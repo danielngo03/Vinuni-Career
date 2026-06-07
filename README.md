@@ -1,100 +1,98 @@
-# Starter Code Template — Cohort 2
+# Enterprise JD Matching Module
 
-Empty starter template for AI20K Build Cohort 2 team repositories. Includes pre-configured AI usage logging hooks for Claude Code, Cursor, Codex, Gemini CLI, Antigravity, and GitHub Copilot.
+Enterprise-side module for a student-job matching platform. Companies can enter or upload a job description, parse it into validated JSON with Gemini, manage job status, and run rule-based matching against mock student skill profiles.
 
-## Structure
+## Demo
 
-```
-├── scripts/
-│   ├── _pyrun.sh             # Cross-platform Python launcher (bash)
-│   ├── _pyrun.cmd            # Cross-platform Python launcher (Windows)
-│   ├── setup_hooks.sh        # One-time pre-push hook installer (POSIX)
-│   ├── setup_hooks.ps1       # One-time pre-push hook installer (Windows)
-│   ├── log_hook.py           # AI tool hook handler (Claude / Cursor / Codex / Gemini / Copilot)
-│   ├── log_antigravity.py    # Auto-log hook for Antigravity
-│   ├── log_manual.py         # Manual log for ChatGPT / web tools
-│   └── submit_log.py         # Submits logs on git push
-├── .agents/                  # Antigravity rules + workflows
-├── .claude/  .codex/  .cursor/  .gemini/  .github/hooks/   # Per-tool hook configs
-├── .env.example
-├── JOURNAL.md                # Weekly journal — product journey & learnings
-└── WORKLOG.md                # Technical decisions, task assignments, brainstorming
-```
+The module supports:
 
-## Getting Started
+- JD input by form, raw text, or PDF/DOCX/TXT upload.
+- LLM JD parsing through Gemini 3.1 Flash Lite when `GEMINI_API_KEY` is set.
+- Deterministic fallback parsing for local demos without an API key.
+- UI parser status showing whether Gemini is configured and whether the last parse used Gemini or fallback.
+- JSON review/edit before saving a job.
+- Local JSON job storage.
+- Open/close/delete job management.
+- `all_students_for_job` matching against mock student profiles.
+- Configurable strong/partial match thresholds.
 
-### 1. Clone and install pre-push hook
+## Quick Start
 
-**Linux / macOS / Git Bash:**
-```bash
-git clone <repo-url>
-cd <repo>
-bash scripts/setup_hooks.sh
-```
+Install dependencies:
 
-**Windows PowerShell:**
 ```powershell
-git clone <repo-url>
-cd <repo>
-powershell -ExecutionPolicy Bypass -File scripts\setup_hooks.ps1
+scripts\_pyrun.cmd -m pip install -r requirements.txt
 ```
 
-### 2. Configure environment
+Run API:
 
-```bash
-cp .env.example .env       # macOS / Linux / Git Bash
-# copy .env.example .env   # Windows cmd
+```powershell
+scripts\_pyrun.cmd -m uvicorn backend.src.api.main:app --reload
 ```
 
-Fill in `AI_LOG_SERVER` and `AI_LOG_API_KEY` (provided by the course).
+Run Streamlit demo:
 
-### 3. Build your project
-
-This is an empty starter — pick any language/framework. The hooks are language-agnostic; they only need Python on the host (any of `python3`, `python`, or `py` works).
-
-## Weekly Journal
-
-Update **[JOURNAL.md](./JOURNAL.md)** at the end of every week:
-
-- Features shipped
-- AI tools used and how they helped
-- Hardest problem of the week and how you solved it
-- What you'd do differently
-- Plan for next week
-
-> JOURNAL.md **must be updated** before each PR — it is your learning record for the course.
-
-## Worklog
-
-Update **[WORKLOG.md](./WORKLOG.md)** whenever your team makes a technical decision or changes direction:
-
-- **Technical decisions** — why this approach over alternatives?
-- **Task assignments** — who does what, by when
-- **Brainstorming** — options considered, pros / cons, conclusion
-- **Important bugs** — root cause and fix
-
-## AI Logging
-
-Prompts and tool calls are **automatically logged** when you use any supported AI tool (Claude Code, Cursor, Codex, Gemini, Antigravity, Copilot). No manual steps needed after running `setup_hooks`.
-
-For ChatGPT or other web tools, log manually:
-
-```bash
-# POSIX
-bash scripts/_pyrun.sh scripts/log_manual.py --tool chatgpt --prompt "<what you did>"
-
-# Windows
-scripts\_pyrun.cmd scripts\log_manual.py --tool chatgpt --prompt "<what you did>"
+```powershell
+scripts\_pyrun.cmd -m streamlit run frontend\streamlit_app.py
 ```
 
-### Python requirements
+Run tests:
 
-The hook system needs **one** of: `python3`, `python`, or `py` on PATH.
+```powershell
+scripts\_pyrun.cmd -m unittest discover -s backend\tests -p "test_*.py"
+```
 
-| OS | Recommended install |
-|---|---|
-| Windows | Python 3 from [python.org](https://www.python.org/downloads/) — installer adds both `python` and `py` to PATH |
-| Ubuntu / Debian | `sudo apt install python3` (already preinstalled on most distros) |
-| macOS | `brew install python3` or use system Python 3 |
+## Configuration
 
-The `scripts/_pyrun.*` wrappers detect whichever is available — students do not need to alias `python3` → `python`.
+Set these in `.env` or your shell:
+
+```text
+GEMINI_API_KEY=...
+GEMINI_MODEL=gemini-3.1-flash-lite
+STRONG_MATCH_THRESHOLD=0.8
+PARTIAL_MATCH_THRESHOLD=0.6
+```
+
+If `GEMINI_API_KEY` is missing or parsing fails, the module uses a deterministic fallback parser so the demo can still run.
+
+## API
+
+- `POST /jobs/parse` - parse raw text or form data into draft job JSON.
+- `POST /jobs/parse-upload` - parse PDF/DOCX/TXT upload into draft job JSON.
+- `POST /jobs` - save validated job JSON.
+- `GET /jobs` - list jobs.
+- `GET /jobs/{job_id}` - get one job.
+- `PATCH /jobs/{job_id}` - replace/edit one job.
+- `POST /jobs/{job_id}/open` - mark job open.
+- `POST /jobs/{job_id}/close` - mark job closed.
+- `DELETE /jobs/{job_id}` - delete job.
+- `GET /students/mock` - inspect mock student profiles.
+- `POST /jobs/{job_id}/match` - match one open job against mock students.
+
+Parse endpoints include an internal `_parser` field in the response so the UI can show whether the result came from Gemini or the fallback parser. Do not include `_parser` when saving a job; it is status metadata, not part of the job schema.
+
+## Project Structure
+
+```text
+backend/
+  src/
+    api/        FastAPI wrapper
+    core/       settings and paths
+    models/     schema dataclasses and validators
+    services/   parser, storage, document reader, matching engine
+  tests/        unittest coverage for matching rules
+data/
+  jobs/         local saved jobs
+  mock/         mock student profiles
+docs/           intake, architecture, implementation, logs
+eval/           evaluation plan, sample JDs, report
+frontend/       Streamlit demo UI
+```
+
+## Evaluation
+
+See [eval/EVALUATION_PLAN.md](eval/EVALUATION_PLAN.md) and [eval/EVALUATION_REPORT.md](eval/EVALUATION_REPORT.md).
+
+## Notes
+
+This module intentionally does not implement student CV parsing, course recommendation, RAG interview simulation, admin dashboards, production auth, or a production database.

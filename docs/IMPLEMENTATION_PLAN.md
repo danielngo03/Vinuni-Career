@@ -24,20 +24,20 @@ Build the enterprise JD management and rule-based matching module for final/demo
 - [x] Create architecture draft.
 - [x] Create evaluation plan.
 - [x] Create implementation plan.
-- [ ] Scaffold backend/frontend/data/test structure after user approval.
-- [ ] Implement Pydantic models.
-- [ ] Implement JSON storage.
-- [ ] Implement mock student profile provider.
-- [ ] Implement PDF/DOCX text extraction.
-- [ ] Implement Gemini JD parser with configurable model.
-- [ ] Implement schema validation and review/edit flow.
-- [ ] Implement job management endpoints.
-- [ ] Implement matching engine.
-- [ ] Implement threshold config.
-- [ ] Implement Streamlit demo UI.
-- [ ] Add tests for matching and validation.
-- [ ] Run evaluation cases.
-- [ ] Update README and logs.
+- [x] Scaffold backend/frontend/data/test structure after user approval.
+- [x] Implement schema models and validators.
+- [x] Implement JSON storage.
+- [x] Implement mock student profile provider.
+- [x] Implement PDF/DOCX/TXT text extraction.
+- [x] Implement Gemini JD parser with configurable model and fallback parser.
+- [x] Implement schema validation and review/edit flow.
+- [x] Implement job management endpoints.
+- [x] Implement matching engine.
+- [x] Implement threshold config.
+- [x] Implement Streamlit demo UI.
+- [x] Add tests for matching and validation.
+- [x] Run core evaluation cases.
+- [x] Update README and logs.
 
 ## Proposed Structure
 
@@ -49,8 +49,7 @@ project-root/
 │   │   ├── api/
 │   │   ├── core/
 │   │   ├── models/
-│   │   ├── services/
-│   │   └── agent/
+│   │   └── services/
 │   └── tests/
 ├── frontend/
 │   └── streamlit_app.py
@@ -63,6 +62,5 @@ project-root/
 
 ## Open Questions
 
-- Confirm final project/module name.
-- Confirm whether to use the endpoint names proposed in `docs/ARCHITECTURE.md`.
-- Confirm whether to scaffold now.
+- Confirm final team-facing project/module name if it should differ from Enterprise JD Matching Module.
+- Confirm final student API endpoint once the teammate module is ready.

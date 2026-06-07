@@ -128,6 +128,7 @@ Constraint:
 Planned FastAPI endpoints:
 
 - `POST /jobs/parse` - parse uploaded or text JD into draft JSON.
+- `POST /jobs/parse-upload` - parse PDF/DOCX/TXT upload into draft JSON.
 - `POST /jobs` - create a validated job request.
 - `GET /jobs` - list job requests.
 - `GET /jobs/{job_id}` - view one job request.
