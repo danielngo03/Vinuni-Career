@@ -2,7 +2,7 @@
 
 ## Project Name
 
-Enterprise JD Matching Module
+Corhort Student-Job Matching Demo
 
 ## Level
 
@@ -27,7 +27,7 @@ In the demo, a company user can:
 - Open or close the job.
 - Run matching for an open job and see ranked mock students with missing skills and explanations.
 
-## AI Agent Job
+## AI Core
 
 Parse JD content into a structured job requirement profile using Gemini 3.1 Flash Lite. The parser should extract metadata and skill requirements, then pass the output through schema validation before the job is saved.
 
@@ -53,7 +53,8 @@ Parse JD content into a structured job requirement profile using Gemini 3.1 Flas
 - Local JSON storage.
 - Rule-based `all_students_for_job` matching.
 - Mock student profile provider.
-- FastAPI backend and simple Streamlit UI.
+- Agent-style FastAPI backend.
+- Streamlit home page and JD workspace page.
 
 ## Non-Goals
 

@@ -2,65 +2,79 @@
 
 ## Selected Level
 
-Level 3 - Demo Day
+Level 3 - Demo Day.
 
 ## System Overview
 
 ```mermaid
 graph TB
-    Company[Company User] --> UI[Streamlit Demo UI]
-    UI --> API[FastAPI Backend]
-    API --> JDInput[JD Upload/Form Input]
-    JDInput --> Reader[PDF/DOCX Text Reader]
-    Reader --> Parser[Gemini JD Parser]
-    Parser --> Validator[Schema Validation + Edit Review]
-    Validator --> JobStore[Local JSON Job Store]
-    API --> Matcher[Rule-Based Matching Engine]
+    Company["Company / Recruiter"] --> UI["Streamlit UI"]
+    UI --> Home["Home Page"]
+    UI --> JDPage["JD Workspace Page"]
+    JDPage --> ParserFlow["JD Input and Parser Flow"]
+    ParserFlow --> Reader["PDF / DOCX / TXT Reader"]
+    ParserFlow --> LLM["Configured LLM Provider"]
+    ParserFlow --> Fallback["Deterministic Fallback Parser"]
+    LLM --> Validator["Schema Validation and Review"]
+    Fallback --> Validator
+    Validator --> JobStore["Local JSON Job Store"]
+    JDPage --> Matcher["Rule-Based Matching Engine"]
     Matcher --> JobStore
-    Matcher --> StudentProvider[Mock Student Profile Provider]
-    Matcher --> Results[Ranked Match Results]
+    Matcher --> StudentProvider["Mock Student Profile Provider"]
+    Matcher --> Results["Ranked Match Results"]
+    API["FastAPI App"] --> JDRouter["JD Matching Router"]
+    API --> StudentRouter["Student Profile Router Skeleton"]
+    JDRouter --> ParserFlow
+    JDRouter --> Matcher
+    StudentRouter --> StudentProvider
 ```
+
+## Backend Shape
+
+The backend uses one FastAPI app that composes agent-style routers.
+
+```text
+backend/src/
+  api/
+    main.py              FastAPI app composition
+  agents/
+    jd_matching/         JD parsing, job management, matching routes
+    student_profile/     Small student profile API skeleton
+  core/                  settings and paths
+  models/                shared dataclasses and validation helpers
+  provider/              shared LLM provider adapters
+  services/              shared parser, storage, document reader, matching logic
+```
+
+This keeps the current demo simple while still giving each future task a clear place to live.
 
 ## AI Core
 
-The AI core is a JD parser. It extracts structured job requirements from uploaded or manually entered JD content. Matching decisions are not made by the LLM.
+The AI core is the JD parser. It extracts structured job requirements from uploaded or manually entered JD content. Matching decisions are deterministic and are not made by the LLM.
 
-## Agent Type
+If the selected LLM provider is not configured or fails, the system uses a deterministic fallback parser so the demo remains usable.
 
-Single-step extraction agent plus deterministic rule-based matching engine.
+## Agents / Modules
+
+| Name | Responsibility |
+|------|----------------|
+| `jd_matching` | Parse JD, save and manage jobs, run matching for open jobs. |
+| `student_profile` | Skeleton API for student profile summaries and future integration. |
+| Document reader | Extract text from PDF, DOCX, or TXT uploads. |
+| Schema validator | Check required fields, data types, score ranges, and skill requirements. |
+| Matching engine | Rank students for one open job using deterministic rules. |
+| Student profile provider | Return mock student profiles now; can be replaced by an API provider later. |
 
 ## State
 
 | Field | Purpose |
 |-------|---------|
 | `raw_jd_text` | Text extracted from upload or assembled from form input. |
-| `parsed_job_requirement` | Draft JSON returned by Gemini. |
+| `parsed_job_requirement` | Draft JSON returned by LLM or fallback parser. |
 | `validated_job_requirement` | Schema-valid JSON after validation and optional user edits. |
 | `job_status` | Controls whether a job can be matched. |
-| `match_thresholds` | Configurable thresholds for strong/partial/not match. |
-| `student_profiles` | Mock or future API-provided student skill profiles. |
-
-## Nodes Or Agents
-
-| Name | Responsibility |
-|------|----------------|
-| JD text extractor | Read PDF/DOCX files into text. |
-| JD parser | Use Gemini 3.1 Flash Lite to produce structured job requirement JSON. |
-| Schema validator | Check required fields, data types, ranges, and missing skills. |
-| Job manager | Create, view, update, open, close, and delete job requests. |
-| Student profile provider | Return mock student profiles now and API profiles later. |
-| Matching engine | Rank students for one open job using deterministic rules. |
-
-## Tools
-
-| Tool | Purpose | Source |
-|------|---------|--------|
-| Gemini 3.1 Flash Lite | JD extraction into JSON | Configured LLM provider |
-| PDF reader | Extract text from uploaded PDF JDs | Python library |
-| DOCX reader | Extract text from uploaded DOCX JDs | Python library |
-| JSON schema / Pydantic | Validate parsed JD and API payloads | Python validation |
-| FastAPI | Thin backend API | Local service |
-| Streamlit | Simple demo UI | Local app |
+| `match_thresholds` | Configurable thresholds for strong, partial, or not match. |
+| `student_profiles` | Mock student skill profiles. |
 
 ## Core Schemas
 
@@ -123,45 +137,44 @@ Constraint:
 
 - If a student is missing a skill with `required = true` and `importance >= 0.8`, they cannot be labeled `strong_match`.
 
-## Backend
+## Current API
 
-Planned FastAPI endpoints:
+Agent catalog:
 
-- `POST /jobs/parse` - parse uploaded or text JD into draft JSON.
-- `POST /jobs/parse-upload` - parse PDF/DOCX/TXT upload into draft JSON.
-- `POST /jobs` - create a validated job request.
-- `GET /jobs` - list job requests.
-- `GET /jobs/{job_id}` - view one job request.
-- `PATCH /jobs/{job_id}` - edit job request JSON or metadata.
-- `POST /jobs/{job_id}/open` - mark job open.
-- `POST /jobs/{job_id}/close` - mark job closed.
-- `DELETE /jobs/{job_id}` - delete a job request.
-- `GET /students/mock` - return mock student profiles for demo/integration testing.
-- `POST /jobs/{job_id}/match` - run `all_students_for_job` matching.
+- `GET /`
+- `GET /agents/jd-matching/health`
+- `GET /agents/student-profile/health`
+
+JD matching:
+
+- `POST /jobs/parse`
+- `POST /jobs/parse-upload`
+- `POST /jobs`
+- `GET /jobs`
+- `GET /jobs/{job_id}`
+- `PATCH /jobs/{job_id}`
+- `POST /jobs/{job_id}/open`
+- `POST /jobs/{job_id}/close`
+- `DELETE /jobs/{job_id}`
+- `GET /students/mock`
+- `POST /jobs/{job_id}/match`
+
+Student profile skeleton:
+
+- `GET /agents/student-profile/students/{student_id}/summary`
 
 ## Frontend
 
-Streamlit demo UI:
+Streamlit UI:
 
-- Upload PDF/DOCX or enter JD through form.
-- Display parsed JSON.
-- Allow JSON review/edit before saving.
-- Manage job status.
-- Run matching and display ranked students.
-- Adjust threshold settings for demo.
+- Home page with project stats and link to JD Workspace.
+- JD Workspace page with parse, manage, and matching tabs.
 
-## Logging
-
-Log:
-
-- JD parse requests and validation failures.
-- Job create/update/status/delete actions.
-- Matching request, selected thresholds, and job status.
-- Per-run match summary and errors.
+A CV page is intentionally not included yet because real CV parsing/profile work is not implemented.
 
 ## Risks
 
-- Gemini output can be invalid; schema validation and edit review are required.
-- Mock student profiles may not match future API shape exactly; use a provider interface.
+- LLM output can be invalid; schema validation and edit review are required.
+- Mock student profiles may not match future API shape exactly; keep provider logic isolated.
 - JSON local storage is demo-friendly but not production-safe under concurrent writes.
-- Skill aliases can reduce match quality; add normalization for common variants.
+- Skill aliases can reduce match quality; normalization should keep expanding.

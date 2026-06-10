@@ -9,3 +9,5 @@
 | 2026-06-07 | Use Gemini 3.1 Flash Lite for JD parsing | Gemini vs other LLMs vs no LLM | User specified Gemini 3.1 Flash Lite | Model configured through environment/config |
 | 2026-06-07 | Validate and allow edit after parsing | Save raw LLM output vs validate/edit | LLM output can be malformed or incomplete | Adds a required review step before saving/matching |
 | 2026-06-07 | Keep course recommendations out of scope | Include suggested courses vs missing skills only | User said course recommendation is not in this task | Match result focuses on missing/weak skills |
+| 2026-06-10 | Organize backend by agent-style routers | One large FastAPI file vs per-agent routers | Team members may own separate FastAPI tasks | `main.py` composes routers; each agent keeps its own route module |
+| 2026-06-10 | Split frontend into Streamlit pages | One long Streamlit file vs multipage UI | JD flow is easier to maintain as its own workspace | Home page links to JD Workspace; CV page is not added until needed |

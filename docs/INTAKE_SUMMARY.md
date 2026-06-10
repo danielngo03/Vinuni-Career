@@ -44,7 +44,7 @@ This is final/demo-day material and needs clear APIs, evaluation evidence, demo-
 - Match one job against mock student profiles.
 - Return ranked students with `match_score`, `match_status`, matched skills, missing or weak skills, and explanation.
 - Allow configurable matching thresholds.
-- Provide a thin FastAPI backend and simple Streamlit demo UI.
+- Provide a thin agent-style FastAPI backend and simple Streamlit demo UI.
 
 ## Non-Goals
 
@@ -72,8 +72,8 @@ The AI core is a JD extraction parser, not a general chatbot. It receives raw JD
 
 ## Backend / Frontend Need
 
-- Backend: FastAPI.
-- Frontend/demo: Streamlit.
+- Backend: FastAPI with agent-style routers.
+- Frontend/demo: Streamlit home page plus JD workspace page.
 - Keep both thin; the main value is the parser, schema validation, job state management, and matching engine.
 
 ## Evaluation Direction
@@ -111,7 +111,7 @@ Evaluate with mock JDs and mock student profiles:
 
 ## Unresolved Decisions
 
-- Final project/module name.
+- Final project/module name is currently Corhort Student-Job Matching Demo.
 - Final endpoint naming convention if the team already has one.
 - Final student API endpoint once teammate implementation is ready.
 
