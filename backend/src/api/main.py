@@ -32,6 +32,18 @@ student_provider = MockStudentProfileProvider(settings.mock_students_path)
 if FastAPI is not None:
     app = FastAPI(title="Enterprise JD Matching Module")
 
+    @app.get("/")
+    def root() -> dict[str, Any]:
+        return {
+            "service": "Enterprise JD Matching Module",
+            "status": "ok",
+            "docs": "/docs",
+            "endpoints": {
+                "jobs": "/jobs",
+                "mock_students": "/students/mock",
+            },
+        }
+
     @app.post("/jobs/parse")
     def parse_job(payload: dict[str, Any]) -> dict[str, Any]:
         try:

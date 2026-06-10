@@ -10,6 +10,8 @@ from typing import Any
 
 from backend.src.core.config import settings
 from backend.src.models.schemas import JobRequirementProfile, job_from_dict
+from backend.src.provider import LLMProvider, LLMProviderConfig, get_llm_provider
+from backend.src.provider.gemini import GeminiProvider
 
 
 DEFAULT_SKILLS = [
@@ -47,14 +49,29 @@ def parse_jd_text(raw_text: str, company_id: str, use_llm: bool = True) -> JobRe
 
 
 def parse_jd_text_with_metadata(raw_text: str, company_id: str, use_llm: bool = True) -> ParseResult:
-    if use_llm and settings.gemini_api_key:
+    try:
+        provider = get_llm_provider()
+    except Exception as exc:
+        return ParseResult(
+            job=job_from_dict(_fallback_parse(raw_text, company_id)),
+            metadata=ParseMetadata(
+                parser_mode="fallback",
+                model=getattr(settings, "llm_model", "unknown"),
+                api_key_configured=False,
+                used_llm=False,
+                fallback_used=True,
+                error=str(exc) if use_llm else "LLM parsing disabled for this call.",
+            ),
+        )
+
+    if use_llm and provider.is_configured:
         try:
-            parsed = _parse_with_gemini(raw_text, company_id)
+            parsed = _parse_with_provider(raw_text, company_id, provider)
             return ParseResult(
                 job=job_from_dict(parsed),
                 metadata=ParseMetadata(
-                    parser_mode="gemini",
-                    model=settings.gemini_model,
+                    parser_mode=provider.name,
+                    model=provider.model,
                     api_key_configured=True,
                     used_llm=True,
                     fallback_used=False,
@@ -66,7 +83,7 @@ def parse_jd_text_with_metadata(raw_text: str, company_id: str, use_llm: bool = 
                 job=job_from_dict(_fallback_parse(raw_text, company_id)),
                 metadata=ParseMetadata(
                     parser_mode="fallback",
-                    model=settings.gemini_model,
+                    model=provider.model,
                     api_key_configured=True,
                     used_llm=False,
                     fallback_used=True,
@@ -78,8 +95,8 @@ def parse_jd_text_with_metadata(raw_text: str, company_id: str, use_llm: bool = 
         job=job_from_dict(_fallback_parse(raw_text, company_id)),
         metadata=ParseMetadata(
             parser_mode="fallback",
-            model=settings.gemini_model,
-            api_key_configured=bool(settings.gemini_api_key),
+            model=provider.model,
+            api_key_configured=provider.is_configured,
             used_llm=False,
             fallback_used=True,
             error=None if use_llm else "LLM parsing disabled for this call.",
@@ -115,14 +132,7 @@ def parse_metadata_to_dict(metadata: ParseMetadata) -> dict[str, Any]:
     }
 
 
-def _parse_with_gemini(raw_text: str, company_id: str) -> dict[str, Any]:
-    try:
-        import google.generativeai as genai
-    except ImportError as exc:
-        raise RuntimeError("Install google-generativeai to use Gemini parsing.") from exc
-
-    genai.configure(api_key=settings.gemini_api_key)
-    model = genai.GenerativeModel(settings.gemini_model)
+def _build_parse_prompt(raw_text: str, company_id: str) -> str:
     prompt = f"""
 Return only JSON for this job description. Required schema:
 {{
@@ -147,11 +157,28 @@ Return only JSON for this job description. Required schema:
 Job description:
 {raw_text}
 """
-    response = model.generate_content(prompt)
-    text = getattr(response, "text", "")
+    return prompt
+
+
+def _parse_with_provider(raw_text: str, company_id: str, provider: LLMProvider) -> dict[str, Any]:
+    text = provider.generate(_build_parse_prompt(raw_text, company_id))
+    return _load_llm_json(text, raw_text, company_id)
+
+
+def _parse_with_gemini(raw_text: str, company_id: str) -> dict[str, Any]:
+    config = LLMProviderConfig(
+        name="gemini",
+        model=getattr(settings, "gemini_model", getattr(settings, "llm_model", "gemini-3.1-flash-lite")),
+        temperature=getattr(settings, "llm_temperature", 0.0),
+        api_key=getattr(settings, "gemini_api_key", getattr(settings, "google_api_key", None)),
+    )
+    return _parse_with_provider(raw_text, company_id, GeminiProvider(config))
+
+
+def _load_llm_json(text: str, raw_text: str, company_id: str) -> dict[str, Any]:
     match = re.search(r"\{.*\}", text, re.DOTALL)
     if not match:
-        raise ValueError("Gemini did not return a JSON object.")
+        raise ValueError("LLM did not return a JSON object.")
     data = json.loads(match.group(0))
     data["company_id"] = company_id
     data.setdefault("job_id", f"job_{uuid.uuid4().hex[:8]}")
