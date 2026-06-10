@@ -1,10 +1,10 @@
-# Enterprise JD Matching Module
+# Corhort Backend Agents
 
-Enterprise-side module for a student-job matching platform. Companies can enter or upload a job description, parse it into validated JSON with Gemini, manage job status, and run rule-based matching against mock student skill profiles.
+Backend agents for a student-job matching platform. The first agent handles enterprise JD parsing and matching. A second `student_profile` agent provides a small independent FastAPI task for student skill summaries.
 
 ## Demo
 
-The module supports:
+The backend supports:
 
 - JD input by form, raw text, or PDF/DOCX/TXT upload.
 - LLM JD parsing through Gemini 3.1 Flash Lite when `GEMINI_API_KEY` is set.
@@ -14,6 +14,7 @@ The module supports:
 - Local JSON job storage.
 - Open/close/delete job management.
 - `all_students_for_job` matching against mock student profiles.
+- Student profile summary endpoint under its own agent prefix.
 - Configurable strong/partial match thresholds.
 
 ## Quick Start
@@ -57,6 +58,14 @@ If `GEMINI_API_KEY` is missing or parsing fails, the module uses a deterministic
 
 ## API
 
+Agent catalog:
+
+- `GET /` - service health and available agents.
+- `GET /agents/jd-matching/health` - JD matching agent health.
+- `GET /agents/student-profile/health` - student profile agent health.
+
+JD matching agent:
+
 - `POST /jobs/parse` - parse raw text or form data into draft job JSON.
 - `POST /jobs/parse-upload` - parse PDF/DOCX/TXT upload into draft job JSON.
 - `POST /jobs` - save validated job JSON.
@@ -69,6 +78,10 @@ If `GEMINI_API_KEY` is missing or parsing fails, the module uses a deterministic
 - `GET /students/mock` - inspect mock student profiles.
 - `POST /jobs/{job_id}/match` - match one open job against mock students.
 
+Student profile agent:
+
+- `GET /agents/student-profile/students/{student_id}/summary` - summarize one mock student profile.
+
 Parse endpoints include an internal `_parser` field in the response so the UI can show whether the result came from Gemini or the fallback parser. Do not include `_parser` when saving a job; it is status metadata, not part of the job schema.
 
 ## Project Structure
@@ -76,11 +89,15 @@ Parse endpoints include an internal `_parser` field in the response so the UI ca
 ```text
 backend/
   src/
-    api/        FastAPI wrapper
+    api/        FastAPI app composition
+    agents/
+      jd_matching/       routes for JD parsing, job CRUD, matching
+      student_profile/   routes and service for student profile summaries
     core/       settings and paths
     models/     schema dataclasses and validators
+    provider/   shared LLM provider adapters
     services/   parser, storage, document reader, matching engine
-  tests/        unittest coverage for matching rules
+  tests/        unittest coverage for agents and shared logic
 data/
   jobs/         local saved jobs
   mock/         mock student profiles
@@ -88,6 +105,19 @@ docs/           intake, architecture, implementation, logs
 eval/           evaluation plan, sample JDs, report
 frontend/       Streamlit demo UI
 ```
+
+## Adding Another Agent
+
+For a small team where each person owns one FastAPI task, add a new folder under `backend/src/agents/<agent_name>/`:
+
+```text
+backend/src/agents/<agent_name>/
+  __init__.py
+  router.py      FastAPI routes with prefix /agents/<agent-name>
+  service.py     agent-specific business logic
+```
+
+Then import and include its router in `backend/src/api/main.py`. Keep shared code in `models/`, `services/`, `provider/`, or `core/` only when more than one agent needs it.
 
 ## Evaluation
 
