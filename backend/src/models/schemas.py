@@ -196,7 +196,7 @@ def requirement_to_dict(requirement: JobSkillRequirement) -> dict[str, Any]:
 
 
 def job_to_dict(job: JobRequirementProfile) -> dict[str, Any]:
-    return {
+    data = {
         "job_id": job.job_id,
         "company_id": job.company_id,
         "title": job.title,
@@ -206,16 +206,19 @@ def job_to_dict(job: JobRequirementProfile) -> dict[str, Any]:
         "salary_range": job.salary_range,
         "benefits": job.benefits,
         "skills": {name: requirement_to_dict(req) for name, req in job.skills.items()},
-        "raw_text": job.raw_text,
     }
+    if job.raw_text:
+        data["raw_text"] = job.raw_text
+    return data
 
 
 def student_to_dict(student: StudentProfile) -> dict[str, Any]:
+    metadata = {key: value for key, value in student.metadata.items() if key != "raw_text"}
     return {
         "student_id": student.student_id,
         "name": student.name,
         "skills": {name: skill_to_dict(skill) for name, skill in student.skills.items()},
-        "metadata": student.metadata,
+        "metadata": metadata,
     }
 
 

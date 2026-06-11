@@ -73,7 +73,6 @@ def render_parser_status_sidebar() -> None:
             st.sidebar.error("LLM failed, used fallback")
         else:
             st.sidebar.info("Used fallback/mock parser")
-        st.sidebar.json(metadata)
 
 
 def render_demo_role_sidebar() -> str:
@@ -142,7 +141,7 @@ def render_parsed_job_review(job_data: dict[str, Any], key_prefix: str) -> None:
     benefits = job_data.get("benefits", [])
     raw_text = job_data.get("raw_text", "")
 
-    tab_overview, tab_requirements, tab_raw = st.tabs(["Job info", "Skills & benefits", "Raw JD"])
+    tab_overview, tab_requirements, tab_description = st.tabs(["Job info", "Skills & benefits", "Job description"])
 
     with tab_overview:
         col_title, col_status, col_location = st.columns(3)
@@ -177,14 +176,18 @@ def render_parsed_job_review(job_data: dict[str, Any], key_prefix: str) -> None:
         else:
             st.info("No benefits detected.")
 
-    with tab_raw:
-        st.text_area(
-            "Original job description",
-            value=str(raw_text),
-            height=320,
-            disabled=True,
-            key=f"{key_prefix}-raw-text",
-        )
+    with tab_description:
+        description = str(raw_text).strip()
+        if description:
+            st.text_area(
+                "Job description",
+                value=description,
+                height=320,
+                disabled=True,
+                key=f"{key_prefix}-job-description",
+            )
+        else:
+            st.info("No job description text saved.")
 
 
 def render_student_profile_review(student_data: dict[str, Any], key_prefix: str) -> None:
@@ -192,9 +195,8 @@ def render_student_profile_review(student_data: dict[str, Any], key_prefix: str)
     if not isinstance(metadata, dict):
         metadata = {}
     skills = student_data.get("skills", {})
-    raw_text = metadata.get("raw_text", "")
 
-    tab_overview, tab_skills, tab_cv = st.tabs(["Student info", "Skills", "Raw CV"])
+    tab_overview, tab_skills = st.tabs(["Student info", "Skills"])
 
     with tab_overview:
         col_name, col_id, col_skill_count = st.columns(3)
@@ -229,12 +231,3 @@ def render_student_profile_review(student_data: dict[str, Any], key_prefix: str)
             st.dataframe(skill_rows, hide_index=True, width="stretch")
         else:
             st.info("No skills detected.")
-
-    with tab_cv:
-        st.text_area(
-            "Original CV text",
-            value=str(raw_text),
-            height=320,
-            disabled=True,
-            key=f"{key_prefix}-raw-cv",
-        )

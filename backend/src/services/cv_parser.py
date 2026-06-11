@@ -144,8 +144,7 @@ Return only JSON for this student CV. Required schema:
     "year": "year if present",
     "education": [],
     "projects": [],
-    "experience": [],
-    "raw_text": "original text"
+    "experience": []
   }}
 }}
 
@@ -169,7 +168,7 @@ def _load_llm_json(text: str, raw_text: str) -> dict[str, Any]:
     data.setdefault("student_id", f"student_{uuid.uuid4().hex[:8]}")
     metadata = data.setdefault("metadata", {})
     if isinstance(metadata, dict):
-        metadata.setdefault("raw_text", raw_text)
+        metadata.pop("raw_text", None)
     return data
 
 
@@ -205,7 +204,6 @@ def _fallback_parse(raw_text: str) -> dict[str, Any]:
             "education": _infer_section_lines(raw_text, "education"),
             "projects": _infer_section_lines(raw_text, "projects"),
             "experience": _infer_section_lines(raw_text, "experience"),
-            "raw_text": raw_text,
             "parser_note": "Deterministic fallback parser; review JSON before saving.",
         },
     }
