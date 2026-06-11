@@ -15,6 +15,7 @@ except ImportError:  # pragma: no cover - dependency is installed in normal app 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DATA_DIR = PROJECT_ROOT / "data"
 JOBS_DIR = DATA_DIR / "jobs"
+STUDENTS_DIR = DATA_DIR / "students"
 MOCK_DIR = DATA_DIR / "mock"
 
 if load_dotenv is not None:
@@ -33,6 +34,13 @@ def _env_int(name: str, default: int) -> int:
     if value is None or not value.strip():
         return default
     return int(value)
+
+
+def _env_bool(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    if value is None or not value.strip():
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
 @dataclass(frozen=True)
@@ -55,9 +63,11 @@ class Settings:
     gemini_api_key: str | None = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
     gemini_model: str = os.getenv("GEMINI_MODEL", os.getenv("LLM_MODEL", "gemini-3.1-flash-lite"))
     jobs_dir: Path = JOBS_DIR
+    students_dir: Path = STUDENTS_DIR
     mock_students_path: Path = MOCK_DIR / "students.json"
     strong_match_threshold: float = float(os.getenv("STRONG_MATCH_THRESHOLD", "0.8"))
     partial_match_threshold: float = float(os.getenv("PARTIAL_MATCH_THRESHOLD", "0.6"))
+    demo_auth_enabled: bool = _env_bool("DEMO_AUTH_ENABLED", True)
     log_level: str = os.getenv("LOG_LEVEL", "INFO")
 
 

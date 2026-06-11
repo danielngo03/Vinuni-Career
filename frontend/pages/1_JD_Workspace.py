@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 
+from demo_auth import get_current_user_id, require_login
 from shared import (
     job_repo,
     log_ui_action,
@@ -30,14 +31,16 @@ from backend.src.services.matching import match_students_for_job
 
 
 st.set_page_config(page_title="JD Workspace", layout="wide")
+user = require_login("enterprise")
 render_parser_status_sidebar()
+company_user_id = get_current_user_id()
 st.title("JD Workspace")
 
 tab_parse, tab_manage, tab_match = st.tabs(["Parse JD", "Manage Jobs", "Match Students"])
 
 with tab_parse:
     input_mode = st.radio("Input mode", ["Form", "Upload", "Raw text"], horizontal=True)
-    company_id = st.text_input("Company ID", value="company_demo")
+    company_id = st.text_input("Company ID", value=company_user_id, disabled=True)
 
     if input_mode == "Form":
         form = {
@@ -99,7 +102,9 @@ with tab_parse:
         )
         if st.button("Validate and save job"):
             try:
-                job = job_from_dict(json.loads(edited))
+                job_data = json.loads(edited)
+                job_data["company_id"] = company_user_id
+                job = job_from_dict(job_data)
                 job_repo.save(job)
                 log_ui_action("save_job", job.job_id)
                 st.success(f"Saved {job.job_id}")
@@ -108,7 +113,7 @@ with tab_parse:
                 st.error(str(exc))
 
 with tab_manage:
-    jobs = job_repo.list()
+    jobs = [job for job in job_repo.list() if job.company_id == company_user_id]
     if not jobs:
         st.info("No jobs saved yet.")
     for job in jobs:
@@ -129,7 +134,7 @@ with tab_manage:
                 st.rerun()
 
 with tab_match:
-    jobs = [job for job in job_repo.list() if job.status == "open"]
+    jobs = [job for job in job_repo.list() if job.company_id == company_user_id and job.status == "open"]
     if not jobs:
         st.info("Open at least one job before running matching.")
     else:

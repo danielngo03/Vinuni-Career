@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from backend.src.core.auth import DemoUser, require_roles
 from backend.src.core.config import settings
 from backend.src.models.schemas import (
     MatchThresholds,
@@ -16,17 +17,25 @@ from backend.src.models.schemas import (
 from backend.src.services.document_reader import extract_text_from_bytes
 from backend.src.services.jd_parser import parse_jd_form_with_metadata, parse_jd_text_with_metadata, parse_metadata_to_dict
 from backend.src.services.matching import match_students_for_job
-from backend.src.services.storage import JsonJobRepository, MockStudentProfileProvider
+from backend.src.services.storage import (
+    CombinedStudentProfileProvider,
+    JsonJobRepository,
+    JsonStudentRepository,
+    MockStudentProfileProvider,
+)
 
 try:
-    from fastapi import APIRouter, File, Form, HTTPException, UploadFile
+    from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 except ImportError:  # pragma: no cover - used only when optional API dependency is absent.
     APIRouter = None  # type: ignore[assignment]
+    Depends = None  # type: ignore[assignment]
     HTTPException = Exception  # type: ignore[assignment]
 
 
 job_repo = JsonJobRepository(settings.jobs_dir)
-student_provider = MockStudentProfileProvider(settings.mock_students_path)
+saved_student_repo = JsonStudentRepository(settings.students_dir)
+mock_student_provider = MockStudentProfileProvider(settings.mock_students_path)
+student_provider = CombinedStudentProfileProvider(saved_student_repo, mock_student_provider)
 
 
 if APIRouter is not None:
@@ -37,7 +46,10 @@ if APIRouter is not None:
         return {"agent": "jd_matching", "status": "ok"}
 
     @router.post("/jobs/parse")
-    def parse_job(payload: dict[str, Any]) -> dict[str, Any]:
+    def parse_job(
+        payload: dict[str, Any],
+        _user: DemoUser = Depends(require_roles("enterprise")),
+    ) -> dict[str, Any]:
         try:
             company_id = str(payload.get("company_id", "company_demo"))
             if "form" in payload and isinstance(payload["form"], dict):
@@ -54,6 +66,7 @@ if APIRouter is not None:
     async def parse_uploaded_job(
         company_id: str = Form("company_demo"),
         file: UploadFile = File(...),
+        _user: DemoUser = Depends(require_roles("enterprise")),
     ) -> dict[str, Any]:
         try:
             content = await file.read()
@@ -66,7 +79,10 @@ if APIRouter is not None:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     @router.post("/jobs")
-    def create_job(payload: dict[str, Any]) -> dict[str, Any]:
+    def create_job(
+        payload: dict[str, Any],
+        _user: DemoUser = Depends(require_roles("enterprise")),
+    ) -> dict[str, Any]:
         try:
             job = job_from_dict(payload)
             return job_to_dict(job_repo.save(job))
@@ -74,18 +90,25 @@ if APIRouter is not None:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @router.get("/jobs")
-    def list_jobs() -> list[dict[str, Any]]:
+    def list_jobs(_user: DemoUser = Depends(require_roles("enterprise"))) -> list[dict[str, Any]]:
         return [job_to_dict(job) for job in job_repo.list()]
 
     @router.get("/jobs/{job_id}")
-    def get_job(job_id: str) -> dict[str, Any]:
+    def get_job(
+        job_id: str,
+        _user: DemoUser = Depends(require_roles("enterprise")),
+    ) -> dict[str, Any]:
         try:
             return job_to_dict(job_repo.get(job_id))
         except FileNotFoundError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     @router.patch("/jobs/{job_id}")
-    def update_job(job_id: str, payload: dict[str, Any]) -> dict[str, Any]:
+    def update_job(
+        job_id: str,
+        payload: dict[str, Any],
+        _user: DemoUser = Depends(require_roles("enterprise")),
+    ) -> dict[str, Any]:
         try:
             payload["job_id"] = job_id
             job = job_from_dict(payload)
@@ -94,21 +117,30 @@ if APIRouter is not None:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @router.post("/jobs/{job_id}/open")
-    def open_job(job_id: str) -> dict[str, Any]:
+    def open_job(
+        job_id: str,
+        _user: DemoUser = Depends(require_roles("enterprise")),
+    ) -> dict[str, Any]:
         try:
             return job_to_dict(job_repo.update_status(job_id, "open"))
         except FileNotFoundError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     @router.post("/jobs/{job_id}/close")
-    def close_job(job_id: str) -> dict[str, Any]:
+    def close_job(
+        job_id: str,
+        _user: DemoUser = Depends(require_roles("enterprise")),
+    ) -> dict[str, Any]:
         try:
             return job_to_dict(job_repo.update_status(job_id, "closed"))
         except FileNotFoundError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     @router.delete("/jobs/{job_id}")
-    def delete_job(job_id: str) -> dict[str, str]:
+    def delete_job(
+        job_id: str,
+        _user: DemoUser = Depends(require_roles("enterprise")),
+    ) -> dict[str, str]:
         try:
             job_repo.delete(job_id)
             return {"status": "deleted", "job_id": job_id}
@@ -116,11 +148,15 @@ if APIRouter is not None:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     @router.get("/students/mock")
-    def list_mock_students() -> list[dict[str, Any]]:
-        return [student_to_dict(student) for student in student_provider.list_profiles()]
+    def list_mock_students(_user: DemoUser = Depends(require_roles("enterprise"))) -> list[dict[str, Any]]:
+        return [student_to_dict(student) for student in mock_student_provider.list_profiles()]
 
     @router.post("/jobs/{job_id}/match")
-    def match_job(job_id: str, payload: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+    def match_job(
+        job_id: str,
+        payload: dict[str, Any] | None = None,
+        _user: DemoUser = Depends(require_roles("enterprise")),
+    ) -> list[dict[str, Any]]:
         try:
             payload = payload or {}
             thresholds = MatchThresholds(

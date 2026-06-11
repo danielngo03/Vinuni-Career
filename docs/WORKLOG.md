@@ -9,3 +9,5 @@
 | 2026-06-10 | Refactored backend API composition | Added agent-style routers for JD matching and student profile skeleton | Keep future task APIs under `backend/src/agents` |
 | 2026-06-10 | Split Streamlit frontend | Added home page, shared helpers, and JD Workspace page; skipped CV page for now | Add a CV page only when CV parsing/profile work is ready |
 | 2026-06-10 | Split documentation | README now introduces the topic; run commands moved to `docs/RUNNING.md` | Keep docs aligned with project structure |
+| 2026-06-11 | Added CV analysis workflow | CV uploads/text can be parsed into student profile JSON, saved locally, and included in matching | Verify Streamlit manually with a real Gemini key |
+| 2026-06-11 | Added basic student/enterprise authorization | Backend routes use demo role headers; Streamlit uses a role selector and owned CV profiles | Replace demo headers with real auth when account management exists |

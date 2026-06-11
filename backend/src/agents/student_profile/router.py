@@ -5,17 +5,26 @@ from __future__ import annotations
 from typing import Any
 
 from backend.src.agents.student_profile.service import summarize_student_profile
+from backend.src.core.auth import DemoUser, require_roles
 from backend.src.core.config import settings
-from backend.src.services.storage import MockStudentProfileProvider
+from backend.src.services.storage import (
+    CombinedStudentProfileProvider,
+    JsonStudentRepository,
+    MockStudentProfileProvider,
+)
 
 try:
-    from fastapi import APIRouter, HTTPException
+    from fastapi import APIRouter, Depends, HTTPException
 except ImportError:  # pragma: no cover - used only when optional API dependency is absent.
     APIRouter = None  # type: ignore[assignment]
+    Depends = None  # type: ignore[assignment]
     HTTPException = Exception  # type: ignore[assignment]
 
 
-student_provider = MockStudentProfileProvider(settings.mock_students_path)
+student_provider = CombinedStudentProfileProvider(
+    JsonStudentRepository(settings.students_dir),
+    MockStudentProfileProvider(settings.mock_students_path),
+)
 
 
 if APIRouter is not None:
@@ -26,7 +35,11 @@ if APIRouter is not None:
         return {"agent": "student_profile", "status": "ok"}
 
     @router.get("/students/{student_id}/summary")
-    def summarize_student(student_id: str, top_n: int = 3) -> dict[str, Any]:
+    def summarize_student(
+        student_id: str,
+        top_n: int = 3,
+        _user: DemoUser = Depends(require_roles("student", "enterprise")),
+    ) -> dict[str, Any]:
         for student in student_provider.list_profiles():
             if student.student_id == student_id:
                 return summarize_student_profile(student, top_n=max(1, min(top_n, 10)))

@@ -18,6 +18,7 @@ Deliver the assigned module for a final/demo-day project: enterprise job request
 Scope is limited to:
 
 - Enterprise JD input and management.
+- CV analysis into student skill profiles for matching.
 - LLM-based JD parsing.
 - JSON validation/edit before saving.
 - Rule-based matching from one open JD to ranked student profiles.
@@ -34,22 +35,22 @@ This is final/demo-day material and needs clear APIs, evaluation evidence, demo-
 ## Scope
 
 - Upload JD as PDF or DOCX and extract text.
+- Upload student CV as PDF or DOCX and extract text.
 - Enter JD through a structured form/template.
 - Parse JD text/form data into `job_requirement.json` with Gemini 3.1 Flash Lite.
+- Parse CV text into student skill profile JSON with Gemini 3.1 Flash Lite or fallback logic.
 - Validate parsed JSON against the required schema.
 - Allow users to review and edit parsed JSON before saving.
 - Store job requests in local JSON files.
 - Support create, list, view, update, open, close, and delete job requests.
 - Match only jobs with `status = open`.
-- Match one job against mock student profiles.
+- Match one job against mock and locally saved student profiles.
 - Return ranked students with `match_score`, `match_status`, matched skills, missing or weak skills, and explanation.
 - Allow configurable matching thresholds.
 - Provide a thin agent-style FastAPI backend and simple Streamlit demo UI.
 
 ## Non-Goals
 
-- Student CV upload or CV parsing.
-- Student profile generation.
 - Course recommendation.
 - RAG interview simulation.
 - School/admin dashboard.
@@ -60,14 +61,14 @@ This is final/demo-day material and needs clear APIs, evaluation evidence, demo-
 
 ## AI Agent Core
 
-The AI core is a JD extraction parser, not a general chatbot. It receives raw JD text or structured form data and returns a normalized job requirement profile. Rule-based matching remains deterministic and explainable.
+The AI core is structured extraction, not a general chatbot. It receives raw JD text or structured form data and returns a normalized job requirement profile; it can also receive CV text and return a student skill profile. Rule-based matching remains deterministic and explainable.
 
 ## Data, Tools, Or RAG
 
 - LLM: Gemini 3.1 Flash Lite.
 - Document readers: PDF and DOCX text extraction.
 - Storage: local JSON files.
-- Student profiles: mock JSON provider first, later replaceable with an API provider.
+- Student profiles: mock JSON provider plus local CV-derived profiles, later replaceable with an API provider.
 - RAG: not in scope for this module.
 
 ## Backend / Frontend Need
@@ -88,7 +89,7 @@ Evaluate with mock JDs and mock student profiles:
 
 ## Additional User Notes
 
-- Student profiles will be mocked for now.
+- Student profiles can be mocked or created from CV analysis.
 - JD storage should be local JSON.
 - Course recommendations are outside this task.
 - Matching flow should be `all_students_for_job`.
