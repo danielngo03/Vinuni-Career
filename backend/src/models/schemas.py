@@ -48,6 +48,7 @@ class JobRequirementProfile:
     benefits: list[str]
     skills: dict[str, JobSkillRequirement]
     raw_text: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -176,6 +177,7 @@ def job_from_dict(data: dict[str, Any]) -> JobRequirementProfile:
         benefits=[str(item) for item in benefits],
         skills=skills,
         raw_text=data.get("raw_text") if isinstance(data.get("raw_text"), str) else None,
+        metadata=data.get("metadata", {}) if isinstance(data.get("metadata", {}), dict) else {},
     )
 
 
@@ -209,6 +211,8 @@ def job_to_dict(job: JobRequirementProfile) -> dict[str, Any]:
     }
     if job.raw_text:
         data["raw_text"] = job.raw_text
+    if job.metadata:
+        data["metadata"] = job.metadata
     return data
 
 
