@@ -1,0 +1,6815 @@
+{
+  "video": {
+    "id": "kCPVBl953eY",
+    "title": "Lec 3 | MIT 18.01 Single Variable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=kCPVBl953eY",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2995,
+    "language": "en"
+  },
+  "segment_count": 971,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.75,
+      "end": 1.76,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.76,
+      "end": 4.309,
+      "duration": 2.549,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.43,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.44,
+      "end": 8.35,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.36,
+      "end": 11.23,
+      "duration": 2.87,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.24,
+      "end": 12.789,
+      "duration": 1.549,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.799,
+      "end": 15.869,
+      "duration": 3.07,
+      "text": "hundreds of MIT courses visit MIT open"
+    },
+    {
+      "index": 7,
+      "start": 15.879,
+      "end": 21.99,
+      "duration": 6.111,
+      "text": "courseware at"
+    },
+    {
+      "index": 8,
+      "start": 24.71,
+      "end": 24.72,
+      "duration": 0.01,
+      "text": "ocw.mit.edu today's lecture in today's"
+    },
+    {
+      "index": 9,
+      "start": 24.72,
+      "end": 26.63,
+      "duration": 1.91,
+      "text": "lecture I want to develop several more"
+    },
+    {
+      "index": 10,
+      "start": 26.64,
+      "end": 29.429,
+      "duration": 2.789,
+      "text": "formulas that will allow us to reach our"
+    },
+    {
+      "index": 11,
+      "start": 29.439,
+      "end": 31.51,
+      "duration": 2.071,
+      "text": "goal of differentiating"
+    },
+    {
+      "index": 12,
+      "start": 31.52,
+      "end": 40.95,
+      "duration": 9.43,
+      "text": "everything so these are derivative"
+    },
+    {
+      "index": 13,
+      "start": 44.549,
+      "end": 44.559,
+      "duration": 0.01,
+      "text": "formulas and they come in two"
+    },
+    {
+      "index": 14,
+      "start": 44.559,
+      "end": 49.91,
+      "duration": 5.351,
+      "text": "flavors the first kind is"
+    },
+    {
+      "index": 15,
+      "start": 53.709,
+      "end": 53.719,
+      "duration": 0.01,
+      "text": "specific so some specific function we're"
+    },
+    {
+      "index": 16,
+      "start": 53.719,
+      "end": 57.27,
+      "duration": 3.551,
+      "text": "uh giving the derivative of and that"
+    },
+    {
+      "index": 17,
+      "start": 57.28,
+      "end": 60.67,
+      "duration": 3.39,
+      "text": "would be for example uh x to the N or 1X"
+    },
+    {
+      "index": 18,
+      "start": 60.68,
+      "end": 63.15,
+      "duration": 2.47,
+      "text": "those are ones that we did uh a couple"
+    },
+    {
+      "index": 19,
+      "start": 63.16,
+      "end": 64.429,
+      "duration": 1.269,
+      "text": "of lectures"
+    },
+    {
+      "index": 20,
+      "start": 64.439,
+      "end": 69.67,
+      "duration": 5.231,
+      "text": "ago and then there are General"
+    },
+    {
+      "index": 21,
+      "start": 72.149,
+      "end": 72.159,
+      "duration": 0.01,
+      "text": "formulas and the general ones don't"
+    },
+    {
+      "index": 22,
+      "start": 72.159,
+      "end": 73.51,
+      "duration": 1.351,
+      "text": "actually give you a formula for a"
+    },
+    {
+      "index": 23,
+      "start": 73.52,
+      "end": 76.27,
+      "duration": 2.75,
+      "text": "specific function but uh tell you"
+    },
+    {
+      "index": 24,
+      "start": 76.28,
+      "end": 78.749,
+      "duration": 2.469,
+      "text": "something like if you take two functions"
+    },
+    {
+      "index": 25,
+      "start": 78.759,
+      "end": 81.03,
+      "duration": 2.271,
+      "text": "and add them together their derivative"
+    },
+    {
+      "index": 26,
+      "start": 81.04,
+      "end": 82.55,
+      "duration": 1.51,
+      "text": "is the sum of the"
+    },
+    {
+      "index": 27,
+      "start": 82.56,
+      "end": 85.03,
+      "duration": 2.47,
+      "text": "derivatives or if you multiply by a"
+    },
+    {
+      "index": 28,
+      "start": 85.04,
+      "end": 90.87,
+      "duration": 5.83,
+      "text": "constant for example so um C * U the"
+    },
+    {
+      "index": 29,
+      "start": 90.88,
+      "end": 93.71,
+      "duration": 2.83,
+      "text": "derivative of that is C * U Prime where"
+    },
+    {
+      "index": 30,
+      "start": 93.72,
+      "end": 98.03,
+      "duration": 4.31,
+      "text": "C is"
+    },
+    {
+      "index": 31,
+      "start": 100.91,
+      "end": 100.92,
+      "duration": 0.01,
+      "text": "constant all right so these kinds of"
+    },
+    {
+      "index": 32,
+      "start": 100.92,
+      "end": 103.91,
+      "duration": 2.99,
+      "text": "formulas uh are very useful both the"
+    },
+    {
+      "index": 33,
+      "start": 103.92,
+      "end": 106.95,
+      "duration": 3.03,
+      "text": "specific and the general kind uh for"
+    },
+    {
+      "index": 34,
+      "start": 106.96,
+      "end": 110.83,
+      "duration": 3.87,
+      "text": "example uh they're needed so we need"
+    },
+    {
+      "index": 35,
+      "start": 110.84,
+      "end": 115.55,
+      "duration": 4.71,
+      "text": "both"
+    },
+    {
+      "index": 36,
+      "start": 125.51,
+      "end": 125.52,
+      "duration": 0.01,
+      "text": "and more generally pretty much any set"
+    },
+    {
+      "index": 37,
+      "start": 125.52,
+      "end": 126.789,
+      "duration": 1.269,
+      "text": "of formulas that we give you we'll give"
+    },
+    {
+      "index": 38,
+      "start": 126.799,
+      "end": 128.83,
+      "duration": 2.031,
+      "text": "you a few functions to start out with"
+    },
+    {
+      "index": 39,
+      "start": 128.84,
+      "end": 130.469,
+      "duration": 1.629,
+      "text": "and then you'll be able to generate lots"
+    },
+    {
+      "index": 40,
+      "start": 130.479,
+      "end": 135.589,
+      "duration": 5.11,
+      "text": "more by these General"
+    },
+    {
+      "index": 41,
+      "start": 138.91,
+      "end": 138.92,
+      "duration": 0.01,
+      "text": "formulas so today we want to concentrate"
+    },
+    {
+      "index": 42,
+      "start": 138.92,
+      "end": 141.91,
+      "duration": 2.99,
+      "text": "on the trig functions and so we have"
+    },
+    {
+      "index": 43,
+      "start": 141.92,
+      "end": 146.75,
+      "duration": 4.83,
+      "text": "some we'll start out with some specific"
+    },
+    {
+      "index": 44,
+      "start": 149.19,
+      "end": 149.2,
+      "duration": 0.01,
+      "text": "formulas and they're going to be the"
+    },
+    {
+      "index": 45,
+      "start": 149.2,
+      "end": 152.19,
+      "duration": 2.99,
+      "text": "formulas for the derivative of the S"
+    },
+    {
+      "index": 46,
+      "start": 152.2,
+      "end": 156.949,
+      "duration": 4.749,
+      "text": "function and the cosine"
+    },
+    {
+      "index": 47,
+      "start": 159.949,
+      "end": 159.959,
+      "duration": 0.01,
+      "text": "function so that's what we'll spend uh"
+    },
+    {
+      "index": 48,
+      "start": 159.959,
+      "end": 162.07,
+      "duration": 2.111,
+      "text": "the first part of the lecture on and at"
+    },
+    {
+      "index": 49,
+      "start": 162.08,
+      "end": 164.55,
+      "duration": 2.47,
+      "text": "the same time I hope to get you very"
+    },
+    {
+      "index": 50,
+      "start": 164.56,
+      "end": 167.949,
+      "duration": 3.389,
+      "text": "used to uh dealing with trig functions"
+    },
+    {
+      "index": 51,
+      "start": 167.959,
+      "end": 169.47,
+      "duration": 1.511,
+      "text": "although that's something that you"
+    },
+    {
+      "index": 52,
+      "start": 169.48,
+      "end": 174.75,
+      "duration": 5.27,
+      "text": "should uh think of as as a gradual"
+    },
+    {
+      "index": 53,
+      "start": 174.76,
+      "end": 177.07,
+      "duration": 2.31,
+      "text": "process all right so in order to"
+    },
+    {
+      "index": 54,
+      "start": 177.08,
+      "end": 179.67,
+      "duration": 2.59,
+      "text": "calculate these I'm going to start over"
+    },
+    {
+      "index": 55,
+      "start": 179.68,
+      "end": 182.789,
+      "duration": 3.109,
+      "text": "here here and uh just start the"
+    },
+    {
+      "index": 56,
+      "start": 182.799,
+      "end": 185.789,
+      "duration": 2.99,
+      "text": "calculation so here we go let's check"
+    },
+    {
+      "index": 57,
+      "start": 185.799,
+      "end": 188.55,
+      "duration": 2.751,
+      "text": "what happens with the S function so I"
+    },
+    {
+      "index": 58,
+      "start": 188.56,
+      "end": 189.589,
+      "duration": 1.029,
+      "text": "take"
+    },
+    {
+      "index": 59,
+      "start": 189.599,
+      "end": 195.949,
+      "duration": 6.35,
+      "text": "sin x + Delta X I subtract sin x and I"
+    },
+    {
+      "index": 60,
+      "start": 195.959,
+      "end": 197.509,
+      "duration": 1.55,
+      "text": "divide by sorry let's leave a little"
+    },
+    {
+      "index": 61,
+      "start": 197.519,
+      "end": 201.149,
+      "duration": 3.63,
+      "text": "space there sinx and divide by Delta"
+    },
+    {
+      "index": 62,
+      "start": 201.159,
+      "end": 203.39,
+      "duration": 2.231,
+      "text": "X all right so this is the difference"
+    },
+    {
+      "index": 63,
+      "start": 203.4,
+      "end": 205.27,
+      "duration": 1.87,
+      "text": "quotient and eventually I'm going to"
+    },
+    {
+      "index": 64,
+      "start": 205.28,
+      "end": 207.509,
+      "duration": 2.229,
+      "text": "have to take the limit as Delta X goes"
+    },
+    {
+      "index": 65,
+      "start": 207.519,
+      "end": 208.47,
+      "duration": 0.951,
+      "text": "to"
+    },
+    {
+      "index": 66,
+      "start": 208.48,
+      "end": 211.869,
+      "duration": 3.389,
+      "text": "zero and there's really only one thing"
+    },
+    {
+      "index": 67,
+      "start": 211.879,
+      "end": 213.47,
+      "duration": 1.591,
+      "text": "we can do with"
+    },
+    {
+      "index": 68,
+      "start": 213.48,
+      "end": 217.19,
+      "duration": 3.71,
+      "text": "this to simplify it or change it and"
+    },
+    {
+      "index": 69,
+      "start": 217.2,
+      "end": 220.949,
+      "duration": 3.749,
+      "text": "that is to use the sum formula for the"
+    },
+    {
+      "index": 70,
+      "start": 220.959,
+      "end": 225.47,
+      "duration": 4.511,
+      "text": "uh s function so that's this that's sin"
+    },
+    {
+      "index": 71,
+      "start": 225.48,
+      "end": 233.63,
+      "duration": 8.15,
+      "text": "x cosine Delta X plus"
+    },
+    {
+      "index": 72,
+      "start": 237.149,
+      "end": 237.159,
+      "duration": 0.01,
+      "text": "uh oh that's not what it is huh okay so"
+    },
+    {
+      "index": 73,
+      "start": 237.159,
+      "end": 240.069,
+      "duration": 2.91,
+      "text": "what is it sin x"
+    },
+    {
+      "index": 74,
+      "start": 240.079,
+      "end": 244.589,
+      "duration": 4.51,
+      "text": "s Delta X okay good you remember"
+    },
+    {
+      "index": 75,
+      "start": 244.599,
+      "end": 246.589,
+      "duration": 1.99,
+      "text": "plus"
+    },
+    {
+      "index": 76,
+      "start": 246.599,
+      "end": 248.47,
+      "duration": 1.871,
+      "text": "cosine"
+    },
+    {
+      "index": 77,
+      "start": 248.48,
+      "end": 253.789,
+      "duration": 5.309,
+      "text": "no oh okay so which is"
+    },
+    {
+      "index": 78,
+      "start": 257.509,
+      "end": 257.519,
+      "duration": 0.01,
+      "text": "it okay all right let's take a vote is"
+    },
+    {
+      "index": 79,
+      "start": 257.519,
+      "end": 261.83,
+      "duration": 4.311,
+      "text": "it s s or is it sin"
+    },
+    {
+      "index": 80,
+      "start": 271.07,
+      "end": 271.08,
+      "duration": 0.01,
+      "text": "be cosine all right"
+    },
+    {
+      "index": 81,
+      "start": 271.08,
+      "end": 272.35,
+      "duration": 1.27,
+      "text": "all right you better remember these"
+    },
+    {
+      "index": 82,
+      "start": 272.36,
+      "end": 273.67,
+      "duration": 1.31,
+      "text": "formulas all"
+    },
+    {
+      "index": 83,
+      "start": 273.68,
+      "end": 276.59,
+      "duration": 2.91,
+      "text": "right okay it turns out that it's s"
+    },
+    {
+      "index": 84,
+      "start": 276.6,
+      "end": 281.749,
+      "duration": 5.149,
+      "text": "cosine all right cosine sign so here we"
+    },
+    {
+      "index": 85,
+      "start": 281.759,
+      "end": 287.51,
+      "duration": 5.751,
+      "text": "go no you got to do X here s Delta X all"
+    },
+    {
+      "index": 86,
+      "start": 287.52,
+      "end": 289.83,
+      "duration": 2.31,
+      "text": "right so now there's lots of places to"
+    },
+    {
+      "index": 87,
+      "start": 289.84,
+      "end": 292.83,
+      "duration": 2.99,
+      "text": "get confused here and you're going to"
+    },
+    {
+      "index": 88,
+      "start": 292.84,
+      "end": 295.27,
+      "duration": 2.43,
+      "text": "need to make sure that you get it right"
+    },
+    {
+      "index": 89,
+      "start": 295.28,
+      "end": 296.79,
+      "duration": 1.51,
+      "text": "all right so we're going to put those in"
+    },
+    {
+      "index": 90,
+      "start": 296.8,
+      "end": 300.39,
+      "duration": 3.59,
+      "text": "parentheses here sin a plus"
+    },
+    {
+      "index": 91,
+      "start": 300.4,
+      "end": 305.43,
+      "duration": 5.03,
+      "text": "B is sin a COS B"
+    },
+    {
+      "index": 92,
+      "start": 305.44,
+      "end": 311.35,
+      "duration": 5.91,
+      "text": "plus cos a sin B all right now that's"
+    },
+    {
+      "index": 93,
+      "start": 311.36,
+      "end": 313.99,
+      "duration": 2.63,
+      "text": "what I did over here except it was the"
+    },
+    {
+      "index": 94,
+      "start": 314.0,
+      "end": 317.189,
+      "duration": 3.189,
+      "text": "letter X was a and the"
+    },
+    {
+      "index": 95,
+      "start": 317.199,
+      "end": 322.07,
+      "duration": 4.871,
+      "text": "letter uh B was Delta X right now that's"
+    },
+    {
+      "index": 96,
+      "start": 322.08,
+      "end": 324.51,
+      "duration": 2.43,
+      "text": "just the first part that's just this"
+    },
+    {
+      "index": 97,
+      "start": 324.52,
+      "end": 327.59,
+      "duration": 3.07,
+      "text": "part of the expression I still have to"
+    },
+    {
+      "index": 98,
+      "start": 327.6,
+      "end": 330.15,
+      "duration": 2.55,
+      "text": "remember the minus sinx that comes at"
+    },
+    {
+      "index": 99,
+      "start": 330.16,
+      "end": 331.15,
+      "duration": 0.99,
+      "text": "minus"
+    },
+    {
+      "index": 100,
+      "start": 331.16,
+      "end": 333.79,
+      "duration": 2.63,
+      "text": "sin and then I have to remember the"
+    },
+    {
+      "index": 101,
+      "start": 333.8,
+      "end": 337.15,
+      "duration": 3.35,
+      "text": "denominator which is Delta"
+    },
+    {
+      "index": 102,
+      "start": 337.16,
+      "end": 342.15,
+      "duration": 4.99,
+      "text": "X"
+    },
+    {
+      "index": 103,
+      "start": 349.55,
+      "end": 349.56,
+      "duration": 0.01,
+      "text": "now the next thing we're going to do is"
+    },
+    {
+      "index": 104,
+      "start": 349.56,
+      "end": 351.43,
+      "duration": 1.87,
+      "text": "we're going to try to group the"
+    },
+    {
+      "index": 105,
+      "start": 351.44,
+      "end": 354.909,
+      "duration": 3.469,
+      "text": "terms and the difficulty with all such"
+    },
+    {
+      "index": 106,
+      "start": 354.919,
+      "end": 356.51,
+      "duration": 1.591,
+      "text": "arguments"
+    },
+    {
+      "index": 107,
+      "start": 356.52,
+      "end": 360.11,
+      "duration": 3.59,
+      "text": "is the following one any tricky limit is"
+    },
+    {
+      "index": 108,
+      "start": 360.12,
+      "end": 362.909,
+      "duration": 2.789,
+      "text": "basically 0 over 0 when you set Delta x"
+    },
+    {
+      "index": 109,
+      "start": 362.919,
+      "end": 364.79,
+      "duration": 1.871,
+      "text": "equal to 0 if I set Delta x equal to 0"
+    },
+    {
+      "index": 110,
+      "start": 364.8,
+      "end": 367.83,
+      "duration": 3.03,
+      "text": "this is sinx - sinx so it's a 0 over 0o"
+    },
+    {
+      "index": 111,
+      "start": 367.84,
+      "end": 370.029,
+      "duration": 2.189,
+      "text": "term here we have various things which"
+    },
+    {
+      "index": 112,
+      "start": 370.039,
+      "end": 371.39,
+      "duration": 1.351,
+      "text": "are zero and various things which are"
+    },
+    {
+      "index": 113,
+      "start": 371.4,
+      "end": 376.39,
+      "duration": 4.99,
+      "text": "non zero we must group the terms so that"
+    },
+    {
+      "index": 114,
+      "start": 376.4,
+      "end": 378.39,
+      "duration": 1.99,
+      "text": "a zero stays over a zero otherwise we're"
+    },
+    {
+      "index": 115,
+      "start": 378.4,
+      "end": 380.15,
+      "duration": 1.75,
+      "text": "going to have no hope if we get some one"
+    },
+    {
+      "index": 116,
+      "start": 380.16,
+      "end": 381.99,
+      "duration": 1.83,
+      "text": "over zero term we'll get something"
+    },
+    {
+      "index": 117,
+      "start": 382.0,
+      "end": 385.469,
+      "duration": 3.469,
+      "text": "meaningless in the limit so I claim that"
+    },
+    {
+      "index": 118,
+      "start": 385.479,
+      "end": 387.87,
+      "duration": 2.391,
+      "text": "the right thing to do here is to notice"
+    },
+    {
+      "index": 119,
+      "start": 387.88,
+      "end": 390.909,
+      "duration": 3.029,
+      "text": "I'll just point out this one thing is"
+    },
+    {
+      "index": 120,
+      "start": 390.919,
+      "end": 393.79,
+      "duration": 2.871,
+      "text": "that the when Delta X goes to zero this"
+    },
+    {
+      "index": 121,
+      "start": 393.8,
+      "end": 397.55,
+      "duration": 3.75,
+      "text": "cosine of 0 is one so it doesn't cancel"
+    },
+    {
+      "index": 122,
+      "start": 397.56,
+      "end": 400.07,
+      "duration": 2.51,
+      "text": "unless we throw in this extra sign term"
+    },
+    {
+      "index": 123,
+      "start": 400.08,
+      "end": 402.629,
+      "duration": 2.549,
+      "text": "here so I'm going to use this common"
+    },
+    {
+      "index": 124,
+      "start": 402.639,
+      "end": 404.95,
+      "duration": 2.311,
+      "text": "factor and combine those terms so this"
+    },
+    {
+      "index": 125,
+      "start": 404.96,
+      "end": 406.469,
+      "duration": 1.509,
+      "text": "is really the only thing that you're"
+    },
+    {
+      "index": 126,
+      "start": 406.479,
+      "end": 407.629,
+      "duration": 1.15,
+      "text": "going to have to check in this"
+    },
+    {
+      "index": 127,
+      "start": 407.639,
+      "end": 409.749,
+      "duration": 2.11,
+      "text": "particular calculation so we have the"
+    },
+    {
+      "index": 128,
+      "start": 409.759,
+      "end": 412.35,
+      "duration": 2.591,
+      "text": "common factor of sinx and then that"
+    },
+    {
+      "index": 129,
+      "start": 412.36,
+      "end": 414.629,
+      "duration": 2.269,
+      "text": "multiplies something that will cancel"
+    },
+    {
+      "index": 130,
+      "start": 414.639,
+      "end": 419.27,
+      "duration": 4.631,
+      "text": "which is cosine Delta X - 1 / Delta X so"
+    },
+    {
+      "index": 131,
+      "start": 419.28,
+      "end": 422.43,
+      "duration": 3.15,
+      "text": "that's the first term and now what's"
+    },
+    {
+      "index": 132,
+      "start": 422.44,
+      "end": 425.23,
+      "duration": 2.79,
+      "text": "left well there's a cosine X that"
+    },
+    {
+      "index": 133,
+      "start": 425.24,
+      "end": 428.11,
+      "duration": 2.87,
+      "text": "factors out and then the other factor is"
+    },
+    {
+      "index": 134,
+      "start": 428.12,
+      "end": 433.23,
+      "duration": 5.11,
+      "text": "sin Delta X over Delta"
+    },
+    {
+      "index": 135,
+      "start": 440.71,
+      "end": 440.72,
+      "duration": 0.01,
+      "text": "now does anyone remember from last time"
+    },
+    {
+      "index": 136,
+      "start": 440.72,
+      "end": 444.07,
+      "duration": 3.35,
+      "text": "what this thing goes"
+    },
+    {
+      "index": 137,
+      "start": 446.55,
+      "end": 446.56,
+      "duration": 0.01,
+      "text": "to how many people say"
+    },
+    {
+      "index": 138,
+      "start": 446.56,
+      "end": 449.51,
+      "duration": 2.95,
+      "text": "one how many people say zero all right"
+    },
+    {
+      "index": 139,
+      "start": 449.52,
+      "end": 452.27,
+      "duration": 2.75,
+      "text": "all right it's zero that's my favorite"
+    },
+    {
+      "index": 140,
+      "start": 452.28,
+      "end": 454.95,
+      "duration": 2.67,
+      "text": "number all right zero it's the easiest"
+    },
+    {
+      "index": 141,
+      "start": 454.96,
+      "end": 458.39,
+      "duration": 3.43,
+      "text": "number to deal with so this goes to zero"
+    },
+    {
+      "index": 142,
+      "start": 458.4,
+      "end": 461.029,
+      "duration": 2.629,
+      "text": "and that's what happens as Delta X tends"
+    },
+    {
+      "index": 143,
+      "start": 461.039,
+      "end": 464.99,
+      "duration": 3.951,
+      "text": "to"
+    },
+    {
+      "index": 144,
+      "start": 467.589,
+      "end": 467.599,
+      "duration": 0.01,
+      "text": "zero now how about this one this one"
+    },
+    {
+      "index": 145,
+      "start": 467.599,
+      "end": 471.189,
+      "duration": 3.59,
+      "text": "goes to one my second favorite number"
+    },
+    {
+      "index": 146,
+      "start": 471.199,
+      "end": 474.55,
+      "duration": 3.351,
+      "text": "almost as easy to deal with as zero and"
+    },
+    {
+      "index": 147,
+      "start": 474.56,
+      "end": 476.39,
+      "duration": 1.83,
+      "text": "these things are are are picked for a"
+    },
+    {
+      "index": 148,
+      "start": 476.4,
+      "end": 477.79,
+      "duration": 1.39,
+      "text": "reason they're the simplest numbers to"
+    },
+    {
+      "index": 149,
+      "start": 477.8,
+      "end": 480.79,
+      "duration": 2.99,
+      "text": "deal with so Al together this thing as"
+    },
+    {
+      "index": 150,
+      "start": 480.8,
+      "end": 485.83,
+      "duration": 5.03,
+      "text": "Delta X goes to zero goes to"
+    },
+    {
+      "index": 151,
+      "start": 488.51,
+      "end": 488.52,
+      "duration": 0.01,
+      "text": "what I want a single person to answer"
+    },
+    {
+      "index": 152,
+      "start": 488.52,
+      "end": 491.23,
+      "duration": 2.71,
+      "text": "Brave volunteer all right right back"
+    },
+    {
+      "index": 153,
+      "start": 491.24,
+      "end": 494.83,
+      "duration": 3.59,
+      "text": "there cosine because this factor is zero"
+    },
+    {
+      "index": 154,
+      "start": 494.84,
+      "end": 497.07,
+      "duration": 2.23,
+      "text": "it cancels and this Factor has a one so"
+    },
+    {
+      "index": 155,
+      "start": 497.08,
+      "end": 500.27,
+      "duration": 3.19,
+      "text": "it's cosine so it's cosine X all right"
+    },
+    {
+      "index": 156,
+      "start": 500.28,
+      "end": 503.909,
+      "duration": 3.629,
+      "text": "so our conclusion over here I'll put it"
+    },
+    {
+      "index": 157,
+      "start": 503.919,
+      "end": 508.309,
+      "duration": 4.39,
+      "text": "in Orange is that the derivative of the"
+    },
+    {
+      "index": 158,
+      "start": 508.319,
+      "end": 511.629,
+      "duration": 3.31,
+      "text": "sign is the cosine"
+    },
+    {
+      "index": 159,
+      "start": 516.909,
+      "end": 516.919,
+      "duration": 0.01,
+      "text": "right okay now I still want to label"
+    },
+    {
+      "index": 160,
+      "start": 516.919,
+      "end": 519.269,
+      "duration": 2.35,
+      "text": "these very important limit facts here"
+    },
+    {
+      "index": 161,
+      "start": 519.279,
+      "end": 521.709,
+      "duration": 2.43,
+      "text": "this one we'll call a and this one we're"
+    },
+    {
+      "index": 162,
+      "start": 521.719,
+      "end": 523.79,
+      "duration": 2.071,
+      "text": "going to call B because we haven't"
+    },
+    {
+      "index": 163,
+      "start": 523.8,
+      "end": 525.31,
+      "duration": 1.51,
+      "text": "checked them yet I promised you I would"
+    },
+    {
+      "index": 164,
+      "start": 525.32,
+      "end": 527.47,
+      "duration": 2.15,
+      "text": "do that and I'll have to do that this"
+    },
+    {
+      "index": 165,
+      "start": 527.48,
+      "end": 530.11,
+      "duration": 2.63,
+      "text": "time so we've we're relying on those"
+    },
+    {
+      "index": 166,
+      "start": 530.12,
+      "end": 531.509,
+      "duration": 1.389,
+      "text": "things being"
+    },
+    {
+      "index": 167,
+      "start": 531.519,
+      "end": 534.55,
+      "duration": 3.031,
+      "text": "true now I'm going to do the same thing"
+    },
+    {
+      "index": 168,
+      "start": 534.56,
+      "end": 536.87,
+      "duration": 2.31,
+      "text": "with the cosine function except in order"
+    },
+    {
+      "index": 169,
+      "start": 536.88,
+      "end": 538.31,
+      "duration": 1.43,
+      "text": "to do it I'm going to have to remember"
+    },
+    {
+      "index": 170,
+      "start": 538.32,
+      "end": 541.389,
+      "duration": 3.069,
+      "text": "the sum rule for cosine so we're going"
+    },
+    {
+      "index": 171,
+      "start": 541.399,
+      "end": 543.63,
+      "duration": 2.231,
+      "text": "to do almost the same calculation here"
+    },
+    {
+      "index": 172,
+      "start": 543.64,
+      "end": 544.75,
+      "duration": 1.11,
+      "text": "we're going to see that that will work"
+    },
+    {
+      "index": 173,
+      "start": 544.76,
+      "end": 546.63,
+      "duration": 1.87,
+      "text": "out but now you have to remember that"
+    },
+    {
+      "index": 174,
+      "start": 546.64,
+      "end": 550.31,
+      "duration": 3.67,
+      "text": "cosine of a plus b is equal"
+    },
+    {
+      "index": 175,
+      "start": 550.32,
+      "end": 553.75,
+      "duration": 3.43,
+      "text": "to cosine cosine no it's not cosine"
+    },
+    {
+      "index": 176,
+      "start": 553.76,
+      "end": 555.43,
+      "duration": 1.67,
+      "text": "squared because they're two different"
+    },
+    {
+      "index": 177,
+      "start": 555.44,
+      "end": 559.23,
+      "duration": 3.79,
+      "text": "quantities here it's cosine a cosine B"
+    },
+    {
+      "index": 178,
+      "start": 559.24,
+      "end": 563.79,
+      "duration": 4.55,
+      "text": "minus here's the minus sign sin a sin B"
+    },
+    {
+      "index": 179,
+      "start": 563.8,
+      "end": 566.15,
+      "duration": 2.35,
+      "text": "all"
+    },
+    {
+      "index": 180,
+      "start": 569.91,
+      "end": 569.92,
+      "duration": 0.01,
+      "text": "right so you'll have to be uh"
+    },
+    {
+      "index": 181,
+      "start": 569.92,
+      "end": 573.71,
+      "duration": 3.79,
+      "text": "willing to call those forth at will uh"
+    },
+    {
+      "index": 182,
+      "start": 573.72,
+      "end": 575.75,
+      "duration": 2.03,
+      "text": "right now so okay so let's do the the"
+    },
+    {
+      "index": 183,
+      "start": 575.76,
+      "end": 579.829,
+      "duration": 4.069,
+      "text": "cosine now so that's cosine x + Delta"
+    },
+    {
+      "index": 184,
+      "start": 579.839,
+      "end": 581.87,
+      "duration": 2.031,
+      "text": "xus cosine"
+    },
+    {
+      "index": 185,
+      "start": 581.88,
+      "end": 584.67,
+      "duration": 2.79,
+      "text": "x / Delta"
+    },
+    {
+      "index": 186,
+      "start": 584.68,
+      "end": 587.87,
+      "duration": 3.19,
+      "text": "X okay there's the difference quotient"
+    },
+    {
+      "index": 187,
+      "start": 587.88,
+      "end": 589.91,
+      "duration": 2.03,
+      "text": "for the cosine function and now I'm"
+    },
+    {
+      "index": 188,
+      "start": 589.92,
+      "end": 591.47,
+      "duration": 1.55,
+      "text": "going to do the same thing I did before"
+    },
+    {
+      "index": 189,
+      "start": 591.48,
+      "end": 592.949,
+      "duration": 1.469,
+      "text": "except I'm going to apply the second"
+    },
+    {
+      "index": 190,
+      "start": 592.959,
+      "end": 595.91,
+      "duration": 2.951,
+      "text": "rule that is the sum rule for cosine and"
+    },
+    {
+      "index": 191,
+      "start": 595.92,
+      "end": 598.829,
+      "duration": 2.909,
+      "text": "that's going to give me cosine x cosine"
+    },
+    {
+      "index": 192,
+      "start": 598.839,
+      "end": 604.509,
+      "duration": 5.67,
+      "text": "Delta X x - sin x sin Delta X and then I"
+    },
+    {
+      "index": 193,
+      "start": 604.519,
+      "end": 607.99,
+      "duration": 3.471,
+      "text": "have to remember again to subtract the"
+    },
+    {
+      "index": 194,
+      "start": 608.0,
+      "end": 610.63,
+      "duration": 2.63,
+      "text": "cosine divided by this Delta"
+    },
+    {
+      "index": 195,
+      "start": 610.64,
+      "end": 613.75,
+      "duration": 3.11,
+      "text": "X and now I'm going to regroup just the"
+    },
+    {
+      "index": 196,
+      "start": 613.76,
+      "end": 615.59,
+      "duration": 1.83,
+      "text": "way I did"
+    },
+    {
+      "index": 197,
+      "start": 615.6,
+      "end": 618.63,
+      "duration": 3.03,
+      "text": "before and I get the common factor of"
+    },
+    {
+      "index": 198,
+      "start": 618.64,
+      "end": 623.389,
+      "duration": 4.749,
+      "text": "cosine multiplying cosine Delta xus 1 /"
+    },
+    {
+      "index": 199,
+      "start": 623.399,
+      "end": 628.15,
+      "duration": 4.751,
+      "text": "Delta X and here I get um the sinx but"
+    },
+    {
+      "index": 200,
+      "start": 628.16,
+      "end": 631.47,
+      "duration": 3.31,
+      "text": "actually it's minus sin x and then I"
+    },
+    {
+      "index": 201,
+      "start": 631.48,
+      "end": 635.389,
+      "duration": 3.909,
+      "text": "have sin Delta x / Delta"
+    },
+    {
+      "index": 202,
+      "start": 635.399,
+      "end": 637.99,
+      "duration": 2.591,
+      "text": "X all right the only difference is this"
+    },
+    {
+      "index": 203,
+      "start": 638.0,
+      "end": 642.15,
+      "duration": 4.15,
+      "text": "minus sign which I stuck inside"
+    },
+    {
+      "index": 204,
+      "start": 642.16,
+      "end": 644.15,
+      "duration": 1.99,
+      "text": "there well that's not the only"
+    },
+    {
+      "index": 205,
+      "start": 644.16,
+      "end": 647.67,
+      "duration": 3.51,
+      "text": "difference but it's a crucial"
+    },
+    {
+      "index": 206,
+      "start": 647.68,
+      "end": 651.99,
+      "duration": 4.31,
+      "text": "difference okay again by a we get that"
+    },
+    {
+      "index": 207,
+      "start": 652.0,
+      "end": 654.79,
+      "duration": 2.79,
+      "text": "this is zero as Delta X tends to zero"
+    },
+    {
+      "index": 208,
+      "start": 654.8,
+      "end": 657.59,
+      "duration": 2.79,
+      "text": "and this is one those are the properties"
+    },
+    {
+      "index": 209,
+      "start": 657.6,
+      "end": 662.15,
+      "duration": 4.55,
+      "text": "I called A and B and so the result here"
+    },
+    {
+      "index": 210,
+      "start": 662.16,
+      "end": 664.03,
+      "duration": 1.87,
+      "text": "as Delta X tends to"
+    },
+    {
+      "index": 211,
+      "start": 664.04,
+      "end": 668.79,
+      "duration": 4.75,
+      "text": "zero is that we get Negative sinx that's"
+    },
+    {
+      "index": 212,
+      "start": 668.8,
+      "end": 672.15,
+      "duration": 3.35,
+      "text": "the factor negative sinx all right so"
+    },
+    {
+      "index": 213,
+      "start": 672.16,
+      "end": 677.949,
+      "duration": 5.789,
+      "text": "this guy is negative"
+    },
+    {
+      "index": 214,
+      "start": 688.67,
+      "end": 688.68,
+      "duration": 0.01,
+      "text": "too all right now these formulas take a"
+    },
+    {
+      "index": 215,
+      "start": 688.68,
+      "end": 693.67,
+      "duration": 4.99,
+      "text": "little bit of getting used to and um but"
+    },
+    {
+      "index": 216,
+      "start": 693.68,
+      "end": 695.99,
+      "duration": 2.31,
+      "text": "before I do that I'm going to explain to"
+    },
+    {
+      "index": 217,
+      "start": 696.0,
+      "end": 699.15,
+      "duration": 3.15,
+      "text": "you the proofs of A and B all right so"
+    },
+    {
+      "index": 218,
+      "start": 699.16,
+      "end": 702.269,
+      "duration": 3.109,
+      "text": "we'll we'll get ourselves"
+    },
+    {
+      "index": 219,
+      "start": 702.279,
+      "end": 704.99,
+      "duration": 2.711,
+      "text": "started by mentioning that now maybe"
+    },
+    {
+      "index": 220,
+      "start": 705.0,
+      "end": 707.43,
+      "duration": 2.43,
+      "text": "maybe before I do that though I I want"
+    },
+    {
+      "index": 221,
+      "start": 707.44,
+      "end": 709.99,
+      "duration": 2.55,
+      "text": "to show you how A and B fit into the"
+    },
+    {
+      "index": 222,
+      "start": 710.0,
+      "end": 712.43,
+      "duration": 2.43,
+      "text": "proofs of these theorems"
+    },
+    {
+      "index": 223,
+      "start": 712.44,
+      "end": 726.11,
+      "duration": 13.67,
+      "text": "so let me just make some remarks here"
+    },
+    {
+      "index": 224,
+      "start": 729.31,
+      "end": 729.32,
+      "duration": 0.01,
+      "text": "so this is just a remark but it's meant"
+    },
+    {
+      "index": 225,
+      "start": 729.32,
+      "end": 733.71,
+      "duration": 4.39,
+      "text": "to help you to frame how these how these"
+    },
+    {
+      "index": 226,
+      "start": 733.72,
+      "end": 734.71,
+      "duration": 0.99,
+      "text": "proofs"
+    },
+    {
+      "index": 227,
+      "start": 734.72,
+      "end": 737.389,
+      "duration": 2.669,
+      "text": "worked so first of all I want to point"
+    },
+    {
+      "index": 228,
+      "start": 737.399,
+      "end": 740.87,
+      "duration": 3.471,
+      "text": "out that if you take the rate of change"
+    },
+    {
+      "index": 229,
+      "start": 740.88,
+      "end": 743.79,
+      "duration": 2.91,
+      "text": "of"
+    },
+    {
+      "index": 230,
+      "start": 743.8,
+      "end": 746.949,
+      "duration": 3.149,
+      "text": "sinx well let's start with"
+    },
+    {
+      "index": 231,
+      "start": 746.959,
+      "end": 749.55,
+      "duration": 2.591,
+      "text": "cosine because it's actually a little"
+    },
+    {
+      "index": 232,
+      "start": 749.56,
+      "end": 751.99,
+      "duration": 2.43,
+      "text": "less obvious if I take the rate of uh"
+    },
+    {
+      "index": 233,
+      "start": 752.0,
+      "end": 754.069,
+      "duration": 2.069,
+      "text": "change of cos x so in other words this"
+    },
+    {
+      "index": 234,
+      "start": 754.079,
+      "end": 757.99,
+      "duration": 3.911,
+      "text": "derivative at xal"
+    },
+    {
+      "index": 235,
+      "start": 758.0,
+      "end": 762.15,
+      "duration": 4.15,
+      "text": "0 then by definition this is a certain"
+    },
+    {
+      "index": 236,
+      "start": 762.16,
+      "end": 765.829,
+      "duration": 3.669,
+      "text": "limit as Delta X goes to zero so which"
+    },
+    {
+      "index": 237,
+      "start": 765.839,
+      "end": 769.11,
+      "duration": 3.271,
+      "text": "one is it well I have to evaluate"
+    },
+    {
+      "index": 238,
+      "start": 769.12,
+      "end": 772.069,
+      "duration": 2.949,
+      "text": "cosine at 0 plus Delta X but that's just"
+    },
+    {
+      "index": 239,
+      "start": 772.079,
+      "end": 775.949,
+      "duration": 3.87,
+      "text": "Delta X and I have to subtract cosine at"
+    },
+    {
+      "index": 240,
+      "start": 775.959,
+      "end": 778.11,
+      "duration": 2.151,
+      "text": "zero that's the base point but that's"
+    },
+    {
+      "index": 241,
+      "start": 778.12,
+      "end": 780.069,
+      "duration": 1.949,
+      "text": "just one"
+    },
+    {
+      "index": 242,
+      "start": 780.079,
+      "end": 783.31,
+      "duration": 3.231,
+      "text": "and then I have to divide by Delta X and"
+    },
+    {
+      "index": 243,
+      "start": 783.32,
+      "end": 785.35,
+      "duration": 2.03,
+      "text": "lo and behold you can see that this is"
+    },
+    {
+      "index": 244,
+      "start": 785.36,
+      "end": 788.23,
+      "duration": 2.87,
+      "text": "exactly the limit that we had over there"
+    },
+    {
+      "index": 245,
+      "start": 788.24,
+      "end": 790.069,
+      "duration": 1.829,
+      "text": "this is the one that we know is zero by"
+    },
+    {
+      "index": 246,
+      "start": 790.079,
+      "end": 791.35,
+      "duration": 1.271,
+      "text": "what we called"
+    },
+    {
+      "index": 247,
+      "start": 791.36,
+      "end": 795.069,
+      "duration": 3.709,
+      "text": "property"
+    },
+    {
+      "index": 248,
+      "start": 797.35,
+      "end": 797.36,
+      "duration": 0.01,
+      "text": "a and"
+    },
+    {
+      "index": 249,
+      "start": 797.36,
+      "end": 800.389,
+      "duration": 3.029,
+      "text": "similarly if I take the derivative of"
+    },
+    {
+      "index": 250,
+      "start": 800.399,
+      "end": 804.03,
+      "duration": 3.631,
+      "text": "sinx at xal 0 then that's going to be"
+    },
+    {
+      "index": 251,
+      "start": 804.04,
+      "end": 808.509,
+      "duration": 4.469,
+      "text": "the limit as Delta X goes to zero of sin"
+    },
+    {
+      "index": 252,
+      "start": 808.519,
+      "end": 809.75,
+      "duration": 1.231,
+      "text": "Delta X"
+    },
+    {
+      "index": 253,
+      "start": 809.76,
+      "end": 813.629,
+      "duration": 3.869,
+      "text": "Delta X and that's because I should be"
+    },
+    {
+      "index": 254,
+      "start": 813.639,
+      "end": 817.069,
+      "duration": 3.43,
+      "text": "subtracting of 0 but s of 0"
+    },
+    {
+      "index": 255,
+      "start": 817.079,
+      "end": 821.03,
+      "duration": 3.951,
+      "text": "is0 all right so this is going to be one"
+    },
+    {
+      "index": 256,
+      "start": 821.04,
+      "end": 825.55,
+      "duration": 4.51,
+      "text": "by our property"
+    },
+    {
+      "index": 257,
+      "start": 829.31,
+      "end": 829.32,
+      "duration": 0.01,
+      "text": "B and so the remark that I want to make"
+    },
+    {
+      "index": 258,
+      "start": 829.32,
+      "end": 831.509,
+      "duration": 2.189,
+      "text": "in addition to the to this is is"
+    },
+    {
+      "index": 259,
+      "start": 831.519,
+      "end": 833.35,
+      "duration": 1.831,
+      "text": "something about the structure of these"
+    },
+    {
+      "index": 260,
+      "start": 833.36,
+      "end": 834.389,
+      "duration": 1.029,
+      "text": "two"
+    },
+    {
+      "index": 261,
+      "start": 834.399,
+      "end": 841.87,
+      "duration": 7.471,
+      "text": "proofs which is the derivatives"
+    },
+    {
+      "index": 262,
+      "start": 843.629,
+      "end": 843.639,
+      "duration": 0.01,
+      "text": "of"
+    },
+    {
+      "index": 263,
+      "start": 843.639,
+      "end": 846.71,
+      "duration": 3.071,
+      "text": "s and"
+    },
+    {
+      "index": 264,
+      "start": 846.72,
+      "end": 852.11,
+      "duration": 5.39,
+      "text": "cosine at xal"
+    },
+    {
+      "index": 265,
+      "start": 861.629,
+      "end": 861.639,
+      "duration": 0.01,
+      "text": "values of d by DX"
+    },
+    {
+      "index": 266,
+      "start": 861.639,
+      "end": 866.189,
+      "duration": 4.55,
+      "text": "sinx d by DX cosine X so that's really"
+    },
+    {
+      "index": 267,
+      "start": 866.199,
+      "end": 867.99,
+      "duration": 1.791,
+      "text": "what this argument is showing us is that"
+    },
+    {
+      "index": 268,
+      "start": 868.0,
+      "end": 869.79,
+      "duration": 1.79,
+      "text": "we just need one"
+    },
+    {
+      "index": 269,
+      "start": 869.8,
+      "end": 871.79,
+      "duration": 1.99,
+      "text": "rate of change at one place and then we"
+    },
+    {
+      "index": 270,
+      "start": 871.8,
+      "end": 877.55,
+      "duration": 5.75,
+      "text": "work out all the rest of"
+    },
+    {
+      "index": 271,
+      "start": 879.67,
+      "end": 879.68,
+      "duration": 0.01,
+      "text": "them all right so that that's that's"
+    },
+    {
+      "index": 272,
+      "start": 879.68,
+      "end": 880.829,
+      "duration": 1.149,
+      "text": "really the substance of this proof"
+    },
+    {
+      "index": 273,
+      "start": 880.839,
+      "end": 882.87,
+      "duration": 2.031,
+      "text": "that's of course really then shows that"
+    },
+    {
+      "index": 274,
+      "start": 882.88,
+      "end": 884.59,
+      "duration": 1.71,
+      "text": "it boils down to showing what this rate"
+    },
+    {
+      "index": 275,
+      "start": 884.6,
+      "end": 887.15,
+      "duration": 2.55,
+      "text": "of change is in these two cases and a"
+    },
+    {
+      "index": 276,
+      "start": 887.16,
+      "end": 890.269,
+      "duration": 3.109,
+      "text": "equals so now there's enough suspense"
+    },
+    {
+      "index": 277,
+      "start": 890.279,
+      "end": 891.749,
+      "duration": 1.47,
+      "text": "that we we want to make sure that we"
+    },
+    {
+      "index": 278,
+      "start": 891.759,
+      "end": 894.87,
+      "duration": 3.111,
+      "text": "know that those answers are correct"
+    },
+    {
+      "index": 279,
+      "start": 894.88,
+      "end": 897.55,
+      "duration": 2.67,
+      "text": "right I think looks like the erasers are"
+    },
+    {
+      "index": 280,
+      "start": 897.56,
+      "end": 908.47,
+      "duration": 10.91,
+      "text": "over here"
+    },
+    {
+      "index": 281,
+      "start": 911.71,
+      "end": 911.72,
+      "duration": 0.01,
+      "text": "okay so let's let's um demonstrate both"
+    },
+    {
+      "index": 282,
+      "start": 911.72,
+      "end": 914.99,
+      "duration": 3.27,
+      "text": "of them I'll start with"
+    },
+    {
+      "index": 283,
+      "start": 915.0,
+      "end": 918.829,
+      "duration": 3.829,
+      "text": "B so I need to figure out property B now"
+    },
+    {
+      "index": 284,
+      "start": 918.839,
+      "end": 921.749,
+      "duration": 2.91,
+      "text": "we only have one alternative as to a"
+    },
+    {
+      "index": 285,
+      "start": 921.759,
+      "end": 923.509,
+      "duration": 1.75,
+      "text": "type of proof that we can give of this"
+    },
+    {
+      "index": 286,
+      "start": 923.519,
+      "end": 926.59,
+      "duration": 3.071,
+      "text": "kind of result and that's because we"
+    },
+    {
+      "index": 287,
+      "start": 926.6,
+      "end": 929.749,
+      "duration": 3.149,
+      "text": "only have one way of describing s and"
+    },
+    {
+      "index": 288,
+      "start": 929.759,
+      "end": 932.829,
+      "duration": 3.07,
+      "text": "cosine functions that is geometrically"
+    },
+    {
+      "index": 289,
+      "start": 932.839,
+      "end": 941.79,
+      "duration": 8.951,
+      "text": "so we have to give a geometric"
+    },
+    {
+      "index": 290,
+      "start": 945.03,
+      "end": 945.04,
+      "duration": 0.01,
+      "text": "proof and to write down a geometric"
+    },
+    {
+      "index": 291,
+      "start": 945.04,
+      "end": 946.35,
+      "duration": 1.31,
+      "text": "proof we're going to have to draw a"
+    },
+    {
+      "index": 292,
+      "start": 946.36,
+      "end": 949.269,
+      "duration": 2.909,
+      "text": "picture and the first step in the proof"
+    },
+    {
+      "index": 293,
+      "start": 949.279,
+      "end": 951.67,
+      "duration": 2.391,
+      "text": "really is to replace this variable Delta"
+    },
+    {
+      "index": 294,
+      "start": 951.68,
+      "end": 955.11,
+      "duration": 3.43,
+      "text": "X which is going to zero with another"
+    },
+    {
+      "index": 295,
+      "start": 955.12,
+      "end": 956.87,
+      "duration": 1.75,
+      "text": "name which is suggestive of what we're"
+    },
+    {
+      "index": 296,
+      "start": 956.88,
+      "end": 958.99,
+      "duration": 2.11,
+      "text": "going to do which is the letter Theta"
+    },
+    {
+      "index": 297,
+      "start": 959.0,
+      "end": 960.15,
+      "duration": 1.15,
+      "text": "for an"
+    },
+    {
+      "index": 298,
+      "start": 960.16,
+      "end": 963.389,
+      "duration": 3.229,
+      "text": "angle okay so let's draw a picture of"
+    },
+    {
+      "index": 299,
+      "start": 963.399,
+      "end": 965.99,
+      "duration": 2.591,
+      "text": "what it is that we're going to do now"
+    },
+    {
+      "index": 300,
+      "start": 966.0,
+      "end": 967.069,
+      "duration": 1.069,
+      "text": "here's the"
+    },
+    {
+      "index": 301,
+      "start": 967.079,
+      "end": 971.03,
+      "duration": 3.951,
+      "text": "circle and here is uh the origin and"
+    },
+    {
+      "index": 302,
+      "start": 971.04,
+      "end": 974.069,
+      "duration": 3.029,
+      "text": "here's some little angle well I'll draw"
+    },
+    {
+      "index": 303,
+      "start": 974.079,
+      "end": 976.15,
+      "duration": 2.071,
+      "text": "it a little larger so that it's visible"
+    },
+    {
+      "index": 304,
+      "start": 976.16,
+      "end": 978.509,
+      "duration": 2.349,
+      "text": "here's Theta all"
+    },
+    {
+      "index": 305,
+      "start": 978.519,
+      "end": 981.15,
+      "duration": 2.631,
+      "text": "right and this is the unit circle I"
+    },
+    {
+      "index": 306,
+      "start": 981.16,
+      "end": 983.15,
+      "duration": 1.99,
+      "text": "won't write that down on here but that's"
+    },
+    {
+      "index": 307,
+      "start": 983.16,
+      "end": 985.11,
+      "duration": 1.95,
+      "text": "the unit"
+    },
+    {
+      "index": 308,
+      "start": 985.12,
+      "end": 988.91,
+      "duration": 3.79,
+      "text": "circle and now sin Theta is this ver"
+    },
+    {
+      "index": 309,
+      "start": 988.92,
+      "end": 990.35,
+      "duration": 1.43,
+      "text": "vertical distance here maybe I'll draw"
+    },
+    {
+      "index": 310,
+      "start": 990.36,
+      "end": 992.71,
+      "duration": 2.35,
+      "text": "it in a different color so that we can"
+    },
+    {
+      "index": 311,
+      "start": 992.72,
+      "end": 993.749,
+      "duration": 1.029,
+      "text": "see it"
+    },
+    {
+      "index": 312,
+      "start": 993.759,
+      "end": 997.47,
+      "duration": 3.711,
+      "text": "all okay so"
+    },
+    {
+      "index": 313,
+      "start": 1001.67,
+      "end": 1001.68,
+      "duration": 0.01,
+      "text": "here's this distance so this distance is"
+    },
+    {
+      "index": 314,
+      "start": 1001.68,
+      "end": 1005.03,
+      "duration": 3.35,
+      "text": "sin"
+    },
+    {
+      "index": 315,
+      "start": 1007.509,
+      "end": 1007.519,
+      "duration": 0.01,
+      "text": "Theta"
+    },
+    {
+      "index": 316,
+      "start": 1007.519,
+      "end": 1009.15,
+      "duration": 1.631,
+      "text": "okay"
+    },
+    {
+      "index": 317,
+      "start": 1009.16,
+      "end": 1011.59,
+      "duration": 2.43,
+      "text": "now almost the only other thing we have"
+    },
+    {
+      "index": 318,
+      "start": 1011.6,
+      "end": 1013.389,
+      "duration": 1.789,
+      "text": "to write down in this picture to to have"
+    },
+    {
+      "index": 319,
+      "start": 1013.399,
+      "end": 1016.47,
+      "duration": 3.071,
+      "text": "it work out is that we have to recognize"
+    },
+    {
+      "index": 320,
+      "start": 1016.48,
+      "end": 1019.309,
+      "duration": 2.829,
+      "text": "that when Theta is the angle that's also"
+    },
+    {
+      "index": 321,
+      "start": 1019.319,
+      "end": 1022.87,
+      "duration": 3.551,
+      "text": "the arc length of this piece of the"
+    },
+    {
+      "index": 322,
+      "start": 1022.88,
+      "end": 1025.35,
+      "duration": 2.47,
+      "text": "circle when measured in radians so this"
+    },
+    {
+      "index": 323,
+      "start": 1025.36,
+      "end": 1030.27,
+      "duration": 4.91,
+      "text": "length here is also Arc Length whoops"
+    },
+    {
+      "index": 324,
+      "start": 1030.28,
+      "end": 1032.069,
+      "duration": 1.789,
+      "text": "Arc"
+    },
+    {
+      "index": 325,
+      "start": 1032.079,
+      "end": 1034.909,
+      "duration": 2.83,
+      "text": "Length Theta that little piece in there"
+    },
+    {
+      "index": 326,
+      "start": 1034.919,
+      "end": 1037.069,
+      "duration": 2.15,
+      "text": "so maybe I'll use a different color for"
+    },
+    {
+      "index": 327,
+      "start": 1037.079,
+      "end": 1039.669,
+      "duration": 2.59,
+      "text": "that to indicate it so there's orange"
+    },
+    {
+      "index": 328,
+      "start": 1039.679,
+      "end": 1043.11,
+      "duration": 3.431,
+      "text": "and that's this this little chunk"
+    },
+    {
+      "index": 329,
+      "start": 1043.12,
+      "end": 1047.189,
+      "duration": 4.069,
+      "text": "there okay so those are the two pieces"
+    },
+    {
+      "index": 330,
+      "start": 1047.199,
+      "end": 1052.71,
+      "duration": 5.511,
+      "text": "now in order to to to"
+    },
+    {
+      "index": 331,
+      "start": 1056.31,
+      "end": 1056.32,
+      "duration": 0.01,
+      "text": "um persuade you now that the limit is"
+    },
+    {
+      "index": 332,
+      "start": 1056.32,
+      "end": 1058.19,
+      "duration": 1.87,
+      "text": "what it's supposed to be I'm going to"
+    },
+    {
+      "index": 333,
+      "start": 1058.2,
+      "end": 1059.789,
+      "duration": 1.589,
+      "text": "extend the picture just a little bit I'm"
+    },
+    {
+      "index": 334,
+      "start": 1059.799,
+      "end": 1061.87,
+      "duration": 2.071,
+      "text": "going to double it just for my own"
+    },
+    {
+      "index": 335,
+      "start": 1061.88,
+      "end": 1063.83,
+      "duration": 1.95,
+      "text": "linguistic s so that I can tell you a"
+    },
+    {
+      "index": 336,
+      "start": 1063.84,
+      "end": 1065.75,
+      "duration": 1.91,
+      "text": "story all right so that you'll remember"
+    },
+    {
+      "index": 337,
+      "start": 1065.76,
+      "end": 1069.11,
+      "duration": 3.35,
+      "text": "this so I'm going to take a Theta angle"
+    },
+    {
+      "index": 338,
+      "start": 1069.12,
+      "end": 1071.87,
+      "duration": 2.75,
+      "text": "below and I'll have another copy of sin"
+    },
+    {
+      "index": 339,
+      "start": 1071.88,
+      "end": 1077.43,
+      "duration": 5.55,
+      "text": "Theta down here and now the total"
+    },
+    {
+      "index": 340,
+      "start": 1079.99,
+      "end": 1080.0,
+      "duration": 0.01,
+      "text": "picture is"
+    },
+    {
+      "index": 341,
+      "start": 1080.0,
+      "end": 1084.27,
+      "duration": 4.27,
+      "text": "really like a bow and it's bow string"
+    },
+    {
+      "index": 342,
+      "start": 1084.28,
+      "end": 1088.23,
+      "duration": 3.95,
+      "text": "there all right so what we have here is"
+    },
+    {
+      "index": 343,
+      "start": 1088.24,
+      "end": 1091.83,
+      "duration": 3.59,
+      "text": "uh a length of 2 sin Theta so maybe I'll"
+    },
+    {
+      "index": 344,
+      "start": 1091.84,
+      "end": 1094.07,
+      "duration": 2.23,
+      "text": "write it this way 2 sin Theta I just"
+    },
+    {
+      "index": 345,
+      "start": 1094.08,
+      "end": 1100.83,
+      "duration": 6.75,
+      "text": "doubled it and here I have uh"
+    },
+    {
+      "index": 346,
+      "start": 1104.669,
+      "end": 1104.679,
+      "duration": 0.01,
+      "text": "underneath two whoops that's I got it"
+    },
+    {
+      "index": 347,
+      "start": 1104.679,
+      "end": 1107.549,
+      "duration": 2.87,
+      "text": "backwards sorry about that trying to be"
+    },
+    {
+      "index": 348,
+      "start": 1107.559,
+      "end": 1109.71,
+      "duration": 2.151,
+      "text": "fancy with the color chalk and I have It"
+    },
+    {
+      "index": 349,
+      "start": 1109.72,
+      "end": 1112.23,
+      "duration": 2.51,
+      "text": "reversed here so this is not 2 sin Theta"
+    },
+    {
+      "index": 350,
+      "start": 1112.24,
+      "end": 1114.029,
+      "duration": 1.789,
+      "text": "2 sin Theta is the vertical that's the"
+    },
+    {
+      "index": 351,
+      "start": 1114.039,
+      "end": 1117.87,
+      "duration": 3.831,
+      "text": "green so let's try that again this is 2"
+    },
+    {
+      "index": 352,
+      "start": 1117.88,
+      "end": 1119.43,
+      "duration": 1.55,
+      "text": "sin"
+    },
+    {
+      "index": 353,
+      "start": 1119.44,
+      "end": 1122.19,
+      "duration": 2.75,
+      "text": "Theta all right and then in the"
+    },
+    {
+      "index": 354,
+      "start": 1122.2,
+      "end": 1124.63,
+      "duration": 2.43,
+      "text": "denominator I have the Arc Length which"
+    },
+    {
+      "index": 355,
+      "start": 1124.64,
+      "end": 1127.75,
+      "duration": 3.11,
+      "text": "is Theta is the first half and so double"
+    },
+    {
+      "index": 356,
+      "start": 1127.76,
+      "end": 1129.63,
+      "duration": 1.87,
+      "text": "it is 2"
+    },
+    {
+      "index": 357,
+      "start": 1129.64,
+      "end": 1132.31,
+      "duration": 2.67,
+      "text": "Theta all right so if you like this is"
+    },
+    {
+      "index": 358,
+      "start": 1132.32,
+      "end": 1134.35,
+      "duration": 2.03,
+      "text": "the"
+    },
+    {
+      "index": 359,
+      "start": 1134.36,
+      "end": 1143.07,
+      "duration": 8.71,
+      "text": "bow and up here we have the bow string"
+    },
+    {
+      "index": 360,
+      "start": 1146.87,
+      "end": 1146.88,
+      "duration": 0.01,
+      "text": "all right and of course that's we can"
+    },
+    {
+      "index": 361,
+      "start": 1146.88,
+      "end": 1148.87,
+      "duration": 1.99,
+      "text": "cancel the twos that's equal to sin"
+    },
+    {
+      "index": 362,
+      "start": 1148.88,
+      "end": 1152.909,
+      "duration": 4.029,
+      "text": "Theta / Theta and so now why does this T"
+    },
+    {
+      "index": 363,
+      "start": 1152.919,
+      "end": 1157.07,
+      "duration": 4.151,
+      "text": "to one as Theta goes to goes to"
+    },
+    {
+      "index": 364,
+      "start": 1157.08,
+      "end": 1161.87,
+      "duration": 4.79,
+      "text": "zero well it's because as the angle"
+    },
+    {
+      "index": 365,
+      "start": 1161.88,
+      "end": 1165.51,
+      "duration": 3.63,
+      "text": "Theta gets very small this curved piece"
+    },
+    {
+      "index": 366,
+      "start": 1165.52,
+      "end": 1168.95,
+      "duration": 3.43,
+      "text": "looks more and more like a straight one"
+    },
+    {
+      "index": 367,
+      "start": 1168.96,
+      "end": 1171.19,
+      "duration": 2.23,
+      "text": "all right and if you get very very close"
+    },
+    {
+      "index": 368,
+      "start": 1171.2,
+      "end": 1173.51,
+      "duration": 2.31,
+      "text": "here the green segment and the orange"
+    },
+    {
+      "index": 369,
+      "start": 1173.52,
+      "end": 1175.11,
+      "duration": 1.59,
+      "text": "segment would just merge they would be"
+    },
+    {
+      "index": 370,
+      "start": 1175.12,
+      "end": 1176.95,
+      "duration": 1.83,
+      "text": "practically on top of each other and"
+    },
+    {
+      "index": 371,
+      "start": 1176.96,
+      "end": 1178.75,
+      "duration": 1.79,
+      "text": "they have closer and closer and closer"
+    },
+    {
+      "index": 372,
+      "start": 1178.76,
+      "end": 1181.43,
+      "duration": 2.67,
+      "text": "to the same"
+    },
+    {
+      "index": 373,
+      "start": 1181.44,
+      "end": 1183.95,
+      "duration": 2.51,
+      "text": "length so that's that's that's why this"
+    },
+    {
+      "index": 374,
+      "start": 1183.96,
+      "end": 1190.87,
+      "duration": 6.91,
+      "text": "is"
+    },
+    {
+      "index": 375,
+      "start": 1194.149,
+      "end": 1194.159,
+      "duration": 0.01,
+      "text": "true I guess I'll articulate that by"
+    },
+    {
+      "index": 376,
+      "start": 1194.159,
+      "end": 1196.11,
+      "duration": 1.951,
+      "text": "saying that"
+    },
+    {
+      "index": 377,
+      "start": 1196.12,
+      "end": 1201.39,
+      "duration": 5.27,
+      "text": "um uh short"
+    },
+    {
+      "index": 378,
+      "start": 1204.35,
+      "end": 1204.36,
+      "duration": 0.01,
+      "text": "curves are"
+    },
+    {
+      "index": 379,
+      "start": 1204.36,
+      "end": 1208.47,
+      "duration": 4.11,
+      "text": "nearly straight all right so that's the"
+    },
+    {
+      "index": 380,
+      "start": 1208.48,
+      "end": 1210.549,
+      "duration": 2.069,
+      "text": "the principle that we're using or short"
+    },
+    {
+      "index": 381,
+      "start": 1210.559,
+      "end": 1217.75,
+      "duration": 7.191,
+      "text": "pieces of Curves if you like are nearly"
+    },
+    {
+      "index": 382,
+      "start": 1233.75,
+      "end": 1233.76,
+      "duration": 0.01,
+      "text": "all right so now I also need to give you"
+    },
+    {
+      "index": 383,
+      "start": 1233.76,
+      "end": 1238.549,
+      "duration": 4.789,
+      "text": "a proof of"
+    },
+    {
+      "index": 384,
+      "start": 1243.029,
+      "end": 1243.039,
+      "duration": 0.01,
+      "text": "a and that has to do with this cosine"
+    },
+    {
+      "index": 385,
+      "start": 1243.039,
+      "end": 1245.39,
+      "duration": 2.351,
+      "text": "function here this is this is the"
+    },
+    {
+      "index": 386,
+      "start": 1245.4,
+      "end": 1246.47,
+      "duration": 1.07,
+      "text": "property"
+    },
+    {
+      "index": 387,
+      "start": 1246.48,
+      "end": 1248.909,
+      "duration": 2.429,
+      "text": "a"
+    },
+    {
+      "index": 388,
+      "start": 1248.919,
+      "end": 1250.669,
+      "duration": 1.75,
+      "text": "and"
+    },
+    {
+      "index": 389,
+      "start": 1250.679,
+      "end": 1253.35,
+      "duration": 2.671,
+      "text": "so I'm going to do this by flipping it"
+    },
+    {
+      "index": 390,
+      "start": 1253.36,
+      "end": 1254.75,
+      "duration": 1.39,
+      "text": "around because it turns out that this"
+    },
+    {
+      "index": 391,
+      "start": 1254.76,
+      "end": 1256.31,
+      "duration": 1.55,
+      "text": "numerator is a negative number if I want"
+    },
+    {
+      "index": 392,
+      "start": 1256.32,
+      "end": 1258.35,
+      "duration": 2.03,
+      "text": "to interpret it as a length I'm going to"
+    },
+    {
+      "index": 393,
+      "start": 1258.36,
+      "end": 1260.63,
+      "duration": 2.27,
+      "text": "want want a positive quantity so I'm"
+    },
+    {
+      "index": 394,
+      "start": 1260.64,
+      "end": 1264.19,
+      "duration": 3.55,
+      "text": "going to write down 1us cosine thet here"
+    },
+    {
+      "index": 395,
+      "start": 1264.2,
+      "end": 1266.07,
+      "duration": 1.87,
+      "text": "and then I'm going to divide"
+    },
+    {
+      "index": 396,
+      "start": 1266.08,
+      "end": 1268.909,
+      "duration": 2.829,
+      "text": "bya there all right again I'm going to"
+    },
+    {
+      "index": 397,
+      "start": 1268.919,
+      "end": 1271.11,
+      "duration": 2.191,
+      "text": "make some kind of interpretation now"
+    },
+    {
+      "index": 398,
+      "start": 1271.12,
+      "end": 1274.11,
+      "duration": 2.99,
+      "text": "this time I'm going to draw the same"
+    },
+    {
+      "index": 399,
+      "start": 1274.12,
+      "end": 1275.83,
+      "duration": 1.71,
+      "text": "sort of bow and arrow Arrangement but"
+    },
+    {
+      "index": 400,
+      "start": 1275.84,
+      "end": 1277.99,
+      "duration": 2.15,
+      "text": "maybe I'll exaggerate it a little"
+    },
+    {
+      "index": 401,
+      "start": 1278.0,
+      "end": 1283.23,
+      "duration": 5.23,
+      "text": "bit so here's the vertex of the sector"
+    },
+    {
+      "index": 402,
+      "start": 1283.24,
+      "end": 1285.75,
+      "duration": 2.51,
+      "text": "but we'll maybe make it a little longer"
+    },
+    {
+      "index": 403,
+      "start": 1285.76,
+      "end": 1291.789,
+      "duration": 6.029,
+      "text": "right"
+    },
+    {
+      "index": 404,
+      "start": 1294.549,
+      "end": 1294.559,
+      "duration": 0.01,
+      "text": "all right so here it is and here was"
+    },
+    {
+      "index": 405,
+      "start": 1294.559,
+      "end": 1297.669,
+      "duration": 3.11,
+      "text": "that middle line which was the unit"
+    },
+    {
+      "index": 406,
+      "start": 1297.679,
+      "end": 1299.59,
+      "duration": 1.911,
+      "text": "whoops okay I think I'm gonna have to"
+    },
+    {
+      "index": 407,
+      "start": 1299.6,
+      "end": 1306.23,
+      "duration": 6.63,
+      "text": "tilt it up okay let's try from"
+    },
+    {
+      "index": 408,
+      "start": 1308.669,
+      "end": 1308.679,
+      "duration": 0.01,
+      "text": "here all"
+    },
+    {
+      "index": 409,
+      "start": 1308.679,
+      "end": 1311.269,
+      "duration": 2.59,
+      "text": "right well you know on your pencil and"
+    },
+    {
+      "index": 410,
+      "start": 1311.279,
+      "end": 1312.669,
+      "duration": 1.39,
+      "text": "paper it'll look better than it does on"
+    },
+    {
+      "index": 411,
+      "start": 1312.679,
+      "end": 1315.47,
+      "duration": 2.791,
+      "text": "my Blackboard okay so here we are here's"
+    },
+    {
+      "index": 412,
+      "start": 1315.48,
+      "end": 1319.269,
+      "duration": 3.789,
+      "text": "this shape now"
+    },
+    {
+      "index": 413,
+      "start": 1319.279,
+      "end": 1321.59,
+      "duration": 2.311,
+      "text": "this angle is supposed to be Theta and"
+    },
+    {
+      "index": 414,
+      "start": 1321.6,
+      "end": 1323.99,
+      "duration": 2.39,
+      "text": "this angle is another Theta so here we"
+    },
+    {
+      "index": 415,
+      "start": 1324.0,
+      "end": 1326.35,
+      "duration": 2.35,
+      "text": "have a length which is again Theta and"
+    },
+    {
+      "index": 416,
+      "start": 1326.36,
+      "end": 1328.029,
+      "duration": 1.669,
+      "text": "another length which is Theta over here"
+    },
+    {
+      "index": 417,
+      "start": 1328.039,
+      "end": 1329.789,
+      "duration": 1.75,
+      "text": "that's the same as in the other picture"
+    },
+    {
+      "index": 418,
+      "start": 1329.799,
+      "end": 1332.63,
+      "duration": 2.831,
+      "text": "except we've we've we've exaggerated it"
+    },
+    {
+      "index": 419,
+      "start": 1332.64,
+      "end": 1335.07,
+      "duration": 2.43,
+      "text": "here and now we have this vertical line"
+    },
+    {
+      "index": 420,
+      "start": 1335.08,
+      "end": 1336.59,
+      "duration": 1.51,
+      "text": "which again I'm going to draw in green"
+    },
+    {
+      "index": 421,
+      "start": 1336.6,
+      "end": 1341.39,
+      "duration": 4.79,
+      "text": "the bow string but notice that as the"
+    },
+    {
+      "index": 422,
+      "start": 1341.4,
+      "end": 1343.87,
+      "duration": 2.47,
+      "text": "vertex gets farther and farther"
+    },
+    {
+      "index": 423,
+      "start": 1343.88,
+      "end": 1346.71,
+      "duration": 2.83,
+      "text": "away the curved line gets closer and"
+    },
+    {
+      "index": 424,
+      "start": 1346.72,
+      "end": 1348.19,
+      "duration": 1.47,
+      "text": "closer to being a vertical line that's"
+    },
+    {
+      "index": 425,
+      "start": 1348.2,
+      "end": 1350.95,
+      "duration": 2.75,
+      "text": "sort of the flip side by expansion of"
+    },
+    {
+      "index": 426,
+      "start": 1350.96,
+      "end": 1353.31,
+      "duration": 2.35,
+      "text": "the the the zoom in principle the"
+    },
+    {
+      "index": 427,
+      "start": 1353.32,
+      "end": 1355.19,
+      "duration": 1.87,
+      "text": "principle that that curves are nearly"
+    },
+    {
+      "index": 428,
+      "start": 1355.2,
+      "end": 1357.51,
+      "duration": 2.31,
+      "text": "straight when you zoom in if you zoom"
+    },
+    {
+      "index": 429,
+      "start": 1357.52,
+      "end": 1359.23,
+      "duration": 1.71,
+      "text": "out that would mean sending this vertex"
+    },
+    {
+      "index": 430,
+      "start": 1359.24,
+      "end": 1360.59,
+      "duration": 1.35,
+      "text": "way way out"
+    },
+    {
+      "index": 431,
+      "start": 1360.6,
+      "end": 1363.75,
+      "duration": 3.15,
+      "text": "somewhere um the curved line the piece"
+    },
+    {
+      "index": 432,
+      "start": 1363.76,
+      "end": 1367.63,
+      "duration": 3.87,
+      "text": "of the circle gets more and more"
+    },
+    {
+      "index": 433,
+      "start": 1367.64,
+      "end": 1370.87,
+      "duration": 3.23,
+      "text": "straight and now let me show you where"
+    },
+    {
+      "index": 434,
+      "start": 1370.88,
+      "end": 1375.31,
+      "duration": 4.43,
+      "text": "uh this numerator 1us cosine Theta is on"
+    },
+    {
+      "index": 435,
+      "start": 1375.32,
+      "end": 1376.63,
+      "duration": 1.31,
+      "text": "this"
+    },
+    {
+      "index": 436,
+      "start": 1376.64,
+      "end": 1380.149,
+      "duration": 3.509,
+      "text": "picture so where is it"
+    },
+    {
+      "index": 437,
+      "start": 1380.159,
+      "end": 1384.71,
+      "duration": 4.551,
+      "text": "it's well this whole distance is one but"
+    },
+    {
+      "index": 438,
+      "start": 1384.72,
+      "end": 1386.75,
+      "duration": 2.03,
+      "text": "the distance from the vertex to the"
+    },
+    {
+      "index": 439,
+      "start": 1386.76,
+      "end": 1390.43,
+      "duration": 3.67,
+      "text": "green is cosine of theta right because"
+    },
+    {
+      "index": 440,
+      "start": 1390.44,
+      "end": 1392.75,
+      "duration": 2.31,
+      "text": "this is Theta so dropping down the"
+    },
+    {
+      "index": 441,
+      "start": 1392.76,
+      "end": 1395.269,
+      "duration": 2.509,
+      "text": "perpendicular this distance down back to"
+    },
+    {
+      "index": 442,
+      "start": 1395.279,
+      "end": 1398.11,
+      "duration": 2.831,
+      "text": "the uh origin is cosine Theta so this"
+    },
+    {
+      "index": 443,
+      "start": 1398.12,
+      "end": 1399.11,
+      "duration": 0.99,
+      "text": "little"
+    },
+    {
+      "index": 444,
+      "start": 1399.12,
+      "end": 1402.75,
+      "duration": 3.63,
+      "text": "tiny bitty segment here which is"
+    },
+    {
+      "index": 445,
+      "start": 1402.76,
+      "end": 1406.549,
+      "duration": 3.789,
+      "text": "basically the gap between um the curve"
+    },
+    {
+      "index": 446,
+      "start": 1406.559,
+      "end": 1408.83,
+      "duration": 2.271,
+      "text": "and the vertical segment"
+    },
+    {
+      "index": 447,
+      "start": 1408.84,
+      "end": 1414.149,
+      "duration": 5.309,
+      "text": "so the Gap is equal to 1us cosine"
+    },
+    {
+      "index": 448,
+      "start": 1417.95,
+      "end": 1417.96,
+      "duration": 0.01,
+      "text": "thet all right and so now you can see"
+    },
+    {
+      "index": 449,
+      "start": 1417.96,
+      "end": 1420.95,
+      "duration": 2.99,
+      "text": "that as this point gets farther away if"
+    },
+    {
+      "index": 450,
+      "start": 1420.96,
+      "end": 1423.75,
+      "duration": 2.79,
+      "text": "this got sent off to the state center"
+    },
+    {
+      "index": 451,
+      "start": 1423.76,
+      "end": 1425.149,
+      "duration": 1.389,
+      "text": "you would hardly be able to tell the"
+    },
+    {
+      "index": 452,
+      "start": 1425.159,
+      "end": 1427.35,
+      "duration": 2.191,
+      "text": "difference the bow string would coincide"
+    },
+    {
+      "index": 453,
+      "start": 1427.36,
+      "end": 1429.75,
+      "duration": 2.39,
+      "text": "with the bow and this little gap between"
+    },
+    {
+      "index": 454,
+      "start": 1429.76,
+      "end": 1431.23,
+      "duration": 1.47,
+      "text": "the bow string and the bow would be"
+    },
+    {
+      "index": 455,
+      "start": 1431.24,
+      "end": 1433.549,
+      "duration": 2.309,
+      "text": "tending to zero and that's the statement"
+    },
+    {
+      "index": 456,
+      "start": 1433.559,
+      "end": 1436.07,
+      "duration": 2.511,
+      "text": "that this tends to zero as Theta tends"
+    },
+    {
+      "index": 457,
+      "start": 1436.08,
+      "end": 1437.43,
+      "duration": 1.35,
+      "text": "to"
+    },
+    {
+      "index": 458,
+      "start": 1437.44,
+      "end": 1440.31,
+      "duration": 2.87,
+      "text": "zero right the scaled version of that"
+    },
+    {
+      "index": 459,
+      "start": 1440.32,
+      "end": 1443.149,
+      "duration": 2.829,
+      "text": "yeah question down here the denominator"
+    },
+    {
+      "index": 460,
+      "start": 1443.159,
+      "end": 1447.63,
+      "duration": 4.471,
+      "text": "also tend to zero though ah the the uh"
+    },
+    {
+      "index": 461,
+      "start": 1447.64,
+      "end": 1450.23,
+      "duration": 2.59,
+      "text": "question is doesn't the denominator also"
+    },
+    {
+      "index": 462,
+      "start": 1450.24,
+      "end": 1454.789,
+      "duration": 4.549,
+      "text": "tend to zero and the answer is is yes in"
+    },
+    {
+      "index": 463,
+      "start": 1454.799,
+      "end": 1458.31,
+      "duration": 3.511,
+      "text": "my strange analogy here with zooming in"
+    },
+    {
+      "index": 464,
+      "start": 1458.32,
+      "end": 1460.549,
+      "duration": 2.229,
+      "text": "what I did was I zoomed out the picture"
+    },
+    {
+      "index": 465,
+      "start": 1460.559,
+      "end": 1463.149,
+      "duration": 2.59,
+      "text": "so in other words if you imagine so"
+    },
+    {
+      "index": 466,
+      "start": 1463.159,
+      "end": 1465.47,
+      "duration": 2.311,
+      "text": "imagine you're you're you're taking this"
+    },
+    {
+      "index": 467,
+      "start": 1465.48,
+      "end": 1467.789,
+      "duration": 2.309,
+      "text": "and you're putting it under a microscope"
+    },
+    {
+      "index": 468,
+      "start": 1467.799,
+      "end": 1469.269,
+      "duration": 1.47,
+      "text": "over here and you're looking at"
+    },
+    {
+      "index": 469,
+      "start": 1469.279,
+      "end": 1470.87,
+      "duration": 1.591,
+      "text": "something where Theta is getting smaller"
+    },
+    {
+      "index": 470,
+      "start": 1470.88,
+      "end": 1473.59,
+      "duration": 2.71,
+      "text": "and smaller and smaller and smaller all"
+    },
+    {
+      "index": 471,
+      "start": 1473.6,
+      "end": 1476.99,
+      "duration": 3.39,
+      "text": "right but now uh because I want my"
+    },
+    {
+      "index": 472,
+      "start": 1477.0,
+      "end": 1480.75,
+      "duration": 3.75,
+      "text": "picture I I expanded my picture so the"
+    },
+    {
+      "index": 473,
+      "start": 1480.76,
+      "end": 1483.669,
+      "duration": 2.909,
+      "text": "ratio is the thing that's preserved so"
+    },
+    {
+      "index": 474,
+      "start": 1483.679,
+      "end": 1489.31,
+      "duration": 5.631,
+      "text": "if I if I make it so that this Gap is"
+    },
+    {
+      "index": 475,
+      "start": 1492.43,
+      "end": 1492.44,
+      "duration": 0.01,
+      "text": "Tiny yeah let me say this one more time"
+    },
+    {
+      "index": 476,
+      "start": 1492.44,
+      "end": 1495.149,
+      "duration": 2.709,
+      "text": "I'm afraid I've I've made life"
+    },
+    {
+      "index": 477,
+      "start": 1495.159,
+      "end": 1498.029,
+      "duration": 2.87,
+      "text": "complicated for myself um if I simply"
+    },
+    {
+      "index": 478,
+      "start": 1498.039,
+      "end": 1500.23,
+      "duration": 2.191,
+      "text": "let this Theta tend into"
+    },
+    {
+      "index": 479,
+      "start": 1500.24,
+      "end": 1503.59,
+      "duration": 3.35,
+      "text": "zero that would be the same effect as"
+    },
+    {
+      "index": 480,
+      "start": 1503.6,
+      "end": 1505.07,
+      "duration": 1.47,
+      "text": "making this closer and closer in and"
+    },
+    {
+      "index": 481,
+      "start": 1505.08,
+      "end": 1506.95,
+      "duration": 1.87,
+      "text": "then the vertical would approach but I"
+    },
+    {
+      "index": 482,
+      "start": 1506.96,
+      "end": 1509.11,
+      "duration": 2.15,
+      "text": "want to keep on blowing up the picture"
+    },
+    {
+      "index": 483,
+      "start": 1509.12,
+      "end": 1511.23,
+      "duration": 2.11,
+      "text": "so that I can see the difference between"
+    },
+    {
+      "index": 484,
+      "start": 1511.24,
+      "end": 1515.029,
+      "duration": 3.789,
+      "text": "the vertical and the curve so so that's"
+    },
+    {
+      "index": 485,
+      "start": 1515.039,
+      "end": 1516.35,
+      "duration": 1.311,
+      "text": "very much like if you're on a video"
+    },
+    {
+      "index": 486,
+      "start": 1516.36,
+      "end": 1518.19,
+      "duration": 1.83,
+      "text": "screen and you zoom in zoom in zoom in"
+    },
+    {
+      "index": 487,
+      "start": 1518.2,
+      "end": 1519.51,
+      "duration": 1.31,
+      "text": "zoom in so the question is what would"
+    },
+    {
+      "index": 488,
+      "start": 1519.52,
+      "end": 1522.029,
+      "duration": 2.509,
+      "text": "that look like that has the same effect"
+    },
+    {
+      "index": 489,
+      "start": 1522.039,
+      "end": 1523.99,
+      "duration": 1.951,
+      "text": "as sending this point out farther and"
+    },
+    {
+      "index": 490,
+      "start": 1524.0,
+      "end": 1526.789,
+      "duration": 2.789,
+      "text": "farther in this in that direction in the"
+    },
+    {
+      "index": 491,
+      "start": 1526.799,
+      "end": 1528.63,
+      "duration": 1.831,
+      "text": "to the left and so I'm just just trying"
+    },
+    {
+      "index": 492,
+      "start": 1528.64,
+      "end": 1531.51,
+      "duration": 2.87,
+      "text": "to visualize it for you by leaving the"
+    },
+    {
+      "index": 493,
+      "start": 1531.52,
+      "end": 1533.11,
+      "duration": 1.59,
+      "text": "Theta at this scale but actually the"
+    },
+    {
+      "index": 494,
+      "start": 1533.12,
+      "end": 1535.07,
+      "duration": 1.95,
+      "text": "scale of the picture is then changing"
+    },
+    {
+      "index": 495,
+      "start": 1535.08,
+      "end": 1538.11,
+      "duration": 3.03,
+      "text": "when I do that so both Theta Theta is"
+    },
+    {
+      "index": 496,
+      "start": 1538.12,
+      "end": 1540.07,
+      "duration": 1.95,
+      "text": "going to zero but I'm rescaling it so"
+    },
+    {
+      "index": 497,
+      "start": 1540.08,
+      "end": 1541.87,
+      "duration": 1.79,
+      "text": "that it's of a size that we can look at"
+    },
+    {
+      "index": 498,
+      "start": 1541.88,
+      "end": 1544.35,
+      "duration": 2.47,
+      "text": "it and then watching imagining what's"
+    },
+    {
+      "index": 499,
+      "start": 1544.36,
+      "end": 1545.549,
+      "duration": 1.189,
+      "text": "happening to"
+    },
+    {
+      "index": 500,
+      "start": 1545.559,
+      "end": 1550.31,
+      "duration": 4.751,
+      "text": "it okay does that answer your"
+    },
+    {
+      "index": 501,
+      "start": 1553.71,
+      "end": 1553.72,
+      "duration": 0.01,
+      "text": "question my question then is that seems"
+    },
+    {
+      "index": 502,
+      "start": 1553.72,
+      "end": 1556.269,
+      "duration": 2.549,
+      "text": "to prove that that limit is equal to 0"
+    },
+    {
+      "index": 503,
+      "start": 1556.279,
+      "end": 1558.789,
+      "duration": 2.51,
+      "text": "over 0"
+    },
+    {
+      "index": 504,
+      "start": 1558.799,
+      "end": 1561.11,
+      "duration": 2.311,
+      "text": "uh it proves more than it's equal to 0"
+    },
+    {
+      "index": 505,
+      "start": 1561.12,
+      "end": 1562.909,
+      "duration": 1.789,
+      "text": "over Z it's the ratio of this little"
+    },
+    {
+      "index": 506,
+      "start": 1562.919,
+      "end": 1565.19,
+      "duration": 2.271,
+      "text": "short thing to this longer"
+    },
+    {
+      "index": 507,
+      "start": 1565.2,
+      "end": 1567.59,
+      "duration": 2.39,
+      "text": "thing and this is getting much much"
+    },
+    {
+      "index": 508,
+      "start": 1567.6,
+      "end": 1569.149,
+      "duration": 1.549,
+      "text": "shorter than this total length you're"
+    },
+    {
+      "index": 509,
+      "start": 1569.159,
+      "end": 1570.43,
+      "duration": 1.271,
+      "text": "absolutely right that we're comparing"
+    },
+    {
+      "index": 510,
+      "start": 1570.44,
+      "end": 1572.149,
+      "duration": 1.709,
+      "text": "two quantities which are going to zero"
+    },
+    {
+      "index": 511,
+      "start": 1572.159,
+      "end": 1573.75,
+      "duration": 1.591,
+      "text": "but one of them is much smaller than the"
+    },
+    {
+      "index": 512,
+      "start": 1573.76,
+      "end": 1575.87,
+      "duration": 2.11,
+      "text": "other in the other case we compared two"
+    },
+    {
+      "index": 513,
+      "start": 1575.88,
+      "end": 1577.35,
+      "duration": 1.47,
+      "text": "quantities which were both going to zero"
+    },
+    {
+      "index": 514,
+      "start": 1577.36,
+      "end": 1578.99,
+      "duration": 1.63,
+      "text": "and they both end up being about equal"
+    },
+    {
+      "index": 515,
+      "start": 1579.0,
+      "end": 1582.19,
+      "duration": 3.19,
+      "text": "in length but here the the previous one"
+    },
+    {
+      "index": 516,
+      "start": 1582.2,
+      "end": 1583.59,
+      "duration": 1.39,
+      "text": "was this green line here it's this"
+    },
+    {
+      "index": 517,
+      "start": 1583.6,
+      "end": 1586.07,
+      "duration": 2.47,
+      "text": "little tiny bit here and it's way"
+    },
+    {
+      "index": 518,
+      "start": 1586.08,
+      "end": 1589.51,
+      "duration": 3.43,
+      "text": "shorter than the than the two Theta"
+    },
+    {
+      "index": 519,
+      "start": 1589.52,
+      "end": 1591.269,
+      "duration": 1.749,
+      "text": "distance all"
+    },
+    {
+      "index": 520,
+      "start": 1591.279,
+      "end": 1594.51,
+      "duration": 3.231,
+      "text": "right or Theta yeah another"
+    },
+    {
+      "index": 521,
+      "start": 1594.52,
+      "end": 1596.75,
+      "duration": 2.23,
+      "text": "question cos"
+    },
+    {
+      "index": 522,
+      "start": 1596.76,
+      "end": 1598.55,
+      "duration": 1.79,
+      "text": "thet is the"
+    },
+    {
+      "index": 523,
+      "start": 1598.56,
+      "end": 1601.47,
+      "duration": 2.91,
+      "text": "[Music]"
+    },
+    {
+      "index": 524,
+      "start": 1601.48,
+      "end": 1608.909,
+      "duration": 7.429,
+      "text": "as cos Theta - 1"
+    },
+    {
+      "index": 525,
+      "start": 1614.909,
+      "end": 1614.919,
+      "duration": 0.01,
+      "text": "over so so here what I wrote is cine"
+    },
+    {
+      "index": 526,
+      "start": 1614.919,
+      "end": 1619.549,
+      "duration": 4.63,
+      "text": "Delta xus 1 / Delta X okay and I claim"
+    },
+    {
+      "index": 527,
+      "start": 1619.559,
+      "end": 1620.83,
+      "duration": 1.271,
+      "text": "that it goes to"
+    },
+    {
+      "index": 528,
+      "start": 1620.84,
+      "end": 1625.83,
+      "duration": 4.99,
+      "text": "zero here I wrote of the minus that that"
+    },
+    {
+      "index": 529,
+      "start": 1625.84,
+      "end": 1630.71,
+      "duration": 4.87,
+      "text": "is that is cosine Theta I I replaced"
+    },
+    {
+      "index": 530,
+      "start": 1630.72,
+      "end": 1633.19,
+      "duration": 2.47,
+      "text": "Theta by a Delta X by Theta but then I"
+    },
+    {
+      "index": 531,
+      "start": 1633.2,
+      "end": 1641.71,
+      "duration": 8.51,
+      "text": "wrote this"
+    },
+    {
+      "index": 532,
+      "start": 1645.07,
+      "end": 1645.08,
+      "duration": 0.01,
+      "text": "thing so cosine minus Theta minus 1 -"
+    },
+    {
+      "index": 533,
+      "start": 1645.08,
+      "end": 1648.19,
+      "duration": 3.11,
+      "text": "one is the negative of this all right"
+    },
+    {
+      "index": 534,
+      "start": 1648.2,
+      "end": 1649.549,
+      "duration": 1.349,
+      "text": "and if I show that this goes to zero"
+    },
+    {
+      "index": 535,
+      "start": 1649.559,
+      "end": 1650.789,
+      "duration": 1.23,
+      "text": "it's the same as showing the other one"
+    },
+    {
+      "index": 536,
+      "start": 1650.799,
+      "end": 1652.23,
+      "duration": 1.431,
+      "text": "goes to"
+    },
+    {
+      "index": 537,
+      "start": 1652.24,
+      "end": 1658.43,
+      "duration": 6.19,
+      "text": "zero another"
+    },
+    {
+      "index": 538,
+      "start": 1661.87,
+      "end": 1661.88,
+      "duration": 0.01,
+      "text": "question uh so the question is what"
+    },
+    {
+      "index": 539,
+      "start": 1661.88,
+      "end": 1664.509,
+      "duration": 2.629,
+      "text": "about this business about Arc Length so"
+    },
+    {
+      "index": 540,
+      "start": 1664.519,
+      "end": 1666.99,
+      "duration": 2.471,
+      "text": "the word Arc Length that that shape that"
+    },
+    {
+      "index": 541,
+      "start": 1667.0,
+      "end": 1669.63,
+      "duration": 2.63,
+      "text": "orange shape is an arc and we're just"
+    },
+    {
+      "index": 542,
+      "start": 1669.64,
+      "end": 1671.43,
+      "duration": 1.79,
+      "text": "talking about the length of that Arc and"
+    },
+    {
+      "index": 543,
+      "start": 1671.44,
+      "end": 1673.389,
+      "duration": 1.949,
+      "text": "so we're calling it AR length that's"
+    },
+    {
+      "index": 544,
+      "start": 1673.399,
+      "end": 1674.669,
+      "duration": 1.27,
+      "text": "what the word arc length mean it just"
+    },
+    {
+      "index": 545,
+      "start": 1674.679,
+      "end": 1683.75,
+      "duration": 9.071,
+      "text": "means the length of the arc"
+    },
+    {
+      "index": 546,
+      "start": 1687.269,
+      "end": 1687.279,
+      "duration": 0.01,
+      "text": "why is this length Theta ah okay so this"
+    },
+    {
+      "index": 547,
+      "start": 1687.279,
+      "end": 1688.75,
+      "duration": 1.471,
+      "text": "is a very important point and in fact"
+    },
+    {
+      "index": 548,
+      "start": 1688.76,
+      "end": 1690.19,
+      "duration": 1.43,
+      "text": "it's the very next point that I wanted"
+    },
+    {
+      "index": 549,
+      "start": 1690.2,
+      "end": 1694.149,
+      "duration": 3.949,
+      "text": "to make namely notice that in this"
+    },
+    {
+      "index": 550,
+      "start": 1694.159,
+      "end": 1696.509,
+      "duration": 2.35,
+      "text": "calculation it was very important that"
+    },
+    {
+      "index": 551,
+      "start": 1696.519,
+      "end": 1698.909,
+      "duration": 2.39,
+      "text": "we used"
+    },
+    {
+      "index": 552,
+      "start": 1698.919,
+      "end": 1702.59,
+      "duration": 3.671,
+      "text": "length and that means that the way that"
+    },
+    {
+      "index": 553,
+      "start": 1702.6,
+      "end": 1704.99,
+      "duration": 2.39,
+      "text": "we're measuring Theta is in what are"
+    },
+    {
+      "index": 554,
+      "start": 1705.0,
+      "end": 1712.31,
+      "duration": 7.31,
+      "text": "known as radians"
+    },
+    {
+      "index": 555,
+      "start": 1714.75,
+      "end": 1714.76,
+      "duration": 0.01,
+      "text": "all right so that applies to both b and"
+    },
+    {
+      "index": 556,
+      "start": 1714.76,
+      "end": 1717.07,
+      "duration": 2.31,
+      "text": "a it's it's a scale change in a and"
+    },
+    {
+      "index": 557,
+      "start": 1717.08,
+      "end": 1718.71,
+      "duration": 1.63,
+      "text": "doesn't really matter but in B it's very"
+    },
+    {
+      "index": 558,
+      "start": 1718.72,
+      "end": 1722.35,
+      "duration": 3.63,
+      "text": "important the only way that this orange"
+    },
+    {
+      "index": 559,
+      "start": 1722.36,
+      "end": 1725.83,
+      "duration": 3.47,
+      "text": "length is the comparable to this green"
+    },
+    {
+      "index": 560,
+      "start": 1725.84,
+      "end": 1727.87,
+      "duration": 2.03,
+      "text": "length the vertical is comparable to the"
+    },
+    {
+      "index": 561,
+      "start": 1727.88,
+      "end": 1732.23,
+      "duration": 4.35,
+      "text": "arc is if we measure them in terms of"
+    },
+    {
+      "index": 562,
+      "start": 1732.24,
+      "end": 1734.11,
+      "duration": 1.87,
+      "text": "the same notion of length if we measured"
+    },
+    {
+      "index": 563,
+      "start": 1734.12,
+      "end": 1736.789,
+      "duration": 2.669,
+      "text": "them in degrees for example it would be"
+    },
+    {
+      "index": 564,
+      "start": 1736.799,
+      "end": 1738.909,
+      "duration": 2.11,
+      "text": "completely wrong"
+    },
+    {
+      "index": 565,
+      "start": 1738.919,
+      "end": 1742.909,
+      "duration": 3.99,
+      "text": "we divide up the uh angles into 360° and"
+    },
+    {
+      "index": 566,
+      "start": 1742.919,
+      "end": 1744.59,
+      "duration": 1.671,
+      "text": "that's the wrong unit of measure the"
+    },
+    {
+      "index": 567,
+      "start": 1744.6,
+      "end": 1747.07,
+      "duration": 2.47,
+      "text": "correct measure is the length along the"
+    },
+    {
+      "index": 568,
+      "start": 1747.08,
+      "end": 1749.71,
+      "duration": 2.63,
+      "text": "unit circle which is what radians are"
+    },
+    {
+      "index": 569,
+      "start": 1749.72,
+      "end": 1752.59,
+      "duration": 2.87,
+      "text": "and so the only this is only true this"
+    },
+    {
+      "index": 570,
+      "start": 1752.6,
+      "end": 1759.59,
+      "duration": 6.99,
+      "text": "is only true here if we use"
+    },
+    {
+      "index": 571,
+      "start": 1763.43,
+      "end": 1763.44,
+      "duration": 0.01,
+      "text": "radians all right so again a little"
+    },
+    {
+      "index": 572,
+      "start": 1763.44,
+      "end": 1773.389,
+      "duration": 9.949,
+      "text": "warning here that this is in radians"
+    },
+    {
+      "index": 573,
+      "start": 1782.23,
+      "end": 1782.24,
+      "duration": 0.01,
+      "text": "Radiance and the the the formulas are"
+    },
+    {
+      "index": 574,
+      "start": 1782.24,
+      "end": 1784.909,
+      "duration": 2.669,
+      "text": "just wrong if you use other"
+    },
+    {
+      "index": 575,
+      "start": 1784.919,
+      "end": 1794.669,
+      "duration": 9.75,
+      "text": "units uh"
+    },
+    {
+      "index": 576,
+      "start": 1797.31,
+      "end": 1797.32,
+      "duration": 0.01,
+      "text": "yeah okay so the second question is why"
+    },
+    {
+      "index": 577,
+      "start": 1797.32,
+      "end": 1801.43,
+      "duration": 4.11,
+      "text": "is this crazy length here one um and the"
+    },
+    {
+      "index": 578,
+      "start": 1801.44,
+      "end": 1805.83,
+      "duration": 4.39,
+      "text": "the reason is that what I did"
+    },
+    {
+      "index": 579,
+      "start": 1808.75,
+      "end": 1808.76,
+      "duration": 0.01,
+      "text": "was the relationship between this"
+    },
+    {
+      "index": 580,
+      "start": 1808.76,
+      "end": 1811.029,
+      "duration": 2.269,
+      "text": "picture up here and this picture down"
+    },
+    {
+      "index": 581,
+      "start": 1811.039,
+      "end": 1815.31,
+      "duration": 4.271,
+      "text": "here is that I'm drawing a a a different"
+    },
+    {
+      "index": 582,
+      "start": 1815.32,
+      "end": 1818.669,
+      "duration": 3.349,
+      "text": "shape namely what I'm really imagining"
+    },
+    {
+      "index": 583,
+      "start": 1818.679,
+      "end": 1822.389,
+      "duration": 3.71,
+      "text": "here is a much much smaller Theta okay"
+    },
+    {
+      "index": 584,
+      "start": 1822.399,
+      "end": 1825.95,
+      "duration": 3.551,
+      "text": "and then I'm blowing that up in scale so"
+    },
+    {
+      "index": 585,
+      "start": 1825.96,
+      "end": 1828.269,
+      "duration": 2.309,
+      "text": "this scale of this picture down here is"
+    },
+    {
+      "index": 586,
+      "start": 1828.279,
+      "end": 1829.789,
+      "duration": 1.51,
+      "text": "very different from the scale of the"
+    },
+    {
+      "index": 587,
+      "start": 1829.799,
+      "end": 1833.31,
+      "duration": 3.511,
+      "text": "picture up there and if if the angle is"
+    },
+    {
+      "index": 588,
+      "start": 1833.32,
+      "end": 1836.509,
+      "duration": 3.189,
+      "text": "very very very small then one has to be"
+    },
+    {
+      "index": 589,
+      "start": 1836.519,
+      "end": 1838.549,
+      "duration": 2.03,
+      "text": "very very long in order for me to finish"
+    },
+    {
+      "index": 590,
+      "start": 1838.559,
+      "end": 1840.83,
+      "duration": 2.271,
+      "text": "the circle so in other words this is"
+    },
+    {
+      "index": 591,
+      "start": 1840.84,
+      "end": 1842.87,
+      "duration": 2.03,
+      "text": "this length is one because I that's what"
+    },
+    {
+      "index": 592,
+      "start": 1842.88,
+      "end": 1845.669,
+      "duration": 2.789,
+      "text": "I'm insisting on so I'm I'm claiming"
+    },
+    {
+      "index": 593,
+      "start": 1845.679,
+      "end": 1848.19,
+      "duration": 2.511,
+      "text": "that that's how I Define this circle to"
+    },
+    {
+      "index": 594,
+      "start": 1848.2,
+      "end": 1851.509,
+      "duration": 3.309,
+      "text": "be of unit uh"
+    },
+    {
+      "index": 595,
+      "start": 1851.519,
+      "end": 1853.63,
+      "duration": 2.111,
+      "text": "radius another"
+    },
+    {
+      "index": 596,
+      "start": 1853.64,
+      "end": 1858.909,
+      "duration": 5.269,
+      "text": "question um"
+    },
+    {
+      "index": 597,
+      "start": 1860.71,
+      "end": 1860.72,
+      "duration": 0.01,
+      "text": "I'm having a little difficult"
+    },
+    {
+      "index": 598,
+      "start": 1860.72,
+      "end": 1864.23,
+      "duration": 3.51,
+      "text": "conceptualizing because that as get"
+    },
+    {
+      "index": 599,
+      "start": 1864.24,
+      "end": 1871.31,
+      "duration": 7.07,
+      "text": "smaller and smaller The"
+    },
+    {
+      "index": 600,
+      "start": 1881.43,
+      "end": 1881.44,
+      "duration": 0.01,
+      "text": "don't okay um so the the question is uh"
+    },
+    {
+      "index": 601,
+      "start": 1881.44,
+      "end": 1884.31,
+      "duration": 2.87,
+      "text": "it's hard to visualize this fact"
+    },
+    {
+      "index": 602,
+      "start": 1884.32,
+      "end": 1887.269,
+      "duration": 2.949,
+      "text": "here okay so let me let me take you"
+    },
+    {
+      "index": 603,
+      "start": 1887.279,
+      "end": 1889.11,
+      "duration": 1.831,
+      "text": "through um"
+    },
+    {
+      "index": 604,
+      "start": 1889.12,
+      "end": 1891.23,
+      "duration": 2.11,
+      "text": "a couple of steps all right because I"
+    },
+    {
+      "index": 605,
+      "start": 1891.24,
+      "end": 1892.87,
+      "duration": 1.63,
+      "text": "think probably other people are also"
+    },
+    {
+      "index": 606,
+      "start": 1892.88,
+      "end": 1894.95,
+      "duration": 2.07,
+      "text": "having trouble with this visualization"
+    },
+    {
+      "index": 607,
+      "start": 1894.96,
+      "end": 1896.83,
+      "duration": 1.87,
+      "text": "the first part of the visualization I'm"
+    },
+    {
+      "index": 608,
+      "start": 1896.84,
+      "end": 1898.35,
+      "duration": 1.51,
+      "text": "going to try to demonstrate on this"
+    },
+    {
+      "index": 609,
+      "start": 1898.36,
+      "end": 1900.59,
+      "duration": 2.23,
+      "text": "picture up here the first part of the"
+    },
+    {
+      "index": 610,
+      "start": 1900.6,
+      "end": 1902.83,
+      "duration": 2.23,
+      "text": "visualization is that I should think of"
+    },
+    {
+      "index": 611,
+      "start": 1902.84,
+      "end": 1904.43,
+      "duration": 1.59,
+      "text": "of the beak of a"
+    },
+    {
+      "index": 612,
+      "start": 1904.44,
+      "end": 1907.509,
+      "duration": 3.069,
+      "text": "bird closing down getting narrower and"
+    },
+    {
+      "index": 613,
+      "start": 1907.519,
+      "end": 1909.23,
+      "duration": 1.711,
+      "text": "narrower so in other words Theta has to"
+    },
+    {
+      "index": 614,
+      "start": 1909.24,
+      "end": 1910.95,
+      "duration": 1.71,
+      "text": "be getting the angle Theta has to be"
+    },
+    {
+      "index": 615,
+      "start": 1910.96,
+      "end": 1913.149,
+      "duration": 2.189,
+      "text": "getting smaller and smaller and"
+    },
+    {
+      "index": 616,
+      "start": 1913.159,
+      "end": 1916.029,
+      "duration": 2.87,
+      "text": "smaller okay that's the first step so"
+    },
+    {
+      "index": 617,
+      "start": 1916.039,
+      "end": 1917.59,
+      "duration": 1.551,
+      "text": "that's the process that we're talking"
+    },
+    {
+      "index": 618,
+      "start": 1917.6,
+      "end": 1921.629,
+      "duration": 4.029,
+      "text": "about out now in order to draw that once"
+    },
+    {
+      "index": 619,
+      "start": 1921.639,
+      "end": 1924.43,
+      "duration": 2.791,
+      "text": "Theta gets incredibly narrow in order to"
+    },
+    {
+      "index": 620,
+      "start": 1924.44,
+      "end": 1926.149,
+      "duration": 1.709,
+      "text": "depict that I have to blow the whole"
+    },
+    {
+      "index": 621,
+      "start": 1926.159,
+      "end": 1927.509,
+      "duration": 1.35,
+      "text": "picture back up in order to be able to"
+    },
+    {
+      "index": 622,
+      "start": 1927.519,
+      "end": 1929.07,
+      "duration": 1.551,
+      "text": "see it otherwise it just disappears on"
+    },
+    {
+      "index": 623,
+      "start": 1929.08,
+      "end": 1931.47,
+      "duration": 2.39,
+      "text": "me in fact in the limit theta equals z"
+    },
+    {
+      "index": 624,
+      "start": 1931.48,
+      "end": 1933.149,
+      "duration": 1.669,
+      "text": "it's meaningless it's just a flat line"
+    },
+    {
+      "index": 625,
+      "start": 1933.159,
+      "end": 1934.75,
+      "duration": 1.591,
+      "text": "that's the whole problem with these"
+    },
+    {
+      "index": 626,
+      "start": 1934.76,
+      "end": 1936.75,
+      "duration": 1.99,
+      "text": "tricky limits is they're meaningless"
+    },
+    {
+      "index": 627,
+      "start": 1936.76,
+      "end": 1938.909,
+      "duration": 2.149,
+      "text": "right at the Z 0 level it's only just a"
+    },
+    {
+      "index": 628,
+      "start": 1938.919,
+      "end": 1942.07,
+      "duration": 3.151,
+      "text": "little away that they're actually useful"
+    },
+    {
+      "index": 629,
+      "start": 1942.08,
+      "end": 1943.47,
+      "duration": 1.39,
+      "text": "that you get useful geometric"
+    },
+    {
+      "index": 630,
+      "start": 1943.48,
+      "end": 1944.99,
+      "duration": 1.51,
+      "text": "information out of"
+    },
+    {
+      "index": 631,
+      "start": 1945.0,
+      "end": 1947.549,
+      "duration": 2.549,
+      "text": "them so we're just a little away so"
+    },
+    {
+      "index": 632,
+      "start": 1947.559,
+      "end": 1950.149,
+      "duration": 2.59,
+      "text": "that's with this picture Down Below in"
+    },
+    {
+      "index": 633,
+      "start": 1950.159,
+      "end": 1951.71,
+      "duration": 1.551,
+      "text": "part A is meant to be it's supposed to"
+    },
+    {
+      "index": 634,
+      "start": 1951.72,
+      "end": 1953.99,
+      "duration": 2.27,
+      "text": "be that that Theta is open a tiny crack"
+    },
+    {
+      "index": 635,
+      "start": 1954.0,
+      "end": 1956.23,
+      "duration": 2.23,
+      "text": "just a little bit and the smallest I can"
+    },
+    {
+      "index": 636,
+      "start": 1956.24,
+      "end": 1957.59,
+      "duration": 1.35,
+      "text": "draw it on the board with where you can"
+    },
+    {
+      "index": 637,
+      "start": 1957.6,
+      "end": 1959.389,
+      "duration": 1.789,
+      "text": "visualize it is using the whole length"
+    },
+    {
+      "index": 638,
+      "start": 1959.399,
+      "end": 1961.95,
+      "duration": 2.551,
+      "text": "of the Blackboard here for that so I've"
+    },
+    {
+      "index": 639,
+      "start": 1961.96,
+      "end": 1963.909,
+      "duration": 1.949,
+      "text": "opened a little tiny bit and by the time"
+    },
+    {
+      "index": 640,
+      "start": 1963.919,
+      "end": 1964.71,
+      "duration": 0.791,
+      "text": "we get to the other end of the"
+    },
+    {
+      "index": 641,
+      "start": 1964.72,
+      "end": 1966.669,
+      "duration": 1.949,
+      "text": "Blackboard of course it's fairly wide"
+    },
+    {
+      "index": 642,
+      "start": 1966.679,
+      "end": 1968.59,
+      "duration": 1.911,
+      "text": "but this angle Theta is a very narrow is"
+    },
+    {
+      "index": 643,
+      "start": 1968.6,
+      "end": 1971.87,
+      "duration": 3.27,
+      "text": "a very small angle all right so so I'm"
+    },
+    {
+      "index": 644,
+      "start": 1971.88,
+      "end": 1974.95,
+      "duration": 3.07,
+      "text": "trying to imagine what happens as this"
+    },
+    {
+      "index": 645,
+      "start": 1974.96,
+      "end": 1978.629,
+      "duration": 3.669,
+      "text": "collapses okay now when I imagine that I"
+    },
+    {
+      "index": 646,
+      "start": 1978.639,
+      "end": 1980.43,
+      "duration": 1.791,
+      "text": "have to imagine a geometric"
+    },
+    {
+      "index": 647,
+      "start": 1980.44,
+      "end": 1982.509,
+      "duration": 2.069,
+      "text": "interpretation of both the numerator and"
+    },
+    {
+      "index": 648,
+      "start": 1982.519,
+      "end": 1985.269,
+      "duration": 2.75,
+      "text": "the denominator of this quantity"
+    },
+    {
+      "index": 649,
+      "start": 1985.279,
+      "end": 1988.71,
+      "duration": 3.431,
+      "text": "here and just see what happens now I"
+    },
+    {
+      "index": 650,
+      "start": 1988.72,
+      "end": 1991.43,
+      "duration": 2.71,
+      "text": "claim the the numerator is this little"
+    },
+    {
+      "index": 651,
+      "start": 1991.44,
+      "end": 1995.389,
+      "duration": 3.949,
+      "text": "tiny bit over here and the denominator"
+    },
+    {
+      "index": 652,
+      "start": 1995.399,
+      "end": 1998.669,
+      "duration": 3.27,
+      "text": "is uh actually it's a half of this whole"
+    },
+    {
+      "index": 653,
+      "start": 1998.679,
+      "end": 2000.23,
+      "duration": 1.551,
+      "text": "length here but a factor of two doesn't"
+    },
+    {
+      "index": 654,
+      "start": 2000.24,
+      "end": 2001.669,
+      "duration": 1.429,
+      "text": "matter when you're seeing whether"
+    },
+    {
+      "index": 655,
+      "start": 2001.679,
+      "end": 2005.07,
+      "duration": 3.391,
+      "text": "something tends to zero or not all right"
+    },
+    {
+      "index": 656,
+      "start": 2005.08,
+      "end": 2006.71,
+      "duration": 1.63,
+      "text": "and I claim if you stare at this it's"
+    },
+    {
+      "index": 657,
+      "start": 2006.72,
+      "end": 2008.509,
+      "duration": 1.789,
+      "text": "clear that this is much"
+    },
+    {
+      "index": 658,
+      "start": 2008.519,
+      "end": 2012.149,
+      "duration": 3.63,
+      "text": "than that than that uh vertical curve"
+    },
+    {
+      "index": 659,
+      "start": 2012.159,
+      "end": 2014.389,
+      "duration": 2.23,
+      "text": "there and I'm claiming so this is what"
+    },
+    {
+      "index": 660,
+      "start": 2014.399,
+      "end": 2016.549,
+      "duration": 2.15,
+      "text": "you have to imagine is that as it gets"
+    },
+    {
+      "index": 661,
+      "start": 2016.559,
+      "end": 2018.87,
+      "duration": 2.311,
+      "text": "smaller and smaller and smaller still"
+    },
+    {
+      "index": 662,
+      "start": 2018.88,
+      "end": 2020.75,
+      "duration": 1.87,
+      "text": "that has the same effect of this thing"
+    },
+    {
+      "index": 663,
+      "start": 2020.76,
+      "end": 2023.59,
+      "duration": 2.83,
+      "text": "going way way way farther away and this"
+    },
+    {
+      "index": 664,
+      "start": 2023.6,
+      "end": 2025.269,
+      "duration": 1.669,
+      "text": "uh vertical curve getting closer and"
+    },
+    {
+      "index": 665,
+      "start": 2025.279,
+      "end": 2027.509,
+      "duration": 2.23,
+      "text": "closer and closer to the green and so"
+    },
+    {
+      "index": 666,
+      "start": 2027.519,
+      "end": 2030.47,
+      "duration": 2.951,
+      "text": "that the gap between them gets tiny and"
+    },
+    {
+      "index": 667,
+      "start": 2030.48,
+      "end": 2031.59,
+      "duration": 1.11,
+      "text": "goes to"
+    },
+    {
+      "index": 668,
+      "start": 2031.6,
+      "end": 2034.789,
+      "duration": 3.189,
+      "text": "zero all right so not only does it go to"
+    },
+    {
+      "index": 669,
+      "start": 2034.799,
+      "end": 2036.95,
+      "duration": 2.151,
+      "text": "zero that's not enough for us but it"
+    },
+    {
+      "index": 670,
+      "start": 2036.96,
+      "end": 2038.23,
+      "duration": 1.27,
+      "text": "also goes to Z"
+    },
+    {
+      "index": 671,
+      "start": 2038.24,
+      "end": 2041.789,
+      "duration": 3.549,
+      "text": "faster than thisa goes to zero and"
+    },
+    {
+      "index": 672,
+      "start": 2041.799,
+      "end": 2043.629,
+      "duration": 1.83,
+      "text": "that's what's over I I I hope the"
+    },
+    {
+      "index": 673,
+      "start": 2043.639,
+      "end": 2045.029,
+      "duration": 1.39,
+      "text": "evidence is pretty strong here because"
+    },
+    {
+      "index": 674,
+      "start": 2045.039,
+      "end": 2049.31,
+      "duration": 4.271,
+      "text": "it's so tiny already at this"
+    },
+    {
+      "index": 675,
+      "start": 2051.389,
+      "end": 2051.399,
+      "duration": 0.01,
+      "text": "stage all"
+    },
+    {
+      "index": 676,
+      "start": 2051.399,
+      "end": 2055.99,
+      "duration": 4.591,
+      "text": "right we are going to move forward and"
+    },
+    {
+      "index": 677,
+      "start": 2056.0,
+      "end": 2057.95,
+      "duration": 1.95,
+      "text": "you'll have to ponder these things uh"
+    },
+    {
+      "index": 678,
+      "start": 2057.96,
+      "end": 2059.47,
+      "duration": 1.51,
+      "text": "some other time so I'm going to give you"
+    },
+    {
+      "index": 679,
+      "start": 2059.48,
+      "end": 2062.069,
+      "duration": 2.589,
+      "text": "an even harder thing to visualize now so"
+    },
+    {
+      "index": 680,
+      "start": 2062.079,
+      "end": 2063.43,
+      "duration": 1.351,
+      "text": "so be"
+    },
+    {
+      "index": 681,
+      "start": 2063.44,
+      "end": 2065.909,
+      "duration": 2.469,
+      "text": "prepared"
+    },
+    {
+      "index": 682,
+      "start": 2065.919,
+      "end": 2070.23,
+      "duration": 4.311,
+      "text": "okay okay"
+    },
+    {
+      "index": 683,
+      "start": 2076.389,
+      "end": 2076.399,
+      "duration": 0.01,
+      "text": "now the next thing that I'd like to do"
+    },
+    {
+      "index": 684,
+      "start": 2076.399,
+      "end": 2078.19,
+      "duration": 1.791,
+      "text": "is to give you a second proof because it"
+    },
+    {
+      "index": 685,
+      "start": 2078.2,
+      "end": 2082.829,
+      "duration": 4.629,
+      "text": "really is important I think to uh to"
+    },
+    {
+      "index": 686,
+      "start": 2082.839,
+      "end": 2084.19,
+      "duration": 1.351,
+      "text": "understand this"
+    },
+    {
+      "index": 687,
+      "start": 2084.2,
+      "end": 2087.909,
+      "duration": 3.709,
+      "text": "particular uh fact more thoroughly and"
+    },
+    {
+      "index": 688,
+      "start": 2087.919,
+      "end": 2089.669,
+      "duration": 1.75,
+      "text": "also to get a lot of practice with signs"
+    },
+    {
+      "index": 689,
+      "start": 2089.679,
+      "end": 2090.55,
+      "duration": 0.871,
+      "text": "and"
+    },
+    {
+      "index": 690,
+      "start": 2090.56,
+      "end": 2093.71,
+      "duration": 3.15,
+      "text": "cosiness so we're going to give you I'm"
+    },
+    {
+      "index": 691,
+      "start": 2093.72,
+      "end": 2096.27,
+      "duration": 2.55,
+      "text": "going to give you a geometric proof of"
+    },
+    {
+      "index": 692,
+      "start": 2096.28,
+      "end": 2099.27,
+      "duration": 2.99,
+      "text": "the formula for sign here for the"
+    },
+    {
+      "index": 693,
+      "start": 2099.28,
+      "end": 2110.069,
+      "duration": 10.789,
+      "text": "derivative of"
+    },
+    {
+      "index": 694,
+      "start": 2129.19,
+      "end": 2129.2,
+      "duration": 0.01,
+      "text": "proof of this fact this is for all Theta"
+    },
+    {
+      "index": 695,
+      "start": 2129.2,
+      "end": 2130.79,
+      "duration": 1.59,
+      "text": "all right so far we only did it for"
+    },
+    {
+      "index": 696,
+      "start": 2130.8,
+      "end": 2132.15,
+      "duration": 1.35,
+      "text": "theta equals"
+    },
+    {
+      "index": 697,
+      "start": 2132.16,
+      "end": 2135.27,
+      "duration": 3.11,
+      "text": "z and now we're going to do it for all"
+    },
+    {
+      "index": 698,
+      "start": 2135.28,
+      "end": 2138.23,
+      "duration": 2.95,
+      "text": "Theta so this is a different proof but"
+    },
+    {
+      "index": 699,
+      "start": 2138.24,
+      "end": 2141.39,
+      "duration": 3.15,
+      "text": "it uses exactly the same"
+    },
+    {
+      "index": 700,
+      "start": 2141.4,
+      "end": 2144.47,
+      "duration": 3.07,
+      "text": "principles all"
+    },
+    {
+      "index": 701,
+      "start": 2144.48,
+      "end": 2149.03,
+      "duration": 4.55,
+      "text": "right so I want to do this by drawing"
+    },
+    {
+      "index": 702,
+      "start": 2149.04,
+      "end": 2150.51,
+      "duration": 1.47,
+      "text": "another"
+    },
+    {
+      "index": 703,
+      "start": 2150.52,
+      "end": 2154.03,
+      "duration": 3.51,
+      "text": "picture and the picture is going to"
+    },
+    {
+      "index": 704,
+      "start": 2154.04,
+      "end": 2158.39,
+      "duration": 4.35,
+      "text": "describe Y which is sin Theta which is"
+    },
+    {
+      "index": 705,
+      "start": 2158.4,
+      "end": 2165.15,
+      "duration": 6.75,
+      "text": "the uh if you like the um uh"
+    },
+    {
+      "index": 706,
+      "start": 2184.069,
+      "end": 2184.079,
+      "duration": 0.01,
+      "text": "motion so I'm imagining that some"
+    },
+    {
+      "index": 707,
+      "start": 2184.079,
+      "end": 2186.109,
+      "duration": 2.03,
+      "text": "something is going around in a"
+    },
+    {
+      "index": 708,
+      "start": 2186.119,
+      "end": 2188.589,
+      "duration": 2.47,
+      "text": "circle right some particles going around"
+    },
+    {
+      "index": 709,
+      "start": 2188.599,
+      "end": 2189.79,
+      "duration": 1.191,
+      "text": "in a"
+    },
+    {
+      "index": 710,
+      "start": 2189.8,
+      "end": 2192.91,
+      "duration": 3.11,
+      "text": "circle"
+    },
+    {
+      "index": 711,
+      "start": 2195.47,
+      "end": 2195.48,
+      "duration": 0.01,
+      "text": "and so here's the circle here's the"
+    },
+    {
+      "index": 712,
+      "start": 2195.48,
+      "end": 2199.03,
+      "duration": 3.55,
+      "text": "origin this is the unit distance and"
+    },
+    {
+      "index": 713,
+      "start": 2199.04,
+      "end": 2200.829,
+      "duration": 1.789,
+      "text": "right now it happens to be at this"
+    },
+    {
+      "index": 714,
+      "start": 2200.839,
+      "end": 2202.15,
+      "duration": 1.311,
+      "text": "location"
+    },
+    {
+      "index": 715,
+      "start": 2202.16,
+      "end": 2204.589,
+      "duration": 2.429,
+      "text": "P all right maybe we'll put p a little"
+    },
+    {
+      "index": 716,
+      "start": 2204.599,
+      "end": 2208.99,
+      "duration": 4.391,
+      "text": "over here and here's the angle"
+    },
+    {
+      "index": 717,
+      "start": 2209.0,
+      "end": 2211.15,
+      "duration": 2.15,
+      "text": "Theta all right and now we're going to"
+    },
+    {
+      "index": 718,
+      "start": 2211.16,
+      "end": 2214.19,
+      "duration": 3.03,
+      "text": "move it we're going to vary Theta and"
+    },
+    {
+      "index": 719,
+      "start": 2214.2,
+      "end": 2215.95,
+      "duration": 1.75,
+      "text": "we're interested in the rate of change"
+    },
+    {
+      "index": 720,
+      "start": 2215.96,
+      "end": 2220.309,
+      "duration": 4.349,
+      "text": "of Y so y is the height of P but we're"
+    },
+    {
+      "index": 721,
+      "start": 2220.319,
+      "end": 2221.87,
+      "duration": 1.551,
+      "text": "going to move it to another location"
+    },
+    {
+      "index": 722,
+      "start": 2221.88,
+      "end": 2226.15,
+      "duration": 4.27,
+      "text": "we'll move it along the circle to"
+    },
+    {
+      "index": 723,
+      "start": 2230.99,
+      "end": 2231.0,
+      "duration": 0.01,
+      "text": "Q all right so here it is here's the"
+    },
+    {
+      "index": 724,
+      "start": 2231.0,
+      "end": 2233.99,
+      "duration": 2.99,
+      "text": "uh the thing so so how far did we move"
+    },
+    {
+      "index": 725,
+      "start": 2234.0,
+      "end": 2237.309,
+      "duration": 3.309,
+      "text": "it well we moved it by an angle Delta"
+    },
+    {
+      "index": 726,
+      "start": 2237.319,
+      "end": 2240.15,
+      "duration": 2.831,
+      "text": "Theta all right so we we start at Theta"
+    },
+    {
+      "index": 727,
+      "start": 2240.16,
+      "end": 2241.39,
+      "duration": 1.23,
+      "text": "Theta is going to be fixed in this"
+    },
+    {
+      "index": 728,
+      "start": 2241.4,
+      "end": 2242.71,
+      "duration": 1.31,
+      "text": "argument and we're going to move a"
+    },
+    {
+      "index": 729,
+      "start": 2242.72,
+      "end": 2244.51,
+      "duration": 1.79,
+      "text": "little bit Delta Theta and now we're"
+    },
+    {
+      "index": 730,
+      "start": 2244.52,
+      "end": 2246.75,
+      "duration": 2.23,
+      "text": "just going to try to figure out how far"
+    },
+    {
+      "index": 731,
+      "start": 2246.76,
+      "end": 2248.67,
+      "duration": 1.91,
+      "text": "the thing moves"
+    },
+    {
+      "index": 732,
+      "start": 2248.68,
+      "end": 2250.589,
+      "duration": 1.909,
+      "text": "well in order to do that we've got to"
+    },
+    {
+      "index": 733,
+      "start": 2250.599,
+      "end": 2253.109,
+      "duration": 2.51,
+      "text": "keep track of the the height the"
+    },
+    {
+      "index": 734,
+      "start": 2253.119,
+      "end": 2255.47,
+      "duration": 2.351,
+      "text": "vertical displacement here so we're"
+    },
+    {
+      "index": 735,
+      "start": 2255.48,
+      "end": 2258.63,
+      "duration": 3.15,
+      "text": "going to draw this right angle here and"
+    },
+    {
+      "index": 736,
+      "start": 2258.64,
+      "end": 2260.91,
+      "duration": 2.27,
+      "text": "this is the position R and then this"
+    },
+    {
+      "index": 737,
+      "start": 2260.92,
+      "end": 2264.75,
+      "duration": 3.83,
+      "text": "distance here is the change in"
+    },
+    {
+      "index": 738,
+      "start": 2264.76,
+      "end": 2269.069,
+      "duration": 4.309,
+      "text": "y all right so the the picture is we"
+    },
+    {
+      "index": 739,
+      "start": 2269.079,
+      "end": 2271.15,
+      "duration": 2.071,
+      "text": "have something moving around a unit"
+    },
+    {
+      "index": 740,
+      "start": 2271.16,
+      "end": 2273.349,
+      "duration": 2.189,
+      "text": "circle a point moving around a unit"
+    },
+    {
+      "index": 741,
+      "start": 2273.359,
+      "end": 2275.43,
+      "duration": 2.071,
+      "text": "circle it starts at P it moves to"
+    },
+    {
+      "index": 742,
+      "start": 2275.44,
+      "end": 2278.99,
+      "duration": 3.55,
+      "text": "Q it moves from angle to angle plus"
+    },
+    {
+      "index": 743,
+      "start": 2279.0,
+      "end": 2282.19,
+      "duration": 3.19,
+      "text": "Delta Theta and the issue is how much"
+    },
+    {
+      "index": 744,
+      "start": 2282.2,
+      "end": 2284.79,
+      "duration": 2.59,
+      "text": "does y"
+    },
+    {
+      "index": 745,
+      "start": 2287.39,
+      "end": 2287.4,
+      "duration": 0.01,
+      "text": "move and the formula for y is sin Theta"
+    },
+    {
+      "index": 746,
+      "start": 2287.4,
+      "end": 2289.87,
+      "duration": 2.47,
+      "text": "so that's telling us the rate of change"
+    },
+    {
+      "index": 747,
+      "start": 2289.88,
+      "end": 2309.829,
+      "duration": 19.949,
+      "text": "of sin Theta"
+    },
+    {
+      "index": 748,
+      "start": 2313.069,
+      "end": 2313.079,
+      "duration": 0.01,
+      "text": "all right well so let's just try to"
+    },
+    {
+      "index": 749,
+      "start": 2313.079,
+      "end": 2315.87,
+      "duration": 2.791,
+      "text": "think a little bit about about what this"
+    },
+    {
+      "index": 750,
+      "start": 2315.88,
+      "end": 2317.67,
+      "duration": 1.79,
+      "text": "is so first of all I've already said"
+    },
+    {
+      "index": 751,
+      "start": 2317.68,
+      "end": 2320.23,
+      "duration": 2.55,
+      "text": "this I'm going to repeat it here deltay"
+    },
+    {
+      "index": 752,
+      "start": 2320.24,
+      "end": 2323.47,
+      "duration": 3.23,
+      "text": "is p r it's going from p and going"
+    },
+    {
+      "index": 753,
+      "start": 2323.48,
+      "end": 2326.87,
+      "duration": 3.39,
+      "text": "straight up to R that's how far Y moves"
+    },
+    {
+      "index": 754,
+      "start": 2326.88,
+      "end": 2328.75,
+      "duration": 1.87,
+      "text": "that's the change in y That's what I"
+    },
+    {
+      "index": 755,
+      "start": 2328.76,
+      "end": 2332.03,
+      "duration": 3.27,
+      "text": "said up in the right hand corner"
+    },
+    {
+      "index": 756,
+      "start": 2332.04,
+      "end": 2336.55,
+      "duration": 4.51,
+      "text": "there oops I said PR but I wrote PQ huh"
+    },
+    {
+      "index": 757,
+      "start": 2336.56,
+      "end": 2338.39,
+      "duration": 1.83,
+      "text": "all right that's not a a good"
+    },
+    {
+      "index": 758,
+      "start": 2338.4,
+      "end": 2342.23,
+      "duration": 3.83,
+      "text": "idea all right so Delta Y is p"
+    },
+    {
+      "index": 759,
+      "start": 2342.24,
+      "end": 2346.19,
+      "duration": 3.95,
+      "text": "r and now I want to draw the diagram"
+    },
+    {
+      "index": 760,
+      "start": 2346.2,
+      "end": 2351.109,
+      "duration": 4.909,
+      "text": "again one time so here's Q here's R and"
+    },
+    {
+      "index": 761,
+      "start": 2351.119,
+      "end": 2354.19,
+      "duration": 3.071,
+      "text": "here's"
+    },
+    {
+      "index": 762,
+      "start": 2358.87,
+      "end": 2358.88,
+      "duration": 0.01,
+      "text": "p and here's my triangle and now what"
+    },
+    {
+      "index": 763,
+      "start": 2358.88,
+      "end": 2364.349,
+      "duration": 5.469,
+      "text": "I'd like to do is draw this curve here"
+    },
+    {
+      "index": 764,
+      "start": 2364.359,
+      "end": 2366.67,
+      "duration": 2.311,
+      "text": "which is the piece of the Arc of the"
+    },
+    {
+      "index": 765,
+      "start": 2366.68,
+      "end": 2369.19,
+      "duration": 2.51,
+      "text": "circle but really what I want to keep in"
+    },
+    {
+      "index": 766,
+      "start": 2369.2,
+      "end": 2371.43,
+      "duration": 2.23,
+      "text": "mind is something that I did also in all"
+    },
+    {
+      "index": 767,
+      "start": 2371.44,
+      "end": 2374.829,
+      "duration": 3.389,
+      "text": "these other arguments which is maybe I"
+    },
+    {
+      "index": 768,
+      "start": 2374.839,
+      "end": 2376.069,
+      "duration": 1.23,
+      "text": "should have called this orange but I'm"
+    },
+    {
+      "index": 769,
+      "start": 2376.079,
+      "end": 2378.15,
+      "duration": 2.071,
+      "text": "going to think of the straight line"
+    },
+    {
+      "index": 770,
+      "start": 2378.16,
+      "end": 2379.67,
+      "duration": 1.51,
+      "text": "between so it's the straight line"
+    },
+    {
+      "index": 771,
+      "start": 2379.68,
+      "end": 2382.03,
+      "duration": 2.35,
+      "text": "approximation to the curve that we're"
+    },
+    {
+      "index": 772,
+      "start": 2382.04,
+      "end": 2384.109,
+      "duration": 2.069,
+      "text": "always interested"
+    },
+    {
+      "index": 773,
+      "start": 2384.119,
+      "end": 2386.67,
+      "duration": 2.551,
+      "text": "in so the straight line is much simpler"
+    },
+    {
+      "index": 774,
+      "start": 2386.68,
+      "end": 2387.99,
+      "duration": 1.31,
+      "text": "because that then we just have a"
+    },
+    {
+      "index": 775,
+      "start": 2388.0,
+      "end": 2391.27,
+      "duration": 3.27,
+      "text": "triangle here and in fact it's a right"
+    },
+    {
+      "index": 776,
+      "start": 2391.28,
+      "end": 2393.43,
+      "duration": 2.15,
+      "text": "triangle right so we have the geometry"
+    },
+    {
+      "index": 777,
+      "start": 2393.44,
+      "end": 2394.99,
+      "duration": 1.55,
+      "text": "of a right triangle which is going to"
+    },
+    {
+      "index": 778,
+      "start": 2395.0,
+      "end": 2399.39,
+      "duration": 4.39,
+      "text": "now let us do all of our calculations"
+    },
+    {
+      "index": 779,
+      "start": 2402.829,
+      "end": 2402.839,
+      "duration": 0.01,
+      "text": "okay so now the key step is this same"
+    },
+    {
+      "index": 780,
+      "start": 2402.839,
+      "end": 2405.67,
+      "duration": 2.831,
+      "text": "principle that we already used which is"
+    },
+    {
+      "index": 781,
+      "start": 2405.68,
+      "end": 2408.27,
+      "duration": 2.59,
+      "text": "that short pieces of curves are nearly"
+    },
+    {
+      "index": 782,
+      "start": 2408.28,
+      "end": 2410.349,
+      "duration": 2.069,
+      "text": "straight so that means that this piece"
+    },
+    {
+      "index": 783,
+      "start": 2410.359,
+      "end": 2413.39,
+      "duration": 3.031,
+      "text": "of the circular Arc here from P to Q is"
+    },
+    {
+      "index": 784,
+      "start": 2413.4,
+      "end": 2415.23,
+      "duration": 1.83,
+      "text": "practically the same as the straight"
+    },
+    {
+      "index": 785,
+      "start": 2415.24,
+      "end": 2417.95,
+      "duration": 2.71,
+      "text": "segment from P to"
+    },
+    {
+      "index": 786,
+      "start": 2417.96,
+      "end": 2421.19,
+      "duration": 3.23,
+      "text": "Q all right so that's this principle"
+    },
+    {
+      "index": 787,
+      "start": 2421.2,
+      "end": 2425.829,
+      "duration": 4.629,
+      "text": "that that uh well let's put it over here"
+    },
+    {
+      "index": 788,
+      "start": 2425.839,
+      "end": 2429.109,
+      "duration": 3.27,
+      "text": "is that PQ is practically the same as"
+    },
+    {
+      "index": 789,
+      "start": 2429.119,
+      "end": 2432.19,
+      "duration": 3.071,
+      "text": "the straight segment from P to"
+    },
+    {
+      "index": 790,
+      "start": 2432.2,
+      "end": 2435.829,
+      "duration": 3.629,
+      "text": "Q so how are we going to to use that"
+    },
+    {
+      "index": 791,
+      "start": 2435.839,
+      "end": 2437.79,
+      "duration": 1.951,
+      "text": "well we want to use that quantitatively"
+    },
+    {
+      "index": 792,
+      "start": 2437.8,
+      "end": 2440.23,
+      "duration": 2.43,
+      "text": "in the following way what we want to"
+    },
+    {
+      "index": 793,
+      "start": 2440.24,
+      "end": 2442.39,
+      "duration": 2.15,
+      "text": "notice is that the distance from P to Q"
+    },
+    {
+      "index": 794,
+      "start": 2442.4,
+      "end": 2443.27,
+      "duration": 0.87,
+      "text": "is"
+    },
+    {
+      "index": 795,
+      "start": 2443.28,
+      "end": 2445.51,
+      "duration": 2.23,
+      "text": "approximately Delta"
+    },
+    {
+      "index": 796,
+      "start": 2445.52,
+      "end": 2448.309,
+      "duration": 2.789,
+      "text": "Theta right because the Arc Length along"
+    },
+    {
+      "index": 797,
+      "start": 2448.319,
+      "end": 2450.43,
+      "duration": 2.111,
+      "text": "that curve the length of the curve is"
+    },
+    {
+      "index": 798,
+      "start": 2450.44,
+      "end": 2452.55,
+      "duration": 2.11,
+      "text": "Delta Theta so the length of the green"
+    },
+    {
+      "index": 799,
+      "start": 2452.56,
+      "end": 2455.349,
+      "duration": 2.789,
+      "text": "which is PQ is is almost Delta Theta so"
+    },
+    {
+      "index": 800,
+      "start": 2455.359,
+      "end": 2457.67,
+      "duration": 2.311,
+      "text": "this is essentially Delta Theta this"
+    },
+    {
+      "index": 801,
+      "start": 2457.68,
+      "end": 2460.79,
+      "duration": 3.11,
+      "text": "this distance"
+    },
+    {
+      "index": 802,
+      "start": 2464.069,
+      "end": 2464.079,
+      "duration": 0.01,
+      "text": "here now the Second Step which is a"
+    },
+    {
+      "index": 803,
+      "start": 2464.079,
+      "end": 2466.67,
+      "duration": 2.591,
+      "text": "little trickier is that we have to work"
+    },
+    {
+      "index": 804,
+      "start": 2466.68,
+      "end": 2470.069,
+      "duration": 3.389,
+      "text": "out what this angle is so our goal I'm"
+    },
+    {
+      "index": 805,
+      "start": 2470.079,
+      "end": 2471.55,
+      "duration": 1.471,
+      "text": "going to put it one step below because"
+    },
+    {
+      "index": 806,
+      "start": 2471.56,
+      "end": 2473.03,
+      "duration": 1.47,
+      "text": "I'm going to put the geometric reasoning"
+    },
+    {
+      "index": 807,
+      "start": 2473.04,
+      "end": 2475.67,
+      "duration": 2.63,
+      "text": "in between is I need to figure out what"
+    },
+    {
+      "index": 808,
+      "start": 2475.68,
+      "end": 2480.03,
+      "duration": 4.35,
+      "text": "the angle QPR"
+    },
+    {
+      "index": 809,
+      "start": 2482.99,
+      "end": 2483.0,
+      "duration": 0.01,
+      "text": "is if I can figure out what this angle"
+    },
+    {
+      "index": 810,
+      "start": 2483.0,
+      "end": 2485.589,
+      "duration": 2.589,
+      "text": "is then I'll be able to figure out what"
+    },
+    {
+      "index": 811,
+      "start": 2485.599,
+      "end": 2487.03,
+      "duration": 1.431,
+      "text": "this vertical distance is because I'll"
+    },
+    {
+      "index": 812,
+      "start": 2487.04,
+      "end": 2489.23,
+      "duration": 2.19,
+      "text": "know the hypotenuse and I'll know the"
+    },
+    {
+      "index": 813,
+      "start": 2489.24,
+      "end": 2490.99,
+      "duration": 1.75,
+      "text": "angle so I'll be able to figure out what"
+    },
+    {
+      "index": 814,
+      "start": 2491.0,
+      "end": 2495.75,
+      "duration": 4.75,
+      "text": "the side of the triangle"
+    },
+    {
+      "index": 815,
+      "start": 2499.15,
+      "end": 2499.16,
+      "duration": 0.01,
+      "text": "is so now let me show you why that's"
+    },
+    {
+      "index": 816,
+      "start": 2499.16,
+      "end": 2501.589,
+      "duration": 2.429,
+      "text": "possible to do so in order to do that"
+    },
+    {
+      "index": 817,
+      "start": 2501.599,
+      "end": 2502.99,
+      "duration": 1.391,
+      "text": "first of all I'm going to trade the"
+    },
+    {
+      "index": 818,
+      "start": 2503.0,
+      "end": 2509.63,
+      "duration": 6.63,
+      "text": "boards and show you where the line PQ"
+    },
+    {
+      "index": 819,
+      "start": 2513.43,
+      "end": 2513.44,
+      "duration": 0.01,
+      "text": "is so the line PQ is"
+    },
+    {
+      "index": 820,
+      "start": 2513.44,
+      "end": 2515.63,
+      "duration": 2.19,
+      "text": "here that's the whole"
+    },
+    {
+      "index": 821,
+      "start": 2515.64,
+      "end": 2519.109,
+      "duration": 3.469,
+      "text": "thing and the key point about this line"
+    },
+    {
+      "index": 822,
+      "start": 2519.119,
+      "end": 2521.95,
+      "duration": 2.831,
+      "text": "that I need you to realize is that it's"
+    },
+    {
+      "index": 823,
+      "start": 2521.96,
+      "end": 2525.51,
+      "duration": 3.55,
+      "text": "practically uh perpendicular it's almost"
+    },
+    {
+      "index": 824,
+      "start": 2525.52,
+      "end": 2528.91,
+      "duration": 3.39,
+      "text": "perpendicular to this to this Ray here"
+    },
+    {
+      "index": 825,
+      "start": 2528.92,
+      "end": 2531.349,
+      "duration": 2.429,
+      "text": "all right it's not quite because because"
+    },
+    {
+      "index": 826,
+      "start": 2531.359,
+      "end": 2532.75,
+      "duration": 1.391,
+      "text": "uh the distance between P to Q is"
+    },
+    {
+      "index": 827,
+      "start": 2532.76,
+      "end": 2534.47,
+      "duration": 1.71,
+      "text": "nonzero so it isn't quite but in the"
+    },
+    {
+      "index": 828,
+      "start": 2534.48,
+      "end": 2536.109,
+      "duration": 1.629,
+      "text": "limit it's going to be"
+    },
+    {
+      "index": 829,
+      "start": 2536.119,
+      "end": 2538.309,
+      "duration": 2.19,
+      "text": "perpendicular exactly perpendicular the"
+    },
+    {
+      "index": 830,
+      "start": 2538.319,
+      "end": 2541.63,
+      "duration": 3.311,
+      "text": "tangent line to the circle so the key"
+    },
+    {
+      "index": 831,
+      "start": 2541.64,
+      "end": 2545.91,
+      "duration": 4.27,
+      "text": "thing that I'm going to"
+    },
+    {
+      "index": 832,
+      "start": 2548.109,
+      "end": 2548.119,
+      "duration": 0.01,
+      "text": "use is"
+    },
+    {
+      "index": 833,
+      "start": 2548.119,
+      "end": 2554.309,
+      "duration": 6.19,
+      "text": "that PQ is almost perpendicular to"
+    },
+    {
+      "index": 834,
+      "start": 2554.319,
+      "end": 2557.349,
+      "duration": 3.03,
+      "text": "op all right the ray from the origin is"
+    },
+    {
+      "index": 835,
+      "start": 2557.359,
+      "end": 2559.069,
+      "duration": 1.71,
+      "text": "basically perpendicular to that green"
+    },
+    {
+      "index": 836,
+      "start": 2559.079,
+      "end": 2561.51,
+      "duration": 2.431,
+      "text": "line and then the second thing I'm going"
+    },
+    {
+      "index": 837,
+      "start": 2561.52,
+      "end": 2565.51,
+      "duration": 3.99,
+      "text": "to use is something that's obvious which"
+    },
+    {
+      "index": 838,
+      "start": 2565.52,
+      "end": 2572.39,
+      "duration": 6.87,
+      "text": "is that PR is"
+    },
+    {
+      "index": 839,
+      "start": 2574.71,
+      "end": 2574.72,
+      "duration": 0.01,
+      "text": "vertical okay so those are the two"
+    },
+    {
+      "index": 840,
+      "start": 2574.72,
+      "end": 2578.15,
+      "duration": 3.43,
+      "text": "pieces of geometry that I need to see"
+    },
+    {
+      "index": 841,
+      "start": 2578.16,
+      "end": 2581.91,
+      "duration": 3.75,
+      "text": "and now notice what's happening upstairs"
+    },
+    {
+      "index": 842,
+      "start": 2581.92,
+      "end": 2584.309,
+      "duration": 2.389,
+      "text": "on the picture here in the upper"
+    },
+    {
+      "index": 843,
+      "start": 2584.319,
+      "end": 2586.95,
+      "duration": 2.631,
+      "text": "right what I have"
+    },
+    {
+      "index": 844,
+      "start": 2586.96,
+      "end": 2589.91,
+      "duration": 2.95,
+      "text": "is the angle Theta is the angle between"
+    },
+    {
+      "index": 845,
+      "start": 2589.92,
+      "end": 2594.47,
+      "duration": 4.55,
+      "text": "the horizontal and op that's angle Theta"
+    },
+    {
+      "index": 846,
+      "start": 2594.48,
+      "end": 2598.069,
+      "duration": 3.589,
+      "text": "if I rotate it by 90 de the horizontal"
+    },
+    {
+      "index": 847,
+      "start": 2598.079,
+      "end": 2601.309,
+      "duration": 3.23,
+      "text": "becomes vertical it becomes p r and the"
+    },
+    {
+      "index": 848,
+      "start": 2601.319,
+      "end": 2603.03,
+      "duration": 1.711,
+      "text": "other thing rotated by 90 degrees"
+    },
+    {
+      "index": 849,
+      "start": 2603.04,
+      "end": 2605.91,
+      "duration": 2.87,
+      "text": "becomes the green line so the angle that"
+    },
+    {
+      "index": 850,
+      "start": 2605.92,
+      "end": 2609.589,
+      "duration": 3.669,
+      "text": "I'm talking about I get by taking this"
+    },
+    {
+      "index": 851,
+      "start": 2609.599,
+      "end": 2612.87,
+      "duration": 3.271,
+      "text": "guy and rotating it by 90 de it's the"
+    },
+    {
+      "index": 852,
+      "start": 2612.88,
+      "end": 2614.91,
+      "duration": 2.03,
+      "text": "same angle so that means that this angle"
+    },
+    {
+      "index": 853,
+      "start": 2614.92,
+      "end": 2617.109,
+      "duration": 2.189,
+      "text": "here is essentially"
+    },
+    {
+      "index": 854,
+      "start": 2617.119,
+      "end": 2620.19,
+      "duration": 3.071,
+      "text": "Theta that's what this angle is let me"
+    },
+    {
+      "index": 855,
+      "start": 2620.2,
+      "end": 2622.67,
+      "duration": 2.47,
+      "text": "repeat that one more time we started out"
+    },
+    {
+      "index": 856,
+      "start": 2622.68,
+      "end": 2625.109,
+      "duration": 2.429,
+      "text": "with an angle that looks like this which"
+    },
+    {
+      "index": 857,
+      "start": 2625.119,
+      "end": 2627.63,
+      "duration": 2.511,
+      "text": "is the horizontal that's the origin"
+    },
+    {
+      "index": 858,
+      "start": 2627.64,
+      "end": 2628.87,
+      "duration": 1.23,
+      "text": "straight out horizontally that's the"
+    },
+    {
+      "index": 859,
+      "start": 2628.88,
+      "end": 2631.309,
+      "duration": 2.429,
+      "text": "thing that's labeled one that distance"
+    },
+    {
+      "index": 860,
+      "start": 2631.319,
+      "end": 2635.03,
+      "duration": 3.711,
+      "text": "there and then I also have the my my"
+    },
+    {
+      "index": 861,
+      "start": 2635.04,
+      "end": 2636.47,
+      "duration": 1.43,
+      "text": "that's my right arm which is down here"
+    },
+    {
+      "index": 862,
+      "start": 2636.48,
+      "end": 2639.39,
+      "duration": 2.91,
+      "text": "my left arm is pointing up and it's"
+    },
+    {
+      "index": 863,
+      "start": 2639.4,
+      "end": 2643.47,
+      "duration": 4.07,
+      "text": "going from the origin to uh the point P"
+    },
+    {
+      "index": 864,
+      "start": 2643.48,
+      "end": 2645.27,
+      "duration": 1.79,
+      "text": "so here's the"
+    },
+    {
+      "index": 865,
+      "start": 2645.28,
+      "end": 2647.63,
+      "duration": 2.35,
+      "text": "horizontal uh and and the angle between"
+    },
+    {
+      "index": 866,
+      "start": 2647.64,
+      "end": 2651.549,
+      "duration": 3.909,
+      "text": "them is Theta and now what I claim is"
+    },
+    {
+      "index": 867,
+      "start": 2651.559,
+      "end": 2654.79,
+      "duration": 3.231,
+      "text": "that if I rotate by 90 degrees up like"
+    },
+    {
+      "index": 868,
+      "start": 2654.8,
+      "end": 2657.19,
+      "duration": 2.39,
+      "text": "this without changing anything so that"
+    },
+    {
+      "index": 869,
+      "start": 2657.2,
+      "end": 2659.069,
+      "duration": 1.869,
+      "text": "was what I did the horizontal will"
+    },
+    {
+      "index": 870,
+      "start": 2659.079,
+      "end": 2660.349,
+      "duration": 1.27,
+      "text": "become a"
+    },
+    {
+      "index": 871,
+      "start": 2660.359,
+      "end": 2665.27,
+      "duration": 4.911,
+      "text": "vertical that's PR that's going up PR"
+    },
+    {
+      "index": 872,
+      "start": 2665.28,
+      "end": 2671.349,
+      "duration": 6.069,
+      "text": "and if I rotate op 90° that's exactly"
+    },
+    {
+      "index": 873,
+      "start": 2671.359,
+      "end": 2677.03,
+      "duration": 5.671,
+      "text": "PQ okay so let me even well I think I"
+    },
+    {
+      "index": 874,
+      "start": 2677.04,
+      "end": 2679.549,
+      "duration": 2.509,
+      "text": "will draw it on there one"
+    },
+    {
+      "index": 875,
+      "start": 2679.559,
+      "end": 2683.309,
+      "duration": 3.75,
+      "text": "time and see if you can let's do it with"
+    },
+    {
+      "index": 876,
+      "start": 2683.319,
+      "end": 2687.79,
+      "duration": 4.471,
+      "text": "some arrows here so I started out with"
+    },
+    {
+      "index": 877,
+      "start": 2687.8,
+      "end": 2691.15,
+      "duration": 3.35,
+      "text": "this and then we'll label this as uh"
+    },
+    {
+      "index": 878,
+      "start": 2691.16,
+      "end": 2694.99,
+      "duration": 3.83,
+      "text": "let's see label this is orange okay so"
+    },
+    {
+      "index": 879,
+      "start": 2695.0,
+      "end": 2698.15,
+      "duration": 3.15,
+      "text": "red to orange and then I wrote rotate by"
+    },
+    {
+      "index": 880,
+      "start": 2698.16,
+      "end": 2699.67,
+      "duration": 1.51,
+      "text": "uh"
+    },
+    {
+      "index": 881,
+      "start": 2699.68,
+      "end": 2704.19,
+      "duration": 4.51,
+      "text": "90° and the red becomes this starting"
+    },
+    {
+      "index": 882,
+      "start": 2704.2,
+      "end": 2707.109,
+      "duration": 2.909,
+      "text": "from p and the orange rotates around 90"
+    },
+    {
+      "index": 883,
+      "start": 2707.119,
+      "end": 2710.43,
+      "duration": 3.311,
+      "text": "degrees and becomes this uh this thing"
+    },
+    {
+      "index": 884,
+      "start": 2710.44,
+      "end": 2714.349,
+      "duration": 3.909,
+      "text": "here all right so this angle here is the"
+    },
+    {
+      "index": 885,
+      "start": 2714.359,
+      "end": 2716.99,
+      "duration": 2.631,
+      "text": "same as as the other one which I've just"
+    },
+    {
+      "index": 886,
+      "start": 2717.0,
+      "end": 2719.75,
+      "duration": 2.75,
+      "text": "drawn all right different different uh"
+    },
+    {
+      "index": 887,
+      "start": 2719.76,
+      "end": 2721.99,
+      "duration": 2.23,
+      "text": "or different Origins for the different"
+    },
+    {
+      "index": 888,
+      "start": 2722.0,
+      "end": 2727.309,
+      "duration": 5.309,
+      "text": "vertices for the angles"
+    },
+    {
+      "index": 889,
+      "start": 2730.63,
+      "end": 2730.64,
+      "duration": 0.01,
+      "text": "okay well I didn't say that all"
+    },
+    {
+      "index": 890,
+      "start": 2730.64,
+      "end": 2735.47,
+      "duration": 4.83,
+      "text": "arguments were supposed to be"
+    },
+    {
+      "index": 891,
+      "start": 2737.67,
+      "end": 2737.68,
+      "duration": 0.01,
+      "text": "easy all right so I claim that the"
+    },
+    {
+      "index": 892,
+      "start": 2737.68,
+      "end": 2739.829,
+      "duration": 2.149,
+      "text": "conclusion is that this angle is"
+    },
+    {
+      "index": 893,
+      "start": 2739.839,
+      "end": 2742.27,
+      "duration": 2.431,
+      "text": "approximately"
+    },
+    {
+      "index": 894,
+      "start": 2742.28,
+      "end": 2744.79,
+      "duration": 2.51,
+      "text": "Theta and now we can finish our"
+    },
+    {
+      "index": 895,
+      "start": 2744.8,
+      "end": 2746.79,
+      "duration": 1.99,
+      "text": "calculation because we have something"
+    },
+    {
+      "index": 896,
+      "start": 2746.8,
+      "end": 2749.069,
+      "duration": 2.269,
+      "text": "with the hypotenuse being Delta Theta"
+    },
+    {
+      "index": 897,
+      "start": 2749.079,
+      "end": 2751.309,
+      "duration": 2.23,
+      "text": "and the angle being Theta and so this"
+    },
+    {
+      "index": 898,
+      "start": 2751.319,
+      "end": 2755.03,
+      "duration": 3.711,
+      "text": "segment here p is approximately the"
+    },
+    {
+      "index": 899,
+      "start": 2755.04,
+      "end": 2758.15,
+      "duration": 3.11,
+      "text": "hypotenuse length to times the cosine of"
+    },
+    {
+      "index": 900,
+      "start": 2758.16,
+      "end": 2759.349,
+      "duration": 1.189,
+      "text": "the"
+    },
+    {
+      "index": 901,
+      "start": 2759.359,
+      "end": 2761.51,
+      "duration": 2.151,
+      "text": "angle all"
+    },
+    {
+      "index": 902,
+      "start": 2761.52,
+      "end": 2765.829,
+      "duration": 4.309,
+      "text": "right and that is exactly what we wanted"
+    },
+    {
+      "index": 903,
+      "start": 2765.839,
+      "end": 2766.99,
+      "duration": 1.151,
+      "text": "if we"
+    },
+    {
+      "index": 904,
+      "start": 2767.0,
+      "end": 2769.63,
+      "duration": 2.63,
+      "text": "divide we divide by Delta Theta we get"
+    },
+    {
+      "index": 905,
+      "start": 2769.64,
+      "end": 2773.19,
+      "duration": 3.55,
+      "text": "Delta y/ Delta Theta is approximately"
+    },
+    {
+      "index": 906,
+      "start": 2773.2,
+      "end": 2774.39,
+      "duration": 1.19,
+      "text": "cosine"
+    },
+    {
+      "index": 907,
+      "start": 2774.4,
+      "end": 2776.27,
+      "duration": 1.87,
+      "text": "Theta all"
+    },
+    {
+      "index": 908,
+      "start": 2776.28,
+      "end": 2780.829,
+      "duration": 4.549,
+      "text": "right and uh that's the same thing as so"
+    },
+    {
+      "index": 909,
+      "start": 2780.839,
+      "end": 2782.589,
+      "duration": 1.75,
+      "text": "what we want in the limit is exactly the"
+    },
+    {
+      "index": 910,
+      "start": 2782.599,
+      "end": 2785.109,
+      "duration": 2.51,
+      "text": "Delta Theta going to Z Delta y over"
+    },
+    {
+      "index": 911,
+      "start": 2785.119,
+      "end": 2788.109,
+      "duration": 2.99,
+      "text": "Delta Theta is equal to co sin Theta so"
+    },
+    {
+      "index": 912,
+      "start": 2788.119,
+      "end": 2789.23,
+      "duration": 1.111,
+      "text": "we get an"
+    },
+    {
+      "index": 913,
+      "start": 2789.24,
+      "end": 2791.23,
+      "duration": 1.99,
+      "text": "approximation on the on a scale that we"
+    },
+    {
+      "index": 914,
+      "start": 2791.24,
+      "end": 2793.829,
+      "duration": 2.589,
+      "text": "can visualize and in the limit the uh"
+    },
+    {
+      "index": 915,
+      "start": 2793.839,
+      "end": 2798.79,
+      "duration": 4.951,
+      "text": "formula is"
+    },
+    {
+      "index": 916,
+      "start": 2801.43,
+      "end": 2801.44,
+      "duration": 0.01,
+      "text": "exact okay so that is a geometric"
+    },
+    {
+      "index": 917,
+      "start": 2801.44,
+      "end": 2804.99,
+      "duration": 3.55,
+      "text": "argument for the same result namely that"
+    },
+    {
+      "index": 918,
+      "start": 2805.0,
+      "end": 2807.39,
+      "duration": 2.39,
+      "text": "the derivative of s is"
+    },
+    {
+      "index": 919,
+      "start": 2807.4,
+      "end": 2810.829,
+      "duration": 3.429,
+      "text": "cosine"
+    },
+    {
+      "index": 920,
+      "start": 2813.47,
+      "end": 2813.48,
+      "duration": 0.01,
+      "text": "yeah uh you will have to do some kinds"
+    },
+    {
+      "index": 921,
+      "start": 2813.48,
+      "end": 2816.23,
+      "duration": 2.75,
+      "text": "of geometric proofs sometimes uh when"
+    },
+    {
+      "index": 922,
+      "start": 2816.24,
+      "end": 2818.829,
+      "duration": 2.589,
+      "text": "you'll really need this is probably in"
+    },
+    {
+      "index": 923,
+      "start": 2818.839,
+      "end": 2821.79,
+      "duration": 2.951,
+      "text": "1802 so you'll you you'll need to make"
+    },
+    {
+      "index": 924,
+      "start": 2821.8,
+      "end": 2824.349,
+      "duration": 2.549,
+      "text": "reasoning like this this is for example"
+    },
+    {
+      "index": 925,
+      "start": 2824.359,
+      "end": 2825.87,
+      "duration": 1.511,
+      "text": "the way that you actually develop the"
+    },
+    {
+      "index": 926,
+      "start": 2825.88,
+      "end": 2828.75,
+      "duration": 2.87,
+      "text": "theory of arc length and dealing with"
+    },
+    {
+      "index": 927,
+      "start": 2828.76,
+      "end": 2831.27,
+      "duration": 2.51,
+      "text": "Delta x's and Delta y's is a is a is a"
+    },
+    {
+      "index": 928,
+      "start": 2831.28,
+      "end": 2832.349,
+      "duration": 1.069,
+      "text": "common"
+    },
+    {
+      "index": 929,
+      "start": 2832.359,
+      "end": 2836.95,
+      "duration": 4.591,
+      "text": "tool all right I have I have one more uh"
+    },
+    {
+      "index": 930,
+      "start": 2836.96,
+      "end": 2839.349,
+      "duration": 2.389,
+      "text": "uh thing that I want to talk about today"
+    },
+    {
+      "index": 931,
+      "start": 2839.359,
+      "end": 2841.19,
+      "duration": 1.831,
+      "text": "which is some general"
+    },
+    {
+      "index": 932,
+      "start": 2841.2,
+      "end": 2845.51,
+      "duration": 4.31,
+      "text": "rules and so I'm going to we took a"
+    },
+    {
+      "index": 933,
+      "start": 2845.52,
+      "end": 2847.27,
+      "duration": 1.75,
+      "text": "little bit more time than I expected Ed"
+    },
+    {
+      "index": 934,
+      "start": 2847.28,
+      "end": 2849.829,
+      "duration": 2.549,
+      "text": "with this so what I'm going to do is"
+    },
+    {
+      "index": 935,
+      "start": 2849.839,
+      "end": 2851.069,
+      "duration": 1.23,
+      "text": "just tell you the"
+    },
+    {
+      "index": 936,
+      "start": 2851.079,
+      "end": 2855.43,
+      "duration": 4.351,
+      "text": "rules and we'll discuss them in a few"
+    },
+    {
+      "index": 937,
+      "start": 2855.44,
+      "end": 2862.03,
+      "duration": 6.59,
+      "text": "days so let"
+    },
+    {
+      "index": 938,
+      "start": 2871.71,
+      "end": 2871.72,
+      "duration": 0.01,
+      "text": "rules so these were the specific ones"
+    },
+    {
+      "index": 939,
+      "start": 2871.72,
+      "end": 2880.23,
+      "duration": 8.51,
+      "text": "and here are some general ones"
+    },
+    {
+      "index": 940,
+      "start": 2890.03,
+      "end": 2890.04,
+      "duration": 0.01,
+      "text": "rule and what it says is that if you"
+    },
+    {
+      "index": 941,
+      "start": 2890.04,
+      "end": 2891.829,
+      "duration": 1.789,
+      "text": "take the product of two functions and"
+    },
+    {
+      "index": 942,
+      "start": 2891.839,
+      "end": 2894.91,
+      "duration": 3.071,
+      "text": "differentiate them you get the"
+    },
+    {
+      "index": 943,
+      "start": 2894.92,
+      "end": 2898.23,
+      "duration": 3.31,
+      "text": "derivative of one time the other plus"
+    },
+    {
+      "index": 944,
+      "start": 2898.24,
+      "end": 2901.19,
+      "duration": 2.95,
+      "text": "the othertimes the derivative of the"
+    },
+    {
+      "index": 945,
+      "start": 2901.2,
+      "end": 2903.67,
+      "duration": 2.47,
+      "text": "one now the way that you should remember"
+    },
+    {
+      "index": 946,
+      "start": 2903.68,
+      "end": 2905.95,
+      "duration": 2.27,
+      "text": "this and the way that I'll carry out the"
+    },
+    {
+      "index": 947,
+      "start": 2905.96,
+      "end": 2908.15,
+      "duration": 2.19,
+      "text": "proof"
+    },
+    {
+      "index": 948,
+      "start": 2908.16,
+      "end": 2910.51,
+      "duration": 2.35,
+      "text": "is that you should think of it as you"
+    },
+    {
+      "index": 949,
+      "start": 2910.52,
+      "end": 2919.069,
+      "duration": 8.549,
+      "text": "change one at a"
+    },
+    {
+      "index": 950,
+      "start": 2921.71,
+      "end": 2921.72,
+      "duration": 0.01,
+      "text": "time and this is a very useful way of"
+    },
+    {
+      "index": 951,
+      "start": 2921.72,
+      "end": 2924.67,
+      "duration": 2.95,
+      "text": "thinking about differentiation when you"
+    },
+    {
+      "index": 952,
+      "start": 2924.68,
+      "end": 2927.27,
+      "duration": 2.59,
+      "text": "have uh things which depend on more than"
+    },
+    {
+      "index": 953,
+      "start": 2927.28,
+      "end": 2931.95,
+      "duration": 4.67,
+      "text": "one function so this is a this is a a"
+    },
+    {
+      "index": 954,
+      "start": 2931.96,
+      "end": 2938.03,
+      "duration": 6.07,
+      "text": "general procedure the second formula"
+    },
+    {
+      "index": 955,
+      "start": 2939.51,
+      "end": 2939.52,
+      "duration": 0.01,
+      "text": "that I wanted to mention is called the"
+    },
+    {
+      "index": 956,
+      "start": 2939.52,
+      "end": 2944.589,
+      "duration": 5.069,
+      "text": "quotient"
+    },
+    {
+      "index": 957,
+      "start": 2948.069,
+      "end": 2948.079,
+      "duration": 0.01,
+      "text": "Rule and that says the following that U"
+    },
+    {
+      "index": 958,
+      "start": 2948.079,
+      "end": 2952.43,
+      "duration": 4.351,
+      "text": "/ V Prime has a formula as"
+    },
+    {
+      "index": 959,
+      "start": 2952.44,
+      "end": 2957.63,
+      "duration": 5.19,
+      "text": "well and the formula is U Prime V minus"
+    },
+    {
+      "index": 960,
+      "start": 2957.64,
+      "end": 2960.309,
+      "duration": 2.669,
+      "text": "UV Prime / V ^"
+    },
+    {
+      "index": 961,
+      "start": 2960.319,
+      "end": 2964.67,
+      "duration": 4.351,
+      "text": "2 so this is our second formula let me"
+    },
+    {
+      "index": 962,
+      "start": 2964.68,
+      "end": 2969.87,
+      "duration": 5.19,
+      "text": "just mention and both of them are"
+    },
+    {
+      "index": 963,
+      "start": 2969.88,
+      "end": 2972.069,
+      "duration": 2.189,
+      "text": "extremely valuable and you'll use them"
+    },
+    {
+      "index": 964,
+      "start": 2972.079,
+      "end": 2974.23,
+      "duration": 2.151,
+      "text": "all the time this one of course only"
+    },
+    {
+      "index": 965,
+      "start": 2974.24,
+      "end": 2982.67,
+      "duration": 8.43,
+      "text": "works when V is not"
+    },
+    {
+      "index": 966,
+      "start": 2986.63,
+      "end": 2986.64,
+      "duration": 0.01,
+      "text": "zero all right so because we're out of"
+    },
+    {
+      "index": 967,
+      "start": 2986.64,
+      "end": 2987.87,
+      "duration": 1.23,
+      "text": "time we're not going to prove these"
+    },
+    {
+      "index": 968,
+      "start": 2987.88,
+      "end": 2989.589,
+      "duration": 1.709,
+      "text": "today but we will prove these next time"
+    },
+    {
+      "index": 969,
+      "start": 2989.599,
+      "end": 2991.19,
+      "duration": 1.591,
+      "text": "and you're definitely going to be"
+    },
+    {
+      "index": 970,
+      "start": 2991.2,
+      "end": 2995.599,
+      "duration": 4.399,
+      "text": "responsible for these kinds of proofs"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Single Variable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL590CCC2BC5AF3BC1"
+  }
+}

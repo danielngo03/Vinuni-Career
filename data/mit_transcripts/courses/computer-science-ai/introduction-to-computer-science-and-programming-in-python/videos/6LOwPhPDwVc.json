@@ -1,0 +1,8362 @@
+{
+  "video": {
+    "id": "6LOwPhPDwVc",
+    "title": "12. Searching and Sorting",
+    "url": "https://www.youtube.com/watch?v=6LOwPhPDwVc",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2911,
+    "language": "en"
+  },
+  "segment_count": 1192,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.55,
+      "end": 2.56,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.56,
+      "end": 5.309,
+      "duration": 2.749,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 5.319,
+      "end": 7.429,
+      "duration": 2.11,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 7.439,
+      "end": 9.39,
+      "duration": 1.951,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 9.4,
+      "end": 12.549,
+      "duration": 3.149,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 12.559,
+      "end": 14.509,
+      "duration": 1.95,
+      "text": "view additional materials from hundreds"
+    },
+    {
+      "index": 6,
+      "start": 14.519,
+      "end": 17.83,
+      "duration": 3.311,
+      "text": "of MIT courses visit MIT opencourseware"
+    },
+    {
+      "index": 7,
+      "start": 17.84,
+      "end": 28.95,
+      "duration": 11.11,
+      "text": "at"
+    },
+    {
+      "index": 8,
+      "start": 31.03,
+      "end": 31.04,
+      "duration": 0.01,
+      "text": "ocw.mit.edu"
+    },
+    {
+      "index": 9,
+      "start": 31.04,
+      "end": 34.47,
+      "duration": 3.43,
+      "text": "so for the last two lectures we've been"
+    },
+    {
+      "index": 10,
+      "start": 34.48,
+      "end": 36.95,
+      "duration": 2.47,
+      "text": "talking about analyzing algorithms"
+    },
+    {
+      "index": 11,
+      "start": 36.96,
+      "end": 38.869,
+      "duration": 1.909,
+      "text": "complexity orders of growth how do we"
+    },
+    {
+      "index": 12,
+      "start": 38.879,
+      "end": 41.43,
+      "duration": 2.551,
+      "text": "estimate the cost of an algorithm as the"
+    },
+    {
+      "index": 13,
+      "start": 41.44,
+      "end": 44.069,
+      "duration": 2.629,
+      "text": "size of the input grows and as I've said"
+    },
+    {
+      "index": 14,
+      "start": 44.079,
+      "end": 45.47,
+      "duration": 1.391,
+      "text": "several times I'll say at least once"
+    },
+    {
+      "index": 15,
+      "start": 45.48,
+      "end": 47.43,
+      "duration": 1.95,
+      "text": "more how do we also turn it the other"
+    },
+    {
+      "index": 16,
+      "start": 47.44,
+      "end": 49.99,
+      "duration": 2.55,
+      "text": "direction how do we use thoughts about"
+    },
+    {
+      "index": 17,
+      "start": 50.0,
+      "end": 52.47,
+      "duration": 2.47,
+      "text": "choices of pieces of algorithm in terms"
+    },
+    {
+      "index": 18,
+      "start": 52.48,
+      "end": 54.15,
+      "duration": 1.67,
+      "text": "of implications on the cost it's going"
+    },
+    {
+      "index": 19,
+      "start": 54.16,
+      "end": 55.63,
+      "duration": 1.47,
+      "text": "to take us to"
+    },
+    {
+      "index": 20,
+      "start": 55.64,
+      "end": 58.91,
+      "duration": 3.27,
+      "text": "compute we saw last time a set of"
+    },
+    {
+      "index": 21,
+      "start": 58.92,
+      "end": 61.509,
+      "duration": 2.589,
+      "text": "examples constant algorithms linear"
+    },
+    {
+      "index": 22,
+      "start": 61.519,
+      "end": 63.509,
+      "duration": 1.99,
+      "text": "algorithms sorry constant algorithms"
+    },
+    {
+      "index": 23,
+      "start": 63.519,
+      "end": 66.39,
+      "duration": 2.871,
+      "text": "logarithmic algorithms linear algorithms"
+    },
+    {
+      "index": 24,
+      "start": 66.4,
+      "end": 68.789,
+      "duration": 2.389,
+      "text": "quadratic algorithms exponential"
+    },
+    {
+      "index": 25,
+      "start": 68.799,
+      "end": 70.99,
+      "duration": 2.191,
+      "text": "algorithms today what I'm going to do is"
+    },
+    {
+      "index": 26,
+      "start": 71.0,
+      "end": 73.31,
+      "duration": 2.31,
+      "text": "fill in one more piece a log linear"
+    },
+    {
+      "index": 27,
+      "start": 73.32,
+      "end": 74.95,
+      "duration": 1.63,
+      "text": "algorithm something that's really a nice"
+    },
+    {
+      "index": 28,
+      "start": 74.96,
+      "end": 77.749,
+      "duration": 2.789,
+      "text": "kind of algorithm to have and use it to"
+    },
+    {
+      "index": 29,
+      "start": 77.759,
+      "end": 80.31,
+      "duration": 2.551,
+      "text": "talk about one last class of algorithms"
+    },
+    {
+      "index": 30,
+      "start": 80.32,
+      "end": 82.03,
+      "duration": 1.71,
+      "text": "that are really valuable and those are"
+    },
+    {
+      "index": 31,
+      "start": 82.04,
+      "end": 84.63,
+      "duration": 2.59,
+      "text": "searching and sorting"
+    },
+    {
+      "index": 32,
+      "start": 84.64,
+      "end": 88.069,
+      "duration": 3.429,
+      "text": "algorithms so a search algorithm kind of"
+    },
+    {
+      "index": 33,
+      "start": 88.079,
+      "end": 89.91,
+      "duration": 1.831,
+      "text": "an obvious statement you use them all"
+    },
+    {
+      "index": 34,
+      "start": 89.92,
+      "end": 91.51,
+      "duration": 1.59,
+      "text": "all the time when you go to to Google or"
+    },
+    {
+      "index": 35,
+      "start": 91.52,
+      "end": 93.749,
+      "duration": 2.229,
+      "text": "Bing or whatever your favorite search"
+    },
+    {
+      "index": 36,
+      "start": 93.759,
+      "end": 96.23,
+      "duration": 2.471,
+      "text": "mechanism on the web is it's just a way"
+    },
+    {
+      "index": 37,
+      "start": 96.24,
+      "end": 99.389,
+      "duration": 3.149,
+      "text": "to find an item or a group of items from"
+    },
+    {
+      "index": 38,
+      "start": 99.399,
+      "end": 100.149,
+      "duration": 0.75,
+      "text": "a"
+    },
+    {
+      "index": 39,
+      "start": 100.159,
+      "end": 102.789,
+      "duration": 2.63,
+      "text": "collection if you think about it that"
+    },
+    {
+      "index": 40,
+      "start": 102.799,
+      "end": 106.03,
+      "duration": 3.231,
+      "text": "collection could be either implicit or"
+    },
+    {
+      "index": 41,
+      "start": 106.04,
+      "end": 108.19,
+      "duration": 2.15,
+      "text": "explicit so way back at the beginning of"
+    },
+    {
+      "index": 42,
+      "start": 108.2,
+      "end": 110.109,
+      "duration": 1.909,
+      "text": "the term we saw an example of a search"
+    },
+    {
+      "index": 43,
+      "start": 110.119,
+      "end": 112.109,
+      "duration": 1.99,
+      "text": "algorithm when you were looking for"
+    },
+    {
+      "index": 44,
+      "start": 112.119,
+      "end": 114.67,
+      "duration": 2.551,
+      "text": "square roots and we saw simple things"
+    },
+    {
+      "index": 45,
+      "start": 114.68,
+      "end": 116.709,
+      "duration": 2.029,
+      "text": "like en or exhaustive enumeration we'd"
+    },
+    {
+      "index": 46,
+      "start": 116.719,
+      "end": 118.749,
+      "duration": 2.03,
+      "text": "go through all the possibilities we saw"
+    },
+    {
+      "index": 47,
+      "start": 118.759,
+      "end": 120.749,
+      "duration": 1.99,
+      "text": "our first version of section search"
+    },
+    {
+      "index": 48,
+      "start": 120.759,
+      "end": 122.55,
+      "duration": 1.791,
+      "text": "there where you would do approximations"
+    },
+    {
+      "index": 49,
+      "start": 122.56,
+      "end": 124.95,
+      "duration": 2.39,
+      "text": "Newton RS and these are all examples of"
+    },
+    {
+      "index": 50,
+      "start": 124.96,
+      "end": 126.87,
+      "duration": 1.91,
+      "text": "a search algorithm where the collection"
+    },
+    {
+      "index": 51,
+      "start": 126.88,
+      "end": 129.51,
+      "duration": 2.63,
+      "text": "is implicit it's all the numbers between"
+    },
+    {
+      "index": 52,
+      "start": 129.52,
+      "end": 132.11,
+      "duration": 2.59,
+      "text": "some point and some other point more"
+    },
+    {
+      "index": 53,
+      "start": 132.12,
+      "end": 133.869,
+      "duration": 1.749,
+      "text": "common is a search algorithm where the"
+    },
+    {
+      "index": 54,
+      "start": 133.879,
+      "end": 135.509,
+      "duration": 1.63,
+      "text": "collection is"
+    },
+    {
+      "index": 55,
+      "start": 135.519,
+      "end": 137.63,
+      "duration": 2.111,
+      "text": "explicit I don't know for example I've"
+    },
+    {
+      "index": 56,
+      "start": 137.64,
+      "end": 139.79,
+      "duration": 2.15,
+      "text": "got all the data records of students and"
+    },
+    {
+      "index": 57,
+      "start": 139.8,
+      "end": 141.11,
+      "duration": 1.31,
+      "text": "I want to know how do I find a"
+    },
+    {
+      "index": 58,
+      "start": 141.12,
+      "end": 142.869,
+      "duration": 1.749,
+      "text": "particular student so I can record that"
+    },
+    {
+      "index": 59,
+      "start": 142.879,
+      "end": 145.07,
+      "duration": 2.191,
+      "text": "A+ that everybody in this room is going"
+    },
+    {
+      "index": 60,
+      "start": 145.08,
+      "end": 148.07,
+      "duration": 2.99,
+      "text": "to get next Tuesday on that exam that's"
+    },
+    {
+      "index": 61,
+      "start": 148.08,
+      "end": 150.79,
+      "duration": 2.71,
+      "text": "not a promise sorry but we'll work on it"
+    },
+    {
+      "index": 62,
+      "start": 150.8,
+      "end": 152.75,
+      "duration": 1.95,
+      "text": "so could do it implicit could do it"
+    },
+    {
+      "index": 63,
+      "start": 152.76,
+      "end": 154.79,
+      "duration": 2.03,
+      "text": "explicit today I want to focus on doing"
+    },
+    {
+      "index": 64,
+      "start": 154.8,
+      "end": 157.589,
+      "duration": 2.789,
+      "text": "search explicitly and it could be on"
+    },
+    {
+      "index": 65,
+      "start": 157.599,
+      "end": 159.55,
+      "duration": 1.951,
+      "text": "different kinds of collections but I'm"
+    },
+    {
+      "index": 66,
+      "start": 159.56,
+      "end": 161.35,
+      "duration": 1.79,
+      "text": "going to focus just as an example on"
+    },
+    {
+      "index": 67,
+      "start": 161.36,
+      "end": 163.67,
+      "duration": 2.31,
+      "text": "search over lists and to make it a"
+    },
+    {
+      "index": 68,
+      "start": 163.68,
+      "end": 165.27,
+      "duration": 1.59,
+      "text": "little easier let's just do search over"
+    },
+    {
+      "index": 69,
+      "start": 165.28,
+      "end": 166.83,
+      "duration": 1.55,
+      "text": "lists of numbers but it could obviously"
+    },
+    {
+      "index": 70,
+      "start": 166.84,
+      "end": 168.55,
+      "duration": 1.71,
+      "text": "be other kinds of"
+    },
+    {
+      "index": 71,
+      "start": 168.56,
+      "end": 170.75,
+      "duration": 2.19,
+      "text": "elements now you've already seen some of"
+    },
+    {
+      "index": 72,
+      "start": 170.76,
+      "end": 173.07,
+      "duration": 2.31,
+      "text": "this right we did search where we said"
+    },
+    {
+      "index": 73,
+      "start": 173.08,
+      "end": 175.67,
+      "duration": 2.59,
+      "text": "we could do linear search Brute Force"
+    },
+    {
+      "index": 74,
+      "start": 175.68,
+      "end": 177.509,
+      "duration": 1.829,
+      "text": "just walk down the list looking at"
+    },
+    {
+      "index": 75,
+      "start": 177.519,
+      "end": 179.07,
+      "duration": 1.551,
+      "text": "everything till we either find the thing"
+    },
+    {
+      "index": 76,
+      "start": 179.08,
+      "end": 180.869,
+      "duration": 1.789,
+      "text": "we're looking for or we get to the end"
+    },
+    {
+      "index": 77,
+      "start": 180.879,
+      "end": 183.03,
+      "duration": 2.151,
+      "text": "of the list sometimes also called"
+    },
+    {
+      "index": 78,
+      "start": 183.04,
+      "end": 184.91,
+      "duration": 1.87,
+      "text": "British museum algorithm or exhaustive"
+    },
+    {
+      "index": 79,
+      "start": 184.92,
+      "end": 186.43,
+      "duration": 1.51,
+      "text": "enumeration I go through everything in"
+    },
+    {
+      "index": 80,
+      "start": 186.44,
+      "end": 189.27,
+      "duration": 2.83,
+      "text": "the list nice news is the list doesn't"
+    },
+    {
+      "index": 81,
+      "start": 189.28,
+      "end": 190.869,
+      "duration": 1.589,
+      "text": "have to be sorted it could be just an"
+    },
+    {
+      "index": 82,
+      "start": 190.879,
+      "end": 194.35,
+      "duration": 3.471,
+      "text": "arbitrary order what we saw is that the"
+    },
+    {
+      "index": 83,
+      "start": 194.36,
+      "end": 196.869,
+      "duration": 2.509,
+      "text": "expected sorry not expected the worst"
+    },
+    {
+      "index": 84,
+      "start": 196.879,
+      "end": 199.11,
+      "duration": 2.231,
+      "text": "case behavior is linear in the worst"
+    },
+    {
+      "index": 85,
+      "start": 199.12,
+      "end": 200.71,
+      "duration": 1.59,
+      "text": "case the elements not on the list I got"
+    },
+    {
+      "index": 86,
+      "start": 200.72,
+      "end": 201.869,
+      "duration": 1.149,
+      "text": "to look at everything so it's going to"
+    },
+    {
+      "index": 87,
+      "start": 201.879,
+      "end": 203.869,
+      "duration": 1.99,
+      "text": "be linear in terms of"
+    },
+    {
+      "index": 88,
+      "start": 203.879,
+      "end": 205.83,
+      "duration": 1.951,
+      "text": "complexity and then we looked at"
+    },
+    {
+      "index": 89,
+      "start": 205.84,
+      "end": 207.83,
+      "duration": 1.99,
+      "text": "bsection search where we said the list"
+    },
+    {
+      "index": 90,
+      "start": 207.84,
+      "end": 211.47,
+      "duration": 3.63,
+      "text": "needs to be sorted but if it is we can"
+    },
+    {
+      "index": 91,
+      "start": 211.48,
+      "end": 213.11,
+      "duration": 1.63,
+      "text": "actually be much more efficient because"
+    },
+    {
+      "index": 92,
+      "start": 213.12,
+      "end": 215.71,
+      "duration": 2.59,
+      "text": "we can take advantage of the Sorting to"
+    },
+    {
+      "index": 93,
+      "start": 215.72,
+      "end": 218.11,
+      "duration": 2.39,
+      "text": "cut down the size of the problem and"
+    },
+    {
+      "index": 94,
+      "start": 218.12,
+      "end": 219.67,
+      "duration": 1.55,
+      "text": "I'll remind you about both of those"
+    },
+    {
+      "index": 95,
+      "start": 219.68,
+      "end": 221.429,
+      "duration": 1.749,
+      "text": "there was our simple little linear"
+    },
+    {
+      "index": 96,
+      "start": 221.439,
+      "end": 224.07,
+      "duration": 2.631,
+      "text": "search right set a flag that says I"
+    },
+    {
+      "index": 97,
+      "start": 224.08,
+      "end": 225.91,
+      "duration": 1.83,
+      "text": "haven't yet found it and then just Loop"
+    },
+    {
+      "index": 98,
+      "start": 225.92,
+      "end": 228.229,
+      "duration": 2.309,
+      "text": "over the indices into the list I could"
+    },
+    {
+      "index": 99,
+      "start": 228.239,
+      "end": 230.03,
+      "duration": 1.791,
+      "text": "have also just Loop directly over the"
+    },
+    {
+      "index": 100,
+      "start": 230.04,
+      "end": 232.67,
+      "duration": 2.63,
+      "text": "list itself checking to see if the I"
+    },
+    {
+      "index": 101,
+      "start": 232.68,
+      "end": 234.03,
+      "duration": 1.35,
+      "text": "member of the list is a thing I'm"
+    },
+    {
+      "index": 102,
+      "start": 234.04,
+      "end": 236.75,
+      "duration": 2.71,
+      "text": "looking for if it is change the flag to"
+    },
+    {
+      "index": 103,
+      "start": 236.76,
+      "end": 238.55,
+      "duration": 1.79,
+      "text": "tr so that when I come out of all of"
+    },
+    {
+      "index": 104,
+      "start": 238.56,
+      "end": 241.03,
+      "duration": 2.47,
+      "text": "this I'll return the flag either false"
+    },
+    {
+      "index": 105,
+      "start": 241.04,
+      "end": 242.55,
+      "duration": 1.51,
+      "text": "because it was set that way initially or"
+    },
+    {
+      "index": 106,
+      "start": 242.56,
+      "end": 244.91,
+      "duration": 2.35,
+      "text": "true because I found it and of course"
+    },
+    {
+      "index": 107,
+      "start": 244.92,
+      "end": 245.949,
+      "duration": 1.029,
+      "text": "what we knew is we have to look at"
+    },
+    {
+      "index": 108,
+      "start": 245.959,
+      "end": 248.55,
+      "duration": 2.591,
+      "text": "everything to see if it's there or not I"
+    },
+    {
+      "index": 109,
+      "start": 248.56,
+      "end": 250.429,
+      "duration": 1.869,
+      "text": "could speed this up by just returning"
+    },
+    {
+      "index": 110,
+      "start": 250.439,
+      "end": 253.229,
+      "duration": 2.79,
+      "text": "true at this point well that would"
+    },
+    {
+      "index": 111,
+      "start": 253.239,
+      "end": 256.229,
+      "duration": 2.99,
+      "text": "improve the average case doesn't improve"
+    },
+    {
+      "index": 112,
+      "start": 256.239,
+      "end": 257.509,
+      "duration": 1.27,
+      "text": "the worst case and that's the thing we"
+    },
+    {
+      "index": 113,
+      "start": 257.519,
+      "end": 258.87,
+      "duration": 1.351,
+      "text": "usually are concerned about because in"
+    },
+    {
+      "index": 114,
+      "start": 258.88,
+      "end": 260.11,
+      "duration": 1.23,
+      "text": "the worst case I got to go through"
+    },
+    {
+      "index": 115,
+      "start": 260.12,
+      "end": 262.189,
+      "duration": 2.069,
+      "text": "everything and just to remind you we"
+    },
+    {
+      "index": 116,
+      "start": 262.199,
+      "end": 264.99,
+      "duration": 2.791,
+      "text": "said this is order length of the list to"
+    },
+    {
+      "index": 117,
+      "start": 265.0,
+      "end": 267.39,
+      "duration": 2.39,
+      "text": "go around this part the loop right here"
+    },
+    {
+      "index": 118,
+      "start": 267.4,
+      "end": 270.029,
+      "duration": 2.629,
+      "text": "and inside the loop it's constant work"
+    },
+    {
+      "index": 119,
+      "start": 270.039,
+      "end": 271.749,
+      "duration": 1.71,
+      "text": "I'm doing the same number of things each"
+    },
+    {
+      "index": 120,
+      "start": 271.759,
+      "end": 275.43,
+      "duration": 3.671,
+      "text": "time that's order n * order 1 and by our"
+    },
+    {
+      "index": 121,
+      "start": 275.44,
+      "end": 278.15,
+      "duration": 2.71,
+      "text": "rules that's just order n so it's linear"
+    },
+    {
+      "index": 122,
+      "start": 278.16,
+      "end": 280.23,
+      "duration": 2.07,
+      "text": "in the size of the"
+    },
+    {
+      "index": 123,
+      "start": 280.24,
+      "end": 281.83,
+      "duration": 1.59,
+      "text": "problem"
+    },
+    {
+      "index": 124,
+      "start": 281.84,
+      "end": 284.83,
+      "duration": 2.99,
+      "text": "okay we said we could do it on sorted"
+    },
+    {
+      "index": 125,
+      "start": 284.84,
+      "end": 287.95,
+      "duration": 3.11,
+      "text": "lists but just again walk down the list"
+    },
+    {
+      "index": 126,
+      "start": 287.96,
+      "end": 289.71,
+      "duration": 1.75,
+      "text": "again here I could Loop over everything"
+    },
+    {
+      "index": 127,
+      "start": 289.72,
+      "end": 291.35,
+      "duration": 1.63,
+      "text": "in the list checking to see if it's a"
+    },
+    {
+      "index": 128,
+      "start": 291.36,
+      "end": 294.15,
+      "duration": 2.79,
+      "text": "thing I want return true and if I ever"
+    },
+    {
+      "index": 129,
+      "start": 294.16,
+      "end": 296.189,
+      "duration": 2.029,
+      "text": "get to a point where the element of the"
+    },
+    {
+      "index": 130,
+      "start": 296.199,
+      "end": 298.35,
+      "duration": 2.151,
+      "text": "list is bigger than the thing I'm"
+    },
+    {
+      "index": 131,
+      "start": 298.36,
+      "end": 300.469,
+      "duration": 2.109,
+      "text": "looking for I know it can't be in the"
+    },
+    {
+      "index": 132,
+      "start": 300.479,
+      "end": 301.909,
+      "duration": 1.43,
+      "text": "rest of the list cuz all the things to"
+    },
+    {
+      "index": 133,
+      "start": 301.919,
+      "end": 303.749,
+      "duration": 1.83,
+      "text": "the right are bigger yet I could just"
+    },
+    {
+      "index": 134,
+      "start": 303.759,
+      "end": 305.629,
+      "duration": 1.87,
+      "text": "return fults and drop"
+    },
+    {
+      "index": 135,
+      "start": 305.639,
+      "end": 308.629,
+      "duration": 2.99,
+      "text": "out in terms of average Behavior this is"
+    },
+    {
+      "index": 136,
+      "start": 308.639,
+      "end": 310.51,
+      "duration": 1.871,
+      "text": "better because it's going to stop as"
+    },
+    {
+      "index": 137,
+      "start": 310.52,
+      "end": 311.909,
+      "duration": 1.389,
+      "text": "soon as it gets to a point where it can"
+    },
+    {
+      "index": 138,
+      "start": 311.919,
+      "end": 315.07,
+      "duration": 3.151,
+      "text": "rule everything else out but in terms of"
+    },
+    {
+      "index": 139,
+      "start": 315.08,
+      "end": 319.029,
+      "duration": 3.949,
+      "text": "complexity it's still order n because I"
+    },
+    {
+      "index": 140,
+      "start": 319.039,
+      "end": 321.07,
+      "duration": 2.031,
+      "text": "still on average have to not average in"
+    },
+    {
+      "index": 141,
+      "start": 321.08,
+      "end": 322.189,
+      "duration": 1.109,
+      "text": "the worst case I'm still going to be"
+    },
+    {
+      "index": 142,
+      "start": 322.199,
+      "end": 324.59,
+      "duration": 2.391,
+      "text": "looking end times through the loop"
+    },
+    {
+      "index": 143,
+      "start": 324.6,
+      "end": 326.35,
+      "duration": 1.75,
+      "text": "before I get to a point where I can"
+    },
+    {
+      "index": 144,
+      "start": 326.36,
+      "end": 330.07,
+      "duration": 3.71,
+      "text": "decide to bail out of it so order in and"
+    },
+    {
+      "index": 145,
+      "start": 330.08,
+      "end": 332.79,
+      "duration": 2.71,
+      "text": "then finally last piece of recap"
+    },
+    {
+      "index": 146,
+      "start": 332.8,
+      "end": 334.189,
+      "duration": 1.389,
+      "text": "bsection"
+    },
+    {
+      "index": 147,
+      "start": 334.199,
+      "end": 337.029,
+      "duration": 2.83,
+      "text": "search repeat again the idea here is"
+    },
+    {
+      "index": 148,
+      "start": 337.039,
+      "end": 339.43,
+      "duration": 2.391,
+      "text": "take the midpoint of the list look at"
+    },
+    {
+      "index": 149,
+      "start": 339.44,
+      "end": 341.189,
+      "duration": 1.749,
+      "text": "that element if it's the thing I'm"
+    },
+    {
+      "index": 150,
+      "start": 341.199,
+      "end": 343.51,
+      "duration": 2.311,
+      "text": "looking for great I just won the lottery"
+    },
+    {
+      "index": 151,
+      "start": 343.52,
+      "end": 345.909,
+      "duration": 2.389,
+      "text": "if it isn't decide is the thing I'm"
+    },
+    {
+      "index": 152,
+      "start": 345.919,
+      "end": 348.27,
+      "duration": 2.351,
+      "text": "looking for bigger or less than that"
+    },
+    {
+      "index": 153,
+      "start": 348.28,
+      "end": 351.27,
+      "duration": 2.99,
+      "text": "middle point if it's bigger than that I"
+    },
+    {
+      "index": 154,
+      "start": 351.28,
+      "end": 353.83,
+      "duration": 2.55,
+      "text": "only use the upper half of the list if"
+    },
+    {
+      "index": 155,
+      "start": 353.84,
+      "end": 355.99,
+      "duration": 2.15,
+      "text": "it's less than that I only use the lower"
+    },
+    {
+      "index": 156,
+      "start": 356.0,
+      "end": 358.309,
+      "duration": 2.309,
+      "text": "half of the list and the characteristic"
+    },
+    {
+      "index": 157,
+      "start": 358.319,
+      "end": 361.87,
+      "duration": 3.551,
+      "text": "here was at each step I'm reducing the"
+    },
+    {
+      "index": 158,
+      "start": 361.88,
+      "end": 363.43,
+      "duration": 1.55,
+      "text": "size of the problem in half I'm throwing"
+    },
+    {
+      "index": 159,
+      "start": 363.44,
+      "end": 365.39,
+      "duration": 1.95,
+      "text": "away half of the remaining list at each"
+    },
+    {
+      "index": 160,
+      "start": 365.4,
+      "end": 367.71,
+      "duration": 2.31,
+      "text": "step and I'll just remind you of that"
+    },
+    {
+      "index": 161,
+      "start": 367.72,
+      "end": 369.35,
+      "duration": 1.63,
+      "text": "code I know it's a lot here but just to"
+    },
+    {
+      "index": 162,
+      "start": 369.36,
+      "end": 371.99,
+      "duration": 2.63,
+      "text": "remind you it said down here if I've got"
+    },
+    {
+      "index": 163,
+      "start": 372.0,
+      "end": 373.909,
+      "duration": 1.909,
+      "text": "an empty list can't be there I'm going"
+    },
+    {
+      "index": 164,
+      "start": 373.919,
+      "end": 376.71,
+      "duration": 2.791,
+      "text": "to return faults otherwise call this"
+    },
+    {
+      "index": 165,
+      "start": 376.72,
+      "end": 379.27,
+      "duration": 2.55,
+      "text": "little helper function with the list the"
+    },
+    {
+      "index": 166,
+      "start": 379.28,
+      "end": 381.309,
+      "duration": 2.029,
+      "text": "thing for which I'm searching and the"
+    },
+    {
+      "index": 167,
+      "start": 381.319,
+      "end": 384.15,
+      "duration": 2.831,
+      "text": "beginning and end point indices into the"
+    },
+    {
+      "index": 168,
+      "start": 384.16,
+      "end": 386.83,
+      "duration": 2.67,
+      "text": "list initially the start and the very"
+    },
+    {
+      "index": 169,
+      "start": 386.84,
+      "end": 390.15,
+      "duration": 3.31,
+      "text": "end and this code up here B basically"
+    },
+    {
+      "index": 170,
+      "start": 390.16,
+      "end": 393.67,
+      "duration": 3.51,
+      "text": "says if those two numbers are the same"
+    },
+    {
+      "index": 171,
+      "start": 393.68,
+      "end": 395.43,
+      "duration": 1.75,
+      "text": "I'm down to a list of one just check to"
+    },
+    {
+      "index": 172,
+      "start": 395.44,
+      "end": 397.629,
+      "duration": 2.189,
+      "text": "see if it's the thing I'm looking for"
+    },
+    {
+      "index": 173,
+      "start": 397.639,
+      "end": 399.55,
+      "duration": 1.911,
+      "text": "otherwise pick something halfway in"
+    },
+    {
+      "index": 174,
+      "start": 399.56,
+      "end": 401.83,
+      "duration": 2.27,
+      "text": "between and ignore this case for the"
+    },
+    {
+      "index": 175,
+      "start": 401.84,
+      "end": 403.95,
+      "duration": 2.11,
+      "text": "moment basically then check to see is"
+    },
+    {
+      "index": 176,
+      "start": 403.96,
+      "end": 406.589,
+      "duration": 2.629,
+      "text": "the thing at that point bigger than e in"
+    },
+    {
+      "index": 177,
+      "start": 406.599,
+      "end": 408.87,
+      "duration": 2.271,
+      "text": "which case I'm in general going to call"
+    },
+    {
+      "index": 178,
+      "start": 408.88,
+      "end": 410.909,
+      "duration": 2.029,
+      "text": "this only with from the low point to the"
+    },
+    {
+      "index": 179,
+      "start": 410.919,
+      "end": 412.749,
+      "duration": 1.83,
+      "text": "midpoint otherwise I'm going to call"
+    },
+    {
+      "index": 180,
+      "start": 412.759,
+      "end": 415.39,
+      "duration": 2.631,
+      "text": "this with the midpoint to high and that"
+    },
+    {
+      "index": 181,
+      "start": 415.4,
+      "end": 417.35,
+      "duration": 1.95,
+      "text": "was just this idea of keep cutting down"
+    },
+    {
+      "index": 182,
+      "start": 417.36,
+      "end": 420.589,
+      "duration": 3.229,
+      "text": "in half the size of the list"
+    },
+    {
+      "index": 183,
+      "start": 420.599,
+      "end": 422.15,
+      "duration": 1.551,
+      "text": "last piece of the recap the thing we"
+    },
+    {
+      "index": 184,
+      "start": 422.16,
+      "end": 423.79,
+      "duration": 1.63,
+      "text": "wanted you to see here is there are the"
+    },
+    {
+      "index": 185,
+      "start": 423.8,
+      "end": 425.95,
+      "duration": 2.15,
+      "text": "two recursive calls I'm going to only"
+    },
+    {
+      "index": 186,
+      "start": 425.96,
+      "end": 427.589,
+      "duration": 1.629,
+      "text": "going to do one because I'm making a"
+    },
+    {
+      "index": 187,
+      "start": 427.599,
+      "end": 430.71,
+      "duration": 3.111,
+      "text": "decision at each step I'm cutting down"
+    },
+    {
+      "index": 188,
+      "start": 430.72,
+      "end": 433.589,
+      "duration": 2.869,
+      "text": "the problem by half and that says the"
+    },
+    {
+      "index": 189,
+      "start": 433.599,
+      "end": 435.35,
+      "duration": 1.751,
+      "text": "number of steps the number of times I'm"
+    },
+    {
+      "index": 190,
+      "start": 435.36,
+      "end": 437.309,
+      "duration": 1.949,
+      "text": "going to iterate through here will be"
+    },
+    {
+      "index": 191,
+      "start": 437.319,
+      "end": 440.189,
+      "duration": 2.87,
+      "text": "log in the length of the list and if"
+    },
+    {
+      "index": 192,
+      "start": 440.199,
+      "end": 441.629,
+      "duration": 1.43,
+      "text": "that still doesn't make sense to you it"
+    },
+    {
+      "index": 193,
+      "start": 441.639,
+      "end": 443.79,
+      "duration": 2.151,
+      "text": "says I need to know when 1 over two to"
+    },
+    {
+      "index": 194,
+      "start": 443.8,
+      "end": 446.469,
+      "duration": 2.669,
+      "text": "the K where K is the number of steps is"
+    },
+    {
+      "index": 195,
+      "start": 446.479,
+      "end": 448.23,
+      "duration": 1.751,
+      "text": "equal to one because on each step I'm"
+    },
+    {
+      "index": 196,
+      "start": 448.24,
+      "end": 450.51,
+      "duration": 2.27,
+      "text": "reducing by half and that's when K is"
+    },
+    {
+      "index": 197,
+      "start": 450.52,
+      "end": 453.869,
+      "duration": 3.349,
+      "text": "log base 2 of n so that's why it's log"
+    },
+    {
+      "index": 198,
+      "start": 453.879,
+      "end": 456.189,
+      "duration": 2.31,
+      "text": "linear and so this just reminds you"
+    },
+    {
+      "index": 199,
+      "start": 456.199,
+      "end": 459.469,
+      "duration": 3.27,
+      "text": "again that recap number of calls redu or"
+    },
+    {
+      "index": 200,
+      "start": 459.479,
+      "end": 461.189,
+      "duration": 1.71,
+      "text": "sorry the call gets reduced by factor of"
+    },
+    {
+      "index": 201,
+      "start": 461.199,
+      "end": 462.99,
+      "duration": 1.791,
+      "text": "two each time I'm going to have log in"
+    },
+    {
+      "index": 202,
+      "start": 463.0,
+      "end": 465.589,
+      "duration": 2.589,
+      "text": "work going around it and inside it's"
+    },
+    {
+      "index": 203,
+      "start": 465.599,
+      "end": 467.589,
+      "duration": 1.99,
+      "text": "constant amount of work because I'm just"
+    },
+    {
+      "index": 204,
+      "start": 467.599,
+      "end": 469.67,
+      "duration": 2.071,
+      "text": "passing the pointers not actually"
+    },
+    {
+      "index": 205,
+      "start": 469.68,
+      "end": 471.51,
+      "duration": 1.83,
+      "text": "copying the list and that's a nice state"
+    },
+    {
+      "index": 206,
+      "start": 471.52,
+      "end": 472.67,
+      "duration": 1.15,
+      "text": "to"
+    },
+    {
+      "index": 207,
+      "start": 472.68,
+      "end": 474.629,
+      "duration": 1.949,
+      "text": "be okay"
+    },
+    {
+      "index": 208,
+      "start": 474.639,
+      "end": 478.23,
+      "duration": 3.591,
+      "text": "so sounds good could just use linear"
+    },
+    {
+      "index": 209,
+      "start": 478.24,
+      "end": 479.909,
+      "duration": 1.669,
+      "text": "search it's going to be linear when you"
+    },
+    {
+      "index": 210,
+      "start": 479.919,
+      "end": 482.869,
+      "duration": 2.95,
+      "text": "use binary search or bsection search um"
+    },
+    {
+      "index": 211,
+      "start": 482.879,
+      "end": 485.55,
+      "duration": 2.671,
+      "text": "we can do it in log time that's great we"
+    },
+    {
+      "index": 212,
+      "start": 485.56,
+      "end": 487.469,
+      "duration": 1.909,
+      "text": "assumed the list was sorted but all"
+    },
+    {
+      "index": 213,
+      "start": 487.479,
+      "end": 489.35,
+      "duration": 1.871,
+      "text": "right"
+    },
+    {
+      "index": 214,
+      "start": 489.36,
+      "end": 492.309,
+      "duration": 2.949,
+      "text": "so that Les basically says okay so when"
+    },
+    {
+      "index": 215,
+      "start": 492.319,
+      "end": 495.869,
+      "duration": 3.55,
+      "text": "does it make sense to sort the list and"
+    },
+    {
+      "index": 216,
+      "start": 495.879,
+      "end": 498.67,
+      "duration": 2.791,
+      "text": "then do the search right because if I"
+    },
+    {
+      "index": 217,
+      "start": 498.68,
+      "end": 500.67,
+      "duration": 1.99,
+      "text": "can sort the list cheaply then the"
+    },
+    {
+      "index": 218,
+      "start": 500.68,
+      "end": 502.27,
+      "duration": 1.59,
+      "text": "search is going to be logarithmic that's"
+    },
+    {
+      "index": 219,
+      "start": 502.28,
+      "end": 503.629,
+      "duration": 1.349,
+      "text": "really what I would"
+    },
+    {
+      "index": 220,
+      "start": 503.639,
+      "end": 506.189,
+      "duration": 2.55,
+      "text": "like this little expression basically"
+    },
+    {
+      "index": 221,
+      "start": 506.199,
+      "end": 508.629,
+      "duration": 2.43,
+      "text": "says let's let sort be the cost of"
+    },
+    {
+      "index": 222,
+      "start": 508.639,
+      "end": 509.99,
+      "duration": 1.351,
+      "text": "sorting the list"
+    },
+    {
+      "index": 223,
+      "start": 510.0,
+      "end": 512.31,
+      "duration": 2.31,
+      "text": "I want to know when that cost plus"
+    },
+    {
+      "index": 224,
+      "start": 512.32,
+      "end": 513.949,
+      "duration": 1.629,
+      "text": "something that's order log in which is"
+    },
+    {
+      "index": 225,
+      "start": 513.959,
+      "end": 515.269,
+      "duration": 1.31,
+      "text": "what it's going to cost me to do the"
+    },
+    {
+      "index": 226,
+      "start": 515.279,
+      "end": 518.55,
+      "duration": 3.271,
+      "text": "search when is that less than something"
+    },
+    {
+      "index": 227,
+      "start": 518.56,
+      "end": 521.029,
+      "duration": 2.469,
+      "text": "that's order n because then it's going"
+    },
+    {
+      "index": 228,
+      "start": 521.039,
+      "end": 522.709,
+      "duration": 1.67,
+      "text": "to be better to do the sort first and do"
+    },
+    {
+      "index": 229,
+      "start": 522.719,
+      "end": 524.79,
+      "duration": 2.071,
+      "text": "the search and so I can just rearrange"
+    },
+    {
+      "index": 230,
+      "start": 524.8,
+      "end": 526.59,
+      "duration": 1.79,
+      "text": "it it needs to be when does the cost of"
+    },
+    {
+      "index": 231,
+      "start": 526.6,
+      "end": 528.949,
+      "duration": 2.349,
+      "text": "sorting when is it less than this"
+    },
+    {
+      "index": 232,
+      "start": 528.959,
+      "end": 531.55,
+      "duration": 2.591,
+      "text": "expression which basically says when is"
+    },
+    {
+      "index": 233,
+      "start": 531.56,
+      "end": 533.79,
+      "duration": 2.23,
+      "text": "sorting going to be less expensive than"
+    },
+    {
+      "index": 234,
+      "start": 533.8,
+      "end": 536.75,
+      "duration": 2.95,
+      "text": "the linear"
+    },
+    {
+      "index": 235,
+      "start": 538.43,
+      "end": 538.44,
+      "duration": 0.01,
+      "text": "cost"
+    },
+    {
+      "index": 236,
+      "start": 538.44,
+      "end": 540.63,
+      "duration": 2.19,
+      "text": "crud actually good news for you right"
+    },
+    {
+      "index": 237,
+      "start": 540.64,
+      "end": 542.99,
+      "duration": 2.35,
+      "text": "this is a really short lecture because"
+    },
+    {
+      "index": 238,
+      "start": 543.0,
+      "end": 546.63,
+      "duration": 3.63,
+      "text": "it says it's never true ouch don't worry"
+    },
+    {
+      "index": 239,
+      "start": 546.64,
+      "end": 549.11,
+      "duration": 2.47,
+      "text": "we got more to go in the lecture the"
+    },
+    {
+      "index": 240,
+      "start": 549.12,
+      "end": 550.829,
+      "duration": 1.709,
+      "text": "reason it can't be true if you think"
+    },
+    {
+      "index": 241,
+      "start": 550.839,
+      "end": 552.63,
+      "duration": 1.791,
+      "text": "about it just informally is if I've got"
+    },
+    {
+      "index": 242,
+      "start": 552.64,
+      "end": 554.91,
+      "duration": 2.27,
+      "text": "a collection of n elements and I want to"
+    },
+    {
+      "index": 243,
+      "start": 554.92,
+      "end": 558.269,
+      "duration": 3.349,
+      "text": "sort it I've got to look at Le each one"
+    },
+    {
+      "index": 244,
+      "start": 558.279,
+      "end": 561.35,
+      "duration": 3.071,
+      "text": "of those elements at least once right I"
+    },
+    {
+      "index": 245,
+      "start": 561.36,
+      "end": 562.67,
+      "duration": 1.31,
+      "text": "have to look at them to decide where"
+    },
+    {
+      "index": 246,
+      "start": 562.68,
+      "end": 566.11,
+      "duration": 3.43,
+      "text": "they go oh that's n elements so sorting"
+    },
+    {
+      "index": 247,
+      "start": 566.12,
+      "end": 568.31,
+      "duration": 2.19,
+      "text": "must be at least order n because I got"
+    },
+    {
+      "index": 248,
+      "start": 568.32,
+      "end": 571.069,
+      "duration": 2.749,
+      "text": "to look at everything and in fact as it"
+    },
+    {
+      "index": 249,
+      "start": 571.079,
+      "end": 572.71,
+      "duration": 1.631,
+      "text": "says there I'm going to have to use at"
+    },
+    {
+      "index": 250,
+      "start": 572.72,
+      "end": 575.79,
+      "duration": 3.07,
+      "text": "least linear time to do the"
+    },
+    {
+      "index": 251,
+      "start": 575.8,
+      "end": 579.509,
+      "duration": 3.709,
+      "text": "sort sounds like we're stuck but we're"
+    },
+    {
+      "index": 252,
+      "start": 579.519,
+      "end": 582.55,
+      "duration": 3.031,
+      "text": "not and the reason is often when I want"
+    },
+    {
+      "index": 253,
+      "start": 582.56,
+      "end": 584.55,
+      "duration": 1.99,
+      "text": "to search something I'm going to do"
+    },
+    {
+      "index": 254,
+      "start": 584.56,
+      "end": 587.15,
+      "duration": 2.59,
+      "text": "multiple searches but I may only want to"
+    },
+    {
+      "index": 255,
+      "start": 587.16,
+      "end": 588.87,
+      "duration": 1.71,
+      "text": "sort the list once in fact I probably"
+    },
+    {
+      "index": 256,
+      "start": 588.88,
+      "end": 591.75,
+      "duration": 2.87,
+      "text": "only want to sort the list once so in"
+    },
+    {
+      "index": 257,
+      "start": 591.76,
+      "end": 594.03,
+      "duration": 2.27,
+      "text": "that case I'm spreading out the cost I'm"
+    },
+    {
+      "index": 258,
+      "start": 594.04,
+      "end": 597.47,
+      "duration": 3.43,
+      "text": "amortising the expense of the sort and"
+    },
+    {
+      "index": 259,
+      "start": 597.48,
+      "end": 599.23,
+      "duration": 1.75,
+      "text": "now what I want to know is if I'm going"
+    },
+    {
+      "index": 260,
+      "start": 599.24,
+      "end": 602.31,
+      "duration": 3.07,
+      "text": "to do K searches the cost of those K"
+    },
+    {
+      "index": 261,
+      "start": 602.32,
+      "end": 605.069,
+      "duration": 2.749,
+      "text": "searches I know is going to be K log in"
+    },
+    {
+      "index": 262,
+      "start": 605.079,
+      "end": 607.069,
+      "duration": 1.99,
+      "text": "because it's loged to do the search and"
+    },
+    {
+      "index": 263,
+      "start": 607.079,
+      "end": 609.35,
+      "duration": 2.271,
+      "text": "I simply need to know is the cost of"
+    },
+    {
+      "index": 264,
+      "start": 609.36,
+      "end": 612.19,
+      "duration": 2.83,
+      "text": "sorting plus this can I have something"
+    },
+    {
+      "index": 265,
+      "start": 612.2,
+      "end": 614.75,
+      "duration": 2.55,
+      "text": "where it's less than case searches just"
+    },
+    {
+      "index": 266,
+      "start": 614.76,
+      "end": 618.069,
+      "duration": 3.309,
+      "text": "using linear search and the answer is"
+    },
+    {
+      "index": 267,
+      "start": 618.079,
+      "end": 621.23,
+      "duration": 3.151,
+      "text": "yes there are going to be for large case"
+    },
+    {
+      "index": 268,
+      "start": 621.24,
+      "end": 623.03,
+      "duration": 1.79,
+      "text": "ways in which we can do the sort where"
+    },
+    {
+      "index": 269,
+      "start": 623.04,
+      "end": 625.31,
+      "duration": 2.27,
+      "text": "the sort time becomes irrelevant that"
+    },
+    {
+      "index": 270,
+      "start": 625.32,
+      "end": 627.63,
+      "duration": 2.31,
+      "text": "the cost is really dominated by the"
+    },
+    {
+      "index": 271,
+      "start": 627.64,
+      "end": 629.91,
+      "duration": 2.27,
+      "text": "search and so what I want want to do now"
+    },
+    {
+      "index": 272,
+      "start": 629.92,
+      "end": 631.91,
+      "duration": 1.99,
+      "text": "is look at all right how could we do the"
+    },
+    {
+      "index": 273,
+      "start": 631.92,
+      "end": 634.67,
+      "duration": 2.75,
+      "text": "sort reasonably efficiently it's going"
+    },
+    {
+      "index": 274,
+      "start": 634.68,
+      "end": 635.87,
+      "duration": 1.19,
+      "text": "to have to be at least linear we're"
+    },
+    {
+      "index": 275,
+      "start": 635.88,
+      "end": 636.75,
+      "duration": 0.87,
+      "text": "going to see it's going to be a little"
+    },
+    {
+      "index": 276,
+      "start": 636.76,
+      "end": 638.71,
+      "duration": 1.95,
+      "text": "more than linear but if I could do it"
+    },
+    {
+      "index": 277,
+      "start": 638.72,
+      "end": 640.75,
+      "duration": 2.03,
+      "text": "reasonably I'm going to be in good shape"
+    },
+    {
+      "index": 278,
+      "start": 640.76,
+      "end": 643.269,
+      "duration": 2.509,
+      "text": "here so what I want to do is show you a"
+    },
+    {
+      "index": 279,
+      "start": 643.279,
+      "end": 645.269,
+      "duration": 1.99,
+      "text": "number of ways in which we can do"
+    },
+    {
+      "index": 280,
+      "start": 645.279,
+      "end": 647.47,
+      "duration": 2.191,
+      "text": "sorting take a list of elements and sort"
+    },
+    {
+      "index": 281,
+      "start": 647.48,
+      "end": 649.71,
+      "duration": 2.23,
+      "text": "them from in this case smaller to higher"
+    },
+    {
+      "index": 282,
+      "start": 649.72,
+      "end": 651.829,
+      "duration": 2.109,
+      "text": "or in in increasing"
+    },
+    {
+      "index": 283,
+      "start": 651.839,
+      "end": 654.59,
+      "duration": 2.751,
+      "text": "order so here's my goal I want to"
+    },
+    {
+      "index": 284,
+      "start": 654.6,
+      "end": 656.75,
+      "duration": 2.15,
+      "text": "efficiently sort a list I want to see if"
+    },
+    {
+      "index": 285,
+      "start": 656.76,
+      "end": 658.23,
+      "duration": 1.47,
+      "text": "we can do this as efficiently as"
+    },
+    {
+      "index": 286,
+      "start": 658.24,
+      "end": 660.79,
+      "duration": 2.55,
+      "text": "possible"
+    },
+    {
+      "index": 287,
+      "start": 660.8,
+      "end": 661.75,
+      "duration": 0.95,
+      "text": "I'm going to"
+    },
+    {
+      "index": 288,
+      "start": 661.76,
+      "end": 663.949,
+      "duration": 2.189,
+      "text": "start I'm going to say with a humorous"
+    },
+    {
+      "index": 289,
+      "start": 663.959,
+      "end": 665.87,
+      "duration": 1.911,
+      "text": "version of sort you've all convinced"
+    },
+    {
+      "index": 290,
+      "start": 665.88,
+      "end": 667.67,
+      "duration": 1.79,
+      "text": "that my humor is non-existent you're"
+    },
+    {
+      "index": 291,
+      "start": 667.68,
+      "end": 669.75,
+      "duration": 2.07,
+      "text": "right but it sets the stage for this is"
+    },
+    {
+      "index": 292,
+      "start": 669.76,
+      "end": 671.19,
+      "duration": 1.43,
+      "text": "a sort you can look it up it's called"
+    },
+    {
+      "index": 293,
+      "start": 671.2,
+      "end": 673.509,
+      "duration": 2.309,
+      "text": "monkey sort BOGO sort stupid sort slow"
+    },
+    {
+      "index": 294,
+      "start": 673.519,
+      "end": 676.11,
+      "duration": 2.591,
+      "text": "sort permutation sort shotgun sort and"
+    },
+    {
+      "index": 295,
+      "start": 676.12,
+      "end": 678.23,
+      "duration": 2.11,
+      "text": "here's how it works Anna has nicely"
+    },
+    {
+      "index": 296,
+      "start": 678.24,
+      "end": 680.629,
+      "duration": 2.389,
+      "text": "given me a set of numbers on cards here"
+    },
+    {
+      "index": 297,
+      "start": 680.639,
+      "end": 683.069,
+      "duration": 2.43,
+      "text": "here's how you do BOGO"
+    },
+    {
+      "index": 298,
+      "start": 683.079,
+      "end": 685.59,
+      "duration": 2.511,
+      "text": "sort I got to do that better I got to"
+    },
+    {
+      "index": 299,
+      "start": 685.6,
+      "end": 689.629,
+      "duration": 4.029,
+      "text": "spread them out randomly like this oh"
+    },
+    {
+      "index": 300,
+      "start": 689.639,
+      "end": 690.91,
+      "duration": 1.271,
+      "text": "good I'm going to have to sorry Tom I'm"
+    },
+    {
+      "index": 301,
+      "start": 690.92,
+      "end": 692.269,
+      "duration": 1.349,
+      "text": "now walking and now I picked them up"
+    },
+    {
+      "index": 302,
+      "start": 692.279,
+      "end": 695.11,
+      "duration": 2.831,
+      "text": "saying is that less than this Which is"
+    },
+    {
+      "index": 303,
+      "start": 695.12,
+      "end": 699.15,
+      "duration": 4.03,
+      "text": "less than o crud they're not sorted all"
+    },
+    {
+      "index": 304,
+      "start": 699.16,
+      "end": 701.91,
+      "duration": 2.75,
+      "text": "right I pick them all"
+    },
+    {
+      "index": 305,
+      "start": 701.92,
+      "end": 705.75,
+      "duration": 3.83,
+      "text": "up and I do it again a little brain"
+    },
+    {
+      "index": 306,
+      "start": 705.76,
+      "end": 708.75,
+      "duration": 2.99,
+      "text": "damage right now it's intended to get"
+    },
+    {
+      "index": 307,
+      "start": 708.76,
+      "end": 710.35,
+      "duration": 1.59,
+      "text": "your attention I did I heard a couple of"
+    },
+    {
+      "index": 308,
+      "start": 710.36,
+      "end": 712.03,
+      "duration": 1.67,
+      "text": "Chuckles those are a students by the way"
+    },
+    {
+      "index": 309,
+      "start": 712.04,
+      "end": 713.79,
+      "duration": 1.75,
+      "text": "I heard a couple of Chuckles"
+    },
+    {
+      "index": 310,
+      "start": 713.8,
+      "end": 717.35,
+      "duration": 3.55,
+      "text": "here we could actually do this"
+    },
+    {
+      "index": 311,
+      "start": 717.36,
+      "end": 719.31,
+      "duration": 1.95,
+      "text": "exhaustively basically it's called"
+    },
+    {
+      "index": 312,
+      "start": 719.32,
+      "end": 720.71,
+      "duration": 1.39,
+      "text": "permutation sort because you could"
+    },
+    {
+      "index": 313,
+      "start": 720.72,
+      "end": 723.509,
+      "duration": 2.789,
+      "text": "search through all possible permutations"
+    },
+    {
+      "index": 314,
+      "start": 723.519,
+      "end": 725.47,
+      "duration": 1.951,
+      "text": "to see if you find something that's"
+    },
+    {
+      "index": 315,
+      "start": 725.48,
+      "end": 728.43,
+      "duration": 2.95,
+      "text": "sorted that by the way the complexity of"
+    },
+    {
+      "index": 316,
+      "start": 728.44,
+      "end": 731.91,
+      "duration": 3.47,
+      "text": "that is something like n factorial which"
+    },
+    {
+      "index": 317,
+      "start": 731.92,
+      "end": 735.23,
+      "duration": 3.31,
+      "text": "for large n is n to the nth"
+    },
+    {
+      "index": 318,
+      "start": 735.24,
+      "end": 737.59,
+      "duration": 2.35,
+      "text": "power and if 's anything bigger than"
+    },
+    {
+      "index": 319,
+      "start": 737.6,
+      "end": 740.15,
+      "duration": 2.55,
+      "text": "about two don't do it all right but it"
+    },
+    {
+      "index": 320,
+      "start": 740.16,
+      "end": 741.629,
+      "duration": 1.469,
+      "text": "would be a way to think about doing this"
+    },
+    {
+      "index": 321,
+      "start": 741.639,
+      "end": 742.67,
+      "duration": 1.031,
+      "text": "all right now having caught in the"
+    },
+    {
+      "index": 322,
+      "start": 742.68,
+      "end": 744.91,
+      "duration": 2.23,
+      "text": "humorous version of this how could we do"
+    },
+    {
+      "index": 323,
+      "start": 744.92,
+      "end": 746.99,
+      "duration": 2.07,
+      "text": "this a little bit"
+    },
+    {
+      "index": 324,
+      "start": 747.0,
+      "end": 749.23,
+      "duration": 2.23,
+      "text": "better oh sorry I should say What's the"
+    },
+    {
+      "index": 325,
+      "start": 749.24,
+      "end": 751.03,
+      "duration": 1.79,
+      "text": "complexity there is a nice crisp"
+    },
+    {
+      "index": 326,
+      "start": 751.04,
+      "end": 752.59,
+      "duration": 1.55,
+      "text": "definition of BOGO"
+    },
+    {
+      "index": 327,
+      "start": 752.6,
+      "end": 755.629,
+      "duration": 3.029,
+      "text": "sort its best case is order n because I"
+    },
+    {
+      "index": 328,
+      "start": 755.639,
+      "end": 758.43,
+      "duration": 2.791,
+      "text": "just need to check it sorted its average"
+    },
+    {
+      "index": 329,
+      "start": 758.44,
+      "end": 761.189,
+      "duration": 2.749,
+      "text": "case is n factorial and its worst case"
+    },
+    {
+      "index": 330,
+      "start": 761.199,
+      "end": 762.949,
+      "duration": 1.75,
+      "text": "if I'm just doing it randomly as God"
+    },
+    {
+      "index": 331,
+      "start": 762.959,
+      "end": 764.79,
+      "duration": 1.831,
+      "text": "knows because I could be doing it here"
+    },
+    {
+      "index": 332,
+      "start": 764.8,
+      "end": 766.91,
+      "duration": 2.11,
+      "text": "forever so we're going to move"
+    },
+    {
+      "index": 333,
+      "start": 766.92,
+      "end": 770.509,
+      "duration": 3.589,
+      "text": "on here's a second way to do it called"
+    },
+    {
+      "index": 334,
+      "start": 770.519,
+      "end": 771.949,
+      "duration": 1.43,
+      "text": "Bubble sword I'm going to do this with a"
+    },
+    {
+      "index": 335,
+      "start": 771.959,
+      "end": 773.31,
+      "duration": 1.351,
+      "text": "small version of this I'm going to put"
+    },
+    {
+      "index": 336,
+      "start": 773.32,
+      "end": 774.949,
+      "duration": 1.629,
+      "text": "out a set I'll turn these up so you can"
+    },
+    {
+      "index": 337,
+      "start": 774.959,
+      "end": 776.829,
+      "duration": 1.87,
+      "text": "see them in a"
+    },
+    {
+      "index": 338,
+      "start": 776.839,
+      "end": 779.15,
+      "duration": 2.311,
+      "text": "second the idea of bubble sword is I'm"
+    },
+    {
+      "index": 339,
+      "start": 779.16,
+      "end": 780.629,
+      "duration": 1.469,
+      "text": "I'm going to start at I'm going to call"
+    },
+    {
+      "index": 340,
+      "start": 780.639,
+      "end": 782.35,
+      "duration": 1.711,
+      "text": "this the front end of the list and I'm"
+    },
+    {
+      "index": 341,
+      "start": 782.36,
+      "end": 783.91,
+      "duration": 1.55,
+      "text": "going to walk down comparing elements"
+    },
+    {
+      "index": 342,
+      "start": 783.92,
+      "end": 786.47,
+      "duration": 2.55,
+      "text": "one pairwise and I'm always going to"
+    },
+    {
+      "index": 343,
+      "start": 786.48,
+      "end": 789.11,
+      "duration": 2.63,
+      "text": "move the larger one over so I start here"
+    },
+    {
+      "index": 344,
+      "start": 789.12,
+      "end": 792.829,
+      "duration": 3.709,
+      "text": "and I say one's less than 11 I'm okay"
+    },
+    {
+      "index": 345,
+      "start": 792.839,
+      "end": 794.829,
+      "duration": 1.99,
+      "text": "11's bigger than five I'm going to"
+    },
+    {
+      "index": 346,
+      "start": 794.839,
+      "end": 797.71,
+      "duration": 2.871,
+      "text": "bubble that up 11's bigger than six I'm"
+    },
+    {
+      "index": 347,
+      "start": 797.72,
+      "end": 799.67,
+      "duration": 1.95,
+      "text": "going to bubble that up 11's bigger than"
+    },
+    {
+      "index": 348,
+      "start": 799.68,
+      "end": 802.59,
+      "duration": 2.91,
+      "text": "two I've basically bubbled 11 to the end"
+    },
+    {
+      "index": 349,
+      "start": 802.6,
+      "end": 804.31,
+      "duration": 1.71,
+      "text": "now I go back here I say one is less"
+    },
+    {
+      "index": 350,
+      "start": 804.32,
+      "end": 806.67,
+      "duration": 2.35,
+      "text": "than five that's good five is less than"
+    },
+    {
+      "index": 351,
+      "start": 806.68,
+      "end": 808.91,
+      "duration": 2.23,
+      "text": "six that's good ah six is bigger than"
+    },
+    {
+      "index": 352,
+      "start": 808.92,
+      "end": 813.35,
+      "duration": 4.43,
+      "text": "two two bubble that six is less than 11"
+    },
+    {
+      "index": 353,
+      "start": 813.36,
+      "end": 816.189,
+      "duration": 2.829,
+      "text": "you get the idea comparison comparison"
+    },
+    {
+      "index": 354,
+      "start": 816.199,
+      "end": 820.269,
+      "duration": 4.07,
+      "text": "and swap comparison comparison and now"
+    },
+    {
+      "index": 355,
+      "start": 820.279,
+      "end": 821.87,
+      "duration": 1.591,
+      "text": "if I go back to this part and do it"
+    },
+    {
+      "index": 356,
+      "start": 821.88,
+      "end": 824.43,
+      "duration": 2.55,
+      "text": "you'll notice that's in the right order"
+    },
+    {
+      "index": 357,
+      "start": 824.44,
+      "end": 826.67,
+      "duration": 2.23,
+      "text": "that's in the right order that's in the"
+    },
+    {
+      "index": 358,
+      "start": 826.68,
+      "end": 829.31,
+      "duration": 2.63,
+      "text": "right order that's in the right order"
+    },
+    {
+      "index": 359,
+      "start": 829.32,
+      "end": 830.35,
+      "duration": 1.03,
+      "text": "I'm"
+    },
+    {
+      "index": 360,
+      "start": 830.36,
+      "end": 832.749,
+      "duration": 2.389,
+      "text": "done small round of applause please I"
+    },
+    {
+      "index": 361,
+      "start": 832.759,
+      "end": 836.15,
+      "duration": 3.391,
+      "text": "was able to sort five elements thank"
+    },
+    {
+      "index": 362,
+      "start": 836.16,
+      "end": 838.55,
+      "duration": 2.39,
+      "text": "you the little video was sort of showing"
+    },
+    {
+      "index": 363,
+      "start": 838.56,
+      "end": 840.509,
+      "duration": 1.949,
+      "text": "the same thing you can see the idea here"
+    },
+    {
+      "index": 364,
+      "start": 840.519,
+      "end": 841.71,
+      "duration": 1.191,
+      "text": "it's called bubble sort because you're"
+    },
+    {
+      "index": 365,
+      "start": 841.72,
+      "end": 843.949,
+      "duration": 2.229,
+      "text": "literally bubbling things up uh to the"
+    },
+    {
+      "index": 366,
+      "start": 843.959,
+      "end": 846.23,
+      "duration": 2.271,
+      "text": "end of the list it's pretty simple to do"
+    },
+    {
+      "index": 367,
+      "start": 846.24,
+      "end": 848.269,
+      "duration": 2.029,
+      "text": "you're just swapping Pairs and as you"
+    },
+    {
+      "index": 368,
+      "start": 848.279,
+      "end": 849.749,
+      "duration": 1.47,
+      "text": "saw when I get to the end of the list I"
+    },
+    {
+      "index": 369,
+      "start": 849.759,
+      "end": 851.59,
+      "duration": 1.831,
+      "text": "go back and do it until I have a pass"
+    },
+    {
+      "index": 370,
+      "start": 851.6,
+      "end": 853.11,
+      "duration": 1.51,
+      "text": "where I go all the way through the list"
+    },
+    {
+      "index": 371,
+      "start": 853.12,
+      "end": 855.389,
+      "duration": 2.269,
+      "text": "and I don't do any swaps and in that"
+    },
+    {
+      "index": 372,
+      "start": 855.399,
+      "end": 856.509,
+      "duration": 1.11,
+      "text": "case I know I'm done because"
+    },
+    {
+      "index": 373,
+      "start": 856.519,
+      "end": 858.87,
+      "duration": 2.351,
+      "text": "everything's in order and I can stop one"
+    },
+    {
+      "index": 374,
+      "start": 858.88,
+      "end": 860.509,
+      "duration": 1.629,
+      "text": "of the properties of it is that the"
+    },
+    {
+      "index": 375,
+      "start": 860.519,
+      "end": 862.829,
+      "duration": 2.31,
+      "text": "largest unsorted element is always at"
+    },
+    {
+      "index": 376,
+      "start": 862.839,
+      "end": 866.43,
+      "duration": 3.591,
+      "text": "the end after the pass in other words"
+    },
+    {
+      "index": 377,
+      "start": 866.44,
+      "end": 867.67,
+      "duration": 1.23,
+      "text": "after the first one I know that the"
+    },
+    {
+      "index": 378,
+      "start": 867.68,
+      "end": 869.11,
+      "duration": 1.43,
+      "text": "largest elements at the end after the"
+    },
+    {
+      "index": 379,
+      "start": 869.12,
+      "end": 870.629,
+      "duration": 1.509,
+      "text": "the second one the largest thing left is"
+    },
+    {
+      "index": 380,
+      "start": 870.639,
+      "end": 872.55,
+      "duration": 1.911,
+      "text": "going to be in the next place and that"
+    },
+    {
+      "index": 381,
+      "start": 872.56,
+      "end": 875.03,
+      "duration": 2.47,
+      "text": "tells me among other things that this is"
+    },
+    {
+      "index": 382,
+      "start": 875.04,
+      "end": 877.509,
+      "duration": 2.469,
+      "text": "going to take no more than n times"
+    },
+    {
+      "index": 383,
+      "start": 877.519,
+      "end": 880.15,
+      "duration": 2.631,
+      "text": "through the list to succeed might"
+    },
+    {
+      "index": 384,
+      "start": 880.16,
+      "end": 881.629,
+      "duration": 1.469,
+      "text": "actually take fewer than"
+    },
+    {
+      "index": 385,
+      "start": 881.639,
+      "end": 883.269,
+      "duration": 1.63,
+      "text": "that"
+    },
+    {
+      "index": 386,
+      "start": 883.279,
+      "end": 885.55,
+      "duration": 2.271,
+      "text": "okay again let's look at some code for"
+    },
+    {
+      "index": 387,
+      "start": 885.56,
+      "end": 886.949,
+      "duration": 1.389,
+      "text": "it let's look at its complexity and"
+    },
+    {
+      "index": 388,
+      "start": 886.959,
+      "end": 889.35,
+      "duration": 2.391,
+      "text": "let's actually run this so here is a"
+    },
+    {
+      "index": 389,
+      "start": 889.36,
+      "end": 892.15,
+      "duration": 2.79,
+      "text": "little simple version of bubble sort I'm"
+    },
+    {
+      "index": 390,
+      "start": 892.16,
+      "end": 894.069,
+      "duration": 1.909,
+      "text": "going to set a flag up here I'm going to"
+    },
+    {
+      "index": 391,
+      "start": 894.079,
+      "end": 896.67,
+      "duration": 2.591,
+      "text": "call it swap initially to false that's"
+    },
+    {
+      "index": 392,
+      "start": 896.68,
+      "end": 898.43,
+      "duration": 1.75,
+      "text": "going to let me tell when I'm done when"
+    },
+    {
+      "index": 393,
+      "start": 898.44,
+      "end": 900.069,
+      "duration": 1.629,
+      "text": "I'm gone through everything in the list"
+    },
+    {
+      "index": 394,
+      "start": 900.079,
+      "end": 902.23,
+      "duration": 2.151,
+      "text": "without doing a swap and then I'm going"
+    },
+    {
+      "index": 395,
+      "start": 902.24,
+      "end": 904.949,
+      "duration": 2.709,
+      "text": "to loop as long as swap is false so the"
+    },
+    {
+      "index": 396,
+      "start": 904.959,
+      "end": 906.189,
+      "duration": 1.23,
+      "text": "first time through it's going to do that"
+    },
+    {
+      "index": 397,
+      "start": 906.199,
+      "end": 909.15,
+      "duration": 2.951,
+      "text": "loop I set swap initially to true and"
+    },
+    {
+      "index": 398,
+      "start": 909.16,
+      "end": 912.509,
+      "duration": 3.349,
+      "text": "notice what I then do I let J range from"
+    },
+    {
+      "index": 399,
+      "start": 912.519,
+      "end": 915.91,
+      "duration": 3.391,
+      "text": "one up to the length of the list and I"
+    },
+    {
+      "index": 400,
+      "start": 915.92,
+      "end": 918.269,
+      "duration": 2.349,
+      "text": "look at the jth element and the previous"
+    },
+    {
+      "index": 401,
+      "start": 918.279,
+      "end": 920.949,
+      "duration": 2.67,
+      "text": "element If the previous element is"
+    },
+    {
+      "index": 402,
+      "start": 920.959,
+      "end": 923.59,
+      "duration": 2.631,
+      "text": "bigger I'm going to flip them right"
+    },
+    {
+      "index": 403,
+      "start": 923.6,
+      "end": 925.35,
+      "duration": 1.75,
+      "text": "there and that's just doing that swap"
+    },
+    {
+      "index": 404,
+      "start": 925.36,
+      "end": 927.949,
+      "duration": 2.589,
+      "text": "what I just did down here and if that's"
+    },
+    {
+      "index": 405,
+      "start": 927.959,
+      "end": 930.11,
+      "duration": 2.151,
+      "text": "the case I'm going to set the flag to"
+    },
+    {
+      "index": 406,
+      "start": 930.12,
+      "end": 932.23,
+      "duration": 2.11,
+      "text": "false which says I've done at least one"
+    },
+    {
+      "index": 407,
+      "start": 932.24,
+      "end": 934.59,
+      "duration": 2.35,
+      "text": "bubble as part of this which means when"
+    },
+    {
+      "index": 408,
+      "start": 934.6,
+      "end": 936.11,
+      "duration": 1.51,
+      "text": "I come out of here and go back around to"
+    },
+    {
+      "index": 409,
+      "start": 936.12,
+      "end": 938.03,
+      "duration": 1.91,
+      "text": "the loop it's going to do it again and"
+    },
+    {
+      "index": 410,
+      "start": 938.04,
+      "end": 941.629,
+      "duration": 3.589,
+      "text": "it will do it until all of this succeeds"
+    },
+    {
+      "index": 411,
+      "start": 941.639,
+      "end": 943.15,
+      "duration": 1.511,
+      "text": "without this ever being true in which"
+    },
+    {
+      "index": 412,
+      "start": 943.16,
+      "end": 945.03,
+      "duration": 1.87,
+      "text": "case that's true which makes that false"
+    },
+    {
+      "index": 413,
+      "start": 945.04,
+      "end": 947.15,
+      "duration": 2.11,
+      "text": "and it will drop"
+    },
+    {
+      "index": 414,
+      "start": 947.16,
+      "end": 949.269,
+      "duration": 2.109,
+      "text": "out"
+    },
+    {
+      "index": 415,
+      "start": 949.279,
+      "end": 951.509,
+      "duration": 2.23,
+      "text": "okay let's look at an example of this"
+    },
+    {
+      "index": 416,
+      "start": 951.519,
+      "end": 954.03,
+      "duration": 2.511,
+      "text": "running it's just to give you a sense of"
+    },
+    {
+      "index": 417,
+      "start": 954.04,
+      "end": 956.749,
+      "duration": 2.709,
+      "text": "that assuming I can find the right place"
+    },
+    {
+      "index": 418,
+      "start": 956.759,
+      "end": 960.03,
+      "duration": 3.271,
+      "text": "here so there's again a version of sort"
+    },
+    {
+      "index": 419,
+      "start": 960.04,
+      "end": 961.87,
+      "duration": 1.83,
+      "text": "um on the side and I'm going to bring"
+    },
+    {
+      "index": 420,
+      "start": 961.88,
+      "end": 963.87,
+      "duration": 1.99,
+      "text": "this down to the bottom I've got a"
+    },
+    {
+      "index": 421,
+      "start": 963.88,
+      "end": 965.749,
+      "duration": 1.869,
+      "text": "little test list there and I'm just I've"
+    },
+    {
+      "index": 422,
+      "start": 965.759,
+      "end": 967.629,
+      "duration": 1.87,
+      "text": "put a a print statement in it so you can"
+    },
+    {
+      "index": 423,
+      "start": 967.639,
+      "end": 969.87,
+      "duration": 2.231,
+      "text": "see each time through the loop what's"
+    },
+    {
+      "index": 424,
+      "start": 969.88,
+      "end": 972.47,
+      "duration": 2.59,
+      "text": "the form of the list as it starts and"
+    },
+    {
+      "index": 425,
+      "start": 972.48,
+      "end": 974.79,
+      "duration": 2.31,
+      "text": "assuming I've done this"
+    },
+    {
+      "index": 426,
+      "start": 974.8,
+      "end": 976.829,
+      "duration": 2.029,
+      "text": "right there you"
+    },
+    {
+      "index": 427,
+      "start": 976.839,
+      "end": 979.189,
+      "duration": 2.35,
+      "text": "go there's the list the first time"
+    },
+    {
+      "index": 428,
+      "start": 979.199,
+      "end": 983.309,
+      "duration": 4.11,
+      "text": "through notice after one pass 25's at"
+    },
+    {
+      "index": 429,
+      "start": 983.319,
+      "end": 984.829,
+      "duration": 1.51,
+      "text": "the end of the list the biggest element"
+    },
+    {
+      "index": 430,
+      "start": 984.839,
+      "end": 986.389,
+      "duration": 1.55,
+      "text": "exactly what I like but you can also see"
+    },
+    {
+      "index": 431,
+      "start": 986.399,
+      "end": 988.509,
+      "duration": 2.11,
+      "text": "a few other things have flipped right"
+    },
+    {
+      "index": 432,
+      "start": 988.519,
+      "end": 989.79,
+      "duration": 1.271,
+      "text": "right in there there have been some"
+    },
+    {
+      "index": 433,
+      "start": 989.8,
+      "end": 992.43,
+      "duration": 2.63,
+      "text": "other swaps as it bubbled through and in"
+    },
+    {
+      "index": 434,
+      "start": 992.44,
+      "end": 995.189,
+      "duration": 2.749,
+      "text": "fact uh you can see uh it's well you can"
+    },
+    {
+      "index": 435,
+      "start": 995.199,
+      "end": 996.949,
+      "duration": 1.75,
+      "text": "see that idea you can see 25 moving"
+    },
+    {
+      "index": 436,
+      "start": 996.959,
+      "end": 1000.389,
+      "duration": 3.43,
+      "text": "through notice on the next step a whole"
+    },
+    {
+      "index": 437,
+      "start": 1000.399,
+      "end": 1002.829,
+      "duration": 2.43,
+      "text": "bunch of the list is actually in the"
+    },
+    {
+      "index": 438,
+      "start": 1002.839,
+      "end": 1004.91,
+      "duration": 2.071,
+      "text": "right order it's just because I got"
+    },
+    {
+      "index": 439,
+      "start": 1004.92,
+      "end": 1006.629,
+      "duration": 1.709,
+      "text": "lucky all I can guarantee is that the"
+    },
+    {
+      "index": 440,
+      "start": 1006.639,
+      "end": 1008.389,
+      "duration": 1.75,
+      "text": "second largest element is at the second"
+    },
+    {
+      "index": 441,
+      "start": 1008.399,
+      "end": 1010.43,
+      "duration": 2.031,
+      "text": "and or the second from the end at the"
+    },
+    {
+      "index": 442,
+      "start": 1010.44,
+      "end": 1012.309,
+      "duration": 1.869,
+      "text": "list but you can see here even though"
+    },
+    {
+      "index": 443,
+      "start": 1012.319,
+      "end": 1014.309,
+      "duration": 1.99,
+      "text": "the list is I think nine long it only"
+    },
+    {
+      "index": 444,
+      "start": 1014.319,
+      "end": 1017.55,
+      "duration": 3.231,
+      "text": "took us four passes through so this is"
+    },
+    {
+      "index": 445,
+      "start": 1017.56,
+      "end": 1020.23,
+      "duration": 2.67,
+      "text": "nice it says at most end times through"
+    },
+    {
+      "index": 446,
+      "start": 1020.24,
+      "end": 1022.71,
+      "duration": 2.47,
+      "text": "the list and at the end we actually get"
+    },
+    {
+      "index": 447,
+      "start": 1022.72,
+      "end": 1025.15,
+      "duration": 2.43,
+      "text": "out something that's in the right"
+    },
+    {
+      "index": 448,
+      "start": 1025.16,
+      "end": 1028.789,
+      "duration": 3.629,
+      "text": "form okay so let's go back to this and"
+    },
+    {
+      "index": 449,
+      "start": 1028.799,
+      "end": 1032.47,
+      "duration": 3.671,
+      "text": "basically say what's the"
+    },
+    {
+      "index": 450,
+      "start": 1035.99,
+      "end": 1036.0,
+      "duration": 0.01,
+      "text": "complexity well that's length n right"
+    },
+    {
+      "index": 451,
+      "start": 1036.0,
+      "end": 1037.87,
+      "duration": 1.87,
+      "text": "has to be I'm going through the entire"
+    },
+    {
+      "index": 452,
+      "start": 1037.88,
+      "end": 1039.71,
+      "duration": 1.83,
+      "text": "list"
+    },
+    {
+      "index": 453,
+      "start": 1039.72,
+      "end": 1043.029,
+      "duration": 3.309,
+      "text": "and inside of there is just constant"
+    },
+    {
+      "index": 454,
+      "start": 1043.039,
+      "end": 1046.11,
+      "duration": 3.071,
+      "text": "work four operations I'm doing a test"
+    },
+    {
+      "index": 455,
+      "start": 1046.12,
+      "end": 1048.189,
+      "duration": 2.069,
+      "text": "sorry five I'm doing a test and"
+    },
+    {
+      "index": 456,
+      "start": 1048.199,
+      "end": 1049.669,
+      "duration": 1.47,
+      "text": "depending whether that test is true or"
+    },
+    {
+      "index": 457,
+      "start": 1049.679,
+      "end": 1051.11,
+      "duration": 1.431,
+      "text": "not I'm setting a flag and doing some"
+    },
+    {
+      "index": 458,
+      "start": 1051.12,
+      "end": 1052.43,
+      "duration": 1.31,
+      "text": "movement of things around but it's just"
+    },
+    {
+      "index": 459,
+      "start": 1052.44,
+      "end": 1054.27,
+      "duration": 1.83,
+      "text": "const I don't care about the"
+    },
+    {
+      "index": 460,
+      "start": 1054.28,
+      "end": 1057.59,
+      "duration": 3.31,
+      "text": "five and there how many times do I go"
+    },
+    {
+      "index": 461,
+      "start": 1057.6,
+      "end": 1062.23,
+      "duration": 4.63,
+      "text": "around the loop in the worst case n all"
+    },
+    {
+      "index": 462,
+      "start": 1062.24,
+      "end": 1064.39,
+      "duration": 2.15,
+      "text": "I can guarantee is after the first pass"
+    },
+    {
+      "index": 463,
+      "start": 1064.4,
+      "end": 1066.39,
+      "duration": 1.99,
+      "text": "biggest thing is here after the second"
+    },
+    {
+      "index": 464,
+      "start": 1066.4,
+      "end": 1067.87,
+      "duration": 1.47,
+      "text": "pass the second biggest thing is there"
+    },
+    {
+      "index": 465,
+      "start": 1067.88,
+      "end": 1070.83,
+      "duration": 2.95,
+      "text": "after the third pass you get the idea so"
+    },
+    {
+      "index": 466,
+      "start": 1070.84,
+      "end": 1073.39,
+      "duration": 2.55,
+      "text": "I've got order and things inside the"
+    },
+    {
+      "index": 467,
+      "start": 1073.4,
+      "end": 1077.39,
+      "duration": 3.99,
+      "text": "loop and I'm doing that Loop end times"
+    },
+    {
+      "index": 468,
+      "start": 1077.4,
+      "end": 1079.07,
+      "duration": 1.67,
+      "text": "and I hope that looks familiar we've"
+    },
+    {
+      "index": 469,
+      "start": 1079.08,
+      "end": 1080.87,
+      "duration": 1.79,
+      "text": "talked about this right this is nested"
+    },
+    {
+      "index": 470,
+      "start": 1080.88,
+      "end": 1083.95,
+      "duration": 3.07,
+      "text": "Loops what's this"
+    },
+    {
+      "index": 471,
+      "start": 1083.96,
+      "end": 1086.87,
+      "duration": 2.91,
+      "text": "quadratic so it's order n squ where n is"
+    },
+    {
+      "index": 472,
+      "start": 1086.88,
+      "end": 1089.549,
+      "duration": 2.669,
+      "text": "the length of the list now as you also"
+    },
+    {
+      "index": 473,
+      "start": 1089.559,
+      "end": 1091.23,
+      "duration": 1.671,
+      "text": "saw on average it could be less than"
+    },
+    {
+      "index": 474,
+      "start": 1091.24,
+      "end": 1093.549,
+      "duration": 2.309,
+      "text": "that but it's going to be order n"
+    },
+    {
+      "index": 475,
+      "start": 1093.559,
+      "end": 1095.63,
+      "duration": 2.071,
+      "text": "squ"
+    },
+    {
+      "index": 476,
+      "start": 1095.64,
+      "end": 1097.75,
+      "duration": 2.11,
+      "text": "okay that's one"
+    },
+    {
+      "index": 477,
+      "start": 1097.76,
+      "end": 1100.47,
+      "duration": 2.71,
+      "text": "possibility here's the second nice"
+    },
+    {
+      "index": 478,
+      "start": 1100.48,
+      "end": 1102.95,
+      "duration": 2.47,
+      "text": "simple sord algorithm it's called"
+    },
+    {
+      "index": 479,
+      "start": 1102.96,
+      "end": 1103.99,
+      "duration": 1.03,
+      "text": "selection"
+    },
+    {
+      "index": 480,
+      "start": 1104.0,
+      "end": 1106.27,
+      "duration": 2.27,
+      "text": "sort you can kind of think of this as"
+    },
+    {
+      "index": 481,
+      "start": 1106.28,
+      "end": 1107.789,
+      "duration": 1.509,
+      "text": "going the other way not completely but"
+    },
+    {
+      "index": 482,
+      "start": 1107.799,
+      "end": 1109.07,
+      "duration": 1.271,
+      "text": "going the other way when I say going the"
+    },
+    {
+      "index": 483,
+      "start": 1109.08,
+      "end": 1110.549,
+      "duration": 1.469,
+      "text": "other way the idea here is that I'm"
+    },
+    {
+      "index": 484,
+      "start": 1110.559,
+      "end": 1112.549,
+      "duration": 1.99,
+      "text": "going to find the smallest element in"
+    },
+    {
+      "index": 485,
+      "start": 1112.559,
+      "end": 1114.71,
+      "duration": 2.151,
+      "text": "the list and I'm going to stick it at"
+    },
+    {
+      "index": 486,
+      "start": 1114.72,
+      "end": 1116.149,
+      "duration": 1.429,
+      "text": "the front of the list when I'm done and"
+    },
+    {
+      "index": 487,
+      "start": 1116.159,
+      "end": 1118.99,
+      "duration": 2.831,
+      "text": "simply swap that place with whatever was"
+    },
+    {
+      "index": 488,
+      "start": 1119.0,
+      "end": 1121.63,
+      "duration": 2.63,
+      "text": "there flip them I might do a few other"
+    },
+    {
+      "index": 489,
+      "start": 1121.64,
+      "end": 1123.11,
+      "duration": 1.47,
+      "text": "flips along the way depending how I"
+    },
+    {
+      "index": 490,
+      "start": 1123.12,
+      "end": 1127.07,
+      "duration": 3.95,
+      "text": "implement this next pass I'm just going"
+    },
+    {
+      "index": 491,
+      "start": 1127.08,
+      "end": 1128.51,
+      "duration": 1.43,
+      "text": "to look at everything but the first"
+    },
+    {
+      "index": 492,
+      "start": 1128.52,
+      "end": 1129.789,
+      "duration": 1.269,
+      "text": "element because I know that one's done"
+    },
+    {
+      "index": 493,
+      "start": 1129.799,
+      "end": 1131.31,
+      "duration": 1.511,
+      "text": "I'm going to do the same thing find the"
+    },
+    {
+      "index": 494,
+      "start": 1131.32,
+      "end": 1133.43,
+      "duration": 2.11,
+      "text": "smallest element remaining in the list"
+    },
+    {
+      "index": 495,
+      "start": 1133.44,
+      "end": 1136.31,
+      "duration": 2.87,
+      "text": "put it in the second spot and keep doing"
+    },
+    {
+      "index": 496,
+      "start": 1136.32,
+      "end": 1139.23,
+      "duration": 2.91,
+      "text": "that what I know is if I imp this"
+    },
+    {
+      "index": 497,
+      "start": 1139.24,
+      "end": 1142.71,
+      "duration": 3.47,
+      "text": "correctly after I steps the first I"
+    },
+    {
+      "index": 498,
+      "start": 1142.72,
+      "end": 1145.75,
+      "duration": 3.03,
+      "text": "elements of the list will be sorted and"
+    },
+    {
+      "index": 499,
+      "start": 1145.76,
+      "end": 1147.27,
+      "duration": 1.51,
+      "text": "everything in the rest of the list has"
+    },
+    {
+      "index": 500,
+      "start": 1147.28,
+      "end": 1149.149,
+      "duration": 1.869,
+      "text": "to be bigger than the largest thing in"
+    },
+    {
+      "index": 501,
+      "start": 1149.159,
+      "end": 1150.87,
+      "duration": 1.711,
+      "text": "the first part of the"
+    },
+    {
+      "index": 502,
+      "start": 1150.88,
+      "end": 1154.11,
+      "duration": 3.23,
+      "text": "list okay so we could build that before"
+    },
+    {
+      "index": 503,
+      "start": 1154.12,
+      "end": 1155.47,
+      "duration": 1.35,
+      "text": "we do it I'm going to show you a little"
+    },
+    {
+      "index": 504,
+      "start": 1155.48,
+      "end": 1158.19,
+      "duration": 2.71,
+      "text": "video starring Professor gag this is his"
+    },
+    {
+      "index": 505,
+      "start": 1158.2,
+      "end": 1160.27,
+      "duration": 2.07,
+      "text": "Cameo per performance here but I want to"
+    },
+    {
+      "index": 506,
+      "start": 1160.28,
+      "end": 1162.63,
+      "duration": 2.35,
+      "text": "just show you an example of this using"
+    },
+    {
+      "index": 507,
+      "start": 1162.64,
+      "end": 1166.39,
+      "duration": 3.75,
+      "text": "not numbers but people all right so now"
+    },
+    {
+      "index": 508,
+      "start": 1166.4,
+      "end": 1169.19,
+      "duration": 2.79,
+      "text": "we're going to do selection sort the"
+    },
+    {
+      "index": 509,
+      "start": 1169.2,
+      "end": 1171.75,
+      "duration": 2.55,
+      "text": "idea here is at each step we're going to"
+    },
+    {
+      "index": 510,
+      "start": 1171.76,
+      "end": 1174.83,
+      "duration": 3.07,
+      "text": "select the shortest person and put them"
+    },
+    {
+      "index": 511,
+      "start": 1174.84,
+      "end": 1177.19,
+      "duration": 2.35,
+      "text": "next in line of the sorted"
+    },
+    {
+      "index": 512,
+      "start": 1177.2,
+      "end": 1180.549,
+      "duration": 3.349,
+      "text": "group so we'll bring the leftmost person"
+    },
+    {
+      "index": 513,
+      "start": 1180.559,
+      "end": 1183.35,
+      "duration": 2.791,
+      "text": "forward and we will compare her to"
+    },
+    {
+      "index": 514,
+      "start": 1183.36,
+      "end": 1186.35,
+      "duration": 2.99,
+      "text": "everybody else so one at a time step"
+    },
+    {
+      "index": 515,
+      "start": 1186.36,
+      "end": 1189.029,
+      "duration": 2.669,
+      "text": "forward you're still the winner you go"
+    },
+    {
+      "index": 516,
+      "start": 1189.039,
+      "end": 1191.35,
+      "duration": 2.311,
+      "text": "back please step"
+    },
+    {
+      "index": 517,
+      "start": 1191.36,
+      "end": 1193.39,
+      "duration": 2.03,
+      "text": "forward and watch the number of"
+    },
+    {
+      "index": 518,
+      "start": 1193.4,
+      "end": 1194.909,
+      "duration": 1.509,
+      "text": "comparisons that go on by the way we're"
+    },
+    {
+      "index": 519,
+      "start": 1194.919,
+      "end": 1197.63,
+      "duration": 2.711,
+      "text": "going to go back to"
+    },
+    {
+      "index": 520,
+      "start": 1197.64,
+      "end": 1199.789,
+      "duration": 2.149,
+      "text": "that"
+    },
+    {
+      "index": 521,
+      "start": 1199.799,
+      "end": 1200.83,
+      "duration": 1.031,
+      "text": "still the"
+    },
+    {
+      "index": 522,
+      "start": 1200.84,
+      "end": 1203.149,
+      "duration": 2.309,
+      "text": "winner"
+    },
+    {
+      "index": 523,
+      "start": 1203.159,
+      "end": 1207.909,
+      "duration": 4.75,
+      "text": "next ah a new winner all right so you"
+    },
+    {
+      "index": 524,
+      "start": 1207.919,
+      "end": 1210.83,
+      "duration": 2.911,
+      "text": "can take her place so here we're"
+    },
+    {
+      "index": 525,
+      "start": 1210.84,
+      "end": 1212.63,
+      "duration": 1.79,
+      "text": "choosing to actually insert into the"
+    },
+    {
+      "index": 526,
+      "start": 1212.64,
+      "end": 1214.029,
+      "duration": 1.389,
+      "text": "spot in the line we could have put her"
+    },
+    {
+      "index": 527,
+      "start": 1214.039,
+      "end": 1216.31,
+      "duration": 2.271,
+      "text": "back at the front but this"
+    },
+    {
+      "index": 528,
+      "start": 1216.32,
+      "end": 1221.83,
+      "duration": 5.51,
+      "text": "compare same old"
+    },
+    {
+      "index": 529,
+      "start": 1229.75,
+      "end": 1229.76,
+      "duration": 0.01,
+      "text": "winner no change"
+    },
+    {
+      "index": 530,
+      "start": 1229.76,
+      "end": 1232.43,
+      "duration": 2.67,
+      "text": "it's getting kind of"
+    },
+    {
+      "index": 531,
+      "start": 1232.44,
+      "end": 1235.99,
+      "duration": 3.55,
+      "text": "boring don't fall that we same"
+    },
+    {
+      "index": 532,
+      "start": 1236.0,
+      "end": 1238.23,
+      "duration": 2.23,
+      "text": "winner"
+    },
+    {
+      "index": 533,
+      "start": 1238.24,
+      "end": 1241.39,
+      "duration": 3.15,
+      "text": "please this is a tough"
+    },
+    {
+      "index": 534,
+      "start": 1241.4,
+      "end": 1244.47,
+      "duration": 3.07,
+      "text": "one oh close but I think you're still"
+    },
+    {
+      "index": 535,
+      "start": 1244.48,
+      "end": 1248.789,
+      "duration": 4.309,
+      "text": "shorter all right"
+    },
+    {
+      "index": 536,
+      "start": 1252.149,
+      "end": 1252.159,
+      "duration": 0.01,
+      "text": "next no change which means you are the"
+    },
+    {
+      "index": 537,
+      "start": 1252.159,
+      "end": 1254.51,
+      "duration": 2.351,
+      "text": "first in line congratulations so"
+    },
+    {
+      "index": 538,
+      "start": 1254.52,
+      "end": 1256.51,
+      "duration": 1.99,
+      "text": "smallest element now guarant the first"
+    },
+    {
+      "index": 539,
+      "start": 1256.52,
+      "end": 1258.669,
+      "duration": 2.149,
+      "text": "now you step forward and we'll compare"
+    },
+    {
+      "index": 540,
+      "start": 1258.679,
+      "end": 1270.83,
+      "duration": 12.151,
+      "text": "are"
+    },
+    {
+      "index": 541,
+      "start": 1273.47,
+      "end": 1273.48,
+      "duration": 0.01,
+      "text": "you and I would invite you to watch the"
+    },
+    {
+      "index": 542,
+      "start": 1273.48,
+      "end": 1275.43,
+      "duration": 1.95,
+      "text": "left hand of the list notice how it is"
+    },
+    {
+      "index": 543,
+      "start": 1275.44,
+      "end": 1278.95,
+      "duration": 3.51,
+      "text": "slowly building up at each stage to have"
+    },
+    {
+      "index": 544,
+      "start": 1278.96,
+      "end": 1282.269,
+      "duration": 3.309,
+      "text": "that portion"
+    },
+    {
+      "index": 545,
+      "start": 1284.35,
+      "end": 1284.36,
+      "duration": 0.01,
+      "text": "sorted and we deliberately admit"
+    },
+    {
+      "index": 546,
+      "start": 1284.36,
+      "end": 1286.11,
+      "duration": 1.75,
+      "text": "students to be of different heights so"
+    },
+    {
+      "index": 547,
+      "start": 1286.12,
+      "end": 1287.51,
+      "duration": 1.39,
+      "text": "John can do this"
+    },
+    {
+      "index": 548,
+      "start": 1287.52,
+      "end": 1290.63,
+      "duration": 3.11,
+      "text": "demo you are the winner take your place"
+    },
+    {
+      "index": 549,
+      "start": 1290.64,
+      "end": 1293.909,
+      "duration": 3.269,
+      "text": "in line"
+    },
+    {
+      "index": 550,
+      "start": 1293.919,
+      "end": 1300.549,
+      "duration": 6.63,
+      "text": "next it's"
+    },
+    {
+      "index": 551,
+      "start": 1303.75,
+      "end": 1303.76,
+      "duration": 0.01,
+      "text": "you and once again we have a lovely"
+    },
+    {
+      "index": 552,
+      "start": 1303.76,
+      "end": 1307.029,
+      "duration": 3.269,
+      "text": "group of students sorted in height"
+    },
+    {
+      "index": 553,
+      "start": 1307.039,
+      "end": 1309.51,
+      "duration": 2.471,
+      "text": "order and check out I want you to"
+    },
+    {
+      "index": 554,
+      "start": 1309.52,
+      "end": 1312.789,
+      "duration": 3.269,
+      "text": "remember number of comparisons 55 not"
+    },
+    {
+      "index": 555,
+      "start": 1312.799,
+      "end": 1314.029,
+      "duration": 1.23,
+      "text": "that the 50 but I want you to see a"
+    },
+    {
+      "index": 556,
+      "start": 1314.039,
+      "end": 1317.11,
+      "duration": 3.071,
+      "text": "comparison as we go on in a second so"
+    },
+    {
+      "index": 557,
+      "start": 1317.12,
+      "end": 1319.07,
+      "duration": 1.95,
+      "text": "again selection sort this is this idea"
+    },
+    {
+      "index": 558,
+      "start": 1319.08,
+      "end": 1321.029,
+      "duration": 1.949,
+      "text": "of find the smallest element put it at"
+    },
+    {
+      "index": 559,
+      "start": 1321.039,
+      "end": 1323.35,
+      "duration": 2.311,
+      "text": "the front and I might do a little number"
+    },
+    {
+      "index": 560,
+      "start": 1323.36,
+      "end": 1324.909,
+      "duration": 1.549,
+      "text": "of flips as you can see here along the"
+    },
+    {
+      "index": 561,
+      "start": 1324.919,
+      "end": 1326.149,
+      "duration": 1.23,
+      "text": "way but this is the same sort of"
+    },
+    {
+      "index": 562,
+      "start": 1326.159,
+      "end": 1329.07,
+      "duration": 2.911,
+      "text": "animation of that so let's first of all"
+    },
+    {
+      "index": 563,
+      "start": 1329.08,
+      "end": 1331.07,
+      "duration": 1.99,
+      "text": "convince ourselves it will do the right"
+    },
+    {
+      "index": 564,
+      "start": 1331.08,
+      "end": 1333.39,
+      "duration": 2.31,
+      "text": "thing and then look at some code and"
+    },
+    {
+      "index": 565,
+      "start": 1333.4,
+      "end": 1334.75,
+      "duration": 1.35,
+      "text": "then run the"
+    },
+    {
+      "index": 566,
+      "start": 1334.76,
+      "end": 1337.11,
+      "duration": 2.35,
+      "text": "code so to convince ourselves that this"
+    },
+    {
+      "index": 567,
+      "start": 1337.12,
+      "end": 1338.71,
+      "duration": 1.59,
+      "text": "is going to do the right thing we could"
+    },
+    {
+      "index": 568,
+      "start": 1338.72,
+      "end": 1341.029,
+      "duration": 2.309,
+      "text": "talk about something that we often refer"
+    },
+    {
+      "index": 569,
+      "start": 1341.039,
+      "end": 1342.43,
+      "duration": 1.391,
+      "text": "to as a loop invariant we're going to"
+    },
+    {
+      "index": 570,
+      "start": 1342.44,
+      "end": 1343.75,
+      "duration": 1.31,
+      "text": "write a loop where we're going to walk"
+    },
+    {
+      "index": 571,
+      "start": 1343.76,
+      "end": 1346.31,
+      "duration": 2.55,
+      "text": "through this and the invariant here we"
+    },
+    {
+      "index": 572,
+      "start": 1346.32,
+      "end": 1348.07,
+      "duration": 1.75,
+      "text": "want to just demonstrate if it's true at"
+    },
+    {
+      "index": 573,
+      "start": 1348.08,
+      "end": 1349.75,
+      "duration": 1.67,
+      "text": "the beginning and it's true at each step"
+    },
+    {
+      "index": 574,
+      "start": 1349.76,
+      "end": 1351.99,
+      "duration": 2.23,
+      "text": "therefore by induction as we did earlier"
+    },
+    {
+      "index": 575,
+      "start": 1352.0,
+      "end": 1354.11,
+      "duration": 2.11,
+      "text": "I can conclude it's true always is that"
+    },
+    {
+      "index": 576,
+      "start": 1354.12,
+      "end": 1357.029,
+      "duration": 2.909,
+      "text": "if I'm given the prefix or the first"
+    },
+    {
+      "index": 577,
+      "start": 1357.039,
+      "end": 1360.11,
+      "duration": 3.071,
+      "text": "part of a list from zero up to I and a"
+    },
+    {
+      "index": 578,
+      "start": 1360.12,
+      "end": 1361.909,
+      "duration": 1.789,
+      "text": "suffix or a second part of the list from"
+    },
+    {
+      "index": 579,
+      "start": 1361.919,
+      "end": 1364.99,
+      "duration": 3.071,
+      "text": "i+ one up to the end of the overall list"
+    },
+    {
+      "index": 580,
+      "start": 1365.0,
+      "end": 1367.31,
+      "duration": 2.31,
+      "text": "given that then I'm going to assert that"
+    },
+    {
+      "index": 581,
+      "start": 1367.32,
+      "end": 1369.149,
+      "duration": 1.829,
+      "text": "the invariant is that the prefix is"
+    },
+    {
+      "index": 582,
+      "start": 1369.159,
+      "end": 1372.269,
+      "duration": 3.11,
+      "text": "sorted and no element of the prefix is"
+    },
+    {
+      "index": 583,
+      "start": 1372.279,
+      "end": 1374.029,
+      "duration": 1.75,
+      "text": "larger than the smallest element of the"
+    },
+    {
+      "index": 584,
+      "start": 1374.039,
+      "end": 1376.63,
+      "duration": 2.591,
+      "text": "suffix just what I said earlier says at"
+    },
+    {
+      "index": 585,
+      "start": 1376.64,
+      "end": 1378.75,
+      "duration": 2.11,
+      "text": "any stage here if this is the amount of"
+    },
+    {
+      "index": 586,
+      "start": 1378.76,
+      "end": 1380.83,
+      "duration": 2.07,
+      "text": "sort I've done so far I can guarantee"
+    },
+    {
+      "index": 587,
+      "start": 1380.84,
+      "end": 1382.83,
+      "duration": 1.99,
+      "text": "I'm going to claim this will be sorted"
+    },
+    {
+      "index": 588,
+      "start": 1382.84,
+      "end": 1385.269,
+      "duration": 2.429,
+      "text": "and everything here is bigger than that"
+    },
+    {
+      "index": 589,
+      "start": 1385.279,
+      "end": 1386.35,
+      "duration": 1.071,
+      "text": "thing"
+    },
+    {
+      "index": 590,
+      "start": 1386.36,
+      "end": 1388.47,
+      "duration": 2.11,
+      "text": "there how do I prove"
+    },
+    {
+      "index": 591,
+      "start": 1388.48,
+      "end": 1392.549,
+      "duration": 4.069,
+      "text": "it the base case is really easy in the"
+    },
+    {
+      "index": 592,
+      "start": 1392.559,
+      "end": 1394.39,
+      "duration": 1.831,
+      "text": "base case the prefix is empty I don't"
+    },
+    {
+      "index": 593,
+      "start": 1394.4,
+      "end": 1396.149,
+      "duration": 1.749,
+      "text": "have anything so it's obviously sorted"
+    },
+    {
+      "index": 594,
+      "start": 1396.159,
+      "end": 1397.75,
+      "duration": 1.591,
+      "text": "and everything in the suffix is bigger"
+    },
+    {
+      "index": 595,
+      "start": 1397.76,
+      "end": 1400.549,
+      "duration": 2.789,
+      "text": "than anything in the prefix so I'm fine"
+    },
+    {
+      "index": 596,
+      "start": 1400.559,
+      "end": 1402.47,
+      "duration": 1.911,
+      "text": "and then I just want to say as long as I"
+    },
+    {
+      "index": 597,
+      "start": 1402.48,
+      "end": 1405.19,
+      "duration": 2.71,
+      "text": "write my code so that this step is true"
+    },
+    {
+      "index": 598,
+      "start": 1405.2,
+      "end": 1406.789,
+      "duration": 1.589,
+      "text": "then I'm going to move the smallest"
+    },
+    {
+      "index": 599,
+      "start": 1406.799,
+      "end": 1409.31,
+      "duration": 2.511,
+      "text": "element from the suffix the second part"
+    },
+    {
+      "index": 600,
+      "start": 1409.32,
+      "end": 1412.39,
+      "duration": 3.07,
+      "text": "of the list to the end of the prefix"
+    },
+    {
+      "index": 601,
+      "start": 1412.4,
+      "end": 1414.95,
+      "duration": 2.55,
+      "text": "since the prefix was sorted this is now"
+    },
+    {
+      "index": 602,
+      "start": 1414.96,
+      "end": 1418.59,
+      "duration": 3.63,
+      "text": "sorted and everything in the suffix is"
+    },
+    {
+      "index": 603,
+      "start": 1418.6,
+      "end": 1420.43,
+      "duration": 1.83,
+      "text": "still going to be bigger than everything"
+    },
+    {
+      "index": 604,
+      "start": 1420.44,
+      "end": 1423.029,
+      "duration": 2.589,
+      "text": "in the prefix and as a consequence by"
+    },
+    {
+      "index": 605,
+      "start": 1423.039,
+      "end": 1424.87,
+      "duration": 1.831,
+      "text": "induction this is going to give me"
+    },
+    {
+      "index": 606,
+      "start": 1424.88,
+      "end": 1426.07,
+      "duration": 1.19,
+      "text": "something that says it's always going to"
+    },
+    {
+      "index": 607,
+      "start": 1426.08,
+      "end": 1427.789,
+      "duration": 1.709,
+      "text": "be"
+    },
+    {
+      "index": 608,
+      "start": 1427.799,
+      "end": 1431.71,
+      "duration": 3.911,
+      "text": "correct so here's code that would do"
+    },
+    {
+      "index": 609,
+      "start": 1431.72,
+      "end": 1434.029,
+      "duration": 2.309,
+      "text": "that here I'm just going to set a little"
+    },
+    {
+      "index": 610,
+      "start": 1434.039,
+      "end": 1435.87,
+      "duration": 1.831,
+      "text": "thing called the start of suffix or"
+    },
+    {
+      "index": 611,
+      "start": 1435.88,
+      "end": 1437.71,
+      "duration": 1.83,
+      "text": "suffix start initially it's going to"
+    },
+    {
+      "index": 612,
+      "start": 1437.72,
+      "end": 1440.71,
+      "duration": 2.99,
+      "text": "point to to the beginning of the list"
+    },
+    {
+      "index": 613,
+      "start": 1440.72,
+      "end": 1442.269,
+      "duration": 1.549,
+      "text": "and then I'm going to run a loop and as"
+    },
+    {
+      "index": 614,
+      "start": 1442.279,
+      "end": 1444.43,
+      "duration": 2.151,
+      "text": "long as I still have things to search in"
+    },
+    {
+      "index": 615,
+      "start": 1444.44,
+      "end": 1446.39,
+      "duration": 1.95,
+      "text": "the list that that pointer doesn't point"
+    },
+    {
+      "index": 616,
+      "start": 1446.4,
+      "end": 1448.75,
+      "duration": 2.35,
+      "text": "to the end of the list what am I going"
+    },
+    {
+      "index": 617,
+      "start": 1448.76,
+      "end": 1451.39,
+      "duration": 2.63,
+      "text": "to do I'm going to Loop over everything"
+    },
+    {
+      "index": 618,
+      "start": 1451.4,
+      "end": 1454.19,
+      "duration": 2.79,
+      "text": "from that point to the end of the list"
+    },
+    {
+      "index": 619,
+      "start": 1454.2,
+      "end": 1458.029,
+      "duration": 3.829,
+      "text": "comparing it to the thing at that"
+    },
+    {
+      "index": 620,
+      "start": 1458.039,
+      "end": 1461.51,
+      "duration": 3.471,
+      "text": "point if it's less than I'm going to do"
+    },
+    {
+      "index": 621,
+      "start": 1461.52,
+      "end": 1464.549,
+      "duration": 3.029,
+      "text": "a swap because I want it to move it up"
+    },
+    {
+      "index": 622,
+      "start": 1464.559,
+      "end": 1466.11,
+      "duration": 1.551,
+      "text": "and you can see by the time I get"
+    },
+    {
+      "index": 623,
+      "start": 1466.12,
+      "end": 1467.909,
+      "duration": 1.789,
+      "text": "through this loop I will have found the"
+    },
+    {
+      "index": 624,
+      "start": 1467.919,
+      "end": 1470.389,
+      "duration": 2.47,
+      "text": "smallest element in the remainder of the"
+    },
+    {
+      "index": 625,
+      "start": 1470.399,
+      "end": 1472.71,
+      "duration": 2.311,
+      "text": "list and I would have put it at that"
+    },
+    {
+      "index": 626,
+      "start": 1472.72,
+      "end": 1476.75,
+      "duration": 4.03,
+      "text": "spot whatever suffix start points to and"
+    },
+    {
+      "index": 627,
+      "start": 1476.76,
+      "end": 1479.23,
+      "duration": 2.47,
+      "text": "when I'm done all of that I just change"
+    },
+    {
+      "index": 628,
+      "start": 1479.24,
+      "end": 1482.07,
+      "duration": 2.83,
+      "text": "this by one having found the smallest"
+    },
+    {
+      "index": 629,
+      "start": 1482.08,
+      "end": 1483.75,
+      "duration": 1.67,
+      "text": "element I've stuck it at spot zero I'll"
+    },
+    {
+      "index": 630,
+      "start": 1483.76,
+      "end": 1485.11,
+      "duration": 1.35,
+      "text": "do the same thing having found the next"
+    },
+    {
+      "index": 631,
+      "start": 1485.12,
+      "end": 1487.47,
+      "duration": 2.35,
+      "text": "smallest element I know it's at 0.1 and"
+    },
+    {
+      "index": 632,
+      "start": 1487.48,
+      "end": 1490.19,
+      "duration": 2.71,
+      "text": "I'll just continue"
+    },
+    {
+      "index": 633,
+      "start": 1490.2,
+      "end": 1492.19,
+      "duration": 1.99,
+      "text": "around one of the things you can see"
+    },
+    {
+      "index": 634,
+      "start": 1492.2,
+      "end": 1494.389,
+      "duration": 2.189,
+      "text": "here is as opposed to bubble"
+    },
+    {
+      "index": 635,
+      "start": 1494.399,
+      "end": 1498.95,
+      "duration": 4.551,
+      "text": "sort this one is going to take n times"
+    },
+    {
+      "index": 636,
+      "start": 1498.96,
+      "end": 1502.23,
+      "duration": 3.27,
+      "text": "around the loop because I'm only moving"
+    },
+    {
+      "index": 637,
+      "start": 1502.24,
+      "end": 1504.43,
+      "duration": 2.19,
+      "text": "this pointer by one so it starts at zero"
+    },
+    {
+      "index": 638,
+      "start": 1504.44,
+      "end": 1505.909,
+      "duration": 1.469,
+      "text": "and then one and then two all the way up"
+    },
+    {
+      "index": 639,
+      "start": 1505.919,
+      "end": 1509.99,
+      "duration": 4.071,
+      "text": "to n minus one you can also see in this"
+    },
+    {
+      "index": 640,
+      "start": 1510.0,
+      "end": 1512.389,
+      "duration": 2.389,
+      "text": "particular implementation while I'm"
+    },
+    {
+      "index": 641,
+      "start": 1512.399,
+      "end": 1514.149,
+      "duration": 1.75,
+      "text": "certainly ensuring that the smallest"
+    },
+    {
+      "index": 642,
+      "start": 1514.159,
+      "end": 1517.51,
+      "duration": 3.351,
+      "text": "element goes into that spot I may do a a"
+    },
+    {
+      "index": 643,
+      "start": 1517.52,
+      "end": 1520.23,
+      "duration": 2.71,
+      "text": "few other flips along the way I'm going"
+    },
+    {
+      "index": 644,
+      "start": 1520.24,
+      "end": 1521.35,
+      "duration": 1.11,
+      "text": "to find something I think is the"
+    },
+    {
+      "index": 645,
+      "start": 1521.36,
+      "end": 1522.83,
+      "duration": 1.47,
+      "text": "smallest element put it there and put"
+    },
+    {
+      "index": 646,
+      "start": 1522.84,
+      "end": 1524.47,
+      "duration": 1.63,
+      "text": "that element here and then when I find"
+    },
+    {
+      "index": 647,
+      "start": 1524.48,
+      "end": 1526.23,
+      "duration": 1.75,
+      "text": "another smaller element I may do that"
+    },
+    {
+      "index": 648,
+      "start": 1526.24,
+      "end": 1528.51,
+      "duration": 2.27,
+      "text": "flip I could have implemented this where"
+    },
+    {
+      "index": 649,
+      "start": 1528.52,
+      "end": 1530.19,
+      "duration": 1.67,
+      "text": "I literally search for the smallest"
+    },
+    {
+      "index": 650,
+      "start": 1530.2,
+      "end": 1532.669,
+      "duration": 2.469,
+      "text": "element and only move that doesn't make"
+    },
+    {
+      "index": 651,
+      "start": 1532.679,
+      "end": 1535.35,
+      "duration": 2.671,
+      "text": "any difference in terms of the"
+    },
+    {
+      "index": 652,
+      "start": 1535.36,
+      "end": 1537.029,
+      "duration": 1.669,
+      "text": "complexity all right what's the"
+    },
+    {
+      "index": 653,
+      "start": 1537.039,
+      "end": 1540.549,
+      "duration": 3.51,
+      "text": "complexity here already said this part I"
+    },
+    {
+      "index": 654,
+      "start": 1540.559,
+      "end": 1543.95,
+      "duration": 3.391,
+      "text": "will Loop end times because I start at"
+    },
+    {
+      "index": 655,
+      "start": 1543.96,
+      "end": 1546.75,
+      "duration": 2.79,
+      "text": "zero and then one you get the idea"
+    },
+    {
+      "index": 656,
+      "start": 1546.76,
+      "end": 1548.31,
+      "duration": 1.55,
+      "text": "inside of the"
+    },
+    {
+      "index": 657,
+      "start": 1548.32,
+      "end": 1551.47,
+      "duration": 3.15,
+      "text": "loop I'm going to walk down the"
+    },
+    {
+      "index": 658,
+      "start": 1551.48,
+      "end": 1553.789,
+      "duration": 2.309,
+      "text": "remainder of the list which is initially"
+    },
+    {
+      "index": 659,
+      "start": 1553.799,
+      "end": 1556.029,
+      "duration": 2.23,
+      "text": "n and then n minus one and then n minus"
+    },
+    {
+      "index": 660,
+      "start": 1556.039,
+      "end": 1556.87,
+      "duration": 0.831,
+      "text": "2"
+    },
+    {
+      "index": 661,
+      "start": 1556.88,
+      "end": 1559.389,
+      "duration": 2.509,
+      "text": "times but we've seen that before as well"
+    },
+    {
+      "index": 662,
+      "start": 1559.399,
+      "end": 1562.87,
+      "duration": 3.471,
+      "text": "while it gets shorter that complexity is"
+    },
+    {
+      "index": 663,
+      "start": 1562.88,
+      "end": 1564.47,
+      "duration": 1.59,
+      "text": "still"
+    },
+    {
+      "index": 664,
+      "start": 1564.48,
+      "end": 1567.59,
+      "duration": 3.11,
+      "text": "quadratic order and times going through"
+    },
+    {
+      "index": 665,
+      "start": 1567.6,
+      "end": 1570.269,
+      "duration": 2.669,
+      "text": "this process within the process order"
+    },
+    {
+      "index": 666,
+      "start": 1570.279,
+      "end": 1572.95,
+      "duration": 2.671,
+      "text": "and things that I have to compare and"
+    },
+    {
+      "index": 667,
+      "start": 1572.96,
+      "end": 1575.23,
+      "duration": 2.27,
+      "text": "yes n gets smaller but we know that that"
+    },
+    {
+      "index": 668,
+      "start": 1575.24,
+      "end": 1577.149,
+      "duration": 1.909,
+      "text": "that that n term if you like dominate so"
+    },
+    {
+      "index": 669,
+      "start": 1577.159,
+      "end": 1580.19,
+      "duration": 3.031,
+      "text": "again this is"
+    },
+    {
+      "index": 670,
+      "start": 1580.2,
+      "end": 1582.35,
+      "duration": 2.15,
+      "text": "quadratic okay before you believe that"
+    },
+    {
+      "index": 671,
+      "start": 1582.36,
+      "end": 1584.99,
+      "duration": 2.63,
+      "text": "all sorting algorithms are quadratic I"
+    },
+    {
+      "index": 672,
+      "start": 1585.0,
+      "end": 1586.549,
+      "duration": 1.549,
+      "text": "want to show you the last one the one"
+    },
+    {
+      "index": 673,
+      "start": 1586.559,
+      "end": 1588.909,
+      "duration": 2.35,
+      "text": "that actually is is one of the I think"
+    },
+    {
+      "index": 674,
+      "start": 1588.919,
+      "end": 1590.87,
+      "duration": 1.951,
+      "text": "the the prettiest algorithms around in a"
+    },
+    {
+      "index": 675,
+      "start": 1590.88,
+      "end": 1592.35,
+      "duration": 1.47,
+      "text": "great example of a more efficient"
+    },
+    {
+      "index": 676,
+      "start": 1592.36,
+      "end": 1594.99,
+      "duration": 2.63,
+      "text": "algorithm is called merge"
+    },
+    {
+      "index": 677,
+      "start": 1595.0,
+      "end": 1597.99,
+      "duration": 2.99,
+      "text": "sort merge sort takes an approach we've"
+    },
+    {
+      "index": 678,
+      "start": 1598.0,
+      "end": 1600.389,
+      "duration": 2.389,
+      "text": "seen before talked about divide and"
+    },
+    {
+      "index": 679,
+      "start": 1600.399,
+      "end": 1602.909,
+      "duration": 2.51,
+      "text": "conquer break the problem down into"
+    },
+    {
+      "index": 680,
+      "start": 1602.919,
+      "end": 1605.549,
+      "duration": 2.63,
+      "text": "smaller versions of the same problem and"
+    },
+    {
+      "index": 681,
+      "start": 1605.559,
+      "end": 1607.43,
+      "duration": 1.871,
+      "text": "once you've got those Solutions bring"
+    },
+    {
+      "index": 682,
+      "start": 1607.44,
+      "end": 1610.47,
+      "duration": 3.03,
+      "text": "the answer back together for merge sort"
+    },
+    {
+      "index": 683,
+      "start": 1610.48,
+      "end": 1612.269,
+      "duration": 1.789,
+      "text": "that's pretty easy it says if I've got a"
+    },
+    {
+      "index": 684,
+      "start": 1612.279,
+      "end": 1615.11,
+      "duration": 2.831,
+      "text": "list of zero or one elements it's sorted"
+    },
+    {
+      "index": 685,
+      "start": 1615.12,
+      "end": 1618.35,
+      "duration": 3.23,
+      "text": "duh okay if I got a list of more more"
+    },
+    {
+      "index": 686,
+      "start": 1618.36,
+      "end": 1620.909,
+      "duration": 2.549,
+      "text": "than one element here's my trick going"
+    },
+    {
+      "index": 687,
+      "start": 1620.919,
+      "end": 1623.549,
+      "duration": 2.63,
+      "text": "to split it into two lists I'm going to"
+    },
+    {
+      "index": 688,
+      "start": 1623.559,
+      "end": 1625.87,
+      "duration": 2.311,
+      "text": "sort them and when I'm done I'm just"
+    },
+    {
+      "index": 689,
+      "start": 1625.88,
+      "end": 1628.549,
+      "duration": 2.669,
+      "text": "going to merge those two lists into one"
+    },
+    {
+      "index": 690,
+      "start": 1628.559,
+      "end": 1631.63,
+      "duration": 3.071,
+      "text": "list and the merge is easy because if"
+    },
+    {
+      "index": 691,
+      "start": 1631.64,
+      "end": 1633.149,
+      "duration": 1.509,
+      "text": "I've got two lists that are sorted I"
+    },
+    {
+      "index": 692,
+      "start": 1633.159,
+      "end": 1634.99,
+      "duration": 1.831,
+      "text": "just need to look at the first element"
+    },
+    {
+      "index": 693,
+      "start": 1635.0,
+      "end": 1637.149,
+      "duration": 2.149,
+      "text": "of each take the one that's smaller add"
+    },
+    {
+      "index": 694,
+      "start": 1637.159,
+      "end": 1639.31,
+      "duration": 2.151,
+      "text": "it to my result and keep doing that"
+    },
+    {
+      "index": 695,
+      "start": 1639.32,
+      "end": 1641.029,
+      "duration": 1.709,
+      "text": "until one of the lists is empty and then"
+    },
+    {
+      "index": 696,
+      "start": 1641.039,
+      "end": 1644.149,
+      "duration": 3.11,
+      "text": "just copy the remainder of the other"
+    },
+    {
+      "index": 697,
+      "start": 1644.159,
+      "end": 1646.43,
+      "duration": 2.271,
+      "text": "list you can probably already get a"
+    },
+    {
+      "index": 698,
+      "start": 1646.44,
+      "end": 1648.47,
+      "duration": 2.03,
+      "text": "sense of what the cost is going to to be"
+    },
+    {
+      "index": 699,
+      "start": 1648.48,
+      "end": 1650.389,
+      "duration": 1.909,
+      "text": "here because this is cutting the problem"
+    },
+    {
+      "index": 700,
+      "start": 1650.399,
+      "end": 1652.83,
+      "duration": 2.431,
+      "text": "in half now I've got two pieces so I"
+    },
+    {
+      "index": 701,
+      "start": 1652.84,
+      "end": 1655.389,
+      "duration": 2.549,
+      "text": "need to think about both of them I want"
+    },
+    {
+      "index": 702,
+      "start": 1655.399,
+      "end": 1656.909,
+      "duration": 1.51,
+      "text": "to give you a couple of visualizations"
+    },
+    {
+      "index": 703,
+      "start": 1656.919,
+      "end": 1658.51,
+      "duration": 1.591,
+      "text": "of this here's the first one it says"
+    },
+    {
+      "index": 704,
+      "start": 1658.52,
+      "end": 1660.95,
+      "duration": 2.43,
+      "text": "basically I've got a big unsorted list"
+    },
+    {
+      "index": 705,
+      "start": 1660.96,
+      "end": 1662.95,
+      "duration": 1.99,
+      "text": "I'm going to split it and I'm going to"
+    },
+    {
+      "index": 706,
+      "start": 1662.96,
+      "end": 1665.63,
+      "duration": 2.67,
+      "text": "split it and I'm going to split it until"
+    },
+    {
+      "index": 707,
+      "start": 1665.64,
+      "end": 1668.59,
+      "duration": 2.95,
+      "text": "I get down to just lists that are either"
+    },
+    {
+      "index": 708,
+      "start": 1668.6,
+      "end": 1671.71,
+      "duration": 3.11,
+      "text": "zero or one which by definition are"
+    },
+    {
+      "index": 709,
+      "start": 1671.72,
+      "end": 1675.11,
+      "duration": 3.39,
+      "text": "sorted and once I'm at that level then I"
+    },
+    {
+      "index": 710,
+      "start": 1675.12,
+      "end": 1677.669,
+      "duration": 2.549,
+      "text": "just have to merge them into a sorted"
+    },
+    {
+      "index": 711,
+      "start": 1677.679,
+      "end": 1680.509,
+      "duration": 2.83,
+      "text": "list and then merge them pairwise into a"
+    },
+    {
+      "index": 712,
+      "start": 1680.519,
+      "end": 1683.389,
+      "duration": 2.87,
+      "text": "sorted list and you get the"
+    },
+    {
+      "index": 713,
+      "start": 1683.399,
+      "end": 1685.87,
+      "duration": 2.471,
+      "text": "idea so it's divide and conquer the"
+    },
+    {
+      "index": 714,
+      "start": 1685.88,
+      "end": 1687.75,
+      "duration": 1.87,
+      "text": "Divide is dividing it up into smaller"
+    },
+    {
+      "index": 715,
+      "start": 1687.76,
+      "end": 1690.99,
+      "duration": 3.23,
+      "text": "pieces the conquer is merging them back"
+    },
+    {
+      "index": 716,
+      "start": 1691.0,
+      "end": 1693.47,
+      "duration": 2.47,
+      "text": "together and we have Professor good tag"
+    },
+    {
+      "index": 717,
+      "start": 1693.48,
+      "end": 1695.87,
+      "duration": 2.39,
+      "text": "back for an encore together with his"
+    },
+    {
+      "index": 718,
+      "start": 1695.88,
+      "end": 1698.35,
+      "duration": 2.47,
+      "text": "students so let's show you an example of"
+    },
+    {
+      "index": 719,
+      "start": 1698.36,
+      "end": 1701.87,
+      "duration": 3.51,
+      "text": "merge sort so we're about to demonstrate"
+    },
+    {
+      "index": 720,
+      "start": 1701.88,
+      "end": 1704.35,
+      "duration": 2.47,
+      "text": "merge sort and we're going to sort this"
+    },
+    {
+      "index": 721,
+      "start": 1704.36,
+      "end": 1707.63,
+      "duration": 3.27,
+      "text": "rather mly collection of MIT students by"
+    },
+    {
+      "index": 722,
+      "start": 1707.64,
+      "end": 1709.269,
+      "duration": 1.629,
+      "text": "height"
+    },
+    {
+      "index": 723,
+      "start": 1709.279,
+      "end": 1712.19,
+      "duration": 2.911,
+      "text": "so the first thing we need to do is"
+    },
+    {
+      "index": 724,
+      "start": 1712.2,
+      "end": 1714.269,
+      "duration": 2.069,
+      "text": "we're going to ask everyone to split"
+    },
+    {
+      "index": 725,
+      "start": 1714.279,
+      "end": 1717.19,
+      "duration": 2.911,
+      "text": "into a group of two so you split a"
+    },
+    {
+      "index": 726,
+      "start": 1717.2,
+      "end": 1720.509,
+      "duration": 3.309,
+      "text": "little bit you two are together you two"
+    },
+    {
+      "index": 727,
+      "start": 1720.519,
+      "end": 1723.87,
+      "duration": 3.351,
+      "text": "are together you two are together you"
+    },
+    {
+      "index": 728,
+      "start": 1723.88,
+      "end": 1726.23,
+      "duration": 2.35,
+      "text": "two are together and you are all by"
+    },
+    {
+      "index": 729,
+      "start": 1726.24,
+      "end": 1727.99,
+      "duration": 1.75,
+      "text": "yourself I'm"
+    },
+    {
+      "index": 730,
+      "start": 1728.0,
+      "end": 1732.63,
+      "duration": 4.63,
+      "text": "sorry all right forna so now let's take"
+    },
+    {
+      "index": 731,
+      "start": 1732.64,
+      "end": 1735.669,
+      "duration": 3.029,
+      "text": "the first group take a step down and"
+    },
+    {
+      "index": 732,
+      "start": 1735.679,
+      "end": 1738.549,
+      "duration": 2.87,
+      "text": "what we do is we sort this group by"
+    },
+    {
+      "index": 733,
+      "start": 1738.559,
+      "end": 1741.509,
+      "duration": 2.95,
+      "text": "with the shortest on the left and look"
+    },
+    {
+      "index": 734,
+      "start": 1741.519,
+      "end": 1743.669,
+      "duration": 2.15,
+      "text": "at this we don't have to do anything"
+    },
+    {
+      "index": 735,
+      "start": 1743.679,
+      "end": 1746.07,
+      "duration": 2.391,
+      "text": "thank you feel free to go back"
+    },
+    {
+      "index": 736,
+      "start": 1746.08,
+      "end": 1750.789,
+      "duration": 4.709,
+      "text": "up we then sort the next pair please and"
+    },
+    {
+      "index": 737,
+      "start": 1750.799,
+      "end": 1752.83,
+      "duration": 2.031,
+      "text": "it looks to me like we need to"
+    },
+    {
+      "index": 738,
+      "start": 1752.84,
+      "end": 1757.19,
+      "duration": 4.35,
+      "text": "switch all right take a step"
+    },
+    {
+      "index": 739,
+      "start": 1757.2,
+      "end": 1763.149,
+      "duration": 5.949,
+      "text": "back"
+    },
+    {
+      "index": 740,
+      "start": 1765.63,
+      "end": 1765.64,
+      "duration": 0.01,
+      "text": "ladies"
+    },
+    {
+      "index": 741,
+      "start": 1765.64,
+      "end": 1769.99,
+      "duration": 4.35,
+      "text": "okay ladies gentlemen"
+    },
+    {
+      "index": 742,
+      "start": 1770.0,
+      "end": 1773.549,
+      "duration": 3.549,
+      "text": "also"
+    },
+    {
+      "index": 743,
+      "start": 1776.75,
+      "end": 1776.76,
+      "duration": 0.01,
+      "text": "okay and again"
+    },
+    {
+      "index": 744,
+      "start": 1776.76,
+      "end": 1780.31,
+      "duration": 3.55,
+      "text": "okay notice each subgroup is now which"
+    },
+    {
+      "index": 745,
+      "start": 1780.32,
+      "end": 1781.11,
+      "duration": 0.79,
+      "text": "is"
+    },
+    {
+      "index": 746,
+      "start": 1781.12,
+      "end": 1785.029,
+      "duration": 3.909,
+      "text": "great now what we do is we take these"
+    },
+    {
+      "index": 747,
+      "start": 1785.039,
+      "end": 1788.07,
+      "duration": 3.031,
+      "text": "groups and merge the groups so let's"
+    },
+    {
+      "index": 748,
+      "start": 1788.08,
+      "end": 1790.83,
+      "duration": 2.75,
+      "text": "have these two going to sort these"
+    },
+    {
+      "index": 749,
+      "start": 1790.84,
+      "end": 1793.509,
+      "duration": 2.669,
+      "text": "groups have them step"
+    },
+    {
+      "index": 750,
+      "start": 1793.519,
+      "end": 1796.31,
+      "duration": 2.791,
+      "text": "forward and now what we're doing is"
+    },
+    {
+      "index": 751,
+      "start": 1796.32,
+      "end": 1798.31,
+      "duration": 1.99,
+      "text": "we're doing a merge of the the two"
+    },
+    {
+      "index": 752,
+      "start": 1798.32,
+      "end": 1803.389,
+      "duration": 5.069,
+      "text": "sorted groups so we start by merging"
+    },
+    {
+      "index": 753,
+      "start": 1803.399,
+      "end": 1805.23,
+      "duration": 1.831,
+      "text": "them we'll take the leftmost person in"
+    },
+    {
+      "index": 754,
+      "start": 1805.24,
+      "end": 1808.07,
+      "duration": 2.83,
+      "text": "this group and compare her to the first"
+    },
+    {
+      "index": 755,
+      "start": 1808.08,
+      "end": 1810.07,
+      "duration": 1.99,
+      "text": "person in this group and decide she's"
+    },
+    {
+      "index": 756,
+      "start": 1810.08,
+      "end": 1815.47,
+      "duration": 5.39,
+      "text": "still the shortest take a step"
+    },
+    {
+      "index": 757,
+      "start": 1819.31,
+      "end": 1819.32,
+      "duration": 0.01,
+      "text": "back now we're going to look at you and"
+    },
+    {
+      "index": 758,
+      "start": 1819.32,
+      "end": 1822.509,
+      "duration": 3.189,
+      "text": "say you're actually taller than this"
+    },
+    {
+      "index": 759,
+      "start": 1822.519,
+      "end": 1826.95,
+      "duration": 4.431,
+      "text": "fellow so you now step up"
+    },
+    {
+      "index": 760,
+      "start": 1826.96,
+      "end": 1829.11,
+      "duration": 2.15,
+      "text": "there"
+    },
+    {
+      "index": 761,
+      "start": 1829.12,
+      "end": 1832.07,
+      "duration": 2.95,
+      "text": "and we're good here both of you take a"
+    },
+    {
+      "index": 762,
+      "start": 1832.08,
+      "end": 1834.95,
+      "duration": 2.87,
+      "text": "step"
+    },
+    {
+      "index": 763,
+      "start": 1838.19,
+      "end": 1838.2,
+      "duration": 0.01,
+      "text": "back now we'll take these two groups and"
+    },
+    {
+      "index": 764,
+      "start": 1838.2,
+      "end": 1840.909,
+      "duration": 2.709,
+      "text": "follow the same procedure we'll merge"
+    },
+    {
+      "index": 765,
+      "start": 1840.919,
+      "end": 1844.63,
+      "duration": 3.711,
+      "text": "them let's see we'll compare you the"
+    },
+    {
+      "index": 766,
+      "start": 1844.64,
+      "end": 1846.47,
+      "duration": 1.83,
+      "text": "first person in this group to the first"
+    },
+    {
+      "index": 767,
+      "start": 1846.48,
+      "end": 1848.87,
+      "duration": 2.39,
+      "text": "person in this group now it's a little"
+    },
+    {
+      "index": 768,
+      "start": 1848.88,
+      "end": 1850.75,
+      "duration": 1.87,
+      "text": "tricky so let's see the two of you"
+    },
+    {
+      "index": 769,
+      "start": 1850.76,
+      "end": 1853.71,
+      "duration": 2.95,
+      "text": "compare let's see back to"
+    },
+    {
+      "index": 770,
+      "start": 1853.72,
+      "end": 1855.75,
+      "duration": 2.03,
+      "text": "back we have a"
+    },
+    {
+      "index": 771,
+      "start": 1855.76,
+      "end": 1859.19,
+      "duration": 3.43,
+      "text": "winner set back and now we need to"
+    },
+    {
+      "index": 772,
+      "start": 1859.2,
+      "end": 1860.95,
+      "duration": 1.75,
+      "text": "compare the shortest person in this"
+    },
+    {
+      "index": 773,
+      "start": 1860.96,
+      "end": 1863.07,
+      "duration": 2.11,
+      "text": "group to the shortest person in this"
+    },
+    {
+      "index": 774,
+      "start": 1863.08,
+      "end": 1866.549,
+      "duration": 3.469,
+      "text": "group we have a winner it's"
+    },
+    {
+      "index": 775,
+      "start": 1866.559,
+      "end": 1872.75,
+      "duration": 6.191,
+      "text": "you I'm sorry and now we just we're okay"
+    },
+    {
+      "index": 776,
+      "start": 1872.76,
+      "end": 1876.029,
+      "duration": 3.269,
+      "text": "please step"
+    },
+    {
+      "index": 777,
+      "start": 1879.35,
+      "end": 1879.36,
+      "duration": 0.01,
+      "text": "back now we'll have these two groups"
+    },
+    {
+      "index": 778,
+      "start": 1879.36,
+      "end": 1882.19,
+      "duration": 2.83,
+      "text": "come forward we'll compare the shortest"
+    },
+    {
+      "index": 779,
+      "start": 1882.2,
+      "end": 1883.669,
+      "duration": 1.469,
+      "text": "person in this group to the shortest"
+    },
+    {
+      "index": 780,
+      "start": 1883.679,
+      "end": 1886.149,
+      "duration": 2.47,
+      "text": "person in that group I actually need you"
+    },
+    {
+      "index": 781,
+      "start": 1886.159,
+      "end": 1890.23,
+      "duration": 4.071,
+      "text": "guys to get back to back here"
+    },
+    {
+      "index": 782,
+      "start": 1891.87,
+      "end": 1891.88,
+      "duration": 0.01,
+      "text": "you are the"
+    },
+    {
+      "index": 783,
+      "start": 1891.88,
+      "end": 1894.11,
+      "duration": 2.23,
+      "text": "winner and it's pretty clear that the"
+    },
+    {
+      "index": 784,
+      "start": 1894.12,
+      "end": 1896.11,
+      "duration": 1.99,
+      "text": "shortest person in this group is shorter"
+    },
+    {
+      "index": 785,
+      "start": 1896.12,
+      "end": 1898.31,
+      "duration": 2.19,
+      "text": "than the shortest person in that group"
+    },
+    {
+      "index": 786,
+      "start": 1898.32,
+      "end": 1901.19,
+      "duration": 2.87,
+      "text": "so you go there and you step back notice"
+    },
+    {
+      "index": 787,
+      "start": 1901.2,
+      "end": 1911.029,
+      "duration": 9.829,
+      "text": "the groups sorted now we repeat the same"
+    },
+    {
+      "index": 788,
+      "start": 1913.11,
+      "end": 1913.12,
+      "duration": 0.01,
+      "text": "process and notice how the whole"
+    },
+    {
+      "index": 789,
+      "start": 1913.12,
+      "end": 1915.029,
+      "duration": 1.909,
+      "text": "subgroup now goes up once we know that"
+    },
+    {
+      "index": 790,
+      "start": 1915.039,
+      "end": 1916.83,
+      "duration": 1.791,
+      "text": "one group is"
+    },
+    {
+      "index": 791,
+      "start": 1916.84,
+      "end": 1924.07,
+      "duration": 7.23,
+      "text": "empty"
+    },
+    {
+      "index": 792,
+      "start": 1926.35,
+      "end": 1926.36,
+      "duration": 0.01,
+      "text": "and you can see that we have a group of"
+    },
+    {
+      "index": 793,
+      "start": 1926.36,
+      "end": 1931.629,
+      "duration": 5.269,
+      "text": "students sorted in order by"
+    },
+    {
+      "index": 794,
+      "start": 1934.549,
+      "end": 1934.559,
+      "duration": 0.01,
+      "text": "height remember the first number right"
+    },
+    {
+      "index": 795,
+      "start": 1934.559,
+      "end": 1937.549,
+      "duration": 2.99,
+      "text": "55 28 now this just numbers but you can"
+    },
+    {
+      "index": 796,
+      "start": 1937.559,
+      "end": 1939.99,
+      "duration": 2.431,
+      "text": "see the expectation is this is going to"
+    },
+    {
+      "index": 797,
+      "start": 1940.0,
+      "end": 1941.59,
+      "duration": 1.59,
+      "text": "take less time and it certainly did"
+    },
+    {
+      "index": 798,
+      "start": 1941.6,
+      "end": 1945.269,
+      "duration": 3.669,
+      "text": "there so getting just the demo another"
+    },
+    {
+      "index": 799,
+      "start": 1945.279,
+      "end": 1947.909,
+      "duration": 2.63,
+      "text": "way visually I'm sorting sorry I'm"
+    },
+    {
+      "index": 800,
+      "start": 1947.919,
+      "end": 1949.71,
+      "duration": 1.791,
+      "text": "splitting down until I get small things"
+    },
+    {
+      "index": 801,
+      "start": 1949.72,
+      "end": 1951.669,
+      "duration": 1.949,
+      "text": "and then just merging them up I may have"
+    },
+    {
+      "index": 802,
+      "start": 1951.679,
+      "end": 1953.83,
+      "duration": 2.151,
+      "text": "to do multiple passes through here but"
+    },
+    {
+      "index": 803,
+      "start": 1953.84,
+      "end": 1955.509,
+      "duration": 1.669,
+      "text": "it's going to be hopefully faster than"
+    },
+    {
+      "index": 804,
+      "start": 1955.519,
+      "end": 1957.269,
+      "duration": 1.75,
+      "text": "the other methods we looked"
+    },
+    {
+      "index": 805,
+      "start": 1957.279,
+      "end": 1959.47,
+      "duration": 2.191,
+      "text": "at I'm going to show you code in a"
+    },
+    {
+      "index": 806,
+      "start": 1959.48,
+      "end": 1960.669,
+      "duration": 1.189,
+      "text": "second and then we're going to run it"
+    },
+    {
+      "index": 807,
+      "start": 1960.679,
+      "end": 1962.629,
+      "duration": 1.95,
+      "text": "just to see it but let me stress one"
+    },
+    {
+      "index": 808,
+      "start": 1962.639,
+      "end": 1964.629,
+      "duration": 1.99,
+      "text": "more time just the idea of"
+    },
+    {
+      "index": 809,
+      "start": 1964.639,
+      "end": 1966.59,
+      "duration": 1.951,
+      "text": "merging you can see the idea I keep"
+    },
+    {
+      "index": 810,
+      "start": 1966.6,
+      "end": 1967.789,
+      "duration": 1.189,
+      "text": "splitting down till I got something"
+    },
+    {
+      "index": 811,
+      "start": 1967.799,
+      "end": 1969.35,
+      "duration": 1.551,
+      "text": "small enough I want to merge them back"
+    },
+    {
+      "index": 812,
+      "start": 1969.36,
+      "end": 1970.75,
+      "duration": 1.39,
+      "text": "the idea of merging you've seen it from"
+    },
+    {
+      "index": 813,
+      "start": 1970.76,
+      "end": 1972.31,
+      "duration": 1.55,
+      "text": "Prof from Professor good tag but I just"
+    },
+    {
+      "index": 814,
+      "start": 1972.32,
+      "end": 1974.149,
+      "duration": 1.829,
+      "text": "want to highlight why this is going to"
+    },
+    {
+      "index": 815,
+      "start": 1974.159,
+      "end": 2037.909,
+      "duration": 63.75,
+      "text": "be efficient if I've got two lists"
+    },
+    {
+      "index": 816,
+      "start": 2039.789,
+      "end": 2039.799,
+      "duration": 0.01,
+      "text": "comparisons I'm only comparing the ends"
+    },
+    {
+      "index": 817,
+      "start": 2039.799,
+      "end": 2042.029,
+      "duration": 2.23,
+      "text": "of the list I only therefore look at"
+    },
+    {
+      "index": 818,
+      "start": 2042.039,
+      "end": 2044.029,
+      "duration": 1.99,
+      "text": "each element or the number of"
+    },
+    {
+      "index": 819,
+      "start": 2044.039,
+      "end": 2045.789,
+      "duration": 1.75,
+      "text": "comparisons rather I should say I do I"
+    },
+    {
+      "index": 820,
+      "start": 2045.799,
+      "end": 2047.07,
+      "duration": 1.271,
+      "text": "may look at each element more than once"
+    },
+    {
+      "index": 821,
+      "start": 2047.08,
+      "end": 2049.389,
+      "duration": 2.309,
+      "text": "the number of comparisons is going to be"
+    },
+    {
+      "index": 822,
+      "start": 2049.399,
+      "end": 2051.909,
+      "duration": 2.51,
+      "text": "at most the number of elements in both"
+    },
+    {
+      "index": 823,
+      "start": 2051.919,
+      "end": 2054.069,
+      "duration": 2.15,
+      "text": "lists and that's going to be a nice cue"
+    },
+    {
+      "index": 824,
+      "start": 2054.079,
+      "end": 2055.95,
+      "duration": 1.871,
+      "text": "as we think about how to solve"
+    },
+    {
+      "index": 825,
+      "start": 2055.96,
+      "end": 2058.51,
+      "duration": 2.55,
+      "text": "it so here's the code to merge and then"
+    },
+    {
+      "index": 826,
+      "start": 2058.52,
+      "end": 2059.829,
+      "duration": 1.309,
+      "text": "we'll write merge sort and I know"
+    },
+    {
+      "index": 827,
+      "start": 2059.839,
+      "end": 2061.27,
+      "duration": 1.431,
+      "text": "there's a lot of code here but we can"
+    },
+    {
+      "index": 828,
+      "start": 2061.28,
+      "end": 2062.79,
+      "duration": 1.51,
+      "text": "walk through it and get a good sense of"
+    },
+    {
+      "index": 829,
+      "start": 2062.8,
+      "end": 2066.19,
+      "duration": 3.39,
+      "text": "it I'm going to set up variable called"
+    },
+    {
+      "index": 830,
+      "start": 2066.2,
+      "end": 2069.109,
+      "duration": 2.909,
+      "text": "result that's going to hold my answer"
+    },
+    {
+      "index": 831,
+      "start": 2069.119,
+      "end": 2070.75,
+      "duration": 1.631,
+      "text": "and I'm going to set up two indices I"
+    },
+    {
+      "index": 832,
+      "start": 2070.76,
+      "end": 2072.389,
+      "duration": 1.629,
+      "text": "and J that are initially zero they're"
+    },
+    {
+      "index": 833,
+      "start": 2072.399,
+      "end": 2073.869,
+      "duration": 1.47,
+      "text": "pointing to the beginning and remember"
+    },
+    {
+      "index": 834,
+      "start": 2073.879,
+      "end": 2076.109,
+      "duration": 2.23,
+      "text": "the input here is two lists that we know"
+    },
+    {
+      "index": 835,
+      "start": 2076.119,
+      "end": 2077.909,
+      "duration": 1.79,
+      "text": "are sorted or should be sorted or we"
+    },
+    {
+      "index": 836,
+      "start": 2077.919,
+      "end": 2080.47,
+      "duration": 2.551,
+      "text": "screwed up in some way so initially I"
+    },
+    {
+      "index": 837,
+      "start": 2080.48,
+      "end": 2081.99,
+      "duration": 1.51,
+      "text": "and J are both pointing to the beginning"
+    },
+    {
+      "index": 838,
+      "start": 2082.0,
+      "end": 2084.629,
+      "duration": 2.629,
+      "text": "of the left and right list and look at"
+    },
+    {
+      "index": 839,
+      "start": 2084.639,
+      "end": 2086.43,
+      "duration": 1.791,
+      "text": "what we do we say as long as there's"
+    },
+    {
+      "index": 840,
+      "start": 2086.44,
+      "end": 2088.589,
+      "duration": 2.149,
+      "text": "still something in the left list and"
+    },
+    {
+      "index": 841,
+      "start": 2088.599,
+      "end": 2090.31,
+      "duration": 1.711,
+      "text": "still something in the right list I is"
+    },
+    {
+      "index": 842,
+      "start": 2090.32,
+      "end": 2091.909,
+      "duration": 1.589,
+      "text": "less than the length of left J is less"
+    },
+    {
+      "index": 843,
+      "start": 2091.919,
+      "end": 2095.27,
+      "duration": 3.351,
+      "text": "than the length of right do the"
+    },
+    {
+      "index": 844,
+      "start": 2095.28,
+      "end": 2098.71,
+      "duration": 3.43,
+      "text": "comparison if the left one's smaller"
+    },
+    {
+      "index": 845,
+      "start": 2098.72,
+      "end": 2101.31,
+      "duration": 2.59,
+      "text": "add it to the end of result to the end"
+    },
+    {
+      "index": 846,
+      "start": 2101.32,
+      "end": 2102.99,
+      "duration": 1.67,
+      "text": "of result right I'm appending it because"
+    },
+    {
+      "index": 847,
+      "start": 2103.0,
+      "end": 2105.39,
+      "duration": 2.39,
+      "text": "I want it to be in that sorted order and"
+    },
+    {
+      "index": 848,
+      "start": 2105.4,
+      "end": 2109.71,
+      "duration": 4.31,
+      "text": "increase I if it's not add the right one"
+    },
+    {
+      "index": 849,
+      "start": 2109.72,
+      "end": 2113.47,
+      "duration": 3.75,
+      "text": "to the end of result and increase J and"
+    },
+    {
+      "index": 850,
+      "start": 2113.48,
+      "end": 2115.27,
+      "duration": 1.79,
+      "text": "I'll just keep doing that until I"
+    },
+    {
+      "index": 851,
+      "start": 2115.28,
+      "end": 2118.109,
+      "duration": 2.829,
+      "text": "exhaust one of the lists and when I do I"
+    },
+    {
+      "index": 852,
+      "start": 2118.119,
+      "end": 2120.87,
+      "duration": 2.751,
+      "text": "can basically say if the right list is"
+    },
+    {
+      "index": 853,
+      "start": 2120.88,
+      "end": 2123.23,
+      "duration": 2.35,
+      "text": "empty I know if I get out of here they"
+    },
+    {
+      "index": 854,
+      "start": 2123.24,
+      "end": 2124.55,
+      "duration": 1.31,
+      "text": "can't both be true in other words if"
+    },
+    {
+      "index": 855,
+      "start": 2124.56,
+      "end": 2126.589,
+      "duration": 2.029,
+      "text": "there's still something in the left list"
+    },
+    {
+      "index": 856,
+      "start": 2126.599,
+      "end": 2130.109,
+      "duration": 3.51,
+      "text": "just put it on the end otherwise if the"
+    },
+    {
+      "index": 857,
+      "start": 2130.119,
+      "end": 2131.79,
+      "duration": 1.671,
+      "text": "only things left in the right list just"
+    },
+    {
+      "index": 858,
+      "start": 2131.8,
+      "end": 2133.23,
+      "duration": 1.43,
+      "text": "put them on the"
+    },
+    {
+      "index": 859,
+      "start": 2133.24,
+      "end": 2135.67,
+      "duration": 2.43,
+      "text": "end so I'm just walking down the list"
+    },
+    {
+      "index": 860,
+      "start": 2135.68,
+      "end": 2137.67,
+      "duration": 1.99,
+      "text": "doing the comparison adding the smallest"
+    },
+    {
+      "index": 861,
+      "start": 2137.68,
+      "end": 2139.27,
+      "duration": 1.59,
+      "text": "element to my result and when I'm done I"
+    },
+    {
+      "index": 862,
+      "start": 2139.28,
+      "end": 2141.79,
+      "duration": 2.51,
+      "text": "just return"
+    },
+    {
+      "index": 863,
+      "start": 2141.8,
+      "end": 2144.349,
+      "duration": 2.549,
+      "text": "result complexity we can already begin"
+    },
+    {
+      "index": 864,
+      "start": 2144.359,
+      "end": 2146.19,
+      "duration": 1.831,
+      "text": "to see here right this says the left and"
+    },
+    {
+      "index": 865,
+      "start": 2146.2,
+      "end": 2147.75,
+      "duration": 1.55,
+      "text": "right sublists are order so I'm just"
+    },
+    {
+      "index": 866,
+      "start": 2147.76,
+      "end": 2149.63,
+      "duration": 1.87,
+      "text": "moving the indices depending on which"
+    },
+    {
+      "index": 867,
+      "start": 2149.64,
+      "end": 2151.99,
+      "duration": 2.35,
+      "text": "one holds the smaller element and when I"
+    },
+    {
+      "index": 868,
+      "start": 2152.0,
+      "end": 2153.829,
+      "duration": 1.829,
+      "text": "get done I'm just returning the rest of"
+    },
+    {
+      "index": 869,
+      "start": 2153.839,
+      "end": 2155.67,
+      "duration": 1.831,
+      "text": "the"
+    },
+    {
+      "index": 870,
+      "start": 2155.68,
+      "end": 2158.349,
+      "duration": 2.669,
+      "text": "list so what's the complex"
+    },
+    {
+      "index": 871,
+      "start": 2158.359,
+      "end": 2160.51,
+      "duration": 2.151,
+      "text": "here I'm going to do this a little more"
+    },
+    {
+      "index": 872,
+      "start": 2160.52,
+      "end": 2161.99,
+      "duration": 1.47,
+      "text": "informally you could actually do that"
+    },
+    {
+      "index": 873,
+      "start": 2162.0,
+      "end": 2164.15,
+      "duration": 2.15,
+      "text": "kind of relationship I did last time but"
+    },
+    {
+      "index": 874,
+      "start": 2164.16,
+      "end": 2165.43,
+      "duration": 1.27,
+      "text": "what am I doing I'm going through the"
+    },
+    {
+      "index": 875,
+      "start": 2165.44,
+      "end": 2167.87,
+      "duration": 2.43,
+      "text": "two lists but only one time through each"
+    },
+    {
+      "index": 876,
+      "start": 2167.88,
+      "end": 2170.55,
+      "duration": 2.67,
+      "text": "of those two lists I'm only comparing"
+    },
+    {
+      "index": 877,
+      "start": 2170.56,
+      "end": 2172.589,
+      "duration": 2.029,
+      "text": "the smallest elements so as I already"
+    },
+    {
+      "index": 878,
+      "start": 2172.599,
+      "end": 2174.51,
+      "duration": 1.911,
+      "text": "said this says that the number of"
+    },
+    {
+      "index": 879,
+      "start": 2174.52,
+      "end": 2177.23,
+      "duration": 2.71,
+      "text": "elements I copy will be everything in"
+    },
+    {
+      "index": 880,
+      "start": 2177.24,
+      "end": 2178.63,
+      "duration": 1.39,
+      "text": "the left list and everything in the"
+    },
+    {
+      "index": 881,
+      "start": 2178.64,
+      "end": 2180.23,
+      "duration": 1.59,
+      "text": "right list so that order is just the"
+    },
+    {
+      "index": 882,
+      "start": 2180.24,
+      "end": 2183.23,
+      "duration": 2.99,
+      "text": "length of left plus the length of right"
+    },
+    {
+      "index": 883,
+      "start": 2183.24,
+      "end": 2186.55,
+      "duration": 3.31,
+      "text": "and how many comparisons do I do the"
+    },
+    {
+      "index": 884,
+      "start": 2186.56,
+      "end": 2188.39,
+      "duration": 1.83,
+      "text": "most I have to do is however many are in"
+    },
+    {
+      "index": 885,
+      "start": 2188.4,
+      "end": 2191.15,
+      "duration": 2.75,
+      "text": "the longer list right that's the maximum"
+    },
+    {
+      "index": 886,
+      "start": 2191.16,
+      "end": 2193.99,
+      "duration": 2.83,
+      "text": "number I need to have oh that's nice"
+    },
+    {
+      "index": 887,
+      "start": 2194.0,
+      "end": 2196.43,
+      "duration": 2.43,
+      "text": "that says if the lists are of order n"
+    },
+    {
+      "index": 888,
+      "start": 2196.44,
+      "end": 2199.069,
+      "duration": 2.629,
+      "text": "I'm doing order n copies because order n"
+    },
+    {
+      "index": 889,
+      "start": 2199.079,
+      "end": 2200.91,
+      "duration": 1.831,
+      "text": "plus order n is just 2 N which is order"
+    },
+    {
+      "index": 890,
+      "start": 2200.92,
+      "end": 2204.63,
+      "duration": 3.71,
+      "text": "n and I'm doing order n comparisons so"
+    },
+    {
+      "index": 891,
+      "start": 2204.64,
+      "end": 2207.829,
+      "duration": 3.189,
+      "text": "it's linear in the length of the list"
+    },
+    {
+      "index": 892,
+      "start": 2207.839,
+      "end": 2209.51,
+      "duration": 1.671,
+      "text": "okay sounds"
+    },
+    {
+      "index": 893,
+      "start": 2209.52,
+      "end": 2212.589,
+      "duration": 3.069,
+      "text": "good that just does the merge how do I"
+    },
+    {
+      "index": 894,
+      "start": 2212.599,
+      "end": 2216.109,
+      "duration": 3.51,
+      "text": "do merge sort well we set it break the"
+    },
+    {
+      "index": 895,
+      "start": 2216.119,
+      "end": 2217.589,
+      "duration": 1.47,
+      "text": "problem in half keep doing it until"
+    },
+    {
+      "index": 896,
+      "start": 2217.599,
+      "end": 2219.39,
+      "duration": 1.791,
+      "text": "until I get sorted lists and then grow"
+    },
+    {
+      "index": 897,
+      "start": 2219.4,
+      "end": 2221.75,
+      "duration": 2.35,
+      "text": "them back up so there's merge sort it"
+    },
+    {
+      "index": 898,
+      "start": 2221.76,
+      "end": 2223.67,
+      "duration": 1.91,
+      "text": "says if the list is either empty or of"
+    },
+    {
+      "index": 899,
+      "start": 2223.68,
+      "end": 2226.829,
+      "duration": 3.149,
+      "text": "length one just return a copy of the"
+    },
+    {
+      "index": 900,
+      "start": 2226.839,
+      "end": 2228.03,
+      "duration": 1.191,
+      "text": "list it's"
+    },
+    {
+      "index": 901,
+      "start": 2228.04,
+      "end": 2230.71,
+      "duration": 2.67,
+      "text": "sorted otherwise find the Middle Point"
+    },
+    {
+      "index": 902,
+      "start": 2230.72,
+      "end": 2233.79,
+      "duration": 3.07,
+      "text": "there's that integer Division and split"
+    },
+    {
+      "index": 903,
+      "start": 2233.8,
+      "end": 2235.349,
+      "duration": 1.549,
+      "text": "split the list everything up to the"
+    },
+    {
+      "index": 904,
+      "start": 2235.359,
+      "end": 2237.75,
+      "duration": 2.391,
+      "text": "middle point and do merge sord on that"
+    },
+    {
+      "index": 905,
+      "start": 2237.76,
+      "end": 2239.19,
+      "duration": 1.43,
+      "text": "split everything in the list from the"
+    },
+    {
+      "index": 906,
+      "start": 2239.2,
+      "end": 2241.71,
+      "duration": 2.51,
+      "text": "Middle Point on do merge merge sord on"
+    },
+    {
+      "index": 907,
+      "start": 2241.72,
+      "end": 2243.39,
+      "duration": 1.67,
+      "text": "that and when I get back those two"
+    },
+    {
+      "index": 908,
+      "start": 2243.4,
+      "end": 2246.55,
+      "duration": 3.15,
+      "text": "sorted lists just merge"
+    },
+    {
+      "index": 909,
+      "start": 2246.56,
+      "end": 2248.069,
+      "duration": 1.509,
+      "text": "them"
+    },
+    {
+      "index": 910,
+      "start": 2248.079,
+      "end": 2249.75,
+      "duration": 1.671,
+      "text": "again I hope you can see what the order"
+    },
+    {
+      "index": 911,
+      "start": 2249.76,
+      "end": 2252.349,
+      "duration": 2.589,
+      "text": "of growth should be here cutting the"
+    },
+    {
+      "index": 912,
+      "start": 2252.359,
+      "end": 2255.589,
+      "duration": 3.23,
+      "text": "problem down in half at each step so the"
+    },
+    {
+      "index": 913,
+      "start": 2255.599,
+      "end": 2257.39,
+      "duration": 1.791,
+      "text": "number of times I should have to go"
+    },
+    {
+      "index": 914,
+      "start": 2257.4,
+      "end": 2260.03,
+      "duration": 2.63,
+      "text": "through this should be log in the size"
+    },
+    {
+      "index": 915,
+      "start": 2260.04,
+      "end": 2262.79,
+      "duration": 2.75,
+      "text": "of the original list and you can see why"
+    },
+    {
+      "index": 916,
+      "start": 2262.8,
+      "end": 2264.23,
+      "duration": 1.43,
+      "text": "we call it divide and conquer I'm"
+    },
+    {
+      "index": 917,
+      "start": 2264.24,
+      "end": 2266.03,
+      "duration": 1.79,
+      "text": "dividing it down into small pieces until"
+    },
+    {
+      "index": 918,
+      "start": 2266.04,
+      "end": 2267.51,
+      "duration": 1.47,
+      "text": "I have a simple solution and then I'm"
+    },
+    {
+      "index": 919,
+      "start": 2267.52,
+      "end": 2269.75,
+      "duration": 2.23,
+      "text": "growing that solution back"
+    },
+    {
+      "index": 920,
+      "start": 2269.76,
+      "end": 2273.589,
+      "duration": 3.829,
+      "text": "up so there's the base case there's the"
+    },
+    {
+      "index": 921,
+      "start": 2273.599,
+      "end": 2275.99,
+      "duration": 2.391,
+      "text": "divide and there's the nice conquer"
+    },
+    {
+      "index": 922,
+      "start": 2276.0,
+      "end": 2278.79,
+      "duration": 2.79,
+      "text": "piece of this"
+    },
+    {
+      "index": 923,
+      "start": 2278.8,
+      "end": 2280.91,
+      "duration": 2.11,
+      "text": "okay I'm going to show you an example of"
+    },
+    {
+      "index": 924,
+      "start": 2280.92,
+      "end": 2282.15,
+      "duration": 1.23,
+      "text": "that but let's actually look at some"
+    },
+    {
+      "index": 925,
+      "start": 2282.16,
+      "end": 2284.03,
+      "duration": 1.87,
+      "text": "code sorry about that let's look at some"
+    },
+    {
+      "index": 926,
+      "start": 2284.04,
+      "end": 2287.39,
+      "duration": 3.35,
+      "text": "code to do this and in fact I meant to"
+    },
+    {
+      "index": 927,
+      "start": 2287.4,
+      "end": 2289.87,
+      "duration": 2.47,
+      "text": "do this earlier and didn't I also have a"
+    },
+    {
+      "index": 928,
+      "start": 2289.88,
+      "end": 2292.03,
+      "duration": 2.15,
+      "text": "version of bubble sort"
+    },
+    {
+      "index": 929,
+      "start": 2292.04,
+      "end": 2294.349,
+      "duration": 2.309,
+      "text": "here sorry selection sort I've already"
+    },
+    {
+      "index": 930,
+      "start": 2294.359,
+      "end": 2296.589,
+      "duration": 2.23,
+      "text": "done bubble sort there's selection sort"
+    },
+    {
+      "index": 931,
+      "start": 2296.599,
+      "end": 2300.109,
+      "duration": 3.51,
+      "text": "let's uncomment"
+    },
+    {
+      "index": 932,
+      "start": 2300.119,
+      "end": 2302.47,
+      "duration": 2.351,
+      "text": "this and let's run both of those and"
+    },
+    {
+      "index": 933,
+      "start": 2302.48,
+      "end": 2305.71,
+      "duration": 3.23,
+      "text": "just see the comparison between them and"
+    },
+    {
+      "index": 934,
+      "start": 2305.72,
+      "end": 2307.15,
+      "duration": 1.43,
+      "text": "sorry just to make that a little easier"
+    },
+    {
+      "index": 935,
+      "start": 2307.16,
+      "end": 2309.79,
+      "duration": 2.63,
+      "text": "to read indeed there we"
+    },
+    {
+      "index": 936,
+      "start": 2309.8,
+      "end": 2312.47,
+      "duration": 2.67,
+      "text": "go so we saw bubble sort it only went"
+    },
+    {
+      "index": 937,
+      "start": 2312.48,
+      "end": 2314.71,
+      "duration": 2.23,
+      "text": "through four times so less than n times"
+    },
+    {
+      "index": 938,
+      "start": 2314.72,
+      "end": 2317.63,
+      "duration": 2.91,
+      "text": "there's selection sort and as I said to"
+    },
+    {
+      "index": 939,
+      "start": 2317.64,
+      "end": 2320.27,
+      "duration": 2.63,
+      "text": "you it has to do n passes because it can"
+    },
+    {
+      "index": 940,
+      "start": 2320.28,
+      "end": 2321.99,
+      "duration": 1.71,
+      "text": "only ever guarantee that it gets one"
+    },
+    {
+      "index": 941,
+      "start": 2322.0,
+      "end": 2324.27,
+      "duration": 2.27,
+      "text": "element at the beginning so you can in"
+    },
+    {
+      "index": 942,
+      "start": 2324.28,
+      "end": 2326.99,
+      "duration": 2.71,
+      "text": "fact see in this case from the first or"
+    },
+    {
+      "index": 943,
+      "start": 2327.0,
+      "end": 2328.79,
+      "duration": 1.79,
+      "text": "after the initial input until the end of"
+    },
+    {
+      "index": 944,
+      "start": 2328.8,
+      "end": 2330.79,
+      "duration": 1.99,
+      "text": "the first step it looks like it didn't"
+    },
+    {
+      "index": 945,
+      "start": 2330.8,
+      "end": 2333.15,
+      "duration": 2.35,
+      "text": "do anything because it determined"
+    },
+    {
+      "index": 946,
+      "start": 2333.16,
+      "end": 2335.15,
+      "duration": 1.99,
+      "text": "eventually that one was in the right"
+    },
+    {
+      "index": 947,
+      "start": 2335.16,
+      "end": 2337.589,
+      "duration": 2.429,
+      "text": "spot and similarly I think there's"
+    },
+    {
+      "index": 948,
+      "start": 2337.599,
+      "end": 2339.47,
+      "duration": 1.871,
+      "text": "another one right there where it doesn't"
+    },
+    {
+      "index": 949,
+      "start": 2339.48,
+      "end": 2341.309,
+      "duration": 1.829,
+      "text": "do any or appears not to do anything all"
+    },
+    {
+      "index": 950,
+      "start": 2341.319,
+      "end": 2342.67,
+      "duration": 1.351,
+      "text": "it's guaranteeing is that the next"
+    },
+    {
+      "index": 951,
+      "start": 2342.68,
+      "end": 2345.19,
+      "duration": 2.51,
+      "text": "smallest element is in the right spot as"
+    },
+    {
+      "index": 952,
+      "start": 2345.2,
+      "end": 2347.03,
+      "duration": 1.83,
+      "text": "we get to to the end of it and in fact"
+    },
+    {
+      "index": 953,
+      "start": 2347.04,
+      "end": 2349.39,
+      "duration": 2.35,
+      "text": "ends up in the right place and then"
+    },
+    {
+      "index": 954,
+      "start": 2349.4,
+      "end": 2351.27,
+      "duration": 1.87,
+      "text": "let's look at merge sort and do one more"
+    },
+    {
+      "index": 955,
+      "start": 2351.28,
+      "end": 2353.069,
+      "duration": 1.789,
+      "text": "visualization of"
+    },
+    {
+      "index": 956,
+      "start": 2353.079,
+      "end": 2356.75,
+      "duration": 3.671,
+      "text": "this so again let me remove"
+    },
+    {
+      "index": 957,
+      "start": 2356.76,
+      "end": 2360.47,
+      "duration": 3.71,
+      "text": "that and if we run"
+    },
+    {
+      "index": 958,
+      "start": 2362.589,
+      "end": 2362.599,
+      "duration": 0.01,
+      "text": "it again I've just put some print"
+    },
+    {
+      "index": 959,
+      "start": 2362.599,
+      "end": 2366.27,
+      "duration": 3.671,
+      "text": "statements in there here you can see a"
+    },
+    {
+      "index": 960,
+      "start": 2366.28,
+      "end": 2368.03,
+      "duration": 1.75,
+      "text": "nice behavior"
+    },
+    {
+      "index": 961,
+      "start": 2368.04,
+      "end": 2370.79,
+      "duration": 2.75,
+      "text": "I start off calling merge sort with that"
+    },
+    {
+      "index": 962,
+      "start": 2370.8,
+      "end": 2372.51,
+      "duration": 1.71,
+      "text": "which splits down into doing merge sort"
+    },
+    {
+      "index": 963,
+      "start": 2372.52,
+      "end": 2373.87,
+      "duration": 1.35,
+      "text": "of this portion eventually it's going to"
+    },
+    {
+      "index": 964,
+      "start": 2373.88,
+      "end": 2375.23,
+      "duration": 1.35,
+      "text": "come back down there and do the second"
+    },
+    {
+      "index": 965,
+      "start": 2375.24,
+      "end": 2377.79,
+      "duration": 2.55,
+      "text": "one it keeps doing it until it gets down"
+    },
+    {
+      "index": 966,
+      "start": 2377.8,
+      "end": 2381.27,
+      "duration": 3.47,
+      "text": "to simple list that it knows or sorted"
+    },
+    {
+      "index": 967,
+      "start": 2381.28,
+      "end": 2383.75,
+      "duration": 2.47,
+      "text": "and then it merges it does the smaller"
+    },
+    {
+      "index": 968,
+      "start": 2383.76,
+      "end": 2385.99,
+      "duration": 2.23,
+      "text": "pieces and then merges it and having now"
+    },
+    {
+      "index": 969,
+      "start": 2386.0,
+      "end": 2388.15,
+      "duration": 2.15,
+      "text": "two merged things it can do the next"
+    },
+    {
+      "index": 970,
+      "start": 2388.16,
+      "end": 2389.109,
+      "duration": 0.949,
+      "text": "level of"
+    },
+    {
+      "index": 971,
+      "start": 2389.119,
+      "end": 2391.67,
+      "duration": 2.551,
+      "text": "merge so you can see that it gets this"
+    },
+    {
+      "index": 972,
+      "start": 2391.68,
+      "end": 2393.55,
+      "duration": 1.87,
+      "text": "nice reduction of problems until it gets"
+    },
+    {
+      "index": 973,
+      "start": 2393.56,
+      "end": 2396.109,
+      "duration": 2.549,
+      "text": "down to the smallest"
+    },
+    {
+      "index": 974,
+      "start": 2396.119,
+      "end": 2398.55,
+      "duration": 2.431,
+      "text": "size so let's just look at one more"
+    },
+    {
+      "index": 975,
+      "start": 2398.56,
+      "end": 2400.47,
+      "duration": 1.91,
+      "text": "visualization of that and then get the"
+    },
+    {
+      "index": 976,
+      "start": 2400.48,
+      "end": 2403.63,
+      "duration": 3.15,
+      "text": "complexity so if I start out with this"
+    },
+    {
+      "index": 977,
+      "start": 2403.64,
+      "end": 2407.43,
+      "duration": 3.79,
+      "text": "list sorry about that what I need to do"
+    },
+    {
+      "index": 978,
+      "start": 2407.44,
+      "end": 2410.47,
+      "duration": 3.03,
+      "text": "is split it take the first one split it"
+    },
+    {
+      "index": 979,
+      "start": 2410.48,
+      "end": 2412.15,
+      "duration": 1.67,
+      "text": "keep doing that until I get down to a"
+    },
+    {
+      "index": 980,
+      "start": 2412.16,
+      "end": 2415.39,
+      "duration": 3.23,
+      "text": "base case where I know what those are"
+    },
+    {
+      "index": 981,
+      "start": 2415.4,
+      "end": 2418.87,
+      "duration": 3.47,
+      "text": "and I simply merge them pass it back up"
+    },
+    {
+      "index": 982,
+      "start": 2418.88,
+      "end": 2420.75,
+      "duration": 1.87,
+      "text": "take the second piece split it until I"
+    },
+    {
+      "index": 983,
+      "start": 2420.76,
+      "end": 2422.95,
+      "duration": 2.19,
+      "text": "get down to base cases do the merge"
+    },
+    {
+      "index": 984,
+      "start": 2422.96,
+      "end": 2425.27,
+      "duration": 2.31,
+      "text": "which is nice and linear pass that back"
+    },
+    {
+      "index": 985,
+      "start": 2425.28,
+      "end": 2427.91,
+      "duration": 2.63,
+      "text": "up having done those two pieces I do one"
+    },
+    {
+      "index": 986,
+      "start": 2427.92,
+      "end": 2432.39,
+      "duration": 4.47,
+      "text": "more merge and I do the same"
+    },
+    {
+      "index": 987,
+      "start": 2434.75,
+      "end": 2434.76,
+      "duration": 0.01,
+      "text": "thing I want you to see this because"
+    },
+    {
+      "index": 988,
+      "start": 2434.76,
+      "end": 2437.63,
+      "duration": 2.87,
+      "text": "again you can notice how many levels in"
+    },
+    {
+      "index": 989,
+      "start": 2437.64,
+      "end": 2441.829,
+      "duration": 4.189,
+      "text": "this tree log log in the size because at"
+    },
+    {
+      "index": 990,
+      "start": 2441.839,
+      "end": 2444.03,
+      "duration": 2.191,
+      "text": "each stage here I went from a problem of"
+    },
+    {
+      "index": 991,
+      "start": 2444.04,
+      "end": 2446.309,
+      "duration": 2.269,
+      "text": "eight to two problems of four each of"
+    },
+    {
+      "index": 992,
+      "start": 2446.319,
+      "end": 2447.829,
+      "duration": 1.51,
+      "text": "those went to two problems of two and"
+    },
+    {
+      "index": 993,
+      "start": 2447.839,
+      "end": 2449.67,
+      "duration": 1.831,
+      "text": "each of those went to two problems of"
+    },
+    {
+      "index": 994,
+      "start": 2449.68,
+      "end": 2451.15,
+      "duration": 1.47,
+      "text": "size"
+    },
+    {
+      "index": 995,
+      "start": 2451.16,
+      "end": 2454.51,
+      "duration": 3.35,
+      "text": "one all right so the last piece is"
+    },
+    {
+      "index": 996,
+      "start": 2454.52,
+      "end": 2456.309,
+      "duration": 1.789,
+      "text": "what's the"
+    },
+    {
+      "index": 997,
+      "start": 2456.319,
+      "end": 2457.91,
+      "duration": 1.591,
+      "text": "complexity"
+    },
+    {
+      "index": 998,
+      "start": 2457.92,
+      "end": 2460.99,
+      "duration": 3.07,
+      "text": "here's a simple way to think about it at"
+    },
+    {
+      "index": 999,
+      "start": 2461.0,
+      "end": 2463.67,
+      "duration": 2.67,
+      "text": "the top level I've got I start off with"
+    },
+    {
+      "index": 1000,
+      "start": 2463.68,
+      "end": 2466.43,
+      "duration": 2.75,
+      "text": "n elements I've got two sorted lists of"
+    },
+    {
+      "index": 1001,
+      "start": 2466.44,
+      "end": 2469.589,
+      "duration": 3.149,
+      "text": "size n over two and to merge them"
+    },
+    {
+      "index": 1002,
+      "start": 2469.599,
+      "end": 2473.47,
+      "duration": 3.871,
+      "text": "together I need to do order and work"
+    },
+    {
+      "index": 1003,
+      "start": 2473.48,
+      "end": 2475.39,
+      "duration": 1.91,
+      "text": "because as I said I've got to do at"
+    },
+    {
+      "index": 1004,
+      "start": 2475.4,
+      "end": 2477.47,
+      "duration": 2.07,
+      "text": "least n comparisons where n is the"
+    },
+    {
+      "index": 1005,
+      "start": 2477.48,
+      "end": 2479.589,
+      "duration": 2.109,
+      "text": "length of the list and then I got to do"
+    },
+    {
+      "index": 1006,
+      "start": 2479.599,
+      "end": 2482.069,
+      "duration": 2.47,
+      "text": "n plus n copies which is just order and"
+    },
+    {
+      "index": 1007,
+      "start": 2482.079,
+      "end": 2485.23,
+      "duration": 3.151,
+      "text": "so I'm doing order n work at the second"
+    },
+    {
+      "index": 1008,
+      "start": 2485.24,
+      "end": 2488.069,
+      "duration": 2.829,
+      "text": "level gets a little more complicated now"
+    },
+    {
+      "index": 1009,
+      "start": 2488.079,
+      "end": 2490.63,
+      "duration": 2.551,
+      "text": "I've got problems of size n"
+    },
+    {
+      "index": 1010,
+      "start": 2490.64,
+      "end": 2494.75,
+      "duration": 4.11,
+      "text": "over4 but how many of them do I have"
+    },
+    {
+      "index": 1011,
+      "start": 2494.76,
+      "end": 2497.75,
+      "duration": 2.99,
+      "text": "four oh that's nice because what do I"
+    },
+    {
+      "index": 1012,
+      "start": 2497.76,
+      "end": 2499.75,
+      "duration": 1.99,
+      "text": "know about this I know that I have to"
+    },
+    {
+      "index": 1013,
+      "start": 2499.76,
+      "end": 2502.309,
+      "duration": 2.549,
+      "text": "copy each element at least once so not"
+    },
+    {
+      "index": 1014,
+      "start": 2502.319,
+      "end": 2503.87,
+      "duration": 1.551,
+      "text": "at least once I will copy each element"
+    },
+    {
+      "index": 1015,
+      "start": 2503.88,
+      "end": 2506.79,
+      "duration": 2.91,
+      "text": "exactly once and I'll do comparisons"
+    },
+    {
+      "index": 1016,
+      "start": 2506.8,
+      "end": 2508.27,
+      "duration": 1.47,
+      "text": "that are equal to the length of the"
+    },
+    {
+      "index": 1017,
+      "start": 2508.28,
+      "end": 2511.109,
+      "duration": 2.829,
+      "text": "longer list so I've got four subl lists"
+    },
+    {
+      "index": 1018,
+      "start": 2511.119,
+      "end": 2514.109,
+      "duration": 2.99,
+      "text": "of length n over 4 that says n elements"
+    },
+    {
+      "index": 1019,
+      "start": 2514.119,
+      "end": 2519.23,
+      "duration": 5.111,
+      "text": "oh that's nice order n at each step sub"
+    },
+    {
+      "index": 1020,
+      "start": 2519.24,
+      "end": 2520.87,
+      "duration": 1.63,
+      "text": "problems get smaller but I have more of"
+    },
+    {
+      "index": 1021,
+      "start": 2520.88,
+      "end": 2522.67,
+      "duration": 1.79,
+      "text": "them but the total size of the problem"
+    },
+    {
+      "index": 1022,
+      "start": 2522.68,
+      "end": 2526.43,
+      "duration": 3.75,
+      "text": "is n so the cost at each step is order"
+    },
+    {
+      "index": 1023,
+      "start": 2526.44,
+      "end": 2531.309,
+      "duration": 4.869,
+      "text": "n how many times do I do it log n so"
+    },
+    {
+      "index": 1024,
+      "start": 2531.319,
+      "end": 2535.109,
+      "duration": 3.79,
+      "text": "this is log n iterations with order and"
+    },
+    {
+      "index": 1025,
+      "start": 2535.119,
+      "end": 2537.309,
+      "duration": 2.19,
+      "text": "work at each step and this is a"
+    },
+    {
+      "index": 1026,
+      "start": 2537.319,
+      "end": 2539.71,
+      "duration": 2.391,
+      "text": "wonderful example of a log linear"
+    },
+    {
+      "index": 1027,
+      "start": 2539.72,
+      "end": 2542.349,
+      "duration": 2.629,
+      "text": "algorithm it's n log n where n is the"
+    },
+    {
+      "index": 1028,
+      "start": 2542.359,
+      "end": 2544.79,
+      "duration": 2.431,
+      "text": "length of the"
+    },
+    {
+      "index": 1029,
+      "start": 2544.8,
+      "end": 2548.349,
+      "duration": 3.549,
+      "text": "list so what you end up with then is"
+    },
+    {
+      "index": 1030,
+      "start": 2548.359,
+      "end": 2551.27,
+      "duration": 2.911,
+      "text": "all right a joke version some reasonable"
+    },
+    {
+      "index": 1031,
+      "start": 2551.28,
+      "end": 2553.069,
+      "duration": 1.789,
+      "text": "ways of doing sort that are quick and"
+    },
+    {
+      "index": 1032,
+      "start": 2553.079,
+      "end": 2555.63,
+      "duration": 2.551,
+      "text": "easy to implement but are quadratic and"
+    },
+    {
+      "index": 1033,
+      "start": 2555.64,
+      "end": 2557.91,
+      "duration": 2.27,
+      "text": "then an elegant way of doing the search"
+    },
+    {
+      "index": 1034,
+      "start": 2557.92,
+      "end": 2560.549,
+      "duration": 2.629,
+      "text": "that's end log in and I'll remind you I"
+    },
+    {
+      "index": 1035,
+      "start": 2560.559,
+      "end": 2562.63,
+      "duration": 2.071,
+      "text": "started by saying as long as I can make"
+    },
+    {
+      "index": 1036,
+      "start": 2562.64,
+      "end": 2565.27,
+      "duration": 2.63,
+      "text": "the cost of sorting small enough I can"
+    },
+    {
+      "index": 1037,
+      "start": 2565.28,
+      "end": 2567.309,
+      "duration": 2.029,
+      "text": "amortise that cost and if you go back"
+    },
+    {
+      "index": 1038,
+      "start": 2567.319,
+      "end": 2568.95,
+      "duration": 1.631,
+      "text": "and look at last lecture's notes you'll"
+    },
+    {
+      "index": 1039,
+      "start": 2568.96,
+      "end": 2573.23,
+      "duration": 4.27,
+      "text": "see n log n grows pretty slowly and it's"
+    },
+    {
+      "index": 1040,
+      "start": 2573.24,
+      "end": 2574.829,
+      "duration": 1.589,
+      "text": "actually a nice thing to do it makes it"
+    },
+    {
+      "index": 1041,
+      "start": 2574.839,
+      "end": 2576.829,
+      "duration": 1.99,
+      "text": "reasonable to do the sort and then I can"
+    },
+    {
+      "index": 1042,
+      "start": 2576.839,
+      "end": 2580.069,
+      "duration": 3.23,
+      "text": "do the search in order and time and"
+    },
+    {
+      "index": 1043,
+      "start": 2580.079,
+      "end": 2581.309,
+      "duration": 1.23,
+      "text": "here's the last"
+    },
+    {
+      "index": 1044,
+      "start": 2581.319,
+      "end": 2584.75,
+      "duration": 3.431,
+      "text": "punchline it's the fastest we can do I'm"
+    },
+    {
+      "index": 1045,
+      "start": 2584.76,
+      "end": 2585.95,
+      "duration": 1.19,
+      "text": "going to look at John again I don't"
+    },
+    {
+      "index": 1046,
+      "start": 2585.96,
+      "end": 2587.87,
+      "duration": 1.91,
+      "text": "think anybody has found a faster um"
+    },
+    {
+      "index": 1047,
+      "start": 2587.88,
+      "end": 2589.39,
+      "duration": 1.51,
+      "text": "sword algorithm right this is the best"
+    },
+    {
+      "index": 1048,
+      "start": 2589.4,
+      "end": 2591.79,
+      "duration": 2.39,
+      "text": "one can do unless you"
+    },
+    {
+      "index": 1049,
+      "start": 2591.8,
+      "end": 2594.349,
+      "duration": 2.549,
+      "text": "do sorry the best worst case absolutely"
+    },
+    {
+      "index": 1050,
+      "start": 2594.359,
+      "end": 2595.349,
+      "duration": 0.99,
+      "text": "John is absolutely right there are"
+    },
+    {
+      "index": 1051,
+      "start": 2595.359,
+      "end": 2597.03,
+      "duration": 1.671,
+      "text": "better average cases again our concern"
+    },
+    {
+      "index": 1052,
+      "start": 2597.04,
+      "end": 2599.069,
+      "duration": 2.029,
+      "text": "is worst case so this is as good as"
+    },
+    {
+      "index": 1053,
+      "start": 2599.079,
+      "end": 2600.43,
+      "duration": 1.351,
+      "text": "we're going to do in terms of a worst"
+    },
+    {
+      "index": 1054,
+      "start": 2600.44,
+      "end": 2603.069,
+      "duration": 2.629,
+      "text": "case algorithm so there you now have"
+    },
+    {
+      "index": 1055,
+      "start": 2603.079,
+      "end": 2604.549,
+      "duration": 1.47,
+      "text": "sorting algorithms and searching"
+    },
+    {
+      "index": 1056,
+      "start": 2604.559,
+      "end": 2607.43,
+      "duration": 2.871,
+      "text": "algorithms and you've now seen excuse me"
+    },
+    {
+      "index": 1057,
+      "start": 2607.44,
+      "end": 2611.95,
+      "duration": 4.51,
+      "text": "sorry constant log linear log linear"
+    },
+    {
+      "index": 1058,
+      "start": 2611.96,
+      "end": 2614.79,
+      "duration": 2.83,
+      "text": "quadratic and exponential algorithms I"
+    },
+    {
+      "index": 1059,
+      "start": 2614.8,
+      "end": 2616.91,
+      "duration": 2.11,
+      "text": "remind you we want things as high up in"
+    },
+    {
+      "index": 1060,
+      "start": 2616.92,
+      "end": 2619.549,
+      "duration": 2.629,
+      "text": "that hierarchy as"
+    },
+    {
+      "index": 1061,
+      "start": 2619.559,
+      "end": 2623.23,
+      "duration": 3.671,
+      "text": "possible all right I have six minutes"
+    },
+    {
+      "index": 1062,
+      "start": 2623.24,
+      "end": 2625.589,
+      "duration": 2.349,
+      "text": "left some of you are going to leave us"
+    },
+    {
+      "index": 1063,
+      "start": 2625.599,
+      "end": 2626.91,
+      "duration": 1.311,
+      "text": "we're going to miss you but that's okay"
+    },
+    {
+      "index": 1064,
+      "start": 2626.92,
+      "end": 2628.19,
+      "duration": 1.27,
+      "text": "I'm sure we'll see you later on for"
+    },
+    {
+      "index": 1065,
+      "start": 2628.2,
+      "end": 2630.23,
+      "duration": 2.03,
+      "text": "those of you hanging around this isn't a"
+    },
+    {
+      "index": 1066,
+      "start": 2630.24,
+      "end": 2632.15,
+      "duration": 1.91,
+      "text": "bad time just to step back and say so"
+    },
+    {
+      "index": 1067,
+      "start": 2632.16,
+      "end": 2633.589,
+      "duration": 1.429,
+      "text": "what have we seen and I want to do this"
+    },
+    {
+      "index": 1068,
+      "start": 2633.599,
+      "end": 2634.829,
+      "duration": 1.23,
+      "text": "just very"
+    },
+    {
+      "index": 1069,
+      "start": 2634.839,
+      "end": 2637.99,
+      "duration": 3.151,
+      "text": "quickly sorry I'm remind you we started"
+    },
+    {
+      "index": 1070,
+      "start": 2638.0,
+      "end": 2639.67,
+      "duration": 1.67,
+      "text": "by in some sense giving you a little bit"
+    },
+    {
+      "index": 1071,
+      "start": 2639.68,
+      "end": 2641.43,
+      "duration": 1.75,
+      "text": "of a contract of things we were going to"
+    },
+    {
+      "index": 1072,
+      "start": 2641.44,
+      "end": 2643.349,
+      "duration": 1.909,
+      "text": "show you and I would simply suggest to"
+    },
+    {
+      "index": 1073,
+      "start": 2643.359,
+      "end": 2644.79,
+      "duration": 1.431,
+      "text": "you what have we"
+    },
+    {
+      "index": 1074,
+      "start": 2644.8,
+      "end": 2647.03,
+      "duration": 2.23,
+      "text": "done we given you a sense of how to"
+    },
+    {
+      "index": 1075,
+      "start": 2647.04,
+      "end": 2649.23,
+      "duration": 2.19,
+      "text": "represent knowledge with data structures"
+    },
+    {
+      "index": 1076,
+      "start": 2649.24,
+      "end": 2651.75,
+      "duration": 2.51,
+      "text": "tupal lists dictionaries more"
+    },
+    {
+      "index": 1077,
+      "start": 2651.76,
+      "end": 2654.71,
+      "duration": 2.95,
+      "text": "complicated structures we've shown you"
+    },
+    {
+      "index": 1078,
+      "start": 2654.72,
+      "end": 2657.15,
+      "duration": 2.43,
+      "text": "some good computational metaphors"
+    },
+    {
+      "index": 1079,
+      "start": 2657.16,
+      "end": 2659.75,
+      "duration": 2.59,
+      "text": "iteration and Loops recursion as a great"
+    },
+    {
+      "index": 1080,
+      "start": 2659.76,
+      "end": 2661.309,
+      "duration": 1.549,
+      "text": "way of breaking problems down into"
+    },
+    {
+      "index": 1081,
+      "start": 2661.319,
+      "end": 2663.95,
+      "duration": 2.631,
+      "text": "simpler versions of the same problem and"
+    },
+    {
+      "index": 1082,
+      "start": 2663.96,
+      "end": 2665.75,
+      "duration": 1.79,
+      "text": "there really are metaphors there ways of"
+    },
+    {
+      "index": 1083,
+      "start": 2665.76,
+      "end": 2667.829,
+      "duration": 2.069,
+      "text": "thinking about problems"
+    },
+    {
+      "index": 1084,
+      "start": 2667.839,
+      "end": 2669.03,
+      "duration": 1.191,
+      "text": "we've given you"
+    },
+    {
+      "index": 1085,
+      "start": 2669.04,
+      "end": 2671.19,
+      "duration": 2.15,
+      "text": "abstraction the idea of capture a"
+    },
+    {
+      "index": 1086,
+      "start": 2671.2,
+      "end": 2673.51,
+      "duration": 2.31,
+      "text": "computation bury it in a procedure you"
+    },
+    {
+      "index": 1087,
+      "start": 2673.52,
+      "end": 2675.069,
+      "duration": 1.549,
+      "text": "now have a contract you don't need to"
+    },
+    {
+      "index": 1088,
+      "start": 2675.079,
+      "end": 2676.75,
+      "duration": 1.671,
+      "text": "know what happens inside the procedure"
+    },
+    {
+      "index": 1089,
+      "start": 2676.76,
+      "end": 2678.349,
+      "duration": 1.589,
+      "text": "as long as it delivers the answer it"
+    },
+    {
+      "index": 1090,
+      "start": 2678.359,
+      "end": 2680.51,
+      "duration": 2.151,
+      "text": "says it would or another way of saying"
+    },
+    {
+      "index": 1091,
+      "start": 2680.52,
+      "end": 2682.069,
+      "duration": 1.549,
+      "text": "it you can delegate it to somebody and"
+    },
+    {
+      "index": 1092,
+      "start": 2682.079,
+      "end": 2683.19,
+      "duration": 1.111,
+      "text": "trust it you're going to get what you"
+    },
+    {
+      "index": 1093,
+      "start": 2683.2,
+      "end": 2686.069,
+      "duration": 2.869,
+      "text": "like out of it we've seen classes and"
+    },
+    {
+      "index": 1094,
+      "start": 2686.079,
+      "end": 2688.43,
+      "duration": 2.351,
+      "text": "methods as a wonderful way to modularize"
+    },
+    {
+      "index": 1095,
+      "start": 2688.44,
+      "end": 2691.47,
+      "duration": 3.03,
+      "text": "systems to capture combinations of data"
+    },
+    {
+      "index": 1096,
+      "start": 2691.48,
+      "end": 2692.87,
+      "duration": 1.39,
+      "text": "and things that operate on them in a"
+    },
+    {
+      "index": 1097,
+      "start": 2692.88,
+      "end": 2696.069,
+      "duration": 3.189,
+      "text": "nice elegant way and we just spent a"
+    },
+    {
+      "index": 1098,
+      "start": 2696.079,
+      "end": 2698.109,
+      "duration": 2.03,
+      "text": "week and a half talking about classes of"
+    },
+    {
+      "index": 1099,
+      "start": 2698.119,
+      "end": 2700.309,
+      "duration": 2.19,
+      "text": "algorithms and their"
+    },
+    {
+      "index": 1100,
+      "start": 2700.319,
+      "end": 2703.19,
+      "duration": 2.871,
+      "text": "complexity if you step up a"
+    },
+    {
+      "index": 1101,
+      "start": 2703.2,
+      "end": 2705.47,
+      "duration": 2.27,
+      "text": "level what we hope you've gotten out of"
+    },
+    {
+      "index": 1102,
+      "start": 2705.48,
+      "end": 2708.27,
+      "duration": 2.79,
+      "text": "this are a couple of things you've begun"
+    },
+    {
+      "index": 1103,
+      "start": 2708.28,
+      "end": 2711.109,
+      "duration": 2.829,
+      "text": "to learn computational modes of thinking"
+    },
+    {
+      "index": 1104,
+      "start": 2711.119,
+      "end": 2712.87,
+      "duration": 1.751,
+      "text": "how do I tackle a problem in divide and"
+    },
+    {
+      "index": 1105,
+      "start": 2712.88,
+      "end": 2714.47,
+      "duration": 1.59,
+      "text": "conquer how do I think about recursion"
+    },
+    {
+      "index": 1106,
+      "start": 2714.48,
+      "end": 2717.349,
+      "duration": 2.869,
+      "text": "as a tool in dealing with something"
+    },
+    {
+      "index": 1107,
+      "start": 2717.359,
+      "end": 2719.589,
+      "duration": 2.23,
+      "text": "you've begun to begun I will use that"
+    },
+    {
+      "index": 1108,
+      "start": 2719.599,
+      "end": 2721.47,
+      "duration": 1.871,
+      "text": "word deliberately to master the art of"
+    },
+    {
+      "index": 1109,
+      "start": 2721.48,
+      "end": 2723.03,
+      "duration": 1.55,
+      "text": "computational problem solving how can"
+    },
+    {
+      "index": 1110,
+      "start": 2723.04,
+      "end": 2725.23,
+      "duration": 2.19,
+      "text": "you take a problem and turn it into an"
+    },
+    {
+      "index": 1111,
+      "start": 2725.24,
+      "end": 2727.99,
+      "duration": 2.75,
+      "text": "algorithm and especially You' begun to"
+    },
+    {
+      "index": 1112,
+      "start": 2728.0,
+      "end": 2729.63,
+      "duration": 1.63,
+      "text": "have the ability to make the computer do"
+    },
+    {
+      "index": 1113,
+      "start": 2729.64,
+      "end": 2732.03,
+      "duration": 2.39,
+      "text": "what you want it to to say if I've got a"
+    },
+    {
+      "index": 1114,
+      "start": 2732.04,
+      "end": 2733.87,
+      "duration": 1.83,
+      "text": "problem from biology or chemistry or"
+    },
+    {
+      "index": 1115,
+      "start": 2733.88,
+      "end": 2736.109,
+      "duration": 2.229,
+      "text": "math or physics or chemical engineering"
+    },
+    {
+      "index": 1116,
+      "start": 2736.119,
+      "end": 2738.15,
+      "duration": 2.031,
+      "text": "or mechanical engineering how do I take"
+    },
+    {
+      "index": 1117,
+      "start": 2738.16,
+      "end": 2740.15,
+      "duration": 1.99,
+      "text": "that problem and say Here's how I would"
+    },
+    {
+      "index": 1118,
+      "start": 2740.16,
+      "end": 2742.109,
+      "duration": 1.949,
+      "text": "design an algorithm to give me a"
+    },
+    {
+      "index": 1119,
+      "start": 2742.119,
+      "end": 2744.75,
+      "duration": 2.631,
+      "text": "simulation a way of evaluating what it"
+    },
+    {
+      "index": 1120,
+      "start": 2744.76,
+      "end": 2746.99,
+      "duration": 2.23,
+      "text": "does and so what we hope we've done is"
+    },
+    {
+      "index": 1121,
+      "start": 2747.0,
+      "end": 2748.63,
+      "duration": 1.63,
+      "text": "we started you down the path to being"
+    },
+    {
+      "index": 1122,
+      "start": 2748.64,
+      "end": 2751.39,
+      "duration": 2.75,
+      "text": "able to think and act like a computer"
+    },
+    {
+      "index": 1123,
+      "start": 2751.4,
+      "end": 2753.549,
+      "duration": 2.149,
+      "text": "scientist all right don't panic that"
+    },
+    {
+      "index": 1124,
+      "start": 2753.559,
+      "end": 2755.19,
+      "duration": 1.631,
+      "text": "doesn't mean you stare at people's shoes"
+    },
+    {
+      "index": 1125,
+      "start": 2755.2,
+      "end": 2756.549,
+      "duration": 1.349,
+      "text": "when you talk to them not all computer"
+    },
+    {
+      "index": 1126,
+      "start": 2756.559,
+      "end": 2759.75,
+      "duration": 3.191,
+      "text": "scientists do that just"
+    },
+    {
+      "index": 1127,
+      "start": 2759.76,
+      "end": 2762.79,
+      "duration": 3.03,
+      "text": "faculty sorry John so what do computer"
+    },
+    {
+      "index": 1128,
+      "start": 2762.8,
+      "end": 2765.03,
+      "duration": 2.23,
+      "text": "scientists do and this is actually meant"
+    },
+    {
+      "index": 1129,
+      "start": 2765.04,
+      "end": 2766.829,
+      "duration": 1.789,
+      "text": "to be serious and I've put up two of my"
+    },
+    {
+      "index": 1130,
+      "start": 2766.839,
+      "end": 2768.99,
+      "duration": 2.151,
+      "text": "famous historical figures that computer"
+    },
+    {
+      "index": 1131,
+      "start": 2769.0,
+      "end": 2771.829,
+      "duration": 2.829,
+      "text": "scientists they do think computationally"
+    },
+    {
+      "index": 1132,
+      "start": 2771.839,
+      "end": 2774.309,
+      "duration": 2.47,
+      "text": "they think about abstractions about"
+    },
+    {
+      "index": 1133,
+      "start": 2774.319,
+      "end": 2776.829,
+      "duration": 2.51,
+      "text": "algorithms about automated execution so"
+    },
+    {
+      "index": 1134,
+      "start": 2776.839,
+      "end": 2778.71,
+      "duration": 1.871,
+      "text": "the three a of computational sying and"
+    },
+    {
+      "index": 1135,
+      "start": 2778.72,
+      "end": 2780.99,
+      "duration": 2.27,
+      "text": "in the same way that traditionally you"
+    },
+    {
+      "index": 1136,
+      "start": 2781.0,
+      "end": 2782.95,
+      "duration": 1.95,
+      "text": "had the three Rs of Reading Writing and"
+    },
+    {
+      "index": 1137,
+      "start": 2782.96,
+      "end": 2785.549,
+      "duration": 2.589,
+      "text": "arithmetic computational thinking we"
+    },
+    {
+      "index": 1138,
+      "start": 2785.559,
+      "end": 2787.19,
+      "duration": 1.631,
+      "text": "hope is becoming a fundamental that"
+    },
+    {
+      "index": 1139,
+      "start": 2787.2,
+      "end": 2789.75,
+      "duration": 2.55,
+      "text": "every well-educated person is going to"
+    },
+    {
+      "index": 1140,
+      "start": 2789.76,
+      "end": 2793.109,
+      "duration": 3.349,
+      "text": "need and that says you think about the"
+    },
+    {
+      "index": 1141,
+      "start": 2793.119,
+      "end": 2794.03,
+      "duration": 0.911,
+      "text": "right"
+    },
+    {
+      "index": 1142,
+      "start": 2794.04,
+      "end": 2795.87,
+      "duration": 1.83,
+      "text": "abstraction when you have a problem in"
+    },
+    {
+      "index": 1143,
+      "start": 2795.88,
+      "end": 2798.19,
+      "duration": 2.31,
+      "text": "your europ what's the right abstraction"
+    },
+    {
+      "index": 1144,
+      "start": 2798.2,
+      "end": 2801.03,
+      "duration": 2.83,
+      "text": "how do I pull apart the pieces how do I"
+    },
+    {
+      "index": 1145,
+      "start": 2801.04,
+      "end": 2802.95,
+      "duration": 1.91,
+      "text": "think about that in in terms of of"
+    },
+    {
+      "index": 1146,
+      "start": 2802.96,
+      "end": 2805.03,
+      "duration": 2.07,
+      "text": "decomposing things into a relationship"
+    },
+    {
+      "index": 1147,
+      "start": 2805.04,
+      "end": 2808.23,
+      "duration": 3.19,
+      "text": "that I can use to solve problems how do"
+    },
+    {
+      "index": 1148,
+      "start": 2808.24,
+      "end": 2810.99,
+      "duration": 2.75,
+      "text": "I automate how do I mechanize that"
+    },
+    {
+      "index": 1149,
+      "start": 2811.0,
+      "end": 2812.75,
+      "duration": 1.75,
+      "text": "abstraction how do I use what I know"
+    },
+    {
+      "index": 1150,
+      "start": 2812.76,
+      "end": 2815.03,
+      "duration": 2.27,
+      "text": "happens inside of the machine to write a"
+    },
+    {
+      "index": 1151,
+      "start": 2815.04,
+      "end": 2816.63,
+      "duration": 1.59,
+      "text": "sequence of steps in a language I'm"
+    },
+    {
+      "index": 1152,
+      "start": 2816.64,
+      "end": 2820.03,
+      "duration": 3.39,
+      "text": "using to capture that process and then"
+    },
+    {
+      "index": 1153,
+      "start": 2820.04,
+      "end": 2822.03,
+      "duration": 1.99,
+      "text": "finally how do I turn that into an"
+    },
+    {
+      "index": 1154,
+      "start": 2822.04,
+      "end": 2824.589,
+      "duration": 2.549,
+      "text": "algorithm and that not only means I need"
+    },
+    {
+      "index": 1155,
+      "start": 2824.599,
+      "end": 2826.109,
+      "duration": 1.51,
+      "text": "a language for describing those"
+    },
+    {
+      "index": 1156,
+      "start": 2826.119,
+      "end": 2829.589,
+      "duration": 3.47,
+      "text": "automated processes and and if you like"
+    },
+    {
+      "index": 1157,
+      "start": 2829.599,
+      "end": 2831.91,
+      "duration": 2.311,
+      "text": "allowing the abstraction of details but"
+    },
+    {
+      "index": 1158,
+      "start": 2831.92,
+      "end": 2834.63,
+      "duration": 2.71,
+      "text": "frankly also a way to communicate if you"
+    },
+    {
+      "index": 1159,
+      "start": 2834.64,
+      "end": 2836.589,
+      "duration": 1.949,
+      "text": "have to think crisply about how do I"
+    },
+    {
+      "index": 1160,
+      "start": 2836.599,
+      "end": 2838.95,
+      "duration": 2.351,
+      "text": "describe an algorithm it's actually"
+    },
+    {
+      "index": 1161,
+      "start": 2838.96,
+      "end": 2840.75,
+      "duration": 1.79,
+      "text": "giving you a way to crystallize or"
+    },
+    {
+      "index": 1162,
+      "start": 2840.76,
+      "end": 2843.39,
+      "duration": 2.63,
+      "text": "clarify your thinking about a problem"
+    },
+    {
+      "index": 1163,
+      "start": 2843.4,
+      "end": 2844.75,
+      "duration": 1.35,
+      "text": "this is not to say you should talk to"
+    },
+    {
+      "index": 1164,
+      "start": 2844.76,
+      "end": 2846.67,
+      "duration": 1.91,
+      "text": "your friends in Python I don't recommend"
+    },
+    {
+      "index": 1165,
+      "start": 2846.68,
+      "end": 2847.43,
+      "duration": 0.75,
+      "text": "it"
+    },
+    {
+      "index": 1166,
+      "start": 2847.44,
+      "end": 2849.309,
+      "duration": 1.869,
+      "text": "but it does say you should use that"
+    },
+    {
+      "index": 1167,
+      "start": 2849.319,
+      "end": 2851.109,
+      "duration": 1.79,
+      "text": "thinking as a way of capturing your"
+    },
+    {
+      "index": 1168,
+      "start": 2851.119,
+      "end": 2853.79,
+      "duration": 2.671,
+      "text": "ideas of what you're going to do and"
+    },
+    {
+      "index": 1169,
+      "start": 2853.8,
+      "end": 2857.069,
+      "duration": 3.269,
+      "text": "that leads then to this idea of how"
+    },
+    {
+      "index": 1170,
+      "start": 2857.079,
+      "end": 2859.03,
+      "duration": 1.951,
+      "text": "difficult is a problem how best can I"
+    },
+    {
+      "index": 1171,
+      "start": 2859.04,
+      "end": 2861.03,
+      "duration": 1.99,
+      "text": "solve it we've shown you these"
+    },
+    {
+      "index": 1172,
+      "start": 2861.04,
+      "end": 2862.79,
+      "duration": 1.75,
+      "text": "complexity classes and we've hinted at"
+    },
+    {
+      "index": 1173,
+      "start": 2862.8,
+      "end": 2864.87,
+      "duration": 2.07,
+      "text": "the idea that in fact some problems are"
+    },
+    {
+      "index": 1174,
+      "start": 2864.88,
+      "end": 2867.109,
+      "duration": 2.229,
+      "text": "inherently more difficult than others"
+    },
+    {
+      "index": 1175,
+      "start": 2867.119,
+      "end": 2868.47,
+      "duration": 1.351,
+      "text": "that's something I hope you come back to"
+    },
+    {
+      "index": 1176,
+      "start": 2868.48,
+      "end": 2871.069,
+      "duration": 2.589,
+      "text": "as you go along and especially we want"
+    },
+    {
+      "index": 1177,
+      "start": 2871.079,
+      "end": 2873.67,
+      "duration": 2.591,
+      "text": "you to start thinking recursively we"
+    },
+    {
+      "index": 1178,
+      "start": 2873.68,
+      "end": 2875.829,
+      "duration": 2.149,
+      "text": "want you to think about how do I take a"
+    },
+    {
+      "index": 1179,
+      "start": 2875.839,
+      "end": 2877.87,
+      "duration": 2.031,
+      "text": "hard problem break it up into simpler"
+    },
+    {
+      "index": 1180,
+      "start": 2877.88,
+      "end": 2879.71,
+      "duration": 1.83,
+      "text": "versions of the same problem and then"
+    },
+    {
+      "index": 1181,
+      "start": 2879.72,
+      "end": 2881.43,
+      "duration": 1.71,
+      "text": "construct the"
+    },
+    {
+      "index": 1182,
+      "start": 2881.44,
+      "end": 2884.87,
+      "duration": 3.43,
+      "text": "solution and that shows up lots of"
+    },
+    {
+      "index": 1183,
+      "start": 2884.88,
+      "end": 2887.15,
+      "duration": 2.27,
+      "text": "places right recursion is in all sorts"
+    },
+    {
+      "index": 1184,
+      "start": 2887.16,
+      "end": 2889.19,
+      "duration": 2.03,
+      "text": "of wonderful places so just to give you"
+    },
+    {
+      "index": 1185,
+      "start": 2889.2,
+      "end": 2890.99,
+      "duration": 1.79,
+      "text": "an example I could say to you"
+    },
+    {
+      "index": 1186,
+      "start": 2891.0,
+      "end": 2893.51,
+      "duration": 2.51,
+      "text": "recursively this lecture will end when"
+    },
+    {
+      "index": 1187,
+      "start": 2893.52,
+      "end": 2895.589,
+      "duration": 2.069,
+      "text": "I'm done talking about this lecture"
+    },
+    {
+      "index": 1188,
+      "start": 2895.599,
+      "end": 2897.069,
+      "duration": 1.47,
+      "text": "which will end when I'm done talking"
+    },
+    {
+      "index": 1189,
+      "start": 2897.079,
+      "end": 2898.99,
+      "duration": 1.911,
+      "text": "about this lecture which will end when"
+    },
+    {
+      "index": 1190,
+      "start": 2899.0,
+      "end": 2900.309,
+      "duration": 1.309,
+      "text": "I'm done all right you don't like"
+    },
+    {
+      "index": 1191,
+      "start": 2900.319,
+      "end": 2905.829,
+      "duration": 5.51,
+      "text": "infinite recursion good luck on the"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

@@ -1,0 +1,5744 @@
+{
+  "video": {
+    "id": "13r9QY6cmjc",
+    "title": "22. Diagonalization and Powers of A",
+    "url": "https://www.youtube.com/watch?v=13r9QY6cmjc",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3110,
+    "language": "en"
+  },
+  "segment_count": 818,
+  "segments": [
+    {
+      "index": 0,
+      "start": 12.2,
+      "end": 12.21,
+      "duration": 0.01,
+      "text": "okay so we start this is the second"
+    },
+    {
+      "index": 1,
+      "start": 12.21,
+      "end": 15.919,
+      "duration": 3.709,
+      "text": "lecture on eigenvalues so the first"
+    },
+    {
+      "index": 2,
+      "start": 15.929,
+      "end": 19.25,
+      "duration": 3.321,
+      "text": "lecture was that reached the key"
+    },
+    {
+      "index": 3,
+      "start": 19.26,
+      "end": 22.97,
+      "duration": 3.71,
+      "text": "equation ax equal lambda X X is the"
+    },
+    {
+      "index": 4,
+      "start": 22.98,
+      "end": 26.259,
+      "duration": 3.279,
+      "text": "eigenvector and lambdas the eigenvalue"
+    },
+    {
+      "index": 5,
+      "start": 26.269,
+      "end": 33.7,
+      "duration": 7.431,
+      "text": "now to use that and the the good way to"
+    },
+    {
+      "index": 6,
+      "start": 33.71,
+      "end": 38.27,
+      "duration": 4.56,
+      "text": "after we found so so job one is to find"
+    },
+    {
+      "index": 7,
+      "start": 38.28,
+      "end": 40.01,
+      "duration": 1.73,
+      "text": "the eigenvalues and find the"
+    },
+    {
+      "index": 8,
+      "start": 40.02,
+      "end": 43.28,
+      "duration": 3.26,
+      "text": "eigenvectors now after we found them"
+    },
+    {
+      "index": 9,
+      "start": 43.29,
+      "end": 45.77,
+      "duration": 2.48,
+      "text": "what do we do with them well the good"
+    },
+    {
+      "index": 10,
+      "start": 45.78,
+      "end": 49.76,
+      "duration": 3.98,
+      "text": "way to see that is diagonalize the"
+    },
+    {
+      "index": 11,
+      "start": 49.77,
+      "end": 53.72,
+      "duration": 3.95,
+      "text": "matrix so the matrix is a and I want to"
+    },
+    {
+      "index": 12,
+      "start": 53.73,
+      "end": 56.24,
+      "duration": 2.51,
+      "text": "show first of all this is like the basic"
+    },
+    {
+      "index": 13,
+      "start": 56.25,
+      "end": 59.45,
+      "duration": 3.2,
+      "text": "fact this this formula that's that's the"
+    },
+    {
+      "index": 14,
+      "start": 59.46,
+      "end": 64.549,
+      "duration": 5.089,
+      "text": "key to today's lecture this matrix a I"
+    },
+    {
+      "index": 15,
+      "start": 64.559,
+      "end": 68.3,
+      "duration": 3.741,
+      "text": "put its eigenvectors in the columns of a"
+    },
+    {
+      "index": 16,
+      "start": 68.31,
+      "end": 71.27,
+      "duration": 2.96,
+      "text": "matrix s so s will be the eigenvector"
+    },
+    {
+      "index": 17,
+      "start": 71.28,
+      "end": 75.859,
+      "duration": 4.579,
+      "text": "matrix and i want to look at this magic"
+    },
+    {
+      "index": 18,
+      "start": 75.869,
+      "end": 80.57,
+      "duration": 4.701,
+      "text": "combination s inverse a s so can i show"
+    },
+    {
+      "index": 19,
+      "start": 80.58,
+      "end": 83.749,
+      "duration": 3.169,
+      "text": "you how that how that what happens there"
+    },
+    {
+      "index": 20,
+      "start": 83.759,
+      "end": 87.01,
+      "duration": 3.251,
+      "text": "and notice notice there's an S inverse"
+    },
+    {
+      "index": 21,
+      "start": 87.02,
+      "end": 91.13,
+      "duration": 4.11,
+      "text": "we have to be able to invert this"
+    },
+    {
+      "index": 22,
+      "start": 91.14,
+      "end": 94.73,
+      "duration": 3.59,
+      "text": "eigenvector matrix s so for that we need"
+    },
+    {
+      "index": 23,
+      "start": 94.74,
+      "end": 99.609,
+      "duration": 4.869,
+      "text": "n independent eigenvectors so that's the"
+    },
+    {
+      "index": 24,
+      "start": 99.619,
+      "end": 107.66,
+      "duration": 8.041,
+      "text": "that's the case okay so suppose we have"
+    },
+    {
+      "index": 25,
+      "start": 107.67,
+      "end": 116.139,
+      "duration": 8.469,
+      "text": "n linearly independent eigen vectors of"
+    },
+    {
+      "index": 26,
+      "start": 130.91,
+      "end": 130.92,
+      "duration": 0.01,
+      "text": "put them in the columns of this matrix s"
+    },
+    {
+      "index": 27,
+      "start": 130.92,
+      "end": 133.44,
+      "duration": 2.52,
+      "text": "so I'm naturally going to call that the"
+    },
+    {
+      "index": 28,
+      "start": 133.45,
+      "end": 136.35,
+      "duration": 2.9,
+      "text": "eigenvector matrix because it's got the"
+    },
+    {
+      "index": 29,
+      "start": 136.36,
+      "end": 139.05,
+      "duration": 2.69,
+      "text": "eigenvectors in its columns and all i"
+    },
+    {
+      "index": 30,
+      "start": 139.06,
+      "end": 141.87,
+      "duration": 2.81,
+      "text": "want to do is show you what happens when"
+    },
+    {
+      "index": 31,
+      "start": 141.88,
+      "end": 149.309,
+      "duration": 7.429,
+      "text": "you multiply a times s so a times s so"
+    },
+    {
+      "index": 32,
+      "start": 149.319,
+      "end": 152.67,
+      "duration": 3.351,
+      "text": "this is a times the matrix with the"
+    },
+    {
+      "index": 33,
+      "start": 152.68,
+      "end": 155.52,
+      "duration": 2.84,
+      "text": "first eigenvector in this first column"
+    },
+    {
+      "index": 34,
+      "start": 155.53,
+      "end": 157.949,
+      "duration": 2.419,
+      "text": "the second eigenvector in its second"
+    },
+    {
+      "index": 35,
+      "start": 157.959,
+      "end": 160.68,
+      "duration": 2.721,
+      "text": "column the nth eigen vector in its nth"
+    },
+    {
+      "index": 36,
+      "start": 160.69,
+      "end": 164.25,
+      "duration": 3.56,
+      "text": "column and how am I going to do this"
+    },
+    {
+      "index": 37,
+      "start": 164.26,
+      "end": 167.34,
+      "duration": 3.08,
+      "text": "matrix multiplication well certainly"
+    },
+    {
+      "index": 38,
+      "start": 167.35,
+      "end": 170.4,
+      "duration": 3.05,
+      "text": "I'll do it a column at a time and what"
+    },
+    {
+      "index": 39,
+      "start": 170.41,
+      "end": 174.39,
+      "duration": 3.98,
+      "text": "do I get a times the first column gives"
+    },
+    {
+      "index": 40,
+      "start": 174.4,
+      "end": 176.34,
+      "duration": 1.94,
+      "text": "me the first column of the answer but"
+    },
+    {
+      "index": 41,
+      "start": 176.35,
+      "end": 180.539,
+      "duration": 4.189,
+      "text": "what is it that's an eigenvector a times"
+    },
+    {
+      "index": 42,
+      "start": 180.549,
+      "end": 184.05,
+      "duration": 3.501,
+      "text": "x1 is equal to the lambda times the x 1"
+    },
+    {
+      "index": 43,
+      "start": 184.06,
+      "end": 186.96,
+      "duration": 2.9,
+      "text": "and that lambdas we'll call lambda 1 of"
+    },
+    {
+      "index": 44,
+      "start": 186.97,
+      "end": 191.61,
+      "duration": 4.64,
+      "text": "course so that's the first column ax 1"
+    },
+    {
+      "index": 45,
+      "start": 191.62,
+      "end": 194.97,
+      "duration": 3.35,
+      "text": "is the same as lambda 1 X 1 IX 2 is"
+    },
+    {
+      "index": 46,
+      "start": 194.98,
+      "end": 198.96,
+      "duration": 3.98,
+      "text": "lambda 2 X 2 so on along to in the nth"
+    },
+    {
+      "index": 47,
+      "start": 198.97,
+      "end": 205.05,
+      "duration": 6.08,
+      "text": "column we now have lambda n xn looking"
+    },
+    {
+      "index": 48,
+      "start": 205.06,
+      "end": 208.59,
+      "duration": 3.53,
+      "text": "good but the next step is even better so"
+    },
+    {
+      "index": 49,
+      "start": 208.6,
+      "end": 210.93,
+      "duration": 2.33,
+      "text": "for the next step I want to separate out"
+    },
+    {
+      "index": 50,
+      "start": 210.94,
+      "end": 213.56,
+      "duration": 2.62,
+      "text": "those eigenvalues those those"
+    },
+    {
+      "index": 51,
+      "start": 213.57,
+      "end": 219.18,
+      "duration": 5.61,
+      "text": "multiplying numbers from the X's so then"
+    },
+    {
+      "index": 52,
+      "start": 219.19,
+      "end": 222.84,
+      "duration": 3.65,
+      "text": "I'll have just what I want okay so how"
+    },
+    {
+      "index": 53,
+      "start": 222.85,
+      "end": 225.539,
+      "duration": 2.689,
+      "text": "am I going to separate out so that that"
+    },
+    {
+      "index": 54,
+      "start": 225.549,
+      "end": 228.059,
+      "duration": 2.51,
+      "text": "number lambda 1 is multiplying the first"
+    },
+    {
+      "index": 55,
+      "start": 228.069,
+      "end": 231.449,
+      "duration": 3.38,
+      "text": "column so if I want to factor it out of"
+    },
+    {
+      "index": 56,
+      "start": 231.459,
+      "end": 235.68,
+      "duration": 4.221,
+      "text": "the first column I better put here is"
+    },
+    {
+      "index": 57,
+      "start": 235.69,
+      "end": 239.039,
+      "duration": 3.349,
+      "text": "going to be X 1 and that's going to"
+    },
+    {
+      "index": 58,
+      "start": 239.049,
+      "end": 243.03,
+      "duration": 3.981,
+      "text": "multiply this matrix lambda 1 in the"
+    },
+    {
+      "index": 59,
+      "start": 243.04,
+      "end": 246.09,
+      "duration": 3.05,
+      "text": "first entry in all zeros you see that"
+    },
+    {
+      "index": 60,
+      "start": 246.1,
+      "end": 248.67,
+      "duration": 2.57,
+      "text": "that that's going to come out right for"
+    },
+    {
+      "index": 61,
+      "start": 248.68,
+      "end": 251.49,
+      "duration": 2.81,
+      "text": "the first column because we remember how"
+    },
+    {
+      "index": 62,
+      "start": 251.5,
+      "end": 253.92,
+      "duration": 2.42,
+      "text": "we're going back to that original"
+    },
+    {
+      "index": 63,
+      "start": 253.93,
+      "end": 258.449,
+      "duration": 4.519,
+      "text": "punchline that if I want a number to"
+    },
+    {
+      "index": 64,
+      "start": 258.459,
+      "end": 262.35,
+      "duration": 3.891,
+      "text": "multiply X 1 then I can do it by putting"
+    },
+    {
+      "index": 65,
+      "start": 262.36,
+      "end": 265.32,
+      "duration": 2.96,
+      "text": "X 1 in that column in the first column"
+    },
+    {
+      "index": 66,
+      "start": 265.33,
+      "end": 267.99,
+      "duration": 2.66,
+      "text": "and putting that number there what am I"
+    },
+    {
+      "index": 67,
+      "start": 268.0,
+      "end": 269.37,
+      "duration": 1.37,
+      "text": "going to have here I'm going to have"
+    },
+    {
+      "index": 68,
+      "start": 269.38,
+      "end": 274.32,
+      "duration": 4.94,
+      "text": "lambda what I'm going to have X 1 X 2 xn"
+    },
+    {
+      "index": 69,
+      "start": 274.33,
+      "end": 276.87,
+      "duration": 2.54,
+      "text": "these are going to be my columns again"
+    },
+    {
+      "index": 70,
+      "start": 276.88,
+      "end": 280.35,
+      "duration": 3.47,
+      "text": "I'm getting s back again I'm getting s"
+    },
+    {
+      "index": 71,
+      "start": 280.36,
+      "end": 283.86,
+      "duration": 3.5,
+      "text": "back again but now what's it x on the"
+    },
+    {
+      "index": 72,
+      "start": 283.87,
+      "end": 289.35,
+      "duration": 5.48,
+      "text": "right its x if I want if I want lambda n"
+    },
+    {
+      "index": 73,
+      "start": 289.36,
+      "end": 293.9,
+      "duration": 4.54,
+      "text": "xn in the last column how do I do it"
+    },
+    {
+      "index": 74,
+      "start": 293.91,
+      "end": 297.75,
+      "duration": 3.84,
+      "text": "well the last column here will be I'll"
+    },
+    {
+      "index": 75,
+      "start": 297.76,
+      "end": 301.279,
+      "duration": 3.519,
+      "text": "take the last column use these"
+    },
+    {
+      "index": 76,
+      "start": 301.289,
+      "end": 304.14,
+      "duration": 2.851,
+      "text": "coefficients put the lambda end down"
+    },
+    {
+      "index": 77,
+      "start": 304.15,
+      "end": 306.3,
+      "duration": 2.15,
+      "text": "there and it will multiply that nth"
+    },
+    {
+      "index": 78,
+      "start": 306.31,
+      "end": 310.14,
+      "duration": 3.83,
+      "text": "column and give me lambda n xn there"
+    },
+    {
+      "index": 79,
+      "start": 310.15,
+      "end": 312.3,
+      "duration": 2.15,
+      "text": "there you see matrix multiplication just"
+    },
+    {
+      "index": 80,
+      "start": 312.31,
+      "end": 316.7,
+      "duration": 4.39,
+      "text": "working for us so I started with a s I"
+    },
+    {
+      "index": 81,
+      "start": 316.71,
+      "end": 319.56,
+      "duration": 2.85,
+      "text": "wrote down what it meant a times each"
+    },
+    {
+      "index": 82,
+      "start": 319.57,
+      "end": 322.409,
+      "duration": 2.839,
+      "text": "eigenvector that gave me lambda times"
+    },
+    {
+      "index": 83,
+      "start": 322.419,
+      "end": 324.54,
+      "duration": 2.121,
+      "text": "the eigenvector and then when I peeled"
+    },
+    {
+      "index": 84,
+      "start": 324.55,
+      "end": 326.52,
+      "duration": 1.97,
+      "text": "off the lambdas they were on the"
+    },
+    {
+      "index": 85,
+      "start": 326.53,
+      "end": 330.57,
+      "duration": 4.04,
+      "text": "right-hand side so I've got s my matrix"
+    },
+    {
+      "index": 86,
+      "start": 330.58,
+      "end": 335.61,
+      "duration": 5.03,
+      "text": "back again and this matrix this diagonal"
+    },
+    {
+      "index": 87,
+      "start": 335.62,
+      "end": 347.339,
+      "duration": 11.719,
+      "text": "matrix the eigen value matrix and I call"
+    },
+    {
+      "index": 88,
+      "start": 347.349,
+      "end": 350.07,
+      "duration": 2.721,
+      "text": "it capital lambda using capital letters"
+    },
+    {
+      "index": 89,
+      "start": 350.08,
+      "end": 353.58,
+      "duration": 3.5,
+      "text": "for matrices and lambda to prompt me"
+    },
+    {
+      "index": 90,
+      "start": 353.59,
+      "end": 355.89,
+      "duration": 2.3,
+      "text": "that it's that it's eigen values that"
+    },
+    {
+      "index": 91,
+      "start": 355.9,
+      "end": 357.629,
+      "duration": 1.729,
+      "text": "are in there so you see that the"
+    },
+    {
+      "index": 92,
+      "start": 357.639,
+      "end": 359.52,
+      "duration": 1.881,
+      "text": "eigenvalues are just sitting down that"
+    },
+    {
+      "index": 93,
+      "start": 359.53,
+      "end": 364.61,
+      "duration": 5.08,
+      "text": "diagonal if I had a column x2 here I"
+    },
+    {
+      "index": 94,
+      "start": 364.62,
+      "end": 368.25,
+      "duration": 3.63,
+      "text": "would want the lambda 2 in the two tube"
+    },
+    {
+      "index": 95,
+      "start": 368.26,
+      "end": 371.1,
+      "duration": 2.84,
+      "text": "position in the diagonal position to"
+    },
+    {
+      "index": 96,
+      "start": 371.11,
+      "end": 373.86,
+      "duration": 2.75,
+      "text": "multiply that X 2 and give me the lambda"
+    },
+    {
+      "index": 97,
+      "start": 373.87,
+      "end": 382.329,
+      "duration": 8.459,
+      "text": "2 X 2 that's my formula a s is s lambda"
+    },
+    {
+      "index": 98,
+      "start": 385.549,
+      "end": 385.559,
+      "duration": 0.01,
+      "text": "okay that's that's the you see it's just"
+    },
+    {
+      "index": 99,
+      "start": 385.559,
+      "end": 390.049,
+      "duration": 4.49,
+      "text": "a calculation now I mentioned and I have"
+    },
+    {
+      "index": 100,
+      "start": 390.059,
+      "end": 393.519,
+      "duration": 3.46,
+      "text": "to mention again this business about an"
+    },
+    {
+      "index": 101,
+      "start": 393.529,
+      "end": 398.179,
+      "duration": 4.65,
+      "text": "independent eigenvectors as it stands"
+    },
+    {
+      "index": 102,
+      "start": 398.189,
+      "end": 400.639,
+      "duration": 2.45,
+      "text": "this is all fine whether I mean I could"
+    },
+    {
+      "index": 103,
+      "start": 400.649,
+      "end": 402.679,
+      "duration": 2.03,
+      "text": "be repeating the same eigenvector but I"
+    },
+    {
+      "index": 104,
+      "start": 402.689,
+      "end": 406.489,
+      "duration": 3.8,
+      "text": "am no interest in that I want to be able"
+    },
+    {
+      "index": 105,
+      "start": 406.499,
+      "end": 409.579,
+      "duration": 3.08,
+      "text": "to invert s and that's where this comes"
+    },
+    {
+      "index": 106,
+      "start": 409.589,
+      "end": 412.6,
+      "duration": 3.011,
+      "text": "in this n independent eigenvectors"
+    },
+    {
+      "index": 107,
+      "start": 412.61,
+      "end": 414.98,
+      "duration": 2.37,
+      "text": "business comes in to tell me that that"
+    },
+    {
+      "index": 108,
+      "start": 414.99,
+      "end": 418.249,
+      "duration": 3.259,
+      "text": "matrix is invertible so let me on the"
+    },
+    {
+      "index": 109,
+      "start": 418.259,
+      "end": 422.679,
+      "duration": 4.42,
+      "text": "next board write down what I've got a s"
+    },
+    {
+      "index": 110,
+      "start": 422.689,
+      "end": 428.989,
+      "duration": 6.3,
+      "text": "equals s lambda and now I can multiply"
+    },
+    {
+      "index": 111,
+      "start": 428.999,
+      "end": 432.529,
+      "duration": 3.53,
+      "text": "on the left by s inverse so this is"
+    },
+    {
+      "index": 112,
+      "start": 432.539,
+      "end": 439.85,
+      "duration": 7.311,
+      "text": "really I can do that provided s is"
+    },
+    {
+      "index": 113,
+      "start": 439.86,
+      "end": 442.939,
+      "duration": 3.079,
+      "text": "invertible provided my assumption of n"
+    },
+    {
+      "index": 114,
+      "start": 442.949,
+      "end": 446.809,
+      "duration": 3.86,
+      "text": "independent eigenvectors is satisfied"
+    },
+    {
+      "index": 115,
+      "start": 446.819,
+      "end": 449.329,
+      "duration": 2.51,
+      "text": "and i mentioned at the end of last time"
+    },
+    {
+      "index": 116,
+      "start": 449.339,
+      "end": 452.689,
+      "duration": 3.35,
+      "text": "and i'll say again that there's a small"
+    },
+    {
+      "index": 117,
+      "start": 452.699,
+      "end": 456.829,
+      "duration": 4.13,
+      "text": "number of matrices for that don't have n"
+    },
+    {
+      "index": 118,
+      "start": 456.839,
+      "end": 459.11,
+      "duration": 2.271,
+      "text": "independent eigenvectors so i've got to"
+    },
+    {
+      "index": 119,
+      "start": 459.12,
+      "end": 463.059,
+      "duration": 3.939,
+      "text": "discuss that that technical point but"
+    },
+    {
+      "index": 120,
+      "start": 463.069,
+      "end": 467.119,
+      "duration": 4.05,
+      "text": "the great the most matrices that we see"
+    },
+    {
+      "index": 121,
+      "start": 467.129,
+      "end": 469.82,
+      "duration": 2.691,
+      "text": "have end n independent eigenvectors and"
+    },
+    {
+      "index": 122,
+      "start": 469.83,
+      "end": 471.82,
+      "duration": 1.99,
+      "text": "we can diagonalize this is"
+    },
+    {
+      "index": 123,
+      "start": 471.83,
+      "end": 475.129,
+      "duration": 3.299,
+      "text": "diagonalization i could also write it"
+    },
+    {
+      "index": 124,
+      "start": 475.139,
+      "end": 479.659,
+      "duration": 4.52,
+      "text": "and I often will the other way round if"
+    },
+    {
+      "index": 125,
+      "start": 479.669,
+      "end": 483.199,
+      "duration": 3.53,
+      "text": "I multiply on the right by s inverse if"
+    },
+    {
+      "index": 126,
+      "start": 483.209,
+      "end": 485.089,
+      "duration": 1.88,
+      "text": "I took this equation at the top and"
+    },
+    {
+      "index": 127,
+      "start": 485.099,
+      "end": 487.219,
+      "duration": 2.12,
+      "text": "multiply on the right by s inverse I"
+    },
+    {
+      "index": 128,
+      "start": 487.229,
+      "end": 491.629,
+      "duration": 4.4,
+      "text": "could I would have a left here now s"
+    },
+    {
+      "index": 129,
+      "start": 491.639,
+      "end": 496.639,
+      "duration": 5.0,
+      "text": "inverse is coming from the right so can"
+    },
+    {
+      "index": 130,
+      "start": 496.649,
+      "end": 499.369,
+      "duration": 2.72,
+      "text": "you keep those two straight a multiplies"
+    },
+    {
+      "index": 131,
+      "start": 499.379,
+      "end": 501.499,
+      "duration": 2.12,
+      "text": "its eigenvectors that's how i keep them"
+    },
+    {
+      "index": 132,
+      "start": 501.509,
+      "end": 505.309,
+      "duration": 3.8,
+      "text": "straight so a multiplies s a multiplies"
+    },
+    {
+      "index": 133,
+      "start": 505.319,
+      "end": 508.699,
+      "duration": 3.38,
+      "text": "this and then this s inverse makes the"
+    },
+    {
+      "index": 134,
+      "start": 508.709,
+      "end": 511.819,
+      "duration": 3.11,
+      "text": "whole thing diagonal and this is another"
+    },
+    {
+      "index": 135,
+      "start": 511.829,
+      "end": 514.309,
+      "duration": 2.48,
+      "text": "way of saying the same thing putting the"
+    },
+    {
+      "index": 136,
+      "start": 514.319,
+      "end": 515.99,
+      "duration": 1.671,
+      "text": "S is on the other side of the equation"
+    },
+    {
+      "index": 137,
+      "start": 516.0,
+      "end": 520.55,
+      "duration": 4.55,
+      "text": "vision a is s lambda s inverse so that's"
+    },
+    {
+      "index": 138,
+      "start": 520.56,
+      "end": 524.69,
+      "duration": 4.13,
+      "text": "the that's the new factorization that's"
+    },
+    {
+      "index": 139,
+      "start": 524.7,
+      "end": 528.41,
+      "duration": 3.71,
+      "text": "the replacement for Lu from elimination"
+    },
+    {
+      "index": 140,
+      "start": 528.42,
+      "end": 533.48,
+      "duration": 5.06,
+      "text": "or QR from gram-schmidt and notice that"
+    },
+    {
+      "index": 141,
+      "start": 533.49,
+      "end": 536.72,
+      "duration": 3.23,
+      "text": "the matrix so it's it's a matrix times"
+    },
+    {
+      "index": 142,
+      "start": 536.73,
+      "end": 539.18,
+      "duration": 2.45,
+      "text": "the diagonal matrix times the inverse of"
+    },
+    {
+      "index": 143,
+      "start": 539.19,
+      "end": 541.31,
+      "duration": 2.12,
+      "text": "the first one it's is that's the"
+    },
+    {
+      "index": 144,
+      "start": 541.32,
+      "end": 543.2,
+      "duration": 1.88,
+      "text": "combination that we'll see throughout"
+    },
+    {
+      "index": 145,
+      "start": 543.21,
+      "end": 547.4,
+      "duration": 4.19,
+      "text": "this chapter this this combination with"
+    },
+    {
+      "index": 146,
+      "start": 547.41,
+      "end": 550.79,
+      "duration": 3.38,
+      "text": "an S and an S inverse okay can I just"
+    },
+    {
+      "index": 147,
+      "start": 550.8,
+      "end": 555.68,
+      "duration": 4.88,
+      "text": "begin to use that for example what about"
+    },
+    {
+      "index": 148,
+      "start": 555.69,
+      "end": 559.13,
+      "duration": 3.44,
+      "text": "a squared what are the eigenvalues and"
+    },
+    {
+      "index": 149,
+      "start": 559.14,
+      "end": 561.17,
+      "duration": 2.03,
+      "text": "eigenvectors of a squared that's a"
+    },
+    {
+      "index": 150,
+      "start": 561.18,
+      "end": 563.42,
+      "duration": 2.24,
+      "text": "straightforward question with it with an"
+    },
+    {
+      "index": 151,
+      "start": 563.43,
+      "end": 566.3,
+      "duration": 2.87,
+      "text": "absolutely clean answer so let me let me"
+    },
+    {
+      "index": 152,
+      "start": 566.31,
+      "end": 570.65,
+      "duration": 4.34,
+      "text": "consider a squared so I start with ax"
+    },
+    {
+      "index": 153,
+      "start": 570.66,
+      "end": 574.37,
+      "duration": 3.71,
+      "text": "equal lambda X and I'm headed for a"
+    },
+    {
+      "index": 154,
+      "start": 574.38,
+      "end": 577.7,
+      "duration": 3.32,
+      "text": "squared so let me multiply both sides by"
+    },
+    {
+      "index": 155,
+      "start": 577.71,
+      "end": 580.34,
+      "duration": 2.63,
+      "text": "a that's one way to get a squared on the"
+    },
+    {
+      "index": 156,
+      "start": 580.35,
+      "end": 585.5,
+      "duration": 5.15,
+      "text": "left so if I should write these ifs in"
+    },
+    {
+      "index": 157,
+      "start": 585.51,
+      "end": 589.0,
+      "duration": 3.49,
+      "text": "here if ax equals lambda X then I"
+    },
+    {
+      "index": 158,
+      "start": 589.01,
+      "end": 593.2,
+      "duration": 4.19,
+      "text": "multiply by a so I get a squared x"
+    },
+    {
+      "index": 159,
+      "start": 593.21,
+      "end": 596.27,
+      "duration": 3.06,
+      "text": "equals while I'm multiplying by a so"
+    },
+    {
+      "index": 160,
+      "start": 596.28,
+      "end": 599.48,
+      "duration": 3.2,
+      "text": "that's lambda a X that lambda was a"
+    },
+    {
+      "index": 161,
+      "start": 599.49,
+      "end": 602.18,
+      "duration": 2.69,
+      "text": "number so I just put it on the left and"
+    },
+    {
+      "index": 162,
+      "start": 602.19,
+      "end": 605.0,
+      "duration": 2.81,
+      "text": "what do I did tell me how to make that"
+    },
+    {
+      "index": 163,
+      "start": 605.01,
+      "end": 607.64,
+      "duration": 2.63,
+      "text": "look better what have I got here"
+    },
+    {
+      "index": 164,
+      "start": 607.65,
+      "end": 612.13,
+      "duration": 4.48,
+      "text": "for if a has the eigenvalue lambda and"
+    },
+    {
+      "index": 165,
+      "start": 612.14,
+      "end": 615.5,
+      "duration": 3.36,
+      "text": "eigenvector x what's up with a squared a"
+    },
+    {
+      "index": 166,
+      "start": 615.51,
+      "end": 618.8,
+      "duration": 3.29,
+      "text": "squared X I just multiplied by a but now"
+    },
+    {
+      "index": 167,
+      "start": 618.81,
+      "end": 622.7,
+      "duration": 3.89,
+      "text": "for a X I'm going to substitute lambda X"
+    },
+    {
+      "index": 168,
+      "start": 622.71,
+      "end": 629.0,
+      "duration": 6.29,
+      "text": "so I've got lambda squared X so from"
+    },
+    {
+      "index": 169,
+      "start": 629.01,
+      "end": 632.27,
+      "duration": 3.26,
+      "text": "that simple calculation I my conclusion"
+    },
+    {
+      "index": 170,
+      "start": 632.28,
+      "end": 637.13,
+      "duration": 4.85,
+      "text": "is that the eigenvalues of a squared are"
+    },
+    {
+      "index": 171,
+      "start": 637.14,
+      "end": 640.49,
+      "duration": 3.35,
+      "text": "lambda squared and the eigenvectors i"
+    },
+    {
+      "index": 172,
+      "start": 640.5,
+      "end": 642.59,
+      "duration": 2.09,
+      "text": "always think about both of those what"
+    },
+    {
+      "index": 173,
+      "start": 642.6,
+      "end": 644.54,
+      "duration": 1.94,
+      "text": "can i say about the eigenvalues they're"
+    },
+    {
+      "index": 174,
+      "start": 644.55,
+      "end": 646.67,
+      "duration": 2.12,
+      "text": "squared what can I say about the"
+    },
+    {
+      "index": 175,
+      "start": 646.68,
+      "end": 649.26,
+      "duration": 2.58,
+      "text": "eigenvectors they're the same"
+    },
+    {
+      "index": 176,
+      "start": 649.27,
+      "end": 654.69,
+      "duration": 5.42,
+      "text": "the same X is in s for a now let me see"
+    },
+    {
+      "index": 177,
+      "start": 654.7,
+      "end": 660.87,
+      "duration": 6.17,
+      "text": "that also from this formula how can I"
+    },
+    {
+      "index": 178,
+      "start": 660.88,
+      "end": 664.05,
+      "duration": 3.17,
+      "text": "see what a squared is looking like from"
+    },
+    {
+      "index": 179,
+      "start": 664.06,
+      "end": 667.199,
+      "duration": 3.139,
+      "text": "this formula so let me that was one way"
+    },
+    {
+      "index": 180,
+      "start": 667.209,
+      "end": 670.68,
+      "duration": 3.471,
+      "text": "to do it let me do it by just taking a"
+    },
+    {
+      "index": 181,
+      "start": 670.69,
+      "end": 676.59,
+      "duration": 5.9,
+      "text": "squared from that a squared is s lambda"
+    },
+    {
+      "index": 182,
+      "start": 676.6,
+      "end": 680.31,
+      "duration": 3.71,
+      "text": "s inverse that's a times s lambda s"
+    },
+    {
+      "index": 183,
+      "start": 680.32,
+      "end": 686.07,
+      "duration": 5.75,
+      "text": "inverse that's a which is this is the"
+    },
+    {
+      "index": 184,
+      "start": 686.08,
+      "end": 689.48,
+      "duration": 3.4,
+      "text": "beauty of eigenvalues eigenvectors"
+    },
+    {
+      "index": 185,
+      "start": 689.49,
+      "end": 692.48,
+      "duration": 2.99,
+      "text": "having that s inverse and s is the"
+    },
+    {
+      "index": 186,
+      "start": 692.49,
+      "end": 697.53,
+      "duration": 5.04,
+      "text": "identity so i've got s lambda squared s"
+    },
+    {
+      "index": 187,
+      "start": 697.54,
+      "end": 702.8,
+      "duration": 5.26,
+      "text": "inverse you see what that's telling me"
+    },
+    {
+      "index": 188,
+      "start": 702.81,
+      "end": 705.24,
+      "duration": 2.43,
+      "text": "it's telling me the same thing that I"
+    },
+    {
+      "index": 189,
+      "start": 705.25,
+      "end": 708.06,
+      "duration": 2.81,
+      "text": "just learned here but in the in a matrix"
+    },
+    {
+      "index": 190,
+      "start": 708.07,
+      "end": 711.6,
+      "duration": 3.53,
+      "text": "form it's telling me that the S is the"
+    },
+    {
+      "index": 191,
+      "start": 711.61,
+      "end": 715.8,
+      "duration": 4.19,
+      "text": "same the eigenvectors are the same but"
+    },
+    {
+      "index": 192,
+      "start": 715.81,
+      "end": 719.28,
+      "duration": 3.47,
+      "text": "the eigenvalues are squared because this"
+    },
+    {
+      "index": 193,
+      "start": 719.29,
+      "end": 721.5,
+      "duration": 2.21,
+      "text": "is what's lambda squared that's still"
+    },
+    {
+      "index": 194,
+      "start": 721.51,
+      "end": 724.53,
+      "duration": 3.02,
+      "text": "diagonal it's got little lambda 1"
+    },
+    {
+      "index": 195,
+      "start": 724.54,
+      "end": 726.93,
+      "duration": 2.39,
+      "text": "squared lambda 2 squared down to lambda"
+    },
+    {
+      "index": 196,
+      "start": 726.94,
+      "end": 729.75,
+      "duration": 2.81,
+      "text": "n squared on that diagonal those are the"
+    },
+    {
+      "index": 197,
+      "start": 729.76,
+      "end": 732.329,
+      "duration": 2.569,
+      "text": "eigenvalues as we just learned of a"
+    },
+    {
+      "index": 198,
+      "start": 732.339,
+      "end": 737.22,
+      "duration": 4.881,
+      "text": "squared okay so somehow those"
+    },
+    {
+      "index": 199,
+      "start": 737.23,
+      "end": 739.56,
+      "duration": 2.33,
+      "text": "eigenvalues and eigenvectors are really"
+    },
+    {
+      "index": 200,
+      "start": 739.57,
+      "end": 745.47,
+      "duration": 5.9,
+      "text": "giving you a way to to to see what's"
+    },
+    {
+      "index": 201,
+      "start": 745.48,
+      "end": 750.0,
+      "duration": 4.52,
+      "text": "going on inside a matrix now of course I"
+    },
+    {
+      "index": 202,
+      "start": 750.01,
+      "end": 752.819,
+      "duration": 2.809,
+      "text": "can continue that for to the case power"
+    },
+    {
+      "index": 203,
+      "start": 752.829,
+      "end": 757.44,
+      "duration": 4.611,
+      "text": "a to the case power if I multiply if I"
+    },
+    {
+      "index": 204,
+      "start": 757.45,
+      "end": 760.44,
+      "duration": 2.99,
+      "text": "have K of these together you see how s"
+    },
+    {
+      "index": 205,
+      "start": 760.45,
+      "end": 763.65,
+      "duration": 3.2,
+      "text": "inverse s will keep canceling in the in"
+    },
+    {
+      "index": 206,
+      "start": 763.66,
+      "end": 767.04,
+      "duration": 3.38,
+      "text": "the inside I'll have the s outside at"
+    },
+    {
+      "index": 207,
+      "start": 767.05,
+      "end": 771.21,
+      "duration": 4.16,
+      "text": "the far left and lambda will be in there"
+    },
+    {
+      "index": 208,
+      "start": 771.22,
+      "end": 774.96,
+      "duration": 3.74,
+      "text": "K times and s inverse so what's that"
+    },
+    {
+      "index": 209,
+      "start": 774.97,
+      "end": 778.25,
+      "duration": 3.28,
+      "text": "telling me that's telling me that the"
+    },
+    {
+      "index": 210,
+      "start": 778.26,
+      "end": 781.65,
+      "duration": 3.39,
+      "text": "eigenvalues of a of a to the K power are"
+    },
+    {
+      "index": 211,
+      "start": 781.66,
+      "end": 783.42,
+      "duration": 1.76,
+      "text": "the K power"
+    },
+    {
+      "index": 212,
+      "start": 783.43,
+      "end": 786.73,
+      "duration": 3.3,
+      "text": "the eigenvalues of a cubed are the cubes"
+    },
+    {
+      "index": 213,
+      "start": 786.74,
+      "end": 789.46,
+      "duration": 2.72,
+      "text": "of the eigenvalues of a and the"
+    },
+    {
+      "index": 214,
+      "start": 789.47,
+      "end": 795.34,
+      "duration": 5.87,
+      "text": "eigenvectors are the same the same okay"
+    },
+    {
+      "index": 215,
+      "start": 795.35,
+      "end": 799.75,
+      "duration": 4.4,
+      "text": "in other words eigenvalues and"
+    },
+    {
+      "index": 216,
+      "start": 799.76,
+      "end": 802.03,
+      "duration": 2.27,
+      "text": "eigenvectors give a great way to"
+    },
+    {
+      "index": 217,
+      "start": 802.04,
+      "end": 806.17,
+      "duration": 4.13,
+      "text": "understand the powers of a matrix if I"
+    },
+    {
+      "index": 218,
+      "start": 806.18,
+      "end": 808.6,
+      "duration": 2.42,
+      "text": "take this square of a matrix or the"
+    },
+    {
+      "index": 219,
+      "start": 808.61,
+      "end": 812.139,
+      "duration": 3.529,
+      "text": "hundredth power of a matrix the pivots"
+    },
+    {
+      "index": 220,
+      "start": 812.149,
+      "end": 814.35,
+      "duration": 2.201,
+      "text": "are all over the place"
+    },
+    {
+      "index": 221,
+      "start": 814.36,
+      "end": 819.55,
+      "duration": 5.19,
+      "text": "Lu if I multiply lu x lu x lu x lu a"
+    },
+    {
+      "index": 222,
+      "start": 819.56,
+      "end": 824.26,
+      "duration": 4.7,
+      "text": "hundred times i've got a hundred l use i"
+    },
+    {
+      "index": 223,
+      "start": 824.27,
+      "end": 826.75,
+      "duration": 2.48,
+      "text": "can't do anything with them but when i"
+    },
+    {
+      "index": 224,
+      "start": 826.76,
+      "end": 829.96,
+      "duration": 3.2,
+      "text": "multiply s lambda s inverse by itself"
+    },
+    {
+      "index": 225,
+      "start": 829.97,
+      "end": 832.68,
+      "duration": 2.71,
+      "text": "when I look at the eigenvector picture a"
+    },
+    {
+      "index": 226,
+      "start": 832.69,
+      "end": 836.74,
+      "duration": 4.05,
+      "text": "hundred times I get a hundred or 99 of"
+    },
+    {
+      "index": 227,
+      "start": 836.75,
+      "end": 841.15,
+      "duration": 4.4,
+      "text": "these guys cancelling out inside and I"
+    },
+    {
+      "index": 228,
+      "start": 841.16,
+      "end": 844.66,
+      "duration": 3.5,
+      "text": "get a to the hundredth is s lambda to"
+    },
+    {
+      "index": 229,
+      "start": 844.67,
+      "end": 847.35,
+      "duration": 2.68,
+      "text": "the hundredth s inverse I mean"
+    },
+    {
+      "index": 230,
+      "start": 847.36,
+      "end": 850.06,
+      "duration": 2.7,
+      "text": "eigenvalues tell you about powers of a"
+    },
+    {
+      "index": 231,
+      "start": 850.07,
+      "end": 854.59,
+      "duration": 4.52,
+      "text": "matrix in a way that we had no no way to"
+    },
+    {
+      "index": 232,
+      "start": 854.6,
+      "end": 857.86,
+      "duration": 3.26,
+      "text": "approach previously for example when"
+    },
+    {
+      "index": 233,
+      "start": 857.87,
+      "end": 863.079,
+      "duration": 5.209,
+      "text": "does when do the powers of a matrix go"
+    },
+    {
+      "index": 234,
+      "start": 863.089,
+      "end": 866.86,
+      "duration": 3.771,
+      "text": "to zero I would call that matrix stable"
+    },
+    {
+      "index": 235,
+      "start": 866.87,
+      "end": 870.66,
+      "duration": 3.79,
+      "text": "maybe so so so I could write down a"
+    },
+    {
+      "index": 236,
+      "start": 870.67,
+      "end": 874.86,
+      "duration": 4.19,
+      "text": "theorem I'll write it as a theorem just"
+    },
+    {
+      "index": 237,
+      "start": 874.87,
+      "end": 878.38,
+      "duration": 3.51,
+      "text": "use that word to emphasize that here I'm"
+    },
+    {
+      "index": 238,
+      "start": 878.39,
+      "end": 880.78,
+      "duration": 2.39,
+      "text": "getting this great fact from this"
+    },
+    {
+      "index": 239,
+      "start": 880.79,
+      "end": 885.12,
+      "duration": 4.33,
+      "text": "eigenvalue picture okay a to the K"
+    },
+    {
+      "index": 240,
+      "start": 885.13,
+      "end": 890.199,
+      "duration": 5.069,
+      "text": "approaches zero as K goes as K gets"
+    },
+    {
+      "index": 241,
+      "start": 890.209,
+      "end": 895.87,
+      "duration": 5.661,
+      "text": "bigger if what what's the how can I tell"
+    },
+    {
+      "index": 242,
+      "start": 895.88,
+      "end": 902.13,
+      "duration": 6.25,
+      "text": "for a matrix a if its powers go to zero"
+    },
+    {
+      "index": 243,
+      "start": 905.44,
+      "end": 905.45,
+      "duration": 0.01,
+      "text": "what's somewhere inside that matrix is"
+    },
+    {
+      "index": 244,
+      "start": 905.45,
+      "end": 908.62,
+      "duration": 3.17,
+      "text": "that information that information is not"
+    },
+    {
+      "index": 245,
+      "start": 908.63,
+      "end": 912.22,
+      "duration": 3.59,
+      "text": "present in the pivots it's present in"
+    },
+    {
+      "index": 246,
+      "start": 912.23,
+      "end": 914.769,
+      "duration": 2.539,
+      "text": "the eigenvalues what do I need for the"
+    },
+    {
+      "index": 247,
+      "start": 914.779,
+      "end": 916.78,
+      "duration": 2.001,
+      "text": "to know that if I take"
+    },
+    {
+      "index": 248,
+      "start": 916.79,
+      "end": 918.88,
+      "duration": 2.09,
+      "text": "I earn higher powers of a that this"
+    },
+    {
+      "index": 249,
+      "start": 918.89,
+      "end": 921.43,
+      "duration": 2.54,
+      "text": "matrix gets smaller and smaller well s"
+    },
+    {
+      "index": 250,
+      "start": 921.44,
+      "end": 923.46,
+      "duration": 2.02,
+      "text": "and s inverse are not moving"
+    },
+    {
+      "index": 251,
+      "start": 923.47,
+      "end": 926.47,
+      "duration": 3.0,
+      "text": "so it's this guy that has to get small"
+    },
+    {
+      "index": 252,
+      "start": 926.48,
+      "end": 929.08,
+      "duration": 2.6,
+      "text": "and that's easy too easy to understand"
+    },
+    {
+      "index": 253,
+      "start": 929.09,
+      "end": 935.26,
+      "duration": 6.17,
+      "text": "the requirement is all eigenvalues so"
+    },
+    {
+      "index": 254,
+      "start": 935.27,
+      "end": 938.89,
+      "duration": 3.62,
+      "text": "what is a requirement the eigenvalues"
+    },
+    {
+      "index": 255,
+      "start": 938.9,
+      "end": 942.1,
+      "duration": 3.2,
+      "text": "have to be less than one now I have to"
+    },
+    {
+      "index": 256,
+      "start": 942.11,
+      "end": 946.27,
+      "duration": 4.16,
+      "text": "write that absolute value because those"
+    },
+    {
+      "index": 257,
+      "start": 946.28,
+      "end": 948.88,
+      "duration": 2.6,
+      "text": "eigenvalues could be negative they could"
+    },
+    {
+      "index": 258,
+      "start": 948.89,
+      "end": 951.4,
+      "duration": 2.51,
+      "text": "be complex numbers so I'm taking the"
+    },
+    {
+      "index": 259,
+      "start": 951.41,
+      "end": 954.22,
+      "duration": 2.81,
+      "text": "absolute value half if all of those are"
+    },
+    {
+      "index": 260,
+      "start": 954.23,
+      "end": 962.98,
+      "duration": 8.75,
+      "text": "below one that's in fact we practically"
+    },
+    {
+      "index": 261,
+      "start": 962.99,
+      "end": 971.01,
+      "duration": 8.02,
+      "text": "see why let me just say that I that I"
+    },
+    {
+      "index": 262,
+      "start": 974.41,
+      "end": 974.42,
+      "duration": 0.01,
+      "text": "operating on one assumption here and I"
+    },
+    {
+      "index": 263,
+      "start": 974.42,
+      "end": 976.45,
+      "duration": 2.03,
+      "text": "gotta keep remembering that that"
+    },
+    {
+      "index": 264,
+      "start": 976.46,
+      "end": 978.88,
+      "duration": 2.42,
+      "text": "assumption is still present that"
+    },
+    {
+      "index": 265,
+      "start": 978.89,
+      "end": 981.07,
+      "duration": 2.18,
+      "text": "assumption was that I had a full set of"
+    },
+    {
+      "index": 266,
+      "start": 981.08,
+      "end": 984.82,
+      "duration": 3.74,
+      "text": "of n independent eigenvectors if I don't"
+    },
+    {
+      "index": 267,
+      "start": 984.83,
+      "end": 988.84,
+      "duration": 4.01,
+      "text": "have that then I then this approach is"
+    },
+    {
+      "index": 268,
+      "start": 988.85,
+      "end": 993.75,
+      "duration": 4.9,
+      "text": "not working so so again a pure"
+    },
+    {
+      "index": 269,
+      "start": 993.76,
+      "end": 996.7,
+      "duration": 2.94,
+      "text": "eigenvalue approach eigenvector approach"
+    },
+    {
+      "index": 270,
+      "start": 996.71,
+      "end": 1000.72,
+      "duration": 4.01,
+      "text": "needs and independent eigenvectors if we"
+    },
+    {
+      "index": 271,
+      "start": 1000.73,
+      "end": 1003.12,
+      "duration": 2.39,
+      "text": "don't have n independent eigenvectors we"
+    },
+    {
+      "index": 272,
+      "start": 1003.13,
+      "end": 1006.96,
+      "duration": 3.83,
+      "text": "can't diagonalize the matrix we can't"
+    },
+    {
+      "index": 273,
+      "start": 1006.97,
+      "end": 1012.77,
+      "duration": 5.8,
+      "text": "get to a diagonal matrix this this this"
+    },
+    {
+      "index": 274,
+      "start": 1012.78,
+      "end": 1016.44,
+      "duration": 3.66,
+      "text": "diagonalization is only possible if s"
+    },
+    {
+      "index": 275,
+      "start": 1016.45,
+      "end": 1017.9,
+      "duration": 1.45,
+      "text": "inverse makes sense"
+    },
+    {
+      "index": 276,
+      "start": 1017.91,
+      "end": 1021.0,
+      "duration": 3.09,
+      "text": "okay can I can I follow up on that point"
+    },
+    {
+      "index": 277,
+      "start": 1021.01,
+      "end": 1025.8,
+      "duration": 4.79,
+      "text": "now so so you see why what we get and"
+    },
+    {
+      "index": 278,
+      "start": 1025.81,
+      "end": 1028.32,
+      "duration": 2.51,
+      "text": "and why we want it because we get"
+    },
+    {
+      "index": 279,
+      "start": 1028.33,
+      "end": 1030.33,
+      "duration": 2.0,
+      "text": "information about the powers of a matrix"
+    },
+    {
+      "index": 280,
+      "start": 1030.34,
+      "end": 1034.22,
+      "duration": 3.88,
+      "text": "just immediately from the eigenvalues"
+    },
+    {
+      "index": 281,
+      "start": 1034.23,
+      "end": 1037.37,
+      "duration": 3.14,
+      "text": "okay now let me follow up on this"
+    },
+    {
+      "index": 282,
+      "start": 1037.38,
+      "end": 1042.44,
+      "duration": 5.06,
+      "text": "business of which matrices are"
+    },
+    {
+      "index": 283,
+      "start": 1042.45,
+      "end": 1045.93,
+      "duration": 3.48,
+      "text": "diagonalizable sorry about that long"
+    },
+    {
+      "index": 284,
+      "start": 1045.94,
+      "end": 1049.7,
+      "duration": 3.76,
+      "text": "word so a matrix is"
+    },
+    {
+      "index": 285,
+      "start": 1049.71,
+      "end": 1052.63,
+      "duration": 2.92,
+      "text": "sure so here's here's the main point a"
+    },
+    {
+      "index": 286,
+      "start": 1052.64,
+      "end": 1061.399,
+      "duration": 8.759,
+      "text": "is sure to be to have n independent"
+    },
+    {
+      "index": 287,
+      "start": 1061.409,
+      "end": 1070.669,
+      "duration": 9.26,
+      "text": "eigenvectors and and B now here comes"
+    },
+    {
+      "index": 288,
+      "start": 1070.679,
+      "end": 1080.48,
+      "duration": 9.801,
+      "text": "that word diagonalizable if if so we"
+    },
+    {
+      "index": 289,
+      "start": 1080.49,
+      "end": 1084.5,
+      "duration": 4.01,
+      "text": "might as well get the nice case out in"
+    },
+    {
+      "index": 290,
+      "start": 1084.51,
+      "end": 1088.99,
+      "duration": 4.48,
+      "text": "the open the nice case is when if all"
+    },
+    {
+      "index": 291,
+      "start": 1089.0,
+      "end": 1102.85,
+      "duration": 13.85,
+      "text": "the lambdas are different that means"
+    },
+    {
+      "index": 292,
+      "start": 1111.26,
+      "end": 1111.27,
+      "duration": 0.01,
+      "text": "no repeated eigenvalues okay"
+    },
+    {
+      "index": 293,
+      "start": 1111.27,
+      "end": 1115.7,
+      "duration": 4.43,
+      "text": "that's the nice case if my matrix and"
+    },
+    {
+      "index": 294,
+      "start": 1115.71,
+      "end": 1118.81,
+      "duration": 3.1,
+      "text": "most Maitre if I do a random matrix in"
+    },
+    {
+      "index": 295,
+      "start": 1118.82,
+      "end": 1123.38,
+      "duration": 4.56,
+      "text": "MATLAB and compute its eigenvalues so if"
+    },
+    {
+      "index": 296,
+      "start": 1123.39,
+      "end": 1134.799,
+      "duration": 11.409,
+      "text": "I computed if I took I of ran of ten ten"
+    },
+    {
+      "index": 297,
+      "start": 1139.01,
+      "end": 1139.02,
+      "duration": 0.01,
+      "text": "gave that MATLAB command the we'd get a"
+    },
+    {
+      "index": 298,
+      "start": 1139.02,
+      "end": 1141.799,
+      "duration": 2.779,
+      "text": "random 10 by 10 matrix we would get a"
+    },
+    {
+      "index": 299,
+      "start": 1141.809,
+      "end": 1146.63,
+      "duration": 4.821,
+      "text": "list of its ten eigenvalues and they"
+    },
+    {
+      "index": 300,
+      "start": 1146.64,
+      "end": 1148.58,
+      "duration": 1.94,
+      "text": "would be different they would be"
+    },
+    {
+      "index": 301,
+      "start": 1148.59,
+      "end": 1151.159,
+      "duration": 2.569,
+      "text": "distinct is the best word I would have a"
+    },
+    {
+      "index": 302,
+      "start": 1151.169,
+      "end": 1153.74,
+      "duration": 2.571,
+      "text": "random matrix will have ten distinct"
+    },
+    {
+      "index": 303,
+      "start": 1153.75,
+      "end": 1156.26,
+      "duration": 2.51,
+      "text": "that 10 by 10 matrix will have ten"
+    },
+    {
+      "index": 304,
+      "start": 1156.27,
+      "end": 1161.45,
+      "duration": 5.18,
+      "text": "distinct eigenvalues and if it does the"
+    },
+    {
+      "index": 305,
+      "start": 1161.46,
+      "end": 1163.399,
+      "duration": 1.939,
+      "text": "eigenvectors are automatically"
+    },
+    {
+      "index": 306,
+      "start": 1163.409,
+      "end": 1166.73,
+      "duration": 3.321,
+      "text": "independent so that's a nice fact I"
+    },
+    {
+      "index": 307,
+      "start": 1166.74,
+      "end": 1168.74,
+      "duration": 2.0,
+      "text": "could I'll refer you to the text for the"
+    },
+    {
+      "index": 308,
+      "start": 1168.75,
+      "end": 1173.32,
+      "duration": 4.57,
+      "text": "proof that that a is sure to have an"
+    },
+    {
+      "index": 309,
+      "start": 1173.33,
+      "end": 1177.409,
+      "duration": 4.079,
+      "text": "independent eigenvectors if the"
+    },
+    {
+      "index": 310,
+      "start": 1177.419,
+      "end": 1182.18,
+      "duration": 4.761,
+      "text": "eigenvalues are different if if all the"
+    },
+    {
+      "index": 311,
+      "start": 1182.19,
+      "end": 1183.65,
+      "duration": 1.46,
+      "text": "if all eigenvalues are"
+    },
+    {
+      "index": 312,
+      "start": 1183.66,
+      "end": 1187.28,
+      "duration": 3.62,
+      "text": "it's just if some lambdas are repeated"
+    },
+    {
+      "index": 313,
+      "start": 1187.29,
+      "end": 1190.85,
+      "duration": 3.56,
+      "text": "then I have to look more closely if an"
+    },
+    {
+      "index": 314,
+      "start": 1190.86,
+      "end": 1193.43,
+      "duration": 2.57,
+      "text": "eigenvalue is repeated I have to look I"
+    },
+    {
+      "index": 315,
+      "start": 1193.44,
+      "end": 1196.97,
+      "duration": 3.53,
+      "text": "have to count at the chick has it got"
+    },
+    {
+      "index": 316,
+      "start": 1196.98,
+      "end": 1200.21,
+      "duration": 3.23,
+      "text": "say it's repeated three times so what's"
+    },
+    {
+      "index": 317,
+      "start": 1200.22,
+      "end": 1203.33,
+      "duration": 3.11,
+      "text": "a possibility for the so it's so here's"
+    },
+    {
+      "index": 318,
+      "start": 1203.34,
+      "end": 1213.98,
+      "duration": 10.64,
+      "text": "here's the repeated possibility and let"
+    },
+    {
+      "index": 319,
+      "start": 1213.99,
+      "end": 1216.86,
+      "duration": 2.87,
+      "text": "me emphasize the conclusion that if I"
+    },
+    {
+      "index": 320,
+      "start": 1216.87,
+      "end": 1220.28,
+      "duration": 3.41,
+      "text": "have repeated eigenvalues I may or may"
+    },
+    {
+      "index": 321,
+      "start": 1220.29,
+      "end": 1230.68,
+      "duration": 10.39,
+      "text": "not I may or may not have have n"
+    },
+    {
+      "index": 322,
+      "start": 1230.69,
+      "end": 1236.96,
+      "duration": 6.27,
+      "text": "independent eigenvectors I might I you"
+    },
+    {
+      "index": 323,
+      "start": 1236.97,
+      "end": 1238.85,
+      "duration": 1.88,
+      "text": "know this isn't a completely negative"
+    },
+    {
+      "index": 324,
+      "start": 1238.86,
+      "end": 1243.74,
+      "duration": 4.88,
+      "text": "case the identity matrix well suppose I"
+    },
+    {
+      "index": 325,
+      "start": 1243.75,
+      "end": 1246.53,
+      "duration": 2.78,
+      "text": "take the ten by ten identity matrix what"
+    },
+    {
+      "index": 326,
+      "start": 1246.54,
+      "end": 1250.82,
+      "duration": 4.28,
+      "text": "are the eigenvalues of that matrix so"
+    },
+    {
+      "index": 327,
+      "start": 1250.83,
+      "end": 1253.25,
+      "duration": 2.42,
+      "text": "just let's take the easiest matrix the"
+    },
+    {
+      "index": 328,
+      "start": 1253.26,
+      "end": 1257.44,
+      "duration": 4.18,
+      "text": "identity if I look for its eigenvalues"
+    },
+    {
+      "index": 329,
+      "start": 1257.45,
+      "end": 1261.8,
+      "duration": 4.35,
+      "text": "they're all ones so that eigenvalue one"
+    },
+    {
+      "index": 330,
+      "start": 1261.81,
+      "end": 1264.89,
+      "duration": 3.08,
+      "text": "is repeated ten times but there's no"
+    },
+    {
+      "index": 331,
+      "start": 1264.9,
+      "end": 1266.78,
+      "duration": 1.88,
+      "text": "shortage of eigenvectors for the"
+    },
+    {
+      "index": 332,
+      "start": 1266.79,
+      "end": 1269.42,
+      "duration": 2.63,
+      "text": "identity matrix in fact every vector is"
+    },
+    {
+      "index": 333,
+      "start": 1269.43,
+      "end": 1271.7,
+      "duration": 2.27,
+      "text": "an eigenvector so i can take ten"
+    },
+    {
+      "index": 334,
+      "start": 1271.71,
+      "end": 1274.91,
+      "duration": 3.2,
+      "text": "independent vectors oh well what happens"
+    },
+    {
+      "index": 335,
+      "start": 1274.92,
+      "end": 1277.31,
+      "duration": 2.39,
+      "text": "to everything if a is the identity"
+    },
+    {
+      "index": 336,
+      "start": 1277.32,
+      "end": 1280.07,
+      "duration": 2.75,
+      "text": "matrix let's just think that one through"
+    },
+    {
+      "index": 337,
+      "start": 1280.08,
+      "end": 1283.06,
+      "duration": 2.98,
+      "text": "in our head if a is the identity matrix"
+    },
+    {
+      "index": 338,
+      "start": 1283.07,
+      "end": 1288.92,
+      "duration": 5.85,
+      "text": "then it's got plenty of eigenvectors i"
+    },
+    {
+      "index": 339,
+      "start": 1288.93,
+      "end": 1291.05,
+      "duration": 2.12,
+      "text": "choose ten independent vectors they're"
+    },
+    {
+      "index": 340,
+      "start": 1291.06,
+      "end": 1293.63,
+      "duration": 2.57,
+      "text": "the columns of s and and what do i get"
+    },
+    {
+      "index": 341,
+      "start": 1293.64,
+      "end": 1298.46,
+      "duration": 4.82,
+      "text": "from s inverse a s i get i again right"
+    },
+    {
+      "index": 342,
+      "start": 1298.47,
+      "end": 1301.61,
+      "duration": 3.14,
+      "text": "if a is the idea and of course that's"
+    },
+    {
+      "index": 343,
+      "start": 1301.62,
+      "end": 1304.73,
+      "duration": 3.11,
+      "text": "the correct lambda the matrix was"
+    },
+    {
+      "index": 344,
+      "start": 1304.74,
+      "end": 1307.58,
+      "duration": 2.84,
+      "text": "already diagonal so if the matrix is"
+    },
+    {
+      "index": 345,
+      "start": 1307.59,
+      "end": 1311.33,
+      "duration": 3.74,
+      "text": "already diagonal then the the lambda is"
+    },
+    {
+      "index": 346,
+      "start": 1311.34,
+      "end": 1314.66,
+      "duration": 3.32,
+      "text": "the same as the matrix a diagonal matrix"
+    },
+    {
+      "index": 347,
+      "start": 1314.67,
+      "end": 1316.85,
+      "duration": 2.18,
+      "text": "has got its eigenvalues sitting right"
+    },
+    {
+      "index": 348,
+      "start": 1316.86,
+      "end": 1317.18,
+      "duration": 0.32,
+      "text": "there in"
+    },
+    {
+      "index": 349,
+      "start": 1317.19,
+      "end": 1320.99,
+      "duration": 3.8,
+      "text": "front of you now if it's triangular the"
+    },
+    {
+      "index": 350,
+      "start": 1321.0,
+      "end": 1323.39,
+      "duration": 2.39,
+      "text": "eigenvalues are still sitting there but"
+    },
+    {
+      "index": 351,
+      "start": 1323.4,
+      "end": 1327.41,
+      "duration": 4.01,
+      "text": "so let's let's take a case where it's"
+    },
+    {
+      "index": 352,
+      "start": 1327.42,
+      "end": 1338.06,
+      "duration": 10.64,
+      "text": "triangular suppose a is like 2 1 2 0 so"
+    },
+    {
+      "index": 353,
+      "start": 1338.07,
+      "end": 1340.31,
+      "duration": 2.24,
+      "text": "there's a case that's going to be"
+    },
+    {
+      "index": 354,
+      "start": 1340.32,
+      "end": 1344.27,
+      "duration": 3.95,
+      "text": "trouble there's a case that's going to"
+    },
+    {
+      "index": 355,
+      "start": 1344.28,
+      "end": 1344.93,
+      "duration": 0.65,
+      "text": "be trouble"
+    },
+    {
+      "index": 356,
+      "start": 1344.94,
+      "end": 1348.98,
+      "duration": 4.04,
+      "text": "first of all what are the eigen value if"
+    },
+    {
+      "index": 357,
+      "start": 1348.99,
+      "end": 1351.14,
+      "duration": 2.15,
+      "text": "we start with a matrix the first thing"
+    },
+    {
+      "index": 358,
+      "start": 1351.15,
+      "end": 1352.85,
+      "duration": 1.7,
+      "text": "we do will practically without thinking"
+    },
+    {
+      "index": 359,
+      "start": 1352.86,
+      "end": 1355.22,
+      "duration": 2.36,
+      "text": "is compute the eigenvalues and"
+    },
+    {
+      "index": 360,
+      "start": 1355.23,
+      "end": 1357.32,
+      "duration": 2.09,
+      "text": "eigenvectors okay so what are the"
+    },
+    {
+      "index": 361,
+      "start": 1357.33,
+      "end": 1359.18,
+      "duration": 1.85,
+      "text": "eigenvalues you can tell me right away"
+    },
+    {
+      "index": 362,
+      "start": 1359.19,
+      "end": 1363.41,
+      "duration": 4.22,
+      "text": "what they are they're two and two right"
+    },
+    {
+      "index": 363,
+      "start": 1363.42,
+      "end": 1366.62,
+      "duration": 3.2,
+      "text": "it's a triangular matrix so when I do"
+    },
+    {
+      "index": 364,
+      "start": 1366.63,
+      "end": 1368.33,
+      "duration": 1.7,
+      "text": "this determinant shall I do this"
+    },
+    {
+      "index": 365,
+      "start": 1368.34,
+      "end": 1374.66,
+      "duration": 6.32,
+      "text": "determinant of a minus lambda I I'll get"
+    },
+    {
+      "index": 366,
+      "start": 1374.67,
+      "end": 1379.36,
+      "duration": 4.69,
+      "text": "this 2 minus lambda 1 0 2 minus lambda"
+    },
+    {
+      "index": 367,
+      "start": 1379.37,
+      "end": 1384.8,
+      "duration": 5.43,
+      "text": "right I take that determinant so I make"
+    },
+    {
+      "index": 368,
+      "start": 1384.81,
+      "end": 1387.17,
+      "duration": 2.36,
+      "text": "those into vertical bars to mean"
+    },
+    {
+      "index": 369,
+      "start": 1387.18,
+      "end": 1390.29,
+      "duration": 3.11,
+      "text": "determinant and what's the determinant"
+    },
+    {
+      "index": 370,
+      "start": 1390.3,
+      "end": 1393.5,
+      "duration": 3.2,
+      "text": "to minus lambda square what are the"
+    },
+    {
+      "index": 371,
+      "start": 1393.51,
+      "end": 1397.67,
+      "duration": 4.16,
+      "text": "roots lambda equal to twice so the"
+    },
+    {
+      "index": 372,
+      "start": 1397.68,
+      "end": 1401.92,
+      "duration": 4.24,
+      "text": "eigenvalues are lambda equals 2 and 2"
+    },
+    {
+      "index": 373,
+      "start": 1401.93,
+      "end": 1403.46,
+      "duration": 1.53,
+      "text": "okay fine"
+    },
+    {
+      "index": 374,
+      "start": 1403.47,
+      "end": 1405.91,
+      "duration": 2.44,
+      "text": "now the next step find the eigenvectors"
+    },
+    {
+      "index": 375,
+      "start": 1405.92,
+      "end": 1409.76,
+      "duration": 3.84,
+      "text": "so i hope for eigenvectors and what do I"
+    },
+    {
+      "index": 376,
+      "start": 1409.77,
+      "end": 1411.11,
+      "duration": 1.34,
+      "text": "find for this guy"
+    },
+    {
+      "index": 377,
+      "start": 1411.12,
+      "end": 1413.39,
+      "duration": 2.27,
+      "text": "I can Victor's for this guy when I"
+    },
+    {
+      "index": 378,
+      "start": 1413.4,
+      "end": 1417.95,
+      "duration": 4.55,
+      "text": "subtract 2 minus the identity so a minus"
+    },
+    {
+      "index": 379,
+      "start": 1417.96,
+      "end": 1426.26,
+      "duration": 8.3,
+      "text": "2 I as zeros here and I'm looking for"
+    },
+    {
+      "index": 380,
+      "start": 1426.27,
+      "end": 1429.5,
+      "duration": 3.23,
+      "text": "the null space what's what are the"
+    },
+    {
+      "index": 381,
+      "start": 1429.51,
+      "end": 1430.28,
+      "duration": 0.77,
+      "text": "eigenvectors"
+    },
+    {
+      "index": 382,
+      "start": 1430.29,
+      "end": 1433.07,
+      "duration": 2.78,
+      "text": "they're there they're the null space of"
+    },
+    {
+      "index": 383,
+      "start": 1433.08,
+      "end": 1437.48,
+      "duration": 4.4,
+      "text": "a minus lambda up the null space is only"
+    },
+    {
+      "index": 384,
+      "start": 1437.49,
+      "end": 1441.02,
+      "duration": 3.53,
+      "text": "one dimension this is a case where I"
+    },
+    {
+      "index": 385,
+      "start": 1441.03,
+      "end": 1443.86,
+      "duration": 2.83,
+      "text": "don't have enough eigenvectors my"
+    },
+    {
+      "index": 386,
+      "start": 1443.87,
+      "end": 1445.49,
+      "duration": 1.62,
+      "text": "algebra"
+    },
+    {
+      "index": 387,
+      "start": 1445.5,
+      "end": 1449.75,
+      "duration": 4.25,
+      "text": "simplicity is - I would say when I see"
+    },
+    {
+      "index": 388,
+      "start": 1449.76,
+      "end": 1452.0,
+      "duration": 2.24,
+      "text": "when I count how often the eigenvalue is"
+    },
+    {
+      "index": 389,
+      "start": 1452.01,
+      "end": 1455.32,
+      "duration": 3.31,
+      "text": "repeated"
+    },
+    {
+      "index": 390,
+      "start": 1458.33,
+      "end": 1458.34,
+      "duration": 0.01,
+      "text": "that's the algebraic multiplicity"
+    },
+    {
+      "index": 391,
+      "start": 1458.34,
+      "end": 1460.49,
+      "duration": 2.15,
+      "text": "that's the multiplicity how many times"
+    },
+    {
+      "index": 392,
+      "start": 1460.5,
+      "end": 1462.83,
+      "duration": 2.33,
+      "text": "is it the root of the polynomial my"
+    },
+    {
+      "index": 393,
+      "start": 1462.84,
+      "end": 1468.409,
+      "duration": 5.569,
+      "text": "polynomial is 2 minus lambda square it's"
+    },
+    {
+      "index": 394,
+      "start": 1468.419,
+      "end": 1469.34,
+      "duration": 0.921,
+      "text": "a double root"
+    },
+    {
+      "index": 395,
+      "start": 1469.35,
+      "end": 1473.36,
+      "duration": 4.01,
+      "text": "so my algebraic multiplicity is 2 but"
+    },
+    {
+      "index": 396,
+      "start": 1473.37,
+      "end": 1475.43,
+      "duration": 2.06,
+      "text": "the geometric multiplicity which looks"
+    },
+    {
+      "index": 397,
+      "start": 1475.44,
+      "end": 1479.74,
+      "duration": 4.3,
+      "text": "for vectors looks for eigenvectors and"
+    },
+    {
+      "index": 398,
+      "start": 1479.75,
+      "end": 1482.69,
+      "duration": 2.94,
+      "text": "which means the null space of this thing"
+    },
+    {
+      "index": 399,
+      "start": 1482.7,
+      "end": 1487.76,
+      "duration": 5.06,
+      "text": "and the only eigenvector is 1 0 that's"
+    },
+    {
+      "index": 400,
+      "start": 1487.77,
+      "end": 1491.87,
+      "duration": 4.1,
+      "text": "in the null space 0 1 is not in the null"
+    },
+    {
+      "index": 401,
+      "start": 1491.88,
+      "end": 1493.61,
+      "duration": 1.73,
+      "text": "space the null space is only one"
+    },
+    {
+      "index": 402,
+      "start": 1493.62,
+      "end": 1496.7,
+      "duration": 3.08,
+      "text": "dimensional so there is a matrix my this"
+    },
+    {
+      "index": 403,
+      "start": 1496.71,
+      "end": 1499.789,
+      "duration": 3.079,
+      "text": "a or the original a that are not"
+    },
+    {
+      "index": 404,
+      "start": 1499.799,
+      "end": 1504.46,
+      "duration": 4.661,
+      "text": "diagonalizable I can't I can't find two"
+    },
+    {
+      "index": 405,
+      "start": 1504.47,
+      "end": 1506.72,
+      "duration": 2.25,
+      "text": "independent eigenvectors there's only"
+    },
+    {
+      "index": 406,
+      "start": 1506.73,
+      "end": 1510.909,
+      "duration": 4.179,
+      "text": "one okay so that's the case that I'm"
+    },
+    {
+      "index": 407,
+      "start": 1510.919,
+      "end": 1514.21,
+      "duration": 3.291,
+      "text": "that's a case that I I'm not really"
+    },
+    {
+      "index": 408,
+      "start": 1514.22,
+      "end": 1517.37,
+      "duration": 3.15,
+      "text": "handling for example when I wrote down"
+    },
+    {
+      "index": 409,
+      "start": 1517.38,
+      "end": 1522.32,
+      "duration": 4.94,
+      "text": "up here that the powers went to 0 if the"
+    },
+    {
+      "index": 410,
+      "start": 1522.33,
+      "end": 1525.83,
+      "duration": 3.5,
+      "text": "eigen guys were below 1 I didn't really"
+    },
+    {
+      "index": 411,
+      "start": 1525.84,
+      "end": 1528.38,
+      "duration": 2.54,
+      "text": "handle that case of repeated eigen"
+    },
+    {
+      "index": 412,
+      "start": 1528.39,
+      "end": 1532.22,
+      "duration": 3.83,
+      "text": "values because my reasoning was based on"
+    },
+    {
+      "index": 413,
+      "start": 1532.23,
+      "end": 1535.97,
+      "duration": 3.74,
+      "text": "this form and this formula is based on n"
+    },
+    {
+      "index": 414,
+      "start": 1535.98,
+      "end": 1540.62,
+      "duration": 4.64,
+      "text": "independent eigenvectors ok so just this"
+    },
+    {
+      "index": 415,
+      "start": 1540.63,
+      "end": 1544.61,
+      "duration": 3.98,
+      "text": "just to say there are some matrices that"
+    },
+    {
+      "index": 416,
+      "start": 1544.62,
+      "end": 1547.399,
+      "duration": 2.779,
+      "text": "we that we don't cover through"
+    },
+    {
+      "index": 417,
+      "start": 1547.409,
+      "end": 1549.89,
+      "duration": 2.481,
+      "text": "diagonalization but the great majority"
+    },
+    {
+      "index": 418,
+      "start": 1549.9,
+      "end": 1554.63,
+      "duration": 4.73,
+      "text": "we do okay and we're always okay if we"
+    },
+    {
+      "index": 419,
+      "start": 1554.64,
+      "end": 1559.46,
+      "duration": 4.82,
+      "text": "have different distinct eigen oh okay"
+    },
+    {
+      "index": 420,
+      "start": 1559.47,
+      "end": 1562.97,
+      "duration": 3.5,
+      "text": "that's like the typical case because for"
+    },
+    {
+      "index": 421,
+      "start": 1562.98,
+      "end": 1565.22,
+      "duration": 2.24,
+      "text": "each eigen value there's at least one"
+    },
+    {
+      "index": 422,
+      "start": 1565.23,
+      "end": 1569.09,
+      "duration": 3.86,
+      "text": "eigenvector the algebraic multiplicity"
+    },
+    {
+      "index": 423,
+      "start": 1569.1,
+      "end": 1571.82,
+      "duration": 2.72,
+      "text": "one for every eigenvalue and the"
+    },
+    {
+      "index": 424,
+      "start": 1571.83,
+      "end": 1574.46,
+      "duration": 2.63,
+      "text": "geometric multiplicity is 1 there's one"
+    },
+    {
+      "index": 425,
+      "start": 1574.47,
+      "end": 1578.95,
+      "duration": 4.48,
+      "text": "eigenvector and they are independent"
+    },
+    {
+      "index": 426,
+      "start": 1578.96,
+      "end": 1584.139,
+      "duration": 5.179,
+      "text": "okay okay now let me come back to the"
+    },
+    {
+      "index": 427,
+      "start": 1584.149,
+      "end": 1587.96,
+      "duration": 3.811,
+      "text": "important case when when we're okay the"
+    },
+    {
+      "index": 428,
+      "start": 1587.97,
+      "end": 1590.919,
+      "duration": 2.949,
+      "text": "important case when we are dying light"
+    },
+    {
+      "index": 429,
+      "start": 1590.929,
+      "end": 1601.46,
+      "duration": 10.531,
+      "text": "let me look at so so so a quick let me"
+    },
+    {
+      "index": 430,
+      "start": 1601.47,
+      "end": 1607.669,
+      "duration": 6.199,
+      "text": "solve this equation the equation will be"
+    },
+    {
+      "index": 431,
+      "start": 1607.679,
+      "end": 1613.749,
+      "duration": 6.07,
+      "text": "each I start with some start with a"
+    },
+    {
+      "index": 432,
+      "start": 1613.759,
+      "end": 1623.779,
+      "duration": 10.02,
+      "text": "given vector u0 and then my equation is"
+    },
+    {
+      "index": 433,
+      "start": 1623.789,
+      "end": 1629.029,
+      "duration": 5.24,
+      "text": "that every step I multiply what I have"
+    },
+    {
+      "index": 434,
+      "start": 1629.039,
+      "end": 1635.72,
+      "duration": 6.681,
+      "text": "by a I then then equation ought to be"
+    },
+    {
+      "index": 435,
+      "start": 1635.73,
+      "end": 1640.879,
+      "duration": 5.149,
+      "text": "simple to handle and I'd like to be able"
+    },
+    {
+      "index": 436,
+      "start": 1640.889,
+      "end": 1643.669,
+      "duration": 2.78,
+      "text": "to solve how would I find if I start"
+    },
+    {
+      "index": 437,
+      "start": 1643.679,
+      "end": 1646.789,
+      "duration": 3.11,
+      "text": "with a vector you know it and I multiply"
+    },
+    {
+      "index": 438,
+      "start": 1646.799,
+      "end": 1651.619,
+      "duration": 4.82,
+      "text": "by a a hundred times what if I got what"
+    },
+    {
+      "index": 439,
+      "start": 1651.629,
+      "end": 1654.44,
+      "duration": 2.811,
+      "text": "I certainly write down a formula for the"
+    },
+    {
+      "index": 440,
+      "start": 1654.45,
+      "end": 1659.649,
+      "duration": 5.199,
+      "text": "answer so what what so u1 is a you know"
+    },
+    {
+      "index": 441,
+      "start": 1659.659,
+      "end": 1666.889,
+      "duration": 7.23,
+      "text": "and u2 is what's you to then you to I"
+    },
+    {
+      "index": 442,
+      "start": 1666.899,
+      "end": 1669.68,
+      "duration": 2.781,
+      "text": "multiply u2 I get from you one by"
+    },
+    {
+      "index": 443,
+      "start": 1669.69,
+      "end": 1672.919,
+      "duration": 3.229,
+      "text": "another multiplying by a so I've been a"
+    },
+    {
+      "index": 444,
+      "start": 1672.929,
+      "end": 1681.169,
+      "duration": 8.24,
+      "text": "twice and my formula is you K after K"
+    },
+    {
+      "index": 445,
+      "start": 1681.179,
+      "end": 1685.7,
+      "duration": 4.521,
+      "text": "steps I multiplied by a K times the"
+    },
+    {
+      "index": 446,
+      "start": 1685.71,
+      "end": 1690.249,
+      "duration": 4.539,
+      "text": "original you know you see what I'm doing"
+    },
+    {
+      "index": 447,
+      "start": 1690.259,
+      "end": 1692.93,
+      "duration": 2.671,
+      "text": "the next section is going to solve"
+    },
+    {
+      "index": 448,
+      "start": 1692.94,
+      "end": 1694.6,
+      "duration": 1.66,
+      "text": "systems of"
+    },
+    {
+      "index": 449,
+      "start": 1694.61,
+      "end": 1698.14,
+      "duration": 3.53,
+      "text": "rental equation I'm going to have"
+    },
+    {
+      "index": 450,
+      "start": 1698.15,
+      "end": 1702.1,
+      "duration": 3.95,
+      "text": "derivative this this section is the nice"
+    },
+    {
+      "index": 451,
+      "start": 1702.11,
+      "end": 1706.27,
+      "duration": 4.16,
+      "text": "one it's all difference equations I"
+    },
+    {
+      "index": 452,
+      "start": 1706.28,
+      "end": 1707.89,
+      "duration": 1.61,
+      "text": "would call that a difference equation"
+    },
+    {
+      "index": 453,
+      "start": 1707.9,
+      "end": 1711.49,
+      "duration": 3.59,
+      "text": "it's kinetic first-order I would call"
+    },
+    {
+      "index": 454,
+      "start": 1711.5,
+      "end": 1714.81,
+      "duration": 3.31,
+      "text": "that a first-order system because it"
+    },
+    {
+      "index": 455,
+      "start": 1714.82,
+      "end": 1718.27,
+      "duration": 3.45,
+      "text": "connects only it only goes up one level"
+    },
+    {
+      "index": 456,
+      "start": 1718.28,
+      "end": 1722.26,
+      "duration": 3.98,
+      "text": "and it's a system because these are"
+    },
+    {
+      "index": 457,
+      "start": 1722.27,
+      "end": 1726.34,
+      "duration": 4.07,
+      "text": "vectors and that's amazing and the"
+    },
+    {
+      "index": 458,
+      "start": 1726.35,
+      "end": 1733.15,
+      "duration": 6.8,
+      "text": "solution is just that okay but that's a"
+    },
+    {
+      "index": 459,
+      "start": 1733.16,
+      "end": 1736.299,
+      "duration": 3.139,
+      "text": "nice formula that's like that most"
+    },
+    {
+      "index": 460,
+      "start": 1736.309,
+      "end": 1738.64,
+      "duration": 2.331,
+      "text": "compact formula I could ever get you"
+    },
+    {
+      "index": 461,
+      "start": 1738.65,
+      "end": 1740.169,
+      "duration": 1.519,
+      "text": "what hundreds would be eighty to one"
+    },
+    {
+      "index": 462,
+      "start": 1740.179,
+      "end": 1743.08,
+      "duration": 2.901,
+      "text": "hundred you know but how would I"
+    },
+    {
+      "index": 463,
+      "start": 1743.09,
+      "end": 1747.13,
+      "duration": 4.04,
+      "text": "actually find you one hundred how would"
+    },
+    {
+      "index": 464,
+      "start": 1747.14,
+      "end": 1750.43,
+      "duration": 3.29,
+      "text": "I find how would I discover what you 100"
+    },
+    {
+      "index": 465,
+      "start": 1750.44,
+      "end": 1757.18,
+      "duration": 6.74,
+      "text": "is let me let me show you how here's the"
+    },
+    {
+      "index": 466,
+      "start": 1757.19,
+      "end": 1757.87,
+      "duration": 0.68,
+      "text": "idea"
+    },
+    {
+      "index": 467,
+      "start": 1757.88,
+      "end": 1762.64,
+      "duration": 4.76,
+      "text": "if so to solve to really stop shall I"
+    },
+    {
+      "index": 468,
+      "start": 1762.65,
+      "end": 1770.89,
+      "duration": 8.24,
+      "text": "say to really to really solve it I would"
+    },
+    {
+      "index": 469,
+      "start": 1770.9,
+      "end": 1775.0,
+      "duration": 4.1,
+      "text": "take this initial vector U naught and I"
+    },
+    {
+      "index": 470,
+      "start": 1775.01,
+      "end": 1777.31,
+      "duration": 2.3,
+      "text": "would write it as a combination of"
+    },
+    {
+      "index": 471,
+      "start": 1777.32,
+      "end": 1784.02,
+      "duration": 6.7,
+      "text": "eigenvectors to really solve right right"
+    },
+    {
+      "index": 472,
+      "start": 1788.47,
+      "end": 1788.48,
+      "duration": 0.01,
+      "text": "you not as a combination say certain"
+    },
+    {
+      "index": 473,
+      "start": 1788.48,
+      "end": 1791.049,
+      "duration": 2.569,
+      "text": "amount of the first eigen vector plus is"
+    },
+    {
+      "index": 474,
+      "start": 1791.059,
+      "end": 1791.73,
+      "duration": 0.671,
+      "text": "certain"
+    },
+    {
+      "index": 475,
+      "start": 1791.74,
+      "end": 1794.49,
+      "duration": 2.75,
+      "text": "the second eigenvector plus a certain"
+    },
+    {
+      "index": 476,
+      "start": 1794.5,
+      "end": 1802.74,
+      "duration": 8.24,
+      "text": "amount of the last time now multiply by"
+    },
+    {
+      "index": 477,
+      "start": 1802.75,
+      "end": 1806.399,
+      "duration": 3.649,
+      "text": "a you want you got to see the magic of"
+    },
+    {
+      "index": 478,
+      "start": 1806.409,
+      "end": 1810.389,
+      "duration": 3.98,
+      "text": "eigenvectors working multiplied by a so"
+    },
+    {
+      "index": 479,
+      "start": 1810.399,
+      "end": 1816.649,
+      "duration": 6.25,
+      "text": "a you know is what so a times that a"
+    },
+    {
+      "index": 480,
+      "start": 1816.659,
+      "end": 1819.899,
+      "duration": 3.24,
+      "text": "times so what I can separate it out into"
+    },
+    {
+      "index": 481,
+      "start": 1819.909,
+      "end": 1822.0,
+      "duration": 2.091,
+      "text": "n separate pieces and that's the whole"
+    },
+    {
+      "index": 482,
+      "start": 1822.01,
+      "end": 1825.69,
+      "duration": 3.68,
+      "text": "point that each of those pieces is going"
+    },
+    {
+      "index": 483,
+      "start": 1825.7,
+      "end": 1829.23,
+      "duration": 3.53,
+      "text": "in its own merry way each of those"
+    },
+    {
+      "index": 484,
+      "start": 1829.24,
+      "end": 1832.019,
+      "duration": 2.779,
+      "text": "pieces is an eigenvector and when I"
+    },
+    {
+      "index": 485,
+      "start": 1832.029,
+      "end": 1834.919,
+      "duration": 2.89,
+      "text": "multiply by a what is this piece become"
+    },
+    {
+      "index": 486,
+      "start": 1834.929,
+      "end": 1838.59,
+      "duration": 3.661,
+      "text": "so that's some amount of the first let's"
+    },
+    {
+      "index": 487,
+      "start": 1838.6,
+      "end": 1840.87,
+      "duration": 2.27,
+      "text": "suppose the eigenvectors are normalized"
+    },
+    {
+      "index": 488,
+      "start": 1840.88,
+      "end": 1845.97,
+      "duration": 5.09,
+      "text": "to be unit vectors so that says what the"
+    },
+    {
+      "index": 489,
+      "start": 1845.98,
+      "end": 1852.93,
+      "duration": 6.95,
+      "text": "eigenvector is and I need some multiple"
+    },
+    {
+      "index": 490,
+      "start": 1852.94,
+      "end": 1856.409,
+      "duration": 3.469,
+      "text": "of it to produce you know okay now when"
+    },
+    {
+      "index": 491,
+      "start": 1856.419,
+      "end": 1860.1,
+      "duration": 3.681,
+      "text": "I multiply by a what do I get I get c1"
+    },
+    {
+      "index": 492,
+      "start": 1860.11,
+      "end": 1864.48,
+      "duration": 4.37,
+      "text": "which is just a factor times ax 1 but"
+    },
+    {
+      "index": 493,
+      "start": 1864.49,
+      "end": 1871.35,
+      "duration": 6.86,
+      "text": "they X 1 is lambda 1 X 1 when I multiply"
+    },
+    {
+      "index": 494,
+      "start": 1871.36,
+      "end": 1877.039,
+      "duration": 5.679,
+      "text": "this by a I get C 2 lambda 2 X 2 and"
+    },
+    {
+      "index": 495,
+      "start": 1877.049,
+      "end": 1881.7,
+      "duration": 4.651,
+      "text": "here I get C n lambda n"
+    },
+    {
+      "index": 496,
+      "start": 1881.71,
+      "end": 1885.58,
+      "duration": 3.87,
+      "text": "and suppose I multiply by a to the"
+    },
+    {
+      "index": 497,
+      "start": 1885.59,
+      "end": 1888.94,
+      "duration": 3.35,
+      "text": "hundredth power now can we can we having"
+    },
+    {
+      "index": 498,
+      "start": 1888.95,
+      "end": 1890.98,
+      "duration": 2.03,
+      "text": "done it multiplied by a let's multiply"
+    },
+    {
+      "index": 499,
+      "start": 1890.99,
+      "end": 1893.98,
+      "duration": 2.99,
+      "text": "by a to the hundredth what happens to"
+    },
+    {
+      "index": 500,
+      "start": 1893.99,
+      "end": 1896.02,
+      "duration": 2.03,
+      "text": "this first term when I multiply by a to"
+    },
+    {
+      "index": 501,
+      "start": 1896.03,
+      "end": 1900.82,
+      "duration": 4.79,
+      "text": "the 100 it's got that factor lambda to"
+    },
+    {
+      "index": 502,
+      "start": 1900.83,
+      "end": 1904.33,
+      "duration": 3.5,
+      "text": "the hundredth that's the key that that's"
+    },
+    {
+      "index": 503,
+      "start": 1904.34,
+      "end": 1907.53,
+      "duration": 3.19,
+      "text": "what I mean by going its own merry way"
+    },
+    {
+      "index": 504,
+      "start": 1907.54,
+      "end": 1913.03,
+      "duration": 5.49,
+      "text": "if it is pure eigenvector it's exactly"
+    },
+    {
+      "index": 505,
+      "start": 1913.04,
+      "end": 1915.31,
+      "duration": 2.27,
+      "text": "in a direction where multiplication by a"
+    },
+    {
+      "index": 506,
+      "start": 1915.32,
+      "end": 1918.22,
+      "duration": 2.9,
+      "text": "just brings in a scalar factor lambda"
+    },
+    {
+      "index": 507,
+      "start": 1918.23,
+      "end": 1921.01,
+      "duration": 2.78,
+      "text": "one so a hundred times brings in this"
+    },
+    {
+      "index": 508,
+      "start": 1921.02,
+      "end": 1924.61,
+      "duration": 3.59,
+      "text": "100 times a hundred times lambda 200"
+    },
+    {
+      "index": 509,
+      "start": 1924.62,
+      "end": 1927.19,
+      "duration": 2.57,
+      "text": "times lambda n actually what are we"
+    },
+    {
+      "index": 510,
+      "start": 1927.2,
+      "end": 1932.94,
+      "duration": 5.74,
+      "text": "seeing here we're seeing this same"
+    },
+    {
+      "index": 511,
+      "start": 1932.95,
+      "end": 1935.74,
+      "duration": 2.79,
+      "text": "lambda capital lambda to the hundredth"
+    },
+    {
+      "index": 512,
+      "start": 1935.75,
+      "end": 1939.55,
+      "duration": 3.8,
+      "text": "as in the as in the diagonalization and"
+    },
+    {
+      "index": 513,
+      "start": 1939.56,
+      "end": 1943.15,
+      "duration": 3.59,
+      "text": "we're seeing the S matrix that matrix s"
+    },
+    {
+      "index": 514,
+      "start": 1943.16,
+      "end": 1945.94,
+      "duration": 2.78,
+      "text": "of eigenvector that's what this has got"
+    },
+    {
+      "index": 515,
+      "start": 1945.95,
+      "end": 1951.04,
+      "duration": 5.09,
+      "text": "this has got to amount to a lambda to"
+    },
+    {
+      "index": 516,
+      "start": 1951.05,
+      "end": 1958.09,
+      "duration": 7.04,
+      "text": "the hundredth power times and s times"
+    },
+    {
+      "index": 517,
+      "start": 1958.1,
+      "end": 1961.99,
+      "duration": 3.89,
+      "text": "this vector C that's telling us how much"
+    },
+    {
+      "index": 518,
+      "start": 1962.0,
+      "end": 1965.17,
+      "duration": 3.17,
+      "text": "of each one is in the original thing so"
+    },
+    {
+      "index": 519,
+      "start": 1965.18,
+      "end": 1968.14,
+      "duration": 2.96,
+      "text": "if I had to really find a hundredth"
+    },
+    {
+      "index": 520,
+      "start": 1968.15,
+      "end": 1971.83,
+      "duration": 3.68,
+      "text": "power I would take you not I would"
+    },
+    {
+      "index": 521,
+      "start": 1971.84,
+      "end": 1974.29,
+      "duration": 2.45,
+      "text": "expand it as a combination of"
+    },
+    {
+      "index": 522,
+      "start": 1974.3,
+      "end": 1977.41,
+      "duration": 3.11,
+      "text": "eigenvectors this is really s the"
+    },
+    {
+      "index": 523,
+      "start": 1977.42,
+      "end": 1979.99,
+      "duration": 2.57,
+      "text": "eigenvector matrix times C the"
+    },
+    {
+      "index": 524,
+      "start": 1980.0,
+      "end": 1984.88,
+      "duration": 4.88,
+      "text": "coefficient vector and then I would"
+    },
+    {
+      "index": 525,
+      "start": 1984.89,
+      "end": 1988.99,
+      "duration": 4.1,
+      "text": "immediately did by inserting these"
+    },
+    {
+      "index": 526,
+      "start": 1989.0,
+      "end": 1991.36,
+      "duration": 2.36,
+      "text": "hundreds powers of eigenvalues I'd have"
+    },
+    {
+      "index": 527,
+      "start": 1991.37,
+      "end": 1998.01,
+      "duration": 6.64,
+      "text": "the answer so the the up there must be"
+    },
+    {
+      "index": 528,
+      "start": 1998.02,
+      "end": 2004.02,
+      "duration": 6.0,
+      "text": "let's see okay it's so yeah so if you"
+    },
+    {
+      "index": 529,
+      "start": 2004.03,
+      "end": 2005.64,
+      "duration": 1.61,
+      "text": "100 is"
+    },
+    {
+      "index": 530,
+      "start": 2005.65,
+      "end": 2008.67,
+      "duration": 3.02,
+      "text": "one hundred times you know and you know"
+    },
+    {
+      "index": 531,
+      "start": 2008.68,
+      "end": 2012.45,
+      "duration": 3.77,
+      "text": "it is SC then you see this formula is"
+    },
+    {
+      "index": 532,
+      "start": 2012.46,
+      "end": 2016.95,
+      "duration": 4.49,
+      "text": "just this formula which is the way I"
+    },
+    {
+      "index": 533,
+      "start": 2016.96,
+      "end": 2021.74,
+      "duration": 4.78,
+      "text": "would actually get hold of this of this"
+    },
+    {
+      "index": 534,
+      "start": 2021.75,
+      "end": 2025.74,
+      "duration": 3.99,
+      "text": "you 100 which is let me put it here you"
+    },
+    {
+      "index": 535,
+      "start": 2025.75,
+      "end": 2028.71,
+      "duration": 2.96,
+      "text": "100 the way right the way I would"
+    },
+    {
+      "index": 536,
+      "start": 2028.72,
+      "end": 2031.23,
+      "duration": 2.51,
+      "text": "actually get hold of that see what what"
+    },
+    {
+      "index": 537,
+      "start": 2031.24,
+      "end": 2033.18,
+      "duration": 1.94,
+      "text": "the solution is after a hundred steps"
+    },
+    {
+      "index": 538,
+      "start": 2033.19,
+      "end": 2039.72,
+      "duration": 6.53,
+      "text": "would be expand the initial vector into"
+    },
+    {
+      "index": 539,
+      "start": 2039.73,
+      "end": 2045.81,
+      "duration": 6.08,
+      "text": "eigenvectors and up and let each"
+    },
+    {
+      "index": 540,
+      "start": 2045.82,
+      "end": 2048.96,
+      "duration": 3.14,
+      "text": "eigenvector go its own way multiplying"
+    },
+    {
+      "index": 541,
+      "start": 2048.97,
+      "end": 2051.75,
+      "duration": 2.78,
+      "text": "by a hundred by lambda at every step and"
+    },
+    {
+      "index": 542,
+      "start": 2051.76,
+      "end": 2053.639,
+      "duration": 1.879,
+      "text": "therefore by lambda to the hundredth"
+    },
+    {
+      "index": 543,
+      "start": 2053.649,
+      "end": 2056.46,
+      "duration": 2.811,
+      "text": "power after a hundred steps can I do"
+    },
+    {
+      "index": 544,
+      "start": 2056.47,
+      "end": 2057.36,
+      "duration": 0.89,
+      "text": "anything"
+    },
+    {
+      "index": 545,
+      "start": 2057.37,
+      "end": 2060.389,
+      "duration": 3.019,
+      "text": "so that's that's the the formulas now"
+    },
+    {
+      "index": 546,
+      "start": 2060.399,
+      "end": 2063.149,
+      "duration": 2.75,
+      "text": "let me take an example I'll use the"
+    },
+    {
+      "index": 547,
+      "start": 2063.159,
+      "end": 2070.44,
+      "duration": 7.281,
+      "text": "Fibonacci sequence as an example so so"
+    },
+    {
+      "index": 548,
+      "start": 2070.45,
+      "end": 2080.43,
+      "duration": 9.98,
+      "text": "Fibonacci example you remember the"
+    },
+    {
+      "index": 549,
+      "start": 2080.44,
+      "end": 2085.26,
+      "duration": 4.82,
+      "text": "Fibonacci numbers if we start with 1 and"
+    },
+    {
+      "index": 550,
+      "start": 2085.27,
+      "end": 2089.7,
+      "duration": 4.43,
+      "text": "1 as f naught oh I think I start with 0"
+    },
+    {
+      "index": 551,
+      "start": 2089.71,
+      "end": 2093.59,
+      "duration": 3.88,
+      "text": "that's 0 and 1 be the first"
+    },
+    {
+      "index": 552,
+      "start": 2093.6,
+      "end": 2098.07,
+      "duration": 4.47,
+      "text": "so there's F 0 and F 1 first to 7rg"
+    },
+    {
+      "index": 553,
+      "start": 2098.08,
+      "end": 2099.72,
+      "duration": 1.64,
+      "text": "numbers and what's the rule for"
+    },
+    {
+      "index": 554,
+      "start": 2099.73,
+      "end": 2104.22,
+      "duration": 4.49,
+      "text": "Fibonacci numbers I'm there the Sun the"
+    },
+    {
+      "index": 555,
+      "start": 2104.23,
+      "end": 2107.06,
+      "duration": 2.83,
+      "text": "next one is the sum of those so it's 1"
+    },
+    {
+      "index": 556,
+      "start": 2107.07,
+      "end": 2110.04,
+      "duration": 2.97,
+      "text": "the next one is the sum of those so it's"
+    },
+    {
+      "index": 557,
+      "start": 2110.05,
+      "end": 2113.07,
+      "duration": 3.02,
+      "text": "2 the next one is the sum of those so"
+    },
+    {
+      "index": 558,
+      "start": 2113.08,
+      "end": 2116.34,
+      "duration": 3.26,
+      "text": "it's 3 well it looks like 1 2 3 4 5 but"
+    },
+    {
+      "index": 559,
+      "start": 2116.35,
+      "end": 2119.25,
+      "duration": 2.9,
+      "text": "somehow it's not going to do that way"
+    },
+    {
+      "index": 560,
+      "start": 2119.26,
+      "end": 2122.34,
+      "duration": 3.08,
+      "text": "the next one is 5 right 2 or 3 makes 5"
+    },
+    {
+      "index": 561,
+      "start": 2122.35,
+      "end": 2129.14,
+      "duration": 6.79,
+      "text": "the next one is 8 the next one is 13 and"
+    },
+    {
+      "index": 562,
+      "start": 2129.15,
+      "end": 2132.24,
+      "duration": 3.09,
+      "text": "the 107 odd"
+    },
+    {
+      "index": 563,
+      "start": 2132.25,
+      "end": 2136.95,
+      "duration": 4.7,
+      "text": "number is one that's my question"
+    },
+    {
+      "index": 564,
+      "start": 2136.96,
+      "end": 2139.08,
+      "duration": 2.12,
+      "text": "how could I get a formula for the"
+    },
+    {
+      "index": 565,
+      "start": 2139.09,
+      "end": 2142.14,
+      "duration": 3.05,
+      "text": "hundredth number and and for example how"
+    },
+    {
+      "index": 566,
+      "start": 2142.15,
+      "end": 2145.47,
+      "duration": 3.32,
+      "text": "could I answer the question how fast are"
+    },
+    {
+      "index": 567,
+      "start": 2145.48,
+      "end": 2148.65,
+      "duration": 3.17,
+      "text": "they growing how fast are those"
+    },
+    {
+      "index": 568,
+      "start": 2148.66,
+      "end": 2152.73,
+      "duration": 4.07,
+      "text": "Fibonacci numbers growing they're"
+    },
+    {
+      "index": 569,
+      "start": 2152.74,
+      "end": 2155.43,
+      "duration": 2.69,
+      "text": "certainly growing it's not a stable case"
+    },
+    {
+      "index": 570,
+      "start": 2155.44,
+      "end": 2157.95,
+      "duration": 2.51,
+      "text": "whatever the eigenvalues of whatever"
+    },
+    {
+      "index": 571,
+      "start": 2157.96,
+      "end": 2160.02,
+      "duration": 2.06,
+      "text": "matrix it is they're not smaller than"
+    },
+    {
+      "index": 572,
+      "start": 2160.03,
+      "end": 2163.11,
+      "duration": 3.08,
+      "text": "one these numbers are growing but how"
+    },
+    {
+      "index": 573,
+      "start": 2163.12,
+      "end": 2166.47,
+      "duration": 3.35,
+      "text": "fast are they growing the answer is is"
+    },
+    {
+      "index": 574,
+      "start": 2166.48,
+      "end": 2169.26,
+      "duration": 2.78,
+      "text": "lies in the eigenvalue"
+    },
+    {
+      "index": 575,
+      "start": 2169.27,
+      "end": 2171.78,
+      "duration": 2.51,
+      "text": "so I've got to find the matrix let me"
+    },
+    {
+      "index": 576,
+      "start": 2171.79,
+      "end": 2176.16,
+      "duration": 4.37,
+      "text": "write down the Fibonacci rule FK plus 2"
+    },
+    {
+      "index": 577,
+      "start": 2176.17,
+      "end": 2185.61,
+      "duration": 9.44,
+      "text": "is f k plus 1 plus f k right now that's"
+    },
+    {
+      "index": 578,
+      "start": 2185.62,
+      "end": 2190.02,
+      "duration": 4.4,
+      "text": "not in my I want to write that as u k"
+    },
+    {
+      "index": 579,
+      "start": 2190.03,
+      "end": 2194.79,
+      "duration": 4.76,
+      "text": "plus 1 and a UK but right now what I've"
+    },
+    {
+      "index": 580,
+      "start": 2194.8,
+      "end": 2198.42,
+      "duration": 3.62,
+      "text": "got is a single equation not a system"
+    },
+    {
+      "index": 581,
+      "start": 2198.43,
+      "end": 2202.44,
+      "duration": 4.01,
+      "text": "and it's second order it's like having a"
+    },
+    {
+      "index": 582,
+      "start": 2202.45,
+      "end": 2204.42,
+      "duration": 1.97,
+      "text": "second order differential equation with"
+    },
+    {
+      "index": 583,
+      "start": 2204.43,
+      "end": 2206.64,
+      "duration": 2.21,
+      "text": "second derivative I want to get first"
+    },
+    {
+      "index": 584,
+      "start": 2206.65,
+      "end": 2208.5,
+      "duration": 1.85,
+      "text": "derivatives here I want to get first"
+    },
+    {
+      "index": 585,
+      "start": 2208.51,
+      "end": 2212.43,
+      "duration": 3.92,
+      "text": "difference so the way the way to do it"
+    },
+    {
+      "index": 586,
+      "start": 2212.44,
+      "end": 2218.25,
+      "duration": 5.81,
+      "text": "is to effuse UK will be a vector see it"
+    },
+    {
+      "index": 587,
+      "start": 2218.26,
+      "end": 2223.98,
+      "duration": 5.72,
+      "text": "a small trick let that UK be a vector F"
+    },
+    {
+      "index": 588,
+      "start": 2223.99,
+      "end": 2229.62,
+      "duration": 5.63,
+      "text": "k plus 1 and F K so I'm going to get a 2"
+    },
+    {
+      "index": 589,
+      "start": 2229.63,
+      "end": 2234.42,
+      "duration": 4.79,
+      "text": "by 2 system first order instead of a 1"
+    },
+    {
+      "index": 590,
+      "start": 2234.43,
+      "end": 2236.76,
+      "duration": 2.33,
+      "text": "instead of a scalar system second-order"
+    },
+    {
+      "index": 591,
+      "start": 2236.77,
+      "end": 2239.29,
+      "duration": 2.52,
+      "text": "by a simple trick I'm just going to have"
+    },
+    {
+      "index": 592,
+      "start": 2239.3,
+      "end": 2243.4,
+      "duration": 4.1,
+      "text": "in an equation FK plus 1 equals FK plus"
+    },
+    {
+      "index": 593,
+      "start": 2243.41,
+      "end": 2249.07,
+      "duration": 5.66,
+      "text": "1 that will be my second equation then"
+    },
+    {
+      "index": 594,
+      "start": 2249.08,
+      "end": 2253.66,
+      "duration": 4.58,
+      "text": "this is my system this is my unknown and"
+    },
+    {
+      "index": 595,
+      "start": 2253.67,
+      "end": 2260.32,
+      "duration": 6.65,
+      "text": "what's my one-step equation so so now UK"
+    },
+    {
+      "index": 596,
+      "start": 2260.33,
+      "end": 2264.34,
+      "duration": 4.01,
+      "text": "plus 1 that's so UK plus 1 is the left"
+    },
+    {
+      "index": 597,
+      "start": 2264.35,
+      "end": 2266.56,
+      "duration": 2.21,
+      "text": "side and what have I got here on the"
+    },
+    {
+      "index": 598,
+      "start": 2266.57,
+      "end": 2269.82,
+      "duration": 3.25,
+      "text": "right side I've got some matrix"
+    },
+    {
+      "index": 599,
+      "start": 2269.83,
+      "end": 2274.8,
+      "duration": 4.97,
+      "text": "multiplying UK can you see that alright"
+    },
+    {
+      "index": 600,
+      "start": 2274.81,
+      "end": 2277.96,
+      "duration": 3.15,
+      "text": "if you can see it then you can tell me"
+    },
+    {
+      "index": 601,
+      "start": 2277.97,
+      "end": 2279.25,
+      "duration": 1.28,
+      "text": "what the matrix is"
+    },
+    {
+      "index": 602,
+      "start": 2279.26,
+      "end": 2281.65,
+      "duration": 2.39,
+      "text": "do you see that I'm taking my system"
+    },
+    {
+      "index": 603,
+      "start": 2281.66,
+      "end": 2285.67,
+      "duration": 4.01,
+      "text": "here artificially made it into a system"
+    },
+    {
+      "index": 604,
+      "start": 2285.68,
+      "end": 2288.58,
+      "duration": 2.9,
+      "text": "I artificially made the unknown into a"
+    },
+    {
+      "index": 605,
+      "start": 2288.59,
+      "end": 2293.14,
+      "duration": 4.55,
+      "text": "vector and now I'm ready to look at and"
+    },
+    {
+      "index": 606,
+      "start": 2293.15,
+      "end": 2296.17,
+      "duration": 3.02,
+      "text": "see what the matrix so do you see the"
+    },
+    {
+      "index": 607,
+      "start": 2296.18,
+      "end": 2300.16,
+      "duration": 3.98,
+      "text": "left side UK plus 1 is FK + 2 FK plus 1"
+    },
+    {
+      "index": 608,
+      "start": 2300.17,
+      "end": 2302.35,
+      "duration": 2.18,
+      "text": "that's just what I want on the right"
+    },
+    {
+      "index": 609,
+      "start": 2302.36,
+      "end": 2305.77,
+      "duration": 3.41,
+      "text": "side this remember this UK here I mean"
+    },
+    {
+      "index": 610,
+      "start": 2305.78,
+      "end": 2311.59,
+      "duration": 5.81,
+      "text": "for the moment put it as FK plus 1 FK so"
+    },
+    {
+      "index": 611,
+      "start": 2311.6,
+      "end": 2317.26,
+      "duration": 5.66,
+      "text": "what's the matrix well that is a 1 and a"
+    },
+    {
+      "index": 612,
+      "start": 2317.27,
+      "end": 2320.49,
+      "duration": 3.22,
+      "text": "1 and that has a 1 and a 0"
+    },
+    {
+      "index": 613,
+      "start": 2320.5,
+      "end": 2324.22,
+      "duration": 3.72,
+      "text": "there's the matrix you see that that"
+    },
+    {
+      "index": 614,
+      "start": 2324.23,
+      "end": 2328.24,
+      "duration": 4.01,
+      "text": "gives me the right hand set so there's"
+    },
+    {
+      "index": 615,
+      "start": 2328.25,
+      "end": 2335.94,
+      "duration": 7.69,
+      "text": "the matrix a and this is our friend UK"
+    },
+    {
+      "index": 616,
+      "start": 2335.95,
+      "end": 2340.21,
+      "duration": 4.26,
+      "text": "so we've got so that simple trick would"
+    },
+    {
+      "index": 617,
+      "start": 2340.22,
+      "end": 2343.42,
+      "duration": 3.2,
+      "text": "change the second order scalar problem"
+    },
+    {
+      "index": 618,
+      "start": 2343.43,
+      "end": 2347.53,
+      "duration": 4.1,
+      "text": "to a first order system - but with two"
+    },
+    {
+      "index": 619,
+      "start": 2347.54,
+      "end": 2350.95,
+      "duration": 3.41,
+      "text": "unknowns with a matrix and now what do I"
+    },
+    {
+      "index": 620,
+      "start": 2350.96,
+      "end": 2352.23,
+      "duration": 1.27,
+      "text": "do"
+    },
+    {
+      "index": 621,
+      "start": 2352.24,
+      "end": 2355.36,
+      "duration": 3.12,
+      "text": "well before I even think I find its"
+    },
+    {
+      "index": 622,
+      "start": 2355.37,
+      "end": 2358.42,
+      "duration": 3.05,
+      "text": "eigen values and eigen values so what"
+    },
+    {
+      "index": 623,
+      "start": 2358.43,
+      "end": 2360.2,
+      "duration": 1.77,
+      "text": "are the eigen values and I"
+    },
+    {
+      "index": 624,
+      "start": 2360.21,
+      "end": 2365.329,
+      "duration": 5.119,
+      "text": "that mate that's the Iowa's first let me"
+    },
+    {
+      "index": 625,
+      "start": 2365.339,
+      "end": 2368.77,
+      "duration": 3.431,
+      "text": "just like think for a minute"
+    },
+    {
+      "index": 626,
+      "start": 2368.78,
+      "end": 2372.28,
+      "duration": 3.5,
+      "text": "it's two by two so this shouldn't be"
+    },
+    {
+      "index": 627,
+      "start": 2372.29,
+      "end": 2378.14,
+      "duration": 5.85,
+      "text": "impossible to do let's do it okay so my"
+    },
+    {
+      "index": 628,
+      "start": 2378.15,
+      "end": 2385.9,
+      "duration": 7.75,
+      "text": "matrix again is one one one zero it's"
+    },
+    {
+      "index": 629,
+      "start": 2385.91,
+      "end": 2392.349,
+      "duration": 6.439,
+      "text": "symmetric by the way so what I will"
+    },
+    {
+      "index": 630,
+      "start": 2392.359,
+      "end": 2395.72,
+      "duration": 3.361,
+      "text": "eventually know about symmetric matrices"
+    },
+    {
+      "index": 631,
+      "start": 2395.73,
+      "end": 2398.359,
+      "duration": 2.629,
+      "text": "is that the eigenvalues will come out"
+    },
+    {
+      "index": 632,
+      "start": 2398.369,
+      "end": 2400.7,
+      "duration": 2.331,
+      "text": "real I won't get any complex numbers"
+    },
+    {
+      "index": 633,
+      "start": 2400.71,
+      "end": 2405.68,
+      "duration": 4.97,
+      "text": "here and the eigenvectors once I get"
+    },
+    {
+      "index": 634,
+      "start": 2405.69,
+      "end": 2408.92,
+      "duration": 3.23,
+      "text": "those actually will be orthogonal but"
+    },
+    {
+      "index": 635,
+      "start": 2408.93,
+      "end": 2411.26,
+      "duration": 2.33,
+      "text": "2x2 I'm more interested in what the"
+    },
+    {
+      "index": 636,
+      "start": 2411.27,
+      "end": 2414.74,
+      "duration": 3.47,
+      "text": "actual numbers are what do I know about"
+    },
+    {
+      "index": 637,
+      "start": 2414.75,
+      "end": 2417.05,
+      "duration": 2.3,
+      "text": "those two numbers what should it do you"
+    },
+    {
+      "index": 638,
+      "start": 2417.06,
+      "end": 2419.27,
+      "duration": 2.21,
+      "text": "want me to find this determinant of a"
+    },
+    {
+      "index": 639,
+      "start": 2419.28,
+      "end": 2424.43,
+      "duration": 5.15,
+      "text": "minus lambda hi sure so it's the"
+    },
+    {
+      "index": 640,
+      "start": 2424.44,
+      "end": 2428.0,
+      "duration": 3.56,
+      "text": "determinant of 1 minus lambda 1 1 0"
+    },
+    {
+      "index": 641,
+      "start": 2428.01,
+      "end": 2431.23,
+      "duration": 3.22,
+      "text": "right"
+    },
+    {
+      "index": 642,
+      "start": 2432.859,
+      "end": 2432.869,
+      "duration": 0.01,
+      "text": "minus lambda"
+    },
+    {
+      "index": 643,
+      "start": 2432.869,
+      "end": 2440.599,
+      "duration": 7.73,
+      "text": "yes okay okay there'll be two"
+    },
+    {
+      "index": 644,
+      "start": 2440.609,
+      "end": 2444.17,
+      "duration": 3.561,
+      "text": "eigenvectors well tell me again what i"
+    },
+    {
+      "index": 645,
+      "start": 2444.18,
+      "end": 2446.18,
+      "duration": 2.0,
+      "text": "know about the two eigenvalues before I"
+    },
+    {
+      "index": 646,
+      "start": 2446.19,
+      "end": 2448.19,
+      "duration": 2.0,
+      "text": "go any further tell me something about"
+    },
+    {
+      "index": 647,
+      "start": 2448.2,
+      "end": 2450.109,
+      "duration": 1.909,
+      "text": "these two eigenvalues what are they add"
+    },
+    {
+      "index": 648,
+      "start": 2450.119,
+      "end": 2453.61,
+      "duration": 3.491,
+      "text": "up to lambda 1 plus lambda 2"
+    },
+    {
+      "index": 649,
+      "start": 2453.62,
+      "end": 2460.21,
+      "duration": 6.59,
+      "text": "is is the same as the trace down the"
+    },
+    {
+      "index": 650,
+      "start": 2460.22,
+      "end": 2464.14,
+      "duration": 3.92,
+      "text": "diagonal of the matrix 1 and 0 is 1 so"
+    },
+    {
+      "index": 651,
+      "start": 2464.15,
+      "end": 2467.08,
+      "duration": 2.93,
+      "text": "lambda 1 plus lambda 2 should come out"
+    },
+    {
+      "index": 652,
+      "start": 2467.09,
+      "end": 2470.41,
+      "duration": 3.32,
+      "text": "to be 1 and lambda 1 times lambda 2"
+    },
+    {
+      "index": 653,
+      "start": 2470.42,
+      "end": 2472.33,
+      "duration": 1.91,
+      "text": "should come out to be the determinant"
+    },
+    {
+      "index": 654,
+      "start": 2472.34,
+      "end": 2476.32,
+      "duration": 3.98,
+      "text": "which is minus 1 so I'm expecting the"
+    },
+    {
+      "index": 655,
+      "start": 2476.33,
+      "end": 2479.05,
+      "duration": 2.72,
+      "text": "eigenvalues to head to 1 and to multiply"
+    },
+    {
+      "index": 656,
+      "start": 2479.06,
+      "end": 2482.77,
+      "duration": 3.71,
+      "text": "2 minus 1 but let's just see a happy if"
+    },
+    {
+      "index": 657,
+      "start": 2482.78,
+      "end": 2485.56,
+      "duration": 2.78,
+      "text": "I multiply this out I get that times"
+    },
+    {
+      "index": 658,
+      "start": 2485.57,
+      "end": 2487.6,
+      "duration": 2.03,
+      "text": "that will be a lambda squared minus"
+    },
+    {
+      "index": 659,
+      "start": 2487.61,
+      "end": 2494.86,
+      "duration": 7.25,
+      "text": "lambda minus 1 good lambda squared minus"
+    },
+    {
+      "index": 660,
+      "start": 2494.87,
+      "end": 2500.34,
+      "duration": 5.47,
+      "text": "lambda minus 1 actually you see the"
+    },
+    {
+      "index": 661,
+      "start": 2500.35,
+      "end": 2503.77,
+      "duration": 3.42,
+      "text": "compare that with the original equation"
+    },
+    {
+      "index": 662,
+      "start": 2503.78,
+      "end": 2509.26,
+      "duration": 5.48,
+      "text": "that I started FK plus 2 minus FK plus 1"
+    },
+    {
+      "index": 663,
+      "start": 2509.27,
+      "end": 2514.93,
+      "duration": 5.66,
+      "text": "minus FK is 0 the the recurrent the"
+    },
+    {
+      "index": 664,
+      "start": 2514.94,
+      "end": 2517.81,
+      "duration": 2.87,
+      "text": "recursion with that be that the"
+    },
+    {
+      "index": 665,
+      "start": 2517.82,
+      "end": 2521.1,
+      "duration": 3.28,
+      "text": "Fibonacci number satisfied is somehow"
+    },
+    {
+      "index": 666,
+      "start": 2521.11,
+      "end": 2523.42,
+      "duration": 2.31,
+      "text": "showing up directly here for the"
+    },
+    {
+      "index": 667,
+      "start": 2523.43,
+      "end": 2526.42,
+      "duration": 2.99,
+      "text": "eigenvalues when we set that to 0 okay"
+    },
+    {
+      "index": 668,
+      "start": 2526.43,
+      "end": 2531.61,
+      "duration": 5.18,
+      "text": "that's all well I would like to be able"
+    },
+    {
+      "index": 669,
+      "start": 2531.62,
+      "end": 2534.7,
+      "duration": 3.08,
+      "text": "to factor that that quadratic but I'm"
+    },
+    {
+      "index": 670,
+      "start": 2534.71,
+      "end": 2536.98,
+      "duration": 2.27,
+      "text": "better off to use the quadratic formula"
+    },
+    {
+      "index": 671,
+      "start": 2536.99,
+      "end": 2542.71,
+      "duration": 5.72,
+      "text": "land that is let's see minus B is 1 plus"
+    },
+    {
+      "index": 672,
+      "start": 2542.72,
+      "end": 2545.83,
+      "duration": 3.11,
+      "text": "or minus square root of B squared which"
+    },
+    {
+      "index": 673,
+      "start": 2545.84,
+      "end": 2550.75,
+      "duration": 4.91,
+      "text": "is 1 minus 4 times that times that which"
+    },
+    {
+      "index": 674,
+      "start": 2550.76,
+      "end": 2558.46,
+      "duration": 7.7,
+      "text": "is plus 4 over 2 so that's the square"
+    },
+    {
+      "index": 675,
+      "start": 2558.47,
+      "end": 2563.2,
+      "duration": 4.73,
+      "text": "root of 5"
+    },
+    {
+      "index": 676,
+      "start": 2568.67,
+      "end": 2568.68,
+      "duration": 0.01,
+      "text": "so the eigenvalues are lambda 1 is 1/2"
+    },
+    {
+      "index": 677,
+      "start": 2568.68,
+      "end": 2573.41,
+      "duration": 4.73,
+      "text": "of 1 plus square root of 5 and lambda 2"
+    },
+    {
+      "index": 678,
+      "start": 2573.42,
+      "end": 2579.08,
+      "duration": 5.66,
+      "text": "is 1/2 of 1 minus square root of and"
+    },
+    {
+      "index": 679,
+      "start": 2579.09,
+      "end": 2582.97,
+      "duration": 3.88,
+      "text": "sure enough they those add up to 1 and"
+    },
+    {
+      "index": 680,
+      "start": 2582.98,
+      "end": 2587.54,
+      "duration": 4.56,
+      "text": "they multiply to give minus 1 okay those"
+    },
+    {
+      "index": 681,
+      "start": 2587.55,
+      "end": 2590.48,
+      "duration": 2.93,
+      "text": "are the two I can go how what are those"
+    },
+    {
+      "index": 682,
+      "start": 2590.49,
+      "end": 2593.23,
+      "duration": 2.74,
+      "text": "numbers approximately square root of 5"
+    },
+    {
+      "index": 683,
+      "start": 2593.24,
+      "end": 2599.44,
+      "duration": 6.2,
+      "text": "well it's more than 2 what less than 3"
+    },
+    {
+      "index": 684,
+      "start": 2599.45,
+      "end": 2604.42,
+      "duration": 4.97,
+      "text": "it could be nice to know these numbers I"
+    },
+    {
+      "index": 685,
+      "start": 2604.43,
+      "end": 2609.44,
+      "duration": 5.01,
+      "text": "think I think that that so that number"
+    },
+    {
+      "index": 686,
+      "start": 2609.45,
+      "end": 2612.44,
+      "duration": 2.99,
+      "text": "comes out bigger than 1 right yeah"
+    },
+    {
+      "index": 687,
+      "start": 2612.45,
+      "end": 2614.15,
+      "duration": 1.7,
+      "text": "that's right this number comes out"
+    },
+    {
+      "index": 688,
+      "start": 2614.16,
+      "end": 2621.73,
+      "duration": 7.57,
+      "text": "bigger than 1 it's about 1.618"
+    },
+    {
+      "index": 689,
+      "start": 2627.44,
+      "end": 2627.45,
+      "duration": 0.01,
+      "text": "not exactly it suppose it's one point"
+    },
+    {
+      "index": 690,
+      "start": 2627.45,
+      "end": 2633.61,
+      "duration": 6.16,
+      "text": "just like a face so then what's lambda 2"
+    },
+    {
+      "index": 691,
+      "start": 2633.62,
+      "end": 2637.03,
+      "duration": 3.41,
+      "text": "is lambda 2 positive or negative"
+    },
+    {
+      "index": 692,
+      "start": 2637.04,
+      "end": 2641.63,
+      "duration": 4.59,
+      "text": "negative right obviously negative and I"
+    },
+    {
+      "index": 693,
+      "start": 2641.64,
+      "end": 2645.65,
+      "duration": 4.01,
+      "text": "knew that so it's minus and they add up"
+    },
+    {
+      "index": 694,
+      "start": 2645.66,
+      "end": 2650.66,
+      "duration": 5.0,
+      "text": "to 1 so minus point 6 1 8 I guess ok and"
+    },
+    {
+      "index": 695,
+      "start": 2650.67,
+      "end": 2655.51,
+      "duration": 4.84,
+      "text": "some more those are the two eigenvalues"
+    },
+    {
+      "index": 696,
+      "start": 2655.52,
+      "end": 2658.19,
+      "duration": 2.67,
+      "text": "one eigenvalue bigger than one one"
+    },
+    {
+      "index": 697,
+      "start": 2658.2,
+      "end": 2660.05,
+      "duration": 1.85,
+      "text": "eigenvalue smaller than one"
+    },
+    {
+      "index": 698,
+      "start": 2660.06,
+      "end": 2662.48,
+      "duration": 2.42,
+      "text": "that's a great situation to be in of"
+    },
+    {
+      "index": 699,
+      "start": 2662.49,
+      "end": 2666.17,
+      "duration": 3.68,
+      "text": "course the eigenvalues are different so"
+    },
+    {
+      "index": 700,
+      "start": 2666.18,
+      "end": 2668.89,
+      "duration": 2.71,
+      "text": "there's no doubt whatever is this matrix"
+    },
+    {
+      "index": 701,
+      "start": 2668.9,
+      "end": 2672.97,
+      "duration": 4.07,
+      "text": "diagonalizable is this matrix"
+    },
+    {
+      "index": 702,
+      "start": 2672.98,
+      "end": 2675.14,
+      "duration": 2.16,
+      "text": "diagonalizable that original matrix a"
+    },
+    {
+      "index": 703,
+      "start": 2675.15,
+      "end": 2677.66,
+      "duration": 2.51,
+      "text": "short we've got two distinct eigenvalues"
+    },
+    {
+      "index": 704,
+      "start": 2677.67,
+      "end": 2681.83,
+      "duration": 4.16,
+      "text": "and we can find the eigenvectors in a"
+    },
+    {
+      "index": 705,
+      "start": 2681.84,
+      "end": 2687.98,
+      "duration": 6.14,
+      "text": "moment but they'll be independent will"
+    },
+    {
+      "index": 706,
+      "start": 2687.99,
+      "end": 2691.13,
+      "duration": 3.14,
+      "text": "be diagonalizable and now you can"
+    },
+    {
+      "index": 707,
+      "start": 2691.14,
+      "end": 2694.28,
+      "duration": 3.14,
+      "text": "already answer my very first question"
+    },
+    {
+      "index": 708,
+      "start": 2694.29,
+      "end": 2696.89,
+      "duration": 2.6,
+      "text": "how faster those Fibonacci numbers"
+    },
+    {
+      "index": 709,
+      "start": 2696.9,
+      "end": 2700.94,
+      "duration": 4.04,
+      "text": "increasing how close they're increasing"
+    },
+    {
+      "index": 710,
+      "start": 2700.95,
+      "end": 2703.7,
+      "duration": 2.75,
+      "text": "right they're not doubling at every step"
+    },
+    {
+      "index": 711,
+      "start": 2703.71,
+      "end": 2708.23,
+      "duration": 4.52,
+      "text": "let's look again these numbers 5 8 13"
+    },
+    {
+      "index": 712,
+      "start": 2708.24,
+      "end": 2713.83,
+      "duration": 5.59,
+      "text": "it's not obvious the next would be 21 34"
+    },
+    {
+      "index": 713,
+      "start": 2713.84,
+      "end": 2721.19,
+      "duration": 7.35,
+      "text": "so to get some idea of what F 100 is can"
+    },
+    {
+      "index": 714,
+      "start": 2721.2,
+      "end": 2726.16,
+      "duration": 4.96,
+      "text": "you give me any the crucial number so it"
+    },
+    {
+      "index": 715,
+      "start": 2726.17,
+      "end": 2733.19,
+      "duration": 7.02,
+      "text": "these it's approximately what's"
+    },
+    {
+      "index": 716,
+      "start": 2733.2,
+      "end": 2735.92,
+      "duration": 2.72,
+      "text": "controlling the growth of these"
+    },
+    {
+      "index": 717,
+      "start": 2735.93,
+      "end": 2739.01,
+      "duration": 3.08,
+      "text": "Fibonacci numbers it's the eigen value"
+    },
+    {
+      "index": 718,
+      "start": 2739.02,
+      "end": 2741.47,
+      "duration": 2.45,
+      "text": "and which eigen value is controlling"
+    },
+    {
+      "index": 719,
+      "start": 2741.48,
+      "end": 2746.12,
+      "duration": 4.64,
+      "text": "that growth the big ones so F 100 will"
+    },
+    {
+      "index": 720,
+      "start": 2746.13,
+      "end": 2749.33,
+      "duration": 3.2,
+      "text": "it be approximately some constant C one"
+    },
+    {
+      "index": 721,
+      "start": 2749.34,
+      "end": 2753.97,
+      "duration": 4.63,
+      "text": "I guess times this lambda 1 is 1 plus"
+    },
+    {
+      "index": 722,
+      "start": 2753.98,
+      "end": 2758.6,
+      "duration": 4.62,
+      "text": "square root of 5 over 2 to the hundredth"
+    },
+    {
+      "index": 723,
+      "start": 2758.61,
+      "end": 2763.58,
+      "duration": 4.97,
+      "text": "power and the 200 in other words the"
+    },
+    {
+      "index": 724,
+      "start": 2763.59,
+      "end": 2765.59,
+      "duration": 2.0,
+      "text": "eigen value these that the Fibonacci"
+    },
+    {
+      "index": 725,
+      "start": 2765.6,
+      "end": 2769.24,
+      "duration": 3.64,
+      "text": "numbers are growing by about that factor"
+    },
+    {
+      "index": 726,
+      "start": 2769.25,
+      "end": 2772.13,
+      "duration": 2.88,
+      "text": "you see that we we've got precise"
+    },
+    {
+      "index": 727,
+      "start": 2772.14,
+      "end": 2774.11,
+      "duration": 1.97,
+      "text": "information about the about the"
+    },
+    {
+      "index": 728,
+      "start": 2774.12,
+      "end": 2774.96,
+      "duration": 0.84,
+      "text": "Fibonacci"
+    },
+    {
+      "index": 729,
+      "start": 2774.97,
+      "end": 2779.94,
+      "duration": 4.97,
+      "text": "numbers out of the Idaho okay and again"
+    },
+    {
+      "index": 730,
+      "start": 2779.95,
+      "end": 2782.94,
+      "duration": 2.99,
+      "text": "why is that true let me go over to this"
+    },
+    {
+      "index": 731,
+      "start": 2782.95,
+      "end": 2788.34,
+      "duration": 5.39,
+      "text": "board so what I'm doing here yeah the"
+    },
+    {
+      "index": 732,
+      "start": 2788.35,
+      "end": 2791.16,
+      "duration": 2.81,
+      "text": "original eigen the original initial"
+    },
+    {
+      "index": 733,
+      "start": 2791.17,
+      "end": 2793.92,
+      "duration": 2.75,
+      "text": "value is some combination of"
+    },
+    {
+      "index": 734,
+      "start": 2793.93,
+      "end": 2796.5,
+      "duration": 2.57,
+      "text": "eigenvectors and then when we start"
+    },
+    {
+      "index": 735,
+      "start": 2796.51,
+      "end": 2798.48,
+      "duration": 1.97,
+      "text": "multiple when we start going out the"
+    },
+    {
+      "index": 736,
+      "start": 2798.49,
+      "end": 2801.18,
+      "duration": 2.69,
+      "text": "theory of Fibonacci numbers when we"
+    },
+    {
+      "index": 737,
+      "start": 2801.19,
+      "end": 2803.46,
+      "duration": 2.27,
+      "text": "start multiplying by a 100 times"
+    },
+    {
+      "index": 738,
+      "start": 2803.47,
+      "end": 2806.19,
+      "duration": 2.72,
+      "text": "it's his lambda 1 to the hundredth this"
+    },
+    {
+      "index": 739,
+      "start": 2806.2,
+      "end": 2810.41,
+      "duration": 4.21,
+      "text": "term is is the one that's taken over its"
+    },
+    {
+      "index": 740,
+      "start": 2810.42,
+      "end": 2814.29,
+      "duration": 3.87,
+      "text": "I mean that's be like one point six to"
+    },
+    {
+      "index": 741,
+      "start": 2814.3,
+      "end": 2817.91,
+      "duration": 3.61,
+      "text": "the hundredth power the second term is"
+    },
+    {
+      "index": 742,
+      "start": 2817.92,
+      "end": 2821.43,
+      "duration": 3.51,
+      "text": "practically nothing right the point six"
+    },
+    {
+      "index": 743,
+      "start": 2821.44,
+      "end": 2823.65,
+      "duration": 2.21,
+      "text": "or minus point 6 to the hundredth power"
+    },
+    {
+      "index": 744,
+      "start": 2823.66,
+      "end": 2827.58,
+      "duration": 3.92,
+      "text": "is an extremely small extremely small"
+    },
+    {
+      "index": 745,
+      "start": 2827.59,
+      "end": 2830.52,
+      "duration": 2.93,
+      "text": "number so this is is this there were"
+    },
+    {
+      "index": 746,
+      "start": 2830.53,
+      "end": 2832.14,
+      "duration": 1.61,
+      "text": "only two terms because we're two by two"
+    },
+    {
+      "index": 747,
+      "start": 2832.15,
+      "end": 2835.38,
+      "duration": 3.23,
+      "text": "this number is this piece of it"
+    },
+    {
+      "index": 748,
+      "start": 2835.39,
+      "end": 2839.55,
+      "duration": 4.16,
+      "text": "is there but it's it's disappeared where"
+    },
+    {
+      "index": 749,
+      "start": 2839.56,
+      "end": 2842.28,
+      "duration": 2.72,
+      "text": "this piece is there and it's growing and"
+    },
+    {
+      "index": 750,
+      "start": 2842.29,
+      "end": 2845.13,
+      "duration": 2.84,
+      "text": "controlling everything so so really that"
+    },
+    {
+      "index": 751,
+      "start": 2845.14,
+      "end": 2848.31,
+      "duration": 3.17,
+      "text": "we're doing like problems that are"
+    },
+    {
+      "index": 752,
+      "start": 2848.32,
+      "end": 2852.36,
+      "duration": 4.04,
+      "text": "revolving we're doing dynamic instead of"
+    },
+    {
+      "index": 753,
+      "start": 2852.37,
+      "end": 2855.51,
+      "duration": 3.14,
+      "text": "ax equal B that's a static problem we're"
+    },
+    {
+      "index": 754,
+      "start": 2855.52,
+      "end": 2858.0,
+      "duration": 2.48,
+      "text": "now we're doing dynamics a squared a"
+    },
+    {
+      "index": 755,
+      "start": 2858.01,
+      "end": 2860.22,
+      "duration": 2.21,
+      "text": "cubed things are evolving in time and"
+    },
+    {
+      "index": 756,
+      "start": 2860.23,
+      "end": 2864.17,
+      "duration": 3.94,
+      "text": "the eigenvalues are the crucial numbers"
+    },
+    {
+      "index": 757,
+      "start": 2864.18,
+      "end": 2867.36,
+      "duration": 3.18,
+      "text": "okay I guess to complete this I better"
+    },
+    {
+      "index": 758,
+      "start": 2867.37,
+      "end": 2875.45,
+      "duration": 8.08,
+      "text": "write down"
+    },
+    {
+      "index": 759,
+      "start": 2878.73,
+      "end": 2878.74,
+      "duration": 0.01,
+      "text": "so we should complete the whole process"
+    },
+    {
+      "index": 760,
+      "start": 2878.74,
+      "end": 2881.79,
+      "duration": 3.05,
+      "text": "by finding the eigen vectors okay well I"
+    },
+    {
+      "index": 761,
+      "start": 2881.8,
+      "end": 2884.42,
+      "duration": 2.62,
+      "text": "have two up in the corner then I have to"
+    },
+    {
+      "index": 762,
+      "start": 2884.43,
+      "end": 2888.5,
+      "duration": 4.07,
+      "text": "look at a minus lambda I so a minus"
+    },
+    {
+      "index": 763,
+      "start": 2888.51,
+      "end": 2895.29,
+      "duration": 6.78,
+      "text": "lambda I is this 1 minus lambda 1 1 and"
+    },
+    {
+      "index": 764,
+      "start": 2895.3,
+      "end": 2898.62,
+      "duration": 3.32,
+      "text": "minus lambda and now can we spot and"
+    },
+    {
+      "index": 765,
+      "start": 2898.63,
+      "end": 2901.89,
+      "duration": 3.26,
+      "text": "eigenvector out of that that's s for"
+    },
+    {
+      "index": 766,
+      "start": 2901.9,
+      "end": 2903.87,
+      "duration": 1.97,
+      "text": "these two lambdas this matrix is"
+    },
+    {
+      "index": 767,
+      "start": 2903.88,
+      "end": 2904.68,
+      "duration": 0.8,
+      "text": "singular"
+    },
+    {
+      "index": 768,
+      "start": 2904.69,
+      "end": 2910.08,
+      "duration": 5.39,
+      "text": "I guess the eigenvector 2x2 ought to be"
+    },
+    {
+      "index": 769,
+      "start": 2910.09,
+      "end": 2913.26,
+      "duration": 3.17,
+      "text": "or easy so if I know that this matrix is"
+    },
+    {
+      "index": 770,
+      "start": 2913.27,
+      "end": 2916.41,
+      "duration": 3.14,
+      "text": "singular then seems to me the eigen"
+    },
+    {
+      "index": 771,
+      "start": 2916.42,
+      "end": 2919.95,
+      "duration": 3.53,
+      "text": "vector has to be lambda and one because"
+    },
+    {
+      "index": 772,
+      "start": 2919.96,
+      "end": 2922.29,
+      "duration": 2.33,
+      "text": "that multiplication will give me the 0"
+    },
+    {
+      "index": 773,
+      "start": 2922.3,
+      "end": 2925.859,
+      "duration": 3.559,
+      "text": "and this multiplication gives me better"
+    },
+    {
+      "index": 774,
+      "start": 2925.869,
+      "end": 2928.41,
+      "duration": 2.541,
+      "text": "give me also 0 do you see why it does"
+    },
+    {
+      "index": 775,
+      "start": 2928.42,
+      "end": 2930.42,
+      "duration": 2.0,
+      "text": "this is the minus lambda squared plus"
+    },
+    {
+      "index": 776,
+      "start": 2930.43,
+      "end": 2934.25,
+      "duration": 3.82,
+      "text": "lambda plus 1 it's the thing that's 0"
+    },
+    {
+      "index": 777,
+      "start": 2934.26,
+      "end": 2936.84,
+      "duration": 2.58,
+      "text": "because these lambdas are special"
+    },
+    {
+      "index": 778,
+      "start": 2936.85,
+      "end": 2941.58,
+      "duration": 4.73,
+      "text": "there's the eigenvector x 1 is lambda 1"
+    },
+    {
+      "index": 779,
+      "start": 2941.59,
+      "end": 2948.66,
+      "duration": 7.07,
+      "text": "1 and X 2 is lambda 2 1 I did that as a"
+    },
+    {
+      "index": 780,
+      "start": 2948.67,
+      "end": 2952.5,
+      "duration": 3.83,
+      "text": "little trick that was available in the 2"
+    },
+    {
+      "index": 781,
+      "start": 2952.51,
+      "end": 2957.69,
+      "duration": 5.18,
+      "text": "by 2 case so now I finally have to oh I"
+    },
+    {
+      "index": 782,
+      "start": 2957.7,
+      "end": 2960.81,
+      "duration": 3.11,
+      "text": "have to take the initial you know so to"
+    },
+    {
+      "index": 783,
+      "start": 2960.82,
+      "end": 2963.78,
+      "duration": 2.96,
+      "text": "complete this example entirely I have to"
+    },
+    {
+      "index": 784,
+      "start": 2963.79,
+      "end": 2970.92,
+      "duration": 7.13,
+      "text": "say ok what was you 0 u 0 was F 1 F 2 so"
+    },
+    {
+      "index": 785,
+      "start": 2970.93,
+      "end": 2975.19,
+      "duration": 4.26,
+      "text": "u 0 a starting vector"
+    },
+    {
+      "index": 786,
+      "start": 2975.2,
+      "end": 2984.49,
+      "duration": 9.29,
+      "text": "f1 f0 and those were 1 and 0 so I have"
+    },
+    {
+      "index": 787,
+      "start": 2984.5,
+      "end": 2988.539,
+      "duration": 4.039,
+      "text": "to use that vector so I have to look for"
+    },
+    {
+      "index": 788,
+      "start": 2988.549,
+      "end": 2992.17,
+      "duration": 3.621,
+      "text": "from multiple of the first eigenvector"
+    },
+    {
+      "index": 789,
+      "start": 2992.18,
+      "end": 2996.46,
+      "duration": 4.28,
+      "text": "and the second to produce u0 the 1 0"
+    },
+    {
+      "index": 790,
+      "start": 2996.47,
+      "end": 3002.01,
+      "duration": 5.54,
+      "text": "which this is what we'll find c1 and c2"
+    },
+    {
+      "index": 791,
+      "start": 3002.02,
+      "end": 3009.03,
+      "duration": 7.01,
+      "text": "and then I'm done so let me in the last"
+    },
+    {
+      "index": 792,
+      "start": 3009.04,
+      "end": 3012.539,
+      "duration": 3.499,
+      "text": "five seconds grinding out a formula let"
+    },
+    {
+      "index": 793,
+      "start": 3012.549,
+      "end": 3016.26,
+      "duration": 3.711,
+      "text": "me repeat the idea that I really it's"
+    },
+    {
+      "index": 794,
+      "start": 3016.27,
+      "end": 3019.89,
+      "duration": 3.62,
+      "text": "the idea that central when things are"
+    },
+    {
+      "index": 795,
+      "start": 3019.9,
+      "end": 3022.289,
+      "duration": 2.389,
+      "text": "revolving in time let me come back to"
+    },
+    {
+      "index": 796,
+      "start": 3022.299,
+      "end": 3024.92,
+      "duration": 2.621,
+      "text": "this board because the ideas are here"
+    },
+    {
+      "index": 797,
+      "start": 3024.93,
+      "end": 3027.93,
+      "duration": 3.0,
+      "text": "when things are evolving in time by a"
+    },
+    {
+      "index": 798,
+      "start": 3027.94,
+      "end": 3032.16,
+      "duration": 4.22,
+      "text": "first order system starting from an"
+    },
+    {
+      "index": 799,
+      "start": 3032.17,
+      "end": 3035.849,
+      "duration": 3.679,
+      "text": "original unit the key is find the"
+    },
+    {
+      "index": 800,
+      "start": 3035.859,
+      "end": 3040.079,
+      "duration": 4.22,
+      "text": "eigenvalues and eigenvectors of a that"
+    },
+    {
+      "index": 801,
+      "start": 3040.089,
+      "end": 3042.059,
+      "duration": 1.97,
+      "text": "will tell those eigenvectors are the"
+    },
+    {
+      "index": 802,
+      "start": 3042.069,
+      "end": 3045.539,
+      "duration": 3.47,
+      "text": "eigenvalues will already tell you what's"
+    },
+    {
+      "index": 803,
+      "start": 3045.549,
+      "end": 3048.329,
+      "duration": 2.78,
+      "text": "happening is the solution blowing up is"
+    },
+    {
+      "index": 804,
+      "start": 3048.339,
+      "end": 3051.75,
+      "duration": 3.411,
+      "text": "it going to 0 what's it doing and then"
+    },
+    {
+      "index": 805,
+      "start": 3051.76,
+      "end": 3056.819,
+      "duration": 5.059,
+      "text": "to find out exactly a formula you have"
+    },
+    {
+      "index": 806,
+      "start": 3056.829,
+      "end": 3059.97,
+      "duration": 3.141,
+      "text": "to take your u0 and write it as a con"
+    },
+    {
+      "index": 807,
+      "start": 3059.98,
+      "end": 3063.48,
+      "duration": 3.5,
+      "text": "nation of eigenvectors and then follow"
+    },
+    {
+      "index": 808,
+      "start": 3063.49,
+      "end": 3066.24,
+      "duration": 2.75,
+      "text": "each eigenvector separate and that's"
+    },
+    {
+      "index": 809,
+      "start": 3066.25,
+      "end": 3070.05,
+      "duration": 3.8,
+      "text": "really what this formula the formula for"
+    },
+    {
+      "index": 810,
+      "start": 3070.06,
+      "end": 3073.38,
+      "duration": 3.32,
+      "text": "that that's what the formula for a to"
+    },
+    {
+      "index": 811,
+      "start": 3073.39,
+      "end": 3076.14,
+      "duration": 2.75,
+      "text": "the K is doing so remember that formula"
+    },
+    {
+      "index": 812,
+      "start": 3076.15,
+      "end": 3080.46,
+      "duration": 4.31,
+      "text": "for a to the K is s lambda to the K s"
+    },
+    {
+      "index": 813,
+      "start": 3080.47,
+      "end": 3083.52,
+      "duration": 3.05,
+      "text": "inverse okay that's that's difference"
+    },
+    {
+      "index": 814,
+      "start": 3083.53,
+      "end": 3087.0,
+      "duration": 3.47,
+      "text": "equations and you just have to so that"
+    },
+    {
+      "index": 815,
+      "start": 3087.01,
+      "end": 3090.32,
+      "duration": 3.31,
+      "text": "the homework will give some examples"
+    },
+    {
+      "index": 816,
+      "start": 3090.33,
+      "end": 3095.7,
+      "duration": 5.37,
+      "text": "different from Fibonacci to next time"
+    },
+    {
+      "index": 817,
+      "start": 3095.71,
+      "end": 3101.77,
+      "duration": 6.06,
+      "text": "will be differentially"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

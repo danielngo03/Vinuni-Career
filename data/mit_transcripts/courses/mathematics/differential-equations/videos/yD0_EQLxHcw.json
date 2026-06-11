@@ -1,0 +1,4603 @@
+{
+  "video": {
+    "id": "yD0_EQLxHcw",
+    "title": "Lec 17 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=yD0_EQLxHcw",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2746,
+    "language": "en"
+  },
+  "segment_count": 655,
+  "segments": [
+    {
+      "index": 0,
+      "start": 10.0,
+      "end": 15.815,
+      "duration": 5.815,
+      "text": "I'd like to talk. Thank you."
+    },
+    {
+      "index": 1,
+      "start": 15.815,
+      "end": 28.953,
+      "duration": 13.138,
+      "text": "One of the things I'd like to give a little insight into today"
+    },
+    {
+      "index": 2,
+      "start": 28.953,
+      "end": 38.0,
+      "duration": 9.047,
+      "text": "is the mathematical basis for hearing."
+    },
+    {
+      "index": 3,
+      "start": 38.0,
+      "end": 41.893,
+      "duration": 3.893,
+      "text": "For example, if a musical tone,"
+    },
+    {
+      "index": 4,
+      "start": 41.893,
+      "end": 49.29,
+      "duration": 7.397,
+      "text": "a pure musical tone would consist of a pure oscillation in"
+    },
+    {
+      "index": 5,
+      "start": 49.29,
+      "end": 53.572,
+      "duration": 4.282,
+      "text": "terms of the vibration of the air."
+    },
+    {
+      "index": 6,
+      "start": 53.572,
+      "end": 59.152,
+      "duration": 5.58,
+      "text": "It would be a pure oscillation. So, [SINGS],"
+    },
+    {
+      "index": 7,
+      "start": 59.152,
+      "end": 66.679,
+      "duration": 7.527,
+      "text": "and if you superimpose upon that, suppose you sing a triad,"
+    },
+    {
+      "index": 8,
+      "start": 66.679,
+      "end": 74.345,
+      "duration": 7.666,
+      "text": "[SINGS], those are three tones. Each has its own period of"
+    },
+    {
+      "index": 9,
+      "start": 74.345,
+      "end": 79.308,
+      "duration": 4.963,
+      "text": "oscillation, and then another one, which is the top one,"
+    },
+    {
+      "index": 10,
+      "start": 79.308,
+      "end": 82.736,
+      "duration": 3.428,
+      "text": "which is even faster. The higher it is,"
+    },
+    {
+      "index": 11,
+      "start": 82.736,
+      "end": 86.616,
+      "duration": 3.88,
+      "text": "the faster the thing. Anyway, what you hear,"
+    },
+    {
+      "index": 12,
+      "start": 86.616,
+      "end": 89.503,
+      "duration": 2.887,
+      "text": "then, is the sum of those things."
+    },
+    {
+      "index": 13,
+      "start": 89.503,
+      "end": 94.105,
+      "duration": 4.602,
+      "text": "So, C plus E plus G, let's say, what you hear is the"
+    },
+    {
+      "index": 14,
+      "start": 94.105,
+      "end": 97.338,
+      "duration": 3.233,
+      "text": "wave form. It's periodics,"
+    },
+    {
+      "index": 15,
+      "start": 97.338,
+      "end": 100.55,
+      "duration": 3.212,
+      "text": "still, but it's a mess. I don't know,"
+    },
+    {
+      "index": 16,
+      "start": 100.55,
+      "end": 103.851,
+      "duration": 3.301,
+      "text": "I can't draw it. So, this is periodic,"
+    },
+    {
+      "index": 17,
+      "start": 103.851,
+      "end": 107.866,
+      "duration": 4.015,
+      "text": "but a mess, some sort of mess. Now, of course,"
+    },
+    {
+      "index": 18,
+      "start": 107.866,
+      "end": 112.237,
+      "duration": 4.371,
+      "text": "if you hear the three tones together, most people,"
+    },
+    {
+      "index": 19,
+      "start": 112.237,
+      "end": 116.877,
+      "duration": 4.64,
+      "text": "if they are not tone deaf, anyway, can hear the three"
+    },
+    {
+      "index": 20,
+      "start": 116.877,
+      "end": 121.464,
+      "duration": 4.587,
+      "text": "tones that make up that. So, in other words,"
+    },
+    {
+      "index": 21,
+      "start": 121.464,
+      "end": 125.705,
+      "duration": 4.241,
+      "text": "if this is the function which is the sum of those three,"
+    },
+    {
+      "index": 22,
+      "start": 125.705,
+      "end": 129.098,
+      "duration": 3.393,
+      "text": "some sort of messy function, f of t,"
+    },
+    {
+      "index": 23,
+      "start": 129.098,
+      "end": 132.182,
+      "duration": 3.084,
+      "text": "you're able to do Fourier analysis on it,"
+    },
+    {
+      "index": 24,
+      "start": 132.182,
+      "end": 135.651,
+      "duration": 3.469,
+      "text": "and break it up. You're able to take that f of"
+    },
+    {
+      "index": 25,
+      "start": 135.651,
+      "end": 140.123,
+      "duration": 4.472,
+      "text": "t, and somehow mentally express it as the sum of three pure"
+    },
+    {
+      "index": 26,
+      "start": 140.123,
+      "end": 142.976,
+      "duration": 2.853,
+      "text": "oscillations. That's Fourier analysis."
+    },
+    {
+      "index": 27,
+      "start": 142.976,
+      "end": 146.292,
+      "duration": 3.316,
+      "text": "We've been doing it with an infinite series,"
+    },
+    {
+      "index": 28,
+      "start": 146.292,
+      "end": 149.684,
+      "duration": 3.392,
+      "text": "but it's okay. It's still Fourier analysis if"
+    },
+    {
+      "index": 29,
+      "start": 149.684,
+      "end": 154.693,
+      "duration": 5.009,
+      "text": "you do it with just three. So, in other words,"
+    },
+    {
+      "index": 30,
+      "start": 154.693,
+      "end": 158.704,
+      "duration": 4.011,
+      "text": "the f of t is going to be the sum of,"
+    },
+    {
+      "index": 31,
+      "start": 158.704,
+      "end": 161.289,
+      "duration": 2.585,
+      "text": "let's say, sine, I don't know,"
+    },
+    {
+      "index": 32,
+      "start": 161.289,
+      "end": 166.459,
+      "duration": 5.17,
+      "text": "it's going to be the sign of one frequency plus the sine of"
+    },
+    {
+      "index": 33,
+      "start": 166.459,
+      "end": 171.183,
+      "duration": 4.724,
+      "text": "another frequency plus the sine of a third, maybe with"
+    },
+    {
+      "index": 34,
+      "start": 171.183,
+      "end": 173.857,
+      "duration": 2.674,
+      "text": "coefficients here. So, somehow,"
+    },
+    {
+      "index": 35,
+      "start": 173.857,
+      "end": 178.314,
+      "duration": 4.457,
+      "text": "since you were born, you have been able to take the"
+    },
+    {
+      "index": 36,
+      "start": 178.314,
+      "end": 182.236,
+      "duration": 3.922,
+      "text": "f of t, and express it as the sum of"
+    },
+    {
+      "index": 37,
+      "start": 182.236,
+      "end": 187.147,
+      "duration": 4.911,
+      "text": "the three signs. And, here, therefore,"
+    },
+    {
+      "index": 38,
+      "start": 187.147,
+      "end": 191.034,
+      "duration": 3.887,
+      "text": "the three tones that make up the triad."
+    },
+    {
+      "index": 39,
+      "start": 191.034,
+      "end": 195.943,
+      "duration": 4.909,
+      "text": "Now, the question is, how did you do that Fourier"
+    },
+    {
+      "index": 40,
+      "start": 195.943,
+      "end": 198.397,
+      "duration": 2.454,
+      "text": "analysis? In other words,"
+    },
+    {
+      "index": 41,
+      "start": 198.397,
+      "end": 203.102,
+      "duration": 4.705,
+      "text": "does your brain have a little integrator in it,"
+    },
+    {
+      "index": 42,
+      "start": 203.102,
+      "end": 208.011,
+      "duration": 4.909,
+      "text": "which calculates the coefficients of that series?"
+    },
+    {
+      "index": 43,
+      "start": 208.011,
+      "end": 214.409,
+      "duration": 6.398,
+      "text": "Of course, the answer is no. It has to do something else."
+    },
+    {
+      "index": 44,
+      "start": 214.409,
+      "end": 219.399,
+      "duration": 4.99,
+      "text": "So, one of the things I'd like to aim at in this lecture is"
+    },
+    {
+      "index": 45,
+      "start": 219.399,
+      "end": 224.561,
+      "duration": 5.162,
+      "text": "just briefly explaining what, in fact, actually happens to do"
+    },
+    {
+      "index": 46,
+      "start": 224.561,
+      "end": 226.368,
+      "duration": 1.807,
+      "text": "that. Now, to do that,"
+    },
+    {
+      "index": 47,
+      "start": 226.368,
+      "end": 230.584,
+      "duration": 4.216,
+      "text": "we'll have to make some little detours, as always."
+    },
+    {
+      "index": 48,
+      "start": 230.584,
+      "end": 234.542,
+      "duration": 3.958,
+      "text": "So, first I'm going to, throughout the lecture,"
+    },
+    {
+      "index": 49,
+      "start": 234.542,
+      "end": 239.188,
+      "duration": 4.646,
+      "text": "in fact, I gave you last time a couple of shortcuts for"
+    },
+    {
+      "index": 50,
+      "start": 239.188,
+      "end": 244.006,
+      "duration": 4.818,
+      "text": "calculating Fourier series based on evenness and oddness,"
+    },
+    {
+      "index": 51,
+      "start": 244.006,
+      "end": 249.254,
+      "duration": 5.248,
+      "text": "and also some expansion of the idea of Fourier series where we"
+    },
+    {
+      "index": 52,
+      "start": 249.254,
+      "end": 253.212,
+      "duration": 3.958,
+      "text": "use the different, but things didn't have to be"
+    },
+    {
+      "index": 53,
+      "start": 253.212,
+      "end": 257.858,
+      "duration": 4.646,
+      "text": "periodic or period two pi, but it can have an arbitrary"
+    },
+    {
+      "index": 54,
+      "start": 257.858,
+      "end": 265.0,
+      "duration": 7.142,
+      "text": "period, 2L, and we could still get a Fourier expansion for it."
+    },
+    {
+      "index": 55,
+      "start": 265.0,
+      "end": 268.692,
+      "duration": 3.692,
+      "text": "Let me, therefore, begin just as a problem,"
+    },
+    {
+      "index": 56,
+      "start": 268.692,
+      "end": 273.0,
+      "duration": 4.308,
+      "text": "another type of shortcut exercise, to do a Fourier"
+    },
+    {
+      "index": 57,
+      "start": 273.0,
+      "end": 278.186,
+      "duration": 5.186,
+      "text": "calculation, which we are going to be later in the period to"
+    },
+    {
+      "index": 58,
+      "start": 278.186,
+      "end": 283.765,
+      "duration": 5.579,
+      "text": "explain the music problem. So, let's suppose we're"
+    },
+    {
+      "index": 59,
+      "start": 283.765,
+      "end": 288.936,
+      "duration": 5.171,
+      "text": "starting with the function, f of t,"
+    },
+    {
+      "index": 60,
+      "start": 288.936,
+      "end": 295.189,
+      "duration": 6.253,
+      "text": "which is a real square wave, and I'll make its period"
+    },
+    {
+      "index": 61,
+      "start": 295.189,
+      "end": 300.0,
+      "duration": 4.811,
+      "text": "different from the one, not two pi."
+    },
+    {
+      "index": 62,
+      "start": 300.0,
+      "end": 302.588,
+      "duration": 2.588,
+      "text": "So, suppose we had a function like this."
+    },
+    {
+      "index": 63,
+      "start": 302.588,
+      "end": 304.713,
+      "duration": 2.125,
+      "text": "So, this is one, and this is one."
+    },
+    {
+      "index": 64,
+      "start": 304.713,
+      "end": 308.164,
+      "duration": 3.451,
+      "text": "So, the height is one, and this point is one as well."
+    },
+    {
+      "index": 65,
+      "start": 308.164,
+      "end": 310.753,
+      "duration": 2.589,
+      "text": "And then, it's periodic ever after that."
+    },
+    {
+      "index": 66,
+      "start": 310.753,
+      "end": 313.873,
+      "duration": 3.12,
+      "text": "I'll tell you what, let's do like the electrical"
+    },
+    {
+      "index": 67,
+      "start": 313.873,
+      "end": 317.723,
+      "duration": 3.85,
+      "text": "engineers do and put these vertical lines there even though"
+    },
+    {
+      "index": 68,
+      "start": 317.723,
+      "end": 320.843,
+      "duration": 3.12,
+      "text": "they don't exist. Okay, so the height is one and"
+    },
+    {
+      "index": 69,
+      "start": 320.843,
+      "end": 323.233,
+      "duration": 2.39,
+      "text": "it goes over. The half period is one."
+    },
+    {
+      "index": 70,
+      "start": 323.233,
+      "end": 327.083,
+      "duration": 3.85,
+      "text": "This really is a square wave. I mean, it's really a square,"
+    },
+    {
+      "index": 71,
+      "start": 327.083,
+      "end": 331.0,
+      "duration": 3.917,
+      "text": "not what they usually call a square wave."
+    },
+    {
+      "index": 72,
+      "start": 331.0,
+      "end": 336.506,
+      "duration": 5.506,
+      "text": "So, my question is, what's its Fourier series?"
+    },
+    {
+      "index": 73,
+      "start": 336.506,
+      "end": 340.299,
+      "duration": 3.793,
+      "text": "Well, it's neither even nor odd."
+    },
+    {
+      "index": 74,
+      "start": 340.299,
+      "end": 347.029,
+      "duration": 6.73,
+      "text": "That's a little dismaying. It sounds like we're going to"
+    },
+    {
+      "index": 75,
+      "start": 347.029,
+      "end": 354.371,
+      "duration": 7.342,
+      "text": "have to calculate an's and bn's. So, the shortcuts I gave you"
+    },
+    {
+      "index": 76,
+      "start": 354.371,
+      "end": 360.0,
+      "duration": 5.629,
+      "text": "last time don't seem to be applicable."
+    },
+    {
+      "index": 77,
+      "start": 360.0,
+      "end": 363.087,
+      "duration": 3.087,
+      "text": "Now, of course, nor is the period two pi,"
+    },
+    {
+      "index": 78,
+      "start": 363.087,
+      "end": 367.718,
+      "duration": 4.631,
+      "text": "but that shouldn't be too bad. In fact, you ought to look for"
+    },
+    {
+      "index": 79,
+      "start": 367.718,
+      "end": 371.963,
+      "duration": 4.245,
+      "text": "an expansion in terms of things that look like sine of n,"
+    },
+    {
+      "index": 80,
+      "start": 371.963,
+      "end": 374.664,
+      "duration": 2.701,
+      "text": "well, what should it be?"
+    },
+    {
+      "index": 81,
+      "start": 374.664,
+      "end": 378.6,
+      "duration": 3.936,
+      "text": "Since L is equal to one, the half period is equal to"
+    },
+    {
+      "index": 82,
+      "start": 378.6,
+      "end": 380.993,
+      "duration": 2.393,
+      "text": "one. Remember, the period is 2L,"
+    },
+    {
+      "index": 83,
+      "start": 380.993,
+      "end": 382.768,
+      "duration": 1.775,
+      "text": "not L. It's n pi over L,"
+    },
+    {
+      "index": 84,
+      "start": 382.768,
+      "end": 386.087,
+      "duration": 3.319,
+      "text": "but if L is one, we should be looking for an"
+    },
+    {
+      "index": 85,
+      "start": 386.087,
+      "end": 390.023,
+      "duration": 3.936,
+      "text": "expansion in terms of functions that look like this."
+    },
+    {
+      "index": 86,
+      "start": 390.023,
+      "end": 394.731,
+      "duration": 4.708,
+      "text": "Now, since we've already done the work for the official square"
+    },
+    {
+      "index": 87,
+      "start": 394.731,
+      "end": 399.516,
+      "duration": 4.785,
+      "text": "way, which looks something like this, what you always try to do"
+    },
+    {
+      "index": 88,
+      "start": 399.516,
+      "end": 403.607,
+      "duration": 4.091,
+      "text": "is reduce these things to problems that you've already"
+    },
+    {
+      "index": 89,
+      "start": 403.607,
+      "end": 408.555,
+      "duration": 4.948,
+      "text": "solved. This is a legitimate one,"
+    },
+    {
+      "index": 90,
+      "start": 408.555,
+      "end": 412.235,
+      "duration": 3.68,
+      "text": "since I solved it in lecture for you."
+    },
+    {
+      "index": 91,
+      "start": 412.235,
+      "end": 416.631,
+      "duration": 4.396,
+      "text": "So, we can consider it as something we know."
+    },
+    {
+      "index": 92,
+      "start": 416.631,
+      "end": 422.866,
+      "duration": 6.235,
+      "text": "So, I observed that since I am very lazy, that if I lower this"
+    },
+    {
+      "index": 93,
+      "start": 422.866,
+      "end": 429.0,
+      "duration": 6.134,
+      "text": "function by one half, it will become an odd function."
+    },
+    {
+      "index": 94,
+      "start": 429.0,
+      "end": 437.065,
+      "duration": 8.065,
+      "text": "Now it's an odd function. Okay, I just cut the work in"
+    },
+    {
+      "index": 95,
+      "start": 437.065,
+      "end": 442.239,
+      "duration": 5.174,
+      "text": "half. So, let's call this function,"
+    },
+    {
+      "index": 96,
+      "start": 442.239,
+      "end": 446.652,
+      "duration": 4.413,
+      "text": "let's call this, I don't know,"
+    },
+    {
+      "index": 97,
+      "start": 446.652,
+      "end": 452.433,
+      "duration": 5.781,
+      "text": "S of t. The green one is the one we"
+    },
+    {
+      "index": 98,
+      "start": 452.433,
+      "end": 457.03,
+      "duration": 4.597,
+      "text": "wanted to start with. So, f of t is a green"
+    },
+    {
+      "index": 99,
+      "start": 457.03,
+      "end": 460.546,
+      "duration": 3.516,
+      "text": "function. But, I can improve things even"
+    },
+    {
+      "index": 100,
+      "start": 460.546,
+      "end": 466.045,
+      "duration": 5.499,
+      "text": "more because the function that we calculated in the lecture is"
+    },
+    {
+      "index": 101,
+      "start": 466.045,
+      "end": 471.183,
+      "duration": 5.138,
+      "text": "a lot like this salmon function. That's why I called it S."
+    },
+    {
+      "index": 102,
+      "start": 471.183,
+      "end": 476.861,
+      "duration": 5.678,
+      "text": "But, the difference is that the function we calculated with this"
+    },
+    {
+      "index": 103,
+      "start": 476.861,
+      "end": 478.935,
+      "duration": 2.074,
+      "text": "one. In the first place,"
+    },
+    {
+      "index": 104,
+      "start": 478.935,
+      "end": 484.951,
+      "duration": 6.016,
+      "text": "it went down further. It went not to negative one"
+    },
+    {
+      "index": 105,
+      "start": 484.951,
+      "end": 488.669,
+      "duration": 3.718,
+      "text": "half, which is where that one goes."
+    },
+    {
+      "index": 106,
+      "start": 488.669,
+      "end": 495.01,
+      "duration": 6.341,
+      "text": "But, it went down to negative one, and then went up here to"
+    },
+    {
+      "index": 107,
+      "start": 495.01,
+      "end": 498.618,
+      "duration": 3.608,
+      "text": "plus one. And, it went over to pi."
+    },
+    {
+      "index": 108,
+      "start": 498.618,
+      "end": 503.976,
+      "duration": 5.358,
+      "text": "So, it came down again, but not, but at the point,"
+    },
+    {
+      "index": 109,
+      "start": 503.976,
+      "end": 507.474,
+      "duration": 3.498,
+      "text": "pi. And here, negative pi went up"
+    },
+    {
+      "index": 110,
+      "start": 507.474,
+      "end": 511.192,
+      "duration": 3.718,
+      "text": "again. Okay, let me remind you what"
+    },
+    {
+      "index": 111,
+      "start": 511.192,
+      "end": 514.69,
+      "duration": 3.498,
+      "text": "this one was. Suppose we call it,"
+    },
+    {
+      "index": 112,
+      "start": 514.69,
+      "end": 518.298,
+      "duration": 3.608,
+      "text": "O doesn't look good, I don't know,"
+    },
+    {
+      "index": 113,
+      "start": 518.298,
+      "end": 524.806,
+      "duration": 6.508,
+      "text": "how about g of u? Let's, for a secret reason,"
+    },
+    {
+      "index": 114,
+      "start": 524.806,
+      "end": 527.147,
+      "duration": 2.341,
+      "text": "call the variable u this time, okay?"
+    },
+    {
+      "index": 115,
+      "start": 527.147,
+      "end": 530.892,
+      "duration": 3.745,
+      "text": "So, the previous knowledge that I'm relying on was that I"
+    },
+    {
+      "index": 116,
+      "start": 530.892,
+      "end": 534.973,
+      "duration": 4.081,
+      "text": "derived the Fourier series for you by an orthodox calculation."
+    },
+    {
+      "index": 117,
+      "start": 534.973,
+      "end": 538.986,
+      "duration": 4.013,
+      "text": "And, it's not too hard to do because this is an odd function."
+    },
+    {
+      "index": 118,
+      "start": 538.986,
+      "end": 541.929,
+      "duration": 2.943,
+      "text": "And therefore, you only have to calculate the"
+    },
+    {
+      "index": 119,
+      "start": 541.929,
+      "end": 545.394,
+      "duration": 3.465,
+      "text": "bn's. And, half of them turn out to"
+    },
+    {
+      "index": 120,
+      "start": 545.394,
+      "end": 549.357,
+      "duration": 3.963,
+      "text": "be zero, although you don't know that in advance."
+    },
+    {
+      "index": 121,
+      "start": 549.357,
+      "end": 554.559,
+      "duration": 5.202,
+      "text": "But anyway, the answer was four over pi times the sum"
+    },
+    {
+      "index": 122,
+      "start": 554.559,
+      "end": 557.614,
+      "duration": 3.055,
+      "text": "of just the odd ones, the sine of n u,"
+    },
+    {
+      "index": 123,
+      "start": 557.614,
+      "end": 561.495,
+      "duration": 3.881,
+      "text": "and that you had to divide by n."
+    },
+    {
+      "index": 124,
+      "start": 561.495,
+      "end": 565.211,
+      "duration": 3.716,
+      "text": "So, this is the expansion of g, this function,"
+    },
+    {
+      "index": 125,
+      "start": 565.211,
+      "end": 570.0,
+      "duration": 4.789,
+      "text": "g of u, the Fourier expansion of this function."
+    },
+    {
+      "index": 126,
+      "start": 570.0,
+      "end": 574.426,
+      "duration": 4.426,
+      "text": "Since it's an odd function, it only involves the signs."
+    },
+    {
+      "index": 127,
+      "start": 574.426,
+      "end": 579.016,
+      "duration": 4.59,
+      "text": "There's no funny stuff here because the period is now two"
+    },
+    {
+      "index": 128,
+      "start": 579.016,
+      "end": 581.639,
+      "duration": 2.623,
+      "text": "pi. And, this came from the first"
+    },
+    {
+      "index": 129,
+      "start": 581.639,
+      "end": 585.163,
+      "duration": 3.524,
+      "text": "lecture on Fourier series, or from the book,"
+    },
+    {
+      "index": 130,
+      "start": 585.163,
+      "end": 589.016,
+      "duration": 3.853,
+      "text": "wherever you want it, or solutions to the notes."
+    },
+    {
+      "index": 131,
+      "start": 589.016,
+      "end": 591.803,
+      "duration": 2.787,
+      "text": "There are lots of sources for that."
+    },
+    {
+      "index": 132,
+      "start": 591.803,
+      "end": 596.475,
+      "duration": 4.672,
+      "text": "The solution's in the notes. Okay, now, that looks so much"
+    },
+    {
+      "index": 133,
+      "start": 596.475,
+      "end": 600.0,
+      "duration": 3.525,
+      "text": "like the salmon function, ---"
+    },
+    {
+      "index": 134,
+      "start": 600.0,
+      "end": 604.09,
+      "duration": 4.09,
+      "text": "-- I ought to be able to convert one into the other."
+    },
+    {
+      "index": 135,
+      "start": 604.09,
+      "end": 607.379,
+      "duration": 3.289,
+      "text": "Now, I will do that by shrinking the axis."
+    },
+    {
+      "index": 136,
+      "start": 607.379,
+      "end": 611.871,
+      "duration": 4.492,
+      "text": "But, since this can get rather confusing, what I'll do is"
+    },
+    {
+      "index": 137,
+      "start": 611.871,
+      "end": 615.32,
+      "duration": 3.449,
+      "text": "overlay this. What I prefer to do is I think"
+    },
+    {
+      "index": 138,
+      "start": 615.32,
+      "end": 619.572,
+      "duration": 4.252,
+      "text": "u, okay, I'm changing, I'm keeping the thing the same."
+    },
+    {
+      "index": 139,
+      "start": 619.572,
+      "end": 623.502,
+      "duration": 3.93,
+      "text": "But, I'm going to change the name of the variable,"
+    },
+    {
+      "index": 140,
+      "start": 623.502,
+      "end": 627.994,
+      "duration": 4.492,
+      "text": "the t, in such a way that on the t-axis, this becomes the"
+    },
+    {
+      "index": 141,
+      "start": 627.994,
+      "end": 630.893,
+      "duration": 2.899,
+      "text": "point, one. If I do that,"
+    },
+    {
+      "index": 142,
+      "start": 630.893,
+      "end": 634.331,
+      "duration": 3.438,
+      "text": "then this function will turn exactly into that one,"
+    },
+    {
+      "index": 143,
+      "start": 634.331,
+      "end": 637.7,
+      "duration": 3.369,
+      "text": "except it will go not from minus a half to a half,"
+    },
+    {
+      "index": 144,
+      "start": 637.7,
+      "end": 641.825,
+      "duration": 4.125,
+      "text": "but it will go from negative one to one, since I haven't done"
+    },
+    {
+      "index": 145,
+      "start": 641.825,
+      "end": 645.125,
+      "duration": 3.3,
+      "text": "anything to the vertical axis. So, how I do that?"
+    },
+    {
+      "index": 146,
+      "start": 645.125,
+      "end": 647.531,
+      "duration": 2.406,
+      "text": "What's the relation between u and t?"
+    },
+    {
+      "index": 147,
+      "start": 647.531,
+      "end": 651.312,
+      "duration": 3.781,
+      "text": "Well, u is equal to pi times t, or the other way around."
+    },
+    {
+      "index": 148,
+      "start": 651.312,
+      "end": 654.681,
+      "duration": 3.369,
+      "text": "You know that it's going to be approximately this."
+    },
+    {
+      "index": 149,
+      "start": 654.681,
+      "end": 657.225,
+      "duration": 2.544,
+      "text": "Try one, and then check that it works."
+    },
+    {
+      "index": 150,
+      "start": 657.225,
+      "end": 660.662,
+      "duration": 3.437,
+      "text": "When t is equal to one, u is pi, which is what it's"
+    },
+    {
+      "index": 151,
+      "start": 660.662,
+      "end": 664.705,
+      "duration": 4.043,
+      "text": "supposed to be. So, this is the relation"
+    },
+    {
+      "index": 152,
+      "start": 664.705,
+      "end": 666.836,
+      "duration": 2.131,
+      "text": "between the two. And therefore,"
+    },
+    {
+      "index": 153,
+      "start": 666.836,
+      "end": 669.323,
+      "duration": 2.487,
+      "text": "without further ado, I can say that,"
+    },
+    {
+      "index": 154,
+      "start": 669.323,
+      "end": 671.952,
+      "duration": 2.629,
+      "text": "let's write the relation between them."
+    },
+    {
+      "index": 155,
+      "start": 671.952,
+      "end": 675.86,
+      "duration": 3.908,
+      "text": "f of t is what I want. Well, what's f of t if I"
+    },
+    {
+      "index": 156,
+      "start": 675.86,
+      "end": 679.91,
+      "duration": 4.05,
+      "text": "subtract one half of that? So, that's going to be equal to"
+    },
+    {
+      "index": 157,
+      "start": 679.91,
+      "end": 683.747,
+      "duration": 3.837,
+      "text": "the salmon function plus one half, right, or the salmon"
+    },
+    {
+      "index": 158,
+      "start": 683.747,
+      "end": 686.447,
+      "duration": 2.7,
+      "text": "function is f of t lowered by one half."
+    },
+    {
+      "index": 159,
+      "start": 686.447,
+      "end": 690.0,
+      "duration": 3.553,
+      "text": "One thing is the same as the other."
+    },
+    {
+      "index": 160,
+      "start": 690.0,
+      "end": 695.467,
+      "duration": 5.467,
+      "text": "And, what's the relation between this salmon function and"
+    },
+    {
+      "index": 161,
+      "start": 695.467,
+      "end": 700.251,
+      "duration": 4.784,
+      "text": "the orange function? Well, the salmon function is,"
+    },
+    {
+      "index": 162,
+      "start": 700.251,
+      "end": 705.035,
+      "duration": 4.784,
+      "text": "so, let's convert, so, S of t -- it's more"
+    },
+    {
+      "index": 163,
+      "start": 705.035,
+      "end": 709.917,
+      "duration": 4.882,
+      "text": "convenient, as I wrote the formula g of u."
+    },
+    {
+      "index": 164,
+      "start": 709.917,
+      "end": 714.994,
+      "duration": 5.077,
+      "text": "Let's start it from that end. If I start from g of u,"
+    },
+    {
+      "index": 165,
+      "start": 714.994,
+      "end": 720.949,
+      "duration": 5.955,
+      "text": "what do I have to do to convert it into S of-- into the salmon"
+    },
+    {
+      "index": 166,
+      "start": 720.949,
+      "end": 725.788,
+      "duration": 4.839,
+      "text": "function? Well, take one half of it."
+    },
+    {
+      "index": 167,
+      "start": 725.788,
+      "end": 732.224,
+      "duration": 6.436,
+      "text": "So, if I put them all together, the conclusion is that f of t"
+    },
+    {
+      "index": 168,
+      "start": 732.224,
+      "end": 738.017,
+      "duration": 5.793,
+      "text": "is equal to one half plus S of t,"
+    },
+    {
+      "index": 169,
+      "start": 738.017,
+      "end": 742.307,
+      "duration": 4.29,
+      "text": "which is one half of g of u,"
+    },
+    {
+      "index": 170,
+      "start": 742.307,
+      "end": 745.633,
+      "duration": 3.326,
+      "text": "but u is pi t. So, it's four pi,"
+    },
+    {
+      "index": 171,
+      "start": 745.633,
+      "end": 751.318,
+      "duration": 5.685,
+      "text": "four over pi times the sum of the sine of n."
+    },
+    {
+      "index": 172,
+      "start": 751.318,
+      "end": 756.259,
+      "duration": 4.941,
+      "text": "And, for u, I will write pi t"
+    },
+    {
+      "index": 173,
+      "start": 756.259,
+      "end": 760.389,
+      "duration": 4.13,
+      "text": "divided by n. And, sorry, I forgot to say"
+    },
+    {
+      "index": 174,
+      "start": 760.389,
+      "end": 764.987,
+      "duration": 4.598,
+      "text": "that sum is only over the odd values of n, not all values of"
+    },
+    {
+      "index": 175,
+      "start": 764.987,
+      "end": 767.558,
+      "duration": 2.571,
+      "text": "n. So, the sum over n odd of that,"
+    },
+    {
+      "index": 176,
+      "start": 767.558,
+      "end": 770.675,
+      "duration": 3.117,
+      "text": "and, of course, the two will cancel that."
+    },
+    {
+      "index": 177,
+      "start": 770.675,
+      "end": 773.168,
+      "duration": 2.493,
+      "text": "So, here we have, in other words,"
+    },
+    {
+      "index": 178,
+      "start": 773.168,
+      "end": 777.454,
+      "duration": 4.286,
+      "text": "just by this business of shrinking or just stretching or"
+    },
+    {
+      "index": 179,
+      "start": 777.454,
+      "end": 781.116,
+      "duration": 3.662,
+      "text": "shrinking the axis, lowering it and squishing it"
+    },
+    {
+      "index": 180,
+      "start": 781.116,
+      "end": 786.136,
+      "duration": 5.02,
+      "text": "that way a little bit. We get from this Fourier"
+    },
+    {
+      "index": 181,
+      "start": 786.136,
+      "end": 791.123,
+      "duration": 4.987,
+      "text": "series, we get that one just by this geometric procedure."
+    },
+    {
+      "index": 182,
+      "start": 791.123,
+      "end": 796.376,
+      "duration": 5.253,
+      "text": "I'd like you to be able to do that because it saves a lot of"
+    },
+    {
+      "index": 183,
+      "start": 796.376,
+      "end": 799.493,
+      "duration": 3.117,
+      "text": "time. Okay, so let's put this answer"
+    },
+    {
+      "index": 184,
+      "start": 799.493,
+      "end": 805.102,
+      "duration": 5.609,
+      "text": "up in, I'm going to need it in a minute, but I don't really want"
+    },
+    {
+      "index": 185,
+      "start": 805.102,
+      "end": 808.308,
+      "duration": 3.206,
+      "text": "to recopy it. So, let me handle it by"
+    },
+    {
+      "index": 186,
+      "start": 808.308,
+      "end": 812.223,
+      "duration": 3.915,
+      "text": "erasing. So, let's call that plus two"
+    },
+    {
+      "index": 187,
+      "start": 812.223,
+      "end": 816.036,
+      "duration": 3.813,
+      "text": "over pi, and there is our formula for"
+    },
+    {
+      "index": 188,
+      "start": 816.036,
+      "end": 819.212,
+      "duration": 3.176,
+      "text": "that green function that we wrote before."
+    },
+    {
+      "index": 189,
+      "start": 819.212,
+      "end": 823.581,
+      "duration": 4.369,
+      "text": "So, I'll put that in green. So, we'll have a color-coded"
+    },
+    {
+      "index": 190,
+      "start": 823.581,
+      "end": 826.837,
+      "duration": 3.256,
+      "text": "lecture again. Now, what we're going to be"
+    },
+    {
+      "index": 191,
+      "start": 826.837,
+      "end": 830.649,
+      "duration": 3.812,
+      "text": "doing ultimately, to getting at the music problem"
+    },
+    {
+      "index": 192,
+      "start": 830.649,
+      "end": 835.256,
+      "duration": 4.607,
+      "text": "that I posed at the beginning of the lecture, is we want to"
+    },
+    {
+      "index": 193,
+      "start": 835.256,
+      "end": 839.783,
+      "duration": 4.527,
+      "text": "solve, and this is what a study of Fourier series has been"
+    },
+    {
+      "index": 194,
+      "start": 839.783,
+      "end": 844.707,
+      "duration": 4.924,
+      "text": "aiming at, to solve second-order linear equations with constant"
+    },
+    {
+      "index": 195,
+      "start": 844.707,
+      "end": 849.79,
+      "duration": 5.083,
+      "text": "coefficients were the right-hand side was a more general function"
+    },
+    {
+      "index": 196,
+      "start": 849.79,
+      "end": 854.0,
+      "duration": 4.21,
+      "text": "than the kind we've been handling."
+    },
+    {
+      "index": 197,
+      "start": 854.0,
+      "end": 857.948,
+      "duration": 3.948,
+      "text": "So, now, in order to simplify, and we don't have a lot of time"
+    },
+    {
+      "index": 198,
+      "start": 857.948,
+      "end": 860.86,
+      "duration": 2.912,
+      "text": "in the course, I'd have to take another day to"
+    },
+    {
+      "index": 199,
+      "start": 860.86,
+      "end": 863.061,
+      "duration": 2.201,
+      "text": "make more complicated calculations,"
+    },
+    {
+      "index": 200,
+      "start": 863.061,
+      "end": 867.009,
+      "duration": 3.948,
+      "text": "which I don't want to do since you will learn a lot from them,"
+    },
+    {
+      "index": 201,
+      "start": 867.009,
+      "end": 869.275,
+      "duration": 2.266,
+      "text": "anyway. I think you will find you've"
+    },
+    {
+      "index": 202,
+      "start": 869.275,
+      "end": 872.77,
+      "duration": 3.495,
+      "text": "had enough calculation by the time Friday morning rolls"
+    },
+    {
+      "index": 203,
+      "start": 872.77,
+      "end": 876.32,
+      "duration": 3.55,
+      "text": "around. So, let's look at the undamped"
+    },
+    {
+      "index": 204,
+      "start": 876.32,
+      "end": 879.567,
+      "duration": 3.247,
+      "text": "case, which is simpler, or undamped spring,"
+    },
+    {
+      "index": 205,
+      "start": 879.567,
+      "end": 884.207,
+      "duration": 4.64,
+      "text": "or undamped anything because it doesn't have that extra term,"
+    },
+    {
+      "index": 206,
+      "start": 884.207,
+      "end": 886.759,
+      "duration": 2.552,
+      "text": "which requires extra calculations."
+    },
+    {
+      "index": 207,
+      "start": 886.759,
+      "end": 891.168,
+      "duration": 4.409,
+      "text": "So, I'll follow the book now and some of the notes and the"
+    },
+    {
+      "index": 208,
+      "start": 891.168,
+      "end": 894.957,
+      "duration": 3.789,
+      "text": "visuals, and called the independent variable-- the"
+    },
+    {
+      "index": 209,
+      "start": 894.957,
+      "end": 898.205,
+      "duration": 3.248,
+      "text": "dependent variable I'm going to call x now."
+    },
+    {
+      "index": 210,
+      "start": 898.205,
+      "end": 901.453,
+      "duration": 3.248,
+      "text": "And, the independent variable is, as usual,"
+    },
+    {
+      "index": 211,
+      "start": 901.453,
+      "end": 904.795,
+      "duration": 3.342,
+      "text": "time. So, this is going to be,"
+    },
+    {
+      "index": 212,
+      "start": 904.795,
+      "end": 908.836,
+      "duration": 4.041,
+      "text": "in general, f of t, and I'm going to use it by"
+    },
+    {
+      "index": 213,
+      "start": 908.836,
+      "end": 912.503,
+      "duration": 3.667,
+      "text": "calculating example, this is the actual f of t I'm"
+    },
+    {
+      "index": 214,
+      "start": 912.503,
+      "end": 916.095,
+      "duration": 3.592,
+      "text": "going to be using. But, the general problem for a"
+    },
+    {
+      "index": 215,
+      "start": 916.095,
+      "end": 920.061,
+      "duration": 3.966,
+      "text": "general f of t is to solve this, or at least to find a"
+    },
+    {
+      "index": 216,
+      "start": 920.061,
+      "end": 923.653,
+      "duration": 3.592,
+      "text": "particular solution. That's what most of the work"
+    },
+    {
+      "index": 217,
+      "start": 923.653,
+      "end": 928.068,
+      "duration": 4.415,
+      "text": "is, because we already know how from that to get the general"
+    },
+    {
+      "index": 218,
+      "start": 928.068,
+      "end": 932.183,
+      "duration": 4.115,
+      "text": "solution by adding the solution to the reduced equation,"
+    },
+    {
+      "index": 219,
+      "start": 932.183,
+      "end": 936.0,
+      "duration": 3.817,
+      "text": "the associated homogeneous equation."
+    },
+    {
+      "index": 220,
+      "start": 936.0,
+      "end": 940.977,
+      "duration": 4.977,
+      "text": "So, all our work has been, this past couple of weeks,"
+    },
+    {
+      "index": 221,
+      "start": 940.977,
+      "end": 944.518,
+      "duration": 3.541,
+      "text": "in how you find a particular solution."
+    },
+    {
+      "index": 222,
+      "start": 944.518,
+      "end": 948.73,
+      "duration": 4.212,
+      "text": "Now, the case in which we know what to do is,"
+    },
+    {
+      "index": 223,
+      "start": 948.73,
+      "end": 952.367,
+      "duration": 3.637,
+      "text": "so we can find our particular solution."
+    },
+    {
+      "index": 224,
+      "start": 952.367,
+      "end": 955.43,
+      "duration": 3.063,
+      "text": "Let's call that x sub p."
+    },
+    {
+      "index": 225,
+      "start": 955.43,
+      "end": 961.173,
+      "duration": 5.743,
+      "text": "We could find x sub p if the right hand side is cosine omega,"
+    },
+    {
+      "index": 226,
+      "start": 961.173,
+      "end": 964.236,
+      "duration": 3.063,
+      "text": "well, in general, an exponential,"
+    },
+    {
+      "index": 227,
+      "start": 964.236,
+      "end": 969.979,
+      "duration": 5.743,
+      "text": "but since we are not going to use complex exponentials today,"
+    },
+    {
+      "index": 228,
+      "start": 969.979,
+      "end": 976.032,
+      "duration": 6.053,
+      "text": "all these things are real. And I'd like to keep them real."
+    },
+    {
+      "index": 229,
+      "start": 976.032,
+      "end": 980.032,
+      "duration": 4.0,
+      "text": "If it's either cosine omega t or sine omega t,"
+    },
+    {
+      "index": 230,
+      "start": 980.032,
+      "end": 982.918,
+      "duration": 2.886,
+      "text": "or some multiple of that by"
+    },
+    {
+      "index": 231,
+      "start": 982.918,
+      "end": 986.852,
+      "duration": 3.934,
+      "text": "linearity, it's just as good. We already know how to find the"
+    },
+    {
+      "index": 232,
+      "start": 986.852,
+      "end": 990.0,
+      "duration": 3.148,
+      "text": "thing, and to find a particular solution."
+    },
+    {
+      "index": 233,
+      "start": 990.0,
+      "end": 993.571,
+      "duration": 3.571,
+      "text": "So, the procedure is use complex exponentials,"
+    },
+    {
+      "index": 234,
+      "start": 993.571,
+      "end": 996.19,
+      "duration": 2.619,
+      "text": "and that magic formula I gave you."
+    },
+    {
+      "index": 235,
+      "start": 996.19,
+      "end": 999.523,
+      "duration": 3.333,
+      "text": "But, right now, just to save a little time,"
+    },
+    {
+      "index": 236,
+      "start": 999.523,
+      "end": 1003.65,
+      "duration": 4.127,
+      "text": "since I already did that on the lecture on resonance,"
+    },
+    {
+      "index": 237,
+      "start": 1003.65,
+      "end": 1008.015,
+      "duration": 4.365,
+      "text": "I solved it explicitly for that, and you've had adequate"
+    },
+    {
+      "index": 238,
+      "start": 1008.015,
+      "end": 1010.873,
+      "duration": 2.858,
+      "text": "practice I think in the problem sets."
+    },
+    {
+      "index": 239,
+      "start": 1010.873,
+      "end": 1015.396,
+      "duration": 4.523,
+      "text": "Let's simply write down the answer that comes out of that."
+    },
+    {
+      "index": 240,
+      "start": 1015.396,
+      "end": 1019.761,
+      "duration": 4.365,
+      "text": "The answer for the particular solution is cosine omega t"
+    },
+    {
+      "index": 241,
+      "start": 1019.761,
+      "end": 1025.0,
+      "duration": 5.239,
+      "text": "or sine omega t."
+    },
+    {
+      "index": 242,
+      "start": 1025.0,
+      "end": 1028.752,
+      "duration": 3.752,
+      "text": "That's the top. And, it's over a constant."
+    },
+    {
+      "index": 243,
+      "start": 1028.752,
+      "end": 1033.877,
+      "duration": 5.125,
+      "text": "And, the constant is omega naught squared."
+    },
+    {
+      "index": 244,
+      "start": 1033.877,
+      "end": 1039.003,
+      "duration": 5.126,
+      "text": "That's the natural frequency which comes from the system,"
+    },
+    {
+      "index": 245,
+      "start": 1039.003,
+      "end": 1044.311,
+      "duration": 5.308,
+      "text": "minus the imposed frequency, the driving frequency that the"
+    },
+    {
+      "index": 246,
+      "start": 1044.311,
+      "end": 1049.162,
+      "duration": 4.851,
+      "text": "system, the spring or whatever it is, undamped spring,"
+    },
+    {
+      "index": 247,
+      "start": 1049.162,
+      "end": 1054.695,
+      "duration": 5.533,
+      "text": "is being driven with. Okay, understand the notation."
+    },
+    {
+      "index": 248,
+      "start": 1054.695,
+      "end": 1059.278,
+      "duration": 4.583,
+      "text": "Cosine this over that, or sine, depending on whether"
+    },
+    {
+      "index": 249,
+      "start": 1059.278,
+      "end": 1063.052,
+      "duration": 3.774,
+      "text": "you started driving it with cosine or sine."
+    },
+    {
+      "index": 250,
+      "start": 1063.052,
+      "end": 1066.737,
+      "duration": 3.685,
+      "text": "So, this is from the lecture, if you like,"
+    },
+    {
+      "index": 251,
+      "start": 1066.737,
+      "end": 1070.781,
+      "duration": 4.044,
+      "text": "from the lecture on resonance, but again it's,"
+    },
+    {
+      "index": 252,
+      "start": 1070.781,
+      "end": 1073.476,
+      "duration": 2.695,
+      "text": "I hope by now, a familiar fact."
+    },
+    {
+      "index": 253,
+      "start": 1073.476,
+      "end": 1078.149,
+      "duration": 4.673,
+      "text": "Let me remind you what this had to do with resonance."
+    },
+    {
+      "index": 254,
+      "start": 1078.149,
+      "end": 1083.631,
+      "duration": 5.482,
+      "text": "Then, the observation was that if omega, the driving frequency"
+    },
+    {
+      "index": 255,
+      "start": 1083.631,
+      "end": 1089.023,
+      "duration": 5.392,
+      "text": "is very close to the natural frequency, then this is close to"
+    },
+    {
+      "index": 256,
+      "start": 1089.023,
+      "end": 1093.447,
+      "duration": 4.424,
+      "text": "that. The denominator is almost zero,"
+    },
+    {
+      "index": 257,
+      "start": 1093.447,
+      "end": 1097.315,
+      "duration": 3.868,
+      "text": "and that makes the amplitude of the response very,"
+    },
+    {
+      "index": 258,
+      "start": 1097.315,
+      "end": 1100.631,
+      "duration": 3.316,
+      "text": "very large. And, that was the phenomenon of"
+    },
+    {
+      "index": 259,
+      "start": 1100.631,
+      "end": 1103.71,
+      "duration": 3.079,
+      "text": "resonance. Okay, now what I'd like to do"
+    },
+    {
+      "index": 260,
+      "start": 1103.71,
+      "end": 1108.131,
+      "duration": 4.421,
+      "text": "is apply those formulas to finding out what happens for a"
+    },
+    {
+      "index": 261,
+      "start": 1108.131,
+      "end": 1112.0,
+      "duration": 3.869,
+      "text": "general f(t), or in particular this one."
+    },
+    {
+      "index": 262,
+      "start": 1112.0,
+      "end": 1116.624,
+      "duration": 4.624,
+      "text": "So, in general, I'll keep using the notation,"
+    },
+    {
+      "index": 263,
+      "start": 1116.624,
+      "end": 1121.563,
+      "duration": 4.939,
+      "text": "f of t, even though I've sorted used it"
+    },
+    {
+      "index": 264,
+      "start": 1121.563,
+      "end": 1124.085,
+      "duration": 2.522,
+      "text": "for that. But in general,"
+    },
+    {
+      "index": 265,
+      "start": 1124.085,
+      "end": 1129.13,
+      "duration": 5.045,
+      "text": "what's the situation? If f of t is a sine series,"
+    },
+    {
+      "index": 266,
+      "start": 1129.13,
+      "end": 1133.859,
+      "duration": 4.729,
+      "text": "cosine series, all right, let's do everything."
+    },
+    {
+      "index": 267,
+      "start": 1133.859,
+      "end": 1136.802,
+      "duration": 2.943,
+      "text": "Suppose it's, in other words,"
+    },
+    {
+      "index": 268,
+      "start": 1136.802,
+      "end": 1140.375,
+      "duration": 3.573,
+      "text": "the procedure is, take your f of t,"
+    },
+    {
+      "index": 269,
+      "start": 1140.375,
+      "end": 1147.523,
+      "duration": 7.148,
+      "text": "expand it in a Fourier series. Well, doesn't that assume it's"
+    },
+    {
+      "index": 270,
+      "start": 1147.523,
+      "end": 1149.373,
+      "duration": 1.85,
+      "text": "periodic? Yes, sort of."
+    },
+    {
+      "index": 271,
+      "start": 1149.373,
+      "end": 1152.149,
+      "duration": 2.776,
+      "text": "So, suppose it's a Fourier series."
+    },
+    {
+      "index": 272,
+      "start": 1152.149,
+      "end": 1155.429,
+      "duration": 3.28,
+      "text": "I'll make a very general Fourier series,"
+    },
+    {
+      "index": 273,
+      "start": 1155.429,
+      "end": 1158.962,
+      "duration": 3.533,
+      "text": "write it this way: cosine (omega)n t,"
+    },
+    {
+      "index": 274,
+      "start": 1158.962,
+      "end": 1162.158,
+      "duration": 3.196,
+      "text": "and then the sine terms,"
+    },
+    {
+      "index": 275,
+      "start": 1162.158,
+      "end": 1167.373,
+      "duration": 5.215,
+      "text": "sine (omega)n t from one to infinity where"
+    },
+    {
+      "index": 276,
+      "start": 1167.373,
+      "end": 1172.0,
+      "duration": 4.627,
+      "text": "the omegas are, omega n is short for that."
+    },
+    {
+      "index": 277,
+      "start": 1172.0,
+      "end": 1175.861,
+      "duration": 3.861,
+      "text": "Well, it's going to have the n in it, of course,"
+    },
+    {
+      "index": 278,
+      "start": 1175.861,
+      "end": 1179.558,
+      "duration": 3.697,
+      "text": "but I want, now, to make the general period to"
+    },
+    {
+      "index": 279,
+      "start": 1179.558,
+      "end": 1182.598,
+      "duration": 3.04,
+      "text": "be 2L. So, it would be n pi over L."
+    },
+    {
+      "index": 280,
+      "start": 1182.598,
+      "end": 1185.556,
+      "duration": 2.958,
+      "text": "Of course, if L is equal to"
+    },
+    {
+      "index": 281,
+      "start": 1185.556,
+      "end": 1188.76,
+      "duration": 3.204,
+      "text": "one, then it's n pi. Or, if L equals pi,"
+    },
+    {
+      "index": 282,
+      "start": 1188.76,
+      "end": 1192.375,
+      "duration": 3.615,
+      "text": "those are the two most popular cases, by far."
+    },
+    {
+      "index": 283,
+      "start": 1192.375,
+      "end": 1196.401,
+      "duration": 4.026,
+      "text": "Then, it's simply n itself, the driving frequency."
+    },
+    {
+      "index": 284,
+      "start": 1196.401,
+      "end": 1201.33,
+      "duration": 4.929,
+      "text": "But, this would be the general case, n pi over L"
+    },
+    {
+      "index": 285,
+      "start": 1201.33,
+      "end": 1207.0,
+      "duration": 5.67,
+      "text": "if the period is the period of f of t is 2L."
+    },
+    {
+      "index": 286,
+      "start": 1207.0,
+      "end": 1210.763,
+      "duration": 3.763,
+      "text": "So, that's what the Fourier series looks like."
+    },
+    {
+      "index": 287,
+      "start": 1210.763,
+      "end": 1214.694,
+      "duration": 3.931,
+      "text": "Okay, then the particular solution will be what?"
+    },
+    {
+      "index": 288,
+      "start": 1214.694,
+      "end": 1218.207,
+      "duration": 3.513,
+      "text": "Well, I got these formulas. In other words,"
+    },
+    {
+      "index": 289,
+      "start": 1218.207,
+      "end": 1221.636,
+      "duration": 3.429,
+      "text": "what I'm using is superposition principle."
+    },
+    {
+      "index": 290,
+      "start": 1221.636,
+      "end": 1225.65,
+      "duration": 4.014,
+      "text": "If it's just this, then I know what the answer is"
+    },
+    {
+      "index": 291,
+      "start": 1225.65,
+      "end": 1230.0,
+      "duration": 4.35,
+      "text": "for the particular solution, the response."
+    },
+    {
+      "index": 292,
+      "start": 1230.0,
+      "end": 1234.522,
+      "duration": 4.522,
+      "text": "So, if you make a sum of these things, a sum of these inputs,"
+    },
+    {
+      "index": 293,
+      "start": 1234.522,
+      "end": 1239.045,
+      "duration": 4.523,
+      "text": "you are going to get a sum of the responses by superposition."
+    },
+    {
+      "index": 294,
+      "start": 1239.045,
+      "end": 1243.341,
+      "duration": 4.296,
+      "text": "So, let's write out the ones we are absolutely certain of."
+    },
+    {
+      "index": 295,
+      "start": 1243.341,
+      "end": 1247.713,
+      "duration": 4.372,
+      "text": "What's the response to here? Well, it's (a)n cosine omega n"
+    },
+    {
+      "index": 296,
+      "start": 1247.713,
+      "end": 1251.105,
+      "duration": 3.392,
+      "text": "t. The only thing is,"
+    },
+    {
+      "index": 297,
+      "start": 1251.105,
+      "end": 1255.251,
+      "duration": 4.146,
+      "text": "now it's divided by omega naught squared."
+    },
+    {
+      "index": 298,
+      "start": 1255.251,
+      "end": 1260.0,
+      "duration": 4.749,
+      "text": "This constant has changed, and the same thing here."
+    },
+    {
+      "index": 299,
+      "start": 1260.0,
+      "end": 1263.248,
+      "duration": 3.248,
+      "text": "Of course, by linearity, if this is multiplied by a,"
+    },
+    {
+      "index": 300,
+      "start": 1263.248,
+      "end": 1266.624,
+      "duration": 3.376,
+      "text": "then the answer is multiplied by, the response is also"
+    },
+    {
+      "index": 301,
+      "start": 1266.624,
+      "end": 1269.299,
+      "duration": 2.675,
+      "text": "multiplied by a. So, the same thing happens"
+    },
+    {
+      "index": 302,
+      "start": 1269.299,
+      "end": 1271.21,
+      "duration": 1.911,
+      "text": "here. Here, it's (b)n and over,"
+    },
+    {
+      "index": 303,
+      "start": 1271.21,
+      "end": 1274.777,
+      "duration": 3.567,
+      "text": "again, omega naught squared minus omega times the sine of"
+    },
+    {
+      "index": 304,
+      "start": 1274.777,
+      "end": 1277.515,
+      "duration": 2.738,
+      "text": "omega t."
+    },
+    {
+      "index": 305,
+      "start": 1277.515,
+      "end": 1280.7,
+      "duration": 3.185,
+      "text": "So, in other words, as soon as you have the Fourier"
+    },
+    {
+      "index": 306,
+      "start": 1280.7,
+      "end": 1283.439,
+      "duration": 2.739,
+      "text": "expansion, the Fourier series for the input,"
+    },
+    {
+      "index": 307,
+      "start": 1283.439,
+      "end": 1287.324,
+      "duration": 3.885,
+      "text": "you automatically get this by just writing it down the Fourier"
+    },
+    {
+      "index": 308,
+      "start": 1287.324,
+      "end": 1292.412,
+      "duration": 5.088,
+      "text": "series for the response. That's the fundamental idea of"
+    },
+    {
+      "index": 309,
+      "start": 1292.412,
+      "end": 1295.549,
+      "duration": 3.137,
+      "text": "Fourier series, at least applied in this"
+    },
+    {
+      "index": 310,
+      "start": 1295.549,
+      "end": 1298.605,
+      "duration": 3.056,
+      "text": "context. They have many other contexts,"
+    },
+    {
+      "index": 311,
+      "start": 1298.605,
+      "end": 1301.34,
+      "duration": 2.735,
+      "text": "approximations, so on and so forth."
+    },
+    {
+      "index": 312,
+      "start": 1301.34,
+      "end": 1305.522,
+      "duration": 4.182,
+      "text": "But, that's the idea here. All right, what about that"
+    },
+    {
+      "index": 313,
+      "start": 1305.522,
+      "end": 1309.061,
+      "duration": 3.539,
+      "text": "constant term? Well, this formula still works"
+    },
+    {
+      "index": 314,
+      "start": 1309.061,
+      "end": 1312.439,
+      "duration": 3.378,
+      "text": "if omega equals zero. If omega equals zero,"
+    },
+    {
+      "index": 315,
+      "start": 1312.439,
+      "end": 1314.852,
+      "duration": 2.413,
+      "text": "then this is the constant, one."
+    },
+    {
+      "index": 316,
+      "start": 1314.852,
+      "end": 1320.0,
+      "duration": 5.148,
+      "text": "The formula is still correct. Omega is zero here."
+    },
+    {
+      "index": 317,
+      "start": 1320.0,
+      "end": 1323.515,
+      "duration": 3.515,
+      "text": "The only thing you have to remember is that the original"
+    },
+    {
+      "index": 318,
+      "start": 1323.515,
+      "end": 1327.03,
+      "duration": 3.515,
+      "text": "thing is written in this form. So, the response will be,"
+    },
+    {
+      "index": 319,
+      "start": 1327.03,
+      "end": 1330.035,
+      "duration": 3.005,
+      "text": "what will it be? Well, it's one divided by omega"
+    },
+    {
+      "index": 320,
+      "start": 1330.035,
+      "end": 1332.847,
+      "duration": 2.812,
+      "text": "naught squared, if I'm in the case omega zero"
+    },
+    {
+      "index": 321,
+      "start": 1332.847,
+      "end": 1336.81,
+      "duration": 3.963,
+      "text": "is equal to zero. So, it's a zero divided by two"
+    },
+    {
+      "index": 322,
+      "start": 1336.81,
+      "end": 1339.494,
+      "duration": 2.684,
+      "text": "omega naught squared. And, as you will see,"
+    },
+    {
+      "index": 323,
+      "start": 1339.494,
+      "end": 1343.01,
+      "duration": 3.516,
+      "text": "it looks just like the others. You're just taking omega,"
+    },
+    {
+      "index": 324,
+      "start": 1343.01,
+      "end": 1346.334,
+      "duration": 3.324,
+      "text": "and making it equal to zero for that particular case."
+    },
+    {
+      "index": 325,
+      "start": 1346.334,
+      "end": 1351.0,
+      "duration": 4.666,
+      "text": "Sorry, this should be omega n's all the way through here."
+    },
+    {
+      "index": 326,
+      "start": 1360.0,
+      "end": 1365.585,
+      "duration": 5.585,
+      "text": "All right, well, let's apply this to the green"
+    },
+    {
+      "index": 327,
+      "start": 1365.585,
+      "end": 1369.308,
+      "duration": 3.723,
+      "text": "function. So, what have we got?"
+    },
+    {
+      "index": 328,
+      "start": 1369.308,
+      "end": 1376.258,
+      "duration": 6.95,
+      "text": "We have its Fourier series. So, if the green function is,"
+    },
+    {
+      "index": 329,
+      "start": 1376.258,
+      "end": 1382.092,
+      "duration": 5.834,
+      "text": "if the input in other words is this square wave,"
+    },
+    {
+      "index": 330,
+      "start": 1382.092,
+      "end": 1386.932,
+      "duration": 4.84,
+      "text": "the green square wave, so in your notes,"
+    },
+    {
+      "index": 331,
+      "start": 1386.932,
+      "end": 1395.0,
+      "duration": 8.068,
+      "text": "this guy, this particular f of t is the input."
+    },
+    {
+      "index": 332,
+      "start": 1395.0,
+      "end": 1400.114,
+      "duration": 5.114,
+      "text": "And, the equation is x double prime plus omega naught squared"
+    },
+    {
+      "index": 333,
+      "start": 1400.114,
+      "end": 1403.95,
+      "duration": 3.836,
+      "text": "x equals f of t."
+    },
+    {
+      "index": 334,
+      "start": 1403.95,
+      "end": 1407.872,
+      "duration": 3.922,
+      "text": "Then, the response is, well, I can't draw you a"
+    },
+    {
+      "index": 335,
+      "start": 1407.872,
+      "end": 1412.986,
+      "duration": 5.114,
+      "text": "picture of the response because I don't know what the Fourier"
+    },
+    {
+      "index": 336,
+      "start": 1412.986,
+      "end": 1417.845,
+      "duration": 4.859,
+      "text": "series actually looks like. But, let's at least write down"
+    },
+    {
+      "index": 337,
+      "start": 1417.845,
+      "end": 1423.129,
+      "duration": 5.284,
+      "text": "what the Fourier series is. The Fourier series will be,"
+    },
+    {
+      "index": 338,
+      "start": 1423.129,
+      "end": 1425.573,
+      "duration": 2.444,
+      "text": "well, what is it? It's one half."
+    },
+    {
+      "index": 339,
+      "start": 1425.573,
+      "end": 1430.225,
+      "duration": 4.652,
+      "text": "The constant out front is one half, except it's one over two"
+    },
+    {
+      "index": 340,
+      "start": 1430.225,
+      "end": 1433.458,
+      "duration": 3.233,
+      "text": "omega naught squared."
+    },
+    {
+      "index": 341,
+      "start": 1433.458,
+      "end": 1436.612,
+      "duration": 3.154,
+      "text": "So, this is my function, f of t."
+    },
+    {
+      "index": 342,
+      "start": 1436.612,
+      "end": 1441.422,
+      "duration": 4.81,
+      "text": "That's the general formula for how the input is related to the"
+    },
+    {
+      "index": 343,
+      "start": 1441.422,
+      "end": 1446.132,
+      "duration": 4.71,
+      "text": "response. And, I'm applying it to this"
+    },
+    {
+      "index": 344,
+      "start": 1446.132,
+      "end": 1450.16,
+      "duration": 4.028,
+      "text": "particular function, f of t."
+    },
+    {
+      "index": 345,
+      "start": 1450.16,
+      "end": 1455.419,
+      "duration": 5.259,
+      "text": "And, the answer is plus. Well, my Fourier series"
+    },
+    {
+      "index": 346,
+      "start": 1455.419,
+      "end": 1461.125,
+      "duration": 5.706,
+      "text": "involves only odd sums, only the summation over odd,"
+    },
+    {
+      "index": 347,
+      "start": 1461.125,
+      "end": 1466.832,
+      "duration": 5.707,
+      "text": "and only of the sign. So, it is going to be two over"
+    },
+    {
+      "index": 348,
+      "start": 1466.832,
+      "end": 1471.755,
+      "duration": 4.923,
+      "text": "pi, sorry, so it's going to be two"
+    },
+    {
+      "index": 349,
+      "start": 1471.755,
+      "end": 1477.02,
+      "duration": 5.265,
+      "text": "over pi out front. That constant will carry along"
+    },
+    {
+      "index": 350,
+      "start": 1477.02,
+      "end": 1479.984,
+      "duration": 2.964,
+      "text": "by linearity. And, I'm going to sum over odd,"
+    },
+    {
+      "index": 351,
+      "start": 1479.984,
+      "end": 1483.284,
+      "duration": 3.3,
+      "text": "n odd values only. The basic thing in the upstairs"
+    },
+    {
+      "index": 352,
+      "start": 1483.284,
+      "end": 1487.124,
+      "duration": 3.84,
+      "text": "is going to be the sine of omega n t."
+    },
+    {
+      "index": 353,
+      "start": 1487.124,
+      "end": 1490.155,
+      "duration": 3.031,
+      "text": "But, what is (omega)n? Well, (omega)n is n pi."
+    },
+    {
+      "index": 354,
+      "start": 1490.155,
+      "end": 1493.725,
+      "duration": 3.57,
+      "text": "So, it's n pi t. And, how about the bottom?"
+    },
+    {
+      "index": 355,
+      "start": 1493.725,
+      "end": 1497.699,
+      "duration": 3.974,
+      "text": "The bottom is going to be omega naught squared minus omega n"
+    },
+    {
+      "index": 356,
+      "start": 1497.699,
+      "end": 1501.0,
+      "duration": 3.301,
+      "text": "squared."
+    },
+    {
+      "index": 357,
+      "start": 1501.0,
+      "end": 1505.907,
+      "duration": 4.907,
+      "text": "And, this is my (omega)n, minus n pi squared."
+    },
+    {
+      "index": 358,
+      "start": 1505.907,
+      "end": 1507.871,
+      "duration": 1.964,
+      "text": "What's that?"
+    },
+    {
+      "index": 359,
+      "start": 1507.871,
+      "end": 1512.288,
+      "duration": 4.417,
+      "text": "Well, I don't know. All I could do would be to"
+    },
+    {
+      "index": 360,
+      "start": 1512.288,
+      "end": 1516.509,
+      "duration": 4.221,
+      "text": "calculate it. You could put it on MATLAB and"
+    },
+    {
+      "index": 361,
+      "start": 1516.509,
+      "end": 1522.398,
+      "duration": 5.889,
+      "text": "ask MATLAB to calculate and plot for you the first few terms,"
+    },
+    {
+      "index": 362,
+      "start": 1522.398,
+      "end": 1526.815,
+      "duration": 4.417,
+      "text": "and get some vague idea of what it looks like."
+    },
+    {
+      "index": 363,
+      "start": 1526.815,
+      "end": 1531.036,
+      "duration": 4.221,
+      "text": "That's nice, but it's not what's interesting"
+    },
+    {
+      "index": 364,
+      "start": 1531.036,
+      "end": 1535.453,
+      "duration": 4.417,
+      "text": "to do. What's interesting to do is to"
+    },
+    {
+      "index": 365,
+      "start": 1535.453,
+      "end": 1538.397,
+      "duration": 2.944,
+      "text": "look at the size of the coefficients."
+    },
+    {
+      "index": 366,
+      "start": 1538.397,
+      "end": 1542.077,
+      "duration": 3.68,
+      "text": "And, again, rather than do it in the abstract,"
+    },
+    {
+      "index": 367,
+      "start": 1542.077,
+      "end": 1546.82,
+      "duration": 4.743,
+      "text": "let's take a specific value. Let's suppose that the natural"
+    },
+    {
+      "index": 368,
+      "start": 1546.82,
+      "end": 1550.009,
+      "duration": 3.189,
+      "text": "frequency of the system, in other words,"
+    },
+    {
+      "index": 369,
+      "start": 1550.009,
+      "end": 1554.261,
+      "duration": 4.252,
+      "text": "the frequency at which that little spring wants to go"
+    },
+    {
+      "index": 370,
+      "start": 1554.261,
+      "end": 1558.35,
+      "duration": 4.089,
+      "text": "vibrate back and forth, whatever you got vibrating."
+    },
+    {
+      "index": 371,
+      "start": 1558.35,
+      "end": 1563.011,
+      "duration": 4.661,
+      "text": "Let's suppose the natural frequency that's omega naught is"
+    },
+    {
+      "index": 372,
+      "start": 1563.011,
+      "end": 1565.628,
+      "duration": 2.617,
+      "text": "ten for the sake of definiteness,"
+    },
+    {
+      "index": 373,
+      "start": 1565.628,
+      "end": 1569.83,
+      "duration": 4.202,
+      "text": "as they say. Okay, if that's ten,"
+    },
+    {
+      "index": 374,
+      "start": 1569.83,
+      "end": 1575.415,
+      "duration": 5.585,
+      "text": "all I want to do is calculate in the crudest possible way what"
+    },
+    {
+      "index": 375,
+      "start": 1575.415,
+      "end": 1579.535,
+      "duration": 4.12,
+      "text": "a few of these terms are. So, the response is,"
+    },
+    {
+      "index": 376,
+      "start": 1579.535,
+      "end": 1583.471,
+      "duration": 3.936,
+      "text": "so let's see, we've got to give that a name."
+    },
+    {
+      "index": 377,
+      "start": 1583.471,
+      "end": 1586.95,
+      "duration": 3.479,
+      "text": "The response is (x)p of t."
+    },
+    {
+      "index": 378,
+      "start": 1586.95,
+      "end": 1591.253,
+      "duration": 4.303,
+      "text": "What's (x)p of t? I'm just going to calculate it"
+    },
+    {
+      "index": 379,
+      "start": 1591.253,
+      "end": 1595.568,
+      "duration": 4.315,
+      "text": "very approximately. This means, you know,"
+    },
+    {
+      "index": 380,
+      "start": 1595.568,
+      "end": 1599.379,
+      "duration": 3.811,
+      "text": "throwing caution to the winds because I don't have a"
+    },
+    {
+      "index": 381,
+      "start": 1599.379,
+      "end": 1603.114,
+      "duration": 3.735,
+      "text": "calculator with me. And, I want you to look at this"
+    },
+    {
+      "index": 382,
+      "start": 1603.114,
+      "end": 1607.373,
+      "duration": 4.259,
+      "text": "thing without a calculator. The first term is one over 200."
+    },
+    {
+      "index": 383,
+      "start": 1607.373,
+      "end": 1610.212,
+      "duration": 2.839,
+      "text": "Okay, that's the only term I"
+    },
+    {
+      "index": 384,
+      "start": 1610.212,
+      "end": 1612.902,
+      "duration": 2.69,
+      "text": "can get exactly right. [LAUGHTER] Or,"
+    },
+    {
+      "index": 385,
+      "start": 1612.902,
+      "end": 1616.637,
+      "duration": 3.735,
+      "text": "I could if I could calculate. I suppose it's 0.005,"
+    },
+    {
+      "index": 386,
+      "start": 1616.637,
+      "end": 1620.0,
+      "duration": 3.363,
+      "text": "right? That's the constant term."
+    },
+    {
+      "index": 387,
+      "start": 1620.0,
+      "end": 1624.926,
+      "duration": 4.926,
+      "text": "Okay, so the next term, let's see, two over pi is two"
+    },
+    {
+      "index": 388,
+      "start": 1624.926,
+      "end": 1627.768,
+      "duration": 2.842,
+      "text": "thirds. I'll keep that in mind,"
+    },
+    {
+      "index": 389,
+      "start": 1627.768,
+      "end": 1629.852,
+      "duration": 2.084,
+      "text": "right? Plus two thirds,"
+    },
+    {
+      "index": 390,
+      "start": 1629.852,
+      "end": 1633.831,
+      "duration": 3.979,
+      "text": "0.6, let's say, that's an indication of the"
+    },
+    {
+      "index": 391,
+      "start": 1633.831,
+      "end": 1639.326,
+      "duration": 5.495,
+      "text": "accuracy with which these things are going to be performed."
+    },
+    {
+      "index": 392,
+      "start": 1639.326,
+      "end": 1644.821,
+      "duration": 5.495,
+      "text": "I think in Texas for a long while, the legislature declared"
+    },
+    {
+      "index": 393,
+      "start": 1644.821,
+      "end": 1647.0,
+      "duration": 2.179,
+      "text": "pi to be three, anyways."
+    },
+    {
+      "index": 394,
+      "start": 1647.0,
+      "end": 1651.831,
+      "duration": 4.831,
+      "text": "One of those states did it to save calculation time."
+    },
+    {
+      "index": 395,
+      "start": 1651.831,
+      "end": 1656.0,
+      "duration": 4.169,
+      "text": "I'm not kidding, by the way."
+    },
+    {
+      "index": 396,
+      "start": 1656.0,
+      "end": 1658.995,
+      "duration": 2.995,
+      "text": "All right, so what's the first term?"
+    },
+    {
+      "index": 397,
+      "start": 1658.995,
+      "end": 1662.334,
+      "duration": 3.339,
+      "text": "If n equals one, I have the sine of pi t."
+    },
+    {
+      "index": 398,
+      "start": 1662.334,
+      "end": 1666.014,
+      "duration": 3.68,
+      "text": "That's the n equals one term."
+    },
+    {
+      "index": 399,
+      "start": 1666.014,
+      "end": 1670.465,
+      "duration": 4.451,
+      "text": "What's the denominator like? That's about 100 minus 9"
+    },
+    {
+      "index": 400,
+      "start": 1670.465,
+      "end": 1673.889,
+      "duration": 3.424,
+      "text": "squared. Let's say it's 91,"
+    },
+    {
+      "index": 401,
+      "start": 1673.889,
+      "end": 1676.97,
+      "duration": 3.081,
+      "text": "sine t over 91. What's the next term?"
+    },
+    {
+      "index": 402,
+      "start": 1676.97,
+      "end": 1680.736,
+      "duration": 3.766,
+      "text": "Sine of three pi t, remember,"
+    },
+    {
+      "index": 403,
+      "start": 1680.736,
+      "end": 1684.417,
+      "duration": 3.681,
+      "text": "I am omitting, I'm only using the odd values"
+    },
+    {
+      "index": 404,
+      "start": 1684.417,
+      "end": 1689.81,
+      "duration": 5.393,
+      "text": "of n because those are the only ones that enter into the Fourier"
+    },
+    {
+      "index": 405,
+      "start": 1689.81,
+      "end": 1694.346,
+      "duration": 4.536,
+      "text": "expansion for this function, which is at the bottom of"
+    },
+    {
+      "index": 406,
+      "start": 1694.346,
+      "end": 1699.948,
+      "duration": 5.602,
+      "text": "everything. All right, what's the sine"
+    },
+    {
+      "index": 407,
+      "start": 1699.948,
+      "end": 1706.298,
+      "duration": 6.35,
+      "text": "three pi t? Well, now, I've got 100 minus"
+    },
+    {
+      "index": 408,
+      "start": 1706.298,
+      "end": 1712.752,
+      "duration": 6.454,
+      "text": "three pi, -- -- that's 9 squared is 81."
+    },
+    {
+      "index": 409,
+      "start": 1712.752,
+      "end": 1722.075,
+      "duration": 9.323,
+      "text": "So, no, what am I doing? So, we have 100 minus three"
+    },
+    {
+      "index": 410,
+      "start": 1722.075,
+      "end": 1726.096,
+      "duration": 4.021,
+      "text": "times pi is 9, squared."
+    },
+    {
+      "index": 411,
+      "start": 1726.096,
+      "end": 1733.956,
+      "duration": 7.86,
+      "text": "Well, let's say a little more. Let's say 85."
+    },
+    {
+      "index": 412,
+      "start": 1733.956,
+      "end": 1742.0,
+      "duration": 8.044,
+      "text": "So, that's 15. How bout the next one?"
+    },
+    {
+      "index": 413,
+      "start": 1742.0,
+      "end": 1745.025,
+      "duration": 3.025,
+      "text": "Well, it's sine 5 pi t."
+    },
+    {
+      "index": 414,
+      "start": 1745.025,
+      "end": 1749.644,
+      "duration": 4.619,
+      "text": "I think I'll stop here as soon as we do this one because at"
+    },
+    {
+      "index": 415,
+      "start": 1749.644,
+      "end": 1752.669,
+      "duration": 3.025,
+      "text": "this point it's clear what's happening."
+    },
+    {
+      "index": 416,
+      "start": 1752.669,
+      "end": 1756.73,
+      "duration": 4.061,
+      "text": "This is 100 squared minus, that's 15 squared is 225,"
+    },
+    {
+      "index": 417,
+      "start": 1756.73,
+      "end": 1759.915,
+      "duration": 3.185,
+      "text": "so that's about 125 with a negative sign."
+    },
+    {
+      "index": 418,
+      "start": 1759.915,
+      "end": 1764.693,
+      "duration": 4.778,
+      "text": "So, minus this divided by 125. And, after this they are going"
+    },
+    {
+      "index": 419,
+      "start": 1764.693,
+      "end": 1768.913,
+      "duration": 4.22,
+      "text": "to get really quite small because the next one will be"
+    },
+    {
+      "index": 420,
+      "start": 1768.913,
+      "end": 1773.133,
+      "duration": 4.22,
+      "text": "seven pi squared. That's 400, and this is"
+    },
+    {
+      "index": 421,
+      "start": 1773.133,
+      "end": 1778.47,
+      "duration": 5.337,
+      "text": "becoming negligible. So, what's happening?"
+    },
+    {
+      "index": 422,
+      "start": 1778.47,
+      "end": 1782.941,
+      "duration": 4.471,
+      "text": "So, it's approximately, in other words,"
+    },
+    {
+      "index": 423,
+      "start": 1782.941,
+      "end": 1788.235,
+      "duration": 5.294,
+      "text": "0.005 plus the next coefficient is, let's see,"
+    },
+    {
+      "index": 424,
+      "start": 1788.235,
+      "end": 1791.764,
+      "duration": 3.529,
+      "text": "6/10, let's say 100, sine pi t."
+    },
+    {
+      "index": 425,
+      "start": 1791.764,
+      "end": 1796.823,
+      "duration": 5.059,
+      "text": "And, what comes next? Well, it's now 1/20th."
+    },
+    {
+      "index": 426,
+      "start": 1796.823,
+      "end": 1803.07,
+      "duration": 6.247,
+      "text": "It's about a 20th. Let's call that 0.005 sine"
+    },
+    {
+      "index": 427,
+      "start": 1803.07,
+      "end": 1808.976,
+      "duration": 5.906,
+      "text": "three pi t, and now so small,"
+    },
+    {
+      "index": 428,
+      "start": 1808.976,
+      "end": 1813.818,
+      "duration": 4.842,
+      "text": "minus 0.01, let's say times this last one,"
+    },
+    {
+      "index": 429,
+      "start": 1813.818,
+      "end": 1816.889,
+      "duration": 3.071,
+      "text": "sine 5 pi t. What you find,"
+    },
+    {
+      "index": 430,
+      "start": 1816.889,
+      "end": 1822.086,
+      "duration": 5.197,
+      "text": "in other words, is that the frequencies which"
+    },
+    {
+      "index": 431,
+      "start": 1822.086,
+      "end": 1830.0,
+      "duration": 7.914,
+      "text": "make up the response do not occur with the same amplitude."
+    },
+    {
+      "index": 432,
+      "start": 1830.0,
+      "end": 1835.266,
+      "duration": 5.266,
+      "text": "What happens is that this amplitude is roughly five times"
+    },
+    {
+      "index": 433,
+      "start": 1835.266,
+      "end": 1838.934,
+      "duration": 3.668,
+      "text": "larger than any of the neighboring ones."
+    },
+    {
+      "index": 434,
+      "start": 1838.934,
+      "end": 1843.26,
+      "duration": 4.326,
+      "text": "And after that, it's a lot larger than the ones"
+    },
+    {
+      "index": 435,
+      "start": 1843.26,
+      "end": 1846.175,
+      "duration": 2.915,
+      "text": "that come later. In other words,"
+    },
+    {
+      "index": 436,
+      "start": 1846.175,
+      "end": 1852.1,
+      "duration": 5.925,
+      "text": "the main frequency which occurs in the response is the frequency"
+    },
+    {
+      "index": 437,
+      "start": 1852.1,
+      "end": 1854.733,
+      "duration": 2.633,
+      "text": "three pi. What's happened is,"
+    },
+    {
+      "index": 438,
+      "start": 1854.733,
+      "end": 1860.0,
+      "duration": 5.267,
+      "text": "in other words, near resonance has occurred."
+    },
+    {
+      "index": 439,
+      "start": 1860.0,
+      "end": 1864.599,
+      "duration": 4.599,
+      "text": "So, if omega is ten, very near resonance,"
+    },
+    {
+      "index": 440,
+      "start": 1864.599,
+      "end": 1870.693,
+      "duration": 6.094,
+      "text": "that is, it's not too close, but it's not too far away"
+    },
+    {
+      "index": 441,
+      "start": 1870.693,
+      "end": 1876.902,
+      "duration": 6.209,
+      "text": "either, occurs for the frequency three pi in the input."
+    },
+    {
+      "index": 442,
+      "start": 1876.902,
+      "end": 1882.421,
+      "duration": 5.519,
+      "text": "Now, where's the frequency three pi in the input?"
+    },
+    {
+      "index": 443,
+      "start": 1882.421,
+      "end": 1887.25,
+      "duration": 4.829,
+      "text": "It isn't there. It's just that green thing."
+    },
+    {
+      "index": 444,
+      "start": 1887.25,
+      "end": 1893.0,
+      "duration": 5.75,
+      "text": "Where in that is the frequency three pi?"
+    },
+    {
+      "index": 445,
+      "start": 1893.0,
+      "end": 1897.688,
+      "duration": 4.688,
+      "text": "I can't answer that for you, but that's the function of"
+    },
+    {
+      "index": 446,
+      "start": 1897.688,
+      "end": 1901.508,
+      "duration": 3.82,
+      "text": "Fourier series, to say that you can decompose"
+    },
+    {
+      "index": 447,
+      "start": 1901.508,
+      "end": 1905.416,
+      "duration": 3.908,
+      "text": "that green function into a sum of frequencies,"
+    },
+    {
+      "index": 448,
+      "start": 1905.416,
+      "end": 1910.365,
+      "duration": 4.949,
+      "text": "as it were, and the Fourier coefficients tell you how much"
+    },
+    {
+      "index": 449,
+      "start": 1910.365,
+      "end": 1914.011,
+      "duration": 3.646,
+      "text": "frequency goes into each of those f of t's."
+    },
+    {
+      "index": 450,
+      "start": 1914.011,
+      "end": 1919.134,
+      "duration": 5.123,
+      "text": "Now, so, f of t is decomposed into the sum of frequencies by"
+    },
+    {
+      "index": 451,
+      "start": 1919.134,
+      "end": 1924.45,
+      "duration": 5.316,
+      "text": "the Fourier analysis. But, the system isn't going to"
+    },
+    {
+      "index": 452,
+      "start": 1924.45,
+      "end": 1927.717,
+      "duration": 3.267,
+      "text": "respond equally to all those frequencies."
+    },
+    {
+      "index": 453,
+      "start": 1927.717,
+      "end": 1932.292,
+      "duration": 4.575,
+      "text": "It's going to pick out and favor the one which is closest"
+    },
+    {
+      "index": 454,
+      "start": 1932.292,
+      "end": 1935.967,
+      "duration": 3.675,
+      "text": "to its natural frequency. So, what's happened,"
+    },
+    {
+      "index": 455,
+      "start": 1935.967,
+      "end": 1939.48,
+      "duration": 3.513,
+      "text": "these frequencies, the frequencies and their"
+    },
+    {
+      "index": 456,
+      "start": 1939.48,
+      "end": 1943.482,
+      "duration": 4.002,
+      "text": "relative importance in f of t are hidden,"
+    },
+    {
+      "index": 457,
+      "start": 1943.482,
+      "end": 1946.913,
+      "duration": 3.431,
+      "text": "as it were. They're hidden because we can't"
+    },
+    {
+      "index": 458,
+      "start": 1946.913,
+      "end": 1950.425,
+      "duration": 3.512,
+      "text": "see them unless you do the Fourier analysis,"
+    },
+    {
+      "index": 459,
+      "start": 1950.425,
+      "end": 1955.0,
+      "duration": 4.575,
+      "text": "and look at the size of the coefficients."
+    },
+    {
+      "index": 460,
+      "start": 1955.0,
+      "end": 1964.918,
+      "duration": 9.918,
+      "text": "But, the system can pick out. The system picks out and"
+    },
+    {
+      "index": 461,
+      "start": 1964.918,
+      "end": 1974.274,
+      "duration": 9.356,
+      "text": "favors, picks out for resonance, or resonates with,"
+    },
+    {
+      "index": 462,
+      "start": 1974.274,
+      "end": 1984.005,
+      "duration": 9.731,
+      "text": "resonates with the frequencies closest to its natural"
+    },
+    {
+      "index": 463,
+      "start": 1984.005,
+      "end": 1989.227,
+      "duration": 5.222,
+      "text": "frequency. Well, suppose the system had"
+    },
+    {
+      "index": 464,
+      "start": 1989.227,
+      "end": 1991.296,
+      "duration": 2.069,
+      "text": "natural frequency, not ten."
+    },
+    {
+      "index": 465,
+      "start": 1991.296,
+      "end": 1994.718,
+      "duration": 3.422,
+      "text": "This is a put up job. Suppose it had natural"
+    },
+    {
+      "index": 466,
+      "start": 1994.718,
+      "end": 1997.423,
+      "duration": 2.705,
+      "text": "frequency five. Well, in that case,"
+    },
+    {
+      "index": 467,
+      "start": 1997.423,
+      "end": 2001.959,
+      "duration": 4.536,
+      "text": "none of them are close to the hidden frequencies in f of t,"
+    },
+    {
+      "index": 468,
+      "start": 2001.959,
+      "end": 2005.221,
+      "duration": 3.262,
+      "text": "and there would be no resonance."
+    },
+    {
+      "index": 469,
+      "start": 2005.221,
+      "end": 2009.04,
+      "duration": 3.819,
+      "text": "But, because of the particular value I gave here,"
+    },
+    {
+      "index": 470,
+      "start": 2009.04,
+      "end": 2013.098,
+      "duration": 4.058,
+      "text": "I gave the value ten, it's able to pick out n equals"
+    },
+    {
+      "index": 471,
+      "start": 2013.098,
+      "end": 2017.634,
+      "duration": 4.536,
+      "text": "three as the most important, the corresponding three pi as"
+    },
+    {
+      "index": 472,
+      "start": 2017.634,
+      "end": 2024.0,
+      "duration": 6.366,
+      "text": "the most important frequency in the input, and respond to that."
+    },
+    {
+      "index": 473,
+      "start": 2024.0,
+      "end": 2028.268,
+      "duration": 4.268,
+      "text": "Okay, so this is the way we hear, give or take a few"
+    },
+    {
+      "index": 474,
+      "start": 2028.268,
+      "end": 2031.616,
+      "duration": 3.348,
+      "text": "thousand pages. So, what does the ear do?"
+    },
+    {
+      "index": 475,
+      "start": 2031.616,
+      "end": 2035.048,
+      "duration": 3.432,
+      "text": "How does the ear, so, it's got that thing,"
+    },
+    {
+      "index": 476,
+      "start": 2035.048,
+      "end": 2037.308,
+      "duration": 2.26,
+      "text": "messy curve, which I erased,"
+    },
+    {
+      "index": 477,
+      "start": 2037.308,
+      "end": 2041.158,
+      "duration": 3.85,
+      "text": "which has a secret, which just has three hidden"
+    },
+    {
+      "index": 478,
+      "start": 2041.158,
+      "end": 2045.162,
+      "duration": 4.004,
+      "text": "frequencies. Okay, from now on I hand wave,"
+    },
+    {
+      "index": 479,
+      "start": 2045.162,
+      "end": 2047.83,
+      "duration": 2.668,
+      "text": "right, like they do in other subjects."
+    },
+    {
+      "index": 480,
+      "start": 2047.83,
+      "end": 2051.29,
+      "duration": 3.46,
+      "text": "So, we got our frequency. So, it's got a [SINGS]."
+    },
+    {
+      "index": 481,
+      "start": 2051.29,
+      "end": 2053.669,
+      "duration": 2.379,
+      "text": "That's one frequency. [SINGS] And,"
+    },
+    {
+      "index": 482,
+      "start": 2053.669,
+      "end": 2056.841,
+      "duration": 3.172,
+      "text": "what goes in there is the sum of those three,"
+    },
+    {
+      "index": 483,
+      "start": 2056.841,
+      "end": 2060.59,
+      "duration": 3.749,
+      "text": "and the ear has to do something to say out of all the"
+    },
+    {
+      "index": 484,
+      "start": 2060.59,
+      "end": 2064.411,
+      "duration": 3.821,
+      "text": "frequencies in the world, I'm going to respond to that"
+    },
+    {
+      "index": 485,
+      "start": 2064.411,
+      "end": 2066.358,
+      "duration": 1.947,
+      "text": "one, that one, and that one,"
+    },
+    {
+      "index": 486,
+      "start": 2066.358,
+      "end": 2069.746,
+      "duration": 3.388,
+      "text": "and send a signal to the brain, which the brain,"
+    },
+    {
+      "index": 487,
+      "start": 2069.746,
+      "end": 2074.0,
+      "duration": 4.254,
+      "text": "then, will interpret as a beautiful triad."
+    },
+    {
+      "index": 488,
+      "start": 2074.0,
+      "end": 2077.549,
+      "duration": 3.549,
+      "text": "Okay, so what happens is that the ear, I don't talk"
+    },
+    {
+      "index": 489,
+      "start": 2077.549,
+      "end": 2079.963,
+      "duration": 2.414,
+      "text": "physiology, and I never will again."
+    },
+    {
+      "index": 490,
+      "start": 2079.963,
+      "end": 2083.087,
+      "duration": 3.124,
+      "text": "I know nothing about it, but anyway, the ear,"
+    },
+    {
+      "index": 491,
+      "start": 2083.087,
+      "end": 2086.991,
+      "duration": 3.904,
+      "text": "when you get far enough in there, there are little three"
+    },
+    {
+      "index": 492,
+      "start": 2086.991,
+      "end": 2090.115,
+      "duration": 3.124,
+      "text": "bones, bang, bang, bang; this is the eardrum,"
+    },
+    {
+      "index": 493,
+      "start": 2090.115,
+      "end": 2092.884,
+      "duration": 2.769,
+      "text": "and then there's the part which has wax."
+    },
+    {
+      "index": 494,
+      "start": 2092.884,
+      "end": 2097.215,
+      "duration": 4.331,
+      "text": "Then, there's the eardrum which vibrates, at least if there is"
+    },
+    {
+      "index": 495,
+      "start": 2097.215,
+      "end": 2101.19,
+      "duration": 3.975,
+      "text": "not too much wax in your ear. And then, the vibrations go"
+    },
+    {
+      "index": 496,
+      "start": 2101.19,
+      "end": 2105.734,
+      "duration": 4.544,
+      "text": "through three little bones which send the vibrations to the inner"
+    },
+    {
+      "index": 497,
+      "start": 2105.734,
+      "end": 2110.321,
+      "duration": 4.587,
+      "text": "ear, which nobody ever sees. And, the inner ear,"
+    },
+    {
+      "index": 498,
+      "start": 2110.321,
+      "end": 2113.589,
+      "duration": 3.268,
+      "text": "then, is filled with thick fluid and a membrane,"
+    },
+    {
+      "index": 499,
+      "start": 2113.589,
+      "end": 2116.788,
+      "duration": 3.199,
+      "text": "and the last bone hits up against the membrane,"
+    },
+    {
+      "index": 500,
+      "start": 2116.788,
+      "end": 2120.334,
+      "duration": 3.546,
+      "text": "and the membrane vibrates. And, that makes the fluid"
+    },
+    {
+      "index": 501,
+      "start": 2120.334,
+      "end": 2121.655,
+      "duration": 1.321,
+      "text": "vibrate. Okay, good."
+    },
+    {
+      "index": 502,
+      "start": 2121.655,
+      "end": 2125.827,
+      "duration": 4.172,
+      "text": "So, it's vibrating according to the function f of t."
+    },
+    {
+      "index": 503,
+      "start": 2125.827,
+      "end": 2128.748,
+      "duration": 2.921,
+      "text": "Well, what then? Well, that's the marvelous"
+    },
+    {
+      "index": 504,
+      "start": 2128.748,
+      "end": 2131.975,
+      "duration": 3.227,
+      "text": "part. It's almost impossible to"
+    },
+    {
+      "index": 505,
+      "start": 2131.975,
+      "end": 2136.162,
+      "duration": 4.187,
+      "text": "believe, but there is this, sort of like a snail thing"
+    },
+    {
+      "index": 506,
+      "start": 2136.162,
+      "end": 2138.612,
+      "duration": 2.45,
+      "text": "inside. I've forgotten the name."
+    },
+    {
+      "index": 507,
+      "start": 2138.612,
+      "end": 2141.535,
+      "duration": 2.923,
+      "text": "It's cochlea. And, it has these hairs."
+    },
+    {
+      "index": 508,
+      "start": 2141.535,
+      "end": 2145.96,
+      "duration": 4.425,
+      "text": "They are not hairs really. I don't know what else to call"
+    },
+    {
+      "index": 509,
+      "start": 2145.96,
+      "end": 2147.777,
+      "duration": 1.817,
+      "text": "them. They're not hairs."
+    },
+    {
+      "index": 510,
+      "start": 2147.777,
+      "end": 2152.044,
+      "duration": 4.267,
+      "text": "But, there are things so long, you know, they stick up."
+    },
+    {
+      "index": 511,
+      "start": 2152.044,
+      "end": 2156.469,
+      "duration": 4.425,
+      "text": "And, there are 20,000 of them. And, they are of different"
+    },
+    {
+      "index": 512,
+      "start": 2156.469,
+      "end": 2159.234,
+      "duration": 2.765,
+      "text": "lengths. And, each one is tuned to a"
+    },
+    {
+      "index": 513,
+      "start": 2159.234,
+      "end": 2165.413,
+      "duration": 6.179,
+      "text": "certain frequency. Each one has a certain natural"
+    },
+    {
+      "index": 514,
+      "start": 2165.413,
+      "end": 2171.558,
+      "duration": 6.145,
+      "text": "frequency, and they are all different, and they are all"
+    },
+    {
+      "index": 515,
+      "start": 2171.558,
+      "end": 2176.11,
+      "duration": 4.552,
+      "text": "graded, just like a bunch of organ pipes."
+    },
+    {
+      "index": 516,
+      "start": 2176.11,
+      "end": 2183.279,
+      "duration": 7.169,
+      "text": "And, when that complicated wave hits, the complicated wave hits,"
+    },
+    {
+      "index": 517,
+      "start": 2183.279,
+      "end": 2189.196,
+      "duration": 5.917,
+      "text": "each one resonates to a hidden frequency in the wave,"
+    },
+    {
+      "index": 518,
+      "start": 2189.196,
+      "end": 2195.0,
+      "duration": 5.804,
+      "text": "which is closest to its natural frequency."
+    },
+    {
+      "index": 519,
+      "start": 2195.0,
+      "end": 2197.75,
+      "duration": 2.75,
+      "text": "Now, most of them won't be resonating at all."
+    },
+    {
+      "index": 520,
+      "start": 2197.75,
+      "end": 2200.5,
+      "duration": 2.75,
+      "text": "Only the ones close to the frequency [SINGS],"
+    },
+    {
+      "index": 521,
+      "start": 2200.5,
+      "end": 2203.062,
+      "duration": 2.562,
+      "text": "they'll resonate, and the nearby guys will"
+    },
+    {
+      "index": 522,
+      "start": 2203.062,
+      "end": 2205.687,
+      "duration": 2.625,
+      "text": "resonate, too, because they will be nearby,"
+    },
+    {
+      "index": 523,
+      "start": 2205.687,
+      "end": 2208.062,
+      "duration": 2.375,
+      "text": "almost have the same natural frequency."
+    },
+    {
+      "index": 524,
+      "start": 2208.062,
+      "end": 2210.562,
+      "duration": 2.5,
+      "text": "And, over here, there will be a few which"
+    },
+    {
+      "index": 525,
+      "start": 2210.562,
+      "end": 2213.5,
+      "duration": 2.938,
+      "text": "resonate to [SINGS], and finally over here a few"
+    },
+    {
+      "index": 526,
+      "start": 2213.5,
+      "end": 2216.5,
+      "duration": 3.0,
+      "text": "which go [SINGS], and each of those little hairs,"
+    },
+    {
+      "index": 527,
+      "start": 2216.5,
+      "end": 2220.125,
+      "duration": 3.625,
+      "text": "little groups of hairs will signal, send that signal to the"
+    },
+    {
+      "index": 528,
+      "start": 2220.125,
+      "end": 2223.812,
+      "duration": 3.687,
+      "text": "auditory nerve somehow or other, which will then carry these"
+    },
+    {
+      "index": 529,
+      "start": 2223.812,
+      "end": 2226.312,
+      "duration": 2.5,
+      "text": "three inputs to the brain, and the brain,"
+    },
+    {
+      "index": 530,
+      "start": 2226.312,
+      "end": 2231.0,
+      "duration": 4.688,
+      "text": "then, will interpret that as you are hearing [SINGS]."
+    },
+    {
+      "index": 531,
+      "start": 2231.0,
+      "end": 2235.407,
+      "duration": 4.407,
+      "text": "So, the Fourier analysis is done by resonance."
+    },
+    {
+      "index": 532,
+      "start": 2235.407,
+      "end": 2241.283,
+      "duration": 5.876,
+      "text": "You here resonance because each of these things has a certain"
+    },
+    {
+      "index": 533,
+      "start": 2241.283,
+      "end": 2247.159,
+      "duration": 5.876,
+      "text": "natural frequency which is able, then, to pick out a resonant"
+    },
+    {
+      "index": 534,
+      "start": 2247.159,
+      "end": 2252.233,
+      "duration": 5.074,
+      "text": "frequency in the input. I'd like to finish our work on"
+    },
+    {
+      "index": 535,
+      "start": 2252.233,
+      "end": 2255.657,
+      "duration": 3.424,
+      "text": "Fourier series. So, for homework I'm asking you"
+    },
+    {
+      "index": 536,
+      "start": 2255.657,
+      "end": 2258.56,
+      "duration": 2.903,
+      "text": "to do something similar. Taken an input."
+    },
+    {
+      "index": 537,
+      "start": 2258.56,
+      "end": 2262.431,
+      "duration": 3.871,
+      "text": "I gave you a frequency here, a different omega naught,"
+    },
+    {
+      "index": 538,
+      "start": 2262.431,
+      "end": 2266.972,
+      "duration": 4.541,
+      "text": "a different input, as you by means of this Fourier"
+    },
+    {
+      "index": 539,
+      "start": 2266.972,
+      "end": 2270.173,
+      "duration": 3.201,
+      "text": "analysis to find out which it will resonate,"
+    },
+    {
+      "index": 540,
+      "start": 2270.173,
+      "end": 2274.565,
+      "duration": 4.392,
+      "text": "which of the hidden frequencies in the input the system will"
+    },
+    {
+      "index": 541,
+      "start": 2274.565,
+      "end": 2280.0,
+      "duration": 5.435,
+      "text": "resonate to, just so you can work it out yourself and do it."
+    },
+    {
+      "index": 542,
+      "start": 2280.0,
+      "end": 2285.304,
+      "duration": 5.304,
+      "text": "Now, I'd like to first try to match up what I just did by this"
+    },
+    {
+      "index": 543,
+      "start": 2285.304,
+      "end": 2290.173,
+      "duration": 4.869,
+      "text": "formula with what's in your book, since your book handles"
+    },
+    {
+      "index": 544,
+      "start": 2290.173,
+      "end": 2294.173,
+      "duration": 4.0,
+      "text": "the identical problem but a little differently,"
+    },
+    {
+      "index": 545,
+      "start": 2294.173,
+      "end": 2299.043,
+      "duration": 4.87,
+      "text": "and it's essentially the same. But I think I'd better say"
+    },
+    {
+      "index": 546,
+      "start": 2299.043,
+      "end": 2302.608,
+      "duration": 3.565,
+      "text": "something about it. So, the book's method,"
+    },
+    {
+      "index": 547,
+      "start": 2302.608,
+      "end": 2308.0,
+      "duration": 5.392,
+      "text": "and to the extent which any of these problems are worked out in"
+    },
+    {
+      "index": 548,
+      "start": 2308.0,
+      "end": 2312.0,
+      "duration": 4.0,
+      "text": "the notes, the notes do this, too."
+    },
+    {
+      "index": 549,
+      "start": 2312.0,
+      "end": 2316.453,
+      "duration": 4.453,
+      "text": "Use substitution. Base uses differentiation of"
+    },
+    {
+      "index": 550,
+      "start": 2316.453,
+      "end": 2322.194,
+      "duration": 5.741,
+      "text": "Fourier series term by term. The work is almost exactly the"
+    },
+    {
+      "index": 551,
+      "start": 2322.194,
+      "end": 2326.549,
+      "duration": 4.355,
+      "text": "same as here. And, it has a slight advantage,"
+    },
+    {
+      "index": 552,
+      "start": 2326.549,
+      "end": 2331.399,
+      "duration": 4.85,
+      "text": "that it allows you, the book's method has a slight"
+    },
+    {
+      "index": 553,
+      "start": 2331.399,
+      "end": 2336.447,
+      "duration": 5.048,
+      "text": "advantage that it allows you to forget this formula."
+    },
+    {
+      "index": 554,
+      "start": 2336.447,
+      "end": 2341.0,
+      "duration": 4.553,
+      "text": "You don't have to know this formula."
+    },
+    {
+      "index": 555,
+      "start": 2341.0,
+      "end": 2344.68,
+      "duration": 3.68,
+      "text": "It will come out in the wash. Now, for some of you,"
+    },
+    {
+      "index": 556,
+      "start": 2344.68,
+      "end": 2348.286,
+      "duration": 3.606,
+      "text": "that may be of colossal importance, in which case,"
+    },
+    {
+      "index": 557,
+      "start": 2348.286,
+      "end": 2350.862,
+      "duration": 2.576,
+      "text": "by all means, use the book's method,"
+    },
+    {
+      "index": 558,
+      "start": 2350.862,
+      "end": 2354.101,
+      "duration": 3.239,
+      "text": "term by term. So, it requires no knowledge of"
+    },
+    {
+      "index": 559,
+      "start": 2354.101,
+      "end": 2357.928,
+      "duration": 3.827,
+      "text": "this formula because after all, I base this solution,"
+    },
+    {
+      "index": 560,
+      "start": 2357.928,
+      "end": 2361.829,
+      "duration": 3.901,
+      "text": "I simply wrote down the solution and I based it on the"
+    },
+    {
+      "index": 561,
+      "start": 2361.829,
+      "end": 2366.319,
+      "duration": 4.49,
+      "text": "fact that I was able to write down immediately the solution to"
+    },
+    {
+      "index": 562,
+      "start": 2366.319,
+      "end": 2370.0,
+      "duration": 3.681,
+      "text": "this and put as being that response."
+    },
+    {
+      "index": 563,
+      "start": 2370.0,
+      "end": 2372.577,
+      "duration": 2.577,
+      "text": "And for that, I had to remember it,"
+    },
+    {
+      "index": 564,
+      "start": 2372.577,
+      "end": 2376.975,
+      "duration": 4.398,
+      "text": "or be willing to use complex exponentials quickly to remind"
+    },
+    {
+      "index": 565,
+      "start": 2376.975,
+      "end": 2378.491,
+      "duration": 1.516,
+      "text": "myself. There's very,"
+    },
+    {
+      "index": 566,
+      "start": 2378.491,
+      "end": 2381.372,
+      "duration": 2.881,
+      "text": "very little difference between the two."
+    },
+    {
+      "index": 567,
+      "start": 2381.372,
+      "end": 2384.557,
+      "duration": 3.185,
+      "text": "Even if you have to re-derive that formula,"
+    },
+    {
+      "index": 568,
+      "start": 2384.557,
+      "end": 2388.272,
+      "duration": 3.715,
+      "text": "the two take almost about the same length of time."
+    },
+    {
+      "index": 569,
+      "start": 2388.272,
+      "end": 2390.926,
+      "duration": 2.654,
+      "text": "But anyway, the idea is simply this."
+    },
+    {
+      "index": 570,
+      "start": 2390.926,
+      "end": 2392.821,
+      "duration": 1.895,
+      "text": "With the book, you assume."
+    },
+    {
+      "index": 571,
+      "start": 2392.821,
+      "end": 2395.702,
+      "duration": 2.881,
+      "text": "In other words, you take your function,"
+    },
+    {
+      "index": 572,
+      "start": 2395.702,
+      "end": 2398.887,
+      "duration": 3.185,
+      "text": "f of t. You expand it in a Fourier"
+    },
+    {
+      "index": 573,
+      "start": 2398.887,
+      "end": 2401.389,
+      "duration": 2.502,
+      "text": "series. Of course, which signs and"
+    },
+    {
+      "index": 574,
+      "start": 2401.389,
+      "end": 2407.0,
+      "duration": 5.611,
+      "text": "cosines you use will depend upon what the period is."
+    },
+    {
+      "index": 575,
+      "start": 2407.0,
+      "end": 2410.738,
+      "duration": 3.738,
+      "text": "So, you assume the solution of the form-- Well,"
+    },
+    {
+      "index": 576,
+      "start": 2410.738,
+      "end": 2414.639,
+      "duration": 3.901,
+      "text": "if I, for example, carried out in this particular"
+    },
+    {
+      "index": 577,
+      "start": 2414.639,
+      "end": 2418.215,
+      "duration": 3.576,
+      "text": "case, I don't know if I will do all the work,"
+    },
+    {
+      "index": 578,
+      "start": 2418.215,
+      "end": 2422.766,
+      "duration": 4.551,
+      "text": "but it would be natural to assume a solution of the form,"
+    },
+    {
+      "index": 579,
+      "start": 2422.766,
+      "end": 2426.017,
+      "duration": 3.251,
+      "text": "since the input looks like the green guy."
+    },
+    {
+      "index": 580,
+      "start": 2426.017,
+      "end": 2430.0,
+      "duration": 3.983,
+      "text": "Assume a solution which looks the same."
+    },
+    {
+      "index": 581,
+      "start": 2430.0,
+      "end": 2433.78,
+      "duration": 3.78,
+      "text": "In other words, it will have a constant term"
+    },
+    {
+      "index": 582,
+      "start": 2433.78,
+      "end": 2438.351,
+      "duration": 4.571,
+      "text": "because the input does. But all the rest of the terms"
+    },
+    {
+      "index": 583,
+      "start": 2438.351,
+      "end": 2442.131,
+      "duration": 3.78,
+      "text": "will be sines. So, it will be something like"
+    },
+    {
+      "index": 584,
+      "start": 2442.131,
+      "end": 2446.527,
+      "duration": 4.396,
+      "text": "(c)n times the sine of n pi t."
+    },
+    {
+      "index": 585,
+      "start": 2446.527,
+      "end": 2450.131,
+      "duration": 3.604,
+      "text": "The only question is, what are the (c)n's?"
+    },
+    {
+      "index": 586,
+      "start": 2450.131,
+      "end": 2453.032,
+      "duration": 2.901,
+      "text": "Well, I found one method up there."
+    },
+    {
+      "index": 587,
+      "start": 2453.032,
+      "end": 2456.461,
+      "duration": 3.429,
+      "text": "But, the general method is just plug-in."
+    },
+    {
+      "index": 588,
+      "start": 2456.461,
+      "end": 2462.0,
+      "duration": 5.539,
+      "text": "Substitute into the ODE. Substitute into the ODE."
+    },
+    {
+      "index": 589,
+      "start": 2462.0,
+      "end": 2464.69,
+      "duration": 2.69,
+      "text": "You differentiate this twice to do it."
+    },
+    {
+      "index": 590,
+      "start": 2464.69,
+      "end": 2468.618,
+      "duration": 3.928,
+      "text": "So, I'll do the double differentiation and I won't stop"
+    },
+    {
+      "index": 591,
+      "start": 2468.618,
+      "end": 2472.181,
+      "duration": 3.563,
+      "text": "the lecture there, but I will stop the calculation"
+    },
+    {
+      "index": 592,
+      "start": 2472.181,
+      "end": 2475.163,
+      "duration": 2.982,
+      "text": "there because it has nothing new to offer."
+    },
+    {
+      "index": 593,
+      "start": 2475.163,
+      "end": 2479.309,
+      "duration": 4.146,
+      "text": "And, this is the way all the calculations in the books and"
+    },
+    {
+      "index": 594,
+      "start": 2479.309,
+      "end": 2482.436,
+      "duration": 3.127,
+      "text": "the solutions and the notes are carried out."
+    },
+    {
+      "index": 595,
+      "start": 2482.436,
+      "end": 2485.418,
+      "duration": 2.982,
+      "text": "So, I don't think you'll have any trouble."
+    },
+    {
+      "index": 596,
+      "start": 2485.418,
+      "end": 2490.0,
+      "duration": 4.582,
+      "text": "Well, this term vanishes. This term becomes what?"
+    },
+    {
+      "index": 597,
+      "start": 2490.0,
+      "end": 2493.531,
+      "duration": 3.531,
+      "text": "If I differentiate this twice, I get summation,"
+    },
+    {
+      "index": 598,
+      "start": 2493.531,
+      "end": 2497.83,
+      "duration": 4.299,
+      "text": "so, this is one to infinity because I don't know which of"
+    },
+    {
+      "index": 599,
+      "start": 2497.83,
+      "end": 2500.44,
+      "duration": 2.61,
+      "text": "these are actually going to appear."
+    },
+    {
+      "index": 600,
+      "start": 2500.44,
+      "end": 2503.742,
+      "duration": 3.302,
+      "text": "Summation one to infinity, (c)n times, well,"
+    },
+    {
+      "index": 601,
+      "start": 2503.742,
+      "end": 2508.194,
+      "duration": 4.452,
+      "text": "if you differentiate the sine twice, you get negative sine,"
+    },
+    {
+      "index": 602,
+      "start": 2508.194,
+      "end": 2510.728,
+      "duration": 2.534,
+      "text": "right? Do it once: you get cosine."
+    },
+    {
+      "index": 603,
+      "start": 2510.728,
+      "end": 2513.338,
+      "duration": 2.61,
+      "text": "Second time: you get negative sine."
+    },
+    {
+      "index": 604,
+      "start": 2513.338,
+      "end": 2517.791,
+      "duration": 4.453,
+      "text": "But, each time you will get this extra factor n pi from the"
+    },
+    {
+      "index": 605,
+      "start": 2517.791,
+      "end": 2520.631,
+      "duration": 2.84,
+      "text": "chain rule. And so, the answer will be"
+    },
+    {
+      "index": 606,
+      "start": 2520.631,
+      "end": 2525.545,
+      "duration": 4.914,
+      "text": "negative (c)n times n pi squared times the sine of n pi t."
+    },
+    {
+      "index": 607,
+      "start": 2525.545,
+      "end": 2530.77,
+      "duration": 5.225,
+      "text": "And so, the procedure is,"
+    },
+    {
+      "index": 608,
+      "start": 2530.77,
+      "end": 2533.461,
+      "duration": 2.691,
+      "text": "very simply, you substitute (x)p double"
+    },
+    {
+      "index": 609,
+      "start": 2533.461,
+      "end": 2536.011,
+      "duration": 2.55,
+      "text": "prime into the differential equation."
+    },
+    {
+      "index": 610,
+      "start": 2536.011,
+      "end": 2537.994,
+      "duration": 1.983,
+      "text": "In other words, if you do it,"
+    },
+    {
+      "index": 611,
+      "start": 2537.994,
+      "end": 2542.243,
+      "duration": 4.249,
+      "text": "we will multiply this by omega naught squared."
+    },
+    {
+      "index": 612,
+      "start": 2542.243,
+      "end": 2545.359,
+      "duration": 3.116,
+      "text": "And, you add them. And then, on the left-hand"
+    },
+    {
+      "index": 613,
+      "start": 2545.359,
+      "end": 2549.892,
+      "duration": 4.533,
+      "text": "side, you are going to get a sum of terms, sine n pi t"
+    },
+    {
+      "index": 614,
+      "start": 2549.892,
+      "end": 2554.0,
+      "duration": 4.108,
+      "text": "times coefficients involving the (c)n's."
+    },
+    {
+      "index": 615,
+      "start": 2554.0,
+      "end": 2557.701,
+      "duration": 3.701,
+      "text": "And, on the right, so, you're going to get a sum"
+    },
+    {
+      "index": 616,
+      "start": 2557.701,
+      "end": 2561.009,
+      "duration": 3.308,
+      "text": "involving the (c)n's, and the sines n pi t,"
+    },
+    {
+      "index": 617,
+      "start": 2561.009,
+      "end": 2564.789,
+      "duration": 3.78,
+      "text": "and on the right, you're going to get the Fourier"
+    },
+    {
+      "index": 618,
+      "start": 2564.789,
+      "end": 2569.279,
+      "duration": 4.49,
+      "text": "series for f of t, which is exactly the same kind"
+    },
+    {
+      "index": 619,
+      "start": 2569.279,
+      "end": 2572.193,
+      "duration": 2.914,
+      "text": "of expression. The only difference is,"
+    },
+    {
+      "index": 620,
+      "start": 2572.193,
+      "end": 2576.131,
+      "duration": 3.938,
+      "text": "now the sines have come with definite coefficients."
+    },
+    {
+      "index": 621,
+      "start": 2576.131,
+      "end": 2581.014,
+      "duration": 4.883,
+      "text": "And then, you simply click the coefficients on the left and the"
+    },
+    {
+      "index": 622,
+      "start": 2581.014,
+      "end": 2585.424,
+      "duration": 4.41,
+      "text": "coefficients on the right, and figure out what the (c)n's"
+    },
+    {
+      "index": 623,
+      "start": 2585.424,
+      "end": 2590.233,
+      "duration": 4.809,
+      "text": "are. So, by equating coefficients,"
+    },
+    {
+      "index": 624,
+      "start": 2590.233,
+      "end": 2595.586,
+      "duration": 5.353,
+      "text": "you get the (c)n's. Would you like me to carry it"
+    },
+    {
+      "index": 625,
+      "start": 2595.586,
+      "end": 2599.266,
+      "duration": 3.68,
+      "text": "out? Yeah, okay, I was going to do"
+    },
+    {
+      "index": 626,
+      "start": 2599.266,
+      "end": 2604.284,
+      "duration": 5.018,
+      "text": "something else, but I wouldn't have time to do"
+    },
+    {
+      "index": 627,
+      "start": 2604.284,
+      "end": 2608.075,
+      "duration": 3.791,
+      "text": "it anyway. So, why don't I take two"
+    },
+    {
+      "index": 628,
+      "start": 2608.075,
+      "end": 2614.097,
+      "duration": 6.022,
+      "text": "minutes to complete the calculation just so you can see"
+    },
+    {
+      "index": 629,
+      "start": 2614.097,
+      "end": 2620.445,
+      "duration": 6.348,
+      "text": "you get the same answer? All right, what do we get?"
+    },
+    {
+      "index": 630,
+      "start": 2620.445,
+      "end": 2623.832,
+      "duration": 3.387,
+      "text": "If you add them up, you get c naught,"
+    },
+    {
+      "index": 631,
+      "start": 2623.832,
+      "end": 2627.783,
+      "duration": 3.951,
+      "text": "out front, plus (c)n is multiplied by what?"
+    },
+    {
+      "index": 632,
+      "start": 2627.783,
+      "end": 2632.393,
+      "duration": 4.61,
+      "text": "Well, from the top it's multiplied by omega naught"
+    },
+    {
+      "index": 633,
+      "start": 2632.393,
+      "end": 2635.874,
+      "duration": 3.481,
+      "text": "squared. On the bottom,"
+    },
+    {
+      "index": 634,
+      "start": 2635.874,
+      "end": 2640.013,
+      "duration": 4.139,
+      "text": "it's multiplied by n pi squared."
+    },
+    {
+      "index": 635,
+      "start": 2640.013,
+      "end": 2645.0,
+      "duration": 4.987,
+      "text": "Ah-ha, where have I seen that combination?"
+    },
+    {
+      "index": 636,
+      "start": 2645.0,
+      "end": 2655.378,
+      "duration": 10.378,
+      "text": "The sum is equal to, sorry, one half plus what is"
+    },
+    {
+      "index": 637,
+      "start": 2655.378,
+      "end": 2669.0,
+      "duration": 13.622,
+      "text": "it, sum over n odd of sine n pi t over n."
+    },
+    {
+      "index": 638,
+      "start": 2669.0,
+      "end": 2674.747,
+      "duration": 5.747,
+      "text": "So, the conclusion is that-- I'm sorry, it should be c naught"
+    },
+    {
+      "index": 639,
+      "start": 2674.747,
+      "end": 2678.961,
+      "duration": 4.214,
+      "text": "times omega naught squared."
+    },
+    {
+      "index": 640,
+      "start": 2678.961,
+      "end": 2684.421,
+      "duration": 5.46,
+      "text": "So, what's the conclusion? If c zero is one over two omega"
+    },
+    {
+      "index": 641,
+      "start": 2684.421,
+      "end": 2688.444,
+      "duration": 4.023,
+      "text": "naught squared,"
+    },
+    {
+      "index": 642,
+      "start": 2688.444,
+      "end": 2691.222,
+      "duration": 2.778,
+      "text": "and that (c)n, only for n odd,"
+    },
+    {
+      "index": 643,
+      "start": 2691.222,
+      "end": 2695.819,
+      "duration": 4.597,
+      "text": "the others will be even. The others will be zero."
+    },
+    {
+      "index": 644,
+      "start": 2695.819,
+      "end": 2701.662,
+      "duration": 5.843,
+      "text": "The (c)n is going to be equal to two over pi here."
+    },
+    {
+      "index": 645,
+      "start": 2701.662,
+      "end": 2704.823,
+      "duration": 3.161,
+      "text": "So, it's going to be two pi,"
+    },
+    {
+      "index": 646,
+      "start": 2704.823,
+      "end": 2710.091,
+      "duration": 5.268,
+      "text": "two over pi times one over n times one over omega naught"
+    },
+    {
+      "index": 647,
+      "start": 2710.091,
+      "end": 2715.934,
+      "duration": 5.843,
+      "text": "squared minus n over pi squared."
+    },
+    {
+      "index": 648,
+      "start": 2715.934,
+      "end": 2720.927,
+      "duration": 4.993,
+      "text": "This is terrible,"
+    },
+    {
+      "index": 649,
+      "start": 2720.927,
+      "end": 2726.144,
+      "duration": 5.217,
+      "text": "which is the same answer we got before, I hope."
+    },
+    {
+      "index": 650,
+      "start": 2726.144,
+      "end": 2730.0,
+      "duration": 3.856,
+      "text": "Did I cover it up? Same answer."
+    },
+    {
+      "index": 651,
+      "start": 2730.0,
+      "end": 2735.644,
+      "duration": 5.644,
+      "text": "So, that answer at the left-hand end of the board is"
+    },
+    {
+      "index": 652,
+      "start": 2735.644,
+      "end": 2738.854,
+      "duration": 3.21,
+      "text": "the same one. I've calculated,"
+    },
+    {
+      "index": 653,
+      "start": 2738.854,
+      "end": 2742.839,
+      "duration": 3.985,
+      "text": "in other words, what the c zeros are."
+    },
+    {
+      "index": 654,
+      "start": 2742.839,
+      "end": 2745.239,
+      "duration": 2.4,
+      "text": "And, I got the same answer as before."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

@@ -1,0 +1,5961 @@
+{
+  "video": {
+    "id": "ChiM2-MV-qM",
+    "title": "Lec 15: Partial differential equations; review | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=ChiM2-MV-qM",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2723,
+    "language": "en"
+  },
+  "segment_count": 849,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.75,
+      "end": 1.76,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.76,
+      "end": 4.309,
+      "duration": 2.549,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.43,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.44,
+      "end": 8.35,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.36,
+      "end": 11.23,
+      "duration": 2.87,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.24,
+      "end": 12.789,
+      "duration": 1.549,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.799,
+      "end": 15.869,
+      "duration": 3.07,
+      "text": "hundreds of MIT courses visit MIT open"
+    },
+    {
+      "index": 7,
+      "start": 15.879,
+      "end": 21.15,
+      "duration": 5.271,
+      "text": "courseware at"
+    },
+    {
+      "index": 8,
+      "start": 23.47,
+      "end": 23.48,
+      "duration": 0.01,
+      "text": "ocw.mit.edu let me start by basically"
+    },
+    {
+      "index": 9,
+      "start": 23.48,
+      "end": 25.349,
+      "duration": 1.869,
+      "text": "listing the main things we've learned"
+    },
+    {
+      "index": 10,
+      "start": 25.359,
+      "end": 28.63,
+      "duration": 3.271,
+      "text": "over the past 3 weeks or so and I'll add"
+    },
+    {
+      "index": 11,
+      "start": 28.64,
+      "end": 30.509,
+      "duration": 1.869,
+      "text": "a few complements of information about"
+    },
+    {
+      "index": 12,
+      "start": 30.519,
+      "end": 32.51,
+      "duration": 1.991,
+      "text": "that because there's a few small details"
+    },
+    {
+      "index": 13,
+      "start": 32.52,
+      "end": 35.069,
+      "duration": 2.549,
+      "text": "that I didn't quite clarify and that I"
+    },
+    {
+      "index": 14,
+      "start": 35.079,
+      "end": 37.75,
+      "duration": 2.671,
+      "text": "should you know probably make a bit"
+    },
+    {
+      "index": 15,
+      "start": 37.76,
+      "end": 39.51,
+      "duration": 1.75,
+      "text": "clearer especially what happened at the"
+    },
+    {
+      "index": 16,
+      "start": 39.52,
+      "end": 41.43,
+      "duration": 1.91,
+      "text": "very end of yesterday's"
+    },
+    {
+      "index": 17,
+      "start": 41.44,
+      "end": 47.31,
+      "duration": 5.87,
+      "text": "class"
+    },
+    {
+      "index": 18,
+      "start": 52.43,
+      "end": 52.44,
+      "duration": 0.01,
+      "text": "so here's a list of things that should"
+    },
+    {
+      "index": 19,
+      "start": 52.44,
+      "end": 56.43,
+      "duration": 3.99,
+      "text": "be on your review sheet for the"
+    },
+    {
+      "index": 20,
+      "start": 56.44,
+      "end": 59.189,
+      "duration": 2.749,
+      "text": "exam so the first thing we learned about"
+    },
+    {
+      "index": 21,
+      "start": 59.199,
+      "end": 62.63,
+      "duration": 3.431,
+      "text": "the main topic of this unit is about"
+    },
+    {
+      "index": 22,
+      "start": 62.64,
+      "end": 69.429,
+      "duration": 6.789,
+      "text": "functions of several"
+    },
+    {
+      "index": 23,
+      "start": 71.749,
+      "end": 71.759,
+      "duration": 0.01,
+      "text": "variables so we've learned how to think"
+    },
+    {
+      "index": 24,
+      "start": 71.759,
+      "end": 73.91,
+      "duration": 2.151,
+      "text": "of functions of two or three variables"
+    },
+    {
+      "index": 25,
+      "start": 73.92,
+      "end": 77.19,
+      "duration": 3.27,
+      "text": "in terms of plotting them in particular"
+    },
+    {
+      "index": 26,
+      "start": 77.2,
+      "end": 79.55,
+      "duration": 2.35,
+      "text": "well not only the graph but also the"
+    },
+    {
+      "index": 27,
+      "start": 79.56,
+      "end": 86.51,
+      "duration": 6.95,
+      "text": "Contour plot and how to read a contour"
+    },
+    {
+      "index": 28,
+      "start": 89.55,
+      "end": 89.56,
+      "duration": 0.01,
+      "text": "plot and we've learned how to study"
+    },
+    {
+      "index": 29,
+      "start": 89.56,
+      "end": 90.429,
+      "duration": 0.869,
+      "text": "variation"
+    },
+    {
+      "index": 30,
+      "start": 90.439,
+      "end": 100.51,
+      "duration": 10.071,
+      "text": "of these functions using partial"
+    },
+    {
+      "index": 31,
+      "start": 103.429,
+      "end": 103.439,
+      "duration": 0.01,
+      "text": "derivatives so remember we've defined"
+    },
+    {
+      "index": 32,
+      "start": 103.439,
+      "end": 106.789,
+      "duration": 3.35,
+      "text": "the partial of f with respect to some"
+    },
+    {
+      "index": 33,
+      "start": 106.799,
+      "end": 110.27,
+      "duration": 3.471,
+      "text": "variables say x to be the rate of change"
+    },
+    {
+      "index": 34,
+      "start": 110.28,
+      "end": 112.23,
+      "duration": 1.95,
+      "text": "with respect to X when we hold all the"
+    },
+    {
+      "index": 35,
+      "start": 112.24,
+      "end": 114.23,
+      "duration": 1.99,
+      "text": "other variables"
+    },
+    {
+      "index": 36,
+      "start": 114.24,
+      "end": 116.19,
+      "duration": 1.95,
+      "text": "constant so if you have a function of X"
+    },
+    {
+      "index": 37,
+      "start": 116.2,
+      "end": 118.109,
+      "duration": 1.909,
+      "text": "and Y this symbol means you"
+    },
+    {
+      "index": 38,
+      "start": 118.119,
+      "end": 120.429,
+      "duration": 2.31,
+      "text": "differentiate with respect to X treating"
+    },
+    {
+      "index": 39,
+      "start": 120.439,
+      "end": 126.029,
+      "duration": 5.59,
+      "text": "y as a"
+    },
+    {
+      "index": 40,
+      "start": 128.19,
+      "end": 128.2,
+      "duration": 0.01,
+      "text": "constant"
+    },
+    {
+      "index": 41,
+      "start": 128.2,
+      "end": 132.47,
+      "duration": 4.27,
+      "text": "and we've learned how to package partial"
+    },
+    {
+      "index": 42,
+      "start": 132.48,
+      "end": 138.15,
+      "duration": 5.67,
+      "text": "derivatives into a vector the gradient"
+    },
+    {
+      "index": 43,
+      "start": 140.309,
+      "end": 140.319,
+      "duration": 0.01,
+      "text": "Vector so for example if we have a"
+    },
+    {
+      "index": 44,
+      "start": 140.319,
+      "end": 142.39,
+      "duration": 2.071,
+      "text": "function of three variables that's"
+    },
+    {
+      "index": 45,
+      "start": 142.4,
+      "end": 145.07,
+      "duration": 2.67,
+      "text": "just the vector with components are the"
+    },
+    {
+      "index": 46,
+      "start": 145.08,
+      "end": 147.47,
+      "duration": 2.39,
+      "text": "partial derivatives and we've seen how"
+    },
+    {
+      "index": 47,
+      "start": 147.48,
+      "end": 149.47,
+      "duration": 1.99,
+      "text": "to use the gradient Vector of the"
+    },
+    {
+      "index": 48,
+      "start": 149.48,
+      "end": 152.19,
+      "duration": 2.71,
+      "text": "partial derivatives to derive various"
+    },
+    {
+      "index": 49,
+      "start": 152.2,
+      "end": 158.99,
+      "duration": 6.79,
+      "text": "things such as approximation"
+    },
+    {
+      "index": 50,
+      "start": 162.589,
+      "end": 162.599,
+      "duration": 0.01,
+      "text": "formulas so the change in F when we"
+    },
+    {
+      "index": 51,
+      "start": 162.599,
+      "end": 165.229,
+      "duration": 2.63,
+      "text": "change X Y and Z slightly is"
+    },
+    {
+      "index": 52,
+      "start": 165.239,
+      "end": 169.11,
+      "duration": 3.871,
+      "text": "approximately equal to well there's"
+    },
+    {
+      "index": 53,
+      "start": 169.12,
+      "end": 176.67,
+      "duration": 7.55,
+      "text": "several"
+    },
+    {
+      "index": 54,
+      "start": 179.309,
+      "end": 179.319,
+      "duration": 0.01,
+      "text": "terms and I can rewrite this in Vector"
+    },
+    {
+      "index": 55,
+      "start": 179.319,
+      "end": 182.789,
+      "duration": 3.47,
+      "text": "form as the gradient do"
+    },
+    {
+      "index": 56,
+      "start": 182.799,
+      "end": 185.55,
+      "duration": 2.751,
+      "text": "product the amount by which the position"
+    },
+    {
+      "index": 57,
+      "start": 185.56,
+      "end": 188.83,
+      "duration": 3.27,
+      "text": "Vector has changed okay so basically"
+    },
+    {
+      "index": 58,
+      "start": 188.84,
+      "end": 190.67,
+      "duration": 1.83,
+      "text": "what causes F to change is that I'm"
+    },
+    {
+      "index": 59,
+      "start": 190.68,
+      "end": 193.67,
+      "duration": 2.99,
+      "text": "changing X Y and Z by small amounts and"
+    },
+    {
+      "index": 60,
+      "start": 193.68,
+      "end": 196.869,
+      "duration": 3.189,
+      "text": "how sensitive f is to each variable is"
+    },
+    {
+      "index": 61,
+      "start": 196.879,
+      "end": 201.55,
+      "duration": 4.671,
+      "text": "precisely what the partial derivatives"
+    },
+    {
+      "index": 62,
+      "start": 204.67,
+      "end": 204.68,
+      "duration": 0.01,
+      "text": "measure and in particular we can use so"
+    },
+    {
+      "index": 63,
+      "start": 204.68,
+      "end": 205.39,
+      "duration": 0.71,
+      "text": "this"
+    },
+    {
+      "index": 64,
+      "start": 205.4,
+      "end": 207.309,
+      "duration": 1.909,
+      "text": "approximation is called the tangent"
+    },
+    {
+      "index": 65,
+      "start": 207.319,
+      "end": 210.35,
+      "duration": 3.031,
+      "text": "plane approximation because it tells us"
+    },
+    {
+      "index": 66,
+      "start": 210.36,
+      "end": 212.07,
+      "duration": 1.71,
+      "text": "in"
+    },
+    {
+      "index": 67,
+      "start": 212.08,
+      "end": 216.35,
+      "duration": 4.27,
+      "text": "fact it amounts to identifying the graph"
+    },
+    {
+      "index": 68,
+      "start": 216.36,
+      "end": 218.63,
+      "duration": 2.27,
+      "text": "of a function with its tangent plane it"
+    },
+    {
+      "index": 69,
+      "start": 218.64,
+      "end": 222.03,
+      "duration": 3.39,
+      "text": "means that we assume that the function"
+    },
+    {
+      "index": 70,
+      "start": 222.04,
+      "end": 225.19,
+      "duration": 3.15,
+      "text": "depends more or less linearly on XYZ and"
+    },
+    {
+      "index": 71,
+      "start": 225.2,
+      "end": 227.11,
+      "duration": 1.91,
+      "text": "if we set this things equal what we get"
+    },
+    {
+      "index": 72,
+      "start": 227.12,
+      "end": 229.83,
+      "duration": 2.71,
+      "text": "is actually we're replacing the function"
+    },
+    {
+      "index": 73,
+      "start": 229.84,
+      "end": 232.39,
+      "duration": 2.55,
+      "text": "by its linear approximation we're"
+    },
+    {
+      "index": 74,
+      "start": 232.4,
+      "end": 234.91,
+      "duration": 2.51,
+      "text": "replacing the graph by its tangent"
+    },
+    {
+      "index": 75,
+      "start": 234.92,
+      "end": 237.03,
+      "duration": 2.11,
+      "text": "plane except of course we haven't seen"
+    },
+    {
+      "index": 76,
+      "start": 237.04,
+      "end": 238.11,
+      "duration": 1.07,
+      "text": "the graph of a function of three"
+    },
+    {
+      "index": 77,
+      "start": 238.12,
+      "end": 239.789,
+      "duration": 1.669,
+      "text": "variables because that would live in"
+    },
+    {
+      "index": 78,
+      "start": 239.799,
+      "end": 241.99,
+      "duration": 2.191,
+      "text": "four dimensional space so when we think"
+    },
+    {
+      "index": 79,
+      "start": 242.0,
+      "end": 243.429,
+      "duration": 1.429,
+      "text": "of the graph that's really with a"
+    },
+    {
+      "index": 80,
+      "start": 243.439,
+      "end": 246.35,
+      "duration": 2.911,
+      "text": "function of two"
+    },
+    {
+      "index": 81,
+      "start": 249.55,
+      "end": 249.56,
+      "duration": 0.01,
+      "text": "variables um that also tells us how to"
+    },
+    {
+      "index": 82,
+      "start": 249.56,
+      "end": 253.429,
+      "duration": 3.869,
+      "text": "find tangent planes to level"
+    },
+    {
+      "index": 83,
+      "start": 253.439,
+      "end": 261.03,
+      "duration": 7.591,
+      "text": "surfaces"
+    },
+    {
+      "index": 84,
+      "start": 271.39,
+      "end": 271.4,
+      "duration": 0.01,
+      "text": "plane to a surface"
+    },
+    {
+      "index": 85,
+      "start": 271.4,
+      "end": 275.029,
+      "duration": 3.629,
+      "text": "given by the equation F of"
+    },
+    {
+      "index": 86,
+      "start": 275.039,
+      "end": 279.39,
+      "duration": 4.351,
+      "text": "xyzal C at a given point can be"
+    },
+    {
+      "index": 87,
+      "start": 279.4,
+      "end": 283.469,
+      "duration": 4.069,
+      "text": "found by looking first for its normal"
+    },
+    {
+      "index": 88,
+      "start": 283.479,
+      "end": 286.71,
+      "duration": 3.231,
+      "text": "vector and we know that the normal"
+    },
+    {
+      "index": 89,
+      "start": 286.72,
+      "end": 289.59,
+      "duration": 2.87,
+      "text": "Vector is actually well one normal"
+    },
+    {
+      "index": 90,
+      "start": 289.6,
+      "end": 291.15,
+      "duration": 1.55,
+      "text": "Vector is given by the gradient of a"
+    },
+    {
+      "index": 91,
+      "start": 291.16,
+      "end": 294.55,
+      "duration": 3.39,
+      "text": "function because we know that the"
+    },
+    {
+      "index": 92,
+      "start": 294.56,
+      "end": 296.83,
+      "duration": 2.27,
+      "text": "gradient is actually"
+    },
+    {
+      "index": 93,
+      "start": 296.84,
+      "end": 299.07,
+      "duration": 2.23,
+      "text": "pointing perpendicularly to the level"
+    },
+    {
+      "index": 94,
+      "start": 299.08,
+      "end": 301.79,
+      "duration": 2.71,
+      "text": "set towards higher values of a function"
+    },
+    {
+      "index": 95,
+      "start": 301.8,
+      "end": 304.51,
+      "duration": 2.71,
+      "text": "it gives us the direction of fastest"
+    },
+    {
+      "index": 96,
+      "start": 304.52,
+      "end": 307.31,
+      "duration": 2.79,
+      "text": "increase of a"
+    },
+    {
+      "index": 97,
+      "start": 307.32,
+      "end": 313.43,
+      "duration": 6.11,
+      "text": "function okay any questions about these"
+    },
+    {
+      "index": 98,
+      "start": 320.029,
+      "end": 320.039,
+      "duration": 0.01,
+      "text": "no okay so let me add actually a"
+    },
+    {
+      "index": 99,
+      "start": 320.039,
+      "end": 322.83,
+      "duration": 2.791,
+      "text": "cultural note to what we've seen so far"
+    },
+    {
+      "index": 100,
+      "start": 322.84,
+      "end": 325.029,
+      "duration": 2.189,
+      "text": "about partial derivatives and how to use"
+    },
+    {
+      "index": 101,
+      "start": 325.039,
+      "end": 327.55,
+      "duration": 2.511,
+      "text": "them which is maybe something I should"
+    },
+    {
+      "index": 102,
+      "start": 327.56,
+      "end": 330.71,
+      "duration": 3.15,
+      "text": "have mentioned a couple of weeks ago"
+    },
+    {
+      "index": 103,
+      "start": 330.72,
+      "end": 333.749,
+      "duration": 3.029,
+      "text": "um so why do we like partial derivatives"
+    },
+    {
+      "index": 104,
+      "start": 333.759,
+      "end": 335.67,
+      "duration": 1.911,
+      "text": "well one obvious reason is we can do all"
+    },
+    {
+      "index": 105,
+      "start": 335.68,
+      "end": 338.51,
+      "duration": 2.83,
+      "text": "these things but another reason is that"
+    },
+    {
+      "index": 106,
+      "start": 338.52,
+      "end": 339.95,
+      "duration": 1.43,
+      "text": "really you need partial derivatives to"
+    },
+    {
+      "index": 107,
+      "start": 339.96,
+      "end": 342.309,
+      "duration": 2.349,
+      "text": "do physics and to do actually to"
+    },
+    {
+      "index": 108,
+      "start": 342.319,
+      "end": 343.39,
+      "duration": 1.071,
+      "text": "understand much of the world that's"
+    },
+    {
+      "index": 109,
+      "start": 343.4,
+      "end": 346.309,
+      "duration": 2.909,
+      "text": "around you because a lot of things"
+    },
+    {
+      "index": 110,
+      "start": 346.319,
+      "end": 348.83,
+      "duration": 2.511,
+      "text": "actually are governed by what's called"
+    },
+    {
+      "index": 111,
+      "start": 348.84,
+      "end": 358.469,
+      "duration": 9.629,
+      "text": "partial differential"
+    },
+    {
+      "index": 112,
+      "start": 360.83,
+      "end": 360.84,
+      "duration": 0.01,
+      "text": "equations okay okay so that's if you"
+    },
+    {
+      "index": 113,
+      "start": 360.84,
+      "end": 364.87,
+      "duration": 4.03,
+      "text": "want a cultural remark about what this"
+    },
+    {
+      "index": 114,
+      "start": 364.88,
+      "end": 368.67,
+      "duration": 3.79,
+      "text": "is good for so a partial differential"
+    },
+    {
+      "index": 115,
+      "start": 368.68,
+      "end": 371.11,
+      "duration": 2.43,
+      "text": "equation is an equation that involves"
+    },
+    {
+      "index": 116,
+      "start": 371.12,
+      "end": 373.43,
+      "duration": 2.31,
+      "text": "the partial derivatives of a function"
+    },
+    {
+      "index": 117,
+      "start": 373.44,
+      "end": 375.15,
+      "duration": 1.71,
+      "text": "okay so you have some function that's"
+    },
+    {
+      "index": 118,
+      "start": 375.16,
+      "end": 377.43,
+      "duration": 2.27,
+      "text": "unknown that depends on a bunch of"
+    },
+    {
+      "index": 119,
+      "start": 377.44,
+      "end": 380.629,
+      "duration": 3.189,
+      "text": "variables and a partial differential"
+    },
+    {
+      "index": 120,
+      "start": 380.639,
+      "end": 383.07,
+      "duration": 2.431,
+      "text": "equation is some relation between its"
+    },
+    {
+      "index": 121,
+      "start": 383.08,
+      "end": 386.11,
+      "duration": 3.03,
+      "text": "partial derivatives"
+    },
+    {
+      "index": 122,
+      "start": 386.12,
+      "end": 393.67,
+      "duration": 7.55,
+      "text": "so let me see these are equations"
+    },
+    {
+      "index": 123,
+      "start": 406.35,
+      "end": 406.36,
+      "duration": 0.01,
+      "text": "derivatives of an"
+    },
+    {
+      "index": 124,
+      "start": 406.36,
+      "end": 410.43,
+      "duration": 4.07,
+      "text": "unknown"
+    },
+    {
+      "index": 125,
+      "start": 412.99,
+      "end": 413.0,
+      "duration": 0.01,
+      "text": "function so let me give you an example"
+    },
+    {
+      "index": 126,
+      "start": 413.0,
+      "end": 416.869,
+      "duration": 3.869,
+      "text": "to say to see how that works so for"
+    },
+    {
+      "index": 127,
+      "start": 416.879,
+      "end": 421.39,
+      "duration": 4.511,
+      "text": "example the heat equation"
+    },
+    {
+      "index": 128,
+      "start": 421.4,
+      "end": 424.15,
+      "duration": 2.75,
+      "text": "is one example of a partial differential"
+    },
+    {
+      "index": 129,
+      "start": 424.16,
+      "end": 426.189,
+      "duration": 2.029,
+      "text": "equation it's the"
+    },
+    {
+      "index": 130,
+      "start": 426.199,
+      "end": 428.55,
+      "duration": 2.351,
+      "text": "equation well let me write you write for"
+    },
+    {
+      "index": 131,
+      "start": 428.56,
+      "end": 434.43,
+      "duration": 5.87,
+      "text": "you the space version of"
+    },
+    {
+      "index": 132,
+      "start": 437.55,
+      "end": 437.56,
+      "duration": 0.01,
+      "text": "it it's the equation partial F partial T"
+    },
+    {
+      "index": 133,
+      "start": 437.56,
+      "end": 441.35,
+      "duration": 3.79,
+      "text": "equals some constant times the sum of"
+    },
+    {
+      "index": 134,
+      "start": 441.36,
+      "end": 443.469,
+      "duration": 2.109,
+      "text": "the second partials with respect to X Y"
+    },
+    {
+      "index": 135,
+      "start": 443.479,
+      "end": 448.15,
+      "duration": 4.671,
+      "text": "and"
+    },
+    {
+      "index": 136,
+      "start": 451.55,
+      "end": 451.56,
+      "duration": 0.01,
+      "text": "Z so this is an equation where we're"
+    },
+    {
+      "index": 137,
+      "start": 451.56,
+      "end": 455.27,
+      "duration": 3.71,
+      "text": "trying to solve for a function f that"
+    },
+    {
+      "index": 138,
+      "start": 455.28,
+      "end": 458.35,
+      "duration": 3.07,
+      "text": "depends actually on four"
+    },
+    {
+      "index": 139,
+      "start": 458.36,
+      "end": 461.469,
+      "duration": 3.109,
+      "text": "variables XYZ and"
+    },
+    {
+      "index": 140,
+      "start": 461.479,
+      "end": 465.07,
+      "duration": 3.591,
+      "text": "T and what should you think of you know"
+    },
+    {
+      "index": 141,
+      "start": 465.08,
+      "end": 467.149,
+      "duration": 2.069,
+      "text": "what what should you have in mind well"
+    },
+    {
+      "index": 142,
+      "start": 467.159,
+      "end": 470.51,
+      "duration": 3.351,
+      "text": "this equation governs temperature so if"
+    },
+    {
+      "index": 143,
+      "start": 470.52,
+      "end": 473.79,
+      "duration": 3.27,
+      "text": "you think that F of XYZ T will be the"
+    },
+    {
+      "index": 144,
+      "start": 473.8,
+      "end": 476.27,
+      "duration": 2.47,
+      "text": "temperature at a point in space at"
+    },
+    {
+      "index": 145,
+      "start": 476.28,
+      "end": 479.67,
+      "duration": 3.39,
+      "text": "position XYZ and at time T then this"
+    },
+    {
+      "index": 146,
+      "start": 479.68,
+      "end": 483.55,
+      "duration": 3.87,
+      "text": "tells you how temperature changes over"
+    },
+    {
+      "index": 147,
+      "start": 483.56,
+      "end": 486.07,
+      "duration": 2.51,
+      "text": "time it tells you that at any given"
+    },
+    {
+      "index": 148,
+      "start": 486.08,
+      "end": 488.39,
+      "duration": 2.31,
+      "text": "point the rate of change of temperature"
+    },
+    {
+      "index": 149,
+      "start": 488.4,
+      "end": 491.589,
+      "duration": 3.189,
+      "text": "over time is given by this complicated"
+    },
+    {
+      "index": 150,
+      "start": 491.599,
+      "end": 494.43,
+      "duration": 2.831,
+      "text": "expression in the partial derivatives in"
+    },
+    {
+      "index": 151,
+      "start": 494.44,
+      "end": 496.79,
+      "duration": 2.35,
+      "text": "terms of the space coordinates"
+    },
+    {
+      "index": 152,
+      "start": 496.8,
+      "end": 500.07,
+      "duration": 3.27,
+      "text": "XYZ so if you know for example the"
+    },
+    {
+      "index": 153,
+      "start": 500.08,
+      "end": 501.99,
+      "duration": 1.91,
+      "text": "initial distribution of temperature in"
+    },
+    {
+      "index": 154,
+      "start": 502.0,
+      "end": 504.149,
+      "duration": 2.149,
+      "text": "this room and if you assume that nothing"
+    },
+    {
+      "index": 155,
+      "start": 504.159,
+      "end": 506.35,
+      "duration": 2.191,
+      "text": "is generating heat or taking heat away"
+    },
+    {
+      "index": 156,
+      "start": 506.36,
+      "end": 507.39,
+      "duration": 1.03,
+      "text": "so if you don't have any air"
+    },
+    {
+      "index": 157,
+      "start": 507.4,
+      "end": 509.589,
+      "duration": 2.189,
+      "text": "conditioning or heating going on then"
+    },
+    {
+      "index": 158,
+      "start": 509.599,
+      "end": 511.11,
+      "duration": 1.511,
+      "text": "will tell you how the temperature will"
+    },
+    {
+      "index": 159,
+      "start": 511.12,
+      "end": 512.949,
+      "duration": 1.829,
+      "text": "change over time and eventually"
+    },
+    {
+      "index": 160,
+      "start": 512.959,
+      "end": 519.99,
+      "duration": 7.031,
+      "text": "stabilize to some final value"
+    },
+    {
+      "index": 161,
+      "start": 521.949,
+      "end": 521.959,
+      "duration": 0.01,
+      "text": "yes why do we take the partial"
+    },
+    {
+      "index": 162,
+      "start": 521.959,
+      "end": 524.11,
+      "duration": 2.151,
+      "text": "derivative twice well that's a question"
+    },
+    {
+      "index": 163,
+      "start": 524.12,
+      "end": 526.11,
+      "duration": 1.99,
+      "text": "I say um I'd say it's a question for a"
+    },
+    {
+      "index": 164,
+      "start": 526.12,
+      "end": 528.11,
+      "duration": 1.99,
+      "text": "physics person but actually I'm going to"
+    },
+    {
+      "index": 165,
+      "start": 528.12,
+      "end": 530.31,
+      "duration": 2.19,
+      "text": "no in a few weeks we'll actually see a"
+    },
+    {
+      "index": 166,
+      "start": 530.32,
+      "end": 532.509,
+      "duration": 2.189,
+      "text": "derivation of where this equation comes"
+    },
+    {
+      "index": 167,
+      "start": 532.519,
+      "end": 534.79,
+      "duration": 2.271,
+      "text": "from and try to justify it but really"
+    },
+    {
+      "index": 168,
+      "start": 534.8,
+      "end": 535.79,
+      "duration": 0.99,
+      "text": "that's something you will see in a"
+    },
+    {
+      "index": 169,
+      "start": 535.8,
+      "end": 537.829,
+      "duration": 2.029,
+      "text": "physics class okay uh the reason for"
+    },
+    {
+      "index": 170,
+      "start": 537.839,
+      "end": 539.949,
+      "duration": 2.11,
+      "text": "that is basically"
+    },
+    {
+      "index": 171,
+      "start": 539.959,
+      "end": 542.87,
+      "duration": 2.911,
+      "text": "physics of how heat is transported"
+    },
+    {
+      "index": 172,
+      "start": 542.88,
+      "end": 546.23,
+      "duration": 3.35,
+      "text": "between you know particles in a fluid or"
+    },
+    {
+      "index": 173,
+      "start": 546.24,
+      "end": 549.11,
+      "duration": 2.87,
+      "text": "actually in any medium but uh this"
+    },
+    {
+      "index": 174,
+      "start": 549.12,
+      "end": 550.949,
+      "duration": 1.829,
+      "text": "constant K actually is called the heat"
+    },
+    {
+      "index": 175,
+      "start": 550.959,
+      "end": 553.15,
+      "duration": 2.191,
+      "text": "conductivity it tells you how well the"
+    },
+    {
+      "index": 176,
+      "start": 553.16,
+      "end": 554.67,
+      "duration": 1.51,
+      "text": "heat flows through the material that"
+    },
+    {
+      "index": 177,
+      "start": 554.68,
+      "end": 556.67,
+      "duration": 1.99,
+      "text": "you're looking"
+    },
+    {
+      "index": 178,
+      "start": 556.68,
+      "end": 560.31,
+      "duration": 3.63,
+      "text": "at um so anyway I I'm giving it to you"
+    },
+    {
+      "index": 179,
+      "start": 560.32,
+      "end": 561.79,
+      "duration": 1.47,
+      "text": "just you know to show you an example of"
+    },
+    {
+      "index": 180,
+      "start": 561.8,
+      "end": 564.59,
+      "duration": 2.79,
+      "text": "a real life problem where in fact you"
+    },
+    {
+      "index": 181,
+      "start": 564.6,
+      "end": 566.67,
+      "duration": 2.07,
+      "text": "have to solve one of these things so now"
+    },
+    {
+      "index": 182,
+      "start": 566.68,
+      "end": 568.269,
+      "duration": 1.589,
+      "text": "how to solve partial differential"
+    },
+    {
+      "index": 183,
+      "start": 568.279,
+      "end": 570.829,
+      "duration": 2.55,
+      "text": "equations is not topic for this class"
+    },
+    {
+      "index": 184,
+      "start": 570.839,
+      "end": 572.949,
+      "duration": 2.11,
+      "text": "it's not even a topic for 1803 which is"
+    },
+    {
+      "index": 185,
+      "start": 572.959,
+      "end": 575.23,
+      "duration": 2.271,
+      "text": "called differential equations without"
+    },
+    {
+      "index": 186,
+      "start": 575.24,
+      "end": 577.67,
+      "duration": 2.43,
+      "text": "partial uh which means there actually"
+    },
+    {
+      "index": 187,
+      "start": 577.68,
+      "end": 580.389,
+      "duration": 2.709,
+      "text": "you will learn tools to study and solve"
+    },
+    {
+      "index": 188,
+      "start": 580.399,
+      "end": 581.75,
+      "duration": 1.351,
+      "text": "these equations but when there's only"
+    },
+    {
+      "index": 189,
+      "start": 581.76,
+      "end": 583.71,
+      "duration": 1.95,
+      "text": "one variable involved and you'll see"
+    },
+    {
+      "index": 190,
+      "start": 583.72,
+      "end": 585.389,
+      "duration": 1.669,
+      "text": "it's already quite"
+    },
+    {
+      "index": 191,
+      "start": 585.399,
+      "end": 588.31,
+      "duration": 2.911,
+      "text": "hard um and if you want more then later"
+    },
+    {
+      "index": 192,
+      "start": 588.32,
+      "end": 590.269,
+      "duration": 1.949,
+      "text": "on we have many fine classes about"
+    },
+    {
+      "index": 193,
+      "start": 590.279,
+      "end": 592.79,
+      "duration": 2.511,
+      "text": "partial differential equations but you"
+    },
+    {
+      "index": 194,
+      "start": 592.8,
+      "end": 594.15,
+      "duration": 1.35,
+      "text": "know one thing at the"
+    },
+    {
+      "index": 195,
+      "start": 594.16,
+      "end": 596.87,
+      "duration": 2.71,
+      "text": "time um so just I wanted to point out to"
+    },
+    {
+      "index": 196,
+      "start": 596.88,
+      "end": 599.15,
+      "duration": 2.27,
+      "text": "you that very often functions that you"
+    },
+    {
+      "index": 197,
+      "start": 599.16,
+      "end": 602.269,
+      "duration": 3.109,
+      "text": "see in real life satisfy many nice"
+    },
+    {
+      "index": 198,
+      "start": 602.279,
+      "end": 606.31,
+      "duration": 4.031,
+      "text": "relations between their partial"
+    },
+    {
+      "index": 199,
+      "start": 608.59,
+      "end": 608.6,
+      "duration": 0.01,
+      "text": "derivatives okay so that was you know in"
+    },
+    {
+      "index": 200,
+      "start": 608.6,
+      "end": 609.87,
+      "duration": 1.27,
+      "text": "case you were wondering why on the"
+    },
+    {
+      "index": 201,
+      "start": 609.88,
+      "end": 611.79,
+      "duration": 1.91,
+      "text": "syllabus for today it said partial"
+    },
+    {
+      "index": 202,
+      "start": 611.8,
+      "end": 613.11,
+      "duration": 1.31,
+      "text": "differential equations now we've"
+    },
+    {
+      "index": 203,
+      "start": 613.12,
+      "end": 615.19,
+      "duration": 2.07,
+      "text": "officially covered the topic that's"
+    },
+    {
+      "index": 204,
+      "start": 615.2,
+      "end": 618.71,
+      "duration": 3.51,
+      "text": "basically all we need to know about it"
+    },
+    {
+      "index": 205,
+      "start": 618.72,
+      "end": 621.15,
+      "duration": 2.43,
+      "text": "okay but we'll get back to that a bit"
+    },
+    {
+      "index": 206,
+      "start": 621.16,
+      "end": 624.23,
+      "duration": 3.07,
+      "text": "later you'll"
+    },
+    {
+      "index": 207,
+      "start": 625.75,
+      "end": 625.76,
+      "duration": 0.01,
+      "text": "see"
+    },
+    {
+      "index": 208,
+      "start": 625.76,
+      "end": 628.79,
+      "duration": 3.03,
+      "text": "okay if there's no further questions let"
+    },
+    {
+      "index": 209,
+      "start": 628.8,
+      "end": 631.389,
+      "duration": 2.589,
+      "text": "me continue and go back to my list of"
+    },
+    {
+      "index": 210,
+      "start": 631.399,
+      "end": 634.11,
+      "duration": 2.711,
+      "text": "topics oh sorry I should have written"
+    },
+    {
+      "index": 211,
+      "start": 634.12,
+      "end": 635.91,
+      "duration": 1.79,
+      "text": "down"
+    },
+    {
+      "index": 212,
+      "start": 635.92,
+      "end": 640.91,
+      "duration": 4.99,
+      "text": "okay but this equation is solved by"
+    },
+    {
+      "index": 213,
+      "start": 640.92,
+      "end": 647.67,
+      "duration": 6.75,
+      "text": "temperature at for Point XYZ at time"
+    },
+    {
+      "index": 214,
+      "start": 650.15,
+      "end": 650.16,
+      "duration": 0.01,
+      "text": "T"
+    },
+    {
+      "index": 215,
+      "start": 650.16,
+      "end": 653.43,
+      "duration": 3.27,
+      "text": "okay and there are actually many other"
+    },
+    {
+      "index": 216,
+      "start": 653.44,
+      "end": 654.509,
+      "duration": 1.069,
+      "text": "interesting partial differential"
+    },
+    {
+      "index": 217,
+      "start": 654.519,
+      "end": 656.15,
+      "duration": 1.631,
+      "text": "equations you will maybe sometime learn"
+    },
+    {
+      "index": 218,
+      "start": 656.16,
+      "end": 658.23,
+      "duration": 2.07,
+      "text": "about the wave equation that governs how"
+    },
+    {
+      "index": 219,
+      "start": 658.24,
+      "end": 659.79,
+      "duration": 1.55,
+      "text": "waves propagate in"
+    },
+    {
+      "index": 220,
+      "start": 659.8,
+      "end": 662.629,
+      "duration": 2.829,
+      "text": "space um about the diffusion equation"
+    },
+    {
+      "index": 221,
+      "start": 662.639,
+      "end": 664.99,
+      "duration": 2.351,
+      "text": "which tells you how you know when you"
+    },
+    {
+      "index": 222,
+      "start": 665.0,
+      "end": 667.269,
+      "duration": 2.269,
+      "text": "have maybe a mixture of two fluids how"
+    },
+    {
+      "index": 223,
+      "start": 667.279,
+      "end": 670.43,
+      "duration": 3.151,
+      "text": "they somehow mix over time and so on"
+    },
+    {
+      "index": 224,
+      "start": 670.44,
+      "end": 672.629,
+      "duration": 2.189,
+      "text": "there's basically to every problem you"
+    },
+    {
+      "index": 225,
+      "start": 672.639,
+      "end": 673.99,
+      "duration": 1.351,
+      "text": "might want to consider there's a partial"
+    },
+    {
+      "index": 226,
+      "start": 674.0,
+      "end": 678.15,
+      "duration": 4.15,
+      "text": "differential equation to"
+    },
+    {
+      "index": 227,
+      "start": 680.67,
+      "end": 680.68,
+      "duration": 0.01,
+      "text": "solve okay anyway sorry back to my list"
+    },
+    {
+      "index": 228,
+      "start": 680.68,
+      "end": 681.79,
+      "duration": 1.11,
+      "text": "of"
+    },
+    {
+      "index": 229,
+      "start": 681.8,
+      "end": 684.99,
+      "duration": 3.19,
+      "text": "topics so one important application"
+    },
+    {
+      "index": 230,
+      "start": 685.0,
+      "end": 687.23,
+      "duration": 2.23,
+      "text": "we've seen of partial derivatives is to"
+    },
+    {
+      "index": 231,
+      "start": 687.24,
+      "end": 689.43,
+      "duration": 2.19,
+      "text": "try to optimize things try to solve"
+    },
+    {
+      "index": 232,
+      "start": 689.44,
+      "end": 700.79,
+      "duration": 11.35,
+      "text": "minimum maximum"
+    },
+    {
+      "index": 233,
+      "start": 703.43,
+      "end": 703.44,
+      "duration": 0.01,
+      "text": "problems so"
+    },
+    {
+      "index": 234,
+      "start": 703.44,
+      "end": 705.35,
+      "duration": 1.91,
+      "text": "remember that"
+    },
+    {
+      "index": 235,
+      "start": 705.36,
+      "end": 707.75,
+      "duration": 2.39,
+      "text": "we've introduce the notion of critical"
+    },
+    {
+      "index": 236,
+      "start": 707.76,
+      "end": 709.509,
+      "duration": 1.749,
+      "text": "points of a"
+    },
+    {
+      "index": 237,
+      "start": 709.519,
+      "end": 713.23,
+      "duration": 3.711,
+      "text": "function so a critical point is"
+    },
+    {
+      "index": 238,
+      "start": 713.24,
+      "end": 716.71,
+      "duration": 3.47,
+      "text": "when all the partial derivatives are"
+    },
+    {
+      "index": 239,
+      "start": 716.72,
+      "end": 723.31,
+      "duration": 6.59,
+      "text": "zero"
+    },
+    {
+      "index": 240,
+      "start": 724.71,
+      "end": 724.72,
+      "duration": 0.01,
+      "text": "and then there are various kinds of"
+    },
+    {
+      "index": 241,
+      "start": 724.72,
+      "end": 726.79,
+      "duration": 2.07,
+      "text": "critical points there are Maxima there's"
+    },
+    {
+      "index": 242,
+      "start": 726.8,
+      "end": 729.47,
+      "duration": 2.67,
+      "text": "Minima but there's also settle"
+    },
+    {
+      "index": 243,
+      "start": 729.48,
+      "end": 733.67,
+      "duration": 4.19,
+      "text": "points and we've seen a method using"
+    },
+    {
+      "index": 244,
+      "start": 733.68,
+      "end": 739.189,
+      "duration": 5.509,
+      "text": "second"
+    },
+    {
+      "index": 245,
+      "start": 741.99,
+      "end": 742.0,
+      "duration": 0.01,
+      "text": "derivatives to decide which kind of"
+    },
+    {
+      "index": 246,
+      "start": 742.0,
+      "end": 745.069,
+      "duration": 3.069,
+      "text": "critical point we"
+    },
+    {
+      "index": 247,
+      "start": 747.79,
+      "end": 747.8,
+      "duration": 0.01,
+      "text": "have so you should say that's for a"
+    },
+    {
+      "index": 248,
+      "start": 747.8,
+      "end": 751.47,
+      "duration": 3.67,
+      "text": "function of two"
+    },
+    {
+      "index": 249,
+      "start": 753.829,
+      "end": 753.839,
+      "duration": 0.01,
+      "text": "variables to try to decide whether a"
+    },
+    {
+      "index": 250,
+      "start": 753.839,
+      "end": 756.15,
+      "duration": 2.311,
+      "text": "given critical point is a minimum a"
+    },
+    {
+      "index": 251,
+      "start": 756.16,
+      "end": 759.91,
+      "duration": 3.75,
+      "text": "maximum or a settle"
+    },
+    {
+      "index": 252,
+      "start": 763.67,
+      "end": 763.68,
+      "duration": 0.01,
+      "text": "point and we've also seen that actually"
+    },
+    {
+      "index": 253,
+      "start": 763.68,
+      "end": 765.35,
+      "duration": 1.67,
+      "text": "that's not enough to find the minimum or"
+    },
+    {
+      "index": 254,
+      "start": 765.36,
+      "end": 767.949,
+      "duration": 2.589,
+      "text": "the maximum of a function because the"
+    },
+    {
+      "index": 255,
+      "start": 767.959,
+      "end": 769.75,
+      "duration": 1.791,
+      "text": "minimum of the maximum could occur on"
+    },
+    {
+      "index": 256,
+      "start": 769.76,
+      "end": 771.71,
+      "duration": 1.95,
+      "text": "the boundary so just to give you a small"
+    },
+    {
+      "index": 257,
+      "start": 771.72,
+      "end": 773.949,
+      "duration": 2.229,
+      "text": "reminder when you have a function of one"
+    },
+    {
+      "index": 258,
+      "start": 773.959,
+      "end": 776.75,
+      "duration": 2.791,
+      "text": "variable you know if you're trying"
+    },
+    {
+      "index": 259,
+      "start": 776.76,
+      "end": 779.75,
+      "duration": 2.99,
+      "text": "to find the minimum and the maximum"
+    },
+    {
+      "index": 260,
+      "start": 779.76,
+      "end": 781.91,
+      "duration": 2.15,
+      "text": "of say a function whose graph looks like"
+    },
+    {
+      "index": 261,
+      "start": 781.92,
+      "end": 784.43,
+      "duration": 2.51,
+      "text": "this well you're going to tell me quite"
+    },
+    {
+      "index": 262,
+      "start": 784.44,
+      "end": 786.509,
+      "duration": 2.069,
+      "text": "obviously that the maximum is this point"
+    },
+    {
+      "index": 263,
+      "start": 786.519,
+      "end": 788.829,
+      "duration": 2.31,
+      "text": "up here and that's a point where the"
+    },
+    {
+      "index": 264,
+      "start": 788.839,
+      "end": 791.069,
+      "duration": 2.23,
+      "text": "first derivative is zero that's a"
+    },
+    {
+      "index": 265,
+      "start": 791.079,
+      "end": 793.75,
+      "duration": 2.671,
+      "text": "critical point and we use the second"
+    },
+    {
+      "index": 266,
+      "start": 793.76,
+      "end": 795.75,
+      "duration": 1.99,
+      "text": "derivative to see that this critical"
+    },
+    {
+      "index": 267,
+      "start": 795.76,
+      "end": 797.829,
+      "duration": 2.069,
+      "text": "point is a local"
+    },
+    {
+      "index": 268,
+      "start": 797.839,
+      "end": 800.269,
+      "duration": 2.43,
+      "text": "maximum but then when we looking for the"
+    },
+    {
+      "index": 269,
+      "start": 800.279,
+      "end": 802.59,
+      "duration": 2.311,
+      "text": "minimum of the function well it's not at"
+    },
+    {
+      "index": 270,
+      "start": 802.6,
+      "end": 805.389,
+      "duration": 2.789,
+      "text": "a critical point it's actually here at"
+    },
+    {
+      "index": 271,
+      "start": 805.399,
+      "end": 808.55,
+      "duration": 3.151,
+      "text": "the boundary of the domain of you know"
+    },
+    {
+      "index": 272,
+      "start": 808.56,
+      "end": 810.91,
+      "duration": 2.35,
+      "text": "the range of values that we're going to"
+    },
+    {
+      "index": 273,
+      "start": 810.92,
+      "end": 812.629,
+      "duration": 1.709,
+      "text": "consider"
+    },
+    {
+      "index": 274,
+      "start": 812.639,
+      "end": 818.59,
+      "duration": 5.951,
+      "text": "so here the minimum is at the"
+    },
+    {
+      "index": 275,
+      "start": 820.91,
+      "end": 820.92,
+      "duration": 0.01,
+      "text": "boundary and the"
+    },
+    {
+      "index": 276,
+      "start": 820.92,
+      "end": 827.189,
+      "duration": 6.269,
+      "text": "maximum is at a critical"
+    },
+    {
+      "index": 277,
+      "start": 829.629,
+      "end": 829.639,
+      "duration": 0.01,
+      "text": "point so similarly when you have a"
+    },
+    {
+      "index": 278,
+      "start": 829.639,
+      "end": 832.11,
+      "duration": 2.471,
+      "text": "function of several variables say of two"
+    },
+    {
+      "index": 279,
+      "start": 832.12,
+      "end": 834.509,
+      "duration": 2.389,
+      "text": "variables for example then the minimum"
+    },
+    {
+      "index": 280,
+      "start": 834.519,
+      "end": 836.829,
+      "duration": 2.31,
+      "text": "and the maximum will be achieved either"
+    },
+    {
+      "index": 281,
+      "start": 836.839,
+      "end": 839.35,
+      "duration": 2.511,
+      "text": "at a critical point and then we can use"
+    },
+    {
+      "index": 282,
+      "start": 839.36,
+      "end": 842.509,
+      "duration": 3.149,
+      "text": "these methods to find where they are or"
+    },
+    {
+      "index": 283,
+      "start": 842.519,
+      "end": 844.91,
+      "duration": 2.391,
+      "text": "somewhere on the boundary of the set of"
+    },
+    {
+      "index": 284,
+      "start": 844.92,
+      "end": 847.67,
+      "duration": 2.75,
+      "text": "values that are allowed so it could be"
+    },
+    {
+      "index": 285,
+      "start": 847.68,
+      "end": 849.79,
+      "duration": 2.11,
+      "text": "that you know we actually achieve"
+    },
+    {
+      "index": 286,
+      "start": 849.8,
+      "end": 851.91,
+      "duration": 2.11,
+      "text": "minimum by making X and Y as small as"
+    },
+    {
+      "index": 287,
+      "start": 851.92,
+      "end": 854.069,
+      "duration": 2.149,
+      "text": "possible maybe letting them go to zero"
+    },
+    {
+      "index": 288,
+      "start": 854.079,
+      "end": 856.35,
+      "duration": 2.271,
+      "text": "if they had to be positive or maybe by"
+    },
+    {
+      "index": 289,
+      "start": 856.36,
+      "end": 857.99,
+      "duration": 1.63,
+      "text": "making them go to"
+    },
+    {
+      "index": 290,
+      "start": 858.0,
+      "end": 860.59,
+      "duration": 2.59,
+      "text": "Infinity so we have to keep our minds"
+    },
+    {
+      "index": 291,
+      "start": 860.6,
+      "end": 863.47,
+      "duration": 2.87,
+      "text": "open and you know look at various"
+    },
+    {
+      "index": 292,
+      "start": 863.48,
+      "end": 865.389,
+      "duration": 1.909,
+      "text": "possibilities so we're going to do a"
+    },
+    {
+      "index": 293,
+      "start": 865.399,
+      "end": 867.43,
+      "duration": 2.031,
+      "text": "problem like that uh we're going to go"
+    },
+    {
+      "index": 294,
+      "start": 867.44,
+      "end": 869.11,
+      "duration": 1.67,
+      "text": "over the practice problem from the"
+    },
+    {
+      "index": 295,
+      "start": 869.12,
+      "end": 869.99,
+      "duration": 0.87,
+      "text": "practice"
+    },
+    {
+      "index": 296,
+      "start": 870.0,
+      "end": 872.47,
+      "duration": 2.47,
+      "text": "test to clarify"
+    },
+    {
+      "index": 297,
+      "start": 872.48,
+      "end": 876.629,
+      "duration": 4.149,
+      "text": "this so another important cultural"
+    },
+    {
+      "index": 298,
+      "start": 876.639,
+      "end": 878.91,
+      "duration": 2.271,
+      "text": "application of minimum maximum problems"
+    },
+    {
+      "index": 299,
+      "start": 878.92,
+      "end": 880.949,
+      "duration": 2.029,
+      "text": "in two variables that we've seen in"
+    },
+    {
+      "index": 300,
+      "start": 880.959,
+      "end": 883.79,
+      "duration": 2.831,
+      "text": "class is the least squares method to"
+    },
+    {
+      "index": 301,
+      "start": 883.8,
+      "end": 887.189,
+      "duration": 3.389,
+      "text": "find the best fit line of the best fit"
+    },
+    {
+      "index": 302,
+      "start": 887.199,
+      "end": 891.509,
+      "duration": 4.31,
+      "text": "anything really to you know find when"
+    },
+    {
+      "index": 303,
+      "start": 891.519,
+      "end": 894.35,
+      "duration": 2.831,
+      "text": "you have a set of data points"
+    },
+    {
+      "index": 304,
+      "start": 894.36,
+      "end": 897.71,
+      "duration": 3.35,
+      "text": "what's the best linear approximation"
+    },
+    {
+      "index": 305,
+      "start": 897.72,
+      "end": 901.35,
+      "duration": 3.63,
+      "text": "through these data points"
+    },
+    {
+      "index": 306,
+      "start": 903.55,
+      "end": 903.56,
+      "duration": 0.01,
+      "text": "and here I have some good news for you"
+    },
+    {
+      "index": 307,
+      "start": 903.56,
+      "end": 905.11,
+      "duration": 1.55,
+      "text": "while you should definitely know what"
+    },
+    {
+      "index": 308,
+      "start": 905.12,
+      "end": 913.949,
+      "duration": 8.829,
+      "text": "this is about it will not be on the"
+    },
+    {
+      "index": 309,
+      "start": 931.47,
+      "end": 931.48,
+      "duration": 0.01,
+      "text": "okay that doesn't mean that you should"
+    },
+    {
+      "index": 310,
+      "start": 931.48,
+      "end": 941.59,
+      "duration": 10.11,
+      "text": "forget everything we've seen about it"
+    },
+    {
+      "index": 311,
+      "start": 944.189,
+      "end": 944.199,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 312,
+      "start": 944.199,
+      "end": 952.67,
+      "duration": 8.471,
+      "text": "now what's next on my list of"
+    },
+    {
+      "index": 313,
+      "start": 954.829,
+      "end": 954.839,
+      "duration": 0.01,
+      "text": "topics so we've"
+    },
+    {
+      "index": 314,
+      "start": 954.839,
+      "end": 956.829,
+      "duration": 1.99,
+      "text": "seen"
+    },
+    {
+      "index": 315,
+      "start": 956.839,
+      "end": 960.309,
+      "duration": 3.47,
+      "text": "differentials so remember the differ of"
+    },
+    {
+      "index": 316,
+      "start": 960.319,
+      "end": 962.47,
+      "duration": 2.151,
+      "text": "f by"
+    },
+    {
+      "index": 317,
+      "start": 962.48,
+      "end": 966.189,
+      "duration": 3.709,
+      "text": "definition would be this kind of"
+    },
+    {
+      "index": 318,
+      "start": 966.199,
+      "end": 968.829,
+      "duration": 2.63,
+      "text": "quantity so at first it looks just like"
+    },
+    {
+      "index": 319,
+      "start": 968.839,
+      "end": 971.389,
+      "duration": 2.55,
+      "text": "a new way to package partial derivatives"
+    },
+    {
+      "index": 320,
+      "start": 971.399,
+      "end": 973.99,
+      "duration": 2.591,
+      "text": "together into some new kind of object"
+    },
+    {
+      "index": 321,
+      "start": 974.0,
+      "end": 975.629,
+      "duration": 1.629,
+      "text": "now what is this good for well it's a"
+    },
+    {
+      "index": 322,
+      "start": 975.639,
+      "end": 977.189,
+      "duration": 1.55,
+      "text": "good way to remember approximation"
+    },
+    {
+      "index": 323,
+      "start": 977.199,
+      "end": 980.629,
+      "duration": 3.43,
+      "text": "formulas it's a good way to also study"
+    },
+    {
+      "index": 324,
+      "start": 980.639,
+      "end": 982.55,
+      "duration": 1.911,
+      "text": "how variations in XYZ relate to"
+    },
+    {
+      "index": 325,
+      "start": 982.56,
+      "end": 986.309,
+      "duration": 3.749,
+      "text": "variations in F in particular we can"
+    },
+    {
+      "index": 326,
+      "start": 986.319,
+      "end": 989.43,
+      "duration": 3.111,
+      "text": "divide this by variations"
+    },
+    {
+      "index": 327,
+      "start": 989.44,
+      "end": 992.55,
+      "duration": 3.11,
+      "text": "of by actually by DX or by Dy or by DZ"
+    },
+    {
+      "index": 328,
+      "start": 992.56,
+      "end": 996.15,
+      "duration": 3.59,
+      "text": "in any situation that we want to find or"
+    },
+    {
+      "index": 329,
+      "start": 996.16,
+      "end": 1002.99,
+      "duration": 6.83,
+      "text": "by D of some other variable to get chain"
+    },
+    {
+      "index": 330,
+      "start": 1007.309,
+      "end": 1007.319,
+      "duration": 0.01,
+      "text": "rules so the chain rule says for example"
+    },
+    {
+      "index": 331,
+      "start": 1007.319,
+      "end": 1010.55,
+      "duration": 3.231,
+      "text": "well there's many different situations"
+    },
+    {
+      "index": 332,
+      "start": 1010.56,
+      "end": 1016.91,
+      "duration": 6.35,
+      "text": "but for example if X Y and Z depend on"
+    },
+    {
+      "index": 333,
+      "start": 1016.92,
+      "end": 1019.67,
+      "duration": 2.75,
+      "text": "some other variable say the variables"
+    },
+    {
+      "index": 334,
+      "start": 1019.68,
+      "end": 1024.909,
+      "duration": 5.229,
+      "text": "maybe even u and"
+    },
+    {
+      "index": 335,
+      "start": 1028.069,
+      "end": 1028.079,
+      "duration": 0.01,
+      "text": "v then that means that F becomes a"
+    },
+    {
+      "index": 336,
+      "start": 1028.079,
+      "end": 1030.47,
+      "duration": 2.391,
+      "text": "function of u and v and then we can ask"
+    },
+    {
+      "index": 337,
+      "start": 1030.48,
+      "end": 1033.47,
+      "duration": 2.99,
+      "text": "ourselves how sensitive is"
+    },
+    {
+      "index": 338,
+      "start": 1033.48,
+      "end": 1037.27,
+      "duration": 3.79,
+      "text": "f to the value of U"
+    },
+    {
+      "index": 339,
+      "start": 1037.28,
+      "end": 1041.59,
+      "duration": 4.31,
+      "text": "and well we can answer"
+    },
+    {
+      "index": 340,
+      "start": 1045.549,
+      "end": 1045.559,
+      "duration": 0.01,
+      "text": "that so the chain Ru is something like"
+    },
+    {
+      "index": 341,
+      "start": 1045.559,
+      "end": 1048.39,
+      "duration": 2.831,
+      "text": "this and let me explain to you again"
+    },
+    {
+      "index": 342,
+      "start": 1048.4,
+      "end": 1056.23,
+      "duration": 7.83,
+      "text": "where this"
+    },
+    {
+      "index": 343,
+      "start": 1059.59,
+      "end": 1059.6,
+      "duration": 0.01,
+      "text": "form so"
+    },
+    {
+      "index": 344,
+      "start": 1059.6,
+      "end": 1062.27,
+      "duration": 2.67,
+      "text": "basically what this quantity means is if"
+    },
+    {
+      "index": 345,
+      "start": 1062.28,
+      "end": 1065.15,
+      "duration": 2.87,
+      "text": "we change U and keep V constant what"
+    },
+    {
+      "index": 346,
+      "start": 1065.16,
+      "end": 1067.63,
+      "duration": 2.47,
+      "text": "happens to the value of f well why would"
+    },
+    {
+      "index": 347,
+      "start": 1067.64,
+      "end": 1069.95,
+      "duration": 2.31,
+      "text": "the value of f change in the first place"
+    },
+    {
+      "index": 348,
+      "start": 1069.96,
+      "end": 1072.23,
+      "duration": 2.27,
+      "text": "when f is just a function of XYZ and not"
+    },
+    {
+      "index": 349,
+      "start": 1072.24,
+      "end": 1074.87,
+      "duration": 2.63,
+      "text": "directly of U well it changes because X"
+    },
+    {
+      "index": 350,
+      "start": 1074.88,
+      "end": 1077.99,
+      "duration": 3.11,
+      "text": "Y and Z depend on you so first we have"
+    },
+    {
+      "index": 351,
+      "start": 1078.0,
+      "end": 1079.95,
+      "duration": 1.95,
+      "text": "to figure out how quickly X Y and Z"
+    },
+    {
+      "index": 352,
+      "start": 1079.96,
+      "end": 1083.43,
+      "duration": 3.47,
+      "text": "change when we change U well how quickly"
+    },
+    {
+      "index": 353,
+      "start": 1083.44,
+      "end": 1085.549,
+      "duration": 2.109,
+      "text": "we do that is precisely partial X"
+    },
+    {
+      "index": 354,
+      "start": 1085.559,
+      "end": 1087.95,
+      "duration": 2.391,
+      "text": "partial U partial y partial U partial Z"
+    },
+    {
+      "index": 355,
+      "start": 1087.96,
+      "end": 1089.71,
+      "duration": 1.75,
+      "text": "partial U these are the rates of change"
+    },
+    {
+      "index": 356,
+      "start": 1089.72,
+      "end": 1093.51,
+      "duration": 3.79,
+      "text": "of x y z when we change U and now when"
+    },
+    {
+      "index": 357,
+      "start": 1093.52,
+      "end": 1096.31,
+      "duration": 2.79,
+      "text": "we change X Y and Z that causes F to"
+    },
+    {
+      "index": 358,
+      "start": 1096.32,
+      "end": 1099.11,
+      "duration": 2.79,
+      "text": "change how much does f change well"
+    },
+    {
+      "index": 359,
+      "start": 1099.12,
+      "end": 1101.63,
+      "duration": 2.51,
+      "text": "partial F partial X tells us how quickly"
+    },
+    {
+      "index": 360,
+      "start": 1101.64,
+      "end": 1105.63,
+      "duration": 3.99,
+      "text": "F changes if I just change X so I get"
+    },
+    {
+      "index": 361,
+      "start": 1105.64,
+      "end": 1109.27,
+      "duration": 3.63,
+      "text": "this that's the change in F caused just"
+    },
+    {
+      "index": 362,
+      "start": 1109.28,
+      "end": 1111.909,
+      "duration": 2.629,
+      "text": "by the fact that X changes when U"
+    },
+    {
+      "index": 363,
+      "start": 1111.919,
+      "end": 1115.19,
+      "duration": 3.271,
+      "text": "changes but then y also changes y"
+    },
+    {
+      "index": 364,
+      "start": 1115.2,
+      "end": 1117.23,
+      "duration": 2.03,
+      "text": "changes at this rate and that causes F"
+    },
+    {
+      "index": 365,
+      "start": 1117.24,
+      "end": 1120.23,
+      "duration": 2.99,
+      "text": "to change at that rate and Z changes as"
+    },
+    {
+      "index": 366,
+      "start": 1120.24,
+      "end": 1122.51,
+      "duration": 2.27,
+      "text": "well and that causes F to change at that"
+    },
+    {
+      "index": 367,
+      "start": 1122.52,
+      "end": 1125.39,
+      "duration": 2.87,
+      "text": "rate and the effects add up together"
+    },
+    {
+      "index": 368,
+      "start": 1125.4,
+      "end": 1136.029,
+      "duration": 10.629,
+      "text": "does that make sense"
+    },
+    {
+      "index": 369,
+      "start": 1138.789,
+      "end": 1138.799,
+      "duration": 0.01,
+      "text": "okay and so in particular we can use the"
+    },
+    {
+      "index": 370,
+      "start": 1138.799,
+      "end": 1141.47,
+      "duration": 2.671,
+      "text": "chain rule to do changes of variables if"
+    },
+    {
+      "index": 371,
+      "start": 1141.48,
+      "end": 1144.19,
+      "duration": 2.71,
+      "text": "we have say a function defined in terms"
+    },
+    {
+      "index": 372,
+      "start": 1144.2,
+      "end": 1146.75,
+      "duration": 2.55,
+      "text": "of polar coordinates R and Theta and we"
+    },
+    {
+      "index": 373,
+      "start": 1146.76,
+      "end": 1148.31,
+      "duration": 1.55,
+      "text": "like to switch it to rectangular"
+    },
+    {
+      "index": 374,
+      "start": 1148.32,
+      "end": 1151.07,
+      "duration": 2.75,
+      "text": "coordinates X and Y then we can use"
+    },
+    {
+      "index": 375,
+      "start": 1151.08,
+      "end": 1158.43,
+      "duration": 7.35,
+      "text": "chain rules to relate the partial"
+    },
+    {
+      "index": 376,
+      "start": 1161.47,
+      "end": 1161.48,
+      "duration": 0.01,
+      "text": "derivatives and finally last but not"
+    },
+    {
+      "index": 377,
+      "start": 1161.48,
+      "end": 1164.95,
+      "duration": 3.47,
+      "text": "least we've seen how to deal with"
+    },
+    {
+      "index": 378,
+      "start": 1164.96,
+      "end": 1171.59,
+      "duration": 6.63,
+      "text": "non-independent variables"
+    },
+    {
+      "index": 379,
+      "start": 1174.669,
+      "end": 1174.679,
+      "duration": 0.01,
+      "text": "so when our variables say XY Z are"
+    },
+    {
+      "index": 380,
+      "start": 1174.679,
+      "end": 1176.35,
+      "duration": 1.671,
+      "text": "related by some"
+    },
+    {
+      "index": 381,
+      "start": 1176.36,
+      "end": 1178.909,
+      "duration": 2.549,
+      "text": "equation so one way we can deal with"
+    },
+    {
+      "index": 382,
+      "start": 1178.919,
+      "end": 1180.83,
+      "duration": 1.911,
+      "text": "this is to solve for one of the"
+    },
+    {
+      "index": 383,
+      "start": 1180.84,
+      "end": 1182.99,
+      "duration": 2.15,
+      "text": "variables and get go back to two"
+    },
+    {
+      "index": 384,
+      "start": 1183.0,
+      "end": 1185.149,
+      "duration": 2.149,
+      "text": "independent variables but we can't"
+    },
+    {
+      "index": 385,
+      "start": 1185.159,
+      "end": 1186.909,
+      "duration": 1.75,
+      "text": "always do that of course on the exam you"
+    },
+    {
+      "index": 386,
+      "start": 1186.919,
+      "end": 1189.43,
+      "duration": 2.511,
+      "text": "can be sure that I will make sure that"
+    },
+    {
+      "index": 387,
+      "start": 1189.44,
+      "end": 1190.95,
+      "duration": 1.51,
+      "text": "you cannot solve for the variable you"
+    },
+    {
+      "index": 388,
+      "start": 1190.96,
+      "end": 1193.27,
+      "duration": 2.31,
+      "text": "want to remove because that would be too"
+    },
+    {
+      "index": 389,
+      "start": 1193.28,
+      "end": 1197.07,
+      "duration": 3.79,
+      "text": "easy um so then when we have to keep all"
+    },
+    {
+      "index": 390,
+      "start": 1197.08,
+      "end": 1199.59,
+      "duration": 2.51,
+      "text": "of them but handle you take take into"
+    },
+    {
+      "index": 391,
+      "start": 1199.6,
+      "end": 1203.59,
+      "duration": 3.99,
+      "text": "account this relation we've seen two"
+    },
+    {
+      "index": 392,
+      "start": 1203.6,
+      "end": 1207.43,
+      "duration": 3.83,
+      "text": "useful methods one of them is to"
+    },
+    {
+      "index": 393,
+      "start": 1207.44,
+      "end": 1210.07,
+      "duration": 2.63,
+      "text": "find the minimum or the"
+    },
+    {
+      "index": 394,
+      "start": 1210.08,
+      "end": 1212.83,
+      "duration": 2.75,
+      "text": "maximum of a function when the variables"
+    },
+    {
+      "index": 395,
+      "start": 1212.84,
+      "end": 1215.11,
+      "duration": 2.27,
+      "text": "are not independent and that's the"
+    },
+    {
+      "index": 396,
+      "start": 1215.12,
+      "end": 1232.59,
+      "duration": 17.47,
+      "text": "method of lrange multipliers"
+    },
+    {
+      "index": 397,
+      "start": 1236.669,
+      "end": 1236.679,
+      "duration": 0.01,
+      "text": "so remember to find the minimum or"
+    },
+    {
+      "index": 398,
+      "start": 1236.679,
+      "end": 1245.909,
+      "duration": 9.23,
+      "text": "maximum of a function f subject to the"
+    },
+    {
+      "index": 399,
+      "start": 1249.39,
+      "end": 1249.4,
+      "duration": 0.01,
+      "text": "constraint g equals constant well we"
+    },
+    {
+      "index": 400,
+      "start": 1249.4,
+      "end": 1250.59,
+      "duration": 1.19,
+      "text": "write"
+    },
+    {
+      "index": 401,
+      "start": 1250.6,
+      "end": 1253.95,
+      "duration": 3.35,
+      "text": "down equations that say that the"
+    },
+    {
+      "index": 402,
+      "start": 1253.96,
+      "end": 1256.75,
+      "duration": 2.79,
+      "text": "gradient of f is actually proportional"
+    },
+    {
+      "index": 403,
+      "start": 1256.76,
+      "end": 1259.95,
+      "duration": 3.19,
+      "text": "to the gradient of G"
+    },
+    {
+      "index": 404,
+      "start": 1259.96,
+      "end": 1263.31,
+      "duration": 3.35,
+      "text": "so there's a new variable here Lambda"
+    },
+    {
+      "index": 405,
+      "start": 1263.32,
+      "end": 1265.43,
+      "duration": 2.11,
+      "text": "the"
+    },
+    {
+      "index": 406,
+      "start": 1265.44,
+      "end": 1267.07,
+      "duration": 1.63,
+      "text": "multiplier"
+    },
+    {
+      "index": 407,
+      "start": 1267.08,
+      "end": 1271.07,
+      "duration": 3.99,
+      "text": "and so you know for example if FG well I"
+    },
+    {
+      "index": 408,
+      "start": 1271.08,
+      "end": 1272.35,
+      "duration": 1.27,
+      "text": "guess here I had functions of three"
+    },
+    {
+      "index": 409,
+      "start": 1272.36,
+      "end": 1273.75,
+      "duration": 1.39,
+      "text": "variables so this becomes three"
+    },
+    {
+      "index": 410,
+      "start": 1273.76,
+      "end": 1278.23,
+      "duration": 4.47,
+      "text": "equations F subx = Lambda g subx f sub"
+    },
+    {
+      "index": 411,
+      "start": 1278.24,
+      "end": 1283.87,
+      "duration": 5.63,
+      "text": "yal Lambda G suby and F subz = Lambda G"
+    },
+    {
+      "index": 412,
+      "start": 1283.88,
+      "end": 1286.47,
+      "duration": 2.59,
+      "text": "subz and when we plug in the formulas"
+    },
+    {
+      "index": 413,
+      "start": 1286.48,
+      "end": 1288.87,
+      "duration": 2.39,
+      "text": "for f and g well we're left with three"
+    },
+    {
+      "index": 414,
+      "start": 1288.88,
+      "end": 1291.23,
+      "duration": 2.35,
+      "text": "equations involving the four variables x"
+    },
+    {
+      "index": 415,
+      "start": 1291.24,
+      "end": 1294.99,
+      "duration": 3.75,
+      "text": "y z and Lambda what's wrong well we"
+    },
+    {
+      "index": 416,
+      "start": 1295.0,
+      "end": 1296.71,
+      "duration": 1.71,
+      "text": "don't have actually four independent"
+    },
+    {
+      "index": 417,
+      "start": 1296.72,
+      "end": 1300.789,
+      "duration": 4.069,
+      "text": "variables we also have this"
+    },
+    {
+      "index": 418,
+      "start": 1304.19,
+      "end": 1304.2,
+      "duration": 0.01,
+      "text": "relation g equals well whatever the"
+    },
+    {
+      "index": 419,
+      "start": 1304.2,
+      "end": 1307.19,
+      "duration": 2.99,
+      "text": "constraint was relating X Y and Z"
+    },
+    {
+      "index": 420,
+      "start": 1307.2,
+      "end": 1309.549,
+      "duration": 2.349,
+      "text": "together so then we can try to solve"
+    },
+    {
+      "index": 421,
+      "start": 1309.559,
+      "end": 1312.31,
+      "duration": 2.751,
+      "text": "this and depending on situations it's"
+    },
+    {
+      "index": 422,
+      "start": 1312.32,
+      "end": 1314.19,
+      "duration": 1.87,
+      "text": "sometimes easy and sometimes it's very"
+    },
+    {
+      "index": 423,
+      "start": 1314.2,
+      "end": 1315.83,
+      "duration": 1.63,
+      "text": "hard or even"
+    },
+    {
+      "index": 424,
+      "start": 1315.84,
+      "end": 1319.87,
+      "duration": 4.03,
+      "text": "impossible um so in particular on the"
+    },
+    {
+      "index": 425,
+      "start": 1319.88,
+      "end": 1322.83,
+      "duration": 2.95,
+      "text": "test I haven't decided yet but it could"
+    },
+    {
+      "index": 426,
+      "start": 1322.84,
+      "end": 1324.31,
+      "duration": 1.47,
+      "text": "well be that the problem about lrange"
+    },
+    {
+      "index": 427,
+      "start": 1324.32,
+      "end": 1326.269,
+      "duration": 1.949,
+      "text": "multipliers will just ask you to write"
+    },
+    {
+      "index": 428,
+      "start": 1326.279,
+      "end": 1330.87,
+      "duration": 4.591,
+      "text": "the equations not to solve them okay"
+    },
+    {
+      "index": 429,
+      "start": 1333.149,
+      "end": 1333.159,
+      "duration": 0.01,
+      "text": "so well I don't know"
+    },
+    {
+      "index": 430,
+      "start": 1333.159,
+      "end": 1335.789,
+      "duration": 2.63,
+      "text": "yet okay I'm not promising anything but"
+    },
+    {
+      "index": 431,
+      "start": 1335.799,
+      "end": 1337.35,
+      "duration": 1.551,
+      "text": "just you"
+    },
+    {
+      "index": 432,
+      "start": 1337.36,
+      "end": 1340.19,
+      "duration": 2.83,
+      "text": "know before you start solving check"
+    },
+    {
+      "index": 433,
+      "start": 1340.2,
+      "end": 1341.63,
+      "duration": 1.43,
+      "text": "whether the problem asks you to solve"
+    },
+    {
+      "index": 434,
+      "start": 1341.64,
+      "end": 1344.19,
+      "duration": 2.55,
+      "text": "them or not okay if it doesn't"
+    },
+    {
+      "index": 435,
+      "start": 1344.2,
+      "end": 1363.14,
+      "duration": 18.94,
+      "text": "then probably you shouldn't"
+    },
+    {
+      "index": 436,
+      "start": 1379.87,
+      "end": 1379.88,
+      "duration": 0.01,
+      "text": "whoops"
+    },
+    {
+      "index": 437,
+      "start": 1379.88,
+      "end": 1381.71,
+      "duration": 1.83,
+      "text": "okay"
+    },
+    {
+      "index": 438,
+      "start": 1381.72,
+      "end": 1385.63,
+      "duration": 3.91,
+      "text": "so another topic that we saw just"
+    },
+    {
+      "index": 439,
+      "start": 1385.64,
+      "end": 1390.35,
+      "duration": 4.71,
+      "text": "yesterday is constraint partial"
+    },
+    {
+      "index": 440,
+      "start": 1392.75,
+      "end": 1392.76,
+      "duration": 0.01,
+      "text": "derivatives and I guess I have to re"
+    },
+    {
+      "index": 441,
+      "start": 1392.76,
+      "end": 1396.549,
+      "duration": 3.789,
+      "text": "explain a little bit"
+    },
+    {
+      "index": 442,
+      "start": 1398.75,
+      "end": 1398.76,
+      "duration": 0.01,
+      "text": "because my guess is that things were not"
+    },
+    {
+      "index": 443,
+      "start": 1398.76,
+      "end": 1401.35,
+      "duration": 2.59,
+      "text": "extremely clear at the end of class"
+    },
+    {
+      "index": 444,
+      "start": 1401.36,
+      "end": 1404.47,
+      "duration": 3.11,
+      "text": "yesterday so now we in the same"
+    },
+    {
+      "index": 445,
+      "start": 1404.48,
+      "end": 1406.789,
+      "duration": 2.309,
+      "text": "situation we have a"
+    },
+    {
+      "index": 446,
+      "start": 1406.799,
+      "end": 1409.75,
+      "duration": 2.951,
+      "text": "function let's say"
+    },
+    {
+      "index": 447,
+      "start": 1409.76,
+      "end": 1411.11,
+      "duration": 1.35,
+      "text": "F of"
+    },
+    {
+      "index": 448,
+      "start": 1411.12,
+      "end": 1414.39,
+      "duration": 3.27,
+      "text": "XYZ where the variables x y and z are"
+    },
+    {
+      "index": 449,
+      "start": 1414.4,
+      "end": 1416.99,
+      "duration": 2.59,
+      "text": "not independent but are constrained by"
+    },
+    {
+      "index": 450,
+      "start": 1417.0,
+      "end": 1419.95,
+      "duration": 2.95,
+      "text": "some relation of this form so some"
+    },
+    {
+      "index": 451,
+      "start": 1419.96,
+      "end": 1422.51,
+      "duration": 2.55,
+      "text": "quantity involving X Y and Z is equal to"
+    },
+    {
+      "index": 452,
+      "start": 1422.52,
+      "end": 1425.19,
+      "duration": 2.67,
+      "text": "maybe zero or some other constant and"
+    },
+    {
+      "index": 453,
+      "start": 1425.2,
+      "end": 1427.39,
+      "duration": 2.19,
+      "text": "then what we want to know is what is the"
+    },
+    {
+      "index": 454,
+      "start": 1427.4,
+      "end": 1431.269,
+      "duration": 3.869,
+      "text": "rate of change of f with respect to one"
+    },
+    {
+      "index": 455,
+      "start": 1431.279,
+      "end": 1437.11,
+      "duration": 5.831,
+      "text": "of the variables say X or Y or Z when I"
+    },
+    {
+      "index": 456,
+      "start": 1437.12,
+      "end": 1439.19,
+      "duration": 2.07,
+      "text": "keep the other con"
+    },
+    {
+      "index": 457,
+      "start": 1439.2,
+      "end": 1441.71,
+      "duration": 2.51,
+      "text": "well I can't keep all the others"
+    },
+    {
+      "index": 458,
+      "start": 1441.72,
+      "end": 1443.75,
+      "duration": 2.03,
+      "text": "constant because that wouldn't be"
+    },
+    {
+      "index": 459,
+      "start": 1443.76,
+      "end": 1446.07,
+      "duration": 2.31,
+      "text": "compatible with"
+    },
+    {
+      "index": 460,
+      "start": 1446.08,
+      "end": 1449.269,
+      "duration": 3.189,
+      "text": "this with this condition I mean that"
+    },
+    {
+      "index": 461,
+      "start": 1449.279,
+      "end": 1452.11,
+      "duration": 2.831,
+      "text": "would be the usual or So-Cal formal"
+    },
+    {
+      "index": 462,
+      "start": 1452.12,
+      "end": 1455.43,
+      "duration": 3.31,
+      "text": "partial derivative of f ignoring the"
+    },
+    {
+      "index": 463,
+      "start": 1455.44,
+      "end": 1457.83,
+      "duration": 2.39,
+      "text": "constraint to take this into account"
+    },
+    {
+      "index": 464,
+      "start": 1457.84,
+      "end": 1461.47,
+      "duration": 3.63,
+      "text": "means that if we vary one variable while"
+    },
+    {
+      "index": 465,
+      "start": 1461.48,
+      "end": 1463.59,
+      "duration": 2.11,
+      "text": "keeping another one fixed then the third"
+    },
+    {
+      "index": 466,
+      "start": 1463.6,
+      "end": 1466.389,
+      "duration": 2.789,
+      "text": "one since it depends on them must also"
+    },
+    {
+      "index": 467,
+      "start": 1466.399,
+      "end": 1468.59,
+      "duration": 2.191,
+      "text": "change somehow and we must take that"
+    },
+    {
+      "index": 468,
+      "start": 1468.6,
+      "end": 1469.35,
+      "duration": 0.75,
+      "text": "into"
+    },
+    {
+      "index": 469,
+      "start": 1469.36,
+      "end": 1471.19,
+      "duration": 1.83,
+      "text": "account"
+    },
+    {
+      "index": 470,
+      "start": 1471.2,
+      "end": 1476.71,
+      "duration": 5.51,
+      "text": "so let's say for example we want to"
+    },
+    {
+      "index": 471,
+      "start": 1478.75,
+      "end": 1478.76,
+      "duration": 0.01,
+      "text": "find because I'm going to do a different"
+    },
+    {
+      "index": 472,
+      "start": 1478.76,
+      "end": 1480.669,
+      "duration": 1.909,
+      "text": "example from yesterday so that if you"
+    },
+    {
+      "index": 473,
+      "start": 1480.679,
+      "end": 1482.149,
+      "duration": 1.47,
+      "text": "really didn't like that one you don't"
+    },
+    {
+      "index": 474,
+      "start": 1482.159,
+      "end": 1484.909,
+      "duration": 2.75,
+      "text": "have to see it"
+    },
+    {
+      "index": 475,
+      "start": 1488.63,
+      "end": 1488.64,
+      "duration": 0.01,
+      "text": "again so let's say that we want to find"
+    },
+    {
+      "index": 476,
+      "start": 1488.64,
+      "end": 1490.59,
+      "duration": 1.95,
+      "text": "the partial derivative of f with respect"
+    },
+    {
+      "index": 477,
+      "start": 1490.6,
+      "end": 1494.23,
+      "duration": 3.63,
+      "text": "to Z keeping y constant so what does"
+    },
+    {
+      "index": 478,
+      "start": 1494.24,
+      "end": 1495.07,
+      "duration": 0.83,
+      "text": "that"
+    },
+    {
+      "index": 479,
+      "start": 1495.08,
+      "end": 1499.149,
+      "duration": 4.069,
+      "text": "mean that means Y is"
+    },
+    {
+      "index": 480,
+      "start": 1499.159,
+      "end": 1500.71,
+      "duration": 1.551,
+      "text": "constant"
+    },
+    {
+      "index": 481,
+      "start": 1500.72,
+      "end": 1503.389,
+      "duration": 2.669,
+      "text": "Z"
+    },
+    {
+      "index": 482,
+      "start": 1503.399,
+      "end": 1507.789,
+      "duration": 4.39,
+      "text": "varies and X somehow is mysteriously a"
+    },
+    {
+      "index": 483,
+      "start": 1507.799,
+      "end": 1510.59,
+      "duration": 2.791,
+      "text": "function of Y and Z through this"
+    },
+    {
+      "index": 484,
+      "start": 1510.6,
+      "end": 1512.99,
+      "duration": 2.39,
+      "text": "equation and then of course because it"
+    },
+    {
+      "index": 485,
+      "start": 1513.0,
+      "end": 1516.19,
+      "duration": 3.19,
+      "text": "depends on y that means X will vary"
+    },
+    {
+      "index": 486,
+      "start": 1516.2,
+      "end": 1519.11,
+      "duration": 2.91,
+      "text": "sorry uh X depends on Y and Z and Z"
+    },
+    {
+      "index": 487,
+      "start": 1519.12,
+      "end": 1521.83,
+      "duration": 2.71,
+      "text": "varies so now we're asking ourselves"
+    },
+    {
+      "index": 488,
+      "start": 1521.84,
+      "end": 1523.59,
+      "duration": 1.75,
+      "text": "what's the rate of change of f with"
+    },
+    {
+      "index": 489,
+      "start": 1523.6,
+      "end": 1542.43,
+      "duration": 18.83,
+      "text": "respect to Z in this situation"
+    },
+    {
+      "index": 490,
+      "start": 1548.47,
+      "end": 1548.48,
+      "duration": 0.01,
+      "text": "that so let me start with the one with"
+    },
+    {
+      "index": 491,
+      "start": 1548.48,
+      "end": 1551.31,
+      "duration": 2.83,
+      "text": "differentials which hopefully you kind"
+    },
+    {
+      "index": 492,
+      "start": 1551.32,
+      "end": 1554.389,
+      "duration": 3.069,
+      "text": "of understood yesterday"
+    },
+    {
+      "index": 493,
+      "start": 1554.399,
+      "end": 1563.389,
+      "duration": 8.99,
+      "text": "but if not here's the second chance"
+    },
+    {
+      "index": 494,
+      "start": 1565.71,
+      "end": 1565.72,
+      "duration": 0.01,
+      "text": "so using differentials means that we'll"
+    },
+    {
+      "index": 495,
+      "start": 1565.72,
+      "end": 1569.549,
+      "duration": 3.829,
+      "text": "try to express DF in terms of DZ in this"
+    },
+    {
+      "index": 496,
+      "start": 1569.559,
+      "end": 1572.029,
+      "duration": 2.47,
+      "text": "particular situation okay so what do we"
+    },
+    {
+      "index": 497,
+      "start": 1572.039,
+      "end": 1575.269,
+      "duration": 3.23,
+      "text": "know about DF in general"
+    },
+    {
+      "index": 498,
+      "start": 1575.279,
+      "end": 1579.95,
+      "duration": 4.671,
+      "text": "well we know that DF is f subx DX plus F"
+    },
+    {
+      "index": 499,
+      "start": 1579.96,
+      "end": 1584.269,
+      "duration": 4.309,
+      "text": "suby Dy plus partial F partial Z"
+    },
+    {
+      "index": 500,
+      "start": 1584.279,
+      "end": 1587.51,
+      "duration": 3.231,
+      "text": "DZ that's the general statement but of"
+    },
+    {
+      "index": 501,
+      "start": 1587.52,
+      "end": 1589.07,
+      "duration": 1.55,
+      "text": "course we're in a speci case we in a"
+    },
+    {
+      "index": 502,
+      "start": 1589.08,
+      "end": 1591.87,
+      "duration": 2.79,
+      "text": "special case where first Y is"
+    },
+    {
+      "index": 503,
+      "start": 1591.88,
+      "end": 1595.07,
+      "duration": 3.19,
+      "text": "constant Y is constant means that we can"
+    },
+    {
+      "index": 504,
+      "start": 1595.08,
+      "end": 1603.549,
+      "duration": 8.469,
+      "text": "set Dy to be"
+    },
+    {
+      "index": 505,
+      "start": 1608.83,
+      "end": 1608.84,
+      "duration": 0.01,
+      "text": "zero okay so this goes away and becomes"
+    },
+    {
+      "index": 506,
+      "start": 1608.84,
+      "end": 1611.549,
+      "duration": 2.709,
+      "text": "zero the second thing is actually we"
+    },
+    {
+      "index": 507,
+      "start": 1611.559,
+      "end": 1613.59,
+      "duration": 2.031,
+      "text": "don't care about X we'd like to get rid"
+    },
+    {
+      "index": 508,
+      "start": 1613.6,
+      "end": 1617.11,
+      "duration": 3.51,
+      "text": "of X because it's this dependent"
+    },
+    {
+      "index": 509,
+      "start": 1617.12,
+      "end": 1618.63,
+      "duration": 1.51,
+      "text": "variable what we really want want to do"
+    },
+    {
+      "index": 510,
+      "start": 1618.64,
+      "end": 1621.63,
+      "duration": 2.99,
+      "text": "is Express DF only in terms of"
+    },
+    {
+      "index": 511,
+      "start": 1621.64,
+      "end": 1627.23,
+      "duration": 5.59,
+      "text": "DZ so what we"
+    },
+    {
+      "index": 512,
+      "start": 1633.63,
+      "end": 1633.64,
+      "duration": 0.01,
+      "text": "relate DX with"
+    },
+    {
+      "index": 513,
+      "start": 1633.64,
+      "end": 1636.71,
+      "duration": 3.07,
+      "text": "DZ well to do that we need to look at"
+    },
+    {
+      "index": 514,
+      "start": 1636.72,
+      "end": 1639.789,
+      "duration": 3.069,
+      "text": "how the variables are related so we need"
+    },
+    {
+      "index": 515,
+      "start": 1639.799,
+      "end": 1641.47,
+      "duration": 1.671,
+      "text": "to look at the constraint"
+    },
+    {
+      "index": 516,
+      "start": 1641.48,
+      "end": 1644.71,
+      "duration": 3.23,
+      "text": "G well how do we do that we look at the"
+    },
+    {
+      "index": 517,
+      "start": 1644.72,
+      "end": 1648.71,
+      "duration": 3.99,
+      "text": "differential of G okay so DG is G sub X"
+    },
+    {
+      "index": 518,
+      "start": 1648.72,
+      "end": 1651.35,
+      "duration": 2.63,
+      "text": "DX plus G suby"
+    },
+    {
+      "index": 519,
+      "start": 1651.36,
+      "end": 1654.029,
+      "duration": 2.669,
+      "text": "Dy plus G subz"
+    },
+    {
+      "index": 520,
+      "start": 1654.039,
+      "end": 1657.43,
+      "duration": 3.391,
+      "text": "DZ and that's zero because we're setting"
+    },
+    {
+      "index": 521,
+      "start": 1657.44,
+      "end": 1661.029,
+      "duration": 3.589,
+      "text": "G to always stay constant G doesn't"
+    },
+    {
+      "index": 522,
+      "start": 1661.039,
+      "end": 1664.669,
+      "duration": 3.63,
+      "text": "change if G doesn't change then we have"
+    },
+    {
+      "index": 523,
+      "start": 1664.679,
+      "end": 1667.029,
+      "duration": 2.35,
+      "text": "a relation between DX Dy and"
+    },
+    {
+      "index": 524,
+      "start": 1667.039,
+      "end": 1669.75,
+      "duration": 2.711,
+      "text": "DZ well in fact we said we going to look"
+    },
+    {
+      "index": 525,
+      "start": 1669.76,
+      "end": 1672.149,
+      "duration": 2.389,
+      "text": "only at the case where Y is constant so"
+    },
+    {
+      "index": 526,
+      "start": 1672.159,
+      "end": 1673.19,
+      "duration": 1.031,
+      "text": "y doesn't"
+    },
+    {
+      "index": 527,
+      "start": 1673.2,
+      "end": 1677.07,
+      "duration": 3.87,
+      "text": "change this becomes zero well now we"
+    },
+    {
+      "index": 528,
+      "start": 1677.08,
+      "end": 1679.63,
+      "duration": 2.55,
+      "text": "have our relation between DX and DZ we"
+    },
+    {
+      "index": 529,
+      "start": 1679.64,
+      "end": 1683.07,
+      "duration": 3.43,
+      "text": "know how X depends on Z and when we know"
+    },
+    {
+      "index": 530,
+      "start": 1683.08,
+      "end": 1686.029,
+      "duration": 2.949,
+      "text": "how X depends on Z we can plug that into"
+    },
+    {
+      "index": 531,
+      "start": 1686.039,
+      "end": 1689.11,
+      "duration": 3.071,
+      "text": "here and get how F depends on"
+    },
+    {
+      "index": 532,
+      "start": 1689.12,
+      "end": 1693.71,
+      "duration": 4.59,
+      "text": "Z okay let's do that"
+    },
+    {
+      "index": 533,
+      "start": 1693.72,
+      "end": 1700.23,
+      "duration": 6.51,
+      "text": "oh"
+    },
+    {
+      "index": 534,
+      "start": 1706.63,
+      "end": 1706.64,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 535,
+      "start": 1706.64,
+      "end": 1710.149,
+      "duration": 3.509,
+      "text": "so well so again saying that g cannot"
+    },
+    {
+      "index": 536,
+      "start": 1710.159,
+      "end": 1714.35,
+      "duration": 4.191,
+      "text": "change and keeping y constant tells us"
+    },
+    {
+      "index": 537,
+      "start": 1714.36,
+      "end": 1718.149,
+      "duration": 3.789,
+      "text": "GX DX plus gz DZ is zero and we'd like"
+    },
+    {
+      "index": 538,
+      "start": 1718.159,
+      "end": 1721.909,
+      "duration": 3.75,
+      "text": "to solve for DX in terms of DZ that"
+    },
+    {
+      "index": 539,
+      "start": 1721.919,
+      "end": 1725.31,
+      "duration": 3.391,
+      "text": "tells us DX should"
+    },
+    {
+      "index": 540,
+      "start": 1725.32,
+      "end": 1731.789,
+      "duration": 6.469,
+      "text": "be minus gz DZ ided by"
+    },
+    {
+      "index": 541,
+      "start": 1731.799,
+      "end": 1734.87,
+      "duration": 3.071,
+      "text": "GX okay so if you want this is the rate"
+    },
+    {
+      "index": 542,
+      "start": 1734.88,
+      "end": 1737.75,
+      "duration": 2.87,
+      "text": "of change of X with respect to Z when we"
+    },
+    {
+      "index": 543,
+      "start": 1737.76,
+      "end": 1741.23,
+      "duration": 3.47,
+      "text": "keep y constant in our new termin in our"
+    },
+    {
+      "index": 544,
+      "start": 1741.24,
+      "end": 1745.149,
+      "duration": 3.909,
+      "text": "terminology this is partial Z"
+    },
+    {
+      "index": 545,
+      "start": 1745.159,
+      "end": 1755.149,
+      "duration": 9.99,
+      "text": "no is partial X over partial Z with yeld"
+    },
+    {
+      "index": 546,
+      "start": 1757.149,
+      "end": 1757.159,
+      "duration": 0.01,
+      "text": "constant okay this is the rate of change"
+    },
+    {
+      "index": 547,
+      "start": 1757.159,
+      "end": 1759.83,
+      "duration": 2.671,
+      "text": "of X with respect to Z so now when we"
+    },
+    {
+      "index": 548,
+      "start": 1759.84,
+      "end": 1763.47,
+      "duration": 3.63,
+      "text": "know that we are going to plug that into"
+    },
+    {
+      "index": 549,
+      "start": 1763.48,
+      "end": 1769.59,
+      "duration": 6.11,
+      "text": "this equation"
+    },
+    {
+      "index": 550,
+      "start": 1771.95,
+      "end": 1771.96,
+      "duration": 0.01,
+      "text": "and that will tell"
+    },
+    {
+      "index": 551,
+      "start": 1771.96,
+      "end": 1777.71,
+      "duration": 5.75,
+      "text": "us that DF is f subx * DX well what is"
+    },
+    {
+      "index": 552,
+      "start": 1777.72,
+      "end": 1785.63,
+      "duration": 7.91,
+      "text": "DX DX is now minus gz over GX DZ plus FZ"
+    },
+    {
+      "index": 553,
+      "start": 1785.64,
+      "end": 1792.31,
+      "duration": 6.67,
+      "text": "DZ so that will be minus FX gz over GX"
+    },
+    {
+      "index": 554,
+      "start": 1792.32,
+      "end": 1795.59,
+      "duration": 3.27,
+      "text": "plus FZ *"
+    },
+    {
+      "index": 555,
+      "start": 1795.6,
+      "end": 1799.07,
+      "duration": 3.47,
+      "text": "DZ and so this coefficient here"
+    },
+    {
+      "index": 556,
+      "start": 1799.08,
+      "end": 1801.789,
+      "duration": 2.709,
+      "text": "here is the rate of change of f with"
+    },
+    {
+      "index": 557,
+      "start": 1801.799,
+      "end": 1805.35,
+      "duration": 3.551,
+      "text": "respect to Z in the situation we're"
+    },
+    {
+      "index": 558,
+      "start": 1805.36,
+      "end": 1808.75,
+      "duration": 3.39,
+      "text": "considering so this quantity is what we"
+    },
+    {
+      "index": 559,
+      "start": 1808.76,
+      "end": 1813.75,
+      "duration": 4.99,
+      "text": "call partial F over partial Z with yeld"
+    },
+    {
+      "index": 560,
+      "start": 1813.76,
+      "end": 1816.75,
+      "duration": 2.99,
+      "text": "constant that's what we wanted to"
+    },
+    {
+      "index": 561,
+      "start": 1816.76,
+      "end": 1819.549,
+      "duration": 2.789,
+      "text": "find"
+    },
+    {
+      "index": 562,
+      "start": 1819.559,
+      "end": 1823.63,
+      "duration": 4.071,
+      "text": "okay so now let's see another way to do"
+    },
+    {
+      "index": 563,
+      "start": 1823.64,
+      "end": 1824.909,
+      "duration": 1.269,
+      "text": "the same"
+    },
+    {
+      "index": 564,
+      "start": 1824.919,
+      "end": 1826.99,
+      "duration": 2.071,
+      "text": "calculation and then you can choose"
+    },
+    {
+      "index": 565,
+      "start": 1827.0,
+      "end": 1855.509,
+      "duration": 28.509,
+      "text": "which one you prefer"
+    },
+    {
+      "index": 566,
+      "start": 1858.71,
+      "end": 1858.72,
+      "duration": 0.01,
+      "text": "so we have a method"
+    },
+    {
+      "index": 567,
+      "start": 1858.72,
+      "end": 1865.43,
+      "duration": 6.71,
+      "text": "is using the chain"
+    },
+    {
+      "index": 568,
+      "start": 1868.269,
+      "end": 1868.279,
+      "duration": 0.01,
+      "text": "rule okay"
+    },
+    {
+      "index": 569,
+      "start": 1868.279,
+      "end": 1871.23,
+      "duration": 2.951,
+      "text": "so let's use the chain rule to"
+    },
+    {
+      "index": 570,
+      "start": 1871.24,
+      "end": 1874.83,
+      "duration": 3.59,
+      "text": "understand how F depends on Z when Y is"
+    },
+    {
+      "index": 571,
+      "start": 1874.84,
+      "end": 1875.789,
+      "duration": 0.949,
+      "text": "held"
+    },
+    {
+      "index": 572,
+      "start": 1875.799,
+      "end": 1878.029,
+      "duration": 2.23,
+      "text": "constant so let me first write the chain"
+    },
+    {
+      "index": 573,
+      "start": 1878.039,
+      "end": 1880.149,
+      "duration": 2.11,
+      "text": "rule brutally and then we'll try to"
+    },
+    {
+      "index": 574,
+      "start": 1880.159,
+      "end": 1883.23,
+      "duration": 3.071,
+      "text": "analyze what's going"
+    },
+    {
+      "index": 575,
+      "start": 1886.43,
+      "end": 1886.44,
+      "duration": 0.01,
+      "text": "on so you can just use the version that"
+    },
+    {
+      "index": 576,
+      "start": 1886.44,
+      "end": 1888.35,
+      "duration": 1.91,
+      "text": "I have up there as a template to see"
+    },
+    {
+      "index": 577,
+      "start": 1888.36,
+      "end": 1890.19,
+      "duration": 1.83,
+      "text": "what's going"
+    },
+    {
+      "index": 578,
+      "start": 1890.2,
+      "end": 1892.549,
+      "duration": 2.349,
+      "text": "on but I'm going"
+    },
+    {
+      "index": 579,
+      "start": 1892.559,
+      "end": 1895.07,
+      "duration": 2.511,
+      "text": "to explain"
+    },
+    {
+      "index": 580,
+      "start": 1895.08,
+      "end": 1909.029,
+      "duration": 13.949,
+      "text": "it more carefully"
+    },
+    {
+      "index": 581,
+      "start": 1913.389,
+      "end": 1913.399,
+      "duration": 0.01,
+      "text": "again okay so that's the most mechanical"
+    },
+    {
+      "index": 582,
+      "start": 1913.399,
+      "end": 1915.43,
+      "duration": 2.031,
+      "text": "and"
+    },
+    {
+      "index": 583,
+      "start": 1915.44,
+      "end": 1917.669,
+      "duration": 2.229,
+      "text": "no Mindless way of fighting down the"
+    },
+    {
+      "index": 584,
+      "start": 1917.679,
+      "end": 1920.549,
+      "duration": 2.87,
+      "text": "chain rule I'm just saying here let's"
+    },
+    {
+      "index": 585,
+      "start": 1920.559,
+      "end": 1922.35,
+      "duration": 1.791,
+      "text": "say that I'm varying Z keeping y"
+    },
+    {
+      "index": 586,
+      "start": 1922.36,
+      "end": 1923.909,
+      "duration": 1.549,
+      "text": "constant and I want to know how F"
+    },
+    {
+      "index": 587,
+      "start": 1923.919,
+      "end": 1926.389,
+      "duration": 2.47,
+      "text": "changes well F might change because X"
+    },
+    {
+      "index": 588,
+      "start": 1926.399,
+      "end": 1929.389,
+      "duration": 2.99,
+      "text": "might change y might y might change and"
+    },
+    {
+      "index": 589,
+      "start": 1929.399,
+      "end": 1933.149,
+      "duration": 3.75,
+      "text": "Z might change now how quickly does X"
+    },
+    {
+      "index": 590,
+      "start": 1933.159,
+      "end": 1935.59,
+      "duration": 2.431,
+      "text": "Change well the rate of change of X in"
+    },
+    {
+      "index": 591,
+      "start": 1935.6,
+      "end": 1937.87,
+      "duration": 2.27,
+      "text": "this situation is partial X partial Z"
+    },
+    {
+      "index": 592,
+      "start": 1937.88,
+      "end": 1939.549,
+      "duration": 1.669,
+      "text": "with Y held"
+    },
+    {
+      "index": 593,
+      "start": 1939.559,
+      "end": 1943.149,
+      "duration": 3.59,
+      "text": "constant so if I change X at this rate"
+    },
+    {
+      "index": 594,
+      "start": 1943.159,
+      "end": 1946.35,
+      "duration": 3.191,
+      "text": "then F will change at that"
+    },
+    {
+      "index": 595,
+      "start": 1946.36,
+      "end": 1950.269,
+      "duration": 3.909,
+      "text": "rate now y might change so the rate of"
+    },
+    {
+      "index": 596,
+      "start": 1950.279,
+      "end": 1952.11,
+      "duration": 1.831,
+      "text": "change of Y would be the rate of change"
+    },
+    {
+      "index": 597,
+      "start": 1952.12,
+      "end": 1955.43,
+      "duration": 3.31,
+      "text": "of Y respect to Z holding y constant uh"
+    },
+    {
+      "index": 598,
+      "start": 1955.44,
+      "end": 1957.909,
+      "duration": 2.469,
+      "text": "wait a second if Y is held constant then"
+    },
+    {
+      "index": 599,
+      "start": 1957.919,
+      "end": 1960.149,
+      "duration": 2.23,
+      "text": "y doesn't change so actually this guy is"
+    },
+    {
+      "index": 600,
+      "start": 1960.159,
+      "end": 1961.83,
+      "duration": 1.671,
+      "text": "zero and you didn't really have to write"
+    },
+    {
+      "index": 601,
+      "start": 1961.84,
+      "end": 1964.389,
+      "duration": 2.549,
+      "text": "that term but I wrote it just to be"
+    },
+    {
+      "index": 602,
+      "start": 1964.399,
+      "end": 1967.95,
+      "duration": 3.551,
+      "text": "systematic okay if y had been somehow"
+    },
+    {
+      "index": 603,
+      "start": 1967.96,
+      "end": 1970.87,
+      "duration": 2.91,
+      "text": "able to change at a certain rate then"
+    },
+    {
+      "index": 604,
+      "start": 1970.88,
+      "end": 1972.95,
+      "duration": 2.07,
+      "text": "that would have caused F to change at"
+    },
+    {
+      "index": 605,
+      "start": 1972.96,
+      "end": 1975.269,
+      "duration": 2.309,
+      "text": "that rate of course if f is held con"
+    },
+    {
+      "index": 606,
+      "start": 1975.279,
+      "end": 1977.07,
+      "duration": 1.791,
+      "text": "sorry if Y is held constant then nothing"
+    },
+    {
+      "index": 607,
+      "start": 1977.08,
+      "end": 1978.43,
+      "duration": 1.35,
+      "text": "happens here"
+    },
+    {
+      "index": 608,
+      "start": 1978.44,
+      "end": 1981.47,
+      "duration": 3.03,
+      "text": "and finally while Z is changing at a"
+    },
+    {
+      "index": 609,
+      "start": 1981.48,
+      "end": 1985.669,
+      "duration": 4.189,
+      "text": "certain rate this rate is this one and"
+    },
+    {
+      "index": 610,
+      "start": 1985.679,
+      "end": 1988.549,
+      "duration": 2.87,
+      "text": "that causes F to change at that rate and"
+    },
+    {
+      "index": 611,
+      "start": 1988.559,
+      "end": 1990.509,
+      "duration": 1.95,
+      "text": "then we add the effects together okay"
+    },
+    {
+      "index": 612,
+      "start": 1990.519,
+      "end": 1992.389,
+      "duration": 1.87,
+      "text": "see it's nothing but the good old chain"
+    },
+    {
+      "index": 613,
+      "start": 1992.399,
+      "end": 1994.31,
+      "duration": 1.911,
+      "text": "rule just I've put these extra"
+    },
+    {
+      "index": 614,
+      "start": 1994.32,
+      "end": 1996.35,
+      "duration": 2.03,
+      "text": "subscripts to tell us what is held"
+    },
+    {
+      "index": 615,
+      "start": 1996.36,
+      "end": 1998.87,
+      "duration": 2.51,
+      "text": "constant and what"
+    },
+    {
+      "index": 616,
+      "start": 1998.88,
+      "end": 2000.789,
+      "duration": 1.909,
+      "text": "isn't"
+    },
+    {
+      "index": 617,
+      "start": 2000.799,
+      "end": 2003.23,
+      "duration": 2.431,
+      "text": "okay now of course we can simplify it a"
+    },
+    {
+      "index": 618,
+      "start": 2003.24,
+      "end": 2005.99,
+      "duration": 2.75,
+      "text": "bit more because here how quickly does Z"
+    },
+    {
+      "index": 619,
+      "start": 2006.0,
+      "end": 2008.669,
+      "duration": 2.669,
+      "text": "change if I'm changing Z well the rate"
+    },
+    {
+      "index": 620,
+      "start": 2008.679,
+      "end": 2010.35,
+      "duration": 1.671,
+      "text": "of change of Z with respect to itself is"
+    },
+    {
+      "index": 621,
+      "start": 2010.36,
+      "end": 2013.99,
+      "duration": 3.63,
+      "text": "just"
+    },
+    {
+      "index": 622,
+      "start": 2016.07,
+      "end": 2016.08,
+      "duration": 0.01,
+      "text": "one"
+    },
+    {
+      "index": 623,
+      "start": 2016.08,
+      "end": 2019.669,
+      "duration": 3.589,
+      "text": "okay so in fact the really mysterious"
+    },
+    {
+      "index": 624,
+      "start": 2019.679,
+      "end": 2022.47,
+      "duration": 2.791,
+      "text": "part of this is the one here which is"
+    },
+    {
+      "index": 625,
+      "start": 2022.48,
+      "end": 2024.31,
+      "duration": 1.83,
+      "text": "the rate of change of X with respect to"
+    },
+    {
+      "index": 626,
+      "start": 2024.32,
+      "end": 2026.909,
+      "duration": 2.589,
+      "text": "Z and to find that we have to understand"
+    },
+    {
+      "index": 627,
+      "start": 2026.919,
+      "end": 2028.629,
+      "duration": 1.71,
+      "text": "the"
+    },
+    {
+      "index": 628,
+      "start": 2028.639,
+      "end": 2031.99,
+      "duration": 3.351,
+      "text": "constraint okay so how can we find the"
+    },
+    {
+      "index": 629,
+      "start": 2032.0,
+      "end": 2033.83,
+      "duration": 1.83,
+      "text": "rate of change of X with respect to Z"
+    },
+    {
+      "index": 630,
+      "start": 2033.84,
+      "end": 2035.43,
+      "duration": 1.59,
+      "text": "well we could use differentials like we"
+    },
+    {
+      "index": 631,
+      "start": 2035.44,
+      "end": 2037.43,
+      "duration": 1.99,
+      "text": "did here but we can also keep using the"
+    },
+    {
+      "index": 632,
+      "start": 2037.44,
+      "end": 2056.03,
+      "duration": 18.59,
+      "text": "chain"
+    },
+    {
+      "index": 633,
+      "start": 2059.99,
+      "end": 2060.0,
+      "duration": 0.01,
+      "text": "so how can I do that well I can just"
+    },
+    {
+      "index": 634,
+      "start": 2060.0,
+      "end": 2062.95,
+      "duration": 2.95,
+      "text": "look at how G would change with respect"
+    },
+    {
+      "index": 635,
+      "start": 2062.96,
+      "end": 2065.149,
+      "duration": 2.189,
+      "text": "to Z when Y is held constant so I just"
+    },
+    {
+      "index": 636,
+      "start": 2065.159,
+      "end": 2067.23,
+      "duration": 2.071,
+      "text": "do the same calculation but with G"
+    },
+    {
+      "index": 637,
+      "start": 2067.24,
+      "end": 2072.43,
+      "duration": 5.19,
+      "text": "instead of"
+    },
+    {
+      "index": 638,
+      "start": 2075.389,
+      "end": 2075.399,
+      "duration": 0.01,
+      "text": "F but before I do it let's ask ourselves"
+    },
+    {
+      "index": 639,
+      "start": 2075.399,
+      "end": 2077.79,
+      "duration": 2.391,
+      "text": "first what is this equal"
+    },
+    {
+      "index": 640,
+      "start": 2077.8,
+      "end": 2082.43,
+      "duration": 4.63,
+      "text": "to well if G is held constant then when"
+    },
+    {
+      "index": 641,
+      "start": 2082.44,
+      "end": 2085.069,
+      "duration": 2.629,
+      "text": "we VAR Z keeping y constant and changing"
+    },
+    {
+      "index": 642,
+      "start": 2085.079,
+      "end": 2092.27,
+      "duration": 7.191,
+      "text": "X well G still doesn't change it's held"
+    },
+    {
+      "index": 643,
+      "start": 2096.149,
+      "end": 2096.159,
+      "duration": 0.01,
+      "text": "constant so in fact that should be zero"
+    },
+    {
+      "index": 644,
+      "start": 2096.159,
+      "end": 2097.95,
+      "duration": 1.791,
+      "text": "okay but if we just say that we're not"
+    },
+    {
+      "index": 645,
+      "start": 2097.96,
+      "end": 2101.23,
+      "duration": 3.27,
+      "text": "we're not going to get to that so let's"
+    },
+    {
+      "index": 646,
+      "start": 2101.24,
+      "end": 2103.51,
+      "duration": 2.27,
+      "text": "see how we can compute that using the"
+    },
+    {
+      "index": 647,
+      "start": 2103.52,
+      "end": 2106.51,
+      "duration": 2.99,
+      "text": "chain rule well the chain rule tells us"
+    },
+    {
+      "index": 648,
+      "start": 2106.52,
+      "end": 2109.47,
+      "duration": 2.95,
+      "text": "G changes because X Y and Z"
+    },
+    {
+      "index": 649,
+      "start": 2109.48,
+      "end": 2112.069,
+      "duration": 2.589,
+      "text": "change okay how does it change because"
+    },
+    {
+      "index": 650,
+      "start": 2112.079,
+      "end": 2114.829,
+      "duration": 2.75,
+      "text": "of X well partial G partial x times the"
+    },
+    {
+      "index": 651,
+      "start": 2114.839,
+      "end": 2117.19,
+      "duration": 2.351,
+      "text": "rate of change of"
+    },
+    {
+      "index": 652,
+      "start": 2117.2,
+      "end": 2120.069,
+      "duration": 2.869,
+      "text": "X how does it change because of Y well"
+    },
+    {
+      "index": 653,
+      "start": 2120.079,
+      "end": 2122.31,
+      "duration": 2.231,
+      "text": "partial G partial y times the rate of"
+    },
+    {
+      "index": 654,
+      "start": 2122.32,
+      "end": 2124.31,
+      "duration": 1.99,
+      "text": "change of Y but of course if you're"
+    },
+    {
+      "index": 655,
+      "start": 2124.32,
+      "end": 2125.79,
+      "duration": 1.47,
+      "text": "smarter than me then you don't need to"
+    },
+    {
+      "index": 656,
+      "start": 2125.8,
+      "end": 2127.349,
+      "duration": 1.549,
+      "text": "actually write this one because Y is"
+    },
+    {
+      "index": 657,
+      "start": 2127.359,
+      "end": 2129.91,
+      "duration": 2.551,
+      "text": "held"
+    },
+    {
+      "index": 658,
+      "start": 2132.27,
+      "end": 2132.28,
+      "duration": 0.01,
+      "text": "constant and then there's the rate of"
+    },
+    {
+      "index": 659,
+      "start": 2132.28,
+      "end": 2136.99,
+      "duration": 4.71,
+      "text": "change because Z"
+    },
+    {
+      "index": 660,
+      "start": 2139.87,
+      "end": 2139.88,
+      "duration": 0.01,
+      "text": "changes and how quickly Z changes here"
+    },
+    {
+      "index": 661,
+      "start": 2139.88,
+      "end": 2142.55,
+      "duration": 2.67,
+      "text": "of course is"
+    },
+    {
+      "index": 662,
+      "start": 2142.56,
+      "end": 2149.63,
+      "duration": 7.07,
+      "text": "one okay so out of this you get"
+    },
+    {
+      "index": 663,
+      "start": 2152.349,
+      "end": 2152.359,
+      "duration": 0.01,
+      "text": "that well I'm tired of writing partial G"
+    },
+    {
+      "index": 664,
+      "start": 2152.359,
+      "end": 2154.91,
+      "duration": 2.551,
+      "text": "partial X let me just write G sub x"
+    },
+    {
+      "index": 665,
+      "start": 2154.92,
+      "end": 2159.19,
+      "duration": 4.27,
+      "text": "times partial X partial Z y constant"
+    },
+    {
+      "index": 666,
+      "start": 2159.2,
+      "end": 2164.03,
+      "duration": 4.83,
+      "text": "plus G"
+    },
+    {
+      "index": 667,
+      "start": 2167.55,
+      "end": 2167.56,
+      "duration": 0.01,
+      "text": "subz okay and now we found how X depends"
+    },
+    {
+      "index": 668,
+      "start": 2167.56,
+      "end": 2169.79,
+      "duration": 2.23,
+      "text": "on"
+    },
+    {
+      "index": 669,
+      "start": 2174.71,
+      "end": 2174.72,
+      "duration": 0.01,
+      "text": "Z partial X partial Z with Y constant is"
+    },
+    {
+      "index": 670,
+      "start": 2174.72,
+      "end": 2178.15,
+      "duration": 3.43,
+      "text": "netive G subz over G"
+    },
+    {
+      "index": 671,
+      "start": 2178.16,
+      "end": 2181.47,
+      "duration": 3.31,
+      "text": "subx now we plug this into that and we"
+    },
+    {
+      "index": 672,
+      "start": 2181.48,
+      "end": 2186.19,
+      "duration": 4.71,
+      "text": "get our"
+    },
+    {
+      "index": 673,
+      "start": 2189.55,
+      "end": 2189.56,
+      "duration": 0.01,
+      "text": "answer guess it go all the way up"
+    },
+    {
+      "index": 674,
+      "start": 2189.56,
+      "end": 2193.109,
+      "duration": 3.549,
+      "text": "here okay and then we get the answer I'm"
+    },
+    {
+      "index": 675,
+      "start": 2193.119,
+      "end": 2206.03,
+      "duration": 12.911,
+      "text": "not going to well I guess I can write it"
+    },
+    {
+      "index": 676,
+      "start": 2210.15,
+      "end": 2210.16,
+      "duration": 0.01,
+      "text": "again so that was partial F partial x"
+    },
+    {
+      "index": 677,
+      "start": 2210.16,
+      "end": 2214.39,
+      "duration": 4.23,
+      "text": "times this guyus G subz over G"
+    },
+    {
+      "index": 678,
+      "start": 2214.4,
+      "end": 2218.91,
+      "duration": 4.51,
+      "text": "subx Plus partial F over partial Z"
+    },
+    {
+      "index": 679,
+      "start": 2218.92,
+      "end": 2221.51,
+      "duration": 2.59,
+      "text": "and you can observe that this is exactly"
+    },
+    {
+      "index": 680,
+      "start": 2221.52,
+      "end": 2224.069,
+      "duration": 2.549,
+      "text": "the same formula that we had over"
+    },
+    {
+      "index": 681,
+      "start": 2224.079,
+      "end": 2226.349,
+      "duration": 2.27,
+      "text": "here in fact let's compare these two"
+    },
+    {
+      "index": 682,
+      "start": 2226.359,
+      "end": 2228.75,
+      "duration": 2.391,
+      "text": "methods side by side I claim we did"
+    },
+    {
+      "index": 683,
+      "start": 2228.76,
+      "end": 2230.75,
+      "duration": 1.99,
+      "text": "exactly the same thing just with"
+    },
+    {
+      "index": 684,
+      "start": 2230.76,
+      "end": 2231.79,
+      "duration": 1.03,
+      "text": "different"
+    },
+    {
+      "index": 685,
+      "start": 2231.8,
+      "end": 2233.87,
+      "duration": 2.07,
+      "text": "notations see if you take the"
+    },
+    {
+      "index": 686,
+      "start": 2233.88,
+      "end": 2236.95,
+      "duration": 3.07,
+      "text": "differential of F and you divide it by"
+    },
+    {
+      "index": 687,
+      "start": 2236.96,
+      "end": 2238.95,
+      "duration": 1.99,
+      "text": "DZ in this situation where Y is held"
+    },
+    {
+      "index": 688,
+      "start": 2238.96,
+      "end": 2241.71,
+      "duration": 2.75,
+      "text": "constant and so on you get exactly this"
+    },
+    {
+      "index": 689,
+      "start": 2241.72,
+      "end": 2244.829,
+      "duration": 3.109,
+      "text": "chain R up there right that chain roll"
+    },
+    {
+      "index": 690,
+      "start": 2244.839,
+      "end": 2250.15,
+      "duration": 5.311,
+      "text": "up there is this guy DF divided by DZ"
+    },
+    {
+      "index": 691,
+      "start": 2250.16,
+      "end": 2252.43,
+      "duration": 2.27,
+      "text": "with yeld"
+    },
+    {
+      "index": 692,
+      "start": 2252.44,
+      "end": 2256.19,
+      "duration": 3.75,
+      "text": "constant and the term involving Dy was"
+    },
+    {
+      "index": 693,
+      "start": 2256.2,
+      "end": 2258.63,
+      "duration": 2.43,
+      "text": "replaced by zero on both sides because"
+    },
+    {
+      "index": 694,
+      "start": 2258.64,
+      "end": 2261.47,
+      "duration": 2.83,
+      "text": "we knew actually that Y is held"
+    },
+    {
+      "index": 695,
+      "start": 2261.48,
+      "end": 2263.95,
+      "duration": 2.47,
+      "text": "constant now the real difficulty in both"
+    },
+    {
+      "index": 696,
+      "start": 2263.96,
+      "end": 2266.95,
+      "duration": 2.99,
+      "text": "cases comes from DX and what we do about"
+    },
+    {
+      "index": 697,
+      "start": 2266.96,
+      "end": 2269.51,
+      "duration": 2.55,
+      "text": "DX is we use the constraint so here we"
+    },
+    {
+      "index": 698,
+      "start": 2269.52,
+      "end": 2273.51,
+      "duration": 3.99,
+      "text": "use it by writing dgal Z here we write"
+    },
+    {
+      "index": 699,
+      "start": 2273.52,
+      "end": 2275.27,
+      "duration": 1.75,
+      "text": "the chain rule for G that's the same"
+    },
+    {
+      "index": 700,
+      "start": 2275.28,
+      "end": 2279.03,
+      "duration": 3.75,
+      "text": "thing just divided by DZ with yeld"
+    },
+    {
+      "index": 701,
+      "start": 2279.04,
+      "end": 2282.79,
+      "duration": 3.75,
+      "text": "constant okay so this formula or that"
+    },
+    {
+      "index": 702,
+      "start": 2282.8,
+      "end": 2286.67,
+      "duration": 3.87,
+      "text": "formula are the same just dividing by DZ"
+    },
+    {
+      "index": 703,
+      "start": 2286.68,
+      "end": 2289.589,
+      "duration": 2.909,
+      "text": "with yeld constant and then in both"
+    },
+    {
+      "index": 704,
+      "start": 2289.599,
+      "end": 2292.47,
+      "duration": 2.871,
+      "text": "cases we used that to solve for"
+    },
+    {
+      "index": 705,
+      "start": 2292.48,
+      "end": 2295.43,
+      "duration": 2.95,
+      "text": "DX and then we plugged into the formula"
+    },
+    {
+      "index": 706,
+      "start": 2295.44,
+      "end": 2298.47,
+      "duration": 3.03,
+      "text": "for DF to express DF DZ or partial F"
+    },
+    {
+      "index": 707,
+      "start": 2298.48,
+      "end": 2303.03,
+      "duration": 4.55,
+      "text": "partial Z with Y held"
+    },
+    {
+      "index": 708,
+      "start": 2304.99,
+      "end": 2305.0,
+      "duration": 0.01,
+      "text": "constant okay so the two methods are"
+    },
+    {
+      "index": 709,
+      "start": 2305.0,
+      "end": 2307.67,
+      "duration": 2.67,
+      "text": "pretty much the same quick pull who"
+    },
+    {
+      "index": 710,
+      "start": 2307.68,
+      "end": 2309.349,
+      "duration": 1.669,
+      "text": "prefers this"
+    },
+    {
+      "index": 711,
+      "start": 2309.359,
+      "end": 2311.95,
+      "duration": 2.591,
+      "text": "one who prefers that"
+    },
+    {
+      "index": 712,
+      "start": 2311.96,
+      "end": 2314.63,
+      "duration": 2.67,
+      "text": "one okay uh majority vote seems to be"
+    },
+    {
+      "index": 713,
+      "start": 2314.64,
+      "end": 2316.109,
+      "duration": 1.469,
+      "text": "for differentials but doesn't mean that"
+    },
+    {
+      "index": 714,
+      "start": 2316.119,
+      "end": 2318.19,
+      "duration": 2.071,
+      "text": "it's better okay both are"
+    },
+    {
+      "index": 715,
+      "start": 2318.2,
+      "end": 2321.75,
+      "duration": 3.55,
+      "text": "fine you can use whichever one you want"
+    },
+    {
+      "index": 716,
+      "start": 2321.76,
+      "end": 2325.75,
+      "duration": 3.99,
+      "text": "but you should give both a"
+    },
+    {
+      "index": 717,
+      "start": 2329.069,
+      "end": 2329.079,
+      "duration": 0.01,
+      "text": "try okay any"
+    },
+    {
+      "index": 718,
+      "start": 2329.079,
+      "end": 2332.589,
+      "duration": 3.51,
+      "text": "questions"
+    },
+    {
+      "index": 719,
+      "start": 2339.95,
+      "end": 2339.96,
+      "duration": 0.01,
+      "text": "use uh yes thank you I forgot to mention"
+    },
+    {
+      "index": 720,
+      "start": 2339.96,
+      "end": 2342.87,
+      "duration": 2.91,
+      "text": "it uh where did that go I think I've"
+    },
+    {
+      "index": 721,
+      "start": 2342.88,
+      "end": 2352.069,
+      "duration": 9.189,
+      "text": "erased that part so yes we need to"
+    },
+    {
+      "index": 722,
+      "start": 2359.069,
+      "end": 2359.079,
+      "duration": 0.01,
+      "text": "derivatives okay the pretty much the"
+    },
+    {
+      "index": 723,
+      "start": 2359.079,
+      "end": 2361.03,
+      "duration": 1.951,
+      "text": "only thing to remember about them is"
+    },
+    {
+      "index": 724,
+      "start": 2361.04,
+      "end": 2363.95,
+      "duration": 2.91,
+      "text": "that the fds in the direction of some"
+    },
+    {
+      "index": 725,
+      "start": 2363.96,
+      "end": 2367.67,
+      "duration": 3.71,
+      "text": "unit Vector U is just the gradient f"
+    },
+    {
+      "index": 726,
+      "start": 2367.68,
+      "end": 2368.91,
+      "duration": 1.23,
+      "text": "with"
+    },
+    {
+      "index": 727,
+      "start": 2368.92,
+      "end": 2372.19,
+      "duration": 3.27,
+      "text": "you so that's you know pretty much all"
+    },
+    {
+      "index": 728,
+      "start": 2372.2,
+      "end": 2373.829,
+      "duration": 1.629,
+      "text": "we know about"
+    },
+    {
+      "index": 729,
+      "start": 2373.839,
+      "end": 2376.63,
+      "duration": 2.791,
+      "text": "them um any other topics that I forgot"
+    },
+    {
+      "index": 730,
+      "start": 2376.64,
+      "end": 2378.55,
+      "duration": 1.91,
+      "text": "to"
+    },
+    {
+      "index": 731,
+      "start": 2378.56,
+      "end": 2380.55,
+      "duration": 1.99,
+      "text": "list"
+    },
+    {
+      "index": 732,
+      "start": 2380.56,
+      "end": 2382.829,
+      "duration": 2.269,
+      "text": "no"
+    },
+    {
+      "index": 733,
+      "start": 2382.839,
+      "end": 2385.87,
+      "duration": 3.031,
+      "text": "yes at time can I erase three boards at"
+    },
+    {
+      "index": 734,
+      "start": 2385.88,
+      "end": 2391.63,
+      "duration": 5.75,
+      "text": "a time no I would need three hands to do"
+    },
+    {
+      "index": 735,
+      "start": 2393.15,
+      "end": 2393.16,
+      "duration": 0.01,
+      "text": "that"
+    },
+    {
+      "index": 736,
+      "start": 2393.16,
+      "end": 2395.95,
+      "duration": 2.79,
+      "text": "okay"
+    },
+    {
+      "index": 737,
+      "start": 2395.96,
+      "end": 2402.109,
+      "duration": 6.149,
+      "text": "um let's see"
+    },
+    {
+      "index": 738,
+      "start": 2405.349,
+      "end": 2405.359,
+      "duration": 0.01,
+      "text": "okay I think what we should do for is"
+    },
+    {
+      "index": 739,
+      "start": 2405.359,
+      "end": 2407.23,
+      "duration": 1.871,
+      "text": "look quickly at you know the practice"
+    },
+    {
+      "index": 740,
+      "start": 2407.24,
+      "end": 2409.71,
+      "duration": 2.47,
+      "text": "test I mean given the time you will"
+    },
+    {
+      "index": 741,
+      "start": 2409.72,
+      "end": 2412.589,
+      "duration": 2.869,
+      "text": "mostly have to think about it yourselves"
+    },
+    {
+      "index": 742,
+      "start": 2412.599,
+      "end": 2413.829,
+      "duration": 1.23,
+      "text": "but"
+    },
+    {
+      "index": 743,
+      "start": 2413.839,
+      "end": 2416.19,
+      "duration": 2.351,
+      "text": "um so hopefully you have a copy of a"
+    },
+    {
+      "index": 744,
+      "start": 2416.2,
+      "end": 2417.87,
+      "duration": 1.67,
+      "text": "practice"
+    },
+    {
+      "index": 745,
+      "start": 2417.88,
+      "end": 2422.829,
+      "duration": 4.949,
+      "text": "exam oh yes okay so let's look at the"
+    },
+    {
+      "index": 746,
+      "start": 2422.839,
+      "end": 2425.829,
+      "duration": 2.99,
+      "text": "second so the first problem is a simple"
+    },
+    {
+      "index": 747,
+      "start": 2425.839,
+      "end": 2427.349,
+      "duration": 1.51,
+      "text": "problem find the gradient find"
+    },
+    {
+      "index": 748,
+      "start": 2427.359,
+      "end": 2428.99,
+      "duration": 1.631,
+      "text": "approximation formula hopefully you know"
+    },
+    {
+      "index": 749,
+      "start": 2429.0,
+      "end": 2431.43,
+      "duration": 2.43,
+      "text": "how to do that the second problem is one"
+    },
+    {
+      "index": 750,
+      "start": 2431.44,
+      "end": 2433.349,
+      "duration": 1.909,
+      "text": "about trading a contour plot and so"
+    },
+    {
+      "index": 751,
+      "start": 2433.359,
+      "end": 2435.309,
+      "duration": 1.95,
+      "text": "before I let you go for the weekend I"
+    },
+    {
+      "index": 752,
+      "start": 2435.319,
+      "end": 2437.23,
+      "duration": 1.911,
+      "text": "want to make sure that you actually know"
+    },
+    {
+      "index": 753,
+      "start": 2437.24,
+      "end": 2441.95,
+      "duration": 4.71,
+      "text": "how to read a contour"
+    },
+    {
+      "index": 754,
+      "start": 2450.55,
+      "end": 2450.56,
+      "duration": 0.01,
+      "text": "so one thing I should first mention"
+    },
+    {
+      "index": 755,
+      "start": 2450.56,
+      "end": 2452.829,
+      "duration": 2.269,
+      "text": "is you know this problem asks you to"
+    },
+    {
+      "index": 756,
+      "start": 2452.839,
+      "end": 2454.51,
+      "duration": 1.671,
+      "text": "estimate partial derivatives by reading"
+    },
+    {
+      "index": 757,
+      "start": 2454.52,
+      "end": 2456.19,
+      "duration": 1.67,
+      "text": "a contour plot we haven't done that so"
+    },
+    {
+      "index": 758,
+      "start": 2456.2,
+      "end": 2457.67,
+      "duration": 1.47,
+      "text": "that won't be actually on the test will"
+    },
+    {
+      "index": 759,
+      "start": 2457.68,
+      "end": 2459.99,
+      "duration": 2.31,
+      "text": "be doing qualitative questions like what"
+    },
+    {
+      "index": 760,
+      "start": 2460.0,
+      "end": 2461.63,
+      "duration": 1.63,
+      "text": "is the sign of the partial derivative is"
+    },
+    {
+      "index": 761,
+      "start": 2461.64,
+      "end": 2464.71,
+      "duration": 3.07,
+      "text": "it zero less than Zer more than zero you"
+    },
+    {
+      "index": 762,
+      "start": 2464.72,
+      "end": 2466.27,
+      "duration": 1.55,
+      "text": "don't need to bring a ruler to estimate"
+    },
+    {
+      "index": 763,
+      "start": 2466.28,
+      "end": 2468.309,
+      "duration": 2.029,
+      "text": "partial derivatives in the way that this"
+    },
+    {
+      "index": 764,
+      "start": 2468.319,
+      "end": 2471.42,
+      "duration": 3.101,
+      "text": "problem asks you to"
+    },
+    {
+      "index": 765,
+      "start": 2471.43,
+      "end": 2473.04,
+      "duration": 1.61,
+      "text": "[Music]"
+    },
+    {
+      "index": 766,
+      "start": 2473.05,
+      "end": 2489.15,
+      "duration": 16.1,
+      "text": "[Applause]"
+    },
+    {
+      "index": 767,
+      "start": 2492.23,
+      "end": 2492.24,
+      "duration": 0.01,
+      "text": "okay I"
+    },
+    {
+      "index": 768,
+      "start": 2492.24,
+      "end": 2494.069,
+      "duration": 1.829,
+      "text": "guess"
+    },
+    {
+      "index": 769,
+      "start": 2494.079,
+      "end": 2497.55,
+      "duration": 3.471,
+      "text": "so okay so let's look at problem"
+    },
+    {
+      "index": 770,
+      "start": 2497.56,
+      "end": 2500.19,
+      "duration": 2.63,
+      "text": "2B problem 2B is asking you to find a"
+    },
+    {
+      "index": 771,
+      "start": 2500.2,
+      "end": 2503.109,
+      "duration": 2.909,
+      "text": "point at which H equals"
+    },
+    {
+      "index": 772,
+      "start": 2503.119,
+      "end": 2506.15,
+      "duration": 3.031,
+      "text": "2200 partial H partial x equals z and"
+    },
+    {
+      "index": 773,
+      "start": 2506.16,
+      "end": 2509.63,
+      "duration": 3.47,
+      "text": "partial H partial Y is less than zero so"
+    },
+    {
+      "index": 774,
+      "start": 2509.64,
+      "end": 2512.95,
+      "duration": 3.31,
+      "text": "let's try and see what is going on here"
+    },
+    {
+      "index": 775,
+      "start": 2512.96,
+      "end": 2515.109,
+      "duration": 2.149,
+      "text": "so a point where f equals"
+    },
+    {
+      "index": 776,
+      "start": 2515.119,
+      "end": 2517.51,
+      "duration": 2.391,
+      "text": "2200 well that should be probably on the"
+    },
+    {
+      "index": 777,
+      "start": 2517.52,
+      "end": 2519.63,
+      "duration": 2.11,
+      "text": "level curve that say is 2200 so I can"
+    },
+    {
+      "index": 778,
+      "start": 2519.64,
+      "end": 2520.95,
+      "duration": 1.31,
+      "text": "actually zoom"
+    },
+    {
+      "index": 779,
+      "start": 2520.96,
+      "end": 2522.87,
+      "duration": 1.91,
+      "text": "in"
+    },
+    {
+      "index": 780,
+      "start": 2522.88,
+      "end": 2526.91,
+      "duration": 4.03,
+      "text": "and here's here's the level"
+    },
+    {
+      "index": 781,
+      "start": 2530.99,
+      "end": 2531.0,
+      "duration": 0.01,
+      "text": "2200 okay now I want partial H partial X"
+    },
+    {
+      "index": 782,
+      "start": 2531.0,
+      "end": 2534.43,
+      "duration": 3.43,
+      "text": "to be zero that means if I change X"
+    },
+    {
+      "index": 783,
+      "start": 2534.44,
+      "end": 2536.91,
+      "duration": 2.47,
+      "text": "keeping y constant the value of H"
+    },
+    {
+      "index": 784,
+      "start": 2536.92,
+      "end": 2541.67,
+      "duration": 4.75,
+      "text": "doesn't change so which points on the"
+    },
+    {
+      "index": 785,
+      "start": 2541.68,
+      "end": 2545.79,
+      "duration": 4.11,
+      "text": "level curve satisfy that"
+    },
+    {
+      "index": 786,
+      "start": 2545.8,
+      "end": 2548.71,
+      "duration": 2.91,
+      "text": "property yeah the top and the bottom"
+    },
+    {
+      "index": 787,
+      "start": 2548.72,
+      "end": 2552.349,
+      "duration": 3.629,
+      "text": "okay if you here for example and you"
+    },
+    {
+      "index": 788,
+      "start": 2552.359,
+      "end": 2554.589,
+      "duration": 2.23,
+      "text": "move in the X"
+    },
+    {
+      "index": 789,
+      "start": 2554.599,
+      "end": 2556.79,
+      "duration": 2.191,
+      "text": "Direction well you see as you get to"
+    },
+    {
+      "index": 790,
+      "start": 2556.8,
+      "end": 2558.91,
+      "duration": 2.11,
+      "text": "there from the left the height first"
+    },
+    {
+      "index": 791,
+      "start": 2558.92,
+      "end": 2561.87,
+      "duration": 2.95,
+      "text": "increases and then decreases it goes for"
+    },
+    {
+      "index": 792,
+      "start": 2561.88,
+      "end": 2564.79,
+      "duration": 2.91,
+      "text": "a maximum at that point so at that point"
+    },
+    {
+      "index": 793,
+      "start": 2564.8,
+      "end": 2566.87,
+      "duration": 2.07,
+      "text": "the partial derivative is zero with"
+    },
+    {
+      "index": 794,
+      "start": 2566.88,
+      "end": 2572.03,
+      "duration": 5.15,
+      "text": "respect to X and same"
+    },
+    {
+      "index": 795,
+      "start": 2575.51,
+      "end": 2575.52,
+      "duration": 0.01,
+      "text": "here now we also we're also told and"
+    },
+    {
+      "index": 796,
+      "start": 2575.52,
+      "end": 2577.99,
+      "duration": 2.47,
+      "text": "let's find partial H partial y less than"
+    },
+    {
+      "index": 797,
+      "start": 2578.0,
+      "end": 2580.71,
+      "duration": 2.71,
+      "text": "zero so that means if we go north we"
+    },
+    {
+      "index": 798,
+      "start": 2580.72,
+      "end": 2582.39,
+      "duration": 1.67,
+      "text": "should go"
+    },
+    {
+      "index": 799,
+      "start": 2582.4,
+      "end": 2584.23,
+      "duration": 1.83,
+      "text": "down"
+    },
+    {
+      "index": 800,
+      "start": 2584.24,
+      "end": 2587.51,
+      "duration": 3.27,
+      "text": "well which one is it top or bottom top"
+    },
+    {
+      "index": 801,
+      "start": 2587.52,
+      "end": 2590.87,
+      "duration": 3.35,
+      "text": "top yes here if you go north then you go"
+    },
+    {
+      "index": 802,
+      "start": 2590.88,
+      "end": 2594.309,
+      "duration": 3.429,
+      "text": "from 2200 down to"
+    },
+    {
+      "index": 803,
+      "start": 2594.319,
+      "end": 2597.15,
+      "duration": 2.831,
+      "text": "2100 so this is"
+    },
+    {
+      "index": 804,
+      "start": 2597.16,
+      "end": 2600.19,
+      "duration": 3.03,
+      "text": "where the point"
+    },
+    {
+      "index": 805,
+      "start": 2600.2,
+      "end": 2602.589,
+      "duration": 2.389,
+      "text": "is so now the problem here was also"
+    },
+    {
+      "index": 806,
+      "start": 2602.599,
+      "end": 2604.67,
+      "duration": 2.071,
+      "text": "asking you to estimate partial H partial"
+    },
+    {
+      "index": 807,
+      "start": 2604.68,
+      "end": 2606.43,
+      "duration": 1.75,
+      "text": "Y and just if you're curious how you"
+    },
+    {
+      "index": 808,
+      "start": 2606.44,
+      "end": 2608.03,
+      "duration": 1.59,
+      "text": "would do that"
+    },
+    {
+      "index": 809,
+      "start": 2608.04,
+      "end": 2609.95,
+      "duration": 1.91,
+      "text": "well you would try to figure out how"
+    },
+    {
+      "index": 810,
+      "start": 2609.96,
+      "end": 2611.95,
+      "duration": 1.99,
+      "text": "long it takes before you reach the next"
+    },
+    {
+      "index": 811,
+      "start": 2611.96,
+      "end": 2615.43,
+      "duration": 3.47,
+      "text": "level curve okay and you see that so"
+    },
+    {
+      "index": 812,
+      "start": 2615.44,
+      "end": 2619.99,
+      "duration": 4.55,
+      "text": "here to go from here to"
+    },
+    {
+      "index": 813,
+      "start": 2624.87,
+      "end": 2624.88,
+      "duration": 0.01,
+      "text": "here so to go from Q to this new Point"
+    },
+    {
+      "index": 814,
+      "start": 2624.88,
+      "end": 2628.349,
+      "duration": 3.469,
+      "text": "say Q Prime the change in y while you'd"
+    },
+    {
+      "index": 815,
+      "start": 2628.359,
+      "end": 2633.349,
+      "duration": 4.99,
+      "text": "have to read the scale which was up down"
+    },
+    {
+      "index": 816,
+      "start": 2633.359,
+      "end": 2637.109,
+      "duration": 3.75,
+      "text": "here okay um that would be about"
+    },
+    {
+      "index": 817,
+      "start": 2637.119,
+      "end": 2639.39,
+      "duration": 2.271,
+      "text": "something like"
+    },
+    {
+      "index": 818,
+      "start": 2639.4,
+      "end": 2642.71,
+      "duration": 3.31,
+      "text": "300 what's the change in height when you"
+    },
+    {
+      "index": 819,
+      "start": 2642.72,
+      "end": 2644.75,
+      "duration": 2.03,
+      "text": "go from Q to Q Prime well you go down"
+    },
+    {
+      "index": 820,
+      "start": 2644.76,
+      "end": 2648.51,
+      "duration": 3.75,
+      "text": "from 2200 to 21100 that's about well"
+    },
+    {
+      "index": 821,
+      "start": 2648.52,
+      "end": 2649.63,
+      "duration": 1.11,
+      "text": "that's"
+    },
+    {
+      "index": 822,
+      "start": 2649.64,
+      "end": 2652.91,
+      "duration": 3.27,
+      "text": "actually minus 100"
+    },
+    {
+      "index": 823,
+      "start": 2652.92,
+      "end": 2657.99,
+      "duration": 5.07,
+      "text": "exactly okay and so Delta H over Delta Y"
+    },
+    {
+      "index": 824,
+      "start": 2658.0,
+      "end": 2660.069,
+      "duration": 2.069,
+      "text": "is about minus"
+    },
+    {
+      "index": 825,
+      "start": 2660.079,
+      "end": 2665.03,
+      "duration": 4.951,
+      "text": "1/3 well- 100 over 300 which is oops I'm"
+    },
+    {
+      "index": 826,
+      "start": 2665.04,
+      "end": 2669.27,
+      "duration": 4.23,
+      "text": "getting out of"
+    },
+    {
+      "index": 827,
+      "start": 2673.27,
+      "end": 2673.28,
+      "duration": 0.01,
+      "text": "minus 1/3 and that's the same I mean"
+    },
+    {
+      "index": 828,
+      "start": 2673.28,
+      "end": 2676.71,
+      "duration": 3.43,
+      "text": "that's an approximation for the partial"
+    },
+    {
+      "index": 829,
+      "start": 2676.72,
+      "end": 2679.27,
+      "duration": 2.55,
+      "text": "derivative okay so that's how you would"
+    },
+    {
+      "index": 830,
+      "start": 2679.28,
+      "end": 2681.829,
+      "duration": 2.549,
+      "text": "do"
+    },
+    {
+      "index": 831,
+      "start": 2685.43,
+      "end": 2685.44,
+      "duration": 0.01,
+      "text": "it now so okay let me go back"
+    },
+    {
+      "index": 832,
+      "start": 2685.44,
+      "end": 2689.03,
+      "duration": 3.59,
+      "text": "to other things so if you look at this"
+    },
+    {
+      "index": 833,
+      "start": 2689.04,
+      "end": 2691.069,
+      "duration": 2.029,
+      "text": "practice exam basically there's a bit of"
+    },
+    {
+      "index": 834,
+      "start": 2691.079,
+      "end": 2692.91,
+      "duration": 1.831,
+      "text": "everything and it's kind of you know"
+    },
+    {
+      "index": 835,
+      "start": 2692.92,
+      "end": 2695.109,
+      "duration": 2.189,
+      "text": "fairly representative of what might"
+    },
+    {
+      "index": 836,
+      "start": 2695.119,
+      "end": 2697.589,
+      "duration": 2.47,
+      "text": "happen um on Tuesday"
+    },
+    {
+      "index": 837,
+      "start": 2697.599,
+      "end": 2699.79,
+      "duration": 2.191,
+      "text": "so you know there will be a mix of easy"
+    },
+    {
+      "index": 838,
+      "start": 2699.8,
+      "end": 2702.39,
+      "duration": 2.59,
+      "text": "problems and of harder problems uh"
+    },
+    {
+      "index": 839,
+      "start": 2702.4,
+      "end": 2703.549,
+      "duration": 1.149,
+      "text": "expect something about you know"
+    },
+    {
+      "index": 840,
+      "start": 2703.559,
+      "end": 2705.589,
+      "duration": 2.03,
+      "text": "Computing gradients approximation stat"
+    },
+    {
+      "index": 841,
+      "start": 2705.599,
+      "end": 2707.75,
+      "duration": 2.151,
+      "text": "of change expect a problem about reading"
+    },
+    {
+      "index": 842,
+      "start": 2707.76,
+      "end": 2712.309,
+      "duration": 4.549,
+      "text": "a contour plot uh expect one about you"
+    },
+    {
+      "index": 843,
+      "start": 2712.319,
+      "end": 2714.71,
+      "duration": 2.391,
+      "text": "know a min max problem something about"
+    },
+    {
+      "index": 844,
+      "start": 2714.72,
+      "end": 2716.95,
+      "duration": 2.23,
+      "text": "lrange multipliers something about the"
+    },
+    {
+      "index": 845,
+      "start": 2716.96,
+      "end": 2718.47,
+      "duration": 1.51,
+      "text": "chain Rule and something about"
+    },
+    {
+      "index": 846,
+      "start": 2718.48,
+      "end": 2720.03,
+      "duration": 1.55,
+      "text": "constraint partial derivatives I mean"
+    },
+    {
+      "index": 847,
+      "start": 2720.04,
+      "end": 2721.63,
+      "duration": 1.59,
+      "text": "pretty much all the topics are going to"
+    },
+    {
+      "index": 848,
+      "start": 2721.64,
+      "end": 2724.599,
+      "duration": 2.959,
+      "text": "be there"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

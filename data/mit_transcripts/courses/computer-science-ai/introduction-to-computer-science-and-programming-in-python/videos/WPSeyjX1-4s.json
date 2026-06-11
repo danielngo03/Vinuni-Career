@@ -1,0 +1,8334 @@
+{
+  "video": {
+    "id": "WPSeyjX1-4s",
+    "title": "6. Recursion and Dictionaries",
+    "url": "https://www.youtube.com/watch?v=WPSeyjX1-4s",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2901,
+    "language": "en"
+  },
+  "segment_count": 1188,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.5,
+      "end": 2.51,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.51,
+      "end": 5.259,
+      "duration": 2.749,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 5.269,
+      "end": 7.509,
+      "duration": 2.24,
+      "text": "will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 7.519,
+      "end": 9.4,
+      "duration": 1.881,
+      "text": "offer high quality educational resources"
+    },
+    {
+      "index": 4,
+      "start": 9.41,
+      "end": 10.57,
+      "duration": 1.16,
+      "text": "for free"
+    },
+    {
+      "index": 5,
+      "start": 10.58,
+      "end": 12.85,
+      "duration": 2.27,
+      "text": "to make a donation or view additional"
+    },
+    {
+      "index": 6,
+      "start": 12.86,
+      "end": 15.07,
+      "duration": 2.21,
+      "text": "materials from hundreds of MIT courses"
+    },
+    {
+      "index": 7,
+      "start": 15.08,
+      "end": 31.19,
+      "duration": 16.11,
+      "text": "visit MIT opencourseware at ocw.mit.edu"
+    },
+    {
+      "index": 8,
+      "start": 35.16,
+      "end": 35.17,
+      "duration": 0.01,
+      "text": "ladies and gentlemen I'd like to get"
+    },
+    {
+      "index": 9,
+      "start": 35.17,
+      "end": 38.76,
+      "duration": 3.59,
+      "text": "started my name is Eric Grimson I have"
+    },
+    {
+      "index": 10,
+      "start": 38.77,
+      "end": 40.71,
+      "duration": 1.94,
+      "text": "the privilege of serving as mi t--'s"
+    },
+    {
+      "index": 11,
+      "start": 40.72,
+      "end": 42.54,
+      "duration": 1.82,
+      "text": "chancellor for academic advancement you"
+    },
+    {
+      "index": 12,
+      "start": 42.55,
+      "end": 44.7,
+      "duration": 2.15,
+      "text": "can go look up what that means and like"
+    },
+    {
+      "index": 13,
+      "start": 44.71,
+      "end": 46.64,
+      "duration": 1.93,
+      "text": "John I'm a former head of course six and"
+    },
+    {
+      "index": 14,
+      "start": 46.65,
+      "end": 49.35,
+      "duration": 2.7,
+      "text": "today are it's hard this term with Anna"
+    },
+    {
+      "index": 15,
+      "start": 49.36,
+      "end": 50.61,
+      "duration": 1.25,
+      "text": "and John I'm going to be splitting the"
+    },
+    {
+      "index": 16,
+      "start": 50.62,
+      "end": 54.619,
+      "duration": 3.999,
+      "text": "lecture so I'm up today okay last time"
+    },
+    {
+      "index": 17,
+      "start": 54.629,
+      "end": 57.78,
+      "duration": 3.151,
+      "text": "and introduced the first of the compound"
+    },
+    {
+      "index": 18,
+      "start": 57.79,
+      "end": 61.74,
+      "duration": 3.95,
+      "text": "datatypes tuples and lists she sold Lots"
+    },
+    {
+      "index": 19,
+      "start": 61.75,
+      "end": 63.57,
+      "duration": 1.82,
+      "text": "showed lots of ways of manipulating them"
+    },
+    {
+      "index": 20,
+      "start": 63.58,
+      "end": 65.31,
+      "duration": 1.73,
+      "text": "lots of built-in things for manipulating"
+    },
+    {
+      "index": 21,
+      "start": 65.32,
+      "end": 67.649,
+      "duration": 2.329,
+      "text": "those structures in the key difference"
+    },
+    {
+      "index": 22,
+      "start": 67.659,
+      "end": 69.63,
+      "duration": 1.971,
+      "text": "between the two of them was that tuples"
+    },
+    {
+      "index": 23,
+      "start": 69.64,
+      "end": 71.82,
+      "duration": 2.18,
+      "text": "were immutable meaning you could not"
+    },
+    {
+      "index": 24,
+      "start": 71.83,
+      "end": 74.25,
+      "duration": 2.42,
+      "text": "change them lists were mutable they"
+    },
+    {
+      "index": 25,
+      "start": 74.26,
+      "end": 76.74,
+      "duration": 2.48,
+      "text": "could be changed or mutated and that led"
+    },
+    {
+      "index": 26,
+      "start": 76.75,
+      "end": 78.359,
+      "duration": 1.609,
+      "text": "to both some nice power and some"
+    },
+    {
+      "index": 27,
+      "start": 78.369,
+      "end": 80.64,
+      "duration": 2.271,
+      "text": "opportunities for challenges and in"
+    },
+    {
+      "index": 28,
+      "start": 80.65,
+      "end": 81.99,
+      "duration": 1.34,
+      "text": "particular she showed you things like"
+    },
+    {
+      "index": 29,
+      "start": 82.0,
+      "end": 84.33,
+      "duration": 2.33,
+      "text": "aliasing where you could have two names"
+    },
+    {
+      "index": 30,
+      "start": 84.34,
+      "end": 86.31,
+      "duration": 1.97,
+      "text": "pointing to the same list structure and"
+    },
+    {
+      "index": 31,
+      "start": 86.32,
+      "end": 88.53,
+      "duration": 2.21,
+      "text": "because of that you could change the"
+    },
+    {
+      "index": 32,
+      "start": 88.54,
+      "end": 90.45,
+      "duration": 1.91,
+      "text": "contents of one it would change the"
+    },
+    {
+      "index": 33,
+      "start": 90.46,
+      "end": 92.85,
+      "duration": 2.39,
+      "text": "appearance of the contents of the other"
+    },
+    {
+      "index": 34,
+      "start": 92.86,
+      "end": 94.41,
+      "duration": 1.55,
+      "text": "and that leads to some nice challenges"
+    },
+    {
+      "index": 35,
+      "start": 94.42,
+      "end": 96.6,
+      "duration": 2.18,
+      "text": "so the side-effects immutability or one"
+    },
+    {
+      "index": 36,
+      "start": 96.61,
+      "end": 97.89,
+      "duration": 1.28,
+      "text": "of the things you're going to see both"
+    },
+    {
+      "index": 37,
+      "start": 97.9,
+      "end": 99.96,
+      "duration": 2.06,
+      "text": "as a plus and a minus as we go through"
+    },
+    {
+      "index": 38,
+      "start": 99.97,
+      "end": 104.7,
+      "duration": 4.73,
+      "text": "the course today we're going to take a"
+    },
+    {
+      "index": 39,
+      "start": 104.71,
+      "end": 106.02,
+      "duration": 1.31,
+      "text": "different direction for a little while"
+    },
+    {
+      "index": 40,
+      "start": 106.03,
+      "end": 107.34,
+      "duration": 1.31,
+      "text": "we're going to talk about recursion"
+    },
+    {
+      "index": 41,
+      "start": 107.35,
+      "end": 109.77,
+      "duration": 2.42,
+      "text": "there's a powerful and wonderful tool"
+    },
+    {
+      "index": 42,
+      "start": 109.78,
+      "end": 113.04,
+      "duration": 3.26,
+      "text": "for solving computational problems we're"
+    },
+    {
+      "index": 43,
+      "start": 113.05,
+      "end": 114.56,
+      "duration": 1.51,
+      "text": "then going to look at another type of"
+    },
+    {
+      "index": 44,
+      "start": 114.57,
+      "end": 117.33,
+      "duration": 2.76,
+      "text": "compound data structure a dictionary"
+    },
+    {
+      "index": 45,
+      "start": 117.34,
+      "end": 119.88,
+      "duration": 2.54,
+      "text": "which is also mutable and then we're"
+    },
+    {
+      "index": 46,
+      "start": 119.89,
+      "end": 121.41,
+      "duration": 1.52,
+      "text": "going to put the two pieces together and"
+    },
+    {
+      "index": 47,
+      "start": 121.42,
+      "end": 123.09,
+      "duration": 1.67,
+      "text": "show how together they actually give you"
+    },
+    {
+      "index": 48,
+      "start": 123.1,
+      "end": 124.89,
+      "duration": 1.79,
+      "text": "a lot of power for solving some really"
+    },
+    {
+      "index": 49,
+      "start": 124.9,
+      "end": 128.55,
+      "duration": 3.65,
+      "text": "neat problems very effectively but I"
+    },
+    {
+      "index": 50,
+      "start": 128.56,
+      "end": 132.089,
+      "duration": 3.529,
+      "text": "want to start with recursion perhaps one"
+    },
+    {
+      "index": 51,
+      "start": 132.099,
+      "end": 133.5,
+      "duration": 1.401,
+      "text": "of the most mysterious at least"
+    },
+    {
+      "index": 52,
+      "start": 133.51,
+      "end": 135.42,
+      "duration": 1.91,
+      "text": "according to programmers concepts in"
+    },
+    {
+      "index": 53,
+      "start": 135.43,
+      "end": 137.07,
+      "duration": 1.64,
+      "text": "computer science one that leads to lots"
+    },
+    {
+      "index": 54,
+      "start": 137.08,
+      "end": 138.78,
+      "duration": 1.7,
+      "text": "of really bad computer science jokes"
+    },
+    {
+      "index": 55,
+      "start": 138.79,
+      "end": 140.82,
+      "duration": 2.03,
+      "text": "actually all computer science jokes are"
+    },
+    {
+      "index": 56,
+      "start": 140.83,
+      "end": 143.55,
+      "duration": 2.72,
+      "text": "bad but these are particularly bad so"
+    },
+    {
+      "index": 57,
+      "start": 143.56,
+      "end": 145.259,
+      "duration": 1.699,
+      "text": "let's start with the obvious question"
+    },
+    {
+      "index": 58,
+      "start": 145.269,
+      "end": 147.869,
+      "duration": 2.6,
+      "text": "what is recursion if you go to the"
+    },
+    {
+      "index": 59,
+      "start": 147.879,
+      "end": 150.35,
+      "duration": 2.471,
+      "text": "ultimate source of knowledge Wikipedia"
+    },
+    {
+      "index": 60,
+      "start": 150.36,
+      "end": 153.6,
+      "duration": 3.24,
+      "text": "you get something that says in essence"
+    },
+    {
+      "index": 61,
+      "start": 153.61,
+      "end": 155.88,
+      "duration": 2.27,
+      "text": "recursion is the process of repeating"
+    },
+    {
+      "index": 62,
+      "start": 155.89,
+      "end": 160.17,
+      "duration": 4.28,
+      "text": "items in a self-similar way well that's"
+    },
+    {
+      "index": 63,
+      "start": 160.18,
+      "end": 161.37,
+      "duration": 1.19,
+      "text": "really helpful right"
+    },
+    {
+      "index": 64,
+      "start": 161.38,
+      "end": 163.14,
+      "duration": 1.76,
+      "text": "but we're going to see that idea because"
+    },
+    {
+      "index": 65,
+      "start": 163.15,
+      "end": 164.64,
+      "duration": 1.49,
+      "text": "recursion is we're going to see in a"
+    },
+    {
+      "index": 66,
+      "start": 164.65,
+      "end": 166.74,
+      "duration": 2.09,
+      "text": "second is the idea of taking a problem"
+    },
+    {
+      "index": 67,
+      "start": 166.75,
+      "end": 170.64,
+      "duration": 3.89,
+      "text": "and reducing it to a smaller version of"
+    },
+    {
+      "index": 68,
+      "start": 170.65,
+      "end": 173.4,
+      "duration": 2.75,
+      "text": "the same problem and using that idea to"
+    },
+    {
+      "index": 69,
+      "start": 173.41,
+      "end": 174.72,
+      "duration": 1.31,
+      "text": "actually tackle a bunch of really"
+    },
+    {
+      "index": 70,
+      "start": 174.73,
+      "end": 177.09,
+      "duration": 2.36,
+      "text": "interesting problems but recursion gets"
+    },
+    {
+      "index": 71,
+      "start": 177.1,
+      "end": 178.59,
+      "duration": 1.49,
+      "text": "used a lot of places so it's this idea"
+    },
+    {
+      "index": 72,
+      "start": 178.6,
+      "end": 180.27,
+      "duration": 1.67,
+      "text": "of using or repeating the idea of"
+    },
+    {
+      "index": 73,
+      "start": 180.28,
+      "end": 182.79,
+      "duration": 2.51,
+      "text": "multiple times so you know wouldn't it"
+    },
+    {
+      "index": 74,
+      "start": 182.8,
+      "end": 185.04,
+      "duration": 2.24,
+      "text": "be great if your 3d printer printed 3d"
+    },
+    {
+      "index": 75,
+      "start": 185.05,
+      "end": 187.2,
+      "duration": 2.15,
+      "text": "printers and you could just keep doing"
+    },
+    {
+      "index": 76,
+      "start": 187.21,
+      "end": 189.81,
+      "duration": 2.6,
+      "text": "that all the way along or one that's a"
+    },
+    {
+      "index": 77,
+      "start": 189.82,
+      "end": 191.19,
+      "duration": 1.37,
+      "text": "little more common it's actually got a"
+    },
+    {
+      "index": 78,
+      "start": 191.2,
+      "end": 193.14,
+      "duration": 1.94,
+      "text": "wonderful name is called Me's on a beam"
+    },
+    {
+      "index": 79,
+      "start": 193.15,
+      "end": 195.21,
+      "duration": 2.06,
+      "text": "in art sometimes referred to as the"
+    },
+    {
+      "index": 80,
+      "start": 195.22,
+      "end": 197.91,
+      "duration": 2.69,
+      "text": "droste effect pictures that have inside"
+    },
+    {
+      "index": 81,
+      "start": 197.92,
+      "end": 199.29,
+      "duration": 1.37,
+      "text": "them a picture of the picture which has"
+    },
+    {
+      "index": 82,
+      "start": 199.3,
+      "end": 201.06,
+      "duration": 1.76,
+      "text": "inside them a picture of the picture and"
+    },
+    {
+      "index": 83,
+      "start": 201.07,
+      "end": 203.31,
+      "duration": 2.24,
+      "text": "you get the idea and of course one of"
+    },
+    {
+      "index": 84,
+      "start": 203.32,
+      "end": 204.54,
+      "duration": 1.22,
+      "text": "the things you want to think about in"
+    },
+    {
+      "index": 85,
+      "start": 204.55,
+      "end": 206.01,
+      "duration": 1.46,
+      "text": "recursion is not to have it go on"
+    },
+    {
+      "index": 86,
+      "start": 206.02,
+      "end": 208.56,
+      "duration": 2.54,
+      "text": "infinitely and yes there are even light"
+    },
+    {
+      "index": 87,
+      "start": 208.57,
+      "end": 210.24,
+      "duration": 1.67,
+      "text": "bulb jokes about recursion if you can't"
+    },
+    {
+      "index": 88,
+      "start": 210.25,
+      "end": 212.01,
+      "duration": 1.76,
+      "text": "read it it says how many twists does it"
+    },
+    {
+      "index": 89,
+      "start": 212.02,
+      "end": 213.5,
+      "duration": 1.48,
+      "text": "take to screw in a light bulb"
+    },
+    {
+      "index": 90,
+      "start": 213.51,
+      "end": 216.11,
+      "duration": 2.6,
+      "text": "and it says if it's already screwed in"
+    },
+    {
+      "index": 91,
+      "start": 216.12,
+      "end": 219.63,
+      "duration": 3.51,
+      "text": "the answer is zero otherwise twist at"
+    },
+    {
+      "index": 92,
+      "start": 219.64,
+      "end": 221.85,
+      "duration": 2.21,
+      "text": "once ask me again add one to my answer"
+    },
+    {
+      "index": 93,
+      "start": 221.86,
+      "end": 224.7,
+      "duration": 2.84,
+      "text": "and that's actually a nice description"
+    },
+    {
+      "index": 94,
+      "start": 224.71,
+      "end": 227.22,
+      "duration": 2.51,
+      "text": "of recursion so let's look at it more"
+    },
+    {
+      "index": 95,
+      "start": 227.23,
+      "end": 231.18,
+      "duration": 3.95,
+      "text": "seriously what is recursion I want to"
+    },
+    {
+      "index": 96,
+      "start": 231.19,
+      "end": 233.72,
+      "duration": 2.53,
+      "text": "describe it both abstractly or"
+    },
+    {
+      "index": 97,
+      "start": 233.73,
+      "end": 237.24,
+      "duration": 3.51,
+      "text": "algorithmically and semantically or if"
+    },
+    {
+      "index": 98,
+      "start": 237.25,
+      "end": 239.48,
+      "duration": 2.23,
+      "text": "you like in terms of programming"
+    },
+    {
+      "index": 99,
+      "start": 239.49,
+      "end": 242.31,
+      "duration": 2.82,
+      "text": "abstractly this is a great instance of"
+    },
+    {
+      "index": 100,
+      "start": 242.32,
+      "end": 243.9,
+      "duration": 1.58,
+      "text": "something often called divide and"
+    },
+    {
+      "index": 101,
+      "start": 243.91,
+      "end": 246.36,
+      "duration": 2.45,
+      "text": "conquer or sometimes called decrease and"
+    },
+    {
+      "index": 102,
+      "start": 246.37,
+      "end": 249.06,
+      "duration": 2.69,
+      "text": "conquer and the idea of recursion is I"
+    },
+    {
+      "index": 103,
+      "start": 249.07,
+      "end": 250.92,
+      "duration": 1.85,
+      "text": "want to take a problem I'm trying to"
+    },
+    {
+      "index": 104,
+      "start": 250.93,
+      "end": 253.83,
+      "duration": 2.9,
+      "text": "solve and say how could I reduce it to a"
+    },
+    {
+      "index": 105,
+      "start": 253.84,
+      "end": 257.34,
+      "duration": 3.5,
+      "text": "simpler version of the same problem plus"
+    },
+    {
+      "index": 106,
+      "start": 257.35,
+      "end": 259.59,
+      "duration": 2.24,
+      "text": "some things I know how to do and then"
+    },
+    {
+      "index": 107,
+      "start": 259.6,
+      "end": 261.12,
+      "duration": 1.52,
+      "text": "that simpler version I'm going to reduce"
+    },
+    {
+      "index": 108,
+      "start": 261.13,
+      "end": 263.19,
+      "duration": 2.06,
+      "text": "it again and keep doing that until I get"
+    },
+    {
+      "index": 109,
+      "start": 263.2,
+      "end": 265.53,
+      "duration": 2.33,
+      "text": "down to a simple case that I can solve"
+    },
+    {
+      "index": 110,
+      "start": 265.54,
+      "end": 267.54,
+      "duration": 2.0,
+      "text": "directly that is how we're going to"
+    },
+    {
+      "index": 111,
+      "start": 267.55,
+      "end": 269.79,
+      "duration": 2.24,
+      "text": "think about designing solutions to"
+    },
+    {
+      "index": 112,
+      "start": 269.8,
+      "end": 274.05,
+      "duration": 4.25,
+      "text": "problems semantically this is typically"
+    },
+    {
+      "index": 113,
+      "start": 274.06,
+      "end": 275.31,
+      "duration": 1.25,
+      "text": "going to lead to the case where a"
+    },
+    {
+      "index": 114,
+      "start": 275.32,
+      "end": 278.43,
+      "duration": 3.11,
+      "text": "program a definition a function will"
+    },
+    {
+      "index": 115,
+      "start": 278.44,
+      "end": 281.82,
+      "duration": 3.38,
+      "text": "refer to itself in its body it will call"
+    },
+    {
+      "index": 116,
+      "start": 281.83,
+      "end": 285.15,
+      "duration": 3.32,
+      "text": "itself inside its body now if you"
+    },
+    {
+      "index": 117,
+      "start": 285.16,
+      "end": 286.35,
+      "duration": 1.19,
+      "text": "remember your high school geometry"
+    },
+    {
+      "index": 118,
+      "start": 286.36,
+      "end": 288.0,
+      "duration": 1.64,
+      "text": "teacher she probably would rap your"
+    },
+    {
+      "index": 119,
+      "start": 288.01,
+      "end": 289.35,
+      "duration": 1.34,
+      "text": "knuckles which you're not allowed to do"
+    },
+    {
+      "index": 120,
+      "start": 289.36,
+      "end": 291.15,
+      "duration": 1.79,
+      "text": "because then things like geometry you"
+    },
+    {
+      "index": 121,
+      "start": 291.16,
+      "end": 292.59,
+      "duration": 1.43,
+      "text": "can't define something in terms of"
+    },
+    {
+      "index": 122,
+      "start": 292.6,
+      "end": 294.719,
+      "duration": 2.119,
+      "text": "itself right that's not allowed in"
+    },
+    {
+      "index": 123,
+      "start": 294.729,
+      "end": 295.679,
+      "duration": 0.95,
+      "text": "recursion"
+    },
+    {
+      "index": 124,
+      "start": 295.689,
+      "end": 297.989,
+      "duration": 2.3,
+      "text": "is okay our definition of a procedure"
+    },
+    {
+      "index": 125,
+      "start": 297.999,
+      "end": 301.859,
+      "duration": 3.86,
+      "text": "can in its body call itself so long as I"
+    },
+    {
+      "index": 126,
+      "start": 301.869,
+      "end": 304.259,
+      "duration": 2.39,
+      "text": "have what I call a base case a way of"
+    },
+    {
+      "index": 127,
+      "start": 304.269,
+      "end": 307.619,
+      "duration": 3.35,
+      "text": "stopping that unwinding of the problems"
+    },
+    {
+      "index": 128,
+      "start": 307.629,
+      "end": 309.299,
+      "duration": 1.67,
+      "text": "when I get to something I can solve"
+    },
+    {
+      "index": 129,
+      "start": 309.309,
+      "end": 311.579,
+      "duration": 2.27,
+      "text": "directly and so what we're going to do"
+    },
+    {
+      "index": 130,
+      "start": 311.589,
+      "end": 313.559,
+      "duration": 1.97,
+      "text": "is avoid infinite recursion by ensuring"
+    },
+    {
+      "index": 131,
+      "start": 313.569,
+      "end": 315.089,
+      "duration": 1.52,
+      "text": "that we have at least one or more base"
+    },
+    {
+      "index": 132,
+      "start": 315.099,
+      "end": 317.219,
+      "duration": 2.12,
+      "text": "cases that are easy to solve and then"
+    },
+    {
+      "index": 133,
+      "start": 317.229,
+      "end": 319.139,
+      "duration": 1.91,
+      "text": "the basic idea is I just want to solve"
+    },
+    {
+      "index": 134,
+      "start": 319.149,
+      "end": 321.239,
+      "duration": 2.09,
+      "text": "the same problem on some simpler input"
+    },
+    {
+      "index": 135,
+      "start": 321.249,
+      "end": 323.309,
+      "duration": 2.06,
+      "text": "with the idea of the using that solution"
+    },
+    {
+      "index": 136,
+      "start": 323.319,
+      "end": 326.459,
+      "duration": 3.14,
+      "text": "to solve the larger problem okay let's"
+    },
+    {
+      "index": 137,
+      "start": 326.469,
+      "end": 328.679,
+      "duration": 2.21,
+      "text": "look at an example and to set the stage"
+    },
+    {
+      "index": 138,
+      "start": 328.689,
+      "end": 329.999,
+      "duration": 1.31,
+      "text": "I'm going to go back to something you've"
+    },
+    {
+      "index": 139,
+      "start": 330.009,
+      "end": 332.279,
+      "duration": 2.27,
+      "text": "been doing iterative algorithms for"
+    },
+    {
+      "index": 140,
+      "start": 332.289,
+      "end": 334.379,
+      "duration": 2.09,
+      "text": "loops while loops they naturally lead to"
+    },
+    {
+      "index": 141,
+      "start": 334.389,
+      "end": 335.939,
+      "duration": 1.55,
+      "text": "what we would call iterative algorithms"
+    },
+    {
+      "index": 142,
+      "start": 335.949,
+      "end": 338.549,
+      "duration": 2.6,
+      "text": "and these algorithms can be described as"
+    },
+    {
+      "index": 143,
+      "start": 338.559,
+      "end": 341.279,
+      "duration": 2.72,
+      "text": "being captured by a set of state"
+    },
+    {
+      "index": 144,
+      "start": 341.289,
+      "end": 343.859,
+      "duration": 2.57,
+      "text": "variables meaning a sum one or more"
+    },
+    {
+      "index": 145,
+      "start": 343.869,
+      "end": 345.959,
+      "duration": 2.09,
+      "text": "variables that tell us exactly the state"
+    },
+    {
+      "index": 146,
+      "start": 345.969,
+      "end": 348.299,
+      "duration": 2.33,
+      "text": "of the computation it's a lot of words"
+    },
+    {
+      "index": 147,
+      "start": 348.309,
+      "end": 349.409,
+      "duration": 1.1,
+      "text": "let's look at an example"
+    },
+    {
+      "index": 148,
+      "start": 349.419,
+      "end": 352.199,
+      "duration": 2.78,
+      "text": "I know it's trivial but bear with me"
+    },
+    {
+      "index": 149,
+      "start": 352.209,
+      "end": 353.699,
+      "duration": 1.49,
+      "text": "suppose I want to do integer"
+    },
+    {
+      "index": 150,
+      "start": 353.709,
+      "end": 354.989,
+      "duration": 1.28,
+      "text": "multiplication multiply two integers"
+    },
+    {
+      "index": 151,
+      "start": 354.999,
+      "end": 357.689,
+      "duration": 2.69,
+      "text": "together and all I have available to me"
+    },
+    {
+      "index": 152,
+      "start": 357.699,
+      "end": 360.269,
+      "duration": 2.57,
+      "text": "is addition so a times B is the same as"
+    },
+    {
+      "index": 153,
+      "start": 360.279,
+      "end": 363.959,
+      "duration": 3.68,
+      "text": "adding a to itself B times if I'm"
+    },
+    {
+      "index": 154,
+      "start": 363.969,
+      "end": 366.239,
+      "duration": 2.27,
+      "text": "thinking about this iteratively I could"
+    },
+    {
+      "index": 155,
+      "start": 366.249,
+      "end": 368.729,
+      "duration": 2.48,
+      "text": "capture this computation with two state"
+    },
+    {
+      "index": 156,
+      "start": 368.739,
+      "end": 371.399,
+      "duration": 2.66,
+      "text": "variables one would just call the"
+    },
+    {
+      "index": 157,
+      "start": 371.409,
+      "end": 373.709,
+      "duration": 2.3,
+      "text": "iteration number and it would be"
+    },
+    {
+      "index": 158,
+      "start": 373.719,
+      "end": 376.229,
+      "duration": 2.51,
+      "text": "something for example that starts at B"
+    },
+    {
+      "index": 159,
+      "start": 376.239,
+      "end": 379.379,
+      "duration": 3.14,
+      "text": "and each time through the loop reduces"
+    },
+    {
+      "index": 160,
+      "start": 379.389,
+      "end": 380.999,
+      "duration": 1.61,
+      "text": "by one and it will keep doing that until"
+    },
+    {
+      "index": 161,
+      "start": 381.009,
+      "end": 383.309,
+      "duration": 2.3,
+      "text": "I've counted down B times and I get down"
+    },
+    {
+      "index": 162,
+      "start": 383.319,
+      "end": 385.799,
+      "duration": 2.48,
+      "text": "to zero and at the same time I would"
+    },
+    {
+      "index": 163,
+      "start": 385.809,
+      "end": 387.749,
+      "duration": 1.94,
+      "text": "have some value the computation I might"
+    },
+    {
+      "index": 164,
+      "start": 387.759,
+      "end": 390.299,
+      "duration": 2.54,
+      "text": "call it result which starts at zero"
+    },
+    {
+      "index": 165,
+      "start": 390.309,
+      "end": 392.939,
+      "duration": 2.63,
+      "text": "first time through adds in a next time"
+    },
+    {
+      "index": 166,
+      "start": 392.949,
+      "end": 394.589,
+      "duration": 1.64,
+      "text": "through ads and a and it just keeps"
+    },
+    {
+      "index": 167,
+      "start": 394.599,
+      "end": 396.659,
+      "duration": 2.06,
+      "text": "track of how many things have I added up"
+    },
+    {
+      "index": 168,
+      "start": 396.669,
+      "end": 399.509,
+      "duration": 2.84,
+      "text": "until I get done and yeah I know you"
+    },
+    {
+      "index": 169,
+      "start": 399.519,
+      "end": 400.379,
+      "duration": 0.86,
+      "text": "could just do mult"
+    },
+    {
+      "index": 170,
+      "start": 400.389,
+      "end": 401.909,
+      "duration": 1.52,
+      "text": "but this is trying to get this idea of"
+    },
+    {
+      "index": 171,
+      "start": 401.919,
+      "end": 405.569,
+      "duration": 3.65,
+      "text": "how would I do this iteratively so I"
+    },
+    {
+      "index": 172,
+      "start": 405.579,
+      "end": 409.649,
+      "duration": 4.07,
+      "text": "might start off with I saying there be"
+    },
+    {
+      "index": 173,
+      "start": 409.659,
+      "end": 411.299,
+      "duration": 1.64,
+      "text": "things still to add and results as one"
+    },
+    {
+      "index": 174,
+      "start": 411.309,
+      "end": 413.459,
+      "duration": 2.15,
+      "text": "the first time through the loop I add in"
+    },
+    {
+      "index": 175,
+      "start": 413.469,
+      "end": 415.949,
+      "duration": 2.48,
+      "text": "a reduce I by one next time through the"
+    },
+    {
+      "index": 176,
+      "start": 415.959,
+      "end": 418.259,
+      "duration": 2.3,
+      "text": "loop I add in another a reduced I by one"
+    },
+    {
+      "index": 177,
+      "start": 418.269,
+      "end": 420.509,
+      "duration": 2.24,
+      "text": "and you get the idea I just walk down it"
+    },
+    {
+      "index": 178,
+      "start": 420.519,
+      "end": 422.309,
+      "duration": 1.79,
+      "text": "until eventually I got to the end of"
+    },
+    {
+      "index": 179,
+      "start": 422.319,
+      "end": 426.54,
+      "duration": 4.221,
+      "text": "this computation so we could write code"
+    },
+    {
+      "index": 180,
+      "start": 426.55,
+      "end": 427.98,
+      "duration": 1.43,
+      "text": "for this and actually it should be"
+    },
+    {
+      "index": 181,
+      "start": 427.99,
+      "end": 429.6,
+      "duration": 1.61,
+      "text": "pretty straightforward"
+    },
+    {
+      "index": 182,
+      "start": 429.61,
+      "end": 431.969,
+      "duration": 2.359,
+      "text": "there it is I'm going to call it multi"
+    },
+    {
+      "index": 183,
+      "start": 431.979,
+      "end": 435.3,
+      "duration": 3.321,
+      "text": "two takes in two arguments a and B and"
+    },
+    {
+      "index": 184,
+      "start": 435.31,
+      "end": 436.589,
+      "duration": 1.279,
+      "text": "I'm going to capture exactly that"
+    },
+    {
+      "index": 185,
+      "start": 436.599,
+      "end": 438.33,
+      "duration": 1.731,
+      "text": "process so notice what I do I set up"
+    },
+    {
+      "index": 186,
+      "start": 438.34,
+      "end": 440.52,
+      "duration": 2.18,
+      "text": "result internally is just a little"
+    },
+    {
+      "index": 187,
+      "start": 440.53,
+      "end": 441.959,
+      "duration": 1.429,
+      "text": "variable I'm going to use to accumulate"
+    },
+    {
+      "index": 188,
+      "start": 441.969,
+      "end": 445.98,
+      "duration": 4.011,
+      "text": "things and then there's the iteration as"
+    },
+    {
+      "index": 189,
+      "start": 445.99,
+      "end": 447.659,
+      "duration": 1.669,
+      "text": "long as B is greater than zero what do I"
+    },
+    {
+      "index": 190,
+      "start": 447.669,
+      "end": 447.929,
+      "duration": 0.26,
+      "text": "do"
+    },
+    {
+      "index": 191,
+      "start": 447.939,
+      "end": 452.64,
+      "duration": 4.701,
+      "text": "add a two result stored away reduce B by"
+    },
+    {
+      "index": 192,
+      "start": 452.65,
+      "end": 455.1,
+      "duration": 2.45,
+      "text": "one and I'll keep doing that until B"
+    },
+    {
+      "index": 193,
+      "start": 455.11,
+      "end": 457.29,
+      "duration": 2.18,
+      "text": "gets down to being equal to 0 in which"
+    },
+    {
+      "index": 194,
+      "start": 457.3,
+      "end": 460.79,
+      "duration": 3.49,
+      "text": "case I just return the result okay"
+    },
+    {
+      "index": 195,
+      "start": 460.8,
+      "end": 464.67,
+      "duration": 3.87,
+      "text": "simple solution now let's think about"
+    },
+    {
+      "index": 196,
+      "start": 464.68,
+      "end": 468.39,
+      "duration": 3.71,
+      "text": "this a different way gain a times B is"
+    },
+    {
+      "index": 197,
+      "start": 468.4,
+      "end": 470.6,
+      "duration": 2.2,
+      "text": "just adding a to itself B times and"
+    },
+    {
+      "index": 198,
+      "start": 470.61,
+      "end": 477.45,
+      "duration": 6.84,
+      "text": "that's the same as a plus adding a to"
+    },
+    {
+      "index": 199,
+      "start": 477.46,
+      "end": 481.32,
+      "duration": 3.86,
+      "text": "itself B minus 1 times ok that sounds"
+    },
+    {
+      "index": 200,
+      "start": 481.33,
+      "end": 483.209,
+      "duration": 1.879,
+      "text": "like leisure domain that sounds like"
+    },
+    {
+      "index": 201,
+      "start": 483.219,
+      "end": 485.129,
+      "duration": 1.91,
+      "text": "just playing with words but it's really"
+    },
+    {
+      "index": 202,
+      "start": 485.139,
+      "end": 489.749,
+      "duration": 4.61,
+      "text": "important because what is this ah that's"
+    },
+    {
+      "index": 203,
+      "start": 489.759,
+      "end": 493.649,
+      "duration": 3.89,
+      "text": "just a times B minus 1 by the definition"
+    },
+    {
+      "index": 204,
+      "start": 493.659,
+      "end": 496.17,
+      "duration": 2.511,
+      "text": "at the top point and I know you're"
+    },
+    {
+      "index": 205,
+      "start": 496.18,
+      "end": 498.209,
+      "duration": 2.029,
+      "text": "totally impressed but this is actually"
+    },
+    {
+      "index": 206,
+      "start": 498.219,
+      "end": 500.07,
+      "duration": 1.851,
+      "text": "really cool because what have I done"
+    },
+    {
+      "index": 207,
+      "start": 500.08,
+      "end": 503.129,
+      "duration": 3.049,
+      "text": "I've taken one problem this one up here"
+    },
+    {
+      "index": 208,
+      "start": 503.139,
+      "end": 506.159,
+      "duration": 3.02,
+      "text": "and I've reduced it to a simpler version"
+    },
+    {
+      "index": 209,
+      "start": 506.169,
+      "end": 508.439,
+      "duration": 2.27,
+      "text": "of the same problem plus some things I"
+    },
+    {
+      "index": 210,
+      "start": 508.449,
+      "end": 510.659,
+      "duration": 2.21,
+      "text": "know how to do and how would I solve"
+    },
+    {
+      "index": 211,
+      "start": 510.669,
+      "end": 515.339,
+      "duration": 4.67,
+      "text": "this same trick that's a times a times B"
+    },
+    {
+      "index": 212,
+      "start": 515.349,
+      "end": 517.35,
+      "duration": 2.001,
+      "text": "minus 2 I would just unwrap it one more"
+    },
+    {
+      "index": 213,
+      "start": 517.36,
+      "end": 519.029,
+      "duration": 1.669,
+      "text": "time and I would just keep doing that"
+    },
+    {
+      "index": 214,
+      "start": 519.039,
+      "end": 521.13,
+      "duration": 2.091,
+      "text": "until I get down to something I can"
+    },
+    {
+      "index": 215,
+      "start": 521.14,
+      "end": 523.589,
+      "duration": 2.449,
+      "text": "solve directly a base case and that's"
+    },
+    {
+      "index": 216,
+      "start": 523.599,
+      "end": 526.079,
+      "duration": 2.48,
+      "text": "easy when B is equal to 1 the answer is"
+    },
+    {
+      "index": 217,
+      "start": 526.089,
+      "end": 528.569,
+      "duration": 2.48,
+      "text": "just 8 or I could do one B is equal to 0"
+    },
+    {
+      "index": 218,
+      "start": 528.579,
+      "end": 532.439,
+      "duration": 3.86,
+      "text": "the answer is just 0 and there's code to"
+    },
+    {
+      "index": 219,
+      "start": 532.449,
+      "end": 536.519,
+      "duration": 4.07,
+      "text": "capture that different form wonderful"
+    },
+    {
+      "index": 220,
+      "start": 536.529,
+      "end": 538.23,
+      "duration": 1.701,
+      "text": "compact description what does it say it"
+    },
+    {
+      "index": 221,
+      "start": 538.24,
+      "end": 541.92,
+      "duration": 3.68,
+      "text": "says if I'm at the base case if B is"
+    },
+    {
+      "index": 222,
+      "start": 541.93,
+      "end": 544.97,
+      "duration": 3.04,
+      "text": "equal to 1 the answer is just a"
+    },
+    {
+      "index": 223,
+      "start": 544.98,
+      "end": 548.519,
+      "duration": 3.539,
+      "text": "otherwise I'm going to solve the same"
+    },
+    {
+      "index": 224,
+      "start": 548.529,
+      "end": 551.43,
+      "duration": 2.901,
+      "text": "problem with a smaller version and add"
+    },
+    {
+      "index": 225,
+      "start": 551.44,
+      "end": 554.939,
+      "duration": 3.499,
+      "text": "it to a and return that result and"
+    },
+    {
+      "index": 226,
+      "start": 554.949,
+      "end": 557.79,
+      "duration": 2.841,
+      "text": "that's nice crisp characterization of a"
+    },
+    {
+      "index": 227,
+      "start": 557.8,
+      "end": 560.04,
+      "duration": 2.24,
+      "text": "problem recursive definition that"
+    },
+    {
+      "index": 228,
+      "start": 560.05,
+      "end": 561.42,
+      "duration": 1.37,
+      "text": "reduces a problem to a simpler version"
+    },
+    {
+      "index": 229,
+      "start": 561.43,
+      "end": 563.65,
+      "duration": 2.22,
+      "text": "of the same problem"
+    },
+    {
+      "index": 230,
+      "start": 563.66,
+      "end": 567.669,
+      "duration": 4.009,
+      "text": "okay let's look at another example"
+    },
+    {
+      "index": 231,
+      "start": 567.679,
+      "end": 570.049,
+      "duration": 2.37,
+      "text": "classic problem in recursions to compute"
+    },
+    {
+      "index": 232,
+      "start": 570.059,
+      "end": 572.539,
+      "duration": 2.48,
+      "text": "factorial write n factorial or n bang if"
+    },
+    {
+      "index": 233,
+      "start": 572.549,
+      "end": 574.519,
+      "duration": 1.97,
+      "text": "you like and exclamation point is n"
+    },
+    {
+      "index": 234,
+      "start": 574.529,
+      "end": 576.53,
+      "duration": 2.001,
+      "text": "times n minus 1 all the way down to 1 so"
+    },
+    {
+      "index": 235,
+      "start": 576.54,
+      "end": 578.09,
+      "duration": 1.55,
+      "text": "it's the product of all the integers"
+    },
+    {
+      "index": 236,
+      "start": 578.1,
+      "end": 579.769,
+      "duration": 1.669,
+      "text": "from 1 up to n assuming n is a positive"
+    },
+    {
+      "index": 237,
+      "start": 579.779,
+      "end": 583.22,
+      "duration": 3.441,
+      "text": "integer so we can ask the same question"
+    },
+    {
+      "index": 238,
+      "start": 583.23,
+      "end": 584.629,
+      "duration": 1.399,
+      "text": "if I wanted to solve this recursively"
+    },
+    {
+      "index": 239,
+      "start": 584.639,
+      "end": 588.439,
+      "duration": 3.8,
+      "text": "what would the base case be well when n"
+    },
+    {
+      "index": 240,
+      "start": 588.449,
+      "end": 592.879,
+      "duration": 4.43,
+      "text": "is equal to 1 it's just 1 in the"
+    },
+    {
+      "index": 241,
+      "start": 592.889,
+      "end": 595.039,
+      "duration": 2.15,
+      "text": "recursive case we'll end times n minus 1"
+    },
+    {
+      "index": 242,
+      "start": 595.049,
+      "end": 596.78,
+      "duration": 1.731,
+      "text": "all the way down to 1 that's the same as"
+    },
+    {
+      "index": 243,
+      "start": 596.79,
+      "end": 602.449,
+      "duration": 5.659,
+      "text": "n times n minus 1 factorial so I can"
+    },
+    {
+      "index": 244,
+      "start": 602.459,
+      "end": 606.379,
+      "duration": 3.92,
+      "text": "easily write out the base case and I've"
+    },
+    {
+      "index": 245,
+      "start": 606.389,
+      "end": 608.449,
+      "duration": 2.06,
+      "text": "got a nice recursive solution to this"
+    },
+    {
+      "index": 246,
+      "start": 608.459,
+      "end": 614.449,
+      "duration": 5.99,
+      "text": "problem okay if you're like me and this"
+    },
+    {
+      "index": 247,
+      "start": 614.459,
+      "end": 615.739,
+      "duration": 1.28,
+      "text": "is the first time you see it it feels"
+    },
+    {
+      "index": 248,
+      "start": 615.749,
+      "end": 617.15,
+      "duration": 1.401,
+      "text": "like I've taken your head and twisted it"
+    },
+    {
+      "index": 249,
+      "start": 617.16,
+      "end": 618.799,
+      "duration": 1.639,
+      "text": "about 180 degrees I'm going to take it"
+    },
+    {
+      "index": 250,
+      "start": 618.809,
+      "end": 621.169,
+      "duration": 2.36,
+      "text": "another 180 degrees because you might be"
+    },
+    {
+      "index": 251,
+      "start": 621.179,
+      "end": 622.549,
+      "duration": 1.37,
+      "text": "saying well wait a minute how do you"
+    },
+    {
+      "index": 252,
+      "start": 622.559,
+      "end": 624.379,
+      "duration": 1.82,
+      "text": "know what really stops how do you know"
+    },
+    {
+      "index": 253,
+      "start": 624.389,
+      "end": 627.949,
+      "duration": 3.56,
+      "text": "it really terminates the computation so"
+    },
+    {
+      "index": 254,
+      "start": 627.959,
+      "end": 630.59,
+      "duration": 2.631,
+      "text": "let's look at it there's my definition"
+    },
+    {
+      "index": 255,
+      "start": 630.6,
+      "end": 633.859,
+      "duration": 3.259,
+      "text": "for fact short for factorial right fact"
+    },
+    {
+      "index": 256,
+      "start": 633.869,
+      "end": 635.84,
+      "duration": 1.971,
+      "text": "event is if n is equal to 1 return 1"
+    },
+    {
+      "index": 257,
+      "start": 635.85,
+      "end": 638.6,
+      "duration": 2.75,
+      "text": "otherwise return n times fact of n minus"
+    },
+    {
+      "index": 258,
+      "start": 638.61,
+      "end": 641.179,
+      "duration": 2.569,
+      "text": "1 and let's use the tools that Anna"
+    },
+    {
+      "index": 259,
+      "start": 641.189,
+      "end": 643.609,
+      "duration": 2.42,
+      "text": "talked about in terms of an environment"
+    },
+    {
+      "index": 260,
+      "start": 643.619,
+      "end": 645.229,
+      "duration": 1.61,
+      "text": "at a scope and think about what happens"
+    },
+    {
+      "index": 261,
+      "start": 645.239,
+      "end": 647.78,
+      "duration": 2.541,
+      "text": "here so when I read that in or I"
+    },
+    {
+      "index": 262,
+      "start": 647.79,
+      "end": 649.489,
+      "duration": 1.699,
+      "text": "evaluate that in Python it creates a"
+    },
+    {
+      "index": 263,
+      "start": 649.499,
+      "end": 653.21,
+      "duration": 3.711,
+      "text": "definition that binds the name fact to"
+    },
+    {
+      "index": 264,
+      "start": 653.22,
+      "end": 654.889,
+      "duration": 1.669,
+      "text": "some code just all of that stuff over"
+    },
+    {
+      "index": 265,
+      "start": 654.899,
+      "end": 656.449,
+      "duration": 1.55,
+      "text": "here plus the name for the formal"
+    },
+    {
+      "index": 266,
+      "start": 656.459,
+      "end": 658.819,
+      "duration": 2.36,
+      "text": "parameter hasn't done anything with it"
+    },
+    {
+      "index": 267,
+      "start": 658.829,
+      "end": 661.579,
+      "duration": 2.75,
+      "text": "yet and then I'm going to evaluate print"
+    },
+    {
+      "index": 268,
+      "start": 661.589,
+      "end": 665.419,
+      "duration": 3.83,
+      "text": "a fact of for print needs a value so it"
+    },
+    {
+      "index": 269,
+      "start": 665.429,
+      "end": 668.029,
+      "duration": 2.6,
+      "text": "has to get the value of factor 4 and we"
+    },
+    {
+      "index": 270,
+      "start": 668.039,
+      "end": 669.679,
+      "duration": 1.64,
+      "text": "know what that does it looks up fact"
+    },
+    {
+      "index": 271,
+      "start": 669.689,
+      "end": 673.939,
+      "duration": 4.25,
+      "text": "there it is its procedure definition so"
+    },
+    {
+      "index": 272,
+      "start": 673.949,
+      "end": 675.739,
+      "duration": 1.79,
+      "text": "it creates a new frame a new environment"
+    },
+    {
+      "index": 273,
+      "start": 675.749,
+      "end": 678.65,
+      "duration": 2.901,
+      "text": "it calls that procedure and inside that"
+    },
+    {
+      "index": 274,
+      "start": 678.66,
+      "end": 681.279,
+      "duration": 2.619,
+      "text": "frame the formal parameter for fact is"
+    },
+    {
+      "index": 275,
+      "start": 681.289,
+      "end": 684.559,
+      "duration": 3.27,
+      "text": "bound to the value passed in so n is"
+    },
+    {
+      "index": 276,
+      "start": 684.569,
+      "end": 688.46,
+      "duration": 3.891,
+      "text": "bound to 4 that frame is scoped by this"
+    },
+    {
+      "index": 277,
+      "start": 688.47,
+      "end": 690.379,
+      "duration": 1.909,
+      "text": "global frame meaning this meaning it's"
+    },
+    {
+      "index": 278,
+      "start": 690.389,
+      "end": 691.819,
+      "duration": 1.43,
+      "text": "going to inherit things in the global"
+    },
+    {
+      "index": 279,
+      "start": 691.829,
+      "end": 693.739,
+      "duration": 1.91,
+      "text": "frame and what does it do it says inside"
+    },
+    {
+      "index": 280,
+      "start": 693.749,
+      "end": 696.35,
+      "duration": 2.601,
+      "text": "of this frame evaluate the"
+    },
+    {
+      "index": 281,
+      "start": 696.36,
+      "end": 700.28,
+      "duration": 3.92,
+      "text": "body effect okay so it says is n equal"
+    },
+    {
+      "index": 282,
+      "start": 700.29,
+      "end": 703.22,
+      "duration": 2.93,
+      "text": "to 1 nope it's not it's 4"
+    },
+    {
+      "index": 283,
+      "start": 703.23,
+      "end": 705.56,
+      "duration": 2.33,
+      "text": "so in that case go to the else statement"
+    },
+    {
+      "index": 284,
+      "start": 705.57,
+      "end": 708.59,
+      "duration": 3.02,
+      "text": "and says Oh return n times factor then"
+    },
+    {
+      "index": 285,
+      "start": 708.6,
+      "end": 712.43,
+      "duration": 3.83,
+      "text": "and n is 4 fact of n minus 1 says I need"
+    },
+    {
+      "index": 286,
+      "start": 712.44,
+      "end": 717.019,
+      "duration": 4.579,
+      "text": "to return four times factor 3 4 is easy"
+    },
+    {
+      "index": 287,
+      "start": 717.029,
+      "end": 720.56,
+      "duration": 3.531,
+      "text": "multiplication is easy factor 3 is I"
+    },
+    {
+      "index": 288,
+      "start": 720.57,
+      "end": 723.11,
+      "duration": 2.54,
+      "text": "look up fact now I'm in this frame I"
+    },
+    {
+      "index": 289,
+      "start": 723.12,
+      "end": 725.06,
+      "duration": 1.94,
+      "text": "don't see fact there but I go up to that"
+    },
+    {
+      "index": 290,
+      "start": 725.07,
+      "end": 726.65,
+      "duration": 1.58,
+      "text": "frame there's the definition for fact"
+    },
+    {
+      "index": 291,
+      "start": 726.66,
+      "end": 728.449,
+      "duration": 1.789,
+      "text": "we're going to do the rest of this a"
+    },
+    {
+      "index": 292,
+      "start": 728.459,
+      "end": 729.829,
+      "duration": 1.37,
+      "text": "little more quickly what does that do it"
+    },
+    {
+      "index": 293,
+      "start": 729.839,
+      "end": 733.04,
+      "duration": 3.201,
+      "text": "creates a new frame called by fact and"
+    },
+    {
+      "index": 294,
+      "start": 733.05,
+      "end": 737.36,
+      "duration": 4.31,
+      "text": "the argument passed in for n is n minus"
+    },
+    {
+      "index": 295,
+      "start": 737.37,
+      "end": 739.94,
+      "duration": 2.57,
+      "text": "1 that value right there of 3 so 3 is"
+    },
+    {
+      "index": 296,
+      "start": 739.95,
+      "end": 741.46,
+      "duration": 1.51,
+      "text": "now bound to N"
+    },
+    {
+      "index": 297,
+      "start": 741.47,
+      "end": 744.41,
+      "duration": 2.94,
+      "text": "same game evaluate the body is n equal"
+    },
+    {
+      "index": 298,
+      "start": 744.42,
+      "end": 745.1,
+      "duration": 0.68,
+      "text": "to 1"
+    },
+    {
+      "index": 299,
+      "start": 745.11,
+      "end": 747.259,
+      "duration": 2.149,
+      "text": "no so in that case I'm going to go to"
+    },
+    {
+      "index": 300,
+      "start": 747.269,
+      "end": 748.85,
+      "duration": 1.581,
+      "text": "the return statement it says returned"
+    },
+    {
+      "index": 301,
+      "start": 748.86,
+      "end": 752.18,
+      "duration": 3.32,
+      "text": "three times fact of 2 and notice it's"
+    },
+    {
+      "index": 302,
+      "start": 752.19,
+      "end": 754.28,
+      "duration": 2.09,
+      "text": "only looking at this value of n because"
+    },
+    {
+      "index": 303,
+      "start": 754.29,
+      "end": 755.66,
+      "duration": 1.37,
+      "text": "that's the frame in which I mean it"
+    },
+    {
+      "index": 304,
+      "start": 755.67,
+      "end": 759.889,
+      "duration": 4.219,
+      "text": "never sees that value of n ok aren't you"
+    },
+    {
+      "index": 305,
+      "start": 759.899,
+      "end": 762.079,
+      "duration": 2.18,
+      "text": "glad I didn't do factor 400 we're only"
+    },
+    {
+      "index": 306,
+      "start": 762.089,
+      "end": 763.61,
+      "duration": 1.521,
+      "text": "got two more to go but you get the idea"
+    },
+    {
+      "index": 307,
+      "start": 763.62,
+      "end": 765.829,
+      "duration": 2.209,
+      "text": "same thing I need to get fact of 2 it's"
+    },
+    {
+      "index": 308,
+      "start": 765.839,
+      "end": 767.99,
+      "duration": 2.151,
+      "text": "going to call fact again with n bound to"
+    },
+    {
+      "index": 309,
+      "start": 768.0,
+      "end": 770.449,
+      "duration": 2.449,
+      "text": "2 relative that evaluates the body and"
+    },
+    {
+      "index": 310,
+      "start": 770.459,
+      "end": 772.67,
+      "duration": 2.211,
+      "text": "is not yet equal to 1 that says I can go"
+    },
+    {
+      "index": 311,
+      "start": 772.68,
+      "end": 774.769,
+      "duration": 2.089,
+      "text": "to the else clause and return 2 times"
+    },
+    {
+      "index": 312,
+      "start": 774.779,
+      "end": 778.13,
+      "duration": 3.351,
+      "text": "fact of one I call fact again now with n"
+    },
+    {
+      "index": 313,
+      "start": 778.14,
+      "end": 781.61,
+      "duration": 3.47,
+      "text": "bound to 1 and fortunately now that"
+    },
+    {
+      "index": 314,
+      "start": 781.62,
+      "end": 787.73,
+      "duration": 6.11,
+      "text": "Clause is true and it says return 1 oops"
+    },
+    {
+      "index": 315,
+      "start": 787.74,
+      "end": 789.079,
+      "duration": 1.339,
+      "text": "sorry before I do so there's the base"
+    },
+    {
+      "index": 316,
+      "start": 789.089,
+      "end": 792.079,
+      "duration": 2.99,
+      "text": "case and it may seem apparent to you but"
+    },
+    {
+      "index": 317,
+      "start": 792.089,
+      "end": 793.85,
+      "duration": 1.761,
+      "text": "this is important right I'm unwinding"
+    },
+    {
+      "index": 318,
+      "start": 793.86,
+      "end": 795.199,
+      "duration": 1.339,
+      "text": "this until I get to something that can"
+    },
+    {
+      "index": 319,
+      "start": 795.209,
+      "end": 797.689,
+      "duration": 2.48,
+      "text": "stop the computation now I'm simply"
+    },
+    {
+      "index": 320,
+      "start": 797.699,
+      "end": 799.16,
+      "duration": 1.461,
+      "text": "going to gather the computation up"
+    },
+    {
+      "index": 321,
+      "start": 799.17,
+      "end": 800.78,
+      "duration": 1.61,
+      "text": "because it says return one who asked for"
+    },
+    {
+      "index": 322,
+      "start": 800.79,
+      "end": 804.23,
+      "duration": 3.44,
+      "text": "it well that called a fact of 1 so that"
+    },
+    {
+      "index": 323,
+      "start": 804.24,
+      "end": 807.53,
+      "duration": 3.29,
+      "text": "reduces to return 2 times 1 and who"
+    },
+    {
+      "index": 324,
+      "start": 807.54,
+      "end": 810.439,
+      "duration": 2.899,
+      "text": "called for that fact of 2 that reduces"
+    },
+    {
+      "index": 325,
+      "start": 810.449,
+      "end": 813.41,
+      "duration": 2.961,
+      "text": "to return of 3 times 2 which reduces to"
+    },
+    {
+      "index": 326,
+      "start": 813.42,
+      "end": 816.38,
+      "duration": 2.96,
+      "text": "4 times 6 which reduces to printing out"
+    },
+    {
+      "index": 327,
+      "start": 816.39,
+      "end": 820.79,
+      "duration": 4.4,
+      "text": "24 so it unwinds it down to a base case"
+    },
+    {
+      "index": 328,
+      "start": 820.8,
+      "end": 824.71,
+      "duration": 3.91,
+      "text": "and it stops a couple of observations"
+    },
+    {
+      "index": 329,
+      "start": 824.72,
+      "end": 827.569,
+      "duration": 2.849,
+      "text": "notice how each recursive call creates"
+    },
+    {
+      "index": 330,
+      "start": 827.579,
+      "end": 829.85,
+      "duration": 2.271,
+      "text": "its own frame and as a consequence"
+    },
+    {
+      "index": 331,
+      "start": 829.86,
+      "end": 830.36,
+      "duration": 0.5,
+      "text": "there's"
+    },
+    {
+      "index": 332,
+      "start": 830.37,
+      "end": 832.64,
+      "duration": 2.27,
+      "text": "no confusion about which value of n I'm"
+    },
+    {
+      "index": 333,
+      "start": 832.65,
+      "end": 835.76,
+      "duration": 3.11,
+      "text": "using also notice in the other frames"
+    },
+    {
+      "index": 334,
+      "start": 835.77,
+      "end": 837.98,
+      "duration": 2.21,
+      "text": "and was not changed we did not mutate it"
+    },
+    {
+      "index": 335,
+      "start": 837.99,
+      "end": 839.69,
+      "duration": 1.7,
+      "text": "so we're literally creating a local"
+    },
+    {
+      "index": 336,
+      "start": 839.7,
+      "end": 841.79,
+      "duration": 2.09,
+      "text": "scope for that recursive call which is"
+    },
+    {
+      "index": 337,
+      "start": 841.8,
+      "end": 844.79,
+      "duration": 2.99,
+      "text": "exactly what we want also notice how"
+    },
+    {
+      "index": 338,
+      "start": 844.8,
+      "end": 847.61,
+      "duration": 2.81,
+      "text": "there was a sense of flow of control in"
+    },
+    {
+      "index": 339,
+      "start": 847.62,
+      "end": 849.29,
+      "duration": 1.67,
+      "text": "computing fact of something that reduces"
+    },
+    {
+      "index": 340,
+      "start": 849.3,
+      "end": 852.14,
+      "duration": 2.84,
+      "text": "to returning n times fact of n minus 1"
+    },
+    {
+      "index": 341,
+      "start": 852.15,
+      "end": 855.68,
+      "duration": 3.53,
+      "text": "and that creates a new scope and that"
+    },
+    {
+      "index": 342,
+      "start": 855.69,
+      "end": 857.75,
+      "duration": 2.06,
+      "text": "will simply keep unwinding until I get"
+    },
+    {
+      "index": 343,
+      "start": 857.76,
+      "end": 859.28,
+      "duration": 1.52,
+      "text": "to something that can return a value and"
+    },
+    {
+      "index": 344,
+      "start": 859.29,
+      "end": 861.019,
+      "duration": 1.729,
+      "text": "then I gather all those frames back up"
+    },
+    {
+      "index": 345,
+      "start": 861.029,
+      "end": 863.36,
+      "duration": 2.331,
+      "text": "so there's a natural flow of control"
+    },
+    {
+      "index": 346,
+      "start": 863.37,
+      "end": 865.82,
+      "duration": 2.45,
+      "text": "here but most importantly there's no"
+    },
+    {
+      "index": 347,
+      "start": 865.83,
+      "end": 867.71,
+      "duration": 1.88,
+      "text": "confusion about which variable I'm using"
+    },
+    {
+      "index": 348,
+      "start": 867.72,
+      "end": 871.01,
+      "duration": 3.29,
+      "text": "when I'm looking for a value event all"
+    },
+    {
+      "index": 349,
+      "start": 871.02,
+      "end": 872.41,
+      "duration": 1.39,
+      "text": "right because this is often a place"
+    },
+    {
+      "index": 350,
+      "start": 872.42,
+      "end": 874.55,
+      "duration": 2.13,
+      "text": "where things get a little confusing I"
+    },
+    {
+      "index": 351,
+      "start": 874.56,
+      "end": 875.84,
+      "duration": 1.28,
+      "text": "want to do one more example but let me"
+    },
+    {
+      "index": 352,
+      "start": 875.85,
+      "end": 878.51,
+      "duration": 2.66,
+      "text": "first show you side-by-side the two"
+    },
+    {
+      "index": 353,
+      "start": 878.52,
+      "end": 881.06,
+      "duration": 2.54,
+      "text": "different versions of factorial actually"
+    },
+    {
+      "index": 354,
+      "start": 881.07,
+      "end": 882.71,
+      "duration": 1.64,
+      "text": "I lied slightly we didn't show this on"
+    },
+    {
+      "index": 355,
+      "start": 882.72,
+      "end": 884.06,
+      "duration": 1.34,
+      "text": "earlier but there's factorial if I"
+    },
+    {
+      "index": 356,
+      "start": 884.07,
+      "end": 885.68,
+      "duration": 1.61,
+      "text": "wanted to do it iteratively I'd set up"
+    },
+    {
+      "index": 357,
+      "start": 885.69,
+      "end": 888.74,
+      "duration": 3.05,
+      "text": "some initial variable to one and then I"
+    },
+    {
+      "index": 358,
+      "start": 888.75,
+      "end": 890.87,
+      "duration": 2.12,
+      "text": "just run through a loop for example from"
+    },
+    {
+      "index": 359,
+      "start": 890.88,
+      "end": 893.99,
+      "duration": 3.11,
+      "text": "1 up to just below n minus 1 or 1 up to"
+    },
+    {
+      "index": 360,
+      "start": 894.0,
+      "end": 896.63,
+      "duration": 2.63,
+      "text": "n multiplying at it and putting it back"
+    },
+    {
+      "index": 361,
+      "start": 896.64,
+      "end": 900.769,
+      "duration": 4.129,
+      "text": "into product returned product which one"
+    },
+    {
+      "index": 362,
+      "start": 900.779,
+      "end": 903.44,
+      "duration": 2.661,
+      "text": "do you like more you can't say neither"
+    },
+    {
+      "index": 363,
+      "start": 903.45,
+      "end": 905.329,
+      "duration": 1.879,
+      "text": "you have to pick one show of hands how"
+    },
+    {
+      "index": 364,
+      "start": 905.339,
+      "end": 908.72,
+      "duration": 3.381,
+      "text": "many of you liked this one some hesitant"
+    },
+    {
+      "index": 365,
+      "start": 908.73,
+      "end": 912.19,
+      "duration": 3.46,
+      "text": "ones how many prefer this one yeah"
+    },
+    {
+      "index": 366,
+      "start": 912.2,
+      "end": 915.05,
+      "duration": 2.85,
+      "text": "that's my view I'm biased but I really"
+    },
+    {
+      "index": 367,
+      "start": 915.06,
+      "end": 917.39,
+      "duration": 2.33,
+      "text": "like the recursive one it is crisper to"
+    },
+    {
+      "index": 368,
+      "start": 917.4,
+      "end": 919.31,
+      "duration": 1.91,
+      "text": "look at you can see what it's doing I'm"
+    },
+    {
+      "index": 369,
+      "start": 919.32,
+      "end": 921.949,
+      "duration": 2.629,
+      "text": "reducing this problem to simpler version"
+    },
+    {
+      "index": 370,
+      "start": 921.959,
+      "end": 925.16,
+      "duration": 3.201,
+      "text": "of that problem pick your own version"
+    },
+    {
+      "index": 371,
+      "start": 925.17,
+      "end": 926.449,
+      "duration": 1.279,
+      "text": "but I would argue that the recursive"
+    },
+    {
+      "index": 372,
+      "start": 926.459,
+      "end": 928.329,
+      "duration": 1.87,
+      "text": "version is more intuitive to understand"
+    },
+    {
+      "index": 373,
+      "start": 928.339,
+      "end": 931.04,
+      "duration": 2.701,
+      "text": "from a programmers perspective it's"
+    },
+    {
+      "index": 374,
+      "start": 931.05,
+      "end": 932.72,
+      "duration": 1.67,
+      "text": "actually often more efficient to write"
+    },
+    {
+      "index": 375,
+      "start": 932.73,
+      "end": 933.71,
+      "duration": 0.98,
+      "text": "because I don't have to think about"
+    },
+    {
+      "index": 376,
+      "start": 933.72,
+      "end": 936.8,
+      "duration": 3.08,
+      "text": "interior interior variables depending on"
+    },
+    {
+      "index": 377,
+      "start": 936.81,
+      "end": 939.26,
+      "duration": 2.45,
+      "text": "the machine it may not be as efficient"
+    },
+    {
+      "index": 378,
+      "start": 939.27,
+      "end": 941.09,
+      "duration": 1.82,
+      "text": "when you call it because in the"
+    },
+    {
+      "index": 379,
+      "start": 941.1,
+      "end": 942.65,
+      "duration": 1.55,
+      "text": "recursive version I've got to set up"
+    },
+    {
+      "index": 380,
+      "start": 942.66,
+      "end": 945.199,
+      "duration": 2.539,
+      "text": "that set of frames and some versions of"
+    },
+    {
+      "index": 381,
+      "start": 945.209,
+      "end": 946.4,
+      "duration": 1.191,
+      "text": "these languages are actually very"
+    },
+    {
+      "index": 382,
+      "start": 946.41,
+      "end": 947.69,
+      "duration": 1.28,
+      "text": "efficient about it some of them a little"
+    },
+    {
+      "index": 383,
+      "start": 947.7,
+      "end": 949.94,
+      "duration": 2.24,
+      "text": "less so but given the speed of computers"
+    },
+    {
+      "index": 384,
+      "start": 949.95,
+      "end": 951.56,
+      "duration": 1.61,
+      "text": "today who cares as long as it actually"
+    },
+    {
+      "index": 385,
+      "start": 951.57,
+      "end": 955.16,
+      "duration": 3.59,
+      "text": "just does the computation all right one"
+    },
+    {
+      "index": 386,
+      "start": 955.17,
+      "end": 957.65,
+      "duration": 2.48,
+      "text": "more example how do we really know our"
+    },
+    {
+      "index": 387,
+      "start": 957.66,
+      "end": 960.38,
+      "duration": 2.72,
+      "text": "recursive code works well we just did a"
+    },
+    {
+      "index": 388,
+      "start": 960.39,
+      "end": 961.91,
+      "duration": 1.52,
+      "text": "simulation but let's look at it one more"
+    },
+    {
+      "index": 389,
+      "start": 961.92,
+      "end": 963.92,
+      "duration": 2.0,
+      "text": "way the"
+    },
+    {
+      "index": 390,
+      "start": 963.93,
+      "end": 967.61,
+      "duration": 3.68,
+      "text": "version what can I say about it well I"
+    },
+    {
+      "index": 391,
+      "start": 967.62,
+      "end": 969.95,
+      "duration": 2.33,
+      "text": "know it's going to terminate because B"
+    },
+    {
+      "index": 392,
+      "start": 969.96,
+      "end": 971.87,
+      "duration": 1.91,
+      "text": "is initially positive assuming I gave it"
+    },
+    {
+      "index": 393,
+      "start": 971.88,
+      "end": 975.019,
+      "duration": 3.139,
+      "text": "an appropriate value it decreases by 1"
+    },
+    {
+      "index": 394,
+      "start": 975.029,
+      "end": 977.0,
+      "duration": 1.971,
+      "text": "every time around this loop at some"
+    },
+    {
+      "index": 395,
+      "start": 977.01,
+      "end": 978.44,
+      "duration": 1.43,
+      "text": "point it has to get less than 1 it's"
+    },
+    {
+      "index": 396,
+      "start": 978.45,
+      "end": 980.66,
+      "duration": 2.21,
+      "text": "going to stop so I can conclude it's"
+    },
+    {
+      "index": 397,
+      "start": 980.67,
+      "end": 983.36,
+      "duration": 2.69,
+      "text": "always going to terminate what about the"
+    },
+    {
+      "index": 398,
+      "start": 983.37,
+      "end": 987.26,
+      "duration": 3.89,
+      "text": "recursive version well if I call it with"
+    },
+    {
+      "index": 399,
+      "start": 987.27,
+      "end": 990.829,
+      "duration": 3.559,
+      "text": "B equal to 1 I'm done if I call it with"
+    },
+    {
+      "index": 400,
+      "start": 990.839,
+      "end": 993.86,
+      "duration": 3.021,
+      "text": "B greater than 1 again it's going to"
+    },
+    {
+      "index": 401,
+      "start": 993.87,
+      "end": 995.9,
+      "duration": 2.03,
+      "text": "reduce it by one on the recursive call"
+    },
+    {
+      "index": 402,
+      "start": 995.91,
+      "end": 997.4,
+      "duration": 1.49,
+      "text": "which means on each recursive call is"
+    },
+    {
+      "index": 403,
+      "start": 997.41,
+      "end": 999.05,
+      "duration": 1.64,
+      "text": "going to reduce it eventually gets down"
+    },
+    {
+      "index": 404,
+      "start": 999.06,
+      "end": 1001.389,
+      "duration": 2.329,
+      "text": "to a place assuming I gave it a positive"
+    },
+    {
+      "index": 405,
+      "start": 1001.399,
+      "end": 1003.519,
+      "duration": 2.12,
+      "text": "integer where B is equal to 1 so it'll"
+    },
+    {
+      "index": 406,
+      "start": 1003.529,
+      "end": 1007.75,
+      "duration": 4.221,
+      "text": "stop which is good well we just did was"
+    },
+    {
+      "index": 407,
+      "start": 1007.76,
+      "end": 1011.86,
+      "duration": 4.1,
+      "text": "we used a great tool from math second"
+    },
+    {
+      "index": 408,
+      "start": 1011.87,
+      "end": 1015.1,
+      "duration": 3.23,
+      "text": "best department at MIT wow I didn't even"
+    },
+    {
+      "index": 409,
+      "start": 1015.11,
+      "end": 1016.69,
+      "duration": 1.58,
+      "text": "get any hisses on that one John all"
+    },
+    {
+      "index": 410,
+      "start": 1016.7,
+      "end": 1018.97,
+      "duration": 2.27,
+      "text": "right and I'm now in trouble with the"
+    },
+    {
+      "index": 411,
+      "start": 1018.98,
+      "end": 1021.519,
+      "duration": 2.539,
+      "text": "head of the math department so now that"
+    },
+    {
+      "index": 412,
+      "start": 1021.529,
+      "end": 1023.23,
+      "duration": 1.701,
+      "text": "I got your attention and yes all"
+    },
+    {
+      "index": 413,
+      "start": 1023.24,
+      "end": 1024.669,
+      "duration": 1.429,
+      "text": "computer science strokes are bad and"
+    },
+    {
+      "index": 414,
+      "start": 1024.679,
+      "end": 1026.71,
+      "duration": 2.031,
+      "text": "mine are really bad but I'm tenured you"
+    },
+    {
+      "index": 415,
+      "start": 1026.72,
+      "end": 1029.85,
+      "duration": 3.13,
+      "text": "cannot do a damn thing about it"
+    },
+    {
+      "index": 416,
+      "start": 1029.86,
+      "end": 1031.84,
+      "duration": 1.98,
+      "text": "let's look at mathematical induction"
+    },
+    {
+      "index": 417,
+      "start": 1031.85,
+      "end": 1033.669,
+      "duration": 1.819,
+      "text": "which turns out to be a tool that lets"
+    },
+    {
+      "index": 418,
+      "start": 1033.679,
+      "end": 1035.559,
+      "duration": 1.88,
+      "text": "us think about programs in a really nice"
+    },
+    {
+      "index": 419,
+      "start": 1035.569,
+      "end": 1038.169,
+      "duration": 2.6,
+      "text": "way you haven't seen this here's the"
+    },
+    {
+      "index": 420,
+      "start": 1038.179,
+      "end": 1040.09,
+      "duration": 1.911,
+      "text": "idea of mathematical induction if I want"
+    },
+    {
+      "index": 421,
+      "start": 1040.1,
+      "end": 1042.88,
+      "duration": 2.78,
+      "text": "to prove a statement we refer to as"
+    },
+    {
+      "index": 422,
+      "start": 1042.89,
+      "end": 1044.53,
+      "duration": 1.64,
+      "text": "being indexed on the integers in other"
+    },
+    {
+      "index": 423,
+      "start": 1044.54,
+      "end": 1046.419,
+      "duration": 1.879,
+      "text": "words it's some mathematical statement"
+    },
+    {
+      "index": 424,
+      "start": 1046.429,
+      "end": 1048.85,
+      "duration": 2.421,
+      "text": "that runs over integers if I want to"
+    },
+    {
+      "index": 425,
+      "start": 1048.86,
+      "end": 1051.34,
+      "duration": 2.48,
+      "text": "prove it's true for all values of those"
+    },
+    {
+      "index": 426,
+      "start": 1051.35,
+      "end": 1053.71,
+      "duration": 2.36,
+      "text": "integers mathematically I do it by"
+    },
+    {
+      "index": 427,
+      "start": 1053.72,
+      "end": 1055.299,
+      "duration": 1.579,
+      "text": "simply proving it's true for the"
+    },
+    {
+      "index": 428,
+      "start": 1055.309,
+      "end": 1058.03,
+      "duration": 2.721,
+      "text": "smallest value of n typically n is equal"
+    },
+    {
+      "index": 429,
+      "start": 1058.04,
+      "end": 1060.88,
+      "duration": 2.84,
+      "text": "to 0 or 1 and then I do an interesting"
+    },
+    {
+      "index": 430,
+      "start": 1060.89,
+      "end": 1062.95,
+      "duration": 2.06,
+      "text": "thing I say I need to prove that if it's"
+    },
+    {
+      "index": 431,
+      "start": 1062.96,
+      "end": 1065.11,
+      "duration": 2.15,
+      "text": "true for an arbitrary value of n I'm"
+    },
+    {
+      "index": 432,
+      "start": 1065.12,
+      "end": 1067.21,
+      "duration": 2.09,
+      "text": "just going to prove that it's also then"
+    },
+    {
+      "index": 433,
+      "start": 1067.22,
+      "end": 1070.48,
+      "duration": 3.26,
+      "text": "true for n plus 1 and if I can do those"
+    },
+    {
+      "index": 434,
+      "start": 1070.49,
+      "end": 1072.34,
+      "duration": 1.85,
+      "text": "two things I can then conclude for an"
+    },
+    {
+      "index": 435,
+      "start": 1072.35,
+      "end": 1074.47,
+      "duration": 2.12,
+      "text": "infinite number of values of n it's"
+    },
+    {
+      "index": 436,
+      "start": 1074.48,
+      "end": 1076.96,
+      "duration": 2.48,
+      "text": "always true I'm going to relate it back"
+    },
+    {
+      "index": 437,
+      "start": 1076.97,
+      "end": 1078.49,
+      "duration": 1.52,
+      "text": "to programming in a second but let me"
+    },
+    {
+      "index": 438,
+      "start": 1078.5,
+      "end": 1080.02,
+      "duration": 1.52,
+      "text": "show you a simple example of this one"
+    },
+    {
+      "index": 439,
+      "start": 1080.03,
+      "end": 1082.63,
+      "duration": 2.6,
+      "text": "that you may have seen if I add the"
+    },
+    {
+      "index": 440,
+      "start": 1082.64,
+      "end": 1084.82,
+      "duration": 2.18,
+      "text": "integers from 0 up to n or even from 1"
+    },
+    {
+      "index": 441,
+      "start": 1084.83,
+      "end": 1087.19,
+      "duration": 2.36,
+      "text": "up to n I claim that's the same as n"
+    },
+    {
+      "index": 442,
+      "start": 1087.2,
+      "end": 1091.12,
+      "duration": 3.92,
+      "text": "times n plus 1 over 2 so 1 2 3 that's 6"
+    },
+    {
+      "index": 443,
+      "start": 1091.13,
+      "end": 1093.31,
+      "duration": 2.18,
+      "text": "right and that's one exactly right 3"
+    },
+    {
+      "index": 444,
+      "start": 1093.32,
+      "end": 1095.71,
+      "duration": 2.39,
+      "text": "times 4 which is divided by 2 which"
+    },
+    {
+      "index": 445,
+      "start": 1095.72,
+      "end": 1097.379,
+      "duration": 1.659,
+      "text": "gives me out 6"
+    },
+    {
+      "index": 446,
+      "start": 1097.389,
+      "end": 1101.029,
+      "duration": 3.64,
+      "text": "how would I prove this well by induction"
+    },
+    {
+      "index": 447,
+      "start": 1101.039,
+      "end": 1103.409,
+      "duration": 2.37,
+      "text": "and you do the simple cases van a is"
+    },
+    {
+      "index": 448,
+      "start": 1103.419,
+      "end": 1106.469,
+      "duration": 3.05,
+      "text": "equal to zero well then this side is"
+    },
+    {
+      "index": 449,
+      "start": 1106.479,
+      "end": 1108.659,
+      "duration": 2.18,
+      "text": "just 0 and that's 0 times 1 which is 0"
+    },
+    {
+      "index": 450,
+      "start": 1108.669,
+      "end": 1111.229,
+      "duration": 2.56,
+      "text": "divided by true so 0 equals 0 it's true"
+    },
+    {
+      "index": 451,
+      "start": 1111.239,
+      "end": 1114.69,
+      "duration": 3.451,
+      "text": "and now the inductive step I'm going to"
+    },
+    {
+      "index": 452,
+      "start": 1114.7,
+      "end": 1116.549,
+      "duration": 1.849,
+      "text": "assume it's true for some K I should I"
+    },
+    {
+      "index": 453,
+      "start": 1116.559,
+      "end": 1118.889,
+      "duration": 2.33,
+      "text": "pick down but for some K and then what I"
+    },
+    {
+      "index": 454,
+      "start": 1118.899,
+      "end": 1122.749,
+      "duration": 3.85,
+      "text": "need to show is it's true for K plus 1"
+    },
+    {
+      "index": 455,
+      "start": 1122.759,
+      "end": 1125.279,
+      "duration": 2.52,
+      "text": "well there's the left-hand side and I"
+    },
+    {
+      "index": 456,
+      "start": 1125.289,
+      "end": 1127.56,
+      "duration": 2.271,
+      "text": "want to show that this is equal to that"
+    },
+    {
+      "index": 457,
+      "start": 1127.57,
+      "end": 1130.56,
+      "duration": 2.99,
+      "text": "and I'm going to do it by using exactly"
+    },
+    {
+      "index": 458,
+      "start": 1130.57,
+      "end": 1132.18,
+      "duration": 1.61,
+      "text": "this recursive idea because what do I"
+    },
+    {
+      "index": 459,
+      "start": 1132.19,
+      "end": 1135.449,
+      "duration": 3.259,
+      "text": "know I know that this sum in here I'm"
+    },
+    {
+      "index": 460,
+      "start": 1135.459,
+      "end": 1139.199,
+      "duration": 3.74,
+      "text": "assuming is true and so that says that"
+    },
+    {
+      "index": 461,
+      "start": 1139.209,
+      "end": 1141.389,
+      "duration": 2.18,
+      "text": "the left-hand side the first portion of"
+    },
+    {
+      "index": 462,
+      "start": 1141.399,
+      "end": 1143.339,
+      "duration": 1.94,
+      "text": "it is just K times K plus 1 over 2"
+    },
+    {
+      "index": 463,
+      "start": 1143.349,
+      "end": 1145.229,
+      "duration": 1.88,
+      "text": "that's the definition of the thing I'm"
+    },
+    {
+      "index": 464,
+      "start": 1145.239,
+      "end": 1147.629,
+      "duration": 2.39,
+      "text": "assuming is true to that I'm going to"
+    },
+    {
+      "index": 465,
+      "start": 1147.639,
+      "end": 1151.44,
+      "duration": 3.801,
+      "text": "add k plus 1 well you can do the algebra"
+    },
+    {
+      "index": 466,
+      "start": 1151.45,
+      "end": 1153.959,
+      "duration": 2.509,
+      "text": "right that's K plus 1 all times K over 2"
+    },
+    {
+      "index": 467,
+      "start": 1153.969,
+      "end": 1158.869,
+      "duration": 4.9,
+      "text": "plus 1 which is K plus 2 over 2 oh cool"
+    },
+    {
+      "index": 468,
+      "start": 1158.879,
+      "end": 1162.869,
+      "duration": 3.99,
+      "text": "it's exactly that having done that I can"
+    },
+    {
+      "index": 469,
+      "start": 1162.879,
+      "end": 1165.299,
+      "duration": 2.42,
+      "text": "now conclude this is true for all values"
+    },
+    {
+      "index": 470,
+      "start": 1165.309,
+      "end": 1168.539,
+      "duration": 3.23,
+      "text": "of n what does it have to do with"
+    },
+    {
+      "index": 471,
+      "start": 1168.549,
+      "end": 1171.959,
+      "duration": 3.41,
+      "text": "programming that's exactly what we're"
+    },
+    {
+      "index": 472,
+      "start": 1171.969,
+      "end": 1173.959,
+      "duration": 1.99,
+      "text": "doing when we think about recursive code"
+    },
+    {
+      "index": 473,
+      "start": 1173.969,
+      "end": 1176.43,
+      "duration": 2.461,
+      "text": "right we're saying show that it's true"
+    },
+    {
+      "index": 474,
+      "start": 1176.44,
+      "end": 1178.859,
+      "duration": 2.419,
+      "text": "for the base case and then what I'm"
+    },
+    {
+      "index": 475,
+      "start": 1178.869,
+      "end": 1181.049,
+      "duration": 2.18,
+      "text": "essentially assuming is that if it works"
+    },
+    {
+      "index": 476,
+      "start": 1181.059,
+      "end": 1184.769,
+      "duration": 3.71,
+      "text": "for values smaller than B then does the"
+    },
+    {
+      "index": 477,
+      "start": 1184.779,
+      "end": 1186.899,
+      "duration": 2.12,
+      "text": "code return the right answer for B and"
+    },
+    {
+      "index": 478,
+      "start": 1186.909,
+      "end": 1188.759,
+      "duration": 1.85,
+      "text": "the answers absolutely it does and I'm"
+    },
+    {
+      "index": 479,
+      "start": 1188.769,
+      "end": 1190.949,
+      "duration": 2.18,
+      "text": "using induction to deduce that in fact"
+    },
+    {
+      "index": 480,
+      "start": 1190.959,
+      "end": 1194.969,
+      "duration": 4.01,
+      "text": "my code does the right thing why am i"
+    },
+    {
+      "index": 481,
+      "start": 1194.979,
+      "end": 1198.119,
+      "duration": 3.14,
+      "text": "torturing you with this because this is"
+    },
+    {
+      "index": 482,
+      "start": 1198.129,
+      "end": 1199.289,
+      "duration": 1.16,
+      "text": "the way I want you to think about"
+    },
+    {
+      "index": 483,
+      "start": 1199.299,
+      "end": 1201.269,
+      "duration": 1.97,
+      "text": "recursion when I'm going to break a"
+    },
+    {
+      "index": 484,
+      "start": 1201.279,
+      "end": 1203.249,
+      "duration": 1.97,
+      "text": "problem down into a smaller version of"
+    },
+    {
+      "index": 485,
+      "start": 1203.259,
+      "end": 1204.959,
+      "duration": 1.7,
+      "text": "the same problem I can assume that the"
+    },
+    {
+      "index": 486,
+      "start": 1204.969,
+      "end": 1206.759,
+      "duration": 1.79,
+      "text": "smaller version gives you the answer all"
+    },
+    {
+      "index": 487,
+      "start": 1206.769,
+      "end": 1208.139,
+      "duration": 1.37,
+      "text": "I have to do is make sure that what I"
+    },
+    {
+      "index": 488,
+      "start": 1208.149,
+      "end": 1210.089,
+      "duration": 1.94,
+      "text": "combined together gives me out the right"
+    },
+    {
+      "index": 489,
+      "start": 1210.099,
+      "end": 1215.819,
+      "duration": 5.72,
+      "text": "result ok you may be wondering what I'm"
+    },
+    {
+      "index": 490,
+      "start": 1215.829,
+      "end": 1217.499,
+      "duration": 1.67,
+      "text": "doing with these wonderful high-tech"
+    },
+    {
+      "index": 491,
+      "start": 1217.509,
+      "end": 1218.999,
+      "duration": 1.49,
+      "text": "toys down here I want to show you"
+    },
+    {
+      "index": 492,
+      "start": 1219.009,
+      "end": 1221.19,
+      "duration": 2.181,
+      "text": "another example of recursion so far"
+    },
+    {
+      "index": 493,
+      "start": 1221.2,
+      "end": 1222.629,
+      "duration": 1.429,
+      "text": "we've seen simple things that just have"
+    },
+    {
+      "index": 494,
+      "start": 1222.639,
+      "end": 1225.029,
+      "duration": 2.39,
+      "text": "one base case and this is a mythical"
+    },
+    {
+      "index": 495,
+      "start": 1225.039,
+      "end": 1227.099,
+      "duration": 2.06,
+      "text": "story called the towers of Hanoi and the"
+    },
+    {
+      "index": 496,
+      "start": 1227.109,
+      "end": 1229.349,
+      "duration": 2.24,
+      "text": "story as I heard it is there's a temple"
+    },
+    {
+      "index": 497,
+      "start": 1229.359,
+      "end": 1230.43,
+      "duration": 1.071,
+      "text": "somewhere in Hanoi"
+    },
+    {
+      "index": 498,
+      "start": 1230.44,
+      "end": 1234.09,
+      "duration": 3.65,
+      "text": "with three tall spikes and 64 jewel"
+    },
+    {
+      "index": 499,
+      "start": 1234.1,
+      "end": 1235.98,
+      "duration": 1.88,
+      "text": "encrusted golden discs all of a"
+    },
+    {
+      "index": 500,
+      "start": 1235.99,
+      "end": 1238.5,
+      "duration": 2.51,
+      "text": "different size they all started out on"
+    },
+    {
+      "index": 501,
+      "start": 1238.51,
+      "end": 1240.42,
+      "duration": 1.91,
+      "text": "one spike with the property that they"
+    },
+    {
+      "index": 502,
+      "start": 1240.43,
+      "end": 1242.13,
+      "duration": 1.7,
+      "text": "were ordered from smallest down to"
+    },
+    {
+      "index": 503,
+      "start": 1242.14,
+      "end": 1244.53,
+      "duration": 2.39,
+      "text": "largest and there are priests in this"
+    },
+    {
+      "index": 504,
+      "start": 1244.54,
+      "end": 1246.84,
+      "duration": 2.3,
+      "text": "temple who are moving the disks one at a"
+    },
+    {
+      "index": 505,
+      "start": 1246.85,
+      "end": 1248.79,
+      "duration": 1.94,
+      "text": "time one per second and their goal is to"
+    },
+    {
+      "index": 506,
+      "start": 1248.8,
+      "end": 1251.67,
+      "duration": 2.87,
+      "text": "move the entire stack from one spike to"
+    },
+    {
+      "index": 507,
+      "start": 1251.68,
+      "end": 1254.16,
+      "duration": 2.48,
+      "text": "another spike in women and when they do"
+    },
+    {
+      "index": 508,
+      "start": 1254.17,
+      "end": 1256.65,
+      "duration": 2.48,
+      "text": "nirvana is achieved and we all get a"
+    },
+    {
+      "index": 509,
+      "start": 1256.66,
+      "end": 1257.76,
+      "duration": 1.1,
+      "text": "really great life"
+    },
+    {
+      "index": 510,
+      "start": 1257.77,
+      "end": 1259.86,
+      "duration": 2.09,
+      "text": "we'll talk separately about how long is"
+    },
+    {
+      "index": 511,
+      "start": 1259.87,
+      "end": 1260.85,
+      "duration": 0.98,
+      "text": "it's going to take because there's one"
+    },
+    {
+      "index": 512,
+      "start": 1260.86,
+      "end": 1262.8,
+      "duration": 1.94,
+      "text": "trick to it they can never cover a"
+    },
+    {
+      "index": 513,
+      "start": 1262.81,
+      "end": 1265.5,
+      "duration": 2.69,
+      "text": "smaller disc with a larger disc as"
+    },
+    {
+      "index": 514,
+      "start": 1265.51,
+      "end": 1266.7,
+      "duration": 1.19,
+      "text": "they're doing it so they got a third"
+    },
+    {
+      "index": 515,
+      "start": 1266.71,
+      "end": 1269.97,
+      "duration": 3.26,
+      "text": "disc as a temporary thing and I want to"
+    },
+    {
+      "index": 516,
+      "start": 1269.98,
+      "end": 1270.87,
+      "duration": 0.89,
+      "text": "show you how to solve this problem"
+    },
+    {
+      "index": 517,
+      "start": 1270.88,
+      "end": 1272.31,
+      "duration": 1.43,
+      "text": "because you're going to write code with"
+    },
+    {
+      "index": 518,
+      "start": 1272.32,
+      "end": 1273.84,
+      "duration": 1.52,
+      "text": "my help in a second or I'm going to"
+    },
+    {
+      "index": 519,
+      "start": 1273.85,
+      "end": 1275.28,
+      "duration": 1.43,
+      "text": "write code with your help in a second to"
+    },
+    {
+      "index": 520,
+      "start": 1275.29,
+      "end": 1276.87,
+      "duration": 1.58,
+      "text": "solve so let's look at it so watch"
+    },
+    {
+      "index": 521,
+      "start": 1276.88,
+      "end": 1279.21,
+      "duration": 2.33,
+      "text": "carefully moving a disc of size 1 well"
+    },
+    {
+      "index": 522,
+      "start": 1279.22,
+      "end": 1282.48,
+      "duration": 3.26,
+      "text": "that's pretty easy right moving a disc"
+    },
+    {
+      "index": 523,
+      "start": 1282.49,
+      "end": 1284.31,
+      "duration": 1.82,
+      "text": "of size 2 we'll just put this one on the"
+    },
+    {
+      "index": 524,
+      "start": 1284.32,
+      "end": 1285.84,
+      "duration": 1.52,
+      "text": "spare one while you move it over so you"
+    },
+    {
+      "index": 525,
+      "start": 1285.85,
+      "end": 1288.93,
+      "duration": 3.08,
+      "text": "don't cover it up that's easy moving a"
+    },
+    {
+      "index": 526,
+      "start": 1288.94,
+      "end": 1291.39,
+      "duration": 2.45,
+      "text": "disc of size 3 got to be a little more"
+    },
+    {
+      "index": 527,
+      "start": 1291.4,
+      "end": 1293.07,
+      "duration": 1.67,
+      "text": "careful you can't cover up a smaller one"
+    },
+    {
+      "index": 528,
+      "start": 1293.08,
+      "end": 1294.33,
+      "duration": 1.25,
+      "text": "with a larger one so you have to really"
+    },
+    {
+      "index": 529,
+      "start": 1294.34,
+      "end": 1295.5,
+      "duration": 1.16,
+      "text": "think about where you're putting it"
+    },
+    {
+      "index": 530,
+      "start": 1295.51,
+      "end": 1297.33,
+      "duration": 1.82,
+      "text": "would help if these things didn't juggle"
+    },
+    {
+      "index": 531,
+      "start": 1297.34,
+      "end": 1300.15,
+      "duration": 2.81,
+      "text": "and there you go you got it done all"
+    },
+    {
+      "index": 532,
+      "start": 1300.16,
+      "end": 1300.51,
+      "duration": 0.35,
+      "text": "right"
+    },
+    {
+      "index": 533,
+      "start": 1300.52,
+      "end": 1302.49,
+      "duration": 1.97,
+      "text": "you're watching got to do for to do for"
+    },
+    {
+      "index": 534,
+      "start": 1302.5,
+      "end": 1303.75,
+      "duration": 1.25,
+      "text": "again you've got to be really careful"
+    },
+    {
+      "index": 535,
+      "start": 1303.76,
+      "end": 1305.49,
+      "duration": 1.73,
+      "text": "not to cover things up as you do this"
+    },
+    {
+      "index": 536,
+      "start": 1305.5,
+      "end": 1307.2,
+      "duration": 1.7,
+      "text": "you want to get the bottom one"
+    },
+    {
+      "index": 537,
+      "start": 1307.21,
+      "end": 1308.7,
+      "duration": 1.49,
+      "text": "eventually exposed and so you're going"
+    },
+    {
+      "index": 538,
+      "start": 1308.71,
+      "end": 1310.08,
+      "duration": 1.37,
+      "text": "to pull that one over there if you do"
+    },
+    {
+      "index": 539,
+      "start": 1310.09,
+      "end": 1311.49,
+      "duration": 1.4,
+      "text": "the powder really well you won't notice"
+    },
+    {
+      "index": 540,
+      "start": 1311.5,
+      "end": 1313.23,
+      "duration": 1.73,
+      "text": "if I make a serious mistake as I'm doing"
+    },
+    {
+      "index": 541,
+      "start": 1313.24,
+      "end": 1314.91,
+      "duration": 1.67,
+      "text": "this which I just did but I'm going to"
+    },
+    {
+      "index": 542,
+      "start": 1314.92,
+      "end": 1316.47,
+      "duration": 1.55,
+      "text": "cover from that and do it that way to"
+    },
+    {
+      "index": 543,
+      "start": 1316.48,
+      "end": 1318.75,
+      "duration": 2.27,
+      "text": "put this one over here and that one goes"
+    },
+    {
+      "index": 544,
+      "start": 1318.76,
+      "end": 1320.7,
+      "duration": 1.94,
+      "text": "there and if I did this in Harvard"
+    },
+    {
+      "index": 545,
+      "start": 1320.71,
+      "end": 1321.96,
+      "duration": 1.25,
+      "text": "Square I could make money there you go"
+    },
+    {
+      "index": 546,
+      "start": 1321.97,
+      "end": 1329.28,
+      "duration": 7.31,
+      "text": "right ok got the solution see how to"
+    },
+    {
+      "index": 547,
+      "start": 1329.29,
+      "end": 1331.76,
+      "duration": 2.47,
+      "text": "solve it could you write code for this"
+    },
+    {
+      "index": 548,
+      "start": 1331.77,
+      "end": 1336.27,
+      "duration": 4.5,
+      "text": "yeah maybe not that's on quiz right"
+    },
+    {
+      "index": 549,
+      "start": 1336.28,
+      "end": 1337.8,
+      "duration": 1.52,
+      "text": "thanks John don't tell him us on the"
+    },
+    {
+      "index": 550,
+      "start": 1337.81,
+      "end": 1341.4,
+      "duration": 3.59,
+      "text": "quiz damn alright I'm going to claim"
+    },
+    {
+      "index": 551,
+      "start": 1341.41,
+      "end": 1343.82,
+      "duration": 2.41,
+      "text": "though that in fact there's a beautiful"
+    },
+    {
+      "index": 552,
+      "start": 1343.83,
+      "end": 1347.52,
+      "duration": 3.69,
+      "text": "recursive solution and here's the way to"
+    },
+    {
+      "index": 553,
+      "start": 1347.53,
+      "end": 1349.02,
+      "duration": 1.49,
+      "text": "think about it recursively I want to"
+    },
+    {
+      "index": 554,
+      "start": 1349.03,
+      "end": 1352.11,
+      "duration": 3.08,
+      "text": "move a tower of size n I'm going to"
+    },
+    {
+      "index": 555,
+      "start": 1352.12,
+      "end": 1353.91,
+      "duration": 1.79,
+      "text": "assume I can move smaller towers and"
+    },
+    {
+      "index": 556,
+      "start": 1353.92,
+      "end": 1355.35,
+      "duration": 1.43,
+      "text": "then it's real easy what I do I take a"
+    },
+    {
+      "index": 557,
+      "start": 1355.36,
+      "end": 1358.32,
+      "duration": 2.96,
+      "text": "stack of size n minus 1 I move it onto"
+    },
+    {
+      "index": 558,
+      "start": 1358.33,
+      "end": 1360.81,
+      "duration": 2.48,
+      "text": "the spare one I move the bottom one over"
+    },
+    {
+      "index": 559,
+      "start": 1360.82,
+      "end": 1362.91,
+      "duration": 2.09,
+      "text": "and then I move a stack of size n minus"
+    },
+    {
+      "index": 560,
+      "start": 1362.92,
+      "end": 1364.14,
+      "duration": 1.22,
+      "text": "1"
+    },
+    {
+      "index": 561,
+      "start": 1364.15,
+      "end": 1366.93,
+      "duration": 2.78,
+      "text": "there it's beautiful recursive solution"
+    },
+    {
+      "index": 562,
+      "start": 1366.94,
+      "end": 1369.06,
+      "duration": 2.12,
+      "text": "and how do I move this smaller stack"
+    },
+    {
+      "index": 563,
+      "start": 1369.07,
+      "end": 1372.38,
+      "duration": 3.31,
+      "text": "just the same way I just unwind it"
+    },
+    {
+      "index": 564,
+      "start": 1372.39,
+      "end": 1376.5,
+      "duration": 4.11,
+      "text": "simple and in fact the code follows"
+    },
+    {
+      "index": 565,
+      "start": 1376.51,
+      "end": 1380.49,
+      "duration": 3.98,
+      "text": "exactly that okay I do a little larger"
+    },
+    {
+      "index": 566,
+      "start": 1380.5,
+      "end": 1381.6,
+      "duration": 1.1,
+      "text": "domain up here to try and get your"
+    },
+    {
+      "index": 567,
+      "start": 1381.61,
+      "end": 1384.0,
+      "duration": 2.39,
+      "text": "attention but notice by doing that what"
+    },
+    {
+      "index": 568,
+      "start": 1384.01,
+      "end": 1386.04,
+      "duration": 2.03,
+      "text": "I do I asked you to think about a"
+    },
+    {
+      "index": 569,
+      "start": 1386.05,
+      "end": 1387.96,
+      "duration": 1.91,
+      "text": "recursively the recursive solution when"
+    },
+    {
+      "index": 570,
+      "start": 1387.97,
+      "end": 1389.73,
+      "duration": 1.76,
+      "text": "you see it is in fact very"
+    },
+    {
+      "index": 571,
+      "start": 1389.74,
+      "end": 1392.9,
+      "duration": 3.16,
+      "text": "straightforward and there's the code"
+    },
+    {
+      "index": 572,
+      "start": 1392.91,
+      "end": 1395.61,
+      "duration": 2.7,
+      "text": "dead trivial well dead trivial is unfair"
+    },
+    {
+      "index": 573,
+      "start": 1395.62,
+      "end": 1397.8,
+      "duration": 2.18,
+      "text": "but it's very simple right I simply"
+    },
+    {
+      "index": 574,
+      "start": 1397.81,
+      "end": 1400.05,
+      "duration": 2.24,
+      "text": "write something so let me describe it I"
+    },
+    {
+      "index": 575,
+      "start": 1400.06,
+      "end": 1401.73,
+      "duration": 1.67,
+      "text": "need to say how big a tower am i moving"
+    },
+    {
+      "index": 576,
+      "start": 1401.74,
+      "end": 1404.52,
+      "duration": 2.78,
+      "text": "and i'm going to label the three stacks"
+    },
+    {
+      "index": 577,
+      "start": 1404.53,
+      "end": 1407.4,
+      "duration": 2.87,
+      "text": "a from a two and a spare I have a little"
+    },
+    {
+      "index": 578,
+      "start": 1407.41,
+      "end": 1409.14,
+      "duration": 1.73,
+      "text": "procedure that just prints out the move"
+    },
+    {
+      "index": 579,
+      "start": 1409.15,
+      "end": 1411.92,
+      "duration": 2.77,
+      "text": "for me and then what's the solution if"
+    },
+    {
+      "index": 580,
+      "start": 1411.93,
+      "end": 1414.93,
+      "duration": 3.0,
+      "text": "it's just a stack of size one just print"
+    },
+    {
+      "index": 581,
+      "start": 1414.94,
+      "end": 1416.7,
+      "duration": 1.76,
+      "text": "the move take it to from from from to"
+    },
+    {
+      "index": 582,
+      "start": 1416.71,
+      "end": 1420.33,
+      "duration": 3.62,
+      "text": "two otherwise move a tower of size n"
+    },
+    {
+      "index": 583,
+      "start": 1420.34,
+      "end": 1423.57,
+      "duration": 3.23,
+      "text": "minus one from the from spot to the"
+    },
+    {
+      "index": 584,
+      "start": 1423.58,
+      "end": 1427.32,
+      "duration": 3.74,
+      "text": "spare spot then move what's left at our"
+    },
+    {
+      "index": 585,
+      "start": 1427.33,
+      "end": 1429.99,
+      "duration": 2.66,
+      "text": "size one from from two two and then take"
+    },
+    {
+      "index": 586,
+      "start": 1430.0,
+      "end": 1432.18,
+      "duration": 2.18,
+      "text": "that thing I stuck on spare and move it"
+    },
+    {
+      "index": 587,
+      "start": 1432.19,
+      "end": 1436.98,
+      "duration": 4.79,
+      "text": "over to two and I'm done in that code"
+    },
+    {
+      "index": 588,
+      "start": 1436.99,
+      "end": 1438.93,
+      "duration": 1.94,
+      "text": "that we had that out you'll see this"
+    },
+    {
+      "index": 589,
+      "start": 1438.94,
+      "end": 1440.22,
+      "duration": 1.28,
+      "text": "code you can run it I'm not going to"
+    },
+    {
+      "index": 590,
+      "start": 1440.23,
+      "end": 1441.6,
+      "duration": 1.37,
+      "text": "print it out because if I did use it's"
+    },
+    {
+      "index": 591,
+      "start": 1441.61,
+      "end": 1443.22,
+      "duration": 1.61,
+      "text": "going to say okay it looks like it does"
+    },
+    {
+      "index": 592,
+      "start": 1443.23,
+      "end": 1445.49,
+      "duration": 2.26,
+      "text": "the right kind of thing look at the code"
+    },
+    {
+      "index": 593,
+      "start": 1445.5,
+      "end": 1448.56,
+      "duration": 3.06,
+      "text": "nice and easy and that's what we'd like"
+    },
+    {
+      "index": 594,
+      "start": 1448.57,
+      "end": 1450.33,
+      "duration": 1.76,
+      "text": "you to do when you're given a problem we"
+    },
+    {
+      "index": 595,
+      "start": 1450.34,
+      "end": 1451.8,
+      "duration": 1.46,
+      "text": "asked you to think about it recursively"
+    },
+    {
+      "index": 596,
+      "start": 1451.81,
+      "end": 1453.6,
+      "duration": 1.79,
+      "text": "how do I solve this with a smaller"
+    },
+    {
+      "index": 597,
+      "start": 1453.61,
+      "end": 1456.3,
+      "duration": 2.69,
+      "text": "version of the same problem and then how"
+    },
+    {
+      "index": 598,
+      "start": 1456.31,
+      "end": 1457.74,
+      "duration": 1.43,
+      "text": "do I use that to build the larger"
+    },
+    {
+      "index": 599,
+      "start": 1457.75,
+      "end": 1460.53,
+      "duration": 2.78,
+      "text": "solution this case is a little different"
+    },
+    {
+      "index": 600,
+      "start": 1460.54,
+      "end": 1462.99,
+      "duration": 2.45,
+      "text": "you could argue that this is not really"
+    },
+    {
+      "index": 601,
+      "start": 1463.0,
+      "end": 1464.43,
+      "duration": 1.43,
+      "text": "a recursive call here it's just moving"
+    },
+    {
+      "index": 602,
+      "start": 1464.44,
+      "end": 1465.66,
+      "duration": 1.22,
+      "text": "the bottom when I could have done that"
+    },
+    {
+      "index": 603,
+      "start": 1465.67,
+      "end": 1469.92,
+      "duration": 4.25,
+      "text": "directly but I've got two recursive"
+    },
+    {
+      "index": 604,
+      "start": 1469.93,
+      "end": 1471.87,
+      "duration": 1.94,
+      "text": "calls in the body here I have to move a"
+    },
+    {
+      "index": 605,
+      "start": 1471.88,
+      "end": 1474.06,
+      "duration": 2.18,
+      "text": "smaller stack twice we're going to come"
+    },
+    {
+      "index": 606,
+      "start": 1474.07,
+      "end": 1478.17,
+      "duration": 4.1,
+      "text": "back to that in a little bit let me show"
+    },
+    {
+      "index": 607,
+      "start": 1478.18,
+      "end": 1479.9,
+      "duration": 1.72,
+      "text": "you one other example of recursion that"
+    },
+    {
+      "index": 608,
+      "start": 1479.91,
+      "end": 1483.45,
+      "duration": 3.54,
+      "text": "runs a little bit differently in this"
+    },
+    {
+      "index": 609,
+      "start": 1483.46,
+      "end": 1484.77,
+      "duration": 1.31,
+      "text": "case it's going to have multiple base"
+    },
+    {
+      "index": 610,
+      "start": 1484.78,
+      "end": 1486.3,
+      "duration": 1.52,
+      "text": "cases and this is another very old"
+    },
+    {
+      "index": 611,
+      "start": 1486.31,
+      "end": 1487.86,
+      "duration": 1.55,
+      "text": "problems called the Fibonacci numbers"
+    },
+    {
+      "index": 612,
+      "start": 1487.87,
+      "end": 1489.84,
+      "duration": 1.97,
+      "text": "it's based on something from several"
+    },
+    {
+      "index": 613,
+      "start": 1489.85,
+      "end": 1491.34,
+      "duration": 1.49,
+      "text": "centuries ago when a gentleman named"
+    },
+    {
+      "index": 614,
+      "start": 1491.35,
+      "end": 1493.79,
+      "duration": 2.44,
+      "text": "Leonardo of Pisa also known as Fibonacci"
+    },
+    {
+      "index": 615,
+      "start": 1493.8,
+      "end": 1497.07,
+      "duration": 3.27,
+      "text": "asked the following challenge so I'm"
+    },
+    {
+      "index": 616,
+      "start": 1497.08,
+      "end": 1498.0,
+      "duration": 0.92,
+      "text": "going to put a newborn"
+    },
+    {
+      "index": 617,
+      "start": 1498.01,
+      "end": 1499.83,
+      "duration": 1.82,
+      "text": "of rabbits one male and one female into"
+    },
+    {
+      "index": 618,
+      "start": 1499.84,
+      "end": 1502.77,
+      "duration": 2.93,
+      "text": "an enclosure a pan of some sort and"
+    },
+    {
+      "index": 619,
+      "start": 1502.78,
+      "end": 1504.03,
+      "duration": 1.25,
+      "text": "those rabbits have the following"
+    },
+    {
+      "index": 620,
+      "start": 1504.04,
+      "end": 1507.54,
+      "duration": 3.5,
+      "text": "properties they mate at age one month so"
+    },
+    {
+      "index": 621,
+      "start": 1507.55,
+      "end": 1509.97,
+      "duration": 2.42,
+      "text": "they take a month to mature after a"
+    },
+    {
+      "index": 622,
+      "start": 1509.98,
+      "end": 1512.22,
+      "duration": 2.24,
+      "text": "one-month gestation period they produce"
+    },
+    {
+      "index": 623,
+      "start": 1512.23,
+      "end": 1514.32,
+      "duration": 2.09,
+      "text": "another pair of rabbits a male and a"
+    },
+    {
+      "index": 624,
+      "start": 1514.33,
+      "end": 1516.33,
+      "duration": 2.0,
+      "text": "female and he says I'm going to assume"
+    },
+    {
+      "index": 625,
+      "start": 1516.34,
+      "end": 1520.02,
+      "duration": 3.68,
+      "text": "that the rabbits never die so each month"
+    },
+    {
+      "index": 626,
+      "start": 1520.03,
+      "end": 1521.73,
+      "duration": 1.7,
+      "text": "mature females are going to produce"
+    },
+    {
+      "index": 627,
+      "start": 1521.74,
+      "end": 1523.38,
+      "duration": 1.64,
+      "text": "another pair and his question was how"
+    },
+    {
+      "index": 628,
+      "start": 1523.39,
+      "end": 1524.97,
+      "duration": 1.58,
+      "text": "many female rabbits are there at the end"
+    },
+    {
+      "index": 629,
+      "start": 1524.98,
+      "end": 1529.88,
+      "duration": 4.9,
+      "text": "of a year or two years or three years so"
+    },
+    {
+      "index": 630,
+      "start": 1532.08,
+      "end": 1532.09,
+      "duration": 0.01,
+      "text": "ideas I start off with too immature"
+    },
+    {
+      "index": 631,
+      "start": 1532.09,
+      "end": 1535.16,
+      "duration": 3.07,
+      "text": "rabbits after one month they've matured"
+    },
+    {
+      "index": 632,
+      "start": 1535.17,
+      "end": 1538.26,
+      "duration": 3.09,
+      "text": "which means after another month they"
+    },
+    {
+      "index": 633,
+      "start": 1538.27,
+      "end": 1539.52,
+      "duration": 1.25,
+      "text": "will have both they were sorry they will"
+    },
+    {
+      "index": 634,
+      "start": 1539.53,
+      "end": 1542.13,
+      "duration": 2.6,
+      "text": "have produced a new pair after another"
+    },
+    {
+      "index": 635,
+      "start": 1542.14,
+      "end": 1543.87,
+      "duration": 1.73,
+      "text": "month that mature pair is produced"
+    },
+    {
+      "index": 636,
+      "start": 1543.88,
+      "end": 1546.6,
+      "duration": 2.72,
+      "text": "another pair and the immature pair has"
+    },
+    {
+      "index": 637,
+      "start": 1546.61,
+      "end": 1549.27,
+      "duration": 2.66,
+      "text": "matured which means after another month"
+    },
+    {
+      "index": 638,
+      "start": 1549.28,
+      "end": 1551.16,
+      "duration": 1.88,
+      "text": "those two mature pairs are going to"
+    },
+    {
+      "index": 639,
+      "start": 1551.17,
+      "end": 1554.4,
+      "duration": 3.23,
+      "text": "produce offspring and that immature"
+    },
+    {
+      "index": 640,
+      "start": 1554.41,
+      "end": 1557.31,
+      "duration": 2.9,
+      "text": "Paris has matured and you get the idea"
+    },
+    {
+      "index": 641,
+      "start": 1557.32,
+      "end": 1560.07,
+      "duration": 2.75,
+      "text": "and after several months you get to"
+    },
+    {
+      "index": 642,
+      "start": 1560.08,
+      "end": 1564.66,
+      "duration": 4.58,
+      "text": "Australia you can also see this is going"
+    },
+    {
+      "index": 643,
+      "start": 1564.67,
+      "end": 1565.86,
+      "duration": 1.19,
+      "text": "to be interesting to think about how do"
+    },
+    {
+      "index": 644,
+      "start": 1565.87,
+      "end": 1567.24,
+      "duration": 1.37,
+      "text": "you compute this but what I want you to"
+    },
+    {
+      "index": 645,
+      "start": 1567.25,
+      "end": 1569.07,
+      "duration": 1.82,
+      "text": "see is the recursive solution to it so"
+    },
+    {
+      "index": 646,
+      "start": 1569.08,
+      "end": 1572.31,
+      "duration": 3.23,
+      "text": "how could we capture this well here's"
+    },
+    {
+      "index": 647,
+      "start": 1572.32,
+      "end": 1574.56,
+      "duration": 2.24,
+      "text": "another way of thinking about it after"
+    },
+    {
+      "index": 648,
+      "start": 1574.57,
+      "end": 1575.7,
+      "duration": 1.13,
+      "text": "the first month and I know we're going"
+    },
+    {
+      "index": 649,
+      "start": 1575.71,
+      "end": 1576.72,
+      "duration": 1.01,
+      "text": "to do this funny thing we're going to"
+    },
+    {
+      "index": 650,
+      "start": 1576.73,
+      "end": 1578.19,
+      "duration": 1.46,
+      "text": "index at zero so I'll call at month zero"
+    },
+    {
+      "index": 651,
+      "start": 1578.2,
+      "end": 1582.27,
+      "duration": 4.07,
+      "text": "there is one female which is immature to"
+    },
+    {
+      "index": 652,
+      "start": 1582.28,
+      "end": 1584.73,
+      "duration": 2.45,
+      "text": "the second month that female is mature"
+    },
+    {
+      "index": 653,
+      "start": 1584.74,
+      "end": 1587.28,
+      "duration": 2.54,
+      "text": "and now pregnant which means after the"
+    },
+    {
+      "index": 654,
+      "start": 1587.29,
+      "end": 1590.28,
+      "duration": 2.99,
+      "text": "third month it is produced an offspring"
+    },
+    {
+      "index": 655,
+      "start": 1590.29,
+      "end": 1594.39,
+      "duration": 4.1,
+      "text": "and more generally at the end month"
+    },
+    {
+      "index": 656,
+      "start": 1594.4,
+      "end": 1596.16,
+      "duration": 1.76,
+      "text": "after we get past the first few cases"
+    },
+    {
+      "index": 657,
+      "start": 1596.17,
+      "end": 1599.28,
+      "duration": 3.11,
+      "text": "what do we have any female that was"
+    },
+    {
+      "index": 658,
+      "start": 1599.29,
+      "end": 1602.82,
+      "duration": 3.53,
+      "text": "there two months ago has produced an"
+    },
+    {
+      "index": 659,
+      "start": 1602.83,
+      "end": 1604.89,
+      "duration": 2.06,
+      "text": "offspring because it's taken at least"
+    },
+    {
+      "index": 660,
+      "start": 1604.9,
+      "end": 1606.78,
+      "duration": 1.88,
+      "text": "one month to mature if it hasn't already"
+    },
+    {
+      "index": 661,
+      "start": 1606.79,
+      "end": 1607.86,
+      "duration": 1.07,
+      "text": "been mature and then it's going to"
+    },
+    {
+      "index": 662,
+      "start": 1607.87,
+      "end": 1611.31,
+      "duration": 3.44,
+      "text": "produce an offspring and any female that"
+    },
+    {
+      "index": 663,
+      "start": 1611.32,
+      "end": 1613.32,
+      "duration": 2.0,
+      "text": "was around last month is still around"
+    },
+    {
+      "index": 664,
+      "start": 1613.33,
+      "end": 1615.81,
+      "duration": 2.48,
+      "text": "because it never died off so this is a"
+    },
+    {
+      "index": 665,
+      "start": 1615.82,
+      "end": 1618.09,
+      "duration": 2.27,
+      "text": "little different this is now the number"
+    },
+    {
+      "index": 666,
+      "start": 1618.1,
+      "end": 1620.55,
+      "duration": 2.45,
+      "text": "of females at month n is the number of"
+    },
+    {
+      "index": 667,
+      "start": 1620.56,
+      "end": 1622.62,
+      "duration": 2.06,
+      "text": "females at month n minus one plus the"
+    },
+    {
+      "index": 668,
+      "start": 1622.63,
+      "end": 1624.68,
+      "duration": 2.05,
+      "text": "number of females at month n minus two"
+    },
+    {
+      "index": 669,
+      "start": 1624.69,
+      "end": 1628.83,
+      "duration": 4.14,
+      "text": "so two recursive calls but with"
+    },
+    {
+      "index": 670,
+      "start": 1628.84,
+      "end": 1630.31,
+      "duration": 1.47,
+      "text": "different arguments"
+    },
+    {
+      "index": 671,
+      "start": 1630.32,
+      "end": 1633.47,
+      "duration": 3.15,
+      "text": "different from towers of Hanoi where"
+    },
+    {
+      "index": 672,
+      "start": 1633.48,
+      "end": 1635.06,
+      "duration": 1.58,
+      "text": "there were two recursive calls but with"
+    },
+    {
+      "index": 673,
+      "start": 1635.07,
+      "end": 1638.77,
+      "duration": 3.7,
+      "text": "the same size problem okay"
+    },
+    {
+      "index": 674,
+      "start": 1638.78,
+      "end": 1643.1,
+      "duration": 4.32,
+      "text": "so now I need two base cases one for"
+    },
+    {
+      "index": 675,
+      "start": 1643.11,
+      "end": 1645.62,
+      "duration": 2.51,
+      "text": "when n is equal to zero one frame when n"
+    },
+    {
+      "index": 676,
+      "start": 1645.63,
+      "end": 1647.6,
+      "duration": 1.97,
+      "text": "is equal to one and then I've got that"
+    },
+    {
+      "index": 677,
+      "start": 1647.61,
+      "end": 1651.95,
+      "duration": 4.34,
+      "text": "recursive case and so there's a nice"
+    },
+    {
+      "index": 678,
+      "start": 1651.96,
+      "end": 1655.13,
+      "duration": 3.17,
+      "text": "little piece of code Fibonacci I'm going"
+    },
+    {
+      "index": 679,
+      "start": 1655.14,
+      "end": 1656.63,
+      "duration": 1.49,
+      "text": "to assume X is an integer greater than"
+    },
+    {
+      "index": 680,
+      "start": 1656.64,
+      "end": 1657.74,
+      "duration": 1.1,
+      "text": "or equal to zero I'm going to return"
+    },
+    {
+      "index": 681,
+      "start": 1657.75,
+      "end": 1660.77,
+      "duration": 3.02,
+      "text": "Fibonacci of X and you can see now it"
+    },
+    {
+      "index": 682,
+      "start": 1660.78,
+      "end": 1663.08,
+      "duration": 2.3,
+      "text": "says if either X is equal to zero or X"
+    },
+    {
+      "index": 683,
+      "start": 1663.09,
+      "end": 1664.55,
+      "duration": 1.46,
+      "text": "is equal to one I'm going to return 1"
+    },
+    {
+      "index": 684,
+      "start": 1664.56,
+      "end": 1669.47,
+      "duration": 4.91,
+      "text": "otherwise I reduce it to two simpler"
+    },
+    {
+      "index": 685,
+      "start": 1669.48,
+      "end": 1671.12,
+      "duration": 1.64,
+      "text": "versions of the problem but with"
+    },
+    {
+      "index": 686,
+      "start": 1671.13,
+      "end": 1674.62,
+      "duration": 3.49,
+      "text": "different arguments and I add them up"
+    },
+    {
+      "index": 687,
+      "start": 1674.63,
+      "end": 1678.14,
+      "duration": 3.51,
+      "text": "okay and if we go look at this we can"
+    },
+    {
+      "index": 688,
+      "start": 1678.15,
+      "end": 1681.19,
+      "duration": 3.04,
+      "text": "actually run this I can find my code"
+    },
+    {
+      "index": 689,
+      "start": 1681.2,
+      "end": 1685.21,
+      "duration": 4.01,
+      "text": "which is right there"
+    },
+    {
+      "index": 690,
+      "start": 1690.38,
+      "end": 1690.39,
+      "duration": 0.01,
+      "text": "and I'm just going to so we can for"
+    },
+    {
+      "index": 691,
+      "start": 1690.39,
+      "end": 1697.13,
+      "duration": 6.74,
+      "text": "example check it by saying fib of 0 that"
+    },
+    {
+      "index": 692,
+      "start": 1697.14,
+      "end": 1702.65,
+      "duration": 5.51,
+      "text": "is it a I just hit a bug which I don't"
+    },
+    {
+      "index": 693,
+      "start": 1702.66,
+      "end": 1711.98,
+      "duration": 9.32,
+      "text": "see let me try it again"
+    },
+    {
+      "index": 694,
+      "start": 1729.56,
+      "end": 1729.57,
+      "duration": 0.01,
+      "text": "darn it's really naughty try it I got"
+    },
+    {
+      "index": 695,
+      "start": 1729.57,
+      "end": 1731.0,
+      "duration": 1.43,
+      "text": "two different versions of fib in here"
+    },
+    {
+      "index": 696,
+      "start": 1731.01,
+      "end": 1732.44,
+      "duration": 1.43,
+      "text": "that's what I've got going on so let me"
+    },
+    {
+      "index": 697,
+      "start": 1732.45,
+      "end": 1734.48,
+      "duration": 2.03,
+      "text": "do it again let's do fib of 1 there we"
+    },
+    {
+      "index": 698,
+      "start": 1734.49,
+      "end": 1734.84,
+      "duration": 0.35,
+      "text": "go"
+    },
+    {
+      "index": 699,
+      "start": 1734.85,
+      "end": 1739.37,
+      "duration": 4.52,
+      "text": "fib of 2 just to fib of 3 which is 3 and"
+    },
+    {
+      "index": 700,
+      "start": 1739.38,
+      "end": 1741.26,
+      "duration": 1.88,
+      "text": "fib of 4 which should add the previous"
+    },
+    {
+      "index": 701,
+      "start": 1741.27,
+      "end": 1743.12,
+      "duration": 1.85,
+      "text": "two which gives me 5 there we go sorry"
+    },
+    {
+      "index": 702,
+      "start": 1743.13,
+      "end": 1744.86,
+      "duration": 1.73,
+      "text": "about that I had two versions of fib in"
+    },
+    {
+      "index": 703,
+      "start": 1744.87,
+      "end": 1747.05,
+      "duration": 2.18,
+      "text": "my file which is why you complained at"
+    },
+    {
+      "index": 704,
+      "start": 1747.06,
+      "end": 1749.15,
+      "duration": 2.09,
+      "text": "me and which is why you should always"
+    },
+    {
+      "index": 705,
+      "start": 1749.16,
+      "end": 1750.95,
+      "duration": 1.79,
+      "text": "read the error instructions because it"
+    },
+    {
+      "index": 706,
+      "start": 1750.96,
+      "end": 1754.28,
+      "duration": 3.32,
+      "text": "tells you what you did wrong let's go on"
+    },
+    {
+      "index": 707,
+      "start": 1754.29,
+      "end": 1757.07,
+      "duration": 2.78,
+      "text": "and look at one more example of doing"
+    },
+    {
+      "index": 708,
+      "start": 1757.08,
+      "end": 1758.42,
+      "duration": 1.34,
+      "text": "recursion and we're going to"
+    },
+    {
+      "index": 709,
+      "start": 1758.43,
+      "end": 1759.71,
+      "duration": 1.28,
+      "text": "dictionaries and we're going to pull it"
+    },
+    {
+      "index": 710,
+      "start": 1759.72,
+      "end": 1762.32,
+      "duration": 2.6,
+      "text": "all together so far we been doing"
+    },
+    {
+      "index": 711,
+      "start": 1762.33,
+      "end": 1765.29,
+      "duration": 2.96,
+      "text": "recursion on numerical things we can do"
+    },
+    {
+      "index": 712,
+      "start": 1765.3,
+      "end": 1767.42,
+      "duration": 2.12,
+      "text": "it on non numerical things so a nice way"
+    },
+    {
+      "index": 713,
+      "start": 1767.43,
+      "end": 1768.83,
+      "duration": 1.4,
+      "text": "of thinking about this is how would I"
+    },
+    {
+      "index": 714,
+      "start": 1768.84,
+      "end": 1770.18,
+      "duration": 1.34,
+      "text": "tell if a string of characters is a"
+    },
+    {
+      "index": 715,
+      "start": 1770.19,
+      "end": 1772.19,
+      "duration": 2.0,
+      "text": "palindrome meaning it reads the same"
+    },
+    {
+      "index": 716,
+      "start": 1772.2,
+      "end": 1774.74,
+      "duration": 2.54,
+      "text": "backwards and forwards probably the most"
+    },
+    {
+      "index": 717,
+      "start": 1774.75,
+      "end": 1776.84,
+      "duration": 2.09,
+      "text": "famous palindrome is attributed to"
+    },
+    {
+      "index": 718,
+      "start": 1776.85,
+      "end": 1780.14,
+      "duration": 3.29,
+      "text": "Napoleon Abel was i ere I saw Elba given"
+    },
+    {
+      "index": 719,
+      "start": 1780.15,
+      "end": 1781.94,
+      "duration": 1.79,
+      "text": "that a Pulliam was French I really doubt"
+    },
+    {
+      "index": 720,
+      "start": 1781.95,
+      "end": 1784.13,
+      "duration": 2.18,
+      "text": "he said Abel was i ere I saw Elba but"
+    },
+    {
+      "index": 721,
+      "start": 1784.14,
+      "end": 1786.41,
+      "duration": 2.27,
+      "text": "it's a great palindrome another one"
+    },
+    {
+      "index": 722,
+      "start": 1786.42,
+      "end": 1788.3,
+      "duration": 1.88,
+      "text": "attributed Anne Michaels are we not"
+    },
+    {
+      "index": 723,
+      "start": 1788.31,
+      "end": 1791.06,
+      "duration": 2.75,
+      "text": "drawn onward we fruit viva we few drawn"
+    },
+    {
+      "index": 724,
+      "start": 1791.07,
+      "end": 1793.52,
+      "duration": 2.45,
+      "text": "onward to a new era reads the same"
+    },
+    {
+      "index": 725,
+      "start": 1793.53,
+      "end": 1796.01,
+      "duration": 2.48,
+      "text": "backwards and forwards it's fun to think"
+    },
+    {
+      "index": 726,
+      "start": 1796.02,
+      "end": 1797.3,
+      "duration": 1.28,
+      "text": "about how do you create the palindromes"
+    },
+    {
+      "index": 727,
+      "start": 1797.31,
+      "end": 1801.98,
+      "duration": 4.67,
+      "text": "I want to write code to solve this again"
+    },
+    {
+      "index": 728,
+      "start": 1801.99,
+      "end": 1803.57,
+      "duration": 1.58,
+      "text": "I want to think about it recursively so"
+    },
+    {
+      "index": 729,
+      "start": 1803.58,
+      "end": 1805.61,
+      "duration": 2.03,
+      "text": "here's what I'm going to do I'm first"
+    },
+    {
+      "index": 730,
+      "start": 1805.62,
+      "end": 1807.52,
+      "duration": 1.9,
+      "text": "going to take a string of characters"
+    },
+    {
+      "index": 731,
+      "start": 1807.53,
+      "end": 1810.47,
+      "duration": 2.94,
+      "text": "reduce them all to lowercase and strip"
+    },
+    {
+      "index": 732,
+      "start": 1810.48,
+      "end": 1812.63,
+      "duration": 2.15,
+      "text": "out spaces and punctuation I just want"
+    },
+    {
+      "index": 733,
+      "start": 1812.64,
+      "end": 1816.23,
+      "duration": 3.59,
+      "text": "the characters okay and once I got that"
+    },
+    {
+      "index": 734,
+      "start": 1816.24,
+      "end": 1818.51,
+      "duration": 2.27,
+      "text": "I want to say is that string that list"
+    },
+    {
+      "index": 735,
+      "start": 1818.52,
+      "end": 1819.89,
+      "duration": 1.37,
+      "text": "of characters or that collection of"
+    },
+    {
+      "index": 736,
+      "start": 1819.9,
+      "end": 1823.07,
+      "duration": 3.17,
+      "text": "characters I should say a palindrome and"
+    },
+    {
+      "index": 737,
+      "start": 1823.08,
+      "end": 1824.48,
+      "duration": 1.4,
+      "text": "I'm going to think about it recursively"
+    },
+    {
+      "index": 738,
+      "start": 1824.49,
+      "end": 1828.02,
+      "duration": 3.53,
+      "text": "and that's actually pretty easy if it's"
+    },
+    {
+      "index": 739,
+      "start": 1828.03,
+      "end": 1831.73,
+      "duration": 3.7,
+      "text": "either 0 or 1 long it's a palindrome"
+    },
+    {
+      "index": 740,
+      "start": 1831.74,
+      "end": 1834.29,
+      "duration": 2.55,
+      "text": "otherwise you could think about having"
+    },
+    {
+      "index": 741,
+      "start": 1834.3,
+      "end": 1835.79,
+      "duration": 1.49,
+      "text": "an index at each end of this thing and"
+    },
+    {
+      "index": 742,
+      "start": 1835.8,
+      "end": 1837.59,
+      "duration": 1.79,
+      "text": "sort of counting into the middle but"
+    },
+    {
+      "index": 743,
+      "start": 1837.6,
+      "end": 1839.3,
+      "duration": 1.7,
+      "text": "it's much easier to say take the 2 at"
+    },
+    {
+      "index": 744,
+      "start": 1839.31,
+      "end": 1842.24,
+      "duration": 2.93,
+      "text": "the end if they're the same then check"
+    },
+    {
+      "index": 745,
+      "start": 1842.25,
+      "end": 1843.53,
+      "duration": 1.28,
+      "text": "to see what's left in the middle is a"
+    },
+    {
+      "index": 746,
+      "start": 1843.54,
+      "end": 1845.96,
+      "duration": 2.42,
+      "text": "palindrome and if those two properties"
+    },
+    {
+      "index": 747,
+      "start": 1845.97,
+      "end": 1849.17,
+      "duration": 3.2,
+      "text": "true I'm done and notice what I just did"
+    },
+    {
+      "index": 748,
+      "start": 1849.18,
+      "end": 1852.05,
+      "duration": 2.87,
+      "text": "I nicely reduced a bigger problem to a"
+    },
+    {
+      "index": 749,
+      "start": 1852.06,
+      "end": 1853.85,
+      "duration": 1.79,
+      "text": "slightly smaller problem so exactly what"
+    },
+    {
+      "index": 750,
+      "start": 1853.86,
+      "end": 1858.56,
+      "duration": 4.7,
+      "text": "I want to do okay so what says to check"
+    },
+    {
+      "index": 751,
+      "start": 1858.57,
+      "end": 1860.87,
+      "duration": 2.3,
+      "text": "is this I'm going to reduce it to just"
+    },
+    {
+      "index": 752,
+      "start": 1860.88,
+      "end": 1862.58,
+      "duration": 1.7,
+      "text": "the string of characters and then I'm"
+    },
+    {
+      "index": 753,
+      "start": 1862.59,
+      "end": 1864.05,
+      "duration": 1.46,
+      "text": "going to check that's a palindrome by"
+    },
+    {
+      "index": 754,
+      "start": 1864.06,
+      "end": 1865.61,
+      "duration": 1.55,
+      "text": "pulling those two off and checking to"
+    },
+    {
+      "index": 755,
+      "start": 1865.62,
+      "end": 1868.1,
+      "duration": 2.48,
+      "text": "see they're the same and then checking"
+    },
+    {
+      "index": 756,
+      "start": 1868.11,
+      "end": 1869.81,
+      "duration": 1.7,
+      "text": "to see if the middle is itself a"
+    },
+    {
+      "index": 757,
+      "start": 1869.82,
+      "end": 1876.74,
+      "duration": 6.92,
+      "text": "palindrome okay how would I write it on"
+    },
+    {
+      "index": 758,
+      "start": 1876.75,
+      "end": 1878.33,
+      "duration": 1.58,
+      "text": "the create procedure up here is"
+    },
+    {
+      "index": 759,
+      "start": 1878.34,
+      "end": 1880.79,
+      "duration": 2.45,
+      "text": "palindrome I'm going to have inside of"
+    },
+    {
+      "index": 760,
+      "start": 1880.8,
+      "end": 1882.5,
+      "duration": 1.7,
+      "text": "it two internal procedures that do the"
+    },
+    {
+      "index": 761,
+      "start": 1882.51,
+      "end": 1884.12,
+      "duration": 1.61,
+      "text": "work for me the first one is simply"
+    },
+    {
+      "index": 762,
+      "start": 1884.13,
+      "end": 1886.61,
+      "duration": 2.48,
+      "text": "going to reduce this to all lowercase"
+    },
+    {
+      "index": 763,
+      "start": 1886.62,
+      "end": 1889.16,
+      "duration": 2.54,
+      "text": "with no spaces and notice what I can do"
+    },
+    {
+      "index": 764,
+      "start": 1889.17,
+      "end": 1891.95,
+      "duration": 2.78,
+      "text": "because s is a string of characters I"
+    },
+    {
+      "index": 765,
+      "start": 1891.96,
+      "end": 1895.1,
+      "duration": 3.14,
+      "text": "can use the built in string method lower"
+    },
+    {
+      "index": 766,
+      "start": 1895.11,
+      "end": 1897.56,
+      "duration": 2.45,
+      "text": "so there's that dot notation s dot lower"
+    },
+    {
+      "index": 767,
+      "start": 1897.57,
+      "end": 1899.84,
+      "duration": 2.27,
+      "text": "says apply the method lower to a string"
+    },
+    {
+      "index": 768,
+      "start": 1899.85,
+      "end": 1901.91,
+      "duration": 2.06,
+      "text": "I need an open and close paren to"
+    },
+    {
+      "index": 769,
+      "start": 1901.92,
+      "end": 1904.55,
+      "duration": 2.63,
+      "text": "actually call that procedure and that"
+    },
+    {
+      "index": 770,
+      "start": 1904.56,
+      "end": 1907.81,
+      "duration": 3.25,
+      "text": "will mutate s to just be all lowercase"
+    },
+    {
+      "index": 771,
+      "start": 1907.82,
+      "end": 1909.83,
+      "duration": 2.01,
+      "text": "and then I'm going to run a little loop"
+    },
+    {
+      "index": 772,
+      "start": 1909.84,
+      "end": 1911.69,
+      "duration": 1.85,
+      "text": "I'll set up answer or ants to be an"
+    },
+    {
+      "index": 773,
+      "start": 1911.7,
+      "end": 1913.28,
+      "duration": 1.58,
+      "text": "empty string and then for everything"
+    },
+    {
+      "index": 774,
+      "start": 1913.29,
+      "end": 1916.55,
+      "duration": 3.26,
+      "text": "inside that mutated string I'll simply"
+    },
+    {
+      "index": 775,
+      "start": 1916.56,
+      "end": 1919.4,
+      "duration": 2.84,
+      "text": "say if it's inside this string if it's a"
+    },
+    {
+      "index": 776,
+      "start": 1919.41,
+      "end": 1923.48,
+      "duration": 4.07,
+      "text": "letter add it in to answer if it's a"
+    },
+    {
+      "index": 777,
+      "start": 1923.49,
+      "end": 1925.34,
+      "duration": 1.85,
+      "text": "space or a comma or something else I'll"
+    },
+    {
+      "index": 778,
+      "start": 1925.35,
+      "end": 1926.72,
+      "duration": 1.37,
+      "text": "ignore it and when I'm done just return"
+    },
+    {
+      "index": 779,
+      "start": 1926.73,
+      "end": 1929.65,
+      "duration": 2.92,
+      "text": "answer strips it down to lowercase and"
+    },
+    {
+      "index": 780,
+      "start": 1929.66,
+      "end": 1932.68,
+      "duration": 3.02,
+      "text": "then I'm going to pass that into is pal"
+    },
+    {
+      "index": 781,
+      "start": 1932.69,
+      "end": 1936.29,
+      "duration": 3.6,
+      "text": "which simply says if this is either 0 or"
+    },
+    {
+      "index": 782,
+      "start": 1936.3,
+      "end": 1939.05,
+      "duration": 2.75,
+      "text": "1 long it's a palindrome return true"
+    },
+    {
+      "index": 783,
+      "start": 1939.06,
+      "end": 1942.05,
+      "duration": 2.99,
+      "text": "otherwise check to see that the first"
+    },
+    {
+      "index": 784,
+      "start": 1942.06,
+      "end": 1945.38,
+      "duration": 3.32,
+      "text": "and last element of the string are the"
+    },
+    {
+      "index": 785,
+      "start": 1945.39,
+      "end": 1947.69,
+      "duration": 2.3,
+      "text": "same notice the indexing to get into the"
+    },
+    {
+      "index": 786,
+      "start": 1947.7,
+      "end": 1950.39,
+      "duration": 2.69,
+      "text": "last element and similarly just slice"
+    },
+    {
+      "index": 787,
+      "start": 1950.4,
+      "end": 1952.4,
+      "duration": 2.0,
+      "text": "into the string ignoring the first and"
+    },
+    {
+      "index": 788,
+      "start": 1952.41,
+      "end": 1954.65,
+      "duration": 2.24,
+      "text": "last element and ask is that a"
+    },
+    {
+      "index": 789,
+      "start": 1954.66,
+      "end": 1958.7,
+      "duration": 4.04,
+      "text": "palindrome and then just call it and"
+    },
+    {
+      "index": 790,
+      "start": 1958.71,
+      "end": 1961.22,
+      "duration": 2.51,
+      "text": "that'll do it and again there's a nice"
+    },
+    {
+      "index": 791,
+      "start": 1961.23,
+      "end": 1962.6,
+      "duration": 1.37,
+      "text": "example of that in the code I'm not"
+    },
+    {
+      "index": 792,
+      "start": 1962.61,
+      "end": 1963.8,
+      "duration": 1.19,
+      "text": "going to run out of let you just go look"
+    },
+    {
+      "index": 793,
+      "start": 1963.81,
+      "end": 1965.03,
+      "duration": 1.22,
+      "text": "at it but it will actually pull out"
+    },
+    {
+      "index": 794,
+      "start": 1965.04,
+      "end": 1966.35,
+      "duration": 1.31,
+      "text": "something that checks is this a"
+    },
+    {
+      "index": 795,
+      "start": 1966.36,
+      "end": 1969.65,
+      "duration": 3.29,
+      "text": "palindrome notice again what I'm doing"
+    },
+    {
+      "index": 796,
+      "start": 1969.66,
+      "end": 1972.98,
+      "duration": 3.32,
+      "text": "here i'm doing dividing conquer i'm"
+    },
+    {
+      "index": 797,
+      "start": 1972.99,
+      "end": 1975.17,
+      "duration": 2.18,
+      "text": "taking a problem reducing it keep saying"
+    },
+    {
+      "index": 798,
+      "start": 1975.18,
+      "end": 1976.76,
+      "duration": 1.58,
+      "text": "this to a simpler version of the same"
+    },
+    {
+      "index": 799,
+      "start": 1976.77,
+      "end": 1977.24,
+      "duration": 0.47,
+      "text": "problem"
+    },
+    {
+      "index": 800,
+      "start": 1977.25,
+      "end": 1979.43,
+      "duration": 2.18,
+      "text": "keep unwinding it till i get down to"
+    },
+    {
+      "index": 801,
+      "start": 1979.44,
+      "end": 1979.72,
+      "duration": 0.28,
+      "text": "some"
+    },
+    {
+      "index": 802,
+      "start": 1979.73,
+      "end": 1981.61,
+      "duration": 1.88,
+      "text": "can solve directly in my base case and"
+    },
+    {
+      "index": 803,
+      "start": 1981.62,
+      "end": 1984.73,
+      "duration": 3.11,
+      "text": "I'm done and that's really the heart of"
+    },
+    {
+      "index": 804,
+      "start": 1984.74,
+      "end": 1986.62,
+      "duration": 1.88,
+      "text": "thinking about recursive solutions to"
+    },
+    {
+      "index": 805,
+      "start": 1986.63,
+      "end": 1989.38,
+      "duration": 2.75,
+      "text": "problems I would hope that one of the"
+    },
+    {
+      "index": 806,
+      "start": 1989.39,
+      "end": 1991.27,
+      "duration": 1.88,
+      "text": "things you remember besides my really"
+    },
+    {
+      "index": 807,
+      "start": 1991.28,
+      "end": 1993.49,
+      "duration": 2.21,
+      "text": "lousy patter up here is the idea of"
+    },
+    {
+      "index": 808,
+      "start": 1993.5,
+      "end": 1995.26,
+      "duration": 1.76,
+      "text": "towers of Hanoi because to me it's one"
+    },
+    {
+      "index": 809,
+      "start": 1995.27,
+      "end": 1997.39,
+      "duration": 2.12,
+      "text": "of the nicest examples of a problem that"
+    },
+    {
+      "index": 810,
+      "start": 1997.4,
+      "end": 2000.27,
+      "duration": 2.87,
+      "text": "would be hard to solve iteratively but"
+    },
+    {
+      "index": 811,
+      "start": 2000.28,
+      "end": 2002.19,
+      "duration": 1.91,
+      "text": "when you see the recursive solution it's"
+    },
+    {
+      "index": 812,
+      "start": 2002.2,
+      "end": 2004.23,
+      "duration": 2.03,
+      "text": "pretty straightforward keep that in mind"
+    },
+    {
+      "index": 813,
+      "start": 2004.24,
+      "end": 2008.22,
+      "duration": 3.98,
+      "text": "as you think about doing recursion okay"
+    },
+    {
+      "index": 814,
+      "start": 2008.23,
+      "end": 2010.62,
+      "duration": 2.39,
+      "text": "let's switch gears and let's talk very"
+    },
+    {
+      "index": 815,
+      "start": 2010.63,
+      "end": 2012.66,
+      "duration": 2.03,
+      "text": "briefly about another kind of data type"
+    },
+    {
+      "index": 816,
+      "start": 2012.67,
+      "end": 2015.54,
+      "duration": 2.87,
+      "text": "called a dictionary in the idea of a"
+    },
+    {
+      "index": 817,
+      "start": 2015.55,
+      "end": 2016.86,
+      "duration": 1.31,
+      "text": "dictionary I'm going to motivate with a"
+    },
+    {
+      "index": 818,
+      "start": 2016.87,
+      "end": 2019.62,
+      "duration": 2.75,
+      "text": "simple example there's a quiz coming up"
+    },
+    {
+      "index": 819,
+      "start": 2019.63,
+      "end": 2021.15,
+      "duration": 1.52,
+      "text": "on Thursday I know you don't want to"
+    },
+    {
+      "index": 820,
+      "start": 2021.16,
+      "end": 2023.01,
+      "duration": 1.85,
+      "text": "hear that but there is which means we're"
+    },
+    {
+      "index": 821,
+      "start": 2023.02,
+      "end": 2024.3,
+      "duration": 1.28,
+      "text": "going to be recording grades and so"
+    },
+    {
+      "index": 822,
+      "start": 2024.31,
+      "end": 2025.86,
+      "duration": 1.55,
+      "text": "imagine I wanted to build a little"
+    },
+    {
+      "index": 823,
+      "start": 2025.87,
+      "end": 2027.84,
+      "duration": 1.97,
+      "text": "database just to keep track of grades of"
+    },
+    {
+      "index": 824,
+      "start": 2027.85,
+      "end": 2030.15,
+      "duration": 2.3,
+      "text": "students so one of the ways I could do"
+    },
+    {
+      "index": 825,
+      "start": 2030.16,
+      "end": 2031.5,
+      "duration": 1.34,
+      "text": "it as I could create a list with the"
+    },
+    {
+      "index": 826,
+      "start": 2031.51,
+      "end": 2033.48,
+      "duration": 1.97,
+      "text": "names of the students I could create"
+    },
+    {
+      "index": 827,
+      "start": 2033.49,
+      "end": 2035.79,
+      "duration": 2.3,
+      "text": "another list with their grades and a"
+    },
+    {
+      "index": 828,
+      "start": 2035.8,
+      "end": 2038.04,
+      "duration": 2.24,
+      "text": "third list with the actual subject or"
+    },
+    {
+      "index": 829,
+      "start": 2038.05,
+      "end": 2040.97,
+      "duration": 2.92,
+      "text": "course from which they got that grade"
+    },
+    {
+      "index": 830,
+      "start": 2040.98,
+      "end": 2043.14,
+      "duration": 2.16,
+      "text": "keep a separate list for each one of"
+    },
+    {
+      "index": 831,
+      "start": 2043.15,
+      "end": 2045.36,
+      "duration": 2.21,
+      "text": "them keep them of the same length and in"
+    },
+    {
+      "index": 832,
+      "start": 2045.37,
+      "end": 2046.8,
+      "duration": 1.43,
+      "text": "essence what I'm doing here is I'm"
+    },
+    {
+      "index": 833,
+      "start": 2046.81,
+      "end": 2051.66,
+      "duration": 4.85,
+      "text": "storing information at the same index in"
+    },
+    {
+      "index": 834,
+      "start": 2051.67,
+      "end": 2055.14,
+      "duration": 3.47,
+      "text": "each list so Anna who's going to have to"
+    },
+    {
+      "index": 835,
+      "start": 2055.15,
+      "end": 2057.39,
+      "duration": 2.24,
+      "text": "take the class again gets a B John who's"
+    },
+    {
+      "index": 836,
+      "start": 2057.4,
+      "end": 2060.18,
+      "duration": 2.78,
+      "text": "created the class gets an A+ sorry Anna"
+    },
+    {
+      "index": 837,
+      "start": 2060.19,
+      "end": 2063.6,
+      "duration": 3.41,
+      "text": "John's had a longer time at it all right"
+    },
+    {
+      "index": 838,
+      "start": 2063.61,
+      "end": 2065.04,
+      "duration": 1.43,
+      "text": "bad jokes aside what I'm doing is I"
+    },
+    {
+      "index": 839,
+      "start": 2065.05,
+      "end": 2066.39,
+      "duration": 1.34,
+      "text": "could imagine just creating lists I"
+    },
+    {
+      "index": 840,
+      "start": 2066.4,
+      "end": 2067.92,
+      "duration": 1.52,
+      "text": "could create lists of lists but a simple"
+    },
+    {
+      "index": 841,
+      "start": 2067.93,
+      "end": 2070.8,
+      "duration": 2.87,
+      "text": "ways to do lists we're basically at each"
+    },
+    {
+      "index": 842,
+      "start": 2070.81,
+      "end": 2073.64,
+      "duration": 2.83,
+      "text": "index I've got associated information"
+    },
+    {
+      "index": 843,
+      "start": 2073.65,
+      "end": 2076.28,
+      "duration": 2.63,
+      "text": "it's a simple way to deal with it"
+    },
+    {
+      "index": 844,
+      "start": 2076.29,
+      "end": 2078.9,
+      "duration": 2.61,
+      "text": "getting a grade out takes a little bit"
+    },
+    {
+      "index": 845,
+      "start": 2078.91,
+      "end": 2080.34,
+      "duration": 1.43,
+      "text": "of work because if I want to get the"
+    },
+    {
+      "index": 846,
+      "start": 2080.35,
+      "end": 2082.14,
+      "duration": 1.79,
+      "text": "grade associated with a particular"
+    },
+    {
+      "index": 847,
+      "start": 2082.15,
+      "end": 2085.23,
+      "duration": 3.08,
+      "text": "student what would I do I would go into"
+    },
+    {
+      "index": 848,
+      "start": 2085.24,
+      "end": 2088.14,
+      "duration": 2.9,
+      "text": "the name list and use the method index"
+    },
+    {
+      "index": 849,
+      "start": 2088.15,
+      "end": 2089.94,
+      "duration": 1.79,
+      "text": "which you've seen before again notice"
+    },
+    {
+      "index": 850,
+      "start": 2089.95,
+      "end": 2092.22,
+      "duration": 2.27,
+      "text": "the dot notation it says this is a list"
+    },
+    {
+      "index": 851,
+      "start": 2092.23,
+      "end": 2094.92,
+      "duration": 2.69,
+      "text": "use the index method call it on student"
+    },
+    {
+      "index": 852,
+      "start": 2094.93,
+      "end": 2097.14,
+      "duration": 2.21,
+      "text": "and whatever the value of student is it"
+    },
+    {
+      "index": 853,
+      "start": 2097.15,
+      "end": 2099.33,
+      "duration": 2.18,
+      "text": "will find that in the list return the"
+    },
+    {
+      "index": 854,
+      "start": 2099.34,
+      "end": 2101.94,
+      "duration": 2.6,
+      "text": "index at that point and then I can use"
+    },
+    {
+      "index": 855,
+      "start": 2101.95,
+      "end": 2103.77,
+      "duration": 1.82,
+      "text": "that to go in and get the grade in the"
+    },
+    {
+      "index": 856,
+      "start": 2103.78,
+      "end": 2104.1,
+      "duration": 0.32,
+      "text": "course"
+    },
+    {
+      "index": 857,
+      "start": 2104.11,
+      "end": 2108.66,
+      "duration": 4.55,
+      "text": "and return something out simple way to"
+    },
+    {
+      "index": 858,
+      "start": 2108.67,
+      "end": 2111.27,
+      "duration": 2.6,
+      "text": "do it put a little ugly alright because"
+    },
+    {
+      "index": 859,
+      "start": 2111.28,
+      "end": 2113.309,
+      "duration": 2.029,
+      "text": "among other things I've got things store"
+    },
+    {
+      "index": 860,
+      "start": 2113.319,
+      "end": 2115.769,
+      "duration": 2.45,
+      "text": "in different places in the list I got to"
+    },
+    {
+      "index": 861,
+      "start": 2115.779,
+      "end": 2116.64,
+      "duration": 0.861,
+      "text": "think about if I'm going to add"
+    },
+    {
+      "index": 862,
+      "start": 2116.65,
+      "end": 2118.109,
+      "duration": 1.459,
+      "text": "something the list I got to put them in"
+    },
+    {
+      "index": 863,
+      "start": 2118.119,
+      "end": 2120.449,
+      "duration": 2.33,
+      "text": "the same spot in the list I've got to"
+    },
+    {
+      "index": 864,
+      "start": 2120.459,
+      "end": 2122.249,
+      "duration": 1.79,
+      "text": "remember to always index using integers"
+    },
+    {
+      "index": 865,
+      "start": 2122.259,
+      "end": 2124.14,
+      "duration": 1.881,
+      "text": "is what which is what we know how to do"
+    },
+    {
+      "index": 866,
+      "start": 2124.15,
+      "end": 2128.189,
+      "duration": 4.039,
+      "text": "with lists at least so far it would be"
+    },
+    {
+      "index": 867,
+      "start": 2128.199,
+      "end": 2129.839,
+      "duration": 1.64,
+      "text": "nice if I had a better way to do it and"
+    },
+    {
+      "index": 868,
+      "start": 2129.849,
+      "end": 2131.609,
+      "duration": 1.76,
+      "text": "that's exactly what a dictionary is"
+    },
+    {
+      "index": 869,
+      "start": 2131.619,
+      "end": 2132.719,
+      "duration": 1.1,
+      "text": "going to provide for me"
+    },
+    {
+      "index": 870,
+      "start": 2132.729,
+      "end": 2136.349,
+      "duration": 3.62,
+      "text": "so rather than indexing on integers I'd"
+    },
+    {
+      "index": 871,
+      "start": 2136.359,
+      "end": 2138.449,
+      "duration": 2.09,
+      "text": "like to index directly on the item of"
+    },
+    {
+      "index": 872,
+      "start": 2138.459,
+      "end": 2140.309,
+      "duration": 1.85,
+      "text": "interest I'd like to say where's Anna's"
+    },
+    {
+      "index": 873,
+      "start": 2140.319,
+      "end": 2142.68,
+      "duration": 2.361,
+      "text": "record and find that in one data"
+    },
+    {
+      "index": 874,
+      "start": 2142.69,
+      "end": 2145.339,
+      "duration": 2.649,
+      "text": "structure and so whereas a list is"
+    },
+    {
+      "index": 875,
+      "start": 2145.349,
+      "end": 2147.569,
+      "duration": 2.22,
+      "text": "indexed by integers and has elements"
+    },
+    {
+      "index": 876,
+      "start": 2147.579,
+      "end": 2150.87,
+      "duration": 3.291,
+      "text": "associated with it a dictionary is going"
+    },
+    {
+      "index": 877,
+      "start": 2150.88,
+      "end": 2154.41,
+      "duration": 3.53,
+      "text": "to combine a key or if you like a name"
+    },
+    {
+      "index": 878,
+      "start": 2154.42,
+      "end": 2156.779,
+      "duration": 2.359,
+      "text": "of some sort with an actual value and"
+    },
+    {
+      "index": 879,
+      "start": 2156.789,
+      "end": 2159.12,
+      "duration": 2.331,
+      "text": "we're going to index just by the name or"
+    },
+    {
+      "index": 880,
+      "start": 2159.13,
+      "end": 2162.839,
+      "duration": 3.709,
+      "text": "the label as we go into it so let me"
+    },
+    {
+      "index": 881,
+      "start": 2162.849,
+      "end": 2165.63,
+      "duration": 2.781,
+      "text": "show you some examples first of all to"
+    },
+    {
+      "index": 882,
+      "start": 2165.64,
+      "end": 2167.549,
+      "duration": 1.909,
+      "text": "create a dictionary I use curly braces"
+    },
+    {
+      "index": 883,
+      "start": 2167.559,
+      "end": 2169.259,
+      "duration": 1.7,
+      "text": "open close curly brace so an empty"
+    },
+    {
+      "index": 884,
+      "start": 2169.269,
+      "end": 2171.989,
+      "duration": 2.72,
+      "text": "dictionary would be simply that call if"
+    },
+    {
+      "index": 885,
+      "start": 2171.999,
+      "end": 2173.729,
+      "duration": 1.73,
+      "text": "I want to create an actual dictionary"
+    },
+    {
+      "index": 886,
+      "start": 2173.739,
+      "end": 2175.65,
+      "duration": 1.911,
+      "text": "before I insert things into it I use a"
+    },
+    {
+      "index": 887,
+      "start": 2175.66,
+      "end": 2178.529,
+      "duration": 2.869,
+      "text": "little bit of a funky notation it is a"
+    },
+    {
+      "index": 888,
+      "start": 2178.539,
+      "end": 2182.16,
+      "duration": 3.621,
+      "text": "key or a label a colon and then a value"
+    },
+    {
+      "index": 889,
+      "start": 2182.17,
+      "end": 2184.349,
+      "duration": 2.179,
+      "text": "in this case the string Anna and the end"
+    },
+    {
+      "index": 890,
+      "start": 2184.359,
+      "end": 2187.199,
+      "duration": 2.84,
+      "text": "of and the string B followed by a comma"
+    },
+    {
+      "index": 891,
+      "start": 2187.209,
+      "end": 2189.66,
+      "duration": 2.451,
+      "text": "which separates it from the next pairing"
+    },
+    {
+      "index": 892,
+      "start": 2189.67,
+      "end": 2192.809,
+      "duration": 3.139,
+      "text": "of a key and a label or key and a value"
+    },
+    {
+      "index": 893,
+      "start": 2192.819,
+      "end": 2196.979,
+      "duration": 4.16,
+      "text": "and so on and so if I do this what it"
+    },
+    {
+      "index": 894,
+      "start": 2196.989,
+      "end": 2199.069,
+      "duration": 2.08,
+      "text": "does in my dictionary is it creates"
+    },
+    {
+      "index": 895,
+      "start": 2199.079,
+      "end": 2204.059,
+      "duration": 4.98,
+      "text": "pairings of those labels with the values"
+    },
+    {
+      "index": 896,
+      "start": 2204.069,
+      "end": 2206.449,
+      "duration": 2.38,
+      "text": "I associated with them"
+    },
+    {
+      "index": 897,
+      "start": 2206.459,
+      "end": 2210.959,
+      "duration": 4.5,
+      "text": "okay these are pretty simple but in fact"
+    },
+    {
+      "index": 898,
+      "start": 2210.969,
+      "end": 2212.189,
+      "duration": 1.22,
+      "text": "there's lots of nice things we can do"
+    },
+    {
+      "index": 899,
+      "start": 2212.199,
+      "end": 2213.989,
+      "duration": 1.79,
+      "text": "with it so once we've got them indexing"
+    },
+    {
+      "index": 900,
+      "start": 2213.999,
+      "end": 2216.539,
+      "duration": 2.54,
+      "text": "now is similar to a list but not done by"
+    },
+    {
+      "index": 901,
+      "start": 2216.549,
+      "end": 2218.699,
+      "duration": 2.15,
+      "text": "a number it's done by a value so if"
+    },
+    {
+      "index": 902,
+      "start": 2218.709,
+      "end": 2221.219,
+      "duration": 2.51,
+      "text": "that's my key I can say what's John's"
+    },
+    {
+      "index": 903,
+      "start": 2221.229,
+      "end": 2223.829,
+      "duration": 2.6,
+      "text": "great notice the call it's grades which"
+    },
+    {
+      "index": 904,
+      "start": 2223.839,
+      "end": 2226.319,
+      "duration": 2.48,
+      "text": "is my dictionary open close square"
+    },
+    {
+      "index": 905,
+      "start": 2226.329,
+      "end": 2229.439,
+      "duration": 3.11,
+      "text": "brackets with the label John and what it"
+    },
+    {
+      "index": 906,
+      "start": 2229.449,
+      "end": 2230.999,
+      "duration": 1.55,
+      "text": "does it goes in and finds that in the"
+    },
+    {
+      "index": 907,
+      "start": 2231.009,
+      "end": 2232.589,
+      "duration": 1.58,
+      "text": "dictionary returns the value associated"
+    },
+    {
+      "index": 908,
+      "start": 2232.599,
+      "end": 2235.289,
+      "duration": 2.69,
+      "text": "with it if I ask for something not in"
+    },
+    {
+      "index": 909,
+      "start": 2235.299,
+      "end": 2236.519,
+      "duration": 1.22,
+      "text": "the dictionary it's going to give me a"
+    },
+    {
+      "index": 910,
+      "start": 2236.529,
+      "end": 2240.39,
+      "duration": 3.861,
+      "text": "key R other things we can do with"
+    },
+    {
+      "index": 911,
+      "start": 2240.4,
+      "end": 2243.469,
+      "duration": 3.069,
+      "text": "dictionaries we can add entries just"
+    },
+    {
+      "index": 912,
+      "start": 2243.479,
+      "end": 2246.9,
+      "duration": 3.421,
+      "text": "like we would do with lists"
+    },
+    {
+      "index": 913,
+      "start": 2246.91,
+      "end": 2249.24,
+      "duration": 2.33,
+      "text": "grades as a dictionary and open and"
+    },
+    {
+      "index": 914,
+      "start": 2249.25,
+      "end": 2251.279,
+      "duration": 2.029,
+      "text": "close square brackets I put in a new"
+    },
+    {
+      "index": 915,
+      "start": 2251.289,
+      "end": 2256.079,
+      "duration": 4.79,
+      "text": "label and a value and that adds that to"
+    },
+    {
+      "index": 916,
+      "start": 2256.089,
+      "end": 2259.859,
+      "duration": 3.77,
+      "text": "the dictionary I can test if something's"
+    },
+    {
+      "index": 917,
+      "start": 2259.869,
+      "end": 2261.96,
+      "duration": 2.091,
+      "text": "in the dictionary by simply saying is"
+    },
+    {
+      "index": 918,
+      "start": 2261.97,
+      "end": 2265.38,
+      "duration": 3.41,
+      "text": "this label in grades and it simply"
+    },
+    {
+      "index": 919,
+      "start": 2265.39,
+      "end": 2268.589,
+      "duration": 3.199,
+      "text": "checks all of the labels or the keys for"
+    },
+    {
+      "index": 920,
+      "start": 2268.599,
+      "end": 2269.94,
+      "duration": 1.341,
+      "text": "the dictionary to see if it's there and"
+    },
+    {
+      "index": 921,
+      "start": 2269.95,
+      "end": 2273.569,
+      "duration": 3.619,
+      "text": "if it's not returns false I can remove"
+    },
+    {
+      "index": 922,
+      "start": 2273.579,
+      "end": 2276.779,
+      "duration": 3.2,
+      "text": "entries del something we've seen before"
+    },
+    {
+      "index": 923,
+      "start": 2276.789,
+      "end": 2278.46,
+      "duration": 1.671,
+      "text": "a very generic thing it will delete"
+    },
+    {
+      "index": 924,
+      "start": 2278.47,
+      "end": 2280.41,
+      "duration": 1.94,
+      "text": "something and in this case it says in"
+    },
+    {
+      "index": 925,
+      "start": 2280.42,
+      "end": 2282.839,
+      "duration": 2.419,
+      "text": "the dictionary grades find the entry"
+    },
+    {
+      "index": 926,
+      "start": 2282.849,
+      "end": 2285.539,
+      "duration": 2.69,
+      "text": "associated with that key sorry Ana"
+    },
+    {
+      "index": 927,
+      "start": 2285.549,
+      "end": 2288.769,
+      "duration": 3.22,
+      "text": "you're about to be flushed remove it"
+    },
+    {
+      "index": 928,
+      "start": 2288.779,
+      "end": 2291.18,
+      "duration": 2.401,
+      "text": "she's only getting a B in the class and"
+    },
+    {
+      "index": 929,
+      "start": 2291.19,
+      "end": 2292.62,
+      "duration": 1.43,
+      "text": "she teaches it we got to do something"
+    },
+    {
+      "index": 930,
+      "start": 2292.63,
+      "end": 2295.95,
+      "duration": 3.32,
+      "text": "about this right okay so I can add"
+    },
+    {
+      "index": 931,
+      "start": 2295.96,
+      "end": 2297.569,
+      "duration": 1.609,
+      "text": "things I can delete things I can test if"
+    },
+    {
+      "index": 932,
+      "start": 2297.579,
+      "end": 2299.309,
+      "duration": 1.73,
+      "text": "things are there let me show you a"
+    },
+    {
+      "index": 933,
+      "start": 2299.319,
+      "end": 2300.509,
+      "duration": 1.19,
+      "text": "couple of other things about"
+    },
+    {
+      "index": 934,
+      "start": 2300.519,
+      "end": 2304.17,
+      "duration": 3.651,
+      "text": "dictionaries I can ask for all of the"
+    },
+    {
+      "index": 935,
+      "start": 2304.18,
+      "end": 2307.71,
+      "duration": 3.53,
+      "text": "keys in the dictionary notice the format"
+    },
+    {
+      "index": 936,
+      "start": 2307.72,
+      "end": 2309.509,
+      "duration": 1.789,
+      "text": "there's that dot notation grades as a"
+    },
+    {
+      "index": 937,
+      "start": 2309.519,
+      "end": 2311.519,
+      "duration": 2.0,
+      "text": "dictionary says use the keys method"
+    },
+    {
+      "index": 938,
+      "start": 2311.529,
+      "end": 2313.769,
+      "duration": 2.24,
+      "text": "associated with this data structured"
+    },
+    {
+      "index": 939,
+      "start": 2313.779,
+      "end": 2316.499,
+      "duration": 2.72,
+      "text": "dictionaries open close actually calls"
+    },
+    {
+      "index": 940,
+      "start": 2316.509,
+      "end": 2318.87,
+      "duration": 2.361,
+      "text": "it and it gives me back a collection of"
+    },
+    {
+      "index": 941,
+      "start": 2318.88,
+      "end": 2324.299,
+      "duration": 5.419,
+      "text": "all the keys in some arbitrary order I'm"
+    },
+    {
+      "index": 942,
+      "start": 2324.309,
+      "end": 2326.039,
+      "duration": 1.73,
+      "text": "going to use a funny term here which I'm"
+    },
+    {
+      "index": 943,
+      "start": 2326.049,
+      "end": 2327.9,
+      "duration": 1.851,
+      "text": "not certain we've seen so far it returns"
+    },
+    {
+      "index": 944,
+      "start": 2327.91,
+      "end": 2329.609,
+      "duration": 1.699,
+      "text": "something we call an iterable it's like"
+    },
+    {
+      "index": 945,
+      "start": 2329.619,
+      "end": 2332.009,
+      "duration": 2.39,
+      "text": "range think of it as giving us back the"
+    },
+    {
+      "index": 946,
+      "start": 2332.019,
+      "end": 2333.48,
+      "duration": 1.461,
+      "text": "equivalent of a list it's not actually"
+    },
+    {
+      "index": 947,
+      "start": 2333.49,
+      "end": 2334.92,
+      "duration": 1.43,
+      "text": "list but it's something we could walk"
+    },
+    {
+      "index": 948,
+      "start": 2334.93,
+      "end": 2337.319,
+      "duration": 2.389,
+      "text": "down which is exactly why I can then say"
+    },
+    {
+      "index": 949,
+      "start": 2337.329,
+      "end": 2339.509,
+      "duration": 2.18,
+      "text": "is something in a dictionary because it"
+    },
+    {
+      "index": 950,
+      "start": 2339.519,
+      "end": 2342.749,
+      "duration": 3.23,
+      "text": "returns this set of keys and I can test"
+    },
+    {
+      "index": 951,
+      "start": 2342.759,
+      "end": 2344.49,
+      "duration": 1.731,
+      "text": "to see something's in there I can"
+    },
+    {
+      "index": 952,
+      "start": 2344.5,
+      "end": 2346.68,
+      "duration": 2.18,
+      "text": "similarly get all of the values if I"
+    },
+    {
+      "index": 953,
+      "start": 2346.69,
+      "end": 2349.14,
+      "duration": 2.45,
+      "text": "wanted to look at them giving us out two"
+    },
+    {
+      "index": 954,
+      "start": 2349.15,
+      "end": 2352.499,
+      "duration": 3.349,
+      "text": "intervals here are the key things to"
+    },
+    {
+      "index": 955,
+      "start": 2352.509,
+      "end": 2356.849,
+      "duration": 4.34,
+      "text": "keep in mind about dictionaries the"
+    },
+    {
+      "index": 956,
+      "start": 2356.859,
+      "end": 2360.18,
+      "duration": 3.321,
+      "text": "values can be anything any type mutable"
+    },
+    {
+      "index": 957,
+      "start": 2360.19,
+      "end": 2362.13,
+      "duration": 1.94,
+      "text": "immutable they could be duplicates that"
+    },
+    {
+      "index": 958,
+      "start": 2362.14,
+      "end": 2363.18,
+      "duration": 1.04,
+      "text": "actually makes sense I could have the"
+    },
+    {
+      "index": 959,
+      "start": 2363.19,
+      "end": 2364.74,
+      "duration": 1.55,
+      "text": "same value associated that for example"
+    },
+    {
+      "index": 960,
+      "start": 2364.75,
+      "end": 2366.39,
+      "duration": 1.64,
+      "text": "the same grade associated with different"
+    },
+    {
+      "index": 961,
+      "start": 2366.4,
+      "end": 2368.94,
+      "duration": 2.54,
+      "text": "people that's perfectly fine the values"
+    },
+    {
+      "index": 962,
+      "start": 2368.95,
+      "end": 2370.769,
+      "duration": 1.819,
+      "text": "could be lists they could be other data"
+    },
+    {
+      "index": 963,
+      "start": 2370.779,
+      "end": 2371.97,
+      "duration": 1.191,
+      "text": "structures they could even be other"
+    },
+    {
+      "index": 964,
+      "start": 2371.98,
+      "end": 2373.92,
+      "duration": 1.94,
+      "text": "dictionaries they can be anything which"
+    },
+    {
+      "index": 965,
+      "start": 2373.93,
+      "end": 2377.7,
+      "duration": 3.77,
+      "text": "is great the keys the first part of it a"
+    },
+    {
+      "index": 966,
+      "start": 2377.71,
+      "end": 2380.339,
+      "duration": 2.629,
+      "text": "little more structure"
+    },
+    {
+      "index": 967,
+      "start": 2380.349,
+      "end": 2383.4,
+      "duration": 3.051,
+      "text": "they need to be unique well duh that"
+    },
+    {
+      "index": 968,
+      "start": 2383.41,
+      "end": 2385.17,
+      "duration": 1.76,
+      "text": "makes sense if I have the same key in"
+    },
+    {
+      "index": 969,
+      "start": 2385.18,
+      "end": 2386.789,
+      "duration": 1.609,
+      "text": "two places in the dictionary when I go"
+    },
+    {
+      "index": 970,
+      "start": 2386.799,
+      "end": 2387.9,
+      "duration": 1.101,
+      "text": "to look it up how am I going to know"
+    },
+    {
+      "index": 971,
+      "start": 2387.91,
+      "end": 2389.219,
+      "duration": 1.309,
+      "text": "which one I want so it needs to be"
+    },
+    {
+      "index": 972,
+      "start": 2389.229,
+      "end": 2391.71,
+      "duration": 2.481,
+      "text": "unique and they also need to be"
+    },
+    {
+      "index": 973,
+      "start": 2391.72,
+      "end": 2394.589,
+      "duration": 2.869,
+      "text": "immutable which also makes sense if I'm"
+    },
+    {
+      "index": 974,
+      "start": 2394.599,
+      "end": 2395.969,
+      "duration": 1.37,
+      "text": "storing something in a key in the"
+    },
+    {
+      "index": 975,
+      "start": 2395.979,
+      "end": 2398.43,
+      "duration": 2.451,
+      "text": "dictionary and I can go and change the"
+    },
+    {
+      "index": 976,
+      "start": 2398.44,
+      "end": 2399.719,
+      "duration": 1.279,
+      "text": "value of the key how am I going to"
+    },
+    {
+      "index": 977,
+      "start": 2399.729,
+      "end": 2401.4,
+      "duration": 1.671,
+      "text": "remember what I was looking for so they"
+    },
+    {
+      "index": 978,
+      "start": 2401.41,
+      "end": 2403.469,
+      "duration": 2.059,
+      "text": "can only be things like intz flows"
+    },
+    {
+      "index": 979,
+      "start": 2403.479,
+      "end": 2407.219,
+      "duration": 3.74,
+      "text": "strings tuples boolean's I don't"
+    },
+    {
+      "index": 980,
+      "start": 2407.229,
+      "end": 2408.719,
+      "duration": 1.49,
+      "text": "recommend using floats because you need"
+    },
+    {
+      "index": 981,
+      "start": 2408.729,
+      "end": 2410.279,
+      "duration": 1.55,
+      "text": "to make sure it's exactly the same float"
+    },
+    {
+      "index": 982,
+      "start": 2410.289,
+      "end": 2411.299,
+      "duration": 1.01,
+      "text": "and that sometimes a little bit"
+    },
+    {
+      "index": 983,
+      "start": 2411.309,
+      "end": 2413.4,
+      "duration": 2.091,
+      "text": "challenging but nonetheless you can have"
+    },
+    {
+      "index": 984,
+      "start": 2413.41,
+      "end": 2415.319,
+      "duration": 1.909,
+      "text": "any immutable type as your key and"
+    },
+    {
+      "index": 985,
+      "start": 2415.329,
+      "end": 2417.9,
+      "duration": 2.571,
+      "text": "notice that there's no order to the keys"
+    },
+    {
+      "index": 986,
+      "start": 2417.91,
+      "end": 2419.37,
+      "duration": 1.46,
+      "text": "or the values they are simply stored"
+    },
+    {
+      "index": 987,
+      "start": 2419.38,
+      "end": 2421.499,
+      "duration": 2.119,
+      "text": "arbitrarily by the by Python as it puts"
+    },
+    {
+      "index": 988,
+      "start": 2421.509,
+      "end": 2424.589,
+      "duration": 3.08,
+      "text": "them in and so if I compare these two"
+    },
+    {
+      "index": 989,
+      "start": 2424.599,
+      "end": 2427.289,
+      "duration": 2.69,
+      "text": "lists our ordered sequences index by"
+    },
+    {
+      "index": 990,
+      "start": 2427.299,
+      "end": 2429.809,
+      "duration": 2.51,
+      "text": "integers I look them up by integer index"
+    },
+    {
+      "index": 991,
+      "start": 2429.819,
+      "end": 2431.819,
+      "duration": 2.0,
+      "text": "and the indices have to have an order as"
+    },
+    {
+      "index": 992,
+      "start": 2431.829,
+      "end": 2434.239,
+      "duration": 2.41,
+      "text": "a consequence dictionaries are this nice"
+    },
+    {
+      "index": 993,
+      "start": 2434.249,
+      "end": 2437.069,
+      "duration": 2.82,
+      "text": "generalization arbitrarily match keys to"
+    },
+    {
+      "index": 994,
+      "start": 2437.079,
+      "end": 2439.769,
+      "duration": 2.69,
+      "text": "values I simply look up one item by"
+    },
+    {
+      "index": 995,
+      "start": 2439.779,
+      "end": 2440.999,
+      "duration": 1.22,
+      "text": "looking up things under the appropriate"
+    },
+    {
+      "index": 996,
+      "start": 2441.009,
+      "end": 2443.819,
+      "duration": 2.81,
+      "text": "key all I requires that the keys have to"
+    },
+    {
+      "index": 997,
+      "start": 2443.829,
+      "end": 2448.319,
+      "duration": 4.49,
+      "text": "be immutable okay I want to do two last"
+    },
+    {
+      "index": 998,
+      "start": 2448.329,
+      "end": 2451.319,
+      "duration": 2.99,
+      "text": "things seven minutes to go here I want"
+    },
+    {
+      "index": 999,
+      "start": 2451.329,
+      "end": 2452.519,
+      "duration": 1.19,
+      "text": "to show you an example of using"
+    },
+    {
+      "index": 1000,
+      "start": 2452.529,
+      "end": 2454.499,
+      "duration": 1.97,
+      "text": "dictionaries and I'm going to do this"
+    },
+    {
+      "index": 1001,
+      "start": 2454.509,
+      "end": 2456.12,
+      "duration": 1.611,
+      "text": "with a little bit more interesting I"
+    },
+    {
+      "index": 1002,
+      "start": 2456.13,
+      "end": 2457.769,
+      "duration": 1.639,
+      "text": "hope example I'm going to analyze song"
+    },
+    {
+      "index": 1003,
+      "start": 2457.779,
+      "end": 2460.079,
+      "duration": 2.3,
+      "text": "lyrics now I'm going to show you you can"
+    },
+    {
+      "index": 1004,
+      "start": 2460.089,
+      "end": 2461.309,
+      "duration": 1.22,
+      "text": "already tell the difference between my"
+    },
+    {
+      "index": 1005,
+      "start": 2461.319,
+      "end": 2464.219,
+      "duration": 2.9,
+      "text": "age and Anna's age she used Taylor Swift"
+    },
+    {
+      "index": 1006,
+      "start": 2464.229,
+      "end": 2466.589,
+      "duration": 2.36,
+      "text": "and Justin Bieber I'm going to use the"
+    },
+    {
+      "index": 1007,
+      "start": 2466.599,
+      "end": 2468.569,
+      "duration": 1.97,
+      "text": "Beatles that's more my generation most"
+    },
+    {
+      "index": 1008,
+      "start": 2468.579,
+      "end": 2469.89,
+      "duration": 1.311,
+      "text": "of you never heard of the Beatles unless"
+    },
+    {
+      "index": 1009,
+      "start": 2469.9,
+      "end": 2471.479,
+      "duration": 1.579,
+      "text": "you watch shining time station where you"
+    },
+    {
+      "index": 1010,
+      "start": 2471.489,
+      "end": 2474.509,
+      "duration": 3.02,
+      "text": "saw Ringo Starr right okay what I'm"
+    },
+    {
+      "index": 1011,
+      "start": 2474.519,
+      "end": 2475.95,
+      "duration": 1.431,
+      "text": "going to do is I want to write us a"
+    },
+    {
+      "index": 1012,
+      "start": 2475.96,
+      "end": 2477.839,
+      "duration": 1.879,
+      "text": "little set of procedures that record the"
+    },
+    {
+      "index": 1013,
+      "start": 2477.849,
+      "end": 2481.559,
+      "duration": 3.71,
+      "text": "frequencies of words in a song lyric so"
+    },
+    {
+      "index": 1014,
+      "start": 2481.569,
+      "end": 2483.45,
+      "duration": 1.881,
+      "text": "I'm going to match strings or words to"
+    },
+    {
+      "index": 1015,
+      "start": 2483.46,
+      "end": 2485.459,
+      "duration": 1.999,
+      "text": "integers how many times did that that"
+    },
+    {
+      "index": 1016,
+      "start": 2485.469,
+      "end": 2487.829,
+      "duration": 2.36,
+      "text": "word appear in the in the song lyric and"
+    },
+    {
+      "index": 1017,
+      "start": 2487.839,
+      "end": 2489.539,
+      "duration": 1.7,
+      "text": "then I'm going to ask can I easily"
+    },
+    {
+      "index": 1018,
+      "start": 2489.549,
+      "end": 2491.609,
+      "duration": 2.06,
+      "text": "figure out which words occur most often"
+    },
+    {
+      "index": 1019,
+      "start": 2491.619,
+      "end": 2494.519,
+      "duration": 2.9,
+      "text": "and how many times I'm going to gather"
+    },
+    {
+      "index": 1020,
+      "start": 2494.529,
+      "end": 2495.959,
+      "duration": 1.43,
+      "text": "them together to see what are the most"
+    },
+    {
+      "index": 1021,
+      "start": 2495.969,
+      "end": 2498.15,
+      "duration": 2.181,
+      "text": "common words in here and I'm going to do"
+    },
+    {
+      "index": 1022,
+      "start": 2498.16,
+      "end": 2499.529,
+      "duration": 1.369,
+      "text": "that where I'm going to let a user say I"
+    },
+    {
+      "index": 1023,
+      "start": 2499.539,
+      "end": 2501.059,
+      "duration": 1.52,
+      "text": "want every word that appears more than"
+    },
+    {
+      "index": 1024,
+      "start": 2501.069,
+      "end": 2503.13,
+      "duration": 2.061,
+      "text": "some number of times it's a simple"
+    },
+    {
+      "index": 1025,
+      "start": 2503.14,
+      "end": 2504.599,
+      "duration": 1.459,
+      "text": "example but I want you to see how"
+    },
+    {
+      "index": 1026,
+      "start": 2504.609,
+      "end": 2506.43,
+      "duration": 1.821,
+      "text": "mutation of the dictionary gives you a"
+    },
+    {
+      "index": 1027,
+      "start": 2506.44,
+      "end": 2508.799,
+      "duration": 2.359,
+      "text": "really powerful tool for solving this"
+    },
+    {
+      "index": 1028,
+      "start": 2508.809,
+      "end": 2509.249,
+      "duration": 0.44,
+      "text": "problem"
+    },
+    {
+      "index": 1029,
+      "start": 2509.259,
+      "end": 2513.15,
+      "duration": 3.891,
+      "text": "so let's write the code to do that it's"
+    },
+    {
+      "index": 1030,
+      "start": 2513.16,
+      "end": 2514.23,
+      "duration": 1.07,
+      "text": "also in the handout"
+    },
+    {
+      "index": 1031,
+      "start": 2514.24,
+      "end": 2516.93,
+      "duration": 2.69,
+      "text": "here we go lyrics to frequencies lyrics"
+    },
+    {
+      "index": 1032,
+      "start": 2516.94,
+      "end": 2521.07,
+      "duration": 4.13,
+      "text": "is just a list of words strings so I'm"
+    },
+    {
+      "index": 1033,
+      "start": 2521.08,
+      "end": 2522.24,
+      "duration": 1.16,
+      "text": "going to set up an empty dictionary"
+    },
+    {
+      "index": 1034,
+      "start": 2522.25,
+      "end": 2524.24,
+      "duration": 1.99,
+      "text": "there's that open closed curly brace and"
+    },
+    {
+      "index": 1035,
+      "start": 2524.25,
+      "end": 2526.98,
+      "duration": 2.73,
+      "text": "here's what I'm going to do I'm going to"
+    },
+    {
+      "index": 1036,
+      "start": 2526.99,
+      "end": 2528.78,
+      "duration": 1.79,
+      "text": "walk through all the words in lyrics"
+    },
+    {
+      "index": 1037,
+      "start": 2528.79,
+      "end": 2530.43,
+      "duration": 1.64,
+      "text": "you've seen this before this is looping"
+    },
+    {
+      "index": 1038,
+      "start": 2530.44,
+      "end": 2533.43,
+      "duration": 2.99,
+      "text": "over for every word in lyrics notice"
+    },
+    {
+      "index": 1039,
+      "start": 2533.44,
+      "end": 2535.17,
+      "duration": 1.73,
+      "text": "what I'm going to do I'm going to simply"
+    },
+    {
+      "index": 1040,
+      "start": 2535.18,
+      "end": 2537.78,
+      "duration": 2.6,
+      "text": "say so first part is I can easily"
+    },
+    {
+      "index": 1041,
+      "start": 2537.79,
+      "end": 2539.91,
+      "duration": 2.12,
+      "text": "iterate over the list but now I'm going"
+    },
+    {
+      "index": 1042,
+      "start": 2539.92,
+      "end": 2542.45,
+      "duration": 2.53,
+      "text": "to say if the word is in the dictionary"
+    },
+    {
+      "index": 1043,
+      "start": 2542.46,
+      "end": 2545.37,
+      "duration": 2.91,
+      "text": "and because the dictionary is iterable"
+    },
+    {
+      "index": 1044,
+      "start": 2545.38,
+      "end": 2547.29,
+      "duration": 1.91,
+      "text": "simply going to give me back all of the"
+    },
+    {
+      "index": 1045,
+      "start": 2547.3,
+      "end": 2548.58,
+      "duration": 1.28,
+      "text": "keys it's simply going to say in this"
+    },
+    {
+      "index": 1046,
+      "start": 2548.59,
+      "end": 2551.55,
+      "duration": 2.96,
+      "text": "case if it's in the dictionary okay it's"
+    },
+    {
+      "index": 1047,
+      "start": 2551.56,
+      "end": 2552.69,
+      "duration": 1.13,
+      "text": "already there I've got some value"
+    },
+    {
+      "index": 1048,
+      "start": 2552.7,
+      "end": 2554.94,
+      "duration": 2.24,
+      "text": "associated with it get the value out add"
+    },
+    {
+      "index": 1049,
+      "start": 2554.95,
+      "end": 2559.92,
+      "duration": 4.97,
+      "text": "one to it put it back in okay if it's"
+    },
+    {
+      "index": 1050,
+      "start": 2559.93,
+      "end": 2561.69,
+      "duration": 1.76,
+      "text": "not already in the dictionary this is"
+    },
+    {
+      "index": 1051,
+      "start": 2561.7,
+      "end": 2563.609,
+      "duration": 1.909,
+      "text": "the first time I've seen it just store"
+    },
+    {
+      "index": 1052,
+      "start": 2563.619,
+      "end": 2566.37,
+      "duration": 2.751,
+      "text": "it into the dictionary and when I'm done"
+    },
+    {
+      "index": 1053,
+      "start": 2566.38,
+      "end": 2570.93,
+      "duration": 4.55,
+      "text": "just return the dictionary okay so I'm"
+    },
+    {
+      "index": 1054,
+      "start": 2570.94,
+      "end": 2572.7,
+      "duration": 1.76,
+      "text": "going to if I can do this right with my"
+    },
+    {
+      "index": 1055,
+      "start": 2572.71,
+      "end": 2575.28,
+      "duration": 2.57,
+      "text": "Python show you an example of this and I"
+    },
+    {
+      "index": 1056,
+      "start": 2575.29,
+      "end": 2578.16,
+      "duration": 2.87,
+      "text": "have put in one of the great classic"
+    },
+    {
+      "index": 1057,
+      "start": 2578.17,
+      "end": 2581.849,
+      "duration": 3.679,
+      "text": "Beatles songs you might recognize it"
+    },
+    {
+      "index": 1058,
+      "start": 2581.859,
+      "end": 2584.43,
+      "duration": 2.571,
+      "text": "right there mostly because it's got a"
+    },
+    {
+      "index": 1059,
+      "start": 2584.44,
+      "end": 2585.96,
+      "duration": 1.52,
+      "text": "whole lot of repetitions of things so"
+    },
+    {
+      "index": 1060,
+      "start": 2585.97,
+      "end": 2588.33,
+      "duration": 2.36,
+      "text": "she loves you yeah yeah yeah yeah sorry"
+    },
+    {
+      "index": 1061,
+      "start": 2588.34,
+      "end": 2589.59,
+      "duration": 1.25,
+      "text": "actually they sing it better than I just"
+    },
+    {
+      "index": 1062,
+      "start": 2589.6,
+      "end": 2591.75,
+      "duration": 2.15,
+      "text": "did it sarcastically sorry about that"
+    },
+    {
+      "index": 1063,
+      "start": 2591.76,
+      "end": 2593.43,
+      "duration": 1.67,
+      "text": "but I thought she loves you there and"
+    },
+    {
+      "index": 1064,
+      "start": 2593.44,
+      "end": 2595.29,
+      "duration": 1.85,
+      "text": "here's my code up here lyrics to"
+    },
+    {
+      "index": 1065,
+      "start": 2595.3,
+      "end": 2596.91,
+      "duration": 1.61,
+      "text": "frequency so let's see what happens if"
+    },
+    {
+      "index": 1066,
+      "start": 2596.92,
+      "end": 2602.12,
+      "duration": 5.2,
+      "text": "we call it and we say lyrics to"
+    },
+    {
+      "index": 1067,
+      "start": 2602.13,
+      "end": 2610.08,
+      "duration": 7.95,
+      "text": "frequencies if she loves you and it"
+    },
+    {
+      "index": 1068,
+      "start": 2610.09,
+      "end": 2611.67,
+      "duration": 1.58,
+      "text": "would help if I can type alright we'll"
+    },
+    {
+      "index": 1069,
+      "start": 2611.68,
+      "end": 2614.07,
+      "duration": 2.39,
+      "text": "try it one more time lyrics to"
+    },
+    {
+      "index": 1070,
+      "start": 2614.08,
+      "end": 2623.75,
+      "duration": 9.67,
+      "text": "frequencies she loves you"
+    },
+    {
+      "index": 1071,
+      "start": 2623.76,
+      "end": 2627.72,
+      "duration": 3.96,
+      "text": "cool this gave me back a dictionary you"
+    },
+    {
+      "index": 1072,
+      "start": 2627.73,
+      "end": 2629.97,
+      "duration": 2.24,
+      "text": "can see the curly braces and there are"
+    },
+    {
+      "index": 1073,
+      "start": 2629.98,
+      "end": 2631.41,
+      "duration": 1.43,
+      "text": "all the words that appear in there in"
+    },
+    {
+      "index": 1074,
+      "start": 2631.42,
+      "end": 2634.43,
+      "duration": 3.01,
+      "text": "the number of times that they appear"
+    },
+    {
+      "index": 1075,
+      "start": 2634.44,
+      "end": 2637.95,
+      "duration": 3.51,
+      "text": "what's the order you don't care you"
+    },
+    {
+      "index": 1076,
+      "start": 2637.96,
+      "end": 2639.72,
+      "duration": 1.76,
+      "text": "don't know what we want to do is to"
+    },
+    {
+      "index": 1077,
+      "start": 2639.73,
+      "end": 2641.16,
+      "duration": 1.43,
+      "text": "think about how can we analyze it so"
+    },
+    {
+      "index": 1078,
+      "start": 2641.17,
+      "end": 2642.72,
+      "duration": 1.55,
+      "text": "let's go back and look at the last piece"
+    },
+    {
+      "index": 1079,
+      "start": 2642.73,
+      "end": 2645.599,
+      "duration": 2.869,
+      "text": "of this which is okay I can compute or"
+    },
+    {
+      "index": 1080,
+      "start": 2645.609,
+      "end": 2648.92,
+      "duration": 3.311,
+      "text": "convert lyrics to frequencies"
+    },
+    {
+      "index": 1081,
+      "start": 2648.93,
+      "end": 2651.38,
+      "duration": 2.45,
+      "text": "so here's the next thing I want to do"
+    },
+    {
+      "index": 1082,
+      "start": 2651.39,
+      "end": 2654.92,
+      "duration": 3.53,
+      "text": "how do I find the most common words well"
+    },
+    {
+      "index": 1083,
+      "start": 2654.93,
+      "end": 2657.15,
+      "duration": 2.22,
+      "text": "here's what I'm going to do frequencies"
+    },
+    {
+      "index": 1084,
+      "start": 2657.16,
+      "end": 2659.49,
+      "duration": 2.33,
+      "text": "is the dictionary something that I just"
+    },
+    {
+      "index": 1085,
+      "start": 2659.5,
+      "end": 2663.329,
+      "duration": 3.829,
+      "text": "pulled out okay so I can use the values"
+    },
+    {
+      "index": 1086,
+      "start": 2663.339,
+      "end": 2665.4,
+      "duration": 2.061,
+      "text": "method on it which returns an iterable"
+    },
+    {
+      "index": 1087,
+      "start": 2665.41,
+      "end": 2666.87,
+      "duration": 1.46,
+      "text": "as I said earlier again notice the"
+    },
+    {
+      "index": 1088,
+      "start": 2666.88,
+      "end": 2668.94,
+      "duration": 2.06,
+      "text": "open/close because I got to call it that"
+    },
+    {
+      "index": 1089,
+      "start": 2668.95,
+      "end": 2671.73,
+      "duration": 2.78,
+      "text": "gives me back an interval that is all of"
+    },
+    {
+      "index": 1090,
+      "start": 2671.74,
+      "end": 2673.38,
+      "duration": 1.64,
+      "text": "the frequencies inside of there because"
+    },
+    {
+      "index": 1091,
+      "start": 2673.39,
+      "end": 2676.559,
+      "duration": 3.169,
+      "text": "it's an iterable I can use max on it and"
+    },
+    {
+      "index": 1092,
+      "start": 2676.569,
+      "end": 2677.7,
+      "duration": 1.131,
+      "text": "it will take that interval and give me"
+    },
+    {
+      "index": 1093,
+      "start": 2677.71,
+      "end": 2680.19,
+      "duration": 2.48,
+      "text": "back the biggest value I'm going to call"
+    },
+    {
+      "index": 1094,
+      "start": 2680.2,
+      "end": 2682.26,
+      "duration": 2.06,
+      "text": "that best I'm going to set up words to"
+    },
+    {
+      "index": 1095,
+      "start": 2682.27,
+      "end": 2683.579,
+      "duration": 1.309,
+      "text": "be an empty list and then I'm just going"
+    },
+    {
+      "index": 1096,
+      "start": 2683.589,
+      "end": 2685.14,
+      "duration": 1.551,
+      "text": "to walk through all of the entries in"
+    },
+    {
+      "index": 1097,
+      "start": 2685.15,
+      "end": 2688.23,
+      "duration": 3.08,
+      "text": "the dictionary saying if the value at"
+    },
+    {
+      "index": 1098,
+      "start": 2688.24,
+      "end": 2691.95,
+      "duration": 3.71,
+      "text": "that entry is equal to best add that"
+    },
+    {
+      "index": 1099,
+      "start": 2691.96,
+      "end": 2694.559,
+      "duration": 2.599,
+      "text": "entry into words just append it onto the"
+    },
+    {
+      "index": 1100,
+      "start": 2694.569,
+      "end": 2697.079,
+      "duration": 2.51,
+      "text": "end of the list and when I'm done all of"
+    },
+    {
+      "index": 1101,
+      "start": 2697.089,
+      "end": 2698.7,
+      "duration": 1.611,
+      "text": "that loop I'm just going to return a"
+    },
+    {
+      "index": 1102,
+      "start": 2698.71,
+      "end": 2701.22,
+      "duration": 2.51,
+      "text": "tuple of both the collections of words"
+    },
+    {
+      "index": 1103,
+      "start": 2701.23,
+      "end": 2703.62,
+      "duration": 2.39,
+      "text": "that appeared that many times and how"
+    },
+    {
+      "index": 1104,
+      "start": 2703.63,
+      "end": 2706.38,
+      "duration": 2.75,
+      "text": "often they appeared I'm going to show"
+    },
+    {
+      "index": 1105,
+      "start": 2706.39,
+      "end": 2707.67,
+      "duration": 1.28,
+      "text": "you an example a second but notice I'm"
+    },
+    {
+      "index": 1106,
+      "start": 2707.68,
+      "end": 2709.14,
+      "duration": 1.46,
+      "text": "simply using the properties of the"
+    },
+    {
+      "index": 1107,
+      "start": 2709.15,
+      "end": 2711.54,
+      "duration": 2.39,
+      "text": "dictionary the last thing I want to do"
+    },
+    {
+      "index": 1108,
+      "start": 2711.55,
+      "end": 2713.309,
+      "duration": 1.759,
+      "text": "then is say I want to see how often the"
+    },
+    {
+      "index": 1109,
+      "start": 2713.319,
+      "end": 2714.78,
+      "duration": 1.461,
+      "text": "words appear so I'm going to give it a"
+    },
+    {
+      "index": 1110,
+      "start": 2714.79,
+      "end": 2717.51,
+      "duration": 2.72,
+      "text": "dictionary and a minimum number of times"
+    },
+    {
+      "index": 1111,
+      "start": 2717.52,
+      "end": 2720.329,
+      "duration": 2.809,
+      "text": "and here I'm going to set result up to"
+    },
+    {
+      "index": 1112,
+      "start": 2720.339,
+      "end": 2721.68,
+      "duration": 1.341,
+      "text": "be an empty list I'm going to create a"
+    },
+    {
+      "index": 1113,
+      "start": 2721.69,
+      "end": 2723.51,
+      "duration": 1.82,
+      "text": "flag called false it's going to keep"
+    },
+    {
+      "index": 1114,
+      "start": 2723.52,
+      "end": 2725.46,
+      "duration": 1.94,
+      "text": "track of when I'm done and as long as"
+    },
+    {
+      "index": 1115,
+      "start": 2725.47,
+      "end": 2728.28,
+      "duration": 2.81,
+      "text": "I'm not yet done I'll call that previous"
+    },
+    {
+      "index": 1116,
+      "start": 2728.29,
+      "end": 2729.69,
+      "duration": 1.4,
+      "text": "procedure that's going to give me back"
+    },
+    {
+      "index": 1117,
+      "start": 2729.7,
+      "end": 2731.819,
+      "duration": 2.119,
+      "text": "the most common words and how often they"
+    },
+    {
+      "index": 1118,
+      "start": 2731.829,
+      "end": 2734.849,
+      "duration": 3.02,
+      "text": "appeared I check remember it was a tuple"
+    },
+    {
+      "index": 1119,
+      "start": 2734.859,
+      "end": 2736.559,
+      "duration": 1.7,
+      "text": "how often do they appear if it's bigger"
+    },
+    {
+      "index": 1120,
+      "start": 2736.569,
+      "end": 2738.599,
+      "duration": 2.03,
+      "text": "than the thing I'm looking for I'll add"
+    },
+    {
+      "index": 1121,
+      "start": 2738.609,
+      "end": 2741.72,
+      "duration": 3.111,
+      "text": "that into my result and then the best"
+    },
+    {
+      "index": 1122,
+      "start": 2741.73,
+      "end": 2743.88,
+      "duration": 2.15,
+      "text": "part is I'm now going to walk through"
+    },
+    {
+      "index": 1123,
+      "start": 2743.89,
+      "end": 2745.74,
+      "duration": 1.85,
+      "text": "all the words that appeared that many"
+    },
+    {
+      "index": 1124,
+      "start": 2745.75,
+      "end": 2748.14,
+      "duration": 2.39,
+      "text": "times and just delete them from the"
+    },
+    {
+      "index": 1125,
+      "start": 2748.15,
+      "end": 2750.809,
+      "duration": 2.659,
+      "text": "dictionary I can mutate the dictionary"
+    },
+    {
+      "index": 1126,
+      "start": 2750.819,
+      "end": 2753.24,
+      "duration": 2.421,
+      "text": "and by doing that I can go back around"
+    },
+    {
+      "index": 1127,
+      "start": 2753.25,
+      "end": 2755.37,
+      "duration": 2.12,
+      "text": "and do this again and it will pull out"
+    },
+    {
+      "index": 1128,
+      "start": 2755.38,
+      "end": 2756.78,
+      "duration": 1.4,
+      "text": "how many times has disappeared and keep"
+    },
+    {
+      "index": 1129,
+      "start": 2756.79,
+      "end": 2758.91,
+      "duration": 2.12,
+      "text": "doing it when I go all the way through"
+    },
+    {
+      "index": 1130,
+      "start": 2758.92,
+      "end": 2761.01,
+      "duration": 2.09,
+      "text": "that if I can't find anymore I'll set"
+    },
+    {
+      "index": 1131,
+      "start": 2761.02,
+      "end": 2762.45,
+      "duration": 1.43,
+      "text": "the flag to true which means it will"
+    },
+    {
+      "index": 1132,
+      "start": 2762.46,
+      "end": 2764.4,
+      "duration": 1.94,
+      "text": "drop out of here and return the result"
+    },
+    {
+      "index": 1133,
+      "start": 2764.41,
+      "end": 2766.8,
+      "duration": 2.39,
+      "text": "and if you I'm going to let you run this"
+    },
+    {
+      "index": 1134,
+      "start": 2766.81,
+      "end": 2768.54,
+      "duration": 1.73,
+      "text": "yourself if you do that you'll find that"
+    },
+    {
+      "index": 1135,
+      "start": 2768.55,
+      "end": 2770.069,
+      "duration": 1.519,
+      "text": "it comes up with not surprisingly I"
+    },
+    {
+      "index": 1136,
+      "start": 2770.079,
+      "end": 2771.63,
+      "duration": 1.551,
+      "text": "think yeah is the most common one and"
+    },
+    {
+      "index": 1137,
+      "start": 2771.64,
+      "end": 2773.55,
+      "duration": 1.91,
+      "text": "she loves you followed by loves and a"
+    },
+    {
+      "index": 1138,
+      "start": 2773.56,
+      "end": 2775.71,
+      "duration": 2.15,
+      "text": "few others what I want you to see here"
+    },
+    {
+      "index": 1139,
+      "start": 2775.72,
+      "end": 2776.94,
+      "duration": 1.22,
+      "text": "is how the dictionary captured the"
+    },
+    {
+      "index": 1140,
+      "start": 2776.95,
+      "end": 2780.849,
+      "duration": 3.899,
+      "text": "pieces we wanted to very last one"
+    },
+    {
+      "index": 1141,
+      "start": 2780.859,
+      "end": 2784.589,
+      "duration": 3.73,
+      "text": "there's Fibonacci as we called it before"
+    },
+    {
+      "index": 1142,
+      "start": 2784.599,
+      "end": 2787.089,
+      "duration": 2.49,
+      "text": "it's actually incredibly inefficient"
+    },
+    {
+      "index": 1143,
+      "start": 2787.099,
+      "end": 2789.279,
+      "duration": 2.18,
+      "text": "because if I call it I have to do all"
+    },
+    {
+      "index": 1144,
+      "start": 2789.289,
+      "end": 2790.93,
+      "duration": 1.641,
+      "text": "the sub calls until I get down to the"
+    },
+    {
+      "index": 1145,
+      "start": 2790.94,
+      "end": 2794.289,
+      "duration": 3.349,
+      "text": "base case which is okay but notice every"
+    },
+    {
+      "index": 1146,
+      "start": 2794.299,
+      "end": 2796.449,
+      "duration": 2.15,
+      "text": "other thing I do here I've actually"
+    },
+    {
+      "index": 1147,
+      "start": 2796.459,
+      "end": 2799.66,
+      "duration": 3.201,
+      "text": "computed those values I'm wasting"
+    },
+    {
+      "index": 1148,
+      "start": 2799.67,
+      "end": 2801.579,
+      "duration": 1.909,
+      "text": "measures or wasting time now it's not so"
+    },
+    {
+      "index": 1149,
+      "start": 2801.589,
+      "end": 2803.739,
+      "duration": 2.15,
+      "text": "bad with fib of 5 this is fib of 20"
+    },
+    {
+      "index": 1150,
+      "start": 2803.749,
+      "end": 2805.839,
+      "duration": 2.09,
+      "text": "almost everything on the right-hand side"
+    },
+    {
+      "index": 1151,
+      "start": 2805.849,
+      "end": 2807.94,
+      "duration": 2.091,
+      "text": "of this tree I've already computed once"
+    },
+    {
+      "index": 1152,
+      "start": 2807.95,
+      "end": 2812.109,
+      "duration": 4.159,
+      "text": "it means fibs very inefficient I can"
+    },
+    {
+      "index": 1153,
+      "start": 2812.119,
+      "end": 2814.329,
+      "duration": 2.21,
+      "text": "improve it by using a dictionary very"
+    },
+    {
+      "index": 1154,
+      "start": 2814.339,
+      "end": 2817.479,
+      "duration": 3.14,
+      "text": "handy tool I'm going to call fib not"
+    },
+    {
+      "index": 1155,
+      "start": 2817.489,
+      "end": 2819.4,
+      "duration": 1.911,
+      "text": "only with a value of n but a dictionary"
+    },
+    {
+      "index": 1156,
+      "start": 2819.41,
+      "end": 2820.959,
+      "duration": 1.549,
+      "text": "which initially I'm going to initialize"
+    },
+    {
+      "index": 1157,
+      "start": 2820.969,
+      "end": 2824.259,
+      "duration": 3.29,
+      "text": "to the base cases and notice what I do"
+    },
+    {
+      "index": 1158,
+      "start": 2824.269,
+      "end": 2825.459,
+      "duration": 1.19,
+      "text": "I'm going to say if I've already"
+    },
+    {
+      "index": 1159,
+      "start": 2825.469,
+      "end": 2827.979,
+      "duration": 2.51,
+      "text": "computed this just return the value in"
+    },
+    {
+      "index": 1160,
+      "start": 2827.989,
+      "end": 2831.16,
+      "duration": 3.171,
+      "text": "the dictionary if I haven't go ahead and"
+    },
+    {
+      "index": 1161,
+      "start": 2831.17,
+      "end": 2833.44,
+      "duration": 2.27,
+      "text": "do the computation store it in the"
+    },
+    {
+      "index": 1162,
+      "start": 2833.45,
+      "end": 2835.959,
+      "duration": 2.509,
+      "text": "dictionary at that point and return the"
+    },
+    {
+      "index": 1163,
+      "start": 2835.969,
+      "end": 2839.049,
+      "duration": 3.08,
+      "text": "answer different way of thinking about"
+    },
+    {
+      "index": 1164,
+      "start": 2839.059,
+      "end": 2840.759,
+      "duration": 1.7,
+      "text": "it and the reason this is really nice"
+    },
+    {
+      "index": 1165,
+      "start": 2840.769,
+      "end": 2843.88,
+      "duration": 3.111,
+      "text": "it's a method called memoization is if I"
+    },
+    {
+      "index": 1166,
+      "start": 2843.89,
+      "end": 2846.88,
+      "duration": 2.99,
+      "text": "call fib of 30 for the standard way it"
+    },
+    {
+      "index": 1167,
+      "start": 2846.89,
+      "end": 2850.689,
+      "duration": 3.799,
+      "text": "takes 11 million-plus recursive calls to"
+    },
+    {
+      "index": 1168,
+      "start": 2850.699,
+      "end": 2853.15,
+      "duration": 2.451,
+      "text": "get the answer out takes a long time of"
+    },
+    {
+      "index": 1169,
+      "start": 2853.16,
+      "end": 2854.769,
+      "duration": 1.609,
+      "text": "giving some code for you can try it and"
+    },
+    {
+      "index": 1170,
+      "start": 2854.779,
+      "end": 2857.469,
+      "duration": 2.69,
+      "text": "see how long it takes using the"
+    },
+    {
+      "index": 1171,
+      "start": 2857.479,
+      "end": 2859.15,
+      "duration": 1.671,
+      "text": "dictionary to keep track of intermediate"
+    },
+    {
+      "index": 1172,
+      "start": 2859.16,
+      "end": 2863.62,
+      "duration": 4.46,
+      "text": "values 65 calls and if you try it you'll"
+    },
+    {
+      "index": 1173,
+      "start": 2863.63,
+      "end": 2865.059,
+      "duration": 1.429,
+      "text": "see the difference in speed as you run"
+    },
+    {
+      "index": 1174,
+      "start": 2865.069,
+      "end": 2867.43,
+      "duration": 2.361,
+      "text": "this so dictionaries are valuable not"
+    },
+    {
+      "index": 1175,
+      "start": 2867.44,
+      "end": 2869.289,
+      "duration": 1.849,
+      "text": "only for just storing away data they're"
+    },
+    {
+      "index": 1176,
+      "start": 2869.299,
+      "end": 2872.769,
+      "duration": 3.47,
+      "text": "valuable on procedure calls when those"
+    },
+    {
+      "index": 1177,
+      "start": 2872.779,
+      "end": 2874.15,
+      "duration": 1.371,
+      "text": "intermediate values are not going to"
+    },
+    {
+      "index": 1178,
+      "start": 2874.16,
+      "end": 2876.219,
+      "duration": 2.059,
+      "text": "change and what you're going to see as"
+    },
+    {
+      "index": 1179,
+      "start": 2876.229,
+      "end": 2877.209,
+      "duration": 0.98,
+      "text": "we go along is we're going to use"
+    },
+    {
+      "index": 1180,
+      "start": 2877.219,
+      "end": 2879.339,
+      "duration": 2.12,
+      "text": "exactly these ideas using dictionaries"
+    },
+    {
+      "index": 1181,
+      "start": 2879.349,
+      "end": 2880.779,
+      "duration": 1.43,
+      "text": "to capture information but especially"
+    },
+    {
+      "index": 1182,
+      "start": 2880.789,
+      "end": 2883.599,
+      "duration": 2.81,
+      "text": "using recursion to break bigger problems"
+    },
+    {
+      "index": 1183,
+      "start": 2883.609,
+      "end": 2885.099,
+      "duration": 1.49,
+      "text": "down into smaller versions of the same"
+    },
+    {
+      "index": 1184,
+      "start": 2885.109,
+      "end": 2887.14,
+      "duration": 2.031,
+      "text": "problem to use that as a tool for"
+    },
+    {
+      "index": 1185,
+      "start": 2887.15,
+      "end": 2888.969,
+      "duration": 1.819,
+      "text": "solving what turned out to be really"
+    },
+    {
+      "index": 1186,
+      "start": 2888.979,
+      "end": 2891.519,
+      "duration": 2.54,
+      "text": "complex things and what that we'll see"
+    },
+    {
+      "index": 1187,
+      "start": 2891.529,
+      "end": 2899.73,
+      "duration": 8.201,
+      "text": "you next time"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

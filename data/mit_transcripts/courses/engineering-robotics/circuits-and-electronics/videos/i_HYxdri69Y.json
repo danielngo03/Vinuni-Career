@@ -1,0 +1,6171 @@
+{
+  "video": {
+    "id": "i_HYxdri69Y",
+    "title": "Lecture 8 - Karnaugh Map Minimization Using Maxterms",
+    "url": "https://www.youtube.com/watch?v=i_HYxdri69Y",
+    "channel": "nptelhrd",
+    "duration": 3167,
+    "language": "en"
+  },
+  "segment_count": 879,
+  "segments": [
+    {
+      "index": 0,
+      "start": 22.26,
+      "end": 22.27,
+      "duration": 0.01,
+      "text": "speech"
+    },
+    {
+      "index": 1,
+      "start": 22.27,
+      "end": 31.34,
+      "duration": 9.07,
+      "text": "[Music]"
+    },
+    {
+      "index": 2,
+      "start": 131.17,
+      "end": 135.88,
+      "duration": 4.71,
+      "text": "okay we have been talking about"
+    },
+    {
+      "index": 3,
+      "start": 135.89,
+      "end": 140.47,
+      "duration": 4.58,
+      "text": "minimization of boolean functions first"
+    },
+    {
+      "index": 4,
+      "start": 140.48,
+      "end": 143.2,
+      "duration": 2.72,
+      "text": "by boolean algebra using boolean algebra"
+    },
+    {
+      "index": 5,
+      "start": 143.21,
+      "end": 146.65,
+      "duration": 3.44,
+      "text": "and then used by cardamom method map"
+    },
+    {
+      "index": 6,
+      "start": 146.66,
+      "end": 149.26,
+      "duration": 2.6,
+      "text": "method by drawing a graphical"
+    },
+    {
+      "index": 7,
+      "start": 149.27,
+      "end": 150.76,
+      "duration": 1.49,
+      "text": "representation of the truth table and"
+    },
+    {
+      "index": 8,
+      "start": 150.77,
+      "end": 153.21,
+      "duration": 2.44,
+      "text": "identifying the patterns of ones and"
+    },
+    {
+      "index": 9,
+      "start": 153.22,
+      "end": 157.9,
+      "duration": 4.68,
+      "text": "group them and reduce the variables in"
+    },
+    {
+      "index": 10,
+      "start": 157.91,
+      "end": 159.67,
+      "duration": 1.76,
+      "text": "that process number of variables as well"
+    },
+    {
+      "index": 11,
+      "start": 159.68,
+      "end": 163.72,
+      "duration": 4.04,
+      "text": "as number of terms we also talked about"
+    },
+    {
+      "index": 12,
+      "start": 163.73,
+      "end": 167.55,
+      "duration": 3.82,
+      "text": "if you remember we also talked about a"
+    },
+    {
+      "index": 13,
+      "start": 167.56,
+      "end": 170.41,
+      "duration": 2.85,
+      "text": "min term and max terms min terms and Max"
+    },
+    {
+      "index": 14,
+      "start": 170.42,
+      "end": 174.1,
+      "duration": 3.68,
+      "text": "terms that is you can write an"
+    },
+    {
+      "index": 15,
+      "start": 174.11,
+      "end": 177.49,
+      "duration": 3.38,
+      "text": "expression boolean algebra even as a sum"
+    },
+    {
+      "index": 16,
+      "start": 177.5,
+      "end": 180.729,
+      "duration": 3.229,
+      "text": "of products or product of sums that is"
+    },
+    {
+      "index": 17,
+      "start": 180.739,
+      "end": 188.08,
+      "duration": 7.341,
+      "text": "and terms combined with an are gate or"
+    },
+    {
+      "index": 18,
+      "start": 188.09,
+      "end": 193.24,
+      "duration": 5.15,
+      "text": "or terms comparison I indicate so one is"
+    },
+    {
+      "index": 19,
+      "start": 193.25,
+      "end": 194.5,
+      "duration": 1.25,
+      "text": "called the sum of products as it is"
+    },
+    {
+      "index": 20,
+      "start": 194.51,
+      "end": 198.85,
+      "duration": 4.34,
+      "text": "called product of sum because analogous"
+    },
+    {
+      "index": 21,
+      "start": 198.86,
+      "end": 202.66,
+      "duration": 3.8,
+      "text": "to the algebra one looks like a series"
+    },
+    {
+      "index": 22,
+      "start": 202.67,
+      "end": 207.06,
+      "duration": 4.39,
+      "text": "of terms product terms and you sum them"
+    },
+    {
+      "index": 23,
+      "start": 207.07,
+      "end": 210.67,
+      "duration": 3.6,
+      "text": "and that looks like a series of some"
+    },
+    {
+      "index": 24,
+      "start": 210.68,
+      "end": 213.37,
+      "duration": 2.69,
+      "text": "terms you multiply this some terms as a"
+    },
+    {
+      "index": 25,
+      "start": 213.38,
+      "end": 216.22,
+      "duration": 2.84,
+      "text": "product sometimes what happens when you"
+    },
+    {
+      "index": 26,
+      "start": 216.23,
+      "end": 219.21,
+      "duration": 2.98,
+      "text": "draw a karnaugh map to simplifying"
+    },
+    {
+      "index": 27,
+      "start": 219.22,
+      "end": 221.83,
+      "duration": 2.61,
+      "text": "defender more zero or more once than"
+    },
+    {
+      "index": 28,
+      "start": 221.84,
+      "end": 225.49,
+      "duration": 3.65,
+      "text": "zeros the idea is to minimize we said"
+    },
+    {
+      "index": 29,
+      "start": 225.5,
+      "end": 228.49,
+      "duration": 2.99,
+      "text": "number of terms total no term should be"
+    },
+    {
+      "index": 30,
+      "start": 228.5,
+      "end": 230.74,
+      "duration": 2.24,
+      "text": "as small as possible and the number of"
+    },
+    {
+      "index": 31,
+      "start": 230.75,
+      "end": 233.289,
+      "duration": 2.539,
+      "text": "literals in each of these terms should"
+    },
+    {
+      "index": 32,
+      "start": 233.299,
+      "end": 236.14,
+      "duration": 2.841,
+      "text": "be as few as possible so when you have"
+    },
+    {
+      "index": 33,
+      "start": 236.15,
+      "end": 238.0,
+      "duration": 1.85,
+      "text": "large number of ones we have large"
+    },
+    {
+      "index": 34,
+      "start": 238.01,
+      "end": 241.84,
+      "duration": 3.83,
+      "text": "groups of ones results in many prime"
+    },
+    {
+      "index": 35,
+      "start": 241.85,
+      "end": 243.16,
+      "duration": 1.31,
+      "text": "implicants and essential prime"
+    },
+    {
+      "index": 36,
+      "start": 243.17,
+      "end": 248.74,
+      "duration": 5.57,
+      "text": "implicants if there are more Z once than"
+    },
+    {
+      "index": 37,
+      "start": 248.75,
+      "end": 252.1,
+      "duration": 3.35,
+      "text": "zeroes is it possible to use the zeros"
+    },
+    {
+      "index": 38,
+      "start": 252.11,
+      "end": 256.529,
+      "duration": 4.419,
+      "text": "and get the F 0 F bar compliment I have"
+    },
+    {
+      "index": 39,
+      "start": 256.539,
+      "end": 260.569,
+      "duration": 4.03,
+      "text": "expression because when one"
+    },
+    {
+      "index": 40,
+      "start": 260.579,
+      "end": 262.309,
+      "duration": 1.73,
+      "text": "the one is the truth table says the F is"
+    },
+    {
+      "index": 41,
+      "start": 262.319,
+      "end": 264.77,
+      "duration": 2.451,
+      "text": "true the function is true zero and the"
+    },
+    {
+      "index": 42,
+      "start": 264.78,
+      "end": 266.26,
+      "duration": 1.48,
+      "text": "truth table says the function is false"
+    },
+    {
+      "index": 43,
+      "start": 266.27,
+      "end": 270.26,
+      "duration": 3.99,
+      "text": "so when you group zeros we can get an f"
+    },
+    {
+      "index": 44,
+      "start": 270.27,
+      "end": 275.51,
+      "duration": 5.24,
+      "text": "bar expression just as we get F"
+    },
+    {
+      "index": 45,
+      "start": 275.52,
+      "end": 278.24,
+      "duration": 2.72,
+      "text": "expression by grouping once and once I"
+    },
+    {
+      "index": 46,
+      "start": 278.25,
+      "end": 280.1,
+      "duration": 1.85,
+      "text": "have f bar I have DeMarcus theorem to"
+    },
+    {
+      "index": 47,
+      "start": 280.11,
+      "end": 284.36,
+      "duration": 4.25,
+      "text": "get an F so that is one approach some"
+    },
+    {
+      "index": 48,
+      "start": 284.37,
+      "end": 287.36,
+      "duration": 2.99,
+      "text": "people use that also depends on the type"
+    },
+    {
+      "index": 49,
+      "start": 287.37,
+      "end": 289.85,
+      "duration": 2.48,
+      "text": "of gates you want it all depends on"
+    },
+    {
+      "index": 50,
+      "start": 289.86,
+      "end": 293.779,
+      "duration": 3.919,
+      "text": "whether you want a sum of product as the"
+    },
+    {
+      "index": 51,
+      "start": 293.789,
+      "end": 296.809,
+      "duration": 3.02,
+      "text": "minimum expression or the product of sum"
+    },
+    {
+      "index": 52,
+      "start": 296.819,
+      "end": 297.95,
+      "duration": 1.131,
+      "text": "as the minimum expression"
+    },
+    {
+      "index": 53,
+      "start": 297.96,
+      "end": 300.399,
+      "duration": 2.439,
+      "text": "so let us today see an example where"
+    },
+    {
+      "index": 54,
+      "start": 300.409,
+      "end": 304.07,
+      "duration": 3.661,
+      "text": "we'll use zeros to simplify the logic"
+    },
+    {
+      "index": 55,
+      "start": 304.08,
+      "end": 305.839,
+      "duration": 1.759,
+      "text": "function will be use our same familiar"
+    },
+    {
+      "index": 56,
+      "start": 305.849,
+      "end": 309.64,
+      "duration": 3.791,
+      "text": "example from the last few classes we"
+    },
+    {
+      "index": 57,
+      "start": 309.65,
+      "end": 312.68,
+      "duration": 3.03,
+      "text": "have been using the function f is equal"
+    },
+    {
+      "index": 58,
+      "start": 312.69,
+      "end": 319.07,
+      "duration": 6.38,
+      "text": "to a B is a our BC bar it has been our"
+    },
+    {
+      "index": 59,
+      "start": 319.08,
+      "end": 326.649,
+      "duration": 7.569,
+      "text": "example so when you when you do the"
+    },
+    {
+      "index": 60,
+      "start": 350.98,
+      "end": 350.99,
+      "duration": 0.01,
+      "text": "but there was a one here one here one"
+    },
+    {
+      "index": 61,
+      "start": 350.99,
+      "end": 353.409,
+      "duration": 2.419,
+      "text": "here one here one here and here if you"
+    },
+    {
+      "index": 62,
+      "start": 353.419,
+      "end": 355.48,
+      "duration": 2.061,
+      "text": "look at the truth table we had one entry"
+    },
+    {
+      "index": 63,
+      "start": 355.49,
+      "end": 363.31,
+      "duration": 7.82,
+      "text": "in the third row and last four rows the"
+    },
+    {
+      "index": 64,
+      "start": 363.32,
+      "end": 365.5,
+      "duration": 2.18,
+      "text": "first row second row and the fourth rows"
+    },
+    {
+      "index": 65,
+      "start": 365.51,
+      "end": 369.22,
+      "duration": 3.71,
+      "text": "had zero in the other put all the rows"
+    },
+    {
+      "index": 66,
+      "start": 369.23,
+      "end": 371.44,
+      "duration": 2.21,
+      "text": "are one in the output since we've all"
+    },
+    {
+      "index": 67,
+      "start": 371.45,
+      "end": 372.76,
+      "duration": 1.31,
+      "text": "done it so many times I don't want to go"
+    },
+    {
+      "index": 68,
+      "start": 372.77,
+      "end": 376.87,
+      "duration": 4.1,
+      "text": "do it again I spent time on it and if we"
+    },
+    {
+      "index": 69,
+      "start": 376.88,
+      "end": 379.27,
+      "duration": 2.39,
+      "text": "map it this is what we got is that right"
+    },
+    {
+      "index": 70,
+      "start": 379.28,
+      "end": 382.42,
+      "duration": 3.14,
+      "text": "or if you remember this yes"
+    },
+    {
+      "index": 71,
+      "start": 382.43,
+      "end": 385.12,
+      "duration": 2.69,
+      "text": "so now what we did last time was to"
+    },
+    {
+      "index": 72,
+      "start": 385.13,
+      "end": 389.65,
+      "duration": 4.52,
+      "text": "simplify this using one here and then"
+    },
+    {
+      "index": 73,
+      "start": 389.66,
+      "end": 392.34,
+      "duration": 2.68,
+      "text": "here because it's a trivial example"
+    },
+    {
+      "index": 74,
+      "start": 392.35,
+      "end": 395.65,
+      "duration": 3.3,
+      "text": "you'll find that some of evens our"
+    },
+    {
+      "index": 75,
+      "start": 395.66,
+      "end": 397.93,
+      "duration": 2.27,
+      "text": "number of ones logical ones if they are"
+    },
+    {
+      "index": 76,
+      "start": 397.94,
+      "end": 403.62,
+      "duration": 5.68,
+      "text": "properly firmly if the pattern is good"
+    },
+    {
+      "index": 77,
+      "start": 403.63,
+      "end": 407.74,
+      "duration": 4.11,
+      "text": "large groups of one together it will"
+    },
+    {
+      "index": 78,
+      "start": 407.75,
+      "end": 412.06,
+      "duration": 4.31,
+      "text": "give you a very small sum of product"
+    },
+    {
+      "index": 79,
+      "start": 412.07,
+      "end": 414.76,
+      "duration": 2.69,
+      "text": "expression because larger and larger"
+    },
+    {
+      "index": 80,
+      "start": 414.77,
+      "end": 416.29,
+      "duration": 1.52,
+      "text": "groups of one gives you a smaller and"
+    },
+    {
+      "index": 81,
+      "start": 416.3,
+      "end": 420.4,
+      "duration": 4.1,
+      "text": "smaller product terms that we had a nice"
+    },
+    {
+      "index": 82,
+      "start": 420.41,
+      "end": 422.77,
+      "duration": 2.36,
+      "text": "example with this example had a for this"
+    },
+    {
+      "index": 83,
+      "start": 422.78,
+      "end": 425.38,
+      "duration": 2.6,
+      "text": "and BC bar but just to give you the"
+    },
+    {
+      "index": 84,
+      "start": 425.39,
+      "end": 427.9,
+      "duration": 2.51,
+      "text": "illustration the example modeling the"
+    },
+    {
+      "index": 85,
+      "start": 427.91,
+      "end": 430.3,
+      "duration": 2.39,
+      "text": "concept of using zeros to simplify the"
+    },
+    {
+      "index": 86,
+      "start": 430.31,
+      "end": 432.219,
+      "duration": 1.909,
+      "text": "expression I'm going to fill these"
+    },
+    {
+      "index": 87,
+      "start": 432.229,
+      "end": 435.27,
+      "duration": 3.041,
+      "text": "entries of the truth table which had"
+    },
+    {
+      "index": 88,
+      "start": 435.28,
+      "end": 439.029,
+      "duration": 3.749,
+      "text": "output Falls with zero so I'm going to"
+    },
+    {
+      "index": 89,
+      "start": 439.039,
+      "end": 442.26,
+      "duration": 3.221,
+      "text": "use zeros to simplify my logic function"
+    },
+    {
+      "index": 90,
+      "start": 442.27,
+      "end": 447.52,
+      "duration": 5.25,
+      "text": "so if I group these ones and write prime"
+    },
+    {
+      "index": 91,
+      "start": 447.53,
+      "end": 449.05,
+      "duration": 1.52,
+      "text": "implicant they will get F expression"
+    },
+    {
+      "index": 92,
+      "start": 449.06,
+      "end": 452.29,
+      "duration": 3.23,
+      "text": "expression for the output F if you now"
+    },
+    {
+      "index": 93,
+      "start": 452.3,
+      "end": 457.75,
+      "duration": 5.45,
+      "text": "group these zeros and identify prime"
+    },
+    {
+      "index": 94,
+      "start": 457.76,
+      "end": 458.98,
+      "duration": 1.22,
+      "text": "implicants and essential prime"
+    },
+    {
+      "index": 95,
+      "start": 458.99,
+      "end": 463.54,
+      "duration": 4.55,
+      "text": "implicants I'll get f bar is it not"
+    },
+    {
+      "index": 96,
+      "start": 463.55,
+      "end": 466.42,
+      "duration": 2.87,
+      "text": "whenever the function is not true that's"
+    },
+    {
+      "index": 97,
+      "start": 466.43,
+      "end": 468.279,
+      "duration": 1.849,
+      "text": "a zero entry in the truth table and in"
+    },
+    {
+      "index": 98,
+      "start": 468.289,
+      "end": 469.39,
+      "duration": 1.101,
+      "text": "the truth table as well as in the"
+    },
+    {
+      "index": 99,
+      "start": 469.4,
+      "end": 471.55,
+      "duration": 2.15,
+      "text": "karnaugh map so now i am going to group"
+    },
+    {
+      "index": 100,
+      "start": 471.56,
+      "end": 477.1,
+      "duration": 5.54,
+      "text": "these two zeros and these two zero so"
+    },
+    {
+      "index": 101,
+      "start": 477.11,
+      "end": 479.99,
+      "duration": 2.88,
+      "text": "I'll call this one"
+    },
+    {
+      "index": 102,
+      "start": 480.0,
+      "end": 487.76,
+      "duration": 7.76,
+      "text": "well again one from Britain - if bar is"
+    },
+    {
+      "index": 103,
+      "start": 490.86,
+      "end": 490.87,
+      "duration": 0.01,
+      "text": "some of from breaking ones and some"
+    },
+    {
+      "index": 104,
+      "start": 490.87,
+      "end": 493.89,
+      "duration": 3.02,
+      "text": "framing - or or combination of prime"
+    },
+    {
+      "index": 105,
+      "start": 493.9,
+      "end": 495.93,
+      "duration": 2.03,
+      "text": "implicant one and one reckon - when he"
+    },
+    {
+      "index": 106,
+      "start": 495.94,
+      "end": 499.409,
+      "duration": 3.469,
+      "text": "says some even really our operation so"
+    },
+    {
+      "index": 107,
+      "start": 499.419,
+      "end": 503.52,
+      "duration": 4.101,
+      "text": "which is one is one this is a bar b bar"
+    },
+    {
+      "index": 108,
+      "start": 503.53,
+      "end": 511.8,
+      "duration": 8.27,
+      "text": "correct this is a bar b bar this is a"
+    },
+    {
+      "index": 109,
+      "start": 511.81,
+      "end": 518.029,
+      "duration": 6.219,
+      "text": "bar C"
+    },
+    {
+      "index": 110,
+      "start": 522.719,
+      "end": 522.729,
+      "duration": 0.01,
+      "text": "see but this is only half bar but we"
+    },
+    {
+      "index": 111,
+      "start": 522.729,
+      "end": 525.93,
+      "duration": 3.201,
+      "text": "want F and one because the problem"
+    },
+    {
+      "index": 112,
+      "start": 525.94,
+      "end": 527.82,
+      "duration": 1.88,
+      "text": "definition of the truth table given to"
+    },
+    {
+      "index": 113,
+      "start": 527.83,
+      "end": 531.69,
+      "duration": 3.86,
+      "text": "you is to implement a function f which"
+    },
+    {
+      "index": 114,
+      "start": 531.7,
+      "end": 535.5,
+      "duration": 3.8,
+      "text": "are the output asserted as true for the"
+    },
+    {
+      "index": 115,
+      "start": 535.51,
+      "end": 538.889,
+      "duration": 3.379,
+      "text": "given combinations but what we got is f"
+    },
+    {
+      "index": 116,
+      "start": 538.899,
+      "end": 541.56,
+      "duration": 2.661,
+      "text": "bar output not asserted or output asset"
+    },
+    {
+      "index": 117,
+      "start": 541.57,
+      "end": 545.36,
+      "duration": 3.79,
+      "text": "at zero so you don't want this we want"
+    },
+    {
+      "index": 118,
+      "start": 545.37,
+      "end": 547.59,
+      "duration": 2.22,
+      "text": "complement of this so we want to come"
+    },
+    {
+      "index": 119,
+      "start": 547.6,
+      "end": 549.21,
+      "duration": 1.61,
+      "text": "you know this you know how to get the"
+    },
+    {
+      "index": 120,
+      "start": 549.22,
+      "end": 552.69,
+      "duration": 3.47,
+      "text": "complement by taking demorgan's theorum"
+    },
+    {
+      "index": 121,
+      "start": 552.7,
+      "end": 555.0,
+      "duration": 2.3,
+      "text": "on both sides applying the magazine"
+    },
+    {
+      "index": 122,
+      "start": 555.01,
+      "end": 565.41,
+      "duration": 10.4,
+      "text": "about both sides you get a face which is"
+    },
+    {
+      "index": 123,
+      "start": 565.42,
+      "end": 569.94,
+      "duration": 4.52,
+      "text": "nothing but a or b because variable gets"
+    },
+    {
+      "index": 124,
+      "start": 569.95,
+      "end": 573.71,
+      "duration": 3.76,
+      "text": "changed into complement and becomes our"
+    },
+    {
+      "index": 125,
+      "start": 573.72,
+      "end": 578.579,
+      "duration": 4.859,
+      "text": "or becomes and variable gets"
+    },
+    {
+      "index": 126,
+      "start": 578.589,
+      "end": 586.17,
+      "duration": 7.581,
+      "text": "complemented and you can simplify this"
+    },
+    {
+      "index": 127,
+      "start": 586.18,
+      "end": 590.87,
+      "duration": 4.69,
+      "text": "to original f which is a plus BC bar"
+    },
+    {
+      "index": 128,
+      "start": 590.88,
+      "end": 593.519,
+      "duration": 2.639,
+      "text": "because now if I do this this should"
+    },
+    {
+      "index": 129,
+      "start": 593.529,
+      "end": 604.53,
+      "duration": 11.001,
+      "text": "become a maybe AC bar BC bar we have the"
+    },
+    {
+      "index": 130,
+      "start": 604.54,
+      "end": 607.05,
+      "duration": 2.51,
+      "text": "identity in the boolean algebra from bar"
+    },
+    {
+      "index": 131,
+      "start": 607.06,
+      "end": 613.82,
+      "duration": 6.76,
+      "text": "a ra b is a correct so this is redundant"
+    },
+    {
+      "index": 132,
+      "start": 613.83,
+      "end": 618.75,
+      "duration": 4.92,
+      "text": "similarly our a bar Fe bar also a this"
+    },
+    {
+      "index": 133,
+      "start": 618.76,
+      "end": 620.67,
+      "duration": 1.91,
+      "text": "compare to this will give you a so these"
+    },
+    {
+      "index": 134,
+      "start": 620.68,
+      "end": 624.09,
+      "duration": 3.41,
+      "text": "two terms get knocked off so the result"
+    },
+    {
+      "index": 135,
+      "start": 624.1,
+      "end": 632.32,
+      "duration": 8.22,
+      "text": "is a plus BC bar which is what this is"
+    },
+    {
+      "index": 136,
+      "start": 634.24,
+      "end": 634.25,
+      "duration": 0.01,
+      "text": "the point I'm trying to make is say the"
+    },
+    {
+      "index": 137,
+      "start": 634.25,
+      "end": 636.55,
+      "duration": 2.3,
+      "text": "couple of points really one is I have"
+    },
+    {
+      "index": 138,
+      "start": 636.56,
+      "end": 638.86,
+      "duration": 2.3,
+      "text": "smaller number of ones grouping is"
+    },
+    {
+      "index": 139,
+      "start": 638.87,
+      "end": 641.71,
+      "duration": 2.84,
+      "text": "easier only if they are randomly"
+    },
+    {
+      "index": 140,
+      "start": 641.72,
+      "end": 643.96,
+      "duration": 2.24,
+      "text": "situated actually when ones are nicely"
+    },
+    {
+      "index": 141,
+      "start": 643.97,
+      "end": 647.95,
+      "duration": 3.98,
+      "text": "grouped you may find a good simplified"
+    },
+    {
+      "index": 142,
+      "start": 647.96,
+      "end": 651.04,
+      "duration": 3.08,
+      "text": "expression minimum form but if you had"
+    },
+    {
+      "index": 143,
+      "start": 651.05,
+      "end": 654.67,
+      "duration": 3.62,
+      "text": "once and zero spread them then under"
+    },
+    {
+      "index": 144,
+      "start": 654.68,
+      "end": 657.01,
+      "duration": 2.33,
+      "text": "fashion and more zeroes than ones and"
+    },
+    {
+      "index": 145,
+      "start": 657.02,
+      "end": 659.2,
+      "duration": 2.18,
+      "text": "more once than zeros maybe it's a good"
+    },
+    {
+      "index": 146,
+      "start": 659.21,
+      "end": 661.78,
+      "duration": 2.57,
+      "text": "idea to go for a simplification using"
+    },
+    {
+      "index": 147,
+      "start": 661.79,
+      "end": 666.67,
+      "duration": 4.88,
+      "text": "zeros the second thing is this is the"
+    },
+    {
+      "index": 148,
+      "start": 666.68,
+      "end": 669.13,
+      "duration": 2.45,
+      "text": "expression for the F without this"
+    },
+    {
+      "index": 149,
+      "start": 669.14,
+      "end": 670.81,
+      "duration": 1.67,
+      "text": "simplification this simplification I did"
+    },
+    {
+      "index": 150,
+      "start": 670.82,
+      "end": 674.08,
+      "duration": 3.26,
+      "text": "to prove that this is same as this I can"
+    },
+    {
+      "index": 151,
+      "start": 674.09,
+      "end": 675.7,
+      "duration": 1.61,
+      "text": "stop here this is the minimum product of"
+    },
+    {
+      "index": 152,
+      "start": 675.71,
+      "end": 678.94,
+      "duration": 3.23,
+      "text": "sum in the product of some form this is"
+    },
+    {
+      "index": 153,
+      "start": 678.95,
+      "end": 684.91,
+      "duration": 5.96,
+      "text": "a sum of product expression this is a"
+    },
+    {
+      "index": 154,
+      "start": 684.92,
+      "end": 688.84,
+      "duration": 3.92,
+      "text": "product of sum expression so if you"
+    },
+    {
+      "index": 155,
+      "start": 688.85,
+      "end": 690.61,
+      "duration": 1.76,
+      "text": "wanted the solution is a product of sum"
+    },
+    {
+      "index": 156,
+      "start": 690.62,
+      "end": 692.8,
+      "duration": 2.18,
+      "text": "expression once the solution is the"
+    },
+    {
+      "index": 157,
+      "start": 692.81,
+      "end": 695.32,
+      "duration": 2.51,
+      "text": "product of some farm I would stop here"
+    },
+    {
+      "index": 158,
+      "start": 695.33,
+      "end": 697.06,
+      "duration": 1.73,
+      "text": "and use this expression the minimum"
+    },
+    {
+      "index": 159,
+      "start": 697.07,
+      "end": 698.41,
+      "duration": 1.34,
+      "text": "product of sum this is a minimum sum of"
+    },
+    {
+      "index": 160,
+      "start": 698.42,
+      "end": 700.72,
+      "duration": 2.3,
+      "text": "C just as you get a minimum sum of"
+    },
+    {
+      "index": 161,
+      "start": 700.73,
+      "end": 702.73,
+      "duration": 2.0,
+      "text": "product expression using karnaugh map I"
+    },
+    {
+      "index": 162,
+      "start": 702.74,
+      "end": 705.04,
+      "duration": 2.3,
+      "text": "will also get a minimum product of sum"
+    },
+    {
+      "index": 163,
+      "start": 705.05,
+      "end": 709.06,
+      "duration": 4.01,
+      "text": "expression using karnaugh map using"
+    },
+    {
+      "index": 164,
+      "start": 709.07,
+      "end": 709.98,
+      "duration": 0.91,
+      "text": "zeroes"
+    },
+    {
+      "index": 165,
+      "start": 709.99,
+      "end": 712.33,
+      "duration": 2.34,
+      "text": "where will I use that situation I would"
+    },
+    {
+      "index": 166,
+      "start": 712.34,
+      "end": 714.01,
+      "duration": 1.67,
+      "text": "like I will use the situation where I"
+    },
+    {
+      "index": 167,
+      "start": 714.02,
+      "end": 716.59,
+      "duration": 2.57,
+      "text": "want to have or gates feeding into a"
+    },
+    {
+      "index": 168,
+      "start": 716.6,
+      "end": 719.35,
+      "duration": 2.75,
+      "text": "NAND gate because here there'll be each"
+    },
+    {
+      "index": 169,
+      "start": 719.36,
+      "end": 722.59,
+      "duration": 3.23,
+      "text": "sum term is an and gate each product"
+    },
+    {
+      "index": 170,
+      "start": 722.6,
+      "end": 724.81,
+      "duration": 2.21,
+      "text": "terms an and gate and a sum term"
+    },
+    {
+      "index": 171,
+      "start": 724.82,
+      "end": 726.91,
+      "duration": 2.09,
+      "text": "represents an or gate sum is equal to R"
+    },
+    {
+      "index": 172,
+      "start": 726.92,
+      "end": 729.97,
+      "duration": 3.05,
+      "text": "now really know some it's an or operator"
+    },
+    {
+      "index": 173,
+      "start": 729.98,
+      "end": 731.68,
+      "duration": 1.7,
+      "text": "because we put a plus we call it some"
+    },
+    {
+      "index": 174,
+      "start": 731.69,
+      "end": 734.62,
+      "duration": 2.93,
+      "text": "pluses in our operation dot is an and"
+    },
+    {
+      "index": 175,
+      "start": 734.63,
+      "end": 737.74,
+      "duration": 3.11,
+      "text": "operation so sum term represents an or"
+    },
+    {
+      "index": 176,
+      "start": 737.75,
+      "end": 741.43,
+      "duration": 3.68,
+      "text": "gate a product term represents an and"
+    },
+    {
+      "index": 177,
+      "start": 741.44,
+      "end": 749.76,
+      "duration": 8.32,
+      "text": "gate so if we have fewer or Gatien"
+    },
+    {
+      "index": 178,
+      "start": 749.77,
+      "end": 752.44,
+      "duration": 2.67,
+      "text": "larger number of and gates and use a sum"
+    },
+    {
+      "index": 179,
+      "start": 752.45,
+      "end": 755.61,
+      "duration": 3.16,
+      "text": "of product expression or if we have"
+    },
+    {
+      "index": 180,
+      "start": 755.62,
+      "end": 761.11,
+      "duration": 5.49,
+      "text": "fewer and gates and larger number of or"
+    },
+    {
+      "index": 181,
+      "start": 761.12,
+      "end": 763.27,
+      "duration": 2.15,
+      "text": "gates and use this so depending on the"
+    },
+    {
+      "index": 182,
+      "start": 763.28,
+      "end": 765.65,
+      "duration": 2.37,
+      "text": "topology as they call it"
+    },
+    {
+      "index": 183,
+      "start": 765.66,
+      "end": 767.93,
+      "duration": 2.27,
+      "text": "depending on the topology I'll have"
+    },
+    {
+      "index": 184,
+      "start": 767.94,
+      "end": 770.059,
+      "duration": 2.119,
+      "text": "either a sum of product expression or"
+    },
+    {
+      "index": 185,
+      "start": 770.069,
+      "end": 772.999,
+      "duration": 2.93,
+      "text": "product of sum expression even if the"
+    },
+    {
+      "index": 186,
+      "start": 773.009,
+      "end": 775.22,
+      "duration": 2.211,
+      "text": "number of zeros are more or less even"
+    },
+    {
+      "index": 187,
+      "start": 775.23,
+      "end": 778.309,
+      "duration": 3.079,
+      "text": "without considering the number of zeros"
+    },
+    {
+      "index": 188,
+      "start": 778.319,
+      "end": 780.1,
+      "duration": 1.781,
+      "text": "are once in the truth table are"
+    },
+    {
+      "index": 189,
+      "start": 780.11,
+      "end": 781.819,
+      "duration": 1.709,
+      "text": "regardless of zeros and ones"
+    },
+    {
+      "index": 190,
+      "start": 781.829,
+      "end": 783.98,
+      "duration": 2.151,
+      "text": "distribution in the truth table are the"
+    },
+    {
+      "index": 191,
+      "start": 783.99,
+      "end": 786.47,
+      "duration": 2.48,
+      "text": "karnaugh map we may sometimes want to"
+    },
+    {
+      "index": 192,
+      "start": 786.48,
+      "end": 789.139,
+      "duration": 2.659,
+      "text": "write the expression as a product of"
+    },
+    {
+      "index": 193,
+      "start": 789.149,
+      "end": 792.92,
+      "duration": 3.771,
+      "text": "some expression in that case I will use"
+    },
+    {
+      "index": 194,
+      "start": 792.93,
+      "end": 795.319,
+      "duration": 2.389,
+      "text": "this approach a group zeroes together"
+    },
+    {
+      "index": 195,
+      "start": 795.329,
+      "end": 800.509,
+      "duration": 5.18,
+      "text": "and get f bar and then F but you can do"
+    },
+    {
+      "index": 196,
+      "start": 800.519,
+      "end": 803.569,
+      "duration": 3.05,
+      "text": "a lot thing you can skip this by reading"
+    },
+    {
+      "index": 197,
+      "start": 803.579,
+      "end": 806.15,
+      "duration": 2.571,
+      "text": "judiciously because they are being"
+    },
+    {
+      "index": 198,
+      "start": 806.16,
+      "end": 808.97,
+      "duration": 2.81,
+      "text": "corresponding this you will read it"
+    },
+    {
+      "index": 199,
+      "start": 808.98,
+      "end": 812.17,
+      "duration": 3.19,
+      "text": "because this I can do it mentally"
+    },
+    {
+      "index": 200,
+      "start": 812.18,
+      "end": 816.379,
+      "duration": 4.199,
+      "text": "writing a bar and B bar and taking its"
+    },
+    {
+      "index": 201,
+      "start": 816.389,
+      "end": 820.18,
+      "duration": 3.791,
+      "text": "complement knocking of the bars here and"
+    },
+    {
+      "index": 202,
+      "start": 820.19,
+      "end": 822.86,
+      "duration": 2.67,
+      "text": "removing this and and putting in are all"
+    },
+    {
+      "index": 203,
+      "start": 822.87,
+      "end": 825.59,
+      "duration": 2.72,
+      "text": "this can be done in my mind I can see"
+    },
+    {
+      "index": 204,
+      "start": 825.6,
+      "end": 827.68,
+      "duration": 2.08,
+      "text": "that whenever two zeros are together"
+    },
+    {
+      "index": 205,
+      "start": 827.69,
+      "end": 831.8,
+      "duration": 4.11,
+      "text": "this is a bar and this is B bar I can"
+    },
+    {
+      "index": 206,
+      "start": 831.81,
+      "end": 834.319,
+      "duration": 2.509,
+      "text": "rewrite this as instead of a bar and"
+    },
+    {
+      "index": 207,
+      "start": 834.329,
+      "end": 838.67,
+      "duration": 4.341,
+      "text": "rusa a I'll use an R symbol you should"
+    },
+    {
+      "index": 208,
+      "start": 838.68,
+      "end": 841.699,
+      "duration": 3.019,
+      "text": "be that means I will read the map as if"
+    },
+    {
+      "index": 209,
+      "start": 841.709,
+      "end": 846.199,
+      "duration": 4.49,
+      "text": "I would read a product term I will read"
+    },
+    {
+      "index": 210,
+      "start": 846.209,
+      "end": 848.84,
+      "duration": 2.631,
+      "text": "a sum term as I would read a product"
+    },
+    {
+      "index": 211,
+      "start": 848.85,
+      "end": 851.139,
+      "duration": 2.289,
+      "text": "term except that I'll remember to"
+    },
+    {
+      "index": 212,
+      "start": 851.149,
+      "end": 854.21,
+      "duration": 3.061,
+      "text": "compliment each variable and remember to"
+    },
+    {
+      "index": 213,
+      "start": 854.22,
+      "end": 858.35,
+      "duration": 4.13,
+      "text": "complement each operation and operation"
+    },
+    {
+      "index": 214,
+      "start": 858.36,
+      "end": 861.67,
+      "duration": 3.31,
+      "text": "will be written as our operations and"
+    },
+    {
+      "index": 215,
+      "start": 861.68,
+      "end": 863.42,
+      "duration": 1.74,
+      "text": "variables will be written as this"
+    },
+    {
+      "index": 216,
+      "start": 863.43,
+      "end": 865.34,
+      "duration": 1.91,
+      "text": "complement so without going through"
+    },
+    {
+      "index": 217,
+      "start": 865.35,
+      "end": 866.929,
+      "duration": 1.579,
+      "text": "these two steps which is of course not"
+    },
+    {
+      "index": 218,
+      "start": 866.939,
+      "end": 871.4,
+      "duration": 4.461,
+      "text": "necessary but I am saying I am NOT doing"
+    },
+    {
+      "index": 219,
+      "start": 871.41,
+      "end": 873.74,
+      "duration": 2.33,
+      "text": "something which is wrong I'm just trying"
+    },
+    {
+      "index": 220,
+      "start": 873.75,
+      "end": 877.939,
+      "duration": 4.189,
+      "text": "to simplify my procedure visualize a"
+    },
+    {
+      "index": 221,
+      "start": 877.949,
+      "end": 880.67,
+      "duration": 2.721,
+      "text": "procedure says that these two things are"
+    },
+    {
+      "index": 222,
+      "start": 880.68,
+      "end": 883.22,
+      "duration": 2.54,
+      "text": "mentally done in your mind so you can"
+    },
+    {
+      "index": 223,
+      "start": 883.23,
+      "end": 889.34,
+      "duration": 6.11,
+      "text": "directly read the map as this let's take"
+    },
+    {
+      "index": 224,
+      "start": 889.35,
+      "end": 890.829,
+      "duration": 1.479,
+      "text": "one more example to prove this point"
+    },
+    {
+      "index": 225,
+      "start": 890.839,
+      "end": 894.73,
+      "duration": 3.891,
+      "text": "this time"
+    },
+    {
+      "index": 226,
+      "start": 912.61,
+      "end": 912.62,
+      "duration": 0.01,
+      "text": "Sigma M number of minterms"
+    },
+    {
+      "index": 227,
+      "start": 912.62,
+      "end": 920.2,
+      "duration": 7.58,
+      "text": "it's from the Sun will be one three four"
+    },
+    {
+      "index": 228,
+      "start": 920.21,
+      "end": 939.699,
+      "duration": 19.489,
+      "text": "five nine eleven fourteen fifteen"
+    },
+    {
+      "index": 229,
+      "start": 944.69,
+      "end": 944.7,
+      "duration": 0.01,
+      "text": "this is a map for F I can use any"
+    },
+    {
+      "index": 230,
+      "start": 944.7,
+      "end": 956.23,
+      "duration": 11.53,
+      "text": "variable I'll call them ABCD"
+    },
+    {
+      "index": 231,
+      "start": 958.58,
+      "end": 958.59,
+      "duration": 0.01,
+      "text": "so the variables for which the min term"
+    },
+    {
+      "index": 232,
+      "start": 958.59,
+      "end": 961.43,
+      "duration": 2.84,
+      "text": "min terms or is the outfit is one are"
+    },
+    {
+      "index": 233,
+      "start": 961.44,
+      "end": 966.32,
+      "duration": 4.88,
+      "text": "true or one which is this 3 which is"
+    },
+    {
+      "index": 234,
+      "start": 966.33,
+      "end": 982.72,
+      "duration": 16.39,
+      "text": "this 4 5 8 9 10 11 12 13 14 15"
+    },
+    {
+      "index": 235,
+      "start": 982.73,
+      "end": 992.81,
+      "duration": 10.08,
+      "text": "this is the distribution so this way"
+    },
+    {
+      "index": 236,
+      "start": 992.82,
+      "end": 998.12,
+      "duration": 5.3,
+      "text": "when breaking one essential prime"
+    },
+    {
+      "index": 237,
+      "start": 998.13,
+      "end": 1004.75,
+      "duration": 6.62,
+      "text": "implicant here this - this one will"
+    },
+    {
+      "index": 238,
+      "start": 1004.76,
+      "end": 1007.96,
+      "duration": 3.2,
+      "text": "cannot be combined in either way is the"
+    },
+    {
+      "index": 239,
+      "start": 1007.97,
+      "end": 1010.9,
+      "duration": 2.93,
+      "text": "most efficient way of combining because"
+    },
+    {
+      "index": 240,
+      "start": 1010.91,
+      "end": 1012.64,
+      "duration": 1.73,
+      "text": "this one has to be combined so this has"
+    },
+    {
+      "index": 241,
+      "start": 1012.65,
+      "end": 1014.86,
+      "duration": 2.21,
+      "text": "to be there this one has become and it's"
+    },
+    {
+      "index": 242,
+      "start": 1014.87,
+      "end": 1016.39,
+      "duration": 1.52,
+      "text": "just very I could have combined this way"
+    },
+    {
+      "index": 243,
+      "start": 1016.4,
+      "end": 1017.5,
+      "duration": 1.1,
+      "text": "but it's not necessary because they"
+    },
+    {
+      "index": 244,
+      "start": 1017.51,
+      "end": 1019.9,
+      "duration": 2.39,
+      "text": "already taken this one into account and"
+    },
+    {
+      "index": 245,
+      "start": 1019.91,
+      "end": 1026.73,
+      "duration": 6.82,
+      "text": "again these two these four ones form a"
+    },
+    {
+      "index": 246,
+      "start": 1026.74,
+      "end": 1032.02,
+      "duration": 5.28,
+      "text": "pair of implicant"
+    },
+    {
+      "index": 247,
+      "start": 1039.25,
+      "end": 1039.26,
+      "duration": 0.01,
+      "text": "love this should be put in this book"
+    },
+    {
+      "index": 248,
+      "start": 1039.26,
+      "end": 1041.679,
+      "duration": 2.419,
+      "text": "what would this be first term will be"
+    },
+    {
+      "index": 249,
+      "start": 1041.689,
+      "end": 1052.149,
+      "duration": 10.46,
+      "text": "this which is button P bar P bar D P"
+    },
+    {
+      "index": 250,
+      "start": 1052.159,
+      "end": 1061.86,
+      "duration": 9.701,
+      "text": "Bondi are this one a bar a bar b c bar"
+    },
+    {
+      "index": 251,
+      "start": 1061.87,
+      "end": 1074.47,
+      "duration": 12.6,
+      "text": "then this one a b c simple we've done"
+    },
+    {
+      "index": 252,
+      "start": 1074.48,
+      "end": 1078.81,
+      "duration": 4.33,
+      "text": "this earlier and SMAP is simple to read"
+    },
+    {
+      "index": 253,
+      "start": 1078.82,
+      "end": 1082.6,
+      "duration": 3.78,
+      "text": "there's no ambiguity here in terms of"
+    },
+    {
+      "index": 254,
+      "start": 1082.61,
+      "end": 1084.19,
+      "duration": 1.58,
+      "text": "non essential prime implicants and all"
+    },
+    {
+      "index": 255,
+      "start": 1084.2,
+      "end": 1087.399,
+      "duration": 3.199,
+      "text": "that on the other hand if i try to use"
+    },
+    {
+      "index": 256,
+      "start": 1087.409,
+      "end": 1101.78,
+      "duration": 14.371,
+      "text": "my zeros in the truth table def would be"
+    },
+    {
+      "index": 257,
+      "start": 1106.73,
+      "end": 1106.74,
+      "duration": 0.01,
+      "text": "wherever there is a one there all other"
+    },
+    {
+      "index": 258,
+      "start": 1106.74,
+      "end": 1108.86,
+      "duration": 2.12,
+      "text": "all other terms have to be put in this"
+    },
+    {
+      "index": 259,
+      "start": 1108.87,
+      "end": 1112.37,
+      "duration": 3.5,
+      "text": "so you represent this is sum of products"
+    },
+    {
+      "index": 260,
+      "start": 1112.38,
+      "end": 1114.77,
+      "duration": 2.39,
+      "text": "there's a product of some so we will put"
+    },
+    {
+      "index": 261,
+      "start": 1114.78,
+      "end": 1118.43,
+      "duration": 3.65,
+      "text": "a product which is a PI M for capital m"
+    },
+    {
+      "index": 262,
+      "start": 1118.44,
+      "end": 1120.67,
+      "duration": 2.23,
+      "text": "for min max terms small m firm in terms"
+    },
+    {
+      "index": 263,
+      "start": 1120.68,
+      "end": 1123.08,
+      "duration": 2.4,
+      "text": "so max - what are the max term that will"
+    },
+    {
+      "index": 264,
+      "start": 1123.09,
+      "end": 1124.76,
+      "duration": 1.67,
+      "text": "be there whatever term is not here will"
+    },
+    {
+      "index": 265,
+      "start": 1124.77,
+      "end": 1130.72,
+      "duration": 5.95,
+      "text": "be a max term so it will be 0 2 3 4 5 6"
+    },
+    {
+      "index": 266,
+      "start": 1130.73,
+      "end": 1140.9,
+      "duration": 10.17,
+      "text": "7 8 10 11 12 13 so happens that I"
+    },
+    {
+      "index": 267,
+      "start": 1140.91,
+      "end": 1143.78,
+      "duration": 2.87,
+      "text": "equally chose just one that did not do"
+    },
+    {
+      "index": 268,
+      "start": 1143.79,
+      "end": 1146.44,
+      "duration": 2.65,
+      "text": "it intentionally I wanted to have a"
+    },
+    {
+      "index": 269,
+      "start": 1146.45,
+      "end": 1148.46,
+      "duration": 2.01,
+      "text": "large number of ones and large number of"
+    },
+    {
+      "index": 270,
+      "start": 1148.47,
+      "end": 1150.62,
+      "duration": 2.15,
+      "text": "zeros so happened and I took this"
+    },
+    {
+      "index": 271,
+      "start": 1150.63,
+      "end": 1153.2,
+      "duration": 2.57,
+      "text": "example there exactly eight ones and"
+    },
+    {
+      "index": 272,
+      "start": 1153.21,
+      "end": 1155.3,
+      "duration": 2.09,
+      "text": "eight zeros so you could have proceeded"
+    },
+    {
+      "index": 273,
+      "start": 1155.31,
+      "end": 1158.72,
+      "duration": 3.41,
+      "text": "either with precision sum of product way"
+    },
+    {
+      "index": 274,
+      "start": 1158.73,
+      "end": 1161.75,
+      "duration": 3.02,
+      "text": "our product of some way if you had a"
+    },
+    {
+      "index": 275,
+      "start": 1161.76,
+      "end": 1163.73,
+      "duration": 1.97,
+      "text": "specific reason to go for product of sum"
+    },
+    {
+      "index": 276,
+      "start": 1163.74,
+      "end": 1166.52,
+      "duration": 2.78,
+      "text": "because you wanted to use and gates fit"
+    },
+    {
+      "index": 277,
+      "start": 1166.53,
+      "end": 1168.68,
+      "duration": 2.15,
+      "text": "into or gate I will not do it sum of"
+    },
+    {
+      "index": 278,
+      "start": 1168.69,
+      "end": 1170.87,
+      "duration": 2.18,
+      "text": "products if you want to have or gates"
+    },
+    {
+      "index": 279,
+      "start": 1170.88,
+      "end": 1173.23,
+      "duration": 2.35,
+      "text": "fit into and gates I should go for"
+    },
+    {
+      "index": 280,
+      "start": 1173.24,
+      "end": 1176.18,
+      "duration": 2.94,
+      "text": "product of sums but if you are not given"
+    },
+    {
+      "index": 281,
+      "start": 1176.19,
+      "end": 1177.53,
+      "duration": 1.34,
+      "text": "a choice like that if you are not given"
+    },
+    {
+      "index": 282,
+      "start": 1177.54,
+      "end": 1181.91,
+      "duration": 4.37,
+      "text": "a condition constraint like that in this"
+    },
+    {
+      "index": 283,
+      "start": 1181.92,
+      "end": 1183.56,
+      "duration": 1.64,
+      "text": "case that we ate once and eight zeros I"
+    },
+    {
+      "index": 284,
+      "start": 1183.57,
+      "end": 1186.98,
+      "duration": 3.41,
+      "text": "can go either way right so now put the"
+    },
+    {
+      "index": 285,
+      "start": 1186.99,
+      "end": 1189.7,
+      "duration": 2.71,
+      "text": "zeros here and draw another map here"
+    },
+    {
+      "index": 286,
+      "start": 1189.71,
+      "end": 1195.4,
+      "duration": 5.69,
+      "text": "seem a but not at avoid cluttering map"
+    },
+    {
+      "index": 287,
+      "start": 1195.41,
+      "end": 1205.39,
+      "duration": 9.98,
+      "text": "and we do it here"
+    },
+    {
+      "index": 288,
+      "start": 1222.55,
+      "end": 1222.56,
+      "duration": 0.01,
+      "text": "so I can group these zeros in groups of"
+    },
+    {
+      "index": 289,
+      "start": 1222.56,
+      "end": 1224.26,
+      "duration": 1.7,
+      "text": "two zeros or four zeros or eight zeros"
+    },
+    {
+      "index": 290,
+      "start": 1224.27,
+      "end": 1226.72,
+      "duration": 2.45,
+      "text": "as they came every based on the guess"
+    },
+    {
+      "index": 291,
+      "start": 1226.73,
+      "end": 1229.06,
+      "duration": 2.33,
+      "text": "maybe based on the adjacency rule and"
+    },
+    {
+      "index": 292,
+      "start": 1229.07,
+      "end": 1233.55,
+      "duration": 4.48,
+      "text": "then try to read them so these four"
+    },
+    {
+      "index": 293,
+      "start": 1233.56,
+      "end": 1243.01,
+      "duration": 9.45,
+      "text": "zeros on the group these two zeros form"
+    },
+    {
+      "index": 294,
+      "start": 1243.02,
+      "end": 1249.4,
+      "duration": 6.38,
+      "text": "a group from brigant these two so there"
+    },
+    {
+      "index": 295,
+      "start": 1249.41,
+      "end": 1256.15,
+      "duration": 6.74,
+      "text": "are only three terms and I can write f"
+    },
+    {
+      "index": 296,
+      "start": 1256.16,
+      "end": 1258.84,
+      "duration": 2.68,
+      "text": "bar and then take a complement of that"
+    },
+    {
+      "index": 297,
+      "start": 1258.85,
+      "end": 1261.85,
+      "duration": 3.0,
+      "text": "using the Morgans identity demorgan's"
+    },
+    {
+      "index": 298,
+      "start": 1261.86,
+      "end": 1265.0,
+      "duration": 3.14,
+      "text": "theorum and then write the product of"
+    },
+    {
+      "index": 299,
+      "start": 1265.01,
+      "end": 1269.02,
+      "duration": 4.01,
+      "text": "some form bar as I told you just now a"
+    },
+    {
+      "index": 300,
+      "start": 1269.03,
+      "end": 1271.75,
+      "duration": 2.72,
+      "text": "while ago I can directly read the map"
+    },
+    {
+      "index": 301,
+      "start": 1271.76,
+      "end": 1273.75,
+      "duration": 1.99,
+      "text": "for product of sum expression by"
+    },
+    {
+      "index": 302,
+      "start": 1273.76,
+      "end": 1276.31,
+      "duration": 2.55,
+      "text": "treating a variable as its complement"
+    },
+    {
+      "index": 303,
+      "start": 1276.32,
+      "end": 1278.38,
+      "duration": 2.06,
+      "text": "when writing when you read it as you"
+    },
+    {
+      "index": 304,
+      "start": 1278.39,
+      "end": 1281.56,
+      "duration": 3.17,
+      "text": "read it as a complement any variable is"
+    },
+    {
+      "index": 305,
+      "start": 1281.57,
+      "end": 1283.69,
+      "duration": 2.12,
+      "text": "read that is read as its complement and"
+    },
+    {
+      "index": 306,
+      "start": 1283.7,
+      "end": 1286.0,
+      "duration": 2.3,
+      "text": "Anand operator is read as an or operator"
+    },
+    {
+      "index": 307,
+      "start": 1286.01,
+      "end": 1288.46,
+      "duration": 2.45,
+      "text": "and vice versa so this would be these"
+    },
+    {
+      "index": 308,
+      "start": 1288.47,
+      "end": 1293.8,
+      "duration": 5.33,
+      "text": "four ones would be B bar D bar if you"
+    },
+    {
+      "index": 309,
+      "start": 1293.81,
+      "end": 1297.04,
+      "duration": 3.23,
+      "text": "want to write it as a sum of product"
+    },
+    {
+      "index": 310,
+      "start": 1297.05,
+      "end": 1298.87,
+      "duration": 1.82,
+      "text": "since I want to write a product of sum"
+    },
+    {
+      "index": 311,
+      "start": 1298.88,
+      "end": 1308.59,
+      "duration": 9.71,
+      "text": "this will be B or D so this will be"
+    },
+    {
+      "index": 312,
+      "start": 1313.6,
+      "end": 1313.61,
+      "duration": 0.01,
+      "text": "the Rd that right there anyone who"
+    },
+    {
+      "index": 313,
+      "start": 1313.61,
+      "end": 1316.749,
+      "duration": 3.139,
+      "text": "doesn't understand what I'm saying you"
+    },
+    {
+      "index": 314,
+      "start": 1316.759,
+      "end": 1318.669,
+      "duration": 1.91,
+      "text": "look at this four-eyes would do I have"
+    },
+    {
+      "index": 315,
+      "start": 1318.679,
+      "end": 1322.36,
+      "duration": 3.681,
+      "text": "one the only difference is this will be"
+    },
+    {
+      "index": 316,
+      "start": 1322.37,
+      "end": 1326.82,
+      "duration": 4.45,
+      "text": "let us be d if you are grouping once"
+    },
+    {
+      "index": 317,
+      "start": 1326.83,
+      "end": 1328.96,
+      "duration": 2.13,
+      "text": "when you're gripping zeros B would be"
+    },
+    {
+      "index": 318,
+      "start": 1328.97,
+      "end": 1331.96,
+      "duration": 2.99,
+      "text": "read as B bar D will be read as D bar"
+    },
+    {
+      "index": 319,
+      "start": 1331.97,
+      "end": 1334.84,
+      "duration": 2.87,
+      "text": "and will be read as an R so instead of"
+    },
+    {
+      "index": 320,
+      "start": 1334.85,
+      "end": 1340.029,
+      "duration": 5.179,
+      "text": "BD L say B bar or I mean instead of B"
+    },
+    {
+      "index": 321,
+      "start": 1340.039,
+      "end": 1344.35,
+      "duration": 4.311,
+      "text": "bar and D bar I will read it as B or D"
+    },
+    {
+      "index": 322,
+      "start": 1344.36,
+      "end": 1345.7,
+      "duration": 1.34,
+      "text": "that's it"
+    },
+    {
+      "index": 323,
+      "start": 1345.71,
+      "end": 1349.419,
+      "duration": 3.709,
+      "text": "this is well trick if you wanna buy it's"
+    },
+    {
+      "index": 324,
+      "start": 1349.429,
+      "end": 1351.039,
+      "duration": 1.61,
+      "text": "not a trick really it's a procedure"
+    },
+    {
+      "index": 325,
+      "start": 1351.049,
+      "end": 1354.119,
+      "duration": 3.07,
+      "text": "which is bypassing the some of the"
+    },
+    {
+      "index": 326,
+      "start": 1354.129,
+      "end": 1357.639,
+      "duration": 3.51,
+      "text": "logical steps it is not as if it is a"
+    },
+    {
+      "index": 327,
+      "start": 1357.649,
+      "end": 1361.81,
+      "duration": 4.161,
+      "text": "new concept or another thing or it's not"
+    },
+    {
+      "index": 328,
+      "start": 1361.82,
+      "end": 1364.72,
+      "duration": 2.9,
+      "text": "a derivation in it no this is how you"
+    },
+    {
+      "index": 329,
+      "start": 1364.73,
+      "end": 1369.789,
+      "duration": 5.059,
+      "text": "get it couple of quick steps we prove"
+    },
+    {
+      "index": 330,
+      "start": 1369.799,
+      "end": 1372.669,
+      "duration": 2.87,
+      "text": "that the same as this here so the next"
+    },
+    {
+      "index": 331,
+      "start": 1372.679,
+      "end": 1375.85,
+      "duration": 3.171,
+      "text": "term would be this it will be if they"
+    },
+    {
+      "index": 332,
+      "start": 1375.86,
+      "end": 1378.7,
+      "duration": 2.84,
+      "text": "were if this to where once these two"
+    },
+    {
+      "index": 333,
+      "start": 1378.71,
+      "end": 1384.249,
+      "duration": 5.539,
+      "text": "advance I would read it as B I would"
+    },
+    {
+      "index": 334,
+      "start": 1384.259,
+      "end": 1386.769,
+      "duration": 2.51,
+      "text": "reduce is B yeah"
+    },
+    {
+      "index": 335,
+      "start": 1386.779,
+      "end": 1397.08,
+      "duration": 10.301,
+      "text": "a bar b see rivalry does a or b bar are"
+    },
+    {
+      "index": 336,
+      "start": 1397.09,
+      "end": 1416.01,
+      "duration": 18.92,
+      "text": "c bar"
+    },
+    {
+      "index": 337,
+      "start": 1420.03,
+      "end": 1420.04,
+      "duration": 0.01,
+      "text": "and finally this two ones if you're one"
+    },
+    {
+      "index": 338,
+      "start": 1420.04,
+      "end": 1423.15,
+      "duration": 3.11,
+      "text": "that will it as a b c bar little bit it"
+    },
+    {
+      "index": 339,
+      "start": 1423.16,
+      "end": 1444.27,
+      "duration": 21.11,
+      "text": "as a bar b Bar C"
+    },
+    {
+      "index": 340,
+      "start": 1458.46,
+      "end": 1458.47,
+      "duration": 0.01,
+      "text": "product of sum this is a minimum this is"
+    },
+    {
+      "index": 341,
+      "start": 1458.47,
+      "end": 1461.25,
+      "duration": 2.78,
+      "text": "just min term this is as max terms this"
+    },
+    {
+      "index": 342,
+      "start": 1461.26,
+      "end": 1464.31,
+      "duration": 3.05,
+      "text": "is as once this is 0 this will lose and"
+    },
+    {
+      "index": 343,
+      "start": 1464.32,
+      "end": 1466.08,
+      "duration": 1.76,
+      "text": "gates fitting into our gate for the"
+    },
+    {
+      "index": 344,
+      "start": 1466.09,
+      "end": 1467.279,
+      "duration": 1.189,
+      "text": "final output"
+    },
+    {
+      "index": 345,
+      "start": 1467.289,
+      "end": 1470.25,
+      "duration": 2.961,
+      "text": "this will lose or gate feeding the NAND"
+    },
+    {
+      "index": 346,
+      "start": 1470.26,
+      "end": 1471.96,
+      "duration": 1.7,
+      "text": "gate for the final output but both are"
+    },
+    {
+      "index": 347,
+      "start": 1471.97,
+      "end": 1476.31,
+      "duration": 4.34,
+      "text": "identical your choice of using this or"
+    },
+    {
+      "index": 348,
+      "start": 1476.32,
+      "end": 1478.919,
+      "duration": 2.599,
+      "text": "that or if you are given a constraint as"
+    },
+    {
+      "index": 349,
+      "start": 1478.929,
+      "end": 1482.34,
+      "duration": 3.411,
+      "text": "use many and gates only one our gate"
+    },
+    {
+      "index": 350,
+      "start": 1482.35,
+      "end": 1485.37,
+      "duration": 3.02,
+      "text": "will use this for us to do many our"
+    },
+    {
+      "index": 351,
+      "start": 1485.38,
+      "end": 1487.32,
+      "duration": 1.94,
+      "text": "gates you can many our gates and only"
+    },
+    {
+      "index": 352,
+      "start": 1487.33,
+      "end": 1489.39,
+      "duration": 2.06,
+      "text": "one I indicate you use this you can use"
+    },
+    {
+      "index": 353,
+      "start": 1489.4,
+      "end": 1491.039,
+      "duration": 1.639,
+      "text": "many and against only one organ to use"
+    },
+    {
+      "index": 354,
+      "start": 1491.049,
+      "end": 1494.1,
+      "duration": 3.051,
+      "text": "this sometimes this restrictions"
+    },
+    {
+      "index": 355,
+      "start": 1494.11,
+      "end": 1496.14,
+      "duration": 2.03,
+      "text": "combined because come in the design"
+    },
+    {
+      "index": 356,
+      "start": 1496.15,
+      "end": 1498.12,
+      "duration": 1.97,
+      "text": "because of the availability of parts"
+    },
+    {
+      "index": 357,
+      "start": 1498.13,
+      "end": 1500.07,
+      "duration": 1.94,
+      "text": "because of the matching with the other"
+    },
+    {
+      "index": 358,
+      "start": 1500.08,
+      "end": 1502.159,
+      "duration": 2.079,
+      "text": "part of the circuitry were designing"
+    },
+    {
+      "index": 359,
+      "start": 1502.169,
+      "end": 1504.419,
+      "duration": 2.25,
+      "text": "because you may want to have an"
+    },
+    {
+      "index": 360,
+      "start": 1504.429,
+      "end": 1506.399,
+      "duration": 1.97,
+      "text": "inventory of type of parts of the same"
+    },
+    {
+      "index": 361,
+      "start": 1506.409,
+      "end": 1509.25,
+      "duration": 2.841,
+      "text": "type for different designs in different"
+    },
+    {
+      "index": 362,
+      "start": 1509.26,
+      "end": 1511.26,
+      "duration": 2.0,
+      "text": "permutations there may be several"
+    },
+    {
+      "index": 363,
+      "start": 1511.27,
+      "end": 1512.85,
+      "duration": 1.58,
+      "text": "reasons why you want to go for this or"
+    },
+    {
+      "index": 364,
+      "start": 1512.86,
+      "end": 1518.159,
+      "duration": 5.299,
+      "text": "that so now we are done with I also told"
+    },
+    {
+      "index": 365,
+      "start": 1518.169,
+      "end": 1520.71,
+      "duration": 2.541,
+      "text": "you the other day how to do a 4 verify"
+    },
+    {
+      "index": 366,
+      "start": 1520.72,
+      "end": 1524.1,
+      "duration": 3.38,
+      "text": "variable map 6 variable map redundant"
+    },
+    {
+      "index": 367,
+      "start": 1524.11,
+      "end": 1526.43,
+      "duration": 2.32,
+      "text": "some length for variable Maps which is"
+    },
+    {
+      "index": 368,
+      "start": 1526.44,
+      "end": 1529.32,
+      "duration": 2.88,
+      "text": "generally far concept conceptually that"
+    },
+    {
+      "index": 369,
+      "start": 1529.33,
+      "end": 1531.539,
+      "duration": 2.209,
+      "text": "is good enough we talked about"
+    },
+    {
+      "index": 370,
+      "start": 1531.549,
+      "end": 1533.159,
+      "duration": 1.61,
+      "text": "implicants prime implicant essential"
+    },
+    {
+      "index": 371,
+      "start": 1533.169,
+      "end": 1535.44,
+      "duration": 2.271,
+      "text": "prime implicants non essential prime"
+    },
+    {
+      "index": 372,
+      "start": 1535.45,
+      "end": 1537.33,
+      "duration": 1.88,
+      "text": "implicants how to use a non essential"
+    },
+    {
+      "index": 373,
+      "start": 1537.34,
+      "end": 1541.26,
+      "duration": 3.92,
+      "text": "prime implicant properly in our line we"
+    },
+    {
+      "index": 374,
+      "start": 1541.27,
+      "end": 1545.159,
+      "duration": 3.889,
+      "text": "will have to now go to or some examples"
+    },
+    {
+      "index": 375,
+      "start": 1545.169,
+      "end": 1549.18,
+      "duration": 4.011,
+      "text": "of systems small ones will will design"
+    },
+    {
+      "index": 376,
+      "start": 1549.19,
+      "end": 1554.45,
+      "duration": 5.26,
+      "text": "will think of some real examples and"
+    },
+    {
+      "index": 377,
+      "start": 1554.46,
+      "end": 1557.399,
+      "duration": 2.939,
+      "text": "instead of so far I've been giving you"
+    },
+    {
+      "index": 378,
+      "start": 1557.409,
+      "end": 1558.75,
+      "duration": 1.341,
+      "text": "min terms and max terms"
+    },
+    {
+      "index": 379,
+      "start": 1558.76,
+      "end": 1564.539,
+      "duration": 5.779,
+      "text": "lists without any physical relationship"
+    },
+    {
+      "index": 380,
+      "start": 1564.549,
+      "end": 1567.6,
+      "duration": 3.051,
+      "text": "any physical correlation with anything"
+    },
+    {
+      "index": 381,
+      "start": 1567.61,
+      "end": 1570.02,
+      "duration": 2.41,
+      "text": "we just arbitrarily sum of products"
+    },
+    {
+      "index": 382,
+      "start": 1570.03,
+      "end": 1572.88,
+      "duration": 2.85,
+      "text": "arbitrary product of sums arbitrary"
+    },
+    {
+      "index": 383,
+      "start": 1572.89,
+      "end": 1575.71,
+      "duration": 2.82,
+      "text": "zeros and ones in the"
+    },
+    {
+      "index": 384,
+      "start": 1575.72,
+      "end": 1579.07,
+      "duration": 3.35,
+      "text": "rushon are arbitrary ones and zeros in"
+    },
+    {
+      "index": 385,
+      "start": 1579.08,
+      "end": 1581.5,
+      "duration": 2.42,
+      "text": "the truth table before we move on to"
+    },
+    {
+      "index": 386,
+      "start": 1581.51,
+      "end": 1584.95,
+      "duration": 3.44,
+      "text": "that I wonder before we wanted some"
+    },
+    {
+      "index": 387,
+      "start": 1584.96,
+      "end": 1587.35,
+      "duration": 2.39,
+      "text": "practical examples are real-life"
+    },
+    {
+      "index": 388,
+      "start": 1587.36,
+      "end": 1590.02,
+      "duration": 2.66,
+      "text": "examples I will not give one more"
+    },
+    {
+      "index": 389,
+      "start": 1590.03,
+      "end": 1591.789,
+      "duration": 1.759,
+      "text": "concept is very simple concept it's"
+    },
+    {
+      "index": 390,
+      "start": 1591.799,
+      "end": 1603.25,
+      "duration": 11.451,
+      "text": "called a don't care condition"
+    },
+    {
+      "index": 391,
+      "start": 1605.78,
+      "end": 1605.79,
+      "duration": 0.01,
+      "text": "this is not instead you are in all the"
+    },
+    {
+      "index": 392,
+      "start": 1605.79,
+      "end": 1610.73,
+      "duration": 4.94,
+      "text": "time don't care states right you don't"
+    },
+    {
+      "index": 393,
+      "start": 1610.74,
+      "end": 1616.94,
+      "duration": 6.2,
+      "text": "really care but what happens now what is"
+    },
+    {
+      "index": 394,
+      "start": 1616.95,
+      "end": 1620.66,
+      "duration": 3.71,
+      "text": "it don't care state I have a tooth table"
+    },
+    {
+      "index": 395,
+      "start": 1620.67,
+      "end": 1626.72,
+      "duration": 6.05,
+      "text": "here date rose or a map with eight cells"
+    },
+    {
+      "index": 396,
+      "start": 1626.73,
+      "end": 1629.45,
+      "duration": 2.72,
+      "text": "a map with sixteen cells are two table"
+    },
+    {
+      "index": 397,
+      "start": 1629.46,
+      "end": 1632.63,
+      "duration": 3.17,
+      "text": "16 rows and we define for each of these"
+    },
+    {
+      "index": 398,
+      "start": 1632.64,
+      "end": 1636.35,
+      "duration": 3.71,
+      "text": "rows ourselves and I output to be true"
+    },
+    {
+      "index": 399,
+      "start": 1636.36,
+      "end": 1639.41,
+      "duration": 3.05,
+      "text": "or false asserted to be 1 or 0 that"
+    },
+    {
+      "index": 400,
+      "start": 1639.42,
+      "end": 1641.51,
+      "duration": 2.09,
+      "text": "means you are very clear what do you"
+    },
+    {
+      "index": 401,
+      "start": 1641.52,
+      "end": 1643.79,
+      "duration": 2.27,
+      "text": "want the output to be for each of the"
+    },
+    {
+      "index": 402,
+      "start": 1643.8,
+      "end": 1647.72,
+      "duration": 3.92,
+      "text": "input combinations very clearly because"
+    },
+    {
+      "index": 403,
+      "start": 1647.73,
+      "end": 1649.04,
+      "duration": 1.31,
+      "text": "based on that condition you are"
+    },
+    {
+      "index": 404,
+      "start": 1649.05,
+      "end": 1653.27,
+      "duration": 4.22,
+      "text": "designing a system or a circuit on the"
+    },
+    {
+      "index": 405,
+      "start": 1653.28,
+      "end": 1658.34,
+      "duration": 5.06,
+      "text": "other hand I may have a system the"
+    },
+    {
+      "index": 406,
+      "start": 1658.35,
+      "end": 1672.06,
+      "duration": 13.71,
+      "text": "circuit which on designing"
+    },
+    {
+      "index": 407,
+      "start": 1677.1,
+      "end": 1677.11,
+      "duration": 0.01,
+      "text": "I will define the output to be true for"
+    },
+    {
+      "index": 408,
+      "start": 1677.11,
+      "end": 1680.22,
+      "duration": 3.11,
+      "text": "certain combinations of the inputs and"
+    },
+    {
+      "index": 409,
+      "start": 1680.23,
+      "end": 1683.01,
+      "duration": 2.78,
+      "text": "it has to be false for certain other"
+    },
+    {
+      "index": 410,
+      "start": 1683.02,
+      "end": 1685.47,
+      "duration": 2.45,
+      "text": "combinations of the input and there will"
+    },
+    {
+      "index": 411,
+      "start": 1685.48,
+      "end": 1687.0,
+      "duration": 1.52,
+      "text": "be some combinations which are not"
+    },
+    {
+      "index": 412,
+      "start": 1687.01,
+      "end": 1689.25,
+      "duration": 2.24,
+      "text": "covered in both the lists I can give you"
+    },
+    {
+      "index": 413,
+      "start": 1689.26,
+      "end": 1690.48,
+      "duration": 1.22,
+      "text": "a list of combinations of the input"
+    },
+    {
+      "index": 414,
+      "start": 1690.49,
+      "end": 1691.59,
+      "duration": 1.1,
+      "text": "there how many combinations are possible"
+    },
+    {
+      "index": 415,
+      "start": 1691.6,
+      "end": 1694.5,
+      "duration": 2.9,
+      "text": "to three inputs eight combinations"
+    },
+    {
+      "index": 416,
+      "start": 1694.51,
+      "end": 1696.21,
+      "duration": 1.7,
+      "text": "what are these eight combinations I will"
+    },
+    {
+      "index": 417,
+      "start": 1696.22,
+      "end": 1698.01,
+      "duration": 1.79,
+      "text": "say definitely for certain combinations"
+    },
+    {
+      "index": 418,
+      "start": 1698.02,
+      "end": 1700.44,
+      "duration": 2.42,
+      "text": "let us say three combinations the output"
+    },
+    {
+      "index": 419,
+      "start": 1700.45,
+      "end": 1703.68,
+      "duration": 3.23,
+      "text": "has to be true and for another three"
+    },
+    {
+      "index": 420,
+      "start": 1703.69,
+      "end": 1706.83,
+      "duration": 3.14,
+      "text": "maybe the output has to be false and"
+    },
+    {
+      "index": 421,
+      "start": 1706.84,
+      "end": 1708.99,
+      "duration": 2.15,
+      "text": "then there are two combinations which"
+    },
+    {
+      "index": 422,
+      "start": 1709.0,
+      "end": 1713.31,
+      "duration": 4.31,
+      "text": "are not defined means you may not define"
+    },
+    {
+      "index": 423,
+      "start": 1713.32,
+      "end": 1716.25,
+      "duration": 2.93,
+      "text": "it for many reasons these combinations"
+    },
+    {
+      "index": 424,
+      "start": 1716.26,
+      "end": 1719.97,
+      "duration": 3.71,
+      "text": "may not occur in your system this"
+    },
+    {
+      "index": 425,
+      "start": 1719.98,
+      "end": 1721.56,
+      "duration": 1.58,
+      "text": "combination is mirror-like or this"
+    },
+    {
+      "index": 426,
+      "start": 1721.57,
+      "end": 1724.53,
+      "duration": 2.96,
+      "text": "combination may occur but you don't"
+    },
+    {
+      "index": 427,
+      "start": 1724.54,
+      "end": 1726.51,
+      "duration": 1.97,
+      "text": "worry too much about that it can be 1 of"
+    },
+    {
+      "index": 428,
+      "start": 1726.52,
+      "end": 1728.16,
+      "duration": 1.64,
+      "text": "0 the output can be true or false"
+    },
+    {
+      "index": 429,
+      "start": 1728.17,
+      "end": 1730.35,
+      "duration": 2.18,
+      "text": "because it's not going to affect you are"
+    },
+    {
+      "index": 430,
+      "start": 1730.36,
+      "end": 1734.13,
+      "duration": 3.77,
+      "text": "processing anyway so there are certain"
+    },
+    {
+      "index": 431,
+      "start": 1734.14,
+      "end": 1736.88,
+      "duration": 2.74,
+      "text": "combinations in any system in a circuit"
+    },
+    {
+      "index": 432,
+      "start": 1736.89,
+      "end": 1740.16,
+      "duration": 3.27,
+      "text": "certain combination input for which you"
+    },
+    {
+      "index": 433,
+      "start": 1740.17,
+      "end": 1741.72,
+      "duration": 1.55,
+      "text": "will not define the inputs the inputs"
+    },
+    {
+      "index": 434,
+      "start": 1741.73,
+      "end": 1745.95,
+      "duration": 4.22,
+      "text": "are undefined need not be defined for"
+    },
+    {
+      "index": 435,
+      "start": 1745.96,
+      "end": 1748.44,
+      "duration": 2.48,
+      "text": "practical reasons the practical reasons"
+    },
+    {
+      "index": 436,
+      "start": 1748.45,
+      "end": 1751.14,
+      "duration": 2.69,
+      "text": "could be such a combination of inputs"
+    },
+    {
+      "index": 437,
+      "start": 1751.15,
+      "end": 1754.53,
+      "duration": 3.38,
+      "text": "may not occur in practice or the"
+    },
+    {
+      "index": 438,
+      "start": 1754.54,
+      "end": 1756.51,
+      "duration": 1.97,
+      "text": "practical reason could be such a"
+    },
+    {
+      "index": 439,
+      "start": 1756.52,
+      "end": 1758.58,
+      "duration": 2.06,
+      "text": "combination input if it occurs I really"
+    },
+    {
+      "index": 440,
+      "start": 1758.59,
+      "end": 1760.59,
+      "duration": 2.0,
+      "text": "don't know I don't really care whatever"
+    },
+    {
+      "index": 441,
+      "start": 1760.6,
+      "end": 1762.78,
+      "duration": 2.18,
+      "text": "it is whether it's not going to affect"
+    },
+    {
+      "index": 442,
+      "start": 1762.79,
+      "end": 1766.5,
+      "duration": 3.71,
+      "text": "my processing in any way whatever is the"
+    },
+    {
+      "index": 443,
+      "start": 1766.51,
+      "end": 1770.52,
+      "duration": 4.01,
+      "text": "reason if you want to say there are"
+    },
+    {
+      "index": 444,
+      "start": 1770.53,
+      "end": 1771.72,
+      "duration": 1.19,
+      "text": "certain combinations of the inputs for"
+    },
+    {
+      "index": 445,
+      "start": 1771.73,
+      "end": 1774.66,
+      "duration": 2.93,
+      "text": "which I do not care that's why it's"
+    },
+    {
+      "index": 446,
+      "start": 1774.67,
+      "end": 1776.7,
+      "duration": 2.03,
+      "text": "called don't care says I do not care"
+    },
+    {
+      "index": 447,
+      "start": 1776.71,
+      "end": 1779.4,
+      "duration": 2.69,
+      "text": "what the output is such states are"
+    },
+    {
+      "index": 448,
+      "start": 1779.41,
+      "end": 1793.35,
+      "duration": 13.94,
+      "text": "called don't care states"
+    },
+    {
+      "index": 449,
+      "start": 1796.02,
+      "end": 1796.03,
+      "duration": 0.01,
+      "text": "I'll give a simple example somebody want"
+    },
+    {
+      "index": 450,
+      "start": 1796.03,
+      "end": 1801.36,
+      "duration": 5.33,
+      "text": "to count for using one half one hand for"
+    },
+    {
+      "index": 451,
+      "start": 1801.37,
+      "end": 1803.73,
+      "duration": 2.36,
+      "text": "five fingers one hand I'll use only four"
+    },
+    {
+      "index": 452,
+      "start": 1803.74,
+      "end": 1805.14,
+      "duration": 1.4,
+      "text": "fingers all the time fifth finger will"
+    },
+    {
+      "index": 453,
+      "start": 1805.15,
+      "end": 1808.71,
+      "duration": 3.56,
+      "text": "not be used so I'll say supposing I show"
+    },
+    {
+      "index": 454,
+      "start": 1808.72,
+      "end": 1814.62,
+      "duration": 5.9,
+      "text": "you a tree like this you know it's 3ra"
+    },
+    {
+      "index": 455,
+      "start": 1814.63,
+      "end": 1820.08,
+      "duration": 5.45,
+      "text": "but let us say how much like this it's"
+    },
+    {
+      "index": 456,
+      "start": 1820.09,
+      "end": 1822.12,
+      "duration": 2.03,
+      "text": "also two because these four other"
+    },
+    {
+      "index": 457,
+      "start": 1822.13,
+      "end": 1824.58,
+      "duration": 2.45,
+      "text": "fingers you will not look at I'm not"
+    },
+    {
+      "index": 458,
+      "start": 1824.59,
+      "end": 1830.01,
+      "duration": 5.42,
+      "text": "saying any whatever hang but supposing I"
+    },
+    {
+      "index": 459,
+      "start": 1830.02,
+      "end": 1832.89,
+      "duration": 2.87,
+      "text": "put three and this thing this thumb also"
+    },
+    {
+      "index": 460,
+      "start": 1832.9,
+      "end": 1835.89,
+      "duration": 2.99,
+      "text": "out I always tell you that look at my"
+    },
+    {
+      "index": 461,
+      "start": 1835.9,
+      "end": 1838.73,
+      "duration": 2.83,
+      "text": "four fingers and determine the condition"
+    },
+    {
+      "index": 462,
+      "start": 1838.74,
+      "end": 1847.08,
+      "duration": 8.34,
+      "text": "ok 3 2 or 1 1 I mean 3 before 3 2 1 this"
+    },
+    {
+      "index": 463,
+      "start": 1847.09,
+      "end": 1848.55,
+      "duration": 1.46,
+      "text": "finger you don't even look at I'm saying"
+    },
+    {
+      "index": 464,
+      "start": 1848.56,
+      "end": 1851.55,
+      "duration": 2.99,
+      "text": "this thumb you don't even look at but I"
+    },
+    {
+      "index": 465,
+      "start": 1851.56,
+      "end": 1853.92,
+      "duration": 2.36,
+      "text": "I may put it like this I may put it like"
+    },
+    {
+      "index": 466,
+      "start": 1853.93,
+      "end": 1856.41,
+      "duration": 2.48,
+      "text": "this it doesn't matter because this is"
+    },
+    {
+      "index": 467,
+      "start": 1856.42,
+      "end": 1859.32,
+      "duration": 2.9,
+      "text": "not going to affect you this is one our"
+    },
+    {
+      "index": 468,
+      "start": 1859.33,
+      "end": 1862.2,
+      "duration": 2.87,
+      "text": "this is also one this is this also -"
+    },
+    {
+      "index": 469,
+      "start": 1862.21,
+      "end": 1866.01,
+      "duration": 3.8,
+      "text": "this also - right it's an example in"
+    },
+    {
+      "index": 470,
+      "start": 1866.02,
+      "end": 1868.68,
+      "duration": 2.66,
+      "text": "like that I may have four inputs what"
+    },
+    {
+      "index": 471,
+      "start": 1868.69,
+      "end": 1871.08,
+      "duration": 2.39,
+      "text": "are these three combinations three input"
+    },
+    {
+      "index": 472,
+      "start": 1871.09,
+      "end": 1873.0,
+      "duration": 1.91,
+      "text": "curve are certain companies they four"
+    },
+    {
+      "index": 473,
+      "start": 1873.01,
+      "end": 1875.16,
+      "duration": 2.15,
+      "text": "inputs is going to affect my output and"
+    },
+    {
+      "index": 474,
+      "start": 1875.17,
+      "end": 1877.56,
+      "duration": 2.39,
+      "text": "we read about those if it happens I have"
+    },
+    {
+      "index": 475,
+      "start": 1877.57,
+      "end": 1881.16,
+      "duration": 3.59,
+      "text": "to take some action and certain other"
+    },
+    {
+      "index": 476,
+      "start": 1881.17,
+      "end": 1883.5,
+      "duration": 2.33,
+      "text": "combinations if it happens I don't care"
+    },
+    {
+      "index": 477,
+      "start": 1883.51,
+      "end": 1885.63,
+      "duration": 2.12,
+      "text": "this nothing goes well nothing is going"
+    },
+    {
+      "index": 478,
+      "start": 1885.64,
+      "end": 1887.58,
+      "duration": 1.94,
+      "text": "to happen I don't have to take any"
+    },
+    {
+      "index": 479,
+      "start": 1887.59,
+      "end": 1893.67,
+      "duration": 6.08,
+      "text": "action so we have we can always say it's"
+    },
+    {
+      "index": 480,
+      "start": 1893.68,
+      "end": 1897.3,
+      "duration": 3.62,
+      "text": "zero we are only interested in a"
+    },
+    {
+      "index": 481,
+      "start": 1897.31,
+      "end": 1898.8,
+      "duration": 1.49,
+      "text": "particular combination certain"
+    },
+    {
+      "index": 482,
+      "start": 1898.81,
+      "end": 1901.26,
+      "duration": 2.45,
+      "text": "combinations the import giving an out"
+    },
+    {
+      "index": 483,
+      "start": 1901.27,
+      "end": 1904.07,
+      "duration": 2.8,
+      "text": "certian asserted one logical output one"
+    },
+    {
+      "index": 484,
+      "start": 1904.08,
+      "end": 1906.18,
+      "duration": 2.1,
+      "text": "when that is the case you can always say"
+    },
+    {
+      "index": 485,
+      "start": 1906.19,
+      "end": 1908.7,
+      "duration": 2.51,
+      "text": "any other combination coming the output"
+    },
+    {
+      "index": 486,
+      "start": 1908.71,
+      "end": 1910.38,
+      "duration": 1.67,
+      "text": "can be zero then you are very safe is it"
+    },
+    {
+      "index": 487,
+      "start": 1910.39,
+      "end": 1914.73,
+      "duration": 4.34,
+      "text": "not I don't want a false output whenever"
+    },
+    {
+      "index": 488,
+      "start": 1914.74,
+      "end": 1916.38,
+      "duration": 1.64,
+      "text": "I have a condition for which the output"
+    },
+    {
+      "index": 489,
+      "start": 1916.39,
+      "end": 1918.18,
+      "duration": 1.79,
+      "text": "is required to be one I need an output"
+    },
+    {
+      "index": 490,
+      "start": 1918.19,
+      "end": 1920.67,
+      "duration": 2.48,
+      "text": "to be one if there is a mistake in that"
+    },
+    {
+      "index": 491,
+      "start": 1920.68,
+      "end": 1924.09,
+      "duration": 3.41,
+      "text": "I be worried but all other conditions I"
+    },
+    {
+      "index": 492,
+      "start": 1924.1,
+      "end": 1925.89,
+      "duration": 1.79,
+      "text": "want output is zero whether they occur"
+    },
+    {
+      "index": 493,
+      "start": 1925.9,
+      "end": 1927.35,
+      "duration": 1.45,
+      "text": "or not"
+    },
+    {
+      "index": 494,
+      "start": 1927.36,
+      "end": 1929.94,
+      "duration": 2.58,
+      "text": "that is one way of looking at it is that"
+    },
+    {
+      "index": 495,
+      "start": 1929.95,
+      "end": 1934.08,
+      "duration": 4.13,
+      "text": "not there's a fair enough there are"
+    },
+    {
+      "index": 496,
+      "start": 1934.09,
+      "end": 1936.15,
+      "duration": 2.06,
+      "text": "eight combinations I've told you three"
+    },
+    {
+      "index": 497,
+      "start": 1936.16,
+      "end": 1937.5,
+      "duration": 1.34,
+      "text": "combinations for each the output has to"
+    },
+    {
+      "index": 498,
+      "start": 1937.51,
+      "end": 1937.86,
+      "duration": 0.35,
+      "text": "be 1"
+    },
+    {
+      "index": 499,
+      "start": 1937.87,
+      "end": 1940.17,
+      "duration": 2.3,
+      "text": "I'm worried about then I'm concerned"
+    },
+    {
+      "index": 500,
+      "start": 1940.18,
+      "end": 1943.68,
+      "duration": 3.5,
+      "text": "about this three other combinations I"
+    },
+    {
+      "index": 501,
+      "start": 1943.69,
+      "end": 1944.94,
+      "duration": 1.25,
+      "text": "says you know another - I don't know"
+    },
+    {
+      "index": 502,
+      "start": 1944.95,
+      "end": 1946.5,
+      "duration": 1.55,
+      "text": "anything here I can always combine all"
+    },
+    {
+      "index": 503,
+      "start": 1946.51,
+      "end": 1949.32,
+      "duration": 2.81,
+      "text": "these 3 plus 2 5 and say for all other"
+    },
+    {
+      "index": 504,
+      "start": 1949.33,
+      "end": 1950.7,
+      "duration": 1.37,
+      "text": "five combinations I can have that when I"
+    },
+    {
+      "index": 505,
+      "start": 1950.71,
+      "end": 1952.74,
+      "duration": 2.03,
+      "text": "don't care about the output what does it"
+    },
+    {
+      "index": 506,
+      "start": 1952.75,
+      "end": 1956.93,
+      "duration": 4.18,
+      "text": "matter to you if the output is zero yeah"
+    },
+    {
+      "index": 507,
+      "start": 1956.94,
+      "end": 1959.34,
+      "duration": 2.4,
+      "text": "so I can say for all other combinations"
+    },
+    {
+      "index": 508,
+      "start": 1959.35,
+      "end": 1960.63,
+      "duration": 1.28,
+      "text": "other than these three for which I want"
+    },
+    {
+      "index": 509,
+      "start": 1960.64,
+      "end": 1963.3,
+      "duration": 2.66,
+      "text": "one output is zero I can do that"
+    },
+    {
+      "index": 510,
+      "start": 1963.31,
+      "end": 1966.03,
+      "duration": 2.72,
+      "text": "that means I'll have more zeroes less"
+    },
+    {
+      "index": 511,
+      "start": 1966.04,
+      "end": 1967.95,
+      "duration": 1.91,
+      "text": "once or I can say since I don't care"
+    },
+    {
+      "index": 512,
+      "start": 1967.96,
+      "end": 1970.68,
+      "duration": 2.72,
+      "text": "about output those three combinations"
+    },
+    {
+      "index": 513,
+      "start": 1970.69,
+      "end": 1972.0,
+      "duration": 1.31,
+      "text": "for which I want output everyone and"
+    },
+    {
+      "index": 514,
+      "start": 1972.01,
+      "end": 1973.83,
+      "duration": 1.82,
+      "text": "those two comedies I don't care whatever"
+    },
+    {
+      "index": 515,
+      "start": 1973.84,
+      "end": 1976.17,
+      "duration": 2.33,
+      "text": "produce all the five combinations are"
+    },
+    {
+      "index": 516,
+      "start": 1976.18,
+      "end": 1978.6,
+      "duration": 2.42,
+      "text": "always pretty is output of one I'll make"
+    },
+    {
+      "index": 517,
+      "start": 1978.61,
+      "end": 1979.8,
+      "duration": 1.19,
+      "text": "sure the three combinations for which"
+    },
+    {
+      "index": 518,
+      "start": 1979.81,
+      "end": 1982.35,
+      "duration": 2.54,
+      "text": "output should not be zero should not be"
+    },
+    {
+      "index": 519,
+      "start": 1982.36,
+      "end": 1982.83,
+      "duration": 0.47,
+      "text": "one"
+    },
+    {
+      "index": 520,
+      "start": 1982.84,
+      "end": 1984.78,
+      "duration": 1.94,
+      "text": "I'll make sure for those combinations"
+    },
+    {
+      "index": 521,
+      "start": 1984.79,
+      "end": 1986.67,
+      "duration": 1.88,
+      "text": "output it'll always be zero that's also"
+    },
+    {
+      "index": 522,
+      "start": 1986.68,
+      "end": 1987.36,
+      "duration": 0.68,
+      "text": "possible"
+    },
+    {
+      "index": 523,
+      "start": 1987.37,
+      "end": 1989.34,
+      "duration": 1.97,
+      "text": "it's a reasonable argument either both"
+    },
+    {
+      "index": 524,
+      "start": 1989.35,
+      "end": 1992.52,
+      "duration": 3.17,
+      "text": "are reasonable arguments but if you so"
+    },
+    {
+      "index": 525,
+      "start": 1992.53,
+      "end": 1996.6,
+      "duration": 4.07,
+      "text": "doing I fix this don't care conditions"
+    },
+    {
+      "index": 526,
+      "start": 1996.61,
+      "end": 1998.34,
+      "duration": 1.73,
+      "text": "the states for which you really do not"
+    },
+    {
+      "index": 527,
+      "start": 1998.35,
+      "end": 2000.92,
+      "duration": 2.57,
+      "text": "worry about outputs the conditions for"
+    },
+    {
+      "index": 528,
+      "start": 2000.93,
+      "end": 2002.45,
+      "duration": 1.52,
+      "text": "which the you do not worry of the"
+    },
+    {
+      "index": 529,
+      "start": 2002.46,
+      "end": 2004.91,
+      "duration": 2.45,
+      "text": "outputs you have you are fixing it as a"
+    },
+    {
+      "index": 530,
+      "start": 2004.92,
+      "end": 2008.24,
+      "duration": 3.32,
+      "text": "1 or a 0 when you put a 1 and a map you"
+    },
+    {
+      "index": 531,
+      "start": 2008.25,
+      "end": 2009.86,
+      "duration": 1.61,
+      "text": "would like to you have to make it you"
+    },
+    {
+      "index": 532,
+      "start": 2009.87,
+      "end": 2012.05,
+      "duration": 2.18,
+      "text": "have to cover it"
+    },
+    {
+      "index": 533,
+      "start": 2012.06,
+      "end": 2014.89,
+      "duration": 2.83,
+      "text": "you have to enclose it right there Tom"
+    },
+    {
+      "index": 534,
+      "start": 2014.9,
+      "end": 2018.65,
+      "duration": 3.75,
+      "text": "and I really put a 0 my number of ones"
+    },
+    {
+      "index": 535,
+      "start": 2018.66,
+      "end": 2021.14,
+      "duration": 2.48,
+      "text": "in the map gets reduced when the number"
+    },
+    {
+      "index": 536,
+      "start": 2021.15,
+      "end": 2022.49,
+      "duration": 1.34,
+      "text": "of ones in the map gets reduced my"
+    },
+    {
+      "index": 537,
+      "start": 2022.5,
+      "end": 2025.58,
+      "duration": 3.08,
+      "text": "expression becomes more difficult my"
+    },
+    {
+      "index": 538,
+      "start": 2025.59,
+      "end": 2027.05,
+      "duration": 1.46,
+      "text": "expression becomes more complex"
+    },
+    {
+      "index": 539,
+      "start": 2027.06,
+      "end": 2032.51,
+      "duration": 5.45,
+      "text": "fewer ones is longer terms is it an in"
+    },
+    {
+      "index": 540,
+      "start": 2032.52,
+      "end": 2035.21,
+      "duration": 2.69,
+      "text": "terms of they each term will have more"
+    },
+    {
+      "index": 541,
+      "start": 2035.22,
+      "end": 2037.67,
+      "duration": 2.45,
+      "text": "literals is the number of one six one so"
+    },
+    {
+      "index": 542,
+      "start": 2037.68,
+      "end": 2039.32,
+      "duration": 1.64,
+      "text": "I would like to use these conditions for"
+    },
+    {
+      "index": 543,
+      "start": 2039.33,
+      "end": 2041.54,
+      "duration": 2.21,
+      "text": "which I don't worry about outputs to my"
+    },
+    {
+      "index": 544,
+      "start": 2041.55,
+      "end": 2042.08,
+      "duration": 0.53,
+      "text": "advantage"
+    },
+    {
+      "index": 545,
+      "start": 2042.09,
+      "end": 2046.01,
+      "duration": 3.92,
+      "text": "whenever I like algorithm is one in"
+    },
+    {
+      "index": 546,
+      "start": 2046.02,
+      "end": 2048.5,
+      "duration": 2.48,
+      "text": "order to simplify my hardware but I"
+    },
+    {
+      "index": 547,
+      "start": 2048.51,
+      "end": 2050.39,
+      "duration": 1.88,
+      "text": "don't have to produce a one so whenever"
+    },
+    {
+      "index": 548,
+      "start": 2050.4,
+      "end": 2052.58,
+      "duration": 2.18,
+      "text": "I do not it's not convenient to me I"
+    },
+    {
+      "index": 549,
+      "start": 2052.59,
+      "end": 2058.159,
+      "duration": 5.569,
+      "text": "will ditch it and use it as a zero the"
+    },
+    {
+      "index": 550,
+      "start": 2058.169,
+      "end": 2060.05,
+      "duration": 1.881,
+      "text": "advantage of this is"
+    },
+    {
+      "index": 551,
+      "start": 2060.06,
+      "end": 2061.7,
+      "duration": 1.64,
+      "text": "I can use this don't care condition to"
+    },
+    {
+      "index": 552,
+      "start": 2061.71,
+      "end": 2065.03,
+      "duration": 3.32,
+      "text": "simplify my hardware if I can put an"
+    },
+    {
+      "index": 553,
+      "start": 2065.04,
+      "end": 2066.89,
+      "duration": 1.85,
+      "text": "extra one in my for example I had a"
+    },
+    {
+      "index": 554,
+      "start": 2066.9,
+      "end": 2070.34,
+      "duration": 3.44,
+      "text": "three ones group of three ones if you"
+    },
+    {
+      "index": 555,
+      "start": 2070.35,
+      "end": 2072.7,
+      "duration": 2.35,
+      "text": "put an extra one I will make a nice term"
+    },
+    {
+      "index": 556,
+      "start": 2072.71,
+      "end": 2075.77,
+      "duration": 3.06,
+      "text": "so there if they don't get there they"
+    },
+    {
+      "index": 557,
+      "start": 2075.78,
+      "end": 2077.21,
+      "duration": 1.43,
+      "text": "don't care in one of those cells I will"
+    },
+    {
+      "index": 558,
+      "start": 2077.22,
+      "end": 2080.81,
+      "duration": 3.59,
+      "text": "use it I say one to my advantage to"
+    },
+    {
+      "index": 559,
+      "start": 2080.82,
+      "end": 2084.41,
+      "duration": 3.59,
+      "text": "reduce my hardware may reduce my term on"
+    },
+    {
+      "index": 560,
+      "start": 2084.42,
+      "end": 2086.87,
+      "duration": 2.45,
+      "text": "the other hand if they already completed"
+    },
+    {
+      "index": 561,
+      "start": 2086.88,
+      "end": 2088.76,
+      "duration": 1.88,
+      "text": "all my ones and there are some don't"
+    },
+    {
+      "index": 562,
+      "start": 2088.77,
+      "end": 2089.3,
+      "duration": 0.53,
+      "text": "care"
+    },
+    {
+      "index": 563,
+      "start": 2089.31,
+      "end": 2091.82,
+      "duration": 2.51,
+      "text": "strewn around I will not bother to cover"
+    },
+    {
+      "index": 564,
+      "start": 2091.83,
+      "end": 2095.15,
+      "duration": 3.32,
+      "text": "them and write terms for it so use it to"
+    },
+    {
+      "index": 565,
+      "start": 2095.16,
+      "end": 2097.19,
+      "duration": 2.03,
+      "text": "our advantage advantage don't care"
+    },
+    {
+      "index": 566,
+      "start": 2097.2,
+      "end": 2111.1,
+      "duration": 13.9,
+      "text": "stairs are used to reduce the logic"
+    },
+    {
+      "index": 567,
+      "start": 2113.51,
+      "end": 2113.52,
+      "duration": 0.01,
+      "text": "plant necessary have to use every one of"
+    },
+    {
+      "index": 568,
+      "start": 2113.52,
+      "end": 2116.5,
+      "duration": 2.98,
+      "text": "them whichever don't care states are"
+    },
+    {
+      "index": 569,
+      "start": 2116.51,
+      "end": 2120.29,
+      "duration": 3.78,
+      "text": "useful to introduction for the either"
+    },
+    {
+      "index": 570,
+      "start": 2120.3,
+      "end": 2122.42,
+      "duration": 2.12,
+      "text": "the number of terms are in a given term"
+    },
+    {
+      "index": 571,
+      "start": 2122.43,
+      "end": 2123.44,
+      "duration": 1.01,
+      "text": "if you can reduce the number of"
+    },
+    {
+      "index": 572,
+      "start": 2123.45,
+      "end": 2127.06,
+      "duration": 3.61,
+      "text": "variables we call them literals I said"
+    },
+    {
+      "index": 573,
+      "start": 2127.07,
+      "end": 2132.02,
+      "duration": 4.95,
+      "text": "ABC a B bar a bar b bar this rod written"
+    },
+    {
+      "index": 574,
+      "start": 2132.03,
+      "end": 2133.84,
+      "duration": 1.81,
+      "text": "as a bar and B bar called it allows each"
+    },
+    {
+      "index": 575,
+      "start": 2133.85,
+      "end": 2135.98,
+      "duration": 2.13,
+      "text": "variable in your term is called literal"
+    },
+    {
+      "index": 576,
+      "start": 2135.99,
+      "end": 2138.53,
+      "duration": 2.54,
+      "text": "and each is a term there are two terms"
+    },
+    {
+      "index": 577,
+      "start": 2138.54,
+      "end": 2142.85,
+      "duration": 4.31,
+      "text": "with two literals each three terms with"
+    },
+    {
+      "index": 578,
+      "start": 2142.86,
+      "end": 2144.56,
+      "duration": 1.7,
+      "text": "two literals three literals three"
+    },
+    {
+      "index": 579,
+      "start": 2144.57,
+      "end": 2147.44,
+      "duration": 2.87,
+      "text": "literals so by using a don't care if we"
+    },
+    {
+      "index": 580,
+      "start": 2147.45,
+      "end": 2149.24,
+      "duration": 1.79,
+      "text": "can reduce this further either the"
+    },
+    {
+      "index": 581,
+      "start": 2149.25,
+      "end": 2152.15,
+      "duration": 2.9,
+      "text": "number of terms or a literal in many of"
+    },
+    {
+      "index": 582,
+      "start": 2152.16,
+      "end": 2154.04,
+      "duration": 1.88,
+      "text": "those terms then I will use it to my"
+    },
+    {
+      "index": 583,
+      "start": 2154.05,
+      "end": 2154.49,
+      "duration": 0.44,
+      "text": "advantage"
+    },
+    {
+      "index": 584,
+      "start": 2154.5,
+      "end": 2157.91,
+      "duration": 3.41,
+      "text": "use it as a one otherwise I will not"
+    },
+    {
+      "index": 585,
+      "start": 2157.92,
+      "end": 2159.74,
+      "duration": 1.82,
+      "text": "purposely go and introduce an extra term"
+    },
+    {
+      "index": 586,
+      "start": 2159.75,
+      "end": 2162.71,
+      "duration": 2.96,
+      "text": "to cover a note I know don't care I"
+    },
+    {
+      "index": 587,
+      "start": 2162.72,
+      "end": 2165.83,
+      "duration": 3.11,
+      "text": "don't want to introduce a new term in"
+    },
+    {
+      "index": 588,
+      "start": 2165.84,
+      "end": 2168.32,
+      "duration": 2.48,
+      "text": "order to include my don't care condition"
+    },
+    {
+      "index": 589,
+      "start": 2168.33,
+      "end": 2171.65,
+      "duration": 3.32,
+      "text": "we send out wastes so the idea is always"
+    },
+    {
+      "index": 590,
+      "start": 2171.66,
+      "end": 2173.6,
+      "duration": 1.94,
+      "text": "to reduce the hardware it is a hardware"
+    },
+    {
+      "index": 591,
+      "start": 2173.61,
+      "end": 2176.39,
+      "duration": 2.78,
+      "text": "it is a hardware this is the team as I"
+    },
+    {
+      "index": 592,
+      "start": 2176.4,
+      "end": 2178.01,
+      "duration": 1.61,
+      "text": "said in the beginning the theme of this"
+    },
+    {
+      "index": 593,
+      "start": 2178.02,
+      "end": 2180.61,
+      "duration": 2.59,
+      "text": "course reduce reduce reduce hardware"
+    },
+    {
+      "index": 594,
+      "start": 2180.62,
+      "end": 2182.93,
+      "duration": 2.31,
+      "text": "Hardware reduction which in result in"
+    },
+    {
+      "index": 595,
+      "start": 2182.94,
+      "end": 2185.3,
+      "duration": 2.36,
+      "text": "power saving cost saving size saving"
+    },
+    {
+      "index": 596,
+      "start": 2185.31,
+      "end": 2189.17,
+      "duration": 3.86,
+      "text": "space saving everything saying that is"
+    },
+    {
+      "index": 597,
+      "start": 2189.18,
+      "end": 2191.72,
+      "duration": 2.54,
+      "text": "why we want efficient hardware but"
+    },
+    {
+      "index": 598,
+      "start": 2191.73,
+      "end": 2193.819,
+      "duration": 2.089,
+      "text": "reliable hardware you can't knock it off"
+    },
+    {
+      "index": 599,
+      "start": 2193.829,
+      "end": 2196.279,
+      "duration": 2.45,
+      "text": "arbitrarily and says reduce hardware use"
+    },
+    {
+      "index": 600,
+      "start": 2196.289,
+      "end": 2197.9,
+      "duration": 1.611,
+      "text": "only 50% terms I'll have reduced"
+    },
+    {
+      "index": 601,
+      "start": 2197.91,
+      "end": 2200.299,
+      "duration": 2.389,
+      "text": "hardware but will not get 50% of mark"
+    },
+    {
+      "index": 602,
+      "start": 2200.309,
+      "end": 2203.239,
+      "duration": 2.93,
+      "text": "will get 0 Mars there is a problem this"
+    },
+    {
+      "index": 603,
+      "start": 2203.249,
+      "end": 2206.749,
+      "duration": 3.5,
+      "text": "is a digital course so you get zero"
+    },
+    {
+      "index": 604,
+      "start": 2206.759,
+      "end": 2209.749,
+      "duration": 2.99,
+      "text": "marks one mark I was right wrong so"
+    },
+    {
+      "index": 605,
+      "start": 2209.759,
+      "end": 2213.789,
+      "duration": 4.03,
+      "text": "reduction at what cost election without"
+    },
+    {
+      "index": 606,
+      "start": 2213.799,
+      "end": 2218.18,
+      "duration": 4.381,
+      "text": "losing the reliability of the circuit so"
+    },
+    {
+      "index": 607,
+      "start": 2218.19,
+      "end": 2220.009,
+      "duration": 1.819,
+      "text": "let us take an example of that class I"
+    },
+    {
+      "index": 608,
+      "start": 2220.019,
+      "end": 2221.809,
+      "duration": 1.79,
+      "text": "can use the same thing and put some"
+    },
+    {
+      "index": 609,
+      "start": 2221.819,
+      "end": 2224.12,
+      "duration": 2.301,
+      "text": "don't care I'll take for example the"
+    },
+    {
+      "index": 610,
+      "start": 2224.13,
+      "end": 2230.599,
+      "duration": 6.469,
+      "text": "same Sigma yeah what is the output r1"
+    },
+    {
+      "index": 611,
+      "start": 2230.609,
+      "end": 2232.4,
+      "duration": 1.791,
+      "text": "what are the terms for each output is 1"
+    },
+    {
+      "index": 612,
+      "start": 2232.41,
+      "end": 2238.699,
+      "duration": 6.289,
+      "text": "1 3 4 5 9 11 14 15 I don't want to"
+    },
+    {
+      "index": 613,
+      "start": 2238.709,
+      "end": 2241.43,
+      "duration": 2.721,
+      "text": "change any of these but instead of"
+    },
+    {
+      "index": 614,
+      "start": 2241.44,
+      "end": 2244.819,
+      "duration": 3.379,
+      "text": "making all other terms as zeros I will"
+    },
+    {
+      "index": 615,
+      "start": 2244.829,
+      "end": 2248.39,
+      "duration": 3.561,
+      "text": "say maybe 6 7 8 and 10 I don't care how"
+    },
+    {
+      "index": 616,
+      "start": 2248.4,
+      "end": 2255.62,
+      "duration": 7.22,
+      "text": "do I write it differ don't care some"
+    },
+    {
+      "index": 617,
+      "start": 2255.63,
+      "end": 2259.339,
+      "duration": 3.709,
+      "text": "people use X some books use X there some"
+    },
+    {
+      "index": 618,
+      "start": 2259.349,
+      "end": 2261.969,
+      "duration": 2.62,
+      "text": "books use this D which is replaced in"
+    },
+    {
+      "index": 619,
+      "start": 2261.979,
+      "end": 2268.359,
+      "duration": 6.38,
+      "text": "some books by X some books very fun see"
+    },
+    {
+      "index": 620,
+      "start": 2268.369,
+      "end": 2272.719,
+      "duration": 4.35,
+      "text": "some books by capital D it's all the"
+    },
+    {
+      "index": 621,
+      "start": 2272.729,
+      "end": 2279.759,
+      "duration": 7.03,
+      "text": "same don't care don't care Tom's are"
+    },
+    {
+      "index": 622,
+      "start": 2279.769,
+      "end": 2283.219,
+      "duration": 3.45,
+      "text": "orbitally put that why not I put this"
+    },
+    {
+      "index": 623,
+      "start": 2283.229,
+      "end": 2287.359,
+      "duration": 4.13,
+      "text": "tone this four to six hour late just to"
+    },
+    {
+      "index": 624,
+      "start": 2287.369,
+      "end": 2290.359,
+      "duration": 2.99,
+      "text": "show the effect I don't have an idea"
+    },
+    {
+      "index": 625,
+      "start": 2290.369,
+      "end": 2292.459,
+      "duration": 2.09,
+      "text": "what it's going to look like just"
+    },
+    {
+      "index": 626,
+      "start": 2292.469,
+      "end": 2294.769,
+      "duration": 2.3,
+      "text": "arbitrarily assuming from the list of"
+    },
+    {
+      "index": 627,
+      "start": 2294.779,
+      "end": 2298.549,
+      "duration": 3.77,
+      "text": "zeros I'm assuming these four terms need"
+    },
+    {
+      "index": 628,
+      "start": 2298.559,
+      "end": 2301.009,
+      "duration": 2.45,
+      "text": "not be real easy rows they need not be"
+    },
+    {
+      "index": 629,
+      "start": 2301.019,
+      "end": 2303.069,
+      "duration": 2.05,
+      "text": "once they need not be 0 so the output"
+    },
+    {
+      "index": 630,
+      "start": 2303.079,
+      "end": 2306.65,
+      "duration": 3.571,
+      "text": "they can be don't cares they can you"
+    },
+    {
+      "index": 631,
+      "start": 2306.66,
+      "end": 2307.969,
+      "duration": 1.309,
+      "text": "don't have you don't worry about that"
+    },
+    {
+      "index": 632,
+      "start": 2307.979,
+      "end": 2310.64,
+      "duration": 2.661,
+      "text": "they or put is a 1 or a 0 for these four"
+    },
+    {
+      "index": 633,
+      "start": 2310.65,
+      "end": 2314.449,
+      "duration": 3.799,
+      "text": "conditions of input combinations so my"
+    },
+    {
+      "index": 634,
+      "start": 2314.459,
+      "end": 2322.11,
+      "duration": 7.651,
+      "text": "map gets modified we don't care"
+    },
+    {
+      "index": 635,
+      "start": 2332.25,
+      "end": 2332.26,
+      "duration": 0.01,
+      "text": "is there a modified map modified came up"
+    },
+    {
+      "index": 636,
+      "start": 2332.26,
+      "end": 2360.26,
+      "duration": 28.0,
+      "text": "with don't care stairs"
+    },
+    {
+      "index": 637,
+      "start": 2361.819,
+      "end": 2361.829,
+      "duration": 0.01,
+      "text": "what are the terms always there's one"
+    },
+    {
+      "index": 638,
+      "start": 2361.829,
+      "end": 2366.64,
+      "duration": 4.811,
+      "text": "start with these are once these are once"
+    },
+    {
+      "index": 639,
+      "start": 2366.65,
+      "end": 2371.74,
+      "duration": 5.09,
+      "text": "these for once these are ones that right"
+    },
+    {
+      "index": 640,
+      "start": 2371.75,
+      "end": 2376.0,
+      "duration": 4.25,
+      "text": "now I'm going to add two six seven eight"
+    },
+    {
+      "index": 641,
+      "start": 2376.01,
+      "end": 2378.5,
+      "duration": 2.49,
+      "text": "when you do to Caesar I don't mark a one"
+    },
+    {
+      "index": 642,
+      "start": 2378.51,
+      "end": 2380.329,
+      "duration": 1.819,
+      "text": "there remember if I mark a one there"
+    },
+    {
+      "index": 643,
+      "start": 2380.339,
+      "end": 2383.359,
+      "duration": 3.02,
+      "text": "when I try to simplify this Map Reduce"
+    },
+    {
+      "index": 644,
+      "start": 2383.369,
+      "end": 2385.67,
+      "duration": 2.301,
+      "text": "this map I will have to I will make an"
+    },
+    {
+      "index": 645,
+      "start": 2385.68,
+      "end": 2387.2,
+      "duration": 1.52,
+      "text": "effort to include every possible one"
+    },
+    {
+      "index": 646,
+      "start": 2387.21,
+      "end": 2389.87,
+      "duration": 2.66,
+      "text": "that will be unnecessary waste of effort"
+    },
+    {
+      "index": 647,
+      "start": 2389.88,
+      "end": 2391.37,
+      "duration": 1.49,
+      "text": "so what I will do is I will not use"
+    },
+    {
+      "index": 648,
+      "start": 2391.38,
+      "end": 2393.829,
+      "duration": 2.449,
+      "text": "another symbol if you put a zero again I"
+    },
+    {
+      "index": 649,
+      "start": 2393.839,
+      "end": 2395.359,
+      "duration": 1.52,
+      "text": "will ignore them if you put a zero I"
+    },
+    {
+      "index": 650,
+      "start": 2395.369,
+      "end": 2396.62,
+      "duration": 1.251,
+      "text": "will ignore it if you put a 1 I will"
+    },
+    {
+      "index": 651,
+      "start": 2396.63,
+      "end": 2399.71,
+      "duration": 3.08,
+      "text": "necessarily have to include it so what I"
+    },
+    {
+      "index": 652,
+      "start": 2399.72,
+      "end": 2401.21,
+      "duration": 1.49,
+      "text": "will do is use another symbol I can use"
+    },
+    {
+      "index": 653,
+      "start": 2401.22,
+      "end": 2405.799,
+      "duration": 4.579,
+      "text": "a D or X or fee whatever this list so"
+    },
+    {
+      "index": 654,
+      "start": 2405.809,
+      "end": 2415.549,
+      "duration": 9.74,
+      "text": "let me use a D 2 this is 2 then 1 6 4 5"
+    },
+    {
+      "index": 655,
+      "start": 2415.559,
+      "end": 2424.1,
+      "duration": 8.541,
+      "text": "6 6"
+    },
+    {
+      "index": 656,
+      "start": 2432.24,
+      "end": 2432.25,
+      "duration": 0.01,
+      "text": "7:8 this for dese I have included to"
+    },
+    {
+      "index": 657,
+      "start": 2432.25,
+      "end": 2433.74,
+      "duration": 1.49,
+      "text": "indicate the don't care conditions of"
+    },
+    {
+      "index": 658,
+      "start": 2433.75,
+      "end": 2436.65,
+      "duration": 2.9,
+      "text": "those four combinations of input these"
+    },
+    {
+      "index": 659,
+      "start": 2436.66,
+      "end": 2438.03,
+      "duration": 1.37,
+      "text": "four combination inputs when they occur"
+    },
+    {
+      "index": 660,
+      "start": 2438.04,
+      "end": 2440.28,
+      "duration": 2.24,
+      "text": "the output need not be one they need not"
+    },
+    {
+      "index": 661,
+      "start": 2440.29,
+      "end": 2441.87,
+      "duration": 1.58,
+      "text": "be zero there can be anything it can be"
+    },
+    {
+      "index": 662,
+      "start": 2441.88,
+      "end": 2444.45,
+      "duration": 2.57,
+      "text": "either one or zero because that does not"
+    },
+    {
+      "index": 663,
+      "start": 2444.46,
+      "end": 2446.1,
+      "duration": 1.64,
+      "text": "affect my circuit performance in any way"
+    },
+    {
+      "index": 664,
+      "start": 2446.11,
+      "end": 2448.11,
+      "duration": 2.0,
+      "text": "because I may not have those"
+    },
+    {
+      "index": 665,
+      "start": 2448.12,
+      "end": 2449.88,
+      "duration": 1.76,
+      "text": "combinations input at all to start with"
+    },
+    {
+      "index": 666,
+      "start": 2449.89,
+      "end": 2452.43,
+      "duration": 2.54,
+      "text": "or even if it does occur doesn't matter"
+    },
+    {
+      "index": 667,
+      "start": 2452.44,
+      "end": 2455.85,
+      "duration": 3.41,
+      "text": "to me what happens okay that is the case"
+    },
+    {
+      "index": 668,
+      "start": 2455.86,
+      "end": 2457.5,
+      "duration": 1.64,
+      "text": "then how do I simplify now I will have"
+    },
+    {
+      "index": 669,
+      "start": 2457.51,
+      "end": 2463.38,
+      "duration": 5.87,
+      "text": "more options I would probably do this as"
+    },
+    {
+      "index": 670,
+      "start": 2463.39,
+      "end": 2472.82,
+      "duration": 9.43,
+      "text": "one"
+    },
+    {
+      "index": 671,
+      "start": 2477.17,
+      "end": 2477.18,
+      "duration": 0.01,
+      "text": "you're right or need not you not even"
+    },
+    {
+      "index": 672,
+      "start": 2477.18,
+      "end": 2482.29,
+      "duration": 5.11,
+      "text": "have it oh okay I can I can have these"
+    },
+    {
+      "index": 673,
+      "start": 2482.3,
+      "end": 2491.54,
+      "duration": 9.24,
+      "text": "these forth and these forth so this is"
+    },
+    {
+      "index": 674,
+      "start": 2491.55,
+      "end": 2501.28,
+      "duration": 9.73,
+      "text": "my one this is my - this is my three"
+    },
+    {
+      "index": 675,
+      "start": 2501.29,
+      "end": 2506.09,
+      "duration": 4.8,
+      "text": "prime implicant one essential epi one"
+    },
+    {
+      "index": 676,
+      "start": 2506.1,
+      "end": 2509.41,
+      "duration": 3.31,
+      "text": "two and three essential prime implicants"
+    },
+    {
+      "index": 677,
+      "start": 2509.42,
+      "end": 2513.28,
+      "duration": 3.86,
+      "text": "now remember I look at this and see that"
+    },
+    {
+      "index": 678,
+      "start": 2513.29,
+      "end": 2516.92,
+      "duration": 3.63,
+      "text": "this D has not been included this D has"
+    },
+    {
+      "index": 679,
+      "start": 2516.93,
+      "end": 2519.71,
+      "duration": 2.78,
+      "text": "not been so it's not mandatory it is not"
+    },
+    {
+      "index": 680,
+      "start": 2519.72,
+      "end": 2522.05,
+      "duration": 2.33,
+      "text": "necessary to include all these at the"
+    },
+    {
+      "index": 681,
+      "start": 2522.06,
+      "end": 2524.12,
+      "duration": 2.06,
+      "text": "same time I use D to my advantage"
+    },
+    {
+      "index": 682,
+      "start": 2524.13,
+      "end": 2525.98,
+      "duration": 1.85,
+      "text": "I've used these two DS because there are"
+    },
+    {
+      "index": 683,
+      "start": 2525.99,
+      "end": 2528.64,
+      "duration": 2.65,
+      "text": "advantages I am able to make a simpler"
+    },
+    {
+      "index": 684,
+      "start": 2528.65,
+      "end": 2531.02,
+      "duration": 2.37,
+      "text": "grouping of these two DS if I don't have"
+    },
+    {
+      "index": 685,
+      "start": 2531.03,
+      "end": 2533.36,
+      "duration": 2.33,
+      "text": "these two DS I have to use this as one"
+    },
+    {
+      "index": 686,
+      "start": 2533.37,
+      "end": 2536.21,
+      "duration": 2.84,
+      "text": "prime implicant which will have three"
+    },
+    {
+      "index": 687,
+      "start": 2536.22,
+      "end": 2539.96,
+      "duration": 3.74,
+      "text": "literals now I have only I have prime"
+    },
+    {
+      "index": 688,
+      "start": 2539.97,
+      "end": 2541.4,
+      "duration": 1.43,
+      "text": "implicants have only two literals that"
+    },
+    {
+      "index": 689,
+      "start": 2541.41,
+      "end": 2543.41,
+      "duration": 2.0,
+      "text": "means I'm knocking up one of the inputs"
+    },
+    {
+      "index": 690,
+      "start": 2543.42,
+      "end": 2546.23,
+      "duration": 2.81,
+      "text": "of my gate and gate that's an advantage"
+    },
+    {
+      "index": 691,
+      "start": 2546.24,
+      "end": 2549.56,
+      "duration": 3.32,
+      "text": "Hardware saving so this is the concept"
+    },
+    {
+      "index": 692,
+      "start": 2549.57,
+      "end": 2552.08,
+      "duration": 2.51,
+      "text": "of drone case on how to use dual case so"
+    },
+    {
+      "index": 693,
+      "start": 2552.09,
+      "end": 2555.89,
+      "duration": 3.8,
+      "text": "now let us read the expression once they"
+    },
+    {
+      "index": 694,
+      "start": 2555.9,
+      "end": 2557.33,
+      "duration": 1.43,
+      "text": "don't cancel combine them don't worry"
+    },
+    {
+      "index": 695,
+      "start": 2557.34,
+      "end": 2560.21,
+      "duration": 2.87,
+      "text": "you don't have to keep them separate"
+    },
+    {
+      "index": 696,
+      "start": 2560.22,
+      "end": 2561.56,
+      "duration": 1.34,
+      "text": "anymore you can just write the"
+    },
+    {
+      "index": 697,
+      "start": 2561.57,
+      "end": 2563.27,
+      "duration": 1.7,
+      "text": "expression as if we would write a normal"
+    },
+    {
+      "index": 698,
+      "start": 2563.28,
+      "end": 2566.39,
+      "duration": 3.11,
+      "text": "expression very same way as we write a"
+    },
+    {
+      "index": 699,
+      "start": 2566.4,
+      "end": 2570.25,
+      "duration": 3.85,
+      "text": "normal expression so one would be what a"
+    },
+    {
+      "index": 700,
+      "start": 2570.26,
+      "end": 2579.86,
+      "duration": 9.6,
+      "text": "by be good to me two would be be C good"
+    },
+    {
+      "index": 701,
+      "start": 2579.87,
+      "end": 2589.1,
+      "duration": 9.23,
+      "text": "and three would be D bar or this is B"
+    },
+    {
+      "index": 702,
+      "start": 2589.11,
+      "end": 2593.839,
+      "duration": 4.729,
+      "text": "bar and D very nice"
+    },
+    {
+      "index": 703,
+      "start": 2597.45,
+      "end": 2597.46,
+      "duration": 0.01,
+      "text": "now this is what we got now including"
+    },
+    {
+      "index": 704,
+      "start": 2597.46,
+      "end": 2600.63,
+      "duration": 3.17,
+      "text": "don't care or the for donkus IV really"
+    },
+    {
+      "index": 705,
+      "start": 2600.64,
+      "end": 2602.91,
+      "duration": 2.27,
+      "text": "is only to to do not use because these"
+    },
+    {
+      "index": 706,
+      "start": 2602.92,
+      "end": 2606.0,
+      "duration": 3.08,
+      "text": "two are the two advantage exploit them"
+    },
+    {
+      "index": 707,
+      "start": 2606.01,
+      "end": 2609.03,
+      "duration": 3.02,
+      "text": "to reduce hardware but at the same time"
+    },
+    {
+      "index": 708,
+      "start": 2609.04,
+      "end": 2610.77,
+      "duration": 1.73,
+      "text": "don't feel obliged to include every"
+    },
+    {
+      "index": 709,
+      "start": 2610.78,
+      "end": 2612.69,
+      "duration": 1.91,
+      "text": "don't care it's going to be a burden to"
+    },
+    {
+      "index": 710,
+      "start": 2612.7,
+      "end": 2613.95,
+      "duration": 1.25,
+      "text": "include evil don't care because it's"
+    },
+    {
+      "index": 711,
+      "start": 2613.96,
+      "end": 2615.03,
+      "duration": 1.07,
+      "text": "going to unnecessarily give you more"
+    },
+    {
+      "index": 712,
+      "start": 2615.04,
+      "end": 2616.92,
+      "duration": 1.88,
+      "text": "terms which are not if they want to"
+    },
+    {
+      "index": 713,
+      "start": 2616.93,
+      "end": 2618.69,
+      "duration": 1.76,
+      "text": "combine this doodie I have to put one"
+    },
+    {
+      "index": 714,
+      "start": 2618.7,
+      "end": 2620.04,
+      "duration": 1.34,
+      "text": "more term here which is not necessary"
+    },
+    {
+      "index": 715,
+      "start": 2620.05,
+      "end": 2621.87,
+      "duration": 1.82,
+      "text": "this one has already covered"
+    },
+    {
+      "index": 716,
+      "start": 2621.88,
+      "end": 2624.12,
+      "duration": 2.24,
+      "text": "you put a D here I'll have an extra term"
+    },
+    {
+      "index": 717,
+      "start": 2624.13,
+      "end": 2625.5,
+      "duration": 1.37,
+      "text": "with three literals is a variable"
+    },
+    {
+      "index": 718,
+      "start": 2625.51,
+      "end": 2627.69,
+      "duration": 2.18,
+      "text": "serviced one external and gain one extra"
+    },
+    {
+      "index": 719,
+      "start": 2627.7,
+      "end": 2629.7,
+      "duration": 2.0,
+      "text": "I indicate with three inputs and an"
+    },
+    {
+      "index": 720,
+      "start": 2629.71,
+      "end": 2631.65,
+      "duration": 1.94,
+      "text": "input that input us to feed into our"
+    },
+    {
+      "index": 721,
+      "start": 2631.66,
+      "end": 2633.089,
+      "duration": 1.429,
+      "text": "gate that means all gate input also has"
+    },
+    {
+      "index": 722,
+      "start": 2633.099,
+      "end": 2637.25,
+      "duration": 4.151,
+      "text": "been kiss me one all those extra burden"
+    },
+    {
+      "index": 723,
+      "start": 2637.26,
+      "end": 2641.01,
+      "duration": 3.75,
+      "text": "it's not necessary same thing with this"
+    },
+    {
+      "index": 724,
+      "start": 2641.02,
+      "end": 2648.44,
+      "duration": 7.42,
+      "text": "D now originally we had this expression"
+    },
+    {
+      "index": 725,
+      "start": 2651.03,
+      "end": 2651.04,
+      "duration": 0.01,
+      "text": "you have now that expression B bar D is"
+    },
+    {
+      "index": 726,
+      "start": 2651.04,
+      "end": 2653.55,
+      "duration": 2.51,
+      "text": "same in both these two terms have been"
+    },
+    {
+      "index": 727,
+      "start": 2653.56,
+      "end": 2656.579,
+      "duration": 3.019,
+      "text": "introduced by each by one literal these"
+    },
+    {
+      "index": 728,
+      "start": 2656.589,
+      "end": 2661.109,
+      "duration": 4.52,
+      "text": "two and gates will now have the modified"
+    },
+    {
+      "index": 729,
+      "start": 2661.119,
+      "end": 2663.51,
+      "duration": 2.391,
+      "text": "form only two inputs here there are"
+    },
+    {
+      "index": 730,
+      "start": 2663.52,
+      "end": 2666.12,
+      "duration": 2.6,
+      "text": "three inputs so that is the advantage in"
+    },
+    {
+      "index": 731,
+      "start": 2666.13,
+      "end": 2670.32,
+      "duration": 4.19,
+      "text": "hardware so I'm having three and two and"
+    },
+    {
+      "index": 732,
+      "start": 2670.33,
+      "end": 2681.17,
+      "duration": 10.84,
+      "text": "three and gates feeding into an or gate"
+    },
+    {
+      "index": 733,
+      "start": 2683.549,
+      "end": 2683.559,
+      "duration": 0.01,
+      "text": "what I'm not writing the values here you"
+    },
+    {
+      "index": 734,
+      "start": 2683.559,
+      "end": 2684.839,
+      "duration": 1.28,
+      "text": "know that this is a bar so you have to"
+    },
+    {
+      "index": 735,
+      "start": 2684.849,
+      "end": 2689.099,
+      "duration": 4.25,
+      "text": "come through a an inverter B is B C B"
+    },
+    {
+      "index": 736,
+      "start": 2689.109,
+      "end": 2691.349,
+      "duration": 2.24,
+      "text": "right so enough to extract notice out to"
+    },
+    {
+      "index": 737,
+      "start": 2691.359,
+      "end": 2696.39,
+      "duration": 5.031,
+      "text": "be also included this is the story of"
+    },
+    {
+      "index": 738,
+      "start": 2696.4,
+      "end": 2699.599,
+      "duration": 3.199,
+      "text": "the don't cares so now we have exhausted"
+    },
+    {
+      "index": 739,
+      "start": 2699.609,
+      "end": 2704.579,
+      "duration": 4.97,
+      "text": "now all possibilities of simplification"
+    },
+    {
+      "index": 740,
+      "start": 2704.589,
+      "end": 2707.22,
+      "duration": 2.631,
+      "text": "of course showing you some of the things"
+    },
+    {
+      "index": 741,
+      "start": 2707.23,
+      "end": 2711.18,
+      "duration": 3.95,
+      "text": "we saw in an arbitrary in the random not"
+    },
+    {
+      "index": 742,
+      "start": 2711.19,
+      "end": 2712.77,
+      "duration": 1.58,
+      "text": "random an arbitrary in what I meant is"
+    },
+    {
+      "index": 743,
+      "start": 2712.78,
+      "end": 2716.28,
+      "duration": 3.5,
+      "text": "what I mean is sort of arbitrary"
+    },
+    {
+      "index": 744,
+      "start": 2716.29,
+      "end": 2718.079,
+      "duration": 1.789,
+      "text": "examples we talked we didn't take any"
+    },
+    {
+      "index": 745,
+      "start": 2718.089,
+      "end": 2720.93,
+      "duration": 2.841,
+      "text": "device or any extra but in one case I"
+    },
+    {
+      "index": 746,
+      "start": 2720.94,
+      "end": 2724.65,
+      "duration": 3.71,
+      "text": "started justified a plus B bars a plus B"
+    },
+    {
+      "index": 747,
+      "start": 2724.66,
+      "end": 2727.74,
+      "duration": 3.08,
+      "text": "by a plus BC bar I said can have a"
+    },
+    {
+      "index": 748,
+      "start": 2727.75,
+      "end": 2730.68,
+      "duration": 2.93,
+      "text": "combination but justifying after we drew"
+    },
+    {
+      "index": 749,
+      "start": 2730.69,
+      "end": 2732.66,
+      "duration": 1.97,
+      "text": "the circuit but now we are due to the"
+    },
+    {
+      "index": 750,
+      "start": 2732.67,
+      "end": 2734.039,
+      "duration": 1.369,
+      "text": "other way we have to have a system"
+    },
+    {
+      "index": 751,
+      "start": 2734.049,
+      "end": 2737.52,
+      "duration": 3.471,
+      "text": "herself like any system you want to"
+    },
+    {
+      "index": 752,
+      "start": 2737.53,
+      "end": 2740.99,
+      "duration": 3.46,
+      "text": "design what do you want from that system"
+    },
+    {
+      "index": 753,
+      "start": 2741.0,
+      "end": 2743.19,
+      "duration": 2.19,
+      "text": "for that system you write the truth"
+    },
+    {
+      "index": 754,
+      "start": 2743.2,
+      "end": 2746.67,
+      "duration": 3.47,
+      "text": "table that's the design you identify a"
+    },
+    {
+      "index": 755,
+      "start": 2746.68,
+      "end": 2748.38,
+      "duration": 1.7,
+      "text": "physical device system that they want"
+    },
+    {
+      "index": 756,
+      "start": 2748.39,
+      "end": 2750.24,
+      "duration": 1.85,
+      "text": "how many inputs are there for the system"
+    },
+    {
+      "index": 757,
+      "start": 2750.25,
+      "end": 2751.589,
+      "duration": 1.339,
+      "text": "how many outputs are there for system"
+    },
+    {
+      "index": 758,
+      "start": 2751.599,
+      "end": 2753.66,
+      "duration": 2.061,
+      "text": "what is the input output relationship"
+    },
+    {
+      "index": 759,
+      "start": 2753.67,
+      "end": 2755.97,
+      "duration": 2.3,
+      "text": "you want and for the input output"
+    },
+    {
+      "index": 760,
+      "start": 2755.98,
+      "end": 2757.589,
+      "duration": 1.609,
+      "text": "relationship we want to write the bow"
+    },
+    {
+      "index": 761,
+      "start": 2757.599,
+      "end": 2761.25,
+      "duration": 3.651,
+      "text": "truth table and from the truth table you"
+    },
+    {
+      "index": 762,
+      "start": 2761.26,
+      "end": 2762.78,
+      "duration": 1.52,
+      "text": "can either use boolean algebra to"
+    },
+    {
+      "index": 763,
+      "start": 2762.79,
+      "end": 2765.809,
+      "duration": 3.019,
+      "text": "simplify it or go to karnaugh map and"
+    },
+    {
+      "index": 764,
+      "start": 2765.819,
+      "end": 2768.809,
+      "duration": 2.99,
+      "text": "simplify it and they can do it I mean"
+    },
+    {
+      "index": 765,
+      "start": 2768.819,
+      "end": 2770.73,
+      "duration": 1.911,
+      "text": "summer products they are the product of"
+    },
+    {
+      "index": 766,
+      "start": 2770.74,
+      "end": 2771.99,
+      "duration": 1.25,
+      "text": "somewhere depending on the type of"
+    },
+    {
+      "index": 767,
+      "start": 2772.0,
+      "end": 2773.569,
+      "duration": 1.569,
+      "text": "hardware realization they won at the end"
+    },
+    {
+      "index": 768,
+      "start": 2773.579,
+      "end": 2777.049,
+      "duration": 3.47,
+      "text": "so what you do is to take examples"
+    },
+    {
+      "index": 769,
+      "start": 2777.059,
+      "end": 2785.25,
+      "duration": 8.191,
+      "text": "simple examples of logic functions are"
+    },
+    {
+      "index": 770,
+      "start": 2785.26,
+      "end": 2786.599,
+      "duration": 1.339,
+      "text": "it MIDI function this one interesting"
+    },
+    {
+      "index": 771,
+      "start": 2786.609,
+      "end": 2791.91,
+      "duration": 5.301,
+      "text": "thing is in this course we always been"
+    },
+    {
+      "index": 772,
+      "start": 2791.92,
+      "end": 2793.77,
+      "duration": 1.85,
+      "text": "talking of logic gates logic means the"
+    },
+    {
+      "index": 773,
+      "start": 2793.78,
+      "end": 2795.03,
+      "duration": 1.25,
+      "text": "decision right"
+    },
+    {
+      "index": 774,
+      "start": 2795.04,
+      "end": 2798.559,
+      "duration": 3.519,
+      "text": "true or false R and an R for example"
+    },
+    {
+      "index": 775,
+      "start": 2798.569,
+      "end": 2802.319,
+      "duration": 3.75,
+      "text": "these this function is true why is it"
+    },
+    {
+      "index": 776,
+      "start": 2802.329,
+      "end": 2803.46,
+      "duration": 1.131,
+      "text": "called logic because the function is"
+    },
+    {
+      "index": 777,
+      "start": 2803.47,
+      "end": 2806.849,
+      "duration": 3.379,
+      "text": "true if and only if if both the inputs"
+    },
+    {
+      "index": 778,
+      "start": 2806.859,
+      "end": 2810.39,
+      "duration": 3.531,
+      "text": "are true all the other cases the output"
+    },
+    {
+      "index": 779,
+      "start": 2810.4,
+      "end": 2813.24,
+      "duration": 2.84,
+      "text": "is false so we think of this a lot"
+    },
+    {
+      "index": 780,
+      "start": 2813.25,
+      "end": 2816.84,
+      "duration": 3.59,
+      "text": "Kella statement logically we can make"
+    },
+    {
+      "index": 781,
+      "start": 2816.85,
+      "end": 2818.91,
+      "duration": 2.06,
+      "text": "sense logically it's logical sense it"
+    },
+    {
+      "index": 782,
+      "start": 2818.92,
+      "end": 2821.43,
+      "duration": 2.51,
+      "text": "makes logical sense or gate is a logical"
+    },
+    {
+      "index": 783,
+      "start": 2821.44,
+      "end": 2824.94,
+      "duration": 3.5,
+      "text": "gate if at least one of the inputs is"
+    },
+    {
+      "index": 784,
+      "start": 2824.95,
+      "end": 2828.15,
+      "duration": 3.2,
+      "text": "true the output is true or an arcade"
+    },
+    {
+      "index": 785,
+      "start": 2828.16,
+      "end": 2832.5,
+      "duration": 4.34,
+      "text": "would say the other way nor is"
+    },
+    {
+      "index": 786,
+      "start": 2832.51,
+      "end": 2835.32,
+      "duration": 2.81,
+      "text": "compliment of our only with both inputs"
+    },
+    {
+      "index": 787,
+      "start": 2835.33,
+      "end": 2837.84,
+      "duration": 2.51,
+      "text": "are 0 the output is 1 all other cases"
+    },
+    {
+      "index": 788,
+      "start": 2837.85,
+      "end": 2841.31,
+      "duration": 3.46,
+      "text": "the output is but put is 0 so whatever"
+    },
+    {
+      "index": 789,
+      "start": 2841.32,
+      "end": 2845.55,
+      "duration": 4.23,
+      "text": "but then when we do where I said this"
+    },
+    {
+      "index": 790,
+      "start": 2845.56,
+      "end": 2849.24,
+      "duration": 3.68,
+      "text": "all digital systems many times it is"
+    },
+    {
+      "index": 791,
+      "start": 2849.25,
+      "end": 2850.77,
+      "duration": 1.52,
+      "text": "computational source their computational"
+    },
+    {
+      "index": 792,
+      "start": 2850.78,
+      "end": 2854.13,
+      "duration": 3.35,
+      "text": "intensive if you remember are we talking"
+    },
+    {
+      "index": 793,
+      "start": 2854.14,
+      "end": 2855.81,
+      "duration": 1.67,
+      "text": "about computers as the the basic"
+    },
+    {
+      "index": 794,
+      "start": 2855.82,
+      "end": 2856.56,
+      "duration": 0.74,
+      "text": "building blocks"
+    },
+    {
+      "index": 795,
+      "start": 2856.57,
+      "end": 2859.01,
+      "duration": 2.44,
+      "text": "anything can be thought of as a computer"
+    },
+    {
+      "index": 796,
+      "start": 2859.02,
+      "end": 2863.55,
+      "duration": 4.53,
+      "text": "so the basic thing in a computer is an"
+    },
+    {
+      "index": 797,
+      "start": 2863.56,
+      "end": 2866.79,
+      "duration": 3.23,
+      "text": "electronic circuit logic also comes"
+    },
+    {
+      "index": 798,
+      "start": 2866.8,
+      "end": 2868.83,
+      "duration": 2.03,
+      "text": "occasionally but mostly arithmetic"
+    },
+    {
+      "index": 799,
+      "start": 2868.84,
+      "end": 2875.94,
+      "duration": 7.1,
+      "text": "add subtract multiply divide you will"
+    },
+    {
+      "index": 800,
+      "start": 2875.95,
+      "end": 2877.56,
+      "duration": 1.61,
+      "text": "see that later on in this course in the"
+    },
+    {
+      "index": 801,
+      "start": 2877.57,
+      "end": 2879.39,
+      "duration": 1.82,
+      "text": "next few lectures subsequent lectures we"
+    },
+    {
+      "index": 802,
+      "start": 2879.4,
+      "end": 2881.85,
+      "duration": 2.45,
+      "text": "can also build arithmetic using logic"
+    },
+    {
+      "index": 803,
+      "start": 2881.86,
+      "end": 2883.62,
+      "duration": 1.76,
+      "text": "actually logic gates they're called"
+    },
+    {
+      "index": 804,
+      "start": 2883.63,
+      "end": 2886.32,
+      "duration": 2.69,
+      "text": "logic gates but we'll use our credit"
+    },
+    {
+      "index": 805,
+      "start": 2886.33,
+      "end": 2889.11,
+      "duration": 2.78,
+      "text": "circuits like an circuit or circuit now"
+    },
+    {
+      "index": 806,
+      "start": 2889.12,
+      "end": 2891.84,
+      "duration": 2.72,
+      "text": "I answer I mean sorry add circuit"
+    },
+    {
+      "index": 807,
+      "start": 2891.85,
+      "end": 2893.3,
+      "duration": 1.45,
+      "text": "subtract circuit and things like that"
+    },
+    {
+      "index": 808,
+      "start": 2893.31,
+      "end": 2897.66,
+      "duration": 4.35,
+      "text": "using this logic block so logically why"
+    },
+    {
+      "index": 809,
+      "start": 2897.67,
+      "end": 2899.61,
+      "duration": 1.94,
+      "text": "is logic same as arithmetic because of"
+    },
+    {
+      "index": 810,
+      "start": 2899.62,
+      "end": 2903.99,
+      "duration": 4.37,
+      "text": "there are only two things no really we"
+    },
+    {
+      "index": 811,
+      "start": 2904.0,
+      "end": 2906.09,
+      "duration": 2.09,
+      "text": "are talking about binary here binary"
+    },
+    {
+      "index": 812,
+      "start": 2906.1,
+      "end": 2908.37,
+      "duration": 2.27,
+      "text": "variables variables can only have two"
+    },
+    {
+      "index": 813,
+      "start": 2908.38,
+      "end": 2912.06,
+      "duration": 3.68,
+      "text": "values 0 and 1 so it doesn't matter is"
+    },
+    {
+      "index": 814,
+      "start": 2912.07,
+      "end": 2913.91,
+      "duration": 1.84,
+      "text": "arithmetic and logic because and I have"
+    },
+    {
+      "index": 815,
+      "start": 2913.92,
+      "end": 2917.46,
+      "duration": 3.54,
+      "text": "there are two inputs I want to add these"
+    },
+    {
+      "index": 816,
+      "start": 2917.47,
+      "end": 2919.56,
+      "duration": 2.09,
+      "text": "two inputs I want to only one output is"
+    },
+    {
+      "index": 817,
+      "start": 2919.57,
+      "end": 2921.6,
+      "duration": 2.03,
+      "text": "possible and it will have two inputs and"
+    },
+    {
+      "index": 818,
+      "start": 2921.61,
+      "end": 2923.58,
+      "duration": 1.97,
+      "text": "one output let us say what I add two"
+    },
+    {
+      "index": 819,
+      "start": 2923.59,
+      "end": 2927.21,
+      "duration": 3.62,
+      "text": "numbers binary numbers to binary numbers"
+    },
+    {
+      "index": 820,
+      "start": 2927.22,
+      "end": 2930.21,
+      "duration": 2.99,
+      "text": "I want to add I have two inputs and one"
+    },
+    {
+      "index": 821,
+      "start": 2930.22,
+      "end": 2932.34,
+      "duration": 2.12,
+      "text": "output and each of these two inputs can"
+    },
+    {
+      "index": 822,
+      "start": 2932.35,
+      "end": 2934.05,
+      "duration": 1.7,
+      "text": "only have two values and output it can"
+    },
+    {
+      "index": 823,
+      "start": 2934.06,
+      "end": 2937.11,
+      "duration": 3.05,
+      "text": "also have only two values so if both the"
+    },
+    {
+      "index": 824,
+      "start": 2937.12,
+      "end": 2939.75,
+      "duration": 2.63,
+      "text": "if one of these inputs is both the"
+    },
+    {
+      "index": 825,
+      "start": 2939.76,
+      "end": 2941.07,
+      "duration": 1.31,
+      "text": "inputs of 0 the output is 0 you know"
+    },
+    {
+      "index": 826,
+      "start": 2941.08,
+      "end": 2944.88,
+      "duration": 3.8,
+      "text": "that sum of 2 zeros is 0 if one of the"
+    },
+    {
+      "index": 827,
+      "start": 2944.89,
+      "end": 2946.47,
+      "duration": 1.58,
+      "text": "inputs is 1 the output has to be 1"
+    },
+    {
+      "index": 828,
+      "start": 2946.48,
+      "end": 2947.099,
+      "duration": 0.619,
+      "text": "because"
+    },
+    {
+      "index": 829,
+      "start": 2947.109,
+      "end": 2948.239,
+      "duration": 1.13,
+      "text": "one is the one in the other is a zero"
+    },
+    {
+      "index": 830,
+      "start": 2948.249,
+      "end": 2950.43,
+      "duration": 2.181,
+      "text": "the output is the one submissive one so"
+    },
+    {
+      "index": 831,
+      "start": 2950.44,
+      "end": 2953.489,
+      "duration": 3.049,
+      "text": "sum is 0 if both inputs are zero sum is"
+    },
+    {
+      "index": 832,
+      "start": 2953.499,
+      "end": 2955.41,
+      "duration": 1.911,
+      "text": "1 if one of the inputs is 1 what will"
+    },
+    {
+      "index": 833,
+      "start": 2955.42,
+      "end": 2958.89,
+      "duration": 3.47,
+      "text": "happen in sum is 1 both inputs 1 1 is"
+    },
+    {
+      "index": 834,
+      "start": 2958.9,
+      "end": 2962.819,
+      "duration": 3.919,
+      "text": "input both the inputs are 1 the sum of 2"
+    },
+    {
+      "index": 835,
+      "start": 2962.829,
+      "end": 2966.45,
+      "duration": 3.621,
+      "text": "ones is 2 and I can't represent 2 I can"
+    },
+    {
+      "index": 836,
+      "start": 2966.46,
+      "end": 2968.609,
+      "duration": 2.149,
+      "text": "only represent 0 or 1 the output has to"
+    },
+    {
+      "index": 837,
+      "start": 2968.619,
+      "end": 2973.14,
+      "duration": 4.521,
+      "text": "be 1 0 and I should also remember to"
+    },
+    {
+      "index": 838,
+      "start": 2973.15,
+      "end": 2975.509,
+      "duration": 2.359,
+      "text": "include this another output call to"
+    },
+    {
+      "index": 839,
+      "start": 2975.519,
+      "end": 2977.819,
+      "duration": 2.3,
+      "text": "carry output which will know that when"
+    },
+    {
+      "index": 840,
+      "start": 2977.829,
+      "end": 2979.38,
+      "duration": 1.551,
+      "text": "both the inputs are 1 the output will be"
+    },
+    {
+      "index": 841,
+      "start": 2979.39,
+      "end": 2982.47,
+      "duration": 3.08,
+      "text": "0 even though the output is 0 sum is 0"
+    },
+    {
+      "index": 842,
+      "start": 2982.48,
+      "end": 2985.259,
+      "duration": 2.779,
+      "text": "it results in a carry so I will not know"
+    },
+    {
+      "index": 843,
+      "start": 2985.269,
+      "end": 2987.809,
+      "duration": 2.54,
+      "text": "how to handle the carry but that is the"
+    },
+    {
+      "index": 844,
+      "start": 2987.819,
+      "end": 2989.069,
+      "duration": 1.25,
+      "text": "arithmetic part what I am trying to say"
+    },
+    {
+      "index": 845,
+      "start": 2989.079,
+      "end": 2991.68,
+      "duration": 2.601,
+      "text": "is is the logic function basically I"
+    },
+    {
+      "index": 846,
+      "start": 2991.69,
+      "end": 2993.059,
+      "duration": 1.369,
+      "text": "like to look at the two values of the"
+    },
+    {
+      "index": 847,
+      "start": 2993.069,
+      "end": 2996.96,
+      "duration": 3.891,
+      "text": "input and determine output time if the"
+    },
+    {
+      "index": 848,
+      "start": 2996.97,
+      "end": 2999.69,
+      "duration": 2.72,
+      "text": "two versus input gives me the output so"
+    },
+    {
+      "index": 849,
+      "start": 2999.7,
+      "end": 3001.069,
+      "duration": 1.369,
+      "text": "my logic gates can be used for"
+    },
+    {
+      "index": 850,
+      "start": 3001.079,
+      "end": 3003.92,
+      "duration": 2.841,
+      "text": "arithmetic operations so what we have"
+    },
+    {
+      "index": 851,
+      "start": 3003.93,
+      "end": 3006.529,
+      "duration": 2.599,
+      "text": "done is a basic introduction to logic"
+    },
+    {
+      "index": 852,
+      "start": 3006.539,
+      "end": 3009.65,
+      "duration": 3.111,
+      "text": "gates reduction to boolean algebra we"
+    },
+    {
+      "index": 853,
+      "start": 3009.66,
+      "end": 3011.299,
+      "duration": 1.639,
+      "text": "talked about min term Mac term sum of"
+    },
+    {
+      "index": 854,
+      "start": 3011.309,
+      "end": 3013.519,
+      "duration": 2.21,
+      "text": "products products or some karna have"
+    },
+    {
+      "index": 855,
+      "start": 3013.529,
+      "end": 3015.17,
+      "duration": 1.641,
+      "text": "simplification don't cancel cetera but"
+    },
+    {
+      "index": 856,
+      "start": 3015.18,
+      "end": 3016.91,
+      "duration": 1.73,
+      "text": "then all of them will lead to has to"
+    },
+    {
+      "index": 857,
+      "start": 3016.92,
+      "end": 3019.519,
+      "duration": 2.599,
+      "text": "lead to all of them will have to lead to"
+    },
+    {
+      "index": 858,
+      "start": 3019.529,
+      "end": 3021.729,
+      "duration": 2.2,
+      "text": "the realization of things which you need"
+    },
+    {
+      "index": 859,
+      "start": 3021.739,
+      "end": 3025.46,
+      "duration": 3.721,
+      "text": "so in subsequent classes we will take"
+    },
+    {
+      "index": 860,
+      "start": 3025.47,
+      "end": 3028.569,
+      "duration": 3.099,
+      "text": "design examples from combinational logic"
+    },
+    {
+      "index": 861,
+      "start": 3028.579,
+      "end": 3032.63,
+      "duration": 4.051,
+      "text": "both logically and arithmetic how we can"
+    },
+    {
+      "index": 862,
+      "start": 3032.64,
+      "end": 3035.21,
+      "duration": 2.57,
+      "text": "build and design and build that means"
+    },
+    {
+      "index": 863,
+      "start": 3035.22,
+      "end": 3037.069,
+      "duration": 1.849,
+      "text": "you have to first design and specify a"
+    },
+    {
+      "index": 864,
+      "start": 3037.079,
+      "end": 3039.41,
+      "duration": 2.331,
+      "text": "circuit specify the inputs and outputs"
+    },
+    {
+      "index": 865,
+      "start": 3039.42,
+      "end": 3041.9,
+      "duration": 2.48,
+      "text": "and what is the relationship between"
+    },
+    {
+      "index": 866,
+      "start": 3041.91,
+      "end": 3044.359,
+      "duration": 2.449,
+      "text": "input and output represent form of truth"
+    },
+    {
+      "index": 867,
+      "start": 3044.369,
+      "end": 3045.65,
+      "duration": 1.281,
+      "text": "table and use your tools that you have"
+    },
+    {
+      "index": 868,
+      "start": 3045.66,
+      "end": 3047.829,
+      "duration": 2.169,
+      "text": "learnt boolean algebra or karnaugh map"
+    },
+    {
+      "index": 869,
+      "start": 3047.839,
+      "end": 3050.21,
+      "duration": 2.371,
+      "text": "with that without don't gasp someone"
+    },
+    {
+      "index": 870,
+      "start": 3050.22,
+      "end": 3051.979,
+      "duration": 1.759,
+      "text": "from the products of all that finally"
+    },
+    {
+      "index": 871,
+      "start": 3051.989,
+      "end": 3053.18,
+      "duration": 1.191,
+      "text": "come with the simplification and that"
+    },
+    {
+      "index": 872,
+      "start": 3053.19,
+      "end": 3054.499,
+      "duration": 1.309,
+      "text": "simplification will be what will be done"
+    },
+    {
+      "index": 873,
+      "start": 3054.509,
+      "end": 3057.049,
+      "duration": 2.54,
+      "text": "in terms of true gates and that gate"
+    },
+    {
+      "index": 874,
+      "start": 3057.059,
+      "end": 3058.999,
+      "duration": 1.94,
+      "text": "circuit will work as a arithmetic"
+    },
+    {
+      "index": 875,
+      "start": 3059.009,
+      "end": 3061.009,
+      "duration": 2.0,
+      "text": "circuit so logic circuit will become an"
+    },
+    {
+      "index": 876,
+      "start": 3061.019,
+      "end": 3063.499,
+      "duration": 2.48,
+      "text": "arithmetic circuit we will see in"
+    },
+    {
+      "index": 877,
+      "start": 3063.509,
+      "end": 3065.69,
+      "duration": 2.181,
+      "text": "subsequent lectures"
+    },
+    {
+      "index": 878,
+      "start": 3065.7,
+      "end": 3164.86,
+      "duration": 99.16,
+      "text": "[Music]"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

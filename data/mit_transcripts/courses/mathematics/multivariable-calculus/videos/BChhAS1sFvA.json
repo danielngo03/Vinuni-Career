@@ -1,0 +1,4120 @@
+{
+  "video": {
+    "id": "BChhAS1sFvA",
+    "title": "Lec 33: Topological considerations; Maxwell's equations | MIT 18.02 Multivariable Calculus, Fall 07",
+    "url": "https://www.youtube.com/watch?v=BChhAS1sFvA",
+    "channel": "MIT OpenCourseWare",
+    "duration": 1719,
+    "language": "en"
+  },
+  "segment_count": 586,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.75,
+      "end": 1.76,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.76,
+      "end": 4.309,
+      "duration": 2.549,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.43,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.44,
+      "end": 8.35,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.36,
+      "end": 11.23,
+      "duration": 2.87,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.24,
+      "end": 12.789,
+      "duration": 1.549,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.799,
+      "end": 15.869,
+      "duration": 3.07,
+      "text": "hundreds of MIT courses visit MIT open"
+    },
+    {
+      "index": 7,
+      "start": 15.879,
+      "end": 20.99,
+      "duration": 5.111,
+      "text": "courseware at"
+    },
+    {
+      "index": 8,
+      "start": 23.91,
+      "end": 23.92,
+      "duration": 0.01,
+      "text": "ocw.mit.edu all right so let's try to"
+    },
+    {
+      "index": 9,
+      "start": 23.92,
+      "end": 26.79,
+      "duration": 2.87,
+      "text": "do okay so let's try to discuss a bit"
+    },
+    {
+      "index": 10,
+      "start": 26.8,
+      "end": 28.349,
+      "duration": 1.549,
+      "text": "how things relate to"
+    },
+    {
+      "index": 11,
+      "start": 28.359,
+      "end": 30.87,
+      "duration": 2.511,
+      "text": "physics okay"
+    },
+    {
+      "index": 12,
+      "start": 30.88,
+      "end": 33.27,
+      "duration": 2.39,
+      "text": "so there's two main things I want to"
+    },
+    {
+      "index": 13,
+      "start": 33.28,
+      "end": 36.83,
+      "duration": 3.55,
+      "text": "discuss one of them is what curl says"
+    },
+    {
+      "index": 14,
+      "start": 36.84,
+      "end": 39.19,
+      "duration": 2.35,
+      "text": "about force fields and in"
+    },
+    {
+      "index": 15,
+      "start": 39.2,
+      "end": 42.869,
+      "duration": 3.669,
+      "text": "particular uh nice"
+    },
+    {
+      "index": 16,
+      "start": 42.879,
+      "end": 45.229,
+      "duration": 2.35,
+      "text": "consequence of that concerning"
+    },
+    {
+      "index": 17,
+      "start": 45.239,
+      "end": 47.35,
+      "duration": 2.111,
+      "text": "gravitational"
+    },
+    {
+      "index": 18,
+      "start": 47.36,
+      "end": 53.389,
+      "duration": 6.029,
+      "text": "attraction okay"
+    },
+    {
+      "index": 19,
+      "start": 63.789,
+      "end": 63.799,
+      "duration": 0.01,
+      "text": "if we have a velocity"
+    },
+    {
+      "index": 20,
+      "start": 63.799,
+      "end": 66.07,
+      "duration": 2.271,
+      "text": "field then we've seen that the curl"
+    },
+    {
+      "index": 21,
+      "start": 66.08,
+      "end": 71.749,
+      "duration": 5.669,
+      "text": "measures the rotation effect more"
+    },
+    {
+      "index": 22,
+      "start": 74.59,
+      "end": 74.6,
+      "duration": 0.01,
+      "text": "precisely Cur"
+    },
+    {
+      "index": 23,
+      "start": 74.6,
+      "end": 77.63,
+      "duration": 3.03,
+      "text": "V"
+    },
+    {
+      "index": 24,
+      "start": 82.469,
+      "end": 82.479,
+      "duration": 0.01,
+      "text": "measures twice the angular velocity or"
+    },
+    {
+      "index": 25,
+      "start": 82.479,
+      "end": 83.87,
+      "duration": 1.391,
+      "text": "maybe I should say the angular velocity"
+    },
+    {
+      "index": 26,
+      "start": 83.88,
+      "end": 86.749,
+      "duration": 2.869,
+      "text": "Vector because it also includes the axis"
+    },
+    {
+      "index": 27,
+      "start": 86.759,
+      "end": 91.749,
+      "duration": 4.99,
+      "text": "of rotation"
+    },
+    {
+      "index": 28,
+      "start": 93.71,
+      "end": 93.72,
+      "duration": 0.01,
+      "text": "okay so I should say maybe for"
+    },
+    {
+      "index": 29,
+      "start": 93.72,
+      "end": 97.91,
+      "duration": 4.19,
+      "text": "the rotation"
+    },
+    {
+      "index": 30,
+      "start": 110.83,
+      "end": 110.84,
+      "duration": 0.01,
+      "text": "example just to remind you I mean we've"
+    },
+    {
+      "index": 31,
+      "start": 110.84,
+      "end": 114.99,
+      "duration": 4.15,
+      "text": "seen this guy a couple of times"
+    },
+    {
+      "index": 32,
+      "start": 118.389,
+      "end": 118.399,
+      "duration": 0.01,
+      "text": "but if I give you a uniform rotation"
+    },
+    {
+      "index": 33,
+      "start": 118.399,
+      "end": 123.469,
+      "duration": 5.07,
+      "text": "motion"
+    },
+    {
+      "index": 34,
+      "start": 136.15,
+      "end": 136.16,
+      "duration": 0.01,
+      "text": "so that's a vector field in which the"
+    },
+    {
+      "index": 35,
+      "start": 136.16,
+      "end": 138.35,
+      "duration": 2.19,
+      "text": "trajectories are going to be circles"
+    },
+    {
+      "index": 36,
+      "start": 138.36,
+      "end": 141.15,
+      "duration": 2.79,
+      "text": "centered in the z-axis and our Vector"
+    },
+    {
+      "index": 37,
+      "start": 141.16,
+      "end": 144.11,
+      "duration": 2.95,
+      "text": "field is just going to be tangent to"
+    },
+    {
+      "index": 38,
+      "start": 144.12,
+      "end": 145.55,
+      "duration": 1.43,
+      "text": "each of these"
+    },
+    {
+      "index": 39,
+      "start": 145.56,
+      "end": 155.75,
+      "duration": 10.19,
+      "text": "circles and if you look at it from above"
+    },
+    {
+      "index": 40,
+      "start": 159.309,
+      "end": 159.319,
+      "duration": 0.01,
+      "text": "then you'll have this rotation Vector"
+    },
+    {
+      "index": 41,
+      "start": 159.319,
+      "end": 161.07,
+      "duration": 1.751,
+      "text": "field that we've seen many"
+    },
+    {
+      "index": 42,
+      "start": 161.08,
+      "end": 164.589,
+      "duration": 3.509,
+      "text": "times so typically the velocity Vector"
+    },
+    {
+      "index": 43,
+      "start": 164.599,
+      "end": 170.11,
+      "duration": 5.511,
+      "text": "for this would be minus y i+ XJ times"
+    },
+    {
+      "index": 44,
+      "start": 170.12,
+      "end": 173.43,
+      "duration": 3.31,
+      "text": "maybe the a number which represents how"
+    },
+    {
+      "index": 45,
+      "start": 173.44,
+      "end": 175.27,
+      "duration": 1.83,
+      "text": "fast we're spinning the angular velocity"
+    },
+    {
+      "index": 46,
+      "start": 175.28,
+      "end": 177.19,
+      "duration": 1.91,
+      "text": "in radians per"
+    },
+    {
+      "index": 47,
+      "start": 177.2,
+      "end": 180.229,
+      "duration": 3.029,
+      "text": "second and then"
+    },
+    {
+      "index": 48,
+      "start": 180.239,
+      "end": 182.75,
+      "duration": 2.511,
+      "text": "no if you compute the curl of this you"
+    },
+    {
+      "index": 49,
+      "start": 182.76,
+      "end": 186.27,
+      "duration": 3.51,
+      "text": "will end up with 2 Omega *"
+    },
+    {
+      "index": 50,
+      "start": 186.28,
+      "end": 189.67,
+      "duration": 3.39,
+      "text": "K so now the other kinds of vector"
+    },
+    {
+      "index": 51,
+      "start": 189.68,
+      "end": 191.63,
+      "duration": 1.95,
+      "text": "Fields we've seen physically are force"
+    },
+    {
+      "index": 52,
+      "start": 191.64,
+      "end": 193.509,
+      "duration": 1.869,
+      "text": "fields so the question is what does the"
+    },
+    {
+      "index": 53,
+      "start": 193.519,
+      "end": 195.99,
+      "duration": 2.471,
+      "text": "curl of a force field"
+    },
+    {
+      "index": 54,
+      "start": 196.0,
+      "end": 198.83,
+      "duration": 2.83,
+      "text": "mean what can we say about that so the"
+    },
+    {
+      "index": 55,
+      "start": 198.84,
+      "end": 200.71,
+      "duration": 1.87,
+      "text": "interpretation is a little bit less"
+    },
+    {
+      "index": 56,
+      "start": 200.72,
+      "end": 204.949,
+      "duration": 4.229,
+      "text": "obvious but let's try to get some idea"
+    },
+    {
+      "index": 57,
+      "start": 204.959,
+      "end": 218.149,
+      "duration": 13.19,
+      "text": "of what it might be"
+    },
+    {
+      "index": 58,
+      "start": 221.19,
+      "end": 221.2,
+      "duration": 0.01,
+      "text": "okay so I want to remind you that if we"
+    },
+    {
+      "index": 59,
+      "start": 221.2,
+      "end": 223.55,
+      "duration": 2.35,
+      "text": "have a solid in a force field we can"
+    },
+    {
+      "index": 60,
+      "start": 223.56,
+      "end": 226.03,
+      "duration": 2.47,
+      "text": "measure the torque of the"
+    },
+    {
+      "index": 61,
+      "start": 226.04,
+      "end": 228.429,
+      "duration": 2.389,
+      "text": "force the torque exerted by the force on"
+    },
+    {
+      "index": 62,
+      "start": 228.439,
+      "end": 230.309,
+      "duration": 1.87,
+      "text": "the solid"
+    },
+    {
+      "index": 63,
+      "start": 230.319,
+      "end": 232.589,
+      "duration": 2.27,
+      "text": "so maybe first I should remind you about"
+    },
+    {
+      "index": 64,
+      "start": 232.599,
+      "end": 235.83,
+      "duration": 3.231,
+      "text": "what torque is in space so let's say"
+    },
+    {
+      "index": 65,
+      "start": 235.84,
+      "end": 239.11,
+      "duration": 3.27,
+      "text": "that I have a piece of solid with a mass"
+    },
+    {
+      "index": 66,
+      "start": 239.12,
+      "end": 241.83,
+      "duration": 2.71,
+      "text": "Delta m for example and I have a force"
+    },
+    {
+      "index": 67,
+      "start": 241.84,
+      "end": 243.75,
+      "duration": 1.91,
+      "text": "that's being exerted to"
+    },
+    {
+      "index": 68,
+      "start": 243.76,
+      "end": 247.949,
+      "duration": 4.189,
+      "text": "it so let's say that maybe my"
+    },
+    {
+      "index": 69,
+      "start": 250.71,
+      "end": 250.72,
+      "duration": 0.01,
+      "text": "Force might"
+    },
+    {
+      "index": 70,
+      "start": 250.72,
+      "end": 254.149,
+      "duration": 3.429,
+      "text": "be F time Delta M if you think for"
+    },
+    {
+      "index": 71,
+      "start": 254.159,
+      "end": 256.39,
+      "duration": 2.231,
+      "text": "example of a gravitational field you"
+    },
+    {
+      "index": 72,
+      "start": 256.4,
+      "end": 258.27,
+      "duration": 1.87,
+      "text": "know the gravitational force is actually"
+    },
+    {
+      "index": 73,
+      "start": 258.28,
+      "end": 260.71,
+      "duration": 2.43,
+      "text": "the gravitational field times the"
+    },
+    {
+      "index": 74,
+      "start": 260.72,
+      "end": 263.03,
+      "duration": 2.31,
+      "text": "mass I me you can forget Delta M if you"
+    },
+    {
+      "index": 75,
+      "start": 263.04,
+      "end": 264.99,
+      "duration": 1.95,
+      "text": "don't like"
+    },
+    {
+      "index": 76,
+      "start": 265.0,
+      "end": 267.59,
+      "duration": 2.59,
+      "text": "it and let's say that the position"
+    },
+    {
+      "index": 77,
+      "start": 267.6,
+      "end": 270.27,
+      "duration": 2.67,
+      "text": "Vector oops should be aiming for the"
+    },
+    {
+      "index": 78,
+      "start": 270.28,
+      "end": 275.11,
+      "duration": 4.83,
+      "text": "origin the position Vector R is here and"
+    },
+    {
+      "index": 79,
+      "start": 275.12,
+      "end": 276.79,
+      "duration": 1.67,
+      "text": "now let's say that maybe this guy is at"
+    },
+    {
+      "index": 80,
+      "start": 276.8,
+      "end": 279.55,
+      "duration": 2.75,
+      "text": "the end of some arm or some you know"
+    },
+    {
+      "index": 81,
+      "start": 279.56,
+      "end": 282.749,
+      "duration": 3.189,
+      "text": "metal thing and I want to hold it in"
+    },
+    {
+      "index": 82,
+      "start": 282.759,
+      "end": 285.83,
+      "duration": 3.071,
+      "text": "place so the force is going to exert a"
+    },
+    {
+      "index": 83,
+      "start": 285.84,
+      "end": 288.95,
+      "duration": 3.11,
+      "text": "torque relative to the origin that will"
+    },
+    {
+      "index": 84,
+      "start": 288.96,
+      "end": 292.11,
+      "duration": 3.15,
+      "text": "try to measure you know how much I'm"
+    },
+    {
+      "index": 85,
+      "start": 292.12,
+      "end": 293.51,
+      "duration": 1.39,
+      "text": "trying to swing this guy around the"
+    },
+    {
+      "index": 86,
+      "start": 293.52,
+      "end": 296.35,
+      "duration": 2.83,
+      "text": "origin and consequently how much effort"
+    },
+    {
+      "index": 87,
+      "start": 296.36,
+      "end": 297.909,
+      "duration": 1.549,
+      "text": "I have to exert if I want to actually"
+    },
+    {
+      "index": 88,
+      "start": 297.919,
+      "end": 300.11,
+      "duration": 2.191,
+      "text": "maintain it at its place but by just"
+    },
+    {
+      "index": 89,
+      "start": 300.12,
+      "end": 302.67,
+      "duration": 2.55,
+      "text": "holding it at the end of a stick"
+    },
+    {
+      "index": 90,
+      "start": 302.68,
+      "end": 308.55,
+      "duration": 5.87,
+      "text": "here okay so the"
+    },
+    {
+      "index": 91,
+      "start": 311.79,
+      "end": 311.8,
+      "duration": 0.01,
+      "text": "talk is now a vector which is just the"
+    },
+    {
+      "index": 92,
+      "start": 311.8,
+      "end": 315.31,
+      "duration": 3.51,
+      "text": "cross product of a position Vector with"
+    },
+    {
+      "index": 93,
+      "start": 315.32,
+      "end": 327.79,
+      "duration": 12.47,
+      "text": "a"
+    },
+    {
+      "index": 94,
+      "start": 330.51,
+      "end": 330.52,
+      "duration": 0.01,
+      "text": "force and so what a measures again is"
+    },
+    {
+      "index": 95,
+      "start": 330.52,
+      "end": 333.67,
+      "duration": 3.15,
+      "text": "the rotation effects of the force and"
+    },
+    {
+      "index": 96,
+      "start": 333.68,
+      "end": 335.67,
+      "duration": 1.99,
+      "text": "you know if you"
+    },
+    {
+      "index": 97,
+      "start": 335.68,
+      "end": 338.189,
+      "duration": 2.509,
+      "text": "remember the principle"
+    },
+    {
+      "index": 98,
+      "start": 338.199,
+      "end": 341.15,
+      "duration": 2.951,
+      "text": "that the derivative of velocity which is"
+    },
+    {
+      "index": 99,
+      "start": 341.16,
+      "end": 344.029,
+      "duration": 2.869,
+      "text": "acceleration is force divided by"
+    },
+    {
+      "index": 100,
+      "start": 344.039,
+      "end": 346.51,
+      "duration": 2.471,
+      "text": "mass then the derivative of angular"
+    },
+    {
+      "index": 101,
+      "start": 346.52,
+      "end": 349.029,
+      "duration": 2.509,
+      "text": "velocity should be angular acceleration"
+    },
+    {
+      "index": 102,
+      "start": 349.039,
+      "end": 351.43,
+      "duration": 2.391,
+      "text": "which is related to the torque per unit"
+    },
+    {
+      "index": 103,
+      "start": 351.44,
+      "end": 362.59,
+      "duration": 11.15,
+      "text": "mass and so"
+    },
+    {
+      "index": 104,
+      "start": 364.59,
+      "end": 364.6,
+      "duration": 0.01,
+      "text": "let me just remind you if I look at"
+    },
+    {
+      "index": 105,
+      "start": 364.6,
+      "end": 366.23,
+      "duration": 1.63,
+      "text": "translation motions you know say I'm"
+    },
+    {
+      "index": 106,
+      "start": 366.24,
+      "end": 368.029,
+      "duration": 1.789,
+      "text": "just looking at a point Mass so there's"
+    },
+    {
+      "index": 107,
+      "start": 368.039,
+      "end": 369.95,
+      "duration": 1.911,
+      "text": "no rotation"
+    },
+    {
+      "index": 108,
+      "start": 369.96,
+      "end": 371.909,
+      "duration": 1.949,
+      "text": "effect"
+    },
+    {
+      "index": 109,
+      "start": 371.919,
+      "end": 375.55,
+      "duration": 3.631,
+      "text": "then Force divided by"
+    },
+    {
+      "index": 110,
+      "start": 375.56,
+      "end": 380.07,
+      "duration": 4.51,
+      "text": "mass is"
+    },
+    {
+      "index": 111,
+      "start": 382.43,
+      "end": 382.44,
+      "duration": 0.01,
+      "text": "acceleration which is the"
+    },
+    {
+      "index": 112,
+      "start": 382.44,
+      "end": 387.07,
+      "duration": 4.63,
+      "text": "derivative of"
+    },
+    {
+      "index": 113,
+      "start": 390.749,
+      "end": 390.759,
+      "duration": 0.01,
+      "text": "velocity and so what I'm claiming is"
+    },
+    {
+      "index": 114,
+      "start": 390.759,
+      "end": 394.39,
+      "duration": 3.631,
+      "text": "that for rotation"
+    },
+    {
+      "index": 115,
+      "start": 396.749,
+      "end": 396.759,
+      "duration": 0.01,
+      "text": "effects we have a similar low which"
+    },
+    {
+      "index": 116,
+      "start": 396.759,
+      "end": 399.07,
+      "duration": 2.311,
+      "text": "maybe you've seen in"
+    },
+    {
+      "index": 117,
+      "start": 399.08,
+      "end": 403.189,
+      "duration": 4.109,
+      "text": "801 uh at least well it's one of the"
+    },
+    {
+      "index": 118,
+      "start": 403.199,
+      "end": 405.309,
+      "duration": 2.11,
+      "text": "important things of solid mechanics"
+    },
+    {
+      "index": 119,
+      "start": 405.319,
+      "end": 407.83,
+      "duration": 2.511,
+      "text": "which is that the torque of the force"
+    },
+    {
+      "index": 120,
+      "start": 407.84,
+      "end": 411.99,
+      "duration": 4.15,
+      "text": "divided by the moment of"
+    },
+    {
+      "index": 121,
+      "start": 414.51,
+      "end": 414.52,
+      "duration": 0.01,
+      "text": "inertia I'm cheating a little bit here"
+    },
+    {
+      "index": 122,
+      "start": 414.52,
+      "end": 417.51,
+      "duration": 2.99,
+      "text": "but if you can see how I'm cheating then"
+    },
+    {
+      "index": 123,
+      "start": 417.52,
+      "end": 418.79,
+      "duration": 1.27,
+      "text": "I'm sure you know how to State it"
+    },
+    {
+      "index": 124,
+      "start": 418.8,
+      "end": 420.749,
+      "duration": 1.949,
+      "text": "correctly and if you don't see how I'm"
+    },
+    {
+      "index": 125,
+      "start": 420.759,
+      "end": 426.309,
+      "duration": 5.55,
+      "text": "cheating then let's just ignore the"
+    },
+    {
+      "index": 126,
+      "start": 434.67,
+      "end": 434.68,
+      "duration": 0.01,
+      "text": "acceleration and angular acceleration is"
+    },
+    {
+      "index": 127,
+      "start": 434.68,
+      "end": 435.67,
+      "duration": 0.99,
+      "text": "the"
+    },
+    {
+      "index": 128,
+      "start": 435.68,
+      "end": 444.55,
+      "duration": 8.87,
+      "text": "derivative of angular"
+    },
+    {
+      "index": 129,
+      "start": 449.99,
+      "end": 450.0,
+      "duration": 0.01,
+      "text": "velocity okay so now if I think of"
+    },
+    {
+      "index": 130,
+      "start": 450.0,
+      "end": 453.51,
+      "duration": 3.51,
+      "text": "curl as an operation which from a"
+    },
+    {
+      "index": 131,
+      "start": 453.52,
+      "end": 457.589,
+      "duration": 4.069,
+      "text": "velocity field gives the angular"
+    },
+    {
+      "index": 132,
+      "start": 457.599,
+      "end": 460.629,
+      "duration": 3.03,
+      "text": "velocity of its rotation"
+    },
+    {
+      "index": 133,
+      "start": 460.639,
+      "end": 463.83,
+      "duration": 3.191,
+      "text": "effects then you see that the curl of an"
+    },
+    {
+      "index": 134,
+      "start": 463.84,
+      "end": 465.51,
+      "duration": 1.67,
+      "text": "acceleration"
+    },
+    {
+      "index": 135,
+      "start": 465.52,
+      "end": 468.51,
+      "duration": 2.99,
+      "text": "field gives the angular acceleration in"
+    },
+    {
+      "index": 136,
+      "start": 468.52,
+      "end": 470.51,
+      "duration": 1.99,
+      "text": "the rotation part of the acceleration"
+    },
+    {
+      "index": 137,
+      "start": 470.52,
+      "end": 472.749,
+      "duration": 2.229,
+      "text": "effect and"
+    },
+    {
+      "index": 138,
+      "start": 472.759,
+      "end": 475.749,
+      "duration": 2.99,
+      "text": "therefore the curl of a force field"
+    },
+    {
+      "index": 139,
+      "start": 475.759,
+      "end": 478.469,
+      "duration": 2.71,
+      "text": "measures the torque per unit moment of"
+    },
+    {
+      "index": 140,
+      "start": 478.479,
+      "end": 481.149,
+      "duration": 2.67,
+      "text": "inertia"
+    },
+    {
+      "index": 141,
+      "start": 481.159,
+      "end": 483.79,
+      "duration": 2.631,
+      "text": "so it measures how much torque this"
+    },
+    {
+      "index": 142,
+      "start": 483.8,
+      "end": 486.71,
+      "duration": 2.91,
+      "text": "force field exerts on a small test solid"
+    },
+    {
+      "index": 143,
+      "start": 486.72,
+      "end": 489.35,
+      "duration": 2.63,
+      "text": "placed in it so if you you know you have"
+    },
+    {
+      "index": 144,
+      "start": 489.36,
+      "end": 491.23,
+      "duration": 1.87,
+      "text": "a small solid somewhere the curl will"
+    },
+    {
+      "index": 145,
+      "start": 491.24,
+      "end": 494.11,
+      "duration": 2.87,
+      "text": "just measure how much your solid starts"
+    },
+    {
+      "index": 146,
+      "start": 494.12,
+      "end": 496.51,
+      "duration": 2.39,
+      "text": "spinning if you leave it in this force"
+    },
+    {
+      "index": 147,
+      "start": 496.52,
+      "end": 499.51,
+      "duration": 2.99,
+      "text": "field so in particular a force field"
+    },
+    {
+      "index": 148,
+      "start": 499.52,
+      "end": 501.909,
+      "duration": 2.389,
+      "text": "with no curl is a force field that does"
+    },
+    {
+      "index": 149,
+      "start": 501.919,
+      "end": 504.67,
+      "duration": 2.751,
+      "text": "not generate any rotation motion so that"
+    },
+    {
+      "index": 150,
+      "start": 504.68,
+      "end": 506.11,
+      "duration": 1.43,
+      "text": "means you know if you put an object in"
+    },
+    {
+      "index": 151,
+      "start": 506.12,
+      "end": 508.909,
+      "duration": 2.789,
+      "text": "there that's completely immobile and you"
+    },
+    {
+      "index": 152,
+      "start": 508.919,
+      "end": 510.27,
+      "duration": 1.351,
+      "text": "leave it in that force field well of"
+    },
+    {
+      "index": 153,
+      "start": 510.28,
+      "end": 511.629,
+      "duration": 1.349,
+      "text": "course it might accelerate in some"
+    },
+    {
+      "index": 154,
+      "start": 511.639,
+      "end": 514.269,
+      "duration": 2.63,
+      "text": "Direction but it won't start"
+    },
+    {
+      "index": 155,
+      "start": 514.279,
+      "end": 516.469,
+      "duration": 2.19,
+      "text": "spinning while if you put it in there"
+    },
+    {
+      "index": 156,
+      "start": 516.479,
+      "end": 519.389,
+      "duration": 2.91,
+      "text": "spinning already in some direction then"
+    },
+    {
+      "index": 157,
+      "start": 519.399,
+      "end": 520.909,
+      "duration": 1.51,
+      "text": "well it should continue to spin in the"
+    },
+    {
+      "index": 158,
+      "start": 520.919,
+      "end": 523.149,
+      "duration": 2.23,
+      "text": "same way of course maybe there will be"
+    },
+    {
+      "index": 159,
+      "start": 523.159,
+      "end": 524.67,
+      "duration": 1.511,
+      "text": "you know friction and things like that"
+    },
+    {
+      "index": 160,
+      "start": 524.68,
+      "end": 527.87,
+      "duration": 3.19,
+      "text": "that will slow it down but this force"
+    },
+    {
+      "index": 161,
+      "start": 527.88,
+      "end": 536.63,
+      "duration": 8.75,
+      "text": "field is not responsible for"
+    },
+    {
+      "index": 162,
+      "start": 540.03,
+      "end": 540.04,
+      "duration": 0.01,
+      "text": "it okay so"
+    },
+    {
+      "index": 163,
+      "start": 540.04,
+      "end": 546.55,
+      "duration": 6.51,
+      "text": "the cool consequence of"
+    },
+    {
+      "index": 164,
+      "start": 556.23,
+      "end": 556.24,
+      "duration": 0.01,
+      "text": "potential okay so that's what we've seen"
+    },
+    {
+      "index": 165,
+      "start": 556.24,
+      "end": 558.15,
+      "duration": 1.91,
+      "text": "about conservative"
+    },
+    {
+      "index": 166,
+      "start": 558.16,
+      "end": 561.389,
+      "duration": 3.229,
+      "text": "forces so our main concern so far has"
+    },
+    {
+      "index": 167,
+      "start": 561.399,
+      "end": 563.11,
+      "duration": 1.711,
+      "text": "been to say if we have a conservative"
+    },
+    {
+      "index": 168,
+      "start": 563.12,
+      "end": 565.829,
+      "duration": 2.709,
+      "text": "force field it means that the work of a"
+    },
+    {
+      "index": 169,
+      "start": 565.839,
+      "end": 568.79,
+      "duration": 2.951,
+      "text": "force is the change in the energy and in"
+    },
+    {
+      "index": 170,
+      "start": 568.8,
+      "end": 570.87,
+      "duration": 2.07,
+      "text": "particular we can't get energy for free"
+    },
+    {
+      "index": 171,
+      "start": 570.88,
+      "end": 573.67,
+      "duration": 2.79,
+      "text": "out of it and you know that the change"
+    },
+    {
+      "index": 172,
+      "start": 573.68,
+      "end": 575.47,
+      "duration": 1.79,
+      "text": "in potential energy is going to be"
+    },
+    {
+      "index": 173,
+      "start": 575.48,
+      "end": 577.35,
+      "duration": 1.87,
+      "text": "related to the change in kinetic energy"
+    },
+    {
+      "index": 174,
+      "start": 577.36,
+      "end": 578.75,
+      "duration": 1.39,
+      "text": "so that's you know you have conservation"
+    },
+    {
+      "index": 175,
+      "start": 578.76,
+      "end": 581.069,
+      "duration": 2.309,
+      "text": "of energy principles well there's"
+    },
+    {
+      "index": 176,
+      "start": 581.079,
+      "end": 584.19,
+      "duration": 3.111,
+      "text": "another thing that we know now because"
+    },
+    {
+      "index": 177,
+      "start": 584.2,
+      "end": 586.79,
+      "duration": 2.59,
+      "text": "if a force deres from potential then"
+    },
+    {
+      "index": 178,
+      "start": 586.8,
+      "end": 588.389,
+      "duration": 1.589,
+      "text": "that means that its"
+    },
+    {
+      "index": 179,
+      "start": 588.399,
+      "end": 592.069,
+      "duration": 3.67,
+      "text": "curl is zero that's the Criterion we've"
+    },
+    {
+      "index": 180,
+      "start": 592.079,
+      "end": 594.19,
+      "duration": 2.111,
+      "text": "seen for a force to derive from for a"
+    },
+    {
+      "index": 181,
+      "start": 594.2,
+      "end": 597.19,
+      "duration": 2.99,
+      "text": "vector field to derive from a"
+    },
+    {
+      "index": 182,
+      "start": 597.2,
+      "end": 599.75,
+      "duration": 2.55,
+      "text": "potential and"
+    },
+    {
+      "index": 183,
+      "start": 599.76,
+      "end": 601.91,
+      "duration": 2.15,
+      "text": "if the curl is zero then it means that"
+    },
+    {
+      "index": 184,
+      "start": 601.92,
+      "end": 603.75,
+      "duration": 1.83,
+      "text": "actually this force does not generate"
+    },
+    {
+      "index": 185,
+      "start": 603.76,
+      "end": 620.63,
+      "duration": 16.87,
+      "text": "any rotation"
+    },
+    {
+      "index": 186,
+      "start": 623.11,
+      "end": 623.12,
+      "duration": 0.01,
+      "text": "effects so for"
+    },
+    {
+      "index": 187,
+      "start": 623.12,
+      "end": 625.43,
+      "duration": 2.31,
+      "text": "example you know if you try to"
+    },
+    {
+      "index": 188,
+      "start": 625.44,
+      "end": 627.63,
+      "duration": 2.19,
+      "text": "understand where does the Earth come"
+    },
+    {
+      "index": 189,
+      "start": 627.64,
+      "end": 630.35,
+      "duration": 2.71,
+      "text": "from well the Earth is spinning on"
+    },
+    {
+      "index": 190,
+      "start": 630.36,
+      "end": 632.31,
+      "duration": 1.95,
+      "text": "itself as it goes around the"
+    },
+    {
+      "index": 191,
+      "start": 632.32,
+      "end": 634.87,
+      "duration": 2.55,
+      "text": "Sun and you might wonder where does that"
+    },
+    {
+      "index": 192,
+      "start": 634.88,
+      "end": 636.23,
+      "duration": 1.35,
+      "text": "come from is that caused by"
+    },
+    {
+      "index": 193,
+      "start": 636.24,
+      "end": 638.509,
+      "duration": 2.269,
+      "text": "gravitational attraction and while the"
+    },
+    {
+      "index": 194,
+      "start": 638.519,
+      "end": 641.269,
+      "duration": 2.75,
+      "text": "answer is no gravitational attraction in"
+    },
+    {
+      "index": 195,
+      "start": 641.279,
+      "end": 643.67,
+      "duration": 2.391,
+      "text": "itself cannot cause the Earth to start"
+    },
+    {
+      "index": 196,
+      "start": 643.68,
+      "end": 645.19,
+      "duration": 1.51,
+      "text": "spinning faster or"
+    },
+    {
+      "index": 197,
+      "start": 645.2,
+      "end": 647.389,
+      "duration": 2.189,
+      "text": "slower at least if you assume the Earth"
+    },
+    {
+      "index": 198,
+      "start": 647.399,
+      "end": 650.59,
+      "duration": 3.191,
+      "text": "to be a solid which actually is"
+    },
+    {
+      "index": 199,
+      "start": 650.6,
+      "end": 653.269,
+      "duration": 2.669,
+      "text": "false okay but still it doesn't explain"
+    },
+    {
+      "index": 200,
+      "start": 653.279,
+      "end": 654.509,
+      "duration": 1.23,
+      "text": "I mean basically the reason why the"
+    },
+    {
+      "index": 201,
+      "start": 654.519,
+      "end": 656.629,
+      "duration": 2.11,
+      "text": "Earth is spinning is because it was"
+    },
+    {
+      "index": 202,
+      "start": 656.639,
+      "end": 659.55,
+      "duration": 2.911,
+      "text": "formed spinning"
+    },
+    {
+      "index": 203,
+      "start": 659.56,
+      "end": 661.03,
+      "duration": 1.47,
+      "text": "it didn't start spinning because of"
+    },
+    {
+      "index": 204,
+      "start": 661.04,
+      "end": 664.75,
+      "duration": 3.71,
+      "text": "gravitational effect and that's you"
+    },
+    {
+      "index": 205,
+      "start": 664.76,
+      "end": 667.99,
+      "duration": 3.23,
+      "text": "know a rather deep purely mathematical"
+    },
+    {
+      "index": 206,
+      "start": 668.0,
+      "end": 671.03,
+      "duration": 3.03,
+      "text": "consequence of understanding gravitation"
+    },
+    {
+      "index": 207,
+      "start": 671.04,
+      "end": 672.99,
+      "duration": 1.95,
+      "text": "in this way so it's quite spectacular"
+    },
+    {
+      "index": 208,
+      "start": 673.0,
+      "end": 674.629,
+      "duration": 1.629,
+      "text": "that just you know by abstract thinking"
+    },
+    {
+      "index": 209,
+      "start": 674.639,
+      "end": 677.11,
+      "duration": 2.471,
+      "text": "we got there so actually what's the"
+    },
+    {
+      "index": 210,
+      "start": 677.12,
+      "end": 679.23,
+      "duration": 2.11,
+      "text": "truth well the truth is actually the"
+    },
+    {
+      "index": 211,
+      "start": 679.24,
+      "end": 680.509,
+      "duration": 1.269,
+      "text": "Earth the moon and everything is"
+    },
+    {
+      "index": 212,
+      "start": 680.519,
+      "end": 682.509,
+      "duration": 1.99,
+      "text": "actually slightly deformable and so"
+    },
+    {
+      "index": 213,
+      "start": 682.519,
+      "end": 684.79,
+      "duration": 2.271,
+      "text": "there's deformation friction effects"
+    },
+    {
+      "index": 214,
+      "start": 684.8,
+      "end": 686.99,
+      "duration": 2.19,
+      "text": "tidal effects and so on and these"
+    },
+    {
+      "index": 215,
+      "start": 687.0,
+      "end": 689.79,
+      "duration": 2.79,
+      "text": "actually cause rotations to get slightly"
+    },
+    {
+      "index": 216,
+      "start": 689.8,
+      "end": 691.23,
+      "duration": 1.43,
+      "text": "synchronized with each other so for"
+    },
+    {
+      "index": 217,
+      "start": 691.24,
+      "end": 694.389,
+      "duration": 3.149,
+      "text": "example if you want to explain why the"
+    },
+    {
+      "index": 218,
+      "start": 694.399,
+      "end": 696.269,
+      "duration": 1.87,
+      "text": "Moon is always showing the same face to"
+    },
+    {
+      "index": 219,
+      "start": 696.279,
+      "end": 698.35,
+      "duration": 2.071,
+      "text": "the Earth so why the rotation of a moon"
+    },
+    {
+      "index": 220,
+      "start": 698.36,
+      "end": 701.47,
+      "duration": 3.11,
+      "text": "on itself is synchronized with its"
+    },
+    {
+      "index": 221,
+      "start": 701.48,
+      "end": 703.509,
+      "duration": 2.029,
+      "text": "revolution around the earth that is"
+    },
+    {
+      "index": 222,
+      "start": 703.519,
+      "end": 706.15,
+      "duration": 2.631,
+      "text": "actually explained by friction effect"
+    },
+    {
+      "index": 223,
+      "start": 706.16,
+      "end": 708.03,
+      "duration": 1.87,
+      "text": "over time and the gravitational"
+    },
+    {
+      "index": 224,
+      "start": 708.04,
+      "end": 710.59,
+      "duration": 2.55,
+      "text": "attraction of the Earth and the moon so"
+    },
+    {
+      "index": 225,
+      "start": 710.6,
+      "end": 713.11,
+      "duration": 2.51,
+      "text": "there is something there but if you took"
+    },
+    {
+      "index": 226,
+      "start": 713.12,
+      "end": 715.47,
+      "duration": 2.35,
+      "text": "perfectly solid you know perfectly rigid"
+    },
+    {
+      "index": 227,
+      "start": 715.48,
+      "end": 717.87,
+      "duration": 2.39,
+      "text": "solid bodies then gravitation would"
+    },
+    {
+      "index": 228,
+      "start": 717.88,
+      "end": 731.91,
+      "duration": 14.03,
+      "text": "never cause any rotation effect"
+    },
+    {
+      "index": 229,
+      "start": 735.79,
+      "end": 735.8,
+      "duration": 0.01,
+      "text": "okay so of course that tells us that we"
+    },
+    {
+      "index": 230,
+      "start": 735.8,
+      "end": 737.55,
+      "duration": 1.75,
+      "text": "don't know how to answer the question of"
+    },
+    {
+      "index": 231,
+      "start": 737.56,
+      "end": 739.79,
+      "duration": 2.23,
+      "text": "why is the Earth spinning"
+    },
+    {
+      "index": 232,
+      "start": 739.8,
+      "end": 742.23,
+      "duration": 2.43,
+      "text": "and well that will be left for another"
+    },
+    {
+      "index": 233,
+      "start": 742.24,
+      "end": 744.35,
+      "duration": 2.11,
+      "text": "physics class I I don't have a good"
+    },
+    {
+      "index": 234,
+      "start": 744.36,
+      "end": 747.31,
+      "duration": 2.95,
+      "text": "answer to"
+    },
+    {
+      "index": 235,
+      "start": 756.15,
+      "end": 756.16,
+      "duration": 0.01,
+      "text": "so that was kind of 801 is uh let me now"
+    },
+    {
+      "index": 236,
+      "start": 756.16,
+      "end": 759.35,
+      "duration": 3.19,
+      "text": "move forward to 802"
+    },
+    {
+      "index": 237,
+      "start": 759.36,
+      "end": 762.99,
+      "duration": 3.63,
+      "text": "stuff so I want to tell you things about"
+    },
+    {
+      "index": 238,
+      "start": 763.0,
+      "end": 773.75,
+      "duration": 10.75,
+      "text": "electric and magnetic"
+    },
+    {
+      "index": 239,
+      "start": 775.949,
+      "end": 775.959,
+      "duration": 0.01,
+      "text": "fields"
+    },
+    {
+      "index": 240,
+      "start": 775.959,
+      "end": 778.389,
+      "duration": 2.43,
+      "text": "and in fact something that's known as"
+    },
+    {
+      "index": 241,
+      "start": 778.399,
+      "end": 784.43,
+      "duration": 6.031,
+      "text": "Maxwell's equ"
+    },
+    {
+      "index": 242,
+      "start": 786.59,
+      "end": 786.6,
+      "duration": 0.01,
+      "text": "so just a quick poll if you have been"
+    },
+    {
+      "index": 243,
+      "start": 786.6,
+      "end": 788.55,
+      "duration": 1.95,
+      "text": "taking first of all how many of you have"
+    },
+    {
+      "index": 244,
+      "start": 788.56,
+      "end": 791.269,
+      "duration": 2.709,
+      "text": "been taking 8 to2 or something like that"
+    },
+    {
+      "index": 245,
+      "start": 791.279,
+      "end": 793.31,
+      "duration": 2.031,
+      "text": "okay so that's not very many so for most"
+    },
+    {
+      "index": 246,
+      "start": 793.32,
+      "end": 795.15,
+      "duration": 1.83,
+      "text": "of you this is a preview if you've been"
+    },
+    {
+      "index": 247,
+      "start": 795.16,
+      "end": 797.43,
+      "duration": 2.27,
+      "text": "taking 802 have you seen Maxwell's"
+    },
+    {
+      "index": 248,
+      "start": 797.44,
+      "end": 800.629,
+      "duration": 3.189,
+      "text": "equations at least part of them yeah"
+    },
+    {
+      "index": 249,
+      "start": 800.639,
+      "end": 803.389,
+      "duration": 2.75,
+      "text": "okay so then I'm sure in that case you"
+    },
+    {
+      "index": 250,
+      "start": 803.399,
+      "end": 804.47,
+      "duration": 1.071,
+      "text": "know better than me what I'm going to"
+    },
+    {
+      "index": 251,
+      "start": 804.48,
+      "end": 806.269,
+      "duration": 1.789,
+      "text": "talk about because I'm not a physicist"
+    },
+    {
+      "index": 252,
+      "start": 806.279,
+      "end": 810.069,
+      "duration": 3.79,
+      "text": "but just in case um"
+    },
+    {
+      "index": 253,
+      "start": 810.079,
+      "end": 812.47,
+      "duration": 2.391,
+      "text": "so Maxwell's equations govern how"
+    },
+    {
+      "index": 254,
+      "start": 812.48,
+      "end": 814.949,
+      "duration": 2.469,
+      "text": "electric and magnetic fields behave how"
+    },
+    {
+      "index": 255,
+      "start": 814.959,
+      "end": 817.43,
+      "duration": 2.471,
+      "text": "they're caused by charge electric"
+    },
+    {
+      "index": 256,
+      "start": 817.44,
+      "end": 819.99,
+      "duration": 2.55,
+      "text": "charges and their motions and in"
+    },
+    {
+      "index": 257,
+      "start": 820.0,
+      "end": 822.79,
+      "duration": 2.79,
+      "text": "particular they explain a lot of things"
+    },
+    {
+      "index": 258,
+      "start": 822.8,
+      "end": 824.509,
+      "duration": 1.709,
+      "text": "such as you know how electrical devices"
+    },
+    {
+      "index": 259,
+      "start": 824.519,
+      "end": 827.75,
+      "duration": 3.231,
+      "text": "work but also how electromagnetic waves"
+    },
+    {
+      "index": 260,
+      "start": 827.76,
+      "end": 830.59,
+      "duration": 2.83,
+      "text": "propagate so in particular that explains"
+    },
+    {
+      "index": 261,
+      "start": 830.6,
+      "end": 832.31,
+      "duration": 1.71,
+      "text": "light"
+    },
+    {
+      "index": 262,
+      "start": 832.32,
+      "end": 836.269,
+      "duration": 3.949,
+      "text": "um and um you know all sorts of waves so"
+    },
+    {
+      "index": 263,
+      "start": 836.279,
+      "end": 837.79,
+      "duration": 1.511,
+      "text": "it's thanks to them that you know your"
+    },
+    {
+      "index": 264,
+      "start": 837.8,
+      "end": 840.67,
+      "duration": 2.87,
+      "text": "cell phone and your"
+    },
+    {
+      "index": 265,
+      "start": 840.68,
+      "end": 843.31,
+      "duration": 2.63,
+      "text": "laptop and things like that work but"
+    },
+    {
+      "index": 266,
+      "start": 843.32,
+      "end": 845.55,
+      "duration": 2.23,
+      "text": "anyway okay"
+    },
+    {
+      "index": 267,
+      "start": 845.56,
+      "end": 849.31,
+      "duration": 3.75,
+      "text": "so hopefully most of you know that the"
+    },
+    {
+      "index": 268,
+      "start": 849.32,
+      "end": 852.509,
+      "duration": 3.189,
+      "text": "electric field is a vector field that"
+    },
+    {
+      "index": 269,
+      "start": 852.519,
+      "end": 854.749,
+      "duration": 2.23,
+      "text": "basically tells you what kind of force"
+    },
+    {
+      "index": 270,
+      "start": 854.759,
+      "end": 857.23,
+      "duration": 2.471,
+      "text": "will be exerted on a Charged particle"
+    },
+    {
+      "index": 271,
+      "start": 857.24,
+      "end": 858.91,
+      "duration": 1.67,
+      "text": "that you put in it so if you have a"
+    },
+    {
+      "index": 272,
+      "start": 858.92,
+      "end": 861.069,
+      "duration": 2.149,
+      "text": "particle carrying an electric"
+    },
+    {
+      "index": 273,
+      "start": 861.079,
+      "end": 865.23,
+      "duration": 4.151,
+      "text": "charge then this Vector field will tell"
+    },
+    {
+      "index": 274,
+      "start": 865.24,
+      "end": 867.03,
+      "duration": 1.79,
+      "text": "you basically there will be an electric"
+    },
+    {
+      "index": 275,
+      "start": 867.04,
+      "end": 869.71,
+      "duration": 2.67,
+      "text": "force which is the charge times e that"
+    },
+    {
+      "index": 276,
+      "start": 869.72,
+      "end": 872.99,
+      "duration": 3.27,
+      "text": "will be exerted on that particle and"
+    },
+    {
+      "index": 277,
+      "start": 873.0,
+      "end": 874.55,
+      "duration": 1.55,
+      "text": "that's what's responsible for example"
+    },
+    {
+      "index": 278,
+      "start": 874.56,
+      "end": 876.47,
+      "duration": 1.91,
+      "text": "for the flow of electrons when you have"
+    },
+    {
+      "index": 279,
+      "start": 876.48,
+      "end": 879.23,
+      "duration": 2.75,
+      "text": "a voltage difference because"
+    },
+    {
+      "index": 280,
+      "start": 879.24,
+      "end": 881.629,
+      "duration": 2.389,
+      "text": "classically this guy is actually the"
+    },
+    {
+      "index": 281,
+      "start": 881.639,
+      "end": 883.79,
+      "duration": 2.151,
+      "text": "gradient of a potential and that that"
+    },
+    {
+      "index": 282,
+      "start": 883.8,
+      "end": 886.389,
+      "duration": 2.589,
+      "text": "potential is just electric"
+    },
+    {
+      "index": 283,
+      "start": 886.399,
+      "end": 888.749,
+      "duration": 2.35,
+      "text": "voltage the magnetic field is a little"
+    },
+    {
+      "index": 284,
+      "start": 888.759,
+      "end": 893.389,
+      "duration": 4.63,
+      "text": "bit harder to think about if you never"
+    },
+    {
+      "index": 285,
+      "start": 893.399,
+      "end": 896.15,
+      "duration": 2.751,
+      "text": "seen it in physics but you know it's"
+    },
+    {
+      "index": 286,
+      "start": 896.16,
+      "end": 897.069,
+      "duration": 0.909,
+      "text": "what's"
+    },
+    {
+      "index": 287,
+      "start": 897.079,
+      "end": 901.31,
+      "duration": 4.231,
+      "text": "causing for example magnets to work"
+    },
+    {
+      "index": 288,
+      "start": 901.32,
+      "end": 905.749,
+      "duration": 4.429,
+      "text": "and well basically it's a force that's"
+    },
+    {
+      "index": 289,
+      "start": 905.759,
+      "end": 908.629,
+      "duration": 2.87,
+      "text": "also expressed in terms of a of a vector"
+    },
+    {
+      "index": 290,
+      "start": 908.639,
+      "end": 910.509,
+      "duration": 1.87,
+      "text": "field usually called B some people call"
+    },
+    {
+      "index": 291,
+      "start": 910.519,
+      "end": 912.15,
+      "duration": 1.631,
+      "text": "it h but I'm going to use"
+    },
+    {
+      "index": 292,
+      "start": 912.16,
+      "end": 916.269,
+      "duration": 4.109,
+      "text": "B and that Force tends to cause if you"
+    },
+    {
+      "index": 293,
+      "start": 916.279,
+      "end": 918.79,
+      "duration": 2.511,
+      "text": "have a moving charged particle then that"
+    },
+    {
+      "index": 294,
+      "start": 918.8,
+      "end": 920.629,
+      "duration": 1.829,
+      "text": "will cause it to deflect its trajectory"
+    },
+    {
+      "index": 295,
+      "start": 920.639,
+      "end": 923.59,
+      "duration": 2.951,
+      "text": "and start rotating in the magnetic field"
+    },
+    {
+      "index": 296,
+      "start": 923.6,
+      "end": 926.87,
+      "duration": 3.27,
+      "text": "so what it does is not quite as easy as"
+    },
+    {
+      "index": 297,
+      "start": 926.88,
+      "end": 932.35,
+      "duration": 5.47,
+      "text": "what the electric field does"
+    },
+    {
+      "index": 298,
+      "start": 934.91,
+      "end": 934.92,
+      "duration": 0.01,
+      "text": "um just"
+    },
+    {
+      "index": 299,
+      "start": 934.92,
+      "end": 937.91,
+      "duration": 2.99,
+      "text": "to give you formulas the force caused by"
+    },
+    {
+      "index": 300,
+      "start": 937.92,
+      "end": 939.949,
+      "duration": 2.029,
+      "text": "the electric field is the charge time"
+    },
+    {
+      "index": 301,
+      "start": 939.959,
+      "end": 942.23,
+      "duration": 2.271,
+      "text": "the electric field and the force caused"
+    },
+    {
+      "index": 302,
+      "start": 942.24,
+      "end": 946.069,
+      "duration": 3.829,
+      "text": "by the magnetic field is well I always"
+    },
+    {
+      "index": 303,
+      "start": 946.079,
+      "end": 947.389,
+      "duration": 1.31,
+      "text": "I'm never sure about the sign is that"
+    },
+    {
+      "index": 304,
+      "start": 947.399,
+      "end": 951.069,
+      "duration": 3.67,
+      "text": "the correct sign good"
+    },
+    {
+      "index": 305,
+      "start": 951.079,
+      "end": 953.79,
+      "duration": 2.711,
+      "text": "okay so now the question is we need to"
+    },
+    {
+      "index": 306,
+      "start": 953.8,
+      "end": 955.189,
+      "duration": 1.389,
+      "text": "understand how these fields themselves"
+    },
+    {
+      "index": 307,
+      "start": 955.199,
+      "end": 957.269,
+      "duration": 2.07,
+      "text": "are caused by the by the charge"
+    },
+    {
+      "index": 308,
+      "start": 957.279,
+      "end": 960.309,
+      "duration": 3.03,
+      "text": "particles that are placed in them"
+    },
+    {
+      "index": 309,
+      "start": 960.319,
+      "end": 963.99,
+      "duration": 3.671,
+      "text": "and so there's various laws in there"
+    },
+    {
+      "index": 310,
+      "start": 964.0,
+      "end": 966.11,
+      "duration": 2.11,
+      "text": "that explain what's going on so let me"
+    },
+    {
+      "index": 311,
+      "start": 966.12,
+      "end": 970.35,
+      "duration": 4.23,
+      "text": "Focus today on the electric"
+    },
+    {
+      "index": 312,
+      "start": 972.87,
+      "end": 972.88,
+      "duration": 0.01,
+      "text": "field"
+    },
+    {
+      "index": 313,
+      "start": 972.88,
+      "end": 975.71,
+      "duration": 2.83,
+      "text": "so Maxwell's equations actually tell you"
+    },
+    {
+      "index": 314,
+      "start": 975.72,
+      "end": 978.87,
+      "duration": 3.15,
+      "text": "about da and"
+    },
+    {
+      "index": 315,
+      "start": 980.749,
+      "end": 980.759,
+      "duration": 0.01,
+      "text": "Cur of this"
+    },
+    {
+      "index": 316,
+      "start": 980.759,
+      "end": 984.23,
+      "duration": 3.471,
+      "text": "Fields so let's look at div and curl of"
+    },
+    {
+      "index": 317,
+      "start": 984.24,
+      "end": 985.629,
+      "duration": 1.389,
+      "text": "the electric"
+    },
+    {
+      "index": 318,
+      "start": 985.639,
+      "end": 989.55,
+      "duration": 3.911,
+      "text": "field so the first equation"
+    },
+    {
+      "index": 319,
+      "start": 989.56,
+      "end": 992.59,
+      "duration": 3.03,
+      "text": "is called the G"
+    },
+    {
+      "index": 320,
+      "start": 992.6,
+      "end": 995.87,
+      "duration": 3.27,
+      "text": "Kum"
+    },
+    {
+      "index": 321,
+      "start": 1000.11,
+      "end": 1000.12,
+      "duration": 0.01,
+      "text": "law and it says that the Divergence of"
+    },
+    {
+      "index": 322,
+      "start": 1000.12,
+      "end": 1003.509,
+      "duration": 3.389,
+      "text": "the electric"
+    },
+    {
+      "index": 323,
+      "start": 1006.829,
+      "end": 1006.839,
+      "duration": 0.01,
+      "text": "field is equal"
+    },
+    {
+      "index": 324,
+      "start": 1006.839,
+      "end": 1008.829,
+      "duration": 1.99,
+      "text": "to so this"
+    },
+    {
+      "index": 325,
+      "start": 1008.839,
+      "end": 1011.189,
+      "duration": 2.35,
+      "text": "is just a physical"
+    },
+    {
+      "index": 326,
+      "start": 1011.199,
+      "end": 1013.43,
+      "duration": 2.231,
+      "text": "constant what it's equal to depends on"
+    },
+    {
+      "index": 327,
+      "start": 1013.44,
+      "end": 1015.269,
+      "duration": 1.829,
+      "text": "what units you're"
+    },
+    {
+      "index": 328,
+      "start": 1015.279,
+      "end": 1018.99,
+      "duration": 3.711,
+      "text": "using and this guy ho well it's not the"
+    },
+    {
+      "index": 329,
+      "start": 1019.0,
+      "end": 1020.43,
+      "duration": 1.43,
+      "text": "same row as in spherical coordinates"
+    },
+    {
+      "index": 330,
+      "start": 1020.44,
+      "end": 1023.43,
+      "duration": 2.99,
+      "text": "because physicists somehow patented the"
+    },
+    {
+      "index": 331,
+      "start": 1023.44,
+      "end": 1026.429,
+      "duration": 2.989,
+      "text": "use of head letter first uh it's the"
+    },
+    {
+      "index": 332,
+      "start": 1026.439,
+      "end": 1028.71,
+      "duration": 2.271,
+      "text": "actually the electric charge density so"
+    },
+    {
+      "index": 333,
+      "start": 1028.72,
+      "end": 1030.99,
+      "duration": 2.27,
+      "text": "it's the amount of electric"
+    },
+    {
+      "index": 334,
+      "start": 1031.0,
+      "end": 1034.029,
+      "duration": 3.029,
+      "text": "charge per unit"
+    },
+    {
+      "index": 335,
+      "start": 1034.039,
+      "end": 1036.309,
+      "duration": 2.27,
+      "text": "volume so what it tells you what this"
+    },
+    {
+      "index": 336,
+      "start": 1036.319,
+      "end": 1039.35,
+      "duration": 3.031,
+      "text": "tells you is that Divergence of e is"
+    },
+    {
+      "index": 337,
+      "start": 1039.36,
+      "end": 1041.429,
+      "duration": 2.069,
+      "text": "caused by the presence of electric"
+    },
+    {
+      "index": 338,
+      "start": 1041.439,
+      "end": 1043.35,
+      "duration": 1.911,
+      "text": "charge in particular if you have an"
+    },
+    {
+      "index": 339,
+      "start": 1043.36,
+      "end": 1044.71,
+      "duration": 1.35,
+      "text": "empty region of"
+    },
+    {
+      "index": 340,
+      "start": 1044.72,
+      "end": 1046.829,
+      "duration": 2.109,
+      "text": "space or region where nothing has"
+    },
+    {
+      "index": 341,
+      "start": 1046.839,
+      "end": 1049.47,
+      "duration": 2.631,
+      "text": "electrical charge then e has"
+    },
+    {
+      "index": 342,
+      "start": 1049.48,
+      "end": 1052.95,
+      "duration": 3.47,
+      "text": "as Divergence equal to"
+    },
+    {
+      "index": 343,
+      "start": 1056.27,
+      "end": 1056.28,
+      "duration": 0.01,
+      "text": "zero so now that looks like a very"
+    },
+    {
+      "index": 344,
+      "start": 1056.28,
+      "end": 1058.23,
+      "duration": 1.95,
+      "text": "abstract strange equation I mean"
+    },
+    {
+      "index": 345,
+      "start": 1058.24,
+      "end": 1059.95,
+      "duration": 1.71,
+      "text": "actually it's a partial differential"
+    },
+    {
+      "index": 346,
+      "start": 1059.96,
+      "end": 1064.31,
+      "duration": 4.35,
+      "text": "equation Satisfied by the electric field"
+    },
+    {
+      "index": 347,
+      "start": 1064.32,
+      "end": 1068.39,
+      "duration": 4.07,
+      "text": "e and that's not very intuitive in any"
+    },
+    {
+      "index": 348,
+      "start": 1068.4,
+      "end": 1070.51,
+      "duration": 2.11,
+      "text": "way okay"
+    },
+    {
+      "index": 349,
+      "start": 1070.52,
+      "end": 1074.35,
+      "duration": 3.83,
+      "text": "so what's actually more"
+    },
+    {
+      "index": 350,
+      "start": 1074.36,
+      "end": 1076.99,
+      "duration": 2.63,
+      "text": "intuitive is what we get if we apply the"
+    },
+    {
+      "index": 351,
+      "start": 1077.0,
+      "end": 1081.43,
+      "duration": 4.43,
+      "text": "Divergence Theorem"
+    },
+    {
+      "index": 352,
+      "start": 1083.63,
+      "end": 1083.64,
+      "duration": 0.01,
+      "text": "to this"
+    },
+    {
+      "index": 353,
+      "start": 1083.64,
+      "end": 1086.029,
+      "duration": 2.389,
+      "text": "equation okay"
+    },
+    {
+      "index": 354,
+      "start": 1086.039,
+      "end": 1091.23,
+      "duration": 5.191,
+      "text": "so if I think now about any closed"
+    },
+    {
+      "index": 355,
+      "start": 1091.24,
+      "end": 1094.149,
+      "duration": 2.909,
+      "text": "surface okay and I want to think about"
+    },
+    {
+      "index": 356,
+      "start": 1094.159,
+      "end": 1096.71,
+      "duration": 2.551,
+      "text": "the flux of the electric field out of"
+    },
+    {
+      "index": 357,
+      "start": 1096.72,
+      "end": 1100.47,
+      "duration": 3.75,
+      "text": "that"
+    },
+    {
+      "index": 358,
+      "start": 1102.47,
+      "end": 1102.48,
+      "duration": 0.01,
+      "text": "surface so we haven't really thought"
+    },
+    {
+      "index": 359,
+      "start": 1102.48,
+      "end": 1104.75,
+      "duration": 2.27,
+      "text": "about what the flux of a force field"
+    },
+    {
+      "index": 360,
+      "start": 1104.76,
+      "end": 1106.47,
+      "duration": 1.71,
+      "text": "does and I don't want to get into that"
+    },
+    {
+      "index": 361,
+      "start": 1106.48,
+      "end": 1109.909,
+      "duration": 3.429,
+      "text": "because there's no very easy answer in"
+    },
+    {
+      "index": 362,
+      "start": 1109.919,
+      "end": 1112.95,
+      "duration": 3.031,
+      "text": "general but I'm going to explain soon"
+    },
+    {
+      "index": 363,
+      "start": 1112.96,
+      "end": 1114.87,
+      "duration": 1.91,
+      "text": "how this can be useful"
+    },
+    {
+      "index": 364,
+      "start": 1114.88,
+      "end": 1116.789,
+      "duration": 1.909,
+      "text": "sometimes but so let's say that we want"
+    },
+    {
+      "index": 365,
+      "start": 1116.799,
+      "end": 1120.35,
+      "duration": 3.551,
+      "text": "to find the flux of the electric field"
+    },
+    {
+      "index": 366,
+      "start": 1120.36,
+      "end": 1122.63,
+      "duration": 2.27,
+      "text": "out of a closed"
+    },
+    {
+      "index": 367,
+      "start": 1122.64,
+      "end": 1125.83,
+      "duration": 3.19,
+      "text": "surface then by the Divergence"
+    },
+    {
+      "index": 368,
+      "start": 1125.84,
+      "end": 1129.31,
+      "duration": 3.47,
+      "text": "Theorem that's equal to the triple"
+    },
+    {
+      "index": 369,
+      "start": 1129.32,
+      "end": 1133.59,
+      "duration": 4.27,
+      "text": "integral of the region inside of D"
+    },
+    {
+      "index": 370,
+      "start": 1133.6,
+      "end": 1137.11,
+      "duration": 3.51,
+      "text": "DV which is by the"
+    },
+    {
+      "index": 371,
+      "start": 1137.12,
+      "end": 1139.95,
+      "duration": 2.83,
+      "text": "equation one of our 0 that's this"
+    },
+    {
+      "index": 372,
+      "start": 1139.96,
+      "end": 1142.149,
+      "duration": 2.189,
+      "text": "constant the triple"
+    },
+    {
+      "index": 373,
+      "start": 1142.159,
+      "end": 1146.75,
+      "duration": 4.591,
+      "text": "integral of row DV but now if I"
+    },
+    {
+      "index": 374,
+      "start": 1146.76,
+      "end": 1148.95,
+      "duration": 2.19,
+      "text": "integrate the charge density over the"
+    },
+    {
+      "index": 375,
+      "start": 1148.96,
+      "end": 1151.029,
+      "duration": 2.069,
+      "text": "entire region then what I will get is"
+    },
+    {
+      "index": 376,
+      "start": 1151.039,
+      "end": 1152.63,
+      "duration": 1.591,
+      "text": "actually the total amount of electric"
+    },
+    {
+      "index": 377,
+      "start": 1152.64,
+      "end": 1156.75,
+      "duration": 4.11,
+      "text": "charge inside the"
+    },
+    {
+      "index": 378,
+      "start": 1169.75,
+      "end": 1169.76,
+      "duration": 0.01,
+      "text": "D so"
+    },
+    {
+      "index": 379,
+      "start": 1169.76,
+      "end": 1172.07,
+      "duration": 2.31,
+      "text": "this one tells us in a more concrete way"
+    },
+    {
+      "index": 380,
+      "start": 1172.08,
+      "end": 1174.47,
+      "duration": 2.39,
+      "text": "how electric charges placed in here"
+    },
+    {
+      "index": 381,
+      "start": 1174.48,
+      "end": 1178.19,
+      "duration": 3.71,
+      "text": "influence the electric field around them"
+    },
+    {
+      "index": 382,
+      "start": 1178.2,
+      "end": 1179.909,
+      "duration": 1.709,
+      "text": "in particular one application of that is"
+    },
+    {
+      "index": 383,
+      "start": 1179.919,
+      "end": 1181.71,
+      "duration": 1.791,
+      "text": "if you want to study capacitors so"
+    },
+    {
+      "index": 384,
+      "start": 1181.72,
+      "end": 1184.23,
+      "duration": 2.51,
+      "text": "capacitors are these things that store"
+    },
+    {
+      "index": 385,
+      "start": 1184.24,
+      "end": 1187.029,
+      "duration": 2.789,
+      "text": "energy by basically you have two plates"
+    },
+    {
+      "index": 386,
+      "start": 1187.039,
+      "end": 1188.51,
+      "duration": 1.471,
+      "text": "one that contains positive charge the"
+    },
+    {
+      "index": 387,
+      "start": 1188.52,
+      "end": 1189.95,
+      "duration": 1.43,
+      "text": "other negative charge and then you have"
+    },
+    {
+      "index": 388,
+      "start": 1189.96,
+      "end": 1193.029,
+      "duration": 3.069,
+      "text": "a voltage between these plates and that"
+    },
+    {
+      "index": 389,
+      "start": 1193.039,
+      "end": 1194.95,
+      "duration": 1.911,
+      "text": "can act basically that can provide"
+    },
+    {
+      "index": 390,
+      "start": 1194.96,
+      "end": 1197.11,
+      "duration": 2.15,
+      "text": "electrical energy"
+    },
+    {
+      "index": 391,
+      "start": 1197.12,
+      "end": 1201.19,
+      "duration": 4.07,
+      "text": "to power Maybe an electrical"
+    },
+    {
+      "index": 392,
+      "start": 1201.2,
+      "end": 1204.19,
+      "duration": 2.99,
+      "text": "circuit and so you know that's kind of"
+    },
+    {
+      "index": 393,
+      "start": 1204.2,
+      "end": 1205.39,
+      "duration": 1.19,
+      "text": "it's not really a battery because it"
+    },
+    {
+      "index": 394,
+      "start": 1205.4,
+      "end": 1207.23,
+      "duration": 1.83,
+      "text": "doesn't store energy in large enough"
+    },
+    {
+      "index": 395,
+      "start": 1207.24,
+      "end": 1209.59,
+      "duration": 2.35,
+      "text": "amounts for that but for example that's"
+    },
+    {
+      "index": 396,
+      "start": 1209.6,
+      "end": 1211.23,
+      "duration": 1.63,
+      "text": "why you know when you switch your"
+    },
+    {
+      "index": 397,
+      "start": 1211.24,
+      "end": 1212.63,
+      "duration": 1.39,
+      "text": "favorite Gadget off it doesn't actually"
+    },
+    {
+      "index": 398,
+      "start": 1212.64,
+      "end": 1214.149,
+      "duration": 1.509,
+      "text": "go off immediately but somehow you see"
+    },
+    {
+      "index": 399,
+      "start": 1214.159,
+      "end": 1216.27,
+      "duration": 2.111,
+      "text": "things diming progressively there's a"
+    },
+    {
+      "index": 400,
+      "start": 1216.28,
+      "end": 1218.75,
+      "duration": 2.47,
+      "text": "capacitor in there so if you want to"
+    },
+    {
+      "index": 401,
+      "start": 1218.76,
+      "end": 1219.789,
+      "duration": 1.029,
+      "text": "understand how the voltage and the"
+    },
+    {
+      "index": 402,
+      "start": 1219.799,
+      "end": 1221.59,
+      "duration": 1.791,
+      "text": "charge relate to each other well the"
+    },
+    {
+      "index": 403,
+      "start": 1221.6,
+      "end": 1223.51,
+      "duration": 1.91,
+      "text": "voltage is obtained by integrating the"
+    },
+    {
+      "index": 404,
+      "start": 1223.52,
+      "end": 1225.63,
+      "duration": 2.11,
+      "text": "electric field from one plate to the"
+    },
+    {
+      "index": 405,
+      "start": 1225.64,
+      "end": 1229.23,
+      "duration": 3.59,
+      "text": "other plate and the force sorry the"
+    },
+    {
+      "index": 406,
+      "start": 1229.24,
+      "end": 1231.39,
+      "duration": 2.15,
+      "text": "charges in the plates are what causes"
+    },
+    {
+      "index": 407,
+      "start": 1231.4,
+      "end": 1233.83,
+      "duration": 2.43,
+      "text": "the electric field between the plates so"
+    },
+    {
+      "index": 408,
+      "start": 1233.84,
+      "end": 1235.149,
+      "duration": 1.309,
+      "text": "that's how you can get the relation"
+    },
+    {
+      "index": 409,
+      "start": 1235.159,
+      "end": 1238.71,
+      "duration": 3.551,
+      "text": "between voltage and charge in these guys"
+    },
+    {
+      "index": 410,
+      "start": 1238.72,
+      "end": 1241.83,
+      "duration": 3.11,
+      "text": "that's an example of application of"
+    },
+    {
+      "index": 411,
+      "start": 1241.84,
+      "end": 1245.19,
+      "duration": 3.35,
+      "text": "that okay now of course if you haven't"
+    },
+    {
+      "index": 412,
+      "start": 1245.2,
+      "end": 1247.39,
+      "duration": 2.19,
+      "text": "seen any of this then maybe it's a"
+    },
+    {
+      "index": 413,
+      "start": 1247.4,
+      "end": 1249.35,
+      "duration": 1.95,
+      "text": "little bit esoteric but that will tell"
+    },
+    {
+      "index": 414,
+      "start": 1249.36,
+      "end": 1250.75,
+      "duration": 1.39,
+      "text": "you you know part of what you will see"
+    },
+    {
+      "index": 415,
+      "start": 1250.76,
+      "end": 1253.789,
+      "duration": 3.029,
+      "text": "in"
+    },
+    {
+      "index": 416,
+      "start": 1255.39,
+      "end": 1255.4,
+      "duration": 0.01,
+      "text": "802"
+    },
+    {
+      "index": 417,
+      "start": 1255.4,
+      "end": 1258.75,
+      "duration": 3.35,
+      "text": "okay questions"
+    },
+    {
+      "index": 418,
+      "start": 1258.76,
+      "end": 1262.35,
+      "duration": 3.59,
+      "text": "I see some confused"
+    },
+    {
+      "index": 419,
+      "start": 1264.549,
+      "end": 1264.559,
+      "duration": 0.01,
+      "text": "faces okay well don't worry it will make"
+    },
+    {
+      "index": 420,
+      "start": 1264.559,
+      "end": 1270.39,
+      "duration": 5.831,
+      "text": "sense"
+    },
+    {
+      "index": 421,
+      "start": 1272.909,
+      "end": 1272.919,
+      "duration": 0.01,
+      "text": "someday so the next one I want to tell"
+    },
+    {
+      "index": 422,
+      "start": 1272.919,
+      "end": 1281.87,
+      "duration": 8.951,
+      "text": "you about is far's"
+    },
+    {
+      "index": 423,
+      "start": 1284.269,
+      "end": 1284.279,
+      "duration": 0.01,
+      "text": "low so in case you're confused by the"
+    },
+    {
+      "index": 424,
+      "start": 1284.279,
+      "end": 1285.909,
+      "duration": 1.63,
+      "text": "way I should say Maxwell's equations so"
+    },
+    {
+      "index": 425,
+      "start": 1285.919,
+      "end": 1288.83,
+      "duration": 2.911,
+      "text": "there's four equations in the set of Max"
+    },
+    {
+      "index": 426,
+      "start": 1288.84,
+      "end": 1290.95,
+      "duration": 2.11,
+      "text": "equations and most of them don't carry"
+    },
+    {
+      "index": 427,
+      "start": 1290.96,
+      "end": 1293.39,
+      "duration": 2.43,
+      "text": "Maxwell's name I mean"
+    },
+    {
+      "index": 428,
+      "start": 1293.4,
+      "end": 1296.149,
+      "duration": 2.749,
+      "text": "that's Qui feature of"
+    },
+    {
+      "index": 429,
+      "start": 1296.159,
+      "end": 1299.43,
+      "duration": 3.271,
+      "text": "them so that one tells you about the"
+    },
+    {
+      "index": 430,
+      "start": 1299.44,
+      "end": 1301.99,
+      "duration": 2.55,
+      "text": "curl of the electric"
+    },
+    {
+      "index": 431,
+      "start": 1302.0,
+      "end": 1304.31,
+      "duration": 2.31,
+      "text": "field so now depending on your knowledge"
+    },
+    {
+      "index": 432,
+      "start": 1304.32,
+      "end": 1306.31,
+      "duration": 1.99,
+      "text": "you might start telling me well the curl"
+    },
+    {
+      "index": 433,
+      "start": 1306.32,
+      "end": 1307.99,
+      "duration": 1.67,
+      "text": "of the electric field has to be zero"
+    },
+    {
+      "index": 434,
+      "start": 1308.0,
+      "end": 1309.789,
+      "duration": 1.789,
+      "text": "because it derives it derives from"
+    },
+    {
+      "index": 435,
+      "start": 1309.799,
+      "end": 1311.35,
+      "duration": 1.551,
+      "text": "actually it's the gradient of the"
+    },
+    {
+      "index": 436,
+      "start": 1311.36,
+      "end": 1313.029,
+      "duration": 1.669,
+      "text": "electric potential I told you this stuff"
+    },
+    {
+      "index": 437,
+      "start": 1313.039,
+      "end": 1316.19,
+      "duration": 3.151,
+      "text": "about voltage well that doesn't account"
+    },
+    {
+      "index": 438,
+      "start": 1316.2,
+      "end": 1317.83,
+      "duration": 1.63,
+      "text": "for the fact that sometimes you can"
+    },
+    {
+      "index": 439,
+      "start": 1317.84,
+      "end": 1319.35,
+      "duration": 1.51,
+      "text": "create voltage"
+    },
+    {
+      "index": 440,
+      "start": 1319.36,
+      "end": 1322.31,
+      "duration": 2.95,
+      "text": "out of nowhere using magnetic fields and"
+    },
+    {
+      "index": 441,
+      "start": 1322.32,
+      "end": 1324.23,
+      "duration": 1.91,
+      "text": "in fact you have a faure of"
+    },
+    {
+      "index": 442,
+      "start": 1324.24,
+      "end": 1326.59,
+      "duration": 2.35,
+      "text": "conservativity of the electric force if"
+    },
+    {
+      "index": 443,
+      "start": 1326.6,
+      "end": 1328.39,
+      "duration": 1.79,
+      "text": "you have a magnetic"
+    },
+    {
+      "index": 444,
+      "start": 1328.4,
+      "end": 1331.51,
+      "duration": 3.11,
+      "text": "field so what this one says is actually"
+    },
+    {
+      "index": 445,
+      "start": 1331.52,
+      "end": 1334.269,
+      "duration": 2.749,
+      "text": "the curl of e is not zero but rather"
+    },
+    {
+      "index": 446,
+      "start": 1334.279,
+      "end": 1336.59,
+      "duration": 2.311,
+      "text": "it's the derivative of the magnetic"
+    },
+    {
+      "index": 447,
+      "start": 1336.6,
+      "end": 1339.71,
+      "duration": 3.11,
+      "text": "field with respect to"
+    },
+    {
+      "index": 448,
+      "start": 1339.72,
+      "end": 1343.19,
+      "duration": 3.47,
+      "text": "time okay so more precisely it tells you"
+    },
+    {
+      "index": 449,
+      "start": 1343.2,
+      "end": 1345.43,
+      "duration": 2.23,
+      "text": "that what you might have learned about"
+    },
+    {
+      "index": 450,
+      "start": 1345.44,
+      "end": 1347.75,
+      "duration": 2.31,
+      "text": "electric Fields deriving from electric"
+    },
+    {
+      "index": 451,
+      "start": 1347.76,
+      "end": 1350.11,
+      "duration": 2.35,
+      "text": "potential becomes false if you have a"
+    },
+    {
+      "index": 452,
+      "start": 1350.12,
+      "end": 1354.07,
+      "duration": 3.95,
+      "text": "variable magnetic"
+    },
+    {
+      "index": 453,
+      "start": 1357.71,
+      "end": 1357.72,
+      "duration": 0.01,
+      "text": "field and just to tell"
+    },
+    {
+      "index": 454,
+      "start": 1357.72,
+      "end": 1360.51,
+      "duration": 2.79,
+      "text": "you you know that's again a strange"
+    },
+    {
+      "index": 455,
+      "start": 1360.52,
+      "end": 1363.149,
+      "duration": 2.629,
+      "text": "partial differential equation relating"
+    },
+    {
+      "index": 456,
+      "start": 1363.159,
+      "end": 1366.23,
+      "duration": 3.071,
+      "text": "these two Vector Fields"
+    },
+    {
+      "index": 457,
+      "start": 1366.24,
+      "end": 1369.07,
+      "duration": 2.83,
+      "text": "so to make sense of it one should use"
+    },
+    {
+      "index": 458,
+      "start": 1369.08,
+      "end": 1371.43,
+      "duration": 2.35,
+      "text": "Stokes theorem okay so if we apply"
+    },
+    {
+      "index": 459,
+      "start": 1371.44,
+      "end": 1372.669,
+      "duration": 1.229,
+      "text": "Stokes"
+    },
+    {
+      "index": 460,
+      "start": 1372.679,
+      "end": 1376.549,
+      "duration": 3.87,
+      "text": "theorem to compute the work done by the"
+    },
+    {
+      "index": 461,
+      "start": 1376.559,
+      "end": 1379.63,
+      "duration": 3.071,
+      "text": "electric field around a closed curve"
+    },
+    {
+      "index": 462,
+      "start": 1379.64,
+      "end": 1381.51,
+      "duration": 1.87,
+      "text": "so that means you know you have a wire"
+    },
+    {
+      "index": 463,
+      "start": 1381.52,
+      "end": 1383.87,
+      "duration": 2.35,
+      "text": "in there and you want to find the"
+    },
+    {
+      "index": 464,
+      "start": 1383.88,
+      "end": 1386.07,
+      "duration": 2.19,
+      "text": "voltage along the wire so now there's a"
+    },
+    {
+      "index": 465,
+      "start": 1386.08,
+      "end": 1388.47,
+      "duration": 2.39,
+      "text": "strange thing because classically you"
+    },
+    {
+      "index": 466,
+      "start": 1388.48,
+      "end": 1389.909,
+      "duration": 1.429,
+      "text": "would say well if I just have a wire"
+    },
+    {
+      "index": 467,
+      "start": 1389.919,
+      "end": 1392.11,
+      "duration": 2.191,
+      "text": "with nothing in it there's no voltage on"
+    },
+    {
+      "index": 468,
+      "start": 1392.12,
+      "end": 1395.59,
+      "duration": 3.47,
+      "text": "it well small change in plans if you"
+    },
+    {
+      "index": 469,
+      "start": 1395.6,
+      "end": 1398.19,
+      "duration": 2.59,
+      "text": "actually have a varying a varying"
+    },
+    {
+      "index": 470,
+      "start": 1398.2,
+      "end": 1402.029,
+      "duration": 3.829,
+      "text": "magnetic field that passes through that"
+    },
+    {
+      "index": 471,
+      "start": 1402.039,
+      "end": 1404.59,
+      "duration": 2.551,
+      "text": "wire then that will actually generate"
+    },
+    {
+      "index": 472,
+      "start": 1404.6,
+      "end": 1406.71,
+      "duration": 2.11,
+      "text": "voltage in it and that's how a"
+    },
+    {
+      "index": 473,
+      "start": 1406.72,
+      "end": 1410.83,
+      "duration": 4.11,
+      "text": "Transformer works so a Transformer"
+    },
+    {
+      "index": 474,
+      "start": 1413.23,
+      "end": 1413.24,
+      "duration": 0.01,
+      "text": "you know when you plug your laptop into"
+    },
+    {
+      "index": 475,
+      "start": 1413.24,
+      "end": 1415.149,
+      "duration": 1.909,
+      "text": "the wall circuit you don't actually feed"
+    },
+    {
+      "index": 476,
+      "start": 1415.159,
+      "end": 1417.39,
+      "duration": 2.231,
+      "text": "it directly 110 volts or 120 volts or"
+    },
+    {
+      "index": 477,
+      "start": 1417.4,
+      "end": 1419.789,
+      "duration": 2.389,
+      "text": "whatever there's a transformer in there"
+    },
+    {
+      "index": 478,
+      "start": 1419.799,
+      "end": 1421.549,
+      "duration": 1.75,
+      "text": "what the Transformer does is it takes"
+    },
+    {
+      "index": 479,
+      "start": 1421.559,
+      "end": 1424.71,
+      "duration": 3.151,
+      "text": "some input voltage and it passes that"
+    },
+    {
+      "index": 480,
+      "start": 1424.72,
+      "end": 1427.99,
+      "duration": 3.27,
+      "text": "through basically a loop of"
+    },
+    {
+      "index": 481,
+      "start": 1428.0,
+      "end": 1430.99,
+      "duration": 2.99,
+      "text": "wire okay not much seems to be happening"
+    },
+    {
+      "index": 482,
+      "start": 1431.0,
+      "end": 1433.51,
+      "duration": 2.51,
+      "text": "but now you have another loop of wire"
+    },
+    {
+      "index": 483,
+      "start": 1433.52,
+      "end": 1437.029,
+      "duration": 3.509,
+      "text": "that is intertwined with it and somehow"
+    },
+    {
+      "index": 484,
+      "start": 1437.039,
+      "end": 1440.39,
+      "duration": 3.351,
+      "text": "the magnetic field generated by so it"
+    },
+    {
+      "index": 485,
+      "start": 1440.4,
+      "end": 1442.99,
+      "duration": 2.59,
+      "text": "has to be alternating current the"
+    },
+    {
+      "index": 486,
+      "start": 1443.0,
+      "end": 1445.11,
+      "duration": 2.11,
+      "text": "alternating current varies over time in"
+    },
+    {
+      "index": 487,
+      "start": 1445.12,
+      "end": 1447.029,
+      "duration": 1.909,
+      "text": "the first wire that generates a magnetic"
+    },
+    {
+      "index": 488,
+      "start": 1447.039,
+      "end": 1449.269,
+      "duration": 2.23,
+      "text": "field that varies over time so that"
+    },
+    {
+      "index": 489,
+      "start": 1449.279,
+      "end": 1452.59,
+      "duration": 3.311,
+      "text": "causes DB by DT and that causes curl of"
+    },
+    {
+      "index": 490,
+      "start": 1452.6,
+      "end": 1454.47,
+      "duration": 1.87,
+      "text": "the electric field and the curl of the"
+    },
+    {
+      "index": 491,
+      "start": 1454.48,
+      "end": 1456.39,
+      "duration": 1.91,
+      "text": "electric field will generate voltage"
+    },
+    {
+      "index": 492,
+      "start": 1456.4,
+      "end": 1457.669,
+      "duration": 1.269,
+      "text": "between these two"
+    },
+    {
+      "index": 493,
+      "start": 1457.679,
+      "end": 1460.909,
+      "duration": 3.23,
+      "text": "guys and that's how a Transformer works"
+    },
+    {
+      "index": 494,
+      "start": 1460.919,
+      "end": 1463.149,
+      "duration": 2.23,
+      "text": "it uses Stokes"
+    },
+    {
+      "index": 495,
+      "start": 1463.159,
+      "end": 1466.07,
+      "duration": 2.911,
+      "text": "theorem okay so more precisely how do we"
+    },
+    {
+      "index": 496,
+      "start": 1466.08,
+      "end": 1467.389,
+      "duration": 1.309,
+      "text": "find the voltage between these two"
+    },
+    {
+      "index": 497,
+      "start": 1467.399,
+      "end": 1470.549,
+      "duration": 3.15,
+      "text": "points let's close the loop and let's"
+    },
+    {
+      "index": 498,
+      "start": 1470.559,
+      "end": 1472.63,
+      "duration": 2.071,
+      "text": "try to figure out the voltage inside"
+    },
+    {
+      "index": 499,
+      "start": 1472.64,
+      "end": 1473.549,
+      "duration": 0.909,
+      "text": "this"
+    },
+    {
+      "index": 500,
+      "start": 1473.559,
+      "end": 1476.59,
+      "duration": 3.031,
+      "text": "Loop so to find the voltage along a"
+    },
+    {
+      "index": 501,
+      "start": 1476.6,
+      "end": 1481.99,
+      "duration": 5.39,
+      "text": "closed curve placed in a varing magnetic"
+    },
+    {
+      "index": 502,
+      "start": 1485.71,
+      "end": 1485.72,
+      "duration": 0.01,
+      "text": "field so we have to do the line"
+    },
+    {
+      "index": 503,
+      "start": 1485.72,
+      "end": 1487.87,
+      "duration": 2.15,
+      "text": "integral along a closed curve of the"
+    },
+    {
+      "index": 504,
+      "start": 1487.88,
+      "end": 1489.87,
+      "duration": 1.99,
+      "text": "electric field and you should think of"
+    },
+    {
+      "index": 505,
+      "start": 1489.88,
+      "end": 1493.23,
+      "duration": 3.35,
+      "text": "this as the voltage generated in this"
+    },
+    {
+      "index": 506,
+      "start": 1493.24,
+      "end": 1499.669,
+      "duration": 6.429,
+      "text": "circuit that will be the flux"
+    },
+    {
+      "index": 507,
+      "start": 1502.909,
+      "end": 1502.919,
+      "duration": 0.01,
+      "text": "through this surface bounded by the"
+    },
+    {
+      "index": 508,
+      "start": 1502.919,
+      "end": 1506.87,
+      "duration": 3.951,
+      "text": "curve of Cur"
+    },
+    {
+      "index": 509,
+      "start": 1506.88,
+      "end": 1511.83,
+      "duration": 4.95,
+      "text": "e DS that's what Stokes theorem says and"
+    },
+    {
+      "index": 510,
+      "start": 1511.84,
+      "end": 1514.47,
+      "duration": 2.63,
+      "text": "now if you combine with farad law you"
+    },
+    {
+      "index": 511,
+      "start": 1514.48,
+      "end": 1519.19,
+      "duration": 4.71,
+      "text": "end up with the flux through S"
+    },
+    {
+      "index": 512,
+      "start": 1519.2,
+      "end": 1521.909,
+      "duration": 2.709,
+      "text": "of minus"
+    },
+    {
+      "index": 513,
+      "start": 1521.919,
+      "end": 1525.19,
+      "duration": 3.271,
+      "text": "dbdt and of course you could take if"
+    },
+    {
+      "index": 514,
+      "start": 1525.2,
+      "end": 1527.23,
+      "duration": 2.03,
+      "text": "your Loop doesn't move over time so I"
+    },
+    {
+      "index": 515,
+      "start": 1527.24,
+      "end": 1528.99,
+      "duration": 1.75,
+      "text": "mean actually there's there's a"
+    },
+    {
+      "index": 516,
+      "start": 1529.0,
+      "end": 1530.87,
+      "duration": 1.87,
+      "text": "different story if you start somehow"
+    },
+    {
+      "index": 517,
+      "start": 1530.88,
+      "end": 1533.83,
+      "duration": 2.95,
+      "text": "taking your wire and somehow moving it"
+    },
+    {
+      "index": 518,
+      "start": 1533.84,
+      "end": 1535.51,
+      "duration": 1.67,
+      "text": "inside the field but if you don't do"
+    },
+    {
+      "index": 519,
+      "start": 1535.52,
+      "end": 1537.11,
+      "duration": 1.59,
+      "text": "that if it's the field that's moving"
+    },
+    {
+      "index": 520,
+      "start": 1537.12,
+      "end": 1539.71,
+      "duration": 2.59,
+      "text": "then you just can take the d by DT"
+    },
+    {
+      "index": 521,
+      "start": 1539.72,
+      "end": 1542.909,
+      "duration": 3.189,
+      "text": "outside but let's not"
+    },
+    {
+      "index": 522,
+      "start": 1542.919,
+      "end": 1545.83,
+      "duration": 2.911,
+      "text": "bother okay"
+    },
+    {
+      "index": 523,
+      "start": 1545.84,
+      "end": 1548.389,
+      "duration": 2.549,
+      "text": "so again what this equation tells you is"
+    },
+    {
+      "index": 524,
+      "start": 1548.399,
+      "end": 1550.95,
+      "duration": 2.551,
+      "text": "that if magnetic field changes over time"
+    },
+    {
+      "index": 525,
+      "start": 1550.96,
+      "end": 1553.149,
+      "duration": 2.189,
+      "text": "then it creates just out of nowhere an"
+    },
+    {
+      "index": 526,
+      "start": 1553.159,
+      "end": 1555.789,
+      "duration": 2.63,
+      "text": "electric field and that electric field"
+    },
+    {
+      "index": 527,
+      "start": 1555.799,
+      "end": 1561.95,
+      "duration": 6.151,
+      "text": "can be used to power things"
+    },
+    {
+      "index": 528,
+      "start": 1570.549,
+      "end": 1570.559,
+      "duration": 0.01,
+      "text": "so I don't really claim that I've given"
+    },
+    {
+      "index": 529,
+      "start": 1570.559,
+      "end": 1572.149,
+      "duration": 1.59,
+      "text": "you enough details to understand how"
+    },
+    {
+      "index": 530,
+      "start": 1572.159,
+      "end": 1574.83,
+      "duration": 2.671,
+      "text": "they work but basically these equations"
+    },
+    {
+      "index": 531,
+      "start": 1574.84,
+      "end": 1577.63,
+      "duration": 2.79,
+      "text": "are at the heart of understanding how"
+    },
+    {
+      "index": 532,
+      "start": 1577.64,
+      "end": 1580.59,
+      "duration": 2.95,
+      "text": "things like capacitors and Transformers"
+    },
+    {
+      "index": 533,
+      "start": 1580.6,
+      "end": 1582.83,
+      "duration": 2.23,
+      "text": "work and they also explain a lot of"
+    },
+    {
+      "index": 534,
+      "start": 1582.84,
+      "end": 1584.149,
+      "duration": 1.309,
+      "text": "other things but I will leave that to"
+    },
+    {
+      "index": 535,
+      "start": 1584.159,
+      "end": 1586.07,
+      "duration": 1.911,
+      "text": "your physics teachers uh just for"
+    },
+    {
+      "index": 536,
+      "start": 1586.08,
+      "end": 1589.029,
+      "duration": 2.949,
+      "text": "completeness"
+    },
+    {
+      "index": 537,
+      "start": 1589.039,
+      "end": 1591.43,
+      "duration": 2.391,
+      "text": "let me just give you the last two"
+    },
+    {
+      "index": 538,
+      "start": 1591.44,
+      "end": 1593.71,
+      "duration": 2.27,
+      "text": "equations in that I'm not just I'm not"
+    },
+    {
+      "index": 539,
+      "start": 1593.72,
+      "end": 1595.95,
+      "duration": 2.23,
+      "text": "even going to try to explain them too"
+    },
+    {
+      "index": 540,
+      "start": 1595.96,
+      "end": 1599.87,
+      "duration": 3.91,
+      "text": "much so one of them says that the"
+    },
+    {
+      "index": 541,
+      "start": 1599.88,
+      "end": 1603.669,
+      "duration": 3.789,
+      "text": "Divergence of the magnetic field is zero"
+    },
+    {
+      "index": 542,
+      "start": 1603.679,
+      "end": 1606.19,
+      "duration": 2.511,
+      "text": "which somehow is fortunate because"
+    },
+    {
+      "index": 543,
+      "start": 1606.2,
+      "end": 1607.71,
+      "duration": 1.51,
+      "text": "otherwise you would run into trouble"
+    },
+    {
+      "index": 544,
+      "start": 1607.72,
+      "end": 1609.71,
+      "duration": 1.99,
+      "text": "trying to understand surface"
+    },
+    {
+      "index": 545,
+      "start": 1609.72,
+      "end": 1611.19,
+      "duration": 1.47,
+      "text": "Independence when you apply Stokes"
+    },
+    {
+      "index": 546,
+      "start": 1611.2,
+      "end": 1613.83,
+      "duration": 2.63,
+      "text": "theorem in"
+    },
+    {
+      "index": 547,
+      "start": 1613.84,
+      "end": 1615.389,
+      "duration": 1.549,
+      "text": "here"
+    },
+    {
+      "index": 548,
+      "start": 1615.399,
+      "end": 1619.71,
+      "duration": 4.311,
+      "text": "and the last one tells you how the curl"
+    },
+    {
+      "index": 549,
+      "start": 1619.72,
+      "end": 1623.71,
+      "duration": 3.99,
+      "text": "of the magnetic field is caused by"
+    },
+    {
+      "index": 550,
+      "start": 1623.72,
+      "end": 1626.71,
+      "duration": 2.99,
+      "text": "motion of charged particles so in"
+    },
+    {
+      "index": 551,
+      "start": 1626.72,
+      "end": 1629.789,
+      "duration": 3.069,
+      "text": "fact it says that the curl of"
+    },
+    {
+      "index": 552,
+      "start": 1629.799,
+      "end": 1632.19,
+      "duration": 2.391,
+      "text": "J sorry the curl of"
+    },
+    {
+      "index": 553,
+      "start": 1632.2,
+      "end": 1637.59,
+      "duration": 5.39,
+      "text": "B is given by this kind of"
+    },
+    {
+      "index": 554,
+      "start": 1641.51,
+      "end": 1641.52,
+      "duration": 0.01,
+      "text": "formula where J is What's called the"
+    },
+    {
+      "index": 555,
+      "start": 1641.52,
+      "end": 1644.23,
+      "duration": 2.71,
+      "text": "vector current density so it it measures"
+    },
+    {
+      "index": 556,
+      "start": 1644.24,
+      "end": 1646.31,
+      "duration": 2.07,
+      "text": "the flow of electrically charged"
+    },
+    {
+      "index": 557,
+      "start": 1646.32,
+      "end": 1649.71,
+      "duration": 3.39,
+      "text": "particles"
+    },
+    {
+      "index": 558,
+      "start": 1652.269,
+      "end": 1652.279,
+      "duration": 0.01,
+      "text": "okay so you get this guy when you start"
+    },
+    {
+      "index": 559,
+      "start": 1652.279,
+      "end": 1654.59,
+      "duration": 2.311,
+      "text": "taking charged particles like electrons"
+    },
+    {
+      "index": 560,
+      "start": 1654.6,
+      "end": 1657.47,
+      "duration": 2.87,
+      "text": "maybe and moving them"
+    },
+    {
+      "index": 561,
+      "start": 1657.48,
+      "end": 1659.59,
+      "duration": 2.11,
+      "text": "around and of course that's actually"
+    },
+    {
+      "index": 562,
+      "start": 1659.6,
+      "end": 1661.549,
+      "duration": 1.949,
+      "text": "part of how Transformers work because"
+    },
+    {
+      "index": 563,
+      "start": 1661.559,
+      "end": 1663.789,
+      "duration": 2.23,
+      "text": "I've told you you know running the AC"
+    },
+    {
+      "index": 564,
+      "start": 1663.799,
+      "end": 1665.23,
+      "duration": 1.431,
+      "text": "through the first Loop generates a"
+    },
+    {
+      "index": 565,
+      "start": 1665.24,
+      "end": 1667.71,
+      "duration": 2.47,
+      "text": "magnetic field well how does it do that"
+    },
+    {
+      "index": 566,
+      "start": 1667.72,
+      "end": 1669.669,
+      "duration": 1.949,
+      "text": "it's thanks to this equation if you have"
+    },
+    {
+      "index": 567,
+      "start": 1669.679,
+      "end": 1671.47,
+      "duration": 1.791,
+      "text": "a current passing in the loop that"
+    },
+    {
+      "index": 568,
+      "start": 1671.48,
+      "end": 1673.63,
+      "duration": 2.15,
+      "text": "causes a magnetic field and in turn"
+    },
+    {
+      "index": 569,
+      "start": 1673.64,
+      "end": 1675.71,
+      "duration": 2.07,
+      "text": "through the other equation that causes"
+    },
+    {
+      "index": 570,
+      "start": 1675.72,
+      "end": 1678.269,
+      "duration": 2.549,
+      "text": "an electric field which in turns causes"
+    },
+    {
+      "index": 571,
+      "start": 1678.279,
+      "end": 1681.07,
+      "duration": 2.791,
+      "text": "urrent so it's all somehow intertwined"
+    },
+    {
+      "index": 572,
+      "start": 1681.08,
+      "end": 1684.31,
+      "duration": 3.23,
+      "text": "in a very intricate way and it's really"
+    },
+    {
+      "index": 573,
+      "start": 1684.32,
+      "end": 1689.43,
+      "duration": 5.11,
+      "text": "remarkable how well that works in"
+    },
+    {
+      "index": 574,
+      "start": 1696.19,
+      "end": 1696.2,
+      "duration": 0.01,
+      "text": "so I think that's basically all I wanted"
+    },
+    {
+      "index": 575,
+      "start": 1696.2,
+      "end": 1697.99,
+      "duration": 1.79,
+      "text": "to say about 802 I don't want to you"
+    },
+    {
+      "index": 576,
+      "start": 1698.0,
+      "end": 1699.63,
+      "duration": 1.63,
+      "text": "know put your physics teachers out of a"
+    },
+    {
+      "index": 577,
+      "start": 1699.64,
+      "end": 1701.029,
+      "duration": 1.389,
+      "text": "job"
+    },
+    {
+      "index": 578,
+      "start": 1701.039,
+      "end": 1704.669,
+      "duration": 3.63,
+      "text": "so um if you haven't seen any of this"
+    },
+    {
+      "index": 579,
+      "start": 1704.679,
+      "end": 1706.11,
+      "duration": 1.431,
+      "text": "before I understand that this is"
+    },
+    {
+      "index": 580,
+      "start": 1706.12,
+      "end": 1707.83,
+      "duration": 1.71,
+      "text": "probably not detailed enough to be"
+    },
+    {
+      "index": 581,
+      "start": 1707.84,
+      "end": 1709.669,
+      "duration": 1.829,
+      "text": "really understandable but hopefully it"
+    },
+    {
+      "index": 582,
+      "start": 1709.679,
+      "end": 1711.35,
+      "duration": 1.671,
+      "text": "makes you it will make you a bit curious"
+    },
+    {
+      "index": 583,
+      "start": 1711.36,
+      "end": 1714.029,
+      "duration": 2.669,
+      "text": "about that and prompt you to you know"
+    },
+    {
+      "index": 584,
+      "start": 1714.039,
+      "end": 1715.43,
+      "duration": 1.391,
+      "text": "take that class someday and maybe even"
+    },
+    {
+      "index": 585,
+      "start": 1715.44,
+      "end": 1719.64,
+      "duration": 4.2,
+      "text": "remember how it relates to 1802"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

@@ -1,0 +1,5198 @@
+{
+  "video": {
+    "id": "MdzfsfBNJIw",
+    "title": "Lec 8 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=MdzfsfBNJIw",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3036,
+    "language": "en"
+  },
+  "segment_count": 740,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.0,
+      "end": 4.5809999999999995,
+      "duration": 3.581,
+      "text": "I usually like to start a lecture with something new,"
+    },
+    {
+      "index": 1,
+      "start": 4.5809999999999995,
+      "end": 7.612,
+      "duration": 3.031,
+      "text": "but this time I'm going to make an exception,"
+    },
+    {
+      "index": 2,
+      "start": 7.612,
+      "end": 11.883,
+      "duration": 4.271,
+      "text": "and start with the finishing up on Friday because it involves a"
+    },
+    {
+      "index": 3,
+      "start": 11.883,
+      "end": 14.707,
+      "duration": 2.824,
+      "text": "little more practice with complex numbers."
+    },
+    {
+      "index": 4,
+      "start": 14.707,
+      "end": 18.634,
+      "duration": 3.927,
+      "text": "I think that's what a large number of you are still fairly"
+    },
+    {
+      "index": 5,
+      "start": 18.634,
+      "end": 20.976,
+      "duration": 2.342,
+      "text": "weak in. So, to briefly remind you,"
+    },
+    {
+      "index": 6,
+      "start": 20.976,
+      "end": 23.249,
+      "duration": 2.273,
+      "text": "it will be sort of self-contained,"
+    },
+    {
+      "index": 7,
+      "start": 23.249,
+      "end": 25.866,
+      "duration": 2.617,
+      "text": "but still, it will use complex numbers."
+    },
+    {
+      "index": 8,
+      "start": 25.866,
+      "end": 30.0,
+      "duration": 4.134,
+      "text": "And, I think it's a good way to start today."
+    },
+    {
+      "index": 9,
+      "start": 30.0,
+      "end": 33.929,
+      "duration": 3.929,
+      "text": "So, remember, the basic problem was to solve"
+    },
+    {
+      "index": 10,
+      "start": 33.929,
+      "end": 38.041,
+      "duration": 4.112,
+      "text": "something with, where the input was sinusoidal"
+    },
+    {
+      "index": 11,
+      "start": 38.041,
+      "end": 41.514,
+      "duration": 3.473,
+      "text": "in particular. The k was on both sides,"
+    },
+    {
+      "index": 12,
+      "start": 41.514,
+      "end": 46.723,
+      "duration": 5.209,
+      "text": "and the input looked like cosine omega t."
+    },
+    {
+      "index": 13,
+      "start": 46.723,
+      "end": 52.023,
+      "duration": 5.3,
+      "text": "And, the plan of the solution consisted of transporting the"
+    },
+    {
+      "index": 14,
+      "start": 52.023,
+      "end": 57.14,
+      "duration": 5.117,
+      "text": "problem to the complex domain. So, you look for a complex"
+    },
+    {
+      "index": 15,
+      "start": 57.14,
+      "end": 62.989,
+      "duration": 5.849,
+      "text": "solution, and you complexify the right hand side of the equation,"
+    },
+    {
+      "index": 16,
+      "start": 62.989,
+      "end": 67.397,
+      "duration": 4.408,
+      "text": "as well. So, cosine omega t"
+    },
+    {
+      "index": 17,
+      "start": 67.397,
+      "end": 71.473,
+      "duration": 4.076,
+      "text": "becomes the real part of this complex function."
+    },
+    {
+      "index": 18,
+      "start": 71.473,
+      "end": 75.63,
+      "duration": 4.157,
+      "text": "The reason for doing that, remember, was because it's"
+    },
+    {
+      "index": 19,
+      "start": 75.63,
+      "end": 79.466,
+      "duration": 3.836,
+      "text": "easier to handle when you solve linear equations."
+    },
+    {
+      "index": 20,
+      "start": 79.466,
+      "end": 83.942,
+      "duration": 4.476,
+      "text": "It's much easier to handle exponentials on the right-hand"
+    },
+    {
+      "index": 21,
+      "start": 83.942,
+      "end": 88.977,
+      "duration": 5.035,
+      "text": "side than it is to handle sines and cosines because exponentials"
+    },
+    {
+      "index": 22,
+      "start": 88.977,
+      "end": 93.373,
+      "duration": 4.396,
+      "text": "are so easy to integrate when you multiply them by other"
+    },
+    {
+      "index": 23,
+      "start": 93.373,
+      "end": 95.931,
+      "duration": 2.558,
+      "text": "exponentials. So, the result was,"
+    },
+    {
+      "index": 24,
+      "start": 95.931,
+      "end": 99.607,
+      "duration": 3.676,
+      "text": "after doing that, y tilda turned out to be one,"
+    },
+    {
+      "index": 25,
+      "start": 99.607,
+      "end": 104.403,
+      "duration": 4.796,
+      "text": "after I scale the coefficient, one over one plus omega over k"
+    },
+    {
+      "index": 26,
+      "start": 104.403,
+      "end": 111.341,
+      "duration": 6.938,
+      "text": "And then, the rest was e to the"
+    },
+    {
+      "index": 27,
+      "start": 111.341,
+      "end": 116.946,
+      "duration": 5.605,
+      "text": "i times (omega t minus phi),"
+    },
+    {
+      "index": 28,
+      "start": 116.946,
+      "end": 120.287,
+      "duration": 3.341,
+      "text": "where phi had a certain meaning."
+    },
+    {
+      "index": 29,
+      "start": 120.287,
+      "end": 126.0,
+      "duration": 5.713,
+      "text": "It was the arc tangent of a, it was a phase lag."
+    },
+    {
+      "index": 30,
+      "start": 126.0,
+      "end": 129.491,
+      "duration": 3.491,
+      "text": "And, this was then, I had to take the real part of"
+    },
+    {
+      "index": 31,
+      "start": 129.491,
+      "end": 133.695,
+      "duration": 4.204,
+      "text": "this to get the final answer, which came out to be something"
+    },
+    {
+      "index": 32,
+      "start": 133.695,
+      "end": 138.255,
+      "duration": 4.56,
+      "text": "like one over the square root of one plus the amplitude one omega"
+    },
+    {
+      "index": 33,
+      "start": 138.255,
+      "end": 142.459,
+      "duration": 4.204,
+      "text": "/ k squared, and then the rest was cosine omega t plus minus"
+    },
+    {
+      "index": 34,
+      "start": 142.459,
+      "end": 146.378,
+      "duration": 3.919,
+      "text": "phi."
+    },
+    {
+      "index": 35,
+      "start": 146.378,
+      "end": 150.511,
+      "duration": 4.133,
+      "text": "It's easier to see that that part is the real part of this;"
+    },
+    {
+      "index": 36,
+      "start": 150.511,
+      "end": 153.646,
+      "duration": 3.135,
+      "text": "the problem is, of course you have to convert"
+    },
+    {
+      "index": 37,
+      "start": 153.646,
+      "end": 157.584,
+      "duration": 3.938,
+      "text": "this. Sorry, this should be i omega"
+    },
+    {
+      "index": 38,
+      "start": 157.584,
+      "end": 161.772,
+      "duration": 4.188,
+      "text": "t, in which case you don't need the parentheses,"
+    },
+    {
+      "index": 39,
+      "start": 161.772,
+      "end": 165.069,
+      "duration": 3.297,
+      "text": "either. So, the problem was to use the"
+    },
+    {
+      "index": 40,
+      "start": 165.069,
+      "end": 170.059,
+      "duration": 4.99,
+      "text": "polar representation of this complex number to convert it"
+    },
+    {
+      "index": 41,
+      "start": 170.059,
+      "end": 175.316,
+      "duration": 5.257,
+      "text": "into something whose amplitude was this, and whose angle was"
+    },
+    {
+      "index": 42,
+      "start": 175.316,
+      "end": 178.702,
+      "duration": 3.386,
+      "text": "minus phi. Now, that's what we call the"
+    },
+    {
+      "index": 43,
+      "start": 178.702,
+      "end": 182.0,
+      "duration": 3.298,
+      "text": "polar method, going polar."
+    },
+    {
+      "index": 44,
+      "start": 182.0,
+      "end": 184.896,
+      "duration": 2.896,
+      "text": "I'd like, now, for the first few minutes of"
+    },
+    {
+      "index": 45,
+      "start": 184.896,
+      "end": 187.793,
+      "duration": 2.897,
+      "text": "the period, to talk about the other method,"
+    },
+    {
+      "index": 46,
+      "start": 187.793,
+      "end": 190.965,
+      "duration": 3.172,
+      "text": "the Cartesian method. I think for a long while,"
+    },
+    {
+      "index": 47,
+      "start": 190.965,
+      "end": 194.62,
+      "duration": 3.655,
+      "text": "many of you will be more comfortable with that anyway."
+    },
+    {
+      "index": 48,
+      "start": 194.62,
+      "end": 198.896,
+      "duration": 4.276,
+      "text": "Although, one of the objects of the course should be to get you"
+    },
+    {
+      "index": 49,
+      "start": 198.896,
+      "end": 202.965,
+      "duration": 4.069,
+      "text": "equally comfortable with the polar representation of complex"
+    },
+    {
+      "index": 50,
+      "start": 202.965,
+      "end": 205.448,
+      "duration": 2.483,
+      "text": "numbers. So, if we try to do the same"
+    },
+    {
+      "index": 51,
+      "start": 205.448,
+      "end": 208.551,
+      "duration": 3.103,
+      "text": "thing going Cartesian, what's going to happen?"
+    },
+    {
+      "index": 52,
+      "start": 208.551,
+      "end": 212.0,
+      "duration": 3.449,
+      "text": "Well, I guess the same point here."
+    },
+    {
+      "index": 53,
+      "start": 212.0,
+      "end": 217.253,
+      "duration": 5.253,
+      "text": "So, the starting point is still y tilde equals one over,"
+    },
+    {
+      "index": 54,
+      "start": 217.253,
+      "end": 222.602,
+      "duration": 5.349,
+      "text": "sorry, this should have an i here, one plus i times omega"
+    },
+    {
+      "index": 55,
+      "start": 222.602,
+      "end": 228.334,
+      "duration": 5.732,
+      "text": "over k, e to the i omega t."
+    },
+    {
+      "index": 56,
+      "start": 228.334,
+      "end": 232.155,
+      "duration": 3.821,
+      "text": "But now, what you're going to"
+    },
+    {
+      "index": 57,
+      "start": 232.155,
+      "end": 237.217,
+      "duration": 5.062,
+      "text": "do is turn this into its Cartesian, turn both of these"
+    },
+    {
+      "index": 58,
+      "start": 237.217,
+      "end": 242.185,
+      "duration": 4.968,
+      "text": "into their Cartesian representations as a plus ib."
+    },
+    {
+      "index": 59,
+      "start": 242.185,
+      "end": 246.074,
+      "duration": 3.889,
+      "text": "So, if you do that Cartesianly,"
+    },
+    {
+      "index": 60,
+      "start": 246.074,
+      "end": 249.889,
+      "duration": 3.815,
+      "text": "of course, what you have to do is the standard thing about"
+    },
+    {
+      "index": 61,
+      "start": 249.889,
+      "end": 253.636,
+      "duration": 3.747,
+      "text": "dividing complex numbers or taking the reciprocals that I"
+    },
+    {
+      "index": 62,
+      "start": 253.636,
+      "end": 256.915,
+      "duration": 3.279,
+      "text": "told you at the very beginning of complex numbers."
+    },
+    {
+      "index": 63,
+      "start": 256.915,
+      "end": 261.131,
+      "duration": 4.216,
+      "text": "You multiply the top and bottom by the complex conjugate of this"
+    },
+    {
+      "index": 64,
+      "start": 261.131,
+      "end": 263.273,
+      "duration": 2.142,
+      "text": "in order to make the bottom real."
+    },
+    {
+      "index": 65,
+      "start": 263.273,
+      "end": 267.021,
+      "duration": 3.748,
+      "text": "So, what does this become? This becomes one minus i times"
+    },
+    {
+      "index": 66,
+      "start": 267.021,
+      "end": 270.835,
+      "duration": 3.814,
+      "text": "omega over k divided by the product of this in its complex"
+    },
+    {
+      "index": 67,
+      "start": 270.835,
+      "end": 274.65,
+      "duration": 3.815,
+      "text": "conjugate, which is the real number, one plus omega over k"
+    },
+    {
+      "index": 68,
+      "start": 274.65,
+      "end": 279.0,
+      "duration": 4.35,
+      "text": "squared"
+    },
+    {
+      "index": 69,
+      "start": 279.0,
+      "end": 283.317,
+      "duration": 4.317,
+      "text": "So, I've now converted this to the a plus bi form."
+    },
+    {
+      "index": 70,
+      "start": 283.317,
+      "end": 287.491,
+      "duration": 4.174,
+      "text": "I have also to convert the right-hand side to the a plus bi"
+    },
+    {
+      "index": 71,
+      "start": 287.491,
+      "end": 289.866,
+      "duration": 2.375,
+      "text": "form. So, it will look like cosine"
+    },
+    {
+      "index": 72,
+      "start": 289.866,
+      "end": 293.823,
+      "duration": 3.957,
+      "text": "omega t plus i sine omega t."
+    },
+    {
+      "index": 73,
+      "start": 293.823,
+      "end": 295.406,
+      "duration": 1.583,
+      "text": "Having done that,"
+    },
+    {
+      "index": 74,
+      "start": 295.406,
+      "end": 299.076,
+      "duration": 3.67,
+      "text": "I take the last step, which is to take the real part"
+    },
+    {
+      "index": 75,
+      "start": 299.076,
+      "end": 301.883,
+      "duration": 2.807,
+      "text": "of that. Remember, the reason I want the"
+    },
+    {
+      "index": 76,
+      "start": 301.883,
+      "end": 306.416,
+      "duration": 4.533,
+      "text": "real part is because this input was the real part of the complex"
+    },
+    {
+      "index": 77,
+      "start": 306.416,
+      "end": 310.243,
+      "duration": 3.827,
+      "text": "input. So, once you've got the complex"
+    },
+    {
+      "index": 78,
+      "start": 310.243,
+      "end": 314.513,
+      "duration": 4.27,
+      "text": "solution, you have to take its real part to go back into the"
+    },
+    {
+      "index": 79,
+      "start": 314.513,
+      "end": 317.407,
+      "duration": 2.894,
+      "text": "domain you started with, of real numbers,"
+    },
+    {
+      "index": 80,
+      "start": 317.407,
+      "end": 319.868,
+      "duration": 2.461,
+      "text": "from the domain of complex numbers."
+    },
+    {
+      "index": 81,
+      "start": 319.868,
+      "end": 323.921,
+      "duration": 4.053,
+      "text": "So, I want the real part is going to be, the real part of"
+    },
+    {
+      "index": 82,
+      "start": 323.921,
+      "end": 327.684,
+      "duration": 3.763,
+      "text": "that is, first of all, there's a factor out in front."
+    },
+    {
+      "index": 83,
+      "start": 327.684,
+      "end": 332.18,
+      "duration": 4.496,
+      "text": "That's entirely real. Let's put that out in front,"
+    },
+    {
+      "index": 84,
+      "start": 332.18,
+      "end": 334.749,
+      "duration": 2.569,
+      "text": "so doesn't bother us particularly."
+    },
+    {
+      "index": 85,
+      "start": 334.749,
+      "end": 339.265,
+      "duration": 4.516,
+      "text": "And now, I need the product of this complex number and that"
+    },
+    {
+      "index": 86,
+      "start": 339.265,
+      "end": 342.768,
+      "duration": 3.503,
+      "text": "complex number. But, I only want the real part"
+    },
+    {
+      "index": 87,
+      "start": 342.768,
+      "end": 345.493,
+      "duration": 2.725,
+      "text": "of it. So, I'm not going to multiply"
+    },
+    {
+      "index": 88,
+      "start": 345.493,
+      "end": 349.776,
+      "duration": 4.283,
+      "text": "it out and get four terms. I'm just going to look at the"
+    },
+    {
+      "index": 89,
+      "start": 349.776,
+      "end": 353.591,
+      "duration": 3.815,
+      "text": "two terms that I do want. I don't want the others."
+    },
+    {
+      "index": 90,
+      "start": 353.591,
+      "end": 358.184,
+      "duration": 4.593,
+      "text": "All right, the real part is cosine omega t,"
+    },
+    {
+      "index": 91,
+      "start": 358.184,
+      "end": 362.0,
+      "duration": 3.816,
+      "text": "from the product of this and that."
+    },
+    {
+      "index": 92,
+      "start": 362.0,
+      "end": 367.812,
+      "duration": 5.812,
+      "text": "And, the rest of the real part will be the product of the two i"
+    },
+    {
+      "index": 93,
+      "start": 367.812,
+      "end": 371.093,
+      "duration": 3.281,
+      "text": "terms. But, it's i times negative i,"
+    },
+    {
+      "index": 94,
+      "start": 371.093,
+      "end": 373.906,
+      "duration": 2.813,
+      "text": "which makes one. And therefore,"
+    },
+    {
+      "index": 95,
+      "start": 373.906,
+      "end": 378.687,
+      "duration": 4.781,
+      "text": "it's omega over k times sine omega t."
+    },
+    {
+      "index": 96,
+      "start": 378.687,
+      "end": 382.25,
+      "duration": 3.563,
+      "text": "Now, that's the answer."
+    },
+    {
+      "index": 97,
+      "start": 382.25,
+      "end": 386.562,
+      "duration": 4.312,
+      "text": "And that's the answer, too; they must be equal,"
+    },
+    {
+      "index": 98,
+      "start": 386.562,
+      "end": 392.0,
+      "duration": 5.438,
+      "text": "unless there's a contradiction in mathematics."
+    },
+    {
+      "index": 99,
+      "start": 392.0,
+      "end": 396.485,
+      "duration": 4.485,
+      "text": "But, it's extremely important. And that's the other reason why"
+    },
+    {
+      "index": 100,
+      "start": 396.485,
+      "end": 400.088,
+      "duration": 3.603,
+      "text": "I'm giving you this, that you learn in this course"
+    },
+    {
+      "index": 101,
+      "start": 400.088,
+      "end": 404.352,
+      "duration": 4.264,
+      "text": "to be able to convert quickly and automatically things that"
+    },
+    {
+      "index": 102,
+      "start": 404.352,
+      "end": 407.735,
+      "duration": 3.383,
+      "text": "look like this into things that look like that."
+    },
+    {
+      "index": 103,
+      "start": 407.735,
+      "end": 410.97,
+      "duration": 3.235,
+      "text": "And, that's done by means of a basic formula,"
+    },
+    {
+      "index": 104,
+      "start": 410.97,
+      "end": 414.647,
+      "duration": 3.677,
+      "text": "which occurs at the end of the notes for reference,"
+    },
+    {
+      "index": 105,
+      "start": 414.647,
+      "end": 418.544,
+      "duration": 3.897,
+      "text": "as I optimistically say, although I think for a lot of"
+    },
+    {
+      "index": 106,
+      "start": 418.544,
+      "end": 422.367,
+      "duration": 3.823,
+      "text": "you will not be referenced, stuff in the category of,"
+    },
+    {
+      "index": 107,
+      "start": 422.367,
+      "end": 427.0,
+      "duration": 4.633,
+      "text": "yeah, I think I've vaguely seen that somewhere."
+    },
+    {
+      "index": 108,
+      "start": 427.0,
+      "end": 430.076,
+      "duration": 3.076,
+      "text": "But, well, we never used it for anything."
+    },
+    {
+      "index": 109,
+      "start": 430.076,
+      "end": 432.923,
+      "duration": 2.847,
+      "text": "Okay, you're going to use it all term."
+    },
+    {
+      "index": 110,
+      "start": 432.923,
+      "end": 436.23,
+      "duration": 3.307,
+      "text": "So, the formula is, the famous trigonometric"
+    },
+    {
+      "index": 111,
+      "start": 436.23,
+      "end": 439.923,
+      "duration": 3.693,
+      "text": "identity, which is, so, the problem is to convert"
+    },
+    {
+      "index": 112,
+      "start": 439.923,
+      "end": 444.0,
+      "duration": 4.077,
+      "text": "this into the other guy. And, the thing which is going"
+    },
+    {
+      "index": 113,
+      "start": 444.0,
+      "end": 448.307,
+      "duration": 4.307,
+      "text": "to do that, enable one to combine the sine and the cosine"
+    },
+    {
+      "index": 114,
+      "start": 448.307,
+      "end": 452.307,
+      "duration": 4.0,
+      "text": "terms, is the famous formula that a times the cosine,"
+    },
+    {
+      "index": 115,
+      "start": 452.307,
+      "end": 456.615,
+      "duration": 4.308,
+      "text": "I'm going to use theta to make it as neutral as possible,"
+    },
+    {
+      "index": 116,
+      "start": 456.615,
+      "end": 460.03,
+      "duration": 3.415,
+      "text": "-- -- so, theta you can think of"
+    },
+    {
+      "index": 117,
+      "start": 460.03,
+      "end": 464.302,
+      "duration": 4.272,
+      "text": "as being replaced by omega t in this particular application of"
+    },
+    {
+      "index": 118,
+      "start": 464.302,
+      "end": 467.103,
+      "duration": 2.801,
+      "text": "the formula. But, I'll just use a general"
+    },
+    {
+      "index": 119,
+      "start": 467.103,
+      "end": 471.095,
+      "duration": 3.992,
+      "text": "angle theta, which doesn't suggest anything in particular."
+    },
+    {
+      "index": 120,
+      "start": 471.095,
+      "end": 474.456,
+      "duration": 3.361,
+      "text": "So, the problem is, you have something which is a"
+    },
+    {
+      "index": 121,
+      "start": 474.456,
+      "end": 478.168,
+      "duration": 3.712,
+      "text": "combination with real coefficients of cosine and sine,"
+    },
+    {
+      "index": 122,
+      "start": 478.168,
+      "end": 483.0,
+      "duration": 4.832,
+      "text": "and the important thing is that these numbers be the same."
+    },
+    {
+      "index": 123,
+      "start": 483.0,
+      "end": 486.025,
+      "duration": 3.025,
+      "text": "In practice, that means that the omega t,"
+    },
+    {
+      "index": 124,
+      "start": 486.025,
+      "end": 490.26,
+      "duration": 4.235,
+      "text": "you're not allowed to have omega one t here,"
+    },
+    {
+      "index": 125,
+      "start": 490.26,
+      "end": 494.42,
+      "duration": 4.16,
+      "text": "and some other frequency, omega two t here."
+    },
+    {
+      "index": 126,
+      "start": 494.42,
+      "end": 497.823,
+      "duration": 3.403,
+      "text": "That would correspond to using theta one here,"
+    },
+    {
+      "index": 127,
+      "start": 497.823,
+      "end": 501.529,
+      "duration": 3.706,
+      "text": "and theta two here. And, though there is a formula"
+    },
+    {
+      "index": 128,
+      "start": 501.529,
+      "end": 504.478,
+      "duration": 2.949,
+      "text": "for combining that, nobody remembers it,"
+    },
+    {
+      "index": 129,
+      "start": 504.478,
+      "end": 508.184,
+      "duration": 3.706,
+      "text": "and it's, in general, less universally useful than"
+    },
+    {
+      "index": 130,
+      "start": 508.184,
+      "end": 512.949,
+      "duration": 4.765,
+      "text": "the first. If you're going to memorize a"
+    },
+    {
+      "index": 131,
+      "start": 512.949,
+      "end": 518.542,
+      "duration": 5.593,
+      "text": "formula, and learn this one, it's best to start with the"
+    },
+    {
+      "index": 132,
+      "start": 518.542,
+      "end": 524.033,
+      "duration": 5.491,
+      "text": "ones where the two are equal. That's the basic formula."
+    },
+    {
+      "index": 133,
+      "start": 524.033,
+      "end": 529.525,
+      "duration": 5.492,
+      "text": "The others are variations of it, but there is a sizable"
+    },
+    {
+      "index": 134,
+      "start": 529.525,
+      "end": 533.389,
+      "duration": 3.864,
+      "text": "variations. All right, so the answer is"
+    },
+    {
+      "index": 135,
+      "start": 533.389,
+      "end": 539.084,
+      "duration": 5.695,
+      "text": "that this is equal to some other constant, real constant,"
+    },
+    {
+      "index": 136,
+      "start": 539.084,
+      "end": 546.0,
+      "duration": 6.916,
+      "text": "times the cosine of theta minus phi."
+    },
+    {
+      "index": 137,
+      "start": 546.0,
+      "end": 549.742,
+      "duration": 3.742,
+      "text": "Of course, most people remember this vaguely."
+    },
+    {
+      "index": 138,
+      "start": 549.742,
+      "end": 554.335,
+      "duration": 4.593,
+      "text": "What they don't remember is what the c and the phi are,"
+    },
+    {
+      "index": 139,
+      "start": 554.335,
+      "end": 558.587,
+      "duration": 4.252,
+      "text": "how to calculate them. I don't suggest you memorize"
+    },
+    {
+      "index": 140,
+      "start": 558.587,
+      "end": 562.159,
+      "duration": 3.572,
+      "text": "the formulas for them. You can if you wish."
+    },
+    {
+      "index": 141,
+      "start": 562.159,
+      "end": 566.497,
+      "duration": 4.338,
+      "text": "Instead, memorize the picture, which is much easier."
+    },
+    {
+      "index": 142,
+      "start": 566.497,
+      "end": 571.515,
+      "duration": 5.018,
+      "text": "Memorize that a and b are the two sides of a right triangle."
+    },
+    {
+      "index": 143,
+      "start": 571.515,
+      "end": 576.873,
+      "duration": 5.358,
+      "text": "Phi is the angle opposite the b side, and c is the length of the"
+    },
+    {
+      "index": 144,
+      "start": 576.873,
+      "end": 582.122,
+      "duration": 5.249,
+      "text": "hypotenuse. Okay, that's worth putting up."
+    },
+    {
+      "index": 145,
+      "start": 582.122,
+      "end": 588.262,
+      "duration": 6.14,
+      "text": "I think that's a pink formula. It's even worth two of those,"
+    },
+    {
+      "index": 146,
+      "start": 588.262,
+      "end": 592.945,
+      "duration": 4.683,
+      "text": "but I will thrift. Now, let's apply it to this"
+    },
+    {
+      "index": 147,
+      "start": 592.945,
+      "end": 597.316,
+      "duration": 4.371,
+      "text": "case to see that it gives the right answer."
+    },
+    {
+      "index": 148,
+      "start": 597.316,
+      "end": 602.0,
+      "duration": 4.684,
+      "text": "So, to use this formula, how I use it?"
+    },
+    {
+      "index": 149,
+      "start": 602.0,
+      "end": 607.698,
+      "duration": 5.698,
+      "text": "Well, I should take, I will reproduce the left-hand"
+    },
+    {
+      "index": 150,
+      "start": 607.698,
+      "end": 609.75,
+      "duration": 2.052,
+      "text": "side. So that part,"
+    },
+    {
+      "index": 151,
+      "start": 609.75,
+      "end": 613.966,
+      "duration": 4.216,
+      "text": "I just copy. And, how about the right?"
+    },
+    {
+      "index": 152,
+      "start": 613.966,
+      "end": 619.323,
+      "duration": 5.357,
+      "text": "Well, the amplitude, it's combined into a single"
+    },
+    {
+      "index": 153,
+      "start": 619.323,
+      "end": 625.819,
+      "duration": 6.496,
+      "text": "cosine term whose amplitude is, well, the two sides of the"
+    },
+    {
+      "index": 154,
+      "start": 625.819,
+      "end": 633.0,
+      "duration": 7.181,
+      "text": "right triangle are one, and omega over k."
+    },
+    {
+      "index": 155,
+      "start": 633.0,
+      "end": 636.672,
+      "duration": 3.672,
+      "text": "The hypotenuse in that case is going to be, well,"
+    },
+    {
+      "index": 156,
+      "start": 636.672,
+      "end": 639.961,
+      "duration": 3.289,
+      "text": "why don't we write it here? So, we have one,"
+    },
+    {
+      "index": 157,
+      "start": 639.961,
+      "end": 643.404,
+      "duration": 3.443,
+      "text": "and omega over k. And, here's phi."
+    },
+    {
+      "index": 158,
+      "start": 643.404,
+      "end": 647.994,
+      "duration": 4.59,
+      "text": "So, the hypotenuse is going to be the square root of one plus"
+    },
+    {
+      "index": 159,
+      "start": 647.994,
+      "end": 651.513,
+      "duration": 3.519,
+      "text": "omega over k squared."
+    },
+    {
+      "index": 160,
+      "start": 651.513,
+      "end": 655.338,
+      "duration": 3.825,
+      "text": "And, that's going to be multiplied by the cosine of"
+    },
+    {
+      "index": 161,
+      "start": 655.338,
+      "end": 659.393,
+      "duration": 4.055,
+      "text": "omega t minus this phase lag angle phi."
+    },
+    {
+      "index": 162,
+      "start": 659.393,
+      "end": 662.312,
+      "duration": 2.919,
+      "text": "You can write,"
+    },
+    {
+      "index": 163,
+      "start": 662.312,
+      "end": 665.968,
+      "duration": 3.656,
+      "text": "if you wish, phi equals the arc tangent,"
+    },
+    {
+      "index": 164,
+      "start": 665.968,
+      "end": 669.531,
+      "duration": 3.563,
+      "text": "but you are not learning a lot by that."
+    },
+    {
+      "index": 165,
+      "start": 669.531,
+      "end": 675.156,
+      "duration": 5.625,
+      "text": "Phi is the arc tangent of omega over k."
+    },
+    {
+      "index": 166,
+      "start": 675.156,
+      "end": 676.75,
+      "duration": 1.594,
+      "text": "That's okay,"
+    },
+    {
+      "index": 167,
+      "start": 676.75,
+      "end": 679.843,
+      "duration": 3.093,
+      "text": "but it's true. But, notice there's"
+    },
+    {
+      "index": 168,
+      "start": 679.843,
+      "end": 683.875,
+      "duration": 4.032,
+      "text": "cancellation now. This over that is equal to"
+    },
+    {
+      "index": 169,
+      "start": 683.875,
+      "end": 688.0,
+      "duration": 4.125,
+      "text": "what? Well, it's equal to this."
+    },
+    {
+      "index": 170,
+      "start": 688.0,
+      "end": 691.872,
+      "duration": 3.872,
+      "text": "And, so when we get in this way, by combining these two"
+    },
+    {
+      "index": 171,
+      "start": 691.872,
+      "end": 696.246,
+      "duration": 4.374,
+      "text": "factors, one gets exactly the same formula that we got before."
+    },
+    {
+      "index": 172,
+      "start": 696.246,
+      "end": 698.612,
+      "duration": 2.366,
+      "text": "So, as you can see, in some sense,"
+    },
+    {
+      "index": 173,
+      "start": 698.612,
+      "end": 701.193,
+      "duration": 2.581,
+      "text": "there's not, if you can remember this"
+    },
+    {
+      "index": 174,
+      "start": 701.193,
+      "end": 705.065,
+      "duration": 3.872,
+      "text": "trigonometric identity, there's not a lot of difference"
+    },
+    {
+      "index": 175,
+      "start": 705.065,
+      "end": 709.153,
+      "duration": 4.088,
+      "text": "between the two methods except that this one requires this"
+    },
+    {
+      "index": 176,
+      "start": 709.153,
+      "end": 711.877,
+      "duration": 2.724,
+      "text": "extra step. The answer will come out in"
+    },
+    {
+      "index": 177,
+      "start": 711.877,
+      "end": 715.534,
+      "duration": 3.657,
+      "text": "this form, and you then, to see what it really looks"
+    },
+    {
+      "index": 178,
+      "start": 715.534,
+      "end": 718.689,
+      "duration": 3.155,
+      "text": "like, really have to convert it to this form,"
+    },
+    {
+      "index": 179,
+      "start": 718.689,
+      "end": 722.633,
+      "duration": 3.944,
+      "text": "the form in which you can see what the phase lag and the"
+    },
+    {
+      "index": 180,
+      "start": 722.633,
+      "end": 727.221,
+      "duration": 4.588,
+      "text": "amplitude is. It's amazing how many people"
+    },
+    {
+      "index": 181,
+      "start": 727.221,
+      "end": 730.156,
+      "duration": 2.935,
+      "text": "who should know, this includes working"
+    },
+    {
+      "index": 182,
+      "start": 730.156,
+      "end": 733.487,
+      "duration": 3.331,
+      "text": "mathematicians, theoretical mathematicians,"
+    },
+    {
+      "index": 183,
+      "start": 733.487,
+      "end": 737.612,
+      "duration": 4.125,
+      "text": "includes even possibly the authors of your textbooks."
+    },
+    {
+      "index": 184,
+      "start": 737.612,
+      "end": 740.944,
+      "duration": 3.332,
+      "text": "I'm not sure, but I've caught them in this,"
+    },
+    {
+      "index": 185,
+      "start": 740.944,
+      "end": 744.99,
+      "duration": 4.046,
+      "text": "too, who in this form, everybody remembers that it's"
+    },
+    {
+      "index": 186,
+      "start": 744.99,
+      "end": 747.687,
+      "duration": 2.697,
+      "text": "something like that. Unfortunately,"
+    },
+    {
+      "index": 187,
+      "start": 747.687,
+      "end": 751.336,
+      "duration": 3.649,
+      "text": "when it occurs as the answer in an answer book,"
+    },
+    {
+      "index": 188,
+      "start": 751.336,
+      "end": 755.858,
+      "duration": 4.522,
+      "text": "the numbers are some colossal mess here plus some colossal"
+    },
+    {
+      "index": 189,
+      "start": 755.858,
+      "end": 759.449,
+      "duration": 3.591,
+      "text": "mess here. And theta is,"
+    },
+    {
+      "index": 190,
+      "start": 759.449,
+      "end": 764.799,
+      "duration": 5.35,
+      "text": "again, a real mess, involving roots and some cube"
+    },
+    {
+      "index": 191,
+      "start": 764.799,
+      "end": 768.924,
+      "duration": 4.125,
+      "text": "roots, and whatnot. The only thing is,"
+    },
+    {
+      "index": 192,
+      "start": 768.924,
+      "end": 772.491,
+      "duration": 3.567,
+      "text": "these two are the same real mess."
+    },
+    {
+      "index": 193,
+      "start": 772.491,
+      "end": 778.957,
+      "duration": 6.466,
+      "text": "That amounts to just another pure oscillation with the same"
+    },
+    {
+      "index": 194,
+      "start": 778.957,
+      "end": 785.2,
+      "duration": 6.243,
+      "text": "frequency as the old guy, and with the amplitude changed,"
+    },
+    {
+      "index": 195,
+      "start": 785.2,
+      "end": 792.0,
+      "duration": 6.8,
+      "text": "and with a phase shift, move to the right or left."
+    },
+    {
+      "index": 196,
+      "start": 792.0,
+      "end": 794.989,
+      "duration": 2.989,
+      "text": "So, this is no more general than that."
+    },
+    {
+      "index": 197,
+      "start": 794.989,
+      "end": 798.545,
+      "duration": 3.556,
+      "text": "Notice they both have two parameters in them,"
+    },
+    {
+      "index": 198,
+      "start": 798.545,
+      "end": 802.909,
+      "duration": 4.364,
+      "text": "these two coefficients. This one has the two parameters"
+    },
+    {
+      "index": 199,
+      "start": 802.909,
+      "end": 806.141,
+      "duration": 3.232,
+      "text": "in an altered form. Okay, well, I wanted,"
+    },
+    {
+      "index": 200,
+      "start": 806.141,
+      "end": 809.454,
+      "duration": 3.313,
+      "text": "because of the importance of this formula,"
+    },
+    {
+      "index": 201,
+      "start": 809.454,
+      "end": 814.141,
+      "duration": 4.687,
+      "text": "I wanted to take a couple of minutes out for a proof of the"
+    },
+    {
+      "index": 202,
+      "start": 814.141,
+      "end": 816.0,
+      "duration": 1.859,
+      "text": "formula, --"
+    },
+    {
+      "index": 203,
+      "start": 822.0,
+      "end": 826.449,
+      "duration": 4.449,
+      "text": "just to give you chance to stare at it a little more now."
+    },
+    {
+      "index": 204,
+      "start": 826.449,
+      "end": 830.371,
+      "duration": 3.922,
+      "text": "There are three proofs I know. I'm sure there are 27."
+    },
+    {
+      "index": 205,
+      "start": 830.371,
+      "end": 833.916,
+      "duration": 3.545,
+      "text": "The Pythagorean theorem now has several hundred."
+    },
+    {
+      "index": 206,
+      "start": 833.916,
+      "end": 836.405,
+      "duration": 2.489,
+      "text": "But, there are three basic proofs."
+    },
+    {
+      "index": 207,
+      "start": 836.405,
+      "end": 840.553,
+      "duration": 4.148,
+      "text": "There is the one I will not give you, I'll call the high"
+    },
+    {
+      "index": 208,
+      "start": 840.553,
+      "end": 843.418,
+      "duration": 2.865,
+      "text": "school proof, which is the only one one"
+    },
+    {
+      "index": 209,
+      "start": 843.418,
+      "end": 847.189,
+      "duration": 3.771,
+      "text": "normally finds in books, physics textbooks or other"
+    },
+    {
+      "index": 210,
+      "start": 847.189,
+      "end": 851.314,
+      "duration": 4.125,
+      "text": "textbooks. The high school proof takes the"
+    },
+    {
+      "index": 211,
+      "start": 851.314,
+      "end": 854.525,
+      "duration": 3.211,
+      "text": "right-hand side, applies the formula for the"
+    },
+    {
+      "index": 212,
+      "start": 854.525,
+      "end": 859.229,
+      "duration": 4.704,
+      "text": "cosine of the difference of two angles, which it assumes you had"
+    },
+    {
+      "index": 213,
+      "start": 859.229,
+      "end": 862.738,
+      "duration": 3.509,
+      "text": "in trigonometry, and then converts it into this."
+    },
+    {
+      "index": 214,
+      "start": 862.738,
+      "end": 867.144,
+      "duration": 4.406,
+      "text": "It shows you that once you've done that, that a turns out to"
+    },
+    {
+      "index": 215,
+      "start": 867.144,
+      "end": 871.549,
+      "duration": 4.405,
+      "text": "be c cosine phi and b, the number b is c sine"
+    },
+    {
+      "index": 216,
+      "start": 871.549,
+      "end": 875.282,
+      "duration": 3.733,
+      "text": "phi, and therefore it identifies the"
+    },
+    {
+      "index": 217,
+      "start": 875.282,
+      "end": 879.316,
+      "duration": 4.034,
+      "text": "two sides. Now, the thing that's of course"
+    },
+    {
+      "index": 218,
+      "start": 879.316,
+      "end": 882.827,
+      "duration": 3.511,
+      "text": "correct and it's the simplest possible argument,"
+    },
+    {
+      "index": 219,
+      "start": 882.827,
+      "end": 887.086,
+      "duration": 4.259,
+      "text": "the thing that's no good about it is that the direction at"
+    },
+    {
+      "index": 220,
+      "start": 887.086,
+      "end": 889.626,
+      "duration": 2.54,
+      "text": "which it goes is from here to here."
+    },
+    {
+      "index": 221,
+      "start": 889.626,
+      "end": 893.586,
+      "duration": 3.96,
+      "text": "Well, everybody knew that. If I gave you this and told"
+    },
+    {
+      "index": 222,
+      "start": 893.586,
+      "end": 896.948,
+      "duration": 3.362,
+      "text": "you, write it out in terms of cosine and sine,"
+    },
+    {
+      "index": 223,
+      "start": 896.948,
+      "end": 901.431,
+      "duration": 4.483,
+      "text": "I would assume it dearly hope that practically all of you can"
+    },
+    {
+      "index": 224,
+      "start": 901.431,
+      "end": 903.867,
+      "duration": 2.436,
+      "text": "do that. Unfortunately,"
+    },
+    {
+      "index": 225,
+      "start": 903.867,
+      "end": 907.275,
+      "duration": 3.408,
+      "text": "when you want to use the formula, it's this way you want"
+    },
+    {
+      "index": 226,
+      "start": 907.275,
+      "end": 909.444,
+      "duration": 2.169,
+      "text": "to use it in the opposite direction."
+    },
+    {
+      "index": 227,
+      "start": 909.444,
+      "end": 913.038,
+      "duration": 3.594,
+      "text": "You are starting with this, and want to convert it to that."
+    },
+    {
+      "index": 228,
+      "start": 913.038,
+      "end": 915.826,
+      "duration": 2.788,
+      "text": "Now, the proof, therefore, will not be of much"
+    },
+    {
+      "index": 229,
+      "start": 915.826,
+      "end": 917.871,
+      "duration": 2.045,
+      "text": "help. It requires you to go in the"
+    },
+    {
+      "index": 230,
+      "start": 917.871,
+      "end": 920.722,
+      "duration": 2.851,
+      "text": "backwards direction, and match up coefficients."
+    },
+    {
+      "index": 231,
+      "start": 920.722,
+      "end": 922.643,
+      "duration": 1.921,
+      "text": "It's much better to go forwards."
+    },
+    {
+      "index": 232,
+      "start": 922.643,
+      "end": 925.245,
+      "duration": 2.602,
+      "text": "Now, there are two proofs that go forwards."
+    },
+    {
+      "index": 233,
+      "start": 925.245,
+      "end": 928.467,
+      "duration": 3.222,
+      "text": "There's the 18.02 proof. Since I didn't teach most of"
+    },
+    {
+      "index": 234,
+      "start": 928.467,
+      "end": 932.0,
+      "duration": 3.533,
+      "text": "you 18.02, I can't be sure you had it."
+    },
+    {
+      "index": 235,
+      "start": 932.0,
+      "end": 936.578,
+      "duration": 4.578,
+      "text": "So, I'll spend one minute giving it to you."
+    },
+    {
+      "index": 236,
+      "start": 936.578,
+      "end": 942.248,
+      "duration": 5.67,
+      "text": "What is the 18.02 proof? It is the following picture."
+    },
+    {
+      "index": 237,
+      "start": 942.248,
+      "end": 946.609,
+      "duration": 4.361,
+      "text": "I think this requires deep colored chalk."
+    },
+    {
+      "index": 238,
+      "start": 946.609,
+      "end": 950.097,
+      "duration": 3.488,
+      "text": "This is going to be pretty heavy."
+    },
+    {
+      "index": 239,
+      "start": 950.097,
+      "end": 955.984,
+      "duration": 5.887,
+      "text": "All right, first of all, the a and the b are the given."
+    },
+    {
+      "index": 240,
+      "start": 955.984,
+      "end": 961.0,
+      "duration": 5.016,
+      "text": "So, I'm going to put in that vector."
+    },
+    {
+      "index": 241,
+      "start": 961.0,
+      "end": 965.732,
+      "duration": 4.732,
+      "text": "So, there is the vector whose sides are, whose components are"
+    },
+    {
+      "index": 242,
+      "start": 965.732,
+      "end": 968.809,
+      "duration": 3.077,
+      "text": "a and b. I'll write it without the i and"
+    },
+    {
+      "index": 243,
+      "start": 968.809,
+      "end": 971.096,
+      "duration": 2.287,
+      "text": "j. I hope you had from Jerison"
+    },
+    {
+      "index": 244,
+      "start": 971.096,
+      "end": 974.882,
+      "duration": 3.786,
+      "text": "that form for the vector, if you don't like that,"
+    },
+    {
+      "index": 245,
+      "start": 974.882,
+      "end": 977.564,
+      "duration": 2.682,
+      "text": "write ai plus bj, okay?"
+    },
+    {
+      "index": 246,
+      "start": 977.564,
+      "end": 980.877,
+      "duration": 3.313,
+      "text": "Now, there's another vector lurking around."
+    },
+    {
+      "index": 247,
+      "start": 980.877,
+      "end": 984.821,
+      "duration": 3.944,
+      "text": "It's the unit vector whose, I'll write it this way,"
+    },
+    {
+      "index": 248,
+      "start": 984.821,
+      "end": 989.554,
+      "duration": 4.733,
+      "text": "u because it's a unit vector, and theta to indicate that it's"
+    },
+    {
+      "index": 249,
+      "start": 989.554,
+      "end": 994.269,
+      "duration": 4.715,
+      "text": "angle is theta. Now, the reason for doing that"
+    },
+    {
+      "index": 250,
+      "start": 994.269,
+      "end": 998.657,
+      "duration": 4.388,
+      "text": "is because you see that the left-hand side is a dot product"
+    },
+    {
+      "index": 251,
+      "start": 998.657,
+      "end": 1001.683,
+      "duration": 3.026,
+      "text": "of two vectors. The left-hand side of the"
+    },
+    {
+      "index": 252,
+      "start": 1001.683,
+      "end": 1005.011,
+      "duration": 3.328,
+      "text": "identity is the dot product of the vector <a,"
+    },
+    {
+      "index": 253,
+      "start": 1005.011,
+      "end": 1009.172,
+      "duration": 4.161,
+      "text": "b> with the vector whose components are cosine theta and"
+    },
+    {
+      "index": 254,
+      "start": 1009.172,
+      "end": 1012.122,
+      "duration": 2.95,
+      "text": "sine theta."
+    },
+    {
+      "index": 255,
+      "start": 1012.122,
+      "end": 1015.148,
+      "duration": 3.026,
+      "text": "That's what I'm calling this unit vector."
+    },
+    {
+      "index": 256,
+      "start": 1015.148,
+      "end": 1019.536,
+      "duration": 4.388,
+      "text": "It's a unit vector because cosine squared plus sine squared"
+    },
+    {
+      "index": 257,
+      "start": 1019.536,
+      "end": 1024.0,
+      "duration": 4.464,
+      "text": "is one."
+    },
+    {
+      "index": 258,
+      "start": 1024.0,
+      "end": 1028.764,
+      "duration": 4.764,
+      "text": "Now, all this formula is, is saying that scalar product,"
+    },
+    {
+      "index": 259,
+      "start": 1028.764,
+      "end": 1033.962,
+      "duration": 5.198,
+      "text": "the dot product of those two vectors, can be evaluated if you"
+    },
+    {
+      "index": 260,
+      "start": 1033.962,
+      "end": 1038.987,
+      "duration": 5.025,
+      "text": "know their components by the left-hand side of the formula."
+    },
+    {
+      "index": 261,
+      "start": 1038.987,
+      "end": 1044.099,
+      "duration": 5.112,
+      "text": "And, if you don't know their components, it can be evaluated"
+    },
+    {
+      "index": 262,
+      "start": 1044.099,
+      "end": 1047.564,
+      "duration": 3.465,
+      "text": "in another way, the geometric evaluation,"
+    },
+    {
+      "index": 263,
+      "start": 1047.564,
+      "end": 1051.636,
+      "duration": 4.072,
+      "text": "which goes, what is it? It's a magnitude of one,"
+    },
+    {
+      "index": 264,
+      "start": 1051.636,
+      "end": 1056.487,
+      "duration": 4.851,
+      "text": "times the magnitude of the other, times the cosine of the"
+    },
+    {
+      "index": 265,
+      "start": 1056.487,
+      "end": 1062.859,
+      "duration": 6.372,
+      "text": "included angle. Now, what's the included angle?"
+    },
+    {
+      "index": 266,
+      "start": 1062.859,
+      "end": 1069.957,
+      "duration": 7.098,
+      "text": "Well, theta is this angle from the horizontal to that unit"
+    },
+    {
+      "index": 267,
+      "start": 1069.957,
+      "end": 1074.315,
+      "duration": 4.358,
+      "text": "vector. The angle phi is this angle,"
+    },
+    {
+      "index": 268,
+      "start": 1074.315,
+      "end": 1078.922,
+      "duration": 4.607,
+      "text": "from this picture here. And therefore,"
+    },
+    {
+      "index": 269,
+      "start": 1078.922,
+      "end": 1085.894,
+      "duration": 6.972,
+      "text": "the included angle between (u)theta and my pink vector is"
+    },
+    {
+      "index": 270,
+      "start": 1085.894,
+      "end": 1092.455,
+      "duration": 6.561,
+      "text": "theta minus phi. That's the formula."
+    },
+    {
+      "index": 271,
+      "start": 1092.455,
+      "end": 1096.67,
+      "duration": 4.215,
+      "text": "It comes from two ways of calculating the scalar product"
+    },
+    {
+      "index": 272,
+      "start": 1096.67,
+      "end": 1101.498,
+      "duration": 4.828,
+      "text": "of the vector whose coefficients are, and the unit vector"
+    },
+    {
+      "index": 273,
+      "start": 1101.498,
+      "end": 1105.099,
+      "duration": 3.601,
+      "text": "whose components are cosine theta and sine theta."
+    },
+    {
+      "index": 274,
+      "start": 1105.099,
+      "end": 1108.241,
+      "duration": 3.142,
+      "text": "All right, well,"
+    },
+    {
+      "index": 275,
+      "start": 1108.241,
+      "end": 1115.056,
+      "duration": 6.815,
+      "text": "you should, that was 18.02."
+    },
+    {
+      "index": 276,
+      "start": 1115.056,
+      "end": 1116.359,
+      "duration": 1.303,
+      "text": "There must be an 18.03 proof also. Yes."
+    },
+    {
+      "index": 277,
+      "start": 1116.359,
+      "end": 1123.747,
+      "duration": 7.388,
+      "text": "What's the 18.03 proof? The 18.03 proof uses complex"
+    },
+    {
+      "index": 278,
+      "start": 1123.747,
+      "end": 1126.934,
+      "duration": 3.187,
+      "text": "numbers. It says, look,"
+    },
+    {
+      "index": 279,
+      "start": 1126.934,
+      "end": 1133.742,
+      "duration": 6.808,
+      "text": "take the left side. Instead of viewing it as the"
+    },
+    {
+      "index": 280,
+      "start": 1133.742,
+      "end": 1142.0,
+      "duration": 8.258,
+      "text": "dot product of two vectors, there's another way."
+    },
+    {
+      "index": 281,
+      "start": 1142.0,
+      "end": 1146.765,
+      "duration": 4.765,
+      "text": "You can think of it as the part of the products of two complex"
+    },
+    {
+      "index": 282,
+      "start": 1146.765,
+      "end": 1149.187,
+      "duration": 2.422,
+      "text": "numbers. So, the 18.03 argument,"
+    },
+    {
+      "index": 283,
+      "start": 1149.187,
+      "end": 1152.312,
+      "duration": 3.125,
+      "text": "really, the complex number argument says,"
+    },
+    {
+      "index": 284,
+      "start": 1152.312,
+      "end": 1157.0,
+      "duration": 4.688,
+      "text": "look, multiply together a minus bi and the complex"
+    },
+    {
+      "index": 285,
+      "start": 1157.0,
+      "end": 1161.14,
+      "duration": 4.14,
+      "text": "number cosine theta plus i sine theta."
+    },
+    {
+      "index": 286,
+      "start": 1161.14,
+      "end": 1164.265,
+      "duration": 3.125,
+      "text": "There are different ways of"
+    },
+    {
+      "index": 287,
+      "start": 1164.265,
+      "end": 1168.875,
+      "duration": 4.61,
+      "text": "explaining why I want to put the minus i there instead of i."
+    },
+    {
+      "index": 288,
+      "start": 1168.875,
+      "end": 1173.718,
+      "duration": 4.843,
+      "text": "But, the simplest is because I want, when I take the real part,"
+    },
+    {
+      "index": 289,
+      "start": 1173.718,
+      "end": 1177.585,
+      "duration": 3.867,
+      "text": "to get the left-hand side. I will."
+    },
+    {
+      "index": 290,
+      "start": 1177.585,
+      "end": 1182.35,
+      "duration": 4.765,
+      "text": "If I take the real part of this, I'm going to get a cosine"
+    },
+    {
+      "index": 291,
+      "start": 1182.35,
+      "end": 1186.864,
+      "duration": 4.514,
+      "text": "theta plus b sine theta"
+    },
+    {
+      "index": 292,
+      "start": 1186.864,
+      "end": 1191.128,
+      "duration": 4.264,
+      "text": "because of negative i and i make one,"
+    },
+    {
+      "index": 293,
+      "start": 1191.128,
+      "end": 1195.392,
+      "duration": 4.264,
+      "text": "multiplied together. All right, that's the left-hand"
+    },
+    {
+      "index": 294,
+      "start": 1195.392,
+      "end": 1198.234,
+      "duration": 2.842,
+      "text": "side. And now, the right-hand side,"
+    },
+    {
+      "index": 295,
+      "start": 1198.234,
+      "end": 1203.0,
+      "duration": 4.766,
+      "text": "I'm going to use polar representation instead."
+    },
+    {
+      "index": 296,
+      "start": 1203.0,
+      "end": 1206.394,
+      "duration": 3.394,
+      "text": "What's the polar representation of this guy?"
+    },
+    {
+      "index": 297,
+      "start": 1206.394,
+      "end": 1209.157,
+      "duration": 2.763,
+      "text": "Well, if <a, b> has the angle theta,"
+    },
+    {
+      "index": 298,
+      "start": 1209.157,
+      "end": 1213.815,
+      "duration": 4.658,
+      "text": "then a negative b, a minus bi goes down"
+    },
+    {
+      "index": 299,
+      "start": 1213.815,
+      "end": 1216.421,
+      "duration": 2.606,
+      "text": "below. It has the angle minus phi."
+    },
+    {
+      "index": 300,
+      "start": 1216.421,
+      "end": 1218.473,
+      "duration": 2.052,
+      "text": "So, this is, has magnitude."
+    },
+    {
+      "index": 301,
+      "start": 1218.473,
+      "end": 1223.052,
+      "duration": 4.579,
+      "text": "It is polar representation. Its magnitude is a squared plus"
+    },
+    {
+      "index": 302,
+      "start": 1223.052,
+      "end": 1227.315,
+      "duration": 4.263,
+      "text": "b squared, and its angle is negative phi,"
+    },
+    {
+      "index": 303,
+      "start": 1227.315,
+      "end": 1232.131,
+      "duration": 4.816,
+      "text": "not positive phi because this a minus bi goes below"
+    },
+    {
+      "index": 304,
+      "start": 1232.131,
+      "end": 1236.0,
+      "duration": 3.869,
+      "text": "the axis if a and b are positive."
+    },
+    {
+      "index": 305,
+      "start": 1236.0,
+      "end": 1239.246,
+      "duration": 3.246,
+      "text": "So, it's e to the minus i phi."
+    },
+    {
+      "index": 306,
+      "start": 1239.246,
+      "end": 1243.01,
+      "duration": 3.764,
+      "text": "That's the first guy. And, how about the second guy?"
+    },
+    {
+      "index": 307,
+      "start": 1243.01,
+      "end": 1247.142,
+      "duration": 4.132,
+      "text": "Well, the second guy is e to the i theta."
+    },
+    {
+      "index": 308,
+      "start": 1247.142,
+      "end": 1251.127,
+      "duration": 3.985,
+      "text": "So, what's the product? It is a squared plus b squared,"
+    },
+    {
+      "index": 309,
+      "start": 1251.127,
+      "end": 1254.447,
+      "duration": 3.32,
+      "text": "the square root, times e to the i times (theta"
+    },
+    {
+      "index": 310,
+      "start": 1254.447,
+      "end": 1258.137,
+      "duration": 3.69,
+      "text": "minus phi)."
+    },
+    {
+      "index": 311,
+      "start": 1258.137,
+      "end": 1261.531,
+      "duration": 3.394,
+      "text": "And now, what do I want? The real part of this,"
+    },
+    {
+      "index": 312,
+      "start": 1261.531,
+      "end": 1265.0,
+      "duration": 3.469,
+      "text": "and I want the real part of this."
+    },
+    {
+      "index": 313,
+      "start": 1265.0,
+      "end": 1268.321,
+      "duration": 3.321,
+      "text": "So, let's just say take the real parts of both sides."
+    },
+    {
+      "index": 314,
+      "start": 1268.321,
+      "end": 1271.196,
+      "duration": 2.875,
+      "text": "If I take the real part of the left-hand side,"
+    },
+    {
+      "index": 315,
+      "start": 1271.196,
+      "end": 1274.773,
+      "duration": 3.577,
+      "text": "I get a cosine theta plus b sine theta."
+    },
+    {
+      "index": 316,
+      "start": 1274.773,
+      "end": 1277.457,
+      "duration": 2.684,
+      "text": "If I take a real part of this"
+    },
+    {
+      "index": 317,
+      "start": 1277.457,
+      "end": 1281.226,
+      "duration": 3.769,
+      "text": "side, I get square root of a squared plus b squared times e,"
+    },
+    {
+      "index": 318,
+      "start": 1281.226,
+      "end": 1283.653,
+      "duration": 2.427,
+      "text": "times the cosine, that's the real part,"
+    },
+    {
+      "index": 319,
+      "start": 1283.653,
+      "end": 1286.783,
+      "duration": 3.13,
+      "text": "right, of theta minus phi, which is just what it's"
+    },
+    {
+      "index": 320,
+      "start": 1286.783,
+      "end": 1291.0,
+      "duration": 4.217,
+      "text": "supposed to be."
+    },
+    {
+      "index": 321,
+      "start": 1291.0,
+      "end": 1295.941,
+      "duration": 4.941,
+      "text": "Well, with three different arguments, I'm really pounding"
+    },
+    {
+      "index": 322,
+      "start": 1295.941,
+      "end": 1300.882,
+      "duration": 4.941,
+      "text": "the table on this formula. But, I think there's something"
+    },
+    {
+      "index": 323,
+      "start": 1300.882,
+      "end": 1304.323,
+      "duration": 3.441,
+      "text": "to be learned from at least two of them."
+    },
+    {
+      "index": 324,
+      "start": 1304.323,
+      "end": 1307.5,
+      "duration": 3.177,
+      "text": "And, you know, I'm still, for awhile,"
+    },
+    {
+      "index": 325,
+      "start": 1307.5,
+      "end": 1311.647,
+      "duration": 4.147,
+      "text": "I will never miss an opportunity to bang complex"
+    },
+    {
+      "index": 326,
+      "start": 1311.647,
+      "end": 1315.617,
+      "duration": 3.97,
+      "text": "numbers into your head because, in some sense,"
+    },
+    {
+      "index": 327,
+      "start": 1315.617,
+      "end": 1321.0,
+      "duration": 5.383,
+      "text": "you have to reproduce the experience of the race."
+    },
+    {
+      "index": 328,
+      "start": 1321.0,
+      "end": 1324.54,
+      "duration": 3.54,
+      "text": "As I mentioned in the notes, it took mathematicians 300 or"
+    },
+    {
+      "index": 329,
+      "start": 1324.54,
+      "end": 1327.024,
+      "duration": 2.484,
+      "text": "400 years to get used to complex numbers."
+    },
+    {
+      "index": 330,
+      "start": 1327.024,
+      "end": 1331.0,
+      "duration": 3.976,
+      "text": "So, if it takes you three or four weeks, that's not too bad."
+    },
+    {
+      "index": 331,
+      "start": 1352.0,
+      "end": 1356.395,
+      "duration": 4.395,
+      "text": "Now, for the rest of the period I'd like to go back to the"
+    },
+    {
+      "index": 332,
+      "start": 1356.395,
+      "end": 1360.096,
+      "duration": 3.701,
+      "text": "linear equations, and try to put into perspective"
+    },
+    {
+      "index": 333,
+      "start": 1360.096,
+      "end": 1363.566,
+      "duration": 3.47,
+      "text": "and summarize, and tell you a couple of things"
+    },
+    {
+      "index": 334,
+      "start": 1363.566,
+      "end": 1366.573,
+      "duration": 3.007,
+      "text": "which I had to leave out, but which are,"
+    },
+    {
+      "index": 335,
+      "start": 1366.573,
+      "end": 1368.963,
+      "duration": 2.39,
+      "text": "in my view, extremely important."
+    },
+    {
+      "index": 336,
+      "start": 1368.963,
+      "end": 1372.433,
+      "duration": 3.47,
+      "text": "And, up to now, I don't want to leave you with"
+    },
+    {
+      "index": 337,
+      "start": 1372.433,
+      "end": 1376.443,
+      "duration": 4.01,
+      "text": "any misapprehensions. So, I'm going to summarize this"
+    },
+    {
+      "index": 338,
+      "start": 1376.443,
+      "end": 1381.224,
+      "duration": 4.781,
+      "text": "way, whereas last lecture I went from the most general equation"
+    },
+    {
+      "index": 339,
+      "start": 1381.224,
+      "end": 1386.391,
+      "duration": 5.167,
+      "text": "to the most special. I'd like to just write them"
+    },
+    {
+      "index": 340,
+      "start": 1386.391,
+      "end": 1389.048,
+      "duration": 2.657,
+      "text": "down in the reverse order, now."
+    },
+    {
+      "index": 341,
+      "start": 1389.048,
+      "end": 1393.212,
+      "duration": 4.164,
+      "text": "So, we are talking about basic linear equations."
+    },
+    {
+      "index": 342,
+      "start": 1393.212,
+      "end": 1396.932,
+      "duration": 3.72,
+      "text": "First order, of course, we haven't moved as"
+    },
+    {
+      "index": 343,
+      "start": 1396.932,
+      "end": 1400.829,
+      "duration": 3.897,
+      "text": "a second order yet. So, the most special one,"
+    },
+    {
+      "index": 344,
+      "start": 1400.829,
+      "end": 1405.967,
+      "duration": 5.138,
+      "text": "and the one we talked about essentially all of the previous"
+    },
+    {
+      "index": 345,
+      "start": 1405.967,
+      "end": 1410.927,
+      "duration": 4.96,
+      "text": "two times, or last Friday, anyway, was the equation where"
+    },
+    {
+      "index": 346,
+      "start": 1410.927,
+      "end": 1414.47,
+      "duration": 3.543,
+      "text": "the k, the coefficient of y, is constant,"
+    },
+    {
+      "index": 347,
+      "start": 1414.47,
+      "end": 1419.165,
+      "duration": 4.695,
+      "text": "and where you also get it on the right-hand side quite"
+    },
+    {
+      "index": 348,
+      "start": 1419.165,
+      "end": 1424.142,
+      "duration": 4.977,
+      "text": "providentially. So, this is the most special"
+    },
+    {
+      "index": 349,
+      "start": 1424.142,
+      "end": 1428.505,
+      "duration": 4.363,
+      "text": "form, and it's the one which governed what I will call the"
+    },
+    {
+      "index": 350,
+      "start": 1428.505,
+      "end": 1433.25,
+      "duration": 4.745,
+      "text": "temperature-concentration model, or if you want to be grown up,"
+    },
+    {
+      "index": 351,
+      "start": 1433.25,
+      "end": 1437.612,
+      "duration": 4.362,
+      "text": "the conduction-diffusion model, conduction-diffusion which"
+    },
+    {
+      "index": 352,
+      "start": 1437.612,
+      "end": 1441.821,
+      "duration": 4.209,
+      "text": "describes the processes, which the equation is modeling,"
+    },
+    {
+      "index": 353,
+      "start": 1441.821,
+      "end": 1445.954,
+      "duration": 4.133,
+      "text": "whereas these simply described the variables of things,"
+    },
+    {
+      "index": 354,
+      "start": 1445.954,
+      "end": 1450.316,
+      "duration": 4.362,
+      "text": "which you usually are trying to calculate when you use the"
+    },
+    {
+      "index": 355,
+      "start": 1450.316,
+      "end": 1453.757,
+      "duration": 3.441,
+      "text": "equation. Now, there are a class of"
+    },
+    {
+      "index": 356,
+      "start": 1453.757,
+      "end": 1457.625,
+      "duration": 3.868,
+      "text": "things where the thing is constant, but where the k does"
+    },
+    {
+      "index": 357,
+      "start": 1457.625,
+      "end": 1460.648,
+      "duration": 3.023,
+      "text": "not appear naturally on the right hand side."
+    },
+    {
+      "index": 358,
+      "start": 1460.648,
+      "end": 1464.937,
+      "duration": 4.289,
+      "text": "And, you're going to encounter them pretty quickly in physics,"
+    },
+    {
+      "index": 359,
+      "start": 1464.937,
+      "end": 1467.96,
+      "duration": 3.023,
+      "text": "for one place. So, I better not try to sweep"
+    },
+    {
+      "index": 360,
+      "start": 1467.96,
+      "end": 1472.738,
+      "duration": 4.778,
+      "text": "those under the rug. Let's just call that q of t."
+    },
+    {
+      "index": 361,
+      "start": 1472.738,
+      "end": 1476.943,
+      "duration": 4.205,
+      "text": "And finally, there is the most general case,"
+    },
+    {
+      "index": 362,
+      "start": 1476.943,
+      "end": 1480.463,
+      "duration": 3.52,
+      "text": "where you allow k to be non-constant."
+    },
+    {
+      "index": 363,
+      "start": 1480.463,
+      "end": 1485.842,
+      "duration": 5.379,
+      "text": "That's the one we began, when we talked about the linear"
+    },
+    {
+      "index": 364,
+      "start": 1485.842,
+      "end": 1489.753,
+      "duration": 3.911,
+      "text": "equation. And you know how to solve it in"
+    },
+    {
+      "index": 365,
+      "start": 1489.753,
+      "end": 1494.35,
+      "duration": 4.597,
+      "text": "general by a definite or an indefinite integral."
+    },
+    {
+      "index": 366,
+      "start": 1494.35,
+      "end": 1501.0,
+      "duration": 6.65,
+      "text": "Now, there's one other thing, which I want to talk about."
+    },
+    {
+      "index": 367,
+      "start": 1501.0,
+      "end": 1503.727,
+      "duration": 2.727,
+      "text": "I will do all these in a certain order."
+    },
+    {
+      "index": 368,
+      "start": 1503.727,
+      "end": 1507.46,
+      "duration": 3.733,
+      "text": "But, from the beginning, you should keep in mind that"
+    },
+    {
+      "index": 369,
+      "start": 1507.46,
+      "end": 1510.547,
+      "duration": 3.087,
+      "text": "there's another between the first two cases."
+    },
+    {
+      "index": 370,
+      "start": 1510.547,
+      "end": 1514.351,
+      "duration": 3.804,
+      "text": "Between the first two cases, there's another extremely"
+    },
+    {
+      "index": 371,
+      "start": 1514.351,
+      "end": 1518.084,
+      "duration": 3.733,
+      "text": "important distinction, and that is as to whether k is"
+    },
+    {
+      "index": 372,
+      "start": 1518.084,
+      "end": 1521.314,
+      "duration": 3.23,
+      "text": "positive or not. Up to now, we've always had k"
+    },
+    {
+      "index": 373,
+      "start": 1521.314,
+      "end": 1524.759,
+      "duration": 3.445,
+      "text": "positive. So, I'm going to put that here."
+    },
+    {
+      "index": 374,
+      "start": 1524.759,
+      "end": 1530.0,
+      "duration": 5.241,
+      "text": "So, it's understood when I write these, that k is positive."
+    },
+    {
+      "index": 375,
+      "start": 1530.0,
+      "end": 1532.291,
+      "duration": 2.291,
+      "text": "I want to talk about that, too."
+    },
+    {
+      "index": 376,
+      "start": 1532.291,
+      "end": 1536.415,
+      "duration": 4.124,
+      "text": "But, first things first. The first thing I wanted to do"
+    },
+    {
+      "index": 377,
+      "start": 1536.415,
+      "end": 1539.546,
+      "duration": 3.131,
+      "text": "was to show you that this, the first case,"
+    },
+    {
+      "index": 378,
+      "start": 1539.546,
+      "end": 1543.365,
+      "duration": 3.819,
+      "text": "the most special case, does not just apply to this."
+    },
+    {
+      "index": 379,
+      "start": 1543.365,
+      "end": 1545.732,
+      "duration": 2.367,
+      "text": "It applies to other things, too."
+    },
+    {
+      "index": 380,
+      "start": 1545.732,
+      "end": 1548.176,
+      "duration": 2.444,
+      "text": "Let me give you a mixing problem."
+    },
+    {
+      "index": 381,
+      "start": 1548.176,
+      "end": 1551.842,
+      "duration": 3.666,
+      "text": "The typical mixing problem gives another example."
+    },
+    {
+      "index": 382,
+      "start": 1551.842,
+      "end": 1555.89,
+      "duration": 4.048,
+      "text": "You've already done in recitation, and you did one for"
+    },
+    {
+      "index": 383,
+      "start": 1555.89,
+      "end": 1559.25,
+      "duration": 3.36,
+      "text": "the problem set, the problem of the two rooms"
+    },
+    {
+      "index": 384,
+      "start": 1559.25,
+      "end": 1564.114,
+      "duration": 4.864,
+      "text": "filled with smoke. But, let me do it just using"
+    },
+    {
+      "index": 385,
+      "start": 1564.114,
+      "end": 1568.494,
+      "duration": 4.38,
+      "text": "letters, so that the ideas stand out a little more clearly,"
+    },
+    {
+      "index": 386,
+      "start": 1568.494,
+      "end": 1571.817,
+      "duration": 3.323,
+      "text": "and you are not preoccupied with the numbers,"
+    },
+    {
+      "index": 387,
+      "start": 1571.817,
+      "end": 1575.593,
+      "duration": 3.776,
+      "text": "and calculating with the numbers, and trying to get"
+    },
+    {
+      "index": 388,
+      "start": 1575.593,
+      "end": 1579.067,
+      "duration": 3.474,
+      "text": "numerical examples. So, it's as simple as k sub"
+    },
+    {
+      "index": 389,
+      "start": 1579.067,
+      "end": 1581.031,
+      "duration": 1.964,
+      "text": "mixing. It looks like this."
+    },
+    {
+      "index": 390,
+      "start": 1581.031,
+      "end": 1583.825,
+      "duration": 2.794,
+      "text": "You have a tank, a room, I don't know,"
+    },
+    {
+      "index": 391,
+      "start": 1583.825,
+      "end": 1586.468,
+      "duration": 2.643,
+      "text": "where everything's getting mixed in."
+    },
+    {
+      "index": 392,
+      "start": 1586.468,
+      "end": 1591.0,
+      "duration": 4.532,
+      "text": "It has a certain volume, which I will call v."
+    },
+    {
+      "index": 393,
+      "start": 1591.0,
+      "end": 1594.909,
+      "duration": 3.909,
+      "text": "Something is flowing in, a gas or a liquid."
+    },
+    {
+      "index": 394,
+      "start": 1594.909,
+      "end": 1598.911,
+      "duration": 4.002,
+      "text": "And, r will be the flow rate, in some units."
+    },
+    {
+      "index": 395,
+      "start": 1598.911,
+      "end": 1604.123,
+      "duration": 5.212,
+      "text": "Now, since it can't pile up inside this sealed container,"
+    },
+    {
+      "index": 396,
+      "start": 1604.123,
+      "end": 1609.056,
+      "duration": 4.933,
+      "text": "which I'm sure is full, the flow rate out must also be"
+    },
+    {
+      "index": 397,
+      "start": 1609.056,
+      "end": 1611.941,
+      "duration": 2.885,
+      "text": "r. And, what we're interested in"
+    },
+    {
+      "index": 398,
+      "start": 1611.941,
+      "end": 1616.781,
+      "duration": 4.84,
+      "text": "is the amount of salt. So, x, let's suppose these are"
+    },
+    {
+      "index": 399,
+      "start": 1616.781,
+      "end": 1622.551,
+      "duration": 5.77,
+      "text": "fluid flows, and the dissolved substance that I'm talking about"
+    },
+    {
+      "index": 400,
+      "start": 1622.551,
+      "end": 1626.926,
+      "duration": 4.375,
+      "text": "is not carbon monoxide, it's salt, any dissolved"
+    },
+    {
+      "index": 401,
+      "start": 1626.926,
+      "end": 1634.0,
+      "duration": 7.074,
+      "text": "substance, some pollutant or whatever the problem calls for."
+    },
+    {
+      "index": 402,
+      "start": 1634.0,
+      "end": 1640.806,
+      "duration": 6.806,
+      "text": "Let's use salt. So, it's the amount of salt in"
+    },
+    {
+      "index": 403,
+      "start": 1640.806,
+      "end": 1648.067,
+      "duration": 7.261,
+      "text": "the tank at time t. I'm interested in knowing how"
+    },
+    {
+      "index": 404,
+      "start": 1648.067,
+      "end": 1654.056,
+      "duration": 5.989,
+      "text": "that varies with time. Now, there's nothing to be said"
+    },
+    {
+      "index": 405,
+      "start": 1654.056,
+      "end": 1656.578,
+      "duration": 2.522,
+      "text": "about how it flows out. What flows out,"
+    },
+    {
+      "index": 406,
+      "start": 1656.578,
+      "end": 1659.497,
+      "duration": 2.919,
+      "text": "of course, is what happens to be in the tank."
+    },
+    {
+      "index": 407,
+      "start": 1659.497,
+      "end": 1661.819,
+      "duration": 2.322,
+      "text": "But, I do have to say what flows in."
+    },
+    {
+      "index": 408,
+      "start": 1661.819,
+      "end": 1666.0,
+      "duration": 4.181,
+      "text": "Now, the only convenient way to describe the in-flow is in terms"
+    },
+    {
+      "index": 409,
+      "start": 1666.0,
+      "end": 1669.317,
+      "duration": 3.317,
+      "text": "of its concentration. The salt will be dissolved in"
+    },
+    {
+      "index": 410,
+      "start": 1669.317,
+      "end": 1672.701,
+      "duration": 3.384,
+      "text": "the in-flowing water, and so there will be a certain"
+    },
+    {
+      "index": 411,
+      "start": 1672.701,
+      "end": 1675.023,
+      "duration": 2.322,
+      "text": "concentration. And, as you will see,"
+    },
+    {
+      "index": 412,
+      "start": 1675.023,
+      "end": 1678.075,
+      "duration": 3.052,
+      "text": "for a secret reason, I'm going to give that the"
+    },
+    {
+      "index": 413,
+      "start": 1678.075,
+      "end": 1682.612,
+      "duration": 4.537,
+      "text": "subscript e. So, e is the concentration of"
+    },
+    {
+      "index": 414,
+      "start": 1682.612,
+      "end": 1685.585,
+      "duration": 2.973,
+      "text": "the incoming salt, in other words,"
+    },
+    {
+      "index": 415,
+      "start": 1685.585,
+      "end": 1689.279,
+      "duration": 3.694,
+      "text": "in the fluid, how many grams are there per"
+    },
+    {
+      "index": 416,
+      "start": 1689.279,
+      "end": 1693.243,
+      "duration": 3.964,
+      "text": "liter in the incoming fluid. That's the data."
+    },
+    {
+      "index": 417,
+      "start": 1693.243,
+      "end": 1697.117,
+      "duration": 3.874,
+      "text": "So, this is the data. r is part of the data."
+    },
+    {
+      "index": 418,
+      "start": 1697.117,
+      "end": 1700.27,
+      "duration": 3.153,
+      "text": "r is the flow rate. v is the volume."
+    },
+    {
+      "index": 419,
+      "start": 1700.27,
+      "end": 1705.855,
+      "duration": 5.585,
+      "text": "I think I won't bother writing that down, and the problem is to"
+    },
+    {
+      "index": 420,
+      "start": 1705.855,
+      "end": 1710.0,
+      "duration": 4.145,
+      "text": "determine what happens to x of t."
+    },
+    {
+      "index": 421,
+      "start": 1710.0,
+      "end": 1714.603,
+      "duration": 4.603,
+      "text": "Now, I strongly recommend you not attempt to work directly"
+    },
+    {
+      "index": 422,
+      "start": 1714.603,
+      "end": 1719.529,
+      "duration": 4.926,
+      "text": "with the concentrations unless you feel you have a really good"
+    },
+    {
+      "index": 423,
+      "start": 1719.529,
+      "end": 1722.356,
+      "duration": 2.827,
+      "text": "physical feeling for concentrations."
+    },
+    {
+      "index": 424,
+      "start": 1722.356,
+      "end": 1726.959,
+      "duration": 4.603,
+      "text": "I strongly recommend you work with a variable that you are"
+    },
+    {
+      "index": 425,
+      "start": 1726.959,
+      "end": 1729.947,
+      "duration": 2.988,
+      "text": "given, namely, the dependent variable,"
+    },
+    {
+      "index": 426,
+      "start": 1729.947,
+      "end": 1732.693,
+      "duration": 2.746,
+      "text": "which is the amount of salt, grams."
+    },
+    {
+      "index": 427,
+      "start": 1732.693,
+      "end": 1737.458,
+      "duration": 4.765,
+      "text": "Well, because it's something you can physically think about."
+    },
+    {
+      "index": 428,
+      "start": 1737.458,
+      "end": 1740.446,
+      "duration": 2.988,
+      "text": "It's coming in, it's getting mixed up,"
+    },
+    {
+      "index": 429,
+      "start": 1740.446,
+      "end": 1748.815,
+      "duration": 8.369,
+      "text": "and some of it is going out. So, the basic equation is going"
+    },
+    {
+      "index": 430,
+      "start": 1748.815,
+      "end": 1758.601,
+      "duration": 9.786,
+      "text": "to be that the rate of change of salt in the tank is the rate of"
+    },
+    {
+      "index": 431,
+      "start": 1758.601,
+      "end": 1767.922,
+      "duration": 9.321,
+      "text": "salt inflow, let me write salt inflow, minus the rate of salt"
+    },
+    {
+      "index": 432,
+      "start": 1767.922,
+      "end": 1773.203,
+      "duration": 5.281,
+      "text": "outflow. Okay, at what rate is salt"
+    },
+    {
+      "index": 433,
+      "start": 1773.203,
+      "end": 1779.17,
+      "duration": 5.967,
+      "text": "flowing in? Well, the flow rate is the flow"
+    },
+    {
+      "index": 434,
+      "start": 1779.17,
+      "end": 1783.67,
+      "duration": 4.5,
+      "text": "rate of the liquid. I multiply the flow rate,"
+    },
+    {
+      "index": 435,
+      "start": 1783.67,
+      "end": 1787.556,
+      "duration": 3.886,
+      "text": "1 L per minute times the concentration,"
+    },
+    {
+      "index": 436,
+      "start": 1787.556,
+      "end": 1791.647,
+      "duration": 4.091,
+      "text": "3 g per liter. That means 3 g per minute."
+    },
+    {
+      "index": 437,
+      "start": 1791.647,
+      "end": 1796.352,
+      "duration": 4.705,
+      "text": "It's going to be, therefore, the product of the"
+    },
+    {
+      "index": 438,
+      "start": 1796.352,
+      "end": 1803.0,
+      "duration": 6.648,
+      "text": "flow rate and the concentration, incoming concentration."
+    },
+    {
+      "index": 439,
+      "start": 1803.0,
+      "end": 1805.798,
+      "duration": 2.798,
+      "text": "How about the rate of the salt outflow?"
+    },
+    {
+      "index": 440,
+      "start": 1805.798,
+      "end": 1808.892,
+      "duration": 3.094,
+      "text": "Well, again, the rate of the liquid outflow"
+    },
+    {
+      "index": 441,
+      "start": 1808.892,
+      "end": 1811.47,
+      "duration": 2.578,
+      "text": "is r. And, what is the concentration"
+    },
+    {
+      "index": 442,
+      "start": 1811.47,
+      "end": 1815.373,
+      "duration": 3.903,
+      "text": "of salt in the outflow? I must use, when you talk flow"
+    },
+    {
+      "index": 443,
+      "start": 1815.373,
+      "end": 1818.983,
+      "duration": 3.61,
+      "text": "rates, the other factor must be the concentration,"
+    },
+    {
+      "index": 444,
+      "start": 1818.983,
+      "end": 1822.223,
+      "duration": 3.24,
+      "text": "not the amount. So, what is the concentration"
+    },
+    {
+      "index": 445,
+      "start": 1822.223,
+      "end": 1825.464,
+      "duration": 3.241,
+      "text": "in the outflow? Well, it's the amount of salt"
+    },
+    {
+      "index": 446,
+      "start": 1825.464,
+      "end": 1829.0,
+      "duration": 3.536,
+      "text": "in the tank divided by its volume."
+    },
+    {
+      "index": 447,
+      "start": 1829.0,
+      "end": 1832.828,
+      "duration": 3.828,
+      "text": "So, the analog, the concentration here is x"
+    },
+    {
+      "index": 448,
+      "start": 1832.828,
+      "end": 1836.475,
+      "duration": 3.647,
+      "text": "divided by v. Now, here's a typical messy"
+    },
+    {
+      "index": 449,
+      "start": 1836.475,
+      "end": 1840.941,
+      "duration": 4.466,
+      "text": "equation, dx / dt, let's write it in the standard,"
+    },
+    {
+      "index": 450,
+      "start": 1840.941,
+      "end": 1844.77,
+      "duration": 3.829,
+      "text": "linear form, plus r times x over v equals r"
+    },
+    {
+      "index": 451,
+      "start": 1844.77,
+      "end": 1850.058,
+      "duration": 5.288,
+      "text": "times the given concentration, which is a function of time."
+    },
+    {
+      "index": 452,
+      "start": 1850.058,
+      "end": 1854.069,
+      "duration": 4.011,
+      "text": "Now, this is going to be some given function,"
+    },
+    {
+      "index": 453,
+      "start": 1854.069,
+      "end": 1859.265,
+      "duration": 5.196,
+      "text": "and there will be no reason whatsoever why you can't solve"
+    },
+    {
+      "index": 454,
+      "start": 1859.265,
+      "end": 1864.014,
+      "duration": 4.749,
+      "text": "it in that form. And, that's normally what you"
+    },
+    {
+      "index": 455,
+      "start": 1864.014,
+      "end": 1865.404,
+      "duration": 1.39,
+      "text": "will do. Nonetheless,"
+    },
+    {
+      "index": 456,
+      "start": 1865.404,
+      "end": 1869.155,
+      "duration": 3.751,
+      "text": "in trying to understand how it fits into this paradigm,"
+    },
+    {
+      "index": 457,
+      "start": 1869.155,
+      "end": 1872.837,
+      "duration": 3.682,
+      "text": "which kind of equation is it? Well, clearly there's an"
+    },
+    {
+      "index": 458,
+      "start": 1872.837,
+      "end": 1875.755,
+      "duration": 2.918,
+      "text": "awkwardness in that on the right-hand side,"
+    },
+    {
+      "index": 459,
+      "start": 1875.755,
+      "end": 1879.09,
+      "duration": 3.335,
+      "text": "we have concentration, and on the left-hand side,"
+    },
+    {
+      "index": 460,
+      "start": 1879.09,
+      "end": 1882.842,
+      "duration": 3.752,
+      "text": "we seem to have amounts. Now, the way to understand the"
+    },
+    {
+      "index": 461,
+      "start": 1882.842,
+      "end": 1886.176,
+      "duration": 3.334,
+      "text": "equation as opposed to the way to solve it, well,"
+    },
+    {
+      "index": 462,
+      "start": 1886.176,
+      "end": 1888.677,
+      "duration": 2.501,
+      "text": "it's a step on the way to solving it."
+    },
+    {
+      "index": 463,
+      "start": 1888.677,
+      "end": 1892.012,
+      "duration": 3.335,
+      "text": "But, I emphasize, you can and normally will solve"
+    },
+    {
+      "index": 464,
+      "start": 1892.012,
+      "end": 1896.746,
+      "duration": 4.734,
+      "text": "it in exactly that form. But, to understand what's"
+    },
+    {
+      "index": 465,
+      "start": 1896.746,
+      "end": 1900.031,
+      "duration": 3.285,
+      "text": "happening, it's better to express it in terms of"
+    },
+    {
+      "index": 466,
+      "start": 1900.031,
+      "end": 1903.734,
+      "duration": 3.703,
+      "text": "concentration entirely, and that's why it's called the"
+    },
+    {
+      "index": 467,
+      "start": 1903.734,
+      "end": 1905.901,
+      "duration": 2.167,
+      "text": "concentration, or the diffusion,"
+    },
+    {
+      "index": 468,
+      "start": 1905.901,
+      "end": 1908.137,
+      "duration": 2.236,
+      "text": "concentration-diffusion equation."
+    },
+    {
+      "index": 469,
+      "start": 1908.137,
+      "end": 1911.421,
+      "duration": 3.284,
+      "text": "So, I'm going to convert this to concentrations."
+    },
+    {
+      "index": 470,
+      "start": 1911.421,
+      "end": 1915.474,
+      "duration": 4.053,
+      "text": "Now, there's no problem here. x over v is the concentration"
+    },
+    {
+      "index": 471,
+      "start": 1915.474,
+      "end": 1917.78,
+      "duration": 2.306,
+      "text": "in the tank. And now, immediately,"
+    },
+    {
+      "index": 472,
+      "start": 1917.78,
+      "end": 1920.575,
+      "duration": 2.795,
+      "text": "you see, hey, it looks like it's going to"
+    },
+    {
+      "index": 473,
+      "start": 1920.575,
+      "end": 1926.003,
+      "duration": 5.428,
+      "text": "come out just in the first form. But, wait a minute."
+    },
+    {
+      "index": 474,
+      "start": 1926.003,
+      "end": 1930.01,
+      "duration": 4.007,
+      "text": "How about the x? How do I convert that?"
+    },
+    {
+      "index": 475,
+      "start": 1930.01,
+      "end": 1933.701,
+      "duration": 3.691,
+      "text": "Well, what's the relation between x?"
+    },
+    {
+      "index": 476,
+      "start": 1933.701,
+      "end": 1939.712,
+      "duration": 6.011,
+      "text": "So, if the concentration in the tank is equal to x over v,"
+    },
+    {
+      "index": 477,
+      "start": 1939.712,
+      "end": 1945.618,
+      "duration": 5.906,
+      "text": "so the tank concentration, then x is equal to C times the"
+    },
+    {
+      "index": 478,
+      "start": 1945.618,
+      "end": 1951.523,
+      "duration": 5.905,
+      "text": "constant, V, and dx / dt, therefore, will be c times dC /"
+    },
+    {
+      "index": 479,
+      "start": 1951.523,
+      "end": 1954.487,
+      "duration": 2.964,
+      "text": "dt. You see that?"
+    },
+    {
+      "index": 480,
+      "start": 1954.487,
+      "end": 1958.148,
+      "duration": 3.661,
+      "text": "Now, that's not in standard form."
+    },
+    {
+      "index": 481,
+      "start": 1958.148,
+      "end": 1964.669,
+      "duration": 6.521,
+      "text": "Let's put it in standard form. To put it in standard form,"
+    },
+    {
+      "index": 482,
+      "start": 1964.669,
+      "end": 1971.076,
+      "duration": 6.407,
+      "text": "I see, now, that it's not r that's the critical quantity."
+    },
+    {
+      "index": 483,
+      "start": 1971.076,
+      "end": 1975.309,
+      "duration": 4.233,
+      "text": "It's r divided by v. So, it's dC / dt,"
+    },
+    {
+      "index": 484,
+      "start": 1975.309,
+      "end": 1980.0,
+      "duration": 4.691,
+      "text": "C prime, plus r divided by v, --"
+    },
+    {
+      "index": 485,
+      "start": 1980.0,
+      "end": 1984.281,
+      "duration": 4.281,
+      "text": "I'm going to call that k, k C, no let's not,"
+    },
+    {
+      "index": 486,
+      "start": 1984.281,
+      "end": 1989.772,
+      "duration": 5.491,
+      "text": "r divided by v is equal to r divided by v times Ce."
+    },
+    {
+      "index": 487,
+      "start": 1989.772,
+      "end": 1994.24,
+      "duration": 4.468,
+      "text": "That's the equation expressed"
+    },
+    {
+      "index": 488,
+      "start": 1994.24,
+      "end": 1998.8,
+      "duration": 4.56,
+      "text": "in a form where the concentration is the dependent"
+    },
+    {
+      "index": 489,
+      "start": 1998.8,
+      "end": 2003.175,
+      "duration": 4.375,
+      "text": "variable, rather than the amount of salt itself."
+    },
+    {
+      "index": 490,
+      "start": 2003.175,
+      "end": 2007.829,
+      "duration": 4.654,
+      "text": "And, you can see it falls exactly in this category."
+    },
+    {
+      "index": 491,
+      "start": 2007.829,
+      "end": 2011.086,
+      "duration": 3.257,
+      "text": "That means that I can talk about it."
+    },
+    {
+      "index": 492,
+      "start": 2011.086,
+      "end": 2016.484,
+      "duration": 5.398,
+      "text": "The natural way to talk about this equation is in terms of,"
+    },
+    {
+      "index": 493,
+      "start": 2016.484,
+      "end": 2023.0,
+      "duration": 6.516,
+      "text": "the same way we talked about the temperature equation."
+    },
+    {
+      "index": 494,
+      "start": 2023.0,
+      "end": 2027.235,
+      "duration": 4.235,
+      "text": "I said concentration. I mean, that concentration has"
+    },
+    {
+      "index": 495,
+      "start": 2027.235,
+      "end": 2030.308,
+      "duration": 3.073,
+      "text": "nothing to do with this concentration."
+    },
+    {
+      "index": 496,
+      "start": 2030.308,
+      "end": 2034.96,
+      "duration": 4.652,
+      "text": "This is the diffusion model, where salt solution outside,"
+    },
+    {
+      "index": 497,
+      "start": 2034.96,
+      "end": 2038.531,
+      "duration": 3.571,
+      "text": "cell in the middle, salt diffusing through a"
+    },
+    {
+      "index": 498,
+      "start": 2038.531,
+      "end": 2043.016,
+      "duration": 4.485,
+      "text": "semi-permeable membrane into that, uses Newton's law of"
+    },
+    {
+      "index": 499,
+      "start": 2043.016,
+      "end": 2048.0,
+      "duration": 4.984,
+      "text": "diffusion, except he didn't do a law of diffusion."
+    },
+    {
+      "index": 500,
+      "start": 2048.0,
+      "end": 2050.663,
+      "duration": 2.663,
+      "text": "But, he is sticky. His name is attached to"
+    },
+    {
+      "index": 501,
+      "start": 2050.663,
+      "end": 2053.262,
+      "duration": 2.599,
+      "text": "everything. So, that's this concentration"
+    },
+    {
+      "index": 502,
+      "start": 2053.262,
+      "end": 2055.665,
+      "duration": 2.403,
+      "text": "model. It's the one entirely analogous"
+    },
+    {
+      "index": 503,
+      "start": 2055.665,
+      "end": 2058.784,
+      "duration": 3.119,
+      "text": "to the temperature. And the physical setup is the"
+    },
+    {
+      "index": 504,
+      "start": 2058.784,
+      "end": 2061.122,
+      "duration": 2.338,
+      "text": "same. This one is entirely different."
+    },
+    {
+      "index": 505,
+      "start": 2061.122,
+      "end": 2064.955,
+      "duration": 3.833,
+      "text": "Mixing in this form of this problem has really nothing to do"
+    },
+    {
+      "index": 506,
+      "start": 2064.955,
+      "end": 2067.879,
+      "duration": 2.924,
+      "text": "with this model whatsoever. But, nor does that"
+    },
+    {
+      "index": 507,
+      "start": 2067.879,
+      "end": 2071.517,
+      "duration": 3.638,
+      "text": "concentration had anything to do with this concentration,"
+    },
+    {
+      "index": 508,
+      "start": 2071.517,
+      "end": 2076.0,
+      "duration": 4.483,
+      "text": "which refers to the result of the mixing in the tank."
+    },
+    {
+      "index": 509,
+      "start": 2076.0,
+      "end": 2080.535,
+      "duration": 4.535,
+      "text": "But, what happens is the differential equation is the"
+    },
+    {
+      "index": 510,
+      "start": 2080.535,
+      "end": 2083.152,
+      "duration": 2.617,
+      "text": "same. The language of input and"
+    },
+    {
+      "index": 511,
+      "start": 2083.152,
+      "end": 2087.688,
+      "duration": 4.536,
+      "text": "response that we talked about is also available here."
+    },
+    {
+      "index": 512,
+      "start": 2087.688,
+      "end": 2092.747,
+      "duration": 5.059,
+      "text": "So, everything is the same. And, the most interesting thing"
+    },
+    {
+      "index": 513,
+      "start": 2092.747,
+      "end": 2097.283,
+      "duration": 4.536,
+      "text": "is that it shows that the analog of the conductivity,"
+    },
+    {
+      "index": 514,
+      "start": 2097.283,
+      "end": 2101.732,
+      "duration": 4.449,
+      "text": "the k, the analog of conductivity and diffusivity is"
+    },
+    {
+      "index": 515,
+      "start": 2101.732,
+      "end": 2106.82,
+      "duration": 5.088,
+      "text": "this quantity. I should not be considering r"
+    },
+    {
+      "index": 516,
+      "start": 2106.82,
+      "end": 2111.683,
+      "duration": 4.863,
+      "text": "and v by themselves. I should be considering as the"
+    },
+    {
+      "index": 517,
+      "start": 2111.683,
+      "end": 2115.379,
+      "duration": 3.696,
+      "text": "basic quantity, the ratio of those two."
+    },
+    {
+      "index": 518,
+      "start": 2115.379,
+      "end": 2119.269,
+      "duration": 3.89,
+      "text": "Now, why is that, is the basic parameter."
+    },
+    {
+      "index": 519,
+      "start": 2119.269,
+      "end": 2123.548,
+      "duration": 4.279,
+      "text": "What is this? Well, r is the rate of outflow,"
+    },
+    {
+      "index": 520,
+      "start": 2123.548,
+      "end": 2127.341,
+      "duration": 3.793,
+      "text": "and the rate of inflow, what's r over v?"
+    },
+    {
+      "index": 521,
+      "start": 2127.341,
+      "end": 2131.426,
+      "duration": 4.085,
+      "text": "r over v is the fractional rate of outflow."
+    },
+    {
+      "index": 522,
+      "start": 2131.426,
+      "end": 2135.316,
+      "duration": 3.89,
+      "text": "In other words, if r over v is one tenth,"
+    },
+    {
+      "index": 523,
+      "start": 2135.316,
+      "end": 2140.957,
+      "duration": 5.641,
+      "text": "it means that 1/10 of the tank will be emptied in a minute,"
+    },
+    {
+      "index": 524,
+      "start": 2140.957,
+      "end": 2144.5,
+      "duration": 3.543,
+      "text": "say. In other words,"
+    },
+    {
+      "index": 525,
+      "start": 2144.5,
+      "end": 2149.0,
+      "duration": 4.5,
+      "text": "we lumped these two constants into a single k,"
+    },
+    {
+      "index": 526,
+      "start": 2149.0,
+      "end": 2153.599,
+      "duration": 4.599,
+      "text": "and at the same time have simplified the units."
+    },
+    {
+      "index": 527,
+      "start": 2153.599,
+      "end": 2158.099,
+      "duration": 4.5,
+      "text": "What are the units? This is volume per minute."
+    },
+    {
+      "index": 528,
+      "start": 2158.099,
+      "end": 2162.199,
+      "duration": 4.1,
+      "text": "This is volume. So, it's simply reciprocal"
+    },
+    {
+      "index": 529,
+      "start": 2162.199,
+      "end": 2167.4,
+      "duration": 5.201,
+      "text": "minutes, reciprocal time, which was the same units of"
+    },
+    {
+      "index": 530,
+      "start": 2167.4,
+      "end": 2171.099,
+      "duration": 3.699,
+      "text": "that diffusivity and conductivity had,"
+    },
+    {
+      "index": 531,
+      "start": 2171.099,
+      "end": 2176.031,
+      "duration": 4.932,
+      "text": "reciprocal time. The space variables have"
+    },
+    {
+      "index": 532,
+      "start": 2176.031,
+      "end": 2179.164,
+      "duration": 3.133,
+      "text": "entirely disappeared. So, it that way,"
+    },
+    {
+      "index": 533,
+      "start": 2179.164,
+      "end": 2182.973,
+      "duration": 3.809,
+      "text": "it's simplified. It's simplified conceptually,"
+    },
+    {
+      "index": 534,
+      "start": 2182.973,
+      "end": 2187.883,
+      "duration": 4.91,
+      "text": "and now, you can answer the same type of questions we asked"
+    },
+    {
+      "index": 535,
+      "start": 2187.883,
+      "end": 2192.307,
+      "duration": 4.424,
+      "text": "before about this. I think it would be better for"
+    },
+    {
+      "index": 536,
+      "start": 2192.307,
+      "end": 2193.923,
+      "duration": 1.616,
+      "text": "us to move on, though."
+    },
+    {
+      "index": 537,
+      "start": 2193.923,
+      "end": 2197.461,
+      "duration": 3.538,
+      "text": "Well, just an example, one really simple thing,"
+    },
+    {
+      "index": 538,
+      "start": 2197.461,
+      "end": 2201.923,
+      "duration": 4.462,
+      "text": "so, suppose since we spent so much time worrying about what"
+    },
+    {
+      "index": 539,
+      "start": 2201.923,
+      "end": 2205.153,
+      "duration": 3.23,
+      "text": "was happening with sinusoid inputs, I mean,"
+    },
+    {
+      "index": 540,
+      "start": 2205.153,
+      "end": 2208.23,
+      "duration": 3.077,
+      "text": "when could Ce be sinusoidal, for example?"
+    },
+    {
+      "index": 541,
+      "start": 2208.23,
+      "end": 2211.307,
+      "duration": 3.077,
+      "text": "Well, roughly sinusoidal if, for example,"
+    },
+    {
+      "index": 542,
+      "start": 2211.307,
+      "end": 2215.0,
+      "duration": 3.693,
+      "text": "some factory were polluting. If this were a lake,"
+    },
+    {
+      "index": 543,
+      "start": 2215.0,
+      "end": 2219.307,
+      "duration": 4.307,
+      "text": "and some factory were polluting it, but in the beginning,"
+    },
+    {
+      "index": 544,
+      "start": 2219.307,
+      "end": 2223.461,
+      "duration": 4.154,
+      "text": "at the beginning of the day, they produced a lot of the"
+    },
+    {
+      "index": 545,
+      "start": 2223.461,
+      "end": 2227.692,
+      "duration": 4.231,
+      "text": "pollutant, and by the end of the day when it wound down,"
+    },
+    {
+      "index": 546,
+      "start": 2227.692,
+      "end": 2232.23,
+      "duration": 4.538,
+      "text": "it might well happen that the concentration of pollutants in"
+    },
+    {
+      "index": 547,
+      "start": 2232.23,
+      "end": 2236.615,
+      "duration": 4.385,
+      "text": "the incoming stream would vary sinusoidally with a 24 hour"
+    },
+    {
+      "index": 548,
+      "start": 2236.615,
+      "end": 2242.485,
+      "duration": 5.87,
+      "text": "cycle. And then, we would be asking,"
+    },
+    {
+      "index": 549,
+      "start": 2242.485,
+      "end": 2246.812,
+      "duration": 4.327,
+      "text": "so, suppose this varies sinusoidally."
+    },
+    {
+      "index": 550,
+      "start": 2246.812,
+      "end": 2251.5,
+      "duration": 4.688,
+      "text": "In other words, it's like cosine omega t."
+    },
+    {
+      "index": 551,
+      "start": 2251.5,
+      "end": 2256.908,
+      "duration": 5.408,
+      "text": "I'm asking, how closely does"
+    },
+    {
+      "index": 552,
+      "start": 2256.908,
+      "end": 2264.0,
+      "duration": 7.092,
+      "text": "the concentration in the tank follow C sub e?"
+    },
+    {
+      "index": 553,
+      "start": 2264.0,
+      "end": 2268.173,
+      "duration": 4.173,
+      "text": "Now, what would that depend upon?"
+    },
+    {
+      "index": 554,
+      "start": 2268.173,
+      "end": 2272.347,
+      "duration": 4.174,
+      "text": "Think about it. Well, the answer,"
+    },
+    {
+      "index": 555,
+      "start": 2272.347,
+      "end": 2278.869,
+      "duration": 6.522,
+      "text": "suppose k is large. Closely, let's just analyze one"
+    },
+    {
+      "index": 556,
+      "start": 2278.869,
+      "end": 2283.921,
+      "duration": 5.052,
+      "text": "case, if k is big. Now, what would make k big?"
+    },
+    {
+      "index": 557,
+      "start": 2283.921,
+      "end": 2286.697,
+      "duration": 2.776,
+      "text": "We know that from the temperature thing."
+    },
+    {
+      "index": 558,
+      "start": 2286.697,
+      "end": 2290.896,
+      "duration": 4.199,
+      "text": "If the conductivity is high, then the inner temperature will"
+    },
+    {
+      "index": 559,
+      "start": 2290.896,
+      "end": 2295.167,
+      "duration": 4.271,
+      "text": "follow the outer temperature closely, and the same thing with"
+    },
+    {
+      "index": 560,
+      "start": 2295.167,
+      "end": 2297.871,
+      "duration": 2.704,
+      "text": "the diffusion model. But we, of course,"
+    },
+    {
+      "index": 561,
+      "start": 2297.871,
+      "end": 2301.928,
+      "duration": 4.057,
+      "text": "therefore, since the equation is the same, we must get the"
+    },
+    {
+      "index": 562,
+      "start": 2301.928,
+      "end": 2305.06,
+      "duration": 3.132,
+      "text": "same result here. Now, what would make k big?"
+    },
+    {
+      "index": 563,
+      "start": 2305.06,
+      "end": 2308.049,
+      "duration": 2.989,
+      "text": "If r is big, if the flow rate is very fast,"
+    },
+    {
+      "index": 564,
+      "start": 2308.049,
+      "end": 2311.466,
+      "duration": 3.417,
+      "text": "we will expect the concentration of the inside of"
+    },
+    {
+      "index": 565,
+      "start": 2311.466,
+      "end": 2315.523,
+      "duration": 4.057,
+      "text": "that tank to match fairly closely the concentration of the"
+    },
+    {
+      "index": 566,
+      "start": 2315.523,
+      "end": 2318.654,
+      "duration": 3.131,
+      "text": "pollutant, of the incoming salt solution, or,"
+    },
+    {
+      "index": 567,
+      "start": 2318.654,
+      "end": 2323.482,
+      "duration": 4.828,
+      "text": "if the tank is very small. For fixed flow rates,"
+    },
+    {
+      "index": 568,
+      "start": 2323.482,
+      "end": 2327.152,
+      "duration": 3.67,
+      "text": "if the tank is very small, well, then it gets emptied"
+    },
+    {
+      "index": 569,
+      "start": 2327.152,
+      "end": 2329.27,
+      "duration": 2.118,
+      "text": "quickly. So, both of these are,"
+    },
+    {
+      "index": 570,
+      "start": 2329.27,
+      "end": 2332.235,
+      "duration": 2.965,
+      "text": "I think, intuitive results. And, of course,"
+    },
+    {
+      "index": 571,
+      "start": 2332.235,
+      "end": 2336.258,
+      "duration": 4.023,
+      "text": "as before, we got them from that, by trying to analyze the"
+    },
+    {
+      "index": 572,
+      "start": 2336.258,
+      "end": 2339.223,
+      "duration": 2.965,
+      "text": "final form of the solution. In other words,"
+    },
+    {
+      "index": 573,
+      "start": 2339.223,
+      "end": 2343.458,
+      "duration": 4.235,
+      "text": "we got them by looking at that form of the solution up there,"
+    },
+    {
+      "index": 574,
+      "start": 2343.458,
+      "end": 2347.242,
+      "duration": 3.784,
+      "text": "and seeing if k is big. As k increases,"
+    },
+    {
+      "index": 575,
+      "start": 2347.242,
+      "end": 2352.128,
+      "duration": 4.886,
+      "text": "what happens to the amplitude, and what happens to the phase"
+    },
+    {
+      "index": 576,
+      "start": 2352.128,
+      "end": 2354.861,
+      "duration": 2.733,
+      "text": "lag? But, that summarizes the two."
+    },
+    {
+      "index": 577,
+      "start": 2354.861,
+      "end": 2357.263,
+      "duration": 2.402,
+      "text": "So, this means, closely means,"
+    },
+    {
+      "index": 578,
+      "start": 2357.263,
+      "end": 2360.162,
+      "duration": 2.899,
+      "text": "that the phase lag is, big or small?"
+    },
+    {
+      "index": 579,
+      "start": 2360.162,
+      "end": 2363.392,
+      "duration": 3.23,
+      "text": "The lag is small. And, the amplitude is,"
+    },
+    {
+      "index": 580,
+      "start": 2363.392,
+      "end": 2367.616,
+      "duration": 4.224,
+      "text": "well, the amplitude, the biggest the amplitude could"
+    },
+    {
+      "index": 581,
+      "start": 2367.616,
+      "end": 2373.0,
+      "duration": 5.384,
+      "text": "ever be is one because that's the amplitude of this."
+    },
+    {
+      "index": 582,
+      "start": 2373.0,
+      "end": 2378.02,
+      "duration": 5.02,
+      "text": "So, the amplitude is near one, one because that's the"
+    },
+    {
+      "index": 583,
+      "start": 2378.02,
+      "end": 2381.786,
+      "duration": 3.766,
+      "text": "amplitude of the incoming signal, input,"
+    },
+    {
+      "index": 584,
+      "start": 2381.786,
+      "end": 2387.289,
+      "duration": 5.503,
+      "text": "whatever you want to call it. Okay, now, I'd like to spend"
+    },
+    {
+      "index": 585,
+      "start": 2387.289,
+      "end": 2392.696,
+      "duration": 5.407,
+      "text": "the rest of the time talking about the failures of number"
+    },
+    {
+      "index": 586,
+      "start": 2392.696,
+      "end": 2398.586,
+      "duration": 5.89,
+      "text": "one, and when you have to use number two, and when even number"
+    },
+    {
+      "index": 587,
+      "start": 2398.586,
+      "end": 2403.881,
+      "duration": 5.295,
+      "text": "two is no good. So, let me end first-order"
+    },
+    {
+      "index": 588,
+      "start": 2403.881,
+      "end": 2408.536,
+      "duration": 4.655,
+      "text": "equations by putting my worst foot forward."
+    },
+    {
+      "index": 589,
+      "start": 2408.536,
+      "end": 2413.744,
+      "duration": 5.208,
+      "text": "Well, I'm just trying to avoid disappointment at"
+    },
+    {
+      "index": 590,
+      "start": 2413.744,
+      "end": 2419.951,
+      "duration": 6.207,
+      "text": "misapprehensions from you. I'll watch you leave this room"
+    },
+    {
+      "index": 591,
+      "start": 2419.951,
+      "end": 2422.943,
+      "duration": 2.992,
+      "text": "and say, well, he said that,"
+    },
+    {
+      "index": 592,
+      "start": 2422.943,
+      "end": 2426.822,
+      "duration": 3.879,
+      "text": "okay. So, the first one you're going"
+    },
+    {
+      "index": 593,
+      "start": 2426.822,
+      "end": 2432.585,
+      "duration": 5.763,
+      "text": "to encounter very shortly where one is not satisfied,"
+    },
+    {
+      "index": 594,
+      "start": 2432.585,
+      "end": 2438.126,
+      "duration": 5.541,
+      "text": "but two is, so on some examples where you need two,"
+    },
+    {
+      "index": 595,
+      "start": 2438.126,
+      "end": 2444.0,
+      "duration": 5.874,
+      "text": "well, it's going to happen right here."
+    },
+    {
+      "index": 596,
+      "start": 2444.0,
+      "end": 2447.634,
+      "duration": 3.634,
+      "text": "Somebody, sooner or later, it's going to draw on that"
+    },
+    {
+      "index": 597,
+      "start": 2447.634,
+      "end": 2450.639,
+      "duration": 3.005,
+      "text": "loathsome orange chalk, which is unerasable,"
+    },
+    {
+      "index": 598,
+      "start": 2450.639,
+      "end": 2452.806,
+      "duration": 2.167,
+      "text": "something which looks like that."
+    },
+    {
+      "index": 599,
+      "start": 2452.806,
+      "end": 2454.973,
+      "duration": 2.167,
+      "text": "Remember, you saw it here first."
+    },
+    {
+      "index": 600,
+      "start": 2454.973,
+      "end": 2458.327,
+      "duration": 3.354,
+      "text": "r, yeah, we had that. Okay, see, I had it in high"
+    },
+    {
+      "index": 601,
+      "start": 2458.327,
+      "end": 2460.704,
+      "duration": 2.377,
+      "text": "school too. That's the capacitance."
+    },
+    {
+      "index": 602,
+      "start": 2460.704,
+      "end": 2464.478,
+      "duration": 3.774,
+      "text": "This is the resistance. That's the electromotive force:"
+    },
+    {
+      "index": 603,
+      "start": 2464.478,
+      "end": 2467.483,
+      "duration": 3.005,
+      "text": "battery, or a source of alternating current,"
+    },
+    {
+      "index": 604,
+      "start": 2467.483,
+      "end": 2471.258,
+      "duration": 3.775,
+      "text": "something like that. Now, of course,"
+    },
+    {
+      "index": 605,
+      "start": 2471.258,
+      "end": 2475.954,
+      "duration": 4.696,
+      "text": "what you're interested in is how the current flows in the"
+    },
+    {
+      "index": 606,
+      "start": 2475.954,
+      "end": 2478.638,
+      "duration": 2.684,
+      "text": "circuit. Since current across the"
+    },
+    {
+      "index": 607,
+      "start": 2478.638,
+      "end": 2483.419,
+      "duration": 4.781,
+      "text": "capacitance doesn't make sense, you have to talk about the"
+    },
+    {
+      "index": 608,
+      "start": 2483.419,
+      "end": 2487.78,
+      "duration": 4.361,
+      "text": "charge on the capacitance. So, q, it's customary in a"
+    },
+    {
+      "index": 609,
+      "start": 2487.78,
+      "end": 2492.225,
+      "duration": 4.445,
+      "text": "circle this simple to use as the variable not current,"
+    },
+    {
+      "index": 610,
+      "start": 2492.225,
+      "end": 2496.0,
+      "duration": 3.775,
+      "text": "but the charge on the capacitance."
+    },
+    {
+      "index": 611,
+      "start": 2496.0,
+      "end": 2500.642,
+      "duration": 4.642,
+      "text": "And then Kirchhoff's, you are also supposed to know"
+    },
+    {
+      "index": 612,
+      "start": 2500.642,
+      "end": 2505.192,
+      "duration": 4.55,
+      "text": "that the derivative, that the time derivative of q"
+    },
+    {
+      "index": 613,
+      "start": 2505.192,
+      "end": 2509.185,
+      "duration": 3.993,
+      "text": "is what's called the current in the circuit."
+    },
+    {
+      "index": 614,
+      "start": 2509.185,
+      "end": 2513.735,
+      "duration": 4.55,
+      "text": "That sort of intuitive. But, i in a physics class,"
+    },
+    {
+      "index": 615,
+      "start": 2513.735,
+      "end": 2517.914,
+      "duration": 4.179,
+      "text": "j in an electrical engineering class, and why,"
+    },
+    {
+      "index": 616,
+      "start": 2517.914,
+      "end": 2522.0,
+      "duration": 4.086,
+      "text": "not the letter Y, but why is that?"
+    },
+    {
+      "index": 617,
+      "start": 2522.0,
+      "end": 2526.973,
+      "duration": 4.973,
+      "text": "That's because of electrical engineers use lots of lots of"
+    },
+    {
+      "index": 618,
+      "start": 2526.973,
+      "end": 2531.946,
+      "duration": 4.973,
+      "text": "complex numbers and therefore, you have to call current j,"
+    },
+    {
+      "index": 619,
+      "start": 2531.946,
+      "end": 2535.174,
+      "duration": 3.228,
+      "text": "I guess. I think they do j in physics,"
+    },
+    {
+      "index": 620,
+      "start": 2535.174,
+      "end": 2537.53,
+      "duration": 2.356,
+      "text": "too, now. No, no they don't."
+    },
+    {
+      "index": 621,
+      "start": 2537.53,
+      "end": 2541.194,
+      "duration": 3.664,
+      "text": "I don't know. So, i is ambiguous if you are"
+    },
+    {
+      "index": 622,
+      "start": 2541.194,
+      "end": 2545.818,
+      "duration": 4.624,
+      "text": "in that particular subject. And it's customary to use,"
+    },
+    {
+      "index": 623,
+      "start": 2545.818,
+      "end": 2549.789,
+      "duration": 3.971,
+      "text": "I don't know. Now it's completely safe."
+    },
+    {
+      "index": 624,
+      "start": 2549.789,
+      "end": 2552.366,
+      "duration": 2.577,
+      "text": "Okay, where are we? Well, the law is,"
+    },
+    {
+      "index": 625,
+      "start": 2552.366,
+      "end": 2556.517,
+      "duration": 4.151,
+      "text": "the basic differential equation is Kirchhoff's voltage law,"
+    },
+    {
+      "index": 626,
+      "start": 2556.517,
+      "end": 2560.597,
+      "duration": 4.08,
+      "text": "but the sum of the voltage drops across these three has to"
+    },
+    {
+      "index": 627,
+      "start": 2560.597,
+      "end": 2562.53,
+      "duration": 1.933,
+      "text": "be zero. So, it's R times i,"
+    },
+    {
+      "index": 628,
+      "start": 2562.53,
+      "end": 2564.964,
+      "duration": 2.434,
+      "text": "which is dq / dt. That's Ohm's law."
+    },
+    {
+      "index": 629,
+      "start": 2564.964,
+      "end": 2567.898,
+      "duration": 2.934,
+      "text": "That's the voltage drop across resistance."
+    },
+    {
+      "index": 630,
+      "start": 2567.898,
+      "end": 2571.907,
+      "duration": 4.009,
+      "text": "The voltage drop across the capacitance is Coulomb's law,"
+    },
+    {
+      "index": 631,
+      "start": 2571.907,
+      "end": 2575.199,
+      "duration": 3.292,
+      "text": "one form of Coulomb's law. It's q divided by C."
+    },
+    {
+      "index": 632,
+      "start": 2575.199,
+      "end": 2577.776,
+      "duration": 2.577,
+      "text": "And, that has to be the voltage drop."
+    },
+    {
+      "index": 633,
+      "start": 2577.776,
+      "end": 2582.0,
+      "duration": 4.224,
+      "text": "And then, there is some sign convention."
+    },
+    {
+      "index": 634,
+      "start": 2582.0,
+      "end": 2586.454,
+      "duration": 4.454,
+      "text": "So, this is either plus or minus, depending on your sign"
+    },
+    {
+      "index": 635,
+      "start": 2586.454,
+      "end": 2591.233,
+      "duration": 4.779,
+      "text": "conventions, but it's E of t. Now, if I put that in standard"
+    },
+    {
+      "index": 636,
+      "start": 2591.233,
+      "end": 2595.769,
+      "duration": 4.536,
+      "text": "form, in standard form I probably should say q prime plus"
+    },
+    {
+      "index": 637,
+      "start": 2595.769,
+      "end": 2598.442,
+      "duration": 2.673,
+      "text": "q over RC equals, well, I suppose,"
+    },
+    {
+      "index": 638,
+      "start": 2598.442,
+      "end": 2603.221,
+      "duration": 4.779,
+      "text": "E over R. And, this is what would appear"
+    },
+    {
+      "index": 639,
+      "start": 2603.221,
+      "end": 2606.542,
+      "duration": 3.321,
+      "text": "in the equation. But, it's not the natural"
+    },
+    {
+      "index": 640,
+      "start": 2606.542,
+      "end": 2610.095,
+      "duration": 3.553,
+      "text": "thing. The k is one over RC."
+    },
+    {
+      "index": 641,
+      "start": 2610.095,
+      "end": 2612.33,
+      "duration": 2.235,
+      "text": "And, that's the reciprocal."
+    },
+    {
+      "index": 642,
+      "start": 2612.33,
+      "end": 2615.893,
+      "duration": 3.563,
+      "text": "The RC constant is what everybody knows is important"
+    },
+    {
+      "index": 643,
+      "start": 2615.893,
+      "end": 2619.316,
+      "duration": 3.423,
+      "text": "when you talk about a little circuit of that form."
+    },
+    {
+      "index": 644,
+      "start": 2619.316,
+      "end": 2621.97,
+      "duration": 2.654,
+      "text": "On the other hand, the right-hand side,"
+    },
+    {
+      "index": 645,
+      "start": 2621.97,
+      "end": 2626.022,
+      "duration": 4.052,
+      "text": "it's quite unnatural to try to stick in the right-hand side"
+    },
+    {
+      "index": 646,
+      "start": 2626.022,
+      "end": 2628.397,
+      "duration": 2.375,
+      "text": "that same RC. Call this EC over RC."
+    },
+    {
+      "index": 647,
+      "start": 2628.397,
+      "end": 2630.841,
+      "duration": 2.444,
+      "text": "People don't do that, and therefore,"
+    },
+    {
+      "index": 648,
+      "start": 2630.841,
+      "end": 2635.242,
+      "duration": 4.401,
+      "text": "it doesn't really fall into the paradigm of that first equation."
+    },
+    {
+      "index": 649,
+      "start": 2635.242,
+      "end": 2639.433,
+      "duration": 4.191,
+      "text": "It's the second equation that really falls into the category."
+    },
+    {
+      "index": 650,
+      "start": 2639.433,
+      "end": 2642.647,
+      "duration": 3.214,
+      "text": "Another simple example of this is chained to k,"
+    },
+    {
+      "index": 651,
+      "start": 2642.647,
+      "end": 2648.476,
+      "duration": 5.829,
+      "text": "radioactively changed to k. Well, let's say the radioactive"
+    },
+    {
+      "index": 652,
+      "start": 2648.476,
+      "end": 2650.473,
+      "duration": 1.997,
+      "text": "substance, A, decays into,"
+    },
+    {
+      "index": 653,
+      "start": 2650.473,
+      "end": 2654.947,
+      "duration": 4.474,
+      "text": "let's say, one atom of this produces one atom of that for"
+    },
+    {
+      "index": 654,
+      "start": 2654.947,
+      "end": 2657.504,
+      "duration": 2.557,
+      "text": "simplicity. So, it decays into B,"
+    },
+    {
+      "index": 655,
+      "start": 2657.504,
+      "end": 2661.498,
+      "duration": 3.994,
+      "text": "which then still is radioactive and decays further."
+    },
+    {
+      "index": 656,
+      "start": 2661.498,
+      "end": 2666.292,
+      "duration": 4.794,
+      "text": "Okay, what's the differential equation, which is going to be,"
+    },
+    {
+      "index": 657,
+      "start": 2666.292,
+      "end": 2669.088,
+      "duration": 2.796,
+      "text": "it's going to govern this situation?"
+    },
+    {
+      "index": 658,
+      "start": 2669.088,
+      "end": 2675.0,
+      "duration": 5.912,
+      "text": "What I want to know is how much B there is at any given time."
+    },
+    {
+      "index": 659,
+      "start": 2675.0,
+      "end": 2679.217,
+      "duration": 4.217,
+      "text": "So, I want a differential equation for the quantity of the"
+    },
+    {
+      "index": 660,
+      "start": 2679.217,
+      "end": 2681.955,
+      "duration": 2.738,
+      "text": "radioactive product at any given time."
+    },
+    {
+      "index": 661,
+      "start": 2681.955,
+      "end": 2684.47,
+      "duration": 2.515,
+      "text": "Well, what's it going to look like?"
+    },
+    {
+      "index": 662,
+      "start": 2684.47,
+      "end": 2688.762,
+      "duration": 4.292,
+      "text": "Well, it's the amount coming in minus the amount going out,"
+    },
+    {
+      "index": 663,
+      "start": 2688.762,
+      "end": 2691.721,
+      "duration": 2.959,
+      "text": "so to speak. The rate of inflow minus the"
+    },
+    {
+      "index": 664,
+      "start": 2691.721,
+      "end": 2695.051,
+      "duration": 3.33,
+      "text": "rate of outflow, except it's not the same type"
+    },
+    {
+      "index": 665,
+      "start": 2695.051,
+      "end": 2699.195,
+      "duration": 4.144,
+      "text": "of physical flow we had before. How fast is it coming in?"
+    },
+    {
+      "index": 666,
+      "start": 2699.195,
+      "end": 2701.932,
+      "duration": 2.737,
+      "text": "Well, A is decaying at a certain rate,"
+    },
+    {
+      "index": 667,
+      "start": 2701.932,
+      "end": 2705.484,
+      "duration": 3.552,
+      "text": "and so the rate at which A decays is by the basic"
+    },
+    {
+      "index": 668,
+      "start": 2705.484,
+      "end": 2709.618,
+      "duration": 4.134,
+      "text": "radioactive law. It's k1, it's constant,"
+    },
+    {
+      "index": 669,
+      "start": 2709.618,
+      "end": 2712.713,
+      "duration": 3.095,
+      "text": "decay constant, times the amount of A present."
+    },
+    {
+      "index": 670,
+      "start": 2712.713,
+      "end": 2715.175,
+      "duration": 2.462,
+      "text": "If I used the differential"
+    },
+    {
+      "index": 671,
+      "start": 2715.175,
+      "end": 2718.834,
+      "duration": 3.659,
+      "text": "equation with A here, I'd have to put a negative sign"
+    },
+    {
+      "index": 672,
+      "start": 2718.834,
+      "end": 2722.633,
+      "duration": 3.799,
+      "text": "because it's the rate at which that stuff is leaving A."
+    },
+    {
+      "index": 673,
+      "start": 2722.633,
+      "end": 2726.854,
+      "duration": 4.221,
+      "text": "But, I'm interested in the rate at which it's coming in to B."
+    },
+    {
+      "index": 674,
+      "start": 2726.854,
+      "end": 2730.793,
+      "duration": 3.939,
+      "text": "So, it has a positive sign. And then, the rate at which B"
+    },
+    {
+      "index": 675,
+      "start": 2730.793,
+      "end": 2734.804,
+      "duration": 4.011,
+      "text": "is decaying, and therefore the quantity of good B is gone,"
+    },
+    {
+      "index": 676,
+      "start": 2734.804,
+      "end": 2738.388,
+      "duration": 3.584,
+      "text": "-- -- that will have some other"
+    },
+    {
+      "index": 677,
+      "start": 2738.388,
+      "end": 2741.97,
+      "duration": 3.582,
+      "text": "constant, B. So, that will be the equation,"
+    },
+    {
+      "index": 678,
+      "start": 2741.97,
+      "end": 2746.405,
+      "duration": 4.435,
+      "text": "and to avoid having two dependent variables in there,"
+    },
+    {
+      "index": 679,
+      "start": 2746.405,
+      "end": 2749.647,
+      "duration": 3.242,
+      "text": "we know how A is decaying. So, it's k1,"
+    },
+    {
+      "index": 680,
+      "start": 2749.647,
+      "end": 2753.655,
+      "duration": 4.008,
+      "text": "some constant times A, sorry, A will be e to the"
+    },
+    {
+      "index": 681,
+      "start": 2753.655,
+      "end": 2756.47,
+      "duration": 2.815,
+      "text": "negative, you know, the decay law,"
+    },
+    {
+      "index": 682,
+      "start": 2756.47,
+      "end": 2761.332,
+      "duration": 4.862,
+      "text": "so, times the initial amount that was there times e to the"
+    },
+    {
+      "index": 683,
+      "start": 2761.332,
+      "end": 2767.515,
+      "duration": 6.183,
+      "text": "negative k1 t. That's how much A there is at"
+    },
+    {
+      "index": 684,
+      "start": 2767.515,
+      "end": 2770.552,
+      "duration": 3.037,
+      "text": "any given time. It's decaying by the"
+    },
+    {
+      "index": 685,
+      "start": 2770.552,
+      "end": 2774.283,
+      "duration": 3.731,
+      "text": "radioactive decay law, minus k2 B."
+    },
+    {
+      "index": 686,
+      "start": 2774.283,
+      "end": 2778.881,
+      "duration": 4.598,
+      "text": "Okay, so how does the differential equation look like?"
+    },
+    {
+      "index": 687,
+      "start": 2778.881,
+      "end": 2783.479,
+      "duration": 4.598,
+      "text": "It looks like B prime plus k2 B equals an exponential,"
+    },
+    {
+      "index": 688,
+      "start": 2783.479,
+      "end": 2788.424,
+      "duration": 4.945,
+      "text": "k1 A zero e to the negative k1 t."
+    },
+    {
+      "index": 689,
+      "start": 2788.424,
+      "end": 2791.027,
+      "duration": 2.603,
+      "text": "But, there's no reason to"
+    },
+    {
+      "index": 690,
+      "start": 2791.027,
+      "end": 2796.146,
+      "duration": 5.119,
+      "text": "expect that that constant really has anything to do with k2."
+    },
+    {
+      "index": 691,
+      "start": 2796.146,
+      "end": 2801.178,
+      "duration": 5.032,
+      "text": "It's unnatural to put it in that form, which is the correct"
+    },
+    {
+      "index": 692,
+      "start": 2801.178,
+      "end": 2809.655,
+      "duration": 8.477,
+      "text": "one. Now, in the last two minutes,"
+    },
+    {
+      "index": 693,
+      "start": 2809.655,
+      "end": 2822.967,
+      "duration": 13.312,
+      "text": "I wish to alienate half the class by pointing out that if k"
+    },
+    {
+      "index": 694,
+      "start": 2822.967,
+      "end": 2833.065,
+      "duration": 10.098,
+      "text": "is less than zero, none of the terminology of"
+    },
+    {
+      "index": 695,
+      "start": 2833.065,
+      "end": 2845.0,
+      "duration": 11.935,
+      "text": "transient, steady-state input response applies."
+    },
+    {
+      "index": 696,
+      "start": 2845.0,
+      "end": 2848.205,
+      "duration": 3.205,
+      "text": "The technique of solving the equation is identical."
+    },
+    {
+      "index": 697,
+      "start": 2848.205,
+      "end": 2853.38,
+      "duration": 5.175,
+      "text": "But, you cannot interpret. So, the technique is the same,"
+    },
+    {
+      "index": 698,
+      "start": 2853.38,
+      "end": 2857.098,
+      "duration": 3.718,
+      "text": "and therefore it's worth learning."
+    },
+    {
+      "index": 699,
+      "start": 2857.098,
+      "end": 2861.718,
+      "duration": 4.62,
+      "text": "The technique is the same. In other words,"
+    },
+    {
+      "index": 700,
+      "start": 2861.718,
+      "end": 2868.704,
+      "duration": 6.986,
+      "text": "the solution will be still e to the negative kt integral q of t"
+    },
+    {
+      "index": 701,
+      "start": 2868.704,
+      "end": 2874.901,
+      "duration": 6.197,
+      "text": "e to the kt dt plus"
+    },
+    {
+      "index": 702,
+      "start": 2874.901,
+      "end": 2880.422,
+      "duration": 5.521,
+      "text": "a constant times e to the k, oh, this is terrible,"
+    },
+    {
+      "index": 703,
+      "start": 2880.422,
+      "end": 2884.709,
+      "duration": 4.287,
+      "text": "no. dy / dt, let's give an example."
+    },
+    {
+      "index": 704,
+      "start": 2884.709,
+      "end": 2890.041,
+      "duration": 5.332,
+      "text": "The equation I'm going to look at is something that looks like"
+    },
+    {
+      "index": 705,
+      "start": 2890.041,
+      "end": 2893.362,
+      "duration": 3.321,
+      "text": "this: y equals q of t, let's say, okay,"
+    },
+    {
+      "index": 706,
+      "start": 2893.362,
+      "end": 2897.033,
+      "duration": 3.671,
+      "text": "a constant, but the constant a is positive."
+    },
+    {
+      "index": 707,
+      "start": 2897.033,
+      "end": 2899.917,
+      "duration": 2.884,
+      "text": "So, the constant here is negative."
+    },
+    {
+      "index": 708,
+      "start": 2899.917,
+      "end": 2903.413,
+      "duration": 3.496,
+      "text": "Then, when I solve, my k, in other words,"
+    },
+    {
+      "index": 709,
+      "start": 2903.413,
+      "end": 2906.647,
+      "duration": 3.234,
+      "text": "is now properly written as negative a."
+    },
+    {
+      "index": 710,
+      "start": 2906.647,
+      "end": 2910.493,
+      "duration": 3.846,
+      "text": "And therefore, this formula should now become"
+    },
+    {
+      "index": 711,
+      "start": 2910.493,
+      "end": 2916.0,
+      "duration": 5.507,
+      "text": "not this, but the negative k is a t."
+    },
+    {
+      "index": 712,
+      "start": 2916.0,
+      "end": 2921.092,
+      "duration": 5.092,
+      "text": "And, here it's negative a t. And, here it is positive a t."
+    },
+    {
+      "index": 713,
+      "start": 2921.092,
+      "end": 2924.756,
+      "duration": 3.664,
+      "text": "Now, why is it, if this is going to be the"
+    },
+    {
+      "index": 714,
+      "start": 2924.756,
+      "end": 2929.491,
+      "duration": 4.735,
+      "text": "solution, why are all those things totally irrelevant?"
+    },
+    {
+      "index": 715,
+      "start": 2929.491,
+      "end": 2934.762,
+      "duration": 5.271,
+      "text": "This is not a transient any longer because if a is positive,"
+    },
+    {
+      "index": 716,
+      "start": 2934.762,
+      "end": 2939.408,
+      "duration": 4.646,
+      "text": "this goes to infinity. Or, if I go to minus infinity,"
+    },
+    {
+      "index": 717,
+      "start": 2939.408,
+      "end": 2943.533,
+      "duration": 4.125,
+      "text": "then C is negative. So, it's not transient."
+    },
+    {
+      "index": 718,
+      "start": 2943.533,
+      "end": 2947.0,
+      "duration": 3.467,
+      "text": "It's not going to zero, and it depends heavily on the"
+    },
+    {
+      "index": 719,
+      "start": 2947.0,
+      "end": 2950.133,
+      "duration": 3.133,
+      "text": "initial conditions. That means that of these two"
+    },
+    {
+      "index": 720,
+      "start": 2950.133,
+      "end": 2952.533,
+      "duration": 2.4,
+      "text": "functions, this is the important guy."
+    },
+    {
+      "index": 721,
+      "start": 2952.533,
+      "end": 2955.133,
+      "duration": 2.6,
+      "text": "This is just fixed, some fixed function."
+    },
+    {
+      "index": 722,
+      "start": 2955.133,
+      "end": 2958.733,
+      "duration": 3.6,
+      "text": "Everything, in other words, is going to depend upon the"
+    },
+    {
+      "index": 723,
+      "start": 2958.733,
+      "end": 2961.933,
+      "duration": 3.2,
+      "text": "initial conditions, whereas in the other cases we"
+    },
+    {
+      "index": 724,
+      "start": 2961.933,
+      "end": 2965.199,
+      "duration": 3.266,
+      "text": "have been studying, the initial conditions after a"
+    },
+    {
+      "index": 725,
+      "start": 2965.199,
+      "end": 2970.509,
+      "duration": 5.31,
+      "text": "while don't matter anymore. Now, why did I say I would"
+    },
+    {
+      "index": 726,
+      "start": 2970.509,
+      "end": 2975.433,
+      "duration": 4.924,
+      "text": "alienate half of you? Well, because in what subjects"
+    },
+    {
+      "index": 727,
+      "start": 2975.433,
+      "end": 2979.777,
+      "duration": 4.344,
+      "text": "will a be positive? In what subjects will k be"
+    },
+    {
+      "index": 728,
+      "start": 2979.777,
+      "end": 2983.155,
+      "duration": 3.378,
+      "text": "negative? k is typically negative in"
+    },
+    {
+      "index": 729,
+      "start": 2983.155,
+      "end": 2985.569,
+      "duration": 2.414,
+      "text": "biology, economics, Sloan."
+    },
+    {
+      "index": 730,
+      "start": 2985.569,
+      "end": 2990.009,
+      "duration": 4.44,
+      "text": "In other words, the simple thing is think of it"
+    },
+    {
+      "index": 731,
+      "start": 2990.009,
+      "end": 2993.774,
+      "duration": 3.765,
+      "text": "in biology. What's the simplest equation"
+    },
+    {
+      "index": 732,
+      "start": 2993.774,
+      "end": 2998.408,
+      "duration": 4.634,
+      "text": "for population growth? Well, it is dP / dt equals"
+    },
+    {
+      "index": 733,
+      "start": 2998.408,
+      "end": 3002.752,
+      "duration": 4.344,
+      "text": "some, if the population is growing, a times P,"
+    },
+    {
+      "index": 734,
+      "start": 3002.752,
+      "end": 3009.982,
+      "duration": 7.23,
+      "text": "and a is a positive number. That means P prime minus a P is"
+    },
+    {
+      "index": 735,
+      "start": 3009.982,
+      "end": 3013.254,
+      "duration": 3.272,
+      "text": "zero. So, the thing I want to leave"
+    },
+    {
+      "index": 736,
+      "start": 3013.254,
+      "end": 3016.814,
+      "duration": 3.56,
+      "text": "you with is this. If life is involved,"
+    },
+    {
+      "index": 737,
+      "start": 3016.814,
+      "end": 3022.107,
+      "duration": 5.293,
+      "text": "k is likely to be negative. k is positive when inanimate"
+    },
+    {
+      "index": 738,
+      "start": 3022.107,
+      "end": 3025.667,
+      "duration": 3.56,
+      "text": "things are involved; I won't say dead,"
+    },
+    {
+      "index": 739,
+      "start": 3025.667,
+      "end": 3026.667,
+      "duration": 1.0,
+      "text": "inanimate."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

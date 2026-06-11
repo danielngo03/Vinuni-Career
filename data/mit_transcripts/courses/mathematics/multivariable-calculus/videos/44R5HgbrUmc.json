@@ -1,0 +1,6689 @@
+{
+  "video": {
+    "id": "44R5HgbrUmc",
+    "title": "Lec 25: Triple integrals in rectangular & cylindrical | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=44R5HgbrUmc",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2922,
+    "language": "en"
+  },
+  "segment_count": 953,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.75,
+      "end": 1.76,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.76,
+      "end": 4.309,
+      "duration": 2.549,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.43,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.44,
+      "end": 8.35,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.36,
+      "end": 11.19,
+      "duration": 2.83,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.2,
+      "end": 12.749,
+      "duration": 1.549,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.759,
+      "end": 15.869,
+      "duration": 3.11,
+      "text": "hundreds of MIT courses visit MIT open"
+    },
+    {
+      "index": 7,
+      "start": 15.879,
+      "end": 20.91,
+      "duration": 5.031,
+      "text": "courseware at"
+    },
+    {
+      "index": 8,
+      "start": 23.189,
+      "end": 23.199,
+      "duration": 0.01,
+      "text": "ocw.mit.edu all right so the past few"
+    },
+    {
+      "index": 9,
+      "start": 23.199,
+      "end": 25.67,
+      "duration": 2.471,
+      "text": "weeks we've been looking at Double"
+    },
+    {
+      "index": 10,
+      "start": 25.68,
+      "end": 28.39,
+      "duration": 2.71,
+      "text": "integrals in the plane line integrals in"
+    },
+    {
+      "index": 11,
+      "start": 28.4,
+      "end": 31.189,
+      "duration": 2.789,
+      "text": "the plane and and what we're going to do"
+    },
+    {
+      "index": 12,
+      "start": 31.199,
+      "end": 32.749,
+      "duration": 1.55,
+      "text": "now from now on basically until the end"
+    },
+    {
+      "index": 13,
+      "start": 32.759,
+      "end": 34.99,
+      "duration": 2.231,
+      "text": "of the term will be very similar stuff"
+    },
+    {
+      "index": 14,
+      "start": 35.0,
+      "end": 36.75,
+      "duration": 1.75,
+      "text": "but in space so we're going to learn how"
+    },
+    {
+      "index": 15,
+      "start": 36.76,
+      "end": 40.79,
+      "duration": 4.03,
+      "text": "to do triple integrals in space flux in"
+    },
+    {
+      "index": 16,
+      "start": 40.8,
+      "end": 45.43,
+      "duration": 4.63,
+      "text": "space work in space Divergence curl all"
+    },
+    {
+      "index": 17,
+      "start": 45.44,
+      "end": 49.229,
+      "duration": 3.789,
+      "text": "that so that means basically you know if"
+    },
+    {
+      "index": 18,
+      "start": 49.239,
+      "end": 51.31,
+      "duration": 2.071,
+      "text": "you were really on top of what we've"
+    },
+    {
+      "index": 19,
+      "start": 51.32,
+      "end": 53.99,
+      "duration": 2.67,
+      "text": "been doing this past few weeks then it"
+    },
+    {
+      "index": 20,
+      "start": 54.0,
+      "end": 55.709,
+      "duration": 1.709,
+      "text": "will be just the same with one more"
+    },
+    {
+      "index": 21,
+      "start": 55.719,
+      "end": 57.83,
+      "duration": 2.111,
+      "text": "coordinate and you'll see there are some"
+    },
+    {
+      "index": 22,
+      "start": 57.84,
+      "end": 61.509,
+      "duration": 3.669,
+      "text": "differences but conceptually it's pretty"
+    },
+    {
+      "index": 23,
+      "start": 61.519,
+      "end": 64.149,
+      "duration": 2.63,
+      "text": "similar there are a few tricky things"
+    },
+    {
+      "index": 24,
+      "start": 64.159,
+      "end": 66.83,
+      "duration": 2.671,
+      "text": "for now that also means that you know if"
+    },
+    {
+      "index": 25,
+      "start": 66.84,
+      "end": 68.63,
+      "duration": 1.79,
+      "text": "there's stuff that you're not sure about"
+    },
+    {
+      "index": 26,
+      "start": 68.64,
+      "end": 72.109,
+      "duration": 3.469,
+      "text": "in the plane then I encourage you to you"
+    },
+    {
+      "index": 27,
+      "start": 72.119,
+      "end": 74.31,
+      "duration": 2.191,
+      "text": "know review the material that we've done"
+    },
+    {
+      "index": 28,
+      "start": 74.32,
+      "end": 76.429,
+      "duration": 2.109,
+      "text": "over the past few weeks to make sure"
+    },
+    {
+      "index": 29,
+      "start": 76.439,
+      "end": 77.91,
+      "duration": 1.471,
+      "text": "that everything in the plane is"
+    },
+    {
+      "index": 30,
+      "start": 77.92,
+      "end": 79.91,
+      "duration": 1.99,
+      "text": "completely clear to you because it will"
+    },
+    {
+      "index": 31,
+      "start": 79.92,
+      "end": 81.31,
+      "duration": 1.39,
+      "text": "be much harder to understand stuff in"
+    },
+    {
+      "index": 32,
+      "start": 81.32,
+      "end": 86.23,
+      "duration": 4.91,
+      "text": "space if things are still shaky in the"
+    },
+    {
+      "index": 33,
+      "start": 88.27,
+      "end": 88.28,
+      "duration": 0.01,
+      "text": "plane okay"
+    },
+    {
+      "index": 34,
+      "start": 88.28,
+      "end": 90.67,
+      "duration": 2.39,
+      "text": "so anyway the plan is we're going to"
+    },
+    {
+      "index": 35,
+      "start": 90.68,
+      "end": 93.469,
+      "duration": 2.789,
+      "text": "basically go through the same stuff but"
+    },
+    {
+      "index": 36,
+      "start": 93.479,
+      "end": 94.789,
+      "duration": 1.31,
+      "text": "in"
+    },
+    {
+      "index": 37,
+      "start": 94.799,
+      "end": 97.069,
+      "duration": 2.27,
+      "text": "space so it shouldn't be surprising that"
+    },
+    {
+      "index": 38,
+      "start": 97.079,
+      "end": 107.31,
+      "duration": 10.231,
+      "text": "we'll start today with triple"
+    },
+    {
+      "index": 39,
+      "start": 109.749,
+      "end": 109.759,
+      "duration": 0.01,
+      "text": "integrals okay so the way triple"
+    },
+    {
+      "index": 40,
+      "start": 109.759,
+      "end": 110.91,
+      "duration": 1.151,
+      "text": "integrals"
+    },
+    {
+      "index": 41,
+      "start": 110.92,
+      "end": 113.429,
+      "duration": 2.509,
+      "text": "work is if I give"
+    },
+    {
+      "index": 42,
+      "start": 113.439,
+      "end": 118.35,
+      "duration": 4.911,
+      "text": "you a function of three variables x y"
+    },
+    {
+      "index": 43,
+      "start": 118.36,
+      "end": 122.35,
+      "duration": 3.99,
+      "text": "z and I give you some region in"
+    },
+    {
+      "index": 44,
+      "start": 122.36,
+      "end": 126.67,
+      "duration": 4.31,
+      "text": "space so some"
+    },
+    {
+      "index": 45,
+      "start": 130.71,
+      "end": 130.72,
+      "duration": 0.01,
+      "text": "solid then I can take the"
+    },
+    {
+      "index": 46,
+      "start": 130.72,
+      "end": 132.71,
+      "duration": 1.99,
+      "text": "integral over this"
+    },
+    {
+      "index": 47,
+      "start": 132.72,
+      "end": 137.63,
+      "duration": 4.91,
+      "text": "region of our function f DV where DV"
+    },
+    {
+      "index": 48,
+      "start": 137.64,
+      "end": 140.509,
+      "duration": 2.869,
+      "text": "stands for the volume element okay so"
+    },
+    {
+      "index": 49,
+      "start": 140.519,
+      "end": 142.63,
+      "duration": 2.111,
+      "text": "what it means is we'll just take you"
+    },
+    {
+      "index": 50,
+      "start": 142.64,
+      "end": 144.589,
+      "duration": 1.949,
+      "text": "know every single little piece of our"
+    },
+    {
+      "index": 51,
+      "start": 144.599,
+      "end": 148.07,
+      "duration": 3.471,
+      "text": "solid take the value the value of f"
+    },
+    {
+      "index": 52,
+      "start": 148.08,
+      "end": 149.99,
+      "duration": 1.91,
+      "text": "multiply by the small volume of each"
+    },
+    {
+      "index": 53,
+      "start": 150.0,
+      "end": 154.47,
+      "duration": 4.47,
+      "text": "little piece and sum all these things"
+    },
+    {
+      "index": 54,
+      "start": 156.03,
+      "end": 156.04,
+      "duration": 0.01,
+      "text": "together"
+    },
+    {
+      "index": 55,
+      "start": 156.04,
+      "end": 159.67,
+      "duration": 3.63,
+      "text": "and so this volume element"
+    },
+    {
+      "index": 56,
+      "start": 159.68,
+      "end": 162.75,
+      "duration": 3.07,
+      "text": "here well for example if you're doing"
+    },
+    {
+      "index": 57,
+      "start": 162.76,
+      "end": 165.63,
+      "duration": 2.87,
+      "text": "the integral in rectangular coordinates"
+    },
+    {
+      "index": 58,
+      "start": 165.64,
+      "end": 169.55,
+      "duration": 3.91,
+      "text": "that will become DX Dy DZ or any"
+    },
+    {
+      "index": 59,
+      "start": 169.56,
+      "end": 171.509,
+      "duration": 1.949,
+      "text": "permutation of that because of course we"
+    },
+    {
+      "index": 60,
+      "start": 171.519,
+      "end": 173.11,
+      "duration": 1.591,
+      "text": "have lots of possible orders of"
+    },
+    {
+      "index": 61,
+      "start": 173.12,
+      "end": 178.19,
+      "duration": 5.07,
+      "text": "integration to choose"
+    },
+    {
+      "index": 62,
+      "start": 187.03,
+      "end": 187.04,
+      "duration": 0.01,
+      "text": "rather than bore you with you know"
+    },
+    {
+      "index": 63,
+      "start": 187.04,
+      "end": 189.71,
+      "duration": 2.67,
+      "text": "Theory and all sorts"
+    },
+    {
+      "index": 64,
+      "start": 189.72,
+      "end": 194.35,
+      "duration": 4.63,
+      "text": "of complicated things let's just do"
+    },
+    {
+      "index": 65,
+      "start": 197.43,
+      "end": 197.44,
+      "duration": 0.01,
+      "text": "examples and you'll see basically if you"
+    },
+    {
+      "index": 66,
+      "start": 197.44,
+      "end": 198.789,
+      "duration": 1.349,
+      "text": "understand how to set up iterated"
+    },
+    {
+      "index": 67,
+      "start": 198.799,
+      "end": 201.309,
+      "duration": 2.51,
+      "text": "integrals in two variables then you"
+    },
+    {
+      "index": 68,
+      "start": 201.319,
+      "end": 203.07,
+      "duration": 1.751,
+      "text": "basically understand how to do them in"
+    },
+    {
+      "index": 69,
+      "start": 203.08,
+      "end": 205.07,
+      "duration": 1.99,
+      "text": "three variables you just have to be a"
+    },
+    {
+      "index": 70,
+      "start": 205.08,
+      "end": 208.67,
+      "duration": 3.59,
+      "text": "bit more careful and there's one more"
+    },
+    {
+      "index": 71,
+      "start": 213.309,
+      "end": 213.319,
+      "duration": 0.01,
+      "text": "step okay so let's take our first triple"
+    },
+    {
+      "index": 72,
+      "start": 213.319,
+      "end": 215.789,
+      "duration": 2.47,
+      "text": "integral to be on the region so of"
+    },
+    {
+      "index": 73,
+      "start": 215.799,
+      "end": 216.949,
+      "duration": 1.15,
+      "text": "course there's two different things as"
+    },
+    {
+      "index": 74,
+      "start": 216.959,
+      "end": 218.99,
+      "duration": 2.031,
+      "text": "always there's the region of integration"
+    },
+    {
+      "index": 75,
+      "start": 219.0,
+      "end": 220.11,
+      "duration": 1.11,
+      "text": "and there's the function we're"
+    },
+    {
+      "index": 76,
+      "start": 220.12,
+      "end": 221.91,
+      "duration": 1.79,
+      "text": "integrating now the function we're"
+    },
+    {
+      "index": 77,
+      "start": 221.92,
+      "end": 223.63,
+      "duration": 1.71,
+      "text": "integrating well it will come in handy"
+    },
+    {
+      "index": 78,
+      "start": 223.64,
+      "end": 225.229,
+      "duration": 1.589,
+      "text": "when you actually try to evaluate the"
+    },
+    {
+      "index": 79,
+      "start": 225.239,
+      "end": 228.83,
+      "duration": 3.591,
+      "text": "integral but as you can see probably the"
+    },
+    {
+      "index": 80,
+      "start": 228.84,
+      "end": 231.309,
+      "duration": 2.469,
+      "text": "new part is really hard to set it up so"
+    },
+    {
+      "index": 81,
+      "start": 231.319,
+      "end": 232.63,
+      "duration": 1.311,
+      "text": "the function won't really matter that"
+    },
+    {
+      "index": 82,
+      "start": 232.64,
+      "end": 234.949,
+      "duration": 2.309,
+      "text": "much for me so in the examples I'll do"
+    },
+    {
+      "index": 83,
+      "start": 234.959,
+      "end": 236.949,
+      "duration": 1.99,
+      "text": "today the functions will be kind of"
+    },
+    {
+      "index": 84,
+      "start": 236.959,
+      "end": 240.55,
+      "duration": 3.591,
+      "text": "silly so for example let's say that we"
+    },
+    {
+      "index": 85,
+      "start": 240.56,
+      "end": 243.47,
+      "duration": 2.91,
+      "text": "want to look at the region"
+    },
+    {
+      "index": 86,
+      "start": 243.48,
+      "end": 250.19,
+      "duration": 6.71,
+      "text": "between two"
+    },
+    {
+      "index": 87,
+      "start": 254.67,
+      "end": 254.68,
+      "duration": 0.01,
+      "text": "paraboloids 1 given by z = x + y^ 2 V"
+    },
+    {
+      "index": 88,
+      "start": 254.68,
+      "end": 259.59,
+      "duration": 4.91,
+      "text": "over is z = 4 - x^2 - y^"
+    },
+    {
+      "index": 89,
+      "start": 259.6,
+      "end": 263.629,
+      "duration": 4.029,
+      "text": "2 and so I haven't given you yet the"
+    },
+    {
+      "index": 90,
+      "start": 263.639,
+      "end": 265.11,
+      "duration": 1.471,
+      "text": "function to integrate okay this is not"
+    },
+    {
+      "index": 91,
+      "start": 265.12,
+      "end": 267.99,
+      "duration": 2.87,
+      "text": "the function to integrate this is what"
+    },
+    {
+      "index": 92,
+      "start": 268.0,
+      "end": 270.43,
+      "duration": 2.43,
+      "text": "describes the region where I will"
+    },
+    {
+      "index": 93,
+      "start": 270.44,
+      "end": 272.87,
+      "duration": 2.43,
+      "text": "integrate my function and let's say that"
+    },
+    {
+      "index": 94,
+      "start": 272.88,
+      "end": 276.23,
+      "duration": 3.35,
+      "text": "I just want to find the volume of this"
+    },
+    {
+      "index": 95,
+      "start": 276.24,
+      "end": 280.35,
+      "duration": 4.11,
+      "text": "region which is the triple integral of"
+    },
+    {
+      "index": 96,
+      "start": 280.36,
+      "end": 282.15,
+      "duration": 1.79,
+      "text": "just one"
+    },
+    {
+      "index": 97,
+      "start": 282.16,
+      "end": 285.23,
+      "duration": 3.07,
+      "text": "DV okay similarly remember when we try"
+    },
+    {
+      "index": 98,
+      "start": 285.24,
+      "end": 286.95,
+      "duration": 1.71,
+      "text": "to find the area of origin in the plane"
+    },
+    {
+      "index": 99,
+      "start": 286.96,
+      "end": 290.029,
+      "duration": 3.069,
+      "text": "we were just integrating 1 da here we"
+    },
+    {
+      "index": 100,
+      "start": 290.039,
+      "end": 292.51,
+      "duration": 2.471,
+      "text": "integrate 1 DV that will give us the"
+    },
+    {
+      "index": 101,
+      "start": 292.52,
+      "end": 295.71,
+      "duration": 3.19,
+      "text": "volume now I know that you can imagine"
+    },
+    {
+      "index": 102,
+      "start": 295.72,
+      "end": 297.909,
+      "duration": 2.189,
+      "text": "how to actually do this one as a double"
+    },
+    {
+      "index": 103,
+      "start": 297.919,
+      "end": 300.27,
+      "duration": 2.351,
+      "text": "integral but you know the goal of the"
+    },
+    {
+      "index": 104,
+      "start": 300.28,
+      "end": 301.749,
+      "duration": 1.469,
+      "text": "game is to set up the triple integral"
+    },
+    {
+      "index": 105,
+      "start": 301.759,
+      "end": 304.189,
+      "duration": 2.43,
+      "text": "it's not to actually find the"
+    },
+    {
+      "index": 106,
+      "start": 304.199,
+      "end": 309.469,
+      "duration": 5.27,
+      "text": "volume so what does that look"
+    },
+    {
+      "index": 107,
+      "start": 314.59,
+      "end": 314.6,
+      "duration": 0.01,
+      "text": "like well zal X2 + y^2 that's one of our"
+    },
+    {
+      "index": 108,
+      "start": 314.6,
+      "end": 316.35,
+      "duration": 1.75,
+      "text": "favorite parabol it's that's something"
+    },
+    {
+      "index": 109,
+      "start": 316.36,
+      "end": 318.11,
+      "duration": 1.75,
+      "text": "that looks like a"
+    },
+    {
+      "index": 110,
+      "start": 318.12,
+      "end": 321.07,
+      "duration": 2.95,
+      "text": "parabola with its bottom at the origin"
+    },
+    {
+      "index": 111,
+      "start": 321.08,
+      "end": 327.27,
+      "duration": 6.19,
+      "text": "that you spin about the"
+    },
+    {
+      "index": 112,
+      "start": 330.23,
+      "end": 330.24,
+      "duration": 0.01,
+      "text": "z-axis and Z equal"
+    },
+    {
+      "index": 113,
+      "start": 330.24,
+      "end": 334.59,
+      "duration": 4.35,
+      "text": "4 - - y^ 2 well that's also a paraboloid"
+    },
+    {
+      "index": 114,
+      "start": 334.6,
+      "end": 337.189,
+      "duration": 2.589,
+      "text": "but this one is pointing down and when"
+    },
+    {
+      "index": 115,
+      "start": 337.199,
+      "end": 340.469,
+      "duration": 3.27,
+      "text": "you take xal yal 0 you get zal 4 so it"
+    },
+    {
+      "index": 116,
+      "start": 340.479,
+      "end": 343.909,
+      "duration": 3.43,
+      "text": "starts at four and it goes"
+    },
+    {
+      "index": 117,
+      "start": 343.919,
+      "end": 348.67,
+      "duration": 4.751,
+      "text": "down like"
+    },
+    {
+      "index": 118,
+      "start": 351.11,
+      "end": 351.12,
+      "duration": 0.01,
+      "text": "that okay so the solid that we'd like to"
+    },
+    {
+      "index": 119,
+      "start": 351.12,
+      "end": 355.07,
+      "duration": 3.95,
+      "text": "consider is what's in between in"
+    },
+    {
+      "index": 120,
+      "start": 358.99,
+      "end": 359.0,
+      "duration": 0.01,
+      "text": "here so it has a curvy top which is this"
+    },
+    {
+      "index": 121,
+      "start": 359.0,
+      "end": 361.35,
+      "duration": 2.35,
+      "text": "downward paraboloid a curvy bottom which"
+    },
+    {
+      "index": 122,
+      "start": 361.36,
+      "end": 362.87,
+      "duration": 1.51,
+      "text": "is the other"
+    },
+    {
+      "index": 123,
+      "start": 362.88,
+      "end": 365.43,
+      "duration": 2.55,
+      "text": "paraboloid and what about the sides"
+    },
+    {
+      "index": 124,
+      "start": 365.44,
+      "end": 368.79,
+      "duration": 3.35,
+      "text": "where do you have any idea what we get"
+    },
+    {
+      "index": 125,
+      "start": 368.8,
+      "end": 370.749,
+      "duration": 1.949,
+      "text": "here yeah it's going to be a circle"
+    },
+    {
+      "index": 126,
+      "start": 370.759,
+      "end": 372.35,
+      "duration": 1.591,
+      "text": "because the entire picture is invariant"
+    },
+    {
+      "index": 127,
+      "start": 372.36,
+      "end": 375.83,
+      "duration": 3.47,
+      "text": "by rotation around the X the z-axis so"
+    },
+    {
+      "index": 128,
+      "start": 375.84,
+      "end": 377.189,
+      "duration": 1.349,
+      "text": "you know if you look at the picture just"
+    },
+    {
+      "index": 129,
+      "start": 377.199,
+      "end": 379.51,
+      "duration": 2.311,
+      "text": "say in the YZ plane you get this point"
+    },
+    {
+      "index": 130,
+      "start": 379.52,
+      "end": 382.23,
+      "duration": 2.71,
+      "text": "and that point and when you rotate when"
+    },
+    {
+      "index": 131,
+      "start": 382.24,
+      "end": 384.07,
+      "duration": 1.83,
+      "text": "you rotate everything around the z-axis"
+    },
+    {
+      "index": 132,
+      "start": 384.08,
+      "end": 388.39,
+      "duration": 4.31,
+      "text": "you will just get a circle"
+    },
+    {
+      "index": 133,
+      "start": 391.35,
+      "end": 391.36,
+      "duration": 0.01,
+      "text": "here"
+    },
+    {
+      "index": 134,
+      "start": 391.36,
+      "end": 394.11,
+      "duration": 2.75,
+      "text": "okay so our goal is to find the volume"
+    },
+    {
+      "index": 135,
+      "start": 394.12,
+      "end": 396.469,
+      "duration": 2.349,
+      "text": "of this thing and there's lots of things"
+    },
+    {
+      "index": 136,
+      "start": 396.479,
+      "end": 398.15,
+      "duration": 1.671,
+      "text": "I could do to simplify the calculation"
+    },
+    {
+      "index": 137,
+      "start": 398.16,
+      "end": 400.07,
+      "duration": 1.91,
+      "text": "or even not do it as a triple integral"
+    },
+    {
+      "index": 138,
+      "start": 400.08,
+      "end": 402.55,
+      "duration": 2.47,
+      "text": "at all but I want to actually set it up"
+    },
+    {
+      "index": 139,
+      "start": 402.56,
+      "end": 403.99,
+      "duration": 1.43,
+      "text": "as a triple"
+    },
+    {
+      "index": 140,
+      "start": 404.0,
+      "end": 407.27,
+      "duration": 3.27,
+      "text": "integral just to show how we do"
+    },
+    {
+      "index": 141,
+      "start": 407.28,
+      "end": 409.87,
+      "duration": 2.59,
+      "text": "that okay so the first thing we need to"
+    },
+    {
+      "index": 142,
+      "start": 409.88,
+      "end": 412.909,
+      "duration": 3.029,
+      "text": "do is choose an order of"
+    },
+    {
+      "index": 143,
+      "start": 412.919,
+      "end": 416.27,
+      "duration": 3.351,
+      "text": "integration and here well I don't know"
+    },
+    {
+      "index": 144,
+      "start": 416.28,
+      "end": 418.189,
+      "duration": 1.909,
+      "text": "if you can see it yet but hopefully soon"
+    },
+    {
+      "index": 145,
+      "start": 418.199,
+      "end": 421.11,
+      "duration": 2.911,
+      "text": "that will be intuitive to you uh I claim"
+    },
+    {
+      "index": 146,
+      "start": 421.12,
+      "end": 422.27,
+      "duration": 1.15,
+      "text": "that I would like to start by"
+    },
+    {
+      "index": 147,
+      "start": 422.28,
+      "end": 424.23,
+      "duration": 1.95,
+      "text": "integrating first over Z what's the"
+    },
+    {
+      "index": 148,
+      "start": 424.24,
+      "end": 426.35,
+      "duration": 2.11,
+      "text": "reason for that well the reason is if I"
+    },
+    {
+      "index": 149,
+      "start": 426.36,
+      "end": 429.15,
+      "duration": 2.79,
+      "text": "give you X and Y then you can find"
+    },
+    {
+      "index": 150,
+      "start": 429.16,
+      "end": 431.27,
+      "duration": 2.11,
+      "text": "quickly what's the bottom and top values"
+    },
+    {
+      "index": 151,
+      "start": 431.28,
+      "end": 434.35,
+      "duration": 3.07,
+      "text": "of Z for that choice of X and Y okay so"
+    },
+    {
+      "index": 152,
+      "start": 434.36,
+      "end": 439.15,
+      "duration": 4.79,
+      "text": "if I have X and Y given then I can find"
+    },
+    {
+      "index": 153,
+      "start": 439.16,
+      "end": 441.39,
+      "duration": 2.23,
+      "text": "above"
+    },
+    {
+      "index": 154,
+      "start": 441.4,
+      "end": 443.629,
+      "duration": 2.229,
+      "text": "that what"
+    },
+    {
+      "index": 155,
+      "start": 443.639,
+      "end": 448.029,
+      "duration": 4.39,
+      "text": "is the bottom Z and the top Z"
+    },
+    {
+      "index": 156,
+      "start": 448.039,
+      "end": 449.869,
+      "duration": 1.83,
+      "text": "corresponding to"
+    },
+    {
+      "index": 157,
+      "start": 449.879,
+      "end": 451.67,
+      "duration": 1.791,
+      "text": "you know the the vertical line above"
+    },
+    {
+      "index": 158,
+      "start": 451.68,
+      "end": 454.469,
+      "duration": 2.789,
+      "text": "that point uh the portion of it that's"
+    },
+    {
+      "index": 159,
+      "start": 454.479,
+      "end": 455.629,
+      "duration": 1.15,
+      "text": "inside our"
+    },
+    {
+      "index": 160,
+      "start": 455.639,
+      "end": 459.749,
+      "duration": 4.11,
+      "text": "solid so somehow there a bottom"
+    },
+    {
+      "index": 161,
+      "start": 459.759,
+      "end": 462.67,
+      "duration": 2.911,
+      "text": "Z and the top"
+    },
+    {
+      "index": 162,
+      "start": 462.68,
+      "end": 466.07,
+      "duration": 3.39,
+      "text": "Z and so the top Z is actually on the"
+    },
+    {
+      "index": 163,
+      "start": 466.08,
+      "end": 469.71,
+      "duration": 3.63,
+      "text": "downward paraboloid so it's 4 - x - y^ 2"
+    },
+    {
+      "index": 164,
+      "start": 469.72,
+      "end": 473.23,
+      "duration": 3.51,
+      "text": "the bottom value of Z is X2 +"
+    },
+    {
+      "index": 165,
+      "start": 473.24,
+      "end": 477.99,
+      "duration": 4.75,
+      "text": "y^2 okay so if I want to"
+    },
+    {
+      "index": 166,
+      "start": 483.51,
+      "end": 483.52,
+      "duration": 0.01,
+      "text": "start to set this up I will write triple"
+    },
+    {
+      "index": 167,
+      "start": 483.52,
+      "end": 485.71,
+      "duration": 2.19,
+      "text": "integral and then so let's say I'm going"
+    },
+    {
+      "index": 168,
+      "start": 485.72,
+      "end": 490.51,
+      "duration": 4.79,
+      "text": "to do it DZ first and then say Dy DX for"
+    },
+    {
+      "index": 169,
+      "start": 490.52,
+      "end": 492.55,
+      "duration": 2.03,
+      "text": "example doesn't really"
+    },
+    {
+      "index": 170,
+      "start": 492.56,
+      "end": 495.07,
+      "duration": 2.51,
+      "text": "matter so then for a given value of X"
+    },
+    {
+      "index": 171,
+      "start": 495.08,
+      "end": 498.39,
+      "duration": 3.31,
+      "text": "and Y I claim Z goes from the bottom"
+    },
+    {
+      "index": 172,
+      "start": 498.4,
+      "end": 503.07,
+      "duration": 4.67,
+      "text": "surface the bottom face is z = X2 + y^2"
+    },
+    {
+      "index": 173,
+      "start": 503.08,
+      "end": 508.23,
+      "duration": 5.15,
+      "text": "the top face is 4 - x^2 - y^"
+    },
+    {
+      "index": 174,
+      "start": 508.24,
+      "end": 512.909,
+      "duration": 4.669,
+      "text": "2 okay is that okay with f"
+    },
+    {
+      "index": 175,
+      "start": 512.919,
+      "end": 517.909,
+      "duration": 4.99,
+      "text": "i1 yeah any questions so"
+    },
+    {
+      "index": 176,
+      "start": 524.55,
+      "end": 524.56,
+      "duration": 0.01,
+      "text": "yes why did I start with Z that's a very"
+    },
+    {
+      "index": 177,
+      "start": 524.56,
+      "end": 526.43,
+      "duration": 1.87,
+      "text": "good question so I could choose whatever"
+    },
+    {
+      "index": 178,
+      "start": 526.44,
+      "end": 529.31,
+      "duration": 2.87,
+      "text": "order I want but let's say I did X first"
+    },
+    {
+      "index": 179,
+      "start": 529.32,
+      "end": 531.71,
+      "duration": 2.39,
+      "text": "then to find the inner integral bounds I"
+    },
+    {
+      "index": 180,
+      "start": 531.72,
+      "end": 534.23,
+      "duration": 2.51,
+      "text": "would need to say okay I've chosen"
+    },
+    {
+      "index": 181,
+      "start": 534.24,
+      "end": 536.47,
+      "duration": 2.23,
+      "text": "values of see in the inner integral"
+    },
+    {
+      "index": 182,
+      "start": 536.48,
+      "end": 539.59,
+      "duration": 3.11,
+      "text": "you've fixed the two other variables and"
+    },
+    {
+      "index": 183,
+      "start": 539.6,
+      "end": 540.79,
+      "duration": 1.19,
+      "text": "you're just going to vary that one and"
+    },
+    {
+      "index": 184,
+      "start": 540.8,
+      "end": 542.949,
+      "duration": 2.149,
+      "text": "you need to find bounds for it so if I"
+    },
+    {
+      "index": 185,
+      "start": 542.959,
+      "end": 545.71,
+      "duration": 2.751,
+      "text": "integrate over X first I have to solve"
+    },
+    {
+      "index": 186,
+      "start": 545.72,
+      "end": 547.59,
+      "duration": 1.87,
+      "text": "answer the following question say I'm"
+    },
+    {
+      "index": 187,
+      "start": 547.6,
+      "end": 550.59,
+      "duration": 2.99,
+      "text": "given values of Y and Z what are the"
+    },
+    {
+      "index": 188,
+      "start": 550.6,
+      "end": 552.47,
+      "duration": 1.87,
+      "text": "bounds for X so that would mean I'm"
+    },
+    {
+      "index": 189,
+      "start": 552.48,
+      "end": 555.79,
+      "duration": 3.31,
+      "text": "slicing my solid by lines that are"
+    },
+    {
+      "index": 190,
+      "start": 555.8,
+      "end": 558.35,
+      "duration": 2.55,
+      "text": "parallel to the x axis and see it's kind"
+    },
+    {
+      "index": 191,
+      "start": 558.36,
+      "end": 560.47,
+      "duration": 2.11,
+      "text": "of hard to find what are the values of X"
+    },
+    {
+      "index": 192,
+      "start": 560.48,
+      "end": 562.55,
+      "duration": 2.07,
+      "text": "at the front and at the back I mean it's"
+    },
+    {
+      "index": 193,
+      "start": 562.56,
+      "end": 564.87,
+      "duration": 2.31,
+      "text": "possible but it's easier to actually"
+    },
+    {
+      "index": 194,
+      "start": 564.88,
+      "end": 568.19,
+      "duration": 3.31,
+      "text": "First Look for Z at the top and bottom"
+    },
+    {
+      "index": 195,
+      "start": 568.2,
+      "end": 573.43,
+      "duration": 5.23,
+      "text": "yes is"
+    },
+    {
+      "index": 196,
+      "start": 575.87,
+      "end": 575.88,
+      "duration": 0.01,
+      "text": "uh dydx or dxdy no it's completely at"
+    },
+    {
+      "index": 197,
+      "start": 575.88,
+      "end": 577.59,
+      "duration": 1.71,
+      "text": "random I mean you can see X and Y play"
+    },
+    {
+      "index": 198,
+      "start": 577.6,
+      "end": 582.11,
+      "duration": 4.51,
+      "text": "symmetric roles so you know if you look"
+    },
+    {
+      "index": 199,
+      "start": 582.12,
+      "end": 584.55,
+      "duration": 2.43,
+      "text": "at it it's reasonably clear that Z"
+    },
+    {
+      "index": 200,
+      "start": 584.56,
+      "end": 586.829,
+      "duration": 2.269,
+      "text": "should be the E just one to set up first"
+    },
+    {
+      "index": 201,
+      "start": 586.839,
+      "end": 590.11,
+      "duration": 3.271,
+      "text": "for what comes next X Y or YX it's the"
+    },
+    {
+      "index": 202,
+      "start": 590.12,
+      "end": 592.55,
+      "duration": 2.43,
+      "text": "same uh"
+    },
+    {
+      "index": 203,
+      "start": 592.56,
+      "end": 595.269,
+      "duration": 2.709,
+      "text": "yes coordinates yes it will be easier to"
+    },
+    {
+      "index": 204,
+      "start": 595.279,
+      "end": 597.03,
+      "duration": 1.751,
+      "text": "use cical coordinates I'll get to that"
+    },
+    {
+      "index": 205,
+      "start": 597.04,
+      "end": 604.19,
+      "duration": 7.15,
+      "text": "just as soon as I'm done with this one"
+    },
+    {
+      "index": 206,
+      "start": 607.67,
+      "end": 607.68,
+      "duration": 0.01,
+      "text": "okay so let's continue a bit with that"
+    },
+    {
+      "index": 207,
+      "start": 607.68,
+      "end": 609.67,
+      "duration": 1.99,
+      "text": "and I mean as you mentioned actually we"
+    },
+    {
+      "index": 208,
+      "start": 609.68,
+      "end": 611.47,
+      "duration": 1.79,
+      "text": "don't actually want to do it with XY in"
+    },
+    {
+      "index": 209,
+      "start": 611.48,
+      "end": 613.75,
+      "duration": 2.27,
+      "text": "the end uh in a few minutes we'll"
+    },
+    {
+      "index": 210,
+      "start": 613.76,
+      "end": 615.63,
+      "duration": 1.87,
+      "text": "actually switch to cylindrical"
+    },
+    {
+      "index": 211,
+      "start": 615.64,
+      "end": 617.269,
+      "duration": 1.629,
+      "text": "coordinates but for now we don't even"
+    },
+    {
+      "index": 212,
+      "start": 617.279,
+      "end": 618.75,
+      "duration": 1.471,
+      "text": "know what they are"
+    },
+    {
+      "index": 213,
+      "start": 618.76,
+      "end": 620.949,
+      "duration": 2.189,
+      "text": "so"
+    },
+    {
+      "index": 214,
+      "start": 620.959,
+      "end": 625.03,
+      "duration": 4.071,
+      "text": "okay so I've done the inner integral by"
+    },
+    {
+      "index": 215,
+      "start": 625.04,
+      "end": 626.47,
+      "duration": 1.43,
+      "text": "looking at you know if I slice by"
+    },
+    {
+      "index": 216,
+      "start": 626.48,
+      "end": 628.43,
+      "duration": 1.95,
+      "text": "vertical lines what is the top what is"
+    },
+    {
+      "index": 217,
+      "start": 628.44,
+      "end": 631.269,
+      "duration": 2.829,
+      "text": "the bottom for a given value of X and Y"
+    },
+    {
+      "index": 218,
+      "start": 631.279,
+      "end": 634.43,
+      "duration": 3.151,
+      "text": "so the bounds in the inner integral"
+    },
+    {
+      "index": 219,
+      "start": 634.44,
+      "end": 638.069,
+      "duration": 3.629,
+      "text": "depend on both the middle and outer"
+    },
+    {
+      "index": 220,
+      "start": 638.079,
+      "end": 640.75,
+      "duration": 2.671,
+      "text": "variables next I need to figure out what"
+    },
+    {
+      "index": 221,
+      "start": 640.76,
+      "end": 642.829,
+      "duration": 2.069,
+      "text": "values of X and Y I will be interested"
+    },
+    {
+      "index": 222,
+      "start": 642.839,
+      "end": 646.47,
+      "duration": 3.631,
+      "text": "in and the answer for that is well the"
+    },
+    {
+      "index": 223,
+      "start": 646.48,
+      "end": 648.31,
+      "duration": 1.83,
+      "text": "values of X and Y that I want to look at"
+    },
+    {
+      "index": 224,
+      "start": 648.32,
+      "end": 650.069,
+      "duration": 1.749,
+      "text": "are all those that are in the shade of"
+    },
+    {
+      "index": 225,
+      "start": 650.079,
+      "end": 650.99,
+      "duration": 0.911,
+      "text": "my"
+    },
+    {
+      "index": 226,
+      "start": 651.0,
+      "end": 654.389,
+      "duration": 3.389,
+      "text": "Orion so in fact to set up the Midland"
+    },
+    {
+      "index": 227,
+      "start": 654.399,
+      "end": 657.55,
+      "duration": 3.151,
+      "text": "outer bounds what I want to do is"
+    },
+    {
+      "index": 228,
+      "start": 657.56,
+      "end": 663.949,
+      "duration": 6.389,
+      "text": "Project my solid so my solid looks"
+    },
+    {
+      "index": 229,
+      "start": 667.269,
+      "end": 667.279,
+      "duration": 0.01,
+      "text": "like this kind of thing and I don't"
+    },
+    {
+      "index": 230,
+      "start": 667.279,
+      "end": 670.55,
+      "duration": 3.271,
+      "text": "really know how to call it but what's"
+    },
+    {
+      "index": 231,
+      "start": 670.56,
+      "end": 673.629,
+      "duration": 3.069,
+      "text": "interesting now is I want to look at the"
+    },
+    {
+      "index": 232,
+      "start": 673.639,
+      "end": 676.67,
+      "duration": 3.031,
+      "text": "shadow that it casts in the XY"
+    },
+    {
+      "index": 233,
+      "start": 676.68,
+      "end": 679.31,
+      "duration": 2.63,
+      "text": "plane okay and of course that shadow"
+    },
+    {
+      "index": 234,
+      "start": 679.32,
+      "end": 683.23,
+      "duration": 3.91,
+      "text": "will just be the disc that's directly"
+    },
+    {
+      "index": 235,
+      "start": 683.24,
+      "end": 686.509,
+      "duration": 3.269,
+      "text": "below this disc here that's separating"
+    },
+    {
+      "index": 236,
+      "start": 686.519,
+      "end": 687.949,
+      "duration": 1.43,
+      "text": "the two halves of the"
+    },
+    {
+      "index": 237,
+      "start": 687.959,
+      "end": 689.91,
+      "duration": 1.951,
+      "text": "solid"
+    },
+    {
+      "index": 238,
+      "start": 689.92,
+      "end": 691.79,
+      "duration": 1.87,
+      "text": "and so now I will want to"
+    },
+    {
+      "index": 239,
+      "start": 691.8,
+      "end": 693.389,
+      "duration": 1.589,
+      "text": "integrate"
+    },
+    {
+      "index": 240,
+      "start": 693.399,
+      "end": 694.99,
+      "duration": 1.591,
+      "text": "over"
+    },
+    {
+      "index": 241,
+      "start": 695.0,
+      "end": 699.79,
+      "duration": 4.79,
+      "text": "Sor I want to look at all the X y's X"
+    },
+    {
+      "index": 242,
+      "start": 699.8,
+      "end": 703.829,
+      "duration": 4.029,
+      "text": "and Y in the"
+    },
+    {
+      "index": 243,
+      "start": 706.87,
+      "end": 706.88,
+      "duration": 0.01,
+      "text": "shadow so now I'm left with actually"
+    },
+    {
+      "index": 244,
+      "start": 706.88,
+      "end": 708.23,
+      "duration": 1.35,
+      "text": "something we've already done namely"
+    },
+    {
+      "index": 245,
+      "start": 708.24,
+      "end": 710.91,
+      "duration": 2.67,
+      "text": "setting up a double integral over X and"
+    },
+    {
+      "index": 246,
+      "start": 710.92,
+      "end": 713.55,
+      "duration": 2.63,
+      "text": "Y so if it helps here we don't strictly"
+    },
+    {
+      "index": 247,
+      "start": 713.56,
+      "end": 715.87,
+      "duration": 2.31,
+      "text": "need it but if it helps you know it"
+    },
+    {
+      "index": 248,
+      "start": 715.88,
+      "end": 718.43,
+      "duration": 2.55,
+      "text": "could be useful to actually draw a"
+    },
+    {
+      "index": 249,
+      "start": 718.44,
+      "end": 719.99,
+      "duration": 1.55,
+      "text": "picture of this"
+    },
+    {
+      "index": 250,
+      "start": 720.0,
+      "end": 722.509,
+      "duration": 2.509,
+      "text": "shadow in the XY"
+    },
+    {
+      "index": 251,
+      "start": 722.519,
+      "end": 725.99,
+      "duration": 3.471,
+      "text": "plane so here it would just look again"
+    },
+    {
+      "index": 252,
+      "start": 726.0,
+      "end": 728.269,
+      "duration": 2.269,
+      "text": "like a"
+    },
+    {
+      "index": 253,
+      "start": 728.279,
+      "end": 736.35,
+      "duration": 8.071,
+      "text": "dis and set it"
+    },
+    {
+      "index": 254,
+      "start": 739.43,
+      "end": 739.44,
+      "duration": 0.01,
+      "text": "up now the question is how do we find"
+    },
+    {
+      "index": 255,
+      "start": 739.44,
+      "end": 741.55,
+      "duration": 2.11,
+      "text": "the size of this disc the size of this"
+    },
+    {
+      "index": 256,
+      "start": 741.56,
+      "end": 743.87,
+      "duration": 2.31,
+      "text": "Shadow well basically we have to figure"
+    },
+    {
+      "index": 257,
+      "start": 743.88,
+      "end": 747.87,
+      "duration": 3.99,
+      "text": "out where our two paraboloids"
+    },
+    {
+      "index": 258,
+      "start": 747.88,
+      "end": 750.35,
+      "duration": 2.47,
+      "text": "intersect"
+    },
+    {
+      "index": 259,
+      "start": 750.36,
+      "end": 756.189,
+      "duration": 5.829,
+      "text": "oops there's nothing"
+    },
+    {
+      "index": 260,
+      "start": 760.75,
+      "end": 760.76,
+      "duration": 0.01,
+      "text": "else okay so one way"
+    },
+    {
+      "index": 261,
+      "start": 760.76,
+      "end": 770.269,
+      "duration": 9.509,
+      "text": "to how to find the shadow in the XY"
+    },
+    {
+      "index": 262,
+      "start": 772.629,
+      "end": 772.639,
+      "duration": 0.01,
+      "text": "plane well here actually we know the"
+    },
+    {
+      "index": 263,
+      "start": 772.639,
+      "end": 776.269,
+      "duration": 3.63,
+      "text": "answer a prior but even if we didn't we"
+    },
+    {
+      "index": 264,
+      "start": 776.279,
+      "end": 779.269,
+      "duration": 2.99,
+      "text": "could just say well our region live"
+    },
+    {
+      "index": 265,
+      "start": 779.279,
+      "end": 781.79,
+      "duration": 2.511,
+      "text": "wherever the bottom surface is below the"
+    },
+    {
+      "index": 266,
+      "start": 781.8,
+      "end": 787.509,
+      "duration": 5.709,
+      "text": "top surface okay so we want to look at"
+    },
+    {
+      "index": 267,
+      "start": 787.519,
+      "end": 789.43,
+      "duration": 1.911,
+      "text": "things"
+    },
+    {
+      "index": 268,
+      "start": 789.44,
+      "end": 793.79,
+      "duration": 4.35,
+      "text": "wherever the bottom value of Z is less"
+    },
+    {
+      "index": 269,
+      "start": 793.8,
+      "end": 796.069,
+      "duration": 2.269,
+      "text": "than the top value of Z I mean less or"
+    },
+    {
+      "index": 270,
+      "start": 796.079,
+      "end": 798.629,
+      "duration": 2.55,
+      "text": "less than equal that's the same thing so"
+    },
+    {
+      "index": 271,
+      "start": 798.639,
+      "end": 802.949,
+      "duration": 4.31,
+      "text": "the bottom value of Z is X2 + y^2 should"
+    },
+    {
+      "index": 272,
+      "start": 802.959,
+      "end": 807.069,
+      "duration": 4.11,
+      "text": "be less than 4 - x^2 - y^"
+    },
+    {
+      "index": 273,
+      "start": 807.079,
+      "end": 810.189,
+      "duration": 3.11,
+      "text": "2 and if you solve for"
+    },
+    {
+      "index": 274,
+      "start": 810.199,
+      "end": 813.629,
+      "duration": 3.43,
+      "text": "that then you will get well so let's"
+    },
+    {
+      "index": 275,
+      "start": 813.639,
+      "end": 815.509,
+      "duration": 1.87,
+      "text": "move these guys over here you'll get 2x2"
+    },
+    {
+      "index": 276,
+      "start": 815.519,
+      "end": 819.31,
+      "duration": 3.791,
+      "text": "+ 2 y^2 less than 4 that becomes X2 +"
+    },
+    {
+      "index": 277,
+      "start": 819.32,
+      "end": 824.069,
+      "duration": 4.749,
+      "text": "y^2 less than 2 so that means that's a"
+    },
+    {
+      "index": 278,
+      "start": 824.079,
+      "end": 827.67,
+      "duration": 3.591,
+      "text": "dis of"
+    },
+    {
+      "index": 279,
+      "start": 830.23,
+      "end": 830.24,
+      "duration": 0.01,
+      "text": "radius square root of"
+    },
+    {
+      "index": 280,
+      "start": 830.24,
+      "end": 832.43,
+      "duration": 2.19,
+      "text": "two"
+    },
+    {
+      "index": 281,
+      "start": 832.44,
+      "end": 834.79,
+      "duration": 2.35,
+      "text": "okay so we kind of knew in advance it"
+    },
+    {
+      "index": 282,
+      "start": 834.8,
+      "end": 836.23,
+      "duration": 1.43,
+      "text": "was going to be a dis but what we've"
+    },
+    {
+      "index": 283,
+      "start": 836.24,
+      "end": 840.069,
+      "duration": 3.829,
+      "text": "learned now is that this rad isare root"
+    },
+    {
+      "index": 284,
+      "start": 840.079,
+      "end": 843.87,
+      "duration": 3.791,
+      "text": "of"
+    },
+    {
+      "index": 285,
+      "start": 846.71,
+      "end": 846.72,
+      "duration": 0.01,
+      "text": "two so if we want to set up if we really"
+    },
+    {
+      "index": 286,
+      "start": 846.72,
+      "end": 850.67,
+      "duration": 3.95,
+      "text": "want to set it up using Dy DX like I"
+    },
+    {
+      "index": 287,
+      "start": 850.68,
+      "end": 853.629,
+      "duration": 2.949,
+      "text": "started then we can do it because we"
+    },
+    {
+      "index": 288,
+      "start": 853.639,
+      "end": 855.91,
+      "duration": 2.271,
+      "text": "know so for the middle integral"
+    },
+    {
+      "index": 289,
+      "start": 855.92,
+      "end": 859.03,
+      "duration": 3.11,
+      "text": "now we want to fix a value of x and for"
+    },
+    {
+      "index": 290,
+      "start": 859.04,
+      "end": 860.91,
+      "duration": 1.87,
+      "text": "that fixed value of x we want to figure"
+    },
+    {
+      "index": 291,
+      "start": 860.92,
+      "end": 864.03,
+      "duration": 3.11,
+      "text": "out the bounce for y well the answer is"
+    },
+    {
+      "index": 292,
+      "start": 864.04,
+      "end": 866.749,
+      "duration": 2.709,
+      "text": "y goes from here to here what's here"
+    },
+    {
+      "index": 293,
+      "start": 866.759,
+      "end": 871.35,
+      "duration": 4.591,
+      "text": "well here Y is s < TK of 2 - x 2 and"
+    },
+    {
+      "index": 294,
+      "start": 871.36,
+      "end": 872.59,
+      "duration": 1.23,
+      "text": "here"
+    },
+    {
+      "index": 295,
+      "start": 872.6,
+      "end": 875.31,
+      "duration": 2.71,
+      "text": "it's < TK 2 - x^"
+    },
+    {
+      "index": 296,
+      "start": 875.32,
+      "end": 881.069,
+      "duration": 5.749,
+      "text": "2 so y will go from < TK of 2 - x^ 2 to"
+    },
+    {
+      "index": 297,
+      "start": 881.079,
+      "end": 882.47,
+      "duration": 1.391,
+      "text": "positive square"
+    },
+    {
+      "index": 298,
+      "start": 882.48,
+      "end": 889.47,
+      "duration": 6.99,
+      "text": "root and then X will go from < tk2 to <"
+    },
+    {
+      "index": 299,
+      "start": 889.48,
+      "end": 891.71,
+      "duration": 2.23,
+      "text": "tk2 okay if that's not completely clear"
+    },
+    {
+      "index": 300,
+      "start": 891.72,
+      "end": 894.31,
+      "duration": 2.59,
+      "text": "to you then I encourage you to go over"
+    },
+    {
+      "index": 301,
+      "start": 894.32,
+      "end": 897.31,
+      "duration": 2.99,
+      "text": "how we set up double integrals"
+    },
+    {
+      "index": 302,
+      "start": 897.32,
+      "end": 901.269,
+      "duration": 3.949,
+      "text": "again okay do does that make sense kind"
+    },
+    {
+      "index": 303,
+      "start": 901.279,
+      "end": 914.629,
+      "duration": 13.35,
+      "text": "of"
+    },
+    {
+      "index": 304,
+      "start": 917.67,
+      "end": 917.68,
+      "duration": 0.01,
+      "text": "yeah well so when we set up remember"
+    },
+    {
+      "index": 305,
+      "start": 917.68,
+      "end": 920.269,
+      "duration": 2.589,
+      "text": "we're setting up a double integral Dy DX"
+    },
+    {
+      "index": 306,
+      "start": 920.279,
+      "end": 923.31,
+      "duration": 3.031,
+      "text": "here so when we do it dyx it means we"
+    },
+    {
+      "index": 307,
+      "start": 923.32,
+      "end": 925.55,
+      "duration": 2.23,
+      "text": "slice this region of the plane by"
+    },
+    {
+      "index": 308,
+      "start": 925.56,
+      "end": 926.71,
+      "duration": 1.15,
+      "text": "vertical line"
+    },
+    {
+      "index": 309,
+      "start": 926.72,
+      "end": 930.59,
+      "duration": 3.87,
+      "text": "segments in the so this middle guy would"
+    },
+    {
+      "index": 310,
+      "start": 930.6,
+      "end": 932.91,
+      "duration": 2.31,
+      "text": "be what used to be the inner integral so"
+    },
+    {
+      "index": 311,
+      "start": 932.92,
+      "end": 936.189,
+      "duration": 3.269,
+      "text": "in the inner remember you fix the value"
+    },
+    {
+      "index": 312,
+      "start": 936.199,
+      "end": 938.15,
+      "duration": 1.951,
+      "text": "of x and you ask yourself what is the"
+    },
+    {
+      "index": 313,
+      "start": 938.16,
+      "end": 941.309,
+      "duration": 3.149,
+      "text": "range of values of Y in my region so y"
+    },
+    {
+      "index": 314,
+      "start": 941.319,
+      "end": 943.59,
+      "duration": 2.271,
+      "text": "goes from here to here and what here and"
+    },
+    {
+      "index": 315,
+      "start": 943.6,
+      "end": 947.23,
+      "duration": 3.63,
+      "text": "here are depends on the value of x how"
+    },
+    {
+      "index": 316,
+      "start": 947.24,
+      "end": 948.55,
+      "duration": 1.31,
+      "text": "well we have to find the relation"
+    },
+    {
+      "index": 317,
+      "start": 948.56,
+      "end": 950.55,
+      "duration": 1.99,
+      "text": "between X and Y at these points these"
+    },
+    {
+      "index": 318,
+      "start": 950.56,
+      "end": 953.269,
+      "duration": 2.709,
+      "text": "points are on the circle of radius root2"
+    },
+    {
+      "index": 319,
+      "start": 953.279,
+      "end": 954.59,
+      "duration": 1.311,
+      "text": "so if you want this circle maybe I"
+    },
+    {
+      "index": 320,
+      "start": 954.6,
+      "end": 958.269,
+      "duration": 3.669,
+      "text": "should have written is X2 + Y2 = 2 and"
+    },
+    {
+      "index": 321,
+      "start": 958.279,
+      "end": 962.03,
+      "duration": 3.751,
+      "text": "if you solve for y given X you get"
+    },
+    {
+      "index": 322,
+      "start": 962.04,
+      "end": 965.269,
+      "duration": 3.229,
+      "text": "plusus root of 2 - x^"
+    },
+    {
+      "index": 323,
+      "start": 965.279,
+      "end": 968.949,
+      "duration": 3.67,
+      "text": "2 okay"
+    },
+    {
+      "index": 324,
+      "start": 968.959,
+      "end": 971.309,
+      "duration": 2.35,
+      "text": "yes is there a way to compute this with"
+    },
+    {
+      "index": 325,
+      "start": 971.319,
+      "end": 974.11,
+      "duration": 2.791,
+      "text": "symmetry well certainly yeah this solid"
+    },
+    {
+      "index": 326,
+      "start": 974.12,
+      "end": 975.59,
+      "duration": 1.47,
+      "text": "looks sufficiently symmetric but"
+    },
+    {
+      "index": 327,
+      "start": 975.6,
+      "end": 977.949,
+      "duration": 2.349,
+      "text": "actually you could certainly for if you"
+    },
+    {
+      "index": 328,
+      "start": 977.959,
+      "end": 979.59,
+      "duration": 1.631,
+      "text": "don't want to do the whole disc you"
+    },
+    {
+      "index": 329,
+      "start": 979.6,
+      "end": 982.15,
+      "duration": 2.55,
+      "text": "could just do quarter discs and multiply"
+    },
+    {
+      "index": 330,
+      "start": 982.16,
+      "end": 985.03,
+      "duration": 2.87,
+      "text": "by four you could even just look at the"
+    },
+    {
+      "index": 331,
+      "start": 985.04,
+      "end": 987.67,
+      "duration": 2.63,
+      "text": "lower half of the solid and multiply"
+    },
+    {
+      "index": 332,
+      "start": 987.68,
+      "end": 990.99,
+      "duration": 3.31,
+      "text": "then you know by two so total by eight"
+    },
+    {
+      "index": 333,
+      "start": 991.0,
+      "end": 992.47,
+      "duration": 1.47,
+      "text": "so yeah certainly there's lots of ways"
+    },
+    {
+      "index": 334,
+      "start": 992.48,
+      "end": 995.67,
+      "duration": 3.19,
+      "text": "to make it slightly Easier by using"
+    },
+    {
+      "index": 335,
+      "start": 995.68,
+      "end": 998.23,
+      "duration": 2.55,
+      "text": "symmetry now the most spectacular way to"
+    },
+    {
+      "index": 336,
+      "start": 998.24,
+      "end": 999.79,
+      "duration": 1.55,
+      "text": "use symmetry here of course is to use"
+    },
+    {
+      "index": 337,
+      "start": 999.8,
+      "end": 1001.629,
+      "duration": 1.829,
+      "text": "that we have this rotation Symmetry and"
+    },
+    {
+      "index": 338,
+      "start": 1001.639,
+      "end": 1004.829,
+      "duration": 3.19,
+      "text": "switch actually you know not do this guy"
+    },
+    {
+      "index": 339,
+      "start": 1004.839,
+      "end": 1009.069,
+      "duration": 4.23,
+      "text": "in XY coordinates but instead in polar"
+    },
+    {
+      "index": 340,
+      "start": 1029.35,
+      "end": 1029.36,
+      "duration": 0.01,
+      "text": "do would be to"
+    },
+    {
+      "index": 341,
+      "start": 1029.36,
+      "end": 1033.309,
+      "duration": 3.949,
+      "text": "use polar"
+    },
+    {
+      "index": 342,
+      "start": 1035.949,
+      "end": 1035.959,
+      "duration": 0.01,
+      "text": "coordinates"
+    },
+    {
+      "index": 343,
+      "start": 1035.959,
+      "end": 1038.39,
+      "duration": 2.431,
+      "text": "instead of X and"
+    },
+    {
+      "index": 344,
+      "start": 1038.4,
+      "end": 1040.949,
+      "duration": 2.549,
+      "text": "Y and of course we want to keep Z I mean"
+    },
+    {
+      "index": 345,
+      "start": 1040.959,
+      "end": 1043.309,
+      "duration": 2.35,
+      "text": "we're very happy with Z the way it is"
+    },
+    {
+      "index": 346,
+      "start": 1043.319,
+      "end": 1046.309,
+      "duration": 2.99,
+      "text": "but we'll just change X and Y to R cos"
+    },
+    {
+      "index": 347,
+      "start": 1046.319,
+      "end": 1050.23,
+      "duration": 3.911,
+      "text": "Theta R sin Theta"
+    },
+    {
+      "index": 348,
+      "start": 1050.24,
+      "end": 1051.71,
+      "duration": 1.47,
+      "text": "okay"
+    },
+    {
+      "index": 349,
+      "start": 1051.72,
+      "end": 1054.07,
+      "duration": 2.35,
+      "text": "because well let's see actually how we"
+    },
+    {
+      "index": 350,
+      "start": 1054.08,
+      "end": 1056.59,
+      "duration": 2.51,
+      "text": "would evaluate this"
+    },
+    {
+      "index": 351,
+      "start": 1056.6,
+      "end": 1061.669,
+      "duration": 5.069,
+      "text": "guy"
+    },
+    {
+      "index": 352,
+      "start": 1064.47,
+      "end": 1064.48,
+      "duration": 0.01,
+      "text": "so well actually let's not it's kind of"
+    },
+    {
+      "index": 353,
+      "start": 1064.48,
+      "end": 1067.43,
+      "duration": 2.95,
+      "text": "boring but uh so if you start well let"
+    },
+    {
+      "index": 354,
+      "start": 1067.44,
+      "end": 1068.99,
+      "duration": 1.55,
+      "text": "me just point out one small thing here"
+    },
+    {
+      "index": 355,
+      "start": 1069.0,
+      "end": 1072.59,
+      "duration": 3.59,
+      "text": "sorry before I do that so if you start"
+    },
+    {
+      "index": 356,
+      "start": 1072.6,
+      "end": 1074.51,
+      "duration": 1.91,
+      "text": "Computing the inner"
+    },
+    {
+      "index": 357,
+      "start": 1074.52,
+      "end": 1076.87,
+      "duration": 2.35,
+      "text": "integral okay so let"
+    },
+    {
+      "index": 358,
+      "start": 1076.88,
+      "end": 1079.71,
+      "duration": 2.83,
+      "text": "me not do that yet"
+    },
+    {
+      "index": 359,
+      "start": 1079.72,
+      "end": 1082.83,
+      "duration": 3.11,
+      "text": "sorry so if you try to compute the inner"
+    },
+    {
+      "index": 360,
+      "start": 1082.84,
+      "end": 1086.51,
+      "duration": 3.67,
+      "text": "integral you'll be integrating from x²"
+    },
+    {
+      "index": 361,
+      "start": 1086.52,
+      "end": 1091.59,
+      "duration": 5.07,
+      "text": "y^ 2 to 4 - x^2 - y^ 2 d z well that"
+    },
+    {
+      "index": 362,
+      "start": 1091.6,
+      "end": 1097.909,
+      "duration": 6.309,
+      "text": "will integrate to Z between these two"
+    },
+    {
+      "index": 363,
+      "start": 1104.07,
+      "end": 1104.08,
+      "duration": 0.01,
+      "text": "bounds so you will get 4 - 2x^2 - 2"
+    },
+    {
+      "index": 364,
+      "start": 1104.08,
+      "end": 1107.789,
+      "duration": 3.709,
+      "text": "y^2 now when you put that into the"
+    },
+    {
+      "index": 365,
+      "start": 1107.799,
+      "end": 1110.47,
+      "duration": 2.671,
+      "text": "remaining ones you'll"
+    },
+    {
+      "index": 366,
+      "start": 1110.48,
+      "end": 1117.35,
+      "duration": 6.87,
+      "text": "get something that's probably not very"
+    },
+    {
+      "index": 367,
+      "start": 1124.83,
+      "end": 1124.84,
+      "duration": 0.01,
+      "text": "pleasant of 4 - 2x^ 2 - 2 y^ 2 Dy DX and"
+    },
+    {
+      "index": 368,
+      "start": 1124.84,
+      "end": 1127.07,
+      "duration": 2.23,
+      "text": "here you see that to evaluate this you"
+    },
+    {
+      "index": 369,
+      "start": 1127.08,
+      "end": 1137.31,
+      "duration": 10.23,
+      "text": "switch to Polar"
+    },
+    {
+      "index": 370,
+      "start": 1141.39,
+      "end": 1141.4,
+      "duration": 0.01,
+      "text": "coordinates oh by the way so you know if"
+    },
+    {
+      "index": 371,
+      "start": 1141.4,
+      "end": 1144.029,
+      "duration": 2.629,
+      "text": "your initial Instinct had been to you"
+    },
+    {
+      "index": 372,
+      "start": 1144.039,
+      "end": 1146.11,
+      "duration": 2.071,
+      "text": "know given that we just want the volume"
+    },
+    {
+      "index": 373,
+      "start": 1146.12,
+      "end": 1147.63,
+      "duration": 1.51,
+      "text": "you could also have found the volume"
+    },
+    {
+      "index": 374,
+      "start": 1147.64,
+      "end": 1149.669,
+      "duration": 2.029,
+      "text": "just by doing a double integral of the"
+    },
+    {
+      "index": 375,
+      "start": 1149.679,
+      "end": 1152.35,
+      "duration": 2.671,
+      "text": "height between the top and bottom well"
+    },
+    {
+      "index": 376,
+      "start": 1152.36,
+      "end": 1154.789,
+      "duration": 2.429,
+      "text": "you would just have gotten this right"
+    },
+    {
+      "index": 377,
+      "start": 1154.799,
+      "end": 1156.19,
+      "duration": 1.391,
+      "text": "because this is the height between top"
+    },
+    {
+      "index": 378,
+      "start": 1156.2,
+      "end": 1157.789,
+      "duration": 1.589,
+      "text": "and bottom so it's all the same it"
+    },
+    {
+      "index": 379,
+      "start": 1157.799,
+      "end": 1160.11,
+      "duration": 2.311,
+      "text": "doesn't really matter"
+    },
+    {
+      "index": 380,
+      "start": 1160.12,
+      "end": 1162.39,
+      "duration": 2.27,
+      "text": "um but with this of course we'll be able"
+    },
+    {
+      "index": 381,
+      "start": 1162.4,
+      "end": 1164.669,
+      "duration": 2.269,
+      "text": "to integrate all sorts of functions not"
+    },
+    {
+      "index": 382,
+      "start": 1164.679,
+      "end": 1167.51,
+      "duration": 2.831,
+      "text": "just one over the solid so we'll do"
+    },
+    {
+      "index": 383,
+      "start": 1167.52,
+      "end": 1172.909,
+      "duration": 5.389,
+      "text": "we'll be able to do much more than just"
+    },
+    {
+      "index": 384,
+      "start": 1175.029,
+      "end": 1175.039,
+      "duration": 0.01,
+      "text": "volumes okay so let's see how do we do"
+    },
+    {
+      "index": 385,
+      "start": 1175.039,
+      "end": 1178.149,
+      "duration": 3.11,
+      "text": "it with polar coordinate instead"
+    },
+    {
+      "index": 386,
+      "start": 1178.159,
+      "end": 1190.71,
+      "duration": 12.551,
+      "text": "well"
+    },
+    {
+      "index": 387,
+      "start": 1199.789,
+      "end": 1199.799,
+      "duration": 0.01,
+      "text": "become so let's see"
+    },
+    {
+      "index": 388,
+      "start": 1199.799,
+      "end": 1204.149,
+      "duration": 4.35,
+      "text": "so I want to keep DZ but then DX Dy or"
+    },
+    {
+      "index": 389,
+      "start": 1204.159,
+      "end": 1208.87,
+      "duration": 4.711,
+      "text": "dydx would become rdrd"
+    },
+    {
+      "index": 390,
+      "start": 1210.83,
+      "end": 1210.84,
+      "duration": 0.01,
+      "text": "Theta"
+    },
+    {
+      "index": 391,
+      "start": 1210.84,
+      "end": 1214.789,
+      "duration": 3.949,
+      "text": "and if I try to set up a bounds well I"
+    },
+    {
+      "index": 392,
+      "start": 1214.799,
+      "end": 1217.029,
+      "duration": 2.23,
+      "text": "probably shouldn't keep this x s+ y^ s"
+    },
+    {
+      "index": 393,
+      "start": 1217.039,
+      "end": 1219.43,
+      "duration": 2.391,
+      "text": "around but x squ + y s is easy in terms"
+    },
+    {
+      "index": 394,
+      "start": 1219.44,
+      "end": 1222.909,
+      "duration": 3.469,
+      "text": "of R and Theta that's just r"
+    },
+    {
+      "index": 395,
+      "start": 1222.919,
+      "end": 1224.75,
+      "duration": 1.831,
+      "text": "s"
+    },
+    {
+      "index": 396,
+      "start": 1224.76,
+      "end": 1226.95,
+      "duration": 2.19,
+      "text": "okay I mean in general I could have"
+    },
+    {
+      "index": 397,
+      "start": 1226.96,
+      "end": 1228.59,
+      "duration": 1.63,
+      "text": "something that depends also on Theta"
+    },
+    {
+      "index": 398,
+      "start": 1228.6,
+      "end": 1231.47,
+      "duration": 2.87,
+      "text": "that's perfectly legitimate but here it"
+    },
+    {
+      "index": 399,
+      "start": 1231.48,
+      "end": 1234.029,
+      "duration": 2.549,
+      "text": "simplifies there only R and this guy up"
+    },
+    {
+      "index": 400,
+      "start": 1234.039,
+      "end": 1240.149,
+      "duration": 6.11,
+      "text": "here 4 - x- y^ 2 becomes 4us R 2 and now"
+    },
+    {
+      "index": 401,
+      "start": 1240.159,
+      "end": 1242.35,
+      "duration": 2.191,
+      "text": "the integral that we have to do over R"
+    },
+    {
+      "index": 402,
+      "start": 1242.36,
+      "end": 1244.909,
+      "duration": 2.549,
+      "text": "and Theta well we look again at the"
+    },
+    {
+      "index": 403,
+      "start": 1244.919,
+      "end": 1247.19,
+      "duration": 2.271,
+      "text": "Shadow the shadow is still a disc of"
+    },
+    {
+      "index": 404,
+      "start": 1247.2,
+      "end": 1249.95,
+      "duration": 2.75,
+      "text": "radius root2 that hasn't changed and now"
+    },
+    {
+      "index": 405,
+      "start": 1249.96,
+      "end": 1252.789,
+      "duration": 2.829,
+      "text": "we know how to to set up this integral"
+    },
+    {
+      "index": 406,
+      "start": 1252.799,
+      "end": 1256.75,
+      "duration": 3.951,
+      "text": "in polar coordinates R goes from 0 to <"
+    },
+    {
+      "index": 407,
+      "start": 1256.76,
+      "end": 1260.95,
+      "duration": 4.19,
+      "text": "tk2 and Theta goes from 0 to 2"
+    },
+    {
+      "index": 408,
+      "start": 1263.789,
+      "end": 1263.799,
+      "duration": 0.01,
+      "text": "pi okay and now it becomes actually"
+    },
+    {
+      "index": 409,
+      "start": 1263.799,
+      "end": 1276.23,
+      "duration": 12.431,
+      "text": "easier to"
+    },
+    {
+      "index": 410,
+      "start": 1277.99,
+      "end": 1278.0,
+      "duration": 0.01,
+      "text": "evaluate"
+    },
+    {
+      "index": 411,
+      "start": 1278.0,
+      "end": 1281.51,
+      "duration": 3.51,
+      "text": "okay so now we have actually a name for"
+    },
+    {
+      "index": 412,
+      "start": 1281.52,
+      "end": 1284.35,
+      "duration": 2.83,
+      "text": "this because we're doing it in space so"
+    },
+    {
+      "index": 413,
+      "start": 1284.36,
+      "end": 1287.029,
+      "duration": 2.669,
+      "text": "these are called actually cylindrical"
+    },
+    {
+      "index": 414,
+      "start": 1287.039,
+      "end": 1288.87,
+      "duration": 1.831,
+      "text": "coordinates"
+    },
+    {
+      "index": 415,
+      "start": 1288.88,
+      "end": 1290.19,
+      "duration": 1.31,
+      "text": "so in fact you already knew about"
+    },
+    {
+      "index": 416,
+      "start": 1290.2,
+      "end": 1291.63,
+      "duration": 1.43,
+      "text": "cylindrical coordinates even if you"
+    },
+    {
+      "index": 417,
+      "start": 1291.64,
+      "end": 1296.43,
+      "duration": 4.79,
+      "text": "didn't know the"
+    },
+    {
+      "index": 418,
+      "start": 1298.909,
+      "end": 1298.919,
+      "duration": 0.01,
+      "text": "name okay so the idea of cylindrical"
+    },
+    {
+      "index": 419,
+      "start": 1298.919,
+      "end": 1303.149,
+      "duration": 4.23,
+      "text": "coordinates is that instead of X Y and Z"
+    },
+    {
+      "index": 420,
+      "start": 1303.159,
+      "end": 1304.99,
+      "duration": 1.831,
+      "text": "to locate a point in"
+    },
+    {
+      "index": 421,
+      "start": 1305.0,
+      "end": 1308.51,
+      "duration": 3.51,
+      "text": "space you will use three coordinates one"
+    },
+    {
+      "index": 422,
+      "start": 1308.52,
+      "end": 1312.51,
+      "duration": 3.99,
+      "text": "of them is basically how high it is"
+    },
+    {
+      "index": 423,
+      "start": 1312.52,
+      "end": 1317.029,
+      "duration": 4.509,
+      "text": "above the XY"
+    },
+    {
+      "index": 424,
+      "start": 1319.909,
+      "end": 1319.919,
+      "duration": 0.01,
+      "text": "plane"
+    },
+    {
+      "index": 425,
+      "start": 1319.919,
+      "end": 1321.669,
+      "duration": 1.75,
+      "text": "so that will be"
+    },
+    {
+      "index": 426,
+      "start": 1321.679,
+      "end": 1325.029,
+      "duration": 3.35,
+      "text": "Z and then you will use polar"
+    },
+    {
+      "index": 427,
+      "start": 1325.039,
+      "end": 1326.87,
+      "duration": 1.831,
+      "text": "coordinates for the projection of your"
+    },
+    {
+      "index": 428,
+      "start": 1326.88,
+      "end": 1329.47,
+      "duration": 2.59,
+      "text": "point in the XY plane so R will be the"
+    },
+    {
+      "index": 429,
+      "start": 1329.48,
+      "end": 1331.549,
+      "duration": 2.069,
+      "text": "distance from the"
+    },
+    {
+      "index": 430,
+      "start": 1331.559,
+      "end": 1336.31,
+      "duration": 4.751,
+      "text": "z-axis and Theta will be the angle from"
+    },
+    {
+      "index": 431,
+      "start": 1336.32,
+      "end": 1338.269,
+      "duration": 1.949,
+      "text": "the xaxis"
+    },
+    {
+      "index": 432,
+      "start": 1338.279,
+      "end": 1339.95,
+      "duration": 1.671,
+      "text": "counterclockwise okay so the one thing"
+    },
+    {
+      "index": 433,
+      "start": 1339.96,
+      "end": 1342.07,
+      "duration": 2.11,
+      "text": "to be careful about is because of the"
+    },
+    {
+      "index": 434,
+      "start": 1342.08,
+      "end": 1344.269,
+      "duration": 2.189,
+      "text": "usual convention that we make the xaxis"
+    },
+    {
+      "index": 435,
+      "start": 1344.279,
+      "end": 1346.95,
+      "duration": 2.671,
+      "text": "point toward us Theta equal Z is no"
+    },
+    {
+      "index": 436,
+      "start": 1346.96,
+      "end": 1348.83,
+      "duration": 1.87,
+      "text": "longer to the right now equal 0 is to"
+    },
+    {
+      "index": 437,
+      "start": 1348.84,
+      "end": 1350.87,
+      "duration": 2.03,
+      "text": "the front and the angle is measured from"
+    },
+    {
+      "index": 438,
+      "start": 1350.88,
+      "end": 1355.269,
+      "duration": 4.389,
+      "text": "the front"
+    },
+    {
+      "index": 439,
+      "start": 1357.789,
+      "end": 1357.799,
+      "duration": 0.01,
+      "text": "counterclockwise okay"
+    },
+    {
+      "index": 440,
+      "start": 1357.799,
+      "end": 1360.39,
+      "duration": 2.591,
+      "text": "so and of course if you want to know how"
+    },
+    {
+      "index": 441,
+      "start": 1360.4,
+      "end": 1364.43,
+      "duration": 4.03,
+      "text": "to convert between XYZ and R Theta Z"
+    },
+    {
+      "index": 442,
+      "start": 1364.44,
+      "end": 1366.99,
+      "duration": 2.55,
+      "text": "well the formulas are just the same as"
+    },
+    {
+      "index": 443,
+      "start": 1367.0,
+      "end": 1371.23,
+      "duration": 4.23,
+      "text": "in usual polar coordinates R cos Theta R"
+    },
+    {
+      "index": 444,
+      "start": 1371.24,
+      "end": 1375.51,
+      "duration": 4.27,
+      "text": "sin Theta and Z remains"
+    },
+    {
+      "index": 445,
+      "start": 1377.47,
+      "end": 1377.48,
+      "duration": 0.01,
+      "text": "Z okay so why are this called"
+    },
+    {
+      "index": 446,
+      "start": 1377.48,
+      "end": 1379.99,
+      "duration": 2.51,
+      "text": "cylindrical coordinates by the way well"
+    },
+    {
+      "index": 447,
+      "start": 1380.0,
+      "end": 1384.11,
+      "duration": 4.11,
+      "text": "let's say that I give you the"
+    },
+    {
+      "index": 448,
+      "start": 1387.43,
+      "end": 1387.44,
+      "duration": 0.01,
+      "text": "equation Ral a where a is some constant"
+    },
+    {
+      "index": 449,
+      "start": 1387.44,
+      "end": 1391.99,
+      "duration": 4.55,
+      "text": "say Ral 1 for example so Ral 1 in 2D"
+    },
+    {
+      "index": 450,
+      "start": 1392.0,
+      "end": 1394.75,
+      "duration": 2.75,
+      "text": "that used to be just a circle of radius"
+    },
+    {
+      "index": 451,
+      "start": 1394.76,
+      "end": 1399.549,
+      "duration": 4.789,
+      "text": "one now well in space a single equation"
+    },
+    {
+      "index": 452,
+      "start": 1399.559,
+      "end": 1401.59,
+      "duration": 2.031,
+      "text": "actually defines a surface not just a"
+    },
+    {
+      "index": 453,
+      "start": 1401.6,
+      "end": 1404.23,
+      "duration": 2.63,
+      "text": "curve anymore and the set of points"
+    },
+    {
+      "index": 454,
+      "start": 1404.24,
+      "end": 1406.31,
+      "duration": 2.07,
+      "text": "where R is a well that's all the points"
+    },
+    {
+      "index": 455,
+      "start": 1406.32,
+      "end": 1408.87,
+      "duration": 2.55,
+      "text": "that are at distance a from the Z axis"
+    },
+    {
+      "index": 456,
+      "start": 1408.88,
+      "end": 1413.31,
+      "duration": 4.43,
+      "text": "so in fact what you get this way is a"
+    },
+    {
+      "index": 457,
+      "start": 1413.32,
+      "end": 1420.549,
+      "duration": 7.229,
+      "text": "cylinder of radius a centered on the"
+    },
+    {
+      "index": 458,
+      "start": 1422.75,
+      "end": 1422.76,
+      "duration": 0.01,
+      "text": "z-axis okay so that's why they're called"
+    },
+    {
+      "index": 459,
+      "start": 1422.76,
+      "end": 1427.39,
+      "duration": 4.63,
+      "text": "cylindrical"
+    },
+    {
+      "index": 460,
+      "start": 1429.75,
+      "end": 1429.76,
+      "duration": 0.01,
+      "text": "coordinates by the way so now similarly"
+    },
+    {
+      "index": 461,
+      "start": 1429.76,
+      "end": 1431.19,
+      "duration": 1.43,
+      "text": "if you look at the equation you know"
+    },
+    {
+      "index": 462,
+      "start": 1431.2,
+      "end": 1434.51,
+      "duration": 3.31,
+      "text": "theta equals some given value well so"
+    },
+    {
+      "index": 463,
+      "start": 1434.52,
+      "end": 1436.19,
+      "duration": 1.67,
+      "text": "that used to be just array from the"
+    },
+    {
+      "index": 464,
+      "start": 1436.2,
+      "end": 1439.149,
+      "duration": 2.949,
+      "text": "origin now that becomes a vertical half"
+    },
+    {
+      "index": 465,
+      "start": 1439.159,
+      "end": 1441.31,
+      "duration": 2.151,
+      "text": "plane for example you know if I set the"
+    },
+    {
+      "index": 466,
+      "start": 1441.32,
+      "end": 1444.95,
+      "duration": 3.63,
+      "text": "value OFA and let R and Z vary well R is"
+    },
+    {
+      "index": 467,
+      "start": 1444.96,
+      "end": 1447.549,
+      "duration": 2.589,
+      "text": "always positive but uh basically that"
+    },
+    {
+      "index": 468,
+      "start": 1447.559,
+      "end": 1449.51,
+      "duration": 1.951,
+      "text": "means I'm taking a vertical plane that"
+    },
+    {
+      "index": 469,
+      "start": 1449.52,
+      "end": 1452.31,
+      "duration": 2.79,
+      "text": "comes out in this"
+    },
+    {
+      "index": 470,
+      "start": 1452.32,
+      "end": 1455.149,
+      "duration": 2.829,
+      "text": "direction okay any questions about"
+    },
+    {
+      "index": 471,
+      "start": 1455.159,
+      "end": 1456.83,
+      "duration": 1.671,
+      "text": "cylindrical"
+    },
+    {
+      "index": 472,
+      "start": 1456.84,
+      "end": 1464.83,
+      "duration": 7.99,
+      "text": "coordinates"
+    },
+    {
+      "index": 473,
+      "start": 1467.11,
+      "end": 1467.12,
+      "duration": 0.01,
+      "text": "yes uh yeah so I'm saying when you when"
+    },
+    {
+      "index": 474,
+      "start": 1467.12,
+      "end": 1468.99,
+      "duration": 1.87,
+      "text": "you fix fat you get only a half plane"
+    },
+    {
+      "index": 475,
+      "start": 1469.0,
+      "end": 1470.75,
+      "duration": 1.75,
+      "text": "not a full plane I mean it goes all the"
+    },
+    {
+      "index": 476,
+      "start": 1470.76,
+      "end": 1472.789,
+      "duration": 2.029,
+      "text": "way up and down but it doesn't go back"
+    },
+    {
+      "index": 477,
+      "start": 1472.799,
+      "end": 1474.31,
+      "duration": 1.511,
+      "text": "to the other side of the"
+    },
+    {
+      "index": 478,
+      "start": 1474.32,
+      "end": 1476.75,
+      "duration": 2.43,
+      "text": "z-axis why that's because R is always"
+    },
+    {
+      "index": 479,
+      "start": 1476.76,
+      "end": 1479.35,
+      "duration": 2.59,
+      "text": "positive by convention so you know for"
+    },
+    {
+      "index": 480,
+      "start": 1479.36,
+      "end": 1481.83,
+      "duration": 2.47,
+      "text": "example here we say Theta is zero at the"
+    },
+    {
+      "index": 481,
+      "start": 1481.84,
+      "end": 1483.87,
+      "duration": 2.03,
+      "text": "back we say Theta is pi we don't say"
+    },
+    {
+      "index": 482,
+      "start": 1483.88,
+      "end": 1485.99,
+      "duration": 2.11,
+      "text": "Theta is zero and R is negative we say R"
+    },
+    {
+      "index": 483,
+      "start": 1486.0,
+      "end": 1488.47,
+      "duration": 2.47,
+      "text": "is positive and Theta is p it's it's a"
+    },
+    {
+      "index": 484,
+      "start": 1488.48,
+      "end": 1490.549,
+      "duration": 2.069,
+      "text": "convention largely but sticking with"
+    },
+    {
+      "index": 485,
+      "start": 1490.559,
+      "end": 1492.59,
+      "duration": 2.031,
+      "text": "this convention really will help you to"
+    },
+    {
+      "index": 486,
+      "start": 1492.6,
+      "end": 1494.11,
+      "duration": 1.51,
+      "text": "set up the integrals properly I mean"
+    },
+    {
+      "index": 487,
+      "start": 1494.12,
+      "end": 1496.75,
+      "duration": 2.63,
+      "text": "otherwise there's just too much risk for"
+    },
+    {
+      "index": 488,
+      "start": 1496.76,
+      "end": 1505.19,
+      "duration": 8.43,
+      "text": "mistakes"
+    },
+    {
+      "index": 489,
+      "start": 1508.389,
+      "end": 1508.399,
+      "duration": 0.01,
+      "text": "yes well it depends so question is if I"
+    },
+    {
+      "index": 490,
+      "start": 1508.399,
+      "end": 1509.669,
+      "duration": 1.27,
+      "text": "were to use symmetry to do this one"
+    },
+    {
+      "index": 491,
+      "start": 1509.679,
+      "end": 1511.83,
+      "duration": 2.151,
+      "text": "would I multiply by four or by two well"
+    },
+    {
+      "index": 492,
+      "start": 1511.84,
+      "end": 1513.789,
+      "duration": 1.949,
+      "text": "it depends on how much symmetry you're"
+    },
+    {
+      "index": 493,
+      "start": 1513.799,
+      "end": 1516.07,
+      "duration": 2.271,
+      "text": "using you know so I mean no it's it's"
+    },
+    {
+      "index": 494,
+      "start": 1516.08,
+      "end": 1517.31,
+      "duration": 1.23,
+      "text": "your choice you can multiply by two by"
+    },
+    {
+      "index": 495,
+      "start": 1517.32,
+      "end": 1518.669,
+      "duration": 1.349,
+      "text": "four by eight depending on how much you"
+    },
+    {
+      "index": 496,
+      "start": 1518.679,
+      "end": 1520.909,
+      "duration": 2.23,
+      "text": "cut it it depends on so it depends on"
+    },
+    {
+      "index": 497,
+      "start": 1520.919,
+      "end": 1522.07,
+      "duration": 1.151,
+      "text": "what symmetry you use for example if you"
+    },
+    {
+      "index": 498,
+      "start": 1522.08,
+      "end": 1523.51,
+      "duration": 1.43,
+      "text": "use the Symmetry between top and bottom"
+    },
+    {
+      "index": 499,
+      "start": 1523.52,
+      "end": 1525.149,
+      "duration": 1.629,
+      "text": "you'd say well the volume is twice the"
+    },
+    {
+      "index": 500,
+      "start": 1525.159,
+      "end": 1528.19,
+      "duration": 3.031,
+      "text": "lower half if you use the"
+    },
+    {
+      "index": 501,
+      "start": 1528.2,
+      "end": 1529.71,
+      "duration": 1.51,
+      "text": "you know left and right half you would"
+    },
+    {
+      "index": 502,
+      "start": 1529.72,
+      "end": 1531.31,
+      "duration": 1.59,
+      "text": "say it's twice each half if you do"
+    },
+    {
+      "index": 503,
+      "start": 1531.32,
+      "end": 1533.35,
+      "duration": 2.03,
+      "text": "actually if you cut it into four pieces"
+    },
+    {
+      "index": 504,
+      "start": 1533.36,
+      "end": 1536.71,
+      "duration": 3.35,
+      "text": "then you know and so on so it depends on"
+    },
+    {
+      "index": 505,
+      "start": 1536.72,
+      "end": 1538.59,
+      "duration": 1.87,
+      "text": "and again you don't have to use the"
+    },
+    {
+      "index": 506,
+      "start": 1538.6,
+      "end": 1540.71,
+      "duration": 2.11,
+      "text": "Symmetry it's just you"
+    },
+    {
+      "index": 507,
+      "start": 1540.72,
+      "end": 1542.909,
+      "duration": 2.189,
+      "text": "know if you actually if you don't think"
+    },
+    {
+      "index": 508,
+      "start": 1542.919,
+      "end": 1544.95,
+      "duration": 2.031,
+      "text": "of using polar coordinates then it can"
+    },
+    {
+      "index": 509,
+      "start": 1544.96,
+      "end": 1546.35,
+      "duration": 1.39,
+      "text": "save you from doing you know you can"
+    },
+    {
+      "index": 510,
+      "start": 1546.36,
+      "end": 1547.909,
+      "duration": 1.549,
+      "text": "just start at zero here and here and you"
+    },
+    {
+      "index": 511,
+      "start": 1547.919,
+      "end": 1552.789,
+      "duration": 4.87,
+      "text": "know simplify things a tiny bit but"
+    },
+    {
+      "index": 512,
+      "start": 1554.389,
+      "end": 1554.399,
+      "duration": 0.01,
+      "text": "um"
+    },
+    {
+      "index": 513,
+      "start": 1554.399,
+      "end": 1556.669,
+      "duration": 2.27,
+      "text": "okay oh uh"
+    },
+    {
+      "index": 514,
+      "start": 1556.679,
+      "end": 1559.87,
+      "duration": 3.191,
+      "text": "yes how can you"
+    },
+    {
+      "index": 515,
+      "start": 1559.88,
+      "end": 1562.549,
+      "duration": 2.669,
+      "text": "def so to define a vertical full plane"
+    },
+    {
+      "index": 516,
+      "start": 1562.559,
+      "end": 1565.11,
+      "duration": 2.551,
+      "text": "well first of all it depends on whether"
+    },
+    {
+      "index": 517,
+      "start": 1565.12,
+      "end": 1566.83,
+      "duration": 1.71,
+      "text": "it passes for the z-axis or not you know"
+    },
+    {
+      "index": 518,
+      "start": 1566.84,
+      "end": 1569.269,
+      "duration": 2.429,
+      "text": "if it doesn't then you'd have to"
+    },
+    {
+      "index": 519,
+      "start": 1569.279,
+      "end": 1571.23,
+      "duration": 1.951,
+      "text": "remember how you do in polar coordinates"
+    },
+    {
+      "index": 520,
+      "start": 1571.24,
+      "end": 1572.95,
+      "duration": 1.71,
+      "text": "I mean basically the answer is if you"
+    },
+    {
+      "index": 521,
+      "start": 1572.96,
+      "end": 1575.43,
+      "duration": 2.47,
+      "text": "have a vertical plane you know so it"
+    },
+    {
+      "index": 522,
+      "start": 1575.44,
+      "end": 1577.43,
+      "duration": 1.99,
+      "text": "doesn't depend on Z the equation does"
+    },
+    {
+      "index": 523,
+      "start": 1577.44,
+      "end": 1579.029,
+      "duration": 1.589,
+      "text": "not involve Z it only involves R and"
+    },
+    {
+      "index": 524,
+      "start": 1579.039,
+      "end": 1581.63,
+      "duration": 2.591,
+      "text": "Theta and how it involves R and Theta is"
+    },
+    {
+      "index": 525,
+      "start": 1581.64,
+      "end": 1583.389,
+      "duration": 1.749,
+      "text": "exactly the same as when you do a line"
+    },
+    {
+      "index": 526,
+      "start": 1583.399,
+      "end": 1586.029,
+      "duration": 2.63,
+      "text": "in polar coordinates in the plane so if"
+    },
+    {
+      "index": 527,
+      "start": 1586.039,
+      "end": 1587.83,
+      "duration": 1.791,
+      "text": "it's a line passing through the origin"
+    },
+    {
+      "index": 528,
+      "start": 1587.84,
+      "end": 1590.549,
+      "duration": 2.709,
+      "text": "say well Theta is either some value or"
+    },
+    {
+      "index": 529,
+      "start": 1590.559,
+      "end": 1592.669,
+      "duration": 2.11,
+      "text": "the other one uh if it's a line that"
+    },
+    {
+      "index": 530,
+      "start": 1592.679,
+      "end": 1593.87,
+      "duration": 1.191,
+      "text": "doesn't pass through the origin then"
+    },
+    {
+      "index": 531,
+      "start": 1593.88,
+      "end": 1595.31,
+      "duration": 1.43,
+      "text": "it's more tricky but hopefully you've"
+    },
+    {
+      "index": 532,
+      "start": 1595.32,
+      "end": 1598.47,
+      "duration": 3.15,
+      "text": "seen how to do"
+    },
+    {
+      "index": 533,
+      "start": 1601.11,
+      "end": 1601.12,
+      "duration": 0.01,
+      "text": "that"
+    },
+    {
+      "index": 534,
+      "start": 1601.12,
+      "end": 1608.269,
+      "duration": 7.149,
+      "text": "okay let's move on a"
+    },
+    {
+      "index": 535,
+      "start": 1612.269,
+      "end": 1612.279,
+      "duration": 0.01,
+      "text": "bit so one thing to know I mean"
+    },
+    {
+      "index": 536,
+      "start": 1612.279,
+      "end": 1613.35,
+      "duration": 1.071,
+      "text": "basically the important thing to"
+    },
+    {
+      "index": 537,
+      "start": 1613.36,
+      "end": 1615.389,
+      "duration": 2.029,
+      "text": "remember is that the volume"
+    },
+    {
+      "index": 538,
+      "start": 1615.399,
+      "end": 1619.59,
+      "duration": 4.191,
+      "text": "element in cylindrical coordinates"
+    },
+    {
+      "index": 539,
+      "start": 1619.6,
+      "end": 1621.909,
+      "duration": 2.309,
+      "text": "well DX Dy"
+    },
+    {
+      "index": 540,
+      "start": 1621.919,
+      "end": 1627.23,
+      "duration": 5.311,
+      "text": "DZ becomes RDR D Theta DZ and that"
+    },
+    {
+      "index": 541,
+      "start": 1627.24,
+      "end": 1629.269,
+      "duration": 2.029,
+      "text": "shouldn't be surprising because that's"
+    },
+    {
+      "index": 542,
+      "start": 1629.279,
+      "end": 1632.07,
+      "duration": 2.791,
+      "text": "just you know DX Dy becomes Rd r d Theta"
+    },
+    {
+      "index": 543,
+      "start": 1632.08,
+      "end": 1635.23,
+      "duration": 3.15,
+      "text": "and DZ remains"
+    },
+    {
+      "index": 544,
+      "start": 1637.75,
+      "end": 1637.76,
+      "duration": 0.01,
+      "text": "DZ I mean so you know the way to think"
+    },
+    {
+      "index": 545,
+      "start": 1637.76,
+      "end": 1640.389,
+      "duration": 2.629,
+      "text": "about it if you want is that if you"
+    },
+    {
+      "index": 546,
+      "start": 1640.399,
+      "end": 1644.389,
+      "duration": 3.99,
+      "text": "take a little piece of solid in"
+    },
+    {
+      "index": 547,
+      "start": 1644.399,
+      "end": 1647.83,
+      "duration": 3.431,
+      "text": "space so it has some height Delta Z and"
+    },
+    {
+      "index": 548,
+      "start": 1647.84,
+      "end": 1649.51,
+      "duration": 1.67,
+      "text": "it has a"
+    },
+    {
+      "index": 549,
+      "start": 1649.52,
+      "end": 1654.23,
+      "duration": 4.71,
+      "text": "base which has some area Delta a then"
+    },
+    {
+      "index": 550,
+      "start": 1654.24,
+      "end": 1658.11,
+      "duration": 3.87,
+      "text": "the small volume Delta V is equal to the"
+    },
+    {
+      "index": 551,
+      "start": 1658.12,
+      "end": 1661.43,
+      "duration": 3.31,
+      "text": "area of the base times the height so now"
+    },
+    {
+      "index": 552,
+      "start": 1661.44,
+      "end": 1662.909,
+      "duration": 1.469,
+      "text": "when you make the things infinitely"
+    },
+    {
+      "index": 553,
+      "start": 1662.919,
+      "end": 1668.63,
+      "duration": 5.711,
+      "text": "small you will get DV is Da * DZ and you"
+    },
+    {
+      "index": 554,
+      "start": 1668.64,
+      "end": 1670.71,
+      "duration": 2.07,
+      "text": "can use whichever formula you want for"
+    },
+    {
+      "index": 555,
+      "start": 1670.72,
+      "end": 1674.95,
+      "duration": 4.23,
+      "text": "area in the xway"
+    },
+    {
+      "index": 556,
+      "start": 1676.509,
+      "end": 1676.519,
+      "duration": 0.01,
+      "text": "plane"
+    },
+    {
+      "index": 557,
+      "start": 1676.519,
+      "end": 1678.23,
+      "duration": 1.711,
+      "text": "okay"
+    },
+    {
+      "index": 558,
+      "start": 1678.24,
+      "end": 1679.669,
+      "duration": 1.429,
+      "text": "now in practice you know you choose"
+    },
+    {
+      "index": 559,
+      "start": 1679.679,
+      "end": 1682.029,
+      "duration": 2.35,
+      "text": "which order you integrate in uh as"
+    },
+    {
+      "index": 560,
+      "start": 1682.039,
+      "end": 1684.11,
+      "duration": 2.071,
+      "text": "you've probably seen a favorite of mine"
+    },
+    {
+      "index": 561,
+      "start": 1684.12,
+      "end": 1687.07,
+      "duration": 2.95,
+      "text": "is Z first because very often you'll"
+    },
+    {
+      "index": 562,
+      "start": 1687.08,
+      "end": 1688.669,
+      "duration": 1.589,
+      "text": "know what the top and bottom of your"
+    },
+    {
+      "index": 563,
+      "start": 1688.679,
+      "end": 1690.75,
+      "duration": 2.071,
+      "text": "solid look like and then you will reduce"
+    },
+    {
+      "index": 564,
+      "start": 1690.76,
+      "end": 1692.59,
+      "duration": 1.83,
+      "text": "to just something in the XY"
+    },
+    {
+      "index": 565,
+      "start": 1692.6,
+      "end": 1694.83,
+      "duration": 2.23,
+      "text": "plane but there might be situations"
+    },
+    {
+      "index": 566,
+      "start": 1694.84,
+      "end": 1696.23,
+      "duration": 1.39,
+      "text": "where it's actually easier to start"
+    },
+    {
+      "index": 567,
+      "start": 1696.24,
+      "end": 1699.669,
+      "duration": 3.429,
+      "text": "first with DX Dy or RDR D Theta and then"
+    },
+    {
+      "index": 568,
+      "start": 1699.679,
+      "end": 1701.71,
+      "duration": 2.031,
+      "text": "save DZ for"
+    },
+    {
+      "index": 569,
+      "start": 1701.72,
+      "end": 1704.63,
+      "duration": 2.91,
+      "text": "last I me if you've seen how to in"
+    },
+    {
+      "index": 570,
+      "start": 1704.64,
+      "end": 1705.99,
+      "duration": 1.35,
+      "text": "single variable calculus you know the"
+    },
+    {
+      "index": 571,
+      "start": 1706.0,
+      "end": 1707.47,
+      "duration": 1.47,
+      "text": "disc and shell methods for finding"
+    },
+    {
+      "index": 572,
+      "start": 1707.48,
+      "end": 1709.83,
+      "duration": 2.35,
+      "text": "volumes that's exactly you know the"
+    },
+    {
+      "index": 573,
+      "start": 1709.84,
+      "end": 1712.029,
+      "duration": 2.189,
+      "text": "Dilemma of you know shells versus discs"
+    },
+    {
+      "index": 574,
+      "start": 1712.039,
+      "end": 1713.509,
+      "duration": 1.47,
+      "text": "one of them is you to Z first the other"
+    },
+    {
+      "index": 575,
+      "start": 1713.519,
+      "end": 1724.47,
+      "duration": 10.951,
+      "text": "is U to Z"
+    },
+    {
+      "index": 576,
+      "start": 1726.95,
+      "end": 1726.96,
+      "duration": 0.01,
+      "text": "last"
+    },
+    {
+      "index": 577,
+      "start": 1726.96,
+      "end": 1730.59,
+      "duration": 3.63,
+      "text": "okay so what are things we can do now"
+    },
+    {
+      "index": 578,
+      "start": 1730.6,
+      "end": 1732.75,
+      "duration": 2.15,
+      "text": "with triple"
+    },
+    {
+      "index": 579,
+      "start": 1732.76,
+      "end": 1734.95,
+      "duration": 2.19,
+      "text": "integrals well we can find the volume of"
+    },
+    {
+      "index": 580,
+      "start": 1734.96,
+      "end": 1737.95,
+      "duration": 2.99,
+      "text": "solids by just integrating DV"
+    },
+    {
+      "index": 581,
+      "start": 1737.96,
+      "end": 1741.23,
+      "duration": 3.27,
+      "text": "and we've seen that um we can find the"
+    },
+    {
+      "index": 582,
+      "start": 1741.24,
+      "end": 1742.71,
+      "duration": 1.47,
+      "text": "mass of a"
+    },
+    {
+      "index": 583,
+      "start": 1742.72,
+      "end": 1746.43,
+      "duration": 3.71,
+      "text": "solid okay so if we have a"
+    },
+    {
+      "index": 584,
+      "start": 1746.44,
+      "end": 1750.99,
+      "duration": 4.55,
+      "text": "density Delta which remember Delta is"
+    },
+    {
+      "index": 585,
+      "start": 1751.0,
+      "end": 1753.99,
+      "duration": 2.99,
+      "text": "basically the mass divided by the volume"
+    },
+    {
+      "index": 586,
+      "start": 1754.0,
+      "end": 1756.35,
+      "duration": 2.35,
+      "text": "okay so the small Mass element maybe I"
+    },
+    {
+      "index": 587,
+      "start": 1756.36,
+      "end": 1762.47,
+      "duration": 6.11,
+      "text": "should have written that as DM the mass"
+    },
+    {
+      "index": 588,
+      "start": 1766.389,
+      "end": 1766.399,
+      "duration": 0.01,
+      "text": "element is density time DV so now this"
+    },
+    {
+      "index": 589,
+      "start": 1766.399,
+      "end": 1767.99,
+      "duration": 1.591,
+      "text": "is the real physical density you know if"
+    },
+    {
+      "index": 590,
+      "start": 1768.0,
+      "end": 1769.789,
+      "duration": 1.789,
+      "text": "you're given material it will be usually"
+    },
+    {
+      "index": 591,
+      "start": 1769.799,
+      "end": 1773.47,
+      "duration": 3.671,
+      "text": "the density will be in per or in or"
+    },
+    {
+      "index": 592,
+      "start": 1773.48,
+      "end": 1775.47,
+      "duration": 1.99,
+      "text": "whatever I mean there tons of different"
+    },
+    {
+      "index": 593,
+      "start": 1775.48,
+      "end": 1776.909,
+      "duration": 1.429,
+      "text": "units but"
+    },
+    {
+      "index": 594,
+      "start": 1776.919,
+      "end": 1780.63,
+      "duration": 3.711,
+      "text": "um so then the"
+    },
+    {
+      "index": 595,
+      "start": 1780.64,
+      "end": 1783.35,
+      "duration": 2.71,
+      "text": "mass of your solid will be just the"
+    },
+    {
+      "index": 596,
+      "start": 1783.36,
+      "end": 1784.63,
+      "duration": 1.27,
+      "text": "triple"
+    },
+    {
+      "index": 597,
+      "start": 1784.64,
+      "end": 1788.029,
+      "duration": 3.389,
+      "text": "integral of density DV because you just"
+    },
+    {
+      "index": 598,
+      "start": 1788.039,
+      "end": 1790.669,
+      "duration": 2.63,
+      "text": "sum the mass of each little piece and of"
+    },
+    {
+      "index": 599,
+      "start": 1790.679,
+      "end": 1792.19,
+      "duration": 1.511,
+      "text": "course if the density is one then it"
+    },
+    {
+      "index": 600,
+      "start": 1792.2,
+      "end": 1794.59,
+      "duration": 2.39,
+      "text": "just becomes the"
+    },
+    {
+      "index": 601,
+      "start": 1794.6,
+      "end": 1797.87,
+      "duration": 3.27,
+      "text": "volume okay now it shouldn't be"
+    },
+    {
+      "index": 602,
+      "start": 1797.88,
+      "end": 1800.11,
+      "duration": 2.23,
+      "text": "surprising to you that we can also do"
+    },
+    {
+      "index": 603,
+      "start": 1800.12,
+      "end": 1802.669,
+      "duration": 2.549,
+      "text": "Classics that we had seen the plane such"
+    },
+    {
+      "index": 604,
+      "start": 1802.679,
+      "end": 1805.029,
+      "duration": 2.35,
+      "text": "as the average value of a function the"
+    },
+    {
+      "index": 605,
+      "start": 1805.039,
+      "end": 1826.23,
+      "duration": 21.191,
+      "text": "center of mass and the moment of"
+    },
+    {
+      "index": 606,
+      "start": 1844.47,
+      "end": 1844.48,
+      "duration": 0.01,
+      "text": "so the average"
+    },
+    {
+      "index": 607,
+      "start": 1844.48,
+      "end": 1848.269,
+      "duration": 3.789,
+      "text": "value of a function f of"
+    },
+    {
+      "index": 608,
+      "start": 1848.279,
+      "end": 1853.87,
+      "duration": 5.591,
+      "text": "XYZ in the region r that would be F Bar"
+    },
+    {
+      "index": 609,
+      "start": 1853.88,
+      "end": 1856.23,
+      "duration": 2.35,
+      "text": "would be one over the volume of the"
+    },
+    {
+      "index": 610,
+      "start": 1856.24,
+      "end": 1857.909,
+      "duration": 1.669,
+      "text": "region"
+    },
+    {
+      "index": 611,
+      "start": 1857.919,
+      "end": 1861.59,
+      "duration": 3.671,
+      "text": "time the triple integral of f"
+    },
+    {
+      "index": 612,
+      "start": 1861.6,
+      "end": 1864.149,
+      "duration": 2.549,
+      "text": "DV or if we have a density and we want"
+    },
+    {
+      "index": 613,
+      "start": 1864.159,
+      "end": 1879.11,
+      "duration": 14.951,
+      "text": "to take a weighted"
+    },
+    {
+      "index": 614,
+      "start": 1882.669,
+      "end": 1882.679,
+      "duration": 0.01,
+      "text": "average then we take one over the mass"
+    },
+    {
+      "index": 615,
+      "start": 1882.679,
+      "end": 1885.19,
+      "duration": 2.511,
+      "text": "where the mass is the triple integral of"
+    },
+    {
+      "index": 616,
+      "start": 1885.2,
+      "end": 1890.11,
+      "duration": 4.91,
+      "text": "the density times the triple integral of"
+    },
+    {
+      "index": 617,
+      "start": 1890.12,
+      "end": 1893.95,
+      "duration": 3.83,
+      "text": "f density"
+    },
+    {
+      "index": 618,
+      "start": 1897.43,
+      "end": 1897.44,
+      "duration": 0.01,
+      "text": "DV so as particular cases there's again"
+    },
+    {
+      "index": 619,
+      "start": 1897.44,
+      "end": 1899.909,
+      "duration": 2.469,
+      "text": "the notion of center of mass of a solid"
+    },
+    {
+      "index": 620,
+      "start": 1899.919,
+      "end": 1902.23,
+      "duration": 2.311,
+      "text": "so that's the point that's somehow right"
+    },
+    {
+      "index": 621,
+      "start": 1902.24,
+      "end": 1905.07,
+      "duration": 2.83,
+      "text": "in the middle of the solid um that's the"
+    },
+    {
+      "index": 622,
+      "start": 1905.08,
+      "end": 1906.629,
+      "duration": 1.549,
+      "text": "point mass by which you know that's a"
+    },
+    {
+      "index": 623,
+      "start": 1906.639,
+      "end": 1909.87,
+      "duration": 3.231,
+      "text": "point at which you should put a point"
+    },
+    {
+      "index": 624,
+      "start": 1909.88,
+      "end": 1912.789,
+      "duration": 2.909,
+      "text": "Mass so that it would be equivalent from"
+    },
+    {
+      "index": 625,
+      "start": 1912.799,
+      "end": 1915.19,
+      "duration": 2.391,
+      "text": "the point of view of you know dealing"
+    },
+    {
+      "index": 626,
+      "start": 1915.2,
+      "end": 1917.59,
+      "duration": 2.39,
+      "text": "with forces and translation effects of"
+    },
+    {
+      "index": 627,
+      "start": 1917.6,
+      "end": 1920.71,
+      "duration": 3.11,
+      "text": "course not for rotation but um so the"
+    },
+    {
+      "index": 628,
+      "start": 1920.72,
+      "end": 1923.71,
+      "duration": 2.99,
+      "text": "center of mass of a"
+    },
+    {
+      "index": 629,
+      "start": 1923.72,
+      "end": 1926.389,
+      "duration": 2.669,
+      "text": "solid is just given"
+    },
+    {
+      "index": 630,
+      "start": 1926.399,
+      "end": 1930.11,
+      "duration": 3.711,
+      "text": "by taking the average values of X Y and"
+    },
+    {
+      "index": 631,
+      "start": 1930.12,
+      "end": 1933.549,
+      "duration": 3.429,
+      "text": "Z okay so it's the special case where"
+    },
+    {
+      "index": 632,
+      "start": 1933.559,
+      "end": 1937.59,
+      "duration": 4.031,
+      "text": "you know so xar is one over the mass"
+    },
+    {
+      "index": 633,
+      "start": 1937.6,
+      "end": 1942.31,
+      "duration": 4.71,
+      "text": "time triple integral of x density DV and"
+    },
+    {
+      "index": 634,
+      "start": 1942.32,
+      "end": 1946.07,
+      "duration": 3.75,
+      "text": "same thing with y and"
+    },
+    {
+      "index": 635,
+      "start": 1952.87,
+      "end": 1952.88,
+      "duration": 0.01,
+      "text": "of course you know very often you"
+    },
+    {
+      "index": 636,
+      "start": 1952.88,
+      "end": 1955.389,
+      "duration": 2.509,
+      "text": "can use symmetry to not have to compute"
+    },
+    {
+      "index": 637,
+      "start": 1955.399,
+      "end": 1957.59,
+      "duration": 2.191,
+      "text": "all three of them for example if you"
+    },
+    {
+      "index": 638,
+      "start": 1957.6,
+      "end": 1959.31,
+      "duration": 1.71,
+      "text": "look at this solid that we had well I"
+    },
+    {
+      "index": 639,
+      "start": 1959.32,
+      "end": 1961.11,
+      "duration": 1.79,
+      "text": "guess I've erased it now but if you"
+    },
+    {
+      "index": 640,
+      "start": 1961.12,
+      "end": 1963.149,
+      "duration": 2.029,
+      "text": "remember what it looked like well it was"
+    },
+    {
+      "index": 641,
+      "start": 1963.159,
+      "end": 1964.47,
+      "duration": 1.311,
+      "text": "pretty obvious that the center of mass"
+    },
+    {
+      "index": 642,
+      "start": 1964.48,
+      "end": 1966.75,
+      "duration": 2.27,
+      "text": "would be in the z-axis so no need to"
+    },
+    {
+      "index": 643,
+      "start": 1966.76,
+      "end": 1976.029,
+      "duration": 9.269,
+      "text": "waste time Computing xar and Y"
+    },
+    {
+      "index": 644,
+      "start": 1984.43,
+      "end": 1984.44,
+      "duration": 0.01,
+      "text": "and in fact you could also find ZB bar"
+    },
+    {
+      "index": 645,
+      "start": 1984.44,
+      "end": 1986.389,
+      "duration": 1.949,
+      "text": "by symmetry between the top and bottom"
+    },
+    {
+      "index": 646,
+      "start": 1986.399,
+      "end": 1995.789,
+      "duration": 9.39,
+      "text": "I'll let you figure that"
+    },
+    {
+      "index": 647,
+      "start": 1998.509,
+      "end": 1998.519,
+      "duration": 0.01,
+      "text": "out of course symmetry only works I"
+    },
+    {
+      "index": 648,
+      "start": 1998.519,
+      "end": 1999.909,
+      "duration": 1.39,
+      "text": "should say symmetry only works if the"
+    },
+    {
+      "index": 649,
+      "start": 1999.919,
+      "end": 2002.669,
+      "duration": 2.75,
+      "text": "density is also symmetric right if if I"
+    },
+    {
+      "index": 650,
+      "start": 2002.679,
+      "end": 2004.83,
+      "duration": 2.151,
+      "text": "had taken my guy to be you know heavier"
+    },
+    {
+      "index": 651,
+      "start": 2004.84,
+      "end": 2006.629,
+      "duration": 1.789,
+      "text": "at the front than at the back then it"
+    },
+    {
+      "index": 652,
+      "start": 2006.639,
+      "end": 2012.95,
+      "duration": 6.311,
+      "text": "would longer be true that xar would be"
+    },
+    {
+      "index": 653,
+      "start": 2017.71,
+      "end": 2017.72,
+      "duration": 0.01,
+      "text": "zero okay next on the list is moment of"
+    },
+    {
+      "index": 654,
+      "start": 2017.72,
+      "end": 2020.509,
+      "duration": 2.789,
+      "text": "inertia and actually in a way moment of"
+    },
+    {
+      "index": 655,
+      "start": 2020.519,
+      "end": 2022.83,
+      "duration": 2.311,
+      "text": "inertia in 3D is easier conceptually"
+    },
+    {
+      "index": 656,
+      "start": 2022.84,
+      "end": 2028.59,
+      "duration": 5.75,
+      "text": "than in 2D so why is that well"
+    },
+    {
+      "index": 657,
+      "start": 2028.6,
+      "end": 2031.269,
+      "duration": 2.669,
+      "text": "because now the various flavors that we"
+    },
+    {
+      "index": 658,
+      "start": 2031.279,
+      "end": 2033.87,
+      "duration": 2.591,
+      "text": "had come together in a nice way so the"
+    },
+    {
+      "index": 659,
+      "start": 2033.88,
+      "end": 2036.31,
+      "duration": 2.43,
+      "text": "moment of inertia of an AIS sorry with"
+    },
+    {
+      "index": 660,
+      "start": 2036.32,
+      "end": 2038.029,
+      "duration": 1.709,
+      "text": "respect to an AIS"
+    },
+    {
+      "index": 661,
+      "start": 2038.039,
+      "end": 2040.269,
+      "duration": 2.23,
+      "text": "would be again given by the triple"
+    },
+    {
+      "index": 662,
+      "start": 2040.279,
+      "end": 2046.35,
+      "duration": 6.071,
+      "text": "integral of the distance to the"
+    },
+    {
+      "index": 663,
+      "start": 2049.869,
+      "end": 2049.879,
+      "duration": 0.01,
+      "text": "axis squared time density time"
+    },
+    {
+      "index": 664,
+      "start": 2049.879,
+      "end": 2053.349,
+      "duration": 3.47,
+      "text": "DV and in particular so you know we have"
+    },
+    {
+      "index": 665,
+      "start": 2053.359,
+      "end": 2054.109,
+      "duration": 0.75,
+      "text": "our"
+    },
+    {
+      "index": 666,
+      "start": 2054.119,
+      "end": 2057.71,
+      "duration": 3.591,
+      "text": "solid and we might skew it using any of"
+    },
+    {
+      "index": 667,
+      "start": 2057.72,
+      "end": 2059.149,
+      "duration": 1.429,
+      "text": "the coordinate axis and then try to"
+    },
+    {
+      "index": 668,
+      "start": 2059.159,
+      "end": 2061.95,
+      "duration": 2.791,
+      "text": "rotate it about one of the axis so we"
+    },
+    {
+      "index": 669,
+      "start": 2061.96,
+      "end": 2063.51,
+      "duration": 1.55,
+      "text": "have three different possibilities of"
+    },
+    {
+      "index": 670,
+      "start": 2063.52,
+      "end": 2065.75,
+      "duration": 2.23,
+      "text": "course the X Y or Z"
+    },
+    {
+      "index": 671,
+      "start": 2065.76,
+      "end": 2070.669,
+      "duration": 4.909,
+      "text": "axis and and so now rotating about the"
+    },
+    {
+      "index": 672,
+      "start": 2070.679,
+      "end": 2073.71,
+      "duration": 3.031,
+      "text": "z-axis actually corresponds to when we"
+    },
+    {
+      "index": 673,
+      "start": 2073.72,
+      "end": 2075.27,
+      "duration": 1.55,
+      "text": "were just doing things for flat object"
+    },
+    {
+      "index": 674,
+      "start": 2075.28,
+      "end": 2077.349,
+      "duration": 2.069,
+      "text": "in the XY plane that corresponded to"
+    },
+    {
+      "index": 675,
+      "start": 2077.359,
+      "end": 2078.629,
+      "duration": 1.27,
+      "text": "rotating about the"
+    },
+    {
+      "index": 676,
+      "start": 2078.639,
+      "end": 2081.03,
+      "duration": 2.391,
+      "text": "origin so secretly we were saying we"
+    },
+    {
+      "index": 677,
+      "start": 2081.04,
+      "end": 2082.95,
+      "duration": 1.91,
+      "text": "were rotating about a point but actually"
+    },
+    {
+      "index": 678,
+      "start": 2082.96,
+      "end": 2084.829,
+      "duration": 1.869,
+      "text": "it was just rotating about the z-axis"
+    },
+    {
+      "index": 679,
+      "start": 2084.839,
+      "end": 2086.75,
+      "duration": 1.911,
+      "text": "just I didn't want to you know introduce"
+    },
+    {
+      "index": 680,
+      "start": 2086.76,
+      "end": 2088.95,
+      "duration": 2.19,
+      "text": "a z coordinate that we didn't actually"
+    },
+    {
+      "index": 681,
+      "start": 2088.96,
+      "end": 2091.069,
+      "duration": 2.109,
+      "text": "need at the"
+    },
+    {
+      "index": 682,
+      "start": 2091.079,
+      "end": 2095.869,
+      "duration": 4.79,
+      "text": "time"
+    },
+    {
+      "index": 683,
+      "start": 2118.03,
+      "end": 2118.04,
+      "duration": 0.01,
+      "text": "[Applause]"
+    },
+    {
+      "index": 684,
+      "start": 2118.04,
+      "end": 2121.589,
+      "duration": 3.549,
+      "text": "okay"
+    },
+    {
+      "index": 685,
+      "start": 2125.79,
+      "end": 2125.8,
+      "duration": 0.01,
+      "text": "so moment of inera about the"
+    },
+    {
+      "index": 686,
+      "start": 2125.8,
+      "end": 2127.43,
+      "duration": 1.63,
+      "text": "z-axis"
+    },
+    {
+      "index": 687,
+      "start": 2127.44,
+      "end": 2129.79,
+      "duration": 2.35,
+      "text": "um so what's the distance to the z-axis"
+    },
+    {
+      "index": 688,
+      "start": 2129.8,
+      "end": 2132.27,
+      "duration": 2.47,
+      "text": "well we've said that's exactly R that's"
+    },
+    {
+      "index": 689,
+      "start": 2132.28,
+      "end": 2136.55,
+      "duration": 4.27,
+      "text": "the cylindrical coordinate R so the"
+    },
+    {
+      "index": 690,
+      "start": 2136.56,
+      "end": 2139.71,
+      "duration": 3.15,
+      "text": "square of a distance is just R"
+    },
+    {
+      "index": 691,
+      "start": 2139.72,
+      "end": 2141.99,
+      "duration": 2.27,
+      "text": "squ now if you didn't want to do it in"
+    },
+    {
+      "index": 692,
+      "start": 2142.0,
+      "end": 2144.31,
+      "duration": 2.31,
+      "text": "cylindrical coordinates then of course R"
+    },
+    {
+      "index": 693,
+      "start": 2144.32,
+      "end": 2149.829,
+      "duration": 5.509,
+      "text": "2 is just X2 +"
+    },
+    {
+      "index": 694,
+      "start": 2156.67,
+      "end": 2156.68,
+      "duration": 0.01,
+      "text": "okay square of distance from the z-axis"
+    },
+    {
+      "index": 695,
+      "start": 2156.68,
+      "end": 2159.91,
+      "duration": 3.23,
+      "text": "is is just X2 + y^2 similarly now if you"
+    },
+    {
+      "index": 696,
+      "start": 2159.92,
+      "end": 2163.589,
+      "duration": 3.669,
+      "text": "want the distance from the x axis well"
+    },
+    {
+      "index": 697,
+      "start": 2163.599,
+      "end": 2166.95,
+      "duration": 3.351,
+      "text": "that will be y s plus z^ s try to"
+    },
+    {
+      "index": 698,
+      "start": 2166.96,
+      "end": 2168.71,
+      "duration": 1.75,
+      "text": "convince yourselves on the picture or"
+    },
+    {
+      "index": 699,
+      "start": 2168.72,
+      "end": 2170.75,
+      "duration": 2.03,
+      "text": "else just argue by symmetry you know if"
+    },
+    {
+      "index": 700,
+      "start": 2170.76,
+      "end": 2173.15,
+      "duration": 2.39,
+      "text": "you change the positions of V"
+    },
+    {
+      "index": 701,
+      "start": 2173.16,
+      "end": 2177.67,
+      "duration": 4.51,
+      "text": "axis so moment of inertia about the"
+    },
+    {
+      "index": 702,
+      "start": 2180.55,
+      "end": 2180.56,
+      "duration": 0.01,
+      "text": "x-axis"
+    },
+    {
+      "index": 703,
+      "start": 2180.56,
+      "end": 2185.71,
+      "duration": 5.15,
+      "text": "is double integral of Y2 + z^2 Delta DV"
+    },
+    {
+      "index": 704,
+      "start": 2185.72,
+      "end": 2187.91,
+      "duration": 2.19,
+      "text": "and moment of inertia about y-"
+    },
+    {
+      "index": 705,
+      "start": 2187.92,
+      "end": 2191.069,
+      "duration": 3.149,
+      "text": "axis is the same thing but now with X2 +"
+    },
+    {
+      "index": 706,
+      "start": 2191.079,
+      "end": 2193.95,
+      "duration": 2.871,
+      "text": "z^"
+    },
+    {
+      "index": 707,
+      "start": 2196.79,
+      "end": 2196.8,
+      "duration": 0.01,
+      "text": "2 and so now if you try to apply these"
+    },
+    {
+      "index": 708,
+      "start": 2196.8,
+      "end": 2198.95,
+      "duration": 2.15,
+      "text": "things for flat solids that are in the"
+    },
+    {
+      "index": 709,
+      "start": 2198.96,
+      "end": 2202.03,
+      "duration": 3.07,
+      "text": "XY plane so where there's no Z to look"
+    },
+    {
+      "index": 710,
+      "start": 2202.04,
+      "end": 2204.95,
+      "duration": 2.91,
+      "text": "at well you see these formulas become"
+    },
+    {
+      "index": 711,
+      "start": 2204.96,
+      "end": 2207.39,
+      "duration": 2.43,
+      "text": "the old formulas that we"
+    },
+    {
+      "index": 712,
+      "start": 2207.4,
+      "end": 2209.829,
+      "duration": 2.429,
+      "text": "had but now you know they all fit"
+    },
+    {
+      "index": 713,
+      "start": 2209.839,
+      "end": 2215.51,
+      "duration": 5.671,
+      "text": "together in a more symmetric"
+    },
+    {
+      "index": 714,
+      "start": 2225.349,
+      "end": 2225.359,
+      "duration": 0.01,
+      "text": "that no okay so this are just formulas"
+    },
+    {
+      "index": 715,
+      "start": 2225.359,
+      "end": 2226.75,
+      "duration": 1.391,
+      "text": "to"
+    },
+    {
+      "index": 716,
+      "start": 2226.76,
+      "end": 2230.349,
+      "duration": 3.589,
+      "text": "remember so let's"
+    },
+    {
+      "index": 717,
+      "start": 2232.309,
+      "end": 2232.319,
+      "duration": 0.01,
+      "text": "do no"
+    },
+    {
+      "index": 718,
+      "start": 2232.319,
+      "end": 2236.91,
+      "duration": 4.591,
+      "text": "okay so let's do an"
+    },
+    {
+      "index": 719,
+      "start": 2240.67,
+      "end": 2240.68,
+      "duration": 0.01,
+      "text": "example oh was there a question that I"
+    },
+    {
+      "index": 720,
+      "start": 2240.68,
+      "end": 2242.79,
+      "duration": 2.11,
+      "text": "missed no"
+    },
+    {
+      "index": 721,
+      "start": 2242.8,
+      "end": 2247.15,
+      "duration": 4.35,
+      "text": "okay so let's find the moment of inertia"
+    },
+    {
+      "index": 722,
+      "start": 2247.16,
+      "end": 2248.27,
+      "duration": 1.11,
+      "text": "about the"
+    },
+    {
+      "index": 723,
+      "start": 2248.28,
+      "end": 2255.95,
+      "duration": 7.67,
+      "text": "z-axis of a solid"
+    },
+    {
+      "index": 724,
+      "start": 2264.349,
+      "end": 2264.359,
+      "duration": 0.01,
+      "text": "between z = a * R and Z equals B so just"
+    },
+    {
+      "index": 725,
+      "start": 2264.359,
+      "end": 2267.43,
+      "duration": 3.071,
+      "text": "to convince you that it's a"
+    },
+    {
+      "index": 726,
+      "start": 2271.87,
+      "end": 2271.88,
+      "duration": 0.01,
+      "text": "cone so zal a * R means you know the"
+    },
+    {
+      "index": 727,
+      "start": 2271.88,
+      "end": 2274.069,
+      "duration": 2.189,
+      "text": "height is proportional to the distance"
+    },
+    {
+      "index": 728,
+      "start": 2274.079,
+      "end": 2276.23,
+      "duration": 2.151,
+      "text": "from the z-axis so let's look at what we"
+    },
+    {
+      "index": 729,
+      "start": 2276.24,
+      "end": 2277.109,
+      "duration": 0.869,
+      "text": "get"
+    },
+    {
+      "index": 730,
+      "start": 2277.119,
+      "end": 2278.75,
+      "duration": 1.631,
+      "text": "if we just do it in the plane of the"
+    },
+    {
+      "index": 731,
+      "start": 2278.76,
+      "end": 2281.349,
+      "duration": 2.589,
+      "text": "Blackboard so if I go to the right here"
+    },
+    {
+      "index": 732,
+      "start": 2281.359,
+      "end": 2284.47,
+      "duration": 3.111,
+      "text": "R is just the distance from the z-axis"
+    },
+    {
+      "index": 733,
+      "start": 2284.48,
+      "end": 2287.27,
+      "duration": 2.79,
+      "text": "the height should be proportional with"
+    },
+    {
+      "index": 734,
+      "start": 2287.28,
+      "end": 2289.829,
+      "duration": 2.549,
+      "text": "proportionality factor a so that means"
+    },
+    {
+      "index": 735,
+      "start": 2289.839,
+      "end": 2292.79,
+      "duration": 2.951,
+      "text": "you know I take a line with slope"
+    },
+    {
+      "index": 736,
+      "start": 2292.8,
+      "end": 2295.589,
+      "duration": 2.789,
+      "text": "a if I'm on the left well it's the same"
+    },
+    {
+      "index": 737,
+      "start": 2295.599,
+      "end": 2298.19,
+      "duration": 2.591,
+      "text": "story except distance to the z-axis is"
+    },
+    {
+      "index": 738,
+      "start": 2298.2,
+      "end": 2300.63,
+      "duration": 2.43,
+      "text": "still positive so I get the symmetric"
+    },
+    {
+      "index": 739,
+      "start": 2300.64,
+      "end": 2303.55,
+      "duration": 2.91,
+      "text": "thing and in fact it doesn't matter"
+    },
+    {
+      "index": 740,
+      "start": 2303.56,
+      "end": 2306.109,
+      "duration": 2.549,
+      "text": "which vertical plane I do it in this is"
+    },
+    {
+      "index": 741,
+      "start": 2306.119,
+      "end": 2307.829,
+      "duration": 1.71,
+      "text": "the same you know if I rotate about the"
+    },
+    {
+      "index": 742,
+      "start": 2307.839,
+      "end": 2310.87,
+      "duration": 3.031,
+      "text": "Z axis see there's NOA in here so it's"
+    },
+    {
+      "index": 743,
+      "start": 2310.88,
+      "end": 2312.19,
+      "duration": 1.31,
+      "text": "the same in all"
+    },
+    {
+      "index": 744,
+      "start": 2312.2,
+      "end": 2315.55,
+      "duration": 3.35,
+      "text": "directions so I claim it's a cone where"
+    },
+    {
+      "index": 745,
+      "start": 2315.56,
+      "end": 2318.349,
+      "duration": 2.789,
+      "text": "the slope of the ray is"
+    },
+    {
+      "index": 746,
+      "start": 2318.359,
+      "end": 2320.95,
+      "duration": 2.591,
+      "text": "a"
+    },
+    {
+      "index": 747,
+      "start": 2320.96,
+      "end": 2324.03,
+      "duration": 3.07,
+      "text": "okay and Z equals B well that just means"
+    },
+    {
+      "index": 748,
+      "start": 2324.04,
+      "end": 2327.71,
+      "duration": 3.67,
+      "text": "we stop in a horizontal"
+    },
+    {
+      "index": 749,
+      "start": 2327.72,
+      "end": 2330.23,
+      "duration": 2.51,
+      "text": "plane at height"
+    },
+    {
+      "index": 750,
+      "start": 2330.24,
+      "end": 2333.19,
+      "duration": 2.95,
+      "text": "B okay so that solid cone really just"
+    },
+    {
+      "index": 751,
+      "start": 2333.2,
+      "end": 2335.51,
+      "duration": 2.31,
+      "text": "looks like this that's our"
+    },
+    {
+      "index": 752,
+      "start": 2335.52,
+      "end": 2338.309,
+      "duration": 2.789,
+      "text": "solid"
+    },
+    {
+      "index": 753,
+      "start": 2338.319,
+      "end": 2340.67,
+      "duration": 2.351,
+      "text": "okay so it has a flat top flat circular"
+    },
+    {
+      "index": 754,
+      "start": 2340.68,
+      "end": 2343.63,
+      "duration": 2.95,
+      "text": "top and then it's pointing and the point"
+    },
+    {
+      "index": 755,
+      "start": 2343.64,
+      "end": 2347.23,
+      "duration": 3.59,
+      "text": "is at V the tape of it is at the"
+    },
+    {
+      "index": 756,
+      "start": 2347.24,
+      "end": 2349.67,
+      "duration": 2.43,
+      "text": "origin so let's try to compute its"
+    },
+    {
+      "index": 757,
+      "start": 2349.68,
+      "end": 2352.47,
+      "duration": 2.79,
+      "text": "moment of inertia about the z-axis so"
+    },
+    {
+      "index": 758,
+      "start": 2352.48,
+      "end": 2355.43,
+      "duration": 2.95,
+      "text": "that means you know maybe this is like a"
+    },
+    {
+      "index": 759,
+      "start": 2355.44,
+      "end": 2356.75,
+      "duration": 1.31,
+      "text": "top that you're going to spin and it"
+    },
+    {
+      "index": 760,
+      "start": 2356.76,
+      "end": 2358.349,
+      "duration": 1.589,
+      "text": "tells you how hard it is to actually"
+    },
+    {
+      "index": 761,
+      "start": 2358.359,
+      "end": 2359.71,
+      "duration": 1.351,
+      "text": "spin that"
+    },
+    {
+      "index": 762,
+      "start": 2359.72,
+      "end": 2362.71,
+      "duration": 2.99,
+      "text": "top actually that's you know also useful"
+    },
+    {
+      "index": 763,
+      "start": 2362.72,
+      "end": 2363.95,
+      "duration": 1.23,
+      "text": "if you're going to do mechanical"
+    },
+    {
+      "index": 764,
+      "start": 2363.96,
+      "end": 2366.109,
+      "duration": 2.149,
+      "text": "engineering because you know if you're"
+    },
+    {
+      "index": 765,
+      "start": 2366.119,
+      "end": 2367.67,
+      "duration": 1.551,
+      "text": "trying to design gears and things like"
+    },
+    {
+      "index": 766,
+      "start": 2367.68,
+      "end": 2368.99,
+      "duration": 1.31,
+      "text": "that that will rotate you might want to"
+    },
+    {
+      "index": 767,
+      "start": 2369.0,
+      "end": 2371.069,
+      "duration": 2.069,
+      "text": "know exactly how much effort you'll have"
+    },
+    {
+      "index": 768,
+      "start": 2371.079,
+      "end": 2373.55,
+      "duration": 2.471,
+      "text": "to put to actually get them to spin and"
+    },
+    {
+      "index": 769,
+      "start": 2373.56,
+      "end": 2374.95,
+      "duration": 1.39,
+      "text": "you know whether you actually going to"
+    },
+    {
+      "index": 770,
+      "start": 2374.96,
+      "end": 2376.309,
+      "duration": 1.349,
+      "text": "have a strong enough engine or whatever"
+    },
+    {
+      "index": 771,
+      "start": 2376.319,
+      "end": 2377.95,
+      "duration": 1.631,
+      "text": "to do"
+    },
+    {
+      "index": 772,
+      "start": 2377.96,
+      "end": 2380.23,
+      "duration": 2.27,
+      "text": "it okay so what's the amount of inertia"
+    },
+    {
+      "index": 773,
+      "start": 2380.24,
+      "end": 2382.349,
+      "duration": 2.109,
+      "text": "of this guy well that's the triple"
+    },
+    {
+      "index": 774,
+      "start": 2382.359,
+      "end": 2383.99,
+      "duration": 1.631,
+      "text": "integral"
+    },
+    {
+      "index": 775,
+      "start": 2384.0,
+      "end": 2388.109,
+      "duration": 4.109,
+      "text": "of well we have to choose X2 + y^2 or r"
+    },
+    {
+      "index": 776,
+      "start": 2388.119,
+      "end": 2390.99,
+      "duration": 2.871,
+      "text": "s let's see I think I want to use"
+    },
+    {
+      "index": 777,
+      "start": 2391.0,
+      "end": 2392.829,
+      "duration": 1.829,
+      "text": "cylindrical coordinates to do that given"
+    },
+    {
+      "index": 778,
+      "start": 2392.839,
+      "end": 2397.43,
+      "duration": 4.591,
+      "text": "the shape so we use r squ"
+    },
+    {
+      "index": 779,
+      "start": 2397.44,
+      "end": 2398.95,
+      "duration": 1.51,
+      "text": "I might have the density but let's say"
+    },
+    {
+      "index": 780,
+      "start": 2398.96,
+      "end": 2401.67,
+      "duration": 2.71,
+      "text": "the density is"
+    },
+    {
+      "index": 781,
+      "start": 2405.51,
+      "end": 2405.52,
+      "duration": 0.01,
+      "text": "one so I don't have density I still have"
+    },
+    {
+      "index": 782,
+      "start": 2405.52,
+      "end": 2408.51,
+      "duration": 2.99,
+      "text": "DV now it will be my choice to choose"
+    },
+    {
+      "index": 783,
+      "start": 2408.52,
+      "end": 2412.63,
+      "duration": 4.11,
+      "text": "you know uh between doing"
+    },
+    {
+      "index": 784,
+      "start": 2412.64,
+      "end": 2416.71,
+      "duration": 4.07,
+      "text": "the DZ first or doing the rdrd feta"
+    },
+    {
+      "index": 785,
+      "start": 2416.72,
+      "end": 2418.63,
+      "duration": 1.91,
+      "text": "first just to show you how it goes the"
+    },
+    {
+      "index": 786,
+      "start": 2418.64,
+      "end": 2420.829,
+      "duration": 2.189,
+      "text": "other way around let me do it rdrd feta"
+    },
+    {
+      "index": 787,
+      "start": 2420.839,
+      "end": 2425.349,
+      "duration": 4.51,
+      "text": "DZ this time okay you know then you can"
+    },
+    {
+      "index": 788,
+      "start": 2425.359,
+      "end": 2428.109,
+      "duration": 2.75,
+      "text": "decide on a Case by case basis which one"
+    },
+    {
+      "index": 789,
+      "start": 2428.119,
+      "end": 2429.95,
+      "duration": 1.831,
+      "text": "you like"
+    },
+    {
+      "index": 790,
+      "start": 2429.96,
+      "end": 2432.47,
+      "duration": 2.51,
+      "text": "best okay so if we do it in this"
+    },
+    {
+      "index": 791,
+      "start": 2432.48,
+      "end": 2435.03,
+      "duration": 2.55,
+      "text": "direction it means that in the inner and"
+    },
+    {
+      "index": 792,
+      "start": 2435.04,
+      "end": 2437.589,
+      "duration": 2.549,
+      "text": "middle integrals we fixed a value of"
+    },
+    {
+      "index": 793,
+      "start": 2437.599,
+      "end": 2440.67,
+      "duration": 3.071,
+      "text": "Z and for that particular value of Z"
+    },
+    {
+      "index": 794,
+      "start": 2440.68,
+      "end": 2442.47,
+      "duration": 1.79,
+      "text": "we'll be actually slicing our solid by a"
+    },
+    {
+      "index": 795,
+      "start": 2442.48,
+      "end": 2444.87,
+      "duration": 2.39,
+      "text": "horizontal plane and looking at what we"
+    },
+    {
+      "index": 796,
+      "start": 2444.88,
+      "end": 2450.51,
+      "duration": 5.63,
+      "text": "get okay so what does that look"
+    },
+    {
+      "index": 797,
+      "start": 2450.52,
+      "end": 2452.589,
+      "duration": 2.069,
+      "text": "like well I"
+    },
+    {
+      "index": 798,
+      "start": 2452.599,
+      "end": 2458.109,
+      "duration": 5.51,
+      "text": "fix a value of Z and I slice"
+    },
+    {
+      "index": 799,
+      "start": 2458.119,
+      "end": 2460.109,
+      "duration": 1.99,
+      "text": "by a horizontal plane well I'm going to"
+    },
+    {
+      "index": 800,
+      "start": 2460.119,
+      "end": 2462.87,
+      "duration": 2.751,
+      "text": "get a circle"
+    },
+    {
+      "index": 801,
+      "start": 2462.88,
+      "end": 2465.51,
+      "duration": 2.63,
+      "text": "certainly what's the radius well a disc"
+    },
+    {
+      "index": 802,
+      "start": 2465.52,
+      "end": 2468.23,
+      "duration": 2.71,
+      "text": "actually what's the radius of that"
+    },
+    {
+      "index": 803,
+      "start": 2468.24,
+      "end": 2470.79,
+      "duration": 2.55,
+      "text": "disc yeah the radius of that disc should"
+    },
+    {
+      "index": 804,
+      "start": 2470.8,
+      "end": 2473.309,
+      "duration": 2.509,
+      "text": "be Z over a because the equation of that"
+    },
+    {
+      "index": 805,
+      "start": 2473.319,
+      "end": 2476.71,
+      "duration": 3.391,
+      "text": "cone we say that Z equals a r if you"
+    },
+    {
+      "index": 806,
+      "start": 2476.72,
+      "end": 2477.71,
+      "duration": 0.99,
+      "text": "flip it"
+    },
+    {
+      "index": 807,
+      "start": 2477.72,
+      "end": 2480.63,
+      "duration": 2.91,
+      "text": "around so maybe I should switch to"
+    },
+    {
+      "index": 808,
+      "start": 2480.64,
+      "end": 2482.829,
+      "duration": 2.189,
+      "text": "another"
+    },
+    {
+      "index": 809,
+      "start": 2482.839,
+      "end": 2489.069,
+      "duration": 6.23,
+      "text": "Blackboard so the equation of a cone"
+    },
+    {
+      "index": 810,
+      "start": 2491.069,
+      "end": 2491.079,
+      "duration": 0.01,
+      "text": "it's zal a r or"
+    },
+    {
+      "index": 811,
+      "start": 2491.079,
+      "end": 2495.03,
+      "duration": 3.951,
+      "text": "equivalently Ral z"
+    },
+    {
+      "index": 812,
+      "start": 2495.04,
+      "end": 2500.03,
+      "duration": 4.99,
+      "text": "a so for a given value of Z I will get"
+    },
+    {
+      "index": 813,
+      "start": 2500.04,
+      "end": 2501.87,
+      "duration": 1.83,
+      "text": "guy will be"
+    },
+    {
+      "index": 814,
+      "start": 2501.88,
+      "end": 2505.03,
+      "duration": 3.15,
+      "text": "dis of"
+    },
+    {
+      "index": 815,
+      "start": 2505.04,
+      "end": 2507.95,
+      "duration": 2.91,
+      "text": "radius Z over"
+    },
+    {
+      "index": 816,
+      "start": 2507.96,
+      "end": 2509.95,
+      "duration": 1.99,
+      "text": "a okay"
+    },
+    {
+      "index": 817,
+      "start": 2509.96,
+      "end": 2513.99,
+      "duration": 4.03,
+      "text": "so moment of inertia is going to be when"
+    },
+    {
+      "index": 818,
+      "start": 2514.0,
+      "end": 2519.87,
+      "duration": 5.87,
+      "text": "I said r s r the r d Theta d z now so to"
+    },
+    {
+      "index": 819,
+      "start": 2519.88,
+      "end": 2522.67,
+      "duration": 2.79,
+      "text": "set up the inner and middle integrals I"
+    },
+    {
+      "index": 820,
+      "start": 2522.68,
+      "end": 2524.39,
+      "duration": 1.71,
+      "text": "just set up a double integral over this"
+    },
+    {
+      "index": 821,
+      "start": 2524.4,
+      "end": 2527.87,
+      "duration": 3.47,
+      "text": "disc of radius z a so it's easy R goes"
+    },
+    {
+      "index": 822,
+      "start": 2527.88,
+      "end": 2533.23,
+      "duration": 5.35,
+      "text": "from 0 to Z a Theta goes from 0 to 2"
+    },
+    {
+      "index": 823,
+      "start": 2533.24,
+      "end": 2534.87,
+      "duration": 1.63,
+      "text": "pi"
+    },
+    {
+      "index": 824,
+      "start": 2534.88,
+      "end": 2538.23,
+      "duration": 3.35,
+      "text": "okay and then well if I set up the"
+    },
+    {
+      "index": 825,
+      "start": 2538.24,
+      "end": 2540.39,
+      "duration": 2.15,
+      "text": "bounce for z now it's my outer variable"
+    },
+    {
+      "index": 826,
+      "start": 2540.4,
+      "end": 2543.069,
+      "duration": 2.669,
+      "text": "so the question I have to ask is what is"
+    },
+    {
+      "index": 827,
+      "start": 2543.079,
+      "end": 2545.549,
+      "duration": 2.47,
+      "text": "the First Slice what is the last slice"
+    },
+    {
+      "index": 828,
+      "start": 2545.559,
+      "end": 2547.39,
+      "duration": 1.831,
+      "text": "so the bottom most value of Z would be"
+    },
+    {
+      "index": 829,
+      "start": 2547.4,
+      "end": 2551.95,
+      "duration": 4.55,
+      "text": "zero and the topmost would be"
+    },
+    {
+      "index": 830,
+      "start": 2556.67,
+      "end": 2556.68,
+      "duration": 0.01,
+      "text": "B and so that's what I get okay so"
+    },
+    {
+      "index": 831,
+      "start": 2556.68,
+      "end": 2559.03,
+      "duration": 2.35,
+      "text": "exercise it's not very hard try to set"
+    },
+    {
+      "index": 832,
+      "start": 2559.04,
+      "end": 2560.71,
+      "duration": 1.67,
+      "text": "it up the other way"
+    },
+    {
+      "index": 833,
+      "start": 2560.72,
+      "end": 2564.71,
+      "duration": 3.99,
+      "text": "around you know uh with DZ first and"
+    },
+    {
+      "index": 834,
+      "start": 2564.72,
+      "end": 2566.03,
+      "duration": 1.31,
+      "text": "then Rd r d"
+    },
+    {
+      "index": 835,
+      "start": 2566.04,
+      "end": 2569.03,
+      "duration": 2.99,
+      "text": "Theta it's pretty much the same level of"
+    },
+    {
+      "index": 836,
+      "start": 2569.04,
+      "end": 2571.67,
+      "duration": 2.63,
+      "text": "difficulty I'm sure you can do both of"
+    },
+    {
+      "index": 837,
+      "start": 2571.68,
+      "end": 2574.829,
+      "duration": 3.149,
+      "text": "them so and also if you want to practice"
+    },
+    {
+      "index": 838,
+      "start": 2574.839,
+      "end": 2577.309,
+      "duration": 2.47,
+      "text": "calculations you should end up getting"
+    },
+    {
+      "index": 839,
+      "start": 2577.319,
+      "end": 2588.71,
+      "duration": 11.391,
+      "text": "pi b to 5 over 10 a to 4 if I got it"
+    },
+    {
+      "index": 840,
+      "start": 2592.91,
+      "end": 2592.92,
+      "duration": 0.01,
+      "text": "right okay let me finish with one more"
+    },
+    {
+      "index": 841,
+      "start": 2592.92,
+      "end": 2595.069,
+      "duration": 2.149,
+      "text": "example I'm trying to give you plenty of"
+    },
+    {
+      "index": 842,
+      "start": 2595.079,
+      "end": 2597.67,
+      "duration": 2.591,
+      "text": "practice because in case you haven't"
+    },
+    {
+      "index": 843,
+      "start": 2597.68,
+      "end": 2599.23,
+      "duration": 1.55,
+      "text": "noticed Monday is a holiday so you don't"
+    },
+    {
+      "index": 844,
+      "start": 2599.24,
+      "end": 2600.95,
+      "duration": 1.71,
+      "text": "have a recitation on"
+    },
+    {
+      "index": 845,
+      "start": 2600.96,
+      "end": 2603.47,
+      "duration": 2.51,
+      "text": "Monday which is good but it means that"
+    },
+    {
+      "index": 846,
+      "start": 2603.48,
+      "end": 2605.79,
+      "duration": 2.31,
+      "text": "there will be lots of stuff to cover on"
+    },
+    {
+      "index": 847,
+      "start": 2605.8,
+      "end": 2625.19,
+      "duration": 19.39,
+      "text": "Wednesday day"
+    },
+    {
+      "index": 848,
+      "start": 2628.549,
+      "end": 2628.559,
+      "duration": 0.01,
+      "text": "so thank you okay"
+    },
+    {
+      "index": 849,
+      "start": 2628.559,
+      "end": 2632.549,
+      "duration": 3.99,
+      "text": "so F"
+    },
+    {
+      "index": 850,
+      "start": 2635.109,
+      "end": 2635.119,
+      "duration": 0.01,
+      "text": "example let's say that I want to just"
+    },
+    {
+      "index": 851,
+      "start": 2635.119,
+      "end": 2636.79,
+      "duration": 1.671,
+      "text": "set up"
+    },
+    {
+      "index": 852,
+      "start": 2636.8,
+      "end": 2638.67,
+      "duration": 1.87,
+      "text": "a triple"
+    },
+    {
+      "index": 853,
+      "start": 2638.68,
+      "end": 2642.47,
+      "duration": 3.79,
+      "text": "integral for the"
+    },
+    {
+      "index": 854,
+      "start": 2648.27,
+      "end": 2648.28,
+      "duration": 0.01,
+      "text": "region where Z is bigger than 1 minus y"
+    },
+    {
+      "index": 855,
+      "start": 2648.28,
+      "end": 2657.79,
+      "duration": 9.51,
+      "text": "inside the unit bow centered at the"
+    },
+    {
+      "index": 856,
+      "start": 2664.91,
+      "end": 2664.92,
+      "duration": 0.01,
+      "text": "so so the unit bow is just you know well"
+    },
+    {
+      "index": 857,
+      "start": 2664.92,
+      "end": 2668.23,
+      "duration": 3.31,
+      "text": "it's the inside of the unit"
+    },
+    {
+      "index": 858,
+      "start": 2670.79,
+      "end": 2670.8,
+      "duration": 0.01,
+      "text": "sphere so it's equation if you want"
+    },
+    {
+      "index": 859,
+      "start": 2670.8,
+      "end": 2675.15,
+      "duration": 4.35,
+      "text": "would be X2 + y^2 + z^ 2 less than one"
+    },
+    {
+      "index": 860,
+      "start": 2675.16,
+      "end": 2676.069,
+      "duration": 0.909,
+      "text": "okay so that's one thing you should"
+    },
+    {
+      "index": 861,
+      "start": 2676.079,
+      "end": 2677.99,
+      "duration": 1.911,
+      "text": "remember the equation of a sphere"
+    },
+    {
+      "index": 862,
+      "start": 2678.0,
+      "end": 2679.67,
+      "duration": 1.67,
+      "text": "centered at the origin is x sare + y"
+    },
+    {
+      "index": 863,
+      "start": 2679.68,
+      "end": 2682.79,
+      "duration": 3.11,
+      "text": "sare + z sare equals radius"
+    },
+    {
+      "index": 864,
+      "start": 2682.8,
+      "end": 2684.99,
+      "duration": 2.19,
+      "text": "squ and now we're going to take this"
+    },
+    {
+      "index": 865,
+      "start": 2685.0,
+      "end": 2688.829,
+      "duration": 3.829,
+      "text": "plane Z equals 1 minus y so if you think"
+    },
+    {
+      "index": 866,
+      "start": 2688.839,
+      "end": 2690.79,
+      "duration": 1.951,
+      "text": "about it it's parallel to the x axis"
+    },
+    {
+      "index": 867,
+      "start": 2690.8,
+      "end": 2692.39,
+      "duration": 1.59,
+      "text": "because there's no X in its coordinate"
+    },
+    {
+      "index": 868,
+      "start": 2692.4,
+      "end": 2695.71,
+      "duration": 3.31,
+      "text": "in its equation at the origin the height"
+    },
+    {
+      "index": 869,
+      "start": 2695.72,
+      "end": 2699.51,
+      "duration": 3.79,
+      "text": "is one so it starts right here at one"
+    },
+    {
+      "index": 870,
+      "start": 2699.52,
+      "end": 2702.67,
+      "duration": 3.15,
+      "text": "and it slopes down with Y with slope"
+    },
+    {
+      "index": 871,
+      "start": 2702.68,
+      "end": 2706.03,
+      "duration": 3.35,
+      "text": "one okay so it's a plane that comes"
+    },
+    {
+      "index": 872,
+      "start": 2706.04,
+      "end": 2707.589,
+      "duration": 1.549,
+      "text": "straight out"
+    },
+    {
+      "index": 873,
+      "start": 2707.599,
+      "end": 2710.39,
+      "duration": 2.791,
+      "text": "here and it intersects the sphere so"
+    },
+    {
+      "index": 874,
+      "start": 2710.4,
+      "end": 2711.95,
+      "duration": 1.55,
+      "text": "here and here but also at other points"
+    },
+    {
+      "index": 875,
+      "start": 2711.96,
+      "end": 2715.03,
+      "duration": 3.07,
+      "text": "in between any idea what kind of shape"
+    },
+    {
+      "index": 876,
+      "start": 2715.04,
+      "end": 2717.51,
+      "duration": 2.47,
+      "text": "this"
+    },
+    {
+      "index": 877,
+      "start": 2719.829,
+      "end": 2719.839,
+      "duration": 0.01,
+      "text": "is uh well it's an ellipse but it's even"
+    },
+    {
+      "index": 878,
+      "start": 2719.839,
+      "end": 2721.39,
+      "duration": 1.551,
+      "text": "more than that it's also a circle if you"
+    },
+    {
+      "index": 879,
+      "start": 2721.4,
+      "end": 2723.069,
+      "duration": 1.669,
+      "text": "slice a sphere by a plane you always get"
+    },
+    {
+      "index": 880,
+      "start": 2723.079,
+      "end": 2725.39,
+      "duration": 2.311,
+      "text": "a circle but of course it's a slanted"
+    },
+    {
+      "index": 881,
+      "start": 2725.4,
+      "end": 2727.069,
+      "duration": 1.669,
+      "text": "Circle so if you look at it in the XY"
+    },
+    {
+      "index": 882,
+      "start": 2727.079,
+      "end": 2730.03,
+      "duration": 2.951,
+      "text": "plane if you project it to the XY plane"
+    },
+    {
+      "index": 883,
+      "start": 2730.04,
+      "end": 2731.15,
+      "duration": 1.11,
+      "text": "then you'll get an"
+    },
+    {
+      "index": 884,
+      "start": 2731.16,
+      "end": 2733.829,
+      "duration": 2.669,
+      "text": "ellipse okay so we want to look at this"
+    },
+    {
+      "index": 885,
+      "start": 2733.839,
+      "end": 2734.87,
+      "duration": 1.031,
+      "text": "guy in"
+    },
+    {
+      "index": 886,
+      "start": 2734.88,
+      "end": 2738.95,
+      "duration": 4.07,
+      "text": "here so how do we do that"
+    },
+    {
+      "index": 887,
+      "start": 2738.96,
+      "end": 2741.39,
+      "duration": 2.43,
+      "text": "well so maybe I should actually draw"
+    },
+    {
+      "index": 888,
+      "start": 2741.4,
+      "end": 2743.95,
+      "duration": 2.55,
+      "text": "quickly picture so in the YZ"
+    },
+    {
+      "index": 889,
+      "start": 2743.96,
+      "end": 2747.829,
+      "duration": 3.869,
+      "text": "plane it looks just like this okay but"
+    },
+    {
+      "index": 890,
+      "start": 2747.839,
+      "end": 2753.27,
+      "duration": 5.431,
+      "text": "if I look at it from above in the XY"
+    },
+    {
+      "index": 891,
+      "start": 2755.87,
+      "end": 2755.88,
+      "duration": 0.01,
+      "text": "plane then it's Shadow well see it will"
+    },
+    {
+      "index": 892,
+      "start": 2755.88,
+      "end": 2759.03,
+      "duration": 3.15,
+      "text": "will sit entirely where Y is positive so"
+    },
+    {
+      "index": 893,
+      "start": 2759.04,
+      "end": 2761.829,
+      "duration": 2.789,
+      "text": "it sits entirely above here and it goes"
+    },
+    {
+      "index": 894,
+      "start": 2761.839,
+      "end": 2763.71,
+      "duration": 1.871,
+      "text": "through here and here and in fact when"
+    },
+    {
+      "index": 895,
+      "start": 2763.72,
+      "end": 2766.589,
+      "duration": 2.869,
+      "text": "you project that slanted circle now you"
+    },
+    {
+      "index": 896,
+      "start": 2766.599,
+      "end": 2767.67,
+      "duration": 1.071,
+      "text": "will get an"
+    },
+    {
+      "index": 897,
+      "start": 2767.68,
+      "end": 2769.91,
+      "duration": 2.23,
+      "text": "ellipse and well I don't really know how"
+    },
+    {
+      "index": 898,
+      "start": 2769.92,
+      "end": 2772.67,
+      "duration": 2.75,
+      "text": "to draw it well but"
+    },
+    {
+      "index": 899,
+      "start": 2772.68,
+      "end": 2780.069,
+      "duration": 7.389,
+      "text": "um it should be maybe something like"
+    },
+    {
+      "index": 900,
+      "start": 2782.51,
+      "end": 2782.52,
+      "duration": 0.01,
+      "text": "this okay so now if you want to try to"
+    },
+    {
+      "index": 901,
+      "start": 2782.52,
+      "end": 2784.79,
+      "duration": 2.27,
+      "text": "set"
+    },
+    {
+      "index": 902,
+      "start": 2787.79,
+      "end": 2787.8,
+      "duration": 0.01,
+      "text": "up that double integral sorry that"
+    },
+    {
+      "index": 903,
+      "start": 2787.8,
+      "end": 2790.79,
+      "duration": 2.99,
+      "text": "triple integral"
+    },
+    {
+      "index": 904,
+      "start": 2790.8,
+      "end": 2792.91,
+      "duration": 2.11,
+      "text": "well so let's say we do it in"
+    },
+    {
+      "index": 905,
+      "start": 2792.92,
+      "end": 2796.109,
+      "duration": 3.189,
+      "text": "rectangular coordinates because we are"
+    },
+    {
+      "index": 906,
+      "start": 2796.119,
+      "end": 2799.47,
+      "duration": 3.351,
+      "text": "really evil"
+    },
+    {
+      "index": 907,
+      "start": 2799.48,
+      "end": 2802.27,
+      "duration": 2.79,
+      "text": "well so then the bottom surface okay so"
+    },
+    {
+      "index": 908,
+      "start": 2802.28,
+      "end": 2804.069,
+      "duration": 1.789,
+      "text": "we do it with Z first so the bottom"
+    },
+    {
+      "index": 909,
+      "start": 2804.079,
+      "end": 2806.67,
+      "duration": 2.591,
+      "text": "surface is the slanted plane so the"
+    },
+    {
+      "index": 910,
+      "start": 2806.68,
+      "end": 2810.829,
+      "duration": 4.149,
+      "text": "bottom value would be zal 1 minus y the"
+    },
+    {
+      "index": 911,
+      "start": 2810.839,
+      "end": 2812.71,
+      "duration": 1.871,
+      "text": "Top Value is on the"
+    },
+    {
+      "index": 912,
+      "start": 2812.72,
+      "end": 2817.71,
+      "duration": 4.99,
+      "text": "sphere so the sphere corresponds to Z ="
+    },
+    {
+      "index": 913,
+      "start": 2817.72,
+      "end": 2821.309,
+      "duration": 3.589,
+      "text": "< TK of 1 - x^2 - y^ 2 so you go from"
+    },
+    {
+      "index": 914,
+      "start": 2821.319,
+      "end": 2822.589,
+      "duration": 1.27,
+      "text": "the"
+    },
+    {
+      "index": 915,
+      "start": 2822.599,
+      "end": 2825.99,
+      "duration": 3.391,
+      "text": "plane to the sphere and then to find the"
+    },
+    {
+      "index": 916,
+      "start": 2826.0,
+      "end": 2827.589,
+      "duration": 1.589,
+      "text": "bounce for X and Y you have to figure"
+    },
+    {
+      "index": 917,
+      "start": 2827.599,
+      "end": 2829.95,
+      "duration": 2.351,
+      "text": "out what exactly what the heck is this"
+    },
+    {
+      "index": 918,
+      "start": 2829.96,
+      "end": 2832.349,
+      "duration": 2.389,
+      "text": "region here"
+    },
+    {
+      "index": 919,
+      "start": 2832.359,
+      "end": 2835.19,
+      "duration": 2.831,
+      "text": "okay so what is this region well we have"
+    },
+    {
+      "index": 920,
+      "start": 2835.2,
+      "end": 2836.51,
+      "duration": 1.31,
+      "text": "to figure"
+    },
+    {
+      "index": 921,
+      "start": 2836.52,
+      "end": 2839.79,
+      "duration": 3.27,
+      "text": "out for what values of X and Y the plane"
+    },
+    {
+      "index": 922,
+      "start": 2839.8,
+      "end": 2842.75,
+      "duration": 2.95,
+      "text": "is below the ellipse so the condition is"
+    },
+    {
+      "index": 923,
+      "start": 2842.76,
+      "end": 2845.39,
+      "duration": 2.63,
+      "text": "that sorry the plane is below the sphere"
+    },
+    {
+      "index": 924,
+      "start": 2845.4,
+      "end": 2848.91,
+      "duration": 3.51,
+      "text": "okay so that's when the plane is"
+    },
+    {
+      "index": 925,
+      "start": 2848.92,
+      "end": 2853.91,
+      "duration": 4.99,
+      "text": "below the sphere that means 1 - Y is"
+    },
+    {
+      "index": 926,
+      "start": 2853.92,
+      "end": 2859.39,
+      "duration": 5.47,
+      "text": "less than square root of 1 - x^2 - y^"
+    },
+    {
+      "index": 927,
+      "start": 2859.4,
+      "end": 2862.109,
+      "duration": 2.709,
+      "text": "2 so you have to somehow manipulate this"
+    },
+    {
+      "index": 928,
+      "start": 2862.119,
+      "end": 2863.67,
+      "duration": 1.551,
+      "text": "to extract something simpler well"
+    },
+    {
+      "index": 929,
+      "start": 2863.68,
+      "end": 2865.75,
+      "duration": 2.07,
+      "text": "probably the only way to do it is to"
+    },
+    {
+      "index": 930,
+      "start": 2865.76,
+      "end": 2869.51,
+      "duration": 3.75,
+      "text": "square both sides 1 - y^ 2 should be"
+    },
+    {
+      "index": 931,
+      "start": 2869.52,
+      "end": 2873.309,
+      "duration": 3.789,
+      "text": "less than 1 - x^2 - y^2 and if you work"
+    },
+    {
+      "index": 932,
+      "start": 2873.319,
+      "end": 2876.349,
+      "duration": 3.03,
+      "text": "hard enough you'll find quite an ugly"
+    },
+    {
+      "index": 933,
+      "start": 2876.359,
+      "end": 2878.79,
+      "duration": 2.431,
+      "text": "equation but you can figure out what are"
+    },
+    {
+      "index": 934,
+      "start": 2878.8,
+      "end": 2880.79,
+      "duration": 1.99,
+      "text": "then the bounds for x given Y and then"
+    },
+    {
+      "index": 935,
+      "start": 2880.8,
+      "end": 2883.47,
+      "duration": 2.67,
+      "text": "set up the integral um so just to give"
+    },
+    {
+      "index": 936,
+      "start": 2883.48,
+      "end": 2886.589,
+      "duration": 3.109,
+      "text": "you a hint the bounds on y will be 0 to"
+    },
+    {
+      "index": 937,
+      "start": 2886.599,
+      "end": 2889.27,
+      "duration": 2.671,
+      "text": "one the bound on X well I'm not sure you"
+    },
+    {
+      "index": 938,
+      "start": 2889.28,
+      "end": 2891.069,
+      "duration": 1.789,
+      "text": "want to see them but in case you"
+    },
+    {
+      "index": 939,
+      "start": 2891.079,
+      "end": 2896.549,
+      "duration": 5.47,
+      "text": "do it will be from < TK of 2 y - 2 y^ 2"
+    },
+    {
+      "index": 940,
+      "start": 2896.559,
+      "end": 2900.309,
+      "duration": 3.75,
+      "text": "toare < TK of 2 y - 2 y^ 2 so exercise"
+    },
+    {
+      "index": 941,
+      "start": 2900.319,
+      "end": 2902.71,
+      "duration": 2.391,
+      "text": "figure out how I got these by starting"
+    },
+    {
+      "index": 942,
+      "start": 2902.72,
+      "end": 2904.43,
+      "duration": 1.71,
+      "text": "from"
+    },
+    {
+      "index": 943,
+      "start": 2904.44,
+      "end": 2906.67,
+      "duration": 2.23,
+      "text": "that now of course if we just wanted the"
+    },
+    {
+      "index": 944,
+      "start": 2906.68,
+      "end": 2908.03,
+      "duration": 1.35,
+      "text": "volume of this guy we wouldn't do it"
+    },
+    {
+      "index": 945,
+      "start": 2908.04,
+      "end": 2909.67,
+      "duration": 1.63,
+      "text": "this way we use Symmetry and actually we"
+    },
+    {
+      "index": 946,
+      "start": 2909.68,
+      "end": 2912.15,
+      "duration": 2.47,
+      "text": "rotate the thing so that you know our"
+    },
+    {
+      "index": 947,
+      "start": 2912.16,
+      "end": 2913.75,
+      "duration": 1.59,
+      "text": "spherical cap was actually centered on"
+    },
+    {
+      "index": 948,
+      "start": 2913.76,
+      "end": 2915.47,
+      "duration": 1.71,
+      "text": "the z-axis because that would be a much"
+    },
+    {
+      "index": 949,
+      "start": 2915.48,
+      "end": 2918.069,
+      "duration": 2.589,
+      "text": "easier way to set it up but depending on"
+    },
+    {
+      "index": 950,
+      "start": 2918.079,
+      "end": 2919.51,
+      "duration": 1.431,
+      "text": "what function we're integrating we can't"
+    },
+    {
+      "index": 951,
+      "start": 2919.52,
+      "end": 2920.79,
+      "duration": 1.27,
+      "text": "always do"
+    },
+    {
+      "index": 952,
+      "start": 2920.8,
+      "end": 2923.8,
+      "duration": 3.0,
+      "text": "that"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

@@ -1,0 +1,1495 @@
+{
+  "video": {
+    "id": "sn3orkHWqUQ",
+    "title": "Complex Numbers and Euler's Formula | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=sn3orkHWqUQ",
+    "channel": "MIT OpenCourseWare",
+    "duration": 690,
+    "language": "en"
+  },
+  "segment_count": 211,
+  "segments": [
+    {
+      "index": 0,
+      "start": 8.31,
+      "end": 8.32,
+      "duration": 0.01,
+      "text": "Hi, today we will explore the complex"
+    },
+    {
+      "index": 1,
+      "start": 8.32,
+      "end": 10.47,
+      "duration": 2.15,
+      "text": "numbers and ear formula. So the first"
+    },
+    {
+      "index": 2,
+      "start": 10.48,
+      "end": 12.79,
+      "duration": 2.31,
+      "text": "part of the problem is to write this"
+    },
+    {
+      "index": 3,
+      "start": 12.8,
+      "end": 16.23,
+      "duration": 3.43,
+      "text": "complex number min - 2 + 3 3 I in polar"
+    },
+    {
+      "index": 4,
+      "start": 16.24,
+      "end": 18.39,
+      "duration": 2.15,
+      "text": "form which and at this point it's"
+    },
+    {
+      "index": 5,
+      "start": 18.4,
+      "end": 20.23,
+      "duration": 1.83,
+      "text": "written in rectangular coordinate form."
+    },
+    {
+      "index": 6,
+      "start": 20.24,
+      "end": 21.91,
+      "duration": 1.67,
+      "text": "The second question asks you to do the"
+    },
+    {
+      "index": 7,
+      "start": 21.92,
+      "end": 24.31,
+      "duration": 2.39,
+      "text": "reverse to write 3 exponential to the i"
+    },
+    {
+      "index": 8,
+      "start": 24.32,
+      "end": 26.23,
+      "duration": 1.91,
+      "text": "pi over 6 in rectangular coordinate"
+    },
+    {
+      "index": 9,
+      "start": 26.24,
+      "end": 29.189,
+      "duration": 2.949,
+      "text": "form. Question C asks you to draw and"
+    },
+    {
+      "index": 10,
+      "start": 29.199,
+      "end": 30.71,
+      "duration": 1.511,
+      "text": "label the triangle relating the"
+    },
+    {
+      "index": 11,
+      "start": 30.72,
+      "end": 32.87,
+      "duration": 2.15,
+      "text": "rectangular coordinates to the polar"
+    },
+    {
+      "index": 12,
+      "start": 32.88,
+      "end": 35.91,
+      "duration": 3.03,
+      "text": "coordinate form. D asks you to compute"
+    },
+    {
+      "index": 13,
+      "start": 35.92,
+      "end": 37.83,
+      "duration": 1.91,
+      "text": "one over this reverse complex number"
+    },
+    {
+      "index": 14,
+      "start": 37.84,
+      "end": 39.869,
+      "duration": 2.029,
+      "text": "that we already saw in question"
+    },
+    {
+      "index": 15,
+      "start": 39.879,
+      "end": 43.91,
+      "duration": 4.031,
+      "text": "A. And E ask you to find the cube root"
+    },
+    {
+      "index": 16,
+      "start": 43.92,
+      "end": 46.229,
+      "duration": 2.309,
+      "text": "of one. And in all these questions"
+    },
+    {
+      "index": 17,
+      "start": 46.239,
+      "end": 48.47,
+      "duration": 2.231,
+      "text": "you'll be using earlier formula. So why"
+    },
+    {
+      "index": 18,
+      "start": 48.48,
+      "end": 50.15,
+      "duration": 1.67,
+      "text": "don't you pause the video, take a few"
+    },
+    {
+      "index": 19,
+      "start": 50.16,
+      "end": 51.59,
+      "duration": 1.43,
+      "text": "minutes to work out the problem and"
+    },
+    {
+      "index": 20,
+      "start": 51.6,
+      "end": 60.15,
+      "duration": 8.55,
+      "text": "we'll come back."
+    },
+    {
+      "index": 21,
+      "start": 63.75,
+      "end": 63.76,
+      "duration": 0.01,
+      "text": "Welcome back. So, we're asked to"
+    },
+    {
+      "index": 22,
+      "start": 63.76,
+      "end": 65.75,
+      "duration": 1.99,
+      "text": "throughout the problem to go back and"
+    },
+    {
+      "index": 23,
+      "start": 65.76,
+      "end": 68.149,
+      "duration": 2.389,
+      "text": "forth between coordinates in polar form"
+    },
+    {
+      "index": 24,
+      "start": 68.159,
+      "end": 70.55,
+      "duration": 2.391,
+      "text": "and in rectangular form. So, key thing"
+    },
+    {
+      "index": 25,
+      "start": 70.56,
+      "end": 73.789,
+      "duration": 3.229,
+      "text": "to remember"
+    },
+    {
+      "index": 26,
+      "start": 76.429,
+      "end": 76.439,
+      "duration": 0.01,
+      "text": "is earlier"
+    },
+    {
+      "index": 27,
+      "start": 76.439,
+      "end": 78.95,
+      "duration": 2.511,
+      "text": "formula from the start. So, we're just"
+    },
+    {
+      "index": 28,
+      "start": 78.96,
+      "end": 85.83,
+      "duration": 6.87,
+      "text": "going to write it up here."
+    },
+    {
+      "index": 29,
+      "start": 87.35,
+      "end": 87.36,
+      "duration": 0.01,
+      "text": "allow us to express a complex"
+    },
+    {
+      "index": 30,
+      "start": 87.36,
+      "end": 89.51,
+      "duration": 2.15,
+      "text": "exponential into the sum of its cosine"
+    },
+    {
+      "index": 31,
+      "start": 89.52,
+      "end": 92.31,
+      "duration": 2.79,
+      "text": "plus i sin theta. So how do we tackle"
+    },
+    {
+      "index": 32,
+      "start": 92.32,
+      "end": 93.71,
+      "duration": 1.39,
+      "text": "question"
+    },
+    {
+      "index": 33,
+      "start": 93.72,
+      "end": 99.39,
+      "duration": 5.67,
+      "text": "a? Question a gives us a complex"
+    },
+    {
+      "index": 34,
+      "start": 99.4,
+      "end": 103.27,
+      "duration": 3.87,
+      "text": "number in rectangular form. So in this"
+    },
+    {
+      "index": 35,
+      "start": 103.28,
+      "end": 107.19,
+      "duration": 3.91,
+      "text": "form a + i and we are asked to write it"
+    },
+    {
+      "index": 36,
+      "start": 107.2,
+      "end": 110.429,
+      "duration": 3.229,
+      "text": "in polar"
+    },
+    {
+      "index": 37,
+      "start": 113.91,
+      "end": 113.92,
+      "duration": 0.01,
+      "text": "form which is which imp introduces the"
+    },
+    {
+      "index": 38,
+      "start": 113.92,
+      "end": 116.149,
+      "duration": 2.229,
+      "text": "modulus of the complex number r and its"
+    },
+    {
+      "index": 39,
+      "start": 116.159,
+      "end": 118.35,
+      "duration": 2.191,
+      "text": "phase theta. So"
+    },
+    {
+      "index": 40,
+      "start": 118.36,
+      "end": 122.149,
+      "duration": 3.789,
+      "text": "r is the modulus of the complex number"
+    },
+    {
+      "index": 41,
+      "start": 122.159,
+      "end": 124.03,
+      "duration": 1.871,
+      "text": "that we can"
+    },
+    {
+      "index": 42,
+      "start": 124.04,
+      "end": 126.469,
+      "duration": 2.429,
+      "text": "compute when we know its rectangular"
+    },
+    {
+      "index": 43,
+      "start": 126.479,
+      "end": 129.029,
+      "duration": 2.55,
+      "text": "form with its real form square plus"
+    },
+    {
+      "index": 44,
+      "start": 129.039,
+      "end": 132.55,
+      "duration": 3.511,
+      "text": "imaginary uh part square. the whole"
+    },
+    {
+      "index": 45,
+      "start": 132.56,
+      "end": 134.63,
+      "duration": 2.07,
+      "text": "thing under the root. So in this case we"
+    },
+    {
+      "index": 46,
+      "start": 134.64,
+      "end": 137.55,
+      "duration": 2.91,
+      "text": "have four +"
+    },
+    {
+      "index": 47,
+      "start": 137.56,
+      "end": 141.589,
+      "duration": 4.029,
+      "text": "9. So we end up with root of 13 for the"
+    },
+    {
+      "index": 48,
+      "start": 141.599,
+      "end": 144.63,
+      "duration": 3.031,
+      "text": "modus of of the complex number z. So now"
+    },
+    {
+      "index": 49,
+      "start": 144.64,
+      "end": 146.11,
+      "duration": 1.47,
+      "text": "for the"
+    },
+    {
+      "index": 50,
+      "start": 146.12,
+      "end": 149.67,
+      "duration": 3.55,
+      "text": "phase using formula we can see that we"
+    },
+    {
+      "index": 51,
+      "start": 149.68,
+      "end": 152.71,
+      "duration": 3.03,
+      "text": "can relate the rectangular form to the"
+    },
+    {
+      "index": 52,
+      "start": 152.72,
+      "end": 153.71,
+      "duration": 0.99,
+      "text": "polar"
+    },
+    {
+      "index": 53,
+      "start": 153.72,
+      "end": 163.11,
+      "duration": 9.39,
+      "text": "form by just introducing"
+    },
+    {
+      "index": 54,
+      "start": 172.63,
+      "end": 172.64,
+      "duration": 0.01,
+      "text": "R. And you can see now that we can"
+    },
+    {
+      "index": 55,
+      "start": 172.64,
+      "end": 174.47,
+      "duration": 1.83,
+      "text": "extract the sign and the cosine of the"
+    },
+    {
+      "index": 56,
+      "start": 174.48,
+      "end": 177.11,
+      "duration": 2.63,
+      "text": "angle theta and relate that to a ratio"
+    },
+    {
+      "index": 57,
+      "start": 177.12,
+      "end": 179.67,
+      "duration": 2.55,
+      "text": "of A and the modulus R that we just"
+    },
+    {
+      "index": 58,
+      "start": 179.68,
+      "end": 183.03,
+      "duration": 3.35,
+      "text": "found. B modulus R that we just found or"
+    },
+    {
+      "index": 59,
+      "start": 183.04,
+      "end": 184.19,
+      "duration": 1.15,
+      "text": "in"
+    },
+    {
+      "index": 60,
+      "start": 184.2,
+      "end": 188.55,
+      "duration": 4.35,
+      "text": "one move just express it as the tangent"
+    },
+    {
+      "index": 61,
+      "start": 188.56,
+      "end": 192.83,
+      "duration": 4.27,
+      "text": "of the angle theta is just s"
+    },
+    {
+      "index": 62,
+      "start": 192.84,
+      "end": 199.55,
+      "duration": 6.71,
+      "text": "cosine just becomes basically uh B /"
+    },
+    {
+      "index": 63,
+      "start": 199.56,
+      "end": 205.75,
+      "duration": 6.19,
+      "text": "A which we have here."
+    },
+    {
+      "index": 64,
+      "start": 207.309,
+      "end": 207.319,
+      "duration": 0.01,
+      "text": "So we have the"
+    },
+    {
+      "index": 65,
+      "start": 207.319,
+      "end": 210.63,
+      "duration": 3.311,
+      "text": "modulus r which is now root of 13 and"
+    },
+    {
+      "index": 66,
+      "start": 210.64,
+      "end": 214.509,
+      "duration": 3.869,
+      "text": "the angle theta that we can now"
+    },
+    {
+      "index": 67,
+      "start": 214.519,
+      "end": 217.869,
+      "duration": 3.35,
+      "text": "extract by using the"
+    },
+    {
+      "index": 68,
+      "start": 217.879,
+      "end": 221.71,
+      "duration": 3.831,
+      "text": "reverse of the function theta uh"
+    },
+    {
+      "index": 69,
+      "start": 221.72,
+      "end": 224.949,
+      "duration": 3.229,
+      "text": "10. So just to before we move to the"
+    },
+    {
+      "index": 70,
+      "start": 224.959,
+      "end": 228.509,
+      "duration": 3.55,
+      "text": "next question this is not one of the"
+    },
+    {
+      "index": 71,
+      "start": 228.519,
+      "end": 231.19,
+      "duration": 2.671,
+      "text": "classical angles that you learned. So"
+    },
+    {
+      "index": 72,
+      "start": 231.2,
+      "end": 233.149,
+      "duration": 1.949,
+      "text": "just to have an idea of where this angle"
+    },
+    {
+      "index": 73,
+      "start": 233.159,
+      "end": 235.07,
+      "duration": 1.911,
+      "text": "lies on the"
+    },
+    {
+      "index": 74,
+      "start": 235.08,
+      "end": 238.789,
+      "duration": 3.709,
+      "text": "trigonometric unit circle just re recall"
+    },
+    {
+      "index": 75,
+      "start": 238.799,
+      "end": 242.309,
+      "duration": 3.51,
+      "text": "here that the sign is positive and the"
+    },
+    {
+      "index": 76,
+      "start": 242.319,
+      "end": 244.869,
+      "duration": 2.55,
+      "text": "cosine of this angle is negative. So we"
+    },
+    {
+      "index": 77,
+      "start": 244.879,
+      "end": 249.789,
+      "duration": 4.91,
+      "text": "are bound to be in this"
+    },
+    {
+      "index": 78,
+      "start": 252.83,
+      "end": 252.84,
+      "duration": 0.01,
+      "text": "region where basically"
+    },
+    {
+      "index": 79,
+      "start": 252.84,
+      "end": 255.629,
+      "duration": 2.789,
+      "text": "theta is between"
+    },
+    {
+      "index": 80,
+      "start": 255.639,
+      "end": 260.069,
+      "duration": 4.43,
+      "text": "pi and pi / 2. And that ends the rep the"
+    },
+    {
+      "index": 81,
+      "start": 260.079,
+      "end": 264.03,
+      "duration": 3.951,
+      "text": "answer to question"
+    },
+    {
+      "index": 82,
+      "start": 267.27,
+      "end": 267.28,
+      "duration": 0.01,
+      "text": "A. So now for question B, we're asked to"
+    },
+    {
+      "index": 83,
+      "start": 267.28,
+      "end": 268.27,
+      "duration": 0.99,
+      "text": "do the"
+    },
+    {
+      "index": 84,
+      "start": 268.28,
+      "end": 272.189,
+      "duration": 3.909,
+      "text": "reverse expressing the polar number 3"
+    },
+    {
+      "index": 85,
+      "start": 272.199,
+      "end": 277.35,
+      "duration": 5.151,
+      "text": "I pi / 6 in rectangular coordinates. So"
+    },
+    {
+      "index": 86,
+      "start": 277.36,
+      "end": 279.11,
+      "duration": 1.75,
+      "text": "now this is just a straightforward"
+    },
+    {
+      "index": 87,
+      "start": 279.12,
+      "end": 281.03,
+      "duration": 1.91,
+      "text": "application of the other formula that we"
+    },
+    {
+      "index": 88,
+      "start": 281.04,
+      "end": 282.749,
+      "duration": 1.709,
+      "text": "just"
+    },
+    {
+      "index": 89,
+      "start": 282.759,
+      "end": 285.67,
+      "duration": 2.911,
+      "text": "saw by just expanding the exponential as"
+    },
+    {
+      "index": 90,
+      "start": 285.68,
+      "end": 291.909,
+      "duration": 6.229,
+      "text": "I already wrote there."
+    },
+    {
+      "index": 91,
+      "start": 294.83,
+      "end": 294.84,
+      "duration": 0.01,
+      "text": "+ i"
+    },
+    {
+      "index": 92,
+      "start": 294.84,
+      "end": 297.31,
+      "duration": 2.47,
+      "text": "3"
+    },
+    {
+      "index": 93,
+      "start": 297.32,
+      "end": 300.67,
+      "duration": 3.35,
+      "text": "sin pi /"
+    },
+    {
+      "index": 94,
+      "start": 300.68,
+      "end": 307.15,
+      "duration": 6.47,
+      "text": "6. And on the same trigonometric circle"
+    },
+    {
+      "index": 95,
+      "start": 310.79,
+      "end": 310.8,
+      "duration": 0.01,
+      "text": "here, that's roughly where pi / 6 lie."
+    },
+    {
+      "index": 96,
+      "start": 310.8,
+      "end": 312.99,
+      "duration": 2.19,
+      "text": "And you can just reexpress"
+    },
+    {
+      "index": 97,
+      "start": 313.0,
+      "end": 317.67,
+      "duration": 4.67,
+      "text": "this as 3 roo<unk> of 3 / 2"
+    },
+    {
+      "index": 98,
+      "start": 317.68,
+      "end": 319.31,
+      "duration": 1.63,
+      "text": "+"
+    },
+    {
+      "index": 99,
+      "start": 319.32,
+      "end": 325.189,
+      "duration": 5.869,
+      "text": "i 3 over2. So that ends the solution for"
+    },
+    {
+      "index": 100,
+      "start": 325.199,
+      "end": 330.83,
+      "duration": 5.631,
+      "text": "question B. So now question"
+    },
+    {
+      "index": 101,
+      "start": 334.35,
+      "end": 334.36,
+      "duration": 0.01,
+      "text": "C. Let me just add a line"
+    },
+    {
+      "index": 102,
+      "start": 334.36,
+      "end": 337.67,
+      "duration": 3.31,
+      "text": "here. Question C, we're asked to draw"
+    },
+    {
+      "index": 103,
+      "start": 337.68,
+      "end": 340.55,
+      "duration": 2.87,
+      "text": "and label the triangle relating"
+    },
+    {
+      "index": 104,
+      "start": 340.56,
+      "end": 342.95,
+      "duration": 2.39,
+      "text": "rectangular to polar coordinates. So"
+    },
+    {
+      "index": 105,
+      "start": 342.96,
+      "end": 346.07,
+      "duration": 3.11,
+      "text": "that's what we already had a sense with"
+    },
+    {
+      "index": 106,
+      "start": 346.08,
+      "end": 349.51,
+      "duration": 3.43,
+      "text": "when we wrote this formula going from a"
+    },
+    {
+      "index": 107,
+      "start": 349.52,
+      "end": 354.469,
+      "duration": 4.949,
+      "text": "plus i to r exponential of i theta. So"
+    },
+    {
+      "index": 108,
+      "start": 354.479,
+      "end": 357.23,
+      "duration": 2.751,
+      "text": "in the complex"
+    },
+    {
+      "index": 109,
+      "start": 357.24,
+      "end": 362.11,
+      "duration": 4.87,
+      "text": "plane we have the real"
+    },
+    {
+      "index": 110,
+      "start": 362.12,
+      "end": 367.55,
+      "duration": 5.43,
+      "text": "axis imaginary"
+    },
+    {
+      "index": 111,
+      "start": 371.95,
+      "end": 371.96,
+      "duration": 0.01,
+      "text": "axis and a complex number lying on this"
+    },
+    {
+      "index": 112,
+      "start": 371.96,
+      "end": 374.83,
+      "duration": 2.87,
+      "text": "plane written"
+    },
+    {
+      "index": 113,
+      "start": 374.84,
+      "end": 379.309,
+      "duration": 4.469,
+      "text": "in this form in a rectangular"
+    },
+    {
+      "index": 114,
+      "start": 381.309,
+      "end": 381.319,
+      "duration": 0.01,
+      "text": "coordinate would"
+    },
+    {
+      "index": 115,
+      "start": 381.319,
+      "end": 384.71,
+      "duration": 3.391,
+      "text": "have a projection of a on the real axis"
+    },
+    {
+      "index": 116,
+      "start": 384.72,
+      "end": 388.07,
+      "duration": 3.35,
+      "text": "projection of value B on the imaginary"
+    },
+    {
+      "index": 117,
+      "start": 388.08,
+      "end": 392.83,
+      "duration": 4.75,
+      "text": "axis and in polar"
+    },
+    {
+      "index": 118,
+      "start": 395.99,
+      "end": 396.0,
+      "duration": 0.01,
+      "text": "form this would be its modulus or"
+    },
+    {
+      "index": 119,
+      "start": 396.0,
+      "end": 397.95,
+      "duration": 1.95,
+      "text": "distance from the"
+    },
+    {
+      "index": 120,
+      "start": 397.96,
+      "end": 399.87,
+      "duration": 1.91,
+      "text": "origin and"
+    },
+    {
+      "index": 121,
+      "start": 399.88,
+      "end": 404.23,
+      "duration": 4.35,
+      "text": "its phase theta that would come in the"
+    },
+    {
+      "index": 122,
+      "start": 404.24,
+      "end": 407.39,
+      "duration": 3.15,
+      "text": "polar"
+    },
+    {
+      "index": 123,
+      "start": 410.39,
+      "end": 410.4,
+      "duration": 0.01,
+      "text": "form. So that's roughly that's the the"
+    },
+    {
+      "index": 124,
+      "start": 410.4,
+      "end": 412.79,
+      "duration": 2.39,
+      "text": "the triangle that allow us to go back"
+    },
+    {
+      "index": 125,
+      "start": 412.8,
+      "end": 415.11,
+      "duration": 2.31,
+      "text": "and forth between the rectangular and"
+    },
+    {
+      "index": 126,
+      "start": 415.12,
+      "end": 416.11,
+      "duration": 0.99,
+      "text": "polar"
+    },
+    {
+      "index": 127,
+      "start": 416.12,
+      "end": 420.43,
+      "duration": 4.31,
+      "text": "coordinates. So to finish or almost"
+    },
+    {
+      "index": 128,
+      "start": 420.44,
+      "end": 424.07,
+      "duration": 3.63,
+      "text": "finish question D now asked us to"
+    },
+    {
+      "index": 129,
+      "start": 424.08,
+      "end": 426.309,
+      "duration": 2.229,
+      "text": "compute the reverse of the original"
+    },
+    {
+      "index": 130,
+      "start": 426.319,
+      "end": 429.95,
+      "duration": 3.631,
+      "text": "complex number that we"
+    },
+    {
+      "index": 131,
+      "start": 433.39,
+      "end": 433.4,
+      "duration": 0.01,
+      "text": "used. So 1 over"
+    },
+    {
+      "index": 132,
+      "start": 433.4,
+      "end": 437.43,
+      "duration": 4.03,
+      "text": "-2 + 3 I. So to do this we can stay in"
+    },
+    {
+      "index": 133,
+      "start": 437.44,
+      "end": 440.23,
+      "duration": 2.79,
+      "text": "complex in a in rectangular form and"
+    },
+    {
+      "index": 134,
+      "start": 440.24,
+      "end": 442.23,
+      "duration": 1.99,
+      "text": "basically multiply the numerator and the"
+    },
+    {
+      "index": 135,
+      "start": 442.24,
+      "end": 444.15,
+      "duration": 1.91,
+      "text": "denominator by the complex conjugate of"
+    },
+    {
+      "index": 136,
+      "start": 444.16,
+      "end": 446.23,
+      "duration": 2.07,
+      "text": "the number. But clearly now that we"
+    },
+    {
+      "index": 137,
+      "start": 446.24,
+      "end": 448.87,
+      "duration": 2.63,
+      "text": "learned how to use polar numbers, polar"
+    },
+    {
+      "index": 138,
+      "start": 448.88,
+      "end": 450.87,
+      "duration": 1.99,
+      "text": "uh coordinate expressions of this"
+    },
+    {
+      "index": 139,
+      "start": 450.88,
+      "end": 452.71,
+      "duration": 1.83,
+      "text": "number, it's much easier to just write"
+    },
+    {
+      "index": 140,
+      "start": 452.72,
+      "end": 456.589,
+      "duration": 3.869,
+      "text": "it directly in this"
+    },
+    {
+      "index": 141,
+      "start": 467.11,
+      "end": 467.12,
+      "duration": 0.01,
+      "text": "in in one step, we basically arrived to"
+    },
+    {
+      "index": 142,
+      "start": 467.12,
+      "end": 468.51,
+      "duration": 1.39,
+      "text": "the"
+    },
+    {
+      "index": 143,
+      "start": 468.52,
+      "end": 476.15,
+      "duration": 7.63,
+      "text": "results where we expressed"
+    },
+    {
+      "index": 144,
+      "start": 478.79,
+      "end": 478.8,
+      "duration": 0.01,
+      "text": "that the angle was the reverse tan of -"
+    },
+    {
+      "index": 145,
+      "start": 478.8,
+      "end": 480.749,
+      "duration": 1.949,
+      "text": "3 /2 and that's"
+    },
+    {
+      "index": 146,
+      "start": 480.759,
+      "end": 487.07,
+      "duration": 6.311,
+      "text": "done. So now for the last"
+    },
+    {
+      "index": 147,
+      "start": 491.189,
+      "end": 491.199,
+      "duration": 0.01,
+      "text": "question we are asked to compute the 1/3"
+    },
+    {
+      "index": 148,
+      "start": 491.199,
+      "end": 492.51,
+      "duration": 1.311,
+      "text": "root of"
+    },
+    {
+      "index": 149,
+      "start": 492.52,
+      "end": 496.469,
+      "duration": 3.949,
+      "text": "one. So basically one to the 1/3. So"
+    },
+    {
+      "index": 150,
+      "start": 496.479,
+      "end": 498.629,
+      "duration": 2.15,
+      "text": "here obviously we're treating one as the"
+    },
+    {
+      "index": 151,
+      "start": 498.639,
+      "end": 501.309,
+      "duration": 2.67,
+      "text": "complex number and"
+    },
+    {
+      "index": 152,
+      "start": 501.319,
+      "end": 504.589,
+      "duration": 3.27,
+      "text": "if we"
+    },
+    {
+      "index": 153,
+      "start": 507.43,
+      "end": 507.44,
+      "duration": 0.01,
+      "text": "go the complex plane and I just"
+    },
+    {
+      "index": 154,
+      "start": 507.44,
+      "end": 510.39,
+      "duration": 2.95,
+      "text": "introduce here the number one we see"
+    },
+    {
+      "index": 155,
+      "start": 510.4,
+      "end": 512.709,
+      "duration": 2.309,
+      "text": "that in polar form one is just basically"
+    },
+    {
+      "index": 156,
+      "start": 512.719,
+      "end": 514.87,
+      "duration": 2.151,
+      "text": "complex number with modulus one and"
+    },
+    {
+      "index": 157,
+      "start": 514.88,
+      "end": 519.35,
+      "duration": 4.47,
+      "text": "angle 0 modul modulus 2 pi right so we"
+    },
+    {
+      "index": 158,
+      "start": 519.36,
+      "end": 522.19,
+      "duration": 2.83,
+      "text": "can write one as"
+    },
+    {
+      "index": 159,
+      "start": 522.2,
+      "end": 529.31,
+      "duration": 7.11,
+      "text": "exponential 2 n pi"
+    },
+    {
+      "index": 160,
+      "start": 531.829,
+      "end": 531.839,
+      "duration": 0.01,
+      "text": "Oops. Because it's basically angle 0"
+    },
+    {
+      "index": 161,
+      "start": 531.839,
+      "end": 534.43,
+      "duration": 2.591,
+      "text": "modulus 2"
+    },
+    {
+      "index": 162,
+      "start": 534.44,
+      "end": 538.15,
+      "duration": 3.71,
+      "text": "pi. And from here we know that we're"
+    },
+    {
+      "index": 163,
+      "start": 538.16,
+      "end": 539.23,
+      "duration": 1.07,
+      "text": "looking"
+    },
+    {
+      "index": 164,
+      "start": 539.24,
+      "end": 541.75,
+      "duration": 2.51,
+      "text": "at third roots. So we're going to have"
+    },
+    {
+      "index": 165,
+      "start": 541.76,
+      "end": 544.31,
+      "duration": 2.55,
+      "text": "three roots. And these roots are going"
+    },
+    {
+      "index": 166,
+      "start": 544.32,
+      "end": 547.509,
+      "duration": 3.189,
+      "text": "to be expressed by changing the value of"
+    },
+    {
+      "index": 167,
+      "start": 547.519,
+      "end": 551.75,
+      "duration": 4.231,
+      "text": "n. First one is n equals to zero is just"
+    },
+    {
+      "index": 168,
+      "start": 551.76,
+      "end": 553.31,
+      "duration": 1.55,
+      "text": "going to give us"
+    },
+    {
+      "index": 169,
+      "start": 553.32,
+      "end": 555.99,
+      "duration": 2.67,
+      "text": "back root of one because we're going to"
+    },
+    {
+      "index": 170,
+      "start": 556.0,
+      "end": 558.75,
+      "duration": 2.75,
+      "text": "have exponential to 0 is just one power"
+    },
+    {
+      "index": 171,
+      "start": 558.76,
+      "end": 561.99,
+      "duration": 3.23,
+      "text": "1/3 is just one."
+    },
+    {
+      "index": 172,
+      "start": 562.0,
+      "end": 564.509,
+      "duration": 2.509,
+      "text": "n="
+    },
+    {
+      "index": 173,
+      "start": 564.519,
+      "end": 567.91,
+      "duration": 3.391,
+      "text": "21. We're going to have exponential of 2"
+    },
+    {
+      "index": 174,
+      "start": 567.92,
+      "end": 571.31,
+      "duration": 3.39,
+      "text": "pi over"
+    },
+    {
+      "index": 175,
+      "start": 573.389,
+      "end": 573.399,
+      "duration": 0.01,
+      "text": "3, which we"
+    },
+    {
+      "index": 176,
+      "start": 573.399,
+      "end": 579.31,
+      "duration": 5.911,
+      "text": "can express again using the ear"
+    },
+    {
+      "index": 177,
+      "start": 588.35,
+      "end": 588.36,
+      "duration": 0.01,
+      "text": "form and then just write down the"
+    },
+    {
+      "index": 178,
+      "start": 588.36,
+      "end": 591.47,
+      "duration": 3.11,
+      "text": "values. And for"
+    },
+    {
+      "index": 179,
+      "start": 591.48,
+      "end": 594.75,
+      "duration": 3.27,
+      "text": "the third"
+    },
+    {
+      "index": 180,
+      "start": 594.76,
+      "end": 597.99,
+      "duration": 3.23,
+      "text": "root we take the value n equals to 2. So"
+    },
+    {
+      "index": 181,
+      "start": 598.0,
+      "end": 602.99,
+      "duration": 4.99,
+      "text": "we have i 4 pi over"
+    },
+    {
+      "index": 182,
+      "start": 614.71,
+      "end": 614.72,
+      "duration": 0.01,
+      "text": "again we can express as the cosine plus"
+    },
+    {
+      "index": 183,
+      "start": 614.72,
+      "end": 618.15,
+      "duration": 3.43,
+      "text": "the s of 4 pi over 3. So where do where"
+    },
+    {
+      "index": 184,
+      "start": 618.16,
+      "end": 620.71,
+      "duration": 2.55,
+      "text": "do these roots lie? So we have root one"
+    },
+    {
+      "index": 185,
+      "start": 620.72,
+      "end": 623.11,
+      "duration": 2.39,
+      "text": "for n equals to zero. The second root"
+    },
+    {
+      "index": 186,
+      "start": 623.12,
+      "end": 625.11,
+      "duration": 1.99,
+      "text": "exponential 2 pi over 3 basically in"
+    },
+    {
+      "index": 187,
+      "start": 625.12,
+      "end": 626.11,
+      "duration": 0.99,
+      "text": "polar"
+    },
+    {
+      "index": 188,
+      "start": 626.12,
+      "end": 628.55,
+      "duration": 2.43,
+      "text": "form would be here where we would have"
+    },
+    {
+      "index": 189,
+      "start": 628.56,
+      "end": 632.949,
+      "duration": 4.389,
+      "text": "the angle 2 pi over 3 and here. Okay. So"
+    },
+    {
+      "index": 190,
+      "start": 632.959,
+      "end": 636.389,
+      "duration": 3.43,
+      "text": "1 pi over 3 would be here. 2 pi over 3"
+    },
+    {
+      "index": 191,
+      "start": 636.399,
+      "end": 638.15,
+      "duration": 1.751,
+      "text": "would be here. 3 pi over 3 would be"
+    },
+    {
+      "index": 192,
+      "start": 638.16,
+      "end": 641.03,
+      "duration": 2.87,
+      "text": "here. And 4 pi over 3 is our third root"
+    },
+    {
+      "index": 193,
+      "start": 641.04,
+      "end": 651.35,
+      "duration": 10.31,
+      "text": "would be here."
+    },
+    {
+      "index": 194,
+      "start": 653.99,
+      "end": 654.0,
+      "duration": 0.01,
+      "text": "So this completes so then we can just"
+    },
+    {
+      "index": 195,
+      "start": 654.0,
+      "end": 655.43,
+      "duration": 1.43,
+      "text": "write down the values and you can do"
+    },
+    {
+      "index": 196,
+      "start": 655.44,
+      "end": 657.269,
+      "duration": 1.829,
+      "text": "that when you know the the angles or"
+    },
+    {
+      "index": 197,
+      "start": 657.279,
+      "end": 659.19,
+      "duration": 1.911,
+      "text": "just keep it in either form when you"
+    },
+    {
+      "index": 198,
+      "start": 659.2,
+      "end": 661.35,
+      "duration": 2.15,
+      "text": "don't know the the directly the"
+    },
+    {
+      "index": 199,
+      "start": 661.36,
+      "end": 663.11,
+      "duration": 1.75,
+      "text": "expression for the angles. So this"
+    },
+    {
+      "index": 200,
+      "start": 663.12,
+      "end": 666.389,
+      "duration": 3.269,
+      "text": "completes the problems in overall in all"
+    },
+    {
+      "index": 201,
+      "start": 666.399,
+      "end": 668.63,
+      "duration": 2.231,
+      "text": "of these problems what we kept using is"
+    },
+    {
+      "index": 202,
+      "start": 668.64,
+      "end": 670.389,
+      "duration": 1.749,
+      "text": "earlier formula to go back and forth"
+    },
+    {
+      "index": 203,
+      "start": 670.399,
+      "end": 673.11,
+      "duration": 2.711,
+      "text": "between coordinate in rectangular form"
+    },
+    {
+      "index": 204,
+      "start": 673.12,
+      "end": 675.11,
+      "duration": 1.99,
+      "text": "to coordinate to expression of complex"
+    },
+    {
+      "index": 205,
+      "start": 675.12,
+      "end": 677.269,
+      "duration": 2.149,
+      "text": "number in polar form and that's the key"
+    },
+    {
+      "index": 206,
+      "start": 677.279,
+      "end": 679.35,
+      "duration": 2.071,
+      "text": "formula that we kept using and you will"
+    },
+    {
+      "index": 207,
+      "start": 679.36,
+      "end": 681.829,
+      "duration": 2.469,
+      "text": "be using this uh repeatedly when we will"
+    },
+    {
+      "index": 208,
+      "start": 681.839,
+      "end": 684.069,
+      "duration": 2.23,
+      "text": "be solving other odes for which we can"
+    },
+    {
+      "index": 209,
+      "start": 684.079,
+      "end": 686.15,
+      "duration": 2.071,
+      "text": "use complex number as a trick for"
+    },
+    {
+      "index": 210,
+      "start": 686.16,
+      "end": 690.16,
+      "duration": 4.0,
+      "text": "solutions and this end this session"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

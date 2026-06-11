@@ -1,0 +1,2055 @@
+{
+  "video": {
+    "id": "zmzyW1rP-hk",
+    "title": "Phase Portraits | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=zmzyW1rP-hk",
+    "channel": "MIT OpenCourseWare",
+    "duration": 734,
+    "language": "en"
+  },
+  "segment_count": 291,
+  "segments": [
+    {
+      "index": 0,
+      "start": 8.75,
+      "end": 8.76,
+      "duration": 0.01,
+      "text": "Welcome to this recitation on a phase"
+    },
+    {
+      "index": 1,
+      "start": 8.76,
+      "end": 11.27,
+      "duration": 2.51,
+      "text": "portrait. So, you're given matrix A, a 2"
+    },
+    {
+      "index": 2,
+      "start": 11.28,
+      "end": 14.67,
+      "duration": 3.39,
+      "text": "by 2 matrix with entries -1, -1, 1 - C,"
+    },
+    {
+      "index": 3,
+      "start": 14.68,
+      "end": 15.99,
+      "duration": 1.31,
+      "text": "where C is a constant where it will be"
+    },
+    {
+      "index": 4,
+      "start": 16.0,
+      "end": 20.03,
+      "duration": 4.03,
+      "text": "varying, and -1. As C increases from 0"
+    },
+    {
+      "index": 5,
+      "start": 20.04,
+      "end": 22.23,
+      "duration": 2.19,
+      "text": "to other positive values, determine the"
+    },
+    {
+      "index": 6,
+      "start": 22.24,
+      "end": 24.23,
+      "duration": 1.99,
+      "text": "path of the system on the trace"
+    },
+    {
+      "index": 7,
+      "start": 24.24,
+      "end": 26.19,
+      "duration": 1.95,
+      "text": "determinant diagram that we saw in"
+    },
+    {
+      "index": 8,
+      "start": 26.2,
+      "end": 27.87,
+      "duration": 1.67,
+      "text": "previous recitations,"
+    },
+    {
+      "index": 9,
+      "start": 27.88,
+      "end": 29.75,
+      "duration": 1.87,
+      "text": "and draw the phase portraits that"
+    },
+    {
+      "index": 10,
+      "start": 29.76,
+      "end": 32.55,
+      "duration": 2.79,
+      "text": "corresponds to the critical points and"
+    },
+    {
+      "index": 11,
+      "start": 32.56,
+      "end": 34.35,
+      "duration": 1.79,
+      "text": "the nature of the critical points. So,"
+    },
+    {
+      "index": 12,
+      "start": 34.36,
+      "end": 37.03,
+      "duration": 2.67,
+      "text": "here we're basically talking of a system"
+    },
+    {
+      "index": 13,
+      "start": 37.04,
+      "end": 42.51,
+      "duration": 5.47,
+      "text": "that would be a 2 by 2"
+    },
+    {
+      "index": 14,
+      "start": 43.91,
+      "end": 43.92,
+      "duration": 0.01,
+      "text": "system where we have derivative of"
+    },
+    {
+      "index": 15,
+      "start": 43.92,
+      "end": 47.11,
+      "duration": 3.19,
+      "text": "entries XY for vector equals to this"
+    },
+    {
+      "index": 16,
+      "start": 47.12,
+      "end": 50.95,
+      "duration": 3.83,
+      "text": "matrix AC multiplying the unknown"
+    },
+    {
+      "index": 17,
+      "start": 50.96,
+      "end": 53.95,
+      "duration": 2.99,
+      "text": "vector XC. So, take a few minutes and"
+    },
+    {
+      "index": 18,
+      "start": 53.96,
+      "end": 55.35,
+      "duration": 1.39,
+      "text": "work out through this problem, and I'll"
+    },
+    {
+      "index": 19,
+      "start": 55.36,
+      "end": 66.39,
+      "duration": 11.03,
+      "text": "be right back."
+    },
+    {
+      "index": 20,
+      "start": 68.67,
+      "end": 68.68,
+      "duration": 0.01,
+      "text": "Welcome back. Okay, so I already"
+    },
+    {
+      "index": 21,
+      "start": 68.68,
+      "end": 71.47,
+      "duration": 2.79,
+      "text": "prepared the trace diagram"
+    },
+    {
+      "index": 22,
+      "start": 71.48,
+      "end": 73.31,
+      "duration": 1.83,
+      "text": "the the trace determinant diagram for"
+    },
+    {
+      "index": 23,
+      "start": 73.32,
+      "end": 76.67,
+      "duration": 3.35,
+      "text": "you. So, here as a reminder, this is the"
+    },
+    {
+      "index": 24,
+      "start": 76.68,
+      "end": 78.63,
+      "duration": 1.95,
+      "text": "parabola that determines whether we're"
+    },
+    {
+      "index": 25,
+      "start": 78.64,
+      "end": 80.83,
+      "duration": 2.19,
+      "text": "going to have repeated eigenvalues or"
+    },
+    {
+      "index": 26,
+      "start": 80.84,
+      "end": 83.31,
+      "duration": 2.47,
+      "text": "not. Above this parabola, we have two"
+    },
+    {
+      "index": 27,
+      "start": 83.32,
+      "end": 86.71,
+      "duration": 3.39,
+      "text": "real two complex conjugate eigenvalues."
+    },
+    {
+      "index": 28,
+      "start": 86.72,
+      "end": 88.55,
+      "duration": 1.83,
+      "text": "Below this parabola, we have real"
+    },
+    {
+      "index": 29,
+      "start": 88.56,
+      "end": 90.59,
+      "duration": 2.03,
+      "text": "eigenvalues either of the same signs"
+    },
+    {
+      "index": 30,
+      "start": 90.6,
+      "end": 92.27,
+      "duration": 1.67,
+      "text": "positive or negative or of different"
+    },
+    {
+      "index": 31,
+      "start": 92.28,
+      "end": 93.83,
+      "duration": 1.55,
+      "text": "signs, and then we have the borderline"
+    },
+    {
+      "index": 32,
+      "start": 93.84,
+      "end": 94.87,
+      "duration": 1.03,
+      "text": "cases."
+    },
+    {
+      "index": 33,
+      "start": 94.88,
+      "end": 96.67,
+      "duration": 1.79,
+      "text": "In our case here, we're looking at a"
+    },
+    {
+      "index": 34,
+      "start": 96.68,
+      "end": 99.47,
+      "duration": 2.79,
+      "text": "matrix A"
+    },
+    {
+      "index": 35,
+      "start": 99.48,
+      "end": 102.99,
+      "duration": 3.51,
+      "text": "with a trace equals to -1 + -1 -1, so"
+    },
+    {
+      "index": 36,
+      "start": 103.0,
+      "end": 104.47,
+      "duration": 1.47,
+      "text": "it's -2."
+    },
+    {
+      "index": 37,
+      "start": 104.48,
+      "end": 107.91,
+      "duration": 3.43,
+      "text": "And a determinant"
+    },
+    {
+      "index": 38,
+      "start": 110.43,
+      "end": 110.44,
+      "duration": 0.01,
+      "text": "that is equal to 2"
+    },
+    {
+      "index": 39,
+      "start": 110.44,
+      "end": 111.91,
+      "duration": 1.47,
+      "text": "-C."
+    },
+    {
+      "index": 40,
+      "start": 111.92,
+      "end": 114.27,
+      "duration": 2.35,
+      "text": "So, here we are basically along this"
+    },
+    {
+      "index": 41,
+      "start": 114.28,
+      "end": 115.95,
+      "duration": 1.67,
+      "text": "dotted line where the trace equals to"
+    },
+    {
+      "index": 42,
+      "start": 115.96,
+      "end": 117.63,
+      "duration": 1.67,
+      "text": "-2. So, either we're going to have"
+    },
+    {
+      "index": 43,
+      "start": 117.64,
+      "end": 119.71,
+      "duration": 2.07,
+      "text": "complex values with negative real parts"
+    },
+    {
+      "index": 44,
+      "start": 119.72,
+      "end": 122.11,
+      "duration": 2.39,
+      "text": "or uh negative eigenvalues. So, we're in"
+    },
+    {
+      "index": 45,
+      "start": 122.12,
+      "end": 123.95,
+      "duration": 1.83,
+      "text": "stable configurations."
+    },
+    {
+      "index": 46,
+      "start": 123.96,
+      "end": 126.79,
+      "duration": 2.83,
+      "text": "So, we're going to be moving at C equal"
+    },
+    {
+      "index": 47,
+      "start": 126.8,
+      "end": 132.15,
+      "duration": 5.35,
+      "text": "to 0 from a case where"
+    },
+    {
+      "index": 48,
+      "start": 134.35,
+      "end": 134.36,
+      "duration": 0.01,
+      "text": "I'm just going to label this point one."
+    },
+    {
+      "index": 49,
+      "start": 134.36,
+      "end": 137.71,
+      "duration": 3.35,
+      "text": "From, for example, we have the matrix -1"
+    },
+    {
+      "index": 50,
+      "start": 137.72,
+      "end": 140.63,
+      "duration": 2.91,
+      "text": "1 1 -1"
+    },
+    {
+      "index": 51,
+      "start": 140.64,
+      "end": 144.35,
+      "duration": 3.71,
+      "text": "with the trace equals to -2 and the"
+    },
+    {
+      "index": 52,
+      "start": 144.36,
+      "end": 147.23,
+      "duration": 2.87,
+      "text": "determinant equals"
+    },
+    {
+      "index": 53,
+      "start": 147.24,
+      "end": 150.07,
+      "duration": 2.83,
+      "text": "to 2."
+    },
+    {
+      "index": 54,
+      "start": 152.39,
+      "end": 152.4,
+      "duration": 0.01,
+      "text": "So, clearly we're at this point. And we"
+    },
+    {
+      "index": 55,
+      "start": 152.4,
+      "end": 154.35,
+      "duration": 1.95,
+      "text": "were we are just going to be increasing"
+    },
+    {
+      "index": 56,
+      "start": 154.36,
+      "end": 156.47,
+      "duration": 2.11,
+      "text": "the value of C and moving along this"
+    },
+    {
+      "index": 57,
+      "start": 156.48,
+      "end": 159.47,
+      "duration": 2.99,
+      "text": "line, crossing this first boundary case"
+    },
+    {
+      "index": 58,
+      "start": 159.48,
+      "end": 160.91,
+      "duration": 1.43,
+      "text": "where we will have"
+    },
+    {
+      "index": 59,
+      "start": 160.92,
+      "end": 163.23,
+      "duration": 2.31,
+      "text": "either defective or or not case, and"
+    },
+    {
+      "index": 60,
+      "start": 163.24,
+      "end": 165.95,
+      "duration": 2.71,
+      "text": "I'll discuss very briefly what we have."
+    },
+    {
+      "index": 61,
+      "start": 165.96,
+      "end": 167.67,
+      "duration": 1.71,
+      "text": "And then we have other value where we"
+    },
+    {
+      "index": 62,
+      "start": 167.68,
+      "end": 170.63,
+      "duration": 2.95,
+      "text": "are basically in this area where we have"
+    },
+    {
+      "index": 63,
+      "start": 170.64,
+      "end": 172.99,
+      "duration": 2.35,
+      "text": "real eigenvalues, both of them negative,"
+    },
+    {
+      "index": 64,
+      "start": 173.0,
+      "end": 175.31,
+      "duration": 2.31,
+      "text": "so we have stability, and it would"
+    },
+    {
+      "index": 65,
+      "start": 175.32,
+      "end": 178.15,
+      "duration": 2.83,
+      "text": "basically be a sink. And then we cross"
+    },
+    {
+      "index": 66,
+      "start": 178.16,
+      "end": 180.63,
+      "duration": 2.47,
+      "text": "this other borderline case where the"
+    },
+    {
+      "index": 67,
+      "start": 180.64,
+      "end": 182.87,
+      "duration": 2.23,
+      "text": "determinant is equal to 0, and here we"
+    },
+    {
+      "index": 68,
+      "start": 182.88,
+      "end": 184.07,
+      "duration": 1.19,
+      "text": "have one"
+    },
+    {
+      "index": 69,
+      "start": 184.08,
+      "end": 185.99,
+      "duration": 1.91,
+      "text": "eigenvalue that is equal to 0 and one"
+    },
+    {
+      "index": 70,
+      "start": 186.0,
+      "end": 189.03,
+      "duration": 3.03,
+      "text": "that is negative. And then we get to the"
+    },
+    {
+      "index": 71,
+      "start": 189.04,
+      "end": 190.35,
+      "duration": 1.31,
+      "text": "the part of the diagram where the"
+    },
+    {
+      "index": 72,
+      "start": 190.36,
+      "end": 192.59,
+      "duration": 2.23,
+      "text": "determinant is negative and the trace is"
+    },
+    {
+      "index": 73,
+      "start": 192.6,
+      "end": 196.03,
+      "duration": 3.43,
+      "text": "negative, and we basically have a saddle"
+    },
+    {
+      "index": 74,
+      "start": 196.04,
+      "end": 198.99,
+      "duration": 2.95,
+      "text": "a saddle structure where we have one"
+    },
+    {
+      "index": 75,
+      "start": 199.0,
+      "end": 200.67,
+      "duration": 1.67,
+      "text": "eigenvalue that is negative and another"
+    },
+    {
+      "index": 76,
+      "start": 200.68,
+      "end": 203.43,
+      "duration": 2.75,
+      "text": "eigenvalue that is positive. So,"
+    },
+    {
+      "index": 77,
+      "start": 203.44,
+      "end": 205.63,
+      "duration": 2.19,
+      "text": "let's get through these uh"
+    },
+    {
+      "index": 78,
+      "start": 205.64,
+      "end": 207.95,
+      "duration": 2.31,
+      "text": "five cases, and I'll just do more"
+    },
+    {
+      "index": 79,
+      "start": 207.96,
+      "end": 209.75,
+      "duration": 1.79,
+      "text": "detailed picture illustrating what I"
+    },
+    {
+      "index": 80,
+      "start": 209.76,
+      "end": 212.79,
+      "duration": 3.03,
+      "text": "just said."
+    },
+    {
+      "index": 81,
+      "start": 215.11,
+      "end": 215.12,
+      "duration": 0.01,
+      "text": "So, I'll just write down a bit more in"
+    },
+    {
+      "index": 82,
+      "start": 215.12,
+      "end": 216.95,
+      "duration": 1.83,
+      "text": "detail the first case"
+    },
+    {
+      "index": 83,
+      "start": 216.96,
+      "end": 219.59,
+      "duration": 2.63,
+      "text": "here. So, we have the case where the the"
+    },
+    {
+      "index": 84,
+      "start": 219.6,
+      "end": 223.79,
+      "duration": 4.19,
+      "text": "the the eigenvalues are both"
+    },
+    {
+      "index": 85,
+      "start": 223.8,
+      "end": 225.59,
+      "duration": 1.79,
+      "text": "complex conjugate, and we have their"
+    },
+    {
+      "index": 86,
+      "start": 225.6,
+      "end": 227.79,
+      "duration": 2.19,
+      "text": "real part being negative. So, basically"
+    },
+    {
+      "index": 87,
+      "start": 227.8,
+      "end": 233.63,
+      "duration": 5.83,
+      "text": "we have spirals, right?"
+    },
+    {
+      "index": 88,
+      "start": 235.35,
+      "end": 235.36,
+      "duration": 0.01,
+      "text": "asymptotically"
+    },
+    {
+      "index": 89,
+      "start": 235.36,
+      "end": 237.23,
+      "duration": 1.87,
+      "text": "stable"
+    },
+    {
+      "index": 90,
+      "start": 237.24,
+      "end": 240.35,
+      "duration": 3.11,
+      "text": "spirals, and the spirals could be either"
+    },
+    {
+      "index": 91,
+      "start": 240.36,
+      "end": 242.79,
+      "duration": 2.43,
+      "text": "clockwise or counterclockwise. And one"
+    },
+    {
+      "index": 92,
+      "start": 242.8,
+      "end": 247.55,
+      "duration": 4.75,
+      "text": "way of determining"
+    },
+    {
+      "index": 93,
+      "start": 249.59,
+      "end": 249.6,
+      "duration": 0.01,
+      "text": "the direction of these spirals is to"
+    },
+    {
+      "index": 94,
+      "start": 249.6,
+      "end": 251.79,
+      "duration": 2.19,
+      "text": "look at the sign of the velocity vector"
+    },
+    {
+      "index": 95,
+      "start": 251.8,
+      "end": 253.79,
+      "duration": 1.99,
+      "text": "of the trajectories in the phase space."
+    },
+    {
+      "index": 96,
+      "start": 253.8,
+      "end": 255.55,
+      "duration": 1.75,
+      "text": "So, the phase space basically diagram"
+    },
+    {
+      "index": 97,
+      "start": 255.56,
+      "end": 258.509,
+      "duration": 2.949,
+      "text": "here where we have X and Y as the axis"
+    },
+    {
+      "index": 98,
+      "start": 258.519,
+      "end": 260.67,
+      "duration": 2.151,
+      "text": "of the of this space."
+    },
+    {
+      "index": 99,
+      "start": 260.68,
+      "end": 264.67,
+      "duration": 3.99,
+      "text": "So, let's look at"
+    },
+    {
+      "index": 100,
+      "start": 266.87,
+      "end": 266.88,
+      "duration": 0.01,
+      "text": "Oops."
+    },
+    {
+      "index": 101,
+      "start": 266.88,
+      "end": 269.07,
+      "duration": 2.19,
+      "text": "Let's look, for example,"
+    },
+    {
+      "index": 102,
+      "start": 269.08,
+      "end": 271.51,
+      "duration": 2.43,
+      "text": "at a a particular point here that would"
+    },
+    {
+      "index": 103,
+      "start": 271.52,
+      "end": 274.55,
+      "duration": 3.03,
+      "text": "be velocity vector 1 0."
+    },
+    {
+      "index": 104,
+      "start": 274.56,
+      "end": 277.87,
+      "duration": 3.31,
+      "text": "And this position vector 1 0 would give"
+    },
+    {
+      "index": 105,
+      "start": 277.88,
+      "end": 279.87,
+      "duration": 1.99,
+      "text": "us a velocity vector"
+    },
+    {
+      "index": 106,
+      "start": 279.88,
+      "end": 283.07,
+      "duration": 3.19,
+      "text": "of -1 and +1. So, basically this vector"
+    },
+    {
+      "index": 107,
+      "start": 283.08,
+      "end": 285.39,
+      "duration": 2.31,
+      "text": "would be directed upward, which means"
+    },
+    {
+      "index": 108,
+      "start": 285.4,
+      "end": 287.19,
+      "duration": 1.79,
+      "text": "that we are in the case where we would"
+    },
+    {
+      "index": 109,
+      "start": 287.2,
+      "end": 289.75,
+      "duration": 2.55,
+      "text": "have a spiral"
+    },
+    {
+      "index": 110,
+      "start": 289.76,
+      "end": 293.55,
+      "duration": 3.79,
+      "text": "coming this way."
+    },
+    {
+      "index": 111,
+      "start": 295.27,
+      "end": 295.28,
+      "duration": 0.01,
+      "text": "toward"
+    },
+    {
+      "index": 112,
+      "start": 295.28,
+      "end": 297.19,
+      "duration": 1.91,
+      "text": "the critical point, and basically with"
+    },
+    {
+      "index": 113,
+      "start": 297.2,
+      "end": 299.47,
+      "duration": 2.27,
+      "text": "the velocity vector here going this way."
+    },
+    {
+      "index": 114,
+      "start": 299.48,
+      "end": 301.59,
+      "duration": 2.11,
+      "text": "You don't have to actually do all this"
+    },
+    {
+      "index": 115,
+      "start": 301.6,
+      "end": 303.39,
+      "duration": 1.79,
+      "text": "to figure out which direction of the"
+    },
+    {
+      "index": 116,
+      "start": 303.4,
+      "end": 305.23,
+      "duration": 1.83,
+      "text": "spiral you should choose. You can just"
+    },
+    {
+      "index": 117,
+      "start": 305.24,
+      "end": 307.59,
+      "duration": 2.35,
+      "text": "look for these cases 2 by 2 matrices at"
+    },
+    {
+      "index": 118,
+      "start": 307.6,
+      "end": 310.67,
+      "duration": 3.07,
+      "text": "the entry at the lower left part of your"
+    },
+    {
+      "index": 119,
+      "start": 310.68,
+      "end": 312.67,
+      "duration": 1.99,
+      "text": "matrix. And if the coefficient here is"
+    },
+    {
+      "index": 120,
+      "start": 312.68,
+      "end": 314.51,
+      "duration": 1.83,
+      "text": "positive, then it will determine the"
+    },
+    {
+      "index": 121,
+      "start": 314.52,
+      "end": 316.23,
+      "duration": 1.71,
+      "text": "direction of the"
+    },
+    {
+      "index": 122,
+      "start": 316.24,
+      "end": 317.95,
+      "duration": 1.71,
+      "text": "of the velocity vector at this point."
+    },
+    {
+      "index": 123,
+      "start": 317.96,
+      "end": 319.39,
+      "duration": 1.43,
+      "text": "So, if it's positive in this case, you"
+    },
+    {
+      "index": 124,
+      "start": 319.4,
+      "end": 321.83,
+      "duration": 2.43,
+      "text": "would have this counterclockwise"
+    },
+    {
+      "index": 125,
+      "start": 321.84,
+      "end": 323.95,
+      "duration": 2.11,
+      "text": "direction of rotation of the spiral."
+    },
+    {
+      "index": 126,
+      "start": 323.96,
+      "end": 326.07,
+      "duration": 2.11,
+      "text": "Okay, so now we can move on and do the"
+    },
+    {
+      "index": 127,
+      "start": 326.08,
+      "end": 328.51,
+      "duration": 2.43,
+      "text": "second the following cases a bit faster."
+    },
+    {
+      "index": 128,
+      "start": 328.52,
+      "end": 330.67,
+      "duration": 2.15,
+      "text": "So, the second case, we are in the case"
+    },
+    {
+      "index": 129,
+      "start": 330.68,
+      "end": 332.23,
+      "duration": 1.55,
+      "text": "where we now have two repeated"
+    },
+    {
+      "index": 130,
+      "start": 332.24,
+      "end": 334.91,
+      "duration": 2.67,
+      "text": "eigenvalues, both of them are negative."
+    },
+    {
+      "index": 131,
+      "start": 334.92,
+      "end": 336.87,
+      "duration": 1.95,
+      "text": "So, we can have either"
+    },
+    {
+      "index": 132,
+      "start": 336.88,
+      "end": 338.95,
+      "duration": 2.07,
+      "text": "a complete case. If we had a matrix that"
+    },
+    {
+      "index": 133,
+      "start": 338.96,
+      "end": 340.91,
+      "duration": 1.95,
+      "text": "was diagonal, we would have basically a"
+    },
+    {
+      "index": 134,
+      "start": 340.92,
+      "end": 343.27,
+      "duration": 2.35,
+      "text": "star, but that's not the case because if"
+    },
+    {
+      "index": 135,
+      "start": 343.28,
+      "end": 345.67,
+      "duration": 2.39,
+      "text": "we pick, for example, the value C equals"
+    },
+    {
+      "index": 136,
+      "start": 345.68,
+      "end": 348.63,
+      "duration": 2.95,
+      "text": "to 1, that puts us on the parabola, we"
+    },
+    {
+      "index": 137,
+      "start": 348.64,
+      "end": 350.15,
+      "duration": 1.51,
+      "text": "can see that the matrix AC is not"
+    },
+    {
+      "index": 138,
+      "start": 350.16,
+      "end": 352.51,
+      "duration": 2.35,
+      "text": "diagonal, so we are in a defective case."
+    },
+    {
+      "index": 139,
+      "start": 352.52,
+      "end": 354.75,
+      "duration": 2.23,
+      "text": "The defective case,"
+    },
+    {
+      "index": 140,
+      "start": 354.76,
+      "end": 356.87,
+      "duration": 2.11,
+      "text": "if you compute the eigen"
+    },
+    {
+      "index": 141,
+      "start": 356.88,
+      "end": 359.19,
+      "duration": 2.31,
+      "text": "values and eigenvector, would give you"
+    },
+    {
+      "index": 142,
+      "start": 359.2,
+      "end": 360.47,
+      "duration": 1.27,
+      "text": "something that looks like that. The"
+    },
+    {
+      "index": 143,
+      "start": 360.48,
+      "end": 362.87,
+      "duration": 2.39,
+      "text": "first rate of eigenvector corresponding"
+    },
+    {
+      "index": 144,
+      "start": 362.88,
+      "end": 366.63,
+      "duration": 3.75,
+      "text": "to your eigenvalue would be"
+    },
+    {
+      "index": 145,
+      "start": 366.64,
+      "end": 368.67,
+      "duration": 2.03,
+      "text": "in the direction of 1 0. We have"
+    },
+    {
+      "index": 146,
+      "start": 368.68,
+      "end": 370.75,
+      "duration": 2.07,
+      "text": "negative eigenvalues, so it's going to"
+    },
+    {
+      "index": 147,
+      "start": 370.76,
+      "end": 373.07,
+      "duration": 2.31,
+      "text": "0. And basically in to determine the"
+    },
+    {
+      "index": 148,
+      "start": 373.08,
+      "end": 374.75,
+      "duration": 1.67,
+      "text": "direction, you have to see that we're"
+    },
+    {
+      "index": 149,
+      "start": 374.76,
+      "end": 376.91,
+      "duration": 2.15,
+      "text": "also following a transition here on the"
+    },
+    {
+      "index": 150,
+      "start": 376.92,
+      "end": 379.39,
+      "duration": 2.47,
+      "text": "determinant on the on the trace"
+    },
+    {
+      "index": 151,
+      "start": 379.4,
+      "end": 381.99,
+      "duration": 2.59,
+      "text": "determinant diagram, and so basically we"
+    },
+    {
+      "index": 152,
+      "start": 382.0,
+      "end": 383.47,
+      "duration": 1.47,
+      "text": "will have"
+    },
+    {
+      "index": 153,
+      "start": 383.48,
+      "end": 386.55,
+      "duration": 3.07,
+      "text": "a spiral that would look like this."
+    },
+    {
+      "index": 154,
+      "start": 386.56,
+      "end": 389.71,
+      "duration": 3.15,
+      "text": "Um yep."
+    },
+    {
+      "index": 155,
+      "start": 391.19,
+      "end": 391.2,
+      "duration": 0.01,
+      "text": "What am I doing here? Am I doing the"
+    },
+    {
+      "index": 156,
+      "start": 391.2,
+      "end": 392.43,
+      "duration": 1.23,
+      "text": "same thing?"
+    },
+    {
+      "index": 157,
+      "start": 392.44,
+      "end": 403.99,
+      "duration": 11.55,
+      "text": "Yeah."
+    },
+    {
+      "index": 158,
+      "start": 406.87,
+      "end": 406.88,
+      "duration": 0.01,
+      "text": "And it would basically rotate"
+    },
+    {
+      "index": 159,
+      "start": 406.88,
+      "end": 410.11,
+      "duration": 3.23,
+      "text": "as you can see here"
+    },
+    {
+      "index": 160,
+      "start": 415.15,
+      "end": 415.16,
+      "duration": 0.01,
+      "text": "direction"
+    },
+    {
+      "index": 161,
+      "start": 415.16,
+      "end": 416.03,
+      "duration": 0.87,
+      "text": "as"
+    },
+    {
+      "index": 162,
+      "start": 416.04,
+      "end": 417.87,
+      "duration": 1.83,
+      "text": "the case that we had just before because"
+    },
+    {
+      "index": 163,
+      "start": 417.88,
+      "end": 419.67,
+      "duration": 1.79,
+      "text": "we basically have the transition of the"
+    },
+    {
+      "index": 164,
+      "start": 419.68,
+      "end": 422.27,
+      "duration": 2.59,
+      "text": "structure of the critical point. Okay?"
+    },
+    {
+      "index": 165,
+      "start": 422.28,
+      "end": 424.83,
+      "duration": 2.55,
+      "text": "And we arrows are pointing toward the"
+    },
+    {
+      "index": 166,
+      "start": 424.84,
+      "end": 426.51,
+      "duration": 1.67,
+      "text": "critical point again because our two"
+    },
+    {
+      "index": 167,
+      "start": 426.52,
+      "end": 429.27,
+      "duration": 2.75,
+      "text": "eigenvalues are"
+    },
+    {
+      "index": 168,
+      "start": 429.28,
+      "end": 431.35,
+      "duration": 2.07,
+      "text": "are basically here negative. What should"
+    },
+    {
+      "index": 169,
+      "start": 431.36,
+      "end": 432.75,
+      "duration": 1.39,
+      "text": "just repeated eigenvalue that is"
+    },
+    {
+      "index": 170,
+      "start": 432.76,
+      "end": 433.71,
+      "duration": 0.95,
+      "text": "negative."
+    },
+    {
+      "index": 171,
+      "start": 433.72,
+      "end": 435.71,
+      "duration": 1.99,
+      "text": "Okay, so now we can move on to a third"
+    },
+    {
+      "index": 172,
+      "start": 435.72,
+      "end": 439.03,
+      "duration": 3.31,
+      "text": "case where here we move into the wedge"
+    },
+    {
+      "index": 173,
+      "start": 439.04,
+      "end": 441.39,
+      "duration": 2.35,
+      "text": "area where we have the two eigenvalues"
+    },
+    {
+      "index": 174,
+      "start": 441.4,
+      "end": 445.03,
+      "duration": 3.63,
+      "text": "now being real, and both of them are"
+    },
+    {
+      "index": 175,
+      "start": 445.04,
+      "end": 447.39,
+      "duration": 2.35,
+      "text": "negative."
+    },
+    {
+      "index": 176,
+      "start": 447.4,
+      "end": 450.59,
+      "duration": 3.19,
+      "text": "So, for example,"
+    },
+    {
+      "index": 177,
+      "start": 453.91,
+      "end": 453.92,
+      "duration": 0.01,
+      "text": "we would have two eigenvalues"
+    },
+    {
+      "index": 178,
+      "start": 453.92,
+      "end": 456.19,
+      "duration": 2.27,
+      "text": "that would give us two eigenvectors"
+    },
+    {
+      "index": 179,
+      "start": 456.2,
+      "end": 457.75,
+      "duration": 1.55,
+      "text": "that are basically the rays. The"
+    },
+    {
+      "index": 180,
+      "start": 457.76,
+      "end": 459.27,
+      "duration": 1.51,
+      "text": "direction of the trajectories on these"
+    },
+    {
+      "index": 181,
+      "start": 459.28,
+      "end": 461.19,
+      "duration": 1.91,
+      "text": "two rays would be toward the critical"
+    },
+    {
+      "index": 182,
+      "start": 461.2,
+      "end": 463.55,
+      "duration": 2.35,
+      "text": "point because we have again negative"
+    },
+    {
+      "index": 183,
+      "start": 463.56,
+      "end": 467.07,
+      "duration": 3.51,
+      "text": "eigenvalues. And the trajectories then"
+    },
+    {
+      "index": 184,
+      "start": 467.08,
+      "end": 468.79,
+      "duration": 1.71,
+      "text": "would be following"
+    },
+    {
+      "index": 185,
+      "start": 468.8,
+      "end": 473.43,
+      "duration": 4.63,
+      "text": "the lambda. So, if I, for example, pick"
+    },
+    {
+      "index": 186,
+      "start": 473.44,
+      "end": 475.39,
+      "duration": 1.95,
+      "text": "lambda one less than"
+    },
+    {
+      "index": 187,
+      "start": 475.4,
+      "end": 477.91,
+      "duration": 2.51,
+      "text": "lambda two,"
+    },
+    {
+      "index": 188,
+      "start": 477.92,
+      "end": 480.51,
+      "duration": 2.59,
+      "text": "then I would have something like this"
+    },
+    {
+      "index": 189,
+      "start": 480.52,
+      "end": 484.95,
+      "duration": 4.43,
+      "text": "going to 0."
+    },
+    {
+      "index": 190,
+      "start": 486.75,
+      "end": 486.76,
+      "duration": 0.01,
+      "text": "And we would have this trajectory"
+    },
+    {
+      "index": 191,
+      "start": 486.76,
+      "end": 488.83,
+      "duration": 2.07,
+      "text": "corresponding"
+    },
+    {
+      "index": 192,
+      "start": 488.84,
+      "end": 490.67,
+      "duration": 1.83,
+      "text": "to the eigenvalue that is the closer to"
+    },
+    {
+      "index": 193,
+      "start": 490.68,
+      "end": 492.87,
+      "duration": 2.19,
+      "text": "0."
+    },
+    {
+      "index": 194,
+      "start": 492.88,
+      "end": 493.91,
+      "duration": 1.03,
+      "text": "Okay?"
+    },
+    {
+      "index": 195,
+      "start": 493.92,
+      "end": 495.47,
+      "duration": 1.55,
+      "text": "And again, the arrows would be going"
+    },
+    {
+      "index": 196,
+      "start": 495.48,
+      "end": 497.71,
+      "duration": 2.23,
+      "text": "toward this critical point. So, we can"
+    },
+    {
+      "index": 197,
+      "start": 497.72,
+      "end": 499.67,
+      "duration": 1.95,
+      "text": "now move on."
+    },
+    {
+      "index": 198,
+      "start": 499.68,
+      "end": 502.19,
+      "duration": 2.51,
+      "text": "And if we keep increasing C,"
+    },
+    {
+      "index": 199,
+      "start": 502.2,
+      "end": 505.83,
+      "duration": 3.63,
+      "text": "uh we reach now the point four where we"
+    },
+    {
+      "index": 200,
+      "start": 505.84,
+      "end": 507.79,
+      "duration": 1.95,
+      "text": "are in a special case again, a boundary"
+    },
+    {
+      "index": 201,
+      "start": 507.8,
+      "end": 510.31,
+      "duration": 2.51,
+      "text": "case where the determinant is 0, but the"
+    },
+    {
+      "index": 202,
+      "start": 510.32,
+      "end": 512.07,
+      "duration": 1.75,
+      "text": "trace is nonzero. If the determinant is"
+    },
+    {
+      "index": 203,
+      "start": 512.08,
+      "end": 513.589,
+      "duration": 1.509,
+      "text": "0, which is the product of the two"
+    },
+    {
+      "index": 204,
+      "start": 513.599,
+      "end": 515.23,
+      "duration": 1.631,
+      "text": "eigenvalues, it means that we have one"
+    },
+    {
+      "index": 205,
+      "start": 515.24,
+      "end": 516.79,
+      "duration": 1.55,
+      "text": "eigenvalue that is"
+    },
+    {
+      "index": 206,
+      "start": 516.8,
+      "end": 519.029,
+      "duration": 2.229,
+      "text": "equal to 0"
+    },
+    {
+      "index": 207,
+      "start": 519.039,
+      "end": 521.51,
+      "duration": 2.471,
+      "text": "and another eigenvalue"
+    },
+    {
+      "index": 208,
+      "start": 521.52,
+      "end": 523.709,
+      "duration": 2.189,
+      "text": "that is actually in this case -2, so"
+    },
+    {
+      "index": 209,
+      "start": 523.719,
+      "end": 524.95,
+      "duration": 1.231,
+      "text": "just negative."
+    },
+    {
+      "index": 210,
+      "start": 524.96,
+      "end": 527.19,
+      "duration": 2.23,
+      "text": "So, what happens here? What happens is"
+    },
+    {
+      "index": 211,
+      "start": 527.2,
+      "end": 529.59,
+      "duration": 2.39,
+      "text": "that we have now"
+    },
+    {
+      "index": 212,
+      "start": 529.6,
+      "end": 531.51,
+      "duration": 1.91,
+      "text": "the eigenvector that corresponds to the"
+    },
+    {
+      "index": 213,
+      "start": 531.52,
+      "end": 534.27,
+      "duration": 2.75,
+      "text": "eigenvalue equals to 0 is basically just"
+    },
+    {
+      "index": 214,
+      "start": 534.28,
+      "end": 537.75,
+      "duration": 3.47,
+      "text": "defining a whole line of critical"
+    },
+    {
+      "index": 215,
+      "start": 537.76,
+      "end": 539.75,
+      "duration": 1.99,
+      "text": "points. So, all the points on this line"
+    },
+    {
+      "index": 216,
+      "start": 539.76,
+      "end": 541.23,
+      "duration": 1.47,
+      "text": "that would correspond, so for example,"
+    },
+    {
+      "index": 217,
+      "start": 541.24,
+      "end": 543.43,
+      "duration": 2.19,
+      "text": "to lambda 0, are all critical points."
+    },
+    {
+      "index": 218,
+      "start": 543.44,
+      "end": 544.75,
+      "duration": 1.31,
+      "text": "So, we don't need to actually draw"
+    },
+    {
+      "index": 219,
+      "start": 544.76,
+      "end": 546.67,
+      "duration": 1.91,
+      "text": "arrows here. All the points would be"
+    },
+    {
+      "index": 220,
+      "start": 546.68,
+      "end": 548.95,
+      "duration": 2.27,
+      "text": "critical points. And another direction"
+    },
+    {
+      "index": 221,
+      "start": 548.96,
+      "end": 550.63,
+      "duration": 1.67,
+      "text": "or ray would be determined by the second"
+    },
+    {
+      "index": 222,
+      "start": 550.64,
+      "end": 554.11,
+      "duration": 3.47,
+      "text": "eigenvalue lambda two, and we would"
+    },
+    {
+      "index": 223,
+      "start": 554.12,
+      "end": 556.83,
+      "duration": 2.71,
+      "text": "have, for example,"
+    },
+    {
+      "index": 224,
+      "start": 556.84,
+      "end": 558.63,
+      "duration": 1.79,
+      "text": "directions"
+    },
+    {
+      "index": 225,
+      "start": 558.64,
+      "end": 560.63,
+      "duration": 1.99,
+      "text": "in this way where it would correspond to"
+    },
+    {
+      "index": 226,
+      "start": 560.64,
+      "end": 562.23,
+      "duration": 1.59,
+      "text": "direction of V2. So, all these would be"
+    },
+    {
+      "index": 227,
+      "start": 562.24,
+      "end": 564.35,
+      "duration": 2.11,
+      "text": "parallel to V2, and we would have the"
+    },
+    {
+      "index": 228,
+      "start": 564.36,
+      "end": 568.79,
+      "duration": 4.43,
+      "text": "trajectories"
+    },
+    {
+      "index": 229,
+      "start": 571.55,
+      "end": 571.56,
+      "duration": 0.01,
+      "text": "going toward all the critical points on"
+    },
+    {
+      "index": 230,
+      "start": 571.56,
+      "end": 573.27,
+      "duration": 1.71,
+      "text": "this line. So, in this case, we're in a"
+    },
+    {
+      "index": 231,
+      "start": 573.28,
+      "end": 574.95,
+      "duration": 1.67,
+      "text": "case where we actually don't have one"
+    },
+    {
+      "index": 232,
+      "start": 574.96,
+      "end": 576.83,
+      "duration": 1.87,
+      "text": "localized critical points like in the"
+    },
+    {
+      "index": 233,
+      "start": 576.84,
+      "end": 578.75,
+      "duration": 1.91,
+      "text": "previous case that we saw. We actually"
+    },
+    {
+      "index": 234,
+      "start": 578.76,
+      "end": 580.55,
+      "duration": 1.79,
+      "text": "have a full a whole line of critical"
+    },
+    {
+      "index": 235,
+      "start": 580.56,
+      "end": 581.59,
+      "duration": 1.03,
+      "text": "points."
+    },
+    {
+      "index": 236,
+      "start": 581.6,
+      "end": 584.11,
+      "duration": 2.51,
+      "text": "Okay, so let's move one more point down."
+    },
+    {
+      "index": 237,
+      "start": 584.12,
+      "end": 587.43,
+      "duration": 3.31,
+      "text": "So, here for another value of C, we now"
+    },
+    {
+      "index": 238,
+      "start": 587.44,
+      "end": 589.91,
+      "duration": 2.47,
+      "text": "are in the lower part of the diagram"
+    },
+    {
+      "index": 239,
+      "start": 589.92,
+      "end": 592.39,
+      "duration": 2.47,
+      "text": "where we now have"
+    },
+    {
+      "index": 240,
+      "start": 592.4,
+      "end": 594.79,
+      "duration": 2.39,
+      "text": "two eigenvalues that are again real, but"
+    },
+    {
+      "index": 241,
+      "start": 594.8,
+      "end": 596.63,
+      "duration": 1.83,
+      "text": "now the determinant is negative."
+    },
+    {
+      "index": 242,
+      "start": 596.64,
+      "end": 598.27,
+      "duration": 1.63,
+      "text": "Determinant is the product of the two."
+    },
+    {
+      "index": 243,
+      "start": 598.28,
+      "end": 599.51,
+      "duration": 1.23,
+      "text": "So, basically, you know that one is"
+    },
+    {
+      "index": 244,
+      "start": 599.52,
+      "end": 601.71,
+      "duration": 2.19,
+      "text": "positive and the other one is negative."
+    },
+    {
+      "index": 245,
+      "start": 601.72,
+      "end": 604.11,
+      "duration": 2.39,
+      "text": "Okay? So, for example, here, we would"
+    },
+    {
+      "index": 246,
+      "start": 604.12,
+      "end": 606.99,
+      "duration": 2.87,
+      "text": "have"
+    },
+    {
+      "index": 247,
+      "start": 608.95,
+      "end": 608.96,
+      "duration": 0.01,
+      "text": "uh one"
+    },
+    {
+      "index": 248,
+      "start": 608.96,
+      "end": 611.79,
+      "duration": 2.83,
+      "text": "positive"
+    },
+    {
+      "index": 249,
+      "start": 615.91,
+      "end": 615.92,
+      "duration": 0.01,
+      "text": "the negative eigen uh value."
+    },
+    {
+      "index": 250,
+      "start": 615.92,
+      "end": 627.83,
+      "duration": 11.91,
+      "text": "Oops. Sorry. Thank you."
+    },
+    {
+      "index": 251,
+      "start": 629.27,
+      "end": 629.28,
+      "duration": 0.01,
+      "text": "So, we would have the positive eigen"
+    },
+    {
+      "index": 252,
+      "start": 629.28,
+      "end": 631.87,
+      "duration": 2.59,
+      "text": "value"
+    },
+    {
+      "index": 253,
+      "start": 633.79,
+      "end": 633.8,
+      "duration": 0.01,
+      "text": "and the negative eigen value here. So,"
+    },
+    {
+      "index": 254,
+      "start": 633.8,
+      "end": 636.35,
+      "duration": 2.55,
+      "text": "here again, we're just moving in the"
+    },
+    {
+      "index": 255,
+      "start": 636.36,
+      "end": 638.95,
+      "duration": 2.59,
+      "text": "structure of the of the uh critical"
+    },
+    {
+      "index": 256,
+      "start": 638.96,
+      "end": 640.59,
+      "duration": 1.63,
+      "text": "point. So, we should have a smooth"
+    },
+    {
+      "index": 257,
+      "start": 640.6,
+      "end": 643.03,
+      "duration": 2.43,
+      "text": "transition between the diagrams going"
+    },
+    {
+      "index": 258,
+      "start": 643.04,
+      "end": 645.31,
+      "duration": 2.27,
+      "text": "one to five. And so, here, what we see"
+    },
+    {
+      "index": 259,
+      "start": 645.32,
+      "end": 648.47,
+      "duration": 3.15,
+      "text": "is that we actually have uh the ray that"
+    },
+    {
+      "index": 260,
+      "start": 648.48,
+      "end": 650.63,
+      "duration": 2.15,
+      "text": "uh is basically the stable the space"
+    },
+    {
+      "index": 261,
+      "start": 650.64,
+      "end": 653.27,
+      "duration": 2.63,
+      "text": "stable space here that would uh give us"
+    },
+    {
+      "index": 262,
+      "start": 653.28,
+      "end": 653.99,
+      "duration": 0.71,
+      "text": "the"
+    },
+    {
+      "index": 263,
+      "start": 654.0,
+      "end": 655.79,
+      "duration": 1.79,
+      "text": "uh trajectories going to zero, but it's"
+    },
+    {
+      "index": 264,
+      "start": 655.8,
+      "end": 657.03,
+      "duration": 1.23,
+      "text": "the only"
+    },
+    {
+      "index": 265,
+      "start": 657.04,
+      "end": 658.95,
+      "duration": 1.91,
+      "text": "region where we have stability. And all"
+    },
+    {
+      "index": 266,
+      "start": 658.96,
+      "end": 664.47,
+      "duration": 5.51,
+      "text": "the trajectories would just then be"
+    },
+    {
+      "index": 267,
+      "start": 667.75,
+      "end": 667.76,
+      "duration": 0.01,
+      "text": "tangent in minus infinity to the the ray"
+    },
+    {
+      "index": 268,
+      "start": 667.76,
+      "end": 670.23,
+      "duration": 2.47,
+      "text": "V1 corresponding to uh the negative"
+    },
+    {
+      "index": 269,
+      "start": 670.24,
+      "end": 672.87,
+      "duration": 2.63,
+      "text": "eigen value and going toward the"
+    },
+    {
+      "index": 270,
+      "start": 672.88,
+      "end": 675.59,
+      "duration": 2.71,
+      "text": "direction of the ray with the positive"
+    },
+    {
+      "index": 271,
+      "start": 675.6,
+      "end": 679.75,
+      "duration": 4.15,
+      "text": "eigen uh value at plus infinity. Okay?"
+    },
+    {
+      "index": 272,
+      "start": 679.76,
+      "end": 682.47,
+      "duration": 2.71,
+      "text": "So, we would have"
+    },
+    {
+      "index": 273,
+      "start": 682.48,
+      "end": 684.15,
+      "duration": 1.67,
+      "text": "something like that that would"
+    },
+    {
+      "index": 274,
+      "start": 684.16,
+      "end": 689.27,
+      "duration": 5.11,
+      "text": "correspond to a saddle."
+    },
+    {
+      "index": 275,
+      "start": 699.11,
+      "end": 699.12,
+      "duration": 0.01,
+      "text": "or basically a stable node."
+    },
+    {
+      "index": 276,
+      "start": 699.12,
+      "end": 701.79,
+      "duration": 2.67,
+      "text": "This would be defective"
+    },
+    {
+      "index": 277,
+      "start": 701.8,
+      "end": 703.87,
+      "duration": 2.07,
+      "text": "stable node."
+    },
+    {
+      "index": 278,
+      "start": 703.88,
+      "end": 706.43,
+      "duration": 2.55,
+      "text": "And here, we just have a asymptotically"
+    },
+    {
+      "index": 279,
+      "start": 706.44,
+      "end": 708.55,
+      "duration": 2.11,
+      "text": "stable"
+    },
+    {
+      "index": 280,
+      "start": 708.56,
+      "end": 709.91,
+      "duration": 1.35,
+      "text": "spiral."
+    },
+    {
+      "index": 281,
+      "start": 709.92,
+      "end": 710.87,
+      "duration": 0.95,
+      "text": "So,"
+    },
+    {
+      "index": 282,
+      "start": 710.88,
+      "end": 712.829,
+      "duration": 1.949,
+      "text": "uh basically, here, what you could see"
+    },
+    {
+      "index": 283,
+      "start": 712.839,
+      "end": 715.03,
+      "duration": 2.191,
+      "text": "is that we have uh by just changing the"
+    },
+    {
+      "index": 284,
+      "start": 715.04,
+      "end": 717.47,
+      "duration": 2.43,
+      "text": "value of the constant C, had um"
+    },
+    {
+      "index": 285,
+      "start": 717.48,
+      "end": 719.87,
+      "duration": 2.39,
+      "text": "moved this the the structure of the"
+    },
+    {
+      "index": 286,
+      "start": 719.88,
+      "end": 722.03,
+      "duration": 2.15,
+      "text": "critical point for the of the system"
+    },
+    {
+      "index": 287,
+      "start": 722.04,
+      "end": 724.87,
+      "duration": 2.83,
+      "text": "from the phase diagrams one to five, and"
+    },
+    {
+      "index": 288,
+      "start": 724.88,
+      "end": 727.59,
+      "duration": 2.71,
+      "text": "the transitions can be seen to be smooth"
+    },
+    {
+      "index": 289,
+      "start": 727.6,
+      "end": 729.67,
+      "duration": 2.07,
+      "text": "if you had a continuum of values of for"
+    },
+    {
+      "index": 290,
+      "start": 729.68,
+      "end": 733.96,
+      "duration": 4.28,
+      "text": "C. So, that ends this recitation."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

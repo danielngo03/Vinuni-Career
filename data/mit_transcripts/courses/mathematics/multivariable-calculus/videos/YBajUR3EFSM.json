@@ -1,0 +1,7431 @@
+{
+  "video": {
+    "id": "YBajUR3EFSM",
+    "title": "Lec 4: Square systems; equations of planes | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=YBajUR3EFSM",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2942,
+    "language": "en"
+  },
+  "segment_count": 1059,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.83,
+      "end": 1.8399999999999999,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.8399999999999999,
+      "end": 4.35,
+      "duration": 2.51,
+      "text": "a Creative Commons license. Your support"
+    },
+    {
+      "index": 2,
+      "start": 4.36,
+      "end": 6.63,
+      "duration": 2.27,
+      "text": "will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.64,
+      "end": 8.87,
+      "duration": 2.23,
+      "text": "offer high-quality educational resources"
+    },
+    {
+      "index": 4,
+      "start": 8.88,
+      "end": 9.95,
+      "duration": 1.07,
+      "text": "for free."
+    },
+    {
+      "index": 5,
+      "start": 9.96,
+      "end": 11.99,
+      "duration": 2.03,
+      "text": "To make a donation or to view additional"
+    },
+    {
+      "index": 6,
+      "start": 12.0,
+      "end": 14.79,
+      "duration": 2.79,
+      "text": "materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 7,
+      "start": 14.8,
+      "end": 22.19,
+      "duration": 7.39,
+      "text": "visit MIT OpenCourseWare at ocw.mit.edu."
+    },
+    {
+      "index": 8,
+      "start": 24.07,
+      "end": 24.08,
+      "duration": 0.01,
+      "text": "The topic for today"
+    },
+    {
+      "index": 9,
+      "start": 24.08,
+      "end": 25.91,
+      "duration": 1.83,
+      "text": "is going to be"
+    },
+    {
+      "index": 10,
+      "start": 25.92,
+      "end": 32.87,
+      "duration": 6.95,
+      "text": "equations of planes."
+    },
+    {
+      "index": 11,
+      "start": 36.23,
+      "end": 36.24,
+      "duration": 0.01,
+      "text": "And how it relates how they"
+    },
+    {
+      "index": 12,
+      "start": 36.24,
+      "end": 39.23,
+      "duration": 2.99,
+      "text": "relate to linear systems and matrices as"
+    },
+    {
+      "index": 13,
+      "start": 39.24,
+      "end": 41.47,
+      "duration": 2.23,
+      "text": "we have seen"
+    },
+    {
+      "index": 14,
+      "start": 41.48,
+      "end": 44.43,
+      "duration": 2.95,
+      "text": "during Tuesday's lecture."
+    },
+    {
+      "index": 15,
+      "start": 44.44,
+      "end": 46.71,
+      "duration": 2.27,
+      "text": "So,"
+    },
+    {
+      "index": 16,
+      "start": 46.72,
+      "end": 48.27,
+      "duration": 1.55,
+      "text": "let's start again with equations of"
+    },
+    {
+      "index": 17,
+      "start": 48.28,
+      "end": 51.07,
+      "duration": 2.79,
+      "text": "planes."
+    },
+    {
+      "index": 18,
+      "start": 53.91,
+      "end": 53.92,
+      "duration": 0.01,
+      "text": "So, remember"
+    },
+    {
+      "index": 19,
+      "start": 53.92,
+      "end": 56.15,
+      "duration": 2.23,
+      "text": "we've seen briefly"
+    },
+    {
+      "index": 20,
+      "start": 56.16,
+      "end": 59.59,
+      "duration": 3.43,
+      "text": "that an equation"
+    },
+    {
+      "index": 21,
+      "start": 59.6,
+      "end": 63.67,
+      "duration": 4.07,
+      "text": "for a plane"
+    },
+    {
+      "index": 22,
+      "start": 69.31,
+      "end": 69.32,
+      "duration": 0.01,
+      "text": "ax"
+    },
+    {
+      "index": 23,
+      "start": 69.32,
+      "end": 74.39,
+      "duration": 5.07,
+      "text": "+ by + cz = d, where a, b, c, and d are"
+    },
+    {
+      "index": 24,
+      "start": 74.4,
+      "end": 76.15,
+      "duration": 1.75,
+      "text": "just numbers."
+    },
+    {
+      "index": 25,
+      "start": 76.16,
+      "end": 77.35,
+      "duration": 1.19,
+      "text": "Okay, and so this expresses the"
+    },
+    {
+      "index": 26,
+      "start": 77.36,
+      "end": 79.71,
+      "duration": 2.35,
+      "text": "condition for a point at coordinates x,"
+    },
+    {
+      "index": 27,
+      "start": 79.72,
+      "end": 83.59,
+      "duration": 3.87,
+      "text": "y, z to be in the plane."
+    },
+    {
+      "index": 28,
+      "start": 86.31,
+      "end": 86.32,
+      "duration": 0.01,
+      "text": "And so, an equation of this form"
+    },
+    {
+      "index": 29,
+      "start": 86.32,
+      "end": 88.95,
+      "duration": 2.63,
+      "text": "defines"
+    },
+    {
+      "index": 30,
+      "start": 88.96,
+      "end": 93.23,
+      "duration": 4.27,
+      "text": "a plane."
+    },
+    {
+      "index": 31,
+      "start": 94.35,
+      "end": 94.36,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 32,
+      "start": 94.36,
+      "end": 98.27,
+      "duration": 3.91,
+      "text": "let's see how that works again."
+    },
+    {
+      "index": 33,
+      "start": 99.83,
+      "end": 99.84,
+      "duration": 0.01,
+      "text": "So, let's start with an example. Let's"
+    },
+    {
+      "index": 34,
+      "start": 99.84,
+      "end": 102.07,
+      "duration": 2.23,
+      "text": "say that we want to find an equation for"
+    },
+    {
+      "index": 35,
+      "start": 102.08,
+      "end": 105.07,
+      "duration": 2.99,
+      "text": "a plane"
+    },
+    {
+      "index": 36,
+      "start": 119.95,
+      "end": 119.96,
+      "duration": 0.01,
+      "text": "let's say"
+    },
+    {
+      "index": 37,
+      "start": 119.96,
+      "end": 122.31,
+      "duration": 2.35,
+      "text": "vector n equals"
+    },
+    {
+      "index": 38,
+      "start": 122.32,
+      "end": 125.95,
+      "duration": 3.63,
+      "text": "let's say the normal vector 1 5 10."
+    },
+    {
+      "index": 39,
+      "start": 125.96,
+      "end": 128.07,
+      "duration": 2.11,
+      "text": "Okay, so how do we find an equation of"
+    },
+    {
+      "index": 40,
+      "start": 128.08,
+      "end": 130.31,
+      "duration": 2.23,
+      "text": "this plane?"
+    },
+    {
+      "index": 41,
+      "start": 130.32,
+      "end": 132.19,
+      "duration": 1.87,
+      "text": "Well,"
+    },
+    {
+      "index": 42,
+      "start": 132.2,
+      "end": 134.15,
+      "duration": 1.95,
+      "text": "remember"
+    },
+    {
+      "index": 43,
+      "start": 134.16,
+      "end": 139.63,
+      "duration": 5.47,
+      "text": "that"
+    },
+    {
+      "index": 44,
+      "start": 141.99,
+      "end": 142.0,
+      "duration": 0.01,
+      "text": "we can get that equation by thinking"
+    },
+    {
+      "index": 45,
+      "start": 142.0,
+      "end": 144.03,
+      "duration": 2.03,
+      "text": "geometrically. So, what's our thinking"
+    },
+    {
+      "index": 46,
+      "start": 144.04,
+      "end": 147.55,
+      "duration": 3.51,
+      "text": "going to be?"
+    },
+    {
+      "index": 47,
+      "start": 148.99,
+      "end": 149.0,
+      "duration": 0.01,
+      "text": "Well,"
+    },
+    {
+      "index": 48,
+      "start": 149.0,
+      "end": 154.63,
+      "duration": 5.63,
+      "text": "we have the XYZ axes."
+    },
+    {
+      "index": 49,
+      "start": 156.43,
+      "end": 156.44,
+      "duration": 0.01,
+      "text": "And"
+    },
+    {
+      "index": 50,
+      "start": 156.44,
+      "end": 162.31,
+      "duration": 5.87,
+      "text": "we have this vector n"
+    },
+    {
+      "index": 51,
+      "start": 164.75,
+      "end": 164.76,
+      "duration": 0.01,
+      "text": "1 5 10."
+    },
+    {
+      "index": 52,
+      "start": 164.76,
+      "end": 166.63,
+      "duration": 1.87,
+      "text": "And it's supposed to be perpendicular to"
+    },
+    {
+      "index": 53,
+      "start": 166.64,
+      "end": 168.19,
+      "duration": 1.55,
+      "text": "our plane, and our plane passes through"
+    },
+    {
+      "index": 54,
+      "start": 168.2,
+      "end": 169.83,
+      "duration": 1.63,
+      "text": "the origin here."
+    },
+    {
+      "index": 55,
+      "start": 169.84,
+      "end": 170.87,
+      "duration": 1.03,
+      "text": "Okay?"
+    },
+    {
+      "index": 56,
+      "start": 170.88,
+      "end": 177.03,
+      "duration": 6.15,
+      "text": "So, we want to think of a plane"
+    },
+    {
+      "index": 57,
+      "start": 179.83,
+      "end": 179.84,
+      "duration": 0.01,
+      "text": "that's perpendicular to this vector."
+    },
+    {
+      "index": 58,
+      "start": 179.84,
+      "end": 183.11,
+      "duration": 3.27,
+      "text": "Well, when is a point in that plane?"
+    },
+    {
+      "index": 59,
+      "start": 183.12,
+      "end": 190.229,
+      "duration": 7.109,
+      "text": "Let's say we have a point P."
+    },
+    {
+      "index": 60,
+      "start": 192.31,
+      "end": 192.32,
+      "duration": 0.01,
+      "text": "I call this XYZ."
+    },
+    {
+      "index": 61,
+      "start": 192.32,
+      "end": 194.55,
+      "duration": 2.23,
+      "text": "Well, the condition for P to be in the"
+    },
+    {
+      "index": 62,
+      "start": 194.56,
+      "end": 197.27,
+      "duration": 2.71,
+      "text": "plane should be that we have a right"
+    },
+    {
+      "index": 63,
+      "start": 197.28,
+      "end": 200.03,
+      "duration": 2.75,
+      "text": "angle here."
+    },
+    {
+      "index": 64,
+      "start": 200.79,
+      "end": 200.8,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 65,
+      "start": 200.8,
+      "end": 201.79,
+      "duration": 0.99,
+      "text": "So,"
+    },
+    {
+      "index": 66,
+      "start": 201.8,
+      "end": 206.71,
+      "duration": 4.91,
+      "text": "P is in the plane"
+    },
+    {
+      "index": 67,
+      "start": 208.03,
+      "end": 208.04,
+      "duration": 0.01,
+      "text": "whenever"
+    },
+    {
+      "index": 68,
+      "start": 208.04,
+      "end": 209.43,
+      "duration": 1.39,
+      "text": "OP"
+    },
+    {
+      "index": 69,
+      "start": 209.44,
+      "end": 210.949,
+      "duration": 1.509,
+      "text": ".n"
+    },
+    {
+      "index": 70,
+      "start": 210.959,
+      "end": 214.03,
+      "duration": 3.071,
+      "text": "is zero."
+    },
+    {
+      "index": 71,
+      "start": 216.55,
+      "end": 216.56,
+      "duration": 0.01,
+      "text": "And if we write that explicitly, well,"
+    },
+    {
+      "index": 72,
+      "start": 216.56,
+      "end": 220.11,
+      "duration": 3.55,
+      "text": "vector OP has components XYZ and has"
+    },
+    {
+      "index": 73,
+      "start": 220.12,
+      "end": 222.07,
+      "duration": 1.95,
+      "text": "components 1 5 10."
+    },
+    {
+      "index": 74,
+      "start": 222.08,
+      "end": 225.75,
+      "duration": 3.67,
+      "text": "So, that will give us x + 5y"
+    },
+    {
+      "index": 75,
+      "start": 225.76,
+      "end": 227.47,
+      "duration": 1.71,
+      "text": "+ 10z"
+    },
+    {
+      "index": 76,
+      "start": 227.48,
+      "end": 228.949,
+      "duration": 1.469,
+      "text": "= 0."
+    },
+    {
+      "index": 77,
+      "start": 228.959,
+      "end": 237.11,
+      "duration": 8.151,
+      "text": "Okay, that's the equation of our plane."
+    },
+    {
+      "index": 78,
+      "start": 239.07,
+      "end": 239.08,
+      "duration": 0.01,
+      "text": "Now,"
+    },
+    {
+      "index": 79,
+      "start": 239.08,
+      "end": 240.79,
+      "duration": 1.71,
+      "text": "let's think about a slightly different"
+    },
+    {
+      "index": 80,
+      "start": 240.8,
+      "end": 242.75,
+      "duration": 1.95,
+      "text": "problem."
+    },
+    {
+      "index": 81,
+      "start": 242.76,
+      "end": 245.27,
+      "duration": 2.51,
+      "text": "So, let's do another problem. Let's try"
+    },
+    {
+      "index": 82,
+      "start": 245.28,
+      "end": 248.71,
+      "duration": 3.43,
+      "text": "to find the equation of a plane"
+    },
+    {
+      "index": 83,
+      "start": 248.72,
+      "end": 251.19,
+      "duration": 2.47,
+      "text": "through"
+    },
+    {
+      "index": 84,
+      "start": 254.31,
+      "end": 254.32,
+      "duration": 0.01,
+      "text": "a point P0 with coordinates"
+    },
+    {
+      "index": 85,
+      "start": 254.32,
+      "end": 256.59,
+      "duration": 2.27,
+      "text": "say 2 1 - 1"
+    },
+    {
+      "index": 86,
+      "start": 256.6,
+      "end": 258.91,
+      "duration": 2.31,
+      "text": "and"
+    },
+    {
+      "index": 87,
+      "start": 258.92,
+      "end": 260.509,
+      "duration": 1.589,
+      "text": "with normal vector"
+    },
+    {
+      "index": 88,
+      "start": 260.519,
+      "end": 264.47,
+      "duration": 3.951,
+      "text": "again the same guy, 1 5 10."
+    },
+    {
+      "index": 89,
+      "start": 265.75,
+      "end": 265.76,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 90,
+      "start": 265.76,
+      "end": 267.63,
+      "duration": 1.87,
+      "text": "So,"
+    },
+    {
+      "index": 91,
+      "start": 267.64,
+      "end": 268.95,
+      "duration": 1.31,
+      "text": "how do we find an equation of this"
+    },
+    {
+      "index": 92,
+      "start": 268.96,
+      "end": 277.03,
+      "duration": 8.07,
+      "text": "thing?"
+    },
+    {
+      "index": 93,
+      "start": 278.79,
+      "end": 278.8,
+      "duration": 0.01,
+      "text": "Well, we are going to use the same"
+    },
+    {
+      "index": 94,
+      "start": 278.8,
+      "end": 281.59,
+      "duration": 2.79,
+      "text": "method. In fact, let's think first for a"
+    },
+    {
+      "index": 95,
+      "start": 281.6,
+      "end": 285.79,
+      "duration": 4.19,
+      "text": "second."
+    },
+    {
+      "index": 96,
+      "start": 288.909,
+      "end": 288.919,
+      "duration": 0.01,
+      "text": "So, I said we have a normal vector N"
+    },
+    {
+      "index": 97,
+      "start": 288.919,
+      "end": 290.59,
+      "duration": 1.671,
+      "text": "and it's going to be perpendicular to"
+    },
+    {
+      "index": 98,
+      "start": 290.6,
+      "end": 293.31,
+      "duration": 2.71,
+      "text": "both planes at the same time. So, in"
+    },
+    {
+      "index": 99,
+      "start": 293.32,
+      "end": 294.909,
+      "duration": 1.589,
+      "text": "fact, our two planes will be parallel to"
+    },
+    {
+      "index": 100,
+      "start": 294.919,
+      "end": 297.07,
+      "duration": 2.151,
+      "text": "each other. The difference is, well,"
+    },
+    {
+      "index": 101,
+      "start": 297.08,
+      "end": 299.23,
+      "duration": 2.15,
+      "text": "before we had a plane"
+    },
+    {
+      "index": 102,
+      "start": 299.24,
+      "end": 300.39,
+      "duration": 1.15,
+      "text": "that was"
+    },
+    {
+      "index": 103,
+      "start": 300.4,
+      "end": 301.87,
+      "duration": 1.47,
+      "text": "perpendicular to N and passing through"
+    },
+    {
+      "index": 104,
+      "start": 301.88,
+      "end": 305.79,
+      "duration": 3.91,
+      "text": "the origin. And now we have a new plane"
+    },
+    {
+      "index": 105,
+      "start": 305.8,
+      "end": 307.87,
+      "duration": 2.07,
+      "text": "that's going to pass, well, not through"
+    },
+    {
+      "index": 106,
+      "start": 307.88,
+      "end": 309.43,
+      "duration": 1.55,
+      "text": "the origin"
+    },
+    {
+      "index": 107,
+      "start": 309.44,
+      "end": 311.43,
+      "duration": 1.99,
+      "text": "but through maybe this point P0 and I"
+    },
+    {
+      "index": 108,
+      "start": 311.44,
+      "end": 312.99,
+      "duration": 1.55,
+      "text": "don't really know where it is, but let's"
+    },
+    {
+      "index": 109,
+      "start": 313.0,
+      "end": 317.07,
+      "duration": 4.07,
+      "text": "say for example that P0 is here."
+    },
+    {
+      "index": 110,
+      "start": 319.95,
+      "end": 319.96,
+      "duration": 0.01,
+      "text": "Then, I will just"
+    },
+    {
+      "index": 111,
+      "start": 319.96,
+      "end": 321.79,
+      "duration": 1.83,
+      "text": "have to shift my plane"
+    },
+    {
+      "index": 112,
+      "start": 321.8,
+      "end": 323.07,
+      "duration": 1.27,
+      "text": "so that"
+    },
+    {
+      "index": 113,
+      "start": 323.08,
+      "end": 324.87,
+      "duration": 1.79,
+      "text": "instead of passing"
+    },
+    {
+      "index": 114,
+      "start": 324.88,
+      "end": 325.909,
+      "duration": 1.029,
+      "text": "through the origin, it passes through"
+    },
+    {
+      "index": 115,
+      "start": 325.919,
+      "end": 328.75,
+      "duration": 2.831,
+      "text": "this new point."
+    },
+    {
+      "index": 116,
+      "start": 331.99,
+      "end": 332.0,
+      "duration": 0.01,
+      "text": "Okay? So,"
+    },
+    {
+      "index": 117,
+      "start": 332.0,
+      "end": 333.71,
+      "duration": 1.71,
+      "text": "how are we going to do that? Well, now"
+    },
+    {
+      "index": 118,
+      "start": 333.72,
+      "end": 336.15,
+      "duration": 2.43,
+      "text": "for a point P to be in our new plane, we"
+    },
+    {
+      "index": 119,
+      "start": 336.16,
+      "end": 339.75,
+      "duration": 3.59,
+      "text": "need the vector no longer OP but P0P to"
+    },
+    {
+      "index": 120,
+      "start": 339.76,
+      "end": 343.23,
+      "duration": 3.47,
+      "text": "be perpendicular to N."
+    },
+    {
+      "index": 121,
+      "start": 344.47,
+      "end": 344.48,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 122,
+      "start": 344.48,
+      "end": 346.79,
+      "duration": 2.31,
+      "text": "So,"
+    },
+    {
+      "index": 123,
+      "start": 346.8,
+      "end": 351.31,
+      "duration": 4.51,
+      "text": "P is in this new plane"
+    },
+    {
+      "index": 124,
+      "start": 359.07,
+      "end": 359.08,
+      "duration": 0.01,
+      "text": "is perpendicular to N."
+    },
+    {
+      "index": 125,
+      "start": 359.08,
+      "end": 361.27,
+      "duration": 2.19,
+      "text": "And now let's think for a second, what's"
+    },
+    {
+      "index": 126,
+      "start": 361.28,
+      "end": 363.11,
+      "duration": 1.83,
+      "text": "vector P0P?"
+    },
+    {
+      "index": 127,
+      "start": 363.12,
+      "end": 365.35,
+      "duration": 2.23,
+      "text": "Well, we take the coordinates of P and"
+    },
+    {
+      "index": 128,
+      "start": 365.36,
+      "end": 368.03,
+      "duration": 2.67,
+      "text": "we subtract those of P0."
+    },
+    {
+      "index": 129,
+      "start": 368.04,
+      "end": 371.11,
+      "duration": 3.07,
+      "text": "So that should be X - 2"
+    },
+    {
+      "index": 130,
+      "start": 371.12,
+      "end": 373.59,
+      "duration": 2.47,
+      "text": "Y - 1"
+    },
+    {
+      "index": 131,
+      "start": 373.6,
+      "end": 376.99,
+      "duration": 3.39,
+      "text": "and Z + 1"
+    },
+    {
+      "index": 132,
+      "start": 377.0,
+      "end": 380.03,
+      "duration": 3.03,
+      "text": "dot product with 1 5 10"
+    },
+    {
+      "index": 133,
+      "start": 380.04,
+      "end": 382.71,
+      "duration": 2.67,
+      "text": "= 0."
+    },
+    {
+      "index": 134,
+      "start": 382.72,
+      "end": 387.47,
+      "duration": 4.75,
+      "text": "Or let's expand this. Well, we get"
+    },
+    {
+      "index": 135,
+      "start": 389.31,
+      "end": 389.32,
+      "duration": 0.01,
+      "text": "X - 2"
+    },
+    {
+      "index": 136,
+      "start": 389.32,
+      "end": 393.07,
+      "duration": 3.75,
+      "text": "+ 5 * Y - 1"
+    },
+    {
+      "index": 137,
+      "start": 393.08,
+      "end": 396.95,
+      "duration": 3.87,
+      "text": "+ 10 * Z + 1"
+    },
+    {
+      "index": 138,
+      "start": 396.96,
+      "end": 398.67,
+      "duration": 1.71,
+      "text": "= 0."
+    },
+    {
+      "index": 139,
+      "start": 398.68,
+      "end": 401.07,
+      "duration": 2.39,
+      "text": "Or"
+    },
+    {
+      "index": 140,
+      "start": 401.08,
+      "end": 403.03,
+      "duration": 1.95,
+      "text": "let's put the constants on the other"
+    },
+    {
+      "index": 141,
+      "start": 403.04,
+      "end": 404.19,
+      "duration": 1.15,
+      "text": "side."
+    },
+    {
+      "index": 142,
+      "start": 404.2,
+      "end": 406.909,
+      "duration": 2.709,
+      "text": "We get X + 5Y"
+    },
+    {
+      "index": 143,
+      "start": 406.919,
+      "end": 408.63,
+      "duration": 1.711,
+      "text": "+ 10Z"
+    },
+    {
+      "index": 144,
+      "start": 408.64,
+      "end": 412.67,
+      "duration": 4.03,
+      "text": "= Well, here we have -2 becomes 2, -5"
+    },
+    {
+      "index": 145,
+      "start": 412.68,
+      "end": 414.11,
+      "duration": 1.43,
+      "text": "becomes 5."
+    },
+    {
+      "index": 146,
+      "start": 414.12,
+      "end": 417.39,
+      "duration": 3.27,
+      "text": "10 becomes -10. I think we end up with"
+    },
+    {
+      "index": 147,
+      "start": 417.4,
+      "end": 420.71,
+      "duration": 3.31,
+      "text": "-3."
+    },
+    {
+      "index": 148,
+      "start": 421.95,
+      "end": 421.96,
+      "duration": 0.01,
+      "text": "So"
+    },
+    {
+      "index": 149,
+      "start": 421.96,
+      "end": 423.35,
+      "duration": 1.39,
+      "text": "see, the only thing that changes between"
+    },
+    {
+      "index": 150,
+      "start": 423.36,
+      "end": 425.39,
+      "duration": 2.03,
+      "text": "these two equations is the constant term"
+    },
+    {
+      "index": 151,
+      "start": 425.4,
+      "end": 427.15,
+      "duration": 1.75,
+      "text": "on the right-hand side."
+    },
+    {
+      "index": 152,
+      "start": 427.16,
+      "end": 429.15,
+      "duration": 1.99,
+      "text": "The thing that I called D."
+    },
+    {
+      "index": 153,
+      "start": 429.16,
+      "end": 431.39,
+      "duration": 2.23,
+      "text": "And the other common feature is that the"
+    },
+    {
+      "index": 154,
+      "start": 431.4,
+      "end": 434.67,
+      "duration": 3.27,
+      "text": "coefficients of X, Y, and Z 1 5 and 10"
+    },
+    {
+      "index": 155,
+      "start": 434.68,
+      "end": 436.87,
+      "duration": 2.19,
+      "text": "correspond exactly to the normal vector."
+    },
+    {
+      "index": 156,
+      "start": 436.88,
+      "end": 437.909,
+      "duration": 1.029,
+      "text": "Okay, so that's something you should"
+    },
+    {
+      "index": 157,
+      "start": 437.919,
+      "end": 440.27,
+      "duration": 2.351,
+      "text": "remember about planes."
+    },
+    {
+      "index": 158,
+      "start": 440.28,
+      "end": 442.15,
+      "duration": 1.87,
+      "text": "These coefficients here"
+    },
+    {
+      "index": 159,
+      "start": 442.16,
+      "end": 444.67,
+      "duration": 2.51,
+      "text": "correspond exactly to a normal vector."
+    },
+    {
+      "index": 160,
+      "start": 444.68,
+      "end": 447.67,
+      "duration": 2.99,
+      "text": "And well, this constant term here"
+    },
+    {
+      "index": 161,
+      "start": 447.68,
+      "end": 451.43,
+      "duration": 3.75,
+      "text": "roughly measures how far, you know, when"
+    },
+    {
+      "index": 162,
+      "start": 451.44,
+      "end": 453.59,
+      "duration": 2.15,
+      "text": "you move from"
+    },
+    {
+      "index": 163,
+      "start": 453.6,
+      "end": 454.63,
+      "duration": 1.03,
+      "text": "So if you have a plane through the"
+    },
+    {
+      "index": 164,
+      "start": 454.64,
+      "end": 456.19,
+      "duration": 1.55,
+      "text": "origin, the right-hand side will be"
+    },
+    {
+      "index": 165,
+      "start": 456.2,
+      "end": 458.23,
+      "duration": 2.03,
+      "text": "zero. And if you move to a parallel"
+    },
+    {
+      "index": 166,
+      "start": 458.24,
+      "end": 459.99,
+      "duration": 1.75,
+      "text": "plane, then this number will become"
+    },
+    {
+      "index": 167,
+      "start": 460.0,
+      "end": 462.23,
+      "duration": 2.23,
+      "text": "something else."
+    },
+    {
+      "index": 168,
+      "start": 462.24,
+      "end": 463.99,
+      "duration": 1.75,
+      "text": "So how actually could we have found that"
+    },
+    {
+      "index": 169,
+      "start": 464.0,
+      "end": 466.19,
+      "duration": 2.19,
+      "text": "minus three more quickly?"
+    },
+    {
+      "index": 170,
+      "start": 466.2,
+      "end": 467.95,
+      "duration": 1.75,
+      "text": "Well, we know that the first part of the"
+    },
+    {
+      "index": 171,
+      "start": 467.96,
+      "end": 470.43,
+      "duration": 2.47,
+      "text": "equation is like this."
+    },
+    {
+      "index": 172,
+      "start": 470.44,
+      "end": 472.03,
+      "duration": 1.59,
+      "text": "Okay? And we know something else. We"
+    },
+    {
+      "index": 173,
+      "start": 472.04,
+      "end": 476.19,
+      "duration": 4.15,
+      "text": "know that the point P0 is in the plane."
+    },
+    {
+      "index": 174,
+      "start": 476.2,
+      "end": 479.83,
+      "duration": 3.63,
+      "text": "So, if we plug the coordinates of P0"
+    },
+    {
+      "index": 175,
+      "start": 479.84,
+      "end": 484.19,
+      "duration": 4.35,
+      "text": "into this, well, X is 2 + 5 * 1"
+    },
+    {
+      "index": 176,
+      "start": 484.2,
+      "end": 486.23,
+      "duration": 2.03,
+      "text": "+ 10 * -1"
+    },
+    {
+      "index": 177,
+      "start": 486.24,
+      "end": 488.23,
+      "duration": 1.99,
+      "text": "we get minus three."
+    },
+    {
+      "index": 178,
+      "start": 488.24,
+      "end": 489.55,
+      "duration": 1.31,
+      "text": "So, in fact, the number we should have"
+    },
+    {
+      "index": 179,
+      "start": 489.56,
+      "end": 492.75,
+      "duration": 3.19,
+      "text": "here should be minus three so that P0 is"
+    },
+    {
+      "index": 180,
+      "start": 492.76,
+      "end": 495.47,
+      "duration": 2.71,
+      "text": "a solution."
+    },
+    {
+      "index": 181,
+      "start": 497.59,
+      "end": 497.6,
+      "duration": 0.01,
+      "text": "Okay? So,"
+    },
+    {
+      "index": 182,
+      "start": 497.6,
+      "end": 499.55,
+      "duration": 1.95,
+      "text": "let me point out. So, maybe"
+    },
+    {
+      "index": 183,
+      "start": 499.56,
+      "end": 502.39,
+      "duration": 2.83,
+      "text": "I'll put a one here again."
+    },
+    {
+      "index": 184,
+      "start": 502.4,
+      "end": 504.03,
+      "duration": 1.63,
+      "text": "So,"
+    },
+    {
+      "index": 185,
+      "start": 504.04,
+      "end": 507.63,
+      "duration": 3.59,
+      "text": "these three numbers, 1 5 10, are exactly"
+    },
+    {
+      "index": 186,
+      "start": 507.64,
+      "end": 513.35,
+      "duration": 5.71,
+      "text": "the normal vector."
+    },
+    {
+      "index": 187,
+      "start": 514.79,
+      "end": 514.8,
+      "duration": 0.01,
+      "text": "And"
+    },
+    {
+      "index": 188,
+      "start": 514.8,
+      "end": 517.43,
+      "duration": 2.63,
+      "text": "one way that we can get this number here"
+    },
+    {
+      "index": 189,
+      "start": 517.44,
+      "end": 520.469,
+      "duration": 3.029,
+      "text": "is by computing the value of"
+    },
+    {
+      "index": 190,
+      "start": 520.479,
+      "end": 526.71,
+      "duration": 6.231,
+      "text": "the left-hand side."
+    },
+    {
+      "index": 191,
+      "start": 529.87,
+      "end": 529.88,
+      "duration": 0.01,
+      "text": "At the point P0, we plug in the point P0"
+    },
+    {
+      "index": 192,
+      "start": 529.88,
+      "end": 533.15,
+      "duration": 3.27,
+      "text": "into the left-hand side."
+    },
+    {
+      "index": 193,
+      "start": 534.829,
+      "end": 534.839,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 194,
+      "start": 534.839,
+      "end": 543.91,
+      "duration": 9.071,
+      "text": "Any questions about that?"
+    },
+    {
+      "index": 195,
+      "start": 545.31,
+      "end": 545.32,
+      "duration": 0.01,
+      "text": "Nope."
+    },
+    {
+      "index": 196,
+      "start": 545.32,
+      "end": 546.95,
+      "duration": 1.63,
+      "text": "Okay."
+    },
+    {
+      "index": 197,
+      "start": 546.96,
+      "end": 549.43,
+      "duration": 2.47,
+      "text": "By the way, I mean, of course, a plane"
+    },
+    {
+      "index": 198,
+      "start": 549.44,
+      "end": 550.99,
+      "duration": 1.55,
+      "text": "doesn't have just one equation. It has"
+    },
+    {
+      "index": 199,
+      "start": 551.0,
+      "end": 553.11,
+      "duration": 2.11,
+      "text": "infinitely many equations because if I"
+    },
+    {
+      "index": 200,
+      "start": 553.12,
+      "end": 554.71,
+      "duration": 1.59,
+      "text": "take instead, say,"
+    },
+    {
+      "index": 201,
+      "start": 554.72,
+      "end": 556.87,
+      "duration": 2.15,
+      "text": "if I multiply everything by two,"
+    },
+    {
+      "index": 202,
+      "start": 556.88,
+      "end": 561.15,
+      "duration": 4.27,
+      "text": "2x + 10y + 20z = -6 is also an equation"
+    },
+    {
+      "index": 203,
+      "start": 561.16,
+      "end": 562.35,
+      "duration": 1.19,
+      "text": "for this plane."
+    },
+    {
+      "index": 204,
+      "start": 562.36,
+      "end": 563.19,
+      "duration": 0.83,
+      "text": "Okay?"
+    },
+    {
+      "index": 205,
+      "start": 563.2,
+      "end": 565.15,
+      "duration": 1.95,
+      "text": "That's because, of course, we have"
+    },
+    {
+      "index": 206,
+      "start": 565.16,
+      "end": 567.63,
+      "duration": 2.47,
+      "text": "normal vectors of all sizes."
+    },
+    {
+      "index": 207,
+      "start": 567.64,
+      "end": 573.47,
+      "duration": 5.83,
+      "text": "We can choose how big we make it."
+    },
+    {
+      "index": 208,
+      "start": 578.43,
+      "end": 578.44,
+      "duration": 0.01,
+      "text": "again, just to"
+    },
+    {
+      "index": 209,
+      "start": 578.44,
+      "end": 580.79,
+      "duration": 2.35,
+      "text": "repeat the single most important thing"
+    },
+    {
+      "index": 210,
+      "start": 580.8,
+      "end": 581.99,
+      "duration": 1.19,
+      "text": "here"
+    },
+    {
+      "index": 211,
+      "start": 582.0,
+      "end": 585.63,
+      "duration": 3.63,
+      "text": "in the equation"
+    },
+    {
+      "index": 212,
+      "start": 587.23,
+      "end": 587.24,
+      "duration": 0.01,
+      "text": "ax"
+    },
+    {
+      "index": 213,
+      "start": 587.24,
+      "end": 590.71,
+      "duration": 3.47,
+      "text": "+ by + cz = d"
+    },
+    {
+      "index": 214,
+      "start": 590.72,
+      "end": 593.91,
+      "duration": 3.19,
+      "text": "the coefficients abc"
+    },
+    {
+      "index": 215,
+      "start": 593.92,
+      "end": 597.91,
+      "duration": 3.99,
+      "text": "give us actually a normal vector"
+    },
+    {
+      "index": 216,
+      "start": 597.92,
+      "end": 601.59,
+      "duration": 3.67,
+      "text": "to the plane."
+    },
+    {
+      "index": 217,
+      "start": 604.99,
+      "end": 605.0,
+      "duration": 0.01,
+      "text": "So, that's why in fact"
+    },
+    {
+      "index": 218,
+      "start": 605.0,
+      "end": 606.75,
+      "duration": 1.75,
+      "text": "what matters to us mostly is finding the"
+    },
+    {
+      "index": 219,
+      "start": 606.76,
+      "end": 608.63,
+      "duration": 1.87,
+      "text": "normal vector. And in particular, if you"
+    },
+    {
+      "index": 220,
+      "start": 608.64,
+      "end": 610.79,
+      "duration": 2.15,
+      "text": "remember last time I explained something"
+    },
+    {
+      "index": 221,
+      "start": 610.8,
+      "end": 612.75,
+      "duration": 1.95,
+      "text": "about how we can find normal vector to"
+    },
+    {
+      "index": 222,
+      "start": 612.76,
+      "end": 614.27,
+      "duration": 1.51,
+      "text": "the plane if we know points in the"
+    },
+    {
+      "index": 223,
+      "start": 614.28,
+      "end": 615.43,
+      "duration": 1.15,
+      "text": "plane."
+    },
+    {
+      "index": 224,
+      "start": 615.44,
+      "end": 617.83,
+      "duration": 2.39,
+      "text": "Namely, we can take the cross product of"
+    },
+    {
+      "index": 225,
+      "start": 617.84,
+      "end": 645.71,
+      "duration": 27.87,
+      "text": "two vectors contained in the plane."
+    },
+    {
+      "index": 226,
+      "start": 646.59,
+      "end": 646.6,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 227,
+      "start": 646.6,
+      "end": 647.99,
+      "duration": 1.39,
+      "text": "So,"
+    },
+    {
+      "index": 228,
+      "start": 648.0,
+      "end": 651.79,
+      "duration": 3.79,
+      "text": "let's just do an example to see"
+    },
+    {
+      "index": 229,
+      "start": 653.47,
+      "end": 653.48,
+      "duration": 0.01,
+      "text": "if we completely understand what's going"
+    },
+    {
+      "index": 230,
+      "start": 653.48,
+      "end": 655.39,
+      "duration": 1.91,
+      "text": "on."
+    },
+    {
+      "index": 231,
+      "start": 655.4,
+      "end": 657.99,
+      "duration": 2.59,
+      "text": "So,"
+    },
+    {
+      "index": 232,
+      "start": 659.99,
+      "end": 660.0,
+      "duration": 0.01,
+      "text": "let's say that I give you the vector"
+    },
+    {
+      "index": 233,
+      "start": 660.0,
+      "end": 663.27,
+      "duration": 3.27,
+      "text": "with components 1 2 -1"
+    },
+    {
+      "index": 234,
+      "start": 663.28,
+      "end": 667.63,
+      "duration": 4.35,
+      "text": "and I give you the plane x + y + 3z = 5."
+    },
+    {
+      "index": 235,
+      "start": 667.64,
+      "end": 669.55,
+      "duration": 1.91,
+      "text": "So, do you think this"
+    },
+    {
+      "index": 236,
+      "start": 669.56,
+      "end": 670.75,
+      "duration": 1.19,
+      "text": "Do you think that this vector is"
+    },
+    {
+      "index": 237,
+      "start": 670.76,
+      "end": 673.03,
+      "duration": 2.27,
+      "text": "parallel to the plane, perpendicular to"
+    },
+    {
+      "index": 238,
+      "start": 673.04,
+      "end": 674.55,
+      "duration": 1.51,
+      "text": "it,"
+    },
+    {
+      "index": 239,
+      "start": 674.56,
+      "end": 684.35,
+      "duration": 9.79,
+      "text": "neither?"
+    },
+    {
+      "index": 240,
+      "start": 700.59,
+      "end": 700.6,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 241,
+      "start": 700.6,
+      "end": 702.79,
+      "duration": 2.19,
+      "text": "So,"
+    },
+    {
+      "index": 242,
+      "start": 702.8,
+      "end": 705.47,
+      "duration": 2.67,
+      "text": "I see that most of you are answering"
+    },
+    {
+      "index": 243,
+      "start": 705.48,
+      "end": 708.11,
+      "duration": 2.63,
+      "text": "number two, this vector is perpendicular"
+    },
+    {
+      "index": 244,
+      "start": 708.12,
+      "end": 709.63,
+      "duration": 1.51,
+      "text": "to the plane."
+    },
+    {
+      "index": 245,
+      "start": 709.64,
+      "end": 711.71,
+      "duration": 2.07,
+      "text": "Uh there are some other answers, too."
+    },
+    {
+      "index": 246,
+      "start": 711.72,
+      "end": 713.87,
+      "duration": 2.15,
+      "text": "Well, let's try to figure it out."
+    },
+    {
+      "index": 247,
+      "start": 713.88,
+      "end": 715.11,
+      "duration": 1.23,
+      "text": "Okay?"
+    },
+    {
+      "index": 248,
+      "start": 715.12,
+      "end": 720.79,
+      "duration": 5.67,
+      "text": "So,"
+    },
+    {
+      "index": 249,
+      "start": 722.55,
+      "end": 722.56,
+      "duration": 0.01,
+      "text": "let's do the example."
+    },
+    {
+      "index": 250,
+      "start": 722.56,
+      "end": 725.83,
+      "duration": 3.27,
+      "text": "Say V is 1 2 -1"
+    },
+    {
+      "index": 251,
+      "start": 725.84,
+      "end": 728.15,
+      "duration": 2.31,
+      "text": "and the plane"
+    },
+    {
+      "index": 252,
+      "start": 728.16,
+      "end": 730.67,
+      "duration": 2.51,
+      "text": "is x + y"
+    },
+    {
+      "index": 253,
+      "start": 730.68,
+      "end": 734.23,
+      "duration": 3.55,
+      "text": "+ 3z = 5. So, let's just draw, you know,"
+    },
+    {
+      "index": 254,
+      "start": 734.24,
+      "end": 735.59,
+      "duration": 1.35,
+      "text": "that plane"
+    },
+    {
+      "index": 255,
+      "start": 735.6,
+      "end": 737.79,
+      "duration": 2.19,
+      "text": "anywhere. It doesn't really matter."
+    },
+    {
+      "index": 256,
+      "start": 737.8,
+      "end": 739.87,
+      "duration": 2.07,
+      "text": "Let's first get a normal vector out of"
+    },
+    {
+      "index": 257,
+      "start": 739.88,
+      "end": 740.99,
+      "duration": 1.11,
+      "text": "it."
+    },
+    {
+      "index": 258,
+      "start": 741.0,
+      "end": 742.23,
+      "duration": 1.23,
+      "text": "Well,"
+    },
+    {
+      "index": 259,
+      "start": 742.24,
+      "end": 746.43,
+      "duration": 4.19,
+      "text": "to get a normal vector"
+    },
+    {
+      "index": 260,
+      "start": 748.79,
+      "end": 748.8,
+      "duration": 0.01,
+      "text": "to the plane,"
+    },
+    {
+      "index": 261,
+      "start": 748.8,
+      "end": 750.99,
+      "duration": 2.19,
+      "text": "what I will do is I will take"
+    },
+    {
+      "index": 262,
+      "start": 751.0,
+      "end": 752.99,
+      "duration": 1.99,
+      "text": "the coefficients of x, y, and z. So,"
+    },
+    {
+      "index": 263,
+      "start": 753.0,
+      "end": 755.19,
+      "duration": 2.19,
+      "text": "that's 1 1 3."
+    },
+    {
+      "index": 264,
+      "start": 755.2,
+      "end": 757.67,
+      "duration": 2.47,
+      "text": "Okay? So, 1 1 3 is perpendicular to the"
+    },
+    {
+      "index": 265,
+      "start": 757.68,
+      "end": 758.75,
+      "duration": 1.07,
+      "text": "plane."
+    },
+    {
+      "index": 266,
+      "start": 758.76,
+      "end": 760.43,
+      "duration": 1.67,
+      "text": "How do we get all the other vectors that"
+    },
+    {
+      "index": 267,
+      "start": 760.44,
+      "end": 761.71,
+      "duration": 1.27,
+      "text": "perpendicular to the plane, that are"
+    },
+    {
+      "index": 268,
+      "start": 761.72,
+      "end": 763.79,
+      "duration": 2.07,
+      "text": "perpendicular to the plane?"
+    },
+    {
+      "index": 269,
+      "start": 763.8,
+      "end": 765.95,
+      "duration": 2.15,
+      "text": "Well, all the perpendicular vectors are"
+    },
+    {
+      "index": 270,
+      "start": 765.96,
+      "end": 767.79,
+      "duration": 1.83,
+      "text": "parallel to each other."
+    },
+    {
+      "index": 271,
+      "start": 767.8,
+      "end": 769.71,
+      "duration": 1.91,
+      "text": "Okay? So, that means"
+    },
+    {
+      "index": 272,
+      "start": 769.72,
+      "end": 771.79,
+      "duration": 2.07,
+      "text": "that they're just obtained by maybe"
+    },
+    {
+      "index": 273,
+      "start": 771.8,
+      "end": 774.39,
+      "duration": 2.59,
+      "text": "multiplying this guy by some number."
+    },
+    {
+      "index": 274,
+      "start": 774.4,
+      "end": 777.79,
+      "duration": 3.39,
+      "text": "Okay? 2 2 6, for example, would still be"
+    },
+    {
+      "index": 275,
+      "start": 777.8,
+      "end": 780.91,
+      "duration": 3.11,
+      "text": "perpendicular to the plane. Uh 1/2 1/2"
+    },
+    {
+      "index": 276,
+      "start": 780.92,
+      "end": 784.59,
+      "duration": 3.67,
+      "text": "3/2 is also perpendicular to the plane."
+    },
+    {
+      "index": 277,
+      "start": 784.6,
+      "end": 785.87,
+      "duration": 1.27,
+      "text": "But now, see, these guys are not"
+    },
+    {
+      "index": 278,
+      "start": 785.88,
+      "end": 789.59,
+      "duration": 3.71,
+      "text": "proportional to each other. So, V is not"
+    },
+    {
+      "index": 279,
+      "start": 789.6,
+      "end": 800.71,
+      "duration": 11.11,
+      "text": "perpendicular to the plane."
+    },
+    {
+      "index": 280,
+      "start": 812.51,
+      "end": 812.52,
+      "duration": 0.01,
+      "text": "Being perpendicular to the plane is the"
+    },
+    {
+      "index": 281,
+      "start": 812.52,
+      "end": 814.39,
+      "duration": 1.87,
+      "text": "same as being parallel to its normal"
+    },
+    {
+      "index": 282,
+      "start": 814.4,
+      "end": 817.19,
+      "duration": 2.79,
+      "text": "vector."
+    },
+    {
+      "index": 283,
+      "start": 820.03,
+      "end": 820.04,
+      "duration": 0.01,
+      "text": "Now, what about testing if V is instead"
+    },
+    {
+      "index": 284,
+      "start": 820.04,
+      "end": 821.99,
+      "duration": 1.95,
+      "text": "parallel to the plane? Well, it's"
+    },
+    {
+      "index": 285,
+      "start": 822.0,
+      "end": 823.39,
+      "duration": 1.39,
+      "text": "parallel to the plane if it's"
+    },
+    {
+      "index": 286,
+      "start": 823.4,
+      "end": 825.43,
+      "duration": 2.03,
+      "text": "perpendicular to N."
+    },
+    {
+      "index": 287,
+      "start": 825.44,
+      "end": 836.27,
+      "duration": 10.83,
+      "text": "Well, let's check that."
+    },
+    {
+      "index": 288,
+      "start": 838.87,
+      "end": 838.88,
+      "duration": 0.01,
+      "text": "So, let's try to see if it's"
+    },
+    {
+      "index": 289,
+      "start": 838.88,
+      "end": 841.27,
+      "duration": 2.39,
+      "text": "perpendicular"
+    },
+    {
+      "index": 290,
+      "start": 841.28,
+      "end": 843.63,
+      "duration": 2.35,
+      "text": "to N."
+    },
+    {
+      "index": 291,
+      "start": 843.64,
+      "end": 845.35,
+      "duration": 1.71,
+      "text": "Well, let's do"
+    },
+    {
+      "index": 292,
+      "start": 845.36,
+      "end": 849.15,
+      "duration": 3.79,
+      "text": "V dot N."
+    },
+    {
+      "index": 293,
+      "start": 850.23,
+      "end": 850.24,
+      "duration": 0.01,
+      "text": "That's"
+    },
+    {
+      "index": 294,
+      "start": 850.24,
+      "end": 855.07,
+      "duration": 4.83,
+      "text": "1 2 -1 dot 1 1 3."
+    },
+    {
+      "index": 295,
+      "start": 855.08,
+      "end": 860.47,
+      "duration": 5.39,
+      "text": "You get 1 + 2 - 3."
+    },
+    {
+      "index": 296,
+      "start": 868.95,
+      "end": 868.96,
+      "duration": 0.01,
+      "text": "So, if it's perpendicular to N,"
+    },
+    {
+      "index": 297,
+      "start": 868.96,
+      "end": 872.39,
+      "duration": 3.43,
+      "text": "means"
+    },
+    {
+      "index": 298,
+      "start": 880.35,
+      "end": 880.36,
+      "duration": 0.01,
+      "text": "somewhere like that."
+    },
+    {
+      "index": 299,
+      "start": 880.36,
+      "end": 882.39,
+      "duration": 2.03,
+      "text": "It's actually going to be parallel to"
+    },
+    {
+      "index": 300,
+      "start": 882.4,
+      "end": 895.67,
+      "duration": 13.27,
+      "text": "the plane."
+    },
+    {
+      "index": 301,
+      "start": 896.91,
+      "end": 896.92,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 302,
+      "start": 896.92,
+      "end": 898.95,
+      "duration": 2.03,
+      "text": "Any questions? Yes."
+    },
+    {
+      "index": 303,
+      "start": 898.96,
+      "end": 901.11,
+      "duration": 2.15,
+      "text": "When you plug in the"
+    },
+    {
+      "index": 304,
+      "start": 901.12,
+      "end": 904.03,
+      "duration": 2.91,
+      "text": "uh the vector into the plane equation,"
+    },
+    {
+      "index": 305,
+      "start": 904.04,
+      "end": 906.51,
+      "duration": 2.47,
+      "text": "you get zero. What is that"
+    },
+    {
+      "index": 306,
+      "start": 906.52,
+      "end": 907.35,
+      "duration": 0.83,
+      "text": "What's the significance?"
+    },
+    {
+      "index": 307,
+      "start": 907.36,
+      "end": 910.87,
+      "duration": 3.51,
+      "text": "Ah, when you plug"
+    },
+    {
+      "index": 308,
+      "start": 910.88,
+      "end": 913.07,
+      "duration": 2.19,
+      "text": "Mm, let's see."
+    },
+    {
+      "index": 309,
+      "start": 913.08,
+      "end": 914.79,
+      "duration": 1.71,
+      "text": "So, if I plug the vector into the plane"
+    },
+    {
+      "index": 310,
+      "start": 914.8,
+      "end": 916.35,
+      "duration": 1.55,
+      "text": "equation,"
+    },
+    {
+      "index": 311,
+      "start": 916.36,
+      "end": 918.47,
+      "duration": 2.11,
+      "text": "so, X"
+    },
+    {
+      "index": 312,
+      "start": 918.48,
+      "end": 922.63,
+      "duration": 4.15,
+      "text": "1 + 2 - 3, well, the left-hand side"
+    },
+    {
+      "index": 313,
+      "start": 922.64,
+      "end": 924.11,
+      "duration": 1.47,
+      "text": "becomes zero."
+    },
+    {
+      "index": 314,
+      "start": 924.12,
+      "end": 925.71,
+      "duration": 1.59,
+      "text": "So, it's not a solution of a plane"
+    },
+    {
+      "index": 315,
+      "start": 925.72,
+      "end": 927.87,
+      "duration": 2.15,
+      "text": "equation. Okay? So,"
+    },
+    {
+      "index": 316,
+      "start": 927.88,
+      "end": 932.27,
+      "duration": 4.39,
+      "text": "I should say"
+    },
+    {
+      "index": 317,
+      "start": 933.47,
+      "end": 933.48,
+      "duration": 0.01,
+      "text": "Okay, so there's two different things"
+    },
+    {
+      "index": 318,
+      "start": 933.48,
+      "end": 934.47,
+      "duration": 0.99,
+      "text": "here."
+    },
+    {
+      "index": 319,
+      "start": 934.48,
+      "end": 936.23,
+      "duration": 1.75,
+      "text": "One is"
+    },
+    {
+      "index": 320,
+      "start": 936.24,
+      "end": 940.31,
+      "duration": 4.07,
+      "text": "the point with coordinates 1 2 - 1 is"
+    },
+    {
+      "index": 321,
+      "start": 940.32,
+      "end": 941.47,
+      "duration": 1.15,
+      "text": "not"
+    },
+    {
+      "index": 322,
+      "start": 941.48,
+      "end": 943.47,
+      "duration": 1.99,
+      "text": "in the plane."
+    },
+    {
+      "index": 323,
+      "start": 943.48,
+      "end": 946.39,
+      "duration": 2.91,
+      "text": "Okay, so what that tells us"
+    },
+    {
+      "index": 324,
+      "start": 946.4,
+      "end": 948.35,
+      "duration": 1.95,
+      "text": "is that"
+    },
+    {
+      "index": 325,
+      "start": 948.36,
+      "end": 954.39,
+      "duration": 6.03,
+      "text": "if I put my vector V at the origin,"
+    },
+    {
+      "index": 326,
+      "start": 955.07,
+      "end": 955.08,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 327,
+      "start": 955.08,
+      "end": 957.11,
+      "duration": 2.03,
+      "text": "Then the point here"
+    },
+    {
+      "index": 328,
+      "start": 957.12,
+      "end": 961.47,
+      "duration": 4.35,
+      "text": "is not going to be in the plane."
+    },
+    {
+      "index": 329,
+      "start": 963.63,
+      "end": 963.64,
+      "duration": 0.01,
+      "text": "On the other hand, you're right, the"
+    },
+    {
+      "index": 330,
+      "start": 963.64,
+      "end": 965.95,
+      "duration": 2.31,
+      "text": "left-hand side evaluates to zero. What"
+    },
+    {
+      "index": 331,
+      "start": 965.96,
+      "end": 967.87,
+      "duration": 1.91,
+      "text": "that means is if instead I had taken the"
+    },
+    {
+      "index": 332,
+      "start": 967.88,
+      "end": 970.95,
+      "duration": 3.07,
+      "text": "plane x + y + 3z = 0, then it would be"
+    },
+    {
+      "index": 333,
+      "start": 970.96,
+      "end": 972.11,
+      "duration": 1.15,
+      "text": "inside"
+    },
+    {
+      "index": 334,
+      "start": 972.12,
+      "end": 973.39,
+      "duration": 1.27,
+      "text": "and the plane"
+    },
+    {
+      "index": 335,
+      "start": 973.4,
+      "end": 978.75,
+      "duration": 5.35,
+      "text": "x + y, so this one is x + y + 3z = 5,"
+    },
+    {
+      "index": 336,
+      "start": 978.76,
+      "end": 982.43,
+      "duration": 3.67,
+      "text": "x + y + 3z = 0 would be a plane parallel"
+    },
+    {
+      "index": 337,
+      "start": 982.44,
+      "end": 987.59,
+      "duration": 5.15,
+      "text": "to it but through the origin."
+    },
+    {
+      "index": 338,
+      "start": 989.35,
+      "end": 989.36,
+      "duration": 0.01,
+      "text": "So, that would be another way to see"
+    },
+    {
+      "index": 339,
+      "start": 989.36,
+      "end": 990.67,
+      "duration": 1.31,
+      "text": "that the vector is parallel to the"
+    },
+    {
+      "index": 340,
+      "start": 990.68,
+      "end": 992.63,
+      "duration": 1.95,
+      "text": "plane. If we move the plane to a"
+    },
+    {
+      "index": 341,
+      "start": 992.64,
+      "end": 994.91,
+      "duration": 2.27,
+      "text": "parallel plane through the origin, then"
+    },
+    {
+      "index": 342,
+      "start": 994.92,
+      "end": 996.95,
+      "duration": 2.03,
+      "text": "the end point of the vector is in the"
+    },
+    {
+      "index": 343,
+      "start": 996.96,
+      "end": 998.99,
+      "duration": 2.03,
+      "text": "plane."
+    },
+    {
+      "index": 344,
+      "start": 999.0,
+      "end": 1000.23,
+      "duration": 1.23,
+      "text": "Okay, that's another way to convince"
+    },
+    {
+      "index": 345,
+      "start": 1000.24,
+      "end": 1005.79,
+      "duration": 5.55,
+      "text": "yourselves."
+    },
+    {
+      "index": 346,
+      "start": 1007.27,
+      "end": 1007.28,
+      "duration": 0.01,
+      "text": "Um"
+    },
+    {
+      "index": 347,
+      "start": 1007.28,
+      "end": 1016.39,
+      "duration": 9.11,
+      "text": "any other questions?"
+    },
+    {
+      "index": 348,
+      "start": 1018.87,
+      "end": 1018.88,
+      "duration": 0.01,
+      "text": "Okay, so"
+    },
+    {
+      "index": 349,
+      "start": 1018.88,
+      "end": 1020.829,
+      "duration": 1.949,
+      "text": "let's move on."
+    },
+    {
+      "index": 350,
+      "start": 1020.839,
+      "end": 1022.07,
+      "duration": 1.231,
+      "text": "So,"
+    },
+    {
+      "index": 351,
+      "start": 1022.08,
+      "end": 1024.11,
+      "duration": 2.03,
+      "text": "last time we saw about matrices, we"
+    },
+    {
+      "index": 352,
+      "start": 1024.12,
+      "end": 1025.55,
+      "duration": 1.43,
+      "text": "learned about matrices and linear"
+    },
+    {
+      "index": 353,
+      "start": 1025.56,
+      "end": 1027.59,
+      "duration": 2.03,
+      "text": "systems. So, let's try to think now"
+    },
+    {
+      "index": 354,
+      "start": 1027.6,
+      "end": 1029.949,
+      "duration": 2.349,
+      "text": "about linear systems in terms of"
+    },
+    {
+      "index": 355,
+      "start": 1029.959,
+      "end": 1031.91,
+      "duration": 1.951,
+      "text": "equations of planes and intersections of"
+    },
+    {
+      "index": 356,
+      "start": 1031.92,
+      "end": 1033.15,
+      "duration": 1.23,
+      "text": "planes."
+    },
+    {
+      "index": 357,
+      "start": 1033.16,
+      "end": 1035.03,
+      "duration": 1.87,
+      "text": "I mean, remember a linear system, it's a"
+    },
+    {
+      "index": 358,
+      "start": 1035.04,
+      "end": 1037.67,
+      "duration": 2.63,
+      "text": "bunch of equations. Let's say a 3x3"
+    },
+    {
+      "index": 359,
+      "start": 1037.68,
+      "end": 1039.75,
+      "duration": 2.07,
+      "text": "linear system, it's three different"
+    },
+    {
+      "index": 360,
+      "start": 1039.76,
+      "end": 1042.27,
+      "duration": 2.51,
+      "text": "equations. Each of the equation is the"
+    },
+    {
+      "index": 361,
+      "start": 1042.28,
+      "end": 1044.23,
+      "duration": 1.95,
+      "text": "equation of a plane."
+    },
+    {
+      "index": 362,
+      "start": 1044.24,
+      "end": 1047.27,
+      "duration": 3.03,
+      "text": "So, in fact, if we try to solve"
+    },
+    {
+      "index": 363,
+      "start": 1047.28,
+      "end": 1048.87,
+      "duration": 1.59,
+      "text": "a system of equations, that means"
+    },
+    {
+      "index": 364,
+      "start": 1048.88,
+      "end": 1050.31,
+      "duration": 1.43,
+      "text": "actually we're trying to find a point"
+    },
+    {
+      "index": 365,
+      "start": 1050.32,
+      "end": 1051.91,
+      "duration": 1.59,
+      "text": "that is on several planes at the same"
+    },
+    {
+      "index": 366,
+      "start": 1051.92,
+      "end": 1054.59,
+      "duration": 2.67,
+      "text": "time."
+    },
+    {
+      "index": 367,
+      "start": 1056.35,
+      "end": 1056.36,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 368,
+      "start": 1056.36,
+      "end": 1057.23,
+      "duration": 0.87,
+      "text": "Oh."
+    },
+    {
+      "index": 369,
+      "start": 1057.24,
+      "end": 1065.71,
+      "duration": 8.47,
+      "text": "One more board here."
+    },
+    {
+      "index": 370,
+      "start": 1067.47,
+      "end": 1067.48,
+      "duration": 0.01,
+      "text": "So, let's say that we have"
+    },
+    {
+      "index": 371,
+      "start": 1067.48,
+      "end": 1072.39,
+      "duration": 4.91,
+      "text": "a 3x3 linear system."
+    },
+    {
+      "index": 372,
+      "start": 1080.19,
+      "end": 1080.2,
+      "duration": 0.01,
+      "text": "it doesn't really matter what I give"
+    },
+    {
+      "index": 373,
+      "start": 1080.2,
+      "end": 1082.91,
+      "duration": 2.71,
+      "text": "you, but let's say I give you"
+    },
+    {
+      "index": 374,
+      "start": 1082.92,
+      "end": 1085.07,
+      "duration": 2.15,
+      "text": "x +"
+    },
+    {
+      "index": 375,
+      "start": 1085.08,
+      "end": 1087.19,
+      "duration": 2.11,
+      "text": "z = 1,"
+    },
+    {
+      "index": 376,
+      "start": 1087.2,
+      "end": 1090.75,
+      "duration": 3.55,
+      "text": "x + y = 2,"
+    },
+    {
+      "index": 377,
+      "start": 1090.76,
+      "end": 1092.87,
+      "duration": 2.11,
+      "text": "x + 2y"
+    },
+    {
+      "index": 378,
+      "start": 1092.88,
+      "end": 1094.83,
+      "duration": 1.95,
+      "text": "+ 3z"
+    },
+    {
+      "index": 379,
+      "start": 1094.84,
+      "end": 1097.43,
+      "duration": 2.59,
+      "text": "= 3."
+    },
+    {
+      "index": 380,
+      "start": 1097.44,
+      "end": 1099.07,
+      "duration": 1.63,
+      "text": "Well, what does it What What does this"
+    },
+    {
+      "index": 381,
+      "start": 1099.08,
+      "end": 1101.55,
+      "duration": 2.47,
+      "text": "mean? What does it mean to solve this?"
+    },
+    {
+      "index": 382,
+      "start": 1101.56,
+      "end": 1104.35,
+      "duration": 2.79,
+      "text": "It means we want to find x y z"
+    },
+    {
+      "index": 383,
+      "start": 1104.36,
+      "end": 1107.83,
+      "duration": 3.47,
+      "text": "which satisfy all of these conditions."
+    },
+    {
+      "index": 384,
+      "start": 1107.84,
+      "end": 1110.15,
+      "duration": 2.31,
+      "text": "So, let's just look at the first"
+    },
+    {
+      "index": 385,
+      "start": 1110.16,
+      "end": 1111.95,
+      "duration": 1.79,
+      "text": "equation first. Well, the first equation"
+    },
+    {
+      "index": 386,
+      "start": 1111.96,
+      "end": 1114.71,
+      "duration": 2.75,
+      "text": "says our point should be on the plane"
+    },
+    {
+      "index": 387,
+      "start": 1114.72,
+      "end": 1117.15,
+      "duration": 2.43,
+      "text": "which has this equation."
+    },
+    {
+      "index": 388,
+      "start": 1117.16,
+      "end": 1118.91,
+      "duration": 1.75,
+      "text": "Then the second equation says, \"Oh, our"
+    },
+    {
+      "index": 389,
+      "start": 1118.92,
+      "end": 1122.15,
+      "duration": 3.23,
+      "text": "point should also be on this plane.\""
+    },
+    {
+      "index": 390,
+      "start": 1122.16,
+      "end": 1123.51,
+      "duration": 1.35,
+      "text": "Okay?"
+    },
+    {
+      "index": 391,
+      "start": 1123.52,
+      "end": 1125.19,
+      "duration": 1.67,
+      "text": "So, in fact, if you just look at the"
+    },
+    {
+      "index": 392,
+      "start": 1125.2,
+      "end": 1127.03,
+      "duration": 1.83,
+      "text": "first two equations,"
+    },
+    {
+      "index": 393,
+      "start": 1127.04,
+      "end": 1130.35,
+      "duration": 3.31,
+      "text": "that means you have two planes,"
+    },
+    {
+      "index": 394,
+      "start": 1130.36,
+      "end": 1136.19,
+      "duration": 5.83,
+      "text": "and"
+    },
+    {
+      "index": 395,
+      "start": 1137.75,
+      "end": 1137.76,
+      "duration": 0.01,
+      "text": "the"
+    },
+    {
+      "index": 396,
+      "start": 1137.76,
+      "end": 1142.47,
+      "duration": 4.71,
+      "text": "solutions"
+    },
+    {
+      "index": 397,
+      "start": 1151.15,
+      "end": 1151.16,
+      "duration": 0.01,
+      "text": "determine for you two planes,"
+    },
+    {
+      "index": 398,
+      "start": 1151.16,
+      "end": 1154.35,
+      "duration": 3.19,
+      "text": "and two planes intersect"
+    },
+    {
+      "index": 399,
+      "start": 1154.36,
+      "end": 1159.55,
+      "duration": 5.19,
+      "text": "in a line."
+    },
+    {
+      "index": 400,
+      "start": 1161.55,
+      "end": 1161.56,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 401,
+      "start": 1161.56,
+      "end": 1163.51,
+      "duration": 1.95,
+      "text": "Now,"
+    },
+    {
+      "index": 402,
+      "start": 1163.52,
+      "end": 1164.95,
+      "duration": 1.43,
+      "text": "well, what happens with the third"
+    },
+    {
+      "index": 403,
+      "start": 1164.96,
+      "end": 1166.71,
+      "duration": 1.75,
+      "text": "equation?"
+    },
+    {
+      "index": 404,
+      "start": 1166.72,
+      "end": 1167.99,
+      "duration": 1.27,
+      "text": "That's actually going to be a third"
+    },
+    {
+      "index": 405,
+      "start": 1168.0,
+      "end": 1170.39,
+      "duration": 2.39,
+      "text": "plane."
+    },
+    {
+      "index": 406,
+      "start": 1172.59,
+      "end": 1172.6,
+      "duration": 0.01,
+      "text": "So, if we want to solve the first two"
+    },
+    {
+      "index": 407,
+      "start": 1172.6,
+      "end": 1175.23,
+      "duration": 2.63,
+      "text": "equations, we have to be on this line."
+    },
+    {
+      "index": 408,
+      "start": 1175.24,
+      "end": 1177.03,
+      "duration": 1.79,
+      "text": "And if we want to solve the third one,"
+    },
+    {
+      "index": 409,
+      "start": 1177.04,
+      "end": 1180.67,
+      "duration": 3.63,
+      "text": "we also need to be on another plane."
+    },
+    {
+      "index": 410,
+      "start": 1180.68,
+      "end": 1182.79,
+      "duration": 2.11,
+      "text": "And in general, three planes intersect"
+    },
+    {
+      "index": 411,
+      "start": 1182.8,
+      "end": 1185.39,
+      "duration": 2.59,
+      "text": "in a point because this line of"
+    },
+    {
+      "index": 412,
+      "start": 1185.4,
+      "end": 1196.63,
+      "duration": 11.23,
+      "text": "intersection"
+    },
+    {
+      "index": 413,
+      "start": 1201.63,
+      "end": 1201.64,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 414,
+      "start": 1201.64,
+      "end": 1204.15,
+      "duration": 2.51,
+      "text": "So, three planes intersect in a point,"
+    },
+    {
+      "index": 415,
+      "start": 1204.16,
+      "end": 1205.83,
+      "duration": 1.67,
+      "text": "and when we think about it is that the"
+    },
+    {
+      "index": 416,
+      "start": 1205.84,
+      "end": 1208.31,
+      "duration": 2.47,
+      "text": "line with the first two points"
+    },
+    {
+      "index": 417,
+      "start": 1208.32,
+      "end": 1209.79,
+      "duration": 1.47,
+      "text": "Sorry, the line with with the first two"
+    },
+    {
+      "index": 418,
+      "start": 1209.8,
+      "end": 1212.95,
+      "duration": 3.15,
+      "text": "planes intersect meets the third plane"
+    },
+    {
+      "index": 419,
+      "start": 1212.96,
+      "end": 1214.67,
+      "duration": 1.71,
+      "text": "in a point. And that point is the"
+    },
+    {
+      "index": 420,
+      "start": 1214.68,
+      "end": 1217.51,
+      "duration": 2.83,
+      "text": "solution to the linear system."
+    },
+    {
+      "index": 421,
+      "start": 1217.52,
+      "end": 1218.55,
+      "duration": 1.03,
+      "text": "Okay?"
+    },
+    {
+      "index": 422,
+      "start": 1218.56,
+      "end": 1220.55,
+      "duration": 1.99,
+      "text": "So,"
+    },
+    {
+      "index": 423,
+      "start": 1220.56,
+      "end": 1222.51,
+      "duration": 1.95,
+      "text": "the line,"
+    },
+    {
+      "index": 424,
+      "start": 1222.52,
+      "end": 1223.67,
+      "duration": 1.15,
+      "text": "let's say,"
+    },
+    {
+      "index": 425,
+      "start": 1223.68,
+      "end": 1225.79,
+      "duration": 2.11,
+      "text": "formed by the So, this is"
+    },
+    {
+      "index": 426,
+      "start": 1225.8,
+      "end": 1226.95,
+      "duration": 1.15,
+      "text": "mathematical notation for the"
+    },
+    {
+      "index": 427,
+      "start": 1226.96,
+      "end": 1228.51,
+      "duration": 1.55,
+      "text": "intersection between the first two"
+    },
+    {
+      "index": 428,
+      "start": 1228.52,
+      "end": 1231.31,
+      "duration": 2.79,
+      "text": "planes"
+    },
+    {
+      "index": 429,
+      "start": 1233.91,
+      "end": 1233.92,
+      "duration": 0.01,
+      "text": "intersects"
+    },
+    {
+      "index": 430,
+      "start": 1233.92,
+      "end": 1235.27,
+      "duration": 1.35,
+      "text": "the third plane"
+    },
+    {
+      "index": 431,
+      "start": 1235.28,
+      "end": 1240.75,
+      "duration": 5.47,
+      "text": "in a point,"
+    },
+    {
+      "index": 432,
+      "start": 1247.99,
+      "end": 1248.0,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 433,
+      "start": 1248.0,
+      "end": 1249.71,
+      "duration": 1.71,
+      "text": "So,"
+    },
+    {
+      "index": 434,
+      "start": 1249.72,
+      "end": 1252.35,
+      "duration": 2.63,
+      "text": "the solution Actually, how do we"
+    },
+    {
+      "index": 435,
+      "start": 1252.36,
+      "end": 1253.63,
+      "duration": 1.27,
+      "text": "find it? Well, one way is to draw"
+    },
+    {
+      "index": 436,
+      "start": 1253.64,
+      "end": 1255.11,
+      "duration": 1.47,
+      "text": "pictures and try to figure out where the"
+    },
+    {
+      "index": 437,
+      "start": 1255.12,
+      "end": 1257.19,
+      "duration": 2.07,
+      "text": "solution is, but that's not how we do it"
+    },
+    {
+      "index": 438,
+      "start": 1257.2,
+      "end": 1258.39,
+      "duration": 1.19,
+      "text": "in practice if we are given the"
+    },
+    {
+      "index": 439,
+      "start": 1258.4,
+      "end": 1260.03,
+      "duration": 1.63,
+      "text": "equations."
+    },
+    {
+      "index": 440,
+      "start": 1260.04,
+      "end": 1263.51,
+      "duration": 3.47,
+      "text": "Uh the solution is given"
+    },
+    {
+      "index": 441,
+      "start": 1263.52,
+      "end": 1266.99,
+      "duration": 3.47,
+      "text": "Sorry. So, let me use matrix notation."
+    },
+    {
+      "index": 442,
+      "start": 1267.0,
+      "end": 1268.75,
+      "duration": 1.75,
+      "text": "Remember, we saw on Tuesday that the"
+    },
+    {
+      "index": 443,
+      "start": 1268.76,
+      "end": 1270.67,
+      "duration": 1.91,
+      "text": "solution to"
+    },
+    {
+      "index": 444,
+      "start": 1270.68,
+      "end": 1273.15,
+      "duration": 2.47,
+      "text": "Ax = B"
+    },
+    {
+      "index": 445,
+      "start": 1273.16,
+      "end": 1276.23,
+      "duration": 3.07,
+      "text": "is given by"
+    },
+    {
+      "index": 446,
+      "start": 1276.24,
+      "end": 1278.07,
+      "duration": 1.83,
+      "text": "x ="
+    },
+    {
+      "index": 447,
+      "start": 1278.08,
+      "end": 1281.03,
+      "duration": 2.95,
+      "text": "A inverse B."
+    },
+    {
+      "index": 448,
+      "start": 1282.67,
+      "end": 1282.68,
+      "duration": 0.01,
+      "text": "Okay, and we get from here to here by"
+    },
+    {
+      "index": 449,
+      "start": 1282.68,
+      "end": 1286.47,
+      "duration": 3.79,
+      "text": "multiplying on the left by A inverse."
+    },
+    {
+      "index": 450,
+      "start": 1286.48,
+      "end": 1290.27,
+      "duration": 3.79,
+      "text": "A inverse Ax simplifies to x = A inverse"
+    },
+    {
+      "index": 451,
+      "start": 1290.28,
+      "end": 1291.75,
+      "duration": 1.47,
+      "text": "B."
+    },
+    {
+      "index": 452,
+      "start": 1291.76,
+      "end": 1294.19,
+      "duration": 2.43,
+      "text": "And once again, it's A inverse B and not"
+    },
+    {
+      "index": 453,
+      "start": 1294.2,
+      "end": 1295.67,
+      "duration": 1.47,
+      "text": "BA inverse."
+    },
+    {
+      "index": 454,
+      "start": 1295.68,
+      "end": 1297.43,
+      "duration": 1.75,
+      "text": "If you try to set up the multiplication,"
+    },
+    {
+      "index": 455,
+      "start": 1297.44,
+      "end": 1299.55,
+      "duration": 2.11,
+      "text": "BA inverse doesn't work. The sizes are"
+    },
+    {
+      "index": 456,
+      "start": 1299.56,
+      "end": 1302.67,
+      "duration": 3.11,
+      "text": "not compatible. You can't multiply the"
+    },
+    {
+      "index": 457,
+      "start": 1302.68,
+      "end": 1308.27,
+      "duration": 5.59,
+      "text": "other way around."
+    },
+    {
+      "index": 458,
+      "start": 1311.03,
+      "end": 1311.04,
+      "duration": 0.01,
+      "text": "Okay, so"
+    },
+    {
+      "index": 459,
+      "start": 1311.04,
+      "end": 1313.23,
+      "duration": 2.19,
+      "text": "that's pretty good."
+    },
+    {
+      "index": 460,
+      "start": 1313.24,
+      "end": 1316.23,
+      "duration": 2.99,
+      "text": "Unless"
+    },
+    {
+      "index": 461,
+      "start": 1317.63,
+      "end": 1317.64,
+      "duration": 0.01,
+      "text": "Well,"
+    },
+    {
+      "index": 462,
+      "start": 1317.64,
+      "end": 1320.11,
+      "duration": 2.47,
+      "text": "unless it doesn't work that way."
+    },
+    {
+      "index": 463,
+      "start": 1320.12,
+      "end": 1321.15,
+      "duration": 1.03,
+      "text": "Okay?"
+    },
+    {
+      "index": 464,
+      "start": 1321.16,
+      "end": 1323.55,
+      "duration": 2.39,
+      "text": "And what could go wrong? Well, let's say"
+    },
+    {
+      "index": 465,
+      "start": 1323.56,
+      "end": 1325.19,
+      "duration": 1.63,
+      "text": "that our first two planes intersect"
+    },
+    {
+      "index": 466,
+      "start": 1325.2,
+      "end": 1327.19,
+      "duration": 1.99,
+      "text": "nicely in a line,"
+    },
+    {
+      "index": 467,
+      "start": 1327.2,
+      "end": 1329.27,
+      "duration": 2.07,
+      "text": "but let's think about"
+    },
+    {
+      "index": 468,
+      "start": 1329.28,
+      "end": 1331.55,
+      "duration": 2.27,
+      "text": "the third plane. Maybe the third plane"
+    },
+    {
+      "index": 469,
+      "start": 1331.56,
+      "end": 1333.59,
+      "duration": 2.03,
+      "text": "does not intersect that line nicely in a"
+    },
+    {
+      "index": 470,
+      "start": 1333.6,
+      "end": 1335.63,
+      "duration": 2.03,
+      "text": "point. Maybe it's actually parallel to"
+    },
+    {
+      "index": 471,
+      "start": 1335.64,
+      "end": 1337.79,
+      "duration": 2.15,
+      "text": "that line."
+    },
+    {
+      "index": 472,
+      "start": 1337.8,
+      "end": 1338.63,
+      "duration": 0.83,
+      "text": "Okay?"
+    },
+    {
+      "index": 473,
+      "start": 1338.64,
+      "end": 1341.15,
+      "duration": 2.51,
+      "text": "So,"
+    },
+    {
+      "index": 474,
+      "start": 1341.16,
+      "end": 1343.35,
+      "duration": 2.19,
+      "text": "let's try to think about"
+    },
+    {
+      "index": 475,
+      "start": 1343.36,
+      "end": 1345.19,
+      "duration": 1.83,
+      "text": "this question for"
+    },
+    {
+      "index": 476,
+      "start": 1345.2,
+      "end": 1346.91,
+      "duration": 1.71,
+      "text": "a second."
+    },
+    {
+      "index": 477,
+      "start": 1346.92,
+      "end": 1350.03,
+      "duration": 3.11,
+      "text": "Oh, sorry. This is 2,000 left."
+    },
+    {
+      "index": 478,
+      "start": 1350.04,
+      "end": 1353.99,
+      "duration": 3.95,
+      "text": "So, let's say that the set of solutions"
+    },
+    {
+      "index": 479,
+      "start": 1354.0,
+      "end": 1356.35,
+      "duration": 2.35,
+      "text": "to a 3 by 3 linear system is not just"
+    },
+    {
+      "index": 480,
+      "start": 1356.36,
+      "end": 1359.07,
+      "duration": 2.71,
+      "text": "one point."
+    },
+    {
+      "index": 481,
+      "start": 1359.08,
+      "end": 1361.43,
+      "duration": 2.35,
+      "text": "So, we don't have a unique solution that"
+    },
+    {
+      "index": 482,
+      "start": 1361.44,
+      "end": 1363.19,
+      "duration": 1.75,
+      "text": "we can get this way."
+    },
+    {
+      "index": 483,
+      "start": 1363.2,
+      "end": 1364.43,
+      "duration": 1.23,
+      "text": "What could happen? What do you think"
+    },
+    {
+      "index": 484,
+      "start": 1364.44,
+      "end": 1372.79,
+      "duration": 8.35,
+      "text": "could happen?"
+    },
+    {
+      "index": 485,
+      "start": 1375.31,
+      "end": 1375.32,
+      "duration": 0.01,
+      "text": "Okay, I see"
+    },
+    {
+      "index": 486,
+      "start": 1375.32,
+      "end": 1377.67,
+      "duration": 2.35,
+      "text": "answers number"
+    },
+    {
+      "index": 487,
+      "start": 1377.68,
+      "end": 1379.71,
+      "duration": 2.03,
+      "text": "three and five seem to be dominating."
+    },
+    {
+      "index": 488,
+      "start": 1379.72,
+      "end": 1382.31,
+      "duration": 2.59,
+      "text": "There's also a bit of answer"
+    },
+    {
+      "index": 489,
+      "start": 1382.32,
+      "end": 1384.15,
+      "duration": 1.83,
+      "text": "number one."
+    },
+    {
+      "index": 490,
+      "start": 1384.16,
+      "end": 1385.79,
+      "duration": 1.63,
+      "text": "And in fact, these are pretty good"
+    },
+    {
+      "index": 491,
+      "start": 1385.8,
+      "end": 1387.75,
+      "duration": 1.95,
+      "text": "answers. I see even some of you figured"
+    },
+    {
+      "index": 492,
+      "start": 1387.76,
+      "end": 1389.23,
+      "duration": 1.47,
+      "text": "out that you can answer one and three at"
+    },
+    {
+      "index": 493,
+      "start": 1389.24,
+      "end": 1392.51,
+      "duration": 3.27,
+      "text": "the same time."
+    },
+    {
+      "index": 494,
+      "start": 1394.67,
+      "end": 1394.68,
+      "duration": 0.01,
+      "text": "Or three and five at the same time."
+    },
+    {
+      "index": 495,
+      "start": 1394.68,
+      "end": 1396.35,
+      "duration": 1.67,
+      "text": "Uh I yet have to see somebody with three"
+    },
+    {
+      "index": 496,
+      "start": 1396.36,
+      "end": 1398.15,
+      "duration": 1.79,
+      "text": "hands answer all three numbers at the"
+    },
+    {
+      "index": 497,
+      "start": 1398.16,
+      "end": 1400.31,
+      "duration": 2.15,
+      "text": "same time, but uh"
+    },
+    {
+      "index": 498,
+      "start": 1400.32,
+      "end": 1401.51,
+      "duration": 1.19,
+      "text": "Okay."
+    },
+    {
+      "index": 499,
+      "start": 1401.52,
+      "end": 1404.91,
+      "duration": 3.39,
+      "text": "So, indeed, we'll see very soon that we"
+    },
+    {
+      "index": 500,
+      "start": 1404.92,
+      "end": 1407.55,
+      "duration": 2.63,
+      "text": "could have either no solution, a line,"
+    },
+    {
+      "index": 501,
+      "start": 1407.56,
+      "end": 1409.07,
+      "duration": 1.51,
+      "text": "or a plane."
+    },
+    {
+      "index": 502,
+      "start": 1409.08,
+      "end": 1411.99,
+      "duration": 2.91,
+      "text": "The other answers, well, two points, two"
+    },
+    {
+      "index": 503,
+      "start": 1412.0,
+      "end": 1414.23,
+      "duration": 2.23,
+      "text": "solutions,"
+    },
+    {
+      "index": 504,
+      "start": 1414.24,
+      "end": 1416.11,
+      "duration": 1.87,
+      "text": "uh we will see is not actually a"
+    },
+    {
+      "index": 505,
+      "start": 1416.12,
+      "end": 1417.71,
+      "duration": 1.59,
+      "text": "possibility because if you have two"
+    },
+    {
+      "index": 506,
+      "start": 1417.72,
+      "end": 1419.35,
+      "duration": 1.63,
+      "text": "different solutions, then the entire"
+    },
+    {
+      "index": 507,
+      "start": 1419.36,
+      "end": 1421.11,
+      "duration": 1.75,
+      "text": "line through these two points is also"
+    },
+    {
+      "index": 508,
+      "start": 1421.12,
+      "end": 1423.79,
+      "duration": 2.67,
+      "text": "going to be made of solutions."
+    },
+    {
+      "index": 509,
+      "start": 1423.8,
+      "end": 1425.95,
+      "duration": 2.15,
+      "text": "Uh a tetrahedron is just there to, you"
+    },
+    {
+      "index": 510,
+      "start": 1425.96,
+      "end": 1427.55,
+      "duration": 1.59,
+      "text": "know,"
+    },
+    {
+      "index": 511,
+      "start": 1427.56,
+      "end": 1429.79,
+      "duration": 2.23,
+      "text": "amuse you. Uh it's not actually a good"
+    },
+    {
+      "index": 512,
+      "start": 1429.8,
+      "end": 1431.59,
+      "duration": 1.79,
+      "text": "answer to that question. It's not very"
+    },
+    {
+      "index": 513,
+      "start": 1431.6,
+      "end": 1433.19,
+      "duration": 1.59,
+      "text": "likely that you will get a tetrahedron"
+    },
+    {
+      "index": 514,
+      "start": 1433.2,
+      "end": 1435.71,
+      "duration": 2.51,
+      "text": "out of intersecting planes."
+    },
+    {
+      "index": 515,
+      "start": 1435.72,
+      "end": 1437.47,
+      "duration": 1.75,
+      "text": "A plane is indeed possible, and I don't"
+    },
+    {
+      "index": 516,
+      "start": 1437.48,
+      "end": 1439.03,
+      "duration": 1.55,
+      "text": "know is still okay for a few more"
+    },
+    {
+      "index": 517,
+      "start": 1439.04,
+      "end": 1440.55,
+      "duration": 1.51,
+      "text": "minutes."
+    },
+    {
+      "index": 518,
+      "start": 1440.56,
+      "end": 1442.47,
+      "duration": 1.91,
+      "text": "But, we're going to get to the bottom of"
+    },
+    {
+      "index": 519,
+      "start": 1442.48,
+      "end": 1445.91,
+      "duration": 3.43,
+      "text": "this, and then we will know."
+    },
+    {
+      "index": 520,
+      "start": 1445.92,
+      "end": 1447.67,
+      "duration": 1.75,
+      "text": "Okay, so let's try to figure out what"
+    },
+    {
+      "index": 521,
+      "start": 1447.68,
+      "end": 1450.59,
+      "duration": 2.91,
+      "text": "can happen."
+    },
+    {
+      "index": 522,
+      "start": 1458.23,
+      "end": 1458.24,
+      "duration": 0.01,
+      "text": "And so, I had my first two planes."
+    },
+    {
+      "index": 523,
+      "start": 1458.24,
+      "end": 1460.23,
+      "duration": 1.99,
+      "text": "They determine a line."
+    },
+    {
+      "index": 524,
+      "start": 1460.24,
+      "end": 1461.71,
+      "duration": 1.47,
+      "text": "And now I have my third plane. And maybe"
+    },
+    {
+      "index": 525,
+      "start": 1461.72,
+      "end": 1463.79,
+      "duration": 2.07,
+      "text": "my third plane is actually"
+    },
+    {
+      "index": 526,
+      "start": 1463.8,
+      "end": 1466.03,
+      "duration": 2.23,
+      "text": "parallel to the line,"
+    },
+    {
+      "index": 527,
+      "start": 1466.04,
+      "end": 1468.95,
+      "duration": 2.91,
+      "text": "but doesn't pass through it."
+    },
+    {
+      "index": 528,
+      "start": 1468.96,
+      "end": 1470.83,
+      "duration": 1.87,
+      "text": "Well,"
+    },
+    {
+      "index": 529,
+      "start": 1470.84,
+      "end": 1472.59,
+      "duration": 1.75,
+      "text": "then I'm afraid that there's no"
+    },
+    {
+      "index": 530,
+      "start": 1472.6,
+      "end": 1475.43,
+      "duration": 2.83,
+      "text": "solutions, okay? Because to solve the"
+    },
+    {
+      "index": 531,
+      "start": 1475.44,
+      "end": 1477.91,
+      "duration": 2.47,
+      "text": "system of equations, I need to be in the"
+    },
+    {
+      "index": 532,
+      "start": 1477.92,
+      "end": 1479.87,
+      "duration": 1.95,
+      "text": "first two planes. So, that means I need"
+    },
+    {
+      "index": 533,
+      "start": 1479.88,
+      "end": 1481.75,
+      "duration": 1.87,
+      "text": "to be in that vertical line. Well, that"
+    },
+    {
+      "index": 534,
+      "start": 1481.76,
+      "end": 1482.99,
+      "duration": 1.23,
+      "text": "line was supposed to be a red, but I"
+    },
+    {
+      "index": 535,
+      "start": 1483.0,
+      "end": 1485.39,
+      "duration": 2.39,
+      "text": "guess it doesn't really show up as"
+    },
+    {
+      "index": 536,
+      "start": 1485.4,
+      "end": 1486.91,
+      "duration": 1.51,
+      "text": "red."
+    },
+    {
+      "index": 537,
+      "start": 1486.92,
+      "end": 1488.79,
+      "duration": 1.87,
+      "text": "Uh and it also needs to be in the third"
+    },
+    {
+      "index": 538,
+      "start": 1488.8,
+      "end": 1490.59,
+      "duration": 1.79,
+      "text": "plane, but the line and the plane are"
+    },
+    {
+      "index": 539,
+      "start": 1490.6,
+      "end": 1492.47,
+      "duration": 1.87,
+      "text": "parallel to each other. There's just no"
+    },
+    {
+      "index": 540,
+      "start": 1492.48,
+      "end": 1494.91,
+      "duration": 2.43,
+      "text": "place where they intersect."
+    },
+    {
+      "index": 541,
+      "start": 1494.92,
+      "end": 1496.87,
+      "duration": 1.95,
+      "text": "Okay, so there's no way to solve all the"
+    },
+    {
+      "index": 542,
+      "start": 1496.88,
+      "end": 1499.55,
+      "duration": 2.67,
+      "text": "equations."
+    },
+    {
+      "index": 543,
+      "start": 1499.56,
+      "end": 1500.91,
+      "duration": 1.35,
+      "text": "On the other hand,"
+    },
+    {
+      "index": 544,
+      "start": 1500.92,
+      "end": 1502.43,
+      "duration": 1.51,
+      "text": "the other thing that could happen is"
+    },
+    {
+      "index": 545,
+      "start": 1502.44,
+      "end": 1504.59,
+      "duration": 2.15,
+      "text": "that actually the line is contained in"
+    },
+    {
+      "index": 546,
+      "start": 1504.6,
+      "end": 1506.99,
+      "duration": 2.39,
+      "text": "the plane."
+    },
+    {
+      "index": 547,
+      "start": 1507.0,
+      "end": 1508.47,
+      "duration": 1.47,
+      "text": "And then,"
+    },
+    {
+      "index": 548,
+      "start": 1508.48,
+      "end": 1510.43,
+      "duration": 1.95,
+      "text": "well, it means any point on that line"
+    },
+    {
+      "index": 549,
+      "start": 1510.44,
+      "end": 1512.99,
+      "duration": 2.55,
+      "text": "will actually solve automatically"
+    },
+    {
+      "index": 550,
+      "start": 1513.0,
+      "end": 1515.95,
+      "duration": 2.95,
+      "text": "the third equation."
+    },
+    {
+      "index": 551,
+      "start": 1515.96,
+      "end": 1518.27,
+      "duration": 2.31,
+      "text": "Okay, so if you try solving a system"
+    },
+    {
+      "index": 552,
+      "start": 1518.28,
+      "end": 1520.07,
+      "duration": 1.79,
+      "text": "that looks like this"
+    },
+    {
+      "index": 553,
+      "start": 1520.08,
+      "end": 1521.79,
+      "duration": 1.71,
+      "text": "by hand, what you will notice, you know,"
+    },
+    {
+      "index": 554,
+      "start": 1521.8,
+      "end": 1523.59,
+      "duration": 1.79,
+      "text": "if you do substitutions, eliminations,"
+    },
+    {
+      "index": 555,
+      "start": 1523.6,
+      "end": 1524.99,
+      "duration": 1.39,
+      "text": "and so on,"
+    },
+    {
+      "index": 556,
+      "start": 1525.0,
+      "end": 1526.99,
+      "duration": 1.99,
+      "text": "what you will notice is that, you know,"
+    },
+    {
+      "index": 557,
+      "start": 1527.0,
+      "end": 1528.19,
+      "duration": 1.19,
+      "text": "after you've dealt with two of the"
+    },
+    {
+      "index": 558,
+      "start": 1528.2,
+      "end": 1530.35,
+      "duration": 2.15,
+      "text": "equations, the third one"
+    },
+    {
+      "index": 559,
+      "start": 1530.36,
+      "end": 1531.79,
+      "duration": 1.43,
+      "text": "here would actually turn out to be the"
+    },
+    {
+      "index": 560,
+      "start": 1531.8,
+      "end": 1533.47,
+      "duration": 1.67,
+      "text": "same as what you got out of the first"
+    },
+    {
+      "index": 561,
+      "start": 1533.48,
+      "end": 1534.79,
+      "duration": 1.31,
+      "text": "two."
+    },
+    {
+      "index": 562,
+      "start": 1534.8,
+      "end": 1535.95,
+      "duration": 1.15,
+      "text": "It doesn't give you any additional"
+    },
+    {
+      "index": 563,
+      "start": 1535.96,
+      "end": 1537.67,
+      "duration": 1.71,
+      "text": "information. It's as if you had only two"
+    },
+    {
+      "index": 564,
+      "start": 1537.68,
+      "end": 1541.55,
+      "duration": 3.87,
+      "text": "equations."
+    },
+    {
+      "index": 565,
+      "start": 1544.15,
+      "end": 1544.16,
+      "duration": 0.01,
+      "text": "The previous case"
+    },
+    {
+      "index": 566,
+      "start": 1544.16,
+      "end": 1545.39,
+      "duration": 1.23,
+      "text": "would be when actually the third"
+    },
+    {
+      "index": 567,
+      "start": 1545.4,
+      "end": 1547.31,
+      "duration": 1.91,
+      "text": "equation contradicts something that you"
+    },
+    {
+      "index": 568,
+      "start": 1547.32,
+      "end": 1548.95,
+      "duration": 1.63,
+      "text": "can get out of the first two. For"
+    },
+    {
+      "index": 569,
+      "start": 1548.96,
+      "end": 1550.55,
+      "duration": 1.59,
+      "text": "example, maybe out of the first two you"
+    },
+    {
+      "index": 570,
+      "start": 1550.56,
+      "end": 1553.51,
+      "duration": 2.95,
+      "text": "got x + z = 1, and the third equation is"
+    },
+    {
+      "index": 571,
+      "start": 1553.52,
+      "end": 1555.19,
+      "duration": 1.67,
+      "text": "x + z = 2."
+    },
+    {
+      "index": 572,
+      "start": 1555.2,
+      "end": 1556.35,
+      "duration": 1.15,
+      "text": "Well, it can't be one and two at the"
+    },
+    {
+      "index": 573,
+      "start": 1556.36,
+      "end": 1558.31,
+      "duration": 1.95,
+      "text": "same time."
+    },
+    {
+      "index": 574,
+      "start": 1558.32,
+      "end": 1561.31,
+      "duration": 2.99,
+      "text": "Um maybe another way to say it is that"
+    },
+    {
+      "index": 575,
+      "start": 1561.32,
+      "end": 1563.75,
+      "duration": 2.43,
+      "text": "this picture is one where you can get,"
+    },
+    {
+      "index": 576,
+      "start": 1563.76,
+      "end": 1565.63,
+      "duration": 1.87,
+      "text": "you know, out of the equations you get a"
+    },
+    {
+      "index": 577,
+      "start": 1565.64,
+      "end": 1567.19,
+      "duration": 1.55,
+      "text": "number equals a different number. That's"
+    },
+    {
+      "index": 578,
+      "start": 1567.2,
+      "end": 1568.51,
+      "duration": 1.31,
+      "text": "impossible."
+    },
+    {
+      "index": 579,
+      "start": 1568.52,
+      "end": 1570.63,
+      "duration": 2.11,
+      "text": "And that picture is one where out of the"
+    },
+    {
+      "index": 580,
+      "start": 1570.64,
+      "end": 1572.99,
+      "duration": 2.35,
+      "text": "equations you get 0 = 0, which is"
+    },
+    {
+      "index": 581,
+      "start": 1573.0,
+      "end": 1575.07,
+      "duration": 2.07,
+      "text": "certainly true, but isn't very useful"
+    },
+    {
+      "index": 582,
+      "start": 1575.08,
+      "end": 1576.87,
+      "duration": 1.79,
+      "text": "equation. So, you can't actually finish"
+    },
+    {
+      "index": 583,
+      "start": 1576.88,
+      "end": 1579.75,
+      "duration": 2.87,
+      "text": "solving."
+    },
+    {
+      "index": 584,
+      "start": 1581.83,
+      "end": 1581.84,
+      "duration": 0.01,
+      "text": "Okay, so let me"
+    },
+    {
+      "index": 585,
+      "start": 1581.84,
+      "end": 1585.19,
+      "duration": 3.35,
+      "text": "write that down."
+    },
+    {
+      "index": 586,
+      "start": 1585.2,
+      "end": 1587.55,
+      "duration": 2.35,
+      "text": "So,"
+    },
+    {
+      "index": 587,
+      "start": 1587.56,
+      "end": 1591.51,
+      "duration": 3.95,
+      "text": "unless the third plane"
+    },
+    {
+      "index": 588,
+      "start": 1597.95,
+      "end": 1597.96,
+      "duration": 0.01,
+      "text": "to"
+    },
+    {
+      "index": 589,
+      "start": 1597.96,
+      "end": 1601.47,
+      "duration": 3.51,
+      "text": "the line"
+    },
+    {
+      "index": 590,
+      "start": 1603.31,
+      "end": 1603.32,
+      "duration": 0.01,
+      "text": "where P1 and P2"
+    },
+    {
+      "index": 591,
+      "start": 1603.32,
+      "end": 1611.51,
+      "duration": 8.19,
+      "text": "intersect."
+    },
+    {
+      "index": 592,
+      "start": 1617.59,
+      "end": 1617.6,
+      "duration": 0.01,
+      "text": "then there's two sub cases."
+    },
+    {
+      "index": 593,
+      "start": 1617.6,
+      "end": 1618.67,
+      "duration": 1.07,
+      "text": "If"
+    },
+    {
+      "index": 594,
+      "start": 1618.68,
+      "end": 1620.99,
+      "duration": 2.31,
+      "text": "the line"
+    },
+    {
+      "index": 595,
+      "start": 1621.0,
+      "end": 1623.23,
+      "duration": 2.23,
+      "text": "of intersections of P1 and P2 is"
+    },
+    {
+      "index": 596,
+      "start": 1623.24,
+      "end": 1628.51,
+      "duration": 5.27,
+      "text": "actually contained"
+    },
+    {
+      "index": 597,
+      "start": 1631.07,
+      "end": 1631.08,
+      "duration": 0.01,
+      "text": "in P3, in the third plane,"
+    },
+    {
+      "index": 598,
+      "start": 1631.08,
+      "end": 1644.83,
+      "duration": 13.75,
+      "text": "then we have infinitely many solutions."
+    },
+    {
+      "index": 599,
+      "start": 1646.79,
+      "end": 1646.8,
+      "duration": 0.01,
+      "text": "Namely, any point on the line will"
+    },
+    {
+      "index": 600,
+      "start": 1646.8,
+      "end": 1668.47,
+      "duration": 21.67,
+      "text": "automatically solve the third equation."
+    },
+    {
+      "index": 601,
+      "start": 1669.47,
+      "end": 1669.48,
+      "duration": 0.01,
+      "text": "Now,"
+    },
+    {
+      "index": 602,
+      "start": 1669.48,
+      "end": 1670.99,
+      "duration": 1.51,
+      "text": "we have a possibility if we have a sub"
+    },
+    {
+      "index": 603,
+      "start": 1671.0,
+      "end": 1674.39,
+      "duration": 3.39,
+      "text": "case is if"
+    },
+    {
+      "index": 604,
+      "start": 1674.4,
+      "end": 1677.95,
+      "duration": 3.55,
+      "text": "the line"
+    },
+    {
+      "index": 605,
+      "start": 1688.35,
+      "end": 1688.36,
+      "duration": 0.01,
+      "text": "to P3"
+    },
+    {
+      "index": 606,
+      "start": 1688.36,
+      "end": 1698.31,
+      "duration": 9.95,
+      "text": "and not contained in it."
+    },
+    {
+      "index": 607,
+      "start": 1699.71,
+      "end": 1699.72,
+      "duration": 0.01,
+      "text": "Then,"
+    },
+    {
+      "index": 608,
+      "start": 1699.72,
+      "end": 1711.83,
+      "duration": 12.11,
+      "text": "we get no solutions."
+    },
+    {
+      "index": 609,
+      "start": 1713.27,
+      "end": 1713.28,
+      "duration": 0.01,
+      "text": "Okay, so again, just to show you the"
+    },
+    {
+      "index": 610,
+      "start": 1713.28,
+      "end": 1715.31,
+      "duration": 2.03,
+      "text": "pictures once again,"
+    },
+    {
+      "index": 611,
+      "start": 1715.32,
+      "end": 1718.03,
+      "duration": 2.71,
+      "text": "when we have the first two planes,"
+    },
+    {
+      "index": 612,
+      "start": 1718.04,
+      "end": 1720.31,
+      "duration": 2.27,
+      "text": "they give us a line."
+    },
+    {
+      "index": 613,
+      "start": 1720.32,
+      "end": 1722.19,
+      "duration": 1.87,
+      "text": "And now, depending on what happens to"
+    },
+    {
+      "index": 614,
+      "start": 1722.2,
+      "end": 1723.67,
+      "duration": 1.47,
+      "text": "that line in relation to the third"
+    },
+    {
+      "index": 615,
+      "start": 1723.68,
+      "end": 1724.71,
+      "duration": 1.03,
+      "text": "plane,"
+    },
+    {
+      "index": 616,
+      "start": 1724.72,
+      "end": 1726.99,
+      "duration": 2.27,
+      "text": "various situations can happen."
+    },
+    {
+      "index": 617,
+      "start": 1727.0,
+      "end": 1729.11,
+      "duration": 2.11,
+      "text": "So, if"
+    },
+    {
+      "index": 618,
+      "start": 1729.12,
+      "end": 1731.07,
+      "duration": 1.95,
+      "text": "the third line"
+    },
+    {
+      "index": 619,
+      "start": 1731.08,
+      "end": 1733.43,
+      "duration": 2.35,
+      "text": "just hits Sorry, if the line hits the"
+    },
+    {
+      "index": 620,
+      "start": 1733.44,
+      "end": 1734.87,
+      "duration": 1.43,
+      "text": "third plane in a point, then that's"
+    },
+    {
+      "index": 621,
+      "start": 1734.88,
+      "end": 1737.07,
+      "duration": 2.19,
+      "text": "going to be our solution."
+    },
+    {
+      "index": 622,
+      "start": 1737.08,
+      "end": 1739.07,
+      "duration": 1.99,
+      "text": "And if that line instead is parallel to"
+    },
+    {
+      "index": 623,
+      "start": 1739.08,
+      "end": 1740.87,
+      "duration": 1.79,
+      "text": "the third plane,"
+    },
+    {
+      "index": 624,
+      "start": 1740.88,
+      "end": 1742.83,
+      "duration": 1.95,
+      "text": "well, if it's parallel and outside of"
+    },
+    {
+      "index": 625,
+      "start": 1742.84,
+      "end": 1745.27,
+      "duration": 2.43,
+      "text": "it, then we have no solution."
+    },
+    {
+      "index": 626,
+      "start": 1745.28,
+      "end": 1747.39,
+      "duration": 2.11,
+      "text": "If it's parallel and"
+    },
+    {
+      "index": 627,
+      "start": 1747.4,
+      "end": 1748.71,
+      "duration": 1.31,
+      "text": "contains"
+    },
+    {
+      "index": 628,
+      "start": 1748.72,
+      "end": 1751.27,
+      "duration": 2.55,
+      "text": "in it actually, then we have infinitely"
+    },
+    {
+      "index": 629,
+      "start": 1751.28,
+      "end": 1758.03,
+      "duration": 6.75,
+      "text": "many solutions."
+    },
+    {
+      "index": 630,
+      "start": 1759.23,
+      "end": 1759.24,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 631,
+      "start": 1759.24,
+      "end": 1761.35,
+      "duration": 2.11,
+      "text": "So, going back to our list of"
+    },
+    {
+      "index": 632,
+      "start": 1761.36,
+      "end": 1763.31,
+      "duration": 1.95,
+      "text": "possibilities,"
+    },
+    {
+      "index": 633,
+      "start": 1763.32,
+      "end": 1766.83,
+      "duration": 3.51,
+      "text": "that means"
+    },
+    {
+      "index": 634,
+      "start": 1768.99,
+      "end": 1769.0,
+      "duration": 0.01,
+      "text": "Well, let's see what can happen."
+    },
+    {
+      "index": 635,
+      "start": 1769.0,
+      "end": 1770.87,
+      "duration": 1.87,
+      "text": "So, no solution Well, we've seen that"
+    },
+    {
+      "index": 636,
+      "start": 1770.88,
+      "end": 1772.59,
+      "duration": 1.71,
+      "text": "happens when"
+    },
+    {
+      "index": 637,
+      "start": 1772.6,
+      "end": 1773.87,
+      "duration": 1.27,
+      "text": "the line where the first two planes"
+    },
+    {
+      "index": 638,
+      "start": 1773.88,
+      "end": 1776.31,
+      "duration": 2.43,
+      "text": "intersect is parallel to the third one."
+    },
+    {
+      "index": 639,
+      "start": 1776.32,
+      "end": 1778.43,
+      "duration": 2.11,
+      "text": "That exists."
+    },
+    {
+      "index": 640,
+      "start": 1778.44,
+      "end": 1780.87,
+      "duration": 2.43,
+      "text": "Two points Well, that didn't come up."
+    },
+    {
+      "index": 641,
+      "start": 1780.88,
+      "end": 1782.63,
+      "duration": 1.75,
+      "text": "Okay, and"
+    },
+    {
+      "index": 642,
+      "start": 1782.64,
+      "end": 1785.79,
+      "duration": 3.15,
+      "text": "as I said, the problem is if the line of"
+    },
+    {
+      "index": 643,
+      "start": 1785.8,
+      "end": 1788.03,
+      "duration": 2.23,
+      "text": "intersection of the first two planes"
+    },
+    {
+      "index": 644,
+      "start": 1788.04,
+      "end": 1789.63,
+      "duration": 1.59,
+      "text": "actually has two points that are in the"
+    },
+    {
+      "index": 645,
+      "start": 1789.64,
+      "end": 1791.35,
+      "duration": 1.71,
+      "text": "third plane,"
+    },
+    {
+      "index": 646,
+      "start": 1791.36,
+      "end": 1792.87,
+      "duration": 1.51,
+      "text": "well, then that means actually the"
+    },
+    {
+      "index": 647,
+      "start": 1792.88,
+      "end": 1794.79,
+      "duration": 1.91,
+      "text": "entire line must also be in the third"
+    },
+    {
+      "index": 648,
+      "start": 1794.8,
+      "end": 1795.79,
+      "duration": 0.99,
+      "text": "plane."
+    },
+    {
+      "index": 649,
+      "start": 1795.8,
+      "end": 1797.59,
+      "duration": 1.79,
+      "text": "So,"
+    },
+    {
+      "index": 650,
+      "start": 1797.6,
+      "end": 1798.95,
+      "duration": 1.35,
+      "text": "if you have two solutions, then you have"
+    },
+    {
+      "index": 651,
+      "start": 1798.96,
+      "end": 1800.99,
+      "duration": 2.03,
+      "text": "more than two actually."
+    },
+    {
+      "index": 652,
+      "start": 1801.0,
+      "end": 1802.43,
+      "duration": 1.43,
+      "text": "In fact, you have infinitely many, and"
+    },
+    {
+      "index": 653,
+      "start": 1802.44,
+      "end": 1805.19,
+      "duration": 2.75,
+      "text": "we've seen that can happen."
+    },
+    {
+      "index": 654,
+      "start": 1805.2,
+      "end": 1806.83,
+      "duration": 1.63,
+      "text": "Okay, tetrahedrons still doesn't look"
+    },
+    {
+      "index": 655,
+      "start": 1806.84,
+      "end": 1809.99,
+      "duration": 3.15,
+      "text": "very promising."
+    },
+    {
+      "index": 656,
+      "start": 1811.55,
+      "end": 1811.56,
+      "duration": 0.01,
+      "text": "Um"
+    },
+    {
+      "index": 657,
+      "start": 1811.56,
+      "end": 1813.31,
+      "duration": 1.75,
+      "text": "What about a plane?"
+    },
+    {
+      "index": 658,
+      "start": 1813.32,
+      "end": 1814.99,
+      "duration": 1.67,
+      "text": "Well, that's a case that I didn't"
+    },
+    {
+      "index": 659,
+      "start": 1815.0,
+      "end": 1817.63,
+      "duration": 2.63,
+      "text": "explain because I've been assuming that"
+    },
+    {
+      "index": 660,
+      "start": 1817.64,
+      "end": 1820.07,
+      "duration": 2.43,
+      "text": "P1 and P2 are different planes and they"
+    },
+    {
+      "index": 661,
+      "start": 1820.08,
+      "end": 1821.91,
+      "duration": 1.83,
+      "text": "intersect in a line."
+    },
+    {
+      "index": 662,
+      "start": 1821.92,
+      "end": 1823.63,
+      "duration": 1.71,
+      "text": "But in fact,"
+    },
+    {
+      "index": 663,
+      "start": 1823.64,
+      "end": 1825.31,
+      "duration": 1.67,
+      "text": "well, they could be parallel, in which"
+    },
+    {
+      "index": 664,
+      "start": 1825.32,
+      "end": 1826.95,
+      "duration": 1.63,
+      "text": "case we already have no solution to the"
+    },
+    {
+      "index": 665,
+      "start": 1826.96,
+      "end": 1828.59,
+      "duration": 1.63,
+      "text": "first two equations,"
+    },
+    {
+      "index": 666,
+      "start": 1828.6,
+      "end": 1830.79,
+      "duration": 2.19,
+      "text": "or they could be the same plane."
+    },
+    {
+      "index": 667,
+      "start": 1830.8,
+      "end": 1832.39,
+      "duration": 1.59,
+      "text": "And now, if the third plane is also the"
+    },
+    {
+      "index": 668,
+      "start": 1832.4,
+      "end": 1833.67,
+      "duration": 1.27,
+      "text": "same plane, you know, if all three"
+    },
+    {
+      "index": 669,
+      "start": 1833.68,
+      "end": 1836.11,
+      "duration": 2.43,
+      "text": "planes are the same plane, well, then"
+    },
+    {
+      "index": 670,
+      "start": 1836.12,
+      "end": 1838.27,
+      "duration": 2.15,
+      "text": "you have a plane of solutions. You know,"
+    },
+    {
+      "index": 671,
+      "start": 1838.28,
+      "end": 1839.55,
+      "duration": 1.27,
+      "text": "if I give you three times the same"
+    },
+    {
+      "index": 672,
+      "start": 1839.56,
+      "end": 1841.95,
+      "duration": 2.39,
+      "text": "equation, that is a linear system. It's"
+    },
+    {
+      "index": 673,
+      "start": 1841.96,
+      "end": 1843.47,
+      "duration": 1.51,
+      "text": "not a very interesting one, but it is a"
+    },
+    {
+      "index": 674,
+      "start": 1843.48,
+      "end": 1846.59,
+      "duration": 3.11,
+      "text": "linear system."
+    },
+    {
+      "index": 675,
+      "start": 1856.83,
+      "end": 1856.84,
+      "duration": 0.01,
+      "text": "Okay, any questions?"
+    },
+    {
+      "index": 676,
+      "start": 1856.84,
+      "end": 1857.67,
+      "duration": 0.83,
+      "text": "Yes."
+    },
+    {
+      "index": 677,
+      "start": 1857.68,
+      "end": 1860.19,
+      "duration": 2.51,
+      "text": "What is the geometric significance of"
+    },
+    {
+      "index": 678,
+      "start": 1860.2,
+      "end": 1863.03,
+      "duration": 2.83,
+      "text": "plane x + y + z is equal to 1"
+    },
+    {
+      "index": 679,
+      "start": 1863.04,
+      "end": 1865.11,
+      "duration": 2.07,
+      "text": "as opposed to 2 or 3?"
+    },
+    {
+      "index": 680,
+      "start": 1865.12,
+      "end": 1866.95,
+      "duration": 1.83,
+      "text": "Okay, so that's a very good question."
+    },
+    {
+      "index": 681,
+      "start": 1866.96,
+      "end": 1868.55,
+      "duration": 1.59,
+      "text": "The question is what is the geometric"
+    },
+    {
+      "index": 682,
+      "start": 1868.56,
+      "end": 1871.63,
+      "duration": 3.07,
+      "text": "significance of an equation like x + y +"
+    },
+    {
+      "index": 683,
+      "start": 1871.64,
+      "end": 1874.71,
+      "duration": 3.07,
+      "text": "z or say this one equals to 1, 2, 3, or"
+    },
+    {
+      "index": 684,
+      "start": 1874.72,
+      "end": 1876.55,
+      "duration": 1.83,
+      "text": "something else?"
+    },
+    {
+      "index": 685,
+      "start": 1876.56,
+      "end": 1879.31,
+      "duration": 2.75,
+      "text": "Well, if the equation is x + y + z"
+    },
+    {
+      "index": 686,
+      "start": 1879.32,
+      "end": 1881.71,
+      "duration": 2.39,
+      "text": "equals 0, it means that our plane is"
+    },
+    {
+      "index": 687,
+      "start": 1881.72,
+      "end": 1884.07,
+      "duration": 2.35,
+      "text": "passing through the origin."
+    },
+    {
+      "index": 688,
+      "start": 1884.08,
+      "end": 1885.43,
+      "duration": 1.35,
+      "text": "And then if we change the constant, it"
+    },
+    {
+      "index": 689,
+      "start": 1885.44,
+      "end": 1887.71,
+      "duration": 2.27,
+      "text": "means we move to a parallel plane."
+    },
+    {
+      "index": 690,
+      "start": 1887.72,
+      "end": 1890.51,
+      "duration": 2.79,
+      "text": "So, the first guess that you might have"
+    },
+    {
+      "index": 691,
+      "start": 1890.52,
+      "end": 1892.39,
+      "duration": 1.87,
+      "text": "is that this number on the right-hand"
+    },
+    {
+      "index": 692,
+      "start": 1892.4,
+      "end": 1894.91,
+      "duration": 2.51,
+      "text": "side is the distance between the origin"
+    },
+    {
+      "index": 693,
+      "start": 1894.92,
+      "end": 1896.39,
+      "duration": 1.47,
+      "text": "and the plane. It tells us how far from"
+    },
+    {
+      "index": 694,
+      "start": 1896.4,
+      "end": 1898.23,
+      "duration": 1.83,
+      "text": "the origin we are."
+    },
+    {
+      "index": 695,
+      "start": 1898.24,
+      "end": 1901.11,
+      "duration": 2.87,
+      "text": "That is not quite true."
+    },
+    {
+      "index": 696,
+      "start": 1901.12,
+      "end": 1902.47,
+      "duration": 1.35,
+      "text": "Um"
+    },
+    {
+      "index": 697,
+      "start": 1902.48,
+      "end": 1905.27,
+      "duration": 2.79,
+      "text": "in fact, that would be true if the"
+    },
+    {
+      "index": 698,
+      "start": 1905.28,
+      "end": 1907.55,
+      "duration": 2.27,
+      "text": "coefficients here form the unit vector."
+    },
+    {
+      "index": 699,
+      "start": 1907.56,
+      "end": 1909.27,
+      "duration": 1.71,
+      "text": "Then this guy would just be the distance"
+    },
+    {
+      "index": 700,
+      "start": 1909.28,
+      "end": 1912.67,
+      "duration": 3.39,
+      "text": "to the origin."
+    },
+    {
+      "index": 701,
+      "start": 1915.59,
+      "end": 1915.6,
+      "duration": 0.01,
+      "text": "Otherwise, you have to actually scale by"
+    },
+    {
+      "index": 702,
+      "start": 1915.6,
+      "end": 1917.67,
+      "duration": 2.07,
+      "text": "the length of this normal vector. And I"
+    },
+    {
+      "index": 703,
+      "start": 1917.68,
+      "end": 1919.23,
+      "duration": 1.55,
+      "text": "think there's a problem in the notes"
+    },
+    {
+      "index": 704,
+      "start": 1919.24,
+      "end": 1920.47,
+      "duration": 1.23,
+      "text": "that will"
+    },
+    {
+      "index": 705,
+      "start": 1920.48,
+      "end": 1922.75,
+      "duration": 2.27,
+      "text": "show you exactly how this works."
+    },
+    {
+      "index": 706,
+      "start": 1922.76,
+      "end": 1924.23,
+      "duration": 1.47,
+      "text": "Okay? But you should think of it roughly"
+    },
+    {
+      "index": 707,
+      "start": 1924.24,
+      "end": 1926.35,
+      "duration": 2.11,
+      "text": "as how much have we moved the plane away"
+    },
+    {
+      "index": 708,
+      "start": 1926.36,
+      "end": 1928.95,
+      "duration": 2.59,
+      "text": "from the origin."
+    },
+    {
+      "index": 709,
+      "start": 1928.96,
+      "end": 1930.51,
+      "duration": 1.55,
+      "text": "That's the meaning of"
+    },
+    {
+      "index": 710,
+      "start": 1930.52,
+      "end": 1932.91,
+      "duration": 2.39,
+      "text": "this last term d"
+    },
+    {
+      "index": 711,
+      "start": 1932.92,
+      "end": 1934.03,
+      "duration": 1.11,
+      "text": "that's in the right-hand side of the"
+    },
+    {
+      "index": 712,
+      "start": 1934.04,
+      "end": 1942.23,
+      "duration": 8.19,
+      "text": "equation."
+    },
+    {
+      "index": 713,
+      "start": 1950.91,
+      "end": 1950.92,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 714,
+      "start": 1950.92,
+      "end": 1953.75,
+      "duration": 2.83,
+      "text": "let's try to think about"
+    },
+    {
+      "index": 715,
+      "start": 1953.76,
+      "end": 1955.39,
+      "duration": 1.63,
+      "text": "what exactly this case is. You know, how"
+    },
+    {
+      "index": 716,
+      "start": 1955.4,
+      "end": 1956.99,
+      "duration": 1.59,
+      "text": "do how do we detect now in which"
+    },
+    {
+      "index": 717,
+      "start": 1957.0,
+      "end": 1958.99,
+      "duration": 1.99,
+      "text": "situation we are? Because that's all"
+    },
+    {
+      "index": 718,
+      "start": 1959.0,
+      "end": 1961.23,
+      "duration": 2.23,
+      "text": "very nice in a picture,"
+    },
+    {
+      "index": 719,
+      "start": 1961.24,
+      "end": 1962.83,
+      "duration": 1.59,
+      "text": "but"
+    },
+    {
+      "index": 720,
+      "start": 1962.84,
+      "end": 1964.27,
+      "duration": 1.43,
+      "text": "you know, it's difficult to draw planes."
+    },
+    {
+      "index": 721,
+      "start": 1964.28,
+      "end": 1966.15,
+      "duration": 1.87,
+      "text": "In fact, when I draw these pictures, I'm"
+    },
+    {
+      "index": 722,
+      "start": 1966.16,
+      "end": 1968.35,
+      "duration": 2.19,
+      "text": "always very careful not to actually try"
+    },
+    {
+      "index": 723,
+      "start": 1968.36,
+      "end": 1970.03,
+      "duration": 1.67,
+      "text": "to pretend to draw an actual plane given"
+    },
+    {
+      "index": 724,
+      "start": 1970.04,
+      "end": 1971.99,
+      "duration": 1.95,
+      "text": "by an equation, or when I do, then it's"
+    },
+    {
+      "index": 725,
+      "start": 1972.0,
+      "end": 1973.79,
+      "duration": 1.79,
+      "text": "blatantly false."
+    },
+    {
+      "index": 726,
+      "start": 1973.8,
+      "end": 1975.83,
+      "duration": 2.03,
+      "text": "Um it's difficult to draw a plane"
+    },
+    {
+      "index": 727,
+      "start": 1975.84,
+      "end": 1977.07,
+      "duration": 1.23,
+      "text": "correctly."
+    },
+    {
+      "index": 728,
+      "start": 1977.08,
+      "end": 1978.31,
+      "duration": 1.23,
+      "text": "So,"
+    },
+    {
+      "index": 729,
+      "start": 1978.32,
+      "end": 1979.83,
+      "duration": 1.51,
+      "text": "instead, let's try to think about it in"
+    },
+    {
+      "index": 730,
+      "start": 1979.84,
+      "end": 1981.95,
+      "duration": 2.11,
+      "text": "terms of matrices."
+    },
+    {
+      "index": 731,
+      "start": 1981.96,
+      "end": 1983.71,
+      "duration": 1.75,
+      "text": "In particular, what's wrong with this,"
+    },
+    {
+      "index": 732,
+      "start": 1983.72,
+      "end": 1985.59,
+      "duration": 1.87,
+      "text": "you know? Why can't we always say the"
+    },
+    {
+      "index": 733,
+      "start": 1985.6,
+      "end": 1989.39,
+      "duration": 3.79,
+      "text": "solution is X equals A inverse B?"
+    },
+    {
+      "index": 734,
+      "start": 1989.4,
+      "end": 1990.91,
+      "duration": 1.51,
+      "text": "Well,"
+    },
+    {
+      "index": 735,
+      "start": 1990.92,
+      "end": 1995.47,
+      "duration": 4.55,
+      "text": "so"
+    },
+    {
+      "index": 736,
+      "start": 1997.35,
+      "end": 1997.36,
+      "duration": 0.01,
+      "text": "the point is actually you cannot always"
+    },
+    {
+      "index": 737,
+      "start": 1997.36,
+      "end": 2001.79,
+      "duration": 4.43,
+      "text": "invert a matrix. Okay?"
+    },
+    {
+      "index": 738,
+      "start": 2005.59,
+      "end": 2005.6,
+      "duration": 0.01,
+      "text": "So, recall we've seen this formula that"
+    },
+    {
+      "index": 739,
+      "start": 2005.6,
+      "end": 2010.83,
+      "duration": 5.23,
+      "text": "A inverse is one over determinant of A"
+    },
+    {
+      "index": 740,
+      "start": 2010.84,
+      "end": 2013.91,
+      "duration": 3.07,
+      "text": "times the adjoint matrix."
+    },
+    {
+      "index": 741,
+      "start": 2013.92,
+      "end": 2015.79,
+      "duration": 1.87,
+      "text": "And well, we've learned how to compute"
+    },
+    {
+      "index": 742,
+      "start": 2015.8,
+      "end": 2017.23,
+      "duration": 1.43,
+      "text": "this thing."
+    },
+    {
+      "index": 743,
+      "start": 2017.24,
+      "end": 2019.79,
+      "duration": 2.55,
+      "text": "Remember, we had to take minors, then"
+    },
+    {
+      "index": 744,
+      "start": 2019.8,
+      "end": 2022.55,
+      "duration": 2.75,
+      "text": "flip some signs, and then transpose."
+    },
+    {
+      "index": 745,
+      "start": 2022.56,
+      "end": 2024.47,
+      "duration": 1.91,
+      "text": "Well, that step we can always do. We can"
+    },
+    {
+      "index": 746,
+      "start": 2024.48,
+      "end": 2027.19,
+      "duration": 2.71,
+      "text": "always do these calculations."
+    },
+    {
+      "index": 747,
+      "start": 2027.2,
+      "end": 2029.03,
+      "duration": 1.83,
+      "text": "But then at the end, we have to divide"
+    },
+    {
+      "index": 748,
+      "start": 2029.04,
+      "end": 2030.71,
+      "duration": 1.67,
+      "text": "by the determinant."
+    },
+    {
+      "index": 749,
+      "start": 2030.72,
+      "end": 2031.87,
+      "duration": 1.15,
+      "text": "Well,"
+    },
+    {
+      "index": 750,
+      "start": 2031.88,
+      "end": 2033.19,
+      "duration": 1.31,
+      "text": "that's fine if the determinant is not"
+    },
+    {
+      "index": 751,
+      "start": 2033.2,
+      "end": 2034.91,
+      "duration": 1.71,
+      "text": "zero, but if the determinant is zero,"
+    },
+    {
+      "index": 752,
+      "start": 2034.92,
+      "end": 2039.51,
+      "duration": 4.59,
+      "text": "then certainly we cannot do that."
+    },
+    {
+      "index": 753,
+      "start": 2041.35,
+      "end": 2041.36,
+      "duration": 0.01,
+      "text": "So, in fact,"
+    },
+    {
+      "index": 754,
+      "start": 2041.36,
+      "end": 2044.51,
+      "duration": 3.15,
+      "text": "what I didn't mention last time is that"
+    },
+    {
+      "index": 755,
+      "start": 2044.52,
+      "end": 2046.71,
+      "duration": 2.19,
+      "text": "the matrix is invertible, that means it"
+    },
+    {
+      "index": 756,
+      "start": 2046.72,
+      "end": 2049.31,
+      "duration": 2.59,
+      "text": "has an inverse,"
+    },
+    {
+      "index": 757,
+      "start": 2049.32,
+      "end": 2052.99,
+      "duration": 3.67,
+      "text": "exactly when its determinant"
+    },
+    {
+      "index": 758,
+      "start": 2053.0,
+      "end": 2055.75,
+      "duration": 2.75,
+      "text": "is not zero."
+    },
+    {
+      "index": 759,
+      "start": 2055.76,
+      "end": 2056.75,
+      "duration": 0.99,
+      "text": "Okay, so that's something we should"
+    },
+    {
+      "index": 760,
+      "start": 2056.76,
+      "end": 2059.95,
+      "duration": 3.19,
+      "text": "remember."
+    },
+    {
+      "index": 761,
+      "start": 2062.27,
+      "end": 2062.28,
+      "duration": 0.01,
+      "text": "So, if a determinant is not zero, then"
+    },
+    {
+      "index": 762,
+      "start": 2062.28,
+      "end": 2064.47,
+      "duration": 2.19,
+      "text": "we can use our method to find the"
+    },
+    {
+      "index": 763,
+      "start": 2064.48,
+      "end": 2067.43,
+      "duration": 2.95,
+      "text": "inverse, and then we can solve using"
+    },
+    {
+      "index": 764,
+      "start": 2067.44,
+      "end": 2069.629,
+      "duration": 2.189,
+      "text": "this method."
+    },
+    {
+      "index": 765,
+      "start": 2069.639,
+      "end": 2071.27,
+      "duration": 1.631,
+      "text": "If not, then not."
+    },
+    {
+      "index": 766,
+      "start": 2071.28,
+      "end": 2071.51,
+      "duration": 0.23,
+      "text": "Yeah?"
+    },
+    {
+      "index": 767,
+      "start": 2071.52,
+      "end": 2073.43,
+      "duration": 1.91,
+      "text": "Sorry, can you hear me explain that"
+    },
+    {
+      "index": 768,
+      "start": 2073.44,
+      "end": 2075.629,
+      "duration": 2.189,
+      "text": "quickly? You can invert A if the"
+    },
+    {
+      "index": 769,
+      "start": 2075.639,
+      "end": 2077.99,
+      "duration": 2.351,
+      "text": "determinant of A is not equal to zero."
+    },
+    {
+      "index": 770,
+      "start": 2078.0,
+      "end": 2079.79,
+      "duration": 1.79,
+      "text": "That's correct. So, what I'm saying is"
+    },
+    {
+      "index": 771,
+      "start": 2079.8,
+      "end": 2081.79,
+      "duration": 1.99,
+      "text": "we can invert a matrix A if the"
+    },
+    {
+      "index": 772,
+      "start": 2081.8,
+      "end": 2084.51,
+      "duration": 2.71,
+      "text": "determinant is not zero. And if you look"
+    },
+    {
+      "index": 773,
+      "start": 2084.52,
+      "end": 2085.99,
+      "duration": 1.47,
+      "text": "again at the method that we saw last"
+    },
+    {
+      "index": 774,
+      "start": 2086.0,
+      "end": 2087.23,
+      "duration": 1.23,
+      "text": "time,"
+    },
+    {
+      "index": 775,
+      "start": 2087.24,
+      "end": 2089.43,
+      "duration": 2.19,
+      "text": "so first we had to compute this adjoint"
+    },
+    {
+      "index": 776,
+      "start": 2089.44,
+      "end": 2091.31,
+      "duration": 1.87,
+      "text": "matrix, and these operations we can"
+    },
+    {
+      "index": 777,
+      "start": 2091.32,
+      "end": 2093.47,
+      "duration": 2.15,
+      "text": "always do. If we're given a 3 by 3"
+    },
+    {
+      "index": 778,
+      "start": 2093.48,
+      "end": 2094.95,
+      "duration": 1.47,
+      "text": "matrix, we can always compute the"
+    },
+    {
+      "index": 779,
+      "start": 2094.96,
+      "end": 2096.35,
+      "duration": 1.39,
+      "text": "adjoint."
+    },
+    {
+      "index": 780,
+      "start": 2096.36,
+      "end": 2097.83,
+      "duration": 1.47,
+      "text": "And then the last step to find the"
+    },
+    {
+      "index": 781,
+      "start": 2097.84,
+      "end": 2099.07,
+      "duration": 1.23,
+      "text": "inverse was to divide by the"
+    },
+    {
+      "index": 782,
+      "start": 2099.08,
+      "end": 2102.11,
+      "duration": 3.03,
+      "text": "determinant. And that we can only do if"
+    },
+    {
+      "index": 783,
+      "start": 2102.12,
+      "end": 2103.99,
+      "duration": 1.87,
+      "text": "the determinant is not zero."
+    },
+    {
+      "index": 784,
+      "start": 2104.0,
+      "end": 2105.43,
+      "duration": 1.43,
+      "text": "So, if we have a matrix whose"
+    },
+    {
+      "index": 785,
+      "start": 2105.44,
+      "end": 2107.35,
+      "duration": 1.91,
+      "text": "determinant is not zero, then we know"
+    },
+    {
+      "index": 786,
+      "start": 2107.36,
+      "end": 2109.79,
+      "duration": 2.43,
+      "text": "how to find the inverse."
+    },
+    {
+      "index": 787,
+      "start": 2109.8,
+      "end": 2111.59,
+      "duration": 1.79,
+      "text": "If the determinant is zero, then of"
+    },
+    {
+      "index": 788,
+      "start": 2111.6,
+      "end": 2113.63,
+      "duration": 2.03,
+      "text": "course this method doesn't work,"
+    },
+    {
+      "index": 789,
+      "start": 2113.64,
+      "end": 2116.15,
+      "duration": 2.51,
+      "text": "but I'm saying actually even more, there"
+    },
+    {
+      "index": 790,
+      "start": 2116.16,
+      "end": 2117.91,
+      "duration": 1.75,
+      "text": "isn't an inverse at all. It's not just"
+    },
+    {
+      "index": 791,
+      "start": 2117.92,
+      "end": 2120.59,
+      "duration": 2.67,
+      "text": "that our method fails, I cannot take the"
+    },
+    {
+      "index": 792,
+      "start": 2120.6,
+      "end": 2122.31,
+      "duration": 1.71,
+      "text": "inverse of a matrix with determinant"
+    },
+    {
+      "index": 793,
+      "start": 2122.32,
+      "end": 2126.63,
+      "duration": 4.31,
+      "text": "zero."
+    },
+    {
+      "index": 794,
+      "start": 2128.91,
+      "end": 2128.92,
+      "duration": 0.01,
+      "text": "And geometrically,"
+    },
+    {
+      "index": 795,
+      "start": 2128.92,
+      "end": 2131.43,
+      "duration": 2.51,
+      "text": "well, precisely the situation where the"
+    },
+    {
+      "index": 796,
+      "start": 2131.44,
+      "end": 2134.23,
+      "duration": 2.79,
+      "text": "determinant is not zero is exactly this"
+    },
+    {
+      "index": 797,
+      "start": 2134.24,
+      "end": 2136.43,
+      "duration": 2.19,
+      "text": "nice usual situation where the three"
+    },
+    {
+      "index": 798,
+      "start": 2136.44,
+      "end": 2138.71,
+      "duration": 2.27,
+      "text": "planes intersect in a point."
+    },
+    {
+      "index": 799,
+      "start": 2138.72,
+      "end": 2140.63,
+      "duration": 1.91,
+      "text": "While the situation where the"
+    },
+    {
+      "index": 800,
+      "start": 2140.64,
+      "end": 2143.47,
+      "duration": 2.83,
+      "text": "determinant is zero is this situation"
+    },
+    {
+      "index": 801,
+      "start": 2143.48,
+      "end": 2145.59,
+      "duration": 2.11,
+      "text": "here where the line determined by the"
+    },
+    {
+      "index": 802,
+      "start": 2145.6,
+      "end": 2147.19,
+      "duration": 1.59,
+      "text": "first two planes is parallel to the"
+    },
+    {
+      "index": 803,
+      "start": 2147.2,
+      "end": 2151.67,
+      "duration": 4.47,
+      "text": "third plane."
+    },
+    {
+      "index": 804,
+      "start": 2152.63,
+      "end": 2152.64,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 805,
+      "start": 2152.64,
+      "end": 2156.19,
+      "duration": 3.55,
+      "text": "So,"
+    },
+    {
+      "index": 806,
+      "start": 2157.67,
+      "end": 2157.68,
+      "duration": 0.01,
+      "text": "let me"
+    },
+    {
+      "index": 807,
+      "start": 2157.68,
+      "end": 2159.83,
+      "duration": 2.15,
+      "text": "emphasize this again."
+    },
+    {
+      "index": 808,
+      "start": 2159.84,
+      "end": 2161.59,
+      "duration": 1.75,
+      "text": "And"
+    },
+    {
+      "index": 809,
+      "start": 2161.6,
+      "end": 2166.91,
+      "duration": 5.31,
+      "text": "let's see again what happens."
+    },
+    {
+      "index": 810,
+      "start": 2169.15,
+      "end": 2169.16,
+      "duration": 0.01,
+      "text": "Okay, so let's start with an easier"
+    },
+    {
+      "index": 811,
+      "start": 2169.16,
+      "end": 2178.79,
+      "duration": 9.63,
+      "text": "case."
+    },
+    {
+      "index": 812,
+      "start": 2180.15,
+      "end": 2180.16,
+      "duration": 0.01,
+      "text": "So, it's called the case of a"
+    },
+    {
+      "index": 813,
+      "start": 2180.16,
+      "end": 2181.71,
+      "duration": 1.55,
+      "text": "homogeneous system. It's called"
+    },
+    {
+      "index": 814,
+      "start": 2181.72,
+      "end": 2183.47,
+      "duration": 1.75,
+      "text": "homogeneous"
+    },
+    {
+      "index": 815,
+      "start": 2183.48,
+      "end": 2187.99,
+      "duration": 4.51,
+      "text": "because it's the situation"
+    },
+    {
+      "index": 816,
+      "start": 2190.47,
+      "end": 2190.48,
+      "duration": 0.01,
+      "text": "where the equations are invariant under"
+    },
+    {
+      "index": 817,
+      "start": 2190.48,
+      "end": 2193.31,
+      "duration": 2.83,
+      "text": "scaling. So, a homogeneous system"
+    },
+    {
+      "index": 818,
+      "start": 2193.32,
+      "end": 2194.99,
+      "duration": 1.67,
+      "text": "is one where the right-hand side is"
+    },
+    {
+      "index": 819,
+      "start": 2195.0,
+      "end": 2195.87,
+      "duration": 0.87,
+      "text": "zero."
+    },
+    {
+      "index": 820,
+      "start": 2195.88,
+      "end": 2197.55,
+      "duration": 1.67,
+      "text": "Okay? There's no B. If you want the"
+    },
+    {
+      "index": 821,
+      "start": 2197.56,
+      "end": 2201.35,
+      "duration": 3.79,
+      "text": "constant terms here are all zeros. 0 0"
+    },
+    {
+      "index": 822,
+      "start": 2201.36,
+      "end": 2202.39,
+      "duration": 1.03,
+      "text": "0."
+    },
+    {
+      "index": 823,
+      "start": 2202.4,
+      "end": 2205.87,
+      "duration": 3.47,
+      "text": "Okay, so this one is not homogeneous."
+    },
+    {
+      "index": 824,
+      "start": 2205.88,
+      "end": 2209.31,
+      "duration": 3.43,
+      "text": "So, let's see what happens there."
+    },
+    {
+      "index": 825,
+      "start": 2209.32,
+      "end": 2211.51,
+      "duration": 2.19,
+      "text": "Well,"
+    },
+    {
+      "index": 826,
+      "start": 2211.52,
+      "end": 2214.59,
+      "duration": 3.07,
+      "text": "so what that means,"
+    },
+    {
+      "index": 827,
+      "start": 2214.6,
+      "end": 2216.71,
+      "duration": 2.11,
+      "text": "you know, so"
+    },
+    {
+      "index": 828,
+      "start": 2216.72,
+      "end": 2218.51,
+      "duration": 1.79,
+      "text": "let's take an example. Instead of this"
+    },
+    {
+      "index": 829,
+      "start": 2218.52,
+      "end": 2222.31,
+      "duration": 3.79,
+      "text": "guy, we could take X + Z = 0,"
+    },
+    {
+      "index": 830,
+      "start": 2222.32,
+      "end": 2227.79,
+      "duration": 5.47,
+      "text": "X + Y = 0, and X + 2Y"
+    },
+    {
+      "index": 831,
+      "start": 2227.8,
+      "end": 2231.59,
+      "duration": 3.79,
+      "text": "+ 3Z also equals 0."
+    },
+    {
+      "index": 832,
+      "start": 2231.6,
+      "end": 2235.31,
+      "duration": 3.71,
+      "text": "Well, can we solve these equations?"
+    },
+    {
+      "index": 833,
+      "start": 2235.32,
+      "end": 2237.35,
+      "duration": 2.03,
+      "text": "Yeah, I think actually you already know"
+    },
+    {
+      "index": 834,
+      "start": 2237.36,
+      "end": 2238.63,
+      "duration": 1.27,
+      "text": "a very simple solution to these"
+    },
+    {
+      "index": 835,
+      "start": 2238.64,
+      "end": 2241.23,
+      "duration": 2.59,
+      "text": "equations."
+    },
+    {
+      "index": 836,
+      "start": 2241.24,
+      "end": 2242.99,
+      "duration": 1.75,
+      "text": "Yeah, you can just take X, Y, and Z all"
+    },
+    {
+      "index": 837,
+      "start": 2243.0,
+      "end": 2245.27,
+      "duration": 2.27,
+      "text": "to be zero."
+    },
+    {
+      "index": 838,
+      "start": 2245.28,
+      "end": 2248.39,
+      "duration": 3.11,
+      "text": "So,"
+    },
+    {
+      "index": 839,
+      "start": 2264.11,
+      "end": 2264.12,
+      "duration": 0.01,
+      "text": "Namely, 0 0 0."
+    },
+    {
+      "index": 840,
+      "start": 2264.12,
+      "end": 2265.83,
+      "duration": 1.71,
+      "text": "And"
+    },
+    {
+      "index": 841,
+      "start": 2265.84,
+      "end": 2267.83,
+      "duration": 1.99,
+      "text": "in mathematical jargon, this is called"
+    },
+    {
+      "index": 842,
+      "start": 2267.84,
+      "end": 2271.39,
+      "duration": 3.55,
+      "text": "the trivial solution."
+    },
+    {
+      "index": 843,
+      "start": 2273.23,
+      "end": 2273.24,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 844,
+      "start": 2273.24,
+      "end": 2274.95,
+      "duration": 1.71,
+      "text": "So,"
+    },
+    {
+      "index": 845,
+      "start": 2274.96,
+      "end": 2277.03,
+      "duration": 2.07,
+      "text": "there's always this trivial solution."
+    },
+    {
+      "index": 846,
+      "start": 2277.04,
+      "end": 2279.75,
+      "duration": 2.71,
+      "text": "And what's the geometric interpretation?"
+    },
+    {
+      "index": 847,
+      "start": 2279.76,
+      "end": 2282.19,
+      "duration": 2.43,
+      "text": "Well, having zeros here means that all"
+    },
+    {
+      "index": 848,
+      "start": 2282.2,
+      "end": 2284.43,
+      "duration": 2.23,
+      "text": "three planes pass through the origin."
+    },
+    {
+      "index": 849,
+      "start": 2284.44,
+      "end": 2286.67,
+      "duration": 2.23,
+      "text": "So, certainly the origin is always a"
+    },
+    {
+      "index": 850,
+      "start": 2286.68,
+      "end": 2301.23,
+      "duration": 14.55,
+      "text": "solution."
+    },
+    {
+      "index": 851,
+      "start": 2303.67,
+      "end": 2303.68,
+      "duration": 0.01,
+      "text": "So, the origin is always a solution"
+    },
+    {
+      "index": 852,
+      "start": 2303.68,
+      "end": 2306.95,
+      "duration": 3.27,
+      "text": "because"
+    },
+    {
+      "index": 853,
+      "start": 2313.07,
+      "end": 2313.08,
+      "duration": 0.01,
+      "text": "pass"
+    },
+    {
+      "index": 854,
+      "start": 2313.08,
+      "end": 2319.23,
+      "duration": 6.15,
+      "text": "through the origin."
+    },
+    {
+      "index": 855,
+      "start": 2321.03,
+      "end": 2321.04,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 856,
+      "start": 2321.04,
+      "end": 2325.11,
+      "duration": 4.07,
+      "text": "So, now there's two subcases. Okay?"
+    },
+    {
+      "index": 857,
+      "start": 2325.12,
+      "end": 2327.27,
+      "duration": 2.15,
+      "text": "One case is if the determinant of the"
+    },
+    {
+      "index": 858,
+      "start": 2327.28,
+      "end": 2330.87,
+      "duration": 3.59,
+      "text": "matrix A is nonzero."
+    },
+    {
+      "index": 859,
+      "start": 2330.88,
+      "end": 2335.67,
+      "duration": 4.79,
+      "text": "Well, that means that"
+    },
+    {
+      "index": 860,
+      "start": 2340.71,
+      "end": 2340.72,
+      "duration": 0.01,
+      "text": "So, if we can invert A,"
+    },
+    {
+      "index": 861,
+      "start": 2340.72,
+      "end": 2343.55,
+      "duration": 2.83,
+      "text": "then that means we can solve"
+    },
+    {
+      "index": 862,
+      "start": 2343.56,
+      "end": 2344.91,
+      "duration": 1.35,
+      "text": "the system"
+    },
+    {
+      "index": 863,
+      "start": 2344.92,
+      "end": 2347.23,
+      "duration": 2.31,
+      "text": "by multiplying by A inverse."
+    },
+    {
+      "index": 864,
+      "start": 2347.24,
+      "end": 2349.43,
+      "duration": 2.19,
+      "text": "If we multiply by A inverse,"
+    },
+    {
+      "index": 865,
+      "start": 2349.44,
+      "end": 2351.87,
+      "duration": 2.43,
+      "text": "well, we'll get X equals"
+    },
+    {
+      "index": 866,
+      "start": 2351.88,
+      "end": 2354.19,
+      "duration": 2.31,
+      "text": "A inverse times zero,"
+    },
+    {
+      "index": 867,
+      "start": 2354.2,
+      "end": 2356.11,
+      "duration": 1.91,
+      "text": "which is zero."
+    },
+    {
+      "index": 868,
+      "start": 2356.12,
+      "end": 2360.99,
+      "duration": 4.87,
+      "text": "Okay, and that's the only solution."
+    },
+    {
+      "index": 869,
+      "start": 2363.07,
+      "end": 2363.08,
+      "duration": 0.01,
+      "text": "Because, well,"
+    },
+    {
+      "index": 870,
+      "start": 2363.08,
+      "end": 2364.95,
+      "duration": 1.87,
+      "text": "you know, if AX is zero, then let's"
+    },
+    {
+      "index": 871,
+      "start": 2364.96,
+      "end": 2366.95,
+      "duration": 1.99,
+      "text": "multiply by A inverse, we get A inverse"
+    },
+    {
+      "index": 872,
+      "start": 2366.96,
+      "end": 2369.83,
+      "duration": 2.87,
+      "text": "AX, that's X, equals A inverse zero,"
+    },
+    {
+      "index": 873,
+      "start": 2369.84,
+      "end": 2371.95,
+      "duration": 2.11,
+      "text": "that's zero. We get X equals zero. We've"
+    },
+    {
+      "index": 874,
+      "start": 2371.96,
+      "end": 2374.11,
+      "duration": 2.15,
+      "text": "solved it."
+    },
+    {
+      "index": 875,
+      "start": 2374.12,
+      "end": 2381.95,
+      "duration": 7.83,
+      "text": "Okay, no other solution."
+    },
+    {
+      "index": 876,
+      "start": 2383.19,
+      "end": 2383.2,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 877,
+      "start": 2383.2,
+      "end": 2385.63,
+      "duration": 2.43,
+      "text": "to go back to these pictures that"
+    },
+    {
+      "index": 878,
+      "start": 2385.64,
+      "end": 2386.95,
+      "duration": 1.31,
+      "text": "we all enjoy,"
+    },
+    {
+      "index": 879,
+      "start": 2386.96,
+      "end": 2390.51,
+      "duration": 3.55,
+      "text": "it's"
+    },
+    {
+      "index": 880,
+      "start": 2405.63,
+      "end": 2405.64,
+      "duration": 0.01,
+      "text": "if the determinant of A"
+    },
+    {
+      "index": 881,
+      "start": 2405.64,
+      "end": 2410.59,
+      "duration": 4.95,
+      "text": "equals zero, then it means that actually"
+    },
+    {
+      "index": 882,
+      "start": 2410.6,
+      "end": 2413.11,
+      "duration": 2.51,
+      "text": "this doesn't quite work."
+    },
+    {
+      "index": 883,
+      "start": 2413.12,
+      "end": 2415.99,
+      "duration": 2.87,
+      "text": "So,"
+    },
+    {
+      "index": 884,
+      "start": 2417.19,
+      "end": 2417.2,
+      "duration": 0.01,
+      "text": "let's see."
+    },
+    {
+      "index": 885,
+      "start": 2417.2,
+      "end": 2418.63,
+      "duration": 1.43,
+      "text": "What does it mean that the determinant"
+    },
+    {
+      "index": 886,
+      "start": 2418.64,
+      "end": 2420.79,
+      "duration": 2.15,
+      "text": "of A is zero? Well, remember"
+    },
+    {
+      "index": 887,
+      "start": 2420.8,
+      "end": 2422.55,
+      "duration": 1.75,
+      "text": "the entries in A, they are the"
+    },
+    {
+      "index": 888,
+      "start": 2422.56,
+      "end": 2425.27,
+      "duration": 2.71,
+      "text": "coefficients in the equations. Okay?"
+    },
+    {
+      "index": 889,
+      "start": 2425.28,
+      "end": 2426.35,
+      "duration": 1.07,
+      "text": "But now, the coefficients in the"
+    },
+    {
+      "index": 890,
+      "start": 2426.36,
+      "end": 2428.11,
+      "duration": 1.75,
+      "text": "equations,"
+    },
+    {
+      "index": 891,
+      "start": 2428.12,
+      "end": 2429.67,
+      "duration": 1.55,
+      "text": "they are exactly the normal vectors to"
+    },
+    {
+      "index": 892,
+      "start": 2429.68,
+      "end": 2431.23,
+      "duration": 1.55,
+      "text": "the planes."
+    },
+    {
+      "index": 893,
+      "start": 2431.24,
+      "end": 2433.63,
+      "duration": 2.39,
+      "text": "So, that's the same thing as saying that"
+    },
+    {
+      "index": 894,
+      "start": 2433.64,
+      "end": 2435.63,
+      "duration": 1.99,
+      "text": "the determinant"
+    },
+    {
+      "index": 895,
+      "start": 2435.64,
+      "end": 2438.51,
+      "duration": 2.87,
+      "text": "of the three normal vectors to our three"
+    },
+    {
+      "index": 896,
+      "start": 2438.52,
+      "end": 2440.31,
+      "duration": 1.79,
+      "text": "planes"
+    },
+    {
+      "index": 897,
+      "start": 2440.32,
+      "end": 2447.15,
+      "duration": 6.83,
+      "text": "is zero."
+    },
+    {
+      "index": 898,
+      "start": 2456.07,
+      "end": 2456.08,
+      "duration": 0.01,
+      "text": "that N1"
+    },
+    {
+      "index": 899,
+      "start": 2456.08,
+      "end": 2457.31,
+      "duration": 1.23,
+      "text": "N2"
+    },
+    {
+      "index": 900,
+      "start": 2457.32,
+      "end": 2460.63,
+      "duration": 3.31,
+      "text": "and N3 are actually in the same plane."
+    },
+    {
+      "index": 901,
+      "start": 2460.64,
+      "end": 2462.51,
+      "duration": 1.87,
+      "text": "It's called coplanar. Okay? These three"
+    },
+    {
+      "index": 902,
+      "start": 2462.52,
+      "end": 2466.47,
+      "duration": 3.95,
+      "text": "vectors are coplanar."
+    },
+    {
+      "index": 903,
+      "start": 2468.27,
+      "end": 2468.28,
+      "duration": 0.01,
+      "text": "So, let's"
+    },
+    {
+      "index": 904,
+      "start": 2468.28,
+      "end": 2471.71,
+      "duration": 3.43,
+      "text": "see what happens."
+    },
+    {
+      "index": 905,
+      "start": 2473.47,
+      "end": 2473.48,
+      "duration": 0.01,
+      "text": "So, I claim it would correspond to this"
+    },
+    {
+      "index": 906,
+      "start": 2473.48,
+      "end": 2475.31,
+      "duration": 1.83,
+      "text": "situation here."
+    },
+    {
+      "index": 907,
+      "start": 2475.32,
+      "end": 2476.75,
+      "duration": 1.43,
+      "text": "Let's draw the normal vectors to these"
+    },
+    {
+      "index": 908,
+      "start": 2476.76,
+      "end": 2482.87,
+      "duration": 6.11,
+      "text": "three planes."
+    },
+    {
+      "index": 909,
+      "start": 2490.19,
+      "end": 2490.2,
+      "duration": 0.01,
+      "text": "but Okay, so I've tried to draw the"
+    },
+    {
+      "index": 910,
+      "start": 2490.2,
+      "end": 2492.51,
+      "duration": 2.31,
+      "text": "normal vectors to my planes."
+    },
+    {
+      "index": 911,
+      "start": 2492.52,
+      "end": 2494.95,
+      "duration": 2.43,
+      "text": "Well, they're all"
+    },
+    {
+      "index": 912,
+      "start": 2494.96,
+      "end": 2496.99,
+      "duration": 2.03,
+      "text": "in the direction that's perpendicular to"
+    },
+    {
+      "index": 913,
+      "start": 2497.0,
+      "end": 2498.83,
+      "duration": 1.83,
+      "text": "the line of intersection. They're all in"
+    },
+    {
+      "index": 914,
+      "start": 2498.84,
+      "end": 2500.87,
+      "duration": 2.03,
+      "text": "the same plane. So, if I try to form a"
+    },
+    {
+      "index": 915,
+      "start": 2500.88,
+      "end": 2502.03,
+      "duration": 1.15,
+      "text": "box,"
+    },
+    {
+      "index": 916,
+      "start": 2502.04,
+      "end": 2503.59,
+      "duration": 1.55,
+      "text": "you know, a parallelepiped,"
+    },
+    {
+      "index": 917,
+      "start": 2503.6,
+      "end": 2505.83,
+      "duration": 2.23,
+      "text": "with these three normal vectors, well, I"
+    },
+    {
+      "index": 918,
+      "start": 2505.84,
+      "end": 2506.83,
+      "duration": 0.99,
+      "text": "will get something that's completely"
+    },
+    {
+      "index": 919,
+      "start": 2506.84,
+      "end": 2510.87,
+      "duration": 4.03,
+      "text": "flat and has no volume. Has volume zero."
+    },
+    {
+      "index": 920,
+      "start": 2510.88,
+      "end": 2511.79,
+      "duration": 0.91,
+      "text": "Okay?"
+    },
+    {
+      "index": 921,
+      "start": 2511.8,
+      "end": 2518.79,
+      "duration": 6.99,
+      "text": "So,"
+    },
+    {
+      "index": 922,
+      "start": 2530.31,
+      "end": 2530.32,
+      "duration": 0.01,
+      "text": "And the fact that the normal vectors"
+    },
+    {
+      "index": 923,
+      "start": 2530.32,
+      "end": 2533.39,
+      "duration": 3.07,
+      "text": "are coplanar"
+    },
+    {
+      "index": 924,
+      "start": 2540.71,
+      "end": 2540.72,
+      "duration": 0.01,
+      "text": "Well, let me start a new blackboard."
+    },
+    {
+      "index": 925,
+      "start": 2540.72,
+      "end": 2543.27,
+      "duration": 2.55,
+      "text": "If we Okay, so now"
+    },
+    {
+      "index": 926,
+      "start": 2543.28,
+      "end": 2545.15,
+      "duration": 1.87,
+      "text": "let's say that our normal vectors N1,"
+    },
+    {
+      "index": 927,
+      "start": 2545.16,
+      "end": 2548.07,
+      "duration": 2.91,
+      "text": "N2, and N3 are all in the same plane."
+    },
+    {
+      "index": 928,
+      "start": 2548.08,
+      "end": 2549.47,
+      "duration": 1.39,
+      "text": "And let's think about the direction"
+    },
+    {
+      "index": 929,
+      "start": 2549.48,
+      "end": 2551.31,
+      "duration": 1.83,
+      "text": "that's perpendicular"
+    },
+    {
+      "index": 930,
+      "start": 2551.32,
+      "end": 2555.35,
+      "duration": 4.03,
+      "text": "to N1, N2, and N3 at the same time."
+    },
+    {
+      "index": 931,
+      "start": 2555.36,
+      "end": 2556.83,
+      "duration": 1.47,
+      "text": "Okay, I claim that will be the line of"
+    },
+    {
+      "index": 932,
+      "start": 2556.84,
+      "end": 2588.47,
+      "duration": 31.63,
+      "text": "intersection."
+    },
+    {
+      "index": 933,
+      "start": 2590.63,
+      "end": 2590.64,
+      "duration": 0.01,
+      "text": "So, let me try to draw the picture"
+    },
+    {
+      "index": 934,
+      "start": 2590.64,
+      "end": 2591.79,
+      "duration": 1.15,
+      "text": "again."
+    },
+    {
+      "index": 935,
+      "start": 2591.8,
+      "end": 2606.63,
+      "duration": 14.83,
+      "text": "So, we have three planes."
+    },
+    {
+      "index": 936,
+      "start": 2607.91,
+      "end": 2607.92,
+      "duration": 0.01,
+      "text": "Okay, now you see why I prepared the"
+    },
+    {
+      "index": 937,
+      "start": 2607.92,
+      "end": 2611.23,
+      "duration": 3.31,
+      "text": "picture in advance. It's easier"
+    },
+    {
+      "index": 938,
+      "start": 2611.24,
+      "end": 2613.11,
+      "duration": 1.87,
+      "text": "I draw it beforehand."
+    },
+    {
+      "index": 939,
+      "start": 2613.12,
+      "end": 2616.95,
+      "duration": 3.83,
+      "text": "And I said their normal vectors are all"
+    },
+    {
+      "index": 940,
+      "start": 2616.96,
+      "end": 2618.67,
+      "duration": 1.71,
+      "text": "in the same plane."
+    },
+    {
+      "index": 941,
+      "start": 2618.68,
+      "end": 2619.99,
+      "duration": 1.31,
+      "text": "So,"
+    },
+    {
+      "index": 942,
+      "start": 2620.0,
+      "end": 2621.59,
+      "duration": 1.59,
+      "text": "Oh, what else do I know? I know that all"
+    },
+    {
+      "index": 943,
+      "start": 2621.6,
+      "end": 2622.87,
+      "duration": 1.27,
+      "text": "these planes"
+    },
+    {
+      "index": 944,
+      "start": 2622.88,
+      "end": 2625.11,
+      "duration": 2.23,
+      "text": "pass through the origin. Okay, so the"
+    },
+    {
+      "index": 945,
+      "start": 2625.12,
+      "end": 2626.83,
+      "duration": 1.71,
+      "text": "origin"
+    },
+    {
+      "index": 946,
+      "start": 2626.84,
+      "end": 2629.75,
+      "duration": 2.91,
+      "text": "is somewhere in the intersection of the"
+    },
+    {
+      "index": 947,
+      "start": 2629.76,
+      "end": 2631.39,
+      "duration": 1.63,
+      "text": "three planes."
+    },
+    {
+      "index": 948,
+      "start": 2631.4,
+      "end": 2634.83,
+      "duration": 3.43,
+      "text": "Now,"
+    },
+    {
+      "index": 949,
+      "start": 2646.51,
+      "end": 2646.52,
+      "duration": 0.01,
+      "text": "Well, it's kind of hard to draw a little"
+    },
+    {
+      "index": 950,
+      "start": 2646.52,
+      "end": 2649.11,
+      "duration": 2.59,
+      "text": "bit."
+    },
+    {
+      "index": 951,
+      "start": 2653.23,
+      "end": 2653.24,
+      "duration": 0.01,
+      "text": "Uh all actually coplanar."
+    },
+    {
+      "index": 952,
+      "start": 2653.24,
+      "end": 2655.15,
+      "duration": 1.91,
+      "text": "Okay, so N1,"
+    },
+    {
+      "index": 953,
+      "start": 2655.16,
+      "end": 2657.31,
+      "duration": 2.15,
+      "text": "N2, N3"
+    },
+    {
+      "index": 954,
+      "start": 2657.32,
+      "end": 2658.87,
+      "duration": 1.55,
+      "text": "determine a plane."
+    },
+    {
+      "index": 955,
+      "start": 2658.88,
+      "end": 2661.27,
+      "duration": 2.39,
+      "text": "Well,"
+    },
+    {
+      "index": 956,
+      "start": 2661.28,
+      "end": 2664.15,
+      "duration": 2.87,
+      "text": "now if I look at the line through the"
+    },
+    {
+      "index": 957,
+      "start": 2664.16,
+      "end": 2665.35,
+      "duration": 1.19,
+      "text": "origin"
+    },
+    {
+      "index": 958,
+      "start": 2665.36,
+      "end": 2668.67,
+      "duration": 3.31,
+      "text": "that's perpendicular to N1, N2, and N3."
+    },
+    {
+      "index": 959,
+      "start": 2668.68,
+      "end": 2670.23,
+      "duration": 1.55,
+      "text": "So, perpendicular to this red plane"
+    },
+    {
+      "index": 960,
+      "start": 2670.24,
+      "end": 2672.43,
+      "duration": 2.19,
+      "text": "here."
+    },
+    {
+      "index": 961,
+      "start": 2672.44,
+      "end": 2675.79,
+      "duration": 3.35,
+      "text": "Uh that's a terrible picture. It's"
+    },
+    {
+      "index": 962,
+      "start": 2675.8,
+      "end": 2679.79,
+      "duration": 3.99,
+      "text": "supposed to be in all the planes."
+    },
+    {
+      "index": 963,
+      "start": 2682.31,
+      "end": 2682.32,
+      "duration": 0.01,
+      "text": "Okay, you can see that better"
+    },
+    {
+      "index": 964,
+      "start": 2682.32,
+      "end": 2685.11,
+      "duration": 2.79,
+      "text": "on the side screens."
+    },
+    {
+      "index": 965,
+      "start": 2685.12,
+      "end": 2687.47,
+      "duration": 2.35,
+      "text": "Okay, and why is that? Well, that's"
+    },
+    {
+      "index": 966,
+      "start": 2687.48,
+      "end": 2689.19,
+      "duration": 1.71,
+      "text": "because"
+    },
+    {
+      "index": 967,
+      "start": 2689.2,
+      "end": 2691.75,
+      "duration": 2.55,
+      "text": "my line it's perpendicular to the normal"
+    },
+    {
+      "index": 968,
+      "start": 2691.76,
+      "end": 2693.83,
+      "duration": 2.07,
+      "text": "vectors. So, it's parallel to the"
+    },
+    {
+      "index": 969,
+      "start": 2693.84,
+      "end": 2695.31,
+      "duration": 1.47,
+      "text": "planes. It's parallel to all of the"
+    },
+    {
+      "index": 970,
+      "start": 2695.32,
+      "end": 2696.59,
+      "duration": 1.27,
+      "text": "planes."
+    },
+    {
+      "index": 971,
+      "start": 2696.6,
+      "end": 2698.47,
+      "duration": 1.87,
+      "text": "Now, why is it in the planes instead of"
+    },
+    {
+      "index": 972,
+      "start": 2698.48,
+      "end": 2700.51,
+      "duration": 2.03,
+      "text": "parallel to them? Well, that's because"
+    },
+    {
+      "index": 973,
+      "start": 2700.52,
+      "end": 2701.99,
+      "duration": 1.47,
+      "text": "my line goes through the origin and the"
+    },
+    {
+      "index": 974,
+      "start": 2702.0,
+      "end": 2704.95,
+      "duration": 2.95,
+      "text": "origin is on the plane. So, suddenly my"
+    },
+    {
+      "index": 975,
+      "start": 2704.96,
+      "end": 2706.87,
+      "duration": 1.91,
+      "text": "line has to be contained in the planes,"
+    },
+    {
+      "index": 976,
+      "start": 2706.88,
+      "end": 2710.51,
+      "duration": 3.63,
+      "text": "not parallel to them."
+    },
+    {
+      "index": 977,
+      "start": 2711.35,
+      "end": 2711.36,
+      "duration": 0.01,
+      "text": "Okay,"
+    },
+    {
+      "index": 978,
+      "start": 2711.36,
+      "end": 2713.95,
+      "duration": 2.59,
+      "text": "so the line"
+    },
+    {
+      "index": 979,
+      "start": 2713.96,
+      "end": 2715.67,
+      "duration": 1.71,
+      "text": "through"
+    },
+    {
+      "index": 980,
+      "start": 2715.68,
+      "end": 2717.31,
+      "duration": 1.63,
+      "text": "the origin"
+    },
+    {
+      "index": 981,
+      "start": 2717.32,
+      "end": 2722.43,
+      "duration": 5.11,
+      "text": "and perpendicular"
+    },
+    {
+      "index": 982,
+      "start": 2725.11,
+      "end": 2725.12,
+      "duration": 0.01,
+      "text": "to the plane"
+    },
+    {
+      "index": 983,
+      "start": 2725.12,
+      "end": 2732.83,
+      "duration": 7.71,
+      "text": "of N1, N2, and N3"
+    },
+    {
+      "index": 984,
+      "start": 2733.91,
+      "end": 2733.92,
+      "duration": 0.01,
+      "text": "is"
+    },
+    {
+      "index": 985,
+      "start": 2733.92,
+      "end": 2735.19,
+      "duration": 1.27,
+      "text": "parallel"
+    },
+    {
+      "index": 986,
+      "start": 2735.2,
+      "end": 2739.11,
+      "duration": 3.91,
+      "text": "to all three planes."
+    },
+    {
+      "index": 987,
+      "start": 2740.75,
+      "end": 2740.76,
+      "duration": 0.01,
+      "text": "And because the planes go through the"
+    },
+    {
+      "index": 988,
+      "start": 2740.76,
+      "end": 2745.75,
+      "duration": 4.99,
+      "text": "origin"
+    },
+    {
+      "index": 989,
+      "start": 2748.23,
+      "end": 2748.24,
+      "duration": 0.01,
+      "text": "it's contained"
+    },
+    {
+      "index": 990,
+      "start": 2748.24,
+      "end": 2751.71,
+      "duration": 3.47,
+      "text": "in them."
+    },
+    {
+      "index": 991,
+      "start": 2753.51,
+      "end": 2753.52,
+      "duration": 0.01,
+      "text": "Okay, so what happens here is I have in"
+    },
+    {
+      "index": 992,
+      "start": 2753.52,
+      "end": 2754.59,
+      "duration": 1.07,
+      "text": "fact"
+    },
+    {
+      "index": 993,
+      "start": 2754.6,
+      "end": 2757.47,
+      "duration": 2.87,
+      "text": "infinitely many"
+    },
+    {
+      "index": 994,
+      "start": 2757.48,
+      "end": 2765.31,
+      "duration": 7.83,
+      "text": "solutions."
+    },
+    {
+      "index": 995,
+      "start": 2767.59,
+      "end": 2767.6,
+      "duration": 0.01,
+      "text": "And how do I find these solutions? Well,"
+    },
+    {
+      "index": 996,
+      "start": 2767.6,
+      "end": 2769.75,
+      "duration": 2.15,
+      "text": "if I want to find something that's"
+    },
+    {
+      "index": 997,
+      "start": 2769.76,
+      "end": 2773.19,
+      "duration": 3.43,
+      "text": "perpendicular to N1, N2, and N3,"
+    },
+    {
+      "index": 998,
+      "start": 2773.2,
+      "end": 2774.63,
+      "duration": 1.43,
+      "text": "well, if I just want to be perpendicular"
+    },
+    {
+      "index": 999,
+      "start": 2774.64,
+      "end": 2777.99,
+      "duration": 3.35,
+      "text": "to N1 and N2, I can take their"
+    },
+    {
+      "index": 1000,
+      "start": 2778.0,
+      "end": 2780.91,
+      "duration": 2.91,
+      "text": "cross product. Exactly."
+    },
+    {
+      "index": 1001,
+      "start": 2780.92,
+      "end": 2787.47,
+      "duration": 6.55,
+      "text": "So,"
+    },
+    {
+      "index": 1002,
+      "start": 2788.79,
+      "end": 2788.8,
+      "duration": 0.01,
+      "text": "for example,"
+    },
+    {
+      "index": 1003,
+      "start": 2788.8,
+      "end": 2792.67,
+      "duration": 3.87,
+      "text": "if I do N1 cross N2"
+    },
+    {
+      "index": 1004,
+      "start": 2792.68,
+      "end": 2795.47,
+      "duration": 2.79,
+      "text": "is perpendicular to N1"
+    },
+    {
+      "index": 1005,
+      "start": 2795.48,
+      "end": 2799.39,
+      "duration": 3.91,
+      "text": "and to N2."
+    },
+    {
+      "index": 1006,
+      "start": 2801.27,
+      "end": 2801.28,
+      "duration": 0.01,
+      "text": "And also to N3"
+    },
+    {
+      "index": 1007,
+      "start": 2801.28,
+      "end": 2803.35,
+      "duration": 2.07,
+      "text": "because N3 is in the same plane as N1"
+    },
+    {
+      "index": 1008,
+      "start": 2803.36,
+      "end": 2805.07,
+      "duration": 1.71,
+      "text": "and N2. So, if you're perpendicular to"
+    },
+    {
+      "index": 1009,
+      "start": 2805.08,
+      "end": 2807.15,
+      "duration": 2.07,
+      "text": "N1 and N2, you're also perpendicular to"
+    },
+    {
+      "index": 1010,
+      "start": 2807.16,
+      "end": 2808.83,
+      "duration": 1.67,
+      "text": "N3."
+    },
+    {
+      "index": 1011,
+      "start": 2808.84,
+      "end": 2811.51,
+      "duration": 2.67,
+      "text": "It's automatic."
+    },
+    {
+      "index": 1012,
+      "start": 2811.52,
+      "end": 2814.31,
+      "duration": 2.79,
+      "text": "Um so,"
+    },
+    {
+      "index": 1013,
+      "start": 2814.32,
+      "end": 2815.75,
+      "duration": 1.43,
+      "text": "it's"
+    },
+    {
+      "index": 1014,
+      "start": 2815.76,
+      "end": 2822.99,
+      "duration": 7.23,
+      "text": "a non-trivial solution."
+    },
+    {
+      "index": 1015,
+      "start": 2825.03,
+      "end": 2825.04,
+      "duration": 0.01,
+      "text": "This vector goes along the line of"
+    },
+    {
+      "index": 1016,
+      "start": 2825.04,
+      "end": 2828.67,
+      "duration": 3.63,
+      "text": "intersections."
+    },
+    {
+      "index": 1017,
+      "start": 2830.31,
+      "end": 2830.32,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 1018,
+      "start": 2830.32,
+      "end": 2831.75,
+      "duration": 1.43,
+      "text": "So, that's the case of homogeneous"
+    },
+    {
+      "index": 1019,
+      "start": 2831.76,
+      "end": 2832.87,
+      "duration": 1.11,
+      "text": "systems."
+    },
+    {
+      "index": 1020,
+      "start": 2832.88,
+      "end": 2835.67,
+      "duration": 2.79,
+      "text": "And then, let's finish with the other"
+    },
+    {
+      "index": 1021,
+      "start": 2835.68,
+      "end": 2837.11,
+      "duration": 1.43,
+      "text": "case."
+    },
+    {
+      "index": 1022,
+      "start": 2837.12,
+      "end": 2844.31,
+      "duration": 7.19,
+      "text": "So, the general case."
+    },
+    {
+      "index": 1023,
+      "start": 2847.75,
+      "end": 2847.76,
+      "duration": 0.01,
+      "text": "So, that means if we look at a system AX"
+    },
+    {
+      "index": 1024,
+      "start": 2847.76,
+      "end": 2850.59,
+      "duration": 2.83,
+      "text": "= B,"
+    },
+    {
+      "index": 1025,
+      "start": 2850.6,
+      "end": 2851.71,
+      "duration": 1.11,
+      "text": "well,"
+    },
+    {
+      "index": 1026,
+      "start": 2851.72,
+      "end": 2855.55,
+      "duration": 3.83,
+      "text": "with B now anything, there's two cases."
+    },
+    {
+      "index": 1027,
+      "start": 2855.56,
+      "end": 2859.03,
+      "duration": 3.47,
+      "text": "If the determinant of A"
+    },
+    {
+      "index": 1028,
+      "start": 2859.04,
+      "end": 2860.51,
+      "duration": 1.47,
+      "text": "is not zero,"
+    },
+    {
+      "index": 1029,
+      "start": 2860.52,
+      "end": 2861.95,
+      "duration": 1.43,
+      "text": "then"
+    },
+    {
+      "index": 1030,
+      "start": 2861.96,
+      "end": 2868.99,
+      "duration": 7.03,
+      "text": "there's a unique solution."
+    },
+    {
+      "index": 1031,
+      "start": 2878.39,
+      "end": 2878.4,
+      "duration": 0.01,
+      "text": "If the determinant of A"
+    },
+    {
+      "index": 1032,
+      "start": 2878.4,
+      "end": 2879.91,
+      "duration": 1.51,
+      "text": "is zero,"
+    },
+    {
+      "index": 1033,
+      "start": 2879.92,
+      "end": 2881.47,
+      "duration": 1.55,
+      "text": "then it means actually we have this"
+    },
+    {
+      "index": 1034,
+      "start": 2881.48,
+      "end": 2883.87,
+      "duration": 2.39,
+      "text": "situation with, you know, planes that"
+    },
+    {
+      "index": 1035,
+      "start": 2883.88,
+      "end": 2886.51,
+      "duration": 2.63,
+      "text": "are all parallel to a same line."
+    },
+    {
+      "index": 1036,
+      "start": 2886.52,
+      "end": 2892.75,
+      "duration": 6.23,
+      "text": "And then we have either"
+    },
+    {
+      "index": 1037,
+      "start": 2895.35,
+      "end": 2895.36,
+      "duration": 0.01,
+      "text": "no solution"
+    },
+    {
+      "index": 1038,
+      "start": 2895.36,
+      "end": 2900.63,
+      "duration": 5.27,
+      "text": "or infinitely many solutions."
+    },
+    {
+      "index": 1039,
+      "start": 2903.19,
+      "end": 2903.2,
+      "duration": 0.01,
+      "text": "It cannot be a single solution."
+    },
+    {
+      "index": 1040,
+      "start": 2903.2,
+      "end": 2905.03,
+      "duration": 1.83,
+      "text": "Now, whether you have no solutions or"
+    },
+    {
+      "index": 1041,
+      "start": 2905.04,
+      "end": 2907.27,
+      "duration": 2.23,
+      "text": "infinitely many solutions, well, we"
+    },
+    {
+      "index": 1042,
+      "start": 2907.28,
+      "end": 2909.07,
+      "duration": 1.79,
+      "text": "haven't actually developed the tools to"
+    },
+    {
+      "index": 1043,
+      "start": 2909.08,
+      "end": 2911.35,
+      "duration": 2.27,
+      "text": "answer that. But if you try solving the"
+    },
+    {
+      "index": 1044,
+      "start": 2911.36,
+      "end": 2913.59,
+      "duration": 2.23,
+      "text": "system by hand by elimination,"
+    },
+    {
+      "index": 1045,
+      "start": 2913.6,
+      "end": 2915.19,
+      "duration": 1.59,
+      "text": "you will see"
+    },
+    {
+      "index": 1046,
+      "start": 2915.2,
+      "end": 2916.79,
+      "duration": 1.59,
+      "text": "that you end up maybe with something"
+    },
+    {
+      "index": 1047,
+      "start": 2916.8,
+      "end": 2919.03,
+      "duration": 2.23,
+      "text": "that says 0 = 0 and you have infinitely"
+    },
+    {
+      "index": 1048,
+      "start": 2919.04,
+      "end": 2920.55,
+      "duration": 1.51,
+      "text": "many solutions."
+    },
+    {
+      "index": 1049,
+      "start": 2920.56,
+      "end": 2922.07,
+      "duration": 1.51,
+      "text": "You know, actually if you can find one"
+    },
+    {
+      "index": 1050,
+      "start": 2922.08,
+      "end": 2923.15,
+      "duration": 1.07,
+      "text": "solution, then you know that there's"
+    },
+    {
+      "index": 1051,
+      "start": 2923.16,
+      "end": 2924.55,
+      "duration": 1.39,
+      "text": "infinitely many."
+    },
+    {
+      "index": 1052,
+      "start": 2924.56,
+      "end": 2925.91,
+      "duration": 1.35,
+      "text": "On the other hand, if you end up with"
+    },
+    {
+      "index": 1053,
+      "start": 2925.92,
+      "end": 2927.63,
+      "duration": 1.71,
+      "text": "something that's a contradiction, like 1"
+    },
+    {
+      "index": 1054,
+      "start": 2927.64,
+      "end": 2932.39,
+      "duration": 4.75,
+      "text": "= 2, then you know there's no solutions."
+    },
+    {
+      "index": 1055,
+      "start": 2935.87,
+      "end": 2935.88,
+      "duration": 0.01,
+      "text": "Okay, so that's the end for today."
+    },
+    {
+      "index": 1056,
+      "start": 2935.88,
+      "end": 2937.99,
+      "duration": 2.11,
+      "text": "And tomorrow we will learn about"
+    },
+    {
+      "index": 1057,
+      "start": 2938.0,
+      "end": 2939.87,
+      "duration": 1.87,
+      "text": "parametric equations for lines and"
+    },
+    {
+      "index": 1058,
+      "start": 2939.88,
+      "end": 2942.32,
+      "duration": 2.44,
+      "text": "curves."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

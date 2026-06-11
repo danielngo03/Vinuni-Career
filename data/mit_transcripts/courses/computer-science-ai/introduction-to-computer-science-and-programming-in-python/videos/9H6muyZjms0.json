@@ -1,0 +1,6934 @@
+{
+  "video": {
+    "id": "9H6muyZjms0",
+    "title": "7. Testing, Debugging, Exceptions, and Assertions",
+    "url": "https://www.youtube.com/watch?v=9H6muyZjms0",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2492,
+    "language": "en"
+  },
+  "segment_count": 988,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.55,
+      "end": 2.56,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.56,
+      "end": 5.309,
+      "duration": 2.749,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 5.319,
+      "end": 7.429,
+      "duration": 2.11,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 7.439,
+      "end": 9.39,
+      "duration": 1.951,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 9.4,
+      "end": 12.549,
+      "duration": 3.149,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 12.559,
+      "end": 14.509,
+      "duration": 1.95,
+      "text": "view additional materials from hundreds"
+    },
+    {
+      "index": 6,
+      "start": 14.519,
+      "end": 17.83,
+      "duration": 3.311,
+      "text": "of MIT courses visit MIT opencourseware"
+    },
+    {
+      "index": 7,
+      "start": 17.84,
+      "end": 28.95,
+      "duration": 11.11,
+      "text": "at"
+    },
+    {
+      "index": 8,
+      "start": 31.47,
+      "end": 31.48,
+      "duration": 0.01,
+      "text": "ocw.mit.edu"
+    },
+    {
+      "index": 9,
+      "start": 31.48,
+      "end": 33.47,
+      "duration": 1.99,
+      "text": "all right everyone good afternoon let's"
+    },
+    {
+      "index": 10,
+      "start": 33.48,
+      "end": 36.43,
+      "duration": 2.95,
+      "text": "get started so today's lecture will be"
+    },
+    {
+      "index": 11,
+      "start": 36.44,
+      "end": 38.709,
+      "duration": 2.269,
+      "text": "on testing debugging and then exceptions"
+    },
+    {
+      "index": 12,
+      "start": 38.719,
+      "end": 42.029,
+      "duration": 3.31,
+      "text": "and assertions so before we begin let's"
+    },
+    {
+      "index": 13,
+      "start": 42.039,
+      "end": 44.029,
+      "duration": 1.99,
+      "text": "start with an analogy to sort of come"
+    },
+    {
+      "index": 14,
+      "start": 44.039,
+      "end": 47.389,
+      "duration": 3.35,
+      "text": "back to real life for a second so I've"
+    },
+    {
+      "index": 15,
+      "start": 47.399,
+      "end": 49.15,
+      "duration": 1.751,
+      "text": "made soup before perhaps you've made"
+    },
+    {
+      "index": 16,
+      "start": 49.16,
+      "end": 51.67,
+      "duration": 2.51,
+      "text": "soup before let's say you're making soup"
+    },
+    {
+      "index": 17,
+      "start": 51.68,
+      "end": 53.83,
+      "duration": 2.15,
+      "text": "in this big pot"
+    },
+    {
+      "index": 18,
+      "start": 53.84,
+      "end": 56.63,
+      "duration": 2.79,
+      "text": "here and it turns out that bugs keep"
+    },
+    {
+      "index": 19,
+      "start": 56.64,
+      "end": 58.709,
+      "duration": 2.069,
+      "text": "falling into your soup from the ceiling"
+    },
+    {
+      "index": 20,
+      "start": 58.719,
+      "end": 61.509,
+      "duration": 2.79,
+      "text": "all right quick just question to the"
+    },
+    {
+      "index": 21,
+      "start": 61.519,
+      "end": 63.47,
+      "duration": 1.951,
+      "text": "audience what do you do if you encounter"
+    },
+    {
+      "index": 22,
+      "start": 63.48,
+      "end": 66.35,
+      "duration": 2.87,
+      "text": "this"
+    },
+    {
+      "index": 23,
+      "start": 69.91,
+      "end": 69.92,
+      "duration": 0.01,
+      "text": "issue all right hands up one one at a"
+    },
+    {
+      "index": 24,
+      "start": 69.92,
+      "end": 72.55,
+      "duration": 2.63,
+      "text": "time anyone have any idea yeah eat it"
+    },
+    {
+      "index": 25,
+      "start": 72.56,
+      "end": 75.19,
+      "duration": 2.63,
+      "text": "eat it you want to eat it anyway okay"
+    },
+    {
+      "index": 26,
+      "start": 75.2,
+      "end": 76.91,
+      "duration": 1.71,
+      "text": "all right we're going for an analogy"
+    },
+    {
+      "index": 27,
+      "start": 76.92,
+      "end": 78.59,
+      "duration": 1.67,
+      "text": "here with computer programming I don't"
+    },
+    {
+      "index": 28,
+      "start": 78.6,
+      "end": 79.99,
+      "duration": 1.39,
+      "text": "know what You' do if you have a buggy"
+    },
+    {
+      "index": 29,
+      "start": 80.0,
+      "end": 81.71,
+      "duration": 1.71,
+      "text": "program I guess you just release it to"
+    },
+    {
+      "index": 30,
+      "start": 81.72,
+      "end": 83.51,
+      "duration": 1.79,
+      "text": "the customer and they'd complain but"
+    },
+    {
+      "index": 31,
+      "start": 83.52,
+      "end": 87.27,
+      "duration": 3.75,
+      "text": "okay what else yeah cover the soup cover"
+    },
+    {
+      "index": 32,
+      "start": 87.28,
+      "end": 89.23,
+      "duration": 1.95,
+      "text": "the soup that's a good suggestion yeah"
+    },
+    {
+      "index": 33,
+      "start": 89.24,
+      "end": 91.03,
+      "duration": 1.79,
+      "text": "so you can cover the soup so put a lid"
+    },
+    {
+      "index": 34,
+      "start": 91.04,
+      "end": 92.27,
+      "duration": 1.23,
+      "text": "on"
+    },
+    {
+      "index": 35,
+      "start": 92.28,
+      "end": 95.429,
+      "duration": 3.149,
+      "text": "it sometimes you'd have to open uh take"
+    },
+    {
+      "index": 36,
+      "start": 95.439,
+      "end": 97.03,
+      "duration": 1.591,
+      "text": "the lid off right to check to make sure"
+    },
+    {
+      "index": 37,
+      "start": 97.04,
+      "end": 99.51,
+      "duration": 2.47,
+      "text": "it's done to taste it add things so bugs"
+    },
+    {
+      "index": 38,
+      "start": 99.52,
+      "end": 101.389,
+      "duration": 1.869,
+      "text": "might fall in in between there but"
+    },
+    {
+      "index": 39,
+      "start": 101.399,
+      "end": 102.749,
+      "duration": 1.35,
+      "text": "covering the soup is a good idea what"
+    },
+    {
+      "index": 40,
+      "start": 102.759,
+      "end": 108.19,
+      "duration": 5.431,
+      "text": "else yeah debug it debug"
+    },
+    {
+      "index": 41,
+      "start": 110.51,
+      "end": 110.52,
+      "duration": 0.01,
+      "text": "it I wish I had something for that"
+    },
+    {
+      "index": 42,
+      "start": 110.52,
+      "end": 112.23,
+      "duration": 1.71,
+      "text": "answer all right that's a good answer"
+    },
+    {
+      "index": 43,
+      "start": 112.24,
+      "end": 115.91,
+      "duration": 3.67,
+      "text": "yeah take"
+    },
+    {
+      "index": 44,
+      "start": 118.429,
+      "end": 118.439,
+      "duration": 0.01,
+      "text": "all so take all the food out of your"
+    },
+    {
+      "index": 45,
+      "start": 118.439,
+      "end": 120.35,
+      "duration": 1.911,
+      "text": "house so there's nothing for the bugs to"
+    },
+    {
+      "index": 46,
+      "start": 120.36,
+      "end": 123.87,
+      "duration": 3.51,
+      "text": "eat that's sort of the equivalent of"
+    },
+    {
+      "index": 47,
+      "start": 123.88,
+      "end": 126.429,
+      "duration": 2.549,
+      "text": "cleaning like doing a mass cleaning of"
+    },
+    {
+      "index": 48,
+      "start": 126.439,
+      "end": 128.469,
+      "duration": 2.03,
+      "text": "your entire house that's a good that's a"
+    },
+    {
+      "index": 49,
+      "start": 128.479,
+      "end": 129.949,
+      "duration": 1.47,
+      "text": "good one that's that's sort of"
+    },
+    {
+      "index": 50,
+      "start": 129.959,
+      "end": 132.79,
+      "duration": 2.831,
+      "text": "eliminating the source of the bugs right"
+    },
+    {
+      "index": 51,
+      "start": 132.8,
+      "end": 135.19,
+      "duration": 2.39,
+      "text": "what"
+    },
+    {
+      "index": 52,
+      "start": 138.309,
+      "end": 138.319,
+      "duration": 0.01,
+      "text": "else yeah John decide it's high protein"
+    },
+    {
+      "index": 53,
+      "start": 138.319,
+      "end": 140.19,
+      "duration": 1.871,
+      "text": "and declare it a feature decide it's"
+    },
+    {
+      "index": 54,
+      "start": 140.2,
+      "end": 142.03,
+      "duration": 1.83,
+      "text": "high protein and declare and declare it"
+    },
+    {
+      "index": 55,
+      "start": 142.04,
+      "end": 145.11,
+      "duration": 3.07,
+      "text": "a feature that's probably what a lot of"
+    },
+    {
+      "index": 56,
+      "start": 145.12,
+      "end": 147.47,
+      "duration": 2.35,
+      "text": "a lot of people would do right all right"
+    },
+    {
+      "index": 57,
+      "start": 147.48,
+      "end": 148.83,
+      "duration": 1.35,
+      "text": "cool"
+    },
+    {
+      "index": 58,
+      "start": 148.84,
+      "end": 150.71,
+      "duration": 1.87,
+      "text": "so"
+    },
+    {
+      "index": 59,
+      "start": 150.72,
+      "end": 153.509,
+      "duration": 2.789,
+      "text": "I wish computer debugging was as fun as"
+    },
+    {
+      "index": 60,
+      "start": 153.519,
+      "end": 155.309,
+      "duration": 1.79,
+      "text": "taking bugs out of your soup so what did"
+    },
+    {
+      "index": 61,
+      "start": 155.319,
+      "end": 157.03,
+      "duration": 1.711,
+      "text": "we decide well we could check the soup"
+    },
+    {
+      "index": 62,
+      "start": 157.04,
+      "end": 159.509,
+      "duration": 2.469,
+      "text": "for bugs keep the lid closed that was a"
+    },
+    {
+      "index": 63,
+      "start": 159.519,
+      "end": 161.27,
+      "duration": 1.751,
+      "text": "good suggestion and cleaning your"
+    },
+    {
+      "index": 64,
+      "start": 161.28,
+      "end": 163.47,
+      "duration": 2.19,
+      "text": "kitchen which someone suggested the"
+    },
+    {
+      "index": 65,
+      "start": 163.48,
+      "end": 164.83,
+      "duration": 1.35,
+      "text": "equivalent of cleaning the kitchen was"
+    },
+    {
+      "index": 66,
+      "start": 164.84,
+      "end": 166.91,
+      "duration": 2.07,
+      "text": "to just throw out all the food I would"
+    },
+    {
+      "index": 67,
+      "start": 166.92,
+      "end": 169.149,
+      "duration": 2.229,
+      "text": "take a mop and clean the floor but yeah"
+    },
+    {
+      "index": 68,
+      "start": 169.159,
+      "end": 172.03,
+      "duration": 2.871,
+      "text": "that works too"
+    },
+    {
+      "index": 69,
+      "start": 172.04,
+      "end": 175.149,
+      "duration": 3.109,
+      "text": "so we can draw some Parallels for these"
+    },
+    {
+      "index": 70,
+      "start": 175.159,
+      "end": 177.43,
+      "duration": 2.271,
+      "text": "um for this uh with for this analogy"
+    },
+    {
+      "index": 71,
+      "start": 177.44,
+      "end": 178.71,
+      "duration": 1.27,
+      "text": "with computer programming so checking"
+    },
+    {
+      "index": 72,
+      "start": 178.72,
+      "end": 181.11,
+      "duration": 2.39,
+      "text": "the soup is really equivalent to testing"
+    },
+    {
+      "index": 73,
+      "start": 181.12,
+      "end": 183.789,
+      "duration": 2.669,
+      "text": "right you have you have a soup you think"
+    },
+    {
+      "index": 74,
+      "start": 183.799,
+      "end": 185.869,
+      "duration": 2.07,
+      "text": "it has bugs in it test it make sure"
+    },
+    {
+      "index": 75,
+      "start": 185.879,
+      "end": 188.07,
+      "duration": 2.191,
+      "text": "there's no bugs continue on keeping the"
+    },
+    {
+      "index": 76,
+      "start": 188.08,
+      "end": 190.67,
+      "duration": 2.59,
+      "text": "lid closed it's sort of this idea of"
+    },
+    {
+      "index": 77,
+      "start": 190.68,
+      "end": 192.43,
+      "duration": 1.75,
+      "text": "defensive programming so make sure that"
+    },
+    {
+      "index": 78,
+      "start": 192.44,
+      "end": 194.35,
+      "duration": 1.91,
+      "text": "bugs don't fall in in the first place"
+    },
+    {
+      "index": 79,
+      "start": 194.36,
+      "end": 196.39,
+      "duration": 2.03,
+      "text": "sometimes you have to open open the lid"
+    },
+    {
+      "index": 80,
+      "start": 196.4,
+      "end": 199.27,
+      "duration": 2.87,
+      "text": "to make sure that the soup is it tastes"
+    },
+    {
+      "index": 81,
+      "start": 199.28,
+      "end": 201.27,
+      "duration": 1.99,
+      "text": "good or whatever so that's equivalent to"
+    },
+    {
+      "index": 82,
+      "start": 201.28,
+      "end": 202.869,
+      "duration": 1.589,
+      "text": "defensive programming so try not to have"
+    },
+    {
+      "index": 83,
+      "start": 202.879,
+      "end": 204.43,
+      "duration": 1.551,
+      "text": "bugs in the first place but they might"
+    },
+    {
+      "index": 84,
+      "start": 204.44,
+      "end": 207.11,
+      "duration": 2.67,
+      "text": "show up anyway cleaning the kitchen is a"
+    },
+    {
+      "index": 85,
+      "start": 207.12,
+      "end": 208.789,
+      "duration": 1.669,
+      "text": "limiting source of the bugs in the first"
+    },
+    {
+      "index": 86,
+      "start": 208.799,
+      "end": 209.99,
+      "duration": 1.191,
+      "text": "place this is actually really really"
+    },
+    {
+      "index": 87,
+      "start": 210.0,
+      "end": 212.03,
+      "duration": 2.03,
+      "text": "hard to do in"
+    },
+    {
+      "index": 88,
+      "start": 212.04,
+      "end": 214.91,
+      "duration": 2.87,
+      "text": "programming but you can still try to do"
+    },
+    {
+      "index": 89,
+      "start": 214.92,
+      "end": 219.429,
+      "duration": 4.509,
+      "text": "it okay so let's talk a little bit about"
+    },
+    {
+      "index": 90,
+      "start": 219.439,
+      "end": 223.35,
+      "duration": 3.911,
+      "text": "programming so far in 61 or 600 so you"
+    },
+    {
+      "index": 91,
+      "start": 223.36,
+      "end": 226.07,
+      "duration": 2.71,
+      "text": "expect really that you write a program"
+    },
+    {
+      "index": 92,
+      "start": 226.08,
+      "end": 228.429,
+      "duration": 2.349,
+      "text": "you maybe do a little debugging and you"
+    },
+    {
+      "index": 93,
+      "start": 228.439,
+      "end": 231.83,
+      "duration": 3.391,
+      "text": "run the program and it's perfect right"
+    },
+    {
+      "index": 94,
+      "start": 231.84,
+      "end": 234.789,
+      "duration": 2.949,
+      "text": "you just nailed it but in reality you"
+    },
+    {
+      "index": 95,
+      "start": 234.799,
+      "end": 236.67,
+      "duration": 1.871,
+      "text": "write this really complex piece of code"
+    },
+    {
+      "index": 96,
+      "start": 236.68,
+      "end": 238.429,
+      "duration": 1.749,
+      "text": "and you go to run"
+    },
+    {
+      "index": 97,
+      "start": 238.439,
+      "end": 242.47,
+      "duration": 4.031,
+      "text": "it and and it crashes right it's"
+    },
+    {
+      "index": 98,
+      "start": 242.48,
+      "end": 244.589,
+      "duration": 2.109,
+      "text": "happened to me many times it's happened"
+    },
+    {
+      "index": 99,
+      "start": 244.599,
+      "end": 245.869,
+      "duration": 1.27,
+      "text": "to you many"
+    },
+    {
+      "index": 100,
+      "start": 245.879,
+      "end": 250.069,
+      "duration": 4.19,
+      "text": "times that's the reality okay so today's"
+    },
+    {
+      "index": 101,
+      "start": 250.079,
+      "end": 251.83,
+      "duration": 1.751,
+      "text": "lecture we'll sort of go over some tips"
+    },
+    {
+      "index": 102,
+      "start": 251.84,
+      "end": 254.11,
+      "duration": 2.27,
+      "text": "and tricks and debugging and how you can"
+    },
+    {
+      "index": 103,
+      "start": 254.12,
+      "end": 255.99,
+      "duration": 1.87,
+      "text": "help make your life easier when you're"
+    },
+    {
+      "index": 104,
+      "start": 256.0,
+      "end": 258.509,
+      "duration": 2.509,
+      "text": "writing programs so you don't end up"
+    },
+    {
+      "index": 105,
+      "start": 258.519,
+      "end": 260.11,
+      "duration": 1.591,
+      "text": "like this little girl here disappointed"
+    },
+    {
+      "index": 106,
+      "start": 260.12,
+      "end": 262.11,
+      "duration": 1.99,
+      "text": "beyond belief all"
+    },
+    {
+      "index": 107,
+      "start": 262.12,
+      "end": 265.189,
+      "duration": 3.069,
+      "text": "right so at the heart of it all is"
+    },
+    {
+      "index": 108,
+      "start": 265.199,
+      "end": 266.79,
+      "duration": 1.591,
+      "text": "really starting with a defensive"
+    },
+    {
+      "index": 109,
+      "start": 266.8,
+      "end": 269.51,
+      "duration": 2.71,
+      "text": "programming attitude okay and this comes"
+    },
+    {
+      "index": 110,
+      "start": 269.52,
+      "end": 271.749,
+      "duration": 2.229,
+      "text": "back back to the idea of decomposition"
+    },
+    {
+      "index": 111,
+      "start": 271.759,
+      "end": 273.71,
+      "duration": 1.951,
+      "text": "and abstraction that we talked about"
+    },
+    {
+      "index": 112,
+      "start": 273.72,
+      "end": 275.55,
+      "duration": 1.83,
+      "text": "when we when we started when we did the"
+    },
+    {
+      "index": 113,
+      "start": 275.56,
+      "end": 278.87,
+      "duration": 3.31,
+      "text": "lecture on functions right so try to"
+    },
+    {
+      "index": 114,
+      "start": 278.88,
+      "end": 281.029,
+      "duration": 2.149,
+      "text": "start out with to modularize your code"
+    },
+    {
+      "index": 115,
+      "start": 281.039,
+      "end": 282.15,
+      "duration": 1.111,
+      "text": "right if you write your code in"
+    },
+    {
+      "index": 116,
+      "start": 282.16,
+      "end": 283.39,
+      "duration": 1.23,
+      "text": "different"
+    },
+    {
+      "index": 117,
+      "start": 283.4,
+      "end": 286.31,
+      "duration": 2.91,
+      "text": "blocks documenting each different block"
+    },
+    {
+      "index": 118,
+      "start": 286.32,
+      "end": 288.469,
+      "duration": 2.149,
+      "text": "you're more likely to understand what's"
+    },
+    {
+      "index": 119,
+      "start": 288.479,
+      "end": 290.07,
+      "duration": 1.591,
+      "text": "happening in your code later on and"
+    },
+    {
+      "index": 120,
+      "start": 290.08,
+      "end": 292.11,
+      "duration": 2.03,
+      "text": "you'll be able to test it and debug it a"
+    },
+    {
+      "index": 121,
+      "start": 292.12,
+      "end": 293.11,
+      "duration": 0.99,
+      "text": "lot"
+    },
+    {
+      "index": 122,
+      "start": 293.12,
+      "end": 296.189,
+      "duration": 3.069,
+      "text": "easier speaking of testing and debugging"
+    },
+    {
+      "index": 123,
+      "start": 296.199,
+      "end": 298.749,
+      "duration": 2.55,
+      "text": "once you've written a program that's"
+    },
+    {
+      "index": 124,
+      "start": 298.759,
+      "end": 300.95,
+      "duration": 2.191,
+      "text": "modular"
+    },
+    {
+      "index": 125,
+      "start": 300.96,
+      "end": 302.79,
+      "duration": 1.83,
+      "text": "you still have to test"
+    },
+    {
+      "index": 126,
+      "start": 302.8,
+      "end": 305.909,
+      "duration": 3.109,
+      "text": "it and the process of testing is really"
+    },
+    {
+      "index": 127,
+      "start": 305.919,
+      "end": 309.189,
+      "duration": 3.27,
+      "text": "just coming up with inputs figuring out"
+    },
+    {
+      "index": 128,
+      "start": 309.199,
+      "end": 312.31,
+      "duration": 3.111,
+      "text": "what outputs you expect and then running"
+    },
+    {
+      "index": 129,
+      "start": 312.32,
+      "end": 314.43,
+      "duration": 2.11,
+      "text": "your program does the output that the"
+    },
+    {
+      "index": 130,
+      "start": 314.44,
+      "end": 316.59,
+      "duration": 2.15,
+      "text": "program give match what you"
+    },
+    {
+      "index": 131,
+      "start": 316.6,
+      "end": 319.71,
+      "duration": 3.11,
+      "text": "expected if it does great you're done"
+    },
+    {
+      "index": 132,
+      "start": 319.72,
+      "end": 321.43,
+      "duration": 1.71,
+      "text": "but if it doesn't you have to go to this"
+    },
+    {
+      "index": 133,
+      "start": 321.44,
+      "end": 323.909,
+      "duration": 2.469,
+      "text": "debugging step and this debugging step"
+    },
+    {
+      "index": 134,
+      "start": 323.919,
+      "end": 326.39,
+      "duration": 2.471,
+      "text": "is the hardest part and it's really just"
+    },
+    {
+      "index": 135,
+      "start": 326.4,
+      "end": 328.629,
+      "duration": 2.229,
+      "text": "figuring out why the program crashed or"
+    },
+    {
+      "index": 136,
+      "start": 328.639,
+      "end": 330.189,
+      "duration": 1.55,
+      "text": "why the program didn't give you the"
+    },
+    {
+      "index": 137,
+      "start": 330.199,
+      "end": 332.11,
+      "duration": 1.911,
+      "text": "answer that you expected it to"
+    },
+    {
+      "index": 138,
+      "start": 332.12,
+      "end": 335.67,
+      "duration": 3.55,
+      "text": "give okay so as I mentioned the most"
+    },
+    {
+      "index": 139,
+      "start": 335.68,
+      "end": 336.99,
+      "duration": 1.31,
+      "text": "important thing is to do defensive"
+    },
+    {
+      "index": 140,
+      "start": 337.0,
+      "end": 338.95,
+      "duration": 1.95,
+      "text": "programming and to that end you want to"
+    },
+    {
+      "index": 141,
+      "start": 338.96,
+      "end": 341.15,
+      "duration": 2.19,
+      "text": "set yourself up for easy testing and"
+    },
+    {
+      "index": 142,
+      "start": 341.16,
+      "end": 343.469,
+      "duration": 2.309,
+      "text": "debugging which really comes down to"
+    },
+    {
+      "index": 143,
+      "start": 343.479,
+      "end": 345.71,
+      "duration": 2.231,
+      "text": "making sure that the code you write is"
+    },
+    {
+      "index": 144,
+      "start": 345.72,
+      "end": 348.029,
+      "duration": 2.309,
+      "text": "modular so write as many functions as"
+    },
+    {
+      "index": 145,
+      "start": 348.039,
+      "end": 350.95,
+      "duration": 2.911,
+      "text": "you can document what the functions do"
+    },
+    {
+      "index": 146,
+      "start": 350.96,
+      "end": 352.55,
+      "duration": 1.59,
+      "text": "document their"
+    },
+    {
+      "index": 147,
+      "start": 352.56,
+      "end": 355.029,
+      "duration": 2.469,
+      "text": "constraints and it'll make your life a"
+    },
+    {
+      "index": 148,
+      "start": 355.039,
+      "end": 356.35,
+      "duration": 1.311,
+      "text": "little bit easier later on when you have"
+    },
+    {
+      "index": 149,
+      "start": 356.36,
+      "end": 358.469,
+      "duration": 2.109,
+      "text": "to debug"
+    },
+    {
+      "index": 150,
+      "start": 358.479,
+      "end": 360.35,
+      "duration": 1.871,
+      "text": "it when when do you want to start"
+    },
+    {
+      "index": 151,
+      "start": 360.36,
+      "end": 361.83,
+      "duration": 1.47,
+      "text": "testing well first you have to make sure"
+    },
+    {
+      "index": 152,
+      "start": 361.84,
+      "end": 364.39,
+      "duration": 2.55,
+      "text": "your program runs so eliminate syntax"
+    },
+    {
+      "index": 153,
+      "start": 364.4,
+      "end": 366.51,
+      "duration": 2.11,
+      "text": "errors and static semantic errors which"
+    },
+    {
+      "index": 154,
+      "start": 366.52,
+      "end": 369.95,
+      "duration": 3.43,
+      "text": "by the way python can easily catch for"
+    },
+    {
+      "index": 155,
+      "start": 369.96,
+      "end": 372.43,
+      "duration": 2.47,
+      "text": "you once you've ensured that a piece of"
+    },
+    {
+      "index": 156,
+      "start": 372.44,
+      "end": 374.71,
+      "duration": 2.27,
+      "text": "code runs then you want to come up with"
+    },
+    {
+      "index": 157,
+      "start": 374.72,
+      "end": 376.87,
+      "duration": 2.15,
+      "text": "some test cases so this is pairs of"
+    },
+    {
+      "index": 158,
+      "start": 376.88,
+      "end": 379.43,
+      "duration": 2.55,
+      "text": "input and output for um for what you"
+    },
+    {
+      "index": 159,
+      "start": 379.44,
+      "end": 382.15,
+      "duration": 2.71,
+      "text": "expect the program to"
+    },
+    {
+      "index": 160,
+      "start": 382.16,
+      "end": 385.39,
+      "duration": 3.23,
+      "text": "do once you have your test cases and a"
+    },
+    {
+      "index": 161,
+      "start": 385.4,
+      "end": 387.469,
+      "duration": 2.069,
+      "text": "piece of code that runs you can start"
+    },
+    {
+      "index": 162,
+      "start": 387.479,
+      "end": 390.029,
+      "duration": 2.55,
+      "text": "doing tests so there there's three"
+    },
+    {
+      "index": 163,
+      "start": 390.039,
+      "end": 392.51,
+      "duration": 2.471,
+      "text": "General classes of tests that you can do"
+    },
+    {
+      "index": 164,
+      "start": 392.52,
+      "end": 395.189,
+      "duration": 2.669,
+      "text": "the first is called unit testing and if"
+    },
+    {
+      "index": 165,
+      "start": 395.199,
+      "end": 397.23,
+      "duration": 2.031,
+      "text": "you written functions unit testing"
+    },
+    {
+      "index": 166,
+      "start": 397.24,
+      "end": 399.43,
+      "duration": 2.19,
+      "text": "testing just makes sure that for example"
+    },
+    {
+      "index": 167,
+      "start": 399.44,
+      "end": 402.87,
+      "duration": 3.43,
+      "text": "each function runs according to the"
+    },
+    {
+      "index": 168,
+      "start": 402.88,
+      "end": 404.95,
+      "duration": 2.07,
+      "text": "specifications so you do this multiple"
+    },
+    {
+      "index": 169,
+      "start": 404.96,
+      "end": 406.99,
+      "duration": 2.03,
+      "text": "times as you're testing each function"
+    },
+    {
+      "index": 170,
+      "start": 407.0,
+      "end": 408.43,
+      "duration": 1.43,
+      "text": "you might find a"
+    },
+    {
+      "index": 171,
+      "start": 408.44,
+      "end": 411.11,
+      "duration": 2.67,
+      "text": "bug at that point you do regression"
+    },
+    {
+      "index": 172,
+      "start": 411.12,
+      "end": 414.43,
+      "duration": 3.31,
+      "text": "testing come up with a test case that"
+    },
+    {
+      "index": 173,
+      "start": 414.44,
+      "end": 415.43,
+      "duration": 0.99,
+      "text": "found that"
+    },
+    {
+      "index": 174,
+      "start": 415.44,
+      "end": 418.629,
+      "duration": 3.189,
+      "text": "bug and run all of the different pieces"
+    },
+    {
+      "index": 175,
+      "start": 418.639,
+      "end": 420.589,
+      "duration": 1.95,
+      "text": "of the of your code again to make sure"
+    },
+    {
+      "index": 176,
+      "start": 420.599,
+      "end": 422.43,
+      "duration": 1.831,
+      "text": "that when you fix the bug you don't"
+    },
+    {
+      "index": 177,
+      "start": 422.44,
+      "end": 425.35,
+      "duration": 2.91,
+      "text": "reintroduce new bugs into um pieces of"
+    },
+    {
+      "index": 178,
+      "start": 425.36,
+      "end": 427.629,
+      "duration": 2.269,
+      "text": "the of the code that had already"
+    },
+    {
+      "index": 179,
+      "start": 427.639,
+      "end": 430.23,
+      "duration": 2.591,
+      "text": "run so you do this this a bunch of times"
+    },
+    {
+      "index": 180,
+      "start": 430.24,
+      "end": 431.589,
+      "duration": 1.349,
+      "text": "you do a little bit of unit testing a"
+    },
+    {
+      "index": 181,
+      "start": 431.599,
+      "end": 432.909,
+      "duration": 1.31,
+      "text": "little bit of regression testing and"
+    },
+    {
+      "index": 182,
+      "start": 432.919,
+      "end": 434.469,
+      "duration": 1.55,
+      "text": "keep doing that at some point you're"
+    },
+    {
+      "index": 183,
+      "start": 434.479,
+      "end": 436.15,
+      "duration": 1.671,
+      "text": "ready to do integration testing which"
+    },
+    {
+      "index": 184,
+      "start": 436.16,
+      "end": 438.55,
+      "duration": 2.39,
+      "text": "means test your program as a whole okay"
+    },
+    {
+      "index": 185,
+      "start": 438.56,
+      "end": 441.029,
+      "duration": 2.469,
+      "text": "does the overall program work so this is"
+    },
+    {
+      "index": 186,
+      "start": 441.039,
+      "end": 442.23,
+      "duration": 1.191,
+      "text": "the part where you take all of the"
+    },
+    {
+      "index": 187,
+      "start": 442.24,
+      "end": 444.95,
+      "duration": 2.71,
+      "text": "individual pieces put them together and"
+    },
+    {
+      "index": 188,
+      "start": 444.96,
+      "end": 447.029,
+      "duration": 2.069,
+      "text": "integration testing tests to make sure"
+    },
+    {
+      "index": 189,
+      "start": 447.039,
+      "end": 450.27,
+      "duration": 3.231,
+      "text": "that the interactions between all the"
+    },
+    {
+      "index": 190,
+      "start": 450.28,
+      "end": 452.67,
+      "duration": 2.39,
+      "text": "all of the different pieces works as"
+    },
+    {
+      "index": 191,
+      "start": 452.68,
+      "end": 454.99,
+      "duration": 2.31,
+      "text": "expected if it does great you're done"
+    },
+    {
+      "index": 192,
+      "start": 455.0,
+      "end": 456.27,
+      "duration": 1.27,
+      "text": "but if it doesn't then you'll have to go"
+    },
+    {
+      "index": 193,
+      "start": 456.28,
+      "end": 457.79,
+      "duration": 1.51,
+      "text": "back to unit testing and regression"
+    },
+    {
+      "index": 194,
+      "start": 457.8,
+      "end": 460.95,
+      "duration": 3.15,
+      "text": "testing and so on so it's really a a um"
+    },
+    {
+      "index": 195,
+      "start": 460.96,
+      "end": 463.869,
+      "duration": 2.909,
+      "text": "a cycle of"
+    },
+    {
+      "index": 196,
+      "start": 463.879,
+      "end": 466.71,
+      "duration": 2.831,
+      "text": "testing okay so what are some testing"
+    },
+    {
+      "index": 197,
+      "start": 466.72,
+      "end": 468.71,
+      "duration": 1.99,
+      "text": "approaches the first and this is"
+    },
+    {
+      "index": 198,
+      "start": 468.72,
+      "end": 470.71,
+      "duration": 1.99,
+      "text": "probably most common with programs that"
+    },
+    {
+      "index": 199,
+      "start": 470.72,
+      "end": 472.35,
+      "duration": 1.63,
+      "text": "involve numbers is figuring out some"
+    },
+    {
+      "index": 200,
+      "start": 472.36,
+      "end": 474.43,
+      "duration": 2.07,
+      "text": "natural boundaries for the numbers for"
+    },
+    {
+      "index": 201,
+      "start": 474.44,
+      "end": 476.11,
+      "duration": 1.67,
+      "text": "the program"
+    },
+    {
+      "index": 202,
+      "start": 476.12,
+      "end": 478.79,
+      "duration": 2.67,
+      "text": "sorry so for example if I have a"
+    },
+    {
+      "index": 203,
+      "start": 478.8,
+      "end": 482.07,
+      "duration": 3.27,
+      "text": "function is bigger and it Compares if x"
+    },
+    {
+      "index": 204,
+      "start": 482.08,
+      "end": 485.07,
+      "duration": 2.99,
+      "text": "is is bigger than y then some natural"
+    },
+    {
+      "index": 205,
+      "start": 485.08,
+      "end": 487.83,
+      "duration": 2.75,
+      "text": "boundary given this specification is if"
+    },
+    {
+      "index": 206,
+      "start": 487.84,
+      "end": 489.99,
+      "duration": 2.15,
+      "text": "x is less than y x is greater than y x"
+    },
+    {
+      "index": 207,
+      "start": 490.0,
+      "end": 492.189,
+      "duration": 2.189,
+      "text": "is equal to Y maybe throw in less than"
+    },
+    {
+      "index": 208,
+      "start": 492.199,
+      "end": 494.11,
+      "duration": 1.911,
+      "text": "or equal to or greater or equal to and"
+    },
+    {
+      "index": 209,
+      "start": 494.12,
+      "end": 496.749,
+      "duration": 2.629,
+      "text": "so on so that's just sort of an"
+    },
+    {
+      "index": 210,
+      "start": 496.759,
+      "end": 498.79,
+      "duration": 2.031,
+      "text": "intuition about the"
+    },
+    {
+      "index": 211,
+      "start": 498.8,
+      "end": 500.95,
+      "duration": 2.15,
+      "text": "problem it's possible you have some"
+    },
+    {
+      "index": 212,
+      "start": 500.96,
+      "end": 503.629,
+      "duration": 2.669,
+      "text": "problems for which there are no natural"
+    },
+    {
+      "index": 213,
+      "start": 503.639,
+      "end": 505.51,
+      "duration": 1.871,
+      "text": "partitions in which case you might do"
+    },
+    {
+      "index": 214,
+      "start": 505.52,
+      "end": 507.35,
+      "duration": 1.83,
+      "text": "some random testing and then the more"
+    },
+    {
+      "index": 215,
+      "start": 507.36,
+      "end": 509.07,
+      "duration": 1.71,
+      "text": "random testing you do the greater the"
+    },
+    {
+      "index": 216,
+      "start": 509.08,
+      "end": 511.95,
+      "duration": 2.87,
+      "text": "likely that your program is correct but"
+    },
+    {
+      "index": 217,
+      "start": 511.96,
+      "end": 515.19,
+      "duration": 3.23,
+      "text": "there's actually two more rigorous um"
+    },
+    {
+      "index": 218,
+      "start": 515.2,
+      "end": 517.19,
+      "duration": 1.99,
+      "text": "ways to do testing and one is blackbox"
+    },
+    {
+      "index": 219,
+      "start": 517.2,
+      "end": 520.63,
+      "duration": 3.43,
+      "text": "testing and the other one is glass box"
+    },
+    {
+      "index": 220,
+      "start": 520.64,
+      "end": 523.23,
+      "duration": 2.59,
+      "text": "testing in blackbox testing you're"
+    },
+    {
+      "index": 221,
+      "start": 523.24,
+      "end": 525.47,
+      "duration": 2.23,
+      "text": "assuming you have the specifications to"
+    },
+    {
+      "index": 222,
+      "start": 525.48,
+      "end": 527.63,
+      "duration": 2.15,
+      "text": "a function so that's the dock"
+    },
+    {
+      "index": 223,
+      "start": 527.64,
+      "end": 529.79,
+      "duration": 2.15,
+      "text": "string all you're looking at is the dock"
+    },
+    {
+      "index": 224,
+      "start": 529.8,
+      "end": 531.23,
+      "duration": 1.43,
+      "text": "string and coming up with some test"
+    },
+    {
+      "index": 225,
+      "start": 531.24,
+      "end": 534.79,
+      "duration": 3.55,
+      "text": "cases based on that in glassbox testing"
+    },
+    {
+      "index": 226,
+      "start": 534.8,
+      "end": 536.71,
+      "duration": 1.91,
+      "text": "you have the code itself and you're"
+    },
+    {
+      "index": 227,
+      "start": 536.72,
+      "end": 538.829,
+      "duration": 2.109,
+      "text": "trying to come up with some test cases"
+    },
+    {
+      "index": 228,
+      "start": 538.839,
+      "end": 540.509,
+      "duration": 1.67,
+      "text": "that hit upon on all of the possible"
+    },
+    {
+      "index": 229,
+      "start": 540.519,
+      "end": 543.23,
+      "duration": 2.711,
+      "text": "paths through through the"
+    },
+    {
+      "index": 230,
+      "start": 543.24,
+      "end": 545.389,
+      "duration": 2.149,
+      "text": "code all right let's look at an example"
+    },
+    {
+      "index": 231,
+      "start": 545.399,
+      "end": 548.03,
+      "duration": 2.631,
+      "text": "for blackbox testing I'm finding the"
+    },
+    {
+      "index": 232,
+      "start": 548.04,
+      "end": 552.35,
+      "duration": 4.31,
+      "text": "square root of x to some close enough"
+    },
+    {
+      "index": 233,
+      "start": 552.36,
+      "end": 555.67,
+      "duration": 3.31,
+      "text": "value given by this"
+    },
+    {
+      "index": 234,
+      "start": 555.68,
+      "end": 558.19,
+      "duration": 2.51,
+      "text": "Epsilon and the idea here notice I don't"
+    },
+    {
+      "index": 235,
+      "start": 558.2,
+      "end": 559.43,
+      "duration": 1.23,
+      "text": "actually give you how this function is"
+    },
+    {
+      "index": 236,
+      "start": 559.44,
+      "end": 561.949,
+      "duration": 2.509,
+      "text": "implemented the idea is that you're just"
+    },
+    {
+      "index": 237,
+      "start": 561.959,
+      "end": 565.75,
+      "duration": 3.791,
+      "text": "figuring out test cases based on this"
+    },
+    {
+      "index": 238,
+      "start": 565.76,
+      "end": 567.55,
+      "duration": 1.79,
+      "text": "specification and the great thing about"
+    },
+    {
+      "index": 239,
+      "start": 567.56,
+      "end": 569.389,
+      "duration": 1.829,
+      "text": "blackbox testing is that whoever"
+    },
+    {
+      "index": 240,
+      "start": 569.399,
+      "end": 571.389,
+      "duration": 1.99,
+      "text": "implements this function can implement"
+    },
+    {
+      "index": 241,
+      "start": 571.399,
+      "end": 573.43,
+      "duration": 2.031,
+      "text": "it in whatever way they wish they can"
+    },
+    {
+      "index": 242,
+      "start": 573.44,
+      "end": 574.829,
+      "duration": 1.389,
+      "text": "use approximation method they can use"
+    },
+    {
+      "index": 243,
+      "start": 574.839,
+      "end": 577.19,
+      "duration": 2.351,
+      "text": "bisection method it doesn't matter the"
+    },
+    {
+      "index": 244,
+      "start": 577.2,
+      "end": 579.19,
+      "duration": 1.99,
+      "text": "test cases that you come up with for"
+    },
+    {
+      "index": 245,
+      "start": 579.2,
+      "end": 580.71,
+      "duration": 1.51,
+      "text": "this function are going to be exactly"
+    },
+    {
+      "index": 246,
+      "start": 580.72,
+      "end": 584.47,
+      "duration": 3.75,
+      "text": "the same right no matter what the"
+    },
+    {
+      "index": 247,
+      "start": 586.67,
+      "end": 586.68,
+      "duration": 0.01,
+      "text": "implementation so for this particular"
+    },
+    {
+      "index": 248,
+      "start": 586.68,
+      "end": 589.35,
+      "duration": 2.67,
+      "text": "function here's a sample"
+    },
+    {
+      "index": 249,
+      "start": 589.36,
+      "end": 592.03,
+      "duration": 2.67,
+      "text": "set we check the boundary we check"
+    },
+    {
+      "index": 250,
+      "start": 592.04,
+      "end": 594.269,
+      "duration": 2.229,
+      "text": "perfect squares we can check some number"
+    },
+    {
+      "index": 251,
+      "start": 594.279,
+      "end": 596.47,
+      "duration": 2.191,
+      "text": "that's less than one we can check maybe"
+    },
+    {
+      "index": 252,
+      "start": 596.48,
+      "end": 598.91,
+      "duration": 2.43,
+      "text": "irrationals and then you do extreme"
+    },
+    {
+      "index": 253,
+      "start": 598.92,
+      "end": 600.069,
+      "duration": 1.149,
+      "text": "tests"
+    },
+    {
+      "index": 254,
+      "start": 600.079,
+      "end": 603.069,
+      "duration": 2.99,
+      "text": "so when either Epsilon is really large"
+    },
+    {
+      "index": 255,
+      "start": 603.079,
+      "end": 605.55,
+      "duration": 2.471,
+      "text": "or Epsilon is really small or X is"
+    },
+    {
+      "index": 256,
+      "start": 605.56,
+      "end": 607.11,
+      "duration": 1.55,
+      "text": "really large or X is really small and"
+    },
+    {
+      "index": 257,
+      "start": 607.12,
+      "end": 610.269,
+      "duration": 3.149,
+      "text": "all the com possible combinations of"
+    },
+    {
+      "index": 258,
+      "start": 610.279,
+      "end": 612.75,
+      "duration": 2.471,
+      "text": "those okay so the important thing about"
+    },
+    {
+      "index": 259,
+      "start": 612.76,
+      "end": 615.23,
+      "duration": 2.47,
+      "text": "blackbox testing is that you are"
+    },
+    {
+      "index": 260,
+      "start": 615.24,
+      "end": 617.55,
+      "duration": 2.31,
+      "text": "doing you are creating the test cases"
+    },
+    {
+      "index": 261,
+      "start": 617.56,
+      "end": 620.35,
+      "duration": 2.79,
+      "text": "based on the specifications only"
+    },
+    {
+      "index": 262,
+      "start": 620.36,
+      "end": 622.91,
+      "duration": 2.55,
+      "text": "glassbox testing you're using the code"
+    },
+    {
+      "index": 263,
+      "start": 622.92,
+      "end": 626.47,
+      "duration": 3.55,
+      "text": "itself to guide your test"
+    },
+    {
+      "index": 264,
+      "start": 626.48,
+      "end": 629.829,
+      "duration": 3.349,
+      "text": "cases so if you have a piece of code"
+    },
+    {
+      "index": 265,
+      "start": 629.839,
+      "end": 631.23,
+      "duration": 1.391,
+      "text": "and you come up with a test case that"
+    },
+    {
+      "index": 266,
+      "start": 631.24,
+      "end": 633.55,
+      "duration": 2.31,
+      "text": "goes through every single possible"
+    },
+    {
+      "index": 267,
+      "start": 633.56,
+      "end": 637.949,
+      "duration": 4.389,
+      "text": "combination of uh input of uh every"
+    },
+    {
+      "index": 268,
+      "start": 637.959,
+      "end": 640.03,
+      "duration": 2.071,
+      "text": "single possible path through the code"
+    },
+    {
+      "index": 269,
+      "start": 640.04,
+      "end": 642.629,
+      "duration": 2.589,
+      "text": "then that test set is called path"
+    },
+    {
+      "index": 270,
+      "start": 642.639,
+      "end": 645.389,
+      "duration": 2.75,
+      "text": "complete the problem with this is when"
+    },
+    {
+      "index": 271,
+      "start": 645.399,
+      "end": 646.87,
+      "duration": 1.471,
+      "text": "you encounter Loops for"
+    },
+    {
+      "index": 272,
+      "start": 646.88,
+      "end": 649.069,
+      "duration": 2.189,
+      "text": "example every single possible path"
+    },
+    {
+      "index": 273,
+      "start": 649.079,
+      "end": 651.949,
+      "duration": 2.87,
+      "text": "through a loop is maybe the code not"
+    },
+    {
+      "index": 274,
+      "start": 651.959,
+      "end": 653.11,
+      "duration": 1.151,
+      "text": "going through the loop at all going"
+    },
+    {
+      "index": 275,
+      "start": 653.12,
+      "end": 654.47,
+      "duration": 1.35,
+      "text": "through once going through twice going"
+    },
+    {
+      "index": 276,
+      "start": 654.48,
+      "end": 655.79,
+      "duration": 1.31,
+      "text": "through three times four times five"
+    },
+    {
+      "index": 277,
+      "start": 655.8,
+      "end": 658.59,
+      "duration": 2.79,
+      "text": "times and so on right which could be a"
+    },
+    {
+      "index": 278,
+      "start": 658.6,
+      "end": 661.509,
+      "duration": 2.909,
+      "text": "very very big test set so instead there"
+    },
+    {
+      "index": 279,
+      "start": 661.519,
+      "end": 662.949,
+      "duration": 1.43,
+      "text": "are actually some guidelines for when"
+    },
+    {
+      "index": 280,
+      "start": 662.959,
+      "end": 664.59,
+      "duration": 1.631,
+      "text": "you're dealing with loops and and things"
+    },
+    {
+      "index": 281,
+      "start": 664.6,
+      "end": 666.75,
+      "duration": 2.15,
+      "text": "like that so for branches when you're"
+    },
+    {
+      "index": 282,
+      "start": 666.76,
+      "end": 669.47,
+      "duration": 2.71,
+      "text": "doing glassbox testing it's important"
+    },
+    {
+      "index": 283,
+      "start": 669.48,
+      "end": 671.509,
+      "duration": 2.029,
+      "text": "you should just exercise all of the"
+    },
+    {
+      "index": 284,
+      "start": 671.519,
+      "end": 672.87,
+      "duration": 1.351,
+      "text": "parts of the conditional so make sure"
+    },
+    {
+      "index": 285,
+      "start": 672.88,
+      "end": 674.15,
+      "duration": 1.27,
+      "text": "you have a test case that goes through"
+    },
+    {
+      "index": 286,
+      "start": 674.16,
+      "end": 675.67,
+      "duration": 1.51,
+      "text": "each part of the"
+    },
+    {
+      "index": 287,
+      "start": 675.68,
+      "end": 677.99,
+      "duration": 2.31,
+      "text": "conditional for four Loops make sure you"
+    },
+    {
+      "index": 288,
+      "start": 678.0,
+      "end": 679.43,
+      "duration": 1.43,
+      "text": "have a test case where the loop is not"
+    },
+    {
+      "index": 289,
+      "start": 679.44,
+      "end": 680.949,
+      "duration": 1.509,
+      "text": "entered at all where the loop is entered"
+    },
+    {
+      "index": 290,
+      "start": 680.959,
+      "end": 682.59,
+      "duration": 1.631,
+      "text": "one time and when the loop is entered"
+    },
+    {
+      "index": 291,
+      "start": 682.6,
+      "end": 684.829,
+      "duration": 2.229,
+      "text": "just some number more than"
+    },
+    {
+      "index": 292,
+      "start": 684.839,
+      "end": 687.31,
+      "duration": 2.471,
+      "text": "once for while Loops similar to for"
+    },
+    {
+      "index": 293,
+      "start": 687.32,
+      "end": 688.949,
+      "duration": 1.629,
+      "text": "Loops except that make sure you have"
+    },
+    {
+      "index": 294,
+      "start": 688.959,
+      "end": 690.71,
+      "duration": 1.751,
+      "text": "test cases that cover all of the"
+    },
+    {
+      "index": 295,
+      "start": 690.72,
+      "end": 693.11,
+      "duration": 2.39,
+      "text": "possible ways to break out of the Y Loop"
+    },
+    {
+      "index": 296,
+      "start": 693.12,
+      "end": 695.55,
+      "duration": 2.43,
+      "text": "so if if the if the Y Loop condition"
+    },
+    {
+      "index": 297,
+      "start": 695.56,
+      "end": 697.99,
+      "duration": 2.43,
+      "text": "becomes false or if maybe there's a"
+    },
+    {
+      "index": 298,
+      "start": 698.0,
+      "end": 701.389,
+      "duration": 3.389,
+      "text": "break inside the inside the Y Loop and"
+    },
+    {
+      "index": 299,
+      "start": 701.399,
+      "end": 703.19,
+      "duration": 1.791,
+      "text": "so"
+    },
+    {
+      "index": 300,
+      "start": 703.2,
+      "end": 705.99,
+      "duration": 2.79,
+      "text": "on so in this in this example we have"
+    },
+    {
+      "index": 301,
+      "start": 706.0,
+      "end": 708.31,
+      "duration": 2.31,
+      "text": "the absolute value of x this is a"
+    },
+    {
+      "index": 302,
+      "start": 708.32,
+      "end": 709.509,
+      "duration": 1.189,
+      "text": "specification and this is the"
+    },
+    {
+      "index": 303,
+      "start": 709.519,
+      "end": 711.99,
+      "duration": 2.471,
+      "text": "implementation that um that someone"
+    },
+    {
+      "index": 304,
+      "start": 712.0,
+      "end": 716.67,
+      "duration": 4.67,
+      "text": "decided to to do for this uh"
+    },
+    {
+      "index": 305,
+      "start": 719.59,
+      "end": 719.6,
+      "duration": 0.01,
+      "text": "function so a path complete test set"
+    },
+    {
+      "index": 306,
+      "start": 719.6,
+      "end": 722.47,
+      "duration": 2.87,
+      "text": "means that you want to have a a test"
+    },
+    {
+      "index": 307,
+      "start": 722.48,
+      "end": 723.509,
+      "duration": 1.029,
+      "text": "that goes through each one of these"
+    },
+    {
+      "index": 308,
+      "start": 723.519,
+      "end": 726.389,
+      "duration": 2.87,
+      "text": "branches so if x is less than minus one"
+    },
+    {
+      "index": 309,
+      "start": 726.399,
+      "end": 728.35,
+      "duration": 1.951,
+      "text": "well minus two is less than minus one so"
+    },
+    {
+      "index": 310,
+      "start": 728.36,
+      "end": 731.31,
+      "duration": 2.95,
+      "text": "that's good and"
+    },
+    {
+      "index": 311,
+      "start": 731.32,
+      "end": 734.069,
+      "duration": 2.749,
+      "text": "otherwise which means pick a number"
+    },
+    {
+      "index": 312,
+      "start": 734.079,
+      "end": 737.509,
+      "duration": 3.43,
+      "text": "greater than minus one so"
+    },
+    {
+      "index": 313,
+      "start": 737.519,
+      "end": 741.15,
+      "duration": 3.631,
+      "text": "two so two and minus two are path"
+    },
+    {
+      "index": 314,
+      "start": 741.16,
+      "end": 744.35,
+      "duration": 3.19,
+      "text": "complete yield to um yield path complete"
+    },
+    {
+      "index": 315,
+      "start": 744.36,
+      "end": 747.03,
+      "duration": 2.67,
+      "text": "yields a path complete test Suite but"
+    },
+    {
+      "index": 316,
+      "start": 747.04,
+      "end": 749.23,
+      "duration": 2.19,
+      "text": "notice that while we've hit upon every"
+    },
+    {
+      "index": 317,
+      "start": 749.24,
+      "end": 751.23,
+      "duration": 1.99,
+      "text": "possible path through this code we've"
+    },
+    {
+      "index": 318,
+      "start": 751.24,
+      "end": 753.55,
+      "duration": 2.31,
+      "text": "actually missed a test case minus one so"
+    },
+    {
+      "index": 319,
+      "start": 753.56,
+      "end": 755.629,
+      "duration": 2.069,
+      "text": "this code incorrectly classifies minus"
+    },
+    {
+      "index": 320,
+      "start": 755.639,
+      "end": 759.67,
+      "duration": 4.031,
+      "text": "one um as returning minus one right"
+    },
+    {
+      "index": 321,
+      "start": 759.68,
+      "end": 761.189,
+      "duration": 1.509,
+      "text": "which is"
+    },
+    {
+      "index": 322,
+      "start": 761.199,
+      "end": 764.11,
+      "duration": 2.911,
+      "text": "wrong so in add so for glass box testing"
+    },
+    {
+      "index": 323,
+      "start": 764.12,
+      "end": 765.629,
+      "duration": 1.509,
+      "text": "in addition to making sure you're going"
+    },
+    {
+      "index": 324,
+      "start": 765.639,
+      "end": 767.35,
+      "duration": 1.711,
+      "text": "through all the possible paths through"
+    },
+    {
+      "index": 325,
+      "start": 767.36,
+      "end": 769.389,
+      "duration": 2.029,
+      "text": "the code you also want to make sure you"
+    },
+    {
+      "index": 326,
+      "start": 769.399,
+      "end": 772.189,
+      "duration": 2.79,
+      "text": "hit upon any boundary condition so in"
+    },
+    {
+      "index": 327,
+      "start": 772.199,
+      "end": 774.79,
+      "duration": 2.591,
+      "text": "this case for branches minus one is a"
+    },
+    {
+      "index": 328,
+      "start": 774.8,
+      "end": 776.11,
+      "duration": 1.31,
+      "text": "boundary"
+    },
+    {
+      "index": 329,
+      "start": 776.12,
+      "end": 779.75,
+      "duration": 3.63,
+      "text": "condition okay so you youve created a"
+    },
+    {
+      "index": 330,
+      "start": 779.76,
+      "end": 781.55,
+      "duration": 1.79,
+      "text": "test Suite you've tested your program"
+    },
+    {
+      "index": 331,
+      "start": 781.56,
+      "end": 784.55,
+      "duration": 2.99,
+      "text": "chances are you found a bug what do you"
+    },
+    {
+      "index": 332,
+      "start": 784.56,
+      "end": 785.99,
+      "duration": 1.43,
+      "text": "do"
+    },
+    {
+      "index": 333,
+      "start": 786.0,
+      "end": 789.509,
+      "duration": 3.509,
+      "text": "now all right quick sort of detour into"
+    },
+    {
+      "index": 334,
+      "start": 789.519,
+      "end": 790.79,
+      "duration": 1.271,
+      "text": "a little bit of"
+    },
+    {
+      "index": 335,
+      "start": 790.8,
+      "end": 794.79,
+      "duration": 3.99,
+      "text": "History uh the history of debugging so"
+    },
+    {
+      "index": 336,
+      "start": 794.8,
+      "end": 798.069,
+      "duration": 3.269,
+      "text": "1947 this computer was"
+    },
+    {
+      "index": 337,
+      "start": 798.079,
+      "end": 800.629,
+      "duration": 2.55,
+      "text": "built and it was a computer that was"
+    },
+    {
+      "index": 338,
+      "start": 800.639,
+      "end": 803.75,
+      "duration": 3.111,
+      "text": "very impressive for its day it could do"
+    },
+    {
+      "index": 339,
+      "start": 803.76,
+      "end": 806.35,
+      "duration": 2.59,
+      "text": "things like addition in 0.1"
+    },
+    {
+      "index": 340,
+      "start": 806.36,
+      "end": 810.35,
+      "duration": 3.99,
+      "text": "seconds things like multiplication in 7"
+    },
+    {
+      "index": 341,
+      "start": 810.36,
+      "end": 814.75,
+      "duration": 4.39,
+      "text": "seconds and take the log of something in"
+    },
+    {
+      "index": 342,
+      "start": 814.76,
+      "end": 818.31,
+      "duration": 3.55,
+      "text": "5 seconds okay so faster than a human"
+    },
+    {
+      "index": 343,
+      "start": 818.32,
+      "end": 821.55,
+      "duration": 3.23,
+      "text": "possibly but pretty slow for today's"
+    },
+    {
+      "index": 344,
+      "start": 821.56,
+      "end": 824.189,
+      "duration": 2.629,
+      "text": "standards okay and a group of Engineers"
+    },
+    {
+      "index": 345,
+      "start": 824.199,
+      "end": 827.269,
+      "duration": 3.07,
+      "text": "were working on on uh running a program"
+    },
+    {
+      "index": 346,
+      "start": 827.279,
+      "end": 828.949,
+      "duration": 1.67,
+      "text": "that found that was supposed to find a"
+    },
+    {
+      "index": 347,
+      "start": 828.959,
+      "end": 831.55,
+      "duration": 2.591,
+      "text": "trigonometric"
+    },
+    {
+      "index": 348,
+      "start": 831.56,
+      "end": 834.749,
+      "duration": 3.189,
+      "text": "function and among them being uh this"
+    },
+    {
+      "index": 349,
+      "start": 834.759,
+      "end": 837.269,
+      "duration": 2.51,
+      "text": "one of the first female scientists Grace"
+    },
+    {
+      "index": 350,
+      "start": 837.279,
+      "end": 839.43,
+      "duration": 2.151,
+      "text": "Hopper and they found that their program"
+    },
+    {
+      "index": 351,
+      "start": 839.44,
+      "end": 843.269,
+      "duration": 3.829,
+      "text": "was not working correctly so they went"
+    },
+    {
+      "index": 352,
+      "start": 843.279,
+      "end": 846.15,
+      "duration": 2.871,
+      "text": "through all of the panels and all of the"
+    },
+    {
+      "index": 353,
+      "start": 846.16,
+      "end": 847.79,
+      "duration": 1.63,
+      "text": "relays in the"
+    },
+    {
+      "index": 354,
+      "start": 847.8,
+      "end": 851.15,
+      "duration": 3.35,
+      "text": "computer and they isolated a program in"
+    },
+    {
+      "index": 355,
+      "start": 851.16,
+      "end": 855.23,
+      "duration": 4.07,
+      "text": "panel F relay 70 where they found this"
+    },
+    {
+      "index": 356,
+      "start": 855.24,
+      "end": 858.11,
+      "duration": 2.87,
+      "text": "moth just just sitting in there I think"
+    },
+    {
+      "index": 357,
+      "start": 858.12,
+      "end": 860.43,
+      "duration": 2.31,
+      "text": "it was dead probably electrocuted but it"
+    },
+    {
+      "index": 358,
+      "start": 860.44,
+      "end": 862.59,
+      "duration": 2.15,
+      "text": "was a moth that was impeding the"
+    },
+    {
+      "index": 359,
+      "start": 862.6,
+      "end": 864.829,
+      "duration": 2.229,
+      "text": "calculation and don't know if you can"
+    },
+    {
+      "index": 360,
+      "start": 864.839,
+      "end": 868.03,
+      "duration": 3.191,
+      "text": "read this but this part right here they"
+    },
+    {
+      "index": 361,
+      "start": 868.04,
+      "end": 869.71,
+      "duration": 1.67,
+      "text": "made a note in their in a log book that"
+    },
+    {
+      "index": 362,
+      "start": 869.72,
+      "end": 872.11,
+      "duration": 2.39,
+      "text": "says first actual casee of bug being"
+    },
+    {
+      "index": 363,
+      "start": 872.12,
+      "end": 875.67,
+      "duration": 3.55,
+      "text": "found which I think is really cute so so"
+    },
+    {
+      "index": 364,
+      "start": 875.68,
+      "end": 877.829,
+      "duration": 2.149,
+      "text": "they were literally doing debugging in"
+    },
+    {
+      "index": 365,
+      "start": 877.839,
+      "end": 881.189,
+      "duration": 3.35,
+      "text": "this uh in this computer right all right"
+    },
+    {
+      "index": 366,
+      "start": 881.199,
+      "end": 882.949,
+      "duration": 1.75,
+      "text": "so you won't be doing that sort of"
+    },
+    {
+      "index": 367,
+      "start": 882.959,
+      "end": 884.629,
+      "duration": 1.67,
+      "text": "debugging you'll be doing a virtual kind"
+    },
+    {
+      "index": 368,
+      "start": 884.639,
+      "end": 886.11,
+      "duration": 1.471,
+      "text": "of debugging in your programs which"
+    },
+    {
+      "index": 369,
+      "start": 886.12,
+      "end": 888.35,
+      "duration": 2.23,
+      "text": "again is not that fun but you still have"
+    },
+    {
+      "index": 370,
+      "start": 888.36,
+      "end": 891.71,
+      "duration": 3.35,
+      "text": "to do it so debugging as you might have"
+    },
+    {
+      "index": 371,
+      "start": 891.72,
+      "end": 893.43,
+      "duration": 1.71,
+      "text": "noticed so far in your problem sets has"
+    },
+    {
+      "index": 372,
+      "start": 893.44,
+      "end": 896.829,
+      "duration": 3.389,
+      "text": "a a bit of a steep learning curve"
+    },
+    {
+      "index": 373,
+      "start": 896.839,
+      "end": 899.269,
+      "duration": 2.43,
+      "text": "right and obviously your goal goal is to"
+    },
+    {
+      "index": 374,
+      "start": 899.279,
+      "end": 900.79,
+      "duration": 1.511,
+      "text": "have a bug free program and in order to"
+    },
+    {
+      "index": 375,
+      "start": 900.8,
+      "end": 903.43,
+      "duration": 2.63,
+      "text": "achieve that you have to do the"
+    },
+    {
+      "index": 376,
+      "start": 903.44,
+      "end": 906.03,
+      "duration": 2.59,
+      "text": "debugging there are some tools which"
+    },
+    {
+      "index": 377,
+      "start": 906.04,
+      "end": 907.949,
+      "duration": 1.909,
+      "text": "some of you have been using there are"
+    },
+    {
+      "index": 378,
+      "start": 907.959,
+      "end": 910.03,
+      "duration": 2.071,
+      "text": "some tools built into anaconda or"
+    },
+    {
+      "index": 379,
+      "start": 910.04,
+      "end": 913.11,
+      "duration": 3.07,
+      "text": "whatever uh ID you've been using um to"
+    },
+    {
+      "index": 380,
+      "start": 913.12,
+      "end": 915.749,
+      "duration": 2.629,
+      "text": "do to do debugging I know some of you"
+    },
+    {
+      "index": 381,
+      "start": 915.759,
+      "end": 917.069,
+      "duration": 1.31,
+      "text": "have been using the python tutor which"
+    },
+    {
+      "index": 382,
+      "start": 917.079,
+      "end": 918.23,
+      "duration": 1.151,
+      "text": "is"
+    },
+    {
+      "index": 383,
+      "start": 918.24,
+      "end": 920.55,
+      "duration": 2.31,
+      "text": "awesome the print statement can also be"
+    },
+    {
+      "index": 384,
+      "start": 920.56,
+      "end": 923.03,
+      "duration": 2.47,
+      "text": "a good debugging"
+    },
+    {
+      "index": 385,
+      "start": 923.04,
+      "end": 926.99,
+      "duration": 3.95,
+      "text": "tool but over above everything else it's"
+    },
+    {
+      "index": 386,
+      "start": 927.0,
+      "end": 928.55,
+      "duration": 1.55,
+      "text": "really important to just be systematic"
+    },
+    {
+      "index": 387,
+      "start": 928.56,
+      "end": 930.949,
+      "duration": 2.389,
+      "text": "as you're TR to debug your"
+    },
+    {
+      "index": 388,
+      "start": 930.959,
+      "end": 932.829,
+      "duration": 1.87,
+      "text": "program I want to talk a little bit"
+    },
+    {
+      "index": 389,
+      "start": 932.839,
+      "end": 934.189,
+      "duration": 1.35,
+      "text": "about print statements and how you can"
+    },
+    {
+      "index": 390,
+      "start": 934.199,
+      "end": 937.43,
+      "duration": 3.231,
+      "text": "use them to debug because I I think"
+    },
+    {
+      "index": 391,
+      "start": 937.44,
+      "end": 938.829,
+      "duration": 1.389,
+      "text": "python tutor you know if you don't have"
+    },
+    {
+      "index": 392,
+      "start": 938.839,
+      "end": 940.23,
+      "duration": 1.391,
+      "text": "the internet you might not be able to"
+    },
+    {
+      "index": 393,
+      "start": 940.24,
+      "end": 942.509,
+      "duration": 2.269,
+      "text": "use it um if you don't know how to use"
+    },
+    {
+      "index": 394,
+      "start": 942.519,
+      "end": 944.55,
+      "duration": 2.031,
+      "text": "the debugger you know you don't need to"
+    },
+    {
+      "index": 395,
+      "start": 944.56,
+      "end": 946.23,
+      "duration": 1.67,
+      "text": "learn but print statements you'll always"
+    },
+    {
+      "index": 396,
+      "start": 946.24,
+      "end": 947.389,
+      "duration": 1.149,
+      "text": "have them right and you can always put"
+    },
+    {
+      "index": 397,
+      "start": 947.399,
+      "end": 948.79,
+      "duration": 1.391,
+      "text": "them in your program and they're really"
+    },
+    {
+      "index": 398,
+      "start": 948.8,
+      "end": 951.829,
+      "duration": 3.029,
+      "text": "good ways to test"
+    },
+    {
+      "index": 399,
+      "start": 954.91,
+      "end": 954.92,
+      "duration": 0.01,
+      "text": "hypotheses so good places to put print"
+    },
+    {
+      "index": 400,
+      "start": 954.92,
+      "end": 958.309,
+      "duration": 3.389,
+      "text": "statements are inside functions inside"
+    },
+    {
+      "index": 401,
+      "start": 958.319,
+      "end": 959.829,
+      "duration": 1.51,
+      "text": "Loops for example what are the loop"
+    },
+    {
+      "index": 402,
+      "start": 959.839,
+      "end": 962.67,
+      "duration": 2.831,
+      "text": "parameters what are the loop values what"
+    },
+    {
+      "index": 403,
+      "start": 962.68,
+      "end": 964.949,
+      "duration": 2.269,
+      "text": "function what functions return what"
+    },
+    {
+      "index": 404,
+      "start": 964.959,
+      "end": 968.43,
+      "duration": 3.471,
+      "text": "values so you can make sure that values"
+    },
+    {
+      "index": 405,
+      "start": 968.44,
+      "end": 970.71,
+      "duration": 2.27,
+      "text": "are being passed the correct values are"
+    },
+    {
+      "index": 406,
+      "start": 970.72,
+      "end": 974.509,
+      "duration": 3.789,
+      "text": "being passed between parts of your"
+    },
+    {
+      "index": 407,
+      "start": 976.87,
+      "end": 976.88,
+      "duration": 0.01,
+      "text": "code I will mention that you can use the"
+    },
+    {
+      "index": 408,
+      "start": 976.88,
+      "end": 979.35,
+      "duration": 2.47,
+      "text": "bisection method when you're"
+    },
+    {
+      "index": 409,
+      "start": 979.36,
+      "end": 982.069,
+      "duration": 2.709,
+      "text": "debugging which is"
+    },
+    {
+      "index": 410,
+      "start": 982.079,
+      "end": 984.309,
+      "duration": 2.23,
+      "text": "interesting so if you take a print"
+    },
+    {
+      "index": 411,
+      "start": 984.319,
+      "end": 986.87,
+      "duration": 2.551,
+      "text": "statement find approximately the halfway"
+    },
+    {
+      "index": 412,
+      "start": 986.88,
+      "end": 989.35,
+      "duration": 2.47,
+      "text": "point in your code print out what values"
+    },
+    {
+      "index": 413,
+      "start": 989.36,
+      "end": 991.069,
+      "duration": 1.709,
+      "text": "you you uh print out some relevant"
+    },
+    {
+      "index": 414,
+      "start": 991.079,
+      "end": 994.03,
+      "duration": 2.951,
+      "text": "values all of the possible some some"
+    },
+    {
+      "index": 415,
+      "start": 994.04,
+      "end": 996.509,
+      "duration": 2.469,
+      "text": "print out some values at that point in"
+    },
+    {
+      "index": 416,
+      "start": 996.519,
+      "end": 998.509,
+      "duration": 1.99,
+      "text": "your"
+    },
+    {
+      "index": 417,
+      "start": 998.519,
+      "end": 1001.23,
+      "duration": 2.711,
+      "text": "code if everything is as you expect it"
+    },
+    {
+      "index": 418,
+      "start": 1001.24,
+      "end": 1002.629,
+      "duration": 1.389,
+      "text": "to be at that point in your code then"
+    },
+    {
+      "index": 419,
+      "start": 1002.639,
+      "end": 1005.35,
+      "duration": 2.711,
+      "text": "you're good that means the code so far"
+    },
+    {
+      "index": 420,
+      "start": 1005.36,
+      "end": 1008.389,
+      "duration": 3.029,
+      "text": "is bug free that means that however that"
+    },
+    {
+      "index": 421,
+      "start": 1008.399,
+      "end": 1011.71,
+      "duration": 3.311,
+      "text": "means that the code Beyond it has a bug"
+    },
+    {
+      "index": 422,
+      "start": 1011.72,
+      "end": 1014.03,
+      "duration": 2.31,
+      "text": "right so since you've put a print"
+    },
+    {
+      "index": 423,
+      "start": 1014.04,
+      "end": 1015.35,
+      "duration": 1.31,
+      "text": "statement halfway in your code and you"
+    },
+    {
+      "index": 424,
+      "start": 1015.36,
+      "end": 1017.35,
+      "duration": 1.99,
+      "text": "think that's and that's that gave good"
+    },
+    {
+      "index": 425,
+      "start": 1017.36,
+      "end": 1019.67,
+      "duration": 2.31,
+      "text": "results then put a print statement 3/4"
+    },
+    {
+      "index": 426,
+      "start": 1019.68,
+      "end": 1021.87,
+      "duration": 2.19,
+      "text": "of the way in a code and see if the"
+    },
+    {
+      "index": 427,
+      "start": 1021.88,
+      "end": 1023.509,
+      "duration": 1.629,
+      "text": "values are as you expect at that point"
+    },
+    {
+      "index": 428,
+      "start": 1023.519,
+      "end": 1026.309,
+      "duration": 2.79,
+      "text": "and if they are great then put a print"
+    },
+    {
+      "index": 429,
+      "start": 1026.319,
+      "end": 1029.23,
+      "duration": 2.911,
+      "text": "statement um further down so in this way"
+    },
+    {
+      "index": 430,
+      "start": 1029.24,
+      "end": 1030.87,
+      "duration": 1.63,
+      "text": "you could use the bisection method to"
+    },
+    {
+      "index": 431,
+      "start": 1030.88,
+      "end": 1032.71,
+      "duration": 1.83,
+      "text": "sort of pinpoint a line or a set of"
+    },
+    {
+      "index": 432,
+      "start": 1032.72,
+      "end": 1036.23,
+      "duration": 3.51,
+      "text": "lines or maybe a um a function that"
+    },
+    {
+      "index": 433,
+      "start": 1036.24,
+      "end": 1040.59,
+      "duration": 4.35,
+      "text": "that's giving you the bad uh the bad"
+    },
+    {
+      "index": 434,
+      "start": 1044.029,
+      "end": 1044.039,
+      "duration": 0.01,
+      "text": "results so the general debugging steps"
+    },
+    {
+      "index": 435,
+      "start": 1044.039,
+      "end": 1046.829,
+      "duration": 2.79,
+      "text": "is to study the program"
+    },
+    {
+      "index": 436,
+      "start": 1046.839,
+      "end": 1049.15,
+      "duration": 2.311,
+      "text": "code don't ask what is wrong because"
+    },
+    {
+      "index": 437,
+      "start": 1049.16,
+      "end": 1050.669,
+      "duration": 1.509,
+      "text": "that's actually part of the testing so"
+    },
+    {
+      "index": 438,
+      "start": 1050.679,
+      "end": 1052.51,
+      "duration": 1.831,
+      "text": "your test cases would have figured out"
+    },
+    {
+      "index": 439,
+      "start": 1052.52,
+      "end": 1054.51,
+      "duration": 1.99,
+      "text": "what's"
+    },
+    {
+      "index": 440,
+      "start": 1054.52,
+      "end": 1057.47,
+      "duration": 2.95,
+      "text": "wrong the debugging process is figuring"
+    },
+    {
+      "index": 441,
+      "start": 1057.48,
+      "end": 1060.31,
+      "duration": 2.83,
+      "text": "out how that how the result took"
+    },
+    {
+      "index": 442,
+      "start": 1060.32,
+      "end": 1063.07,
+      "duration": 2.75,
+      "text": "place and since programming is or"
+    },
+    {
+      "index": 443,
+      "start": 1063.08,
+      "end": 1066.07,
+      "duration": 2.99,
+      "text": "programing and debugging is sort of is a"
+    },
+    {
+      "index": 444,
+      "start": 1066.08,
+      "end": 1067.87,
+      "duration": 1.79,
+      "text": "science you can use a scientific method"
+    },
+    {
+      "index": 445,
+      "start": 1067.88,
+      "end": 1070.27,
+      "duration": 2.39,
+      "text": "as well so look at all the data that's"
+    },
+    {
+      "index": 446,
+      "start": 1070.28,
+      "end": 1072.95,
+      "duration": 2.67,
+      "text": "your test cases figure out a hypothesis"
+    },
+    {
+      "index": 447,
+      "start": 1072.96,
+      "end": 1076.07,
+      "duration": 3.11,
+      "text": "maybe say oh maybe I'm indexing from one"
+    },
+    {
+      "index": 448,
+      "start": 1076.08,
+      "end": 1079.83,
+      "duration": 3.75,
+      "text": "instead of zero in lists for example"
+    },
+    {
+      "index": 449,
+      "start": 1079.84,
+      "end": 1081.23,
+      "duration": 1.39,
+      "text": "come up with an experiment that you can"
+    },
+    {
+      "index": 450,
+      "start": 1081.24,
+      "end": 1083.35,
+      "duration": 2.11,
+      "text": "repeat and then pick a simple test case"
+    },
+    {
+      "index": 451,
+      "start": 1083.36,
+      "end": 1087.31,
+      "duration": 3.95,
+      "text": "that you can test your hypothesis"
+    },
+    {
+      "index": 452,
+      "start": 1090.43,
+      "end": 1090.44,
+      "duration": 0.01,
+      "text": "with so as you're debugging you will"
+    },
+    {
+      "index": 453,
+      "start": 1090.44,
+      "end": 1091.75,
+      "duration": 1.31,
+      "text": "encounter error"
+    },
+    {
+      "index": 454,
+      "start": 1091.76,
+      "end": 1093.99,
+      "duration": 2.23,
+      "text": "messages and these error messages are"
+    },
+    {
+      "index": 455,
+      "start": 1094.0,
+      "end": 1096.35,
+      "duration": 2.35,
+      "text": "actually pretty easy to figure"
+    },
+    {
+      "index": 456,
+      "start": 1096.36,
+      "end": 1098.59,
+      "duration": 2.23,
+      "text": "out and they're really easy to fix in"
+    },
+    {
+      "index": 457,
+      "start": 1098.6,
+      "end": 1101.47,
+      "duration": 2.87,
+      "text": "your code so for example accessing"
+    },
+    {
+      "index": 458,
+      "start": 1101.48,
+      "end": 1103.029,
+      "duration": 1.549,
+      "text": "things beyond the limits of a list give"
+    },
+    {
+      "index": 459,
+      "start": 1103.039,
+      "end": 1106.27,
+      "duration": 3.231,
+      "text": "you index errors trying to convert in"
+    },
+    {
+      "index": 460,
+      "start": 1106.28,
+      "end": 1108.19,
+      "duration": 1.91,
+      "text": "this case a list to an integer gives you"
+    },
+    {
+      "index": 461,
+      "start": 1108.2,
+      "end": 1109.71,
+      "duration": 1.51,
+      "text": "type errors"
+    },
+    {
+      "index": 462,
+      "start": 1109.72,
+      "end": 1112.149,
+      "duration": 2.429,
+      "text": "accessing variables that you've haven't"
+    },
+    {
+      "index": 463,
+      "start": 1112.159,
+      "end": 1114.63,
+      "duration": 2.471,
+      "text": "created before gives you name errors and"
+    },
+    {
+      "index": 464,
+      "start": 1114.64,
+      "end": 1117.63,
+      "duration": 2.99,
+      "text": "so on and so on and syntax errors are"
+    },
+    {
+      "index": 465,
+      "start": 1117.64,
+      "end": 1119.39,
+      "duration": 1.75,
+      "text": "things for things like if you forget a"
+    },
+    {
+      "index": 466,
+      "start": 1119.4,
+      "end": 1121.47,
+      "duration": 2.07,
+      "text": "parenthesis or forget a colon or"
+    },
+    {
+      "index": 467,
+      "start": 1121.48,
+      "end": 1123.07,
+      "duration": 1.59,
+      "text": "something like"
+    },
+    {
+      "index": 468,
+      "start": 1123.08,
+      "end": 1125.99,
+      "duration": 2.91,
+      "text": "that okay so error messages are really"
+    },
+    {
+      "index": 469,
+      "start": 1126.0,
+      "end": 1127.87,
+      "duration": 1.87,
+      "text": "easy to spot right the python"
+    },
+    {
+      "index": 470,
+      "start": 1127.88,
+      "end": 1130.59,
+      "duration": 2.71,
+      "text": "interpreter spits these out for you and"
+    },
+    {
+      "index": 471,
+      "start": 1130.6,
+      "end": 1132.549,
+      "duration": 1.949,
+      "text": "then you can pinpoint the exact line"
+    },
+    {
+      "index": 472,
+      "start": 1132.559,
+      "end": 1134.87,
+      "duration": 2.311,
+      "text": "logic errors are actually the hard part"
+    },
+    {
+      "index": 473,
+      "start": 1134.88,
+      "end": 1138.029,
+      "duration": 3.149,
+      "text": "okay and logic errors are the ones that"
+    },
+    {
+      "index": 474,
+      "start": 1138.039,
+      "end": 1141.19,
+      "duration": 3.151,
+      "text": "you will be uh spending the most time on"
+    },
+    {
+      "index": 475,
+      "start": 1141.2,
+      "end": 1143.23,
+      "duration": 2.03,
+      "text": "for which I would recommend always"
+    },
+    {
+      "index": 476,
+      "start": 1143.24,
+      "end": 1146.39,
+      "duration": 3.15,
+      "text": "trying to take a break take a nap go eat"
+    },
+    {
+      "index": 477,
+      "start": 1146.4,
+      "end": 1148.27,
+      "duration": 1.87,
+      "text": "something sometimes you'd have to start"
+    },
+    {
+      "index": 478,
+      "start": 1148.28,
+      "end": 1151.43,
+      "duration": 3.15,
+      "text": "all over right so throw out the code you"
+    },
+    {
+      "index": 479,
+      "start": 1151.44,
+      "end": 1153.19,
+      "duration": 1.75,
+      "text": "have and just sit down with a piece of"
+    },
+    {
+      "index": 480,
+      "start": 1153.2,
+      "end": 1154.63,
+      "duration": 1.43,
+      "text": "paper try to figure out how you want to"
+    },
+    {
+      "index": 481,
+      "start": 1154.64,
+      "end": 1157.19,
+      "duration": 2.55,
+      "text": "solve the problem and if you look up the"
+    },
+    {
+      "index": 482,
+      "start": 1157.2,
+      "end": 1159.95,
+      "duration": 2.75,
+      "text": "term rubber"
+    },
+    {
+      "index": 483,
+      "start": 1162.35,
+      "end": 1162.36,
+      "duration": 0.01,
+      "text": "ducky a lot of heads went up on that one"
+    },
+    {
+      "index": 484,
+      "start": 1162.36,
+      "end": 1163.909,
+      "duration": 1.549,
+      "text": "rubber ducky"
+    },
+    {
+      "index": 485,
+      "start": 1163.919,
+      "end": 1167.27,
+      "duration": 3.351,
+      "text": "debugging um that is an actual term uh"
+    },
+    {
+      "index": 486,
+      "start": 1167.28,
+      "end": 1169.95,
+      "duration": 2.67,
+      "text": "in Wikipedia and it's when a programmer"
+    },
+    {
+      "index": 487,
+      "start": 1169.96,
+      "end": 1172.19,
+      "duration": 2.23,
+      "text": "explains their code to rubber ducky"
+    },
+    {
+      "index": 488,
+      "start": 1172.2,
+      "end": 1173.83,
+      "duration": 1.63,
+      "text": "that's me on the left explaining code to"
+    },
+    {
+      "index": 489,
+      "start": 1173.84,
+      "end": 1175.63,
+      "duration": 1.79,
+      "text": "my rubber ducky you should always you"
+    },
+    {
+      "index": 490,
+      "start": 1175.64,
+      "end": 1177.27,
+      "duration": 1.63,
+      "text": "should you should go buy"
+    },
+    {
+      "index": 491,
+      "start": 1177.28,
+      "end": 1180.669,
+      "duration": 3.389,
+      "text": "one or code to anyone else preferably"
+    },
+    {
+      "index": 492,
+      "start": 1180.679,
+      "end": 1182.63,
+      "duration": 1.951,
+      "text": "someone who doesn't really understand"
+    },
+    {
+      "index": 493,
+      "start": 1182.64,
+      "end": 1184.71,
+      "duration": 2.07,
+      "text": "anything because that'll force you to"
+    },
+    {
+      "index": 494,
+      "start": 1184.72,
+      "end": 1187.149,
+      "duration": 2.429,
+      "text": "explain everything really really closely"
+    },
+    {
+      "index": 495,
+      "start": 1187.159,
+      "end": 1188.789,
+      "duration": 1.63,
+      "text": "okay and as you're doing that you'll"
+    },
+    {
+      "index": 496,
+      "start": 1188.799,
+      "end": 1190.59,
+      "duration": 1.791,
+      "text": "figure out your problem and I figured"
+    },
+    {
+      "index": 497,
+      "start": 1190.6,
+      "end": 1192.47,
+      "duration": 1.87,
+      "text": "out my problem in both of these"
+    },
+    {
+      "index": 498,
+      "start": 1192.48,
+      "end": 1197.23,
+      "duration": 4.75,
+      "text": "cases um so just go back to the basics"
+    },
+    {
+      "index": 499,
+      "start": 1197.24,
+      "end": 1200.35,
+      "duration": 3.11,
+      "text": "all right"
+    },
+    {
+      "index": 500,
+      "start": 1200.36,
+      "end": 1202.75,
+      "duration": 2.39,
+      "text": "quick summary of dos and don'ts of"
+    },
+    {
+      "index": 501,
+      "start": 1202.76,
+      "end": 1205.83,
+      "duration": 3.07,
+      "text": "debugging and testing so don't write the"
+    },
+    {
+      "index": 502,
+      "start": 1205.84,
+      "end": 1207.39,
+      "duration": 1.55,
+      "text": "entire program test the entire program"
+    },
+    {
+      "index": 503,
+      "start": 1207.4,
+      "end": 1209.19,
+      "duration": 1.79,
+      "text": "and debug the entire program I know this"
+    },
+    {
+      "index": 504,
+      "start": 1209.2,
+      "end": 1211.35,
+      "duration": 2.15,
+      "text": "is really tempting to do and I do it all"
+    },
+    {
+      "index": 505,
+      "start": 1211.36,
+      "end": 1216.27,
+      "duration": 4.91,
+      "text": "the time but don't do it okay because"
+    },
+    {
+      "index": 506,
+      "start": 1216.28,
+      "end": 1218.07,
+      "duration": 1.79,
+      "text": "you're going to introduce a lot of bugs"
+    },
+    {
+      "index": 507,
+      "start": 1218.08,
+      "end": 1219.43,
+      "duration": 1.35,
+      "text": "and it's going to be hard to isolate"
+    },
+    {
+      "index": 508,
+      "start": 1219.44,
+      "end": 1221.59,
+      "duration": 2.15,
+      "text": "which bugs are affecting other"
+    },
+    {
+      "index": 509,
+      "start": 1221.6,
+      "end": 1224.149,
+      "duration": 2.549,
+      "text": "ones and it'll lead to a lot more stress"
+    },
+    {
+      "index": 510,
+      "start": 1224.159,
+      "end": 1228.029,
+      "duration": 3.87,
+      "text": "than you need instead do um do unit"
+    },
+    {
+      "index": 511,
+      "start": 1228.039,
+      "end": 1230.47,
+      "duration": 2.431,
+      "text": "testing so write one function test the"
+    },
+    {
+      "index": 512,
+      "start": 1230.48,
+      "end": 1232.51,
+      "duration": 2.03,
+      "text": "function debug the function you know"
+    },
+    {
+      "index": 513,
+      "start": 1232.52,
+      "end": 1233.789,
+      "duration": 1.269,
+      "text": "make sure it works write the other"
+    },
+    {
+      "index": 514,
+      "start": 1233.799,
+      "end": 1235.789,
+      "duration": 1.99,
+      "text": "function and so on and so on do a little"
+    },
+    {
+      "index": 515,
+      "start": 1235.799,
+      "end": 1237.59,
+      "duration": 1.791,
+      "text": "regression testing a little more unit"
+    },
+    {
+      "index": 516,
+      "start": 1237.6,
+      "end": 1239.47,
+      "duration": 1.87,
+      "text": "testing a little integration"
+    },
+    {
+      "index": 517,
+      "start": 1239.48,
+      "end": 1242.75,
+      "duration": 3.27,
+      "text": "testing and um it's a lot more"
+    },
+    {
+      "index": 518,
+      "start": 1242.76,
+      "end": 1244.549,
+      "duration": 1.789,
+      "text": "systematic way to write the program and"
+    },
+    {
+      "index": 519,
+      "start": 1244.559,
+      "end": 1247.59,
+      "duration": 3.031,
+      "text": "it'll cut down on your debugging time"
+    },
+    {
+      "index": 520,
+      "start": 1247.6,
+      "end": 1249.59,
+      "duration": 1.99,
+      "text": "immensely if you're changing your code"
+    },
+    {
+      "index": 521,
+      "start": 1249.6,
+      "end": 1251.11,
+      "duration": 1.51,
+      "text": "and inevitably you'll be changing your"
+    },
+    {
+      "index": 522,
+      "start": 1251.12,
+      "end": 1253.75,
+      "duration": 2.63,
+      "text": "code as you're doing your problem sets"
+    },
+    {
+      "index": 523,
+      "start": 1253.76,
+      "end": 1255.149,
+      "duration": 1.389,
+      "text": "remember"
+    },
+    {
+      "index": 524,
+      "start": 1255.159,
+      "end": 1257.63,
+      "duration": 2.471,
+      "text": "to back up your code so if you have a"
+    },
+    {
+      "index": 525,
+      "start": 1257.64,
+      "end": 1259.11,
+      "duration": 1.47,
+      "text": "version that almost works"
+    },
+    {
+      "index": 526,
+      "start": 1259.12,
+      "end": 1261.47,
+      "duration": 2.35,
+      "text": "don't just modify that maybe save a copy"
+    },
+    {
+      "index": 527,
+      "start": 1261.48,
+      "end": 1264.07,
+      "duration": 2.59,
+      "text": "SP you've got terabytes of of of memory"
+    },
+    {
+      "index": 528,
+      "start": 1264.08,
+      "end": 1265.43,
+      "duration": 1.35,
+      "text": "on your computer it won't hurt to just"
+    },
+    {
+      "index": 529,
+      "start": 1265.44,
+      "end": 1268.909,
+      "duration": 3.469,
+      "text": "make a quick copy of it document maybe"
+    },
+    {
+      "index": 530,
+      "start": 1268.919,
+      "end": 1271.669,
+      "duration": 2.75,
+      "text": "what worked and what didn't in that copy"
+    },
+    {
+      "index": 531,
+      "start": 1271.679,
+      "end": 1273.07,
+      "duration": 1.391,
+      "text": "and"
+    },
+    {
+      "index": 532,
+      "start": 1273.08,
+      "end": 1274.95,
+      "duration": 1.87,
+      "text": "then"
+    },
+    {
+      "index": 533,
+      "start": 1274.96,
+      "end": 1277.39,
+      "duration": 2.43,
+      "text": "um and then make another copy and then"
+    },
+    {
+      "index": 534,
+      "start": 1277.4,
+      "end": 1280.71,
+      "duration": 3.31,
+      "text": "you can modify your"
+    },
+    {
+      "index": 535,
+      "start": 1283.63,
+      "end": 1283.64,
+      "duration": 0.01,
+      "text": "code"
+    },
+    {
+      "index": 536,
+      "start": 1283.64,
+      "end": 1286.35,
+      "duration": 2.71,
+      "text": "okay so that's sort of a highle"
+    },
+    {
+      "index": 537,
+      "start": 1286.36,
+      "end": 1289.07,
+      "duration": 2.71,
+      "text": "introduction to testing and debugging"
+    },
+    {
+      "index": 538,
+      "start": 1289.08,
+      "end": 1291.99,
+      "duration": 2.91,
+      "text": "the rest of the class will be on um on"
+    },
+    {
+      "index": 539,
+      "start": 1292.0,
+      "end": 1294.549,
+      "duration": 2.549,
+      "text": "on the error messages or or on errors"
+    },
+    {
+      "index": 540,
+      "start": 1294.559,
+      "end": 1296.95,
+      "duration": 2.391,
+      "text": "that you'll get in your"
+    },
+    {
+      "index": 541,
+      "start": 1296.96,
+      "end": 1299.95,
+      "duration": 2.99,
+      "text": "programs so when your"
+    },
+    {
+      "index": 542,
+      "start": 1299.96,
+      "end": 1302.11,
+      "duration": 2.15,
+      "text": "functions when when you run functions or"
+    },
+    {
+      "index": 543,
+      "start": 1302.12,
+      "end": 1304.549,
+      "duration": 2.429,
+      "text": "when you run your program at some point"
+    },
+    {
+      "index": 544,
+      "start": 1304.559,
+      "end": 1307.269,
+      "duration": 2.71,
+      "text": "the program execution is going to stop"
+    },
+    {
+      "index": 545,
+      "start": 1307.279,
+      "end": 1309.19,
+      "duration": 1.911,
+      "text": "right maybe it encountered an"
+    },
+    {
+      "index": 546,
+      "start": 1309.2,
+      "end": 1311.95,
+      "duration": 2.75,
+      "text": "error because of some unexpected"
+    },
+    {
+      "index": 547,
+      "start": 1311.96,
+      "end": 1314.029,
+      "duration": 2.069,
+      "text": "condition and when that happens you get"
+    },
+    {
+      "index": 548,
+      "start": 1314.039,
+      "end": 1315.909,
+      "duration": 1.87,
+      "text": "an exception so the error is called an"
+    },
+    {
+      "index": 549,
+      "start": 1315.919,
+      "end": 1317.63,
+      "duration": 1.711,
+      "text": "exception and it's called an exception"
+    },
+    {
+      "index": 550,
+      "start": 1317.64,
+      "end": 1319.75,
+      "duration": 2.11,
+      "text": "because it was an exception to what was"
+    },
+    {
+      "index": 551,
+      "start": 1319.76,
+      "end": 1323.07,
+      "duration": 3.31,
+      "text": "expected okay to what the program"
+    },
+    {
+      "index": 552,
+      "start": 1323.08,
+      "end": 1325.35,
+      "duration": 2.27,
+      "text": "expected so all of these errors that"
+    },
+    {
+      "index": 553,
+      "start": 1325.36,
+      "end": 1327.07,
+      "duration": 1.71,
+      "text": "I've talked about in the previous slides"
+    },
+    {
+      "index": 554,
+      "start": 1327.08,
+      "end": 1332.43,
+      "duration": 5.35,
+      "text": "are actually examples of exceptions"
+    },
+    {
+      "index": 555,
+      "start": 1334.549,
+      "end": 1334.559,
+      "duration": 0.01,
+      "text": "okay and there are actually many other"
+    },
+    {
+      "index": 556,
+      "start": 1334.559,
+      "end": 1337.59,
+      "duration": 3.031,
+      "text": "types of exceptions which you'll see um"
+    },
+    {
+      "index": 557,
+      "start": 1337.6,
+      "end": 1342.549,
+      "duration": 4.949,
+      "text": "as you go on in this course and also in"
+    },
+    {
+      "index": 558,
+      "start": 1345.669,
+      "end": 1345.679,
+      "duration": 0.01,
+      "text": "602 so how do we deal with these"
+    },
+    {
+      "index": 559,
+      "start": 1345.679,
+      "end": 1349.71,
+      "duration": 4.031,
+      "text": "exceptions okay in Python you you can"
+    },
+    {
+      "index": 560,
+      "start": 1349.72,
+      "end": 1352.909,
+      "duration": 3.189,
+      "text": "actually have handlers for"
+    },
+    {
+      "index": 561,
+      "start": 1352.919,
+      "end": 1355.23,
+      "duration": 2.311,
+      "text": "exceptions so if you know that a piece"
+    },
+    {
+      "index": 562,
+      "start": 1355.24,
+      "end": 1360.35,
+      "duration": 5.11,
+      "text": "of code might give you an error for"
+    },
+    {
+      "index": 563,
+      "start": 1360.36,
+      "end": 1363.909,
+      "duration": 3.549,
+      "text": "example here I'm dealing with inputs"
+    },
+    {
+      "index": 564,
+      "start": 1363.919,
+      "end": 1366.35,
+      "duration": 2.431,
+      "text": "from users and users are really"
+    },
+    {
+      "index": 565,
+      "start": 1366.36,
+      "end": 1368.47,
+      "duration": 2.11,
+      "text": "unpredictable right you tell them to"
+    },
+    {
+      "index": 566,
+      "start": 1368.48,
+      "end": 1369.789,
+      "duration": 1.309,
+      "text": "give you a number they might give you"
+    },
+    {
+      "index": 567,
+      "start": 1369.799,
+      "end": 1371.83,
+      "duration": 2.031,
+      "text": "their"
+    },
+    {
+      "index": 568,
+      "start": 1371.84,
+      "end": 1374.43,
+      "duration": 2.59,
+      "text": "name nothing you can do about that or is"
+    },
+    {
+      "index": 569,
+      "start": 1374.44,
+      "end": 1377.23,
+      "duration": 2.79,
+      "text": "there yes there is so in your program"
+    },
+    {
+      "index": 570,
+      "start": 1377.24,
+      "end": 1379.029,
+      "duration": 1.789,
+      "text": "you can actually put"
+    },
+    {
+      "index": 571,
+      "start": 1379.039,
+      "end": 1381.149,
+      "duration": 2.11,
+      "text": "any lines of"
+    },
+    {
+      "index": 572,
+      "start": 1381.159,
+      "end": 1383.83,
+      "duration": 2.671,
+      "text": "code that you think might be problematic"
+    },
+    {
+      "index": 573,
+      "start": 1383.84,
+      "end": 1385.11,
+      "duration": 1.27,
+      "text": "that might give you an error an"
+    },
+    {
+      "index": 574,
+      "start": 1385.12,
+      "end": 1388.31,
+      "duration": 3.19,
+      "text": "exception in this Tri block so you say"
+    },
+    {
+      "index": 575,
+      "start": 1388.32,
+      "end": 1390.75,
+      "duration": 2.43,
+      "text": "TR colon and you put in any lines of"
+    },
+    {
+      "index": 576,
+      "start": 1390.76,
+      "end": 1394.909,
+      "duration": 4.149,
+      "text": "code that you think might give you an"
+    },
+    {
+      "index": 577,
+      "start": 1396.59,
+      "end": 1396.6,
+      "duration": 0.01,
+      "text": "error"
+    },
+    {
+      "index": 578,
+      "start": 1396.6,
+      "end": 1399.51,
+      "duration": 2.91,
+      "text": "if if none of these lines of code"
+    },
+    {
+      "index": 579,
+      "start": 1399.52,
+      "end": 1403.35,
+      "duration": 3.83,
+      "text": "actually produce an error then great"
+    },
+    {
+      "index": 580,
+      "start": 1403.36,
+      "end": 1404.95,
+      "duration": 1.59,
+      "text": "python doesn't do anything else it"
+    },
+    {
+      "index": 581,
+      "start": 1404.96,
+      "end": 1407.51,
+      "duration": 2.55,
+      "text": "treats them as just part as just if they"
+    },
+    {
+      "index": 582,
+      "start": 1407.52,
+      "end": 1410.149,
+      "duration": 2.629,
+      "text": "were part of a regular program but if an"
+    },
+    {
+      "index": 583,
+      "start": 1410.159,
+      "end": 1413.11,
+      "duration": 2.951,
+      "text": "error does come up for example if if"
+    },
+    {
+      "index": 584,
+      "start": 1413.12,
+      "end": 1414.83,
+      "duration": 1.71,
+      "text": "someone doesn't put in a number but puts"
+    },
+    {
+      "index": 585,
+      "start": 1414.84,
+      "end": 1416.19,
+      "duration": 1.35,
+      "text": "their name"
+    },
+    {
+      "index": 586,
+      "start": 1416.2,
+      "end": 1418.549,
+      "duration": 2.349,
+      "text": "in that's going to raise an error"
+    },
+    {
+      "index": 587,
+      "start": 1418.559,
+      "end": 1420.71,
+      "duration": 2.151,
+      "text": "specifically a value"
+    },
+    {
+      "index": 588,
+      "start": 1420.72,
+      "end": 1423.149,
+      "duration": 2.429,
+      "text": "error and at that point Python's going"
+    },
+    {
+      "index": 589,
+      "start": 1423.159,
+      "end": 1425.31,
+      "duration": 2.151,
+      "text": "to say is there an"
+    },
+    {
+      "index": 590,
+      "start": 1425.32,
+      "end": 1427.19,
+      "duration": 1.87,
+      "text": "accept"
+    },
+    {
+      "index": 591,
+      "start": 1427.2,
+      "end": 1429.75,
+      "duration": 2.55,
+      "text": "statement and if so this accept"
+    },
+    {
+      "index": 592,
+      "start": 1429.76,
+      "end": 1434.19,
+      "duration": 4.43,
+      "text": "statement is going to handle the"
+    },
+    {
+      "index": 593,
+      "start": 1436.43,
+      "end": 1436.44,
+      "duration": 0.01,
+      "text": "error and it's going to say okay an"
+    },
+    {
+      "index": 594,
+      "start": 1436.44,
+      "end": 1438.19,
+      "duration": 1.75,
+      "text": "error came up but I know how to handle"
+    },
+    {
+      "index": 595,
+      "start": 1438.2,
+      "end": 1439.149,
+      "duration": 0.949,
+      "text": "it"
+    },
+    {
+      "index": 596,
+      "start": 1439.159,
+      "end": 1441.11,
+      "duration": 1.951,
+      "text": "I'm going to print out this user this"
+    },
+    {
+      "index": 597,
+      "start": 1441.12,
+      "end": 1442.789,
+      "duration": 1.669,
+      "text": "message to the"
+    },
+    {
+      "index": 598,
+      "start": 1442.799,
+      "end": 1445.99,
+      "duration": 3.191,
+      "text": "user so if we look at"
+    },
+    {
+      "index": 599,
+      "start": 1446.0,
+      "end": 1449.07,
+      "duration": 3.07,
+      "text": "code this is the same code as in the"
+    },
+    {
+      "index": 600,
+      "start": 1449.08,
+      "end": 1451.51,
+      "duration": 2.43,
+      "text": "slides and there's no try except block"
+    },
+    {
+      "index": 601,
+      "start": 1451.52,
+      "end": 1454.19,
+      "duration": 2.67,
+      "text": "around it so if I run it and I say three"
+    },
+    {
+      "index": 602,
+      "start": 1454.2,
+      "end": 1457.11,
+      "duration": 2.91,
+      "text": "and four it's going to it's going to run"
+    },
+    {
+      "index": 603,
+      "start": 1457.12,
+      "end": 1461.83,
+      "duration": 4.71,
+      "text": "fine but if I run it and I say a a it's"
+    },
+    {
+      "index": 604,
+      "start": 1461.84,
+      "end": 1465.549,
+      "duration": 3.709,
+      "text": "going to give a value error"
+    },
+    {
+      "index": 605,
+      "start": 1465.559,
+      "end": 1469.789,
+      "duration": 4.23,
+      "text": "okay now if I run the same piece of code"
+    },
+    {
+      "index": 606,
+      "start": 1469.799,
+      "end": 1474.669,
+      "duration": 4.87,
+      "text": "with try with a try accept"
+    },
+    {
+      "index": 607,
+      "start": 1478.31,
+      "end": 1478.32,
+      "duration": 0.01,
+      "text": "block I run it if I give it a regular"
+    },
+    {
+      "index": 608,
+      "start": 1478.32,
+      "end": 1479.87,
+      "duration": 1.55,
+      "text": "numbers it's"
+    },
+    {
+      "index": 609,
+      "start": 1479.88,
+      "end": 1483.11,
+      "duration": 3.23,
+      "text": "fine but"
+    },
+    {
+      "index": 610,
+      "start": 1483.12,
+      "end": 1487.549,
+      "duration": 4.429,
+      "text": "if I'm being a cheeky user and I say"
+    },
+    {
+      "index": 611,
+      "start": 1487.559,
+      "end": 1490.389,
+      "duration": 2.83,
+      "text": "three automatically this would have"
+    },
+    {
+      "index": 612,
+      "start": 1490.399,
+      "end": 1493.23,
+      "duration": 2.831,
+      "text": "raised the value error in the previous"
+    },
+    {
+      "index": 613,
+      "start": 1493.24,
+      "end": 1495.63,
+      "duration": 2.39,
+      "text": "uh version of the of the program but in"
+    },
+    {
+      "index": 614,
+      "start": 1495.64,
+      "end": 1497.47,
+      "duration": 1.83,
+      "text": "this version of the program the"
+    },
+    {
+      "index": 615,
+      "start": 1497.48,
+      "end": 1499.63,
+      "duration": 2.15,
+      "text": "programmer handled the exception or"
+    },
+    {
+      "index": 616,
+      "start": 1499.64,
+      "end": 1501.99,
+      "duration": 2.35,
+      "text": "caught the exception and printed out"
+    },
+    {
+      "index": 617,
+      "start": 1502.0,
+      "end": 1504.909,
+      "duration": 2.909,
+      "text": "this nicer looking message so bug and"
+    },
+    {
+      "index": 618,
+      "start": 1504.919,
+      "end": 1507.269,
+      "duration": 2.35,
+      "text": "user input is nicer"
+    },
+    {
+      "index": 619,
+      "start": 1507.279,
+      "end": 1510.99,
+      "duration": 3.711,
+      "text": "than this this whole lot"
+    },
+    {
+      "index": 620,
+      "start": 1511.0,
+      "end": 1514.07,
+      "duration": 3.07,
+      "text": "here"
+    },
+    {
+      "index": 621,
+      "start": 1523.31,
+      "end": 1523.32,
+      "duration": 0.01,
+      "text": "read okay so any problematic uh lines of"
+    },
+    {
+      "index": 622,
+      "start": 1523.32,
+      "end": 1525.43,
+      "duration": 2.11,
+      "text": "code you can put in a tri block and then"
+    },
+    {
+      "index": 623,
+      "start": 1525.44,
+      "end": 1528.549,
+      "duration": 3.109,
+      "text": "handle um handle whatever errors might"
+    },
+    {
+      "index": 624,
+      "start": 1528.559,
+      "end": 1530.83,
+      "duration": 2.271,
+      "text": "come up in this accept block this accept"
+    },
+    {
+      "index": 625,
+      "start": 1530.84,
+      "end": 1533.11,
+      "duration": 2.27,
+      "text": "block is going to catch any error that"
+    },
+    {
+      "index": 626,
+      "start": 1533.12,
+      "end": 1535.75,
+      "duration": 2.63,
+      "text": "comes up okay and you can actually get a"
+    },
+    {
+      "index": 627,
+      "start": 1535.76,
+      "end": 1537.87,
+      "duration": 2.11,
+      "text": "little bit more specific and catch"
+    },
+    {
+      "index": 628,
+      "start": 1537.88,
+      "end": 1539.909,
+      "duration": 2.029,
+      "text": "specific types of"
+    },
+    {
+      "index": 629,
+      "start": 1539.919,
+      "end": 1543.47,
+      "duration": 3.551,
+      "text": "errors in this case I'm saying if a"
+    },
+    {
+      "index": 630,
+      "start": 1543.48,
+      "end": 1545.269,
+      "duration": 1.789,
+      "text": "value error comes up for example if the"
+    },
+    {
+      "index": 631,
+      "start": 1545.279,
+      "end": 1547.87,
+      "duration": 2.591,
+      "text": "user inputs a string instead of an"
+    },
+    {
+      "index": 632,
+      "start": 1547.88,
+      "end": 1550.59,
+      "duration": 2.71,
+      "text": "integer do this which is going to print"
+    },
+    {
+      "index": 633,
+      "start": 1550.6,
+      "end": 1552.669,
+      "duration": 2.069,
+      "text": "this this"
+    },
+    {
+      "index": 634,
+      "start": 1552.679,
+      "end": 1555.23,
+      "duration": 2.551,
+      "text": "message if the user in"
+    },
+    {
+      "index": 635,
+      "start": 1555.24,
+      "end": 1559.07,
+      "duration": 3.83,
+      "text": "inputs a number for B such that we're"
+    },
+    {
+      "index": 636,
+      "start": 1559.08,
+      "end": 1560.99,
+      "duration": 1.91,
+      "text": "dividing a divide we're doing a divid by"
+    },
+    {
+      "index": 637,
+      "start": 1561.0,
+      "end": 1562.63,
+      "duration": 1.63,
+      "text": "B so that would give a zero division"
+    },
+    {
+      "index": 638,
+      "start": 1562.64,
+      "end": 1564.909,
+      "duration": 2.269,
+      "text": "error in that case we're going to catch"
+    },
+    {
+      "index": 639,
+      "start": 1564.919,
+      "end": 1567.43,
+      "duration": 2.511,
+      "text": "this other error here this zero division"
+    },
+    {
+      "index": 640,
+      "start": 1567.44,
+      "end": 1569.149,
+      "duration": 1.709,
+      "text": "error and we're going to print this"
+    },
+    {
+      "index": 641,
+      "start": 1569.159,
+      "end": 1572.11,
+      "duration": 2.951,
+      "text": "other message can't divide by"
+    },
+    {
+      "index": 642,
+      "start": 1572.12,
+      "end": 1573.71,
+      "duration": 1.59,
+      "text": "zero"
+    },
+    {
+      "index": 643,
+      "start": 1573.72,
+      "end": 1576.99,
+      "duration": 3.27,
+      "text": "okay so each so you can think of these"
+    },
+    {
+      "index": 644,
+      "start": 1577.0,
+      "end": 1580.389,
+      "duration": 3.389,
+      "text": "different except blocks as sort of if"
+    },
+    {
+      "index": 645,
+      "start": 1580.399,
+      "end": 1582.99,
+      "duration": 2.591,
+      "text": "you know if else if statements except"
+    },
+    {
+      "index": 646,
+      "start": 1583.0,
+      "end": 1585.83,
+      "duration": 2.83,
+      "text": "for exceptions okay so we're going to"
+    },
+    {
+      "index": 647,
+      "start": 1585.84,
+      "end": 1588.549,
+      "duration": 2.709,
+      "text": "try this but if there's a value error do"
+    },
+    {
+      "index": 648,
+      "start": 1588.559,
+      "end": 1590.63,
+      "duration": 2.071,
+      "text": "this uh otherwise if there's a division"
+    },
+    {
+      "index": 649,
+      "start": 1590.64,
+      "end": 1594.35,
+      "duration": 3.71,
+      "text": "error do this and otherwise do this so"
+    },
+    {
+      "index": 650,
+      "start": 1594.36,
+      "end": 1595.95,
+      "duration": 1.59,
+      "text": "this last accept is actually going to be"
+    },
+    {
+      "index": 651,
+      "start": 1595.96,
+      "end": 1597.789,
+      "duration": 1.829,
+      "text": "for any other error that comes up so if"
+    },
+    {
+      "index": 652,
+      "start": 1597.799,
+      "end": 1599.59,
+      "duration": 1.791,
+      "text": "it's not a value error not a nor a"
+    },
+    {
+      "index": 653,
+      "start": 1599.6,
+      "end": 1601.47,
+      "duration": 1.87,
+      "text": "division error then we're going to print"
+    },
+    {
+      "index": 654,
+      "start": 1601.48,
+      "end": 1603.43,
+      "duration": 1.95,
+      "text": "something went very wrong I don't I"
+    },
+    {
+      "index": 655,
+      "start": 1603.44,
+      "end": 1605.269,
+      "duration": 1.829,
+      "text": "couldn't even try to create I couldn't"
+    },
+    {
+      "index": 656,
+      "start": 1605.279,
+      "end": 1607.75,
+      "duration": 2.471,
+      "text": "even try to make the program come up"
+    },
+    {
+      "index": 657,
+      "start": 1607.76,
+      "end": 1612.269,
+      "duration": 4.509,
+      "text": "with uh any other error besides those"
+    },
+    {
+      "index": 658,
+      "start": 1614.909,
+      "end": 1614.919,
+      "duration": 0.01,
+      "text": "two"
+    },
+    {
+      "index": 659,
+      "start": 1614.919,
+      "end": 1617.19,
+      "duration": 2.271,
+      "text": "okay so a lot of the time you're just"
+    },
+    {
+      "index": 660,
+      "start": 1617.2,
+      "end": 1619.83,
+      "duration": 2.63,
+      "text": "going to use try accept blocks but"
+    },
+    {
+      "index": 661,
+      "start": 1619.84,
+      "end": 1621.87,
+      "duration": 2.03,
+      "text": "there's other blocks that you can add to"
+    },
+    {
+      "index": 662,
+      "start": 1621.88,
+      "end": 1623.71,
+      "duration": 1.83,
+      "text": "exceptions and these are more rarely"
+    },
+    {
+      "index": 663,
+      "start": 1623.72,
+      "end": 1627.07,
+      "duration": 3.35,
+      "text": "used but I'll talk about them anyway so"
+    },
+    {
+      "index": 664,
+      "start": 1627.08,
+      "end": 1630.07,
+      "duration": 2.99,
+      "text": "you can have an else"
+    },
+    {
+      "index": 665,
+      "start": 1630.08,
+      "end": 1632.669,
+      "duration": 2.589,
+      "text": "block and an else block is going to get"
+    },
+    {
+      "index": 666,
+      "start": 1632.679,
+      "end": 1636.07,
+      "duration": 3.391,
+      "text": "executed when the code in the tri block"
+    },
+    {
+      "index": 667,
+      "start": 1636.08,
+      "end": 1639.269,
+      "duration": 3.189,
+      "text": "finished without raising an"
+    },
+    {
+      "index": 668,
+      "start": 1639.279,
+      "end": 1642.149,
+      "duration": 2.87,
+      "text": "error and you can also have a finally"
+    },
+    {
+      "index": 669,
+      "start": 1642.159,
+      "end": 1646.75,
+      "duration": 4.591,
+      "text": "block which is always executed okay if"
+    },
+    {
+      "index": 670,
+      "start": 1646.76,
+      "end": 1648.51,
+      "duration": 1.75,
+      "text": "the code in the tri block finished"
+    },
+    {
+      "index": 671,
+      "start": 1648.52,
+      "end": 1650.87,
+      "duration": 2.35,
+      "text": "without without an error if you raised"
+    },
+    {
+      "index": 672,
+      "start": 1650.88,
+      "end": 1652.51,
+      "duration": 1.63,
+      "text": "an exception if you raised a different"
+    },
+    {
+      "index": 673,
+      "start": 1652.52,
+      "end": 1654.549,
+      "duration": 2.029,
+      "text": "kind of exception if you went through"
+    },
+    {
+      "index": 674,
+      "start": 1654.559,
+      "end": 1657.07,
+      "duration": 2.511,
+      "text": "the else in any of these cases the"
+    },
+    {
+      "index": 675,
+      "start": 1657.08,
+      "end": 1659.11,
+      "duration": 2.03,
+      "text": "whatever is in the finally block is"
+    },
+    {
+      "index": 676,
+      "start": 1659.12,
+      "end": 1660.95,
+      "duration": 1.83,
+      "text": "always going to get"
+    },
+    {
+      "index": 677,
+      "start": 1660.96,
+      "end": 1663.669,
+      "duration": 2.709,
+      "text": "executed okay and it's usually used to"
+    },
+    {
+      "index": 678,
+      "start": 1663.679,
+      "end": 1668.549,
+      "duration": 4.87,
+      "text": "clean up um cleanup code like if you"
+    },
+    {
+      "index": 679,
+      "start": 1668.559,
+      "end": 1670.669,
+      "duration": 2.11,
+      "text": "want to print oh the program finished or"
+    },
+    {
+      "index": 680,
+      "start": 1670.679,
+      "end": 1672.269,
+      "duration": 1.59,
+      "text": "if you want to close a file or something"
+    },
+    {
+      "index": 681,
+      "start": 1672.279,
+      "end": 1673.23,
+      "duration": 0.951,
+      "text": "like"
+    },
+    {
+      "index": 682,
+      "start": 1673.24,
+      "end": 1675.029,
+      "duration": 1.789,
+      "text": "that"
+    },
+    {
+      "index": 683,
+      "start": 1675.039,
+      "end": 1679.23,
+      "duration": 4.191,
+      "text": "so we've encountered errors we've caught"
+    },
+    {
+      "index": 684,
+      "start": 1679.24,
+      "end": 1683.59,
+      "duration": 4.35,
+      "text": "what else can we do with ER with"
+    },
+    {
+      "index": 685,
+      "start": 1686.19,
+      "end": 1686.2,
+      "duration": 0.01,
+      "text": "exceptions three other things"
+    },
+    {
+      "index": 686,
+      "start": 1686.2,
+      "end": 1690.71,
+      "duration": 4.51,
+      "text": "so one is if we've we've caught an error"
+    },
+    {
+      "index": 687,
+      "start": 1690.72,
+      "end": 1693.83,
+      "duration": 3.11,
+      "text": "we can just fail silently okay what this"
+    },
+    {
+      "index": 688,
+      "start": 1693.84,
+      "end": 1696.99,
+      "duration": 3.15,
+      "text": "means is you've caught an error and you"
+    },
+    {
+      "index": 689,
+      "start": 1697.0,
+      "end": 1698.47,
+      "duration": 1.47,
+      "text": "just"
+    },
+    {
+      "index": 690,
+      "start": 1698.48,
+      "end": 1700.789,
+      "duration": 2.309,
+      "text": "substitute whatever erroneous value the"
+    },
+    {
+      "index": 691,
+      "start": 1700.799,
+      "end": 1702.75,
+      "duration": 1.951,
+      "text": "user gave you for some other"
+    },
+    {
+      "index": 692,
+      "start": 1702.76,
+      "end": 1704.87,
+      "duration": 2.11,
+      "text": "value that's not actually a very good"
+    },
+    {
+      "index": 693,
+      "start": 1704.88,
+      "end": 1708.23,
+      "duration": 3.35,
+      "text": "idea that's a bad idea because suddenly"
+    },
+    {
+      "index": 694,
+      "start": 1708.24,
+      "end": 1709.509,
+      "duration": 1.269,
+      "text": "L the user thinks that they entered"
+    },
+    {
+      "index": 695,
+      "start": 1709.519,
+      "end": 1711.07,
+      "duration": 1.551,
+      "text": "something and they think everything's"
+    },
+    {
+      "index": 696,
+      "start": 1711.08,
+      "end": 1713.47,
+      "duration": 2.39,
+      "text": "great your program accepts it but then"
+    },
+    {
+      "index": 697,
+      "start": 1713.48,
+      "end": 1715.269,
+      "duration": 1.789,
+      "text": "they get some weird value as an output"
+    },
+    {
+      "index": 698,
+      "start": 1715.279,
+      "end": 1717.23,
+      "duration": 1.951,
+      "text": "Which is far from what they expected"
+    },
+    {
+      "index": 699,
+      "start": 1717.24,
+      "end": 1718.789,
+      "duration": 1.549,
+      "text": "right so it's not really a good idea to"
+    },
+    {
+      "index": 700,
+      "start": 1718.799,
+      "end": 1722.549,
+      "duration": 3.75,
+      "text": "just replace users values with"
+    },
+    {
+      "index": 701,
+      "start": 1725.31,
+      "end": 1725.32,
+      "duration": 0.01,
+      "text": "anything okay in the context so this is"
+    },
+    {
+      "index": 702,
+      "start": 1725.32,
+      "end": 1726.95,
+      "duration": 1.63,
+      "text": "in the context of a function in the"
+    },
+    {
+      "index": 703,
+      "start": 1726.96,
+      "end": 1728.59,
+      "duration": 1.63,
+      "text": "context of a function what else can we"
+    },
+    {
+      "index": 704,
+      "start": 1728.6,
+      "end": 1732.47,
+      "duration": 3.87,
+      "text": "do well if you have a"
+    },
+    {
+      "index": 705,
+      "start": 1736.029,
+      "end": 1736.039,
+      "duration": 0.01,
+      "text": "function that fails for example let's"
+    },
+    {
+      "index": 706,
+      "start": 1736.039,
+      "end": 1740.029,
+      "duration": 3.99,
+      "text": "say you're trying to do um you're trying"
+    },
+    {
+      "index": 707,
+      "start": 1740.039,
+      "end": 1742.669,
+      "duration": 2.63,
+      "text": "to get the square root of an even"
+    },
+    {
+      "index": 708,
+      "start": 1742.679,
+      "end": 1745.269,
+      "duration": 2.59,
+      "text": "number okay and let's say the user gives"
+    },
+    {
+      "index": 709,
+      "start": 1745.279,
+      "end": 1747.75,
+      "duration": 2.471,
+      "text": "you uh sorry you're trying to find the"
+    },
+    {
+      "index": 710,
+      "start": 1747.76,
+      "end": 1749.269,
+      "duration": 1.509,
+      "text": "square root of a positive number and"
+    },
+    {
+      "index": 711,
+      "start": 1749.279,
+      "end": 1753.789,
+      "duration": 4.51,
+      "text": "let's say the user gives you a negative"
+    },
+    {
+      "index": 712,
+      "start": 1755.909,
+      "end": 1755.919,
+      "duration": 0.01,
+      "text": "number well if the user gives you a"
+    },
+    {
+      "index": 713,
+      "start": 1755.919,
+      "end": 1757.75,
+      "duration": 1.831,
+      "text": "negative number if your your function"
+    },
+    {
+      "index": 714,
+      "start": 1757.76,
+      "end": 1760.509,
+      "duration": 2.749,
+      "text": "could return an error value which means"
+    },
+    {
+      "index": 715,
+      "start": 1760.519,
+      "end": 1762.75,
+      "duration": 2.231,
+      "text": "well if the number input is input it is"
+    },
+    {
+      "index": 716,
+      "start": 1762.76,
+      "end": 1765.269,
+      "duration": 2.509,
+      "text": "is less than zero then return zero or"
+    },
+    {
+      "index": 717,
+      "start": 1765.279,
+      "end": 1768.11,
+      "duration": 2.831,
+      "text": "minus one or minus 100 just pick any"
+    },
+    {
+      "index": 718,
+      "start": 1768.12,
+      "end": 1770.47,
+      "duration": 2.35,
+      "text": "value to return um which represents some"
+    },
+    {
+      "index": 719,
+      "start": 1770.48,
+      "end": 1771.47,
+      "duration": 0.99,
+      "text": "error"
+    },
+    {
+      "index": 720,
+      "start": 1771.48,
+      "end": 1773.99,
+      "duration": 2.51,
+      "text": "value this is actually not a good idea"
+    },
+    {
+      "index": 721,
+      "start": 1774.0,
+      "end": 1776.23,
+      "duration": 2.23,
+      "text": "either because later on in your program"
+    },
+    {
+      "index": 722,
+      "start": 1776.24,
+      "end": 1777.669,
+      "duration": 1.429,
+      "text": "if you're using this function now you"
+    },
+    {
+      "index": 723,
+      "start": 1777.679,
+      "end": 1780.71,
+      "duration": 3.031,
+      "text": "have to do a check and the check is well"
+    },
+    {
+      "index": 724,
+      "start": 1780.72,
+      "end": 1782.389,
+      "duration": 1.669,
+      "text": "if the return from this function is"
+    },
+    {
+      "index": 725,
+      "start": 1782.399,
+      "end": 1784.87,
+      "duration": 2.471,
+      "text": "minus one or minus 100 do this otherwise"
+    },
+    {
+      "index": 726,
+      "start": 1784.88,
+      "end": 1787.31,
+      "duration": 2.43,
+      "text": "do this so you're you're you're"
+    },
+    {
+      "index": 727,
+      "start": 1787.32,
+      "end": 1789.31,
+      "duration": 1.99,
+      "text": "complicating your code because now you"
+    },
+    {
+      "index": 728,
+      "start": 1789.32,
+      "end": 1791.149,
+      "duration": 1.829,
+      "text": "always have to have always have to have"
+    },
+    {
+      "index": 729,
+      "start": 1791.159,
+      "end": 1793.75,
+      "duration": 2.591,
+      "text": "this check for this error value right"
+    },
+    {
+      "index": 730,
+      "start": 1793.76,
+      "end": 1795.789,
+      "duration": 2.029,
+      "text": "which makes the code really"
+    },
+    {
+      "index": 731,
+      "start": 1795.799,
+      "end": 1798.149,
+      "duration": 2.35,
+      "text": "messy the other thing we can do is we"
+    },
+    {
+      "index": 732,
+      "start": 1798.159,
+      "end": 1800.509,
+      "duration": 2.35,
+      "text": "can signal an airor condition so this is"
+    },
+    {
+      "index": 733,
+      "start": 1800.519,
+      "end": 1804.63,
+      "duration": 4.111,
+      "text": "how you um how you"
+    },
+    {
+      "index": 734,
+      "start": 1804.64,
+      "end": 1807.95,
+      "duration": 3.31,
+      "text": "um create control flow in your programs"
+    },
+    {
+      "index": 735,
+      "start": 1807.96,
+      "end": 1811.11,
+      "duration": 3.15,
+      "text": "with exceptions so in Python signaling"
+    },
+    {
+      "index": 736,
+      "start": 1811.12,
+      "end": 1812.789,
+      "duration": 1.669,
+      "text": "an error condition means raising your"
+    },
+    {
+      "index": 737,
+      "start": 1812.799,
+      "end": 1814.149,
+      "duration": 1.35,
+      "text": "own"
+    },
+    {
+      "index": 738,
+      "start": 1814.159,
+      "end": 1816.75,
+      "duration": 2.591,
+      "text": "exception so so far we've just seen the"
+    },
+    {
+      "index": 739,
+      "start": 1816.76,
+      "end": 1818.389,
+      "duration": 1.629,
+      "text": "programs"
+    },
+    {
+      "index": 740,
+      "start": 1818.399,
+      "end": 1820.75,
+      "duration": 2.351,
+      "text": "crashing which means they raise an"
+    },
+    {
+      "index": 741,
+      "start": 1820.76,
+      "end": 1823.029,
+      "duration": 2.269,
+      "text": "exception and then you deal with them"
+    },
+    {
+      "index": 742,
+      "start": 1823.039,
+      "end": 1824.669,
+      "duration": 1.63,
+      "text": "but in this last case you're raising"
+    },
+    {
+      "index": 743,
+      "start": 1824.679,
+      "end": 1828.47,
+      "duration": 3.791,
+      "text": "your own exception as a way to use that"
+    },
+    {
+      "index": 744,
+      "start": 1828.48,
+      "end": 1830.95,
+      "duration": 2.47,
+      "text": "exception later on in the in the code"
+    },
+    {
+      "index": 745,
+      "start": 1830.96,
+      "end": 1833.269,
+      "duration": 2.309,
+      "text": "okay so in Python you raise your own"
+    },
+    {
+      "index": 746,
+      "start": 1833.279,
+      "end": 1835.47,
+      "duration": 2.191,
+      "text": "exception using this raise keyword and"
+    },
+    {
+      "index": 747,
+      "start": 1835.48,
+      "end": 1837.99,
+      "duration": 2.51,
+      "text": "then an exception and then some sort of"
+    },
+    {
+      "index": 748,
+      "start": 1838.0,
+      "end": 1839.389,
+      "duration": 1.389,
+      "text": "description"
+    },
+    {
+      "index": 749,
+      "start": 1839.399,
+      "end": 1841.909,
+      "duration": 2.51,
+      "text": "like user entered a negative number or"
+    },
+    {
+      "index": 750,
+      "start": 1841.919,
+      "end": 1846.11,
+      "duration": 4.191,
+      "text": "something like"
+    },
+    {
+      "index": 751,
+      "start": 1849.31,
+      "end": 1849.32,
+      "duration": 0.01,
+      "text": "that okay a lot of the time we're going"
+    },
+    {
+      "index": 752,
+      "start": 1849.32,
+      "end": 1851.269,
+      "duration": 1.949,
+      "text": "to raise a value"
+    },
+    {
+      "index": 753,
+      "start": 1851.279,
+      "end": 1855.029,
+      "duration": 3.75,
+      "text": "error okay so if the number is less than"
+    },
+    {
+      "index": 754,
+      "start": 1855.039,
+      "end": 1857.99,
+      "duration": 2.951,
+      "text": "zero then raise a value error so"
+    },
+    {
+      "index": 755,
+      "start": 1858.0,
+      "end": 1858.909,
+      "duration": 0.909,
+      "text": "something is"
+    },
+    {
+      "index": 756,
+      "start": 1858.919,
+      "end": 1861.59,
+      "duration": 2.671,
+      "text": "wrong okay the keyword the name of the"
+    },
+    {
+      "index": 757,
+      "start": 1861.6,
+      "end": 1867.149,
+      "duration": 5.549,
+      "text": "error and then some sort of descriptive"
+    },
+    {
+      "index": 758,
+      "start": 1869.47,
+      "end": 1869.48,
+      "duration": 0.01,
+      "text": "string okay so let's see an example of"
+    },
+    {
+      "index": 759,
+      "start": 1869.48,
+      "end": 1871.549,
+      "duration": 2.069,
+      "text": "how we raise an an"
+    },
+    {
+      "index": 760,
+      "start": 1871.559,
+      "end": 1873.59,
+      "duration": 2.031,
+      "text": "exception I have this function here"
+    },
+    {
+      "index": 761,
+      "start": 1873.6,
+      "end": 1874.669,
+      "duration": 1.069,
+      "text": "called get"
+    },
+    {
+      "index": 762,
+      "start": 1874.679,
+      "end": 1878.029,
+      "duration": 3.35,
+      "text": "ratios it takes in two lists L1 and"
+    },
+    {
+      "index": 763,
+      "start": 1878.039,
+      "end": 1881.19,
+      "duration": 3.151,
+      "text": "L2 and it's going to create a new list"
+    },
+    {
+      "index": 764,
+      "start": 1881.2,
+      "end": 1884.19,
+      "duration": 2.99,
+      "text": "that's going to contain the ratio of"
+    },
+    {
+      "index": 765,
+      "start": 1884.2,
+      "end": 1886.31,
+      "duration": 2.11,
+      "text": "each element in L1 divided by each"
+    },
+    {
+      "index": 766,
+      "start": 1886.32,
+      "end": 1889.509,
+      "duration": 3.189,
+      "text": "element in L2"
+    },
+    {
+      "index": 767,
+      "start": 1889.519,
+      "end": 1891.269,
+      "duration": 1.75,
+      "text": "so I have a four Loop"
+    },
+    {
+      "index": 768,
+      "start": 1891.279,
+      "end": 1895.19,
+      "duration": 3.911,
+      "text": "here for index in range length L1 so I'm"
+    },
+    {
+      "index": 769,
+      "start": 1895.2,
+      "end": 1898.149,
+      "duration": 2.949,
+      "text": "going through every single element in L1"
+    },
+    {
+      "index": 770,
+      "start": 1898.159,
+      "end": 1899.95,
+      "duration": 1.791,
+      "text": "I'm going to"
+    },
+    {
+      "index": 771,
+      "start": 1899.96,
+      "end": 1904.669,
+      "duration": 4.709,
+      "text": "try oops here I'm going to try to do"
+    },
+    {
+      "index": 772,
+      "start": 1904.679,
+      "end": 1906.269,
+      "duration": 1.59,
+      "text": "this line so I think that this line"
+    },
+    {
+      "index": 773,
+      "start": 1906.279,
+      "end": 1907.71,
+      "duration": 1.431,
+      "text": "might give me an error so I'm going to"
+    },
+    {
+      "index": 774,
+      "start": 1907.72,
+      "end": 1909.11,
+      "duration": 1.39,
+      "text": "put it in a tri"
+    },
+    {
+      "index": 775,
+      "start": 1909.12,
+      "end": 1912.629,
+      "duration": 3.509,
+      "text": "block the error I think I'm going to get"
+    },
+    {
+      "index": 776,
+      "start": 1912.639,
+      "end": 1914.629,
+      "duration": 1.99,
+      "text": "is a zero division error because what"
+    },
+    {
+      "index": 777,
+      "start": 1914.639,
+      "end": 1916.83,
+      "duration": 2.191,
+      "text": "happens when an element in L2 is"
+    },
+    {
+      "index": 778,
+      "start": 1916.84,
+      "end": 1920.509,
+      "duration": 3.669,
+      "text": "zero"
+    },
+    {
+      "index": 779,
+      "start": 1922.35,
+      "end": 1922.36,
+      "duration": 0.01,
+      "text": "and when an element in L2 is zero I'm"
+    },
+    {
+      "index": 780,
+      "start": 1922.36,
+      "end": 1925.83,
+      "duration": 3.47,
+      "text": "going to append this not a number as a"
+    },
+    {
+      "index": 781,
+      "start": 1925.84,
+      "end": 1929.35,
+      "duration": 3.51,
+      "text": "float okay so Nan as a string you can"
+    },
+    {
+      "index": 782,
+      "start": 1929.36,
+      "end": 1931.43,
+      "duration": 2.07,
+      "text": "convert it to a float and it stands for"
+    },
+    {
+      "index": 783,
+      "start": 1931.44,
+      "end": 1933.75,
+      "duration": 2.31,
+      "text": "not a"
+    },
+    {
+      "index": 784,
+      "start": 1933.76,
+      "end": 1936.149,
+      "duration": 2.389,
+      "text": "number okay so then I can continue"
+    },
+    {
+      "index": 785,
+      "start": 1936.159,
+      "end": 1939.029,
+      "duration": 2.87,
+      "text": "populating the um the list with these"
+    },
+    {
+      "index": 786,
+      "start": 1939.039,
+      "end": 1942.83,
+      "duration": 3.791,
+      "text": "not a numbers if an element in L2 is"
+    },
+    {
+      "index": 787,
+      "start": 1942.84,
+      "end": 1946.669,
+      "duration": 3.829,
+      "text": "zero and otherwise if there's no zero"
+    },
+    {
+      "index": 788,
+      "start": 1946.679,
+      "end": 1948.549,
+      "duration": 1.87,
+      "text": "division error but there's another kind"
+    },
+    {
+      "index": 789,
+      "start": 1948.559,
+      "end": 1951.029,
+      "duration": 2.47,
+      "text": "of error then I'm going to raise my own"
+    },
+    {
+      "index": 790,
+      "start": 1951.039,
+      "end": 1953.35,
+      "duration": 2.311,
+      "text": "error and say for any other kind of"
+    },
+    {
+      "index": 791,
+      "start": 1953.36,
+      "end": 1956.149,
+      "duration": 2.789,
+      "text": "error just raise a value error which"
+    },
+    {
+      "index": 792,
+      "start": 1956.159,
+      "end": 1958.07,
+      "duration": 1.911,
+      "text": "says get ratios was called with a bad"
+    },
+    {
+      "index": 793,
+      "start": 1958.08,
+      "end": 1960.31,
+      "duration": 2.23,
+      "text": "argument"
+    },
+    {
+      "index": 794,
+      "start": 1960.32,
+      "end": 1962.71,
+      "duration": 2.39,
+      "text": "okay so here I'm sort of consolidating"
+    },
+    {
+      "index": 795,
+      "start": 1962.72,
+      "end": 1965.029,
+      "duration": 2.309,
+      "text": "all errors into my one value error so"
+    },
+    {
+      "index": 796,
+      "start": 1965.039,
+      "end": 1967.11,
+      "duration": 2.071,
+      "text": "later on in my program I can catch this"
+    },
+    {
+      "index": 797,
+      "start": 1967.12,
+      "end": 1972.35,
+      "duration": 5.23,
+      "text": "value error and do something with"
+    },
+    {
+      "index": 798,
+      "start": 1975.909,
+      "end": 1975.919,
+      "duration": 0.01,
+      "text": "it here's another example of"
+    },
+    {
+      "index": 799,
+      "start": 1975.919,
+      "end": 1978.07,
+      "duration": 2.151,
+      "text": "exceptions so let's say we're given a"
+    },
+    {
+      "index": 800,
+      "start": 1978.08,
+      "end": 1982.31,
+      "duration": 4.23,
+      "text": "class list we have a list of"
+    },
+    {
+      "index": 801,
+      "start": 1982.32,
+      "end": 1985.59,
+      "duration": 3.27,
+      "text": "lists where we have the name of a"
+    },
+    {
+      "index": 802,
+      "start": 1985.6,
+      "end": 1987.509,
+      "duration": 1.909,
+      "text": "student first name and last name and"
+    },
+    {
+      "index": 803,
+      "start": 1987.519,
+      "end": 1989.23,
+      "duration": 1.711,
+      "text": "their grades in the class so we"
+    },
+    {
+      "index": 804,
+      "start": 1989.24,
+      "end": 1991.23,
+      "duration": 1.99,
+      "text": "currently have two"
+    },
+    {
+      "index": 805,
+      "start": 1991.24,
+      "end": 1993.269,
+      "duration": 2.029,
+      "text": "students and what I want to do is create"
+    },
+    {
+      "index": 806,
+      "start": 1993.279,
+      "end": 1997.43,
+      "duration": 4.151,
+      "text": "a new list which is the same the same"
+    },
+    {
+      "index": 807,
+      "start": 1997.44,
+      "end": 2000.95,
+      "duration": 3.51,
+      "text": "things the same inputs here but I'm"
+    },
+    {
+      "index": 808,
+      "start": 2000.96,
+      "end": 2003.87,
+      "duration": 2.91,
+      "text": "adding an extra I'm appending an extra"
+    },
+    {
+      "index": 809,
+      "start": 2003.88,
+      "end": 2005.789,
+      "duration": 1.909,
+      "text": "value at the end of the list for each"
+    },
+    {
+      "index": 810,
+      "start": 2005.799,
+      "end": 2007.99,
+      "duration": 2.191,
+      "text": "student which is the average of all of"
+    },
+    {
+      "index": 811,
+      "start": 2008.0,
+      "end": 2010.43,
+      "duration": 2.43,
+      "text": "their grades or all of their yeah all of"
+    },
+    {
+      "index": 812,
+      "start": 2010.44,
+      "end": 2013.43,
+      "duration": 2.99,
+      "text": "their"
+    },
+    {
+      "index": 813,
+      "start": 2017.23,
+      "end": 2017.24,
+      "duration": 0.01,
+      "text": "grades so let's look at the"
+    },
+    {
+      "index": 814,
+      "start": 2017.24,
+      "end": 2019.43,
+      "duration": 2.19,
+      "text": "code this is a"
+    },
+    {
+      "index": 815,
+      "start": 2019.44,
+      "end": 2022.35,
+      "duration": 2.91,
+      "text": "function that takes the class list which"
+    },
+    {
+      "index": 816,
+      "start": 2022.36,
+      "end": 2026.35,
+      "duration": 3.99,
+      "text": "is this whole list"
+    },
+    {
+      "index": 817,
+      "start": 2030.31,
+      "end": 2030.32,
+      "duration": 0.01,
+      "text": "here I'm creating a new uh list inside"
+    },
+    {
+      "index": 818,
+      "start": 2030.32,
+      "end": 2032.59,
+      "duration": 2.27,
+      "text": "it initially"
+    },
+    {
+      "index": 819,
+      "start": 2032.6,
+      "end": 2035.23,
+      "duration": 2.63,
+      "text": "empty and then I'm going for every"
+    },
+    {
+      "index": 820,
+      "start": 2035.24,
+      "end": 2038.75,
+      "duration": 3.51,
+      "text": "element in the class list I'm appending"
+    },
+    {
+      "index": 821,
+      "start": 2038.76,
+      "end": 2040.11,
+      "duration": 1.35,
+      "text": "element at"
+    },
+    {
+      "index": 822,
+      "start": 2040.12,
+      "end": 2042.629,
+      "duration": 2.509,
+      "text": "zero which is going to be this first"
+    },
+    {
+      "index": 823,
+      "start": 2042.639,
+      "end": 2044.19,
+      "duration": 1.551,
+      "text": "list here so it's going to be the first"
+    },
+    {
+      "index": 824,
+      "start": 2044.2,
+      "end": 2048.19,
+      "duration": 3.99,
+      "text": "name and the last name element at one"
+    },
+    {
+      "index": 825,
+      "start": 2048.2,
+      "end": 2050.069,
+      "duration": 1.869,
+      "text": "which is the"
+    },
+    {
+      "index": 826,
+      "start": 2050.079,
+      "end": 2052.389,
+      "duration": 2.31,
+      "text": "grades and then the last thing I'm"
+    },
+    {
+      "index": 827,
+      "start": 2052.399,
+      "end": 2055.629,
+      "duration": 3.23,
+      "text": "appending is a function"
+    },
+    {
+      "index": 828,
+      "start": 2055.639,
+      "end": 2058.389,
+      "duration": 2.75,
+      "text": "call the function call being called with"
+    },
+    {
+      "index": 829,
+      "start": 2058.399,
+      "end": 2061.069,
+      "duration": 2.67,
+      "text": "element one which is all of the"
+    },
+    {
+      "index": 830,
+      "start": 2061.079,
+      "end": 2063.19,
+      "duration": 2.111,
+      "text": "grades and this is my function call"
+    },
+    {
+      "index": 831,
+      "start": 2063.2,
+      "end": 2064.23,
+      "duration": 1.03,
+      "text": "we're going to see three different"
+    },
+    {
+      "index": 832,
+      "start": 2064.24,
+      "end": 2065.23,
+      "duration": 0.99,
+      "text": "function"
+    },
+    {
+      "index": 833,
+      "start": 2065.24,
+      "end": 2068.27,
+      "duration": 3.03,
+      "text": "calls okay this is the first one it"
+    },
+    {
+      "index": 834,
+      "start": 2068.28,
+      "end": 2070.31,
+      "duration": 2.03,
+      "text": "simply takes the sum of the grades and"
+    },
+    {
+      "index": 835,
+      "start": 2070.32,
+      "end": 2075.19,
+      "duration": 4.87,
+      "text": "divides it by the length of the"
+    },
+    {
+      "index": 836,
+      "start": 2077.03,
+      "end": 2077.04,
+      "duration": 0.01,
+      "text": "grades"
+    },
+    {
+      "index": 837,
+      "start": 2077.04,
+      "end": 2079.95,
+      "duration": 2.91,
+      "text": "if if these students are responsible and"
+    },
+    {
+      "index": 838,
+      "start": 2079.96,
+      "end": 2082.829,
+      "duration": 2.869,
+      "text": "they've taken all of the tests right"
+    },
+    {
+      "index": 839,
+      "start": 2082.839,
+      "end": 2085.43,
+      "duration": 2.591,
+      "text": "then there's no problem because length"
+    },
+    {
+      "index": 840,
+      "start": 2085.44,
+      "end": 2086.71,
+      "duration": 1.27,
+      "text": "of grades is going to be something"
+    },
+    {
+      "index": 841,
+      "start": 2086.72,
+      "end": 2088.79,
+      "duration": 2.07,
+      "text": "greater than"
+    },
+    {
+      "index": 842,
+      "start": 2088.8,
+      "end": 2091.349,
+      "duration": 2.549,
+      "text": "zero but what if we have a student in"
+    },
+    {
+      "index": 843,
+      "start": 2091.359,
+      "end": 2096.63,
+      "duration": 5.271,
+      "text": "the class who didn't show up for any"
+    },
+    {
+      "index": 844,
+      "start": 2099.75,
+      "end": 2099.76,
+      "duration": 0.01,
+      "text": "tests then we have no record of any of"
+    },
+    {
+      "index": 845,
+      "start": 2099.76,
+      "end": 2101.95,
+      "duration": 2.19,
+      "text": "their tests right no record of grades or"
+    },
+    {
+      "index": 846,
+      "start": 2101.96,
+      "end": 2103.31,
+      "duration": 1.35,
+      "text": "anything like"
+    },
+    {
+      "index": 847,
+      "start": 2103.32,
+      "end": 2106.03,
+      "duration": 2.71,
+      "text": "that so they're going to have an empty"
+    },
+    {
+      "index": 848,
+      "start": 2106.04,
+      "end": 2109.23,
+      "duration": 3.19,
+      "text": "list so if we run the same this function"
+    },
+    {
+      "index": 849,
+      "start": 2109.24,
+      "end": 2111.95,
+      "duration": 2.71,
+      "text": "averages on their data we're actually"
+    },
+    {
+      "index": 850,
+      "start": 2111.96,
+      "end": 2113.39,
+      "duration": 1.43,
+      "text": "going to get a zero division error"
+    },
+    {
+      "index": 851,
+      "start": 2113.4,
+      "end": 2114.91,
+      "duration": 1.51,
+      "text": "because we're trying to divide by length"
+    },
+    {
+      "index": 852,
+      "start": 2114.92,
+      "end": 2120.43,
+      "duration": 5.51,
+      "text": "of grades which is going to be um"
+    },
+    {
+      "index": 853,
+      "start": 2123.31,
+      "end": 2123.32,
+      "duration": 0.01,
+      "text": "zero so what can we do two things two"
+    },
+    {
+      "index": 854,
+      "start": 2123.32,
+      "end": 2124.23,
+      "duration": 0.91,
+      "text": "options"
+    },
+    {
+      "index": 855,
+      "start": 2124.24,
+      "end": 2127.87,
+      "duration": 3.63,
+      "text": "here one is we can just flag the error"
+    },
+    {
+      "index": 856,
+      "start": 2127.88,
+      "end": 2129.03,
+      "duration": 1.15,
+      "text": "and print the"
+    },
+    {
+      "index": 857,
+      "start": 2129.04,
+      "end": 2132.27,
+      "duration": 3.23,
+      "text": "message so here there's a new average"
+    },
+    {
+      "index": 858,
+      "start": 2132.28,
+      "end": 2135.349,
+      "duration": 3.069,
+      "text": "function an improved one that's going to"
+    },
+    {
+      "index": 859,
+      "start": 2135.359,
+      "end": 2137.15,
+      "duration": 1.791,
+      "text": "try to do the exact same line as the"
+    },
+    {
+      "index": 860,
+      "start": 2137.16,
+      "end": 2138.829,
+      "duration": 1.669,
+      "text": "previous"
+    },
+    {
+      "index": 861,
+      "start": 2138.839,
+      "end": 2141.79,
+      "duration": 2.951,
+      "text": "one and it's going to and it's going to"
+    },
+    {
+      "index": 862,
+      "start": 2141.8,
+      "end": 2144.91,
+      "duration": 3.11,
+      "text": "catch the zero division"
+    },
+    {
+      "index": 863,
+      "start": 2144.92,
+      "end": 2147.03,
+      "duration": 2.11,
+      "text": "error and when it catches it it's going"
+    },
+    {
+      "index": 864,
+      "start": 2147.04,
+      "end": 2148.79,
+      "duration": 1.75,
+      "text": "to print this"
+    },
+    {
+      "index": 865,
+      "start": 2148.8,
+      "end": 2150.91,
+      "duration": 2.11,
+      "text": "warning and when we run it we're going"
+    },
+    {
+      "index": 866,
+      "start": 2150.92,
+      "end": 2154.47,
+      "duration": 3.55,
+      "text": "to get warning no grades data which is"
+    },
+    {
+      "index": 867,
+      "start": 2154.48,
+      "end": 2156.63,
+      "duration": 2.15,
+      "text": "fine"
+    },
+    {
+      "index": 868,
+      "start": 2156.64,
+      "end": 2159.43,
+      "duration": 2.79,
+      "text": "and"
+    },
+    {
+      "index": 869,
+      "start": 2159.44,
+      "end": 2161.71,
+      "duration": 2.27,
+      "text": "we're going to get this none here for"
+    },
+    {
+      "index": 870,
+      "start": 2161.72,
+      "end": 2162.87,
+      "duration": 1.15,
+      "text": "the"
+    },
+    {
+      "index": 871,
+      "start": 2162.88,
+      "end": 2165.27,
+      "duration": 2.39,
+      "text": "grades okay so everyone else's grades"
+    },
+    {
+      "index": 872,
+      "start": 2165.28,
+      "end": 2167.39,
+      "duration": 2.11,
+      "text": "was calculated correctly and for this"
+    },
+    {
+      "index": 873,
+      "start": 2167.4,
+      "end": 2168.95,
+      "duration": 1.55,
+      "text": "last one we got a"
+    },
+    {
+      "index": 874,
+      "start": 2168.96,
+      "end": 2171.91,
+      "duration": 2.95,
+      "text": "none that's because when we entered this"
+    },
+    {
+      "index": 875,
+      "start": 2171.92,
+      "end": 2173.589,
+      "duration": 1.669,
+      "text": "accept statement right if this is a"
+    },
+    {
+      "index": 876,
+      "start": 2173.599,
+      "end": 2176.71,
+      "duration": 3.111,
+      "text": "function remember functions return"
+    },
+    {
+      "index": 877,
+      "start": 2176.72,
+      "end": 2179.19,
+      "duration": 2.47,
+      "text": "something this function in this"
+    },
+    {
+      "index": 878,
+      "start": 2179.2,
+      "end": 2181.109,
+      "duration": 1.909,
+      "text": "particular accept statement didn't"
+    },
+    {
+      "index": 879,
+      "start": 2181.119,
+      "end": 2182.75,
+      "duration": 1.631,
+      "text": "return anything right so it returns a"
+    },
+    {
+      "index": 880,
+      "start": 2182.76,
+      "end": 2185.589,
+      "duration": 2.829,
+      "text": "none so for the averages for this"
+    },
+    {
+      "index": 881,
+      "start": 2185.599,
+      "end": 2187.99,
+      "duration": 2.391,
+      "text": "particular function the average is going"
+    },
+    {
+      "index": 882,
+      "start": 2188.0,
+      "end": 2190.79,
+      "duration": 2.79,
+      "text": "to be a none um for this person who"
+    },
+    {
+      "index": 883,
+      "start": 2190.8,
+      "end": 2195.27,
+      "duration": 4.47,
+      "text": "didn't have any grades associated with"
+    },
+    {
+      "index": 884,
+      "start": 2195.28,
+      "end": 2200.829,
+      "duration": 5.549,
+      "text": "them okay and yeah so that's basically"
+    },
+    {
+      "index": 885,
+      "start": 2200.839,
+      "end": 2202.63,
+      "duration": 1.791,
+      "text": "what I"
+    },
+    {
+      "index": 886,
+      "start": 2202.64,
+      "end": 2204.87,
+      "duration": 2.23,
+      "text": "said so that's our first option is to"
+    },
+    {
+      "index": 887,
+      "start": 2204.88,
+      "end": 2206.63,
+      "duration": 1.75,
+      "text": "just flag the flag the error and print a"
+    },
+    {
+      "index": 888,
+      "start": 2206.64,
+      "end": 2209.349,
+      "duration": 2.709,
+      "text": "message the other option is to actually"
+    },
+    {
+      "index": 889,
+      "start": 2209.359,
+      "end": 2211.23,
+      "duration": 1.871,
+      "text": "change the policy so this is where you"
+    },
+    {
+      "index": 890,
+      "start": 2211.24,
+      "end": 2214.349,
+      "duration": 3.109,
+      "text": "replace the data with some sort of"
+    },
+    {
+      "index": 891,
+      "start": 2214.359,
+      "end": 2216.39,
+      "duration": 2.031,
+      "text": "default value and if you do something"
+    },
+    {
+      "index": 892,
+      "start": 2216.4,
+      "end": 2217.75,
+      "duration": 1.35,
+      "text": "like this then this should be document"
+    },
+    {
+      "index": 893,
+      "start": 2217.76,
+      "end": 2219.23,
+      "duration": 1.47,
+      "text": "it inside the function so when you write"
+    },
+    {
+      "index": 894,
+      "start": 2219.24,
+      "end": 2220.589,
+      "duration": 1.349,
+      "text": "the doc string for the function you"
+    },
+    {
+      "index": 895,
+      "start": 2220.599,
+      "end": 2225.19,
+      "duration": 4.591,
+      "text": "would say if if the"
+    },
+    {
+      "index": 896,
+      "start": 2225.2,
+      "end": 2226.91,
+      "duration": 1.71,
+      "text": "um"
+    },
+    {
+      "index": 897,
+      "start": 2226.92,
+      "end": 2230.63,
+      "duration": 3.71,
+      "text": "uh if there's no if the if the if the if"
+    },
+    {
+      "index": 898,
+      "start": 2230.64,
+      "end": 2233.63,
+      "duration": 2.99,
+      "text": "the list is is empty then it'll Return"
+    },
+    {
+      "index": 899,
+      "start": 2233.64,
+      "end": 2234.63,
+      "duration": 0.99,
+      "text": "To"
+    },
+    {
+      "index": 900,
+      "start": 2234.64,
+      "end": 2237.03,
+      "duration": 2.39,
+      "text": "Zero so this is the exact same thing as"
+    },
+    {
+      "index": 901,
+      "start": 2237.04,
+      "end": 2239.309,
+      "duration": 2.269,
+      "text": "before we have a try and an accept for"
+    },
+    {
+      "index": 902,
+      "start": 2239.319,
+      "end": 2240.829,
+      "duration": 1.51,
+      "text": "the zero division"
+    },
+    {
+      "index": 903,
+      "start": 2240.839,
+      "end": 2244.15,
+      "duration": 3.311,
+      "text": "error we also print a warning no grades"
+    },
+    {
+      "index": 904,
+      "start": 2244.16,
+      "end": 2249.069,
+      "duration": 4.909,
+      "text": "data and then we return a zero"
+    },
+    {
+      "index": 905,
+      "start": 2249.079,
+      "end": 2250.829,
+      "duration": 1.75,
+      "text": "so we still flag the error and now"
+    },
+    {
+      "index": 906,
+      "start": 2250.839,
+      "end": 2253.91,
+      "duration": 3.071,
+      "text": "instead of a none we get a zero because"
+    },
+    {
+      "index": 907,
+      "start": 2253.92,
+      "end": 2256.589,
+      "duration": 2.669,
+      "text": "we've returned 0.0 here as opposed to"
+    },
+    {
+      "index": 908,
+      "start": 2256.599,
+      "end": 2259.79,
+      "duration": 3.191,
+      "text": "just leaving it"
+    },
+    {
+      "index": 909,
+      "start": 2266.069,
+      "end": 2266.079,
+      "duration": 0.01,
+      "text": "okay all right so those are um"
+    },
+    {
+      "index": 910,
+      "start": 2266.079,
+      "end": 2267.829,
+      "duration": 1.75,
+      "text": "exceptions last thing we're going to"
+    },
+    {
+      "index": 911,
+      "start": 2267.839,
+      "end": 2272.27,
+      "duration": 4.431,
+      "text": "talk about today are these things called"
+    },
+    {
+      "index": 912,
+      "start": 2278.79,
+      "end": 2278.8,
+      "duration": 0.01,
+      "text": "are"
+    },
+    {
+      "index": 913,
+      "start": 2278.8,
+      "end": 2281.51,
+      "duration": 2.71,
+      "text": "good example of defensive"
+    },
+    {
+      "index": 914,
+      "start": 2281.52,
+      "end": 2284.829,
+      "duration": 3.309,
+      "text": "programming in that you have assert"
+    },
+    {
+      "index": 915,
+      "start": 2284.839,
+      "end": 2287.829,
+      "duration": 2.99,
+      "text": "statements at the beginning of functions"
+    },
+    {
+      "index": 916,
+      "start": 2287.839,
+      "end": 2290.67,
+      "duration": 2.831,
+      "text": "typically or at the end of"
+    },
+    {
+      "index": 917,
+      "start": 2290.68,
+      "end": 2293.63,
+      "duration": 2.95,
+      "text": "functions and assert statements are used"
+    },
+    {
+      "index": 918,
+      "start": 2293.64,
+      "end": 2297.47,
+      "duration": 3.83,
+      "text": "to make sure that the assumptions on"
+    },
+    {
+      "index": 919,
+      "start": 2297.48,
+      "end": 2299.19,
+      "duration": 1.71,
+      "text": "computations are exactly what the"
+    },
+    {
+      "index": 920,
+      "start": 2299.2,
+      "end": 2302.43,
+      "duration": 3.23,
+      "text": "function expects them to be okay so if"
+    },
+    {
+      "index": 921,
+      "start": 2302.44,
+      "end": 2304.51,
+      "duration": 2.07,
+      "text": "we have a function that says it's"
+    },
+    {
+      "index": 922,
+      "start": 2304.52,
+      "end": 2306.91,
+      "duration": 2.39,
+      "text": "supposed to take in an integer greater"
+    },
+    {
+      "index": 923,
+      "start": 2306.92,
+      "end": 2310.71,
+      "duration": 3.79,
+      "text": "than zero then the assert statement will"
+    },
+    {
+      "index": 924,
+      "start": 2310.72,
+      "end": 2312.79,
+      "duration": 2.07,
+      "text": "assert that the function takes in an"
+    },
+    {
+      "index": 925,
+      "start": 2312.8,
+      "end": 2316.109,
+      "duration": 3.309,
+      "text": "integer that's greater than zero okay"
+    },
+    {
+      "index": 926,
+      "start": 2316.119,
+      "end": 2318.55,
+      "duration": 2.431,
+      "text": "here's an example this is the same"
+    },
+    {
+      "index": 927,
+      "start": 2318.56,
+      "end": 2321.19,
+      "duration": 2.63,
+      "text": "average function we've seen"
+    },
+    {
+      "index": 928,
+      "start": 2321.2,
+      "end": 2323.75,
+      "duration": 2.55,
+      "text": "before here instead of using exceptions"
+    },
+    {
+      "index": 929,
+      "start": 2323.76,
+      "end": 2325.47,
+      "duration": 1.71,
+      "text": "we're going to use an assert"
+    },
+    {
+      "index": 930,
+      "start": 2325.48,
+      "end": 2327.51,
+      "duration": 2.03,
+      "text": "statement and the assert statement we're"
+    },
+    {
+      "index": 931,
+      "start": 2327.52,
+      "end": 2330.069,
+      "duration": 2.549,
+      "text": "putting right at the at the front uh at"
+    },
+    {
+      "index": 932,
+      "start": 2330.079,
+      "end": 2332.15,
+      "duration": 2.071,
+      "text": "the beginning of the function"
+    },
+    {
+      "index": 933,
+      "start": 2332.16,
+      "end": 2336.069,
+      "duration": 3.909,
+      "text": "sorry and the keyword is"
+    },
+    {
+      "index": 934,
+      "start": 2338.51,
+      "end": 2338.52,
+      "duration": 0.01,
+      "text": "assert the next next part of the assert"
+    },
+    {
+      "index": 935,
+      "start": 2338.52,
+      "end": 2342.51,
+      "duration": 3.99,
+      "text": "is what uh the function expects so we"
+    },
+    {
+      "index": 936,
+      "start": 2342.52,
+      "end": 2345.47,
+      "duration": 2.95,
+      "text": "expect that the length of grades is not"
+    },
+    {
+      "index": 937,
+      "start": 2345.48,
+      "end": 2347.15,
+      "duration": 1.67,
+      "text": "equal to zero so it has to be greater"
+    },
+    {
+      "index": 938,
+      "start": 2347.16,
+      "end": 2349.67,
+      "duration": 2.51,
+      "text": "than"
+    },
+    {
+      "index": 939,
+      "start": 2351.99,
+      "end": 2352.0,
+      "duration": 0.01,
+      "text": "zero and then we have a string here"
+    },
+    {
+      "index": 940,
+      "start": 2352.0,
+      "end": 2353.829,
+      "duration": 1.829,
+      "text": "which represents what do you print out"
+    },
+    {
+      "index": 941,
+      "start": 2353.839,
+      "end": 2356.63,
+      "duration": 2.791,
+      "text": "if the assertion does not"
+    },
+    {
+      "index": 942,
+      "start": 2356.64,
+      "end": 2360.03,
+      "duration": 3.39,
+      "text": "hold so if you run the function and you"
+    },
+    {
+      "index": 943,
+      "start": 2360.04,
+      "end": 2364.67,
+      "duration": 4.63,
+      "text": "give it a list that is"
+    },
+    {
+      "index": 944,
+      "start": 2364.68,
+      "end": 2368.349,
+      "duration": 3.669,
+      "text": "empty this becomes false so the assert"
+    },
+    {
+      "index": 945,
+      "start": 2368.359,
+      "end": 2371.23,
+      "duration": 2.871,
+      "text": "is false and we're going to print out an"
+    },
+    {
+      "index": 946,
+      "start": 2371.24,
+      "end": 2373.349,
+      "duration": 2.109,
+      "text": "assertion error no grades"
+    },
+    {
+      "index": 947,
+      "start": 2373.359,
+      "end": 2375.109,
+      "duration": 1.75,
+      "text": "data"
+    },
+    {
+      "index": 948,
+      "start": 2375.119,
+      "end": 2378.43,
+      "duration": 3.311,
+      "text": "okay if the assert is false the function"
+    },
+    {
+      "index": 949,
+      "start": 2378.44,
+      "end": 2381.43,
+      "duration": 2.99,
+      "text": "does not continue it stops right"
+    },
+    {
+      "index": 950,
+      "start": 2381.44,
+      "end": 2384.63,
+      "duration": 3.19,
+      "text": "there why does it behave this way"
+    },
+    {
+      "index": 951,
+      "start": 2384.64,
+      "end": 2387.99,
+      "duration": 3.35,
+      "text": "well assertions are great to make sure"
+    },
+    {
+      "index": 952,
+      "start": 2388.0,
+      "end": 2390.55,
+      "duration": 2.55,
+      "text": "that preconditions and postconditions on"
+    },
+    {
+      "index": 953,
+      "start": 2390.56,
+      "end": 2394.71,
+      "duration": 4.15,
+      "text": "functions are exactly as you expect okay"
+    },
+    {
+      "index": 954,
+      "start": 2394.72,
+      "end": 2398.069,
+      "duration": 3.349,
+      "text": "so as soon as an assert becomes false"
+    },
+    {
+      "index": 955,
+      "start": 2398.079,
+      "end": 2400.349,
+      "duration": 2.27,
+      "text": "the function is going to immediately"
+    },
+    {
+      "index": 956,
+      "start": 2400.359,
+      "end": 2403.91,
+      "duration": 3.551,
+      "text": "terminate this is useful"
+    },
+    {
+      "index": 957,
+      "start": 2403.92,
+      "end": 2407.39,
+      "duration": 3.47,
+      "text": "because it'll prevent the program from"
+    },
+    {
+      "index": 958,
+      "start": 2407.4,
+      "end": 2410.55,
+      "duration": 3.15,
+      "text": "propagating bad values so as soon as a"
+    },
+    {
+      "index": 959,
+      "start": 2410.56,
+      "end": 2412.829,
+      "duration": 2.269,
+      "text": "precondition isn't true for example as"
+    },
+    {
+      "index": 960,
+      "start": 2412.839,
+      "end": 2414.589,
+      "duration": 1.75,
+      "text": "you enter a function then that means"
+    },
+    {
+      "index": 961,
+      "start": 2414.599,
+      "end": 2416.95,
+      "duration": 2.351,
+      "text": "something went wrong in your program and"
+    },
+    {
+      "index": 962,
+      "start": 2416.96,
+      "end": 2419.349,
+      "duration": 2.389,
+      "text": "the program is going to stop right there"
+    },
+    {
+      "index": 963,
+      "start": 2419.359,
+      "end": 2421.55,
+      "duration": 2.191,
+      "text": "so instead of propagating a a bad value"
+    },
+    {
+      "index": 964,
+      "start": 2421.56,
+      "end": 2423.03,
+      "duration": 1.47,
+      "text": "throughout the program and then you"
+    },
+    {
+      "index": 965,
+      "start": 2423.04,
+      "end": 2425.03,
+      "duration": 1.99,
+      "text": "getting an output that you didn't expect"
+    },
+    {
+      "index": 966,
+      "start": 2425.04,
+      "end": 2426.71,
+      "duration": 1.67,
+      "text": "and then you having to trace back to the"
+    },
+    {
+      "index": 967,
+      "start": 2426.72,
+      "end": 2429.309,
+      "duration": 2.589,
+      "text": "function that was that gave this bad"
+    },
+    {
+      "index": 968,
+      "start": 2429.319,
+      "end": 2432.109,
+      "duration": 2.79,
+      "text": "value you'll get this bad value you'll"
+    },
+    {
+      "index": 969,
+      "start": 2432.119,
+      "end": 2434.39,
+      "duration": 2.271,
+      "text": "get this assert being false a lot"
+    },
+    {
+      "index": 970,
+      "start": 2434.4,
+      "end": 2437.47,
+      "duration": 3.07,
+      "text": "earlier so it'll be a lot so you it'll"
+    },
+    {
+      "index": 971,
+      "start": 2437.48,
+      "end": 2439.87,
+      "duration": 2.39,
+      "text": "be a lot easier to figure out where the"
+    },
+    {
+      "index": 972,
+      "start": 2439.88,
+      "end": 2441.99,
+      "duration": 2.11,
+      "text": "bug came from and you won't have to"
+    },
+    {
+      "index": 973,
+      "start": 2442.0,
+      "end": 2444.47,
+      "duration": 2.47,
+      "text": "trace back so many"
+    },
+    {
+      "index": 974,
+      "start": 2444.48,
+      "end": 2448.23,
+      "duration": 3.75,
+      "text": "steps okay so this is basically what I"
+    },
+    {
+      "index": 975,
+      "start": 2448.24,
+      "end": 2449.95,
+      "duration": 1.71,
+      "text": "said you really want to spot the bugs as"
+    },
+    {
+      "index": 976,
+      "start": 2449.96,
+      "end": 2454.03,
+      "duration": 4.07,
+      "text": "soon as they're introduced okay and"
+    },
+    {
+      "index": 977,
+      "start": 2454.04,
+      "end": 2456.79,
+      "duration": 2.75,
+      "text": "exceptions are good if you want to raise"
+    },
+    {
+      "index": 978,
+      "start": 2456.8,
+      "end": 2458.51,
+      "duration": 1.71,
+      "text": "them when the user supplies bad data"
+    },
+    {
+      "index": 979,
+      "start": 2458.52,
+      "end": 2460.71,
+      "duration": 2.19,
+      "text": "input but assertions are used to make"
+    },
+    {
+      "index": 980,
+      "start": 2460.72,
+      "end": 2463.75,
+      "duration": 3.03,
+      "text": "sure that the types um and other the"
+    },
+    {
+      "index": 981,
+      "start": 2463.76,
+      "end": 2466.51,
+      "duration": 2.75,
+      "text": "types of of inputs to"
+    },
+    {
+      "index": 982,
+      "start": 2466.52,
+      "end": 2469.79,
+      "duration": 3.27,
+      "text": "functions maybe um other conditions on"
+    },
+    {
+      "index": 983,
+      "start": 2469.8,
+      "end": 2473.589,
+      "duration": 3.789,
+      "text": "inputs to functions are are being held"
+    },
+    {
+      "index": 984,
+      "start": 2473.599,
+      "end": 2476.309,
+      "duration": 2.71,
+      "text": "as the values are being passed in okay"
+    },
+    {
+      "index": 985,
+      "start": 2476.319,
+      "end": 2477.75,
+      "duration": 1.431,
+      "text": "so the key word here is making sure that"
+    },
+    {
+      "index": 986,
+      "start": 2477.76,
+      "end": 2481.19,
+      "duration": 3.43,
+      "text": "the invariance on data structures are"
+    },
+    {
+      "index": 987,
+      "start": 2481.2,
+      "end": 2486.23,
+      "duration": 5.03,
+      "text": "met and that's it great"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

@@ -1,0 +1,9209 @@
+{
+  "video": {
+    "id": "f9cVS_URPc0",
+    "title": "12. Bellman-Ford",
+    "url": "https://www.youtube.com/watch?v=f9cVS_URPc0",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3460,
+    "language": "en"
+  },
+  "segment_count": 1313,
+  "segments": [
+    {
+      "index": 0,
+      "start": 15.27,
+      "end": 15.28,
+      "duration": 0.01,
+      "text": "Okay, let's get started. Welcome to the"
+    },
+    {
+      "index": 1,
+      "start": 15.28,
+      "end": 19.23,
+      "duration": 3.95,
+      "text": "12th lecture of 6.006."
+    },
+    {
+      "index": 2,
+      "start": 19.24,
+      "end": 22.95,
+      "duration": 3.71,
+      "text": "This is our second lecture talking about"
+    },
+    {
+      "index": 3,
+      "start": 22.96,
+      "end": 24.87,
+      "duration": 1.91,
+      "text": "weighted graphs and in particular"
+    },
+    {
+      "index": 4,
+      "start": 24.88,
+      "end": 28.07,
+      "duration": 3.19,
+      "text": "weighted shortest paths algorithms. Last"
+    },
+    {
+      "index": 5,
+      "start": 28.08,
+      "end": 30.63,
+      "duration": 2.55,
+      "text": "time we talked about weighted graphs."
+    },
+    {
+      "index": 6,
+      "start": 30.64,
+      "end": 32.589,
+      "duration": 1.949,
+      "text": "This is a kind of a generalization of"
+    },
+    {
+      "index": 7,
+      "start": 32.599,
+      "end": 34.99,
+      "duration": 2.391,
+      "text": "what we mean by distance"
+    },
+    {
+      "index": 8,
+      "start": 35.0,
+      "end": 37.63,
+      "duration": 2.63,
+      "text": "in an unweighted graph instead of each"
+    },
+    {
+      "index": 9,
+      "start": 37.64,
+      "end": 40.55,
+      "duration": 2.91,
+      "text": "edge having a weight of one essentially."
+    },
+    {
+      "index": 10,
+      "start": 40.56,
+      "end": 42.43,
+      "duration": 1.87,
+      "text": "Right? We generalize that to be any"
+    },
+    {
+      "index": 11,
+      "start": 42.44,
+      "end": 44.15,
+      "duration": 1.71,
+      "text": "integer."
+    },
+    {
+      "index": 12,
+      "start": 44.16,
+      "end": 46.07,
+      "duration": 1.91,
+      "text": "And last time"
+    },
+    {
+      "index": 13,
+      "start": 46.08,
+      "end": 49.47,
+      "duration": 3.39,
+      "text": "we we showed how to solve shortest"
+    },
+    {
+      "index": 14,
+      "start": 49.48,
+      "end": 51.55,
+      "duration": 2.07,
+      "text": "single source shortest paths in a graph"
+    },
+    {
+      "index": 15,
+      "start": 51.56,
+      "end": 54.07,
+      "duration": 2.51,
+      "text": "that doesn't have cycles even if it has"
+    },
+    {
+      "index": 16,
+      "start": 54.08,
+      "end": 56.35,
+      "duration": 2.27,
+      "text": "zero or negative weights"
+    },
+    {
+      "index": 17,
+      "start": 56.36,
+      "end": 58.47,
+      "duration": 2.11,
+      "text": "in linear time using an algorithm called"
+    },
+    {
+      "index": 18,
+      "start": 58.48,
+      "end": 60.43,
+      "duration": 1.95,
+      "text": "dag relaxation."
+    },
+    {
+      "index": 19,
+      "start": 60.44,
+      "end": 63.27,
+      "duration": 2.83,
+      "text": "We also showed in that lecture how in"
+    },
+    {
+      "index": 20,
+      "start": 63.28,
+      "end": 65.31,
+      "duration": 2.03,
+      "text": "linear time if we are given the shortest"
+    },
+    {
+      "index": 21,
+      "start": 65.32,
+      "end": 68.19,
+      "duration": 2.87,
+      "text": "path weights to all the things reachable"
+    },
+    {
+      "index": 22,
+      "start": 68.2,
+      "end": 69.91,
+      "duration": 1.71,
+      "text": "in finite"
+    },
+    {
+      "index": 23,
+      "start": 69.92,
+      "end": 71.95,
+      "duration": 2.03,
+      "text": "or with shortest path"
+    },
+    {
+      "index": 24,
+      "start": 71.96,
+      "end": 75.51,
+      "duration": 3.55,
+      "text": "distance that's finite, we can construct"
+    },
+    {
+      "index": 25,
+      "start": 75.52,
+      "end": 78.27,
+      "duration": 2.75,
+      "text": "a shortest paths tree from those weights"
+    },
+    {
+      "index": 26,
+      "start": 78.28,
+      "end": 79.87,
+      "duration": 1.59,
+      "text": "in linear time."
+    },
+    {
+      "index": 27,
+      "start": 79.88,
+      "end": 82.59,
+      "duration": 2.71,
+      "text": "Okay? So, this is motivating why we're"
+    },
+    {
+      "index": 28,
+      "start": 82.6,
+      "end": 83.91,
+      "duration": 1.31,
+      "text": "not really going to talk about parent"
+    },
+    {
+      "index": 29,
+      "start": 83.92,
+      "end": 85.91,
+      "duration": 1.99,
+      "text": "pointers for the next couple of"
+    },
+    {
+      "index": 30,
+      "start": 85.92,
+      "end": 87.27,
+      "duration": 1.35,
+      "text": "lectures. We're just going to"
+    },
+    {
+      "index": 31,
+      "start": 87.28,
+      "end": 89.43,
+      "duration": 2.15,
+      "text": "concentrate on these shortest path"
+    },
+    {
+      "index": 32,
+      "start": 89.44,
+      "end": 92.23,
+      "duration": 2.79,
+      "text": "weights. Right? And so today we're going"
+    },
+    {
+      "index": 33,
+      "start": 92.24,
+      "end": 94.87,
+      "duration": 2.63,
+      "text": "to be talking about our most general"
+    },
+    {
+      "index": 34,
+      "start": 94.88,
+      "end": 97.43,
+      "duration": 2.55,
+      "text": "algorithm we'll be showing for solving"
+    },
+    {
+      "index": 35,
+      "start": 97.44,
+      "end": 99.35,
+      "duration": 1.91,
+      "text": "single source shortest paths. In"
+    },
+    {
+      "index": 36,
+      "start": 99.36,
+      "end": 101.71,
+      "duration": 2.35,
+      "text": "particular in graphs that could contain"
+    },
+    {
+      "index": 37,
+      "start": 101.72,
+      "end": 104.59,
+      "duration": 2.87,
+      "text": "cycles and could have negative weights."
+    },
+    {
+      "index": 38,
+      "start": 104.6,
+      "end": 107.27,
+      "duration": 2.67,
+      "text": "Okay? So, just to recap"
+    },
+    {
+      "index": 39,
+      "start": 107.28,
+      "end": 108.43,
+      "duration": 1.15,
+      "text": "uh"
+    },
+    {
+      "index": 40,
+      "start": 108.44,
+      "end": 110.59,
+      "duration": 2.15,
+      "text": "our little road map here."
+    },
+    {
+      "index": 41,
+      "start": 110.6,
+      "end": 112.43,
+      "duration": 1.83,
+      "text": "Uh single source shortest paths in"
+    },
+    {
+      "index": 42,
+      "start": 112.44,
+      "end": 115.07,
+      "duration": 2.63,
+      "text": "linear time. Last time we discussed"
+    },
+    {
+      "index": 43,
+      "start": 115.08,
+      "end": 116.63,
+      "duration": 1.55,
+      "text": "another linear time algorithm dag"
+    },
+    {
+      "index": 44,
+      "start": 116.64,
+      "end": 118.23,
+      "duration": 1.59,
+      "text": "relaxation."
+    },
+    {
+      "index": 45,
+      "start": 118.24,
+      "end": 119.71,
+      "duration": 1.47,
+      "text": "And today we're going to be talking"
+    },
+    {
+      "index": 46,
+      "start": 119.72,
+      "end": 122.55,
+      "duration": 2.83,
+      "text": "about Bellman-Ford which isn't limited"
+    },
+    {
+      "index": 47,
+      "start": 122.56,
+      "end": 125.07,
+      "duration": 2.51,
+      "text": "to acyclic graphs. In particular there"
+    },
+    {
+      "index": 48,
+      "start": 125.08,
+      "end": 127.75,
+      "duration": 2.67,
+      "text": "could be negative weight cycles in our"
+    },
+    {
+      "index": 49,
+      "start": 127.76,
+      "end": 129.15,
+      "duration": 1.39,
+      "text": "graph."
+    },
+    {
+      "index": 50,
+      "start": 129.16,
+      "end": 132.07,
+      "duration": 2.91,
+      "text": "Right? If it has cycles and has negative"
+    },
+    {
+      "index": 51,
+      "start": 132.08,
+      "end": 134.11,
+      "duration": 2.03,
+      "text": "weights, the worry is that we could have"
+    },
+    {
+      "index": 52,
+      "start": 134.12,
+      "end": 136.47,
+      "duration": 2.35,
+      "text": "negative weight cycles. In which case"
+    },
+    {
+      "index": 53,
+      "start": 136.48,
+      "end": 139.03,
+      "duration": 2.55,
+      "text": "there is if if a negative weight cycle"
+    },
+    {
+      "index": 54,
+      "start": 139.04,
+      "end": 142.39,
+      "duration": 3.35,
+      "text": "is reachable from our source"
+    },
+    {
+      "index": 55,
+      "start": 142.4,
+      "end": 144.15,
+      "duration": 1.75,
+      "text": "then the vertices in that cycle and"
+    },
+    {
+      "index": 56,
+      "start": 144.16,
+      "end": 147.39,
+      "duration": 3.23,
+      "text": "anything reachable from that cycle"
+    },
+    {
+      "index": 57,
+      "start": 147.4,
+      "end": 150.03,
+      "duration": 2.63,
+      "text": "will potentially have an"
+    },
+    {
+      "index": 58,
+      "start": 150.04,
+      "end": 151.31,
+      "duration": 1.27,
+      "text": "uh"
+    },
+    {
+      "index": 59,
+      "start": 151.32,
+      "end": 153.51,
+      "duration": 2.19,
+      "text": "an unbounded number of edges you need to"
+    },
+    {
+      "index": 60,
+      "start": 153.52,
+      "end": 156.19,
+      "duration": 2.67,
+      "text": "go through. There's not a"
+    },
+    {
+      "index": 61,
+      "start": 156.2,
+      "end": 157.87,
+      "duration": 1.67,
+      "text": "bound on the number of edges for a"
+    },
+    {
+      "index": 62,
+      "start": 157.88,
+      "end": 159.63,
+      "duration": 1.75,
+      "text": "shortest path"
+    },
+    {
+      "index": 63,
+      "start": 159.64,
+      "end": 161.35,
+      "duration": 1.71,
+      "text": "because I could just keep going around"
+    },
+    {
+      "index": 64,
+      "start": 161.36,
+      "end": 163.47,
+      "duration": 2.11,
+      "text": "that cycle as many times as I want and"
+    },
+    {
+      "index": 65,
+      "start": 163.48,
+      "end": 165.23,
+      "duration": 1.75,
+      "text": "get a shorter path, right? And so we"
+    },
+    {
+      "index": 66,
+      "start": 165.24,
+      "end": 167.83,
+      "duration": 2.59,
+      "text": "assign those distances to be minus"
+    },
+    {
+      "index": 67,
+      "start": 167.84,
+      "end": 170.07,
+      "duration": 2.23,
+      "text": "infinity. Okay? So, that's what we're"
+    },
+    {
+      "index": 68,
+      "start": 170.08,
+      "end": 171.95,
+      "duration": 1.87,
+      "text": "going to do today in Bellman-Ford. In"
+    },
+    {
+      "index": 69,
+      "start": 171.96,
+      "end": 175.43,
+      "duration": 3.47,
+      "text": "particular, what we're going to do is"
+    },
+    {
+      "index": 70,
+      "start": 175.44,
+      "end": 176.83,
+      "duration": 1.39,
+      "text": "compute"
+    },
+    {
+      "index": 71,
+      "start": 176.84,
+      "end": 178.75,
+      "duration": 1.91,
+      "text": "our shortest path distances, these"
+    },
+    {
+      "index": 72,
+      "start": 178.76,
+      "end": 180.87,
+      "duration": 2.11,
+      "text": "shortest path weights"
+    },
+    {
+      "index": 73,
+      "start": 180.88,
+      "end": 183.75,
+      "duration": 2.87,
+      "text": "for every vertex in our graph"
+    },
+    {
+      "index": 74,
+      "start": 183.76,
+      "end": 185.75,
+      "duration": 1.99,
+      "text": "setting the ones that are not reachable"
+    },
+    {
+      "index": 75,
+      "start": 185.76,
+      "end": 187.67,
+      "duration": 1.91,
+      "text": "to infinity and the ones that are"
+    },
+    {
+      "index": 76,
+      "start": 187.68,
+      "end": 189.15,
+      "duration": 1.47,
+      "text": "reachable"
+    },
+    {
+      "index": 77,
+      "start": 189.16,
+      "end": 191.67,
+      "duration": 2.51,
+      "text": "through a negative weight cycle to minus"
+    },
+    {
+      "index": 78,
+      "start": 191.68,
+      "end": 193.31,
+      "duration": 1.63,
+      "text": "infinity and all other ones we're going"
+    },
+    {
+      "index": 79,
+      "start": 193.32,
+      "end": 196.03,
+      "duration": 2.71,
+      "text": "to set to a finite weight."
+    },
+    {
+      "index": 80,
+      "start": 196.04,
+      "end": 197.59,
+      "duration": 1.55,
+      "text": "And"
+    },
+    {
+      "index": 81,
+      "start": 197.6,
+      "end": 200.07,
+      "duration": 2.47,
+      "text": "another thing that we might want is if"
+    },
+    {
+      "index": 82,
+      "start": 200.08,
+      "end": 201.39,
+      "duration": 1.31,
+      "text": "there's a negative weight cycle in the"
+    },
+    {
+      "index": 83,
+      "start": 201.4,
+      "end": 202.59,
+      "duration": 1.19,
+      "text": "graph"
+    },
+    {
+      "index": 84,
+      "start": 202.6,
+      "end": 204.51,
+      "duration": 1.91,
+      "text": "let's return one. Okay? So, those are"
+    },
+    {
+      "index": 85,
+      "start": 204.52,
+      "end": 205.75,
+      "duration": 1.23,
+      "text": "the two kinds of things that we're"
+    },
+    {
+      "index": 86,
+      "start": 205.76,
+      "end": 208.79,
+      "duration": 3.03,
+      "text": "trying to solve in today's lecture."
+    },
+    {
+      "index": 87,
+      "start": 208.8,
+      "end": 211.23,
+      "duration": 2.43,
+      "text": "Okay? But before we do that, let's warm"
+    },
+    {
+      "index": 88,
+      "start": 211.24,
+      "end": 213.27,
+      "duration": 2.03,
+      "text": "up with two short"
+    },
+    {
+      "index": 89,
+      "start": 213.28,
+      "end": 215.87,
+      "duration": 2.59,
+      "text": "exercises."
+    },
+    {
+      "index": 90,
+      "start": 215.88,
+      "end": 218.19,
+      "duration": 2.31,
+      "text": "The first one"
+    },
+    {
+      "index": 91,
+      "start": 218.2,
+      "end": 220.95,
+      "duration": 2.75,
+      "text": "exercise one"
+    },
+    {
+      "index": 92,
+      "start": 220.96,
+      "end": 222.87,
+      "duration": 1.91,
+      "text": "Okay?"
+    },
+    {
+      "index": 93,
+      "start": 222.88,
+      "end": 228.07,
+      "duration": 5.19,
+      "text": "Given an undirected graph"
+    },
+    {
+      "index": 94,
+      "start": 229.91,
+      "end": 229.92,
+      "duration": 0.01,
+      "text": "given"
+    },
+    {
+      "index": 95,
+      "start": 229.92,
+      "end": 233.71,
+      "duration": 3.79,
+      "text": "undirected"
+    },
+    {
+      "index": 96,
+      "start": 235.63,
+      "end": 235.64,
+      "duration": 0.01,
+      "text": "graph"
+    },
+    {
+      "index": 97,
+      "start": 235.64,
+      "end": 241.15,
+      "duration": 5.51,
+      "text": "G"
+    },
+    {
+      "index": 98,
+      "start": 243.99,
+      "end": 244.0,
+      "duration": 0.01,
+      "text": "return"
+    },
+    {
+      "index": 99,
+      "start": 244.0,
+      "end": 247.75,
+      "duration": 3.75,
+      "text": "whether"
+    },
+    {
+      "index": 100,
+      "start": 249.15,
+      "end": 249.16,
+      "duration": 0.01,
+      "text": "G"
+    },
+    {
+      "index": 101,
+      "start": 249.16,
+      "end": 252.27,
+      "duration": 3.11,
+      "text": "contains"
+    },
+    {
+      "index": 102,
+      "start": 262.43,
+      "end": 262.44,
+      "duration": 0.01,
+      "text": "Anyone have an idea of how we can solve"
+    },
+    {
+      "index": 103,
+      "start": 262.44,
+      "end": 264.99,
+      "duration": 2.55,
+      "text": "this in linear time actually?"
+    },
+    {
+      "index": 104,
+      "start": 265.0,
+      "end": 268.43,
+      "duration": 3.43,
+      "text": "In fact, we can do it in order E."
+    },
+    {
+      "index": 105,
+      "start": 268.44,
+      "end": 272.75,
+      "duration": 4.31,
+      "text": "Uh no. Yes. Yes, reachable from S."
+    },
+    {
+      "index": 106,
+      "start": 272.76,
+      "end": 274.71,
+      "duration": 1.95,
+      "text": "I guess"
+    },
+    {
+      "index": 107,
+      "start": 274.72,
+      "end": 276.79,
+      "duration": 2.07,
+      "text": "let's just say if a negative weight"
+    },
+    {
+      "index": 108,
+      "start": 276.8,
+      "end": 280.07,
+      "duration": 3.27,
+      "text": "cycle at all."
+    },
+    {
+      "index": 109,
+      "start": 281.55,
+      "end": 281.56,
+      "duration": 0.01,
+      "text": "Not in the context of single source"
+    },
+    {
+      "index": 110,
+      "start": 281.56,
+      "end": 283.11,
+      "duration": 1.55,
+      "text": "shortest paths."
+    },
+    {
+      "index": 111,
+      "start": 283.12,
+      "end": 284.51,
+      "duration": 1.39,
+      "text": "Check whether there's a negative weight"
+    },
+    {
+      "index": 112,
+      "start": 284.52,
+      "end": 286.19,
+      "duration": 1.67,
+      "text": "edge. Ah."
+    },
+    {
+      "index": 113,
+      "start": 286.2,
+      "end": 289.47,
+      "duration": 3.27,
+      "text": "Your colleague has determined uh an"
+    },
+    {
+      "index": 114,
+      "start": 289.48,
+      "end": 291.51,
+      "duration": 2.03,
+      "text": "interesting fact about undirected"
+    },
+    {
+      "index": 115,
+      "start": 291.52,
+      "end": 293.23,
+      "duration": 1.71,
+      "text": "graphs."
+    },
+    {
+      "index": 116,
+      "start": 293.24,
+      "end": 296.31,
+      "duration": 3.07,
+      "text": "If you have a a negative weight edge in"
+    },
+    {
+      "index": 117,
+      "start": 296.32,
+      "end": 298.55,
+      "duration": 2.23,
+      "text": "an undirected graph, I can just move"
+    },
+    {
+      "index": 118,
+      "start": 298.56,
+      "end": 301.11,
+      "duration": 2.55,
+      "text": "back and forth along that edge."
+    },
+    {
+      "index": 119,
+      "start": 301.12,
+      "end": 304.11,
+      "duration": 2.99,
+      "text": "That's a cycle of length two or"
+    },
+    {
+      "index": 120,
+      "start": 304.12,
+      "end": 306.19,
+      "duration": 2.07,
+      "text": "I guess three vertices back back to"
+    },
+    {
+      "index": 121,
+      "start": 306.2,
+      "end": 308.31,
+      "duration": 2.11,
+      "text": "where we came from that is of negative"
+    },
+    {
+      "index": 122,
+      "start": 308.32,
+      "end": 309.99,
+      "duration": 1.67,
+      "text": "weight because I'm just traversing that"
+    },
+    {
+      "index": 123,
+      "start": 310.0,
+      "end": 311.23,
+      "duration": 1.23,
+      "text": "weight"
+    },
+    {
+      "index": 124,
+      "start": 311.24,
+      "end": 314.11,
+      "duration": 2.87,
+      "text": "over and over and over again. So, the"
+    },
+    {
+      "index": 125,
+      "start": 314.12,
+      "end": 316.23,
+      "duration": 2.11,
+      "text": "question of single source shortest paths"
+    },
+    {
+      "index": 126,
+      "start": 316.24,
+      "end": 318.95,
+      "duration": 2.71,
+      "text": "of finding negative weights is not"
+    },
+    {
+      "index": 127,
+      "start": 318.96,
+      "end": 321.51,
+      "duration": 2.55,
+      "text": "particularly interesting in the"
+    },
+    {
+      "index": 128,
+      "start": 321.52,
+      "end": 323.39,
+      "duration": 1.87,
+      "text": "undirected case. What I can do is just"
+    },
+    {
+      "index": 129,
+      "start": 323.4,
+      "end": 325.99,
+      "duration": 2.59,
+      "text": "for every negative weight edge"
+    },
+    {
+      "index": 130,
+      "start": 326.0,
+      "end": 328.83,
+      "duration": 2.83,
+      "text": "undirected edge in my graph, I can just"
+    },
+    {
+      "index": 131,
+      "start": 328.84,
+      "end": 332.11,
+      "duration": 3.27,
+      "text": "you know, find the reachability from"
+    },
+    {
+      "index": 132,
+      "start": 332.12,
+      "end": 335.75,
+      "duration": 3.63,
+      "text": "the vertices the end points of that edge"
+    },
+    {
+      "index": 133,
+      "start": 335.76,
+      "end": 339.03,
+      "duration": 3.27,
+      "text": "and label them as minus"
+    },
+    {
+      "index": 134,
+      "start": 339.04,
+      "end": 341.35,
+      "duration": 2.31,
+      "text": "minus delta. Basically, if the connected"
+    },
+    {
+      "index": 135,
+      "start": 341.36,
+      "end": 343.39,
+      "duration": 2.03,
+      "text": "component containing S"
+    },
+    {
+      "index": 136,
+      "start": 343.4,
+      "end": 345.87,
+      "duration": 2.47,
+      "text": "has a negative weight edge, then"
+    },
+    {
+      "index": 137,
+      "start": 345.88,
+      "end": 347.83,
+      "duration": 1.95,
+      "text": "everything in the graph is accessible"
+    },
+    {
+      "index": 138,
+      "start": 347.84,
+      "end": 349.23,
+      "duration": 1.39,
+      "text": "from a negative weight cycle. So, this"
+    },
+    {
+      "index": 139,
+      "start": 349.24,
+      "end": 351.83,
+      "duration": 2.59,
+      "text": "is not such an interesting problem and"
+    },
+    {
+      "index": 140,
+      "start": 351.84,
+      "end": 353.31,
+      "duration": 1.47,
+      "text": "so we're going to restrict our"
+    },
+    {
+      "index": 141,
+      "start": 353.32,
+      "end": 358.23,
+      "duration": 4.91,
+      "text": "discussion today"
+    },
+    {
+      "index": 142,
+      "start": 360.48,
+      "end": 368.67,
+      "duration": 8.19,
+      "text": "to directed graphs."
+    },
+    {
+      "index": 143,
+      "start": 375.47,
+      "end": 375.48,
+      "duration": 0.01,
+      "text": "if and only if"
+    },
+    {
+      "index": 144,
+      "start": 375.48,
+      "end": 378.67,
+      "duration": 3.19,
+      "text": "exists negative"
+    },
+    {
+      "index": 145,
+      "start": 378.68,
+      "end": 380.43,
+      "duration": 1.75,
+      "text": "weight"
+    },
+    {
+      "index": 146,
+      "start": 380.44,
+      "end": 382.91,
+      "duration": 2.47,
+      "text": "edge."
+    },
+    {
+      "index": 147,
+      "start": 382.92,
+      "end": 384.63,
+      "duration": 1.71,
+      "text": "Okay?"
+    },
+    {
+      "index": 148,
+      "start": 384.64,
+      "end": 388.23,
+      "duration": 3.59,
+      "text": "Okay, exercise two."
+    },
+    {
+      "index": 149,
+      "start": 390.27,
+      "end": 390.28,
+      "duration": 0.01,
+      "text": "Kind of a little"
+    },
+    {
+      "index": 150,
+      "start": 390.28,
+      "end": 392.95,
+      "duration": 2.67,
+      "text": "preview for what's to come. We're"
+    },
+    {
+      "index": 151,
+      "start": 392.96,
+      "end": 394.43,
+      "duration": 1.47,
+      "text": "actually not going to show you an"
+    },
+    {
+      "index": 152,
+      "start": 394.44,
+      "end": 397.11,
+      "duration": 2.67,
+      "text": "algorithm directly that meets this"
+    },
+    {
+      "index": 153,
+      "start": 397.12,
+      "end": 400.19,
+      "duration": 3.07,
+      "text": "Bellman-Ford running time V times E."
+    },
+    {
+      "index": 154,
+      "start": 400.2,
+      "end": 402.15,
+      "duration": 1.95,
+      "text": "What instead we're going to show you is"
+    },
+    {
+      "index": 155,
+      "start": 402.16,
+      "end": 404.55,
+      "duration": 2.39,
+      "text": "a an algorithm that solves single source"
+    },
+    {
+      "index": 156,
+      "start": 404.56,
+      "end": 406.19,
+      "duration": 1.63,
+      "text": "shortest paths"
+    },
+    {
+      "index": 157,
+      "start": 406.2,
+      "end": 410.31,
+      "duration": 4.11,
+      "text": "in so, given an algorithm"
+    },
+    {
+      "index": 158,
+      "start": 410.32,
+      "end": 412.15,
+      "duration": 1.83,
+      "text": "alg A"
+    },
+    {
+      "index": 159,
+      "start": 412.16,
+      "end": 413.99,
+      "duration": 1.83,
+      "text": "solves"
+    },
+    {
+      "index": 160,
+      "start": 414.0,
+      "end": 418.39,
+      "duration": 4.39,
+      "text": "single source shortest paths in order"
+    },
+    {
+      "index": 161,
+      "start": 418.4,
+      "end": 420.55,
+      "duration": 2.15,
+      "text": "V times"
+    },
+    {
+      "index": 162,
+      "start": 420.56,
+      "end": 424.59,
+      "duration": 4.03,
+      "text": "V plus E time."
+    },
+    {
+      "index": 163,
+      "start": 426.91,
+      "end": 426.92,
+      "duration": 0.01,
+      "text": "Okay, what is that? That's V squared"
+    },
+    {
+      "index": 164,
+      "start": 426.92,
+      "end": 430.03,
+      "duration": 3.11,
+      "text": "plus V times E. Right? That's close to"
+    },
+    {
+      "index": 165,
+      "start": 430.04,
+      "end": 432.83,
+      "duration": 2.79,
+      "text": "what this V times E is."
+    },
+    {
+      "index": 166,
+      "start": 432.84,
+      "end": 434.83,
+      "duration": 1.99,
+      "text": "Okay? That's what we're going to show"
+    },
+    {
+      "index": 167,
+      "start": 434.84,
+      "end": 435.95,
+      "duration": 1.11,
+      "text": "you."
+    },
+    {
+      "index": 168,
+      "start": 435.96,
+      "end": 439.35,
+      "duration": 3.39,
+      "text": "But if I had such an algorithm"
+    },
+    {
+      "index": 169,
+      "start": 439.36,
+      "end": 440.99,
+      "duration": 1.63,
+      "text": "can anyone tell me a single source"
+    },
+    {
+      "index": 170,
+      "start": 441.0,
+      "end": 442.55,
+      "duration": 1.55,
+      "text": "shortest paths"
+    },
+    {
+      "index": 171,
+      "start": 442.56,
+      "end": 445.55,
+      "duration": 2.99,
+      "text": "how we can use this algorithm to solve"
+    },
+    {
+      "index": 172,
+      "start": 445.56,
+      "end": 448.31,
+      "duration": 2.75,
+      "text": "single source shortest paths in V just V"
+    },
+    {
+      "index": 173,
+      "start": 448.32,
+      "end": 449.95,
+      "duration": 1.63,
+      "text": "times E time?"
+    },
+    {
+      "index": 174,
+      "start": 449.96,
+      "end": 455.71,
+      "duration": 5.75,
+      "text": "Okay?"
+    },
+    {
+      "index": 175,
+      "start": 457.51,
+      "end": 457.52,
+      "duration": 0.01,
+      "text": "Show"
+    },
+    {
+      "index": 176,
+      "start": 457.52,
+      "end": 460.91,
+      "duration": 3.39,
+      "text": "how to solve"
+    },
+    {
+      "index": 177,
+      "start": 460.92,
+      "end": 462.75,
+      "duration": 1.83,
+      "text": "SSSP"
+    },
+    {
+      "index": 178,
+      "start": 462.76,
+      "end": 464.55,
+      "duration": 1.79,
+      "text": "in order"
+    },
+    {
+      "index": 179,
+      "start": 464.56,
+      "end": 468.83,
+      "duration": 4.27,
+      "text": "V times E."
+    },
+    {
+      "index": 180,
+      "start": 468.84,
+      "end": 470.35,
+      "duration": 1.51,
+      "text": "I guess we can put a a dot there as"
+    },
+    {
+      "index": 181,
+      "start": 470.36,
+      "end": 471.47,
+      "duration": 1.11,
+      "text": "well."
+    },
+    {
+      "index": 182,
+      "start": 471.48,
+      "end": 472.71,
+      "duration": 1.23,
+      "text": "Okay?"
+    },
+    {
+      "index": 183,
+      "start": 472.72,
+      "end": 475.07,
+      "duration": 2.35,
+      "text": "So, this is a little tricky."
+    },
+    {
+      "index": 184,
+      "start": 475.08,
+      "end": 476.91,
+      "duration": 1.83,
+      "text": "It's kind of related to the difference"
+    },
+    {
+      "index": 185,
+      "start": 476.92,
+      "end": 479.23,
+      "duration": 2.31,
+      "text": "we had between the reachability problem"
+    },
+    {
+      "index": 186,
+      "start": 479.24,
+      "end": 480.63,
+      "duration": 1.39,
+      "text": "and the single source shortest paths"
+    },
+    {
+      "index": 187,
+      "start": 480.64,
+      "end": 481.95,
+      "duration": 1.31,
+      "text": "problem"
+    },
+    {
+      "index": 188,
+      "start": 481.96,
+      "end": 484.79,
+      "duration": 2.83,
+      "text": "that we saw last lecture, right?"
+    },
+    {
+      "index": 189,
+      "start": 484.8,
+      "end": 487.95,
+      "duration": 3.15,
+      "text": "This When are these asymptotically"
+    },
+    {
+      "index": 190,
+      "start": 487.96,
+      "end": 491.75,
+      "duration": 3.79,
+      "text": "different in their upper bound is when V"
+    },
+    {
+      "index": 191,
+      "start": 491.76,
+      "end": 495.43,
+      "duration": 3.67,
+      "text": "is asymptotically larger than E."
+    },
+    {
+      "index": 192,
+      "start": 495.44,
+      "end": 497.59,
+      "duration": 2.15,
+      "text": "Right?"
+    },
+    {
+      "index": 193,
+      "start": 497.6,
+      "end": 502.35,
+      "duration": 4.75,
+      "text": "But the connected component containing S"
+    },
+    {
+      "index": 194,
+      "start": 502.36,
+      "end": 507.51,
+      "duration": 5.15,
+      "text": "can have at most E vertices or order E."
+    },
+    {
+      "index": 195,
+      "start": 507.52,
+      "end": 509.99,
+      "duration": 2.47,
+      "text": "It it can actually have at most E plus"
+    },
+    {
+      "index": 196,
+      "start": 510.0,
+      "end": 511.95,
+      "duration": 1.95,
+      "text": "one vertices because"
+    },
+    {
+      "index": 197,
+      "start": 511.96,
+      "end": 513.07,
+      "duration": 1.11,
+      "text": "uh"
+    },
+    {
+      "index": 198,
+      "start": 513.08,
+      "end": 515.87,
+      "duration": 2.79,
+      "text": "otherwise it wouldn't be connected."
+    },
+    {
+      "index": 199,
+      "start": 515.88,
+      "end": 517.149,
+      "duration": 1.269,
+      "text": "Okay?"
+    },
+    {
+      "index": 200,
+      "start": 517.159,
+      "end": 518.23,
+      "duration": 1.071,
+      "text": "So,"
+    },
+    {
+      "index": 201,
+      "start": 518.24,
+      "end": 520.029,
+      "duration": 1.789,
+      "text": "what we can do if we had such an"
+    },
+    {
+      "index": 202,
+      "start": 520.039,
+      "end": 521.469,
+      "duration": 1.43,
+      "text": "algorithm"
+    },
+    {
+      "index": 203,
+      "start": 521.479,
+      "end": 523.35,
+      "duration": 1.871,
+      "text": "we could first when we're given our"
+    },
+    {
+      "index": 204,
+      "start": 523.36,
+      "end": 525.99,
+      "duration": 2.63,
+      "text": "graph explore everything in the graph"
+    },
+    {
+      "index": 205,
+      "start": 526.0,
+      "end": 528.91,
+      "duration": 2.91,
+      "text": "using BFS or DFS, find all the things"
+    },
+    {
+      "index": 206,
+      "start": 528.92,
+      "end": 531.63,
+      "duration": 2.71,
+      "text": "reachable from S and then just throw"
+    },
+    {
+      "index": 207,
+      "start": 531.64,
+      "end": 534.23,
+      "duration": 2.59,
+      "text": "away everything else. Now I have a graph"
+    },
+    {
+      "index": 208,
+      "start": 534.24,
+      "end": 537.07,
+      "duration": 2.83,
+      "text": "for which V is asymptotically no bigger"
+    },
+    {
+      "index": 209,
+      "start": 537.08,
+      "end": 538.67,
+      "duration": 1.59,
+      "text": "than E."
+    },
+    {
+      "index": 210,
+      "start": 538.68,
+      "end": 540.95,
+      "duration": 2.27,
+      "text": "And then we can use this algorithm to"
+    },
+    {
+      "index": 211,
+      "start": 540.96,
+      "end": 542.79,
+      "duration": 1.83,
+      "text": "solve single source shortest paths in V"
+    },
+    {
+      "index": 212,
+      "start": 542.8,
+      "end": 544.87,
+      "duration": 2.07,
+      "text": "times E time. Okay? I'm not going to"
+    },
+    {
+      "index": 213,
+      "start": 544.88,
+      "end": 546.79,
+      "duration": 1.91,
+      "text": "write all that down here. You can see it"
+    },
+    {
+      "index": 214,
+      "start": 546.8,
+      "end": 549.07,
+      "duration": 2.27,
+      "text": "in the notes. Yeah. Does this work if"
+    },
+    {
+      "index": 215,
+      "start": 549.08,
+      "end": 550.99,
+      "duration": 1.91,
+      "text": "your graph isn't simple?"
+    },
+    {
+      "index": 216,
+      "start": 551.0,
+      "end": 552.27,
+      "duration": 1.27,
+      "text": "Does this work if your graph isn't"
+    },
+    {
+      "index": 217,
+      "start": 552.28,
+      "end": 554.39,
+      "duration": 2.11,
+      "text": "simple? I haven't thought about it. We"
+    },
+    {
+      "index": 218,
+      "start": 554.4,
+      "end": 555.83,
+      "duration": 1.43,
+      "text": "are not going to talk about non-simple"
+    },
+    {
+      "index": 219,
+      "start": 555.84,
+      "end": 557.87,
+      "duration": 2.03,
+      "text": "graphs in this class."
+    },
+    {
+      "index": 220,
+      "start": 557.88,
+      "end": 560.31,
+      "duration": 2.43,
+      "text": "Uh but probably not because you've got a"
+    },
+    {
+      "index": 221,
+      "start": 560.32,
+      "end": 561.75,
+      "duration": 1.43,
+      "text": "lot of edges."
+    },
+    {
+      "index": 222,
+      "start": 561.76,
+      "end": 563.83,
+      "duration": 2.07,
+      "text": "Though in our class if we're talking"
+    },
+    {
+      "index": 223,
+      "start": 563.84,
+      "end": 566.23,
+      "duration": 2.39,
+      "text": "about single source shortest paths, if"
+    },
+    {
+      "index": 224,
+      "start": 566.24,
+      "end": 567.87,
+      "duration": 1.63,
+      "text": "we have multiple edges between two"
+    },
+    {
+      "index": 225,
+      "start": 567.88,
+      "end": 570.11,
+      "duration": 2.23,
+      "text": "vertices, we can just take the minimum"
+    },
+    {
+      "index": 226,
+      "start": 570.12,
+      "end": 572.31,
+      "duration": 2.19,
+      "text": "weight one because it's never better to"
+    },
+    {
+      "index": 227,
+      "start": 572.32,
+      "end": 574.11,
+      "duration": 1.79,
+      "text": "take the larger ones."
+    },
+    {
+      "index": 228,
+      "start": 574.12,
+      "end": 576.31,
+      "duration": 2.19,
+      "text": "Did that answer your question? Great."
+    },
+    {
+      "index": 229,
+      "start": 576.32,
+      "end": 578.15,
+      "duration": 1.83,
+      "text": "All right. So, those are our warm-ups."
+    },
+    {
+      "index": 230,
+      "start": 578.16,
+      "end": 580.35,
+      "duration": 2.19,
+      "text": "That's our goal. We need to find an"
+    },
+    {
+      "index": 231,
+      "start": 580.36,
+      "end": 581.83,
+      "duration": 1.47,
+      "text": "algorithm for single source shortest"
+    },
+    {
+      "index": 232,
+      "start": 581.84,
+      "end": 584.35,
+      "duration": 2.51,
+      "text": "paths in general graphs, graphs with"
+    },
+    {
+      "index": 233,
+      "start": 584.36,
+      "end": 586.19,
+      "duration": 1.83,
+      "text": "potentially graphs with cycles and"
+    },
+    {
+      "index": 234,
+      "start": 586.2,
+      "end": 589.03,
+      "duration": 2.83,
+      "text": "negative weights."
+    },
+    {
+      "index": 235,
+      "start": 589.04,
+      "end": 592.35,
+      "duration": 3.31,
+      "text": "And solve it in this V times linear kind"
+    },
+    {
+      "index": 236,
+      "start": 592.36,
+      "end": 593.27,
+      "duration": 0.91,
+      "text": "of"
+    },
+    {
+      "index": 237,
+      "start": 593.28,
+      "end": 594.23,
+      "duration": 0.95,
+      "text": "time."
+    },
+    {
+      "index": 238,
+      "start": 594.24,
+      "end": 595.79,
+      "duration": 1.55,
+      "text": "That makes sense?"
+    },
+    {
+      "index": 239,
+      "start": 595.8,
+      "end": 598.23,
+      "duration": 2.43,
+      "text": "All right. So, first before we get to"
+    },
+    {
+      "index": 240,
+      "start": 598.24,
+      "end": 600.11,
+      "duration": 1.87,
+      "text": "the algorithm,"
+    },
+    {
+      "index": 241,
+      "start": 600.12,
+      "end": 601.95,
+      "duration": 1.83,
+      "text": "we're going to take uh discuss a little"
+    },
+    {
+      "index": 242,
+      "start": 601.96,
+      "end": 605.11,
+      "duration": 3.15,
+      "text": "bit about simple short about shortest"
+    },
+    {
+      "index": 243,
+      "start": 605.12,
+      "end": 608.07,
+      "duration": 2.95,
+      "text": "paths in general. If we didn't have The"
+    },
+    {
+      "index": 244,
+      "start": 608.08,
+      "end": 610.31,
+      "duration": 2.23,
+      "text": "problem here is negative weights. How do"
+    },
+    {
+      "index": 245,
+      "start": 610.32,
+      "end": 611.59,
+      "duration": 1.27,
+      "text": "we find"
+    },
+    {
+      "index": 246,
+      "start": 611.6,
+      "end": 614.11,
+      "duration": 2.51,
+      "text": "if we had negative weight cycles, there"
+    },
+    {
+      "index": 247,
+      "start": 614.12,
+      "end": 616.15,
+      "duration": 2.03,
+      "text": "seems to be these problems because we"
+    },
+    {
+      "index": 248,
+      "start": 616.16,
+      "end": 618.23,
+      "duration": 2.07,
+      "text": "could have minus infinities in our"
+    },
+    {
+      "index": 249,
+      "start": 618.24,
+      "end": 620.35,
+      "duration": 2.11,
+      "text": "deltas."
+    },
+    {
+      "index": 250,
+      "start": 620.36,
+      "end": 622.67,
+      "duration": 2.31,
+      "text": "But if we didn't have negative weights,"
+    },
+    {
+      "index": 251,
+      "start": 622.68,
+      "end": 624.55,
+      "duration": 1.87,
+      "text": "I'd like to assert to you that our"
+    },
+    {
+      "index": 252,
+      "start": 624.56,
+      "end": 626.55,
+      "duration": 1.99,
+      "text": "shortest paths, even if there are"
+    },
+    {
+      "index": 253,
+      "start": 626.56,
+      "end": 628.43,
+      "duration": 1.87,
+      "text": "negative weights,"
+    },
+    {
+      "index": 254,
+      "start": 628.44,
+      "end": 629.75,
+      "duration": 1.31,
+      "text": "are going to be simple. They won't"
+    },
+    {
+      "index": 255,
+      "start": 629.76,
+      "end": 631.63,
+      "duration": 1.87,
+      "text": "repeat vertices. So, that's the first"
+    },
+    {
+      "index": 256,
+      "start": 631.64,
+      "end": 632.95,
+      "duration": 1.31,
+      "text": "thing we're going to"
+    },
+    {
+      "index": 257,
+      "start": 632.96,
+      "end": 634.67,
+      "duration": 1.71,
+      "text": "show you."
+    },
+    {
+      "index": 258,
+      "start": 634.68,
+      "end": 636.95,
+      "duration": 2.27,
+      "text": "Uh"
+    },
+    {
+      "index": 259,
+      "start": 636.96,
+      "end": 638.15,
+      "duration": 1.19,
+      "text": "Find that"
+    },
+    {
+      "index": 260,
+      "start": 638.16,
+      "end": 639.95,
+      "duration": 1.79,
+      "text": "uh let's say"
+    },
+    {
+      "index": 261,
+      "start": 639.96,
+      "end": 642.63,
+      "duration": 2.67,
+      "text": "simple"
+    },
+    {
+      "index": 262,
+      "start": 642.64,
+      "end": 644.91,
+      "duration": 2.27,
+      "text": "shortest"
+    },
+    {
+      "index": 263,
+      "start": 644.92,
+      "end": 649.43,
+      "duration": 4.51,
+      "text": "paths."
+    },
+    {
+      "index": 264,
+      "start": 651.15,
+      "end": 651.16,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 265,
+      "start": 651.16,
+      "end": 652.27,
+      "duration": 1.11,
+      "text": "So,"
+    },
+    {
+      "index": 266,
+      "start": 652.28,
+      "end": 655.67,
+      "duration": 3.39,
+      "text": "claim."
+    },
+    {
+      "index": 267,
+      "start": 658.23,
+      "end": 658.24,
+      "duration": 0.01,
+      "text": "I'm going to give my claims numbers"
+    },
+    {
+      "index": 268,
+      "start": 658.24,
+      "end": 659.99,
+      "duration": 1.75,
+      "text": "today just because I'm going to have a"
+    },
+    {
+      "index": 269,
+      "start": 660.0,
+      "end": 661.19,
+      "duration": 1.19,
+      "text": "lot of them."
+    },
+    {
+      "index": 270,
+      "start": 661.2,
+      "end": 663.03,
+      "duration": 1.83,
+      "text": "If"
+    },
+    {
+      "index": 271,
+      "start": 663.04,
+      "end": 665.87,
+      "duration": 2.83,
+      "text": "my shortest path distance from S to some"
+    },
+    {
+      "index": 272,
+      "start": 665.88,
+      "end": 668.87,
+      "duration": 2.99,
+      "text": "vertex is finite,"
+    },
+    {
+      "index": 273,
+      "start": 668.88,
+      "end": 672.59,
+      "duration": 3.71,
+      "text": "meaning it's not infinite or minus"
+    },
+    {
+      "index": 274,
+      "start": 672.6,
+      "end": 676.27,
+      "duration": 3.67,
+      "text": "infinite, right? Some finite value."
+    },
+    {
+      "index": 275,
+      "start": 676.28,
+      "end": 680.35,
+      "duration": 4.07,
+      "text": "There exists"
+    },
+    {
+      "index": 276,
+      "start": 681.79,
+      "end": 681.8,
+      "duration": 0.01,
+      "text": "a"
+    },
+    {
+      "index": 277,
+      "start": 681.8,
+      "end": 684.99,
+      "duration": 3.19,
+      "text": "shortest"
+    },
+    {
+      "index": 278,
+      "start": 695.63,
+      "end": 695.64,
+      "duration": 0.01,
+      "text": "that is"
+    },
+    {
+      "index": 279,
+      "start": 695.64,
+      "end": 697.27,
+      "duration": 1.63,
+      "text": "simple."
+    },
+    {
+      "index": 280,
+      "start": 697.28,
+      "end": 699.27,
+      "duration": 1.99,
+      "text": "And remember, simple means not going"
+    },
+    {
+      "index": 281,
+      "start": 699.28,
+      "end": 701.27,
+      "duration": 1.99,
+      "text": "through a vertex more than once."
+    },
+    {
+      "index": 282,
+      "start": 701.28,
+      "end": 703.07,
+      "duration": 1.79,
+      "text": "All right."
+    },
+    {
+      "index": 283,
+      "start": 703.08,
+      "end": 709.27,
+      "duration": 6.19,
+      "text": "How are we going to prove this?"
+    },
+    {
+      "index": 284,
+      "start": 710.79,
+      "end": 710.8,
+      "duration": 0.01,
+      "text": "Well,"
+    },
+    {
+      "index": 285,
+      "start": 710.8,
+      "end": 712.55,
+      "duration": 1.75,
+      "text": "consider"
+    },
+    {
+      "index": 286,
+      "start": 712.56,
+      "end": 715.95,
+      "duration": 3.39,
+      "text": "if this claim was not true, right?"
+    },
+    {
+      "index": 287,
+      "start": 715.96,
+      "end": 716.99,
+      "duration": 1.03,
+      "text": "If"
+    },
+    {
+      "index": 288,
+      "start": 717.0,
+      "end": 719.31,
+      "duration": 2.31,
+      "text": "every shortest path"
+    },
+    {
+      "index": 289,
+      "start": 719.32,
+      "end": 721.43,
+      "duration": 2.11,
+      "text": "contains a cycle, essentially, right? It"
+    },
+    {
+      "index": 290,
+      "start": 721.44,
+      "end": 723.829,
+      "duration": 2.389,
+      "text": "it it repeated a vertex."
+    },
+    {
+      "index": 291,
+      "start": 723.839,
+      "end": 725.07,
+      "duration": 1.231,
+      "text": "Then"
+    },
+    {
+      "index": 292,
+      "start": 725.08,
+      "end": 731.35,
+      "duration": 6.27,
+      "text": "my path looks something like this."
+    },
+    {
+      "index": 293,
+      "start": 733.39,
+      "end": 733.4,
+      "duration": 0.01,
+      "text": "I mean, there's some vertices along"
+    },
+    {
+      "index": 294,
+      "start": 733.4,
+      "end": 734.75,
+      "duration": 1.35,
+      "text": "here,"
+    },
+    {
+      "index": 295,
+      "start": 734.76,
+      "end": 736.91,
+      "duration": 2.15,
+      "text": "and then I go to V."
+    },
+    {
+      "index": 296,
+      "start": 736.92,
+      "end": 739.07,
+      "duration": 2.15,
+      "text": "So, here's S, and then there's this some"
+    },
+    {
+      "index": 297,
+      "start": 739.08,
+      "end": 741.51,
+      "duration": 2.43,
+      "text": "cycle I repeat some vertex. I'm going to"
+    },
+    {
+      "index": 298,
+      "start": 741.52,
+      "end": 744.39,
+      "duration": 2.87,
+      "text": "call this cycle at C."
+    },
+    {
+      "index": 299,
+      "start": 744.4,
+      "end": 746.31,
+      "duration": 1.91,
+      "text": "Okay?"
+    },
+    {
+      "index": 300,
+      "start": 746.32,
+      "end": 748.95,
+      "duration": 2.63,
+      "text": "Now, what do I know about this path? I"
+    },
+    {
+      "index": 301,
+      "start": 748.96,
+      "end": 751.47,
+      "duration": 2.51,
+      "text": "know that"
+    },
+    {
+      "index": 302,
+      "start": 751.48,
+      "end": 754.03,
+      "duration": 2.55,
+      "text": "it has it's a shortest path,"
+    },
+    {
+      "index": 303,
+      "start": 754.04,
+      "end": 756.55,
+      "duration": 2.51,
+      "text": "and it has finite weight, right?"
+    },
+    {
+      "index": 304,
+      "start": 756.56,
+      "end": 759.07,
+      "duration": 2.51,
+      "text": "So, in particular, this path, this delta"
+    },
+    {
+      "index": 305,
+      "start": 759.08,
+      "end": 763.31,
+      "duration": 4.23,
+      "text": "distance, is not minus infinity. But"
+    },
+    {
+      "index": 306,
+      "start": 763.32,
+      "end": 765.19,
+      "duration": 1.87,
+      "text": "if this is not minus infinity, what do I"
+    },
+    {
+      "index": 307,
+      "start": 765.2,
+      "end": 769.87,
+      "duration": 4.67,
+      "text": "know about the weight of this cycle?"
+    },
+    {
+      "index": 308,
+      "start": 772.23,
+      "end": 772.24,
+      "duration": 0.01,
+      "text": "Yeah, it can't be negative, right? Cuz"
+    },
+    {
+      "index": 309,
+      "start": 772.24,
+      "end": 773.71,
+      "duration": 1.47,
+      "text": "if it was negative, I could keep going"
+    },
+    {
+      "index": 310,
+      "start": 773.72,
+      "end": 776.43,
+      "duration": 2.71,
+      "text": "around this cycle, and this would have a"
+    },
+    {
+      "index": 311,
+      "start": 776.44,
+      "end": 778.35,
+      "duration": 1.91,
+      "text": "non-finite weight,"
+    },
+    {
+      "index": 312,
+      "start": 778.36,
+      "end": 781.07,
+      "duration": 2.71,
+      "text": "shortest path distance from S, right?"
+    },
+    {
+      "index": 313,
+      "start": 781.08,
+      "end": 782.95,
+      "duration": 1.87,
+      "text": "So, I know this is"
+    },
+    {
+      "index": 314,
+      "start": 782.96,
+      "end": 784.43,
+      "duration": 1.47,
+      "text": "you know, can't be negative, so it must"
+    },
+    {
+      "index": 315,
+      "start": 784.44,
+      "end": 787.19,
+      "duration": 2.75,
+      "text": "be zero or positive, right? But if it's"
+    },
+    {
+      "index": 316,
+      "start": 787.2,
+      "end": 789.23,
+      "duration": 2.03,
+      "text": "zero or positive, and this is a shortest"
+    },
+    {
+      "index": 317,
+      "start": 789.24,
+      "end": 790.47,
+      "duration": 1.23,
+      "text": "path,"
+    },
+    {
+      "index": 318,
+      "start": 790.48,
+      "end": 792.55,
+      "duration": 2.07,
+      "text": "right? Went through this cycle,"
+    },
+    {
+      "index": 319,
+      "start": 792.56,
+      "end": 796.829,
+      "duration": 4.269,
+      "text": "then I could remove it."
+    },
+    {
+      "index": 320,
+      "start": 800.07,
+      "end": 800.08,
+      "duration": 0.01,
+      "text": "And now, I have a new path with one"
+    },
+    {
+      "index": 321,
+      "start": 800.08,
+      "end": 802.35,
+      "duration": 2.27,
+      "text": "fewer cycle. I could just keep doing"
+    },
+    {
+      "index": 322,
+      "start": 802.36,
+      "end": 806.91,
+      "duration": 4.55,
+      "text": "this to create a simple path. Okay? So,"
+    },
+    {
+      "index": 323,
+      "start": 806.92,
+      "end": 808.55,
+      "duration": 1.63,
+      "text": "that checks out."
+    },
+    {
+      "index": 324,
+      "start": 808.56,
+      "end": 810.07,
+      "duration": 1.51,
+      "text": "Okay."
+    },
+    {
+      "index": 325,
+      "start": 810.08,
+      "end": 812.19,
+      "duration": 2.11,
+      "text": "So,"
+    },
+    {
+      "index": 326,
+      "start": 812.2,
+      "end": 815.19,
+      "duration": 2.99,
+      "text": "that's interesting. If it's simple,"
+    },
+    {
+      "index": 327,
+      "start": 815.2,
+      "end": 817.59,
+      "duration": 2.39,
+      "text": "what do we know about the number of"
+    },
+    {
+      "index": 328,
+      "start": 817.6,
+      "end": 820.87,
+      "duration": 3.27,
+      "text": "edges in a"
+    },
+    {
+      "index": 329,
+      "start": 820.88,
+      "end": 823.11,
+      "duration": 2.23,
+      "text": "simple shortest paths? How many could"
+    },
+    {
+      "index": 330,
+      "start": 823.12,
+      "end": 825.71,
+      "duration": 2.59,
+      "text": "there possibly be?"
+    },
+    {
+      "index": 331,
+      "start": 825.72,
+      "end": 829.11,
+      "duration": 3.39,
+      "text": "How long in number of edges"
+    },
+    {
+      "index": 332,
+      "start": 829.12,
+      "end": 832.07,
+      "duration": 2.95,
+      "text": "could a simple shortest path path be? If"
+    },
+    {
+      "index": 333,
+      "start": 832.08,
+      "end": 834.27,
+      "duration": 2.19,
+      "text": "I can't repeat vertices,"
+    },
+    {
+      "index": 334,
+      "start": 834.28,
+      "end": 838.47,
+      "duration": 4.19,
+      "text": "right? I can have at most V vertices"
+    },
+    {
+      "index": 335,
+      "start": 838.48,
+      "end": 841.31,
+      "duration": 2.83,
+      "text": "on my simple path, which means I can use"
+    },
+    {
+      "index": 336,
+      "start": 841.32,
+      "end": 843.23,
+      "duration": 1.91,
+      "text": "at most"
+    },
+    {
+      "index": 337,
+      "start": 843.24,
+      "end": 845.63,
+      "duration": 2.39,
+      "text": "V minus one edges, right? Fence posting,"
+    },
+    {
+      "index": 338,
+      "start": 845.64,
+      "end": 850.23,
+      "duration": 4.59,
+      "text": "right? So, simple"
+    },
+    {
+      "index": 339,
+      "start": 850.24,
+      "end": 852.43,
+      "duration": 2.19,
+      "text": "paths"
+    },
+    {
+      "index": 340,
+      "start": 852.44,
+      "end": 854.069,
+      "duration": 1.629,
+      "text": "have"
+    },
+    {
+      "index": 341,
+      "start": 854.079,
+      "end": 856.949,
+      "duration": 2.87,
+      "text": "at most"
+    },
+    {
+      "index": 342,
+      "start": 856.959,
+      "end": 865.51,
+      "duration": 8.551,
+      "text": "V minus one edges."
+    },
+    {
+      "index": 343,
+      "start": 866.59,
+      "end": 866.6,
+      "duration": 0.01,
+      "text": "That's a"
+    },
+    {
+      "index": 344,
+      "start": 866.6,
+      "end": 868.91,
+      "duration": 2.31,
+      "text": "nice little thing I'd like to to box"
+    },
+    {
+      "index": 345,
+      "start": 868.92,
+      "end": 870.03,
+      "duration": 1.11,
+      "text": "off."
+    },
+    {
+      "index": 346,
+      "start": 870.04,
+      "end": 873.91,
+      "duration": 3.87,
+      "text": "That's a really nice property, right?"
+    },
+    {
+      "index": 347,
+      "start": 873.92,
+      "end": 876.19,
+      "duration": 2.27,
+      "text": "So,"
+    },
+    {
+      "index": 348,
+      "start": 876.2,
+      "end": 879.069,
+      "duration": 2.869,
+      "text": "while uh a shortest path here could have"
+    },
+    {
+      "index": 349,
+      "start": 879.079,
+      "end": 881.19,
+      "duration": 2.111,
+      "text": "an infinite number of edges,"
+    },
+    {
+      "index": 350,
+      "start": 881.2,
+      "end": 882.35,
+      "duration": 1.15,
+      "text": "right?"
+    },
+    {
+      "index": 351,
+      "start": 882.36,
+      "end": 885.31,
+      "duration": 2.95,
+      "text": "If the shortest path distance is finite,"
+    },
+    {
+      "index": 352,
+      "start": 885.32,
+      "end": 888.51,
+      "duration": 3.19,
+      "text": "I know I only have to check paths"
+    },
+    {
+      "index": 353,
+      "start": 888.52,
+      "end": 891.71,
+      "duration": 3.19,
+      "text": "that use up to V minus one edges. In"
+    },
+    {
+      "index": 354,
+      "start": 891.72,
+      "end": 894.71,
+      "duration": 2.99,
+      "text": "particular, this is"
+    },
+    {
+      "index": 355,
+      "start": 894.72,
+      "end": 896.63,
+      "duration": 1.91,
+      "text": "finitely bounded in terms of the number"
+    },
+    {
+      "index": 356,
+      "start": 896.64,
+      "end": 897.91,
+      "duration": 1.27,
+      "text": "of paths I have to consider. It's"
+    },
+    {
+      "index": 357,
+      "start": 897.92,
+      "end": 899.949,
+      "duration": 2.029,
+      "text": "exponential potentially,"
+    },
+    {
+      "index": 358,
+      "start": 899.959,
+      "end": 902.39,
+      "duration": 2.431,
+      "text": "right? But at least it's finite. Okay?"
+    },
+    {
+      "index": 359,
+      "start": 902.4,
+      "end": 904.43,
+      "duration": 2.03,
+      "text": "The other The other way I I potentially"
+    },
+    {
+      "index": 360,
+      "start": 904.44,
+      "end": 906.27,
+      "duration": 1.83,
+      "text": "had to check"
+    },
+    {
+      "index": 361,
+      "start": 906.28,
+      "end": 908.829,
+      "duration": 2.549,
+      "text": "every possible path,"
+    },
+    {
+      "index": 362,
+      "start": 908.839,
+      "end": 910.35,
+      "duration": 1.511,
+      "text": "of which there could be infinite if"
+    },
+    {
+      "index": 363,
+      "start": 910.36,
+      "end": 912.71,
+      "duration": 2.35,
+      "text": "there's cycles in my graph."
+    },
+    {
+      "index": 364,
+      "start": 912.72,
+      "end": 914.39,
+      "duration": 1.67,
+      "text": "Okay."
+    },
+    {
+      "index": 365,
+      "start": 914.4,
+      "end": 916.55,
+      "duration": 2.15,
+      "text": "So,"
+    },
+    {
+      "index": 366,
+      "start": 916.56,
+      "end": 918.59,
+      "duration": 2.03,
+      "text": "I have an idea."
+    },
+    {
+      "index": 367,
+      "start": 918.6,
+      "end": 919.91,
+      "duration": 1.31,
+      "text": "Okay?"
+    },
+    {
+      "index": 368,
+      "start": 919.92,
+      "end": 922.99,
+      "duration": 3.07,
+      "text": "What if I could"
+    },
+    {
+      "index": 369,
+      "start": 923.0,
+      "end": 925.949,
+      "duration": 2.949,
+      "text": "find shortest path distances"
+    },
+    {
+      "index": 370,
+      "start": 925.959,
+      "end": 927.91,
+      "duration": 1.951,
+      "text": "by limiting the number of edges I go"
+    },
+    {
+      "index": 371,
+      "start": 927.92,
+      "end": 929.23,
+      "duration": 1.31,
+      "text": "through,"
+    },
+    {
+      "index": 372,
+      "start": 929.24,
+      "end": 933.55,
+      "duration": 4.31,
+      "text": "right? So, not the the the full shortest"
+    },
+    {
+      "index": 373,
+      "start": 933.56,
+      "end": 936.47,
+      "duration": 2.91,
+      "text": "path distance from S to V,"
+    },
+    {
+      "index": 374,
+      "start": 936.48,
+      "end": 938.91,
+      "duration": 2.43,
+      "text": "but let's limit the number of edges I'm"
+    },
+    {
+      "index": 375,
+      "start": 938.92,
+      "end": 941.43,
+      "duration": 2.51,
+      "text": "allowed to go through, and let's"
+    },
+    {
+      "index": 376,
+      "start": 941.44,
+      "end": 943.23,
+      "duration": 1.79,
+      "text": "talk about those shortest path"
+    },
+    {
+      "index": 377,
+      "start": 943.24,
+      "end": 945.27,
+      "duration": 2.03,
+      "text": "distances, just among the paths that"
+    },
+    {
+      "index": 378,
+      "start": 945.28,
+      "end": 947.39,
+      "duration": 2.11,
+      "text": "have at most a certain number of edges."
+    },
+    {
+      "index": 379,
+      "start": 947.4,
+      "end": 950.71,
+      "duration": 3.31,
+      "text": "I'm going to call this uh K"
+    },
+    {
+      "index": 380,
+      "start": 950.72,
+      "end": 953.11,
+      "duration": 2.39,
+      "text": "edge"
+    },
+    {
+      "index": 381,
+      "start": 953.12,
+      "end": 955.39,
+      "duration": 2.27,
+      "text": "distance."
+    },
+    {
+      "index": 382,
+      "start": 955.4,
+      "end": 957.11,
+      "duration": 1.71,
+      "text": "And I'm just going to provide a little"
+    },
+    {
+      "index": 383,
+      "start": 957.12,
+      "end": 959.23,
+      "duration": 2.11,
+      "text": "notation here."
+    },
+    {
+      "index": 384,
+      "start": 959.24,
+      "end": 961.31,
+      "duration": 2.07,
+      "text": "Instead of having a delta, I'll have a"
+    },
+    {
+      "index": 385,
+      "start": 961.32,
+      "end": 963.51,
+      "duration": 2.19,
+      "text": "delta K here. That That means how many"
+    },
+    {
+      "index": 386,
+      "start": 963.52,
+      "end": 967.67,
+      "duration": 4.15,
+      "text": "edges I'm limited by, okay? So, from S"
+    },
+    {
+      "index": 387,
+      "start": 967.68,
+      "end": 969.87,
+      "duration": 2.19,
+      "text": "to V"
+    },
+    {
+      "index": 388,
+      "start": 969.88,
+      "end": 972.51,
+      "duration": 2.63,
+      "text": "is"
+    },
+    {
+      "index": 389,
+      "start": 972.52,
+      "end": 975.31,
+      "duration": 2.79,
+      "text": "shortest"
+    },
+    {
+      "index": 390,
+      "start": 975.32,
+      "end": 979.949,
+      "duration": 4.629,
+      "text": "uh S to V path"
+    },
+    {
+      "index": 391,
+      "start": 982.069,
+      "end": 982.079,
+      "duration": 0.01,
+      "text": "using"
+    },
+    {
+      "index": 392,
+      "start": 982.079,
+      "end": 989.67,
+      "duration": 7.591,
+      "text": "at most K edges."
+    },
+    {
+      "index": 393,
+      "start": 994.67,
+      "end": 994.68,
+      "duration": 0.01,
+      "text": "Weight"
+    },
+    {
+      "index": 394,
+      "start": 994.68,
+      "end": 996.19,
+      "duration": 1.51,
+      "text": "of"
+    },
+    {
+      "index": 395,
+      "start": 996.2,
+      "end": 999.67,
+      "duration": 3.47,
+      "text": "a shortest path shortest S to V path"
+    },
+    {
+      "index": 396,
+      "start": 999.68,
+      "end": 1001.55,
+      "duration": 1.87,
+      "text": "using at most"
+    },
+    {
+      "index": 397,
+      "start": 1001.56,
+      "end": 1005.99,
+      "duration": 4.43,
+      "text": "K edges, okay? And the these notions"
+    },
+    {
+      "index": 398,
+      "start": 1006.0,
+      "end": 1007.71,
+      "duration": 1.71,
+      "text": "seem somewhat symmetric, right? If I"
+    },
+    {
+      "index": 399,
+      "start": 1007.72,
+      "end": 1010.31,
+      "duration": 2.59,
+      "text": "were able to compute"
+    },
+    {
+      "index": 400,
+      "start": 1010.32,
+      "end": 1012.51,
+      "duration": 2.19,
+      "text": "this thing for"
+    },
+    {
+      "index": 401,
+      "start": 1012.52,
+      "end": 1015.39,
+      "duration": 2.87,
+      "text": "V minus one,"
+    },
+    {
+      "index": 402,
+      "start": 1015.4,
+      "end": 1018.19,
+      "duration": 2.79,
+      "text": "right?"
+    },
+    {
+      "index": 403,
+      "start": 1019.39,
+      "end": 1019.4,
+      "duration": 0.01,
+      "text": "Then"
+    },
+    {
+      "index": 404,
+      "start": 1019.4,
+      "end": 1021.91,
+      "duration": 2.51,
+      "text": "it for all the vertices,"
+    },
+    {
+      "index": 405,
+      "start": 1021.92,
+      "end": 1024.189,
+      "duration": 2.269,
+      "text": "then if the"
+    },
+    {
+      "index": 406,
+      "start": 1024.199,
+      "end": 1026.31,
+      "duration": 2.111,
+      "text": "distance is finite,"
+    },
+    {
+      "index": 407,
+      "start": 1026.32,
+      "end": 1028.99,
+      "duration": 2.67,
+      "text": "then I'll have successfully computed the"
+    },
+    {
+      "index": 408,
+      "start": 1029.0,
+      "end": 1030.829,
+      "duration": 1.829,
+      "text": "real shortest paths because of this"
+    },
+    {
+      "index": 409,
+      "start": 1030.839,
+      "end": 1032.55,
+      "duration": 1.711,
+      "text": "statement, right?"
+    },
+    {
+      "index": 410,
+      "start": 1032.56,
+      "end": 1035.23,
+      "duration": 2.67,
+      "text": "Now, that doesn't mean that"
+    },
+    {
+      "index": 411,
+      "start": 1035.24,
+      "end": 1037.429,
+      "duration": 2.189,
+      "text": "if it's if this is"
+    },
+    {
+      "index": 412,
+      "start": 1037.439,
+      "end": 1040.15,
+      "duration": 2.711,
+      "text": "uh"
+    },
+    {
+      "index": 413,
+      "start": 1041.949,
+      "end": 1041.959,
+      "duration": 0.01,
+      "text": "it doesn't mean the other way, right? If"
+    },
+    {
+      "index": 414,
+      "start": 1041.959,
+      "end": 1044.189,
+      "duration": 2.23,
+      "text": "this is minus infinity,"
+    },
+    {
+      "index": 415,
+      "start": 1044.199,
+      "end": 1046.91,
+      "duration": 2.711,
+      "text": "right? If the shortest path distance is"
+    },
+    {
+      "index": 416,
+      "start": 1046.92,
+      "end": 1049.15,
+      "duration": 2.23,
+      "text": "minus infinity,"
+    },
+    {
+      "index": 417,
+      "start": 1049.16,
+      "end": 1050.59,
+      "duration": 1.43,
+      "text": "it doesn't say anything about what this"
+    },
+    {
+      "index": 418,
+      "start": 1050.6,
+      "end": 1051.51,
+      "duration": 0.91,
+      "text": "is,"
+    },
+    {
+      "index": 419,
+      "start": 1051.52,
+      "end": 1053.99,
+      "duration": 2.47,
+      "text": "right? It just says the shortest path"
+    },
+    {
+      "index": 420,
+      "start": 1054.0,
+      "end": 1057.03,
+      "duration": 3.03,
+      "text": "using at most V minus one vertices using"
+    },
+    {
+      "index": 421,
+      "start": 1057.04,
+      "end": 1059.79,
+      "duration": 2.75,
+      "text": "it at most V minus one edges"
+    },
+    {
+      "index": 422,
+      "start": 1059.8,
+      "end": 1062.43,
+      "duration": 2.63,
+      "text": "uh would be whatever this is. But"
+    },
+    {
+      "index": 423,
+      "start": 1062.44,
+      "end": 1063.83,
+      "duration": 1.39,
+      "text": "really, the shortest path length needs"
+    },
+    {
+      "index": 424,
+      "start": 1063.84,
+      "end": 1066.35,
+      "duration": 2.51,
+      "text": "to consider an infinite number of edges,"
+    },
+    {
+      "index": 425,
+      "start": 1066.36,
+      "end": 1067.43,
+      "duration": 1.07,
+      "text": "right? So, it doesn't really tell us"
+    },
+    {
+      "index": 426,
+      "start": 1067.44,
+      "end": 1069.71,
+      "duration": 2.27,
+      "text": "much about that."
+    },
+    {
+      "index": 427,
+      "start": 1069.72,
+      "end": 1071.55,
+      "duration": 1.83,
+      "text": "But for the finite ones, it does. It"
+    },
+    {
+      "index": 428,
+      "start": 1071.56,
+      "end": 1072.95,
+      "duration": 1.39,
+      "text": "works well."
+    },
+    {
+      "index": 429,
+      "start": 1072.96,
+      "end": 1074.51,
+      "duration": 1.55,
+      "text": "And so, if we are able to compute this"
+    },
+    {
+      "index": 430,
+      "start": 1074.52,
+      "end": 1079.79,
+      "duration": 5.27,
+      "text": "thing for K equals V minus one,"
+    },
+    {
+      "index": 431,
+      "start": 1081.55,
+      "end": 1081.56,
+      "duration": 0.01,
+      "text": "in a graph that doesn't contain negative"
+    },
+    {
+      "index": 432,
+      "start": 1081.56,
+      "end": 1083.27,
+      "duration": 1.71,
+      "text": "weight cycles, we'd be done,"
+    },
+    {
+      "index": 433,
+      "start": 1083.28,
+      "end": 1086.79,
+      "duration": 3.51,
+      "text": "right?"
+    },
+    {
+      "index": 434,
+      "start": 1089.75,
+      "end": 1089.76,
+      "duration": 0.01,
+      "text": "I claim to you a stronger statement"
+    },
+    {
+      "index": 435,
+      "start": 1089.76,
+      "end": 1096.19,
+      "duration": 6.43,
+      "text": "that if"
+    },
+    {
+      "index": 436,
+      "start": 1103.03,
+      "end": 1103.04,
+      "duration": 0.01,
+      "text": "at most V edges"
+    },
+    {
+      "index": 437,
+      "start": 1103.04,
+      "end": 1104.59,
+      "duration": 1.55,
+      "text": "from S to V"
+    },
+    {
+      "index": 438,
+      "start": 1104.6,
+      "end": 1108.39,
+      "duration": 3.79,
+      "text": "is less than strictly less than delta of"
+    },
+    {
+      "index": 439,
+      "start": 1108.4,
+      "end": 1113.35,
+      "duration": 4.95,
+      "text": "V minus one,"
+    },
+    {
+      "index": 440,
+      "start": 1115.03,
+      "end": 1115.04,
+      "duration": 0.01,
+      "text": "right? This is"
+    },
+    {
+      "index": 441,
+      "start": 1115.04,
+      "end": 1117.669,
+      "duration": 2.629,
+      "text": "all in the subscript here, right?"
+    },
+    {
+      "index": 442,
+      "start": 1117.679,
+      "end": 1118.99,
+      "duration": 1.311,
+      "text": "Basically,"
+    },
+    {
+      "index": 443,
+      "start": 1119.0,
+      "end": 1120.95,
+      "duration": 1.95,
+      "text": "this is the"
+    },
+    {
+      "index": 444,
+      "start": 1120.96,
+      "end": 1123.55,
+      "duration": 2.59,
+      "text": "shortest path distance"
+    },
+    {
+      "index": 445,
+      "start": 1123.56,
+      "end": 1127.27,
+      "duration": 3.71,
+      "text": "of any simple path, right? And possibly"
+    },
+    {
+      "index": 446,
+      "start": 1127.28,
+      "end": 1129.87,
+      "duration": 2.59,
+      "text": "ones that also contain cycles, but"
+    },
+    {
+      "index": 447,
+      "start": 1129.88,
+      "end": 1131.35,
+      "duration": 1.47,
+      "text": "definitely it includes all the the"
+    },
+    {
+      "index": 448,
+      "start": 1131.36,
+      "end": 1133.71,
+      "duration": 2.35,
+      "text": "simple paths, right?"
+    },
+    {
+      "index": 449,
+      "start": 1133.72,
+      "end": 1136.59,
+      "duration": 2.87,
+      "text": "If there's a shorter path"
+    },
+    {
+      "index": 450,
+      "start": 1136.6,
+      "end": 1138.55,
+      "duration": 1.95,
+      "text": "to my vertex"
+    },
+    {
+      "index": 451,
+      "start": 1138.56,
+      "end": 1140.43,
+      "duration": 1.87,
+      "text": "that goes through"
+    },
+    {
+      "index": 452,
+      "start": 1140.44,
+      "end": 1143.35,
+      "duration": 2.91,
+      "text": "more than V minus one edges, that this"
+    },
+    {
+      "index": 453,
+      "start": 1143.36,
+      "end": 1145.35,
+      "duration": 1.99,
+      "text": "path can't be simple,"
+    },
+    {
+      "index": 454,
+      "start": 1145.36,
+      "end": 1148.23,
+      "duration": 2.87,
+      "text": "right? Cuz it goes through a vertex more"
+    },
+    {
+      "index": 455,
+      "start": 1148.24,
+      "end": 1149.43,
+      "duration": 1.19,
+      "text": "than once. Otherwise, it would be"
+    },
+    {
+      "index": 456,
+      "start": 1149.44,
+      "end": 1151.87,
+      "duration": 2.43,
+      "text": "included in this"
+    },
+    {
+      "index": 457,
+      "start": 1151.88,
+      "end": 1154.31,
+      "duration": 2.43,
+      "text": "distance set, right? So, if this is the"
+    },
+    {
+      "index": 458,
+      "start": 1154.32,
+      "end": 1155.87,
+      "duration": 1.55,
+      "text": "case,"
+    },
+    {
+      "index": 459,
+      "start": 1155.88,
+      "end": 1159.19,
+      "duration": 3.31,
+      "text": "and I have found a shorter path to V"
+    },
+    {
+      "index": 460,
+      "start": 1159.2,
+      "end": 1162.59,
+      "duration": 3.39,
+      "text": "that uses V edges uh yeah, that uses V"
+    },
+    {
+      "index": 461,
+      "start": 1162.6,
+      "end": 1165.47,
+      "duration": 2.87,
+      "text": "edges, that path can't be simple, which"
+    },
+    {
+      "index": 462,
+      "start": 1165.48,
+      "end": 1167.43,
+      "duration": 1.95,
+      "text": "means that path"
+    },
+    {
+      "index": 463,
+      "start": 1167.44,
+      "end": 1169.75,
+      "duration": 2.31,
+      "text": "or some path there contains a negative"
+    },
+    {
+      "index": 464,
+      "start": 1169.76,
+      "end": 1170.95,
+      "duration": 1.19,
+      "text": "weight cycle."
+    },
+    {
+      "index": 465,
+      "start": 1170.96,
+      "end": 1175.03,
+      "duration": 4.07,
+      "text": "Okay? So, if this is true, then"
+    },
+    {
+      "index": 466,
+      "start": 1175.04,
+      "end": 1177.07,
+      "duration": 2.03,
+      "text": "I know"
+    },
+    {
+      "index": 467,
+      "start": 1177.08,
+      "end": 1178.909,
+      "duration": 1.829,
+      "text": "that"
+    },
+    {
+      "index": 468,
+      "start": 1178.919,
+      "end": 1180.99,
+      "duration": 2.071,
+      "text": "the real shortest path distance from S"
+    },
+    {
+      "index": 469,
+      "start": 1181.0,
+      "end": 1182.75,
+      "duration": 1.75,
+      "text": "to V"
+    },
+    {
+      "index": 470,
+      "start": 1182.76,
+      "end": 1184.35,
+      "duration": 1.59,
+      "text": "must be"
+    },
+    {
+      "index": 471,
+      "start": 1184.36,
+      "end": 1188.55,
+      "duration": 4.19,
+      "text": "minus infinity."
+    },
+    {
+      "index": 472,
+      "start": 1189.669,
+      "end": 1189.679,
+      "duration": 0.01,
+      "text": "Right?"
+    },
+    {
+      "index": 473,
+      "start": 1189.679,
+      "end": 1191.71,
+      "duration": 2.031,
+      "text": "I'm going to call such a vertex a"
+    },
+    {
+      "index": 474,
+      "start": 1191.72,
+      "end": 1194.75,
+      "duration": 3.03,
+      "text": "witness, right? If if we can find a"
+    },
+    {
+      "index": 475,
+      "start": 1194.76,
+      "end": 1196.75,
+      "duration": 1.99,
+      "text": "vertex that has this property. I mean, I"
+    },
+    {
+      "index": 476,
+      "start": 1196.76,
+      "end": 1198.03,
+      "duration": 1.27,
+      "text": "haven't shown you how to compute these"
+    },
+    {
+      "index": 477,
+      "start": 1198.04,
+      "end": 1200.35,
+      "duration": 2.31,
+      "text": "things yet, right? But, if I were able"
+    },
+    {
+      "index": 478,
+      "start": 1200.36,
+      "end": 1202.71,
+      "duration": 2.35,
+      "text": "to find a vertex V"
+    },
+    {
+      "index": 479,
+      "start": 1202.72,
+      "end": 1204.95,
+      "duration": 2.23,
+      "text": "and these are capital V's"
+    },
+    {
+      "index": 480,
+      "start": 1204.96,
+      "end": 1206.31,
+      "duration": 1.35,
+      "text": "if you uh"
+    },
+    {
+      "index": 481,
+      "start": 1206.32,
+      "end": 1208.47,
+      "duration": 2.15,
+      "text": "having trouble."
+    },
+    {
+      "index": 482,
+      "start": 1208.48,
+      "end": 1210.23,
+      "duration": 1.75,
+      "text": "These this V is different than this V."
+    },
+    {
+      "index": 483,
+      "start": 1210.24,
+      "end": 1213.11,
+      "duration": 2.87,
+      "text": "This is cardinality, right?"
+    },
+    {
+      "index": 484,
+      "start": 1213.12,
+      "end": 1215.63,
+      "duration": 2.51,
+      "text": "If we can find such a vertex V that"
+    },
+    {
+      "index": 485,
+      "start": 1215.64,
+      "end": 1217.31,
+      "duration": 1.67,
+      "text": "certifies that there is a negative"
+    },
+    {
+      "index": 486,
+      "start": 1217.32,
+      "end": 1220.11,
+      "duration": 2.79,
+      "text": "weight cycle in our"
+    },
+    {
+      "index": 487,
+      "start": 1220.12,
+      "end": 1221.55,
+      "duration": 1.43,
+      "text": "graph."
+    },
+    {
+      "index": 488,
+      "start": 1221.56,
+      "end": 1223.23,
+      "duration": 1.67,
+      "text": "So, I'm going to call"
+    },
+    {
+      "index": 489,
+      "start": 1223.24,
+      "end": 1230.51,
+      "duration": 7.27,
+      "text": "V is a witness."
+    },
+    {
+      "index": 490,
+      "start": 1232.39,
+      "end": 1232.4,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 491,
+      "start": 1232.4,
+      "end": 1236.27,
+      "duration": 3.87,
+      "text": "So,"
+    },
+    {
+      "index": 492,
+      "start": 1238.63,
+      "end": 1238.64,
+      "duration": 0.01,
+      "text": "if this property is true, it's a witness"
+    },
+    {
+      "index": 493,
+      "start": 1238.64,
+      "end": 1240.27,
+      "duration": 1.63,
+      "text": "and it definitely has this. Is it"
+    },
+    {
+      "index": 494,
+      "start": 1240.28,
+      "end": 1242.27,
+      "duration": 1.99,
+      "text": "possible, you think?"
+    },
+    {
+      "index": 495,
+      "start": 1242.28,
+      "end": 1243.51,
+      "duration": 1.23,
+      "text": "I'm going to claim to you that it's"
+    },
+    {
+      "index": 496,
+      "start": 1243.52,
+      "end": 1244.79,
+      "duration": 1.27,
+      "text": "possible"
+    },
+    {
+      "index": 497,
+      "start": 1244.8,
+      "end": 1247.11,
+      "duration": 2.31,
+      "text": "that a vertex could have minus infinite"
+    },
+    {
+      "index": 498,
+      "start": 1247.12,
+      "end": 1249.27,
+      "duration": 2.15,
+      "text": "distance,"
+    },
+    {
+      "index": 499,
+      "start": 1249.28,
+      "end": 1252.91,
+      "duration": 3.63,
+      "text": "but not have this property hold. Okay?"
+    },
+    {
+      "index": 500,
+      "start": 1252.92,
+      "end": 1254.07,
+      "duration": 1.15,
+      "text": "There's"
+    },
+    {
+      "index": 501,
+      "start": 1254.08,
+      "end": 1255.79,
+      "duration": 1.71,
+      "text": "I could probably give you an example. I"
+    },
+    {
+      "index": 502,
+      "start": 1255.8,
+      "end": 1257.15,
+      "duration": 1.35,
+      "text": "don't have one off the top of my head"
+    },
+    {
+      "index": 503,
+      "start": 1257.16,
+      "end": 1260.27,
+      "duration": 3.11,
+      "text": "right now, but that's possible. You"
+    },
+    {
+      "index": 504,
+      "start": 1260.28,
+      "end": 1263.91,
+      "duration": 3.63,
+      "text": "could imagine there might be no path"
+    },
+    {
+      "index": 505,
+      "start": 1263.92,
+      "end": 1265.75,
+      "duration": 1.83,
+      "text": "going to a vertex on a negative weight"
+    },
+    {
+      "index": 506,
+      "start": 1265.76,
+      "end": 1267.35,
+      "duration": 1.59,
+      "text": "cycle"
+    },
+    {
+      "index": 507,
+      "start": 1267.36,
+      "end": 1269.99,
+      "duration": 2.63,
+      "text": "that goes through V exactly V edges,"
+    },
+    {
+      "index": 508,
+      "start": 1270.0,
+      "end": 1272.91,
+      "duration": 2.91,
+      "text": "right? It might go through more edges, a"
+    },
+    {
+      "index": 509,
+      "start": 1272.92,
+      "end": 1275.87,
+      "duration": 2.95,
+      "text": "shorter one, right? So,"
+    },
+    {
+      "index": 510,
+      "start": 1275.88,
+      "end": 1278.99,
+      "duration": 3.11,
+      "text": "this equation would be an equality and"
+    },
+    {
+      "index": 511,
+      "start": 1279.0,
+      "end": 1281.83,
+      "duration": 2.83,
+      "text": "would not certify that this is true,"
+    },
+    {
+      "index": 512,
+      "start": 1281.84,
+      "end": 1283.47,
+      "duration": 1.63,
+      "text": "right?"
+    },
+    {
+      "index": 513,
+      "start": 1283.48,
+      "end": 1287.51,
+      "duration": 4.03,
+      "text": "But, I claim to you if a vertex has this"
+    },
+    {
+      "index": 514,
+      "start": 1287.52,
+      "end": 1290.27,
+      "duration": 2.75,
+      "text": "property, if it's re- its shortest path"
+    },
+    {
+      "index": 515,
+      "start": 1290.28,
+      "end": 1292.95,
+      "duration": 2.67,
+      "text": "distance is minus infinite,"
+    },
+    {
+      "index": 516,
+      "start": 1292.96,
+      "end": 1294.63,
+      "duration": 1.67,
+      "text": "then it must be reachable from a"
+    },
+    {
+      "index": 517,
+      "start": 1294.64,
+      "end": 1300.91,
+      "duration": 6.27,
+      "text": "witness, okay? So, that's the claim."
+    },
+    {
+      "index": 518,
+      "start": 1302.43,
+      "end": 1302.44,
+      "duration": 0.01,
+      "text": "If"
+    },
+    {
+      "index": 519,
+      "start": 1302.44,
+      "end": 1305.11,
+      "duration": 2.67,
+      "text": "delta S V"
+    },
+    {
+      "index": 520,
+      "start": 1305.12,
+      "end": 1310.43,
+      "duration": 5.31,
+      "text": "is minus infinity,"
+    },
+    {
+      "index": 521,
+      "start": 1313.75,
+      "end": 1313.76,
+      "duration": 0.01,
+      "text": "then V is"
+    },
+    {
+      "index": 522,
+      "start": 1313.76,
+      "end": 1316.95,
+      "duration": 3.19,
+      "text": "reachable"
+    },
+    {
+      "index": 523,
+      "start": 1318.79,
+      "end": 1318.8,
+      "duration": 0.01,
+      "text": "from"
+    },
+    {
+      "index": 524,
+      "start": 1318.8,
+      "end": 1322.47,
+      "duration": 3.67,
+      "text": "a witness."
+    },
+    {
+      "index": 525,
+      "start": 1322.48,
+      "end": 1324.43,
+      "duration": 1.95,
+      "text": "Reachable from a vertex that has this"
+    },
+    {
+      "index": 526,
+      "start": 1324.44,
+      "end": 1327.51,
+      "duration": 3.07,
+      "text": "property, that has this property. And if"
+    },
+    {
+      "index": 527,
+      "start": 1327.52,
+      "end": 1330.31,
+      "duration": 2.79,
+      "text": "it's reachable from something that has"
+    },
+    {
+      "index": 528,
+      "start": 1330.32,
+      "end": 1332.95,
+      "duration": 2.63,
+      "text": "minus infinity shortest path weight,"
+    },
+    {
+      "index": 529,
+      "start": 1332.96,
+      "end": 1335.59,
+      "duration": 2.63,
+      "text": "then I can take that path, go to my"
+    },
+    {
+      "index": 530,
+      "start": 1335.6,
+      "end": 1338.63,
+      "duration": 3.03,
+      "text": "reachable vertex, and that's also minus"
+    },
+    {
+      "index": 531,
+      "start": 1338.64,
+      "end": 1341.35,
+      "duration": 2.71,
+      "text": "infinite path, right? Okay. So, how do"
+    },
+    {
+      "index": 532,
+      "start": 1341.36,
+      "end": 1348.15,
+      "duration": 6.79,
+      "text": "we prove this?"
+    },
+    {
+      "index": 533,
+      "start": 1358.43,
+      "end": 1358.44,
+      "duration": 0.01,
+      "text": "Let's Let's I'm going to state a"
+    },
+    {
+      "index": 534,
+      "start": 1358.44,
+      "end": 1361.27,
+      "duration": 2.83,
+      "text": "somewhat stronger statement"
+    },
+    {
+      "index": 535,
+      "start": 1361.28,
+      "end": 1364.03,
+      "duration": 2.75,
+      "text": "uh that we'll prove instead. Okay? It"
+    },
+    {
+      "index": 536,
+      "start": 1364.04,
+      "end": 1367.07,
+      "duration": 3.03,
+      "text": "suffices to prove that every negative"
+    },
+    {
+      "index": 537,
+      "start": 1367.08,
+      "end": 1369.55,
+      "duration": 2.47,
+      "text": "weight cycle"
+    },
+    {
+      "index": 538,
+      "start": 1369.56,
+      "end": 1372.07,
+      "duration": 2.51,
+      "text": "contains a witness. If we were to prove"
+    },
+    {
+      "index": 539,
+      "start": 1372.08,
+      "end": 1373.35,
+      "duration": 1.27,
+      "text": "that,"
+    },
+    {
+      "index": 540,
+      "start": 1373.36,
+      "end": 1376.19,
+      "duration": 2.83,
+      "text": "right? Then every vertex with this"
+    },
+    {
+      "index": 541,
+      "start": 1376.2,
+      "end": 1377.91,
+      "duration": 1.71,
+      "text": "property,"
+    },
+    {
+      "index": 542,
+      "start": 1377.92,
+      "end": 1382.31,
+      "duration": 4.39,
+      "text": "every vertex with this property has"
+    },
+    {
+      "index": 543,
+      "start": 1382.32,
+      "end": 1385.43,
+      "duration": 3.11,
+      "text": "uh"
+    },
+    {
+      "index": 544,
+      "start": 1386.95,
+      "end": 1386.96,
+      "duration": 0.01,
+      "text": "is reachable from a negative weight"
+    },
+    {
+      "index": 545,
+      "start": 1386.96,
+      "end": 1389.27,
+      "duration": 2.31,
+      "text": "cycle by definition."
+    },
+    {
+      "index": 546,
+      "start": 1389.28,
+      "end": 1390.75,
+      "duration": 1.47,
+      "text": "Okay?"
+    },
+    {
+      "index": 547,
+      "start": 1390.76,
+      "end": 1394.95,
+      "duration": 4.19,
+      "text": "So, if we can prove that"
+    },
+    {
+      "index": 548,
+      "start": 1394.96,
+      "end": 1398.87,
+      "duration": 3.91,
+      "text": "every"
+    },
+    {
+      "index": 549,
+      "start": 1400.63,
+      "end": 1400.64,
+      "duration": 0.01,
+      "text": "prove"
+    },
+    {
+      "index": 550,
+      "start": 1400.64,
+      "end": 1404.35,
+      "duration": 3.71,
+      "text": "every"
+    },
+    {
+      "index": 551,
+      "start": 1405.91,
+      "end": 1405.92,
+      "duration": 0.01,
+      "text": "negative"
+    },
+    {
+      "index": 552,
+      "start": 1405.92,
+      "end": 1408.39,
+      "duration": 2.47,
+      "text": "weight"
+    },
+    {
+      "index": 553,
+      "start": 1408.4,
+      "end": 1410.47,
+      "duration": 2.07,
+      "text": "weight"
+    },
+    {
+      "index": 554,
+      "start": 1410.48,
+      "end": 1412.59,
+      "duration": 2.11,
+      "text": "cycle"
+    },
+    {
+      "index": 555,
+      "start": 1412.6,
+      "end": 1416.11,
+      "duration": 3.51,
+      "text": "contains"
+    },
+    {
+      "index": 556,
+      "start": 1420.71,
+      "end": 1420.72,
+      "duration": 0.01,
+      "text": "Right? If we can prove that every"
+    },
+    {
+      "index": 557,
+      "start": 1420.72,
+      "end": 1421.95,
+      "duration": 1.23,
+      "text": "negative weight cycle contains a"
+    },
+    {
+      "index": 558,
+      "start": 1421.96,
+      "end": 1423.31,
+      "duration": 1.35,
+      "text": "witness,"
+    },
+    {
+      "index": 559,
+      "start": 1423.32,
+      "end": 1427.51,
+      "duration": 4.19,
+      "text": "then every vertex reachable from one of"
+    },
+    {
+      "index": 560,
+      "start": 1427.52,
+      "end": 1429.39,
+      "duration": 1.87,
+      "text": "those witnesses, in particular reachable"
+    },
+    {
+      "index": 561,
+      "start": 1429.4,
+      "end": 1433.75,
+      "duration": 4.35,
+      "text": "from a negative weight cycle,"
+    },
+    {
+      "index": 562,
+      "start": 1434.99,
+      "end": 1435.0,
+      "duration": 0.01,
+      "text": "has"
+    },
+    {
+      "index": 563,
+      "start": 1435.0,
+      "end": 1436.19,
+      "duration": 1.19,
+      "text": "is"
+    },
+    {
+      "index": 564,
+      "start": 1436.2,
+      "end": 1436.95,
+      "duration": 0.75,
+      "text": "uh"
+    },
+    {
+      "index": 565,
+      "start": 1436.96,
+      "end": 1439.03,
+      "duration": 2.07,
+      "text": "has shortest path distance minus"
+    },
+    {
+      "index": 566,
+      "start": 1439.04,
+      "end": 1440.669,
+      "duration": 1.629,
+      "text": "infinity, and that should prove the"
+    },
+    {
+      "index": 567,
+      "start": 1440.679,
+      "end": 1444.15,
+      "duration": 3.471,
+      "text": "claim, right? Uh is"
+    },
+    {
+      "index": 568,
+      "start": 1444.16,
+      "end": 1445.87,
+      "duration": 1.71,
+      "text": "This thing has to be reachable from a"
+    },
+    {
+      "index": 569,
+      "start": 1445.88,
+      "end": 1450.63,
+      "duration": 4.75,
+      "text": "negative weight cycle."
+    },
+    {
+      "index": 570,
+      "start": 1452.51,
+      "end": 1452.52,
+      "duration": 0.01,
+      "text": "Uh"
+    },
+    {
+      "index": 571,
+      "start": 1452.52,
+      "end": 1454.27,
+      "duration": 1.75,
+      "text": "And so, if we prove negative weight"
+    },
+    {
+      "index": 572,
+      "start": 1454.28,
+      "end": 1457.91,
+      "duration": 3.63,
+      "text": "cycles contain witnesses, then"
+    },
+    {
+      "index": 573,
+      "start": 1457.92,
+      "end": 1459.95,
+      "duration": 2.03,
+      "text": "all of these vertices are reachable from"
+    },
+    {
+      "index": 574,
+      "start": 1459.96,
+      "end": 1462.35,
+      "duration": 2.39,
+      "text": "a witness. Okay, great. Great."
+    },
+    {
+      "index": 575,
+      "start": 1462.36,
+      "end": 1464.03,
+      "duration": 1.67,
+      "text": "Confusing myself there for a second."
+    },
+    {
+      "index": 576,
+      "start": 1464.04,
+      "end": 1465.47,
+      "duration": 1.43,
+      "text": "Okay."
+    },
+    {
+      "index": 577,
+      "start": 1465.48,
+      "end": 1467.27,
+      "duration": 1.79,
+      "text": "So, let's consider"
+    },
+    {
+      "index": 578,
+      "start": 1467.28,
+      "end": 1470.75,
+      "duration": 3.47,
+      "text": "a negative weight cycle"
+    },
+    {
+      "index": 579,
+      "start": 1473.75,
+      "end": 1473.76,
+      "duration": 0.01,
+      "text": "in G, okay? This is a directed negative"
+    },
+    {
+      "index": 580,
+      "start": 1473.76,
+      "end": 1475.47,
+      "duration": 1.71,
+      "text": "weight cycle."
+    },
+    {
+      "index": 581,
+      "start": 1475.48,
+      "end": 1477.71,
+      "duration": 2.23,
+      "text": "Recall."
+    },
+    {
+      "index": 582,
+      "start": 1477.72,
+      "end": 1480.23,
+      "duration": 2.51,
+      "text": "Okay? This is be my negative weight"
+    },
+    {
+      "index": 583,
+      "start": 1480.24,
+      "end": 1481.35,
+      "duration": 1.11,
+      "text": "cycle"
+    },
+    {
+      "index": 584,
+      "start": 1481.36,
+      "end": 1484.95,
+      "duration": 3.59,
+      "text": "C, right? All of the sum of the edges"
+    },
+    {
+      "index": 585,
+      "start": 1484.96,
+      "end": 1487.39,
+      "duration": 2.43,
+      "text": "in this thing, the wei- the weights has"
+    },
+    {
+      "index": 586,
+      "start": 1487.4,
+      "end": 1490.87,
+      "duration": 3.47,
+      "text": "negative weight."
+    },
+    {
+      "index": 587,
+      "start": 1491.95,
+      "end": 1491.96,
+      "duration": 0.01,
+      "text": "And I'm going to have a little bit"
+    },
+    {
+      "index": 588,
+      "start": 1491.96,
+      "end": 1496.19,
+      "duration": 4.23,
+      "text": "notation. If I have a vertex V here,"
+    },
+    {
+      "index": 589,
+      "start": 1496.2,
+      "end": 1498.91,
+      "duration": 2.71,
+      "text": "I'm going to say that its predecessor in"
+    },
+    {
+      "index": 590,
+      "start": 1498.92,
+      "end": 1500.91,
+      "duration": 1.99,
+      "text": "the cycle, I'm just going to call it V"
+    },
+    {
+      "index": 591,
+      "start": 1500.92,
+      "end": 1502.75,
+      "duration": 1.83,
+      "text": "prime."
+    },
+    {
+      "index": 592,
+      "start": 1502.76,
+      "end": 1506.79,
+      "duration": 4.03,
+      "text": "Okay? That's just some notation."
+    },
+    {
+      "index": 593,
+      "start": 1508.91,
+      "end": 1508.92,
+      "duration": 0.01,
+      "text": "All right."
+    },
+    {
+      "index": 594,
+      "start": 1508.92,
+      "end": 1510.07,
+      "duration": 1.15,
+      "text": "So,"
+    },
+    {
+      "index": 595,
+      "start": 1510.08,
+      "end": 1513.87,
+      "duration": 3.79,
+      "text": "if I have computed these"
+    },
+    {
+      "index": 596,
+      "start": 1513.88,
+      "end": 1516.35,
+      "duration": 2.47,
+      "text": "shortest path distances to every vertex"
+    },
+    {
+      "index": 597,
+      "start": 1516.36,
+      "end": 1517.79,
+      "duration": 1.43,
+      "text": "in my graph,"
+    },
+    {
+      "index": 598,
+      "start": 1517.8,
+      "end": 1519.63,
+      "duration": 1.83,
+      "text": "shortest path distance going through at"
+    },
+    {
+      "index": 599,
+      "start": 1519.64,
+      "end": 1521.669,
+      "duration": 2.029,
+      "text": "most V vertices and the shortest path"
+    },
+    {
+      "index": 600,
+      "start": 1521.679,
+      "end": 1523.15,
+      "duration": 1.471,
+      "text": "distance going through at most V minus"
+    },
+    {
+      "index": 601,
+      "start": 1523.16,
+      "end": 1524.79,
+      "duration": 1.63,
+      "text": "one vertices,"
+    },
+    {
+      "index": 602,
+      "start": 1524.8,
+      "end": 1527.35,
+      "duration": 2.55,
+      "text": "then I know the following thing holds."
+    },
+    {
+      "index": 603,
+      "start": 1527.36,
+      "end": 1528.71,
+      "duration": 1.35,
+      "text": "Delta"
+    },
+    {
+      "index": 604,
+      "start": 1528.72,
+      "end": 1530.43,
+      "duration": 1.71,
+      "text": "of V"
+    },
+    {
+      "index": 605,
+      "start": 1530.44,
+      "end": 1533.31,
+      "duration": 2.87,
+      "text": "going from S to V for any vertex in my"
+    },
+    {
+      "index": 606,
+      "start": 1533.32,
+      "end": 1535.47,
+      "duration": 2.15,
+      "text": "cycle"
+    },
+    {
+      "index": 607,
+      "start": 1535.48,
+      "end": 1537.31,
+      "duration": 1.83,
+      "text": "can't be bigger"
+    },
+    {
+      "index": 608,
+      "start": 1537.32,
+      "end": 1541.07,
+      "duration": 3.75,
+      "text": "than delta V minus one"
+    },
+    {
+      "index": 609,
+      "start": 1541.08,
+      "end": 1543.03,
+      "duration": 1.95,
+      "text": "from S to"
+    },
+    {
+      "index": 610,
+      "start": 1543.04,
+      "end": 1544.55,
+      "duration": 1.51,
+      "text": "U"
+    },
+    {
+      "index": 611,
+      "start": 1544.56,
+      "end": 1548.39,
+      "duration": 3.83,
+      "text": "plus the weight, sorry, not U, V prime,"
+    },
+    {
+      "index": 612,
+      "start": 1548.4,
+      "end": 1550.43,
+      "duration": 2.03,
+      "text": "its predecessor,"
+    },
+    {
+      "index": 613,
+      "start": 1550.44,
+      "end": 1552.39,
+      "duration": 1.95,
+      "text": "plus the weight"
+    },
+    {
+      "index": 614,
+      "start": 1552.4,
+      "end": 1555.99,
+      "duration": 3.59,
+      "text": "going from the predecessor to my vertex."
+    },
+    {
+      "index": 615,
+      "start": 1556.0,
+      "end": 1558.11,
+      "duration": 2.11,
+      "text": "Why is that?"
+    },
+    {
+      "index": 616,
+      "start": 1558.12,
+      "end": 1560.15,
+      "duration": 2.03,
+      "text": "Why is that? Because this is the weight"
+    },
+    {
+      "index": 617,
+      "start": 1560.16,
+      "end": 1563.15,
+      "duration": 2.99,
+      "text": "of some vertex uh this is"
+    },
+    {
+      "index": 618,
+      "start": 1563.16,
+      "end": 1566.87,
+      "duration": 3.71,
+      "text": "the weight the shortest path distance to"
+    },
+    {
+      "index": 619,
+      "start": 1566.88,
+      "end": 1570.23,
+      "duration": 3.35,
+      "text": "my predecessor using one fewer edge."
+    },
+    {
+      "index": 620,
+      "start": 1570.24,
+      "end": 1572.75,
+      "duration": 2.51,
+      "text": "And so, this in particular is the weight"
+    },
+    {
+      "index": 621,
+      "start": 1572.76,
+      "end": 1574.79,
+      "duration": 2.03,
+      "text": "of some path"
+    },
+    {
+      "index": 622,
+      "start": 1574.8,
+      "end": 1576.95,
+      "duration": 2.15,
+      "text": "that uses V edges."
+    },
+    {
+      "index": 623,
+      "start": 1576.96,
+      "end": 1579.59,
+      "duration": 2.63,
+      "text": "So, if this is the shortest such path"
+    },
+    {
+      "index": 624,
+      "start": 1579.6,
+      "end": 1581.51,
+      "duration": 1.91,
+      "text": "distance,"
+    },
+    {
+      "index": 625,
+      "start": 1581.52,
+      "end": 1584.15,
+      "duration": 2.63,
+      "text": "this has to upper bound it, right? At at"
+    },
+    {
+      "index": 626,
+      "start": 1584.16,
+      "end": 1585.99,
+      "duration": 1.83,
+      "text": "least at most, yeah. Is that the"
+    },
+    {
+      "index": 627,
+      "start": 1586.0,
+      "end": 1588.19,
+      "duration": 2.19,
+      "text": "triangle inequality? That's that is a"
+    },
+    {
+      "index": 628,
+      "start": 1588.2,
+      "end": 1589.71,
+      "duration": 1.51,
+      "text": "statement of the triangle inequality."
+    },
+    {
+      "index": 629,
+      "start": 1589.72,
+      "end": 1592.19,
+      "duration": 2.47,
+      "text": "Thank you."
+    },
+    {
+      "index": 630,
+      "start": 1592.2,
+      "end": 1595.03,
+      "duration": 2.83,
+      "text": "All right. So,"
+    },
+    {
+      "index": 631,
+      "start": 1595.04,
+      "end": 1596.63,
+      "duration": 1.59,
+      "text": "Yes, this is just by triangle"
+    },
+    {
+      "index": 632,
+      "start": 1596.64,
+      "end": 1598.63,
+      "duration": 1.99,
+      "text": "inequality. Okay."
+    },
+    {
+      "index": 633,
+      "start": 1598.64,
+      "end": 1602.35,
+      "duration": 3.71,
+      "text": "Now, what we can say is let's take this"
+    },
+    {
+      "index": 634,
+      "start": 1602.36,
+      "end": 1604.99,
+      "duration": 2.63,
+      "text": "equation summed over all vertices in my"
+    },
+    {
+      "index": 635,
+      "start": 1605.0,
+      "end": 1608.47,
+      "duration": 3.47,
+      "text": "cycle, okay? So, I'm just going to add"
+    },
+    {
+      "index": 636,
+      "start": 1608.48,
+      "end": 1609.43,
+      "duration": 0.95,
+      "text": "su-"
+    },
+    {
+      "index": 637,
+      "start": 1609.44,
+      "end": 1610.35,
+      "duration": 0.91,
+      "text": "uh"
+    },
+    {
+      "index": 638,
+      "start": 1610.36,
+      "end": 1612.91,
+      "duration": 2.55,
+      "text": "summation here of all vertices in my"
+    },
+    {
+      "index": 639,
+      "start": 1612.92,
+      "end": 1614.79,
+      "duration": 1.87,
+      "text": "cycle"
+    },
+    {
+      "index": 640,
+      "start": 1614.8,
+      "end": 1616.27,
+      "duration": 1.47,
+      "text": "of this whole thing."
+    },
+    {
+      "index": 641,
+      "start": 1616.28,
+      "end": 1617.27,
+      "duration": 0.99,
+      "text": "Okay?"
+    },
+    {
+      "index": 642,
+      "start": 1617.28,
+      "end": 1619.35,
+      "duration": 2.07,
+      "text": "I'm going to do that out a little bit"
+    },
+    {
+      "index": 643,
+      "start": 1619.36,
+      "end": 1621.27,
+      "duration": 1.91,
+      "text": "neater, okay?"
+    },
+    {
+      "index": 644,
+      "start": 1621.28,
+      "end": 1623.51,
+      "duration": 2.23,
+      "text": "Summation"
+    },
+    {
+      "index": 645,
+      "start": 1623.52,
+      "end": 1625.63,
+      "duration": 2.11,
+      "text": "of"
+    },
+    {
+      "index": 646,
+      "start": 1625.64,
+      "end": 1626.669,
+      "duration": 1.029,
+      "text": "del-"
+    },
+    {
+      "index": 647,
+      "start": 1626.679,
+      "end": 1629.63,
+      "duration": 2.951,
+      "text": "delta, not D, delta"
+    },
+    {
+      "index": 648,
+      "start": 1629.64,
+      "end": 1634.99,
+      "duration": 5.35,
+      "text": "V S V."
+    },
+    {
+      "index": 649,
+      "start": 1636.43,
+      "end": 1636.44,
+      "duration": 0.01,
+      "text": "I guess I don't need this open"
+    },
+    {
+      "index": 650,
+      "start": 1636.44,
+      "end": 1638.11,
+      "duration": 1.67,
+      "text": "parentheses."
+    },
+    {
+      "index": 651,
+      "start": 1638.12,
+      "end": 1643.23,
+      "duration": 5.11,
+      "text": "Equals or less than or equal to sum of V"
+    },
+    {
+      "index": 652,
+      "start": 1643.24,
+      "end": 1646.63,
+      "duration": 3.39,
+      "text": "in C of delta"
+    },
+    {
+      "index": 653,
+      "start": 1646.64,
+      "end": 1649.71,
+      "duration": 3.07,
+      "text": "V minus one"
+    },
+    {
+      "index": 654,
+      "start": 1649.72,
+      "end": 1653.35,
+      "duration": 3.63,
+      "text": "uh V prime."
+    },
+    {
+      "index": 655,
+      "start": 1658.63,
+      "end": 1658.64,
+      "duration": 0.01,
+      "text": "Okay? And here I'm summing over V in C,"
+    },
+    {
+      "index": 656,
+      "start": 1658.64,
+      "end": 1660.55,
+      "duration": 1.91,
+      "text": "and this is just my notation for it's"
+    },
+    {
+      "index": 657,
+      "start": 1660.56,
+      "end": 1662.31,
+      "duration": 1.75,
+      "text": "the predecessor, right?"
+    },
+    {
+      "index": 658,
+      "start": 1662.32,
+      "end": 1664.31,
+      "duration": 1.99,
+      "text": "And then I'm going to sum"
+    },
+    {
+      "index": 659,
+      "start": 1664.32,
+      "end": 1666.19,
+      "duration": 1.87,
+      "text": "over the weights"
+    },
+    {
+      "index": 660,
+      "start": 1666.2,
+      "end": 1668.71,
+      "duration": 2.51,
+      "text": "in my cycle."
+    },
+    {
+      "index": 661,
+      "start": 1668.72,
+      "end": 1671.63,
+      "duration": 2.91,
+      "text": "V in C, right? These are just some of"
+    },
+    {
+      "index": 662,
+      "start": 1671.64,
+      "end": 1673.59,
+      "duration": 1.95,
+      "text": "the weights in my cycle."
+    },
+    {
+      "index": 663,
+      "start": 1673.6,
+      "end": 1676.79,
+      "duration": 3.19,
+      "text": "Well, what do I know about this cycle?"
+    },
+    {
+      "index": 664,
+      "start": 1676.8,
+      "end": 1678.15,
+      "duration": 1.35,
+      "text": "Right? This is just the weight of C,"
+    },
+    {
+      "index": 665,
+      "start": 1678.16,
+      "end": 1679.35,
+      "duration": 1.19,
+      "text": "right?"
+    },
+    {
+      "index": 666,
+      "start": 1679.36,
+      "end": 1681.669,
+      "duration": 2.309,
+      "text": "Weight of C."
+    },
+    {
+      "index": 667,
+      "start": 1681.679,
+      "end": 1683.71,
+      "duration": 2.031,
+      "text": "That's awful handwriting."
+    },
+    {
+      "index": 668,
+      "start": 1683.72,
+      "end": 1685.31,
+      "duration": 1.59,
+      "text": "C."
+    },
+    {
+      "index": 669,
+      "start": 1685.32,
+      "end": 1686.39,
+      "duration": 1.07,
+      "text": "What do I know about the weight of the"
+    },
+    {
+      "index": 670,
+      "start": 1686.4,
+      "end": 1689.15,
+      "duration": 2.75,
+      "text": "cycle? It's negative, right?"
+    },
+    {
+      "index": 671,
+      "start": 1689.16,
+      "end": 1690.83,
+      "duration": 1.67,
+      "text": "So,"
+    },
+    {
+      "index": 672,
+      "start": 1690.84,
+      "end": 1692.63,
+      "duration": 1.79,
+      "text": "this is less than zero,"
+    },
+    {
+      "index": 673,
+      "start": 1692.64,
+      "end": 1696.47,
+      "duration": 3.83,
+      "text": "which means that if I remove this,"
+    },
+    {
+      "index": 674,
+      "start": 1696.48,
+      "end": 1699.79,
+      "duration": 3.31,
+      "text": "this needs to be a strict equality,"
+    },
+    {
+      "index": 675,
+      "start": 1699.8,
+      "end": 1702.47,
+      "duration": 2.67,
+      "text": "right?"
+    },
+    {
+      "index": 676,
+      "start": 1705.55,
+      "end": 1705.56,
+      "duration": 0.01,
+      "text": "But, if this if the sum of all of these"
+    },
+    {
+      "index": 677,
+      "start": 1705.56,
+      "end": 1707.51,
+      "duration": 1.95,
+      "text": "is less strictly less than the sum of"
+    },
+    {
+      "index": 678,
+      "start": 1707.52,
+      "end": 1709.79,
+      "duration": 2.27,
+      "text": "all these,"
+    },
+    {
+      "index": 679,
+      "start": 1709.8,
+      "end": 1711.75,
+      "duration": 1.95,
+      "text": "we can't have"
+    },
+    {
+      "index": 680,
+      "start": 1711.76,
+      "end": 1715.07,
+      "duration": 3.31,
+      "text": "none of the vertices in my graph"
+    },
+    {
+      "index": 681,
+      "start": 1715.08,
+      "end": 1718.909,
+      "duration": 3.829,
+      "text": "satisfying not satisfying this property,"
+    },
+    {
+      "index": 682,
+      "start": 1718.919,
+      "end": 1721.11,
+      "duration": 2.191,
+      "text": "right?"
+    },
+    {
+      "index": 683,
+      "start": 1721.12,
+      "end": 1725.35,
+      "duration": 4.23,
+      "text": "Right? If all of them are not witnesses,"
+    },
+    {
+      "index": 684,
+      "start": 1725.36,
+      "end": 1727.87,
+      "duration": 2.51,
+      "text": "then this thing"
+    },
+    {
+      "index": 685,
+      "start": 1727.88,
+      "end": 1729.99,
+      "duration": 2.11,
+      "text": "is bigger than this thing at least as"
+    },
+    {
+      "index": 686,
+      "start": 1730.0,
+      "end": 1732.87,
+      "duration": 2.87,
+      "text": "big as this thing for every vertex in my"
+    },
+    {
+      "index": 687,
+      "start": 1732.88,
+      "end": 1735.51,
+      "duration": 2.63,
+      "text": "cycle, which is a contradiction,"
+    },
+    {
+      "index": 688,
+      "start": 1735.52,
+      "end": 1739.83,
+      "duration": 4.31,
+      "text": "right? So, the claim holds if"
+    },
+    {
+      "index": 689,
+      "start": 1739.84,
+      "end": 1742.83,
+      "duration": 2.99,
+      "text": "we have a negative infinite shortest"
+    },
+    {
+      "index": 690,
+      "start": 1742.84,
+      "end": 1744.39,
+      "duration": 1.55,
+      "text": "path distance,"
+    },
+    {
+      "index": 691,
+      "start": 1744.4,
+      "end": 1746.19,
+      "duration": 1.79,
+      "text": "then V is reachable from a witness. So,"
+    },
+    {
+      "index": 692,
+      "start": 1746.2,
+      "end": 1747.63,
+      "duration": 1.43,
+      "text": "it suffices for us to find all the"
+    },
+    {
+      "index": 693,
+      "start": 1747.64,
+      "end": 1749.11,
+      "duration": 1.47,
+      "text": "witnesses,"
+    },
+    {
+      "index": 694,
+      "start": 1749.12,
+      "end": 1751.43,
+      "duration": 2.31,
+      "text": "find all the vertices reachable from the"
+    },
+    {
+      "index": 695,
+      "start": 1751.44,
+      "end": 1752.87,
+      "duration": 1.43,
+      "text": "witnesses,"
+    },
+    {
+      "index": 696,
+      "start": 1752.88,
+      "end": 1756.47,
+      "duration": 3.59,
+      "text": "and then mark them as minus infinity."
+    },
+    {
+      "index": 697,
+      "start": 1756.48,
+      "end": 1757.909,
+      "duration": 1.429,
+      "text": "Does that make sense?"
+    },
+    {
+      "index": 698,
+      "start": 1757.919,
+      "end": 1759.55,
+      "duration": 1.631,
+      "text": "Okay."
+    },
+    {
+      "index": 699,
+      "start": 1759.56,
+      "end": 1760.83,
+      "duration": 1.27,
+      "text": "So,"
+    },
+    {
+      "index": 700,
+      "start": 1760.84,
+      "end": 1763.75,
+      "duration": 2.91,
+      "text": "now we finally are able to get to our"
+    },
+    {
+      "index": 701,
+      "start": 1763.76,
+      "end": 1765.59,
+      "duration": 1.83,
+      "text": "algorithm."
+    },
+    {
+      "index": 702,
+      "start": 1765.6,
+      "end": 1771.55,
+      "duration": 5.95,
+      "text": "All right. Bellman-Ford."
+    },
+    {
+      "index": 703,
+      "start": 1773.23,
+      "end": 1773.24,
+      "duration": 0.01,
+      "text": "And"
+    },
+    {
+      "index": 704,
+      "start": 1773.24,
+      "end": 1774.95,
+      "duration": 1.71,
+      "text": "what I'm going to show you today is a"
+    },
+    {
+      "index": 705,
+      "start": 1774.96,
+      "end": 1776.87,
+      "duration": 1.91,
+      "text": "little different than what is normally"
+    },
+    {
+      "index": 706,
+      "start": 1776.88,
+      "end": 1778.909,
+      "duration": 2.029,
+      "text": "presented as Bellman-Ford."
+    },
+    {
+      "index": 707,
+      "start": 1778.919,
+      "end": 1781.909,
+      "duration": 2.99,
+      "text": "The original Bellman-Ford algorithm"
+    },
+    {
+      "index": 708,
+      "start": 1781.919,
+      "end": 1784.31,
+      "duration": 2.391,
+      "text": "does something a little different,"
+    },
+    {
+      "index": 709,
+      "start": 1784.32,
+      "end": 1785.55,
+      "duration": 1.23,
+      "text": "and because it does something a little"
+    },
+    {
+      "index": 710,
+      "start": 1785.56,
+      "end": 1786.75,
+      "duration": 1.19,
+      "text": "different, which we'll talk about at the"
+    },
+    {
+      "index": 711,
+      "start": 1786.76,
+      "end": 1788.11,
+      "duration": 1.35,
+      "text": "end."
+    },
+    {
+      "index": 712,
+      "start": 1788.12,
+      "end": 1790.19,
+      "duration": 2.07,
+      "text": "It's a little hairier to analyze. I'm"
+    },
+    {
+      "index": 713,
+      "start": 1790.2,
+      "end": 1791.67,
+      "duration": 1.47,
+      "text": "going to"
+    },
+    {
+      "index": 714,
+      "start": 1791.68,
+      "end": 1794.47,
+      "duration": 2.79,
+      "text": "show you a modification that is a little"
+    },
+    {
+      "index": 715,
+      "start": 1794.48,
+      "end": 1796.95,
+      "duration": 2.47,
+      "text": "easier to analyze and has this nice"
+    },
+    {
+      "index": 716,
+      "start": 1796.96,
+      "end": 1798.23,
+      "duration": 1.27,
+      "text": "property"
+    },
+    {
+      "index": 717,
+      "start": 1798.24,
+      "end": 1799.79,
+      "duration": 1.55,
+      "text": "that we're going to be able to use the"
+    },
+    {
+      "index": 718,
+      "start": 1799.8,
+      "end": 1801.11,
+      "duration": 1.31,
+      "text": "algorithm"
+    },
+    {
+      "index": 719,
+      "start": 1801.12,
+      "end": 1803.75,
+      "duration": 2.63,
+      "text": "to give us a negative weight cycle if it"
+    },
+    {
+      "index": 720,
+      "start": 1803.76,
+      "end": 1805.83,
+      "duration": 2.07,
+      "text": "exists."
+    },
+    {
+      "index": 721,
+      "start": 1805.84,
+      "end": 1806.91,
+      "duration": 1.07,
+      "text": "Okay?"
+    },
+    {
+      "index": 722,
+      "start": 1806.92,
+      "end": 1807.87,
+      "duration": 0.95,
+      "text": "So,"
+    },
+    {
+      "index": 723,
+      "start": 1807.88,
+      "end": 1809.67,
+      "duration": 1.79,
+      "text": "we're going to say this is a maybe a"
+    },
+    {
+      "index": 724,
+      "start": 1809.68,
+      "end": 1811.99,
+      "duration": 2.31,
+      "text": "modified Bellman-Ford."
+    },
+    {
+      "index": 725,
+      "start": 1812.0,
+      "end": 1817.35,
+      "duration": 5.35,
+      "text": "And the idea here is to"
+    },
+    {
+      "index": 726,
+      "start": 1820.71,
+      "end": 1820.72,
+      "duration": 0.01,
+      "text": "make a vertex associated make many"
+    },
+    {
+      "index": 727,
+      "start": 1820.72,
+      "end": 1822.79,
+      "duration": 2.07,
+      "text": "versions of a vertex."
+    },
+    {
+      "index": 728,
+      "start": 1822.8,
+      "end": 1823.67,
+      "duration": 0.87,
+      "text": "Okay?"
+    },
+    {
+      "index": 729,
+      "start": 1823.68,
+      "end": 1826.27,
+      "duration": 2.59,
+      "text": "And I want this version of the vertex"
+    },
+    {
+      "index": 730,
+      "start": 1826.28,
+      "end": 1828.39,
+      "duration": 2.11,
+      "text": "to correspond to whether I came here"
+    },
+    {
+      "index": 731,
+      "start": 1828.4,
+      "end": 1829.75,
+      "duration": 1.35,
+      "text": "using"
+    },
+    {
+      "index": 732,
+      "start": 1829.76,
+      "end": 1833.59,
+      "duration": 3.83,
+      "text": "zero edges, one edge, two edges, three"
+    },
+    {
+      "index": 733,
+      "start": 1833.6,
+      "end": 1835.47,
+      "duration": 1.87,
+      "text": "edges. I have a different vertex version"
+    },
+    {
+      "index": 734,
+      "start": 1835.48,
+      "end": 1838.63,
+      "duration": 3.15,
+      "text": "of the vertex for each one of these"
+    },
+    {
+      "index": 735,
+      "start": 1838.64,
+      "end": 1840.87,
+      "duration": 2.23,
+      "text": "uh for for"
+    },
+    {
+      "index": 736,
+      "start": 1840.88,
+      "end": 1844.71,
+      "duration": 3.83,
+      "text": "uh uh a path going through at most a"
+    },
+    {
+      "index": 737,
+      "start": 1844.72,
+      "end": 1847.07,
+      "duration": 2.35,
+      "text": "certain number of edges. Okay? So, this"
+    },
+    {
+      "index": 738,
+      "start": 1847.08,
+      "end": 1851.07,
+      "duration": 3.99,
+      "text": "is an idea called graph duplication."
+    },
+    {
+      "index": 739,
+      "start": 1851.08,
+      "end": 1853.63,
+      "duration": 2.55,
+      "text": "Idea."
+    },
+    {
+      "index": 740,
+      "start": 1853.64,
+      "end": 1856.31,
+      "duration": 2.67,
+      "text": "Graph"
+    },
+    {
+      "index": 741,
+      "start": 1856.32,
+      "end": 1858.83,
+      "duration": 2.51,
+      "text": "duplication."
+    },
+    {
+      "index": 742,
+      "start": 1858.84,
+      "end": 1861.55,
+      "duration": 2.71,
+      "text": "And this is a very common technique for"
+    },
+    {
+      "index": 743,
+      "start": 1861.56,
+      "end": 1864.83,
+      "duration": 3.27,
+      "text": "solving graph-related problems"
+    },
+    {
+      "index": 744,
+      "start": 1864.84,
+      "end": 1866.67,
+      "duration": 1.83,
+      "text": "because essentially what I get to do is"
+    },
+    {
+      "index": 745,
+      "start": 1866.68,
+      "end": 1869.39,
+      "duration": 2.71,
+      "text": "I get to store information, right? It's"
+    },
+    {
+      "index": 746,
+      "start": 1869.4,
+      "end": 1872.03,
+      "duration": 2.63,
+      "text": "I'm I'm I'm I'm"
+    },
+    {
+      "index": 747,
+      "start": 1872.04,
+      "end": 1874.19,
+      "duration": 2.15,
+      "text": "if I'm having different versions of a"
+    },
+    {
+      "index": 748,
+      "start": 1874.2,
+      "end": 1875.47,
+      "duration": 1.27,
+      "text": "vertex,"
+    },
+    {
+      "index": 749,
+      "start": 1875.48,
+      "end": 1877.51,
+      "duration": 2.03,
+      "text": "I can have that vertex"
+    },
+    {
+      "index": 750,
+      "start": 1877.52,
+      "end": 1879.99,
+      "duration": 2.47,
+      "text": "correspond to reaching that vertex in a"
+    },
+    {
+      "index": 751,
+      "start": 1880.0,
+      "end": 1882.31,
+      "duration": 2.31,
+      "text": "different state. Okay?"
+    },
+    {
+      "index": 752,
+      "start": 1882.32,
+      "end": 1884.15,
+      "duration": 1.83,
+      "text": "So, that's what we're going to do here."
+    },
+    {
+      "index": 753,
+      "start": 1884.16,
+      "end": 1885.79,
+      "duration": 1.63,
+      "text": "The idea here"
+    },
+    {
+      "index": 754,
+      "start": 1885.8,
+      "end": 1890.59,
+      "duration": 4.79,
+      "text": "is make"
+    },
+    {
+      "index": 755,
+      "start": 1892.67,
+      "end": 1892.68,
+      "duration": 0.01,
+      "text": "V"
+    },
+    {
+      "index": 756,
+      "start": 1892.68,
+      "end": 1895.99,
+      "duration": 3.31,
+      "text": "plus one levels."
+    },
+    {
+      "index": 757,
+      "start": 1896.0,
+      "end": 1897.31,
+      "duration": 1.31,
+      "text": "Basically,"
+    },
+    {
+      "index": 758,
+      "start": 1897.32,
+      "end": 1903.99,
+      "duration": 6.67,
+      "text": "duplicate vertices in our graph"
+    },
+    {
+      "index": 759,
+      "start": 1905.35,
+      "end": 1905.36,
+      "duration": 0.01,
+      "text": "where"
+    },
+    {
+      "index": 760,
+      "start": 1905.36,
+      "end": 1908.27,
+      "duration": 2.91,
+      "text": "vertex VK"
+    },
+    {
+      "index": 761,
+      "start": 1908.28,
+      "end": 1911.11,
+      "duration": 2.83,
+      "text": "in level"
+    },
+    {
+      "index": 762,
+      "start": 1911.12,
+      "end": 1915.07,
+      "duration": 3.95,
+      "text": "K"
+    },
+    {
+      "index": 763,
+      "start": 1925.39,
+      "end": 1925.4,
+      "duration": 0.01,
+      "text": "vertex"
+    },
+    {
+      "index": 764,
+      "start": 1925.4,
+      "end": 1927.19,
+      "duration": 1.79,
+      "text": "V"
+    },
+    {
+      "index": 765,
+      "start": 1927.2,
+      "end": 1929.79,
+      "duration": 2.59,
+      "text": "using"
+    },
+    {
+      "index": 766,
+      "start": 1929.8,
+      "end": 1933.07,
+      "duration": 3.27,
+      "text": "at most K edges."
+    },
+    {
+      "index": 767,
+      "start": 1933.08,
+      "end": 1935.51,
+      "duration": 2.43,
+      "text": "Okay? So, this definition"
+    },
+    {
+      "index": 768,
+      "start": 1935.52,
+      "end": 1937.03,
+      "duration": 1.51,
+      "text": "seems similar to what we're doing up"
+    },
+    {
+      "index": 769,
+      "start": 1937.04,
+      "end": 1939.79,
+      "duration": 2.75,
+      "text": "here, right?"
+    },
+    {
+      "index": 770,
+      "start": 1939.8,
+      "end": 1942.23,
+      "duration": 2.43,
+      "text": "If if we have vertices that have this"
+    },
+    {
+      "index": 771,
+      "start": 1942.24,
+      "end": 1943.669,
+      "duration": 1.429,
+      "text": "property,"
+    },
+    {
+      "index": 772,
+      "start": 1943.679,
+      "end": 1945.83,
+      "duration": 2.151,
+      "text": "then their shortest paths in this new"
+    },
+    {
+      "index": 773,
+      "start": 1945.84,
+      "end": 1949.47,
+      "duration": 3.63,
+      "text": "graph might correspond to these K edge"
+    },
+    {
+      "index": 774,
+      "start": 1949.48,
+      "end": 1951.55,
+      "duration": 2.07,
+      "text": "distances. And really what the name of"
+    },
+    {
+      "index": 775,
+      "start": 1951.56,
+      "end": 1953.55,
+      "duration": 1.99,
+      "text": "the game here is to compute these two"
+    },
+    {
+      "index": 776,
+      "start": 1953.56,
+      "end": 1956.39,
+      "duration": 2.83,
+      "text": "for every vertex because then we can"
+    },
+    {
+      "index": 777,
+      "start": 1956.4,
+      "end": 1959.35,
+      "duration": 2.95,
+      "text": "com- then if uh"
+    },
+    {
+      "index": 778,
+      "start": 1959.36,
+      "end": 1962.19,
+      "duration": 2.83,
+      "text": "D is finite, delta is finite,"
+    },
+    {
+      "index": 779,
+      "start": 1962.2,
+      "end": 1964.07,
+      "duration": 1.87,
+      "text": "then this guy will be the length of our"
+    },
+    {
+      "index": 780,
+      "start": 1964.08,
+      "end": 1967.15,
+      "duration": 3.07,
+      "text": "shortest path. And if they're different,"
+    },
+    {
+      "index": 781,
+      "start": 1967.16,
+      "end": 1968.95,
+      "duration": 1.79,
+      "text": "that'll be a witness and we can explore"
+    },
+    {
+      "index": 782,
+      "start": 1968.96,
+      "end": 1971.75,
+      "duration": 2.79,
+      "text": "from it. Okay?"
+    },
+    {
+      "index": 783,
+      "start": 1971.76,
+      "end": 1974.87,
+      "duration": 3.11,
+      "text": "So,"
+    },
+    {
+      "index": 784,
+      "start": 1977.27,
+      "end": 1977.28,
+      "duration": 0.01,
+      "text": "and if"
+    },
+    {
+      "index": 785,
+      "start": 1977.28,
+      "end": 1978.75,
+      "duration": 1.47,
+      "text": "uh we"
+    },
+    {
+      "index": 786,
+      "start": 1978.76,
+      "end": 1982.39,
+      "duration": 3.63,
+      "text": "connect"
+    },
+    {
+      "index": 787,
+      "start": 1989.11,
+      "end": 1989.12,
+      "duration": 0.01,
+      "text": "uh"
+    },
+    {
+      "index": 788,
+      "start": 1989.12,
+      "end": 1991.99,
+      "duration": 2.87,
+      "text": "from"
+    },
+    {
+      "index": 789,
+      "start": 1992.0,
+      "end": 1994.63,
+      "duration": 2.63,
+      "text": "one level"
+    },
+    {
+      "index": 790,
+      "start": 1994.64,
+      "end": 1998.03,
+      "duration": 3.39,
+      "text": "to only"
+    },
+    {
+      "index": 791,
+      "start": 1998.04,
+      "end": 2002.39,
+      "duration": 4.35,
+      "text": "higher levels,"
+    },
+    {
+      "index": 792,
+      "start": 2006.07,
+      "end": 2006.08,
+      "duration": 0.01,
+      "text": "basically levels with a higher K,"
+    },
+    {
+      "index": 793,
+      "start": 2006.08,
+      "end": 2014.39,
+      "duration": 8.31,
+      "text": "then this graph is going to be a DAG."
+    },
+    {
+      "index": 794,
+      "start": 2015.75,
+      "end": 2015.76,
+      "duration": 0.01,
+      "text": "OH,"
+    },
+    {
+      "index": 795,
+      "start": 2015.76,
+      "end": 2017.43,
+      "duration": 1.67,
+      "text": "THAT'S COOL."
+    },
+    {
+      "index": 796,
+      "start": 2017.44,
+      "end": 2020.47,
+      "duration": 3.03,
+      "text": "WHY IS THAT COOL? Because we saw how to"
+    },
+    {
+      "index": 797,
+      "start": 2020.48,
+      "end": 2022.63,
+      "duration": 2.15,
+      "text": "solve single-source shortest paths in a"
+    },
+    {
+      "index": 798,
+      "start": 2022.64,
+      "end": 2024.91,
+      "duration": 2.27,
+      "text": "DAG in linear time. Now, this graph that"
+    },
+    {
+      "index": 799,
+      "start": 2024.92,
+      "end": 2026.47,
+      "duration": 1.55,
+      "text": "we're going to construct is going to"
+    },
+    {
+      "index": 800,
+      "start": 2026.48,
+      "end": 2029.03,
+      "duration": 2.55,
+      "text": "have V plus one levels,"
+    },
+    {
+      "index": 801,
+      "start": 2029.04,
+      "end": 2031.79,
+      "duration": 2.75,
+      "text": "so could have"
+    },
+    {
+      "index": 802,
+      "start": 2031.8,
+      "end": 2035.39,
+      "duration": 3.59,
+      "text": "our our graph kind of explodes V times,"
+    },
+    {
+      "index": 803,
+      "start": 2035.4,
+      "end": 2037.95,
+      "duration": 2.55,
+      "text": "right?"
+    },
+    {
+      "index": 804,
+      "start": 2039.23,
+      "end": 2039.24,
+      "duration": 0.01,
+      "text": "We're going to do that in a second. I'm"
+    },
+    {
+      "index": 805,
+      "start": 2039.24,
+      "end": 2040.99,
+      "duration": 1.75,
+      "text": "going to be more precise with what I"
+    },
+    {
+      "index": 806,
+      "start": 2041.0,
+      "end": 2042.39,
+      "duration": 1.39,
+      "text": "mean there."
+    },
+    {
+      "index": 807,
+      "start": 2042.4,
+      "end": 2045.19,
+      "duration": 2.79,
+      "text": "But if we're multiplying our graph"
+    },
+    {
+      "index": 808,
+      "start": 2045.2,
+      "end": 2047.71,
+      "duration": 2.51,
+      "text": "V V plus one times,"
+    },
+    {
+      "index": 809,
+      "start": 2047.72,
+      "end": 2049.55,
+      "duration": 1.83,
+      "text": "then the size of our graph is now V"
+    },
+    {
+      "index": 810,
+      "start": 2049.56,
+      "end": 2053.389,
+      "duration": 3.829,
+      "text": "times larger. That doesn't That's not so"
+    },
+    {
+      "index": 811,
+      "start": 2053.399,
+      "end": 2055.71,
+      "duration": 2.311,
+      "text": "hard to believe, but if we made our"
+    },
+    {
+      "index": 812,
+      "start": 2055.72,
+      "end": 2057.95,
+      "duration": 2.23,
+      "text": "graph V times larger"
+    },
+    {
+      "index": 813,
+      "start": 2057.96,
+      "end": 2060.59,
+      "duration": 2.63,
+      "text": "and we ran a shortest path algorithm in"
+    },
+    {
+      "index": 814,
+      "start": 2060.6,
+      "end": 2064.11,
+      "duration": 3.51,
+      "text": "linear time with respect to that graph,"
+    },
+    {
+      "index": 815,
+      "start": 2064.12,
+      "end": 2067.909,
+      "duration": 3.789,
+      "text": "then that graph has something like size"
+    },
+    {
+      "index": 816,
+      "start": 2067.919,
+      "end": 2073.27,
+      "duration": 5.351,
+      "text": "V times V plus E"
+    },
+    {
+      "index": 817,
+      "start": 2073.28,
+      "end": 2077.75,
+      "duration": 4.47,
+      "text": "size."
+    },
+    {
+      "index": 818,
+      "start": 2085.31,
+      "end": 2085.32,
+      "duration": 0.01,
+      "text": "That's this running time, right?"
+    },
+    {
+      "index": 819,
+      "start": 2085.32,
+      "end": 2086.669,
+      "duration": 1.349,
+      "text": "So, if we can find an algorithm that"
+    },
+    {
+      "index": 820,
+      "start": 2086.679,
+      "end": 2088.59,
+      "duration": 1.911,
+      "text": "runs in that running time, we can get"
+    },
+    {
+      "index": 821,
+      "start": 2088.6,
+      "end": 2091.389,
+      "duration": 2.789,
+      "text": "down to V times E. Okay? So, let's try"
+    },
+    {
+      "index": 822,
+      "start": 2091.399,
+      "end": 2097.55,
+      "duration": 6.151,
+      "text": "to do that."
+    },
+    {
+      "index": 823,
+      "start": 2099.39,
+      "end": 2099.4,
+      "duration": 0.01,
+      "text": "Here's the transformation I'm going to"
+    },
+    {
+      "index": 824,
+      "start": 2099.4,
+      "end": 2100.47,
+      "duration": 1.07,
+      "text": "show you. I'm going to show you first"
+    },
+    {
+      "index": 825,
+      "start": 2100.48,
+      "end": 2102.07,
+      "duration": 1.59,
+      "text": "with an example."
+    },
+    {
+      "index": 826,
+      "start": 2102.08,
+      "end": 2104.39,
+      "duration": 2.31,
+      "text": "Okay? Here's an example"
+    },
+    {
+      "index": 827,
+      "start": 2104.4,
+      "end": 2106.39,
+      "duration": 1.99,
+      "text": "of a directed"
+    },
+    {
+      "index": 828,
+      "start": 2106.4,
+      "end": 2107.59,
+      "duration": 1.19,
+      "text": "graph"
+    },
+    {
+      "index": 829,
+      "start": 2107.6,
+      "end": 2109.27,
+      "duration": 1.67,
+      "text": "that does contain a negative weight"
+    },
+    {
+      "index": 830,
+      "start": 2109.28,
+      "end": 2116.79,
+      "duration": 7.51,
+      "text": "cycle. Okay? Can anyone find it for me?"
+    },
+    {
+      "index": 831,
+      "start": 2120.87,
+      "end": 2120.88,
+      "duration": 0.01,
+      "text": "B C D, right? Has weight minus four plus"
+    },
+    {
+      "index": 832,
+      "start": 2120.88,
+      "end": 2124.95,
+      "duration": 4.07,
+      "text": "three minus one. It has a minus two"
+    },
+    {
+      "index": 833,
+      "start": 2124.96,
+      "end": 2126.87,
+      "duration": 1.91,
+      "text": "total weight, right? So, that's a"
+    },
+    {
+      "index": 834,
+      "start": 2126.88,
+      "end": 2129.03,
+      "duration": 2.15,
+      "text": "negative weight cycle. Okay? So, if I"
+    },
+    {
+      "index": 835,
+      "start": 2129.04,
+      "end": 2132.79,
+      "duration": 3.75,
+      "text": "were to take shortest paths from A,"
+    },
+    {
+      "index": 836,
+      "start": 2132.8,
+      "end": 2133.83,
+      "duration": 1.03,
+      "text": "right?"
+    },
+    {
+      "index": 837,
+      "start": 2133.84,
+      "end": 2135.63,
+      "duration": 1.79,
+      "text": "I will want to say"
+    },
+    {
+      "index": 838,
+      "start": 2135.64,
+      "end": 2137.67,
+      "duration": 2.03,
+      "text": "at the end of my algorithm, this better"
+    },
+    {
+      "index": 839,
+      "start": 2137.68,
+      "end": 2139.27,
+      "duration": 1.59,
+      "text": "be zero."
+    },
+    {
+      "index": 840,
+      "start": 2139.28,
+      "end": 2141.19,
+      "duration": 1.91,
+      "text": "And all of these better be minus"
+    },
+    {
+      "index": 841,
+      "start": 2141.2,
+      "end": 2142.27,
+      "duration": 1.07,
+      "text": "infinity,"
+    },
+    {
+      "index": 842,
+      "start": 2142.28,
+      "end": 2144.95,
+      "duration": 2.67,
+      "text": "right? So, that's what I want in my"
+    },
+    {
+      "index": 843,
+      "start": 2144.96,
+      "end": 2147.11,
+      "duration": 2.15,
+      "text": "in my algorithm."
+    },
+    {
+      "index": 844,
+      "start": 2147.12,
+      "end": 2148.75,
+      "duration": 1.63,
+      "text": "So, what's my algorithm going to be? I'm"
+    },
+    {
+      "index": 845,
+      "start": 2148.76,
+      "end": 2150.27,
+      "duration": 1.51,
+      "text": "going to make"
+    },
+    {
+      "index": 846,
+      "start": 2150.28,
+      "end": 2153.349,
+      "duration": 3.069,
+      "text": "V plus one"
+    },
+    {
+      "index": 847,
+      "start": 2153.359,
+      "end": 2155.51,
+      "duration": 2.151,
+      "text": "copies of this graph and I'm going to"
+    },
+    {
+      "index": 848,
+      "start": 2155.52,
+      "end": 2157.59,
+      "duration": 2.07,
+      "text": "kind of stretch it out, right? Okay. So,"
+    },
+    {
+      "index": 849,
+      "start": 2157.6,
+      "end": 2159.83,
+      "duration": 2.23,
+      "text": "here I have V"
+    },
+    {
+      "index": 850,
+      "start": 2159.84,
+      "end": 2163.39,
+      "duration": 3.55,
+      "text": "0 1 2 3 4. There are four vertices in my"
+    },
+    {
+      "index": 851,
+      "start": 2163.4,
+      "end": 2167.31,
+      "duration": 3.91,
+      "text": "graph. So, this is 1 2 3 4 5"
+    },
+    {
+      "index": 852,
+      "start": 2167.32,
+      "end": 2169.71,
+      "duration": 2.39,
+      "text": "copies of my graph. I have a"
+    },
+    {
+      "index": 853,
+      "start": 2169.72,
+      "end": 2172.83,
+      "duration": 3.11,
+      "text": "version of vertex A for each one of"
+    },
+    {
+      "index": 854,
+      "start": 2172.84,
+      "end": 2175.15,
+      "duration": 2.31,
+      "text": "those copies, a version of vertex B for"
+    },
+    {
+      "index": 855,
+      "start": 2175.16,
+      "end": 2177.83,
+      "duration": 2.67,
+      "text": "each of those copies, C and D, etc."
+    },
+    {
+      "index": 856,
+      "start": 2177.84,
+      "end": 2179.55,
+      "duration": 1.71,
+      "text": "Okay? So, I have this nice grid of"
+    },
+    {
+      "index": 857,
+      "start": 2179.56,
+      "end": 2181.67,
+      "duration": 2.11,
+      "text": "vertices."
+    },
+    {
+      "index": 858,
+      "start": 2181.68,
+      "end": 2184.27,
+      "duration": 2.59,
+      "text": "And I'm not going to put any edges"
+    },
+    {
+      "index": 859,
+      "start": 2184.28,
+      "end": 2185.87,
+      "duration": 1.59,
+      "text": "within a layer,"
+    },
+    {
+      "index": 860,
+      "start": 2185.88,
+      "end": 2187.59,
+      "duration": 1.71,
+      "text": "within a level,"
+    },
+    {
+      "index": 861,
+      "start": 2187.6,
+      "end": 2189.15,
+      "duration": 1.55,
+      "text": "right? Because then I mean, this graph"
+    },
+    {
+      "index": 862,
+      "start": 2189.16,
+      "end": 2191.19,
+      "duration": 2.03,
+      "text": "has cycles, right? And I don't want"
+    },
+    {
+      "index": 863,
+      "start": 2191.2,
+      "end": 2193.19,
+      "duration": 1.99,
+      "text": "cycles in my graph, right? What I'm"
+    },
+    {
+      "index": 864,
+      "start": 2193.2,
+      "end": 2196.31,
+      "duration": 3.11,
+      "text": "going to do instead is for every edge in"
+    },
+    {
+      "index": 865,
+      "start": 2196.32,
+      "end": 2198.31,
+      "duration": 1.99,
+      "text": "my original graph, for example, the edge"
+    },
+    {
+      "index": 866,
+      "start": 2198.32,
+      "end": 2200.31,
+      "duration": 1.99,
+      "text": "from A to B,"
+    },
+    {
+      "index": 867,
+      "start": 2200.32,
+      "end": 2202.349,
+      "duration": 2.029,
+      "text": "I'm going to connect it to the the B in"
+    },
+    {
+      "index": 868,
+      "start": 2202.359,
+      "end": 2205.67,
+      "duration": 3.311,
+      "text": "the next level, right? So, A0"
+    },
+    {
+      "index": 869,
+      "start": 2205.68,
+      "end": 2208.19,
+      "duration": 2.51,
+      "text": "is connected to B1"
+    },
+    {
+      "index": 870,
+      "start": 2208.2,
+      "end": 2210.03,
+      "duration": 1.83,
+      "text": "with an edge weight of minus five, just"
+    },
+    {
+      "index": 871,
+      "start": 2210.04,
+      "end": 2211.67,
+      "duration": 1.63,
+      "text": "like in the original."
+    },
+    {
+      "index": 872,
+      "start": 2211.68,
+      "end": 2212.83,
+      "duration": 1.15,
+      "text": "Okay? And I'm going to do that for every"
+    },
+    {
+      "index": 873,
+      "start": 2212.84,
+      "end": 2214.83,
+      "duration": 1.99,
+      "text": "edge in my graph and I repeat that down"
+    },
+    {
+      "index": 874,
+      "start": 2214.84,
+      "end": 2216.23,
+      "duration": 1.39,
+      "text": "all the way."
+    },
+    {
+      "index": 875,
+      "start": 2216.24,
+      "end": 2218.07,
+      "duration": 1.83,
+      "text": "Okay?"
+    },
+    {
+      "index": 876,
+      "start": 2218.08,
+      "end": 2219.63,
+      "duration": 1.55,
+      "text": "In addition,"
+    },
+    {
+      "index": 877,
+      "start": 2219.64,
+      "end": 2223.07,
+      "duration": 3.43,
+      "text": "I'm going to add a zero weight edge from"
+    },
+    {
+      "index": 878,
+      "start": 2223.08,
+      "end": 2227.23,
+      "duration": 4.15,
+      "text": "A0 to A1 or from every vertex all the"
+    },
+    {
+      "index": 879,
+      "start": 2227.24,
+      "end": 2229.31,
+      "duration": 2.07,
+      "text": "way down the line. These are all zero"
+    },
+    {
+      "index": 880,
+      "start": 2229.32,
+      "end": 2231.79,
+      "duration": 2.47,
+      "text": "weight edges corresponding to I'm not"
+    },
+    {
+      "index": 881,
+      "start": 2231.8,
+      "end": 2233.67,
+      "duration": 1.87,
+      "text": "going to traverse an edge."
+    },
+    {
+      "index": 882,
+      "start": 2233.68,
+      "end": 2236.27,
+      "duration": 2.59,
+      "text": "I'm just going to stay at this vertex."
+    },
+    {
+      "index": 883,
+      "start": 2236.28,
+      "end": 2237.31,
+      "duration": 1.03,
+      "text": "Okay?"
+    },
+    {
+      "index": 884,
+      "start": 2237.32,
+      "end": 2238.95,
+      "duration": 1.63,
+      "text": "That's going to allow us to simulate"
+    },
+    {
+      "index": 885,
+      "start": 2238.96,
+      "end": 2243.03,
+      "duration": 4.07,
+      "text": "this at most K edges condition. Now, if"
+    },
+    {
+      "index": 886,
+      "start": 2243.04,
+      "end": 2245.83,
+      "duration": 2.79,
+      "text": "you take a look at paths in this graph"
+    },
+    {
+      "index": 887,
+      "start": 2245.84,
+      "end": 2251.51,
+      "duration": 5.67,
+      "text": "from A0, our starting vertex,"
+    },
+    {
+      "index": 888,
+      "start": 2253.95,
+      "end": 2253.96,
+      "duration": 0.01,
+      "text": "clearly none of the other vertices are"
+    },
+    {
+      "index": 889,
+      "start": 2253.96,
+      "end": 2256.95,
+      "duration": 2.99,
+      "text": "in that level are reachable"
+    },
+    {
+      "index": 890,
+      "start": 2256.96,
+      "end": 2260.15,
+      "duration": 3.19,
+      "text": "from A0, right? Just as we want, right?"
+    },
+    {
+      "index": 891,
+      "start": 2260.16,
+      "end": 2263.19,
+      "duration": 3.03,
+      "text": "Because the shortest path distance"
+    },
+    {
+      "index": 892,
+      "start": 2263.2,
+      "end": 2265.15,
+      "duration": 1.95,
+      "text": "to any of these vertices using at most"
+    },
+    {
+      "index": 893,
+      "start": 2265.16,
+      "end": 2267.03,
+      "duration": 1.87,
+      "text": "zero edges"
+    },
+    {
+      "index": 894,
+      "start": 2267.04,
+      "end": 2268.91,
+      "duration": 1.87,
+      "text": "should be infinite, right? I can't get"
+    },
+    {
+      "index": 895,
+      "start": 2268.92,
+      "end": 2270.83,
+      "duration": 1.91,
+      "text": "there in zero edges."
+    },
+    {
+      "index": 896,
+      "start": 2270.84,
+      "end": 2273.67,
+      "duration": 2.83,
+      "text": "Okay?"
+    },
+    {
+      "index": 897,
+      "start": 2277.79,
+      "end": 2277.8,
+      "duration": 0.01,
+      "text": "But then any path in this graph using"
+    },
+    {
+      "index": 898,
+      "start": 2277.8,
+      "end": 2279.51,
+      "duration": 1.71,
+      "text": "at most"
+    },
+    {
+      "index": 899,
+      "start": 2279.52,
+      "end": 2281.07,
+      "duration": 1.55,
+      "text": "uh"
+    },
+    {
+      "index": 900,
+      "start": 2281.08,
+      "end": 2283.87,
+      "duration": 2.79,
+      "text": "uh K edges"
+    },
+    {
+      "index": 901,
+      "start": 2283.88,
+      "end": 2287.15,
+      "duration": 3.27,
+      "text": "is going to correspond to a path from"
+    },
+    {
+      "index": 902,
+      "start": 2287.16,
+      "end": 2289.47,
+      "duration": 2.31,
+      "text": "zero A0"
+    },
+    {
+      "index": 903,
+      "start": 2289.48,
+      "end": 2291.83,
+      "duration": 2.35,
+      "text": "to a vertex in that level,"
+    },
+    {
+      "index": 904,
+      "start": 2291.84,
+      "end": 2293.23,
+      "duration": 1.39,
+      "text": "the corresponding level. So, for"
+    },
+    {
+      "index": 905,
+      "start": 2293.24,
+      "end": 2294.63,
+      "duration": 1.39,
+      "text": "example,"
+    },
+    {
+      "index": 906,
+      "start": 2294.64,
+      "end": 2296.349,
+      "duration": 1.709,
+      "text": "if I had a"
+    },
+    {
+      "index": 907,
+      "start": 2296.359,
+      "end": 2298.83,
+      "duration": 2.471,
+      "text": "uh if I was looking for paths"
+    },
+    {
+      "index": 908,
+      "start": 2298.84,
+      "end": 2300.63,
+      "duration": 1.79,
+      "text": "to B,"
+    },
+    {
+      "index": 909,
+      "start": 2300.64,
+      "end": 2305.99,
+      "duration": 5.35,
+      "text": "right?"
+    },
+    {
+      "index": 910,
+      "start": 2309.19,
+      "end": 2309.2,
+      "duration": 0.01,
+      "text": "Using at most three edges,"
+    },
+    {
+      "index": 911,
+      "start": 2309.2,
+      "end": 2312.27,
+      "duration": 3.07,
+      "text": "right?"
+    },
+    {
+      "index": 912,
+      "start": 2314.63,
+      "end": 2314.64,
+      "duration": 0.01,
+      "text": "Any path a"
+    },
+    {
+      "index": 913,
+      "start": 2314.64,
+      "end": 2320.55,
+      "duration": 5.91,
+      "text": "a path from A0 to B3 in this graph"
+    },
+    {
+      "index": 914,
+      "start": 2320.56,
+      "end": 2323.55,
+      "duration": 2.99,
+      "text": "would correspond to a path in this graph"
+    },
+    {
+      "index": 915,
+      "start": 2323.56,
+      "end": 2326.07,
+      "duration": 2.51,
+      "text": "that uses at most"
+    },
+    {
+      "index": 916,
+      "start": 2326.08,
+      "end": 2328.27,
+      "duration": 2.19,
+      "text": "three edges, right? So, let's find such"
+    },
+    {
+      "index": 917,
+      "start": 2328.28,
+      "end": 2331.79,
+      "duration": 3.51,
+      "text": "a path. Okay? So, going to from"
+    },
+    {
+      "index": 918,
+      "start": 2331.8,
+      "end": 2333.51,
+      "duration": 1.71,
+      "text": "A0,"
+    },
+    {
+      "index": 919,
+      "start": 2333.52,
+      "end": 2335.67,
+      "duration": 2.15,
+      "text": "B1,"
+    },
+    {
+      "index": 920,
+      "start": 2335.68,
+      "end": 2338.15,
+      "duration": 2.47,
+      "text": "stay at B1,"
+    },
+    {
+      "index": 921,
+      "start": 2338.16,
+      "end": 2340.95,
+      "duration": 2.79,
+      "text": "stay at B, sorry. Yeah, that's a that's"
+    },
+    {
+      "index": 922,
+      "start": 2340.96,
+      "end": 2343.51,
+      "duration": 2.55,
+      "text": "a path using fewer than"
+    },
+    {
+      "index": 923,
+      "start": 2343.52,
+      "end": 2346.47,
+      "duration": 2.95,
+      "text": "three edges or at most three edges."
+    },
+    {
+      "index": 924,
+      "start": 2346.48,
+      "end": 2349.19,
+      "duration": 2.71,
+      "text": "Okay? But there's another path here."
+    },
+    {
+      "index": 925,
+      "start": 2349.2,
+      "end": 2351.03,
+      "duration": 1.83,
+      "text": "Where is it?"
+    },
+    {
+      "index": 926,
+      "start": 2351.04,
+      "end": 2354.95,
+      "duration": 3.91,
+      "text": "Going from A A A to B. Okay, that's not"
+    },
+    {
+      "index": 927,
+      "start": 2354.96,
+      "end": 2356.23,
+      "duration": 1.27,
+      "text": "such an interesting one. That's the same"
+    },
+    {
+      "index": 928,
+      "start": 2356.24,
+      "end": 2358.71,
+      "duration": 2.47,
+      "text": "path. So, I might have more than one"
+    },
+    {
+      "index": 929,
+      "start": 2358.72,
+      "end": 2360.39,
+      "duration": 1.67,
+      "text": "path in here corresponding to a path in"
+    },
+    {
+      "index": 930,
+      "start": 2360.4,
+      "end": 2361.51,
+      "duration": 1.11,
+      "text": "there,"
+    },
+    {
+      "index": 931,
+      "start": 2361.52,
+      "end": 2364.349,
+      "duration": 2.829,
+      "text": "but my claim is that any path in here"
+    },
+    {
+      "index": 932,
+      "start": 2364.359,
+      "end": 2366.71,
+      "duration": 2.351,
+      "text": "corresponds to a path in here."
+    },
+    {
+      "index": 933,
+      "start": 2366.72,
+      "end": 2368.19,
+      "duration": 1.47,
+      "text": "Okay?"
+    },
+    {
+      "index": 934,
+      "start": 2368.2,
+      "end": 2371.75,
+      "duration": 3.55,
+      "text": "So, what's a what's a path of length"
+    },
+    {
+      "index": 935,
+      "start": 2371.76,
+      "end": 2374.23,
+      "duration": 2.47,
+      "text": "three that's non-trivial? Yeah, A to C"
+    },
+    {
+      "index": 936,
+      "start": 2374.24,
+      "end": 2378.31,
+      "duration": 4.07,
+      "text": "to D to B. Okay? So, A"
+    },
+    {
+      "index": 937,
+      "start": 2378.32,
+      "end": 2380.11,
+      "duration": 1.79,
+      "text": "to C"
+    },
+    {
+      "index": 938,
+      "start": 2380.12,
+      "end": 2381.67,
+      "duration": 1.55,
+      "text": "to D"
+    },
+    {
+      "index": 939,
+      "start": 2381.68,
+      "end": 2384.51,
+      "duration": 2.83,
+      "text": "to B. Yeah, that that's a path, right?"
+    },
+    {
+      "index": 940,
+      "start": 2384.52,
+      "end": 2386.87,
+      "duration": 2.35,
+      "text": "And I basically because I constructed"
+    },
+    {
+      "index": 941,
+      "start": 2386.88,
+      "end": 2388.47,
+      "duration": 1.59,
+      "text": "this so that the edges always move from"
+    },
+    {
+      "index": 942,
+      "start": 2388.48,
+      "end": 2390.87,
+      "duration": 2.39,
+      "text": "level to level, as I traverse these"
+    },
+    {
+      "index": 943,
+      "start": 2390.88,
+      "end": 2394.39,
+      "duration": 3.51,
+      "text": "edges, I always change levels."
+    },
+    {
+      "index": 944,
+      "start": 2394.4,
+      "end": 2396.35,
+      "duration": 1.95,
+      "text": "Yeah."
+    },
+    {
+      "index": 945,
+      "start": 2396.36,
+      "end": 2398.55,
+      "duration": 2.19,
+      "text": "But my original graph doesn't have these"
+    },
+    {
+      "index": 946,
+      "start": 2398.56,
+      "end": 2400.71,
+      "duration": 2.15,
+      "text": "self loops with with zero weight."
+    },
+    {
+      "index": 947,
+      "start": 2400.72,
+      "end": 2404.03,
+      "duration": 3.31,
+      "text": "yes. My original graph doesn't have an"
+    },
+    {
+      "index": 948,
+      "start": 2404.04,
+      "end": 2405.35,
+      "duration": 1.31,
+      "text": "edge"
+    },
+    {
+      "index": 949,
+      "start": 2405.36,
+      "end": 2407.87,
+      "duration": 2.51,
+      "text": "from A to A. That's true."
+    },
+    {
+      "index": 950,
+      "start": 2407.88,
+      "end": 2410.47,
+      "duration": 2.59,
+      "text": "Right? I'm using these edges to"
+    },
+    {
+      "index": 951,
+      "start": 2410.48,
+      "end": 2412.39,
+      "duration": 1.91,
+      "text": "correspond to"
+    },
+    {
+      "index": 952,
+      "start": 2412.4,
+      "end": 2419.07,
+      "duration": 6.67,
+      "text": "I'm deciding not to take an edge, right?"
+    },
+    {
+      "index": 953,
+      "start": 2420.79,
+      "end": 2420.8,
+      "duration": 0.01,
+      "text": "It's not that I'm"
+    },
+    {
+      "index": 954,
+      "start": 2420.8,
+      "end": 2422.75,
+      "duration": 1.95,
+      "text": "like doing any work here. I'm just"
+    },
+    {
+      "index": 955,
+      "start": 2422.76,
+      "end": 2425.31,
+      "duration": 2.55,
+      "text": "staying there for a state. Okay? And"
+    },
+    {
+      "index": 956,
+      "start": 2425.32,
+      "end": 2426.67,
+      "duration": 1.35,
+      "text": "that's what's going to allow me to get"
+    },
+    {
+      "index": 957,
+      "start": 2426.68,
+      "end": 2429.83,
+      "duration": 3.15,
+      "text": "this at most edges. All right. So, this"
+    },
+    {
+      "index": 958,
+      "start": 2429.84,
+      "end": 2431.63,
+      "duration": 1.79,
+      "text": "is the graph we construct. Hopefully,"
+    },
+    {
+      "index": 959,
+      "start": 2431.64,
+      "end": 2434.47,
+      "duration": 2.83,
+      "text": "you understand that we made these"
+    },
+    {
+      "index": 960,
+      "start": 2434.48,
+      "end": 2436.95,
+      "duration": 2.47,
+      "text": "uh V layers,"
+    },
+    {
+      "index": 961,
+      "start": 2436.96,
+      "end": 2439.39,
+      "duration": 2.43,
+      "text": "right? This is"
+    },
+    {
+      "index": 962,
+      "start": 2439.4,
+      "end": 2440.83,
+      "duration": 1.43,
+      "text": "V."
+    },
+    {
+      "index": 963,
+      "start": 2440.84,
+      "end": 2442.31,
+      "duration": 1.47,
+      "text": "Right?"
+    },
+    {
+      "index": 964,
+      "start": 2442.32,
+      "end": 2446.39,
+      "duration": 4.07,
+      "text": "And a vertex we made V copies of every"
+    },
+    {
+      "index": 965,
+      "start": 2446.4,
+      "end": 2448.79,
+      "duration": 2.39,
+      "text": "vertex and connected them using edges in"
+    },
+    {
+      "index": 966,
+      "start": 2448.8,
+      "end": 2450.91,
+      "duration": 2.11,
+      "text": "this way. Okay."
+    },
+    {
+      "index": 967,
+      "start": 2450.92,
+      "end": 2453.03,
+      "duration": 2.11,
+      "text": "So, first step of Bellman-Ford is"
+    },
+    {
+      "index": 968,
+      "start": 2453.04,
+      "end": 2457.39,
+      "duration": 4.35,
+      "text": "construct this graph."
+    },
+    {
+      "index": 969,
+      "start": 2458.79,
+      "end": 2458.8,
+      "duration": 0.01,
+      "text": "Uh"
+    },
+    {
+      "index": 970,
+      "start": 2458.8,
+      "end": 2462.99,
+      "duration": 4.19,
+      "text": "So, Bellman-Ford construct"
+    },
+    {
+      "index": 971,
+      "start": 2465.52,
+      "end": 2467.63,
+      "duration": 2.11,
+      "text": "G prime"
+    },
+    {
+      "index": 972,
+      "start": 2467.64,
+      "end": 2472.23,
+      "duration": 4.59,
+      "text": "as described above. It has"
+    },
+    {
+      "index": 973,
+      "start": 2472.24,
+      "end": 2476.87,
+      "duration": 4.63,
+      "text": "how many vertices?"
+    },
+    {
+      "index": 974,
+      "start": 2480.03,
+      "end": 2480.04,
+      "duration": 0.01,
+      "text": "V * V + 1, right?"
+    },
+    {
+      "index": 975,
+      "start": 2480.04,
+      "end": 2482.79,
+      "duration": 2.75,
+      "text": "V * V + 1 vertices."
+    },
+    {
+      "index": 976,
+      "start": 2482.8,
+      "end": 2485.83,
+      "duration": 3.03,
+      "text": "And how many edges? Well, I have one"
+    },
+    {
+      "index": 977,
+      "start": 2485.84,
+      "end": 2489.71,
+      "duration": 3.87,
+      "text": "edge for outgoing edge for each vertex"
+    },
+    {
+      "index": 978,
+      "start": 2489.72,
+      "end": 2491.91,
+      "duration": 2.19,
+      "text": "corresponding to"
+    },
+    {
+      "index": 979,
+      "start": 2491.92,
+      "end": 2494.15,
+      "duration": 2.23,
+      "text": "just staying in the same place, right?"
+    },
+    {
+      "index": 980,
+      "start": 2494.16,
+      "end": 2495.75,
+      "duration": 1.59,
+      "text": "So, that's"
+    },
+    {
+      "index": 981,
+      "start": 2495.76,
+      "end": 2499.31,
+      "duration": 3.55,
+      "text": "V squared vertices, I mean edges."
+    },
+    {
+      "index": 982,
+      "start": 2499.32,
+      "end": 2502.31,
+      "duration": 2.99,
+      "text": "And then I have one edge"
+    },
+    {
+      "index": 983,
+      "start": 2502.32,
+      "end": 2504.83,
+      "duration": 2.51,
+      "text": "for every edge in my graph."
+    },
+    {
+      "index": 984,
+      "start": 2504.84,
+      "end": 2508.71,
+      "duration": 3.87,
+      "text": "I have K Sorry, I have uh V - 1"
+    },
+    {
+      "index": 985,
+      "start": 2508.72,
+      "end": 2511.79,
+      "duration": 3.07,
+      "text": "Sorry, just V. I have V edges for every"
+    },
+    {
+      "index": 986,
+      "start": 2511.8,
+      "end": 2514.51,
+      "duration": 2.71,
+      "text": "edge in my graph. Okay? So, that means"
+    },
+    {
+      "index": 987,
+      "start": 2514.52,
+      "end": 2520.15,
+      "duration": 5.63,
+      "text": "So, this is the number of vertices."
+    },
+    {
+      "index": 988,
+      "start": 2531.23,
+      "end": 2531.24,
+      "duration": 0.01,
+      "text": "+ V * E."
+    },
+    {
+      "index": 989,
+      "start": 2531.24,
+      "end": 2533.83,
+      "duration": 2.59,
+      "text": "This is V"
+    },
+    {
+      "index": 990,
+      "start": 2533.84,
+      "end": 2538.59,
+      "duration": 4.75,
+      "text": "V + E. All right, cool."
+    },
+    {
+      "index": 991,
+      "start": 2538.6,
+      "end": 2541.99,
+      "duration": 3.39,
+      "text": "So, that's how many edges I have."
+    },
+    {
+      "index": 992,
+      "start": 2542.0,
+      "end": 2543.63,
+      "duration": 1.63,
+      "text": "So, we constructed it in that way. It's"
+    },
+    {
+      "index": 993,
+      "start": 2543.64,
+      "end": 2546.43,
+      "duration": 2.79,
+      "text": "a DAG, right? If we only have edges"
+    },
+    {
+      "index": 994,
+      "start": 2546.44,
+      "end": 2549.67,
+      "duration": 3.23,
+      "text": "going to increasing levels, then this"
+    },
+    {
+      "index": 995,
+      "start": 2549.68,
+      "end": 2551.75,
+      "duration": 2.07,
+      "text": "thing can't have cycles because"
+    },
+    {
+      "index": 996,
+      "start": 2551.76,
+      "end": 2552.95,
+      "duration": 1.19,
+      "text": "otherwise that would mean there would be"
+    },
+    {
+      "index": 997,
+      "start": 2552.96,
+      "end": 2554.59,
+      "duration": 1.63,
+      "text": "an edge pointing backwards, right? And"
+    },
+    {
+      "index": 998,
+      "start": 2554.6,
+      "end": 2556.99,
+      "duration": 2.39,
+      "text": "we didn't construct any of those."
+    },
+    {
+      "index": 999,
+      "start": 2557.0,
+      "end": 2559.39,
+      "duration": 2.39,
+      "text": "All right. So, we construct this graph G"
+    },
+    {
+      "index": 1000,
+      "start": 2559.4,
+      "end": 2560.63,
+      "duration": 1.23,
+      "text": "prime."
+    },
+    {
+      "index": 1001,
+      "start": 2560.64,
+      "end": 2562.59,
+      "duration": 1.95,
+      "text": "We can do that in linear time with"
+    },
+    {
+      "index": 1002,
+      "start": 2562.6,
+      "end": 2563.95,
+      "duration": 1.35,
+      "text": "respect to these things. I just go"
+    },
+    {
+      "index": 1003,
+      "start": 2563.96,
+      "end": 2565.47,
+      "duration": 1.51,
+      "text": "through all the edges, I make these"
+    },
+    {
+      "index": 1004,
+      "start": 2565.48,
+      "end": 2568.23,
+      "duration": 2.75,
+      "text": "edges and I make these vertices. It's It"
+    },
+    {
+      "index": 1005,
+      "start": 2568.24,
+      "end": 2570.19,
+      "duration": 1.95,
+      "text": "doesn't take anything. I just do it"
+    },
+    {
+      "index": 1006,
+      "start": 2570.2,
+      "end": 2574.07,
+      "duration": 3.87,
+      "text": "naively, right? I can do that in time"
+    },
+    {
+      "index": 1007,
+      "start": 2574.08,
+      "end": 2578.15,
+      "duration": 4.07,
+      "text": "V * V + E"
+    },
+    {
+      "index": 1008,
+      "start": 2581.07,
+      "end": 2581.08,
+      "duration": 0.01,
+      "text": "asymptotically. Okay."
+    },
+    {
+      "index": 1009,
+      "start": 2581.08,
+      "end": 2584.71,
+      "duration": 3.63,
+      "text": "Now, I run"
+    },
+    {
+      "index": 1010,
+      "start": 2584.72,
+      "end": 2586.83,
+      "duration": 2.11,
+      "text": "DAG relaxation"
+    },
+    {
+      "index": 1011,
+      "start": 2586.84,
+      "end": 2593.27,
+      "duration": 6.43,
+      "text": "our nice algorithm we had last time"
+    },
+    {
+      "index": 1012,
+      "start": 2598.15,
+      "end": 2598.16,
+      "duration": 0.01,
+      "text": "in there it was A0. I'm going to say"
+    },
+    {
+      "index": 1013,
+      "start": 2598.16,
+      "end": 2599.15,
+      "duration": 0.99,
+      "text": "it's"
+    },
+    {
+      "index": 1014,
+      "start": 2599.16,
+      "end": 2602.47,
+      "duration": 3.31,
+      "text": "S0, our source"
+    },
+    {
+      "index": 1015,
+      "start": 2602.48,
+      "end": 2604.39,
+      "duration": 1.91,
+      "text": "our source vertex"
+    },
+    {
+      "index": 1016,
+      "start": 2604.4,
+      "end": 2607.71,
+      "duration": 3.31,
+      "text": "single source shortest paths."
+    },
+    {
+      "index": 1017,
+      "start": 2607.72,
+      "end": 2613.63,
+      "duration": 5.91,
+      "text": "So, that I compute"
+    },
+    {
+      "index": 1018,
+      "start": 2614.95,
+      "end": 2614.96,
+      "duration": 0.01,
+      "text": "delta"
+    },
+    {
+      "index": 1019,
+      "start": 2614.96,
+      "end": 2617.43,
+      "duration": 2.47,
+      "text": "of S0"
+    },
+    {
+      "index": 1020,
+      "start": 2617.44,
+      "end": 2620.75,
+      "duration": 3.31,
+      "text": "to VK"
+    },
+    {
+      "index": 1021,
+      "start": 2620.76,
+      "end": 2622.43,
+      "duration": 1.67,
+      "text": "for all"
+    },
+    {
+      "index": 1022,
+      "start": 2622.44,
+      "end": 2624.55,
+      "duration": 2.11,
+      "text": "K in"
+    },
+    {
+      "index": 1023,
+      "start": 2624.56,
+      "end": 2626.31,
+      "duration": 1.75,
+      "text": "what is it?"
+    },
+    {
+      "index": 1024,
+      "start": 2626.32,
+      "end": 2628.63,
+      "duration": 2.31,
+      "text": "0 to"
+    },
+    {
+      "index": 1025,
+      "start": 2628.64,
+      "end": 2631.91,
+      "duration": 3.27,
+      "text": "V."
+    },
+    {
+      "index": 1026,
+      "start": 2633.23,
+      "end": 2633.24,
+      "duration": 0.01,
+      "text": "Right? That's what single source"
+    },
+    {
+      "index": 1027,
+      "start": 2633.24,
+      "end": 2635.27,
+      "duration": 2.03,
+      "text": "shortest paths does, right? It computes"
+    },
+    {
+      "index": 1028,
+      "start": 2635.28,
+      "end": 2638.07,
+      "duration": 2.79,
+      "text": "for me this distance from my source at"
+    },
+    {
+      "index": 1029,
+      "start": 2638.08,
+      "end": 2640.07,
+      "duration": 1.99,
+      "text": "some source, right? To every other"
+    },
+    {
+      "index": 1030,
+      "start": 2640.08,
+      "end": 2641.31,
+      "duration": 1.23,
+      "text": "vertex in the graph. And so, in"
+    },
+    {
+      "index": 1031,
+      "start": 2641.32,
+      "end": 2643.99,
+      "duration": 2.67,
+      "text": "particular, I get these, right?"
+    },
+    {
+      "index": 1032,
+      "start": 2644.0,
+      "end": 2648.23,
+      "duration": 4.23,
+      "text": "Well, that that is all of them."
+    },
+    {
+      "index": 1033,
+      "start": 2654.03,
+      "end": 2654.04,
+      "duration": 0.01,
+      "text": "for each"
+    },
+    {
+      "index": 1034,
+      "start": 2654.04,
+      "end": 2656.75,
+      "duration": 2.71,
+      "text": "vertex"
+    },
+    {
+      "index": 1035,
+      "start": 2656.76,
+      "end": 2658.95,
+      "duration": 2.19,
+      "text": "V"
+    },
+    {
+      "index": 1036,
+      "start": 2658.96,
+      "end": 2661.11,
+      "duration": 2.15,
+      "text": "set"
+    },
+    {
+      "index": 1037,
+      "start": 2661.12,
+      "end": 2663.63,
+      "duration": 2.51,
+      "text": "the thing I'm going to return"
+    },
+    {
+      "index": 1038,
+      "start": 2663.64,
+      "end": 2665.59,
+      "duration": 1.95,
+      "text": "uh D value"
+    },
+    {
+      "index": 1039,
+      "start": 2665.6,
+      "end": 2667.91,
+      "duration": 2.31,
+      "text": "uh S to V"
+    },
+    {
+      "index": 1040,
+      "start": 2667.92,
+      "end": 2669.83,
+      "duration": 1.91,
+      "text": "equal to"
+    },
+    {
+      "index": 1041,
+      "start": 2669.84,
+      "end": 2671.47,
+      "duration": 1.63,
+      "text": "the shortest path distance I got from"
+    },
+    {
+      "index": 1042,
+      "start": 2671.48,
+      "end": 2677.19,
+      "duration": 5.71,
+      "text": "DAG relaxation to a particular vertex."
+    },
+    {
+      "index": 1043,
+      "start": 2681.91,
+      "end": 2681.92,
+      "duration": 0.01,
+      "text": "V"
+    },
+    {
+      "index": 1044,
+      "start": 2681.92,
+      "end": 2685.91,
+      "duration": 3.99,
+      "text": "V - 1. All right? Why do my Why am I"
+    },
+    {
+      "index": 1045,
+      "start": 2685.92,
+      "end": 2687.19,
+      "duration": 1.27,
+      "text": "doing this?"
+    },
+    {
+      "index": 1046,
+      "start": 2687.2,
+      "end": 2690.349,
+      "duration": 3.149,
+      "text": "Right? I'm setting it to be"
+    },
+    {
+      "index": 1047,
+      "start": 2690.359,
+      "end": 2693.349,
+      "duration": 2.99,
+      "text": "the shortest path distance to"
+    },
+    {
+      "index": 1048,
+      "start": 2693.359,
+      "end": 2696.27,
+      "duration": 2.911,
+      "text": "the guy in the second to last row here"
+    },
+    {
+      "index": 1049,
+      "start": 2696.28,
+      "end": 2700.95,
+      "duration": 4.67,
+      "text": "or column"
+    },
+    {
+      "index": 1050,
+      "start": 2708.11,
+      "end": 2708.12,
+      "duration": 0.01,
+      "text": "The hope is that"
+    },
+    {
+      "index": 1051,
+      "start": 2708.12,
+      "end": 2710.79,
+      "duration": 2.67,
+      "text": "this distance"
+    },
+    {
+      "index": 1052,
+      "start": 2710.8,
+      "end": 2713.27,
+      "duration": 2.47,
+      "text": "in my DAG"
+    },
+    {
+      "index": 1053,
+      "start": 2713.28,
+      "end": 2718.07,
+      "duration": 4.79,
+      "text": "corresponds to"
+    },
+    {
+      "index": 1054,
+      "start": 2720.349,
+      "end": 2720.359,
+      "duration": 0.01,
+      "text": "this distance"
+    },
+    {
+      "index": 1055,
+      "start": 2720.359,
+      "end": 2723.11,
+      "duration": 2.751,
+      "text": "in my original graph, right? Uh the"
+    },
+    {
+      "index": 1056,
+      "start": 2723.12,
+      "end": 2727.11,
+      "duration": 3.99,
+      "text": "distance to V using at most V - 1 edges,"
+    },
+    {
+      "index": 1057,
+      "start": 2727.12,
+      "end": 2728.95,
+      "duration": 1.83,
+      "text": "right? So, that's the claim That's the"
+    },
+    {
+      "index": 1058,
+      "start": 2728.96,
+      "end": 2730.23,
+      "duration": 1.27,
+      "text": "claim we're going to prove in just a"
+    },
+    {
+      "index": 1059,
+      "start": 2730.24,
+      "end": 2732.11,
+      "duration": 1.87,
+      "text": "second. I'm going to write it down just"
+    },
+    {
+      "index": 1060,
+      "start": 2732.12,
+      "end": 2733.67,
+      "duration": 1.55,
+      "text": "so that we have"
+    },
+    {
+      "index": 1061,
+      "start": 2733.68,
+      "end": 2736.39,
+      "duration": 2.71,
+      "text": "just to continue our train of thought."
+    },
+    {
+      "index": 1062,
+      "start": 2736.4,
+      "end": 2740.349,
+      "duration": 3.949,
+      "text": "Claim"
+    },
+    {
+      "index": 1063,
+      "start": 2743.51,
+      "end": 2743.52,
+      "duration": 0.01,
+      "text": "delta S0"
+    },
+    {
+      "index": 1064,
+      "start": 2743.52,
+      "end": 2745.15,
+      "duration": 1.63,
+      "text": "VK"
+    },
+    {
+      "index": 1065,
+      "start": 2745.16,
+      "end": 2751.27,
+      "duration": 6.11,
+      "text": "equals delta K the K edge distance from"
+    },
+    {
+      "index": 1066,
+      "start": 2751.28,
+      "end": 2755.43,
+      "duration": 4.15,
+      "text": "S to V."
+    },
+    {
+      "index": 1067,
+      "start": 2757.19,
+      "end": 2757.2,
+      "duration": 0.01,
+      "text": "That's That's what we want to claim."
+    },
+    {
+      "index": 1068,
+      "start": 2757.2,
+      "end": 2759.23,
+      "duration": 2.03,
+      "text": "That would then What would that mean"
+    },
+    {
+      "index": 1069,
+      "start": 2759.24,
+      "end": 2761.83,
+      "duration": 2.59,
+      "text": "then? That would mean that I'm correctly"
+    },
+    {
+      "index": 1070,
+      "start": 2761.84,
+      "end": 2764.19,
+      "duration": 2.35,
+      "text": "setting the shortest path distance here"
+    },
+    {
+      "index": 1071,
+      "start": 2764.2,
+      "end": 2766.39,
+      "duration": 2.19,
+      "text": "for all vertices"
+    },
+    {
+      "index": 1072,
+      "start": 2766.4,
+      "end": 2768.91,
+      "duration": 2.51,
+      "text": "whose distance is finite."
+    },
+    {
+      "index": 1073,
+      "start": 2768.92,
+      "end": 2771.59,
+      "duration": 2.67,
+      "text": "Great. I mean I I set"
+    },
+    {
+      "index": 1074,
+      "start": 2771.6,
+      "end": 2773.63,
+      "duration": 2.03,
+      "text": "values to things where they're not"
+    },
+    {
+      "index": 1075,
+      "start": 2773.64,
+      "end": 2775.23,
+      "duration": 1.59,
+      "text": "finite and where they're minus infinity"
+    },
+    {
+      "index": 1076,
+      "start": 2775.24,
+      "end": 2777.99,
+      "duration": 2.75,
+      "text": "also. But in particular, I set the ones"
+    },
+    {
+      "index": 1077,
+      "start": 2778.0,
+      "end": 2780.19,
+      "duration": 2.19,
+      "text": "correctly if they're"
+    },
+    {
+      "index": 1078,
+      "start": 2780.2,
+      "end": 2782.07,
+      "duration": 1.87,
+      "text": "uh finite."
+    },
+    {
+      "index": 1079,
+      "start": 2782.08,
+      "end": 2784.07,
+      "duration": 1.99,
+      "text": "Okay. So, the last thing we need to do"
+    },
+    {
+      "index": 1080,
+      "start": 2784.08,
+      "end": 2787.71,
+      "duration": 3.63,
+      "text": "is deal with these minus infinity"
+    },
+    {
+      "index": 1081,
+      "start": 2787.72,
+      "end": 2790.55,
+      "duration": 2.83,
+      "text": "vertices, right?"
+    },
+    {
+      "index": 1082,
+      "start": 2790.56,
+      "end": 2792.75,
+      "duration": 2.19,
+      "text": "But we know how to do that, right?"
+    },
+    {
+      "index": 1083,
+      "start": 2792.76,
+      "end": 2794.43,
+      "duration": 1.67,
+      "text": "We just look at the witnesses because"
+    },
+    {
+      "index": 1084,
+      "start": 2794.44,
+      "end": 2800.95,
+      "duration": 6.51,
+      "text": "we've computed this value"
+    },
+    {
+      "index": 1085,
+      "start": 2802.11,
+      "end": 2802.12,
+      "duration": 0.01,
+      "text": "for"
+    },
+    {
+      "index": 1086,
+      "start": 2802.12,
+      "end": 2805.99,
+      "duration": 3.87,
+      "text": "K = V and K = V - 1. And if that claim"
+    },
+    {
+      "index": 1087,
+      "start": 2806.0,
+      "end": 2808.07,
+      "duration": 2.07,
+      "text": "over there is true"
+    },
+    {
+      "index": 1088,
+      "start": 2808.08,
+      "end": 2810.03,
+      "duration": 1.95,
+      "text": "then those shortest path distances are"
+    },
+    {
+      "index": 1089,
+      "start": 2810.04,
+      "end": 2812.47,
+      "duration": 2.43,
+      "text": "the same as these K edge shortest path"
+    },
+    {
+      "index": 1090,
+      "start": 2812.48,
+      "end": 2815.11,
+      "duration": 2.63,
+      "text": "distances."
+    },
+    {
+      "index": 1091,
+      "start": 2815.12,
+      "end": 2817.27,
+      "duration": 2.15,
+      "text": "And we can just for every vertex, we"
+    },
+    {
+      "index": 1092,
+      "start": 2817.28,
+      "end": 2819.31,
+      "duration": 2.03,
+      "text": "compare these things. If this is"
+    },
+    {
+      "index": 1093,
+      "start": 2819.32,
+      "end": 2821.95,
+      "duration": 2.63,
+      "text": "satisfied, we got a witness."
+    },
+    {
+      "index": 1094,
+      "start": 2821.96,
+      "end": 2826.55,
+      "duration": 4.59,
+      "text": "Right? Okay. So,"
+    },
+    {
+      "index": 1095,
+      "start": 2836.11,
+      "end": 2836.12,
+      "duration": 0.01,
+      "text": "each"
+    },
+    {
+      "index": 1096,
+      "start": 2836.12,
+      "end": 2840.75,
+      "duration": 4.63,
+      "text": "witness"
+    },
+    {
+      "index": 1097,
+      "start": 2847.87,
+      "end": 2847.88,
+      "duration": 0.01,
+      "text": "you know, where delta"
+    },
+    {
+      "index": 1098,
+      "start": 2847.88,
+      "end": 2849.51,
+      "duration": 1.63,
+      "text": "S0"
+    },
+    {
+      "index": 1099,
+      "start": 2849.52,
+      "end": 2852.59,
+      "duration": 3.07,
+      "text": "U V"
+    },
+    {
+      "index": 1100,
+      "start": 2852.6,
+      "end": 2857.31,
+      "duration": 4.71,
+      "text": "is less than strictly S0 U"
+    },
+    {
+      "index": 1101,
+      "start": 2857.32,
+      "end": 2859.51,
+      "duration": 2.19,
+      "text": "V - 1."
+    },
+    {
+      "index": 1102,
+      "start": 2859.52,
+      "end": 2862.23,
+      "duration": 2.71,
+      "text": "That's the definition of a witness here."
+    },
+    {
+      "index": 1103,
+      "start": 2862.24,
+      "end": 2865.59,
+      "duration": 3.35,
+      "text": "Close the parentheses."
+    },
+    {
+      "index": 1104,
+      "start": 2867.07,
+      "end": 2867.08,
+      "duration": 0.01,
+      "text": "Then"
+    },
+    {
+      "index": 1105,
+      "start": 2867.08,
+      "end": 2869.67,
+      "duration": 2.59,
+      "text": "for each"
+    },
+    {
+      "index": 1106,
+      "start": 2869.68,
+      "end": 2874.67,
+      "duration": 4.99,
+      "text": "vertex V reachable"
+    },
+    {
+      "index": 1107,
+      "start": 2876.63,
+      "end": 2876.64,
+      "duration": 0.01,
+      "text": "from"
+    },
+    {
+      "index": 1108,
+      "start": 2876.64,
+      "end": 2877.91,
+      "duration": 1.27,
+      "text": "U"
+    },
+    {
+      "index": 1109,
+      "start": 2877.92,
+      "end": 2880.07,
+      "duration": 2.15,
+      "text": "set"
+    },
+    {
+      "index": 1110,
+      "start": 2880.08,
+      "end": 2882.31,
+      "duration": 2.23,
+      "text": "del- uh sorry, D. D is what we're"
+    },
+    {
+      "index": 1111,
+      "start": 2882.32,
+      "end": 2885.23,
+      "duration": 2.91,
+      "text": "returning. D of S V"
+    },
+    {
+      "index": 1112,
+      "start": 2885.24,
+      "end": 2887.71,
+      "duration": 2.47,
+      "text": "equal to minus infinity. So, that's the"
+    },
+    {
+      "index": 1113,
+      "start": 2887.72,
+      "end": 2889.23,
+      "duration": 1.51,
+      "text": "end of the algorithm."
+    },
+    {
+      "index": 1114,
+      "start": 2889.24,
+      "end": 2890.63,
+      "duration": 1.39,
+      "text": "Basically, I'm looking for all the"
+    },
+    {
+      "index": 1115,
+      "start": 2890.64,
+      "end": 2892.71,
+      "duration": 2.07,
+      "text": "witnesses."
+    },
+    {
+      "index": 1116,
+      "start": 2892.72,
+      "end": 2894.83,
+      "duration": 2.11,
+      "text": "For each witness, I find all of the"
+    },
+    {
+      "index": 1117,
+      "start": 2894.84,
+      "end": 2896.99,
+      "duration": 2.15,
+      "text": "vertices reachable from it and set it to"
+    },
+    {
+      "index": 1118,
+      "start": 2897.0,
+      "end": 2900.03,
+      "duration": 3.03,
+      "text": "minus infinity just as we argued before."
+    },
+    {
+      "index": 1119,
+      "start": 2900.04,
+      "end": 2903.27,
+      "duration": 3.23,
+      "text": "Okay. So, it remains to prove this"
+    },
+    {
+      "index": 1120,
+      "start": 2903.28,
+      "end": 2908.19,
+      "duration": 4.91,
+      "text": "claim."
+    },
+    {
+      "index": 1121,
+      "start": 2913.27,
+      "end": 2913.28,
+      "duration": 0.01,
+      "text": "Well,"
+    },
+    {
+      "index": 1122,
+      "start": 2913.28,
+      "end": 2916.91,
+      "duration": 3.63,
+      "text": "we can induct on K, right?"
+    },
+    {
+      "index": 1123,
+      "start": 2916.92,
+      "end": 2919.55,
+      "duration": 2.63,
+      "text": "Is this true for K = 0?"
+    },
+    {
+      "index": 1124,
+      "start": 2919.56,
+      "end": 2921.99,
+      "duration": 2.43,
+      "text": "Yeah, right? We kind of already argued"
+    },
+    {
+      "index": 1125,
+      "start": 2922.0,
+      "end": 2924.19,
+      "duration": 2.19,
+      "text": "it over here when we were talking about"
+    },
+    {
+      "index": 1126,
+      "start": 2924.2,
+      "end": 2926.79,
+      "duration": 2.59,
+      "text": "our initialization step or what what DAG"
+    },
+    {
+      "index": 1127,
+      "start": 2926.8,
+      "end": 2928.47,
+      "duration": 1.67,
+      "text": "relaxation does."
+    },
+    {
+      "index": 1128,
+      "start": 2928.48,
+      "end": 2930.55,
+      "duration": 2.07,
+      "text": "It'll set this to be the shortest path"
+    },
+    {
+      "index": 1129,
+      "start": 2930.56,
+      "end": 2933.47,
+      "duration": 2.91,
+      "text": "from this guy to all of these vertices."
+    },
+    {
+      "index": 1130,
+      "start": 2933.48,
+      "end": 2935.47,
+      "duration": 1.99,
+      "text": "These aren't reachable from here, and so"
+    },
+    {
+      "index": 1131,
+      "start": 2935.48,
+      "end": 2937.03,
+      "duration": 1.55,
+      "text": "these are infinite."
+    },
+    {
+      "index": 1132,
+      "start": 2937.04,
+      "end": 2939.51,
+      "duration": 2.47,
+      "text": "And that one's zero."
+    },
+    {
+      "index": 1133,
+      "start": 2939.52,
+      "end": 2943.07,
+      "duration": 3.55,
+      "text": "Okay? So, the base case"
+    },
+    {
+      "index": 1134,
+      "start": 2943.08,
+      "end": 2944.51,
+      "duration": 1.43,
+      "text": "So,"
+    },
+    {
+      "index": 1135,
+      "start": 2944.52,
+      "end": 2946.95,
+      "duration": 2.43,
+      "text": "induct"
+    },
+    {
+      "index": 1136,
+      "start": 2946.96,
+      "end": 2951.47,
+      "duration": 4.51,
+      "text": "on K."
+    },
+    {
+      "index": 1137,
+      "start": 2953.23,
+      "end": 2953.24,
+      "duration": 0.01,
+      "text": "Base case,"
+    },
+    {
+      "index": 1138,
+      "start": 2953.24,
+      "end": 2956.83,
+      "duration": 3.59,
+      "text": "K = 0, check, right?"
+    },
+    {
+      "index": 1139,
+      "start": 2956.84,
+      "end": 2959.15,
+      "duration": 2.31,
+      "text": "That's all good. Now, we induct our"
+    },
+    {
+      "index": 1140,
+      "start": 2959.16,
+      "end": 2962.75,
+      "duration": 3.59,
+      "text": "inductive step."
+    },
+    {
+      "index": 1141,
+      "start": 2964.55,
+      "end": 2964.56,
+      "duration": 0.01,
+      "text": "Let's take a look at the shortest path"
+    },
+    {
+      "index": 1142,
+      "start": 2964.56,
+      "end": 2968.59,
+      "duration": 4.03,
+      "text": "distance from zero from S0 to V"
+    },
+    {
+      "index": 1143,
+      "start": 2968.6,
+      "end": 2972.75,
+      "duration": 4.15,
+      "text": "of K prime for some K prime. And the"
+    },
+    {
+      "index": 1144,
+      "start": 2972.76,
+      "end": 2974.91,
+      "duration": 2.15,
+      "text": "assumption is the inductive hypothesis"
+    },
+    {
+      "index": 1145,
+      "start": 2974.92,
+      "end": 2979.47,
+      "duration": 4.55,
+      "text": "is that this distance is the"
+    },
+    {
+      "index": 1146,
+      "start": 2979.48,
+      "end": 2982.63,
+      "duration": 3.15,
+      "text": "K edge distance for all K prime less"
+    },
+    {
+      "index": 1147,
+      "start": 2982.64,
+      "end": 2985.47,
+      "duration": 2.83,
+      "text": "than K I mean all K less than K prime,"
+    },
+    {
+      "index": 1148,
+      "start": 2985.48,
+      "end": 2987.11,
+      "duration": 1.63,
+      "text": "right?"
+    },
+    {
+      "index": 1149,
+      "start": 2987.12,
+      "end": 2988.71,
+      "duration": 1.59,
+      "text": "Well, kind of by definition of a"
+    },
+    {
+      "index": 1150,
+      "start": 2988.72,
+      "end": 2990.19,
+      "duration": 1.47,
+      "text": "shortest path"
+    },
+    {
+      "index": 1151,
+      "start": 2990.2,
+      "end": 2992.87,
+      "duration": 2.67,
+      "text": "this is the minimum"
+    },
+    {
+      "index": 1152,
+      "start": 2992.88,
+      "end": 2995.99,
+      "duration": 3.11,
+      "text": "over all incoming vertices of the"
+    },
+    {
+      "index": 1153,
+      "start": 2996.0,
+      "end": 2997.55,
+      "duration": 1.55,
+      "text": "shortest path"
+    },
+    {
+      "index": 1154,
+      "start": 2997.56,
+      "end": 3001.15,
+      "duration": 3.59,
+      "text": "from S zero to U of"
+    },
+    {
+      "index": 1155,
+      "start": 3001.16,
+      "end": 3005.31,
+      "duration": 4.15,
+      "text": "K prime minus one"
+    },
+    {
+      "index": 1156,
+      "start": 3008.31,
+      "end": 3008.32,
+      "duration": 0.01,
+      "text": "plus the weight of the edge of the edge"
+    },
+    {
+      "index": 1157,
+      "start": 3008.32,
+      "end": 3012.11,
+      "duration": 3.79,
+      "text": "from U of K prime minus one"
+    },
+    {
+      "index": 1158,
+      "start": 3012.12,
+      "end": 3015.71,
+      "duration": 3.59,
+      "text": "to V K"
+    },
+    {
+      "index": 1159,
+      "start": 3015.72,
+      "end": 3017.51,
+      "duration": 1.79,
+      "text": "prime"
+    },
+    {
+      "index": 1160,
+      "start": 3017.52,
+      "end": 3021.19,
+      "duration": 3.67,
+      "text": "for all U K prime minus one"
+    },
+    {
+      "index": 1161,
+      "start": 3021.2,
+      "end": 3023.67,
+      "duration": 2.47,
+      "text": "in the adjacencies"
+    },
+    {
+      "index": 1162,
+      "start": 3023.68,
+      "end": 3029.07,
+      "duration": 5.39,
+      "text": "the incoming adjacencies of V K prime."
+    },
+    {
+      "index": 1163,
+      "start": 3029.08,
+      "end": 3031.27,
+      "duration": 2.19,
+      "text": "Okay, what does this mean? Right? I'm"
+    },
+    {
+      "index": 1164,
+      "start": 3031.28,
+      "end": 3034.87,
+      "duration": 3.59,
+      "text": "just saying in my graph G prime"
+    },
+    {
+      "index": 1165,
+      "start": 3034.88,
+      "end": 3037.95,
+      "duration": 3.07,
+      "text": "a shortest path to this vertex needs to"
+    },
+    {
+      "index": 1166,
+      "start": 3037.96,
+      "end": 3040.59,
+      "duration": 2.63,
+      "text": "go first through some"
+    },
+    {
+      "index": 1167,
+      "start": 3040.6,
+      "end": 3043.07,
+      "duration": 2.47,
+      "text": "uh vertex in the layer before it which"
+    },
+    {
+      "index": 1168,
+      "start": 3043.08,
+      "end": 3044.99,
+      "duration": 1.91,
+      "text": "is one of these. And in particular I'm"
+    },
+    {
+      "index": 1169,
+      "start": 3045.0,
+      "end": 3048.23,
+      "duration": 3.23,
+      "text": "only connected to things"
+    },
+    {
+      "index": 1170,
+      "start": 3048.24,
+      "end": 3050.31,
+      "duration": 2.07,
+      "text": "uh adjacent to me. That's all this is"
+    },
+    {
+      "index": 1171,
+      "start": 3050.32,
+      "end": 3051.95,
+      "duration": 1.63,
+      "text": "saying, right? I have to go through that"
+    },
+    {
+      "index": 1172,
+      "start": 3051.96,
+      "end": 3054.03,
+      "duration": 2.07,
+      "text": "vertex and take some shortest path to"
+    },
+    {
+      "index": 1173,
+      "start": 3054.04,
+      "end": 3057.63,
+      "duration": 3.59,
+      "text": "one of those previous vertices."
+    },
+    {
+      "index": 1174,
+      "start": 3060.71,
+      "end": 3060.72,
+      "duration": 0.01,
+      "text": "Now, in actuality"
+    },
+    {
+      "index": 1175,
+      "start": 3060.72,
+      "end": 3063.59,
+      "duration": 2.87,
+      "text": "these adjacencies I constructed them to"
+    },
+    {
+      "index": 1176,
+      "start": 3063.6,
+      "end": 3065.83,
+      "duration": 2.23,
+      "text": "be similar to the adjacencies in my"
+    },
+    {
+      "index": 1177,
+      "start": 3065.84,
+      "end": 3067.55,
+      "duration": 1.71,
+      "text": "original graph."
+    },
+    {
+      "index": 1178,
+      "start": 3067.56,
+      "end": 3069.83,
+      "duration": 2.27,
+      "text": "In addition to one edge coming from my"
+    },
+    {
+      "index": 1179,
+      "start": 3069.84,
+      "end": 3072.27,
+      "duration": 2.43,
+      "text": "original vertex, right? From from vertex"
+    },
+    {
+      "index": 1180,
+      "start": 3072.28,
+      "end": 3073.43,
+      "duration": 1.15,
+      "text": "V."
+    },
+    {
+      "index": 1181,
+      "start": 3073.44,
+      "end": 3076.71,
+      "duration": 3.27,
+      "text": "So, this is the same as the minimum"
+    },
+    {
+      "index": 1182,
+      "start": 3076.72,
+      "end": 3082.19,
+      "duration": 5.47,
+      "text": "of this set delta S naught"
+    },
+    {
+      "index": 1183,
+      "start": 3090.31,
+      "end": 3090.32,
+      "duration": 0.01,
+      "text": "plus W U V"
+    },
+    {
+      "index": 1184,
+      "start": 3090.32,
+      "end": 3092.19,
+      "duration": 1.87,
+      "text": "for all"
+    },
+    {
+      "index": 1185,
+      "start": 3092.2,
+      "end": 3097.79,
+      "duration": 5.59,
+      "text": "uh"
+    },
+    {
+      "index": 1186,
+      "start": 3106.47,
+      "end": 3106.48,
+      "duration": 0.01,
+      "text": "of my original vertex"
+    },
+    {
+      "index": 1187,
+      "start": 3106.48,
+      "end": 3108.15,
+      "duration": 1.67,
+      "text": "in addition to one more term. What is"
+    },
+    {
+      "index": 1188,
+      "start": 3108.16,
+      "end": 3114.27,
+      "duration": 6.11,
+      "text": "that other term?"
+    },
+    {
+      "index": 1189,
+      "start": 3115.63,
+      "end": 3115.64,
+      "duration": 0.01,
+      "text": "These are all of the things"
+    },
+    {
+      "index": 1190,
+      "start": 3115.64,
+      "end": 3117.99,
+      "duration": 2.35,
+      "text": "corresponding to my incoming edges in my"
+    },
+    {
+      "index": 1191,
+      "start": 3118.0,
+      "end": 3120.31,
+      "duration": 2.31,
+      "text": "original thing, but I also have that one"
+    },
+    {
+      "index": 1192,
+      "start": 3120.32,
+      "end": 3123.27,
+      "duration": 2.95,
+      "text": "edge coming from the V before it, right?"
+    },
+    {
+      "index": 1193,
+      "start": 3123.28,
+      "end": 3126.63,
+      "duration": 3.35,
+      "text": "So, this is I'm going to union union"
+    },
+    {
+      "index": 1194,
+      "start": 3126.64,
+      "end": 3128.63,
+      "duration": 1.99,
+      "text": "union this with"
+    },
+    {
+      "index": 1195,
+      "start": 3128.64,
+      "end": 3132.11,
+      "duration": 3.47,
+      "text": "delta S naught"
+    },
+    {
+      "index": 1196,
+      "start": 3132.12,
+      "end": 3136.63,
+      "duration": 4.51,
+      "text": "V of K prime minus one."
+    },
+    {
+      "index": 1197,
+      "start": 3136.64,
+      "end": 3138.15,
+      "duration": 1.51,
+      "text": "Awful."
+    },
+    {
+      "index": 1198,
+      "start": 3138.16,
+      "end": 3140.51,
+      "duration": 2.35,
+      "text": "I think there's another one here."
+    },
+    {
+      "index": 1199,
+      "start": 3140.52,
+      "end": 3144.71,
+      "duration": 4.19,
+      "text": "This is S naught V of K prime minus one."
+    },
+    {
+      "index": 1200,
+      "start": 3144.72,
+      "end": 3147.35,
+      "duration": 2.63,
+      "text": "Okay? I'm not going to rewrite it."
+    },
+    {
+      "index": 1201,
+      "start": 3147.36,
+      "end": 3154.11,
+      "duration": 6.75,
+      "text": "Okay."
+    },
+    {
+      "index": 1202,
+      "start": 3156.03,
+      "end": 3156.04,
+      "duration": 0.01,
+      "text": "Then by induction"
+    },
+    {
+      "index": 1203,
+      "start": 3156.04,
+      "end": 3159.63,
+      "duration": 3.59,
+      "text": "this thing and this thing must be"
+    },
+    {
+      "index": 1204,
+      "start": 3159.64,
+      "end": 3162.43,
+      "duration": 2.79,
+      "text": "the edge shortest paths using"
+    },
+    {
+      "index": 1205,
+      "start": 3162.44,
+      "end": 3165.19,
+      "duration": 2.75,
+      "text": "K minus one vertices"
+    },
+    {
+      "index": 1206,
+      "start": 3165.2,
+      "end": 3168.43,
+      "duration": 3.23,
+      "text": "and then that's just the statement of"
+    },
+    {
+      "index": 1207,
+      "start": 3168.44,
+      "end": 3172.87,
+      "duration": 4.43,
+      "text": "what the shortest path should be"
+    },
+    {
+      "index": 1208,
+      "start": 3175.55,
+      "end": 3175.56,
+      "duration": 0.01,
+      "text": "using at most K"
+    },
+    {
+      "index": 1209,
+      "start": 3175.56,
+      "end": 3179.63,
+      "duration": 4.07,
+      "text": "prime edges going from S to V."
+    },
+    {
+      "index": 1210,
+      "start": 3179.64,
+      "end": 3181.55,
+      "duration": 1.91,
+      "text": "Okay?"
+    },
+    {
+      "index": 1211,
+      "start": 3181.56,
+      "end": 3183.35,
+      "duration": 1.79,
+      "text": "So"
+    },
+    {
+      "index": 1212,
+      "start": 3183.36,
+      "end": 3184.99,
+      "duration": 1.63,
+      "text": "these things are the same"
+    },
+    {
+      "index": 1213,
+      "start": 3185.0,
+      "end": 3188.63,
+      "duration": 3.63,
+      "text": "as we claimed. Yay, check."
+    },
+    {
+      "index": 1214,
+      "start": 3188.64,
+      "end": 3190.55,
+      "duration": 1.91,
+      "text": "All right, and then it's not such a"
+    },
+    {
+      "index": 1215,
+      "start": 3190.56,
+      "end": 3192.67,
+      "duration": 2.11,
+      "text": "trivial it's it's kind of a trivial leap"
+    },
+    {
+      "index": 1216,
+      "start": 3192.68,
+      "end": 3194.75,
+      "duration": 2.07,
+      "text": "then to say that at the end of"
+    },
+    {
+      "index": 1217,
+      "start": 3194.76,
+      "end": 3197.55,
+      "duration": 2.79,
+      "text": "Bellman-Ford"
+    },
+    {
+      "index": 1218,
+      "start": 3197.56,
+      "end": 3199.59,
+      "duration": 2.03,
+      "text": "these guys"
+    },
+    {
+      "index": 1219,
+      "start": 3199.6,
+      "end": 3202.27,
+      "duration": 2.67,
+      "text": "uh sorry, the things that we return"
+    },
+    {
+      "index": 1220,
+      "start": 3202.28,
+      "end": 3204.39,
+      "duration": 2.11,
+      "text": "these guys are the shortest path"
+    },
+    {
+      "index": 1221,
+      "start": 3204.4,
+      "end": 3208.59,
+      "duration": 4.19,
+      "text": "distances because here if they're finite"
+    },
+    {
+      "index": 1222,
+      "start": 3208.6,
+      "end": 3210.43,
+      "duration": 1.83,
+      "text": "we set them to their true shortest path"
+    },
+    {
+      "index": 1223,
+      "start": 3210.44,
+      "end": 3214.95,
+      "duration": 4.51,
+      "text": "distance and if they're minus infinity"
+    },
+    {
+      "index": 1224,
+      "start": 3214.96,
+      "end": 3218.03,
+      "duration": 3.07,
+      "text": "that invariant means that these things"
+    },
+    {
+      "index": 1225,
+      "start": 3218.04,
+      "end": 3220.79,
+      "duration": 2.75,
+      "text": "correspond to exactly this claim over"
+    },
+    {
+      "index": 1226,
+      "start": 3220.8,
+      "end": 3224.83,
+      "duration": 4.03,
+      "text": "here."
+    },
+    {
+      "index": 1227,
+      "start": 3230.83,
+      "end": 3230.84,
+      "duration": 0.01,
+      "text": "And then finding all the vertices"
+    },
+    {
+      "index": 1228,
+      "start": 3230.84,
+      "end": 3233.39,
+      "duration": 2.55,
+      "text": "reachable from those witnesses we set"
+    },
+    {
+      "index": 1229,
+      "start": 3233.4,
+      "end": 3234.79,
+      "duration": 1.39,
+      "text": "all of the"
+    },
+    {
+      "index": 1230,
+      "start": 3234.8,
+      "end": 3236.43,
+      "duration": 1.63,
+      "text": "infinite ones"
+    },
+    {
+      "index": 1231,
+      "start": 3236.44,
+      "end": 3238.99,
+      "duration": 2.55,
+      "text": "to be minus infinity as desired. Okay,"
+    },
+    {
+      "index": 1232,
+      "start": 3239.0,
+      "end": 3240.11,
+      "duration": 1.11,
+      "text": "so what's the running time of this"
+    },
+    {
+      "index": 1233,
+      "start": 3240.12,
+      "end": 3242.59,
+      "duration": 2.47,
+      "text": "thing?"
+    },
+    {
+      "index": 1234,
+      "start": 3244.67,
+      "end": 3244.68,
+      "duration": 0.01,
+      "text": "Well, we had to construct this graph, so"
+    },
+    {
+      "index": 1235,
+      "start": 3244.68,
+      "end": 3247.67,
+      "duration": 2.99,
+      "text": "we had to take that time. Okay? We ran"
+    },
+    {
+      "index": 1236,
+      "start": 3247.68,
+      "end": 3249.11,
+      "duration": 1.43,
+      "text": "DAG relaxation. That takes the same"
+    },
+    {
+      "index": 1237,
+      "start": 3249.12,
+      "end": 3250.27,
+      "duration": 1.15,
+      "text": "amount of time."
+    },
+    {
+      "index": 1238,
+      "start": 3250.28,
+      "end": 3253.19,
+      "duration": 2.91,
+      "text": "Right? For every vertex we did O order V"
+    },
+    {
+      "index": 1239,
+      "start": 3253.2,
+      "end": 3254.39,
+      "duration": 1.19,
+      "text": "work."
+    },
+    {
+      "index": 1240,
+      "start": 3254.4,
+      "end": 3256.59,
+      "duration": 2.19,
+      "text": "And then for each witness, how many"
+    },
+    {
+      "index": 1241,
+      "start": 3256.6,
+      "end": 3258.83,
+      "duration": 2.23,
+      "text": "could there be? At most V."
+    },
+    {
+      "index": 1242,
+      "start": 3258.84,
+      "end": 3260.349,
+      "duration": 1.509,
+      "text": "Checking the reachability of each"
+    },
+    {
+      "index": 1243,
+      "start": 3260.359,
+      "end": 3264.27,
+      "duration": 3.911,
+      "text": "vertex, that can be done in how long?"
+    },
+    {
+      "index": 1244,
+      "start": 3264.28,
+      "end": 3266.349,
+      "duration": 2.069,
+      "text": "Order E time."
+    },
+    {
+      "index": 1245,
+      "start": 3266.359,
+      "end": 3267.43,
+      "duration": 1.071,
+      "text": "Right?"
+    },
+    {
+      "index": 1246,
+      "start": 3267.44,
+      "end": 3270.47,
+      "duration": 3.03,
+      "text": "Cuz we don't need to consider the things"
+    },
+    {
+      "index": 1247,
+      "start": 3270.48,
+      "end": 3273.43,
+      "duration": 2.95,
+      "text": "that aren't connected to X or aren't"
+    },
+    {
+      "index": 1248,
+      "start": 3273.44,
+      "end": 3275.43,
+      "duration": 1.99,
+      "text": "connected to the witness. Right? So,"
+    },
+    {
+      "index": 1249,
+      "start": 3275.44,
+      "end": 3281.43,
+      "duration": 5.99,
+      "text": "this thing takes order V times E work."
+    },
+    {
+      "index": 1250,
+      "start": 3281.44,
+      "end": 3284.07,
+      "duration": 2.63,
+      "text": "So, we're upper bounded by this"
+    },
+    {
+      "index": 1251,
+      "start": 3284.08,
+      "end": 3285.87,
+      "duration": 1.79,
+      "text": "the a time it took to construct the"
+    },
+    {
+      "index": 1252,
+      "start": 3285.88,
+      "end": 3288.63,
+      "duration": 2.75,
+      "text": "original graph and by the claim we had"
+    },
+    {
+      "index": 1253,
+      "start": 3288.64,
+      "end": 3291.31,
+      "duration": 2.67,
+      "text": "before"
+    },
+    {
+      "index": 1254,
+      "start": 3293.91,
+      "end": 3293.92,
+      "duration": 0.01,
+      "text": "that takes V times E time. Okay."
+    },
+    {
+      "index": 1255,
+      "start": 3293.92,
+      "end": 3296.71,
+      "duration": 2.79,
+      "text": "So, that's Bellman-Ford."
+    },
+    {
+      "index": 1256,
+      "start": 3296.72,
+      "end": 3298.99,
+      "duration": 2.27,
+      "text": "I'm just going to leave you with two"
+    },
+    {
+      "index": 1257,
+      "start": 3299.0,
+      "end": 3303.91,
+      "duration": 4.91,
+      "text": "nuggets."
+    },
+    {
+      "index": 1258,
+      "start": 3306.63,
+      "end": 3306.64,
+      "duration": 0.01,
+      "text": "First, the shortest uh"
+    },
+    {
+      "index": 1259,
+      "start": 3306.64,
+      "end": 3310.75,
+      "duration": 4.11,
+      "text": "shortest path"
+    },
+    {
+      "index": 1260,
+      "start": 3312.71,
+      "end": 3312.72,
+      "duration": 0.01,
+      "text": "if for any witness, let's say we have a"
+    },
+    {
+      "index": 1261,
+      "start": 3312.72,
+      "end": 3314.39,
+      "duration": 1.67,
+      "text": "witness here. Do I have any witnesses"
+    },
+    {
+      "index": 1262,
+      "start": 3314.4,
+      "end": 3315.55,
+      "duration": 1.15,
+      "text": "here?"
+    },
+    {
+      "index": 1263,
+      "start": 3315.56,
+      "end": 3317.27,
+      "duration": 1.71,
+      "text": "Uh I didn't construct I didn't fill in"
+    },
+    {
+      "index": 1264,
+      "start": 3317.28,
+      "end": 3318.91,
+      "duration": 1.63,
+      "text": "all these."
+    },
+    {
+      "index": 1265,
+      "start": 3318.92,
+      "end": 3323.15,
+      "duration": 4.23,
+      "text": "But is there a vertex on this cycle that"
+    },
+    {
+      "index": 1266,
+      "start": 3323.16,
+      "end": 3324.71,
+      "duration": 1.55,
+      "text": "goes through"
+    },
+    {
+      "index": 1267,
+      "start": 3324.72,
+      "end": 3327.83,
+      "duration": 3.11,
+      "text": "uh who has a shortest path"
+    },
+    {
+      "index": 1268,
+      "start": 3327.84,
+      "end": 3329.95,
+      "duration": 2.11,
+      "text": "that goes through four vertices that's"
+    },
+    {
+      "index": 1269,
+      "start": 3329.96,
+      "end": 3332.67,
+      "duration": 2.71,
+      "text": "smaller than any other, right? Okay, I"
+    },
+    {
+      "index": 1270,
+      "start": 3332.68,
+      "end": 3336.27,
+      "duration": 3.59,
+      "text": "can go from A to C to B"
+    },
+    {
+      "index": 1271,
+      "start": 3336.28,
+      "end": 3340.95,
+      "duration": 4.67,
+      "text": "to D to B to C."
+    },
+    {
+      "index": 1272,
+      "start": 3342.99,
+      "end": 3343.0,
+      "duration": 0.01,
+      "text": "And you can work out this algorithm. I"
+    },
+    {
+      "index": 1273,
+      "start": 3343.0,
+      "end": 3344.47,
+      "duration": 1.47,
+      "text": "have it in the notes that you can take a"
+    },
+    {
+      "index": 1274,
+      "start": 3344.48,
+      "end": 3346.95,
+      "duration": 2.47,
+      "text": "look at. This will actually have a"
+    },
+    {
+      "index": 1275,
+      "start": 3346.96,
+      "end": 3349.03,
+      "duration": 2.07,
+      "text": "shorter path"
+    },
+    {
+      "index": 1276,
+      "start": 3349.04,
+      "end": 3351.83,
+      "duration": 2.79,
+      "text": "for vertex, sorry. It'll have a shorter"
+    },
+    {
+      "index": 1277,
+      "start": 3351.84,
+      "end": 3354.59,
+      "duration": 2.75,
+      "text": "path for vertex"
+    },
+    {
+      "index": 1278,
+      "start": 3354.6,
+      "end": 3360.99,
+      "duration": 6.39,
+      "text": "B."
+    },
+    {
+      "index": 1279,
+      "start": 3364.79,
+      "end": 3364.8,
+      "duration": 0.01,
+      "text": "A to B to C to D to B. Thank you. That's"
+    },
+    {
+      "index": 1280,
+      "start": 3364.8,
+      "end": 3368.95,
+      "duration": 4.15,
+      "text": "a path of length four of four of edges."
+    },
+    {
+      "index": 1281,
+      "start": 3368.96,
+      "end": 3371.91,
+      "duration": 2.95,
+      "text": "That has shorter path than any path that"
+    },
+    {
+      "index": 1282,
+      "start": 3371.92,
+      "end": 3372.99,
+      "duration": 1.07,
+      "text": "has"
+    },
+    {
+      "index": 1283,
+      "start": 3373.0,
+      "end": 3374.51,
+      "duration": 1.51,
+      "text": "fewer edges. In particular, there's only"
+    },
+    {
+      "index": 1284,
+      "start": 3374.52,
+      "end": 3376.91,
+      "duration": 2.39,
+      "text": "one other path to B using fewer than"
+    },
+    {
+      "index": 1285,
+      "start": 3376.92,
+      "end": 3380.11,
+      "duration": 3.19,
+      "text": "four uh there's two other paths."
+    },
+    {
+      "index": 1286,
+      "start": 3380.12,
+      "end": 3381.63,
+      "duration": 1.51,
+      "text": "One path of length"
+    },
+    {
+      "index": 1287,
+      "start": 3381.64,
+      "end": 3383.47,
+      "duration": 1.83,
+      "text": "uh that has one edge that has weight"
+    },
+    {
+      "index": 1288,
+      "start": 3383.48,
+      "end": 3386.47,
+      "duration": 2.99,
+      "text": "minus five and one path this path that"
+    },
+    {
+      "index": 1289,
+      "start": 3386.48,
+      "end": 3389.07,
+      "duration": 2.59,
+      "text": "has weight nine minus one is eight."
+    },
+    {
+      "index": 1290,
+      "start": 3389.08,
+      "end": 3391.71,
+      "duration": 2.63,
+      "text": "Right? Whereas this path minus five"
+    },
+    {
+      "index": 1291,
+      "start": 3391.72,
+      "end": 3395.75,
+      "duration": 4.03,
+      "text": "minus four three minus one has"
+    },
+    {
+      "index": 1292,
+      "start": 3395.76,
+      "end": 3399.31,
+      "duration": 3.55,
+      "text": "minus 10 plus three is minus seven which"
+    },
+    {
+      "index": 1293,
+      "start": 3399.32,
+      "end": 3402.51,
+      "duration": 3.19,
+      "text": "is shorter than minus five. So"
+    },
+    {
+      "index": 1294,
+      "start": 3402.52,
+      "end": 3406.23,
+      "duration": 3.71,
+      "text": "B indeed is a witness, right? And if we"
+    },
+    {
+      "index": 1295,
+      "start": 3406.24,
+      "end": 3408.59,
+      "duration": 2.35,
+      "text": "actually take a look at that path"
+    },
+    {
+      "index": 1296,
+      "start": 3408.6,
+      "end": 3410.75,
+      "duration": 2.15,
+      "text": "through this graph"
+    },
+    {
+      "index": 1297,
+      "start": 3410.76,
+      "end": 3414.349,
+      "duration": 3.589,
+      "text": "going from A to B"
+    },
+    {
+      "index": 1298,
+      "start": 3414.359,
+      "end": 3416.71,
+      "duration": 2.351,
+      "text": "to C"
+    },
+    {
+      "index": 1299,
+      "start": 3416.72,
+      "end": 3419.11,
+      "duration": 2.39,
+      "text": "to D"
+    },
+    {
+      "index": 1300,
+      "start": 3419.12,
+      "end": 3423.39,
+      "duration": 4.27,
+      "text": "back to B"
+    },
+    {
+      "index": 1301,
+      "start": 3425.47,
+      "end": 3425.48,
+      "duration": 0.01,
+      "text": "we see that there's a"
+    },
+    {
+      "index": 1302,
+      "start": 3425.48,
+      "end": 3428.23,
+      "duration": 2.75,
+      "text": "negative weight cycle in this graph."
+    },
+    {
+      "index": 1303,
+      "start": 3428.24,
+      "end": 3432.27,
+      "duration": 4.03,
+      "text": "B to C to D to B. And indeed that's"
+    },
+    {
+      "index": 1304,
+      "start": 3432.28,
+      "end": 3435.11,
+      "duration": 2.83,
+      "text": "always the case for our witnesses."
+    },
+    {
+      "index": 1305,
+      "start": 3435.12,
+      "end": 3436.71,
+      "duration": 1.59,
+      "text": "Okay? You can see a proof of that in the"
+    },
+    {
+      "index": 1306,
+      "start": 3436.72,
+      "end": 3440.03,
+      "duration": 3.31,
+      "text": "notes and you can see in recitation a"
+    },
+    {
+      "index": 1307,
+      "start": 3440.04,
+      "end": 3442.71,
+      "duration": 2.67,
+      "text": "little space optimization"
+    },
+    {
+      "index": 1308,
+      "start": 3442.72,
+      "end": 3444.87,
+      "duration": 2.15,
+      "text": "to make us not have to construct this"
+    },
+    {
+      "index": 1309,
+      "start": 3444.88,
+      "end": 3447.23,
+      "duration": 2.35,
+      "text": "entire graph on the fly, but actually"
+    },
+    {
+      "index": 1310,
+      "start": 3447.24,
+      "end": 3449.91,
+      "duration": 2.67,
+      "text": "only use order V space while we're"
+    },
+    {
+      "index": 1311,
+      "start": 3449.92,
+      "end": 3452.19,
+      "duration": 2.27,
+      "text": "going. Okay, so that's Bellman-Ford."
+    },
+    {
+      "index": 1312,
+      "start": 3452.2,
+      "end": 3455.52,
+      "duration": 3.32,
+      "text": "Sorry for running a little late."
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Algorithms",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY"
+  }
+}

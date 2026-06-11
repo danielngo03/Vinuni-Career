@@ -1,0 +1,8726 @@
+{
+  "video": {
+    "id": "nykOeWgQcHM",
+    "title": "1. What is Computation?",
+    "url": "https://www.youtube.com/watch?v=nykOeWgQcHM",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2586,
+    "language": "en"
+  },
+  "segment_count": 1244,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.51,
+      "end": 2.52,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.52,
+      "end": 5.27,
+      "duration": 2.75,
+      "text": "a Creative Commons license. Your support"
+    },
+    {
+      "index": 2,
+      "start": 5.28,
+      "end": 7.55,
+      "duration": 2.27,
+      "text": "will help MIT OpenCourseware continue to"
+    },
+    {
+      "index": 3,
+      "start": 7.5600000000000005,
+      "end": 9.91,
+      "duration": 2.35,
+      "text": "offer high-quality educational resources"
+    },
+    {
+      "index": 4,
+      "start": 9.92,
+      "end": 11.19,
+      "duration": 1.27,
+      "text": "for free."
+    },
+    {
+      "index": 5,
+      "start": 11.2,
+      "end": 13.31,
+      "duration": 2.11,
+      "text": "To make a donation or view additional"
+    },
+    {
+      "index": 6,
+      "start": 13.32,
+      "end": 16.03,
+      "duration": 2.71,
+      "text": "materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 7,
+      "start": 16.04,
+      "end": 30.11,
+      "duration": 14.07,
+      "text": "visit MIT OpenCourseware at ocw.mit.edu."
+    },
+    {
+      "index": 8,
+      "start": 32.87,
+      "end": 32.88,
+      "duration": 0.01,
+      "text": "All right, let's begin."
+    },
+    {
+      "index": 9,
+      "start": 32.88,
+      "end": 35.19,
+      "duration": 2.31,
+      "text": "So, as I mentioned before, this this"
+    },
+    {
+      "index": 10,
+      "start": 35.2,
+      "end": 37.23,
+      "duration": 2.03,
+      "text": "this lecture will be recorded for OCW."
+    },
+    {
+      "index": 11,
+      "start": 37.24,
+      "end": 38.47,
+      "duration": 1.23,
+      "text": "So, again,"
+    },
+    {
+      "index": 12,
+      "start": 38.48,
+      "end": 39.99,
+      "duration": 1.51,
+      "text": "in future lectures, if you don't want to"
+    },
+    {
+      "index": 13,
+      "start": 40.0,
+      "end": 41.87,
+      "duration": 1.87,
+      "text": "have the back of your head show up, just"
+    },
+    {
+      "index": 14,
+      "start": 41.88,
+      "end": 44.43,
+      "duration": 2.55,
+      "text": "don't sit in this this front area here."
+    },
+    {
+      "index": 15,
+      "start": 44.44,
+      "end": 46.11,
+      "duration": 1.67,
+      "text": "So, first of all, wow, what a crowd, you"
+    },
+    {
+      "index": 16,
+      "start": 46.12,
+      "end": 49.67,
+      "duration": 3.55,
+      "text": "guys. We're finally in 26-100. 6.001"
+    },
+    {
+      "index": 17,
+      "start": 49.68,
+      "end": 52.11,
+      "duration": 2.43,
+      "text": "made it big, huh? So,"
+    },
+    {
+      "index": 18,
+      "start": 52.12,
+      "end": 53.83,
+      "duration": 1.71,
+      "text": "good afternoon and welcome to the very"
+    },
+    {
+      "index": 19,
+      "start": 53.84,
+      "end": 57.11,
+      "duration": 3.27,
+      "text": "first class of 6.001 and also 600 this"
+    },
+    {
+      "index": 20,
+      "start": 57.12,
+      "end": 58.67,
+      "duration": 1.55,
+      "text": "semester."
+    },
+    {
+      "index": 21,
+      "start": 58.68,
+      "end": 60.87,
+      "duration": 2.19,
+      "text": "So, my name is Annabelle. First name"
+    },
+    {
+      "index": 22,
+      "start": 60.88,
+      "end": 63.31,
+      "duration": 2.43,
+      "text": "Anna, last name Bell."
+    },
+    {
+      "index": 23,
+      "start": 63.32,
+      "end": 66.35,
+      "duration": 3.03,
+      "text": "I'm a lecturer in the EECS department."
+    },
+    {
+      "index": 24,
+      "start": 66.36,
+      "end": 67.63,
+      "duration": 1.27,
+      "text": "And I'll be giving some of the lectures"
+    },
+    {
+      "index": 25,
+      "start": 67.64,
+      "end": 70.59,
+      "duration": 2.95,
+      "text": "for today, along with um"
+    },
+    {
+      "index": 26,
+      "start": 70.6,
+      "end": 72.19,
+      "duration": 1.59,
+      "text": "later on in the in the term, Professor"
+    },
+    {
+      "index": 27,
+      "start": 72.2,
+      "end": 73.43,
+      "duration": 1.23,
+      "text": "Eric Grimson, who's sitting right down"
+    },
+    {
+      "index": 28,
+      "start": 73.44,
+      "end": 74.31,
+      "duration": 0.87,
+      "text": "there,"
+    },
+    {
+      "index": 29,
+      "start": 74.32,
+      "end": 75.67,
+      "duration": 1.35,
+      "text": "um will be giving some of the lectures"
+    },
+    {
+      "index": 30,
+      "start": 75.68,
+      "end": 79.15,
+      "duration": 3.47,
+      "text": "as well. Okay, so, today we're going to"
+    },
+    {
+      "index": 31,
+      "start": 79.16,
+      "end": 80.67,
+      "duration": 1.51,
+      "text": "um go over some just basic"
+    },
+    {
+      "index": 32,
+      "start": 80.68,
+      "end": 82.03,
+      "duration": 1.35,
+      "text": "administrivia, a little bit of course"
+    },
+    {
+      "index": 33,
+      "start": 82.04,
+      "end": 83.63,
+      "duration": 1.59,
+      "text": "information,"
+    },
+    {
+      "index": 34,
+      "start": 83.64,
+      "end": 84.59,
+      "duration": 0.95,
+      "text": "and then we're going to talk a little"
+    },
+    {
+      "index": 35,
+      "start": 84.6,
+      "end": 86.27,
+      "duration": 1.67,
+      "text": "bit about what is computation. So, we'll"
+    },
+    {
+      "index": 36,
+      "start": 86.28,
+      "end": 87.63,
+      "duration": 1.35,
+      "text": "discuss at a very high level what"
+    },
+    {
+      "index": 37,
+      "start": 87.64,
+      "end": 89.55,
+      "duration": 1.91,
+      "text": "computers do, just to make sure we're"
+    },
+    {
+      "index": 38,
+      "start": 89.56,
+      "end": 91.39,
+      "duration": 1.83,
+      "text": "all on the same page."
+    },
+    {
+      "index": 39,
+      "start": 91.4,
+      "end": 92.79,
+      "duration": 1.39,
+      "text": "And then we're going to dive right into"
+    },
+    {
+      "index": 40,
+      "start": 92.8,
+      "end": 94.55,
+      "duration": 1.75,
+      "text": "Python basics. We're going to talk a"
+    },
+    {
+      "index": 41,
+      "start": 94.56,
+      "end": 96.23,
+      "duration": 1.67,
+      "text": "little bit about mathematical operations"
+    },
+    {
+      "index": 42,
+      "start": 96.24,
+      "end": 98.55,
+      "duration": 2.31,
+      "text": "you can do with Python, um and then"
+    },
+    {
+      "index": 43,
+      "start": 98.56,
+      "end": 99.71,
+      "duration": 1.15,
+      "text": "we're going to talk about Python"
+    },
+    {
+      "index": 44,
+      "start": 99.72,
+      "end": 102.39,
+      "duration": 2.67,
+      "text": "variables and types. So, as I mentioned"
+    },
+    {
+      "index": 45,
+      "start": 102.4,
+      "end": 104.47,
+      "duration": 2.07,
+      "text": "in my introductory email, all the slides"
+    },
+    {
+      "index": 46,
+      "start": 104.48,
+      "end": 105.71,
+      "duration": 1.23,
+      "text": "and code that I'll talk about during"
+    },
+    {
+      "index": 47,
+      "start": 105.72,
+      "end": 107.75,
+      "duration": 2.03,
+      "text": "lectures will be up before lecture. So,"
+    },
+    {
+      "index": 48,
+      "start": 107.76,
+      "end": 110.39,
+      "duration": 2.63,
+      "text": "I highly encourage you to download them"
+    },
+    {
+      "index": 49,
+      "start": 110.4,
+      "end": 112.71,
+      "duration": 2.31,
+      "text": "and to have them open. Um we're going to"
+    },
+    {
+      "index": 50,
+      "start": 112.72,
+      "end": 113.67,
+      "duration": 0.95,
+      "text": "go"
+    },
+    {
+      "index": 51,
+      "start": 113.68,
+      "end": 115.59,
+      "duration": 1.91,
+      "text": "uh go through some in-class exercises,"
+    },
+    {
+      "index": 52,
+      "start": 115.6,
+      "end": 117.67,
+      "duration": 2.07,
+      "text": "which will be available on the slides,"
+    },
+    {
+      "index": 53,
+      "start": 117.68,
+      "end": 120.31,
+      "duration": 2.63,
+      "text": "and it's it's fun to do. And it's also"
+    },
+    {
+      "index": 54,
+      "start": 120.32,
+      "end": 123.15,
+      "duration": 2.83,
+      "text": "great if you could take notes um"
+    },
+    {
+      "index": 55,
+      "start": 123.16,
+      "end": 126.75,
+      "duration": 3.59,
+      "text": "about on the code, uh just so you"
+    },
+    {
+      "index": 56,
+      "start": 126.76,
+      "end": 129.029,
+      "duration": 2.269,
+      "text": "uh just for future reference."
+    },
+    {
+      "index": 57,
+      "start": 129.039,
+      "end": 130.71,
+      "duration": 1.671,
+      "text": "It's It's true. This is a really"
+    },
+    {
+      "index": 58,
+      "start": 130.72,
+      "end": 132.99,
+      "duration": 2.27,
+      "text": "fast-paced course, and we ramp up really"
+    },
+    {
+      "index": 59,
+      "start": 133.0,
+      "end": 135.71,
+      "duration": 2.71,
+      "text": "quickly. So, we do want to position you"
+    },
+    {
+      "index": 60,
+      "start": 135.72,
+      "end": 137.83,
+      "duration": 2.11,
+      "text": "um to succeed in this course."
+    },
+    {
+      "index": 61,
+      "start": 137.84,
+      "end": 139.15,
+      "duration": 1.31,
+      "text": "So, as I was writing this, I was trying"
+    },
+    {
+      "index": 62,
+      "start": 139.16,
+      "end": 140.99,
+      "duration": 1.83,
+      "text": "to think about when I was first starting"
+    },
+    {
+      "index": 63,
+      "start": 141.0,
+      "end": 143.39,
+      "duration": 2.39,
+      "text": "to program, uh you know, what helped me"
+    },
+    {
+      "index": 64,
+      "start": 143.4,
+      "end": 144.63,
+      "duration": 1.23,
+      "text": "get through my first very first"
+    },
+    {
+      "index": 65,
+      "start": 144.64,
+      "end": 147.63,
+      "duration": 2.99,
+      "text": "programming course, and this is really"
+    },
+    {
+      "index": 66,
+      "start": 147.64,
+      "end": 149.83,
+      "duration": 2.19,
+      "text": "like a good list. So, the first thing"
+    },
+    {
+      "index": 67,
+      "start": 149.84,
+      "end": 151.79,
+      "duration": 1.95,
+      "text": "was I just read the p-sets as soon as"
+    },
+    {
+      "index": 68,
+      "start": 151.8,
+      "end": 153.19,
+      "duration": 1.39,
+      "text": "they came out,"
+    },
+    {
+      "index": 69,
+      "start": 153.2,
+      "end": 154.31,
+      "duration": 1.11,
+      "text": "made sure that, you know, the"
+    },
+    {
+      "index": 70,
+      "start": 154.32,
+      "end": 156.43,
+      "duration": 2.11,
+      "text": "terminology kind of just"
+    },
+    {
+      "index": 71,
+      "start": 156.44,
+      "end": 158.99,
+      "duration": 2.55,
+      "text": "sank in. And then, during lectures, you"
+    },
+    {
+      "index": 72,
+      "start": 159.0,
+      "end": 160.35,
+      "duration": 1.35,
+      "text": "know, if the lecturer was talking about"
+    },
+    {
+      "index": 73,
+      "start": 160.36,
+      "end": 161.87,
+      "duration": 1.51,
+      "text": "something that"
+    },
+    {
+      "index": 74,
+      "start": 161.88,
+      "end": 163.11,
+      "duration": 1.23,
+      "text": "you know, suddenly I remembered, oh, I"
+    },
+    {
+      "index": 75,
+      "start": 163.12,
+      "end": 164.71,
+      "duration": 1.59,
+      "text": "saw that word in the p-set and I didn't"
+    },
+    {
+      "index": 76,
+      "start": 164.72,
+      "end": 166.07,
+      "duration": 1.35,
+      "text": "know what it was. Well, hey, now I know"
+    },
+    {
+      "index": 77,
+      "start": 166.08,
+      "end": 167.71,
+      "duration": 1.63,
+      "text": "what it is, right? So, just give it a"
+    },
+    {
+      "index": 78,
+      "start": 167.72,
+      "end": 169.63,
+      "duration": 1.91,
+      "text": "read. You don't need to start it."
+    },
+    {
+      "index": 79,
+      "start": 169.64,
+      "end": 171.39,
+      "duration": 1.75,
+      "text": "Um"
+    },
+    {
+      "index": 80,
+      "start": 171.4,
+      "end": 172.55,
+      "duration": 1.15,
+      "text": "if you're new to programming, I think"
+    },
+    {
+      "index": 81,
+      "start": 172.56,
+      "end": 174.55,
+      "duration": 1.99,
+      "text": "the keyword is practice."
+    },
+    {
+      "index": 82,
+      "start": 174.56,
+      "end": 177.31,
+      "duration": 2.75,
+      "text": "So, it's like math, you know, or"
+    },
+    {
+      "index": 83,
+      "start": 177.32,
+      "end": 178.51,
+      "duration": 1.19,
+      "text": "reading. The more you practice, the"
+    },
+    {
+      "index": 84,
+      "start": 178.52,
+      "end": 180.11,
+      "duration": 1.59,
+      "text": "better you get at it."
+    },
+    {
+      "index": 85,
+      "start": 180.12,
+      "end": 181.39,
+      "duration": 1.27,
+      "text": "It You're not going to absorb"
+    },
+    {
+      "index": 86,
+      "start": 181.4,
+      "end": 182.83,
+      "duration": 1.43,
+      "text": "programming by watching me write"
+    },
+    {
+      "index": 87,
+      "start": 182.84,
+      "end": 184.19,
+      "duration": 1.35,
+      "text": "programs cuz I already know how to"
+    },
+    {
+      "index": 88,
+      "start": 184.2,
+      "end": 185.55,
+      "duration": 1.35,
+      "text": "program, right? You guys need to"
+    },
+    {
+      "index": 89,
+      "start": 185.56,
+      "end": 187.11,
+      "duration": 1.55,
+      "text": "practice."
+    },
+    {
+      "index": 90,
+      "start": 187.12,
+      "end": 189.19,
+      "duration": 2.07,
+      "text": "So, download the code before lecture,"
+    },
+    {
+      "index": 91,
+      "start": 189.2,
+      "end": 191.07,
+      "duration": 1.87,
+      "text": "follow along whatever I type, you guys"
+    },
+    {
+      "index": 92,
+      "start": 191.08,
+      "end": 193.87,
+      "duration": 2.79,
+      "text": "can type. And I think also one of the"
+    },
+    {
+      "index": 93,
+      "start": 193.88,
+      "end": 195.27,
+      "duration": 1.39,
+      "text": "big things is if you're new to"
+    },
+    {
+      "index": 94,
+      "start": 195.28,
+      "end": 196.71,
+      "duration": 1.43,
+      "text": "programming, you're kind of afraid that"
+    },
+    {
+      "index": 95,
+      "start": 196.72,
+      "end": 198.19,
+      "duration": 1.47,
+      "text": "you're going to break your computer,"
+    },
+    {
+      "index": 96,
+      "start": 198.2,
+      "end": 199.23,
+      "duration": 1.03,
+      "text": "right?"
+    },
+    {
+      "index": 97,
+      "start": 199.24,
+      "end": 201.55,
+      "duration": 2.31,
+      "text": "And you can't really do that"
+    },
+    {
+      "index": 98,
+      "start": 201.56,
+      "end": 203.23,
+      "duration": 1.67,
+      "text": "um just by"
+    },
+    {
+      "index": 99,
+      "start": 203.24,
+      "end": 205.19,
+      "duration": 1.95,
+      "text": "running Anaconda and and typing in some"
+    },
+    {
+      "index": 100,
+      "start": 205.2,
+      "end": 206.47,
+      "duration": 1.27,
+      "text": "commands."
+    },
+    {
+      "index": 101,
+      "start": 206.48,
+      "end": 207.79,
+      "duration": 1.31,
+      "text": "So, don't be afraid to just type some"
+    },
+    {
+      "index": 102,
+      "start": 207.8,
+      "end": 209.83,
+      "duration": 2.03,
+      "text": "stuff in and see what it does. Worst"
+    },
+    {
+      "index": 103,
+      "start": 209.84,
+      "end": 211.39,
+      "duration": 1.55,
+      "text": "case, you just restart the computer,"
+    },
+    {
+      "index": 104,
+      "start": 211.4,
+      "end": 212.87,
+      "duration": 1.47,
+      "text": "right?"
+    },
+    {
+      "index": 105,
+      "start": 212.88,
+      "end": 214.67,
+      "duration": 1.79,
+      "text": "So, yeah."
+    },
+    {
+      "index": 106,
+      "start": 214.68,
+      "end": 217.51,
+      "duration": 2.83,
+      "text": "Um yeah. So, that's probably the big"
+    },
+    {
+      "index": 107,
+      "start": 217.52,
+      "end": 218.55,
+      "duration": 1.03,
+      "text": "thing right there. I should probably"
+    },
+    {
+      "index": 108,
+      "start": 218.56,
+      "end": 220.99,
+      "duration": 2.43,
+      "text": "highlighted it, but don't be afraid."
+    },
+    {
+      "index": 109,
+      "start": 221.0,
+      "end": 223.43,
+      "duration": 2.43,
+      "text": "Great. So, this is pretty much a roadmap"
+    },
+    {
+      "index": 110,
+      "start": 223.44,
+      "end": 226.63,
+      "duration": 3.19,
+      "text": "of all of 6.001 or 600"
+    },
+    {
+      "index": 111,
+      "start": 226.64,
+      "end": 227.91,
+      "duration": 1.27,
+      "text": "as I've just explained it. So, there's"
+    },
+    {
+      "index": 112,
+      "start": 227.92,
+      "end": 229.75,
+      "duration": 1.83,
+      "text": "three big things we want you to get out"
+    },
+    {
+      "index": 113,
+      "start": 229.76,
+      "end": 231.15,
+      "duration": 1.39,
+      "text": "of this course."
+    },
+    {
+      "index": 114,
+      "start": 231.16,
+      "end": 233.03,
+      "duration": 1.87,
+      "text": "Okay. The first thing is the knowledge"
+    },
+    {
+      "index": 115,
+      "start": 233.04,
+      "end": 234.95,
+      "duration": 1.91,
+      "text": "of concepts, which is pretty much true"
+    },
+    {
+      "index": 116,
+      "start": 234.96,
+      "end": 236.79,
+      "duration": 1.83,
+      "text": "of any class that you'll take, right?"
+    },
+    {
+      "index": 117,
+      "start": 236.8,
+      "end": 238.51,
+      "duration": 1.71,
+      "text": "The class will teach you something"
+    },
+    {
+      "index": 118,
+      "start": 238.52,
+      "end": 240.47,
+      "duration": 1.95,
+      "text": "through lectures, exams will test how"
+    },
+    {
+      "index": 119,
+      "start": 240.48,
+      "end": 242.39,
+      "duration": 1.91,
+      "text": "much you know."
+    },
+    {
+      "index": 120,
+      "start": 242.4,
+      "end": 245.67,
+      "duration": 3.27,
+      "text": "This is a class in programming, right?"
+    },
+    {
+      "index": 121,
+      "start": 245.68,
+      "end": 247.83,
+      "duration": 2.15,
+      "text": "The other thing we need you we want you"
+    },
+    {
+      "index": 122,
+      "start": 247.84,
+      "end": 250.91,
+      "duration": 3.07,
+      "text": "to get out of it is programming skills."
+    },
+    {
+      "index": 123,
+      "start": 250.92,
+      "end": 252.27,
+      "duration": 1.35,
+      "text": "And the last thing, and I think this is"
+    },
+    {
+      "index": 124,
+      "start": 252.28,
+      "end": 253.79,
+      "duration": 1.51,
+      "text": "what makes this class really great, is"
+    },
+    {
+      "index": 125,
+      "start": 253.8,
+      "end": 256.19,
+      "duration": 2.39,
+      "text": "we teach you how to solve problems. And"
+    },
+    {
+      "index": 126,
+      "start": 256.2,
+      "end": 258.509,
+      "duration": 2.309,
+      "text": "we do that through the p-sets."
+    },
+    {
+      "index": 127,
+      "start": 258.519,
+      "end": 260.31,
+      "duration": 1.791,
+      "text": "So, that's really how I feel the roadmap"
+    },
+    {
+      "index": 128,
+      "start": 260.32,
+      "end": 262.47,
+      "duration": 2.15,
+      "text": "of this course looks like."
+    },
+    {
+      "index": 129,
+      "start": 262.48,
+      "end": 264.19,
+      "duration": 1.71,
+      "text": "And underlying all of these is just"
+    },
+    {
+      "index": 130,
+      "start": 264.2,
+      "end": 266.39,
+      "duration": 2.19,
+      "text": "practice. So, you have to just type some"
+    },
+    {
+      "index": 131,
+      "start": 266.4,
+      "end": 269.63,
+      "duration": 3.23,
+      "text": "stuff away and code a lot."
+    },
+    {
+      "index": 132,
+      "start": 269.64,
+      "end": 271.31,
+      "duration": 1.67,
+      "text": "And um"
+    },
+    {
+      "index": 133,
+      "start": 271.32,
+      "end": 273.35,
+      "duration": 2.03,
+      "text": "you'll succeed in this course, I think."
+    },
+    {
+      "index": 134,
+      "start": 273.36,
+      "end": 275.47,
+      "duration": 2.11,
+      "text": "Okay."
+    },
+    {
+      "index": 135,
+      "start": 275.48,
+      "end": 277.19,
+      "duration": 1.71,
+      "text": "So, what are the things we're going to"
+    },
+    {
+      "index": 136,
+      "start": 277.2,
+      "end": 280.43,
+      "duration": 3.23,
+      "text": "learn in this class? I feel like"
+    },
+    {
+      "index": 137,
+      "start": 280.44,
+      "end": 281.23,
+      "duration": 0.79,
+      "text": "the things we're going to learn in this"
+    },
+    {
+      "index": 138,
+      "start": 281.24,
+      "end": 283.23,
+      "duration": 1.99,
+      "text": "class can be divided into basically"
+    },
+    {
+      "index": 139,
+      "start": 283.24,
+      "end": 284.75,
+      "duration": 1.51,
+      "text": "three different sections. So, the first"
+    },
+    {
+      "index": 140,
+      "start": 284.76,
+      "end": 286.27,
+      "duration": 1.51,
+      "text": "one is"
+    },
+    {
+      "index": 141,
+      "start": 286.28,
+      "end": 288.11,
+      "duration": 1.83,
+      "text": "related to these first two first two"
+    },
+    {
+      "index": 142,
+      "start": 288.12,
+      "end": 289.87,
+      "duration": 1.75,
+      "text": "items here."
+    },
+    {
+      "index": 143,
+      "start": 289.88,
+      "end": 291.43,
+      "duration": 1.55,
+      "text": "So, it's really about learning how to"
+    },
+    {
+      "index": 144,
+      "start": 291.44,
+      "end": 293.15,
+      "duration": 1.71,
+      "text": "program."
+    },
+    {
+      "index": 145,
+      "start": 293.16,
+      "end": 295.03,
+      "duration": 1.87,
+      "text": "So, learning how to program is part of"
+    },
+    {
+      "index": 146,
+      "start": 295.04,
+      "end": 298.27,
+      "duration": 3.23,
+      "text": "it is figuring out what um what objects"
+    },
+    {
+      "index": 147,
+      "start": 298.28,
+      "end": 299.91,
+      "duration": 1.63,
+      "text": "to create. You'll learn about these"
+    },
+    {
+      "index": 148,
+      "start": 299.92,
+      "end": 301.63,
+      "duration": 1.71,
+      "text": "later. How do you represent knowledge"
+    },
+    {
+      "index": 149,
+      "start": 301.64,
+      "end": 302.87,
+      "duration": 1.23,
+      "text": "with data structures? That's sort of the"
+    },
+    {
+      "index": 150,
+      "start": 302.88,
+      "end": 304.75,
+      "duration": 1.87,
+      "text": "broad term for that."
+    },
+    {
+      "index": 151,
+      "start": 304.76,
+      "end": 305.91,
+      "duration": 1.15,
+      "text": "And then, as you're writing programs,"
+    },
+    {
+      "index": 152,
+      "start": 305.92,
+      "end": 308.19,
+      "duration": 2.27,
+      "text": "you need to uh programs aren't just"
+    },
+    {
+      "index": 153,
+      "start": 308.2,
+      "end": 310.15,
+      "duration": 1.95,
+      "text": "linear. Sometimes programs jump around,"
+    },
+    {
+      "index": 154,
+      "start": 310.16,
+      "end": 311.43,
+      "duration": 1.27,
+      "text": "they make decisions. There's some"
+    },
+    {
+      "index": 155,
+      "start": 311.44,
+      "end": 313.43,
+      "duration": 1.99,
+      "text": "control flow to programs."
+    },
+    {
+      "index": 156,
+      "start": 313.44,
+      "end": 315.43,
+      "duration": 1.99,
+      "text": "So, that's what the second line is going"
+    },
+    {
+      "index": 157,
+      "start": 315.44,
+      "end": 318.47,
+      "duration": 3.03,
+      "text": "to be be about."
+    },
+    {
+      "index": 158,
+      "start": 318.48,
+      "end": 320.79,
+      "duration": 2.31,
+      "text": "The second big part of this course"
+    },
+    {
+      "index": 159,
+      "start": 320.8,
+      "end": 324.19,
+      "duration": 3.39,
+      "text": "is a little bit more abstract,"
+    },
+    {
+      "index": 160,
+      "start": 324.2,
+      "end": 326.43,
+      "duration": 2.23,
+      "text": "and it deals with how do you write good"
+    },
+    {
+      "index": 161,
+      "start": 326.44,
+      "end": 327.55,
+      "duration": 1.11,
+      "text": "code,"
+    },
+    {
+      "index": 162,
+      "start": 327.56,
+      "end": 328.71,
+      "duration": 1.15,
+      "text": "good style,"
+    },
+    {
+      "index": 163,
+      "start": 328.72,
+      "end": 330.35,
+      "duration": 1.63,
+      "text": "um code that's readable."
+    },
+    {
+      "index": 164,
+      "start": 330.36,
+      "end": 332.27,
+      "duration": 1.91,
+      "text": "So, when you write code, you want to"
+    },
+    {
+      "index": 165,
+      "start": 332.28,
+      "end": 333.67,
+      "duration": 1.39,
+      "text": "write it such that, you know, you're in"
+    },
+    {
+      "index": 166,
+      "start": 333.68,
+      "end": 335.15,
+      "duration": 1.47,
+      "text": "a big company, other people will read"
+    },
+    {
+      "index": 167,
+      "start": 335.16,
+      "end": 337.31,
+      "duration": 2.15,
+      "text": "it, other people will use it."
+    },
+    {
+      "index": 168,
+      "start": 337.32,
+      "end": 338.83,
+      "duration": 1.51,
+      "text": "Um so, it has to be readable and"
+    },
+    {
+      "index": 169,
+      "start": 338.84,
+      "end": 340.51,
+      "duration": 1.67,
+      "text": "understandable by others. So, to that"
+    },
+    {
+      "index": 170,
+      "start": 340.52,
+      "end": 342.99,
+      "duration": 2.47,
+      "text": "end, you need to write code that's"
+    },
+    {
+      "index": 171,
+      "start": 343.0,
+      "end": 345.63,
+      "duration": 2.63,
+      "text": "well organized, modular, easy to"
+    },
+    {
+      "index": 172,
+      "start": 345.64,
+      "end": 348.67,
+      "duration": 3.03,
+      "text": "understand, right?"
+    },
+    {
+      "index": 173,
+      "start": 348.68,
+      "end": 350.15,
+      "duration": 1.47,
+      "text": "And not only that, not only will your"
+    },
+    {
+      "index": 174,
+      "start": 350.16,
+      "end": 353.03,
+      "duration": 2.87,
+      "text": "code be read by other people, but next"
+    },
+    {
+      "index": 175,
+      "start": 353.04,
+      "end": 354.79,
+      "duration": 1.75,
+      "text": "year, maybe you'll take another course"
+    },
+    {
+      "index": 176,
+      "start": 354.8,
+      "end": 356.03,
+      "duration": 1.23,
+      "text": "and you'll want to look back at some of"
+    },
+    {
+      "index": 177,
+      "start": 356.04,
+      "end": 357.07,
+      "duration": 1.03,
+      "text": "the problem sets you wrote in this"
+    },
+    {
+      "index": 178,
+      "start": 357.08,
+      "end": 358.19,
+      "duration": 1.11,
+      "text": "class."
+    },
+    {
+      "index": 179,
+      "start": 358.2,
+      "end": 359.79,
+      "duration": 1.59,
+      "text": "You kind of want to be able to reread"
+    },
+    {
+      "index": 180,
+      "start": 359.8,
+      "end": 361.43,
+      "duration": 1.63,
+      "text": "your code, right? If it's a big mess,"
+    },
+    {
+      "index": 181,
+      "start": 361.44,
+      "end": 363.15,
+      "duration": 1.71,
+      "text": "you might not be able to"
+    },
+    {
+      "index": 182,
+      "start": 363.16,
+      "end": 365.27,
+      "duration": 2.11,
+      "text": "understand or re-understand what you"
+    },
+    {
+      "index": 183,
+      "start": 365.28,
+      "end": 367.23,
+      "duration": 1.95,
+      "text": "what you were doing. So, writing"
+    },
+    {
+      "index": 184,
+      "start": 367.24,
+      "end": 368.59,
+      "duration": 1.35,
+      "text": "readable code and organizing code is"
+    },
+    {
+      "index": 185,
+      "start": 368.6,
+      "end": 370.23,
+      "duration": 1.63,
+      "text": "also a big part."
+    },
+    {
+      "index": 186,
+      "start": 370.24,
+      "end": 371.99,
+      "duration": 1.75,
+      "text": "And the last section is going to deal"
+    },
+    {
+      "index": 187,
+      "start": 372.0,
+      "end": 373.15,
+      "duration": 1.15,
+      "text": "with"
+    },
+    {
+      "index": 188,
+      "start": 373.16,
+      "end": 374.87,
+      "duration": 1.71,
+      "text": "um"
+    },
+    {
+      "index": 189,
+      "start": 374.88,
+      "end": 376.31,
+      "duration": 1.43,
+      "text": "So, the first two are actually part of"
+    },
+    {
+      "index": 190,
+      "start": 376.32,
+      "end": 378.03,
+      "duration": 1.71,
+      "text": "the programming"
+    },
+    {
+      "index": 191,
+      "start": 378.04,
+      "end": 379.67,
+      "duration": 1.63,
+      "text": "in Introduction to Programming and"
+    },
+    {
+      "index": 192,
+      "start": 379.68,
+      "end": 381.79,
+      "duration": 2.11,
+      "text": "Computer Science in Python. And the last"
+    },
+    {
+      "index": 193,
+      "start": 381.8,
+      "end": 384.83,
+      "duration": 3.03,
+      "text": "one deals a little bit deals mostly with"
+    },
+    {
+      "index": 194,
+      "start": 384.84,
+      "end": 386.15,
+      "duration": 1.31,
+      "text": "the computer science part in"
+    },
+    {
+      "index": 195,
+      "start": 386.16,
+      "end": 387.47,
+      "duration": 1.31,
+      "text": "Introduction to Programming and Computer"
+    },
+    {
+      "index": 196,
+      "start": 387.48,
+      "end": 389.27,
+      "duration": 1.79,
+      "text": "Science in Python."
+    },
+    {
+      "index": 197,
+      "start": 389.28,
+      "end": 391.19,
+      "duration": 1.91,
+      "text": "So, we're going to talk about once"
+    },
+    {
+      "index": 198,
+      "start": 391.2,
+      "end": 392.71,
+      "duration": 1.51,
+      "text": "you've learned how to write programs in"
+    },
+    {
+      "index": 199,
+      "start": 392.72,
+      "end": 394.99,
+      "duration": 2.27,
+      "text": "Python, how do you compare programs in"
+    },
+    {
+      "index": 200,
+      "start": 395.0,
+      "end": 396.71,
+      "duration": 1.71,
+      "text": "Python? How do you know that one program"
+    },
+    {
+      "index": 201,
+      "start": 396.72,
+      "end": 398.23,
+      "duration": 1.51,
+      "text": "is better than the other?"
+    },
+    {
+      "index": 202,
+      "start": 398.24,
+      "end": 399.39,
+      "duration": 1.15,
+      "text": "Right? How do you know that one program"
+    },
+    {
+      "index": 203,
+      "start": 399.4,
+      "end": 401.31,
+      "duration": 1.91,
+      "text": "is more efficient than the other?"
+    },
+    {
+      "index": 204,
+      "start": 401.32,
+      "end": 404.23,
+      "duration": 2.91,
+      "text": "How do you know that one algorithm is is"
+    },
+    {
+      "index": 205,
+      "start": 404.24,
+      "end": 405.83,
+      "duration": 1.59,
+      "text": "is better than the other. So, that's"
+    },
+    {
+      "index": 206,
+      "start": 405.84,
+      "end": 406.71,
+      "duration": 0.87,
+      "text": "what we're going to talk about in the"
+    },
+    {
+      "index": 207,
+      "start": 406.72,
+      "end": 408.91,
+      "duration": 2.19,
+      "text": "last part of the course."
+    },
+    {
+      "index": 208,
+      "start": 408.92,
+      "end": 409.99,
+      "duration": 1.07,
+      "text": "Okay."
+    },
+    {
+      "index": 209,
+      "start": 410.0,
+      "end": 412.03,
+      "duration": 2.03,
+      "text": "So, that's all for the of the sort of"
+    },
+    {
+      "index": 210,
+      "start": 412.04,
+      "end": 413.47,
+      "duration": 1.43,
+      "text": "administrative part of the course. So,"
+    },
+    {
+      "index": 211,
+      "start": 413.48,
+      "end": 415.99,
+      "duration": 2.51,
+      "text": "let's let's start by talking"
+    },
+    {
+      "index": 212,
+      "start": 416.0,
+      "end": 418.95,
+      "duration": 2.95,
+      "text": "at a high level what does a computer do?"
+    },
+    {
+      "index": 213,
+      "start": 418.96,
+      "end": 421.55,
+      "duration": 2.59,
+      "text": "So, fundamentally,"
+    },
+    {
+      "index": 214,
+      "start": 421.56,
+      "end": 424.03,
+      "duration": 2.47,
+      "text": "it does two things. One,"
+    },
+    {
+      "index": 215,
+      "start": 424.04,
+      "end": 426.39,
+      "duration": 2.35,
+      "text": "performs calculation. And it it performs"
+    },
+    {
+      "index": 216,
+      "start": 426.4,
+      "end": 428.03,
+      "duration": 1.63,
+      "text": "a lot of calculations, right? Computers"
+    },
+    {
+      "index": 217,
+      "start": 428.04,
+      "end": 429.59,
+      "duration": 1.55,
+      "text": "these days are really, really fast. A"
+    },
+    {
+      "index": 218,
+      "start": 429.6,
+      "end": 431.83,
+      "duration": 2.23,
+      "text": "billion calculations per second"
+    },
+    {
+      "index": 219,
+      "start": 431.84,
+      "end": 435.11,
+      "duration": 3.27,
+      "text": "is probably not not far off."
+    },
+    {
+      "index": 220,
+      "start": 435.12,
+      "end": 436.79,
+      "duration": 1.67,
+      "text": "It performs these calculations and it"
+    },
+    {
+      "index": 221,
+      "start": 436.8,
+      "end": 438.91,
+      "duration": 2.11,
+      "text": "has to store them somewhere, right?"
+    },
+    {
+      "index": 222,
+      "start": 438.92,
+      "end": 440.91,
+      "duration": 1.99,
+      "text": "Stores them in computer memory."
+    },
+    {
+      "index": 223,
+      "start": 440.92,
+      "end": 442.63,
+      "duration": 1.71,
+      "text": "So, a computer also has to remember"
+    },
+    {
+      "index": 224,
+      "start": 442.64,
+      "end": 443.87,
+      "duration": 1.23,
+      "text": "results."
+    },
+    {
+      "index": 225,
+      "start": 443.88,
+      "end": 445.35,
+      "duration": 1.47,
+      "text": "And these days, it's not uncommon to"
+    },
+    {
+      "index": 226,
+      "start": 445.36,
+      "end": 447.11,
+      "duration": 1.75,
+      "text": "find computers with hundreds of"
+    },
+    {
+      "index": 227,
+      "start": 447.12,
+      "end": 450.15,
+      "duration": 3.03,
+      "text": "gigabytes of storage."
+    },
+    {
+      "index": 228,
+      "start": 450.16,
+      "end": 451.51,
+      "duration": 1.35,
+      "text": "So, the kinds of calculations that"
+    },
+    {
+      "index": 229,
+      "start": 451.52,
+      "end": 453.43,
+      "duration": 1.91,
+      "text": "computers"
+    },
+    {
+      "index": 230,
+      "start": 453.44,
+      "end": 455.59,
+      "duration": 2.15,
+      "text": "do, there are two kinds. So, one are"
+    },
+    {
+      "index": 231,
+      "start": 455.6,
+      "end": 456.87,
+      "duration": 1.27,
+      "text": "calculations that are built into the"
+    },
+    {
+      "index": 232,
+      "start": 456.88,
+      "end": 458.11,
+      "duration": 1.23,
+      "text": "language. So, these are the very"
+    },
+    {
+      "index": 233,
+      "start": 458.12,
+      "end": 460.15,
+      "duration": 2.03,
+      "text": "low-level times types of calculations,"
+    },
+    {
+      "index": 234,
+      "start": 460.16,
+      "end": 462.43,
+      "duration": 2.27,
+      "text": "things like addition, subtraction,"
+    },
+    {
+      "index": 235,
+      "start": 462.44,
+      "end": 465.35,
+      "duration": 2.91,
+      "text": "multiplication, and so on."
+    },
+    {
+      "index": 236,
+      "start": 465.36,
+      "end": 467.83,
+      "duration": 2.47,
+      "text": "And once you have a language that has"
+    },
+    {
+      "index": 237,
+      "start": 467.84,
+      "end": 470.39,
+      "duration": 2.55,
+      "text": "these sort of primitive"
+    },
+    {
+      "index": 238,
+      "start": 470.4,
+      "end": 472.43,
+      "duration": 2.03,
+      "text": "calculate calculation types, you as a"
+    },
+    {
+      "index": 239,
+      "start": 472.44,
+      "end": 474.71,
+      "duration": 2.27,
+      "text": "programmer can put these types together"
+    },
+    {
+      "index": 240,
+      "start": 474.72,
+      "end": 477.63,
+      "duration": 2.91,
+      "text": "and then define your own calculations."
+    },
+    {
+      "index": 241,
+      "start": 477.64,
+      "end": 479.03,
+      "duration": 1.39,
+      "text": "Okay? And then you create new types"
+    },
+    {
+      "index": 242,
+      "start": 479.04,
+      "end": 480.55,
+      "duration": 1.51,
+      "text": "types of calculations, and the computer"
+    },
+    {
+      "index": 243,
+      "start": 480.56,
+      "end": 482.23,
+      "duration": 1.67,
+      "text": "will be able to to perform those as"
+    },
+    {
+      "index": 244,
+      "start": 482.24,
+      "end": 483.27,
+      "duration": 1.03,
+      "text": "well."
+    },
+    {
+      "index": 245,
+      "start": 483.28,
+      "end": 484.35,
+      "duration": 1.07,
+      "text": "Okay?"
+    },
+    {
+      "index": 246,
+      "start": 484.36,
+      "end": 486.51,
+      "duration": 2.15,
+      "text": "And I think"
+    },
+    {
+      "index": 247,
+      "start": 486.52,
+      "end": 487.75,
+      "duration": 1.23,
+      "text": "one thing I want to stress, and we're"
+    },
+    {
+      "index": 248,
+      "start": 487.76,
+      "end": 489.79,
+      "duration": 2.03,
+      "text": "going to come back to this in this this"
+    },
+    {
+      "index": 249,
+      "start": 489.8,
+      "end": 491.79,
+      "duration": 1.99,
+      "text": "again during during this entire lecture,"
+    },
+    {
+      "index": 250,
+      "start": 491.8,
+      "end": 493.83,
+      "duration": 2.03,
+      "text": "actually, is computers only know what"
+    },
+    {
+      "index": 251,
+      "start": 493.84,
+      "end": 495.11,
+      "duration": 1.27,
+      "text": "you tell them."
+    },
+    {
+      "index": 252,
+      "start": 495.12,
+      "end": 496.75,
+      "duration": 1.63,
+      "text": "Okay? Computers only do what you tell"
+    },
+    {
+      "index": 253,
+      "start": 496.76,
+      "end": 497.95,
+      "duration": 1.19,
+      "text": "them to do."
+    },
+    {
+      "index": 254,
+      "start": 497.96,
+      "end": 499.71,
+      "duration": 1.75,
+      "text": "They're not magical."
+    },
+    {
+      "index": 255,
+      "start": 499.72,
+      "end": 501.99,
+      "duration": 2.27,
+      "text": "They don't have"
+    },
+    {
+      "index": 256,
+      "start": 502.0,
+      "end": 503.67,
+      "duration": 1.67,
+      "text": "a mind. They just know how to perform"
+    },
+    {
+      "index": 257,
+      "start": 503.68,
+      "end": 506.19,
+      "duration": 2.51,
+      "text": "calculations really, really quickly."
+    },
+    {
+      "index": 258,
+      "start": 506.2,
+      "end": 507.27,
+      "duration": 1.07,
+      "text": "But"
+    },
+    {
+      "index": 259,
+      "start": 507.28,
+      "end": 508.63,
+      "duration": 1.35,
+      "text": "you have to tell them how to what what"
+    },
+    {
+      "index": 260,
+      "start": 508.64,
+      "end": 511.31,
+      "duration": 2.67,
+      "text": "calculations to do. Okay?"
+    },
+    {
+      "index": 261,
+      "start": 511.32,
+      "end": 512.83,
+      "duration": 1.51,
+      "text": "Okay."
+    },
+    {
+      "index": 262,
+      "start": 512.84,
+      "end": 514.35,
+      "duration": 1.51,
+      "text": "Computers don't know anything. All"
+    },
+    {
+      "index": 263,
+      "start": 514.36,
+      "end": 517.589,
+      "duration": 3.229,
+      "text": "right, we've come to that."
+    },
+    {
+      "index": 264,
+      "start": 517.599,
+      "end": 519.909,
+      "duration": 2.31,
+      "text": "So,"
+    },
+    {
+      "index": 265,
+      "start": 519.919,
+      "end": 521.709,
+      "duration": 1.79,
+      "text": "let's let's go into the types of"
+    },
+    {
+      "index": 266,
+      "start": 521.719,
+      "end": 523.31,
+      "duration": 1.591,
+      "text": "knowledge."
+    },
+    {
+      "index": 267,
+      "start": 523.32,
+      "end": 524.19,
+      "duration": 0.87,
+      "text": "Okay?"
+    },
+    {
+      "index": 268,
+      "start": 524.2,
+      "end": 526.03,
+      "duration": 1.83,
+      "text": "The first type of knowledge is"
+    },
+    {
+      "index": 269,
+      "start": 526.04,
+      "end": 528.07,
+      "duration": 2.03,
+      "text": "declarative knowledge."
+    },
+    {
+      "index": 270,
+      "start": 528.08,
+      "end": 529.67,
+      "duration": 1.59,
+      "text": "And those are things like statements of"
+    },
+    {
+      "index": 271,
+      "start": 529.68,
+      "end": 532.27,
+      "duration": 2.59,
+      "text": "fact. Okay? And this is where my email"
+    },
+    {
+      "index": 272,
+      "start": 532.28,
+      "end": 533.63,
+      "duration": 1.35,
+      "text": "came into play. If you read it all the"
+    },
+    {
+      "index": 273,
+      "start": 533.64,
+      "end": 535.35,
+      "duration": 1.71,
+      "text": "way to the bottom,"
+    },
+    {
+      "index": 274,
+      "start": 535.36,
+      "end": 537.91,
+      "duration": 2.55,
+      "text": "you would have entered a raffle. Okay?"
+    },
+    {
+      "index": 275,
+      "start": 537.92,
+      "end": 539.43,
+      "duration": 1.51,
+      "text": "So, statement of fact for today's"
+    },
+    {
+      "index": 276,
+      "start": 539.44,
+      "end": 542.15,
+      "duration": 2.71,
+      "text": "lecture is someone will win a prize"
+    },
+    {
+      "index": 277,
+      "start": 542.16,
+      "end": 544.07,
+      "duration": 1.91,
+      "text": "before class ends. And the prize was a"
+    },
+    {
+      "index": 278,
+      "start": 544.08,
+      "end": 545.87,
+      "duration": 1.79,
+      "text": "Google Cardboard."
+    },
+    {
+      "index": 279,
+      "start": 545.88,
+      "end": 548.59,
+      "duration": 2.71,
+      "text": "Right? Google state-of-the-art"
+    },
+    {
+      "index": 280,
+      "start": 548.6,
+      "end": 550.15,
+      "duration": 1.55,
+      "text": "virtual reality glasses, and I have them"
+    },
+    {
+      "index": 281,
+      "start": 550.16,
+      "end": 551.43,
+      "duration": 1.27,
+      "text": "right here."
+    },
+    {
+      "index": 282,
+      "start": 551.44,
+      "end": 554.23,
+      "duration": 2.79,
+      "text": "Okay."
+    },
+    {
+      "index": 283,
+      "start": 557.23,
+      "end": 557.24,
+      "duration": 0.01,
+      "text": "Yay! Okay, I delivered on my promise."
+    },
+    {
+      "index": 284,
+      "start": 557.24,
+      "end": 558.39,
+      "duration": 1.15,
+      "text": "Okay."
+    },
+    {
+      "index": 285,
+      "start": 558.4,
+      "end": 560.39,
+      "duration": 1.99,
+      "text": "So, that's a statement of fact. But, if"
+    },
+    {
+      "index": 286,
+      "start": 560.4,
+      "end": 562.51,
+      "duration": 2.11,
+      "text": "you So, pretend I'm a machine,"
+    },
+    {
+      "index": 287,
+      "start": 562.52,
+      "end": 564.87,
+      "duration": 2.35,
+      "text": "okay? I don't know anything except what"
+    },
+    {
+      "index": 288,
+      "start": 564.88,
+      "end": 566.87,
+      "duration": 1.99,
+      "text": "you tell me what you tell me. So, I"
+    },
+    {
+      "index": 289,
+      "start": 566.88,
+      "end": 569.59,
+      "duration": 2.71,
+      "text": "don't know I know that you tell me the"
+    },
+    {
+      "index": 290,
+      "start": 569.6,
+      "end": 571.99,
+      "duration": 2.39,
+      "text": "statement, and I'm like, okay."
+    },
+    {
+      "index": 291,
+      "start": 572.0,
+      "end": 573.15,
+      "duration": 1.15,
+      "text": "But, how is someone going to win a"
+    },
+    {
+      "index": 292,
+      "start": 573.16,
+      "end": 574.75,
+      "duration": 1.59,
+      "text": "Google Cardboard before class ends,"
+    },
+    {
+      "index": 293,
+      "start": 574.76,
+      "end": 576.71,
+      "duration": 1.95,
+      "text": "right? That's where imperative knowledge"
+    },
+    {
+      "index": 294,
+      "start": 576.72,
+      "end": 578.03,
+      "duration": 1.31,
+      "text": "comes in. So, imperative knowledge is"
+    },
+    {
+      "index": 295,
+      "start": 578.04,
+      "end": 579.95,
+      "duration": 1.91,
+      "text": "the recipe or the how-to or the sequence"
+    },
+    {
+      "index": 296,
+      "start": 579.96,
+      "end": 582.11,
+      "duration": 2.15,
+      "text": "of steps. Okay?"
+    },
+    {
+      "index": 297,
+      "start": 582.12,
+      "end": 583.63,
+      "duration": 1.51,
+      "text": "Sorry."
+    },
+    {
+      "index": 298,
+      "start": 583.64,
+      "end": 587.07,
+      "duration": 3.43,
+      "text": "That's just my funny for that one."
+    },
+    {
+      "index": 299,
+      "start": 590.23,
+      "end": 590.24,
+      "duration": 0.01,
+      "text": "So, the sequence of steps"
+    },
+    {
+      "index": 300,
+      "start": 590.24,
+      "end": 592.19,
+      "duration": 1.95,
+      "text": "is is the imperative is imperative"
+    },
+    {
+      "index": 301,
+      "start": 592.2,
+      "end": 593.27,
+      "duration": 1.07,
+      "text": "knowledge."
+    },
+    {
+      "index": 302,
+      "start": 593.28,
+      "end": 596.23,
+      "duration": 2.95,
+      "text": "So, if I'm a machine,"
+    },
+    {
+      "index": 303,
+      "start": 596.24,
+      "end": 597.83,
+      "duration": 1.59,
+      "text": "you need to tell me"
+    },
+    {
+      "index": 304,
+      "start": 597.84,
+      "end": 599.07,
+      "duration": 1.23,
+      "text": "how that someone will win a Google"
+    },
+    {
+      "index": 305,
+      "start": 599.08,
+      "end": 600.99,
+      "duration": 1.91,
+      "text": "Cardboard before class, right? So, if I"
+    },
+    {
+      "index": 306,
+      "start": 601.0,
+      "end": 602.63,
+      "duration": 1.63,
+      "text": "follow these steps, then technically I"
+    },
+    {
+      "index": 307,
+      "start": 602.64,
+      "end": 604.03,
+      "duration": 1.39,
+      "text": "should"
+    },
+    {
+      "index": 308,
+      "start": 604.04,
+      "end": 606.31,
+      "duration": 2.27,
+      "text": "I should reach a conclusion. Okay. So,"
+    },
+    {
+      "index": 309,
+      "start": 606.32,
+      "end": 608.11,
+      "duration": 1.79,
+      "text": "step one, I think we've already done"
+    },
+    {
+      "index": 310,
+      "start": 608.12,
+      "end": 610.07,
+      "duration": 1.95,
+      "text": "that. Whoever wanted to sign up had"
+    },
+    {
+      "index": 311,
+      "start": 610.08,
+      "end": 611.31,
+      "duration": 1.23,
+      "text": "signed up."
+    },
+    {
+      "index": 312,
+      "start": 611.32,
+      "end": 612.99,
+      "duration": 1.67,
+      "text": "So, now I'm going to open my IDE. So,"
+    },
+    {
+      "index": 313,
+      "start": 613.0,
+      "end": 614.63,
+      "duration": 1.63,
+      "text": "I'm just basically being a machine and"
+    },
+    {
+      "index": 314,
+      "start": 614.64,
+      "end": 616.27,
+      "duration": 1.63,
+      "text": "following the steps that you've that"
+    },
+    {
+      "index": 315,
+      "start": 616.28,
+      "end": 618.39,
+      "duration": 2.11,
+      "text": "you've told me. So, the IDE that we're"
+    },
+    {
+      "index": 316,
+      "start": 618.4,
+      "end": 621.87,
+      "duration": 3.47,
+      "text": "using in this class is called Anaconda."
+    },
+    {
+      "index": 317,
+      "start": 621.88,
+      "end": 624.79,
+      "duration": 2.91,
+      "text": "Let me just scroll down to the bottom."
+    },
+    {
+      "index": 318,
+      "start": 624.8,
+      "end": 626.19,
+      "duration": 1.39,
+      "text": "Okay. Hopefully you've been started in"
+    },
+    {
+      "index": 319,
+      "start": 626.2,
+      "end": 628.31,
+      "duration": 2.11,
+      "text": "prompt set zero."
+    },
+    {
+      "index": 320,
+      "start": 628.32,
+      "end": 630.43,
+      "duration": 2.11,
+      "text": "So, I've opened my IDE."
+    },
+    {
+      "index": 321,
+      "start": 630.44,
+      "end": 632.99,
+      "duration": 2.55,
+      "text": "I'm going to follow the next set of"
+    },
+    {
+      "index": 322,
+      "start": 633.0,
+      "end": 634.67,
+      "duration": 1.67,
+      "text": "um instructions. I'm going to choose a"
+    },
+    {
+      "index": 323,
+      "start": 634.68,
+      "end": 636.27,
+      "duration": 1.59,
+      "text": "random number between the first and the"
+    },
+    {
+      "index": 324,
+      "start": 636.28,
+      "end": 639.27,
+      "duration": 2.99,
+      "text": "nth responder. Okay?"
+    },
+    {
+      "index": 325,
+      "start": 639.28,
+      "end": 641.07,
+      "duration": 1.79,
+      "text": "Now, I'm going to actually use Python to"
+    },
+    {
+      "index": 326,
+      "start": 641.08,
+      "end": 642.19,
+      "duration": 1.11,
+      "text": "do this."
+    },
+    {
+      "index": 327,
+      "start": 642.2,
+      "end": 644.31,
+      "duration": 2.11,
+      "text": "And this is also an example of how just"
+    },
+    {
+      "index": 328,
+      "start": 644.32,
+      "end": 646.11,
+      "duration": 1.79,
+      "text": "like a really simple task in your life,"
+    },
+    {
+      "index": 329,
+      "start": 646.12,
+      "end": 647.75,
+      "duration": 1.63,
+      "text": "you can use computers or programming to"
+    },
+    {
+      "index": 330,
+      "start": 647.76,
+      "end": 649.79,
+      "duration": 2.03,
+      "text": "do that. Because if I chose a random"
+    },
+    {
+      "index": 331,
+      "start": 649.8,
+      "end": 651.27,
+      "duration": 1.47,
+      "text": "number, I might be biased because, for"
+    },
+    {
+      "index": 332,
+      "start": 651.28,
+      "end": 653.55,
+      "duration": 2.27,
+      "text": "example, I might like the number eight."
+    },
+    {
+      "index": 333,
+      "start": 653.56,
+      "end": 655.35,
+      "duration": 1.79,
+      "text": "So, to choose a random number, I'm going"
+    },
+    {
+      "index": 334,
+      "start": 655.36,
+      "end": 657.79,
+      "duration": 2.43,
+      "text": "to go and say, \"Okay, where's the list"
+    },
+    {
+      "index": 335,
+      "start": 657.8,
+      "end": 659.63,
+      "duration": 1.83,
+      "text": "of responders?\" It starts at 15."
+    },
+    {
+      "index": 336,
+      "start": 659.64,
+      "end": 662.03,
+      "duration": 2.39,
+      "text": "Actually, it starts at 16 cuz that's me."
+    },
+    {
+      "index": 337,
+      "start": 662.04,
+      "end": 663.75,
+      "duration": 1.71,
+      "text": "Okay? So, we're going to choose a random"
+    },
+    {
+      "index": 338,
+      "start": 663.76,
+      "end": 667.23,
+      "duration": 3.47,
+      "text": "number between 16 and the end person,"
+    },
+    {
+      "index": 339,
+      "start": 667.24,
+      "end": 669.11,
+      "duration": 1.87,
+      "text": "266."
+    },
+    {
+      "index": 340,
+      "start": 669.12,
+      "end": 672.35,
+      "duration": 3.23,
+      "text": "Oh, we just got Oh, okay."
+    },
+    {
+      "index": 341,
+      "start": 672.36,
+      "end": 674.23,
+      "duration": 1.87,
+      "text": "2 Okay, I'm going to cut it off right"
+    },
+    {
+      "index": 342,
+      "start": 674.24,
+      "end": 678.31,
+      "duration": 4.07,
+      "text": "here, 271. Okay, 16 and 271."
+    },
+    {
+      "index": 343,
+      "start": 678.32,
+      "end": 680.27,
+      "duration": 1.95,
+      "text": "Perfect. Okay."
+    },
+    {
+      "index": 344,
+      "start": 680.28,
+      "end": 681.55,
+      "duration": 1.27,
+      "text": "So, I'm going to choose a random number."
+    },
+    {
+      "index": 345,
+      "start": 681.56,
+      "end": 682.95,
+      "duration": 1.39,
+      "text": "So, I'm going to go to my IDE, and you"
+    },
+    {
+      "index": 346,
+      "start": 682.96,
+      "end": 684.31,
+      "duration": 1.35,
+      "text": "don't need to know how to do this yet,"
+    },
+    {
+      "index": 347,
+      "start": 684.32,
+      "end": 685.71,
+      "duration": 1.39,
+      "text": "but by the end of this class you will."
+    },
+    {
+      "index": 348,
+      "start": 685.72,
+      "end": 687.99,
+      "duration": 2.27,
+      "text": "So, I'm just going to use Python."
+    },
+    {
+      "index": 349,
+      "start": 688.0,
+      "end": 689.11,
+      "duration": 1.11,
+      "text": "Um"
+    },
+    {
+      "index": 350,
+      "start": 689.12,
+      "end": 690.63,
+      "duration": 1.51,
+      "text": "I'm just going to get the random number"
+    },
+    {
+      "index": 351,
+      "start": 690.64,
+      "end": 692.27,
+      "duration": 1.63,
+      "text": "package that's going to get me a random"
+    },
+    {
+      "index": 352,
+      "start": 692.28,
+      "end": 693.75,
+      "duration": 1.47,
+      "text": "number. So, I'm going to say"
+    },
+    {
+      "index": 353,
+      "start": 693.76,
+      "end": 695.87,
+      "duration": 2.11,
+      "text": "random.randint,"
+    },
+    {
+      "index": 354,
+      "start": 695.88,
+      "end": 697.07,
+      "duration": 1.19,
+      "text": "and I'm going to choose a random number"
+    },
+    {
+      "index": 355,
+      "start": 697.08,
+      "end": 700.63,
+      "duration": 3.55,
+      "text": "between 16 and 272."
+    },
+    {
+      "index": 356,
+      "start": 700.64,
+      "end": 703.55,
+      "duration": 2.91,
+      "text": "Okay, 75. Okay?"
+    },
+    {
+      "index": 357,
+      "start": 703.56,
+      "end": 705.829,
+      "duration": 2.269,
+      "text": "Great. So, I chose a random number, and"
+    },
+    {
+      "index": 358,
+      "start": 705.839,
+      "end": 706.91,
+      "duration": 1.071,
+      "text": "I'm going to find the number in the"
+    },
+    {
+      "index": 359,
+      "start": 706.92,
+      "end": 708.71,
+      "duration": 1.79,
+      "text": "responders sheet."
+    },
+    {
+      "index": 360,
+      "start": 708.72,
+      "end": 710.829,
+      "duration": 2.109,
+      "text": "What was the number again? Sorry."
+    },
+    {
+      "index": 361,
+      "start": 710.839,
+      "end": 713.79,
+      "duration": 2.951,
+      "text": "75. Okay."
+    },
+    {
+      "index": 362,
+      "start": 713.8,
+      "end": 715.91,
+      "duration": 2.11,
+      "text": "Up we go."
+    },
+    {
+      "index": 363,
+      "start": 715.92,
+      "end": 717.47,
+      "duration": 1.55,
+      "text": "There we go."
+    },
+    {
+      "index": 364,
+      "start": 717.48,
+      "end": 719.23,
+      "duration": 1.75,
+      "text": "Lauren"
+    },
+    {
+      "index": 365,
+      "start": 719.24,
+      "end": 720.67,
+      "duration": 1.43,
+      "text": "Z O V."
+    },
+    {
+      "index": 366,
+      "start": 720.68,
+      "end": 733.95,
+      "duration": 13.27,
+      "text": "Yeah, nice. You're here."
+    },
+    {
+      "index": 367,
+      "start": 737.51,
+      "end": 737.52,
+      "duration": 0.01,
+      "text": "All right."
+    },
+    {
+      "index": 368,
+      "start": 737.52,
+      "end": 739.03,
+      "duration": 1.51,
+      "text": "So, that's an example of me being a"
+    },
+    {
+      "index": 369,
+      "start": 739.04,
+      "end": 741.39,
+      "duration": 2.35,
+      "text": "machine, right? And also at the same"
+    },
+    {
+      "index": 370,
+      "start": 741.4,
+      "end": 742.99,
+      "duration": 1.59,
+      "text": "time using Python in just my everyday"
+    },
+    {
+      "index": 371,
+      "start": 743.0,
+      "end": 745.75,
+      "duration": 2.75,
+      "text": "life, right? Just lecturing."
+    },
+    {
+      "index": 372,
+      "start": 745.76,
+      "end": 747.99,
+      "duration": 2.23,
+      "text": "Just to find a random number, right? So,"
+    },
+    {
+      "index": 373,
+      "start": 748.0,
+      "end": 749.59,
+      "duration": 1.59,
+      "text": "just you know, try to use Python"
+    },
+    {
+      "index": 374,
+      "start": 749.6,
+      "end": 750.75,
+      "duration": 1.15,
+      "text": "wherever you can, and that just gives"
+    },
+    {
+      "index": 375,
+      "start": 750.76,
+      "end": 752.27,
+      "duration": 1.51,
+      "text": "you practice."
+    },
+    {
+      "index": 376,
+      "start": 752.28,
+      "end": 754.39,
+      "duration": 2.11,
+      "text": "Okay. So,"
+    },
+    {
+      "index": 377,
+      "start": 754.4,
+      "end": 757.23,
+      "duration": 2.83,
+      "text": "that was fun, but we're at MIT We're at"
+    },
+    {
+      "index": 378,
+      "start": 757.24,
+      "end": 760.39,
+      "duration": 3.15,
+      "text": "MIT students, right? And we love numbers"
+    },
+    {
+      "index": 379,
+      "start": 760.4,
+      "end": 761.95,
+      "duration": 1.55,
+      "text": "here at MIT, right? So, here's a"
+    },
+    {
+      "index": 380,
+      "start": 761.96,
+      "end": 764.75,
+      "duration": 2.79,
+      "text": "numerical example for"
+    },
+    {
+      "index": 381,
+      "start": 764.76,
+      "end": 765.71,
+      "duration": 0.95,
+      "text": "that shows the difference between"
+    },
+    {
+      "index": 382,
+      "start": 765.72,
+      "end": 767.79,
+      "duration": 2.07,
+      "text": "declarative and imperative knowledge."
+    },
+    {
+      "index": 383,
+      "start": 767.8,
+      "end": 769.31,
+      "duration": 1.51,
+      "text": "So, I want to find the square root of"
+    },
+    {
+      "index": 384,
+      "start": 769.32,
+      "end": 771.31,
+      "duration": 1.99,
+      "text": "So, an example of declarative knowledge"
+    },
+    {
+      "index": 385,
+      "start": 771.32,
+      "end": 773.31,
+      "duration": 1.99,
+      "text": "is the square root of a number X is Y"
+    },
+    {
+      "index": 386,
+      "start": 773.32,
+      "end": 776.07,
+      "duration": 2.75,
+      "text": "such that Y * Y is equal to X."
+    },
+    {
+      "index": 387,
+      "start": 776.08,
+      "end": 778.27,
+      "duration": 2.19,
+      "text": "Okay? That's just a statement of fact."
+    },
+    {
+      "index": 388,
+      "start": 778.28,
+      "end": 780.99,
+      "duration": 2.71,
+      "text": "It's true."
+    },
+    {
+      "index": 389,
+      "start": 782.829,
+      "end": 782.839,
+      "duration": 0.01,
+      "text": "Imperative know So, computers don't know"
+    },
+    {
+      "index": 390,
+      "start": 782.839,
+      "end": 785.55,
+      "duration": 2.711,
+      "text": "what to do with that."
+    },
+    {
+      "index": 391,
+      "start": 785.56,
+      "end": 786.67,
+      "duration": 1.11,
+      "text": "Right? They don't know what to do with"
+    },
+    {
+      "index": 392,
+      "start": 786.68,
+      "end": 788.55,
+      "duration": 1.87,
+      "text": "that statement, but computers do know"
+    },
+    {
+      "index": 393,
+      "start": 788.56,
+      "end": 790.55,
+      "duration": 1.99,
+      "text": "how to follow a recipe."
+    },
+    {
+      "index": 394,
+      "start": 790.56,
+      "end": 793.07,
+      "duration": 2.51,
+      "text": "So, here's a well-known algorithm"
+    },
+    {
+      "index": 395,
+      "start": 793.08,
+      "end": 795.55,
+      "duration": 2.47,
+      "text": "to find the square root of a number"
+    },
+    {
+      "index": 396,
+      "start": 795.56,
+      "end": 801.03,
+      "duration": 5.47,
+      "text": "X. Let's say X is originally 16."
+    },
+    {
+      "index": 397,
+      "start": 804.11,
+      "end": 804.12,
+      "duration": 0.01,
+      "text": "So, if a computer follows this um this"
+    },
+    {
+      "index": 398,
+      "start": 804.12,
+      "end": 805.31,
+      "duration": 1.19,
+      "text": "algorithm, it's going to start with a"
+    },
+    {
+      "index": 399,
+      "start": 805.32,
+      "end": 808.55,
+      "duration": 3.23,
+      "text": "guess G. Let's say three, right? We're"
+    },
+    {
+      "index": 400,
+      "start": 808.56,
+      "end": 810.67,
+      "duration": 2.11,
+      "text": "trying to find the square root of 16."
+    },
+    {
+      "index": 401,
+      "start": 810.68,
+      "end": 813.35,
+      "duration": 2.67,
+      "text": "We're going to calculate G * G is nine,"
+    },
+    {
+      "index": 402,
+      "start": 813.36,
+      "end": 815.829,
+      "duration": 2.469,
+      "text": "right? And we're going to ask is if G *"
+    },
+    {
+      "index": 403,
+      "start": 815.839,
+      "end": 817.67,
+      "duration": 1.831,
+      "text": "G is close enough to X, then stop and"
+    },
+    {
+      "index": 404,
+      "start": 817.68,
+      "end": 819.39,
+      "duration": 1.71,
+      "text": "say G is the answer."
+    },
+    {
+      "index": 405,
+      "start": 819.4,
+      "end": 820.87,
+      "duration": 1.47,
+      "text": "I'm not really happy with nine being"
+    },
+    {
+      "index": 406,
+      "start": 820.88,
+      "end": 822.829,
+      "duration": 1.949,
+      "text": "really close to 16, right? So, I'm going"
+    },
+    {
+      "index": 407,
+      "start": 822.839,
+      "end": 824.31,
+      "duration": 1.471,
+      "text": "to say I'm not I'm not stopping here."
+    },
+    {
+      "index": 408,
+      "start": 824.32,
+      "end": 826.07,
+      "duration": 1.75,
+      "text": "I'm going to keep going."
+    },
+    {
+      "index": 409,
+      "start": 826.08,
+      "end": 828.43,
+      "duration": 2.35,
+      "text": "Okay? So, if it's not close enough, then"
+    },
+    {
+      "index": 410,
+      "start": 828.44,
+      "end": 829.75,
+      "duration": 1.31,
+      "text": "I'm going to make a new guess by"
+    },
+    {
+      "index": 411,
+      "start": 829.76,
+      "end": 832.55,
+      "duration": 2.79,
+      "text": "averaging G averaging G and X over G."
+    },
+    {
+      "index": 412,
+      "start": 832.56,
+      "end": 834.75,
+      "duration": 2.19,
+      "text": "So, that's X over G here, and that's the"
+    },
+    {
+      "index": 413,
+      "start": 834.76,
+      "end": 836.95,
+      "duration": 2.19,
+      "text": "average over there. Okay?"
+    },
+    {
+      "index": 414,
+      "start": 836.96,
+      "end": 839.31,
+      "duration": 2.35,
+      "text": "And the new average is going to be my"
+    },
+    {
+      "index": 415,
+      "start": 839.32,
+      "end": 842.95,
+      "duration": 3.63,
+      "text": "new guess."
+    },
+    {
+      "index": 416,
+      "start": 844.11,
+      "end": 844.12,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 417,
+      "start": 844.12,
+      "end": 845.87,
+      "duration": 1.75,
+      "text": "And that's what it says And then the"
+    },
+    {
+      "index": 418,
+      "start": 845.88,
+      "end": 847.51,
+      "duration": 1.63,
+      "text": "last step is using the new new guess,"
+    },
+    {
+      "index": 419,
+      "start": 847.52,
+      "end": 849.11,
+      "duration": 1.59,
+      "text": "repeat the process. So, then we go back"
+    },
+    {
+      "index": 420,
+      "start": 849.12,
+      "end": 850.43,
+      "duration": 1.31,
+      "text": "to the beginning"
+    },
+    {
+      "index": 421,
+      "start": 850.44,
+      "end": 851.71,
+      "duration": 1.27,
+      "text": "and repeat the whole process over and"
+    },
+    {
+      "index": 422,
+      "start": 851.72,
+      "end": 853.39,
+      "duration": 1.67,
+      "text": "over again. Okay?"
+    },
+    {
+      "index": 423,
+      "start": 853.4,
+      "end": 854.79,
+      "duration": 1.39,
+      "text": "And that's what the rest of the rows"
+    },
+    {
+      "index": 424,
+      "start": 854.8,
+      "end": 856.069,
+      "duration": 1.269,
+      "text": "does. And you keep doing this until you"
+    },
+    {
+      "index": 425,
+      "start": 856.079,
+      "end": 860.27,
+      "duration": 4.191,
+      "text": "decide that you're close enough."
+    },
+    {
+      "index": 426,
+      "start": 863.03,
+      "end": 863.04,
+      "duration": 0.01,
+      "text": "Okay. So, then"
+    },
+    {
+      "index": 427,
+      "start": 863.04,
+      "end": 864.63,
+      "duration": 1.59,
+      "text": "So, what we saw for the imperative"
+    },
+    {
+      "index": 428,
+      "start": 864.64,
+      "end": 865.99,
+      "duration": 1.35,
+      "text": "knowledge in the previous numerical"
+    },
+    {
+      "index": 429,
+      "start": 866.0,
+      "end": 867.91,
+      "duration": 1.91,
+      "text": "example was the recipe, right? For how"
+    },
+    {
+      "index": 430,
+      "start": 867.92,
+      "end": 870.35,
+      "duration": 2.43,
+      "text": "to find the square root of X."
+    },
+    {
+      "index": 431,
+      "start": 870.36,
+      "end": 871.59,
+      "duration": 1.23,
+      "text": "So,"
+    },
+    {
+      "index": 432,
+      "start": 871.6,
+      "end": 873.11,
+      "duration": 1.51,
+      "text": "what were the three parts to the recipe?"
+    },
+    {
+      "index": 433,
+      "start": 873.12,
+      "end": 875.67,
+      "duration": 2.55,
+      "text": "One was a simple sequence of steps,"
+    },
+    {
+      "index": 434,
+      "start": 875.68,
+      "end": 876.949,
+      "duration": 1.269,
+      "text": "right? There were four steps, pretty"
+    },
+    {
+      "index": 435,
+      "start": 876.959,
+      "end": 879.069,
+      "duration": 2.11,
+      "text": "much."
+    },
+    {
+      "index": 436,
+      "start": 879.079,
+      "end": 881.31,
+      "duration": 2.231,
+      "text": "The other was a flow of control."
+    },
+    {
+      "index": 437,
+      "start": 881.32,
+      "end": 883.31,
+      "duration": 1.99,
+      "text": "So, there were parts where we made"
+    },
+    {
+      "index": 438,
+      "start": 883.32,
+      "end": 884.51,
+      "duration": 1.19,
+      "text": "decisions,"
+    },
+    {
+      "index": 439,
+      "start": 884.52,
+      "end": 886.75,
+      "duration": 2.23,
+      "text": "right? Are we close enough?"
+    },
+    {
+      "index": 440,
+      "start": 886.76,
+      "end": 888.39,
+      "duration": 1.63,
+      "text": "There were parts where we repeated some"
+    },
+    {
+      "index": 441,
+      "start": 888.4,
+      "end": 890.47,
+      "duration": 2.07,
+      "text": "steps. So, at the end we said repeat"
+    },
+    {
+      "index": 442,
+      "start": 890.48,
+      "end": 892.55,
+      "duration": 2.07,
+      "text": "steps one, two, three."
+    },
+    {
+      "index": 443,
+      "start": 892.56,
+      "end": 895.11,
+      "duration": 2.55,
+      "text": "So, that's the flow of control."
+    },
+    {
+      "index": 444,
+      "start": 895.12,
+      "end": 896.91,
+      "duration": 1.79,
+      "text": "And the last part of the recipe was a"
+    },
+    {
+      "index": 445,
+      "start": 896.92,
+      "end": 898.71,
+      "duration": 1.79,
+      "text": "way to stop, right? You don't want a"
+    },
+    {
+      "index": 446,
+      "start": 898.72,
+      "end": 900.59,
+      "duration": 1.87,
+      "text": "program that keeps going and going. Or"
+    },
+    {
+      "index": 447,
+      "start": 900.6,
+      "end": 901.71,
+      "duration": 1.11,
+      "text": "for a recipe, you don't want to keep"
+    },
+    {
+      "index": 448,
+      "start": 901.72,
+      "end": 904.15,
+      "duration": 2.43,
+      "text": "baking bread forever, right? You want to"
+    },
+    {
+      "index": 449,
+      "start": 904.16,
+      "end": 905.71,
+      "duration": 1.55,
+      "text": "stop at some point. Like 10 breads is"
+    },
+    {
+      "index": 450,
+      "start": 905.72,
+      "end": 908.19,
+      "duration": 2.47,
+      "text": "enough, right? Okay. So, you have to"
+    },
+    {
+      "index": 451,
+      "start": 908.2,
+      "end": 910.19,
+      "duration": 1.99,
+      "text": "have a way of stopping. Okay? In this In"
+    },
+    {
+      "index": 452,
+      "start": 910.2,
+      "end": 911.829,
+      "duration": 1.629,
+      "text": "the previous example,"
+    },
+    {
+      "index": 453,
+      "start": 911.839,
+      "end": 913.91,
+      "duration": 2.071,
+      "text": "the way of stopping was that we decided"
+    },
+    {
+      "index": 454,
+      "start": 913.92,
+      "end": 915.79,
+      "duration": 1.87,
+      "text": "we were close enough. Close enough was"
+    },
+    {
+      "index": 455,
+      "start": 915.8,
+      "end": 920.19,
+      "duration": 4.39,
+      "text": "maybe be being within 0.01, 0.0001."
+    },
+    {
+      "index": 456,
+      "start": 920.2,
+      "end": 923.51,
+      "duration": 3.31,
+      "text": "Whatever you pick."
+    },
+    {
+      "index": 457,
+      "start": 925.75,
+      "end": 925.76,
+      "duration": 0.01,
+      "text": "So, this recipe is therefore an"
+    },
+    {
+      "index": 458,
+      "start": 925.76,
+      "end": 927.11,
+      "duration": 1.35,
+      "text": "algorithm, right? In computer science"
+    },
+    {
+      "index": 459,
+      "start": 927.12,
+      "end": 928.71,
+      "duration": 1.59,
+      "text": "speak, it's going to be an algorithm."
+    },
+    {
+      "index": 460,
+      "start": 928.72,
+      "end": 930.39,
+      "duration": 1.67,
+      "text": "Okay? And that's what we're going to"
+    },
+    {
+      "index": 461,
+      "start": 930.4,
+      "end": 932.75,
+      "duration": 2.35,
+      "text": "learn about in this class."
+    },
+    {
+      "index": 462,
+      "start": 932.76,
+      "end": 934.03,
+      "duration": 1.27,
+      "text": "Okay."
+    },
+    {
+      "index": 463,
+      "start": 934.04,
+      "end": 935.829,
+      "duration": 1.789,
+      "text": "So, we're dealing with computers, and we"
+    },
+    {
+      "index": 464,
+      "start": 935.839,
+      "end": 938.27,
+      "duration": 2.431,
+      "text": "actually want to capture a recipe inside"
+    },
+    {
+      "index": 465,
+      "start": 938.28,
+      "end": 940.67,
+      "duration": 2.39,
+      "text": "a computer. Computer being a mechanical"
+    },
+    {
+      "index": 466,
+      "start": 940.68,
+      "end": 942.59,
+      "duration": 1.91,
+      "text": "process. And historically, there were"
+    },
+    {
+      "index": 467,
+      "start": 942.6,
+      "end": 945.51,
+      "duration": 2.91,
+      "text": "two ways of um"
+    },
+    {
+      "index": 468,
+      "start": 945.52,
+      "end": 948.19,
+      "duration": 2.67,
+      "text": "There were There were two two ways of"
+    },
+    {
+      "index": 469,
+      "start": 948.2,
+      "end": 949.069,
+      "duration": 0.869,
+      "text": "uh"
+    },
+    {
+      "index": 470,
+      "start": 949.079,
+      "end": 951.19,
+      "duration": 2.111,
+      "text": "Sorry. Historically, there were um two"
+    },
+    {
+      "index": 471,
+      "start": 951.2,
+      "end": 955.35,
+      "duration": 4.15,
+      "text": "different types of computers. Okay? So,"
+    },
+    {
+      "index": 472,
+      "start": 955.36,
+      "end": 956.91,
+      "duration": 1.55,
+      "text": "originally,"
+    },
+    {
+      "index": 473,
+      "start": 956.92,
+      "end": 957.99,
+      "duration": 1.07,
+      "text": "there were these things called fixed"
+    },
+    {
+      "index": 474,
+      "start": 958.0,
+      "end": 959.59,
+      "duration": 1.59,
+      "text": "program computers."
+    },
+    {
+      "index": 475,
+      "start": 959.6,
+      "end": 961.67,
+      "duration": 2.07,
+      "text": "And I'm old enough to have used"
+    },
+    {
+      "index": 476,
+      "start": 961.68,
+      "end": 963.55,
+      "duration": 1.87,
+      "text": "something like this, where there's just"
+    },
+    {
+      "index": 477,
+      "start": 963.56,
+      "end": 967.11,
+      "duration": 3.55,
+      "text": "numbers and plus, minus, multiplication,"
+    },
+    {
+      "index": 478,
+      "start": 967.12,
+      "end": 968.75,
+      "duration": 1.63,
+      "text": "divide, and equal."
+    },
+    {
+      "index": 479,
+      "start": 968.76,
+      "end": 970.31,
+      "duration": 1.55,
+      "text": "But, calculators these days are really a"
+    },
+    {
+      "index": 480,
+      "start": 970.32,
+      "end": 972.39,
+      "duration": 2.07,
+      "text": "lot more complicated. But, way back then"
+    },
+    {
+      "index": 481,
+      "start": 972.4,
+      "end": 973.63,
+      "duration": 1.23,
+      "text": "a fixed uh"
+    },
+    {
+      "index": 482,
+      "start": 973.64,
+      "end": 975.19,
+      "duration": 1.55,
+      "text": "An example of a fixed program computer"
+    },
+    {
+      "index": 483,
+      "start": 975.2,
+      "end": 977.75,
+      "duration": 2.55,
+      "text": "is this calculator. It only knows how to"
+    },
+    {
+      "index": 484,
+      "start": 977.76,
+      "end": 978.91,
+      "duration": 1.15,
+      "text": "do addition, multiplication,"
+    },
+    {
+      "index": 485,
+      "start": 978.92,
+      "end": 980.51,
+      "duration": 1.59,
+      "text": "subtraction, division."
+    },
+    {
+      "index": 486,
+      "start": 980.52,
+      "end": 981.91,
+      "duration": 1.39,
+      "text": "If you want to plot something, you"
+    },
+    {
+      "index": 487,
+      "start": 981.92,
+      "end": 983.47,
+      "duration": 1.55,
+      "text": "can't. If you want to"
+    },
+    {
+      "index": 488,
+      "start": 983.48,
+      "end": 984.27,
+      "duration": 0.79,
+      "text": "uh"
+    },
+    {
+      "index": 489,
+      "start": 984.28,
+      "end": 985.949,
+      "duration": 1.669,
+      "text": "um go on the internet, check you you"
+    },
+    {
+      "index": 490,
+      "start": 985.959,
+      "end": 987.67,
+      "duration": 1.711,
+      "text": "know, send email with it, you can't. It"
+    },
+    {
+      "index": 491,
+      "start": 987.68,
+      "end": 990.71,
+      "duration": 3.03,
+      "text": "can only do this one thing. Okay?"
+    },
+    {
+      "index": 492,
+      "start": 990.72,
+      "end": 992.51,
+      "duration": 1.79,
+      "text": "And if you wanted to create a machine"
+    },
+    {
+      "index": 493,
+      "start": 992.52,
+      "end": 994.11,
+      "duration": 1.59,
+      "text": "that did another thing, then you'd have"
+    },
+    {
+      "index": 494,
+      "start": 994.12,
+      "end": 996.75,
+      "duration": 2.63,
+      "text": "to uh create another fixed program"
+    },
+    {
+      "index": 495,
+      "start": 996.76,
+      "end": 998.51,
+      "duration": 1.75,
+      "text": "computer that did a completely separate"
+    },
+    {
+      "index": 496,
+      "start": 998.52,
+      "end": 1001.47,
+      "duration": 2.95,
+      "text": "task. Okay? So, that's not very great,"
+    },
+    {
+      "index": 497,
+      "start": 1001.48,
+      "end": 1003.27,
+      "duration": 1.79,
+      "text": "right? So, that's when stored program"
+    },
+    {
+      "index": 498,
+      "start": 1003.28,
+      "end": 1005.71,
+      "duration": 2.43,
+      "text": "computers came into play."
+    },
+    {
+      "index": 499,
+      "start": 1005.72,
+      "end": 1007.51,
+      "duration": 1.79,
+      "text": "And these were machines that could store"
+    },
+    {
+      "index": 500,
+      "start": 1007.52,
+      "end": 1010.35,
+      "duration": 2.83,
+      "text": "a sequence of instructions."
+    },
+    {
+      "index": 501,
+      "start": 1010.36,
+      "end": 1011.79,
+      "duration": 1.43,
+      "text": "And"
+    },
+    {
+      "index": 502,
+      "start": 1011.8,
+      "end": 1013.069,
+      "duration": 1.269,
+      "text": "these machines could execute the"
+    },
+    {
+      "index": 503,
+      "start": 1013.079,
+      "end": 1015.11,
+      "duration": 2.031,
+      "text": "sequence of instructions, and you could"
+    },
+    {
+      "index": 504,
+      "start": 1015.12,
+      "end": 1016.79,
+      "duration": 1.67,
+      "text": "change the sequence of instructions and"
+    },
+    {
+      "index": 505,
+      "start": 1016.8,
+      "end": 1018.59,
+      "duration": 1.79,
+      "text": "execute a different this different"
+    },
+    {
+      "index": 506,
+      "start": 1018.6,
+      "end": 1020.35,
+      "duration": 1.75,
+      "text": "sequence of instructions. So, you could"
+    },
+    {
+      "index": 507,
+      "start": 1020.36,
+      "end": 1023.35,
+      "duration": 2.99,
+      "text": "do different tasks in the same machine,"
+    },
+    {
+      "index": 508,
+      "start": 1023.36,
+      "end": 1024.829,
+      "duration": 1.469,
+      "text": "right?"
+    },
+    {
+      "index": 509,
+      "start": 1024.839,
+      "end": 1026.63,
+      "duration": 1.791,
+      "text": "And that's the computer as we know it"
+    },
+    {
+      "index": 510,
+      "start": 1026.64,
+      "end": 1028.669,
+      "duration": 2.029,
+      "text": "these days. So, the central processing"
+    },
+    {
+      "index": 511,
+      "start": 1028.679,
+      "end": 1030.51,
+      "duration": 1.831,
+      "text": "unit is is where, you know, all of these"
+    },
+    {
+      "index": 512,
+      "start": 1030.52,
+      "end": 1031.91,
+      "duration": 1.39,
+      "text": "decisions get made. And these are all"
+    },
+    {
+      "index": 513,
+      "start": 1031.92,
+      "end": 1036.03,
+      "duration": 4.11,
+      "text": "the sort of peripherals."
+    },
+    {
+      "index": 514,
+      "start": 1037.87,
+      "end": 1037.88,
+      "duration": 0.01,
+      "text": "So, the basic machine architecture, so"
+    },
+    {
+      "index": 515,
+      "start": 1037.88,
+      "end": 1039.829,
+      "duration": 1.949,
+      "text": "at the heart of of every computer"
+    },
+    {
+      "index": 516,
+      "start": 1039.839,
+      "end": 1042.31,
+      "duration": 2.471,
+      "text": "there's just this"
+    },
+    {
+      "index": 517,
+      "start": 1042.32,
+      "end": 1044.03,
+      "duration": 1.71,
+      "text": "um"
+    },
+    {
+      "index": 518,
+      "start": 1044.04,
+      "end": 1046.71,
+      "duration": 2.67,
+      "text": "this basic architecture, and it contains"
+    },
+    {
+      "index": 519,
+      "start": 1046.72,
+      "end": 1048.669,
+      "duration": 1.949,
+      "text": "uh I guess four main parts. So, the"
+    },
+    {
+      "index": 520,
+      "start": 1048.679,
+      "end": 1051.31,
+      "duration": 2.631,
+      "text": "first is the memory."
+    },
+    {
+      "index": 521,
+      "start": 1051.32,
+      "end": 1054.51,
+      "duration": 3.19,
+      "text": "Input and output is the other one."
+    },
+    {
+      "index": 522,
+      "start": 1054.52,
+      "end": 1057.27,
+      "duration": 2.75,
+      "text": "The ALU is where all of the operations"
+    },
+    {
+      "index": 523,
+      "start": 1057.28,
+      "end": 1059.75,
+      "duration": 2.47,
+      "text": "are done."
+    },
+    {
+      "index": 524,
+      "start": 1059.76,
+      "end": 1061.39,
+      "duration": 1.63,
+      "text": "And the operations that the ALU can do"
+    },
+    {
+      "index": 525,
+      "start": 1061.4,
+      "end": 1063.55,
+      "duration": 2.15,
+      "text": "are these really primitive operations,"
+    },
+    {
+      "index": 526,
+      "start": 1063.56,
+      "end": 1066.11,
+      "duration": 2.55,
+      "text": "addition, subtraction, and so on."
+    },
+    {
+      "index": 527,
+      "start": 1066.12,
+      "end": 1069.51,
+      "duration": 3.39,
+      "text": "So, what the memory contains is"
+    },
+    {
+      "index": 528,
+      "start": 1069.52,
+      "end": 1072.43,
+      "duration": 2.91,
+      "text": "a bunch of data"
+    },
+    {
+      "index": 529,
+      "start": 1072.44,
+      "end": 1075.39,
+      "duration": 2.95,
+      "text": "and your sequence of instructions."
+    },
+    {
+      "index": 530,
+      "start": 1075.4,
+      "end": 1080.35,
+      "duration": 4.95,
+      "text": "Okay?"
+    },
+    {
+      "index": 531,
+      "start": 1082.11,
+      "end": 1082.12,
+      "duration": 0.01,
+      "text": "So, interacting with the arithmetic"
+    },
+    {
+      "index": 532,
+      "start": 1082.12,
+      "end": 1083.87,
+      "duration": 1.75,
+      "text": "logic unit is the control unit. And the"
+    },
+    {
+      "index": 533,
+      "start": 1083.88,
+      "end": 1085.47,
+      "duration": 1.59,
+      "text": "control unit contains one program"
+    },
+    {
+      "index": 534,
+      "start": 1085.48,
+      "end": 1086.79,
+      "duration": 1.31,
+      "text": "counter."
+    },
+    {
+      "index": 535,
+      "start": 1086.8,
+      "end": 1088.51,
+      "duration": 1.71,
+      "text": "So, when you load a sequence of"
+    },
+    {
+      "index": 536,
+      "start": 1088.52,
+      "end": 1091.71,
+      "duration": 3.19,
+      "text": "instructions, the program counter starts"
+    },
+    {
+      "index": 537,
+      "start": 1091.72,
+      "end": 1093.51,
+      "duration": 1.79,
+      "text": "at the first sequence."
+    },
+    {
+      "index": 538,
+      "start": 1093.52,
+      "end": 1095.23,
+      "duration": 1.71,
+      "text": "It gets what the"
+    },
+    {
+      "index": 539,
+      "start": 1095.24,
+      "end": 1097.23,
+      "duration": 1.99,
+      "text": "It starts at the at the sequence, at the"
+    },
+    {
+      "index": 540,
+      "start": 1097.24,
+      "end": 1098.87,
+      "duration": 1.63,
+      "text": "first instruction. It gets what the"
+    },
+    {
+      "index": 541,
+      "start": 1098.88,
+      "end": 1100.47,
+      "duration": 1.59,
+      "text": "instruction is, and it sends it to the"
+    },
+    {
+      "index": 542,
+      "start": 1100.48,
+      "end": 1101.99,
+      "duration": 1.51,
+      "text": "ALU."
+    },
+    {
+      "index": 543,
+      "start": 1102.0,
+      "end": 1104.43,
+      "duration": 2.43,
+      "text": "The ALU asks, \"What are we What What are"
+    },
+    {
+      "index": 544,
+      "start": 1104.44,
+      "end": 1105.91,
+      "duration": 1.47,
+      "text": "we doing operations on here? What's"
+    },
+    {
+      "index": 545,
+      "start": 1105.92,
+      "end": 1106.99,
+      "duration": 1.07,
+      "text": "happening?\""
+    },
+    {
+      "index": 546,
+      "start": 1107.0,
+      "end": 1109.23,
+      "duration": 2.23,
+      "text": "So, it might get some data. You know, if"
+    },
+    {
+      "index": 547,
+      "start": 1109.24,
+      "end": 1110.669,
+      "duration": 1.429,
+      "text": "you're adding two numbers, it might get"
+    },
+    {
+      "index": 548,
+      "start": 1110.679,
+      "end": 1113.11,
+      "duration": 2.431,
+      "text": "two numbers from from memory."
+    },
+    {
+      "index": 549,
+      "start": 1113.12,
+      "end": 1114.75,
+      "duration": 1.63,
+      "text": "It might do some operations, and it"
+    },
+    {
+      "index": 550,
+      "start": 1114.76,
+      "end": 1117.75,
+      "duration": 2.99,
+      "text": "might store data back into memory. Okay?"
+    },
+    {
+      "index": 551,
+      "start": 1117.76,
+      "end": 1120.87,
+      "duration": 3.11,
+      "text": "And after it's done, the ALU"
+    },
+    {
+      "index": 552,
+      "start": 1120.88,
+      "end": 1122.07,
+      "duration": 1.19,
+      "text": "is going to go back, and the program"
+    },
+    {
+      "index": 553,
+      "start": 1122.08,
+      "end": 1124.23,
+      "duration": 2.15,
+      "text": "counter is going to increase by one,"
+    },
+    {
+      "index": 554,
+      "start": 1124.24,
+      "end": 1126.19,
+      "duration": 1.95,
+      "text": "which means that we're going to go to"
+    },
+    {
+      "index": 555,
+      "start": 1126.2,
+      "end": 1127.95,
+      "duration": 1.75,
+      "text": "the next sequence in the instruction"
+    },
+    {
+      "index": 556,
+      "start": 1127.96,
+      "end": 1129.55,
+      "duration": 1.59,
+      "text": "set."
+    },
+    {
+      "index": 557,
+      "start": 1129.56,
+      "end": 1131.87,
+      "duration": 2.31,
+      "text": "Okay? And it just goes linearly line"
+    },
+    {
+      "index": 558,
+      "start": 1131.88,
+      "end": 1133.669,
+      "duration": 1.789,
+      "text": "instruction by instruction."
+    },
+    {
+      "index": 559,
+      "start": 1133.679,
+      "end": 1135.07,
+      "duration": 1.391,
+      "text": "There might be one instruc- one"
+    },
+    {
+      "index": 560,
+      "start": 1135.08,
+      "end": 1136.909,
+      "duration": 1.829,
+      "text": "particular instruction that does some"
+    },
+    {
+      "index": 561,
+      "start": 1136.919,
+      "end": 1141.43,
+      "duration": 4.511,
+      "text": "sort of test. It's going to say, \"Is"
+    },
+    {
+      "index": 562,
+      "start": 1141.44,
+      "end": 1143.47,
+      "duration": 2.03,
+      "text": "is this particular"
+    },
+    {
+      "index": 563,
+      "start": 1143.48,
+      "end": 1144.95,
+      "duration": 1.47,
+      "text": "um"
+    },
+    {
+      "index": 564,
+      "start": 1144.96,
+      "end": 1147.43,
+      "duration": 2.47,
+      "text": "uh is this particular value greater or"
+    },
+    {
+      "index": 565,
+      "start": 1147.44,
+      "end": 1149.23,
+      "duration": 1.79,
+      "text": "equal to or the same as this other"
+    },
+    {
+      "index": 566,
+      "start": 1149.24,
+      "end": 1151.03,
+      "duration": 1.79,
+      "text": "particular value?\""
+    },
+    {
+      "index": 567,
+      "start": 1151.04,
+      "end": 1152.95,
+      "duration": 1.91,
+      "text": "So, that's a test, an example of a test."
+    },
+    {
+      "index": 568,
+      "start": 1152.96,
+      "end": 1154.47,
+      "duration": 1.51,
+      "text": "And the test is going to be the either"
+    },
+    {
+      "index": 569,
+      "start": 1154.48,
+      "end": 1155.83,
+      "duration": 1.35,
+      "text": "return something that"
+    },
+    {
+      "index": 570,
+      "start": 1155.84,
+      "end": 1157.55,
+      "duration": 1.71,
+      "text": "either return true or false. And"
+    },
+    {
+      "index": 571,
+      "start": 1157.56,
+      "end": 1159.47,
+      "duration": 1.91,
+      "text": "depending on the result of"
+    },
+    {
+      "index": 572,
+      "start": 1159.48,
+      "end": 1162.27,
+      "duration": 2.79,
+      "text": "of of that test, you might either"
+    },
+    {
+      "index": 573,
+      "start": 1162.28,
+      "end": 1164.35,
+      "duration": 2.07,
+      "text": "go to the next instruction,"
+    },
+    {
+      "index": 574,
+      "start": 1164.36,
+      "end": 1166.07,
+      "duration": 1.71,
+      "text": "or you might set the program counter to"
+    },
+    {
+      "index": 575,
+      "start": 1166.08,
+      "end": 1167.79,
+      "duration": 1.71,
+      "text": "go all the way back to the beginning,"
+    },
+    {
+      "index": 576,
+      "start": 1167.8,
+      "end": 1169.47,
+      "duration": 1.67,
+      "text": "and so on."
+    },
+    {
+      "index": 577,
+      "start": 1169.48,
+      "end": 1171.87,
+      "duration": 2.39,
+      "text": "So, you're not just sort of linearly um"
+    },
+    {
+      "index": 578,
+      "start": 1171.88,
+      "end": 1173.27,
+      "duration": 1.39,
+      "text": "stepping through all the instructions."
+    },
+    {
+      "index": 579,
+      "start": 1173.28,
+      "end": 1174.75,
+      "duration": 1.47,
+      "text": "There might be some control flow"
+    },
+    {
+      "index": 580,
+      "start": 1174.76,
+      "end": 1175.95,
+      "duration": 1.19,
+      "text": "involved, where you might skip an"
+    },
+    {
+      "index": 581,
+      "start": 1175.96,
+      "end": 1177.79,
+      "duration": 1.83,
+      "text": "instruction or start from the beginning,"
+    },
+    {
+      "index": 582,
+      "start": 1177.8,
+      "end": 1179.55,
+      "duration": 1.75,
+      "text": "or so on. Okay?"
+    },
+    {
+      "index": 583,
+      "start": 1179.56,
+      "end": 1181.83,
+      "duration": 2.27,
+      "text": "And after you're done, when when when"
+    },
+    {
+      "index": 584,
+      "start": 1181.84,
+      "end": 1183.07,
+      "duration": 1.23,
+      "text": "you finished executing the last"
+    },
+    {
+      "index": 585,
+      "start": 1183.08,
+      "end": 1184.87,
+      "duration": 1.79,
+      "text": "instruction, then you might output"
+    },
+    {
+      "index": 586,
+      "start": 1184.88,
+      "end": 1186.83,
+      "duration": 1.95,
+      "text": "something."
+    },
+    {
+      "index": 587,
+      "start": 1186.84,
+      "end": 1188.909,
+      "duration": 2.069,
+      "text": "So, that's really the basic"
+    },
+    {
+      "index": 588,
+      "start": 1188.919,
+      "end": 1191.669,
+      "duration": 2.75,
+      "text": "the the basic way that a computer works."
+    },
+    {
+      "index": 589,
+      "start": 1191.679,
+      "end": 1192.99,
+      "duration": 1.311,
+      "text": "Okay?"
+    },
+    {
+      "index": 590,
+      "start": 1193.0,
+      "end": 1194.91,
+      "duration": 1.91,
+      "text": "So, just to recap, you have the stored"
+    },
+    {
+      "index": 591,
+      "start": 1194.92,
+      "end": 1196.43,
+      "duration": 1.51,
+      "text": "program computer that contains these"
+    },
+    {
+      "index": 592,
+      "start": 1196.44,
+      "end": 1198.59,
+      "duration": 2.15,
+      "text": "sequences of instructions."
+    },
+    {
+      "index": 593,
+      "start": 1198.6,
+      "end": 1200.47,
+      "duration": 1.87,
+      "text": "Um the primitive operations that it can"
+    },
+    {
+      "index": 594,
+      "start": 1200.48,
+      "end": 1202.19,
+      "duration": 1.71,
+      "text": "do are"
+    },
+    {
+      "index": 595,
+      "start": 1202.2,
+      "end": 1204.83,
+      "duration": 2.63,
+      "text": "addition, subtraction, logic operations,"
+    },
+    {
+      "index": 596,
+      "start": 1204.84,
+      "end": 1207.63,
+      "duration": 2.79,
+      "text": "tests, which are, you know, something"
+    },
+    {
+      "index": 597,
+      "start": 1207.64,
+      "end": 1208.91,
+      "duration": 1.27,
+      "text": "equal to something else, something less"
+    },
+    {
+      "index": 598,
+      "start": 1208.92,
+      "end": 1210.95,
+      "duration": 2.03,
+      "text": "than, and so on, and moving data, so"
+    },
+    {
+      "index": 599,
+      "start": 1210.96,
+      "end": 1212.79,
+      "duration": 1.83,
+      "text": "storing data, moving data around, and"
+    },
+    {
+      "index": 600,
+      "start": 1212.8,
+      "end": 1214.15,
+      "duration": 1.35,
+      "text": "things like that."
+    },
+    {
+      "index": 601,
+      "start": 1214.16,
+      "end": 1217.03,
+      "duration": 2.87,
+      "text": "And the interpreter"
+    },
+    {
+      "index": 602,
+      "start": 1217.04,
+      "end": 1219.07,
+      "duration": 2.03,
+      "text": "goes through every"
+    },
+    {
+      "index": 603,
+      "start": 1219.08,
+      "end": 1220.87,
+      "duration": 1.79,
+      "text": "every instruction and decides whether"
+    },
+    {
+      "index": 604,
+      "start": 1220.88,
+      "end": 1221.67,
+      "duration": 0.79,
+      "text": "you're going to go to the next"
+    },
+    {
+      "index": 605,
+      "start": 1221.68,
+      "end": 1224.39,
+      "duration": 2.71,
+      "text": "instructions, skip instructions, or"
+    },
+    {
+      "index": 606,
+      "start": 1224.4,
+      "end": 1228.15,
+      "duration": 3.75,
+      "text": "repeat instructions, and so on."
+    },
+    {
+      "index": 607,
+      "start": 1230.47,
+      "end": 1230.48,
+      "duration": 0.01,
+      "text": "Okay. So, we talked about primitives."
+    },
+    {
+      "index": 608,
+      "start": 1230.48,
+      "end": 1232.67,
+      "duration": 2.19,
+      "text": "And in fact, the"
+    },
+    {
+      "index": 609,
+      "start": 1232.68,
+      "end": 1234.67,
+      "duration": 1.99,
+      "text": "Alan Turing was this"
+    },
+    {
+      "index": 610,
+      "start": 1234.68,
+      "end": 1235.99,
+      "duration": 1.31,
+      "text": "a really great computer scientist. He"
+    },
+    {
+      "index": 611,
+      "start": 1236.0,
+      "end": 1237.19,
+      "duration": 1.19,
+      "text": "showed that you can compute anything"
+    },
+    {
+      "index": 612,
+      "start": 1237.2,
+      "end": 1239.11,
+      "duration": 1.91,
+      "text": "using the six primitives. And the six"
+    },
+    {
+      "index": 613,
+      "start": 1239.12,
+      "end": 1240.63,
+      "duration": 1.51,
+      "text": "primitives were"
+    },
+    {
+      "index": 614,
+      "start": 1240.64,
+      "end": 1243.07,
+      "duration": 2.43,
+      "text": "um are"
+    },
+    {
+      "index": 615,
+      "start": 1243.08,
+      "end": 1245.31,
+      "duration": 2.23,
+      "text": "move left, move right,"
+    },
+    {
+      "index": 616,
+      "start": 1245.32,
+      "end": 1248.79,
+      "duration": 3.47,
+      "text": "read, write, scan, and do nothing. Okay."
+    },
+    {
+      "index": 617,
+      "start": 1248.8,
+      "end": 1251.27,
+      "duration": 2.47,
+      "text": "So, using those six"
+    },
+    {
+      "index": 618,
+      "start": 1251.28,
+      "end": 1253.35,
+      "duration": 2.07,
+      "text": "those six instructions and the piece of"
+    },
+    {
+      "index": 619,
+      "start": 1253.36,
+      "end": 1255.35,
+      "duration": 1.99,
+      "text": "tape, he showed that you can compute"
+    },
+    {
+      "index": 620,
+      "start": 1255.36,
+      "end": 1257.07,
+      "duration": 1.71,
+      "text": "anything."
+    },
+    {
+      "index": 621,
+      "start": 1257.08,
+      "end": 1258.47,
+      "duration": 1.39,
+      "text": "And"
+    },
+    {
+      "index": 622,
+      "start": 1258.48,
+      "end": 1260.19,
+      "duration": 1.71,
+      "text": "using those six instructions,"
+    },
+    {
+      "index": 623,
+      "start": 1260.2,
+      "end": 1262.95,
+      "duration": 2.75,
+      "text": "programming languages came about that"
+    },
+    {
+      "index": 624,
+      "start": 1262.96,
+      "end": 1264.35,
+      "duration": 1.39,
+      "text": "created a more convenient set of"
+    },
+    {
+      "index": 625,
+      "start": 1264.36,
+      "end": 1265.99,
+      "duration": 1.63,
+      "text": "primitives, so you don't have to program"
+    },
+    {
+      "index": 626,
+      "start": 1266.0,
+      "end": 1269.07,
+      "duration": 3.07,
+      "text": "in only these only these six commands,"
+    },
+    {
+      "index": 627,
+      "start": 1269.08,
+      "end": 1271.23,
+      "duration": 2.15,
+      "text": "right?"
+    },
+    {
+      "index": 628,
+      "start": 1271.24,
+      "end": 1272.75,
+      "duration": 1.51,
+      "text": "And"
+    },
+    {
+      "index": 629,
+      "start": 1272.76,
+      "end": 1274.71,
+      "duration": 1.95,
+      "text": "one interesting thing or one really"
+    },
+    {
+      "index": 630,
+      "start": 1274.72,
+      "end": 1276.79,
+      "duration": 2.07,
+      "text": "important thing that came about from"
+    },
+    {
+      "index": 631,
+      "start": 1276.8,
+      "end": 1278.07,
+      "duration": 1.27,
+      "text": "this"
+    },
+    {
+      "index": 632,
+      "start": 1278.08,
+      "end": 1280.07,
+      "duration": 1.99,
+      "text": "from these six primitives is that if you"
+    },
+    {
+      "index": 633,
+      "start": 1280.08,
+      "end": 1282.35,
+      "duration": 2.27,
+      "text": "can compute something in Python, let's"
+    },
+    {
+      "index": 634,
+      "start": 1282.36,
+      "end": 1283.79,
+      "duration": 1.43,
+      "text": "say,"
+    },
+    {
+      "index": 635,
+      "start": 1283.8,
+      "end": 1285.31,
+      "duration": 1.51,
+      "text": "if you write a program that computes"
+    },
+    {
+      "index": 636,
+      "start": 1285.32,
+      "end": 1288.11,
+      "duration": 2.79,
+      "text": "something in Python, then in theory, you"
+    },
+    {
+      "index": 637,
+      "start": 1288.12,
+      "end": 1289.63,
+      "duration": 1.51,
+      "text": "can you can write a program that"
+    },
+    {
+      "index": 638,
+      "start": 1289.64,
+      "end": 1291.43,
+      "duration": 1.79,
+      "text": "computes the exact same thing in any"
+    },
+    {
+      "index": 639,
+      "start": 1291.44,
+      "end": 1292.79,
+      "duration": 1.35,
+      "text": "other language. Okay. And that's a"
+    },
+    {
+      "index": 640,
+      "start": 1292.8,
+      "end": 1295.27,
+      "duration": 2.47,
+      "text": "really powerful statement."
+    },
+    {
+      "index": 641,
+      "start": 1295.28,
+      "end": 1296.51,
+      "duration": 1.23,
+      "text": "Okay."
+    },
+    {
+      "index": 642,
+      "start": 1296.52,
+      "end": 1298.15,
+      "duration": 1.63,
+      "text": "Think about that today when you review"
+    },
+    {
+      "index": 643,
+      "start": 1298.16,
+      "end": 1299.51,
+      "duration": 1.35,
+      "text": "your slides."
+    },
+    {
+      "index": 644,
+      "start": 1299.52,
+      "end": 1301.03,
+      "duration": 1.51,
+      "text": "Think about that again, and that's"
+    },
+    {
+      "index": 645,
+      "start": 1301.04,
+      "end": 1304.83,
+      "duration": 3.79,
+      "text": "really powerful. Okay."
+    },
+    {
+      "index": 646,
+      "start": 1306.43,
+      "end": 1306.44,
+      "duration": 0.01,
+      "text": "So, once you set have your set of"
+    },
+    {
+      "index": 647,
+      "start": 1306.44,
+      "end": 1308.27,
+      "duration": 1.83,
+      "text": "primitives,"
+    },
+    {
+      "index": 648,
+      "start": 1308.28,
+      "end": 1310.03,
+      "duration": 1.75,
+      "text": "you can set of primitives for a"
+    },
+    {
+      "index": 649,
+      "start": 1310.04,
+      "end": 1312.83,
+      "duration": 2.79,
+      "text": "particular language. Okay. You can start"
+    },
+    {
+      "index": 650,
+      "start": 1312.84,
+      "end": 1314.15,
+      "duration": 1.31,
+      "text": "creating expressions. And these"
+    },
+    {
+      "index": 651,
+      "start": 1314.16,
+      "end": 1316.63,
+      "duration": 2.47,
+      "text": "expressions are going to be combinations"
+    },
+    {
+      "index": 652,
+      "start": 1316.64,
+      "end": 1318.55,
+      "duration": 1.91,
+      "text": "of of the primitives in the programming"
+    },
+    {
+      "index": 653,
+      "start": 1318.56,
+      "end": 1320.23,
+      "duration": 1.67,
+      "text": "language."
+    },
+    {
+      "index": 654,
+      "start": 1320.24,
+      "end": 1321.43,
+      "duration": 1.19,
+      "text": "And the expressions are going to have"
+    },
+    {
+      "index": 655,
+      "start": 1321.44,
+      "end": 1323.07,
+      "duration": 1.63,
+      "text": "some value. And they're going to have"
+    },
+    {
+      "index": 656,
+      "start": 1323.08,
+      "end": 1324.71,
+      "duration": 1.63,
+      "text": "some meaning in"
+    },
+    {
+      "index": 657,
+      "start": 1324.72,
+      "end": 1327.87,
+      "duration": 3.15,
+      "text": "in the programming language."
+    },
+    {
+      "index": 658,
+      "start": 1327.88,
+      "end": 1329.63,
+      "duration": 1.75,
+      "text": "So, let's do a little bit of a parallel"
+    },
+    {
+      "index": 659,
+      "start": 1329.64,
+      "end": 1332.43,
+      "duration": 2.79,
+      "text": "with English, just so you see what I am"
+    },
+    {
+      "index": 660,
+      "start": 1332.44,
+      "end": 1333.75,
+      "duration": 1.31,
+      "text": "what what I mean."
+    },
+    {
+      "index": 661,
+      "start": 1333.76,
+      "end": 1335.35,
+      "duration": 1.59,
+      "text": "So, in English, the primitive constructs"
+    },
+    {
+      "index": 662,
+      "start": 1335.36,
+      "end": 1337.19,
+      "duration": 1.83,
+      "text": "are going to be words, right? There's a"
+    },
+    {
+      "index": 663,
+      "start": 1337.2,
+      "end": 1338.99,
+      "duration": 1.79,
+      "text": "lot of words in the English language."
+    },
+    {
+      "index": 664,
+      "start": 1339.0,
+      "end": 1340.75,
+      "duration": 1.75,
+      "text": "Programming in"
+    },
+    {
+      "index": 665,
+      "start": 1340.76,
+      "end": 1341.99,
+      "duration": 1.23,
+      "text": "Python,"
+    },
+    {
+      "index": 666,
+      "start": 1342.0,
+      "end": 1343.19,
+      "duration": 1.19,
+      "text": "there are there are primitives, but"
+    },
+    {
+      "index": 667,
+      "start": 1343.2,
+      "end": 1344.91,
+      "duration": 1.71,
+      "text": "there aren't as many of them. So,"
+    },
+    {
+      "index": 668,
+      "start": 1344.92,
+      "end": 1346.03,
+      "duration": 1.11,
+      "text": "there's"
+    },
+    {
+      "index": 669,
+      "start": 1346.04,
+      "end": 1348.59,
+      "duration": 2.55,
+      "text": "there are floats, booleans, you know,"
+    },
+    {
+      "index": 670,
+      "start": 1348.6,
+      "end": 1350.99,
+      "duration": 2.39,
+      "text": "these are numbers, strings, and simple"
+    },
+    {
+      "index": 671,
+      "start": 1351.0,
+      "end": 1352.55,
+      "duration": 1.55,
+      "text": "operators like addition, subtraction,"
+    },
+    {
+      "index": 672,
+      "start": 1352.56,
+      "end": 1354.31,
+      "duration": 1.75,
+      "text": "and so on."
+    },
+    {
+      "index": 673,
+      "start": 1354.32,
+      "end": 1357.99,
+      "duration": 3.67,
+      "text": "Okay. So, we have primitive constructs."
+    },
+    {
+      "index": 674,
+      "start": 1358.0,
+      "end": 1359.95,
+      "duration": 1.95,
+      "text": "Using these primitive constructs, we can"
+    },
+    {
+      "index": 675,
+      "start": 1359.96,
+      "end": 1362.71,
+      "duration": 2.75,
+      "text": "start creating"
+    },
+    {
+      "index": 676,
+      "start": 1362.72,
+      "end": 1364.59,
+      "duration": 1.87,
+      "text": "in English"
+    },
+    {
+      "index": 677,
+      "start": 1364.6,
+      "end": 1367.99,
+      "duration": 3.39,
+      "text": "phrases, right? Sentences."
+    },
+    {
+      "index": 678,
+      "start": 1368.0,
+      "end": 1369.51,
+      "duration": 1.51,
+      "text": "And the same in programming languages."
+    },
+    {
+      "index": 679,
+      "start": 1369.52,
+      "end": 1370.83,
+      "duration": 1.31,
+      "text": "So, in English, we can say something"
+    },
+    {
+      "index": 680,
+      "start": 1370.84,
+      "end": 1372.99,
+      "duration": 2.15,
+      "text": "like cat dog boy."
+    },
+    {
+      "index": 681,
+      "start": 1373.0,
+      "end": 1374.11,
+      "duration": 1.11,
+      "text": "Okay."
+    },
+    {
+      "index": 682,
+      "start": 1374.12,
+      "end": 1375.55,
+      "duration": 1.43,
+      "text": "That"
+    },
+    {
+      "index": 683,
+      "start": 1375.56,
+      "end": 1378.19,
+      "duration": 2.63,
+      "text": "we say is not syntactically valid. So,"
+    },
+    {
+      "index": 684,
+      "start": 1378.2,
+      "end": 1380.75,
+      "duration": 2.55,
+      "text": "that's bad syntax, right? I That's noun"
+    },
+    {
+      "index": 685,
+      "start": 1380.76,
+      "end": 1382.27,
+      "duration": 1.51,
+      "text": "noun noun. I think that doesn't make"
+    },
+    {
+      "index": 686,
+      "start": 1382.28,
+      "end": 1384.91,
+      "duration": 2.63,
+      "text": "sense."
+    },
+    {
+      "index": 687,
+      "start": 1387.23,
+      "end": 1387.24,
+      "duration": 0.01,
+      "text": "What does have good syntax in English is"
+    },
+    {
+      "index": 688,
+      "start": 1387.24,
+      "end": 1390.35,
+      "duration": 3.11,
+      "text": "noun verb noun. So, cat hugs boy is"
+    },
+    {
+      "index": 689,
+      "start": 1390.36,
+      "end": 1392.55,
+      "duration": 2.19,
+      "text": "syntactically valid."
+    },
+    {
+      "index": 690,
+      "start": 1392.56,
+      "end": 1394.55,
+      "duration": 1.99,
+      "text": "Similarly, in a programming language,"
+    },
+    {
+      "index": 691,
+      "start": 1394.56,
+      "end": 1396.669,
+      "duration": 2.109,
+      "text": "something like this in Python in this"
+    },
+    {
+      "index": 692,
+      "start": 1396.679,
+      "end": 1397.75,
+      "duration": 1.071,
+      "text": "case,"
+    },
+    {
+      "index": 693,
+      "start": 1397.76,
+      "end": 1399.51,
+      "duration": 1.75,
+      "text": "a word and then the number five doesn't"
+    },
+    {
+      "index": 694,
+      "start": 1399.52,
+      "end": 1400.47,
+      "duration": 0.95,
+      "text": "really make sense. It's not"
+    },
+    {
+      "index": 695,
+      "start": 1400.48,
+      "end": 1402.55,
+      "duration": 2.07,
+      "text": "syntactically valid. But something like"
+    },
+    {
+      "index": 696,
+      "start": 1402.56,
+      "end": 1407.75,
+      "duration": 5.19,
+      "text": "operator operand operator is okay."
+    },
+    {
+      "index": 697,
+      "start": 1407.76,
+      "end": 1410.79,
+      "duration": 3.03,
+      "text": "So, once you've created"
+    },
+    {
+      "index": 698,
+      "start": 1410.8,
+      "end": 1412.39,
+      "duration": 1.59,
+      "text": "these"
+    },
+    {
+      "index": 699,
+      "start": 1412.4,
+      "end": 1414.31,
+      "duration": 1.91,
+      "text": "these phrases or these these expressions"
+    },
+    {
+      "index": 700,
+      "start": 1414.32,
+      "end": 1417.15,
+      "duration": 2.83,
+      "text": "that are syntactically valid, you have"
+    },
+    {
+      "index": 701,
+      "start": 1417.16,
+      "end": 1418.669,
+      "duration": 1.509,
+      "text": "to think about"
+    },
+    {
+      "index": 702,
+      "start": 1418.679,
+      "end": 1421.51,
+      "duration": 2.831,
+      "text": "um the static semantics of your phrase,"
+    },
+    {
+      "index": 703,
+      "start": 1421.52,
+      "end": 1423.51,
+      "duration": 1.99,
+      "text": "okay, of your expression."
+    },
+    {
+      "index": 704,
+      "start": 1423.52,
+      "end": 1424.71,
+      "duration": 1.19,
+      "text": "So,"
+    },
+    {
+      "index": 705,
+      "start": 1424.72,
+      "end": 1428.31,
+      "duration": 3.59,
+      "text": "so for example, in English,"
+    },
+    {
+      "index": 706,
+      "start": 1428.32,
+      "end": 1432.47,
+      "duration": 4.15,
+      "text": "I are hungry is good syntax, okay, but"
+    },
+    {
+      "index": 707,
+      "start": 1432.48,
+      "end": 1435.07,
+      "duration": 2.59,
+      "text": "it's kind of weird to say, right?"
+    },
+    {
+      "index": 708,
+      "start": 1435.08,
+      "end": 1436.43,
+      "duration": 1.35,
+      "text": "We have a pronoun, a verb, and an"
+    },
+    {
+      "index": 709,
+      "start": 1436.44,
+      "end": 1437.71,
+      "duration": 1.27,
+      "text": "adjective,"
+    },
+    {
+      "index": 710,
+      "start": 1437.72,
+      "end": 1439.63,
+      "duration": 1.91,
+      "text": "which doesn't really make sense, right?"
+    },
+    {
+      "index": 711,
+      "start": 1439.64,
+      "end": 1442.31,
+      "duration": 2.67,
+      "text": "I am hungry is is better. So, this is"
+    },
+    {
+      "index": 712,
+      "start": 1442.32,
+      "end": 1443.95,
+      "duration": 1.63,
+      "text": "statically semantically This does not"
+    },
+    {
+      "index": 713,
+      "start": 1443.96,
+      "end": 1445.11,
+      "duration": 1.15,
+      "text": "have good"
+    },
+    {
+      "index": 714,
+      "start": 1445.12,
+      "end": 1447.03,
+      "duration": 1.91,
+      "text": "static semantics."
+    },
+    {
+      "index": 715,
+      "start": 1447.04,
+      "end": 1449.07,
+      "duration": 2.03,
+      "text": "Similarly, in programming languages, and"
+    },
+    {
+      "index": 716,
+      "start": 1449.08,
+      "end": 1450.63,
+      "duration": 1.55,
+      "text": "you'll get the hang of this"
+    },
+    {
+      "index": 717,
+      "start": 1450.64,
+      "end": 1452.39,
+      "duration": 1.75,
+      "text": "hang of this the more you do it,"
+    },
+    {
+      "index": 718,
+      "start": 1452.4,
+      "end": 1455.59,
+      "duration": 3.19,
+      "text": "something like this, 3.2 * 5 is okay."
+    },
+    {
+      "index": 719,
+      "start": 1455.6,
+      "end": 1457.55,
+      "duration": 1.95,
+      "text": "But what does it mean, right? What's the"
+    },
+    {
+      "index": 720,
+      "start": 1457.56,
+      "end": 1459.83,
+      "duration": 2.27,
+      "text": "meaning to have"
+    },
+    {
+      "index": 721,
+      "start": 1459.84,
+      "end": 1462.15,
+      "duration": 2.31,
+      "text": "a word added to the number to a number?"
+    },
+    {
+      "index": 722,
+      "start": 1462.16,
+      "end": 1465.43,
+      "duration": 3.27,
+      "text": "There's no meaning behind that, right?"
+    },
+    {
+      "index": 723,
+      "start": 1465.44,
+      "end": 1467.91,
+      "duration": 2.47,
+      "text": "It's syntax is okay because you have"
+    },
+    {
+      "index": 724,
+      "start": 1467.92,
+      "end": 1470.15,
+      "duration": 2.23,
+      "text": "operator operand operator, but it"
+    },
+    {
+      "index": 725,
+      "start": 1470.16,
+      "end": 1471.59,
+      "duration": 1.43,
+      "text": "doesn't really make sense to add a"
+    },
+    {
+      "index": 726,
+      "start": 1471.6,
+      "end": 1476.27,
+      "duration": 4.67,
+      "text": "number to a word, for example. Okay."
+    },
+    {
+      "index": 727,
+      "start": 1478.669,
+      "end": 1478.679,
+      "duration": 0.01,
+      "text": "So, once you have created these"
+    },
+    {
+      "index": 728,
+      "start": 1478.679,
+      "end": 1481.11,
+      "duration": 2.431,
+      "text": "expressions that are syntactically"
+    },
+    {
+      "index": 729,
+      "start": 1481.12,
+      "end": 1485.59,
+      "duration": 4.47,
+      "text": "correct and static semantically correct,"
+    },
+    {
+      "index": 730,
+      "start": 1485.6,
+      "end": 1487.47,
+      "duration": 1.87,
+      "text": "in English, for example, you think about"
+    },
+    {
+      "index": 731,
+      "start": 1487.48,
+      "end": 1489.43,
+      "duration": 1.95,
+      "text": "the semantics. So, what's the meaning of"
+    },
+    {
+      "index": 732,
+      "start": 1489.44,
+      "end": 1491.47,
+      "duration": 2.03,
+      "text": "the phrase? And in English, you can"
+    },
+    {
+      "index": 733,
+      "start": 1491.48,
+      "end": 1493.03,
+      "duration": 1.55,
+      "text": "actually have more than one meaning to"
+    },
+    {
+      "index": 734,
+      "start": 1493.04,
+      "end": 1494.83,
+      "duration": 1.79,
+      "text": "an entire phrase."
+    },
+    {
+      "index": 735,
+      "start": 1494.84,
+      "end": 1495.83,
+      "duration": 0.99,
+      "text": "Okay."
+    },
+    {
+      "index": 736,
+      "start": 1495.84,
+      "end": 1497.79,
+      "duration": 1.95,
+      "text": "So, in this case, flying planes are"
+    },
+    {
+      "index": 737,
+      "start": 1497.8,
+      "end": 1501.15,
+      "duration": 3.35,
+      "text": "dangerous flying planes can be dangerous"
+    },
+    {
+      "index": 738,
+      "start": 1501.16,
+      "end": 1503.43,
+      "duration": 2.27,
+      "text": "can have two meanings. It's the act of"
+    },
+    {
+      "index": 739,
+      "start": 1503.44,
+      "end": 1506.43,
+      "duration": 2.99,
+      "text": "flying a plane is dangerous or the plane"
+    },
+    {
+      "index": 740,
+      "start": 1506.44,
+      "end": 1508.669,
+      "duration": 2.229,
+      "text": "that is in the air is dangerous, right?"
+    },
+    {
+      "index": 741,
+      "start": 1508.679,
+      "end": 1510.71,
+      "duration": 2.031,
+      "text": "And this might be a cuter example. This"
+    },
+    {
+      "index": 742,
+      "start": 1510.72,
+      "end": 1512.59,
+      "duration": 1.87,
+      "text": "reading lamp hasn't uttered a word since"
+    },
+    {
+      "index": 743,
+      "start": 1512.6,
+      "end": 1515.11,
+      "duration": 2.51,
+      "text": "I bought it. What's going on, right? So,"
+    },
+    {
+      "index": 744,
+      "start": 1515.12,
+      "end": 1516.51,
+      "duration": 1.39,
+      "text": "that has two meanings, right? It's"
+    },
+    {
+      "index": 745,
+      "start": 1516.52,
+      "end": 1519.79,
+      "duration": 3.27,
+      "text": "playing on the word reading lamp."
+    },
+    {
+      "index": 746,
+      "start": 1519.8,
+      "end": 1521.75,
+      "duration": 1.95,
+      "text": "In programming, so that's that's in"
+    },
+    {
+      "index": 747,
+      "start": 1521.76,
+      "end": 1522.71,
+      "duration": 0.95,
+      "text": "English. In English, you can have a"
+    },
+    {
+      "index": 748,
+      "start": 1522.72,
+      "end": 1524.55,
+      "duration": 1.83,
+      "text": "sentence that has more than one meaning."
+    },
+    {
+      "index": 749,
+      "start": 1524.56,
+      "end": 1526.35,
+      "duration": 1.79,
+      "text": "That's syntactically correct and static"
+    },
+    {
+      "index": 750,
+      "start": 1526.36,
+      "end": 1528.669,
+      "duration": 2.309,
+      "text": "semantically correct. But in programming"
+    },
+    {
+      "index": 751,
+      "start": 1528.679,
+      "end": 1529.83,
+      "duration": 1.151,
+      "text": "languages,"
+    },
+    {
+      "index": 752,
+      "start": 1529.84,
+      "end": 1531.55,
+      "duration": 1.71,
+      "text": "the program that you write, the set of"
+    },
+    {
+      "index": 753,
+      "start": 1531.56,
+      "end": 1532.95,
+      "duration": 1.39,
+      "text": "instructions that you write, only has"
+    },
+    {
+      "index": 754,
+      "start": 1532.96,
+      "end": 1534.87,
+      "duration": 1.91,
+      "text": "one meaning. So, remember we're coming"
+    },
+    {
+      "index": 755,
+      "start": 1534.88,
+      "end": 1536.47,
+      "duration": 1.59,
+      "text": "back to the fact that the computer only"
+    },
+    {
+      "index": 756,
+      "start": 1536.48,
+      "end": 1538.55,
+      "duration": 2.07,
+      "text": "does what you tell it to do."
+    },
+    {
+      "index": 757,
+      "start": 1538.56,
+      "end": 1539.83,
+      "duration": 1.27,
+      "text": "Okay."
+    },
+    {
+      "index": 758,
+      "start": 1539.84,
+      "end": 1541.63,
+      "duration": 1.79,
+      "text": "It's not going to suddenly, you know,"
+    },
+    {
+      "index": 759,
+      "start": 1541.64,
+      "end": 1544.11,
+      "duration": 2.47,
+      "text": "decide to"
+    },
+    {
+      "index": 760,
+      "start": 1544.12,
+      "end": 1545.91,
+      "duration": 1.79,
+      "text": "add another variable for for some"
+    },
+    {
+      "index": 761,
+      "start": 1545.92,
+      "end": 1547.83,
+      "duration": 1.91,
+      "text": "reason. It's just going to execute"
+    },
+    {
+      "index": 762,
+      "start": 1547.84,
+      "end": 1550.59,
+      "duration": 2.75,
+      "text": "whatever statements you've put up. Okay."
+    },
+    {
+      "index": 763,
+      "start": 1550.6,
+      "end": 1551.95,
+      "duration": 1.35,
+      "text": "So, in programming languages, there's"
+    },
+    {
+      "index": 764,
+      "start": 1551.96,
+      "end": 1554.03,
+      "duration": 2.07,
+      "text": "only one meaning, but the problem comes"
+    },
+    {
+      "index": 765,
+      "start": 1554.04,
+      "end": 1556.55,
+      "duration": 2.51,
+      "text": "the problem"
+    },
+    {
+      "index": 766,
+      "start": 1556.56,
+      "end": 1557.95,
+      "duration": 1.39,
+      "text": "that comes into play in programming"
+    },
+    {
+      "index": 767,
+      "start": 1557.96,
+      "end": 1559.39,
+      "duration": 1.43,
+      "text": "languages is it's not the meaning that"
+    },
+    {
+      "index": 768,
+      "start": 1559.4,
+      "end": 1560.79,
+      "duration": 1.39,
+      "text": "you might have intended as the"
+    },
+    {
+      "index": 769,
+      "start": 1560.8,
+      "end": 1562.75,
+      "duration": 1.95,
+      "text": "programmer. Okay."
+    },
+    {
+      "index": 770,
+      "start": 1562.76,
+      "end": 1565.91,
+      "duration": 3.15,
+      "text": "So, that's where things can go wrong."
+    },
+    {
+      "index": 771,
+      "start": 1565.92,
+      "end": 1567.31,
+      "duration": 1.39,
+      "text": "And there's going to be a lecture on"
+    },
+    {
+      "index": 772,
+      "start": 1567.32,
+      "end": 1569.07,
+      "duration": 1.75,
+      "text": "debugging a little bit later in the"
+    },
+    {
+      "index": 773,
+      "start": 1569.08,
+      "end": 1572.15,
+      "duration": 3.07,
+      "text": "course, but this is here just to"
+    },
+    {
+      "index": 774,
+      "start": 1572.16,
+      "end": 1574.35,
+      "duration": 2.19,
+      "text": "just to tell you that if you see an"
+    },
+    {
+      "index": 775,
+      "start": 1574.36,
+      "end": 1576.43,
+      "duration": 2.07,
+      "text": "error pop up in your program, it's just,"
+    },
+    {
+      "index": 776,
+      "start": 1576.44,
+      "end": 1578.75,
+      "duration": 2.31,
+      "text": "you know, some text that says error, no,"
+    },
+    {
+      "index": 777,
+      "start": 1578.76,
+      "end": 1580.07,
+      "duration": 1.31,
+      "text": "it's some"
+    },
+    {
+      "index": 778,
+      "start": 1580.08,
+      "end": 1582.75,
+      "duration": 2.67,
+      "text": "uh for example, if we do something like"
+    },
+    {
+      "index": 779,
+      "start": 1582.76,
+      "end": 1584.07,
+      "duration": 1.31,
+      "text": "this,"
+    },
+    {
+      "index": 780,
+      "start": 1584.08,
+      "end": 1588.35,
+      "duration": 4.27,
+      "text": "um"
+    },
+    {
+      "index": 781,
+      "start": 1590.669,
+      "end": 1590.679,
+      "duration": 0.01,
+      "text": "this is syntactically correct."
+    },
+    {
+      "index": 782,
+      "start": 1590.679,
+      "end": 1592.39,
+      "duration": 1.711,
+      "text": "Incorrect syntactically incorrect. See,"
+    },
+    {
+      "index": 783,
+      "start": 1592.4,
+      "end": 1594.83,
+      "duration": 2.43,
+      "text": "there's some angry text right here,"
+    },
+    {
+      "index": 784,
+      "start": 1594.84,
+      "end": 1597.47,
+      "duration": 2.63,
+      "text": "right? Like what is going on?"
+    },
+    {
+      "index": 785,
+      "start": 1597.48,
+      "end": 1599.07,
+      "duration": 1.59,
+      "text": "The more you program, the more you'll"
+    },
+    {
+      "index": 786,
+      "start": 1599.08,
+      "end": 1600.99,
+      "duration": 1.91,
+      "text": "get the hang of of reading these errors,"
+    },
+    {
+      "index": 787,
+      "start": 1601.0,
+      "end": 1602.59,
+      "duration": 1.59,
+      "text": "but this is basically telling me this"
+    },
+    {
+      "index": 788,
+      "start": 1602.6,
+      "end": 1603.83,
+      "duration": 1.23,
+      "text": "this the line that I wrote is"
+    },
+    {
+      "index": 789,
+      "start": 1603.84,
+      "end": 1605.95,
+      "duration": 2.11,
+      "text": "syntactically incorrect, okay? And it's"
+    },
+    {
+      "index": 790,
+      "start": 1605.96,
+      "end": 1607.71,
+      "duration": 1.75,
+      "text": "pointing me to the exact line and says"
+    },
+    {
+      "index": 791,
+      "start": 1607.72,
+      "end": 1610.19,
+      "duration": 2.47,
+      "text": "this is wrong. So,"
+    },
+    {
+      "index": 792,
+      "start": 1610.2,
+      "end": 1611.39,
+      "duration": 1.19,
+      "text": "I can go back and fix it as a"
+    },
+    {
+      "index": 793,
+      "start": 1611.4,
+      "end": 1615.11,
+      "duration": 3.71,
+      "text": "programmer. Okay."
+    },
+    {
+      "index": 794,
+      "start": 1616.71,
+      "end": 1616.72,
+      "duration": 0.01,
+      "text": "So, syntax errors are actually really"
+    },
+    {
+      "index": 795,
+      "start": 1616.72,
+      "end": 1618.95,
+      "duration": 2.23,
+      "text": "easily caught by Python."
+    },
+    {
+      "index": 796,
+      "start": 1618.96,
+      "end": 1621.27,
+      "duration": 2.31,
+      "text": "Static semantic errors, so that was an"
+    },
+    {
+      "index": 797,
+      "start": 1621.28,
+      "end": 1623.03,
+      "duration": 1.75,
+      "text": "example of a syntax error. Static"
+    },
+    {
+      "index": 798,
+      "start": 1623.04,
+      "end": 1624.79,
+      "duration": 1.75,
+      "text": "semantic errors can also be caught by"
+    },
+    {
+      "index": 799,
+      "start": 1624.8,
+      "end": 1627.669,
+      "duration": 2.869,
+      "text": "Python as long as"
+    },
+    {
+      "index": 800,
+      "start": 1627.679,
+      "end": 1629.79,
+      "duration": 2.111,
+      "text": "if if your program has some decisions to"
+    },
+    {
+      "index": 801,
+      "start": 1629.8,
+      "end": 1631.03,
+      "duration": 1.23,
+      "text": "make,"
+    },
+    {
+      "index": 802,
+      "start": 1631.04,
+      "end": 1632.47,
+      "duration": 1.43,
+      "text": "um as long as you've gone down the"
+    },
+    {
+      "index": 803,
+      "start": 1632.48,
+      "end": 1634.23,
+      "duration": 1.75,
+      "text": "branch where this where the static"
+    },
+    {
+      "index": 804,
+      "start": 1634.24,
+      "end": 1637.83,
+      "duration": 3.59,
+      "text": "semantic error happens."
+    },
+    {
+      "index": 805,
+      "start": 1637.84,
+      "end": 1639.19,
+      "duration": 1.35,
+      "text": "And"
+    },
+    {
+      "index": 806,
+      "start": 1639.2,
+      "end": 1640.63,
+      "duration": 1.43,
+      "text": "this is probably going to be the most"
+    },
+    {
+      "index": 807,
+      "start": 1640.64,
+      "end": 1642.51,
+      "duration": 1.87,
+      "text": "frustrating one, especially as you're"
+    },
+    {
+      "index": 808,
+      "start": 1642.52,
+      "end": 1643.87,
+      "duration": 1.35,
+      "text": "starting out."
+    },
+    {
+      "index": 809,
+      "start": 1643.88,
+      "end": 1645.43,
+      "duration": 1.55,
+      "text": "The program might do something different"
+    },
+    {
+      "index": 810,
+      "start": 1645.44,
+      "end": 1647.55,
+      "duration": 2.11,
+      "text": "than what you expected it to do, right?"
+    },
+    {
+      "index": 811,
+      "start": 1647.56,
+      "end": 1649.43,
+      "duration": 1.87,
+      "text": "And that's not because the program"
+    },
+    {
+      "index": 812,
+      "start": 1649.44,
+      "end": 1652.11,
+      "duration": 2.67,
+      "text": "suddenly, you know, for example,"
+    },
+    {
+      "index": 813,
+      "start": 1652.12,
+      "end": 1653.47,
+      "duration": 1.35,
+      "text": "you expected the program to give you an"
+    },
+    {
+      "index": 814,
+      "start": 1653.48,
+      "end": 1655.669,
+      "duration": 2.189,
+      "text": "output of zero for a certain test case,"
+    },
+    {
+      "index": 815,
+      "start": 1655.679,
+      "end": 1657.669,
+      "duration": 1.99,
+      "text": "and the output that you got was 10,"
+    },
+    {
+      "index": 816,
+      "start": 1657.679,
+      "end": 1659.03,
+      "duration": 1.351,
+      "text": "right? Well, the program didn't suddenly"
+    },
+    {
+      "index": 817,
+      "start": 1659.04,
+      "end": 1662.07,
+      "duration": 3.03,
+      "text": "decide to change its answer to 10."
+    },
+    {
+      "index": 818,
+      "start": 1662.08,
+      "end": 1664.15,
+      "duration": 2.07,
+      "text": "It just did executed the program that"
+    },
+    {
+      "index": 819,
+      "start": 1664.16,
+      "end": 1668.43,
+      "duration": 4.27,
+      "text": "you that you wrote, right? So,"
+    },
+    {
+      "index": 820,
+      "start": 1668.44,
+      "end": 1670.43,
+      "duration": 1.99,
+      "text": "that's the case where the program gave"
+    },
+    {
+      "index": 821,
+      "start": 1670.44,
+      "end": 1672.95,
+      "duration": 2.51,
+      "text": "you a different answer than expected."
+    },
+    {
+      "index": 822,
+      "start": 1672.96,
+      "end": 1674.59,
+      "duration": 1.63,
+      "text": "Programs might crash, which means they"
+    },
+    {
+      "index": 823,
+      "start": 1674.6,
+      "end": 1677.51,
+      "duration": 2.91,
+      "text": "stop running. That's okay."
+    },
+    {
+      "index": 824,
+      "start": 1677.52,
+      "end": 1679.27,
+      "duration": 1.75,
+      "text": "Just go back to your code and and figure"
+    },
+    {
+      "index": 825,
+      "start": 1679.28,
+      "end": 1682.11,
+      "duration": 2.83,
+      "text": "out what was wrong. And another example"
+    },
+    {
+      "index": 826,
+      "start": 1682.12,
+      "end": 1683.87,
+      "duration": 1.75,
+      "text": "of different meaning than what you"
+    },
+    {
+      "index": 827,
+      "start": 1683.88,
+      "end": 1685.71,
+      "duration": 1.83,
+      "text": "intended was maybe the program will"
+    },
+    {
+      "index": 828,
+      "start": 1685.72,
+      "end": 1688.11,
+      "duration": 2.39,
+      "text": "stop. It's also okay. There are ways to"
+    },
+    {
+      "index": 829,
+      "start": 1688.12,
+      "end": 1691.75,
+      "duration": 3.63,
+      "text": "stop it besides restarting the computer."
+    },
+    {
+      "index": 830,
+      "start": 1691.76,
+      "end": 1692.79,
+      "duration": 1.03,
+      "text": "Okay."
+    },
+    {
+      "index": 831,
+      "start": 1692.8,
+      "end": 1697.19,
+      "duration": 4.39,
+      "text": "So, then Python programs"
+    },
+    {
+      "index": 832,
+      "start": 1699.19,
+      "end": 1699.2,
+      "duration": 0.01,
+      "text": "are going to be sequences of definitions"
+    },
+    {
+      "index": 833,
+      "start": 1699.2,
+      "end": 1700.51,
+      "duration": 1.31,
+      "text": "and commands. We're going to have"
+    },
+    {
+      "index": 834,
+      "start": 1700.52,
+      "end": 1702.23,
+      "duration": 1.71,
+      "text": "expressions that are going to be"
+    },
+    {
+      "index": 835,
+      "start": 1702.24,
+      "end": 1703.75,
+      "duration": 1.51,
+      "text": "evaluated."
+    },
+    {
+      "index": 836,
+      "start": 1703.76,
+      "end": 1704.79,
+      "duration": 1.03,
+      "text": "Okay."
+    },
+    {
+      "index": 837,
+      "start": 1704.8,
+      "end": 1707.149,
+      "duration": 2.349,
+      "text": "And commands"
+    },
+    {
+      "index": 838,
+      "start": 1707.159,
+      "end": 1709.39,
+      "duration": 2.231,
+      "text": "that"
+    },
+    {
+      "index": 839,
+      "start": 1709.4,
+      "end": 1710.75,
+      "duration": 1.35,
+      "text": "that tell the interpreter to do"
+    },
+    {
+      "index": 840,
+      "start": 1710.76,
+      "end": 1712.63,
+      "duration": 1.87,
+      "text": "something."
+    },
+    {
+      "index": 841,
+      "start": 1712.64,
+      "end": 1715.07,
+      "duration": 2.43,
+      "text": "So, if you've done problem set zero,"
+    },
+    {
+      "index": 842,
+      "start": 1715.08,
+      "end": 1717.27,
+      "duration": 2.19,
+      "text": "you'll see that you can type commands"
+    },
+    {
+      "index": 843,
+      "start": 1717.28,
+      "end": 1719.63,
+      "duration": 2.35,
+      "text": "directly in the shell here, which is the"
+    },
+    {
+      "index": 844,
+      "start": 1719.64,
+      "end": 1721.39,
+      "duration": 1.75,
+      "text": "part on the right where I did some some"
+    },
+    {
+      "index": 845,
+      "start": 1721.4,
+      "end": 1724.23,
+      "duration": 2.83,
+      "text": "really simple things, 2 + 4."
+    },
+    {
+      "index": 846,
+      "start": 1724.24,
+      "end": 1727.63,
+      "duration": 3.39,
+      "text": "Or you can type commands up in here"
+    },
+    {
+      "index": 847,
+      "start": 1727.64,
+      "end": 1730.149,
+      "duration": 2.509,
+      "text": "on the left-hand side, and then run your"
+    },
+    {
+      "index": 848,
+      "start": 1730.159,
+      "end": 1732.149,
+      "duration": 1.99,
+      "text": "program. Okay."
+    },
+    {
+      "index": 849,
+      "start": 1732.159,
+      "end": 1734.83,
+      "duration": 2.671,
+      "text": "Notice that Well, we'll talk about this"
+    },
+    {
+      "index": 850,
+      "start": 1734.84,
+      "end": 1736.99,
+      "duration": 2.15,
+      "text": "I won't talk about this now, but"
+    },
+    {
+      "index": 851,
+      "start": 1737.0,
+      "end": 1738.149,
+      "duration": 1.149,
+      "text": "these are"
+    },
+    {
+      "index": 852,
+      "start": 1738.159,
+      "end": 1739.95,
+      "duration": 1.791,
+      "text": "on the right-hand side, typically, you"
+    },
+    {
+      "index": 853,
+      "start": 1739.96,
+      "end": 1741.59,
+      "duration": 1.63,
+      "text": "write very simple commands just if"
+    },
+    {
+      "index": 854,
+      "start": 1741.6,
+      "end": 1743.39,
+      "duration": 1.79,
+      "text": "you're testing something out. And on the"
+    },
+    {
+      "index": 855,
+      "start": 1743.4,
+      "end": 1744.909,
+      "duration": 1.509,
+      "text": "left-hand side here in the editor, you"
+    },
+    {
+      "index": 856,
+      "start": 1744.919,
+      "end": 1746.19,
+      "duration": 1.271,
+      "text": "write"
+    },
+    {
+      "index": 857,
+      "start": 1746.2,
+      "end": 1748.79,
+      "duration": 2.59,
+      "text": "more lines and"
+    },
+    {
+      "index": 858,
+      "start": 1748.8,
+      "end": 1753.35,
+      "duration": 4.55,
+      "text": "more complicated programs."
+    },
+    {
+      "index": 859,
+      "start": 1754.75,
+      "end": 1754.76,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 860,
+      "start": 1754.76,
+      "end": 1756.03,
+      "duration": 1.27,
+      "text": "So, now we're going to start talking"
+    },
+    {
+      "index": 861,
+      "start": 1756.04,
+      "end": 1758.51,
+      "duration": 2.47,
+      "text": "about Python."
+    },
+    {
+      "index": 862,
+      "start": 1758.52,
+      "end": 1760.23,
+      "duration": 1.71,
+      "text": "And in Python, we're going to come back"
+    },
+    {
+      "index": 863,
+      "start": 1760.24,
+      "end": 1763.23,
+      "duration": 2.99,
+      "text": "to this, everything is an object."
+    },
+    {
+      "index": 864,
+      "start": 1763.24,
+      "end": 1765.23,
+      "duration": 1.99,
+      "text": "And Python programs manipulate these"
+    },
+    {
+      "index": 865,
+      "start": 1765.24,
+      "end": 1767.669,
+      "duration": 2.429,
+      "text": "data objects."
+    },
+    {
+      "index": 866,
+      "start": 1767.679,
+      "end": 1769.79,
+      "duration": 2.111,
+      "text": "All objects in Python are going to have"
+    },
+    {
+      "index": 867,
+      "start": 1769.8,
+      "end": 1772.23,
+      "duration": 2.43,
+      "text": "a type. And the type is going to tell"
+    },
+    {
+      "index": 868,
+      "start": 1772.24,
+      "end": 1774.07,
+      "duration": 1.83,
+      "text": "Python the kinds of operations that you"
+    },
+    {
+      "index": 869,
+      "start": 1774.08,
+      "end": 1776.47,
+      "duration": 2.39,
+      "text": "can do on these objects."
+    },
+    {
+      "index": 870,
+      "start": 1776.48,
+      "end": 1779.11,
+      "duration": 2.63,
+      "text": "So, if an object is the number five, for"
+    },
+    {
+      "index": 871,
+      "start": 1779.12,
+      "end": 1782.03,
+      "duration": 2.91,
+      "text": "example, you can add the number to"
+    },
+    {
+      "index": 872,
+      "start": 1782.04,
+      "end": 1783.71,
+      "duration": 1.67,
+      "text": "another number, subtract the number,"
+    },
+    {
+      "index": 873,
+      "start": 1783.72,
+      "end": 1785.03,
+      "duration": 1.31,
+      "text": "take it to the power of something, and"
+    },
+    {
+      "index": 874,
+      "start": 1785.04,
+      "end": 1786.75,
+      "duration": 1.71,
+      "text": "so on."
+    },
+    {
+      "index": 875,
+      "start": 1786.76,
+      "end": 1788.55,
+      "duration": 1.79,
+      "text": "More as a more general example, for"
+    },
+    {
+      "index": 876,
+      "start": 1788.56,
+      "end": 1790.51,
+      "duration": 1.95,
+      "text": "example, I"
+    },
+    {
+      "index": 877,
+      "start": 1790.52,
+      "end": 1793.11,
+      "duration": 2.59,
+      "text": "am a human, so that's my type. And I can"
+    },
+    {
+      "index": 878,
+      "start": 1793.12,
+      "end": 1795.47,
+      "duration": 2.35,
+      "text": "walk, speak English, etc."
+    },
+    {
+      "index": 879,
+      "start": 1795.48,
+      "end": 1798.67,
+      "duration": 3.19,
+      "text": "Chewbacca is going to be a type Wookiee,"
+    },
+    {
+      "index": 880,
+      "start": 1798.68,
+      "end": 1801.11,
+      "duration": 2.43,
+      "text": "right? So, he can walk, do that sound"
+    },
+    {
+      "index": 881,
+      "start": 1801.12,
+      "end": 1803.03,
+      "duration": 1.91,
+      "text": "that I can't do, right? So, he can do"
+    },
+    {
+      "index": 882,
+      "start": 1803.04,
+      "end": 1804.39,
+      "duration": 1.35,
+      "text": "that, but I can't. I'm not even going to"
+    },
+    {
+      "index": 883,
+      "start": 1804.4,
+      "end": 1805.55,
+      "duration": 1.15,
+      "text": "try."
+    },
+    {
+      "index": 884,
+      "start": 1805.56,
+      "end": 1808.23,
+      "duration": 2.67,
+      "text": "And and so on."
+    },
+    {
+      "index": 885,
+      "start": 1808.24,
+      "end": 1809.39,
+      "duration": 1.15,
+      "text": "Okay."
+    },
+    {
+      "index": 886,
+      "start": 1809.4,
+      "end": 1811.07,
+      "duration": 1.67,
+      "text": "So, once you have these Python objects,"
+    },
+    {
+      "index": 887,
+      "start": 1811.08,
+      "end": 1815.11,
+      "duration": 4.03,
+      "text": "everything is an object in Python."
+    },
+    {
+      "index": 888,
+      "start": 1816.51,
+      "end": 1816.52,
+      "duration": 0.01,
+      "text": "There are actually two types of objects."
+    },
+    {
+      "index": 889,
+      "start": 1816.52,
+      "end": 1818.59,
+      "duration": 2.07,
+      "text": "One are scalar objects. So, that means"
+    },
+    {
+      "index": 890,
+      "start": 1818.6,
+      "end": 1820.71,
+      "duration": 2.11,
+      "text": "these are very basic objects in Python"
+    },
+    {
+      "index": 891,
+      "start": 1820.72,
+      "end": 1822.51,
+      "duration": 1.79,
+      "text": "from which everything"
+    },
+    {
+      "index": 892,
+      "start": 1822.52,
+      "end": 1824.87,
+      "duration": 2.35,
+      "text": "can be can be made. Okay. So, these are"
+    },
+    {
+      "index": 893,
+      "start": 1824.88,
+      "end": 1826.39,
+      "duration": 1.51,
+      "text": "scalar objects. They can't be"
+    },
+    {
+      "index": 894,
+      "start": 1826.4,
+      "end": 1828.35,
+      "duration": 1.95,
+      "text": "subdivided."
+    },
+    {
+      "index": 895,
+      "start": 1828.36,
+      "end": 1830.31,
+      "duration": 1.95,
+      "text": "The other type of object is a non-scalar"
+    },
+    {
+      "index": 896,
+      "start": 1830.32,
+      "end": 1832.15,
+      "duration": 1.83,
+      "text": "object, and these are objects that have"
+    },
+    {
+      "index": 897,
+      "start": 1832.16,
+      "end": 1833.67,
+      "duration": 1.51,
+      "text": "some internal structure. So, for"
+    },
+    {
+      "index": 898,
+      "start": 1833.68,
+      "end": 1836.55,
+      "duration": 2.87,
+      "text": "example, the number five is a scalar"
+    },
+    {
+      "index": 899,
+      "start": 1836.56,
+      "end": 1838.91,
+      "duration": 2.35,
+      "text": "object cuz it can't be subdivided."
+    },
+    {
+      "index": 900,
+      "start": 1838.92,
+      "end": 1841.59,
+      "duration": 2.67,
+      "text": "But, a list of numbers, for example, 5 6"
+    },
+    {
+      "index": 901,
+      "start": 1841.6,
+      "end": 1845.31,
+      "duration": 3.71,
+      "text": "7 8, is going to be a non-scalar object"
+    },
+    {
+      "index": 902,
+      "start": 1845.32,
+      "end": 1846.51,
+      "duration": 1.19,
+      "text": "because you can subdivide it. So, you"
+    },
+    {
+      "index": 903,
+      "start": 1846.52,
+      "end": 1848.55,
+      "duration": 2.03,
+      "text": "just can subdivide it into"
+    },
+    {
+      "index": 904,
+      "start": 1848.56,
+      "end": 1851.63,
+      "duration": 3.07,
+      "text": "um"
+    },
+    {
+      "index": 905,
+      "start": 1853.23,
+      "end": 1853.24,
+      "duration": 0.01,
+      "text": "You can find parts parts to it. It's"
+    },
+    {
+      "index": 906,
+      "start": 1853.24,
+      "end": 1854.99,
+      "duration": 1.75,
+      "text": "It's made up of a sequence of numbers,"
+    },
+    {
+      "index": 907,
+      "start": 1855.0,
+      "end": 1858.35,
+      "duration": 3.35,
+      "text": "right?"
+    },
+    {
+      "index": 908,
+      "start": 1859.99,
+      "end": 1860.0,
+      "duration": 0.01,
+      "text": "So, here's the list of all of the scalar"
+    },
+    {
+      "index": 909,
+      "start": 1860.0,
+      "end": 1863.15,
+      "duration": 3.15,
+      "text": "objects in Python. We have integers."
+    },
+    {
+      "index": 910,
+      "start": 1863.16,
+      "end": 1865.75,
+      "duration": 2.59,
+      "text": "For example, all of the whole numbers."
+    },
+    {
+      "index": 911,
+      "start": 1865.76,
+      "end": 1868.75,
+      "duration": 2.99,
+      "text": "Floats, which are all of the decimal uh"
+    },
+    {
+      "index": 912,
+      "start": 1868.76,
+      "end": 1871.39,
+      "duration": 2.63,
+      "text": "real numbers, anything with a decimal."
+    },
+    {
+      "index": 913,
+      "start": 1871.4,
+      "end": 1874.19,
+      "duration": 2.79,
+      "text": "Bools are booleans. There's only two"
+    },
+    {
+      "index": 914,
+      "start": 1874.2,
+      "end": 1876.67,
+      "duration": 2.47,
+      "text": "values to booleans. That's true and"
+    },
+    {
+      "index": 915,
+      "start": 1876.68,
+      "end": 1878.35,
+      "duration": 1.67,
+      "text": "false."
+    },
+    {
+      "index": 916,
+      "start": 1878.36,
+      "end": 1880.63,
+      "duration": 2.27,
+      "text": "Note the capitalization, capital T and"
+    },
+    {
+      "index": 917,
+      "start": 1880.64,
+      "end": 1882.91,
+      "duration": 2.27,
+      "text": "capital F."
+    },
+    {
+      "index": 918,
+      "start": 1882.92,
+      "end": 1884.87,
+      "duration": 1.95,
+      "text": "And this other thing called none type,"
+    },
+    {
+      "index": 919,
+      "start": 1884.88,
+      "end": 1886.35,
+      "duration": 1.47,
+      "text": "which is special."
+    },
+    {
+      "index": 920,
+      "start": 1886.36,
+      "end": 1888.55,
+      "duration": 2.19,
+      "text": "It has only one value called none. And"
+    },
+    {
+      "index": 921,
+      "start": 1888.56,
+      "end": 1890.07,
+      "duration": 1.51,
+      "text": "it's it represents the absence of a"
+    },
+    {
+      "index": 922,
+      "start": 1890.08,
+      "end": 1892.27,
+      "duration": 2.19,
+      "text": "type, and it sometimes comes in handy"
+    },
+    {
+      "index": 923,
+      "start": 1892.28,
+      "end": 1894.47,
+      "duration": 2.19,
+      "text": "for for some programs."
+    },
+    {
+      "index": 924,
+      "start": 1894.48,
+      "end": 1895.79,
+      "duration": 1.31,
+      "text": "If you want to find the type of an"
+    },
+    {
+      "index": 925,
+      "start": 1895.8,
+      "end": 1898.59,
+      "duration": 2.79,
+      "text": "object, you can use this special command"
+    },
+    {
+      "index": 926,
+      "start": 1898.6,
+      "end": 1899.99,
+      "duration": 1.39,
+      "text": "called type, and then in the"
+    },
+    {
+      "index": 927,
+      "start": 1900.0,
+      "end": 1901.51,
+      "duration": 1.51,
+      "text": "parentheses, you put down what you want"
+    },
+    {
+      "index": 928,
+      "start": 1901.52,
+      "end": 1903.71,
+      "duration": 2.19,
+      "text": "to find the type of."
+    },
+    {
+      "index": 929,
+      "start": 1903.72,
+      "end": 1906.07,
+      "duration": 2.35,
+      "text": "Okay. So, you can write into the shell"
+    },
+    {
+      "index": 930,
+      "start": 1906.08,
+      "end": 1908.11,
+      "duration": 2.03,
+      "text": "type of five, and the shell will tell"
+    },
+    {
+      "index": 931,
+      "start": 1908.12,
+      "end": 1912.83,
+      "duration": 4.71,
+      "text": "you that's an integer. Okay."
+    },
+    {
+      "index": 932,
+      "start": 1915.31,
+      "end": 1915.32,
+      "duration": 0.01,
+      "text": "If you happen to want to convert between"
+    },
+    {
+      "index": 933,
+      "start": 1915.32,
+      "end": 1916.87,
+      "duration": 1.55,
+      "text": "two different types, Python allows you"
+    },
+    {
+      "index": 934,
+      "start": 1916.88,
+      "end": 1920.31,
+      "duration": 3.43,
+      "text": "to do that. And to do that, you use this"
+    },
+    {
+      "index": 935,
+      "start": 1920.32,
+      "end": 1921.51,
+      "duration": 1.19,
+      "text": "you put the type that you want to"
+    },
+    {
+      "index": 936,
+      "start": 1921.52,
+      "end": 1923.83,
+      "duration": 2.31,
+      "text": "convert to right before the object that"
+    },
+    {
+      "index": 937,
+      "start": 1923.84,
+      "end": 1926.07,
+      "duration": 2.23,
+      "text": "you want to convert to. So, float three"
+    },
+    {
+      "index": 938,
+      "start": 1926.08,
+      "end": 1928.27,
+      "duration": 2.19,
+      "text": "will convert the integer three"
+    },
+    {
+      "index": 939,
+      "start": 1928.28,
+      "end": 1932.51,
+      "duration": 4.23,
+      "text": "to the float 3.0."
+    },
+    {
+      "index": 940,
+      "start": 1934.99,
+      "end": 1935.0,
+      "duration": 0.01,
+      "text": "And similarly, you can convert any float"
+    },
+    {
+      "index": 941,
+      "start": 1935.0,
+      "end": 1936.71,
+      "duration": 1.71,
+      "text": "into an integer."
+    },
+    {
+      "index": 942,
+      "start": 1936.72,
+      "end": 1938.23,
+      "duration": 1.51,
+      "text": "And converting to an integer just"
+    },
+    {
+      "index": 943,
+      "start": 1938.24,
+      "end": 1939.79,
+      "duration": 1.55,
+      "text": "truncates."
+    },
+    {
+      "index": 944,
+      "start": 1939.8,
+      "end": 1941.669,
+      "duration": 1.869,
+      "text": "So, it just takes away the decimal and"
+    },
+    {
+      "index": 945,
+      "start": 1941.679,
+      "end": 1944.47,
+      "duration": 2.791,
+      "text": "whatever's after it. It does not round"
+    },
+    {
+      "index": 946,
+      "start": 1944.48,
+      "end": 1948.27,
+      "duration": 3.79,
+      "text": "and keeps just the integer part."
+    },
+    {
+      "index": 947,
+      "start": 1948.28,
+      "end": 1949.35,
+      "duration": 1.07,
+      "text": "Okay."
+    },
+    {
+      "index": 948,
+      "start": 1949.36,
+      "end": 1951.31,
+      "duration": 1.95,
+      "text": "So, for this slide, I'm going to talk"
+    },
+    {
+      "index": 949,
+      "start": 1951.32,
+      "end": 1953.71,
+      "duration": 2.39,
+      "text": "about it, but if you'd like, go to if"
+    },
+    {
+      "index": 950,
+      "start": 1953.72,
+      "end": 1955.79,
+      "duration": 2.07,
+      "text": "you have the slides up, go to go to this"
+    },
+    {
+      "index": 951,
+      "start": 1955.8,
+      "end": 1958.23,
+      "duration": 2.43,
+      "text": "exercise, and after I'm done talking"
+    },
+    {
+      "index": 952,
+      "start": 1958.24,
+      "end": 1960.83,
+      "duration": 2.59,
+      "text": "about the slide, we'll see um"
+    },
+    {
+      "index": 953,
+      "start": 1960.84,
+      "end": 1962.75,
+      "duration": 1.91,
+      "text": "we'll see what people think"
+    },
+    {
+      "index": 954,
+      "start": 1962.76,
+      "end": 1965.11,
+      "duration": 2.35,
+      "text": "for that exercise, okay?"
+    },
+    {
+      "index": 955,
+      "start": 1965.12,
+      "end": 1966.87,
+      "duration": 1.75,
+      "text": "So, one of the most important things"
+    },
+    {
+      "index": 956,
+      "start": 1966.88,
+      "end": 1969.51,
+      "duration": 2.63,
+      "text": "that you can do in program"
+    },
+    {
+      "index": 957,
+      "start": 1969.52,
+      "end": 1972.43,
+      "duration": 2.91,
+      "text": "in basically any programming in Python's"
+    },
+    {
+      "index": 958,
+      "start": 1972.44,
+      "end": 1975.39,
+      "duration": 2.95,
+      "text": "also, is to print things out. So,"
+    },
+    {
+      "index": 959,
+      "start": 1975.4,
+      "end": 1977.87,
+      "duration": 2.47,
+      "text": "printing out is how you interact with"
+    },
+    {
+      "index": 960,
+      "start": 1977.88,
+      "end": 1980.27,
+      "duration": 2.39,
+      "text": "the user. Okay."
+    },
+    {
+      "index": 961,
+      "start": 1980.28,
+      "end": 1981.47,
+      "duration": 1.19,
+      "text": "So, to print things out, you use the"
+    },
+    {
+      "index": 962,
+      "start": 1981.48,
+      "end": 1982.83,
+      "duration": 1.35,
+      "text": "print command."
+    },
+    {
+      "index": 963,
+      "start": 1982.84,
+      "end": 1984.669,
+      "duration": 1.829,
+      "text": "So,"
+    },
+    {
+      "index": 964,
+      "start": 1984.679,
+      "end": 1986.43,
+      "duration": 1.751,
+      "text": "if you're in the shell, if you simply"
+    },
+    {
+      "index": 965,
+      "start": 1986.44,
+      "end": 1989.59,
+      "duration": 3.15,
+      "text": "type 3 + 2, you do see a value here,"
+    },
+    {
+      "index": 966,
+      "start": 1989.6,
+      "end": 1991.59,
+      "duration": 1.99,
+      "text": "five, right?"
+    },
+    {
+      "index": 967,
+      "start": 1991.6,
+      "end": 1992.71,
+      "duration": 1.11,
+      "text": "But, that's not actually printing"
+    },
+    {
+      "index": 968,
+      "start": 1992.72,
+      "end": 1995.43,
+      "duration": 2.71,
+      "text": "something out. And that becomes apparent"
+    },
+    {
+      "index": 969,
+      "start": 1995.44,
+      "end": 1996.99,
+      "duration": 1.55,
+      "text": "when"
+    },
+    {
+      "index": 970,
+      "start": 1997.0,
+      "end": 1999.03,
+      "duration": 2.03,
+      "text": "when you actually type things into the"
+    },
+    {
+      "index": 971,
+      "start": 1999.04,
+      "end": 2001.75,
+      "duration": 2.71,
+      "text": "editor. So, if you just do 3 + 2"
+    },
+    {
+      "index": 972,
+      "start": 2001.76,
+      "end": 2003.11,
+      "duration": 1.35,
+      "text": "and you run the program, that's this"
+    },
+    {
+      "index": 973,
+      "start": 2003.12,
+      "end": 2004.669,
+      "duration": 1.549,
+      "text": "little green button here,"
+    },
+    {
+      "index": 974,
+      "start": 2004.679,
+      "end": 2006.23,
+      "duration": 1.551,
+      "text": "you see on the right-hand side here, it"
+    },
+    {
+      "index": 975,
+      "start": 2006.24,
+      "end": 2007.59,
+      "duration": 1.35,
+      "text": "ran my program, but it didn't actually"
+    },
+    {
+      "index": 976,
+      "start": 2007.6,
+      "end": 2010.03,
+      "duration": 2.43,
+      "text": "print anything."
+    },
+    {
+      "index": 977,
+      "start": 2010.04,
+      "end": 2012.15,
+      "duration": 2.11,
+      "text": "If you type this into the console, it"
+    },
+    {
+      "index": 978,
+      "start": 2012.16,
+      "end": 2013.79,
+      "duration": 1.63,
+      "text": "does show you this value, but that's"
+    },
+    {
+      "index": 979,
+      "start": 2013.8,
+      "end": 2016.59,
+      "duration": 2.79,
+      "text": "just sort of a like peek peeking into"
+    },
+    {
+      "index": 980,
+      "start": 2016.6,
+      "end": 2018.59,
+      "duration": 1.99,
+      "text": "the value for you as just for you as a"
+    },
+    {
+      "index": 981,
+      "start": 2018.6,
+      "end": 2019.83,
+      "duration": 1.23,
+      "text": "programmer. Okay? It's not actually"
+    },
+    {
+      "index": 982,
+      "start": 2019.84,
+      "end": 2021.51,
+      "duration": 1.67,
+      "text": "printing it out to anyone."
+    },
+    {
+      "index": 983,
+      "start": 2021.52,
+      "end": 2022.71,
+      "duration": 1.19,
+      "text": "If you want to print something out, you"
+    },
+    {
+      "index": 984,
+      "start": 2022.72,
+      "end": 2025.79,
+      "duration": 3.07,
+      "text": "have to use the print state print um"
+    },
+    {
+      "index": 985,
+      "start": 2025.8,
+      "end": 2027.71,
+      "duration": 1.91,
+      "text": "print statement like that."
+    },
+    {
+      "index": 986,
+      "start": 2027.72,
+      "end": 2029.07,
+      "duration": 1.35,
+      "text": "So, in this case, this is actually going"
+    },
+    {
+      "index": 987,
+      "start": 2029.08,
+      "end": 2031.63,
+      "duration": 2.55,
+      "text": "to print this number five to the"
+    },
+    {
+      "index": 988,
+      "start": 2031.64,
+      "end": 2033.07,
+      "duration": 1.43,
+      "text": "console."
+    },
+    {
+      "index": 989,
+      "start": 2033.08,
+      "end": 2036.87,
+      "duration": 3.79,
+      "text": "Okay."
+    },
+    {
+      "index": 990,
+      "start": 2038.27,
+      "end": 2038.28,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 991,
+      "start": 2038.28,
+      "end": 2039.71,
+      "duration": 1.43,
+      "text": "that's basically what I said. So, out"
+    },
+    {
+      "index": 992,
+      "start": 2039.72,
+      "end": 2040.83,
+      "duration": 1.11,
+      "text": "just tells you it's an interaction"
+    },
+    {
+      "index": 993,
+      "start": 2040.84,
+      "end": 2042.55,
+      "duration": 1.71,
+      "text": "within the shell only. It's not"
+    },
+    {
+      "index": 994,
+      "start": 2042.56,
+      "end": 2044.79,
+      "duration": 2.23,
+      "text": "interacting with with anyone else."
+    },
+    {
+      "index": 995,
+      "start": 2044.8,
+      "end": 2045.91,
+      "duration": 1.11,
+      "text": "And if you don't have any out, that"
+    },
+    {
+      "index": 996,
+      "start": 2045.92,
+      "end": 2049.51,
+      "duration": 3.59,
+      "text": "means it got printed out to the console."
+    },
+    {
+      "index": 997,
+      "start": 2049.52,
+      "end": 2050.51,
+      "duration": 0.99,
+      "text": "All right. So, we talked a little bit"
+    },
+    {
+      "index": 998,
+      "start": 2050.52,
+      "end": 2053.149,
+      "duration": 2.629,
+      "text": "about objects."
+    },
+    {
+      "index": 999,
+      "start": 2053.159,
+      "end": 2054.79,
+      "duration": 1.631,
+      "text": "Once you have objects, you can combine"
+    },
+    {
+      "index": 1000,
+      "start": 2054.8,
+      "end": 2056.43,
+      "duration": 1.63,
+      "text": "objects and operators to form these"
+    },
+    {
+      "index": 1001,
+      "start": 2056.44,
+      "end": 2057.869,
+      "duration": 1.429,
+      "text": "expressions, and each expression is"
+    },
+    {
+      "index": 1002,
+      "start": 2057.879,
+      "end": 2059.99,
+      "duration": 2.111,
+      "text": "going to have value. So, an expression"
+    },
+    {
+      "index": 1003,
+      "start": 2060.0,
+      "end": 2062.669,
+      "duration": 2.669,
+      "text": "evaluates to a value. Okay."
+    },
+    {
+      "index": 1004,
+      "start": 2062.679,
+      "end": 2064.23,
+      "duration": 1.551,
+      "text": "And the syntax for an expression is"
+    },
+    {
+      "index": 1005,
+      "start": 2064.24,
+      "end": 2067.51,
+      "duration": 3.27,
+      "text": "going to be object operator object like"
+    },
+    {
+      "index": 1006,
+      "start": 2067.52,
+      "end": 2070.27,
+      "duration": 2.75,
+      "text": "that."
+    },
+    {
+      "index": 1007,
+      "start": 2072.389,
+      "end": 2072.399,
+      "duration": 0.01,
+      "text": "And these are some opera operators you"
+    },
+    {
+      "index": 1008,
+      "start": 2072.399,
+      "end": 2074.47,
+      "duration": 2.071,
+      "text": "can do on ints and floats. So, there's"
+    },
+    {
+      "index": 1009,
+      "start": 2074.48,
+      "end": 2076.31,
+      "duration": 1.83,
+      "text": "the typical ones, addition, subtraction,"
+    },
+    {
+      "index": 1010,
+      "start": 2076.32,
+      "end": 2078.55,
+      "duration": 2.23,
+      "text": "multiplication, and division."
+    },
+    {
+      "index": 1011,
+      "start": 2078.56,
+      "end": 2082.869,
+      "duration": 4.309,
+      "text": "If for the first three, you have"
+    },
+    {
+      "index": 1012,
+      "start": 2082.879,
+      "end": 2084.47,
+      "duration": 1.591,
+      "text": "the answer that you get, the type of the"
+    },
+    {
+      "index": 1013,
+      "start": 2084.48,
+      "end": 2085.83,
+      "duration": 1.35,
+      "text": "answer that you get is going to depend"
+    },
+    {
+      "index": 1014,
+      "start": 2085.84,
+      "end": 2088.11,
+      "duration": 2.27,
+      "text": "on type of your variables."
+    },
+    {
+      "index": 1015,
+      "start": 2088.12,
+      "end": 2090.95,
+      "duration": 2.83,
+      "text": "So, if both of the variables of the"
+    },
+    {
+      "index": 1016,
+      "start": 2090.96,
+      "end": 2093.19,
+      "duration": 2.23,
+      "text": "operands are integers, then the result"
+    },
+    {
+      "index": 1017,
+      "start": 2093.2,
+      "end": 2094.83,
+      "duration": 1.63,
+      "text": "you're going to get is of type integer."
+    },
+    {
+      "index": 1018,
+      "start": 2094.84,
+      "end": 2096.27,
+      "duration": 1.43,
+      "text": "But, if at least one of them is a float,"
+    },
+    {
+      "index": 1019,
+      "start": 2096.28,
+      "end": 2097.31,
+      "duration": 1.03,
+      "text": "then the result you're going to get is a"
+    },
+    {
+      "index": 1020,
+      "start": 2097.32,
+      "end": 2098.83,
+      "duration": 1.51,
+      "text": "float."
+    },
+    {
+      "index": 1021,
+      "start": 2098.84,
+      "end": 2102.19,
+      "duration": 3.35,
+      "text": "Division's a little bit special in that"
+    },
+    {
+      "index": 1022,
+      "start": 2102.2,
+      "end": 2104.55,
+      "duration": 2.35,
+      "text": "no matter what the operands are, the"
+    },
+    {
+      "index": 1023,
+      "start": 2104.56,
+      "end": 2107.79,
+      "duration": 3.23,
+      "text": "result is always going to be a float."
+    },
+    {
+      "index": 1024,
+      "start": 2107.8,
+      "end": 2109.55,
+      "duration": 1.75,
+      "text": "Okay."
+    },
+    {
+      "index": 1025,
+      "start": 2109.56,
+      "end": 2111.59,
+      "duration": 2.03,
+      "text": "The other opera um operations you can do"
+    },
+    {
+      "index": 1026,
+      "start": 2111.6,
+      "end": 2113.07,
+      "duration": 1.47,
+      "text": "and these these are these are also"
+    },
+    {
+      "index": 1027,
+      "start": 2113.08,
+      "end": 2116.43,
+      "duration": 3.35,
+      "text": "useful is um are the remainder, so the"
+    },
+    {
+      "index": 1028,
+      "start": 2116.44,
+      "end": 2119.15,
+      "duration": 2.71,
+      "text": "percent sign."
+    },
+    {
+      "index": 1029,
+      "start": 2119.16,
+      "end": 2120.87,
+      "duration": 1.71,
+      "text": "If you use the percent sign between two"
+    },
+    {
+      "index": 1030,
+      "start": 2120.88,
+      "end": 2122.79,
+      "duration": 1.91,
+      "text": "operands,"
+    },
+    {
+      "index": 1031,
+      "start": 2122.8,
+      "end": 2124.63,
+      "duration": 1.83,
+      "text": "that's going to give you the remainder"
+    },
+    {
+      "index": 1032,
+      "start": 2124.64,
+      "end": 2127.87,
+      "duration": 3.23,
+      "text": "when you divide I by J."
+    },
+    {
+      "index": 1033,
+      "start": 2127.88,
+      "end": 2129.349,
+      "duration": 1.469,
+      "text": "And raising something to the power of"
+    },
+    {
+      "index": 1034,
+      "start": 2129.359,
+      "end": 2131.27,
+      "duration": 1.911,
+      "text": "something else is using the star star"
+    },
+    {
+      "index": 1035,
+      "start": 2131.28,
+      "end": 2132.59,
+      "duration": 1.31,
+      "text": "operator."
+    },
+    {
+      "index": 1036,
+      "start": 2132.6,
+      "end": 2134.47,
+      "duration": 1.87,
+      "text": "And I star stars J"
+    },
+    {
+      "index": 1037,
+      "start": 2134.48,
+      "end": 2138.19,
+      "duration": 3.71,
+      "text": "is going to take I to the power of J."
+    },
+    {
+      "index": 1038,
+      "start": 2143.31,
+      "end": 2143.32,
+      "duration": 0.01,
+      "text": "So, these operations have the typical"
+    },
+    {
+      "index": 1039,
+      "start": 2143.32,
+      "end": 2144.91,
+      "duration": 1.59,
+      "text": "precedence that you might expect in in"
+    },
+    {
+      "index": 1040,
+      "start": 2144.92,
+      "end": 2146.87,
+      "duration": 1.95,
+      "text": "math, for example."
+    },
+    {
+      "index": 1041,
+      "start": 2146.88,
+      "end": 2149.03,
+      "duration": 2.15,
+      "text": "And if you'd like to put precedence"
+    },
+    {
+      "index": 1042,
+      "start": 2149.04,
+      "end": 2150.43,
+      "duration": 1.39,
+      "text": "towards some other operations, you can"
+    },
+    {
+      "index": 1043,
+      "start": 2150.44,
+      "end": 2158.23,
+      "duration": 7.79,
+      "text": "use parentheses to do that. Okay."
+    },
+    {
+      "index": 1044,
+      "start": 2161.349,
+      "end": 2161.359,
+      "duration": 0.01,
+      "text": "Um yeah. Okay."
+    },
+    {
+      "index": 1045,
+      "start": 2161.359,
+      "end": 2163.59,
+      "duration": 2.231,
+      "text": "All right."
+    },
+    {
+      "index": 1046,
+      "start": 2163.6,
+      "end": 2165.349,
+      "duration": 1.749,
+      "text": "Okay. So, we have ways of creating"
+    },
+    {
+      "index": 1047,
+      "start": 2165.359,
+      "end": 2166.87,
+      "duration": 1.511,
+      "text": "expressions,"
+    },
+    {
+      "index": 1048,
+      "start": 2166.88,
+      "end": 2170.07,
+      "duration": 3.19,
+      "text": "and we have operations we can do on on"
+    },
+    {
+      "index": 1049,
+      "start": 2170.08,
+      "end": 2173.39,
+      "duration": 3.31,
+      "text": "on on objects."
+    },
+    {
+      "index": 1050,
+      "start": 2175.43,
+      "end": 2175.44,
+      "duration": 0.01,
+      "text": "But, what's going to be useful is to be"
+    },
+    {
+      "index": 1051,
+      "start": 2175.44,
+      "end": 2178.99,
+      "duration": 3.55,
+      "text": "able to save values"
+    },
+    {
+      "index": 1052,
+      "start": 2179.0,
+      "end": 2181.19,
+      "duration": 2.19,
+      "text": "to some name."
+    },
+    {
+      "index": 1053,
+      "start": 2181.2,
+      "end": 2182.67,
+      "duration": 1.47,
+      "text": "And the name is going to be something"
+    },
+    {
+      "index": 1054,
+      "start": 2182.68,
+      "end": 2184.63,
+      "duration": 1.95,
+      "text": "that you can you pick,"
+    },
+    {
+      "index": 1055,
+      "start": 2184.64,
+      "end": 2187.67,
+      "duration": 3.03,
+      "text": "and it should be a descriptive name."
+    },
+    {
+      "index": 1056,
+      "start": 2187.68,
+      "end": 2190.31,
+      "duration": 2.63,
+      "text": "And"
+    },
+    {
+      "index": 1057,
+      "start": 2190.32,
+      "end": 2192.15,
+      "duration": 1.83,
+      "text": "when you save the value to a name,"
+    },
+    {
+      "index": 1058,
+      "start": 2192.16,
+      "end": 2193.87,
+      "duration": 1.71,
+      "text": "you're going to be able to access that"
+    },
+    {
+      "index": 1059,
+      "start": 2193.88,
+      "end": 2195.59,
+      "duration": 1.71,
+      "text": "value"
+    },
+    {
+      "index": 1060,
+      "start": 2195.6,
+      "end": 2197.51,
+      "duration": 1.91,
+      "text": "later on in your program."
+    },
+    {
+      "index": 1061,
+      "start": 2197.52,
+      "end": 2199.95,
+      "duration": 2.43,
+      "text": "Okay? And that's very useful."
+    },
+    {
+      "index": 1062,
+      "start": 2199.96,
+      "end": 2202.59,
+      "duration": 2.63,
+      "text": "So, to save a value to a to a variable"
+    },
+    {
+      "index": 1063,
+      "start": 2202.6,
+      "end": 2204.83,
+      "duration": 2.23,
+      "text": "to a variable name, you use the equal"
+    },
+    {
+      "index": 1064,
+      "start": 2204.84,
+      "end": 2207.51,
+      "duration": 2.67,
+      "text": "sign."
+    },
+    {
+      "index": 1065,
+      "start": 2208.99,
+      "end": 2209.0,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 1066,
+      "start": 2209.0,
+      "end": 2210.51,
+      "duration": 1.51,
+      "text": "And the equal sign is the assign is an"
+    },
+    {
+      "index": 1067,
+      "start": 2210.52,
+      "end": 2211.91,
+      "duration": 1.39,
+      "text": "assignment. So, it assigns the"
+    },
+    {
+      "index": 1068,
+      "start": 2211.92,
+      "end": 2213.99,
+      "duration": 2.07,
+      "text": "right-hand side, which is a value, to"
+    },
+    {
+      "index": 1069,
+      "start": 2214.0,
+      "end": 2215.75,
+      "duration": 1.75,
+      "text": "the left-hand side, which is going to be"
+    },
+    {
+      "index": 1070,
+      "start": 2215.76,
+      "end": 2219.15,
+      "duration": 3.39,
+      "text": "a variable name."
+    },
+    {
+      "index": 1071,
+      "start": 2221.63,
+      "end": 2221.64,
+      "duration": 0.01,
+      "text": "So, in this case, I assigned the float"
+    },
+    {
+      "index": 1072,
+      "start": 2221.64,
+      "end": 2225.39,
+      "duration": 3.75,
+      "text": "3.14159 to the to the variable pi."
+    },
+    {
+      "index": 1073,
+      "start": 2225.4,
+      "end": 2227.59,
+      "duration": 2.19,
+      "text": "And in the second line,"
+    },
+    {
+      "index": 1074,
+      "start": 2227.6,
+      "end": 2230.15,
+      "duration": 2.55,
+      "text": "I'm going to take this expression, 22 /"
+    },
+    {
+      "index": 1075,
+      "start": 2230.16,
+      "end": 2232.99,
+      "duration": 2.83,
+      "text": "7, I'm going to evaluate it."
+    },
+    {
+      "index": 1076,
+      "start": 2233.0,
+      "end": 2234.47,
+      "duration": 1.47,
+      "text": "It's going to come up with some some"
+    },
+    {
+      "index": 1077,
+      "start": 2234.48,
+      "end": 2236.27,
+      "duration": 1.79,
+      "text": "some decimal number, and I'm going to"
+    },
+    {
+      "index": 1078,
+      "start": 2236.28,
+      "end": 2239.23,
+      "duration": 2.95,
+      "text": "save it into the variable pi_approx."
+    },
+    {
+      "index": 1079,
+      "start": 2239.24,
+      "end": 2241.47,
+      "duration": 2.23,
+      "text": "Okay? Values are stored in memory, and"
+    },
+    {
+      "index": 1080,
+      "start": 2241.48,
+      "end": 2243.07,
+      "duration": 1.59,
+      "text": "this assignment in Python, we say the"
+    },
+    {
+      "index": 1081,
+      "start": 2243.08,
+      "end": 2245.87,
+      "duration": 2.79,
+      "text": "assignment binds the name to the value."
+    },
+    {
+      "index": 1082,
+      "start": 2245.88,
+      "end": 2247.63,
+      "duration": 1.75,
+      "text": "So, when you when you use that name"
+    },
+    {
+      "index": 1083,
+      "start": 2247.64,
+      "end": 2249.43,
+      "duration": 1.79,
+      "text": "later on in your program, you're going"
+    },
+    {
+      "index": 1084,
+      "start": 2249.44,
+      "end": 2251.59,
+      "duration": 2.15,
+      "text": "to be referring you're going to be"
+    },
+    {
+      "index": 1085,
+      "start": 2251.6,
+      "end": 2254.43,
+      "duration": 2.83,
+      "text": "referring to the value in memory."
+    },
+    {
+      "index": 1086,
+      "start": 2254.44,
+      "end": 2255.47,
+      "duration": 1.03,
+      "text": "Okay?"
+    },
+    {
+      "index": 1087,
+      "start": 2255.48,
+      "end": 2257.11,
+      "duration": 1.63,
+      "text": "And if you ever want to refer to the"
+    },
+    {
+      "index": 1088,
+      "start": 2257.12,
+      "end": 2258.99,
+      "duration": 1.87,
+      "text": "value later on in your code, you just"
+    },
+    {
+      "index": 1089,
+      "start": 2259.0,
+      "end": 2260.43,
+      "duration": 1.43,
+      "text": "simply type the name of the variable"
+    },
+    {
+      "index": 1090,
+      "start": 2260.44,
+      "end": 2262.71,
+      "duration": 2.27,
+      "text": "that you've that you've assigned it to."
+    },
+    {
+      "index": 1091,
+      "start": 2262.72,
+      "end": 2264.31,
+      "duration": 1.59,
+      "text": "Okay?"
+    },
+    {
+      "index": 1092,
+      "start": 2264.32,
+      "end": 2266.39,
+      "duration": 2.07,
+      "text": "So, why do we want to give names to the"
+    },
+    {
+      "index": 1093,
+      "start": 2266.4,
+      "end": 2268.07,
+      "duration": 1.67,
+      "text": "to expressions?"
+    },
+    {
+      "index": 1094,
+      "start": 2268.08,
+      "end": 2269.67,
+      "duration": 1.59,
+      "text": "Well, you want to reuse the names,"
+    },
+    {
+      "index": 1095,
+      "start": 2269.68,
+      "end": 2271.51,
+      "duration": 1.83,
+      "text": "right? Instead of the values."
+    },
+    {
+      "index": 1096,
+      "start": 2271.52,
+      "end": 2274.07,
+      "duration": 2.55,
+      "text": "And it makes your code look a lot nicer."
+    },
+    {
+      "index": 1097,
+      "start": 2274.08,
+      "end": 2275.51,
+      "duration": 1.43,
+      "text": "So, this is a piece of code that"
+    },
+    {
+      "index": 1098,
+      "start": 2275.52,
+      "end": 2279.11,
+      "duration": 3.59,
+      "text": "calculates the area of a circle."
+    },
+    {
+      "index": 1099,
+      "start": 2279.12,
+      "end": 2281.11,
+      "duration": 1.99,
+      "text": "And notice I've assigned a variable pi"
+    },
+    {
+      "index": 1100,
+      "start": 2281.12,
+      "end": 2283.27,
+      "duration": 2.15,
+      "text": "to 3.14159."
+    },
+    {
+      "index": 1101,
+      "start": 2283.28,
+      "end": 2285.07,
+      "duration": 1.79,
+      "text": "I've assigned another variable called"
+    },
+    {
+      "index": 1102,
+      "start": 2285.08,
+      "end": 2288.03,
+      "duration": 2.95,
+      "text": "radius to be 2.2. And then later on in"
+    },
+    {
+      "index": 1103,
+      "start": 2288.04,
+      "end": 2289.95,
+      "duration": 1.91,
+      "text": "my code, I have another line that says"
+    },
+    {
+      "index": 1104,
+      "start": 2289.96,
+      "end": 2293.15,
+      "duration": 3.19,
+      "text": "area. This is another variable is equal"
+    },
+    {
+      "index": 1105,
+      "start": 2293.16,
+      "end": 2295.59,
+      "duration": 2.43,
+      "text": "to this is an assignment to this"
+    },
+    {
+      "index": 1106,
+      "start": 2295.6,
+      "end": 2297.11,
+      "duration": 1.51,
+      "text": "expression."
+    },
+    {
+      "index": 1107,
+      "start": 2297.12,
+      "end": 2300.43,
+      "duration": 3.31,
+      "text": "And this expression is just going to"
+    },
+    {
+      "index": 1108,
+      "start": 2300.44,
+      "end": 2302.67,
+      "duration": 2.23,
+      "text": "is is referring to these variable names"
+    },
+    {
+      "index": 1109,
+      "start": 2302.68,
+      "end": 2304.31,
+      "duration": 1.63,
+      "text": "pi and radius."
+    },
+    {
+      "index": 1110,
+      "start": 2304.32,
+      "end": 2305.39,
+      "duration": 1.07,
+      "text": "And it's going to look them up their"
+    },
+    {
+      "index": 1111,
+      "start": 2305.4,
+      "end": 2306.67,
+      "duration": 1.27,
+      "text": "values in memory, and it's going to"
+    },
+    {
+      "index": 1112,
+      "start": 2306.68,
+      "end": 2308.91,
+      "duration": 2.23,
+      "text": "replace their their these variable names"
+    },
+    {
+      "index": 1113,
+      "start": 2308.92,
+      "end": 2310.91,
+      "duration": 1.99,
+      "text": "with those values, and it's going to do"
+    },
+    {
+      "index": 1114,
+      "start": 2310.92,
+      "end": 2312.67,
+      "duration": 1.75,
+      "text": "the calculation for me."
+    },
+    {
+      "index": 1115,
+      "start": 2312.68,
+      "end": 2314.39,
+      "duration": 1.71,
+      "text": "And in the end, this whole expression is"
+    },
+    {
+      "index": 1116,
+      "start": 2314.4,
+      "end": 2316.59,
+      "duration": 2.19,
+      "text": "going to be replaced by one number, and"
+    },
+    {
+      "index": 1117,
+      "start": 2316.6,
+      "end": 2318.95,
+      "duration": 2.35,
+      "text": "that's going to be the float."
+    },
+    {
+      "index": 1118,
+      "start": 2318.96,
+      "end": 2320.349,
+      "duration": 1.389,
+      "text": "Okay."
+    },
+    {
+      "index": 1119,
+      "start": 2320.359,
+      "end": 2321.99,
+      "duration": 1.631,
+      "text": "Here's another exercise while I'm"
+    },
+    {
+      "index": 1120,
+      "start": 2322.0,
+      "end": 2325.11,
+      "duration": 3.11,
+      "text": "talking about the slide."
+    },
+    {
+      "index": 1121,
+      "start": 2325.12,
+      "end": 2326.11,
+      "duration": 0.99,
+      "text": "I do want to make a note about"
+    },
+    {
+      "index": 1122,
+      "start": 2326.12,
+      "end": 2328.63,
+      "duration": 2.51,
+      "text": "programming versus math, okay? So, in"
+    },
+    {
+      "index": 1123,
+      "start": 2328.64,
+      "end": 2331.99,
+      "duration": 3.35,
+      "text": "pro in math, you're often presented with"
+    },
+    {
+      "index": 1124,
+      "start": 2332.0,
+      "end": 2333.91,
+      "duration": 1.91,
+      "text": "um"
+    },
+    {
+      "index": 1125,
+      "start": 2333.92,
+      "end": 2335.43,
+      "duration": 1.51,
+      "text": "with with sort of a problem that says"
+    },
+    {
+      "index": 1126,
+      "start": 2335.44,
+      "end": 2337.59,
+      "duration": 2.15,
+      "text": "solve for solve for X."
+    },
+    {
+      "index": 1127,
+      "start": 2337.6,
+      "end": 2340.23,
+      "duration": 2.63,
+      "text": "X + Y is equal to something something."
+    },
+    {
+      "index": 1128,
+      "start": 2340.24,
+      "end": 2342.349,
+      "duration": 2.109,
+      "text": "Solve for X, for example."
+    },
+    {
+      "index": 1129,
+      "start": 2342.359,
+      "end": 2343.59,
+      "duration": 1.231,
+      "text": "Okay?"
+    },
+    {
+      "index": 1130,
+      "start": 2343.6,
+      "end": 2345.07,
+      "duration": 1.47,
+      "text": "That's coming back to the fact that"
+    },
+    {
+      "index": 1131,
+      "start": 2345.08,
+      "end": 2349.19,
+      "duration": 4.11,
+      "text": "program computers can't"
+    },
+    {
+      "index": 1132,
+      "start": 2349.2,
+      "end": 2350.43,
+      "duration": 1.23,
+      "text": "don't know what to do with that."
+    },
+    {
+      "index": 1133,
+      "start": 2350.44,
+      "end": 2352.47,
+      "duration": 2.03,
+      "text": "Computers need to be told what to do."
+    },
+    {
+      "index": 1134,
+      "start": 2352.48,
+      "end": 2353.75,
+      "duration": 1.27,
+      "text": "So, in programming, if you want to solve"
+    },
+    {
+      "index": 1135,
+      "start": 2353.76,
+      "end": 2356.15,
+      "duration": 2.39,
+      "text": "for X, you need to tell"
+    },
+    {
+      "index": 1136,
+      "start": 2356.16,
+      "end": 2358.19,
+      "duration": 2.03,
+      "text": "the computer exactly how to solve for X."
+    },
+    {
+      "index": 1137,
+      "start": 2358.2,
+      "end": 2360.31,
+      "duration": 2.11,
+      "text": "You need to figure out what formula you"
+    },
+    {
+      "index": 1138,
+      "start": 2360.32,
+      "end": 2361.55,
+      "duration": 1.23,
+      "text": "need to"
+    },
+    {
+      "index": 1139,
+      "start": 2361.56,
+      "end": 2362.91,
+      "duration": 1.35,
+      "text": "um give the computer in order to be able"
+    },
+    {
+      "index": 1140,
+      "start": 2362.92,
+      "end": 2365.39,
+      "duration": 2.47,
+      "text": "to solve for X. Okay?"
+    },
+    {
+      "index": 1141,
+      "start": 2365.4,
+      "end": 2368.23,
+      "duration": 2.83,
+      "text": "So, that means always in programming,"
+    },
+    {
+      "index": 1142,
+      "start": 2368.24,
+      "end": 2371.51,
+      "duration": 3.27,
+      "text": "the right-hand side is going to be"
+    },
+    {
+      "index": 1143,
+      "start": 2371.52,
+      "end": 2373.47,
+      "duration": 1.95,
+      "text": "an expression. It's something that's"
+    },
+    {
+      "index": 1144,
+      "start": 2373.48,
+      "end": 2375.79,
+      "duration": 2.31,
+      "text": "going to be evaluated to a value."
+    },
+    {
+      "index": 1145,
+      "start": 2375.8,
+      "end": 2378.03,
+      "duration": 2.23,
+      "text": "And the left-hand side is always a"
+    },
+    {
+      "index": 1146,
+      "start": 2378.04,
+      "end": 2379.59,
+      "duration": 1.55,
+      "text": "variable. So, it's going to be an"
+    },
+    {
+      "index": 1147,
+      "start": 2379.6,
+      "end": 2382.11,
+      "duration": 2.51,
+      "text": "assignment. So, the equal sign is not is"
+    },
+    {
+      "index": 1148,
+      "start": 2382.12,
+      "end": 2383.99,
+      "duration": 1.87,
+      "text": "not like in in math, right? Where you"
+    },
+    {
+      "index": 1149,
+      "start": 2384.0,
+      "end": 2385.39,
+      "duration": 1.39,
+      "text": "can have thing a lot of things to the"
+    },
+    {
+      "index": 1150,
+      "start": 2385.4,
+      "end": 2386.71,
+      "duration": 1.31,
+      "text": "left and a lot of things to the right of"
+    },
+    {
+      "index": 1151,
+      "start": 2386.72,
+      "end": 2387.91,
+      "duration": 1.19,
+      "text": "the equal sign. There's only one thing"
+    },
+    {
+      "index": 1152,
+      "start": 2387.92,
+      "end": 2389.19,
+      "duration": 1.27,
+      "text": "to the left of the equal sign and that's"
+    },
+    {
+      "index": 1153,
+      "start": 2389.2,
+      "end": 2390.67,
+      "duration": 1.47,
+      "text": "going to be a variable."
+    },
+    {
+      "index": 1154,
+      "start": 2390.68,
+      "end": 2393.59,
+      "duration": 2.91,
+      "text": "An equal sign stands for an assignment."
+    },
+    {
+      "index": 1155,
+      "start": 2393.6,
+      "end": 2395.23,
+      "duration": 1.63,
+      "text": "Once we've created expressions and we"
+    },
+    {
+      "index": 1156,
+      "start": 2395.24,
+      "end": 2397.27,
+      "duration": 2.03,
+      "text": "have these these assignments, you can"
+    },
+    {
+      "index": 1157,
+      "start": 2397.28,
+      "end": 2398.87,
+      "duration": 1.59,
+      "text": "rebind variable names using new"
+    },
+    {
+      "index": 1158,
+      "start": 2398.88,
+      "end": 2401.23,
+      "duration": 2.35,
+      "text": "assignment statements, okay?"
+    },
+    {
+      "index": 1159,
+      "start": 2401.24,
+      "end": 2403.03,
+      "duration": 1.79,
+      "text": "So"
+    },
+    {
+      "index": 1160,
+      "start": 2403.04,
+      "end": 2405.03,
+      "duration": 1.99,
+      "text": "let's look at an example for that. Let's"
+    },
+    {
+      "index": 1161,
+      "start": 2405.04,
+      "end": 2406.83,
+      "duration": 1.79,
+      "text": "say this is our memory."
+    },
+    {
+      "index": 1162,
+      "start": 2406.84,
+      "end": 2407.71,
+      "duration": 0.87,
+      "text": "Okay?"
+    },
+    {
+      "index": 1163,
+      "start": 2407.72,
+      "end": 2409.83,
+      "duration": 2.11,
+      "text": "Let's look at let's type back in the"
+    },
+    {
+      "index": 1164,
+      "start": 2409.84,
+      "end": 2412.79,
+      "duration": 2.95,
+      "text": "example with finding the radius, okay?"
+    },
+    {
+      "index": 1165,
+      "start": 2412.8,
+      "end": 2417.11,
+      "duration": 4.31,
+      "text": "So let's say pi is equal to 3.14."
+    },
+    {
+      "index": 1166,
+      "start": 2417.12,
+      "end": 2418.19,
+      "duration": 1.07,
+      "text": "Okay."
+    },
+    {
+      "index": 1167,
+      "start": 2418.2,
+      "end": 2420.47,
+      "duration": 2.27,
+      "text": "So in memory we're going to create this"
+    },
+    {
+      "index": 1168,
+      "start": 2420.48,
+      "end": 2424.47,
+      "duration": 3.99,
+      "text": "value 3.14. We're going to bind it to"
+    },
+    {
+      "index": 1169,
+      "start": 2424.48,
+      "end": 2427.35,
+      "duration": 2.87,
+      "text": "the variable name pi."
+    },
+    {
+      "index": 1170,
+      "start": 2427.36,
+      "end": 2428.03,
+      "duration": 0.67,
+      "text": "Okay."
+    },
+    {
+      "index": 1171,
+      "start": 2428.04,
+      "end": 2431.11,
+      "duration": 3.07,
+      "text": "Next line, radius is equal to 2.2. In"
+    },
+    {
+      "index": 1172,
+      "start": 2431.12,
+      "end": 2433.83,
+      "duration": 2.71,
+      "text": "memory we're creating this variable this"
+    },
+    {
+      "index": 1173,
+      "start": 2433.84,
+      "end": 2435.99,
+      "duration": 2.15,
+      "text": "value 2.2 and we're going to bind it to"
+    },
+    {
+      "index": 1174,
+      "start": 2436.0,
+      "end": 2436.67,
+      "duration": 0.67,
+      "text": "the"
+    },
+    {
+      "index": 1175,
+      "start": 2436.68,
+      "end": 2439.87,
+      "duration": 3.19,
+      "text": "to the variable name pi radius."
+    },
+    {
+      "index": 1176,
+      "start": 2439.88,
+      "end": 2440.51,
+      "duration": 0.63,
+      "text": "Okay."
+    },
+    {
+      "index": 1177,
+      "start": 2440.52,
+      "end": 2444.43,
+      "duration": 3.91,
+      "text": "Then we have this expression here."
+    },
+    {
+      "index": 1178,
+      "start": 2444.44,
+      "end": 2445.95,
+      "duration": 1.51,
+      "text": "It's going to substitute the values for"
+    },
+    {
+      "index": 1179,
+      "start": 2445.96,
+      "end": 2447.87,
+      "duration": 1.91,
+      "text": "pi from memory"
+    },
+    {
+      "index": 1180,
+      "start": 2447.88,
+      "end": 2449.75,
+      "duration": 1.87,
+      "text": "and the value for radius from memory."
+    },
+    {
+      "index": 1181,
+      "start": 2449.76,
+      "end": 2453.03,
+      "duration": 3.27,
+      "text": "It's going to calculate this this um"
+    },
+    {
+      "index": 1182,
+      "start": 2453.04,
+      "end": 2454.59,
+      "duration": 1.55,
+      "text": "this the value that this expression"
+    },
+    {
+      "index": 1183,
+      "start": 2454.6,
+      "end": 2456.23,
+      "duration": 1.63,
+      "text": "evaluates to."
+    },
+    {
+      "index": 1184,
+      "start": 2456.24,
+      "end": 2457.79,
+      "duration": 1.55,
+      "text": "It's going to pop that into the memory"
+    },
+    {
+      "index": 1185,
+      "start": 2457.8,
+      "end": 2460.39,
+      "duration": 2.59,
+      "text": "and it's going to assign cuz we're using"
+    },
+    {
+      "index": 1186,
+      "start": 2460.4,
+      "end": 2462.99,
+      "duration": 2.59,
+      "text": "the equal sign. It's going to assign"
+    },
+    {
+      "index": 1187,
+      "start": 2463.0,
+      "end": 2466.11,
+      "duration": 3.11,
+      "text": "that value to that variable area."
+    },
+    {
+      "index": 1188,
+      "start": 2466.12,
+      "end": 2468.03,
+      "duration": 1.91,
+      "text": "Okay."
+    },
+    {
+      "index": 1189,
+      "start": 2468.04,
+      "end": 2470.67,
+      "duration": 2.63,
+      "text": "So now let's say we rebind"
+    },
+    {
+      "index": 1190,
+      "start": 2470.68,
+      "end": 2471.55,
+      "duration": 0.87,
+      "text": "the"
+    },
+    {
+      "index": 1191,
+      "start": 2471.56,
+      "end": 2474.67,
+      "duration": 3.11,
+      "text": "we rebind radius to be something else."
+    },
+    {
+      "index": 1192,
+      "start": 2474.68,
+      "end": 2476.79,
+      "duration": 2.11,
+      "text": "So radius is already in"
+    },
+    {
+      "index": 1193,
+      "start": 2476.8,
+      "end": 2479.67,
+      "duration": 2.87,
+      "text": "is being is being is is bound to the"
+    },
+    {
+      "index": 1194,
+      "start": 2479.68,
+      "end": 2481.43,
+      "duration": 1.75,
+      "text": "value 2.2."
+    },
+    {
+      "index": 1195,
+      "start": 2481.44,
+      "end": 2482.91,
+      "duration": 1.47,
+      "text": "But when we do this line radius is equal"
+    },
+    {
+      "index": 1196,
+      "start": 2482.92,
+      "end": 2485.03,
+      "duration": 2.11,
+      "text": "to radius plus one, we're going to take"
+    },
+    {
+      "index": 1197,
+      "start": 2485.04,
+      "end": 2487.43,
+      "duration": 2.39,
+      "text": "away the binding to 2.2."
+    },
+    {
+      "index": 1198,
+      "start": 2487.44,
+      "end": 2489.83,
+      "duration": 2.39,
+      "text": "We're going to make do this calculation."
+    },
+    {
+      "index": 1199,
+      "start": 2489.84,
+      "end": 2491.55,
+      "duration": 1.71,
+      "text": "The new value is 3.2 and we're going to"
+    },
+    {
+      "index": 1200,
+      "start": 2491.56,
+      "end": 2493.79,
+      "duration": 2.23,
+      "text": "bind that rebind that"
+    },
+    {
+      "index": 1201,
+      "start": 2493.8,
+      "end": 2494.95,
+      "duration": 1.15,
+      "text": "um"
+    },
+    {
+      "index": 1202,
+      "start": 2494.96,
+      "end": 2496.39,
+      "duration": 1.43,
+      "text": "that value to that to that same"
+    },
+    {
+      "index": 1203,
+      "start": 2496.4,
+      "end": 2497.75,
+      "duration": 1.35,
+      "text": "variable."
+    },
+    {
+      "index": 1204,
+      "start": 2497.76,
+      "end": 2500.11,
+      "duration": 2.35,
+      "text": "So in memory notice we're still going to"
+    },
+    {
+      "index": 1205,
+      "start": 2500.12,
+      "end": 2502.75,
+      "duration": 2.63,
+      "text": "have this this value 2.2 floating"
+    },
+    {
+      "index": 1206,
+      "start": 2502.76,
+      "end": 2505.11,
+      "duration": 2.35,
+      "text": "around, but we've lost sort of the"
+    },
+    {
+      "index": 1207,
+      "start": 2505.12,
+      "end": 2507.19,
+      "duration": 2.07,
+      "text": "handle for it. Okay? There's no way to"
+    },
+    {
+      "index": 1208,
+      "start": 2507.2,
+      "end": 2508.91,
+      "duration": 1.71,
+      "text": "get it back. So it's kind of just in"
+    },
+    {
+      "index": 1209,
+      "start": 2508.92,
+      "end": 2510.19,
+      "duration": 1.27,
+      "text": "memory"
+    },
+    {
+      "index": 1210,
+      "start": 2510.2,
+      "end": 2511.87,
+      "duration": 1.67,
+      "text": "sitting there."
+    },
+    {
+      "index": 1211,
+      "start": 2511.88,
+      "end": 2514.39,
+      "duration": 2.51,
+      "text": "At some point it might get collected by"
+    },
+    {
+      "index": 1212,
+      "start": 2514.4,
+      "end": 2515.71,
+      "duration": 1.31,
+      "text": "what they what we call the garbage"
+    },
+    {
+      "index": 1213,
+      "start": 2515.72,
+      "end": 2518.67,
+      "duration": 2.95,
+      "text": "collector in Python. It'll retrieve"
+    },
+    {
+      "index": 1214,
+      "start": 2518.68,
+      "end": 2521.27,
+      "duration": 2.59,
+      "text": "um these sort of lost values and it'll"
+    },
+    {
+      "index": 1215,
+      "start": 2521.28,
+      "end": 2522.87,
+      "duration": 1.59,
+      "text": "reuse them for new values and things"
+    },
+    {
+      "index": 1216,
+      "start": 2522.88,
+      "end": 2525.75,
+      "duration": 2.87,
+      "text": "like that."
+    },
+    {
+      "index": 1217,
+      "start": 2527.91,
+      "end": 2527.92,
+      "duration": 0.01,
+      "text": "But radius now points to the new value,"
+    },
+    {
+      "index": 1218,
+      "start": 2527.92,
+      "end": 2533.67,
+      "duration": 5.75,
+      "text": "okay? So we can never get back 2.2."
+    },
+    {
+      "index": 1219,
+      "start": 2536.15,
+      "end": 2536.16,
+      "duration": 0.01,
+      "text": "And that's it. Okay?"
+    },
+    {
+      "index": 1220,
+      "start": 2536.16,
+      "end": 2538.47,
+      "duration": 2.31,
+      "text": "The value of area, notice this is very"
+    },
+    {
+      "index": 1221,
+      "start": 2538.48,
+      "end": 2540.03,
+      "duration": 1.55,
+      "text": "important, the value of area did not"
+    },
+    {
+      "index": 1222,
+      "start": 2540.04,
+      "end": 2541.39,
+      "duration": 1.35,
+      "text": "change."
+    },
+    {
+      "index": 1223,
+      "start": 2541.4,
+      "end": 2542.99,
+      "duration": 1.59,
+      "text": "Okay?"
+    },
+    {
+      "index": 1224,
+      "start": 2543.0,
+      "end": 2545.03,
+      "duration": 2.03,
+      "text": "And it did not change because these are"
+    },
+    {
+      "index": 1225,
+      "start": 2545.04,
+      "end": 2546.23,
+      "duration": 1.19,
+      "text": "all the instructions we told the"
+    },
+    {
+      "index": 1226,
+      "start": 2546.24,
+      "end": 2548.31,
+      "duration": 2.07,
+      "text": "computer to do. Okay?"
+    },
+    {
+      "index": 1227,
+      "start": 2548.32,
+      "end": 2549.27,
+      "duration": 0.95,
+      "text": "We told"
+    },
+    {
+      "index": 1228,
+      "start": 2549.28,
+      "end": 2551.35,
+      "duration": 2.07,
+      "text": "we just told it to change radius to be"
+    },
+    {
+      "index": 1229,
+      "start": 2551.36,
+      "end": 2553.11,
+      "duration": 1.75,
+      "text": "radius plus one."
+    },
+    {
+      "index": 1230,
+      "start": 2553.12,
+      "end": 2555.63,
+      "duration": 2.51,
+      "text": "We never told it to recalculate the"
+    },
+    {
+      "index": 1231,
+      "start": 2555.64,
+      "end": 2557.35,
+      "duration": 1.71,
+      "text": "value of area."
+    },
+    {
+      "index": 1232,
+      "start": 2557.36,
+      "end": 2558.87,
+      "duration": 1.51,
+      "text": "If I copied"
+    },
+    {
+      "index": 1233,
+      "start": 2558.88,
+      "end": 2561.15,
+      "duration": 2.27,
+      "text": "that line down here, then the value of"
+    },
+    {
+      "index": 1234,
+      "start": 2561.16,
+      "end": 2562.71,
+      "duration": 1.55,
+      "text": "area would change."
+    },
+    {
+      "index": 1235,
+      "start": 2562.72,
+      "end": 2564.15,
+      "duration": 1.43,
+      "text": "But we never told it to do that, right?"
+    },
+    {
+      "index": 1236,
+      "start": 2564.16,
+      "end": 2565.51,
+      "duration": 1.35,
+      "text": "So the computer only does what we tell"
+    },
+    {
+      "index": 1237,
+      "start": 2565.52,
+      "end": 2566.87,
+      "duration": 1.35,
+      "text": "it to do."
+    },
+    {
+      "index": 1238,
+      "start": 2566.88,
+      "end": 2568.31,
+      "duration": 1.43,
+      "text": "That's the last thing. Next lecture"
+    },
+    {
+      "index": 1239,
+      "start": 2568.32,
+      "end": 2570.39,
+      "duration": 2.07,
+      "text": "we're going to talk about"
+    },
+    {
+      "index": 1240,
+      "start": 2570.4,
+      "end": 2572.43,
+      "duration": 2.03,
+      "text": "adding control flow to our programs. So"
+    },
+    {
+      "index": 1241,
+      "start": 2572.44,
+      "end": 2573.91,
+      "duration": 1.47,
+      "text": "how do you tell the computer to do one"
+    },
+    {
+      "index": 1242,
+      "start": 2573.92,
+      "end": 2575.35,
+      "duration": 1.43,
+      "text": "thing or another?"
+    },
+    {
+      "index": 1243,
+      "start": 2575.36,
+      "end": 2577.8,
+      "duration": 2.44,
+      "text": "All right."
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Introduction to Computer Science and Programming in Python",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"
+  }
+}

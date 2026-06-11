@@ -1,0 +1,6493 @@
+{
+  "video": {
+    "id": "XBcHnz08ZW8",
+    "title": "Lecture 28 - MSI AND LSI BASED DESIGN",
+    "url": "https://www.youtube.com/watch?v=XBcHnz08ZW8",
+    "channel": "nptelhrd",
+    "duration": 2862,
+    "language": "en"
+  },
+  "segment_count": 925,
+  "segments": [
+    {
+      "index": 0,
+      "start": 23.55,
+      "end": 23.56,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 1,
+      "start": 23.56,
+      "end": 26.669,
+      "duration": 3.109,
+      "text": "oh oh"
+    },
+    {
+      "index": 2,
+      "start": 26.679,
+      "end": 28.349,
+      "duration": 1.67,
+      "text": "sh"
+    },
+    {
+      "index": 3,
+      "start": 28.359,
+      "end": 32.12,
+      "duration": 3.761,
+      "text": "sh sh on me"
+    },
+    {
+      "index": 4,
+      "start": 32.13,
+      "end": 80.52,
+      "duration": 48.39,
+      "text": "[Music]"
+    },
+    {
+      "index": 5,
+      "start": 111.2,
+      "end": 113.87,
+      "duration": 2.67,
+      "text": "okay uh starting"
+    },
+    {
+      "index": 6,
+      "start": 113.88,
+      "end": 116.069,
+      "duration": 2.189,
+      "text": "today we will see"
+    },
+    {
+      "index": 7,
+      "start": 116.079,
+      "end": 117.87,
+      "duration": 1.791,
+      "text": "some"
+    },
+    {
+      "index": 8,
+      "start": 117.88,
+      "end": 120.749,
+      "duration": 2.869,
+      "text": "designs using"
+    },
+    {
+      "index": 9,
+      "start": 120.759,
+      "end": 123.429,
+      "duration": 2.67,
+      "text": "medium scale and large scale integrated"
+    },
+    {
+      "index": 10,
+      "start": 123.439,
+      "end": 125.91,
+      "duration": 2.471,
+      "text": "circuits um first we'll look at the"
+    },
+    {
+      "index": 11,
+      "start": 125.92,
+      "end": 128.109,
+      "duration": 2.189,
+      "text": "combinational circuits and"
+    },
+    {
+      "index": 12,
+      "start": 128.119,
+      "end": 131.83,
+      "duration": 3.711,
+      "text": "then include the sequential part of it I"
+    },
+    {
+      "index": 13,
+      "start": 131.84,
+      "end": 133.03,
+      "duration": 1.19,
+      "text": "mentioned this I have mentioned this"
+    },
+    {
+      "index": 14,
+      "start": 133.04,
+      "end": 135.229,
+      "duration": 2.189,
+      "text": "several times earlier in the"
+    },
+    {
+      "index": 15,
+      "start": 135.239,
+      "end": 137.67,
+      "duration": 2.431,
+      "text": "course ultimately the design success of"
+    },
+    {
+      "index": 16,
+      "start": 137.68,
+      "end": 138.99,
+      "duration": 1.31,
+      "text": "the design depends"
+    },
+    {
+      "index": 17,
+      "start": 139.0,
+      "end": 141.63,
+      "duration": 2.63,
+      "text": "on how efficiently we are able to make a"
+    },
+    {
+      "index": 18,
+      "start": 141.64,
+      "end": 143.39,
+      "duration": 1.75,
+      "text": "design for a given"
+    },
+    {
+      "index": 19,
+      "start": 143.4,
+      "end": 146.07,
+      "duration": 2.67,
+      "text": "specifications given set of"
+    },
+    {
+      "index": 20,
+      "start": 146.08,
+      "end": 148.43,
+      "duration": 2.35,
+      "text": "specifications in terms of the size in"
+    },
+    {
+      "index": 21,
+      "start": 148.44,
+      "end": 150.43,
+      "duration": 1.99,
+      "text": "terms of the power consumption"
+    },
+    {
+      "index": 22,
+      "start": 150.44,
+      "end": 152.869,
+      "duration": 2.429,
+      "text": "and in terms of the"
+    },
+    {
+      "index": 23,
+      "start": 152.879,
+      "end": 155.949,
+      "duration": 3.07,
+      "text": "cost so if you want to have a design of"
+    },
+    {
+      "index": 24,
+      "start": 155.959,
+      "end": 158.47,
+      "duration": 2.511,
+      "text": "course the types of design the sizes of"
+    },
+    {
+      "index": 25,
+      "start": 158.48,
+      "end": 159.949,
+      "duration": 1.469,
+      "text": "the designs we have seen so far in the"
+    },
+    {
+      "index": 26,
+      "start": 159.959,
+      "end": 161.43,
+      "duration": 1.471,
+      "text": "class are"
+    },
+    {
+      "index": 27,
+      "start": 161.44,
+      "end": 166.79,
+      "duration": 5.35,
+      "text": "small so gate based approaches just if"
+    },
+    {
+      "index": 28,
+      "start": 166.8,
+      "end": 168.75,
+      "duration": 1.95,
+      "text": "justifiable but the circuits become"
+    },
+    {
+      "index": 29,
+      "start": 168.76,
+      "end": 171.03,
+      "duration": 2.27,
+      "text": "larger and larger systems become larger"
+    },
+    {
+      "index": 30,
+      "start": 171.04,
+      "end": 172.03,
+      "duration": 0.99,
+      "text": "and"
+    },
+    {
+      "index": 31,
+      "start": 172.04,
+      "end": 174.509,
+      "duration": 2.469,
+      "text": "larger it becomes"
+    },
+    {
+      "index": 32,
+      "start": 174.519,
+      "end": 177.39,
+      "duration": 2.871,
+      "text": "extremely what say very large"
+    },
+    {
+      "index": 33,
+      "start": 177.4,
+      "end": 179.55,
+      "duration": 2.15,
+      "text": "extensive in order to have a large"
+    },
+    {
+      "index": 34,
+      "start": 179.56,
+      "end": 180.99,
+      "duration": 1.43,
+      "text": "number of"
+    },
+    {
+      "index": 35,
+      "start": 181.0,
+      "end": 183.99,
+      "duration": 2.99,
+      "text": "Gates so with the large number of gates"
+    },
+    {
+      "index": 36,
+      "start": 184.0,
+      "end": 187.99,
+      "duration": 3.99,
+      "text": "come things like reliability problems"
+    },
+    {
+      "index": 37,
+      "start": 188.0,
+      "end": 191.149,
+      "duration": 3.149,
+      "text": "interconnectivity between Gates external"
+    },
+    {
+      "index": 38,
+      "start": 191.159,
+      "end": 193.509,
+      "duration": 2.35,
+      "text": "interconnection is unreliable compared"
+    },
+    {
+      "index": 39,
+      "start": 193.519,
+      "end": 196.07,
+      "duration": 2.551,
+      "text": "to the integrated circuits of course you"
+    },
+    {
+      "index": 40,
+      "start": 196.08,
+      "end": 199.47,
+      "duration": 3.39,
+      "text": "can make a very sturdy and rugged"
+    },
+    {
+      "index": 41,
+      "start": 199.48,
+      "end": 201.589,
+      "duration": 2.109,
+      "text": "printed circuit boards but still a"
+    },
+    {
+      "index": 42,
+      "start": 201.599,
+      "end": 203.229,
+      "duration": 1.63,
+      "text": "circuit which is fabricated as an"
+    },
+    {
+      "index": 43,
+      "start": 203.239,
+      "end": 205.309,
+      "duration": 2.07,
+      "text": "integrated circuit have much more"
+    },
+    {
+      "index": 44,
+      "start": 205.319,
+      "end": 210.509,
+      "duration": 5.19,
+      "text": "reliability in terms of the um failure"
+    },
+    {
+      "index": 45,
+      "start": 210.519,
+      "end": 212.11,
+      "duration": 1.591,
+      "text": "compared to a circuit which you put"
+    },
+    {
+      "index": 46,
+      "start": 212.12,
+      "end": 214.589,
+      "duration": 2.469,
+      "text": "together outside then the"
+    },
+    {
+      "index": 47,
+      "start": 214.599,
+      "end": 218.11,
+      "duration": 3.511,
+      "text": "size the size of an integrated circuit"
+    },
+    {
+      "index": 48,
+      "start": 218.12,
+      "end": 220.309,
+      "duration": 2.189,
+      "text": "package as you see it there has be"
+    },
+    {
+      "index": 49,
+      "start": 220.319,
+      "end": 221.75,
+      "duration": 1.431,
+      "text": "minimum size of the package for you to"
+    },
+    {
+      "index": 50,
+      "start": 221.76,
+      "end": 223.509,
+      "duration": 1.749,
+      "text": "handle it so that you can put it on a"
+    },
+    {
+      "index": 51,
+      "start": 223.519,
+      "end": 226.99,
+      "duration": 3.471,
+      "text": "board and you can wire it so you cannot"
+    },
+    {
+      "index": 52,
+      "start": 227.0,
+      "end": 228.229,
+      "duration": 1.229,
+      "text": "make a very very even though we are"
+    },
+    {
+      "index": 53,
+      "start": 228.239,
+      "end": 230.35,
+      "duration": 2.111,
+      "text": "talking of Micron Technology and sub"
+    },
+    {
+      "index": 54,
+      "start": 230.36,
+      "end": 232.229,
+      "duration": 1.869,
+      "text": "Micron Technology that means we talking"
+    },
+    {
+      "index": 55,
+      "start": 232.239,
+      "end": 233.869,
+      "duration": 1.63,
+      "text": "about dimensions of transistors being in"
+    },
+    {
+      "index": 56,
+      "start": 233.879,
+      "end": 236.91,
+      "duration": 3.031,
+      "text": "the order of microns and"
+    },
+    {
+      "index": 57,
+      "start": 236.92,
+      "end": 239.19,
+      "duration": 2.27,
+      "text": "submicrons we cannot handle them if I"
+    },
+    {
+      "index": 58,
+      "start": 239.2,
+      "end": 242.19,
+      "duration": 2.99,
+      "text": "give you a small piece of uh transistor"
+    },
+    {
+      "index": 59,
+      "start": 242.2,
+      "end": 245.149,
+      "duration": 2.949,
+      "text": "fabricated using a Micron Technology how"
+    },
+    {
+      "index": 60,
+      "start": 245.159,
+      "end": 247.19,
+      "duration": 2.031,
+      "text": "will you handle it you cannot so you"
+    },
+    {
+      "index": 61,
+      "start": 247.2,
+      "end": 248.47,
+      "duration": 1.27,
+      "text": "need"
+    },
+    {
+      "index": 62,
+      "start": 248.48,
+      "end": 251.99,
+      "duration": 3.51,
+      "text": "to put it in a package and the package"
+    },
+    {
+      "index": 63,
+      "start": 252.0,
+      "end": 254.589,
+      "duration": 2.589,
+      "text": "has been hermetically sealed for"
+    },
+    {
+      "index": 64,
+      "start": 254.599,
+      "end": 256.43,
+      "duration": 1.831,
+      "text": "protection from"
+    },
+    {
+      "index": 65,
+      "start": 256.44,
+      "end": 259.749,
+      "duration": 3.309,
+      "text": "environment but you need to connect it"
+    },
+    {
+      "index": 66,
+      "start": 259.759,
+      "end": 264.43,
+      "duration": 4.671,
+      "text": "properly so in ic the extra circuit the"
+    },
+    {
+      "index": 67,
+      "start": 264.44,
+      "end": 265.95,
+      "duration": 1.51,
+      "text": "cost of the excess circuit that you put"
+    },
+    {
+      "index": 68,
+      "start": 265.96,
+      "end": 269.27,
+      "duration": 3.31,
+      "text": "in a chip is not proportional to the"
+    },
+    {
+      "index": 69,
+      "start": 269.28,
+      "end": 271.909,
+      "duration": 2.629,
+      "text": "final cost of the circuit that"
+    },
+    {
+      "index": 70,
+      "start": 271.919,
+      "end": 274.23,
+      "duration": 2.311,
+      "text": "means there's a minimum cost in the"
+    },
+    {
+      "index": 71,
+      "start": 274.24,
+      "end": 276.71,
+      "duration": 2.47,
+      "text": "fabrication process terms of the the"
+    },
+    {
+      "index": 72,
+      "start": 276.72,
+      "end": 278.07,
+      "duration": 1.35,
+      "text": "infrastructure in terms of the"
+    },
+    {
+      "index": 73,
+      "start": 278.08,
+      "end": 280.79,
+      "duration": 2.71,
+      "text": "technology the clean rooms"
+    },
+    {
+      "index": 74,
+      "start": 280.8,
+      "end": 283.83,
+      "duration": 3.03,
+      "text": "lithographic lithographic techniques in"
+    },
+    {
+      "index": 75,
+      "start": 283.84,
+      "end": 286.59,
+      "duration": 2.75,
+      "text": "terms of packaging terms of um"
+    },
+    {
+      "index": 76,
+      "start": 286.6,
+      "end": 289.11,
+      "duration": 2.51,
+      "text": "reliability in terms of testing this is"
+    },
+    {
+      "index": 77,
+      "start": 289.12,
+      "end": 291.15,
+      "duration": 2.03,
+      "text": "a very high"
+    },
+    {
+      "index": 78,
+      "start": 291.16,
+      "end": 294.79,
+      "duration": 3.63,
+      "text": "component of the total cost of an IC so"
+    },
+    {
+      "index": 79,
+      "start": 294.8,
+      "end": 297.43,
+      "duration": 2.63,
+      "text": "give an example if a circuit with about"
+    },
+    {
+      "index": 80,
+      "start": 297.44,
+      "end": 298.35,
+      "duration": 0.91,
+      "text": "10"
+    },
+    {
+      "index": 81,
+      "start": 298.36,
+      "end": 301.07,
+      "duration": 2.71,
+      "text": "Gates when I turn gate circuit as I"
+    },
+    {
+      "index": 82,
+      "start": 301.08,
+      "end": 302.67,
+      "duration": 1.59,
+      "text": "mentioned this again several times"
+    },
+    {
+      "index": 83,
+      "start": 302.68,
+      "end": 304.43,
+      "duration": 1.75,
+      "text": "earlier turn Gates does not mean there"
+    },
+    {
+      "index": 84,
+      "start": 304.44,
+      "end": 306.51,
+      "duration": 2.07,
+      "text": "are turn Gates inside the circuit which"
+    },
+    {
+      "index": 85,
+      "start": 306.52,
+      "end": 309.51,
+      "duration": 2.99,
+      "text": "is whose performance is equalent as the"
+    },
+    {
+      "index": 86,
+      "start": 309.52,
+      "end": 312.43,
+      "duration": 2.91,
+      "text": "performance of 10"
+    },
+    {
+      "index": 87,
+      "start": 312.44,
+      "end": 317.23,
+      "duration": 4.79,
+      "text": "Gates is sold let us say for 10"
+    },
+    {
+      "index": 88,
+      "start": 317.24,
+      "end": 319.39,
+      "duration": 2.15,
+      "text": "Rupees it does not mean that I make a"
+    },
+    {
+      "index": 89,
+      "start": 319.4,
+      "end": 321.749,
+      "duration": 2.349,
+      "text": "circuit for 100 gates with 100 Gates"
+    },
+    {
+      "index": 90,
+      "start": 321.759,
+      "end": 323.79,
+      "duration": 2.031,
+      "text": "using the same technology same"
+    },
+    {
+      "index": 91,
+      "start": 323.8,
+      "end": 326.749,
+      "duration": 2.949,
+      "text": "processing same packaging does not mean"
+    },
+    {
+      "index": 92,
+      "start": 326.759,
+      "end": 330.27,
+      "duration": 3.511,
+      "text": "it will cost 100 rupees"
+    },
+    {
+      "index": 93,
+      "start": 330.28,
+      "end": 332.469,
+      "duration": 2.189,
+      "text": "that is the the complexity of the cost"
+    },
+    {
+      "index": 94,
+      "start": 332.479,
+      "end": 333.71,
+      "duration": 1.231,
+      "text": "of the circuit is not proportional to"
+    },
+    {
+      "index": 95,
+      "start": 333.72,
+      "end": 335.83,
+      "duration": 2.11,
+      "text": "the complexity of the circuit there's an"
+    },
+    {
+      "index": 96,
+      "start": 335.84,
+      "end": 338.909,
+      "duration": 3.069,
+      "text": "incremental cost increase small increase"
+    },
+    {
+      "index": 97,
+      "start": 338.919,
+      "end": 341.029,
+      "duration": 2.11,
+      "text": "in the cost because of the extra design"
+    },
+    {
+      "index": 98,
+      "start": 341.039,
+      "end": 343.189,
+      "duration": 2.15,
+      "text": "effort but that's it I don't think"
+    },
+    {
+      "index": 99,
+      "start": 343.199,
+      "end": 344.43,
+      "duration": 1.231,
+      "text": "you'll have to account for the chemical"
+    },
+    {
+      "index": 100,
+      "start": 344.44,
+      "end": 346.39,
+      "duration": 1.95,
+      "text": "that will be used extra in the"
+    },
+    {
+      "index": 101,
+      "start": 346.4,
+      "end": 348.87,
+      "duration": 2.47,
+      "text": "process the wafer size is as I said the"
+    },
+    {
+      "index": 102,
+      "start": 348.88,
+      "end": 351.469,
+      "duration": 2.589,
+      "text": "same you cannot handle less than that"
+    },
+    {
+      "index": 103,
+      "start": 351.479,
+      "end": 353.79,
+      "duration": 2.311,
+      "text": "the package size may be same the"
+    },
+    {
+      "index": 104,
+      "start": 353.8,
+      "end": 355.67,
+      "duration": 1.87,
+      "text": "packaging technology may be same so"
+    },
+    {
+      "index": 105,
+      "start": 355.68,
+      "end": 357.39,
+      "duration": 1.71,
+      "text": "instead of 10 rupes maybe you can sell"
+    },
+    {
+      "index": 106,
+      "start": 357.4,
+      "end": 360.55,
+      "duration": 3.15,
+      "text": "it at 12 rupees"
+    },
+    {
+      "index": 107,
+      "start": 360.56,
+      "end": 364.469,
+      "duration": 3.909,
+      "text": "so this is It's a dramatic it is not a"
+    },
+    {
+      "index": 108,
+      "start": 364.479,
+      "end": 366.35,
+      "duration": 1.871,
+      "text": "insignificant Factor we're talking about"
+    },
+    {
+      "index": 109,
+      "start": 366.36,
+      "end": 368.79,
+      "duration": 2.43,
+      "text": "here so as a ciruit become larger and"
+    },
+    {
+      "index": 110,
+      "start": 368.8,
+      "end": 371.629,
+      "duration": 2.829,
+      "text": "larger the cost per function if you want"
+    },
+    {
+      "index": 111,
+      "start": 371.639,
+      "end": 374.79,
+      "duration": 3.151,
+      "text": "to define the cost per function it"
+    },
+    {
+      "index": 112,
+      "start": 374.8,
+      "end": 378.55,
+      "duration": 3.75,
+      "text": "drastically reduces take of memory chips"
+    },
+    {
+      "index": 113,
+      "start": 378.56,
+      "end": 380.55,
+      "duration": 1.99,
+      "text": "why are we able to get Now Memory chips"
+    },
+    {
+      "index": 114,
+      "start": 380.56,
+      "end": 386.23,
+      "duration": 5.67,
+      "text": "in computers with the huge capacity for"
+    },
+    {
+      "index": 115,
+      "start": 386.24,
+      "end": 388.55,
+      "duration": 2.31,
+      "text": "much smaller price because it's one one"
+    },
+    {
+      "index": 116,
+      "start": 388.56,
+      "end": 390.87,
+      "duration": 2.31,
+      "text": "IC we are able to get it"
+    },
+    {
+      "index": 117,
+      "start": 390.88,
+      "end": 393.029,
+      "duration": 2.149,
+      "text": "suppose a memory of particular size let"
+    },
+    {
+      "index": 118,
+      "start": 393.039,
+      "end": 394.27,
+      "duration": 1.231,
+      "text": "us say 1"
+    },
+    {
+      "index": 119,
+      "start": 394.28,
+      "end": 396.99,
+      "duration": 2.71,
+      "text": "kilobytes cause a certain"
+    },
+    {
+      "index": 120,
+      "start": 397.0,
+      "end": 399.87,
+      "duration": 2.87,
+      "text": "amount earlier if you wanted to make 64"
+    },
+    {
+      "index": 121,
+      "start": 399.88,
+      "end": 401.71,
+      "duration": 1.83,
+      "text": "kilobytes you need to buy 64 of those"
+    },
+    {
+      "index": 122,
+      "start": 401.72,
+      "end": 402.589,
+      "duration": 0.869,
+      "text": "memory"
+    },
+    {
+      "index": 123,
+      "start": 402.599,
+      "end": 406.15,
+      "duration": 3.551,
+      "text": "chips today if you can make a 64 K"
+    },
+    {
+      "index": 124,
+      "start": 406.16,
+      "end": 408.71,
+      "duration": 2.55,
+      "text": "memory the cost will not be 64 times"
+    },
+    {
+      "index": 125,
+      "start": 408.72,
+      "end": 411.23,
+      "duration": 2.51,
+      "text": "what it was but of course maybe maybe"
+    },
+    {
+      "index": 126,
+      "start": 411.24,
+      "end": 413.99,
+      "duration": 2.75,
+      "text": "twice or even let us say five times I"
+    },
+    {
+      "index": 127,
+      "start": 414.0,
+      "end": 415.43,
+      "duration": 1.43,
+      "text": "don't know depends on the technology the"
+    },
+    {
+      "index": 128,
+      "start": 415.44,
+      "end": 420.39,
+      "duration": 4.95,
+      "text": "design effort the testing effort and ra"
+    },
+    {
+      "index": 129,
+      "start": 420.4,
+      "end": 422.55,
+      "duration": 2.15,
+      "text": "changes you have to make in the"
+    },
+    {
+      "index": 130,
+      "start": 422.56,
+      "end": 427.029,
+      "duration": 4.469,
+      "text": "processing steps but you get the point"
+    },
+    {
+      "index": 131,
+      "start": 427.039,
+      "end": 429.07,
+      "duration": 2.031,
+      "text": "it is not 64 times it is maybe at the"
+    },
+    {
+      "index": 132,
+      "start": 429.08,
+      "end": 430.749,
+      "duration": 1.669,
+      "text": "most 3 four"
+    },
+    {
+      "index": 133,
+      "start": 430.759,
+      "end": 433.23,
+      "duration": 2.471,
+      "text": "times that accounts for a very drastic"
+    },
+    {
+      "index": 134,
+      "start": 433.24,
+      "end": 435.39,
+      "duration": 2.15,
+      "text": "reduction in the cost of electronic"
+    },
+    {
+      "index": 135,
+      "start": 435.4,
+      "end": 436.629,
+      "duration": 1.229,
+      "text": "circuits"
+    },
+    {
+      "index": 136,
+      "start": 436.639,
+      "end": 439.23,
+      "duration": 2.591,
+      "text": "today we have computers which are always"
+    },
+    {
+      "index": 137,
+      "start": 439.24,
+      "end": 441.029,
+      "duration": 1.789,
+      "text": "costing less than what it was earlier"
+    },
+    {
+      "index": 138,
+      "start": 441.039,
+      "end": 443.67,
+      "duration": 2.631,
+      "text": "for a given performance this is probably"
+    },
+    {
+      "index": 139,
+      "start": 443.68,
+      "end": 446.23,
+      "duration": 2.55,
+      "text": "only one one one of the very few areas"
+    },
+    {
+      "index": 140,
+      "start": 446.24,
+      "end": 449.27,
+      "duration": 3.03,
+      "text": "of human activity where the cost goes"
+    },
+    {
+      "index": 141,
+      "start": 449.28,
+      "end": 450.07,
+      "duration": 0.79,
+      "text": "down"
+    },
+    {
+      "index": 142,
+      "start": 450.08,
+      "end": 451.55,
+      "duration": 1.47,
+      "text": "any other"
+    },
+    {
+      "index": 143,
+      "start": 451.56,
+      "end": 456.15,
+      "duration": 4.59,
+      "text": "area be it agriculture be textiles be it"
+    },
+    {
+      "index": 144,
+      "start": 456.16,
+      "end": 457.99,
+      "duration": 1.83,
+      "text": "whatever"
+    },
+    {
+      "index": 145,
+      "start": 458.0,
+      "end": 459.749,
+      "duration": 1.749,
+      "text": "manufacture the cost will be"
+    },
+    {
+      "index": 146,
+      "start": 459.759,
+      "end": 462.27,
+      "duration": 2.511,
+      "text": "proportional to the effort and it cost"
+    },
+    {
+      "index": 147,
+      "start": 462.28,
+      "end": 463.27,
+      "duration": 0.99,
+      "text": "also you have to take into account"
+    },
+    {
+      "index": 148,
+      "start": 463.28,
+      "end": 465.589,
+      "duration": 2.309,
+      "text": "inflation everything but"
+    },
+    {
+      "index": 149,
+      "start": 465.599,
+      "end": 468.149,
+      "duration": 2.55,
+      "text": "here I can buy today an"
+    },
+    {
+      "index": 150,
+      "start": 468.159,
+      "end": 469.67,
+      "duration": 1.511,
+      "text": "Electronics"
+    },
+    {
+      "index": 151,
+      "start": 469.68,
+      "end": 472.71,
+      "duration": 3.03,
+      "text": "Hardware which cost less from last year"
+    },
+    {
+      "index": 152,
+      "start": 472.72,
+      "end": 476.07,
+      "duration": 3.35,
+      "text": "for the same function or for a given"
+    },
+    {
+      "index": 153,
+      "start": 476.08,
+      "end": 479.029,
+      "duration": 2.949,
+      "text": "cost the circuit this year I can buy"
+    },
+    {
+      "index": 154,
+      "start": 479.039,
+      "end": 481.43,
+      "duration": 2.391,
+      "text": "much"
+    },
+    {
+      "index": 155,
+      "start": 481.44,
+      "end": 484.749,
+      "duration": 3.309,
+      "text": "more complex much circuit with much"
+    },
+    {
+      "index": 156,
+      "start": 484.759,
+      "end": 486.71,
+      "duration": 1.951,
+      "text": "better performance compared to what I"
+    },
+    {
+      "index": 157,
+      "start": 486.72,
+      "end": 487.869,
+      "duration": 1.149,
+      "text": "could have bought for the same price"
+    },
+    {
+      "index": 158,
+      "start": 487.879,
+      "end": 490.149,
+      "duration": 2.27,
+      "text": "last year that is because of the advanc"
+    },
+    {
+      "index": 159,
+      "start": 490.159,
+      "end": 492.589,
+      "duration": 2.43,
+      "text": "in technology so why am I saying all"
+    },
+    {
+      "index": 160,
+      "start": 492.599,
+      "end": 494.67,
+      "duration": 2.071,
+      "text": "this because now the time has come for"
+    },
+    {
+      "index": 161,
+      "start": 494.68,
+      "end": 497.79,
+      "duration": 3.11,
+      "text": "us to study from gate"
+    },
+    {
+      "index": 162,
+      "start": 497.8,
+      "end": 499.71,
+      "duration": 1.91,
+      "text": "approach even though the gate approach"
+    },
+    {
+      "index": 163,
+      "start": 499.72,
+      "end": 501.309,
+      "duration": 1.589,
+      "text": "is required for us to design to"
+    },
+    {
+      "index": 164,
+      "start": 501.319,
+      "end": 503.23,
+      "duration": 1.911,
+      "text": "understand the problem to minimize and"
+    },
+    {
+      "index": 165,
+      "start": 503.24,
+      "end": 505.23,
+      "duration": 1.99,
+      "text": "then see how it functions"
+    },
+    {
+      "index": 166,
+      "start": 505.24,
+      "end": 506.869,
+      "duration": 1.629,
+      "text": "functional understanding of the problem"
+    },
+    {
+      "index": 167,
+      "start": 506.879,
+      "end": 508.27,
+      "duration": 1.391,
+      "text": "is very important functional"
+    },
+    {
+      "index": 168,
+      "start": 508.28,
+      "end": 509.11,
+      "duration": 0.83,
+      "text": "understanding of the design is very"
+    },
+    {
+      "index": 169,
+      "start": 509.12,
+      "end": 510.67,
+      "duration": 1.55,
+      "text": "important"
+    },
+    {
+      "index": 170,
+      "start": 510.68,
+      "end": 513.19,
+      "duration": 2.51,
+      "text": "but I would rather use IC which are"
+    },
+    {
+      "index": 171,
+      "start": 513.2,
+      "end": 515.469,
+      "duration": 2.269,
+      "text": "larger because there are few of them"
+    },
+    {
+      "index": 172,
+      "start": 515.479,
+      "end": 517.67,
+      "duration": 2.191,
+      "text": "compared"
+    },
+    {
+      "index": 173,
+      "start": 517.68,
+      "end": 520.469,
+      "duration": 2.789,
+      "text": "to a large number of gates very few of"
+    },
+    {
+      "index": 174,
+      "start": 520.479,
+      "end": 523.469,
+      "duration": 2.99,
+      "text": "them for a given performance given specs"
+    },
+    {
+      "index": 175,
+      "start": 523.479,
+      "end": 524.75,
+      "duration": 1.271,
+      "text": "given set of"
+    },
+    {
+      "index": 176,
+      "start": 524.76,
+      "end": 527.19,
+      "duration": 2.43,
+      "text": "specifications if I can decide using"
+    },
+    {
+      "index": 177,
+      "start": 527.2,
+      "end": 530.15,
+      "duration": 2.95,
+      "text": "five five i instead of 100 I I would"
+    },
+    {
+      "index": 178,
+      "start": 530.16,
+      "end": 532.03,
+      "duration": 1.87,
+      "text": "definitely prefer it for the reasons I"
+    },
+    {
+      "index": 179,
+      "start": 532.04,
+      "end": 534.91,
+      "duration": 2.87,
+      "text": "mentioned earlier the cost the size that"
+    },
+    {
+      "index": 180,
+      "start": 534.92,
+      "end": 537.55,
+      "duration": 2.63,
+      "text": "is going to occupy in the PCB finally"
+    },
+    {
+      "index": 181,
+      "start": 537.56,
+      "end": 539.91,
+      "duration": 2.35,
+      "text": "when you make a chip it it has to go as"
+    },
+    {
+      "index": 182,
+      "start": 539.92,
+      "end": 542.35,
+      "duration": 2.43,
+      "text": "a board which gets into our computer and"
+    },
+    {
+      "index": 183,
+      "start": 542.36,
+      "end": 544.31,
+      "duration": 1.95,
+      "text": "other electronic devices and"
+    },
+    {
+      "index": 184,
+      "start": 544.32,
+      "end": 546.829,
+      "duration": 2.509,
+      "text": "appliances especially when it is space"
+    },
+    {
+      "index": 185,
+      "start": 546.839,
+      "end": 548.269,
+      "duration": 1.43,
+      "text": "applications and things like that the"
+    },
+    {
+      "index": 186,
+      "start": 548.279,
+      "end": 553.15,
+      "duration": 4.871,
+      "text": "size is of major importance so I can put"
+    },
+    {
+      "index": 187,
+      "start": 553.16,
+      "end": 555.069,
+      "duration": 1.909,
+      "text": "in a smaller"
+    },
+    {
+      "index": 188,
+      "start": 555.079,
+      "end": 558.509,
+      "duration": 3.43,
+      "text": "area the performance of the circuit"
+    },
+    {
+      "index": 189,
+      "start": 558.519,
+      "end": 561.63,
+      "duration": 3.111,
+      "text": "function system compared to if I had"
+    },
+    {
+      "index": 190,
+      "start": 561.64,
+      "end": 563.829,
+      "duration": 2.189,
+      "text": "done if I had to if I had to do the"
+    },
+    {
+      "index": 191,
+      "start": 563.839,
+      "end": 567.829,
+      "duration": 3.99,
+      "text": "whole thing using functions of less"
+    },
+    {
+      "index": 192,
+      "start": 567.839,
+      "end": 569.99,
+      "duration": 2.151,
+      "text": "complexity so size reduction cost"
+    },
+    {
+      "index": 193,
+      "start": 570.0,
+      "end": 572.069,
+      "duration": 2.069,
+      "text": "reduction already talked about power"
+    },
+    {
+      "index": 194,
+      "start": 572.079,
+      "end": 573.75,
+      "duration": 1.671,
+      "text": "reduction because power is not again"
+    },
+    {
+      "index": 195,
+      "start": 573.76,
+      "end": 575.15,
+      "duration": 1.39,
+      "text": "proportional to function power also"
+    },
+    {
+      "index": 196,
+      "start": 575.16,
+      "end": 577.35,
+      "duration": 2.19,
+      "text": "there's lots of power which wasted in"
+    },
+    {
+      "index": 197,
+      "start": 577.36,
+      "end": 579.35,
+      "duration": 1.99,
+      "text": "switching activity in distribution of"
+    },
+    {
+      "index": 198,
+      "start": 579.36,
+      "end": 583.069,
+      "duration": 3.709,
+      "text": "the the power rails along the"
+    },
+    {
+      "index": 199,
+      "start": 583.079,
+      "end": 585.35,
+      "duration": 2.271,
+      "text": "IC power of course is proportional"
+    },
+    {
+      "index": 200,
+      "start": 585.36,
+      "end": 587.23,
+      "duration": 1.87,
+      "text": "function to a certain extent and the"
+    },
+    {
+      "index": 201,
+      "start": 587.24,
+      "end": 589.55,
+      "duration": 2.31,
+      "text": "switching activity to certain extent but"
+    },
+    {
+      "index": 202,
+      "start": 589.56,
+      "end": 591.389,
+      "duration": 1.829,
+      "text": "there's also some power consumption"
+    },
+    {
+      "index": 203,
+      "start": 591.399,
+      "end": 593.069,
+      "duration": 1.67,
+      "text": "saving in power consumption when number"
+    },
+    {
+      "index": 204,
+      "start": 593.079,
+      "end": 595.59,
+      "duration": 2.511,
+      "text": "of I is small for example when the large"
+    },
+    {
+      "index": 205,
+      "start": 595.6,
+      "end": 597.35,
+      "duration": 1.75,
+      "text": "number of IES they get all switched on"
+    },
+    {
+      "index": 206,
+      "start": 597.36,
+      "end": 598.67,
+      "duration": 1.31,
+      "text": "and Switched Off whether they are used"
+    },
+    {
+      "index": 207,
+      "start": 598.68,
+      "end": 599.87,
+      "duration": 1.19,
+      "text": "or not"
+    },
+    {
+      "index": 208,
+      "start": 599.88,
+      "end": 602.03,
+      "duration": 2.15,
+      "text": "so some of those can"
+    },
+    {
+      "index": 209,
+      "start": 602.04,
+      "end": 606.35,
+      "duration": 4.31,
+      "text": "be they may be a waste of power"
+    },
+    {
+      "index": 210,
+      "start": 606.36,
+      "end": 608.35,
+      "duration": 1.99,
+      "text": "dissipation and finally and most"
+    },
+    {
+      "index": 211,
+      "start": 608.36,
+      "end": 610.35,
+      "duration": 1.99,
+      "text": "importantly is the reliability as I"
+    },
+    {
+      "index": 212,
+      "start": 610.36,
+      "end": 613.829,
+      "duration": 3.469,
+      "text": "always as I said earlier even today what"
+    },
+    {
+      "index": 213,
+      "start": 613.839,
+      "end": 616.55,
+      "duration": 2.711,
+      "text": "I said was if you can connect something"
+    },
+    {
+      "index": 214,
+      "start": 616.56,
+      "end": 619.03,
+      "duration": 2.47,
+      "text": "together with a reliable connection"
+    },
+    {
+      "index": 215,
+      "start": 619.04,
+      "end": 622.43,
+      "duration": 3.39,
+      "text": "connection which is very very"
+    },
+    {
+      "index": 216,
+      "start": 622.44,
+      "end": 625.31,
+      "duration": 2.87,
+      "text": "tight practical practical probability of"
+    },
+    {
+      "index": 217,
+      "start": 625.32,
+      "end": 628.15,
+      "duration": 2.83,
+      "text": "failure is very very small remote almost"
+    },
+    {
+      "index": 218,
+      "start": 628.16,
+      "end": 630.31,
+      "duration": 2.15,
+      "text": "nil that that is assured only in the"
+    },
+    {
+      "index": 219,
+      "start": 630.32,
+      "end": 631.829,
+      "duration": 1.509,
+      "text": "processing because the chemical"
+    },
+    {
+      "index": 220,
+      "start": 631.839,
+      "end": 634.19,
+      "duration": 2.351,
+      "text": "processing and all other processing"
+    },
+    {
+      "index": 221,
+      "start": 634.2,
+      "end": 637.11,
+      "duration": 2.91,
+      "text": "lithography the implantation techniques"
+    },
+    {
+      "index": 222,
+      "start": 637.12,
+      "end": 638.59,
+      "duration": 1.47,
+      "text": "and all those technology which you are"
+    },
+    {
+      "index": 223,
+      "start": 638.6,
+      "end": 641.269,
+      "duration": 2.669,
+      "text": "going to study later on in other courses"
+    },
+    {
+      "index": 224,
+      "start": 641.279,
+      "end": 642.949,
+      "duration": 1.67,
+      "text": "it is not a technology where you put"
+    },
+    {
+      "index": 225,
+      "start": 642.959,
+      "end": 643.99,
+      "duration": 1.031,
+      "text": "together it's not a mechanical"
+    },
+    {
+      "index": 226,
+      "start": 644.0,
+      "end": 645.829,
+      "duration": 1.829,
+      "text": "technology where you put and Fen things"
+    },
+    {
+      "index": 227,
+      "start": 645.839,
+      "end": 648.47,
+      "duration": 2.631,
+      "text": "together sometimes the thing gets couple"
+    },
+    {
+      "index": 228,
+      "start": 648.48,
+      "end": 651.389,
+      "duration": 2.909,
+      "text": "coupling goes or screw gets weaken or"
+    },
+    {
+      "index": 229,
+      "start": 651.399,
+      "end": 653.31,
+      "duration": 1.911,
+      "text": "even an electronic circuitry where we"
+    },
+    {
+      "index": 230,
+      "start": 653.32,
+      "end": 655.87,
+      "duration": 2.55,
+      "text": "put external circuits IC and connect"
+    },
+    {
+      "index": 231,
+      "start": 655.88,
+      "end": 657.15,
+      "duration": 1.27,
+      "text": "them together by"
+    },
+    {
+      "index": 232,
+      "start": 657.16,
+      "end": 661.069,
+      "duration": 3.909,
+      "text": "either wires or by inter circuit board"
+    },
+    {
+      "index": 233,
+      "start": 661.079,
+      "end": 664.47,
+      "duration": 3.391,
+      "text": "channels here it is all bonded together"
+    },
+    {
+      "index": 234,
+      "start": 664.48,
+      "end": 666.47,
+      "duration": 1.99,
+      "text": "as the circuit is made as circuit is"
+    },
+    {
+      "index": 235,
+      "start": 666.48,
+      "end": 668.91,
+      "duration": 2.43,
+      "text": "fabricated so that means if once it is"
+    },
+    {
+      "index": 236,
+      "start": 668.92,
+      "end": 671.389,
+      "duration": 2.469,
+      "text": "tested IC is tested"
+    },
+    {
+      "index": 237,
+      "start": 671.399,
+      "end": 673.87,
+      "duration": 2.471,
+      "text": "function very very remote possib there's"
+    },
+    {
+      "index": 238,
+      "start": 673.88,
+      "end": 675.15,
+      "duration": 1.27,
+      "text": "a very very remote possibility that you"
+    },
+    {
+      "index": 239,
+      "start": 675.16,
+      "end": 676.03,
+      "duration": 0.87,
+      "text": "will"
+    },
+    {
+      "index": 240,
+      "start": 676.04,
+      "end": 678.67,
+      "duration": 2.63,
+      "text": "fail fails occasionally because of a"
+    },
+    {
+      "index": 241,
+      "start": 678.68,
+      "end": 680.23,
+      "duration": 1.55,
+      "text": "condition which was not tested as"
+    },
+    {
+      "index": 242,
+      "start": 680.24,
+      "end": 683.55,
+      "duration": 3.31,
+      "text": "occurred in the operational circuit or"
+    },
+    {
+      "index": 243,
+      "start": 683.56,
+      "end": 685.15,
+      "duration": 1.59,
+      "text": "it could be a radiation or some other"
+    },
+    {
+      "index": 244,
+      "start": 685.16,
+      "end": 686.829,
+      "duration": 1.669,
+      "text": "aspect which has not been considered"
+    },
+    {
+      "index": 245,
+      "start": 686.839,
+      "end": 688.87,
+      "duration": 2.031,
+      "text": "earlier otherwise you connect a wrong"
+    },
+    {
+      "index": 246,
+      "start": 688.88,
+      "end": 691.629,
+      "duration": 2.749,
+      "text": "power Supply and then pump extra current"
+    },
+    {
+      "index": 247,
+      "start": 691.639,
+      "end": 693.79,
+      "duration": 2.151,
+      "text": "much more than what it can handle these"
+    },
+    {
+      "index": 248,
+      "start": 693.8,
+      "end": 696.15,
+      "duration": 2.35,
+      "text": "are these are not uh see radiation and"
+    },
+    {
+      "index": 249,
+      "start": 696.16,
+      "end": 697.47,
+      "duration": 1.31,
+      "text": "an extra power"
+    },
+    {
+      "index": 250,
+      "start": 697.48,
+      "end": 699.59,
+      "duration": 2.11,
+      "text": "dissipation driving it with voltages"
+    },
+    {
+      "index": 251,
+      "start": 699.6,
+      "end": 701.829,
+      "duration": 2.229,
+      "text": "much higher than what you are what you"
+    },
+    {
+      "index": 252,
+      "start": 701.839,
+      "end": 703.389,
+      "duration": 1.55,
+      "text": "designed the circuit for these are not"
+    },
+    {
+      "index": 253,
+      "start": 703.399,
+      "end": 704.79,
+      "duration": 1.391,
+      "text": "considered as failure because of the"
+    },
+    {
+      "index": 254,
+      "start": 704.8,
+      "end": 706.949,
+      "duration": 2.149,
+      "text": "circuit occasionally there a circuit"
+    },
+    {
+      "index": 255,
+      "start": 706.959,
+      "end": 708.629,
+      "duration": 1.67,
+      "text": "failure because of a condition which has"
+    },
+    {
+      "index": 256,
+      "start": 708.639,
+      "end": 711.47,
+      "duration": 2.831,
+      "text": "not been made tested earlier for that"
+    },
+    {
+      "index": 257,
+      "start": 711.48,
+      "end": 712.87,
+      "duration": 1.39,
+      "text": "condition not tested so assume it will"
+    },
+    {
+      "index": 258,
+      "start": 712.88,
+      "end": 715.389,
+      "duration": 2.509,
+      "text": "work for that condition that when it the"
+    },
+    {
+      "index": 259,
+      "start": 715.399,
+      "end": 717.43,
+      "duration": 2.031,
+      "text": "condition really happen I don't know if"
+    },
+    {
+      "index": 260,
+      "start": 717.44,
+      "end": 720.47,
+      "duration": 3.03,
+      "text": "you know but I don't know whether really"
+    },
+    {
+      "index": 261,
+      "start": 720.48,
+      "end": 722.47,
+      "duration": 1.99,
+      "text": "uh following such things a few years a"
+    },
+    {
+      "index": 262,
+      "start": 722.48,
+      "end": 724.59,
+      "duration": 2.11,
+      "text": "few years ago you might have been in"
+    },
+    {
+      "index": 263,
+      "start": 724.6,
+      "end": 726.67,
+      "duration": 2.07,
+      "text": "high school at the time uh there was a"
+    },
+    {
+      "index": 264,
+      "start": 726.68,
+      "end": 728.87,
+      "duration": 2.19,
+      "text": "major problem on"
+    },
+    {
+      "index": 265,
+      "start": 728.88,
+      "end": 730.43,
+      "duration": 1.55,
+      "text": "Pentium"
+    },
+    {
+      "index": 266,
+      "start": 730.44,
+      "end": 733.189,
+      "duration": 2.749,
+      "text": "chips because see they have they go"
+    },
+    {
+      "index": 267,
+      "start": 733.199,
+      "end": 734.99,
+      "duration": 1.791,
+      "text": "through Pentium is in processor micro"
+    },
+    {
+      "index": 268,
+      "start": 735.0,
+      "end": 736.71,
+      "duration": 1.71,
+      "text": "processor by Intel which is used in all"
+    },
+    {
+      "index": 269,
+      "start": 736.72,
+      "end": 738.389,
+      "duration": 1.669,
+      "text": "these computers"
+    },
+    {
+      "index": 270,
+      "start": 738.399,
+      "end": 741.189,
+      "duration": 2.79,
+      "text": "now Pentium"
+    },
+    {
+      "index": 271,
+      "start": 741.199,
+      "end": 743.79,
+      "duration": 2.591,
+      "text": "processors and you they go through a"
+    },
+    {
+      "index": 272,
+      "start": 743.8,
+      "end": 746.03,
+      "duration": 2.23,
+      "text": "very elaborate Des procedure and testing"
+    },
+    {
+      "index": 273,
+      "start": 746.04,
+      "end": 749.389,
+      "duration": 3.349,
+      "text": "procedure and and they suddenly reported"
+    },
+    {
+      "index": 274,
+      "start": 749.399,
+      "end": 751.87,
+      "duration": 2.471,
+      "text": "problems"
+    },
+    {
+      "index": 275,
+      "start": 751.88,
+      "end": 754.91,
+      "duration": 3.03,
+      "text": "failure circuit didn't work it was found"
+    },
+    {
+      "index": 276,
+      "start": 754.92,
+      "end": 757.55,
+      "duration": 2.63,
+      "text": "out that a rare combination"
+    },
+    {
+      "index": 277,
+      "start": 757.56,
+      "end": 763.31,
+      "duration": 5.75,
+      "text": "of certain um um functions which"
+    },
+    {
+      "index": 278,
+      "start": 763.32,
+      "end": 767.31,
+      "duration": 3.99,
+      "text": "is which is not tested had occurred by"
+    },
+    {
+      "index": 279,
+      "start": 767.32,
+      "end": 769.629,
+      "duration": 2.309,
+      "text": "and that appeared that it appeared that"
+    },
+    {
+      "index": 280,
+      "start": 769.639,
+      "end": 773.15,
+      "duration": 3.511,
+      "text": "it was not a very um infrequent thing it"
+    },
+    {
+      "index": 281,
+      "start": 773.16,
+      "end": 775.31,
+      "duration": 2.15,
+      "text": "could occur very frequently in some"
+    },
+    {
+      "index": 282,
+      "start": 775.32,
+      "end": 777.509,
+      "duration": 2.189,
+      "text": "computation so what Intel did was to"
+    },
+    {
+      "index": 283,
+      "start": 777.519,
+      "end": 780.35,
+      "duration": 2.831,
+      "text": "recall all those computers all those"
+    },
+    {
+      "index": 284,
+      "start": 780.36,
+      "end": 783.03,
+      "duration": 2.67,
+      "text": "chips and then they made the corrections"
+    },
+    {
+      "index": 285,
+      "start": 783.04,
+      "end": 785.389,
+      "duration": 2.349,
+      "text": "in their"
+    },
+    {
+      "index": 286,
+      "start": 785.399,
+      "end": 789.79,
+      "duration": 4.391,
+      "text": "uh design and reassure those so but is"
+    },
+    {
+      "index": 287,
+      "start": 789.8,
+      "end": 791.23,
+      "duration": 1.43,
+      "text": "very rare these things otherwise what"
+    },
+    {
+      "index": 288,
+      "start": 791.24,
+      "end": 792.47,
+      "duration": 1.23,
+      "text": "I'm trying to say is the reliability is"
+    },
+    {
+      "index": 289,
+      "start": 792.48,
+      "end": 794.43,
+      "duration": 1.95,
+      "text": "very very high when you do integrated"
+    },
+    {
+      "index": 290,
+      "start": 794.44,
+      "end": 797.11,
+      "duration": 2.67,
+      "text": "circuit rather than discret rather than"
+    },
+    {
+      "index": 291,
+      "start": 797.12,
+      "end": 800.47,
+      "duration": 3.35,
+      "text": "connecting circuits discretly outside"
+    },
+    {
+      "index": 292,
+      "start": 800.48,
+      "end": 803.75,
+      "duration": 3.27,
+      "text": "the chip because of these reasons we"
+    },
+    {
+      "index": 293,
+      "start": 803.76,
+      "end": 807.629,
+      "duration": 3.869,
+      "text": "have to go in for I which can do more"
+    },
+    {
+      "index": 294,
+      "start": 807.639,
+      "end": 810.629,
+      "duration": 2.99,
+      "text": "than a simple G"
+    },
+    {
+      "index": 295,
+      "start": 810.639,
+      "end": 812.87,
+      "duration": 2.231,
+      "text": "function but what the price you pay for"
+    },
+    {
+      "index": 296,
+      "start": 812.88,
+      "end": 815.189,
+      "duration": 2.309,
+      "text": "it the price you pay for is we can never"
+    },
+    {
+      "index": 297,
+      "start": 815.199,
+      "end": 817.99,
+      "duration": 2.791,
+      "text": "optimize for example if I give you a"
+    },
+    {
+      "index": 298,
+      "start": 818.0,
+      "end": 819.23,
+      "duration": 1.23,
+      "text": "circuit"
+    },
+    {
+      "index": 299,
+      "start": 819.24,
+      "end": 822.189,
+      "duration": 2.949,
+      "text": "uh problem of design problem using"
+    },
+    {
+      "index": 300,
+      "start": 822.199,
+      "end": 824.99,
+      "duration": 2.791,
+      "text": "combinational or even sequential logic"
+    },
+    {
+      "index": 301,
+      "start": 825.0,
+      "end": 826.59,
+      "duration": 1.59,
+      "text": "you'll always optimize for the minimum"
+    },
+    {
+      "index": 302,
+      "start": 826.6,
+      "end": 828.59,
+      "duration": 1.99,
+      "text": "number of gates using Cara maps and then"
+    },
+    {
+      "index": 303,
+      "start": 828.6,
+      "end": 830.389,
+      "duration": 1.789,
+      "text": "say this is the best possible"
+    },
+    {
+      "index": 304,
+      "start": 830.399,
+      "end": 832.509,
+      "duration": 2.11,
+      "text": "solution but then here I don't have"
+    },
+    {
+      "index": 305,
+      "start": 832.519,
+      "end": 834.03,
+      "duration": 1.511,
+      "text": "Gates I may I may have come up with a"
+    },
+    {
+      "index": 306,
+      "start": 834.04,
+      "end": 835.99,
+      "duration": 1.95,
+      "text": "gate solution but where are those Gates"
+    },
+    {
+      "index": 307,
+      "start": 836.0,
+      "end": 837.269,
+      "duration": 1.269,
+      "text": "I'm asking you to connect something"
+    },
+    {
+      "index": 308,
+      "start": 837.279,
+      "end": 839.749,
+      "duration": 2.47,
+      "text": "which is not gate"
+    },
+    {
+      "index": 309,
+      "start": 839.759,
+      "end": 841.509,
+      "duration": 1.75,
+      "text": "there are components these components"
+    },
+    {
+      "index": 310,
+      "start": 841.519,
+      "end": 843.15,
+      "duration": 1.631,
+      "text": "will have equivalent gate functions but"
+    },
+    {
+      "index": 311,
+      "start": 843.16,
+      "end": 845.069,
+      "duration": 1.909,
+      "text": "they are not the gates for example I"
+    },
+    {
+      "index": 312,
+      "start": 845.079,
+      "end": 846.189,
+      "duration": 1.11,
+      "text": "cannot"
+    },
+    {
+      "index": 313,
+      "start": 846.199,
+      "end": 849.11,
+      "duration": 2.911,
+      "text": "get suppose I require about half a dozen"
+    },
+    {
+      "index": 314,
+      "start": 849.12,
+      "end": 851.389,
+      "duration": 2.269,
+      "text": "and Gates a few R Gates and"
+    },
+    {
+      "index": 315,
+      "start": 851.399,
+      "end": 854.43,
+      "duration": 3.031,
+      "text": "inverters I may have an IC which may not"
+    },
+    {
+      "index": 316,
+      "start": 854.44,
+      "end": 856.47,
+      "duration": 2.03,
+      "text": "exactly have those"
+    },
+    {
+      "index": 317,
+      "start": 856.48,
+      "end": 858.67,
+      "duration": 2.19,
+      "text": "combinations so I should be able to map"
+    },
+    {
+      "index": 318,
+      "start": 858.68,
+      "end": 861.99,
+      "duration": 3.31,
+      "text": "on the given Hardware my"
+    },
+    {
+      "index": 319,
+      "start": 862.0,
+      "end": 864.829,
+      "duration": 2.829,
+      "text": "function by function that I want to"
+    },
+    {
+      "index": 320,
+      "start": 864.839,
+      "end": 867.67,
+      "duration": 2.831,
+      "text": "implement I should be able to map of"
+    },
+    {
+      "index": 321,
+      "start": 867.68,
+      "end": 869.509,
+      "duration": 1.829,
+      "text": "course when I do the mapping I do it"
+    },
+    {
+      "index": 322,
+      "start": 869.519,
+      "end": 872.11,
+      "duration": 2.591,
+      "text": "most efficient way possible but it will"
+    },
+    {
+      "index": 323,
+      "start": 872.12,
+      "end": 874.269,
+      "duration": 2.149,
+      "text": "not be the efficient way in terms of the"
+    },
+    {
+      "index": 324,
+      "start": 874.279,
+      "end": 879.509,
+      "duration": 5.23,
+      "text": "gate count see I'll be I may be spending"
+    },
+    {
+      "index": 325,
+      "start": 883.03,
+      "end": 883.04,
+      "duration": 0.01,
+      "text": "more functional equivalents of"
+    },
+    {
+      "index": 326,
+      "start": 883.04,
+      "end": 885.43,
+      "duration": 2.39,
+      "text": "gates so I'll call this Loosely more"
+    },
+    {
+      "index": 327,
+      "start": 885.44,
+      "end": 888.629,
+      "duration": 3.189,
+      "text": "gates I may end up using more gates"
+    },
+    {
+      "index": 328,
+      "start": 888.639,
+      "end": 892.43,
+      "duration": 3.791,
+      "text": "to implement a function compared to what"
+    },
+    {
+      "index": 329,
+      "start": 892.44,
+      "end": 895.069,
+      "duration": 2.629,
+      "text": "I could have done I would have done if I"
+    },
+    {
+      "index": 330,
+      "start": 895.079,
+      "end": 897.47,
+      "duration": 2.391,
+      "text": "had all the gates"
+    },
+    {
+      "index": 331,
+      "start": 897.48,
+      "end": 899.31,
+      "duration": 1.83,
+      "text": "available but that is the price you"
+    },
+    {
+      "index": 332,
+      "start": 899.32,
+      "end": 900.67,
+      "duration": 1.35,
+      "text": "paper doesn't matter because I'm now"
+    },
+    {
+      "index": 333,
+      "start": 900.68,
+      "end": 902.15,
+      "duration": 1.47,
+      "text": "using smaller number of I is going to be"
+    },
+    {
+      "index": 334,
+      "start": 902.16,
+      "end": 904.47,
+      "duration": 2.31,
+      "text": "cost effective going to be speed of high"
+    },
+    {
+      "index": 335,
+      "start": 904.48,
+      "end": 907.31,
+      "duration": 2.83,
+      "text": "speed is going to be also less power and"
+    },
+    {
+      "index": 336,
+      "start": 907.32,
+      "end": 909.069,
+      "duration": 1.749,
+      "text": "small area what what does it"
+    },
+    {
+      "index": 337,
+      "start": 909.079,
+      "end": 912.069,
+      "duration": 2.99,
+      "text": "matter in fact if I'm if I'm going to"
+    },
+    {
+      "index": 338,
+      "start": 912.079,
+      "end": 913.87,
+      "duration": 1.791,
+      "text": "use all of them all the"
+    },
+    {
+      "index": 339,
+      "start": 913.88,
+      "end": 917.15,
+      "duration": 3.27,
+      "text": "parameters I'm interested in"
+    },
+    {
+      "index": 340,
+      "start": 917.16,
+      "end": 919.829,
+      "duration": 2.669,
+      "text": "monitoring are going to be better in my"
+    },
+    {
+      "index": 341,
+      "start": 919.839,
+      "end": 921.79,
+      "duration": 1.951,
+      "text": "design how does it matter if you don't"
+    },
+    {
+      "index": 342,
+      "start": 921.8,
+      "end": 923.99,
+      "duration": 2.19,
+      "text": "use the minimum number of gares doesn't"
+    },
+    {
+      "index": 343,
+      "start": 924.0,
+      "end": 926.71,
+      "duration": 2.71,
+      "text": "matter so the mapping of the hardware"
+    },
+    {
+      "index": 344,
+      "start": 926.72,
+      "end": 928.11,
+      "duration": 1.39,
+      "text": "mapping of the given problem in the"
+    },
+    {
+      "index": 345,
+      "start": 928.12,
+      "end": 932.35,
+      "duration": 4.23,
+      "text": "hardware is available"
+    },
+    {
+      "index": 346,
+      "start": 933.749,
+      "end": 933.759,
+      "duration": 0.01,
+      "text": "will not be the most efficient way of"
+    },
+    {
+      "index": 347,
+      "start": 933.759,
+      "end": 935.91,
+      "duration": 2.151,
+      "text": "doing it but we have to do it by"
+    },
+    {
+      "index": 348,
+      "start": 935.92,
+      "end": 938.03,
+      "duration": 2.11,
+      "text": "experience there are certain times"
+    },
+    {
+      "index": 349,
+      "start": 938.04,
+      "end": 939.15,
+      "duration": 1.11,
+      "text": "sometimes there are some tools or"
+    },
+    {
+      "index": 350,
+      "start": 939.16,
+      "end": 941.23,
+      "duration": 2.07,
+      "text": "procedures available for this but not"
+    },
+    {
+      "index": 351,
+      "start": 941.24,
+      "end": 943.47,
+      "duration": 2.23,
+      "text": "always most of the time it's"
+    },
+    {
+      "index": 352,
+      "start": 943.48,
+      "end": 946.069,
+      "duration": 2.589,
+      "text": "experience what they call it huris you"
+    },
+    {
+      "index": 353,
+      "start": 946.079,
+      "end": 947.35,
+      "duration": 1.271,
+      "text": "know"
+    },
+    {
+      "index": 354,
+      "start": 947.36,
+      "end": 950.829,
+      "duration": 3.469,
+      "text": "intuitive this intuitive design okay"
+    },
+    {
+      "index": 355,
+      "start": 950.839,
+      "end": 952.11,
+      "duration": 1.271,
+      "text": "this is what is required this is what"
+    },
+    {
+      "index": 356,
+      "start": 952.12,
+      "end": 954.35,
+      "duration": 2.23,
+      "text": "the available component this is the best"
+    },
+    {
+      "index": 357,
+      "start": 954.36,
+      "end": 957.749,
+      "duration": 3.389,
+      "text": "way to connect it as I said certain time"
+    },
+    {
+      "index": 358,
+      "start": 957.759,
+      "end": 959.47,
+      "duration": 1.711,
+      "text": "sometimes there is a procedure"
+    },
+    {
+      "index": 359,
+      "start": 959.48,
+      "end": 961.67,
+      "duration": 2.19,
+      "text": "many times that may not be procedures"
+    },
+    {
+      "index": 360,
+      "start": 961.68,
+      "end": 962.949,
+      "duration": 1.269,
+      "text": "but still you can once you have an"
+    },
+    {
+      "index": 361,
+      "start": 962.959,
+      "end": 964.829,
+      "duration": 1.87,
+      "text": "experience of Designing you'll have a"
+    },
+    {
+      "index": 362,
+      "start": 964.839,
+      "end": 967.23,
+      "duration": 2.391,
+      "text": "feel for it if you connected this way"
+    },
+    {
+      "index": 363,
+      "start": 967.24,
+      "end": 968.309,
+      "duration": 1.069,
+      "text": "you'll get the better performance"
+    },
+    {
+      "index": 364,
+      "start": 968.319,
+      "end": 970.71,
+      "duration": 2.391,
+      "text": "compared to connect in this way or"
+    },
+    {
+      "index": 365,
+      "start": 970.72,
+      "end": 971.87,
+      "duration": 1.15,
+      "text": "sometimes you may have to do trial and"
+    },
+    {
+      "index": 366,
+      "start": 971.88,
+      "end": 973.389,
+      "duration": 1.509,
+      "text": "error to find the best possible solution"
+    },
+    {
+      "index": 367,
+      "start": 973.399,
+      "end": 975.389,
+      "duration": 1.99,
+      "text": "to that that's also fine with"
+    },
+    {
+      "index": 368,
+      "start": 975.399,
+      "end": 978.67,
+      "duration": 3.271,
+      "text": "us so this approach is called intuitive"
+    },
+    {
+      "index": 369,
+      "start": 978.68,
+      "end": 980.629,
+      "duration": 1.949,
+      "text": "approach or people even call it"
+    },
+    {
+      "index": 370,
+      "start": 980.639,
+      "end": 981.829,
+      "duration": 1.19,
+      "text": "heuristic approach I don't know whether"
+    },
+    {
+      "index": 371,
+      "start": 981.839,
+      "end": 983.189,
+      "duration": 1.35,
+      "text": "you heard of this term heuristic"
+    },
+    {
+      "index": 372,
+      "start": 983.199,
+      "end": 992.23,
+      "duration": 9.031,
+      "text": "approach"
+    },
+    {
+      "index": 373,
+      "start": 997.67,
+      "end": 997.68,
+      "duration": 0.01,
+      "text": "than rather than a fixed procedure of"
+    },
+    {
+      "index": 374,
+      "start": 997.68,
+      "end": 998.99,
+      "duration": 1.31,
+      "text": "course procedure may be there but it's"
+    },
+    {
+      "index": 375,
+      "start": 999.0,
+      "end": 1000.389,
+      "duration": 1.389,
+      "text": "not may not be the efficient procedure"
+    },
+    {
+      "index": 376,
+      "start": 1000.399,
+      "end": 1002.509,
+      "duration": 2.11,
+      "text": "and also and always procedures may not"
+    },
+    {
+      "index": 377,
+      "start": 1002.519,
+      "end": 1006.11,
+      "duration": 3.591,
+      "text": "be there for simpler"
+    },
+    {
+      "index": 378,
+      "start": 1006.12,
+      "end": 1008.629,
+      "duration": 2.509,
+      "text": "ICS there will be procedures again as"
+    },
+    {
+      "index": 379,
+      "start": 1008.639,
+      "end": 1010.99,
+      "duration": 2.351,
+      "text": "you go higher and higher into ICS if you"
+    },
+    {
+      "index": 380,
+      "start": 1011.0,
+      "end": 1013.189,
+      "duration": 2.189,
+      "text": "have a gate count of th"
+    },
+    {
+      "index": 381,
+      "start": 1013.199,
+      "end": 1017.11,
+      "duration": 3.911,
+      "text": "and and above 1,000 gate function my"
+    },
+    {
+      "index": 382,
+      "start": 1017.12,
+      "end": 1018.67,
+      "duration": 1.55,
+      "text": "complexity of the circuit design is also"
+    },
+    {
+      "index": 383,
+      "start": 1018.68,
+      "end": 1021.71,
+      "duration": 3.03,
+      "text": "about 1,000 Gates I'm trying to map this"
+    },
+    {
+      "index": 384,
+      "start": 1021.72,
+      "end": 1024.069,
+      "duration": 2.349,
+      "text": "functional requirement into the hardware"
+    },
+    {
+      "index": 385,
+      "start": 1024.079,
+      "end": 1025.429,
+      "duration": 1.35,
+      "text": "available I have a hardware which is"
+    },
+    {
+      "index": 386,
+      "start": 1025.439,
+      "end": 1027.39,
+      "duration": 1.951,
+      "text": "thand gate equivalent and I have a"
+    },
+    {
+      "index": 387,
+      "start": 1027.4,
+      "end": 1029.429,
+      "duration": 2.029,
+      "text": "function which is th G equalent I have"
+    },
+    {
+      "index": 388,
+      "start": 1029.439,
+      "end": 1031.909,
+      "duration": 2.47,
+      "text": "to map it I have to do a best possible"
+    },
+    {
+      "index": 389,
+      "start": 1031.919,
+      "end": 1033.669,
+      "duration": 1.75,
+      "text": "way of course I can't do it manually I"
+    },
+    {
+      "index": 390,
+      "start": 1033.679,
+      "end": 1035.829,
+      "duration": 2.15,
+      "text": "have to depend on software and the"
+    },
+    {
+      "index": 391,
+      "start": 1035.839,
+      "end": 1039.71,
+      "duration": 3.871,
+      "text": "software limitation software is the if"
+    },
+    {
+      "index": 392,
+      "start": 1039.72,
+      "end": 1041.71,
+      "duration": 1.99,
+      "text": "designers the software designers"
+    },
+    {
+      "index": 393,
+      "start": 1041.72,
+      "end": 1043.99,
+      "duration": 2.27,
+      "text": "limitation whatever he he or she knows"
+    },
+    {
+      "index": 394,
+      "start": 1044.0,
+      "end": 1046.63,
+      "duration": 2.63,
+      "text": "about it and that person may not be the"
+    },
+    {
+      "index": 395,
+      "start": 1046.64,
+      "end": 1047.83,
+      "duration": 1.19,
+      "text": "person who"
+    },
+    {
+      "index": 396,
+      "start": 1047.84,
+      "end": 1049.87,
+      "duration": 2.03,
+      "text": "is knowledgeable in the particular"
+    },
+    {
+      "index": 397,
+      "start": 1049.88,
+      "end": 1051.31,
+      "duration": 1.43,
+      "text": "application you are doing so there may"
+    },
+    {
+      "index": 398,
+      "start": 1051.32,
+      "end": 1054.23,
+      "duration": 2.91,
+      "text": "be a generalized efficient"
+    },
+    {
+      "index": 399,
+      "start": 1054.24,
+      "end": 1057.19,
+      "duration": 2.95,
+      "text": "way you may get but when you do it"
+    },
+    {
+      "index": 400,
+      "start": 1057.2,
+      "end": 1058.789,
+      "duration": 1.589,
+      "text": "yourself by hand you may probably do it"
+    },
+    {
+      "index": 401,
+      "start": 1058.799,
+      "end": 1060.27,
+      "duration": 1.471,
+      "text": "better but these are some of the"
+    },
+    {
+      "index": 402,
+      "start": 1060.28,
+      "end": 1061.909,
+      "duration": 1.629,
+      "text": "problems but these problems"
+    },
+    {
+      "index": 403,
+      "start": 1061.919,
+      "end": 1064.35,
+      "duration": 2.431,
+      "text": "are very very insignificant compared to"
+    },
+    {
+      "index": 404,
+      "start": 1064.36,
+      "end": 1065.909,
+      "duration": 1.549,
+      "text": "the advantages in terms of the cost"
+    },
+    {
+      "index": 405,
+      "start": 1065.919,
+      "end": 1067.07,
+      "duration": 1.151,
+      "text": "saving power"
+    },
+    {
+      "index": 406,
+      "start": 1067.08,
+      "end": 1070.35,
+      "duration": 3.27,
+      "text": "saving Improvement performance and size"
+    },
+    {
+      "index": 407,
+      "start": 1070.36,
+      "end": 1073.63,
+      "duration": 3.27,
+      "text": "saving so with this little introduction"
+    },
+    {
+      "index": 408,
+      "start": 1073.64,
+      "end": 1076.23,
+      "duration": 2.59,
+      "text": "we will talk about first combination"
+    },
+    {
+      "index": 409,
+      "start": 1076.24,
+      "end": 1082.029,
+      "duration": 5.789,
+      "text": "logic"
+    },
+    {
+      "index": 410,
+      "start": 1097.27,
+      "end": 1097.28,
+      "duration": 0.01,
+      "text": "sequential using first MSI we will use"
+    },
+    {
+      "index": 411,
+      "start": 1097.28,
+      "end": 1102.95,
+      "duration": 5.67,
+      "text": "and also we'll later see SSI I mean"
+    },
+    {
+      "index": 412,
+      "start": 1105.31,
+      "end": 1105.32,
+      "duration": 0.01,
+      "text": "LSI medium scale integrated and large"
+    },
+    {
+      "index": 413,
+      "start": 1105.32,
+      "end": 1110.87,
+      "duration": 5.55,
+      "text": "scale integrated circuit"
+    },
+    {
+      "index": 414,
+      "start": 1113.07,
+      "end": 1113.08,
+      "duration": 0.01,
+      "text": "so it's always possible to"
+    },
+    {
+      "index": 415,
+      "start": 1113.08,
+      "end": 1117.07,
+      "duration": 3.99,
+      "text": "map see everything is as I said earlier"
+    },
+    {
+      "index": 416,
+      "start": 1117.08,
+      "end": 1120.51,
+      "duration": 3.43,
+      "text": "several times everything is"
+    },
+    {
+      "index": 417,
+      "start": 1120.52,
+      "end": 1123.11,
+      "duration": 2.59,
+      "text": "Gates whether it's a full adders 4bit"
+    },
+    {
+      "index": 418,
+      "start": 1123.12,
+      "end": 1125.87,
+      "duration": 2.75,
+      "text": "add whether it's"
+    },
+    {
+      "index": 419,
+      "start": 1125.88,
+      "end": 1128.75,
+      "duration": 2.87,
+      "text": "a decoder whether it is a priority"
+    },
+    {
+      "index": 420,
+      "start": 1128.76,
+      "end": 1130.59,
+      "duration": 1.83,
+      "text": "encoder what is what is that we talked"
+    },
+    {
+      "index": 421,
+      "start": 1130.6,
+      "end": 1134.51,
+      "duration": 3.91,
+      "text": "about the parity Checker code converter"
+    },
+    {
+      "index": 422,
+      "start": 1134.52,
+      "end": 1137.75,
+      "duration": 3.23,
+      "text": "it's all Gates and what we have to"
+    },
+    {
+      "index": 423,
+      "start": 1137.76,
+      "end": 1140.39,
+      "duration": 2.63,
+      "text": "optimize also Gates"
+    },
+    {
+      "index": 424,
+      "start": 1140.4,
+      "end": 1142.99,
+      "duration": 2.59,
+      "text": "so this is sort of a common sense tells"
+    },
+    {
+      "index": 425,
+      "start": 1143.0,
+      "end": 1144.63,
+      "duration": 1.63,
+      "text": "us that is these Gates which are"
+    },
+    {
+      "index": 426,
+      "start": 1144.64,
+      "end": 1146.549,
+      "duration": 1.909,
+      "text": "required and these are these gates are"
+    },
+    {
+      "index": 427,
+      "start": 1146.559,
+      "end": 1147.95,
+      "duration": 1.391,
+      "text": "available in this Hardware piece I'm"
+    },
+    {
+      "index": 428,
+      "start": 1147.96,
+      "end": 1149.19,
+      "duration": 1.23,
+      "text": "giving you I'm giving you a hardware"
+    },
+    {
+      "index": 429,
+      "start": 1149.2,
+      "end": 1151.07,
+      "duration": 1.87,
+      "text": "piece in which there are gate functional"
+    },
+    {
+      "index": 430,
+      "start": 1151.08,
+      "end": 1154.07,
+      "duration": 2.99,
+      "text": "equivalent and I'm trying to design a"
+    },
+    {
+      "index": 431,
+      "start": 1154.08,
+      "end": 1156.43,
+      "duration": 2.35,
+      "text": "circuit with get functional equivalent"
+    },
+    {
+      "index": 432,
+      "start": 1156.44,
+      "end": 1158.59,
+      "duration": 2.15,
+      "text": "so how best can I map it and it's not"
+    },
+    {
+      "index": 433,
+      "start": 1158.6,
+      "end": 1160.43,
+      "duration": 1.83,
+      "text": "always that it's possible the best"
+    },
+    {
+      "index": 434,
+      "start": 1160.44,
+      "end": 1161.83,
+      "duration": 1.39,
+      "text": "possible way may not be available to you"
+    },
+    {
+      "index": 435,
+      "start": 1161.84,
+      "end": 1163.43,
+      "duration": 1.59,
+      "text": "because inputs and output should be"
+    },
+    {
+      "index": 436,
+      "start": 1163.44,
+      "end": 1165.11,
+      "duration": 1.67,
+      "text": "available you should be able to Fed in"
+    },
+    {
+      "index": 437,
+      "start": 1165.12,
+      "end": 1167.71,
+      "duration": 2.59,
+      "text": "things you must be able to take them out"
+    },
+    {
+      "index": 438,
+      "start": 1167.72,
+      "end": 1169.669,
+      "duration": 1.949,
+      "text": "so you make come up with the best scheme"
+    },
+    {
+      "index": 439,
+      "start": 1169.679,
+      "end": 1170.99,
+      "duration": 1.311,
+      "text": "but it may not be possible because there"
+    },
+    {
+      "index": 440,
+      "start": 1171.0,
+      "end": 1172.549,
+      "duration": 1.549,
+      "text": "no input pin for that you can't break"
+    },
+    {
+      "index": 441,
+      "start": 1172.559,
+      "end": 1175.19,
+      "duration": 2.631,
+      "text": "open an IC and put a signal inside that"
+    },
+    {
+      "index": 442,
+      "start": 1175.2,
+      "end": 1176.549,
+      "duration": 1.349,
+      "text": "so you have to work with the inputs and"
+    },
+    {
+      "index": 443,
+      "start": 1176.559,
+      "end": 1179.23,
+      "duration": 2.671,
+      "text": "outputs being available to"
+    },
+    {
+      "index": 444,
+      "start": 1179.24,
+      "end": 1183.83,
+      "duration": 4.59,
+      "text": "you okay so first we'll talk about msis"
+    },
+    {
+      "index": 445,
+      "start": 1183.84,
+      "end": 1185.51,
+      "duration": 1.67,
+      "text": "and the first MSI we will talk about"
+    },
+    {
+      "index": 446,
+      "start": 1185.52,
+      "end": 1187.87,
+      "duration": 2.35,
+      "text": "will be all of you have been asking me"
+    },
+    {
+      "index": 447,
+      "start": 1187.88,
+      "end": 1194.07,
+      "duration": 6.19,
+      "text": "for this for so many days what"
+    },
+    {
+      "index": 448,
+      "start": 1194.08,
+      "end": 1195.99,
+      "duration": 1.91,
+      "text": "multiplexes you all thought that I'm"
+    },
+    {
+      "index": 449,
+      "start": 1196.0,
+      "end": 1198.11,
+      "duration": 2.11,
+      "text": "going to finish my course without"
+    },
+    {
+      "index": 450,
+      "start": 1198.12,
+      "end": 1204.07,
+      "duration": 5.95,
+      "text": "teaching you"
+    },
+    {
+      "index": 451,
+      "start": 1206.149,
+      "end": 1206.159,
+      "duration": 0.01,
+      "text": "lexes and then we'll also talk about"
+    },
+    {
+      "index": 452,
+      "start": 1206.159,
+      "end": 1208.71,
+      "duration": 2.551,
+      "text": "decoders and then we'll go to LSI and"
+    },
+    {
+      "index": 453,
+      "start": 1208.72,
+      "end": 1211.669,
+      "duration": 2.949,
+      "text": "we'll talk about Proms and programm"
+    },
+    {
+      "index": 454,
+      "start": 1211.679,
+      "end": 1212.789,
+      "duration": 1.11,
+      "text": "logic"
+    },
+    {
+      "index": 455,
+      "start": 1212.799,
+      "end": 1215.75,
+      "duration": 2.951,
+      "text": "arrays and then probably go to"
+    },
+    {
+      "index": 456,
+      "start": 1215.76,
+      "end": 1218.59,
+      "duration": 2.83,
+      "text": "sequential circuit with counters and"
+    },
+    {
+      "index": 457,
+      "start": 1218.6,
+      "end": 1219.789,
+      "duration": 1.189,
+      "text": "shift register which are already"
+    },
+    {
+      "index": 458,
+      "start": 1219.799,
+      "end": 1221.99,
+      "duration": 2.191,
+      "text": "familiar but then how to use them in a"
+    },
+    {
+      "index": 459,
+      "start": 1222.0,
+      "end": 1224.71,
+      "duration": 2.71,
+      "text": "design okay now what is a multiplexor"
+    },
+    {
+      "index": 460,
+      "start": 1224.72,
+      "end": 1226.11,
+      "duration": 1.39,
+      "text": "basically multiplexor has the name such"
+    },
+    {
+      "index": 461,
+      "start": 1226.12,
+      "end": 1228.71,
+      "duration": 2.59,
+      "text": "as is multiplexes that me have several"
+    },
+    {
+      "index": 462,
+      "start": 1228.72,
+      "end": 1230.47,
+      "duration": 1.75,
+      "text": "PS and you have to select one of them"
+    },
+    {
+      "index": 463,
+      "start": 1230.48,
+      "end": 1231.99,
+      "duration": 1.51,
+      "text": "it's a selector multiplexor is nothing"
+    },
+    {
+      "index": 464,
+      "start": 1232.0,
+      "end": 1232.95,
+      "duration": 0.95,
+      "text": "but a"
+    },
+    {
+      "index": 465,
+      "start": 1232.96,
+      "end": 1236.11,
+      "duration": 3.15,
+      "text": "selector so if I"
+    },
+    {
+      "index": 466,
+      "start": 1236.12,
+      "end": 1239.59,
+      "duration": 3.47,
+      "text": "have a hardware which I call"
+    },
+    {
+      "index": 467,
+      "start": 1239.6,
+      "end": 1242.47,
+      "duration": 2.87,
+      "text": "multiplexer for mux for"
+    },
+    {
+      "index": 468,
+      "start": 1242.48,
+      "end": 1247.549,
+      "duration": 5.069,
+      "text": "short they this they call it"
+    },
+    {
+      "index": 469,
+      "start": 1250.59,
+      "end": 1250.6,
+      "duration": 0.01,
+      "text": "Max now have several"
+    },
+    {
+      "index": 470,
+      "start": 1250.6,
+      "end": 1253.19,
+      "duration": 2.59,
+      "text": "inputs let us say i"
+    },
+    {
+      "index": 471,
+      "start": 1253.2,
+      "end": 1257.71,
+      "duration": 4.51,
+      "text": "z i1 I2 I3 are the three inputs and at"
+    },
+    {
+      "index": 472,
+      "start": 1257.72,
+      "end": 1258.95,
+      "duration": 1.23,
+      "text": "any given time I want one of these"
+    },
+    {
+      "index": 473,
+      "start": 1258.96,
+      "end": 1262.47,
+      "duration": 3.51,
+      "text": "outputs I want F to be either i z or i1"
+    },
+    {
+      "index": 474,
+      "start": 1262.48,
+      "end": 1265.789,
+      "duration": 3.309,
+      "text": "or I2 or I3 based on my"
+    },
+    {
+      "index": 475,
+      "start": 1265.799,
+      "end": 1267.95,
+      "duration": 2.151,
+      "text": "requirement so I need to connect one of"
+    },
+    {
+      "index": 476,
+      "start": 1267.96,
+      "end": 1270.029,
+      "duration": 2.069,
+      "text": "these inputs to the output as"
+    },
+    {
+      "index": 477,
+      "start": 1270.039,
+      "end": 1273.029,
+      "duration": 2.99,
+      "text": "required that means I need some control"
+    },
+    {
+      "index": 478,
+      "start": 1273.039,
+      "end": 1275.71,
+      "duration": 2.671,
+      "text": "when do I connect I3 when do you connect"
+    },
+    {
+      "index": 479,
+      "start": 1275.72,
+      "end": 1278.83,
+      "duration": 3.11,
+      "text": "I2 so that means I need signals which"
+    },
+    {
+      "index": 480,
+      "start": 1278.84,
+      "end": 1287.51,
+      "duration": 8.67,
+      "text": "are called control signals or"
+    },
+    {
+      "index": 481,
+      "start": 1289.87,
+      "end": 1289.88,
+      "duration": 0.01,
+      "text": "selectors and number of selectors will"
+    },
+    {
+      "index": 482,
+      "start": 1289.88,
+      "end": 1292.31,
+      "duration": 2.43,
+      "text": "be based on the number of inputs depends"
+    },
+    {
+      "index": 483,
+      "start": 1292.32,
+      "end": 1294.35,
+      "duration": 2.03,
+      "text": "on the number of inputs if you have four"
+    },
+    {
+      "index": 484,
+      "start": 1294.36,
+      "end": 1296.51,
+      "duration": 2.15,
+      "text": "inputs and one of them has to be"
+    },
+    {
+      "index": 485,
+      "start": 1296.52,
+      "end": 1299.87,
+      "duration": 3.35,
+      "text": "output how many selectors do we need two"
+    },
+    {
+      "index": 486,
+      "start": 1299.88,
+      "end": 1302.07,
+      "duration": 2.19,
+      "text": "because two selectors can have four"
+    },
+    {
+      "index": 487,
+      "start": 1302.08,
+      "end": 1303.99,
+      "duration": 1.91,
+      "text": "combinations and each one of those"
+    },
+    {
+      "index": 488,
+      "start": 1304.0,
+      "end": 1306.83,
+      "duration": 2.83,
+      "text": "combinations can connect the given input"
+    },
+    {
+      "index": 489,
+      "start": 1306.84,
+      "end": 1308.549,
+      "duration": 1.709,
+      "text": "to the output so I'll call these"
+    },
+    {
+      "index": 490,
+      "start": 1308.559,
+      "end": 1313.149,
+      "duration": 4.59,
+      "text": "selectors S1 and"
+    },
+    {
+      "index": 491,
+      "start": 1316.63,
+      "end": 1316.64,
+      "duration": 0.01,
+      "text": "s0 this one s0 the selector"
+    },
+    {
+      "index": 492,
+      "start": 1316.64,
+      "end": 1319.269,
+      "duration": 2.629,
+      "text": "signals i0 i1 I2 I three are the input"
+    },
+    {
+      "index": 493,
+      "start": 1319.279,
+      "end": 1321.95,
+      "duration": 2.671,
+      "text": "signals and I F is the output signal so"
+    },
+    {
+      "index": 494,
+      "start": 1321.96,
+      "end": 1324.07,
+      "duration": 2.11,
+      "text": "the function description of the"
+    },
+    {
+      "index": 495,
+      "start": 1324.08,
+      "end": 1328.149,
+      "duration": 4.069,
+      "text": "multiplexor"
+    },
+    {
+      "index": 496,
+      "start": 1330.59,
+      "end": 1330.6,
+      "duration": 0.01,
+      "text": "is f"
+    },
+    {
+      "index": 497,
+      "start": 1330.6,
+      "end": 1333.909,
+      "duration": 3.309,
+      "text": "is i"
+    },
+    {
+      "index": 498,
+      "start": 1335.95,
+      "end": 1335.96,
+      "duration": 0.01,
+      "text": "z I'm"
+    },
+    {
+      "index": 499,
+      "start": 1335.96,
+      "end": 1343.63,
+      "duration": 7.67,
+      "text": "sorry S1 bar s0 bar i z S1 bar s0"
+    },
+    {
+      "index": 500,
+      "start": 1343.64,
+      "end": 1347.98,
+      "duration": 4.34,
+      "text": "i1 S1 s0 bar"
+    },
+    {
+      "index": 501,
+      "start": 1347.99,
+      "end": 1349.99,
+      "duration": 2.0,
+      "text": "[Music]"
+    },
+    {
+      "index": 502,
+      "start": 1350.0,
+      "end": 1354.87,
+      "duration": 4.87,
+      "text": "I2 S1 S2 I3 that means if I make both"
+    },
+    {
+      "index": 503,
+      "start": 1354.88,
+      "end": 1356.47,
+      "duration": 1.59,
+      "text": "these input 0 0 both these selected"
+    },
+    {
+      "index": 504,
+      "start": 1356.48,
+      "end": 1360.549,
+      "duration": 4.069,
+      "text": "input 0 0 f gets connected to i"
+    },
+    {
+      "index": 505,
+      "start": 1360.559,
+      "end": 1363.07,
+      "duration": 2.511,
+      "text": "z so it's a selection process that's all"
+    },
+    {
+      "index": 506,
+      "start": 1363.08,
+      "end": 1365.029,
+      "duration": 1.949,
+      "text": "I have several signals coming into the"
+    },
+    {
+      "index": 507,
+      "start": 1365.039,
+      "end": 1366.909,
+      "duration": 1.87,
+      "text": "input and one of them has to be"
+    },
+    {
+      "index": 508,
+      "start": 1366.919,
+      "end": 1369.39,
+      "duration": 2.471,
+      "text": "connected to the output and which one"
+    },
+    {
+      "index": 509,
+      "start": 1369.4,
+      "end": 1371.51,
+      "duration": 2.11,
+      "text": "will should be connected depends on the"
+    },
+    {
+      "index": 510,
+      "start": 1371.52,
+      "end": 1374.549,
+      "duration": 3.029,
+      "text": "combination of the and s0 so if it is 0"
+    },
+    {
+      "index": 511,
+      "start": 1374.559,
+      "end": 1378.19,
+      "duration": 3.631,
+      "text": "0 i z will go through 01 i1 will go"
+    },
+    {
+      "index": 512,
+      "start": 1378.2,
+      "end": 1380.11,
+      "duration": 1.91,
+      "text": "through one Z I2 will go through 1 one"
+    },
+    {
+      "index": 513,
+      "start": 1380.12,
+      "end": 1382.59,
+      "duration": 2.47,
+      "text": "I3 will go"
+    },
+    {
+      "index": 514,
+      "start": 1382.6,
+      "end": 1384.669,
+      "duration": 2.069,
+      "text": "through can you think of an application"
+    },
+    {
+      "index": 515,
+      "start": 1384.679,
+      "end": 1389.83,
+      "duration": 5.151,
+      "text": "for this type of"
+    },
+    {
+      "index": 516,
+      "start": 1392.909,
+      "end": 1392.919,
+      "duration": 0.01,
+      "text": "circuit somebody said something"
+    },
+    {
+      "index": 517,
+      "start": 1392.919,
+      "end": 1396.63,
+      "duration": 3.711,
+      "text": "here yeah it's right telephone"
+    },
+    {
+      "index": 518,
+      "start": 1396.64,
+      "end": 1399.269,
+      "duration": 2.629,
+      "text": "exchange as an example I have four lines"
+    },
+    {
+      "index": 519,
+      "start": 1399.279,
+      "end": 1400.87,
+      "duration": 1.591,
+      "text": "and I have only one of the four"
+    },
+    {
+      "index": 520,
+      "start": 1400.88,
+      "end": 1402.35,
+      "duration": 1.47,
+      "text": "subscribers and only one line is"
+    },
+    {
+      "index": 521,
+      "start": 1402.36,
+      "end": 1405.11,
+      "duration": 2.75,
+      "text": "connected this may be the your local"
+    },
+    {
+      "index": 522,
+      "start": 1405.12,
+      "end": 1407.63,
+      "duration": 2.51,
+      "text": "exchange and this may be my my local"
+    },
+    {
+      "index": 523,
+      "start": 1407.64,
+      "end": 1409.07,
+      "duration": 1.43,
+      "text": "there are two villages"
+    },
+    {
+      "index": 524,
+      "start": 1409.08,
+      "end": 1410.63,
+      "duration": 1.55,
+      "text": "of course I'm making a problem too"
+    },
+    {
+      "index": 525,
+      "start": 1410.64,
+      "end": 1414.59,
+      "duration": 3.95,
+      "text": "trivial but just to give you an idea so"
+    },
+    {
+      "index": 526,
+      "start": 1414.6,
+      "end": 1416.75,
+      "duration": 2.15,
+      "text": "I have four subscribers in"
+    },
+    {
+      "index": 527,
+      "start": 1416.76,
+      "end": 1419.47,
+      "duration": 2.71,
+      "text": "this town and four other subscribers in"
+    },
+    {
+      "index": 528,
+      "start": 1419.48,
+      "end": 1422.51,
+      "duration": 3.03,
+      "text": "this town and I need to only one person"
+    },
+    {
+      "index": 529,
+      "start": 1422.52,
+      "end": 1425.63,
+      "duration": 3.11,
+      "text": "can talk at a time so I have only one"
+    },
+    {
+      "index": 530,
+      "start": 1425.64,
+      "end": 1428.47,
+      "duration": 2.83,
+      "text": "line coming from this town to this town"
+    },
+    {
+      "index": 531,
+      "start": 1428.48,
+      "end": 1431.63,
+      "duration": 3.15,
+      "text": "so depending on which person is"
+    },
+    {
+      "index": 532,
+      "start": 1431.64,
+      "end": 1433.789,
+      "duration": 2.149,
+      "text": "dialing that person will have a code and"
+    },
+    {
+      "index": 533,
+      "start": 1433.799,
+      "end": 1435.59,
+      "duration": 1.791,
+      "text": "that signal will go through there in the"
+    },
+    {
+      "index": 534,
+      "start": 1435.6,
+      "end": 1436.789,
+      "duration": 1.189,
+      "text": "other side we have what is known as a"
+    },
+    {
+      "index": 535,
+      "start": 1436.799,
+      "end": 1438.909,
+      "duration": 2.11,
+      "text": "reverse of this operation"
+    },
+    {
+      "index": 536,
+      "start": 1438.919,
+      "end": 1441.11,
+      "duration": 2.191,
+      "text": "naturally it will be called a d"
+    },
+    {
+      "index": 537,
+      "start": 1441.12,
+      "end": 1442.87,
+      "duration": 1.75,
+      "text": "Multiplex when you have a multiplex so I"
+    },
+    {
+      "index": 538,
+      "start": 1442.88,
+      "end": 1445.269,
+      "duration": 2.389,
+      "text": "will have one input and four outputs and"
+    },
+    {
+      "index": 539,
+      "start": 1445.279,
+      "end": 1447.19,
+      "duration": 1.911,
+      "text": "which one is"
+    },
+    {
+      "index": 540,
+      "start": 1447.2,
+      "end": 1449.35,
+      "duration": 2.15,
+      "text": "connected it depends on the selection"
+    },
+    {
+      "index": 541,
+      "start": 1449.36,
+      "end": 1451.95,
+      "duration": 2.59,
+      "text": "you make this an example of a selection"
+    },
+    {
+      "index": 542,
+      "start": 1451.96,
+      "end": 1454.43,
+      "duration": 2.47,
+      "text": "there are several locations in digital"
+    },
+    {
+      "index": 543,
+      "start": 1454.44,
+      "end": 1457.43,
+      "duration": 2.99,
+      "text": "signal in digital system design where"
+    },
+    {
+      "index": 544,
+      "start": 1457.44,
+      "end": 1458.909,
+      "duration": 1.469,
+      "text": "there may be several signals and you may"
+    },
+    {
+      "index": 545,
+      "start": 1458.919,
+      "end": 1461.23,
+      "duration": 2.311,
+      "text": "have to select one of those"
+    },
+    {
+      "index": 546,
+      "start": 1461.24,
+      "end": 1463.99,
+      "duration": 2.75,
+      "text": "signals to be applied to a particular"
+    },
+    {
+      "index": 547,
+      "start": 1464.0,
+      "end": 1466.31,
+      "duration": 2.31,
+      "text": "circuit so there are several signals and"
+    },
+    {
+      "index": 548,
+      "start": 1466.32,
+      "end": 1468.029,
+      "duration": 1.709,
+      "text": "only one of those you have to select to"
+    },
+    {
+      "index": 549,
+      "start": 1468.039,
+      "end": 1473.149,
+      "duration": 5.11,
+      "text": "be app a particular circuit use a"
+    },
+    {
+      "index": 550,
+      "start": 1475.75,
+      "end": 1475.76,
+      "duration": 0.01,
+      "text": "multiplexor now this is a very simple uh"
+    },
+    {
+      "index": 551,
+      "start": 1475.76,
+      "end": 1477.63,
+      "duration": 1.87,
+      "text": "this is a combination logic isn't it f"
+    },
+    {
+      "index": 552,
+      "start": 1477.64,
+      "end": 1480.789,
+      "duration": 3.149,
+      "text": "is so if I don't have this this"
+    },
+    {
+      "index": 553,
+      "start": 1480.799,
+      "end": 1483.029,
+      "duration": 2.23,
+      "text": "available as an IC I can go to the"
+    },
+    {
+      "index": 554,
+      "start": 1483.039,
+      "end": 1485.99,
+      "duration": 2.951,
+      "text": "electronic store and buy this as for a"
+    },
+    {
+      "index": 555,
+      "start": 1486.0,
+      "end": 1487.35,
+      "duration": 1.35,
+      "text": "multiplexor of course you can't say give"
+    },
+    {
+      "index": 556,
+      "start": 1487.36,
+      "end": 1489.83,
+      "duration": 2.47,
+      "text": "me a multiplexor you tell me tell"
+    },
+    {
+      "index": 557,
+      "start": 1489.84,
+      "end": 1492.269,
+      "duration": 2.429,
+      "text": "him how many inputs and how many outputs"
+    },
+    {
+      "index": 558,
+      "start": 1492.279,
+      "end": 1495.43,
+      "duration": 3.151,
+      "text": "so it's called 4 to1"
+    },
+    {
+      "index": 559,
+      "start": 1497.269,
+      "end": 1497.279,
+      "duration": 0.01,
+      "text": "multiplexer you don't have to tell how"
+    },
+    {
+      "index": 560,
+      "start": 1497.279,
+      "end": 1499.43,
+      "duration": 2.151,
+      "text": "many selectors because it is fixed you"
+    },
+    {
+      "index": 561,
+      "start": 1499.44,
+      "end": 1502.07,
+      "duration": 2.63,
+      "text": "say 4 to one naturally selected is two"
+    },
+    {
+      "index": 562,
+      "start": 1502.08,
+      "end": 1503.95,
+      "duration": 1.87,
+      "text": "or I can have 2 to one I can have 2 to"
+    },
+    {
+      "index": 563,
+      "start": 1503.96,
+      "end": 1504.71,
+      "duration": 0.75,
+      "text": "One"
+    },
+    {
+      "index": 564,
+      "start": 1504.72,
+      "end": 1508.669,
+      "duration": 3.949,
+      "text": "Max I can have 4 to One Max I can have 8"
+    },
+    {
+      "index": 565,
+      "start": 1508.679,
+      "end": 1509.83,
+      "duration": 1.151,
+      "text": "to One"
+    },
+    {
+      "index": 566,
+      "start": 1509.84,
+      "end": 1512.31,
+      "duration": 2.47,
+      "text": "Max have 16 to One"
+    },
+    {
+      "index": 567,
+      "start": 1512.32,
+      "end": 1515.47,
+      "duration": 3.15,
+      "text": "Max Beyond this even 16 to one sometimes"
+    },
+    {
+      "index": 568,
+      "start": 1515.48,
+      "end": 1518.149,
+      "duration": 2.669,
+      "text": "will not be"
+    },
+    {
+      "index": 569,
+      "start": 1520.149,
+      "end": 1520.159,
+      "duration": 0.01,
+      "text": "available but beyond that you have to"
+    },
+    {
+      "index": 570,
+      "start": 1520.159,
+      "end": 1521.95,
+      "duration": 1.791,
+      "text": "make your own Maxes that is possible"
+    },
+    {
+      "index": 571,
+      "start": 1521.96,
+      "end": 1524.35,
+      "duration": 2.39,
+      "text": "having a smaller Max you can build a"
+    },
+    {
+      "index": 572,
+      "start": 1524.36,
+      "end": 1528.47,
+      "duration": 4.11,
+      "text": "larger Max you can mix you can connect a"
+    },
+    {
+      "index": 573,
+      "start": 1528.48,
+      "end": 1529.99,
+      "duration": 1.51,
+      "text": "tree of"
+    },
+    {
+      "index": 574,
+      "start": 1530.0,
+      "end": 1533.87,
+      "duration": 3.87,
+      "text": "multiplexers to realize larger"
+    },
+    {
+      "index": 575,
+      "start": 1533.88,
+      "end": 1536.269,
+      "duration": 2.389,
+      "text": "Maxes but then even though it's"
+    },
+    {
+      "index": 576,
+      "start": 1536.279,
+      "end": 1537.59,
+      "duration": 1.311,
+      "text": "available if it's not available you are"
+    },
+    {
+      "index": 577,
+      "start": 1537.6,
+      "end": 1542.51,
+      "duration": 4.91,
+      "text": "only G you are suppose you di hard G"
+    },
+    {
+      "index": 578,
+      "start": 1542.52,
+      "end": 1544.909,
+      "duration": 2.389,
+      "text": "utilizer I don't want anything as G"
+    },
+    {
+      "index": 579,
+      "start": 1544.919,
+      "end": 1546.389,
+      "duration": 1.47,
+      "text": "that's all I can use and please don't"
+    },
+    {
+      "index": 580,
+      "start": 1546.399,
+      "end": 1549.35,
+      "duration": 2.951,
+      "text": "give me a multiplexer can you build one"
+    },
+    {
+      "index": 581,
+      "start": 1549.36,
+      "end": 1551.59,
+      "duration": 2.23,
+      "text": "of course because this is a function and"
+    },
+    {
+      "index": 582,
+      "start": 1551.6,
+      "end": 1553.47,
+      "duration": 1.87,
+      "text": "you know how to implement this function"
+    },
+    {
+      "index": 583,
+      "start": 1553.48,
+      "end": 1555.87,
+      "duration": 2.39,
+      "text": "how many gates do you need for this four"
+    },
+    {
+      "index": 584,
+      "start": 1555.88,
+      "end": 1558.029,
+      "duration": 2.149,
+      "text": "and gates with three inputs each one R"
+    },
+    {
+      "index": 585,
+      "start": 1558.039,
+      "end": 1561.51,
+      "duration": 3.471,
+      "text": "gate with four inputs and then I need to"
+    },
+    {
+      "index": 586,
+      "start": 1561.52,
+      "end": 1564.63,
+      "duration": 3.11,
+      "text": "have two inverters for S1 and"
+    },
+    {
+      "index": 587,
+      "start": 1564.64,
+      "end": 1582.11,
+      "duration": 17.47,
+      "text": "s0 so I can have for"
+    },
+    {
+      "index": 588,
+      "start": 1619.149,
+      "end": 1619.159,
+      "duration": 0.01,
+      "text": "F I'm not showing all this connections"
+    },
+    {
+      "index": 589,
+      "start": 1619.159,
+      "end": 1621.51,
+      "duration": 2.351,
+      "text": "it just sort of clutter the drawing you"
+    },
+    {
+      "index": 590,
+      "start": 1621.52,
+      "end": 1623.51,
+      "duration": 1.99,
+      "text": "know what I mean so for this G for"
+    },
+    {
+      "index": 591,
+      "start": 1623.52,
+      "end": 1625.909,
+      "duration": 2.389,
+      "text": "example I need to feed"
+    },
+    {
+      "index": 592,
+      "start": 1625.919,
+      "end": 1629.23,
+      "duration": 3.311,
+      "text": "this this S one with the inverter this s"
+    },
+    {
+      "index": 593,
+      "start": 1629.24,
+      "end": 1631.669,
+      "duration": 2.429,
+      "text": "z with an inverter then like that you"
+    },
+    {
+      "index": 594,
+      "start": 1631.679,
+      "end": 1633.07,
+      "duration": 1.391,
+      "text": "have to you can finish you can complete"
+    },
+    {
+      "index": 595,
+      "start": 1633.08,
+      "end": 1635.47,
+      "duration": 2.39,
+      "text": "the drawing I'm not showing it because"
+    },
+    {
+      "index": 596,
+      "start": 1635.48,
+      "end": 1639.63,
+      "duration": 4.15,
+      "text": "it becomes very messy Affair and"
+    },
+    {
+      "index": 597,
+      "start": 1639.64,
+      "end": 1642.75,
+      "duration": 3.11,
+      "text": "Bor but instead of buying this four"
+    },
+    {
+      "index": 598,
+      "start": 1642.76,
+      "end": 1646.95,
+      "duration": 4.19,
+      "text": "Gates three input four four uh and gates"
+    },
+    {
+      "index": 599,
+      "start": 1646.96,
+      "end": 1650.549,
+      "duration": 3.589,
+      "text": "with three input h two inverters and one"
+    },
+    {
+      "index": 600,
+      "start": 1650.559,
+      "end": 1653.47,
+      "duration": 2.911,
+      "text": "argate which will be how many"
+    },
+    {
+      "index": 601,
+      "start": 1653.48,
+      "end": 1655.789,
+      "duration": 2.309,
+      "text": "I because argate and andate will not"
+    },
+    {
+      "index": 602,
+      "start": 1655.799,
+      "end": 1658.269,
+      "duration": 2.47,
+      "text": "exist in the same IC naturally I need to"
+    },
+    {
+      "index": 603,
+      "start": 1658.279,
+      "end": 1661.71,
+      "duration": 3.431,
+      "text": "buy one IC for this and Gates more than"
+    },
+    {
+      "index": 604,
+      "start": 1661.72,
+      "end": 1664.43,
+      "duration": 2.71,
+      "text": "one and gate can exist in one IC but"
+    },
+    {
+      "index": 605,
+      "start": 1664.44,
+      "end": 1668.59,
+      "duration": 4.15,
+      "text": "then generally it is four two input"
+    },
+    {
+      "index": 606,
+      "start": 1668.6,
+      "end": 1671.95,
+      "duration": 3.35,
+      "text": "Gates or three three input"
+    },
+    {
+      "index": 607,
+      "start": 1671.96,
+      "end": 1674.99,
+      "duration": 3.03,
+      "text": "Gates so I may have to buy two of"
+    },
+    {
+      "index": 608,
+      "start": 1675.0,
+      "end": 1677.549,
+      "duration": 2.549,
+      "text": "those two three input and Gates I need"
+    },
+    {
+      "index": 609,
+      "start": 1677.559,
+      "end": 1678.95,
+      "duration": 1.391,
+      "text": "to buy"
+    },
+    {
+      "index": 610,
+      "start": 1678.96,
+      "end": 1681.11,
+      "duration": 2.15,
+      "text": "combination not three in brand Gates"
+    },
+    {
+      "index": 611,
+      "start": 1681.12,
+      "end": 1682.47,
+      "duration": 1.35,
+      "text": "it's a package"
+    },
+    {
+      "index": 612,
+      "start": 1682.48,
+      "end": 1684.75,
+      "duration": 2.27,
+      "text": "usually like an inverter doesn't come as"
+    },
+    {
+      "index": 613,
+      "start": 1684.76,
+      "end": 1686.389,
+      "duration": 1.629,
+      "text": "single I can't buy an inverter I have to"
+    },
+    {
+      "index": 614,
+      "start": 1686.399,
+      "end": 1689.43,
+      "duration": 3.031,
+      "text": "buy a six inverters one package of"
+    },
+    {
+      "index": 615,
+      "start": 1689.44,
+      "end": 1692.07,
+      "duration": 2.63,
+      "text": "inverter will consist of six inverters"
+    },
+    {
+      "index": 616,
+      "start": 1692.08,
+      "end": 1693.83,
+      "duration": 1.75,
+      "text": "one package of landgate will contain two"
+    },
+    {
+      "index": 617,
+      "start": 1693.84,
+      "end": 1696.31,
+      "duration": 2.47,
+      "text": "input landgate will contain four of them"
+    },
+    {
+      "index": 618,
+      "start": 1696.32,
+      "end": 1699.549,
+      "duration": 3.229,
+      "text": "quad"
+    },
+    {
+      "index": 619,
+      "start": 1702.549,
+      "end": 1702.559,
+      "duration": 0.01,
+      "text": "package like this uh"
+    },
+    {
+      "index": 620,
+      "start": 1702.559,
+      "end": 1706.47,
+      "duration": 3.911,
+      "text": "similarly and Gates will come two inputs"
+    },
+    {
+      "index": 621,
+      "start": 1706.48,
+      "end": 1708.87,
+      "duration": 2.39,
+      "text": "one output four of them in one package"
+    },
+    {
+      "index": 622,
+      "start": 1708.88,
+      "end": 1711.149,
+      "duration": 2.269,
+      "text": "but then there are three inputs so I"
+    },
+    {
+      "index": 623,
+      "start": 1711.159,
+      "end": 1714.07,
+      "duration": 2.911,
+      "text": "need to buy two of them so two packages"
+    },
+    {
+      "index": 624,
+      "start": 1714.08,
+      "end": 1716.95,
+      "duration": 2.87,
+      "text": "of three input and Gates one package of"
+    },
+    {
+      "index": 625,
+      "start": 1716.96,
+      "end": 1719.07,
+      "duration": 2.11,
+      "text": "argat four input"
+    },
+    {
+      "index": 626,
+      "start": 1719.08,
+      "end": 1721.63,
+      "duration": 2.55,
+      "text": "argat one package of inverters I need"
+    },
+    {
+      "index": 627,
+      "start": 1721.64,
+      "end": 1723.75,
+      "duration": 2.11,
+      "text": "how many I"
+    },
+    {
+      "index": 628,
+      "start": 1723.76,
+      "end": 1725.509,
+      "duration": 1.749,
+      "text": "is"
+    },
+    {
+      "index": 629,
+      "start": 1725.519,
+      "end": 1729.909,
+      "duration": 4.39,
+      "text": "total four here it is one this is MSI"
+    },
+    {
+      "index": 630,
+      "start": 1729.919,
+      "end": 1732.19,
+      "duration": 2.271,
+      "text": "get function wise it is only how many 1"
+    },
+    {
+      "index": 631,
+      "start": 1732.2,
+      "end": 1734.11,
+      "duration": 1.91,
+      "text": "2 3 4 5 but then you don't count like"
+    },
+    {
+      "index": 632,
+      "start": 1734.12,
+      "end": 1736.269,
+      "duration": 2.149,
+      "text": "this inputs two input one output is"
+    },
+    {
+      "index": 633,
+      "start": 1736.279,
+      "end": 1737.71,
+      "duration": 1.431,
+      "text": "considered as a gate function so I may"
+    },
+    {
+      "index": 634,
+      "start": 1737.72,
+      "end": 1738.83,
+      "duration": 1.11,
+      "text": "have to"
+    },
+    {
+      "index": 635,
+      "start": 1738.84,
+      "end": 1743.59,
+      "duration": 4.75,
+      "text": "1 2 3 4 5 add some more numbers for the"
+    },
+    {
+      "index": 636,
+      "start": 1743.6,
+      "end": 1745.23,
+      "duration": 1.63,
+      "text": "inputs more inputs and inverters"
+    },
+    {
+      "index": 637,
+      "start": 1745.24,
+      "end": 1747.149,
+      "duration": 1.909,
+      "text": "everything so but get equivalent"
+    },
+    {
+      "index": 638,
+      "start": 1747.159,
+      "end": 1748.83,
+      "duration": 1.671,
+      "text": "approximately don't worry too much about"
+    },
+    {
+      "index": 639,
+      "start": 1748.84,
+      "end": 1750.23,
+      "duration": 1.39,
+      "text": "these"
+    },
+    {
+      "index": 640,
+      "start": 1750.24,
+      "end": 1753.029,
+      "duration": 2.789,
+      "text": "calculations I'm not going to ask you to"
+    },
+    {
+      "index": 641,
+      "start": 1753.039,
+      "end": 1755.31,
+      "duration": 2.271,
+      "text": "find out the calculation equivalent and"
+    },
+    {
+      "index": 642,
+      "start": 1755.32,
+      "end": 1757.59,
+      "duration": 2.27,
+      "text": "gates for a gate function for a given"
+    },
+    {
+      "index": 643,
+      "start": 1757.6,
+      "end": 1759.83,
+      "duration": 2.23,
+      "text": "function or anything like that but but T"
+    },
+    {
+      "index": 644,
+      "start": 1759.84,
+      "end": 1763.149,
+      "duration": 3.309,
+      "text": "Gates put together in this one package"
+    },
+    {
+      "index": 645,
+      "start": 1763.159,
+      "end": 1765.23,
+      "duration": 2.071,
+      "text": "does the same job with all the"
+    },
+    {
+      "index": 646,
+      "start": 1765.24,
+      "end": 1766.71,
+      "duration": 1.47,
+      "text": "advantages listed earlier in this"
+    },
+    {
+      "index": 647,
+      "start": 1766.72,
+      "end": 1769.029,
+      "duration": 2.309,
+      "text": "lecture about the price being small and"
+    },
+    {
+      "index": 648,
+      "start": 1769.039,
+      "end": 1771.23,
+      "duration": 2.191,
+      "text": "cost being small naturally will go for"
+    },
+    {
+      "index": 649,
+      "start": 1771.24,
+      "end": 1773.269,
+      "duration": 2.029,
+      "text": "this rather than this"
+    },
+    {
+      "index": 650,
+      "start": 1773.279,
+      "end": 1775.59,
+      "duration": 2.311,
+      "text": "right this is the concept of medium"
+    },
+    {
+      "index": 651,
+      "start": 1775.6,
+      "end": 1778.71,
+      "duration": 3.11,
+      "text": "scale inte circuit design so now having"
+    },
+    {
+      "index": 652,
+      "start": 1778.72,
+      "end": 1780.549,
+      "duration": 1.829,
+      "text": "desired to go in for this Maxes then"
+    },
+    {
+      "index": 653,
+      "start": 1780.559,
+      "end": 1782.669,
+      "duration": 2.11,
+      "text": "Gates how do I use it in a design"
+    },
+    {
+      "index": 654,
+      "start": 1782.679,
+      "end": 1784.19,
+      "duration": 1.511,
+      "text": "procedure the same combination logic"
+    },
+    {
+      "index": 655,
+      "start": 1784.2,
+      "end": 1787.71,
+      "duration": 3.51,
+      "text": "design which I know how to do exactly"
+    },
+    {
+      "index": 656,
+      "start": 1787.72,
+      "end": 1790.75,
+      "duration": 3.03,
+      "text": "optimized way most efficient way saving"
+    },
+    {
+      "index": 657,
+      "start": 1790.76,
+      "end": 1793.75,
+      "duration": 2.99,
+      "text": "the number of gates using condom"
+    },
+    {
+      "index": 658,
+      "start": 1793.76,
+      "end": 1796.47,
+      "duration": 2.71,
+      "text": "Maps provided we are asked to use only"
+    },
+    {
+      "index": 659,
+      "start": 1796.48,
+      "end": 1798.71,
+      "duration": 2.23,
+      "text": "Gates now how am I going going to modify"
+    },
+    {
+      "index": 660,
+      "start": 1798.72,
+      "end": 1801.269,
+      "duration": 2.549,
+      "text": "my descent"
+    },
+    {
+      "index": 661,
+      "start": 1805.909,
+      "end": 1805.919,
+      "duration": 0.01,
+      "text": "procedure to do the same problem using"
+    },
+    {
+      "index": 662,
+      "start": 1805.919,
+      "end": 1808.75,
+      "duration": 2.831,
+      "text": "multiplexes Okay so let's do a simple"
+    },
+    {
+      "index": 663,
+      "start": 1808.76,
+      "end": 1810.35,
+      "duration": 1.59,
+      "text": "example of"
+    },
+    {
+      "index": 664,
+      "start": 1810.36,
+      "end": 1812.149,
+      "duration": 1.789,
+      "text": "a"
+    },
+    {
+      "index": 665,
+      "start": 1812.159,
+      "end": 1819.23,
+      "duration": 7.071,
+      "text": "Adder full"
+    },
+    {
+      "index": 666,
+      "start": 1822.99,
+      "end": 1823.0,
+      "duration": 0.01,
+      "text": "adder what do I mean say I don't a two"
+    },
+    {
+      "index": 667,
+      "start": 1823.0,
+      "end": 1825.549,
+      "duration": 2.549,
+      "text": "input full adder sorry one bit full"
+    },
+    {
+      "index": 668,
+      "start": 1825.559,
+      "end": 1829.59,
+      "duration": 4.031,
+      "text": "adder"
+    },
+    {
+      "index": 669,
+      "start": 1836.43,
+      "end": 1836.44,
+      "duration": 0.01,
+      "text": "Max I'm going to design a Max using a"
+    },
+    {
+      "index": 670,
+      "start": 1836.44,
+      "end": 1839.99,
+      "duration": 3.55,
+      "text": "Max one bit full ladder and all of you"
+    },
+    {
+      "index": 671,
+      "start": 1840.0,
+      "end": 1841.75,
+      "duration": 1.75,
+      "text": "know the tooth"
+    },
+    {
+      "index": 672,
+      "start": 1841.76,
+      "end": 1851.909,
+      "duration": 10.149,
+      "text": "table"
+    },
+    {
+      "index": 673,
+      "start": 1856.269,
+      "end": 1856.279,
+      "duration": 0.01,
+      "text": "hopefully AB inputs C the carry some and"
+    },
+    {
+      "index": 674,
+      "start": 1856.279,
+      "end": 1871.269,
+      "duration": 14.99,
+      "text": "Carry Out"
+    },
+    {
+      "index": 675,
+      "start": 1878.629,
+      "end": 1878.639,
+      "duration": 0.01,
+      "text": "so is 0 1 1 0 1 0 0 0 1 0 0 1 that"
+    },
+    {
+      "index": 676,
+      "start": 1878.639,
+      "end": 1880.83,
+      "duration": 2.191,
+      "text": "right please tell me if I make a mistake"
+    },
+    {
+      "index": 677,
+      "start": 1880.84,
+      "end": 1882.47,
+      "duration": 1.63,
+      "text": "in the truth table in a"
+    },
+    {
+      "index": 678,
+      "start": 1882.48,
+      "end": 1889.47,
+      "duration": 6.99,
+      "text": "hurry and the carry would be"
+    },
+    {
+      "index": 679,
+      "start": 1900.87,
+      "end": 1900.88,
+      "duration": 0.01,
+      "text": "right now let me draw the corner map for"
+    },
+    {
+      "index": 680,
+      "start": 1900.88,
+      "end": 1903.23,
+      "duration": 2.35,
+      "text": "this just to show you how it is going to"
+    },
+    {
+      "index": 681,
+      "start": 1903.24,
+      "end": 1908.11,
+      "duration": 4.87,
+      "text": "be"
+    },
+    {
+      "index": 682,
+      "start": 1962.789,
+      "end": 1962.799,
+      "duration": 0.01,
+      "text": "there a little board interface here to"
+    },
+    {
+      "index": 683,
+      "start": 1962.799,
+      "end": 1980.43,
+      "duration": 17.631,
+      "text": "move this a little further"
+    },
+    {
+      "index": 684,
+      "start": 1982.549,
+      "end": 1982.559,
+      "duration": 0.01,
+      "text": "so quickly mapping this on"
+    },
+    {
+      "index": 685,
+      "start": 1982.559,
+      "end": 1984.43,
+      "duration": 1.871,
+      "text": "this it"
+    },
+    {
+      "index": 686,
+      "start": 1984.44,
+      "end": 1989.389,
+      "duration": 4.949,
+      "text": "is 0"
+    },
+    {
+      "index": 687,
+      "start": 1995.95,
+      "end": 1995.96,
+      "duration": 0.01,
+      "text": "Z is that"
+    },
+    {
+      "index": 688,
+      "start": 1995.96,
+      "end": 2000.59,
+      "duration": 4.63,
+      "text": "right"
+    },
+    {
+      "index": 689,
+      "start": 2004.11,
+      "end": 2004.12,
+      "duration": 0.01,
+      "text": "no one0 1"
+    },
+    {
+      "index": 690,
+      "start": 2004.12,
+      "end": 2009.669,
+      "duration": 5.549,
+      "text": "0 0 1"
+    },
+    {
+      "index": 691,
+      "start": 2010.99,
+      "end": 2011.0,
+      "duration": 0.01,
+      "text": "and on this it"
+    },
+    {
+      "index": 692,
+      "start": 2011.0,
+      "end": 2014.509,
+      "duration": 3.509,
+      "text": "is 0 0 0"
+    },
+    {
+      "index": 693,
+      "start": 2014.519,
+      "end": 2021.669,
+      "duration": 7.15,
+      "text": "1 1"
+    },
+    {
+      "index": 694,
+      "start": 2025.23,
+      "end": 2025.24,
+      "duration": 0.01,
+      "text": "one that right this is the carry output"
+    },
+    {
+      "index": 695,
+      "start": 2025.24,
+      "end": 2026.59,
+      "duration": 1.35,
+      "text": "this"
+    },
+    {
+      "index": 696,
+      "start": 2026.6,
+      "end": 2030.99,
+      "duration": 4.39,
+      "text": "some now it is where you design as I"
+    },
+    {
+      "index": 697,
+      "start": 2031.0,
+      "end": 2034.35,
+      "duration": 3.35,
+      "text": "said it's not the intuitive design as I"
+    },
+    {
+      "index": 698,
+      "start": 2034.36,
+      "end": 2036.669,
+      "duration": 2.309,
+      "text": "said heuristic design of course it's not"
+    },
+    {
+      "index": 699,
+      "start": 2036.679,
+      "end": 2038.59,
+      "duration": 1.911,
+      "text": "all that it's very sort of very"
+    },
+    {
+      "index": 700,
+      "start": 2038.6,
+      "end": 2041.149,
+      "duration": 2.549,
+      "text": "straightforward problem but later as the"
+    },
+    {
+      "index": 701,
+      "start": 2041.159,
+      "end": 2043.07,
+      "duration": 1.911,
+      "text": "comp the complexity of circuit becomes"
+    },
+    {
+      "index": 702,
+      "start": 2043.08,
+      "end": 2046.389,
+      "duration": 3.309,
+      "text": "bigger and bigger and also it's not this"
+    },
+    {
+      "index": 703,
+      "start": 2046.399,
+      "end": 2048.349,
+      "duration": 1.95,
+      "text": "this um"
+    },
+    {
+      "index": 704,
+      "start": 2048.359,
+      "end": 2050.71,
+      "duration": 2.351,
+      "text": "symmetrical then you'll have more of"
+    },
+    {
+      "index": 705,
+      "start": 2050.72,
+      "end": 2053.99,
+      "duration": 3.27,
+      "text": "thinking to do but in this"
+    },
+    {
+      "index": 706,
+      "start": 2054.0,
+      "end": 2056.149,
+      "duration": 2.149,
+      "text": "case there is a thinking step but the"
+    },
+    {
+      "index": 707,
+      "start": 2056.159,
+      "end": 2058.03,
+      "duration": 1.871,
+      "text": "thinking step is very very obvious and"
+    },
+    {
+      "index": 708,
+      "start": 2058.04,
+      "end": 2060.829,
+      "duration": 2.789,
+      "text": "straightforward so I need to make I want"
+    },
+    {
+      "index": 709,
+      "start": 2060.839,
+      "end": 2062.51,
+      "duration": 1.671,
+      "text": "I would like to use a four to one"
+    },
+    {
+      "index": 710,
+      "start": 2062.52,
+      "end": 2065.43,
+      "duration": 2.91,
+      "text": "multiplexer I need to select two of"
+    },
+    {
+      "index": 711,
+      "start": 2065.44,
+      "end": 2068.51,
+      "duration": 3.07,
+      "text": "these variables as selectors"
+    },
+    {
+      "index": 712,
+      "start": 2068.52,
+      "end": 2070.829,
+      "duration": 2.309,
+      "text": "I have three variables a b and c i out"
+    },
+    {
+      "index": 713,
+      "start": 2070.839,
+      "end": 2072.27,
+      "duration": 1.431,
+      "text": "of these I need to select two of the"
+    },
+    {
+      "index": 714,
+      "start": 2072.28,
+      "end": 2073.909,
+      "duration": 1.629,
+      "text": "mass selected"
+    },
+    {
+      "index": 715,
+      "start": 2073.919,
+      "end": 2076.31,
+      "duration": 2.391,
+      "text": "variables and when this select variable"
+    },
+    {
+      "index": 716,
+      "start": 2076.32,
+      "end": 2080.75,
+      "duration": 4.43,
+      "text": "0 0 what should be given as CI so that"
+    },
+    {
+      "index": 717,
+      "start": 2080.76,
+      "end": 2082.31,
+      "duration": 1.55,
+      "text": "the output is what is required according"
+    },
+    {
+      "index": 718,
+      "start": 2082.32,
+      "end": 2084.43,
+      "duration": 2.11,
+      "text": "to the table so what I'm going to do is"
+    },
+    {
+      "index": 719,
+      "start": 2084.44,
+      "end": 2092.19,
+      "duration": 7.75,
+      "text": "I'm going to use a 4 to one"
+    },
+    {
+      "index": 720,
+      "start": 2106.87,
+      "end": 2106.88,
+      "duration": 0.01,
+      "text": "Multiplex and the two selectors I'm"
+    },
+    {
+      "index": 721,
+      "start": 2106.88,
+      "end": 2113.63,
+      "duration": 6.75,
+      "text": "going to use my two bits A and"
+    },
+    {
+      "index": 722,
+      "start": 2120.95,
+      "end": 2120.96,
+      "duration": 0.01,
+      "text": "now when a is 0 0 you know that I z s is"
+    },
+    {
+      "index": 723,
+      "start": 2120.96,
+      "end": 2122.67,
+      "duration": 1.71,
+      "text": "equal i0 is that"
+    },
+    {
+      "index": 724,
+      "start": 2122.68,
+      "end": 2129.47,
+      "duration": 6.79,
+      "text": "right we know that from this equation"
+    },
+    {
+      "index": 725,
+      "start": 2129.48,
+      "end": 2133.43,
+      "duration": 3.95,
+      "text": "or from whatever here when a is 0 0"
+    },
+    {
+      "index": 726,
+      "start": 2133.44,
+      "end": 2137.109,
+      "duration": 3.669,
+      "text": "which is s S10 is is0"
+    },
+    {
+      "index": 727,
+      "start": 2137.119,
+      "end": 2140.51,
+      "duration": 3.391,
+      "text": "0 output s is connected to i z so if I"
+    },
+    {
+      "index": 728,
+      "start": 2140.52,
+      "end": 2142.349,
+      "duration": 1.829,
+      "text": "make i z what is required according to"
+    },
+    {
+      "index": 729,
+      "start": 2142.359,
+      "end": 2146.109,
+      "duration": 3.75,
+      "text": "this Kor map then that will be"
+    },
+    {
+      "index": 730,
+      "start": 2146.119,
+      "end": 2150.03,
+      "duration": 3.911,
+      "text": "implemented so when a is 0 0 sum should"
+    },
+    {
+      "index": 731,
+      "start": 2150.04,
+      "end": 2155.27,
+      "duration": 5.23,
+      "text": "be same as CI Su should be zero if CI is"
+    },
+    {
+      "index": 732,
+      "start": 2155.28,
+      "end": 2159.03,
+      "duration": 3.75,
+      "text": "zero sum should be one if C is one so if"
+    },
+    {
+      "index": 733,
+      "start": 2159.04,
+      "end": 2161.589,
+      "duration": 2.549,
+      "text": "I connect CI to"
+    },
+    {
+      "index": 734,
+      "start": 2161.599,
+      "end": 2164.829,
+      "duration": 3.23,
+      "text": "this if C is one when a is 0 0 the"
+    },
+    {
+      "index": 735,
+      "start": 2164.839,
+      "end": 2166.069,
+      "duration": 1.23,
+      "text": "output will be"
+    },
+    {
+      "index": 736,
+      "start": 2166.079,
+      "end": 2169.47,
+      "duration": 3.391,
+      "text": "one when C is z I'm sorry when C is z"
+    },
+    {
+      "index": 737,
+      "start": 2169.48,
+      "end": 2171.109,
+      "duration": 1.629,
+      "text": "output will be Zero Sum will be zero"
+    },
+    {
+      "index": 738,
+      "start": 2171.119,
+      "end": 2174.67,
+      "duration": 3.551,
+      "text": "when a is 0 0 and when C is one when a 0"
+    },
+    {
+      "index": 739,
+      "start": 2174.68,
+      "end": 2176.39,
+      "duration": 1.71,
+      "text": "0 sum will be one that's what it is"
+    },
+    {
+      "index": 740,
+      "start": 2176.4,
+      "end": 2179.67,
+      "duration": 3.27,
+      "text": "mapping the hardware mapping on the"
+    },
+    {
+      "index": 741,
+      "start": 2179.68,
+      "end": 2183.47,
+      "duration": 3.79,
+      "text": "given Hardware our requirement which is"
+    },
+    {
+      "index": 742,
+      "start": 2183.48,
+      "end": 2185.79,
+      "duration": 2.31,
+      "text": "here but what is so intuitive about it"
+    },
+    {
+      "index": 743,
+      "start": 2185.8,
+      "end": 2187.829,
+      "duration": 2.029,
+      "text": "because I chose this A and B as SCT"
+    },
+    {
+      "index": 744,
+      "start": 2187.839,
+      "end": 2189.67,
+      "duration": 1.831,
+      "text": "variables and found out that this is has"
+    },
+    {
+      "index": 745,
+      "start": 2189.68,
+      "end": 2192.91,
+      "duration": 3.23,
+      "text": "be done this way I can also do it some"
+    },
+    {
+      "index": 746,
+      "start": 2192.92,
+      "end": 2194.15,
+      "duration": 1.23,
+      "text": "other"
+    },
+    {
+      "index": 747,
+      "start": 2194.16,
+      "end": 2199.63,
+      "duration": 5.47,
+      "text": "way now when a is 0 1 output will be 1"
+    },
+    {
+      "index": 748,
+      "start": 2199.64,
+      "end": 2203.63,
+      "duration": 3.99,
+      "text": "when C is zero and zero when CA is 1 so"
+    },
+    {
+      "index": 749,
+      "start": 2203.64,
+      "end": 2211.67,
+      "duration": 8.03,
+      "text": "I need to connect CI"
+    },
+    {
+      "index": 750,
+      "start": 2213.309,
+      "end": 2213.319,
+      "duration": 0.01,
+      "text": "bar"
+    },
+    {
+      "index": 751,
+      "start": 2213.319,
+      "end": 2219.47,
+      "duration": 6.151,
+      "text": "likewise for this 01 1 z c"
+    },
+    {
+      "index": 752,
+      "start": 2219.48,
+      "end": 2222.71,
+      "duration": 3.23,
+      "text": "R and when a is 1"
+    },
+    {
+      "index": 753,
+      "start": 2222.72,
+      "end": 2226.27,
+      "duration": 3.55,
+      "text": "one sum is zero C is z sum is one C is"
+    },
+    {
+      "index": 754,
+      "start": 2226.28,
+      "end": 2229.23,
+      "duration": 2.95,
+      "text": "one so I need to connect"
+    },
+    {
+      "index": 755,
+      "start": 2229.24,
+      "end": 2231.63,
+      "duration": 2.39,
+      "text": "C"
+    },
+    {
+      "index": 756,
+      "start": 2231.64,
+      "end": 2236.03,
+      "duration": 4.39,
+      "text": "correct so with a simple four to one Max"
+    },
+    {
+      "index": 757,
+      "start": 2236.04,
+      "end": 2238.91,
+      "duration": 2.87,
+      "text": "and only one gate for inverting"
+    },
+    {
+      "index": 758,
+      "start": 2238.92,
+      "end": 2242.069,
+      "duration": 3.149,
+      "text": "CI I can get my sum whereas if I had"
+    },
+    {
+      "index": 759,
+      "start": 2242.079,
+      "end": 2244.91,
+      "duration": 2.831,
+      "text": "used this I would used two two input"
+    },
+    {
+      "index": 760,
+      "start": 2244.92,
+      "end": 2246.15,
+      "duration": 1.23,
+      "text": "exclusive R"
+    },
+    {
+      "index": 761,
+      "start": 2246.16,
+      "end": 2249.23,
+      "duration": 3.07,
+      "text": "Gates correct"
+    },
+    {
+      "index": 762,
+      "start": 2249.24,
+      "end": 2251.069,
+      "duration": 1.829,
+      "text": "that is what is the efficiency about"
+    },
+    {
+      "index": 763,
+      "start": 2251.079,
+      "end": 2254.03,
+      "duration": 2.951,
+      "text": "this coming to the carry again there are"
+    },
+    {
+      "index": 764,
+      "start": 2254.04,
+      "end": 2258.87,
+      "duration": 4.83,
+      "text": "four inputs so I'll use Ab as"
+    },
+    {
+      "index": 765,
+      "start": 2258.88,
+      "end": 2261.91,
+      "duration": 3.03,
+      "text": "selectors and this Max is a 4 to1"
+    },
+    {
+      "index": 766,
+      "start": 2261.92,
+      "end": 2264.39,
+      "duration": 2.47,
+      "text": "Max this and this"
+    },
+    {
+      "index": 767,
+      "start": 2264.4,
+      "end": 2272.19,
+      "duration": 7.79,
+      "text": "are 4 to1"
+    },
+    {
+      "index": 768,
+      "start": 2274.829,
+      "end": 2274.839,
+      "duration": 0.01,
+      "text": "Maxes now in this output I'll get carry"
+    },
+    {
+      "index": 769,
+      "start": 2274.839,
+      "end": 2277.109,
+      "duration": 2.27,
+      "text": "from this map I do this so I'm now"
+    },
+    {
+      "index": 770,
+      "start": 2277.119,
+      "end": 2278.309,
+      "duration": 1.19,
+      "text": "mapping"
+    },
+    {
+      "index": 771,
+      "start": 2278.319,
+      "end": 2280.95,
+      "duration": 2.631,
+      "text": "onto this given Hardware namely 4 to1"
+    },
+    {
+      "index": 772,
+      "start": 2280.96,
+      "end": 2283.309,
+      "duration": 2.349,
+      "text": "multiplexer is a hardware mapping not"
+    },
+    {
+      "index": 773,
+      "start": 2283.319,
+      "end": 2287.589,
+      "duration": 4.27,
+      "text": "mapping like drawing the hardware"
+    },
+    {
+      "index": 774,
+      "start": 2287.599,
+      "end": 2291.27,
+      "duration": 3.671,
+      "text": "mapping on a given 4 to1"
+    },
+    {
+      "index": 775,
+      "start": 2291.28,
+      "end": 2293.87,
+      "duration": 2.59,
+      "text": "Max the"
+    },
+    {
+      "index": 776,
+      "start": 2293.88,
+      "end": 2297.03,
+      "duration": 3.15,
+      "text": "given cor of map to get the Implement"
+    },
+    {
+      "index": 777,
+      "start": 2297.04,
+      "end": 2300.23,
+      "duration": 3.19,
+      "text": "function"
+    },
+    {
+      "index": 778,
+      "start": 2313.47,
+      "end": 2313.48,
+      "duration": 0.01,
+      "text": "there's no carry irrespective of whether"
+    },
+    {
+      "index": 779,
+      "start": 2313.48,
+      "end": 2317.19,
+      "duration": 3.71,
+      "text": "C is z or C is 1 so I put a zero here"
+    },
+    {
+      "index": 780,
+      "start": 2317.2,
+      "end": 2318.91,
+      "duration": 1.71,
+      "text": "carry is always"
+    },
+    {
+      "index": 781,
+      "start": 2318.92,
+      "end": 2324.23,
+      "duration": 5.31,
+      "text": "zero if a is 0 0 a 01 carry will be one"
+    },
+    {
+      "index": 782,
+      "start": 2324.24,
+      "end": 2331.51,
+      "duration": 7.27,
+      "text": "if C is one so I put CI"
+    },
+    {
+      "index": 783,
+      "start": 2333.55,
+      "end": 2333.56,
+      "duration": 0.01,
+      "text": "here is one"
+    },
+    {
+      "index": 784,
+      "start": 2333.56,
+      "end": 2341.87,
+      "duration": 8.31,
+      "text": "Z again CI"
+    },
+    {
+      "index": 785,
+      "start": 2349.109,
+      "end": 2349.119,
+      "duration": 0.01,
+      "text": "one when whether CI is Zer or CI is one"
+    },
+    {
+      "index": 786,
+      "start": 2349.119,
+      "end": 2351.309,
+      "duration": 2.19,
+      "text": "we have carry out so carry out is"
+    },
+    {
+      "index": 787,
+      "start": 2351.319,
+      "end": 2354.19,
+      "duration": 2.871,
+      "text": "independent of CI has always to be one"
+    },
+    {
+      "index": 788,
+      "start": 2354.2,
+      "end": 2358.51,
+      "duration": 4.31,
+      "text": "so I need to connect a one"
+    },
+    {
+      "index": 789,
+      "start": 2365.309,
+      "end": 2365.319,
+      "duration": 0.01,
+      "text": "here so with 241 maxas I got my full"
+    },
+    {
+      "index": 790,
+      "start": 2365.319,
+      "end": 2367.19,
+      "duration": 1.871,
+      "text": "adder and the beauty about the whole"
+    },
+    {
+      "index": 791,
+      "start": 2367.2,
+      "end": 2369.95,
+      "duration": 2.75,
+      "text": "thing is four to I was just now telling"
+    },
+    {
+      "index": 792,
+      "start": 2369.96,
+      "end": 2373.23,
+      "duration": 3.27,
+      "text": "you these things come as packages four"
+    },
+    {
+      "index": 793,
+      "start": 2373.24,
+      "end": 2374.91,
+      "duration": 1.67,
+      "text": "two input and Gates come as a package"
+    },
+    {
+      "index": 794,
+      "start": 2374.92,
+      "end": 2377.67,
+      "duration": 2.75,
+      "text": "four two input Nate comes a package six"
+    },
+    {
+      "index": 795,
+      "start": 2377.68,
+      "end": 2379.99,
+      "duration": 2.31,
+      "text": "inverters come as a package likewise"
+    },
+    {
+      "index": 796,
+      "start": 2380.0,
+      "end": 2384.109,
+      "duration": 4.109,
+      "text": "four two input four I mean two four"
+    },
+    {
+      "index": 797,
+      "start": 2384.119,
+      "end": 2386.109,
+      "duration": 1.99,
+      "text": "input multiplexers come as a single"
+    },
+    {
+      "index": 798,
+      "start": 2386.119,
+      "end": 2388.829,
+      "duration": 2.71,
+      "text": "package mean I can nowh I can go and"
+    },
+    {
+      "index": 799,
+      "start": 2388.839,
+      "end": 2392.589,
+      "duration": 3.75,
+      "text": "find a four input Max individually when"
+    },
+    {
+      "index": 800,
+      "start": 2392.599,
+      "end": 2395.109,
+      "duration": 2.51,
+      "text": "I go and buy a four to one Max I will"
+    },
+    {
+      "index": 801,
+      "start": 2395.119,
+      "end": 2397.55,
+      "duration": 2.431,
+      "text": "always get two"
+    },
+    {
+      "index": 802,
+      "start": 2397.56,
+      "end": 2401.63,
+      "duration": 4.07,
+      "text": "in one package that means in one IC"
+    },
+    {
+      "index": 803,
+      "start": 2401.64,
+      "end": 2404.27,
+      "duration": 2.63,
+      "text": "package I'm getting a full"
+    },
+    {
+      "index": 804,
+      "start": 2404.28,
+      "end": 2406.47,
+      "duration": 2.19,
+      "text": "adder as again number of gates would"
+    },
+    {
+      "index": 805,
+      "start": 2406.48,
+      "end": 2409.03,
+      "duration": 2.55,
+      "text": "have used in the other approach that is"
+    },
+    {
+      "index": 806,
+      "start": 2409.04,
+      "end": 2411.99,
+      "duration": 2.95,
+      "text": "what is called the MSI based design so I"
+    },
+    {
+      "index": 807,
+      "start": 2412.0,
+      "end": 2413.87,
+      "duration": 1.87,
+      "text": "have this full adder which is going to"
+    },
+    {
+      "index": 808,
+      "start": 2413.88,
+      "end": 2419.15,
+      "duration": 5.27,
+      "text": "look like this so 14 it's called dual"
+    },
+    {
+      "index": 809,
+      "start": 2419.16,
+      "end": 2423.99,
+      "duration": 4.83,
+      "text": "Mar dual 4 to1"
+    },
+    {
+      "index": 810,
+      "start": 2428.23,
+      "end": 2428.24,
+      "duration": 0.01,
+      "text": "marks dual means two of them in one"
+    },
+    {
+      "index": 811,
+      "start": 2428.24,
+      "end": 2432.23,
+      "duration": 3.99,
+      "text": "dual Max the first"
+    },
+    {
+      "index": 812,
+      "start": 2432.24,
+      "end": 2435.109,
+      "duration": 2.869,
+      "text": "max I'll"
+    },
+    {
+      "index": 813,
+      "start": 2435.119,
+      "end": 2440.75,
+      "duration": 5.631,
+      "text": "connect uh"
+    },
+    {
+      "index": 814,
+      "start": 2459.19,
+      "end": 2459.2,
+      "duration": 0.01,
+      "text": "bar this is i0 i1 I2 I3 corresponding to"
+    },
+    {
+      "index": 815,
+      "start": 2459.2,
+      "end": 2462.63,
+      "duration": 3.43,
+      "text": "the first"
+    },
+    {
+      "index": 816,
+      "start": 2465.23,
+      "end": 2465.24,
+      "duration": 0.01,
+      "text": "max"
+    },
+    {
+      "index": 817,
+      "start": 2465.24,
+      "end": 2478.589,
+      "duration": 13.349,
+      "text": "sum this is one 42 Max 42 One"
+    },
+    {
+      "index": 818,
+      "start": 2494.309,
+      "end": 2494.319,
+      "duration": 0.01,
+      "text": "this will be connected to zero that"
+    },
+    {
+      "index": 819,
+      "start": 2494.319,
+      "end": 2497.19,
+      "duration": 2.871,
+      "text": "means ground you put zero the in"
+    },
+    {
+      "index": 820,
+      "start": 2497.2,
+      "end": 2499.15,
+      "duration": 1.95,
+      "text": "inverted comma that means a ground"
+    },
+    {
+      "index": 821,
+      "start": 2499.16,
+      "end": 2501.75,
+      "duration": 2.59,
+      "text": "potential zero potential and this is a"
+    },
+    {
+      "index": 822,
+      "start": 2501.76,
+      "end": 2504.67,
+      "duration": 2.91,
+      "text": "one means it's the VCC whether it's 5"
+    },
+    {
+      "index": 823,
+      "start": 2504.68,
+      "end": 2507.03,
+      "duration": 2.35,
+      "text": "volts or 3.3 Vols whatever is the"
+    },
+    {
+      "index": 824,
+      "start": 2507.04,
+      "end": 2508.51,
+      "duration": 1.47,
+      "text": "operating voltage that voltage will be"
+    },
+    {
+      "index": 825,
+      "start": 2508.52,
+      "end": 2511.27,
+      "duration": 2.75,
+      "text": "given here and in between these two are"
+    },
+    {
+      "index": 826,
+      "start": 2511.28,
+      "end": 2520.47,
+      "duration": 9.19,
+      "text": "connected to CI"
+    },
+    {
+      "index": 827,
+      "start": 2523.91,
+      "end": 2523.92,
+      "duration": 0.01,
+      "text": "for the second gate second Max these are"
+    },
+    {
+      "index": 828,
+      "start": 2523.92,
+      "end": 2526.67,
+      "duration": 2.75,
+      "text": "the inputs these are outputs and this is"
+    },
+    {
+      "index": 829,
+      "start": 2526.68,
+      "end": 2528.75,
+      "duration": 2.07,
+      "text": "my carry"
+    },
+    {
+      "index": 830,
+      "start": 2528.76,
+      "end": 2531.13,
+      "duration": 2.37,
+      "text": "out and to"
+    },
+    {
+      "index": 831,
+      "start": 2531.14,
+      "end": 2533.19,
+      "duration": 2.05,
+      "text": "[Music]"
+    },
+    {
+      "index": 832,
+      "start": 2533.2,
+      "end": 2536.19,
+      "duration": 2.99,
+      "text": "the two"
+    },
+    {
+      "index": 833,
+      "start": 2536.2,
+      "end": 2539.15,
+      "duration": 2.95,
+      "text": "selectors we connect the two bits A and"
+    },
+    {
+      "index": 834,
+      "start": 2539.16,
+      "end": 2541.47,
+      "duration": 2.31,
+      "text": "B which would be connected intern I'm"
+    },
+    {
+      "index": 835,
+      "start": 2541.48,
+      "end": 2543.19,
+      "duration": 1.71,
+      "text": "not showing all internally we are only"
+    },
+    {
+      "index": 836,
+      "start": 2543.2,
+      "end": 2545.39,
+      "duration": 2.19,
+      "text": "having these things available to us so"
+    },
+    {
+      "index": 837,
+      "start": 2545.4,
+      "end": 2553.03,
+      "duration": 7.63,
+      "text": "I'll connect a and b here"
+    },
+    {
+      "index": 838,
+      "start": 2555.309,
+      "end": 2555.319,
+      "duration": 0.01,
+      "text": "so internally this would be taken"
+    },
+    {
+      "index": 839,
+      "start": 2555.319,
+      "end": 2557.549,
+      "duration": 2.23,
+      "text": "here this will be taken here this will"
+    },
+    {
+      "index": 840,
+      "start": 2557.559,
+      "end": 2559.309,
+      "duration": 1.75,
+      "text": "be taken here this will be taken here"
+    },
+    {
+      "index": 841,
+      "start": 2559.319,
+      "end": 2561.39,
+      "duration": 2.071,
+      "text": "this will go here this will go"
+    },
+    {
+      "index": 842,
+      "start": 2561.4,
+      "end": 2563.71,
+      "duration": 2.31,
+      "text": "here internal"
+    },
+    {
+      "index": 843,
+      "start": 2563.72,
+      "end": 2568.91,
+      "duration": 5.19,
+      "text": "connections I cannot make but it's"
+    },
+    {
+      "index": 844,
+      "start": 2572.27,
+      "end": 2572.28,
+      "duration": 0.01,
+      "text": "there so you know single 421 Max piece I"
+    },
+    {
+      "index": 845,
+      "start": 2572.28,
+      "end": 2575.63,
+      "duration": 3.35,
+      "text": "mean single dual 421 Max I'm getting a"
+    },
+    {
+      "index": 846,
+      "start": 2575.64,
+      "end": 2578.27,
+      "duration": 2.63,
+      "text": "full add so single chip solution of a"
+    },
+    {
+      "index": 847,
+      "start": 2578.28,
+      "end": 2581.27,
+      "duration": 2.99,
+      "text": "full"
+    },
+    {
+      "index": 848,
+      "start": 2585.51,
+      "end": 2585.52,
+      "duration": 0.01,
+      "text": "add so this tells you there are I's"
+    },
+    {
+      "index": 849,
+      "start": 2585.52,
+      "end": 2591.51,
+      "duration": 5.99,
+      "text": "available which are larger in function"
+    },
+    {
+      "index": 850,
+      "start": 2593.79,
+      "end": 2593.8,
+      "duration": 0.01,
+      "text": "functionally larger compared to the"
+    },
+    {
+      "index": 851,
+      "start": 2593.8,
+      "end": 2596.109,
+      "duration": 2.309,
+      "text": "simple Gates and these will be"
+    },
+    {
+      "index": 852,
+      "start": 2596.119,
+      "end": 2599.19,
+      "duration": 3.071,
+      "text": "used in design in combination logic even"
+    },
+    {
+      "index": 853,
+      "start": 2599.2,
+      "end": 2600.71,
+      "duration": 1.51,
+      "text": "in sequential Logic the combinational"
+    },
+    {
+      "index": 854,
+      "start": 2600.72,
+      "end": 2603.069,
+      "duration": 2.349,
+      "text": "logic is the steering logic isn't not"
+    },
+    {
+      "index": 855,
+      "start": 2603.079,
+      "end": 2604.79,
+      "duration": 1.711,
+      "text": "steering logic is combination logic so"
+    },
+    {
+      "index": 856,
+      "start": 2604.8,
+      "end": 2606.19,
+      "duration": 1.39,
+      "text": "we need combination logic whether it's a"
+    },
+    {
+      "index": 857,
+      "start": 2606.2,
+      "end": 2607.75,
+      "duration": 1.55,
+      "text": "combination logic design or a sequential"
+    },
+    {
+      "index": 858,
+      "start": 2607.76,
+      "end": 2610.39,
+      "duration": 2.63,
+      "text": "logic Reon so if we use these I which"
+    },
+    {
+      "index": 859,
+      "start": 2610.4,
+      "end": 2613.23,
+      "duration": 2.83,
+      "text": "are medium scale I which have several"
+    },
+    {
+      "index": 860,
+      "start": 2613.24,
+      "end": 2614.87,
+      "duration": 1.63,
+      "text": "gate functions in"
+    },
+    {
+      "index": 861,
+      "start": 2614.88,
+      "end": 2617.43,
+      "duration": 2.55,
+      "text": "it the design becomes"
+    },
+    {
+      "index": 862,
+      "start": 2617.44,
+      "end": 2619.87,
+      "duration": 2.43,
+      "text": "simpler but a sort of an extra effort is"
+    },
+    {
+      "index": 863,
+      "start": 2619.88,
+      "end": 2622.39,
+      "duration": 2.51,
+      "text": "required it's an effort in the terms of"
+    },
+    {
+      "index": 864,
+      "start": 2622.4,
+      "end": 2624.67,
+      "duration": 2.27,
+      "text": "properly identifying"
+    },
+    {
+      "index": 865,
+      "start": 2624.68,
+      "end": 2627.67,
+      "duration": 2.99,
+      "text": "the requirements of the chip for example"
+    },
+    {
+      "index": 866,
+      "start": 2627.68,
+      "end": 2630.349,
+      "duration": 2.669,
+      "text": "how will you first of all decide even I"
+    },
+    {
+      "index": 867,
+      "start": 2630.359,
+      "end": 2635.47,
+      "duration": 5.111,
+      "text": "if I didn't tell you use max if you say"
+    },
+    {
+      "index": 868,
+      "start": 2635.48,
+      "end": 2638.19,
+      "duration": 2.71,
+      "text": "use an MSI"
+    },
+    {
+      "index": 869,
+      "start": 2638.2,
+      "end": 2640.109,
+      "duration": 1.909,
+      "text": "and get a one full one with full add so"
+    },
+    {
+      "index": 870,
+      "start": 2640.119,
+      "end": 2641.99,
+      "duration": 1.871,
+      "text": "I should know how to do it also because"
+    },
+    {
+      "index": 871,
+      "start": 2642.0,
+      "end": 2644.51,
+      "duration": 2.51,
+      "text": "there are other I also we can do I can"
+    },
+    {
+      "index": 872,
+      "start": 2644.52,
+      "end": 2647.309,
+      "duration": 2.789,
+      "text": "get a decoder using other I also so"
+    },
+    {
+      "index": 873,
+      "start": 2647.319,
+      "end": 2649.829,
+      "duration": 2.51,
+      "text": "first thing make a intelligent choice of"
+    },
+    {
+      "index": 874,
+      "start": 2649.839,
+      "end": 2651.109,
+      "duration": 1.27,
+      "text": "the"
+    },
+    {
+      "index": 875,
+      "start": 2651.119,
+      "end": 2653.589,
+      "duration": 2.47,
+      "text": "MSI look at the specifications of the"
+    },
+    {
+      "index": 876,
+      "start": 2653.599,
+      "end": 2654.87,
+      "duration": 1.271,
+      "text": "circuit"
+    },
+    {
+      "index": 877,
+      "start": 2654.88,
+      "end": 2658.109,
+      "duration": 3.229,
+      "text": "given specifications of the requirement"
+    },
+    {
+      "index": 878,
+      "start": 2658.119,
+      "end": 2661.43,
+      "duration": 3.311,
+      "text": "look at the capabilities of the hardware"
+    },
+    {
+      "index": 879,
+      "start": 2661.44,
+      "end": 2663.99,
+      "duration": 2.55,
+      "text": "available try to make a match to the"
+    },
+    {
+      "index": 880,
+      "start": 2664.0,
+      "end": 2666.109,
+      "duration": 2.109,
+      "text": "extent possible and this is a very"
+    },
+    {
+      "index": 881,
+      "start": 2666.119,
+      "end": 2668.15,
+      "duration": 2.031,
+      "text": "symmetric and straightforward Cas"
+    },
+    {
+      "index": 882,
+      "start": 2668.16,
+      "end": 2669.99,
+      "duration": 1.83,
+      "text": "sometimes we may have to do a little"
+    },
+    {
+      "index": 883,
+      "start": 2670.0,
+      "end": 2672.67,
+      "duration": 2.67,
+      "text": "extra sort of uh"
+    },
+    {
+      "index": 884,
+      "start": 2672.68,
+      "end": 2674.95,
+      "duration": 2.27,
+      "text": "manipulation and in that process we may"
+    },
+    {
+      "index": 885,
+      "start": 2674.96,
+      "end": 2677.15,
+      "duration": 2.19,
+      "text": "end up with a less less than efficient"
+    },
+    {
+      "index": 886,
+      "start": 2677.16,
+      "end": 2679.75,
+      "duration": 2.59,
+      "text": "design but it's worth it because we are"
+    },
+    {
+      "index": 887,
+      "start": 2679.76,
+      "end": 2682.91,
+      "duration": 3.15,
+      "text": "going to reduce the total number of"
+    },
+    {
+      "index": 888,
+      "start": 2682.92,
+      "end": 2685.75,
+      "duration": 2.83,
+      "text": "I so this is only an example you can try"
+    },
+    {
+      "index": 889,
+      "start": 2685.76,
+      "end": 2687.309,
+      "duration": 1.549,
+      "text": "several other examples because anything"
+    },
+    {
+      "index": 890,
+      "start": 2687.319,
+      "end": 2689.109,
+      "duration": 1.79,
+      "text": "that you can do with a four bit four"
+    },
+    {
+      "index": 891,
+      "start": 2689.119,
+      "end": 2691.51,
+      "duration": 2.391,
+      "text": "variable Corner map a b c"
+    },
+    {
+      "index": 892,
+      "start": 2691.52,
+      "end": 2694.19,
+      "duration": 2.67,
+      "text": "d we have done earlier using"
+    },
+    {
+      "index": 893,
+      "start": 2694.2,
+      "end": 2696.15,
+      "duration": 1.95,
+      "text": "Gates now we can go ahead and do it"
+    },
+    {
+      "index": 894,
+      "start": 2696.16,
+      "end": 2698.75,
+      "duration": 2.59,
+      "text": "using multiplexers"
+    },
+    {
+      "index": 895,
+      "start": 2698.76,
+      "end": 2701.43,
+      "duration": 2.67,
+      "text": "this is a three input K map I mean the"
+    },
+    {
+      "index": 896,
+      "start": 2701.44,
+      "end": 2705.549,
+      "duration": 4.109,
+      "text": "total of ABC ABCI even though I split it"
+    },
+    {
+      "index": 897,
+      "start": 2705.559,
+      "end": 2707.95,
+      "duration": 2.391,
+      "text": "it's a three input K map suppose I give"
+    },
+    {
+      "index": 898,
+      "start": 2707.96,
+      "end": 2709.75,
+      "duration": 1.79,
+      "text": "you a four input K map how will you do"
+    },
+    {
+      "index": 899,
+      "start": 2709.76,
+      "end": 2712.51,
+      "duration": 2.75,
+      "text": "this using a 4 to one multiplexer or"
+    },
+    {
+      "index": 900,
+      "start": 2712.52,
+      "end": 2714.589,
+      "duration": 2.069,
+      "text": "sometimes I may have to go for8 input"
+    },
+    {
+      "index": 901,
+      "start": 2714.599,
+      "end": 2716.67,
+      "duration": 2.071,
+      "text": "multiplexer 8 to one"
+    },
+    {
+      "index": 902,
+      "start": 2716.68,
+      "end": 2718.829,
+      "duration": 2.149,
+      "text": "Multiplex so there's no need for me to"
+    },
+    {
+      "index": 903,
+      "start": 2718.839,
+      "end": 2720.069,
+      "duration": 1.23,
+      "text": "give you a separate homework what you"
+    },
+    {
+      "index": 904,
+      "start": 2720.079,
+      "end": 2723.23,
+      "duration": 3.151,
+      "text": "can do is can take any of"
+    },
+    {
+      "index": 905,
+      "start": 2723.24,
+      "end": 2726.19,
+      "duration": 2.95,
+      "text": "the three variable C production or four"
+    },
+    {
+      "index": 906,
+      "start": 2726.2,
+      "end": 2728.15,
+      "duration": 1.95,
+      "text": "variable C production and try to map"
+    },
+    {
+      "index": 907,
+      "start": 2728.16,
+      "end": 2732.87,
+      "duration": 4.71,
+      "text": "them into Maxes first using 4 to1 Maxes"
+    },
+    {
+      "index": 908,
+      "start": 2732.88,
+      "end": 2734.87,
+      "duration": 1.99,
+      "text": "and if necessary sometime you can use 8"
+    },
+    {
+      "index": 909,
+      "start": 2734.88,
+      "end": 2738.309,
+      "duration": 3.429,
+      "text": "to1 Maxes 8 to1 Maxes and 4 to1 Maes of"
+    },
+    {
+      "index": 910,
+      "start": 2738.319,
+      "end": 2739.47,
+      "duration": 1.151,
+      "text": "course we'll do some more examples in"
+    },
+    {
+      "index": 911,
+      "start": 2739.48,
+      "end": 2741.67,
+      "duration": 2.19,
+      "text": "the class but there's no need for you to"
+    },
+    {
+      "index": 912,
+      "start": 2741.68,
+      "end": 2743.79,
+      "duration": 2.11,
+      "text": "wait for me to give a"
+    },
+    {
+      "index": 913,
+      "start": 2743.8,
+      "end": 2748.109,
+      "duration": 4.309,
+      "text": "proper um formal homework assignment"
+    },
+    {
+      "index": 914,
+      "start": 2748.119,
+      "end": 2750.349,
+      "duration": 2.23,
+      "text": "sheet whatever you have done earlier"
+    },
+    {
+      "index": 915,
+      "start": 2750.359,
+      "end": 2751.23,
+      "duration": 0.871,
+      "text": "with"
+    },
+    {
+      "index": 916,
+      "start": 2751.24,
+      "end": 2753.87,
+      "duration": 2.63,
+      "text": "gets in principle we must be able to do"
+    },
+    {
+      "index": 917,
+      "start": 2753.88,
+      "end": 2755.91,
+      "duration": 2.03,
+      "text": "it with"
+    },
+    {
+      "index": 918,
+      "start": 2755.92,
+      "end": 2759.829,
+      "duration": 3.909,
+      "text": "multiplexes so what we'll do is next see"
+    },
+    {
+      "index": 919,
+      "start": 2759.839,
+      "end": 2762.99,
+      "duration": 3.151,
+      "text": "some more cir Maas and then also see"
+    },
+    {
+      "index": 920,
+      "start": 2763.0,
+      "end": 2766.069,
+      "duration": 3.069,
+      "text": "what are the other I other than ma which"
+    },
+    {
+      "index": 921,
+      "start": 2766.079,
+      "end": 2768.589,
+      "duration": 2.51,
+      "text": "are medium scale IND circuit ices which"
+    },
+    {
+      "index": 922,
+      "start": 2768.599,
+      "end": 2784.36,
+      "duration": 15.761,
+      "text": "can be used for combination logic Des"
+    },
+    {
+      "index": 923,
+      "start": 2848.069,
+      "end": 2848.079,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 924,
+      "start": 2848.079,
+      "end": 2851.84,
+      "duration": 3.761,
+      "text": "t"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

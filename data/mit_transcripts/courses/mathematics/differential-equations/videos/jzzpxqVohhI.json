@@ -1,0 +1,1894 @@
+{
+  "video": {
+    "id": "jzzpxqVohhI",
+    "title": "Computing Fourier Series | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=jzzpxqVohhI",
+    "channel": "MIT OpenCourseWare",
+    "duration": 882,
+    "language": "en"
+  },
+  "segment_count": 268,
+  "segments": [
+    {
+      "index": 0,
+      "start": 8.39,
+      "end": 8.4,
+      "duration": 0.01,
+      "text": "hi everyone welcome back so today we'd"
+    },
+    {
+      "index": 1,
+      "start": 8.4,
+      "end": 11.19,
+      "duration": 2.79,
+      "text": "like to uh tackle a problem in 4A series"
+    },
+    {
+      "index": 2,
+      "start": 11.2,
+      "end": 12.91,
+      "duration": 1.71,
+      "text": "and uh specifically we're just going to"
+    },
+    {
+      "index": 3,
+      "start": 12.92,
+      "end": 15.47,
+      "duration": 2.55,
+      "text": "compute the 4A series for uh a simple"
+    },
+    {
+      "index": 4,
+      "start": 15.48,
+      "end": 17.23,
+      "duration": 1.75,
+      "text": "function so the function we're"
+    },
+    {
+      "index": 5,
+      "start": 17.24,
+      "end": 20.269,
+      "duration": 3.029,
+      "text": "interested in is f of t uh which we're"
+    },
+    {
+      "index": 6,
+      "start": 20.279,
+      "end": 23.99,
+      "duration": 3.711,
+      "text": "told is periodic with Period 2 pi F of T"
+    },
+    {
+      "index": 7,
+      "start": 24.0,
+      "end": 27.47,
+      "duration": 3.47,
+      "text": "is one from minus pi to 0er and then"
+    },
+    {
+      "index": 8,
+      "start": 27.48,
+      "end": 31.83,
+      "duration": 4.35,
+      "text": "it's minus one from Z to"
+    },
+    {
+      "index": 9,
+      "start": 31.84,
+      "end": 34.03,
+      "duration": 2.19,
+      "text": "Pi so first off we're interested in"
+    },
+    {
+      "index": 10,
+      "start": 34.04,
+      "end": 35.19,
+      "duration": 1.15,
+      "text": "sketching F of"
+    },
+    {
+      "index": 11,
+      "start": 35.2,
+      "end": 37.95,
+      "duration": 2.75,
+      "text": "T secondly uh we'd like to compute the"
+    },
+    {
+      "index": 12,
+      "start": 37.96,
+      "end": 41.79,
+      "duration": 3.83,
+      "text": "4A series uh for f of T and then thirdly"
+    },
+    {
+      "index": 13,
+      "start": 41.8,
+      "end": 42.99,
+      "duration": 1.19,
+      "text": "uh we'd like to sketch the first"
+    },
+    {
+      "index": 14,
+      "start": 43.0,
+      "end": 46.549,
+      "duration": 3.549,
+      "text": "non-zero term of the 4A series and uh we"
+    },
+    {
+      "index": 15,
+      "start": 46.559,
+      "end": 49.35,
+      "duration": 2.791,
+      "text": "can specifically uh sketch this uh"
+    },
+    {
+      "index": 16,
+      "start": 49.36,
+      "end": 53.59,
+      "duration": 4.23,
+      "text": "single term on top of f of T so I'll let"
+    },
+    {
+      "index": 17,
+      "start": 53.6,
+      "end": 55.349,
+      "duration": 1.749,
+      "text": "you think about this problem for now and"
+    },
+    {
+      "index": 18,
+      "start": 55.359,
+      "end": 69.109,
+      "duration": 13.75,
+      "text": "I'll be back in a moment"
+    },
+    {
+      "index": 19,
+      "start": 72.35,
+      "end": 72.36,
+      "duration": 0.01,
+      "text": "hi everyone welcome back okay so let's"
+    },
+    {
+      "index": 20,
+      "start": 72.36,
+      "end": 81.95,
+      "duration": 9.59,
+      "text": "take a look at sketching F of"
+    },
+    {
+      "index": 21,
+      "start": 84.35,
+      "end": 84.36,
+      "duration": 0.01,
+      "text": "t Okay so for part"
+    },
+    {
+      "index": 22,
+      "start": 84.36,
+      "end": 89.95,
+      "duration": 5.59,
+      "text": "A we have our axis T and we're told F of"
+    },
+    {
+      "index": 23,
+      "start": 89.96,
+      "end": 92.99,
+      "duration": 3.03,
+      "text": "t uh within some interval so we might as"
+    },
+    {
+      "index": 24,
+      "start": 93.0,
+      "end": 95.149,
+      "duration": 2.149,
+      "text": "well plot F of t on that"
+    },
+    {
+      "index": 25,
+      "start": 95.159,
+      "end": 99.31,
+      "duration": 4.151,
+      "text": "interval okay so minus"
+    },
+    {
+      "index": 26,
+      "start": 108.87,
+      "end": 108.88,
+      "duration": 0.01,
+      "text": "one from minus pi to"
+    },
+    {
+      "index": 27,
+      "start": 108.88,
+      "end": 112.03,
+      "duration": 3.15,
+      "text": "0 we're also told that it's minus"
+    },
+    {
+      "index": 28,
+      "start": 112.04,
+      "end": 118.109,
+      "duration": 6.069,
+      "text": "one from 0 to"
+    },
+    {
+      "index": 29,
+      "start": 121.63,
+      "end": 121.64,
+      "duration": 0.01,
+      "text": "Pi and now uh to fill in the blanks or"
+    },
+    {
+      "index": 30,
+      "start": 121.64,
+      "end": 124.069,
+      "duration": 2.429,
+      "text": "to complete the picture of f we're told"
+    },
+    {
+      "index": 31,
+      "start": 124.079,
+      "end": 126.67,
+      "duration": 2.591,
+      "text": "that it has a period of 2 pi so note"
+    },
+    {
+      "index": 32,
+      "start": 126.68,
+      "end": 128.91,
+      "duration": 2.23,
+      "text": "that they've told us what F looks like"
+    },
+    {
+      "index": 33,
+      "start": 128.92,
+      "end": 131.39,
+      "duration": 2.47,
+      "text": "over the range uh of minus pi to Pi"
+    },
+    {
+      "index": 34,
+      "start": 131.4,
+      "end": 134.03,
+      "duration": 2.63,
+      "text": "which is a length of 2 pi so basically"
+    },
+    {
+      "index": 35,
+      "start": 134.04,
+      "end": 135.63,
+      "duration": 1.59,
+      "text": "what we can do is we can use this as a"
+    },
+    {
+      "index": 36,
+      "start": 135.64,
+      "end": 137.27,
+      "duration": 1.63,
+      "text": "stamp and just pick up this entire"
+    },
+    {
+      "index": 37,
+      "start": 137.28,
+      "end": 140.75,
+      "duration": 3.47,
+      "text": "picture shift it over one period 2 pi"
+    },
+    {
+      "index": 38,
+      "start": 140.76,
+      "end": 142.83,
+      "duration": 2.07,
+      "text": "and just think of thinking of this uh"
+    },
+    {
+      "index": 39,
+      "start": 142.84,
+      "end": 145.63,
+      "duration": 2.79,
+      "text": "picture and stamping it in multiple"
+    },
+    {
+      "index": 40,
+      "start": 145.64,
+      "end": 156.79,
+      "duration": 11.15,
+      "text": "places so just filling this in"
+    },
+    {
+      "index": 41,
+      "start": 166.83,
+      "end": 166.84,
+      "duration": 0.01,
+      "text": "wave which jumps between minus one and"
+    },
+    {
+      "index": 42,
+      "start": 166.84,
+      "end": 169.47,
+      "duration": 2.63,
+      "text": "one at every multiple of"
+    },
+    {
+      "index": 43,
+      "start": 169.48,
+      "end": 173.11,
+      "duration": 3.63,
+      "text": "Pi okay so this concludes part a uh for"
+    },
+    {
+      "index": 44,
+      "start": 173.12,
+      "end": 175.39,
+      "duration": 2.27,
+      "text": "Part B which is the real meat of the"
+    },
+    {
+      "index": 45,
+      "start": 175.4,
+      "end": 177.27,
+      "duration": 1.87,
+      "text": "meat of the problem uh we're interested"
+    },
+    {
+      "index": 46,
+      "start": 177.28,
+      "end": 181.03,
+      "duration": 3.75,
+      "text": "in Computing the fora series for f of t"
+    },
+    {
+      "index": 47,
+      "start": 181.04,
+      "end": 182.949,
+      "duration": 1.909,
+      "text": "now we can always write down a 4A series"
+    },
+    {
+      "index": 48,
+      "start": 182.959,
+      "end": 184.63,
+      "duration": 1.671,
+      "text": "for any periodic"
+    },
+    {
+      "index": 49,
+      "start": 184.64,
+      "end": 188.99,
+      "duration": 4.35,
+      "text": "function and specifically in this case"
+    },
+    {
+      "index": 50,
+      "start": 189.0,
+      "end": 191.71,
+      "duration": 2.71,
+      "text": "so for Part B the periodic function"
+    },
+    {
+      "index": 51,
+      "start": 191.72,
+      "end": 194.99,
+      "duration": 3.27,
+      "text": "we're interested in has Period 2 pi so"
+    },
+    {
+      "index": 52,
+      "start": 195.0,
+      "end": 197.589,
+      "duration": 2.589,
+      "text": "in the"
+    },
+    {
+      "index": 53,
+      "start": 199.71,
+      "end": 199.72,
+      "duration": 0.01,
+      "text": "notes for the class notes we've"
+    },
+    {
+      "index": 54,
+      "start": 199.72,
+      "end": 202.509,
+      "duration": 2.789,
+      "text": "identified L with half the period so in"
+    },
+    {
+      "index": 55,
+      "start": 202.519,
+      "end": 206.27,
+      "duration": 3.751,
+      "text": "this case L is 2 Pi /"
+    },
+    {
+      "index": 56,
+      "start": 206.28,
+      "end": 210.19,
+      "duration": 3.91,
+      "text": "2 which gives us pi"
+    },
+    {
+      "index": 57,
+      "start": 210.2,
+      "end": 212.71,
+      "duration": 2.51,
+      "text": "and just to recall what a fora series is"
+    },
+    {
+      "index": 58,
+      "start": 212.72,
+      "end": 214.11,
+      "duration": 1.39,
+      "text": "what we do is we try and take our"
+    },
+    {
+      "index": 59,
+      "start": 214.12,
+      "end": 216.07,
+      "duration": 1.95,
+      "text": "function f of"
+    },
+    {
+      "index": 60,
+      "start": 216.08,
+      "end": 219.75,
+      "duration": 3.67,
+      "text": "T and write it down as a summation of ss"
+    },
+    {
+      "index": 61,
+      "start": 219.76,
+      "end": 220.75,
+      "duration": 0.99,
+      "text": "and"
+    },
+    {
+      "index": 62,
+      "start": 220.76,
+      "end": 223.39,
+      "duration": 2.63,
+      "text": "cosiness so in this case for a function"
+    },
+    {
+      "index": 63,
+      "start": 223.4,
+      "end": 225.99,
+      "duration": 2.59,
+      "text": "f of T which is 2 pi periodic it's going"
+    },
+    {
+      "index": 64,
+      "start": 226.0,
+      "end": 227.39,
+      "duration": 1.39,
+      "text": "to look something like this it's going"
+    },
+    {
+      "index": 65,
+      "start": 227.4,
+      "end": 230.47,
+      "duration": 3.07,
+      "text": "to be a of 0"
+    },
+    {
+      "index": 66,
+      "start": 230.48,
+      "end": 235.069,
+      "duration": 4.589,
+      "text": "plus sum from Nal 1 there's going to be"
+    },
+    {
+      "index": 67,
+      "start": 235.079,
+      "end": 238.19,
+      "duration": 3.111,
+      "text": "infinitely many terms but in this case"
+    },
+    {
+      "index": 68,
+      "start": 238.2,
+      "end": 242.069,
+      "duration": 3.869,
+      "text": "we have a of n time cosine of"
+    },
+    {
+      "index": 69,
+      "start": 242.079,
+      "end": 245.39,
+      "duration": 3.311,
+      "text": "NT and it's NT here because we have"
+    },
+    {
+      "index": 70,
+      "start": 245.4,
+      "end": 249.39,
+      "duration": 3.99,
+      "text": "Period 2 pi plus"
+    },
+    {
+      "index": 71,
+      "start": 249.4,
+      "end": 252.27,
+      "duration": 2.87,
+      "text": "BN sin"
+    },
+    {
+      "index": 72,
+      "start": 252.28,
+      "end": 255.629,
+      "duration": 3.349,
+      "text": "nt Okay so this is the general"
+    },
+    {
+      "index": 73,
+      "start": 255.639,
+      "end": 258.11,
+      "duration": 2.471,
+      "text": "form and when asked to compute the 4A"
+    },
+    {
+      "index": 74,
+      "start": 258.12,
+      "end": 260.789,
+      "duration": 2.669,
+      "text": "series of a of a function the main"
+    },
+    {
+      "index": 75,
+      "start": 260.799,
+      "end": 262.39,
+      "duration": 1.591,
+      "text": "difficulty is to compute these"
+    },
+    {
+      "index": 76,
+      "start": 262.4,
+      "end": 264.469,
+      "duration": 2.069,
+      "text": "coefficients a n and"
+    },
+    {
+      "index": 77,
+      "start": 264.479,
+      "end": 267.35,
+      "duration": 2.871,
+      "text": "BN however that essentially boils down"
+    },
+    {
+      "index": 78,
+      "start": 267.36,
+      "end": 274.189,
+      "duration": 6.829,
+      "text": "to working out some integrals"
+    },
+    {
+      "index": 79,
+      "start": 276.469,
+      "end": 276.479,
+      "duration": 0.01,
+      "text": "okay so let's take a look at what a of"
+    },
+    {
+      "index": 80,
+      "start": 276.479,
+      "end": 279.11,
+      "duration": 2.631,
+      "text": "Zer"
+    },
+    {
+      "index": 81,
+      "start": 284.27,
+      "end": 284.28,
+      "duration": 0.01,
+      "text": "is so a0 the formula for a z is 1 over 2"
+    },
+    {
+      "index": 82,
+      "start": 284.28,
+      "end": 287.23,
+      "duration": 2.95,
+      "text": "L so in this case it's 1 over 2"
+    },
+    {
+      "index": 83,
+      "start": 287.24,
+      "end": 290.27,
+      "duration": 3.03,
+      "text": "pi times the integral over one period of"
+    },
+    {
+      "index": 84,
+      "start": 290.28,
+      "end": 293.23,
+      "duration": 2.95,
+      "text": "the function from minus pi to Pi of just"
+    },
+    {
+      "index": 85,
+      "start": 293.24,
+      "end": 295.55,
+      "duration": 2.31,
+      "text": "F of"
+    },
+    {
+      "index": 86,
+      "start": 295.56,
+      "end": 298.43,
+      "duration": 2.87,
+      "text": "T So notice how a z is just the average"
+    },
+    {
+      "index": 87,
+      "start": 298.44,
+      "end": 300.95,
+      "duration": 2.51,
+      "text": "of the function so if we take a look at"
+    },
+    {
+      "index": 88,
+      "start": 300.96,
+      "end": 303.87,
+      "duration": 2.91,
+      "text": "the function f of t f of T spends"
+    },
+    {
+      "index": 89,
+      "start": 303.88,
+      "end": 306.83,
+      "duration": 2.95,
+      "text": "exactly half of its time at one and half"
+    },
+    {
+      "index": 90,
+      "start": 306.84,
+      "end": 309.469,
+      "duration": 2.629,
+      "text": "of its time at minus one so immediately"
+    },
+    {
+      "index": 91,
+      "start": 309.479,
+      "end": 311.79,
+      "duration": 2.311,
+      "text": "we could guess that the average value of"
+    },
+    {
+      "index": 92,
+      "start": 311.8,
+      "end": 315.749,
+      "duration": 3.949,
+      "text": "f of T is going to be"
+    },
+    {
+      "index": 93,
+      "start": 328.189,
+      "end": 328.199,
+      "duration": 0.01,
+      "text": "pi minus pi to Zer F of T takes on the"
+    },
+    {
+      "index": 94,
+      "start": 328.199,
+      "end": 332.309,
+      "duration": 4.11,
+      "text": "value of plus one"
+    },
+    {
+      "index": 95,
+      "start": 334.87,
+      "end": 334.88,
+      "duration": 0.01,
+      "text": "and then from 0 to"
+    },
+    {
+      "index": 96,
+      "start": 334.88,
+      "end": 339.39,
+      "duration": 4.51,
+      "text": "Pi F of T takes on the value of minus"
+    },
+    {
+      "index": 97,
+      "start": 339.4,
+      "end": 342.95,
+      "duration": 3.55,
+      "text": "one so we would end up getting Pi minus"
+    },
+    {
+      "index": 98,
+      "start": 342.96,
+      "end": 346.23,
+      "duration": 3.27,
+      "text": "Pi which is"
+    },
+    {
+      "index": 99,
+      "start": 346.24,
+      "end": 348.15,
+      "duration": 1.91,
+      "text": "zero"
+    },
+    {
+      "index": 100,
+      "start": 348.16,
+      "end": 351.95,
+      "duration": 3.79,
+      "text": "okay for a"
+    },
+    {
+      "index": 101,
+      "start": 356.309,
+      "end": 356.319,
+      "duration": 0.01,
+      "text": "n the formula is one over half the"
+    },
+    {
+      "index": 102,
+      "start": 356.319,
+      "end": 358.83,
+      "duration": 2.511,
+      "text": "period so note how a of zero is just a"
+    },
+    {
+      "index": 103,
+      "start": 358.84,
+      "end": 360.39,
+      "duration": 1.55,
+      "text": "special case"
+    },
+    {
+      "index": 104,
+      "start": 360.4,
+      "end": 363.59,
+      "duration": 3.19,
+      "text": "we always have the full period in a zero"
+    },
+    {
+      "index": 105,
+      "start": 363.6,
+      "end": 365.15,
+      "duration": 1.55,
+      "text": "but in a n and"
+    },
+    {
+      "index": 106,
+      "start": 365.16,
+      "end": 367.589,
+      "duration": 2.429,
+      "text": "BN uh the factor that divides the"
+    },
+    {
+      "index": 107,
+      "start": 367.599,
+      "end": 370.749,
+      "duration": 3.15,
+      "text": "integral is always going to be half the"
+    },
+    {
+      "index": 108,
+      "start": 370.759,
+      "end": 373.589,
+      "duration": 2.83,
+      "text": "period time minus pi to"
+    },
+    {
+      "index": 109,
+      "start": 373.599,
+      "end": 376.67,
+      "duration": 3.071,
+      "text": "Pi F of"
+    },
+    {
+      "index": 110,
+      "start": 376.68,
+      "end": 380.15,
+      "duration": 3.47,
+      "text": "T cosine"
+    },
+    {
+      "index": 111,
+      "start": 380.16,
+      "end": 382.11,
+      "duration": 1.95,
+      "text": "NT"
+    },
+    {
+      "index": 112,
+      "start": 382.12,
+      "end": 384.79,
+      "duration": 2.67,
+      "text": "DT and I I should point out that in"
+    },
+    {
+      "index": 113,
+      "start": 384.8,
+      "end": 386.71,
+      "duration": 1.91,
+      "text": "general we only need to integrate over"
+    },
+    {
+      "index": 114,
+      "start": 386.72,
+      "end": 388.99,
+      "duration": 2.27,
+      "text": "one period of the function so in some"
+    },
+    {
+      "index": 115,
+      "start": 389.0,
+      "end": 390.11,
+      "duration": 1.11,
+      "text": "sense there's nothing special about"
+    },
+    {
+      "index": 116,
+      "start": 390.12,
+      "end": 393.79,
+      "duration": 3.67,
+      "text": "minus pi and Pi it's just uh very often"
+    },
+    {
+      "index": 117,
+      "start": 393.8,
+      "end": 395.749,
+      "duration": 1.949,
+      "text": "these are the easiest in uh bounds of"
+    },
+    {
+      "index": 118,
+      "start": 395.759,
+      "end": 400.27,
+      "duration": 4.511,
+      "text": "integration to uh to integrate"
+    },
+    {
+      "index": 119,
+      "start": 402.79,
+      "end": 402.8,
+      "duration": 0.01,
+      "text": "over but in practice we could have used"
+    },
+    {
+      "index": 120,
+      "start": 402.8,
+      "end": 406.43,
+      "duration": 3.63,
+      "text": "0 to 2 pi or any other uh interval as"
+    },
+    {
+      "index": 121,
+      "start": 406.44,
+      "end": 409.95,
+      "duration": 3.51,
+      "text": "long as it's exactly one period of the"
+    },
+    {
+      "index": 122,
+      "start": 409.96,
+      "end": 414.23,
+      "duration": 4.27,
+      "text": "function okay so uh in this case uh I"
+    },
+    {
+      "index": 123,
+      "start": 414.24,
+      "end": 415.67,
+      "duration": 1.43,
+      "text": "just like to take a look at the symmetry"
+    },
+    {
+      "index": 124,
+      "start": 415.68,
+      "end": 418.51,
+      "duration": 2.83,
+      "text": "of f of T and we note that the the"
+    },
+    {
+      "index": 125,
+      "start": 418.52,
+      "end": 421.23,
+      "duration": 2.71,
+      "text": "function f of t is actually uh odd about"
+    },
+    {
+      "index": 126,
+      "start": 421.24,
+      "end": 422.43,
+      "duration": 1.19,
+      "text": "the"
+    },
+    {
+      "index": 127,
+      "start": 422.44,
+      "end": 426.909,
+      "duration": 4.469,
+      "text": "origin so if F of T is odd and cosine T"
+    },
+    {
+      "index": 128,
+      "start": 426.919,
+      "end": 429.589,
+      "duration": 2.67,
+      "text": "is an even function then an odd times an"
+    },
+    {
+      "index": 129,
+      "start": 429.599,
+      "end": 431.39,
+      "duration": 1.791,
+      "text": "even function is going to be an odd"
+    },
+    {
+      "index": 130,
+      "start": 431.4,
+      "end": 433.55,
+      "duration": 2.15,
+      "text": "function and when you integrate an odd"
+    },
+    {
+      "index": 131,
+      "start": 433.56,
+      "end": 437.309,
+      "duration": 3.749,
+      "text": "function from minus any value to the"
+    },
+    {
+      "index": 132,
+      "start": 437.319,
+      "end": 438.83,
+      "duration": 1.511,
+      "text": "same positive value so in this case"
+    },
+    {
+      "index": 133,
+      "start": 438.84,
+      "end": 442.83,
+      "duration": 3.99,
+      "text": "minus pi to Pi we always get"
+    },
+    {
+      "index": 134,
+      "start": 442.84,
+      "end": 446.23,
+      "duration": 3.39,
+      "text": "zero so this is actually zero because"
+    },
+    {
+      "index": 135,
+      "start": 446.24,
+      "end": 449.51,
+      "duration": 3.27,
+      "text": "we're integrating an odd function over"
+    },
+    {
+      "index": 136,
+      "start": 449.52,
+      "end": 459.43,
+      "duration": 9.91,
+      "text": "for a symmetric"
+    },
+    {
+      "index": 137,
+      "start": 462.23,
+      "end": 462.24,
+      "duration": 0.01,
+      "text": "interval okay so lastly we have the"
+    },
+    {
+      "index": 138,
+      "start": 462.24,
+      "end": 464.07,
+      "duration": 1.83,
+      "text": "values of uh"
+    },
+    {
+      "index": 139,
+      "start": 464.08,
+      "end": 467.629,
+      "duration": 3.549,
+      "text": "BN which are one over"
+    },
+    {
+      "index": 140,
+      "start": 467.639,
+      "end": 469.909,
+      "duration": 2.27,
+      "text": "Pi minus pi to"
+    },
+    {
+      "index": 141,
+      "start": 469.919,
+      "end": 475.23,
+      "duration": 5.311,
+      "text": "Pi F of T of sin n"
+    },
+    {
+      "index": 142,
+      "start": 478.189,
+      "end": 478.199,
+      "duration": 0.01,
+      "text": "t uh"
+    },
+    {
+      "index": 143,
+      "start": 478.199,
+      "end": 480.629,
+      "duration": 2.43,
+      "text": "DT and if we were to look at just the"
+    },
+    {
+      "index": 144,
+      "start": 480.639,
+      "end": 483.149,
+      "duration": 2.51,
+      "text": "Symmetry argument again F of T is an odd"
+    },
+    {
+      "index": 145,
+      "start": 483.159,
+      "end": 485.99,
+      "duration": 2.831,
+      "text": "function sin T is an odd function and"
+    },
+    {
+      "index": 146,
+      "start": 486.0,
+      "end": 487.67,
+      "duration": 1.67,
+      "text": "odd times an odd function is an even"
+    },
+    {
+      "index": 147,
+      "start": 487.68,
+      "end": 489.589,
+      "duration": 1.909,
+      "text": "function when you integrate an even"
+    },
+    {
+      "index": 148,
+      "start": 489.599,
+      "end": 493.07,
+      "duration": 3.471,
+      "text": "function over a symmetric bound uh you"
+    },
+    {
+      "index": 149,
+      "start": 493.08,
+      "end": 494.79,
+      "duration": 1.71,
+      "text": "will essentially get twice the value of"
+    },
+    {
+      "index": 150,
+      "start": 494.8,
+      "end": 497.11,
+      "duration": 2.31,
+      "text": "the integral from zero to one of the"
+    },
+    {
+      "index": 151,
+      "start": 497.12,
+      "end": 499.55,
+      "duration": 2.43,
+      "text": "bounds so B of n in this case doesn't"
+    },
+    {
+      "index": 152,
+      "start": 499.56,
+      "end": 501.35,
+      "duration": 1.79,
+      "text": "vanish which means we actually have to"
+    },
+    {
+      "index": 153,
+      "start": 501.36,
+      "end": 504.83,
+      "duration": 3.47,
+      "text": "do some"
+    },
+    {
+      "index": 154,
+      "start": 508.469,
+      "end": 508.479,
+      "duration": 0.01,
+      "text": "work okay so what what do we do well we"
+    },
+    {
+      "index": 155,
+      "start": 508.479,
+      "end": 509.869,
+      "duration": 1.39,
+      "text": "know the value of f of t on two"
+    },
+    {
+      "index": 156,
+      "start": 509.879,
+      "end": 511.749,
+      "duration": 1.87,
+      "text": "intervals so we're just going to have to"
+    },
+    {
+      "index": 157,
+      "start": 511.759,
+      "end": 513.87,
+      "duration": 2.111,
+      "text": "work out each"
+    },
+    {
+      "index": 158,
+      "start": 513.88,
+      "end": 517.029,
+      "duration": 3.149,
+      "text": "interval minus pi to 0 it takes on the"
+    },
+    {
+      "index": 159,
+      "start": 517.039,
+      "end": 524.23,
+      "duration": 7.191,
+      "text": "value of one so we have s n"
+    },
+    {
+      "index": 160,
+      "start": 526.91,
+      "end": 526.92,
+      "duration": 0.01,
+      "text": "t and then from 0 to"
+    },
+    {
+      "index": 161,
+      "start": 526.92,
+      "end": 530.79,
+      "duration": 3.87,
+      "text": "Pi F of T takes on the value of minus"
+    },
+    {
+      "index": 162,
+      "start": 530.8,
+      "end": 534.11,
+      "duration": 3.31,
+      "text": "one sin"
+    },
+    {
+      "index": 163,
+      "start": 536.63,
+      "end": 536.64,
+      "duration": 0.01,
+      "text": "NT"
+    },
+    {
+      "index": 164,
+      "start": 536.64,
+      "end": 538.67,
+      "duration": 2.03,
+      "text": "DTS and you'll note that these these"
+    },
+    {
+      "index": 165,
+      "start": 538.68,
+      "end": 542.269,
+      "duration": 3.589,
+      "text": "integrals are actually the"
+    },
+    {
+      "index": 166,
+      "start": 551.509,
+      "end": 551.519,
+      "duration": 0.01,
+      "text": "Pi 0 to Pi sin"
+    },
+    {
+      "index": 167,
+      "start": 551.519,
+      "end": 554.75,
+      "duration": 3.231,
+      "text": "NT"
+    },
+    {
+      "index": 168,
+      "start": 557.55,
+      "end": 557.56,
+      "duration": 0.01,
+      "text": "DT which if we"
+    },
+    {
+      "index": 169,
+      "start": 557.56,
+      "end": 560.35,
+      "duration": 2.79,
+      "text": "integrate is 1 over"
+    },
+    {
+      "index": 170,
+      "start": 560.36,
+      "end": 565.47,
+      "duration": 5.11,
+      "text": "n cosine"
+    },
+    {
+      "index": 171,
+      "start": 575.949,
+      "end": 575.959,
+      "duration": 0.01,
+      "text": "so if I work this out we get a minus and"
+    },
+    {
+      "index": 172,
+      "start": 575.959,
+      "end": 579.87,
+      "duration": 3.911,
+      "text": "a minus"
+    },
+    {
+      "index": 173,
+      "start": 582.59,
+      "end": 582.6,
+      "duration": 0.01,
+      "text": "well get minus 1/"
+    },
+    {
+      "index": 174,
+      "start": 582.6,
+      "end": 586.15,
+      "duration": 3.55,
+      "text": "n cine n"
+    },
+    {
+      "index": 175,
+      "start": 586.16,
+      "end": 590.15,
+      "duration": 3.99,
+      "text": "pi plus 1/"
+    },
+    {
+      "index": 176,
+      "start": 590.16,
+      "end": 595.11,
+      "duration": 4.95,
+      "text": "n so note that cosine of Z is just"
+    },
+    {
+      "index": 177,
+      "start": 597.829,
+      "end": 597.839,
+      "duration": 0.01,
+      "text": "one okay and now if we take a look at"
+    },
+    {
+      "index": 178,
+      "start": 597.839,
+      "end": 600.15,
+      "duration": 2.311,
+      "text": "cosine n Pi we you see that cosine and"
+    },
+    {
+      "index": 179,
+      "start": 600.16,
+      "end": 602.87,
+      "duration": 2.71,
+      "text": "Pi oscillates between min-1 and 1 so"
+    },
+    {
+      "index": 180,
+      "start": 602.88,
+      "end": 606.069,
+      "duration": 3.189,
+      "text": "cosine of pi is 1 cosine of 2 pi is 1"
+    },
+    {
+      "index": 181,
+      "start": 606.079,
+      "end": 609.31,
+      "duration": 3.231,
+      "text": "cosine of 3 Pi is - 1 dot dot dot so"
+    },
+    {
+      "index": 182,
+      "start": 609.32,
+      "end": 610.71,
+      "duration": 1.39,
+      "text": "this term right here is"
+    },
+    {
+      "index": 183,
+      "start": 610.72,
+      "end": 616.99,
+      "duration": 6.27,
+      "text": "actually 1 to the"
+    },
+    {
+      "index": 184,
+      "start": 624.99,
+      "end": 625.0,
+      "duration": 0.01,
+      "text": "Pi"
+    },
+    {
+      "index": 185,
+      "start": 625.0,
+      "end": 632.269,
+      "duration": 7.269,
+      "text": "1us -1 to the n"
+    },
+    {
+      "index": 186,
+      "start": 633.949,
+      "end": 633.959,
+      "duration": 0.01,
+      "text": "okay and now if we just plug in some"
+    },
+    {
+      "index": 187,
+      "start": 633.959,
+      "end": 636.23,
+      "duration": 2.271,
+      "text": "values of B of zero B or sorry B of one"
+    },
+    {
+      "index": 188,
+      "start": 636.24,
+      "end": 639.11,
+      "duration": 2.87,
+      "text": "B of uh two B of three B of four we can"
+    },
+    {
+      "index": 189,
+      "start": 639.12,
+      "end": 642.35,
+      "duration": 3.23,
+      "text": "see what pattern uh emerges in the"
+    },
+    {
+      "index": 190,
+      "start": 642.36,
+      "end": 645.35,
+      "duration": 2.99,
+      "text": "B's okay so B of"
+    },
+    {
+      "index": 191,
+      "start": 645.36,
+      "end": 649.949,
+      "duration": 4.589,
+      "text": "one if I plug in one I get 1us Nega 1 is"
+    },
+    {
+      "index": 192,
+      "start": 649.959,
+      "end": 655.19,
+      "duration": 5.231,
+      "text": "going to be two so I get -4 over"
+    },
+    {
+      "index": 193,
+      "start": 655.2,
+      "end": 659.75,
+      "duration": 4.55,
+      "text": "Pi uh B of two"
+    },
+    {
+      "index": 194,
+      "start": 661.79,
+      "end": 661.8,
+      "duration": 0.01,
+      "text": "is going to be 1"
+    },
+    {
+      "index": 195,
+      "start": 661.8,
+      "end": 667.03,
+      "duration": 5.23,
+      "text": "minus - 1^ squ is just one so this"
+    },
+    {
+      "index": 196,
+      "start": 671.43,
+      "end": 671.44,
+      "duration": 0.01,
+      "text": "vanishes B of 3 is going to be 1 minus"
+    },
+    {
+      "index": 197,
+      "start": 671.44,
+      "end": 674.069,
+      "duration": 2.629,
+      "text": "-1 cubed is just negative 1 so again we"
+    },
+    {
+      "index": 198,
+      "start": 674.079,
+      "end": 681.23,
+      "duration": 7.151,
+      "text": "get ne uh 4 over 3"
+    },
+    {
+      "index": 199,
+      "start": 684.389,
+      "end": 684.399,
+      "duration": 0.01,
+      "text": "pi b of 4 is going to be"
+    },
+    {
+      "index": 200,
+      "start": 684.399,
+      "end": 686.829,
+      "duration": 2.43,
+      "text": "zero dot dot"
+    },
+    {
+      "index": 201,
+      "start": 686.839,
+      "end": 689.389,
+      "duration": 2.55,
+      "text": "dot okay"
+    },
+    {
+      "index": 202,
+      "start": 689.399,
+      "end": 692.389,
+      "duration": 2.99,
+      "text": "so uh it's sometimes useful to write out"
+    },
+    {
+      "index": 203,
+      "start": 692.399,
+      "end": 695.19,
+      "duration": 2.791,
+      "text": "what the 4A series looks like so I'll"
+    },
+    {
+      "index": 204,
+      "start": 695.2,
+      "end": 697.99,
+      "duration": 2.79,
+      "text": "just write it out right"
+    },
+    {
+      "index": 205,
+      "start": 698.0,
+      "end": 701.389,
+      "duration": 3.389,
+      "text": "here so we have F of"
+    },
+    {
+      "index": 206,
+      "start": 701.399,
+      "end": 703.75,
+      "duration": 2.351,
+      "text": "T is going to be"
+    },
+    {
+      "index": 207,
+      "start": 703.76,
+      "end": 706.43,
+      "duration": 2.67,
+      "text": "-4 over"
+    },
+    {
+      "index": 208,
+      "start": 706.44,
+      "end": 710.23,
+      "duration": 3.79,
+      "text": "Pi Time s of"
+    },
+    {
+      "index": 209,
+      "start": 710.24,
+      "end": 713.15,
+      "duration": 2.91,
+      "text": "t plus"
+    },
+    {
+      "index": 210,
+      "start": 713.16,
+      "end": 716.75,
+      "duration": 3.59,
+      "text": "1/3 s of"
+    },
+    {
+      "index": 211,
+      "start": 721.15,
+      "end": 721.16,
+      "duration": 0.01,
+      "text": "3T + 1/5 sin"
+    },
+    {
+      "index": 212,
+      "start": 721.16,
+      "end": 724.59,
+      "duration": 3.43,
+      "text": "5T plus dot dot"
+    },
+    {
+      "index": 213,
+      "start": 724.6,
+      "end": 732.03,
+      "duration": 7.43,
+      "text": "dot okay so this concludes uh part"
+    },
+    {
+      "index": 214,
+      "start": 736.069,
+      "end": 736.079,
+      "duration": 0.01,
+      "text": "C oh sorry Part B and now lastly for"
+    },
+    {
+      "index": 215,
+      "start": 736.079,
+      "end": 738.79,
+      "duration": 2.711,
+      "text": "part C we're asked to comp uh to sketch"
+    },
+    {
+      "index": 216,
+      "start": 738.8,
+      "end": 741.15,
+      "duration": 2.35,
+      "text": "what does the uh the first for term look"
+    },
+    {
+      "index": 217,
+      "start": 741.16,
+      "end": 743.949,
+      "duration": 2.789,
+      "text": "like okay so in this case the first for"
+    },
+    {
+      "index": 218,
+      "start": 743.959,
+      "end": 745.43,
+      "duration": 1.471,
+      "text": "your term is going to"
+    },
+    {
+      "index": 219,
+      "start": 745.44,
+      "end": 750.15,
+      "duration": 4.71,
+      "text": "be4 over Pi * sin t"
+    },
+    {
+      "index": 220,
+      "start": 750.16,
+      "end": 751.35,
+      "duration": 1.19,
+      "text": "okay so I'm going to go back to our"
+    },
+    {
+      "index": 221,
+      "start": 751.36,
+      "end": 753.949,
+      "duration": 2.589,
+      "text": "diagram from part A okay so let's go"
+    },
+    {
+      "index": 222,
+      "start": 753.959,
+      "end": 756.15,
+      "duration": 2.191,
+      "text": "back to our diagram from part"
+    },
+    {
+      "index": 223,
+      "start": 756.16,
+      "end": 759.87,
+      "duration": 3.71,
+      "text": "A now what does -4 over Pi sin t look"
+    },
+    {
+      "index": 224,
+      "start": 759.88,
+      "end": 762.829,
+      "duration": 2.949,
+      "text": "like well it's a sine wave that has"
+    },
+    {
+      "index": 225,
+      "start": 762.839,
+      "end": 766.87,
+      "duration": 4.031,
+      "text": "exactly a period 2 pi and it's going to"
+    },
+    {
+      "index": 226,
+      "start": 766.88,
+      "end": 770.069,
+      "duration": 3.189,
+      "text": "line up exactly with this Square wave uh"
+    },
+    {
+      "index": 227,
+      "start": 770.079,
+      "end": 772.79,
+      "duration": 2.711,
+      "text": "in addition minus 4 over Pi is just"
+    },
+    {
+      "index": 228,
+      "start": 772.8,
+      "end": 774.629,
+      "duration": 1.829,
+      "text": "slightly larger than"
+    },
+    {
+      "index": 229,
+      "start": 774.639,
+      "end": 777.269,
+      "duration": 2.63,
+      "text": "one so we're going to end up with sign"
+    },
+    {
+      "index": 230,
+      "start": 777.279,
+      "end": 779.67,
+      "duration": 2.391,
+      "text": "which Peaks"
+    },
+    {
+      "index": 231,
+      "start": 779.68,
+      "end": 782.47,
+      "duration": 2.79,
+      "text": "uh just slightly above one and slightly"
+    },
+    {
+      "index": 232,
+      "start": 782.48,
+      "end": 785.269,
+      "duration": 2.789,
+      "text": "below one it's going to go through zero"
+    },
+    {
+      "index": 233,
+      "start": 785.279,
+      "end": 787.91,
+      "duration": 2.631,
+      "text": "and it's going to go through each each"
+    },
+    {
+      "index": 234,
+      "start": 787.92,
+      "end": 790.91,
+      "duration": 2.99,
+      "text": "value uh or each multiple of"
+    },
+    {
+      "index": 235,
+      "start": 790.92,
+      "end": 804.79,
+      "duration": 13.87,
+      "text": "Pi so it might look something like"
+    },
+    {
+      "index": 236,
+      "start": 807.59,
+      "end": 807.6,
+      "duration": 0.01,
+      "text": "this"
+    },
+    {
+      "index": 237,
+      "start": 807.6,
+      "end": 812.269,
+      "duration": 4.669,
+      "text": "okay so this is the"
+    },
+    {
+      "index": 238,
+      "start": 814.75,
+      "end": 814.76,
+      "duration": 0.01,
+      "text": "first forier"
+    },
+    {
+      "index": 239,
+      "start": 814.76,
+      "end": 817.949,
+      "duration": 3.189,
+      "text": "term in the"
+    },
+    {
+      "index": 240,
+      "start": 817.959,
+      "end": 820.67,
+      "duration": 2.711,
+      "text": "series and notice how this first for you"
+    },
+    {
+      "index": 241,
+      "start": 820.68,
+      "end": 823.629,
+      "duration": 2.949,
+      "text": "term uh is actually a pretty good"
+    },
+    {
+      "index": 242,
+      "start": 823.639,
+      "end": 825.71,
+      "duration": 2.071,
+      "text": "approximation to the square wave"
+    },
+    {
+      "index": 243,
+      "start": 825.72,
+      "end": 827.829,
+      "duration": 2.109,
+      "text": "considering it's just one term in a"
+    },
+    {
+      "index": 244,
+      "start": 827.839,
+      "end": 829.99,
+      "duration": 2.151,
+      "text": "series as we add more terms in the"
+    },
+    {
+      "index": 245,
+      "start": 830.0,
+      "end": 831.71,
+      "duration": 1.71,
+      "text": "series we're going to look at we're"
+    },
+    {
+      "index": 246,
+      "start": 831.72,
+      "end": 833.069,
+      "duration": 1.349,
+      "text": "going to get something which looks"
+    },
+    {
+      "index": 247,
+      "start": 833.079,
+      "end": 836.829,
+      "duration": 3.75,
+      "text": "closer and closer to a square wave"
+    },
+    {
+      "index": 248,
+      "start": 836.839,
+      "end": 839.67,
+      "duration": 2.831,
+      "text": "function okay so I just like to quickly"
+    },
+    {
+      "index": 249,
+      "start": 839.68,
+      "end": 842.47,
+      "duration": 2.79,
+      "text": "recap when Computing a uh the 4A series"
+    },
+    {
+      "index": 250,
+      "start": 842.48,
+      "end": 844.91,
+      "duration": 2.43,
+      "text": "for a periodic function uh the first"
+    },
+    {
+      "index": 251,
+      "start": 844.92,
+      "end": 846.35,
+      "duration": 1.43,
+      "text": "useful thing to do is just write down"
+    },
+    {
+      "index": 252,
+      "start": 846.36,
+      "end": 849.189,
+      "duration": 2.829,
+      "text": "the formula for a 4 Series and then"
+    },
+    {
+      "index": 253,
+      "start": 849.199,
+      "end": 850.509,
+      "duration": 1.31,
+      "text": "write down the formulas for the"
+    },
+    {
+      "index": 254,
+      "start": 850.519,
+      "end": 852.389,
+      "duration": 1.87,
+      "text": "coefficients of the 4 Series so write"
+    },
+    {
+      "index": 255,
+      "start": 852.399,
+      "end": 855.23,
+      "duration": 2.831,
+      "text": "down the formulas for a z a n"
+    },
+    {
+      "index": 256,
+      "start": 855.24,
+      "end": 858.03,
+      "duration": 2.79,
+      "text": "BN when Computing a z you can often just"
+    },
+    {
+      "index": 257,
+      "start": 858.04,
+      "end": 859.67,
+      "duration": 1.63,
+      "text": "look at the average of the"
+    },
+    {
+      "index": 258,
+      "start": 859.68,
+      "end": 862.59,
+      "duration": 2.91,
+      "text": "function when Computing a an and BN it's"
+    },
+    {
+      "index": 259,
+      "start": 862.6,
+      "end": 864.11,
+      "duration": 1.51,
+      "text": "also useful to look at the symmetry of"
+    },
+    {
+      "index": 260,
+      "start": 864.12,
+      "end": 866.35,
+      "duration": 2.23,
+      "text": "your function and if it's either even or"
+    },
+    {
+      "index": 261,
+      "start": 866.36,
+      "end": 869.59,
+      "duration": 3.23,
+      "text": "odd uh symmetric then typically either"
+    },
+    {
+      "index": 262,
+      "start": 869.6,
+      "end": 871.31,
+      "duration": 1.71,
+      "text": "all the a ends or all the B ends will"
+    },
+    {
+      "index": 263,
+      "start": 871.32,
+      "end": 873.47,
+      "duration": 2.15,
+      "text": "vanish and then when you work out the"
+    },
+    {
+      "index": 264,
+      "start": 873.48,
+      "end": 875.509,
+      "duration": 2.029,
+      "text": "integrals you can then reconstruct the"
+    },
+    {
+      "index": 265,
+      "start": 875.519,
+      "end": 876.629,
+      "duration": 1.11,
+      "text": "4A"
+    },
+    {
+      "index": 266,
+      "start": 876.639,
+      "end": 879.269,
+      "duration": 2.63,
+      "text": "Series so I'd like to conclude here and"
+    },
+    {
+      "index": 267,
+      "start": 879.279,
+      "end": 882.88,
+      "duration": 3.601,
+      "text": "I'll see you next time"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

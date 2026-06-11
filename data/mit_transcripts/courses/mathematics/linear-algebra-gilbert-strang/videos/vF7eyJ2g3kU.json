@@ -1,0 +1,7907 @@
+{
+  "video": {
+    "id": "vF7eyJ2g3kU",
+    "title": "27. Positive Definite Matrices and Minima",
+    "url": "https://www.youtube.com/watch?v=vF7eyJ2g3kU",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3040,
+    "language": "en"
+  },
+  "segment_count": 1127,
+  "segments": [
+    {
+      "index": 0,
+      "start": 12.59,
+      "end": 12.6,
+      "duration": 0.01,
+      "text": "Okay, this is the lecture on positive"
+    },
+    {
+      "index": 1,
+      "start": 12.6,
+      "end": 15.35,
+      "duration": 2.75,
+      "text": "definite matrices. I"
+    },
+    {
+      "index": 2,
+      "start": 15.36,
+      "end": 17.83,
+      "duration": 2.47,
+      "text": "made a start on those"
+    },
+    {
+      "index": 3,
+      "start": 17.84,
+      "end": 20.87,
+      "duration": 3.03,
+      "text": "briefly in a previous lecture and"
+    },
+    {
+      "index": 4,
+      "start": 20.88,
+      "end": 23.83,
+      "duration": 2.95,
+      "text": "one point I wanted to make was"
+    },
+    {
+      "index": 5,
+      "start": 23.84,
+      "end": 26.47,
+      "duration": 2.63,
+      "text": "the way that this topic brings the whole"
+    },
+    {
+      "index": 6,
+      "start": 26.48,
+      "end": 28.23,
+      "duration": 1.75,
+      "text": "course together."
+    },
+    {
+      "index": 7,
+      "start": 28.24,
+      "end": 31.95,
+      "duration": 3.71,
+      "text": "Pivots, determinants, eigenvalues, and"
+    },
+    {
+      "index": 8,
+      "start": 31.96,
+      "end": 34.47,
+      "duration": 2.51,
+      "text": "something new"
+    },
+    {
+      "index": 9,
+      "start": 34.48,
+      "end": 38.07,
+      "duration": 3.59,
+      "text": "for and stability and then something new"
+    },
+    {
+      "index": 10,
+      "start": 38.08,
+      "end": 41.99,
+      "duration": 3.91,
+      "text": "in this expression X transpose AX."
+    },
+    {
+      "index": 11,
+      "start": 42.0,
+      "end": 44.43,
+      "duration": 2.43,
+      "text": "Actually, that's the guy to watch in"
+    },
+    {
+      "index": 12,
+      "start": 44.44,
+      "end": 45.99,
+      "duration": 1.55,
+      "text": "this lecture."
+    },
+    {
+      "index": 13,
+      "start": 46.0,
+      "end": 47.43,
+      "duration": 1.43,
+      "text": "So,"
+    },
+    {
+      "index": 14,
+      "start": 47.44,
+      "end": 50.47,
+      "duration": 3.03,
+      "text": "so the topic is positive definite matrix"
+    },
+    {
+      "index": 15,
+      "start": 50.48,
+      "end": 51.47,
+      "duration": 0.99,
+      "text": "and"
+    },
+    {
+      "index": 16,
+      "start": 51.48,
+      "end": 53.55,
+      "duration": 2.07,
+      "text": "what what's my goal?"
+    },
+    {
+      "index": 17,
+      "start": 53.56,
+      "end": 56.63,
+      "duration": 3.07,
+      "text": "First first goal is"
+    },
+    {
+      "index": 18,
+      "start": 56.64,
+      "end": 58.87,
+      "duration": 2.23,
+      "text": "how can I tell if a matrix is positive"
+    },
+    {
+      "index": 19,
+      "start": 58.88,
+      "end": 61.59,
+      "duration": 2.71,
+      "text": "definite? So, I would like to have tests"
+    },
+    {
+      "index": 20,
+      "start": 61.6,
+      "end": 62.87,
+      "duration": 1.27,
+      "text": "to see"
+    },
+    {
+      "index": 21,
+      "start": 62.88,
+      "end": 66.39,
+      "duration": 3.51,
+      "text": "if you give me a a 5 by 5 matrix, how do"
+    },
+    {
+      "index": 22,
+      "start": 66.4,
+      "end": 68.95,
+      "duration": 2.55,
+      "text": "I tell if it's positive definite?"
+    },
+    {
+      "index": 23,
+      "start": 68.96,
+      "end": 72.63,
+      "duration": 3.67,
+      "text": "More important is what does it mean? Why"
+    },
+    {
+      "index": 24,
+      "start": 72.64,
+      "end": 74.71,
+      "duration": 2.07,
+      "text": "are we so interested in this property of"
+    },
+    {
+      "index": 25,
+      "start": 74.72,
+      "end": 77.67,
+      "duration": 2.95,
+      "text": "positive definiteness? And then at the"
+    },
+    {
+      "index": 26,
+      "start": 77.68,
+      "end": 81.35,
+      "duration": 3.67,
+      "text": "end comes some geometry."
+    },
+    {
+      "index": 27,
+      "start": 81.36,
+      "end": 83.59,
+      "duration": 2.23,
+      "text": "Ellipses are connected with positive"
+    },
+    {
+      "index": 28,
+      "start": 83.6,
+      "end": 86.35,
+      "duration": 2.75,
+      "text": "definite things. Hyperbolas are not"
+    },
+    {
+      "index": 29,
+      "start": 86.36,
+      "end": 88.43,
+      "duration": 2.07,
+      "text": "connected with positive definite things."
+    },
+    {
+      "index": 30,
+      "start": 88.44,
+      "end": 91.51,
+      "duration": 3.07,
+      "text": "So, we it's this uh"
+    },
+    {
+      "index": 31,
+      "start": 91.52,
+      "end": 94.35,
+      "duration": 2.83,
+      "text": "we there's a geometry, too, but mostly"
+    },
+    {
+      "index": 32,
+      "start": 94.36,
+      "end": 97.11,
+      "duration": 2.75,
+      "text": "it's linear algebra and"
+    },
+    {
+      "index": 33,
+      "start": 97.12,
+      "end": 98.11,
+      "duration": 0.99,
+      "text": "uh"
+    },
+    {
+      "index": 34,
+      "start": 98.12,
+      "end": 101.15,
+      "duration": 3.03,
+      "text": "this this application of how do you"
+    },
+    {
+      "index": 35,
+      "start": 101.16,
+      "end": 103.99,
+      "duration": 2.83,
+      "text": "recognize them when you have a minimum"
+    },
+    {
+      "index": 36,
+      "start": 104.0,
+      "end": 107.63,
+      "duration": 3.63,
+      "text": "is pretty neat. Okay, I'm going to begin"
+    },
+    {
+      "index": 37,
+      "start": 107.64,
+      "end": 110.03,
+      "duration": 2.39,
+      "text": "with 2 by 2."
+    },
+    {
+      "index": 38,
+      "start": 110.04,
+      "end": 112.15,
+      "duration": 2.11,
+      "text": "All matrices are symmetric, right?"
+    },
+    {
+      "index": 39,
+      "start": 112.16,
+      "end": 114.51,
+      "duration": 2.35,
+      "text": "That's understood. The matrix is"
+    },
+    {
+      "index": 40,
+      "start": 114.52,
+      "end": 117.39,
+      "duration": 2.87,
+      "text": "symmetric. Now, my question is"
+    },
+    {
+      "index": 41,
+      "start": 117.4,
+      "end": 120.59,
+      "duration": 3.19,
+      "text": "is it positive definite?"
+    },
+    {
+      "index": 42,
+      "start": 120.6,
+      "end": 123.55,
+      "duration": 2.95,
+      "text": "Now, here are here are some"
+    },
+    {
+      "index": 43,
+      "start": 123.56,
+      "end": 125.99,
+      "duration": 2.43,
+      "text": "each one of these"
+    },
+    {
+      "index": 44,
+      "start": 126.0,
+      "end": 128.27,
+      "duration": 2.27,
+      "text": "is a complete test for positive"
+    },
+    {
+      "index": 45,
+      "start": 128.28,
+      "end": 129.59,
+      "duration": 1.31,
+      "text": "definiteness."
+    },
+    {
+      "index": 46,
+      "start": 129.6,
+      "end": 132.07,
+      "duration": 2.47,
+      "text": "If I know the eigenvalues,"
+    },
+    {
+      "index": 47,
+      "start": 132.08,
+      "end": 134.95,
+      "duration": 2.87,
+      "text": "my test is are they positive?"
+    },
+    {
+      "index": 48,
+      "start": 134.96,
+      "end": 138.11,
+      "duration": 3.15,
+      "text": "Are they all positive?"
+    },
+    {
+      "index": 49,
+      "start": 138.12,
+      "end": 140.59,
+      "duration": 2.47,
+      "text": "If I know the"
+    },
+    {
+      "index": 50,
+      "start": 140.6,
+      "end": 141.59,
+      "duration": 0.99,
+      "text": "these"
+    },
+    {
+      "index": 51,
+      "start": 141.6,
+      "end": 144.03,
+      "duration": 2.43,
+      "text": "So, A is really"
+    },
+    {
+      "index": 52,
+      "start": 144.04,
+      "end": 147.03,
+      "duration": 2.99,
+      "text": "I I look at that number A here as the as"
+    },
+    {
+      "index": 53,
+      "start": 147.04,
+      "end": 149.43,
+      "duration": 2.39,
+      "text": "the 1 by 1 determinant"
+    },
+    {
+      "index": 54,
+      "start": 149.44,
+      "end": 153.35,
+      "duration": 3.91,
+      "text": "and here's the 2 by 2 determinant."
+    },
+    {
+      "index": 55,
+      "start": 153.36,
+      "end": 155.59,
+      "duration": 2.23,
+      "text": "So, this is the determinant test. This"
+    },
+    {
+      "index": 56,
+      "start": 155.6,
+      "end": 157.63,
+      "duration": 2.03,
+      "text": "is the eigenvalue test. This is the"
+    },
+    {
+      "index": 57,
+      "start": 157.64,
+      "end": 161.47,
+      "duration": 3.83,
+      "text": "determinant test. Are the determinants"
+    },
+    {
+      "index": 58,
+      "start": 161.48,
+      "end": 165.59,
+      "duration": 4.11,
+      "text": "growing in of all of all n"
+    },
+    {
+      "index": 59,
+      "start": 165.6,
+      "end": 167.43,
+      "duration": 1.83,
+      "text": "sort of could I call them leading"
+    },
+    {
+      "index": 60,
+      "start": 167.44,
+      "end": 169.51,
+      "duration": 2.07,
+      "text": "submatrices? They're they're they're the"
+    },
+    {
+      "index": 61,
+      "start": 169.52,
+      "end": 172.55,
+      "duration": 3.03,
+      "text": "first ones. They're the northwest"
+    },
+    {
+      "index": 62,
+      "start": 172.56,
+      "end": 175.43,
+      "duration": 2.87,
+      "text": "Seattle submatrices coming down from"
+    },
+    {
+      "index": 63,
+      "start": 175.44,
+      "end": 176.63,
+      "duration": 1.19,
+      "text": "from there."
+    },
+    {
+      "index": 64,
+      "start": 176.64,
+      "end": 178.39,
+      "duration": 1.75,
+      "text": "They all all those determinants have to"
+    },
+    {
+      "index": 65,
+      "start": 178.4,
+      "end": 179.91,
+      "duration": 1.51,
+      "text": "be positive."
+    },
+    {
+      "index": 66,
+      "start": 179.92,
+      "end": 184.23,
+      "duration": 4.31,
+      "text": "And then another test is the pivots."
+    },
+    {
+      "index": 67,
+      "start": 184.24,
+      "end": 187.31,
+      "duration": 3.07,
+      "text": "The pivots of a 2 by 2 matrix are that"
+    },
+    {
+      "index": 68,
+      "start": 187.32,
+      "end": 189.95,
+      "duration": 2.63,
+      "text": "number A for sure."
+    },
+    {
+      "index": 69,
+      "start": 189.96,
+      "end": 191.27,
+      "duration": 1.31,
+      "text": "And"
+    },
+    {
+      "index": 70,
+      "start": 191.28,
+      "end": 192.07,
+      "duration": 0.79,
+      "text": "uh"
+    },
+    {
+      "index": 71,
+      "start": 192.08,
+      "end": 194.35,
+      "duration": 2.27,
+      "text": "since the product is the determinant,"
+    },
+    {
+      "index": 72,
+      "start": 194.36,
+      "end": 197.23,
+      "duration": 2.87,
+      "text": "the second pivot must be the determinant"
+    },
+    {
+      "index": 73,
+      "start": 197.24,
+      "end": 198.95,
+      "duration": 1.71,
+      "text": "divided by A."
+    },
+    {
+      "index": 74,
+      "start": 198.96,
+      "end": 202.71,
+      "duration": 3.75,
+      "text": "And then in here is going to come my"
+    },
+    {
+      "index": 75,
+      "start": 202.72,
+      "end": 205.67,
+      "duration": 2.95,
+      "text": "favorite and my new idea, the the the"
+    },
+    {
+      "index": 76,
+      "start": 205.68,
+      "end": 210.39,
+      "duration": 4.71,
+      "text": "the one to catch about X transpose AX"
+    },
+    {
+      "index": 77,
+      "start": 210.4,
+      "end": 212.67,
+      "duration": 2.27,
+      "text": "being positive."
+    },
+    {
+      "index": 78,
+      "start": 212.68,
+      "end": 215.19,
+      "duration": 2.51,
+      "text": "But we'll have to look at this guy."
+    },
+    {
+      "index": 79,
+      "start": 215.2,
+      "end": 218.39,
+      "duration": 3.19,
+      "text": "This gets a like a star because"
+    },
+    {
+      "index": 80,
+      "start": 218.4,
+      "end": 220.43,
+      "duration": 2.03,
+      "text": "for most"
+    },
+    {
+      "index": 81,
+      "start": 220.44,
+      "end": 221.39,
+      "duration": 0.95,
+      "text": "uh"
+    },
+    {
+      "index": 82,
+      "start": 221.4,
+      "end": 222.99,
+      "duration": 1.59,
+      "text": "presentations,"
+    },
+    {
+      "index": 83,
+      "start": 223.0,
+      "end": 225.55,
+      "duration": 2.55,
+      "text": "the definition of positive definiteness"
+    },
+    {
+      "index": 84,
+      "start": 225.56,
+      "end": 228.07,
+      "duration": 2.51,
+      "text": "would be this number four and these"
+    },
+    {
+      "index": 85,
+      "start": 228.08,
+      "end": 231.19,
+      "duration": 3.11,
+      "text": "numbers 1 2 3 would be tests for it."
+    },
+    {
+      "index": 86,
+      "start": 231.2,
+      "end": 233.83,
+      "duration": 2.63,
+      "text": "Okay, maybe I'll tuck this"
+    },
+    {
+      "index": 87,
+      "start": 233.84,
+      "end": 236.11,
+      "duration": 2.27,
+      "text": "wire in a little bit."
+    },
+    {
+      "index": 88,
+      "start": 236.12,
+      "end": 237.99,
+      "duration": 1.87,
+      "text": "Okay, so I have to look at this X"
+    },
+    {
+      "index": 89,
+      "start": 238.0,
+      "end": 239.99,
+      "duration": 1.99,
+      "text": "transpose AX."
+    },
+    {
+      "index": 90,
+      "start": 240.0,
+      "end": 244.63,
+      "duration": 4.63,
+      "text": "Can you uh"
+    },
+    {
+      "index": 91,
+      "start": 247.43,
+      "end": 247.44,
+      "duration": 0.01,
+      "text": "Can we just be sure"
+    },
+    {
+      "index": 92,
+      "start": 247.44,
+      "end": 250.31,
+      "duration": 2.87,
+      "text": "how do we know that the eigenvalue test"
+    },
+    {
+      "index": 93,
+      "start": 250.32,
+      "end": 254.27,
+      "duration": 3.95,
+      "text": "and the and the determinant test"
+    },
+    {
+      "index": 94,
+      "start": 254.28,
+      "end": 256.39,
+      "duration": 2.11,
+      "text": "pick out the same matrices? And and let"
+    },
+    {
+      "index": 95,
+      "start": 256.4,
+      "end": 257.509,
+      "duration": 1.109,
+      "text": "me"
+    },
+    {
+      "index": 96,
+      "start": 257.519,
+      "end": 259.789,
+      "duration": 2.27,
+      "text": "let's just do a few examples."
+    },
+    {
+      "index": 97,
+      "start": 259.799,
+      "end": 264.55,
+      "duration": 4.751,
+      "text": "So, examples."
+    },
+    {
+      "index": 98,
+      "start": 268.19,
+      "end": 268.2,
+      "duration": 0.01,
+      "text": "Let me let me pick the matrix two"
+    },
+    {
+      "index": 99,
+      "start": 268.2,
+      "end": 270.79,
+      "duration": 2.59,
+      "text": "uh 6 6."
+    },
+    {
+      "index": 100,
+      "start": 270.8,
+      "end": 272.59,
+      "duration": 1.79,
+      "text": "Tell me what number do I have to put"
+    },
+    {
+      "index": 101,
+      "start": 272.6,
+      "end": 275.59,
+      "duration": 2.99,
+      "text": "there"
+    },
+    {
+      "index": 102,
+      "start": 282.15,
+      "end": 282.16,
+      "duration": 0.01,
+      "text": "Tell me a sufficiently large number that"
+    },
+    {
+      "index": 103,
+      "start": 282.16,
+      "end": 284.35,
+      "duration": 2.19,
+      "text": "would would make it positive definite."
+    },
+    {
+      "index": 104,
+      "start": 284.36,
+      "end": 286.35,
+      "duration": 1.99,
+      "text": "Just just let's just practice with these"
+    },
+    {
+      "index": 105,
+      "start": 286.36,
+      "end": 289.27,
+      "duration": 2.91,
+      "text": "conditions in the 2 by 2 case."
+    },
+    {
+      "index": 106,
+      "start": 289.28,
+      "end": 291.55,
+      "duration": 2.27,
+      "text": "Now, when I ask you that, you don't want"
+    },
+    {
+      "index": 107,
+      "start": 291.56,
+      "end": 294.39,
+      "duration": 2.83,
+      "text": "to find the eigenvalues."
+    },
+    {
+      "index": 108,
+      "start": 294.4,
+      "end": 296.27,
+      "duration": 1.87,
+      "text": "You would use the determinant test for"
+    },
+    {
+      "index": 109,
+      "start": 296.28,
+      "end": 297.95,
+      "duration": 1.67,
+      "text": "that. So,"
+    },
+    {
+      "index": 110,
+      "start": 297.96,
+      "end": 300.55,
+      "duration": 2.59,
+      "text": "so the first or the pivot test, that"
+    },
+    {
+      "index": 111,
+      "start": 300.56,
+      "end": 302.67,
+      "duration": 2.11,
+      "text": "that guy is certainly positive. That had"
+    },
+    {
+      "index": 112,
+      "start": 302.68,
+      "end": 303.95,
+      "duration": 1.27,
+      "text": "to happen."
+    },
+    {
+      "index": 113,
+      "start": 303.96,
+      "end": 307.27,
+      "duration": 3.31,
+      "text": "And it's okay. How large a number here"
+    },
+    {
+      "index": 114,
+      "start": 307.28,
+      "end": 310.71,
+      "duration": 3.43,
+      "text": "the number had better be more than what?"
+    },
+    {
+      "index": 115,
+      "start": 310.72,
+      "end": 313.71,
+      "duration": 2.99,
+      "text": "More than 18, right? Because if it's"
+    },
+    {
+      "index": 116,
+      "start": 313.72,
+      "end": 316.03,
+      "duration": 2.31,
+      "text": "eight No."
+    },
+    {
+      "index": 117,
+      "start": 316.04,
+      "end": 318.47,
+      "duration": 2.43,
+      "text": "More than what?"
+    },
+    {
+      "index": 118,
+      "start": 318.48,
+      "end": 320.39,
+      "duration": 1.91,
+      "text": "19 is it?"
+    },
+    {
+      "index": 119,
+      "start": 320.4,
+      "end": 321.39,
+      "duration": 0.99,
+      "text": "What"
+    },
+    {
+      "index": 120,
+      "start": 321.4,
+      "end": 327.75,
+      "duration": 6.35,
+      "text": "If I have a 19 here,"
+    },
+    {
+      "index": 121,
+      "start": 335.11,
+      "end": 335.12,
+      "duration": 0.01,
+      "text": "Yeah, because the I get 38 minus 36."
+    },
+    {
+      "index": 122,
+      "start": 335.12,
+      "end": 337.99,
+      "duration": 2.87,
+      "text": "That's okay. If I had an 18, let me play"
+    },
+    {
+      "index": 123,
+      "start": 338.0,
+      "end": 339.83,
+      "duration": 1.83,
+      "text": "it really close."
+    },
+    {
+      "index": 124,
+      "start": 339.84,
+      "end": 341.99,
+      "duration": 2.15,
+      "text": "If I have an 18 there,"
+    },
+    {
+      "index": 125,
+      "start": 342.0,
+      "end": 344.75,
+      "duration": 2.75,
+      "text": "then am I positive definite?"
+    },
+    {
+      "index": 126,
+      "start": 344.76,
+      "end": 346.59,
+      "duration": 1.83,
+      "text": "Not quite."
+    },
+    {
+      "index": 127,
+      "start": 346.6,
+      "end": 349.59,
+      "duration": 2.99,
+      "text": "I would call this guy positive. So, it's"
+    },
+    {
+      "index": 128,
+      "start": 349.6,
+      "end": 351.87,
+      "duration": 2.27,
+      "text": "it's useful just to see that this is the"
+    },
+    {
+      "index": 129,
+      "start": 351.88,
+      "end": 353.47,
+      "duration": 1.59,
+      "text": "borderline."
+    },
+    {
+      "index": 130,
+      "start": 353.48,
+      "end": 355.71,
+      "duration": 2.23,
+      "text": "That matrix is on the borderline. I"
+    },
+    {
+      "index": 131,
+      "start": 355.72,
+      "end": 358.63,
+      "duration": 2.91,
+      "text": "would call that matrix positive"
+    },
+    {
+      "index": 132,
+      "start": 358.64,
+      "end": 363.79,
+      "duration": 5.15,
+      "text": "semi-definite."
+    },
+    {
+      "index": 133,
+      "start": 366.59,
+      "end": 366.6,
+      "duration": 0.01,
+      "text": "And and what are the eigenvalues of that"
+    },
+    {
+      "index": 134,
+      "start": 366.6,
+      "end": 368.27,
+      "duration": 1.67,
+      "text": "matrix?"
+    },
+    {
+      "index": 135,
+      "start": 368.28,
+      "end": 370.03,
+      "duration": 1.75,
+      "text": "Just since we're good at eigenvalues of"
+    },
+    {
+      "index": 136,
+      "start": 370.04,
+      "end": 371.75,
+      "duration": 1.71,
+      "text": "2 by 2s,"
+    },
+    {
+      "index": 137,
+      "start": 371.76,
+      "end": 375.43,
+      "duration": 3.67,
+      "text": "uh when it's semi-definite,"
+    },
+    {
+      "index": 138,
+      "start": 375.44,
+      "end": 377.55,
+      "duration": 2.11,
+      "text": "but not definite,"
+    },
+    {
+      "index": 139,
+      "start": 377.56,
+      "end": 379.11,
+      "duration": 1.55,
+      "text": "then the"
+    },
+    {
+      "index": 140,
+      "start": 379.12,
+      "end": 382.15,
+      "duration": 3.03,
+      "text": "I'm squeezing this eigenvalue test down."
+    },
+    {
+      "index": 141,
+      "start": 382.16,
+      "end": 384.15,
+      "duration": 1.99,
+      "text": "Tell what's the what's the"
+    },
+    {
+      "index": 142,
+      "start": 384.16,
+      "end": 385.83,
+      "duration": 1.67,
+      "text": "what's the"
+    },
+    {
+      "index": 143,
+      "start": 385.84,
+      "end": 388.27,
+      "duration": 2.43,
+      "text": "eigenvalue that I know this matrix has?"
+    },
+    {
+      "index": 144,
+      "start": 388.28,
+      "end": 391.27,
+      "duration": 2.99,
+      "text": "What kind of a matrix have I got here?"
+    },
+    {
+      "index": 145,
+      "start": 391.28,
+      "end": 393.07,
+      "duration": 1.79,
+      "text": "It's a singular matrix. One of its"
+    },
+    {
+      "index": 146,
+      "start": 393.08,
+      "end": 396.59,
+      "duration": 3.51,
+      "text": "eigenvalues is"
+    },
+    {
+      "index": 147,
+      "start": 397.63,
+      "end": 397.64,
+      "duration": 0.01,
+      "text": "zero."
+    },
+    {
+      "index": 148,
+      "start": 397.64,
+      "end": 400.39,
+      "duration": 2.75,
+      "text": "That has an eigenvalue zero and the"
+    },
+    {
+      "index": 149,
+      "start": 400.4,
+      "end": 403.51,
+      "duration": 3.11,
+      "text": "other eigenvalue is"
+    },
+    {
+      "index": 150,
+      "start": 403.52,
+      "end": 405.91,
+      "duration": 2.39,
+      "text": "from the trace,"
+    },
+    {
+      "index": 151,
+      "start": 405.92,
+      "end": 406.95,
+      "duration": 1.03,
+      "text": "20."
+    },
+    {
+      "index": 152,
+      "start": 406.96,
+      "end": 409.63,
+      "duration": 2.67,
+      "text": "Okay. So, that that matrix has"
+    },
+    {
+      "index": 153,
+      "start": 409.64,
+      "end": 412.23,
+      "duration": 2.59,
+      "text": "eigenvalues greater than or equal to"
+    },
+    {
+      "index": 154,
+      "start": 412.24,
+      "end": 414.99,
+      "duration": 2.75,
+      "text": "zero. And it's that equal to that"
+    },
+    {
+      "index": 155,
+      "start": 415.0,
+      "end": 417.99,
+      "duration": 2.99,
+      "text": "brought this word semi-definite in."
+    },
+    {
+      "index": 156,
+      "start": 418.0,
+      "end": 419.87,
+      "duration": 1.87,
+      "text": "And the What are the pivots of that"
+    },
+    {
+      "index": 157,
+      "start": 419.88,
+      "end": 421.15,
+      "duration": 1.27,
+      "text": "matrix?"
+    },
+    {
+      "index": 158,
+      "start": 421.16,
+      "end": 424.23,
+      "duration": 3.07,
+      "text": "So, the pivots So, the eigenvalues are"
+    },
+    {
+      "index": 159,
+      "start": 424.24,
+      "end": 428.43,
+      "duration": 4.19,
+      "text": "zero and 20. The pivots are"
+    },
+    {
+      "index": 160,
+      "start": 428.44,
+      "end": 431.35,
+      "duration": 2.91,
+      "text": "well, the pivot is two and what's the"
+    },
+    {
+      "index": 161,
+      "start": 431.36,
+      "end": 435.71,
+      "duration": 4.35,
+      "text": "next pivot?"
+    },
+    {
+      "index": 162,
+      "start": 437.43,
+      "end": 437.44,
+      "duration": 0.01,
+      "text": "There isn't one."
+    },
+    {
+      "index": 163,
+      "start": 437.44,
+      "end": 439.39,
+      "duration": 1.95,
+      "text": "We got a singular matrix here. It'll"
+    },
+    {
+      "index": 164,
+      "start": 439.4,
+      "end": 441.71,
+      "duration": 2.31,
+      "text": "only have one pivot. You see that that's"
+    },
+    {
+      "index": 165,
+      "start": 441.72,
+      "end": 445.83,
+      "duration": 4.11,
+      "text": "a rank one matrix. 2 6 is a 6 18 is a"
+    },
+    {
+      "index": 166,
+      "start": 445.84,
+      "end": 448.39,
+      "duration": 2.55,
+      "text": "multiple of 2 6."
+    },
+    {
+      "index": 167,
+      "start": 448.4,
+      "end": 451.31,
+      "duration": 2.91,
+      "text": "The matrix is singular. It only has one"
+    },
+    {
+      "index": 168,
+      "start": 451.32,
+      "end": 452.67,
+      "duration": 1.35,
+      "text": "pivot."
+    },
+    {
+      "index": 169,
+      "start": 452.68,
+      "end": 453.75,
+      "duration": 1.07,
+      "text": "So,"
+    },
+    {
+      "index": 170,
+      "start": 453.76,
+      "end": 455.19,
+      "duration": 1.43,
+      "text": "uh"
+    },
+    {
+      "index": 171,
+      "start": 455.2,
+      "end": 458.07,
+      "duration": 2.87,
+      "text": "the pivot test doesn't quite pass."
+    },
+    {
+      "index": 172,
+      "start": 458.08,
+      "end": 461.31,
+      "duration": 3.23,
+      "text": "The Let me do the X transpose AX. Now,"
+    },
+    {
+      "index": 173,
+      "start": 461.32,
+      "end": 466.43,
+      "duration": 5.11,
+      "text": "this is this is the this is the uh"
+    },
+    {
+      "index": 174,
+      "start": 466.44,
+      "end": 467.55,
+      "duration": 1.11,
+      "text": "the"
+    },
+    {
+      "index": 175,
+      "start": 467.56,
+      "end": 470.27,
+      "duration": 2.71,
+      "text": "the novelty now. Okay."
+    },
+    {
+      "index": 176,
+      "start": 470.28,
+      "end": 472.31,
+      "duration": 2.03,
+      "text": "What am I looking at when I look at at"
+    },
+    {
+      "index": 177,
+      "start": 472.32,
+      "end": 476.75,
+      "duration": 4.43,
+      "text": "this new combination X transpose AX? X"
+    },
+    {
+      "index": 178,
+      "start": 476.76,
+      "end": 478.63,
+      "duration": 1.87,
+      "text": "is any vector now."
+    },
+    {
+      "index": 179,
+      "start": 478.64,
+      "end": 481.03,
+      "duration": 2.39,
+      "text": "So, let me compute So,"
+    },
+    {
+      "index": 180,
+      "start": 481.04,
+      "end": 483.35,
+      "duration": 2.31,
+      "text": "any vector, let me call its components"
+    },
+    {
+      "index": 181,
+      "start": 483.36,
+      "end": 486.43,
+      "duration": 3.07,
+      "text": "X1 and X2."
+    },
+    {
+      "index": 182,
+      "start": 486.44,
+      "end": 488.91,
+      "duration": 2.47,
+      "text": "So, that's X."
+    },
+    {
+      "index": 183,
+      "start": 488.92,
+      "end": 491.27,
+      "duration": 2.35,
+      "text": "And I put in here A."
+    },
+    {
+      "index": 184,
+      "start": 491.28,
+      "end": 496.27,
+      "duration": 4.99,
+      "text": "Let's let's use this example 2 6 6 18."
+    },
+    {
+      "index": 185,
+      "start": 496.28,
+      "end": 497.55,
+      "duration": 1.27,
+      "text": "And"
+    },
+    {
+      "index": 186,
+      "start": 497.56,
+      "end": 501.55,
+      "duration": 3.99,
+      "text": "here's X transpose, so X1 X2."
+    },
+    {
+      "index": 187,
+      "start": 501.56,
+      "end": 503.83,
+      "duration": 2.27,
+      "text": "We're back to real matrices after that"
+    },
+    {
+      "index": 188,
+      "start": 503.84,
+      "end": 505.75,
+      "duration": 1.91,
+      "text": "last lecture"
+    },
+    {
+      "index": 189,
+      "start": 505.76,
+      "end": 507.87,
+      "duration": 2.11,
+      "text": "that that said what to do in the complex"
+    },
+    {
+      "index": 190,
+      "start": 507.88,
+      "end": 509.59,
+      "duration": 1.71,
+      "text": "case, let's"
+    },
+    {
+      "index": 191,
+      "start": 509.6,
+      "end": 513.31,
+      "duration": 3.71,
+      "text": "come back to real matrices. So, here's X"
+    },
+    {
+      "index": 192,
+      "start": 513.32,
+      "end": 516.909,
+      "duration": 3.589,
+      "text": "transpose AX and what I'm interested in"
+    },
+    {
+      "index": 193,
+      "start": 516.919,
+      "end": 519.11,
+      "duration": 2.191,
+      "text": "is"
+    },
+    {
+      "index": 194,
+      "start": 519.12,
+      "end": 520.63,
+      "duration": 1.51,
+      "text": "what do I get if I multiply those"
+    },
+    {
+      "index": 195,
+      "start": 520.64,
+      "end": 522.67,
+      "duration": 2.03,
+      "text": "together?"
+    },
+    {
+      "index": 196,
+      "start": 522.68,
+      "end": 526.63,
+      "duration": 3.95,
+      "text": "I get some function of X1 and X2. And"
+    },
+    {
+      "index": 197,
+      "start": 526.64,
+      "end": 528.31,
+      "duration": 1.67,
+      "text": "what is it?"
+    },
+    {
+      "index": 198,
+      "start": 528.32,
+      "end": 530.27,
+      "duration": 1.95,
+      "text": "Uh let's see. If I do this"
+    },
+    {
+      "index": 199,
+      "start": 530.28,
+      "end": 532.27,
+      "duration": 1.99,
+      "text": "multiplication, should I do it? Let me"
+    },
+    {
+      "index": 200,
+      "start": 532.28,
+      "end": 535.39,
+      "duration": 3.11,
+      "text": "I'll just do it slowly. X1 X2, if I"
+    },
+    {
+      "index": 201,
+      "start": 535.4,
+      "end": 540.03,
+      "duration": 4.63,
+      "text": "multiply that matrix, this is 2 X1"
+    },
+    {
+      "index": 202,
+      "start": 540.04,
+      "end": 542.31,
+      "duration": 2.27,
+      "text": "and 6 X2s"
+    },
+    {
+      "index": 203,
+      "start": 542.32,
+      "end": 547.83,
+      "duration": 5.51,
+      "text": "and the next row is 6 X1s and 18 X2s."
+    },
+    {
+      "index": 204,
+      "start": 547.84,
+      "end": 550.75,
+      "duration": 2.91,
+      "text": "And now I do this final step and what do"
+    },
+    {
+      "index": 205,
+      "start": 550.76,
+      "end": 555.23,
+      "duration": 4.47,
+      "text": "I have? I've got 2 X1 squareds."
+    },
+    {
+      "index": 206,
+      "start": 555.24,
+      "end": 557.67,
+      "duration": 2.43,
+      "text": "That 2 X1 squareds is coming from this"
+    },
+    {
+      "index": 207,
+      "start": 557.68,
+      "end": 559.31,
+      "duration": 1.63,
+      "text": "two."
+    },
+    {
+      "index": 208,
+      "start": 559.32,
+      "end": 560.91,
+      "duration": 1.59,
+      "text": "I've got"
+    },
+    {
+      "index": 209,
+      "start": 560.92,
+      "end": 563.75,
+      "duration": 2.83,
+      "text": "this one gives me 18 Well, should I do"
+    },
+    {
+      "index": 210,
+      "start": 563.76,
+      "end": 565.59,
+      "duration": 1.83,
+      "text": "the ones in the middle? How many How"
+    },
+    {
+      "index": 211,
+      "start": 565.6,
+      "end": 569.43,
+      "duration": 3.83,
+      "text": "many X1 X2s do I have?"
+    },
+    {
+      "index": 212,
+      "start": 569.44,
+      "end": 572.27,
+      "duration": 2.83,
+      "text": "Let's see. X1 times that 6 X2 will be"
+    },
+    {
+      "index": 213,
+      "start": 572.28,
+      "end": 574.99,
+      "duration": 2.71,
+      "text": "six of them and then X2 times this one"
+    },
+    {
+      "index": 214,
+      "start": 575.0,
+      "end": 578.27,
+      "duration": 3.27,
+      "text": "will be six more. I get 12."
+    },
+    {
+      "index": 215,
+      "start": 578.28,
+      "end": 581.99,
+      "duration": 3.71,
+      "text": "So, in in here is going This is the This"
+    },
+    {
+      "index": 216,
+      "start": 582.0,
+      "end": 583.87,
+      "duration": 1.87,
+      "text": "is the number A."
+    },
+    {
+      "index": 217,
+      "start": 583.88,
+      "end": 586.47,
+      "duration": 2.59,
+      "text": "This is the number 2 B."
+    },
+    {
+      "index": 218,
+      "start": 586.48,
+      "end": 588.67,
+      "duration": 2.19,
+      "text": "And in here is going to"
+    },
+    {
+      "index": 219,
+      "start": 588.68,
+      "end": 594.47,
+      "duration": 5.79,
+      "text": "X2 times 18 X2 will be 18 X2 squareds"
+    },
+    {
+      "index": 220,
+      "start": 594.48,
+      "end": 597.59,
+      "duration": 3.11,
+      "text": "and this is is number C."
+    },
+    {
+      "index": 221,
+      "start": 597.6,
+      "end": 601.75,
+      "duration": 4.15,
+      "text": "So, it's A X1 It's like AX squared,"
+    },
+    {
+      "index": 222,
+      "start": 601.76,
+      "end": 603.47,
+      "duration": 1.71,
+      "text": "2 BXY,"
+    },
+    {
+      "index": 223,
+      "start": 603.48,
+      "end": 607.83,
+      "duration": 4.35,
+      "text": "and CY squared."
+    },
+    {
+      "index": 224,
+      "start": 609.83,
+      "end": 609.84,
+      "duration": 0.01,
+      "text": "So, my my first point that I wanted to"
+    },
+    {
+      "index": 225,
+      "start": 609.84,
+      "end": 612.03,
+      "duration": 2.19,
+      "text": "make by just doing out a multiplication"
+    },
+    {
+      "index": 226,
+      "start": 612.04,
+      "end": 614.39,
+      "duration": 2.35,
+      "text": "is that as soon as you give me the"
+    },
+    {
+      "index": 227,
+      "start": 614.4,
+      "end": 615.91,
+      "duration": 1.51,
+      "text": "matrix,"
+    },
+    {
+      "index": 228,
+      "start": 615.92,
+      "end": 618.27,
+      "duration": 2.35,
+      "text": "as soon as you give me the matrix,"
+    },
+    {
+      "index": 229,
+      "start": 618.28,
+      "end": 620.47,
+      "duration": 2.19,
+      "text": "I can I Those are the numbers that"
+    },
+    {
+      "index": 230,
+      "start": 620.48,
+      "end": 623.91,
+      "duration": 3.43,
+      "text": "appear in the I'll call this thing a"
+    },
+    {
+      "index": 231,
+      "start": 623.92,
+      "end": 625.63,
+      "duration": 1.71,
+      "text": "quadratic."
+    },
+    {
+      "index": 232,
+      "start": 625.64,
+      "end": 629.03,
+      "duration": 3.39,
+      "text": "It You see, it's not linear anymore."
+    },
+    {
+      "index": 233,
+      "start": 629.04,
+      "end": 631.27,
+      "duration": 2.23,
+      "text": "AX is linear, but now I've got an X"
+    },
+    {
+      "index": 234,
+      "start": 631.28,
+      "end": 633.39,
+      "duration": 2.11,
+      "text": "transpose coming in. I'm up to degree"
+    },
+    {
+      "index": 235,
+      "start": 633.4,
+      "end": 634.43,
+      "duration": 1.03,
+      "text": "two."
+    },
+    {
+      "index": 236,
+      "start": 634.44,
+      "end": 636.67,
+      "duration": 2.23,
+      "text": "Up to degree two, maybe"
+    },
+    {
+      "index": 237,
+      "start": 636.68,
+      "end": 638.71,
+      "duration": 2.03,
+      "text": "quadratic is the"
+    },
+    {
+      "index": 238,
+      "start": 638.72,
+      "end": 641.87,
+      "duration": 3.15,
+      "text": "usual word, a quadratic form."
+    },
+    {
+      "index": 239,
+      "start": 641.88,
+      "end": 643.31,
+      "duration": 1.43,
+      "text": "It's"
+    },
+    {
+      "index": 240,
+      "start": 643.32,
+      "end": 645.59,
+      "duration": 2.27,
+      "text": "It's purely degree two. There's no"
+    },
+    {
+      "index": 241,
+      "start": 645.6,
+      "end": 647.75,
+      "duration": 2.15,
+      "text": "linear part, there's no constant part,"
+    },
+    {
+      "index": 242,
+      "start": 647.76,
+      "end": 649.39,
+      "duration": 1.63,
+      "text": "there certainly aren't any cubes or"
+    },
+    {
+      "index": 243,
+      "start": 649.4,
+      "end": 653.43,
+      "duration": 4.03,
+      "text": "fourth powers. It's all second degree."
+    },
+    {
+      "index": 244,
+      "start": 653.44,
+      "end": 656.35,
+      "duration": 2.91,
+      "text": "And my question is, is it po- is that"
+    },
+    {
+      "index": 245,
+      "start": 656.36,
+      "end": 660.03,
+      "duration": 3.67,
+      "text": "quantity positive or not?"
+    },
+    {
+      "index": 246,
+      "start": 660.04,
+      "end": 665.03,
+      "duration": 4.99,
+      "text": "That's my It for every X1 and X2."
+    },
+    {
+      "index": 247,
+      "start": 665.04,
+      "end": 668.55,
+      "duration": 3.51,
+      "text": "That is my new definition. That's my"
+    },
+    {
+      "index": 248,
+      "start": 668.56,
+      "end": 670.87,
+      "duration": 2.31,
+      "text": "definition of a positive definite"
+    },
+    {
+      "index": 249,
+      "start": 670.88,
+      "end": 675.19,
+      "duration": 4.31,
+      "text": "matrix. If this quantity is positive, if"
+    },
+    {
+      "index": 250,
+      "start": 675.2,
+      "end": 676.87,
+      "duration": 1.67,
+      "text": "if if"
+    },
+    {
+      "index": 251,
+      "start": 676.88,
+      "end": 680.63,
+      "duration": 3.75,
+      "text": "it's positive for all X's and Y's, all"
+    },
+    {
+      "index": 252,
+      "start": 680.64,
+      "end": 684.43,
+      "duration": 3.79,
+      "text": "X1 X2's, then"
+    },
+    {
+      "index": 253,
+      "start": 684.44,
+      "end": 686.829,
+      "duration": 2.389,
+      "text": "I call them And then, that's the matrix"
+    },
+    {
+      "index": 254,
+      "start": 686.839,
+      "end": 689.03,
+      "duration": 2.191,
+      "text": "is positive definite."
+    },
+    {
+      "index": 255,
+      "start": 689.04,
+      "end": 691.11,
+      "duration": 2.07,
+      "text": "Now,"
+    },
+    {
+      "index": 256,
+      "start": 691.12,
+      "end": 694.23,
+      "duration": 3.11,
+      "text": "is this guy passing our test?"
+    },
+    {
+      "index": 257,
+      "start": 694.24,
+      "end": 697.11,
+      "duration": 2.87,
+      "text": "Well, we had we anticipated the answer"
+    },
+    {
+      "index": 258,
+      "start": 697.12,
+      "end": 699.91,
+      "duration": 2.79,
+      "text": "here by by asking first about"
+    },
+    {
+      "index": 259,
+      "start": 699.92,
+      "end": 702.87,
+      "duration": 2.95,
+      "text": "eigenvalues and pivots. And what"
+    },
+    {
+      "index": 260,
+      "start": 702.88,
+      "end": 704.75,
+      "duration": 1.87,
+      "text": "happened?"
+    },
+    {
+      "index": 261,
+      "start": 704.76,
+      "end": 706.95,
+      "duration": 2.19,
+      "text": "It failed."
+    },
+    {
+      "index": 262,
+      "start": 706.96,
+      "end": 709.39,
+      "duration": 2.43,
+      "text": "It barely failed."
+    },
+    {
+      "index": 263,
+      "start": 709.4,
+      "end": 714.23,
+      "duration": 4.83,
+      "text": "If I had made this 18 down to a seven,"
+    },
+    {
+      "index": 264,
+      "start": 714.24,
+      "end": 716.35,
+      "duration": 2.11,
+      "text": "it would have totally failed."
+    },
+    {
+      "index": 265,
+      "start": 716.36,
+      "end": 718.91,
+      "duration": 2.55,
+      "text": "If I if I if I Can I do that with the"
+    },
+    {
+      "index": 266,
+      "start": 718.92,
+      "end": 721.63,
+      "duration": 2.71,
+      "text": "eraser? And then, I'll put back 18 cuz"
+    },
+    {
+      "index": 267,
+      "start": 721.64,
+      "end": 723.99,
+      "duration": 2.35,
+      "text": "I'm Seven is such a"
+    },
+    {
+      "index": 268,
+      "start": 724.0,
+      "end": 726.35,
+      "duration": 2.35,
+      "text": "total disaster that if"
+    },
+    {
+      "index": 269,
+      "start": 726.36,
+      "end": 729.31,
+      "duration": 2.95,
+      "text": "that Well, let me I'll keep seven for a"
+    },
+    {
+      "index": 270,
+      "start": 729.32,
+      "end": 730.47,
+      "duration": 1.15,
+      "text": "second."
+    },
+    {
+      "index": 271,
+      "start": 730.48,
+      "end": 732.31,
+      "duration": 1.83,
+      "text": "Is that thing"
+    },
+    {
+      "index": 272,
+      "start": 732.32,
+      "end": 735.63,
+      "duration": 3.31,
+      "text": "in any way positive definite? No,"
+    },
+    {
+      "index": 273,
+      "start": 735.64,
+      "end": 738.95,
+      "duration": 3.31,
+      "text": "absolutely not. The I I don't know it's"
+    },
+    {
+      "index": 274,
+      "start": 738.96,
+      "end": 741.71,
+      "duration": 2.75,
+      "text": "eigenvalues, but I know for sure one of"
+    },
+    {
+      "index": 275,
+      "start": 741.72,
+      "end": 744.11,
+      "duration": 2.39,
+      "text": "them is negative."
+    },
+    {
+      "index": 276,
+      "start": 744.12,
+      "end": 748.03,
+      "duration": 3.91,
+      "text": "It's pivots are two, and then the next"
+    },
+    {
+      "index": 277,
+      "start": 748.04,
+      "end": 750.829,
+      "duration": 2.789,
+      "text": "pivot would be the determinant over two,"
+    },
+    {
+      "index": 278,
+      "start": 750.839,
+      "end": 752.47,
+      "duration": 1.631,
+      "text": "and the determinant is What's the"
+    },
+    {
+      "index": 279,
+      "start": 752.48,
+      "end": 754.99,
+      "duration": 2.51,
+      "text": "determinant of this thing?"
+    },
+    {
+      "index": 280,
+      "start": 755.0,
+      "end": 758.07,
+      "duration": 3.07,
+      "text": "14 minus 36. I've got a determinant of"
+    },
+    {
+      "index": 281,
+      "start": 758.08,
+      "end": 761.63,
+      "duration": 3.55,
+      "text": "minus 22. The next pivot will be"
+    },
+    {
+      "index": 282,
+      "start": 761.64,
+      "end": 765.51,
+      "duration": 3.87,
+      "text": "The pivots now of this thing are two and"
+    },
+    {
+      "index": 283,
+      "start": 765.52,
+      "end": 768.35,
+      "duration": 2.83,
+      "text": "minus 11 or something."
+    },
+    {
+      "index": 284,
+      "start": 768.36,
+      "end": 770.35,
+      "duration": 1.99,
+      "text": "Their product being minus 22, the"
+    },
+    {
+      "index": 285,
+      "start": 770.36,
+      "end": 772.79,
+      "duration": 2.43,
+      "text": "determinant. This thing is not positive"
+    },
+    {
+      "index": 286,
+      "start": 772.8,
+      "end": 775.19,
+      "duration": 2.39,
+      "text": "definite. What would be What Let me look"
+    },
+    {
+      "index": 287,
+      "start": 775.2,
+      "end": 777.63,
+      "duration": 2.43,
+      "text": "at the X transpose AX for this guy."
+    },
+    {
+      "index": 288,
+      "start": 777.64,
+      "end": 780.47,
+      "duration": 2.83,
+      "text": "What's If I do out this multiplication,"
+    },
+    {
+      "index": 289,
+      "start": 780.48,
+      "end": 783.11,
+      "duration": 2.63,
+      "text": "this 18 is temporarily changing to a"
+    },
+    {
+      "index": 290,
+      "start": 783.12,
+      "end": 784.67,
+      "duration": 1.55,
+      "text": "seven."
+    },
+    {
+      "index": 291,
+      "start": 784.68,
+      "end": 787.11,
+      "duration": 2.43,
+      "text": "This 18 is temporarily changing to a"
+    },
+    {
+      "index": 292,
+      "start": 787.12,
+      "end": 788.31,
+      "duration": 1.19,
+      "text": "seven."
+    },
+    {
+      "index": 293,
+      "start": 788.32,
+      "end": 792.95,
+      "duration": 4.63,
+      "text": "And I know"
+    },
+    {
+      "index": 294,
+      "start": 796.75,
+      "end": 796.76,
+      "duration": 0.01,
+      "text": "that there's some numbers X1 and X2 for"
+    },
+    {
+      "index": 295,
+      "start": 796.76,
+      "end": 801.43,
+      "duration": 4.67,
+      "text": "which that thing that function"
+    },
+    {
+      "index": 296,
+      "start": 801.44,
+      "end": 802.39,
+      "duration": 0.95,
+      "text": "is"
+    },
+    {
+      "index": 297,
+      "start": 802.4,
+      "end": 804.75,
+      "duration": 2.35,
+      "text": "negative."
+    },
+    {
+      "index": 298,
+      "start": 804.76,
+      "end": 806.829,
+      "duration": 2.069,
+      "text": "And I'm desperately trying to think what"
+    },
+    {
+      "index": 299,
+      "start": 806.839,
+      "end": 808.31,
+      "duration": 1.471,
+      "text": "they are."
+    },
+    {
+      "index": 300,
+      "start": 808.32,
+      "end": 810.63,
+      "duration": 2.31,
+      "text": "Okay, maybe you can see. Can you tell me"
+    },
+    {
+      "index": 301,
+      "start": 810.64,
+      "end": 814.19,
+      "duration": 3.55,
+      "text": "a value of X1 and X2"
+    },
+    {
+      "index": 302,
+      "start": 814.2,
+      "end": 820.27,
+      "duration": 6.07,
+      "text": "that makes this quantity negative?"
+    },
+    {
+      "index": 303,
+      "start": 823.03,
+      "end": 823.04,
+      "duration": 0.01,
+      "text": "Oh, maybe one and minus one?"
+    },
+    {
+      "index": 304,
+      "start": 823.04,
+      "end": 825.27,
+      "duration": 2.23,
+      "text": "Yeah, that's a that's a"
+    },
+    {
+      "index": 305,
+      "start": 825.28,
+      "end": 827.27,
+      "duration": 1.99,
+      "text": "In this case, that"
+    },
+    {
+      "index": 306,
+      "start": 827.28,
+      "end": 827.95,
+      "duration": 0.67,
+      "text": "uh"
+    },
+    {
+      "index": 307,
+      "start": 827.96,
+      "end": 832.31,
+      "duration": 4.35,
+      "text": "will work, right? If I took X1 to be one"
+    },
+    {
+      "index": 308,
+      "start": 832.32,
+      "end": 834.79,
+      "duration": 2.47,
+      "text": "and X2 to be minus one, then I always"
+    },
+    {
+      "index": 309,
+      "start": 834.8,
+      "end": 837.55,
+      "duration": 2.75,
+      "text": "get something positive, the two and the"
+    },
+    {
+      "index": 310,
+      "start": 837.56,
+      "end": 840.35,
+      "duration": 2.79,
+      "text": "seven minus one squared. But this would"
+    },
+    {
+      "index": 311,
+      "start": 840.36,
+      "end": 842.27,
+      "duration": 1.91,
+      "text": "be minus 12, and the whole thing would"
+    },
+    {
+      "index": 312,
+      "start": 842.28,
+      "end": 844.91,
+      "duration": 2.63,
+      "text": "be negative. I'd have two minus 12 plus"
+    },
+    {
+      "index": 313,
+      "start": 844.92,
+      "end": 847.51,
+      "duration": 2.59,
+      "text": "seven, I'm negative."
+    },
+    {
+      "index": 314,
+      "start": 847.52,
+      "end": 850.27,
+      "duration": 2.75,
+      "text": "If I drew the graph, can I Can I get a"
+    },
+    {
+      "index": 315,
+      "start": 850.28,
+      "end": 852.87,
+      "duration": 2.59,
+      "text": "little picture in here? If I draw the"
+    },
+    {
+      "index": 316,
+      "start": 852.88,
+      "end": 856.35,
+      "duration": 3.47,
+      "text": "graph of this thing,"
+    },
+    {
+      "index": 317,
+      "start": 858.55,
+      "end": 858.56,
+      "duration": 0.01,
+      "text": "so graph"
+    },
+    {
+      "index": 318,
+      "start": 858.56,
+      "end": 860.15,
+      "duration": 1.59,
+      "text": "of"
+    },
+    {
+      "index": 319,
+      "start": 860.16,
+      "end": 862.23,
+      "duration": 2.07,
+      "text": "the function F"
+    },
+    {
+      "index": 320,
+      "start": 862.24,
+      "end": 867.35,
+      "duration": 5.11,
+      "text": "of XY or F of X, shall I say, or F of XY"
+    },
+    {
+      "index": 321,
+      "start": 867.36,
+      "end": 870.71,
+      "duration": 3.35,
+      "text": "equal this It's this It's this X"
+    },
+    {
+      "index": 322,
+      "start": 870.72,
+      "end": 874.39,
+      "duration": 3.67,
+      "text": "transpose AX. This This"
+    },
+    {
+      "index": 323,
+      "start": 874.4,
+      "end": 877.23,
+      "duration": 2.83,
+      "text": "This AX squared,"
+    },
+    {
+      "index": 324,
+      "start": 877.24,
+      "end": 879.31,
+      "duration": 2.07,
+      "text": "2 BXY,"
+    },
+    {
+      "index": 325,
+      "start": 879.32,
+      "end": 882.39,
+      "duration": 3.07,
+      "text": "and CY squared. And"
+    },
+    {
+      "index": 326,
+      "start": 882.4,
+      "end": 885.67,
+      "duration": 3.27,
+      "text": "let's take the example"
+    },
+    {
+      "index": 327,
+      "start": 885.68,
+      "end": 889.069,
+      "duration": 3.389,
+      "text": "with these numbers."
+    },
+    {
+      "index": 328,
+      "start": 892.79,
+      "end": 892.8,
+      "duration": 0.01,
+      "text": "Okay, so here's the X axis. Here's the Y"
+    },
+    {
+      "index": 329,
+      "start": 892.8,
+      "end": 896.63,
+      "duration": 3.83,
+      "text": "axis, but here's up is the function. Z,"
+    },
+    {
+      "index": 330,
+      "start": 896.64,
+      "end": 899.23,
+      "duration": 2.59,
+      "text": "if you like, or F."
+    },
+    {
+      "index": 331,
+      "start": 899.24,
+      "end": 902.829,
+      "duration": 3.589,
+      "text": "I I I apologize. Let me just once in my"
+    },
+    {
+      "index": 332,
+      "start": 902.839,
+      "end": 906.11,
+      "duration": 3.271,
+      "text": "life here put an arrow over these these"
+    },
+    {
+      "index": 333,
+      "start": 906.12,
+      "end": 908.67,
+      "duration": 2.55,
+      "text": "axes, so you see that"
+    },
+    {
+      "index": 334,
+      "start": 908.68,
+      "end": 911.11,
+      "duration": 2.43,
+      "text": "that's the vector, and I just Okay,"
+    },
+    {
+      "index": 335,
+      "start": 911.12,
+      "end": 914.27,
+      "duration": 3.15,
+      "text": "instead of X1 and X2, I made them X the"
+    },
+    {
+      "index": 336,
+      "start": 914.28,
+      "end": 918.43,
+      "duration": 4.15,
+      "text": "components X and Y. Okay. So, So, what's"
+    },
+    {
+      "index": 337,
+      "start": 918.44,
+      "end": 920.99,
+      "duration": 2.55,
+      "text": "a graph of 2X squared,"
+    },
+    {
+      "index": 338,
+      "start": 921.0,
+      "end": 922.71,
+      "duration": 1.71,
+      "text": "12XY,"
+    },
+    {
+      "index": 339,
+      "start": 922.72,
+      "end": 925.59,
+      "duration": 2.87,
+      "text": "and 7Y squared?"
+    },
+    {
+      "index": 340,
+      "start": 925.6,
+      "end": 928.31,
+      "duration": 2.71,
+      "text": "I'd like to see So, to get some idea"
+    },
+    {
+      "index": 341,
+      "start": 928.32,
+      "end": 929.829,
+      "duration": 1.509,
+      "text": "Actually, I'm"
+    },
+    {
+      "index": 342,
+      "start": 929.839,
+      "end": 932.19,
+      "duration": 2.351,
+      "text": "not the greatest artist."
+    },
+    {
+      "index": 343,
+      "start": 932.2,
+      "end": 933.27,
+      "duration": 1.07,
+      "text": "But"
+    },
+    {
+      "index": 344,
+      "start": 933.28,
+      "end": 934.67,
+      "duration": 1.39,
+      "text": "let's"
+    },
+    {
+      "index": 345,
+      "start": 934.68,
+      "end": 937.15,
+      "duration": 2.47,
+      "text": "Tell me something about this"
+    },
+    {
+      "index": 346,
+      "start": 937.16,
+      "end": 942.069,
+      "duration": 4.909,
+      "text": "graph of this function."
+    },
+    {
+      "index": 347,
+      "start": 944.15,
+      "end": 944.16,
+      "duration": 0.01,
+      "text": "Uh well, tell me one point it goes"
+    },
+    {
+      "index": 348,
+      "start": 944.16,
+      "end": 947.829,
+      "duration": 3.669,
+      "text": "through."
+    },
+    {
+      "index": 349,
+      "start": 950.829,
+      "end": 950.839,
+      "duration": 0.01,
+      "text": "Uh the origin, right?"
+    },
+    {
+      "index": 350,
+      "start": 950.839,
+      "end": 953.43,
+      "duration": 2.591,
+      "text": "Even this artist can get this thing to"
+    },
+    {
+      "index": 351,
+      "start": 953.44,
+      "end": 957.15,
+      "duration": 3.71,
+      "text": "go through the origin. At At When these"
+    },
+    {
+      "index": 352,
+      "start": 957.16,
+      "end": 960.47,
+      "duration": 3.31,
+      "text": "are zero, I I certainly get zero."
+    },
+    {
+      "index": 353,
+      "start": 960.48,
+      "end": 962.43,
+      "duration": 1.95,
+      "text": "Okay, some more points."
+    },
+    {
+      "index": 354,
+      "start": 962.44,
+      "end": 965.47,
+      "duration": 3.03,
+      "text": "If X is one and Y is zero, then I'm"
+    },
+    {
+      "index": 355,
+      "start": 965.48,
+      "end": 967.63,
+      "duration": 2.15,
+      "text": "going upwards. So, I'm going up this"
+    },
+    {
+      "index": 356,
+      "start": 967.64,
+      "end": 970.63,
+      "duration": 2.99,
+      "text": "way. And I'm going up like 2X squared in"
+    },
+    {
+      "index": 357,
+      "start": 970.64,
+      "end": 972.03,
+      "duration": 1.39,
+      "text": "that direction."
+    },
+    {
+      "index": 358,
+      "start": 972.04,
+      "end": 974.67,
+      "duration": 2.63,
+      "text": "So, that's meant to be a"
+    },
+    {
+      "index": 359,
+      "start": 974.68,
+      "end": 978.069,
+      "duration": 3.389,
+      "text": "a parabola."
+    },
+    {
+      "index": 360,
+      "start": 981.949,
+      "end": 981.959,
+      "duration": 0.01,
+      "text": "And suppose X stays zero and Y"
+    },
+    {
+      "index": 361,
+      "start": 981.959,
+      "end": 984.91,
+      "duration": 2.951,
+      "text": "increases. Well, Y could be positive or"
+    },
+    {
+      "index": 362,
+      "start": 984.92,
+      "end": 987.35,
+      "duration": 2.43,
+      "text": "negative. It's 7Y squared. Is this"
+    },
+    {
+      "index": 363,
+      "start": 987.36,
+      "end": 990.51,
+      "duration": 3.15,
+      "text": "function going upward?"
+    },
+    {
+      "index": 364,
+      "start": 990.52,
+      "end": 994.23,
+      "duration": 3.71,
+      "text": "In the X direction, it's going upward."
+    },
+    {
+      "index": 365,
+      "start": 994.24,
+      "end": 995.949,
+      "duration": 1.709,
+      "text": "And in the Y direction, it's going"
+    },
+    {
+      "index": 366,
+      "start": 995.959,
+      "end": 997.91,
+      "duration": 1.951,
+      "text": "upwards."
+    },
+    {
+      "index": 367,
+      "start": 997.92,
+      "end": 1001.55,
+      "duration": 3.63,
+      "text": "And if X equals Y in the 45° direction,"
+    },
+    {
+      "index": 368,
+      "start": 1001.56,
+      "end": 1003.59,
+      "duration": 2.03,
+      "text": "it's certainly going upwards."
+    },
+    {
+      "index": 369,
+      "start": 1003.6,
+      "end": 1005.91,
+      "duration": 2.31,
+      "text": "Cuz then we'd have What about"
+    },
+    {
+      "index": 370,
+      "start": 1005.92,
+      "end": 1009.47,
+      "duration": 3.55,
+      "text": "Everything would be positive, but what?"
+    },
+    {
+      "index": 371,
+      "start": 1009.48,
+      "end": 1013.23,
+      "duration": 3.75,
+      "text": "This function What What What's the graph"
+    },
+    {
+      "index": 372,
+      "start": 1013.24,
+      "end": 1014.67,
+      "duration": 1.43,
+      "text": "of this function?"
+    },
+    {
+      "index": 373,
+      "start": 1014.68,
+      "end": 1017.35,
+      "duration": 2.67,
+      "text": "So, like tell me the Tell me the word"
+    },
+    {
+      "index": 374,
+      "start": 1017.36,
+      "end": 1019.67,
+      "duration": 2.31,
+      "text": "that describes the graph of this"
+    },
+    {
+      "index": 375,
+      "start": 1019.68,
+      "end": 1021.91,
+      "duration": 2.23,
+      "text": "function. This is the non-positive"
+    },
+    {
+      "index": 376,
+      "start": 1021.92,
+      "end": 1024.189,
+      "duration": 2.269,
+      "text": "definite. You Everybody's with me here."
+    },
+    {
+      "index": 377,
+      "start": 1024.199,
+      "end": 1025.15,
+      "duration": 0.951,
+      "text": "I'm"
+    },
+    {
+      "index": 378,
+      "start": 1025.16,
+      "end": 1027.03,
+      "duration": 1.87,
+      "text": "for some"
+    },
+    {
+      "index": 379,
+      "start": 1027.04,
+      "end": 1029.03,
+      "duration": 1.99,
+      "text": "reason got started in a negative"
+    },
+    {
+      "index": 380,
+      "start": 1029.04,
+      "end": 1031.23,
+      "duration": 2.19,
+      "text": "direction here, a case that isn't"
+    },
+    {
+      "index": 381,
+      "start": 1031.24,
+      "end": 1034.39,
+      "duration": 3.15,
+      "text": "positive definite. And what's What's the"
+    },
+    {
+      "index": 382,
+      "start": 1034.4,
+      "end": 1037.069,
+      "duration": 2.669,
+      "text": "graph look like? It goes up, but does it"
+    },
+    {
+      "index": 383,
+      "start": 1037.079,
+      "end": 1039.27,
+      "duration": 2.191,
+      "text": "Do we have a minimum here? Does it go up"
+    },
+    {
+      "index": 384,
+      "start": 1039.28,
+      "end": 1042.59,
+      "duration": 3.31,
+      "text": "from the from the origin?"
+    },
+    {
+      "index": 385,
+      "start": 1042.6,
+      "end": 1044.35,
+      "duration": 1.75,
+      "text": "Completely?"
+    },
+    {
+      "index": 386,
+      "start": 1044.36,
+      "end": 1046.75,
+      "duration": 2.39,
+      "text": "No, because we just checked that this"
+    },
+    {
+      "index": 387,
+      "start": 1046.76,
+      "end": 1048.51,
+      "duration": 1.75,
+      "text": "thing failed."
+    },
+    {
+      "index": 388,
+      "start": 1048.52,
+      "end": 1052.11,
+      "duration": 3.59,
+      "text": "It failed along the direction when X was"
+    },
+    {
+      "index": 389,
+      "start": 1052.12,
+      "end": 1055.23,
+      "duration": 3.11,
+      "text": "minus Y. We have a saddle point. Let me"
+    },
+    {
+      "index": 390,
+      "start": 1055.24,
+      "end": 1057.669,
+      "duration": 2.429,
+      "text": "Let me put myself Let me at least tell"
+    },
+    {
+      "index": 391,
+      "start": 1057.679,
+      "end": 1059.23,
+      "duration": 1.551,
+      "text": "you the word."
+    },
+    {
+      "index": 392,
+      "start": 1059.24,
+      "end": 1061.15,
+      "duration": 1.91,
+      "text": "This thing"
+    },
+    {
+      "index": 393,
+      "start": 1061.16,
+      "end": 1066.35,
+      "duration": 5.19,
+      "text": "goes up in some directions,"
+    },
+    {
+      "index": 394,
+      "start": 1069.79,
+      "end": 1069.8,
+      "duration": 0.01,
+      "text": "but down in other directions."
+    },
+    {
+      "index": 395,
+      "start": 1069.8,
+      "end": 1072.07,
+      "duration": 2.27,
+      "text": "And"
+    },
+    {
+      "index": 396,
+      "start": 1072.08,
+      "end": 1074.15,
+      "duration": 2.07,
+      "text": "if we actually knew what a saddle looked"
+    },
+    {
+      "index": 397,
+      "start": 1074.16,
+      "end": 1076.43,
+      "duration": 2.27,
+      "text": "like, I think saddle do that."
+    },
+    {
+      "index": 398,
+      "start": 1076.44,
+      "end": 1079.11,
+      "duration": 2.67,
+      "text": "Like Am I right? I"
+    },
+    {
+      "index": 399,
+      "start": 1079.12,
+      "end": 1082.91,
+      "duration": 3.79,
+      "text": "I mean, like the way your legs go"
+    },
+    {
+      "index": 400,
+      "start": 1082.92,
+      "end": 1085.23,
+      "duration": 2.31,
+      "text": "like down. I"
+    },
+    {
+      "index": 401,
+      "start": 1085.24,
+      "end": 1088.31,
+      "duration": 3.07,
+      "text": "And the way you And looking like forward"
+    },
+    {
+      "index": 402,
+      "start": 1088.32,
+      "end": 1090.27,
+      "duration": 1.95,
+      "text": "and"
+    },
+    {
+      "index": 403,
+      "start": 1090.28,
+      "end": 1091.43,
+      "duration": 1.15,
+      "text": "uh"
+    },
+    {
+      "index": 404,
+      "start": 1091.44,
+      "end": 1094.35,
+      "duration": 2.91,
+      "text": "the"
+    },
+    {
+      "index": 405,
+      "start": 1096.55,
+      "end": 1096.56,
+      "duration": 0.01,
+      "text": "And drawing the thing is even worse than"
+    },
+    {
+      "index": 406,
+      "start": 1096.56,
+      "end": 1098.59,
+      "duration": 2.03,
+      "text": "describing. I'm just going to say, in"
+    },
+    {
+      "index": 407,
+      "start": 1098.6,
+      "end": 1101.35,
+      "duration": 2.75,
+      "text": "some directions we go up, and in other"
+    },
+    {
+      "index": 408,
+      "start": 1101.36,
+      "end": 1102.87,
+      "duration": 1.51,
+      "text": "directions"
+    },
+    {
+      "index": 409,
+      "start": 1102.88,
+      "end": 1105.31,
+      "duration": 2.43,
+      "text": "there is"
+    },
+    {
+      "index": 410,
+      "start": 1105.32,
+      "end": 1107.47,
+      "duration": 2.15,
+      "text": "um"
+    },
+    {
+      "index": 411,
+      "start": 1107.48,
+      "end": 1109.31,
+      "duration": 1.83,
+      "text": "a saddle. Now, I'm sorry I put that on"
+    },
+    {
+      "index": 412,
+      "start": 1109.32,
+      "end": 1111.99,
+      "duration": 2.67,
+      "text": "the front board cuz I've no way to to"
+    },
+    {
+      "index": 413,
+      "start": 1112.0,
+      "end": 1115.47,
+      "duration": 3.47,
+      "text": "cover it. But it's a saddle. Okay."
+    },
+    {
+      "index": 414,
+      "start": 1115.48,
+      "end": 1119.31,
+      "duration": 3.83,
+      "text": "And And this is a saddle point. It's the"
+    },
+    {
+      "index": 415,
+      "start": 1119.32,
+      "end": 1122.669,
+      "duration": 3.349,
+      "text": "It's a point that's at the maximum in"
+    },
+    {
+      "index": 416,
+      "start": 1122.679,
+      "end": 1125.03,
+      "duration": 2.351,
+      "text": "some directions and at the minimum in"
+    },
+    {
+      "index": 417,
+      "start": 1125.04,
+      "end": 1126.63,
+      "duration": 1.59,
+      "text": "other directions."
+    },
+    {
+      "index": 418,
+      "start": 1126.64,
+      "end": 1128.59,
+      "duration": 1.95,
+      "text": "And actually,"
+    },
+    {
+      "index": 419,
+      "start": 1128.6,
+      "end": 1131.27,
+      "duration": 2.67,
+      "text": "the perfect directions to look are the"
+    },
+    {
+      "index": 420,
+      "start": 1131.28,
+      "end": 1133.55,
+      "duration": 2.27,
+      "text": "eigenvector directions."
+    },
+    {
+      "index": 421,
+      "start": 1133.56,
+      "end": 1135.149,
+      "duration": 1.589,
+      "text": "We'll see that."
+    },
+    {
+      "index": 422,
+      "start": 1135.159,
+      "end": 1138.51,
+      "duration": 3.351,
+      "text": "So, this is"
+    },
+    {
+      "index": 423,
+      "start": 1138.52,
+      "end": 1141.47,
+      "duration": 2.95,
+      "text": "um"
+    },
+    {
+      "index": 424,
+      "start": 1144.71,
+      "end": 1144.72,
+      "duration": 0.01,
+      "text": "not a positive definite matrix. Okay."
+    },
+    {
+      "index": 425,
+      "start": 1144.72,
+      "end": 1148.03,
+      "duration": 3.31,
+      "text": "Now, I'm coming back to this example."
+    },
+    {
+      "index": 426,
+      "start": 1148.04,
+      "end": 1150.35,
+      "duration": 2.31,
+      "text": "Getting rid of this seven,"
+    },
+    {
+      "index": 427,
+      "start": 1150.36,
+      "end": 1154.27,
+      "duration": 3.91,
+      "text": "let's move it up to 20."
+    },
+    {
+      "index": 428,
+      "start": 1154.28,
+      "end": 1156.63,
+      "duration": 2.35,
+      "text": "Let's Let's Let's make the thing really"
+    },
+    {
+      "index": 429,
+      "start": 1156.64,
+      "end": 1158.31,
+      "duration": 1.67,
+      "text": "positive definite."
+    },
+    {
+      "index": 430,
+      "start": 1158.32,
+      "end": 1159.99,
+      "duration": 1.67,
+      "text": "Okay."
+    },
+    {
+      "index": 431,
+      "start": 1160.0,
+      "end": 1162.75,
+      "duration": 2.75,
+      "text": "So, this is This number is now 20."
+    },
+    {
+      "index": 432,
+      "start": 1162.76,
+      "end": 1165.79,
+      "duration": 3.03,
+      "text": "C is now 20. Okay."
+    },
+    {
+      "index": 433,
+      "start": 1165.8,
+      "end": 1168.35,
+      "duration": 2.55,
+      "text": "Now, that passes the test,"
+    },
+    {
+      "index": 434,
+      "start": 1168.36,
+      "end": 1171.149,
+      "duration": 2.789,
+      "text": "which I haven't proved, of course. It"
+    },
+    {
+      "index": 435,
+      "start": 1171.159,
+      "end": 1177.31,
+      "duration": 6.151,
+      "text": "passes the test for positive pivots."
+    },
+    {
+      "index": 436,
+      "start": 1179.35,
+      "end": 1179.36,
+      "duration": 0.01,
+      "text": "It passes the test for positive"
+    },
+    {
+      "index": 437,
+      "start": 1179.36,
+      "end": 1181.19,
+      "duration": 1.83,
+      "text": "eigenvalues. How How can you tell that"
+    },
+    {
+      "index": 438,
+      "start": 1181.2,
+      "end": 1183.19,
+      "duration": 1.99,
+      "text": "the eigenvalues of that matrix are"
+    },
+    {
+      "index": 439,
+      "start": 1183.2,
+      "end": 1185.71,
+      "duration": 2.51,
+      "text": "positive without actually finding them?"
+    },
+    {
+      "index": 440,
+      "start": 1185.72,
+      "end": 1186.87,
+      "duration": 1.15,
+      "text": "Of course,"
+    },
+    {
+      "index": 441,
+      "start": 1186.88,
+      "end": 1188.79,
+      "duration": 1.91,
+      "text": "two by two, I could find them. But can"
+    },
+    {
+      "index": 442,
+      "start": 1188.8,
+      "end": 1191.39,
+      "duration": 2.59,
+      "text": "you see How do I know they're positive?"
+    },
+    {
+      "index": 443,
+      "start": 1191.4,
+      "end": 1193.71,
+      "duration": 2.31,
+      "text": "I know that their product is I know that"
+    },
+    {
+      "index": 444,
+      "start": 1193.72,
+      "end": 1196.43,
+      "duration": 2.71,
+      "text": "lambda one times lambda two is positive."
+    },
+    {
+      "index": 445,
+      "start": 1196.44,
+      "end": 1198.07,
+      "duration": 1.63,
+      "text": "Why?"
+    },
+    {
+      "index": 446,
+      "start": 1198.08,
+      "end": 1200.59,
+      "duration": 2.51,
+      "text": "Because that's the"
+    },
+    {
+      "index": 447,
+      "start": 1200.6,
+      "end": 1202.87,
+      "duration": 2.27,
+      "text": "determinant, right? Lambda one times"
+    },
+    {
+      "index": 448,
+      "start": 1202.88,
+      "end": 1205.47,
+      "duration": 2.59,
+      "text": "lambda two is the determinant, which is"
+    },
+    {
+      "index": 449,
+      "start": 1205.48,
+      "end": 1209.07,
+      "duration": 3.59,
+      "text": "40 minus 36 is four. So, the determinant"
+    },
+    {
+      "index": 450,
+      "start": 1209.08,
+      "end": 1211.07,
+      "duration": 1.99,
+      "text": "is four."
+    },
+    {
+      "index": 451,
+      "start": 1211.08,
+      "end": 1213.27,
+      "duration": 2.19,
+      "text": "And the trace"
+    },
+    {
+      "index": 452,
+      "start": 1213.28,
+      "end": 1216.47,
+      "duration": 3.19,
+      "text": "the sum down the diagonal is 22."
+    },
+    {
+      "index": 453,
+      "start": 1216.48,
+      "end": 1220.59,
+      "duration": 4.11,
+      "text": "So, they multiply to give four."
+    },
+    {
+      "index": 454,
+      "start": 1220.6,
+      "end": 1222.47,
+      "duration": 1.87,
+      "text": "So, that leaves the possibility they're"
+    },
+    {
+      "index": 455,
+      "start": 1222.48,
+      "end": 1226.83,
+      "duration": 4.35,
+      "text": "either both positive or both negative."
+    },
+    {
+      "index": 456,
+      "start": 1226.84,
+      "end": 1228.83,
+      "duration": 1.99,
+      "text": "But, if they're both negative, the trace"
+    },
+    {
+      "index": 457,
+      "start": 1228.84,
+      "end": 1230.67,
+      "duration": 1.83,
+      "text": "couldn't be 22. So, they're both"
+    },
+    {
+      "index": 458,
+      "start": 1230.68,
+      "end": 1233.19,
+      "duration": 2.51,
+      "text": "positive. So, both of the eigenvalues"
+    },
+    {
+      "index": 459,
+      "start": 1233.2,
+      "end": 1234.91,
+      "duration": 1.71,
+      "text": "there are positive, both of the pivots"
+    },
+    {
+      "index": 460,
+      "start": 1234.92,
+      "end": 1237.11,
+      "duration": 2.19,
+      "text": "are positive, the the determinants are"
+    },
+    {
+      "index": 461,
+      "start": 1237.12,
+      "end": 1239.67,
+      "duration": 2.55,
+      "text": "positive, and I believe that this"
+    },
+    {
+      "index": 462,
+      "start": 1239.68,
+      "end": 1241.95,
+      "duration": 2.27,
+      "text": "function"
+    },
+    {
+      "index": 463,
+      "start": 1241.96,
+      "end": 1246.27,
+      "duration": 4.31,
+      "text": "is positive everywhere except at"
+    },
+    {
+      "index": 464,
+      "start": 1246.28,
+      "end": 1250.31,
+      "duration": 4.03,
+      "text": "0 0, of course. When I write down"
+    },
+    {
+      "index": 465,
+      "start": 1250.32,
+      "end": 1251.55,
+      "duration": 1.23,
+      "text": "this"
+    },
+    {
+      "index": 466,
+      "start": 1251.56,
+      "end": 1253.75,
+      "duration": 2.19,
+      "text": "condition. I So, I believe that X"
+    },
+    {
+      "index": 467,
+      "start": 1253.76,
+      "end": 1256.91,
+      "duration": 3.15,
+      "text": "transpose Let me copy X transpose AX is"
+    },
+    {
+      "index": 468,
+      "start": 1256.92,
+      "end": 1260.59,
+      "duration": 3.67,
+      "text": "positive except, of course,"
+    },
+    {
+      "index": 469,
+      "start": 1260.6,
+      "end": 1263.31,
+      "duration": 2.71,
+      "text": "at the minimum point"
+    },
+    {
+      "index": 470,
+      "start": 1263.32,
+      "end": 1265.47,
+      "duration": 2.15,
+      "text": "at"
+    },
+    {
+      "index": 471,
+      "start": 1265.48,
+      "end": 1267.71,
+      "duration": 2.23,
+      "text": "the zero vector. Of course, I don't"
+    },
+    {
+      "index": 472,
+      "start": 1267.72,
+      "end": 1271.67,
+      "duration": 3.95,
+      "text": "expect miracles."
+    },
+    {
+      "index": 473,
+      "start": 1274.39,
+      "end": 1274.4,
+      "duration": 0.01,
+      "text": "So, what does its graph look like? And"
+    },
+    {
+      "index": 474,
+      "start": 1274.4,
+      "end": 1276.75,
+      "duration": 2.35,
+      "text": "how do I check and how do I check that"
+    },
+    {
+      "index": 475,
+      "start": 1276.76,
+      "end": 1282.19,
+      "duration": 5.43,
+      "text": "this really is positive?"
+    },
+    {
+      "index": 476,
+      "start": 1284.83,
+      "end": 1284.84,
+      "duration": 0.01,
+      "text": "So, we take its graph for a minute."
+    },
+    {
+      "index": 477,
+      "start": 1284.84,
+      "end": 1286.55,
+      "duration": 1.71,
+      "text": "What would be the graph of that"
+    },
+    {
+      "index": 478,
+      "start": 1286.56,
+      "end": 1288.55,
+      "duration": 1.99,
+      "text": "function? It does not have a saddle"
+    },
+    {
+      "index": 479,
+      "start": 1288.56,
+      "end": 1291.23,
+      "duration": 2.67,
+      "text": "point. Let me I'll raise the board here"
+    },
+    {
+      "index": 480,
+      "start": 1291.24,
+      "end": 1296.23,
+      "duration": 4.99,
+      "text": "and stay with this example for a while."
+    },
+    {
+      "index": 481,
+      "start": 1298.71,
+      "end": 1298.72,
+      "duration": 0.01,
+      "text": "So, I want to do the graph of Here's my"
+    },
+    {
+      "index": 482,
+      "start": 1298.72,
+      "end": 1301.51,
+      "duration": 2.79,
+      "text": "function."
+    },
+    {
+      "index": 483,
+      "start": 1303.55,
+      "end": 1303.56,
+      "duration": 0.01,
+      "text": "2 X squared"
+    },
+    {
+      "index": 484,
+      "start": 1303.56,
+      "end": 1306.07,
+      "duration": 2.51,
+      "text": "12 XY's, that could be positive or"
+    },
+    {
+      "index": 485,
+      "start": 1306.08,
+      "end": 1309.71,
+      "duration": 3.63,
+      "text": "negative, and 20 Y squared."
+    },
+    {
+      "index": 486,
+      "start": 1309.72,
+      "end": 1312.47,
+      "duration": 2.75,
+      "text": "My"
+    },
+    {
+      "index": 487,
+      "start": 1314.71,
+      "end": 1314.72,
+      "duration": 0.01,
+      "text": "point is so I mean, you're seeing the"
+    },
+    {
+      "index": 488,
+      "start": 1314.72,
+      "end": 1317.79,
+      "duration": 3.07,
+      "text": "underlying point is that"
+    },
+    {
+      "index": 489,
+      "start": 1317.8,
+      "end": 1320.07,
+      "duration": 2.27,
+      "text": "the things are positive definite when"
+    },
+    {
+      "index": 490,
+      "start": 1320.08,
+      "end": 1322.59,
+      "duration": 2.51,
+      "text": "when in some way these"
+    },
+    {
+      "index": 491,
+      "start": 1322.6,
+      "end": 1326.15,
+      "duration": 3.55,
+      "text": "these pure squares, squares we know to"
+    },
+    {
+      "index": 492,
+      "start": 1326.16,
+      "end": 1327.87,
+      "duration": 1.71,
+      "text": "be positive."
+    },
+    {
+      "index": 493,
+      "start": 1327.88,
+      "end": 1330.31,
+      "duration": 2.43,
+      "text": "And when those kind of overwhelm this"
+    },
+    {
+      "index": 494,
+      "start": 1330.32,
+      "end": 1331.55,
+      "duration": 1.23,
+      "text": "guy"
+    },
+    {
+      "index": 495,
+      "start": 1331.56,
+      "end": 1334.27,
+      "duration": 2.71,
+      "text": "who could be positive or negative cuz X"
+    },
+    {
+      "index": 496,
+      "start": 1334.28,
+      "end": 1335.99,
+      "duration": 1.71,
+      "text": "and Y could have same or different"
+    },
+    {
+      "index": 497,
+      "start": 1336.0,
+      "end": 1337.83,
+      "duration": 1.83,
+      "text": "signs."
+    },
+    {
+      "index": 498,
+      "start": 1337.84,
+      "end": 1339.83,
+      "duration": 1.99,
+      "text": "When when these are big enough, they"
+    },
+    {
+      "index": 499,
+      "start": 1339.84,
+      "end": 1341.63,
+      "duration": 1.79,
+      "text": "overwhelm this guy and make the total"
+    },
+    {
+      "index": 500,
+      "start": 1341.64,
+      "end": 1344.31,
+      "duration": 2.67,
+      "text": "thing positive. And what would the graph"
+    },
+    {
+      "index": 501,
+      "start": 1344.32,
+      "end": 1349.47,
+      "duration": 5.15,
+      "text": "now look like? Let me draw the X"
+    },
+    {
+      "index": 502,
+      "start": 1352.83,
+      "end": 1352.84,
+      "duration": 0.01,
+      "text": "Well, let me draw the X direction, the Y"
+    },
+    {
+      "index": 503,
+      "start": 1352.84,
+      "end": 1354.19,
+      "duration": 1.35,
+      "text": "direction,"
+    },
+    {
+      "index": 504,
+      "start": 1354.2,
+      "end": 1357.43,
+      "duration": 3.23,
+      "text": "and the origin."
+    },
+    {
+      "index": 505,
+      "start": 1357.44,
+      "end": 1359.83,
+      "duration": 2.39,
+      "text": "At 0 0,"
+    },
+    {
+      "index": 506,
+      "start": 1359.84,
+      "end": 1361.07,
+      "duration": 1.23,
+      "text": "I'm there."
+    },
+    {
+      "index": 507,
+      "start": 1361.08,
+      "end": 1363.47,
+      "duration": 2.39,
+      "text": "Where do I go as I move away from the"
+    },
+    {
+      "index": 508,
+      "start": 1363.48,
+      "end": 1366.11,
+      "duration": 2.63,
+      "text": "origin?"
+    },
+    {
+      "index": 509,
+      "start": 1367.99,
+      "end": 1368.0,
+      "duration": 0.01,
+      "text": "Where do I go as I move away from the"
+    },
+    {
+      "index": 510,
+      "start": 1368.0,
+      "end": 1370.669,
+      "duration": 2.669,
+      "text": "origin?"
+    },
+    {
+      "index": 511,
+      "start": 1373.95,
+      "end": 1373.96,
+      "duration": 0.01,
+      "text": "I'm sure that I go up."
+    },
+    {
+      "index": 512,
+      "start": 1373.96,
+      "end": 1376.87,
+      "duration": 2.91,
+      "text": "The origin, the center point here, is a"
+    },
+    {
+      "index": 513,
+      "start": 1376.88,
+      "end": 1380.07,
+      "duration": 3.19,
+      "text": "minimum because this thing I believe,"
+    },
+    {
+      "index": 514,
+      "start": 1380.08,
+      "end": 1383.23,
+      "duration": 3.15,
+      "text": "and we better see why, it's the graph is"
+    },
+    {
+      "index": 515,
+      "start": 1383.24,
+      "end": 1385.31,
+      "duration": 2.07,
+      "text": "like a bowl."
+    },
+    {
+      "index": 516,
+      "start": 1385.32,
+      "end": 1387.39,
+      "duration": 2.07,
+      "text": "The graph is like a bowl shaped. It's"
+    },
+    {
+      "index": 517,
+      "start": 1387.4,
+      "end": 1395.59,
+      "duration": 8.19,
+      "text": "it's it's Here's the minimum."
+    },
+    {
+      "index": 518,
+      "start": 1399.03,
+      "end": 1399.04,
+      "duration": 0.01,
+      "text": "And because we've got a pure quadratic,"
+    },
+    {
+      "index": 519,
+      "start": 1399.04,
+      "end": 1401.27,
+      "duration": 2.23,
+      "text": "we know it sits at the origin, we know"
+    },
+    {
+      "index": 520,
+      "start": 1401.28,
+      "end": 1403.87,
+      "duration": 2.59,
+      "text": "it's tangent plane, the first"
+    },
+    {
+      "index": 521,
+      "start": 1403.88,
+      "end": 1405.47,
+      "duration": 1.59,
+      "text": "derivatives"
+    },
+    {
+      "index": 522,
+      "start": 1405.48,
+      "end": 1406.99,
+      "duration": 1.51,
+      "text": "are zero."
+    },
+    {
+      "index": 523,
+      "start": 1407.0,
+      "end": 1411.27,
+      "duration": 4.27,
+      "text": "So, so we know we know first derivatives"
+    },
+    {
+      "index": 524,
+      "start": 1411.28,
+      "end": 1413.669,
+      "duration": 2.389,
+      "text": "first derivatives"
+    },
+    {
+      "index": 525,
+      "start": 1413.679,
+      "end": 1416.75,
+      "duration": 3.071,
+      "text": "are all zero."
+    },
+    {
+      "index": 526,
+      "start": 1416.76,
+      "end": 1420.75,
+      "duration": 3.99,
+      "text": "But, that's not enough for a minimum."
+    },
+    {
+      "index": 527,
+      "start": 1427.91,
+      "end": 1427.92,
+      "duration": 0.01,
+      "text": "So, the the partial derivatives, the"
+    },
+    {
+      "index": 528,
+      "start": 1427.92,
+      "end": 1431.11,
+      "duration": 3.19,
+      "text": "first derivatives are zero."
+    },
+    {
+      "index": 529,
+      "start": 1431.12,
+      "end": 1432.91,
+      "duration": 1.79,
+      "text": "Again."
+    },
+    {
+      "index": 530,
+      "start": 1432.92,
+      "end": 1435.11,
+      "duration": 2.19,
+      "text": "Cuz first derivatives"
+    },
+    {
+      "index": 531,
+      "start": 1435.12,
+      "end": 1437.27,
+      "duration": 2.15,
+      "text": "are going to have an X or an a Y or a Y"
+    },
+    {
+      "index": 532,
+      "start": 1437.28,
+      "end": 1439.63,
+      "duration": 2.35,
+      "text": "in them, they'll be zero at the origin."
+    },
+    {
+      "index": 533,
+      "start": 1439.64,
+      "end": 1441.75,
+      "duration": 2.11,
+      "text": "It's the second derivatives that control"
+    },
+    {
+      "index": 534,
+      "start": 1441.76,
+      "end": 1443.27,
+      "duration": 1.51,
+      "text": "everything."
+    },
+    {
+      "index": 535,
+      "start": 1443.28,
+      "end": 1445.31,
+      "duration": 2.03,
+      "text": "It's the second derivatives that this"
+    },
+    {
+      "index": 536,
+      "start": 1445.32,
+      "end": 1447.71,
+      "duration": 2.39,
+      "text": "matrix is telling us."
+    },
+    {
+      "index": 537,
+      "start": 1447.72,
+      "end": 1450.19,
+      "duration": 2.47,
+      "text": "And somehow second"
+    },
+    {
+      "index": 538,
+      "start": 1450.2,
+      "end": 1452.19,
+      "duration": 1.99,
+      "text": "So, here here's my point. You remember"
+    },
+    {
+      "index": 539,
+      "start": 1452.2,
+      "end": 1454.75,
+      "duration": 2.55,
+      "text": "in calculus how did you decide on a"
+    },
+    {
+      "index": 540,
+      "start": 1454.76,
+      "end": 1456.63,
+      "duration": 1.87,
+      "text": "minimum?"
+    },
+    {
+      "index": 541,
+      "start": 1456.64,
+      "end": 1458.95,
+      "duration": 2.31,
+      "text": "First requirement was that the"
+    },
+    {
+      "index": 542,
+      "start": 1458.96,
+      "end": 1461.47,
+      "duration": 2.51,
+      "text": "derivative had to be zero."
+    },
+    {
+      "index": 543,
+      "start": 1461.48,
+      "end": 1463.23,
+      "duration": 1.75,
+      "text": "But, then you didn't know if you had a"
+    },
+    {
+      "index": 544,
+      "start": 1463.24,
+      "end": 1465.83,
+      "duration": 2.59,
+      "text": "minimum or a maximum."
+    },
+    {
+      "index": 545,
+      "start": 1465.84,
+      "end": 1467.63,
+      "duration": 1.79,
+      "text": "To know that you had a minimum, you had"
+    },
+    {
+      "index": 546,
+      "start": 1467.64,
+      "end": 1470.23,
+      "duration": 2.59,
+      "text": "to look at the second derivative."
+    },
+    {
+      "index": 547,
+      "start": 1470.24,
+      "end": 1471.75,
+      "duration": 1.51,
+      "text": "The second derivative had to be"
+    },
+    {
+      "index": 548,
+      "start": 1471.76,
+      "end": 1475.63,
+      "duration": 3.87,
+      "text": "positive. The the the slope had to be"
+    },
+    {
+      "index": 549,
+      "start": 1475.64,
+      "end": 1477.91,
+      "duration": 2.27,
+      "text": "increasing as you went through the"
+    },
+    {
+      "index": 550,
+      "start": 1477.92,
+      "end": 1479.99,
+      "duration": 2.07,
+      "text": "minimum point."
+    },
+    {
+      "index": 551,
+      "start": 1480.0,
+      "end": 1482.71,
+      "duration": 2.71,
+      "text": "The curvature had to go upwards."
+    },
+    {
+      "index": 552,
+      "start": 1482.72,
+      "end": 1485.47,
+      "duration": 2.75,
+      "text": "And that's what we're doing now in two"
+    },
+    {
+      "index": 553,
+      "start": 1485.48,
+      "end": 1487.07,
+      "duration": 1.59,
+      "text": "dimensions"
+    },
+    {
+      "index": 554,
+      "start": 1487.08,
+      "end": 1489.79,
+      "duration": 2.71,
+      "text": "and in N dimensions. So, we're doing"
+    },
+    {
+      "index": 555,
+      "start": 1489.8,
+      "end": 1491.99,
+      "duration": 2.19,
+      "text": "what we did in calculus."
+    },
+    {
+      "index": 556,
+      "start": 1492.0,
+      "end": 1494.51,
+      "duration": 2.51,
+      "text": "Second derivative positive"
+    },
+    {
+      "index": 557,
+      "start": 1494.52,
+      "end": 1497.39,
+      "duration": 2.87,
+      "text": "will now become that the matrix of"
+    },
+    {
+      "index": 558,
+      "start": 1497.4,
+      "end": 1500.71,
+      "duration": 3.31,
+      "text": "second derivatives is positive definite."
+    },
+    {
+      "index": 559,
+      "start": 1500.72,
+      "end": 1502.91,
+      "duration": 2.19,
+      "text": "Can I just So, this is the like the"
+    },
+    {
+      "index": 560,
+      "start": 1502.92,
+      "end": 1506.71,
+      "duration": 3.79,
+      "text": "translation of of this is how minimum is"
+    },
+    {
+      "index": 561,
+      "start": 1506.72,
+      "end": 1510.15,
+      "duration": 3.43,
+      "text": "coming in. In in in in in begin in in"
+    },
+    {
+      "index": 562,
+      "start": 1510.16,
+      "end": 1513.43,
+      "duration": 3.27,
+      "text": "the beginning of calculus"
+    },
+    {
+      "index": 563,
+      "start": 1513.44,
+      "end": 1514.51,
+      "duration": 1.07,
+      "text": "the"
+    },
+    {
+      "index": 564,
+      "start": 1514.52,
+      "end": 1517.19,
+      "duration": 2.67,
+      "text": "we had a minimum"
+    },
+    {
+      "index": 565,
+      "start": 1517.2,
+      "end": 1522.669,
+      "duration": 5.469,
+      "text": "was associated with second derivative"
+    },
+    {
+      "index": 566,
+      "start": 1525.19,
+      "end": 1525.2,
+      "duration": 0.01,
+      "text": "being positive and first derivative"
+    },
+    {
+      "index": 567,
+      "start": 1525.2,
+      "end": 1527.27,
+      "duration": 2.07,
+      "text": "zero, of course."
+    },
+    {
+      "index": 568,
+      "start": 1527.28,
+      "end": 1528.71,
+      "duration": 1.43,
+      "text": "Derivative"
+    },
+    {
+      "index": 569,
+      "start": 1528.72,
+      "end": 1535.75,
+      "duration": 7.03,
+      "text": "first derivative."
+    },
+    {
+      "index": 570,
+      "start": 1537.55,
+      "end": 1537.56,
+      "duration": 0.01,
+      "text": "But, it was the second derivative that"
+    },
+    {
+      "index": 571,
+      "start": 1537.56,
+      "end": 1539.79,
+      "duration": 2.23,
+      "text": "told us we had a minimum."
+    },
+    {
+      "index": 572,
+      "start": 1539.8,
+      "end": 1544.31,
+      "duration": 4.51,
+      "text": "And now in 1806 in linear algebra"
+    },
+    {
+      "index": 573,
+      "start": 1544.32,
+      "end": 1548.31,
+      "duration": 3.99,
+      "text": "we'll have a minimum"
+    },
+    {
+      "index": 574,
+      "start": 1548.32,
+      "end": 1550.79,
+      "duration": 2.47,
+      "text": "for our function now our function will"
+    },
+    {
+      "index": 575,
+      "start": 1550.8,
+      "end": 1557.11,
+      "duration": 6.31,
+      "text": "have be a function not of just X, but"
+    },
+    {
+      "index": 576,
+      "start": 1559.23,
+      "end": 1559.24,
+      "duration": 0.01,
+      "text": "several variables"
+    },
+    {
+      "index": 577,
+      "start": 1559.24,
+      "end": 1561.19,
+      "duration": 1.95,
+      "text": "the way functions really are in real"
+    },
+    {
+      "index": 578,
+      "start": 1561.2,
+      "end": 1562.31,
+      "duration": 1.11,
+      "text": "life."
+    },
+    {
+      "index": 579,
+      "start": 1562.32,
+      "end": 1564.79,
+      "duration": 2.47,
+      "text": "The minimum will be"
+    },
+    {
+      "index": 580,
+      "start": 1564.8,
+      "end": 1568.99,
+      "duration": 4.19,
+      "text": "when the matrix"
+    },
+    {
+      "index": 581,
+      "start": 1569.0,
+      "end": 1571.27,
+      "duration": 2.27,
+      "text": "of"
+    },
+    {
+      "index": 582,
+      "start": 1571.28,
+      "end": 1574.47,
+      "duration": 3.19,
+      "text": "second derivatives"
+    },
+    {
+      "index": 583,
+      "start": 1574.48,
+      "end": 1576.07,
+      "duration": 1.59,
+      "text": "The matrix here was one by one. There"
+    },
+    {
+      "index": 584,
+      "start": 1576.08,
+      "end": 1577.95,
+      "duration": 1.87,
+      "text": "was just one second derivative. Now,"
+    },
+    {
+      "index": 585,
+      "start": 1577.96,
+      "end": 1580.51,
+      "duration": 2.55,
+      "text": "we've got lots."
+    },
+    {
+      "index": 586,
+      "start": 1580.52,
+      "end": 1583.39,
+      "duration": 2.87,
+      "text": "is"
+    },
+    {
+      "index": 587,
+      "start": 1585.19,
+      "end": 1585.2,
+      "duration": 0.01,
+      "text": "positive"
+    },
+    {
+      "index": 588,
+      "start": 1585.2,
+      "end": 1588.95,
+      "duration": 3.75,
+      "text": "definite."
+    },
+    {
+      "index": 589,
+      "start": 1591.31,
+      "end": 1591.32,
+      "duration": 0.01,
+      "text": "So, positive for a number translates"
+    },
+    {
+      "index": 590,
+      "start": 1591.32,
+      "end": 1594.39,
+      "duration": 3.07,
+      "text": "into positive definite for a matrix."
+    },
+    {
+      "index": 591,
+      "start": 1594.4,
+      "end": 1596.71,
+      "duration": 2.31,
+      "text": "And it just brings everything together."
+    },
+    {
+      "index": 592,
+      "start": 1596.72,
+      "end": 1599.19,
+      "duration": 2.47,
+      "text": "You check You check pivots, you check"
+    },
+    {
+      "index": 593,
+      "start": 1599.2,
+      "end": 1602.19,
+      "duration": 2.99,
+      "text": "determinants, you check eigenvalues, or"
+    },
+    {
+      "index": 594,
+      "start": 1602.2,
+      "end": 1605.47,
+      "duration": 3.27,
+      "text": "you check this minimum stuff. Okay, let"
+    },
+    {
+      "index": 595,
+      "start": 1605.48,
+      "end": 1609.11,
+      "duration": 3.63,
+      "text": "me come back to this graph."
+    },
+    {
+      "index": 596,
+      "start": 1616.23,
+      "end": 1616.24,
+      "duration": 0.01,
+      "text": "And I have to see why. How do I know"
+    },
+    {
+      "index": 597,
+      "start": 1616.24,
+      "end": 1618.23,
+      "duration": 1.99,
+      "text": "that this that this function is always"
+    },
+    {
+      "index": 598,
+      "start": 1618.24,
+      "end": 1619.91,
+      "duration": 1.67,
+      "text": "positive?"
+    },
+    {
+      "index": 599,
+      "start": 1619.92,
+      "end": 1621.55,
+      "duration": 1.63,
+      "text": "Can you look at that and tell that it's"
+    },
+    {
+      "index": 600,
+      "start": 1621.56,
+      "end": 1624.669,
+      "duration": 3.109,
+      "text": "always positive?"
+    },
+    {
+      "index": 601,
+      "start": 1624.679,
+      "end": 1627.55,
+      "duration": 2.871,
+      "text": "Maybe two by two you could"
+    },
+    {
+      "index": 602,
+      "start": 1627.56,
+      "end": 1629.71,
+      "duration": 2.15,
+      "text": "feel pretty sure, but the What's the"
+    },
+    {
+      "index": 603,
+      "start": 1629.72,
+      "end": 1631.71,
+      "duration": 1.99,
+      "text": "good way to show that this thing is"
+    },
+    {
+      "index": 604,
+      "start": 1631.72,
+      "end": 1634.51,
+      "duration": 2.79,
+      "text": "always positive?"
+    },
+    {
+      "index": 605,
+      "start": 1634.52,
+      "end": 1637.91,
+      "duration": 3.39,
+      "text": "If we can express it"
+    },
+    {
+      "index": 606,
+      "start": 1637.92,
+      "end": 1640.91,
+      "duration": 2.99,
+      "text": "as in terms of squares"
+    },
+    {
+      "index": 607,
+      "start": 1640.92,
+      "end": 1643.19,
+      "duration": 2.27,
+      "text": "because that's what we know for any X"
+    },
+    {
+      "index": 608,
+      "start": 1643.2,
+      "end": 1646.07,
+      "duration": 2.87,
+      "text": "and Y, whatever, if we're squaring"
+    },
+    {
+      "index": 609,
+      "start": 1646.08,
+      "end": 1647.71,
+      "duration": 1.63,
+      "text": "something, we certainly are not"
+    },
+    {
+      "index": 610,
+      "start": 1647.72,
+      "end": 1649.35,
+      "duration": 1.63,
+      "text": "negative."
+    },
+    {
+      "index": 611,
+      "start": 1649.36,
+      "end": 1651.63,
+      "duration": 2.27,
+      "text": "So, I believe that this expression, this"
+    },
+    {
+      "index": 612,
+      "start": 1651.64,
+      "end": 1652.91,
+      "duration": 1.27,
+      "text": "function,"
+    },
+    {
+      "index": 613,
+      "start": 1652.92,
+      "end": 1657.07,
+      "duration": 4.15,
+      "text": "could be written as a sum of squares."
+    },
+    {
+      "index": 614,
+      "start": 1657.08,
+      "end": 1660.83,
+      "duration": 3.75,
+      "text": "Can Can you tell me"
+    },
+    {
+      "index": 615,
+      "start": 1662.91,
+      "end": 1662.92,
+      "duration": 0.01,
+      "text": "It See, because all the problems the"
+    },
+    {
+      "index": 616,
+      "start": 1662.92,
+      "end": 1667.19,
+      "duration": 4.27,
+      "text": "headaches are coming from this XY term."
+    },
+    {
+      "index": 617,
+      "start": 1667.2,
+      "end": 1669.39,
+      "duration": 2.19,
+      "text": "If we can get expressions if we can get"
+    },
+    {
+      "index": 618,
+      "start": 1669.4,
+      "end": 1671.79,
+      "duration": 2.39,
+      "text": "that inside a square."
+    },
+    {
+      "index": 619,
+      "start": 1671.8,
+      "end": 1673.07,
+      "duration": 1.27,
+      "text": "So, actually we're what we're doing is"
+    },
+    {
+      "index": 620,
+      "start": 1673.08,
+      "end": 1675.35,
+      "duration": 2.27,
+      "text": "something called that you've seen called"
+    },
+    {
+      "index": 621,
+      "start": 1675.36,
+      "end": 1677.51,
+      "duration": 2.15,
+      "text": "completing the square."
+    },
+    {
+      "index": 622,
+      "start": 1677.52,
+      "end": 1679.669,
+      "duration": 2.149,
+      "text": "Let me Let me Let me start the square"
+    },
+    {
+      "index": 623,
+      "start": 1679.679,
+      "end": 1682.11,
+      "duration": 2.431,
+      "text": "and you complete it. Okay, I think we"
+    },
+    {
+      "index": 624,
+      "start": 1682.12,
+      "end": 1684.35,
+      "duration": 2.23,
+      "text": "have two of"
+    },
+    {
+      "index": 625,
+      "start": 1684.36,
+      "end": 1688.03,
+      "duration": 3.67,
+      "text": "X plus Now, I don't know how many Y's we"
+    },
+    {
+      "index": 626,
+      "start": 1688.04,
+      "end": 1693.669,
+      "duration": 5.629,
+      "text": "need, but you'll figure it out squared."
+    },
+    {
+      "index": 627,
+      "start": 1702.39,
+      "end": 1702.4,
+      "duration": 0.01,
+      "text": "to make What do I want to do? The two X"
+    },
+    {
+      "index": 628,
+      "start": 1702.4,
+      "end": 1706.03,
+      "duration": 3.63,
+      "text": "squareds will be correct, right?"
+    },
+    {
+      "index": 629,
+      "start": 1706.04,
+      "end": 1707.75,
+      "duration": 1.71,
+      "text": "What I want to do is put in the right"
+    },
+    {
+      "index": 630,
+      "start": 1707.76,
+      "end": 1713.23,
+      "duration": 5.47,
+      "text": "number of Y's to get the 12 XY correct."
+    },
+    {
+      "index": 631,
+      "start": 1713.24,
+      "end": 1717.27,
+      "duration": 4.03,
+      "text": "And what is that number of Y's?"
+    },
+    {
+      "index": 632,
+      "start": 1719.19,
+      "end": 1719.2,
+      "duration": 0.01,
+      "text": "Let's see. I've got two times it, so I"
+    },
+    {
+      "index": 633,
+      "start": 1719.2,
+      "end": 1721.43,
+      "duration": 2.23,
+      "text": "really want six XY's to come out of"
+    },
+    {
+      "index": 634,
+      "start": 1721.44,
+      "end": 1723.39,
+      "duration": 1.95,
+      "text": "here. I think maybe if I put three"
+    },
+    {
+      "index": 635,
+      "start": 1723.4,
+      "end": 1725.07,
+      "duration": 1.67,
+      "text": "there."
+    },
+    {
+      "index": 636,
+      "start": 1725.08,
+      "end": 1728.51,
+      "duration": 3.43,
+      "text": "Does that look right to you?"
+    },
+    {
+      "index": 637,
+      "start": 1730.39,
+      "end": 1730.4,
+      "duration": 0.01,
+      "text": "I have two"
+    },
+    {
+      "index": 638,
+      "start": 1730.4,
+      "end": 1732.87,
+      "duration": 2.47,
+      "text": "This is we can mentally"
+    },
+    {
+      "index": 639,
+      "start": 1732.88,
+      "end": 1734.87,
+      "duration": 1.99,
+      "text": "multiply that out. That's X squared,"
+    },
+    {
+      "index": 640,
+      "start": 1734.88,
+      "end": 1738.07,
+      "duration": 3.19,
+      "text": "that's right. That's six XY times the"
+    },
+    {
+      "index": 641,
+      "start": 1738.08,
+      "end": 1740.39,
+      "duration": 2.31,
+      "text": "two gives this one right. And how many Y"
+    },
+    {
+      "index": 642,
+      "start": 1740.4,
+      "end": 1742.55,
+      "duration": 2.15,
+      "text": "squareds have I now got?"
+    },
+    {
+      "index": 643,
+      "start": 1742.56,
+      "end": 1744.43,
+      "duration": 1.87,
+      "text": "How many Y squareds have I got from this"
+    },
+    {
+      "index": 644,
+      "start": 1744.44,
+      "end": 1745.83,
+      "duration": 1.39,
+      "text": "term?"
+    },
+    {
+      "index": 645,
+      "start": 1745.84,
+      "end": 1747.63,
+      "duration": 1.79,
+      "text": "18."
+    },
+    {
+      "index": 646,
+      "start": 1747.64,
+      "end": 1751.909,
+      "duration": 4.269,
+      "text": "18 was the key number, remember?"
+    },
+    {
+      "index": 647,
+      "start": 1754.31,
+      "end": 1754.32,
+      "duration": 0.01,
+      "text": "Now, if I want to make it 20,"
+    },
+    {
+      "index": 648,
+      "start": 1754.32,
+      "end": 1758.35,
+      "duration": 4.03,
+      "text": "then I've got two left. Two Y squareds."
+    },
+    {
+      "index": 649,
+      "start": 1758.36,
+      "end": 1761.03,
+      "duration": 2.67,
+      "text": "That's completed the square."
+    },
+    {
+      "index": 650,
+      "start": 1761.04,
+      "end": 1763.39,
+      "duration": 2.35,
+      "text": "And"
+    },
+    {
+      "index": 651,
+      "start": 1763.4,
+      "end": 1765.31,
+      "duration": 1.91,
+      "text": "it's"
+    },
+    {
+      "index": 652,
+      "start": 1765.32,
+      "end": 1767.31,
+      "duration": 1.99,
+      "text": "Now, I can see that that that function"
+    },
+    {
+      "index": 653,
+      "start": 1767.32,
+      "end": 1769.59,
+      "duration": 2.27,
+      "text": "is positive because it's a it's all"
+    },
+    {
+      "index": 654,
+      "start": 1769.6,
+      "end": 1773.149,
+      "duration": 3.549,
+      "text": "squares."
+    },
+    {
+      "index": 655,
+      "start": 1775.83,
+      "end": 1775.84,
+      "duration": 0.01,
+      "text": "I've got two squares added together. I"
+    },
+    {
+      "index": 656,
+      "start": 1775.84,
+      "end": 1777.59,
+      "duration": 1.75,
+      "text": "couldn't go negative."
+    },
+    {
+      "index": 657,
+      "start": 1777.6,
+      "end": 1779.71,
+      "duration": 2.11,
+      "text": "What if What if I went back to that"
+    },
+    {
+      "index": 658,
+      "start": 1779.72,
+      "end": 1781.79,
+      "duration": 2.07,
+      "text": "seven?"
+    },
+    {
+      "index": 659,
+      "start": 1781.8,
+      "end": 1784.149,
+      "duration": 2.349,
+      "text": "If instead of 20, that number was a"
+    },
+    {
+      "index": 660,
+      "start": 1784.159,
+      "end": 1787.51,
+      "duration": 3.351,
+      "text": "seven, then what would happen?"
+    },
+    {
+      "index": 661,
+      "start": 1787.52,
+      "end": 1789.43,
+      "duration": 1.91,
+      "text": "This would still be correct. I'd still"
+    },
+    {
+      "index": 662,
+      "start": 1789.44,
+      "end": 1791.23,
+      "duration": 1.79,
+      "text": "have this square"
+    },
+    {
+      "index": 663,
+      "start": 1791.24,
+      "end": 1794.11,
+      "duration": 2.87,
+      "text": "to get the 2x squared and the 12xy, and"
+    },
+    {
+      "index": 664,
+      "start": 1794.12,
+      "end": 1796.31,
+      "duration": 2.19,
+      "text": "I'd have 18y squared, and then what"
+    },
+    {
+      "index": 665,
+      "start": 1796.32,
+      "end": 1798.75,
+      "duration": 2.43,
+      "text": "would I do here?"
+    },
+    {
+      "index": 666,
+      "start": 1798.76,
+      "end": 1802.51,
+      "duration": 3.75,
+      "text": "I'd have to remove 11"
+    },
+    {
+      "index": 667,
+      "start": 1802.52,
+      "end": 1804.63,
+      "duration": 2.11,
+      "text": "y squared, right? If I If I only had a"
+    },
+    {
+      "index": 668,
+      "start": 1804.64,
+      "end": 1807.31,
+      "duration": 2.67,
+      "text": "seven here,"
+    },
+    {
+      "index": 669,
+      "start": 1807.32,
+      "end": 1809.87,
+      "duration": 2.55,
+      "text": "then instead of when I had a 20, I had"
+    },
+    {
+      "index": 670,
+      "start": 1809.88,
+      "end": 1812.51,
+      "duration": 2.63,
+      "text": "two more to to put in."
+    },
+    {
+      "index": 671,
+      "start": 1812.52,
+      "end": 1815.35,
+      "duration": 2.83,
+      "text": "When I had an 18, which was the marginal"
+    },
+    {
+      "index": 672,
+      "start": 1815.36,
+      "end": 1817.31,
+      "duration": 1.95,
+      "text": "case,"
+    },
+    {
+      "index": 673,
+      "start": 1817.32,
+      "end": 1819.71,
+      "duration": 2.39,
+      "text": "I had no more to put in."
+    },
+    {
+      "index": 674,
+      "start": 1819.72,
+      "end": 1822.31,
+      "duration": 2.59,
+      "text": "When I had a seven, which was the case"
+    },
+    {
+      "index": 675,
+      "start": 1822.32,
+      "end": 1826.67,
+      "duration": 4.35,
+      "text": "below zero, the the the indefinite case,"
+    },
+    {
+      "index": 676,
+      "start": 1826.68,
+      "end": 1829.07,
+      "duration": 2.39,
+      "text": "I had minus 11."
+    },
+    {
+      "index": 677,
+      "start": 1829.08,
+      "end": 1831.03,
+      "duration": 1.95,
+      "text": "Okay. Now,"
+    },
+    {
+      "index": 678,
+      "start": 1831.04,
+      "end": 1832.27,
+      "duration": 1.23,
+      "text": "so you"
+    },
+    {
+      "index": 679,
+      "start": 1832.28,
+      "end": 1835.55,
+      "duration": 3.27,
+      "text": "you can see now that this thing is a"
+    },
+    {
+      "index": 680,
+      "start": 1835.56,
+      "end": 1836.79,
+      "duration": 1.23,
+      "text": "bowl."
+    },
+    {
+      "index": 681,
+      "start": 1836.8,
+      "end": 1839.91,
+      "duration": 3.11,
+      "text": "It's going upwards. Uh if I cut it at at"
+    },
+    {
+      "index": 682,
+      "start": 1839.92,
+      "end": 1844.47,
+      "duration": 4.55,
+      "text": "a plane z equal to one, say, I would get"
+    },
+    {
+      "index": 683,
+      "start": 1844.48,
+      "end": 1845.11,
+      "duration": 0.63,
+      "text": "uh"
+    },
+    {
+      "index": 684,
+      "start": 1845.12,
+      "end": 1848.03,
+      "duration": 2.91,
+      "text": "I would get a curve. What would be the"
+    },
+    {
+      "index": 685,
+      "start": 1848.04,
+      "end": 1850.23,
+      "duration": 2.19,
+      "text": "equation for that curve?"
+    },
+    {
+      "index": 686,
+      "start": 1850.24,
+      "end": 1852.55,
+      "duration": 2.31,
+      "text": "If I cut it at at height one, the"
+    },
+    {
+      "index": 687,
+      "start": 1852.56,
+      "end": 1854.31,
+      "duration": 1.75,
+      "text": "equation would be this thing equal to"
+    },
+    {
+      "index": 688,
+      "start": 1854.32,
+      "end": 1856.95,
+      "duration": 2.63,
+      "text": "one."
+    },
+    {
+      "index": 689,
+      "start": 1859.91,
+      "end": 1859.92,
+      "duration": 0.01,
+      "text": "And that curve would be an ellipse."
+    },
+    {
+      "index": 690,
+      "start": 1859.92,
+      "end": 1862.99,
+      "duration": 3.07,
+      "text": "So actually already I've brought into"
+    },
+    {
+      "index": 691,
+      "start": 1863.0,
+      "end": 1865.99,
+      "duration": 2.99,
+      "text": "the into the lecture"
+    },
+    {
+      "index": 692,
+      "start": 1866.0,
+      "end": 1867.95,
+      "duration": 1.95,
+      "text": "the different pieces that we're aiming"
+    },
+    {
+      "index": 693,
+      "start": 1867.96,
+      "end": 1869.35,
+      "duration": 1.39,
+      "text": "for."
+    },
+    {
+      "index": 694,
+      "start": 1869.36,
+      "end": 1871.43,
+      "duration": 2.07,
+      "text": "We're aiming for the tests, which this"
+    },
+    {
+      "index": 695,
+      "start": 1871.44,
+      "end": 1872.99,
+      "duration": 1.55,
+      "text": "passed."
+    },
+    {
+      "index": 696,
+      "start": 1873.0,
+      "end": 1874.83,
+      "duration": 1.83,
+      "text": "We're aiming for the connection to a"
+    },
+    {
+      "index": 697,
+      "start": 1874.84,
+      "end": 1876.39,
+      "duration": 1.55,
+      "text": "minimum,"
+    },
+    {
+      "index": 698,
+      "start": 1876.4,
+      "end": 1878.71,
+      "duration": 2.31,
+      "text": "which this which we see in the in the"
+    },
+    {
+      "index": 699,
+      "start": 1878.72,
+      "end": 1879.91,
+      "duration": 1.19,
+      "text": "graph."
+    },
+    {
+      "index": 700,
+      "start": 1879.92,
+      "end": 1882.63,
+      "duration": 2.71,
+      "text": "And if we chop it at"
+    },
+    {
+      "index": 701,
+      "start": 1882.64,
+      "end": 1885.43,
+      "duration": 2.79,
+      "text": "if we set this thing equal to one,"
+    },
+    {
+      "index": 702,
+      "start": 1885.44,
+      "end": 1887.47,
+      "duration": 2.03,
+      "text": "if I set that thing equal to one, that"
+    },
+    {
+      "index": 703,
+      "start": 1887.48,
+      "end": 1890.75,
+      "duration": 3.27,
+      "text": "what that gives me is the cross section."
+    },
+    {
+      "index": 704,
+      "start": 1890.76,
+      "end": 1893.39,
+      "duration": 2.63,
+      "text": "It gives me this"
+    },
+    {
+      "index": 705,
+      "start": 1893.4,
+      "end": 1895.03,
+      "duration": 1.63,
+      "text": "this"
+    },
+    {
+      "index": 706,
+      "start": 1895.04,
+      "end": 1896.23,
+      "duration": 1.19,
+      "text": "curve,"
+    },
+    {
+      "index": 707,
+      "start": 1896.24,
+      "end": 1898.99,
+      "duration": 2.75,
+      "text": "and its equation is this thing equals"
+    },
+    {
+      "index": 708,
+      "start": 1899.0,
+      "end": 1901.99,
+      "duration": 2.99,
+      "text": "one, and that's an ellipse. Whereas if I"
+    },
+    {
+      "index": 709,
+      "start": 1902.0,
+      "end": 1905.19,
+      "duration": 3.19,
+      "text": "cut through a saddle point, I'll get a"
+    },
+    {
+      "index": 710,
+      "start": 1905.2,
+      "end": 1907.31,
+      "duration": 2.11,
+      "text": "hyperbola."
+    },
+    {
+      "index": 711,
+      "start": 1907.32,
+      "end": 1910.35,
+      "duration": 3.03,
+      "text": "Okay. But this minimum stuff is is"
+    },
+    {
+      "index": 712,
+      "start": 1910.36,
+      "end": 1913.75,
+      "duration": 3.39,
+      "text": "really what I'm I'm most interested in."
+    },
+    {
+      "index": 713,
+      "start": 1913.76,
+      "end": 1914.79,
+      "duration": 1.03,
+      "text": "Okay."
+    },
+    {
+      "index": 714,
+      "start": 1914.8,
+      "end": 1917.55,
+      "duration": 2.75,
+      "text": "Uh but I I just have to ask,"
+    },
+    {
+      "index": 715,
+      "start": 1917.56,
+      "end": 1919.91,
+      "duration": 2.35,
+      "text": "do you recognize"
+    },
+    {
+      "index": 716,
+      "start": 1919.92,
+      "end": 1923.23,
+      "duration": 3.31,
+      "text": "I mean, these numbers here, the two that"
+    },
+    {
+      "index": 717,
+      "start": 1923.24,
+      "end": 1925.15,
+      "duration": 1.91,
+      "text": "appeared outside, the three that"
+    },
+    {
+      "index": 718,
+      "start": 1925.16,
+      "end": 1927.35,
+      "duration": 2.19,
+      "text": "appeared inside, the two that appeared"
+    },
+    {
+      "index": 719,
+      "start": 1927.36,
+      "end": 1930.51,
+      "duration": 3.15,
+      "text": "there. Actually,"
+    },
+    {
+      "index": 720,
+      "start": 1930.52,
+      "end": 1933.63,
+      "duration": 3.11,
+      "text": "those numbers come from elimination."
+    },
+    {
+      "index": 721,
+      "start": 1933.64,
+      "end": 1936.19,
+      "duration": 2.55,
+      "text": "Completing the square is"
+    },
+    {
+      "index": 722,
+      "start": 1936.2,
+      "end": 1938.23,
+      "duration": 2.03,
+      "text": "our good old"
+    },
+    {
+      "index": 723,
+      "start": 1938.24,
+      "end": 1943.55,
+      "duration": 5.31,
+      "text": "method of Gaussian elimination in"
+    },
+    {
+      "index": 724,
+      "start": 1944.23,
+      "end": 1944.24,
+      "duration": 0.01,
+      "text": "for"
+    },
+    {
+      "index": 725,
+      "start": 1944.24,
+      "end": 1947.27,
+      "duration": 3.03,
+      "text": "expressed in terms of these squares. The"
+    },
+    {
+      "index": 726,
+      "start": 1947.28,
+      "end": 1948.75,
+      "duration": 1.47,
+      "text": "the uh"
+    },
+    {
+      "index": 727,
+      "start": 1948.76,
+      "end": 1950.55,
+      "duration": 1.79,
+      "text": "let me show you what I mean."
+    },
+    {
+      "index": 728,
+      "start": 1950.56,
+      "end": 1952.87,
+      "duration": 2.31,
+      "text": "I I I just think those numbers are no"
+    },
+    {
+      "index": 729,
+      "start": 1952.88,
+      "end": 1954.35,
+      "duration": 1.47,
+      "text": "accident."
+    },
+    {
+      "index": 730,
+      "start": 1954.36,
+      "end": 1956.55,
+      "duration": 2.19,
+      "text": "If I take my matrix"
+    },
+    {
+      "index": 731,
+      "start": 1956.56,
+      "end": 1960.95,
+      "duration": 4.39,
+      "text": "2 6 6 and 20,"
+    },
+    {
+      "index": 732,
+      "start": 1963.59,
+      "end": 1963.6,
+      "duration": 0.01,
+      "text": "and I do elimination, then the pivot is"
+    },
+    {
+      "index": 733,
+      "start": 1963.6,
+      "end": 1965.63,
+      "duration": 2.03,
+      "text": "two."
+    },
+    {
+      "index": 734,
+      "start": 1965.64,
+      "end": 1967.99,
+      "duration": 2.35,
+      "text": "And I take three Oh, yeah, what's the"
+    },
+    {
+      "index": 735,
+      "start": 1968.0,
+      "end": 1970.03,
+      "duration": 2.03,
+      "text": "multiplier?"
+    },
+    {
+      "index": 736,
+      "start": 1970.04,
+      "end": 1972.35,
+      "duration": 2.31,
+      "text": "How much of row one do I take away from"
+    },
+    {
+      "index": 737,
+      "start": 1972.36,
+      "end": 1974.11,
+      "duration": 1.75,
+      "text": "row two?"
+    },
+    {
+      "index": 738,
+      "start": 1974.12,
+      "end": 1975.31,
+      "duration": 1.19,
+      "text": "Three."
+    },
+    {
+      "index": 739,
+      "start": 1975.32,
+      "end": 1977.59,
+      "duration": 2.27,
+      "text": "So what you're seeing in this completing"
+    },
+    {
+      "index": 740,
+      "start": 1977.6,
+      "end": 1981.99,
+      "duration": 4.39,
+      "text": "the square is the pivot's outside"
+    },
+    {
+      "index": 741,
+      "start": 1982.0,
+      "end": 1985.55,
+      "duration": 3.55,
+      "text": "and the multiplier inside. To To just do"
+    },
+    {
+      "index": 742,
+      "start": 1985.56,
+      "end": 1990.23,
+      "duration": 4.67,
+      "text": "that again, the the pivot is two."
+    },
+    {
+      "index": 743,
+      "start": 1990.24,
+      "end": 1992.39,
+      "duration": 2.15,
+      "text": "Three of Three of those away from that"
+    },
+    {
+      "index": 744,
+      "start": 1992.4,
+      "end": 1996.39,
+      "duration": 3.99,
+      "text": "gives me 2 6 0, and what's the second"
+    },
+    {
+      "index": 745,
+      "start": 1996.4,
+      "end": 1998.11,
+      "duration": 1.71,
+      "text": "pivot?"
+    },
+    {
+      "index": 746,
+      "start": 1998.12,
+      "end": 2000.07,
+      "duration": 1.95,
+      "text": "Three of this away from this, three"
+    },
+    {
+      "index": 747,
+      "start": 2000.08,
+      "end": 2002.51,
+      "duration": 2.43,
+      "text": "sixes will be 18, and the second pivot"
+    },
+    {
+      "index": 748,
+      "start": 2002.52,
+      "end": 2004.19,
+      "duration": 1.67,
+      "text": "will also be a two."
+    },
+    {
+      "index": 749,
+      "start": 2004.2,
+      "end": 2007.19,
+      "duration": 2.99,
+      "text": "So that's the that's the U."
+    },
+    {
+      "index": 750,
+      "start": 2007.2,
+      "end": 2009.27,
+      "duration": 2.07,
+      "text": "This is the"
+    },
+    {
+      "index": 751,
+      "start": 2009.28,
+      "end": 2010.75,
+      "duration": 1.47,
+      "text": "A,"
+    },
+    {
+      "index": 752,
+      "start": 2010.76,
+      "end": 2015.87,
+      "duration": 5.11,
+      "text": "and of course the L was 1 0 1, and the"
+    },
+    {
+      "index": 753,
+      "start": 2015.88,
+      "end": 2020.51,
+      "duration": 4.63,
+      "text": "multiplier was three."
+    },
+    {
+      "index": 754,
+      "start": 2022.43,
+      "end": 2022.44,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 755,
+      "start": 2022.44,
+      "end": 2024.59,
+      "duration": 2.15,
+      "text": "completing the square"
+    },
+    {
+      "index": 756,
+      "start": 2024.6,
+      "end": 2028.19,
+      "duration": 3.59,
+      "text": "is elimination."
+    },
+    {
+      "index": 757,
+      "start": 2028.2,
+      "end": 2031.31,
+      "duration": 3.11,
+      "text": "Why am I happy to see"
+    },
+    {
+      "index": 758,
+      "start": 2031.32,
+      "end": 2034.15,
+      "duration": 2.83,
+      "text": "to see that coming together?"
+    },
+    {
+      "index": 759,
+      "start": 2034.16,
+      "end": 2036.59,
+      "duration": 2.43,
+      "text": "Because I know about"
+    },
+    {
+      "index": 760,
+      "start": 2036.6,
+      "end": 2041.11,
+      "duration": 4.51,
+      "text": "elimination for n by n matrices."
+    },
+    {
+      "index": 761,
+      "start": 2041.12,
+      "end": 2043.35,
+      "duration": 2.23,
+      "text": "I just started talking about completing"
+    },
+    {
+      "index": 762,
+      "start": 2043.36,
+      "end": 2047.669,
+      "duration": 4.309,
+      "text": "the square here"
+    },
+    {
+      "index": 763,
+      "start": 2050.27,
+      "end": 2050.28,
+      "duration": 0.01,
+      "text": "for two by twos."
+    },
+    {
+      "index": 764,
+      "start": 2050.28,
+      "end": 2052.95,
+      "duration": 2.67,
+      "text": "But now I see what's going on."
+    },
+    {
+      "index": 765,
+      "start": 2052.96,
+      "end": 2056.03,
+      "duration": 3.07,
+      "text": "Completing the square really amounts to"
+    },
+    {
+      "index": 766,
+      "start": 2056.04,
+      "end": 2058.669,
+      "duration": 2.629,
+      "text": "splitting this thing into a sum of"
+    },
+    {
+      "index": 767,
+      "start": 2058.679,
+      "end": 2061.59,
+      "duration": 2.911,
+      "text": "squares. So what's the critical thing? I"
+    },
+    {
+      "index": 768,
+      "start": 2061.6,
+      "end": 2063.79,
+      "duration": 2.19,
+      "text": "have a lot of squares,"
+    },
+    {
+      "index": 769,
+      "start": 2063.8,
+      "end": 2065.389,
+      "duration": 1.589,
+      "text": "and in inside those squares are"
+    },
+    {
+      "index": 770,
+      "start": 2065.399,
+      "end": 2068.19,
+      "duration": 2.791,
+      "text": "multipliers, but they're squares. And"
+    },
+    {
+      "index": 771,
+      "start": 2068.2,
+      "end": 2070.51,
+      "duration": 2.31,
+      "text": "And the question is, what's outside"
+    },
+    {
+      "index": 772,
+      "start": 2070.52,
+      "end": 2072.59,
+      "duration": 2.07,
+      "text": "these squares? When I complete the"
+    },
+    {
+      "index": 773,
+      "start": 2072.6,
+      "end": 2073.99,
+      "duration": 1.39,
+      "text": "square,"
+    },
+    {
+      "index": 774,
+      "start": 2074.0,
+      "end": 2076.51,
+      "duration": 2.51,
+      "text": "what are the numbers that go outside?"
+    },
+    {
+      "index": 775,
+      "start": 2076.52,
+      "end": 2079.83,
+      "duration": 3.31,
+      "text": "They're the pivots."
+    },
+    {
+      "index": 776,
+      "start": 2083.07,
+      "end": 2083.08,
+      "duration": 0.01,
+      "text": "They're the pivots, and that's why"
+    },
+    {
+      "index": 777,
+      "start": 2083.08,
+      "end": 2087.349,
+      "duration": 4.269,
+      "text": "positive pivots give me sum of squares."
+    },
+    {
+      "index": 778,
+      "start": 2087.359,
+      "end": 2089.71,
+      "duration": 2.351,
+      "text": "Positive pivots, those pivots are the"
+    },
+    {
+      "index": 779,
+      "start": 2089.72,
+      "end": 2092.349,
+      "duration": 2.629,
+      "text": "numbers that go outside the squares, so"
+    },
+    {
+      "index": 780,
+      "start": 2092.359,
+      "end": 2094.83,
+      "duration": 2.471,
+      "text": "positive pivots, sum of squares,"
+    },
+    {
+      "index": 781,
+      "start": 2094.84,
+      "end": 2098.07,
+      "duration": 3.23,
+      "text": "everything positive, graph goes up, a"
+    },
+    {
+      "index": 782,
+      "start": 2098.08,
+      "end": 2099.47,
+      "duration": 1.39,
+      "text": "minimum"
+    },
+    {
+      "index": 783,
+      "start": 2099.48,
+      "end": 2100.99,
+      "duration": 1.51,
+      "text": "at the origin."
+    },
+    {
+      "index": 784,
+      "start": 2101.0,
+      "end": 2103.31,
+      "duration": 2.31,
+      "text": "It's all connected together."
+    },
+    {
+      "index": 785,
+      "start": 2103.32,
+      "end": 2105.27,
+      "duration": 1.95,
+      "text": "All connected together, and in the two"
+    },
+    {
+      "index": 786,
+      "start": 2105.28,
+      "end": 2106.91,
+      "duration": 1.63,
+      "text": "by two case, you can see those"
+    },
+    {
+      "index": 787,
+      "start": 2106.92,
+      "end": 2108.39,
+      "duration": 1.47,
+      "text": "connections."
+    },
+    {
+      "index": 788,
+      "start": 2108.4,
+      "end": 2111.63,
+      "duration": 3.23,
+      "text": "But linear algebra now can go up to"
+    },
+    {
+      "index": 789,
+      "start": 2111.64,
+      "end": 2115.15,
+      "duration": 3.51,
+      "text": "three by three, n by n."
+    },
+    {
+      "index": 790,
+      "start": 2115.16,
+      "end": 2117.83,
+      "duration": 2.67,
+      "text": "And let's do that next."
+    },
+    {
+      "index": 791,
+      "start": 2117.84,
+      "end": 2120.91,
+      "duration": 3.07,
+      "text": "Can I just before I leave two by two,"
+    },
+    {
+      "index": 792,
+      "start": 2120.92,
+      "end": 2123.39,
+      "duration": 2.47,
+      "text": "I've written this expression matrix of"
+    },
+    {
+      "index": 793,
+      "start": 2123.4,
+      "end": 2125.23,
+      "duration": 1.83,
+      "text": "second derivatives."
+    },
+    {
+      "index": 794,
+      "start": 2125.24,
+      "end": 2128.59,
+      "duration": 3.35,
+      "text": "What's the matrix of second derivatives?"
+    },
+    {
+      "index": 795,
+      "start": 2128.6,
+      "end": 2129.59,
+      "duration": 0.99,
+      "text": "It's"
+    },
+    {
+      "index": 796,
+      "start": 2129.6,
+      "end": 2132.19,
+      "duration": 2.59,
+      "text": "that's one second derivative now,"
+    },
+    {
+      "index": 797,
+      "start": 2132.2,
+      "end": 2137.27,
+      "duration": 5.07,
+      "text": "but if I'm in if I'm in two dimensions,"
+    },
+    {
+      "index": 798,
+      "start": 2140.67,
+      "end": 2140.68,
+      "duration": 0.01,
+      "text": "I have a two by two matrix."
+    },
+    {
+      "index": 799,
+      "start": 2140.68,
+      "end": 2143.95,
+      "duration": 3.27,
+      "text": "It's the second x derivative"
+    },
+    {
+      "index": 800,
+      "start": 2143.96,
+      "end": 2144.79,
+      "duration": 0.83,
+      "text": "is"
+    },
+    {
+      "index": 801,
+      "start": 2144.8,
+      "end": 2148.99,
+      "duration": 4.19,
+      "text": "the second x derivative goes there. D"
+    },
+    {
+      "index": 802,
+      "start": 2149.0,
+      "end": 2152.71,
+      "duration": 3.71,
+      "text": "Shall I write it? Yeah, I better use the"
+    },
+    {
+      "index": 803,
+      "start": 2152.72,
+      "end": 2156.43,
+      "duration": 3.71,
+      "text": "This is f fxx, if you like. fxx, that"
+    },
+    {
+      "index": 804,
+      "start": 2156.44,
+      "end": 2158.55,
+      "duration": 2.11,
+      "text": "means the second derivative of f in the"
+    },
+    {
+      "index": 805,
+      "start": 2158.56,
+      "end": 2160.15,
+      "duration": 1.59,
+      "text": "x direction."
+    },
+    {
+      "index": 806,
+      "start": 2160.16,
+      "end": 2162.63,
+      "duration": 2.47,
+      "text": "fyy"
+    },
+    {
+      "index": 807,
+      "start": 2162.64,
+      "end": 2164.39,
+      "duration": 1.75,
+      "text": "second derivative in the y direction."
+    },
+    {
+      "index": 808,
+      "start": 2164.4,
+      "end": 2166.31,
+      "duration": 1.91,
+      "text": "Those are the pure derivative second"
+    },
+    {
+      "index": 809,
+      "start": 2166.32,
+      "end": 2167.83,
+      "duration": 1.51,
+      "text": "derivatives."
+    },
+    {
+      "index": 810,
+      "start": 2167.84,
+      "end": 2170.91,
+      "duration": 3.07,
+      "text": "They have to be positive"
+    },
+    {
+      "index": 811,
+      "start": 2170.92,
+      "end": 2173.39,
+      "duration": 2.47,
+      "text": "for a minimum."
+    },
+    {
+      "index": 812,
+      "start": 2173.4,
+      "end": 2175.11,
+      "duration": 1.71,
+      "text": "This number has to be positive for a"
+    },
+    {
+      "index": 813,
+      "start": 2175.12,
+      "end": 2176.95,
+      "duration": 1.83,
+      "text": "minimum. That number has to be positive"
+    },
+    {
+      "index": 814,
+      "start": 2176.96,
+      "end": 2179.95,
+      "duration": 2.99,
+      "text": "for a minimum. But that's not enough."
+    },
+    {
+      "index": 815,
+      "start": 2179.96,
+      "end": 2182.51,
+      "duration": 2.55,
+      "text": "They Those numbers have to somehow be"
+    },
+    {
+      "index": 816,
+      "start": 2182.52,
+      "end": 2186.63,
+      "duration": 4.11,
+      "text": "big enough to to overcome this cross"
+    },
+    {
+      "index": 817,
+      "start": 2186.64,
+      "end": 2190.07,
+      "duration": 3.43,
+      "text": "derivative."
+    },
+    {
+      "index": 818,
+      "start": 2192.43,
+      "end": 2192.44,
+      "duration": 0.01,
+      "text": "Why is the matrix symmetric? Because the"
+    },
+    {
+      "index": 819,
+      "start": 2192.44,
+      "end": 2194.63,
+      "duration": 2.19,
+      "text": "second derivative of f with respect to x"
+    },
+    {
+      "index": 820,
+      "start": 2194.64,
+      "end": 2197.87,
+      "duration": 3.23,
+      "text": "and y is equal to"
+    },
+    {
+      "index": 821,
+      "start": 2197.88,
+      "end": 2200.87,
+      "duration": 2.99,
+      "text": "I can That's the beautiful fact about"
+    },
+    {
+      "index": 822,
+      "start": 2200.88,
+      "end": 2202.87,
+      "duration": 1.99,
+      "text": "second derivatives is I could do those"
+    },
+    {
+      "index": 823,
+      "start": 2202.88,
+      "end": 2204.99,
+      "duration": 2.11,
+      "text": "in either order, and I get the same"
+    },
+    {
+      "index": 824,
+      "start": 2205.0,
+      "end": 2206.43,
+      "duration": 1.43,
+      "text": "thing."
+    },
+    {
+      "index": 825,
+      "start": 2206.44,
+      "end": 2209.51,
+      "duration": 3.07,
+      "text": "So this is the same as that."
+    },
+    {
+      "index": 826,
+      "start": 2209.52,
+      "end": 2211.67,
+      "duration": 2.15,
+      "text": "And uh"
+    },
+    {
+      "index": 827,
+      "start": 2211.68,
+      "end": 2213.07,
+      "duration": 1.39,
+      "text": "so"
+    },
+    {
+      "index": 828,
+      "start": 2213.08,
+      "end": 2215.39,
+      "duration": 2.31,
+      "text": "uh that's the matrix of second"
+    },
+    {
+      "index": 829,
+      "start": 2215.4,
+      "end": 2217.31,
+      "duration": 1.91,
+      "text": "derivatives."
+    },
+    {
+      "index": 830,
+      "start": 2217.32,
+      "end": 2219.83,
+      "duration": 2.51,
+      "text": "And the test is it has to be positive"
+    },
+    {
+      "index": 831,
+      "start": 2219.84,
+      "end": 2221.23,
+      "duration": 1.39,
+      "text": "definite."
+    },
+    {
+      "index": 832,
+      "start": 2221.24,
+      "end": 2224.79,
+      "duration": 3.55,
+      "text": "You might remember from from uh"
+    },
+    {
+      "index": 833,
+      "start": 2224.8,
+      "end": 2226.55,
+      "duration": 1.75,
+      "text": "tucked in somewhere near the end of"
+    },
+    {
+      "index": 834,
+      "start": 2226.56,
+      "end": 2229.31,
+      "duration": 2.75,
+      "text": "1802, or at least in the book,"
+    },
+    {
+      "index": 835,
+      "start": 2229.32,
+      "end": 2232.91,
+      "duration": 3.59,
+      "text": "was the condition for a minimum"
+    },
+    {
+      "index": 836,
+      "start": 2232.92,
+      "end": 2235.39,
+      "duration": 2.47,
+      "text": "for a function of two variables."
+    },
+    {
+      "index": 837,
+      "start": 2235.4,
+      "end": 2237.27,
+      "duration": 1.87,
+      "text": "What's When do you have a minimum for a"
+    },
+    {
+      "index": 838,
+      "start": 2237.28,
+      "end": 2239.03,
+      "duration": 1.75,
+      "text": "function of two variables? And believe"
+    },
+    {
+      "index": 839,
+      "start": 2239.04,
+      "end": 2240.11,
+      "duration": 1.07,
+      "text": "me,"
+    },
+    {
+      "index": 840,
+      "start": 2240.12,
+      "end": 2244.31,
+      "duration": 4.19,
+      "text": "that's what calculus is for."
+    },
+    {
+      "index": 841,
+      "start": 2246.79,
+      "end": 2246.8,
+      "duration": 0.01,
+      "text": "The condition is first derivatives have"
+    },
+    {
+      "index": 842,
+      "start": 2246.8,
+      "end": 2249.23,
+      "duration": 2.43,
+      "text": "to be zero."
+    },
+    {
+      "index": 843,
+      "start": 2249.24,
+      "end": 2250.75,
+      "duration": 1.51,
+      "text": "And"
+    },
+    {
+      "index": 844,
+      "start": 2250.76,
+      "end": 2252.87,
+      "duration": 2.11,
+      "text": "the matrix of second derivatives has to"
+    },
+    {
+      "index": 845,
+      "start": 2252.88,
+      "end": 2255.27,
+      "duration": 2.39,
+      "text": "be positive definite."
+    },
+    {
+      "index": 846,
+      "start": 2255.28,
+      "end": 2257.87,
+      "duration": 2.59,
+      "text": "So you may be remember there was an fxx"
+    },
+    {
+      "index": 847,
+      "start": 2257.88,
+      "end": 2260.63,
+      "duration": 2.75,
+      "text": "times an fyy that had to be bigger than"
+    },
+    {
+      "index": 848,
+      "start": 2260.64,
+      "end": 2263.39,
+      "duration": 2.75,
+      "text": "an fxy squared. That's just our"
+    },
+    {
+      "index": 849,
+      "start": 2263.4,
+      "end": 2266.59,
+      "duration": 3.19,
+      "text": "determinant two by two."
+    },
+    {
+      "index": 850,
+      "start": 2266.6,
+      "end": 2268.15,
+      "duration": 1.55,
+      "text": "But now"
+    },
+    {
+      "index": 851,
+      "start": 2268.16,
+      "end": 2270.47,
+      "duration": 2.31,
+      "text": "we now know the answer for three by"
+    },
+    {
+      "index": 852,
+      "start": 2270.48,
+      "end": 2272.99,
+      "duration": 2.51,
+      "text": "three, n by n,"
+    },
+    {
+      "index": 853,
+      "start": 2273.0,
+      "end": 2276.19,
+      "duration": 3.19,
+      "text": "because we can do elimination on n by n"
+    },
+    {
+      "index": 854,
+      "start": 2276.2,
+      "end": 2278.23,
+      "duration": 2.03,
+      "text": "matrices."
+    },
+    {
+      "index": 855,
+      "start": 2278.24,
+      "end": 2280.55,
+      "duration": 2.31,
+      "text": "We can connect to eigenvalues of n by n"
+    },
+    {
+      "index": 856,
+      "start": 2280.56,
+      "end": 2283.31,
+      "duration": 2.75,
+      "text": "matrices. We can do sum of squares, sum"
+    },
+    {
+      "index": 857,
+      "start": 2283.32,
+      "end": 2285.91,
+      "duration": 2.59,
+      "text": "of n squares instead of only two"
+    },
+    {
+      "index": 858,
+      "start": 2285.92,
+      "end": 2291.27,
+      "duration": 5.35,
+      "text": "squares. And so let's take a uh"
+    },
+    {
+      "index": 859,
+      "start": 2291.28,
+      "end": 2293.03,
+      "duration": 1.75,
+      "text": "Let me go over here to do a three by"
+    },
+    {
+      "index": 860,
+      "start": 2293.04,
+      "end": 2297.07,
+      "duration": 4.03,
+      "text": "three example."
+    },
+    {
+      "index": 861,
+      "start": 2320.43,
+      "end": 2320.44,
+      "duration": 0.01,
+      "text": "You've seen this matrix before."
+    },
+    {
+      "index": 862,
+      "start": 2320.44,
+      "end": 2323.03,
+      "duration": 2.59,
+      "text": "Uh let me"
+    },
+    {
+      "index": 863,
+      "start": 2323.04,
+      "end": 2326.59,
+      "duration": 3.55,
+      "text": "Uh yeah, let me Yes, let's let's use the"
+    },
+    {
+      "index": 864,
+      "start": 2326.6,
+      "end": 2329.63,
+      "duration": 3.03,
+      "text": "good matrix. What the Why not?"
+    },
+    {
+      "index": 865,
+      "start": 2329.64,
+      "end": 2331.55,
+      "duration": 1.91,
+      "text": "That's"
+    },
+    {
+      "index": 866,
+      "start": 2331.56,
+      "end": 2335.99,
+      "duration": 4.43,
+      "text": "Okay."
+    },
+    {
+      "index": 867,
+      "start": 2343.31,
+      "end": 2343.32,
+      "duration": 0.01,
+      "text": "What's Uh so I'm going to ask questions"
+    },
+    {
+      "index": 868,
+      "start": 2343.32,
+      "end": 2345.07,
+      "duration": 1.75,
+      "text": "about this matrix. Is it positive"
+    },
+    {
+      "index": 869,
+      "start": 2345.08,
+      "end": 2348.19,
+      "duration": 3.11,
+      "text": "definite, first of all?"
+    },
+    {
+      "index": 870,
+      "start": 2350.39,
+      "end": 2350.4,
+      "duration": 0.01,
+      "text": "What's the function associated with that"
+    },
+    {
+      "index": 871,
+      "start": 2350.4,
+      "end": 2356.19,
+      "duration": 5.79,
+      "text": "matrix? What's the x transpose Ax?"
+    },
+    {
+      "index": 872,
+      "start": 2358.07,
+      "end": 2358.08,
+      "duration": 0.01,
+      "text": "Is Do Do we have a minimum for that"
+    },
+    {
+      "index": 873,
+      "start": 2358.08,
+      "end": 2362.39,
+      "duration": 4.31,
+      "text": "function at zero?"
+    },
+    {
+      "index": 874,
+      "start": 2365.27,
+      "end": 2365.28,
+      "duration": 0.01,
+      "text": "And then even what's the geometry?"
+    },
+    {
+      "index": 875,
+      "start": 2365.28,
+      "end": 2368.39,
+      "duration": 3.11,
+      "text": "Okay. First of all, is the matrix"
+    },
+    {
+      "index": 876,
+      "start": 2368.4,
+      "end": 2369.91,
+      "duration": 1.51,
+      "text": "positive definite? I've given you the"
+    },
+    {
+      "index": 877,
+      "start": 2369.92,
+      "end": 2372.31,
+      "duration": 2.39,
+      "text": "numbers there, so"
+    },
+    {
+      "index": 878,
+      "start": 2372.32,
+      "end": 2374.63,
+      "duration": 2.31,
+      "text": "you can take determinants. Maybe that's"
+    },
+    {
+      "index": 879,
+      "start": 2374.64,
+      "end": 2376.07,
+      "duration": 1.43,
+      "text": "the quickest. Is that what you would do"
+    },
+    {
+      "index": 880,
+      "start": 2376.08,
+      "end": 2378.83,
+      "duration": 2.75,
+      "text": "mentally? If If I give you a matrix on a"
+    },
+    {
+      "index": 881,
+      "start": 2378.84,
+      "end": 2380.91,
+      "duration": 2.07,
+      "text": "quiz and say, \"Is it positive definite"
+    },
+    {
+      "index": 882,
+      "start": 2380.92,
+      "end": 2382.99,
+      "duration": 2.07,
+      "text": "or not?\""
+    },
+    {
+      "index": 883,
+      "start": 2383.0,
+      "end": 2385.63,
+      "duration": 2.63,
+      "text": "I would take that determinant and I'd"
+    },
+    {
+      "index": 884,
+      "start": 2385.64,
+      "end": 2387.19,
+      "duration": 1.55,
+      "text": "get the answer two."
+    },
+    {
+      "index": 885,
+      "start": 2387.2,
+      "end": 2389.03,
+      "duration": 1.83,
+      "text": "I would take that determinant and I"
+    },
+    {
+      "index": 886,
+      "start": 2389.04,
+      "end": 2392.63,
+      "duration": 3.59,
+      "text": "would get the answer"
+    },
+    {
+      "index": 887,
+      "start": 2395.95,
+      "end": 2395.96,
+      "duration": 0.01,
+      "text": "for that two by two determinant."
+    },
+    {
+      "index": 888,
+      "start": 2395.96,
+      "end": 2398.15,
+      "duration": 2.19,
+      "text": "I get the answer three."
+    },
+    {
+      "index": 889,
+      "start": 2398.16,
+      "end": 2400.87,
+      "duration": 2.71,
+      "text": "And anybody remember the answer for the"
+    },
+    {
+      "index": 890,
+      "start": 2400.88,
+      "end": 2404.15,
+      "duration": 3.27,
+      "text": "three by three determinant?"
+    },
+    {
+      "index": 891,
+      "start": 2404.16,
+      "end": 2406.47,
+      "duration": 2.31,
+      "text": "It was four. Do you remember for these"
+    },
+    {
+      "index": 892,
+      "start": 2406.48,
+      "end": 2408.47,
+      "duration": 1.99,
+      "text": "special matrices"
+    },
+    {
+      "index": 893,
+      "start": 2408.48,
+      "end": 2412.07,
+      "duration": 3.59,
+      "text": "when we did determinants they went up"
+    },
+    {
+      "index": 894,
+      "start": 2412.08,
+      "end": 2413.83,
+      "duration": 1.75,
+      "text": "two, three, four, five, six. They just"
+    },
+    {
+      "index": 895,
+      "start": 2413.84,
+      "end": 2415.91,
+      "duration": 2.07,
+      "text": "went up linearly."
+    },
+    {
+      "index": 896,
+      "start": 2415.92,
+      "end": 2420.51,
+      "duration": 4.59,
+      "text": "So that matrix has the determinants"
+    },
+    {
+      "index": 897,
+      "start": 2420.52,
+      "end": 2424.67,
+      "duration": 4.15,
+      "text": "are two, three, and four."
+    },
+    {
+      "index": 898,
+      "start": 2424.68,
+      "end": 2427.59,
+      "duration": 2.91,
+      "text": "Pivots."
+    },
+    {
+      "index": 899,
+      "start": 2431.11,
+      "end": 2431.12,
+      "duration": 0.01,
+      "text": "What are the pivots for that matrix?"
+    },
+    {
+      "index": 900,
+      "start": 2431.12,
+      "end": 2433.11,
+      "duration": 1.99,
+      "text": "I'll tell you. They're The first pivot"
+    },
+    {
+      "index": 901,
+      "start": 2433.12,
+      "end": 2434.83,
+      "duration": 1.71,
+      "text": "is two."
+    },
+    {
+      "index": 902,
+      "start": 2434.84,
+      "end": 2437.67,
+      "duration": 2.83,
+      "text": "The next pivot is three over two. The"
+    },
+    {
+      "index": 903,
+      "start": 2437.68,
+      "end": 2442.55,
+      "duration": 4.87,
+      "text": "next pivot is four over three."
+    },
+    {
+      "index": 904,
+      "start": 2443.83,
+      "end": 2443.84,
+      "duration": 0.01,
+      "text": "Because"
+    },
+    {
+      "index": 905,
+      "start": 2443.84,
+      "end": 2445.67,
+      "duration": 1.83,
+      "text": "the product of the pivots has to give me"
+    },
+    {
+      "index": 906,
+      "start": 2445.68,
+      "end": 2447.51,
+      "duration": 1.83,
+      "text": "those determinants."
+    },
+    {
+      "index": 907,
+      "start": 2447.52,
+      "end": 2449.35,
+      "duration": 1.83,
+      "text": "The product of these two pivots gives me"
+    },
+    {
+      "index": 908,
+      "start": 2449.36,
+      "end": 2451.23,
+      "duration": 1.87,
+      "text": "that determinant. The product of all the"
+    },
+    {
+      "index": 909,
+      "start": 2451.24,
+      "end": 2453.79,
+      "duration": 2.55,
+      "text": "pivots gives me that determinant."
+    },
+    {
+      "index": 910,
+      "start": 2453.8,
+      "end": 2462.83,
+      "duration": 9.03,
+      "text": "What are the eigenvalues?"
+    },
+    {
+      "index": 911,
+      "start": 2465.91,
+      "end": 2465.92,
+      "duration": 0.01,
+      "text": "Oh, I don't know."
+    },
+    {
+      "index": 912,
+      "start": 2465.92,
+      "end": 2468.31,
+      "duration": 2.39,
+      "text": "Um"
+    },
+    {
+      "index": 913,
+      "start": 2468.32,
+      "end": 2471.31,
+      "duration": 2.99,
+      "text": "Yeah, the eigenvalues I've got What do I"
+    },
+    {
+      "index": 914,
+      "start": 2471.32,
+      "end": 2473.75,
+      "duration": 2.43,
+      "text": "have? A cubic equation, a degree three"
+    },
+    {
+      "index": 915,
+      "start": 2473.76,
+      "end": 2477.15,
+      "duration": 3.39,
+      "text": "equation."
+    },
+    {
+      "index": 916,
+      "start": 2485.35,
+      "end": 2485.36,
+      "duration": 0.01,
+      "text": "If I believe what I've said today, what"
+    },
+    {
+      "index": 917,
+      "start": 2485.36,
+      "end": 2488.11,
+      "duration": 2.75,
+      "text": "do I know about these eigenvalues?"
+    },
+    {
+      "index": 918,
+      "start": 2488.12,
+      "end": 2490.63,
+      "duration": 2.51,
+      "text": "Even so I don't know the exact numbers."
+    },
+    {
+      "index": 919,
+      "start": 2490.64,
+      "end": 2492.91,
+      "duration": 2.27,
+      "text": "I I might actually I I"
+    },
+    {
+      "index": 920,
+      "start": 2492.92,
+      "end": 2497.07,
+      "duration": 4.15,
+      "text": "I think I remember the numbers."
+    },
+    {
+      "index": 921,
+      "start": 2499.71,
+      "end": 2499.72,
+      "duration": 0.01,
+      "text": "Because these matrices are so important"
+    },
+    {
+      "index": 922,
+      "start": 2499.72,
+      "end": 2500.87,
+      "duration": 1.15,
+      "text": "that people"
+    },
+    {
+      "index": 923,
+      "start": 2500.88,
+      "end": 2502.95,
+      "duration": 2.07,
+      "text": "figured them out."
+    },
+    {
+      "index": 924,
+      "start": 2502.96,
+      "end": 2503.63,
+      "duration": 0.67,
+      "text": "Uh"
+    },
+    {
+      "index": 925,
+      "start": 2503.64,
+      "end": 2505.99,
+      "duration": 2.35,
+      "text": "but what do you What do you believe to"
+    },
+    {
+      "index": 926,
+      "start": 2506.0,
+      "end": 2508.31,
+      "duration": 2.31,
+      "text": "be true about these three eigenvalues?"
+    },
+    {
+      "index": 927,
+      "start": 2508.32,
+      "end": 2511.87,
+      "duration": 3.55,
+      "text": "You believe that they are all"
+    },
+    {
+      "index": 928,
+      "start": 2511.88,
+      "end": 2512.87,
+      "duration": 0.99,
+      "text": "positive"
+    },
+    {
+      "index": 929,
+      "start": 2512.88,
+      "end": 2515.95,
+      "duration": 3.07,
+      "text": "They're all positive. I think that they"
+    },
+    {
+      "index": 930,
+      "start": 2515.96,
+      "end": 2517.23,
+      "duration": 1.27,
+      "text": "are"
+    },
+    {
+      "index": 931,
+      "start": 2517.24,
+      "end": 2519.91,
+      "duration": 2.67,
+      "text": "two minus square root of two"
+    },
+    {
+      "index": 932,
+      "start": 2519.92,
+      "end": 2522.59,
+      "duration": 2.67,
+      "text": "two and two plus the square root of two."
+    },
+    {
+      "index": 933,
+      "start": 2522.6,
+      "end": 2525.15,
+      "duration": 2.55,
+      "text": "I think. Uh let me just"
+    },
+    {
+      "index": 934,
+      "start": 2525.16,
+      "end": 2527.07,
+      "duration": 1.91,
+      "text": "I I can't write those numbers down"
+    },
+    {
+      "index": 935,
+      "start": 2527.08,
+      "end": 2529.35,
+      "duration": 2.27,
+      "text": "without checking the simple checks."
+    },
+    {
+      "index": 936,
+      "start": 2529.36,
+      "end": 2530.91,
+      "duration": 1.55,
+      "text": "What's the first simple check is the"
+    },
+    {
+      "index": 937,
+      "start": 2530.92,
+      "end": 2532.55,
+      "duration": 1.63,
+      "text": "trace."
+    },
+    {
+      "index": 938,
+      "start": 2532.56,
+      "end": 2534.99,
+      "duration": 2.43,
+      "text": "So if I add those numbers, I get six."
+    },
+    {
+      "index": 939,
+      "start": 2535.0,
+      "end": 2538.95,
+      "duration": 3.95,
+      "text": "Then if I add those numbers, I get six."
+    },
+    {
+      "index": 940,
+      "start": 2538.96,
+      "end": 2540.87,
+      "duration": 1.91,
+      "text": "The other simple test is the"
+    },
+    {
+      "index": 941,
+      "start": 2540.88,
+      "end": 2543.55,
+      "duration": 2.67,
+      "text": "determinant. If I"
+    },
+    {
+      "index": 942,
+      "start": 2543.56,
+      "end": 2546.07,
+      "duration": 2.51,
+      "text": "Am I going to do this? Can you multiply"
+    },
+    {
+      "index": 943,
+      "start": 2546.08,
+      "end": 2549.15,
+      "duration": 3.07,
+      "text": "those numbers together?"
+    },
+    {
+      "index": 944,
+      "start": 2549.16,
+      "end": 2552.31,
+      "duration": 3.15,
+      "text": "I guess we can multiply by two, okay."
+    },
+    {
+      "index": 945,
+      "start": 2552.32,
+      "end": 2554.35,
+      "duration": 2.03,
+      "text": "Uh what's two minus square root of two"
+    },
+    {
+      "index": 946,
+      "start": 2554.36,
+      "end": 2556.03,
+      "duration": 1.67,
+      "text": "times two plus square root of two?"
+    },
+    {
+      "index": 947,
+      "start": 2556.04,
+      "end": 2557.11,
+      "duration": 1.07,
+      "text": "That's"
+    },
+    {
+      "index": 948,
+      "start": 2557.12,
+      "end": 2559.83,
+      "duration": 2.71,
+      "text": "That'll be four minus two. That'll be"
+    },
+    {
+      "index": 949,
+      "start": 2559.84,
+      "end": 2562.19,
+      "duration": 2.35,
+      "text": "two. Yeah, two times two. That That's"
+    },
+    {
+      "index": 950,
+      "start": 2562.2,
+      "end": 2565.71,
+      "duration": 3.51,
+      "text": "got the determinant right. So"
+    },
+    {
+      "index": 951,
+      "start": 2565.72,
+      "end": 2567.39,
+      "duration": 1.67,
+      "text": "it's got a it's got a chance of being"
+    },
+    {
+      "index": 952,
+      "start": 2567.4,
+      "end": 2569.71,
+      "duration": 2.31,
+      "text": "correct and I think it is."
+    },
+    {
+      "index": 953,
+      "start": 2569.72,
+      "end": 2572.35,
+      "duration": 2.63,
+      "text": "Now, what's the X transpose AX? I better"
+    },
+    {
+      "index": 954,
+      "start": 2572.36,
+      "end": 2575.03,
+      "duration": 2.67,
+      "text": "give myself enough room for that. X"
+    },
+    {
+      "index": 955,
+      "start": 2575.04,
+      "end": 2579.11,
+      "duration": 4.07,
+      "text": "transpose AX for this guy."
+    },
+    {
+      "index": 956,
+      "start": 2579.12,
+      "end": 2580.51,
+      "duration": 1.39,
+      "text": "It's two"
+    },
+    {
+      "index": 957,
+      "start": 2580.52,
+      "end": 2582.35,
+      "duration": 1.83,
+      "text": "X1 squared"
+    },
+    {
+      "index": 958,
+      "start": 2582.36,
+      "end": 2585.51,
+      "duration": 3.15,
+      "text": "and two X2 squared"
+    },
+    {
+      "index": 959,
+      "start": 2585.52,
+      "end": 2587.95,
+      "duration": 2.43,
+      "text": "and two X3 squared. Those Those come"
+    },
+    {
+      "index": 960,
+      "start": 2587.96,
+      "end": 2590.75,
+      "duration": 2.79,
+      "text": "from the diagonal. Those were easy."
+    },
+    {
+      "index": 961,
+      "start": 2590.76,
+      "end": 2592.83,
+      "duration": 2.07,
+      "text": "Now off the diagonal, there's a minus"
+    },
+    {
+      "index": 962,
+      "start": 2592.84,
+      "end": 2594.39,
+      "duration": 1.55,
+      "text": "and a minus. They come together."
+    },
+    {
+      "index": 963,
+      "start": 2594.4,
+      "end": 2597.07,
+      "duration": 2.67,
+      "text": "There'll be minus two"
+    },
+    {
+      "index": 964,
+      "start": 2597.08,
+      "end": 2599.91,
+      "duration": 2.83,
+      "text": "and then minus two what's"
+    },
+    {
+      "index": 965,
+      "start": 2599.92,
+      "end": 2602.91,
+      "duration": 2.99,
+      "text": "are coming from this one two and two one"
+    },
+    {
+      "index": 966,
+      "start": 2602.92,
+      "end": 2604.27,
+      "duration": 1.35,
+      "text": "position"
+    },
+    {
+      "index": 967,
+      "start": 2604.28,
+      "end": 2606.67,
+      "duration": 2.39,
+      "text": "is is the X1 X2."
+    },
+    {
+      "index": 968,
+      "start": 2606.68,
+      "end": 2607.91,
+      "duration": 1.23,
+      "text": "I'm"
+    },
+    {
+      "index": 969,
+      "start": 2607.92,
+      "end": 2610.95,
+      "duration": 3.03,
+      "text": "I'm doing mentally a multiplication of"
+    },
+    {
+      "index": 970,
+      "start": 2610.96,
+      "end": 2614.43,
+      "duration": 3.47,
+      "text": "this matrix times a row vector on the"
+    },
+    {
+      "index": 971,
+      "start": 2614.44,
+      "end": 2617.91,
+      "duration": 3.47,
+      "text": "left times a column vector on the right"
+    },
+    {
+      "index": 972,
+      "start": 2617.92,
+      "end": 2620.11,
+      "duration": 2.19,
+      "text": "and I know that these numbers show up in"
+    },
+    {
+      "index": 973,
+      "start": 2620.12,
+      "end": 2621.95,
+      "duration": 1.83,
+      "text": "the answer."
+    },
+    {
+      "index": 974,
+      "start": 2621.96,
+      "end": 2625.79,
+      "duration": 3.83,
+      "text": "The diagonal is the perfect squares."
+    },
+    {
+      "index": 975,
+      "start": 2625.8,
+      "end": 2629.23,
+      "duration": 3.43,
+      "text": "This off diagonal is a minus 2 X1 X2 and"
+    },
+    {
+      "index": 976,
+      "start": 2629.24,
+      "end": 2632.15,
+      "duration": 2.91,
+      "text": "there are no X1 X3s and there are minus"
+    },
+    {
+      "index": 977,
+      "start": 2632.16,
+      "end": 2635.47,
+      "duration": 3.31,
+      "text": "2 X2 X3s."
+    },
+    {
+      "index": 978,
+      "start": 2635.48,
+      "end": 2637.95,
+      "duration": 2.47,
+      "text": "And I believe that that expression is"
+    },
+    {
+      "index": 979,
+      "start": 2637.96,
+      "end": 2641.59,
+      "duration": 3.63,
+      "text": "always positive."
+    },
+    {
+      "index": 980,
+      "start": 2644.67,
+      "end": 2644.68,
+      "duration": 0.01,
+      "text": "I believe that that curve"
+    },
+    {
+      "index": 981,
+      "start": 2644.68,
+      "end": 2647.39,
+      "duration": 2.71,
+      "text": "that graph of the of this function. This"
+    },
+    {
+      "index": 982,
+      "start": 2647.4,
+      "end": 2650.71,
+      "duration": 3.31,
+      "text": "is my function F."
+    },
+    {
+      "index": 983,
+      "start": 2650.72,
+      "end": 2652.87,
+      "duration": 2.15,
+      "text": "And I'm in more dimensions now than I"
+    },
+    {
+      "index": 984,
+      "start": 2652.88,
+      "end": 2656.43,
+      "duration": 3.55,
+      "text": "can draw. It It but the graph of that"
+    },
+    {
+      "index": 985,
+      "start": 2656.44,
+      "end": 2659.99,
+      "duration": 3.55,
+      "text": "function goes upwards."
+    },
+    {
+      "index": 986,
+      "start": 2662.27,
+      "end": 2662.28,
+      "duration": 0.01,
+      "text": "It's a bowl."
+    },
+    {
+      "index": 987,
+      "start": 2662.28,
+      "end": 2666.15,
+      "duration": 3.87,
+      "text": "Or maybe the right word is uh"
+    },
+    {
+      "index": 988,
+      "start": 2666.16,
+      "end": 2667.95,
+      "duration": 1.79,
+      "text": "is forgotten."
+    },
+    {
+      "index": 989,
+      "start": 2667.96,
+      "end": 2670.55,
+      "duration": 2.59,
+      "text": "Um"
+    },
+    {
+      "index": 990,
+      "start": 2670.56,
+      "end": 2674.15,
+      "duration": 3.59,
+      "text": "What's a long word for a bowl?"
+    },
+    {
+      "index": 991,
+      "start": 2674.16,
+      "end": 2676.27,
+      "duration": 2.11,
+      "text": "Uh"
+    },
+    {
+      "index": 992,
+      "start": 2676.28,
+      "end": 2677.43,
+      "duration": 1.15,
+      "text": "Hm."
+    },
+    {
+      "index": 993,
+      "start": 2677.44,
+      "end": 2680.31,
+      "duration": 2.87,
+      "text": "Maybe a paraboloid? I think paraboloid"
+    },
+    {
+      "index": 994,
+      "start": 2680.32,
+      "end": 2681.51,
+      "duration": 1.19,
+      "text": "comes in."
+    },
+    {
+      "index": 995,
+      "start": 2681.52,
+      "end": 2682.47,
+      "duration": 0.95,
+      "text": "I'll"
+    },
+    {
+      "index": 996,
+      "start": 2682.48,
+      "end": 2686.27,
+      "duration": 3.79,
+      "text": "I'll edit the tape and get that word in."
+    },
+    {
+      "index": 997,
+      "start": 2686.28,
+      "end": 2688.11,
+      "duration": 1.83,
+      "text": "Bowl, let's say."
+    },
+    {
+      "index": 998,
+      "start": 2688.12,
+      "end": 2689.71,
+      "duration": 1.59,
+      "text": "is"
+    },
+    {
+      "index": 999,
+      "start": 2689.72,
+      "end": 2690.59,
+      "duration": 0.87,
+      "text": "Uh"
+    },
+    {
+      "index": 1000,
+      "start": 2690.6,
+      "end": 2693.51,
+      "duration": 2.91,
+      "text": "that So that And"
+    },
+    {
+      "index": 1001,
+      "start": 2693.52,
+      "end": 2695.99,
+      "duration": 2.47,
+      "text": "if I can I could complete the squares. I"
+    },
+    {
+      "index": 1002,
+      "start": 2696.0,
+      "end": 2697.55,
+      "duration": 1.55,
+      "text": "could write that as a sum of three"
+    },
+    {
+      "index": 1003,
+      "start": 2697.56,
+      "end": 2699.83,
+      "duration": 2.27,
+      "text": "squares. And those three squares would"
+    },
+    {
+      "index": 1004,
+      "start": 2699.84,
+      "end": 2702.71,
+      "duration": 2.87,
+      "text": "get multiplied by the three pivots."
+    },
+    {
+      "index": 1005,
+      "start": 2702.72,
+      "end": 2705.349,
+      "duration": 2.629,
+      "text": "And the pivots are all positive."
+    },
+    {
+      "index": 1006,
+      "start": 2705.359,
+      "end": 2707.59,
+      "duration": 2.231,
+      "text": "So I would have positive pivots times"
+    },
+    {
+      "index": 1007,
+      "start": 2707.6,
+      "end": 2710.27,
+      "duration": 2.67,
+      "text": "squares. The net result would be a"
+    },
+    {
+      "index": 1008,
+      "start": 2710.28,
+      "end": 2712.67,
+      "duration": 2.39,
+      "text": "positive function and a bowl that goes"
+    },
+    {
+      "index": 1009,
+      "start": 2712.68,
+      "end": 2714.47,
+      "duration": 1.79,
+      "text": "upwards."
+    },
+    {
+      "index": 1010,
+      "start": 2714.48,
+      "end": 2717.51,
+      "duration": 3.03,
+      "text": "And then finally, if I cut If I slice"
+    },
+    {
+      "index": 1011,
+      "start": 2717.52,
+      "end": 2719.67,
+      "duration": 2.15,
+      "text": "through this bowl"
+    },
+    {
+      "index": 1012,
+      "start": 2719.68,
+      "end": 2722.67,
+      "duration": 2.99,
+      "text": "If I Now I'm asking you to stretch your"
+    },
+    {
+      "index": 1013,
+      "start": 2722.68,
+      "end": 2725.23,
+      "duration": 2.55,
+      "text": "visualization here."
+    },
+    {
+      "index": 1014,
+      "start": 2725.24,
+      "end": 2727.47,
+      "duration": 2.23,
+      "text": "Cuz I'm in four dimensions. I've got X1"
+    },
+    {
+      "index": 1015,
+      "start": 2727.48,
+      "end": 2732.27,
+      "duration": 4.79,
+      "text": "X2 X3 in the base and this function is Z"
+    },
+    {
+      "index": 1016,
+      "start": 2732.28,
+      "end": 2735.19,
+      "duration": 2.91,
+      "text": "or F or something."
+    },
+    {
+      "index": 1017,
+      "start": 2735.2,
+      "end": 2738.63,
+      "duration": 3.43,
+      "text": "And the its graph is going up. But I'm"
+    },
+    {
+      "index": 1018,
+      "start": 2738.64,
+      "end": 2740.59,
+      "duration": 1.95,
+      "text": "in four dimensions cuz I've got three in"
+    },
+    {
+      "index": 1019,
+      "start": 2740.6,
+      "end": 2743.95,
+      "duration": 3.35,
+      "text": "the base and then the upward direction."
+    },
+    {
+      "index": 1020,
+      "start": 2743.96,
+      "end": 2747.55,
+      "duration": 3.59,
+      "text": "But now if I cut through this"
+    },
+    {
+      "index": 1021,
+      "start": 2747.56,
+      "end": 2752.19,
+      "duration": 4.63,
+      "text": "four dimensional picture at level one"
+    },
+    {
+      "index": 1022,
+      "start": 2752.2,
+      "end": 2754.91,
+      "duration": 2.71,
+      "text": "So suppose I cut through"
+    },
+    {
+      "index": 1023,
+      "start": 2754.92,
+      "end": 2756.71,
+      "duration": 1.79,
+      "text": "this thing at"
+    },
+    {
+      "index": 1024,
+      "start": 2756.72,
+      "end": 2758.07,
+      "duration": 1.35,
+      "text": "height one."
+    },
+    {
+      "index": 1025,
+      "start": 2758.08,
+      "end": 2760.71,
+      "duration": 2.63,
+      "text": "So I take all the points that are at"
+    },
+    {
+      "index": 1026,
+      "start": 2760.72,
+      "end": 2764.91,
+      "duration": 4.19,
+      "text": "height one."
+    },
+    {
+      "index": 1027,
+      "start": 2767.67,
+      "end": 2767.68,
+      "duration": 0.01,
+      "text": "That gives me"
+    },
+    {
+      "index": 1028,
+      "start": 2767.68,
+      "end": 2771.07,
+      "duration": 3.39,
+      "text": "It gave me an ellipse over there."
+    },
+    {
+      "index": 1029,
+      "start": 2771.08,
+      "end": 2774.67,
+      "duration": 3.59,
+      "text": "In that In that two by two case in this"
+    },
+    {
+      "index": 1030,
+      "start": 2774.68,
+      "end": 2778.03,
+      "duration": 3.35,
+      "text": "case this will be the equation of an"
+    },
+    {
+      "index": 1031,
+      "start": 2778.04,
+      "end": 2783.71,
+      "duration": 5.67,
+      "text": "ellipsoid. A football in other words."
+    },
+    {
+      "index": 1032,
+      "start": 2785.95,
+      "end": 2785.96,
+      "duration": 0.01,
+      "text": "Well, not quite a football. A lopsided"
+    },
+    {
+      "index": 1033,
+      "start": 2785.96,
+      "end": 2788.71,
+      "duration": 2.75,
+      "text": "football. What What will be Can I Can I"
+    },
+    {
+      "index": 1034,
+      "start": 2788.72,
+      "end": 2791.15,
+      "duration": 2.43,
+      "text": "try to describe to you what the"
+    },
+    {
+      "index": 1035,
+      "start": 2791.16,
+      "end": 2793.67,
+      "duration": 2.51,
+      "text": "ellipsoid will look like?"
+    },
+    {
+      "index": 1036,
+      "start": 2793.68,
+      "end": 2795.91,
+      "duration": 2.23,
+      "text": "This ellipsoid."
+    },
+    {
+      "index": 1037,
+      "start": 2795.92,
+      "end": 2797.83,
+      "duration": 1.91,
+      "text": "I'm sorry that the"
+    },
+    {
+      "index": 1038,
+      "start": 2797.84,
+      "end": 2798.95,
+      "duration": 1.11,
+      "text": "that I've"
+    },
+    {
+      "index": 1039,
+      "start": 2798.96,
+      "end": 2801.43,
+      "duration": 2.47,
+      "text": "ended the matrix right at the"
+    },
+    {
+      "index": 1040,
+      "start": 2801.44,
+      "end": 2803.27,
+      "duration": 1.83,
+      "text": "point. Let's Let me Let me be sure you"
+    },
+    {
+      "index": 1041,
+      "start": 2803.28,
+      "end": 2804.43,
+      "duration": 1.15,
+      "text": "see the"
+    },
+    {
+      "index": 1042,
+      "start": 2804.44,
+      "end": 2806.15,
+      "duration": 1.71,
+      "text": "the equation."
+    },
+    {
+      "index": 1043,
+      "start": 2806.16,
+      "end": 2810.27,
+      "duration": 4.11,
+      "text": "2 X1 squared, 2 X2 squared, 2 X3 squared"
+    },
+    {
+      "index": 1044,
+      "start": 2810.28,
+      "end": 2814.19,
+      "duration": 3.91,
+      "text": "minus two of the cross products"
+    },
+    {
+      "index": 1045,
+      "start": 2814.2,
+      "end": 2816.91,
+      "duration": 2.71,
+      "text": "equal one."
+    },
+    {
+      "index": 1046,
+      "start": 2816.92,
+      "end": 2820.31,
+      "duration": 3.39,
+      "text": "That is the equation of of a football."
+    },
+    {
+      "index": 1047,
+      "start": 2820.32,
+      "end": 2822.03,
+      "duration": 1.71,
+      "text": "So what do I mean by a football or an"
+    },
+    {
+      "index": 1048,
+      "start": 2822.04,
+      "end": 2823.71,
+      "duration": 1.67,
+      "text": "ellipsoid?"
+    },
+    {
+      "index": 1049,
+      "start": 2823.72,
+      "end": 2826.27,
+      "duration": 2.55,
+      "text": "I mean that"
+    },
+    {
+      "index": 1050,
+      "start": 2826.28,
+      "end": 2829.51,
+      "duration": 3.23,
+      "text": "Well, I'll draw it here."
+    },
+    {
+      "index": 1051,
+      "start": 2832.15,
+      "end": 2832.16,
+      "duration": 0.01,
+      "text": "It's"
+    },
+    {
+      "index": 1052,
+      "start": 2832.16,
+      "end": 2834.91,
+      "duration": 2.75,
+      "text": "like that."
+    },
+    {
+      "index": 1053,
+      "start": 2834.92,
+      "end": 2837.59,
+      "duration": 2.67,
+      "text": "And"
+    },
+    {
+      "index": 1054,
+      "start": 2837.6,
+      "end": 2841.67,
+      "duration": 4.07,
+      "text": "like that. It's got a center."
+    },
+    {
+      "index": 1055,
+      "start": 2845.27,
+      "end": 2845.28,
+      "duration": 0.01,
+      "text": "And it's got um"
+    },
+    {
+      "index": 1056,
+      "start": 2845.28,
+      "end": 2848.99,
+      "duration": 3.71,
+      "text": "It's got three"
+    },
+    {
+      "index": 1057,
+      "start": 2851.71,
+      "end": 2851.72,
+      "duration": 0.01,
+      "text": "principal directions."
+    },
+    {
+      "index": 1058,
+      "start": 2851.72,
+      "end": 2853.87,
+      "duration": 2.15,
+      "text": "This this ellipsoid. So You see what I'm"
+    },
+    {
+      "index": 1059,
+      "start": 2853.88,
+      "end": 2855.51,
+      "duration": 1.63,
+      "text": "saying? If we had a sphere, then all"
+    },
+    {
+      "index": 1060,
+      "start": 2855.52,
+      "end": 2859.47,
+      "duration": 3.95,
+      "text": "directions would be the same."
+    },
+    {
+      "index": 1061,
+      "start": 2862.67,
+      "end": 2862.68,
+      "duration": 0.01,
+      "text": "If we had a true football"
+    },
+    {
+      "index": 1062,
+      "start": 2862.68,
+      "end": 2864.99,
+      "duration": 2.31,
+      "text": "or it's closer to a rugby ball really"
+    },
+    {
+      "index": 1063,
+      "start": 2865.0,
+      "end": 2867.83,
+      "duration": 2.83,
+      "text": "cuz it's more curved than a football."
+    },
+    {
+      "index": 1064,
+      "start": 2867.84,
+      "end": 2870.75,
+      "duration": 2.91,
+      "text": "It would be It would have one long"
+    },
+    {
+      "index": 1065,
+      "start": 2870.76,
+      "end": 2872.55,
+      "duration": 1.79,
+      "text": "direction and the other two would be"
+    },
+    {
+      "index": 1066,
+      "start": 2872.56,
+      "end": 2873.95,
+      "duration": 1.39,
+      "text": "equal."
+    },
+    {
+      "index": 1067,
+      "start": 2873.96,
+      "end": 2876.47,
+      "duration": 2.51,
+      "text": "That would be like having a matrix that"
+    },
+    {
+      "index": 1068,
+      "start": 2876.48,
+      "end": 2878.51,
+      "duration": 2.03,
+      "text": "had one eigenvalue"
+    },
+    {
+      "index": 1069,
+      "start": 2878.52,
+      "end": 2879.99,
+      "duration": 1.47,
+      "text": "repeated."
+    },
+    {
+      "index": 1070,
+      "start": 2880.0,
+      "end": 2882.31,
+      "duration": 2.31,
+      "text": "And then one other different. So the"
+    },
+    {
+      "index": 1071,
+      "start": 2882.32,
+      "end": 2884.349,
+      "duration": 2.029,
+      "text": "sphere comes from like the identity"
+    },
+    {
+      "index": 1072,
+      "start": 2884.359,
+      "end": 2887.47,
+      "duration": 3.111,
+      "text": "matrix. All eigenvalues the same."
+    },
+    {
+      "index": 1073,
+      "start": 2887.48,
+      "end": 2891.23,
+      "duration": 3.75,
+      "text": "Uh rugby ball comes from a case where"
+    },
+    {
+      "index": 1074,
+      "start": 2891.24,
+      "end": 2892.39,
+      "duration": 1.15,
+      "text": "uh"
+    },
+    {
+      "index": 1075,
+      "start": 2892.4,
+      "end": 2895.31,
+      "duration": 2.91,
+      "text": "three the three I two of the three"
+    },
+    {
+      "index": 1076,
+      "start": 2895.32,
+      "end": 2897.67,
+      "duration": 2.35,
+      "text": "eigenvalues are the same. But we now"
+    },
+    {
+      "index": 1077,
+      "start": 2897.68,
+      "end": 2900.11,
+      "duration": 2.43,
+      "text": "have a case where the typical case where"
+    },
+    {
+      "index": 1078,
+      "start": 2900.12,
+      "end": 2903.27,
+      "duration": 3.15,
+      "text": "the three eigenvalues are all different."
+    },
+    {
+      "index": 1079,
+      "start": 2903.28,
+      "end": 2908.39,
+      "duration": 5.11,
+      "text": "So this will have"
+    },
+    {
+      "index": 1080,
+      "start": 2910.349,
+      "end": 2910.359,
+      "duration": 0.01,
+      "text": "How do I say it? If I If I look at this"
+    },
+    {
+      "index": 1081,
+      "start": 2910.359,
+      "end": 2913.11,
+      "duration": 2.751,
+      "text": "ellipsoid correctly, it'll have a major"
+    },
+    {
+      "index": 1082,
+      "start": 2913.12,
+      "end": 2914.55,
+      "duration": 1.43,
+      "text": "axis."
+    },
+    {
+      "index": 1083,
+      "start": 2914.56,
+      "end": 2917.349,
+      "duration": 2.789,
+      "text": "It'll have a middle axis."
+    },
+    {
+      "index": 1084,
+      "start": 2917.359,
+      "end": 2919.19,
+      "duration": 1.831,
+      "text": "And it'll have a"
+    },
+    {
+      "index": 1085,
+      "start": 2919.2,
+      "end": 2921.43,
+      "duration": 2.23,
+      "text": "minor axis."
+    },
+    {
+      "index": 1086,
+      "start": 2921.44,
+      "end": 2924.15,
+      "duration": 2.71,
+      "text": "And those three axes will be in the"
+    },
+    {
+      "index": 1087,
+      "start": 2924.16,
+      "end": 2927.349,
+      "duration": 3.189,
+      "text": "direction of the eigenvectors."
+    },
+    {
+      "index": 1088,
+      "start": 2927.359,
+      "end": 2930.91,
+      "duration": 3.551,
+      "text": "And the length of those axes will be"
+    },
+    {
+      "index": 1089,
+      "start": 2930.92,
+      "end": 2933.75,
+      "duration": 2.83,
+      "text": "determined by the eigenvalues."
+    },
+    {
+      "index": 1090,
+      "start": 2933.76,
+      "end": 2935.23,
+      "duration": 1.47,
+      "text": "It It"
+    },
+    {
+      "index": 1091,
+      "start": 2935.24,
+      "end": 2936.71,
+      "duration": 1.47,
+      "text": "I can get"
+    },
+    {
+      "index": 1092,
+      "start": 2936.72,
+      "end": 2939.99,
+      "duration": 3.27,
+      "text": "turn this all into linear algebra."
+    },
+    {
+      "index": 1093,
+      "start": 2940.0,
+      "end": 2941.75,
+      "duration": 1.75,
+      "text": "Cuz we have the right"
+    },
+    {
+      "index": 1094,
+      "start": 2941.76,
+      "end": 2944.31,
+      "duration": 2.55,
+      "text": "we the right thing we know about"
+    },
+    {
+      "index": 1095,
+      "start": 2944.32,
+      "end": 2946.67,
+      "duration": 2.35,
+      "text": "eigenvectors and eigenvalues for that"
+    },
+    {
+      "index": 1096,
+      "start": 2946.68,
+      "end": 2948.71,
+      "duration": 2.03,
+      "text": "matrix is what?"
+    },
+    {
+      "index": 1097,
+      "start": 2948.72,
+      "end": 2951.15,
+      "duration": 2.43,
+      "text": "Let me just tell you the repeat the main"
+    },
+    {
+      "index": 1098,
+      "start": 2951.16,
+      "end": 2955.23,
+      "duration": 4.07,
+      "text": "linear algebra point. How could we"
+    },
+    {
+      "index": 1099,
+      "start": 2955.24,
+      "end": 2959.15,
+      "duration": 3.91,
+      "text": "turn what I said into into into algebra?"
+    },
+    {
+      "index": 1100,
+      "start": 2959.16,
+      "end": 2963.15,
+      "duration": 3.99,
+      "text": "We would write this A as Q"
+    },
+    {
+      "index": 1101,
+      "start": 2963.16,
+      "end": 2966.39,
+      "duration": 3.23,
+      "text": "the eigenvector matrix times lambda the"
+    },
+    {
+      "index": 1102,
+      "start": 2966.4,
+      "end": 2970.31,
+      "duration": 3.91,
+      "text": "eigenvalue matrix times Q transpose."
+    },
+    {
+      "index": 1103,
+      "start": 2970.32,
+      "end": 2972.75,
+      "duration": 2.43,
+      "text": "The principal axis theorem, we'll call"
+    },
+    {
+      "index": 1104,
+      "start": 2972.76,
+      "end": 2974.55,
+      "duration": 1.79,
+      "text": "it now."
+    },
+    {
+      "index": 1105,
+      "start": 2974.56,
+      "end": 2977.11,
+      "duration": 2.55,
+      "text": "The eigenvectors tell us the directions"
+    },
+    {
+      "index": 1106,
+      "start": 2977.12,
+      "end": 2979.47,
+      "duration": 2.35,
+      "text": "of the principal axes."
+    },
+    {
+      "index": 1107,
+      "start": 2979.48,
+      "end": 2981.55,
+      "duration": 2.07,
+      "text": "The eigenvalues tell us the lengths of"
+    },
+    {
+      "index": 1108,
+      "start": 2981.56,
+      "end": 2984.15,
+      "duration": 2.59,
+      "text": "those axes. Actually, the lengths are"
+    },
+    {
+      "index": 1109,
+      "start": 2984.16,
+      "end": 2986.03,
+      "duration": 1.87,
+      "text": "the half lengths are one over the"
+    },
+    {
+      "index": 1110,
+      "start": 2986.04,
+      "end": 2988.91,
+      "duration": 2.87,
+      "text": "eigenvalues, it turns out."
+    },
+    {
+      "index": 1111,
+      "start": 2988.92,
+      "end": 2992.83,
+      "duration": 3.91,
+      "text": "And that is the matrix factorization,"
+    },
+    {
+      "index": 1112,
+      "start": 2992.84,
+      "end": 2994.95,
+      "duration": 2.11,
+      "text": "which is the which is the most important"
+    },
+    {
+      "index": 1113,
+      "start": 2994.96,
+      "end": 2997.91,
+      "duration": 2.95,
+      "text": "matrix factorization in"
+    },
+    {
+      "index": 1114,
+      "start": 2997.92,
+      "end": 3000.43,
+      "duration": 2.51,
+      "text": "in our eigenvalue material so far."
+    },
+    {
+      "index": 1115,
+      "start": 3000.44,
+      "end": 3002.59,
+      "duration": 2.15,
+      "text": "That's diagonalization"
+    },
+    {
+      "index": 1116,
+      "start": 3002.6,
+      "end": 3005.47,
+      "duration": 2.87,
+      "text": "for a symmetric matrix, so instead of"
+    },
+    {
+      "index": 1117,
+      "start": 3005.48,
+      "end": 3009.27,
+      "duration": 3.79,
+      "text": "the inverse, I can write the transpose."
+    },
+    {
+      "index": 1118,
+      "start": 3009.28,
+      "end": 3011.59,
+      "duration": 2.31,
+      "text": "Okay, I've I've So, what I've tried"
+    },
+    {
+      "index": 1119,
+      "start": 3011.6,
+      "end": 3014.07,
+      "duration": 2.47,
+      "text": "today is to tell you the"
+    },
+    {
+      "index": 1120,
+      "start": 3014.08,
+      "end": 3017.63,
+      "duration": 3.55,
+      "text": "what's going on with"
+    },
+    {
+      "index": 1121,
+      "start": 3017.64,
+      "end": 3020.23,
+      "duration": 2.59,
+      "text": "positive definite matrices."
+    },
+    {
+      "index": 1122,
+      "start": 3020.24,
+      "end": 3022.27,
+      "duration": 2.03,
+      "text": "Uh you see all how all these pieces are"
+    },
+    {
+      "index": 1123,
+      "start": 3022.28,
+      "end": 3025.63,
+      "duration": 3.35,
+      "text": "there, and linear algebra connects them."
+    },
+    {
+      "index": 1124,
+      "start": 3025.64,
+      "end": 3027.11,
+      "duration": 1.47,
+      "text": "Okay."
+    },
+    {
+      "index": 1125,
+      "start": 3027.12,
+      "end": 3028.67,
+      "duration": 1.55,
+      "text": "Um"
+    },
+    {
+      "index": 1126,
+      "start": 3028.68,
+      "end": 3031.56,
+      "duration": 2.88,
+      "text": "see you on Friday."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

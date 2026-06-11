@@ -1,0 +1,4022 @@
+{
+  "video": {
+    "id": "ZwpwmGP5ITM",
+    "title": "Lec 34: Final review | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=ZwpwmGP5ITM",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2633,
+    "language": "en"
+  },
+  "segment_count": 572,
+  "segments": [
+    {
+      "index": 0,
+      "start": 22.95,
+      "end": 27.6,
+      "duration": 4.65,
+      "text": "OK, so anyway, let's get started."
+    },
+    {
+      "index": 1,
+      "start": 27.6,
+      "end": 31.1,
+      "duration": 3.5,
+      "text": "So, the first unit of the class,"
+    },
+    {
+      "index": 2,
+      "start": 31.1,
+      "end": 33.726,
+      "duration": 2.626,
+      "text": "so basically I'm going to go over the first half of the class"
+    },
+    {
+      "index": 3,
+      "start": 33.726,
+      "end": 36.438,
+      "duration": 2.712,
+      "text": "today, and the second half of the"
+    },
+    {
+      "index": 4,
+      "start": 36.438,
+      "end": 41.61,
+      "duration": 5.172,
+      "text": "class on Tuesday just because we have to start somewhere."
+    },
+    {
+      "index": 5,
+      "start": 41.61,
+      "end": 48.843,
+      "duration": 7.233,
+      "text": "So, the first things that we learned about in this class were"
+    },
+    {
+      "index": 6,
+      "start": 48.843,
+      "end": 54.63,
+      "duration": 5.787,
+      "text": "vectors, and how to do dot-product of vectors."
+    },
+    {
+      "index": 7,
+      "start": 54.63,
+      "end": 61.439,
+      "duration": 6.809,
+      "text": "So, remember the formula that A dot B is the sum of ai times bi."
+    },
+    {
+      "index": 8,
+      "start": 61.439,
+      "end": 65.077,
+      "duration": 3.638,
+      "text": "And, geometrically, it's length A times length B"
+    },
+    {
+      "index": 9,
+      "start": 65.077,
+      "end": 68.56,
+      "duration": 3.483,
+      "text": "times the cosine of the angle between them."
+    },
+    {
+      "index": 10,
+      "start": 68.56,
+      "end": 71.064,
+      "duration": 2.504,
+      "text": "And, in particular, we can use this to detect when"
+    },
+    {
+      "index": 11,
+      "start": 71.064,
+      "end": 74.104,
+      "duration": 3.04,
+      "text": "two vectors are perpendicular. That's when their dot product"
+    },
+    {
+      "index": 12,
+      "start": 74.104,
+      "end": 77.078,
+      "duration": 2.974,
+      "text": "is zero. And, we can use that to measure"
+    },
+    {
+      "index": 13,
+      "start": 77.078,
+      "end": 81.5,
+      "duration": 4.422,
+      "text": "angles between vectors by solving for cosine in this."
+    },
+    {
+      "index": 14,
+      "start": 81.5,
+      "end": 85.285,
+      "duration": 3.785,
+      "text": "Hopefully, at this point, this looks a lot easier than it"
+    },
+    {
+      "index": 15,
+      "start": 85.285,
+      "end": 88.992,
+      "duration": 3.707,
+      "text": "used to a few months ago. So, hopefully at this point,"
+    },
+    {
+      "index": 16,
+      "start": 88.992,
+      "end": 92.689,
+      "duration": 3.697,
+      "text": "everyone has this kind of formula memorized and has some"
+    },
+    {
+      "index": 17,
+      "start": 92.689,
+      "end": 95.11,
+      "duration": 2.421,
+      "text": "reasonable understanding of that."
+    },
+    {
+      "index": 18,
+      "start": 95.11,
+      "end": 101.48,
+      "duration": 6.37,
+      "text": "But, if you have any questions, now is the time."
+    },
+    {
+      "index": 19,
+      "start": 101.48,
+      "end": 105.94,
+      "duration": 4.46,
+      "text": "No? Good."
+    },
+    {
+      "index": 20,
+      "start": 105.94,
+      "end": 115.878,
+      "duration": 9.938,
+      "text": "Next we learned how to also do cross product of vectors in"
+    },
+    {
+      "index": 21,
+      "start": 115.878,
+      "end": 126.253,
+      "duration": 10.375,
+      "text": "space -- -- and remember, we saw how to use that to find"
+    },
+    {
+      "index": 22,
+      "start": 126.253,
+      "end": 130.734,
+      "duration": 4.481,
+      "text": "area of, say, a triangle or a parallelogram"
+    },
+    {
+      "index": 23,
+      "start": 130.734,
+      "end": 134.262,
+      "duration": 3.528,
+      "text": "in space because the length of the cross product is equal to"
+    },
+    {
+      "index": 24,
+      "start": 134.262,
+      "end": 137.909,
+      "duration": 3.647,
+      "text": "the area of a parallelogram formed by the vectors a and b."
+    },
+    {
+      "index": 25,
+      "start": 137.909,
+      "end": 145.196,
+      "duration": 7.287,
+      "text": "And, we can also use that to find a vector perpendicular to"
+    },
+    {
+      "index": 26,
+      "start": 145.196,
+      "end": 148.84,
+      "duration": 3.644,
+      "text": "two given vectors, A and B."
+    },
+    {
+      "index": 27,
+      "start": 148.84,
+      "end": 153.767,
+      "duration": 4.927,
+      "text": "And so, in particular, that comes in handy when we are"
+    },
+    {
+      "index": 28,
+      "start": 153.767,
+      "end": 162.379,
+      "duration": 8.612,
+      "text": "looking for the equation of a plane because we've seen -- So,"
+    },
+    {
+      "index": 29,
+      "start": 162.379,
+      "end": 169.53,
+      "duration": 7.151,
+      "text": "the next topic would be equations of planes."
+    },
+    {
+      "index": 30,
+      "start": 169.53,
+      "end": 175.619,
+      "duration": 6.089,
+      "text": "And, we've seen that when you put the equation of a plane in"
+    },
+    {
+      "index": 31,
+      "start": 175.619,
+      "end": 179.012,
+      "duration": 3.393,
+      "text": "the form ax by cz = d, well, <a,"
+    },
+    {
+      "index": 32,
+      "start": 179.012,
+      "end": 183.28,
+      "duration": 4.268,
+      "text": "b, c> in there is actually the normal vector to the plane,"
+    },
+    {
+      "index": 33,
+      "start": 183.28,
+      "end": 187.18,
+      "duration": 3.9,
+      "text": "or some normal vector to the plane."
+    },
+    {
+      "index": 34,
+      "start": 187.18,
+      "end": 191.723,
+      "duration": 4.543,
+      "text": "So, typically, we use cross product to find"
+    },
+    {
+      "index": 35,
+      "start": 191.723,
+      "end": 196.537,
+      "duration": 4.814,
+      "text": "plane equations. OK, is that still reasonably"
+    },
+    {
+      "index": 36,
+      "start": 196.537,
+      "end": 201.009,
+      "duration": 4.472,
+      "text": "familiar to everyone? Yes, very good."
+    },
+    {
+      "index": 37,
+      "start": 201.009,
+      "end": 206.28,
+      "duration": 5.271,
+      "text": "OK, we've also seen how to look at equations of lines,"
+    },
+    {
+      "index": 38,
+      "start": 206.28,
+      "end": 211.581,
+      "duration": 5.301,
+      "text": "and those were of a slightly different nature because we've"
+    },
+    {
+      "index": 39,
+      "start": 211.581,
+      "end": 215.419,
+      "duration": 3.838,
+      "text": "been doing them as parametric equations."
+    },
+    {
+      "index": 40,
+      "start": 215.419,
+      "end": 222.02,
+      "duration": 6.601,
+      "text": "So, typically we had equations of a form, maybe x equals some"
+    },
+    {
+      "index": 41,
+      "start": 222.02,
+      "end": 227.3,
+      "duration": 5.28,
+      "text": "constant times t, y equals constant plus constant"
+    },
+    {
+      "index": 42,
+      "start": 227.3,
+      "end": 233.164,
+      "duration": 5.864,
+      "text": "times t. z equals constant plus constant"
+    },
+    {
+      "index": 43,
+      "start": 233.164,
+      "end": 242.107,
+      "duration": 8.943,
+      "text": "times t where these terms here correspond to some point on the"
+    },
+    {
+      "index": 44,
+      "start": 242.107,
+      "end": 246.356,
+      "duration": 4.249,
+      "text": "line. And, these coefficients here"
+    },
+    {
+      "index": 45,
+      "start": 246.356,
+      "end": 251.3,
+      "duration": 4.944,
+      "text": "correspond to a vector parallel to the line."
+    },
+    {
+      "index": 46,
+      "start": 251.3,
+      "end": 259.1,
+      "duration": 7.8,
+      "text": "That's the velocity of the moving point on the line."
+    },
+    {
+      "index": 47,
+      "start": 259.1,
+      "end": 263.334,
+      "duration": 4.234,
+      "text": "And, well, we've learned in particular how"
+    },
+    {
+      "index": 48,
+      "start": 263.334,
+      "end": 269.356,
+      "duration": 6.022,
+      "text": "to find where a line intersects a plane by plugging in the"
+    },
+    {
+      "index": 49,
+      "start": 269.356,
+      "end": 274.85,
+      "duration": 5.494,
+      "text": "parametric equation into the equation of a plane."
+    },
+    {
+      "index": 50,
+      "start": 274.85,
+      "end": 283.656,
+      "duration": 8.806,
+      "text": "We've learned more general things about parametric"
+    },
+    {
+      "index": 51,
+      "start": 283.656,
+      "end": 288.912,
+      "duration": 5.256,
+      "text": "equations of curves. So, there are these infamous"
+    },
+    {
+      "index": 52,
+      "start": 288.912,
+      "end": 291.796,
+      "duration": 2.884,
+      "text": "problems in particular where you have these rotating wheels and"
+    },
+    {
+      "index": 53,
+      "start": 291.796,
+      "end": 293.74,
+      "duration": 1.944,
+      "text": "points on them, and you have to figure out,"
+    },
+    {
+      "index": 54,
+      "start": 293.74,
+      "end": 297.825,
+      "duration": 4.085,
+      "text": "what's the position of a point? And, the general principle of"
+    },
+    {
+      "index": 55,
+      "start": 297.825,
+      "end": 301.614,
+      "duration": 3.789,
+      "text": "those is that you want to decompose the position vector"
+    },
+    {
+      "index": 56,
+      "start": 301.614,
+      "end": 305.7,
+      "duration": 4.086,
+      "text": "into a sum of simpler things. OK, so if you have a point on a"
+    },
+    {
+      "index": 57,
+      "start": 305.7,
+      "end": 308.55,
+      "duration": 2.85,
+      "text": "wheel that's itself moving and something else,"
+    },
+    {
+      "index": 58,
+      "start": 308.55,
+      "end": 311.42,
+      "duration": 2.87,
+      "text": "then you might want to first figure out the position of a"
+    },
+    {
+      "index": 59,
+      "start": 311.42,
+      "end": 314.444,
+      "duration": 3.024,
+      "text": "center of a wheel than find the angle by which the wheel has"
+    },
+    {
+      "index": 60,
+      "start": 314.444,
+      "end": 318.375,
+      "duration": 3.931,
+      "text": "turned, and then get to the position of"
+    },
+    {
+      "index": 61,
+      "start": 318.375,
+      "end": 323.829,
+      "duration": 5.454,
+      "text": "a moving point by adding together simpler vectors."
+    },
+    {
+      "index": 62,
+      "start": 323.829,
+      "end": 327.033,
+      "duration": 3.204,
+      "text": "So, the general principle is really to try to find one"
+    },
+    {
+      "index": 63,
+      "start": 327.033,
+      "end": 330.6,
+      "duration": 3.567,
+      "text": "parameter that will let us understand what has happened,"
+    },
+    {
+      "index": 64,
+      "start": 330.6,
+      "end": 336.839,
+      "duration": 6.239,
+      "text": "and then decompose the motion into a sum of simpler effect."
+    },
+    {
+      "index": 65,
+      "start": 336.839,
+      "end": 354.388,
+      "duration": 17.549,
+      "text": "So, we want to decompose the position vector into a sum of"
+    },
+    {
+      "index": 66,
+      "start": 354.388,
+      "end": 362.38,
+      "duration": 7.992,
+      "text": "simpler vectors. OK, so maybe now we are getting"
+    },
+    {
+      "index": 67,
+      "start": 362.38,
+      "end": 365.462,
+      "duration": 3.082,
+      "text": "a bit out of some people's comfort zone,"
+    },
+    {
+      "index": 68,
+      "start": 365.462,
+      "end": 372.074,
+      "duration": 6.612,
+      "text": "but hopefully it's not too bad. Do you have any general"
+    },
+    {
+      "index": 69,
+      "start": 372.074,
+      "end": 380.095,
+      "duration": 8.021,
+      "text": "questions about how one would go about that, or,"
+    },
+    {
+      "index": 70,
+      "start": 380.095,
+      "end": 384.379,
+      "duration": 4.284,
+      "text": "yes? Sorry? What about it?"
+    },
+    {
+      "index": 71,
+      "start": 384.379,
+      "end": 385.56,
+      "duration": 1.181,
+      "text": "Parametric descriptions of a plane,"
+    },
+    {
+      "index": 72,
+      "start": 385.56,
+      "end": 388.709,
+      "duration": 3.149,
+      "text": "so we haven't really done that because you would need two"
+    },
+    {
+      "index": 73,
+      "start": 388.709,
+      "end": 391.916,
+      "duration": 3.207,
+      "text": "parameters to parameterize a plane just because it's a two"
+    },
+    {
+      "index": 74,
+      "start": 391.916,
+      "end": 395.692,
+      "duration": 3.776,
+      "text": "dimensional object. So, we have mostly focused on"
+    },
+    {
+      "index": 75,
+      "start": 395.692,
+      "end": 400.401,
+      "duration": 4.709,
+      "text": "the use of parametric equations just for one dimensional"
+    },
+    {
+      "index": 76,
+      "start": 400.401,
+      "end": 402.97,
+      "duration": 2.569,
+      "text": "objects, lines, and curves."
+    },
+    {
+      "index": 77,
+      "start": 402.97,
+      "end": 405.463,
+      "duration": 2.493,
+      "text": "So, you won't need to know about"
+    },
+    {
+      "index": 78,
+      "start": 405.463,
+      "end": 407.4,
+      "duration": 1.937,
+      "text": "parametric descriptions of planes on a final,"
+    },
+    {
+      "index": 79,
+      "start": 407.4,
+      "end": 411.326,
+      "duration": 3.926,
+      "text": "but if you really wanted to, you would think of defining a"
+    },
+    {
+      "index": 80,
+      "start": 411.326,
+      "end": 415.389,
+      "duration": 4.063,
+      "text": "point on a plane as starting from some given point."
+    },
+    {
+      "index": 81,
+      "start": 415.389,
+      "end": 417.79,
+      "duration": 2.401,
+      "text": "Then you have two vectors given on the plane."
+    },
+    {
+      "index": 82,
+      "start": 417.79,
+      "end": 420.591,
+      "duration": 2.801,
+      "text": "And then, you would add a multiple of each of these"
+    },
+    {
+      "index": 83,
+      "start": 420.591,
+      "end": 424.724,
+      "duration": 4.133,
+      "text": "vectors to your starting point. But see, the difficulty is to"
+    },
+    {
+      "index": 84,
+      "start": 424.724,
+      "end": 428.899,
+      "duration": 4.175,
+      "text": "convert from that to the usual equation of a plane,"
+    },
+    {
+      "index": 85,
+      "start": 428.899,
+      "end": 431.71,
+      "duration": 2.811,
+      "text": "you would still have to go back to this cross product method,"
+    },
+    {
+      "index": 86,
+      "start": 431.71,
+      "end": 435.911,
+      "duration": 4.201,
+      "text": "and so on. So, it is possible to represent"
+    },
+    {
+      "index": 87,
+      "start": 435.911,
+      "end": 439.569,
+      "duration": 3.658,
+      "text": "a plane, or, in general, a surface in parametric form."
+    },
+    {
+      "index": 88,
+      "start": 439.569,
+      "end": 443.9,
+      "duration": 4.331,
+      "text": "But, very often, that's not so useful."
+    },
+    {
+      "index": 89,
+      "start": 443.9,
+      "end": 448.472,
+      "duration": 4.572,
+      "text": "Yes? How do you parametrize an"
+    },
+    {
+      "index": 90,
+      "start": 448.472,
+      "end": 451.191,
+      "duration": 2.719,
+      "text": "ellipse in space? Well, that depends on how it's"
+    },
+    {
+      "index": 91,
+      "start": 451.191,
+      "end": 454.659,
+      "duration": 3.468,
+      "text": "given to you. But, OK, let's just do an"
+    },
+    {
+      "index": 92,
+      "start": 454.659,
+      "end": 458.615,
+      "duration": 3.956,
+      "text": "example. Say that I give you an ellipse"
+    },
+    {
+      "index": 93,
+      "start": 458.615,
+      "end": 462.795,
+      "duration": 4.18,
+      "text": "in space as maybe the more, well, one exciting way to"
+    },
+    {
+      "index": 94,
+      "start": 462.795,
+      "end": 465.859,
+      "duration": 3.064,
+      "text": "parameterize an ellipse in space is maybe the intersection of a"
+    },
+    {
+      "index": 95,
+      "start": 465.859,
+      "end": 469.591,
+      "duration": 3.732,
+      "text": "cylinder with a slanted plane. That's the kind of situations"
+    },
+    {
+      "index": 96,
+      "start": 469.591,
+      "end": 472.49,
+      "duration": 2.899,
+      "text": "where you might end up with an ellipse."
+    },
+    {
+      "index": 97,
+      "start": 472.49,
+      "end": 478.577,
+      "duration": 6.087,
+      "text": "OK, so if I tell you that maybe I'm intersecting a cylinder with"
+    },
+    {
+      "index": 98,
+      "start": 478.577,
+      "end": 483.987,
+      "duration": 5.41,
+      "text": "equation x squared plus y squared equals a squared with a"
+    },
+    {
+      "index": 99,
+      "start": 483.987,
+      "end": 489.269,
+      "duration": 5.282,
+      "text": "slanted plane to get, I messed up my picture,"
+    },
+    {
+      "index": 100,
+      "start": 489.269,
+      "end": 493.17,
+      "duration": 3.901,
+      "text": "to get this ellipse of intersection,"
+    },
+    {
+      "index": 101,
+      "start": 493.17,
+      "end": 494.91,
+      "duration": 1.74,
+      "text": "so, of course you'd need the equation of a plane."
+    },
+    {
+      "index": 102,
+      "start": 494.91,
+      "end": 498.339,
+      "duration": 3.429,
+      "text": "And, let's say that this plane is maybe given to you."
+    },
+    {
+      "index": 103,
+      "start": 498.339,
+      "end": 503.435,
+      "duration": 5.096,
+      "text": "Or, you can switch it to form where you can get z as a"
+    },
+    {
+      "index": 104,
+      "start": 503.435,
+      "end": 509.329,
+      "duration": 5.894,
+      "text": "function of x and y. So, maybe it would be z equals,"
+    },
+    {
+      "index": 105,
+      "start": 509.329,
+      "end": 513.879,
+      "duration": 4.55,
+      "text": "I've already used a; I need to use a new letter."
+    },
+    {
+      "index": 106,
+      "start": 513.879,
+      "end": 521.99,
+      "duration": 8.111,
+      "text": "Let's say c1x c2y plus d, whatever, something like that."
+    },
+    {
+      "index": 107,
+      "start": 521.99,
+      "end": 525.82,
+      "duration": 3.83,
+      "text": "So, what I would do is first I would look at what my ellipse"
+    },
+    {
+      "index": 108,
+      "start": 525.82,
+      "end": 529.649,
+      "duration": 3.829,
+      "text": "does in the directions in which I understand it the best."
+    },
+    {
+      "index": 109,
+      "start": 529.649,
+      "end": 533.799,
+      "duration": 4.15,
+      "text": "And, those directions would be probably the xy plane."
+    },
+    {
+      "index": 110,
+      "start": 533.799,
+      "end": 536.74,
+      "duration": 2.941,
+      "text": "So, I would look at the xy coordinates."
+    },
+    {
+      "index": 111,
+      "start": 536.74,
+      "end": 542.084,
+      "duration": 5.344,
+      "text": "Well, if I look at it from above xy, my ellipse looks like"
+    },
+    {
+      "index": 112,
+      "start": 542.084,
+      "end": 546.813,
+      "duration": 4.729,
+      "text": "just a circle of radius a. So, if I'm only concerned with"
+    },
+    {
+      "index": 113,
+      "start": 546.813,
+      "end": 550.668,
+      "duration": 3.855,
+      "text": "x and y, presumably I can just do it the usual way for a"
+    },
+    {
+      "index": 114,
+      "start": 550.668,
+      "end": 553.46,
+      "duration": 2.792,
+      "text": "circle. x equals a cosine t."
+    },
+    {
+      "index": 115,
+      "start": 553.46,
+      "end": 560.229,
+      "duration": 6.769,
+      "text": "y equals a sine t, OK? And then, z would end up being"
+    },
+    {
+      "index": 116,
+      "start": 560.229,
+      "end": 564.557,
+      "duration": 4.328,
+      "text": "just, well, whatever the value of z is to be on the slanted"
+    },
+    {
+      "index": 117,
+      "start": 564.557,
+      "end": 569.214,
+      "duration": 4.657,
+      "text": "plane above a given xy position. So, in fact,"
+    },
+    {
+      "index": 118,
+      "start": 569.214,
+      "end": 578.925,
+      "duration": 9.711,
+      "text": "it would end up being ac1 cosine t plus ac2 sine t plus d,"
+    },
+    {
+      "index": 119,
+      "start": 578.925,
+      "end": 582.25,
+      "duration": 3.325,
+      "text": "I guess. OK, that's not a particularly"
+    },
+    {
+      "index": 120,
+      "start": 582.25,
+      "end": 584.899,
+      "duration": 2.649,
+      "text": "elegant parameterization, but that's the kind of thing"
+    },
+    {
+      "index": 121,
+      "start": 584.899,
+      "end": 587.11,
+      "duration": 2.211,
+      "text": "you might end up with. Now, in general,"
+    },
+    {
+      "index": 122,
+      "start": 587.11,
+      "end": 590.581,
+      "duration": 3.471,
+      "text": "when you have a curve in space, it would rarely be the case"
+    },
+    {
+      "index": 123,
+      "start": 590.581,
+      "end": 593.399,
+      "duration": 2.818,
+      "text": "that you have to get a parameterization from scratch"
+    },
+    {
+      "index": 124,
+      "start": 593.399,
+      "end": 596.548,
+      "duration": 3.149,
+      "text": "unless you are already being told information about how it"
+    },
+    {
+      "index": 125,
+      "start": 596.548,
+      "end": 598.98,
+      "duration": 2.432,
+      "text": "looks in one of the coordinate planes,"
+    },
+    {
+      "index": 126,
+      "start": 598.98,
+      "end": 603.052,
+      "duration": 4.072,
+      "text": "this kind of method. Or, at least you'd have a lot"
+    },
+    {
+      "index": 127,
+      "start": 603.052,
+      "end": 607.108,
+      "duration": 4.056,
+      "text": "of information that would quickly reduce to a plane"
+    },
+    {
+      "index": 128,
+      "start": 607.108,
+      "end": 611.173,
+      "duration": 4.065,
+      "text": "problem somehow. Of course, I could also just"
+    },
+    {
+      "index": 129,
+      "start": 611.173,
+      "end": 616.85,
+      "duration": 5.677,
+      "text": "give you some formulas and let you figure out what's going on."
+    },
+    {
+      "index": 130,
+      "start": 616.85,
+      "end": 621.816,
+      "duration": 4.966,
+      "text": "But, in general, we've done more stuff with"
+    },
+    {
+      "index": 131,
+      "start": 621.816,
+      "end": 625.094,
+      "duration": 3.278,
+      "text": "plane curves. With plane curves,"
+    },
+    {
+      "index": 132,
+      "start": 625.094,
+      "end": 629.525,
+      "duration": 4.431,
+      "text": "certainly there's interesting things with all sorts of"
+    },
+    {
+      "index": 133,
+      "start": 629.525,
+      "end": 632.87,
+      "duration": 3.345,
+      "text": "mechanical gadgets that we can study."
+    },
+    {
+      "index": 134,
+      "start": 632.87,
+      "end": 639.379,
+      "duration": 6.509,
+      "text": "OK, any other questions on that? No?"
+    },
+    {
+      "index": 135,
+      "start": 639.379,
+      "end": 645.823,
+      "duration": 6.444,
+      "text": "OK, so let me move on a bit and point out that with parametric"
+    },
+    {
+      "index": 136,
+      "start": 645.823,
+      "end": 651.634,
+      "duration": 5.811,
+      "text": "equations, we've looked also at things like velocity and"
+    },
+    {
+      "index": 137,
+      "start": 651.634,
+      "end": 655.665,
+      "duration": 4.031,
+      "text": "acceleration. So, the velocity vector is the"
+    },
+    {
+      "index": 138,
+      "start": 655.665,
+      "end": 659.69,
+      "duration": 4.025,
+      "text": "derivative of a position vector with respect to time."
+    },
+    {
+      "index": 139,
+      "start": 659.69,
+      "end": 664.339,
+      "duration": 4.649,
+      "text": "And, it's not to be confused with speed, which is the"
+    },
+    {
+      "index": 140,
+      "start": 664.339,
+      "end": 668.246,
+      "duration": 3.907,
+      "text": "magnitude of v. So, the velocity vector is"
+    },
+    {
+      "index": 141,
+      "start": 668.246,
+      "end": 672.009,
+      "duration": 3.763,
+      "text": "going to be always tangent to the curve."
+    },
+    {
+      "index": 142,
+      "start": 672.009,
+      "end": 674.25,
+      "duration": 2.241,
+      "text": "And, its length will be the speed."
+    },
+    {
+      "index": 143,
+      "start": 674.25,
+      "end": 675.9,
+      "duration": 1.65,
+      "text": "That's the geometric interpretation."
+    },
+    {
+      "index": 144,
+      "start": 692.879,
+      "end": 697.571,
+      "duration": 4.692,
+      "text": "So, just to provoke you, I'm going to write,"
+    },
+    {
+      "index": 145,
+      "start": 697.571,
+      "end": 703.79,
+      "duration": 6.219,
+      "text": "again, that formula that was that v equals T hat ds dt."
+    },
+    {
+      "index": 146,
+      "start": 703.79,
+      "end": 706.917,
+      "duration": 3.127,
+      "text": "What do I mean by that? If I have a curve,"
+    },
+    {
+      "index": 147,
+      "start": 706.917,
+      "end": 711.404,
+      "duration": 4.487,
+      "text": "and I'm moving on the curve, well, I have the unit tangent"
+    },
+    {
+      "index": 148,
+      "start": 711.404,
+      "end": 716.049,
+      "duration": 4.645,
+      "text": "vector which I think at the time I used to draw in blue."
+    },
+    {
+      "index": 149,
+      "start": 716.049,
+      "end": 719.34,
+      "duration": 3.291,
+      "text": "But, blue has been abolished since then."
+    },
+    {
+      "index": 150,
+      "start": 719.34,
+      "end": 724.577,
+      "duration": 5.237,
+      "text": "So, I'm going to draw it in red. OK, so that's a unit vector"
+    },
+    {
+      "index": 151,
+      "start": 724.577,
+      "end": 729.09,
+      "duration": 4.513,
+      "text": "that goes along the curve, and then the actual velocity is"
+    },
+    {
+      "index": 152,
+      "start": 729.09,
+      "end": 731.94,
+      "duration": 2.85,
+      "text": "going to be proportional to that."
+    },
+    {
+      "index": 153,
+      "start": 731.94,
+      "end": 735.48,
+      "duration": 3.54,
+      "text": "And, what's the length? Well, it's the speed."
+    },
+    {
+      "index": 154,
+      "start": 735.48,
+      "end": 739.312,
+      "duration": 3.832,
+      "text": "And, the speed is how much arc length on the curve I go per"
+    },
+    {
+      "index": 155,
+      "start": 739.312,
+      "end": 742.22,
+      "duration": 2.908,
+      "text": "unit time, which is why I'm writing ds dt."
+    },
+    {
+      "index": 156,
+      "start": 742.22,
+      "end": 750.088,
+      "duration": 7.868,
+      "text": "That's another guy. That's another of these guys"
+    },
+    {
+      "index": 157,
+      "start": 750.088,
+      "end": 754.389,
+      "duration": 4.301,
+      "text": "for the speed, OK?"
+    },
+    {
+      "index": 158,
+      "start": 754.389,
+      "end": 761.13,
+      "duration": 6.741,
+      "text": "And, we've also learned about acceleration,"
+    },
+    {
+      "index": 159,
+      "start": 761.13,
+      "end": 767.23,
+      "duration": 6.1,
+      "text": "which is the derivative of velocity."
+    },
+    {
+      "index": 160,
+      "start": 767.23,
+      "end": 770.98,
+      "duration": 3.75,
+      "text": "So, it's the second derivative of a position vector."
+    },
+    {
+      "index": 161,
+      "start": 770.98,
+      "end": 774.48,
+      "duration": 3.5,
+      "text": "And, as an example of the kinds of manipulations we can do,"
+    },
+    {
+      "index": 162,
+      "start": 774.48,
+      "end": 776.909,
+      "duration": 2.429,
+      "text": "in class we've seen Kepler's second law,"
+    },
+    {
+      "index": 163,
+      "start": 776.909,
+      "end": 783.988,
+      "duration": 7.079,
+      "text": "which explains how if the acceleration is parallel to the"
+    },
+    {
+      "index": 164,
+      "start": 783.988,
+      "end": 788.797,
+      "duration": 4.809,
+      "text": "position vector, then r cross v is going to be"
+    },
+    {
+      "index": 165,
+      "start": 788.797,
+      "end": 790.74,
+      "duration": 1.943,
+      "text": "constant, which means that the motion"
+    },
+    {
+      "index": 166,
+      "start": 790.74,
+      "end": 793.409,
+      "duration": 2.669,
+      "text": "will be in an plane, and you will sweep area at a"
+    },
+    {
+      "index": 167,
+      "start": 793.409,
+      "end": 796.709,
+      "duration": 3.3,
+      "text": "constant rate. So now, that is not in itself a"
+    },
+    {
+      "index": 168,
+      "start": 796.709,
+      "end": 799.96,
+      "duration": 3.251,
+      "text": "topic for the exam, but the kinds of methods of"
+    },
+    {
+      "index": 169,
+      "start": 799.96,
+      "end": 802.2,
+      "duration": 2.24,
+      "text": "differentiating vector quantities,"
+    },
+    {
+      "index": 170,
+      "start": 802.2,
+      "end": 805.632,
+      "duration": 3.432,
+      "text": "applying the product rule to take the derivative of a dot or"
+    },
+    {
+      "index": 171,
+      "start": 805.632,
+      "end": 808.6,
+      "duration": 2.968,
+      "text": "cross product and so on are definitely fair game."
+    },
+    {
+      "index": 172,
+      "start": 808.6,
+      "end": 810.6,
+      "duration": 2.0,
+      "text": "I mean, we've seen those on the first exam."
+    },
+    {
+      "index": 173,
+      "start": 810.6,
+      "end": 815.244,
+      "duration": 4.644,
+      "text": "They were there, and most likely they will be on"
+    },
+    {
+      "index": 174,
+      "start": 815.244,
+      "end": 819.161,
+      "duration": 3.917,
+      "text": "the final. OK, so I mean that's the extent"
+    },
+    {
+      "index": 175,
+      "start": 819.161,
+      "end": 824.02,
+      "duration": 4.859,
+      "text": "to which Kepler's law comes up, only just knowing the general"
+    },
+    {
+      "index": 176,
+      "start": 824.02,
+      "end": 827.451,
+      "duration": 3.431,
+      "text": "type of manipulations and proving things with vector"
+    },
+    {
+      "index": 177,
+      "start": 827.451,
+      "end": 832.316,
+      "duration": 4.865,
+      "text": "quantities, but not again the actual"
+    },
+    {
+      "index": 178,
+      "start": 832.316,
+      "end": 838.62,
+      "duration": 6.304,
+      "text": "Kepler's law itself. I skipped something."
+    },
+    {
+      "index": 179,
+      "start": 838.62,
+      "end": 848.648,
+      "duration": 10.028,
+      "text": "I skipped matrices, determinants,"
+    },
+    {
+      "index": 180,
+      "start": 848.648,
+      "end": 858.265,
+      "duration": 9.617,
+      "text": "and linear systems. OK, so we've seen how to"
+    },
+    {
+      "index": 181,
+      "start": 858.265,
+      "end": 864.463,
+      "duration": 6.198,
+      "text": "multiply matrices, and how to write linear systems"
+    },
+    {
+      "index": 182,
+      "start": 864.463,
+      "end": 868.558,
+      "duration": 4.095,
+      "text": "in matrix form. So, remember,"
+    },
+    {
+      "index": 183,
+      "start": 868.558,
+      "end": 875.97,
+      "duration": 7.412,
+      "text": "if you have a 3x3 linear system in the usual sense,"
+    },
+    {
+      "index": 184,
+      "start": 875.97,
+      "end": 882.538,
+      "duration": 6.568,
+      "text": "so, you can write this in a matrix"
+    },
+    {
+      "index": 185,
+      "start": 882.538,
+      "end": 892.373,
+      "duration": 9.835,
+      "text": "form where you have a 3x3 matrix and you have an unknown column"
+    },
+    {
+      "index": 186,
+      "start": 892.373,
+      "end": 897.099,
+      "duration": 4.726,
+      "text": "vector. And, their matrix product"
+    },
+    {
+      "index": 187,
+      "start": 897.099,
+      "end": 901.62,
+      "duration": 4.521,
+      "text": "should be some given column vector."
+    },
+    {
+      "index": 188,
+      "start": 901.62,
+      "end": 904.737,
+      "duration": 3.117,
+      "text": "OK, so if you don't remember how to multiply matrices,"
+    },
+    {
+      "index": 189,
+      "start": 904.737,
+      "end": 907.149,
+      "duration": 2.412,
+      "text": "please look at the notes on that again."
+    },
+    {
+      "index": 190,
+      "start": 907.149,
+      "end": 912.49,
+      "duration": 5.341,
+      "text": "And, also you should remember how to invert a matrix."
+    },
+    {
+      "index": 191,
+      "start": 912.49,
+      "end": 922.872,
+      "duration": 10.382,
+      "text": "So, how did we invert matrices? Let me just remind you very"
+    },
+    {
+      "index": 192,
+      "start": 922.872,
+      "end": 930.575,
+      "duration": 7.703,
+      "text": "quickly. So, I should say 2x2 or 3x3"
+    },
+    {
+      "index": 193,
+      "start": 930.575,
+      "end": 933.868,
+      "duration": 3.293,
+      "text": "matrices. Well, you need to have a square"
+    },
+    {
+      "index": 194,
+      "start": 933.868,
+      "end": 935.509,
+      "duration": 1.641,
+      "text": "matrix to be able to find an inverse."
+    },
+    {
+      "index": 195,
+      "start": 935.509,
+      "end": 937.009,
+      "duration": 1.5,
+      "text": "The method doesn't work, doesn't make sense."
+    },
+    {
+      "index": 196,
+      "start": 937.009,
+      "end": 940.75,
+      "duration": 3.741,
+      "text": "Otherwise, then the concept of inverse doesn't work."
+    },
+    {
+      "index": 197,
+      "start": 940.75,
+      "end": 943.549,
+      "duration": 2.799,
+      "text": "And, if it's larger than 3x3, then we haven't seen that."
+    },
+    {
+      "index": 198,
+      "start": 943.549,
+      "end": 950.08,
+      "duration": 6.531,
+      "text": "So, let's say that I have a 3x3 matrix."
+    },
+    {
+      "index": 199,
+      "start": 950.08,
+      "end": 960.07,
+      "duration": 9.99,
+      "text": "What I will do is I will start by forming the matrix of minors."
+    },
+    {
+      "index": 200,
+      "start": 960.07,
+      "end": 969.124,
+      "duration": 9.054,
+      "text": "So, remember that minors, so, each entry is a 2x2"
+    },
+    {
+      "index": 201,
+      "start": 969.124,
+      "end": 980.631,
+      "duration": 11.507,
+      "text": "determinant in the case of a 3x3 matrix formed by deleting one"
+    },
+    {
+      "index": 202,
+      "start": 980.631,
+      "end": 986.39,
+      "duration": 5.759,
+      "text": "row and one column. OK, so for example,"
+    },
+    {
+      "index": 203,
+      "start": 986.39,
+      "end": 990.203,
+      "duration": 3.813,
+      "text": "to get the first minor, especially in the upper left"
+    },
+    {
+      "index": 204,
+      "start": 990.203,
+      "end": 994.539,
+      "duration": 4.336,
+      "text": "corner, I would delete the first row, the first column."
+    },
+    {
+      "index": 205,
+      "start": 994.539,
+      "end": 996.59,
+      "duration": 2.051,
+      "text": "And, I would be left with this 2x2 determinant."
+    },
+    {
+      "index": 206,
+      "start": 996.59,
+      "end": 998.46,
+      "duration": 1.87,
+      "text": "I take this times that minus this times that."
+    },
+    {
+      "index": 207,
+      "start": 998.46,
+      "end": 1001.39,
+      "duration": 2.93,
+      "text": "I get a number that gives my first minor."
+    },
+    {
+      "index": 208,
+      "start": 1001.39,
+      "end": 1009.411,
+      "duration": 8.021,
+      "text": "And then, same with the others. Then, I flip signs according to"
+    },
+    {
+      "index": 209,
+      "start": 1009.411,
+      "end": 1016.29,
+      "duration": 6.879,
+      "text": "this checkerboard pattern, and that gives me the matrix of"
+    },
+    {
+      "index": 210,
+      "start": 1016.29,
+      "end": 1020.862,
+      "duration": 4.572,
+      "text": "cofactors. OK, so all it means is I'm just"
+    },
+    {
+      "index": 211,
+      "start": 1020.862,
+      "end": 1026.868,
+      "duration": 6.006,
+      "text": "changing the signs of these four entries and leaving the others"
+    },
+    {
+      "index": 212,
+      "start": 1026.868,
+      "end": 1030.986,
+      "duration": 4.118,
+      "text": "alone. And then, I take the transpose"
+    },
+    {
+      "index": 213,
+      "start": 1030.986,
+      "end": 1033.625,
+      "duration": 2.639,
+      "text": "of that. So, that means I read it"
+    },
+    {
+      "index": 214,
+      "start": 1033.625,
+      "end": 1036.609,
+      "duration": 2.984,
+      "text": "horizontally and write it down vertically."
+    },
+    {
+      "index": 215,
+      "start": 1036.609,
+      "end": 1039.5,
+      "duration": 2.891,
+      "text": "I swept the rows and the columns."
+    },
+    {
+      "index": 216,
+      "start": 1039.5,
+      "end": 1043.789,
+      "duration": 4.289,
+      "text": "And then, I divide by the inverse."
+    },
+    {
+      "index": 217,
+      "start": 1043.789,
+      "end": 1048.364,
+      "duration": 4.575,
+      "text": "Well, I divide by the determinant of the initial"
+    },
+    {
+      "index": 218,
+      "start": 1048.364,
+      "end": 1050.075,
+      "duration": 1.711,
+      "text": "matrix. OK, so, of course,"
+    },
+    {
+      "index": 219,
+      "start": 1050.075,
+      "end": 1052.488,
+      "duration": 2.413,
+      "text": "this is kind of very theoretical, and I write it like"
+    },
+    {
+      "index": 220,
+      "start": 1052.488,
+      "end": 1054.702,
+      "duration": 2.214,
+      "text": "this. Probably it makes more sense to"
+    },
+    {
+      "index": 221,
+      "start": 1054.702,
+      "end": 1057.604,
+      "duration": 2.902,
+      "text": "do it on an example. I will let you work out"
+    },
+    {
+      "index": 222,
+      "start": 1057.604,
+      "end": 1062.137,
+      "duration": 4.533,
+      "text": "examples, or bug your recitation instructors so that they do one"
+    },
+    {
+      "index": 223,
+      "start": 1062.137,
+      "end": 1064.799,
+      "duration": 2.662,
+      "text": "on Monday if you want to see that."
+    },
+    {
+      "index": 224,
+      "start": 1064.799,
+      "end": 1067.089,
+      "duration": 2.29,
+      "text": "It's a fairly straightforward method."
+    },
+    {
+      "index": 225,
+      "start": 1067.089,
+      "end": 1070.339,
+      "duration": 3.25,
+      "text": "You just have to remember the steps."
+    },
+    {
+      "index": 226,
+      "start": 1070.339,
+      "end": 1072.851,
+      "duration": 2.512,
+      "text": "But, of course, there's one condition,"
+    },
+    {
+      "index": 227,
+      "start": 1072.851,
+      "end": 1077.059,
+      "duration": 4.208,
+      "text": "which is that the determinant of a matrix has to be nonzero."
+    },
+    {
+      "index": 228,
+      "start": 1077.059,
+      "end": 1079.698,
+      "duration": 2.639,
+      "text": "So, in fact, we've seen that,"
+    },
+    {
+      "index": 229,
+      "start": 1079.698,
+      "end": 1083.089,
+      "duration": 3.391,
+      "text": "oh, there is still one board left."
+    },
+    {
+      "index": 230,
+      "start": 1083.089,
+      "end": 1092.629,
+      "duration": 9.54,
+      "text": "We've seen that a matrix is invertible -- -- exactly when"
+    },
+    {
+      "index": 231,
+      "start": 1092.629,
+      "end": 1099.912,
+      "duration": 7.283,
+      "text": "its determinant is not zero. And, if that's the case,"
+    },
+    {
+      "index": 232,
+      "start": 1099.912,
+      "end": 1104.892,
+      "duration": 4.98,
+      "text": "then we can solve the linear system, AX equals B by just"
+    },
+    {
+      "index": 233,
+      "start": 1104.892,
+      "end": 1110.936,
+      "duration": 6.044,
+      "text": "setting X equals A inverse B. That's going to be the only"
+    },
+    {
+      "index": 234,
+      "start": 1110.936,
+      "end": 1118.823,
+      "duration": 7.887,
+      "text": "solution to our linear system. Otherwise, well,"
+    },
+    {
+      "index": 235,
+      "start": 1118.823,
+      "end": 1132.978,
+      "duration": 14.155,
+      "text": "AX equals B has either no solution, or infinitely many"
+    },
+    {
+      "index": 236,
+      "start": 1132.978,
+      "end": 1141.22,
+      "duration": 8.242,
+      "text": "solutions. Yes?"
+    },
+    {
+      "index": 237,
+      "start": 1141.22,
+      "end": 1144.059,
+      "duration": 2.839,
+      "text": "The determinant of a matrix real quick?"
+    },
+    {
+      "index": 238,
+      "start": 1144.059,
+      "end": 1148.951,
+      "duration": 4.892,
+      "text": "Well, I can do it that quickly unless I start waving my hands"
+    },
+    {
+      "index": 239,
+      "start": 1148.951,
+      "end": 1152.294,
+      "duration": 3.343,
+      "text": "very quickly, but remember we've seen that"
+    },
+    {
+      "index": 240,
+      "start": 1152.294,
+      "end": 1155.23,
+      "duration": 2.936,
+      "text": "you have a matrix, a 3x3 matrix."
+    },
+    {
+      "index": 241,
+      "start": 1155.23,
+      "end": 1158.438,
+      "duration": 3.208,
+      "text": "Its determinant will be obtained by doing an expansion"
+    },
+    {
+      "index": 242,
+      "start": 1158.438,
+      "end": 1160.799,
+      "duration": 2.361,
+      "text": "with respect to, well, your favorite."
+    },
+    {
+      "index": 243,
+      "start": 1160.799,
+      "end": 1162.796,
+      "duration": 1.997,
+      "text": "But usually, we are doing it with respect to"
+    },
+    {
+      "index": 244,
+      "start": 1162.796,
+      "end": 1166.316,
+      "duration": 3.52,
+      "text": "the first row. So, we take this entry and"
+    },
+    {
+      "index": 245,
+      "start": 1166.316,
+      "end": 1171.662,
+      "duration": 5.346,
+      "text": "multiply it by that determinant. Then, we take that entry,"
+    },
+    {
+      "index": 246,
+      "start": 1171.662,
+      "end": 1175.599,
+      "duration": 3.937,
+      "text": "multiply it by that determinant but put a minus sign."
+    },
+    {
+      "index": 247,
+      "start": 1175.599,
+      "end": 1178.6,
+      "duration": 3.001,
+      "text": "And then, we take that entry and multiply it by this"
+    },
+    {
+      "index": 248,
+      "start": 1178.6,
+      "end": 1181.13,
+      "duration": 2.53,
+      "text": "determinant here, and we put a plus sign for"
+    },
+    {
+      "index": 249,
+      "start": 1181.13,
+      "end": 1184.484,
+      "duration": 3.354,
+      "text": "that. OK, so maybe I should write it"
+    },
+    {
+      "index": 250,
+      "start": 1184.484,
+      "end": 1186.112,
+      "duration": 1.628,
+      "text": "down. That's actually the same"
+    },
+    {
+      "index": 251,
+      "start": 1186.112,
+      "end": 1188.15,
+      "duration": 2.038,
+      "text": "formula that we are using for cross products."
+    },
+    {
+      "index": 252,
+      "start": 1188.15,
+      "end": 1190.976,
+      "duration": 2.826,
+      "text": "Right, when we do cross products, we are doing an"
+    },
+    {
+      "index": 253,
+      "start": 1190.976,
+      "end": 1193.45,
+      "duration": 2.474,
+      "text": "expansion with respect to the first row."
+    },
+    {
+      "index": 254,
+      "start": 1193.45,
+      "end": 1197.561,
+      "duration": 4.111,
+      "text": "That's a special case. OK, I mean, do you still want"
+    },
+    {
+      "index": 255,
+      "start": 1197.561,
+      "end": 1199.88,
+      "duration": 2.319,
+      "text": "to see it in more details, or is that OK?"
+    },
+    {
+      "index": 256,
+      "start": 1199.88,
+      "end": 1212.779,
+      "duration": 12.899,
+      "text": "Yes? That's correct."
+    },
+    {
+      "index": 257,
+      "start": 1212.779,
+      "end": 1216.285,
+      "duration": 3.506,
+      "text": "So, if you do an expansion with respect to any row or column,"
+    },
+    {
+      "index": 258,
+      "start": 1216.285,
+      "end": 1219.148,
+      "duration": 2.863,
+      "text": "then you would use the same signs that are in this"
+    },
+    {
+      "index": 259,
+      "start": 1219.148,
+      "end": 1222.15,
+      "duration": 3.002,
+      "text": "checkerboard pattern there. So, if you did an expansion,"
+    },
+    {
+      "index": 260,
+      "start": 1222.15,
+      "end": 1225.0,
+      "duration": 2.85,
+      "text": "actually, so indeed, maybe I should say,"
+    },
+    {
+      "index": 261,
+      "start": 1225.0,
+      "end": 1228.333,
+      "duration": 3.333,
+      "text": "the more general way to determine it is you take your"
+    },
+    {
+      "index": 262,
+      "start": 1228.333,
+      "end": 1231.449,
+      "duration": 3.116,
+      "text": "favorite row or column, and you just multiply the"
+    },
+    {
+      "index": 263,
+      "start": 1231.449,
+      "end": 1234.579,
+      "duration": 3.13,
+      "text": "corresponding entries by the corresponding cofactors."
+    },
+    {
+      "index": 264,
+      "start": 1234.579,
+      "end": 1237.385,
+      "duration": 2.806,
+      "text": "So, the signs are plus or minus depending on what's in that"
+    },
+    {
+      "index": 265,
+      "start": 1237.385,
+      "end": 1238.991,
+      "duration": 1.606,
+      "text": "diagram there. Now, in practice,"
+    },
+    {
+      "index": 266,
+      "start": 1238.991,
+      "end": 1241.145,
+      "duration": 2.154,
+      "text": "in this class, again, all we need is to do it"
+    },
+    {
+      "index": 267,
+      "start": 1241.145,
+      "end": 1246.548,
+      "duration": 5.403,
+      "text": "with respect to the first row. So, don't worry about it too"
+    },
+    {
+      "index": 268,
+      "start": 1246.548,
+      "end": 1248.163,
+      "duration": 1.615,
+      "text": "much. OK, so, again,"
+    },
+    {
+      "index": 269,
+      "start": 1248.163,
+      "end": 1251.662,
+      "duration": 3.499,
+      "text": "the way that we've officially seen it in this class is just if"
+    },
+    {
+      "index": 270,
+      "start": 1251.662,
+      "end": 1259.769,
+      "duration": 8.107,
+      "text": "you have a1, a2, a3, b1, b2, b3, c1, c2, c3,"
+    },
+    {
+      "index": 271,
+      "start": 1259.769,
+      "end": 1266.21,
+      "duration": 6.441,
+      "text": "so if the determinant is a1 times b2 b3, c2 c3,"
+    },
+    {
+      "index": 272,
+      "start": 1266.21,
+      "end": 1276.069,
+      "duration": 9.859,
+      "text": "minus a2 b1 b3 c1 c3 plus a3 b1 b2 c1 c2."
+    },
+    {
+      "index": 273,
+      "start": 1276.069,
+      "end": 1280.799,
+      "duration": 4.73,
+      "text": "And, this minus is here basically because of the minus"
+    },
+    {
+      "index": 274,
+      "start": 1280.799,
+      "end": 1287.2,
+      "duration": 6.401,
+      "text": "in the diagram up there. But, that's all we need to know."
+    },
+    {
+      "index": 275,
+      "start": 1287.2,
+      "end": 1292.43,
+      "duration": 5.23,
+      "text": "Yes? How do you tell the difference"
+    },
+    {
+      "index": 276,
+      "start": 1292.43,
+      "end": 1294.54,
+      "duration": 2.11,
+      "text": "between infinitely many solutions or no solutions?"
+    },
+    {
+      "index": 277,
+      "start": 1294.54,
+      "end": 1297.592,
+      "duration": 3.052,
+      "text": "That's a very good question. So, in full generality,"
+    },
+    {
+      "index": 278,
+      "start": 1297.592,
+      "end": 1300.97,
+      "duration": 3.378,
+      "text": "the answer is we haven't quite seen a systematic method."
+    },
+    {
+      "index": 279,
+      "start": 1300.97,
+      "end": 1303.397,
+      "duration": 2.427,
+      "text": "So, you just have to try solving and see if you can find"
+    },
+    {
+      "index": 280,
+      "start": 1303.397,
+      "end": 1306.288,
+      "duration": 2.891,
+      "text": "a solution or not. So, let me actually explain"
+    },
+    {
+      "index": 281,
+      "start": 1306.288,
+      "end": 1311.3,
+      "duration": 5.012,
+      "text": "that more carefully. So, what happens to these two"
+    },
+    {
+      "index": 282,
+      "start": 1311.3,
+      "end": 1316.059,
+      "duration": 4.759,
+      "text": "situations when a is invertible or not?"
+    },
+    {
+      "index": 283,
+      "start": 1316.059,
+      "end": 1317.45,
+      "duration": 1.391,
+      "text": "So, remember, in the linear system,"
+    },
+    {
+      "index": 284,
+      "start": 1317.45,
+      "end": 1321.395,
+      "duration": 3.945,
+      "text": "you can think of a linear system as asking you to find the"
+    },
+    {
+      "index": 285,
+      "start": 1321.395,
+      "end": 1325.341,
+      "duration": 3.946,
+      "text": "intersection between three planes because each equation is"
+    },
+    {
+      "index": 286,
+      "start": 1325.341,
+      "end": 1332.664,
+      "duration": 7.323,
+      "text": "the equation of a plane. So, Ax = B for a 3x3 system"
+    },
+    {
+      "index": 287,
+      "start": 1332.664,
+      "end": 1344.63,
+      "duration": 11.966,
+      "text": "means that x should be in the intersection of three planes."
+    },
+    {
+      "index": 288,
+      "start": 1344.63,
+      "end": 1348.627,
+      "duration": 3.997,
+      "text": "And then, we have two cases. So, the case where the system"
+    },
+    {
+      "index": 289,
+      "start": 1348.627,
+      "end": 1353.341,
+      "duration": 4.714,
+      "text": "is invertible corresponds to the general situation where your"
+    },
+    {
+      "index": 290,
+      "start": 1353.341,
+      "end": 1357.74,
+      "duration": 4.399,
+      "text": "three planes somehow all just intersect in one point."
+    },
+    {
+      "index": 291,
+      "start": 1357.74,
+      "end": 1361.044,
+      "duration": 3.304,
+      "text": "And then, the situation where the determinant,"
+    },
+    {
+      "index": 292,
+      "start": 1361.044,
+      "end": 1365.155,
+      "duration": 4.111,
+      "text": "that's when the determinant is not zero, you get just one"
+    },
+    {
+      "index": 293,
+      "start": 1365.155,
+      "end": 1368.285,
+      "duration": 3.13,
+      "text": "point. However, sometimes it will"
+    },
+    {
+      "index": 294,
+      "start": 1368.285,
+      "end": 1374.089,
+      "duration": 5.804,
+      "text": "happen that all the planes are parallel to the same direction."
+    },
+    {
+      "index": 295,
+      "start": 1374.089,
+      "end": 1384.818,
+      "duration": 10.729,
+      "text": "So, determinant a equals zero means the three planes are"
+    },
+    {
+      "index": 296,
+      "start": 1384.818,
+      "end": 1391.141,
+      "duration": 6.323,
+      "text": "parallel to a same vector. And, in fact,"
+    },
+    {
+      "index": 297,
+      "start": 1391.141,
+      "end": 1394.72,
+      "duration": 3.579,
+      "text": "you can find that vector explicitly because that vector"
+    },
+    {
+      "index": 298,
+      "start": 1394.72,
+      "end": 1397.769,
+      "duration": 3.049,
+      "text": "has to be perpendicular to all the normals."
+    },
+    {
+      "index": 299,
+      "start": 1397.769,
+      "end": 1402.728,
+      "duration": 4.959,
+      "text": "So, at some point we saw other subtle things about how to find"
+    },
+    {
+      "index": 300,
+      "start": 1402.728,
+      "end": 1406.955,
+      "duration": 4.227,
+      "text": "the direction of this line that's parallel to all the"
+    },
+    {
+      "index": 301,
+      "start": 1406.955,
+      "end": 1410.392,
+      "duration": 3.437,
+      "text": "planes. So, now, this can happen either"
+    },
+    {
+      "index": 302,
+      "start": 1410.392,
+      "end": 1414.329,
+      "duration": 3.937,
+      "text": "with all three planes containing the same line."
+    },
+    {
+      "index": 303,
+      "start": 1414.329,
+      "end": 1416.509,
+      "duration": 2.18,
+      "text": "You know, they can all pass through the same axis."
+    },
+    {
+      "index": 304,
+      "start": 1416.509,
+      "end": 1419.674,
+      "duration": 3.165,
+      "text": "Or it could be that they have somehow shifted with respect to"
+    },
+    {
+      "index": 305,
+      "start": 1419.674,
+      "end": 1424.25,
+      "duration": 4.576,
+      "text": "each other. And so, it might look like this."
+    },
+    {
+      "index": 306,
+      "start": 1424.25,
+      "end": 1426.75,
+      "duration": 2.5,
+      "text": "Then, the last one is actually in front of that."
+    },
+    {
+      "index": 307,
+      "start": 1426.75,
+      "end": 1432.63,
+      "duration": 5.88,
+      "text": "So, see, the lines of intersections between two of the"
+    },
+    {
+      "index": 308,
+      "start": 1432.63,
+      "end": 1435.494,
+      "duration": 2.864,
+      "text": "planes, so, here they all pass through"
+    },
+    {
+      "index": 309,
+      "start": 1435.494,
+      "end": 1437.883,
+      "duration": 2.389,
+      "text": "the same line, and here, instead,"
+    },
+    {
+      "index": 310,
+      "start": 1437.883,
+      "end": 1440.63,
+      "duration": 2.747,
+      "text": "they intersect in one line here,"
+    },
+    {
+      "index": 311,
+      "start": 1440.63,
+      "end": 1443.39,
+      "duration": 2.76,
+      "text": "and one line there."
+    },
+    {
+      "index": 312,
+      "start": 1443.39,
+      "end": 1446.579,
+      "duration": 3.189,
+      "text": "And, there's no triple intersection."
+    },
+    {
+      "index": 313,
+      "start": 1446.579,
+      "end": 1448.859,
+      "duration": 2.28,
+      "text": "So, in general, we haven't really seen how to"
+    },
+    {
+      "index": 314,
+      "start": 1448.859,
+      "end": 1453.765,
+      "duration": 4.906,
+      "text": "decide between these two cases. There's one important situation"
+    },
+    {
+      "index": 315,
+      "start": 1453.765,
+      "end": 1460.362,
+      "duration": 6.597,
+      "text": "where we have seen we must be in the first case that when we have"
+    },
+    {
+      "index": 316,
+      "start": 1460.362,
+      "end": 1466.161,
+      "duration": 5.799,
+      "text": "a homogeneous system, so that means if the right hand"
+    },
+    {
+      "index": 317,
+      "start": 1466.161,
+      "end": 1471.029,
+      "duration": 4.868,
+      "text": "side is zero, then,"
+    },
+    {
+      "index": 318,
+      "start": 1471.029,
+      "end": 1481.75,
+      "duration": 10.721,
+      "text": "well, x equals zero is always a solution."
+    },
+    {
+      "index": 319,
+      "start": 1481.75,
+      "end": 1483.539,
+      "duration": 1.789,
+      "text": "It's called the trivial solution."
+    },
+    {
+      "index": 320,
+      "start": 1483.539,
+      "end": 1490.17,
+      "duration": 6.631,
+      "text": "It's the obvious one, if you want."
+    },
+    {
+      "index": 321,
+      "start": 1490.17,
+      "end": 1493.21,
+      "duration": 3.04,
+      "text": "So, you know that, and why is that?"
+    },
+    {
+      "index": 322,
+      "start": 1493.21,
+      "end": 1497.225,
+      "duration": 4.015,
+      "text": "Well, that's because all of your planes have to pass through"
+    },
+    {
+      "index": 323,
+      "start": 1497.225,
+      "end": 1500.162,
+      "duration": 2.937,
+      "text": "the origin. So, you must be in this case if"
+    },
+    {
+      "index": 324,
+      "start": 1500.162,
+      "end": 1504.07,
+      "duration": 3.908,
+      "text": "you have a noninvertible system where the right hand side is"
+    },
+    {
+      "index": 325,
+      "start": 1504.07,
+      "end": 1505.667,
+      "duration": 1.597,
+      "text": "zero. So, in that case,"
+    },
+    {
+      "index": 326,
+      "start": 1505.667,
+      "end": 1508.87,
+      "duration": 3.203,
+      "text": "if the right hand side is zero, there's two cases."
+    },
+    {
+      "index": 327,
+      "start": 1508.87,
+      "end": 1512.305,
+      "duration": 3.435,
+      "text": "Either the matrix is invertible. Then, the only solution is the"
+    },
+    {
+      "index": 328,
+      "start": 1512.305,
+      "end": 1514.885,
+      "duration": 2.58,
+      "text": "trivial one. Or, if a matrix is not"
+    },
+    {
+      "index": 329,
+      "start": 1514.885,
+      "end": 1519.329,
+      "duration": 4.444,
+      "text": "invertible, then you have infinitely many solutions."
+    },
+    {
+      "index": 330,
+      "start": 1519.329,
+      "end": 1523.922,
+      "duration": 4.593,
+      "text": "If B is not zero, then we haven't really seen how"
+    },
+    {
+      "index": 331,
+      "start": 1523.922,
+      "end": 1527.099,
+      "duration": 3.177,
+      "text": "to decide. We've just seen how to decide"
+    },
+    {
+      "index": 332,
+      "start": 1527.099,
+      "end": 1530.18,
+      "duration": 3.081,
+      "text": "between one solution or zero,infinitely many,"
+    },
+    {
+      "index": 333,
+      "start": 1530.18,
+      "end": 1533.96,
+      "duration": 3.78,
+      "text": "but not how to decide between these last two cases."
+    },
+    {
+      "index": 334,
+      "start": 1533.96,
+      "end": 1542.059,
+      "duration": 8.099,
+      "text": "Yes? I think in principle,"
+    },
+    {
+      "index": 335,
+      "start": 1542.059,
+      "end": 1544.917,
+      "duration": 2.858,
+      "text": "you would be able to, but that's, well,"
+    },
+    {
+      "index": 336,
+      "start": 1544.917,
+      "end": 1548.978,
+      "duration": 4.061,
+      "text": "I mean, that's a slightly counterintuitive way of doing"
+    },
+    {
+      "index": 337,
+      "start": 1548.978,
+      "end": 1550.859,
+      "duration": 1.881,
+      "text": "it. I think it would probably work."
+    },
+    {
+      "index": 338,
+      "start": 1550.859,
+      "end": 1555.94,
+      "duration": 5.081,
+      "text": "Well, I'll let you figure it out."
+    },
+    {
+      "index": 339,
+      "start": 1555.94,
+      "end": 1559.155,
+      "duration": 3.215,
+      "text": "OK, let me move on to the second unit, maybe,"
+    },
+    {
+      "index": 340,
+      "start": 1559.155,
+      "end": 1563.102,
+      "duration": 3.947,
+      "text": "because we've seen a lot of stuff, or was there a quick"
+    },
+    {
+      "index": 341,
+      "start": 1563.102,
+      "end": 1565.63,
+      "duration": 2.528,
+      "text": "question before that? OK."
+    },
+    {
+      "index": 342,
+      "start": 1601.009,
+      "end": 1604.759,
+      "duration": 3.75,
+      "text": "OK, so what was the second part of the class about?"
+    },
+    {
+      "index": 343,
+      "start": 1604.759,
+      "end": 1607.616,
+      "duration": 2.857,
+      "text": "Well, hopefully you kind of vaguely remember that it was"
+    },
+    {
+      "index": 344,
+      "start": 1607.616,
+      "end": 1610.369,
+      "duration": 2.753,
+      "text": "about functions of several variables and their partial"
+    },
+    {
+      "index": 345,
+      "start": 1610.369,
+      "end": 1615.425,
+      "duration": 5.056,
+      "text": "derivatives. OK, so the first thing that"
+    },
+    {
+      "index": 346,
+      "start": 1615.425,
+      "end": 1624.971,
+      "duration": 9.546,
+      "text": "we've seen is how to actually view a function of two variables"
+    },
+    {
+      "index": 347,
+      "start": 1624.971,
+      "end": 1632.17,
+      "duration": 7.199,
+      "text": "in terms of its graph and its contour plot."
+    },
+    {
+      "index": 348,
+      "start": 1632.17,
+      "end": 1635.006,
+      "duration": 2.836,
+      "text": "So, just to remind you very"
+    },
+    {
+      "index": 349,
+      "start": 1635.006,
+      "end": 1637.7,
+      "duration": 2.694,
+      "text": "quickly, if I have a function of two"
+    },
+    {
+      "index": 350,
+      "start": 1637.7,
+      "end": 1641.865,
+      "duration": 4.165,
+      "text": "variables, x and y, then the graph will be just the"
+    },
+    {
+      "index": 351,
+      "start": 1641.865,
+      "end": 1645.869,
+      "duration": 4.004,
+      "text": "surface given by the equation z equals f of xy."
+    },
+    {
+      "index": 352,
+      "start": 1645.869,
+      "end": 1648.674,
+      "duration": 2.805,
+      "text": "So, for each x and y, I plot a point at height given"
+    },
+    {
+      "index": 353,
+      "start": 1648.674,
+      "end": 1650.599,
+      "duration": 1.925,
+      "text": "with the value of the a function."
+    },
+    {
+      "index": 354,
+      "start": 1650.599,
+      "end": 1654.918,
+      "duration": 4.319,
+      "text": "And then, the contour plot will be the topographical map for"
+    },
+    {
+      "index": 355,
+      "start": 1654.918,
+      "end": 1657.561,
+      "duration": 2.643,
+      "text": "this graph. It will tell us,"
+    },
+    {
+      "index": 356,
+      "start": 1657.561,
+      "end": 1661.579,
+      "duration": 4.018,
+      "text": "what are the various levels in there?"
+    },
+    {
+      "index": 357,
+      "start": 1661.579,
+      "end": 1666.045,
+      "duration": 4.466,
+      "text": "So, what it amounts to is we slice the graph by horizontal"
+    },
+    {
+      "index": 358,
+      "start": 1666.045,
+      "end": 1670.667,
+      "duration": 4.622,
+      "text": "planes, and we get a bunch of curves which are the points at"
+    },
+    {
+      "index": 359,
+      "start": 1670.667,
+      "end": 1676.351,
+      "duration": 5.684,
+      "text": "given height on the plot. And, so we get all of these"
+    },
+    {
+      "index": 360,
+      "start": 1676.351,
+      "end": 1684.059,
+      "duration": 7.708,
+      "text": "curves, and then we look at them from above, and that gives us"
+    },
+    {
+      "index": 361,
+      "start": 1684.059,
+      "end": 1689.24,
+      "duration": 5.181,
+      "text": "this map with a bunch of curves on it."
+    },
+    {
+      "index": 362,
+      "start": 1689.24,
+      "end": 1693.119,
+      "duration": 3.879,
+      "text": "And, each of them has a number next to it which tells us the"
+    },
+    {
+      "index": 363,
+      "start": 1693.119,
+      "end": 1696.24,
+      "duration": 3.121,
+      "text": "value of a function there. And, from that map, we can,"
+    },
+    {
+      "index": 364,
+      "start": 1696.24,
+      "end": 1699.966,
+      "duration": 3.726,
+      "text": "of course, tell things about where we might be able to find"
+    },
+    {
+      "index": 365,
+      "start": 1699.966,
+      "end": 1702.279,
+      "duration": 2.313,
+      "text": "minima or maxima of our function,"
+    },
+    {
+      "index": 366,
+      "start": 1702.279,
+      "end": 1710.039,
+      "duration": 7.76,
+      "text": "and how it varies with respect to x or y or actually in any"
+    },
+    {
+      "index": 367,
+      "start": 1710.039,
+      "end": 1720.029,
+      "duration": 9.99,
+      "text": "direction at a given point. So, now, the next thing that"
+    },
+    {
+      "index": 368,
+      "start": 1720.029,
+      "end": 1729.63,
+      "duration": 9.601,
+      "text": "we've learned about is partial derivatives."
+    },
+    {
+      "index": 369,
+      "start": 1729.63,
+      "end": 1732.016,
+      "duration": 2.386,
+      "text": "So, for a function of two variables, there would be two of"
+    },
+    {
+      "index": 370,
+      "start": 1732.016,
+      "end": 1734.183,
+      "duration": 2.167,
+      "text": "them. There's f sub x which is"
+    },
+    {
+      "index": 371,
+      "start": 1734.183,
+      "end": 1738.085,
+      "duration": 3.902,
+      "text": "partial f partial x, and f sub y which is partial f"
+    },
+    {
+      "index": 372,
+      "start": 1738.085,
+      "end": 1740.599,
+      "duration": 2.514,
+      "text": "partial y. And, in terms of a graph,"
+    },
+    {
+      "index": 373,
+      "start": 1740.599,
+      "end": 1744.754,
+      "duration": 4.155,
+      "text": "they correspond to slicing by a plane that's parallel to one of"
+    },
+    {
+      "index": 374,
+      "start": 1744.754,
+      "end": 1747.595,
+      "duration": 2.841,
+      "text": "the coordinate planes, so that we either keep x"
+    },
+    {
+      "index": 375,
+      "start": 1747.595,
+      "end": 1750.029,
+      "duration": 2.434,
+      "text": "constant, or keep y constant."
+    },
+    {
+      "index": 376,
+      "start": 1750.029,
+      "end": 1754.22,
+      "duration": 4.191,
+      "text": "And, we look at the slope of a graph to see the rate of change"
+    },
+    {
+      "index": 377,
+      "start": 1754.22,
+      "end": 1757.93,
+      "duration": 3.71,
+      "text": "of f with respect to one variable only when we hold the"
+    },
+    {
+      "index": 378,
+      "start": 1757.93,
+      "end": 1761.245,
+      "duration": 3.315,
+      "text": "other one constant. And so, we've seen in"
+    },
+    {
+      "index": 379,
+      "start": 1761.245,
+      "end": 1765.13,
+      "duration": 3.885,
+      "text": "particular how to use that in various places,"
+    },
+    {
+      "index": 380,
+      "start": 1765.13,
+      "end": 1769.408,
+      "duration": 4.278,
+      "text": "but, for example, for linear approximation we've"
+    },
+    {
+      "index": 381,
+      "start": 1769.408,
+      "end": 1774.687,
+      "duration": 5.279,
+      "text": "seen that the change in f is approximately equal to f sub x"
+    },
+    {
+      "index": 382,
+      "start": 1774.687,
+      "end": 1780.24,
+      "duration": 5.553,
+      "text": "times the change in x plus f sub y times the change in y."
+    },
+    {
+      "index": 383,
+      "start": 1780.24,
+      "end": 1785.28,
+      "duration": 5.04,
+      "text": "So, you can think of f sub x and f sub y as telling you how"
+    },
+    {
+      "index": 384,
+      "start": 1785.28,
+      "end": 1789.799,
+      "duration": 4.519,
+      "text": "sensitive the value of f is to changes in x and y."
+    },
+    {
+      "index": 385,
+      "start": 1789.799,
+      "end": 1799.546,
+      "duration": 9.747,
+      "text": "So, this linear approximation also tells us about the tangent"
+    },
+    {
+      "index": 386,
+      "start": 1799.546,
+      "end": 1807.976,
+      "duration": 8.43,
+      "text": "plane to the graph of f. In fact, when we turn this into"
+    },
+    {
+      "index": 387,
+      "start": 1807.976,
+      "end": 1816.118,
+      "duration": 8.142,
+      "text": "an equality, that would mean that we replace f by the tangent"
+    },
+    {
+      "index": 388,
+      "start": 1816.118,
+      "end": 1819.347,
+      "duration": 3.229,
+      "text": "plane. We've also learned various ways"
+    },
+    {
+      "index": 389,
+      "start": 1819.347,
+      "end": 1821.419,
+      "duration": 2.072,
+      "text": "of, before I go on, I should say,"
+    },
+    {
+      "index": 390,
+      "start": 1821.419,
+      "end": 1824.915,
+      "duration": 3.496,
+      "text": "of course, we've seen these also for functions of three"
+    },
+    {
+      "index": 391,
+      "start": 1824.915,
+      "end": 1828.513,
+      "duration": 3.598,
+      "text": "variables, right? So, we haven't seen how to plot"
+    },
+    {
+      "index": 392,
+      "start": 1828.513,
+      "end": 1832.23,
+      "duration": 3.717,
+      "text": "them, and we don't really worry about that too much."
+    },
+    {
+      "index": 393,
+      "start": 1832.23,
+      "end": 1837.451,
+      "duration": 5.221,
+      "text": "But, if you have a function of three variables,"
+    },
+    {
+      "index": 394,
+      "start": 1837.451,
+      "end": 1842.559,
+      "duration": 5.108,
+      "text": "you can do the same kinds of manipulations."
+    },
+    {
+      "index": 395,
+      "start": 1842.559,
+      "end": 1849.44,
+      "duration": 6.881,
+      "text": "So, we've learned about differentials and chain rules,"
+    },
+    {
+      "index": 396,
+      "start": 1849.44,
+      "end": 1857.099,
+      "duration": 7.659,
+      "text": "which are a way of repackaging these partial derivatives."
+    },
+    {
+      "index": 397,
+      "start": 1857.099,
+      "end": 1860.766,
+      "duration": 3.667,
+      "text": "So, the differential is just, by definition,"
+    },
+    {
+      "index": 398,
+      "start": 1860.766,
+      "end": 1865.711,
+      "duration": 4.945,
+      "text": "this thing called df which is f sub x times dx plus f sub y"
+    },
+    {
+      "index": 399,
+      "start": 1865.711,
+      "end": 1869.557,
+      "duration": 3.846,
+      "text": "times dy. And, what we can do with it is"
+    },
+    {
+      "index": 400,
+      "start": 1869.557,
+      "end": 1874.03,
+      "duration": 4.473,
+      "text": "just either plug values for changes in x and y,"
+    },
+    {
+      "index": 401,
+      "start": 1874.03,
+      "end": 1877.903,
+      "duration": 3.873,
+      "text": "and get approximation formulas, or we can look at this in a"
+    },
+    {
+      "index": 402,
+      "start": 1877.903,
+      "end": 1881.29,
+      "duration": 3.387,
+      "text": "situation where x and y will depend on something else,"
+    },
+    {
+      "index": 403,
+      "start": 1881.29,
+      "end": 1886.64,
+      "duration": 5.35,
+      "text": "and we get a chain rule. So, for example,"
+    },
+    {
+      "index": 404,
+      "start": 1886.64,
+      "end": 1892.519,
+      "duration": 5.879,
+      "text": "if f is a function of t time, for example, and so is y,"
+    },
+    {
+      "index": 405,
+      "start": 1892.519,
+      "end": 1896.28,
+      "duration": 3.761,
+      "text": "then we can find the rate of change of f with respect to t"
+    },
+    {
+      "index": 406,
+      "start": 1896.28,
+      "end": 1903.334,
+      "duration": 7.054,
+      "text": "just by dividing this by dt. So, we get df dt equals f sub x"
+    },
+    {
+      "index": 407,
+      "start": 1903.334,
+      "end": 1908.97,
+      "duration": 5.636,
+      "text": "dx dt plus f sub y dy dt. We can also get other chain"
+    },
+    {
+      "index": 408,
+      "start": 1908.97,
+      "end": 1911.324,
+      "duration": 2.354,
+      "text": "rules, say, if x and y depend on more"
+    },
+    {
+      "index": 409,
+      "start": 1911.324,
+      "end": 1914.433,
+      "duration": 3.109,
+      "text": "than one variable, if you have a change of"
+    },
+    {
+      "index": 410,
+      "start": 1914.433,
+      "end": 1915.986,
+      "duration": 1.553,
+      "text": "variables, for example,"
+    },
+    {
+      "index": 411,
+      "start": 1915.986,
+      "end": 1918.916,
+      "duration": 2.93,
+      "text": "x and y are functions of two other guys that you call u and"
+    },
+    {
+      "index": 412,
+      "start": 1918.916,
+      "end": 1921.269,
+      "duration": 2.353,
+      "text": "v, then you can express dx and dy"
+    },
+    {
+      "index": 413,
+      "start": 1921.269,
+      "end": 1925.098,
+      "duration": 3.829,
+      "text": "in terms of du and dv, and plugging into df you will"
+    },
+    {
+      "index": 414,
+      "start": 1925.098,
+      "end": 1928.569,
+      "duration": 3.471,
+      "text": "get the manner in which f depends on u and v."
+    },
+    {
+      "index": 415,
+      "start": 1928.569,
+      "end": 1931.442,
+      "duration": 2.873,
+      "text": "So, that will give you formulas for partial f partial u,"
+    },
+    {
+      "index": 416,
+      "start": 1931.442,
+      "end": 1934.935,
+      "duration": 3.493,
+      "text": "and partial f partial v. They look just like these guys"
+    },
+    {
+      "index": 417,
+      "start": 1934.935,
+      "end": 1939.063,
+      "duration": 4.128,
+      "text": "except there's a lot of curly d's instead of straight ones,"
+    },
+    {
+      "index": 418,
+      "start": 1939.063,
+      "end": 1941.839,
+      "duration": 2.776,
+      "text": "and u's and v's in the denominators."
+    },
+    {
+      "index": 419,
+      "start": 1941.839,
+      "end": 1946.089,
+      "duration": 4.25,
+      "text": "OK, so that lets us understand rates of change."
+    },
+    {
+      "index": 420,
+      "start": 1946.089,
+      "end": 1951.053,
+      "duration": 4.964,
+      "text": "We've also seen yet another way to package partial derivatives"
+    },
+    {
+      "index": 421,
+      "start": 1951.053,
+      "end": 1953.982,
+      "duration": 2.929,
+      "text": "into not a differential, but instead,"
+    },
+    {
+      "index": 422,
+      "start": 1953.982,
+      "end": 1957.261,
+      "duration": 3.279,
+      "text": "a vector. That's the gradient vector,"
+    },
+    {
+      "index": 423,
+      "start": 1957.261,
+      "end": 1961.952,
+      "duration": 4.691,
+      "text": "and I'm sure it was quite mysterious when we first saw it,"
+    },
+    {
+      "index": 424,
+      "start": 1961.952,
+      "end": 1965.573,
+      "duration": 3.621,
+      "text": "but hopefully by now, well, it should be less"
+    },
+    {
+      "index": 425,
+      "start": 1965.573,
+      "end": 1966.89,
+      "duration": 1.317,
+      "text": "mysterious."
+    },
+    {
+      "index": 426,
+      "start": 1987.299,
+      "end": 1994.345,
+      "duration": 7.046,
+      "text": "OK, so we've learned about the gradient vector which is del f"
+    },
+    {
+      "index": 427,
+      "start": 1994.345,
+      "end": 2001.859,
+      "duration": 7.514,
+      "text": "is a vector whose components are just the partial derivatives."
+    },
+    {
+      "index": 428,
+      "start": 2001.859,
+      "end": 2006.175,
+      "duration": 4.316,
+      "text": "So, if I have a function of just two variables,"
+    },
+    {
+      "index": 429,
+      "start": 2006.175,
+      "end": 2009.73,
+      "duration": 3.555,
+      "text": "then it's just this. And,"
+    },
+    {
+      "index": 430,
+      "start": 2009.73,
+      "end": 2017.078,
+      "duration": 7.348,
+      "text": "so one observation that we've made is that if you look at a"
+    },
+    {
+      "index": 431,
+      "start": 2017.078,
+      "end": 2024.124,
+      "duration": 7.046,
+      "text": "contour plot of your function, so maybe your function is zero,"
+    },
+    {
+      "index": 432,
+      "start": 2024.124,
+      "end": 2027.218,
+      "duration": 3.094,
+      "text": "one, and two, then the gradient vector is"
+    },
+    {
+      "index": 433,
+      "start": 2027.218,
+      "end": 2029.94,
+      "duration": 2.722,
+      "text": "always perpendicular to the contour plot,"
+    },
+    {
+      "index": 434,
+      "start": 2029.94,
+      "end": 2034.18,
+      "duration": 4.24,
+      "text": "and always points towards higher ground."
+    },
+    {
+      "index": 435,
+      "start": 2034.18,
+      "end": 2042.67,
+      "duration": 8.49,
+      "text": "OK, so the reason for that was that if you take any direction,"
+    },
+    {
+      "index": 436,
+      "start": 2042.67,
+      "end": 2044.69,
+      "duration": 2.02,
+      "text": "you can measure the directional derivative,"
+    },
+    {
+      "index": 437,
+      "start": 2044.69,
+      "end": 2052.79,
+      "duration": 8.1,
+      "text": "which means the rate of change of f in that direction."
+    },
+    {
+      "index": 438,
+      "start": 2052.79,
+      "end": 2060.636,
+      "duration": 7.846,
+      "text": "So, given a unit vector, u, which represents some"
+    },
+    {
+      "index": 439,
+      "start": 2060.636,
+      "end": 2064.682,
+      "duration": 4.046,
+      "text": "direction, so for example let's say I"
+    },
+    {
+      "index": 440,
+      "start": 2064.682,
+      "end": 2069.74,
+      "duration": 5.058,
+      "text": "decide that I want to go in this direction,"
+    },
+    {
+      "index": 441,
+      "start": 2069.74,
+      "end": 2072.692,
+      "duration": 2.952,
+      "text": "and I ask myself, how quickly will f change if I"
+    },
+    {
+      "index": 442,
+      "start": 2072.692,
+      "end": 2076.159,
+      "duration": 3.467,
+      "text": "start from here and I start moving towards that direction?"
+    },
+    {
+      "index": 443,
+      "start": 2076.159,
+      "end": 2078.973,
+      "duration": 2.814,
+      "text": "Well, the answer seems to be, it will start to increase a"
+    },
+    {
+      "index": 444,
+      "start": 2078.973,
+      "end": 2081.787,
+      "duration": 2.814,
+      "text": "bit, and maybe at some point later on something else will"
+    },
+    {
+      "index": 445,
+      "start": 2081.787,
+      "end": 2085.45,
+      "duration": 3.663,
+      "text": "happen. But at first, it will increase."
+    },
+    {
+      "index": 446,
+      "start": 2085.45,
+      "end": 2088.734,
+      "duration": 3.284,
+      "text": "So, the directional derivative is"
+    },
+    {
+      "index": 447,
+      "start": 2088.734,
+      "end": 2093.07,
+      "duration": 4.336,
+      "text": "what we've called f by ds in the direction of this unit vector,"
+    },
+    {
+      "index": 448,
+      "start": 2093.07,
+      "end": 2096.619,
+      "duration": 3.549,
+      "text": "and basically the only thing we know to be able to compute it,"
+    },
+    {
+      "index": 449,
+      "start": 2096.619,
+      "end": 2100.078,
+      "duration": 3.459,
+      "text": "the only thing we need is that it's the dot product between the"
+    },
+    {
+      "index": 450,
+      "start": 2100.078,
+      "end": 2102.599,
+      "duration": 2.521,
+      "text": "gradient and this vector u hat. In particular,"
+    },
+    {
+      "index": 451,
+      "start": 2102.599,
+      "end": 2105.561,
+      "duration": 2.962,
+      "text": "the directional derivatives in the direction of I hat or j hat"
+    },
+    {
+      "index": 452,
+      "start": 2105.561,
+      "end": 2107.6,
+      "duration": 2.039,
+      "text": "are just the usual partial derivatives."
+    },
+    {
+      "index": 453,
+      "start": 2107.6,
+      "end": 2112.294,
+      "duration": 4.694,
+      "text": "That's what you would expect. OK, and so now you see in"
+    },
+    {
+      "index": 454,
+      "start": 2112.294,
+      "end": 2115.504,
+      "duration": 3.21,
+      "text": "particular if you try to go in a direction that's perpendicular"
+    },
+    {
+      "index": 455,
+      "start": 2115.504,
+      "end": 2118.4,
+      "duration": 2.896,
+      "text": "to the gradient, then the directional derivative"
+    },
+    {
+      "index": 456,
+      "start": 2118.4,
+      "end": 2121.76,
+      "duration": 3.36,
+      "text": "will be zero because you are moving on the level curve."
+    },
+    {
+      "index": 457,
+      "start": 2121.76,
+      "end": 2127.6,
+      "duration": 5.84,
+      "text": "So, the value doesn't change, OK?"
+    },
+    {
+      "index": 458,
+      "start": 2127.6,
+      "end": 2145.969,
+      "duration": 18.369,
+      "text": "Questions about that? Yes?"
+    },
+    {
+      "index": 459,
+      "start": 2145.969,
+      "end": 2149.829,
+      "duration": 3.86,
+      "text": "Yeah, so let's see, so indeed to look at more"
+    },
+    {
+      "index": 460,
+      "start": 2149.829,
+      "end": 2152.81,
+      "duration": 2.981,
+      "text": "recent things, if you are taking the flux"
+    },
+    {
+      "index": 461,
+      "start": 2152.81,
+      "end": 2155.159,
+      "duration": 2.349,
+      "text": "through something given by an equation,"
+    },
+    {
+      "index": 462,
+      "start": 2155.159,
+      "end": 2159.29,
+      "duration": 4.131,
+      "text": "so, if you have a surface given by an equation,"
+    },
+    {
+      "index": 463,
+      "start": 2159.29,
+      "end": 2165.481,
+      "duration": 6.191,
+      "text": "say, f equals one. So, say that you have a surface"
+    },
+    {
+      "index": 464,
+      "start": 2165.481,
+      "end": 2168.93,
+      "duration": 3.449,
+      "text": "here or a curve given by an equation,"
+    },
+    {
+      "index": 465,
+      "start": 2168.93,
+      "end": 2174.28,
+      "duration": 5.35,
+      "text": "f equals constant, then the normal vector to the"
+    },
+    {
+      "index": 466,
+      "start": 2174.28,
+      "end": 2179.849,
+      "duration": 5.569,
+      "text": "surface is given by taking the gradient of f."
+    },
+    {
+      "index": 467,
+      "start": 2179.849,
+      "end": 2182.375,
+      "duration": 2.526,
+      "text": "And that is, in general, not a unit normal"
+    },
+    {
+      "index": 468,
+      "start": 2182.375,
+      "end": 2184.607,
+      "duration": 2.232,
+      "text": "vector. Now, if you wanted the unit"
+    },
+    {
+      "index": 469,
+      "start": 2184.607,
+      "end": 2188.334,
+      "duration": 3.727,
+      "text": "normal vector to compute flux, then you would just scale this"
+    },
+    {
+      "index": 470,
+      "start": 2188.334,
+      "end": 2190.26,
+      "duration": 1.926,
+      "text": "guy down to unit length, OK?"
+    },
+    {
+      "index": 471,
+      "start": 2190.26,
+      "end": 2193.725,
+      "duration": 3.465,
+      "text": "So, if you wanted a unit normal, that would be the"
+    },
+    {
+      "index": 472,
+      "start": 2193.725,
+      "end": 2197.111,
+      "duration": 3.386,
+      "text": "gradient divided by its length. However, for flux,"
+    },
+    {
+      "index": 473,
+      "start": 2197.111,
+      "end": 2200.089,
+      "duration": 2.978,
+      "text": "that's still of limited usefulness because you would"
+    },
+    {
+      "index": 474,
+      "start": 2200.089,
+      "end": 2202.832,
+      "duration": 2.743,
+      "text": "still need to know about ds. But, remember,"
+    },
+    {
+      "index": 475,
+      "start": 2202.832,
+      "end": 2206.695,
+      "duration": 3.863,
+      "text": "we've seen a formula for flux in terms of a non-unit normal"
+    },
+    {
+      "index": 476,
+      "start": 2206.695,
+      "end": 2212.302,
+      "duration": 5.607,
+      "text": "vector, and n over n dot kdxdy. So, indeed, this is how you"
+    },
+    {
+      "index": 477,
+      "start": 2212.302,
+      "end": 2218.368,
+      "duration": 6.066,
+      "text": "could actually handle calculations of flux through"
+    },
+    {
+      "index": 478,
+      "start": 2218.368,
+      "end": 2229.67,
+      "duration": 11.302,
+      "text": "pretty much anything. Any other questions about that?"
+    },
+    {
+      "index": 479,
+      "start": 2229.67,
+      "end": 2239.201,
+      "duration": 9.531,
+      "text": "OK, so let me continue with a couple more things we need to,"
+    },
+    {
+      "index": 480,
+      "start": 2239.201,
+      "end": 2245.824,
+      "duration": 6.623,
+      "text": "so, we've seen how to do min/max problems,"
+    },
+    {
+      "index": 481,
+      "start": 2245.824,
+      "end": 2253.739,
+      "duration": 7.915,
+      "text": "in particular, by looking at critical points."
+    },
+    {
+      "index": 482,
+      "start": 2253.739,
+      "end": 2255.723,
+      "duration": 1.984,
+      "text": "So, critical points, remember, are the points where"
+    },
+    {
+      "index": 483,
+      "start": 2255.723,
+      "end": 2257.269,
+      "duration": 1.546,
+      "text": "all the partial derivatives are zero."
+    },
+    {
+      "index": 484,
+      "start": 2257.269,
+      "end": 2260.487,
+      "duration": 3.218,
+      "text": "So, if you prefer, that's where the gradient"
+    },
+    {
+      "index": 485,
+      "start": 2260.487,
+      "end": 2265.096,
+      "duration": 4.609,
+      "text": "vector is zero. And, we know how to decide"
+    },
+    {
+      "index": 486,
+      "start": 2265.096,
+      "end": 2272.668,
+      "duration": 7.572,
+      "text": "using the second derivative test whether a critical point is"
+    },
+    {
+      "index": 487,
+      "start": 2272.668,
+      "end": 2277.288,
+      "duration": 4.62,
+      "text": "going to be a local min, a local max,"
+    },
+    {
+      "index": 488,
+      "start": 2277.288,
+      "end": 2282.178,
+      "duration": 4.89,
+      "text": "or a saddle point. Actually, we can't always quite"
+    },
+    {
+      "index": 489,
+      "start": 2282.178,
+      "end": 2285.055,
+      "duration": 2.877,
+      "text": "decide because, remember, we look at the second"
+    },
+    {
+      "index": 490,
+      "start": 2285.055,
+      "end": 2288.869,
+      "duration": 3.814,
+      "text": "partials, and we compute this quantity ac minus b squared."
+    },
+    {
+      "index": 491,
+      "start": 2288.869,
+      "end": 2290.966,
+      "duration": 2.097,
+      "text": "And, if it happens to be zero, then actually we can't"
+    },
+    {
+      "index": 492,
+      "start": 2290.966,
+      "end": 2293.576,
+      "duration": 2.61,
+      "text": "conclude. But, most of the time we can"
+    },
+    {
+      "index": 493,
+      "start": 2293.576,
+      "end": 2296.803,
+      "duration": 3.227,
+      "text": "conclude. However, that's not all we need"
+    },
+    {
+      "index": 494,
+      "start": 2296.803,
+      "end": 2300.84,
+      "duration": 4.037,
+      "text": "to look for an absolute global maximum or minimum."
+    },
+    {
+      "index": 495,
+      "start": 2300.84,
+      "end": 2303.944,
+      "duration": 3.104,
+      "text": "For that, we also need to check the boundary points,"
+    },
+    {
+      "index": 496,
+      "start": 2303.944,
+      "end": 2307.17,
+      "duration": 3.226,
+      "text": "or look at the behavior of a function, at infinity."
+    },
+    {
+      "index": 497,
+      "start": 2307.17,
+      "end": 2318.257,
+      "duration": 11.087,
+      "text": "So, we also need to check the values of f at the boundary of"
+    },
+    {
+      "index": 498,
+      "start": 2318.257,
+      "end": 2326.15,
+      "duration": 7.893,
+      "text": "its domain of definition or at infinity."
+    },
+    {
+      "index": 499,
+      "start": 2326.15,
+      "end": 2328.44,
+      "duration": 2.29,
+      "text": "Just to give you an example from single variable calculus,"
+    },
+    {
+      "index": 500,
+      "start": 2328.44,
+      "end": 2331.981,
+      "duration": 3.541,
+      "text": "if you are trying to find the minimum and the maximum of f of"
+    },
+    {
+      "index": 501,
+      "start": 2331.981,
+      "end": 2335.068,
+      "duration": 3.087,
+      "text": "x equals x squared, well, you'll find quickly that"
+    },
+    {
+      "index": 502,
+      "start": 2335.068,
+      "end": 2337.929,
+      "duration": 2.861,
+      "text": "the minimum is at zero where x squared is zero."
+    },
+    {
+      "index": 503,
+      "start": 2337.929,
+      "end": 2340.293,
+      "duration": 2.364,
+      "text": "If you are looking for the maximum, you better not just"
+    },
+    {
+      "index": 504,
+      "start": 2340.293,
+      "end": 2342.92,
+      "duration": 2.627,
+      "text": "look at the derivative because you won't find it that way."
+    },
+    {
+      "index": 505,
+      "start": 2342.92,
+      "end": 2345.919,
+      "duration": 2.999,
+      "text": "However, if you think for a second, you'll see that if x"
+    },
+    {
+      "index": 506,
+      "start": 2345.919,
+      "end": 2348.591,
+      "duration": 2.672,
+      "text": "becomes very large, then the function increases to"
+    },
+    {
+      "index": 507,
+      "start": 2348.591,
+      "end": 2350.353,
+      "duration": 1.762,
+      "text": "infinity. And, similarly,"
+    },
+    {
+      "index": 508,
+      "start": 2350.353,
+      "end": 2354.428,
+      "duration": 4.075,
+      "text": "if you try to find the minimum and the maximum of x squared"
+    },
+    {
+      "index": 509,
+      "start": 2354.428,
+      "end": 2357.449,
+      "duration": 3.021,
+      "text": "when x varies only between one and two,"
+    },
+    {
+      "index": 510,
+      "start": 2357.449,
+      "end": 2359.05,
+      "duration": 1.601,
+      "text": "well, you won't find the critical point,"
+    },
+    {
+      "index": 511,
+      "start": 2359.05,
+      "end": 2361.772,
+      "duration": 2.722,
+      "text": "but you'll still find that the smallest value of x squared is"
+    },
+    {
+      "index": 512,
+      "start": 2361.772,
+      "end": 2364.522,
+      "duration": 2.75,
+      "text": "when x is at one, and the largest is at x equals"
+    },
+    {
+      "index": 513,
+      "start": 2364.522,
+      "end": 2366.402,
+      "duration": 1.88,
+      "text": "two. And, all this business about"
+    },
+    {
+      "index": 514,
+      "start": 2366.402,
+      "end": 2369.154,
+      "duration": 2.752,
+      "text": "boundaries and infinity is exactly the same stuff,"
+    },
+    {
+      "index": 515,
+      "start": 2369.154,
+      "end": 2371.119,
+      "duration": 1.965,
+      "text": "but with more than one variable."
+    },
+    {
+      "index": 516,
+      "start": 2371.119,
+      "end": 2377.383,
+      "duration": 6.264,
+      "text": "It's just the story that maybe the minimum and the maximum are"
+    },
+    {
+      "index": 517,
+      "start": 2377.383,
+      "end": 2382.312,
+      "duration": 4.929,
+      "text": "not quite visible, but they are at the edges of a"
+    },
+    {
+      "index": 518,
+      "start": 2382.312,
+      "end": 2388.079,
+      "duration": 5.767,
+      "text": "domain we are looking at. Well, in the last three"
+    },
+    {
+      "index": 519,
+      "start": 2388.079,
+      "end": 2395.598,
+      "duration": 7.519,
+      "text": "minutes, I will just write down a couple more things we've seen"
+    },
+    {
+      "index": 520,
+      "start": 2395.598,
+      "end": 2400.681,
+      "duration": 5.083,
+      "text": "there. So, how to do max/min problems"
+    },
+    {
+      "index": 521,
+      "start": 2400.681,
+      "end": 2408.398,
+      "duration": 7.717,
+      "text": "with non-independent variables -- So, if your variables are"
+    },
+    {
+      "index": 522,
+      "start": 2408.398,
+      "end": 2415.449,
+      "duration": 7.051,
+      "text": "related by some condition, g equals some constant."
+    },
+    {
+      "index": 523,
+      "start": 2415.449,
+      "end": 2425.98,
+      "duration": 10.531,
+      "text": "So, then we've seen the method of Lagrange multipliers."
+    },
+    {
+      "index": 524,
+      "start": 2425.98,
+      "end": 2431.195,
+      "duration": 5.215,
+      "text": "OK, and what this method says is that we should solve the"
+    },
+    {
+      "index": 525,
+      "start": 2431.195,
+      "end": 2436.969,
+      "duration": 5.774,
+      "text": "equation gradient f equals some unknown scalar lambda times the"
+    },
+    {
+      "index": 526,
+      "start": 2436.969,
+      "end": 2439.76,
+      "duration": 2.791,
+      "text": "gradient, g. So, that means each partial,"
+    },
+    {
+      "index": 527,
+      "start": 2439.76,
+      "end": 2443.599,
+      "duration": 3.839,
+      "text": "f sub x equals lambda g sub x and so on,"
+    },
+    {
+      "index": 528,
+      "start": 2443.599,
+      "end": 2448.357,
+      "duration": 4.758,
+      "text": "and of course we have to keep in mind the constraint equation"
+    },
+    {
+      "index": 529,
+      "start": 2448.357,
+      "end": 2453.114,
+      "duration": 4.757,
+      "text": "so that we have the same number of equations as the number of"
+    },
+    {
+      "index": 530,
+      "start": 2453.114,
+      "end": 2457.0,
+      "duration": 3.886,
+      "text": "unknowns because you have a new unknown here."
+    },
+    {
+      "index": 531,
+      "start": 2457.0,
+      "end": 2464.949,
+      "duration": 7.949,
+      "text": "And, the thing to remember is that you have to be careful that"
+    },
+    {
+      "index": 532,
+      "start": 2464.949,
+      "end": 2473.03,
+      "duration": 8.081,
+      "text": "the second derivative test does not apply in this situation."
+    },
+    {
+      "index": 533,
+      "start": 2473.03,
+      "end": 2476.579,
+      "duration": 3.549,
+      "text": "I mean, this is only in the case of independent variables."
+    },
+    {
+      "index": 534,
+      "start": 2476.579,
+      "end": 2478.128,
+      "duration": 1.549,
+      "text": "So, if you want to know if something is a maximum or a"
+    },
+    {
+      "index": 535,
+      "start": 2478.128,
+      "end": 2480.316,
+      "duration": 2.188,
+      "text": "minimum, you just have to use common"
+    },
+    {
+      "index": 536,
+      "start": 2480.316,
+      "end": 2484.601,
+      "duration": 4.285,
+      "text": "sense or compare the values of a function at the various points"
+    },
+    {
+      "index": 537,
+      "start": 2484.601,
+      "end": 2489.769,
+      "duration": 5.168,
+      "text": "you found. Yes?"
+    },
+    {
+      "index": 538,
+      "start": 2489.769,
+      "end": 2494.86,
+      "duration": 5.091,
+      "text": "Will we actually have to calculate?"
+    },
+    {
+      "index": 539,
+      "start": 2494.86,
+      "end": 2498.17,
+      "duration": 3.31,
+      "text": "Well, that depends on what the problem asks you."
+    },
+    {
+      "index": 540,
+      "start": 2498.17,
+      "end": 2500.108,
+      "duration": 1.938,
+      "text": "It might ask you to just set up the equations,"
+    },
+    {
+      "index": 541,
+      "start": 2500.108,
+      "end": 2501.659,
+      "duration": 1.551,
+      "text": "or it might ask you to solve them."
+    },
+    {
+      "index": 542,
+      "start": 2501.659,
+      "end": 2504.247,
+      "duration": 2.588,
+      "text": "So, in general, solving might be difficult,"
+    },
+    {
+      "index": 543,
+      "start": 2504.247,
+      "end": 2507.759,
+      "duration": 3.512,
+      "text": "but if it asks you to do it, then it means it shouldn't be"
+    },
+    {
+      "index": 544,
+      "start": 2507.759,
+      "end": 2510.383,
+      "duration": 2.624,
+      "text": "too hard. I haven't written the final"
+    },
+    {
+      "index": 545,
+      "start": 2510.383,
+      "end": 2514.437,
+      "duration": 4.054,
+      "text": "yet, so I don't know what it will be, but it might be an easy"
+    },
+    {
+      "index": 546,
+      "start": 2514.437,
+      "end": 2520.337,
+      "duration": 5.9,
+      "text": "one. And, the last thing we've seen"
+    },
+    {
+      "index": 547,
+      "start": 2520.337,
+      "end": 2526.849,
+      "duration": 6.512,
+      "text": "is constrained partial derivatives."
+    },
+    {
+      "index": 548,
+      "start": 2526.849,
+      "end": 2532.422,
+      "duration": 5.573,
+      "text": "So, for example, if you have a relation between"
+    },
+    {
+      "index": 549,
+      "start": 2532.422,
+      "end": 2535.617,
+      "duration": 3.195,
+      "text": "x, y, and z, which are constrained to be a"
+    },
+    {
+      "index": 550,
+      "start": 2535.617,
+      "end": 2540.019,
+      "duration": 4.402,
+      "text": "constant, then the notion of partial f"
+    },
+    {
+      "index": 551,
+      "start": 2540.019,
+      "end": 2544.73,
+      "duration": 4.711,
+      "text": "partial x takes several meanings."
+    },
+    {
+      "index": 552,
+      "start": 2544.73,
+      "end": 2552.605,
+      "duration": 7.875,
+      "text": "So, just to remind you very quickly, there's the formal"
+    },
+    {
+      "index": 553,
+      "start": 2552.605,
+      "end": 2558.875,
+      "duration": 6.27,
+      "text": "partial, partial f, partial x, which means x"
+    },
+    {
+      "index": 554,
+      "start": 2558.875,
+      "end": 2563.63,
+      "duration": 4.755,
+      "text": "varies. Y and z are held constant."
+    },
+    {
+      "index": 555,
+      "start": 2563.63,
+      "end": 2568.501,
+      "duration": 4.871,
+      "text": "And, we forget the constraint. This is not compatible with a"
+    },
+    {
+      "index": 556,
+      "start": 2568.501,
+      "end": 2571.451,
+      "duration": 2.95,
+      "text": "constraint, but we don't care. So, that's the guy that we"
+    },
+    {
+      "index": 557,
+      "start": 2571.451,
+      "end": 2574.889,
+      "duration": 3.438,
+      "text": "compute just from the formula for f ignoring the constraints."
+    },
+    {
+      "index": 558,
+      "start": 2574.889,
+      "end": 2581.244,
+      "duration": 6.355,
+      "text": "And then, we have the partial f, partial x with y held"
+    },
+    {
+      "index": 559,
+      "start": 2581.244,
+      "end": 2586.039,
+      "duration": 4.795,
+      "text": "constant, which means y held constant."
+    },
+    {
+      "index": 560,
+      "start": 2586.039,
+      "end": 2595.21,
+      "duration": 9.171,
+      "text": "X varies, and now we treat z as a dependent variable."
+    },
+    {
+      "index": 561,
+      "start": 2595.21,
+      "end": 2600.39,
+      "duration": 5.18,
+      "text": "It varies with x and y according to whatever is needed"
+    },
+    {
+      "index": 562,
+      "start": 2600.39,
+      "end": 2604.3,
+      "duration": 3.91,
+      "text": "so that this constraint keeps holding."
+    },
+    {
+      "index": 563,
+      "start": 2604.3,
+      "end": 2609.217,
+      "duration": 4.917,
+      "text": "And, similarly, there's partial f partial x"
+    },
+    {
+      "index": 564,
+      "start": 2609.217,
+      "end": 2613.667,
+      "duration": 4.45,
+      "text": "with z held constant, which means that,"
+    },
+    {
+      "index": 565,
+      "start": 2613.667,
+      "end": 2618.0,
+      "duration": 4.333,
+      "text": "now, y is the dependent variable."
+    },
+    {
+      "index": 566,
+      "start": 2618.0,
+      "end": 2619.824,
+      "duration": 1.824,
+      "text": "And, the way in which we compute these,"
+    },
+    {
+      "index": 567,
+      "start": 2619.824,
+      "end": 2622.561,
+      "duration": 2.737,
+      "text": "we've seen two methods which I'm not going to tell you now"
+    },
+    {
+      "index": 568,
+      "start": 2622.561,
+      "end": 2625.01,
+      "duration": 2.449,
+      "text": "because otherwise we'll be even more over time."
+    },
+    {
+      "index": 569,
+      "start": 2625.01,
+      "end": 2628.372,
+      "duration": 3.362,
+      "text": "But, we've seen two methods for computing these based on either"
+    },
+    {
+      "index": 570,
+      "start": 2628.372,
+      "end": 2630.216,
+      "duration": 1.844,
+      "text": "the chain rule or on differentials,"
+    },
+    {
+      "index": 571,
+      "start": 2630.216,
+      "end": 2632.82,
+      "duration": 2.604,
+      "text": "solving and substituting into differentials."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

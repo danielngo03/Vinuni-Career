@@ -1,0 +1,1908 @@
+{
+  "video": {
+    "id": "rjAXFBWJt_o",
+    "title": "Frequency Response | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=rjAXFBWJt_o",
+    "channel": "MIT OpenCourseWare",
+    "duration": 884,
+    "language": "en"
+  },
+  "segment_count": 270,
+  "segments": [
+    {
+      "index": 0,
+      "start": 9.27,
+      "end": 9.28,
+      "duration": 0.01,
+      "text": "Hi everyone. So today I'd like to talk"
+    },
+    {
+      "index": 1,
+      "start": 9.28,
+      "end": 12.549,
+      "duration": 3.269,
+      "text": "about resonance frequency response. And"
+    },
+    {
+      "index": 2,
+      "start": 12.559,
+      "end": 13.749,
+      "duration": 1.19,
+      "text": "specifically we're going to take a look"
+    },
+    {
+      "index": 3,
+      "start": 13.759,
+      "end": 16.23,
+      "duration": 2.471,
+      "text": "at a couple differential equations. And"
+    },
+    {
+      "index": 4,
+      "start": 16.24,
+      "end": 17.99,
+      "duration": 1.75,
+      "text": "we're asked to graph the amplitude"
+    },
+    {
+      "index": 5,
+      "start": 18.0,
+      "end": 21.109,
+      "duration": 3.109,
+      "text": "response for each equation. And you'll"
+    },
+    {
+      "index": 6,
+      "start": 21.119,
+      "end": 23.83,
+      "duration": 2.711,
+      "text": "note that these equations A, B, and C"
+    },
+    {
+      "index": 7,
+      "start": 23.84,
+      "end": 26.39,
+      "duration": 2.55,
+      "text": "have varying amounts of damp uh damping."
+    },
+    {
+      "index": 8,
+      "start": 26.4,
+      "end": 29.029,
+      "duration": 2.629,
+      "text": "So for part a we're asked to uh plot the"
+    },
+    {
+      "index": 9,
+      "start": 29.039,
+      "end": 32.95,
+      "duration": 3.911,
+      "text": "amplitude response for x dot dot + 4x= f"
+    },
+    {
+      "index": 10,
+      "start": 32.96,
+      "end": 36.549,
+      "duration": 3.589,
+      "text": "cosine omega t. For part b it's the same"
+    },
+    {
+      "index": 11,
+      "start": 36.559,
+      "end": 38.75,
+      "duration": 2.191,
+      "text": "equation. However we have an x dot term"
+    },
+    {
+      "index": 12,
+      "start": 38.76,
+      "end": 42.95,
+      "duration": 4.19,
+      "text": "added. For part c again we've increased"
+    },
+    {
+      "index": 13,
+      "start": 42.96,
+      "end": 45.99,
+      "duration": 3.03,
+      "text": "the damping. So now we have 6x dot. And"
+    },
+    {
+      "index": 14,
+      "start": 46.0,
+      "end": 48.31,
+      "duration": 2.31,
+      "text": "then lastly for part d uh we'd like to"
+    },
+    {
+      "index": 15,
+      "start": 48.32,
+      "end": 50.549,
+      "duration": 2.229,
+      "text": "discuss the resonance for each system."
+    },
+    {
+      "index": 16,
+      "start": 50.559,
+      "end": 51.99,
+      "duration": 1.431,
+      "text": "So I'll let you work out this problem"
+    },
+    {
+      "index": 17,
+      "start": 52.0,
+      "end": 66.31,
+      "duration": 14.31,
+      "text": "and I'll be back in a moment."
+    },
+    {
+      "index": 18,
+      "start": 69.429,
+      "end": 69.439,
+      "duration": 0.01,
+      "text": "Hi everyone, welcome back. So for part"
+    },
+    {
+      "index": 19,
+      "start": 69.439,
+      "end": 71.67,
+      "duration": 2.231,
+      "text": "A, we're asked to graph the amplitude"
+    },
+    {
+      "index": 20,
+      "start": 71.68,
+      "end": 73.99,
+      "duration": 2.31,
+      "text": "response to the differential equation x"
+    },
+    {
+      "index": 21,
+      "start": 74.0,
+      "end": 77.55,
+      "duration": 3.55,
+      "text": "dot dot +"
+    },
+    {
+      "index": 22,
+      "start": 77.56,
+      "end": 84.149,
+      "duration": 6.589,
+      "text": "4x= f cosine omega t."
+    },
+    {
+      "index": 23,
+      "start": 87.35,
+      "end": 87.36,
+      "duration": 0.01,
+      "text": "And from a previous uh recitation uh we"
+    },
+    {
+      "index": 24,
+      "start": 87.36,
+      "end": 89.03,
+      "duration": 1.67,
+      "text": "already wrote down the particular"
+    },
+    {
+      "index": 25,
+      "start": 89.04,
+      "end": 91.51,
+      "duration": 2.47,
+      "text": "response to this differential equation."
+    },
+    {
+      "index": 26,
+      "start": 91.52,
+      "end": 93.99,
+      "duration": 2.47,
+      "text": "So I'm just going to write down the"
+    },
+    {
+      "index": 27,
+      "start": 94.0,
+      "end": 96.51,
+      "duration": 2.51,
+      "text": "particular"
+    },
+    {
+      "index": 28,
+      "start": 100.83,
+      "end": 100.84,
+      "duration": 0.01,
+      "text": "response which has the form"
+    },
+    {
+      "index": 29,
+      "start": 100.84,
+      "end": 104.03,
+      "duration": 3.19,
+      "text": "f minus omega^"
+    },
+    {
+      "index": 30,
+      "start": 104.04,
+      "end": 107.87,
+      "duration": 3.83,
+      "text": "2 cosine omega"
+    },
+    {
+      "index": 31,
+      "start": 107.88,
+      "end": 112.109,
+      "duration": 4.229,
+      "text": "t. Now the amplitude response is defined"
+    },
+    {
+      "index": 32,
+      "start": 112.119,
+      "end": 123.709,
+      "duration": 11.59,
+      "text": "as a"
+    },
+    {
+      "index": 33,
+      "start": 127.109,
+      "end": 127.119,
+      "duration": 0.01,
+      "text": "ratio and specifically it's the ratio of"
+    },
+    {
+      "index": 34,
+      "start": 127.119,
+      "end": 129.749,
+      "duration": 2.63,
+      "text": "the output amplitude uh to a different"
+    },
+    {
+      "index": 35,
+      "start": 129.759,
+      "end": 132.07,
+      "duration": 2.311,
+      "text": "of a differential equation to the input"
+    },
+    {
+      "index": 36,
+      "start": 132.08,
+      "end": 134.39,
+      "duration": 2.31,
+      "text": "amplitude of a differential equation. So"
+    },
+    {
+      "index": 37,
+      "start": 134.4,
+      "end": 137.03,
+      "duration": 2.63,
+      "text": "in the case at hand we have the output"
+    },
+    {
+      "index": 38,
+      "start": 137.04,
+      "end": 139.99,
+      "duration": 2.95,
+      "text": "is a sinosoidal function whose amplitude"
+    },
+    {
+      "index": 39,
+      "start": 140.0,
+      "end": 146.83,
+      "duration": 6.83,
+      "text": "is f / 4 minus omega^ 2. So it's the"
+    },
+    {
+      "index": 40,
+      "start": 150.35,
+      "end": 150.36,
+      "duration": 0.01,
+      "text": "output divided by the"
+    },
+    {
+      "index": 41,
+      "start": 150.36,
+      "end": 157.229,
+      "duration": 6.869,
+      "text": "input. These are both"
+    },
+    {
+      "index": 42,
+      "start": 161.63,
+      "end": 161.64,
+      "duration": 0.01,
+      "text": "amplitudes. And in our case we have"
+    },
+    {
+      "index": 43,
+      "start": 161.64,
+      "end": 165.229,
+      "duration": 3.589,
+      "text": "f / 4 - omega^"
+    },
+    {
+      "index": 44,
+      "start": 165.239,
+      "end": 168.39,
+      "duration": 3.151,
+      "text": "2. This is the output amplitude. And the"
+    },
+    {
+      "index": 45,
+      "start": 168.4,
+      "end": 169.39,
+      "duration": 0.99,
+      "text": "input"
+    },
+    {
+      "index": 46,
+      "start": 169.4,
+      "end": 171.63,
+      "duration": 2.23,
+      "text": "amplitude is just"
+    },
+    {
+      "index": 47,
+      "start": 171.64,
+      "end": 173.91,
+      "duration": 2.27,
+      "text": "fnot. So we see when we compute this"
+    },
+    {
+      "index": 48,
+      "start": 173.92,
+      "end": 177.55,
+      "duration": 3.63,
+      "text": "ratio the f knots divide"
+    },
+    {
+      "index": 49,
+      "start": 180.75,
+      "end": 180.76,
+      "duration": 0.01,
+      "text": "out and at the end of the day we're left"
+    },
+    {
+      "index": 50,
+      "start": 180.76,
+      "end": 184.35,
+      "duration": 3.59,
+      "text": "with 4 minus omega^"
+    },
+    {
+      "index": 51,
+      "start": 184.36,
+      "end": 186.99,
+      "duration": 2.63,
+      "text": "2. So I'm going to"
+    },
+    {
+      "index": 52,
+      "start": 187.0,
+      "end": 192.83,
+      "duration": 5.83,
+      "text": "draw the amplitude response"
+    },
+    {
+      "index": 53,
+      "start": 196.03,
+      "end": 196.04,
+      "duration": 0.01,
+      "text": "now. So we have"
+    },
+    {
+      "index": 54,
+      "start": 196.04,
+      "end": 198.43,
+      "duration": 2.39,
+      "text": "omega and we see"
+    },
+    {
+      "index": 55,
+      "start": 198.44,
+      "end": 202.19,
+      "duration": 3.75,
+      "text": "that when omega is equal to"
+    },
+    {
+      "index": 56,
+      "start": 202.2,
+      "end": 205.39,
+      "duration": 3.19,
+      "text": "2 there's an"
+    },
+    {
+      "index": 57,
+      "start": 205.4,
+      "end": 208.309,
+      "duration": 2.909,
+      "text": "asmtote. When omega is equal to zero we"
+    },
+    {
+      "index": 58,
+      "start": 208.319,
+      "end": 215.99,
+      "duration": 7.671,
+      "text": "have 1/4."
+    },
+    {
+      "index": 59,
+      "start": 218.11,
+      "end": 218.12,
+      "duration": 0.01,
+      "text": "And specifically we have this tent-like"
+    },
+    {
+      "index": 60,
+      "start": 218.12,
+      "end": 229.789,
+      "duration": 11.669,
+      "text": "function. So this is the amplitude"
+    },
+    {
+      "index": 61,
+      "start": 232.149,
+      "end": 232.159,
+      "duration": 0.01,
+      "text": "response. So notice how when we drive"
+    },
+    {
+      "index": 62,
+      "start": 232.159,
+      "end": 234.47,
+      "duration": 2.311,
+      "text": "the system with frequency 2, the"
+    },
+    {
+      "index": 63,
+      "start": 234.48,
+      "end": 237.67,
+      "duration": 3.19,
+      "text": "amplitude response goes to infinity."
+    },
+    {
+      "index": 64,
+      "start": 237.68,
+      "end": 240.789,
+      "duration": 3.109,
+      "text": "Uh as a result we call this frequency uh"
+    },
+    {
+      "index": 65,
+      "start": 240.799,
+      "end": 253.309,
+      "duration": 12.51,
+      "text": "the resonant"
+    },
+    {
+      "index": 66,
+      "start": 255.67,
+      "end": 255.68,
+      "duration": 0.01,
+      "text": "frequency. Okay. So this concludes part"
+    },
+    {
+      "index": 67,
+      "start": 255.68,
+      "end": 259.31,
+      "duration": 3.63,
+      "text": "A. For part"
+    },
+    {
+      "index": 68,
+      "start": 262.23,
+      "end": 262.24,
+      "duration": 0.01,
+      "text": "B, we have uh a differential equation"
+    },
+    {
+      "index": 69,
+      "start": 262.24,
+      "end": 274.35,
+      "duration": 12.11,
+      "text": "with damping."
+    },
+    {
+      "index": 70,
+      "start": 277.35,
+      "end": 277.36,
+      "duration": 0.01,
+      "text": "Now and to compute the uh particular"
+    },
+    {
+      "index": 71,
+      "start": 277.36,
+      "end": 278.55,
+      "duration": 1.19,
+      "text": "solution we follow the standard"
+    },
+    {
+      "index": 72,
+      "start": 278.56,
+      "end": 280.23,
+      "duration": 1.67,
+      "text": "procedure of first complexifying the"
+    },
+    {
+      "index": 73,
+      "start": 280.24,
+      "end": 282.39,
+      "duration": 2.15,
+      "text": "right hand side and then using the"
+    },
+    {
+      "index": 74,
+      "start": 282.4,
+      "end": 286.35,
+      "duration": 3.95,
+      "text": "exponential response"
+    },
+    {
+      "index": 75,
+      "start": 288.469,
+      "end": 288.479,
+      "duration": 0.01,
+      "text": "formula. So I'm just going to write down"
+    },
+    {
+      "index": 76,
+      "start": 288.479,
+      "end": 291.03,
+      "duration": 2.551,
+      "text": "the particular solution."
+    },
+    {
+      "index": 77,
+      "start": 291.04,
+      "end": 292.79,
+      "duration": 1.75,
+      "text": "If we follow these steps, we find that"
+    },
+    {
+      "index": 78,
+      "start": 292.8,
+      "end": 296.79,
+      "duration": 3.99,
+      "text": "it's the real part of the right hand"
+    },
+    {
+      "index": 79,
+      "start": 296.8,
+      "end": 300.23,
+      "duration": 3.43,
+      "text": "side complexified which is f e to the i"
+    },
+    {
+      "index": 80,
+      "start": 300.24,
+      "end": 301.07,
+      "duration": 0.83,
+      "text": "omega"
+    },
+    {
+      "index": 81,
+      "start": 301.08,
+      "end": 305.189,
+      "duration": 4.109,
+      "text": "t divided by the characteristic polomial"
+    },
+    {
+      "index": 82,
+      "start": 305.199,
+      "end": 308.35,
+      "duration": 3.151,
+      "text": "evaluated at i"
+    },
+    {
+      "index": 83,
+      "start": 310.39,
+      "end": 310.4,
+      "duration": 0.01,
+      "text": "omega. And in this case the"
+    },
+    {
+      "index": 84,
+      "start": 310.4,
+      "end": 312.909,
+      "duration": 2.509,
+      "text": "characteristic"
+    },
+    {
+      "index": 85,
+      "start": 320.909,
+      "end": 320.919,
+      "duration": 0.01,
+      "text": "s is s"
+    },
+    {
+      "index": 86,
+      "start": 320.919,
+      "end": 329.189,
+      "duration": 8.27,
+      "text": "2 + s + 4."
+    },
+    {
+      "index": 87,
+      "start": 331.629,
+      "end": 331.639,
+      "duration": 0.01,
+      "text": "P of I"
+    },
+    {
+      "index": 88,
+      "start": 331.639,
+      "end": 336.99,
+      "duration": 5.351,
+      "text": "omega is then 4 - omega^"
+    },
+    {
+      "index": 89,
+      "start": 337.0,
+      "end": 340.99,
+      "duration": 3.99,
+      "text": "2 plus I"
+    },
+    {
+      "index": 90,
+      "start": 344.749,
+      "end": 344.759,
+      "duration": 0.01,
+      "text": "omega. And when we put the pieces"
+    },
+    {
+      "index": 91,
+      "start": 344.759,
+      "end": 347.55,
+      "duration": 2.791,
+      "text": "together, we end up with a particular"
+    },
+    {
+      "index": 92,
+      "start": 347.56,
+      "end": 352.99,
+      "duration": 5.43,
+      "text": "solution which looks like the real"
+    },
+    {
+      "index": 93,
+      "start": 357.23,
+      "end": 357.24,
+      "duration": 0.01,
+      "text": "part of 1 4 - omega^ 2 plus i"
+    },
+    {
+      "index": 94,
+      "start": 357.24,
+      "end": 359.55,
+      "duration": 2.31,
+      "text": "omega f"
+    },
+    {
+      "index": 95,
+      "start": 359.56,
+      "end": 365.23,
+      "duration": 5.67,
+      "text": "upstairs e i omega"
+    },
+    {
+      "index": 96,
+      "start": 369.11,
+      "end": 369.12,
+      "duration": 0.01,
+      "text": "t. Okay, so we're asked to uh compute"
+    },
+    {
+      "index": 97,
+      "start": 369.12,
+      "end": 371.51,
+      "duration": 2.39,
+      "text": "the amplitude response formula or the"
+    },
+    {
+      "index": 98,
+      "start": 371.52,
+      "end": 373.67,
+      "duration": 2.15,
+      "text": "amplitude response graph. And if we take"
+    },
+    {
+      "index": 99,
+      "start": 373.68,
+      "end": 376.309,
+      "duration": 2.629,
+      "text": "a look at this uh we see that the"
+    },
+    {
+      "index": 100,
+      "start": 376.319,
+      "end": 377.67,
+      "duration": 1.351,
+      "text": "denominator here is really just a"
+    },
+    {
+      "index": 101,
+      "start": 377.68,
+      "end": 379.51,
+      "duration": 1.83,
+      "text": "complex number. So we can convert it"
+    },
+    {
+      "index": 102,
+      "start": 379.52,
+      "end": 383.95,
+      "duration": 4.43,
+      "text": "into the form of r e to the i"
+    },
+    {
+      "index": 103,
+      "start": 386.71,
+      "end": 386.72,
+      "duration": 0.01,
+      "text": "fi. Now the amplitude response is"
+    },
+    {
+      "index": 104,
+      "start": 386.72,
+      "end": 388.95,
+      "duration": 2.23,
+      "text": "defined as the uh ratio of the output"
+    },
+    {
+      "index": 105,
+      "start": 388.96,
+      "end": 396.029,
+      "duration": 7.069,
+      "text": "divided by the input. And so the output"
+    },
+    {
+      "index": 106,
+      "start": 398.309,
+      "end": 398.319,
+      "duration": 0.01,
+      "text": "amplitude is going to be the magnitude"
+    },
+    {
+      "index": 107,
+      "start": 398.319,
+      "end": 419.189,
+      "duration": 20.87,
+      "text": "of this complex number."
+    },
+    {
+      "index": 108,
+      "start": 421.629,
+      "end": 421.639,
+      "duration": 0.01,
+      "text": "So as a result the amplitude"
+    },
+    {
+      "index": 109,
+      "start": 421.639,
+      "end": 424.15,
+      "duration": 2.511,
+      "text": "response it's just the magnitude of one"
+    },
+    {
+      "index": 110,
+      "start": 424.16,
+      "end": 426.15,
+      "duration": 1.99,
+      "text": "over the characteristic polomial"
+    },
+    {
+      "index": 111,
+      "start": 426.16,
+      "end": 428.55,
+      "duration": 2.39,
+      "text": "evaluated at I omega. This is also"
+    },
+    {
+      "index": 112,
+      "start": 428.56,
+      "end": 430.51,
+      "duration": 1.95,
+      "text": "sometimes referred to as the complex"
+    },
+    {
+      "index": 113,
+      "start": 430.52,
+      "end": 433.43,
+      "duration": 2.91,
+      "text": "gain. Moreover, this term right here"
+    },
+    {
+      "index": 114,
+      "start": 433.44,
+      "end": 435.749,
+      "duration": 2.309,
+      "text": "contains two pieces of information. Not"
+    },
+    {
+      "index": 115,
+      "start": 435.759,
+      "end": 437.189,
+      "duration": 1.43,
+      "text": "only does it contain the amplitude"
+    },
+    {
+      "index": 116,
+      "start": 437.199,
+      "end": 439.589,
+      "duration": 2.39,
+      "text": "response, but it also contains uh the"
+    },
+    {
+      "index": 117,
+      "start": 439.599,
+      "end": 442.309,
+      "duration": 2.71,
+      "text": "phase information."
+    },
+    {
+      "index": 118,
+      "start": 442.319,
+      "end": 443.83,
+      "duration": 1.511,
+      "text": "When we take the absolute value, we're"
+    },
+    {
+      "index": 119,
+      "start": 443.84,
+      "end": 445.11,
+      "duration": 1.27,
+      "text": "throwing out the phase information and"
+    },
+    {
+      "index": 120,
+      "start": 445.12,
+      "end": 449.87,
+      "duration": 4.75,
+      "text": "we're just remembering the amplitude"
+    },
+    {
+      "index": 121,
+      "start": 451.749,
+      "end": 451.759,
+      "duration": 0.01,
+      "text": "response. Okay. So, what does this"
+    },
+    {
+      "index": 122,
+      "start": 451.759,
+      "end": 454.27,
+      "duration": 2.511,
+      "text": "amplitude response look like for this"
+    },
+    {
+      "index": 123,
+      "start": 454.28,
+      "end": 464.11,
+      "duration": 9.83,
+      "text": "case?"
+    },
+    {
+      "index": 124,
+      "start": 467.35,
+      "end": 467.36,
+      "duration": 0.01,
+      "text": "Well, we have 1 over and it's the"
+    },
+    {
+      "index": 125,
+      "start": 467.36,
+      "end": 469.11,
+      "duration": 1.75,
+      "text": "magnitude of this complex number which"
+    },
+    {
+      "index": 126,
+      "start": 469.12,
+      "end": 473.51,
+      "duration": 4.39,
+      "text": "is 4 - omega^ 2 plus i omega."
+    },
+    {
+      "index": 127,
+      "start": 473.52,
+      "end": 476.39,
+      "duration": 2.87,
+      "text": "So I just take the real part square it"
+    },
+    {
+      "index": 128,
+      "start": 476.4,
+      "end": 479.27,
+      "duration": 2.87,
+      "text": "add it to the imaginary part squared and"
+    },
+    {
+      "index": 129,
+      "start": 479.28,
+      "end": 482.909,
+      "duration": 3.629,
+      "text": "square root the whole"
+    },
+    {
+      "index": 130,
+      "start": 484.95,
+      "end": 484.96,
+      "duration": 0.01,
+      "text": "quantity. Now there's a question of how"
+    },
+    {
+      "index": 131,
+      "start": 484.96,
+      "end": 487.909,
+      "duration": 2.949,
+      "text": "to graph this and we see that it's that"
+    },
+    {
+      "index": 132,
+      "start": 487.919,
+      "end": 489.51,
+      "duration": 1.591,
+      "text": "well first off the square root's an"
+    },
+    {
+      "index": 133,
+      "start": 489.52,
+      "end": 491.589,
+      "duration": 2.069,
+      "text": "increasing function and we see that"
+    },
+    {
+      "index": 134,
+      "start": 491.599,
+      "end": 494.309,
+      "duration": 2.71,
+      "text": "we're one over an increasing function."
+    },
+    {
+      "index": 135,
+      "start": 494.319,
+      "end": 497.67,
+      "duration": 3.351,
+      "text": "So there's a trick which is to just look"
+    },
+    {
+      "index": 136,
+      "start": 497.68,
+      "end": 499.589,
+      "duration": 1.909,
+      "text": "first at sketching this this piece which"
+    },
+    {
+      "index": 137,
+      "start": 499.599,
+      "end": 502.869,
+      "duration": 3.27,
+      "text": "is under the radical sign. And if you if"
+    },
+    {
+      "index": 138,
+      "start": 502.879,
+      "end": 504.309,
+      "duration": 1.43,
+      "text": "you look at maximizing trying to"
+    },
+    {
+      "index": 139,
+      "start": 504.319,
+      "end": 506.309,
+      "duration": 1.99,
+      "text": "maximize this function so finding the"
+    },
+    {
+      "index": 140,
+      "start": 506.319,
+      "end": 508.629,
+      "duration": 2.31,
+      "text": "critical points we see that in this case"
+    },
+    {
+      "index": 141,
+      "start": 508.639,
+      "end": 513.87,
+      "duration": 5.231,
+      "text": "we have one"
+    },
+    {
+      "index": 142,
+      "start": 515.469,
+      "end": 515.479,
+      "duration": 0.01,
+      "text": "maximum"
+    },
+    {
+      "index": 143,
+      "start": 515.479,
+      "end": 518.589,
+      "duration": 3.11,
+      "text": "to 4 - omega^"
+    },
+    {
+      "index": 144,
+      "start": 518.599,
+      "end": 521.149,
+      "duration": 2.55,
+      "text": "2 plus omega^"
+    },
+    {
+      "index": 145,
+      "start": 521.159,
+      "end": 524.03,
+      "duration": 2.871,
+      "text": "2 and this is"
+    },
+    {
+      "index": 146,
+      "start": 524.04,
+      "end": 527.75,
+      "duration": 3.71,
+      "text": "at when omega equals the square root of"
+    },
+    {
+      "index": 147,
+      "start": 527.76,
+      "end": 532.47,
+      "duration": 4.71,
+      "text": "seven halves."
+    },
+    {
+      "index": 148,
+      "start": 541.75,
+      "end": 541.76,
+      "duration": 0.01,
+      "text": "minimum. Okay. So when I go to sketch"
+    },
+    {
+      "index": 149,
+      "start": 541.76,
+      "end": 544.269,
+      "duration": 2.509,
+      "text": "this now, you have"
+    },
+    {
+      "index": 150,
+      "start": 544.279,
+      "end": 551.63,
+      "duration": 7.351,
+      "text": "omega, we have the amplitude"
+    },
+    {
+      "index": 151,
+      "start": 554.23,
+      "end": 554.24,
+      "duration": 0.01,
+      "text": "response. Okay. Now I'm going to draw in"
+    },
+    {
+      "index": 152,
+      "start": 554.24,
+      "end": 557.43,
+      "duration": 3.19,
+      "text": "root two or sorry just two from our"
+    },
+    {
+      "index": 153,
+      "start": 557.44,
+      "end": 559.19,
+      "duration": 1.75,
+      "text": "previous diagram."
+    },
+    {
+      "index": 154,
+      "start": 559.2,
+      "end": 561.03,
+      "duration": 1.83,
+      "text": "Now the square root of 7 halves is just"
+    },
+    {
+      "index": 155,
+      "start": 561.04,
+      "end": 562.99,
+      "duration": 1.95,
+      "text": "below"
+    },
+    {
+      "index": 156,
+      "start": 563.0,
+      "end": 569.949,
+      "duration": 6.949,
+      "text": "two. So square<unk> of 7"
+    },
+    {
+      "index": 157,
+      "start": 574.67,
+      "end": 574.68,
+      "duration": 0.01,
+      "text": "halves. So we end up with a maximum at 7"
+    },
+    {
+      "index": 158,
+      "start": 574.68,
+      "end": 578.91,
+      "duration": 4.23,
+      "text": "halves and then a decay to"
+    },
+    {
+      "index": 159,
+      "start": 578.92,
+      "end": 582.03,
+      "duration": 3.11,
+      "text": "infinity. And again this is going to"
+    },
+    {
+      "index": 160,
+      "start": 582.04,
+      "end": 585.55,
+      "duration": 3.51,
+      "text": "be 1/4 when omega is"
+    },
+    {
+      "index": 161,
+      "start": 585.56,
+      "end": 588.67,
+      "duration": 3.11,
+      "text": "zero. Okay. So this is the"
+    },
+    {
+      "index": 162,
+      "start": 588.68,
+      "end": 592.07,
+      "duration": 3.39,
+      "text": "peak amplitude response. So note that in"
+    },
+    {
+      "index": 163,
+      "start": 592.08,
+      "end": 594.389,
+      "duration": 2.309,
+      "text": "this case by adding damping what we've"
+    },
+    {
+      "index": 164,
+      "start": 594.399,
+      "end": 596.949,
+      "duration": 2.55,
+      "text": "done is we've uh we no longer have an"
+    },
+    {
+      "index": 165,
+      "start": 596.959,
+      "end": 600.23,
+      "duration": 3.271,
+      "text": "asmtote at omegaals 2 but we now have a"
+    },
+    {
+      "index": 166,
+      "start": 600.24,
+      "end": 603.03,
+      "duration": 2.79,
+      "text": "finite amplitude which occurs at omega"
+    },
+    {
+      "index": 167,
+      "start": 603.04,
+      "end": 605.55,
+      "duration": 2.51,
+      "text": "omega equals the<unk> of 7"
+    },
+    {
+      "index": 168,
+      "start": 605.56,
+      "end": 607.75,
+      "duration": 2.19,
+      "text": "halves. Okay. So I'm just going to clean"
+    },
+    {
+      "index": 169,
+      "start": 607.76,
+      "end": 609.19,
+      "duration": 1.43,
+      "text": "up the board and I'll be back with part"
+    },
+    {
+      "index": 170,
+      "start": 609.2,
+      "end": 611.91,
+      "duration": 2.71,
+      "text": "C in a second."
+    },
+    {
+      "index": 171,
+      "start": 611.92,
+      "end": 614.55,
+      "duration": 2.63,
+      "text": "Uh for part a we uh have a resonance"
+    },
+    {
+      "index": 172,
+      "start": 614.56,
+      "end": 616.31,
+      "duration": 1.75,
+      "text": "response or sorry an amplitude response"
+    },
+    {
+      "index": 173,
+      "start": 616.32,
+      "end": 619.67,
+      "duration": 3.35,
+      "text": "diagram which looks like a tent function"
+    },
+    {
+      "index": 174,
+      "start": 619.68,
+      "end": 621.99,
+      "duration": 2.31,
+      "text": "and at two omega equals 2 we have a"
+    },
+    {
+      "index": 175,
+      "start": 622.0,
+      "end": 624.35,
+      "duration": 2.35,
+      "text": "resonance. So the amplitude response"
+    },
+    {
+      "index": 176,
+      "start": 624.36,
+      "end": 627.03,
+      "duration": 2.67,
+      "text": "diverges just like to point out I made a"
+    },
+    {
+      "index": 177,
+      "start": 627.04,
+      "end": 629.19,
+      "duration": 2.15,
+      "text": "a small error before I forgot to include"
+    },
+    {
+      "index": 178,
+      "start": 629.2,
+      "end": 631.91,
+      "duration": 2.71,
+      "text": "absolute values uh on the denominator"
+    },
+    {
+      "index": 179,
+      "start": 631.92,
+      "end": 633.829,
+      "duration": 1.909,
+      "text": "here. The amplitude response function"
+    },
+    {
+      "index": 180,
+      "start": 633.839,
+      "end": 635.829,
+      "duration": 1.99,
+      "text": "it's always a positive quantity. we"
+    },
+    {
+      "index": 181,
+      "start": 635.839,
+      "end": 638.11,
+      "duration": 2.271,
+      "text": "always throw out uh any phase"
+    },
+    {
+      "index": 182,
+      "start": 638.12,
+      "end": 641.75,
+      "duration": 3.63,
+      "text": "information and uh leave that uh for the"
+    },
+    {
+      "index": 183,
+      "start": 641.76,
+      "end": 644.949,
+      "duration": 3.189,
+      "text": "for the phase and um"
+    },
+    {
+      "index": 184,
+      "start": 644.959,
+      "end": 646.71,
+      "duration": 1.751,
+      "text": "uh in the description of the response of"
+    },
+    {
+      "index": 185,
+      "start": 646.72,
+      "end": 647.79,
+      "duration": 1.07,
+      "text": "a linear"
+    },
+    {
+      "index": 186,
+      "start": 647.8,
+      "end": 650.069,
+      "duration": 2.269,
+      "text": "system. So the amplitude response is"
+    },
+    {
+      "index": 187,
+      "start": 650.079,
+      "end": 653.59,
+      "duration": 3.511,
+      "text": "always positive. Uh for part B we uh we"
+    },
+    {
+      "index": 188,
+      "start": 653.6,
+      "end": 655.79,
+      "duration": 2.19,
+      "text": "added dampening to the system and we see"
+    },
+    {
+      "index": 189,
+      "start": 655.8,
+      "end": 659.11,
+      "duration": 3.31,
+      "text": "that there's actually a peak point which"
+    },
+    {
+      "index": 190,
+      "start": 659.12,
+      "end": 662.509,
+      "duration": 3.389,
+      "text": "is at the square root of seven"
+    },
+    {
+      "index": 191,
+      "start": 665.43,
+      "end": 665.44,
+      "duration": 0.01,
+      "text": "halves and uh the amplitude response is"
+    },
+    {
+      "index": 192,
+      "start": 665.44,
+      "end": 667.269,
+      "duration": 1.829,
+      "text": "bounded at this point but it achieves a"
+    },
+    {
+      "index": 193,
+      "start": 667.279,
+      "end": 670.67,
+      "duration": 3.391,
+      "text": "maximum and then again it decays to"
+    },
+    {
+      "index": 194,
+      "start": 670.68,
+      "end": 673.829,
+      "duration": 3.149,
+      "text": "infinity. So I'd like now uh to take a"
+    },
+    {
+      "index": 195,
+      "start": 673.839,
+      "end": 676.55,
+      "duration": 2.711,
+      "text": "look at part C and in part C we have the"
+    },
+    {
+      "index": 196,
+      "start": 676.56,
+      "end": 679.75,
+      "duration": 3.19,
+      "text": "differential equation x dot dot plus 6x"
+    },
+    {
+      "index": 197,
+      "start": 679.76,
+      "end": 681.829,
+      "duration": 2.069,
+      "text": "dot"
+    },
+    {
+      "index": 198,
+      "start": 681.839,
+      "end": 683.23,
+      "duration": 1.391,
+      "text": "+"
+    },
+    {
+      "index": 199,
+      "start": 683.24,
+      "end": 686.269,
+      "duration": 3.029,
+      "text": "4x ="
+    },
+    {
+      "index": 200,
+      "start": 686.279,
+      "end": 689.31,
+      "duration": 3.031,
+      "text": "f cosine omega"
+    },
+    {
+      "index": 201,
+      "start": 689.32,
+      "end": 697.47,
+      "duration": 8.15,
+      "text": "t. And again, the amplitude"
+    },
+    {
+      "index": 202,
+      "start": 700.75,
+      "end": 700.76,
+      "duration": 0.01,
+      "text": "response is going to equal 1"
+    },
+    {
+      "index": 203,
+      "start": 700.76,
+      "end": 704.269,
+      "duration": 3.509,
+      "text": "over the absolute value of p of i"
+    },
+    {
+      "index": 204,
+      "start": 704.279,
+      "end": 707.43,
+      "duration": 3.151,
+      "text": "omega. And in this case, p of i omega is"
+    },
+    {
+      "index": 205,
+      "start": 707.44,
+      "end": 710.15,
+      "duration": 2.71,
+      "text": "going to be"
+    },
+    {
+      "index": 206,
+      "start": 710.16,
+      "end": 714.23,
+      "duration": 4.07,
+      "text": "1 over well we still have the 4 - omega^"
+    },
+    {
+      "index": 207,
+      "start": 714.24,
+      "end": 717.71,
+      "duration": 3.47,
+      "text": "2"
+    },
+    {
+      "index": 208,
+      "start": 721.75,
+      "end": 721.76,
+      "duration": 0.01,
+      "text": "term instead of x dot we now have six x"
+    },
+    {
+      "index": 209,
+      "start": 721.76,
+      "end": 724.91,
+      "duration": 3.15,
+      "text": "dot which gives us 6 i"
+    },
+    {
+      "index": 210,
+      "start": 724.92,
+      "end": 727.11,
+      "duration": 2.19,
+      "text": "omega and then again we want to take the"
+    },
+    {
+      "index": 211,
+      "start": 727.12,
+      "end": 729.87,
+      "duration": 2.75,
+      "text": "absolute value of this complex"
+    },
+    {
+      "index": 212,
+      "start": 729.88,
+      "end": 731.99,
+      "duration": 2.11,
+      "text": "number and when we take the absolute"
+    },
+    {
+      "index": 213,
+      "start": 732.0,
+      "end": 733.75,
+      "duration": 1.75,
+      "text": "value we just get the sum of the the"
+    },
+    {
+      "index": 214,
+      "start": 733.76,
+      "end": 736.59,
+      "duration": 2.83,
+      "text": "real part"
+    },
+    {
+      "index": 215,
+      "start": 738.949,
+      "end": 738.959,
+      "duration": 0.01,
+      "text": "squared plus the sum of the imaginary"
+    },
+    {
+      "index": 216,
+      "start": 738.959,
+      "end": 740.55,
+      "duration": 1.591,
+      "text": "part squared which in this case is going"
+    },
+    {
+      "index": 217,
+      "start": 740.56,
+      "end": 744.71,
+      "duration": 4.15,
+      "text": "to be 36 omega^ 2 the whole quantity is"
+    },
+    {
+      "index": 218,
+      "start": 744.72,
+      "end": 746.71,
+      "duration": 1.99,
+      "text": "square rooted and then we have 1 over"
+    },
+    {
+      "index": 219,
+      "start": 746.72,
+      "end": 748.99,
+      "duration": 2.27,
+      "text": "this"
+    },
+    {
+      "index": 220,
+      "start": 751.67,
+      "end": 751.68,
+      "duration": 0.01,
+      "text": "value. So now if we'd like to plot this"
+    },
+    {
+      "index": 221,
+      "start": 751.68,
+      "end": 754.31,
+      "duration": 2.63,
+      "text": "this function we can still do the same"
+    },
+    {
+      "index": 222,
+      "start": 754.32,
+      "end": 756.389,
+      "duration": 2.069,
+      "text": "trick and try to maximize or find the"
+    },
+    {
+      "index": 223,
+      "start": 756.399,
+      "end": 758.15,
+      "duration": 1.751,
+      "text": "critical points of the denominator under"
+    },
+    {
+      "index": 224,
+      "start": 758.16,
+      "end": 760.23,
+      "duration": 2.07,
+      "text": "the radical and if we did this in this"
+    },
+    {
+      "index": 225,
+      "start": 760.24,
+      "end": 761.43,
+      "duration": 1.19,
+      "text": "case we would find that the only"
+    },
+    {
+      "index": 226,
+      "start": 761.44,
+      "end": 764.67,
+      "duration": 3.23,
+      "text": "critical point is when omega is equal to"
+    },
+    {
+      "index": 227,
+      "start": 764.68,
+      "end": 768.55,
+      "duration": 3.87,
+      "text": "zero. Uh secondly, if we look at omega"
+    },
+    {
+      "index": 228,
+      "start": 768.56,
+      "end": 770.55,
+      "duration": 1.99,
+      "text": "going to infinity, we see that the"
+    },
+    {
+      "index": 229,
+      "start": 770.56,
+      "end": 773.19,
+      "duration": 2.63,
+      "text": "denominator goes to infinity. So this"
+    },
+    {
+      "index": 230,
+      "start": 773.2,
+      "end": 775.629,
+      "duration": 2.429,
+      "text": "whole quantity must go to"
+    },
+    {
+      "index": 231,
+      "start": 775.639,
+      "end": 778.509,
+      "duration": 2.87,
+      "text": "zero. So if I were to go back"
+    },
+    {
+      "index": 232,
+      "start": 778.519,
+      "end": 782.11,
+      "duration": 3.591,
+      "text": "here to the amplitude response for part"
+    },
+    {
+      "index": 233,
+      "start": 782.12,
+      "end": 785.67,
+      "duration": 3.55,
+      "text": "C again, when omega is equal to zero,"
+    },
+    {
+      "index": 234,
+      "start": 785.68,
+      "end": 788.99,
+      "duration": 3.31,
+      "text": "it's going to start off at"
+    },
+    {
+      "index": 235,
+      "start": 789.0,
+      "end": 791.43,
+      "duration": 2.43,
+      "text": "1/4. I've just argued that it goes to"
+    },
+    {
+      "index": 236,
+      "start": 791.44,
+      "end": 794.949,
+      "duration": 3.509,
+      "text": "zero as omega goes to infinity. And"
+    },
+    {
+      "index": 237,
+      "start": 794.959,
+      "end": 797.19,
+      "duration": 2.231,
+      "text": "since there are no critical points, we"
+    },
+    {
+      "index": 238,
+      "start": 797.2,
+      "end": 798.99,
+      "duration": 1.79,
+      "text": "must smoothly"
+    },
+    {
+      "index": 239,
+      "start": 799.0,
+      "end": 801.829,
+      "duration": 2.829,
+      "text": "paste the function between the two. And"
+    },
+    {
+      "index": 240,
+      "start": 801.839,
+      "end": 804.59,
+      "duration": 2.751,
+      "text": "in fact, it's always"
+    },
+    {
+      "index": 241,
+      "start": 804.6,
+      "end": 807.11,
+      "duration": 2.51,
+      "text": "decreasing. So the amplitude response uh"
+    },
+    {
+      "index": 242,
+      "start": 807.12,
+      "end": 811.069,
+      "duration": 3.949,
+      "text": "in this case is just a decreasing"
+    },
+    {
+      "index": 243,
+      "start": 811.079,
+      "end": 813.91,
+      "duration": 2.831,
+      "text": "function. Okay. So this concludes part C"
+    },
+    {
+      "index": 244,
+      "start": 813.92,
+      "end": 815.67,
+      "duration": 1.75,
+      "text": "and now I'll take a look at part D."
+    },
+    {
+      "index": 245,
+      "start": 815.68,
+      "end": 818.629,
+      "duration": 2.949,
+      "text": "Discuss the resonance for each system."
+    },
+    {
+      "index": 246,
+      "start": 818.639,
+      "end": 821.23,
+      "duration": 2.591,
+      "text": "So in part a we had no"
+    },
+    {
+      "index": 247,
+      "start": 821.24,
+      "end": 823.269,
+      "duration": 2.029,
+      "text": "damping and we saw that there was a"
+    },
+    {
+      "index": 248,
+      "start": 823.279,
+      "end": 826.31,
+      "duration": 3.031,
+      "text": "resonance at omega equals 2 and uh the"
+    },
+    {
+      "index": 249,
+      "start": 826.32,
+      "end": 828.389,
+      "duration": 2.069,
+      "text": "resonance manifested itself uh in the"
+    },
+    {
+      "index": 250,
+      "start": 828.399,
+      "end": 831.269,
+      "duration": 2.87,
+      "text": "amplitude response graph with a pole or"
+    },
+    {
+      "index": 251,
+      "start": 831.279,
+      "end": 834.55,
+      "duration": 3.271,
+      "text": "a a divergent asmtote at omega is equal"
+    },
+    {
+      "index": 252,
+      "start": 834.56,
+      "end": 836.55,
+      "duration": 1.99,
+      "text": "to two. So as as you drive the system"
+    },
+    {
+      "index": 253,
+      "start": 836.56,
+      "end": 839.59,
+      "duration": 3.03,
+      "text": "close to omegaals 2 the amplitude of the"
+    },
+    {
+      "index": 254,
+      "start": 839.6,
+      "end": 841.23,
+      "duration": 1.63,
+      "text": "system starts to"
+    },
+    {
+      "index": 255,
+      "start": 841.24,
+      "end": 844.629,
+      "duration": 3.389,
+      "text": "diverge. In case two uh we introduce"
+    },
+    {
+      "index": 256,
+      "start": 844.639,
+      "end": 847.11,
+      "duration": 2.471,
+      "text": "damping into the system. So we still"
+    },
+    {
+      "index": 257,
+      "start": 847.12,
+      "end": 849.75,
+      "duration": 2.63,
+      "text": "have a very large amplitude response at"
+    },
+    {
+      "index": 258,
+      "start": 849.76,
+      "end": 852.55,
+      "duration": 2.79,
+      "text": "omega equals the<unk> of 7 halves."
+    },
+    {
+      "index": 259,
+      "start": 852.56,
+      "end": 856.11,
+      "duration": 3.55,
+      "text": "However, it's no longer infinite"
+    },
+    {
+      "index": 260,
+      "start": 856.12,
+      "end": 859.67,
+      "duration": 3.55,
+      "text": "infinite. Uh and then lastly uh when we"
+    },
+    {
+      "index": 261,
+      "start": 859.68,
+      "end": 862.47,
+      "duration": 2.79,
+      "text": "increase damping even further uh so we"
+    },
+    {
+      "index": 262,
+      "start": 862.48,
+      "end": 865.509,
+      "duration": 3.029,
+      "text": "had the six x dot term the uh the"
+    },
+    {
+      "index": 263,
+      "start": 865.519,
+      "end": 868.629,
+      "duration": 3.11,
+      "text": "presence of a peak uh disappeared and in"
+    },
+    {
+      "index": 264,
+      "start": 868.639,
+      "end": 870.31,
+      "duration": 1.671,
+      "text": "fact the amplitude response just"
+    },
+    {
+      "index": 265,
+      "start": 870.32,
+      "end": 873.59,
+      "duration": 3.27,
+      "text": "monotonically decayed from 1/2 to"
+    },
+    {
+      "index": 266,
+      "start": 873.6,
+      "end": 875.829,
+      "duration": 2.229,
+      "text": "infinity. So it just constantly uh"
+    },
+    {
+      "index": 267,
+      "start": 875.839,
+      "end": 878.67,
+      "duration": 2.831,
+      "text": "decreased to"
+    },
+    {
+      "index": 268,
+      "start": 878.68,
+      "end": 881.99,
+      "duration": 3.31,
+      "text": "zero. So I'd just like to conclude there"
+    },
+    {
+      "index": 269,
+      "start": 882.0,
+      "end": 885.519,
+      "duration": 3.519,
+      "text": "and I'll see you next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

@@ -1,0 +1,7018 @@
+{
+  "video": {
+    "id": "tYdoS0tkAHA",
+    "title": "Lec 22: Green's theorem | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=tYdoS0tkAHA",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2804,
+    "language": "en"
+  },
+  "segment_count": 1000,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.83,
+      "end": 1.8399999999999999,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.8399999999999999,
+      "end": 4.35,
+      "duration": 2.51,
+      "text": "a Creative Commons License. Your support"
+    },
+    {
+      "index": 2,
+      "start": 4.36,
+      "end": 6.47,
+      "duration": 2.11,
+      "text": "will help MIT Open Courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.48,
+      "end": 8.27,
+      "duration": 1.79,
+      "text": "to offer high-quality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.28,
+      "end": 9.95,
+      "duration": 1.67,
+      "text": "resources for free."
+    },
+    {
+      "index": 5,
+      "start": 9.96,
+      "end": 11.99,
+      "duration": 2.03,
+      "text": "To make a donation or to view additional"
+    },
+    {
+      "index": 6,
+      "start": 12.0,
+      "end": 14.79,
+      "duration": 2.79,
+      "text": "materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 7,
+      "start": 14.8,
+      "end": 16.71,
+      "duration": 1.91,
+      "text": "visit MIT Open Courseware at"
+    },
+    {
+      "index": 8,
+      "start": 16.72,
+      "end": 21.91,
+      "duration": 5.19,
+      "text": "ocw.mit.edu."
+    },
+    {
+      "index": 9,
+      "start": 23.39,
+      "end": 23.4,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 10,
+      "start": 23.4,
+      "end": 28.15,
+      "duration": 4.75,
+      "text": "last time we've seen"
+    },
+    {
+      "index": 11,
+      "start": 36.07,
+      "end": 36.08,
+      "duration": 0.01,
+      "text": "with components M and N, we defined that"
+    },
+    {
+      "index": 12,
+      "start": 36.08,
+      "end": 37.67,
+      "duration": 1.59,
+      "text": "to be"
+    },
+    {
+      "index": 13,
+      "start": 37.68,
+      "end": 40.87,
+      "duration": 3.19,
+      "text": "N sub X minus M sub Y."
+    },
+    {
+      "index": 14,
+      "start": 40.88,
+      "end": 44.31,
+      "duration": 3.43,
+      "text": "And we said this measures how far that"
+    },
+    {
+      "index": 15,
+      "start": 44.32,
+      "end": 47.19,
+      "duration": 2.87,
+      "text": "vector field is from being conservative."
+    },
+    {
+      "index": 16,
+      "start": 47.2,
+      "end": 50.03,
+      "duration": 2.83,
+      "text": "If the curl is zero and if the field is"
+    },
+    {
+      "index": 17,
+      "start": 50.04,
+      "end": 51.79,
+      "duration": 1.75,
+      "text": "defined everywhere, then it's going to"
+    },
+    {
+      "index": 18,
+      "start": 51.8,
+      "end": 53.71,
+      "duration": 1.91,
+      "text": "be conservative. And so when I take a"
+    },
+    {
+      "index": 19,
+      "start": 53.72,
+      "end": 55.71,
+      "duration": 1.99,
+      "text": "line integral along a closed curve, I"
+    },
+    {
+      "index": 20,
+      "start": 55.72,
+      "end": 57.15,
+      "duration": 1.43,
+      "text": "don't have to compute it. I know it's"
+    },
+    {
+      "index": 21,
+      "start": 57.16,
+      "end": 59.27,
+      "duration": 2.11,
+      "text": "going to be zero."
+    },
+    {
+      "index": 22,
+      "start": 59.28,
+      "end": 62.59,
+      "duration": 3.31,
+      "text": "But now let's say that I have a general"
+    },
+    {
+      "index": 23,
+      "start": 62.6,
+      "end": 64.07,
+      "duration": 1.47,
+      "text": "vector field."
+    },
+    {
+      "index": 24,
+      "start": 64.08,
+      "end": 66.07,
+      "duration": 1.99,
+      "text": "So the curl will not be zero and I still"
+    },
+    {
+      "index": 25,
+      "start": 66.08,
+      "end": 68.39,
+      "duration": 2.31,
+      "text": "want to compute a line integral along a"
+    },
+    {
+      "index": 26,
+      "start": 68.4,
+      "end": 70.03,
+      "duration": 1.63,
+      "text": "closed curve."
+    },
+    {
+      "index": 27,
+      "start": 70.04,
+      "end": 72.67,
+      "duration": 2.63,
+      "text": "Well, I could compute it directly."
+    },
+    {
+      "index": 28,
+      "start": 72.68,
+      "end": 74.47,
+      "duration": 1.79,
+      "text": "Or there's another way."
+    },
+    {
+      "index": 29,
+      "start": 74.48,
+      "end": 75.51,
+      "duration": 1.03,
+      "text": "And that's what we're going to see"
+    },
+    {
+      "index": 30,
+      "start": 75.52,
+      "end": 77.47,
+      "duration": 1.95,
+      "text": "today."
+    },
+    {
+      "index": 31,
+      "start": 77.48,
+      "end": 79.07,
+      "duration": 1.59,
+      "text": "So,"
+    },
+    {
+      "index": 32,
+      "start": 79.08,
+      "end": 80.55,
+      "duration": 1.47,
+      "text": "you know, say that I have a closed curve"
+    },
+    {
+      "index": 33,
+      "start": 80.56,
+      "end": 86.39,
+      "duration": 5.83,
+      "text": "C and I want to find"
+    },
+    {
+      "index": 34,
+      "start": 93.07,
+      "end": 93.08,
+      "duration": 0.01,
+      "text": "One is direct calculation."
+    },
+    {
+      "index": 35,
+      "start": 93.08,
+      "end": 102.03,
+      "duration": 8.95,
+      "text": "And the other one is Green's Theorem."
+    },
+    {
+      "index": 36,
+      "start": 104.55,
+      "end": 104.56,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 37,
+      "start": 104.56,
+      "end": 108.63,
+      "duration": 4.07,
+      "text": "Green's Theorem"
+    },
+    {
+      "index": 38,
+      "start": 110.75,
+      "end": 110.76,
+      "duration": 0.01,
+      "text": "is another way"
+    },
+    {
+      "index": 39,
+      "start": 110.76,
+      "end": 112.71,
+      "duration": 1.95,
+      "text": "to avoid calculating line integrals if"
+    },
+    {
+      "index": 40,
+      "start": 112.72,
+      "end": 115.79,
+      "duration": 3.07,
+      "text": "we don't want to."
+    },
+    {
+      "index": 41,
+      "start": 117.27,
+      "end": 117.28,
+      "duration": 0.01,
+      "text": "Okay, so what does it say?"
+    },
+    {
+      "index": 42,
+      "start": 117.28,
+      "end": 118.99,
+      "duration": 1.71,
+      "text": "It says"
+    },
+    {
+      "index": 43,
+      "start": 119.0,
+      "end": 126.27,
+      "duration": 7.27,
+      "text": "if say if C is a closed curve"
+    },
+    {
+      "index": 44,
+      "start": 135.63,
+      "end": 135.64,
+      "duration": 0.01,
+      "text": "in the plane and"
+    },
+    {
+      "index": 45,
+      "start": 135.64,
+      "end": 137.11,
+      "duration": 1.47,
+      "text": "I have to insist C should go"
+    },
+    {
+      "index": 46,
+      "start": 137.12,
+      "end": 143.19,
+      "duration": 6.07,
+      "text": "counterclockwise."
+    },
+    {
+      "index": 47,
+      "start": 152.11,
+      "end": 152.12,
+      "duration": 0.01,
+      "text": "that's defined"
+    },
+    {
+      "index": 48,
+      "start": 152.12,
+      "end": 158.55,
+      "duration": 6.43,
+      "text": "and differentiable"
+    },
+    {
+      "index": 49,
+      "start": 159.91,
+      "end": 159.92,
+      "duration": 0.01,
+      "text": "everywhere"
+    },
+    {
+      "index": 50,
+      "start": 159.92,
+      "end": 161.95,
+      "duration": 2.03,
+      "text": "not only on the curve C, which is what I"
+    },
+    {
+      "index": 51,
+      "start": 161.96,
+      "end": 163.59,
+      "duration": 1.63,
+      "text": "need to define the line integral, but"
+    },
+    {
+      "index": 52,
+      "start": 163.6,
+      "end": 168.19,
+      "duration": 4.59,
+      "text": "also on the region inside,"
+    },
+    {
+      "index": 53,
+      "start": 181.31,
+      "end": 181.32,
+      "duration": 0.01,
+      "text": "of the work done along C is actually"
+    },
+    {
+      "index": 54,
+      "start": 181.32,
+      "end": 183.79,
+      "duration": 2.47,
+      "text": "equal to a double integral"
+    },
+    {
+      "index": 55,
+      "start": 183.8,
+      "end": 189.55,
+      "duration": 5.75,
+      "text": "over the region inside of curl F dA."
+    },
+    {
+      "index": 56,
+      "start": 196.43,
+      "end": 196.44,
+      "duration": 0.01,
+      "text": "the conclusion. And if you want me to"
+    },
+    {
+      "index": 57,
+      "start": 196.44,
+      "end": 198.27,
+      "duration": 1.83,
+      "text": "write it in coordinates, maybe I should"
+    },
+    {
+      "index": 58,
+      "start": 198.28,
+      "end": 200.87,
+      "duration": 2.59,
+      "text": "do that."
+    },
+    {
+      "index": 59,
+      "start": 202.23,
+      "end": 202.24,
+      "duration": 0.01,
+      "text": "So the line integral in terms of the"
+    },
+    {
+      "index": 60,
+      "start": 202.24,
+      "end": 203.79,
+      "duration": 1.55,
+      "text": "components that"
+    },
+    {
+      "index": 61,
+      "start": 203.8,
+      "end": 209.11,
+      "duration": 5.31,
+      "text": "that's the integral of M DX plus N DY."
+    },
+    {
+      "index": 62,
+      "start": 213.27,
+      "end": 213.28,
+      "duration": 0.01,
+      "text": "And the curl is NX minus MY"
+    },
+    {
+      "index": 63,
+      "start": 213.28,
+      "end": 215.91,
+      "duration": 2.63,
+      "text": "dA."
+    },
+    {
+      "index": 64,
+      "start": 217.99,
+      "end": 218.0,
+      "duration": 0.01,
+      "text": "Okay, so that's the other way to"
+    },
+    {
+      "index": 65,
+      "start": 218.0,
+      "end": 222.03,
+      "duration": 4.03,
+      "text": "state it."
+    },
+    {
+      "index": 66,
+      "start": 224.03,
+      "end": 224.04,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 67,
+      "start": 224.04,
+      "end": 227.67,
+      "duration": 3.63,
+      "text": "that's a really strange statement if you"
+    },
+    {
+      "index": 68,
+      "start": 227.68,
+      "end": 229.51,
+      "duration": 1.83,
+      "text": "think about it because the left-hand"
+    },
+    {
+      "index": 69,
+      "start": 229.52,
+      "end": 231.35,
+      "duration": 1.83,
+      "text": "side is a line integral."
+    },
+    {
+      "index": 70,
+      "start": 231.36,
+      "end": 234.59,
+      "duration": 3.23,
+      "text": "Okay, so the way we compute it is we"
+    },
+    {
+      "index": 71,
+      "start": 234.6,
+      "end": 238.03,
+      "duration": 3.43,
+      "text": "take this expression M DX plus N DY and"
+    },
+    {
+      "index": 72,
+      "start": 238.04,
+      "end": 240.47,
+      "duration": 2.43,
+      "text": "we parameterize the curve. We express X"
+    },
+    {
+      "index": 73,
+      "start": 240.48,
+      "end": 242.51,
+      "duration": 2.03,
+      "text": "and Y in terms of some variable T maybe"
+    },
+    {
+      "index": 74,
+      "start": 242.52,
+      "end": 244.51,
+      "duration": 1.99,
+      "text": "or whatever you want to call it."
+    },
+    {
+      "index": 75,
+      "start": 244.52,
+      "end": 246.83,
+      "duration": 2.31,
+      "text": "And then you will do a one variable"
+    },
+    {
+      "index": 76,
+      "start": 246.84,
+      "end": 249.43,
+      "duration": 2.59,
+      "text": "integral over T."
+    },
+    {
+      "index": 77,
+      "start": 249.44,
+      "end": 251.23,
+      "duration": 1.79,
+      "text": "This right-hand side here, it's a double"
+    },
+    {
+      "index": 78,
+      "start": 251.24,
+      "end": 254.35,
+      "duration": 3.11,
+      "text": "integral dA. So we do it the way that we"
+    },
+    {
+      "index": 79,
+      "start": 254.36,
+      "end": 256.87,
+      "duration": 2.51,
+      "text": "learned how to a couple of weeks ago."
+    },
+    {
+      "index": 80,
+      "start": 256.88,
+      "end": 259.67,
+      "duration": 2.79,
+      "text": "You take your region, you slice it in"
+    },
+    {
+      "index": 81,
+      "start": 259.68,
+      "end": 261.789,
+      "duration": 2.109,
+      "text": "the X direction or in the Y direction"
+    },
+    {
+      "index": 82,
+      "start": 261.799,
+      "end": 264.23,
+      "duration": 2.431,
+      "text": "and you integrate DX DY after setting up"
+    },
+    {
+      "index": 83,
+      "start": 264.24,
+      "end": 265.87,
+      "duration": 1.63,
+      "text": "the bounds carefully."
+    },
+    {
+      "index": 84,
+      "start": 265.88,
+      "end": 267.87,
+      "duration": 1.99,
+      "text": "Or maybe in polar coordinates R DR D"
+    },
+    {
+      "index": 85,
+      "start": 267.88,
+      "end": 268.91,
+      "duration": 1.03,
+      "text": "theta."
+    },
+    {
+      "index": 86,
+      "start": 268.92,
+      "end": 270.59,
+      "duration": 1.67,
+      "text": "But see, the way in which you compute"
+    },
+    {
+      "index": 87,
+      "start": 270.6,
+      "end": 272.59,
+      "duration": 1.99,
+      "text": "these things is completely different."
+    },
+    {
+      "index": 88,
+      "start": 272.6,
+      "end": 273.83,
+      "duration": 1.23,
+      "text": "This one"
+    },
+    {
+      "index": 89,
+      "start": 273.84,
+      "end": 276.75,
+      "duration": 2.91,
+      "text": "on the left-hand side lives only on the"
+    },
+    {
+      "index": 90,
+      "start": 276.76,
+      "end": 278.63,
+      "duration": 1.87,
+      "text": "curve."
+    },
+    {
+      "index": 91,
+      "start": 278.64,
+      "end": 282.31,
+      "duration": 3.67,
+      "text": "While the right-hand side lives"
+    },
+    {
+      "index": 92,
+      "start": 282.32,
+      "end": 286.19,
+      "duration": 3.87,
+      "text": "everywhere in this region inside."
+    },
+    {
+      "index": 93,
+      "start": 286.2,
+      "end": 288.51,
+      "duration": 2.31,
+      "text": "So here X and Y are related. They live"
+    },
+    {
+      "index": 94,
+      "start": 288.52,
+      "end": 290.15,
+      "duration": 1.63,
+      "text": "on the curve. Here X and Y are"
+    },
+    {
+      "index": 95,
+      "start": 290.16,
+      "end": 292.31,
+      "duration": 2.15,
+      "text": "independent. They're just awesome bounds"
+    },
+    {
+      "index": 96,
+      "start": 292.32,
+      "end": 293.83,
+      "duration": 1.51,
+      "text": "between them."
+    },
+    {
+      "index": 97,
+      "start": 293.84,
+      "end": 295.15,
+      "duration": 1.31,
+      "text": "And of course what you're integrating is"
+    },
+    {
+      "index": 98,
+      "start": 295.16,
+      "end": 296.67,
+      "duration": 1.51,
+      "text": "different. Here it's a line integral for"
+    },
+    {
+      "index": 99,
+      "start": 296.68,
+      "end": 298.95,
+      "duration": 2.27,
+      "text": "work. Here it's a"
+    },
+    {
+      "index": 100,
+      "start": 298.96,
+      "end": 300.35,
+      "duration": 1.39,
+      "text": "double integral"
+    },
+    {
+      "index": 101,
+      "start": 300.36,
+      "end": 304.19,
+      "duration": 3.83,
+      "text": "of some function of X and Y."
+    },
+    {
+      "index": 102,
+      "start": 304.2,
+      "end": 305.63,
+      "duration": 1.43,
+      "text": "So,"
+    },
+    {
+      "index": 103,
+      "start": 305.64,
+      "end": 306.71,
+      "duration": 1.07,
+      "text": "you know, it's a very perplexing"
+    },
+    {
+      "index": 104,
+      "start": 306.72,
+      "end": 310.15,
+      "duration": 3.43,
+      "text": "statement at first."
+    },
+    {
+      "index": 105,
+      "start": 311.75,
+      "end": 311.76,
+      "duration": 0.01,
+      "text": "But"
+    },
+    {
+      "index": 106,
+      "start": 311.76,
+      "end": 314.07,
+      "duration": 2.31,
+      "text": "it's a very powerful tool."
+    },
+    {
+      "index": 107,
+      "start": 314.08,
+      "end": 316.35,
+      "duration": 2.27,
+      "text": "So we're going to try to see, you know,"
+    },
+    {
+      "index": 108,
+      "start": 316.36,
+      "end": 318.27,
+      "duration": 1.91,
+      "text": "how it works concretely,"
+    },
+    {
+      "index": 109,
+      "start": 318.28,
+      "end": 321.11,
+      "duration": 2.83,
+      "text": "what it says, what are the consequences,"
+    },
+    {
+      "index": 110,
+      "start": 321.12,
+      "end": 322.87,
+      "duration": 1.75,
+      "text": "how we could convince ourselves that"
+    },
+    {
+      "index": 111,
+      "start": 322.88,
+      "end": 324.55,
+      "duration": 1.67,
+      "text": "yes, this works,"
+    },
+    {
+      "index": 112,
+      "start": 324.56,
+      "end": 325.99,
+      "duration": 1.43,
+      "text": "and so on. That's going to be the topic"
+    },
+    {
+      "index": 113,
+      "start": 326.0,
+      "end": 328.15,
+      "duration": 2.15,
+      "text": "for today. Uh any questions about the"
+    },
+    {
+      "index": 114,
+      "start": 328.16,
+      "end": 334.95,
+      "duration": 6.79,
+      "text": "statement first?"
+    },
+    {
+      "index": 115,
+      "start": 341.87,
+      "end": 341.88,
+      "duration": 0.01,
+      "text": "Okay. Oh, yeah, one remark. Sorry."
+    },
+    {
+      "index": 116,
+      "start": 341.88,
+      "end": 343.71,
+      "duration": 1.83,
+      "text": "So here it says counterclockwise. What"
+    },
+    {
+      "index": 117,
+      "start": 343.72,
+      "end": 346.91,
+      "duration": 3.19,
+      "text": "if I have a curve that goes clockwise?"
+    },
+    {
+      "index": 118,
+      "start": 346.92,
+      "end": 348.35,
+      "duration": 1.43,
+      "text": "Well, you could just take the negative"
+    },
+    {
+      "index": 119,
+      "start": 348.36,
+      "end": 350.31,
+      "duration": 1.95,
+      "text": "and integrate counterclockwise, you"
+    },
+    {
+      "index": 120,
+      "start": 350.32,
+      "end": 351.63,
+      "duration": 1.31,
+      "text": "know."
+    },
+    {
+      "index": 121,
+      "start": 351.64,
+      "end": 353.83,
+      "duration": 2.19,
+      "text": "Um why do I mean somehow why does the"
+    },
+    {
+      "index": 122,
+      "start": 353.84,
+      "end": 356.07,
+      "duration": 2.23,
+      "text": "theorem choose counterclockwise over"
+    },
+    {
+      "index": 123,
+      "start": 356.08,
+      "end": 358.11,
+      "duration": 2.03,
+      "text": "clockwise, you know? How does it know"
+    },
+    {
+      "index": 124,
+      "start": 358.12,
+      "end": 359.39,
+      "duration": 1.27,
+      "text": "that it's counterclockwise rather than"
+    },
+    {
+      "index": 125,
+      "start": 359.4,
+      "end": 360.67,
+      "duration": 1.27,
+      "text": "clockwise?"
+    },
+    {
+      "index": 126,
+      "start": 360.68,
+      "end": 362.23,
+      "duration": 1.55,
+      "text": "Well, the answer is basically in our"
+    },
+    {
+      "index": 127,
+      "start": 362.24,
+      "end": 364.79,
+      "duration": 2.55,
+      "text": "convention for curl. See, we've said"
+    },
+    {
+      "index": 128,
+      "start": 364.8,
+      "end": 367.35,
+      "duration": 2.55,
+      "text": "curl is NX minus MY and not the other"
+    },
+    {
+      "index": 129,
+      "start": 367.36,
+      "end": 369.67,
+      "duration": 2.31,
+      "text": "way around. And that's a convention as"
+    },
+    {
+      "index": 130,
+      "start": 369.68,
+      "end": 371.43,
+      "duration": 1.75,
+      "text": "well. So somehow the two conventions"
+    },
+    {
+      "index": 131,
+      "start": 371.44,
+      "end": 373.95,
+      "duration": 2.51,
+      "text": "match with each other."
+    },
+    {
+      "index": 132,
+      "start": 373.96,
+      "end": 376.07,
+      "duration": 2.11,
+      "text": "That's the best answer I can give you."
+    },
+    {
+      "index": 133,
+      "start": 376.08,
+      "end": 377.91,
+      "duration": 1.83,
+      "text": "So you know, if you met somebody from a"
+    },
+    {
+      "index": 134,
+      "start": 377.92,
+      "end": 379.55,
+      "duration": 1.63,
+      "text": "different planet, they might have"
+    },
+    {
+      "index": 135,
+      "start": 379.56,
+      "end": 380.99,
+      "duration": 1.43,
+      "text": "Green's Theorem with the opposite"
+    },
+    {
+      "index": 136,
+      "start": 381.0,
+      "end": 383.15,
+      "duration": 2.15,
+      "text": "conventions with curves going clockwise"
+    },
+    {
+      "index": 137,
+      "start": 383.16,
+      "end": 384.31,
+      "duration": 1.15,
+      "text": "and the curl defined the other way"
+    },
+    {
+      "index": 138,
+      "start": 384.32,
+      "end": 386.99,
+      "duration": 2.67,
+      "text": "around."
+    },
+    {
+      "index": 139,
+      "start": 388.27,
+      "end": 388.28,
+      "duration": 0.01,
+      "text": "I mean, probably if you met an alien"
+    },
+    {
+      "index": 140,
+      "start": 388.28,
+      "end": 389.11,
+      "duration": 0.83,
+      "text": "then I'm not sure if you would be"
+    },
+    {
+      "index": 141,
+      "start": 389.12,
+      "end": 391.19,
+      "duration": 2.07,
+      "text": "discussing Green's Theorem first, but"
+    },
+    {
+      "index": 142,
+      "start": 391.2,
+      "end": 402.99,
+      "duration": 11.79,
+      "text": "just in case, you know."
+    },
+    {
+      "index": 143,
+      "start": 408.59,
+      "end": 408.6,
+      "duration": 0.01,
+      "text": "Uh so that being said,"
+    },
+    {
+      "index": 144,
+      "start": 408.6,
+      "end": 410.79,
+      "duration": 2.19,
+      "text": "so there's a warning here, which is that"
+    },
+    {
+      "index": 145,
+      "start": 410.8,
+      "end": 411.87,
+      "duration": 1.07,
+      "text": "this is"
+    },
+    {
+      "index": 146,
+      "start": 411.88,
+      "end": 413.67,
+      "duration": 1.79,
+      "text": "only"
+    },
+    {
+      "index": 147,
+      "start": 413.68,
+      "end": 419.99,
+      "duration": 6.31,
+      "text": "for closed curves."
+    },
+    {
+      "index": 148,
+      "start": 421.43,
+      "end": 421.44,
+      "duration": 0.01,
+      "text": "Okay, so if I give you a curve that's"
+    },
+    {
+      "index": 149,
+      "start": 421.44,
+      "end": 424.31,
+      "duration": 2.87,
+      "text": "not closed and I tell you, well, compute"
+    },
+    {
+      "index": 150,
+      "start": 424.32,
+      "end": 426.79,
+      "duration": 2.47,
+      "text": "the line integral, then, you know, you"
+    },
+    {
+      "index": 151,
+      "start": 426.8,
+      "end": 428.23,
+      "duration": 1.43,
+      "text": "have to do it by hand. You have to"
+    },
+    {
+      "index": 152,
+      "start": 428.24,
+      "end": 429.91,
+      "duration": 1.67,
+      "text": "parameterize the curve."
+    },
+    {
+      "index": 153,
+      "start": 429.92,
+      "end": 432.11,
+      "duration": 2.19,
+      "text": "Or if you really don't like that line"
+    },
+    {
+      "index": 154,
+      "start": 432.12,
+      "end": 434.19,
+      "duration": 2.07,
+      "text": "integral, you could close the path by"
+    },
+    {
+      "index": 155,
+      "start": 434.2,
+      "end": 436.19,
+      "duration": 1.99,
+      "text": "adding some other line integral to it"
+    },
+    {
+      "index": 156,
+      "start": 436.2,
+      "end": 439.67,
+      "duration": 3.47,
+      "text": "and then compute using Green's Theorem."
+    },
+    {
+      "index": 157,
+      "start": 439.68,
+      "end": 440.87,
+      "duration": 1.19,
+      "text": "But you can't use Green's Theorem"
+    },
+    {
+      "index": 158,
+      "start": 440.88,
+      "end": 448.59,
+      "duration": 7.71,
+      "text": "directly if the curve is not closed."
+    },
+    {
+      "index": 159,
+      "start": 450.07,
+      "end": 450.08,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 160,
+      "start": 450.08,
+      "end": 456.35,
+      "duration": 6.27,
+      "text": "So, let's do a quick example."
+    },
+    {
+      "index": 161,
+      "start": 459.43,
+      "end": 459.44,
+      "duration": 0.01,
+      "text": "Okay, so let's say that I give you"
+    },
+    {
+      "index": 162,
+      "start": 459.44,
+      "end": 462.63,
+      "duration": 3.19,
+      "text": "C, the circle"
+    },
+    {
+      "index": 163,
+      "start": 462.64,
+      "end": 467.63,
+      "duration": 4.99,
+      "text": "of radius one"
+    },
+    {
+      "index": 164,
+      "start": 470.39,
+      "end": 470.4,
+      "duration": 0.01,
+      "text": "centered"
+    },
+    {
+      "index": 165,
+      "start": 470.4,
+      "end": 474.55,
+      "duration": 4.15,
+      "text": "at the point 2 {comma} 0. So,"
+    },
+    {
+      "index": 166,
+      "start": 474.56,
+      "end": 477.79,
+      "duration": 3.23,
+      "text": "you know, it's out here."
+    },
+    {
+      "index": 167,
+      "start": 477.8,
+      "end": 480.27,
+      "duration": 2.47,
+      "text": "Let's Let's make our C."
+    },
+    {
+      "index": 168,
+      "start": 480.28,
+      "end": 481.63,
+      "duration": 1.35,
+      "text": "And let's say that I do it"
+    },
+    {
+      "index": 169,
+      "start": 481.64,
+      "end": 486.07,
+      "duration": 4.43,
+      "text": "counterclockwise so that it will"
+    },
+    {
+      "index": 170,
+      "start": 487.15,
+      "end": 487.16,
+      "duration": 0.01,
+      "text": "you know, it will match with the"
+    },
+    {
+      "index": 171,
+      "start": 487.16,
+      "end": 495.63,
+      "duration": 8.47,
+      "text": "statement of the theorem."
+    },
+    {
+      "index": 172,
+      "start": 499.79,
+      "end": 499.8,
+      "duration": 0.01,
+      "text": "And let's say that I want you to compute"
+    },
+    {
+      "index": 173,
+      "start": 499.8,
+      "end": 502.39,
+      "duration": 2.59,
+      "text": "the line integral along C"
+    },
+    {
+      "index": 174,
+      "start": 502.4,
+      "end": 504.35,
+      "duration": 1.95,
+      "text": "of"
+    },
+    {
+      "index": 175,
+      "start": 504.36,
+      "end": 507.91,
+      "duration": 3.55,
+      "text": "Y E to the minus X DX plus"
+    },
+    {
+      "index": 176,
+      "start": 507.92,
+      "end": 512.83,
+      "duration": 4.91,
+      "text": "1/2 of X squared minus E to the minus X"
+    },
+    {
+      "index": 177,
+      "start": 512.84,
+      "end": 514.79,
+      "duration": 1.95,
+      "text": "DY."
+    },
+    {
+      "index": 178,
+      "start": 514.8,
+      "end": 517.589,
+      "duration": 2.789,
+      "text": "And you know, that's a kind of sadistic"
+    },
+    {
+      "index": 179,
+      "start": 517.599,
+      "end": 519.31,
+      "duration": 1.711,
+      "text": "example, but"
+    },
+    {
+      "index": 180,
+      "start": 519.32,
+      "end": 521.63,
+      "duration": 2.31,
+      "text": "maybe I will ask you to do that."
+    },
+    {
+      "index": 181,
+      "start": 521.64,
+      "end": 523.23,
+      "duration": 1.59,
+      "text": "So,"
+    },
+    {
+      "index": 182,
+      "start": 523.24,
+      "end": 524.79,
+      "duration": 1.55,
+      "text": "how would you do it directly? Well, to"
+    },
+    {
+      "index": 183,
+      "start": 524.8,
+      "end": 527.63,
+      "duration": 2.83,
+      "text": "do it directly, you would have to"
+    },
+    {
+      "index": 184,
+      "start": 527.64,
+      "end": 529.31,
+      "duration": 1.67,
+      "text": "parameterize this curve. So that would"
+    },
+    {
+      "index": 185,
+      "start": 529.32,
+      "end": 535.27,
+      "duration": 5.95,
+      "text": "probably involve"
+    },
+    {
+      "index": 186,
+      "start": 538.27,
+      "end": 538.28,
+      "duration": 0.01,
+      "text": "you know, setting X equals"
+    },
+    {
+      "index": 187,
+      "start": 538.28,
+      "end": 540.51,
+      "duration": 2.23,
+      "text": "2 plus cosine theta,"
+    },
+    {
+      "index": 188,
+      "start": 540.52,
+      "end": 543.47,
+      "duration": 2.95,
+      "text": "Y equals sine theta, but you know, I'm"
+    },
+    {
+      "index": 189,
+      "start": 543.48,
+      "end": 545.47,
+      "duration": 1.99,
+      "text": "using as parameter the angle around the"
+    },
+    {
+      "index": 190,
+      "start": 545.48,
+      "end": 547.55,
+      "duration": 2.07,
+      "text": "circle. It's like the unit circle, the"
+    },
+    {
+      "index": 191,
+      "start": 547.56,
+      "end": 549.67,
+      "duration": 2.11,
+      "text": "usual one, but shifted by two in the X"
+    },
+    {
+      "index": 192,
+      "start": 549.68,
+      "end": 551.03,
+      "duration": 1.35,
+      "text": "direction."
+    },
+    {
+      "index": 193,
+      "start": 551.04,
+      "end": 554.99,
+      "duration": 3.95,
+      "text": "And then I would set DX equals minus"
+    },
+    {
+      "index": 194,
+      "start": 555.0,
+      "end": 557.79,
+      "duration": 2.79,
+      "text": "sine theta D theta."
+    },
+    {
+      "index": 195,
+      "start": 557.8,
+      "end": 560.35,
+      "duration": 2.55,
+      "text": "I would set DY equals"
+    },
+    {
+      "index": 196,
+      "start": 560.36,
+      "end": 562.75,
+      "duration": 2.39,
+      "text": "cos theta D theta."
+    },
+    {
+      "index": 197,
+      "start": 562.76,
+      "end": 564.15,
+      "duration": 1.39,
+      "text": "And I would substitute and I would"
+    },
+    {
+      "index": 198,
+      "start": 564.16,
+      "end": 566.71,
+      "duration": 2.55,
+      "text": "integrate from zero to 2 pi. And I would"
+    },
+    {
+      "index": 199,
+      "start": 566.72,
+      "end": 568.03,
+      "duration": 1.31,
+      "text": "probably run into a bit of trouble"
+    },
+    {
+      "index": 200,
+      "start": 568.04,
+      "end": 570.35,
+      "duration": 2.31,
+      "text": "because I would have this E to the minus"
+    },
+    {
+      "index": 201,
+      "start": 570.36,
+      "end": 571.71,
+      "duration": 1.35,
+      "text": "X, which would give me, you know,"
+    },
+    {
+      "index": 202,
+      "start": 571.72,
+      "end": 573.31,
+      "duration": 1.59,
+      "text": "something that I really don't want to"
+    },
+    {
+      "index": 203,
+      "start": 573.32,
+      "end": 575.07,
+      "duration": 1.75,
+      "text": "integrate."
+    },
+    {
+      "index": 204,
+      "start": 575.08,
+      "end": 576.19,
+      "duration": 1.11,
+      "text": "So,"
+    },
+    {
+      "index": 205,
+      "start": 576.2,
+      "end": 578.75,
+      "duration": 2.55,
+      "text": "instead of doing that, which looks"
+    },
+    {
+      "index": 206,
+      "start": 578.76,
+      "end": 580.67,
+      "duration": 1.91,
+      "text": "pretty much, you know, doomed,"
+    },
+    {
+      "index": 207,
+      "start": 580.68,
+      "end": 583.87,
+      "duration": 3.19,
+      "text": "um I'm going to"
+    },
+    {
+      "index": 208,
+      "start": 583.88,
+      "end": 585.11,
+      "duration": 1.23,
+      "text": "Instead I'm going to use Green's"
+    },
+    {
+      "index": 209,
+      "start": 585.12,
+      "end": 591.47,
+      "duration": 6.35,
+      "text": "Theorem."
+    },
+    {
+      "index": 210,
+      "start": 593.11,
+      "end": 593.12,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 211,
+      "start": 593.12,
+      "end": 595.19,
+      "duration": 2.07,
+      "text": "using Green's Theorem,"
+    },
+    {
+      "index": 212,
+      "start": 595.2,
+      "end": 598.23,
+      "duration": 3.03,
+      "text": "the way I will do it is I will instead"
+    },
+    {
+      "index": 213,
+      "start": 598.24,
+      "end": 601.63,
+      "duration": 3.39,
+      "text": "compute a double integral."
+    },
+    {
+      "index": 214,
+      "start": 602.99,
+      "end": 603.0,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 215,
+      "start": 603.0,
+      "end": 604.47,
+      "duration": 1.47,
+      "text": "So,"
+    },
+    {
+      "index": 216,
+      "start": 604.48,
+      "end": 612.11,
+      "duration": 7.63,
+      "text": "I will"
+    },
+    {
+      "index": 217,
+      "start": 615.15,
+      "end": 615.16,
+      "duration": 0.01,
+      "text": "compute the double integral"
+    },
+    {
+      "index": 218,
+      "start": 615.16,
+      "end": 619.27,
+      "duration": 4.11,
+      "text": "over the region inside of curl F"
+    },
+    {
+      "index": 219,
+      "start": 619.28,
+      "end": 621.51,
+      "duration": 2.23,
+      "text": "DA."
+    },
+    {
+      "index": 220,
+      "start": 621.52,
+      "end": 624.31,
+      "duration": 2.79,
+      "text": "So, I should say probably"
+    },
+    {
+      "index": 221,
+      "start": 624.32,
+      "end": 628.27,
+      "duration": 3.95,
+      "text": "what F was."
+    },
+    {
+      "index": 222,
+      "start": 630.35,
+      "end": 630.36,
+      "duration": 0.01,
+      "text": "So, let's call this M. Let's call this"
+    },
+    {
+      "index": 223,
+      "start": 630.36,
+      "end": 631.91,
+      "duration": 1.55,
+      "text": "N."
+    },
+    {
+      "index": 224,
+      "start": 631.92,
+      "end": 636.91,
+      "duration": 4.99,
+      "text": "And"
+    },
+    {
+      "index": 225,
+      "start": 639.83,
+      "end": 639.84,
+      "duration": 0.01,
+      "text": "then I will actually just use the form"
+    },
+    {
+      "index": 226,
+      "start": 639.84,
+      "end": 641.51,
+      "duration": 1.67,
+      "text": "coordinates"
+    },
+    {
+      "index": 227,
+      "start": 641.52,
+      "end": 645.47,
+      "duration": 3.95,
+      "text": "NX - MY DA."
+    },
+    {
+      "index": 228,
+      "start": 645.48,
+      "end": 650.39,
+      "duration": 4.91,
+      "text": "And what is R here? Well, R is the disk"
+    },
+    {
+      "index": 229,
+      "start": 650.4,
+      "end": 653.15,
+      "duration": 2.75,
+      "text": "in here."
+    },
+    {
+      "index": 230,
+      "start": 654.99,
+      "end": 655.0,
+      "duration": 0.01,
+      "text": "So, of course, it might not be that"
+    },
+    {
+      "index": 231,
+      "start": 655.0,
+      "end": 656.71,
+      "duration": 1.71,
+      "text": "pleasant because we'll also have to set"
+    },
+    {
+      "index": 232,
+      "start": 656.72,
+      "end": 659.43,
+      "duration": 2.71,
+      "text": "up this double integral. And for that,"
+    },
+    {
+      "index": 233,
+      "start": 659.44,
+      "end": 661.15,
+      "duration": 1.71,
+      "text": "you know, we'll have to figure out a way"
+    },
+    {
+      "index": 234,
+      "start": 661.16,
+      "end": 664.39,
+      "duration": 3.23,
+      "text": "to slice this region nicely. We could do"
+    },
+    {
+      "index": 235,
+      "start": 664.4,
+      "end": 667.35,
+      "duration": 2.95,
+      "text": "it DX DY. We could do it DY DX. Or maybe"
+    },
+    {
+      "index": 236,
+      "start": 667.36,
+      "end": 668.99,
+      "duration": 1.63,
+      "text": "we will want to actually make a change"
+    },
+    {
+      "index": 237,
+      "start": 669.0,
+      "end": 671.19,
+      "duration": 2.19,
+      "text": "of variables to first shift this to the"
+    },
+    {
+      "index": 238,
+      "start": 671.2,
+      "end": 674.31,
+      "duration": 3.11,
+      "text": "origin, you know, change X to X - 2."
+    },
+    {
+      "index": 239,
+      "start": 674.32,
+      "end": 675.63,
+      "duration": 1.31,
+      "text": "And then"
+    },
+    {
+      "index": 240,
+      "start": 675.64,
+      "end": 677.67,
+      "duration": 2.03,
+      "text": "switch to polar coordinates. Well, let's"
+    },
+    {
+      "index": 241,
+      "start": 677.68,
+      "end": 681.47,
+      "duration": 3.79,
+      "text": "see what happens later."
+    },
+    {
+      "index": 242,
+      "start": 684.43,
+      "end": 684.44,
+      "duration": 0.01,
+      "text": "Okay? So,"
+    },
+    {
+      "index": 243,
+      "start": 684.44,
+      "end": 686.23,
+      "duration": 1.79,
+      "text": "what is"
+    },
+    {
+      "index": 244,
+      "start": 686.24,
+      "end": 688.75,
+      "duration": 2.51,
+      "text": "So, this is R."
+    },
+    {
+      "index": 245,
+      "start": 688.76,
+      "end": 692.829,
+      "duration": 4.069,
+      "text": "So, what is N sub X?"
+    },
+    {
+      "index": 246,
+      "start": 695.829,
+      "end": 695.839,
+      "duration": 0.01,
+      "text": "Well, N sub X is"
+    },
+    {
+      "index": 247,
+      "start": 695.839,
+      "end": 697.99,
+      "duration": 2.151,
+      "text": "X"
+    },
+    {
+      "index": 248,
+      "start": 698.0,
+      "end": 701.43,
+      "duration": 3.43,
+      "text": "plus E to the minus X."
+    },
+    {
+      "index": 249,
+      "start": 701.44,
+      "end": 705.79,
+      "duration": 4.35,
+      "text": "Minus what is M sub Y?"
+    },
+    {
+      "index": 250,
+      "start": 707.99,
+      "end": 708.0,
+      "duration": 0.01,
+      "text": "E to the minus X."
+    },
+    {
+      "index": 251,
+      "start": 708.0,
+      "end": 709.63,
+      "duration": 1.63,
+      "text": "Okay?"
+    },
+    {
+      "index": 252,
+      "start": 709.64,
+      "end": 711.99,
+      "duration": 2.35,
+      "text": "This is NX."
+    },
+    {
+      "index": 253,
+      "start": 712.0,
+      "end": 715.03,
+      "duration": 3.03,
+      "text": "This is MY."
+    },
+    {
+      "index": 254,
+      "start": 715.04,
+      "end": 717.39,
+      "duration": 2.35,
+      "text": "DA. Well, it seems to simplify a bit,"
+    },
+    {
+      "index": 255,
+      "start": 717.4,
+      "end": 718.95,
+      "duration": 1.55,
+      "text": "right?"
+    },
+    {
+      "index": 256,
+      "start": 718.96,
+      "end": 720.71,
+      "duration": 1.75,
+      "text": "I will just get the double integral over"
+    },
+    {
+      "index": 257,
+      "start": 720.72,
+      "end": 724.43,
+      "duration": 3.71,
+      "text": "the R of X DA."
+    },
+    {
+      "index": 258,
+      "start": 724.44,
+      "end": 726.15,
+      "duration": 1.71,
+      "text": "Which looks suddenly a lot more"
+    },
+    {
+      "index": 259,
+      "start": 726.16,
+      "end": 727.829,
+      "duration": 1.669,
+      "text": "pleasant."
+    },
+    {
+      "index": 260,
+      "start": 727.839,
+      "end": 728.99,
+      "duration": 1.151,
+      "text": "And then of course, I made up the"
+    },
+    {
+      "index": 261,
+      "start": 729.0,
+      "end": 730.31,
+      "duration": 1.31,
+      "text": "example in that way, you know, so that"
+    },
+    {
+      "index": 262,
+      "start": 730.32,
+      "end": 731.55,
+      "duration": 1.23,
+      "text": "it simplifies when you use Green's"
+    },
+    {
+      "index": 263,
+      "start": 731.56,
+      "end": 733.23,
+      "duration": 1.67,
+      "text": "theorem."
+    },
+    {
+      "index": 264,
+      "start": 733.24,
+      "end": 734.71,
+      "duration": 1.47,
+      "text": "Um"
+    },
+    {
+      "index": 265,
+      "start": 734.72,
+      "end": 736.23,
+      "duration": 1.51,
+      "text": "but you know, it gives you"
+    },
+    {
+      "index": 266,
+      "start": 736.24,
+      "end": 738.43,
+      "duration": 2.19,
+      "text": "an example where"
+    },
+    {
+      "index": 267,
+      "start": 738.44,
+      "end": 740.67,
+      "duration": 2.23,
+      "text": "you can turn a really hard line integral"
+    },
+    {
+      "index": 268,
+      "start": 740.68,
+      "end": 742.829,
+      "duration": 2.149,
+      "text": "into an easier double integral."
+    },
+    {
+      "index": 269,
+      "start": 742.839,
+      "end": 744.31,
+      "duration": 1.471,
+      "text": "Now, how do we compute that double"
+    },
+    {
+      "index": 270,
+      "start": 744.32,
+      "end": 746.03,
+      "duration": 1.71,
+      "text": "integral?"
+    },
+    {
+      "index": 271,
+      "start": 746.04,
+      "end": 748.27,
+      "duration": 2.23,
+      "text": "Oops."
+    },
+    {
+      "index": 272,
+      "start": 748.28,
+      "end": 749.95,
+      "duration": 1.67,
+      "text": "Well,"
+    },
+    {
+      "index": 273,
+      "start": 749.96,
+      "end": 752.03,
+      "duration": 2.07,
+      "text": "so one way would be to set it up. Or"
+    },
+    {
+      "index": 274,
+      "start": 752.04,
+      "end": 755.59,
+      "duration": 3.55,
+      "text": "let's actually be a bit smarter"
+    },
+    {
+      "index": 275,
+      "start": 755.6,
+      "end": 760.15,
+      "duration": 4.55,
+      "text": "and observe that"
+    },
+    {
+      "index": 276,
+      "start": 762.71,
+      "end": 762.72,
+      "duration": 0.01,
+      "text": "this is actually"
+    },
+    {
+      "index": 277,
+      "start": 762.72,
+      "end": 766.31,
+      "duration": 3.59,
+      "text": "the area of the region R"
+    },
+    {
+      "index": 278,
+      "start": 766.32,
+      "end": 767.91,
+      "duration": 1.59,
+      "text": "times"
+    },
+    {
+      "index": 279,
+      "start": 767.92,
+      "end": 772.07,
+      "duration": 4.15,
+      "text": "the X coordinate of its center of mass."
+    },
+    {
+      "index": 280,
+      "start": 773.31,
+      "end": 773.32,
+      "duration": 0.01,
+      "text": "Right?"
+    },
+    {
+      "index": 281,
+      "start": 773.32,
+      "end": 775.67,
+      "duration": 2.35,
+      "text": "If I look at the definition of a center"
+    },
+    {
+      "index": 282,
+      "start": 775.68,
+      "end": 778.71,
+      "duration": 3.03,
+      "text": "of mass, it's the average value of X."
+    },
+    {
+      "index": 283,
+      "start": 778.72,
+      "end": 781.79,
+      "duration": 3.07,
+      "text": "So, it's one over the area times the"
+    },
+    {
+      "index": 284,
+      "start": 781.8,
+      "end": 783.99,
+      "duration": 2.19,
+      "text": "double integral of X DA."
+    },
+    {
+      "index": 285,
+      "start": 784.0,
+      "end": 785.51,
+      "duration": 1.51,
+      "text": "Well, possibly with a density, but here"
+    },
+    {
+      "index": 286,
+      "start": 785.52,
+      "end": 789.31,
+      "duration": 3.79,
+      "text": "I'm taking uniform density one."
+    },
+    {
+      "index": 287,
+      "start": 789.32,
+      "end": 792.11,
+      "duration": 2.79,
+      "text": "And now I think I know just by looking"
+    },
+    {
+      "index": 288,
+      "start": 792.12,
+      "end": 794.11,
+      "duration": 1.99,
+      "text": "at the picture what the where the center"
+    },
+    {
+      "index": 289,
+      "start": 794.12,
+      "end": 796.35,
+      "duration": 2.23,
+      "text": "of mass of this circle will be, right?"
+    },
+    {
+      "index": 290,
+      "start": 796.36,
+      "end": 798.87,
+      "duration": 2.51,
+      "text": "I mean, it will be right in the middle."
+    },
+    {
+      "index": 291,
+      "start": 798.88,
+      "end": 802.03,
+      "duration": 3.15,
+      "text": "So,"
+    },
+    {
+      "index": 292,
+      "start": 803.79,
+      "end": 803.8,
+      "duration": 0.01,
+      "text": "that is two."
+    },
+    {
+      "index": 293,
+      "start": 803.8,
+      "end": 806.59,
+      "duration": 2.79,
+      "text": "If you want by symmetry,"
+    },
+    {
+      "index": 294,
+      "start": 806.6,
+      "end": 809.95,
+      "duration": 3.35,
+      "text": "and the area of this guy is just pi"
+    },
+    {
+      "index": 295,
+      "start": 809.96,
+      "end": 812.75,
+      "duration": 2.79,
+      "text": "because it's a disk of radius one."
+    },
+    {
+      "index": 296,
+      "start": 812.76,
+      "end": 816.47,
+      "duration": 3.71,
+      "text": "So, I will just get 2 pi."
+    },
+    {
+      "index": 297,
+      "start": 817.67,
+      "end": 817.68,
+      "duration": 0.01,
+      "text": "I mean, of course, if you didn't see"
+    },
+    {
+      "index": 298,
+      "start": 817.68,
+      "end": 820.07,
+      "duration": 2.39,
+      "text": "that, then you could also compute that"
+    },
+    {
+      "index": 299,
+      "start": 820.08,
+      "end": 821.59,
+      "duration": 1.51,
+      "text": "double integral directly. It's a nice"
+    },
+    {
+      "index": 300,
+      "start": 821.6,
+      "end": 823.11,
+      "duration": 1.51,
+      "text": "exercise."
+    },
+    {
+      "index": 301,
+      "start": 823.12,
+      "end": 825.15,
+      "duration": 2.03,
+      "text": "But see, here using geometry helps you"
+    },
+    {
+      "index": 302,
+      "start": 825.16,
+      "end": 830.11,
+      "duration": 4.95,
+      "text": "to actually streamline the calculation."
+    },
+    {
+      "index": 303,
+      "start": 838.829,
+      "end": 838.839,
+      "duration": 0.01,
+      "text": "Uh yes."
+    },
+    {
+      "index": 304,
+      "start": 838.839,
+      "end": 839.829,
+      "duration": 0.99,
+      "text": "Can you repeat"
+    },
+    {
+      "index": 305,
+      "start": 839.839,
+      "end": 840.87,
+      "duration": 1.031,
+      "text": "the last"
+    },
+    {
+      "index": 306,
+      "start": 840.88,
+      "end": 842.95,
+      "duration": 2.07,
+      "text": "part of Okay, yes. Let me just repeat"
+    },
+    {
+      "index": 307,
+      "start": 842.96,
+      "end": 845.11,
+      "duration": 2.15,
+      "text": "the last part. So, I said we have to"
+    },
+    {
+      "index": 308,
+      "start": 845.12,
+      "end": 848.79,
+      "duration": 3.67,
+      "text": "compute the double integral of X DA over"
+    },
+    {
+      "index": 309,
+      "start": 848.8,
+      "end": 850.95,
+      "duration": 2.15,
+      "text": "this region here, which is a disk of"
+    },
+    {
+      "index": 310,
+      "start": 850.96,
+      "end": 853.99,
+      "duration": 3.03,
+      "text": "radius one centered at"
+    },
+    {
+      "index": 311,
+      "start": 854.0,
+      "end": 858.03,
+      "duration": 4.03,
+      "text": "this point is 2 0."
+    },
+    {
+      "index": 312,
+      "start": 861.069,
+      "end": 861.079,
+      "duration": 0.01,
+      "text": "So, instead of setting up the integral,"
+    },
+    {
+      "index": 313,
+      "start": 861.079,
+      "end": 863.59,
+      "duration": 2.511,
+      "text": "you know, with bounds and integrating DX"
+    },
+    {
+      "index": 314,
+      "start": 863.6,
+      "end": 866.43,
+      "duration": 2.83,
+      "text": "DY or DY DX or polar coordinates,"
+    },
+    {
+      "index": 315,
+      "start": 866.44,
+      "end": 868.069,
+      "duration": 1.629,
+      "text": "I'm just going to say, well, let's"
+    },
+    {
+      "index": 316,
+      "start": 868.079,
+      "end": 869.829,
+      "duration": 1.75,
+      "text": "remember the definition of a center of"
+    },
+    {
+      "index": 317,
+      "start": 869.839,
+      "end": 870.87,
+      "duration": 1.031,
+      "text": "mass."
+    },
+    {
+      "index": 318,
+      "start": 870.88,
+      "end": 873.47,
+      "duration": 2.59,
+      "text": "It's the average value of a function X"
+    },
+    {
+      "index": 319,
+      "start": 873.48,
+      "end": 876.39,
+      "duration": 2.91,
+      "text": "in the region. So, it's one over the"
+    },
+    {
+      "index": 320,
+      "start": 876.4,
+      "end": 878.99,
+      "duration": 2.59,
+      "text": "area of the region times"
+    },
+    {
+      "index": 321,
+      "start": 879.0,
+      "end": 881.91,
+      "duration": 2.91,
+      "text": "the double integral of X DA."
+    },
+    {
+      "index": 322,
+      "start": 881.92,
+      "end": 883.43,
+      "duration": 1.51,
+      "text": "Like if you look again at the definition"
+    },
+    {
+      "index": 323,
+      "start": 883.44,
+      "end": 885.11,
+      "duration": 1.67,
+      "text": "of X bar,"
+    },
+    {
+      "index": 324,
+      "start": 885.12,
+      "end": 889.03,
+      "duration": 3.91,
+      "text": "it's one over area double integral of X"
+    },
+    {
+      "index": 325,
+      "start": 889.04,
+      "end": 890.91,
+      "duration": 1.87,
+      "text": "DA."
+    },
+    {
+      "index": 326,
+      "start": 890.92,
+      "end": 892.55,
+      "duration": 1.63,
+      "text": "Well, maybe, you know, if there's a"
+    },
+    {
+      "index": 327,
+      "start": 892.56,
+      "end": 894.43,
+      "duration": 1.87,
+      "text": "density, then it's one over mass times"
+    },
+    {
+      "index": 328,
+      "start": 894.44,
+      "end": 897.55,
+      "duration": 3.11,
+      "text": "double integral of X density DA. But if"
+    },
+    {
+      "index": 329,
+      "start": 897.56,
+      "end": 899.79,
+      "duration": 2.23,
+      "text": "density is one, then it just becomes"
+    },
+    {
+      "index": 330,
+      "start": 899.8,
+      "end": 901.67,
+      "duration": 1.87,
+      "text": "this."
+    },
+    {
+      "index": 331,
+      "start": 901.68,
+      "end": 902.91,
+      "duration": 1.23,
+      "text": "So,"
+    },
+    {
+      "index": 332,
+      "start": 902.92,
+      "end": 904.87,
+      "duration": 1.95,
+      "text": "you know, switching the area, moving the"
+    },
+    {
+      "index": 333,
+      "start": 904.88,
+      "end": 907.069,
+      "duration": 2.189,
+      "text": "area to the other side, I'll get double"
+    },
+    {
+      "index": 334,
+      "start": 907.079,
+      "end": 909.03,
+      "duration": 1.951,
+      "text": "integral of X DA is the area of the"
+    },
+    {
+      "index": 335,
+      "start": 909.04,
+      "end": 911.19,
+      "duration": 2.15,
+      "text": "region times the X coordinate of the"
+    },
+    {
+      "index": 336,
+      "start": 911.2,
+      "end": 912.63,
+      "duration": 1.43,
+      "text": "center of mass."
+    },
+    {
+      "index": 337,
+      "start": 912.64,
+      "end": 914.39,
+      "duration": 1.75,
+      "text": "The area of the region is pi because"
+    },
+    {
+      "index": 338,
+      "start": 914.4,
+      "end": 917.43,
+      "duration": 3.03,
+      "text": "it's a unit disk. And the center of mass"
+    },
+    {
+      "index": 339,
+      "start": 917.44,
+      "end": 920.39,
+      "duration": 2.95,
+      "text": "is the center of the disk. So, it's X"
+    },
+    {
+      "index": 340,
+      "start": 920.4,
+      "end": 922.43,
+      "duration": 2.03,
+      "text": "bar is two."
+    },
+    {
+      "index": 341,
+      "start": 922.44,
+      "end": 925.19,
+      "duration": 2.75,
+      "text": "And I get 2 pi."
+    },
+    {
+      "index": 342,
+      "start": 925.2,
+      "end": 927.79,
+      "duration": 2.59,
+      "text": "Okay. Now, I didn't actually have to do"
+    },
+    {
+      "index": 343,
+      "start": 927.8,
+      "end": 929.55,
+      "duration": 1.75,
+      "text": "this in my example today, but I thought,"
+    },
+    {
+      "index": 344,
+      "start": 929.56,
+      "end": 930.829,
+      "duration": 1.269,
+      "text": "you know, that would be good review. It"
+    },
+    {
+      "index": 345,
+      "start": 930.839,
+      "end": 932.91,
+      "duration": 2.071,
+      "text": "would remind you of center of mass and"
+    },
+    {
+      "index": 346,
+      "start": 932.92,
+      "end": 939.35,
+      "duration": 6.43,
+      "text": "all that."
+    },
+    {
+      "index": 347,
+      "start": 947.31,
+      "end": 947.32,
+      "duration": 0.01,
+      "text": "Um any other questions?"
+    },
+    {
+      "index": 348,
+      "start": 947.32,
+      "end": 949.069,
+      "duration": 1.749,
+      "text": "Nope."
+    },
+    {
+      "index": 349,
+      "start": 949.079,
+      "end": 951.63,
+      "duration": 2.551,
+      "text": "Okay, so let's see."
+    },
+    {
+      "index": 350,
+      "start": 951.64,
+      "end": 952.99,
+      "duration": 1.35,
+      "text": "You know, now that we've seen how to use"
+    },
+    {
+      "index": 351,
+      "start": 953.0,
+      "end": 955.829,
+      "duration": 2.829,
+      "text": "it in practice, how to avoid calculating"
+    },
+    {
+      "index": 352,
+      "start": 955.839,
+      "end": 957.949,
+      "duration": 2.11,
+      "text": "a line integral if we don't want to,"
+    },
+    {
+      "index": 353,
+      "start": 957.959,
+      "end": 959.75,
+      "duration": 1.791,
+      "text": "let's try to convince ourselves that"
+    },
+    {
+      "index": 354,
+      "start": 959.76,
+      "end": 963.67,
+      "duration": 3.91,
+      "text": "this theorem makes sense."
+    },
+    {
+      "index": 355,
+      "start": 970.91,
+      "end": 970.92,
+      "duration": 0.01,
+      "text": "Well, let's start with an easy case"
+    },
+    {
+      "index": 356,
+      "start": 970.92,
+      "end": 972.35,
+      "duration": 1.43,
+      "text": "where we should be able to know the"
+    },
+    {
+      "index": 357,
+      "start": 972.36,
+      "end": 975.31,
+      "duration": 2.95,
+      "text": "answer to both sides."
+    },
+    {
+      "index": 358,
+      "start": 975.32,
+      "end": 983.35,
+      "duration": 8.03,
+      "text": "So, let's look at the special case."
+    },
+    {
+      "index": 359,
+      "start": 985.35,
+      "end": 985.36,
+      "duration": 0.01,
+      "text": "Let's look at the case where curl F is"
+    },
+    {
+      "index": 360,
+      "start": 985.36,
+      "end": 991.63,
+      "duration": 6.27,
+      "text": "zero."
+    },
+    {
+      "index": 361,
+      "start": 993.43,
+      "end": 993.44,
+      "duration": 0.01,
+      "text": "Then"
+    },
+    {
+      "index": 362,
+      "start": 993.44,
+      "end": 996.43,
+      "duration": 2.99,
+      "text": "well, we'd like to conclude that F is"
+    },
+    {
+      "index": 363,
+      "start": 996.44,
+      "end": 1004.71,
+      "duration": 8.27,
+      "text": "conservative."
+    },
+    {
+      "index": 364,
+      "start": 1006.31,
+      "end": 1006.32,
+      "duration": 0.01,
+      "text": "That's what we've said."
+    },
+    {
+      "index": 365,
+      "start": 1006.32,
+      "end": 1012.79,
+      "duration": 6.47,
+      "text": "Well, let's see what happens."
+    },
+    {
+      "index": 366,
+      "start": 1015.11,
+      "end": 1015.12,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 367,
+      "start": 1015.12,
+      "end": 1017.87,
+      "duration": 2.75,
+      "text": "Green's theorem says"
+    },
+    {
+      "index": 368,
+      "start": 1017.88,
+      "end": 1020.11,
+      "duration": 2.23,
+      "text": "that if I have a closed curve,"
+    },
+    {
+      "index": 369,
+      "start": 1020.12,
+      "end": 1025.189,
+      "duration": 5.069,
+      "text": "then the line integral of F is equal"
+    },
+    {
+      "index": 370,
+      "start": 1027.069,
+      "end": 1027.079,
+      "duration": 0.01,
+      "text": "to"
+    },
+    {
+      "index": 371,
+      "start": 1027.079,
+      "end": 1028.51,
+      "duration": 1.431,
+      "text": "the double integral of curl on the"
+    },
+    {
+      "index": 372,
+      "start": 1028.52,
+      "end": 1029.949,
+      "duration": 1.429,
+      "text": "region inside."
+    },
+    {
+      "index": 373,
+      "start": 1029.959,
+      "end": 1033.11,
+      "duration": 3.151,
+      "text": "And if the curl is zero,"
+    },
+    {
+      "index": 374,
+      "start": 1033.12,
+      "end": 1035.829,
+      "duration": 2.709,
+      "text": "then I will be integrating zero. I will"
+    },
+    {
+      "index": 375,
+      "start": 1035.839,
+      "end": 1039.949,
+      "duration": 4.11,
+      "text": "get zero."
+    },
+    {
+      "index": 376,
+      "start": 1042.71,
+      "end": 1042.72,
+      "duration": 0.01,
+      "text": "Okay, so this is actually how you prove"
+    },
+    {
+      "index": 377,
+      "start": 1042.72,
+      "end": 1046.069,
+      "duration": 3.349,
+      "text": "that if your vector field has curl zero,"
+    },
+    {
+      "index": 378,
+      "start": 1046.079,
+      "end": 1073.63,
+      "duration": 27.551,
+      "text": "then it's conservative."
+    },
+    {
+      "index": 379,
+      "start": 1075.55,
+      "end": 1075.56,
+      "duration": 0.01,
+      "text": "Okay, so in particular,"
+    },
+    {
+      "index": 380,
+      "start": 1075.56,
+      "end": 1076.95,
+      "duration": 1.39,
+      "text": "if you have a vector field that's"
+    },
+    {
+      "index": 381,
+      "start": 1076.96,
+      "end": 1079.55,
+      "duration": 2.59,
+      "text": "defined everywhere in the plane, then"
+    },
+    {
+      "index": 382,
+      "start": 1079.56,
+      "end": 1082.07,
+      "duration": 2.51,
+      "text": "you take any closed curve,"
+    },
+    {
+      "index": 383,
+      "start": 1082.08,
+      "end": 1083.87,
+      "duration": 1.79,
+      "text": "well, you will get that the line"
+    },
+    {
+      "index": 384,
+      "start": 1083.88,
+      "end": 1085.63,
+      "duration": 1.75,
+      "text": "integral will be zero. Strictly"
+    },
+    {
+      "index": 385,
+      "start": 1085.64,
+      "end": 1088.31,
+      "duration": 2.67,
+      "text": "speaking, that will only work here if"
+    },
+    {
+      "index": 386,
+      "start": 1088.32,
+      "end": 1090.31,
+      "duration": 1.99,
+      "text": "the curve goes counterclockwise. But"
+    },
+    {
+      "index": 387,
+      "start": 1090.32,
+      "end": 1091.99,
+      "duration": 1.67,
+      "text": "otherwise, you know, just look at the"
+    },
+    {
+      "index": 388,
+      "start": 1092.0,
+      "end": 1094.47,
+      "duration": 2.47,
+      "text": "various loops that it makes and orient"
+    },
+    {
+      "index": 389,
+      "start": 1094.48,
+      "end": 1096.35,
+      "duration": 1.87,
+      "text": "each of them counterclockwise"
+    },
+    {
+      "index": 390,
+      "start": 1096.36,
+      "end": 1098.43,
+      "duration": 2.07,
+      "text": "and sum things together."
+    },
+    {
+      "index": 391,
+      "start": 1098.44,
+      "end": 1124.99,
+      "duration": 26.55,
+      "text": "Um so, let me state that again."
+    },
+    {
+      "index": 392,
+      "start": 1130.71,
+      "end": 1130.72,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 393,
+      "start": 1130.72,
+      "end": 1135.23,
+      "duration": 4.51,
+      "text": "So, a consequence of Green's theorem"
+    },
+    {
+      "index": 394,
+      "start": 1138.19,
+      "end": 1138.2,
+      "duration": 0.01,
+      "text": "is that if F"
+    },
+    {
+      "index": 395,
+      "start": 1138.2,
+      "end": 1140.63,
+      "duration": 2.43,
+      "text": "is defined"
+    },
+    {
+      "index": 396,
+      "start": 1140.64,
+      "end": 1147.669,
+      "duration": 7.029,
+      "text": "everywhere in the plane"
+    },
+    {
+      "index": 397,
+      "start": 1152.55,
+      "end": 1152.56,
+      "duration": 0.01,
+      "text": "the curl"
+    },
+    {
+      "index": 398,
+      "start": 1152.56,
+      "end": 1155.39,
+      "duration": 2.83,
+      "text": "of F is zero everywhere,"
+    },
+    {
+      "index": 399,
+      "start": 1155.4,
+      "end": 1156.79,
+      "duration": 1.39,
+      "text": "then"
+    },
+    {
+      "index": 400,
+      "start": 1156.8,
+      "end": 1163.669,
+      "duration": 6.869,
+      "text": "F is conservative."
+    },
+    {
+      "index": 401,
+      "start": 1166.39,
+      "end": 1166.4,
+      "duration": 0.01,
+      "text": "And so, this actually is the input we"
+    },
+    {
+      "index": 402,
+      "start": 1166.4,
+      "end": 1169.87,
+      "duration": 3.47,
+      "text": "needed to justify our criterion."
+    },
+    {
+      "index": 403,
+      "start": 1169.88,
+      "end": 1172.63,
+      "duration": 2.75,
+      "text": "You know, the test that we saw last time"
+    },
+    {
+      "index": 404,
+      "start": 1172.64,
+      "end": 1174.83,
+      "duration": 2.19,
+      "text": "saying, well, to check if something is a"
+    },
+    {
+      "index": 405,
+      "start": 1174.84,
+      "end": 1176.75,
+      "duration": 1.91,
+      "text": "gradient field, if it's conservative, we"
+    },
+    {
+      "index": 406,
+      "start": 1176.76,
+      "end": 1178.39,
+      "duration": 1.63,
+      "text": "just have to compute the curl and check"
+    },
+    {
+      "index": 407,
+      "start": 1178.4,
+      "end": 1180.39,
+      "duration": 1.99,
+      "text": "whether it's zero."
+    },
+    {
+      "index": 408,
+      "start": 1180.4,
+      "end": 1182.47,
+      "duration": 2.07,
+      "text": "Okay, so how do we prove that now"
+    },
+    {
+      "index": 409,
+      "start": 1182.48,
+      "end": 1185.99,
+      "duration": 3.51,
+      "text": "carefully?"
+    },
+    {
+      "index": 410,
+      "start": 1189.07,
+      "end": 1189.08,
+      "duration": 0.01,
+      "text": "Well, you just take a closed curve in"
+    },
+    {
+      "index": 411,
+      "start": 1189.08,
+      "end": 1190.43,
+      "duration": 1.35,
+      "text": "the plane."
+    },
+    {
+      "index": 412,
+      "start": 1190.44,
+      "end": 1192.43,
+      "duration": 1.99,
+      "text": "You switch the orientation if needed so"
+    },
+    {
+      "index": 413,
+      "start": 1192.44,
+      "end": 1195.15,
+      "duration": 2.71,
+      "text": "that it becomes counterclockwise"
+    },
+    {
+      "index": 414,
+      "start": 1195.16,
+      "end": 1198.87,
+      "duration": 3.71,
+      "text": "and then you look at the region inside"
+    },
+    {
+      "index": 415,
+      "start": 1198.88,
+      "end": 1200.79,
+      "duration": 1.91,
+      "text": "and then you know"
+    },
+    {
+      "index": 416,
+      "start": 1200.8,
+      "end": 1203.71,
+      "duration": 2.91,
+      "text": "that the line integral"
+    },
+    {
+      "index": 417,
+      "start": 1203.72,
+      "end": 1205.39,
+      "duration": 1.67,
+      "text": "will be equal to the double integral of"
+    },
+    {
+      "index": 418,
+      "start": 1205.4,
+      "end": 1209.51,
+      "duration": 4.11,
+      "text": "curl"
+    },
+    {
+      "index": 419,
+      "start": 1212.59,
+      "end": 1212.6,
+      "duration": 0.01,
+      "text": "which is the double integral of zero."
+    },
+    {
+      "index": 420,
+      "start": 1212.6,
+      "end": 1215.75,
+      "duration": 3.15,
+      "text": "Therefore, that's zero."
+    },
+    {
+      "index": 421,
+      "start": 1215.76,
+      "end": 1217.47,
+      "duration": 1.71,
+      "text": "But see, okay, so now let's say that we"
+    },
+    {
+      "index": 422,
+      "start": 1217.48,
+      "end": 1219.75,
+      "duration": 2.27,
+      "text": "try to do that for the vector field that"
+    },
+    {
+      "index": 423,
+      "start": 1219.76,
+      "end": 1221.51,
+      "duration": 1.75,
+      "text": "was on your problem set that was not"
+    },
+    {
+      "index": 424,
+      "start": 1221.52,
+      "end": 1224.27,
+      "duration": 2.75,
+      "text": "defined at the origin."
+    },
+    {
+      "index": 425,
+      "start": 1224.28,
+      "end": 1226.55,
+      "duration": 2.27,
+      "text": "You know, so if you've done the problem"
+    },
+    {
+      "index": 426,
+      "start": 1226.56,
+      "end": 1228.27,
+      "duration": 1.71,
+      "text": "set and found the same answers that I"
+    },
+    {
+      "index": 427,
+      "start": 1228.28,
+      "end": 1230.11,
+      "duration": 1.83,
+      "text": "did, then"
+    },
+    {
+      "index": 428,
+      "start": 1230.12,
+      "end": 1231.47,
+      "duration": 1.35,
+      "text": "you will have found that this vector"
+    },
+    {
+      "index": 429,
+      "start": 1231.48,
+      "end": 1233.51,
+      "duration": 2.03,
+      "text": "field had curl zero everywhere, but"
+    },
+    {
+      "index": 430,
+      "start": 1233.52,
+      "end": 1235.95,
+      "duration": 2.43,
+      "text": "still it wasn't conservative because if"
+    },
+    {
+      "index": 431,
+      "start": 1235.96,
+      "end": 1238.71,
+      "duration": 2.75,
+      "text": "you went around the unit circle, then"
+    },
+    {
+      "index": 432,
+      "start": 1238.72,
+      "end": 1240.67,
+      "duration": 1.95,
+      "text": "you got a line integral that was 2 pi or"
+    },
+    {
+      "index": 433,
+      "start": 1240.68,
+      "end": 1242.59,
+      "duration": 1.91,
+      "text": "if you compared the two halves, you got"
+    },
+    {
+      "index": 434,
+      "start": 1242.6,
+      "end": 1244.83,
+      "duration": 2.23,
+      "text": "different answers for two paths that go"
+    },
+    {
+      "index": 435,
+      "start": 1244.84,
+      "end": 1247.27,
+      "duration": 2.43,
+      "text": "from the same point to the same point."
+    },
+    {
+      "index": 436,
+      "start": 1247.28,
+      "end": 1248.51,
+      "duration": 1.23,
+      "text": "So,"
+    },
+    {
+      "index": 437,
+      "start": 1248.52,
+      "end": 1250.59,
+      "duration": 2.07,
+      "text": "you know, it fails this property, but"
+    },
+    {
+      "index": 438,
+      "start": 1250.6,
+      "end": 1251.59,
+      "duration": 0.99,
+      "text": "that's because it's not defined"
+    },
+    {
+      "index": 439,
+      "start": 1251.6,
+      "end": 1252.99,
+      "duration": 1.39,
+      "text": "everywhere. So, what goes wrong with"
+    },
+    {
+      "index": 440,
+      "start": 1253.0,
+      "end": 1254.31,
+      "duration": 1.31,
+      "text": "this argument?"
+    },
+    {
+      "index": 441,
+      "start": 1254.32,
+      "end": 1256.23,
+      "duration": 1.91,
+      "text": "Well, if I take the vector field that"
+    },
+    {
+      "index": 442,
+      "start": 1256.24,
+      "end": 1257.39,
+      "duration": 1.15,
+      "text": "was"
+    },
+    {
+      "index": 443,
+      "start": 1257.4,
+      "end": 1258.99,
+      "duration": 1.59,
+      "text": "on the problem set"
+    },
+    {
+      "index": 444,
+      "start": 1259.0,
+      "end": 1262.39,
+      "duration": 3.39,
+      "text": "and if I do things,"
+    },
+    {
+      "index": 445,
+      "start": 1262.4,
+      "end": 1264.27,
+      "duration": 1.87,
+      "text": "you know, say that I look at"
+    },
+    {
+      "index": 446,
+      "start": 1264.28,
+      "end": 1266.91,
+      "duration": 2.63,
+      "text": "the unit circle,"
+    },
+    {
+      "index": 447,
+      "start": 1266.92,
+      "end": 1269.27,
+      "duration": 2.35,
+      "text": "that's a closed curve, so I would like"
+    },
+    {
+      "index": 448,
+      "start": 1269.28,
+      "end": 1270.79,
+      "duration": 1.51,
+      "text": "to use Green's theorem. Green's theorem"
+    },
+    {
+      "index": 449,
+      "start": 1270.8,
+      "end": 1273.67,
+      "duration": 2.87,
+      "text": "would tell me the line integral"
+    },
+    {
+      "index": 450,
+      "start": 1273.68,
+      "end": 1276.47,
+      "duration": 2.79,
+      "text": "along this loop is equal to the double"
+    },
+    {
+      "index": 451,
+      "start": 1276.48,
+      "end": 1278.03,
+      "duration": 1.55,
+      "text": "integral of curl"
+    },
+    {
+      "index": 452,
+      "start": 1278.04,
+      "end": 1281.43,
+      "duration": 3.39,
+      "text": "over this region here, the unit disk."
+    },
+    {
+      "index": 453,
+      "start": 1281.44,
+      "end": 1283.63,
+      "duration": 2.19,
+      "text": "And of course, the curl is zero. Well,"
+    },
+    {
+      "index": 454,
+      "start": 1283.64,
+      "end": 1285.99,
+      "duration": 2.35,
+      "text": "except at the origin."
+    },
+    {
+      "index": 455,
+      "start": 1286.0,
+      "end": 1287.67,
+      "duration": 1.67,
+      "text": "At the origin, the vector field is not"
+    },
+    {
+      "index": 456,
+      "start": 1287.68,
+      "end": 1288.79,
+      "duration": 1.11,
+      "text": "defined."
+    },
+    {
+      "index": 457,
+      "start": 1288.8,
+      "end": 1290.11,
+      "duration": 1.31,
+      "text": "You cannot take the derivatives and the"
+    },
+    {
+      "index": 458,
+      "start": 1290.12,
+      "end": 1292.39,
+      "duration": 2.27,
+      "text": "curl is not defined."
+    },
+    {
+      "index": 459,
+      "start": 1292.4,
+      "end": 1294.55,
+      "duration": 2.15,
+      "text": "And somehow that messes things up."
+    },
+    {
+      "index": 460,
+      "start": 1294.56,
+      "end": 1296.71,
+      "duration": 2.15,
+      "text": "You cannot apply Green's theorem"
+    },
+    {
+      "index": 461,
+      "start": 1296.72,
+      "end": 1297.75,
+      "duration": 1.03,
+      "text": "to"
+    },
+    {
+      "index": 462,
+      "start": 1297.76,
+      "end": 1302.55,
+      "duration": 4.79,
+      "text": "the vector field."
+    },
+    {
+      "index": 463,
+      "start": 1304.91,
+      "end": 1304.92,
+      "duration": 0.01,
+      "text": "So, we cannot apply"
+    },
+    {
+      "index": 464,
+      "start": 1304.92,
+      "end": 1307.63,
+      "duration": 2.71,
+      "text": "Green's theorem"
+    },
+    {
+      "index": 465,
+      "start": 1307.64,
+      "end": 1309.55,
+      "duration": 1.91,
+      "text": "to"
+    },
+    {
+      "index": 466,
+      "start": 1309.56,
+      "end": 1313.55,
+      "duration": 3.99,
+      "text": "the vector field"
+    },
+    {
+      "index": 467,
+      "start": 1315.55,
+      "end": 1315.56,
+      "duration": 0.01,
+      "text": "on"
+    },
+    {
+      "index": 468,
+      "start": 1315.56,
+      "end": 1320.47,
+      "duration": 4.91,
+      "text": "problem set eight, problem two"
+    },
+    {
+      "index": 469,
+      "start": 1322.11,
+      "end": 1322.12,
+      "duration": 0.01,
+      "text": "when"
+    },
+    {
+      "index": 470,
+      "start": 1322.12,
+      "end": 1329.27,
+      "duration": 7.15,
+      "text": "C encloses the origin."
+    },
+    {
+      "index": 471,
+      "start": 1330.87,
+      "end": 1330.88,
+      "duration": 0.01,
+      "text": "And so, that's why"
+    },
+    {
+      "index": 472,
+      "start": 1330.88,
+      "end": 1333.75,
+      "duration": 2.87,
+      "text": "this guy, even though it has curl zero,"
+    },
+    {
+      "index": 473,
+      "start": 1333.76,
+      "end": 1336.07,
+      "duration": 2.31,
+      "text": "is not conservative."
+    },
+    {
+      "index": 474,
+      "start": 1336.08,
+      "end": 1339.59,
+      "duration": 3.51,
+      "text": "You know, there's no contradiction."
+    },
+    {
+      "index": 475,
+      "start": 1341.75,
+      "end": 1341.76,
+      "duration": 0.01,
+      "text": "And somehow you have to imagine that,"
+    },
+    {
+      "index": 476,
+      "start": 1341.76,
+      "end": 1343.39,
+      "duration": 1.63,
+      "text": "well, the curl here is it's really not"
+    },
+    {
+      "index": 477,
+      "start": 1343.4,
+      "end": 1345.11,
+      "duration": 1.71,
+      "text": "defined, but somehow"
+    },
+    {
+      "index": 478,
+      "start": 1345.12,
+      "end": 1346.75,
+      "duration": 1.63,
+      "text": "it becomes infinite so that when you do"
+    },
+    {
+      "index": 479,
+      "start": 1346.76,
+      "end": 1348.27,
+      "duration": 1.51,
+      "text": "the double integral,"
+    },
+    {
+      "index": 480,
+      "start": 1348.28,
+      "end": 1350.83,
+      "duration": 2.55,
+      "text": "you actually get 2 pi instead of zero. I"
+    },
+    {
+      "index": 481,
+      "start": 1350.84,
+      "end": 1352.03,
+      "duration": 1.19,
+      "text": "mean, that doesn't make any sense, of"
+    },
+    {
+      "index": 482,
+      "start": 1352.04,
+      "end": 1354.15,
+      "duration": 2.11,
+      "text": "course, but uh"
+    },
+    {
+      "index": 483,
+      "start": 1354.16,
+      "end": 1368.47,
+      "duration": 14.31,
+      "text": "that's one way to think about it."
+    },
+    {
+      "index": 484,
+      "start": 1370.79,
+      "end": 1370.8,
+      "duration": 0.01,
+      "text": "Okay, any questions?"
+    },
+    {
+      "index": 485,
+      "start": 1370.8,
+      "end": 1371.79,
+      "duration": 0.99,
+      "text": "Yes."
+    },
+    {
+      "index": 486,
+      "start": 1371.8,
+      "end": 1373.51,
+      "duration": 1.71,
+      "text": "But since we know the"
+    },
+    {
+      "index": 487,
+      "start": 1373.52,
+      "end": 1375.35,
+      "duration": 1.83,
+      "text": "the work that we do,"
+    },
+    {
+      "index": 488,
+      "start": 1375.36,
+      "end": 1377.23,
+      "duration": 1.87,
+      "text": "can we find"
+    },
+    {
+      "index": 489,
+      "start": 1377.24,
+      "end": 1379.27,
+      "duration": 2.03,
+      "text": "the curl of F at that point?"
+    },
+    {
+      "index": 490,
+      "start": 1379.28,
+      "end": 1381.87,
+      "duration": 2.59,
+      "text": "Well, so actually it's not defined, see,"
+    },
+    {
+      "index": 491,
+      "start": 1381.88,
+      "end": 1383.23,
+      "duration": 1.35,
+      "text": "because"
+    },
+    {
+      "index": 492,
+      "start": 1383.24,
+      "end": 1384.59,
+      "duration": 1.35,
+      "text": "the curl would the curl is zero"
+    },
+    {
+      "index": 493,
+      "start": 1384.6,
+      "end": 1385.99,
+      "duration": 1.39,
+      "text": "everywhere else."
+    },
+    {
+      "index": 494,
+      "start": 1386.0,
+      "end": 1387.59,
+      "duration": 1.59,
+      "text": "So, if the curl was well defined at the"
+    },
+    {
+      "index": 495,
+      "start": 1387.6,
+      "end": 1389.35,
+      "duration": 1.75,
+      "text": "origin, you know, you would try to then"
+    },
+    {
+      "index": 496,
+      "start": 1389.36,
+      "end": 1390.91,
+      "duration": 1.55,
+      "text": "take the double integral. Well, no"
+    },
+    {
+      "index": 497,
+      "start": 1390.92,
+      "end": 1392.15,
+      "duration": 1.23,
+      "text": "matter what value you put for a"
+    },
+    {
+      "index": 498,
+      "start": 1392.16,
+      "end": 1393.03,
+      "duration": 0.87,
+      "text": "function, you know, if you have a"
+    },
+    {
+      "index": 499,
+      "start": 1393.04,
+      "end": 1394.87,
+      "duration": 1.83,
+      "text": "function that's zero everywhere except"
+    },
+    {
+      "index": 500,
+      "start": 1394.88,
+      "end": 1396.35,
+      "duration": 1.47,
+      "text": "at the origin and some other value at"
+    },
+    {
+      "index": 501,
+      "start": 1396.36,
+      "end": 1399.59,
+      "duration": 3.23,
+      "text": "the origin, the integral is still zero."
+    },
+    {
+      "index": 502,
+      "start": 1399.6,
+      "end": 1400.91,
+      "duration": 1.31,
+      "text": "So, it's worse than that. It doesn't"
+    },
+    {
+      "index": 503,
+      "start": 1400.92,
+      "end": 1402.15,
+      "duration": 1.23,
+      "text": "have It's not only that you can't"
+    },
+    {
+      "index": 504,
+      "start": 1402.16,
+      "end": 1403.669,
+      "duration": 1.509,
+      "text": "compute it, it's really that it's not"
+    },
+    {
+      "index": 505,
+      "start": 1403.679,
+      "end": 1409.39,
+      "duration": 5.711,
+      "text": "defined."
+    },
+    {
+      "index": 506,
+      "start": 1413.51,
+      "end": 1413.52,
+      "duration": 0.01,
+      "text": "Anyway, that's, you know, like a"
+    },
+    {
+      "index": 507,
+      "start": 1413.52,
+      "end": 1416.27,
+      "duration": 2.75,
+      "text": "slightly pathological example. I mean,"
+    },
+    {
+      "index": 508,
+      "start": 1416.28,
+      "end": 1417.95,
+      "duration": 1.67,
+      "text": "yes. Um"
+    },
+    {
+      "index": 509,
+      "start": 1417.96,
+      "end": 1419.19,
+      "duration": 1.23,
+      "text": "if we do the double integral with the"
+    },
+    {
+      "index": 510,
+      "start": 1419.2,
+      "end": 1420.39,
+      "duration": 1.19,
+      "text": "curl,"
+    },
+    {
+      "index": 511,
+      "start": 1420.4,
+      "end": 1422.43,
+      "duration": 2.03,
+      "text": "do we need to get 2 pi?"
+    },
+    {
+      "index": 512,
+      "start": 1422.44,
+      "end": 1424.31,
+      "duration": 1.87,
+      "text": "Well, we wouldn't be able to because the"
+    },
+    {
+      "index": 513,
+      "start": 1424.32,
+      "end": 1426.55,
+      "duration": 2.23,
+      "text": "curl is not defined at the origin. So,"
+    },
+    {
+      "index": 514,
+      "start": 1426.56,
+      "end": 1429.23,
+      "duration": 2.67,
+      "text": "you can't actually integrate it."
+    },
+    {
+      "index": 515,
+      "start": 1429.24,
+      "end": 1431.63,
+      "duration": 2.39,
+      "text": "Okay? So, that's that's the problem. I"
+    },
+    {
+      "index": 516,
+      "start": 1431.64,
+      "end": 1432.79,
+      "duration": 1.15,
+      "text": "mean, if you try to integrate, you know,"
+    },
+    {
+      "index": 517,
+      "start": 1432.8,
+      "end": 1434.75,
+      "duration": 1.95,
+      "text": "we've said everywhere where it's defined"
+    },
+    {
+      "index": 518,
+      "start": 1434.76,
+      "end": 1436.669,
+      "duration": 1.909,
+      "text": "the curl is zero. So, what you would be"
+    },
+    {
+      "index": 519,
+      "start": 1436.679,
+      "end": 1438.83,
+      "duration": 2.151,
+      "text": "integrating would be zero."
+    },
+    {
+      "index": 520,
+      "start": 1438.84,
+      "end": 1440.75,
+      "duration": 1.91,
+      "text": "But that doesn't work because at the"
+    },
+    {
+      "index": 521,
+      "start": 1440.76,
+      "end": 1442.87,
+      "duration": 2.11,
+      "text": "origin, it's not defined."
+    },
+    {
+      "index": 522,
+      "start": 1442.88,
+      "end": 1444.23,
+      "duration": 1.35,
+      "text": "Yes."
+    },
+    {
+      "index": 523,
+      "start": 1444.24,
+      "end": 1446.39,
+      "duration": 2.15,
+      "text": "If you have a curve that makes a weird"
+    },
+    {
+      "index": 524,
+      "start": 1446.4,
+      "end": 1447.79,
+      "duration": 1.39,
+      "text": "shape like a figure eight,"
+    },
+    {
+      "index": 525,
+      "start": 1447.8,
+      "end": 1449.99,
+      "duration": 2.19,
+      "text": "that's not a Ah, so if you take a curve"
+    },
+    {
+      "index": 526,
+      "start": 1450.0,
+      "end": 1452.23,
+      "duration": 2.23,
+      "text": "that makes a figure eight, then indeed"
+    },
+    {
+      "index": 527,
+      "start": 1452.24,
+      "end": 1454.35,
+      "duration": 2.11,
+      "text": "my proof over there is false. So, I kind"
+    },
+    {
+      "index": 528,
+      "start": 1454.36,
+      "end": 1456.19,
+      "duration": 1.83,
+      "text": "of tricked you."
+    },
+    {
+      "index": 529,
+      "start": 1456.2,
+      "end": 1457.59,
+      "duration": 1.39,
+      "text": "You know, it's"
+    },
+    {
+      "index": 530,
+      "start": 1457.6,
+      "end": 1460.55,
+      "duration": 2.95,
+      "text": "not actually correct. So, if the curve"
+    },
+    {
+      "index": 531,
+      "start": 1460.56,
+      "end": 1462.63,
+      "duration": 2.07,
+      "text": "does a figure eight, then what you would"
+    },
+    {
+      "index": 532,
+      "start": 1462.64,
+      "end": 1465.59,
+      "duration": 2.95,
+      "text": "do is you would actually cut it into its"
+    },
+    {
+      "index": 533,
+      "start": 1465.6,
+      "end": 1467.79,
+      "duration": 2.19,
+      "text": "two halves and for each of them you"
+    },
+    {
+      "index": 534,
+      "start": 1467.8,
+      "end": 1469.51,
+      "duration": 1.71,
+      "text": "would apply Green's theorem"
+    },
+    {
+      "index": 535,
+      "start": 1469.52,
+      "end": 1470.71,
+      "duration": 1.19,
+      "text": "and then you would still get that, you"
+    },
+    {
+      "index": 536,
+      "start": 1470.72,
+      "end": 1472.47,
+      "duration": 1.75,
+      "text": "know, if the curl is zero, then this"
+    },
+    {
+      "index": 537,
+      "start": 1472.48,
+      "end": 1474.31,
+      "duration": 1.83,
+      "text": "line integral is zero, that one is also"
+    },
+    {
+      "index": 538,
+      "start": 1474.32,
+      "end": 1476.83,
+      "duration": 2.51,
+      "text": "zero, so their sum is zero."
+    },
+    {
+      "index": 539,
+      "start": 1476.84,
+      "end": 1479.55,
+      "duration": 2.71,
+      "text": "Okay, uh small details that"
+    },
+    {
+      "index": 540,
+      "start": 1479.56,
+      "end": 1480.75,
+      "duration": 1.19,
+      "text": "you don't really need to worry too much"
+    },
+    {
+      "index": 541,
+      "start": 1480.76,
+      "end": 1481.91,
+      "duration": 1.15,
+      "text": "about, but"
+    },
+    {
+      "index": 542,
+      "start": 1481.92,
+      "end": 1483.669,
+      "duration": 1.749,
+      "text": "indeed, if you want to be"
+    },
+    {
+      "index": 543,
+      "start": 1483.679,
+      "end": 1485.95,
+      "duration": 2.271,
+      "text": "careful with details, then"
+    },
+    {
+      "index": 544,
+      "start": 1485.96,
+      "end": 1489.43,
+      "duration": 3.47,
+      "text": "my proof is not quite complete."
+    },
+    {
+      "index": 545,
+      "start": 1489.44,
+      "end": 1492.15,
+      "duration": 2.71,
+      "text": "But the conclusion is still true."
+    },
+    {
+      "index": 546,
+      "start": 1492.16,
+      "end": 1495.27,
+      "duration": 3.11,
+      "text": "Okay."
+    },
+    {
+      "index": 547,
+      "start": 1497.95,
+      "end": 1497.96,
+      "duration": 0.01,
+      "text": "Uh let's move on."
+    },
+    {
+      "index": 548,
+      "start": 1497.96,
+      "end": 1500.11,
+      "duration": 2.15,
+      "text": "So,"
+    },
+    {
+      "index": 549,
+      "start": 1500.12,
+      "end": 1501.99,
+      "duration": 1.87,
+      "text": "I want to tell you how to prove Green's"
+    },
+    {
+      "index": 550,
+      "start": 1502.0,
+      "end": 1507.95,
+      "duration": 5.95,
+      "text": "theorem."
+    },
+    {
+      "index": 551,
+      "start": 1510.31,
+      "end": 1510.32,
+      "duration": 0.01,
+      "text": "Because, you know, it's such a strange"
+    },
+    {
+      "index": 552,
+      "start": 1510.32,
+      "end": 1512.19,
+      "duration": 1.87,
+      "text": "formula that,"
+    },
+    {
+      "index": 553,
+      "start": 1512.2,
+      "end": 1513.59,
+      "duration": 1.39,
+      "text": "you know,"
+    },
+    {
+      "index": 554,
+      "start": 1513.6,
+      "end": 1518.19,
+      "duration": 4.59,
+      "text": "where can it come from possibly? I mean,"
+    },
+    {
+      "index": 555,
+      "start": 1520.27,
+      "end": 1520.28,
+      "duration": 0.01,
+      "text": "so let me remind you first of all, the"
+    },
+    {
+      "index": 556,
+      "start": 1520.28,
+      "end": 1522.11,
+      "duration": 1.83,
+      "text": "statement we want to prove"
+    },
+    {
+      "index": 557,
+      "start": 1522.12,
+      "end": 1523.91,
+      "duration": 1.79,
+      "text": "is that the line integral along a closed"
+    },
+    {
+      "index": 558,
+      "start": 1523.92,
+      "end": 1527.95,
+      "duration": 4.03,
+      "text": "curve of M dx + N dy"
+    },
+    {
+      "index": 559,
+      "start": 1527.96,
+      "end": 1530.63,
+      "duration": 2.67,
+      "text": "is equal to the double integral over the"
+    },
+    {
+      "index": 560,
+      "start": 1530.64,
+      "end": 1533.99,
+      "duration": 3.35,
+      "text": "region inside of Nx - My"
+    },
+    {
+      "index": 561,
+      "start": 1534.0,
+      "end": 1535.91,
+      "duration": 1.91,
+      "text": "dA."
+    },
+    {
+      "index": 562,
+      "start": 1535.92,
+      "end": 1537.43,
+      "duration": 1.51,
+      "text": "And"
+    },
+    {
+      "index": 563,
+      "start": 1537.44,
+      "end": 1539.47,
+      "duration": 2.03,
+      "text": "you know, let's simplify our lives a bit"
+    },
+    {
+      "index": 564,
+      "start": 1539.48,
+      "end": 1541.669,
+      "duration": 2.189,
+      "text": "by proving easier statements."
+    },
+    {
+      "index": 565,
+      "start": 1541.679,
+      "end": 1542.83,
+      "duration": 1.151,
+      "text": "So, actually,"
+    },
+    {
+      "index": 566,
+      "start": 1542.84,
+      "end": 1549.19,
+      "duration": 6.35,
+      "text": "the first observation"
+    },
+    {
+      "index": 567,
+      "start": 1551.15,
+      "end": 1551.16,
+      "duration": 0.01,
+      "text": "we'll actually prove"
+    },
+    {
+      "index": 568,
+      "start": 1551.16,
+      "end": 1553.71,
+      "duration": 2.55,
+      "text": "something easier, namely"
+    },
+    {
+      "index": 569,
+      "start": 1553.72,
+      "end": 1557.59,
+      "duration": 3.87,
+      "text": "that the line integral, let's see,"
+    },
+    {
+      "index": 570,
+      "start": 1557.6,
+      "end": 1559.35,
+      "duration": 1.75,
+      "text": "of M dx"
+    },
+    {
+      "index": 571,
+      "start": 1559.36,
+      "end": 1561.79,
+      "duration": 2.43,
+      "text": "along a closed curve is equal to the"
+    },
+    {
+      "index": 572,
+      "start": 1561.8,
+      "end": 1564.15,
+      "duration": 2.35,
+      "text": "double integral over the region inside"
+    },
+    {
+      "index": 573,
+      "start": 1564.16,
+      "end": 1565.669,
+      "duration": 1.509,
+      "text": "of minus"
+    },
+    {
+      "index": 574,
+      "start": 1565.679,
+      "end": 1567.59,
+      "duration": 1.911,
+      "text": "M sub y dA."
+    },
+    {
+      "index": 575,
+      "start": 1567.6,
+      "end": 1573.35,
+      "duration": 5.75,
+      "text": "Okay, so that's the special case"
+    },
+    {
+      "index": 576,
+      "start": 1575.75,
+      "end": 1575.76,
+      "duration": 0.01,
+      "text": "where N is zero, where you have only an"
+    },
+    {
+      "index": 577,
+      "start": 1575.76,
+      "end": 1578.79,
+      "duration": 3.03,
+      "text": "X component for your vector field."
+    },
+    {
+      "index": 578,
+      "start": 1578.8,
+      "end": 1580.87,
+      "duration": 2.07,
+      "text": "Now, why is that good enough?"
+    },
+    {
+      "index": 579,
+      "start": 1580.88,
+      "end": 1582.27,
+      "duration": 1.39,
+      "text": "Well,"
+    },
+    {
+      "index": 580,
+      "start": 1582.28,
+      "end": 1585.71,
+      "duration": 3.43,
+      "text": "the claim is if I can prove this,"
+    },
+    {
+      "index": 581,
+      "start": 1585.72,
+      "end": 1587.35,
+      "duration": 1.63,
+      "text": "I claim you will be able to do the same"
+    },
+    {
+      "index": 582,
+      "start": 1587.36,
+      "end": 1589.23,
+      "duration": 1.87,
+      "text": "thing to prove the other case where"
+    },
+    {
+      "index": 583,
+      "start": 1589.24,
+      "end": 1592.99,
+      "duration": 3.75,
+      "text": "there's only a Y component."
+    },
+    {
+      "index": 584,
+      "start": 1593.0,
+      "end": 1595.27,
+      "duration": 2.27,
+      "text": "And then, if you add them together,"
+    },
+    {
+      "index": 585,
+      "start": 1595.28,
+      "end": 1599.07,
+      "duration": 3.79,
+      "text": "you'll get the general case."
+    },
+    {
+      "index": 586,
+      "start": 1626.59,
+      "end": 1626.6,
+      "duration": 0.01,
+      "text": "a similar argument,"
+    },
+    {
+      "index": 587,
+      "start": 1626.6,
+      "end": 1631.11,
+      "duration": 4.51,
+      "text": "which I will not do to save time,"
+    },
+    {
+      "index": 588,
+      "start": 1632.79,
+      "end": 1632.8,
+      "duration": 0.01,
+      "text": "will show, so it will be just the same"
+    },
+    {
+      "index": 589,
+      "start": 1632.8,
+      "end": 1634.35,
+      "duration": 1.55,
+      "text": "thing but switching the roles of X and"
+    },
+    {
+      "index": 590,
+      "start": 1634.36,
+      "end": 1635.669,
+      "duration": 1.309,
+      "text": "Y,"
+    },
+    {
+      "index": 591,
+      "start": 1635.679,
+      "end": 1638.19,
+      "duration": 2.511,
+      "text": "that if I integrate along a closed curve"
+    },
+    {
+      "index": 592,
+      "start": 1638.2,
+      "end": 1639.79,
+      "duration": 1.59,
+      "text": "N dy,"
+    },
+    {
+      "index": 593,
+      "start": 1639.8,
+      "end": 1641.91,
+      "duration": 2.11,
+      "text": "then I'll get the double integral"
+    },
+    {
+      "index": 594,
+      "start": 1641.92,
+      "end": 1644.11,
+      "duration": 2.19,
+      "text": "of, sorry,"
+    },
+    {
+      "index": 595,
+      "start": 1644.12,
+      "end": 1646.43,
+      "duration": 2.31,
+      "text": "N sub x"
+    },
+    {
+      "index": 596,
+      "start": 1646.44,
+      "end": 1648.87,
+      "duration": 2.43,
+      "text": "dA."
+    },
+    {
+      "index": 597,
+      "start": 1648.88,
+      "end": 1651.27,
+      "duration": 2.39,
+      "text": "And so now, if I have proved these two"
+    },
+    {
+      "index": 598,
+      "start": 1651.28,
+      "end": 1653.19,
+      "duration": 1.91,
+      "text": "formulas separately,"
+    },
+    {
+      "index": 599,
+      "start": 1653.2,
+      "end": 1654.669,
+      "duration": 1.469,
+      "text": "then"
+    },
+    {
+      "index": 600,
+      "start": 1654.679,
+      "end": 1657.99,
+      "duration": 3.311,
+      "text": "if you sum them together,"
+    },
+    {
+      "index": 601,
+      "start": 1660.11,
+      "end": 1660.12,
+      "duration": 0.01,
+      "text": "we'll get"
+    },
+    {
+      "index": 602,
+      "start": 1660.12,
+      "end": 1663.59,
+      "duration": 3.47,
+      "text": "the correct statement."
+    },
+    {
+      "index": 603,
+      "start": 1665.83,
+      "end": 1665.84,
+      "duration": 0.01,
+      "text": "Well, let me not write it."
+    },
+    {
+      "index": 604,
+      "start": 1665.84,
+      "end": 1671.55,
+      "duration": 5.71,
+      "text": "We get Green's theorem."
+    },
+    {
+      "index": 605,
+      "start": 1673.91,
+      "end": 1673.92,
+      "duration": 0.01,
+      "text": "Okay? So, we've simplifi- simplified our"
+    },
+    {
+      "index": 606,
+      "start": 1673.92,
+      "end": 1675.99,
+      "duration": 2.07,
+      "text": "task a little bit. We'll just be trying"
+    },
+    {
+      "index": 607,
+      "start": 1676.0,
+      "end": 1678.39,
+      "duration": 2.39,
+      "text": "to prove the case where there's only an"
+    },
+    {
+      "index": 608,
+      "start": 1678.4,
+      "end": 1680.669,
+      "duration": 2.269,
+      "text": "X component."
+    },
+    {
+      "index": 609,
+      "start": 1680.679,
+      "end": 1683.55,
+      "duration": 2.871,
+      "text": "So, let's do it."
+    },
+    {
+      "index": 610,
+      "start": 1685.87,
+      "end": 1685.88,
+      "duration": 0.01,
+      "text": "Well, we have another problem, which is"
+    },
+    {
+      "index": 611,
+      "start": 1685.88,
+      "end": 1687.27,
+      "duration": 1.39,
+      "text": "the region that we're looking at, the"
+    },
+    {
+      "index": 612,
+      "start": 1687.28,
+      "end": 1688.669,
+      "duration": 1.389,
+      "text": "curve that we're looking at might be"
+    },
+    {
+      "index": 613,
+      "start": 1688.679,
+      "end": 1690.75,
+      "duration": 2.071,
+      "text": "very complicated."
+    },
+    {
+      "index": 614,
+      "start": 1690.76,
+      "end": 1695.23,
+      "duration": 4.47,
+      "text": "You know, if I give you"
+    },
+    {
+      "index": 615,
+      "start": 1697.63,
+      "end": 1697.64,
+      "duration": 0.01,
+      "text": "let's say I give you,"
+    },
+    {
+      "index": 616,
+      "start": 1697.64,
+      "end": 1699.39,
+      "duration": 1.75,
+      "text": "I don't know, a curve that does"
+    },
+    {
+      "index": 617,
+      "start": 1699.4,
+      "end": 1701.75,
+      "duration": 2.35,
+      "text": "something like this,"
+    },
+    {
+      "index": 618,
+      "start": 1701.76,
+      "end": 1703.03,
+      "duration": 1.27,
+      "text": "well, you know, it will be kind of"
+    },
+    {
+      "index": 619,
+      "start": 1703.04,
+      "end": 1705.669,
+      "duration": 2.629,
+      "text": "tricky to set up a double integral"
+    },
+    {
+      "index": 620,
+      "start": 1705.679,
+      "end": 1707.31,
+      "duration": 1.631,
+      "text": "over the region inside."
+    },
+    {
+      "index": 621,
+      "start": 1707.32,
+      "end": 1708.79,
+      "duration": 1.47,
+      "text": "So, maybe we first want to look at"
+    },
+    {
+      "index": 622,
+      "start": 1708.8,
+      "end": 1710.71,
+      "duration": 1.91,
+      "text": "curves that are simpler,"
+    },
+    {
+      "index": 623,
+      "start": 1710.72,
+      "end": 1712.83,
+      "duration": 2.11,
+      "text": "you know, that will actually allow us to"
+    },
+    {
+      "index": 624,
+      "start": 1712.84,
+      "end": 1715.79,
+      "duration": 2.95,
+      "text": "set up the double integral easily."
+    },
+    {
+      "index": 625,
+      "start": 1715.8,
+      "end": 1717.47,
+      "duration": 1.67,
+      "text": "So,"
+    },
+    {
+      "index": 626,
+      "start": 1717.48,
+      "end": 1720.23,
+      "duration": 2.75,
+      "text": "the second observation,"
+    },
+    {
+      "index": 627,
+      "start": 1720.24,
+      "end": 1721.83,
+      "duration": 1.59,
+      "text": "so that was the first observation,"
+    },
+    {
+      "index": 628,
+      "start": 1721.84,
+      "end": 1723.51,
+      "duration": 1.67,
+      "text": "sorry."
+    },
+    {
+      "index": 629,
+      "start": 1723.52,
+      "end": 1726.59,
+      "duration": 3.07,
+      "text": "The second observation is that"
+    },
+    {
+      "index": 630,
+      "start": 1726.6,
+      "end": 1731.83,
+      "duration": 5.23,
+      "text": "we can decompose"
+    },
+    {
+      "index": 631,
+      "start": 1743.31,
+      "end": 1743.32,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 632,
+      "start": 1743.32,
+      "end": 1747.75,
+      "duration": 4.43,
+      "text": "what do I mean by that?"
+    },
+    {
+      "index": 633,
+      "start": 1750.79,
+      "end": 1750.8,
+      "duration": 0.01,
+      "text": "Well, let's say that I have,"
+    },
+    {
+      "index": 634,
+      "start": 1750.8,
+      "end": 1752.51,
+      "duration": 1.71,
+      "text": "you know, a region and I'm going to cut"
+    },
+    {
+      "index": 635,
+      "start": 1752.52,
+      "end": 1756.75,
+      "duration": 4.23,
+      "text": "it into two, so I will have R1 and R2."
+    },
+    {
+      "index": 636,
+      "start": 1756.76,
+      "end": 1759.95,
+      "duration": 3.19,
+      "text": "And then, of course, I need to have"
+    },
+    {
+      "index": 637,
+      "start": 1759.96,
+      "end": 1762.27,
+      "duration": 2.31,
+      "text": "the curves that go around them. So, I"
+    },
+    {
+      "index": 638,
+      "start": 1762.28,
+      "end": 1764.87,
+      "duration": 2.59,
+      "text": "had my initial curve"
+    },
+    {
+      "index": 639,
+      "start": 1764.88,
+      "end": 1769.27,
+      "duration": 4.39,
+      "text": "C was going around everybody."
+    },
+    {
+      "index": 640,
+      "start": 1771.51,
+      "end": 1771.52,
+      "duration": 0.01,
+      "text": "And they have curves"
+    },
+    {
+      "index": 641,
+      "start": 1771.52,
+      "end": 1773.909,
+      "duration": 2.389,
+      "text": "C1 that goes around"
+    },
+    {
+      "index": 642,
+      "start": 1773.919,
+      "end": 1776.149,
+      "duration": 2.23,
+      "text": "R1"
+    },
+    {
+      "index": 643,
+      "start": 1776.159,
+      "end": 1778.71,
+      "duration": 2.551,
+      "text": "and C2"
+    },
+    {
+      "index": 644,
+      "start": 1778.72,
+      "end": 1782.19,
+      "duration": 3.47,
+      "text": "goes around R2."
+    },
+    {
+      "index": 645,
+      "start": 1794.59,
+      "end": 1794.6,
+      "duration": 0.01,
+      "text": "if we can prove"
+    },
+    {
+      "index": 646,
+      "start": 1794.6,
+      "end": 1797.19,
+      "duration": 2.59,
+      "text": "that the statement is true. So, let's"
+    },
+    {
+      "index": 647,
+      "start": 1797.2,
+      "end": 1798.55,
+      "duration": 1.35,
+      "text": "see."
+    },
+    {
+      "index": 648,
+      "start": 1798.56,
+      "end": 1800.19,
+      "duration": 1.63,
+      "text": "For"
+    },
+    {
+      "index": 649,
+      "start": 1800.2,
+      "end": 1818.51,
+      "duration": 18.31,
+      "text": "C1 and also for C2,"
+    },
+    {
+      "index": 650,
+      "start": 1819.63,
+      "end": 1819.64,
+      "duration": 0.01,
+      "text": "then"
+    },
+    {
+      "index": 651,
+      "start": 1819.64,
+      "end": 1821.19,
+      "duration": 1.55,
+      "text": "I claim we can prove the statement for"
+    },
+    {
+      "index": 652,
+      "start": 1821.2,
+      "end": 1822.75,
+      "duration": 1.55,
+      "text": "C."
+    },
+    {
+      "index": 653,
+      "start": 1822.76,
+      "end": 1825.39,
+      "duration": 2.63,
+      "text": "How do we do that? Well, we just add"
+    },
+    {
+      "index": 654,
+      "start": 1825.4,
+      "end": 1827.47,
+      "duration": 2.07,
+      "text": "these two equalities together."
+    },
+    {
+      "index": 655,
+      "start": 1827.48,
+      "end": 1828.63,
+      "duration": 1.15,
+      "text": "Okay, why does that work? There's"
+    },
+    {
+      "index": 656,
+      "start": 1828.64,
+      "end": 1831.07,
+      "duration": 2.43,
+      "text": "something fishy going on because C1 and"
+    },
+    {
+      "index": 657,
+      "start": 1831.08,
+      "end": 1832.79,
+      "duration": 1.71,
+      "text": "C2 have this piece here in the middle"
+    },
+    {
+      "index": 658,
+      "start": 1832.8,
+      "end": 1835.39,
+      "duration": 2.59,
+      "text": "that's not in that's not there in C."
+    },
+    {
+      "index": 659,
+      "start": 1835.4,
+      "end": 1837.39,
+      "duration": 1.99,
+      "text": "So, if you add the line integral along"
+    },
+    {
+      "index": 660,
+      "start": 1837.4,
+      "end": 1840.19,
+      "duration": 2.79,
+      "text": "C1 and C2, you get, you know, these"
+    },
+    {
+      "index": 661,
+      "start": 1840.2,
+      "end": 1841.87,
+      "duration": 1.67,
+      "text": "unwanted pieces."
+    },
+    {
+      "index": 662,
+      "start": 1841.88,
+      "end": 1843.75,
+      "duration": 1.87,
+      "text": "But, the good news is actually you go"
+    },
+    {
+      "index": 663,
+      "start": 1843.76,
+      "end": 1846.63,
+      "duration": 2.87,
+      "text": "twice through that edge in the middle."
+    },
+    {
+      "index": 664,
+      "start": 1846.64,
+      "end": 1849.55,
+      "duration": 2.91,
+      "text": "See, it appears once in C1 going up and"
+    },
+    {
+      "index": 665,
+      "start": 1849.56,
+      "end": 1851.55,
+      "duration": 1.99,
+      "text": "once in C2 going down."
+    },
+    {
+      "index": 666,
+      "start": 1851.56,
+      "end": 1853.39,
+      "duration": 1.83,
+      "text": "So, in fact, when you will do the work,"
+    },
+    {
+      "index": 667,
+      "start": 1853.4,
+      "end": 1855.59,
+      "duration": 2.19,
+      "text": "you know, when you will sum the work,"
+    },
+    {
+      "index": 668,
+      "start": 1855.6,
+      "end": 1857.03,
+      "duration": 1.43,
+      "text": "uh you will add these two guys together,"
+    },
+    {
+      "index": 669,
+      "start": 1857.04,
+      "end": 1860.63,
+      "duration": 3.59,
+      "text": "they will cancel."
+    },
+    {
+      "index": 670,
+      "start": 1862.67,
+      "end": 1862.68,
+      "duration": 0.01,
+      "text": "Okay, so"
+    },
+    {
+      "index": 671,
+      "start": 1862.68,
+      "end": 1866.19,
+      "duration": 3.51,
+      "text": "the line integral along C"
+    },
+    {
+      "index": 672,
+      "start": 1866.2,
+      "end": 1868.31,
+      "duration": 2.11,
+      "text": "will be"
+    },
+    {
+      "index": 673,
+      "start": 1868.32,
+      "end": 1873.67,
+      "duration": 5.35,
+      "text": "So, then"
+    },
+    {
+      "index": 674,
+      "start": 1874.99,
+      "end": 1875.0,
+      "duration": 0.01,
+      "text": "it will be the sum of the line integral"
+    },
+    {
+      "index": 675,
+      "start": 1875.0,
+      "end": 1878.91,
+      "duration": 3.91,
+      "text": "from C1 and C2."
+    },
+    {
+      "index": 676,
+      "start": 1880.79,
+      "end": 1880.8,
+      "duration": 0.01,
+      "text": "And that will equal therefore the double"
+    },
+    {
+      "index": 677,
+      "start": 1880.8,
+      "end": 1882.35,
+      "duration": 1.55,
+      "text": "integral over R1 plus the double"
+    },
+    {
+      "index": 678,
+      "start": 1882.36,
+      "end": 1884.19,
+      "duration": 1.83,
+      "text": "integral over R2,"
+    },
+    {
+      "index": 679,
+      "start": 1884.2,
+      "end": 1887.31,
+      "duration": 3.11,
+      "text": "which is the double integral over R of"
+    },
+    {
+      "index": 680,
+      "start": 1887.32,
+      "end": 1896.31,
+      "duration": 8.99,
+      "text": "-My."
+    },
+    {
+      "index": 681,
+      "start": 1898.35,
+      "end": 1898.36,
+      "duration": 0.01,
+      "text": "Okay, and the reason for this equality"
+    },
+    {
+      "index": 682,
+      "start": 1898.36,
+      "end": 1899.31,
+      "duration": 0.95,
+      "text": "here"
+    },
+    {
+      "index": 683,
+      "start": 1899.32,
+      "end": 1902.91,
+      "duration": 3.59,
+      "text": "is because"
+    },
+    {
+      "index": 684,
+      "start": 1907.83,
+      "end": 1907.84,
+      "duration": 0.01,
+      "text": "through"
+    },
+    {
+      "index": 685,
+      "start": 1907.84,
+      "end": 1909.91,
+      "duration": 2.07,
+      "text": "the"
+    },
+    {
+      "index": 686,
+      "start": 1909.92,
+      "end": 1912.67,
+      "duration": 2.75,
+      "text": "inner part."
+    },
+    {
+      "index": 687,
+      "start": 1912.68,
+      "end": 1915.51,
+      "duration": 2.83,
+      "text": "Well, what do we want to see?"
+    },
+    {
+      "index": 688,
+      "start": 1918.19,
+      "end": 1918.2,
+      "duration": 0.01,
+      "text": "For the boundary, well, we go twice."
+    },
+    {
+      "index": 689,
+      "start": 1918.2,
+      "end": 1919.19,
+      "duration": 0.99,
+      "text": "Sorry."
+    },
+    {
+      "index": 690,
+      "start": 1919.2,
+      "end": 1920.99,
+      "duration": 1.79,
+      "text": "Along"
+    },
+    {
+      "index": 691,
+      "start": 1921.0,
+      "end": 1930.71,
+      "duration": 9.71,
+      "text": "the boundary between R1 and R2"
+    },
+    {
+      "index": 692,
+      "start": 1947.75,
+      "end": 1947.76,
+      "duration": 0.01,
+      "text": "Okay? So, that means I just need to look"
+    },
+    {
+      "index": 693,
+      "start": 1947.76,
+      "end": 1950.11,
+      "duration": 2.35,
+      "text": "at, you know, smaller pieces if that"
+    },
+    {
+      "index": 694,
+      "start": 1950.12,
+      "end": 1951.99,
+      "duration": 1.87,
+      "text": "makes my life easier."
+    },
+    {
+      "index": 695,
+      "start": 1952.0,
+      "end": 1954.31,
+      "duration": 2.31,
+      "text": "So, now, what will make my life easy?"
+    },
+    {
+      "index": 696,
+      "start": 1954.32,
+      "end": 1956.99,
+      "duration": 2.67,
+      "text": "Well,"
+    },
+    {
+      "index": 697,
+      "start": 1958.63,
+      "end": 1958.64,
+      "duration": 0.01,
+      "text": "let's say that I have, you know, a curve"
+    },
+    {
+      "index": 698,
+      "start": 1958.64,
+      "end": 1960.669,
+      "duration": 2.029,
+      "text": "like that."
+    },
+    {
+      "index": 699,
+      "start": 1960.679,
+      "end": 1961.99,
+      "duration": 1.311,
+      "text": "Well,"
+    },
+    {
+      "index": 700,
+      "start": 1962.0,
+      "end": 1963.19,
+      "duration": 1.19,
+      "text": "I guess I should really draw a pumpkin"
+    },
+    {
+      "index": 701,
+      "start": 1963.2,
+      "end": 1964.75,
+      "duration": 1.55,
+      "text": "or something like that cuz it would be"
+    },
+    {
+      "index": 702,
+      "start": 1964.76,
+      "end": 1967.99,
+      "duration": 3.23,
+      "text": "more seasonal, but okay."
+    },
+    {
+      "index": 703,
+      "start": 1968.0,
+      "end": 1969.31,
+      "duration": 1.31,
+      "text": "Well, I don't really know how to draw"
+    },
+    {
+      "index": 704,
+      "start": 1969.32,
+      "end": 1973.07,
+      "duration": 3.75,
+      "text": "pumpkins, so."
+    },
+    {
+      "index": 705,
+      "start": 1974.669,
+      "end": 1974.679,
+      "duration": 0.01,
+      "text": "Okay, so I'm going to, you know, what I"
+    },
+    {
+      "index": 706,
+      "start": 1974.679,
+      "end": 1976.99,
+      "duration": 2.311,
+      "text": "will do is I will cut this"
+    },
+    {
+      "index": 707,
+      "start": 1977.0,
+      "end": 1979.83,
+      "duration": 2.83,
+      "text": "into smaller regions for which I have a"
+    },
+    {
+      "index": 708,
+      "start": 1979.84,
+      "end": 1982.39,
+      "duration": 2.55,
+      "text": "well-defined lower and upper boundary so"
+    },
+    {
+      "index": 709,
+      "start": 1982.4,
+      "end": 1984.07,
+      "duration": 1.67,
+      "text": "that I will be able to set up a double"
+    },
+    {
+      "index": 710,
+      "start": 1984.08,
+      "end": 1986.99,
+      "duration": 2.91,
+      "text": "integral dy dx easily."
+    },
+    {
+      "index": 711,
+      "start": 1987.0,
+      "end": 1989.35,
+      "duration": 2.35,
+      "text": "So, a region like this, I will actually"
+    },
+    {
+      "index": 712,
+      "start": 1989.36,
+      "end": 1991.03,
+      "duration": 1.67,
+      "text": "cut it here,"
+    },
+    {
+      "index": 713,
+      "start": 1991.04,
+      "end": 1992.47,
+      "duration": 1.43,
+      "text": "here,"
+    },
+    {
+      "index": 714,
+      "start": 1992.48,
+      "end": 1996.39,
+      "duration": 3.91,
+      "text": "and here into five smaller pieces"
+    },
+    {
+      "index": 715,
+      "start": 1996.4,
+      "end": 1998.99,
+      "duration": 2.59,
+      "text": "so that each small piece will let me set"
+    },
+    {
+      "index": 716,
+      "start": 1999.0,
+      "end": 2003.71,
+      "duration": 4.71,
+      "text": "up the double integral dy dx."
+    },
+    {
+      "index": 717,
+      "start": 2006.15,
+      "end": 2006.16,
+      "duration": 0.01,
+      "text": "Okay, so"
+    },
+    {
+      "index": 718,
+      "start": 2006.16,
+      "end": 2007.59,
+      "duration": 1.43,
+      "text": "we'll cut"
+    },
+    {
+      "index": 719,
+      "start": 2007.6,
+      "end": 2010.19,
+      "duration": 2.59,
+      "text": "R into what I will call"
+    },
+    {
+      "index": 720,
+      "start": 2010.2,
+      "end": 2018.27,
+      "duration": 8.07,
+      "text": "vertically simple"
+    },
+    {
+      "index": 721,
+      "start": 2022.95,
+      "end": 2022.96,
+      "duration": 0.01,
+      "text": "So, what's a vertically simple region?"
+    },
+    {
+      "index": 722,
+      "start": 2022.96,
+      "end": 2025.31,
+      "duration": 2.35,
+      "text": "That's a region that's given by looking"
+    },
+    {
+      "index": 723,
+      "start": 2025.32,
+      "end": 2028.51,
+      "duration": 3.19,
+      "text": "at X between A and B for some values of"
+    },
+    {
+      "index": 724,
+      "start": 2028.52,
+      "end": 2029.669,
+      "duration": 1.149,
+      "text": "A and B,"
+    },
+    {
+      "index": 725,
+      "start": 2029.679,
+      "end": 2032.75,
+      "duration": 3.071,
+      "text": "and for each value of X,"
+    },
+    {
+      "index": 726,
+      "start": 2032.76,
+      "end": 2036.43,
+      "duration": 3.67,
+      "text": "Y is between some function of X"
+    },
+    {
+      "index": 727,
+      "start": 2036.44,
+      "end": 2040.27,
+      "duration": 3.83,
+      "text": "and some other function of X."
+    },
+    {
+      "index": 728,
+      "start": 2041.83,
+      "end": 2041.84,
+      "duration": 0.01,
+      "text": "Okay? So, for example, this guy is"
+    },
+    {
+      "index": 729,
+      "start": 2041.84,
+      "end": 2043.55,
+      "duration": 1.71,
+      "text": "vertically simple."
+    },
+    {
+      "index": 730,
+      "start": 2043.56,
+      "end": 2046.19,
+      "duration": 2.63,
+      "text": "See, X runs from this value of X to that"
+    },
+    {
+      "index": 731,
+      "start": 2046.2,
+      "end": 2047.47,
+      "duration": 1.27,
+      "text": "value of X."
+    },
+    {
+      "index": 732,
+      "start": 2047.48,
+      "end": 2049.23,
+      "duration": 1.75,
+      "text": "And for each X,"
+    },
+    {
+      "index": 733,
+      "start": 2049.24,
+      "end": 2051.149,
+      "duration": 1.909,
+      "text": "Y goes between"
+    },
+    {
+      "index": 734,
+      "start": 2051.159,
+      "end": 2054.75,
+      "duration": 3.591,
+      "text": "this value to that value."
+    },
+    {
+      "index": 735,
+      "start": 2054.76,
+      "end": 2078.55,
+      "duration": 23.79,
+      "text": "And same with each of these."
+    },
+    {
+      "index": 736,
+      "start": 2080.47,
+      "end": 2080.48,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 737,
+      "start": 2080.48,
+      "end": 2082.869,
+      "duration": 2.389,
+      "text": "So,"
+    },
+    {
+      "index": 738,
+      "start": 2082.879,
+      "end": 2084.19,
+      "duration": 1.311,
+      "text": "now"
+    },
+    {
+      "index": 739,
+      "start": 2084.2,
+      "end": 2085.27,
+      "duration": 1.07,
+      "text": "we're"
+    },
+    {
+      "index": 740,
+      "start": 2085.28,
+      "end": 2086.99,
+      "duration": 1.71,
+      "text": "down to the main step that we have to"
+    },
+    {
+      "index": 741,
+      "start": 2087.0,
+      "end": 2088.83,
+      "duration": 1.83,
+      "text": "do,"
+    },
+    {
+      "index": 742,
+      "start": 2088.84,
+      "end": 2095.79,
+      "duration": 6.95,
+      "text": "which is to prove"
+    },
+    {
+      "index": 743,
+      "start": 2105.31,
+      "end": 2105.32,
+      "duration": 0.01,
+      "text": "if C is"
+    },
+    {
+      "index": 744,
+      "start": 2105.32,
+      "end": 2111.79,
+      "duration": 6.47,
+      "text": "Sorry, if"
+    },
+    {
+      "index": 745,
+      "start": 2121.19,
+      "end": 2121.2,
+      "duration": 0.01,
+      "text": "and"
+    },
+    {
+      "index": 746,
+      "start": 2121.2,
+      "end": 2123.27,
+      "duration": 2.07,
+      "text": "C is"
+    },
+    {
+      "index": 747,
+      "start": 2123.28,
+      "end": 2125.03,
+      "duration": 1.75,
+      "text": "the boundary of R going"
+    },
+    {
+      "index": 748,
+      "start": 2125.04,
+      "end": 2136.07,
+      "duration": 11.03,
+      "text": "counterclockwise."
+    },
+    {
+      "index": 749,
+      "start": 2138.15,
+      "end": 2138.16,
+      "duration": 0.01,
+      "text": "Okay, so let's look at how we would do"
+    },
+    {
+      "index": 750,
+      "start": 2138.16,
+      "end": 2140.11,
+      "duration": 1.95,
+      "text": "it."
+    },
+    {
+      "index": 751,
+      "start": 2140.12,
+      "end": 2142.75,
+      "duration": 2.63,
+      "text": "So, we said a vertically simple region"
+    },
+    {
+      "index": 752,
+      "start": 2142.76,
+      "end": 2146.39,
+      "duration": 3.63,
+      "text": "looks like X goes between A and B,"
+    },
+    {
+      "index": 753,
+      "start": 2146.4,
+      "end": 2149.63,
+      "duration": 3.23,
+      "text": "and Y goes between"
+    },
+    {
+      "index": 754,
+      "start": 2149.64,
+      "end": 2150.95,
+      "duration": 1.31,
+      "text": "two values"
+    },
+    {
+      "index": 755,
+      "start": 2150.96,
+      "end": 2152.55,
+      "duration": 1.59,
+      "text": "that are given"
+    },
+    {
+      "index": 756,
+      "start": 2152.56,
+      "end": 2154.71,
+      "duration": 2.15,
+      "text": "by functions of X. Okay, so this is Y"
+    },
+    {
+      "index": 757,
+      "start": 2154.72,
+      "end": 2158.79,
+      "duration": 4.07,
+      "text": "equals F2 of X. This is Y equals"
+    },
+    {
+      "index": 758,
+      "start": 2158.8,
+      "end": 2160.75,
+      "duration": 1.95,
+      "text": "F1 of X."
+    },
+    {
+      "index": 759,
+      "start": 2160.76,
+      "end": 2164.71,
+      "duration": 3.95,
+      "text": "This is A. This is B. Our region is this"
+    },
+    {
+      "index": 760,
+      "start": 2164.72,
+      "end": 2170.75,
+      "duration": 6.03,
+      "text": "thing in here."
+    },
+    {
+      "index": 761,
+      "start": 2171.71,
+      "end": 2171.72,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 762,
+      "start": 2171.72,
+      "end": 2173.79,
+      "duration": 2.07,
+      "text": "let's compute both sides. And when I say"
+    },
+    {
+      "index": 763,
+      "start": 2173.8,
+      "end": 2175.19,
+      "duration": 1.39,
+      "text": "compute, of course, we will not get"
+    },
+    {
+      "index": 764,
+      "start": 2175.2,
+      "end": 2177.07,
+      "duration": 1.87,
+      "text": "numbers because we don't know what M is,"
+    },
+    {
+      "index": 765,
+      "start": 2177.08,
+      "end": 2179.55,
+      "duration": 2.47,
+      "text": "we don't know what F1 and F2 are,"
+    },
+    {
+      "index": 766,
+      "start": 2179.56,
+      "end": 2180.87,
+      "duration": 1.31,
+      "text": "but I claim we should be able to"
+    },
+    {
+      "index": 767,
+      "start": 2180.88,
+      "end": 2184.27,
+      "duration": 3.39,
+      "text": "simplify things a bit."
+    },
+    {
+      "index": 768,
+      "start": 2185.87,
+      "end": 2185.88,
+      "duration": 0.01,
+      "text": "Oops."
+    },
+    {
+      "index": 769,
+      "start": 2185.88,
+      "end": 2187.79,
+      "duration": 1.91,
+      "text": "So, let's start with the line integral."
+    },
+    {
+      "index": 770,
+      "start": 2187.8,
+      "end": 2189.83,
+      "duration": 2.03,
+      "text": "How do I compute the line integral"
+    },
+    {
+      "index": 771,
+      "start": 2189.84,
+      "end": 2193.43,
+      "duration": 3.59,
+      "text": "along this curve"
+    },
+    {
+      "index": 772,
+      "start": 2193.44,
+      "end": 2194.75,
+      "duration": 1.31,
+      "text": "that goes"
+    },
+    {
+      "index": 773,
+      "start": 2194.76,
+      "end": 2197.67,
+      "duration": 2.91,
+      "text": "all around here?"
+    },
+    {
+      "index": 774,
+      "start": 2198.91,
+      "end": 2198.92,
+      "duration": 0.01,
+      "text": "Well, it looks like there will be four"
+    },
+    {
+      "index": 775,
+      "start": 2198.92,
+      "end": 2200.79,
+      "duration": 1.87,
+      "text": "pieces."
+    },
+    {
+      "index": 776,
+      "start": 2200.8,
+      "end": 2202.59,
+      "duration": 1.79,
+      "text": "Okay, so we actually have four things to"
+    },
+    {
+      "index": 777,
+      "start": 2202.6,
+      "end": 2204.75,
+      "duration": 2.15,
+      "text": "compute, C1,"
+    },
+    {
+      "index": 778,
+      "start": 2204.76,
+      "end": 2207.59,
+      "duration": 2.83,
+      "text": "C2, C3,"
+    },
+    {
+      "index": 779,
+      "start": 2207.6,
+      "end": 2210.349,
+      "duration": 2.749,
+      "text": "and C4."
+    },
+    {
+      "index": 780,
+      "start": 2225.03,
+      "end": 2225.04,
+      "duration": 0.01,
+      "text": "So, if we integrate on C1 M dx,"
+    },
+    {
+      "index": 781,
+      "start": 2225.04,
+      "end": 2226.95,
+      "duration": 1.91,
+      "text": "how do we do that? Well, we know that on"
+    },
+    {
+      "index": 782,
+      "start": 2226.96,
+      "end": 2230.51,
+      "duration": 3.55,
+      "text": "C1, Y is given by a function of X. So,"
+    },
+    {
+      "index": 783,
+      "start": 2230.52,
+      "end": 2232.59,
+      "duration": 2.07,
+      "text": "we can just get rid of Y and express"
+    },
+    {
+      "index": 784,
+      "start": 2232.6,
+      "end": 2235.55,
+      "duration": 2.95,
+      "text": "everything in terms of in terms of X."
+    },
+    {
+      "index": 785,
+      "start": 2235.56,
+      "end": 2236.79,
+      "duration": 1.23,
+      "text": "Okay?"
+    },
+    {
+      "index": 786,
+      "start": 2236.8,
+      "end": 2240.63,
+      "duration": 3.83,
+      "text": "So, we know Y is F1 of X,"
+    },
+    {
+      "index": 787,
+      "start": 2240.64,
+      "end": 2242.11,
+      "duration": 1.47,
+      "text": "and X goes"
+    },
+    {
+      "index": 788,
+      "start": 2242.12,
+      "end": 2243.27,
+      "duration": 1.15,
+      "text": "from"
+    },
+    {
+      "index": 789,
+      "start": 2243.28,
+      "end": 2245.23,
+      "duration": 1.95,
+      "text": "A to B."
+    },
+    {
+      "index": 790,
+      "start": 2245.24,
+      "end": 2246.87,
+      "duration": 1.63,
+      "text": "So, that will be the integral from A to"
+    },
+    {
+      "index": 791,
+      "start": 2246.88,
+      "end": 2248.07,
+      "duration": 1.19,
+      "text": "B"
+    },
+    {
+      "index": 792,
+      "start": 2248.08,
+      "end": 2251.43,
+      "duration": 3.35,
+      "text": "of Well, I have to take the function M."
+    },
+    {
+      "index": 793,
+      "start": 2251.44,
+      "end": 2253.15,
+      "duration": 1.71,
+      "text": "So, you know, M depends normally on X"
+    },
+    {
+      "index": 794,
+      "start": 2253.16,
+      "end": 2254.99,
+      "duration": 1.83,
+      "text": "and Y. Maybe I should put"
+    },
+    {
+      "index": 795,
+      "start": 2255.0,
+      "end": 2257.75,
+      "duration": 2.75,
+      "text": "X and Y here."
+    },
+    {
+      "index": 796,
+      "start": 2257.76,
+      "end": 2258.95,
+      "duration": 1.19,
+      "text": "And then"
+    },
+    {
+      "index": 797,
+      "start": 2258.96,
+      "end": 2264.71,
+      "duration": 5.75,
+      "text": "I will plug Y equals F1 of X."
+    },
+    {
+      "index": 798,
+      "start": 2265.75,
+      "end": 2265.76,
+      "duration": 0.01,
+      "text": "dx."
+    },
+    {
+      "index": 799,
+      "start": 2265.76,
+      "end": 2266.99,
+      "duration": 1.23,
+      "text": "And"
+    },
+    {
+      "index": 800,
+      "start": 2267.0,
+      "end": 2268.87,
+      "duration": 1.87,
+      "text": "then I have a single variable integral,"
+    },
+    {
+      "index": 801,
+      "start": 2268.88,
+      "end": 2270.71,
+      "duration": 1.83,
+      "text": "and that's what I have to compute."
+    },
+    {
+      "index": 802,
+      "start": 2270.72,
+      "end": 2271.91,
+      "duration": 1.19,
+      "text": "Of course, I cannot compute it here"
+    },
+    {
+      "index": 803,
+      "start": 2271.92,
+      "end": 2274.67,
+      "duration": 2.75,
+      "text": "because I don't know what this is."
+    },
+    {
+      "index": 804,
+      "start": 2274.68,
+      "end": 2279.27,
+      "duration": 4.59,
+      "text": "So, it has to stay this way."
+    },
+    {
+      "index": 805,
+      "start": 2280.23,
+      "end": 2280.24,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 806,
+      "start": 2280.24,
+      "end": 2282.99,
+      "duration": 2.75,
+      "text": "Next one."
+    },
+    {
+      "index": 807,
+      "start": 2291.03,
+      "end": 2291.04,
+      "duration": 0.01,
+      "text": "Well, let's think for a second. On C2,"
+    },
+    {
+      "index": 808,
+      "start": 2291.04,
+      "end": 2292.71,
+      "duration": 1.67,
+      "text": "X equals B."
+    },
+    {
+      "index": 809,
+      "start": 2292.72,
+      "end": 2294.71,
+      "duration": 1.99,
+      "text": "It's constant."
+    },
+    {
+      "index": 810,
+      "start": 2294.72,
+      "end": 2297.15,
+      "duration": 2.43,
+      "text": "So, dx is zero,"
+    },
+    {
+      "index": 811,
+      "start": 2297.16,
+      "end": 2298.15,
+      "duration": 0.99,
+      "text": "and you know, you would integrate"
+    },
+    {
+      "index": 812,
+      "start": 2298.16,
+      "end": 2300.67,
+      "duration": 2.51,
+      "text": "actually over the variable Y."
+    },
+    {
+      "index": 813,
+      "start": 2300.68,
+      "end": 2301.75,
+      "duration": 1.07,
+      "text": "But,"
+    },
+    {
+      "index": 814,
+      "start": 2301.76,
+      "end": 2304.39,
+      "duration": 2.63,
+      "text": "well, we don't have a Y component. See,"
+    },
+    {
+      "index": 815,
+      "start": 2304.4,
+      "end": 2307.63,
+      "duration": 3.23,
+      "text": "this is the reason why we made the first"
+    },
+    {
+      "index": 816,
+      "start": 2307.64,
+      "end": 2309.15,
+      "duration": 1.51,
+      "text": "observation. We got rid of the other"
+    },
+    {
+      "index": 817,
+      "start": 2309.16,
+      "end": 2311.349,
+      "duration": 2.189,
+      "text": "term because it simplifies our life"
+    },
+    {
+      "index": 818,
+      "start": 2311.359,
+      "end": 2313.23,
+      "duration": 1.871,
+      "text": "here."
+    },
+    {
+      "index": 819,
+      "start": 2313.24,
+      "end": 2314.51,
+      "duration": 1.27,
+      "text": "So,"
+    },
+    {
+      "index": 820,
+      "start": 2314.52,
+      "end": 2317.31,
+      "duration": 2.79,
+      "text": "we just get zero."
+    },
+    {
+      "index": 821,
+      "start": 2318.63,
+      "end": 2318.64,
+      "duration": 0.01,
+      "text": "Okay, just looking quickly ahead,"
+    },
+    {
+      "index": 822,
+      "start": 2318.64,
+      "end": 2319.95,
+      "duration": 1.31,
+      "text": "there's another one that will be zero as"
+    },
+    {
+      "index": 823,
+      "start": 2319.96,
+      "end": 2322.03,
+      "duration": 2.07,
+      "text": "well, right? Which one?"
+    },
+    {
+      "index": 824,
+      "start": 2322.04,
+      "end": 2331.79,
+      "duration": 9.75,
+      "text": "Yeah, C4. So, gives me zero."
+    },
+    {
+      "index": 825,
+      "start": 2334.349,
+      "end": 2334.359,
+      "duration": 0.01,
+      "text": "What about C3? Well, C3 will look a lot"
+    },
+    {
+      "index": 826,
+      "start": 2334.359,
+      "end": 2336.79,
+      "duration": 2.431,
+      "text": "like C1. Okay, so we're going to use the"
+    },
+    {
+      "index": 827,
+      "start": 2336.8,
+      "end": 2338.39,
+      "duration": 1.59,
+      "text": "same kind of thing"
+    },
+    {
+      "index": 828,
+      "start": 2338.4,
+      "end": 2361.27,
+      "duration": 22.87,
+      "text": "that we did with C1."
+    },
+    {
+      "index": 829,
+      "start": 2362.55,
+      "end": 2362.56,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 830,
+      "start": 2362.56,
+      "end": 2364.71,
+      "duration": 2.15,
+      "text": "So,"
+    },
+    {
+      "index": 831,
+      "start": 2364.72,
+      "end": 2367.63,
+      "duration": 2.91,
+      "text": "along C3,"
+    },
+    {
+      "index": 832,
+      "start": 2367.64,
+      "end": 2370.63,
+      "duration": 2.99,
+      "text": "well, let's see. So, on C3, Y is a"
+    },
+    {
+      "index": 833,
+      "start": 2370.64,
+      "end": 2373.87,
+      "duration": 3.23,
+      "text": "function of X again."
+    },
+    {
+      "index": 834,
+      "start": 2374.95,
+      "end": 2374.96,
+      "duration": 0.01,
+      "text": "And"
+    },
+    {
+      "index": 835,
+      "start": 2374.96,
+      "end": 2377.39,
+      "duration": 2.43,
+      "text": "so, we're using as our variable X, but"
+    },
+    {
+      "index": 836,
+      "start": 2377.4,
+      "end": 2381.51,
+      "duration": 4.11,
+      "text": "now X goes down from B to A."
+    },
+    {
+      "index": 837,
+      "start": 2384.47,
+      "end": 2384.48,
+      "duration": 0.01,
+      "text": "So, it will be the integral from B to A"
+    },
+    {
+      "index": 838,
+      "start": 2384.48,
+      "end": 2385.91,
+      "duration": 1.43,
+      "text": "of"
+    },
+    {
+      "index": 839,
+      "start": 2385.92,
+      "end": 2387.11,
+      "duration": 1.19,
+      "text": "M of"
+    },
+    {
+      "index": 840,
+      "start": 2387.12,
+      "end": 2389.67,
+      "duration": 2.55,
+      "text": "X and F2 of X"
+    },
+    {
+      "index": 841,
+      "start": 2389.68,
+      "end": 2391.19,
+      "duration": 1.51,
+      "text": "DX."
+    },
+    {
+      "index": 842,
+      "start": 2391.2,
+      "end": 2393.11,
+      "duration": 1.91,
+      "text": "Or if you prefer, that's negative"
+    },
+    {
+      "index": 843,
+      "start": 2393.12,
+      "end": 2394.99,
+      "duration": 1.87,
+      "text": "integral from A to B"
+    },
+    {
+      "index": 844,
+      "start": 2395.0,
+      "end": 2398.55,
+      "duration": 3.55,
+      "text": "of M of X and F2 of X"
+    },
+    {
+      "index": 845,
+      "start": 2398.56,
+      "end": 2401.31,
+      "duration": 2.75,
+      "text": "DX."
+    },
+    {
+      "index": 846,
+      "start": 2402.19,
+      "end": 2402.2,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 847,
+      "start": 2402.2,
+      "end": 2404.03,
+      "duration": 1.83,
+      "text": "So, now if I sum all these pieces"
+    },
+    {
+      "index": 848,
+      "start": 2404.04,
+      "end": 2405.99,
+      "duration": 1.95,
+      "text": "together,"
+    },
+    {
+      "index": 849,
+      "start": 2406.0,
+      "end": 2409.11,
+      "duration": 3.11,
+      "text": "I get"
+    },
+    {
+      "index": 850,
+      "start": 2410.91,
+      "end": 2410.92,
+      "duration": 0.01,
+      "text": "that the line integral along the closed"
+    },
+    {
+      "index": 851,
+      "start": 2410.92,
+      "end": 2415.59,
+      "duration": 4.67,
+      "text": "curve is the integral from A to B of"
+    },
+    {
+      "index": 852,
+      "start": 2415.6,
+      "end": 2418.35,
+      "duration": 2.75,
+      "text": "M X F1 of X"
+    },
+    {
+      "index": 853,
+      "start": 2418.36,
+      "end": 2422.47,
+      "duration": 4.11,
+      "text": "DX minus the integral from A to B of M"
+    },
+    {
+      "index": 854,
+      "start": 2422.48,
+      "end": 2425.59,
+      "duration": 3.11,
+      "text": "of X F2 of X"
+    },
+    {
+      "index": 855,
+      "start": 2425.6,
+      "end": 2429.91,
+      "duration": 4.31,
+      "text": "DX."
+    },
+    {
+      "index": 856,
+      "start": 2438.31,
+      "end": 2438.32,
+      "duration": 0.01,
+      "text": "Next, I should try to look at my double"
+    },
+    {
+      "index": 857,
+      "start": 2438.32,
+      "end": 2440.63,
+      "duration": 2.31,
+      "text": "integral and see if I can make it equal"
+    },
+    {
+      "index": 858,
+      "start": 2440.64,
+      "end": 2447.15,
+      "duration": 6.51,
+      "text": "to that."
+    },
+    {
+      "index": 859,
+      "start": 2460.03,
+      "end": 2460.04,
+      "duration": 0.01,
+      "text": "Double integral over R of negative MY"
+    },
+    {
+      "index": 860,
+      "start": 2460.04,
+      "end": 2461.31,
+      "duration": 1.27,
+      "text": "DA."
+    },
+    {
+      "index": 861,
+      "start": 2461.32,
+      "end": 2462.91,
+      "duration": 1.59,
+      "text": "Well, first I'll take the minus sign"
+    },
+    {
+      "index": 862,
+      "start": 2462.92,
+      "end": 2463.91,
+      "duration": 0.99,
+      "text": "out."
+    },
+    {
+      "index": 863,
+      "start": 2463.92,
+      "end": 2464.95,
+      "duration": 1.03,
+      "text": "It will make my life a little bit"
+    },
+    {
+      "index": 864,
+      "start": 2464.96,
+      "end": 2466.03,
+      "duration": 1.07,
+      "text": "easier."
+    },
+    {
+      "index": 865,
+      "start": 2466.04,
+      "end": 2469.51,
+      "duration": 3.47,
+      "text": "And second,"
+    },
+    {
+      "index": 866,
+      "start": 2472.03,
+      "end": 2472.04,
+      "duration": 0.01,
+      "text": "so I said I will try to set this up in"
+    },
+    {
+      "index": 867,
+      "start": 2472.04,
+      "end": 2474.19,
+      "duration": 2.15,
+      "text": "the way that's the most efficient."
+    },
+    {
+      "index": 868,
+      "start": 2474.2,
+      "end": 2477.39,
+      "duration": 3.19,
+      "text": "And my choice of this kind of region"
+    },
+    {
+      "index": 869,
+      "start": 2477.4,
+      "end": 2481.63,
+      "duration": 4.23,
+      "text": "means that it's easier to set up DY DX."
+    },
+    {
+      "index": 870,
+      "start": 2481.64,
+      "end": 2484.63,
+      "duration": 2.99,
+      "text": "Right? So, if I set it up"
+    },
+    {
+      "index": 871,
+      "start": 2484.64,
+      "end": 2486.83,
+      "duration": 2.19,
+      "text": "DY DX,"
+    },
+    {
+      "index": 872,
+      "start": 2486.84,
+      "end": 2489.31,
+      "duration": 2.47,
+      "text": "then I know for a given value of X, Y"
+    },
+    {
+      "index": 873,
+      "start": 2489.32,
+      "end": 2496.23,
+      "duration": 6.91,
+      "text": "goes from F1 of X to F2 of X."
+    },
+    {
+      "index": 874,
+      "start": 2500.35,
+      "end": 2500.36,
+      "duration": 0.01,
+      "text": "And X goes from A to B."
+    },
+    {
+      "index": 875,
+      "start": 2500.36,
+      "end": 2505.31,
+      "duration": 4.95,
+      "text": "Right?"
+    },
+    {
+      "index": 876,
+      "start": 2507.79,
+      "end": 2507.8,
+      "duration": 0.01,
+      "text": "Is that okay with everyone?"
+    },
+    {
+      "index": 877,
+      "start": 2507.8,
+      "end": 2509.11,
+      "duration": 1.31,
+      "text": "Yeah."
+    },
+    {
+      "index": 878,
+      "start": 2509.12,
+      "end": 2511.23,
+      "duration": 2.11,
+      "text": "Okay. So, now if I compute the inner"
+    },
+    {
+      "index": 879,
+      "start": 2511.24,
+      "end": 2514.43,
+      "duration": 3.19,
+      "text": "integral,"
+    },
+    {
+      "index": 880,
+      "start": 2516.47,
+      "end": 2516.48,
+      "duration": 0.01,
+      "text": "well, what do I get if I integrate"
+    },
+    {
+      "index": 881,
+      "start": 2516.48,
+      "end": 2518.91,
+      "duration": 2.43,
+      "text": "partial M partial Y with respect to Y?"
+    },
+    {
+      "index": 882,
+      "start": 2518.92,
+      "end": 2522.03,
+      "duration": 3.11,
+      "text": "I'll get M back."
+    },
+    {
+      "index": 883,
+      "start": 2536.63,
+      "end": 2536.64,
+      "duration": 0.01,
+      "text": "so I will get M at the point X F2 of X"
+    },
+    {
+      "index": 884,
+      "start": 2536.64,
+      "end": 2539.31,
+      "duration": 2.67,
+      "text": "minus M at the point"
+    },
+    {
+      "index": 885,
+      "start": 2539.32,
+      "end": 2543.51,
+      "duration": 4.19,
+      "text": "X F1 of X."
+    },
+    {
+      "index": 886,
+      "start": 2546.99,
+      "end": 2547.0,
+      "duration": 0.01,
+      "text": "And so, this becomes the"
+    },
+    {
+      "index": 887,
+      "start": 2547.0,
+      "end": 2549.35,
+      "duration": 2.35,
+      "text": "integral from A to B,"
+    },
+    {
+      "index": 888,
+      "start": 2549.36,
+      "end": 2551.35,
+      "duration": 1.99,
+      "text": "I guess there was a minus sign,"
+    },
+    {
+      "index": 889,
+      "start": 2551.36,
+      "end": 2553.35,
+      "duration": 1.99,
+      "text": "of"
+    },
+    {
+      "index": 890,
+      "start": 2553.36,
+      "end": 2556.23,
+      "duration": 2.87,
+      "text": "M of X F2 of X"
+    },
+    {
+      "index": 891,
+      "start": 2556.24,
+      "end": 2560.11,
+      "duration": 3.87,
+      "text": "minus M of X F1 of X"
+    },
+    {
+      "index": 892,
+      "start": 2560.12,
+      "end": 2564.79,
+      "duration": 4.67,
+      "text": "DX."
+    },
+    {
+      "index": 893,
+      "start": 2572.31,
+      "end": 2572.32,
+      "duration": 0.01,
+      "text": "So, that's the end of the proof"
+    },
+    {
+      "index": 894,
+      "start": 2572.32,
+      "end": 2575.67,
+      "duration": 3.35,
+      "text": "because we've checked that for this"
+    },
+    {
+      "index": 895,
+      "start": 2575.68,
+      "end": 2577.75,
+      "duration": 2.07,
+      "text": "special case when we have only an X"
+    },
+    {
+      "index": 896,
+      "start": 2577.76,
+      "end": 2579.63,
+      "duration": 1.87,
+      "text": "component and a vertically simple"
+    },
+    {
+      "index": 897,
+      "start": 2579.64,
+      "end": 2582.35,
+      "duration": 2.71,
+      "text": "region, things work."
+    },
+    {
+      "index": 898,
+      "start": 2582.36,
+      "end": 2584.75,
+      "duration": 2.39,
+      "text": "Then we can remove the assumption that"
+    },
+    {
+      "index": 899,
+      "start": 2584.76,
+      "end": 2586.83,
+      "duration": 2.07,
+      "text": "things are vertically simple using this"
+    },
+    {
+      "index": 900,
+      "start": 2586.84,
+      "end": 2588.51,
+      "duration": 1.67,
+      "text": "second observation. We can just, you"
+    },
+    {
+      "index": 901,
+      "start": 2588.52,
+      "end": 2590.31,
+      "duration": 1.79,
+      "text": "know, glue the various pieces together"
+    },
+    {
+      "index": 902,
+      "start": 2590.32,
+      "end": 2592.75,
+      "duration": 2.43,
+      "text": "and prove it for any region."
+    },
+    {
+      "index": 903,
+      "start": 2592.76,
+      "end": 2594.63,
+      "duration": 1.87,
+      "text": "Then we do the same thing"
+    },
+    {
+      "index": 904,
+      "start": 2594.64,
+      "end": 2597.15,
+      "duration": 2.51,
+      "text": "with the Y component, that's the first"
+    },
+    {
+      "index": 905,
+      "start": 2597.16,
+      "end": 2598.63,
+      "duration": 1.47,
+      "text": "observation. When we add the things"
+    },
+    {
+      "index": 906,
+      "start": 2598.64,
+      "end": 2600.51,
+      "duration": 1.87,
+      "text": "together, we get Green's theorem in its"
+    },
+    {
+      "index": 907,
+      "start": 2600.52,
+      "end": 2608.67,
+      "duration": 8.15,
+      "text": "full generality."
+    },
+    {
+      "index": 908,
+      "start": 2610.47,
+      "end": 2610.48,
+      "duration": 0.01,
+      "text": "Okay. So, let me finish with a cool"
+    },
+    {
+      "index": 909,
+      "start": 2610.48,
+      "end": 2619.27,
+      "duration": 8.79,
+      "text": "example."
+    },
+    {
+      "index": 910,
+      "start": 2625.51,
+      "end": 2625.52,
+      "duration": 0.01,
+      "text": "there's"
+    },
+    {
+      "index": 911,
+      "start": 2625.52,
+      "end": 2627.67,
+      "duration": 2.15,
+      "text": "one place in real life where Green's"
+    },
+    {
+      "index": 912,
+      "start": 2627.68,
+      "end": 2629.91,
+      "duration": 2.23,
+      "text": "theorem used to be extremely useful. I"
+    },
+    {
+      "index": 913,
+      "start": 2629.92,
+      "end": 2631.51,
+      "duration": 1.59,
+      "text": "say used to because computers have"
+    },
+    {
+      "index": 914,
+      "start": 2631.52,
+      "end": 2633.51,
+      "duration": 1.99,
+      "text": "actually made that obsolete."
+    },
+    {
+      "index": 915,
+      "start": 2633.52,
+      "end": 2638.63,
+      "duration": 5.11,
+      "text": "But"
+    },
+    {
+      "index": 916,
+      "start": 2641.11,
+      "end": 2641.12,
+      "duration": 0.01,
+      "text": "so, let me show you a picture"
+    },
+    {
+      "index": 917,
+      "start": 2641.12,
+      "end": 2643.15,
+      "duration": 2.03,
+      "text": "of this device. This is called a"
+    },
+    {
+      "index": 918,
+      "start": 2643.16,
+      "end": 2645.19,
+      "duration": 2.03,
+      "text": "planimeter."
+    },
+    {
+      "index": 919,
+      "start": 2645.2,
+      "end": 2649.55,
+      "duration": 4.35,
+      "text": "And what it does, oh,"
+    },
+    {
+      "index": 920,
+      "start": 2650.55,
+      "end": 2650.56,
+      "duration": 0.01,
+      "text": "okay."
+    },
+    {
+      "index": 921,
+      "start": 2650.56,
+      "end": 2653.79,
+      "duration": 3.23,
+      "text": "And what it does is it measures areas."
+    },
+    {
+      "index": 922,
+      "start": 2653.8,
+      "end": 2655.349,
+      "duration": 1.549,
+      "text": "So,"
+    },
+    {
+      "index": 923,
+      "start": 2655.359,
+      "end": 2656.95,
+      "duration": 1.591,
+      "text": "it used to be"
+    },
+    {
+      "index": 924,
+      "start": 2656.96,
+      "end": 2659.11,
+      "duration": 2.15,
+      "text": "that"
+    },
+    {
+      "index": 925,
+      "start": 2659.12,
+      "end": 2660.75,
+      "duration": 1.63,
+      "text": "when you,"
+    },
+    {
+      "index": 926,
+      "start": 2660.76,
+      "end": 2661.71,
+      "duration": 0.95,
+      "text": "you know, when you were an experimental"
+    },
+    {
+      "index": 927,
+      "start": 2661.72,
+      "end": 2664.11,
+      "duration": 2.39,
+      "text": "scientist, you would, you know, run your"
+    },
+    {
+      "index": 928,
+      "start": 2664.12,
+      "end": 2665.87,
+      "duration": 1.75,
+      "text": "chemical or biological experiment or"
+    },
+    {
+      "index": 929,
+      "start": 2665.88,
+      "end": 2667.87,
+      "duration": 1.99,
+      "text": "whatever, and you would have all of"
+    },
+    {
+      "index": 930,
+      "start": 2667.88,
+      "end": 2670.15,
+      "duration": 2.27,
+      "text": "these recording devices, and the data"
+    },
+    {
+      "index": 931,
+      "start": 2670.16,
+      "end": 2673.03,
+      "duration": 2.87,
+      "text": "would go, well, not onto uh floppy disk"
+    },
+    {
+      "index": 932,
+      "start": 2673.04,
+      "end": 2674.47,
+      "duration": 1.43,
+      "text": "or a hard disk or whatever because you"
+    },
+    {
+      "index": 933,
+      "start": 2674.48,
+      "end": 2675.59,
+      "duration": 1.11,
+      "text": "didn't have those at the time. You"
+    },
+    {
+      "index": 934,
+      "start": 2675.6,
+      "end": 2677.23,
+      "duration": 1.63,
+      "text": "didn't have a computer in your lab. They"
+    },
+    {
+      "index": 935,
+      "start": 2677.24,
+      "end": 2679.95,
+      "duration": 2.71,
+      "text": "would go onto a piece of graph paper."
+    },
+    {
+      "index": 936,
+      "start": 2679.96,
+      "end": 2680.87,
+      "duration": 0.91,
+      "text": "You know, so you'd have your graph"
+    },
+    {
+      "index": 937,
+      "start": 2680.88,
+      "end": 2683.51,
+      "duration": 2.63,
+      "text": "paper, and you would have,"
+    },
+    {
+      "index": 938,
+      "start": 2683.52,
+      "end": 2685.79,
+      "duration": 2.27,
+      "text": "you know, some curve on it."
+    },
+    {
+      "index": 939,
+      "start": 2685.8,
+      "end": 2687.91,
+      "duration": 2.11,
+      "text": "And very often you wanted to know what's"
+    },
+    {
+      "index": 940,
+      "start": 2687.92,
+      "end": 2690.03,
+      "duration": 2.11,
+      "text": "the total amount of"
+    },
+    {
+      "index": 941,
+      "start": 2690.04,
+      "end": 2692.43,
+      "duration": 2.39,
+      "text": "product that you have synthesized or"
+    },
+    {
+      "index": 942,
+      "start": 2692.44,
+      "end": 2694.47,
+      "duration": 2.03,
+      "text": "whatever the question might be. It might"
+    },
+    {
+      "index": 943,
+      "start": 2694.48,
+      "end": 2697.03,
+      "duration": 2.55,
+      "text": "relate with, you know, the area under"
+    },
+    {
+      "index": 944,
+      "start": 2697.04,
+      "end": 2698.51,
+      "duration": 1.47,
+      "text": "your curve."
+    },
+    {
+      "index": 945,
+      "start": 2698.52,
+      "end": 2699.91,
+      "duration": 1.39,
+      "text": "So, you'd say, \"Oh, that's easy. Let's"
+    },
+    {
+      "index": 946,
+      "start": 2699.92,
+      "end": 2701.75,
+      "duration": 1.83,
+      "text": "just integrate.\" Well, except you don't"
+    },
+    {
+      "index": 947,
+      "start": 2701.76,
+      "end": 2703.11,
+      "duration": 1.35,
+      "text": "have a function you can put that into"
+    },
+    {
+      "index": 948,
+      "start": 2703.12,
+      "end": 2704.71,
+      "duration": 1.59,
+      "text": "your calculator."
+    },
+    {
+      "index": 949,
+      "start": 2704.72,
+      "end": 2706.15,
+      "duration": 1.43,
+      "text": "The next thing you could do is, well,"
+    },
+    {
+      "index": 950,
+      "start": 2706.16,
+      "end": 2708.07,
+      "duration": 1.91,
+      "text": "let's count the little squares, but you"
+    },
+    {
+      "index": 951,
+      "start": 2708.08,
+      "end": 2709.07,
+      "duration": 0.99,
+      "text": "know, if you've seen a piece of graph"
+    },
+    {
+      "index": 952,
+      "start": 2709.08,
+      "end": 2711.67,
+      "duration": 2.59,
+      "text": "paper, that's kind of time-consuming."
+    },
+    {
+      "index": 953,
+      "start": 2711.68,
+      "end": 2712.99,
+      "duration": 1.31,
+      "text": "So, people invented these things called"
+    },
+    {
+      "index": 954,
+      "start": 2713.0,
+      "end": 2714.43,
+      "duration": 1.43,
+      "text": "planimeters"
+    },
+    {
+      "index": 955,
+      "start": 2714.44,
+      "end": 2716.03,
+      "duration": 1.59,
+      "text": "where so, it's something where there's a"
+    },
+    {
+      "index": 956,
+      "start": 2716.04,
+      "end": 2718.15,
+      "duration": 2.11,
+      "text": "really heavy"
+    },
+    {
+      "index": 957,
+      "start": 2718.16,
+      "end": 2720.55,
+      "duration": 2.39,
+      "text": "thing based at at one corner, and"
+    },
+    {
+      "index": 958,
+      "start": 2720.56,
+      "end": 2722.51,
+      "duration": 1.95,
+      "text": "there's a lot of dials and gauges and"
+    },
+    {
+      "index": 959,
+      "start": 2722.52,
+      "end": 2724.67,
+      "duration": 2.15,
+      "text": "everything, and there's one arm that you"
+    },
+    {
+      "index": 960,
+      "start": 2724.68,
+      "end": 2726.19,
+      "duration": 1.51,
+      "text": "move. And so, what you do is you take"
+    },
+    {
+      "index": 961,
+      "start": 2726.2,
+      "end": 2729.39,
+      "duration": 3.19,
+      "text": "the moving arm and you just slide it"
+    },
+    {
+      "index": 962,
+      "start": 2729.4,
+      "end": 2731.27,
+      "duration": 1.87,
+      "text": "all around"
+    },
+    {
+      "index": 963,
+      "start": 2731.28,
+      "end": 2733.55,
+      "duration": 2.27,
+      "text": "your curve,"
+    },
+    {
+      "index": 964,
+      "start": 2733.56,
+      "end": 2735.91,
+      "duration": 2.35,
+      "text": "and you look at one of the dials,"
+    },
+    {
+      "index": 965,
+      "start": 2735.92,
+      "end": 2738.349,
+      "duration": 2.429,
+      "text": "and suddenly what comes, you know, as"
+    },
+    {
+      "index": 966,
+      "start": 2738.359,
+      "end": 2739.99,
+      "duration": 1.631,
+      "text": "you go around, it gives you complete"
+    },
+    {
+      "index": 967,
+      "start": 2740.0,
+      "end": 2743.11,
+      "duration": 3.11,
+      "text": "garbage. But when you come back here,"
+    },
+    {
+      "index": 968,
+      "start": 2743.12,
+      "end": 2745.23,
+      "duration": 2.11,
+      "text": "that dial suddenly gives you the value"
+    },
+    {
+      "index": 969,
+      "start": 2745.24,
+      "end": 2747.71,
+      "duration": 2.47,
+      "text": "of the area of this region."
+    },
+    {
+      "index": 970,
+      "start": 2747.72,
+      "end": 2749.71,
+      "duration": 1.99,
+      "text": "So, how does it work? You know, this"
+    },
+    {
+      "index": 971,
+      "start": 2749.72,
+      "end": 2752.07,
+      "duration": 2.35,
+      "text": "gadget never knows about the region"
+    },
+    {
+      "index": 972,
+      "start": 2752.08,
+      "end": 2753.79,
+      "duration": 1.71,
+      "text": "inside because you don't take it all"
+    },
+    {
+      "index": 973,
+      "start": 2753.8,
+      "end": 2754.87,
+      "duration": 1.07,
+      "text": "over here."
+    },
+    {
+      "index": 974,
+      "start": 2754.88,
+      "end": 2757.03,
+      "duration": 2.15,
+      "text": "You only take it along the curve. So,"
+    },
+    {
+      "index": 975,
+      "start": 2757.04,
+      "end": 2758.43,
+      "duration": 1.39,
+      "text": "what it does actually is it computes a"
+    },
+    {
+      "index": 976,
+      "start": 2758.44,
+      "end": 2760.03,
+      "duration": 1.59,
+      "text": "line integral."
+    },
+    {
+      "index": 977,
+      "start": 2760.04,
+      "end": 2761.87,
+      "duration": 1.83,
+      "text": "Okay? So,"
+    },
+    {
+      "index": 978,
+      "start": 2761.88,
+      "end": 2763.43,
+      "duration": 1.55,
+      "text": "you know, it has this system of wheels"
+    },
+    {
+      "index": 979,
+      "start": 2763.44,
+      "end": 2766.07,
+      "duration": 2.63,
+      "text": "and everything that computes for you the"
+    },
+    {
+      "index": 980,
+      "start": 2766.08,
+      "end": 2769.11,
+      "duration": 3.03,
+      "text": "line integral along C of"
+    },
+    {
+      "index": 981,
+      "start": 2769.12,
+      "end": 2770.59,
+      "duration": 1.47,
+      "text": "well, depends on the model, but some of"
+    },
+    {
+      "index": 982,
+      "start": 2770.6,
+      "end": 2772.51,
+      "duration": 1.91,
+      "text": "them compute the line integral of X DY,"
+    },
+    {
+      "index": 983,
+      "start": 2772.52,
+      "end": 2774.23,
+      "duration": 1.71,
+      "text": "some of them compute different line"
+    },
+    {
+      "index": 984,
+      "start": 2774.24,
+      "end": 2776.31,
+      "duration": 2.07,
+      "text": "integrals. But they compute some line"
+    },
+    {
+      "index": 985,
+      "start": 2776.32,
+      "end": 2777.95,
+      "duration": 1.63,
+      "text": "integral."
+    },
+    {
+      "index": 986,
+      "start": 2777.96,
+      "end": 2779.79,
+      "duration": 1.83,
+      "text": "Okay? And now if you apply Green's"
+    },
+    {
+      "index": 987,
+      "start": 2779.8,
+      "end": 2781.67,
+      "duration": 1.87,
+      "text": "theorem,"
+    },
+    {
+      "index": 988,
+      "start": 2781.68,
+      "end": 2782.67,
+      "duration": 0.99,
+      "text": "you see that when you have a"
+    },
+    {
+      "index": 989,
+      "start": 2782.68,
+      "end": 2786.15,
+      "duration": 3.47,
+      "text": "counterclockwise curve,"
+    },
+    {
+      "index": 990,
+      "start": 2787.63,
+      "end": 2787.64,
+      "duration": 0.01,
+      "text": "this will be"
+    },
+    {
+      "index": 991,
+      "start": 2787.64,
+      "end": 2789.19,
+      "duration": 1.55,
+      "text": "just the area"
+    },
+    {
+      "index": 992,
+      "start": 2789.2,
+      "end": 2791.43,
+      "duration": 2.23,
+      "text": "of the region inside."
+    },
+    {
+      "index": 993,
+      "start": 2791.44,
+      "end": 2793.03,
+      "duration": 1.59,
+      "text": "And so, that's, you know, that's how it"
+    },
+    {
+      "index": 994,
+      "start": 2793.04,
+      "end": 2794.31,
+      "duration": 1.27,
+      "text": "works. I mean, of course, now you use a"
+    },
+    {
+      "index": 995,
+      "start": 2794.32,
+      "end": 2796.71,
+      "duration": 2.39,
+      "text": "computer and it does the sums. Yes?"
+    },
+    {
+      "index": 996,
+      "start": 2796.72,
+      "end": 2797.95,
+      "duration": 1.23,
+      "text": "does it cost?"
+    },
+    {
+      "index": 997,
+      "start": 2797.96,
+      "end": 2800.15,
+      "duration": 2.19,
+      "text": "Uh that costs several thousand dollars,"
+    },
+    {
+      "index": 998,
+      "start": 2800.16,
+      "end": 2801.87,
+      "duration": 1.71,
+      "text": "possibly more. So, that's why I didn't"
+    },
+    {
+      "index": 999,
+      "start": 2801.88,
+      "end": 2804.4,
+      "duration": 2.52,
+      "text": "bring one."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

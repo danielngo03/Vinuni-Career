@@ -1,0 +1,8054 @@
+{
+  "video": {
+    "id": "1nScXLQAQ9A",
+    "title": "Lec 11 | MIT 6.042J Mathematics for Computer Science, Fall 2010",
+    "url": "https://www.youtube.com/watch?v=1nScXLQAQ9A",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3839,
+    "language": "en"
+  },
+  "segment_count": 1148,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.23,
+      "end": 2.24,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.24,
+      "end": 4.95,
+      "duration": 2.71,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.96,
+      "end": 7.11,
+      "duration": 2.15,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 7.12,
+      "end": 9.07,
+      "duration": 1.95,
+      "text": "to offer high quality educational"
+    },
+    {
+      "index": 4,
+      "start": 9.08,
+      "end": 12.19,
+      "duration": 3.11,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 12.2,
+      "end": 14.15,
+      "duration": 1.95,
+      "text": "view additional materials from hundreds"
+    },
+    {
+      "index": 6,
+      "start": 14.16,
+      "end": 17.47,
+      "duration": 3.31,
+      "text": "of MIT courses visit MIT opencourseware"
+    },
+    {
+      "index": 7,
+      "start": 17.48,
+      "end": 22.99,
+      "duration": 5.51,
+      "text": "at"
+    },
+    {
+      "index": 8,
+      "start": 25.269,
+      "end": 25.279,
+      "duration": 0.01,
+      "text": "ocw.mit.edu So today we're going to talk"
+    },
+    {
+      "index": 9,
+      "start": 25.279,
+      "end": 28.509,
+      "duration": 3.23,
+      "text": "about uh uh"
+    },
+    {
+      "index": 10,
+      "start": 28.519,
+      "end": 30.509,
+      "duration": 1.99,
+      "text": "relations we're going to talk about"
+    },
+    {
+      "index": 11,
+      "start": 30.519,
+      "end": 34.15,
+      "duration": 3.631,
+      "text": "partial orders wow this is loud can you"
+    },
+    {
+      "index": 12,
+      "start": 34.16,
+      "end": 36.83,
+      "duration": 2.67,
+      "text": "put it a bit"
+    },
+    {
+      "index": 13,
+      "start": 39.75,
+      "end": 39.76,
+      "duration": 0.01,
+      "text": "softer um so we're going to talk about"
+    },
+    {
+      "index": 14,
+      "start": 39.76,
+      "end": 42.35,
+      "duration": 2.59,
+      "text": "relations uh partial orders and then"
+    },
+    {
+      "index": 15,
+      "start": 42.36,
+      "end": 44.63,
+      "duration": 2.27,
+      "text": "parallel task uh"
+    },
+    {
+      "index": 16,
+      "start": 44.64,
+      "end": 47.31,
+      "duration": 2.67,
+      "text": "scheduling so uh well we start out with"
+    },
+    {
+      "index": 17,
+      "start": 47.32,
+      "end": 49.59,
+      "duration": 2.27,
+      "text": "a few definitions as"
+    },
+    {
+      "index": 18,
+      "start": 49.6,
+      "end": 53.47,
+      "duration": 3.87,
+      "text": "usual and uh through examples we will"
+    },
+    {
+      "index": 19,
+      "start": 53.48,
+      "end": 56.31,
+      "duration": 2.83,
+      "text": "explain what we're talking about here so"
+    },
+    {
+      "index": 20,
+      "start": 56.32,
+      "end": 59.389,
+      "duration": 3.069,
+      "text": "what about relations well relations are"
+    },
+    {
+      "index": 21,
+      "start": 59.399,
+      "end": 68.149,
+      "duration": 8.75,
+      "text": "a very simp simple uh definition a"
+    },
+    {
+      "index": 22,
+      "start": 77.39,
+      "end": 77.4,
+      "duration": 0.01,
+      "text": "B is"
+    },
+    {
+      "index": 23,
+      "start": 77.4,
+      "end": 80.87,
+      "duration": 3.47,
+      "text": "really a subset of the cross product of"
+    },
+    {
+      "index": 24,
+      "start": 80.88,
+      "end": 82.469,
+      "duration": 1.589,
+      "text": "the"
+    },
+    {
+      "index": 25,
+      "start": 82.479,
+      "end": 85.149,
+      "duration": 2.67,
+      "text": "two so let me give an"
+    },
+    {
+      "index": 26,
+      "start": 85.159,
+      "end": 88.91,
+      "duration": 3.751,
+      "text": "example is a subset r that"
+    },
+    {
+      "index": 27,
+      "start": 88.92,
+      "end": 90.63,
+      "duration": 1.71,
+      "text": "is"
+    },
+    {
+      "index": 28,
+      "start": 90.64,
+      "end": 92.59,
+      "duration": 1.95,
+      "text": "has its elements in a cross product of A"
+    },
+    {
+      "index": 29,
+      "start": 92.6,
+      "end": 94.83,
+      "duration": 2.23,
+      "text": "and B which really means that it has"
+    },
+    {
+      "index": 30,
+      "start": 94.84,
+      "end": 97.109,
+      "duration": 2.269,
+      "text": "pairs where the first element is drawn"
+    },
+    {
+      "index": 31,
+      "start": 97.119,
+      "end": 100.149,
+      "duration": 3.03,
+      "text": "from a and the second element is from"
+    },
+    {
+      "index": 32,
+      "start": 100.159,
+      "end": 104.109,
+      "duration": 3.95,
+      "text": "B so for example um if you're thinking"
+    },
+    {
+      "index": 33,
+      "start": 104.119,
+      "end": 107.27,
+      "duration": 3.151,
+      "text": "about uh the classes that you're taking"
+    },
+    {
+      "index": 34,
+      "start": 107.28,
+      "end": 111.55,
+      "duration": 4.27,
+      "text": "as say set B and all the students set a"
+    },
+    {
+      "index": 35,
+      "start": 111.56,
+      "end": 114.95,
+      "duration": 3.39,
+      "text": "well then you can uh describe this as a"
+    },
+    {
+      "index": 36,
+      "start": 114.96,
+      "end": 119.63,
+      "duration": 4.67,
+      "text": "relationship uh where we have two PS a b"
+    },
+    {
+      "index": 37,
+      "start": 119.64,
+      "end": 123.149,
+      "duration": 3.509,
+      "text": "where student"
+    },
+    {
+      "index": 38,
+      "start": 127.19,
+      "end": 127.2,
+      "duration": 0.01,
+      "text": "a is taking Class"
+    },
+    {
+      "index": 39,
+      "start": 127.2,
+      "end": 130.51,
+      "duration": 3.31,
+      "text": "B"
+    },
+    {
+      "index": 40,
+      "start": 134.11,
+      "end": 134.12,
+      "duration": 0.01,
+      "text": "so the relation is really just uh a set"
+    },
+    {
+      "index": 41,
+      "start": 134.12,
+      "end": 136.79,
+      "duration": 2.67,
+      "text": "of pairs the first part of the pair is"
+    },
+    {
+      "index": 42,
+      "start": 136.8,
+      "end": 139.71,
+      "duration": 2.91,
+      "text": "in set a the second one in"
+    },
+    {
+      "index": 43,
+      "start": 139.72,
+      "end": 142.91,
+      "duration": 3.19,
+      "text": "b um now we will uh use different"
+    },
+    {
+      "index": 44,
+      "start": 142.92,
+      "end": 147.71,
+      "duration": 4.79,
+      "text": "notation for indicating uh that a pair"
+    },
+    {
+      "index": 45,
+      "start": 147.72,
+      "end": 150.509,
+      "duration": 2.789,
+      "text": "is in this subset so so we will be"
+    },
+    {
+      "index": 46,
+      "start": 150.519,
+      "end": 152.63,
+      "duration": 2.111,
+      "text": "talking about further properties then it"
+    },
+    {
+      "index": 47,
+      "start": 152.64,
+      "end": 154.55,
+      "duration": 1.91,
+      "text": "will become more clear but we will also"
+    },
+    {
+      "index": 48,
+      "start": 154.56,
+      "end": 159.07,
+      "duration": 4.51,
+      "text": "write that a is related to B so instead"
+    },
+    {
+      "index": 49,
+      "start": 159.08,
+      "end": 163.83,
+      "duration": 4.75,
+      "text": "of the pair a is an element of R we may"
+    },
+    {
+      "index": 50,
+      "start": 163.84,
+      "end": 168.47,
+      "duration": 4.63,
+      "text": "write a RB or uh we say a and then we"
+    },
+    {
+      "index": 51,
+      "start": 168.48,
+      "end": 171.79,
+      "duration": 3.31,
+      "text": "use this symbol with a subscript"
+    },
+    {
+      "index": 52,
+      "start": 171.8,
+      "end": 173.91,
+      "duration": 2.11,
+      "text": "r"
+    },
+    {
+      "index": 53,
+      "start": 173.92,
+      "end": 179.509,
+      "duration": 5.589,
+      "text": "b so we use a um a a relational symbol"
+    },
+    {
+      "index": 54,
+      "start": 179.519,
+      "end": 183.67,
+      "duration": 4.151,
+      "text": "in between a and b in these two cases"
+    },
+    {
+      "index": 55,
+      "start": 183.68,
+      "end": 185.229,
+      "duration": 1.549,
+      "text": "and the reason for that becomes clear if"
+    },
+    {
+      "index": 56,
+      "start": 185.239,
+      "end": 187.19,
+      "duration": 1.951,
+      "text": "we start talking about the properties"
+    },
+    {
+      "index": 57,
+      "start": 187.2,
+      "end": 189.27,
+      "duration": 2.07,
+      "text": "but let me first give a few more"
+    },
+    {
+      "index": 58,
+      "start": 189.28,
+      "end": 193.19,
+      "duration": 3.91,
+      "text": "examples and uh talk about the types of"
+    },
+    {
+      "index": 59,
+      "start": 193.2,
+      "end": 195.47,
+      "duration": 2.27,
+      "text": "relationships uh relations that we are"
+    },
+    {
+      "index": 60,
+      "start": 195.48,
+      "end": 197.83,
+      "duration": 2.35,
+      "text": "really interested in we really are"
+    },
+    {
+      "index": 61,
+      "start": 197.84,
+      "end": 203.47,
+      "duration": 5.63,
+      "text": "interested in a relation on a set a and"
+    },
+    {
+      "index": 62,
+      "start": 203.48,
+      "end": 208.07,
+      "duration": 4.59,
+      "text": "this is really um a"
+    },
+    {
+      "index": 63,
+      "start": 208.08,
+      "end": 210.75,
+      "duration": 2.67,
+      "text": "subset r"
+    },
+    {
+      "index": 64,
+      "start": 210.76,
+      "end": 212.75,
+      "duration": 1.99,
+      "text": "that is in a cross product of a with"
+    },
+    {
+      "index": 65,
+      "start": 212.76,
+      "end": 216.35,
+      "duration": 3.59,
+      "text": "itself so essentially a is equal to B in"
+    },
+    {
+      "index": 66,
+      "start": 216.36,
+      "end": 218.19,
+      "duration": 1.83,
+      "text": "the definition right up"
+    },
+    {
+      "index": 67,
+      "start": 218.2,
+      "end": 220.789,
+      "duration": 2.589,
+      "text": "here uh now examples that we have for"
+    },
+    {
+      "index": 68,
+      "start": 220.799,
+      "end": 224.63,
+      "duration": 3.831,
+      "text": "this one is for example we may have a to"
+    },
+    {
+      "index": 69,
+      "start": 224.64,
+      "end": 227.429,
+      "duration": 2.789,
+      "text": "be all the integers positive and"
+    },
+    {
+      "index": 70,
+      "start": 227.439,
+      "end": 231.789,
+      "duration": 4.35,
+      "text": "negative and then we can say for example"
+    },
+    {
+      "index": 71,
+      "start": 231.799,
+      "end": 236.75,
+      "duration": 4.951,
+      "text": "X is related to Y if and only if um X is"
+    },
+    {
+      "index": 72,
+      "start": 236.76,
+      "end": 240.35,
+      "duration": 3.59,
+      "text": "for example U congruent to y"
+    },
+    {
+      "index": 73,
+      "start": 240.36,
+      "end": 244.35,
+      "duration": 3.99,
+      "text": "modulo 5 this would be a proper"
+    },
+    {
+      "index": 74,
+      "start": 244.36,
+      "end": 247.429,
+      "duration": 3.069,
+      "text": "relation um we have not yet talked about"
+    },
+    {
+      "index": 75,
+      "start": 247.439,
+      "end": 250.11,
+      "duration": 2.671,
+      "text": "special properties we will come to that"
+    },
+    {
+      "index": 76,
+      "start": 250.12,
+      "end": 253.27,
+      "duration": 3.15,
+      "text": "uh other examples are well we could take"
+    },
+    {
+      "index": 77,
+      "start": 253.28,
+      "end": 256.11,
+      "duration": 2.83,
+      "text": "um uh all the"
+    },
+    {
+      "index": 78,
+      "start": 256.12,
+      "end": 259.67,
+      "duration": 3.55,
+      "text": "uh a positive integer zero one and so"
+    },
+    {
+      "index": 79,
+      "start": 259.68,
+      "end": 263.189,
+      "duration": 3.509,
+      "text": "and and so forth and then right X is"
+    },
+    {
+      "index": 80,
+      "start": 263.199,
+      "end": 265.71,
+      "duration": 2.511,
+      "text": "related to Y if and only if well for"
+    },
+    {
+      "index": 81,
+      "start": 265.72,
+      "end": 268.99,
+      "duration": 3.27,
+      "text": "example we could say that X divides y"
+    },
+    {
+      "index": 82,
+      "start": 269.0,
+      "end": 270.23,
+      "duration": 1.23,
+      "text": "That's Another relation relationship"
+    },
+    {
+      "index": 83,
+      "start": 270.24,
+      "end": 273.23,
+      "duration": 2.99,
+      "text": "that we could use notice by the way that"
+    },
+    {
+      "index": 84,
+      "start": 273.24,
+      "end": 275.35,
+      "duration": 2.11,
+      "text": "uh in the definition or in in in the"
+    },
+    {
+      "index": 85,
+      "start": 275.36,
+      "end": 277.43,
+      "duration": 2.07,
+      "text": "characterization that I put here I"
+    },
+    {
+      "index": 86,
+      "start": 277.44,
+      "end": 279.55,
+      "duration": 2.11,
+      "text": "already use sort of relational symbols"
+    },
+    {
+      "index": 87,
+      "start": 279.56,
+      "end": 282.27,
+      "duration": 2.71,
+      "text": "right in the middle between X and Y over"
+    },
+    {
+      "index": 88,
+      "start": 282.28,
+      "end": 285.909,
+      "duration": 3.629,
+      "text": "here so that's already indicating why we"
+    },
+    {
+      "index": 89,
+      "start": 285.919,
+      "end": 288.71,
+      "duration": 2.791,
+      "text": "are using the notation that I put up"
+    },
+    {
+      "index": 90,
+      "start": 288.72,
+      "end": 292.11,
+      "duration": 3.39,
+      "text": "here so another example is uh for"
+    },
+    {
+      "index": 91,
+      "start": 292.12,
+      "end": 296.31,
+      "duration": 4.19,
+      "text": "example we have um that X is related to"
+    },
+    {
+      "index": 92,
+      "start": 296.32,
+      "end": 303.51,
+      "duration": 7.19,
+      "text": "Y if and only if um X is is um at most y"
+    },
+    {
+      "index": 93,
+      "start": 303.52,
+      "end": 305.029,
+      "duration": 1.509,
+      "text": "this is also a"
+    },
+    {
+      "index": 94,
+      "start": 305.039,
+      "end": 307.15,
+      "duration": 2.111,
+      "text": "relation so now what are the special"
+    },
+    {
+      "index": 95,
+      "start": 307.16,
+      "end": 310.23,
+      "duration": 3.07,
+      "text": "properties that we are interested in and"
+    },
+    {
+      "index": 96,
+      "start": 310.24,
+      "end": 312.31,
+      "duration": 2.07,
+      "text": "those that will make relation special"
+    },
+    {
+      "index": 97,
+      "start": 312.32,
+      "end": 315.99,
+      "duration": 3.67,
+      "text": "and then we can talk about uh uh oh"
+    },
+    {
+      "index": 98,
+      "start": 316.0,
+      "end": 317.15,
+      "duration": 1.15,
+      "text": "actually I"
+    },
+    {
+      "index": 99,
+      "start": 317.16,
+      "end": 320.79,
+      "duration": 3.63,
+      "text": "forgot one item that we will talk about"
+    },
+    {
+      "index": 100,
+      "start": 320.8,
+      "end": 324.51,
+      "duration": 3.71,
+      "text": "as well which are equivalence"
+    },
+    {
+      "index": 101,
+      "start": 324.52,
+      "end": 328.15,
+      "duration": 3.63,
+      "text": "classes"
+    },
+    {
+      "index": 102,
+      "start": 330.99,
+      "end": 331.0,
+      "duration": 0.01,
+      "text": "equivalence um"
+    },
+    {
+      "index": 103,
+      "start": 331.0,
+      "end": 333.629,
+      "duration": 2.629,
+      "text": "relations so we will see when we talk"
+    },
+    {
+      "index": 104,
+      "start": 333.639,
+      "end": 336.23,
+      "duration": 2.591,
+      "text": "about the properties right now that we"
+    },
+    {
+      "index": 105,
+      "start": 336.24,
+      "end": 338.909,
+      "duration": 2.669,
+      "text": "will be uh defining very special types"
+    },
+    {
+      "index": 106,
+      "start": 338.919,
+      "end": 340.71,
+      "duration": 1.791,
+      "text": "of relations and we will talk about"
+    },
+    {
+      "index": 107,
+      "start": 340.72,
+      "end": 342.83,
+      "duration": 2.11,
+      "text": "these two equivalence relations and"
+    },
+    {
+      "index": 108,
+      "start": 342.84,
+      "end": 344.79,
+      "duration": 1.95,
+      "text": "partial"
+    },
+    {
+      "index": 109,
+      "start": 344.8,
+      "end": 350.59,
+      "duration": 5.79,
+      "text": "orders okay so what are the properties"
+    },
+    {
+      "index": 110,
+      "start": 353.23,
+      "end": 353.24,
+      "duration": 0.01,
+      "text": "um actually before we go into those"
+    },
+    {
+      "index": 111,
+      "start": 353.24,
+      "end": 356.35,
+      "duration": 3.11,
+      "text": "properties let us first describe uh what"
+    },
+    {
+      "index": 112,
+      "start": 356.36,
+      "end": 357.79,
+      "duration": 1.43,
+      "text": "the relationship how how we could"
+    },
+    {
+      "index": 113,
+      "start": 357.8,
+      "end": 361.15,
+      "duration": 3.35,
+      "text": "describe it uh in in in a different way"
+    },
+    {
+      "index": 114,
+      "start": 361.16,
+      "end": 363.51,
+      "duration": 2.35,
+      "text": "actually relation is nothing more than a"
+    },
+    {
+      "index": 115,
+      "start": 363.52,
+      "end": 368.79,
+      "duration": 5.27,
+      "text": "directed graph like uh R over here is a"
+    },
+    {
+      "index": 116,
+      "start": 368.8,
+      "end": 372.189,
+      "duration": 3.389,
+      "text": "subset of a cross product with a so it"
+    },
+    {
+      "index": 117,
+      "start": 372.199,
+      "end": 374.11,
+      "duration": 1.911,
+      "text": "has Pairs and you can think of those as"
+    },
+    {
+      "index": 118,
+      "start": 374.12,
+      "end": 374.95,
+      "duration": 0.83,
+      "text": "being"
+    },
+    {
+      "index": 119,
+      "start": 374.96,
+      "end": 378.23,
+      "duration": 3.27,
+      "text": "edges so let us write that down as well"
+    },
+    {
+      "index": 120,
+      "start": 378.24,
+      "end": 382.71,
+      "duration": 4.47,
+      "text": "so set a um"
+    },
+    {
+      "index": 121,
+      "start": 382.72,
+      "end": 385.029,
+      "duration": 2.309,
+      "text": "together"
+    },
+    {
+      "index": 122,
+      "start": 385.039,
+      "end": 387.23,
+      "duration": 2.191,
+      "text": "with"
+    },
+    {
+      "index": 123,
+      "start": 387.24,
+      "end": 394.749,
+      "duration": 7.509,
+      "text": "r um is is a directed"
+    },
+    {
+      "index": 124,
+      "start": 398.27,
+      "end": 398.28,
+      "duration": 0.01,
+      "text": "graph and the idea is very"
+    },
+    {
+      "index": 125,
+      "start": 398.28,
+      "end": 402.07,
+      "duration": 3.79,
+      "text": "simple uh the directed graph has"
+    },
+    {
+      "index": 126,
+      "start": 402.08,
+      "end": 404.83,
+      "duration": 2.75,
+      "text": "vertices V and Ed set"
+    },
+    {
+      "index": 127,
+      "start": 404.84,
+      "end": 410.749,
+      "duration": 5.909,
+      "text": "e uh where we take V to be equal to a"
+    },
+    {
+      "index": 128,
+      "start": 410.759,
+      "end": 413.589,
+      "duration": 2.83,
+      "text": "and the edge set equal to"
+    },
+    {
+      "index": 129,
+      "start": 413.599,
+      "end": 417.909,
+      "duration": 4.31,
+      "text": "R so for example we could uh create a"
+    },
+    {
+      "index": 130,
+      "start": 417.919,
+      "end": 420.55,
+      "duration": 2.631,
+      "text": "small little graph"
+    },
+    {
+      "index": 131,
+      "start": 420.56,
+      "end": 424.23,
+      "duration": 3.67,
+      "text": "for example we have three persons Julie"
+    },
+    {
+      "index": 132,
+      "start": 424.24,
+      "end": 425.469,
+      "duration": 1.229,
+      "text": "and"
+    },
+    {
+      "index": 133,
+      "start": 425.479,
+      "end": 427.95,
+      "duration": 2.471,
+      "text": "Bill and another one"
+    },
+    {
+      "index": 134,
+      "start": 427.96,
+      "end": 430.71,
+      "duration": 2.75,
+      "text": "Rob and suppose that the directed edges"
+    },
+    {
+      "index": 135,
+      "start": 430.72,
+      "end": 433.35,
+      "duration": 2.63,
+      "text": "indicate whether one person likes the"
+    },
+    {
+      "index": 136,
+      "start": 433.36,
+      "end": 437.83,
+      "duration": 4.47,
+      "text": "other so for example Julie likes Bill"
+    },
+    {
+      "index": 137,
+      "start": 437.84,
+      "end": 442.589,
+      "duration": 4.749,
+      "text": "and Bill likes himself but likes no one"
+    },
+    {
+      "index": 138,
+      "start": 445.39,
+      "end": 445.4,
+      "duration": 0.01,
+      "text": "else Julie also likes Rob but does not"
+    },
+    {
+      "index": 139,
+      "start": 445.4,
+      "end": 447.95,
+      "duration": 2.55,
+      "text": "like herself and Rob really likes Julie"
+    },
+    {
+      "index": 140,
+      "start": 447.96,
+      "end": 449.79,
+      "duration": 1.83,
+      "text": "but does not like himself so so for"
+    },
+    {
+      "index": 141,
+      "start": 449.8,
+      "end": 453.309,
+      "duration": 3.509,
+      "text": "example you could create"
+    },
+    {
+      "index": 142,
+      "start": 453.319,
+      "end": 456.27,
+      "duration": 2.951,
+      "text": "a you could create a graph where all the"
+    },
+    {
+      "index": 143,
+      "start": 456.28,
+      "end": 460.15,
+      "duration": 3.87,
+      "text": "directed edges really represent the uh"
+    },
+    {
+      "index": 144,
+      "start": 460.16,
+      "end": 463.35,
+      "duration": 3.19,
+      "text": "um the um the relations that you have"
+    },
+    {
+      "index": 145,
+      "start": 463.36,
+      "end": 465.99,
+      "duration": 2.63,
+      "text": "described by R"
+    },
+    {
+      "index": 146,
+      "start": 466.0,
+      "end": 470.629,
+      "duration": 4.629,
+      "text": "so we will use this later on and uh the"
+    },
+    {
+      "index": 147,
+      "start": 470.639,
+      "end": 472.149,
+      "duration": 1.51,
+      "text": "special properties that we're interested"
+    },
+    {
+      "index": 148,
+      "start": 472.159,
+      "end": 476.07,
+      "duration": 3.911,
+      "text": "in is is is like uh are the following so"
+    },
+    {
+      "index": 149,
+      "start": 476.08,
+      "end": 477.99,
+      "duration": 1.91,
+      "text": "the properties"
+    },
+    {
+      "index": 150,
+      "start": 478.0,
+      "end": 483.55,
+      "duration": 5.55,
+      "text": "are that relations can be uh reflexive"
+    },
+    {
+      "index": 151,
+      "start": 483.56,
+      "end": 487.029,
+      "duration": 3.469,
+      "text": "so a"
+    },
+    {
+      "index": 152,
+      "start": 490.67,
+      "end": 490.68,
+      "duration": 0.01,
+      "text": "relation uh r on"
+    },
+    {
+      "index": 153,
+      "start": 490.68,
+      "end": 492.51,
+      "duration": 1.83,
+      "text": "a"
+    },
+    {
+      "index": 154,
+      "start": 492.52,
+      "end": 496.07,
+      "duration": 3.55,
+      "text": "is"
+    },
+    {
+      "index": 155,
+      "start": 498.67,
+      "end": 498.68,
+      "duration": 0.01,
+      "text": "reflexive if"
+    },
+    {
+      "index": 156,
+      "start": 498.68,
+      "end": 503.51,
+      "duration": 4.83,
+      "text": "um X is related to itself for all"
+    },
+    {
+      "index": 157,
+      "start": 503.52,
+      "end": 508.43,
+      "duration": 4.91,
+      "text": "X so for"
+    },
+    {
+      "index": 158,
+      "start": 512.269,
+      "end": 512.279,
+      "duration": 0.01,
+      "text": "all for all X in"
+    },
+    {
+      "index": 159,
+      "start": 512.279,
+      "end": 515.99,
+      "duration": 3.711,
+      "text": "a um we have uh well for example in this"
+    },
+    {
+      "index": 160,
+      "start": 516.0,
+      "end": 519.19,
+      "duration": 3.19,
+      "text": "particular graph uh it's not the case uh"
+    },
+    {
+      "index": 161,
+      "start": 519.2,
+      "end": 521.509,
+      "duration": 2.309,
+      "text": "if Julie and Rob would also like"
+    },
+    {
+      "index": 162,
+      "start": 521.519,
+      "end": 523.949,
+      "duration": 2.43,
+      "text": "themselves then the relationship up here"
+    },
+    {
+      "index": 163,
+      "start": 523.959,
+      "end": 526.07,
+      "duration": 2.111,
+      "text": "would actually be"
+    },
+    {
+      "index": 164,
+      "start": 526.08,
+      "end": 529.31,
+      "duration": 3.23,
+      "text": "reflexive uh we have uh"
+    },
+    {
+      "index": 165,
+      "start": 529.32,
+      "end": 533.19,
+      "duration": 3.87,
+      "text": "symmetry so we call a relationship"
+    },
+    {
+      "index": 166,
+      "start": 533.2,
+      "end": 536.43,
+      "duration": 3.23,
+      "text": "symmetric if well if"
+    },
+    {
+      "index": 167,
+      "start": 536.44,
+      "end": 541.31,
+      "duration": 4.87,
+      "text": "x likes y uh then this should imply that"
+    },
+    {
+      "index": 168,
+      "start": 541.32,
+      "end": 543.99,
+      "duration": 2.67,
+      "text": "y also likes"
+    },
+    {
+      "index": 169,
+      "start": 544.0,
+      "end": 546.79,
+      "duration": 2.79,
+      "text": "X and this should of course hold for all"
+    },
+    {
+      "index": 170,
+      "start": 546.8,
+      "end": 553.03,
+      "duration": 6.23,
+      "text": "X and"
+    },
+    {
+      "index": 171,
+      "start": 561.59,
+      "end": 561.6,
+      "duration": 0.01,
+      "text": "symmetric this is which is the opposite"
+    },
+    {
+      "index": 172,
+      "start": 561.6,
+      "end": 566.829,
+      "duration": 5.229,
+      "text": "of this anti- symmetric means that"
+    },
+    {
+      "index": 173,
+      "start": 566.839,
+      "end": 568.35,
+      "duration": 1.511,
+      "text": "well"
+    },
+    {
+      "index": 174,
+      "start": 568.36,
+      "end": 571.389,
+      "duration": 3.029,
+      "text": "if X likes"
+    },
+    {
+      "index": 175,
+      "start": 571.399,
+      "end": 577.069,
+      "duration": 5.67,
+      "text": "Y and Y likes r x then X and Y must be"
+    },
+    {
+      "index": 176,
+      "start": 577.079,
+      "end": 577.79,
+      "duration": 0.711,
+      "text": "the"
+    },
+    {
+      "index": 177,
+      "start": 577.8,
+      "end": 581.35,
+      "duration": 3.55,
+      "text": "same so this really means that uh it's"
+    },
+    {
+      "index": 178,
+      "start": 581.36,
+      "end": 585.19,
+      "duration": 3.83,
+      "text": "not really possible to like someone else"
+    },
+    {
+      "index": 179,
+      "start": 585.2,
+      "end": 589.87,
+      "duration": 4.67,
+      "text": "and that someone else also likes uh X"
+    },
+    {
+      "index": 180,
+      "start": 589.88,
+      "end": 592.949,
+      "duration": 3.069,
+      "text": "because according to the antisymmetrical"
+    },
+    {
+      "index": 181,
+      "start": 592.959,
+      "end": 595.31,
+      "duration": 2.351,
+      "text": "property that would then imply that X is"
+    },
+    {
+      "index": 182,
+      "start": 595.32,
+      "end": 598.55,
+      "duration": 3.23,
+      "text": "actually equal to Y so these are two"
+    },
+    {
+      "index": 183,
+      "start": 598.56,
+      "end": 600.59,
+      "duration": 2.03,
+      "text": "definitions are are are opposite from"
+    },
+    {
+      "index": 184,
+      "start": 600.6,
+      "end": 603.269,
+      "duration": 2.669,
+      "text": "one another and the final one that we"
+    },
+    {
+      "index": 185,
+      "start": 603.279,
+      "end": 605.949,
+      "duration": 2.67,
+      "text": "interested in is"
+    },
+    {
+      "index": 186,
+      "start": 605.959,
+      "end": 611.99,
+      "duration": 6.031,
+      "text": "transitivity so let's uh"
+    },
+    {
+      "index": 187,
+      "start": 614.949,
+      "end": 614.959,
+      "duration": 0.01,
+      "text": "transitive um so relationship is"
+    },
+    {
+      "index": 188,
+      "start": 614.959,
+      "end": 617.389,
+      "duration": 2.43,
+      "text": "transitive"
+    },
+    {
+      "index": 189,
+      "start": 617.399,
+      "end": 620.47,
+      "duration": 3.071,
+      "text": "if"
+    },
+    {
+      "index": 190,
+      "start": 626.55,
+      "end": 626.56,
+      "duration": 0.01,
+      "text": "x uh likes Y and Y likes"
+    },
+    {
+      "index": 191,
+      "start": 626.56,
+      "end": 632.03,
+      "duration": 5.47,
+      "text": "Z then X also likes"
+    },
+    {
+      "index": 192,
+      "start": 632.04,
+      "end": 635.31,
+      "duration": 3.27,
+      "text": "Z so let's have a look at uh these few"
+    },
+    {
+      "index": 193,
+      "start": 635.32,
+      "end": 637.87,
+      "duration": 2.55,
+      "text": "examples and see whether we can figure"
+    },
+    {
+      "index": 194,
+      "start": 637.88,
+      "end": 642.069,
+      "duration": 4.189,
+      "text": "out um what kind of properties they"
+    },
+    {
+      "index": 195,
+      "start": 642.079,
+      "end": 646.23,
+      "duration": 4.151,
+      "text": "have so let's make a"
+    },
+    {
+      "index": 196,
+      "start": 648.11,
+      "end": 648.12,
+      "duration": 0.01,
+      "text": "table"
+    },
+    {
+      "index": 197,
+      "start": 648.12,
+      "end": 651.43,
+      "duration": 3.31,
+      "text": "and uh let's first consider the x is"
+    },
+    {
+      "index": 198,
+      "start": 651.44,
+      "end": 654.91,
+      "duration": 3.47,
+      "text": "congruent to Y modulo"
+    },
+    {
+      "index": 199,
+      "start": 657.99,
+      "end": 658.0,
+      "duration": 0.01,
+      "text": "5 and"
+    },
+    {
+      "index": 200,
+      "start": 658.0,
+      "end": 660.79,
+      "duration": 2.79,
+      "text": "next uh the visibility and the other one"
+    },
+    {
+      "index": 201,
+      "start": 660.8,
+      "end": 665.71,
+      "duration": 4.91,
+      "text": "is less than or equal to so are they"
+    },
+    {
+      "index": 202,
+      "start": 665.72,
+      "end": 669.269,
+      "duration": 3.549,
+      "text": "reflexive is the first question and then"
+    },
+    {
+      "index": 203,
+      "start": 669.279,
+      "end": 671.59,
+      "duration": 2.311,
+      "text": "we want to know that they're"
+    },
+    {
+      "index": 204,
+      "start": 671.6,
+      "end": 676.43,
+      "duration": 4.83,
+      "text": "symmetric and"
+    },
+    {
+      "index": 205,
+      "start": 685.79,
+      "end": 685.8,
+      "duration": 0.01,
+      "text": "transitive so what about this one over"
+    },
+    {
+      "index": 206,
+      "start": 685.8,
+      "end": 689.43,
+      "duration": 3.63,
+      "text": "here so can you help me figuring out"
+    },
+    {
+      "index": 207,
+      "start": 689.44,
+      "end": 691.15,
+      "duration": 1.71,
+      "text": "whether they're reflexive in symmetric"
+    },
+    {
+      "index": 208,
+      "start": 691.16,
+      "end": 693.35,
+      "duration": 2.19,
+      "text": "or antisymmetric and transitive what"
+    },
+    {
+      "index": 209,
+      "start": 693.36,
+      "end": 694.99,
+      "duration": 1.63,
+      "text": "what kind of properties does this one"
+    },
+    {
+      "index": 210,
+      "start": 695.0,
+      "end": 698.069,
+      "duration": 3.069,
+      "text": "have so when we look at X is congruent"
+    },
+    {
+      "index": 211,
+      "start": 698.079,
+      "end": 701.03,
+      "duration": 2.951,
+      "text": "to Y modul 5 it really means that the"
+    },
+    {
+      "index": 212,
+      "start": 701.04,
+      "end": 703.829,
+      "duration": 2.789,
+      "text": "difference between X and"
+    },
+    {
+      "index": 213,
+      "start": 703.839,
+      "end": 707.31,
+      "duration": 3.471,
+      "text": "Y is the visible by"
+    },
+    {
+      "index": 214,
+      "start": 707.32,
+      "end": 710.15,
+      "duration": 2.83,
+      "text": "five so is it"
+    },
+    {
+      "index": 215,
+      "start": 710.16,
+      "end": 713.79,
+      "duration": 3.63,
+      "text": "reflexive is X congruent to x modul 5 it"
+    },
+    {
+      "index": 216,
+      "start": 713.8,
+      "end": 716.87,
+      "duration": 3.07,
+      "text": "it is right that's that's easy so we"
+    },
+    {
+      "index": 217,
+      "start": 716.88,
+      "end": 723.11,
+      "duration": 6.23,
+      "text": "have yes now if x is congruent to Y modu"
+    },
+    {
+      "index": 218,
+      "start": 723.12,
+      "end": 728.03,
+      "duration": 4.91,
+      "text": "5 is y also congruent to x modu 5 it is"
+    },
+    {
+      "index": 219,
+      "start": 728.04,
+      "end": 729.35,
+      "duration": 1.31,
+      "text": "right because the difference between X"
+    },
+    {
+      "index": 220,
+      "start": 729.36,
+      "end": 732.71,
+      "duration": 3.35,
+      "text": "and Y is divisible by five and it stays"
+    },
+    {
+      "index": 221,
+      "start": 732.72,
+      "end": 735.91,
+      "duration": 3.19,
+      "text": "the same and so Y is congruent to X as"
+    },
+    {
+      "index": 222,
+      "start": 735.92,
+      "end": 738.87,
+      "duration": 2.95,
+      "text": "well so it is"
+    },
+    {
+      "index": 223,
+      "start": 738.88,
+      "end": 743.949,
+      "duration": 5.069,
+      "text": "symmetric now what about the anti anti"
+    },
+    {
+      "index": 224,
+      "start": 743.959,
+      "end": 748.71,
+      "duration": 4.751,
+      "text": "symmetric if x is congruent to Y modu 5"
+    },
+    {
+      "index": 225,
+      "start": 748.72,
+      "end": 751.31,
+      "duration": 2.59,
+      "text": "and Y is congruent to X module of 5 does"
+    },
+    {
+      "index": 226,
+      "start": 751.32,
+      "end": 754.71,
+      "duration": 3.39,
+      "text": "that mean that X is equal to Y can you"
+    },
+    {
+      "index": 227,
+      "start": 754.72,
+      "end": 756.15,
+      "duration": 1.43,
+      "text": "that's not it's not really true right"
+    },
+    {
+      "index": 228,
+      "start": 756.16,
+      "end": 759.069,
+      "duration": 2.909,
+      "text": "you can give a counter example for that"
+    },
+    {
+      "index": 229,
+      "start": 759.079,
+      "end": 763.79,
+      "duration": 4.711,
+      "text": "um so for example we could have that uh"
+    },
+    {
+      "index": 230,
+      "start": 763.8,
+      "end": 765.949,
+      "duration": 2.149,
+      "text": "well seven"
+    },
+    {
+      "index": 231,
+      "start": 765.959,
+      "end": 771.47,
+      "duration": 5.511,
+      "text": "is congruent to two modul"
+    },
+    {
+      "index": 232,
+      "start": 775.829,
+      "end": 775.839,
+      "duration": 0.01,
+      "text": "5 and at this"
+    },
+    {
+      "index": 233,
+      "start": 775.839,
+      "end": 778.79,
+      "duration": 2.951,
+      "text": "and well S is conent to two mod of 5"
+    },
+    {
+      "index": 234,
+      "start": 778.8,
+      "end": 781.79,
+      "duration": 2.99,
+      "text": "into congruent to seven modu of 5 but"
+    },
+    {
+      "index": 235,
+      "start": 781.8,
+      "end": 784.71,
+      "duration": 2.91,
+      "text": "they're not the same so this is not"
+    },
+    {
+      "index": 236,
+      "start": 784.72,
+      "end": 788.31,
+      "duration": 3.59,
+      "text": "true no what about"
+    },
+    {
+      "index": 237,
+      "start": 788.32,
+      "end": 791.189,
+      "duration": 2.869,
+      "text": "transitivity is this"
+    },
+    {
+      "index": 238,
+      "start": 791.199,
+      "end": 794.629,
+      "duration": 3.43,
+      "text": "true so let's consider this example as"
+    },
+    {
+      "index": 239,
+      "start": 794.639,
+      "end": 798.15,
+      "duration": 3.511,
+      "text": "well so if I have that two and seven are"
+    },
+    {
+      "index": 240,
+      "start": 798.16,
+      "end": 800.87,
+      "duration": 2.71,
+      "text": "congruent to one another modul of five"
+    },
+    {
+      "index": 241,
+      "start": 800.88,
+      "end": 802.99,
+      "duration": 2.11,
+      "text": "well seven is also for example congruent"
+    },
+    {
+      "index": 242,
+      "start": 803.0,
+      "end": 805.31,
+      "duration": 2.31,
+      "text": "to 12 modu"
+    },
+    {
+      "index": 243,
+      "start": 805.32,
+      "end": 809.11,
+      "duration": 3.79,
+      "text": "5 um does it mean that two and 12 are"
+    },
+    {
+      "index": 244,
+      "start": 809.12,
+      "end": 811.79,
+      "duration": 2.67,
+      "text": "congruent to one another so we have two"
+    },
+    {
+      "index": 245,
+      "start": 811.8,
+      "end": 815.269,
+      "duration": 3.469,
+      "text": "is congruent to seven module"
+    },
+    {
+      "index": 246,
+      "start": 815.279,
+      "end": 819.35,
+      "duration": 4.071,
+      "text": "of5 we have say 7 is congruent to 12"
+    },
+    {
+      "index": 247,
+      "start": 819.36,
+      "end": 821.59,
+      "duration": 2.23,
+      "text": "modu"
+    },
+    {
+      "index": 248,
+      "start": 821.6,
+      "end": 824.87,
+      "duration": 3.27,
+      "text": "5 well we can uh look at the difference"
+    },
+    {
+      "index": 249,
+      "start": 824.88,
+      "end": 828.509,
+      "duration": 3.629,
+      "text": "between two and 12 which is 10 is also"
+    },
+    {
+      "index": 250,
+      "start": 828.519,
+      "end": 830.23,
+      "duration": 1.711,
+      "text": "divisible by five so actually this does"
+    },
+    {
+      "index": 251,
+      "start": 830.24,
+      "end": 833.43,
+      "duration": 3.19,
+      "text": "imply that two is congruent to 12 mod of"
+    },
+    {
+      "index": 252,
+      "start": 833.44,
+      "end": 835.629,
+      "duration": 2.189,
+      "text": "five now this is of course not a proof"
+    },
+    {
+      "index": 253,
+      "start": 835.639,
+      "end": 837.829,
+      "duration": 2.19,
+      "text": "because this is just by example but you"
+    },
+    {
+      "index": 254,
+      "start": 837.839,
+      "end": 839.269,
+      "duration": 1.43,
+      "text": "can check it for yourself that this"
+    },
+    {
+      "index": 255,
+      "start": 839.279,
+      "end": 841.389,
+      "duration": 2.11,
+      "text": "relationship is actually"
+    },
+    {
+      "index": 256,
+      "start": 841.399,
+      "end": 844.829,
+      "duration": 3.43,
+      "text": "transitive now what about the div"
+    },
+    {
+      "index": 257,
+      "start": 844.839,
+      "end": 846.79,
+      "duration": 1.951,
+      "text": "visibility maybe you can help me with"
+    },
+    {
+      "index": 258,
+      "start": 846.8,
+      "end": 847.71,
+      "duration": 0.91,
+      "text": "this"
+    },
+    {
+      "index": 259,
+      "start": 847.72,
+      "end": 853.11,
+      "duration": 5.39,
+      "text": "one so is it"
+    },
+    {
+      "index": 260,
+      "start": 855.91,
+      "end": 855.92,
+      "duration": 0.01,
+      "text": "reflexive it is right I hear yes that's"
+    },
+    {
+      "index": 261,
+      "start": 855.92,
+      "end": 857.55,
+      "duration": 1.63,
+      "text": "correct because if X and Y are equal to"
+    },
+    {
+      "index": 262,
+      "start": 857.56,
+      "end": 860.79,
+      "duration": 3.23,
+      "text": "one another Well X is is one time x so X"
+    },
+    {
+      "index": 263,
+      "start": 860.8,
+      "end": 862.43,
+      "duration": 1.63,
+      "text": "divides X so that's"
+    },
+    {
+      "index": 264,
+      "start": 862.44,
+      "end": 866.069,
+      "duration": 3.629,
+      "text": "true um is it symmetric so if x divides"
+    },
+    {
+      "index": 265,
+      "start": 866.079,
+      "end": 869.99,
+      "duration": 3.911,
+      "text": "Y and Y divides X"
+    },
+    {
+      "index": 266,
+      "start": 870.0,
+      "end": 873.55,
+      "duration": 3.55,
+      "text": "um so let's just see we are over here so"
+    },
+    {
+      "index": 267,
+      "start": 873.56,
+      "end": 876.269,
+      "duration": 2.709,
+      "text": "if x divides y does that imply that y"
+    },
+    {
+      "index": 268,
+      "start": 876.279,
+      "end": 877.91,
+      "duration": 1.631,
+      "text": "divides X that's the relationship that"
+    },
+    {
+      "index": 269,
+      "start": 877.92,
+      "end": 881.269,
+      "duration": 3.349,
+      "text": "we want to check is that true not really"
+    },
+    {
+      "index": 270,
+      "start": 881.279,
+      "end": 883.189,
+      "duration": 1.91,
+      "text": "right we can have like say three divides"
+    },
+    {
+      "index": 271,
+      "start": 883.199,
+      "end": 886.829,
+      "duration": 3.63,
+      "text": "9 but nine does not divide three so this"
+    },
+    {
+      "index": 272,
+      "start": 886.839,
+      "end": 887.87,
+      "duration": 1.031,
+      "text": "is not"
+    },
+    {
+      "index": 273,
+      "start": 887.88,
+      "end": 892.31,
+      "duration": 4.43,
+      "text": "true but anti- symmetry so if x divides"
+    },
+    {
+      "index": 274,
+      "start": 892.32,
+      "end": 896.11,
+      "duration": 3.79,
+      "text": "Y and also y divides X then they must be"
+    },
+    {
+      "index": 275,
+      "start": 896.12,
+      "end": 901.11,
+      "duration": 4.99,
+      "text": "equal to one another so we can have"
+    },
+    {
+      "index": 276,
+      "start": 903.509,
+      "end": 903.519,
+      "duration": 0.01,
+      "text": "uh we can see that this actually is anti"
+    },
+    {
+      "index": 277,
+      "start": 903.519,
+      "end": 905.59,
+      "duration": 2.071,
+      "text": "symmetric so that's interesting and"
+    },
+    {
+      "index": 278,
+      "start": 905.6,
+      "end": 909.99,
+      "duration": 4.39,
+      "text": "transitivity well we have uh again uh"
+    },
+    {
+      "index": 279,
+      "start": 910.0,
+      "end": 913.069,
+      "duration": 3.069,
+      "text": "transitivity because if if x divides Y"
+    },
+    {
+      "index": 280,
+      "start": 913.079,
+      "end": 915.749,
+      "duration": 2.67,
+      "text": "and Y divides Z then X also divid C for"
+    },
+    {
+      "index": 281,
+      "start": 915.759,
+      "end": 918.949,
+      "duration": 3.19,
+      "text": "example if two divides say four and four"
+    },
+    {
+      "index": 282,
+      "start": 918.959,
+      "end": 923.55,
+      "duration": 4.591,
+      "text": "divides 20 and two also divides"
+    },
+    {
+      "index": 283,
+      "start": 923.56,
+      "end": 927.23,
+      "duration": 3.67,
+      "text": "20 now this one over here um has"
+    },
+    {
+      "index": 284,
+      "start": 927.24,
+      "end": 929.829,
+      "duration": 2.589,
+      "text": "actually the same properties as the the"
+    },
+    {
+      "index": 285,
+      "start": 929.839,
+      "end": 932.03,
+      "duration": 2.191,
+      "text": "visibility um it's"
+    },
+    {
+      "index": 286,
+      "start": 932.04,
+      "end": 937.069,
+      "duration": 5.029,
+      "text": "reflexive uh because X is um uh at least"
+    },
+    {
+      "index": 287,
+      "start": 937.079,
+      "end": 938.47,
+      "duration": 1.391,
+      "text": "equal to"
+    },
+    {
+      "index": 288,
+      "start": 938.48,
+      "end": 941.55,
+      "duration": 3.07,
+      "text": "itself it's a symmetric it's not"
+    },
+    {
+      "index": 289,
+      "start": 941.56,
+      "end": 944.71,
+      "duration": 3.15,
+      "text": "symmetric because if x is at most y does"
+    },
+    {
+      "index": 290,
+      "start": 944.72,
+      "end": 947.67,
+      "duration": 2.95,
+      "text": "not really imply that y is at most uh X"
+    },
+    {
+      "index": 291,
+      "start": 947.68,
+      "end": 949.829,
+      "duration": 2.149,
+      "text": "so this particular relation does not"
+    },
+    {
+      "index": 292,
+      "start": 949.839,
+      "end": 951.389,
+      "duration": 1.55,
+      "text": "hold in"
+    },
+    {
+      "index": 293,
+      "start": 951.399,
+      "end": 954.03,
+      "duration": 2.631,
+      "text": "general but it is again antisymmetric"
+    },
+    {
+      "index": 294,
+      "start": 954.04,
+      "end": 955.829,
+      "duration": 1.789,
+      "text": "because if I have this inequality and"
+    },
+    {
+      "index": 295,
+      "start": 955.839,
+      "end": 956.829,
+      "duration": 0.99,
+      "text": "the other"
+    },
+    {
+      "index": 296,
+      "start": 956.839,
+      "end": 959.389,
+      "duration": 2.55,
+      "text": "one well X and Y Must Be equal to one"
+    },
+    {
+      "index": 297,
+      "start": 959.399,
+      "end": 962.11,
+      "duration": 2.711,
+      "text": "another in that case and transitive as"
+    },
+    {
+      "index": 298,
+      "start": 962.12,
+      "end": 965.749,
+      "duration": 3.629,
+      "text": "well now turns out that uh in these"
+    },
+    {
+      "index": 299,
+      "start": 965.759,
+      "end": 967.99,
+      "duration": 2.231,
+      "text": "examples we have seen like a certain"
+    },
+    {
+      "index": 300,
+      "start": 968.0,
+      "end": 970.35,
+      "duration": 2.35,
+      "text": "combination of of of properties that we"
+    },
+    {
+      "index": 301,
+      "start": 970.36,
+      "end": 972.069,
+      "duration": 1.709,
+      "text": "will be talking"
+    },
+    {
+      "index": 302,
+      "start": 972.079,
+      "end": 973.71,
+      "duration": 1.631,
+      "text": "about"
+    },
+    {
+      "index": 303,
+      "start": 973.72,
+      "end": 976.829,
+      "duration": 3.109,
+      "text": "the uh kind of combination that we see"
+    },
+    {
+      "index": 304,
+      "start": 976.839,
+      "end": 979.11,
+      "duration": 2.271,
+      "text": "here will lead to a definition of"
+    },
+    {
+      "index": 305,
+      "start": 979.12,
+      "end": 980.87,
+      "duration": 1.75,
+      "text": "equivalence"
+    },
+    {
+      "index": 306,
+      "start": 980.88,
+      "end": 984.749,
+      "duration": 3.869,
+      "text": "classes uh equivalence"
+    },
+    {
+      "index": 307,
+      "start": 987.55,
+      "end": 987.56,
+      "duration": 0.01,
+      "text": "relations"
+    },
+    {
+      "index": 308,
+      "start": 987.56,
+      "end": 991.309,
+      "duration": 3.749,
+      "text": "and this is also a very usual"
+    },
+    {
+      "index": 309,
+      "start": 991.319,
+      "end": 995.43,
+      "duration": 4.111,
+      "text": "pattern and uh these we will Define as"
+    },
+    {
+      "index": 310,
+      "start": 995.44,
+      "end": 999.47,
+      "duration": 4.03,
+      "text": "partial"
+    },
+    {
+      "index": 311,
+      "start": 1001.67,
+      "end": 1001.68,
+      "duration": 0.01,
+      "text": "orders"
+    },
+    {
+      "index": 312,
+      "start": 1001.68,
+      "end": 1003.91,
+      "duration": 2.23,
+      "text": "so this is what we're going to talk"
+    },
+    {
+      "index": 313,
+      "start": 1003.92,
+      "end": 1006.71,
+      "duration": 2.79,
+      "text": "about next so we'll first start with"
+    },
+    {
+      "index": 314,
+      "start": 1006.72,
+      "end": 1007.829,
+      "duration": 1.109,
+      "text": "equivalence"
+    },
+    {
+      "index": 315,
+      "start": 1007.839,
+      "end": 1010.629,
+      "duration": 2.79,
+      "text": "relations and"
+    },
+    {
+      "index": 316,
+      "start": 1010.639,
+      "end": 1014.47,
+      "duration": 3.831,
+      "text": "um yeah so let's do this um what is an"
+    },
+    {
+      "index": 317,
+      "start": 1014.48,
+      "end": 1016.949,
+      "duration": 2.469,
+      "text": "equivalence relation an equivalence"
+    },
+    {
+      "index": 318,
+      "start": 1016.959,
+      "end": 1019.43,
+      "duration": 2.471,
+      "text": "relation is exactly a relation it has"
+    },
+    {
+      "index": 319,
+      "start": 1019.44,
+      "end": 1021.23,
+      "duration": 1.79,
+      "text": "those few properties over there so it is"
+    },
+    {
+      "index": 320,
+      "start": 1021.24,
+      "end": 1024.51,
+      "duration": 3.27,
+      "text": "reflexive symmetric and"
+    },
+    {
+      "index": 321,
+      "start": 1024.52,
+      "end": 1027.47,
+      "duration": 2.95,
+      "text": "transitive so an"
+    },
+    {
+      "index": 322,
+      "start": 1027.48,
+      "end": 1032.909,
+      "duration": 5.429,
+      "text": "equivalence"
+    },
+    {
+      "index": 323,
+      "start": 1035.15,
+      "end": 1035.16,
+      "duration": 0.01,
+      "text": "relation um"
+    },
+    {
+      "index": 324,
+      "start": 1035.16,
+      "end": 1037.909,
+      "duration": 2.749,
+      "text": "is"
+    },
+    {
+      "index": 325,
+      "start": 1037.919,
+      "end": 1040.99,
+      "duration": 3.071,
+      "text": "reflexive and also"
+    },
+    {
+      "index": 326,
+      "start": 1041.0,
+      "end": 1047.429,
+      "duration": 6.429,
+      "text": "symmetric and also uh"
+    },
+    {
+      "index": 327,
+      "start": 1050.27,
+      "end": 1050.28,
+      "duration": 0.01,
+      "text": "transitive so we have already seen some"
+    },
+    {
+      "index": 328,
+      "start": 1050.28,
+      "end": 1053.11,
+      "duration": 2.83,
+      "text": "uh examples up there or one example but"
+    },
+    {
+      "index": 329,
+      "start": 1053.12,
+      "end": 1055.19,
+      "duration": 2.07,
+      "text": "a very trivial relation maybe you can"
+    },
+    {
+      "index": 330,
+      "start": 1055.2,
+      "end": 1057.63,
+      "duration": 2.43,
+      "text": "think of one that is really straight"
+    },
+    {
+      "index": 331,
+      "start": 1057.64,
+      "end": 1060.27,
+      "duration": 2.63,
+      "text": "forward um what would be an equivalence"
+    },
+    {
+      "index": 332,
+      "start": 1060.28,
+      "end": 1063.23,
+      "duration": 2.95,
+      "text": "relation if you think about uh how we"
+    },
+    {
+      "index": 333,
+      "start": 1063.24,
+      "end": 1066.19,
+      "duration": 2.95,
+      "text": "write mathematical formulas down we use"
+    },
+    {
+      "index": 334,
+      "start": 1066.2,
+      "end": 1068.11,
+      "duration": 1.91,
+      "text": "like the equality sign also right so"
+    },
+    {
+      "index": 335,
+      "start": 1068.12,
+      "end": 1072.87,
+      "duration": 4.75,
+      "text": "just equality itself is"
+    },
+    {
+      "index": 336,
+      "start": 1076.27,
+      "end": 1076.28,
+      "duration": 0.01,
+      "text": "already so equality the equal"
+    },
+    {
+      "index": 337,
+      "start": 1076.28,
+      "end": 1082.51,
+      "duration": 6.23,
+      "text": "sign itself is actually"
+    },
+    {
+      "index": 338,
+      "start": 1085.71,
+      "end": 1085.72,
+      "duration": 0.01,
+      "text": "uh one example and the other example is"
+    },
+    {
+      "index": 339,
+      "start": 1085.72,
+      "end": 1087.35,
+      "duration": 1.63,
+      "text": "the one that we have up there and that's"
+    },
+    {
+      "index": 340,
+      "start": 1087.36,
+      "end": 1089.47,
+      "duration": 2.11,
+      "text": "of course more General we can have X is"
+    },
+    {
+      "index": 341,
+      "start": 1089.48,
+      "end": 1093.47,
+      "duration": 3.99,
+      "text": "congruent to y modulo n so for fixed"
+    },
+    {
+      "index": 342,
+      "start": 1093.48,
+      "end": 1098.149,
+      "duration": 4.669,
+      "text": "n we have uh another equ another"
+    },
+    {
+      "index": 343,
+      "start": 1098.159,
+      "end": 1101.35,
+      "duration": 3.191,
+      "text": "equivalence relation so now given those"
+    },
+    {
+      "index": 344,
+      "start": 1101.36,
+      "end": 1103.549,
+      "duration": 2.189,
+      "text": "we can start defining equivalence"
+    },
+    {
+      "index": 345,
+      "start": 1103.559,
+      "end": 1107.75,
+      "duration": 4.191,
+      "text": "classes so what is an equivalence"
+    },
+    {
+      "index": 346,
+      "start": 1107.76,
+      "end": 1111.27,
+      "duration": 3.51,
+      "text": "class that's actually"
+    },
+    {
+      "index": 347,
+      "start": 1111.28,
+      "end": 1114.07,
+      "duration": 2.79,
+      "text": "everything within that class is related"
+    },
+    {
+      "index": 348,
+      "start": 1114.08,
+      "end": 1117.43,
+      "duration": 3.35,
+      "text": "to itself so the equivalence class of an"
+    },
+    {
+      "index": 349,
+      "start": 1117.44,
+      "end": 1119.669,
+      "duration": 2.229,
+      "text": "element X in"
+    },
+    {
+      "index": 350,
+      "start": 1119.679,
+      "end": 1124.029,
+      "duration": 4.35,
+      "text": "a um is equal to the"
+    },
+    {
+      "index": 351,
+      "start": 1124.039,
+      "end": 1130.149,
+      "duration": 6.11,
+      "text": "set of all the"
+    },
+    {
+      "index": 352,
+      "start": 1133.669,
+      "end": 1133.679,
+      "duration": 0.01,
+      "text": "elements uh in a that are"
+    },
+    {
+      "index": 353,
+      "start": 1133.679,
+      "end": 1137.71,
+      "duration": 4.031,
+      "text": "related in a that are related to"
+    },
+    {
+      "index": 354,
+      "start": 1137.72,
+      "end": 1140.83,
+      "duration": 3.11,
+      "text": "X"
+    },
+    {
+      "index": 355,
+      "start": 1145.789,
+      "end": 1145.799,
+      "duration": 0.01,
+      "text": "by our relationship by our relation R so"
+    },
+    {
+      "index": 356,
+      "start": 1145.799,
+      "end": 1148.59,
+      "duration": 2.791,
+      "text": "we denote this equivalence"
+    },
+    {
+      "index": 357,
+      "start": 1148.6,
+      "end": 1152.75,
+      "duration": 4.15,
+      "text": "class uh so this is denoted by x with"
+    },
+    {
+      "index": 358,
+      "start": 1152.76,
+      "end": 1156.27,
+      "duration": 3.51,
+      "text": "brackets around it so let's put it into"
+    },
+    {
+      "index": 359,
+      "start": 1156.28,
+      "end": 1160.11,
+      "duration": 3.83,
+      "text": "a formula and then give some examples so"
+    },
+    {
+      "index": 360,
+      "start": 1160.12,
+      "end": 1162.07,
+      "duration": 1.95,
+      "text": "uh the formula for this in mathematics"
+    },
+    {
+      "index": 361,
+      "start": 1162.08,
+      "end": 1166.19,
+      "duration": 4.11,
+      "text": "would be uh the set of all the Y such"
+    },
+    {
+      "index": 362,
+      "start": 1166.2,
+      "end": 1170.19,
+      "duration": 3.99,
+      "text": "that X is related to 2"
+    },
+    {
+      "index": 363,
+      "start": 1170.2,
+      "end": 1174.549,
+      "duration": 4.349,
+      "text": "y so as an example we can uh uh do the"
+    },
+    {
+      "index": 364,
+      "start": 1174.559,
+      "end": 1178.909,
+      "duration": 4.35,
+      "text": "one that we started off with um so let's"
+    },
+    {
+      "index": 365,
+      "start": 1178.919,
+      "end": 1185.149,
+      "duration": 6.23,
+      "text": "again look at X is congruent to Y modulo"
+    },
+    {
+      "index": 366,
+      "start": 1185.159,
+      "end": 1188.99,
+      "duration": 3.831,
+      "text": "5 and look at the equivalence classes so"
+    },
+    {
+      "index": 367,
+      "start": 1189.0,
+      "end": 1192.27,
+      "duration": 3.27,
+      "text": "one of them for example we could look at"
+    },
+    {
+      "index": 368,
+      "start": 1192.28,
+      "end": 1195.75,
+      "duration": 3.47,
+      "text": "the equivalence class of seven um we"
+    },
+    {
+      "index": 369,
+      "start": 1195.76,
+      "end": 1197.47,
+      "duration": 1.71,
+      "text": "were looking at this one already well"
+    },
+    {
+      "index": 370,
+      "start": 1197.48,
+      "end": 1199.669,
+      "duration": 2.189,
+      "text": "what are all the"
+    },
+    {
+      "index": 371,
+      "start": 1199.679,
+      "end": 1203.71,
+      "duration": 4.031,
+      "text": "um y's that are actually congruent to"
+    },
+    {
+      "index": 372,
+      "start": 1203.72,
+      "end": 1207.909,
+      "duration": 4.189,
+      "text": "seven modul 5 well uh there are a whole"
+    },
+    {
+      "index": 373,
+      "start": 1207.919,
+      "end": 1211.029,
+      "duration": 3.11,
+      "text": "bunch we have minus three and we have"
+    },
+    {
+      "index": 374,
+      "start": 1211.039,
+      "end": 1214.35,
+      "duration": 3.311,
+      "text": "two seven uh we have"
+    },
+    {
+      "index": 375,
+      "start": 1214.36,
+      "end": 1217.149,
+      "duration": 2.789,
+      "text": "12 17 and"
+    },
+    {
+      "index": 376,
+      "start": 1217.159,
+      "end": 1220.27,
+      "duration": 3.111,
+      "text": "22 and so on we add five to all of these"
+    },
+    {
+      "index": 377,
+      "start": 1220.28,
+      "end": 1223.149,
+      "duration": 2.869,
+      "text": "and this is uh the equivalence class"
+    },
+    {
+      "index": 378,
+      "start": 1223.159,
+      "end": 1226.029,
+      "duration": 2.87,
+      "text": "that belongs to seven now notice that"
+    },
+    {
+      "index": 379,
+      "start": 1226.039,
+      "end": 1228.029,
+      "duration": 1.99,
+      "text": "the equivalence class of seven is"
+    },
+    {
+      "index": 380,
+      "start": 1228.039,
+      "end": 1230.11,
+      "duration": 2.071,
+      "text": "actually equal equal to the equivalence"
+    },
+    {
+      "index": 381,
+      "start": 1230.12,
+      "end": 1231.39,
+      "duration": 1.27,
+      "text": "class of"
+    },
+    {
+      "index": 382,
+      "start": 1231.4,
+      "end": 1235.07,
+      "duration": 3.67,
+      "text": "12 it's the same set right everything"
+    },
+    {
+      "index": 383,
+      "start": 1235.08,
+      "end": 1237.669,
+      "duration": 2.589,
+      "text": "that's congruent to 12 mod 5 is also"
+    },
+    {
+      "index": 384,
+      "start": 1237.679,
+      "end": 1241.029,
+      "duration": 3.35,
+      "text": "congruent to 7 module of 5 and this is"
+    },
+    {
+      "index": 385,
+      "start": 1241.039,
+      "end": 1242.95,
+      "duration": 1.911,
+      "text": "again equal to say"
+    },
+    {
+      "index": 386,
+      "start": 1242.96,
+      "end": 1248.11,
+      "duration": 5.15,
+      "text": "17 and so"
+    },
+    {
+      "index": 387,
+      "start": 1252.47,
+      "end": 1252.48,
+      "duration": 0.01,
+      "text": "on okay so now we can start talking"
+    },
+    {
+      "index": 388,
+      "start": 1252.48,
+      "end": 1254.95,
+      "duration": 2.47,
+      "text": "about a nice property that equivalence"
+    },
+    {
+      "index": 389,
+      "start": 1254.96,
+      "end": 1257.23,
+      "duration": 2.27,
+      "text": "classes have which is that the"
+    },
+    {
+      "index": 390,
+      "start": 1257.24,
+      "end": 1259.029,
+      "duration": 1.789,
+      "text": "equivalence classes together partition"
+    },
+    {
+      "index": 391,
+      "start": 1259.039,
+      "end": 1262.75,
+      "duration": 3.711,
+      "text": "the set a so I will need to Define first"
+    },
+    {
+      "index": 392,
+      "start": 1262.76,
+      "end": 1264.549,
+      "duration": 1.789,
+      "text": "what a partition"
+    },
+    {
+      "index": 393,
+      "start": 1264.559,
+      "end": 1266.19,
+      "duration": 1.631,
+      "text": "is"
+    },
+    {
+      "index": 394,
+      "start": 1266.2,
+      "end": 1269.23,
+      "duration": 3.03,
+      "text": "and it's defined as follows a"
+    },
+    {
+      "index": 395,
+      "start": 1269.24,
+      "end": 1271.789,
+      "duration": 2.549,
+      "text": "partition uh of"
+    },
+    {
+      "index": 396,
+      "start": 1271.799,
+      "end": 1277.35,
+      "duration": 5.551,
+      "text": "a is a"
+    },
+    {
+      "index": 397,
+      "start": 1296.19,
+      "end": 1296.2,
+      "duration": 0.01,
+      "text": "um non empty sets"
+    },
+    {
+      "index": 398,
+      "start": 1296.2,
+      "end": 1298.35,
+      "duration": 2.15,
+      "text": "A1 up to a"
+    },
+    {
+      "index": 399,
+      "start": 1298.36,
+      "end": 1301.789,
+      "duration": 3.429,
+      "text": "n and they are all subsets of"
+    },
+    {
+      "index": 400,
+      "start": 1301.799,
+      "end": 1307.39,
+      "duration": 5.591,
+      "text": "uh of a and the union of all of those is"
+    },
+    {
+      "index": 401,
+      "start": 1307.4,
+      "end": 1309.149,
+      "duration": 1.749,
+      "text": "actually equal to the set"
+    },
+    {
+      "index": 402,
+      "start": 1309.159,
+      "end": 1311.31,
+      "duration": 2.151,
+      "text": "a so whose"
+    },
+    {
+      "index": 403,
+      "start": 1311.32,
+      "end": 1315.269,
+      "duration": 3.949,
+      "text": "Union is a so let's have a look again at"
+    },
+    {
+      "index": 404,
+      "start": 1315.279,
+      "end": 1317.07,
+      "duration": 1.791,
+      "text": "this example and see whether we can"
+    },
+    {
+      "index": 405,
+      "start": 1317.08,
+      "end": 1319.269,
+      "duration": 2.189,
+      "text": "figure out what equ what the equivalence"
+    },
+    {
+      "index": 406,
+      "start": 1319.279,
+      "end": 1320.23,
+      "duration": 0.951,
+      "text": "classes"
+    },
+    {
+      "index": 407,
+      "start": 1320.24,
+      "end": 1324.43,
+      "duration": 4.19,
+      "text": "are um so the example is uh well we can"
+    },
+    {
+      "index": 408,
+      "start": 1324.44,
+      "end": 1326.59,
+      "duration": 2.15,
+      "text": "have everything that is actually a"
+    },
+    {
+      "index": 409,
+      "start": 1326.6,
+      "end": 1330.39,
+      "duration": 3.79,
+      "text": "multiple of five that's that's one class"
+    },
+    {
+      "index": 410,
+      "start": 1330.4,
+      "end": 1334.909,
+      "duration": 4.509,
+      "text": "so we have minus 5 Z five 10 and we go"
+    },
+    {
+      "index": 411,
+      "start": 1334.919,
+      "end": 1338.149,
+      "duration": 3.23,
+      "text": "all the way up another equivalence class"
+    },
+    {
+      "index": 412,
+      "start": 1338.159,
+      "end": 1342.549,
+      "duration": 4.39,
+      "text": "is well we can have we just add one to"
+    },
+    {
+      "index": 413,
+      "start": 1342.559,
+      "end": 1344.59,
+      "duration": 2.031,
+      "text": "each of those elements here so we have"
+    },
+    {
+      "index": 414,
+      "start": 1344.6,
+      "end": 1347.269,
+      "duration": 2.669,
+      "text": "minus four is congruent to one modul 5"
+    },
+    {
+      "index": 415,
+      "start": 1347.279,
+      "end": 1350.47,
+      "duration": 3.191,
+      "text": "is congruent to six modul 5 congruent to"
+    },
+    {
+      "index": 416,
+      "start": 1350.48,
+      "end": 1354.07,
+      "duration": 3.59,
+      "text": "11 and so on and so we can continue and"
+    },
+    {
+      "index": 417,
+      "start": 1354.08,
+      "end": 1356.669,
+      "duration": 2.589,
+      "text": "we actually see that we have - 3 is"
+    },
+    {
+      "index": 418,
+      "start": 1356.679,
+      "end": 1360.789,
+      "duration": 4.11,
+      "text": "congruent to two to seven to 12 and so"
+    },
+    {
+      "index": 419,
+      "start": 1360.799,
+      "end": 1364.63,
+      "duration": 3.831,
+      "text": "on it's the one we had up up there uh"
+    },
+    {
+      "index": 420,
+      "start": 1364.64,
+      "end": 1366.99,
+      "duration": 2.35,
+      "text": "another one is minus"
+    },
+    {
+      "index": 421,
+      "start": 1367.0,
+      "end": 1372.549,
+      "duration": 5.549,
+      "text": "2 um 3 8"
+    },
+    {
+      "index": 422,
+      "start": 1372.559,
+      "end": 1379.35,
+      "duration": 6.791,
+      "text": "13 and we have minus one 4 9"
+    },
+    {
+      "index": 423,
+      "start": 1379.36,
+      "end": 1382.83,
+      "duration": 3.47,
+      "text": "14 and so forth so these are all the"
+    },
+    {
+      "index": 424,
+      "start": 1382.84,
+      "end": 1384.99,
+      "duration": 2.15,
+      "text": "equivalence classes because uh now we"
+    },
+    {
+      "index": 425,
+      "start": 1385.0,
+      "end": 1387.669,
+      "duration": 2.669,
+      "text": "loop around if we add one more two minus"
+    },
+    {
+      "index": 426,
+      "start": 1387.679,
+      "end": 1392.51,
+      "duration": 4.831,
+      "text": "one we get uh zero so we get Z 5 10 15"
+    },
+    {
+      "index": 427,
+      "start": 1392.52,
+      "end": 1394.59,
+      "duration": 2.07,
+      "text": "and so on and that's exactly the same"
+    },
+    {
+      "index": 428,
+      "start": 1394.6,
+      "end": 1399.63,
+      "duration": 5.03,
+      "text": "class as this one so we see that uh for"
+    },
+    {
+      "index": 429,
+      "start": 1399.64,
+      "end": 1401.789,
+      "duration": 2.149,
+      "text": "for this particular example we notice"
+    },
+    {
+      "index": 430,
+      "start": 1401.799,
+      "end": 1404.909,
+      "duration": 3.11,
+      "text": "that uh these equivalence classes uh are"
+    },
+    {
+      "index": 431,
+      "start": 1404.919,
+      "end": 1408.149,
+      "duration": 3.23,
+      "text": "a partition of all the integers turns"
+    },
+    {
+      "index": 432,
+      "start": 1408.159,
+      "end": 1411.43,
+      "duration": 3.271,
+      "text": "out this is a general uh"
+    },
+    {
+      "index": 433,
+      "start": 1411.44,
+      "end": 1414.99,
+      "duration": 3.55,
+      "text": "property um and we're not going to prove"
+    },
+    {
+      "index": 434,
+      "start": 1415.0,
+      "end": 1417.51,
+      "duration": 2.51,
+      "text": "this that's pretty straightforward so"
+    },
+    {
+      "index": 435,
+      "start": 1417.52,
+      "end": 1420.23,
+      "duration": 2.71,
+      "text": "you should actually think about it"
+    },
+    {
+      "index": 436,
+      "start": 1420.24,
+      "end": 1424.07,
+      "duration": 3.83,
+      "text": "yourself uh let's keep this up"
+    },
+    {
+      "index": 437,
+      "start": 1424.08,
+      "end": 1425.789,
+      "duration": 1.709,
+      "text": "here"
+    },
+    {
+      "index": 438,
+      "start": 1425.799,
+      "end": 1432.99,
+      "duration": 7.191,
+      "text": "and take this"
+    },
+    {
+      "index": 439,
+      "start": 1437.269,
+      "end": 1437.279,
+      "duration": 0.01,
+      "text": "out so the theorem is that uh every"
+    },
+    {
+      "index": 440,
+      "start": 1437.279,
+      "end": 1439.23,
+      "duration": 1.951,
+      "text": "equivalence relations"
+    },
+    {
+      "index": 441,
+      "start": 1439.24,
+      "end": 1442.39,
+      "duration": 3.15,
+      "text": "um on a set a can be partitioned in its"
+    },
+    {
+      "index": 442,
+      "start": 1442.4,
+      "end": 1448.029,
+      "duration": 5.629,
+      "text": "equivalence classes so the theorem"
+    },
+    {
+      "index": 443,
+      "start": 1462.549,
+      "end": 1462.559,
+      "duration": 0.01,
+      "text": "class of"
+    },
+    {
+      "index": 444,
+      "start": 1462.559,
+      "end": 1467.35,
+      "duration": 4.791,
+      "text": "um of an equivalence"
+    },
+    {
+      "index": 445,
+      "start": 1487.549,
+      "end": 1487.559,
+      "duration": 0.01,
+      "text": "partition of a now I'm not going to"
+    },
+    {
+      "index": 446,
+      "start": 1487.559,
+      "end": 1490.31,
+      "duration": 2.751,
+      "text": "prove this uh it's actually really"
+    },
+    {
+      "index": 447,
+      "start": 1490.32,
+      "end": 1491.95,
+      "duration": 1.63,
+      "text": "straightforward and you should really"
+    },
+    {
+      "index": 448,
+      "start": 1491.96,
+      "end": 1494.63,
+      "duration": 2.67,
+      "text": "look at this and see that you can prove"
+    },
+    {
+      "index": 449,
+      "start": 1494.64,
+      "end": 1496.269,
+      "duration": 1.629,
+      "text": "this with the properties the property"
+    },
+    {
+      "index": 450,
+      "start": 1496.279,
+      "end": 1498.35,
+      "duration": 2.071,
+      "text": "definitions and the definition of an equ"
+    },
+    {
+      "index": 451,
+      "start": 1498.36,
+      "end": 1501.23,
+      "duration": 2.87,
+      "text": "equivalence relation so this is so far"
+    },
+    {
+      "index": 452,
+      "start": 1501.24,
+      "end": 1504.029,
+      "duration": 2.789,
+      "text": "as we go with equivalence relations so"
+    },
+    {
+      "index": 453,
+      "start": 1504.039,
+      "end": 1506.99,
+      "duration": 2.951,
+      "text": "now we will continue with partial orders"
+    },
+    {
+      "index": 454,
+      "start": 1507.0,
+      "end": 1509.07,
+      "duration": 2.07,
+      "text": "again we go through through a few"
+    },
+    {
+      "index": 455,
+      "start": 1509.08,
+      "end": 1511.51,
+      "duration": 2.43,
+      "text": "definitions and then at some point we'll"
+    },
+    {
+      "index": 456,
+      "start": 1511.52,
+      "end": 1514.11,
+      "duration": 2.59,
+      "text": "be able to prove a few interesting"
+    },
+    {
+      "index": 457,
+      "start": 1514.12,
+      "end": 1517.71,
+      "duration": 3.59,
+      "text": "properties so let's talk about partial"
+    },
+    {
+      "index": 458,
+      "start": 1517.72,
+      "end": 1519.71,
+      "duration": 1.99,
+      "text": "orders"
+    },
+    {
+      "index": 459,
+      "start": 1519.72,
+      "end": 1524.35,
+      "duration": 4.63,
+      "text": "um so notice that uh we have shifted now"
+    },
+    {
+      "index": 460,
+      "start": 1524.36,
+      "end": 1527.31,
+      "duration": 2.95,
+      "text": "from in this diagram over here in this"
+    },
+    {
+      "index": 461,
+      "start": 1527.32,
+      "end": 1530.789,
+      "duration": 3.469,
+      "text": "table from uh this pattern that we were"
+    },
+    {
+      "index": 462,
+      "start": 1530.799,
+      "end": 1532.669,
+      "duration": 1.87,
+      "text": "first interested in now we go to partial"
+    },
+    {
+      "index": 463,
+      "start": 1532.679,
+      "end": 1534.99,
+      "duration": 2.311,
+      "text": "orders and the difference is going to be"
+    },
+    {
+      "index": 464,
+      "start": 1535.0,
+      "end": 1538.59,
+      "duration": 3.59,
+      "text": "that uh we do not have symmetry but we"
+    },
+    {
+      "index": 465,
+      "start": 1538.6,
+      "end": 1540.95,
+      "duration": 2.35,
+      "text": "do have anti- symmetry and that brings"
+    },
+    {
+      "index": 466,
+      "start": 1540.96,
+      "end": 1544.23,
+      "duration": 3.27,
+      "text": "out a whole different"
+    },
+    {
+      "index": 467,
+      "start": 1544.24,
+      "end": 1551.87,
+      "duration": 7.63,
+      "text": "structure so a u"
+    },
+    {
+      "index": 468,
+      "start": 1555.19,
+      "end": 1555.2,
+      "duration": 0.01,
+      "text": "relation is a in between brackets I put"
+    },
+    {
+      "index": 469,
+      "start": 1555.2,
+      "end": 1558.07,
+      "duration": 2.87,
+      "text": "here week I'll explain in a moment why I"
+    },
+    {
+      "index": 470,
+      "start": 1558.08,
+      "end": 1569.71,
+      "duration": 11.63,
+      "text": "do this it's a weak partial"
+    },
+    {
+      "index": 471,
+      "start": 1573.669,
+      "end": 1573.679,
+      "duration": 0.01,
+      "text": "order if it is uh"
+    },
+    {
+      "index": 472,
+      "start": 1573.679,
+      "end": 1584.669,
+      "duration": 10.99,
+      "text": "reflexive and anti- symmetric and"
+    },
+    {
+      "index": 473,
+      "start": 1587.23,
+      "end": 1587.24,
+      "duration": 0.01,
+      "text": "transitive uh and"
+    },
+    {
+      "index": 474,
+      "start": 1587.24,
+      "end": 1588.83,
+      "duration": 1.59,
+      "text": "transitive"
+    },
+    {
+      "index": 475,
+      "start": 1588.84,
+      "end": 1592.35,
+      "duration": 3.51,
+      "text": "so why do I put weak up here well if you"
+    },
+    {
+      "index": 476,
+      "start": 1592.36,
+      "end": 1593.83,
+      "duration": 1.47,
+      "text": "look in the book there are two"
+    },
+    {
+      "index": 477,
+      "start": 1593.84,
+      "end": 1597.149,
+      "duration": 3.309,
+      "text": "definitions one is a weak partial order"
+    },
+    {
+      "index": 478,
+      "start": 1597.159,
+      "end": 1601.149,
+      "duration": 3.99,
+      "text": "which is with reflexive with um"
+    },
+    {
+      "index": 479,
+      "start": 1601.159,
+      "end": 1603.95,
+      "duration": 2.791,
+      "text": "reflexivity and another one is a strong"
+    },
+    {
+      "index": 480,
+      "start": 1603.96,
+      "end": 1608.269,
+      "duration": 4.309,
+      "text": "partial order and that one um has uh a"
+    },
+    {
+      "index": 481,
+      "start": 1608.279,
+      "end": 1610.269,
+      "duration": 1.99,
+      "text": "property that I did not talk about here"
+    },
+    {
+      "index": 482,
+      "start": 1610.279,
+      "end": 1612.59,
+      "duration": 2.311,
+      "text": "called irre flexibility and that's"
+    },
+    {
+      "index": 483,
+      "start": 1612.6,
+      "end": 1615.029,
+      "duration": 2.429,
+      "text": "something that um I will not talk about"
+    },
+    {
+      "index": 484,
+      "start": 1615.039,
+      "end": 1616.23,
+      "duration": 1.191,
+      "text": "in this lecture but you should read"
+    },
+    {
+      "index": 485,
+      "start": 1616.24,
+      "end": 1618.389,
+      "duration": 2.149,
+      "text": "about it and all these properties these"
+    },
+    {
+      "index": 486,
+      "start": 1618.399,
+      "end": 1620.19,
+      "duration": 1.791,
+      "text": "all the theorems that we talk about"
+    },
+    {
+      "index": 487,
+      "start": 1620.2,
+      "end": 1621.909,
+      "duration": 1.709,
+      "text": "right now also hold for the strong"
+    },
+    {
+      "index": 488,
+      "start": 1621.919,
+      "end": 1624.549,
+      "duration": 2.63,
+      "text": "version of a partial order so but for"
+    },
+    {
+      "index": 489,
+      "start": 1624.559,
+      "end": 1629.269,
+      "duration": 4.71,
+      "text": "now let's just um call partial orders"
+    },
+    {
+      "index": 490,
+      "start": 1629.279,
+      "end": 1631.669,
+      "duration": 2.39,
+      "text": "those that are reflexive uh anti-"
+    },
+    {
+      "index": 491,
+      "start": 1631.679,
+      "end": 1634.11,
+      "duration": 2.431,
+      "text": "symmetric and"
+    },
+    {
+      "index": 492,
+      "start": 1634.12,
+      "end": 1637.23,
+      "duration": 3.11,
+      "text": "transitive um well we already saw a few"
+    },
+    {
+      "index": 493,
+      "start": 1637.24,
+      "end": 1641.47,
+      "duration": 4.23,
+      "text": "uh examples up here um we have the the"
+    },
+    {
+      "index": 494,
+      "start": 1641.48,
+      "end": 1644.87,
+      "duration": 3.39,
+      "text": "visibility uh which has this property uh"
+    },
+    {
+      "index": 495,
+      "start": 1644.88,
+      "end": 1649.029,
+      "duration": 4.149,
+      "text": "and also uh um"
+    },
+    {
+      "index": 496,
+      "start": 1649.039,
+      "end": 1652.909,
+      "duration": 3.87,
+      "text": "the less than or equal"
+    },
+    {
+      "index": 497,
+      "start": 1657.11,
+      "end": 1657.12,
+      "duration": 0.01,
+      "text": "relationship um now usually what we do"
+    },
+    {
+      "index": 498,
+      "start": 1657.12,
+      "end": 1660.87,
+      "duration": 3.75,
+      "text": "is instead of using a capital letter r"
+    },
+    {
+      "index": 499,
+      "start": 1660.88,
+      "end": 1664.75,
+      "duration": 3.87,
+      "text": "we will use a relation symbol so a"
+    },
+    {
+      "index": 500,
+      "start": 1664.76,
+      "end": 1665.669,
+      "duration": 0.909,
+      "text": "partial"
+    },
+    {
+      "index": 501,
+      "start": 1665.679,
+      "end": 1673.83,
+      "duration": 8.151,
+      "text": "order"
+    },
+    {
+      "index": 502,
+      "start": 1677.11,
+      "end": 1677.12,
+      "duration": 0.01,
+      "text": "relation is denoted"
+    },
+    {
+      "index": 503,
+      "start": 1677.12,
+      "end": 1680.669,
+      "duration": 3.549,
+      "text": "differently is"
+    },
+    {
+      "index": 504,
+      "start": 1680.679,
+      "end": 1683.99,
+      "duration": 3.311,
+      "text": "denoted uh"
+    },
+    {
+      "index": 505,
+      "start": 1684.0,
+      "end": 1686.19,
+      "duration": 2.19,
+      "text": "with something like"
+    },
+    {
+      "index": 506,
+      "start": 1686.2,
+      "end": 1690.909,
+      "duration": 4.709,
+      "text": "that uh instead"
+    },
+    {
+      "index": 507,
+      "start": 1692.63,
+      "end": 1692.64,
+      "duration": 0.01,
+      "text": "of"
+    },
+    {
+      "index": 508,
+      "start": 1692.64,
+      "end": 1696.19,
+      "duration": 3.55,
+      "text": "R now the reason for that is because we"
+    },
+    {
+      "index": 509,
+      "start": 1696.2,
+      "end": 1698.19,
+      "duration": 1.99,
+      "text": "U um"
+    },
+    {
+      "index": 510,
+      "start": 1698.2,
+      "end": 1701.669,
+      "duration": 3.469,
+      "text": "actually uh will show that there's a"
+    },
+    {
+      "index": 511,
+      "start": 1701.679,
+      "end": 1705.11,
+      "duration": 3.431,
+      "text": "partial order so that we do not really"
+    },
+    {
+      "index": 512,
+      "start": 1705.12,
+      "end": 1708.549,
+      "duration": 3.429,
+      "text": "so so this name does not come by itself"
+    },
+    {
+      "index": 513,
+      "start": 1708.559,
+      "end": 1710.389,
+      "duration": 1.83,
+      "text": "um it turns out that we can give an"
+    },
+    {
+      "index": 514,
+      "start": 1710.399,
+      "end": 1713.11,
+      "duration": 2.711,
+      "text": "order to the or a ranking to the"
+    },
+    {
+      "index": 515,
+      "start": 1713.12,
+      "end": 1715.23,
+      "duration": 2.11,
+      "text": "elements one element is less than"
+    },
+    {
+      "index": 516,
+      "start": 1715.24,
+      "end": 1720.789,
+      "duration": 5.549,
+      "text": "another and so on so um"
+    },
+    {
+      "index": 517,
+      "start": 1720.799,
+      "end": 1723.669,
+      "duration": 2.87,
+      "text": "let's keep this over"
+    },
+    {
+      "index": 518,
+      "start": 1723.679,
+      "end": 1728.87,
+      "duration": 5.191,
+      "text": "here and change up here"
+    },
+    {
+      "index": 519,
+      "start": 1728.88,
+      "end": 1733.95,
+      "duration": 5.07,
+      "text": "um so an"
+    },
+    {
+      "index": 520,
+      "start": 1736.43,
+      "end": 1736.44,
+      "duration": 0.01,
+      "text": "example that we will talk about in a"
+    },
+    {
+      "index": 521,
+      "start": 1736.44,
+      "end": 1739.75,
+      "duration": 3.31,
+      "text": "moment but first let me introduce some"
+    },
+    {
+      "index": 522,
+      "start": 1739.76,
+      "end": 1744.71,
+      "duration": 4.95,
+      "text": "more notation so um we call"
+    },
+    {
+      "index": 523,
+      "start": 1744.72,
+      "end": 1749.47,
+      "duration": 4.75,
+      "text": "a uh the pair a with its relationship"
+    },
+    {
+      "index": 524,
+      "start": 1749.48,
+      "end": 1751.23,
+      "duration": 1.75,
+      "text": "symbol"
+    },
+    {
+      "index": 525,
+      "start": 1751.24,
+      "end": 1753.83,
+      "duration": 2.59,
+      "text": "um is actually"
+    },
+    {
+      "index": 526,
+      "start": 1753.84,
+      "end": 1762.63,
+      "duration": 8.79,
+      "text": "called a partially ordered"
+    },
+    {
+      "index": 527,
+      "start": 1765.31,
+      "end": 1765.32,
+      "duration": 0.01,
+      "text": "set"
+    },
+    {
+      "index": 528,
+      "start": 1765.32,
+      "end": 1768.789,
+      "duration": 3.469,
+      "text": "and we also abbreviate this"
+    },
+    {
+      "index": 529,
+      "start": 1768.799,
+      "end": 1773.789,
+      "duration": 4.99,
+      "text": "by calling it a"
+    },
+    {
+      "index": 530,
+      "start": 1776.59,
+      "end": 1776.6,
+      "duration": 0.01,
+      "text": "postet now in a postet again can be"
+    },
+    {
+      "index": 531,
+      "start": 1776.6,
+      "end": 1779.99,
+      "duration": 3.39,
+      "text": "described by means of a directed graph"
+    },
+    {
+      "index": 532,
+      "start": 1780.0,
+      "end": 1784.87,
+      "duration": 4.87,
+      "text": "um so we can do that as"
+    },
+    {
+      "index": 533,
+      "start": 1796.35,
+      "end": 1796.36,
+      "duration": 0.01,
+      "text": "graph uh such that um it has the vertic"
+    },
+    {
+      "index": 534,
+      "start": 1796.36,
+      "end": 1800.11,
+      "duration": 3.75,
+      "text": "set a"
+    },
+    {
+      "index": 535,
+      "start": 1803.11,
+      "end": 1803.12,
+      "duration": 0.01,
+      "text": "and the edge set is defined by uh the"
+    },
+    {
+      "index": 536,
+      "start": 1803.12,
+      "end": 1807.509,
+      "duration": 4.389,
+      "text": "relationship so and the edge"
+    },
+    {
+      "index": 537,
+      "start": 1807.519,
+      "end": 1811.789,
+      "duration": 4.27,
+      "text": "set is actually this thing notice that"
+    },
+    {
+      "index": 538,
+      "start": 1811.799,
+      "end": 1813.789,
+      "duration": 1.99,
+      "text": "in our definition this is actually a set"
+    },
+    {
+      "index": 539,
+      "start": 1813.799,
+      "end": 1816.83,
+      "duration": 3.031,
+      "text": "right it's still a set it's a it's a"
+    },
+    {
+      "index": 540,
+      "start": 1816.84,
+      "end": 1820.909,
+      "duration": 4.069,
+      "text": "pair it's it's a set of tuples a pairs"
+    },
+    {
+      "index": 541,
+      "start": 1820.919,
+      "end": 1824.99,
+      "duration": 4.071,
+      "text": "um and uh we can again create a directed"
+    },
+    {
+      "index": 542,
+      "start": 1825.0,
+      "end": 1827.549,
+      "duration": 2.549,
+      "text": "graph by using this so nothing has"
+    },
+    {
+      "index": 543,
+      "start": 1827.559,
+      "end": 1828.71,
+      "duration": 1.151,
+      "text": "changed"
+    },
+    {
+      "index": 544,
+      "start": 1828.72,
+      "end": 1833.389,
+      "duration": 4.669,
+      "text": "but for poets we can actually uh create"
+    },
+    {
+      "index": 545,
+      "start": 1833.399,
+      "end": 1838.23,
+      "duration": 4.831,
+      "text": "a a more sort of easier to read uh um"
+    },
+    {
+      "index": 546,
+      "start": 1838.24,
+      "end": 1840.35,
+      "duration": 2.11,
+      "text": "sort of representation which we'll call"
+    },
+    {
+      "index": 547,
+      "start": 1840.36,
+      "end": 1843.95,
+      "duration": 3.59,
+      "text": "a hasset diagram and which is also a"
+    },
+    {
+      "index": 548,
+      "start": 1843.96,
+      "end": 1846.389,
+      "duration": 2.429,
+      "text": "graph and let me give an example to"
+    },
+    {
+      "index": 549,
+      "start": 1846.399,
+      "end": 1847.789,
+      "duration": 1.39,
+      "text": "explain how that"
+    },
+    {
+      "index": 550,
+      "start": 1847.799,
+      "end": 1850.63,
+      "duration": 2.831,
+      "text": "works"
+    },
+    {
+      "index": 551,
+      "start": 1850.64,
+      "end": 1856.59,
+      "duration": 5.95,
+      "text": "um so I think we can take this"
+    },
+    {
+      "index": 552,
+      "start": 1861.389,
+      "end": 1861.399,
+      "duration": 0.01,
+      "text": "out so example is uh imagine that uh"
+    },
+    {
+      "index": 553,
+      "start": 1861.399,
+      "end": 1864.83,
+      "duration": 3.431,
+      "text": "that uh uh a guy is going to dress up"
+    },
+    {
+      "index": 554,
+      "start": 1864.84,
+      "end": 1867.99,
+      "duration": 3.15,
+      "text": "for something very formal so how does he"
+    },
+    {
+      "index": 555,
+      "start": 1868.0,
+      "end": 1869.07,
+      "duration": 1.07,
+      "text": "start"
+    },
+    {
+      "index": 556,
+      "start": 1869.08,
+      "end": 1873.07,
+      "duration": 3.99,
+      "text": "out so let's uh have as vertices in the"
+    },
+    {
+      "index": 557,
+      "start": 1873.08,
+      "end": 1876.95,
+      "duration": 3.87,
+      "text": "graph in this diagram or the elements of"
+    },
+    {
+      "index": 558,
+      "start": 1876.96,
+      "end": 1880.23,
+      "duration": 3.27,
+      "text": "a is going to be all his uh the items"
+    },
+    {
+      "index": 559,
+      "start": 1880.24,
+      "end": 1882.47,
+      "duration": 2.23,
+      "text": "that he will start to put on and start"
+    },
+    {
+      "index": 560,
+      "start": 1882.48,
+      "end": 1884.99,
+      "duration": 2.51,
+      "text": "wearing so his pants a shirt and so on"
+    },
+    {
+      "index": 561,
+      "start": 1885.0,
+      "end": 1888.31,
+      "duration": 3.31,
+      "text": "so okay let's have a look so what do you"
+    },
+    {
+      "index": 562,
+      "start": 1888.32,
+      "end": 1891.35,
+      "duration": 3.03,
+      "text": "start off with um well maybe you're"
+    },
+    {
+      "index": 563,
+      "start": 1891.36,
+      "end": 1893.95,
+      "duration": 2.59,
+      "text": "underwear would be a good"
+    },
+    {
+      "index": 564,
+      "start": 1893.96,
+      "end": 1898.59,
+      "duration": 4.63,
+      "text": "idea um so this could be a first uh item"
+    },
+    {
+      "index": 565,
+      "start": 1898.6,
+      "end": 1900.75,
+      "duration": 2.15,
+      "text": "that you want to put on so let's let's"
+    },
+    {
+      "index": 566,
+      "start": 1900.76,
+      "end": 1902.669,
+      "duration": 1.909,
+      "text": "have the relation that we are interested"
+    },
+    {
+      "index": 567,
+      "start": 1902.679,
+      "end": 1905.75,
+      "duration": 3.071,
+      "text": "in to be one uh where we say well I"
+    },
+    {
+      "index": 568,
+      "start": 1905.76,
+      "end": 1907.71,
+      "duration": 1.95,
+      "text": "first need to put on my underwear and"
+    },
+    {
+      "index": 569,
+      "start": 1907.72,
+      "end": 1910.99,
+      "duration": 3.27,
+      "text": "only after that I can put on my pants"
+    },
+    {
+      "index": 570,
+      "start": 1911.0,
+      "end": 1912.07,
+      "duration": 1.07,
+      "text": "for"
+    },
+    {
+      "index": 571,
+      "start": 1912.08,
+      "end": 1915.509,
+      "duration": 3.429,
+      "text": "example so that makes sense too and"
+    },
+    {
+      "index": 572,
+      "start": 1915.519,
+      "end": 1917.47,
+      "duration": 1.951,
+      "text": "since I'm doing something very formal"
+    },
+    {
+      "index": 573,
+      "start": 1917.48,
+      "end": 1920.549,
+      "duration": 3.069,
+      "text": "later on on I better first put on my"
+    },
+    {
+      "index": 574,
+      "start": 1920.559,
+      "end": 1922.909,
+      "duration": 2.35,
+      "text": "shirt because I like to tuck that into"
+    },
+    {
+      "index": 575,
+      "start": 1922.919,
+      "end": 1923.99,
+      "duration": 1.071,
+      "text": "my"
+    },
+    {
+      "index": 576,
+      "start": 1924.0,
+      "end": 1926.59,
+      "duration": 2.59,
+      "text": "pants but it's not really necessary to"
+    },
+    {
+      "index": 577,
+      "start": 1926.6,
+      "end": 1928.59,
+      "duration": 1.99,
+      "text": "first put on my underwear or first put"
+    },
+    {
+      "index": 578,
+      "start": 1928.6,
+      "end": 1930.909,
+      "duration": 2.309,
+      "text": "on my shirt I can do either of the two"
+    },
+    {
+      "index": 579,
+      "start": 1930.919,
+      "end": 1934.389,
+      "duration": 3.47,
+      "text": "so we're getting sort of a uh you know I"
+    },
+    {
+      "index": 580,
+      "start": 1934.399,
+      "end": 1937.11,
+      "duration": 2.711,
+      "text": "don't care so much I want to put on a"
+    },
+    {
+      "index": 581,
+      "start": 1937.12,
+      "end": 1942.029,
+      "duration": 4.909,
+      "text": "tie uh put on a jacket as"
+    },
+    {
+      "index": 582,
+      "start": 1945.75,
+      "end": 1945.76,
+      "duration": 0.01,
+      "text": "well and"
+    },
+    {
+      "index": 583,
+      "start": 1945.76,
+      "end": 1949.31,
+      "duration": 3.55,
+      "text": "uh after the pant I need to put on my"
+    },
+    {
+      "index": 584,
+      "start": 1949.32,
+      "end": 1950.87,
+      "duration": 1.55,
+      "text": "belt"
+    },
+    {
+      "index": 585,
+      "start": 1950.88,
+      "end": 1953.43,
+      "duration": 2.55,
+      "text": "but I like to finish all that before I"
+    },
+    {
+      "index": 586,
+      "start": 1953.44,
+      "end": 1954.71,
+      "duration": 1.27,
+      "text": "put on my"
+    },
+    {
+      "index": 587,
+      "start": 1954.72,
+      "end": 1960.43,
+      "duration": 5.71,
+      "text": "jacket and I also have my ride sock that"
+    },
+    {
+      "index": 588,
+      "start": 1960.44,
+      "end": 1961.909,
+      "duration": 1.469,
+      "text": "I like to put"
+    },
+    {
+      "index": 589,
+      "start": 1961.919,
+      "end": 1966.71,
+      "duration": 4.791,
+      "text": "on and if I I need to do this first"
+    },
+    {
+      "index": 590,
+      "start": 1966.72,
+      "end": 1968.35,
+      "duration": 1.63,
+      "text": "before I put on my right"
+    },
+    {
+      "index": 591,
+      "start": 1968.36,
+      "end": 1973.23,
+      "duration": 4.87,
+      "text": "shoe that makes"
+    },
+    {
+      "index": 592,
+      "start": 1976.75,
+      "end": 1976.76,
+      "duration": 0.01,
+      "text": "sense and I definitely like to finish"
+    },
+    {
+      "index": 593,
+      "start": 1976.76,
+      "end": 1978.35,
+      "duration": 1.59,
+      "text": "putting on my pants before before I put"
+    },
+    {
+      "index": 594,
+      "start": 1978.36,
+      "end": 1982.95,
+      "duration": 4.59,
+      "text": "on my shoes so let's have a preference"
+    },
+    {
+      "index": 595,
+      "start": 1982.96,
+      "end": 1986.269,
+      "duration": 3.309,
+      "text": "relationship over here as well and but I"
+    },
+    {
+      "index": 596,
+      "start": 1986.279,
+      "end": 1987.909,
+      "duration": 1.63,
+      "text": "do not really care actually I can put on"
+    },
+    {
+      "index": 597,
+      "start": 1987.919,
+      "end": 1991.87,
+      "duration": 3.951,
+      "text": "my socks first uh and then my underwear"
+    },
+    {
+      "index": 598,
+      "start": 1991.88,
+      "end": 1994.87,
+      "duration": 2.99,
+      "text": "and then my shirt I don't mind so much I"
+    },
+    {
+      "index": 599,
+      "start": 1994.88,
+      "end": 1998.95,
+      "duration": 4.07,
+      "text": "also have my left uh"
+    },
+    {
+      "index": 600,
+      "start": 2013.19,
+      "end": 2013.2,
+      "duration": 0.01,
+      "text": "to be preceded by putting on my pants"
+    },
+    {
+      "index": 601,
+      "start": 2013.2,
+      "end": 2015.909,
+      "duration": 2.709,
+      "text": "so this could be a relation a sort of a"
+    },
+    {
+      "index": 602,
+      "start": 2015.919,
+      "end": 2020.549,
+      "duration": 4.63,
+      "text": "description of a partial order um well"
+    },
+    {
+      "index": 603,
+      "start": 2020.559,
+      "end": 2022.509,
+      "duration": 1.95,
+      "text": "um we call this a h diagram so let's"
+    },
+    {
+      "index": 604,
+      "start": 2022.519,
+      "end": 2024.31,
+      "duration": 1.791,
+      "text": "talk about it a little"
+    },
+    {
+      "index": 605,
+      "start": 2024.32,
+      "end": 2028.149,
+      "duration": 3.829,
+      "text": "bit and then I will Define what the"
+    },
+    {
+      "index": 606,
+      "start": 2028.159,
+      "end": 2032.07,
+      "duration": 3.911,
+      "text": "official definition of of of this is um"
+    },
+    {
+      "index": 607,
+      "start": 2032.08,
+      "end": 2033.99,
+      "duration": 1.91,
+      "text": "so let's first look at this so this is a"
+    },
+    {
+      "index": 608,
+      "start": 2034.0,
+      "end": 2037.31,
+      "duration": 3.31,
+      "text": "partial order uh it it it means to"
+    },
+    {
+      "index": 609,
+      "start": 2037.32,
+      "end": 2038.389,
+      "duration": 1.069,
+      "text": "represent"
+    },
+    {
+      "index": 610,
+      "start": 2038.399,
+      "end": 2042.19,
+      "duration": 3.791,
+      "text": "a partial order so it's reflexive I mean"
+    },
+    {
+      "index": 611,
+      "start": 2042.2,
+      "end": 2046.029,
+      "duration": 3.829,
+      "text": "uh uh sort of before I need to put on my"
+    },
+    {
+      "index": 612,
+      "start": 2046.039,
+      "end": 2049.47,
+      "duration": 3.431,
+      "text": "so my the the pens are related to"
+    },
+    {
+      "index": 613,
+      "start": 2049.48,
+      "end": 2053.069,
+      "duration": 3.589,
+      "text": "themselves uh so I put them on uh before"
+    },
+    {
+      "index": 614,
+      "start": 2053.079,
+      "end": 2056.629,
+      "duration": 3.55,
+      "text": "I put on uh the underwear uh before I"
+    },
+    {
+      "index": 615,
+      "start": 2056.639,
+      "end": 2057.95,
+      "duration": 1.311,
+      "text": "put on the Pence I need to put on the"
+    },
+    {
+      "index": 616,
+      "start": 2057.96,
+      "end": 2061.19,
+      "duration": 3.23,
+      "text": "underwear but if I need to put on my"
+    },
+    {
+      "index": 617,
+      "start": 2061.2,
+      "end": 2063.99,
+      "duration": 2.79,
+      "text": "belt after I put on my underwear then"
+    },
+    {
+      "index": 618,
+      "start": 2064.0,
+      "end": 2066.51,
+      "duration": 2.51,
+      "text": "also I know that I first need to put on"
+    },
+    {
+      "index": 619,
+      "start": 2066.52,
+      "end": 2068.95,
+      "duration": 2.43,
+      "text": "my underwear before I put put on my belt"
+    },
+    {
+      "index": 620,
+      "start": 2068.96,
+      "end": 2072.109,
+      "duration": 3.149,
+      "text": "so you have transitivity in this in in"
+    },
+    {
+      "index": 621,
+      "start": 2072.119,
+      "end": 2077.47,
+      "duration": 5.351,
+      "text": "in in this example um we have that uh uh"
+    },
+    {
+      "index": 622,
+      "start": 2077.48,
+      "end": 2080.51,
+      "duration": 3.03,
+      "text": "it's also uh the other property is that"
+    },
+    {
+      "index": 623,
+      "start": 2080.52,
+      "end": 2083.99,
+      "duration": 3.47,
+      "text": "it is uh anti- symmetric uh it's not"
+    },
+    {
+      "index": 624,
+      "start": 2084.0,
+      "end": 2086.149,
+      "duration": 2.149,
+      "text": "true that I can first put on my right"
+    },
+    {
+      "index": 625,
+      "start": 2086.159,
+      "end": 2090.629,
+      "duration": 4.47,
+      "text": "shoe and then my right sock um so we"
+    },
+    {
+      "index": 626,
+      "start": 2090.639,
+      "end": 2093.47,
+      "duration": 2.831,
+      "text": "only have one direction over"
+    },
+    {
+      "index": 627,
+      "start": 2093.48,
+      "end": 2096.589,
+      "duration": 3.109,
+      "text": "here now I did not put in all the edges"
+    },
+    {
+      "index": 628,
+      "start": 2096.599,
+      "end": 2098.349,
+      "duration": 1.75,
+      "text": "that are possible for for this partial"
+    },
+    {
+      "index": 629,
+      "start": 2098.359,
+      "end": 2100.27,
+      "duration": 1.911,
+      "text": "order because if I really want to"
+    },
+    {
+      "index": 630,
+      "start": 2100.28,
+      "end": 2102.99,
+      "duration": 2.71,
+      "text": "continue this um if I really want to"
+    },
+    {
+      "index": 631,
+      "start": 2103.0,
+      "end": 2106.19,
+      "duration": 3.19,
+      "text": "make uh to create the complete directed"
+    },
+    {
+      "index": 632,
+      "start": 2106.2,
+      "end": 2110.589,
+      "duration": 4.389,
+      "text": "graph that I talked about over here um I"
+    },
+    {
+      "index": 633,
+      "start": 2110.599,
+      "end": 2112.349,
+      "duration": 1.75,
+      "text": "think I talked about it"
+    },
+    {
+      "index": 634,
+      "start": 2112.359,
+      "end": 2115.19,
+      "duration": 2.831,
+      "text": "somewhere over here I can I can create a"
+    },
+    {
+      "index": 635,
+      "start": 2115.2,
+      "end": 2117.87,
+      "duration": 2.67,
+      "text": "directed graph that has this vertic set"
+    },
+    {
+      "index": 636,
+      "start": 2117.88,
+      "end": 2119.67,
+      "duration": 1.79,
+      "text": "a which are all the items that I want to"
+    },
+    {
+      "index": 637,
+      "start": 2119.68,
+      "end": 2125.51,
+      "duration": 5.83,
+      "text": "put on and uh and that set that uh has"
+    },
+    {
+      "index": 638,
+      "start": 2125.52,
+      "end": 2128.75,
+      "duration": 3.23,
+      "text": "all the different uh relationship ships"
+    },
+    {
+      "index": 639,
+      "start": 2128.76,
+      "end": 2130.55,
+      "duration": 1.79,
+      "text": "now this is only in abbreviated form"
+    },
+    {
+      "index": 640,
+      "start": 2130.56,
+      "end": 2132.19,
+      "duration": 1.63,
+      "text": "this is a h a diagram but if I would"
+    },
+    {
+      "index": 641,
+      "start": 2132.2,
+      "end": 2134.19,
+      "duration": 1.99,
+      "text": "look at the directed graph then I would"
+    },
+    {
+      "index": 642,
+      "start": 2134.2,
+      "end": 2135.71,
+      "duration": 1.51,
+      "text": "need to look at the closure of this"
+    },
+    {
+      "index": 643,
+      "start": 2135.72,
+      "end": 2138.67,
+      "duration": 2.95,
+      "text": "whole thing that's how I would call it"
+    },
+    {
+      "index": 644,
+      "start": 2138.68,
+      "end": 2143.67,
+      "duration": 4.99,
+      "text": "um and uh I know that for example this"
+    },
+    {
+      "index": 645,
+      "start": 2143.68,
+      "end": 2146.95,
+      "duration": 3.27,
+      "text": "Underwear by transitivity is also less"
+    },
+    {
+      "index": 646,
+      "start": 2146.96,
+      "end": 2149.15,
+      "duration": 2.19,
+      "text": "than or equal than or related to the"
+    },
+    {
+      "index": 647,
+      "start": 2149.16,
+      "end": 2156.63,
+      "duration": 7.47,
+      "text": "belt so in a uh full graph I would"
+    },
+    {
+      "index": 648,
+      "start": 2156.64,
+      "end": 2160.19,
+      "duration": 3.55,
+      "text": "um"
+    },
+    {
+      "index": 649,
+      "start": 2163.349,
+      "end": 2163.359,
+      "duration": 0.01,
+      "text": "I would have another Edge over"
+    },
+    {
+      "index": 650,
+      "start": 2163.359,
+      "end": 2166.589,
+      "duration": 3.23,
+      "text": "here and in the same way I would have an"
+    },
+    {
+      "index": 651,
+      "start": 2166.599,
+      "end": 2170.03,
+      "duration": 3.431,
+      "text": "edge from here to here I would have an"
+    },
+    {
+      "index": 652,
+      "start": 2170.04,
+      "end": 2172.55,
+      "duration": 2.51,
+      "text": "edge over here by"
+    },
+    {
+      "index": 653,
+      "start": 2172.56,
+      "end": 2175.03,
+      "duration": 2.47,
+      "text": "transitivity also I can see that the"
+    },
+    {
+      "index": 654,
+      "start": 2175.04,
+      "end": 2176.95,
+      "duration": 1.91,
+      "text": "shirt goes before the pant before the"
+    },
+    {
+      "index": 655,
+      "start": 2176.96,
+      "end": 2180.87,
+      "duration": 3.91,
+      "text": "right shoe so the shirt is also"
+    },
+    {
+      "index": 656,
+      "start": 2180.88,
+      "end": 2184.15,
+      "duration": 3.27,
+      "text": "related all the way to the right shoe"
+    },
+    {
+      "index": 657,
+      "start": 2184.16,
+      "end": 2186.67,
+      "duration": 2.51,
+      "text": "and similarly to the left shoe I also"
+    },
+    {
+      "index": 658,
+      "start": 2186.68,
+      "end": 2190.63,
+      "duration": 3.95,
+      "text": "have that I have self Loops in here like"
+    },
+    {
+      "index": 659,
+      "start": 2190.64,
+      "end": 2193.95,
+      "duration": 3.31,
+      "text": "a tie is related to itself and a jacket"
+    },
+    {
+      "index": 660,
+      "start": 2193.96,
+      "end": 2196.19,
+      "duration": 2.23,
+      "text": "as well and so forth so I can put in all"
+    },
+    {
+      "index": 661,
+      "start": 2196.2,
+      "end": 2198.47,
+      "duration": 2.27,
+      "text": "these extra edges and as you can see"
+    },
+    {
+      "index": 662,
+      "start": 2198.48,
+      "end": 2201.67,
+      "duration": 3.19,
+      "text": "it's going to be quite a m that will"
+    },
+    {
+      "index": 663,
+      "start": 2201.68,
+      "end": 2203.91,
+      "duration": 2.23,
+      "text": "that will be quite a mess so the H"
+    },
+    {
+      "index": 664,
+      "start": 2203.92,
+      "end": 2206.43,
+      "duration": 2.51,
+      "text": "diagram is a much nicer visual"
+    },
+    {
+      "index": 665,
+      "start": 2206.44,
+      "end": 2210.309,
+      "duration": 3.869,
+      "text": "interpretation of what's going on so"
+    },
+    {
+      "index": 666,
+      "start": 2210.319,
+      "end": 2213.47,
+      "duration": 3.151,
+      "text": "let's define what this really"
+    },
+    {
+      "index": 667,
+      "start": 2213.48,
+      "end": 2216.51,
+      "duration": 3.03,
+      "text": "is um"
+    },
+    {
+      "index": 668,
+      "start": 2216.52,
+      "end": 2220.39,
+      "duration": 3.87,
+      "text": "and"
+    },
+    {
+      "index": 669,
+      "start": 2222.309,
+      "end": 2222.319,
+      "duration": 0.01,
+      "text": "then we can continue with some nice"
+    },
+    {
+      "index": 670,
+      "start": 2222.319,
+      "end": 2225.829,
+      "duration": 3.51,
+      "text": "properties of of this"
+    },
+    {
+      "index": 671,
+      "start": 2225.839,
+      "end": 2232.829,
+      "duration": 6.99,
+      "text": "structure okay"
+    },
+    {
+      "index": 672,
+      "start": 2237.43,
+      "end": 2237.44,
+      "duration": 0.01,
+      "text": "so so what is a h diagram a hod diagram"
+    },
+    {
+      "index": 673,
+      "start": 2237.44,
+      "end": 2242.15,
+      "duration": 4.71,
+      "text": "is really one in which"
+    },
+    {
+      "index": 674,
+      "start": 2242.16,
+      "end": 2246.51,
+      "duration": 4.35,
+      "text": "um I"
+    },
+    {
+      "index": 675,
+      "start": 2248.43,
+      "end": 2248.44,
+      "duration": 0.01,
+      "text": "use"
+    },
+    {
+      "index": 676,
+      "start": 2248.44,
+      "end": 2252.19,
+      "duration": 3.75,
+      "text": "uh the set a is the"
+    },
+    {
+      "index": 677,
+      "start": 2254.95,
+      "end": 2254.96,
+      "duration": 0.01,
+      "text": "vertices so it is a directed"
+    },
+    {
+      "index": 678,
+      "start": 2254.96,
+      "end": 2258.27,
+      "duration": 3.31,
+      "text": "graph a different one one from than the"
+    },
+    {
+      "index": 679,
+      "start": 2258.28,
+      "end": 2260.069,
+      "duration": 1.789,
+      "text": "one that we talked about up there so"
+    },
+    {
+      "index": 680,
+      "start": 2260.079,
+      "end": 2261.829,
+      "duration": 1.75,
+      "text": "it's a directed"
+    },
+    {
+      "index": 681,
+      "start": 2261.839,
+      "end": 2263.67,
+      "duration": 1.831,
+      "text": "graph in"
+    },
+    {
+      "index": 682,
+      "start": 2263.68,
+      "end": 2267.19,
+      "duration": 3.51,
+      "text": "which"
+    },
+    {
+      "index": 683,
+      "start": 2270.95,
+      "end": 2270.96,
+      "duration": 0.01,
+      "text": "um we have the vertic"
+    },
+    {
+      "index": 684,
+      "start": 2270.96,
+      "end": 2274.39,
+      "duration": 3.43,
+      "text": "set a but the EDG set is a little bit"
+    },
+    {
+      "index": 685,
+      "start": 2274.4,
+      "end": 2278.67,
+      "duration": 4.27,
+      "text": "different so it is the EDG set"
+    },
+    {
+      "index": 686,
+      "start": 2278.68,
+      "end": 2281.51,
+      "duration": 2.83,
+      "text": "uh that corresponds to this but we"
+    },
+    {
+      "index": 687,
+      "start": 2281.52,
+      "end": 2285.47,
+      "duration": 3.95,
+      "text": "subtract a whole bunch first of all we"
+    },
+    {
+      "index": 688,
+      "start": 2285.48,
+      "end": 2289.71,
+      "duration": 4.23,
+      "text": "remove all the self Loops that we have"
+    },
+    {
+      "index": 689,
+      "start": 2289.72,
+      "end": 2294.03,
+      "duration": 4.31,
+      "text": "so minus all the self"
+    },
+    {
+      "index": 690,
+      "start": 2294.04,
+      "end": 2297.55,
+      "duration": 3.51,
+      "text": "loops and we also take"
+    },
+    {
+      "index": 691,
+      "start": 2297.56,
+      "end": 2301.55,
+      "duration": 3.99,
+      "text": "out uh all the"
+    },
+    {
+      "index": 692,
+      "start": 2301.56,
+      "end": 2306.43,
+      "duration": 4.87,
+      "text": "edges that are implied by"
+    },
+    {
+      "index": 693,
+      "start": 2317.23,
+      "end": 2317.24,
+      "duration": 0.01,
+      "text": "so that's the definition of a hod"
+    },
+    {
+      "index": 694,
+      "start": 2317.24,
+      "end": 2318.829,
+      "duration": 1.589,
+      "text": "diagram"
+    },
+    {
+      "index": 695,
+      "start": 2318.839,
+      "end": 2321.55,
+      "duration": 2.711,
+      "text": "um now when we look at the Hessa diagram"
+    },
+    {
+      "index": 696,
+      "start": 2321.56,
+      "end": 2327.03,
+      "duration": 5.47,
+      "text": "over here uh we can see that"
+    },
+    {
+      "index": 697,
+      "start": 2330.51,
+      "end": 2330.52,
+      "duration": 0.01,
+      "text": "um so let me take out these notes again"
+    },
+    {
+      "index": 698,
+      "start": 2330.52,
+      "end": 2336.43,
+      "duration": 5.91,
+      "text": "or these"
+    },
+    {
+      "index": 699,
+      "start": 2342.75,
+      "end": 2342.76,
+      "duration": 0.01,
+      "text": "so looking at this H diagram you really"
+    },
+    {
+      "index": 700,
+      "start": 2342.76,
+      "end": 2345.51,
+      "duration": 2.75,
+      "text": "see a nice structure in there it seems"
+    },
+    {
+      "index": 701,
+      "start": 2345.52,
+      "end": 2348.589,
+      "duration": 3.069,
+      "text": "like we can talk about smallest elements"
+    },
+    {
+      "index": 702,
+      "start": 2348.599,
+      "end": 2351.95,
+      "duration": 3.351,
+      "text": "like a shirt is like a a small element"
+    },
+    {
+      "index": 703,
+      "start": 2351.96,
+      "end": 2354.79,
+      "duration": 2.83,
+      "text": "it's sort of uh less than or equal to if"
+    },
+    {
+      "index": 704,
+      "start": 2354.8,
+      "end": 2357.19,
+      "duration": 2.39,
+      "text": "you think about this as being is"
+    },
+    {
+      "index": 705,
+      "start": 2357.2,
+      "end": 2358.829,
+      "duration": 1.629,
+      "text": "representing that than the tie in the"
+    },
+    {
+      "index": 706,
+      "start": 2358.839,
+      "end": 2361.15,
+      "duration": 2.311,
+      "text": "jacket in the pants in the right shoe"
+    },
+    {
+      "index": 707,
+      "start": 2361.16,
+      "end": 2364.67,
+      "duration": 3.51,
+      "text": "and so on so you can see a clear order"
+    },
+    {
+      "index": 708,
+      "start": 2364.68,
+      "end": 2366.349,
+      "duration": 1.669,
+      "text": "in this particular"
+    },
+    {
+      "index": 709,
+      "start": 2366.359,
+      "end": 2369.43,
+      "duration": 3.071,
+      "text": "graph"
+    },
+    {
+      "index": 710,
+      "start": 2373.589,
+      "end": 2373.599,
+      "duration": 0.01,
+      "text": "so so let's uh uh yeah have a look at"
+    },
+    {
+      "index": 711,
+      "start": 2373.599,
+      "end": 2376.03,
+      "duration": 2.431,
+      "text": "this it it it when when I look at this"
+    },
+    {
+      "index": 712,
+      "start": 2376.04,
+      "end": 2379.15,
+      "duration": 3.11,
+      "text": "graph I also do not see any Cycles right"
+    },
+    {
+      "index": 713,
+      "start": 2379.16,
+      "end": 2381.99,
+      "duration": 2.83,
+      "text": "I do not see that the shirt is less than"
+    },
+    {
+      "index": 714,
+      "start": 2382.0,
+      "end": 2383.829,
+      "duration": 1.829,
+      "text": "equal to the pants it's related to the"
+    },
+    {
+      "index": 715,
+      "start": 2383.839,
+      "end": 2385.069,
+      "duration": 1.23,
+      "text": "right shoe and then it's related to"
+    },
+    {
+      "index": 716,
+      "start": 2385.079,
+      "end": 2388.109,
+      "duration": 3.03,
+      "text": "itself again so I do not see any cycles"
+    },
+    {
+      "index": 717,
+      "start": 2388.119,
+      "end": 2389.55,
+      "duration": 1.431,
+      "text": "and this turns out to be general"
+    },
+    {
+      "index": 718,
+      "start": 2389.56,
+      "end": 2393.03,
+      "duration": 3.47,
+      "text": "property of poets and that's what we are"
+    },
+    {
+      "index": 719,
+      "start": 2393.04,
+      "end": 2395.39,
+      "duration": 2.35,
+      "text": "going to prove"
+    },
+    {
+      "index": 720,
+      "start": 2395.4,
+      "end": 2398.349,
+      "duration": 2.949,
+      "text": "next um so"
+    },
+    {
+      "index": 721,
+      "start": 2398.359,
+      "end": 2400.589,
+      "duration": 2.23,
+      "text": "so let's do"
+    },
+    {
+      "index": 722,
+      "start": 2400.599,
+      "end": 2407.95,
+      "duration": 7.351,
+      "text": "that over"
+    },
+    {
+      "index": 723,
+      "start": 2418.39,
+      "end": 2418.4,
+      "duration": 0.01,
+      "text": "so so we see that uh there are no"
+    },
+    {
+      "index": 724,
+      "start": 2418.4,
+      "end": 2420.99,
+      "duration": 2.59,
+      "text": "cycles and that's a general property so"
+    },
+    {
+      "index": 725,
+      "start": 2421.0,
+      "end": 2423.63,
+      "duration": 2.63,
+      "text": "the theorem"
+    },
+    {
+      "index": 726,
+      "start": 2423.64,
+      "end": 2426.309,
+      "duration": 2.669,
+      "text": "is that a post"
+    },
+    {
+      "index": 727,
+      "start": 2426.319,
+      "end": 2428.75,
+      "duration": 2.431,
+      "text": "set"
+    },
+    {
+      "index": 728,
+      "start": 2428.76,
+      "end": 2431.109,
+      "duration": 2.349,
+      "text": "has"
+    },
+    {
+      "index": 729,
+      "start": 2431.119,
+      "end": 2433.79,
+      "duration": 2.671,
+      "text": "no"
+    },
+    {
+      "index": 730,
+      "start": 2433.8,
+      "end": 2438.829,
+      "duration": 5.029,
+      "text": "um directed"
+    },
+    {
+      "index": 731,
+      "start": 2453.39,
+      "end": 2453.4,
+      "duration": 0.01,
+      "text": "Loops now notice that this property is"
+    },
+    {
+      "index": 732,
+      "start": 2453.4,
+      "end": 2455.589,
+      "duration": 2.189,
+      "text": "really necessary to have a proper"
+    },
+    {
+      "index": 733,
+      "start": 2455.599,
+      "end": 2458.349,
+      "duration": 2.75,
+      "text": "representation by using a h diagram"
+    },
+    {
+      "index": 734,
+      "start": 2458.359,
+      "end": 2461.71,
+      "duration": 3.351,
+      "text": "because otherwise if you have a big uh"
+    },
+    {
+      "index": 735,
+      "start": 2461.72,
+      "end": 2465.27,
+      "duration": 3.55,
+      "text": "directed cycle then uh yeah the edges"
+    },
+    {
+      "index": 736,
+      "start": 2465.28,
+      "end": 2466.27,
+      "duration": 0.99,
+      "text": "are sort"
+    },
+    {
+      "index": 737,
+      "start": 2466.28,
+      "end": 2469.109,
+      "duration": 2.829,
+      "text": "of yeah only one of those edges would be"
+    },
+    {
+      "index": 738,
+      "start": 2469.119,
+      "end": 2470.75,
+      "duration": 1.631,
+      "text": "part of the H diagram and all the others"
+    },
+    {
+      "index": 739,
+      "start": 2470.76,
+      "end": 2474.15,
+      "duration": 3.39,
+      "text": "are implied by transitivity sort of and"
+    },
+    {
+      "index": 740,
+      "start": 2474.16,
+      "end": 2476.03,
+      "duration": 1.87,
+      "text": "that is getting a little bit messy"
+    },
+    {
+      "index": 741,
+      "start": 2476.04,
+      "end": 2477.27,
+      "duration": 1.23,
+      "text": "because then we do not really have a"
+    },
+    {
+      "index": 742,
+      "start": 2477.28,
+      "end": 2478.87,
+      "duration": 1.59,
+      "text": "unique"
+    },
+    {
+      "index": 743,
+      "start": 2478.88,
+      "end": 2481.309,
+      "duration": 2.429,
+      "text": "representation but luckily there are no"
+    },
+    {
+      "index": 744,
+      "start": 2481.319,
+      "end": 2483.87,
+      "duration": 2.551,
+      "text": "directed Cycles so how do we prove"
+    },
+    {
+      "index": 745,
+      "start": 2483.88,
+      "end": 2488.23,
+      "duration": 4.35,
+      "text": "this um well let's use uh"
+    },
+    {
+      "index": 746,
+      "start": 2488.24,
+      "end": 2491.55,
+      "duration": 3.31,
+      "text": "let's do this by"
+    },
+    {
+      "index": 747,
+      "start": 2494.589,
+      "end": 2494.599,
+      "duration": 0.01,
+      "text": "contradiction and"
+    },
+    {
+      "index": 748,
+      "start": 2494.599,
+      "end": 2496.47,
+      "duration": 1.871,
+      "text": "see what"
+    },
+    {
+      "index": 749,
+      "start": 2496.48,
+      "end": 2499.47,
+      "duration": 2.99,
+      "text": "happens so suppose the"
+    },
+    {
+      "index": 750,
+      "start": 2499.48,
+      "end": 2501.71,
+      "duration": 2.23,
+      "text": "contrary so"
+    },
+    {
+      "index": 751,
+      "start": 2501.72,
+      "end": 2505.75,
+      "duration": 4.03,
+      "text": "suppose that actually there exists an N"
+    },
+    {
+      "index": 752,
+      "start": 2505.76,
+      "end": 2508.99,
+      "duration": 3.23,
+      "text": "at least two an integer at least two so"
+    },
+    {
+      "index": 753,
+      "start": 2509.0,
+      "end": 2515.109,
+      "duration": 6.109,
+      "text": "at least n distinct"
+    },
+    {
+      "index": 754,
+      "start": 2518.829,
+      "end": 2518.839,
+      "duration": 0.01,
+      "text": "elements uh A1 all all the way up to a n"
+    },
+    {
+      "index": 755,
+      "start": 2518.839,
+      "end": 2534.069,
+      "duration": 15.23,
+      "text": "that form a cycle so such"
+    },
+    {
+      "index": 756,
+      "start": 2537.71,
+      "end": 2537.72,
+      "duration": 0.01,
+      "text": "that such that we have directed"
+    },
+    {
+      "index": 757,
+      "start": 2537.72,
+      "end": 2541.589,
+      "duration": 3.869,
+      "text": "cycle so we would put that in Formula"
+    },
+    {
+      "index": 758,
+      "start": 2541.599,
+      "end": 2547.95,
+      "duration": 6.351,
+      "text": "like this A1 is related to A2"
+    },
+    {
+      "index": 759,
+      "start": 2547.96,
+      "end": 2549.03,
+      "duration": 1.07,
+      "text": "to"
+    },
+    {
+      "index": 760,
+      "start": 2549.04,
+      "end": 2553.39,
+      "duration": 4.35,
+      "text": "A3 and so on all the way up to uh a n"
+    },
+    {
+      "index": 761,
+      "start": 2553.4,
+      "end": 2554.51,
+      "duration": 1.11,
+      "text": "minus"
+    },
+    {
+      "index": 762,
+      "start": 2554.52,
+      "end": 2556.51,
+      "duration": 1.99,
+      "text": "one a"
+    },
+    {
+      "index": 763,
+      "start": 2556.52,
+      "end": 2560.23,
+      "duration": 3.71,
+      "text": "n and we have a cycle so this goes back"
+    },
+    {
+      "index": 764,
+      "start": 2560.24,
+      "end": 2563.549,
+      "duration": 3.309,
+      "text": "to a uh one so why would this be a"
+    },
+    {
+      "index": 765,
+      "start": 2563.559,
+      "end": 2566.069,
+      "duration": 2.51,
+      "text": "contradiction so maybe you can help me"
+    },
+    {
+      "index": 766,
+      "start": 2566.079,
+      "end": 2568.67,
+      "duration": 2.591,
+      "text": "out here so"
+    },
+    {
+      "index": 767,
+      "start": 2568.68,
+      "end": 2571.43,
+      "duration": 2.75,
+      "text": "what what can I already derive from"
+    },
+    {
+      "index": 768,
+      "start": 2571.44,
+      "end": 2573.03,
+      "duration": 1.59,
+      "text": "those properties that I have over here"
+    },
+    {
+      "index": 769,
+      "start": 2573.04,
+      "end": 2575.79,
+      "duration": 2.75,
+      "text": "so I know that the partial order is anti"
+    },
+    {
+      "index": 770,
+      "start": 2575.8,
+      "end": 2578.589,
+      "duration": 2.789,
+      "text": "symmetric um"
+    },
+    {
+      "index": 771,
+      "start": 2578.599,
+      "end": 2583.03,
+      "duration": 4.431,
+      "text": "it is transitive it's reflexive so what"
+    },
+    {
+      "index": 772,
+      "start": 2583.04,
+      "end": 2586.87,
+      "duration": 3.83,
+      "text": "how H how can I get to a contradiction"
+    },
+    {
+      "index": 773,
+      "start": 2586.88,
+      "end": 2589.99,
+      "duration": 3.11,
+      "text": "here so let's think about it a little"
+    },
+    {
+      "index": 774,
+      "start": 2590.0,
+      "end": 2592.63,
+      "duration": 2.63,
+      "text": "bit"
+    },
+    {
+      "index": 775,
+      "start": 2592.64,
+      "end": 2595.43,
+      "duration": 2.79,
+      "text": "um is it possible for example that we"
+    },
+    {
+      "index": 776,
+      "start": 2595.44,
+      "end": 2599.79,
+      "duration": 4.35,
+      "text": "could violate the anti symmetry of of of"
+    },
+    {
+      "index": 777,
+      "start": 2599.8,
+      "end": 2602.39,
+      "duration": 2.59,
+      "text": "of the uh uh"
+    },
+    {
+      "index": 778,
+      "start": 2602.4,
+      "end": 2605.95,
+      "duration": 3.55,
+      "text": "postet so can we find maybe two distinct"
+    },
+    {
+      "index": 779,
+      "start": 2605.96,
+      "end": 2609.069,
+      "duration": 3.109,
+      "text": "elements so such that say x is related"
+    },
+    {
+      "index": 780,
+      "start": 2609.079,
+      "end": 2611.71,
+      "duration": 2.631,
+      "text": "to Y and Y is related to X and"
+    },
+    {
+      "index": 781,
+      "start": 2611.72,
+      "end": 2615.589,
+      "duration": 3.869,
+      "text": "but but you know it's a it's not true"
+    },
+    {
+      "index": 782,
+      "start": 2615.599,
+      "end": 2617.75,
+      "duration": 2.151,
+      "text": "that X is equal to"
+    },
+    {
+      "index": 783,
+      "start": 2617.76,
+      "end": 2620.87,
+      "duration": 3.11,
+      "text": "Y for example if you have a very simple"
+    },
+    {
+      "index": 784,
+      "start": 2620.88,
+      "end": 2625.39,
+      "duration": 4.51,
+      "text": "uh if you have a very small cycle say A1"
+    },
+    {
+      "index": 785,
+      "start": 2625.4,
+      "end": 2629.23,
+      "duration": 3.83,
+      "text": "is less than or equal to is related to a"
+    },
+    {
+      "index": 786,
+      "start": 2629.24,
+      "end": 2633.23,
+      "duration": 3.99,
+      "text": "n and then related to A1 again well then"
+    },
+    {
+      "index": 787,
+      "start": 2633.24,
+      "end": 2635.63,
+      "duration": 2.39,
+      "text": "I would have that A1 is related to a n"
+    },
+    {
+      "index": 788,
+      "start": 2635.64,
+      "end": 2638.87,
+      "duration": 3.23,
+      "text": "and a n is related to"
+    },
+    {
+      "index": 789,
+      "start": 2638.88,
+      "end": 2641.91,
+      "duration": 3.03,
+      "text": "A1 we should have that a n is then equal"
+    },
+    {
+      "index": 790,
+      "start": 2641.92,
+      "end": 2645.349,
+      "duration": 3.429,
+      "text": "to A1 but that's not true because we"
+    },
+    {
+      "index": 791,
+      "start": 2645.359,
+      "end": 2648.03,
+      "duration": 2.671,
+      "text": "assume distinct elements over here so"
+    },
+    {
+      "index": 792,
+      "start": 2648.04,
+      "end": 2649.75,
+      "duration": 1.71,
+      "text": "that seems to be an interesting idea so"
+    },
+    {
+      "index": 793,
+      "start": 2649.76,
+      "end": 2651.91,
+      "duration": 2.15,
+      "text": "maybe we can"
+    },
+    {
+      "index": 794,
+      "start": 2651.92,
+      "end": 2656.03,
+      "duration": 4.11,
+      "text": "um uh prove something of that type so"
+    },
+    {
+      "index": 795,
+      "start": 2656.04,
+      "end": 2659.63,
+      "duration": 3.59,
+      "text": "can we actually show that A1 is uh"
+    },
+    {
+      "index": 796,
+      "start": 2659.64,
+      "end": 2660.91,
+      "duration": 1.27,
+      "text": "related to a"
+    },
+    {
+      "index": 797,
+      "start": 2660.92,
+      "end": 2663.39,
+      "duration": 2.47,
+      "text": "n we can write what kind of property of"
+    },
+    {
+      "index": 798,
+      "start": 2663.4,
+      "end": 2666.03,
+      "duration": 2.63,
+      "text": "a post set do we use here to make that"
+    },
+    {
+      "index": 799,
+      "start": 2666.04,
+      "end": 2668.39,
+      "duration": 2.35,
+      "text": "happen"
+    },
+    {
+      "index": 800,
+      "start": 2668.4,
+      "end": 2674.67,
+      "duration": 6.27,
+      "text": "and yeah I I heard something fely a"
+    },
+    {
+      "index": 801,
+      "start": 2677.589,
+      "end": 2677.599,
+      "duration": 0.01,
+      "text": "Mumble yeah the transitive property so"
+    },
+    {
+      "index": 802,
+      "start": 2677.599,
+      "end": 2680.349,
+      "duration": 2.75,
+      "text": "how do we do it well we take those three"
+    },
+    {
+      "index": 803,
+      "start": 2680.359,
+      "end": 2684.069,
+      "duration": 3.71,
+      "text": "together and we conclude that A1 is also"
+    },
+    {
+      "index": 804,
+      "start": 2684.079,
+      "end": 2688.39,
+      "duration": 4.311,
+      "text": "related to A3 but we have A4 over here"
+    },
+    {
+      "index": 805,
+      "start": 2688.4,
+      "end": 2692.43,
+      "duration": 4.03,
+      "text": "so together with this one so A1 is"
+    },
+    {
+      "index": 806,
+      "start": 2692.44,
+      "end": 2695.589,
+      "duration": 3.149,
+      "text": "related to A3 and A3 is related to A4 we"
+    },
+    {
+      "index": 807,
+      "start": 2695.599,
+      "end": 2699.15,
+      "duration": 3.551,
+      "text": "have that A1 is Rel Rel to A4 and you"
+    },
+    {
+      "index": 808,
+      "start": 2699.16,
+      "end": 2703.03,
+      "duration": 3.87,
+      "text": "can use induction if you uh if you want"
+    },
+    {
+      "index": 809,
+      "start": 2703.04,
+      "end": 2705.15,
+      "duration": 2.11,
+      "text": "to be very precise here which you should"
+    },
+    {
+      "index": 810,
+      "start": 2705.16,
+      "end": 2708.589,
+      "duration": 3.429,
+      "text": "actually but I will not do this so we'll"
+    },
+    {
+      "index": 811,
+      "start": 2708.599,
+      "end": 2711.109,
+      "duration": 2.51,
+      "text": "use induction it'll go all the way to"
+    },
+    {
+      "index": 812,
+      "start": 2711.119,
+      "end": 2713.71,
+      "duration": 2.591,
+      "text": "the fact that A1 is actually related to"
+    },
+    {
+      "index": 813,
+      "start": 2713.72,
+      "end": 2719.069,
+      "duration": 5.349,
+      "text": "a n but wait a minute we also have this"
+    },
+    {
+      "index": 814,
+      "start": 2719.079,
+      "end": 2721.63,
+      "duration": 2.551,
+      "text": "particular"
+    },
+    {
+      "index": 815,
+      "start": 2721.64,
+      "end": 2725.95,
+      "duration": 4.31,
+      "text": "property and a n A1 is not equal to a n"
+    },
+    {
+      "index": 816,
+      "start": 2725.96,
+      "end": 2730.069,
+      "duration": 4.109,
+      "text": "by our assump asson so we get a"
+    },
+    {
+      "index": 817,
+      "start": 2730.079,
+      "end": 2733.39,
+      "duration": 3.311,
+      "text": "contradiction which means that what we"
+    },
+    {
+      "index": 818,
+      "start": 2733.4,
+      "end": 2735.47,
+      "duration": 2.07,
+      "text": "had over here is not true so actually"
+    },
+    {
+      "index": 819,
+      "start": 2735.48,
+      "end": 2739.39,
+      "duration": 3.91,
+      "text": "for all n at least two and distinct"
+    },
+    {
+      "index": 820,
+      "start": 2739.4,
+      "end": 2745.51,
+      "duration": 6.11,
+      "text": "elements uh A1 up to a n that are uh uh"
+    },
+    {
+      "index": 821,
+      "start": 2745.52,
+      "end": 2747.95,
+      "duration": 2.43,
+      "text": "well we have the negative of this so"
+    },
+    {
+      "index": 822,
+      "start": 2747.96,
+      "end": 2750.19,
+      "duration": 2.23,
+      "text": "there is no"
+    },
+    {
+      "index": 823,
+      "start": 2750.2,
+      "end": 2754.23,
+      "duration": 4.03,
+      "text": "cycle so this is uh a great property so"
+    },
+    {
+      "index": 824,
+      "start": 2754.24,
+      "end": 2757.67,
+      "duration": 3.43,
+      "text": "now we start to see why a post set is"
+    },
+    {
+      "index": 825,
+      "start": 2757.68,
+      "end": 2759.71,
+      "duration": 2.03,
+      "text": "actually called a partial order set"
+    },
+    {
+      "index": 826,
+      "start": 2759.72,
+      "end": 2762.79,
+      "duration": 3.07,
+      "text": "right because there's no directed Cycles"
+    },
+    {
+      "index": 827,
+      "start": 2762.8,
+      "end": 2766.309,
+      "duration": 3.509,
+      "text": "other than the self Loops so we sort of"
+    },
+    {
+      "index": 828,
+      "start": 2766.319,
+      "end": 2768.95,
+      "duration": 2.631,
+      "text": "have a ranking to the elements we can"
+    },
+    {
+      "index": 829,
+      "start": 2768.96,
+      "end": 2773.47,
+      "duration": 4.51,
+      "text": "say that uh really one one element is"
+    },
+    {
+      "index": 830,
+      "start": 2773.48,
+      "end": 2775.63,
+      "duration": 2.15,
+      "text": "ranked less than another so this one is"
+    },
+    {
+      "index": 831,
+      "start": 2775.64,
+      "end": 2777.549,
+      "duration": 1.909,
+      "text": "ranked less than this is ranked less"
+    },
+    {
+      "index": 832,
+      "start": 2777.559,
+      "end": 2779.51,
+      "duration": 1.951,
+      "text": "than that and I cannot Circle back again"
+    },
+    {
+      "index": 833,
+      "start": 2779.52,
+      "end": 2781.549,
+      "duration": 2.029,
+      "text": "and say that this one is rank less than"
+    },
+    {
+      "index": 834,
+      "start": 2781.559,
+      "end": 2784.43,
+      "duration": 2.871,
+      "text": "this because I don't have Cycles so that"
+    },
+    {
+      "index": 835,
+      "start": 2784.44,
+      "end": 2787.39,
+      "duration": 2.95,
+      "text": "makes a really consistent story"
+    },
+    {
+      "index": 836,
+      "start": 2787.4,
+      "end": 2790.19,
+      "duration": 2.79,
+      "text": "notice that this was different in when"
+    },
+    {
+      "index": 837,
+      "start": 2790.2,
+      "end": 2791.75,
+      "duration": 1.55,
+      "text": "we talked about tournament grass for"
+    },
+    {
+      "index": 838,
+      "start": 2791.76,
+      "end": 2793.47,
+      "duration": 1.71,
+      "text": "example right that was a very different"
+    },
+    {
+      "index": 839,
+      "start": 2793.48,
+      "end": 2796.309,
+      "duration": 2.829,
+      "text": "structure and we could not think of a"
+    },
+    {
+      "index": 840,
+      "start": 2796.319,
+      "end": 2798.549,
+      "duration": 2.23,
+      "text": "winner in in"
+    },
+    {
+      "index": 841,
+      "start": 2798.559,
+      "end": 2802.069,
+      "duration": 3.51,
+      "text": "there okay so but in this case we have"
+    },
+    {
+      "index": 842,
+      "start": 2802.079,
+      "end": 2805.589,
+      "duration": 3.51,
+      "text": "um we have a ranking and this leads us"
+    },
+    {
+      "index": 843,
+      "start": 2805.599,
+      "end": 2810.19,
+      "duration": 4.591,
+      "text": "to a more uh General uh"
+    },
+    {
+      "index": 844,
+      "start": 2810.2,
+      "end": 2814.27,
+      "duration": 4.07,
+      "text": "um uh discussion but before we go into"
+    },
+    {
+      "index": 845,
+      "start": 2814.28,
+      "end": 2815.829,
+      "duration": 1.549,
+      "text": "that"
+    },
+    {
+      "index": 846,
+      "start": 2815.839,
+      "end": 2819.03,
+      "duration": 3.191,
+      "text": "um I like to write down a conclusion of"
+    },
+    {
+      "index": 847,
+      "start": 2819.04,
+      "end": 2823.349,
+      "duration": 4.309,
+      "text": "this theorem so after"
+    },
+    {
+      "index": 848,
+      "start": 2823.359,
+      "end": 2827.91,
+      "duration": 4.551,
+      "text": "deleting uh the self"
+    },
+    {
+      "index": 849,
+      "start": 2838.95,
+      "end": 2838.96,
+      "duration": 0.01,
+      "text": "set we actually uh get a directed a"
+    },
+    {
+      "index": 850,
+      "start": 2838.96,
+      "end": 2841.03,
+      "duration": 2.07,
+      "text": "cyclic"
+    },
+    {
+      "index": 851,
+      "start": 2841.04,
+      "end": 2843.91,
+      "duration": 2.87,
+      "text": "graph and that's what we defined last"
+    },
+    {
+      "index": 852,
+      "start": 2843.92,
+      "end": 2848.19,
+      "duration": 4.27,
+      "text": "week as well so a directed a cyclic Gra"
+    },
+    {
+      "index": 853,
+      "start": 2848.2,
+      "end": 2854.79,
+      "duration": 6.59,
+      "text": "graph and we abbreviate this as a d a g"
+    },
+    {
+      "index": 854,
+      "start": 2854.8,
+      "end": 2856.27,
+      "duration": 1.47,
+      "text": "a"
+    },
+    {
+      "index": 855,
+      "start": 2856.28,
+      "end": 2860.19,
+      "duration": 3.91,
+      "text": "de so that's a very special uh uh"
+    },
+    {
+      "index": 856,
+      "start": 2860.2,
+      "end": 2865.43,
+      "duration": 5.23,
+      "text": "property for the Post"
+    },
+    {
+      "index": 857,
+      "start": 2869.43,
+      "end": 2869.44,
+      "duration": 0.01,
+      "text": "set now a partial order uh has elements"
+    },
+    {
+      "index": 858,
+      "start": 2869.44,
+      "end": 2872.309,
+      "duration": 2.869,
+      "text": "that cannot be compared for example like"
+    },
+    {
+      "index": 859,
+      "start": 2872.319,
+      "end": 2875.87,
+      "duration": 3.551,
+      "text": "in this case these two have absolutely"
+    },
+    {
+      "index": 860,
+      "start": 2875.88,
+      "end": 2879.47,
+      "duration": 3.59,
+      "text": "no uh relationship with one another even"
+    },
+    {
+      "index": 861,
+      "start": 2879.48,
+      "end": 2880.71,
+      "duration": 1.23,
+      "text": "through"
+    },
+    {
+      "index": 862,
+      "start": 2880.72,
+      "end": 2883.63,
+      "duration": 2.91,
+      "text": "transitivity U I cannot conclude that"
+    },
+    {
+      "index": 863,
+      "start": 2883.64,
+      "end": 2887.03,
+      "duration": 3.39,
+      "text": "either the right sock is related to the"
+    },
+    {
+      "index": 864,
+      "start": 2887.04,
+      "end": 2889.39,
+      "duration": 2.35,
+      "text": "underwear or the underwear related to"
+    },
+    {
+      "index": 865,
+      "start": 2889.4,
+      "end": 2894.95,
+      "duration": 5.55,
+      "text": "the right sock um and uh that makes it a"
+    },
+    {
+      "index": 866,
+      "start": 2894.96,
+      "end": 2897.03,
+      "duration": 2.07,
+      "text": "partial order it's possible that you"
+    },
+    {
+      "index": 867,
+      "start": 2897.04,
+      "end": 2900.39,
+      "duration": 3.35,
+      "text": "have elements pairs of elements that are"
+    },
+    {
+      "index": 868,
+      "start": 2900.4,
+      "end": 2903.23,
+      "duration": 2.83,
+      "text": "incomparable so let me write this"
+    },
+    {
+      "index": 869,
+      "start": 2903.24,
+      "end": 2905.75,
+      "duration": 2.51,
+      "text": "down"
+    },
+    {
+      "index": 870,
+      "start": 2905.76,
+      "end": 2914.109,
+      "duration": 8.349,
+      "text": "um"
+    },
+    {
+      "index": 871,
+      "start": 2916.99,
+      "end": 2917.0,
+      "duration": 0.01,
+      "text": "so what we really want to though is that"
+    },
+    {
+      "index": 872,
+      "start": 2917.0,
+      "end": 2919.43,
+      "duration": 2.43,
+      "text": "we have some kind of consistent ranking"
+    },
+    {
+      "index": 873,
+      "start": 2919.44,
+      "end": 2922.71,
+      "duration": 3.27,
+      "text": "that we can create for a partial ordered"
+    },
+    {
+      "index": 874,
+      "start": 2922.72,
+      "end": 2925.87,
+      "duration": 3.15,
+      "text": "set but uh for now we know that certain"
+    },
+    {
+      "index": 875,
+      "start": 2925.88,
+      "end": 2927.99,
+      "duration": 2.11,
+      "text": "pairs cannot be compared to one another"
+    },
+    {
+      "index": 876,
+      "start": 2928.0,
+      "end": 2930.27,
+      "duration": 2.27,
+      "text": "and we would like to achieve some"
+    },
+    {
+      "index": 877,
+      "start": 2930.28,
+      "end": 2932.63,
+      "duration": 2.35,
+      "text": "something like this so that's why we"
+    },
+    {
+      "index": 878,
+      "start": 2932.64,
+      "end": 2936.51,
+      "duration": 3.87,
+      "text": "start to talk about uh what it means if"
+    },
+    {
+      "index": 879,
+      "start": 2936.52,
+      "end": 2943.19,
+      "duration": 6.67,
+      "text": "a A and B are"
+    },
+    {
+      "index": 880,
+      "start": 2945.43,
+      "end": 2945.44,
+      "duration": 0.01,
+      "text": "incomparable"
+    },
+    {
+      "index": 881,
+      "start": 2945.44,
+      "end": 2949.309,
+      "duration": 3.869,
+      "text": "and uh this is if"
+    },
+    {
+      "index": 882,
+      "start": 2954.87,
+      "end": 2954.88,
+      "duration": 0.01,
+      "text": "neither a is related to b or"
+    },
+    {
+      "index": 883,
+      "start": 2954.88,
+      "end": 2958.23,
+      "duration": 3.35,
+      "text": "nor uh B is related to"
+    },
+    {
+      "index": 884,
+      "start": 2958.24,
+      "end": 2965.63,
+      "duration": 7.39,
+      "text": "a and uh we say that A and B are"
+    },
+    {
+      "index": 885,
+      "start": 2967.789,
+      "end": 2967.799,
+      "duration": 0.01,
+      "text": "comparable"
+    },
+    {
+      "index": 886,
+      "start": 2967.799,
+      "end": 2972.87,
+      "duration": 5.071,
+      "text": "well if a is related to b or B is"
+    },
+    {
+      "index": 887,
+      "start": 2972.88,
+      "end": 2974.47,
+      "duration": 1.59,
+      "text": "related to"
+    },
+    {
+      "index": 888,
+      "start": 2974.48,
+      "end": 2976.03,
+      "duration": 1.55,
+      "text": "a"
+    },
+    {
+      "index": 889,
+      "start": 2976.04,
+      "end": 2978.829,
+      "duration": 2.789,
+      "text": "and now we can have a very special order"
+    },
+    {
+      "index": 890,
+      "start": 2978.839,
+      "end": 2980.51,
+      "duration": 1.671,
+      "text": "which we call a total"
+    },
+    {
+      "index": 891,
+      "start": 2980.52,
+      "end": 2986.589,
+      "duration": 6.069,
+      "text": "order in a total"
+    },
+    {
+      "index": 892,
+      "start": 2990.309,
+      "end": 2990.319,
+      "duration": 0.01,
+      "text": "order"
+    },
+    {
+      "index": 893,
+      "start": 2990.319,
+      "end": 2993.63,
+      "duration": 3.311,
+      "text": "um is actually a partial order but all"
+    },
+    {
+      "index": 894,
+      "start": 2993.64,
+      "end": 2995.63,
+      "duration": 1.99,
+      "text": "the elements are"
+    },
+    {
+      "index": 895,
+      "start": 2995.64,
+      "end": 2998.51,
+      "duration": 2.87,
+      "text": "comparable"
+    },
+    {
+      "index": 896,
+      "start": 2998.52,
+      "end": 3001.95,
+      "duration": 3.43,
+      "text": "so it's a partial"
+    },
+    {
+      "index": 897,
+      "start": 3019.67,
+      "end": 3019.68,
+      "duration": 0.01,
+      "text": "elements is"
+    },
+    {
+      "index": 898,
+      "start": 3019.68,
+      "end": 3022.23,
+      "duration": 2.55,
+      "text": "comparable now maybe you can think about"
+    },
+    {
+      "index": 899,
+      "start": 3022.24,
+      "end": 3024.63,
+      "duration": 2.39,
+      "text": "the H diagram of a total order what"
+    },
+    {
+      "index": 900,
+      "start": 3024.64,
+      "end": 3027.95,
+      "duration": 3.31,
+      "text": "would it look like if we have that all"
+    },
+    {
+      "index": 901,
+      "start": 3027.96,
+      "end": 3029.87,
+      "duration": 1.91,
+      "text": "the pairs or all the elements are"
+    },
+    {
+      "index": 902,
+      "start": 3029.88,
+      "end": 3032.51,
+      "duration": 2.63,
+      "text": "actually comparable you have an idea of"
+    },
+    {
+      "index": 903,
+      "start": 3032.52,
+      "end": 3035.43,
+      "duration": 2.91,
+      "text": "what the what kind of a graph would that"
+    },
+    {
+      "index": 904,
+      "start": 3035.44,
+      "end": 3038.109,
+      "duration": 2.669,
+      "text": "be so in this case we had a partial"
+    },
+    {
+      "index": 905,
+      "start": 3038.119,
+      "end": 3042.43,
+      "duration": 4.311,
+      "text": "order because we see that certain items"
+    },
+    {
+      "index": 906,
+      "start": 3042.44,
+      "end": 3043.99,
+      "duration": 1.55,
+      "text": "cannot be"
+    },
+    {
+      "index": 907,
+      "start": 3044.0,
+      "end": 3046.51,
+      "duration": 2.51,
+      "text": "compared um but what happens if you have"
+    },
+    {
+      "index": 908,
+      "start": 3046.52,
+      "end": 3050.75,
+      "duration": 4.23,
+      "text": "a total order so in a total order um you"
+    },
+    {
+      "index": 909,
+      "start": 3050.76,
+      "end": 3052.95,
+      "duration": 2.19,
+      "text": "know for example if yeah do you have a"
+    },
+    {
+      "index": 910,
+      "start": 3052.96,
+      "end": 3054.67,
+      "duration": 1.71,
+      "text": "do you"
+    },
+    {
+      "index": 911,
+      "start": 3054.68,
+      "end": 3057.109,
+      "duration": 2.429,
+      "text": "know yeah that's correct it will be a"
+    },
+    {
+      "index": 912,
+      "start": 3057.119,
+      "end": 3061.47,
+      "duration": 4.351,
+      "text": "straight line and uh yeah there it will"
+    },
+    {
+      "index": 913,
+      "start": 3061.48,
+      "end": 3064.51,
+      "duration": 3.03,
+      "text": "look like something like this and it"
+    },
+    {
+      "index": 914,
+      "start": 3064.52,
+      "end": 3068.109,
+      "duration": 3.589,
+      "text": "keeps on going and over here also keeps"
+    },
+    {
+      "index": 915,
+      "start": 3068.119,
+      "end": 3070.03,
+      "duration": 1.911,
+      "text": "on going like this so it's a straight"
+    },
+    {
+      "index": 916,
+      "start": 3070.04,
+      "end": 3072.43,
+      "duration": 2.39,
+      "text": "line if it's a finite set we have a"
+    },
+    {
+      "index": 917,
+      "start": 3072.44,
+      "end": 3076.39,
+      "duration": 3.95,
+      "text": "finite line so just a finite number of"
+    },
+    {
+      "index": 918,
+      "start": 3076.4,
+      "end": 3079.03,
+      "duration": 2.63,
+      "text": "vertices but otherwise it's just an"
+    },
+    {
+      "index": 919,
+      "start": 3079.04,
+      "end": 3082.069,
+      "duration": 3.029,
+      "text": "infinite line or half or semi infinite"
+    },
+    {
+      "index": 920,
+      "start": 3082.079,
+      "end": 3086.63,
+      "duration": 4.551,
+      "text": "line so uh yeah why is that because uh"
+    },
+    {
+      "index": 921,
+      "start": 3086.64,
+      "end": 3088.349,
+      "duration": 1.709,
+      "text": "with every two elements that can be"
+    },
+    {
+      "index": 922,
+      "start": 3088.359,
+      "end": 3090.109,
+      "duration": 1.75,
+      "text": "compared to one another so you can rank"
+    },
+    {
+      "index": 923,
+      "start": 3090.119,
+      "end": 3092.109,
+      "duration": 1.99,
+      "text": "them essentially along this line so if"
+    },
+    {
+      "index": 924,
+      "start": 3092.119,
+      "end": 3093.99,
+      "duration": 1.871,
+      "text": "you think about the integers and the"
+    },
+    {
+      "index": 925,
+      "start": 3094.0,
+      "end": 3096.43,
+      "duration": 2.43,
+      "text": "less than or equal to relation well we"
+    },
+    {
+      "index": 926,
+      "start": 3096.44,
+      "end": 3098.63,
+      "duration": 2.19,
+      "text": "see that one is less than equal to two"
+    },
+    {
+      "index": 927,
+      "start": 3098.64,
+      "end": 3100.309,
+      "duration": 1.669,
+      "text": "and two is less than equal to three and"
+    },
+    {
+      "index": 928,
+      "start": 3100.319,
+      "end": 3104.109,
+      "duration": 3.79,
+      "text": "so on so they all are uh put in the H"
+    },
+    {
+      "index": 929,
+      "start": 3104.119,
+      "end": 3107.19,
+      "duration": 3.071,
+      "text": "diagram as a straight line so that's a"
+    },
+    {
+      "index": 930,
+      "start": 3107.2,
+      "end": 3110.95,
+      "duration": 3.75,
+      "text": "very special order we have a ranking"
+    },
+    {
+      "index": 931,
+      "start": 3110.96,
+      "end": 3112.91,
+      "duration": 1.95,
+      "text": "with the total order through this"
+    },
+    {
+      "index": 932,
+      "start": 3112.92,
+      "end": 3113.91,
+      "duration": 0.99,
+      "text": "straight"
+    },
+    {
+      "index": 933,
+      "start": 3113.92,
+      "end": 3116.27,
+      "duration": 2.35,
+      "text": "line um it would be great if you can"
+    },
+    {
+      "index": 934,
+      "start": 3116.28,
+      "end": 3118.23,
+      "duration": 1.95,
+      "text": "also also rank the elements in a partial"
+    },
+    {
+      "index": 935,
+      "start": 3118.24,
+      "end": 3120.19,
+      "duration": 1.95,
+      "text": "order and that's what we're going to"
+    },
+    {
+      "index": 936,
+      "start": 3120.2,
+      "end": 3121.39,
+      "duration": 1.19,
+      "text": "talk about"
+    },
+    {
+      "index": 937,
+      "start": 3121.4,
+      "end": 3123.829,
+      "duration": 2.429,
+      "text": "next um we're going to talk about the"
+    },
+    {
+      "index": 938,
+      "start": 3123.839,
+      "end": 3127.23,
+      "duration": 3.391,
+      "text": "topological sort of a post set and what"
+    },
+    {
+      "index": 939,
+      "start": 3127.24,
+      "end": 3129.63,
+      "duration": 2.39,
+      "text": "it really means is that we're going to"
+    },
+    {
+      "index": 940,
+      "start": 3129.64,
+      "end": 3132.549,
+      "duration": 2.909,
+      "text": "to extend essentially the partial order"
+    },
+    {
+      "index": 941,
+      "start": 3132.559,
+      "end": 3136.23,
+      "duration": 3.671,
+      "text": "towards a total order and by doing that"
+    },
+    {
+      "index": 942,
+      "start": 3136.24,
+      "end": 3138.829,
+      "duration": 2.589,
+      "text": "we will manage to put a ranking to all"
+    },
+    {
+      "index": 943,
+      "start": 3138.839,
+      "end": 3139.63,
+      "duration": 0.791,
+      "text": "the"
+    },
+    {
+      "index": 944,
+      "start": 3139.64,
+      "end": 3142.43,
+      "duration": 2.79,
+      "text": "items okay let me Define what's"
+    },
+    {
+      "index": 945,
+      "start": 3142.44,
+      "end": 3143.47,
+      "duration": 1.03,
+      "text": "happening"
+    },
+    {
+      "index": 946,
+      "start": 3143.48,
+      "end": 3145.43,
+      "duration": 1.95,
+      "text": "here"
+    },
+    {
+      "index": 947,
+      "start": 3145.44,
+      "end": 3147.789,
+      "duration": 2.349,
+      "text": "um"
+    },
+    {
+      "index": 948,
+      "start": 3147.799,
+      "end": 3151.19,
+      "duration": 3.391,
+      "text": "so this is about equivalence"
+    },
+    {
+      "index": 949,
+      "start": 3151.2,
+      "end": 3156.47,
+      "duration": 5.27,
+      "text": "classes and you remember"
+    },
+    {
+      "index": 950,
+      "start": 3168.19,
+      "end": 3168.2,
+      "duration": 0.01,
+      "text": "so so what is a a topological"
+    },
+    {
+      "index": 951,
+      "start": 3168.2,
+      "end": 3174.549,
+      "duration": 6.349,
+      "text": "sort so the idea is that um a total"
+    },
+    {
+      "index": 952,
+      "start": 3174.559,
+      "end": 3178.95,
+      "duration": 4.391,
+      "text": "order that is consistent"
+    },
+    {
+      "index": 953,
+      "start": 3181.91,
+      "end": 3181.92,
+      "duration": 0.01,
+      "text": "with if the to if the total order is"
+    },
+    {
+      "index": 954,
+      "start": 3181.92,
+      "end": 3191.91,
+      "duration": 9.99,
+      "text": "consistent with a partial"
+    },
+    {
+      "index": 955,
+      "start": 3196.589,
+      "end": 3196.599,
+      "duration": 0.01,
+      "text": "order um then it is called"
+    },
+    {
+      "index": 956,
+      "start": 3196.599,
+      "end": 3200.069,
+      "duration": 3.47,
+      "text": "a uh topological sword so let me"
+    },
+    {
+      "index": 957,
+      "start": 3200.079,
+      "end": 3203.91,
+      "duration": 3.831,
+      "text": "redefine it again more"
+    },
+    {
+      "index": 958,
+      "start": 3203.92,
+      "end": 3214.75,
+      "duration": 10.83,
+      "text": "formally topological s"
+    },
+    {
+      "index": 959,
+      "start": 3226.19,
+      "end": 3226.2,
+      "duration": 0.01,
+      "text": "sort of a"
+    },
+    {
+      "index": 960,
+      "start": 3226.2,
+      "end": 3231.15,
+      "duration": 4.95,
+      "text": "postet is formally defined"
+    },
+    {
+      "index": 961,
+      "start": 3240.51,
+      "end": 3240.52,
+      "duration": 0.01,
+      "text": "is a total"
+    },
+    {
+      "index": 962,
+      "start": 3240.52,
+      "end": 3244.549,
+      "duration": 4.029,
+      "text": "order that has the same set of uh of of"
+    },
+    {
+      "index": 963,
+      "start": 3244.559,
+      "end": 3246.549,
+      "duration": 1.99,
+      "text": "items of elements"
+    },
+    {
+      "index": 964,
+      "start": 3246.559,
+      "end": 3248.87,
+      "duration": 2.311,
+      "text": "a but has a"
+    },
+    {
+      "index": 965,
+      "start": 3248.88,
+      "end": 3251.95,
+      "duration": 3.07,
+      "text": "different relation that we will denote"
+    },
+    {
+      "index": 966,
+      "start": 3251.96,
+      "end": 3254.309,
+      "duration": 2.349,
+      "text": "by a subscript"
+    },
+    {
+      "index": 967,
+      "start": 3254.319,
+      "end": 3258.109,
+      "duration": 3.79,
+      "text": "T and this is such"
+    },
+    {
+      "index": 968,
+      "start": 3258.119,
+      "end": 3260.349,
+      "duration": 2.23,
+      "text": "that"
+    },
+    {
+      "index": 969,
+      "start": 3260.359,
+      "end": 3264.47,
+      "duration": 4.111,
+      "text": "well the original relation is"
+    },
+    {
+      "index": 970,
+      "start": 3264.48,
+      "end": 3267.23,
+      "duration": 2.75,
+      "text": "contained in the new"
+    },
+    {
+      "index": 971,
+      "start": 3267.24,
+      "end": 3270.39,
+      "duration": 3.15,
+      "text": "one notice that these also denote sets"
+    },
+    {
+      "index": 972,
+      "start": 3270.4,
+      "end": 3271.789,
+      "duration": 1.389,
+      "text": "so that's why I can write it like this"
+    },
+    {
+      "index": 973,
+      "start": 3271.799,
+      "end": 3276.47,
+      "duration": 4.671,
+      "text": "so this set that is defined by this"
+    },
+    {
+      "index": 974,
+      "start": 3276.48,
+      "end": 3281.47,
+      "duration": 4.99,
+      "text": "relation is a subset of this relation so"
+    },
+    {
+      "index": 975,
+      "start": 3281.48,
+      "end": 3285.67,
+      "duration": 4.19,
+      "text": "it simply means that if x is related to"
+    },
+    {
+      "index": 976,
+      "start": 3285.68,
+      "end": 3290.069,
+      "duration": 4.389,
+      "text": "Y then it also implies that X is related"
+    },
+    {
+      "index": 977,
+      "start": 3290.079,
+      "end": 3295.109,
+      "duration": 5.03,
+      "text": "to uh 2 y in the total"
+    },
+    {
+      "index": 978,
+      "start": 3298.87,
+      "end": 3298.88,
+      "duration": 0.01,
+      "text": "order okay okay so we are interested in"
+    },
+    {
+      "index": 979,
+      "start": 3298.88,
+      "end": 3300.43,
+      "duration": 1.55,
+      "text": "figuring out whether we can find such a"
+    },
+    {
+      "index": 980,
+      "start": 3300.44,
+      "end": 3302.43,
+      "duration": 1.99,
+      "text": "topological sword is it always possible"
+    },
+    {
+      "index": 981,
+      "start": 3302.44,
+      "end": 3309.15,
+      "duration": 6.71,
+      "text": "to do"
+    },
+    {
+      "index": 982,
+      "start": 3313.789,
+      "end": 3313.799,
+      "duration": 0.01,
+      "text": "so now it turns out that every finite um"
+    },
+    {
+      "index": 983,
+      "start": 3313.799,
+      "end": 3318.549,
+      "duration": 4.75,
+      "text": "every finite uh um poet actually has a"
+    },
+    {
+      "index": 984,
+      "start": 3318.559,
+      "end": 3321.91,
+      "duration": 3.351,
+      "text": "topological sord and we going to prove"
+    },
+    {
+      "index": 985,
+      "start": 3321.92,
+      "end": 3325.23,
+      "duration": 3.31,
+      "text": "this"
+    },
+    {
+      "index": 986,
+      "start": 3332.39,
+      "end": 3332.4,
+      "duration": 0.01,
+      "text": "how do we do that so let me first write"
+    },
+    {
+      "index": 987,
+      "start": 3332.4,
+      "end": 3335.349,
+      "duration": 2.949,
+      "text": "out the"
+    },
+    {
+      "index": 988,
+      "start": 3335.359,
+      "end": 3340.029,
+      "duration": 4.67,
+      "text": "theorem the theorem is that"
+    },
+    {
+      "index": 989,
+      "start": 3342.349,
+      "end": 3342.359,
+      "duration": 0.01,
+      "text": "every"
+    },
+    {
+      "index": 990,
+      "start": 3342.359,
+      "end": 3345.27,
+      "duration": 2.911,
+      "text": "finite"
+    },
+    {
+      "index": 991,
+      "start": 3345.28,
+      "end": 3350.91,
+      "duration": 5.63,
+      "text": "posc has a"
+    },
+    {
+      "index": 992,
+      "start": 3354.349,
+      "end": 3354.359,
+      "duration": 0.01,
+      "text": "topological sort the basic idea is that"
+    },
+    {
+      "index": 993,
+      "start": 3354.359,
+      "end": 3356.549,
+      "duration": 2.19,
+      "text": "we're going to in order to prove this is"
+    },
+    {
+      "index": 994,
+      "start": 3356.559,
+      "end": 3358.47,
+      "duration": 1.911,
+      "text": "that we're going to look at a minimal"
+    },
+    {
+      "index": 995,
+      "start": 3358.48,
+      "end": 3360.47,
+      "duration": 1.99,
+      "text": "element in the post set for example in"
+    },
+    {
+      "index": 996,
+      "start": 3360.48,
+      "end": 3362.19,
+      "duration": 1.71,
+      "text": "the diagram we have four minimal"
+    },
+    {
+      "index": 997,
+      "start": 3362.2,
+      "end": 3365.27,
+      "duration": 3.07,
+      "text": "elements I will Define what that means"
+    },
+    {
+      "index": 998,
+      "start": 3365.28,
+      "end": 3367.309,
+      "duration": 2.029,
+      "text": "the left sock and the right sock and the"
+    },
+    {
+      "index": 999,
+      "start": 3367.319,
+      "end": 3369.309,
+      "duration": 1.99,
+      "text": "underwear and the shirt are all at the"
+    },
+    {
+      "index": 1000,
+      "start": 3369.319,
+      "end": 3372.67,
+      "duration": 3.351,
+      "text": "top of the H diagram those are minimal"
+    },
+    {
+      "index": 1001,
+      "start": 3372.68,
+      "end": 3375.67,
+      "duration": 2.99,
+      "text": "elements I just take one of them take it"
+    },
+    {
+      "index": 1002,
+      "start": 3375.68,
+      "end": 3380.589,
+      "duration": 4.909,
+      "text": "out of uh the postet that I'm looking at"
+    },
+    {
+      "index": 1003,
+      "start": 3380.599,
+      "end": 3382.349,
+      "duration": 1.75,
+      "text": "I will get a smaller postet and"
+    },
+    {
+      "index": 1004,
+      "start": 3382.359,
+      "end": 3385.87,
+      "duration": 3.511,
+      "text": "recursively I'm going to construct my uh"
+    },
+    {
+      "index": 1005,
+      "start": 3385.88,
+      "end": 3387.829,
+      "duration": 1.949,
+      "text": "total order so I have a total order on"
+    },
+    {
+      "index": 1006,
+      "start": 3387.839,
+      "end": 3390.91,
+      "duration": 3.071,
+      "text": "the smaller uh post set and then I add"
+    },
+    {
+      "index": 1007,
+      "start": 3390.92,
+      "end": 3392.789,
+      "duration": 1.869,
+      "text": "the minimal element back to it and then"
+    },
+    {
+      "index": 1008,
+      "start": 3392.799,
+      "end": 3395.27,
+      "duration": 2.471,
+      "text": "I get a total order for the whole thing"
+    },
+    {
+      "index": 1009,
+      "start": 3395.28,
+      "end": 3397.069,
+      "duration": 1.789,
+      "text": "so essentially I'm going to use"
+    },
+    {
+      "index": 1010,
+      "start": 3397.079,
+      "end": 3400.39,
+      "duration": 3.311,
+      "text": "induction and before I can do that I'm"
+    },
+    {
+      "index": 1011,
+      "start": 3400.4,
+      "end": 3404.19,
+      "duration": 3.79,
+      "text": "going to first talk about what it means"
+    },
+    {
+      "index": 1012,
+      "start": 3404.2,
+      "end": 3406.069,
+      "duration": 1.869,
+      "text": "um to have a minimal element because"
+    },
+    {
+      "index": 1013,
+      "start": 3406.079,
+      "end": 3413.63,
+      "duration": 7.551,
+      "text": "that's what we need so X in a is called"
+    },
+    {
+      "index": 1014,
+      "start": 3417.829,
+      "end": 3417.839,
+      "duration": 0.01,
+      "text": "minimal if it's not true that there"
+    },
+    {
+      "index": 1015,
+      "start": 3417.839,
+      "end": 3422.75,
+      "duration": 4.911,
+      "text": "exists a y in a which is different from"
+    },
+    {
+      "index": 1016,
+      "start": 3422.76,
+      "end": 3426.39,
+      "duration": 3.63,
+      "text": "X but such"
+    },
+    {
+      "index": 1017,
+      "start": 3426.4,
+      "end": 3428.549,
+      "duration": 2.149,
+      "text": "that Y"
+    },
+    {
+      "index": 1018,
+      "start": 3428.559,
+      "end": 3432.67,
+      "duration": 4.111,
+      "text": "is smaller than x so there is there"
+    },
+    {
+      "index": 1019,
+      "start": 3432.68,
+      "end": 3436.789,
+      "duration": 4.109,
+      "text": "exists no other Y in a that is smaller"
+    },
+    {
+      "index": 1020,
+      "start": 3436.799,
+      "end": 3439.87,
+      "duration": 3.071,
+      "text": "than x then if that's true we call x a"
+    },
+    {
+      "index": 1021,
+      "start": 3439.88,
+      "end": 3442.589,
+      "duration": 2.709,
+      "text": "minimal element and in the same way of"
+    },
+    {
+      "index": 1022,
+      "start": 3442.599,
+      "end": 3445.349,
+      "duration": 2.75,
+      "text": "course we can talk about a maximum a"
+    },
+    {
+      "index": 1023,
+      "start": 3445.359,
+      "end": 3449.67,
+      "duration": 4.311,
+      "text": "maximal element"
+    },
+    {
+      "index": 1024,
+      "start": 3454.109,
+      "end": 3454.119,
+      "duration": 0.01,
+      "text": "is exactly the same but at the very"
+    },
+    {
+      "index": 1025,
+      "start": 3454.119,
+      "end": 3457.029,
+      "duration": 2.91,
+      "text": "end we will have the reverse so X is"
+    },
+    {
+      "index": 1026,
+      "start": 3457.039,
+      "end": 3458.95,
+      "duration": 1.911,
+      "text": "related to"
+    },
+    {
+      "index": 1027,
+      "start": 3458.96,
+      "end": 3461.67,
+      "duration": 2.71,
+      "text": "Y now it turns out that not every post"
+    },
+    {
+      "index": 1028,
+      "start": 3461.68,
+      "end": 3465.549,
+      "duration": 3.869,
+      "text": "set has a minimal element actually so as"
+    },
+    {
+      "index": 1029,
+      "start": 3465.559,
+      "end": 3469.109,
+      "duration": 3.55,
+      "text": "an example uh we may consider the"
+    },
+    {
+      "index": 1030,
+      "start": 3469.119,
+      "end": 3471.589,
+      "duration": 2.47,
+      "text": "integers the the the negative and"
+    },
+    {
+      "index": 1031,
+      "start": 3471.599,
+      "end": 3473.91,
+      "duration": 2.311,
+      "text": "positive numbers and the less than or"
+    },
+    {
+      "index": 1032,
+      "start": 3473.92,
+      "end": 3477.39,
+      "duration": 3.47,
+      "text": "equal to relation there does not exist a"
+    },
+    {
+      "index": 1033,
+      "start": 3477.4,
+      "end": 3479.43,
+      "duration": 2.03,
+      "text": "minimal element you can always find a"
+    },
+    {
+      "index": 1034,
+      "start": 3479.44,
+      "end": 3482.39,
+      "duration": 2.95,
+      "text": "smaller element so it's not really true"
+    },
+    {
+      "index": 1035,
+      "start": 3482.4,
+      "end": 3484.309,
+      "duration": 1.909,
+      "text": "that every post set actually has a"
+    },
+    {
+      "index": 1036,
+      "start": 3484.319,
+      "end": 3486.75,
+      "duration": 2.431,
+      "text": "minimum element it turns out though that"
+    },
+    {
+      "index": 1037,
+      "start": 3486.76,
+      "end": 3489.349,
+      "duration": 2.589,
+      "text": "in a finite postet we do have a minimum"
+    },
+    {
+      "index": 1038,
+      "start": 3489.359,
+      "end": 3492.23,
+      "duration": 2.871,
+      "text": "element and then we can start doing the"
+    },
+    {
+      "index": 1039,
+      "start": 3492.24,
+      "end": 3493.87,
+      "duration": 1.63,
+      "text": "proof by"
+    },
+    {
+      "index": 1040,
+      "start": 3493.88,
+      "end": 3496.789,
+      "duration": 2.909,
+      "text": "induction so let's prove this that every"
+    },
+    {
+      "index": 1041,
+      "start": 3496.799,
+      "end": 3499.99,
+      "duration": 3.191,
+      "text": "finite Pro poet has a minimum has a"
+    },
+    {
+      "index": 1042,
+      "start": 3500.0,
+      "end": 3502.109,
+      "duration": 2.109,
+      "text": "minimal"
+    },
+    {
+      "index": 1043,
+      "start": 3502.119,
+      "end": 3507.63,
+      "duration": 5.511,
+      "text": "element so let's do that up here"
+    },
+    {
+      "index": 1044,
+      "start": 3507.64,
+      "end": 3513.51,
+      "duration": 5.87,
+      "text": "actually we do need this theorem later"
+    },
+    {
+      "index": 1045,
+      "start": 3516.589,
+      "end": 3516.599,
+      "duration": 0.01,
+      "text": "on so let's start out"
+    },
+    {
+      "index": 1046,
+      "start": 3516.599,
+      "end": 3520.549,
+      "duration": 3.95,
+      "text": "here um so the Lemma that we want to"
+    },
+    {
+      "index": 1047,
+      "start": 3520.559,
+      "end": 3525.51,
+      "duration": 4.951,
+      "text": "prove is that uh"
+    },
+    {
+      "index": 1048,
+      "start": 3525.52,
+      "end": 3529.589,
+      "duration": 4.069,
+      "text": "every finite"
+    },
+    {
+      "index": 1049,
+      "start": 3529.599,
+      "end": 3533.309,
+      "duration": 3.71,
+      "text": "poet has a"
+    },
+    {
+      "index": 1050,
+      "start": 3533.319,
+      "end": 3534.87,
+      "duration": 1.551,
+      "text": "minimal"
+    },
+    {
+      "index": 1051,
+      "start": 3534.88,
+      "end": 3537.23,
+      "duration": 2.35,
+      "text": "element and and in order to do that"
+    },
+    {
+      "index": 1052,
+      "start": 3537.24,
+      "end": 3540.75,
+      "duration": 3.51,
+      "text": "we're going to Define what is called a"
+    },
+    {
+      "index": 1053,
+      "start": 3540.76,
+      "end": 3542.63,
+      "duration": 1.87,
+      "text": "chain and a"
+    },
+    {
+      "index": 1054,
+      "start": 3542.64,
+      "end": 3546.109,
+      "duration": 3.469,
+      "text": "chain is a sequence of elements that are"
+    },
+    {
+      "index": 1055,
+      "start": 3546.119,
+      "end": 3550.87,
+      "duration": 4.751,
+      "text": "related to one another is a"
+    },
+    {
+      "index": 1056,
+      "start": 3563.109,
+      "end": 3563.119,
+      "duration": 0.01,
+      "text": "elements such that uh A1 is smaller than"
+    },
+    {
+      "index": 1057,
+      "start": 3563.119,
+      "end": 3567.67,
+      "duration": 4.551,
+      "text": "A2 smaller than A3 and so on up to some"
+    },
+    {
+      "index": 1058,
+      "start": 3567.68,
+      "end": 3571.51,
+      "duration": 3.83,
+      "text": "a t and the length of a chain we will"
+    },
+    {
+      "index": 1059,
+      "start": 3571.52,
+      "end": 3577.91,
+      "duration": 6.39,
+      "text": "denote by T so this is going to be the"
+    },
+    {
+      "index": 1060,
+      "start": 3580.309,
+      "end": 3580.319,
+      "duration": 0.01,
+      "text": "length so now let's have a proof of this"
+    },
+    {
+      "index": 1061,
+      "start": 3580.319,
+      "end": 3582.43,
+      "duration": 2.111,
+      "text": "LMA and with that LMA we will then be"
+    },
+    {
+      "index": 1062,
+      "start": 3582.44,
+      "end": 3584.309,
+      "duration": 1.869,
+      "text": "able to prove the theorem that we want"
+    },
+    {
+      "index": 1063,
+      "start": 3584.319,
+      "end": 3588.43,
+      "duration": 4.111,
+      "text": "to do on the topological"
+    },
+    {
+      "index": 1064,
+      "start": 3597.029,
+      "end": 3597.039,
+      "duration": 0.01,
+      "text": "Okay so"
+    },
+    {
+      "index": 1065,
+      "start": 3597.039,
+      "end": 3599.95,
+      "duration": 2.911,
+      "text": "let's see how we can do this um so"
+    },
+    {
+      "index": 1066,
+      "start": 3599.96,
+      "end": 3602.39,
+      "duration": 2.43,
+      "text": "what's the proof going to"
+    },
+    {
+      "index": 1067,
+      "start": 3602.4,
+      "end": 3606.829,
+      "duration": 4.429,
+      "text": "be um well we want to construct a"
+    },
+    {
+      "index": 1068,
+      "start": 3606.839,
+      "end": 3608.63,
+      "duration": 1.791,
+      "text": "minimal element that we think would be"
+    },
+    {
+      "index": 1069,
+      "start": 3608.64,
+      "end": 3610.67,
+      "duration": 2.03,
+      "text": "minimal and how we're going to do it"
+    },
+    {
+      "index": 1070,
+      "start": 3610.68,
+      "end": 3613.19,
+      "duration": 2.51,
+      "text": "we're going to look at the chain that"
+    },
+    {
+      "index": 1071,
+      "start": 3613.2,
+      "end": 3616.349,
+      "duration": 3.149,
+      "text": "has uh uh that has the largest length"
+    },
+    {
+      "index": 1072,
+      "start": 3616.359,
+      "end": 3620.789,
+      "duration": 4.43,
+      "text": "the maximum length so let's"
+    },
+    {
+      "index": 1073,
+      "start": 3620.799,
+      "end": 3624.47,
+      "duration": 3.671,
+      "text": "um so let"
+    },
+    {
+      "index": 1074,
+      "start": 3628.67,
+      "end": 3628.68,
+      "duration": 0.01,
+      "text": "A1 relat to A2 and so on to a"
+    },
+    {
+      "index": 1075,
+      "start": 3628.68,
+      "end": 3630.63,
+      "duration": 1.95,
+      "text": "n"
+    },
+    {
+      "index": 1076,
+      "start": 3630.64,
+      "end": 3633.549,
+      "duration": 2.909,
+      "text": "be a maximum"
+    },
+    {
+      "index": 1077,
+      "start": 3633.559,
+      "end": 3636.99,
+      "duration": 3.431,
+      "text": "length chain now I'm cheating here a"
+    },
+    {
+      "index": 1078,
+      "start": 3637.0,
+      "end": 3637.75,
+      "duration": 0.75,
+      "text": "little"
+    },
+    {
+      "index": 1079,
+      "start": 3637.76,
+      "end": 3641.15,
+      "duration": 3.39,
+      "text": "bit because how do I know that such a"
+    },
+    {
+      "index": 1080,
+      "start": 3641.16,
+      "end": 3643.67,
+      "duration": 2.51,
+      "text": "chain actually exists does there exist a"
+    },
+    {
+      "index": 1081,
+      "start": 3643.68,
+      "end": 3646.91,
+      "duration": 3.23,
+      "text": "maximum length chain so that you may"
+    },
+    {
+      "index": 1082,
+      "start": 3646.92,
+      "end": 3651.51,
+      "duration": 4.59,
+      "text": "want to think about so it actually does"
+    },
+    {
+      "index": 1083,
+      "start": 3654.51,
+      "end": 3654.52,
+      "duration": 0.01,
+      "text": "exist and uh if you think about it"
+    },
+    {
+      "index": 1084,
+      "start": 3654.52,
+      "end": 3658.27,
+      "duration": 3.75,
+      "text": "yourself then uh you will actually uh"
+    },
+    {
+      "index": 1085,
+      "start": 3658.28,
+      "end": 3660.91,
+      "duration": 2.63,
+      "text": "use the fact that we use a finite postet"
+    },
+    {
+      "index": 1086,
+      "start": 3660.92,
+      "end": 3663.19,
+      "duration": 2.27,
+      "text": "if you have a finite number of elements"
+    },
+    {
+      "index": 1087,
+      "start": 3663.2,
+      "end": 3665.47,
+      "duration": 2.27,
+      "text": "well the maximum length chain can be at"
+    },
+    {
+      "index": 1088,
+      "start": 3665.48,
+      "end": 3666.75,
+      "duration": 1.27,
+      "text": "most the number of elements in the"
+    },
+    {
+      "index": 1089,
+      "start": 3666.76,
+      "end": 3670.51,
+      "duration": 3.75,
+      "text": "postet so uh you always have a maximum"
+    },
+    {
+      "index": 1090,
+      "start": 3670.52,
+      "end": 3671.87,
+      "duration": 1.35,
+      "text": "number but you can prove it more"
+    },
+    {
+      "index": 1091,
+      "start": 3671.88,
+      "end": 3673.589,
+      "duration": 1.709,
+      "text": "formally by using the well ordering"
+    },
+    {
+      "index": 1092,
+      "start": 3673.599,
+      "end": 3676.39,
+      "duration": 2.791,
+      "text": "principle but I will not do that here"
+    },
+    {
+      "index": 1093,
+      "start": 3676.4,
+      "end": 3679.589,
+      "duration": 3.189,
+      "text": "so um we assume for now that this just"
+    },
+    {
+      "index": 1094,
+      "start": 3679.599,
+      "end": 3682.069,
+      "duration": 2.47,
+      "text": "exists but you can prove"
+    },
+    {
+      "index": 1095,
+      "start": 3682.079,
+      "end": 3684.829,
+      "duration": 2.75,
+      "text": "it so let's look at two"
+    },
+    {
+      "index": 1096,
+      "start": 3684.839,
+      "end": 3687.549,
+      "duration": 2.71,
+      "text": "cases we have a case so so what do we"
+    },
+    {
+      "index": 1097,
+      "start": 3687.559,
+      "end": 3689.39,
+      "duration": 1.831,
+      "text": "want to do we want to show that A1 is"
+    },
+    {
+      "index": 1098,
+      "start": 3689.4,
+      "end": 3690.71,
+      "duration": 1.31,
+      "text": "actually minimum"
+    },
+    {
+      "index": 1099,
+      "start": 3690.72,
+      "end": 3693.589,
+      "duration": 2.869,
+      "text": "element so let us consider any other"
+    },
+    {
+      "index": 1100,
+      "start": 3693.599,
+      "end": 3696.19,
+      "duration": 2.591,
+      "text": "element in the set um and then we have"
+    },
+    {
+      "index": 1101,
+      "start": 3696.2,
+      "end": 3700.029,
+      "duration": 3.829,
+      "text": "two cases either a is actually not part"
+    },
+    {
+      "index": 1102,
+      "start": 3700.039,
+      "end": 3703.789,
+      "duration": 3.75,
+      "text": "of A1 A2 all the way up to a"
+    },
+    {
+      "index": 1103,
+      "start": 3703.799,
+      "end": 3705.99,
+      "duration": 2.191,
+      "text": "n well in that"
+    },
+    {
+      "index": 1104,
+      "start": 3706.0,
+      "end": 3710.95,
+      "duration": 4.95,
+      "text": "case um if a is less than"
+    },
+    {
+      "index": 1105,
+      "start": 3710.96,
+      "end": 3713.269,
+      "duration": 2.309,
+      "text": "A1"
+    },
+    {
+      "index": 1106,
+      "start": 3713.279,
+      "end": 3717.829,
+      "duration": 4.55,
+      "text": "well what goes wrong I can put a up"
+    },
+    {
+      "index": 1107,
+      "start": 3717.839,
+      "end": 3719.51,
+      "duration": 1.671,
+      "text": "front here it's a different element from"
+    },
+    {
+      "index": 1108,
+      "start": 3719.52,
+      "end": 3721.95,
+      "duration": 2.43,
+      "text": "all the others I get a longer chain so"
+    },
+    {
+      "index": 1109,
+      "start": 3721.96,
+      "end": 3723.589,
+      "duration": 1.629,
+      "text": "that's that's not possible right so I"
+    },
+    {
+      "index": 1110,
+      "start": 3723.599,
+      "end": 3725.23,
+      "duration": 1.631,
+      "text": "would get a"
+    },
+    {
+      "index": 1111,
+      "start": 3725.24,
+      "end": 3727.789,
+      "duration": 2.549,
+      "text": "longer uh"
+    },
+    {
+      "index": 1112,
+      "start": 3727.799,
+      "end": 3730.91,
+      "duration": 3.111,
+      "text": "chain and that's a contradiction so this"
+    },
+    {
+      "index": 1113,
+      "start": 3730.92,
+      "end": 3733.43,
+      "duration": 2.51,
+      "text": "assumption is not true so it's not true"
+    },
+    {
+      "index": 1114,
+      "start": 3733.44,
+      "end": 3739.069,
+      "duration": 5.629,
+      "text": "that a is less than"
+    },
+    {
+      "index": 1115,
+      "start": 3741.269,
+      "end": 3741.279,
+      "duration": 0.01,
+      "text": "A1 what's the other"
+    },
+    {
+      "index": 1116,
+      "start": 3741.279,
+      "end": 3743.99,
+      "duration": 2.711,
+      "text": "case the other case is that a is an"
+    },
+    {
+      "index": 1117,
+      "start": 3744.0,
+      "end": 3747.829,
+      "duration": 3.829,
+      "text": "element of one of those"
+    },
+    {
+      "index": 1118,
+      "start": 3747.839,
+      "end": 3751.109,
+      "duration": 3.27,
+      "text": "so it's one of"
+    },
+    {
+      "index": 1119,
+      "start": 3751.119,
+      "end": 3753.95,
+      "duration": 2.831,
+      "text": "those in the"
+    },
+    {
+      "index": 1120,
+      "start": 3753.96,
+      "end": 3756.71,
+      "duration": 2.75,
+      "text": "chain now let's have a look what happens"
+    },
+    {
+      "index": 1121,
+      "start": 3756.72,
+      "end": 3761.029,
+      "duration": 4.309,
+      "text": "if a is less than or equal to A1 but"
+    },
+    {
+      "index": 1122,
+      "start": 3761.039,
+      "end": 3763.589,
+      "duration": 2.55,
+      "text": "wait a minute if a is part of one is one"
+    },
+    {
+      "index": 1123,
+      "start": 3763.599,
+      "end": 3764.43,
+      "duration": 0.831,
+      "text": "of"
+    },
+    {
+      "index": 1124,
+      "start": 3764.44,
+      "end": 3768.069,
+      "duration": 3.629,
+      "text": "these and a is less than or equal to A1"
+    },
+    {
+      "index": 1125,
+      "start": 3768.079,
+      "end": 3770.51,
+      "duration": 2.431,
+      "text": "then I will have a cycle A1 is less than"
+    },
+    {
+      "index": 1126,
+      "start": 3770.52,
+      "end": 3774.069,
+      "duration": 3.549,
+      "text": "equal to to a is less than equal to A1"
+    },
+    {
+      "index": 1127,
+      "start": 3774.079,
+      "end": 3776.43,
+      "duration": 2.351,
+      "text": "but we just showed in the theorem"
+    },
+    {
+      "index": 1128,
+      "start": 3776.44,
+      "end": 3778.71,
+      "duration": 2.27,
+      "text": "that there are no directed Cycles in a"
+    },
+    {
+      "index": 1129,
+      "start": 3778.72,
+      "end": 3782.23,
+      "duration": 3.51,
+      "text": "post set so this would"
+    },
+    {
+      "index": 1130,
+      "start": 3782.24,
+      "end": 3785.069,
+      "duration": 2.829,
+      "text": "imply that we have a cycle and according"
+    },
+    {
+      "index": 1131,
+      "start": 3785.079,
+      "end": 3786.789,
+      "duration": 1.71,
+      "text": "to the theorem up there we have a"
+    },
+    {
+      "index": 1132,
+      "start": 3786.799,
+      "end": 3789.029,
+      "duration": 2.23,
+      "text": "contradiction so also in this case it's"
+    },
+    {
+      "index": 1133,
+      "start": 3789.039,
+      "end": 3793.069,
+      "duration": 4.03,
+      "text": "not true that a is less than"
+    },
+    {
+      "index": 1134,
+      "start": 3793.079,
+      "end": 3795.95,
+      "duration": 2.871,
+      "text": "A1 now this is the definition of a"
+    },
+    {
+      "index": 1135,
+      "start": 3795.96,
+      "end": 3798.15,
+      "duration": 2.19,
+      "text": "minimal element so let's have look at"
+    },
+    {
+      "index": 1136,
+      "start": 3798.16,
+      "end": 3802.75,
+      "duration": 4.59,
+      "text": "this definition we've prove now that uh"
+    },
+    {
+      "index": 1137,
+      "start": 3802.76,
+      "end": 3806.109,
+      "duration": 3.349,
+      "text": "that that for every possibility uh every"
+    },
+    {
+      "index": 1138,
+      "start": 3806.119,
+      "end": 3809.87,
+      "duration": 3.751,
+      "text": "possible item or element in set a um"
+    },
+    {
+      "index": 1139,
+      "start": 3809.88,
+      "end": 3814.63,
+      "duration": 4.75,
+      "text": "it's not true that a is smaller than um"
+    },
+    {
+      "index": 1140,
+      "start": 3814.64,
+      "end": 3817.829,
+      "duration": 3.189,
+      "text": "that that new element is smaller than uh"
+    },
+    {
+      "index": 1141,
+      "start": 3817.839,
+      "end": 3821.47,
+      "duration": 3.631,
+      "text": "than A1 so A1 is actually a minimum"
+    },
+    {
+      "index": 1142,
+      "start": 3821.48,
+      "end": 3824.19,
+      "duration": 2.71,
+      "text": "element according to the definition so"
+    },
+    {
+      "index": 1143,
+      "start": 3824.2,
+      "end": 3827.549,
+      "duration": 3.349,
+      "text": "A1 is minimal that's what we have"
+    },
+    {
+      "index": 1144,
+      "start": 3827.559,
+      "end": 3831.269,
+      "duration": 3.71,
+      "text": "shown so great we have showed that there"
+    },
+    {
+      "index": 1145,
+      "start": 3831.279,
+      "end": 3833.19,
+      "duration": 1.911,
+      "text": "exists a minimum element so this is the"
+    },
+    {
+      "index": 1146,
+      "start": 3833.2,
+      "end": 3834.71,
+      "duration": 1.51,
+      "text": "end of this"
+    },
+    {
+      "index": 1147,
+      "start": 3834.72,
+      "end": 3837.72,
+      "duration": 3.0,
+      "text": "proof"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Discrete Mathematics",
+    "source_url": "https://www.youtube.com/playlist?list=PLB7540DEDD482705B"
+  }
+}

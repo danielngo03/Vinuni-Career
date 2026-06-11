@@ -1,0 +1,6563 @@
+{
+  "video": {
+    "id": "6OKQJCnx3is",
+    "title": "Lecture13 - Subtractors",
+    "url": "https://www.youtube.com/watch?v=6OKQJCnx3is",
+    "channel": "nptelhrd",
+    "duration": 3061,
+    "language": "en"
+  },
+  "segment_count": 935,
+  "segments": [
+    {
+      "index": 0,
+      "start": 24.95,
+      "end": 24.96,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 1,
+      "start": 24.96,
+      "end": 26.75,
+      "duration": 1.79,
+      "text": "oh"
+    },
+    {
+      "index": 2,
+      "start": 26.76,
+      "end": 28.47,
+      "duration": 1.71,
+      "text": "sh"
+    },
+    {
+      "index": 3,
+      "start": 28.48,
+      "end": 31.42,
+      "duration": 2.94,
+      "text": "sh sh"
+    },
+    {
+      "index": 4,
+      "start": 31.43,
+      "end": 58.91,
+      "duration": 27.48,
+      "text": "[Music]"
+    },
+    {
+      "index": 5,
+      "start": 110.03,
+      "end": 110.04,
+      "duration": 0.01,
+      "text": "in the last couple of lectures we talked"
+    },
+    {
+      "index": 6,
+      "start": 110.04,
+      "end": 111.749,
+      "duration": 1.709,
+      "text": "about"
+    },
+    {
+      "index": 7,
+      "start": 111.759,
+      "end": 115.83,
+      "duration": 4.071,
+      "text": "adders uh as the basic um building block"
+    },
+    {
+      "index": 8,
+      "start": 115.84,
+      "end": 117.069,
+      "duration": 1.229,
+      "text": "of arithmetic"
+    },
+    {
+      "index": 9,
+      "start": 117.079,
+      "end": 119.55,
+      "duration": 2.471,
+      "text": "circuits which form a major unit of"
+    },
+    {
+      "index": 10,
+      "start": 119.56,
+      "end": 121.95,
+      "duration": 2.39,
+      "text": "Compu"
+    },
+    {
+      "index": 11,
+      "start": 124.91,
+      "end": 124.92,
+      "duration": 0.01,
+      "text": "computers"
+    },
+    {
+      "index": 12,
+      "start": 124.92,
+      "end": 127.07,
+      "duration": 2.15,
+      "text": "um"
+    },
+    {
+      "index": 13,
+      "start": 127.08,
+      "end": 129.43,
+      "duration": 2.35,
+      "text": "the other there are other arithmetic"
+    },
+    {
+      "index": 14,
+      "start": 129.44,
+      "end": 130.71,
+      "duration": 1.27,
+      "text": "operations Adder is only one of the"
+    },
+    {
+      "index": 15,
+      "start": 130.72,
+      "end": 131.79,
+      "duration": 1.07,
+      "text": "elementary"
+    },
+    {
+      "index": 16,
+      "start": 131.8,
+      "end": 133.39,
+      "duration": 1.59,
+      "text": "operations but there are other"
+    },
+    {
+      "index": 17,
+      "start": 133.4,
+      "end": 135.47,
+      "duration": 2.07,
+      "text": "arithmetic operations like subtractors"
+    },
+    {
+      "index": 18,
+      "start": 135.48,
+      "end": 137.63,
+      "duration": 2.15,
+      "text": "subtraction"
+    },
+    {
+      "index": 19,
+      "start": 137.64,
+      "end": 139.79,
+      "duration": 2.15,
+      "text": "multiplication so you can have"
+    },
+    {
+      "index": 20,
+      "start": 139.8,
+      "end": 141.91,
+      "duration": 2.11,
+      "text": "arithmetic circuit designed for each of"
+    },
+    {
+      "index": 21,
+      "start": 141.92,
+      "end": 143.27,
+      "duration": 1.35,
+      "text": "these"
+    },
+    {
+      "index": 22,
+      "start": 143.28,
+      "end": 146.03,
+      "duration": 2.75,
+      "text": "operations Al the concept is almost the"
+    },
+    {
+      "index": 23,
+      "start": 146.04,
+      "end": 148.19,
+      "duration": 2.15,
+      "text": "same what did you do in the case of"
+    },
+    {
+      "index": 24,
+      "start": 148.2,
+      "end": 150.55,
+      "duration": 2.35,
+      "text": "adders we had to write the tooth table"
+    },
+    {
+      "index": 25,
+      "start": 150.56,
+      "end": 152.35,
+      "duration": 1.79,
+      "text": "and we had to get the K map and get the"
+    },
+    {
+      "index": 26,
+      "start": 152.36,
+      "end": 154.43,
+      "duration": 2.07,
+      "text": "simplified version and then implement it"
+    },
+    {
+      "index": 27,
+      "start": 154.44,
+      "end": 155.99,
+      "duration": 1.55,
+      "text": "and if possible try to manipulate the"
+    },
+    {
+      "index": 28,
+      "start": 156.0,
+      "end": 157.67,
+      "duration": 1.67,
+      "text": "simplified version"
+    },
+    {
+      "index": 29,
+      "start": 157.68,
+      "end": 160.43,
+      "duration": 2.75,
+      "text": "to uh a form which is more amable for"
+    },
+    {
+      "index": 30,
+      "start": 160.44,
+      "end": 163.63,
+      "duration": 3.19,
+      "text": "practical implementation like exclusive"
+    },
+    {
+      "index": 31,
+      "start": 163.64,
+      "end": 168.149,
+      "duration": 4.509,
+      "text": "argat we also saw methods of speeding up"
+    },
+    {
+      "index": 32,
+      "start": 168.159,
+      "end": 171.47,
+      "duration": 3.311,
+      "text": "because speeding up is"
+    },
+    {
+      "index": 33,
+      "start": 173.71,
+      "end": 173.72,
+      "duration": 0.01,
+      "text": "important in the case of our adders we"
+    },
+    {
+      "index": 34,
+      "start": 173.72,
+      "end": 175.43,
+      "duration": 1.71,
+      "text": "saw there is a technique called carry"
+    },
+    {
+      "index": 35,
+      "start": 175.44,
+      "end": 177.589,
+      "duration": 2.149,
+      "text": "look ahead also mentioned there other"
+    },
+    {
+      "index": 36,
+      "start": 177.599,
+      "end": 179.11,
+      "duration": 1.511,
+      "text": "techniques which we not going to get"
+    },
+    {
+      "index": 37,
+      "start": 179.12,
+      "end": 181.75,
+      "duration": 2.63,
+      "text": "into"
+    },
+    {
+      "index": 38,
+      "start": 181.76,
+      "end": 183.11,
+      "duration": 1.35,
+      "text": "so likewise you can always do for"
+    },
+    {
+      "index": 39,
+      "start": 183.12,
+      "end": 185.55,
+      "duration": 2.43,
+      "text": "subtraction and"
+    },
+    {
+      "index": 40,
+      "start": 185.56,
+      "end": 187.789,
+      "duration": 2.229,
+      "text": "multiplication so if you want to build a"
+    },
+    {
+      "index": 41,
+      "start": 187.799,
+      "end": 190.71,
+      "duration": 2.911,
+      "text": "subtractor for"
+    },
+    {
+      "index": 42,
+      "start": 194.19,
+      "end": 194.2,
+      "duration": 0.01,
+      "text": "example you have the the half subtractor"
+    },
+    {
+      "index": 43,
+      "start": 194.2,
+      "end": 196.589,
+      "duration": 2.389,
+      "text": "and full subtractor if you only going to"
+    },
+    {
+      "index": 44,
+      "start": 196.599,
+      "end": 199.589,
+      "duration": 2.99,
+      "text": "subtract two bits without considering"
+    },
+    {
+      "index": 45,
+      "start": 199.599,
+      "end": 201.11,
+      "duration": 1.511,
+      "text": "the previous"
+    },
+    {
+      "index": 46,
+      "start": 201.12,
+      "end": 204.47,
+      "duration": 3.35,
+      "text": "bit we have a half subtractor you want"
+    },
+    {
+      "index": 47,
+      "start": 204.48,
+      "end": 207.589,
+      "duration": 3.109,
+      "text": "to do a subtraction the of a"
+    },
+    {
+      "index": 48,
+      "start": 207.599,
+      "end": 210.91,
+      "duration": 3.311,
+      "text": "bit series of bits"
+    },
+    {
+      "index": 49,
+      "start": 210.92,
+      "end": 212.19,
+      "duration": 1.27,
+      "text": "then when we are considering subtraction"
+    },
+    {
+      "index": 50,
+      "start": 212.2,
+      "end": 213.789,
+      "duration": 1.589,
+      "text": "of the previous bit we'll have to see"
+    },
+    {
+      "index": 51,
+      "start": 213.799,
+      "end": 215.71,
+      "duration": 1.911,
+      "text": "whether one has already been borrowed"
+    },
+    {
+      "index": 52,
+      "start": 215.72,
+      "end": 217.75,
+      "duration": 2.03,
+      "text": "from that location to the previous"
+    },
+    {
+      "index": 53,
+      "start": 217.76,
+      "end": 221.11,
+      "duration": 3.35,
+      "text": "location so just as a carry"
+    },
+    {
+      "index": 54,
+      "start": 221.12,
+      "end": 223.949,
+      "duration": 2.829,
+      "text": "in in the case of adders we'll have a"
+    },
+    {
+      "index": 55,
+      "start": 223.959,
+      "end": 226.309,
+      "duration": 2.35,
+      "text": "borrow in in the case of"
+    },
+    {
+      "index": 56,
+      "start": 226.319,
+      "end": 228.35,
+      "duration": 2.031,
+      "text": "subtractor and similarly we'll have a"
+    },
+    {
+      "index": 57,
+      "start": 228.36,
+      "end": 229.39,
+      "duration": 1.03,
+      "text": "borrow"
+    },
+    {
+      "index": 58,
+      "start": 229.4,
+      "end": 233.55,
+      "duration": 4.15,
+      "text": "out so we can have like"
+    },
+    {
+      "index": 59,
+      "start": 233.56,
+      "end": 238.19,
+      "duration": 4.63,
+      "text": "adders two inputs and carry in and some"
+    },
+    {
+      "index": 60,
+      "start": 238.2,
+      "end": 240.75,
+      "duration": 2.55,
+      "text": "and carry out as outputs can also have"
+    },
+    {
+      "index": 61,
+      "start": 240.76,
+      "end": 243.75,
+      "duration": 2.99,
+      "text": "for subtractors two inputs and a borrow"
+    },
+    {
+      "index": 62,
+      "start": 243.76,
+      "end": 249.229,
+      "duration": 5.469,
+      "text": "in and a difference between the two bits"
+    },
+    {
+      "index": 63,
+      "start": 249.239,
+      "end": 253.27,
+      "duration": 4.031,
+      "text": "and bar out so you can draw similar"
+    },
+    {
+      "index": 64,
+      "start": 253.28,
+      "end": 256.27,
+      "duration": 2.99,
+      "text": "tooth tables and similar um circuit"
+    },
+    {
+      "index": 65,
+      "start": 256.28,
+      "end": 258.39,
+      "duration": 2.11,
+      "text": "implementation using caram"
+    },
+    {
+      "index": 66,
+      "start": 258.4,
+      "end": 260.55,
+      "duration": 2.15,
+      "text": "Maps we will not get into that because"
+    },
+    {
+      "index": 67,
+      "start": 260.56,
+      "end": 264.189,
+      "duration": 3.629,
+      "text": "we already seen enough of this uh large"
+    },
+    {
+      "index": 68,
+      "start": 264.199,
+      "end": 266.629,
+      "duration": 2.43,
+      "text": "number of this uh Coram map techniques"
+    },
+    {
+      "index": 69,
+      "start": 266.639,
+      "end": 268.35,
+      "duration": 1.711,
+      "text": "or tooth table"
+    },
+    {
+      "index": 70,
+      "start": 268.36,
+      "end": 270.07,
+      "duration": 1.71,
+      "text": "techniques doesn't matter matter what"
+    },
+    {
+      "index": 71,
+      "start": 270.08,
+      "end": 271.629,
+      "duration": 1.549,
+      "text": "the function is once you define a truth"
+    },
+    {
+      "index": 72,
+      "start": 271.639,
+      "end": 275.749,
+      "duration": 4.11,
+      "text": "table once you define the K map"
+    },
+    {
+      "index": 73,
+      "start": 275.759,
+      "end": 277.31,
+      "duration": 1.551,
+      "text": "implementation is straightforward so"
+    },
+    {
+      "index": 74,
+      "start": 277.32,
+      "end": 278.95,
+      "duration": 1.63,
+      "text": "there's no point in going on talking"
+    },
+    {
+      "index": 75,
+      "start": 278.96,
+      "end": 280.83,
+      "duration": 1.87,
+      "text": "about different types of circuits of"
+    },
+    {
+      "index": 76,
+      "start": 280.84,
+      "end": 284.189,
+      "duration": 3.349,
+      "text": "course more number of circuits you"
+    },
+    {
+      "index": 77,
+      "start": 284.199,
+      "end": 286.629,
+      "duration": 2.43,
+      "text": "design you get more"
+    },
+    {
+      "index": 78,
+      "start": 286.639,
+      "end": 288.71,
+      "duration": 2.071,
+      "text": "practice but there's another scheme of"
+    },
+    {
+      "index": 79,
+      "start": 288.72,
+      "end": 292.189,
+      "duration": 3.469,
+      "text": "subtraction called complement"
+    },
+    {
+      "index": 80,
+      "start": 292.199,
+      "end": 294.67,
+      "duration": 2.471,
+      "text": "subtraction that is"
+    },
+    {
+      "index": 81,
+      "start": 294.68,
+      "end": 297.469,
+      "duration": 2.789,
+      "text": "because"
+    },
+    {
+      "index": 82,
+      "start": 297.479,
+      "end": 300.95,
+      "duration": 3.471,
+      "text": "the hardware in your computer you want"
+    },
+    {
+      "index": 83,
+      "start": 300.96,
+      "end": 303.67,
+      "duration": 2.71,
+      "text": "to have a hardware arithmetic logic unit"
+    },
+    {
+      "index": 84,
+      "start": 303.68,
+      "end": 306.27,
+      "duration": 2.59,
+      "text": "which is just the arithmetics and logic"
+    },
+    {
+      "index": 85,
+      "start": 306.28,
+      "end": 308.749,
+      "duration": 2.469,
+      "text": "functions like to have that as compact"
+    },
+    {
+      "index": 86,
+      "start": 308.759,
+      "end": 311.11,
+      "duration": 2.351,
+      "text": "as possible you don't want to have a add"
+    },
+    {
+      "index": 87,
+      "start": 311.12,
+      "end": 314.35,
+      "duration": 3.23,
+      "text": "a unit and subtract"
+    },
+    {
+      "index": 88,
+      "start": 314.36,
+      "end": 316.749,
+      "duration": 2.389,
+      "text": "unit like that so if it is possible to"
+    },
+    {
+      "index": 89,
+      "start": 316.759,
+      "end": 318.189,
+      "duration": 1.43,
+      "text": "combine more than one operation using a"
+    },
+    {
+      "index": 90,
+      "start": 318.199,
+      "end": 319.469,
+      "duration": 1.27,
+      "text": "hardware"
+    },
+    {
+      "index": 91,
+      "start": 319.479,
+      "end": 325.59,
+      "duration": 6.111,
+      "text": "unit that is a sort of a uh desirable"
+    },
+    {
+      "index": 92,
+      "start": 325.6,
+      "end": 328.23,
+      "duration": 2.63,
+      "text": "feature in Hardware"
+    },
+    {
+      "index": 93,
+      "start": 328.24,
+      "end": 331.35,
+      "duration": 3.11,
+      "text": "design so for this purpose we will talk"
+    },
+    {
+      "index": 94,
+      "start": 331.36,
+      "end": 334.23,
+      "duration": 2.87,
+      "text": "of now what is known as subtraction by"
+    },
+    {
+      "index": 95,
+      "start": 334.24,
+      "end": 335.39,
+      "duration": 1.15,
+      "text": "complement"
+    },
+    {
+      "index": 96,
+      "start": 335.4,
+      "end": 356.11,
+      "duration": 20.71,
+      "text": "numbers subtraction using complement"
+    },
+    {
+      "index": 97,
+      "start": 360.07,
+      "end": 360.08,
+      "duration": 0.01,
+      "text": "numbers what is a complement of a number"
+    },
+    {
+      "index": 98,
+      "start": 360.08,
+      "end": 361.95,
+      "duration": 1.87,
+      "text": "depends on the number system in a"
+    },
+    {
+      "index": 99,
+      "start": 361.96,
+      "end": 364.55,
+      "duration": 2.59,
+      "text": "decimal system see in any number you"
+    },
+    {
+      "index": 100,
+      "start": 364.56,
+      "end": 369.11,
+      "duration": 4.55,
+      "text": "have a base Decimal System the Bas is 10"
+    },
+    {
+      "index": 101,
+      "start": 369.12,
+      "end": 371.629,
+      "duration": 2.509,
+      "text": "B system the Bas is to they also call it"
+    },
+    {
+      "index": 102,
+      "start": 371.639,
+      "end": 374.029,
+      "duration": 2.39,
+      "text": "radics base are"
+    },
+    {
+      "index": 103,
+      "start": 374.039,
+      "end": 375.55,
+      "duration": 1.511,
+      "text": "radics"
+    },
+    {
+      "index": 104,
+      "start": 375.56,
+      "end": 379.39,
+      "duration": 3.83,
+      "text": "so depending on the number of digits or"
+    },
+    {
+      "index": 105,
+      "start": 379.4,
+      "end": 381.87,
+      "duration": 2.47,
+      "text": "the positions or the bits you define the"
+    },
+    {
+      "index": 106,
+      "start": 381.88,
+      "end": 384.469,
+      "duration": 2.589,
+      "text": "complement as the highest possible"
+    },
+    {
+      "index": 107,
+      "start": 384.479,
+      "end": 388.27,
+      "duration": 3.791,
+      "text": "number you can"
+    },
+    {
+      "index": 108,
+      "start": 391.23,
+      "end": 391.24,
+      "duration": 0.01,
+      "text": "represent minus the number so let us say"
+    },
+    {
+      "index": 109,
+      "start": 391.24,
+      "end": 394.83,
+      "duration": 3.59,
+      "text": "in the case of any general radics r"
+    },
+    {
+      "index": 110,
+      "start": 394.84,
+      "end": 397.51,
+      "duration": 2.67,
+      "text": "radics"
+    },
+    {
+      "index": 111,
+      "start": 407.67,
+      "end": 407.68,
+      "duration": 0.01,
+      "text": "complement of a n bit number n digit"
+    },
+    {
+      "index": 112,
+      "start": 407.68,
+      "end": 411.029,
+      "duration": 3.349,
+      "text": "number or n digit is a decimal bit for"
+    },
+    {
+      "index": 113,
+      "start": 411.039,
+      "end": 412.67,
+      "duration": 1.631,
+      "text": "binary so since it can be R can be"
+    },
+    {
+      "index": 114,
+      "start": 412.68,
+      "end": 414.309,
+      "duration": 1.629,
+      "text": "anything I don't know whether it's"
+    },
+    {
+      "index": 115,
+      "start": 414.319,
+      "end": 415.79,
+      "duration": 1.471,
+      "text": "called it digit or bit I can say n"
+    },
+    {
+      "index": 116,
+      "start": 415.8,
+      "end": 417.67,
+      "duration": 1.87,
+      "text": "positions"
+    },
+    {
+      "index": 117,
+      "start": 417.68,
+      "end": 421.629,
+      "duration": 3.949,
+      "text": "whatever number"
+    },
+    {
+      "index": 118,
+      "start": 423.309,
+      "end": 423.319,
+      "duration": 0.01,
+      "text": "is R power"
+    },
+    {
+      "index": 119,
+      "start": 423.319,
+      "end": 426.629,
+      "duration": 3.31,
+      "text": "n minus the"
+    },
+    {
+      "index": 120,
+      "start": 426.639,
+      "end": 429.55,
+      "duration": 2.911,
+      "text": "number number"
+    },
+    {
+      "index": 121,
+      "start": 429.56,
+      "end": 432.029,
+      "duration": 2.469,
+      "text": "n n digit number"
+    },
+    {
+      "index": 122,
+      "start": 432.039,
+      "end": 436.67,
+      "duration": 4.631,
+      "text": "n n is the number I think I used a"
+    },
+    {
+      "index": 123,
+      "start": 436.68,
+      "end": 439.11,
+      "duration": 2.43,
+      "text": "wrong variable that's okay one is small"
+    },
+    {
+      "index": 124,
+      "start": 439.12,
+      "end": 441.27,
+      "duration": 2.15,
+      "text": "variable small n other is a capital N is"
+    },
+    {
+      "index": 125,
+      "start": 441.28,
+      "end": 445.27,
+      "duration": 3.99,
+      "text": "the number n is the number of Digit"
+    },
+    {
+      "index": 126,
+      "start": 445.28,
+      "end": 447.99,
+      "duration": 2.71,
+      "text": "you what I mean by this is if if for"
+    },
+    {
+      "index": 127,
+      "start": 448.0,
+      "end": 458.35,
+      "duration": 10.35,
+      "text": "example let us say Ral 10 decimal"
+    },
+    {
+      "index": 128,
+      "start": 467.51,
+      "end": 467.52,
+      "duration": 0.01,
+      "text": "4 there will be four"
+    },
+    {
+      "index": 129,
+      "start": 467.52,
+      "end": 470.99,
+      "duration": 3.47,
+      "text": "digits so if I represent a number n with"
+    },
+    {
+      "index": 130,
+      "start": 471.0,
+      "end": 473.149,
+      "duration": 2.149,
+      "text": "four"
+    },
+    {
+      "index": 131,
+      "start": 473.159,
+      "end": 474.67,
+      "duration": 1.511,
+      "text": "digits"
+    },
+    {
+      "index": 132,
+      "start": 474.68,
+      "end": 478.43,
+      "duration": 3.75,
+      "text": "the 10 complement"
+    },
+    {
+      "index": 133,
+      "start": 478.44,
+      "end": 481.12,
+      "duration": 2.68,
+      "text": "of"
+    },
+    {
+      "index": 134,
+      "start": 481.13,
+      "end": 483.51,
+      "duration": 2.38,
+      "text": "[Music]"
+    },
+    {
+      "index": 135,
+      "start": 483.52,
+      "end": 487.27,
+      "duration": 3.75,
+      "text": "n which is a four bit four digigit"
+    },
+    {
+      "index": 136,
+      "start": 487.28,
+      "end": 488.83,
+      "duration": 1.55,
+      "text": "decimal"
+    },
+    {
+      "index": 137,
+      "start": 488.84,
+      "end": 492.83,
+      "duration": 3.99,
+      "text": "number four digit decimal number trans"
+    },
+    {
+      "index": 138,
+      "start": 492.84,
+      "end": 495.909,
+      "duration": 3.069,
+      "text": "complement of n"
+    },
+    {
+      "index": 139,
+      "start": 498.23,
+      "end": 498.24,
+      "duration": 0.01,
+      "text": "is 10^"
+    },
+    {
+      "index": 140,
+      "start": 498.24,
+      "end": 502.99,
+      "duration": 4.75,
+      "text": "4 minus number"
+    },
+    {
+      "index": 141,
+      "start": 521.99,
+      "end": 522.0,
+      "duration": 0.01,
+      "text": "because there are four digits so Decimal"
+    },
+    {
+      "index": 142,
+      "start": 522.0,
+      "end": 528.61,
+      "duration": 6.61,
+      "text": "System the T complement of this"
+    },
+    {
+      "index": 143,
+      "start": 541.03,
+      "end": 541.04,
+      "duration": 0.01,
+      "text": "right 10^ 4 is 10,000 is it"
+    },
+    {
+      "index": 144,
+      "start": 541.04,
+      "end": 546.11,
+      "duration": 5.07,
+      "text": "right subtract 1 2 3 4 from"
+    },
+    {
+      "index": 145,
+      "start": 550.75,
+      "end": 550.76,
+      "duration": 0.01,
+      "text": "this how much this"
+    },
+    {
+      "index": 146,
+      "start": 550.76,
+      "end": 553.71,
+      "duration": 2.95,
+      "text": "six six is it six"
+    },
+    {
+      "index": 147,
+      "start": 553.72,
+      "end": 555.99,
+      "duration": 2.27,
+      "text": "again is it"
+    },
+    {
+      "index": 148,
+      "start": 556.0,
+      "end": 558.79,
+      "duration": 2.79,
+      "text": "7 8 is that"
+    },
+    {
+      "index": 149,
+      "start": 558.8,
+      "end": 562.389,
+      "duration": 3.589,
+      "text": "right"
+    },
+    {
+      "index": 150,
+      "start": 572.63,
+      "end": 572.64,
+      "duration": 0.01,
+      "text": "number from the number which is"
+    },
+    {
+      "index": 151,
+      "start": 572.64,
+      "end": 575.71,
+      "duration": 3.07,
+      "text": "represented by the base to the power of"
+    },
+    {
+      "index": 152,
+      "start": 575.72,
+      "end": 577.269,
+      "duration": 1.549,
+      "text": "the number of"
+    },
+    {
+      "index": 153,
+      "start": 577.279,
+      "end": 579.829,
+      "duration": 2.55,
+      "text": "digits base of the radics to the power"
+    },
+    {
+      "index": 154,
+      "start": 579.839,
+      "end": 582.829,
+      "duration": 2.99,
+      "text": "of the number of digits is the number"
+    },
+    {
+      "index": 155,
+      "start": 582.839,
+      "end": 584.11,
+      "duration": 1.271,
+      "text": "from which you should subtract the given"
+    },
+    {
+      "index": 156,
+      "start": 584.12,
+      "end": 586.23,
+      "duration": 2.11,
+      "text": "number then you get the complement of"
+    },
+    {
+      "index": 157,
+      "start": 586.24,
+      "end": 589.269,
+      "duration": 3.029,
+      "text": "that number in that"
+    },
+    {
+      "index": 158,
+      "start": 591.79,
+      "end": 591.8,
+      "duration": 0.01,
+      "text": "system there's also"
+    },
+    {
+      "index": 159,
+      "start": 591.8,
+      "end": 595.389,
+      "duration": 3.589,
+      "text": "what you define Rus one's complement"
+    },
+    {
+      "index": 160,
+      "start": 595.399,
+      "end": 599.99,
+      "duration": 4.591,
+      "text": "same R radic Rus one complement is"
+    },
+    {
+      "index": 161,
+      "start": 600.0,
+      "end": 604.269,
+      "duration": 4.269,
+      "text": "defined"
+    },
+    {
+      "index": 162,
+      "start": 606.67,
+      "end": 606.68,
+      "duration": 0.01,
+      "text": "as R's"
+    },
+    {
+      "index": 163,
+      "start": 606.68,
+      "end": 613.11,
+      "duration": 6.43,
+      "text": "complement minus"
+    },
+    {
+      "index": 164,
+      "start": 615.269,
+      "end": 615.279,
+      "duration": 0.01,
+      "text": "one or if you want to put it the other"
+    },
+    {
+      "index": 165,
+      "start": 615.279,
+      "end": 617.389,
+      "duration": 2.11,
+      "text": "way it"
+    },
+    {
+      "index": 166,
+      "start": 617.399,
+      "end": 620.509,
+      "duration": 3.11,
+      "text": "is of"
+    },
+    {
+      "index": 167,
+      "start": 620.519,
+      "end": 624.43,
+      "duration": 3.911,
+      "text": "n for"
+    },
+    {
+      "index": 168,
+      "start": 628.31,
+      "end": 628.32,
+      "duration": 0.01,
+      "text": "n Rus 1's complement"
+    },
+    {
+      "index": 169,
+      "start": 628.32,
+      "end": 629.949,
+      "duration": 1.629,
+      "text": "is"
+    },
+    {
+      "index": 170,
+      "start": 629.959,
+      "end": 634.35,
+      "duration": 4.391,
+      "text": "with n"
+    },
+    {
+      "index": 171,
+      "start": 637.43,
+      "end": 637.44,
+      "duration": 0.01,
+      "text": "Bits for the number n with n digits"
+    },
+    {
+      "index": 172,
+      "start": 637.44,
+      "end": 639.55,
+      "duration": 2.11,
+      "text": "again I could have probably used P"
+    },
+    {
+      "index": 173,
+      "start": 639.56,
+      "end": 641.11,
+      "duration": 1.55,
+      "text": "digits or something"
+    },
+    {
+      "index": 174,
+      "start": 641.12,
+      "end": 644.069,
+      "duration": 2.949,
+      "text": "but choice is n but doesn't matter n is"
+    },
+    {
+      "index": 175,
+      "start": 644.079,
+      "end": 646.15,
+      "duration": 2.071,
+      "text": "the small n is the number of digits"
+    },
+    {
+      "index": 176,
+      "start": 646.16,
+      "end": 648.829,
+      "duration": 2.669,
+      "text": "capital N is a number I don't think"
+    },
+    {
+      "index": 177,
+      "start": 648.839,
+      "end": 650.55,
+      "duration": 1.711,
+      "text": "there's any confusion in"
+    },
+    {
+      "index": 178,
+      "start": 650.56,
+      "end": 658.23,
+      "duration": 7.67,
+      "text": "that Rus one's complement"
+    },
+    {
+      "index": 179,
+      "start": 669.87,
+      "end": 669.88,
+      "duration": 0.01,
+      "text": "as R power n since I have to subtract"
+    },
+    {
+      "index": 180,
+      "start": 669.88,
+      "end": 671.91,
+      "duration": 2.03,
+      "text": "one from"
+    },
+    {
+      "index": 181,
+      "start": 671.92,
+      "end": 676.15,
+      "duration": 4.23,
+      "text": "it r - n -"
+    },
+    {
+      "index": 182,
+      "start": 679.47,
+      "end": 679.48,
+      "duration": 0.01,
+      "text": "1 from this I"
+    },
+    {
+      "index": 183,
+      "start": 679.48,
+      "end": 687.75,
+      "duration": 8.27,
+      "text": "subtract"
+    },
+    {
+      "index": 184,
+      "start": 702.949,
+      "end": 702.959,
+      "duration": 0.01,
+      "text": "4 R is equal"
+    },
+    {
+      "index": 185,
+      "start": 702.959,
+      "end": 707.31,
+      "duration": 4.351,
+      "text": "10 this case r is equal"
+    },
+    {
+      "index": 186,
+      "start": 710.91,
+      "end": 710.92,
+      "duration": 0.01,
+      "text": "10 and N is equal 4 again small small n"
+    },
+    {
+      "index": 187,
+      "start": 710.92,
+      "end": 714.269,
+      "duration": 3.349,
+      "text": "is four I'll use same n is equal 4 R"
+    },
+    {
+      "index": 188,
+      "start": 714.279,
+      "end": 717.75,
+      "duration": 3.471,
+      "text": "isal 10 capital N is 1 2 3 4 but instead"
+    },
+    {
+      "index": 189,
+      "start": 717.76,
+      "end": 719.47,
+      "duration": 1.71,
+      "text": "of R's compliment or 10 compl compliment"
+    },
+    {
+      "index": 190,
+      "start": 719.48,
+      "end": 721.509,
+      "duration": 2.029,
+      "text": "I will now Define Rus 1's compliment"
+    },
+    {
+      "index": 191,
+      "start": 721.519,
+      "end": 725.55,
+      "duration": 4.031,
+      "text": "which is 9's compliment Rus 1's"
+    },
+    {
+      "index": 192,
+      "start": 725.56,
+      "end": 733.629,
+      "duration": 8.069,
+      "text": "compliment is 9 so 9's compliment"
+    },
+    {
+      "index": 193,
+      "start": 735.79,
+      "end": 735.8,
+      "duration": 0.01,
+      "text": "is this"
+    },
+    {
+      "index": 194,
+      "start": 735.8,
+      "end": 740.71,
+      "duration": 4.91,
+      "text": "is r r^ n which is 10^ 4 is 10,000 but I"
+    },
+    {
+      "index": 195,
+      "start": 740.72,
+      "end": 744.47,
+      "duration": 3.75,
+      "text": "have to subtract one from it so it is"
+    },
+    {
+      "index": 196,
+      "start": 744.48,
+      "end": 748.15,
+      "duration": 3.67,
+      "text": "99,999 so it is"
+    },
+    {
+      "index": 197,
+      "start": 751.069,
+      "end": 751.079,
+      "duration": 0.01,
+      "text": "99,999 - 1 2 3"
+    },
+    {
+      "index": 198,
+      "start": 751.079,
+      "end": 760.43,
+      "duration": 9.351,
+      "text": "4 which is now 5 6 7"
+    },
+    {
+      "index": 199,
+      "start": 764.75,
+      "end": 764.76,
+      "duration": 0.01,
+      "text": "8 you look at this number 86 8766 is"
+    },
+    {
+      "index": 200,
+      "start": 764.76,
+      "end": 767.629,
+      "duration": 2.869,
+      "text": "8765 there's a one difference which is"
+    },
+    {
+      "index": 201,
+      "start": 767.639,
+      "end": 770.389,
+      "duration": 2.75,
+      "text": "that r- nus 1 since I subtracted from R"
+    },
+    {
+      "index": 202,
+      "start": 770.399,
+      "end": 774.069,
+      "duration": 3.67,
+      "text": "power n minus one for r- 1's complement"
+    },
+    {
+      "index": 203,
+      "start": 774.079,
+      "end": 778.75,
+      "duration": 4.671,
+      "text": "I subtracted the given number n from R"
+    },
+    {
+      "index": 204,
+      "start": 778.76,
+      "end": 780.79,
+      "duration": 2.03,
+      "text": "power n n minus"
+    },
+    {
+      "index": 205,
+      "start": 780.8,
+      "end": 783.43,
+      "duration": 2.63,
+      "text": "one for R's complement I subtracted the"
+    },
+    {
+      "index": 206,
+      "start": 783.44,
+      "end": 787.23,
+      "duration": 3.79,
+      "text": "given number from r^ n so that extra one"
+    },
+    {
+      "index": 207,
+      "start": 787.24,
+      "end": 791.59,
+      "duration": 4.35,
+      "text": "from in my total from which I subtracted"
+    },
+    {
+      "index": 208,
+      "start": 791.6,
+      "end": 794.87,
+      "duration": 3.27,
+      "text": "this number that one is showing up here"
+    },
+    {
+      "index": 209,
+      "start": 794.88,
+      "end": 799.31,
+      "duration": 4.43,
+      "text": "showing up here as one less than the R's"
+    },
+    {
+      "index": 210,
+      "start": 799.32,
+      "end": 801.55,
+      "duration": 2.23,
+      "text": "complement so for n's compliment of a"
+    },
+    {
+      "index": 211,
+      "start": 801.56,
+      "end": 802.67,
+      "duration": 1.11,
+      "text": "given"
+    },
+    {
+      "index": 212,
+      "start": 802.68,
+      "end": 805.23,
+      "duration": 2.55,
+      "text": "number why is it convenient because n's"
+    },
+    {
+      "index": 213,
+      "start": 805.24,
+      "end": 806.629,
+      "duration": 1.389,
+      "text": "compliment nothing but a complement of"
+    },
+    {
+      "index": 214,
+      "start": 806.639,
+      "end": 808.629,
+      "duration": 1.99,
+      "text": "each digit here I had to make a"
+    },
+    {
+      "index": 215,
+      "start": 808.639,
+      "end": 811.47,
+      "duration": 2.831,
+      "text": "subtraction of 10 - 4 so it's borrow"
+    },
+    {
+      "index": 216,
+      "start": 811.48,
+      "end": 814.87,
+      "duration": 3.39,
+      "text": "borrow is involved 10 - 4 is 6 so since"
+    },
+    {
+      "index": 217,
+      "start": 814.88,
+      "end": 817.11,
+      "duration": 2.23,
+      "text": "it is 10 I had to borrow one from"
+    },
+    {
+      "index": 218,
+      "start": 817.12,
+      "end": 819.55,
+      "duration": 2.43,
+      "text": "here so when I borrowed one from here"
+    },
+    {
+      "index": 219,
+      "start": 819.56,
+      "end": 822.71,
+      "duration": 3.15,
+      "text": "this became 9 9 - 3 is 6 and since this"
+    },
+    {
+      "index": 220,
+      "start": 822.72,
+      "end": 825.069,
+      "duration": 2.349,
+      "text": "had to be borrowed so this borrow"
+    },
+    {
+      "index": 221,
+      "start": 825.079,
+      "end": 827.43,
+      "duration": 2.351,
+      "text": "traveled through here there's no such"
+    },
+    {
+      "index": 222,
+      "start": 827.44,
+      "end": 829.949,
+      "duration": 2.509,
+      "text": "borrow condition here each digit because"
+    },
+    {
+      "index": 223,
+      "start": 829.959,
+      "end": 832.11,
+      "duration": 2.151,
+      "text": "maximum digit I can have here is a"
+    },
+    {
+      "index": 224,
+      "start": 832.12,
+      "end": 834.71,
+      "duration": 2.59,
+      "text": "nine the maximum value of this any of"
+    },
+    {
+      "index": 225,
+      "start": 834.72,
+      "end": 836.99,
+      "duration": 2.27,
+      "text": "these digits is n and this this is"
+    },
+    {
+      "index": 226,
+      "start": 837.0,
+      "end": 840.23,
+      "duration": 3.23,
+      "text": "9999 I'm going to subtract any number"
+    },
+    {
+      "index": 227,
+      "start": 840.24,
+      "end": 841.749,
+      "duration": 1.509,
+      "text": "each of the digits cannot be more than"
+    },
+    {
+      "index": 228,
+      "start": 841.759,
+      "end": 844.03,
+      "duration": 2.271,
+      "text": "nine so I all I have to do is a simple"
+    },
+    {
+      "index": 229,
+      "start": 844.04,
+      "end": 845.749,
+      "duration": 1.709,
+      "text": "subtraction digit by"
+    },
+    {
+      "index": 230,
+      "start": 845.759,
+      "end": 849.23,
+      "duration": 3.471,
+      "text": "digit so 9 Rus one's complement or n's"
+    },
+    {
+      "index": 231,
+      "start": 849.24,
+      "end": 852.069,
+      "duration": 2.829,
+      "text": "complement in this case is easier to"
+    },
+    {
+      "index": 232,
+      "start": 852.079,
+      "end": 857.55,
+      "duration": 5.471,
+      "text": "perform than 10's compliment which is"
+    },
+    {
+      "index": 233,
+      "start": 857.56,
+      "end": 859.99,
+      "duration": 2.43,
+      "text": "some subtraction involves in borrow so"
+    },
+    {
+      "index": 234,
+      "start": 860.0,
+      "end": 862.31,
+      "duration": 2.31,
+      "text": "if you want to calculate T complement I"
+    },
+    {
+      "index": 235,
+      "start": 862.32,
+      "end": 865.11,
+      "duration": 2.79,
+      "text": "can always find N's complement and add"
+    },
+    {
+      "index": 236,
+      "start": 865.12,
+      "end": 868.03,
+      "duration": 2.91,
+      "text": "one to"
+    },
+    {
+      "index": 237,
+      "start": 887.949,
+      "end": 887.959,
+      "duration": 0.01,
+      "text": "number is n complement of that number"
+    },
+    {
+      "index": 238,
+      "start": 887.959,
+      "end": 893.55,
+      "duration": 5.591,
+      "text": "plus"
+    },
+    {
+      "index": 239,
+      "start": 896.829,
+      "end": 896.839,
+      "duration": 0.01,
+      "text": "one what do we say all this we'll see in"
+    },
+    {
+      "index": 240,
+      "start": 896.839,
+      "end": 898.03,
+      "duration": 1.191,
+      "text": "a"
+    },
+    {
+      "index": 241,
+      "start": 898.04,
+      "end": 899.71,
+      "duration": 1.67,
+      "text": "minute"
+    },
+    {
+      "index": 242,
+      "start": 899.72,
+      "end": 901.509,
+      "duration": 1.789,
+      "text": "before we go to the reason for doing"
+    },
+    {
+      "index": 243,
+      "start": 901.519,
+      "end": 903.629,
+      "duration": 2.11,
+      "text": "this subtraction can be done"
+    },
+    {
+      "index": 244,
+      "start": 903.639,
+      "end": 906.11,
+      "duration": 2.471,
+      "text": "using compl system there must be some"
+    },
+    {
+      "index": 245,
+      "start": 906.12,
+      "end": 908.509,
+      "duration": 2.389,
+      "text": "obvious Advantage we talked about"
+    },
+    {
+      "index": 246,
+      "start": 908.519,
+      "end": 910.389,
+      "duration": 1.87,
+      "text": "Hardware we talked about arithmetic"
+    },
+    {
+      "index": 247,
+      "start": 910.399,
+      "end": 914.47,
+      "duration": 4.071,
+      "text": "units which need to do add subtract"
+    },
+    {
+      "index": 248,
+      "start": 914.48,
+      "end": 916.629,
+      "duration": 2.149,
+      "text": "multiply divide and everything and I"
+    },
+    {
+      "index": 249,
+      "start": 916.639,
+      "end": 918.67,
+      "duration": 2.031,
+      "text": "want to reduce the hardware or use a"
+    },
+    {
+      "index": 250,
+      "start": 918.68,
+      "end": 920.43,
+      "duration": 1.75,
+      "text": "common hardware for doing more than one"
+    },
+    {
+      "index": 251,
+      "start": 920.44,
+      "end": 922.67,
+      "duration": 2.23,
+      "text": "function in that context I have talking"
+    },
+    {
+      "index": 252,
+      "start": 922.68,
+      "end": 925.069,
+      "duration": 2.389,
+      "text": "about compliment numbers which"
+    },
+    {
+      "index": 253,
+      "start": 925.079,
+      "end": 927.389,
+      "duration": 2.31,
+      "text": "means subtraction using compliment"
+    },
+    {
+      "index": 254,
+      "start": 927.399,
+      "end": 929.03,
+      "duration": 1.631,
+      "text": "numbers can be done using the same"
+    },
+    {
+      "index": 255,
+      "start": 929.04,
+      "end": 932.35,
+      "duration": 3.31,
+      "text": "Hardware that we use for addition that"
+    },
+    {
+      "index": 256,
+      "start": 932.36,
+      "end": 933.59,
+      "duration": 1.23,
+      "text": "is why I'm bringing this concept I'll"
+    },
+    {
+      "index": 257,
+      "start": 933.6,
+      "end": 936.43,
+      "duration": 2.83,
+      "text": "will tell you how before that we have to"
+    },
+    {
+      "index": 258,
+      "start": 936.44,
+      "end": 938.15,
+      "duration": 1.71,
+      "text": "switch to Binary because we'll be doing"
+    },
+    {
+      "index": 259,
+      "start": 938.16,
+      "end": 939.069,
+      "duration": 0.909,
+      "text": "binary"
+    },
+    {
+      "index": 260,
+      "start": 939.079,
+      "end": 942.189,
+      "duration": 3.11,
+      "text": "arithmetic in our digital course logic"
+    },
+    {
+      "index": 261,
+      "start": 942.199,
+      "end": 943.67,
+      "duration": 1.471,
+      "text": "design or"
+    },
+    {
+      "index": 262,
+      "start": 943.68,
+      "end": 947.23,
+      "duration": 3.55,
+      "text": "computer design course so this was to"
+    },
+    {
+      "index": 263,
+      "start": 947.24,
+      "end": 948.629,
+      "duration": 1.389,
+      "text": "explain to you because since we familiar"
+    },
+    {
+      "index": 264,
+      "start": 948.639,
+      "end": 951.43,
+      "duration": 2.791,
+      "text": "with decimal numbers I introduced this"
+    },
+    {
+      "index": 265,
+      "start": 951.44,
+      "end": 953.23,
+      "duration": 1.79,
+      "text": "concept of complimenting of numbers"
+    },
+    {
+      "index": 266,
+      "start": 953.24,
+      "end": 955.55,
+      "duration": 2.31,
+      "text": "using decimal concept but in reality we"
+    },
+    {
+      "index": 267,
+      "start": 955.56,
+      "end": 958.99,
+      "duration": 3.43,
+      "text": "are interested in binary numbers so"
+    },
+    {
+      "index": 268,
+      "start": 959.0,
+      "end": 968.829,
+      "duration": 9.829,
+      "text": "binary numbers you have only R is equal"
+    },
+    {
+      "index": 269,
+      "start": 971.189,
+      "end": 971.199,
+      "duration": 0.01,
+      "text": "2 that means I have two's complement and"
+    },
+    {
+      "index": 270,
+      "start": 971.199,
+      "end": 972.829,
+      "duration": 1.63,
+      "text": "one's compliment R's complement Rus"
+    },
+    {
+      "index": 271,
+      "start": 972.839,
+      "end": 975.23,
+      "duration": 2.391,
+      "text": "one's compliment corresponds to two's"
+    },
+    {
+      "index": 272,
+      "start": 975.24,
+      "end": 978.35,
+      "duration": 3.11,
+      "text": "complement 2 2 minus 1 which is one's"
+    },
+    {
+      "index": 273,
+      "start": 978.36,
+      "end": 983.03,
+      "duration": 4.67,
+      "text": "complement so again R power n number of"
+    },
+    {
+      "index": 274,
+      "start": 983.04,
+      "end": 986.43,
+      "duration": 3.39,
+      "text": "bits minus the given number n in the"
+    },
+    {
+      "index": 275,
+      "start": 986.44,
+      "end": 989.91,
+      "duration": 3.47,
+      "text": "case of two's complement or power n"
+    },
+    {
+      "index": 276,
+      "start": 989.92,
+      "end": 991.269,
+      "duration": 1.349,
+      "text": "minus"
+    },
+    {
+      "index": 277,
+      "start": 991.279,
+      "end": 994.99,
+      "duration": 3.711,
+      "text": "one minus the given number n is one's"
+    },
+    {
+      "index": 278,
+      "start": 995.0,
+      "end": 997.11,
+      "duration": 2.11,
+      "text": "complement so let us take a simple"
+    },
+    {
+      "index": 279,
+      "start": 997.12,
+      "end": 999.269,
+      "duration": 2.149,
+      "text": "example without going to all this"
+    },
+    {
+      "index": 280,
+      "start": 999.279,
+      "end": 1001.47,
+      "duration": 2.191,
+      "text": "detailed definitions which already done"
+    },
+    {
+      "index": 281,
+      "start": 1001.48,
+      "end": 1003.03,
+      "duration": 1.55,
+      "text": "in this case in the case of decimal"
+    },
+    {
+      "index": 282,
+      "start": 1003.04,
+      "end": 1006.11,
+      "duration": 3.07,
+      "text": "numbers we will take an example of n is"
+    },
+    {
+      "index": 283,
+      "start": 1006.12,
+      "end": 1009.509,
+      "duration": 3.389,
+      "text": "equal to 8 or even four make it simple"
+    },
+    {
+      "index": 284,
+      "start": 1009.519,
+      "end": 1011.79,
+      "duration": 2.271,
+      "text": "four that means a four bit"
+    },
+    {
+      "index": 285,
+      "start": 1011.8,
+      "end": 1014.629,
+      "duration": 2.829,
+      "text": "number in decimal you call it digits in"
+    },
+    {
+      "index": 286,
+      "start": 1014.639,
+      "end": 1017.829,
+      "duration": 3.19,
+      "text": "binary you call it"
+    },
+    {
+      "index": 287,
+      "start": 1019.629,
+      "end": 1019.639,
+      "duration": 0.01,
+      "text": "bits"
+    },
+    {
+      "index": 288,
+      "start": 1019.639,
+      "end": 1024.35,
+      "duration": 4.711,
+      "text": "I mean number n can be"
+    },
+    {
+      "index": 289,
+      "start": 1026.71,
+      "end": 1026.72,
+      "duration": 0.01,
+      "text": "anything uh it has a binary number so I"
+    },
+    {
+      "index": 290,
+      "start": 1026.72,
+      "end": 1028.789,
+      "duration": 2.069,
+      "text": "have to give it in binary in decimal I"
+    },
+    {
+      "index": 291,
+      "start": 1028.799,
+      "end": 1031.59,
+      "duration": 2.791,
+      "text": "took it as 1 2 3 4 in binary I need to"
+    },
+    {
+      "index": 292,
+      "start": 1031.6,
+      "end": 1033.909,
+      "duration": 2.309,
+      "text": "write it as a binary number let us say"
+    },
+    {
+      "index": 293,
+      "start": 1033.919,
+      "end": 1036.35,
+      "duration": 2.431,
+      "text": "it is 0 1 0"
+    },
+    {
+      "index": 294,
+      "start": 1036.36,
+      "end": 1040.87,
+      "duration": 4.51,
+      "text": "1 which is five really decimal 0 1 0 1"
+    },
+    {
+      "index": 295,
+      "start": 1040.88,
+      "end": 1043.829,
+      "duration": 2.949,
+      "text": "is decimal 5 correct so let me find"
+    },
+    {
+      "index": 296,
+      "start": 1043.839,
+      "end": 1045.829,
+      "duration": 1.99,
+      "text": "two's complement and one's complement"
+    },
+    {
+      "index": 297,
+      "start": 1045.839,
+      "end": 1049.909,
+      "duration": 4.07,
+      "text": "for this number so n is equal 4"
+    },
+    {
+      "index": 298,
+      "start": 1049.919,
+      "end": 1052.029,
+      "duration": 2.11,
+      "text": "capital N is 0 1"
+    },
+    {
+      "index": 299,
+      "start": 1052.039,
+      "end": 1058.43,
+      "duration": 6.391,
+      "text": "01 so two's complement"
+    },
+    {
+      "index": 300,
+      "start": 1060.99,
+      "end": 1061.0,
+      "duration": 0.01,
+      "text": "is or I will do it the other way now to"
+    },
+    {
+      "index": 301,
+      "start": 1061.0,
+      "end": 1064.87,
+      "duration": 3.87,
+      "text": "make it easy for you let me first find"
+    },
+    {
+      "index": 302,
+      "start": 1064.88,
+      "end": 1072.27,
+      "duration": 7.39,
+      "text": "one's"
+    },
+    {
+      "index": 303,
+      "start": 1075.59,
+      "end": 1075.6,
+      "duration": 0.01,
+      "text": "complement what did it say for Rus one's"
+    },
+    {
+      "index": 304,
+      "start": 1075.6,
+      "end": 1078.11,
+      "duration": 2.51,
+      "text": "complement I write the largest number"
+    },
+    {
+      "index": 305,
+      "start": 1078.12,
+      "end": 1079.63,
+      "duration": 1.51,
+      "text": "possible with"
+    },
+    {
+      "index": 306,
+      "start": 1079.64,
+      "end": 1082.669,
+      "duration": 3.029,
+      "text": "the given number of"
+    },
+    {
+      "index": 307,
+      "start": 1085.75,
+      "end": 1085.76,
+      "duration": 0.01,
+      "text": "digits in the case of R RS complement of"
+    },
+    {
+      "index": 308,
+      "start": 1085.76,
+      "end": 1089.19,
+      "duration": 3.43,
+      "text": "course I need to write plus one so that"
+    },
+    {
+      "index": 309,
+      "start": 1089.2,
+      "end": 1090.029,
+      "duration": 0.829,
+      "text": "the"
+    },
+    {
+      "index": 310,
+      "start": 1090.039,
+      "end": 1093.19,
+      "duration": 3.151,
+      "text": "base all all this all this I won't call"
+    },
+    {
+      "index": 311,
+      "start": 1093.2,
+      "end": 1095.43,
+      "duration": 2.23,
+      "text": "it confusion this difference between R"
+    },
+    {
+      "index": 312,
+      "start": 1095.44,
+      "end": 1097.549,
+      "duration": 2.109,
+      "text": "and Rus one comes because we talk with"
+    },
+    {
+      "index": 313,
+      "start": 1097.559,
+      "end": 1100.31,
+      "duration": 2.751,
+      "text": "zero zero has to be counted if you don't"
+    },
+    {
+      "index": 314,
+      "start": 1100.32,
+      "end": 1101.43,
+      "duration": 1.11,
+      "text": "have"
+    },
+    {
+      "index": 315,
+      "start": 1101.44,
+      "end": 1104.71,
+      "duration": 3.27,
+      "text": "zero then there's nothing like R's"
+    },
+    {
+      "index": 316,
+      "start": 1104.72,
+      "end": 1107.47,
+      "duration": 2.75,
+      "text": "compliment Rus one's compliment but zero"
+    },
+    {
+      "index": 317,
+      "start": 1107.48,
+      "end": 1110.149,
+      "duration": 2.669,
+      "text": "is very important we have to represent Z"
+    },
+    {
+      "index": 318,
+      "start": 1110.159,
+      "end": 1111.63,
+      "duration": 1.471,
+      "text": "and you know that is ind's contribution"
+    },
+    {
+      "index": 319,
+      "start": 1111.64,
+      "end": 1112.39,
+      "duration": 0.75,
+      "text": "to"
+    },
+    {
+      "index": 320,
+      "start": 1112.4,
+      "end": 1114.909,
+      "duration": 2.509,
+      "text": "mathematics not zero I think zero was"
+    },
+    {
+      "index": 321,
+      "start": 1114.919,
+      "end": 1116.51,
+      "duration": 1.591,
+      "text": "contributed I think looks like now it is"
+    },
+    {
+      "index": 322,
+      "start": 1116.52,
+      "end": 1122.149,
+      "duration": 5.629,
+      "text": "zero is the contribution anyway zero is"
+    },
+    {
+      "index": 323,
+      "start": 1122.159,
+      "end": 1125.75,
+      "duration": 3.591,
+      "text": "important so now it is once complement"
+    },
+    {
+      "index": 324,
+      "start": 1125.76,
+      "end": 1127.669,
+      "duration": 1.909,
+      "text": "what is the maximum binary number the"
+    },
+    {
+      "index": 325,
+      "start": 1127.679,
+      "end": 1129.149,
+      "duration": 1.47,
+      "text": "largest binary number I can represent"
+    },
+    {
+      "index": 326,
+      "start": 1129.159,
+      "end": 1132.83,
+      "duration": 3.671,
+      "text": "using four bits 1 one one one I"
+    },
+    {
+      "index": 327,
+      "start": 1132.84,
+      "end": 1135.789,
+      "duration": 2.949,
+      "text": "subtract capital N which is 0 1 0 1 from"
+    },
+    {
+      "index": 328,
+      "start": 1135.799,
+      "end": 1138.27,
+      "duration": 2.471,
+      "text": "this I get one's complement add one to"
+    },
+    {
+      "index": 329,
+      "start": 1138.28,
+      "end": 1142.11,
+      "duration": 3.83,
+      "text": "it I get two compliment is that right so"
+    },
+    {
+      "index": 330,
+      "start": 1142.12,
+      "end": 1149.029,
+      "duration": 6.909,
+      "text": "one's compliment is 1 1 1 1 minus"
+    },
+    {
+      "index": 331,
+      "start": 1151.59,
+      "end": 1151.6,
+      "duration": 0.01,
+      "text": "011 now again my binary arithmetic does"
+    },
+    {
+      "index": 332,
+      "start": 1151.6,
+      "end": 1154.99,
+      "duration": 3.39,
+      "text": "not require borrow because these are a"
+    },
+    {
+      "index": 333,
+      "start": 1155.0,
+      "end": 1157.51,
+      "duration": 2.51,
+      "text": "one always one on the top either a one"
+    },
+    {
+      "index": 334,
+      "start": 1157.52,
+      "end": 1159.549,
+      "duration": 2.029,
+      "text": "or a zero in the bottom so either it is"
+    },
+    {
+      "index": 335,
+      "start": 1159.559,
+      "end": 1161.87,
+      "duration": 2.311,
+      "text": "zero or a one result so I don't have to"
+    },
+    {
+      "index": 336,
+      "start": 1161.88,
+      "end": 1164.99,
+      "duration": 3.11,
+      "text": "worry about borrow from the previous"
+    },
+    {
+      "index": 337,
+      "start": 1165.0,
+      "end": 1167.71,
+      "duration": 2.71,
+      "text": "from the next location next bit"
+    },
+    {
+      "index": 338,
+      "start": 1167.72,
+      "end": 1175.27,
+      "duration": 7.55,
+      "text": "position"
+    },
+    {
+      "index": 339,
+      "start": 1178.23,
+      "end": 1178.24,
+      "duration": 0.01,
+      "text": "sort of makes sense because maximum with"
+    },
+    {
+      "index": 340,
+      "start": 1178.24,
+      "end": 1180.71,
+      "duration": 2.47,
+      "text": "four bits 1 one one is"
+    },
+    {
+      "index": 341,
+      "start": 1180.72,
+      "end": 1182.87,
+      "duration": 2.15,
+      "text": "15 and this is"
+    },
+    {
+      "index": 342,
+      "start": 1182.88,
+      "end": 1185.83,
+      "duration": 2.95,
+      "text": "five this is 10 total should make 15"
+    },
+    {
+      "index": 343,
+      "start": 1185.84,
+      "end": 1190.39,
+      "duration": 4.55,
+      "text": "that's all no big magic"
+    },
+    {
+      "index": 344,
+      "start": 1190.4,
+      "end": 1194.59,
+      "duration": 4.19,
+      "text": "here we we had we we are giving we are"
+    },
+    {
+      "index": 345,
+      "start": 1194.6,
+      "end": 1195.83,
+      "duration": 1.23,
+      "text": "giving number we are finding his"
+    },
+    {
+      "index": 346,
+      "start": 1195.84,
+      "end": 1197.39,
+      "duration": 1.55,
+      "text": "compliment compliment you know what a"
+    },
+    {
+      "index": 347,
+      "start": 1197.4,
+      "end": 1199.95,
+      "duration": 2.55,
+      "text": "compliment is complimentary angles and"
+    },
+    {
+      "index": 348,
+      "start": 1199.96,
+      "end": 1202.27,
+      "duration": 2.31,
+      "text": "all that you have studied in"
+    },
+    {
+      "index": 349,
+      "start": 1202.28,
+      "end": 1204.909,
+      "duration": 2.629,
+      "text": "trigonometry so if something is given"
+    },
+    {
+      "index": 350,
+      "start": 1204.919,
+      "end": 1206.87,
+      "duration": 1.951,
+      "text": "what is not given is a compliment from"
+    },
+    {
+      "index": 351,
+      "start": 1206.88,
+      "end": 1209.27,
+      "duration": 2.39,
+      "text": "the total you subtract what is given"
+    },
+    {
+      "index": 352,
+      "start": 1209.28,
+      "end": 1211.51,
+      "duration": 2.23,
+      "text": "from the total you get compliment right"
+    },
+    {
+      "index": 353,
+      "start": 1211.52,
+      "end": 1213.95,
+      "duration": 2.43,
+      "text": "the total is 1111 given is"
+    },
+    {
+      "index": 354,
+      "start": 1213.96,
+      "end": 1217.11,
+      "duration": 3.15,
+      "text": "five so the complement is"
+    },
+    {
+      "index": 355,
+      "start": 1217.12,
+      "end": 1226.669,
+      "duration": 9.549,
+      "text": "10 and two's compliment"
+    },
+    {
+      "index": 356,
+      "start": 1234.789,
+      "end": 1234.799,
+      "duration": 0.01,
+      "text": "so when you add two complement at the"
+    },
+    {
+      "index": 357,
+      "start": 1234.799,
+      "end": 1236.43,
+      "duration": 1.631,
+      "text": "given number it should give rise to one"
+    },
+    {
+      "index": 358,
+      "start": 1236.44,
+      "end": 1238.63,
+      "duration": 2.19,
+      "text": "more than 99"
+    },
+    {
+      "index": 359,
+      "start": 1238.64,
+      "end": 1242.63,
+      "duration": 3.99,
+      "text": "11111 1 more than 1111 is 16 1 one11 is"
+    },
+    {
+      "index": 360,
+      "start": 1242.64,
+      "end": 1246.23,
+      "duration": 3.59,
+      "text": "15 1 more than 1 1 is 16 this is"
+    },
+    {
+      "index": 361,
+      "start": 1246.24,
+      "end": 1250.47,
+      "duration": 4.23,
+      "text": "11 given number is five so total is 16"
+    },
+    {
+      "index": 362,
+      "start": 1250.48,
+      "end": 1251.63,
+      "duration": 1.15,
+      "text": "that also"
+    },
+    {
+      "index": 363,
+      "start": 1251.64,
+      "end": 1255.789,
+      "duration": 4.149,
+      "text": "tallies so this addition of one gives me"
+    },
+    {
+      "index": 364,
+      "start": 1255.799,
+      "end": 1258.029,
+      "duration": 2.23,
+      "text": "two's compliment that is because now if"
+    },
+    {
+      "index": 365,
+      "start": 1258.039,
+      "end": 1260.909,
+      "duration": 2.87,
+      "text": "you want to do the rigorous way it"
+    },
+    {
+      "index": 366,
+      "start": 1260.919,
+      "end": 1266.029,
+      "duration": 5.11,
+      "text": "is R power n in this case r isal 4 R = 2"
+    },
+    {
+      "index": 367,
+      "start": 1266.039,
+      "end": 1272.029,
+      "duration": 5.99,
+      "text": "2 power 4 2^ 4 is 16 16 in binary is not"
+    },
+    {
+      "index": 368,
+      "start": 1272.039,
+      "end": 1274.95,
+      "duration": 2.911,
+      "text": "111 1 four digit four bits all right but"
+    },
+    {
+      "index": 369,
+      "start": 1274.96,
+      "end": 1279.149,
+      "duration": 4.189,
+      "text": "since zero is counted 16th becom the"
+    },
+    {
+      "index": 370,
+      "start": 1279.159,
+      "end": 1282.669,
+      "duration": 3.51,
+      "text": "first bit of the the next position fifth"
+    },
+    {
+      "index": 371,
+      "start": 1282.679,
+      "end": 1285.149,
+      "duration": 2.47,
+      "text": "position so I need five bits to do that"
+    },
+    {
+      "index": 372,
+      "start": 1285.159,
+      "end": 1289.549,
+      "duration": 4.39,
+      "text": "which is 1 0 0 0 0"
+    },
+    {
+      "index": 373,
+      "start": 1289.559,
+      "end": 1296.47,
+      "duration": 6.911,
+      "text": "subtract 0 1 0 1 I do the same"
+    },
+    {
+      "index": 374,
+      "start": 1299.95,
+      "end": 1299.96,
+      "duration": 0.01,
+      "text": "one so now you have to use the borrow"
+    },
+    {
+      "index": 375,
+      "start": 1299.96,
+      "end": 1302.35,
+      "duration": 2.39,
+      "text": "arithmetic and then there's"
+    },
+    {
+      "index": 376,
+      "start": 1302.36,
+      "end": 1305.269,
+      "duration": 2.909,
+      "text": "one same thing here because it's been"
+    },
+    {
+      "index": 377,
+      "start": 1305.279,
+      "end": 1308.43,
+      "duration": 3.151,
+      "text": "borrowed here so this one is so this is"
+    },
+    {
+      "index": 378,
+      "start": 1308.44,
+      "end": 1309.669,
+      "duration": 1.229,
+      "text": "10 1"
+    },
+    {
+      "index": 379,
+      "start": 1309.679,
+      "end": 1317.51,
+      "duration": 7.831,
+      "text": "1 16 - 5 is"
+    },
+    {
+      "index": 380,
+      "start": 1323.31,
+      "end": 1323.32,
+      "duration": 0.01,
+      "text": "so I can always find out the two's"
+    },
+    {
+      "index": 381,
+      "start": 1323.32,
+      "end": 1324.669,
+      "duration": 1.349,
+      "text": "compliment of given we need two's"
+    },
+    {
+      "index": 382,
+      "start": 1324.679,
+      "end": 1327.07,
+      "duration": 2.391,
+      "text": "compliment and one's compliment in our"
+    },
+    {
+      "index": 383,
+      "start": 1327.08,
+      "end": 1330.31,
+      "duration": 3.23,
+      "text": "subtraction we'll see that when subtract"
+    },
+    {
+      "index": 384,
+      "start": 1330.32,
+      "end": 1332.99,
+      "duration": 2.67,
+      "text": "we we want to do subtraction not by"
+    },
+    {
+      "index": 385,
+      "start": 1333.0,
+      "end": 1335.19,
+      "duration": 2.19,
+      "text": "designing a subtractor subtract designed"
+    },
+    {
+      "index": 386,
+      "start": 1335.2,
+      "end": 1336.43,
+      "duration": 1.23,
+      "text": "as you"
+    },
+    {
+      "index": 387,
+      "start": 1336.44,
+      "end": 1338.909,
+      "duration": 2.469,
+      "text": "designed starting from the requirement"
+    },
+    {
+      "index": 388,
+      "start": 1338.919,
+      "end": 1341.23,
+      "duration": 2.311,
+      "text": "problem statement truth table bullan"
+    },
+    {
+      "index": 389,
+      "start": 1341.24,
+      "end": 1346.23,
+      "duration": 4.99,
+      "text": "algebra Cara map reduce get seure fine"
+    },
+    {
+      "index": 390,
+      "start": 1346.24,
+      "end": 1348.31,
+      "duration": 2.07,
+      "text": "nothing wrong in doing the subtraction"
+    },
+    {
+      "index": 391,
+      "start": 1348.32,
+      "end": 1350.19,
+      "duration": 1.87,
+      "text": "like that don't think that it should not"
+    },
+    {
+      "index": 392,
+      "start": 1350.2,
+      "end": 1352.07,
+      "duration": 1.87,
+      "text": "be done that"
+    },
+    {
+      "index": 393,
+      "start": 1352.08,
+      "end": 1354.47,
+      "duration": 2.39,
+      "text": "way because you want to have a common"
+    },
+    {
+      "index": 394,
+      "start": 1354.48,
+      "end": 1356.75,
+      "duration": 2.27,
+      "text": "hardware for adder and"
+    },
+    {
+      "index": 395,
+      "start": 1356.76,
+      "end": 1358.75,
+      "duration": 1.99,
+      "text": "subtractor functionally we want to make"
+    },
+    {
+      "index": 396,
+      "start": 1358.76,
+      "end": 1360.51,
+      "duration": 1.75,
+      "text": "it as comp as possible because you are"
+    },
+    {
+      "index": 397,
+      "start": 1360.52,
+      "end": 1362.19,
+      "duration": 1.67,
+      "text": "not it's very very unlikely that we"
+    },
+    {
+      "index": 398,
+      "start": 1362.2,
+      "end": 1363.549,
+      "duration": 1.349,
+      "text": "going to add and subtract at the same"
+    },
+    {
+      "index": 399,
+      "start": 1363.559,
+      "end": 1365.75,
+      "duration": 2.191,
+      "text": "time very very unlikely that in a"
+    },
+    {
+      "index": 400,
+      "start": 1365.76,
+      "end": 1367.669,
+      "duration": 1.909,
+      "text": "computer in a arithmetic unit in a"
+    },
+    {
+      "index": 401,
+      "start": 1367.679,
+      "end": 1369.99,
+      "duration": 2.311,
+      "text": "calculator you are going to do"
+    },
+    {
+      "index": 402,
+      "start": 1370.0,
+      "end": 1371.83,
+      "duration": 1.83,
+      "text": "subtraction and addition simultaneously"
+    },
+    {
+      "index": 403,
+      "start": 1371.84,
+      "end": 1373.549,
+      "duration": 1.709,
+      "text": "you'll do one after the other so I can"
+    },
+    {
+      "index": 404,
+      "start": 1373.559,
+      "end": 1375.47,
+      "duration": 1.911,
+      "text": "use the same Hardware piece so when you"
+    },
+    {
+      "index": 405,
+      "start": 1375.48,
+      "end": 1377.11,
+      "duration": 1.63,
+      "text": "do subtraction"
+    },
+    {
+      "index": 406,
+      "start": 1377.12,
+      "end": 1381.47,
+      "duration": 4.35,
+      "text": "by comp method I can show that and same"
+    },
+    {
+      "index": 407,
+      "start": 1381.48,
+      "end": 1383.83,
+      "duration": 2.35,
+      "text": "add can be used to do subtraction that"
+    },
+    {
+      "index": 408,
+      "start": 1383.84,
+      "end": 1385.99,
+      "duration": 2.15,
+      "text": "is the object of the whole exercise now"
+    },
+    {
+      "index": 409,
+      "start": 1386.0,
+      "end": 1388.35,
+      "duration": 2.35,
+      "text": "of compl so given number you are asked"
+    },
+    {
+      "index": 410,
+      "start": 1388.36,
+      "end": 1389.75,
+      "duration": 1.39,
+      "text": "to find the two's compliment one's"
+    },
+    {
+      "index": 411,
+      "start": 1389.76,
+      "end": 1392.43,
+      "duration": 2.67,
+      "text": "complement no problem you complement the"
+    },
+    {
+      "index": 412,
+      "start": 1392.44,
+      "end": 1394.669,
+      "duration": 2.229,
+      "text": "given number bit by"
+    },
+    {
+      "index": 413,
+      "start": 1394.679,
+      "end": 1397.269,
+      "duration": 2.59,
+      "text": "bit complement the number given number"
+    },
+    {
+      "index": 414,
+      "start": 1397.279,
+      "end": 1399.63,
+      "duration": 2.351,
+      "text": "bit by bit you get one's"
+    },
+    {
+      "index": 415,
+      "start": 1399.64,
+      "end": 1403.19,
+      "duration": 3.55,
+      "text": "compliment add one to it you get two's"
+    },
+    {
+      "index": 416,
+      "start": 1403.2,
+      "end": 1406.35,
+      "duration": 3.15,
+      "text": "compliment okay"
+    },
+    {
+      "index": 417,
+      "start": 1406.36,
+      "end": 1409.43,
+      "duration": 3.07,
+      "text": "now where does it fit in case of"
+    },
+    {
+      "index": 418,
+      "start": 1409.44,
+      "end": 1414.39,
+      "duration": 4.95,
+      "text": "subtraction now subtraction is same as"
+    },
+    {
+      "index": 419,
+      "start": 1414.4,
+      "end": 1416.39,
+      "duration": 1.99,
+      "text": "adding the complement of the"
+    },
+    {
+      "index": 420,
+      "start": 1416.4,
+      "end": 1418.87,
+      "duration": 2.47,
+      "text": "number okay two complement number if you"
+    },
+    {
+      "index": 421,
+      "start": 1418.88,
+      "end": 1421.75,
+      "duration": 2.87,
+      "text": "add to a given number suppose I want to"
+    },
+    {
+      "index": 422,
+      "start": 1421.76,
+      "end": 1425.11,
+      "duration": 3.35,
+      "text": "subtract a b from a a minus B I want to"
+    },
+    {
+      "index": 423,
+      "start": 1425.12,
+      "end": 1428.549,
+      "duration": 3.429,
+      "text": "find out instead of Designing a logic"
+    },
+    {
+      "index": 424,
+      "start": 1428.559,
+      "end": 1431.75,
+      "duration": 3.191,
+      "text": "for subtraction I can use an Adder logic"
+    },
+    {
+      "index": 425,
+      "start": 1431.76,
+      "end": 1437.43,
+      "duration": 5.67,
+      "text": "and add ins of B the complement of b"
+    },
+    {
+      "index": 426,
+      "start": 1437.44,
+      "end": 1440.549,
+      "duration": 3.109,
+      "text": "a plus complement of B is same as a"
+    },
+    {
+      "index": 427,
+      "start": 1440.559,
+      "end": 1441.71,
+      "duration": 1.151,
+      "text": "minus"
+    },
+    {
+      "index": 428,
+      "start": 1441.72,
+      "end": 1444.59,
+      "duration": 2.87,
+      "text": "B that's all that is to it that is why"
+    },
+    {
+      "index": 429,
+      "start": 1444.6,
+      "end": 1445.87,
+      "duration": 1.27,
+      "text": "you need to know"
+    },
+    {
+      "index": 430,
+      "start": 1445.88,
+      "end": 1447.87,
+      "duration": 1.99,
+      "text": "complement so that we can use the same"
+    },
+    {
+      "index": 431,
+      "start": 1447.88,
+      "end": 1449.19,
+      "duration": 1.31,
+      "text": "Adder which you have"
+    },
+    {
+      "index": 432,
+      "start": 1449.2,
+      "end": 1451.31,
+      "duration": 2.11,
+      "text": "designed whether it's a straight adder"
+    },
+    {
+      "index": 433,
+      "start": 1451.32,
+      "end": 1454.23,
+      "duration": 2.91,
+      "text": "or a carry Li Adder whatever Adder the"
+    },
+    {
+      "index": 434,
+      "start": 1454.24,
+      "end": 1456.51,
+      "duration": 2.27,
+      "text": "same Hardware or the functional unit"
+    },
+    {
+      "index": 435,
+      "start": 1456.52,
+      "end": 1459.23,
+      "duration": 2.71,
+      "text": "called Adder can be used for subtraction"
+    },
+    {
+      "index": 436,
+      "start": 1459.24,
+      "end": 1463.31,
+      "duration": 4.07,
+      "text": "so let us do this example"
+    },
+    {
+      "index": 437,
+      "start": 1478.35,
+      "end": 1478.36,
+      "duration": 0.01,
+      "text": "so again take a simple 4bit"
+    },
+    {
+      "index": 438,
+      "start": 1478.36,
+      "end": 1481.71,
+      "duration": 3.35,
+      "text": "example now I want to"
+    },
+    {
+      "index": 439,
+      "start": 1481.72,
+      "end": 1488.51,
+      "duration": 6.79,
+      "text": "subtract a minus B let us say a is 1 1 0"
+    },
+    {
+      "index": 440,
+      "start": 1488.52,
+      "end": 1492.07,
+      "duration": 3.55,
+      "text": "0 B"
+    },
+    {
+      "index": 441,
+      "start": 1502.71,
+      "end": 1502.72,
+      "duration": 0.01,
+      "text": "5 is it"
+    },
+    {
+      "index": 442,
+      "start": 1502.72,
+      "end": 1507.549,
+      "duration": 4.829,
+      "text": "not 12 - 5 is 7 I should get answer"
+    },
+    {
+      "index": 443,
+      "start": 1507.559,
+      "end": 1508.71,
+      "duration": 1.151,
+      "text": "which is"
+    },
+    {
+      "index": 444,
+      "start": 1508.72,
+      "end": 1515.31,
+      "duration": 6.59,
+      "text": "0111 so what you do is I write a as it"
+    },
+    {
+      "index": 445,
+      "start": 1518.59,
+      "end": 1518.6,
+      "duration": 0.01,
+      "text": "is I find two's complement of B so one's"
+    },
+    {
+      "index": 446,
+      "start": 1518.6,
+      "end": 1521.19,
+      "duration": 2.59,
+      "text": "complement of B first write one's"
+    },
+    {
+      "index": 447,
+      "start": 1521.2,
+      "end": 1523.71,
+      "duration": 2.51,
+      "text": "complement of B"
+    },
+    {
+      "index": 448,
+      "start": 1523.72,
+      "end": 1528.029,
+      "duration": 4.309,
+      "text": "is 1 0 1 0 that means complement bit by"
+    },
+    {
+      "index": 449,
+      "start": 1528.039,
+      "end": 1529.83,
+      "duration": 1.791,
+      "text": "bit"
+    },
+    {
+      "index": 450,
+      "start": 1529.84,
+      "end": 1532.35,
+      "duration": 2.51,
+      "text": "each bit you complement that is one's"
+    },
+    {
+      "index": 451,
+      "start": 1532.36,
+      "end": 1539.87,
+      "duration": 7.51,
+      "text": "compliment add one to it you get two's"
+    },
+    {
+      "index": 452,
+      "start": 1542.83,
+      "end": 1542.84,
+      "duration": 0.01,
+      "text": "compliment so I'm now going to add two's"
+    },
+    {
+      "index": 453,
+      "start": 1542.84,
+      "end": 1557.23,
+      "duration": 14.39,
+      "text": "complement"
+    },
+    {
+      "index": 454,
+      "start": 1572.19,
+      "end": 1572.2,
+      "duration": 0.01,
+      "text": "add add add what is this 1 + 1 zero with"
+    },
+    {
+      "index": 455,
+      "start": 1572.2,
+      "end": 1575.669,
+      "duration": 3.469,
+      "text": "a one carry"
+    },
+    {
+      "index": 456,
+      "start": 1575.679,
+      "end": 1578.029,
+      "duration": 2.35,
+      "text": "one this extra carry which is not"
+    },
+    {
+      "index": 457,
+      "start": 1578.039,
+      "end": 1579.389,
+      "duration": 1.35,
+      "text": "required in this case because this is"
+    },
+    {
+      "index": 458,
+      "start": 1579.399,
+      "end": 1582.389,
+      "duration": 2.99,
+      "text": "not a we are talking of four bit number"
+    },
+    {
+      "index": 459,
+      "start": 1582.399,
+      "end": 1586.269,
+      "duration": 3.87,
+      "text": "here you have to be careful there is a"
+    },
+    {
+      "index": 460,
+      "start": 1588.83,
+      "end": 1588.84,
+      "duration": 0.01,
+      "text": "little sort of a caution"
+    },
+    {
+      "index": 461,
+      "start": 1588.84,
+      "end": 1591.83,
+      "duration": 2.99,
+      "text": "here I'm dealing with four bit numbers A"
+    },
+    {
+      "index": 462,
+      "start": 1591.84,
+      "end": 1594.31,
+      "duration": 2.47,
+      "text": "and B A is four bits B is four bits I'm"
+    },
+    {
+      "index": 463,
+      "start": 1594.32,
+      "end": 1597.63,
+      "duration": 3.31,
+      "text": "expecting a 4 bit result it's not a plus"
+    },
+    {
+      "index": 464,
+      "start": 1597.64,
+      "end": 1600.47,
+      "duration": 2.83,
+      "text": "b the result can be five"
+    },
+    {
+      "index": 465,
+      "start": 1600.48,
+      "end": 1603.029,
+      "duration": 2.549,
+      "text": "bits a is four bits B is four bits I'm"
+    },
+    {
+      "index": 466,
+      "start": 1603.039,
+      "end": 1605.149,
+      "duration": 2.11,
+      "text": "subtracting a minus B result has to be"
+    },
+    {
+      "index": 467,
+      "start": 1605.159,
+      "end": 1607.31,
+      "duration": 2.151,
+      "text": "four bits so all I have to do is to"
+    },
+    {
+      "index": 468,
+      "start": 1607.32,
+      "end": 1611.269,
+      "duration": 3.949,
+      "text": "discard"
+    },
+    {
+      "index": 469,
+      "start": 1613.75,
+      "end": 1613.76,
+      "duration": 0.01,
+      "text": "this discard that car ignore it so"
+    },
+    {
+      "index": 470,
+      "start": 1613.76,
+      "end": 1615.07,
+      "duration": 1.31,
+      "text": "because I'm going I know that the result"
+    },
+    {
+      "index": 471,
+      "start": 1615.08,
+      "end": 1617.23,
+      "duration": 2.15,
+      "text": "is going to be four bits or"
+    },
+    {
+      "index": 472,
+      "start": 1617.24,
+      "end": 1623.87,
+      "duration": 6.63,
+      "text": "less I discard the the last"
+    },
+    {
+      "index": 473,
+      "start": 1625.63,
+      "end": 1625.64,
+      "duration": 0.01,
+      "text": "bit"
+    },
+    {
+      "index": 474,
+      "start": 1625.64,
+      "end": 1628.99,
+      "duration": 3.35,
+      "text": "now this number is how much is this so"
+    },
+    {
+      "index": 475,
+      "start": 1629.0,
+      "end": 1633.389,
+      "duration": 4.389,
+      "text": "this is discard"
+    },
+    {
+      "index": 476,
+      "start": 1638.269,
+      "end": 1638.279,
+      "duration": 0.01,
+      "text": "carry what is this number 0 1 1 1 is 7"
+    },
+    {
+      "index": 477,
+      "start": 1638.279,
+      "end": 1643.83,
+      "duration": 5.551,
+      "text": "so 12 - 5 is"
+    },
+    {
+      "index": 478,
+      "start": 1646.549,
+      "end": 1646.559,
+      "duration": 0.01,
+      "text": "7 I can also do it one's compliment way"
+    },
+    {
+      "index": 479,
+      "start": 1646.559,
+      "end": 1648.19,
+      "duration": 1.631,
+      "text": "but then I will get one less number and"
+    },
+    {
+      "index": 480,
+      "start": 1648.2,
+      "end": 1650.63,
+      "duration": 2.43,
+      "text": "I add one to it finally suppose you do"
+    },
+    {
+      "index": 481,
+      "start": 1650.64,
+      "end": 1654.83,
+      "duration": 4.19,
+      "text": "one complement addition a"
+    },
+    {
+      "index": 482,
+      "start": 1659.389,
+      "end": 1659.399,
+      "duration": 0.01,
+      "text": "is one complement of a b"
+    },
+    {
+      "index": 483,
+      "start": 1659.399,
+      "end": 1663.269,
+      "duration": 3.87,
+      "text": "is what B is 0 1 0 1 one's complement is"
+    },
+    {
+      "index": 484,
+      "start": 1663.279,
+      "end": 1668.19,
+      "duration": 4.911,
+      "text": "1 0 1 0 is that right B is 0 1 0"
+    },
+    {
+      "index": 485,
+      "start": 1668.2,
+      "end": 1671.389,
+      "duration": 3.189,
+      "text": "1 one's compliment of B is 1 0 1"
+    },
+    {
+      "index": 486,
+      "start": 1671.399,
+      "end": 1677.11,
+      "duration": 5.711,
+      "text": "0"
+    },
+    {
+      "index": 487,
+      "start": 1679.35,
+      "end": 1679.36,
+      "duration": 0.01,
+      "text": "add"
+    },
+    {
+      "index": 488,
+      "start": 1679.36,
+      "end": 1681.31,
+      "duration": 1.95,
+      "text": "now I can't discard this carry because I"
+    },
+    {
+      "index": 489,
+      "start": 1681.32,
+      "end": 1684.35,
+      "duration": 3.03,
+      "text": "know that one Carry has to be this carry"
+    },
+    {
+      "index": 490,
+      "start": 1684.36,
+      "end": 1687.47,
+      "duration": 3.11,
+      "text": "can be discard I add one to"
+    },
+    {
+      "index": 491,
+      "start": 1687.48,
+      "end": 1690.029,
+      "duration": 2.549,
+      "text": "it I can discard this carry and add one"
+    },
+    {
+      "index": 492,
+      "start": 1690.039,
+      "end": 1692.23,
+      "duration": 2.191,
+      "text": "to"
+    },
+    {
+      "index": 493,
+      "start": 1710.11,
+      "end": 1710.12,
+      "duration": 0.01,
+      "text": "one or you can say of it's not"
+    },
+    {
+      "index": 494,
+      "start": 1710.12,
+      "end": 1712.23,
+      "duration": 2.11,
+      "text": "logical this one is brought here and"
+    },
+    {
+      "index": 495,
+      "start": 1712.24,
+      "end": 1714.11,
+      "duration": 1.87,
+      "text": "added they say it's called end car"
+    },
+    {
+      "index": 496,
+      "start": 1714.12,
+      "end": 1717.59,
+      "duration": 3.47,
+      "text": "you'll see in the book it's called"
+    },
+    {
+      "index": 497,
+      "start": 1717.6,
+      "end": 1721.71,
+      "duration": 4.11,
+      "text": "EAC you bring the carry"
+    },
+    {
+      "index": 498,
+      "start": 1721.72,
+      "end": 1725.47,
+      "duration": 3.75,
+      "text": "around and add it here it doesn't make"
+    },
+    {
+      "index": 499,
+      "start": 1725.48,
+      "end": 1727.75,
+      "duration": 2.27,
+      "text": "sense you have add one to two compliment"
+    },
+    {
+      "index": 500,
+      "start": 1727.76,
+      "end": 1730.549,
+      "duration": 2.789,
+      "text": "number it is not a magic or something we"
+    },
+    {
+      "index": 501,
+      "start": 1730.559,
+      "end": 1734.389,
+      "duration": 3.83,
+      "text": "showing so it is a logic so you have to"
+    },
+    {
+      "index": 502,
+      "start": 1734.399,
+      "end": 1736.83,
+      "duration": 2.431,
+      "text": "add one to this because it's one's"
+    },
+    {
+      "index": 503,
+      "start": 1736.84,
+      "end": 1739.669,
+      "duration": 2.829,
+      "text": "compliment and want two's complement"
+    },
+    {
+      "index": 504,
+      "start": 1739.679,
+      "end": 1742.35,
+      "duration": 2.671,
+      "text": "two's complement gives the subtraction"
+    },
+    {
+      "index": 505,
+      "start": 1742.36,
+      "end": 1745.029,
+      "duration": 2.669,
+      "text": "number the subtraction of two numberers"
+    },
+    {
+      "index": 506,
+      "start": 1745.039,
+      "end": 1748.269,
+      "duration": 3.23,
+      "text": "subtraction of B from a the result is"
+    },
+    {
+      "index": 507,
+      "start": 1748.279,
+      "end": 1751.83,
+      "duration": 3.551,
+      "text": "the two complement addition of A and B"
+    },
+    {
+      "index": 508,
+      "start": 1751.84,
+      "end": 1757.149,
+      "duration": 5.309,
+      "text": "in other words a minus B is same as a +"
+    },
+    {
+      "index": 509,
+      "start": 1757.159,
+      "end": 1760.35,
+      "duration": 3.191,
+      "text": "2's complement of B not one's complement"
+    },
+    {
+      "index": 510,
+      "start": 1760.36,
+      "end": 1761.99,
+      "duration": 1.63,
+      "text": "since we need to have two's complement"
+    },
+    {
+      "index": 511,
+      "start": 1762.0,
+      "end": 1763.549,
+      "duration": 1.549,
+      "text": "and we done only one compliment I have"
+    },
+    {
+      "index": 512,
+      "start": 1763.559,
+      "end": 1765.35,
+      "duration": 1.791,
+      "text": "to add anywh one one somewhere one has"
+    },
+    {
+      "index": 513,
+      "start": 1765.36,
+      "end": 1768.549,
+      "duration": 3.189,
+      "text": "to be inserted that one is inserted here"
+    },
+    {
+      "index": 514,
+      "start": 1768.559,
+      "end": 1769.95,
+      "duration": 1.391,
+      "text": "but it's okay happen that we are going"
+    },
+    {
+      "index": 515,
+      "start": 1769.96,
+      "end": 1772.389,
+      "duration": 2.429,
+      "text": "to discard one you discard one and then"
+    },
+    {
+      "index": 516,
+      "start": 1772.399,
+      "end": 1775.389,
+      "duration": 2.99,
+      "text": "add one so as if bringing it back and"
+    },
+    {
+      "index": 517,
+      "start": 1775.399,
+      "end": 1777.789,
+      "duration": 2.39,
+      "text": "adding it I think it is more for people"
+    },
+    {
+      "index": 518,
+      "start": 1777.799,
+      "end": 1780.269,
+      "duration": 2.47,
+      "text": "to remember it some sort"
+    },
+    {
+      "index": 519,
+      "start": 1780.279,
+      "end": 1782.909,
+      "duration": 2.63,
+      "text": "of tip for remembering that one has to"
+    },
+    {
+      "index": 520,
+      "start": 1782.919,
+      "end": 1785.11,
+      "duration": 2.191,
+      "text": "be brought so they say bring this and"
+    },
+    {
+      "index": 521,
+      "start": 1785.12,
+      "end": 1786.669,
+      "duration": 1.549,
+      "text": "add that's"
+    },
+    {
+      "index": 522,
+      "start": 1786.679,
+      "end": 1788.71,
+      "duration": 2.031,
+      "text": "not but then you'll find it is a very"
+    },
+    {
+      "index": 523,
+      "start": 1788.72,
+      "end": 1790.269,
+      "duration": 1.549,
+      "text": "serious thing in the book you say end"
+    },
+    {
+      "index": 524,
+      "start": 1790.279,
+      "end": 1792.789,
+      "duration": 2.51,
+      "text": "around carry you bring it back they will"
+    },
+    {
+      "index": 525,
+      "start": 1792.799,
+      "end": 1794.87,
+      "duration": 2.071,
+      "text": "put an arrow like"
+    },
+    {
+      "index": 526,
+      "start": 1794.88,
+      "end": 1798.63,
+      "duration": 3.75,
+      "text": "this and throw it like this if you want"
+    },
+    {
+      "index": 527,
+      "start": 1798.64,
+      "end": 1801.07,
+      "duration": 2.43,
+      "text": "to do it fine no problem as long as you"
+    },
+    {
+      "index": 528,
+      "start": 1801.08,
+      "end": 1802.83,
+      "duration": 1.75,
+      "text": "understand what is"
+    },
+    {
+      "index": 529,
+      "start": 1802.84,
+      "end": 1804.95,
+      "duration": 2.11,
+      "text": "happening now we are talking of a"
+    },
+    {
+      "index": 530,
+      "start": 1804.96,
+      "end": 1806.35,
+      "duration": 1.39,
+      "text": "positive number subtracted from positive"
+    },
+    {
+      "index": 531,
+      "start": 1806.36,
+      "end": 1811.11,
+      "duration": 4.75,
+      "text": "number result is a positive"
+    },
+    {
+      "index": 532,
+      "start": 1813.789,
+      "end": 1813.799,
+      "duration": 0.01,
+      "text": "number supposing I have a number from"
+    },
+    {
+      "index": 533,
+      "start": 1813.799,
+      "end": 1815.43,
+      "duration": 1.631,
+      "text": "which I'm subtracting is larger than the"
+    },
+    {
+      "index": 534,
+      "start": 1815.44,
+      "end": 1818.75,
+      "duration": 3.31,
+      "text": "given number the result will be negative"
+    },
+    {
+      "index": 535,
+      "start": 1818.76,
+      "end": 1821.269,
+      "duration": 2.509,
+      "text": "we'll also look at that possibility what"
+    },
+    {
+      "index": 536,
+      "start": 1821.279,
+      "end": 1825.47,
+      "duration": 4.191,
+      "text": "will happen if the subtracted number is"
+    },
+    {
+      "index": 537,
+      "start": 1825.48,
+      "end": 1827.99,
+      "duration": 2.51,
+      "text": "negative I mean subtracted I mean the"
+    },
+    {
+      "index": 538,
+      "start": 1828.0,
+      "end": 1829.23,
+      "duration": 1.23,
+      "text": "difference is"
+    },
+    {
+      "index": 539,
+      "start": 1829.24,
+      "end": 1832.389,
+      "duration": 3.149,
+      "text": "negative which happens"
+    },
+    {
+      "index": 540,
+      "start": 1832.399,
+      "end": 1837.269,
+      "duration": 4.87,
+      "text": "when n is you put the other way 5 -"
+    },
+    {
+      "index": 541,
+      "start": 1837.279,
+      "end": 1841.269,
+      "duration": 3.99,
+      "text": "12 can I now say a is equal to"
+    },
+    {
+      "index": 542,
+      "start": 1841.279,
+      "end": 1843.789,
+      "duration": 2.51,
+      "text": "5 b"
+    },
+    {
+      "index": 543,
+      "start": 1843.799,
+      "end": 1845.909,
+      "duration": 2.11,
+      "text": "is"
+    },
+    {
+      "index": 544,
+      "start": 1845.919,
+      "end": 1848.71,
+      "duration": 2.791,
+      "text": "12 the result has to"
+    },
+    {
+      "index": 545,
+      "start": 1848.72,
+      "end": 1856.909,
+      "duration": 8.189,
+      "text": "be - 7 is that"
+    },
+    {
+      "index": 546,
+      "start": 1858.59,
+      "end": 1858.6,
+      "duration": 0.01,
+      "text": "right"
+    },
+    {
+      "index": 547,
+      "start": 1858.6,
+      "end": 1862.669,
+      "duration": 4.069,
+      "text": "so I'll do this a is equal to 0 1 0 1"
+    },
+    {
+      "index": 548,
+      "start": 1862.679,
+      "end": 1864.669,
+      "duration": 1.99,
+      "text": "two's complement of B by now you know"
+    },
+    {
+      "index": 549,
+      "start": 1864.679,
+      "end": 1867.549,
+      "duration": 2.87,
+      "text": "how to do that this 0 0 1"
+    },
+    {
+      "index": 550,
+      "start": 1867.559,
+      "end": 1870.87,
+      "duration": 3.311,
+      "text": "1 add 0 0 1 1 to that you have to add"
+    },
+    {
+      "index": 551,
+      "start": 1870.88,
+      "end": 1875.269,
+      "duration": 4.389,
+      "text": "one so what will be two's complement of"
+    },
+    {
+      "index": 552,
+      "start": 1887.75,
+      "end": 1887.76,
+      "duration": 0.01,
+      "text": "right that is because one's complement"
+    },
+    {
+      "index": 553,
+      "start": 1887.76,
+      "end": 1892.23,
+      "duration": 4.47,
+      "text": "is is 0 0 1 1 two's complement"
+    },
+    {
+      "index": 554,
+      "start": 1892.24,
+      "end": 1898.509,
+      "duration": 6.269,
+      "text": "is add one this become 0 0"
+    },
+    {
+      "index": 555,
+      "start": 1901.629,
+      "end": 1901.639,
+      "duration": 0.01,
+      "text": "1 add a minus"
+    },
+    {
+      "index": 556,
+      "start": 1901.639,
+      "end": 1906.149,
+      "duration": 4.51,
+      "text": "B is same as adding a and two compl of B"
+    },
+    {
+      "index": 557,
+      "start": 1906.159,
+      "end": 1907.669,
+      "duration": 1.51,
+      "text": "which is"
+    },
+    {
+      "index": 558,
+      "start": 1907.679,
+      "end": 1910.23,
+      "duration": 2.551,
+      "text": "1"
+    },
+    {
+      "index": 559,
+      "start": 1910.24,
+      "end": 1912.99,
+      "duration": 2.75,
+      "text": "0"
+    },
+    {
+      "index": 560,
+      "start": 1913.0,
+      "end": 1914.99,
+      "duration": 1.99,
+      "text": "0"
+    },
+    {
+      "index": 561,
+      "start": 1915.0,
+      "end": 1918.47,
+      "duration": 3.47,
+      "text": "one is that right"
+    },
+    {
+      "index": 562,
+      "start": 1918.48,
+      "end": 1921.19,
+      "duration": 2.71,
+      "text": "right you mean the answer is"
+    },
+    {
+      "index": 563,
+      "start": 1921.2,
+      "end": 1924.87,
+      "duration": 3.67,
+      "text": "right my addition is right the answer is"
+    },
+    {
+      "index": 564,
+      "start": 1924.88,
+      "end": 1927.07,
+      "duration": 2.19,
+      "text": "not"
+    },
+    {
+      "index": 565,
+      "start": 1927.08,
+      "end": 1931.029,
+      "duration": 3.949,
+      "text": "right"
+    },
+    {
+      "index": 566,
+      "start": 1939.07,
+      "end": 1939.08,
+      "duration": 0.01,
+      "text": "significantly there's a carry here is"
+    },
+    {
+      "index": 567,
+      "start": 1939.08,
+      "end": 1941.35,
+      "duration": 2.27,
+      "text": "the zero and the last digit so Noti the"
+    },
+    {
+      "index": 568,
+      "start": 1941.36,
+      "end": 1944.59,
+      "duration": 3.23,
+      "text": "zero in the last digit and a carry it"
+    },
+    {
+      "index": 569,
+      "start": 1944.6,
+      "end": 1947.509,
+      "duration": 2.909,
+      "text": "represent the positive result difference"
+    },
+    {
+      "index": 570,
+      "start": 1947.519,
+      "end": 1949.83,
+      "duration": 2.311,
+      "text": "is POS positive whenever the difference"
+    },
+    {
+      "index": 571,
+      "start": 1949.84,
+      "end": 1951.629,
+      "duration": 1.789,
+      "text": "is positive you'll have a zero in the"
+    },
+    {
+      "index": 572,
+      "start": 1951.639,
+      "end": 1955.149,
+      "duration": 3.51,
+      "text": "last bit position which is required bit"
+    },
+    {
+      "index": 573,
+      "start": 1955.159,
+      "end": 1957.83,
+      "duration": 2.671,
+      "text": "position and this one which is going to"
+    },
+    {
+      "index": 574,
+      "start": 1957.84,
+      "end": 1959.07,
+      "duration": 1.23,
+      "text": "be"
+    },
+    {
+      "index": 575,
+      "start": 1959.08,
+      "end": 1961.47,
+      "duration": 2.39,
+      "text": "discarded there's a one in the discarded"
+    },
+    {
+      "index": 576,
+      "start": 1961.48,
+      "end": 1964.029,
+      "duration": 2.549,
+      "text": "to position to be discarded zero in the"
+    },
+    {
+      "index": 577,
+      "start": 1964.039,
+      "end": 1966.269,
+      "duration": 2.23,
+      "text": "last position of Interest here is"
+    },
+    {
+      "index": 578,
+      "start": 1966.279,
+      "end": 1969.269,
+      "duration": 2.99,
+      "text": "exactly the opposite I have a one here"
+    },
+    {
+      "index": 579,
+      "start": 1969.279,
+      "end": 1971.43,
+      "duration": 2.151,
+      "text": "in the last position of"
+    },
+    {
+      "index": 580,
+      "start": 1971.44,
+      "end": 1974.47,
+      "duration": 3.03,
+      "text": "interest and"
+    },
+    {
+      "index": 581,
+      "start": 1974.48,
+      "end": 1976.83,
+      "duration": 2.35,
+      "text": "zero in"
+    },
+    {
+      "index": 582,
+      "start": 1976.84,
+      "end": 1979.75,
+      "duration": 2.91,
+      "text": "the discarded position to be discarded"
+    },
+    {
+      "index": 583,
+      "start": 1979.76,
+      "end": 1983.31,
+      "duration": 3.55,
+      "text": "so this gives a signal this a negative"
+    },
+    {
+      "index": 584,
+      "start": 1983.32,
+      "end": 1985.629,
+      "duration": 2.309,
+      "text": "number if the last position of interest"
+    },
+    {
+      "index": 585,
+      "start": 1985.639,
+      "end": 1987.509,
+      "duration": 1.87,
+      "text": "is zero and"
+    },
+    {
+      "index": 586,
+      "start": 1987.519,
+      "end": 1989.71,
+      "duration": 2.191,
+      "text": "one carry which has be discarded then"
+    },
+    {
+      "index": 587,
+      "start": 1989.72,
+      "end": 1993.149,
+      "duration": 3.429,
+      "text": "it's a positive result answer is right"
+    },
+    {
+      "index": 588,
+      "start": 1993.159,
+      "end": 1996.19,
+      "duration": 3.031,
+      "text": "if on the other hand you get a zero here"
+    },
+    {
+      "index": 589,
+      "start": 1996.2,
+      "end": 1997.789,
+      "duration": 1.589,
+      "text": "and a one here you know it's a negative"
+    },
+    {
+      "index": 590,
+      "start": 1997.799,
+      "end": 2000.149,
+      "duration": 2.35,
+      "text": "number so that means I have to get a Cho"
+    },
+    {
+      "index": 591,
+      "start": 2000.159,
+      "end": 2002.269,
+      "duration": 2.11,
+      "text": "compliment of that before I can the"
+    },
+    {
+      "index": 592,
+      "start": 2002.279,
+      "end": 2004.029,
+      "duration": 1.75,
+      "text": "correct answer is not"
+    },
+    {
+      "index": 593,
+      "start": 2004.039,
+      "end": 2007.23,
+      "duration": 3.191,
+      "text": "this the number is the two's complement"
+    },
+    {
+      "index": 594,
+      "start": 2007.24,
+      "end": 2009.149,
+      "duration": 1.909,
+      "text": "of the difference so if I take the two"
+    },
+    {
+      "index": 595,
+      "start": 2009.159,
+      "end": 2013.71,
+      "duration": 4.551,
+      "text": "complement of a this"
+    },
+    {
+      "index": 596,
+      "start": 2017.95,
+      "end": 2017.96,
+      "duration": 0.01,
+      "text": "number so I will call this uh to"
+    },
+    {
+      "index": 597,
+      "start": 2017.96,
+      "end": 2020.389,
+      "duration": 2.429,
+      "text": "complement this is not a minus B really"
+    },
+    {
+      "index": 598,
+      "start": 2020.399,
+      "end": 2025.99,
+      "duration": 5.591,
+      "text": "this is a minus B let us say"
+    },
+    {
+      "index": 599,
+      "start": 2026.0,
+      "end": 2036.71,
+      "duration": 10.71,
+      "text": "star if I take the two complement of"
+    },
+    {
+      "index": 600,
+      "start": 2042.789,
+      "end": 2042.799,
+      "duration": 0.01,
+      "text": "this is going to be one's compliment"
+    },
+    {
+      "index": 601,
+      "start": 2042.799,
+      "end": 2045.149,
+      "duration": 2.35,
+      "text": "plus one right one's compliment"
+    },
+    {
+      "index": 602,
+      "start": 2045.159,
+      "end": 2048.069,
+      "duration": 2.91,
+      "text": "is 0 1 1"
+    },
+    {
+      "index": 603,
+      "start": 2048.079,
+      "end": 2051.19,
+      "duration": 3.111,
+      "text": "0 add one to it I get two's compliment"
+    },
+    {
+      "index": 604,
+      "start": 2051.2,
+      "end": 2054.51,
+      "duration": 3.31,
+      "text": "which"
+    },
+    {
+      "index": 605,
+      "start": 2059.27,
+      "end": 2059.28,
+      "duration": 0.01,
+      "text": "is what is this number 0 1 1 1 7 but you"
+    },
+    {
+      "index": 606,
+      "start": 2059.28,
+      "end": 2061.349,
+      "duration": 2.069,
+      "text": "should not take it as seven"
+    },
+    {
+      "index": 607,
+      "start": 2061.359,
+      "end": 2064.389,
+      "duration": 3.03,
+      "text": "because of this this is minus"
+    },
+    {
+      "index": 608,
+      "start": 2064.399,
+      "end": 2067.79,
+      "duration": 3.391,
+      "text": "7 so when the number is negative you"
+    },
+    {
+      "index": 609,
+      "start": 2067.8,
+      "end": 2069.19,
+      "duration": 1.39,
+      "text": "take the two's complement and give the"
+    },
+    {
+      "index": 610,
+      "start": 2069.2,
+      "end": 2070.389,
+      "duration": 1.189,
+      "text": "negative sign to"
+    },
+    {
+      "index": 611,
+      "start": 2070.399,
+      "end": 2072.55,
+      "duration": 2.151,
+      "text": "it the number is positive you take the"
+    },
+    {
+      "index": 612,
+      "start": 2072.56,
+      "end": 2075.19,
+      "duration": 2.63,
+      "text": "number as it is how do you know is a"
+    },
+    {
+      "index": 613,
+      "start": 2075.2,
+      "end": 2077.47,
+      "duration": 2.27,
+      "text": "positive number negative number the"
+    },
+    {
+      "index": 614,
+      "start": 2077.48,
+      "end": 2079.629,
+      "duration": 2.149,
+      "text": "discarded bit is one in the case of"
+    },
+    {
+      "index": 615,
+      "start": 2079.639,
+      "end": 2081.55,
+      "duration": 1.911,
+      "text": "positive"
+    },
+    {
+      "index": 616,
+      "start": 2081.56,
+      "end": 2085.589,
+      "duration": 4.029,
+      "text": "numbers and then and the last bit of"
+    },
+    {
+      "index": 617,
+      "start": 2085.599,
+      "end": 2087.669,
+      "duration": 2.07,
+      "text": "interest is a zero the last bit of"
+    },
+    {
+      "index": 618,
+      "start": 2087.679,
+      "end": 2089.19,
+      "duration": 1.511,
+      "text": "interest is zero is a positive number"
+    },
+    {
+      "index": 619,
+      "start": 2089.2,
+      "end": 2090.23,
+      "duration": 1.03,
+      "text": "this is called"
+    },
+    {
+      "index": 620,
+      "start": 2090.24,
+      "end": 2092.71,
+      "duration": 2.47,
+      "text": "MSB most significant bit as far as we"
+    },
+    {
+      "index": 621,
+      "start": 2092.72,
+      "end": 2094.31,
+      "duration": 1.59,
+      "text": "are concerned this is the most"
+    },
+    {
+      "index": 622,
+      "start": 2094.32,
+      "end": 2095.43,
+      "duration": 1.11,
+      "text": "significant bit this is the least"
+    },
+    {
+      "index": 623,
+      "start": 2095.44,
+      "end": 2097.19,
+      "duration": 1.75,
+      "text": "significant bit I think we already"
+    },
+    {
+      "index": 624,
+      "start": 2097.2,
+      "end": 2099.589,
+      "duration": 2.389,
+      "text": "mentioned ones when you have several"
+    },
+    {
+      "index": 625,
+      "start": 2099.599,
+      "end": 2103.39,
+      "duration": 3.791,
+      "text": "bits the lowest sign lowest significant"
+    },
+    {
+      "index": 626,
+      "start": 2103.4,
+      "end": 2106.63,
+      "duration": 3.23,
+      "text": "bit next high next next the the maximum"
+    },
+    {
+      "index": 627,
+      "start": 2106.64,
+      "end": 2111.43,
+      "duration": 4.79,
+      "text": "significance is this bit so this is the"
+    },
+    {
+      "index": 628,
+      "start": 2119.91,
+      "end": 2119.92,
+      "duration": 0.01,
+      "text": "LSB so MSB is"
+    },
+    {
+      "index": 629,
+      "start": 2119.92,
+      "end": 2123.71,
+      "duration": 3.79,
+      "text": "zero there a positive"
+    },
+    {
+      "index": 630,
+      "start": 2123.72,
+      "end": 2126.15,
+      "duration": 2.43,
+      "text": "number forget about discarding because"
+    },
+    {
+      "index": 631,
+      "start": 2126.16,
+      "end": 2127.43,
+      "duration": 1.27,
+      "text": "anyway we going to discard that one and"
+    },
+    {
+      "index": 632,
+      "start": 2127.44,
+      "end": 2128.67,
+      "duration": 1.23,
+      "text": "zer"
+    },
+    {
+      "index": 633,
+      "start": 2128.68,
+      "end": 2130.51,
+      "duration": 1.83,
+      "text": "here this Zer is"
+    },
+    {
+      "index": 634,
+      "start": 2130.52,
+      "end": 2132.71,
+      "duration": 2.19,
+      "text": "discarded there one is discarded so let"
+    },
+    {
+      "index": 635,
+      "start": 2132.72,
+      "end": 2133.95,
+      "duration": 1.23,
+      "text": "us not worry about that is an extra"
+    },
+    {
+      "index": 636,
+      "start": 2133.96,
+      "end": 2136.349,
+      "duration": 2.389,
+      "text": "signal for you but don't worry about"
+    },
+    {
+      "index": 637,
+      "start": 2136.359,
+      "end": 2139.43,
+      "duration": 3.071,
+      "text": "that I have this most signicant Z is a"
+    },
+    {
+      "index": 638,
+      "start": 2139.44,
+      "end": 2141.51,
+      "duration": 2.07,
+      "text": "positive number here I have the most"
+    },
+    {
+      "index": 639,
+      "start": 2141.52,
+      "end": 2144.43,
+      "duration": 2.91,
+      "text": "significant bit as one which is a"
+    },
+    {
+      "index": 640,
+      "start": 2144.44,
+      "end": 2145.79,
+      "duration": 1.35,
+      "text": "negative number once the result is"
+    },
+    {
+      "index": 641,
+      "start": 2145.8,
+      "end": 2148.43,
+      "duration": 2.63,
+      "text": "negative the two complement addition of"
+    },
+    {
+      "index": 642,
+      "start": 2148.44,
+      "end": 2151.15,
+      "duration": 2.71,
+      "text": "B to a does not give you a minus B if"
+    },
+    {
+      "index": 643,
+      "start": 2151.16,
+      "end": 2154.39,
+      "duration": 3.23,
+      "text": "the difference happens to be a negative"
+    },
+    {
+      "index": 644,
+      "start": 2154.4,
+      "end": 2157.79,
+      "duration": 3.39,
+      "text": "number indicated by the fact that MSB is"
+    },
+    {
+      "index": 645,
+      "start": 2157.8,
+      "end": 2160.39,
+      "duration": 2.59,
+      "text": "one if the MSB is"
+    },
+    {
+      "index": 646,
+      "start": 2160.4,
+      "end": 2163.27,
+      "duration": 2.87,
+      "text": "one the difference a minus B which"
+    },
+    {
+      "index": 647,
+      "start": 2163.28,
+      "end": 2166.23,
+      "duration": 2.95,
+      "text": "computed by adding B two comp of B to a"
+    },
+    {
+      "index": 648,
+      "start": 2166.24,
+      "end": 2169.43,
+      "duration": 3.19,
+      "text": "is not the correct number it is the two"
+    },
+    {
+      "index": 649,
+      "start": 2169.44,
+      "end": 2171.309,
+      "duration": 1.869,
+      "text": "complement of that difference which is"
+    },
+    {
+      "index": 650,
+      "start": 2171.319,
+      "end": 2174.069,
+      "duration": 2.75,
+      "text": "the correct number which is the two comp"
+    },
+    {
+      "index": 651,
+      "start": 2174.079,
+      "end": 2176.349,
+      "duration": 2.27,
+      "text": "but you don't have to worry about it"
+    },
+    {
+      "index": 652,
+      "start": 2176.359,
+      "end": 2178.43,
+      "duration": 2.071,
+      "text": "because this will be again this is a"
+    },
+    {
+      "index": 653,
+      "start": 2178.44,
+      "end": 2181.069,
+      "duration": 2.629,
+      "text": "negative number since of saying minus"
+    },
+    {
+      "index": 654,
+      "start": 2181.079,
+      "end": 2183.39,
+      "duration": 2.311,
+      "text": "how do you say- 7 in a"
+    },
+    {
+      "index": 655,
+      "start": 2183.4,
+      "end": 2187.069,
+      "duration": 3.669,
+      "text": "computer you add seven you can put seven"
+    },
+    {
+      "index": 656,
+      "start": 2187.079,
+      "end": 2189.95,
+      "duration": 2.871,
+      "text": "binaries s you can put binary any number"
+    },
+    {
+      "index": 657,
+      "start": 2189.96,
+      "end": 2192.23,
+      "duration": 2.27,
+      "text": "how do you put minus sign I said all"
+    },
+    {
+      "index": 658,
+      "start": 2192.24,
+      "end": 2195.109,
+      "duration": 2.869,
+      "text": "symbols have to be represented by binary"
+    },
+    {
+      "index": 659,
+      "start": 2195.119,
+      "end": 2197.589,
+      "duration": 2.47,
+      "text": "Cordes whether it's an alphabets special"
+    },
+    {
+      "index": 660,
+      "start": 2197.599,
+      "end": 2199.589,
+      "duration": 1.99,
+      "text": "symbols comma"
+    },
+    {
+      "index": 661,
+      "start": 2199.599,
+      "end": 2202.75,
+      "duration": 3.151,
+      "text": "punctuation email"
+    },
+    {
+      "index": 662,
+      "start": 2202.76,
+      "end": 2205.15,
+      "duration": 2.39,
+      "text": "letters database"
+    },
+    {
+      "index": 663,
+      "start": 2205.16,
+      "end": 2208.109,
+      "duration": 2.949,
+      "text": "marks it's all binary numbers binary"
+    },
+    {
+      "index": 664,
+      "start": 2208.119,
+      "end": 2209.109,
+      "duration": 0.99,
+      "text": "digits"
+    },
+    {
+      "index": 665,
+      "start": 2209.119,
+      "end": 2212.43,
+      "duration": 3.311,
+      "text": "bits so negative has to be somewhere so"
+    },
+    {
+      "index": 666,
+      "start": 2212.44,
+      "end": 2214.55,
+      "duration": 2.11,
+      "text": "that is our way of telling the computers"
+    },
+    {
+      "index": 667,
+      "start": 2214.56,
+      "end": 2216.829,
+      "duration": 2.269,
+      "text": "negative numberb also the same way the"
+    },
+    {
+      "index": 668,
+      "start": 2216.839,
+      "end": 2218.71,
+      "duration": 1.871,
+      "text": "computer way of telling us it's a"
+    },
+    {
+      "index": 669,
+      "start": 2218.72,
+      "end": 2221.95,
+      "duration": 3.23,
+      "text": "negative number is also same way so in a"
+    },
+    {
+      "index": 670,
+      "start": 2221.96,
+      "end": 2223.75,
+      "duration": 1.79,
+      "text": "any number of bits you define the number"
+    },
+    {
+      "index": 671,
+      "start": 2223.76,
+      "end": 2226.03,
+      "duration": 2.27,
+      "text": "of bits in a number the most significant"
+    },
+    {
+      "index": 672,
+      "start": 2226.04,
+      "end": 2228.47,
+      "duration": 2.43,
+      "text": "bit is one is a negative number the most"
+    },
+    {
+      "index": 673,
+      "start": 2228.48,
+      "end": 2230.99,
+      "duration": 2.51,
+      "text": "signant is a z is a positive number so"
+    },
+    {
+      "index": 674,
+      "start": 2231.0,
+      "end": 2233.03,
+      "duration": 2.03,
+      "text": "even though it's for our consumption for"
+    },
+    {
+      "index": 675,
+      "start": 2233.04,
+      "end": 2234.75,
+      "duration": 1.71,
+      "text": "our understanding to make sure that I"
+    },
+    {
+      "index": 676,
+      "start": 2234.76,
+      "end": 2237.19,
+      "duration": 2.43,
+      "text": "have done this arithmetic right to make"
+    },
+    {
+      "index": 677,
+      "start": 2237.2,
+      "end": 2239.63,
+      "duration": 2.43,
+      "text": "sure that my arithmetic is right I want"
+    },
+    {
+      "index": 678,
+      "start": 2239.64,
+      "end": 2241.87,
+      "duration": 2.23,
+      "text": "to do this two compliment and check"
+    },
+    {
+      "index": 679,
+      "start": 2241.88,
+      "end": 2244.19,
+      "duration": 2.31,
+      "text": "whether it's really seven I knew it's"
+    },
+    {
+      "index": 680,
+      "start": 2244.2,
+      "end": 2246.75,
+      "duration": 2.55,
+      "text": "seven I knew it negative but I'm not"
+    },
+    {
+      "index": 681,
+      "start": 2246.76,
+      "end": 2248.589,
+      "duration": 1.829,
+      "text": "sure it is seven"
+    },
+    {
+      "index": 682,
+      "start": 2248.599,
+      "end": 2250.67,
+      "duration": 2.071,
+      "text": "how do I check it is seven by taking two"
+    },
+    {
+      "index": 683,
+      "start": 2250.68,
+      "end": 2252.71,
+      "duration": 2.03,
+      "text": "compliment and finding out is indeed"
+    },
+    {
+      "index": 684,
+      "start": 2252.72,
+      "end": 2255.55,
+      "duration": 2.83,
+      "text": "seven but this is zero but I know the"
+    },
+    {
+      "index": 685,
+      "start": 2255.56,
+      "end": 2256.99,
+      "duration": 1.43,
+      "text": "number is negative so I cannot have a"
+    },
+    {
+      "index": 686,
+      "start": 2257.0,
+      "end": 2258.71,
+      "duration": 1.71,
+      "text": "zero here when the number is negative"
+    },
+    {
+      "index": 687,
+      "start": 2258.72,
+      "end": 2260.309,
+      "duration": 1.589,
+      "text": "the answer is minus 7 when the answer"
+    },
+    {
+      "index": 688,
+      "start": 2260.319,
+      "end": 2263.27,
+      "duration": 2.951,
+      "text": "is- 7 I can't have a zero here one here"
+    },
+    {
+      "index": 689,
+      "start": 2263.28,
+      "end": 2265.71,
+      "duration": 2.43,
+      "text": "so negative numbers are represented in"
+    },
+    {
+      "index": 690,
+      "start": 2265.72,
+      "end": 2267.79,
+      "duration": 2.07,
+      "text": "computers by two's"
+    },
+    {
+      "index": 691,
+      "start": 2267.8,
+      "end": 2273.95,
+      "duration": 6.15,
+      "text": "complement whose MSB is"
+    },
+    {
+      "index": 692,
+      "start": 2277.71,
+      "end": 2277.72,
+      "duration": 0.01,
+      "text": "one so if you want to give a command"
+    },
+    {
+      "index": 693,
+      "start": 2277.72,
+      "end": 2280.069,
+      "duration": 2.349,
+      "text": "negative number input to the computer"
+    },
+    {
+      "index": 694,
+      "start": 2280.079,
+      "end": 2282.27,
+      "duration": 2.191,
+      "text": "you don't give a number and punch in the"
+    },
+    {
+      "index": 695,
+      "start": 2282.28,
+      "end": 2284.589,
+      "duration": 2.309,
+      "text": "negative sign the calculator of course"
+    },
+    {
+      "index": 696,
+      "start": 2284.599,
+      "end": 2287.95,
+      "duration": 3.351,
+      "text": "you type that but minus does not that"
+    },
+    {
+      "index": 697,
+      "start": 2287.96,
+      "end": 2290.19,
+      "duration": 2.23,
+      "text": "minus or sign of the number you have"
+    },
+    {
+      "index": 698,
+      "start": 2290.2,
+      "end": 2291.99,
+      "duration": 1.79,
+      "text": "this in the calculator plus minus sign"
+    },
+    {
+      "index": 699,
+      "start": 2292.0,
+      "end": 2294.99,
+      "duration": 2.99,
+      "text": "you know if you punch that key your"
+    },
+    {
+      "index": 700,
+      "start": 2295.0,
+      "end": 2297.71,
+      "duration": 2.71,
+      "text": "minus does not go get stored the minus"
+    },
+    {
+      "index": 701,
+      "start": 2297.72,
+      "end": 2299.55,
+      "duration": 1.83,
+      "text": "translated immediately you have to"
+    },
+    {
+      "index": 702,
+      "start": 2299.56,
+      "end": 2301.43,
+      "duration": 1.87,
+      "text": "convert whatever number you had written"
+    },
+    {
+      "index": 703,
+      "start": 2301.44,
+      "end": 2303.829,
+      "duration": 2.389,
+      "text": "earlier had to be converted to two"
+    },
+    {
+      "index": 704,
+      "start": 2303.839,
+      "end": 2305.23,
+      "duration": 1.391,
+      "text": "complement and stored with a negative"
+    },
+    {
+      "index": 705,
+      "start": 2305.24,
+      "end": 2309.27,
+      "duration": 4.03,
+      "text": "one with with a one MSB so so msb1 is"
+    },
+    {
+      "index": 706,
+      "start": 2309.28,
+      "end": 2313.95,
+      "duration": 4.67,
+      "text": "the significant msb1 is indicative of"
+    },
+    {
+      "index": 707,
+      "start": 2313.96,
+      "end": 2316.109,
+      "duration": 2.149,
+      "text": "the fact that the number is represented"
+    },
+    {
+      "index": 708,
+      "start": 2316.119,
+      "end": 2318.71,
+      "duration": 2.591,
+      "text": "as a negative number negative number is"
+    },
+    {
+      "index": 709,
+      "start": 2318.72,
+      "end": 2320.79,
+      "duration": 2.07,
+      "text": "represented similarly the computer when"
+    },
+    {
+      "index": 710,
+      "start": 2320.8,
+      "end": 2322.63,
+      "duration": 1.83,
+      "text": "it find finds out the result gives you a"
+    },
+    {
+      "index": 711,
+      "start": 2322.64,
+      "end": 2324.67,
+      "duration": 2.03,
+      "text": "negative number in the case of negative"
+    },
+    {
+      "index": 712,
+      "start": 2324.68,
+      "end": 2327.03,
+      "duration": 2.35,
+      "text": "numbers it gives a one as MSB you know"
+    },
+    {
+      "index": 713,
+      "start": 2327.04,
+      "end": 2328.91,
+      "duration": 1.87,
+      "text": "it's a negative number you deal with it"
+    },
+    {
+      "index": 714,
+      "start": 2328.92,
+      "end": 2330.99,
+      "duration": 2.07,
+      "text": "the way you want it is a final step and"
+    },
+    {
+      "index": 715,
+      "start": 2331.0,
+      "end": 2333.349,
+      "duration": 2.349,
+      "text": "you want to give the answer to the"
+    },
+    {
+      "index": 716,
+      "start": 2333.359,
+      "end": 2335.27,
+      "duration": 1.911,
+      "text": "examination then you won't write it like"
+    },
+    {
+      "index": 717,
+      "start": 2335.28,
+      "end": 2336.87,
+      "duration": 1.59,
+      "text": "this you'll say it's minus 7 in your"
+    },
+    {
+      "index": 718,
+      "start": 2336.88,
+      "end": 2338.589,
+      "duration": 1.709,
+      "text": "answer paper"
+    },
+    {
+      "index": 719,
+      "start": 2338.599,
+      "end": 2339.99,
+      "duration": 1.391,
+      "text": "but if this is going to be F into the"
+    },
+    {
+      "index": 720,
+      "start": 2340.0,
+      "end": 2341.55,
+      "duration": 1.55,
+      "text": "next stage of computation because after"
+    },
+    {
+      "index": 721,
+      "start": 2341.56,
+      "end": 2344.19,
+      "duration": 2.63,
+      "text": "all you do computation a long equation"
+    },
+    {
+      "index": 722,
+      "start": 2344.2,
+      "end": 2346.589,
+      "duration": 2.389,
+      "text": "or whatever arithmetic problem solving"
+    },
+    {
+      "index": 723,
+      "start": 2346.599,
+      "end": 2347.829,
+      "duration": 1.23,
+      "text": "this is an intermediate result which"
+    },
+    {
+      "index": 724,
+      "start": 2347.839,
+      "end": 2350.43,
+      "duration": 2.591,
+      "text": "will feed into the next stage at that"
+    },
+    {
+      "index": 725,
+      "start": 2350.44,
+      "end": 2352.109,
+      "duration": 1.669,
+      "text": "time again you have to feed minus 7 to"
+    },
+    {
+      "index": 726,
+      "start": 2352.119,
+      "end": 2354.43,
+      "duration": 2.311,
+      "text": "the computer the computer we don't have"
+    },
+    {
+      "index": 727,
+      "start": 2354.44,
+      "end": 2356.55,
+      "duration": 2.11,
+      "text": "to worry about translating to- 7 and"
+    },
+    {
+      "index": 728,
+      "start": 2356.56,
+      "end": 2358.67,
+      "duration": 2.11,
+      "text": "making it plus 7 again and then- 7 all"
+    },
+    {
+      "index": 729,
+      "start": 2358.68,
+      "end": 2362.91,
+      "duration": 4.23,
+      "text": "that step so this is -"
+    },
+    {
+      "index": 730,
+      "start": 2362.92,
+      "end": 2366.23,
+      "duration": 3.31,
+      "text": "7 this extra step was just to tell you"
+    },
+    {
+      "index": 731,
+      "start": 2366.24,
+      "end": 2369.47,
+      "duration": 3.23,
+      "text": "it is not wrong arithmetic we"
+    },
+    {
+      "index": 732,
+      "start": 2369.48,
+      "end": 2372.109,
+      "duration": 2.629,
+      "text": "did I showed you that right arithmetic"
+    },
+    {
+      "index": 733,
+      "start": 2372.119,
+      "end": 2374.829,
+      "duration": 2.71,
+      "text": "is all in right arithmetic only so the"
+    },
+    {
+      "index": 734,
+      "start": 2374.839,
+      "end": 2381.19,
+      "duration": 6.351,
+      "text": "answer is this in the case of 5 -"
+    },
+    {
+      "index": 735,
+      "start": 2381.2,
+      "end": 2385.63,
+      "duration": 4.43,
+      "text": "12 and this in the case of 12 - 5"
+    },
+    {
+      "index": 736,
+      "start": 2385.64,
+      "end": 2387.75,
+      "duration": 2.11,
+      "text": "because of 12 - 5 the answer is + 7 so"
+    },
+    {
+      "index": 737,
+      "start": 2387.76,
+      "end": 2388.75,
+      "duration": 0.99,
+      "text": "it is"
+    },
+    {
+      "index": 738,
+      "start": 2388.76,
+      "end": 2395.55,
+      "duration": 6.79,
+      "text": "0111 so 0111 is + 5 0 1 1 is + 7 so now"
+    },
+    {
+      "index": 739,
+      "start": 2395.56,
+      "end": 2401.39,
+      "duration": 5.83,
+      "text": "the the sum of it is 12 - 5 is + 7 0 1 1"
+    },
+    {
+      "index": 740,
+      "start": 2401.4,
+      "end": 2407.19,
+      "duration": 5.79,
+      "text": "1 5 - 12 is -"
+    },
+    {
+      "index": 741,
+      "start": 2409.23,
+      "end": 2409.24,
+      "duration": 0.01,
+      "text": "7 and if you"
+    },
+    {
+      "index": 742,
+      "start": 2409.24,
+      "end": 2412.589,
+      "duration": 3.349,
+      "text": "don't believe me all I asking you to do"
+    },
+    {
+      "index": 743,
+      "start": 2412.599,
+      "end": 2414.309,
+      "duration": 1.71,
+      "text": "is to take the two compliment and see"
+    },
+    {
+      "index": 744,
+      "start": 2414.319,
+      "end": 2417.99,
+      "duration": 3.671,
+      "text": "yourself is s all I'm"
+    },
+    {
+      "index": 745,
+      "start": 2418.0,
+      "end": 2421.109,
+      "duration": 3.109,
+      "text": "saying any questions here the"
+    },
+    {
+      "index": 746,
+      "start": 2421.119,
+      "end": 2424.19,
+      "duration": 3.071,
+      "text": "complimenting of numbers"
+    },
+    {
+      "index": 747,
+      "start": 2424.2,
+      "end": 2427.67,
+      "duration": 3.47,
+      "text": "makes subtraction and adding operation"
+    },
+    {
+      "index": 748,
+      "start": 2427.68,
+      "end": 2428.829,
+      "duration": 1.149,
+      "text": "that is where the crack of the whole"
+    },
+    {
+      "index": 749,
+      "start": 2428.839,
+      "end": 2432.309,
+      "duration": 3.47,
+      "text": "matter is today I introduce number"
+    },
+    {
+      "index": 750,
+      "start": 2432.319,
+      "end": 2434.99,
+      "duration": 2.671,
+      "text": "systems in compliment system to tell you"
+    },
+    {
+      "index": 751,
+      "start": 2435.0,
+      "end": 2437.75,
+      "duration": 2.75,
+      "text": "of course I always told you this is the"
+    },
+    {
+      "index": 752,
+      "start": 2437.76,
+      "end": 2439.309,
+      "duration": 1.549,
+      "text": "way to do arithmetic but I thought I"
+    },
+    {
+      "index": 753,
+      "start": 2439.319,
+      "end": 2442.349,
+      "duration": 3.03,
+      "text": "want to tell you how why they do it why"
+    },
+    {
+      "index": 754,
+      "start": 2442.359,
+      "end": 2446.39,
+      "duration": 4.031,
+      "text": "they do it is two complement"
+    },
+    {
+      "index": 755,
+      "start": 2446.4,
+      "end": 2450.67,
+      "duration": 4.27,
+      "text": "numbers if you have you can add and then"
+    },
+    {
+      "index": 756,
+      "start": 2450.68,
+      "end": 2453.19,
+      "duration": 2.51,
+      "text": "get a subtraction performed subtraction"
+    },
+    {
+      "index": 757,
+      "start": 2453.2,
+      "end": 2455.349,
+      "duration": 2.149,
+      "text": "is reduced in addition operation not"
+    },
+    {
+      "index": 758,
+      "start": 2455.359,
+      "end": 2456.55,
+      "duration": 1.191,
+      "text": "reduce if you don't want to call it"
+    },
+    {
+      "index": 759,
+      "start": 2456.56,
+      "end": 2457.79,
+      "duration": 1.23,
+      "text": "reduce"
+    },
+    {
+      "index": 760,
+      "start": 2457.8,
+      "end": 2460.51,
+      "duration": 2.71,
+      "text": "inverted why do you have to do that I"
+    },
+    {
+      "index": 761,
+      "start": 2460.52,
+      "end": 2462.87,
+      "duration": 2.35,
+      "text": "can have a single Hardware called"
+    },
+    {
+      "index": 762,
+      "start": 2462.88,
+      "end": 2465.47,
+      "duration": 2.59,
+      "text": "Adder one Hardware unit and since I'm"
+    },
+    {
+      "index": 763,
+      "start": 2465.48,
+      "end": 2467.309,
+      "duration": 1.829,
+      "text": "not going to use the same Hardware both"
+    },
+    {
+      "index": 764,
+      "start": 2467.319,
+      "end": 2468.87,
+      "duration": 1.551,
+      "text": "for adding and subtracting at the same"
+    },
+    {
+      "index": 765,
+      "start": 2468.88,
+      "end": 2471.51,
+      "duration": 2.63,
+      "text": "time when I want add I add when I want"
+    },
+    {
+      "index": 766,
+      "start": 2471.52,
+      "end": 2473.15,
+      "duration": 1.63,
+      "text": "subtract I subtract all I have to feed"
+    },
+    {
+      "index": 767,
+      "start": 2473.16,
+      "end": 2475.75,
+      "duration": 2.59,
+      "text": "is the numbers in two complement form if"
+    },
+    {
+      "index": 768,
+      "start": 2475.76,
+      "end": 2477.109,
+      "duration": 1.349,
+      "text": "you feed the numbers in the regular form"
+    },
+    {
+      "index": 769,
+      "start": 2477.119,
+      "end": 2480.03,
+      "duration": 2.911,
+      "text": "it gets added in two compliment form if"
+    },
+    {
+      "index": 770,
+      "start": 2480.04,
+      "end": 2482.71,
+      "duration": 2.67,
+      "text": "put it it gets"
+    },
+    {
+      "index": 771,
+      "start": 2482.72,
+      "end": 2485.55,
+      "duration": 2.83,
+      "text": "subtractor so the question now is how do"
+    },
+    {
+      "index": 772,
+      "start": 2485.56,
+      "end": 2487.43,
+      "duration": 1.87,
+      "text": "you convert a given number to two compl"
+    },
+    {
+      "index": 773,
+      "start": 2487.44,
+      "end": 2490.67,
+      "duration": 3.23,
+      "text": "number that is extra logic isn't that as"
+    },
+    {
+      "index": 774,
+      "start": 2490.68,
+      "end": 2492.309,
+      "duration": 1.629,
+      "text": "I said nothing is free there's no such"
+    },
+    {
+      "index": 775,
+      "start": 2492.319,
+      "end": 2494.79,
+      "duration": 2.471,
+      "text": "thing as free lunch as they say somebody"
+    },
+    {
+      "index": 776,
+      "start": 2494.8,
+      "end": 2496.27,
+      "duration": 1.47,
+      "text": "inv you for lunch you know that there is"
+    },
+    {
+      "index": 777,
+      "start": 2496.28,
+      "end": 2499.069,
+      "duration": 2.789,
+      "text": "something else coming for favor so that"
+    },
+    {
+      "index": 778,
+      "start": 2499.079,
+      "end": 2500.51,
+      "duration": 1.431,
+      "text": "means you need to do something to get"
+    },
+    {
+      "index": 779,
+      "start": 2500.52,
+      "end": 2504.43,
+      "duration": 3.91,
+      "text": "these two compliment"
+    },
+    {
+      "index": 780,
+      "start": 2507.829,
+      "end": 2507.839,
+      "duration": 0.01,
+      "text": "numbers and easy because all it"
+    },
+    {
+      "index": 781,
+      "start": 2507.839,
+      "end": 2510.47,
+      "duration": 2.631,
+      "text": "inversion and add"
+    },
+    {
+      "index": 782,
+      "start": 2510.48,
+      "end": 2512.63,
+      "duration": 2.15,
+      "text": "one how do you get an inverted of a"
+    },
+    {
+      "index": 783,
+      "start": 2512.64,
+      "end": 2514.39,
+      "duration": 1.75,
+      "text": "number just put pass it through an"
+    },
+    {
+      "index": 784,
+      "start": 2514.4,
+      "end": 2517.43,
+      "duration": 3.03,
+      "text": "inverter so quickest way to invert is"
+    },
+    {
+      "index": 785,
+      "start": 2517.44,
+      "end": 2519.71,
+      "duration": 2.27,
+      "text": "put an inverter which all of us"
+    },
+    {
+      "index": 786,
+      "start": 2519.72,
+      "end": 2522.71,
+      "duration": 2.99,
+      "text": "know so first I'll tell you how to get"
+    },
+    {
+      "index": 787,
+      "start": 2522.72,
+      "end": 2524.51,
+      "duration": 1.79,
+      "text": "one's compliment then we'll see how to"
+    },
+    {
+      "index": 788,
+      "start": 2524.52,
+      "end": 2527.43,
+      "duration": 2.91,
+      "text": "do two's compliment of a given number so"
+    },
+    {
+      "index": 789,
+      "start": 2527.44,
+      "end": 2540.71,
+      "duration": 13.27,
+      "text": "now I now reduced the subtraction"
+    },
+    {
+      "index": 790,
+      "start": 2544.589,
+      "end": 2544.599,
+      "duration": 0.01,
+      "text": "to if you all agree on"
+    },
+    {
+      "index": 791,
+      "start": 2544.599,
+      "end": 2546.95,
+      "duration": 2.351,
+      "text": "this there anyone who doesn't agree on"
+    },
+    {
+      "index": 792,
+      "start": 2546.96,
+      "end": 2548.91,
+      "duration": 1.95,
+      "text": "this"
+    },
+    {
+      "index": 793,
+      "start": 2548.92,
+      "end": 2549.99,
+      "duration": 1.07,
+      "text": "you"
+    },
+    {
+      "index": 794,
+      "start": 2550.0,
+      "end": 2554.109,
+      "duration": 4.109,
+      "text": "better okay other now next step is how"
+    },
+    {
+      "index": 795,
+      "start": 2554.119,
+      "end": 2555.23,
+      "duration": 1.111,
+      "text": "are we going to convert a given number"
+    },
+    {
+      "index": 796,
+      "start": 2555.24,
+      "end": 2558.03,
+      "duration": 2.79,
+      "text": "to two's compliment before I can add it"
+    },
+    {
+      "index": 797,
+      "start": 2558.04,
+      "end": 2560.069,
+      "duration": 2.029,
+      "text": "so first let us do one's compliment that"
+    },
+    {
+      "index": 798,
+      "start": 2560.079,
+      "end": 2561.67,
+      "duration": 1.591,
+      "text": "is why I told you the hardware wise it"
+    },
+    {
+      "index": 799,
+      "start": 2561.68,
+      "end": 2562.99,
+      "duration": 1.31,
+      "text": "is easier to do that one's compliment"
+    },
+    {
+      "index": 800,
+      "start": 2563.0,
+      "end": 2565.39,
+      "duration": 2.39,
+      "text": "and plus one even though in principle"
+    },
+    {
+      "index": 801,
+      "start": 2565.4,
+      "end": 2567.15,
+      "duration": 1.75,
+      "text": "you want to do this this borrowing from"
+    },
+    {
+      "index": 802,
+      "start": 2567.16,
+      "end": 2568.75,
+      "duration": 1.59,
+      "text": "the previous all those things I want to"
+    },
+    {
+      "index": 803,
+      "start": 2568.76,
+      "end": 2570.91,
+      "duration": 2.15,
+      "text": "avoid a simple complimenting will give"
+    },
+    {
+      "index": 804,
+      "start": 2570.92,
+      "end": 2572.39,
+      "duration": 1.47,
+      "text": "you once compliment all I have to do is"
+    },
+    {
+      "index": 805,
+      "start": 2572.4,
+      "end": 2574.109,
+      "duration": 1.709,
+      "text": "add an extra one"
+    },
+    {
+      "index": 806,
+      "start": 2574.119,
+      "end": 2575.99,
+      "duration": 1.871,
+      "text": "somewhere I can do it at the beginning"
+    },
+    {
+      "index": 807,
+      "start": 2576.0,
+      "end": 2577.91,
+      "duration": 1.91,
+      "text": "or I can do it to the end"
+    },
+    {
+      "index": 808,
+      "start": 2577.92,
+      "end": 2582.51,
+      "duration": 4.59,
+      "text": "is it not so one compliment is an"
+    },
+    {
+      "index": 809,
+      "start": 2582.52,
+      "end": 2588.79,
+      "duration": 6.27,
+      "text": "inverter so it is a c bar no problem any"
+    },
+    {
+      "index": 810,
+      "start": 2588.8,
+      "end": 2592.95,
+      "duration": 4.15,
+      "text": "bit but the problem is a given bit a can"
+    },
+    {
+      "index": 811,
+      "start": 2592.96,
+      "end": 2595.349,
+      "duration": 2.389,
+      "text": "be converted into once compliment with"
+    },
+    {
+      "index": 812,
+      "start": 2595.359,
+      "end": 2596.829,
+      "duration": 1.47,
+      "text": "inverter but I don't know when to"
+    },
+    {
+      "index": 813,
+      "start": 2596.839,
+      "end": 2599.27,
+      "duration": 2.431,
+      "text": "convert when not to convert when it's"
+    },
+    {
+      "index": 814,
+      "start": 2599.28,
+      "end": 2600.47,
+      "duration": 1.19,
+      "text": "adding"
+    },
+    {
+      "index": 815,
+      "start": 2600.48,
+      "end": 2603.15,
+      "duration": 2.67,
+      "text": "operation I have the same Hardware unit"
+    },
+    {
+      "index": 816,
+      "start": 2603.16,
+      "end": 2604.19,
+      "duration": 1.03,
+      "text": "called"
+    },
+    {
+      "index": 817,
+      "start": 2604.2,
+      "end": 2608.069,
+      "duration": 3.869,
+      "text": "adder in which I give a and b"
+    },
+    {
+      "index": 818,
+      "start": 2608.079,
+      "end": 2612.069,
+      "duration": 3.99,
+      "text": "without converting it adds up when I"
+    },
+    {
+      "index": 819,
+      "start": 2612.079,
+      "end": 2614.51,
+      "duration": 2.431,
+      "text": "give a and convert b as two complement"
+    },
+    {
+      "index": 820,
+      "start": 2614.52,
+      "end": 2617.23,
+      "duration": 2.71,
+      "text": "and feed it it"
+    },
+    {
+      "index": 821,
+      "start": 2617.24,
+      "end": 2620.309,
+      "duration": 3.069,
+      "text": "subtracts so I need to know when to give"
+    },
+    {
+      "index": 822,
+      "start": 2620.319,
+      "end": 2623.23,
+      "duration": 2.911,
+      "text": "the number directly as a correct number"
+    },
+    {
+      "index": 823,
+      "start": 2623.24,
+      "end": 2625.51,
+      "duration": 2.27,
+      "text": "when to give this number as a two's"
+    },
+    {
+      "index": 824,
+      "start": 2625.52,
+      "end": 2627.27,
+      "duration": 1.75,
+      "text": "complement number whenever I need"
+    },
+    {
+      "index": 825,
+      "start": 2627.28,
+      "end": 2628.589,
+      "duration": 1.309,
+      "text": "subtraction I need to give it as a two"
+    },
+    {
+      "index": 826,
+      "start": 2628.599,
+      "end": 2630.069,
+      "duration": 1.47,
+      "text": "complement number whenever I need"
+    },
+    {
+      "index": 827,
+      "start": 2630.079,
+      "end": 2631.79,
+      "duration": 1.711,
+      "text": "addition I need to give it directly so I"
+    },
+    {
+      "index": 828,
+      "start": 2631.8,
+      "end": 2633.71,
+      "duration": 1.91,
+      "text": "need to have a control of this addition"
+    },
+    {
+      "index": 829,
+      "start": 2633.72,
+      "end": 2635.67,
+      "duration": 1.95,
+      "text": "Inver I need to have a control of this"
+    },
+    {
+      "index": 830,
+      "start": 2635.68,
+      "end": 2638.87,
+      "duration": 3.19,
+      "text": "inversion operation whenever I need so"
+    },
+    {
+      "index": 831,
+      "start": 2638.88,
+      "end": 2641.309,
+      "duration": 2.429,
+      "text": "very simple technique for that let us do"
+    },
+    {
+      "index": 832,
+      "start": 2641.319,
+      "end": 2642.829,
+      "duration": 1.51,
+      "text": "an exclusive argate suppose I have an"
+    },
+    {
+      "index": 833,
+      "start": 2642.839,
+      "end": 2646.51,
+      "duration": 3.671,
+      "text": "exclusive"
+    },
+    {
+      "index": 834,
+      "start": 2648.67,
+      "end": 2648.68,
+      "duration": 0.01,
+      "text": "argate this is the number I want to"
+    },
+    {
+      "index": 835,
+      "start": 2648.68,
+      "end": 2650.95,
+      "duration": 2.27,
+      "text": "invert"
+    },
+    {
+      "index": 836,
+      "start": 2650.96,
+      "end": 2654.19,
+      "duration": 3.23,
+      "text": "AI not always but whenever I want when"
+    },
+    {
+      "index": 837,
+      "start": 2654.2,
+      "end": 2666.03,
+      "duration": 11.83,
+      "text": "do I want when s is equal to 1 s is a"
+    },
+    {
+      "index": 838,
+      "start": 2668.91,
+      "end": 2668.92,
+      "duration": 0.01,
+      "text": "subtraction"
+    },
+    {
+      "index": 839,
+      "start": 2668.92,
+      "end": 2671.109,
+      "duration": 2.189,
+      "text": "suppose I give a s"
+    },
+    {
+      "index": 840,
+      "start": 2671.119,
+      "end": 2674.829,
+      "duration": 3.71,
+      "text": "here second input"
+    },
+    {
+      "index": 841,
+      "start": 2674.839,
+      "end": 2676.99,
+      "duration": 2.151,
+      "text": "the if this is"
+    },
+    {
+      "index": 842,
+      "start": 2677.0,
+      "end": 2680.349,
+      "duration": 3.349,
+      "text": "one and this is one what the output"
+    },
+    {
+      "index": 843,
+      "start": 2680.359,
+      "end": 2681.589,
+      "duration": 1.23,
+      "text": "exclusive or"
+    },
+    {
+      "index": 844,
+      "start": 2681.599,
+      "end": 2684.67,
+      "duration": 3.071,
+      "text": "gate One One exclusive what input"
+    },
+    {
+      "index": 845,
+      "start": 2684.68,
+      "end": 2689.67,
+      "duration": 4.99,
+      "text": "output zero when this is"
+    },
+    {
+      "index": 846,
+      "start": 2689.68,
+      "end": 2693.91,
+      "duration": 4.23,
+      "text": "zero and this is AI this also becomes AI"
+    },
+    {
+      "index": 847,
+      "start": 2693.92,
+      "end": 2706.51,
+      "duration": 12.59,
+      "text": "so when s is zero that's for ADD"
+    },
+    {
+      "index": 848,
+      "start": 2708.23,
+      "end": 2708.24,
+      "duration": 0.01,
+      "text": "when I give s equal"
+    },
+    {
+      "index": 849,
+      "start": 2708.24,
+      "end": 2710.99,
+      "duration": 2.75,
+      "text": "Z it is addition"
+    },
+    {
+      "index": 850,
+      "start": 2711.0,
+      "end": 2718.19,
+      "duration": 7.19,
+      "text": "operation this is a bar this is a a"
+    },
+    {
+      "index": 851,
+      "start": 2728.79,
+      "end": 2728.8,
+      "duration": 0.01,
+      "text": "AI do you agree with me if s is"
+    },
+    {
+      "index": 852,
+      "start": 2728.8,
+      "end": 2732.349,
+      "duration": 3.549,
+      "text": "zero this is zero this is zero this is"
+    },
+    {
+      "index": 853,
+      "start": 2732.359,
+      "end": 2737.51,
+      "duration": 5.151,
+      "text": "one this is One S is one if this is zero"
+    },
+    {
+      "index": 854,
+      "start": 2737.52,
+      "end": 2740.79,
+      "duration": 3.27,
+      "text": "this is one this is one this is zero so"
+    },
+    {
+      "index": 855,
+      "start": 2740.8,
+      "end": 2742.19,
+      "duration": 1.39,
+      "text": "whenever I want to invert I give s is"
+    },
+    {
+      "index": 856,
+      "start": 2742.2,
+      "end": 2743.75,
+      "duration": 1.55,
+      "text": "equal to one whenever do not want to"
+    },
+    {
+      "index": 857,
+      "start": 2743.76,
+      "end": 2746.99,
+      "duration": 3.23,
+      "text": "invert I put s z now not only I can"
+    },
+    {
+      "index": 858,
+      "start": 2747.0,
+      "end": 2748.63,
+      "duration": 1.63,
+      "text": "invert and get one compliment I can do"
+    },
+    {
+      "index": 859,
+      "start": 2748.64,
+      "end": 2751.549,
+      "duration": 2.909,
+      "text": "it at will do it when I need"
+    },
+    {
+      "index": 860,
+      "start": 2751.559,
+      "end": 2755.75,
+      "duration": 4.191,
+      "text": "it so like simple two complement circuit"
+    },
+    {
+      "index": 861,
+      "start": 2755.76,
+      "end": 2758.63,
+      "duration": 2.87,
+      "text": "one's complement circuitry is a bank of"
+    },
+    {
+      "index": 862,
+      "start": 2758.64,
+      "end": 2760.549,
+      "duration": 1.909,
+      "text": "exclusive orates to which I feed the"
+    },
+    {
+      "index": 863,
+      "start": 2760.559,
+      "end": 2763.15,
+      "duration": 2.591,
+      "text": "inputs so this is my two compl one's"
+    },
+    {
+      "index": 864,
+      "start": 2763.16,
+      "end": 2766.87,
+      "duration": 3.71,
+      "text": "compliment circuit or we call it once"
+    },
+    {
+      "index": 865,
+      "start": 2766.88,
+      "end": 2769.39,
+      "duration": 2.51,
+      "text": "compliment because we want to give big"
+    },
+    {
+      "index": 866,
+      "start": 2769.4,
+      "end": 2771.71,
+      "duration": 2.31,
+      "text": "names to small"
+    },
+    {
+      "index": 867,
+      "start": 2771.72,
+      "end": 2773.91,
+      "duration": 2.19,
+      "text": "things"
+    },
+    {
+      "index": 868,
+      "start": 2773.92,
+      "end": 2776.829,
+      "duration": 2.909,
+      "text": "right my once"
+    },
+    {
+      "index": 869,
+      "start": 2776.839,
+      "end": 2783.95,
+      "duration": 7.111,
+      "text": "compliment"
+    },
+    {
+      "index": 870,
+      "start": 2787.67,
+      "end": 2787.68,
+      "duration": 0.01,
+      "text": "Hardware I give a series of exclusive AR"
+    },
+    {
+      "index": 871,
+      "start": 2787.68,
+      "end": 2791.79,
+      "duration": 4.11,
+      "text": "gets let us say four bits let us be"
+    },
+    {
+      "index": 872,
+      "start": 2791.8,
+      "end": 2794.95,
+      "duration": 3.15,
+      "text": "happy with four bits"
+    },
+    {
+      "index": 873,
+      "start": 2801.349,
+      "end": 2801.359,
+      "duration": 0.01,
+      "text": "today a z A1 A2 A3 or B because we said"
+    },
+    {
+      "index": 874,
+      "start": 2801.359,
+      "end": 2805.03,
+      "duration": 3.671,
+      "text": "B A is B just it can be anything I just"
+    },
+    {
+      "index": 875,
+      "start": 2805.04,
+      "end": 2807.47,
+      "duration": 2.43,
+      "text": "for sake of continuity of the lecture"
+    },
+    {
+      "index": 876,
+      "start": 2807.48,
+      "end": 2809.67,
+      "duration": 2.19,
+      "text": "I'm giving B because a minus b or a plus"
+    },
+    {
+      "index": 877,
+      "start": 2809.68,
+      "end": 2813.309,
+      "duration": 3.629,
+      "text": "b know so B I'm converting can be a it"
+    },
+    {
+      "index": 878,
+      "start": 2813.319,
+      "end": 2817.069,
+      "duration": 3.75,
+      "text": "can be P can be Q doesn't matter now I'm"
+    },
+    {
+      "index": 879,
+      "start": 2817.079,
+      "end": 2825.43,
+      "duration": 8.351,
+      "text": "going to connect all the other inputs"
+    },
+    {
+      "index": 880,
+      "start": 2828.63,
+      "end": 2828.64,
+      "duration": 0.01,
+      "text": "together and give this as"
+    },
+    {
+      "index": 881,
+      "start": 2828.64,
+      "end": 2831.069,
+      "duration": 2.429,
+      "text": "s whenever I want subtraction I make"
+    },
+    {
+      "index": 882,
+      "start": 2831.079,
+      "end": 2835.03,
+      "duration": 3.951,
+      "text": "this s equal to 1 I get B Bar b0 Bar B1"
+    },
+    {
+      "index": 883,
+      "start": 2835.04,
+      "end": 2838.63,
+      "duration": 3.59,
+      "text": "bar B2 bar B3 bar whenever s is zero"
+    },
+    {
+      "index": 884,
+      "start": 2838.64,
+      "end": 2842.19,
+      "duration": 3.55,
+      "text": "that means when add s is equal to zero"
+    },
+    {
+      "index": 885,
+      "start": 2842.2,
+      "end": 2844.309,
+      "duration": 2.109,
+      "text": "for"
+    },
+    {
+      "index": 886,
+      "start": 2844.319,
+      "end": 2847.39,
+      "duration": 3.071,
+      "text": "add one for subtract"
+    },
+    {
+      "index": 887,
+      "start": 2847.4,
+      "end": 2850.19,
+      "duration": 2.79,
+      "text": "so if it's adding it"
+    },
+    {
+      "index": 888,
+      "start": 2850.2,
+      "end": 2855.19,
+      "duration": 4.99,
+      "text": "is a0 b0 a0 A1 A2 A3 will come out"
+    },
+    {
+      "index": 889,
+      "start": 2855.2,
+      "end": 2858.589,
+      "duration": 3.389,
+      "text": "subtraction a z bar A1 bar A2 bar A3 bar"
+    },
+    {
+      "index": 890,
+      "start": 2858.599,
+      "end": 2860.91,
+      "duration": 2.311,
+      "text": "so A3 bar will come out so it's one"
+    },
+    {
+      "index": 891,
+      "start": 2860.92,
+      "end": 2862.39,
+      "duration": 1.47,
+      "text": "compliment Circuit of course I have to"
+    },
+    {
+      "index": 892,
+      "start": 2862.4,
+      "end": 2864.829,
+      "duration": 2.429,
+      "text": "add one to we will see how to do that so"
+    },
+    {
+      "index": 893,
+      "start": 2864.839,
+      "end": 2867.15,
+      "duration": 2.311,
+      "text": "all I have to do is now I have an"
+    },
+    {
+      "index": 894,
+      "start": 2867.16,
+      "end": 2870.03,
+      "duration": 2.87,
+      "text": "Adder which we did elaborately in the"
+    },
+    {
+      "index": 895,
+      "start": 2870.04,
+      "end": 2871.63,
+      "duration": 1.59,
+      "text": "last couple of"
+    },
+    {
+      "index": 896,
+      "start": 2871.64,
+      "end": 2874.39,
+      "duration": 2.75,
+      "text": "lectures and I now have a one"
+    },
+    {
+      "index": 897,
+      "start": 2874.4,
+      "end": 2877.549,
+      "duration": 3.149,
+      "text": "compliment which a simple logic I also"
+    },
+    {
+      "index": 898,
+      "start": 2877.559,
+      "end": 2879.309,
+      "duration": 1.75,
+      "text": "proved to you that one's compliment or"
+    },
+    {
+      "index": 899,
+      "start": 2879.319,
+      "end": 2881.43,
+      "duration": 2.111,
+      "text": "two's compliment can be used in"
+    },
+    {
+      "index": 900,
+      "start": 2881.44,
+      "end": 2883.109,
+      "duration": 1.669,
+      "text": "conjunction with an Adder to get a"
+    },
+    {
+      "index": 901,
+      "start": 2883.119,
+      "end": 2884.99,
+      "duration": 1.871,
+      "text": "subtraction done all you have do is to"
+    },
+    {
+      "index": 902,
+      "start": 2885.0,
+      "end": 2886.79,
+      "duration": 1.79,
+      "text": "glue it together put it together to get"
+    },
+    {
+      "index": 903,
+      "start": 2886.8,
+      "end": 2889.43,
+      "duration": 2.63,
+      "text": "a subtractor we'll see that in the next"
+    },
+    {
+      "index": 904,
+      "start": 2889.44,
+      "end": 2892.43,
+      "duration": 2.99,
+      "text": "lecture how to get the subtraction now"
+    },
+    {
+      "index": 905,
+      "start": 2892.44,
+      "end": 2894.309,
+      "duration": 1.869,
+      "text": "there's nothing you can do it yourself I"
+    },
+    {
+      "index": 906,
+      "start": 2894.319,
+      "end": 2896.43,
+      "duration": 2.111,
+      "text": "have an Adder I have a compliment what"
+    },
+    {
+      "index": 907,
+      "start": 2896.44,
+      "end": 2897.39,
+      "duration": 0.95,
+      "text": "else do you"
+    },
+    {
+      "index": 908,
+      "start": 2897.4,
+      "end": 2899.51,
+      "duration": 2.11,
+      "text": "need tell me where do you give that"
+    },
+    {
+      "index": 909,
+      "start": 2899.52,
+      "end": 2901.99,
+      "duration": 2.47,
+      "text": "extra"
+    },
+    {
+      "index": 910,
+      "start": 2905.19,
+      "end": 2905.2,
+      "duration": 0.01,
+      "text": "one carry in is usually"
+    },
+    {
+      "index": 911,
+      "start": 2905.2,
+      "end": 2907.91,
+      "duration": 2.71,
+      "text": "zero carry in is usually zero in order"
+    },
+    {
+      "index": 912,
+      "start": 2907.92,
+      "end": 2910.23,
+      "duration": 2.31,
+      "text": "right first first stage carry is always"
+    },
+    {
+      "index": 913,
+      "start": 2910.24,
+      "end": 2913.349,
+      "duration": 3.109,
+      "text": "zero you make it"
+    },
+    {
+      "index": 914,
+      "start": 2913.359,
+      "end": 2916.03,
+      "duration": 2.671,
+      "text": "one not always one whenever you want"
+    },
+    {
+      "index": 915,
+      "start": 2916.04,
+      "end": 2919.99,
+      "duration": 3.95,
+      "text": "subtraction so you make that same as s"
+    },
+    {
+      "index": 916,
+      "start": 2920.0,
+      "end": 2921.91,
+      "duration": 1.91,
+      "text": "so I have a full"
+    },
+    {
+      "index": 917,
+      "start": 2921.92,
+      "end": 2925.63,
+      "duration": 3.71,
+      "text": "adder a directly feed B feed it through"
+    },
+    {
+      "index": 918,
+      "start": 2925.64,
+      "end": 2928.63,
+      "duration": 2.99,
+      "text": "this compliment"
+    },
+    {
+      "index": 919,
+      "start": 2933.19,
+      "end": 2933.2,
+      "duration": 0.01,
+      "text": "circuit and connect C to the same s"
+    },
+    {
+      "index": 920,
+      "start": 2933.2,
+      "end": 2934.109,
+      "duration": 0.909,
+      "text": "which is going to control the"
+    },
+    {
+      "index": 921,
+      "start": 2934.119,
+      "end": 2936.51,
+      "duration": 2.391,
+      "text": "complimentary circuit R then output I"
+    },
+    {
+      "index": 922,
+      "start": 2936.52,
+      "end": 2938.15,
+      "duration": 1.63,
+      "text": "get"
+    },
+    {
+      "index": 923,
+      "start": 2938.16,
+      "end": 2940.349,
+      "duration": 2.189,
+      "text": "fair enough very simple all I have to do"
+    },
+    {
+      "index": 924,
+      "start": 2940.359,
+      "end": 2943.23,
+      "duration": 2.871,
+      "text": "is do the drawing part of it you can do"
+    },
+    {
+      "index": 925,
+      "start": 2943.24,
+      "end": 2945.63,
+      "duration": 2.39,
+      "text": "it yourself it's in the"
+    },
+    {
+      "index": 926,
+      "start": 2945.64,
+      "end": 2948.99,
+      "duration": 3.35,
+      "text": "book just have to draw this compliment"
+    },
+    {
+      "index": 927,
+      "start": 2949.0,
+      "end": 2951.27,
+      "duration": 2.27,
+      "text": "direct input complimented input yes"
+    },
+    {
+      "index": 928,
+      "start": 2951.28,
+      "end": 2952.87,
+      "duration": 1.59,
+      "text": "being controlling the complimenting as"
+    },
+    {
+      "index": 929,
+      "start": 2952.88,
+      "end": 2955.19,
+      "duration": 2.31,
+      "text": "well as the carry input you get the"
+    },
+    {
+      "index": 930,
+      "start": 2955.2,
+      "end": 2958.71,
+      "duration": 3.51,
+      "text": "output result as negative"
+    },
+    {
+      "index": 931,
+      "start": 2962.109,
+      "end": 2962.119,
+      "duration": 0.01,
+      "text": "Aus are there any"
+    },
+    {
+      "index": 932,
+      "start": 2962.119,
+      "end": 2965.71,
+      "duration": 3.591,
+      "text": "questions"
+    },
+    {
+      "index": 933,
+      "start": 2967.5,
+      "end": 2967.51,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 934,
+      "start": 2967.51,
+      "end": 3055.63,
+      "duration": 88.12,
+      "text": "[Music]"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

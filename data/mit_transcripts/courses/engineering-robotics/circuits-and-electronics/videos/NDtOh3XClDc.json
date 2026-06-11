@@ -1,0 +1,6640 @@
+{
+  "video": {
+    "id": "NDtOh3XClDc",
+    "title": "Lecture 27 - PATTERN DETECTOR",
+    "url": "https://www.youtube.com/watch?v=NDtOh3XClDc",
+    "channel": "nptelhrd",
+    "duration": 3164,
+    "language": "en"
+  },
+  "segment_count": 946,
+  "segments": [
+    {
+      "index": 0,
+      "start": 23.55,
+      "end": 23.56,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 1,
+      "start": 23.56,
+      "end": 26.71,
+      "duration": 3.15,
+      "text": "oh oh"
+    },
+    {
+      "index": 2,
+      "start": 26.72,
+      "end": 28.39,
+      "duration": 1.67,
+      "text": "sh"
+    },
+    {
+      "index": 3,
+      "start": 28.4,
+      "end": 30.749,
+      "duration": 2.349,
+      "text": "sh sh"
+    },
+    {
+      "index": 4,
+      "start": 30.759,
+      "end": 32.12,
+      "duration": 1.361,
+      "text": "me"
+    },
+    {
+      "index": 5,
+      "start": 32.13,
+      "end": 67.06,
+      "duration": 34.93,
+      "text": "[Music]"
+    },
+    {
+      "index": 6,
+      "start": 110.399,
+      "end": 112.789,
+      "duration": 2.39,
+      "text": "so we talked about more machines and"
+    },
+    {
+      "index": 7,
+      "start": 112.799,
+      "end": 116.59,
+      "duration": 3.791,
+      "text": "Millie machines based on the outputs in"
+    },
+    {
+      "index": 8,
+      "start": 116.6,
+      "end": 120.83,
+      "duration": 4.23,
+      "text": "a Mil machine a mil stad graph"
+    },
+    {
+      "index": 9,
+      "start": 120.84,
+      "end": 122.029,
+      "duration": 1.189,
+      "text": "the"
+    },
+    {
+      "index": 10,
+      "start": 122.039,
+      "end": 124.789,
+      "duration": 2.75,
+      "text": "output at any state is defined by the"
+    },
+    {
+      "index": 11,
+      "start": 124.799,
+      "end": 128.389,
+      "duration": 3.59,
+      "text": "state and an input and the"
+    },
+    {
+      "index": 12,
+      "start": 128.399,
+      "end": 130.55,
+      "duration": 2.151,
+      "text": "input so in a given State there can be"
+    },
+    {
+      "index": 13,
+      "start": 130.56,
+      "end": 132.949,
+      "duration": 2.389,
+      "text": "more than one output because there more"
+    },
+    {
+      "index": 14,
+      "start": 132.959,
+      "end": 135.27,
+      "duration": 2.311,
+      "text": "than one input possibility the other"
+    },
+    {
+      "index": 15,
+      "start": 135.28,
+      "end": 137.27,
+      "duration": 1.99,
+      "text": "hand more machine the output is tied to"
+    },
+    {
+      "index": 16,
+      "start": 137.28,
+      "end": 139.27,
+      "duration": 1.99,
+      "text": "a state a particular state will have"
+    },
+    {
+      "index": 17,
+      "start": 139.28,
+      "end": 140.869,
+      "duration": 1.589,
+      "text": "only a particular"
+    },
+    {
+      "index": 18,
+      "start": 140.879,
+      "end": 143.07,
+      "duration": 2.191,
+      "text": "output and the output will change only"
+    },
+    {
+      "index": 19,
+      "start": 143.08,
+      "end": 144.43,
+      "duration": 1.35,
+      "text": "when the machines changes from that"
+    },
+    {
+      "index": 20,
+      "start": 144.44,
+      "end": 146.869,
+      "duration": 2.429,
+      "text": "state to another state for example if a"
+    },
+    {
+      "index": 21,
+      "start": 146.879,
+      "end": 148.83,
+      "duration": 1.951,
+      "text": "machine is in state s"
+    },
+    {
+      "index": 22,
+      "start": 148.84,
+      "end": 152.03,
+      "duration": 3.19,
+      "text": "z and there's an input variable called"
+    },
+    {
+      "index": 23,
+      "start": 152.04,
+      "end": 155.67,
+      "duration": 3.63,
+      "text": "X so instead s s0 if x is zero the"
+    },
+    {
+      "index": 24,
+      "start": 155.68,
+      "end": 157.19,
+      "duration": 1.51,
+      "text": "output can be zero if x is one the"
+    },
+    {
+      "index": 25,
+      "start": 157.2,
+      "end": 158.509,
+      "duration": 1.309,
+      "text": "output can be"
+    },
+    {
+      "index": 26,
+      "start": 158.519,
+      "end": 161.229,
+      "duration": 2.71,
+      "text": "one on the other hand the Mele machine"
+    },
+    {
+      "index": 27,
+      "start": 161.239,
+      "end": 163.229,
+      "duration": 1.99,
+      "text": "will say more machine will say at s z"
+    },
+    {
+      "index": 28,
+      "start": 163.239,
+      "end": 166.27,
+      "duration": 3.031,
+      "text": "State s z output is zero outut has to"
+    },
+    {
+      "index": 29,
+      "start": 166.28,
+      "end": 168.55,
+      "duration": 2.27,
+      "text": "change it has to go to another state so"
+    },
+    {
+      "index": 30,
+      "start": 168.56,
+      "end": 170.19,
+      "duration": 1.63,
+      "text": "you'll"
+    },
+    {
+      "index": 31,
+      "start": 170.2,
+      "end": 173.149,
+      "duration": 2.949,
+      "text": "do some more machines drawing of the"
+    },
+    {
+      "index": 32,
+      "start": 173.159,
+      "end": 174.589,
+      "duration": 1.43,
+      "text": "state graphs as I said that the most"
+    },
+    {
+      "index": 33,
+      "start": 174.599,
+      "end": 175.75,
+      "duration": 1.151,
+      "text": "important step the reason I want to"
+    },
+    {
+      "index": 34,
+      "start": 175.76,
+      "end": 178.11,
+      "duration": 2.35,
+      "text": "spend a little extra time in this"
+    },
+    {
+      "index": 35,
+      "start": 178.12,
+      "end": 180.229,
+      "duration": 2.109,
+      "text": "is this the most important important"
+    },
+    {
+      "index": 36,
+      "start": 180.239,
+      "end": 181.229,
+      "duration": 0.99,
+      "text": "design"
+    },
+    {
+      "index": 37,
+      "start": 181.239,
+      "end": 183.47,
+      "duration": 2.231,
+      "text": "step if you have understood the problem"
+    },
+    {
+      "index": 38,
+      "start": 183.48,
+      "end": 185.11,
+      "duration": 1.63,
+      "text": "very clearly the problem has been stated"
+    },
+    {
+      "index": 39,
+      "start": 185.12,
+      "end": 189.47,
+      "duration": 4.35,
+      "text": "clearly to you by the user the"
+    },
+    {
+      "index": 40,
+      "start": 189.48,
+      "end": 192.19,
+      "duration": 2.71,
+      "text": "client and you are the designer first of"
+    },
+    {
+      "index": 41,
+      "start": 192.2,
+      "end": 193.19,
+      "duration": 0.99,
+      "text": "course you have to understand the"
+    },
+    {
+      "index": 42,
+      "start": 193.2,
+      "end": 194.63,
+      "duration": 1.43,
+      "text": "problem clearly of course that person"
+    },
+    {
+      "index": 43,
+      "start": 194.64,
+      "end": 197.309,
+      "duration": 2.669,
+      "text": "has to state the problem clearly to you"
+    },
+    {
+      "index": 44,
+      "start": 197.319,
+      "end": 200.03,
+      "duration": 2.711,
+      "text": "but ask all questions to understand that"
+    },
+    {
+      "index": 45,
+      "start": 200.04,
+      "end": 201.67,
+      "duration": 1.63,
+      "text": "there's no ambiguity there's no"
+    },
+    {
+      "index": 46,
+      "start": 201.68,
+      "end": 203.71,
+      "duration": 2.03,
+      "text": "uncertainty having said that you'll have"
+    },
+    {
+      "index": 47,
+      "start": 203.72,
+      "end": 206.55,
+      "duration": 2.83,
+      "text": "to first step is to draw the state graph"
+    },
+    {
+      "index": 48,
+      "start": 206.56,
+      "end": 207.83,
+      "duration": 1.27,
+      "text": "once you have the state graph the rest"
+    },
+    {
+      "index": 49,
+      "start": 207.84,
+      "end": 210.47,
+      "duration": 2.63,
+      "text": "is rest will fall in place"
+    },
+    {
+      "index": 50,
+      "start": 210.48,
+      "end": 212.149,
+      "duration": 1.669,
+      "text": "that's why I thought it's important and"
+    },
+    {
+      "index": 51,
+      "start": 212.159,
+      "end": 214.949,
+      "duration": 2.79,
+      "text": "designer job is to get a Best State"
+    },
+    {
+      "index": 52,
+      "start": 214.959,
+      "end": 216.47,
+      "duration": 1.511,
+      "text": "graph possible for a"
+    },
+    {
+      "index": 53,
+      "start": 216.48,
+      "end": 219.11,
+      "duration": 2.63,
+      "text": "given set of"
+    },
+    {
+      "index": 54,
+      "start": 219.12,
+      "end": 221.99,
+      "duration": 2.87,
+      "text": "specifications from then on to the the"
+    },
+    {
+      "index": 55,
+      "start": 222.0,
+      "end": 223.83,
+      "duration": 1.83,
+      "text": "rest of the design procedure is simple"
+    },
+    {
+      "index": 56,
+      "start": 223.84,
+      "end": 225.67,
+      "duration": 1.83,
+      "text": "because it's a standard procedure"
+    },
+    {
+      "index": 57,
+      "start": 225.68,
+      "end": 226.75,
+      "duration": 1.07,
+      "text": "anything a"
+    },
+    {
+      "index": 58,
+      "start": 226.76,
+      "end": 229.63,
+      "duration": 2.87,
+      "text": "standard can be simplified and also even"
+    },
+    {
+      "index": 59,
+      "start": 229.64,
+      "end": 231.229,
+      "duration": 1.589,
+      "text": "automated"
+    },
+    {
+      "index": 60,
+      "start": 231.239,
+      "end": 234.75,
+      "duration": 3.511,
+      "text": "today age of computers and automatic"
+    },
+    {
+      "index": 61,
+      "start": 234.76,
+      "end": 237.27,
+      "duration": 2.51,
+      "text": "design computer aided design they call"
+    },
+    {
+      "index": 62,
+      "start": 237.28,
+      "end": 238.71,
+      "duration": 1.43,
+      "text": "it"
+    },
+    {
+      "index": 63,
+      "start": 238.72,
+      "end": 241.309,
+      "duration": 2.589,
+      "text": "CAD or they call it Eda electronic"
+    },
+    {
+      "index": 64,
+      "start": 241.319,
+      "end": 244.309,
+      "duration": 2.99,
+      "text": "design automation these are all"
+    },
+    {
+      "index": 65,
+      "start": 244.319,
+      "end": 248.429,
+      "duration": 4.11,
+      "text": "the industry terminology for automatic"
+    },
+    {
+      "index": 66,
+      "start": 248.439,
+      "end": 251.03,
+      "duration": 2.591,
+      "text": "design but all that will come only after"
+    },
+    {
+      "index": 67,
+      "start": 251.04,
+      "end": 252.71,
+      "duration": 1.67,
+      "text": "you"
+    },
+    {
+      "index": 68,
+      "start": 252.72,
+      "end": 255.229,
+      "duration": 2.509,
+      "text": "have gotten"
+    },
+    {
+      "index": 69,
+      "start": 255.239,
+      "end": 257.629,
+      "duration": 2.39,
+      "text": "your state graph of course the state"
+    },
+    {
+      "index": 70,
+      "start": 257.639,
+      "end": 259.629,
+      "duration": 1.99,
+      "text": "graph also the computer can generate but"
+    },
+    {
+      "index": 71,
+      "start": 259.639,
+      "end": 261.39,
+      "duration": 1.751,
+      "text": "then it may not it may be suboptimum the"
+    },
+    {
+      "index": 72,
+      "start": 261.4,
+      "end": 263.749,
+      "duration": 2.349,
+      "text": "designers creativity designers"
+    },
+    {
+      "index": 73,
+      "start": 263.759,
+      "end": 264.99,
+      "duration": 1.231,
+      "text": "Innovation the"
+    },
+    {
+      "index": 74,
+      "start": 265.0,
+      "end": 268.749,
+      "duration": 3.749,
+      "text": "designer's um speciality specialization"
+    },
+    {
+      "index": 75,
+      "start": 268.759,
+      "end": 271.67,
+      "duration": 2.911,
+      "text": "can be shown only at this stage of"
+    },
+    {
+      "index": 76,
+      "start": 271.68,
+      "end": 273.469,
+      "duration": 1.789,
+      "text": "drawing a good State graph that's why I"
+    },
+    {
+      "index": 77,
+      "start": 273.479,
+      "end": 276.189,
+      "duration": 2.71,
+      "text": "thought I will spend some extra time and"
+    },
+    {
+      "index": 78,
+      "start": 276.199,
+      "end": 278.629,
+      "duration": 2.43,
+      "text": "give you one or two more examples so let"
+    },
+    {
+      "index": 79,
+      "start": 278.639,
+      "end": 281.15,
+      "duration": 2.511,
+      "text": "us take another example of a of course"
+    },
+    {
+      "index": 80,
+      "start": 281.16,
+      "end": 283.83,
+      "duration": 2.67,
+      "text": "we'll also do systems later on there"
+    },
+    {
+      "index": 81,
+      "start": 283.84,
+      "end": 284.909,
+      "duration": 1.069,
+      "text": "also we'll have to start with State"
+    },
+    {
+      "index": 82,
+      "start": 284.919,
+      "end": 288.31,
+      "duration": 3.391,
+      "text": "graphs but here at this point in time in"
+    },
+    {
+      "index": 83,
+      "start": 288.32,
+      "end": 291.189,
+      "duration": 2.869,
+      "text": "our course since we talking about State"
+    },
+    {
+      "index": 84,
+      "start": 291.199,
+      "end": 293.43,
+      "duration": 2.231,
+      "text": "graphs just taking a state graphs"
+    },
+    {
+      "index": 85,
+      "start": 293.44,
+      "end": 295.189,
+      "duration": 1.749,
+      "text": "example without"
+    },
+    {
+      "index": 86,
+      "start": 295.199,
+      "end": 298.39,
+      "duration": 3.191,
+      "text": "any sort of overall system view I'll"
+    },
+    {
+      "index": 87,
+      "start": 298.4,
+      "end": 300.43,
+      "duration": 2.03,
+      "text": "just Define a system with an input and"
+    },
+    {
+      "index": 88,
+      "start": 300.44,
+      "end": 302.55,
+      "duration": 2.11,
+      "text": "output and the conditions under which"
+    },
+    {
+      "index": 89,
+      "start": 302.56,
+      "end": 305.07,
+      "duration": 2.51,
+      "text": "the output has to be there and then"
+    },
+    {
+      "index": 90,
+      "start": 305.08,
+      "end": 307.87,
+      "duration": 2.79,
+      "text": "we'll have to draw the state graph so"
+    },
+    {
+      "index": 91,
+      "start": 307.88,
+      "end": 328.69,
+      "duration": 20.81,
+      "text": "let us take an example of a m St graph"
+    },
+    {
+      "index": 92,
+      "start": 331.629,
+      "end": 331.639,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 93,
+      "start": 331.639,
+      "end": 332.95,
+      "duration": 1.311,
+      "text": "for"
+    },
+    {
+      "index": 94,
+      "start": 332.96,
+      "end": 336.15,
+      "duration": 3.19,
+      "text": "a"
+    },
+    {
+      "index": 95,
+      "start": 338.87,
+      "end": 338.88,
+      "duration": 0.01,
+      "text": "circuit with one input"
+    },
+    {
+      "index": 96,
+      "start": 338.88,
+      "end": 345.51,
+      "duration": 6.63,
+      "text": "x with a Serial input"
+    },
+    {
+      "index": 97,
+      "start": 365.35,
+      "end": 365.36,
+      "duration": 0.01,
+      "text": "that means with every clock pulse at the"
+    },
+    {
+      "index": 98,
+      "start": 365.36,
+      "end": 366.83,
+      "duration": 1.47,
+      "text": "edge of"
+    },
+    {
+      "index": 99,
+      "start": 366.84,
+      "end": 368.469,
+      "duration": 1.629,
+      "text": "the"
+    },
+    {
+      "index": 100,
+      "start": 368.479,
+      "end": 374.469,
+      "duration": 5.99,
+      "text": "clock the new input"
+    },
+    {
+      "index": 101,
+      "start": 378.909,
+      "end": 378.919,
+      "duration": 0.01,
+      "text": "bit is sent into the hardware it mean"
+    },
+    {
+      "index": 102,
+      "start": 378.919,
+      "end": 379.79,
+      "duration": 0.871,
+      "text": "there's an"
+    },
+    {
+      "index": 103,
+      "start": 379.8,
+      "end": 382.43,
+      "duration": 2.63,
+      "text": "input"
+    },
+    {
+      "index": 104,
+      "start": 382.44,
+      "end": 386.749,
+      "duration": 4.309,
+      "text": "which comes it can be same also it is"
+    },
+    {
+      "index": 105,
+      "start": 386.759,
+      "end": 389.629,
+      "duration": 2.87,
+      "text": "sampled during every clock transition"
+    },
+    {
+      "index": 106,
+      "start": 389.639,
+      "end": 391.749,
+      "duration": 2.11,
+      "text": "input a sample every clock transition"
+    },
+    {
+      "index": 107,
+      "start": 391.759,
+      "end": 392.909,
+      "duration": 1.15,
+      "text": "the value has changed it will take the"
+    },
+    {
+      "index": 108,
+      "start": 392.919,
+      "end": 394.23,
+      "duration": 1.311,
+      "text": "new value the value is not changed it"
+    },
+    {
+      "index": 109,
+      "start": 394.24,
+      "end": 396.629,
+      "duration": 2.389,
+      "text": "will still take the value as a old value"
+    },
+    {
+      "index": 110,
+      "start": 396.639,
+      "end": 400.71,
+      "duration": 4.071,
+      "text": "so it will be a series of ones and"
+    },
+    {
+      "index": 111,
+      "start": 400.72,
+      "end": 403.309,
+      "duration": 2.589,
+      "text": "zeros then we want an output Z also is a"
+    },
+    {
+      "index": 112,
+      "start": 403.319,
+      "end": 406.11,
+      "duration": 2.791,
+      "text": "series of ones and zeros and then the"
+    },
+    {
+      "index": 113,
+      "start": 406.12,
+      "end": 407.99,
+      "duration": 1.87,
+      "text": "relationship between x and z will be the"
+    },
+    {
+      "index": 114,
+      "start": 408.0,
+      "end": 410.23,
+      "duration": 2.23,
+      "text": "following whenever there's a"
+    },
+    {
+      "index": 115,
+      "start": 410.24,
+      "end": 413.79,
+      "duration": 3.55,
+      "text": "pattern we did the pattern"
+    },
+    {
+      "index": 116,
+      "start": 413.8,
+      "end": 420.909,
+      "duration": 7.109,
+      "text": "generator Z should be one"
+    },
+    {
+      "index": 117,
+      "start": 454.51,
+      "end": 454.52,
+      "duration": 0.01,
+      "text": "pattern 1 Z 0 0 1 or 0 1 0 either this"
+    },
+    {
+      "index": 118,
+      "start": 454.52,
+      "end": 459.83,
+      "duration": 5.31,
+      "text": "or that"
+    },
+    {
+      "index": 119,
+      "start": 462.79,
+      "end": 462.8,
+      "duration": 0.01,
+      "text": "happens so if the input"
+    },
+    {
+      "index": 120,
+      "start": 462.8,
+      "end": 466.39,
+      "duration": 3.59,
+      "text": "width as a pattern 1 0 01 along with the"
+    },
+    {
+      "index": 121,
+      "start": 466.4,
+      "end": 472.07,
+      "duration": 5.67,
+      "text": "fourth one output will be 0 0 0 1"
+    },
+    {
+      "index": 122,
+      "start": 472.08,
+      "end": 475.39,
+      "duration": 3.31,
+      "text": "here similarly the input is 1 0 1 0 1 0"
+    },
+    {
+      "index": 123,
+      "start": 475.4,
+      "end": 478.629,
+      "duration": 3.229,
+      "text": "the pattern of 0 1 0 is detected by the"
+    },
+    {
+      "index": 124,
+      "start": 478.639,
+      "end": 480.23,
+      "duration": 1.591,
+      "text": "circuit"
+    },
+    {
+      "index": 125,
+      "start": 480.24,
+      "end": 482.55,
+      "duration": 2.31,
+      "text": "an output Z should be one correspond"
+    },
+    {
+      "index": 126,
+      "start": 482.56,
+      "end": 485.149,
+      "duration": 2.589,
+      "text": "this zero during that clock period that"
+    },
+    {
+      "index": 127,
+      "start": 485.159,
+      "end": 491.99,
+      "duration": 6.831,
+      "text": "clock period rest of time the output is"
+    },
+    {
+      "index": 128,
+      "start": 499.589,
+      "end": 499.599,
+      "duration": 0.01,
+      "text": "otherwise so we'll also assume that"
+    },
+    {
+      "index": 129,
+      "start": 499.599,
+      "end": 502.07,
+      "duration": 2.471,
+      "text": "overlapping is allowed overlapping of"
+    },
+    {
+      "index": 130,
+      "start": 502.08,
+      "end": 503.869,
+      "duration": 1.789,
+      "text": "the two"
+    },
+    {
+      "index": 131,
+      "start": 503.879,
+      "end": 507.589,
+      "duration": 3.71,
+      "text": "patterns are the same pattern repeated"
+    },
+    {
+      "index": 132,
+      "start": 507.599,
+      "end": 509.99,
+      "duration": 2.391,
+      "text": "also has to be considered as completion"
+    },
+    {
+      "index": 133,
+      "start": 510.0,
+      "end": 512.35,
+      "duration": 2.35,
+      "text": "of the pattern overlapping of patterns"
+    },
+    {
+      "index": 134,
+      "start": 512.36,
+      "end": 543.509,
+      "duration": 31.149,
+      "text": "also should be considered as"
+    },
+    {
+      "index": 135,
+      "start": 546.47,
+      "end": 546.48,
+      "duration": 0.01,
+      "text": "so that means there a series of"
+    },
+    {
+      "index": 136,
+      "start": 546.48,
+      "end": 555.75,
+      "duration": 9.27,
+      "text": "bits 0 1 1 0 0 0 1 0 0 1 0 1 0 1 1 0 Z"
+    },
+    {
+      "index": 137,
+      "start": 555.76,
+      "end": 557.269,
+      "duration": 1.509,
+      "text": "like that goes"
+    },
+    {
+      "index": 138,
+      "start": 557.279,
+      "end": 561.43,
+      "duration": 4.151,
+      "text": "on"
+    },
+    {
+      "index": 139,
+      "start": 576.31,
+      "end": 576.32,
+      "duration": 0.01,
+      "text": "sequences so we are looking for this"
+    },
+    {
+      "index": 140,
+      "start": 576.32,
+      "end": 580.75,
+      "duration": 4.43,
+      "text": "pattern 1"
+    },
+    {
+      "index": 141,
+      "start": 587.91,
+      "end": 587.92,
+      "duration": 0.01,
+      "text": "there are"
+    },
+    {
+      "index": 142,
+      "start": 587.92,
+      "end": 593.35,
+      "duration": 5.43,
+      "text": "010 that's a 0 one 0"
+    },
+    {
+      "index": 143,
+      "start": 595.509,
+      "end": 595.519,
+      "duration": 0.01,
+      "text": "here"
+    },
+    {
+      "index": 144,
+      "start": 595.519,
+      "end": 601.55,
+      "duration": 6.031,
+      "text": "right that is a 0 one 0 here"
+    },
+    {
+      "index": 145,
+      "start": 608.279,
+      "end": 617.63,
+      "duration": 9.351,
+      "text": "right so Z should be 0 0 0 0 0 0 0"
+    },
+    {
+      "index": 146,
+      "start": 617.64,
+      "end": 620.87,
+      "duration": 3.23,
+      "text": "1 0"
+    },
+    {
+      "index": 147,
+      "start": 620.88,
+      "end": 630.43,
+      "duration": 9.55,
+      "text": "1 1 0 1 Z"
+    },
+    {
+      "index": 148,
+      "start": 633.55,
+      "end": 633.56,
+      "duration": 0.01,
+      "text": "this one is for completion of this 0 1 0"
+    },
+    {
+      "index": 149,
+      "start": 633.56,
+      "end": 637.269,
+      "duration": 3.709,
+      "text": "this one is for completion of 1 0 0 1"
+    },
+    {
+      "index": 150,
+      "start": 637.279,
+      "end": 639.43,
+      "duration": 2.151,
+      "text": "this one is for completion of 0 1 0 this"
+    },
+    {
+      "index": 151,
+      "start": 639.44,
+      "end": 646.11,
+      "duration": 6.67,
+      "text": "one is for completion of this 0 1"
+    },
+    {
+      "index": 152,
+      "start": 649.99,
+      "end": 650.0,
+      "duration": 0.01,
+      "text": "0 same similar example similar example"
+    },
+    {
+      "index": 153,
+      "start": 650.0,
+      "end": 651.87,
+      "duration": 1.87,
+      "text": "similar to what we did the last lecture"
+    },
+    {
+      "index": 154,
+      "start": 651.88,
+      "end": 654.509,
+      "duration": 2.629,
+      "text": "but slightly more involved in this s"
+    },
+    {
+      "index": 155,
+      "start": 654.519,
+      "end": 656.03,
+      "duration": 1.511,
+      "text": "there are two patterns one is a larger"
+    },
+    {
+      "index": 156,
+      "start": 656.04,
+      "end": 658.23,
+      "duration": 2.19,
+      "text": "pattern and then this overlapping is"
+    },
+    {
+      "index": 157,
+      "start": 658.24,
+      "end": 660.629,
+      "duration": 2.389,
+      "text": "also so we wanted a Mele machine that"
+    },
+    {
+      "index": 158,
+      "start": 660.639,
+      "end": 663.11,
+      "duration": 2.471,
+      "text": "means each Arrow of from each state we"
+    },
+    {
+      "index": 159,
+      "start": 663.12,
+      "end": 664.949,
+      "duration": 1.829,
+      "text": "have to look at the possibility of X"
+    },
+    {
+      "index": 160,
+      "start": 664.959,
+      "end": 667.509,
+      "duration": 2.55,
+      "text": "being one and X being zero we have to"
+    },
+    {
+      "index": 161,
+      "start": 667.519,
+      "end": 668.87,
+      "duration": 1.351,
+      "text": "decide the next state and the output for"
+    },
+    {
+      "index": 162,
+      "start": 668.88,
+      "end": 671.59,
+      "duration": 2.71,
+      "text": "each of those so let's start with always"
+    },
+    {
+      "index": 163,
+      "start": 671.6,
+      "end": 680.75,
+      "duration": 9.15,
+      "text": "a zero state or reset State call it S"
+    },
+    {
+      "index": 164,
+      "start": 683.87,
+      "end": 683.88,
+      "duration": 0.01,
+      "text": "zero the input is a"
+    },
+    {
+      "index": 165,
+      "start": 683.88,
+      "end": 687.67,
+      "duration": 3.79,
+      "text": "zero it could be the first from if an"
+    },
+    {
+      "index": 166,
+      "start": 687.68,
+      "end": 689.949,
+      "duration": 2.269,
+      "text": "input is zero"
+    },
+    {
+      "index": 167,
+      "start": 689.959,
+      "end": 691.71,
+      "duration": 1.751,
+      "text": "output is zero so"
+    },
+    {
+      "index": 168,
+      "start": 691.72,
+      "end": 694.35,
+      "duration": 2.63,
+      "text": "x and"
+    },
+    {
+      "index": 169,
+      "start": 694.36,
+      "end": 696.91,
+      "duration": 2.55,
+      "text": "z output is"
+    },
+    {
+      "index": 170,
+      "start": 696.92,
+      "end": 699.59,
+      "duration": 2.67,
+      "text": "zero go to state"
+    },
+    {
+      "index": 171,
+      "start": 699.6,
+      "end": 705.03,
+      "duration": 5.43,
+      "text": "S1 so S1 state is a state where"
+    },
+    {
+      "index": 172,
+      "start": 712.389,
+      "end": 712.399,
+      "duration": 0.01,
+      "text": "identified it's a"
+    },
+    {
+      "index": 173,
+      "start": 712.399,
+      "end": 716.59,
+      "duration": 4.191,
+      "text": "one another"
+    },
+    {
+      "index": 174,
+      "start": 720.55,
+      "end": 720.56,
+      "duration": 0.01,
+      "text": "state X is one Z is z output is"
+    },
+    {
+      "index": 175,
+      "start": 720.56,
+      "end": 722.31,
+      "duration": 1.75,
+      "text": "zero this"
+    },
+    {
+      "index": 176,
+      "start": 722.32,
+      "end": 726.03,
+      "duration": 3.71,
+      "text": "state one would have"
+    },
+    {
+      "index": 177,
+      "start": 730.389,
+      "end": 730.399,
+      "duration": 0.01,
+      "text": "been registered or memorized or"
+    },
+    {
+      "index": 178,
+      "start": 730.399,
+      "end": 734.31,
+      "duration": 3.911,
+      "text": "recognized whatever you want to call"
+    },
+    {
+      "index": 179,
+      "start": 737.31,
+      "end": 737.32,
+      "duration": 0.01,
+      "text": "it then S1 again can be zero or one if"
+    },
+    {
+      "index": 180,
+      "start": 737.32,
+      "end": 741.47,
+      "duration": 4.15,
+      "text": "it's a zero it could be not going to"
+    },
+    {
+      "index": 181,
+      "start": 741.48,
+      "end": 744.47,
+      "duration": 2.99,
+      "text": "give you any extra information so it"
+    },
+    {
+      "index": 182,
+      "start": 744.48,
+      "end": 747.15,
+      "duration": 2.67,
+      "text": "could be start of the same new sequence"
+    },
+    {
+      "index": 183,
+      "start": 747.16,
+      "end": 749.71,
+      "duration": 2.55,
+      "text": "to zero"
+    },
+    {
+      "index": 184,
+      "start": 749.72,
+      "end": 752.189,
+      "duration": 2.469,
+      "text": "on the other a"
+    },
+    {
+      "index": 185,
+      "start": 752.199,
+      "end": 755.31,
+      "duration": 3.111,
+      "text": "one we'll go to"
+    },
+    {
+      "index": 186,
+      "start": 755.32,
+      "end": 756.87,
+      "duration": 1.55,
+      "text": "S3"
+    },
+    {
+      "index": 187,
+      "start": 756.88,
+      "end": 759.949,
+      "duration": 3.069,
+      "text": "because we are now identified a one zero"
+    },
+    {
+      "index": 188,
+      "start": 759.959,
+      "end": 761.43,
+      "duration": 1.471,
+      "text": "followed by a"
+    },
+    {
+      "index": 189,
+      "start": 761.44,
+      "end": 763.67,
+      "duration": 2.23,
+      "text": "one which could be"
+    },
+    {
+      "index": 190,
+      "start": 763.68,
+      "end": 771.15,
+      "duration": 7.47,
+      "text": "the first two bits of a 0 1 Z"
+    },
+    {
+      "index": 191,
+      "start": 774.389,
+      "end": 774.399,
+      "duration": 0.01,
+      "text": "pattern like likewise in"
+    },
+    {
+      "index": 192,
+      "start": 774.399,
+      "end": 777.71,
+      "duration": 3.311,
+      "text": "S2 if one comes it could be the"
+    },
+    {
+      "index": 193,
+      "start": 777.72,
+      "end": 780.11,
+      "duration": 2.39,
+      "text": "beginning of a new pattern so"
+    },
+    {
+      "index": 194,
+      "start": 780.12,
+      "end": 781.35,
+      "duration": 1.23,
+      "text": "no extra"
+    },
+    {
+      "index": 195,
+      "start": 781.36,
+      "end": 784.949,
+      "duration": 3.589,
+      "text": "output continues to be the same"
+    },
+    {
+      "index": 196,
+      "start": 784.959,
+      "end": 787.949,
+      "duration": 2.99,
+      "text": "state it's a zero occurs on the other"
+    },
+    {
+      "index": 197,
+      "start": 787.959,
+      "end": 791.069,
+      "duration": 3.11,
+      "text": "hand be one Z could be the first two"
+    },
+    {
+      "index": 198,
+      "start": 791.079,
+      "end": 795.31,
+      "duration": 4.231,
+      "text": "bits of a one 0 0 one pattern because we"
+    },
+    {
+      "index": 199,
+      "start": 795.32,
+      "end": 798.629,
+      "duration": 3.309,
+      "text": "want to detect both of these 1 0 0 1 and"
+    },
+    {
+      "index": 200,
+      "start": 798.639,
+      "end": 801.75,
+      "duration": 3.111,
+      "text": "0 1 0 so if a zero"
+    },
+    {
+      "index": 201,
+      "start": 801.76,
+      "end": 804.75,
+      "duration": 2.99,
+      "text": "occurs let us put create a new state"
+    },
+    {
+      "index": 202,
+      "start": 804.76,
+      "end": 806.23,
+      "duration": 1.47,
+      "text": "called"
+    },
+    {
+      "index": 203,
+      "start": 806.24,
+      "end": 810.03,
+      "duration": 3.79,
+      "text": "S4 in which"
+    },
+    {
+      "index": 204,
+      "start": 810.04,
+      "end": 813.509,
+      "duration": 3.469,
+      "text": "one Zer will"
+    },
+    {
+      "index": 205,
+      "start": 821.509,
+      "end": 821.519,
+      "duration": 0.01,
+      "text": "remembered that means up to this point"
+    },
+    {
+      "index": 206,
+      "start": 821.519,
+      "end": 823.03,
+      "duration": 1.511,
+      "text": "the pattern of one Zer has occurred"
+    },
+    {
+      "index": 207,
+      "start": 823.04,
+      "end": 826.949,
+      "duration": 3.909,
+      "text": "that's what it"
+    },
+    {
+      "index": 208,
+      "start": 829.11,
+      "end": 829.12,
+      "duration": 0.01,
+      "text": "means so you have to proceed like this"
+    },
+    {
+      "index": 209,
+      "start": 829.12,
+      "end": 830.55,
+      "duration": 1.43,
+      "text": "for each state and then until you have"
+    },
+    {
+      "index": 210,
+      "start": 830.56,
+      "end": 833.15,
+      "duration": 2.59,
+      "text": "finished your patterns and no more"
+    },
+    {
+      "index": 211,
+      "start": 833.16,
+      "end": 837.87,
+      "duration": 4.71,
+      "text": "possibility is there so in S3 01 if Z"
+    },
+    {
+      "index": 212,
+      "start": 837.88,
+      "end": 839.389,
+      "duration": 1.509,
+      "text": "occurs"
+    },
+    {
+      "index": 213,
+      "start": 839.399,
+      "end": 841.31,
+      "duration": 1.911,
+      "text": "0 1 0 pattern is"
+    },
+    {
+      "index": 214,
+      "start": 841.32,
+      "end": 843.67,
+      "duration": 2.35,
+      "text": "completed and that could be also part of"
+    },
+    {
+      "index": 215,
+      "start": 843.68,
+      "end": 846.87,
+      "duration": 3.19,
+      "text": "1 0 0 1 0 could be the first two bits of"
+    },
+    {
+      "index": 216,
+      "start": 846.88,
+      "end": 851.15,
+      "duration": 4.27,
+      "text": "a one01 pattern which is already here S4"
+    },
+    {
+      "index": 217,
+      "start": 851.16,
+      "end": 853.23,
+      "duration": 2.07,
+      "text": "so if a zero occurs"
+    },
+    {
+      "index": 218,
+      "start": 853.24,
+      "end": 857.55,
+      "duration": 4.31,
+      "text": "here go to S4 which is one"
+    },
+    {
+      "index": 219,
+      "start": 859.91,
+      "end": 859.92,
+      "duration": 0.01,
+      "text": "Z but it will produce an output of one"
+    },
+    {
+      "index": 220,
+      "start": 859.92,
+      "end": 861.67,
+      "duration": 1.75,
+      "text": "in this case because we had completed"
+    },
+    {
+      "index": 221,
+      "start": 861.68,
+      "end": 863.269,
+      "duration": 1.589,
+      "text": "this pattern 0 1"
+    },
+    {
+      "index": 222,
+      "start": 863.279,
+      "end": 870.87,
+      "duration": 7.591,
+      "text": "0 x is z leading it to a one Z state"
+    },
+    {
+      "index": 223,
+      "start": 874.389,
+      "end": 874.399,
+      "duration": 0.01,
+      "text": "and a new one the one is one is output"
+    },
+    {
+      "index": 224,
+      "start": 874.399,
+      "end": 879.03,
+      "duration": 4.631,
+      "text": "because 0 1 0 is now completed with this"
+    },
+    {
+      "index": 225,
+      "start": 879.04,
+      "end": 881.87,
+      "duration": 2.83,
+      "text": "zero on the other hand a one occurs here"
+    },
+    {
+      "index": 226,
+      "start": 881.88,
+      "end": 883.43,
+      "duration": 1.55,
+      "text": "is a 0"
+    },
+    {
+      "index": 227,
+      "start": 883.44,
+      "end": 889.23,
+      "duration": 5.79,
+      "text": "One S S3 01 0 1 0 01 1 011 has no"
+    },
+    {
+      "index": 228,
+      "start": 889.24,
+      "end": 891.749,
+      "duration": 2.509,
+      "text": "meaning the only one the last bit one is"
+    },
+    {
+      "index": 229,
+      "start": 891.759,
+      "end": 894.749,
+      "duration": 2.99,
+      "text": "the of any value so that is in this"
+    },
+    {
+      "index": 230,
+      "start": 894.759,
+      "end": 906.71,
+      "duration": 11.951,
+      "text": "state S2 so the one occurs"
+    },
+    {
+      "index": 231,
+      "start": 908.749,
+      "end": 908.759,
+      "duration": 0.01,
+      "text": "so we exhausted S3 and also finish the"
+    },
+    {
+      "index": 232,
+      "start": 908.759,
+      "end": 910.189,
+      "duration": 1.43,
+      "text": "pattern 0 1"
+    },
+    {
+      "index": 233,
+      "start": 910.199,
+      "end": 913.389,
+      "duration": 3.19,
+      "text": "0 so let us continue with S4 and see how"
+    },
+    {
+      "index": 234,
+      "start": 913.399,
+      "end": 917.31,
+      "duration": 3.911,
+      "text": "to complete the pattern 1 0 01 S4 is one"
+    },
+    {
+      "index": 235,
+      "start": 917.32,
+      "end": 920.749,
+      "duration": 3.429,
+      "text": "Z so if a zero occurs here that will be"
+    },
+    {
+      "index": 236,
+      "start": 920.759,
+      "end": 923.47,
+      "duration": 2.711,
+      "text": "part of 1 0 0 1 so I have to create a"
+    },
+    {
+      "index": 237,
+      "start": 923.48,
+      "end": 936.269,
+      "duration": 12.789,
+      "text": "new state for that is four with a zero"
+    },
+    {
+      "index": 238,
+      "start": 944.59,
+      "end": 944.6,
+      "duration": 0.01,
+      "text": "S5 which will"
+    },
+    {
+      "index": 239,
+      "start": 944.6,
+      "end": 950.43,
+      "duration": 5.83,
+      "text": "remember 1"
+    },
+    {
+      "index": 240,
+      "start": 954.91,
+      "end": 954.92,
+      "duration": 0.01,
+      "text": "0 no output again because 1 1 only when"
+    },
+    {
+      "index": 241,
+      "start": 954.92,
+      "end": 956.389,
+      "duration": 1.469,
+      "text": "that is completed we'll have an output"
+    },
+    {
+      "index": 242,
+      "start": 956.399,
+      "end": 960.87,
+      "duration": 4.471,
+      "text": "of one"
+    },
+    {
+      "index": 243,
+      "start": 964.269,
+      "end": 964.279,
+      "duration": 0.01,
+      "text": "when one occurs in S4 S4 is what one 1"
+    },
+    {
+      "index": 244,
+      "start": 964.279,
+      "end": 967.67,
+      "duration": 3.391,
+      "text": "one Z so one occurs is a 1 01 it could"
+    },
+    {
+      "index": 245,
+      "start": 967.68,
+      "end": 970.71,
+      "duration": 3.03,
+      "text": "be the first two first two bits of a 0"
+    },
+    {
+      "index": 246,
+      "start": 970.72,
+      "end": 975.509,
+      "duration": 4.789,
+      "text": "one0 correct so if one occurs in S4 it"
+    },
+    {
+      "index": 247,
+      "start": 975.519,
+      "end": 984.03,
+      "duration": 8.511,
+      "text": "can go to 01 which is S3 correct"
+    },
+    {
+      "index": 248,
+      "start": 987.35,
+      "end": 987.36,
+      "duration": 0.01,
+      "text": "so is three this"
+    },
+    {
+      "index": 249,
+      "start": 987.36,
+      "end": 998.269,
+      "duration": 10.909,
+      "text": "is one"
+    },
+    {
+      "index": 250,
+      "start": 1003.11,
+      "end": 1003.12,
+      "duration": 0.01,
+      "text": "now S5 if S5 Z occurs then 1 0 0 0 so 1"
+    },
+    {
+      "index": 251,
+      "start": 1003.12,
+      "end": 1005.55,
+      "duration": 2.43,
+      "text": "0 0 has no value except that the only"
+    },
+    {
+      "index": 252,
+      "start": 1005.56,
+      "end": 1008.99,
+      "duration": 3.43,
+      "text": "one zero the last one zero is value"
+    },
+    {
+      "index": 253,
+      "start": 1009.0,
+      "end": 1020.949,
+      "duration": 11.949,
+      "text": "which is S1 so if a zero occurs"
+    },
+    {
+      "index": 254,
+      "start": 1023.43,
+      "end": 1023.44,
+      "duration": 0.01,
+      "text": "on the other hand if 1 0 1 is a one"
+    },
+    {
+      "index": 255,
+      "start": 1023.44,
+      "end": 1026.029,
+      "duration": 2.589,
+      "text": "occurs here the pattern is completed and"
+    },
+    {
+      "index": 256,
+      "start": 1026.039,
+      "end": 1029.23,
+      "duration": 3.191,
+      "text": "the last one 01 of that 1 0 0 1 could be"
+    },
+    {
+      "index": 257,
+      "start": 1029.24,
+      "end": 1032.909,
+      "duration": 3.669,
+      "text": "the part of the pattern 0 1 0"
+    },
+    {
+      "index": 258,
+      "start": 1032.919,
+      "end": 1036.549,
+      "duration": 3.63,
+      "text": "so S3 is"
+    },
+    {
+      "index": 259,
+      "start": 1036.559,
+      "end": 1045.99,
+      "duration": 9.431,
+      "text": "that uh one 1 0 0 1 S3 so I let to go"
+    },
+    {
+      "index": 260,
+      "start": 1048.549,
+      "end": 1048.559,
+      "duration": 0.01,
+      "text": "here with a zero with an output of one"
+    },
+    {
+      "index": 261,
+      "start": 1048.559,
+      "end": 1050.23,
+      "duration": 1.671,
+      "text": "because it has completed just now the"
+    },
+    {
+      "index": 262,
+      "start": 1050.24,
+      "end": 1057.23,
+      "duration": 6.99,
+      "text": "sequence of 1 0"
+    },
+    {
+      "index": 263,
+      "start": 1068.31,
+      "end": 1068.32,
+      "duration": 0.01,
+      "text": "output lot of see of course from here"
+    },
+    {
+      "index": 264,
+      "start": 1068.32,
+      "end": 1069.95,
+      "duration": 1.63,
+      "text": "you have to go to the state graph State"
+    },
+    {
+      "index": 265,
+      "start": 1069.96,
+      "end": 1072.07,
+      "duration": 2.11,
+      "text": "table and all that we you know it we'll"
+    },
+    {
+      "index": 266,
+      "start": 1072.08,
+      "end": 1073.669,
+      "duration": 1.589,
+      "text": "talk about it a little"
+    },
+    {
+      "index": 267,
+      "start": 1073.679,
+      "end": 1076.549,
+      "duration": 2.87,
+      "text": "bit talk a little bit about it but one"
+    },
+    {
+      "index": 268,
+      "start": 1076.559,
+      "end": 1079.99,
+      "duration": 3.431,
+      "text": "thing I want to say here is"
+    },
+    {
+      "index": 269,
+      "start": 1080.0,
+      "end": 1082.31,
+      "duration": 2.31,
+      "text": "the problem is simple two patterns and"
+    },
+    {
+      "index": 270,
+      "start": 1082.32,
+      "end": 1083.99,
+      "duration": 1.67,
+      "text": "you can mentally sort of visualize the"
+    },
+    {
+      "index": 271,
+      "start": 1084.0,
+      "end": 1087.59,
+      "duration": 3.59,
+      "text": "whole thing when problem becomes more"
+    },
+    {
+      "index": 272,
+      "start": 1087.6,
+      "end": 1090.029,
+      "duration": 2.429,
+      "text": "complex is not a pattern detector some"
+    },
+    {
+      "index": 273,
+      "start": 1090.039,
+      "end": 1091.99,
+      "duration": 1.951,
+      "text": "other problem or even a pattern detector"
+    },
+    {
+      "index": 274,
+      "start": 1092.0,
+      "end": 1096.83,
+      "duration": 4.83,
+      "text": "longer pattern or more than two"
+    },
+    {
+      "index": 275,
+      "start": 1099.35,
+      "end": 1099.36,
+      "duration": 0.01,
+      "text": "patterns you will lose track of some of"
+    },
+    {
+      "index": 276,
+      "start": 1099.36,
+      "end": 1100.71,
+      "duration": 1.35,
+      "text": "the combination which has already been"
+    },
+    {
+      "index": 277,
+      "start": 1100.72,
+      "end": 1102.669,
+      "duration": 1.949,
+      "text": "there of course we take notes"
+    },
+    {
+      "index": 278,
+      "start": 1102.679,
+      "end": 1106.27,
+      "duration": 3.591,
+      "text": "here so do not worry about having"
+    },
+    {
+      "index": 279,
+      "start": 1106.28,
+      "end": 1109.149,
+      "duration": 2.869,
+      "text": "creating an extra state"
+    },
+    {
+      "index": 280,
+      "start": 1109.159,
+      "end": 1111.95,
+      "duration": 2.791,
+      "text": "any design that is the that is the rule"
+    },
+    {
+      "index": 281,
+      "start": 1111.96,
+      "end": 1115.39,
+      "duration": 3.43,
+      "text": "thumb rule of any design is don't worry"
+    },
+    {
+      "index": 282,
+      "start": 1115.4,
+      "end": 1117.43,
+      "duration": 2.03,
+      "text": "about extra Hardware to start with start"
+    },
+    {
+      "index": 283,
+      "start": 1117.44,
+      "end": 1118.87,
+      "duration": 1.43,
+      "text": "with you make sure that"
+    },
+    {
+      "index": 284,
+      "start": 1118.88,
+      "end": 1121.51,
+      "duration": 2.63,
+      "text": "all requirements are taken care of all"
+    },
+    {
+      "index": 285,
+      "start": 1121.52,
+      "end": 1125.07,
+      "duration": 3.55,
+      "text": "specifications are covered"
+    },
+    {
+      "index": 286,
+      "start": 1125.08,
+      "end": 1128.789,
+      "duration": 3.709,
+      "text": "completely you you can have Hardware"
+    },
+    {
+      "index": 287,
+      "start": 1128.799,
+      "end": 1130.669,
+      "duration": 1.87,
+      "text": "which is redundant course it's not"
+    },
+    {
+      "index": 288,
+      "start": 1130.679,
+      "end": 1134.669,
+      "duration": 3.99,
+      "text": "efficient in terms of speed cost power"
+    },
+    {
+      "index": 289,
+      "start": 1134.679,
+      "end": 1136.23,
+      "duration": 1.551,
+      "text": "but that is better than having a"
+    },
+    {
+      "index": 290,
+      "start": 1136.24,
+      "end": 1138.11,
+      "duration": 1.87,
+      "text": "hardware which will not work properly"
+    },
+    {
+      "index": 291,
+      "start": 1138.12,
+      "end": 1140.149,
+      "duration": 2.029,
+      "text": "which is inac accurate which will give"
+    },
+    {
+      "index": 292,
+      "start": 1140.159,
+      "end": 1141.39,
+      "duration": 1.231,
+      "text": "an erroneous"
+    },
+    {
+      "index": 293,
+      "start": 1141.4,
+      "end": 1145.75,
+      "duration": 4.35,
+      "text": "Behavior so when in doubt create a new"
+    },
+    {
+      "index": 294,
+      "start": 1145.76,
+      "end": 1148.71,
+      "duration": 2.95,
+      "text": "state if this supposing you are in a"
+    },
+    {
+      "index": 295,
+      "start": 1148.72,
+      "end": 1150.39,
+      "duration": 1.67,
+      "text": "particular State like S four and then"
+    },
+    {
+      "index": 296,
+      "start": 1150.4,
+      "end": 1152.47,
+      "duration": 2.07,
+      "text": "zero occurs whether it should go to"
+    },
+    {
+      "index": 297,
+      "start": 1152.48,
+      "end": 1153.83,
+      "duration": 1.35,
+      "text": "another the existing States or should"
+    },
+    {
+      "index": 298,
+      "start": 1153.84,
+      "end": 1155.39,
+      "duration": 1.55,
+      "text": "create a new state of course if it's a"
+    },
+    {
+      "index": 299,
+      "start": 1155.4,
+      "end": 1157.43,
+      "duration": 2.03,
+      "text": "very simple thing like that you can"
+    },
+    {
+      "index": 300,
+      "start": 1157.44,
+      "end": 1159.75,
+      "duration": 2.31,
+      "text": "always think for a minute and visualize"
+    },
+    {
+      "index": 301,
+      "start": 1159.76,
+      "end": 1161.51,
+      "duration": 1.75,
+      "text": "it and go there but in case it's not"
+    },
+    {
+      "index": 302,
+      "start": 1161.52,
+      "end": 1163.87,
+      "duration": 2.35,
+      "text": "possible the diagram becomes longer"
+    },
+    {
+      "index": 303,
+      "start": 1163.88,
+      "end": 1166.99,
+      "duration": 3.11,
+      "text": "bigger and you AR able to really take"
+    },
+    {
+      "index": 304,
+      "start": 1167.0,
+      "end": 1168.99,
+      "duration": 1.99,
+      "text": "all the possibilities into account can"
+    },
+    {
+      "index": 305,
+      "start": 1169.0,
+      "end": 1170.63,
+      "duration": 1.63,
+      "text": "as well create a new state and proceed"
+    },
+    {
+      "index": 306,
+      "start": 1170.64,
+      "end": 1173.27,
+      "duration": 2.63,
+      "text": "so you may end up with more than the"
+    },
+    {
+      "index": 307,
+      "start": 1173.28,
+      "end": 1176.029,
+      "duration": 2.749,
+      "text": "minimum number of states that's not a"
+    },
+    {
+      "index": 308,
+      "start": 1176.039,
+      "end": 1178.59,
+      "duration": 2.551,
+      "text": "serious difficulty even though more"
+    },
+    {
+      "index": 309,
+      "start": 1178.6,
+      "end": 1180.47,
+      "duration": 1.87,
+      "text": "States means more flip flops more flip"
+    },
+    {
+      "index": 310,
+      "start": 1180.48,
+      "end": 1182.23,
+      "duration": 1.75,
+      "text": "flops mean more driving logic more"
+    },
+    {
+      "index": 311,
+      "start": 1182.24,
+      "end": 1184.75,
+      "duration": 2.51,
+      "text": "driving logic mean more Hardware takes"
+    },
+    {
+      "index": 312,
+      "start": 1184.76,
+      "end": 1187.31,
+      "duration": 2.55,
+      "text": "more space cost more money consumes more"
+    },
+    {
+      "index": 313,
+      "start": 1187.32,
+      "end": 1190.789,
+      "duration": 3.469,
+      "text": "power all that is fine but it system"
+    },
+    {
+      "index": 314,
+      "start": 1190.799,
+      "end": 1192.19,
+      "duration": 1.391,
+      "text": "will still work because you are taking"
+    },
+    {
+      "index": 315,
+      "start": 1192.2,
+      "end": 1194.23,
+      "duration": 2.03,
+      "text": "care of all"
+    },
+    {
+      "index": 316,
+      "start": 1194.24,
+      "end": 1196.789,
+      "duration": 2.549,
+      "text": "specifications so do not be over worried"
+    },
+    {
+      "index": 317,
+      "start": 1196.799,
+      "end": 1198.31,
+      "duration": 1.511,
+      "text": "about simplifying of course it doesn't"
+    },
+    {
+      "index": 318,
+      "start": 1198.32,
+      "end": 1200.789,
+      "duration": 2.469,
+      "text": "mean you should design inefficient"
+    },
+    {
+      "index": 319,
+      "start": 1200.799,
+      "end": 1203.149,
+      "duration": 2.35,
+      "text": "circuits all the time but when in doubt"
+    },
+    {
+      "index": 320,
+      "start": 1203.159,
+      "end": 1204.63,
+      "duration": 1.471,
+      "text": "create a new state but of course there"
+    },
+    {
+      "index": 321,
+      "start": 1204.64,
+      "end": 1206.95,
+      "duration": 2.31,
+      "text": "are later on of course there are"
+    },
+    {
+      "index": 322,
+      "start": 1206.96,
+      "end": 1209.19,
+      "duration": 2.23,
+      "text": "techniques also to make sure whether"
+    },
+    {
+      "index": 323,
+      "start": 1209.2,
+      "end": 1210.71,
+      "duration": 1.51,
+      "text": "this is indeed the simplest possible"
+    },
+    {
+      "index": 324,
+      "start": 1210.72,
+      "end": 1212.909,
+      "duration": 2.189,
+      "text": "State graph any extra States can be"
+    },
+    {
+      "index": 325,
+      "start": 1212.919,
+      "end": 1215.95,
+      "duration": 3.031,
+      "text": "knocked off by a process similar to this"
+    },
+    {
+      "index": 326,
+      "start": 1215.96,
+      "end": 1218.029,
+      "duration": 2.069,
+      "text": "K of map there the Boolean algebra we"
+    },
+    {
+      "index": 327,
+      "start": 1218.039,
+      "end": 1219.99,
+      "duration": 1.951,
+      "text": "went through the Boolean algebra"
+    },
+    {
+      "index": 328,
+      "start": 1220.0,
+      "end": 1221.43,
+      "duration": 1.43,
+      "text": "reduction of the"
+    },
+    {
+      "index": 329,
+      "start": 1221.44,
+      "end": 1224.19,
+      "duration": 2.75,
+      "text": "terms reducing the term to minimum using"
+    },
+    {
+      "index": 330,
+      "start": 1224.2,
+      "end": 1227.63,
+      "duration": 3.43,
+      "text": "caram Maps similar concept is also"
+    },
+    {
+      "index": 331,
+      "start": 1227.64,
+      "end": 1229.27,
+      "duration": 1.63,
+      "text": "possible"
+    },
+    {
+      "index": 332,
+      "start": 1229.28,
+      "end": 1231.59,
+      "duration": 2.31,
+      "text": "instead reduction so once you have a"
+    },
+    {
+      "index": 333,
+      "start": 1231.6,
+      "end": 1233.07,
+      "duration": 1.47,
+      "text": "state graph I can reduce the state gra"
+    },
+    {
+      "index": 334,
+      "start": 1233.08,
+      "end": 1235.149,
+      "duration": 2.069,
+      "text": "to the minimum possible number a state"
+    },
+    {
+      "index": 335,
+      "start": 1235.159,
+      "end": 1236.87,
+      "duration": 1.711,
+      "text": "gra minimum possible number of"
+    },
+    {
+      "index": 336,
+      "start": 1236.88,
+      "end": 1239.63,
+      "duration": 2.75,
+      "text": "states I not in I don't intend doing"
+    },
+    {
+      "index": 337,
+      "start": 1239.64,
+      "end": 1241.07,
+      "duration": 1.43,
+      "text": "that now at this"
+    },
+    {
+      "index": 338,
+      "start": 1241.08,
+      "end": 1244.149,
+      "duration": 3.069,
+      "text": "stage if possible if there's time left"
+    },
+    {
+      "index": 339,
+      "start": 1244.159,
+      "end": 1247.029,
+      "duration": 2.87,
+      "text": "we'll probably do that part a little bit"
+    },
+    {
+      "index": 340,
+      "start": 1247.039,
+      "end": 1250.029,
+      "duration": 2.99,
+      "text": "by a couple of examples maybe I can show"
+    },
+    {
+      "index": 341,
+      "start": 1250.039,
+      "end": 1253.59,
+      "duration": 3.551,
+      "text": "you how a state graph with more States"
+    },
+    {
+      "index": 342,
+      "start": 1253.6,
+      "end": 1256.909,
+      "duration": 3.309,
+      "text": "than required can be reduced to minimum"
+    },
+    {
+      "index": 343,
+      "start": 1256.919,
+      "end": 1258.31,
+      "duration": 1.391,
+      "text": "State graph with a minimum number of"
+    },
+    {
+      "index": 344,
+      "start": 1258.32,
+      "end": 1261.19,
+      "duration": 2.87,
+      "text": "states there's a technique for"
+    },
+    {
+      "index": 345,
+      "start": 1261.2,
+      "end": 1263.549,
+      "duration": 2.349,
+      "text": "that so since the technique is available"
+    },
+    {
+      "index": 346,
+      "start": 1263.559,
+      "end": 1265.029,
+      "duration": 1.47,
+      "text": "even if it is not available I would"
+    },
+    {
+      "index": 347,
+      "start": 1265.039,
+      "end": 1266.71,
+      "duration": 1.671,
+      "text": "rather go with"
+    },
+    {
+      "index": 348,
+      "start": 1266.72,
+      "end": 1269.23,
+      "duration": 2.51,
+      "text": "a conservative State graph which will"
+    },
+    {
+      "index": 349,
+      "start": 1269.24,
+      "end": 1271.789,
+      "duration": 2.549,
+      "text": "take care of all my possibilities rather"
+    },
+    {
+      "index": 350,
+      "start": 1271.799,
+      "end": 1273.71,
+      "duration": 1.911,
+      "text": "than going and taking I'll draw a"
+    },
+    {
+      "index": 351,
+      "start": 1273.72,
+      "end": 1276.59,
+      "duration": 2.87,
+      "text": "simpler graph and then ignore some of"
+    },
+    {
+      "index": 352,
+      "start": 1276.6,
+      "end": 1278.59,
+      "duration": 1.99,
+      "text": "the possibilities between these two"
+    },
+    {
+      "index": 353,
+      "start": 1278.6,
+      "end": 1280.43,
+      "duration": 1.83,
+      "text": "options I will all any day prefer the"
+    },
+    {
+      "index": 354,
+      "start": 1280.44,
+      "end": 1282.549,
+      "duration": 2.109,
+      "text": "option in which I have more States but I"
+    },
+    {
+      "index": 355,
+      "start": 1282.559,
+      "end": 1286.07,
+      "duration": 3.511,
+      "text": "can solve the problem to the entire"
+    },
+    {
+      "index": 356,
+      "start": 1286.08,
+      "end": 1287.87,
+      "duration": 1.79,
+      "text": "specifications that is one point I"
+    },
+    {
+      "index": 357,
+      "start": 1287.88,
+      "end": 1290.23,
+      "duration": 2.35,
+      "text": "wanted to make here there State"
+    },
+    {
+      "index": 358,
+      "start": 1290.24,
+      "end": 1292.909,
+      "duration": 2.669,
+      "text": "reduction to minimum number of states"
+    },
+    {
+      "index": 359,
+      "start": 1292.919,
+      "end": 1295.47,
+      "duration": 2.551,
+      "text": "that's a technique of doing it textbooks"
+    },
+    {
+      "index": 360,
+      "start": 1295.48,
+      "end": 1296.83,
+      "duration": 1.35,
+      "text": "some textbooks will talk about it I"
+    },
+    {
+      "index": 361,
+      "start": 1296.84,
+      "end": 1298.47,
+      "duration": 1.63,
+      "text": "think many textbooks nowadays talk about"
+    },
+    {
+      "index": 362,
+      "start": 1298.48,
+      "end": 1301.07,
+      "duration": 2.59,
+      "text": "it if possible we'll cover"
+    },
+    {
+      "index": 363,
+      "start": 1301.08,
+      "end": 1303.19,
+      "duration": 2.11,
+      "text": "it even though I don't want to do it at"
+    },
+    {
+      "index": 364,
+      "start": 1303.2,
+      "end": 1305.63,
+      "duration": 2.43,
+      "text": "this"
+    },
+    {
+      "index": 365,
+      "start": 1308.47,
+      "end": 1308.48,
+      "duration": 0.01,
+      "text": "stage the next thing is the number of"
+    },
+    {
+      "index": 366,
+      "start": 1308.48,
+      "end": 1309.549,
+      "duration": 1.069,
+      "text": "once you have number of states what do"
+    },
+    {
+      "index": 367,
+      "start": 1309.559,
+      "end": 1312.71,
+      "duration": 3.151,
+      "text": "you proceed with how do you proceed you"
+    },
+    {
+      "index": 368,
+      "start": 1312.72,
+      "end": 1315.149,
+      "duration": 2.429,
+      "text": "have to assign the states now there are"
+    },
+    {
+      "index": 369,
+      "start": 1315.159,
+      "end": 1318.029,
+      "duration": 2.87,
+      "text": "five six states 0 to five there are six"
+    },
+    {
+      "index": 370,
+      "start": 1318.039,
+      "end": 1319.43,
+      "duration": 1.391,
+      "text": "states"
+    },
+    {
+      "index": 371,
+      "start": 1319.44,
+      "end": 1321.39,
+      "duration": 1.95,
+      "text": "six years minimum of three flip flops"
+    },
+    {
+      "index": 372,
+      "start": 1321.4,
+      "end": 1324.43,
+      "duration": 3.03,
+      "text": "are required so you can start you can"
+    },
+    {
+      "index": 373,
+      "start": 1324.44,
+      "end": 1327.95,
+      "duration": 3.51,
+      "text": "call these variables a b c or pqr"
+    },
+    {
+      "index": 374,
+      "start": 1327.96,
+      "end": 1331.39,
+      "duration": 3.43,
+      "text": "whatever and then start giving 000000 1"
+    },
+    {
+      "index": 375,
+      "start": 1331.4,
+      "end": 1333.43,
+      "duration": 2.03,
+      "text": "that is a"
+    },
+    {
+      "index": 376,
+      "start": 1333.44,
+      "end": 1335.59,
+      "duration": 2.15,
+      "text": "arbitrary assignment this is called"
+    },
+    {
+      "index": 377,
+      "start": 1335.6,
+      "end": 1338.19,
+      "duration": 2.59,
+      "text": "assignment once you have a state graph"
+    },
+    {
+      "index": 378,
+      "start": 1338.2,
+      "end": 1342.23,
+      "duration": 4.03,
+      "text": "with States symbols rather than binary"
+    },
+    {
+      "index": 379,
+      "start": 1342.24,
+      "end": 1345.59,
+      "duration": 3.35,
+      "text": "values converting the state from symbols"
+    },
+    {
+      "index": 380,
+      "start": 1345.6,
+      "end": 1347.669,
+      "duration": 2.069,
+      "text": "and letters into binary variables is"
+    },
+    {
+      "index": 381,
+      "start": 1347.679,
+      "end": 1350.43,
+      "duration": 2.751,
+      "text": "called a state assignment"
+    },
+    {
+      "index": 382,
+      "start": 1350.44,
+      "end": 1353.35,
+      "duration": 2.91,
+      "text": "so one is reduction of States reduction"
+    },
+    {
+      "index": 383,
+      "start": 1353.36,
+      "end": 1354.669,
+      "duration": 1.309,
+      "text": "of State"
+    },
+    {
+      "index": 384,
+      "start": 1354.679,
+      "end": 1361.07,
+      "duration": 6.391,
+      "text": "graph these are steps we need to"
+    },
+    {
+      "index": 385,
+      "start": 1364.029,
+      "end": 1364.039,
+      "duration": 0.01,
+      "text": "do which I said I'm skipping at this"
+    },
+    {
+      "index": 386,
+      "start": 1364.039,
+      "end": 1365.149,
+      "duration": 1.11,
+      "text": "point in"
+    },
+    {
+      "index": 387,
+      "start": 1365.159,
+      "end": 1372.51,
+      "duration": 7.351,
+      "text": "time second is the state"
+    },
+    {
+      "index": 388,
+      "start": 1375.029,
+      "end": 1375.039,
+      "duration": 0.01,
+      "text": "assignment State assignment is a process"
+    },
+    {
+      "index": 389,
+      "start": 1375.039,
+      "end": 1379.029,
+      "duration": 3.99,
+      "text": "of mapping or assigning binary values to"
+    },
+    {
+      "index": 390,
+      "start": 1379.039,
+      "end": 1380.11,
+      "duration": 1.071,
+      "text": "the"
+    },
+    {
+      "index": 391,
+      "start": 1380.12,
+      "end": 1383.11,
+      "duration": 2.99,
+      "text": "states I cannot start with 0 0 0 0"
+    },
+    {
+      "index": 392,
+      "start": 1383.12,
+      "end": 1384.99,
+      "duration": 1.87,
+      "text": "because I never know when they start the"
+    },
+    {
+      "index": 393,
+      "start": 1385.0,
+      "end": 1387.19,
+      "duration": 2.19,
+      "text": "problem how many states are going to be"
+    },
+    {
+      "index": 394,
+      "start": 1387.2,
+      "end": 1388.87,
+      "duration": 1.67,
+      "text": "total so how many binary variable should"
+    },
+    {
+      "index": 395,
+      "start": 1388.88,
+      "end": 1390.909,
+      "duration": 2.029,
+      "text": "get started with I don't know otherwise"
+    },
+    {
+      "index": 396,
+      "start": 1390.919,
+      "end": 1392.75,
+      "duration": 1.831,
+      "text": "I would have started with 0 0 0 here and"
+    },
+    {
+      "index": 397,
+      "start": 1392.76,
+      "end": 1394.39,
+      "duration": 1.63,
+      "text": "then I will go to 0 00 0 state will go"
+    },
+    {
+      "index": 398,
+      "start": 1394.4,
+      "end": 1396.43,
+      "duration": 2.03,
+      "text": "to 0 0 one state 0 0 1 state will go to"
+    },
+    {
+      "index": 399,
+      "start": 1396.44,
+      "end": 1399.71,
+      "duration": 3.27,
+      "text": "0 1 0 State I can't I can make a map I"
+    },
+    {
+      "index": 400,
+      "start": 1399.72,
+      "end": 1401.83,
+      "duration": 2.11,
+      "text": "can make a graph like that but I don't"
+    },
+    {
+      "index": 401,
+      "start": 1401.84,
+      "end": 1403.23,
+      "duration": 1.39,
+      "text": "know because I don't know how many"
+    },
+    {
+      "index": 402,
+      "start": 1403.24,
+      "end": 1405.71,
+      "duration": 2.47,
+      "text": "variables I should start"
+    },
+    {
+      "index": 403,
+      "start": 1405.72,
+      "end": 1409.07,
+      "duration": 3.35,
+      "text": "using so I would probably start"
+    },
+    {
+      "index": 404,
+      "start": 1409.08,
+      "end": 1411.789,
+      "duration": 2.709,
+      "text": "with"
+    },
+    {
+      "index": 405,
+      "start": 1411.799,
+      "end": 1414.35,
+      "duration": 2.551,
+      "text": "symbols and then later"
+    },
+    {
+      "index": 406,
+      "start": 1414.36,
+      "end": 1416.669,
+      "duration": 2.309,
+      "text": "on after finding out how many states are"
+    },
+    {
+      "index": 407,
+      "start": 1416.679,
+      "end": 1418.63,
+      "duration": 1.951,
+      "text": "required I'll assign it now I know how"
+    },
+    {
+      "index": 408,
+      "start": 1418.64,
+      "end": 1419.99,
+      "duration": 1.35,
+      "text": "many state variables are required now I"
+    },
+    {
+      "index": 409,
+      "start": 1420.0,
+      "end": 1421.23,
+      "duration": 1.23,
+      "text": "know that three state variables are"
+    },
+    {
+      "index": 410,
+      "start": 1421.24,
+      "end": 1425.51,
+      "duration": 4.27,
+      "text": "required so I'm going to call them pqr"
+    },
+    {
+      "index": 411,
+      "start": 1425.52,
+      "end": 1430.87,
+      "duration": 5.35,
+      "text": "whatever so I can say s0"
+    },
+    {
+      "index": 412,
+      "start": 1443.789,
+      "end": 1443.799,
+      "duration": 0.01,
+      "text": "this is called a state assignment this"
+    },
+    {
+      "index": 413,
+      "start": 1443.799,
+      "end": 1447.909,
+      "duration": 4.11,
+      "text": "proc this step of converting the symbols"
+    },
+    {
+      "index": 414,
+      "start": 1447.919,
+      "end": 1450.95,
+      "duration": 3.031,
+      "text": "state symbols into binary values State"
+    },
+    {
+      "index": 415,
+      "start": 1450.96,
+      "end": 1453.71,
+      "duration": 2.75,
+      "text": "assignment here again I can do a little"
+    },
+    {
+      "index": 416,
+      "start": 1453.72,
+      "end": 1455.43,
+      "duration": 1.71,
+      "text": "more efficient this is an orbitary"
+    },
+    {
+      "index": 417,
+      "start": 1455.44,
+      "end": 1457.59,
+      "duration": 2.15,
+      "text": "assignment natural binary sequence I"
+    },
+    {
+      "index": 418,
+      "start": 1457.6,
+      "end": 1460.59,
+      "duration": 2.99,
+      "text": "have taken and assigned"
+    },
+    {
+      "index": 419,
+      "start": 1463.51,
+      "end": 1463.52,
+      "duration": 0.01,
+      "text": "it it is always possible see finally the"
+    },
+    {
+      "index": 420,
+      "start": 1463.52,
+      "end": 1465.75,
+      "duration": 2.23,
+      "text": "state values become the present State"
+    },
+    {
+      "index": 421,
+      "start": 1465.76,
+      "end": 1467.31,
+      "duration": 1.55,
+      "text": "values and then the next state value"
+    },
+    {
+      "index": 422,
+      "start": 1467.32,
+      "end": 1468.95,
+      "duration": 1.63,
+      "text": "depending on the state"
+    },
+    {
+      "index": 423,
+      "start": 1468.96,
+      "end": 1471.07,
+      "duration": 2.11,
+      "text": "graph and then from there you go to the"
+    },
+    {
+      "index": 424,
+      "start": 1471.08,
+      "end": 1473.389,
+      "duration": 2.309,
+      "text": "flip-flop inputs and the outputs so the"
+    },
+    {
+      "index": 425,
+      "start": 1473.399,
+      "end": 1475.47,
+      "duration": 2.071,
+      "text": "Cara map is"
+    },
+    {
+      "index": 426,
+      "start": 1475.48,
+      "end": 1477.75,
+      "duration": 2.27,
+      "text": "drawn based on the transition from the"
+    },
+    {
+      "index": 427,
+      "start": 1477.76,
+      "end": 1480.029,
+      "duration": 2.269,
+      "text": "present state to the next state isn't"
+    },
+    {
+      "index": 428,
+      "start": 1480.039,
+      "end": 1482.43,
+      "duration": 2.391,
+      "text": "not the simplification of the hardware"
+    },
+    {
+      "index": 429,
+      "start": 1482.44,
+      "end": 1483.99,
+      "duration": 1.55,
+      "text": "finally the hardware that we going to"
+    },
+    {
+      "index": 430,
+      "start": 1484.0,
+      "end": 1485.51,
+      "duration": 1.51,
+      "text": "finally get the stering logic we're"
+    },
+    {
+      "index": 431,
+      "start": 1485.52,
+      "end": 1486.789,
+      "duration": 1.269,
+      "text": "going to get depends on the present"
+    },
+    {
+      "index": 432,
+      "start": 1486.799,
+      "end": 1489.35,
+      "duration": 2.551,
+      "text": "State and the corresponding next States"
+    },
+    {
+      "index": 433,
+      "start": 1489.36,
+      "end": 1491.029,
+      "duration": 1.669,
+      "text": "so if from s0 is the present State and"
+    },
+    {
+      "index": 434,
+      "start": 1491.039,
+      "end": 1492.35,
+      "duration": 1.311,
+      "text": "S1 is the next"
+    },
+    {
+      "index": 435,
+      "start": 1492.36,
+      "end": 1495.07,
+      "duration": 2.71,
+      "text": "state what is the best possible"
+    },
+    {
+      "index": 436,
+      "start": 1495.08,
+      "end": 1496.909,
+      "duration": 1.829,
+      "text": "assignment of s0 and S1 so that a"
+    },
+    {
+      "index": 437,
+      "start": 1496.919,
+      "end": 1499.95,
+      "duration": 3.031,
+      "text": "minimum Hardware is required for Trans"
+    },
+    {
+      "index": 438,
+      "start": 1499.96,
+      "end": 1501.43,
+      "duration": 1.47,
+      "text": "this is also a"
+    },
+    {
+      "index": 439,
+      "start": 1501.44,
+      "end": 1504.59,
+      "duration": 3.15,
+      "text": "problem of interest in reduction"
+    },
+    {
+      "index": 440,
+      "start": 1504.6,
+      "end": 1507.149,
+      "duration": 2.549,
+      "text": "Hardware so there is a possibility of"
+    },
+    {
+      "index": 441,
+      "start": 1507.159,
+      "end": 1509.99,
+      "duration": 2.831,
+      "text": "optimally assigning the binary values to"
+    },
+    {
+      "index": 442,
+      "start": 1510.0,
+      "end": 1511.75,
+      "duration": 1.75,
+      "text": "the states rather than randomly or"
+    },
+    {
+      "index": 443,
+      "start": 1511.76,
+      "end": 1514.63,
+      "duration": 2.87,
+      "text": "orbitally assigning as we did in this"
+    },
+    {
+      "index": 444,
+      "start": 1514.64,
+      "end": 1518.549,
+      "duration": 3.909,
+      "text": "case can I make a more efficient"
+    },
+    {
+      "index": 445,
+      "start": 1518.559,
+      "end": 1535.47,
+      "duration": 16.911,
+      "text": "assignment Hardware efficient assignment"
+    },
+    {
+      "index": 446,
+      "start": 1537.63,
+      "end": 1537.64,
+      "duration": 0.01,
+      "text": "by this what I mean is instead of"
+    },
+    {
+      "index": 447,
+      "start": 1537.64,
+      "end": 1541.83,
+      "duration": 4.19,
+      "text": "blindly saying s0 is 0 S1 is 0 0 1 S2 is"
+    },
+    {
+      "index": 448,
+      "start": 1541.84,
+      "end": 1543.75,
+      "duration": 1.91,
+      "text": "0 1 0 instead of saying"
+    },
+    {
+      "index": 449,
+      "start": 1543.76,
+      "end": 1549.63,
+      "duration": 5.87,
+      "text": "that can I use some sort of a"
+    },
+    {
+      "index": 450,
+      "start": 1553.71,
+      "end": 1553.72,
+      "duration": 0.01,
+      "text": "rule and figure"
+    },
+    {
+      "index": 451,
+      "start": 1553.72,
+      "end": 1556.07,
+      "duration": 2.35,
+      "text": "out which state should be next to which"
+    },
+    {
+      "index": 452,
+      "start": 1556.08,
+      "end": 1557.909,
+      "duration": 1.829,
+      "text": "state this is called neighboring states"
+    },
+    {
+      "index": 453,
+      "start": 1557.919,
+      "end": 1560.269,
+      "duration": 2.35,
+      "text": "are the whenever a state"
+    },
+    {
+      "index": 454,
+      "start": 1560.279,
+      "end": 1562.95,
+      "duration": 2.671,
+      "text": "variable the the state assignment of one"
+    },
+    {
+      "index": 455,
+      "start": 1562.96,
+      "end": 1564.789,
+      "duration": 1.829,
+      "text": "state differs from another state in only"
+    },
+    {
+      "index": 456,
+      "start": 1564.799,
+      "end": 1566.43,
+      "duration": 1.631,
+      "text": "one"
+    },
+    {
+      "index": 457,
+      "start": 1566.44,
+      "end": 1569.269,
+      "duration": 2.829,
+      "text": "variable these are called adjacent"
+    },
+    {
+      "index": 458,
+      "start": 1569.279,
+      "end": 1573.269,
+      "duration": 3.99,
+      "text": "States 0 0 and 001 are adjacent States"
+    },
+    {
+      "index": 459,
+      "start": 1573.279,
+      "end": 1576.11,
+      "duration": 2.831,
+      "text": "like the K map right in K map adjacent"
+    },
+    {
+      "index": 460,
+      "start": 1576.12,
+      "end": 1578.789,
+      "duration": 2.669,
+      "text": "cells differ only in one"
+    },
+    {
+      "index": 461,
+      "start": 1578.799,
+      "end": 1581.549,
+      "duration": 2.75,
+      "text": "variable like that in binary assignment"
+    },
+    {
+      "index": 462,
+      "start": 1581.559,
+      "end": 1584.23,
+      "duration": 2.671,
+      "text": "also adjacent states are the states"
+    },
+    {
+      "index": 463,
+      "start": 1584.24,
+      "end": 1586.029,
+      "duration": 1.789,
+      "text": "which def only one value of the state"
+    },
+    {
+      "index": 464,
+      "start": 1586.039,
+      "end": 1589.35,
+      "duration": 3.311,
+      "text": "variable other state variables are same"
+    },
+    {
+      "index": 465,
+      "start": 1589.36,
+      "end": 1592.83,
+      "duration": 3.47,
+      "text": "so use some adjacency"
+    },
+    {
+      "index": 466,
+      "start": 1592.84,
+      "end": 1599.59,
+      "duration": 6.75,
+      "text": "rules"
+    },
+    {
+      "index": 467,
+      "start": 1602.31,
+      "end": 1602.32,
+      "duration": 0.01,
+      "text": "using this is also"
+    },
+    {
+      "index": 468,
+      "start": 1602.32,
+      "end": 1606.47,
+      "duration": 4.15,
+      "text": "possible these are steps to reduce the"
+    },
+    {
+      "index": 469,
+      "start": 1606.48,
+      "end": 1608.83,
+      "duration": 2.35,
+      "text": "hardware this this will reduce the"
+    },
+    {
+      "index": 470,
+      "start": 1608.84,
+      "end": 1612.11,
+      "duration": 3.27,
+      "text": "hardware because less number of this is"
+    },
+    {
+      "index": 471,
+      "start": 1612.12,
+      "end": 1613.43,
+      "duration": 1.31,
+      "text": "very important when it becomes for"
+    },
+    {
+      "index": 472,
+      "start": 1613.44,
+      "end": 1615.23,
+      "duration": 1.79,
+      "text": "example from eight nine states if I able"
+    },
+    {
+      "index": 473,
+      "start": 1615.24,
+      "end": 1617.269,
+      "duration": 2.029,
+      "text": "to reduce to eight states it's a"
+    },
+    {
+      "index": 474,
+      "start": 1617.279,
+      "end": 1618.87,
+      "duration": 1.591,
+      "text": "significant reduction because instead of"
+    },
+    {
+      "index": 475,
+      "start": 1618.88,
+      "end": 1621.389,
+      "duration": 2.509,
+      "text": "four flip flops I can ruse three flip"
+    },
+    {
+      "index": 476,
+      "start": 1621.399,
+      "end": 1623.87,
+      "duration": 2.471,
+      "text": "flops sh reduction becomes more"
+    },
+    {
+      "index": 477,
+      "start": 1623.88,
+      "end": 1625.269,
+      "duration": 1.389,
+      "text": "meaningful if I can reduce the number of"
+    },
+    {
+      "index": 478,
+      "start": 1625.279,
+      "end": 1627.51,
+      "duration": 2.231,
+      "text": "flip flops even otherwise it will make"
+    },
+    {
+      "index": 479,
+      "start": 1627.52,
+      "end": 1630.669,
+      "duration": 3.149,
+      "text": "meaningful because if I have less States"
+    },
+    {
+      "index": 480,
+      "start": 1630.679,
+      "end": 1632.19,
+      "duration": 1.511,
+      "text": "instead of Six States if I have four"
+    },
+    {
+      "index": 481,
+      "start": 1632.2,
+      "end": 1634.59,
+      "duration": 2.39,
+      "text": "states even though both cases I Ed two"
+    },
+    {
+      "index": 482,
+      "start": 1634.6,
+      "end": 1637.99,
+      "duration": 3.39,
+      "text": "flip flop sorry three flip"
+    },
+    {
+      "index": 483,
+      "start": 1638.0,
+      "end": 1641.47,
+      "duration": 3.47,
+      "text": "flops I have more don't care"
+    },
+    {
+      "index": 484,
+      "start": 1641.48,
+      "end": 1643.71,
+      "duration": 2.23,
+      "text": "values the number of states is less when"
+    },
+    {
+      "index": 485,
+      "start": 1643.72,
+      "end": 1644.909,
+      "duration": 1.189,
+      "text": "I have more don't care values my"
+    },
+    {
+      "index": 486,
+      "start": 1644.919,
+      "end": 1647.43,
+      "duration": 2.511,
+      "text": "Hardware is simpler you know that when I"
+    },
+    {
+      "index": 487,
+      "start": 1647.44,
+      "end": 1649.909,
+      "duration": 2.469,
+      "text": "have more don't care ENT in my state"
+    },
+    {
+      "index": 488,
+      "start": 1649.919,
+      "end": 1652.35,
+      "duration": 2.431,
+      "text": "table my Hardware is"
+    },
+    {
+      "index": 489,
+      "start": 1652.36,
+      "end": 1654.669,
+      "duration": 2.309,
+      "text": "simpler So to that extent it will also"
+    },
+    {
+      "index": 490,
+      "start": 1654.679,
+      "end": 1656.669,
+      "duration": 1.99,
+      "text": "impact the hardware but it's more"
+    },
+    {
+      "index": 491,
+      "start": 1656.679,
+      "end": 1658.99,
+      "duration": 2.311,
+      "text": "significant reduction is possible if you"
+    },
+    {
+      "index": 492,
+      "start": 1659.0,
+      "end": 1660.99,
+      "duration": 1.99,
+      "text": "can even reduce the number of flip"
+    },
+    {
+      "index": 493,
+      "start": 1661.0,
+      "end": 1663.59,
+      "duration": 2.59,
+      "text": "flops the same argument I can hold here"
+    },
+    {
+      "index": 494,
+      "start": 1663.6,
+      "end": 1665.31,
+      "duration": 1.71,
+      "text": "if you have assignment state that the"
+    },
+    {
+      "index": 495,
+      "start": 1665.32,
+      "end": 1666.71,
+      "duration": 1.39,
+      "text": "transition always happens from one state"
+    },
+    {
+      "index": 496,
+      "start": 1666.72,
+      "end": 1668.23,
+      "duration": 1.51,
+      "text": "to the next state which is differing"
+    },
+    {
+      "index": 497,
+      "start": 1668.24,
+      "end": 1671.43,
+      "duration": 3.19,
+      "text": "only one variable the switching activity"
+    },
+    {
+      "index": 498,
+      "start": 1671.44,
+      "end": 1675.389,
+      "duration": 3.949,
+      "text": "or the the CH transition is minimum that"
+    },
+    {
+      "index": 499,
+      "start": 1675.399,
+      "end": 1677.83,
+      "duration": 2.431,
+      "text": "is also efficient again I'm going to"
+    },
+    {
+      "index": 500,
+      "start": 1677.84,
+      "end": 1679.83,
+      "duration": 1.99,
+      "text": "skip part of the thing right this point"
+    },
+    {
+      "index": 501,
+      "start": 1679.84,
+      "end": 1681.269,
+      "duration": 1.429,
+      "text": "these are I want I want to tell you"
+    },
+    {
+      "index": 502,
+      "start": 1681.279,
+      "end": 1684.95,
+      "duration": 3.671,
+      "text": "these are the things which are possible"
+    },
+    {
+      "index": 503,
+      "start": 1684.96,
+      "end": 1686.99,
+      "duration": 2.03,
+      "text": "which can be done and should be done for"
+    },
+    {
+      "index": 504,
+      "start": 1687.0,
+      "end": 1688.029,
+      "duration": 1.029,
+      "text": "efficient"
+    },
+    {
+      "index": 505,
+      "start": 1688.039,
+      "end": 1690.149,
+      "duration": 2.11,
+      "text": "design but we'll have to first go"
+    },
+    {
+      "index": 506,
+      "start": 1690.159,
+      "end": 1691.43,
+      "duration": 1.271,
+      "text": "through the design procedure and then"
+    },
+    {
+      "index": 507,
+      "start": 1691.44,
+      "end": 1693.71,
+      "duration": 2.27,
+      "text": "later on if you have time"
+    },
+    {
+      "index": 508,
+      "start": 1693.72,
+      "end": 1697.549,
+      "duration": 3.829,
+      "text": "we do it why I am not why am I not"
+    },
+    {
+      "index": 509,
+      "start": 1697.559,
+      "end": 1700.149,
+      "duration": 2.59,
+      "text": "giving a lot of importance to"
+    },
+    {
+      "index": 510,
+      "start": 1700.159,
+      "end": 1703.43,
+      "duration": 3.271,
+      "text": "this at this point in time is because"
+    },
+    {
+      "index": 511,
+      "start": 1703.44,
+      "end": 1706.59,
+      "duration": 3.15,
+      "text": "today in today's technology nobody"
+    },
+    {
+      "index": 512,
+      "start": 1706.6,
+      "end": 1710.549,
+      "duration": 3.949,
+      "text": "bothers Hardware"
+    },
+    {
+      "index": 513,
+      "start": 1713.149,
+      "end": 1713.159,
+      "duration": 0.01,
+      "text": "fast because gone are the days where you"
+    },
+    {
+      "index": 514,
+      "start": 1713.159,
+      "end": 1715.029,
+      "duration": 1.87,
+      "text": "have to count the number of"
+    },
+    {
+      "index": 515,
+      "start": 1715.039,
+      "end": 1717.19,
+      "duration": 2.151,
+      "text": "gates if you can do something with seven"
+    },
+    {
+      "index": 516,
+      "start": 1717.2,
+      "end": 1719.789,
+      "duration": 2.589,
+      "text": "Gates instead of six g seven gates in of"
+    },
+    {
+      "index": 517,
+      "start": 1719.799,
+      "end": 1721.669,
+      "duration": 1.87,
+      "text": "nine Gates seven Gates eight Gates we're"
+    },
+    {
+      "index": 518,
+      "start": 1721.679,
+      "end": 1724.549,
+      "duration": 2.87,
+      "text": "very happy I reduced one land gate today"
+    },
+    {
+      "index": 519,
+      "start": 1724.559,
+      "end": 1727.59,
+      "duration": 3.031,
+      "text": "as I said this I integrated"
+    },
+    {
+      "index": 520,
+      "start": 1727.6,
+      "end": 1729.669,
+      "duration": 2.069,
+      "text": "circuits which have a large number of"
+    },
+    {
+      "index": 521,
+      "start": 1729.679,
+      "end": 1732.269,
+      "duration": 2.59,
+      "text": "gates inside on one single chip I can"
+    },
+    {
+      "index": 522,
+      "start": 1732.279,
+      "end": 1734.11,
+      "duration": 1.831,
+      "text": "have a gate equivalent function even"
+    },
+    {
+      "index": 523,
+      "start": 1734.12,
+      "end": 1735.47,
+      "duration": 1.35,
+      "text": "though we call it Gates it's not that"
+    },
+    {
+      "index": 524,
+      "start": 1735.48,
+      "end": 1737.63,
+      "duration": 2.15,
+      "text": "thousand Gates I see does not mean that"
+    },
+    {
+      "index": 525,
+      "start": 1737.64,
+      "end": 1740.269,
+      "duration": 2.629,
+      "text": "thousand G will be sitting there there"
+    },
+    {
+      "index": 526,
+      "start": 1740.279,
+      "end": 1743.87,
+      "duration": 3.591,
+      "text": "are functional Parts functional blocks"
+    },
+    {
+      "index": 527,
+      "start": 1743.88,
+      "end": 1745.269,
+      "duration": 1.389,
+      "text": "within that"
+    },
+    {
+      "index": 528,
+      "start": 1745.279,
+      "end": 1748.029,
+      "duration": 2.75,
+      "text": "I which is which are capable of"
+    },
+    {
+      "index": 529,
+      "start": 1748.039,
+      "end": 1750.909,
+      "duration": 2.87,
+      "text": "delivering the the which are capable of"
+    },
+    {
+      "index": 530,
+      "start": 1750.919,
+      "end": 1752.47,
+      "duration": 1.551,
+      "text": "delivering the"
+    },
+    {
+      "index": 531,
+      "start": 1752.48,
+      "end": 1755.23,
+      "duration": 2.75,
+      "text": "performance of about th"
+    },
+    {
+      "index": 532,
+      "start": 1755.24,
+      "end": 1757.63,
+      "duration": 2.39,
+      "text": "Gates so what is the point in having a"
+    },
+    {
+      "index": 533,
+      "start": 1757.64,
+      "end": 1759.149,
+      "duration": 1.509,
+      "text": "gate like that performance like that and"
+    },
+    {
+      "index": 534,
+      "start": 1759.159,
+      "end": 1762.789,
+      "duration": 3.63,
+      "text": "th gate and then redu reducing it from"
+    },
+    {
+      "index": 535,
+      "start": 1762.799,
+      "end": 1768.47,
+      "duration": 5.671,
+      "text": "767 to 734"
+    },
+    {
+      "index": 536,
+      "start": 1770.669,
+      "end": 1770.679,
+      "duration": 0.01,
+      "text": "you can only say I have M less of course"
+    },
+    {
+      "index": 537,
+      "start": 1770.679,
+      "end": 1772.59,
+      "duration": 1.911,
+      "text": "a little bit increase is there in the"
+    },
+    {
+      "index": 538,
+      "start": 1772.6,
+      "end": 1775.31,
+      "duration": 2.71,
+      "text": "term of switching activity is less to"
+    },
+    {
+      "index": 539,
+      "start": 1775.32,
+      "end": 1777.549,
+      "duration": 2.229,
+      "text": "that extent there's a power saving but"
+    },
+    {
+      "index": 540,
+      "start": 1777.559,
+      "end": 1779.269,
+      "duration": 1.71,
+      "text": "the size is the same that IC is there"
+    },
+    {
+      "index": 541,
+      "start": 1779.279,
+      "end": 1781.669,
+      "duration": 2.39,
+      "text": "sitting in your board there's some"
+    },
+    {
+      "index": 542,
+      "start": 1781.679,
+      "end": 1783.389,
+      "duration": 1.71,
+      "text": "marginal Advantage anywhere there's"
+    },
+    {
+      "index": 543,
+      "start": 1783.399,
+      "end": 1784.75,
+      "duration": 1.351,
+      "text": "always a marginal Advantage but the"
+    },
+    {
+      "index": 544,
+      "start": 1784.76,
+      "end": 1787.59,
+      "duration": 2.83,
+      "text": "amount of advantage in terms of"
+    },
+    {
+      "index": 545,
+      "start": 1787.6,
+      "end": 1791.63,
+      "duration": 4.03,
+      "text": "cost and the size and even the power"
+    },
+    {
+      "index": 546,
+      "start": 1791.64,
+      "end": 1794.269,
+      "duration": 2.629,
+      "text": "consumption is not as significant as the"
+    },
+    {
+      "index": 547,
+      "start": 1794.279,
+      "end": 1795.669,
+      "duration": 1.39,
+      "text": "earlier days where each one is a"
+    },
+    {
+      "index": 548,
+      "start": 1795.679,
+      "end": 1798.509,
+      "duration": 2.83,
+      "text": "separate IC I have to buy and put an I"
+    },
+    {
+      "index": 549,
+      "start": 1798.519,
+      "end": 1800.029,
+      "duration": 1.51,
+      "text": "one and gate means one extra thing I"
+    },
+    {
+      "index": 550,
+      "start": 1800.039,
+      "end": 1801.789,
+      "duration": 1.75,
+      "text": "have to put one Multiplex one"
+    },
+    {
+      "index": 551,
+      "start": 1801.799,
+      "end": 1803.19,
+      "duration": 1.391,
+      "text": "multiplexor I need to put one extra"
+    },
+    {
+      "index": 552,
+      "start": 1803.2,
+      "end": 1804.509,
+      "duration": 1.309,
+      "text": "thing one flipflop I need to put an"
+    },
+    {
+      "index": 553,
+      "start": 1804.519,
+      "end": 1806.95,
+      "duration": 2.431,
+      "text": "extra for each one I to go and buy an IC"
+    },
+    {
+      "index": 554,
+      "start": 1806.96,
+      "end": 1808.789,
+      "duration": 1.829,
+      "text": "and put it there it takes more space"
+    },
+    {
+      "index": 555,
+      "start": 1808.799,
+      "end": 1812.549,
+      "duration": 3.75,
+      "text": "more power More Money More"
+    },
+    {
+      "index": 556,
+      "start": 1812.559,
+      "end": 1816.07,
+      "duration": 3.511,
+      "text": "Everything speed is reduce so those days"
+    },
+    {
+      "index": 557,
+      "start": 1816.08,
+      "end": 1817.669,
+      "duration": 1.589,
+      "text": "Hardware reduction was very significant"
+    },
+    {
+      "index": 558,
+      "start": 1817.679,
+      "end": 1819.99,
+      "duration": 2.311,
+      "text": "today we are having a thanks to the"
+    },
+    {
+      "index": 559,
+      "start": 1820.0,
+      "end": 1823.029,
+      "duration": 3.029,
+      "text": "technology advancement so called vs"
+    },
+    {
+      "index": 560,
+      "start": 1823.039,
+      "end": 1826.95,
+      "duration": 3.911,
+      "text": "technology advances in vs"
+    },
+    {
+      "index": 561,
+      "start": 1826.96,
+      "end": 1830.59,
+      "duration": 3.63,
+      "text": "technology it's so common that everybody"
+    },
+    {
+      "index": 562,
+      "start": 1830.6,
+      "end": 1832.509,
+      "duration": 1.909,
+      "text": "talks of LSI even without understanding"
+    },
+    {
+      "index": 563,
+      "start": 1832.519,
+      "end": 1834.95,
+      "duration": 2.431,
+      "text": "what it is people talk of LSI you have"
+    },
+    {
+      "index": 564,
+      "start": 1834.96,
+      "end": 1838.31,
+      "duration": 3.35,
+      "text": "newspapers talk about VSA"
+    },
+    {
+      "index": 565,
+      "start": 1838.32,
+      "end": 1841.23,
+      "duration": 2.91,
+      "text": "courses so because of that this Hardware"
+    },
+    {
+      "index": 566,
+      "start": 1841.24,
+      "end": 1843.71,
+      "duration": 2.47,
+      "text": "is available in"
+    },
+    {
+      "index": 567,
+      "start": 1843.72,
+      "end": 1847.43,
+      "duration": 3.71,
+      "text": "plenty it is not very important unless"
+    },
+    {
+      "index": 568,
+      "start": 1847.44,
+      "end": 1851.63,
+      "duration": 4.19,
+      "text": "it's a critical issue for example if I"
+    },
+    {
+      "index": 569,
+      "start": 1851.64,
+      "end": 1853.909,
+      "duration": 2.269,
+      "text": "have thousand gate"
+    },
+    {
+      "index": 570,
+      "start": 1853.919,
+      "end": 1858.389,
+      "duration": 4.47,
+      "text": "solution nearly thousand gate solution"
+    },
+    {
+      "index": 571,
+      "start": 1858.399,
+      "end": 1861.269,
+      "duration": 2.87,
+      "text": "is is slightly exceeding thousand Gates"
+    },
+    {
+      "index": 572,
+      "start": 1861.279,
+      "end": 1862.789,
+      "duration": 1.51,
+      "text": "I'll try to accommodate in a th gate"
+    },
+    {
+      "index": 573,
+      "start": 1862.799,
+      "end": 1864.47,
+      "duration": 1.671,
+      "text": "solution other than the next possibility"
+    },
+    {
+      "index": 574,
+      "start": 1864.48,
+      "end": 1865.87,
+      "duration": 1.39,
+      "text": "is 2,000"
+    },
+    {
+      "index": 575,
+      "start": 1865.88,
+      "end": 1868.59,
+      "duration": 2.71,
+      "text": "Gates I would rather do some exercise to"
+    },
+    {
+      "index": 576,
+      "start": 1868.6,
+      "end": 1870.11,
+      "duration": 1.51,
+      "text": "reduce it to less than th000 so that I"
+    },
+    {
+      "index": 577,
+      "start": 1870.12,
+      "end": 1872.71,
+      "duration": 2.59,
+      "text": "can use a smaller IC than a 2,000 gate"
+    },
+    {
+      "index": 578,
+      "start": 1872.72,
+      "end": 1875.35,
+      "duration": 2.63,
+      "text": "IC so certain critical areas are certain"
+    },
+    {
+      "index": 579,
+      "start": 1875.36,
+      "end": 1877.31,
+      "duration": 1.95,
+      "text": "speed issues when it comes to high"
+    },
+    {
+      "index": 580,
+      "start": 1877.32,
+      "end": 1878.95,
+      "duration": 1.63,
+      "text": "speeded applications today the"
+    },
+    {
+      "index": 581,
+      "start": 1878.96,
+      "end": 1881.07,
+      "duration": 2.11,
+      "text": "technology both speed wise and Hardware"
+    },
+    {
+      "index": 582,
+      "start": 1881.08,
+      "end": 1882.389,
+      "duration": 1.309,
+      "text": "availability"
+    },
+    {
+      "index": 583,
+      "start": 1882.399,
+      "end": 1884.87,
+      "duration": 2.471,
+      "text": "wise is plenty we don't have to worry"
+    },
+    {
+      "index": 584,
+      "start": 1884.88,
+      "end": 1887.149,
+      "duration": 2.269,
+      "text": "about the speeds of normal applications"
+    },
+    {
+      "index": 585,
+      "start": 1887.159,
+      "end": 1889.47,
+      "duration": 2.311,
+      "text": "except in very high speed applications"
+    },
+    {
+      "index": 586,
+      "start": 1889.48,
+      "end": 1892.07,
+      "duration": 2.59,
+      "text": "high speed Computing likewise Hardware"
+    },
+    {
+      "index": 587,
+      "start": 1892.08,
+      "end": 1894.87,
+      "duration": 2.79,
+      "text": "availability is enormous cost saving is"
+    },
+    {
+      "index": 588,
+      "start": 1894.88,
+      "end": 1897.71,
+      "duration": 2.83,
+      "text": "minimal if at all there is any because"
+    },
+    {
+      "index": 589,
+      "start": 1897.72,
+      "end": 1899.19,
+      "duration": 1.47,
+      "text": "of these things only we are skipping"
+    },
+    {
+      "index": 590,
+      "start": 1899.2,
+      "end": 1900.549,
+      "duration": 1.349,
+      "text": "these steps now there's no point in"
+    },
+    {
+      "index": 591,
+      "start": 1900.559,
+      "end": 1902.19,
+      "duration": 1.631,
+      "text": "doing it but at the same time as a"
+    },
+    {
+      "index": 592,
+      "start": 1902.2,
+      "end": 1904.629,
+      "duration": 2.429,
+      "text": "designer if you want to Digital Designer"
+    },
+    {
+      "index": 593,
+      "start": 1904.639,
+      "end": 1905.99,
+      "duration": 1.351,
+      "text": "you should know that is available here"
+    },
+    {
+      "index": 594,
+      "start": 1906.0,
+      "end": 1907.23,
+      "duration": 1.23,
+      "text": "when you when you needed you should be"
+    },
+    {
+      "index": 595,
+      "start": 1907.24,
+      "end": 1909.43,
+      "duration": 2.19,
+      "text": "able to apply"
+    },
+    {
+      "index": 596,
+      "start": 1909.44,
+      "end": 1912.149,
+      "duration": 2.709,
+      "text": "it you may be an IC designer later on"
+    },
+    {
+      "index": 597,
+      "start": 1912.159,
+      "end": 1915.19,
+      "duration": 3.031,
+      "text": "you may be doing a very sophisticated I"
+    },
+    {
+      "index": 598,
+      "start": 1915.2,
+      "end": 1917.389,
+      "duration": 2.189,
+      "text": "in which every critical component is"
+    },
+    {
+      "index": 599,
+      "start": 1917.399,
+      "end": 1919.389,
+      "duration": 1.99,
+      "text": "critical in the sense of area and space"
+    },
+    {
+      "index": 600,
+      "start": 1919.399,
+      "end": 1921.43,
+      "duration": 2.031,
+      "text": "and everything so you have to go and"
+    },
+    {
+      "index": 601,
+      "start": 1921.44,
+      "end": 1923.269,
+      "duration": 1.829,
+      "text": "optimize start optimizing block by block"
+    },
+    {
+      "index": 602,
+      "start": 1923.279,
+      "end": 1924.35,
+      "duration": 1.071,
+      "text": "you should know what are the techniques"
+    },
+    {
+      "index": 603,
+      "start": 1924.36,
+      "end": 1926.75,
+      "duration": 2.39,
+      "text": "available to you for that so I don't"
+    },
+    {
+      "index": 604,
+      "start": 1926.76,
+      "end": 1929.389,
+      "duration": 2.629,
+      "text": "want to sort of not let you know that"
+    },
+    {
+      "index": 605,
+      "start": 1929.399,
+      "end": 1930.75,
+      "duration": 1.351,
+      "text": "there are things like this which should"
+    },
+    {
+      "index": 606,
+      "start": 1930.76,
+      "end": 1933.509,
+      "duration": 2.749,
+      "text": "be done which could be done but it is"
+    },
+    {
+      "index": 607,
+      "start": 1933.519,
+      "end": 1935.669,
+      "duration": 2.15,
+      "text": "not important especially in a small"
+    },
+    {
+      "index": 608,
+      "start": 1935.679,
+      "end": 1937.59,
+      "duration": 1.911,
+      "text": "systems like this talking about pattern"
+    },
+    {
+      "index": 609,
+      "start": 1937.6,
+      "end": 1939.07,
+      "duration": 1.47,
+      "text": "generator with three flip flops we"
+    },
+    {
+      "index": 610,
+      "start": 1939.08,
+      "end": 1941.75,
+      "duration": 2.67,
+      "text": "talking about here and a bunch of gates"
+    },
+    {
+      "index": 611,
+      "start": 1941.76,
+      "end": 1943.71,
+      "duration": 1.95,
+      "text": "the whole thing is over which can"
+    },
+    {
+      "index": 612,
+      "start": 1943.72,
+      "end": 1945.789,
+      "duration": 2.069,
+      "text": "accommodate one small integrated circuit"
+    },
+    {
+      "index": 613,
+      "start": 1945.799,
+      "end": 1948.83,
+      "duration": 3.031,
+      "text": "the medium scale IC MSI the whole design"
+    },
+    {
+      "index": 614,
+      "start": 1948.84,
+      "end": 1949.789,
+      "duration": 0.949,
+      "text": "is one"
+    },
+    {
+      "index": 615,
+      "start": 1949.799,
+      "end": 1953.19,
+      "duration": 3.391,
+      "text": "MSI and buy an MSI and put it there and"
+    },
+    {
+      "index": 616,
+      "start": 1953.2,
+      "end": 1956.509,
+      "duration": 3.309,
+      "text": "it works so why bother about trying to"
+    },
+    {
+      "index": 617,
+      "start": 1956.519,
+      "end": 1958.669,
+      "duration": 2.15,
+      "text": "do some of these things that is the"
+    },
+    {
+      "index": 618,
+      "start": 1958.679,
+      "end": 1961.269,
+      "duration": 2.59,
+      "text": "reason I'm not uh I'm skipping some of"
+    },
+    {
+      "index": 619,
+      "start": 1961.279,
+      "end": 1962.99,
+      "duration": 1.711,
+      "text": "these steps now at this point so we'll"
+    },
+    {
+      "index": 620,
+      "start": 1963.0,
+      "end": 1966.149,
+      "duration": 3.149,
+      "text": "do an orbitary assignment most of the"
+    },
+    {
+      "index": 621,
+      "start": 1966.159,
+      "end": 1970.269,
+      "duration": 4.11,
+      "text": "time until we have time to go revisit"
+    },
+    {
+      "index": 622,
+      "start": 1970.279,
+      "end": 1972.509,
+      "duration": 2.23,
+      "text": "this areas try to do some of these"
+    },
+    {
+      "index": 623,
+      "start": 1972.519,
+      "end": 1973.629,
+      "duration": 1.11,
+      "text": "things if"
+    },
+    {
+      "index": 624,
+      "start": 1973.639,
+      "end": 1975.99,
+      "duration": 2.351,
+      "text": "possible so we'll do a normal assignment"
+    },
+    {
+      "index": 625,
+      "start": 1976.0,
+      "end": 1977.269,
+      "duration": 1.269,
+      "text": "from here you know how to do it that"
+    },
+    {
+      "index": 626,
+      "start": 1977.279,
+      "end": 1980.389,
+      "duration": 3.11,
+      "text": "means I have to do a state table which"
+    },
+    {
+      "index": 627,
+      "start": 1980.399,
+      "end": 1981.95,
+      "duration": 1.551,
+      "text": "can be also considered as a transition"
+    },
+    {
+      "index": 628,
+      "start": 1981.96,
+      "end": 1983.19,
+      "duration": 1.23,
+      "text": "table depending on the type of flip"
+    },
+    {
+      "index": 629,
+      "start": 1983.2,
+      "end": 1986.83,
+      "duration": 3.63,
+      "text": "flops so is say per"
+    },
+    {
+      "index": 630,
+      "start": 1986.84,
+      "end": 1989.75,
+      "duration": 2.91,
+      "text": "state"
+    },
+    {
+      "index": 631,
+      "start": 1989.76,
+      "end": 1992.99,
+      "duration": 3.23,
+      "text": "input next"
+    },
+    {
+      "index": 632,
+      "start": 1993.0,
+      "end": 1995.909,
+      "duration": 2.909,
+      "text": "state"
+    },
+    {
+      "index": 633,
+      "start": 1995.919,
+      "end": 1999.95,
+      "duration": 4.031,
+      "text": "output per state values"
+    },
+    {
+      "index": 634,
+      "start": 1999.96,
+      "end": 2006.75,
+      "duration": 6.79,
+      "text": "are what is say was pqr ABC whatever"
+    },
+    {
+      "index": 635,
+      "start": 2009.71,
+      "end": 2009.72,
+      "duration": 0.01,
+      "text": "pqr next"
+    },
+    {
+      "index": 636,
+      "start": 2009.72,
+      "end": 2012.629,
+      "duration": 2.909,
+      "text": "values let us use D flip flop so that P"
+    },
+    {
+      "index": 637,
+      "start": 2012.639,
+      "end": 2017.31,
+      "duration": 4.671,
+      "text": "pqr are same as d a d DP DQ Dr for other"
+    },
+    {
+      "index": 638,
+      "start": 2017.32,
+      "end": 2018.99,
+      "duration": 1.67,
+      "text": "types of f flops I should have"
+    },
+    {
+      "index": 639,
+      "start": 2019.0,
+      "end": 2021.509,
+      "duration": 2.509,
+      "text": "separating so this then get State table"
+    },
+    {
+      "index": 640,
+      "start": 2021.519,
+      "end": 2029.389,
+      "duration": 7.87,
+      "text": "is also a transition"
+    },
+    {
+      "index": 641,
+      "start": 2031.87,
+      "end": 2031.88,
+      "duration": 0.01,
+      "text": "table output"
+    },
+    {
+      "index": 642,
+      "start": 2031.88,
+      "end": 2043.909,
+      "duration": 12.029,
+      "text": "Z so we have 0 0 0 0 0 1 0 0 0 0"
+    },
+    {
+      "index": 643,
+      "start": 2046.669,
+      "end": 2046.679,
+      "duration": 0.01,
+      "text": "the last state is"
+    },
+    {
+      "index": 644,
+      "start": 2046.679,
+      "end": 2049.43,
+      "duration": 2.751,
+      "text": "101 X is zero what happens X is one what"
+    },
+    {
+      "index": 645,
+      "start": 2049.44,
+      "end": 2052.629,
+      "duration": 3.189,
+      "text": "happens and then other two states are"
+    },
+    {
+      "index": 646,
+      "start": 2052.639,
+      "end": 2062.55,
+      "duration": 9.911,
+      "text": "not being"
+    },
+    {
+      "index": 647,
+      "start": 2075.829,
+      "end": 2075.839,
+      "duration": 0.01,
+      "text": "remember in the don't care also the"
+    },
+    {
+      "index": 648,
+      "start": 2075.839,
+      "end": 2083.149,
+      "duration": 7.31,
+      "text": "output should be what"
+    },
+    {
+      "index": 649,
+      "start": 2086.71,
+      "end": 2086.72,
+      "duration": 0.01,
+      "text": "zeros so you can complete this table you"
+    },
+    {
+      "index": 650,
+      "start": 2086.72,
+      "end": 2090.149,
+      "duration": 3.429,
+      "text": "know how to do that from here this is 0"
+    },
+    {
+      "index": 651,
+      "start": 2090.159,
+      "end": 2092.55,
+      "duration": 2.391,
+      "text": "0 0 this is 0 0 1 so 0 0 so I will write"
+    },
+    {
+      "index": 652,
+      "start": 2092.56,
+      "end": 2097.71,
+      "duration": 5.15,
+      "text": "one entry 0 0 0 x is0 it goes to 0 0 1"
+    },
+    {
+      "index": 653,
+      "start": 2097.72,
+      "end": 2101.67,
+      "duration": 3.95,
+      "text": "output is z 0 0 0 input is one it goes"
+    },
+    {
+      "index": 654,
+      "start": 2101.68,
+      "end": 2103.51,
+      "duration": 1.83,
+      "text": "to 0 1"
+    },
+    {
+      "index": 655,
+      "start": 2103.52,
+      "end": 2107.51,
+      "duration": 3.99,
+      "text": "0 like that please fill"
+    },
+    {
+      "index": 656,
+      "start": 2107.52,
+      "end": 2110.03,
+      "duration": 2.51,
+      "text": "this and design the circuit using D flip"
+    },
+    {
+      "index": 657,
+      "start": 2110.04,
+      "end": 2113.109,
+      "duration": 3.069,
+      "text": "flops and Gates simple as possible that"
+    },
+    {
+      "index": 658,
+      "start": 2113.119,
+      "end": 2114.99,
+      "duration": 1.871,
+      "text": "is an exercise you can do it yourself we"
+    },
+    {
+      "index": 659,
+      "start": 2115.0,
+      "end": 2118.63,
+      "duration": 3.63,
+      "text": "have done enough of those by"
+    },
+    {
+      "index": 660,
+      "start": 2118.64,
+      "end": 2120.95,
+      "duration": 2.31,
+      "text": "now so this is how you start from a"
+    },
+    {
+      "index": 661,
+      "start": 2120.96,
+      "end": 2123.23,
+      "duration": 2.27,
+      "text": "basic problem definition with very"
+    },
+    {
+      "index": 662,
+      "start": 2123.24,
+      "end": 2127.87,
+      "duration": 4.63,
+      "text": "clearly stated specs"
+    },
+    {
+      "index": 663,
+      "start": 2130.03,
+      "end": 2130.04,
+      "duration": 0.01,
+      "text": "take all possibilities into account draw"
+    },
+    {
+      "index": 664,
+      "start": 2130.04,
+      "end": 2131.67,
+      "duration": 1.63,
+      "text": "the state"
+    },
+    {
+      "index": 665,
+      "start": 2131.68,
+      "end": 2133.95,
+      "duration": 2.27,
+      "text": "graph from the state"
+    },
+    {
+      "index": 666,
+      "start": 2133.96,
+      "end": 2136.47,
+      "duration": 2.51,
+      "text": "graph you do the state assignment reduce"
+    },
+    {
+      "index": 667,
+      "start": 2136.48,
+      "end": 2139.31,
+      "duration": 2.83,
+      "text": "the state if necessary and if possible"
+    },
+    {
+      "index": 668,
+      "start": 2139.32,
+      "end": 2140.589,
+      "duration": 1.269,
+      "text": "reduce number of"
+    },
+    {
+      "index": 669,
+      "start": 2140.599,
+      "end": 2142.99,
+      "duration": 2.391,
+      "text": "states do a state"
+    },
+    {
+      "index": 670,
+      "start": 2143.0,
+      "end": 2145.51,
+      "duration": 2.51,
+      "text": "assignment either randomly arbitrarily"
+    },
+    {
+      "index": 671,
+      "start": 2145.52,
+      "end": 2148.069,
+      "duration": 2.549,
+      "text": "or using some thumb rules or design"
+    },
+    {
+      "index": 672,
+      "start": 2148.079,
+      "end": 2150.79,
+      "duration": 2.711,
+      "text": "rules to make it efficient from there"
+    },
+    {
+      "index": 673,
+      "start": 2150.8,
+      "end": 2152.309,
+      "duration": 1.509,
+      "text": "you go to the state"
+    },
+    {
+      "index": 674,
+      "start": 2152.319,
+      "end": 2155.75,
+      "duration": 3.431,
+      "text": "table and deci the type of flip flops if"
+    },
+    {
+      "index": 675,
+      "start": 2155.76,
+      "end": 2157.75,
+      "duration": 1.99,
+      "text": "the flip flops are other than a d type"
+    },
+    {
+      "index": 676,
+      "start": 2157.76,
+      "end": 2159.19,
+      "duration": 1.43,
+      "text": "you draw a transition table which is"
+    },
+    {
+      "index": 677,
+      "start": 2159.2,
+      "end": 2161.55,
+      "duration": 2.35,
+      "text": "other than the state table from there"
+    },
+    {
+      "index": 678,
+      "start": 2161.56,
+      "end": 2163.51,
+      "duration": 1.95,
+      "text": "you draw the Cal maps and simplify and"
+    },
+    {
+      "index": 679,
+      "start": 2163.52,
+      "end": 2165.829,
+      "duration": 2.309,
+      "text": "then draw the gates circuit staring"
+    },
+    {
+      "index": 680,
+      "start": 2165.839,
+      "end": 2168.23,
+      "duration": 2.391,
+      "text": "logic using Gates and the flip flops"
+    },
+    {
+      "index": 681,
+      "start": 2168.24,
+      "end": 2169.87,
+      "duration": 1.63,
+      "text": "which will drive which will be driven by"
+    },
+    {
+      "index": 682,
+      "start": 2169.88,
+      "end": 2172.99,
+      "duration": 3.11,
+      "text": "this steering logic and then your"
+    },
+    {
+      "index": 683,
+      "start": 2173.0,
+      "end": 2174.39,
+      "duration": 1.39,
+      "text": "circuit is over then you start giving"
+    },
+    {
+      "index": 684,
+      "start": 2174.4,
+      "end": 2175.27,
+      "duration": 0.87,
+      "text": "the"
+    },
+    {
+      "index": 685,
+      "start": 2175.28,
+      "end": 2178.27,
+      "duration": 2.99,
+      "text": "patterns and then test it build it and"
+    },
+    {
+      "index": 686,
+      "start": 2178.28,
+      "end": 2180.309,
+      "duration": 2.029,
+      "text": "test it whether it works because this is"
+    },
+    {
+      "index": 687,
+      "start": 2180.319,
+      "end": 2181.91,
+      "duration": 1.591,
+      "text": "only sample sequence you don't have to"
+    },
+    {
+      "index": 688,
+      "start": 2181.92,
+      "end": 2183.069,
+      "duration": 1.149,
+      "text": "give the sample sequence you should give"
+    },
+    {
+      "index": 689,
+      "start": 2183.079,
+      "end": 2185.829,
+      "duration": 2.75,
+      "text": "any sequence whenever any sequence you"
+    },
+    {
+      "index": 690,
+      "start": 2185.839,
+      "end": 2187.589,
+      "duration": 1.75,
+      "text": "give this pattern is identified if"
+    },
+    {
+      "index": 691,
+      "start": 2187.599,
+      "end": 2190.87,
+      "duration": 3.271,
+      "text": "should be immediately given output of"
+    },
+    {
+      "index": 692,
+      "start": 2193.67,
+      "end": 2193.68,
+      "duration": 0.01,
+      "text": "one do you have any questions this is a"
+    },
+    {
+      "index": 693,
+      "start": 2193.68,
+      "end": 2198.309,
+      "duration": 4.629,
+      "text": "total procedure with a slightly uh"
+    },
+    {
+      "index": 694,
+      "start": 2198.319,
+      "end": 2199.75,
+      "duration": 1.431,
+      "text": "involved I won't say it's a very"
+    },
+    {
+      "index": 695,
+      "start": 2199.76,
+      "end": 2201.67,
+      "duration": 1.91,
+      "text": "complicated problem but slightly"
+    },
+    {
+      "index": 696,
+      "start": 2201.68,
+      "end": 2203.069,
+      "duration": 1.389,
+      "text": "involved compared to what we did the"
+    },
+    {
+      "index": 697,
+      "start": 2203.079,
+      "end": 2205.71,
+      "duration": 2.631,
+      "text": "last"
+    },
+    {
+      "index": 698,
+      "start": 2207.87,
+      "end": 2207.88,
+      "duration": 0.01,
+      "text": "lecture we'll do one more example of the"
+    },
+    {
+      "index": 699,
+      "start": 2207.88,
+      "end": 2209.47,
+      "duration": 1.59,
+      "text": "state graph"
+    },
+    {
+      "index": 700,
+      "start": 2209.48,
+      "end": 2212.51,
+      "duration": 3.03,
+      "text": "generation this time using more machine"
+    },
+    {
+      "index": 701,
+      "start": 2212.52,
+      "end": 2214.47,
+      "duration": 1.95,
+      "text": "we have not used that so far we we done"
+    },
+    {
+      "index": 702,
+      "start": 2214.48,
+      "end": 2217.589,
+      "duration": 3.109,
+      "text": "only M so let us do a more machine"
+    },
+    {
+      "index": 703,
+      "start": 2217.599,
+      "end": 2220.309,
+      "duration": 2.71,
+      "text": "machine State graph rest of thing is"
+    },
+    {
+      "index": 704,
+      "start": 2220.319,
+      "end": 2221.67,
+      "duration": 1.351,
+      "text": "easy once we have a state graph you know"
+    },
+    {
+      "index": 705,
+      "start": 2221.68,
+      "end": 2222.99,
+      "duration": 1.31,
+      "text": "State assignment I'm not going to talk"
+    },
+    {
+      "index": 706,
+      "start": 2223.0,
+      "end": 2224.75,
+      "duration": 1.75,
+      "text": "about all this things one more time"
+    },
+    {
+      "index": 707,
+      "start": 2224.76,
+      "end": 2225.95,
+      "duration": 1.19,
+      "text": "you'll have a state graph then from"
+    },
+    {
+      "index": 708,
+      "start": 2225.96,
+      "end": 2228.03,
+      "duration": 2.07,
+      "text": "there you know the reduction if"
+    },
+    {
+      "index": 709,
+      "start": 2228.04,
+      "end": 2230.589,
+      "duration": 2.549,
+      "text": "necessary then you go to the state"
+    },
+    {
+      "index": 710,
+      "start": 2230.599,
+      "end": 2235.109,
+      "duration": 4.51,
+      "text": "assignment either arbitrary or efficient"
+    },
+    {
+      "index": 711,
+      "start": 2235.119,
+      "end": 2237.829,
+      "duration": 2.71,
+      "text": "assignment and then"
+    },
+    {
+      "index": 712,
+      "start": 2237.839,
+      "end": 2241.27,
+      "duration": 3.431,
+      "text": "this logic design using Hardware so let"
+    },
+    {
+      "index": 713,
+      "start": 2241.28,
+      "end": 2243.95,
+      "duration": 2.67,
+      "text": "us maybe we'll use the same"
+    },
+    {
+      "index": 714,
+      "start": 2243.96,
+      "end": 2257.829,
+      "duration": 13.869,
+      "text": "problem and instead only change this to"
+    },
+    {
+      "index": 715,
+      "start": 2262.91,
+      "end": 2262.92,
+      "duration": 0.01,
+      "text": "Mo and also this time we will not"
+    },
+    {
+      "index": 716,
+      "start": 2262.92,
+      "end": 2265.79,
+      "duration": 2.87,
+      "text": "identify overlapping"
+    },
+    {
+      "index": 717,
+      "start": 2265.8,
+      "end": 2272.069,
+      "duration": 6.269,
+      "text": "patterns I'll give you two"
+    },
+    {
+      "index": 718,
+      "start": 2275.43,
+      "end": 2275.44,
+      "duration": 0.01,
+      "text": "variations that means I should clearly"
+    },
+    {
+      "index": 719,
+      "start": 2275.44,
+      "end": 2278.99,
+      "duration": 3.55,
+      "text": "have a z z 1 0 0 1"
+    },
+    {
+      "index": 720,
+      "start": 2279.0,
+      "end": 2281.79,
+      "duration": 2.79,
+      "text": "output will be one that 01 will not be"
+    },
+    {
+      "index": 721,
+      "start": 2281.8,
+      "end": 2284.99,
+      "duration": 3.19,
+      "text": "considered as a part of another sequence"
+    },
+    {
+      "index": 722,
+      "start": 2285.0,
+      "end": 2287.309,
+      "duration": 2.309,
+      "text": "again it has to start with a 0 0 1"
+    },
+    {
+      "index": 723,
+      "start": 2287.319,
+      "end": 2290.71,
+      "duration": 3.391,
+      "text": "0 only then it can be a pattern so non"
+    },
+    {
+      "index": 724,
+      "start": 2290.72,
+      "end": 2294.43,
+      "duration": 3.71,
+      "text": "overlapping so I'm going to reduce"
+    },
+    {
+      "index": 725,
+      "start": 2297.87,
+      "end": 2297.88,
+      "duration": 0.01,
+      "text": "this overlapping of the"
+    },
+    {
+      "index": 726,
+      "start": 2297.88,
+      "end": 2308.91,
+      "duration": 11.03,
+      "text": "patterns need not be"
+    },
+    {
+      "index": 727,
+      "start": 2311.39,
+      "end": 2311.4,
+      "duration": 0.01,
+      "text": "design a war machine for the same"
+    },
+    {
+      "index": 728,
+      "start": 2311.4,
+      "end": 2313.47,
+      "duration": 2.07,
+      "text": "patterns and do not have to worry about"
+    },
+    {
+      "index": 729,
+      "start": 2313.48,
+      "end": 2315.39,
+      "duration": 1.91,
+      "text": "overlapping you'll always assume that a"
+    },
+    {
+      "index": 730,
+      "start": 2315.4,
+      "end": 2317.829,
+      "duration": 2.429,
+      "text": "pattern is completed it starts all over"
+    },
+    {
+      "index": 731,
+      "start": 2317.839,
+      "end": 2319.309,
+      "duration": 1.47,
+      "text": "again that means you have to go to the"
+    },
+    {
+      "index": 732,
+      "start": 2319.319,
+      "end": 2320.19,
+      "duration": 0.871,
+      "text": "reset"
+    },
+    {
+      "index": 733,
+      "start": 2320.2,
+      "end": 2322.67,
+      "duration": 2.47,
+      "text": "state after every output one you have to"
+    },
+    {
+      "index": 734,
+      "start": 2322.68,
+      "end": 2324.829,
+      "duration": 2.149,
+      "text": "go to the reset State start all over"
+    },
+    {
+      "index": 735,
+      "start": 2324.839,
+      "end": 2326.91,
+      "duration": 2.071,
+      "text": "again that is what it means by non"
+    },
+    {
+      "index": 736,
+      "start": 2326.92,
+      "end": 2329.47,
+      "duration": 2.55,
+      "text": "overlapping is it not you start with the"
+    },
+    {
+      "index": 737,
+      "start": 2329.48,
+      "end": 2330.99,
+      "duration": 1.51,
+      "text": "resarch state the pattern is completed"
+    },
+    {
+      "index": 738,
+      "start": 2331.0,
+      "end": 2332.39,
+      "duration": 1.39,
+      "text": "since no overlap is allowed you have to"
+    },
+    {
+      "index": 739,
+      "start": 2332.4,
+      "end": 2333.829,
+      "duration": 1.429,
+      "text": "start with the research St again wait"
+    },
+    {
+      "index": 740,
+      "start": 2333.839,
+      "end": 2338.75,
+      "duration": 4.911,
+      "text": "for next pattern to come"
+    },
+    {
+      "index": 741,
+      "start": 2340.43,
+      "end": 2340.44,
+      "duration": 0.01,
+      "text": "is the problem"
+    },
+    {
+      "index": 742,
+      "start": 2340.44,
+      "end": 2344.87,
+      "duration": 4.43,
+      "text": "clear so now if you want to use the same"
+    },
+    {
+      "index": 743,
+      "start": 2344.88,
+      "end": 2347.79,
+      "duration": 2.91,
+      "text": "sequence I don't"
+    },
+    {
+      "index": 744,
+      "start": 2347.8,
+      "end": 2363.51,
+      "duration": 15.71,
+      "text": "know as an"
+    },
+    {
+      "index": 745,
+      "start": 2368.309,
+      "end": 2368.319,
+      "duration": 0.01,
+      "text": "example now one1 is identified here"
+    },
+    {
+      "index": 746,
+      "start": 2368.319,
+      "end": 2370.67,
+      "duration": 2.351,
+      "text": "but the 0 1 0 I will not recognize as a"
+    },
+    {
+      "index": 747,
+      "start": 2370.68,
+      "end": 2373.069,
+      "duration": 2.389,
+      "text": "part of a pattern because it's a"
+    },
+    {
+      "index": 748,
+      "start": 2373.079,
+      "end": 2374.349,
+      "duration": 1.27,
+      "text": "nonoverlapping"
+    },
+    {
+      "index": 749,
+      "start": 2374.359,
+      "end": 2379.67,
+      "duration": 5.311,
+      "text": "so this 1 1 will produce an output of"
+    },
+    {
+      "index": 750,
+      "start": 2379.68,
+      "end": 2387.829,
+      "duration": 8.149,
+      "text": "one until then the output will be"
+    },
+    {
+      "index": 751,
+      "start": 2390.87,
+      "end": 2390.88,
+      "duration": 0.01,
+      "text": "zero okay we're right I didn't see that"
+    },
+    {
+      "index": 752,
+      "start": 2390.88,
+      "end": 2393.55,
+      "duration": 2.67,
+      "text": "thank you very"
+    },
+    {
+      "index": 753,
+      "start": 2404.47,
+      "end": 2404.48,
+      "duration": 0.01,
+      "text": "right you put it like this"
+    },
+    {
+      "index": 754,
+      "start": 2404.48,
+      "end": 2407.99,
+      "duration": 3.51,
+      "text": "huh 0 1 0 right yeah I know that's what"
+    },
+    {
+      "index": 755,
+      "start": 2408.0,
+      "end": 2411.51,
+      "duration": 3.51,
+      "text": "I'm saying now so output here because of"
+    },
+    {
+      "index": 756,
+      "start": 2411.52,
+      "end": 2412.47,
+      "duration": 0.95,
+      "text": "this"
+    },
+    {
+      "index": 757,
+      "start": 2412.48,
+      "end": 2416.79,
+      "duration": 4.31,
+      "text": "pattern now this 1 0 01 gets um knocked"
+    },
+    {
+      "index": 758,
+      "start": 2416.8,
+      "end": 2420.43,
+      "duration": 3.63,
+      "text": "off so I let me put"
+    },
+    {
+      "index": 759,
+      "start": 2422.589,
+      "end": 2422.599,
+      "duration": 0.01,
+      "text": "it give an effect"
+    },
+    {
+      "index": 760,
+      "start": 2422.599,
+      "end": 2424.99,
+      "duration": 2.391,
+      "text": "of then this 0 1 0 also will be"
+    },
+    {
+      "index": 761,
+      "start": 2425.0,
+      "end": 2427.589,
+      "duration": 2.589,
+      "text": "identified"
+    },
+    {
+      "index": 762,
+      "start": 2427.599,
+      "end": 2431.589,
+      "duration": 3.99,
+      "text": "since it's a separate pattern non"
+    },
+    {
+      "index": 763,
+      "start": 2431.599,
+      "end": 2433.829,
+      "duration": 2.23,
+      "text": "overlapping not it's only a sample"
+    },
+    {
+      "index": 764,
+      "start": 2433.839,
+      "end": 2436.349,
+      "duration": 2.51,
+      "text": "sequence"
+    },
+    {
+      "index": 765,
+      "start": 2436.359,
+      "end": 2445.95,
+      "duration": 9.591,
+      "text": "anything and then one"
+    },
+    {
+      "index": 766,
+      "start": 2448.47,
+      "end": 2448.48,
+      "duration": 0.01,
+      "text": "01 the type of input output we want we"
+    },
+    {
+      "index": 767,
+      "start": 2448.48,
+      "end": 2450.03,
+      "duration": 1.55,
+      "text": "have two variations in the problem I"
+    },
+    {
+      "index": 768,
+      "start": 2450.04,
+      "end": 2452.39,
+      "duration": 2.35,
+      "text": "have made one is that a more machine not"
+    },
+    {
+      "index": 769,
+      "start": 2452.4,
+      "end": 2453.63,
+      "duration": 1.23,
+      "text": "a mill machine that means the output"
+    },
+    {
+      "index": 770,
+      "start": 2453.64,
+      "end": 2455.309,
+      "duration": 1.669,
+      "text": "will be decided in the state and not as"
+    },
+    {
+      "index": 771,
+      "start": 2455.319,
+      "end": 2458.15,
+      "duration": 2.831,
+      "text": "a in the along the arrows"
+    },
+    {
+      "index": 772,
+      "start": 2458.16,
+      "end": 2459.91,
+      "duration": 1.75,
+      "text": "the second thing is there will always be"
+    },
+    {
+      "index": 773,
+      "start": 2459.92,
+      "end": 2462.27,
+      "duration": 2.35,
+      "text": "reset after the pattern is detected and"
+    },
+    {
+      "index": 774,
+      "start": 2462.28,
+      "end": 2465.55,
+      "duration": 3.27,
+      "text": "then start all over again you have to"
+    },
+    {
+      "index": 775,
+      "start": 2465.56,
+      "end": 2467.349,
+      "duration": 1.789,
+      "text": "quickly draw the St graph and rest of"
+    },
+    {
+      "index": 776,
+      "start": 2467.359,
+      "end": 2468.589,
+      "duration": 1.23,
+      "text": "things you'll do it"
+    },
+    {
+      "index": 777,
+      "start": 2468.599,
+      "end": 2470.67,
+      "duration": 2.071,
+      "text": "yourself as"
+    },
+    {
+      "index": 778,
+      "start": 2470.68,
+      "end": 2479.39,
+      "duration": 8.71,
+      "text": "homework complete this also is also"
+    },
+    {
+      "index": 779,
+      "start": 2482.109,
+      "end": 2482.119,
+      "duration": 0.01,
+      "text": "homework so let's start with s z the"
+    },
+    {
+      "index": 780,
+      "start": 2482.119,
+      "end": 2492.63,
+      "duration": 10.511,
+      "text": "reset state"
+    },
+    {
+      "index": 781,
+      "start": 2496.23,
+      "end": 2496.24,
+      "duration": 0.01,
+      "text": "zero now I don't have to draw Arrow this"
+    },
+    {
+      "index": 782,
+      "start": 2496.24,
+      "end": 2498.43,
+      "duration": 2.19,
+      "text": "this I have to draw the output within"
+    },
+    {
+      "index": 783,
+      "start": 2498.44,
+      "end": 2501.109,
+      "duration": 2.669,
+      "text": "this state so"
+    },
+    {
+      "index": 784,
+      "start": 2501.119,
+      "end": 2505.829,
+      "duration": 4.71,
+      "text": "usually you put s0 with"
+    },
+    {
+      "index": 785,
+      "start": 2505.839,
+      "end": 2508.19,
+      "duration": 2.351,
+      "text": "the that means in this s0 state the"
+    },
+    {
+      "index": 786,
+      "start": 2508.2,
+      "end": 2510.43,
+      "duration": 2.23,
+      "text": "output is zero that's what it means"
+    },
+    {
+      "index": 787,
+      "start": 2510.44,
+      "end": 2512.47,
+      "duration": 2.03,
+      "text": "along the arrow we draw the inputs we"
+    },
+    {
+      "index": 788,
+      "start": 2512.48,
+      "end": 2514.589,
+      "duration": 2.109,
+      "text": "Mark the input inside the state you mark"
+    },
+    {
+      "index": 789,
+      "start": 2514.599,
+      "end": 2517.39,
+      "duration": 2.791,
+      "text": "the output"
+    },
+    {
+      "index": 790,
+      "start": 2517.4,
+      "end": 2520.67,
+      "duration": 3.27,
+      "text": "so when go"
+    },
+    {
+      "index": 791,
+      "start": 2532.19,
+      "end": 2532.2,
+      "duration": 0.01,
+      "text": "remember"
+    },
+    {
+      "index": 792,
+      "start": 2532.2,
+      "end": 2535.63,
+      "duration": 3.43,
+      "text": "one"
+    },
+    {
+      "index": 793,
+      "start": 2538.829,
+      "end": 2538.839,
+      "duration": 0.01,
+      "text": "S2 one state"
+    },
+    {
+      "index": 794,
+      "start": 2538.839,
+      "end": 2542.19,
+      "duration": 3.351,
+      "text": "remembers now here it can be zero or a"
+    },
+    {
+      "index": 795,
+      "start": 2542.2,
+      "end": 2548.589,
+      "duration": 6.389,
+      "text": "one which is a zero"
+    },
+    {
+      "index": 796,
+      "start": 2550.63,
+      "end": 2550.64,
+      "duration": 0.01,
+      "text": "will continue to be in this"
+    },
+    {
+      "index": 797,
+      "start": 2550.64,
+      "end": 2552.549,
+      "duration": 1.909,
+      "text": "state"
+    },
+    {
+      "index": 798,
+      "start": 2552.559,
+      "end": 2554.67,
+      "duration": 2.111,
+      "text": "correct as long as any number of zeros"
+    },
+    {
+      "index": 799,
+      "start": 2554.68,
+      "end": 2556.03,
+      "duration": 1.35,
+      "text": "is there we are"
+    },
+    {
+      "index": 800,
+      "start": 2556.04,
+      "end": 2558.95,
+      "duration": 2.91,
+      "text": "S1 assuming the letter one is the only"
+    },
+    {
+      "index": 801,
+      "start": 2558.96,
+      "end": 2561.829,
+      "duration": 2.869,
+      "text": "zero letter Z is only"
+    },
+    {
+      "index": 802,
+      "start": 2561.839,
+      "end": 2569.79,
+      "duration": 7.951,
+      "text": "zero then so one it will go to"
+    },
+    {
+      "index": 803,
+      "start": 2581.03,
+      "end": 2581.04,
+      "duration": 0.01,
+      "text": "0 one"
+    },
+    {
+      "index": 804,
+      "start": 2581.04,
+      "end": 2585.91,
+      "duration": 4.87,
+      "text": "state in S2 if one"
+    },
+    {
+      "index": 805,
+      "start": 2585.92,
+      "end": 2589.349,
+      "duration": 3.429,
+      "text": "occurs continue to be here so zero"
+    },
+    {
+      "index": 806,
+      "start": 2589.359,
+      "end": 2592.95,
+      "duration": 3.591,
+      "text": "occurs it will be one zero which is"
+    },
+    {
+      "index": 807,
+      "start": 2592.96,
+      "end": 2608.95,
+      "duration": 15.99,
+      "text": "again new"
+    },
+    {
+      "index": 808,
+      "start": 2613.47,
+      "end": 2613.48,
+      "duration": 0.01,
+      "text": "then you are in S3 output is 01 uh it is"
+    },
+    {
+      "index": 809,
+      "start": 2613.48,
+      "end": 2616.99,
+      "duration": 3.51,
+      "text": "01 for 0o occurs pattern is complete do"
+    },
+    {
+      "index": 810,
+      "start": 2617.0,
+      "end": 2619.069,
+      "duration": 2.069,
+      "text": "you have a question there"
+    },
+    {
+      "index": 811,
+      "start": 2619.079,
+      "end": 2621.91,
+      "duration": 2.831,
+      "text": "yes which which"
+    },
+    {
+      "index": 812,
+      "start": 2621.92,
+      "end": 2629.03,
+      "duration": 7.11,
+      "text": "zero S2 to"
+    },
+    {
+      "index": 813,
+      "start": 2634.589,
+      "end": 2634.599,
+      "duration": 0.01,
+      "text": "0 1 Z it will be 1 0 why 0 1 0 S"
+    },
+    {
+      "index": 814,
+      "start": 2634.599,
+      "end": 2639.39,
+      "duration": 4.791,
+      "text": "1 S2 proceeds to proceed to to go you"
+    },
+    {
+      "index": 815,
+      "start": 2639.4,
+      "end": 2640.67,
+      "duration": 1.27,
+      "text": "get"
+    },
+    {
+      "index": 816,
+      "start": 2640.68,
+      "end": 2646.43,
+      "duration": 5.75,
+      "text": "1 yeah but can even 1 proed 0 1 0 where"
+    },
+    {
+      "index": 817,
+      "start": 2646.44,
+      "end": 2648.03,
+      "duration": 1.59,
+      "text": "we have one already here"
+    },
+    {
+      "index": 818,
+      "start": 2648.04,
+      "end": 2651.19,
+      "duration": 3.15,
+      "text": "one here there's a"
+    },
+    {
+      "index": 819,
+      "start": 2651.2,
+      "end": 2654.069,
+      "duration": 2.869,
+      "text": "one since already is a one here we are"
+    },
+    {
+      "index": 820,
+      "start": 2654.079,
+      "end": 2656.63,
+      "duration": 2.551,
+      "text": "here only if it's a one has a c if a"
+    },
+    {
+      "index": 821,
+      "start": 2656.64,
+      "end": 2658.71,
+      "duration": 2.07,
+      "text": "first zero it would have been here"
+    },
+    {
+      "index": 822,
+      "start": 2658.72,
+      "end": 2662.309,
+      "duration": 3.589,
+      "text": "no well you mean this could be a new"
+    },
+    {
+      "index": 823,
+      "start": 2662.319,
+      "end": 2665.51,
+      "duration": 3.191,
+      "text": "start this could be a old"
+    },
+    {
+      "index": 824,
+      "start": 2665.52,
+      "end": 2668.87,
+      "duration": 3.35,
+      "text": "one1 or starting of a new pattern here"
+    },
+    {
+      "index": 825,
+      "start": 2668.88,
+      "end": 2670.63,
+      "duration": 1.75,
+      "text": "it can either go here or here you are"
+    },
+    {
+      "index": 826,
+      "start": 2670.64,
+      "end": 2673.63,
+      "duration": 2.99,
+      "text": "saying"
+    },
+    {
+      "index": 827,
+      "start": 2676.47,
+      "end": 2676.48,
+      "duration": 0.01,
+      "text": "uh I think we we we we'll do this stick"
+    },
+    {
+      "index": 828,
+      "start": 2676.48,
+      "end": 2677.87,
+      "duration": 1.39,
+      "text": "to this because we'll have two patterns"
+    },
+    {
+      "index": 829,
+      "start": 2677.88,
+      "end": 2680.99,
+      "duration": 3.11,
+      "text": "to detect first we'll consider that a"
+    },
+    {
+      "index": 830,
+      "start": 2681.0,
+      "end": 2683.95,
+      "duration": 2.95,
+      "text": "little later on separately I think it"
+    },
+    {
+      "index": 831,
+      "start": 2683.96,
+      "end": 2688.23,
+      "duration": 4.27,
+      "text": "will not um from"
+    },
+    {
+      "index": 832,
+      "start": 2688.24,
+      "end": 2690.87,
+      "duration": 2.63,
+      "text": "here a zero"
+    },
+    {
+      "index": 833,
+      "start": 2690.88,
+      "end": 2692.99,
+      "duration": 2.11,
+      "text": "occurs I would rather like to use it as"
+    },
+    {
+      "index": 834,
+      "start": 2693.0,
+      "end": 2694.91,
+      "duration": 1.91,
+      "text": "a pattern one"
+    },
+    {
+      "index": 835,
+      "start": 2694.92,
+      "end": 2697.71,
+      "duration": 2.79,
+      "text": "0 uh if it is not going to"
+    },
+    {
+      "index": 836,
+      "start": 2697.72,
+      "end": 2699.39,
+      "duration": 1.67,
+      "text": "result in a pattern then you are losing"
+    },
+    {
+      "index": 837,
+      "start": 2699.4,
+      "end": 2706.51,
+      "duration": 7.11,
+      "text": "that extra zero that's what you saying"
+    },
+    {
+      "index": 838,
+      "start": 2709.309,
+      "end": 2709.319,
+      "duration": 0.01,
+      "text": "yes that we are going to do anyway"
+    },
+    {
+      "index": 839,
+      "start": 2709.319,
+      "end": 2712.829,
+      "duration": 3.51,
+      "text": "now yeah S4 to S3 we are going to do it"
+    },
+    {
+      "index": 840,
+      "start": 2712.839,
+      "end": 2716.99,
+      "duration": 4.151,
+      "text": "now let us complete this now in S3 with"
+    },
+    {
+      "index": 841,
+      "start": 2717.0,
+      "end": 2720.63,
+      "duration": 3.63,
+      "text": "the zero occurs what will happen 0 1 0"
+    },
+    {
+      "index": 842,
+      "start": 2720.64,
+      "end": 2722.47,
+      "duration": 1.83,
+      "text": "completed"
+    },
+    {
+      "index": 843,
+      "start": 2722.48,
+      "end": 2730.829,
+      "duration": 8.349,
+      "text": "correct it will go to"
+    },
+    {
+      "index": 844,
+      "start": 2738.91,
+      "end": 2738.92,
+      "duration": 0.01,
+      "text": "because"
+    },
+    {
+      "index": 845,
+      "start": 2738.92,
+      "end": 2741.99,
+      "duration": 3.07,
+      "text": "S5 one because output has to be one"
+    },
+    {
+      "index": 846,
+      "start": 2742.0,
+      "end": 2744.309,
+      "duration": 2.309,
+      "text": "here a new state in which output has be"
+    },
+    {
+      "index": 847,
+      "start": 2744.319,
+      "end": 2745.79,
+      "duration": 1.471,
+      "text": "one I cannot go to one of the states is"
+    },
+    {
+      "index": 848,
+      "start": 2745.8,
+      "end": 2746.99,
+      "duration": 1.19,
+      "text": "already there because all those states"
+    },
+    {
+      "index": 849,
+      "start": 2747.0,
+      "end": 2753.63,
+      "duration": 6.63,
+      "text": "are only zeros so this is a"
+    },
+    {
+      "index": 850,
+      "start": 2762.109,
+      "end": 2762.119,
+      "duration": 0.01,
+      "text": "0 1"
+    },
+    {
+      "index": 851,
+      "start": 2762.119,
+      "end": 2766.549,
+      "duration": 4.43,
+      "text": "0 so one occurring"
+    },
+    {
+      "index": 852,
+      "start": 2769.95,
+      "end": 2769.96,
+      "duration": 0.01,
+      "text": "here this is a 01"
+    },
+    {
+      "index": 853,
+      "start": 2769.96,
+      "end": 2775.589,
+      "duration": 5.629,
+      "text": "State this is no meaning this has to go"
+    },
+    {
+      "index": 854,
+      "start": 2779.23,
+      "end": 2779.24,
+      "duration": 0.01,
+      "text": "here oneing oh"
+    },
+    {
+      "index": 855,
+      "start": 2779.24,
+      "end": 2783.23,
+      "duration": 3.99,
+      "text": "oh oneing here will go"
+    },
+    {
+      "index": 856,
+      "start": 2783.24,
+      "end": 2787.67,
+      "duration": 4.43,
+      "text": "here let us look at S4 now"
+    },
+    {
+      "index": 857,
+      "start": 2787.68,
+      "end": 2790.51,
+      "duration": 2.83,
+      "text": "in S4 Z occurs it will go to S1 now"
+    },
+    {
+      "index": 858,
+      "start": 2790.52,
+      "end": 2791.95,
+      "duration": 1.43,
+      "text": "because it's a"
+    },
+    {
+      "index": 859,
+      "start": 2791.96,
+      "end": 2796.349,
+      "duration": 4.389,
+      "text": "0 1 0 0 this 0 1 0 oh if a zero occurs"
+    },
+    {
+      "index": 860,
+      "start": 2796.359,
+      "end": 2797.99,
+      "duration": 1.631,
+      "text": "it will go"
+    },
+    {
+      "index": 861,
+      "start": 2798.0,
+      "end": 2800.87,
+      "duration": 2.87,
+      "text": "to a"
+    },
+    {
+      "index": 862,
+      "start": 2800.88,
+      "end": 2809.95,
+      "duration": 9.07,
+      "text": "six"
+    },
+    {
+      "index": 863,
+      "start": 2827.15,
+      "end": 2827.16,
+      "duration": 0.01,
+      "text": "is three this one 1 one 1 would be 01"
+    },
+    {
+      "index": 864,
+      "start": 2827.16,
+      "end": 2830.39,
+      "duration": 3.23,
+      "text": "okay so that is what that zero you are"
+    },
+    {
+      "index": 865,
+      "start": 2830.4,
+      "end": 2831.87,
+      "duration": 1.47,
+      "text": "worried about that has been now taken"
+    },
+    {
+      "index": 866,
+      "start": 2831.88,
+      "end": 2833.19,
+      "duration": 1.31,
+      "text": "care of this zero would not have been"
+    },
+    {
+      "index": 867,
+      "start": 2833.2,
+      "end": 2835.349,
+      "duration": 2.149,
+      "text": "last now you don't have to return it"
+    },
+    {
+      "index": 868,
+      "start": 2835.359,
+      "end": 2837.91,
+      "duration": 2.551,
+      "text": "there because you anyway go to the"
+    },
+    {
+      "index": 869,
+      "start": 2837.92,
+      "end": 2841.75,
+      "duration": 3.83,
+      "text": "S3 so this is a zero now S3 this is when"
+    },
+    {
+      "index": 870,
+      "start": 2841.76,
+      "end": 2843.349,
+      "duration": 1.589,
+      "text": "so"
+    },
+    {
+      "index": 871,
+      "start": 2843.359,
+      "end": 2847.589,
+      "duration": 4.23,
+      "text": "one so consider both arrows here"
+    },
+    {
+      "index": 872,
+      "start": 2847.599,
+      "end": 2851.27,
+      "duration": 3.671,
+      "text": "now this is what S6 is one 0"
+    },
+    {
+      "index": 873,
+      "start": 2851.28,
+      "end": 2854.069,
+      "duration": 2.789,
+      "text": "0 S6 is one0"
+    },
+    {
+      "index": 874,
+      "start": 2854.079,
+      "end": 2859.069,
+      "duration": 4.99,
+      "text": "0 now in S6 if a zero"
+    },
+    {
+      "index": 875,
+      "start": 2859.079,
+      "end": 2864.51,
+      "duration": 5.431,
+      "text": "occurs it will be the start of a uh"
+    },
+    {
+      "index": 876,
+      "start": 2864.52,
+      "end": 2866.63,
+      "duration": 2.11,
+      "text": "there no use because 1 0 0 0 has no"
+    },
+    {
+      "index": 877,
+      "start": 2866.64,
+      "end": 2869.23,
+      "duration": 2.59,
+      "text": "meaning except the last zero if on the"
+    },
+    {
+      "index": 878,
+      "start": 2869.24,
+      "end": 2872.47,
+      "duration": 3.23,
+      "text": "other hand if S6 one occurs the pattern"
+    },
+    {
+      "index": 879,
+      "start": 2872.48,
+      "end": 2874.91,
+      "duration": 2.43,
+      "text": "will be completed output will be one so"
+    },
+    {
+      "index": 880,
+      "start": 2874.92,
+      "end": 2879.67,
+      "duration": 4.75,
+      "text": "if S6 one occurs we'll go to"
+    },
+    {
+      "index": 881,
+      "start": 2879.68,
+      "end": 2882.15,
+      "duration": 2.47,
+      "text": "S5 make an output of one since there"
+    },
+    {
+      "index": 882,
+      "start": 2882.16,
+      "end": 2884.03,
+      "duration": 1.87,
+      "text": "already an out state with an output of"
+    },
+    {
+      "index": 883,
+      "start": 2884.04,
+      "end": 2886.39,
+      "duration": 2.35,
+      "text": "one we'll put this output here that"
+    },
+    {
+      "index": 884,
+      "start": 2886.4,
+      "end": 2890.67,
+      "duration": 4.27,
+      "text": "means S5 is a state where we'll have"
+    },
+    {
+      "index": 885,
+      "start": 2890.68,
+      "end": 2893.109,
+      "duration": 2.429,
+      "text": "output 0 1"
+    },
+    {
+      "index": 886,
+      "start": 2893.119,
+      "end": 2897.51,
+      "duration": 4.391,
+      "text": "0 I mean remember 0 1 0 as well as 1 0 0"
+    },
+    {
+      "index": 887,
+      "start": 2897.52,
+      "end": 2900.87,
+      "duration": 3.35,
+      "text": "1 with both with an output of"
+    },
+    {
+      "index": 888,
+      "start": 2900.88,
+      "end": 2903.19,
+      "duration": 2.31,
+      "text": "one if on the other hand as I said if"
+    },
+    {
+      "index": 889,
+      "start": 2903.2,
+      "end": 2905.95,
+      "duration": 2.75,
+      "text": "zero occurs this zero has no meaning it"
+    },
+    {
+      "index": 890,
+      "start": 2905.96,
+      "end": 2907.589,
+      "duration": 1.629,
+      "text": "could be only"
+    },
+    {
+      "index": 891,
+      "start": 2907.599,
+      "end": 2909.15,
+      "duration": 1.551,
+      "text": "It could only be a start of a new"
+    },
+    {
+      "index": 892,
+      "start": 2909.16,
+      "end": 2910.63,
+      "duration": 1.47,
+      "text": "sequence after"
+    },
+    {
+      "index": 893,
+      "start": 2910.64,
+      "end": 2913.91,
+      "duration": 3.27,
+      "text": "resetting a new sequence 01 0 and that"
+    },
+    {
+      "index": 894,
+      "start": 2913.92,
+      "end": 2915.95,
+      "duration": 2.03,
+      "text": "is where S1 comes into picture because S"
+    },
+    {
+      "index": 895,
+      "start": 2915.96,
+      "end": 2920.349,
+      "duration": 4.389,
+      "text": "one remembers a zero so if zero"
+    },
+    {
+      "index": 896,
+      "start": 2934.23,
+      "end": 2934.24,
+      "duration": 0.01,
+      "text": "here S5 is a state where an output is"
+    },
+    {
+      "index": 897,
+      "start": 2934.24,
+      "end": 2936.109,
+      "duration": 1.869,
+      "text": "one that means we have completed a"
+    },
+    {
+      "index": 898,
+      "start": 2936.119,
+      "end": 2939.71,
+      "duration": 3.591,
+      "text": "sequence either 0 1 0 or 1 0 0 1 whether"
+    },
+    {
+      "index": 899,
+      "start": 2939.72,
+      "end": 2942.95,
+      "duration": 3.23,
+      "text": "a z or one occurs it should only be a"
+    },
+    {
+      "index": 900,
+      "start": 2942.96,
+      "end": 2945.47,
+      "duration": 2.51,
+      "text": "start of a new sequence if a 0 occurs it"
+    },
+    {
+      "index": 901,
+      "start": 2945.48,
+      "end": 2948.15,
+      "duration": 2.67,
+      "text": "will it will go to this S1 because that"
+    },
+    {
+      "index": 902,
+      "start": 2948.16,
+      "end": 2949.63,
+      "duration": 1.47,
+      "text": "is the start of a new sequence with a"
+    },
+    {
+      "index": 903,
+      "start": 2949.64,
+      "end": 2953.549,
+      "duration": 3.909,
+      "text": "zero for 0 one0 and if one occurs it"
+    },
+    {
+      "index": 904,
+      "start": 2953.559,
+      "end": 2956.03,
+      "duration": 2.471,
+      "text": "will go to go to S2 because that is the"
+    },
+    {
+      "index": 905,
+      "start": 2956.04,
+      "end": 2965.71,
+      "duration": 9.67,
+      "text": "starting point of a new sequence 1 0 0"
+    },
+    {
+      "index": 906,
+      "start": 2969.03,
+      "end": 2969.04,
+      "duration": 0.01,
+      "text": "1 so one will take it to this new State"
+    },
+    {
+      "index": 907,
+      "start": 2969.04,
+      "end": 2971.95,
+      "duration": 2.91,
+      "text": "uh S2 state which starts a new pattern"
+    },
+    {
+      "index": 908,
+      "start": 2971.96,
+      "end": 2976.309,
+      "duration": 4.349,
+      "text": "with the one start for 1 0 01 zero"
+    },
+    {
+      "index": 909,
+      "start": 2976.319,
+      "end": 2979.19,
+      "duration": 2.871,
+      "text": "occurs it takes you to takes us to State"
+    },
+    {
+      "index": 910,
+      "start": 2979.2,
+      "end": 2986.069,
+      "duration": 6.869,
+      "text": "S1 you start of a new sequence 0 1 0"
+    },
+    {
+      "index": 911,
+      "start": 2989.91,
+      "end": 2989.92,
+      "duration": 0.01,
+      "text": "here now the diagram is completed it's"
+    },
+    {
+      "index": 912,
+      "start": 2989.92,
+      "end": 2994.71,
+      "duration": 4.79,
+      "text": "uh six stes plus one seven State totally"
+    },
+    {
+      "index": 913,
+      "start": 2994.72,
+      "end": 2997.27,
+      "duration": 2.55,
+      "text": "again you use three flip flops you can"
+    },
+    {
+      "index": 914,
+      "start": 2997.28,
+      "end": 2999.95,
+      "duration": 2.67,
+      "text": "draw the state graph with the present"
+    },
+    {
+      "index": 915,
+      "start": 2999.96,
+      "end": 3001.95,
+      "duration": 1.99,
+      "text": "State values orbitally assigned as 0 0 0"
+    },
+    {
+      "index": 916,
+      "start": 3001.96,
+      "end": 3007.95,
+      "duration": 5.99,
+      "text": "0 0 1 0 1 0 0 1 1 1 0 0 1 0 1 1 1 0 and"
+    },
+    {
+      "index": 917,
+      "start": 3007.96,
+      "end": 3010.47,
+      "duration": 2.51,
+      "text": "then the input x isal z what is the next"
+    },
+    {
+      "index": 918,
+      "start": 3010.48,
+      "end": 3013.39,
+      "duration": 2.91,
+      "text": "state what is the output uh of course"
+    },
+    {
+      "index": 919,
+      "start": 3013.4,
+      "end": 3015.27,
+      "duration": 1.87,
+      "text": "output is depending on the state now so"
+    },
+    {
+      "index": 920,
+      "start": 3015.28,
+      "end": 3016.99,
+      "duration": 1.71,
+      "text": "the input X is equal Z what is the next"
+    },
+    {
+      "index": 921,
+      "start": 3017.0,
+      "end": 3018.789,
+      "duration": 1.789,
+      "text": "state input xal one what is the next"
+    },
+    {
+      "index": 922,
+      "start": 3018.799,
+      "end": 3020.95,
+      "duration": 2.151,
+      "text": "next state then for each of the present"
+    },
+    {
+      "index": 923,
+      "start": 3020.96,
+      "end": 3022.589,
+      "duration": 1.629,
+      "text": "State you the write the output that"
+    },
+    {
+      "index": 924,
+      "start": 3022.599,
+      "end": 3024.789,
+      "duration": 2.19,
+      "text": "become the state table and depending on"
+    },
+    {
+      "index": 925,
+      "start": 3024.799,
+      "end": 3026.069,
+      "duration": 1.27,
+      "text": "the type of flip-flop you can draw the"
+    },
+    {
+      "index": 926,
+      "start": 3026.079,
+      "end": 3028.75,
+      "duration": 2.671,
+      "text": "transition table and finish the hardware"
+    },
+    {
+      "index": 927,
+      "start": 3028.76,
+      "end": 3031.309,
+      "duration": 2.549,
+      "text": "so I leave the rest of the problem as an"
+    },
+    {
+      "index": 928,
+      "start": 3031.319,
+      "end": 3034.39,
+      "duration": 3.071,
+      "text": "exercise to you complete the draw the St"
+    },
+    {
+      "index": 929,
+      "start": 3034.4,
+      "end": 3038.27,
+      "duration": 3.87,
+      "text": "graph from here and using D flip flops"
+    },
+    {
+      "index": 930,
+      "start": 3038.28,
+      "end": 3041.27,
+      "duration": 2.99,
+      "text": "get the K maps for the nexted variables"
+    },
+    {
+      "index": 931,
+      "start": 3041.28,
+      "end": 3043.309,
+      "duration": 2.029,
+      "text": "as well as the output and then draw the"
+    },
+    {
+      "index": 932,
+      "start": 3043.319,
+      "end": 3045.63,
+      "duration": 2.311,
+      "text": "logic diagram of this with this we'll"
+    },
+    {
+      "index": 933,
+      "start": 3045.64,
+      "end": 3047.95,
+      "duration": 2.31,
+      "text": "complete the state graph drawing as a"
+    },
+    {
+      "index": 934,
+      "start": 3047.96,
+      "end": 3050.27,
+      "duration": 2.31,
+      "text": "exercise but of course we'll visit this"
+    },
+    {
+      "index": 935,
+      "start": 3050.28,
+      "end": 3052.589,
+      "duration": 2.309,
+      "text": "area again when you do the system design"
+    },
+    {
+      "index": 936,
+      "start": 3052.599,
+      "end": 3054.349,
+      "duration": 1.75,
+      "text": "naturally again St graph will become"
+    },
+    {
+      "index": 937,
+      "start": 3054.359,
+      "end": 3056.789,
+      "duration": 2.43,
+      "text": "part of the system design also if time"
+    },
+    {
+      "index": 938,
+      "start": 3056.799,
+      "end": 3058.71,
+      "duration": 1.911,
+      "text": "permits as I mentioned earlier we'll"
+    },
+    {
+      "index": 939,
+      "start": 3058.72,
+      "end": 3060.349,
+      "duration": 1.629,
+      "text": "talk about some simplification procedure"
+    },
+    {
+      "index": 940,
+      "start": 3060.359,
+      "end": 3062.829,
+      "duration": 2.47,
+      "text": "for reducing the number of states and"
+    },
+    {
+      "index": 941,
+      "start": 3062.839,
+      "end": 3066.47,
+      "duration": 3.631,
+      "text": "also for um hard Hardware efficient"
+    },
+    {
+      "index": 942,
+      "start": 3066.48,
+      "end": 3071.589,
+      "duration": 5.109,
+      "text": "assignments we'll continue with more uh"
+    },
+    {
+      "index": 943,
+      "start": 3071.599,
+      "end": 3073.91,
+      "duration": 2.311,
+      "text": "Concepts in system design from next"
+    },
+    {
+      "index": 944,
+      "start": 3073.92,
+      "end": 3076.05,
+      "duration": 2.13,
+      "text": "lecture"
+    },
+    {
+      "index": 945,
+      "start": 3076.06,
+      "end": 3146.75,
+      "duration": 70.69,
+      "text": "[Music]"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

@@ -1,0 +1,5835 @@
+{
+  "video": {
+    "id": "MiuMYEn3dpg",
+    "title": "Lecture 24 - DESIGN OF SYNCHRONOUS SEQUENTIAL CIRCUITS",
+    "url": "https://www.youtube.com/watch?v=MiuMYEn3dpg",
+    "channel": "nptelhrd",
+    "duration": 3236,
+    "language": "en"
+  },
+  "segment_count": 831,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.54,
+      "end": 0.55,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 1,
+      "start": 0.55,
+      "end": 0.98,
+      "duration": 0.43,
+      "text": "[Applause]"
+    },
+    {
+      "index": 2,
+      "start": 23.509,
+      "end": 23.519,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 3,
+      "start": 23.519,
+      "end": 26.71,
+      "duration": 3.191,
+      "text": "oh oh"
+    },
+    {
+      "index": 4,
+      "start": 26.72,
+      "end": 28.39,
+      "duration": 1.67,
+      "text": "sh"
+    },
+    {
+      "index": 5,
+      "start": 28.4,
+      "end": 30.749,
+      "duration": 2.349,
+      "text": "sh sh"
+    },
+    {
+      "index": 6,
+      "start": 30.759,
+      "end": 32.13,
+      "duration": 1.371,
+      "text": "me"
+    },
+    {
+      "index": 7,
+      "start": 32.14,
+      "end": 66.55,
+      "duration": 34.41,
+      "text": "[Music]"
+    },
+    {
+      "index": 8,
+      "start": 142.589,
+      "end": 142.599,
+      "duration": 0.01,
+      "text": "I introduced the concept of State"
+    },
+    {
+      "index": 9,
+      "start": 142.599,
+      "end": 144.99,
+      "duration": 2.391,
+      "text": "machine the last"
+    },
+    {
+      "index": 10,
+      "start": 145.0,
+      "end": 147.91,
+      "duration": 2.91,
+      "text": "lecture any digital system can be"
+    },
+    {
+      "index": 11,
+      "start": 147.92,
+      "end": 150.67,
+      "duration": 2.75,
+      "text": "modeled as a state machine"
+    },
+    {
+      "index": 12,
+      "start": 150.68,
+      "end": 154.79,
+      "duration": 4.11,
+      "text": "Because unless it is a pure combination"
+    },
+    {
+      "index": 13,
+      "start": 154.8,
+      "end": 158.19,
+      "duration": 3.39,
+      "text": "Logic the circuit the system resides in"
+    },
+    {
+      "index": 14,
+      "start": 158.2,
+      "end": 159.55,
+      "duration": 1.35,
+      "text": "several"
+    },
+    {
+      "index": 15,
+      "start": 159.56,
+      "end": 161.39,
+      "duration": 1.83,
+      "text": "States and"
+    },
+    {
+      "index": 16,
+      "start": 161.4,
+      "end": 164.47,
+      "duration": 3.07,
+      "text": "the behavior of the system is defined by"
+    },
+    {
+      "index": 17,
+      "start": 164.48,
+      "end": 168.27,
+      "duration": 3.79,
+      "text": "a state graph or a state"
+    },
+    {
+      "index": 18,
+      "start": 168.28,
+      "end": 171.83,
+      "duration": 3.55,
+      "text": "diagram which which gives all the"
+    },
+    {
+      "index": 19,
+      "start": 171.84,
+      "end": 174.11,
+      "duration": 2.27,
+      "text": "possible States in which the circuit can"
+    },
+    {
+      "index": 20,
+      "start": 174.12,
+      "end": 176.589,
+      "duration": 2.469,
+      "text": "reside and the conditions for transition"
+    },
+    {
+      "index": 21,
+      "start": 176.599,
+      "end": 178.39,
+      "duration": 1.791,
+      "text": "from one system to one state to another"
+    },
+    {
+      "index": 22,
+      "start": 178.4,
+      "end": 184.71,
+      "duration": 6.31,
+      "text": "state"
+    },
+    {
+      "index": 23,
+      "start": 187.47,
+      "end": 187.48,
+      "duration": 0.01,
+      "text": "and uh State machine need not be very"
+    },
+    {
+      "index": 24,
+      "start": 187.48,
+      "end": 189.91,
+      "duration": 2.43,
+      "text": "complex very simple counter a counter is"
+    },
+    {
+      "index": 25,
+      "start": 189.92,
+      "end": 191.509,
+      "duration": 1.589,
+      "text": "a state"
+    },
+    {
+      "index": 26,
+      "start": 191.519,
+      "end": 195.949,
+      "duration": 4.43,
+      "text": "machine so we want to really"
+    },
+    {
+      "index": 27,
+      "start": 195.959,
+      "end": 199.47,
+      "duration": 3.511,
+      "text": "know how to model the given problem as a"
+    },
+    {
+      "index": 28,
+      "start": 199.48,
+      "end": 203.11,
+      "duration": 3.63,
+      "text": "state machine then of course to see how"
+    },
+    {
+      "index": 29,
+      "start": 203.12,
+      "end": 205.55,
+      "duration": 2.43,
+      "text": "to implement it how to design it and"
+    },
+    {
+      "index": 30,
+      "start": 205.56,
+      "end": 206.869,
+      "duration": 1.309,
+      "text": "build"
+    },
+    {
+      "index": 31,
+      "start": 206.879,
+      "end": 209.39,
+      "duration": 2.511,
+      "text": "it so we'll see several examples as I"
+    },
+    {
+      "index": 32,
+      "start": 209.4,
+      "end": 211.589,
+      "duration": 2.189,
+      "text": "said"
+    },
+    {
+      "index": 33,
+      "start": 211.599,
+      "end": 215.149,
+      "duration": 3.55,
+      "text": "so in order to start our uh uh"
+    },
+    {
+      "index": 34,
+      "start": 215.159,
+      "end": 216.27,
+      "duration": 1.111,
+      "text": "discussion"
+    },
+    {
+      "index": 35,
+      "start": 216.28,
+      "end": 219.55,
+      "duration": 3.27,
+      "text": "we'll start with a familiar circuit"
+    },
+    {
+      "index": 36,
+      "start": 219.56,
+      "end": 222.149,
+      "duration": 2.589,
+      "text": "we'll start with the counter I"
+    },
+    {
+      "index": 37,
+      "start": 222.159,
+      "end": 225.19,
+      "duration": 3.031,
+      "text": "I'll we'll represent the counter as a"
+    },
+    {
+      "index": 38,
+      "start": 225.2,
+      "end": 227.429,
+      "duration": 2.229,
+      "text": "state machine so far we are not given"
+    },
+    {
+      "index": 39,
+      "start": 227.439,
+      "end": 230.71,
+      "duration": 3.271,
+      "text": "that type of um"
+    },
+    {
+      "index": 40,
+      "start": 230.72,
+      "end": 232.99,
+      "duration": 2.27,
+      "text": "interpretation to us a counter was a"
+    },
+    {
+      "index": 41,
+      "start": 233.0,
+      "end": 234.11,
+      "duration": 1.11,
+      "text": "series of flip"
+    },
+    {
+      "index": 42,
+      "start": 234.12,
+      "end": 236.35,
+      "duration": 2.23,
+      "text": "flops connected in certain particular"
+    },
+    {
+      "index": 43,
+      "start": 236.36,
+      "end": 237.99,
+      "duration": 1.63,
+      "text": "way so that it can count up or count"
+    },
+    {
+      "index": 44,
+      "start": 238.0,
+      "end": 240.55,
+      "duration": 2.55,
+      "text": "down or count from one one"
+    },
+    {
+      "index": 45,
+      "start": 240.56,
+      "end": 242.47,
+      "duration": 1.91,
+      "text": "particular count to another terminal"
+    },
+    {
+      "index": 46,
+      "start": 242.48,
+      "end": 245.11,
+      "duration": 2.63,
+      "text": "count and all that same thing can be now"
+    },
+    {
+      "index": 47,
+      "start": 245.12,
+      "end": 248.229,
+      "duration": 3.109,
+      "text": "gotten using a state Machine"
+    },
+    {
+      "index": 48,
+      "start": 248.239,
+      "end": 250.91,
+      "duration": 2.671,
+      "text": "model so I will call this a"
+    },
+    {
+      "index": 49,
+      "start": 250.92,
+      "end": 260.99,
+      "duration": 10.07,
+      "text": "counter counter"
+    },
+    {
+      "index": 50,
+      "start": 271.79,
+      "end": 271.8,
+      "duration": 0.01,
+      "text": "what I can do in this counter is to make"
+    },
+    {
+      "index": 51,
+      "start": 271.8,
+      "end": 273.83,
+      "duration": 2.03,
+      "text": "a change deviation from what we have"
+    },
+    {
+      "index": 52,
+      "start": 273.84,
+      "end": 277.23,
+      "duration": 3.39,
+      "text": "been seeing so"
+    },
+    {
+      "index": 53,
+      "start": 277.24,
+      "end": 280.11,
+      "duration": 2.87,
+      "text": "far I can have an arbitrary sequence of"
+    },
+    {
+      "index": 54,
+      "start": 280.12,
+      "end": 283.67,
+      "duration": 3.55,
+      "text": "count a counter normally you assume that"
+    },
+    {
+      "index": 55,
+      "start": 283.68,
+      "end": 287.79,
+      "duration": 4.11,
+      "text": "is count up or count down step wise up"
+    },
+    {
+      "index": 56,
+      "start": 287.8,
+      "end": 291.39,
+      "duration": 3.59,
+      "text": "counter you start with 0 1 2 3 4 5 Etc"
+    },
+    {
+      "index": 57,
+      "start": 291.4,
+      "end": 292.59,
+      "duration": 1.19,
+      "text": "and down coun you start with a"
+    },
+    {
+      "index": 58,
+      "start": 292.6,
+      "end": 294.469,
+      "duration": 1.869,
+      "text": "particular number go down for example"
+    },
+    {
+      "index": 59,
+      "start": 294.479,
+      "end": 299.43,
+      "duration": 4.951,
+      "text": "you can start with 7 6 5 4 3 2 1 0 back"
+    },
+    {
+      "index": 60,
+      "start": 299.44,
+      "end": 303.67,
+      "duration": 4.23,
+      "text": "to s what I mean by orbitary"
+    },
+    {
+      "index": 61,
+      "start": 303.68,
+      "end": 318.15,
+      "duration": 14.47,
+      "text": "counter an orbitary sequence"
+    },
+    {
+      "index": 62,
+      "start": 324.67,
+      "end": 324.68,
+      "duration": 0.01,
+      "text": "counter let us have states which are not"
+    },
+    {
+      "index": 63,
+      "start": 324.68,
+      "end": 327.39,
+      "duration": 2.71,
+      "text": "sequential in nature for example I can"
+    },
+    {
+      "index": 64,
+      "start": 327.4,
+      "end": 329.83,
+      "duration": 2.43,
+      "text": "have a count of"
+    },
+    {
+      "index": 65,
+      "start": 329.84,
+      "end": 334.43,
+      "duration": 4.59,
+      "text": "1 followed by 4 followed by 3 followed"
+    },
+    {
+      "index": 66,
+      "start": 334.44,
+      "end": 336.35,
+      "duration": 1.91,
+      "text": "by"
+    },
+    {
+      "index": 67,
+      "start": 336.36,
+      "end": 338.59,
+      "duration": 2.23,
+      "text": "5"
+    },
+    {
+      "index": 68,
+      "start": 338.6,
+      "end": 340.43,
+      "duration": 1.83,
+      "text": "2 and"
+    },
+    {
+      "index": 69,
+      "start": 340.44,
+      "end": 346.35,
+      "duration": 5.91,
+      "text": "six and back to"
+    },
+    {
+      "index": 70,
+      "start": 348.59,
+      "end": 348.6,
+      "duration": 0.01,
+      "text": "one this is an orbitary sequence this"
+    },
+    {
+      "index": 71,
+      "start": 348.6,
+      "end": 352.15,
+      "duration": 3.55,
+      "text": "what I mean by orbitary"
+    },
+    {
+      "index": 72,
+      "start": 355.11,
+      "end": 355.12,
+      "duration": 0.01,
+      "text": "sequence now that means if you"
+    },
+    {
+      "index": 73,
+      "start": 355.12,
+      "end": 356.59,
+      "duration": 1.47,
+      "text": "represented"
+    },
+    {
+      "index": 74,
+      "start": 356.6,
+      "end": 360.189,
+      "duration": 3.589,
+      "text": "binary it is going to be 0 01"
+    },
+    {
+      "index": 75,
+      "start": 360.199,
+      "end": 364.43,
+      "duration": 4.231,
+      "text": "then 1 0 0 then 0 1"
+    },
+    {
+      "index": 76,
+      "start": 364.44,
+      "end": 367.71,
+      "duration": 3.27,
+      "text": "1 1"
+    },
+    {
+      "index": 77,
+      "start": 367.72,
+      "end": 370.029,
+      "duration": 2.309,
+      "text": "1 0 1"
+    },
+    {
+      "index": 78,
+      "start": 370.039,
+      "end": 376.11,
+      "duration": 6.071,
+      "text": "0 1 1 0 and back to this so we are not"
+    },
+    {
+      "index": 79,
+      "start": 376.12,
+      "end": 377.87,
+      "duration": 1.75,
+      "text": "having"
+    },
+    {
+      "index": 80,
+      "start": 377.88,
+      "end": 385.15,
+      "duration": 7.27,
+      "text": "States 0 and"
+    },
+    {
+      "index": 81,
+      "start": 394.11,
+      "end": 394.12,
+      "duration": 0.01,
+      "text": "a state machine is so it doesn't have to"
+    },
+    {
+      "index": 82,
+      "start": 394.12,
+      "end": 396.07,
+      "duration": 1.95,
+      "text": "be sequential all we have to know is the"
+    },
+    {
+      "index": 83,
+      "start": 396.08,
+      "end": 397.87,
+      "duration": 1.79,
+      "text": "sequence in which the states have to"
+    },
+    {
+      "index": 84,
+      "start": 397.88,
+      "end": 400.39,
+      "duration": 2.51,
+      "text": "appear"
+    },
+    {
+      "index": 85,
+      "start": 400.4,
+      "end": 403.39,
+      "duration": 2.99,
+      "text": "each we saw in the last"
+    },
+    {
+      "index": 86,
+      "start": 403.4,
+      "end": 405.67,
+      "duration": 2.27,
+      "text": "lecture a"
+    },
+    {
+      "index": 87,
+      "start": 405.68,
+      "end": 408.51,
+      "duration": 2.83,
+      "text": "state is defined"
+    },
+    {
+      "index": 88,
+      "start": 408.52,
+      "end": 410.909,
+      "duration": 2.389,
+      "text": "as the condition of a circuit at a"
+    },
+    {
+      "index": 89,
+      "start": 410.919,
+      "end": 412.55,
+      "duration": 1.631,
+      "text": "particular clock"
+    },
+    {
+      "index": 90,
+      "start": 412.56,
+      "end": 414.83,
+      "duration": 2.27,
+      "text": "period during a particular clock period"
+    },
+    {
+      "index": 91,
+      "start": 414.84,
+      "end": 416.27,
+      "duration": 1.43,
+      "text": "the circuit remains in a particular"
+    },
+    {
+      "index": 92,
+      "start": 416.28,
+      "end": 418.15,
+      "duration": 1.87,
+      "text": "state with flip flops having different"
+    },
+    {
+      "index": 93,
+      "start": 418.16,
+      "end": 420.71,
+      "duration": 2.55,
+      "text": "values"
+    },
+    {
+      "index": 94,
+      "start": 420.72,
+      "end": 422.67,
+      "duration": 1.95,
+      "text": "and from there it goes to the next state"
+    },
+    {
+      "index": 95,
+      "start": 422.68,
+      "end": 425.629,
+      "duration": 2.949,
+      "text": "the next clock"
+    },
+    {
+      "index": 96,
+      "start": 428.51,
+      "end": 428.52,
+      "duration": 0.01,
+      "text": "period where it goes depends on the"
+    },
+    {
+      "index": 97,
+      "start": 428.52,
+      "end": 430.39,
+      "duration": 1.87,
+      "text": "present state of the flip flops as well"
+    },
+    {
+      "index": 98,
+      "start": 430.4,
+      "end": 431.749,
+      "duration": 1.349,
+      "text": "as the external"
+    },
+    {
+      "index": 99,
+      "start": 431.759,
+      "end": 434.71,
+      "duration": 2.951,
+      "text": "inputs is that what we said last"
+    },
+    {
+      "index": 100,
+      "start": 434.72,
+      "end": 438.83,
+      "duration": 4.11,
+      "text": "time so a circuit can remain in many"
+    },
+    {
+      "index": 101,
+      "start": 438.84,
+      "end": 441.029,
+      "duration": 2.189,
+      "text": "states which are nothing but conditions"
+    },
+    {
+      "index": 102,
+      "start": 441.039,
+      "end": 442.83,
+      "duration": 1.791,
+      "text": "of flip"
+    },
+    {
+      "index": 103,
+      "start": 442.84,
+      "end": 444.909,
+      "duration": 2.069,
+      "text": "flops because flip flops are the ones"
+    },
+    {
+      "index": 104,
+      "start": 444.919,
+      "end": 447.83,
+      "duration": 2.911,
+      "text": "who store the state information flip"
+    },
+    {
+      "index": 105,
+      "start": 447.84,
+      "end": 450.469,
+      "duration": 2.629,
+      "text": "flops are the the ones"
+    },
+    {
+      "index": 106,
+      "start": 450.479,
+      "end": 456.35,
+      "duration": 5.871,
+      "text": "which store the of the circuit so from a"
+    },
+    {
+      "index": 107,
+      "start": 456.36,
+      "end": 458.51,
+      "duration": 2.15,
+      "text": "given set of conditions of the flip flop"
+    },
+    {
+      "index": 108,
+      "start": 458.52,
+      "end": 460.07,
+      "duration": 1.55,
+      "text": "to another set of condition of flip flop"
+    },
+    {
+      "index": 109,
+      "start": 460.08,
+      "end": 461.11,
+      "duration": 1.03,
+      "text": "you have to"
+    },
+    {
+      "index": 110,
+      "start": 461.12,
+      "end": 463.55,
+      "duration": 2.43,
+      "text": "go the transition will depend on the"
+    },
+    {
+      "index": 111,
+      "start": 463.56,
+      "end": 464.95,
+      "duration": 1.39,
+      "text": "present"
+    },
+    {
+      "index": 112,
+      "start": 464.96,
+      "end": 469.589,
+      "duration": 4.629,
+      "text": "State and the input to the flip flops or"
+    },
+    {
+      "index": 113,
+      "start": 469.599,
+      "end": 470.869,
+      "duration": 1.27,
+      "text": "the external"
+    },
+    {
+      "index": 114,
+      "start": 470.879,
+      "end": 473.43,
+      "duration": 2.551,
+      "text": "inputs then it decides next"
+    },
+    {
+      "index": 115,
+      "start": 473.44,
+      "end": 476.629,
+      "duration": 3.189,
+      "text": "stat so if you think of that as"
+    },
+    {
+      "index": 116,
+      "start": 476.639,
+      "end": 479.55,
+      "duration": 2.911,
+      "text": "a state machine this also is a state"
+    },
+    {
+      "index": 117,
+      "start": 479.56,
+      "end": 481.99,
+      "duration": 2.43,
+      "text": "machine that means there are how many"
+    },
+    {
+      "index": 118,
+      "start": 482.0,
+      "end": 484.07,
+      "duration": 2.07,
+      "text": "flip flops the only binary written how"
+    },
+    {
+      "index": 119,
+      "start": 484.08,
+      "end": 485.909,
+      "duration": 1.829,
+      "text": "many flip flops are required for"
+    },
+    {
+      "index": 120,
+      "start": 485.919,
+      "end": 490.07,
+      "duration": 4.151,
+      "text": "this each state has three bits each"
+    },
+    {
+      "index": 121,
+      "start": 490.08,
+      "end": 491.35,
+      "duration": 1.27,
+      "text": "state has a three bits there are three"
+    },
+    {
+      "index": 122,
+      "start": 491.36,
+      "end": 494.51,
+      "duration": 3.15,
+      "text": "variables which change from0 to one all"
+    },
+    {
+      "index": 123,
+      "start": 494.52,
+      "end": 499.029,
+      "duration": 4.509,
+      "text": "the time so let me call this flipflops"
+    },
+    {
+      "index": 124,
+      "start": 499.039,
+      "end": 501.67,
+      "duration": 2.631,
+      "text": "ABC are"
+    },
+    {
+      "index": 125,
+      "start": 501.68,
+      "end": 503.909,
+      "duration": 2.229,
+      "text": "three these ABC are called the state"
+    },
+    {
+      "index": 126,
+      "start": 503.919,
+      "end": 505.99,
+      "duration": 2.071,
+      "text": "variables I"
+    },
+    {
+      "index": 127,
+      "start": 506.0,
+      "end": 508.589,
+      "duration": 2.589,
+      "text": "said I mentioned this yesterday in the"
+    },
+    {
+      "index": 128,
+      "start": 508.599,
+      "end": 515.87,
+      "duration": 7.271,
+      "text": "last lecture"
+    },
+    {
+      "index": 129,
+      "start": 519.949,
+      "end": 519.959,
+      "duration": 0.01,
+      "text": "I need and a is is output of a flip flop"
+    },
+    {
+      "index": 130,
+      "start": 519.959,
+      "end": 521.87,
+      "duration": 1.911,
+      "text": "B is the output of another flip flop C"
+    },
+    {
+      "index": 131,
+      "start": 521.88,
+      "end": 523.79,
+      "duration": 1.91,
+      "text": "is the output of a third flip"
+    },
+    {
+      "index": 132,
+      "start": 523.8,
+      "end": 526.35,
+      "duration": 2.55,
+      "text": "flop and these three flip flops are"
+    },
+    {
+      "index": 133,
+      "start": 526.36,
+      "end": 528.71,
+      "duration": 2.35,
+      "text": "remain in the state 0 0 1 and then it go"
+    },
+    {
+      "index": 134,
+      "start": 528.72,
+      "end": 531.31,
+      "duration": 2.59,
+      "text": "to Z State 1 0 0 then it goes to then"
+    },
+    {
+      "index": 135,
+      "start": 531.32,
+      "end": 534.67,
+      "duration": 3.35,
+      "text": "they go to state 1 01 1 Etc they go to"
+    },
+    {
+      "index": 136,
+      "start": 534.68,
+      "end": 537.269,
+      "duration": 2.589,
+      "text": "state 11 1 0 and finally back to"
+    },
+    {
+      "index": 137,
+      "start": 537.279,
+      "end": 541.31,
+      "duration": 4.031,
+      "text": "01 so I can represent the state graph"
+    },
+    {
+      "index": 138,
+      "start": 541.32,
+      "end": 543.829,
+      "duration": 2.509,
+      "text": "easily and it is a trivial case of no"
+    },
+    {
+      "index": 139,
+      "start": 543.839,
+      "end": 545.71,
+      "duration": 1.871,
+      "text": "external input only the clock steers"
+    },
+    {
+      "index": 140,
+      "start": 545.72,
+      "end": 548.069,
+      "duration": 2.349,
+      "text": "this every clock period we assuming the"
+    },
+    {
+      "index": 141,
+      "start": 548.079,
+      "end": 550.11,
+      "duration": 2.031,
+      "text": "flip-flops will go from one state to the"
+    },
+    {
+      "index": 142,
+      "start": 550.12,
+      "end": 552.43,
+      "duration": 2.31,
+      "text": "next state so I give you different"
+    },
+    {
+      "index": 143,
+      "start": 552.44,
+      "end": 553.63,
+      "duration": 1.19,
+      "text": "models of the"
+    },
+    {
+      "index": 144,
+      "start": 553.64,
+      "end": 556.87,
+      "duration": 3.23,
+      "text": "state"
+    },
+    {
+      "index": 145,
+      "start": 559.91,
+      "end": 559.92,
+      "duration": 0.01,
+      "text": "diagram system in which there can be"
+    },
+    {
+      "index": 146,
+      "start": 559.92,
+      "end": 561.87,
+      "duration": 1.95,
+      "text": "external inputs there need not be"
+    },
+    {
+      "index": 147,
+      "start": 561.88,
+      "end": 564.43,
+      "duration": 2.55,
+      "text": "external inputs in which only the clock"
+    },
+    {
+      "index": 148,
+      "start": 564.44,
+      "end": 566.829,
+      "duration": 2.389,
+      "text": "triggers the clock transition triggers"
+    },
+    {
+      "index": 149,
+      "start": 566.839,
+      "end": 568.03,
+      "duration": 1.191,
+      "text": "the state"
+    },
+    {
+      "index": 150,
+      "start": 568.04,
+      "end": 571.15,
+      "duration": 3.11,
+      "text": "transition the clock transition triggers"
+    },
+    {
+      "index": 151,
+      "start": 571.16,
+      "end": 572.35,
+      "duration": 1.19,
+      "text": "the state"
+    },
+    {
+      "index": 152,
+      "start": 572.36,
+      "end": 574.19,
+      "duration": 1.83,
+      "text": "transition"
+    },
+    {
+      "index": 153,
+      "start": 574.2,
+      "end": 576.59,
+      "duration": 2.39,
+      "text": "and the state transition will depend on"
+    },
+    {
+      "index": 154,
+      "start": 576.6,
+      "end": 577.91,
+      "duration": 1.31,
+      "text": "the present State and the external"
+    },
+    {
+      "index": 155,
+      "start": 577.92,
+      "end": 580.87,
+      "duration": 2.95,
+      "text": "inputs external inputs are not there the"
+    },
+    {
+      "index": 156,
+      "start": 580.88,
+      "end": 583.35,
+      "duration": 2.47,
+      "text": "state transtion will depend on the"
+    },
+    {
+      "index": 157,
+      "start": 583.36,
+      "end": 586.389,
+      "duration": 3.029,
+      "text": "previous States that's all nothing"
+    },
+    {
+      "index": 158,
+      "start": 586.399,
+      "end": 589.269,
+      "duration": 2.87,
+      "text": "else similarly we can have an output"
+    },
+    {
+      "index": 159,
+      "start": 589.279,
+      "end": 591.509,
+      "duration": 2.23,
+      "text": "which is different from the state in"
+    },
+    {
+      "index": 160,
+      "start": 591.519,
+      "end": 595.03,
+      "duration": 3.511,
+      "text": "which the circuit resides or the outputs"
+    },
+    {
+      "index": 161,
+      "start": 595.04,
+      "end": 596.79,
+      "duration": 1.75,
+      "text": "or the state information itself can be"
+    },
+    {
+      "index": 162,
+      "start": 596.8,
+      "end": 599.389,
+      "duration": 2.589,
+      "text": "used as a output as in the case of a"
+    },
+    {
+      "index": 163,
+      "start": 599.399,
+      "end": 601.389,
+      "duration": 1.99,
+      "text": "counter counter we know what count it is"
+    },
+    {
+      "index": 164,
+      "start": 601.399,
+      "end": 602.59,
+      "duration": 1.191,
+      "text": "that's all we want counter what is the"
+    },
+    {
+      "index": 165,
+      "start": 602.6,
+      "end": 605.389,
+      "duration": 2.789,
+      "text": "output of a counter what is the count"
+    },
+    {
+      "index": 166,
+      "start": 605.399,
+      "end": 606.79,
+      "duration": 1.391,
+      "text": "current particular count what is the"
+    },
+    {
+      "index": 167,
+      "start": 606.8,
+      "end": 609.31,
+      "duration": 2.51,
+      "text": "current count that is the output of a"
+    },
+    {
+      "index": 168,
+      "start": 609.32,
+      "end": 611.269,
+      "duration": 1.949,
+      "text": "counter so no external output the"
+    },
+    {
+      "index": 169,
+      "start": 611.279,
+      "end": 613.15,
+      "duration": 1.871,
+      "text": "counter is a case of a state machine in"
+    },
+    {
+      "index": 170,
+      "start": 613.16,
+      "end": 615.19,
+      "duration": 2.03,
+      "text": "which there are no external inputs no"
+    },
+    {
+      "index": 171,
+      "start": 615.2,
+      "end": 616.949,
+      "duration": 1.749,
+      "text": "exteral outputs on the other I can have"
+    },
+    {
+      "index": 172,
+      "start": 616.959,
+      "end": 619.59,
+      "duration": 2.631,
+      "text": "a count also with an exall input like up"
+    },
+    {
+      "index": 173,
+      "start": 619.6,
+      "end": 621.55,
+      "duration": 1.95,
+      "text": "or down suppose I want the count to go"
+    },
+    {
+      "index": 174,
+      "start": 621.56,
+      "end": 624.19,
+      "duration": 2.63,
+      "text": "up what should be what it should what"
+    },
+    {
+      "index": 175,
+      "start": 624.2,
+      "end": 629.75,
+      "duration": 5.55,
+      "text": "what should it be like and if you have a"
+    },
+    {
+      "index": 176,
+      "start": 629.76,
+      "end": 633.269,
+      "duration": 3.509,
+      "text": "if input is present it is up input is"
+    },
+    {
+      "index": 177,
+      "start": 633.279,
+      "end": 634.55,
+      "duration": 1.271,
+      "text": "absent"
+    },
+    {
+      "index": 178,
+      "start": 634.56,
+      "end": 638.269,
+      "duration": 3.709,
+      "text": "is um down this also can be used as an"
+    },
+    {
+      "index": 179,
+      "start": 638.279,
+      "end": 640.829,
+      "duration": 2.55,
+      "text": "extra input if you want to in this case"
+    },
+    {
+      "index": 180,
+      "start": 640.839,
+      "end": 642.47,
+      "duration": 1.631,
+      "text": "a simple counter in which no external"
+    },
+    {
+      "index": 181,
+      "start": 642.48,
+      "end": 643.87,
+      "duration": 1.39,
+      "text": "input so the clock is the triggering"
+    },
+    {
+      "index": 182,
+      "start": 643.88,
+      "end": 644.949,
+      "duration": 1.069,
+      "text": "mechanism the"
+    },
+    {
+      "index": 183,
+      "start": 644.959,
+      "end": 649.47,
+      "duration": 4.511,
+      "text": "states the counter"
+    },
+    {
+      "index": 184,
+      "start": 651.949,
+      "end": 651.959,
+      "duration": 0.01,
+      "text": "flip-flops change from state to state to"
+    },
+    {
+      "index": 185,
+      "start": 651.959,
+      "end": 654.949,
+      "duration": 2.99,
+      "text": "state based on the transition at the"
+    },
+    {
+      "index": 186,
+      "start": 654.959,
+      "end": 656.829,
+      "duration": 1.87,
+      "text": "time of the transition of the"
+    },
+    {
+      "index": 187,
+      "start": 656.839,
+      "end": 659.949,
+      "duration": 3.11,
+      "text": "clock so we have a state machine model"
+    },
+    {
+      "index": 188,
+      "start": 659.959,
+      "end": 671.79,
+      "duration": 11.831,
+      "text": "State graph in which there will be six"
+    },
+    {
+      "index": 189,
+      "start": 675.069,
+      "end": 675.079,
+      "duration": 0.01,
+      "text": "states so I will call this state 0"
+    },
+    {
+      "index": 190,
+      "start": 675.079,
+      "end": 682.67,
+      "duration": 7.591,
+      "text": "s0 S1 S2 S3 S4"
+    },
+    {
+      "index": 191,
+      "start": 682.68,
+      "end": 685.35,
+      "duration": 2.67,
+      "text": "S5 they keep changing without any"
+    },
+    {
+      "index": 192,
+      "start": 685.36,
+      "end": 686.75,
+      "duration": 1.39,
+      "text": "external input that means every clock"
+    },
+    {
+      "index": 193,
+      "start": 686.76,
+      "end": 689.629,
+      "duration": 2.869,
+      "text": "period or every clock"
+    },
+    {
+      "index": 194,
+      "start": 689.639,
+      "end": 692.069,
+      "duration": 2.43,
+      "text": "uh transition that is going be a Str"
+    },
+    {
+      "index": 195,
+      "start": 692.079,
+      "end": 695.03,
+      "duration": 2.951,
+      "text": "transition for the first clock"
+    },
+    {
+      "index": 196,
+      "start": 695.04,
+      "end": 698.23,
+      "duration": 3.19,
+      "text": "period it will be n zero Next loock"
+    },
+    {
+      "index": 197,
+      "start": 698.24,
+      "end": 700.23,
+      "duration": 1.99,
+      "text": "Period the circuit will be in S1 The"
+    },
+    {
+      "index": 198,
+      "start": 700.24,
+      "end": 702.069,
+      "duration": 1.829,
+      "text": "Next loock Period the circuit will be in"
+    },
+    {
+      "index": 199,
+      "start": 702.079,
+      "end": 704.59,
+      "duration": 2.511,
+      "text": "S2 and so forth and each of these SS are"
+    },
+    {
+      "index": 200,
+      "start": 704.6,
+      "end": 707.31,
+      "duration": 2.71,
+      "text": "represented by the state variables so"
+    },
+    {
+      "index": 201,
+      "start": 707.32,
+      "end": 729.829,
+      "duration": 22.509,
+      "text": "I'll put the state variables outside the"
+    },
+    {
+      "index": 202,
+      "start": 732.11,
+      "end": 732.12,
+      "duration": 0.01,
+      "text": "one1 and these are the values of the"
+    },
+    {
+      "index": 203,
+      "start": 732.12,
+      "end": 735.629,
+      "duration": 3.509,
+      "text": "variables a b and c State variables so"
+    },
+    {
+      "index": 204,
+      "start": 735.639,
+      "end": 736.91,
+      "duration": 1.271,
+      "text": "how is the circuit going to look like"
+    },
+    {
+      "index": 205,
+      "start": 736.92,
+      "end": 738.829,
+      "duration": 1.909,
+      "text": "the circuit is going to look like this"
+    },
+    {
+      "index": 206,
+      "start": 738.839,
+      "end": 740.23,
+      "duration": 1.391,
+      "text": "the model of the circuit is going to"
+    },
+    {
+      "index": 207,
+      "start": 740.24,
+      "end": 742.79,
+      "duration": 2.55,
+      "text": "look like this where have three flip"
+    },
+    {
+      "index": 208,
+      "start": 742.8,
+      "end": 770.949,
+      "duration": 28.149,
+      "text": "flops called a b and c"
+    },
+    {
+      "index": 209,
+      "start": 773.03,
+      "end": 773.04,
+      "duration": 0.01,
+      "text": "the current set of the F flops a B and C"
+    },
+    {
+      "index": 210,
+      "start": 773.04,
+      "end": 784.189,
+      "duration": 11.149,
+      "text": "are fed into the inputs of the circuit"
+    },
+    {
+      "index": 211,
+      "start": 786.949,
+      "end": 786.959,
+      "duration": 0.01,
+      "text": "and next St is defined for a given"
+    },
+    {
+      "index": 212,
+      "start": 786.959,
+      "end": 791.79,
+      "duration": 4.831,
+      "text": "State a c the next state is defined so"
+    },
+    {
+      "index": 213,
+      "start": 791.8,
+      "end": 794.069,
+      "duration": 2.269,
+      "text": "that will decide the present state will"
+    },
+    {
+      "index": 214,
+      "start": 794.079,
+      "end": 799.59,
+      "duration": 5.511,
+      "text": "decide what the next St should"
+    },
+    {
+      "index": 215,
+      "start": 803.189,
+      "end": 803.199,
+      "duration": 0.01,
+      "text": "be but in order to distinguish between"
+    },
+    {
+      "index": 216,
+      "start": 803.199,
+      "end": 805.75,
+      "duration": 2.551,
+      "text": "these two variables I'll just put a plus"
+    },
+    {
+      "index": 217,
+      "start": 805.76,
+      "end": 807.99,
+      "duration": 2.23,
+      "text": "sign does not mean anything the same"
+    },
+    {
+      "index": 218,
+      "start": 808.0,
+      "end": 811.47,
+      "duration": 3.47,
+      "text": "variable after the the present state of"
+    },
+    {
+      "index": 219,
+      "start": 811.48,
+      "end": 812.79,
+      "duration": 1.31,
+      "text": "these variables next state of these"
+    },
+    {
+      "index": 220,
+      "start": 812.8,
+      "end": 816.069,
+      "duration": 3.269,
+      "text": "variables next a plus b plus C plus"
+    },
+    {
+      "index": 221,
+      "start": 816.079,
+      "end": 819.189,
+      "duration": 3.11,
+      "text": "represent the next value of"
+    },
+    {
+      "index": 222,
+      "start": 819.199,
+      "end": 823.47,
+      "duration": 4.271,
+      "text": "ABC so plus is given as a sort of a"
+    },
+    {
+      "index": 223,
+      "start": 823.48,
+      "end": 825.47,
+      "duration": 1.99,
+      "text": "notation and that will be stored in the"
+    },
+    {
+      "index": 224,
+      "start": 825.48,
+      "end": 828.43,
+      "duration": 2.95,
+      "text": "flip flops let us use Simple D flip"
+    },
+    {
+      "index": 225,
+      "start": 828.44,
+      "end": 832.67,
+      "duration": 4.23,
+      "text": "flops and outputs"
+    },
+    {
+      "index": 226,
+      "start": 847.749,
+      "end": 847.759,
+      "duration": 0.01,
+      "text": "and there's no exteral inputs no"
+    },
+    {
+      "index": 227,
+      "start": 847.759,
+      "end": 850.43,
+      "duration": 2.671,
+      "text": "external output for"
+    },
+    {
+      "index": 228,
+      "start": 850.44,
+      "end": 853.269,
+      "duration": 2.829,
+      "text": "this"
+    },
+    {
+      "index": 229,
+      "start": 853.279,
+      "end": 856.35,
+      "duration": 3.071,
+      "text": "circuit and this flip flops take the"
+    },
+    {
+      "index": 230,
+      "start": 856.36,
+      "end": 858.069,
+      "duration": 1.709,
+      "text": "present State values are"
+    },
+    {
+      "index": 231,
+      "start": 858.079,
+      "end": 860.189,
+      "duration": 2.11,
+      "text": "presented once the"
+    },
+    {
+      "index": 232,
+      "start": 860.199,
+      "end": 863.15,
+      "duration": 2.951,
+      "text": "present present State values of the"
+    },
+    {
+      "index": 233,
+      "start": 863.16,
+      "end": 865.069,
+      "duration": 1.909,
+      "text": "present State variables are presented to"
+    },
+    {
+      "index": 234,
+      "start": 865.079,
+      "end": 867.11,
+      "duration": 2.031,
+      "text": "the Circuit it will come up with the"
+    },
+    {
+      "index": 235,
+      "start": 867.12,
+      "end": 870.269,
+      "duration": 3.149,
+      "text": "next St value"
+    },
+    {
+      "index": 236,
+      "start": 870.279,
+      "end": 871.87,
+      "duration": 1.591,
+      "text": "the next value will be available here"
+    },
+    {
+      "index": 237,
+      "start": 871.88,
+      "end": 873.47,
+      "duration": 1.59,
+      "text": "which will become the next St not"
+    },
+    {
+      "index": 238,
+      "start": 873.48,
+      "end": 875.11,
+      "duration": 1.63,
+      "text": "immediately but only after the next"
+    },
+    {
+      "index": 239,
+      "start": 875.12,
+      "end": 878.189,
+      "duration": 3.069,
+      "text": "clock transition at the next clock"
+    },
+    {
+      "index": 240,
+      "start": 878.199,
+      "end": 880.99,
+      "duration": 2.791,
+      "text": "transition these values become the the"
+    },
+    {
+      "index": 241,
+      "start": 881.0,
+      "end": 884.71,
+      "duration": 3.71,
+      "text": "present State now it is this logic"
+    },
+    {
+      "index": 242,
+      "start": 884.72,
+      "end": 886.99,
+      "duration": 2.27,
+      "text": "here these are the input values of the"
+    },
+    {
+      "index": 243,
+      "start": 887.0,
+      "end": 887.829,
+      "duration": 0.829,
+      "text": "present"
+    },
+    {
+      "index": 244,
+      "start": 887.839,
+      "end": 890.509,
+      "duration": 2.67,
+      "text": "States and the output values of the next"
+    },
+    {
+      "index": 245,
+      "start": 890.519,
+      "end": 895.31,
+      "duration": 4.791,
+      "text": "state values the next state values will"
+    },
+    {
+      "index": 246,
+      "start": 895.32,
+      "end": 898.67,
+      "duration": 3.35,
+      "text": "be taken in by these flip flops stored"
+    },
+    {
+      "index": 247,
+      "start": 898.68,
+      "end": 901.71,
+      "duration": 3.03,
+      "text": "in this flip flops and presented back to"
+    },
+    {
+      "index": 248,
+      "start": 901.72,
+      "end": 905.15,
+      "duration": 3.43,
+      "text": "this so that the states after that can"
+    },
+    {
+      "index": 249,
+      "start": 905.16,
+      "end": 909.189,
+      "duration": 4.029,
+      "text": "be decided so this is the flip flops"
+    },
+    {
+      "index": 250,
+      "start": 909.199,
+      "end": 923.189,
+      "duration": 13.99,
+      "text": "which have to be"
+    },
+    {
+      "index": 251,
+      "start": 925.91,
+      "end": 925.92,
+      "duration": 0.01,
+      "text": "clocked and this as I said is a pure"
+    },
+    {
+      "index": 252,
+      "start": 925.92,
+      "end": 934.309,
+      "duration": 8.389,
+      "text": "combination logic"
+    },
+    {
+      "index": 253,
+      "start": 939.99,
+      "end": 940.0,
+      "duration": 0.01,
+      "text": "has to be designed such that once"
+    },
+    {
+      "index": 254,
+      "start": 940.0,
+      "end": 944.389,
+      "duration": 4.389,
+      "text": "this input is given this becomes"
+    },
+    {
+      "index": 255,
+      "start": 944.399,
+      "end": 947.509,
+      "duration": 3.11,
+      "text": "output if this input is given this"
+    },
+    {
+      "index": 256,
+      "start": 947.519,
+      "end": 949.99,
+      "duration": 2.471,
+      "text": "should be the output if this input is"
+    },
+    {
+      "index": 257,
+      "start": 950.0,
+      "end": 952.949,
+      "duration": 2.949,
+      "text": "given this should be the output this"
+    },
+    {
+      "index": 258,
+      "start": 952.959,
+      "end": 955.629,
+      "duration": 2.67,
+      "text": "input is given this should the output"
+    },
+    {
+      "index": 259,
+      "start": 955.639,
+      "end": 957.35,
+      "duration": 1.711,
+      "text": "this input is given distribute the"
+    },
+    {
+      "index": 260,
+      "start": 957.36,
+      "end": 959.23,
+      "duration": 1.87,
+      "text": "output this input is given this should"
+    },
+    {
+      "index": 261,
+      "start": 959.24,
+      "end": 961.389,
+      "duration": 2.149,
+      "text": "be the output if you desire the"
+    },
+    {
+      "index": 262,
+      "start": 961.399,
+      "end": 963.43,
+      "duration": 2.031,
+      "text": "combination logic that way then the"
+    },
+    {
+      "index": 263,
+      "start": 963.44,
+      "end": 964.87,
+      "duration": 1.43,
+      "text": "present set values as soon as they"
+    },
+    {
+      "index": 264,
+      "start": 964.88,
+      "end": 966.87,
+      "duration": 1.99,
+      "text": "presented here the next set values will"
+    },
+    {
+      "index": 265,
+      "start": 966.88,
+      "end": 969.189,
+      "duration": 2.309,
+      "text": "appear the next St values will stay"
+    },
+    {
+      "index": 266,
+      "start": 969.199,
+      "end": 971.829,
+      "duration": 2.63,
+      "text": "there when the clock transition occurs"
+    },
+    {
+      "index": 267,
+      "start": 971.839,
+      "end": 974.71,
+      "duration": 2.871,
+      "text": "the next state values are stored in the"
+    },
+    {
+      "index": 268,
+      "start": 974.72,
+      "end": 977.47,
+      "duration": 2.75,
+      "text": "F flops and become the present State at"
+    },
+    {
+      "index": 269,
+      "start": 977.48,
+      "end": 979.309,
+      "duration": 1.829,
+      "text": "that time the next state becomes present"
+    },
+    {
+      "index": 270,
+      "start": 979.319,
+      "end": 981.67,
+      "duration": 2.351,
+      "text": "State at the end of the at the next"
+    },
+    {
+      "index": 271,
+      "start": 981.68,
+      "end": 983.949,
+      "duration": 2.269,
+      "text": "clock transition and that percentage"
+    },
+    {
+      "index": 272,
+      "start": 983.959,
+      "end": 986.43,
+      "duration": 2.471,
+      "text": "values will be represented here that"
+    },
+    {
+      "index": 273,
+      "start": 986.44,
+      "end": 988.069,
+      "duration": 1.629,
+      "text": "will be used by the combination logic to"
+    },
+    {
+      "index": 274,
+      "start": 988.079,
+      "end": 991.03,
+      "duration": 2.951,
+      "text": "decide the value for the state after"
+    },
+    {
+      "index": 275,
+      "start": 991.04,
+      "end": 993.47,
+      "duration": 2.43,
+      "text": "that that will become the next state for"
+    },
+    {
+      "index": 276,
+      "start": 993.48,
+      "end": 995.23,
+      "duration": 1.75,
+      "text": "that and so"
+    },
+    {
+      "index": 277,
+      "start": 995.24,
+      "end": 998.11,
+      "duration": 2.87,
+      "text": "forth so this a counter design is orbit"
+    },
+    {
+      "index": 278,
+      "start": 998.12,
+      "end": 999.949,
+      "duration": 1.829,
+      "text": "counter design is nothing but a simple"
+    },
+    {
+      "index": 279,
+      "start": 999.959,
+      "end": 1002.79,
+      "duration": 2.831,
+      "text": "combination logic design where if you"
+    },
+    {
+      "index": 280,
+      "start": 1002.8,
+      "end": 1004.509,
+      "duration": 1.709,
+      "text": "give this value this should be the"
+    },
+    {
+      "index": 281,
+      "start": 1004.519,
+      "end": 1006.189,
+      "duration": 1.67,
+      "text": "output if I give this value this should"
+    },
+    {
+      "index": 282,
+      "start": 1006.199,
+      "end": 1007.389,
+      "duration": 1.19,
+      "text": "be the output if they give this value"
+    },
+    {
+      "index": 283,
+      "start": 1007.399,
+      "end": 1008.829,
+      "duration": 1.43,
+      "text": "should be output if I give this value"
+    },
+    {
+      "index": 284,
+      "start": 1008.839,
+      "end": 1012.55,
+      "duration": 3.711,
+      "text": "output so forth so what is going to be"
+    },
+    {
+      "index": 285,
+      "start": 1012.56,
+      "end": 1014.43,
+      "duration": 1.87,
+      "text": "the comination logic is a logic in which"
+    },
+    {
+      "index": 286,
+      "start": 1014.44,
+      "end": 1016.189,
+      "duration": 1.749,
+      "text": "there's no flip-flops or anything as I"
+    },
+    {
+      "index": 287,
+      "start": 1016.199,
+      "end": 1019.55,
+      "duration": 3.351,
+      "text": "said the inputs decide the output"
+    },
+    {
+      "index": 288,
+      "start": 1019.56,
+      "end": 1021.55,
+      "duration": 1.99,
+      "text": "and the inputs are this a b c outputs"
+    },
+    {
+      "index": 289,
+      "start": 1021.56,
+      "end": 1023.269,
+      "duration": 1.709,
+      "text": "are a plus b plus C plus even though the"
+    },
+    {
+      "index": 290,
+      "start": 1023.279,
+      "end": 1025.429,
+      "duration": 2.15,
+      "text": "variable is called a I'll call them a"
+    },
+    {
+      "index": 291,
+      "start": 1025.439,
+      "end": 1026.909,
+      "duration": 1.47,
+      "text": "plus b plus C plus to distinguish"
+    },
+    {
+      "index": 292,
+      "start": 1026.919,
+      "end": 1028.15,
+      "duration": 1.231,
+      "text": "between these two sets of variables"
+    },
+    {
+      "index": 293,
+      "start": 1028.16,
+      "end": 1030.27,
+      "duration": 2.11,
+      "text": "otherwise you'll get confused"
+    },
+    {
+      "index": 294,
+      "start": 1030.28,
+      "end": 1033.23,
+      "duration": 2.95,
+      "text": "totally so this a plus b plus C plus"
+    },
+    {
+      "index": 295,
+      "start": 1033.24,
+      "end": 1034.429,
+      "duration": 1.189,
+      "text": "become a b"
+    },
+    {
+      "index": 296,
+      "start": 1034.439,
+      "end": 1038.829,
+      "duration": 4.39,
+      "text": "c at the next CL"
+    },
+    {
+      "index": 297,
+      "start": 1040.99,
+      "end": 1041.0,
+      "duration": 0.01,
+      "text": "transition so what is the description of"
+    },
+    {
+      "index": 298,
+      "start": 1041.0,
+      "end": 1043.35,
+      "duration": 2.35,
+      "text": "a combination Logic the combination"
+    },
+    {
+      "index": 299,
+      "start": 1043.36,
+      "end": 1059.27,
+      "duration": 15.91,
+      "text": "logic"
+    },
+    {
+      "index": 300,
+      "start": 1066.99,
+      "end": 1067.0,
+      "duration": 0.01,
+      "text": "c output a plus B+"
+    },
+    {
+      "index": 301,
+      "start": 1067.0,
+      "end": 1069.83,
+      "duration": 2.83,
+      "text": "C+ and I can always design the circuit"
+    },
+    {
+      "index": 302,
+      "start": 1069.84,
+      "end": 1073.95,
+      "duration": 4.11,
+      "text": "using the map method we know map method"
+    },
+    {
+      "index": 303,
+      "start": 1073.96,
+      "end": 1076.029,
+      "duration": 2.069,
+      "text": "so but only thing we will not write in"
+    },
+    {
+      "index": 304,
+      "start": 1076.039,
+      "end": 1078.39,
+      "duration": 2.351,
+      "text": "this order because it is if you want to"
+    },
+    {
+      "index": 305,
+      "start": 1078.4,
+      "end": 1081.35,
+      "duration": 2.95,
+      "text": "use map method to simplify this"
+    },
+    {
+      "index": 306,
+      "start": 1081.36,
+      "end": 1083.23,
+      "duration": 1.87,
+      "text": "combination logic I would like to have"
+    },
+    {
+      "index": 307,
+      "start": 1083.24,
+      "end": 1084.87,
+      "duration": 1.63,
+      "text": "it in a natural binary"
+    },
+    {
+      "index": 308,
+      "start": 1084.88,
+      "end": 1087.43,
+      "duration": 2.55,
+      "text": "sequence so I will write all possible"
+    },
+    {
+      "index": 309,
+      "start": 1087.44,
+      "end": 1090.07,
+      "duration": 2.63,
+      "text": "values of a c and then write the next"
+    },
+    {
+      "index": 310,
+      "start": 1090.08,
+      "end": 1092.51,
+      "duration": 2.43,
+      "text": "values corresponding to that instead of"
+    },
+    {
+      "index": 311,
+      "start": 1092.52,
+      "end": 1095.51,
+      "duration": 2.99,
+      "text": "saying 0 01 to start with and then 1 0"
+    },
+    {
+      "index": 312,
+      "start": 1095.52,
+      "end": 1096.95,
+      "duration": 1.43,
+      "text": "then it will get confused know when when"
+    },
+    {
+      "index": 313,
+      "start": 1096.96,
+      "end": 1099.31,
+      "duration": 2.35,
+      "text": "you try to draw the map again I let to"
+    },
+    {
+      "index": 314,
+      "start": 1099.32,
+      "end": 1103.27,
+      "duration": 3.95,
+      "text": "sort of fumble around you order to avoid"
+    },
+    {
+      "index": 315,
+      "start": 1103.28,
+      "end": 1106.549,
+      "duration": 3.269,
+      "text": "that I will put them in the sequence and"
+    },
+    {
+      "index": 316,
+      "start": 1106.559,
+      "end": 1109.95,
+      "duration": 3.391,
+      "text": "write the next values from this given"
+    },
+    {
+      "index": 317,
+      "start": 1109.96,
+      "end": 1111.149,
+      "duration": 1.189,
+      "text": "State"
+    },
+    {
+      "index": 318,
+      "start": 1111.159,
+      "end": 1113.789,
+      "duration": 2.63,
+      "text": "graph so all the possible perc values"
+    },
+    {
+      "index": 319,
+      "start": 1113.799,
+      "end": 1115.47,
+      "duration": 1.671,
+      "text": "some of them may not even exist for"
+    },
+    {
+      "index": 320,
+      "start": 1115.48,
+      "end": 1128.669,
+      "duration": 13.189,
+      "text": "example 0 0 1 0 0 doesn't"
+    },
+    {
+      "index": 321,
+      "start": 1133.43,
+      "end": 1133.44,
+      "duration": 0.01,
+      "text": "exist if 0 0 0 occurs what is the next"
+    },
+    {
+      "index": 322,
+      "start": 1133.44,
+      "end": 1137.47,
+      "duration": 4.03,
+      "text": "state 00 0 is not one of the required"
+    },
+    {
+      "index": 323,
+      "start": 1137.48,
+      "end": 1141.07,
+      "duration": 3.59,
+      "text": "States so 0 0 0 will not occur in this"
+    },
+    {
+      "index": 324,
+      "start": 1141.08,
+      "end": 1147.23,
+      "duration": 6.15,
+      "text": "counter so next St will be don't"
+    },
+    {
+      "index": 325,
+      "start": 1151.47,
+      "end": 1151.48,
+      "duration": 0.01,
+      "text": "care similarly 111 occurs again it's not"
+    },
+    {
+      "index": 326,
+      "start": 1151.48,
+      "end": 1158.19,
+      "duration": 6.71,
+      "text": "defined next we don't"
+    },
+    {
+      "index": 327,
+      "start": 1160.75,
+      "end": 1160.76,
+      "duration": 0.01,
+      "text": "care for all other values of this"
+    },
+    {
+      "index": 328,
+      "start": 1160.76,
+      "end": 1165.27,
+      "duration": 4.51,
+      "text": "present States the next states are"
+    },
+    {
+      "index": 329,
+      "start": 1165.28,
+      "end": 1168.029,
+      "duration": 2.749,
+      "text": "defined so the per state is 0 0 1 what"
+    },
+    {
+      "index": 330,
+      "start": 1168.039,
+      "end": 1170.07,
+      "duration": 2.031,
+      "text": "is the next state"
+    },
+    {
+      "index": 331,
+      "start": 1170.08,
+      "end": 1171.31,
+      "duration": 1.23,
+      "text": "1 0"
+    },
+    {
+      "index": 332,
+      "start": 1171.32,
+      "end": 1175.029,
+      "duration": 3.709,
+      "text": "0 person is 0 1 0 next state"
+    },
+    {
+      "index": 333,
+      "start": 1175.039,
+      "end": 1176.909,
+      "duration": 1.87,
+      "text": "is"
+    },
+    {
+      "index": 334,
+      "start": 1176.919,
+      "end": 1179.149,
+      "duration": 2.23,
+      "text": "what 1 1"
+    },
+    {
+      "index": 335,
+      "start": 1179.159,
+      "end": 1184.63,
+      "duration": 5.471,
+      "text": "0 perc is 0 1 1 the next St is one"
+    },
+    {
+      "index": 336,
+      "start": 1184.64,
+      "end": 1190.83,
+      "duration": 6.19,
+      "text": "1 present set is 1 0 0 the next St is 01"
+    },
+    {
+      "index": 337,
+      "start": 1190.84,
+      "end": 1193.789,
+      "duration": 2.949,
+      "text": "1 present set is 1 01 the next set is 0"
+    },
+    {
+      "index": 338,
+      "start": 1193.799,
+      "end": 1196.07,
+      "duration": 2.271,
+      "text": "1"
+    },
+    {
+      "index": 339,
+      "start": 1217.07,
+      "end": 1217.08,
+      "duration": 0.01,
+      "text": "this is a state"
+    },
+    {
+      "index": 340,
+      "start": 1217.08,
+      "end": 1220.789,
+      "duration": 3.709,
+      "text": "graph this is a state table that's all"
+    },
+    {
+      "index": 341,
+      "start": 1220.799,
+      "end": 1223.149,
+      "duration": 2.35,
+      "text": "have I done anything different from here"
+    },
+    {
+      "index": 342,
+      "start": 1223.159,
+      "end": 1224.99,
+      "duration": 1.831,
+      "text": "whatever information I put in this form"
+    },
+    {
+      "index": 343,
+      "start": 1225.0,
+      "end": 1229.149,
+      "duration": 4.149,
+      "text": "of a graph figure diagram has been"
+    },
+    {
+      "index": 344,
+      "start": 1229.159,
+      "end": 1232.27,
+      "duration": 3.111,
+      "text": "converted in the form of a table so this"
+    },
+    {
+      "index": 345,
+      "start": 1232.28,
+      "end": 1234.83,
+      "duration": 2.55,
+      "text": "is called a state"
+    },
+    {
+      "index": 346,
+      "start": 1234.84,
+      "end": 1239.029,
+      "duration": 4.189,
+      "text": "table so in of combination logic truth"
+    },
+    {
+      "index": 347,
+      "start": 1239.039,
+      "end": 1240.95,
+      "duration": 1.911,
+      "text": "table this is the truth table of the"
+    },
+    {
+      "index": 348,
+      "start": 1240.96,
+      "end": 1256.71,
+      "duration": 15.75,
+      "text": "combination"
+    },
+    {
+      "index": 349,
+      "start": 1259.23,
+      "end": 1259.24,
+      "duration": 0.01,
+      "text": "logic also not this"
+    },
+    {
+      "index": 350,
+      "start": 1259.24,
+      "end": 1262.789,
+      "duration": 3.549,
+      "text": "State table here in this case because"
+    },
+    {
+      "index": 351,
+      "start": 1262.799,
+      "end": 1265.669,
+      "duration": 2.87,
+      "text": "this table tells you the present States"
+    },
+    {
+      "index": 352,
+      "start": 1265.679,
+      "end": 1268.23,
+      "duration": 2.551,
+      "text": "and the corresponding next St that's all"
+    },
+    {
+      "index": 353,
+      "start": 1268.24,
+      "end": 1270.87,
+      "duration": 2.63,
+      "text": "right which is what the said graph gives"
+    },
+    {
+      "index": 354,
+      "start": 1270.88,
+      "end": 1273.269,
+      "duration": 2.389,
+      "text": "you if there's an external input I have"
+    },
+    {
+      "index": 355,
+      "start": 1273.279,
+      "end": 1274.95,
+      "duration": 1.671,
+      "text": "to put that external input if the person"
+    },
+    {
+      "index": 356,
+      "start": 1274.96,
+      "end": 1277.029,
+      "duration": 2.069,
+      "text": "is there and X is zero what will happen"
+    },
+    {
+      "index": 357,
+      "start": 1277.039,
+      "end": 1278.43,
+      "duration": 1.391,
+      "text": "the person is there and X is one what"
+    },
+    {
+      "index": 358,
+      "start": 1278.44,
+      "end": 1280.99,
+      "duration": 2.55,
+      "text": "will happen I say so if you have inputs"
+    },
+    {
+      "index": 359,
+      "start": 1281.0,
+      "end": 1283.07,
+      "duration": 2.07,
+      "text": "also in addition to the present State"
+    },
+    {
+      "index": 360,
+      "start": 1283.08,
+      "end": 1285.269,
+      "duration": 2.189,
+      "text": "variables here if there are external"
+    },
+    {
+      "index": 361,
+      "start": 1285.279,
+      "end": 1287.07,
+      "duration": 1.791,
+      "text": "inputs that also can be accommodated in"
+    },
+    {
+      "index": 362,
+      "start": 1287.08,
+      "end": 1289.31,
+      "duration": 2.23,
+      "text": "this by putting one more column for each"
+    },
+    {
+      "index": 363,
+      "start": 1289.32,
+      "end": 1290.63,
+      "duration": 1.31,
+      "text": "of the"
+    },
+    {
+      "index": 364,
+      "start": 1290.64,
+      "end": 1293.909,
+      "duration": 3.269,
+      "text": "inputs if there has been an X then I put"
+    },
+    {
+      "index": 365,
+      "start": 1293.919,
+      "end": 1297.31,
+      "duration": 3.391,
+      "text": "an X as extra column in this truth table"
+    },
+    {
+      "index": 366,
+      "start": 1297.32,
+      "end": 1299.549,
+      "duration": 2.229,
+      "text": "then you'll say the present set is this"
+    },
+    {
+      "index": 367,
+      "start": 1299.559,
+      "end": 1302.909,
+      "duration": 3.35,
+      "text": "and X is zero the next set will be this"
+    },
+    {
+      "index": 368,
+      "start": 1302.919,
+      "end": 1305.11,
+      "duration": 2.191,
+      "text": "if the is this and X is this this will"
+    },
+    {
+      "index": 369,
+      "start": 1305.12,
+      "end": 1307.31,
+      "duration": 2.19,
+      "text": "be next St I will write and similarly"
+    },
+    {
+      "index": 370,
+      "start": 1307.32,
+      "end": 1308.63,
+      "duration": 1.31,
+      "text": "there's an output in addition to the"
+    },
+    {
+      "index": 371,
+      "start": 1308.64,
+      "end": 1309.83,
+      "duration": 1.19,
+      "text": "state"
+    },
+    {
+      "index": 372,
+      "start": 1309.84,
+      "end": 1312.149,
+      "duration": 2.309,
+      "text": "outputs there's an external output I can"
+    },
+    {
+      "index": 373,
+      "start": 1312.159,
+      "end": 1314.07,
+      "duration": 1.911,
+      "text": "also uncor here on the outside output of"
+    },
+    {
+      "index": 374,
+      "start": 1314.08,
+      "end": 1316.63,
+      "duration": 2.55,
+      "text": "this output side supposing Z was an"
+    },
+    {
+      "index": 375,
+      "start": 1316.64,
+      "end": 1318.75,
+      "duration": 2.11,
+      "text": "output in this state this should given"
+    },
+    {
+      "index": 376,
+      "start": 1318.76,
+      "end": 1320.549,
+      "duration": 1.789,
+      "text": "output of this in this state you output"
+    },
+    {
+      "index": 377,
+      "start": 1320.559,
+      "end": 1322.87,
+      "duration": 2.311,
+      "text": "of this that also I can accommodate your"
+    },
+    {
+      "index": 378,
+      "start": 1322.88,
+      "end": 1325.549,
+      "duration": 2.669,
+      "text": "state table is a generalized truth table"
+    },
+    {
+      "index": 379,
+      "start": 1325.559,
+      "end": 1329.23,
+      "duration": 3.671,
+      "text": "truth table input output relationship it"
+    },
+    {
+      "index": 380,
+      "start": 1329.24,
+      "end": 1330.789,
+      "duration": 1.549,
+      "text": "involves the present state in the next"
+    },
+    {
+      "index": 381,
+      "start": 1330.799,
+      "end": 1333.029,
+      "duration": 2.23,
+      "text": "state and if you have external inputs I"
+    },
+    {
+      "index": 382,
+      "start": 1333.039,
+      "end": 1334.789,
+      "duration": 1.75,
+      "text": "can also include them external outputs"
+    },
+    {
+      "index": 383,
+      "start": 1334.799,
+      "end": 1337.07,
+      "duration": 2.271,
+      "text": "you can also include them so present"
+    },
+    {
+      "index": 384,
+      "start": 1337.08,
+      "end": 1339.669,
+      "duration": 2.589,
+      "text": "stes information and the input"
+    },
+    {
+      "index": 385,
+      "start": 1339.679,
+      "end": 1341.39,
+      "duration": 1.711,
+      "text": "information is the left hand side of"
+    },
+    {
+      "index": 386,
+      "start": 1341.4,
+      "end": 1346.51,
+      "duration": 5.11,
+      "text": "this table nexted information output"
+    },
+    {
+      "index": 387,
+      "start": 1346.52,
+      "end": 1348.789,
+      "duration": 2.269,
+      "text": "information they form the left hand side"
+    },
+    {
+      "index": 388,
+      "start": 1348.799,
+      "end": 1350.95,
+      "duration": 2.151,
+      "text": "of the right hand side of the truth"
+    },
+    {
+      "index": 389,
+      "start": 1350.96,
+      "end": 1353.31,
+      "duration": 2.35,
+      "text": "table such a generalized table is called"
+    },
+    {
+      "index": 390,
+      "start": 1353.32,
+      "end": 1356.909,
+      "duration": 3.589,
+      "text": "the state table a state map a state map"
+    },
+    {
+      "index": 391,
+      "start": 1356.919,
+      "end": 1358.909,
+      "duration": 1.99,
+      "text": "or state graph is translated into State"
+    },
+    {
+      "index": 392,
+      "start": 1358.919,
+      "end": 1362.99,
+      "duration": 4.071,
+      "text": "table from here to Comm logic is easy we"
+    },
+    {
+      "index": 393,
+      "start": 1363.0,
+      "end": 1365.149,
+      "duration": 2.149,
+      "text": "know that"
+    },
+    {
+      "index": 394,
+      "start": 1365.159,
+      "end": 1368.87,
+      "duration": 3.711,
+      "text": "right so I have to draw for each one of"
+    },
+    {
+      "index": 395,
+      "start": 1368.88,
+      "end": 1373.07,
+      "duration": 4.19,
+      "text": "these A+ B+ C+ a Cara map in which a b c"
+    },
+    {
+      "index": 396,
+      "start": 1373.08,
+      "end": 1374.029,
+      "duration": 0.949,
+      "text": "will be"
+    },
+    {
+      "index": 397,
+      "start": 1374.039,
+      "end": 1376.43,
+      "duration": 2.391,
+      "text": "inputs I can simplify the map and find"
+    },
+    {
+      "index": 398,
+      "start": 1376.44,
+      "end": 1377.87,
+      "duration": 1.43,
+      "text": "out what is the combination logic look"
+    },
+    {
+      "index": 399,
+      "start": 1377.88,
+      "end": 1381.07,
+      "duration": 3.19,
+      "text": "like right so I can draw the map here"
+    },
+    {
+      "index": 400,
+      "start": 1381.08,
+      "end": 1387.95,
+      "duration": 6.87,
+      "text": "itself in our"
+    },
+    {
+      "index": 401,
+      "start": 1399.75,
+      "end": 1399.76,
+      "duration": 0.01,
+      "text": "c this"
+    },
+    {
+      "index": 402,
+      "start": 1399.76,
+      "end": 1413.35,
+      "duration": 13.59,
+      "text": "is A+ map"
+    },
+    {
+      "index": 403,
+      "start": 1416.19,
+      "end": 1416.2,
+      "duration": 0.01,
+      "text": "then I love the B+ map"
+    },
+    {
+      "index": 404,
+      "start": 1416.2,
+      "end": 1420.789,
+      "duration": 4.589,
+      "text": "so A+ can be read from this"
+    },
+    {
+      "index": 405,
+      "start": 1464.47,
+      "end": 1464.48,
+      "duration": 0.01,
+      "text": "map I'm going to read C+ from this"
+    },
+    {
+      "index": 406,
+      "start": 1464.48,
+      "end": 1467.51,
+      "duration": 3.03,
+      "text": "map so I can read A+ I can read B+ I can"
+    },
+    {
+      "index": 407,
+      "start": 1467.52,
+      "end": 1469.95,
+      "duration": 2.43,
+      "text": "read C+ and then"
+    },
+    {
+      "index": 408,
+      "start": 1469.96,
+      "end": 1473.47,
+      "duration": 3.51,
+      "text": "have what is required inside this box"
+    },
+    {
+      "index": 409,
+      "start": 1473.48,
+      "end": 1475.549,
+      "duration": 2.069,
+      "text": "then my counter design is"
+    },
+    {
+      "index": 410,
+      "start": 1475.559,
+      "end": 1477.47,
+      "duration": 1.911,
+      "text": "completed this this a generalized"
+    },
+    {
+      "index": 411,
+      "start": 1477.48,
+      "end": 1480.029,
+      "duration": 2.549,
+      "text": "approach for a design I can use binary"
+    },
+    {
+      "index": 412,
+      "start": 1480.039,
+      "end": 1483.669,
+      "duration": 3.63,
+      "text": "count also sequential binary instead of"
+    },
+    {
+      "index": 413,
+      "start": 1483.679,
+      "end": 1486.75,
+      "duration": 3.071,
+      "text": "this can I not do that it doesn't matter"
+    },
+    {
+      "index": 414,
+      "start": 1486.76,
+      "end": 1488.71,
+      "duration": 1.95,
+      "text": "it's an orbitary sequence I can have a"
+    },
+    {
+      "index": 415,
+      "start": 1488.72,
+      "end": 1490.669,
+      "duration": 1.949,
+      "text": "natural sequence"
+    },
+    {
+      "index": 416,
+      "start": 1490.679,
+      "end": 1492.87,
+      "duration": 2.191,
+      "text": "also doesn't matter so this is"
+    },
+    {
+      "index": 417,
+      "start": 1492.88,
+      "end": 1495.07,
+      "duration": 2.19,
+      "text": "generalized design concept I'm giving"
+    },
+    {
+      "index": 418,
+      "start": 1495.08,
+      "end": 1499.23,
+      "duration": 4.15,
+      "text": "you now what is this now First Column is"
+    },
+    {
+      "index": 419,
+      "start": 1499.24,
+      "end": 1503.99,
+      "duration": 4.75,
+      "text": "this A+ map so this is don't care one"
+    },
+    {
+      "index": 420,
+      "start": 1504.0,
+      "end": 1505.31,
+      "duration": 1.31,
+      "text": "one"
+    },
+    {
+      "index": 421,
+      "start": 1505.32,
+      "end": 1509.75,
+      "duration": 4.43,
+      "text": "one 0 0 0 don't"
+    },
+    {
+      "index": 422,
+      "start": 1509.76,
+      "end": 1513.43,
+      "duration": 3.67,
+      "text": "care which is very easy what is this a"
+    },
+    {
+      "index": 423,
+      "start": 1513.44,
+      "end": 1514.549,
+      "duration": 1.109,
+      "text": "plus equal"
+    },
+    {
+      "index": 424,
+      "start": 1514.559,
+      "end": 1522.389,
+      "duration": 7.83,
+      "text": "to a"
+    },
+    {
+      "index": 425,
+      "start": 1524.43,
+      "end": 1524.44,
+      "duration": 0.01,
+      "text": "bar"
+    },
+    {
+      "index": 426,
+      "start": 1524.44,
+      "end": 1527.11,
+      "duration": 2.67,
+      "text": "good B+"
+    },
+    {
+      "index": 427,
+      "start": 1527.12,
+      "end": 1529.43,
+      "duration": 2.31,
+      "text": "map Z"
+    },
+    {
+      "index": 428,
+      "start": 1529.44,
+      "end": 1532.35,
+      "duration": 2.91,
+      "text": "0 1"
+    },
+    {
+      "index": 429,
+      "start": 1532.36,
+      "end": 1533.99,
+      "duration": 1.63,
+      "text": "0 1"
+    },
+    {
+      "index": 430,
+      "start": 1534.0,
+      "end": 1536.19,
+      "duration": 2.19,
+      "text": "[Music]"
+    },
+    {
+      "index": 431,
+      "start": 1536.2,
+      "end": 1539.35,
+      "duration": 3.15,
+      "text": "1 zero don't"
+    },
+    {
+      "index": 432,
+      "start": 1539.36,
+      "end": 1543.87,
+      "duration": 4.51,
+      "text": "care that is going to"
+    },
+    {
+      "index": 433,
+      "start": 1547.389,
+      "end": 1547.399,
+      "duration": 0.01,
+      "text": "be this and"
+    },
+    {
+      "index": 434,
+      "start": 1547.399,
+      "end": 1550.43,
+      "duration": 3.031,
+      "text": "this you'll have to include as many"
+    },
+    {
+      "index": 435,
+      "start": 1550.44,
+      "end": 1555.87,
+      "duration": 5.43,
+      "text": "don't cares as possible to reduce the"
+    },
+    {
+      "index": 436,
+      "start": 1558.71,
+      "end": 1558.72,
+      "duration": 0.01,
+      "text": "map I find"
+    },
+    {
+      "index": 437,
+      "start": 1558.72,
+      "end": 1559.87,
+      "duration": 1.15,
+      "text": "quiz"
+    },
+    {
+      "index": 438,
+      "start": 1559.88,
+      "end": 1563.029,
+      "duration": 3.149,
+      "text": "answers answers in the exam questions"
+    },
+    {
+      "index": 439,
+      "start": 1563.039,
+      "end": 1565.789,
+      "duration": 2.75,
+      "text": "some of you have not used the don't cast"
+    },
+    {
+      "index": 440,
+      "start": 1565.799,
+      "end": 1569.029,
+      "duration": 3.23,
+      "text": "to the maximum possible extent use don't"
+    },
+    {
+      "index": 441,
+      "start": 1569.039,
+      "end": 1570.59,
+      "duration": 1.551,
+      "text": "C to the maximum possible extent to"
+    },
+    {
+      "index": 442,
+      "start": 1570.6,
+      "end": 1572.35,
+      "duration": 1.75,
+      "text": "reduce the hardware"
+    },
+    {
+      "index": 443,
+      "start": 1572.36,
+      "end": 1575.549,
+      "duration": 3.189,
+      "text": "complexity so for example this one and"
+    },
+    {
+      "index": 444,
+      "start": 1575.559,
+      "end": 1577.07,
+      "duration": 1.511,
+      "text": "this don't care can be combined instead"
+    },
+    {
+      "index": 445,
+      "start": 1577.08,
+      "end": 1580.389,
+      "duration": 3.309,
+      "text": "of reading this as a separate Prime"
+    },
+    {
+      "index": 446,
+      "start": 1580.399,
+      "end": 1586.63,
+      "duration": 6.231,
+      "text": "implicant so what is this this is a bar"
+    },
+    {
+      "index": 447,
+      "start": 1589.149,
+      "end": 1589.159,
+      "duration": 0.01,
+      "text": "a bar"
+    },
+    {
+      "index": 448,
+      "start": 1589.159,
+      "end": 1593.47,
+      "duration": 4.311,
+      "text": "c"
+    },
+    {
+      "index": 449,
+      "start": 1603.51,
+      "end": 1603.52,
+      "duration": 0.01,
+      "text": "okay C+ map is here zero don't care"
+    },
+    {
+      "index": 450,
+      "start": 1603.52,
+      "end": 1606.59,
+      "duration": 3.07,
+      "text": "don't care"
+    },
+    {
+      "index": 451,
+      "start": 1609.31,
+      "end": 1609.32,
+      "duration": 0.01,
+      "text": "one one"
+    },
+    {
+      "index": 452,
+      "start": 1609.32,
+      "end": 1612.43,
+      "duration": 3.11,
+      "text": "one"
+    },
+    {
+      "index": 453,
+      "start": 1668.509,
+      "end": 1668.519,
+      "duration": 0.01,
+      "text": "s a"
+    },
+    {
+      "index": 454,
+      "start": 1668.519,
+      "end": 1671.31,
+      "duration": 2.791,
+      "text": "bar B+"
+    },
+    {
+      "index": 455,
+      "start": 1671.32,
+      "end": 1675.43,
+      "duration": 4.11,
+      "text": "s AB"
+    },
+    {
+      "index": 456,
+      "start": 1689.11,
+      "end": 1689.12,
+      "duration": 0.01,
+      "text": "s b C+ AC"
+    },
+    {
+      "index": 457,
+      "start": 1689.12,
+      "end": 1692.59,
+      "duration": 3.47,
+      "text": "bar and where are these ABCs these ABCs"
+    },
+    {
+      "index": 458,
+      "start": 1692.6,
+      "end": 1693.509,
+      "duration": 0.909,
+      "text": "are"
+    },
+    {
+      "index": 459,
+      "start": 1693.519,
+      "end": 1695.909,
+      "duration": 2.39,
+      "text": "the same variables"
+    },
+    {
+      "index": 460,
+      "start": 1695.919,
+      "end": 1698.909,
+      "duration": 2.99,
+      "text": "here not any external inputs these are"
+    },
+    {
+      "index": 461,
+      "start": 1698.919,
+      "end": 1700.71,
+      "duration": 1.791,
+      "text": "the state variables which are given as"
+    },
+    {
+      "index": 462,
+      "start": 1700.72,
+      "end": 1703.909,
+      "duration": 3.189,
+      "text": "input to the next state determination"
+    },
+    {
+      "index": 463,
+      "start": 1703.919,
+      "end": 1705.23,
+      "duration": 1.311,
+      "text": "present State variables have to be given"
+    },
+    {
+      "index": 464,
+      "start": 1705.24,
+      "end": 1706.59,
+      "duration": 1.35,
+      "text": "as input so that next state can be"
+    },
+    {
+      "index": 465,
+      "start": 1706.6,
+      "end": 1709.149,
+      "duration": 2.549,
+      "text": "determined by the combination log iic so"
+    },
+    {
+      "index": 466,
+      "start": 1709.159,
+      "end": 1711.149,
+      "duration": 1.99,
+      "text": "the combination logic will"
+    },
+    {
+      "index": 467,
+      "start": 1711.159,
+      "end": 1716.149,
+      "duration": 4.99,
+      "text": "be a bar Advantage is a bar B Bar C bar"
+    },
+    {
+      "index": 468,
+      "start": 1716.159,
+      "end": 1717.389,
+      "duration": 1.23,
+      "text": "are available because these are flip"
+    },
+    {
+      "index": 469,
+      "start": 1717.399,
+      "end": 1727.549,
+      "duration": 10.15,
+      "text": "flops so you have a bar"
+    },
+    {
+      "index": 470,
+      "start": 1730.83,
+      "end": 1730.84,
+      "duration": 0.01,
+      "text": "also so there no need for"
+    },
+    {
+      "index": 471,
+      "start": 1730.84,
+      "end": 1733.029,
+      "duration": 2.189,
+      "text": "inverters because flip flops have q and"
+    },
+    {
+      "index": 472,
+      "start": 1733.039,
+      "end": 1735.19,
+      "duration": 2.151,
+      "text": "Q Bar"
+    },
+    {
+      "index": 473,
+      "start": 1735.2,
+      "end": 1740.789,
+      "duration": 5.589,
+      "text": "outputs so that means I can put"
+    },
+    {
+      "index": 474,
+      "start": 1754.23,
+      "end": 1754.24,
+      "duration": 0.01,
+      "text": "d d A+ or da da is input of the flip"
+    },
+    {
+      "index": 475,
+      "start": 1754.24,
+      "end": 1756.11,
+      "duration": 1.87,
+      "text": "flop a"
+    },
+    {
+      "index": 476,
+      "start": 1756.12,
+      "end": 1776.149,
+      "duration": 20.029,
+      "text": "plus which is nothing but this a bar"
+    },
+    {
+      "index": 477,
+      "start": 1794.35,
+      "end": 1794.36,
+      "duration": 0.01,
+      "text": "both are available a b a a bar b b"
+    },
+    {
+      "index": 478,
+      "start": 1794.36,
+      "end": 1796.23,
+      "duration": 1.87,
+      "text": "bar c c bar are available so all these"
+    },
+    {
+      "index": 479,
+      "start": 1796.24,
+      "end": 1798.83,
+      "duration": 2.59,
+      "text": "four variables are available"
+    },
+    {
+      "index": 480,
+      "start": 1798.84,
+      "end": 1801.07,
+      "duration": 2.23,
+      "text": "combine them in R"
+    },
+    {
+      "index": 481,
+      "start": 1801.08,
+      "end": 1804.87,
+      "duration": 3.79,
+      "text": "gate this will become my"
+    },
+    {
+      "index": 482,
+      "start": 1804.88,
+      "end": 1807.19,
+      "duration": 2.31,
+      "text": "B+ which is given to the second flip"
+    },
+    {
+      "index": 483,
+      "start": 1807.2,
+      "end": 1815.029,
+      "duration": 7.829,
+      "text": "flop"
+    },
+    {
+      "index": 484,
+      "start": 1836.83,
+      "end": 1836.84,
+      "duration": 0.01,
+      "text": "likewise I have"
+    },
+    {
+      "index": 485,
+      "start": 1836.84,
+      "end": 1849.63,
+      "duration": 12.79,
+      "text": "BC AC"
+    },
+    {
+      "index": 486,
+      "start": 1854.31,
+      "end": 1854.32,
+      "duration": 0.01,
+      "text": "bar a DC C+ or"
+    },
+    {
+      "index": 487,
+      "start": 1854.32,
+      "end": 1857.31,
+      "duration": 2.99,
+      "text": "DC same as DC which is the D of this"
+    },
+    {
+      "index": 488,
+      "start": 1857.32,
+      "end": 1859.269,
+      "duration": 1.949,
+      "text": "flip-flop"
+    },
+    {
+      "index": 489,
+      "start": 1859.279,
+      "end": 1861.549,
+      "duration": 2.27,
+      "text": "and this will be c c"
+    },
+    {
+      "index": 490,
+      "start": 1861.559,
+      "end": 1892.75,
+      "duration": 31.191,
+      "text": "bar so I need to write it such that"
+    },
+    {
+      "index": 491,
+      "start": 1895.269,
+      "end": 1895.279,
+      "duration": 0.01,
+      "text": "so if you give my a b c a bar B Bar C"
+    },
+    {
+      "index": 492,
+      "start": 1895.279,
+      "end": 1896.629,
+      "duration": 1.35,
+      "text": "bar as input to this combination logic"
+    },
+    {
+      "index": 493,
+      "start": 1896.639,
+      "end": 1899.149,
+      "duration": 2.51,
+      "text": "so this is the combinational logic block"
+    },
+    {
+      "index": 494,
+      "start": 1899.159,
+      "end": 1905.31,
+      "duration": 6.151,
+      "text": "we're discussing"
+    },
+    {
+      "index": 495,
+      "start": 1907.549,
+      "end": 1907.559,
+      "duration": 0.01,
+      "text": "here and these are the three flip flops"
+    },
+    {
+      "index": 496,
+      "start": 1907.559,
+      "end": 1937.43,
+      "duration": 29.871,
+      "text": "are discussing here this is the clock"
+    },
+    {
+      "index": 497,
+      "start": 1946.389,
+      "end": 1946.399,
+      "duration": 0.01,
+      "text": "block with is one"
+    },
+    {
+      "index": 498,
+      "start": 1946.399,
+      "end": 1952.11,
+      "duration": 5.711,
+      "text": "here this block is shown"
+    },
+    {
+      "index": 499,
+      "start": 1954.95,
+      "end": 1954.96,
+      "duration": 0.01,
+      "text": "here the same as"
+    },
+    {
+      "index": 500,
+      "start": 1954.96,
+      "end": 1958.59,
+      "duration": 3.63,
+      "text": "this so it contain contains say what how"
+    },
+    {
+      "index": 501,
+      "start": 1958.6,
+      "end": 1961.029,
+      "duration": 2.429,
+      "text": "many Gates Four and Gates and two R"
+    },
+    {
+      "index": 502,
+      "start": 1961.039,
+      "end": 1962.71,
+      "duration": 1.671,
+      "text": "Gates all two"
+    },
+    {
+      "index": 503,
+      "start": 1962.72,
+      "end": 1966.629,
+      "duration": 3.909,
+      "text": "inputs and then I get a b a a a bar b b"
+    },
+    {
+      "index": 504,
+      "start": 1966.639,
+      "end": 1968.23,
+      "duration": 1.591,
+      "text": "bar c c bar as inputs to this of course"
+    },
+    {
+      "index": 505,
+      "start": 1968.24,
+      "end": 1970.629,
+      "duration": 2.389,
+      "text": "I have not shown that here only shown a"
+    },
+    {
+      "index": 506,
+      "start": 1970.639,
+      "end": 1973.269,
+      "duration": 2.63,
+      "text": "b c you can"
+    },
+    {
+      "index": 507,
+      "start": 1973.279,
+      "end": 1976.549,
+      "duration": 3.27,
+      "text": "also get a bar B Bar C bar also inside"
+    },
+    {
+      "index": 508,
+      "start": 1976.559,
+      "end": 1978.43,
+      "duration": 1.871,
+      "text": "this"
+    },
+    {
+      "index": 509,
+      "start": 1978.44,
+      "end": 1980.43,
+      "duration": 1.99,
+      "text": "so a a bar BB bar CC Bar which are"
+    },
+    {
+      "index": 510,
+      "start": 1980.44,
+      "end": 1983.029,
+      "duration": 2.589,
+      "text": "available here are taken as inputs"
+    },
+    {
+      "index": 511,
+      "start": 1983.039,
+      "end": 1985.95,
+      "duration": 2.911,
+      "text": "folded and taken as inputs and then you"
+    },
+    {
+      "index": 512,
+      "start": 1985.96,
+      "end": 1988.47,
+      "duration": 2.51,
+      "text": "generate da DB"
+    },
+    {
+      "index": 513,
+      "start": 1988.48,
+      "end": 1991.909,
+      "duration": 3.429,
+      "text": "DC which will drive this D flip"
+    },
+    {
+      "index": 514,
+      "start": 1991.919,
+      "end": 1995.43,
+      "duration": 3.511,
+      "text": "flops to the next state after at the"
+    },
+    {
+      "index": 515,
+      "start": 1995.44,
+      "end": 1996.95,
+      "duration": 1.51,
+      "text": "next clock"
+    },
+    {
+      "index": 516,
+      "start": 1996.96,
+      "end": 1998.95,
+      "duration": 1.99,
+      "text": "transition this combination logic is"
+    },
+    {
+      "index": 517,
+      "start": 1998.96,
+      "end": 2001.669,
+      "duration": 2.709,
+      "text": "also called the steering"
+    },
+    {
+      "index": 518,
+      "start": 2001.679,
+      "end": 2004.149,
+      "duration": 2.47,
+      "text": "logic why is it called steering logic is"
+    },
+    {
+      "index": 519,
+      "start": 2004.159,
+      "end": 2008.389,
+      "duration": 4.23,
+      "text": "obvious"
+    },
+    {
+      "index": 520,
+      "start": 2010.23,
+      "end": 2010.24,
+      "duration": 0.01,
+      "text": "this logic steers this flip flops from"
+    },
+    {
+      "index": 521,
+      "start": 2010.24,
+      "end": 2016.87,
+      "duration": 6.63,
+      "text": "state to"
+    },
+    {
+      "index": 522,
+      "start": 2019.59,
+      "end": 2019.6,
+      "duration": 0.01,
+      "text": "state so counter is a generalized"
+    },
+    {
+      "index": 523,
+      "start": 2019.6,
+      "end": 2022.07,
+      "duration": 2.47,
+      "text": "example of a state machine it can have a"
+    },
+    {
+      "index": 524,
+      "start": 2022.08,
+      "end": 2024.11,
+      "duration": 2.03,
+      "text": "computer have a washing"
+    },
+    {
+      "index": 525,
+      "start": 2024.12,
+      "end": 2026.87,
+      "duration": 2.75,
+      "text": "machine have a traffic controller I can"
+    },
+    {
+      "index": 526,
+      "start": 2026.88,
+      "end": 2028.389,
+      "duration": 1.509,
+      "text": "have an elevator controller I can have a"
+    },
+    {
+      "index": 527,
+      "start": 2028.399,
+      "end": 2030.31,
+      "duration": 1.911,
+      "text": "level liquid level"
+    },
+    {
+      "index": 528,
+      "start": 2030.32,
+      "end": 2033.59,
+      "duration": 3.27,
+      "text": "indicator whatever what are the states"
+    },
+    {
+      "index": 529,
+      "start": 2033.6,
+      "end": 2036.389,
+      "duration": 2.789,
+      "text": "what are the inputs and what sequence"
+    },
+    {
+      "index": 530,
+      "start": 2036.399,
+      "end": 2038.99,
+      "duration": 2.591,
+      "text": "and what inputs"
+    },
+    {
+      "index": 531,
+      "start": 2039.0,
+      "end": 2041.789,
+      "duration": 2.789,
+      "text": "what sequence the St should go to and"
+    },
+    {
+      "index": 532,
+      "start": 2041.799,
+      "end": 2046.95,
+      "duration": 5.151,
+      "text": "with and with what inputs you st"
+    },
+    {
+      "index": 533,
+      "start": 2046.96,
+      "end": 2049.629,
+      "duration": 2.669,
+      "text": "table convert this into State table I"
+    },
+    {
+      "index": 534,
+      "start": 2049.639,
+      "end": 2051.19,
+      "duration": 1.551,
+      "text": "mean State graph convert into State"
+    },
+    {
+      "index": 535,
+      "start": 2051.2,
+      "end": 2053.829,
+      "duration": 2.629,
+      "text": "table use combination logic that is"
+    },
+    {
+      "index": 536,
+      "start": 2053.839,
+      "end": 2055.389,
+      "duration": 1.55,
+      "text": "familiar to"
+    },
+    {
+      "index": 537,
+      "start": 2055.399,
+      "end": 2058.589,
+      "duration": 3.19,
+      "text": "us and drive those flip flops steer"
+    },
+    {
+      "index": 538,
+      "start": 2058.599,
+      "end": 2059.909,
+      "duration": 1.31,
+      "text": "those flip flops using the combination"
+    },
+    {
+      "index": 539,
+      "start": 2059.919,
+      "end": 2069.71,
+      "duration": 9.791,
+      "text": "logic from going from sh to St to St"
+    },
+    {
+      "index": 540,
+      "start": 2071.389,
+      "end": 2071.399,
+      "duration": 0.01,
+      "text": "if the sequence counter is a natural"
+    },
+    {
+      "index": 541,
+      "start": 2071.399,
+      "end": 2073.829,
+      "duration": 2.43,
+      "text": "sequence inste of an orbitary sequence I"
+    },
+    {
+      "index": 542,
+      "start": 2073.839,
+      "end": 2075.27,
+      "duration": 1.431,
+      "text": "can do the same thing but we don't have"
+    },
+    {
+      "index": 543,
+      "start": 2075.28,
+      "end": 2076.389,
+      "duration": 1.109,
+      "text": "to do that because we know that the"
+    },
+    {
+      "index": 544,
+      "start": 2076.399,
+      "end": 2078.349,
+      "duration": 1.95,
+      "text": "clock can be fed"
+    },
+    {
+      "index": 545,
+      "start": 2078.359,
+      "end": 2082.149,
+      "duration": 3.79,
+      "text": "in is a uh reduced solution so we don't"
+    },
+    {
+      "index": 546,
+      "start": 2082.159,
+      "end": 2083.55,
+      "duration": 1.391,
+      "text": "have to go through this but you can also"
+    },
+    {
+      "index": 547,
+      "start": 2083.56,
+      "end": 2094.51,
+      "duration": 10.95,
+      "text": "get the same solution using this"
+    },
+    {
+      "index": 548,
+      "start": 2100.19,
+      "end": 2100.2,
+      "duration": 0.01,
+      "text": "approach suppose I need to use for some"
+    },
+    {
+      "index": 549,
+      "start": 2100.2,
+      "end": 2103.63,
+      "duration": 3.43,
+      "text": "reason are there any questions as of now"
+    },
+    {
+      "index": 550,
+      "start": 2103.64,
+      "end": 2108.23,
+      "duration": 4.59,
+      "text": "with this concept of State machine"
+    },
+    {
+      "index": 551,
+      "start": 2108.24,
+      "end": 2111.39,
+      "duration": 3.15,
+      "text": "design see the whole thing is falling in"
+    },
+    {
+      "index": 552,
+      "start": 2111.4,
+      "end": 2113.79,
+      "duration": 2.39,
+      "text": "place the comination logic sequence"
+    },
+    {
+      "index": 553,
+      "start": 2113.8,
+      "end": 2116.71,
+      "duration": 2.91,
+      "text": "logic reading them independently as each"
+    },
+    {
+      "index": 554,
+      "start": 2116.72,
+      "end": 2118.31,
+      "duration": 1.59,
+      "text": "is a chapter to be forgotten when you go"
+    },
+    {
+      "index": 555,
+      "start": 2118.32,
+      "end": 2122.23,
+      "duration": 3.91,
+      "text": "to the next chapter the book whole think"
+    },
+    {
+      "index": 556,
+      "start": 2122.24,
+      "end": 2127.79,
+      "duration": 5.55,
+      "text": "is one grand thing is all used"
+    },
+    {
+      "index": 557,
+      "start": 2127.8,
+      "end": 2131.03,
+      "duration": 3.23,
+      "text": "in a total goal of system"
+    },
+    {
+      "index": 558,
+      "start": 2131.04,
+      "end": 2135.349,
+      "duration": 4.309,
+      "text": "design system"
+    },
+    {
+      "index": 559,
+      "start": 2143.589,
+      "end": 2143.599,
+      "duration": 0.01,
+      "text": "questions yes you can have but it's that"
+    },
+    {
+      "index": 560,
+      "start": 2143.599,
+      "end": 2146.39,
+      "duration": 2.791,
+      "text": "means when that count it has to remain"
+    },
+    {
+      "index": 561,
+      "start": 2146.4,
+      "end": 2151.23,
+      "duration": 4.83,
+      "text": "the same state"
+    },
+    {
+      "index": 562,
+      "start": 2154.589,
+      "end": 2154.599,
+      "duration": 0.01,
+      "text": "um from here you can have one more"
+    },
+    {
+      "index": 563,
+      "start": 2154.599,
+      "end": 2159.63,
+      "duration": 5.031,
+      "text": "count 0 0"
+    },
+    {
+      "index": 564,
+      "start": 2161.23,
+      "end": 2161.24,
+      "duration": 0.01,
+      "text": "you can"
+    },
+    {
+      "index": 565,
+      "start": 2161.24,
+      "end": 2163.91,
+      "duration": 2.67,
+      "text": "have we would rather use it as an"
+    },
+    {
+      "index": 566,
+      "start": 2163.92,
+      "end": 2166.63,
+      "duration": 2.71,
+      "text": "external"
+    },
+    {
+      "index": 567,
+      "start": 2170.309,
+      "end": 2170.319,
+      "duration": 0.01,
+      "text": "input of course we can always do that"
+    },
+    {
+      "index": 568,
+      "start": 2170.319,
+      "end": 2172.15,
+      "duration": 1.831,
+      "text": "let us say 1 0 0 you want to count twice"
+    },
+    {
+      "index": 569,
+      "start": 2172.16,
+      "end": 2173.829,
+      "duration": 1.669,
+      "text": "you can put 1 0"
+    },
+    {
+      "index": 570,
+      "start": 2173.839,
+      "end": 2176.43,
+      "duration": 2.591,
+      "text": "one0 but then when you draw the C you"
+    },
+    {
+      "index": 571,
+      "start": 2176.44,
+      "end": 2178.109,
+      "duration": 1.669,
+      "text": "don't know which one 0 you are talking"
+    },
+    {
+      "index": 572,
+      "start": 2178.119,
+      "end": 2180.589,
+      "duration": 2.47,
+      "text": "about so instead of doing that we can"
+    },
+    {
+      "index": 573,
+      "start": 2180.599,
+      "end": 2184.55,
+      "duration": 3.951,
+      "text": "have an external input defined when X is"
+    },
+    {
+      "index": 574,
+      "start": 2184.56,
+      "end": 2188.91,
+      "duration": 4.35,
+      "text": "zero it remains there and X is one"
+    },
+    {
+      "index": 575,
+      "start": 2188.92,
+      "end": 2190.589,
+      "duration": 1.669,
+      "text": "X is z it remains there so you can put"
+    },
+    {
+      "index": 576,
+      "start": 2190.599,
+      "end": 2194.87,
+      "duration": 4.271,
+      "text": "xal 0 here all other x one so from s0 to"
+    },
+    {
+      "index": 577,
+      "start": 2194.88,
+      "end": 2198.349,
+      "duration": 3.469,
+      "text": "S1 it will"
+    },
+    {
+      "index": 578,
+      "start": 2198.359,
+      "end": 2200.589,
+      "duration": 2.23,
+      "text": "remain both zero and one it will take"
+    },
+    {
+      "index": 579,
+      "start": 2200.599,
+      "end": 2202.79,
+      "duration": 2.191,
+      "text": "here from here it will take here only if"
+    },
+    {
+      "index": 580,
+      "start": 2202.8,
+      "end": 2205.829,
+      "duration": 3.029,
+      "text": "s is One X is One X is z to remain here"
+    },
+    {
+      "index": 581,
+      "start": 2205.839,
+      "end": 2207.43,
+      "duration": 1.591,
+      "text": "so you can external input can be used"
+    },
+    {
+      "index": 582,
+      "start": 2207.44,
+      "end": 2211.63,
+      "duration": 4.19,
+      "text": "more elegantly for that"
+    },
+    {
+      "index": 583,
+      "start": 2215.109,
+      "end": 2215.119,
+      "duration": 0.01,
+      "text": "design occasionally for some"
+    },
+    {
+      "index": 584,
+      "start": 2215.119,
+      "end": 2217.829,
+      "duration": 2.71,
+      "text": "reason we may want to use fli flops"
+    },
+    {
+      "index": 585,
+      "start": 2217.839,
+      "end": 2219.15,
+      "duration": 1.311,
+      "text": "other than D flip flops because we know"
+    },
+    {
+      "index": 586,
+      "start": 2219.16,
+      "end": 2221.67,
+      "duration": 2.51,
+      "text": "several other flip flops we know JK flip"
+    },
+    {
+      "index": 587,
+      "start": 2221.68,
+      "end": 2223.349,
+      "duration": 1.669,
+      "text": "flops we know D flip flops we know Sr"
+    },
+    {
+      "index": 588,
+      "start": 2223.359,
+      "end": 2229.349,
+      "duration": 5.99,
+      "text": "flip flops T flip flops suppose I say I"
+    },
+    {
+      "index": 589,
+      "start": 2252.99,
+      "end": 2253.0,
+      "duration": 0.01,
+      "text": "the D flip flop has"
+    },
+    {
+      "index": 590,
+      "start": 2253.0,
+      "end": 2255.79,
+      "duration": 2.79,
+      "text": "Advantage Q Plus is same as"
+    },
+    {
+      "index": 591,
+      "start": 2255.8,
+      "end": 2257.79,
+      "duration": 1.99,
+      "text": "D"
+    },
+    {
+      "index": 592,
+      "start": 2257.8,
+      "end": 2261.27,
+      "duration": 3.47,
+      "text": "q+ same as D that is the next state"
+    },
+    {
+      "index": 593,
+      "start": 2261.28,
+      "end": 2265.309,
+      "duration": 4.029,
+      "text": "value of the output is same as the"
+    },
+    {
+      "index": 594,
+      "start": 2265.319,
+      "end": 2267.55,
+      "duration": 2.231,
+      "text": "input give the input and clock it it"
+    },
+    {
+      "index": 595,
+      "start": 2267.56,
+      "end": 2269.91,
+      "duration": 2.35,
+      "text": "will become the nexted value"
+    },
+    {
+      "index": 596,
+      "start": 2269.92,
+      "end": 2272.63,
+      "duration": 2.71,
+      "text": "right so D flip as Advantage so I could"
+    },
+    {
+      "index": 597,
+      "start": 2272.64,
+      "end": 2274.829,
+      "duration": 2.189,
+      "text": "directly use as a d input a plus next"
+    },
+    {
+      "index": 598,
+      "start": 2274.839,
+      "end": 2277.829,
+      "duration": 2.99,
+      "text": "information is same as a d input JK flop"
+    },
+    {
+      "index": 599,
+      "start": 2277.839,
+      "end": 2280.55,
+      "duration": 2.711,
+      "text": "the next St depends on two inputs J and"
+    },
+    {
+      "index": 600,
+      "start": 2280.56,
+      "end": 2283.349,
+      "duration": 2.789,
+      "text": "K so I to modify the circuit if I wanted"
+    },
+    {
+      "index": 601,
+      "start": 2283.359,
+      "end": 2285.19,
+      "duration": 1.831,
+      "text": "to use JK flip flops instead of D flip"
+    },
+    {
+      "index": 602,
+      "start": 2285.2,
+      "end": 2308.91,
+      "duration": 23.71,
+      "text": "flops here"
+    },
+    {
+      "index": 603,
+      "start": 2310.75,
+      "end": 2310.76,
+      "duration": 0.01,
+      "text": "so you can have a a"
+    },
+    {
+      "index": 604,
+      "start": 2310.76,
+      "end": 2314.67,
+      "duration": 3.91,
+      "text": "bar that is q and Q"
+    },
+    {
+      "index": 605,
+      "start": 2314.68,
+      "end": 2317.589,
+      "duration": 2.909,
+      "text": "Bar J and"
+    },
+    {
+      "index": 606,
+      "start": 2317.599,
+      "end": 2321.03,
+      "duration": 3.431,
+      "text": "K J and"
+    },
+    {
+      "index": 607,
+      "start": 2321.04,
+      "end": 2325.71,
+      "duration": 4.67,
+      "text": "K J and"
+    },
+    {
+      "index": 608,
+      "start": 2338.51,
+      "end": 2338.52,
+      "duration": 0.01,
+      "text": "qqr BB bar"
+    },
+    {
+      "index": 609,
+      "start": 2338.52,
+      "end": 2340.99,
+      "duration": 2.47,
+      "text": "c"
+    },
+    {
+      "index": 610,
+      "start": 2362.75,
+      "end": 2362.76,
+      "duration": 0.01,
+      "text": "Source now the combination logic should"
+    },
+    {
+      "index": 611,
+      "start": 2362.76,
+      "end": 2366.109,
+      "duration": 3.349,
+      "text": "determine if I'm in a present State ABC"
+    },
+    {
+      "index": 612,
+      "start": 2366.119,
+      "end": 2369.55,
+      "duration": 3.431,
+      "text": "given by any of these values"
+    },
+    {
+      "index": 613,
+      "start": 2370.87,
+      "end": 2370.88,
+      "duration": 0.01,
+      "text": "the next"
+    },
+    {
+      "index": 614,
+      "start": 2370.88,
+      "end": 2373.79,
+      "duration": 2.91,
+      "text": "St I have to determine based on this"
+    },
+    {
+      "index": 615,
+      "start": 2373.8,
+      "end": 2378.47,
+      "duration": 4.67,
+      "text": "table so what input to J and K here in"
+    },
+    {
+      "index": 616,
+      "start": 2378.48,
+      "end": 2381.309,
+      "duration": 2.829,
+      "text": "the D flipflop case what input to D will"
+    },
+    {
+      "index": 617,
+      "start": 2381.319,
+      "end": 2382.829,
+      "duration": 1.51,
+      "text": "make it the next state this so for"
+    },
+    {
+      "index": 618,
+      "start": 2382.839,
+      "end": 2385.87,
+      "duration": 3.031,
+      "text": "example we thought about a flip flop a"
+    },
+    {
+      "index": 619,
+      "start": 2385.88,
+      "end": 2387.95,
+      "duration": 2.07,
+      "text": "flip flop is present set value zero next"
+    },
+    {
+      "index": 620,
+      "start": 2387.96,
+      "end": 2390.23,
+      "duration": 2.27,
+      "text": "set value is one so I mean to make D"
+    },
+    {
+      "index": 621,
+      "start": 2390.24,
+      "end": 2393.51,
+      "duration": 3.27,
+      "text": "equal to 1 next St becomes one next St"
+    },
+    {
+      "index": 622,
+      "start": 2393.52,
+      "end": 2395.63,
+      "duration": 2.11,
+      "text": "of the D flip has to be zero I have to"
+    },
+    {
+      "index": 623,
+      "start": 2395.64,
+      "end": 2398.27,
+      "duration": 2.63,
+      "text": "make D is equal Z so every clock period"
+    },
+    {
+      "index": 624,
+      "start": 2398.28,
+      "end": 2401.75,
+      "duration": 3.47,
+      "text": "I have to change the value of d as per"
+    },
+    {
+      "index": 625,
+      "start": 2401.76,
+      "end": 2403.27,
+      "duration": 1.51,
+      "text": "this table because next state value is"
+    },
+    {
+      "index": 626,
+      "start": 2403.28,
+      "end": 2407.069,
+      "duration": 3.789,
+      "text": "the same as D input in a d flip flop not"
+    },
+    {
+      "index": 627,
+      "start": 2407.079,
+      "end": 2409.71,
+      "duration": 2.631,
+      "text": "so in a JK flip flop JK flip flop output"
+    },
+    {
+      "index": 628,
+      "start": 2409.72,
+      "end": 2413.03,
+      "duration": 3.31,
+      "text": "decided by both J and K values if next"
+    },
+    {
+      "index": 629,
+      "start": 2413.04,
+      "end": 2415.589,
+      "duration": 2.549,
+      "text": "has be one person set is z next has be"
+    },
+    {
+      "index": 630,
+      "start": 2415.599,
+      "end": 2419.109,
+      "duration": 3.51,
+      "text": "one we want J is equ 1 K is equal"
+    },
+    {
+      "index": 631,
+      "start": 2419.119,
+      "end": 2422.67,
+      "duration": 3.551,
+      "text": "Z if the next has to be zero I have to"
+    },
+    {
+      "index": 632,
+      "start": 2422.68,
+      "end": 2424.95,
+      "duration": 2.27,
+      "text": "make J is = 0 K isal"
+    },
+    {
+      "index": 633,
+      "start": 2424.96,
+      "end": 2427.55,
+      "duration": 2.59,
+      "text": "1 since I need this type of thing things"
+    },
+    {
+      "index": 634,
+      "start": 2427.56,
+      "end": 2430.349,
+      "duration": 2.789,
+      "text": "I need J input K input J input K input"
+    },
+    {
+      "index": 635,
+      "start": 2430.359,
+      "end": 2433.91,
+      "duration": 3.551,
+      "text": "for each of them so I need J A"
+    },
+    {
+      "index": 636,
+      "start": 2433.92,
+      "end": 2441.67,
+      "duration": 7.75,
+      "text": "JB J A JB j c k a KB K C so J next value"
+    },
+    {
+      "index": 637,
+      "start": 2441.68,
+      "end": 2443.829,
+      "duration": 2.149,
+      "text": "will"
+    },
+    {
+      "index": 638,
+      "start": 2443.839,
+      "end": 2446.79,
+      "duration": 2.951,
+      "text": "be k"
+    },
+    {
+      "index": 639,
+      "start": 2446.8,
+      "end": 2449.589,
+      "duration": 2.789,
+      "text": "a JB"
+    },
+    {
+      "index": 640,
+      "start": 2449.599,
+      "end": 2455.829,
+      "duration": 6.23,
+      "text": "KB J C"
+    },
+    {
+      "index": 641,
+      "start": 2460.67,
+      "end": 2460.68,
+      "duration": 0.01,
+      "text": "KC of course give ABC as"
+    },
+    {
+      "index": 642,
+      "start": 2460.68,
+      "end": 2463.79,
+      "duration": 3.11,
+      "text": "inputs so we have seen that not only we"
+    },
+    {
+      "index": 643,
+      "start": 2463.8,
+      "end": 2465.71,
+      "duration": 1.91,
+      "text": "need ABC we have seen that ABC as well"
+    },
+    {
+      "index": 644,
+      "start": 2465.72,
+      "end": 2468.589,
+      "duration": 2.869,
+      "text": "as a bar B Bar C bar also required so if"
+    },
+    {
+      "index": 645,
+      "start": 2468.599,
+      "end": 2470.43,
+      "duration": 1.831,
+      "text": "you want to combine the drawing because"
+    },
+    {
+      "index": 646,
+      "start": 2470.44,
+      "end": 2472.99,
+      "duration": 2.55,
+      "text": "without making it too cluttered I can"
+    },
+    {
+      "index": 647,
+      "start": 2473.0,
+      "end": 2485.87,
+      "duration": 12.87,
+      "text": "draw CC Bar"
+    },
+    {
+      "index": 648,
+      "start": 2509.19,
+      "end": 2509.2,
+      "duration": 0.01,
+      "text": "becomes so a bar a a bar b b bar so I"
+    },
+    {
+      "index": 649,
+      "start": 2509.2,
+      "end": 2520.19,
+      "duration": 10.99,
+      "text": "can try as"
+    },
+    {
+      "index": 650,
+      "start": 2521.99,
+      "end": 2522.0,
+      "duration": 0.01,
+      "text": "so I'm not showing the in between values"
+    },
+    {
+      "index": 651,
+      "start": 2522.0,
+      "end": 2526.55,
+      "duration": 4.55,
+      "text": "assume that all of them are"
+    },
+    {
+      "index": 652,
+      "start": 2529.75,
+      "end": 2529.76,
+      "duration": 0.01,
+      "text": "dra avoid the overcrowding of this"
+    },
+    {
+      "index": 653,
+      "start": 2529.76,
+      "end": 2532.63,
+      "duration": 2.87,
+      "text": "drawing you can imagine that b bar is"
+    },
+    {
+      "index": 654,
+      "start": 2532.64,
+      "end": 2535.349,
+      "duration": 2.709,
+      "text": "conned here B is ConEd here a bar ised a"
+    },
+    {
+      "index": 655,
+      "start": 2535.359,
+      "end": 2538.349,
+      "duration": 2.99,
+      "text": "is so normally we show only a b"
+    },
+    {
+      "index": 656,
+      "start": 2538.359,
+      "end": 2541.15,
+      "duration": 2.791,
+      "text": "c even though a bar B Bar C bar is also"
+    },
+    {
+      "index": 657,
+      "start": 2541.16,
+      "end": 2543.95,
+      "duration": 2.79,
+      "text": "used they're also used normally in the"
+    },
+    {
+      "index": 658,
+      "start": 2543.96,
+      "end": 2548.309,
+      "duration": 4.349,
+      "text": "state graph the state this"
+    },
+    {
+      "index": 659,
+      "start": 2548.319,
+      "end": 2552.39,
+      "duration": 4.071,
+      "text": "model generalized model of the uh system"
+    },
+    {
+      "index": 660,
+      "start": 2552.4,
+      "end": 2554.75,
+      "duration": 2.35,
+      "text": "design we give only ABC as the inputs"
+    },
+    {
+      "index": 661,
+      "start": 2554.76,
+      "end": 2556.03,
+      "duration": 1.27,
+      "text": "even though you know that a bar B Bar C"
+    },
+    {
+      "index": 662,
+      "start": 2556.04,
+      "end": 2557.51,
+      "duration": 1.47,
+      "text": "bar is also"
+    },
+    {
+      "index": 663,
+      "start": 2557.52,
+      "end": 2561.03,
+      "duration": 3.51,
+      "text": "required now the question is then if on"
+    },
+    {
+      "index": 664,
+      "start": 2561.04,
+      "end": 2563.23,
+      "duration": 2.19,
+      "text": "the present set AAL 0 01 the next set is"
+    },
+    {
+      "index": 665,
+      "start": 2563.24,
+      "end": 2565.27,
+      "duration": 2.03,
+      "text": "1 0 0 what should be the value of J and"
+    },
+    {
+      "index": 666,
+      "start": 2565.28,
+      "end": 2567.589,
+      "duration": 2.309,
+      "text": "what should be the value of K pres set"
+    },
+    {
+      "index": 667,
+      "start": 2567.599,
+      "end": 2572.47,
+      "duration": 4.871,
+      "text": "value of zero for a nexted value of a"
+    },
+    {
+      "index": 668,
+      "start": 2572.48,
+      "end": 2575.589,
+      "duration": 3.109,
+      "text": "has to be 1 so I need to give J is equal"
+    },
+    {
+      "index": 669,
+      "start": 2575.599,
+      "end": 2578.349,
+      "duration": 2.75,
+      "text": "1 K is equal 0"
+    },
+    {
+      "index": 670,
+      "start": 2578.359,
+      "end": 2580.71,
+      "duration": 2.351,
+      "text": "for this so this has to be expanded this"
+    },
+    {
+      "index": 671,
+      "start": 2580.72,
+      "end": 2591.549,
+      "duration": 10.829,
+      "text": "table has to be expanded to"
+    },
+    {
+      "index": 672,
+      "start": 2594.71,
+      "end": 2594.72,
+      "duration": 0.01,
+      "text": "include a plus b plus C+ not directly"
+    },
+    {
+      "index": 673,
+      "start": 2594.72,
+      "end": 2598.109,
+      "duration": 3.389,
+      "text": "the inputs now A plus b plus C plus are"
+    },
+    {
+      "index": 674,
+      "start": 2598.119,
+      "end": 2599.91,
+      "duration": 1.791,
+      "text": "the inputs in the case of Def flip flops"
+    },
+    {
+      "index": 675,
+      "start": 2599.92,
+      "end": 2602.91,
+      "duration": 2.99,
+      "text": "because q+ is same as D whatever is the"
+    },
+    {
+      "index": 676,
+      "start": 2602.92,
+      "end": 2605.19,
+      "duration": 2.27,
+      "text": "present value of D that becomes the next"
+    },
+    {
+      "index": 677,
+      "start": 2605.2,
+      "end": 2608.309,
+      "duration": 3.109,
+      "text": "state value of the flip flop output in"
+    },
+    {
+      "index": 678,
+      "start": 2608.319,
+      "end": 2612.309,
+      "duration": 3.99,
+      "text": "the case of D flip-flop alone case of JK"
+    },
+    {
+      "index": 679,
+      "start": 2612.319,
+      "end": 2614.27,
+      "duration": 1.951,
+      "text": "flip-flop the next value will be"
+    },
+    {
+      "index": 680,
+      "start": 2614.28,
+      "end": 2617.15,
+      "duration": 2.87,
+      "text": "determined by J and K so what should be"
+    },
+    {
+      "index": 681,
+      "start": 2617.16,
+      "end": 2620.75,
+      "duration": 3.59,
+      "text": "the value of j a and Ka a what should be"
+    },
+    {
+      "index": 682,
+      "start": 2620.76,
+      "end": 2623.27,
+      "duration": 2.51,
+      "text": "the value of JB and"
+    },
+    {
+      "index": 683,
+      "start": 2623.28,
+      "end": 2625.75,
+      "duration": 2.47,
+      "text": "KB and what should be the value of JC"
+    },
+    {
+      "index": 684,
+      "start": 2625.76,
+      "end": 2630.829,
+      "duration": 5.069,
+      "text": "and"
+    },
+    {
+      "index": 685,
+      "start": 2634.39,
+      "end": 2634.4,
+      "duration": 0.01,
+      "text": "KC in order to make the change from 0 to"
+    },
+    {
+      "index": 686,
+      "start": 2634.4,
+      "end": 2638.99,
+      "duration": 4.59,
+      "text": "00 1 from 0 0 1 to 0 1 0 0 1 0 to 011 so"
+    },
+    {
+      "index": 687,
+      "start": 2639.0,
+      "end": 2642.47,
+      "duration": 3.47,
+      "text": "forth of course 0 0 State doesn't"
+    },
+    {
+      "index": 688,
+      "start": 2642.48,
+      "end": 2650.349,
+      "duration": 7.869,
+      "text": "occur don't"
+    },
+    {
+      "index": 689,
+      "start": 2666.27,
+      "end": 2666.28,
+      "duration": 0.01,
+      "text": "from state to state steer the flip flops"
+    },
+    {
+      "index": 690,
+      "start": 2666.28,
+      "end": 2670.43,
+      "duration": 4.15,
+      "text": "JK fli flop from a set of values a b c"
+    },
+    {
+      "index": 691,
+      "start": 2670.44,
+      "end": 2672.309,
+      "duration": 1.869,
+      "text": "the set of values a plus b plus C plus"
+    },
+    {
+      "index": 692,
+      "start": 2672.319,
+      "end": 2676.15,
+      "duration": 3.831,
+      "text": "in next state I need to have a proper"
+    },
+    {
+      "index": 693,
+      "start": 2676.16,
+      "end": 2677.589,
+      "duration": 1.429,
+      "text": "combination logic so the combination"
+    },
+    {
+      "index": 694,
+      "start": 2677.599,
+      "end": 2680.589,
+      "duration": 2.99,
+      "text": "logic will be having six outputs j a k"
+    },
+    {
+      "index": 695,
+      "start": 2680.599,
+      "end": 2683.43,
+      "duration": 2.831,
+      "text": "JB KB JC KC for present State inputs A B"
+    },
+    {
+      "index": 696,
+      "start": 2683.44,
+      "end": 2686.99,
+      "duration": 3.55,
+      "text": "C and A Bar B Bar C bar so the logic is"
+    },
+    {
+      "index": 697,
+      "start": 2687.0,
+      "end": 2688.27,
+      "duration": 1.27,
+      "text": "going to be different that logic will be"
+    },
+    {
+      "index": 698,
+      "start": 2688.28,
+      "end": 2691.47,
+      "duration": 3.19,
+      "text": "determined by the truth table or"
+    },
+    {
+      "index": 699,
+      "start": 2691.48,
+      "end": 2695.43,
+      "duration": 3.95,
+      "text": "the what is it called State"
+    },
+    {
+      "index": 700,
+      "start": 2695.44,
+      "end": 2699.43,
+      "duration": 3.99,
+      "text": "table in which we have to say what input"
+    },
+    {
+      "index": 701,
+      "start": 2699.44,
+      "end": 2703.51,
+      "duration": 4.07,
+      "text": "of J and what and Ka will make a go from"
+    },
+    {
+      "index": 702,
+      "start": 2703.52,
+      "end": 2705.63,
+      "duration": 2.11,
+      "text": "0 to"
+    },
+    {
+      "index": 703,
+      "start": 2705.64,
+      "end": 2709.43,
+      "duration": 3.79,
+      "text": "Zero from 0 to 0 0 to 0 what in of B"
+    },
+    {
+      "index": 704,
+      "start": 2709.44,
+      "end": 2711.03,
+      "duration": 1.59,
+      "text": "will make it from going from this to"
+    },
+    {
+      "index": 705,
+      "start": 2711.04,
+      "end": 2714.27,
+      "duration": 3.23,
+      "text": "this etc etc we have to no no from yeah"
+    },
+    {
+      "index": 706,
+      "start": 2714.28,
+      "end": 2716.589,
+      "duration": 2.309,
+      "text": "like that you have to"
+    },
+    {
+      "index": 707,
+      "start": 2716.599,
+      "end": 2719.67,
+      "duration": 3.071,
+      "text": "do so for that I need to"
+    },
+    {
+      "index": 708,
+      "start": 2719.68,
+      "end": 2722.23,
+      "duration": 2.55,
+      "text": "know so far we know only the behavior of"
+    },
+    {
+      "index": 709,
+      "start": 2722.24,
+      "end": 2724.51,
+      "duration": 2.27,
+      "text": "the flip-flops it's called"
+    },
+    {
+      "index": 710,
+      "start": 2724.52,
+      "end": 2726.75,
+      "duration": 2.23,
+      "text": "analysis the characteristic table we"
+    },
+    {
+      "index": 711,
+      "start": 2726.76,
+      "end": 2727.91,
+      "duration": 1.15,
+      "text": "call"
+    },
+    {
+      "index": 712,
+      "start": 2727.92,
+      "end": 2747.79,
+      "duration": 19.87,
+      "text": "it for example I said the tables"
+    },
+    {
+      "index": 713,
+      "start": 2750.63,
+      "end": 2750.64,
+      "duration": 0.01,
+      "text": "of so far we know the behavior of JK for"
+    },
+    {
+      "index": 714,
+      "start": 2750.64,
+      "end": 2754.03,
+      "duration": 3.39,
+      "text": "example take J and"
+    },
+    {
+      "index": 715,
+      "start": 2777.79,
+      "end": 2777.8,
+      "duration": 0.01,
+      "text": "memory we'll call it 0 1 0 1 1 1 1 Q Bar"
+    },
+    {
+      "index": 716,
+      "start": 2777.8,
+      "end": 2780.829,
+      "duration": 3.029,
+      "text": "isn't that so you want to call this qn +"
+    },
+    {
+      "index": 717,
+      "start": 2780.839,
+      "end": 2787.03,
+      "duration": 6.191,
+      "text": "1 this is qn or you want to call it q+"
+    },
+    {
+      "index": 718,
+      "start": 2787.04,
+      "end": 2790.79,
+      "duration": 3.75,
+      "text": "this is Q Bar is"
+    },
+    {
+      "index": 719,
+      "start": 2790.8,
+      "end": 2794.309,
+      "duration": 3.509,
+      "text": "q+ memory can be written as"
+    },
+    {
+      "index": 720,
+      "start": 2794.319,
+      "end": 2798.47,
+      "duration": 4.151,
+      "text": "Q the value is same next value same as"
+    },
+    {
+      "index": 721,
+      "start": 2798.48,
+      "end": 2802.19,
+      "duration": 3.71,
+      "text": "Val is"
+    },
+    {
+      "index": 722,
+      "start": 2805.27,
+      "end": 2805.28,
+      "duration": 0.01,
+      "text": "Q This is the characteristic"
+    },
+    {
+      "index": 723,
+      "start": 2805.28,
+      "end": 2808.47,
+      "duration": 3.19,
+      "text": "table the behavior table but you want a"
+    },
+    {
+      "index": 724,
+      "start": 2808.48,
+      "end": 2811.71,
+      "duration": 3.23,
+      "text": "reverse table the present value of is"
+    },
+    {
+      "index": 725,
+      "start": 2811.72,
+      "end": 2813.99,
+      "duration": 2.27,
+      "text": "one and the next has to be one what"
+    },
+    {
+      "index": 726,
+      "start": 2814.0,
+      "end": 2816.63,
+      "duration": 2.63,
+      "text": "should be the value of J and K so I need"
+    },
+    {
+      "index": 727,
+      "start": 2816.64,
+      "end": 2817.39,
+      "duration": 0.75,
+      "text": "four"
+    },
+    {
+      "index": 728,
+      "start": 2817.4,
+      "end": 2819.589,
+      "duration": 2.189,
+      "text": "transitions the person State can be zero"
+    },
+    {
+      "index": 729,
+      "start": 2819.599,
+      "end": 2821.349,
+      "duration": 1.75,
+      "text": "next St can be"
+    },
+    {
+      "index": 730,
+      "start": 2821.359,
+      "end": 2824.63,
+      "duration": 3.271,
+      "text": "zero person State can be one and present"
+    },
+    {
+      "index": 731,
+      "start": 2824.64,
+      "end": 2827.109,
+      "duration": 2.469,
+      "text": "State can be zero next St can be one"
+    },
+    {
+      "index": 732,
+      "start": 2827.119,
+      "end": 2829.27,
+      "duration": 2.151,
+      "text": "present St can be one and next St can be"
+    },
+    {
+      "index": 733,
+      "start": 2829.28,
+      "end": 2831.71,
+      "duration": 2.43,
+      "text": "zero present St can be one and next St"
+    },
+    {
+      "index": 734,
+      "start": 2831.72,
+      "end": 2833.91,
+      "duration": 2.19,
+      "text": "can be one so four possible transitions"
+    },
+    {
+      "index": 735,
+      "start": 2833.92,
+      "end": 2836.549,
+      "duration": 2.629,
+      "text": "are there are four possible transitions"
+    },
+    {
+      "index": 736,
+      "start": 2836.559,
+      "end": 2838.069,
+      "duration": 1.51,
+      "text": "for each transitions what should be the"
+    },
+    {
+      "index": 737,
+      "start": 2838.079,
+      "end": 2839.39,
+      "duration": 1.311,
+      "text": "value of J and what should be the value"
+    },
+    {
+      "index": 738,
+      "start": 2839.4,
+      "end": 2842.589,
+      "duration": 3.189,
+      "text": "of K such a table is a complimentary"
+    },
+    {
+      "index": 739,
+      "start": 2842.599,
+      "end": 2846.95,
+      "duration": 4.351,
+      "text": "table or I won't call it inverse table"
+    },
+    {
+      "index": 740,
+      "start": 2846.96,
+      "end": 2848.349,
+      "duration": 1.389,
+      "text": "I have to derive the table from the"
+    },
+    {
+      "index": 741,
+      "start": 2848.359,
+      "end": 2849.71,
+      "duration": 1.351,
+      "text": "characteristic table such a table is"
+    },
+    {
+      "index": 742,
+      "start": 2849.72,
+      "end": 2851.829,
+      "duration": 2.109,
+      "text": "called an excitation table this is the"
+    },
+    {
+      "index": 743,
+      "start": 2851.839,
+      "end": 2859.87,
+      "duration": 8.031,
+      "text": "characteristic"
+    },
+    {
+      "index": 744,
+      "start": 2863.589,
+      "end": 2863.599,
+      "duration": 0.01,
+      "text": "table of JK flip"
+    },
+    {
+      "index": 745,
+      "start": 2863.599,
+      "end": 2866.03,
+      "duration": 2.431,
+      "text": "flop in order to make it more explicit"
+    },
+    {
+      "index": 746,
+      "start": 2866.04,
+      "end": 2867.63,
+      "duration": 1.59,
+      "text": "what I'm going to do"
+    },
+    {
+      "index": 747,
+      "start": 2867.64,
+      "end": 2870.99,
+      "duration": 3.35,
+      "text": "is instead of making q and Q Bar Etc"
+    },
+    {
+      "index": 748,
+      "start": 2871.0,
+      "end": 2873.87,
+      "duration": 2.87,
+      "text": "which"
+    },
+    {
+      "index": 749,
+      "start": 2877.91,
+      "end": 2877.92,
+      "duration": 0.01,
+      "text": "are I'm going to say"
+    },
+    {
+      "index": 750,
+      "start": 2877.92,
+      "end": 2880.95,
+      "duration": 3.03,
+      "text": "the person set is 0 0 Q is z next set is"
+    },
+    {
+      "index": 751,
+      "start": 2880.96,
+      "end": 2903.71,
+      "duration": 22.75,
+      "text": "also"
+    },
+    {
+      "index": 752,
+      "start": 2905.67,
+      "end": 2905.68,
+      "duration": 0.01,
+      "text": "zero this is an expansion of the"
+    },
+    {
+      "index": 753,
+      "start": 2905.68,
+      "end": 2907.309,
+      "duration": 1.629,
+      "text": "characteristic table earlier I put"
+    },
+    {
+      "index": 754,
+      "start": 2907.319,
+      "end": 2909.67,
+      "duration": 2.351,
+      "text": "memory toggle and things like that have"
+    },
+    {
+      "index": 755,
+      "start": 2909.68,
+      "end": 2910.99,
+      "duration": 1.31,
+      "text": "been removed and put explicitly there"
+    },
+    {
+      "index": 756,
+      "start": 2911.0,
+      "end": 2912.349,
+      "duration": 1.349,
+      "text": "are only two values possible for"
+    },
+    {
+      "index": 757,
+      "start": 2912.359,
+      "end": 2914.589,
+      "duration": 2.23,
+      "text": "everything Q can only take a zero or a"
+    },
+    {
+      "index": 758,
+      "start": 2914.599,
+      "end": 2917.15,
+      "duration": 2.551,
+      "text": "one so present value of Q is zero next"
+    },
+    {
+      "index": 759,
+      "start": 2917.16,
+      "end": 2920.39,
+      "duration": 3.23,
+      "text": "value of Q is one in the toggle mode the"
+    },
+    {
+      "index": 760,
+      "start": 2920.4,
+      "end": 2922.47,
+      "duration": 2.07,
+      "text": "present set value of Q is one the next"
+    },
+    {
+      "index": 761,
+      "start": 2922.48,
+      "end": 2925.109,
+      "duration": 2.629,
+      "text": "set value is zero for toggle mode for"
+    },
+    {
+      "index": 762,
+      "start": 2925.119,
+      "end": 2926.75,
+      "duration": 1.631,
+      "text": "memory the present set is zero next is"
+    },
+    {
+      "index": 763,
+      "start": 2926.76,
+      "end": 2929.109,
+      "duration": 2.349,
+      "text": "also zero present set is one next St is"
+    },
+    {
+      "index": 764,
+      "start": 2929.119,
+      "end": 2931.43,
+      "duration": 2.311,
+      "text": "also one so that is an expanded"
+    },
+    {
+      "index": 765,
+      "start": 2931.44,
+      "end": 2932.829,
+      "duration": 1.389,
+      "text": "characteristic"
+    },
+    {
+      "index": 766,
+      "start": 2932.839,
+      "end": 2935.109,
+      "duration": 2.27,
+      "text": "table instead of putting memory State"
+    },
+    {
+      "index": 767,
+      "start": 2935.119,
+      "end": 2937.71,
+      "duration": 2.591,
+      "text": "and toggle State I have expanded it"
+    },
+    {
+      "index": 768,
+      "start": 2937.72,
+      "end": 2940.15,
+      "duration": 2.43,
+      "text": "if the inputs are 0 0 and the previous"
+    },
+    {
+      "index": 769,
+      "start": 2940.16,
+      "end": 2942.43,
+      "duration": 2.27,
+      "text": "output are Z next output is also"
+    },
+    {
+      "index": 770,
+      "start": 2942.44,
+      "end": 2945.109,
+      "duration": 2.669,
+      "text": "zero input is 0 0 the previous output is"
+    },
+    {
+      "index": 771,
+      "start": 2945.119,
+      "end": 2947.43,
+      "duration": 2.311,
+      "text": "one next output is also oh I'm sorry"
+    },
+    {
+      "index": 772,
+      "start": 2947.44,
+      "end": 2951.109,
+      "duration": 3.669,
+      "text": "this is one memory we all watching"
+    },
+    {
+      "index": 773,
+      "start": 2951.119,
+      "end": 2954.829,
+      "duration": 3.71,
+      "text": "without telling me present set is 0 0"
+    },
+    {
+      "index": 774,
+      "start": 2954.839,
+      "end": 2957.63,
+      "duration": 2.791,
+      "text": "it's a Memory the input"
+    },
+    {
+      "index": 775,
+      "start": 2957.64,
+      "end": 2961.27,
+      "duration": 3.63,
+      "text": "is now if the present set is 01 next St"
+    },
+    {
+      "index": 776,
+      "start": 2961.28,
+      "end": 2964.829,
+      "duration": 3.549,
+      "text": "is zero irrespective of what the Q was"
+    },
+    {
+      "index": 777,
+      "start": 2964.839,
+      "end": 2966.829,
+      "duration": 1.99,
+      "text": "if the inputs are one zero next St is is"
+    },
+    {
+      "index": 778,
+      "start": 2966.839,
+      "end": 2968.829,
+      "duration": 1.99,
+      "text": "one irrespective of what the previous"
+    },
+    {
+      "index": 779,
+      "start": 2968.839,
+      "end": 2972.349,
+      "duration": 3.51,
+      "text": "output was and J and k11 is a toggle"
+    },
+    {
+      "index": 780,
+      "start": 2972.359,
+      "end": 2974.99,
+      "duration": 2.631,
+      "text": "mode circuit is in set zero it will go"
+    },
+    {
+      "index": 781,
+      "start": 2975.0,
+      "end": 2976.829,
+      "duration": 1.829,
+      "text": "to state zero state zero it will go to"
+    },
+    {
+      "index": 782,
+      "start": 2976.839,
+      "end": 2978.51,
+      "duration": 1.671,
+      "text": "state"
+    },
+    {
+      "index": 783,
+      "start": 2978.52,
+      "end": 2980.87,
+      "duration": 2.35,
+      "text": "one from this table I have to derive"
+    },
+    {
+      "index": 784,
+      "start": 2980.88,
+      "end": 2985.43,
+      "duration": 4.55,
+      "text": "what is as an excitation"
+    },
+    {
+      "index": 785,
+      "start": 2988.75,
+      "end": 2988.76,
+      "duration": 0.01,
+      "text": "table in which I let to say if the value"
+    },
+    {
+      "index": 786,
+      "start": 2988.76,
+      "end": 2991.63,
+      "duration": 2.87,
+      "text": "of"
+    },
+    {
+      "index": 787,
+      "start": 2993.95,
+      "end": 2993.96,
+      "duration": 0.01,
+      "text": "Q is"
+    },
+    {
+      "index": 788,
+      "start": 2993.96,
+      "end": 2997.71,
+      "duration": 3.75,
+      "text": "zero and it has to go to zero"
+    },
+    {
+      "index": 789,
+      "start": 2997.72,
+      "end": 3000.87,
+      "duration": 3.15,
+      "text": "what should be J and what should be"
+    },
+    {
+      "index": 790,
+      "start": 3000.88,
+      "end": 3004.23,
+      "duration": 3.35,
+      "text": "K zero it hasn't go to one what should"
+    },
+    {
+      "index": 791,
+      "start": 3004.24,
+      "end": 3006.349,
+      "duration": 2.109,
+      "text": "be J and what should be K is one and it"
+    },
+    {
+      "index": 792,
+      "start": 3006.359,
+      "end": 3010.069,
+      "duration": 3.71,
+      "text": "has go to zero what should be J and K"
+    },
+    {
+      "index": 793,
+      "start": 3010.079,
+      "end": 3013.109,
+      "duration": 3.03,
+      "text": "one and one what so what are the values"
+    },
+    {
+      "index": 794,
+      "start": 3013.119,
+      "end": 3015.63,
+      "duration": 2.511,
+      "text": "of J and K for each possible transition"
+    },
+    {
+      "index": 795,
+      "start": 3015.64,
+      "end": 3018.75,
+      "duration": 3.11,
+      "text": "of Q from the Q can be zero it has to"
+    },
+    {
+      "index": 796,
+      "start": 3018.76,
+      "end": 3020.91,
+      "duration": 2.15,
+      "text": "remain zero Q is zero it has to become"
+    },
+    {
+      "index": 797,
+      "start": 3020.92,
+      "end": 3024.71,
+      "duration": 3.79,
+      "text": "one Q is one it has to go to zero one it"
+    },
+    {
+      "index": 798,
+      "start": 3024.72,
+      "end": 3027.47,
+      "duration": 2.75,
+      "text": "has to remain one each condition and for"
+    },
+    {
+      "index": 799,
+      "start": 3027.48,
+      "end": 3028.91,
+      "duration": 1.43,
+      "text": "each case what should be value of J and"
+    },
+    {
+      "index": 800,
+      "start": 3028.92,
+      "end": 3032.91,
+      "duration": 3.99,
+      "text": "K such a table is an sort of an inverse"
+    },
+    {
+      "index": 801,
+      "start": 3032.92,
+      "end": 3034.75,
+      "duration": 1.83,
+      "text": "table of the"
+    },
+    {
+      "index": 802,
+      "start": 3034.76,
+      "end": 3037.95,
+      "duration": 3.19,
+      "text": "transition this can be derived from this"
+    },
+    {
+      "index": 803,
+      "start": 3037.96,
+      "end": 3040.23,
+      "duration": 2.27,
+      "text": "table you look at this and do this and"
+    },
+    {
+      "index": 804,
+      "start": 3040.24,
+      "end": 3041.91,
+      "duration": 1.67,
+      "text": "that table is required for me to fill"
+    },
+    {
+      "index": 805,
+      "start": 3041.92,
+      "end": 3044.349,
+      "duration": 2.429,
+      "text": "this because here I would say if the"
+    },
+    {
+      "index": 806,
+      "start": 3044.359,
+      "end": 3046.349,
+      "duration": 1.99,
+      "text": "present set is 0 0"
+    },
+    {
+      "index": 807,
+      "start": 3046.359,
+      "end": 3049.309,
+      "duration": 2.95,
+      "text": "1 the next St has be 1 0 0 that means"
+    },
+    {
+      "index": 808,
+      "start": 3049.319,
+      "end": 3052.39,
+      "duration": 3.071,
+      "text": "flip-flop a has to go from 0 to one what"
+    },
+    {
+      "index": 809,
+      "start": 3052.4,
+      "end": 3053.99,
+      "duration": 1.59,
+      "text": "should be J and"
+    },
+    {
+      "index": 810,
+      "start": 3054.0,
+      "end": 3057.15,
+      "duration": 3.15,
+      "text": "Ka if the flip flop is b z"
+    },
+    {
+      "index": 811,
+      "start": 3057.16,
+      "end": 3058.789,
+      "duration": 1.629,
+      "text": "next it also has be zero so what should"
+    },
+    {
+      "index": 812,
+      "start": 3058.799,
+      "end": 3060.67,
+      "duration": 1.871,
+      "text": "be value of JB and KB for the flip flop"
+    },
+    {
+      "index": 813,
+      "start": 3060.68,
+      "end": 3062.39,
+      "duration": 1.71,
+      "text": "to remain"
+    },
+    {
+      "index": 814,
+      "start": 3062.4,
+      "end": 3065.549,
+      "duration": 3.149,
+      "text": "zero flip flop is C is one and has go to"
+    },
+    {
+      "index": 815,
+      "start": 3065.559,
+      "end": 3067.27,
+      "duration": 1.711,
+      "text": "zero for the next state what should be"
+    },
+    {
+      "index": 816,
+      "start": 3067.28,
+      "end": 3069.549,
+      "duration": 2.269,
+      "text": "the value of J JC and KC for this to"
+    },
+    {
+      "index": 817,
+      "start": 3069.559,
+      "end": 3072.309,
+      "duration": 2.75,
+      "text": "become one one to zero transition so"
+    },
+    {
+      "index": 818,
+      "start": 3072.319,
+      "end": 3074.109,
+      "duration": 1.79,
+      "text": "first I make the exitation table and"
+    },
+    {
+      "index": 819,
+      "start": 3074.119,
+      "end": 3076.27,
+      "duration": 2.151,
+      "text": "then use that exitation"
+    },
+    {
+      "index": 820,
+      "start": 3076.28,
+      "end": 3080.99,
+      "duration": 4.71,
+      "text": "table to fill those values of j a k JB"
+    },
+    {
+      "index": 821,
+      "start": 3081.0,
+      "end": 3083.03,
+      "duration": 2.03,
+      "text": "KB JC KC for each of the transitions"
+    },
+    {
+      "index": 822,
+      "start": 3083.04,
+      "end": 3085.589,
+      "duration": 2.549,
+      "text": "given in this diagram then we have the"
+    },
+    {
+      "index": 823,
+      "start": 3085.599,
+      "end": 3087.349,
+      "duration": 1.75,
+      "text": "combination logic"
+    },
+    {
+      "index": 824,
+      "start": 3087.359,
+      "end": 3093.309,
+      "duration": 5.95,
+      "text": "for J A JB JC k a KB KC by K maps and"
+    },
+    {
+      "index": 825,
+      "start": 3093.319,
+      "end": 3097.27,
+      "duration": 3.951,
+      "text": "then make this diagram of the steering"
+    },
+    {
+      "index": 826,
+      "start": 3097.28,
+      "end": 3099.99,
+      "duration": 2.71,
+      "text": "logic we will proceed with this the next"
+    },
+    {
+      "index": 827,
+      "start": 3100.0,
+      "end": 3102.35,
+      "duration": 2.35,
+      "text": "lecture"
+    },
+    {
+      "index": 828,
+      "start": 3102.36,
+      "end": 3176.47,
+      "duration": 74.11,
+      "text": "[Music]"
+    },
+    {
+      "index": 829,
+      "start": 3208.71,
+      "end": 3208.72,
+      "duration": 0.01,
+      "text": "t"
+    },
+    {
+      "index": 830,
+      "start": 3208.72,
+      "end": 3234.61,
+      "duration": 25.89,
+      "text": "[Music]"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

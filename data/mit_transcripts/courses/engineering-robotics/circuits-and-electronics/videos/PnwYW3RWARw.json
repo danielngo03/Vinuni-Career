@@ -1,0 +1,6367 @@
+{
+  "video": {
+    "id": "PnwYW3RWARw",
+    "title": "Lecture 20 - UP/DOWN COUNTERS",
+    "url": "https://www.youtube.com/watch?v=PnwYW3RWARw",
+    "channel": "nptelhrd",
+    "duration": 3094,
+    "language": "en"
+  },
+  "segment_count": 907,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.58,
+      "end": 0.59,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 1,
+      "start": 0.59,
+      "end": 0.98,
+      "duration": 0.39,
+      "text": "[Applause]"
+    },
+    {
+      "index": 2,
+      "start": 23.589,
+      "end": 23.599,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 3,
+      "start": 23.599,
+      "end": 26.71,
+      "duration": 3.111,
+      "text": "oh oh"
+    },
+    {
+      "index": 4,
+      "start": 26.72,
+      "end": 28.39,
+      "duration": 1.67,
+      "text": "sh"
+    },
+    {
+      "index": 5,
+      "start": 28.4,
+      "end": 30.79,
+      "duration": 2.39,
+      "text": "sh sh"
+    },
+    {
+      "index": 6,
+      "start": 30.8,
+      "end": 32.21,
+      "duration": 1.41,
+      "text": "me"
+    },
+    {
+      "index": 7,
+      "start": 32.22,
+      "end": 65.55,
+      "duration": 33.33,
+      "text": "[Music]"
+    },
+    {
+      "index": 8,
+      "start": 132.71,
+      "end": 132.72,
+      "duration": 0.01,
+      "text": "we were discussing the applications of"
+    },
+    {
+      "index": 9,
+      "start": 132.72,
+      "end": 133.67,
+      "duration": 0.95,
+      "text": "flip"
+    },
+    {
+      "index": 10,
+      "start": 133.68,
+      "end": 135.949,
+      "duration": 2.269,
+      "text": "flops in addition to being a storage"
+    },
+    {
+      "index": 11,
+      "start": 135.959,
+      "end": 139.229,
+      "duration": 3.27,
+      "text": "element a flip flop can also be used"
+    },
+    {
+      "index": 12,
+      "start": 139.239,
+      "end": 141.949,
+      "duration": 2.71,
+      "text": "for division of the frequency by a"
+    },
+    {
+      "index": 13,
+      "start": 141.959,
+      "end": 144.47,
+      "duration": 2.511,
+      "text": "factor of two each flip-flop divides a"
+    },
+    {
+      "index": 14,
+      "start": 144.48,
+      "end": 146.11,
+      "duration": 1.63,
+      "text": "clock frequency effect of"
+    },
+    {
+      "index": 15,
+      "start": 146.12,
+      "end": 150.07,
+      "duration": 3.95,
+      "text": "two also use can be used as a counter by"
+    },
+    {
+      "index": 16,
+      "start": 150.08,
+      "end": 154.07,
+      "duration": 3.99,
+      "text": "stacking flip flops serially connecting"
+    },
+    {
+      "index": 17,
+      "start": 154.08,
+      "end": 155.83,
+      "duration": 1.75,
+      "text": "series of flip flops"
+    },
+    {
+      "index": 18,
+      "start": 155.84,
+      "end": 159.229,
+      "duration": 3.389,
+      "text": "serially we can use it as a counter we"
+    },
+    {
+      "index": 19,
+      "start": 159.239,
+      "end": 162.309,
+      "duration": 3.07,
+      "text": "saw that yesterday the last"
+    },
+    {
+      "index": 20,
+      "start": 162.319,
+      "end": 166.47,
+      "duration": 4.151,
+      "text": "lecture the counting was you can"
+    },
+    {
+      "index": 21,
+      "start": 166.48,
+      "end": 169.19,
+      "duration": 2.71,
+      "text": "start it depends the count number of"
+    },
+    {
+      "index": 22,
+      "start": 169.2,
+      "end": 172.589,
+      "duration": 3.389,
+      "text": "counts number of distinct States the"
+    },
+    {
+      "index": 23,
+      "start": 172.599,
+      "end": 174.99,
+      "duration": 2.391,
+      "text": "counter has will depend on the number of"
+    },
+    {
+      "index": 24,
+      "start": 175.0,
+      "end": 175.91,
+      "duration": 0.91,
+      "text": "flip"
+    },
+    {
+      "index": 25,
+      "start": 175.92,
+      "end": 178.47,
+      "duration": 2.55,
+      "text": "flops so there are n flip flops the"
+    },
+    {
+      "index": 26,
+      "start": 178.48,
+      "end": 180.55,
+      "duration": 2.07,
+      "text": "number of distinct state the counter can"
+    },
+    {
+      "index": 27,
+      "start": 180.56,
+      "end": 183.35,
+      "duration": 2.79,
+      "text": "take his 2^ n so if you start the count"
+    },
+    {
+      "index": 28,
+      "start": 183.36,
+      "end": 189.27,
+      "duration": 5.91,
+      "text": "with zero go to 2 2 to n minus"
+    },
+    {
+      "index": 29,
+      "start": 189.28,
+      "end": 192.07,
+      "duration": 2.79,
+      "text": "1 you also do a down counting after all"
+    },
+    {
+      "index": 30,
+      "start": 192.08,
+      "end": 194.149,
+      "duration": 2.069,
+      "text": "down counting and up counting is not"
+    },
+    {
+      "index": 31,
+      "start": 194.159,
+      "end": 195.43,
+      "duration": 1.271,
+      "text": "very different"
+    },
+    {
+      "index": 32,
+      "start": 195.44,
+      "end": 197.67,
+      "duration": 2.23,
+      "text": "because we know that q and Q Bar are"
+    },
+    {
+      "index": 33,
+      "start": 197.68,
+      "end": 199.55,
+      "duration": 1.87,
+      "text": "always complimentary in any flip flop so"
+    },
+    {
+      "index": 34,
+      "start": 199.56,
+      "end": 202.19,
+      "duration": 2.63,
+      "text": "if you in a counting if you start the"
+    },
+    {
+      "index": 35,
+      "start": 202.2,
+      "end": 204.229,
+      "duration": 2.029,
+      "text": "count with 0 0"
+    },
+    {
+      "index": 36,
+      "start": 204.239,
+      "end": 217.75,
+      "duration": 13.511,
+      "text": "0 let us say it's a 3 bit counter"
+    },
+    {
+      "index": 37,
+      "start": 220.789,
+      "end": 220.799,
+      "duration": 0.01,
+      "text": "let us start let us assume this"
+    },
+    {
+      "index": 38,
+      "start": 220.799,
+      "end": 224.47,
+      "duration": 3.671,
+      "text": "three flip flops outputs a b c QA QB and"
+    },
+    {
+      "index": 39,
+      "start": 224.48,
+      "end": 227.99,
+      "duration": 3.51,
+      "text": "QC so the count start from 0 0 0 then 0"
+    },
+    {
+      "index": 40,
+      "start": 228.0,
+      "end": 229.149,
+      "duration": 1.149,
+      "text": "0"
+    },
+    {
+      "index": 41,
+      "start": 229.159,
+      "end": 245.67,
+      "duration": 16.511,
+      "text": "1 0 1 0"
+    },
+    {
+      "index": 42,
+      "start": 258.67,
+      "end": 258.68,
+      "duration": 0.01,
+      "text": "outputs this will be"
+    },
+    {
+      "index": 43,
+      "start": 258.68,
+      "end": 266.909,
+      "duration": 8.229,
+      "text": "111 will be 11"
+    },
+    {
+      "index": 44,
+      "start": 284.189,
+      "end": 284.199,
+      "duration": 0.01,
+      "text": "so all you have to do is to use the same"
+    },
+    {
+      "index": 45,
+      "start": 284.199,
+      "end": 287.35,
+      "duration": 3.151,
+      "text": "counter water counter we had for up"
+    },
+    {
+      "index": 46,
+      "start": 287.36,
+      "end": 291.15,
+      "duration": 3.79,
+      "text": "counting use the same counter but take"
+    },
+    {
+      "index": 47,
+      "start": 291.16,
+      "end": 295.71,
+      "duration": 4.55,
+      "text": "the the flip-flop stes from the Q Bar so"
+    },
+    {
+      "index": 48,
+      "start": 295.72,
+      "end": 299.11,
+      "duration": 3.39,
+      "text": "if you look at Q Bar instead of Q of the"
+    },
+    {
+      "index": 49,
+      "start": 299.12,
+      "end": 301.189,
+      "duration": 2.069,
+      "text": "flip flop you get a down"
+    },
+    {
+      "index": 50,
+      "start": 301.199,
+      "end": 304.39,
+      "duration": 3.191,
+      "text": "counter so I can have"
+    },
+    {
+      "index": 51,
+      "start": 304.4,
+      "end": 309.27,
+      "duration": 4.87,
+      "text": "a 0 to 2^ n minus 1"
+    },
+    {
+      "index": 52,
+      "start": 309.28,
+      "end": 317.95,
+      "duration": 8.67,
+      "text": "counter using n flip"
+    },
+    {
+      "index": 53,
+      "start": 323.189,
+      "end": 323.199,
+      "duration": 0.01,
+      "text": "flops and 2^ N minus 1 to 0 counter"
+    },
+    {
+      "index": 54,
+      "start": 323.199,
+      "end": 325.749,
+      "duration": 2.55,
+      "text": "also using the same n"
+    },
+    {
+      "index": 55,
+      "start": 325.759,
+      "end": 330.07,
+      "duration": 4.311,
+      "text": "flops depending on where I take the"
+    },
+    {
+      "index": 56,
+      "start": 330.08,
+      "end": 333.35,
+      "duration": 3.27,
+      "text": "outputs from take the output from"
+    },
+    {
+      "index": 57,
+      "start": 333.36,
+      "end": 336.99,
+      "duration": 3.63,
+      "text": "Q it becomes up"
+    },
+    {
+      "index": 58,
+      "start": 337.0,
+      "end": 340.909,
+      "duration": 3.909,
+      "text": "counting Q"
+    },
+    {
+      "index": 59,
+      "start": 342.99,
+      "end": 343.0,
+      "duration": 0.01,
+      "text": "outputs of"
+    },
+    {
+      "index": 60,
+      "start": 343.0,
+      "end": 345.309,
+      "duration": 2.309,
+      "text": "count Q Bar outputs if you take it"
+    },
+    {
+      "index": 61,
+      "start": 345.319,
+      "end": 352.67,
+      "duration": 7.351,
+      "text": "becomes a down"
+    },
+    {
+      "index": 62,
+      "start": 355.71,
+      "end": 355.72,
+      "duration": 0.01,
+      "text": "count so that is the very major use of a"
+    },
+    {
+      "index": 63,
+      "start": 355.72,
+      "end": 356.55,
+      "duration": 0.83,
+      "text": "flip"
+    },
+    {
+      "index": 64,
+      "start": 356.56,
+      "end": 362.27,
+      "duration": 5.71,
+      "text": "flop use use flip flops in a chain"
+    },
+    {
+      "index": 65,
+      "start": 370.67,
+      "end": 370.68,
+      "duration": 0.01,
+      "text": "events"
+    },
+    {
+      "index": 66,
+      "start": 370.68,
+      "end": 373.11,
+      "duration": 2.43,
+      "text": "now some sometimes I may not want to"
+    },
+    {
+      "index": 67,
+      "start": 373.12,
+      "end": 376.71,
+      "duration": 3.59,
+      "text": "count till the end of the uh the last"
+    },
+    {
+      "index": 68,
+      "start": 376.72,
+      "end": 379.71,
+      "duration": 2.99,
+      "text": "state that is possible with an N bit"
+    },
+    {
+      "index": 69,
+      "start": 379.72,
+      "end": 382.589,
+      "duration": 2.869,
+      "text": "counter we go from 0 to 2 N minus one"
+    },
+    {
+      "index": 70,
+      "start": 382.599,
+      "end": 385.87,
+      "duration": 3.271,
+      "text": "and then go back to Z after 2 N minus"
+    },
+    {
+      "index": 71,
+      "start": 385.88,
+      "end": 386.83,
+      "duration": 0.95,
+      "text": "one"
+    },
+    {
+      "index": 72,
+      "start": 386.84,
+      "end": 391.469,
+      "duration": 4.629,
+      "text": "count the flip flop becomes 0 0 0 again"
+    },
+    {
+      "index": 73,
+      "start": 391.479,
+      "end": 392.95,
+      "duration": 1.471,
+      "text": "so I need to go through the full cycle"
+    },
+    {
+      "index": 74,
+      "start": 392.96,
+      "end": 395.589,
+      "duration": 2.629,
+      "text": "of modulo I said modulus the total"
+    },
+    {
+      "index": 75,
+      "start": 395.599,
+      "end": 398.11,
+      "duration": 2.511,
+      "text": "number of states the counter has is"
+    },
+    {
+      "index": 76,
+      "start": 398.12,
+      "end": 401.909,
+      "duration": 3.789,
+      "text": "called"
+    },
+    {
+      "index": 77,
+      "start": 404.87,
+      "end": 404.88,
+      "duration": 0.01,
+      "text": "modulus suppose I want to terminate the"
+    },
+    {
+      "index": 78,
+      "start": 404.88,
+      "end": 408.11,
+      "duration": 3.23,
+      "text": "count at a at a at a at at a count Which"
+    },
+    {
+      "index": 79,
+      "start": 408.12,
+      "end": 410.11,
+      "duration": 1.99,
+      "text": "is less than the maximum of course can"
+    },
+    {
+      "index": 80,
+      "start": 410.12,
+      "end": 412.71,
+      "duration": 2.59,
+      "text": "do it more than maximum you want to"
+    },
+    {
+      "index": 81,
+      "start": 412.72,
+      "end": 414.23,
+      "duration": 1.51,
+      "text": "terminate the count at the count Which"
+    },
+    {
+      "index": 82,
+      "start": 414.24,
+      "end": 416.99,
+      "duration": 2.75,
+      "text": "is less than maximum and go back to zero"
+    },
+    {
+      "index": 83,
+      "start": 417.0,
+      "end": 419.909,
+      "duration": 2.909,
+      "text": "I should be able to do it example with"
+    },
+    {
+      "index": 84,
+      "start": 419.919,
+      "end": 422.629,
+      "duration": 2.71,
+      "text": "the four bits we can have 0 to 15 but I"
+    },
+    {
+      "index": 85,
+      "start": 422.639,
+      "end": 426.83,
+      "duration": 4.191,
+      "text": "may want to terminate with 9 0 to 9 and"
+    },
+    {
+      "index": 86,
+      "start": 426.84,
+      "end": 428.95,
+      "duration": 2.11,
+      "text": "start again with Zer there will be a"
+    },
+    {
+      "index": 87,
+      "start": 428.96,
+      "end": 430.83,
+      "duration": 1.87,
+      "text": "decimal counter a decimal counter will"
+    },
+    {
+      "index": 88,
+      "start": 430.84,
+      "end": 435.27,
+      "duration": 4.43,
+      "text": "come from 0 to 9 back to zero or for"
+    },
+    {
+      "index": 89,
+      "start": 435.28,
+      "end": 436.869,
+      "duration": 1.589,
+      "text": "that matter I may want to start a count"
+    },
+    {
+      "index": 90,
+      "start": 436.879,
+      "end": 439.029,
+      "duration": 2.15,
+      "text": "which a number which a state which is"
+    },
+    {
+      "index": 91,
+      "start": 439.039,
+      "end": 442.629,
+      "duration": 3.59,
+      "text": "more than greater than zero I may want"
+    },
+    {
+      "index": 92,
+      "start": 442.639,
+      "end": 445.15,
+      "duration": 2.511,
+      "text": "to start a counter from for some"
+    },
+    {
+      "index": 93,
+      "start": 445.16,
+      "end": 448.23,
+      "duration": 3.07,
+      "text": "reason three instead of zero and then go"
+    },
+    {
+      "index": 94,
+      "start": 448.24,
+      "end": 450.07,
+      "duration": 1.83,
+      "text": "to all the way up to 11 or or 12 or"
+    },
+    {
+      "index": 95,
+      "start": 450.08,
+      "end": 452.309,
+      "duration": 2.229,
+      "text": "whatever so I may be able to start at"
+    },
+    {
+      "index": 96,
+      "start": 452.319,
+      "end": 454.43,
+      "duration": 2.111,
+      "text": "any count and end at any count of course"
+    },
+    {
+      "index": 97,
+      "start": 454.44,
+      "end": 456.83,
+      "duration": 2.39,
+      "text": "within the range possible four bits you"
+    },
+    {
+      "index": 98,
+      "start": 456.84,
+      "end": 459.869,
+      "duration": 3.029,
+      "text": "can only go from 0 to 2 N - 1 four bits"
+    },
+    {
+      "index": 99,
+      "start": 459.879,
+      "end": 462.55,
+      "duration": 2.671,
+      "text": "you can go from 0 2^ 4 - 1 which is 0 to"
+    },
+    {
+      "index": 100,
+      "start": 462.56,
+      "end": 466.11,
+      "duration": 3.55,
+      "text": "15 the n Bits we can only the N counter"
+    },
+    {
+      "index": 101,
+      "start": 466.12,
+      "end": 467.99,
+      "duration": 1.87,
+      "text": "n flip flops you can only go from 0 to"
+    },
+    {
+      "index": 102,
+      "start": 468.0,
+      "end": 471.07,
+      "duration": 3.07,
+      "text": "2^ n minus one within this range I may"
+    },
+    {
+      "index": 103,
+      "start": 471.08,
+      "end": 473.189,
+      "duration": 2.109,
+      "text": "want to start any any count I want to"
+    },
+    {
+      "index": 104,
+      "start": 473.199,
+      "end": 476.189,
+      "duration": 2.99,
+      "text": "end any count and start all over again"
+    },
+    {
+      "index": 105,
+      "start": 476.199,
+      "end": 478.629,
+      "duration": 2.43,
+      "text": "how do you do that by terminating the"
+    },
+    {
+      "index": 106,
+      "start": 478.639,
+      "end": 481.23,
+      "duration": 2.591,
+      "text": "count and starting it again at any point"
+    },
+    {
+      "index": 107,
+      "start": 481.24,
+      "end": 483.35,
+      "duration": 2.11,
+      "text": "we can do that for that there's some"
+    },
+    {
+      "index": 108,
+      "start": 483.36,
+      "end": 485.309,
+      "duration": 1.949,
+      "text": "extra mechanism"
+    },
+    {
+      "index": 109,
+      "start": 485.319,
+      "end": 487.869,
+      "duration": 2.55,
+      "text": "required in any flipflop whether it's a"
+    },
+    {
+      "index": 110,
+      "start": 487.879,
+      "end": 490.07,
+      "duration": 2.191,
+      "text": "d flip flop or a JK flip"
+    },
+    {
+      "index": 111,
+      "start": 490.08,
+      "end": 492.589,
+      "duration": 2.509,
+      "text": "flop talking"
+    },
+    {
+      "index": 112,
+      "start": 492.599,
+      "end": 494.909,
+      "duration": 2.31,
+      "text": "about let's take a JK flip flop because"
+    },
+    {
+      "index": 113,
+      "start": 494.919,
+      "end": 499.469,
+      "duration": 4.55,
+      "text": "that's what we have been using for these"
+    },
+    {
+      "index": 114,
+      "start": 503.11,
+      "end": 503.12,
+      "duration": 0.01,
+      "text": "counters clock zero with zero it becomes"
+    },
+    {
+      "index": 115,
+      "start": 503.12,
+      "end": 506.83,
+      "duration": 3.71,
+      "text": "a negative Ed with a with an with an"
+    },
+    {
+      "index": 116,
+      "start": 506.84,
+      "end": 510.71,
+      "duration": 3.87,
+      "text": "arrow and a bubble right that's what I"
+    },
+    {
+      "index": 117,
+      "start": 510.72,
+      "end": 514.75,
+      "duration": 4.03,
+      "text": "said Q and A Q"
+    },
+    {
+      "index": 118,
+      "start": 517.269,
+      "end": 517.279,
+      "duration": 0.01,
+      "text": "Bar this is what we have been depicting"
+    },
+    {
+      "index": 119,
+      "start": 517.279,
+      "end": 521.87,
+      "duration": 4.591,
+      "text": "uh flip flop as until"
+    },
+    {
+      "index": 120,
+      "start": 523.949,
+      "end": 523.959,
+      "duration": 0.01,
+      "text": "now now I want to introduce two more"
+    },
+    {
+      "index": 121,
+      "start": 523.959,
+      "end": 525.75,
+      "duration": 1.791,
+      "text": "inputs to this flip flop course there"
+    },
+    {
+      "index": 122,
+      "start": 525.76,
+      "end": 528.35,
+      "duration": 2.59,
+      "text": "are two more inputs already which is the"
+    },
+    {
+      "index": 123,
+      "start": 528.36,
+      "end": 530.35,
+      "duration": 1.99,
+      "text": "power supply and ground no circuit will"
+    },
+    {
+      "index": 124,
+      "start": 530.36,
+      "end": 531.55,
+      "duration": 1.19,
+      "text": "work without power supply and ground"
+    },
+    {
+      "index": 125,
+      "start": 531.56,
+      "end": 534.75,
+      "duration": 3.19,
+      "text": "because these are active devices like"
+    },
+    {
+      "index": 126,
+      "start": 534.76,
+      "end": 536.99,
+      "duration": 2.23,
+      "text": "transistors either bipolar transistors"
+    },
+    {
+      "index": 127,
+      "start": 537.0,
+      "end": 540.509,
+      "duration": 3.509,
+      "text": "or M transistors inside this"
+    },
+    {
+      "index": 128,
+      "start": 540.519,
+      "end": 543.35,
+      "duration": 2.831,
+      "text": "since we have not gone into the circuit"
+    },
+    {
+      "index": 129,
+      "start": 543.36,
+      "end": 546.15,
+      "duration": 2.79,
+      "text": "details at at most we have gone into the"
+    },
+    {
+      "index": 130,
+      "start": 546.16,
+      "end": 550.43,
+      "duration": 4.27,
+      "text": "gate level details not beyond that gets"
+    },
+    {
+      "index": 131,
+      "start": 550.44,
+      "end": 553.15,
+      "duration": 2.71,
+      "text": "of transistors component gets of Active"
+    },
+    {
+      "index": 132,
+      "start": 553.16,
+      "end": 556.19,
+      "duration": 3.03,
+      "text": "Components like transistors and Mos"
+    },
+    {
+      "index": 133,
+      "start": 556.2,
+      "end": 558.75,
+      "duration": 2.55,
+      "text": "devices let's not get into that but we"
+    },
+    {
+      "index": 134,
+      "start": 558.76,
+      "end": 561.47,
+      "duration": 2.71,
+      "text": "need to power up those devices we need"
+    },
+    {
+      "index": 135,
+      "start": 561.48,
+      "end": 563.509,
+      "duration": 2.029,
+      "text": "VCC and ground or vdd and ground"
+    },
+    {
+      "index": 136,
+      "start": 563.519,
+      "end": 564.67,
+      "duration": 1.151,
+      "text": "depending on the"
+    },
+    {
+      "index": 137,
+      "start": 564.68,
+      "end": 568.31,
+      "duration": 3.63,
+      "text": "nomenclature leaving those two inputs"
+    },
+    {
+      "index": 138,
+      "start": 568.32,
+      "end": 571.63,
+      "duration": 3.31,
+      "text": "power supply and ground"
+    },
+    {
+      "index": 139,
+      "start": 573.99,
+      "end": 574.0,
+      "duration": 0.01,
+      "text": "apart there are two more inputs defined"
+    },
+    {
+      "index": 140,
+      "start": 574.0,
+      "end": 576.509,
+      "duration": 2.509,
+      "text": "for many of these flip flops these are"
+    },
+    {
+      "index": 141,
+      "start": 576.519,
+      "end": 583.03,
+      "duration": 6.511,
+      "text": "called preset and"
+    },
+    {
+      "index": 142,
+      "start": 586.15,
+      "end": 586.16,
+      "duration": 0.01,
+      "text": "clear this input is called PST stands"
+    },
+    {
+      "index": 143,
+      "start": 586.16,
+      "end": 587.43,
+      "duration": 1.27,
+      "text": "for"
+    },
+    {
+      "index": 144,
+      "start": 587.44,
+      "end": 593.03,
+      "duration": 5.59,
+      "text": "preset CL CLR stands for clear so"
+    },
+    {
+      "index": 145,
+      "start": 593.04,
+      "end": 597.269,
+      "duration": 4.229,
+      "text": "clear input preset"
+    },
+    {
+      "index": 146,
+      "start": 597.279,
+      "end": 601.47,
+      "duration": 4.191,
+      "text": "input what is the preset input"
+    },
+    {
+      "index": 147,
+      "start": 603.11,
+      "end": 603.12,
+      "duration": 0.01,
+      "text": "as you see there's a bubble here that"
+    },
+    {
+      "index": 148,
+      "start": 603.12,
+      "end": 606.35,
+      "duration": 3.23,
+      "text": "means there an inverted input an input"
+    },
+    {
+      "index": 149,
+      "start": 606.36,
+      "end": 607.91,
+      "duration": 1.55,
+      "text": "which is which"
+    },
+    {
+      "index": 150,
+      "start": 607.92,
+      "end": 611.43,
+      "duration": 3.51,
+      "text": "activates the circuit when it is low is"
+    },
+    {
+      "index": 151,
+      "start": 611.44,
+      "end": 613.67,
+      "duration": 2.23,
+      "text": "called an active low input such inputs"
+    },
+    {
+      "index": 152,
+      "start": 613.68,
+      "end": 615.71,
+      "duration": 2.03,
+      "text": "we draw with a"
+    },
+    {
+      "index": 153,
+      "start": 615.72,
+      "end": 618.15,
+      "duration": 2.43,
+      "text": "bubble an input which will be effective"
+    },
+    {
+      "index": 154,
+      "start": 618.16,
+      "end": 620.269,
+      "duration": 2.109,
+      "text": "when you make it zero that's called"
+    },
+    {
+      "index": 155,
+      "start": 620.279,
+      "end": 623.47,
+      "duration": 3.191,
+      "text": "active low input which will be active"
+    },
+    {
+      "index": 156,
+      "start": 623.48,
+      "end": 626.269,
+      "duration": 2.789,
+      "text": "which will activate the required thing"
+    },
+    {
+      "index": 157,
+      "start": 626.279,
+      "end": 627.71,
+      "duration": 1.431,
+      "text": "when you put a one on it it's called"
+    },
+    {
+      "index": 158,
+      "start": 627.72,
+      "end": 629.829,
+      "duration": 2.109,
+      "text": "active high input we don't"
+    },
+    {
+      "index": 159,
+      "start": 629.839,
+      "end": 630.87,
+      "duration": 1.031,
+      "text": "when you draw"
+    },
+    {
+      "index": 160,
+      "start": 630.88,
+      "end": 634.269,
+      "duration": 3.389,
+      "text": "a input with a bubble it say active low"
+    },
+    {
+      "index": 161,
+      "start": 634.279,
+      "end": 636.59,
+      "duration": 2.311,
+      "text": "input so the preset input when it"
+    },
+    {
+      "index": 162,
+      "start": 636.6,
+      "end": 639.67,
+      "duration": 3.07,
+      "text": "becomes zero what happens is it makes q1"
+    },
+    {
+      "index": 163,
+      "start": 639.68,
+      "end": 641.59,
+      "duration": 1.91,
+      "text": "irrespective of the values of J and K"
+    },
+    {
+      "index": 164,
+      "start": 641.6,
+      "end": 643.47,
+      "duration": 1.87,
+      "text": "and irrespective of the clock is posi"
+    },
+    {
+      "index": 165,
+      "start": 643.48,
+      "end": 647.269,
+      "duration": 3.789,
+      "text": "clock is zero or one that means the"
+    },
+    {
+      "index": 166,
+      "start": 647.279,
+      "end": 649.23,
+      "duration": 1.951,
+      "text": "preset input what is called in"
+    },
+    {
+      "index": 167,
+      "start": 649.24,
+      "end": 651.55,
+      "duration": 2.31,
+      "text": "terminology in digital in electronic"
+    },
+    {
+      "index": 168,
+      "start": 651.56,
+      "end": 654.629,
+      "duration": 3.069,
+      "text": "circuit pance"
+    },
+    {
+      "index": 169,
+      "start": 654.639,
+      "end": 656.91,
+      "duration": 2.271,
+      "text": "overrides all of the"
+    },
+    {
+      "index": 170,
+      "start": 656.92,
+      "end": 660.35,
+      "duration": 3.43,
+      "text": "inputs PST"
+    },
+    {
+      "index": 171,
+      "start": 660.36,
+      "end": 661.67,
+      "duration": 1.31,
+      "text": "is equal to"
+    },
+    {
+      "index": 172,
+      "start": 661.68,
+      "end": 665.23,
+      "duration": 3.55,
+      "text": "0 makes Q is equal"
+    },
+    {
+      "index": 173,
+      "start": 665.24,
+      "end": 668.99,
+      "duration": 3.75,
+      "text": "to"
+    },
+    {
+      "index": 174,
+      "start": 672.31,
+      "end": 672.32,
+      "duration": 0.01,
+      "text": "1 irrespective of the value of J K and"
+    },
+    {
+      "index": 175,
+      "start": 672.32,
+      "end": 674.79,
+      "duration": 2.47,
+      "text": "clock at that instant of time and as"
+    },
+    {
+      "index": 176,
+      "start": 674.8,
+      "end": 678.03,
+      "duration": 3.23,
+      "text": "long as pret is zero output continues to"
+    },
+    {
+      "index": 177,
+      "start": 678.04,
+      "end": 679.11,
+      "duration": 1.07,
+      "text": "be"
+    },
+    {
+      "index": 178,
+      "start": 679.12,
+      "end": 682.509,
+      "duration": 3.389,
+      "text": "one in between a clock may come and go"
+    },
+    {
+      "index": 179,
+      "start": 682.519,
+      "end": 683.829,
+      "duration": 1.31,
+      "text": "we may change"
+    },
+    {
+      "index": 180,
+      "start": 683.839,
+      "end": 687.55,
+      "duration": 3.711,
+      "text": "NK regardless of all"
+    },
+    {
+      "index": 181,
+      "start": 687.56,
+      "end": 690.35,
+      "duration": 2.79,
+      "text": "that okay so such an input is called an"
+    },
+    {
+      "index": 182,
+      "start": 690.36,
+      "end": 693.67,
+      "duration": 3.31,
+      "text": "overriding"
+    },
+    {
+      "index": 183,
+      "start": 697.31,
+      "end": 697.32,
+      "duration": 0.01,
+      "text": "input likewise a clear input will"
+    },
+    {
+      "index": 184,
+      "start": 697.32,
+      "end": 699.91,
+      "duration": 2.59,
+      "text": "make as the name suggests it clears the"
+    },
+    {
+      "index": 185,
+      "start": 699.92,
+      "end": 706.03,
+      "duration": 6.11,
+      "text": "output means Q will become"
+    },
+    {
+      "index": 186,
+      "start": 708.55,
+      "end": 708.56,
+      "duration": 0.01,
+      "text": "zero these"
+    },
+    {
+      "index": 187,
+      "start": 708.56,
+      "end": 716.31,
+      "duration": 7.75,
+      "text": "happen irrespective"
+    },
+    {
+      "index": 188,
+      "start": 723.43,
+      "end": 723.44,
+      "duration": 0.01,
+      "text": "so these two inputs are called as I said"
+    },
+    {
+      "index": 189,
+      "start": 723.44,
+      "end": 729.75,
+      "duration": 6.31,
+      "text": "overriding"
+    },
+    {
+      "index": 190,
+      "start": 733.15,
+      "end": 733.16,
+      "duration": 0.01,
+      "text": "inputs so you need extra logic not to do"
+    },
+    {
+      "index": 191,
+      "start": 733.16,
+      "end": 734.99,
+      "duration": 1.83,
+      "text": "that you can get into this a little bit"
+    },
+    {
+      "index": 192,
+      "start": 735.0,
+      "end": 735.87,
+      "duration": 0.87,
+      "text": "extra"
+    },
+    {
+      "index": 193,
+      "start": 735.88,
+      "end": 738.189,
+      "duration": 2.309,
+      "text": "Logics where you have to make sure that"
+    },
+    {
+      "index": 194,
+      "start": 738.199,
+      "end": 739.99,
+      "duration": 1.791,
+      "text": "this is"
+    },
+    {
+      "index": 195,
+      "start": 740.0,
+      "end": 743.67,
+      "duration": 3.67,
+      "text": "overriding um property of making the"
+    },
+    {
+      "index": 196,
+      "start": 743.68,
+      "end": 746.829,
+      "duration": 3.149,
+      "text": "output one or zero as the case may be so"
+    },
+    {
+      "index": 197,
+      "start": 746.839,
+      "end": 748.55,
+      "duration": 1.711,
+      "text": "that means I can now write a table which"
+    },
+    {
+      "index": 198,
+      "start": 748.56,
+      "end": 753.35,
+      "duration": 4.79,
+      "text": "is called pre set clear table and preset"
+    },
+    {
+      "index": 199,
+      "start": 753.36,
+      "end": 757.43,
+      "duration": 4.07,
+      "text": "clear Q preset is zero clear is one"
+    },
+    {
+      "index": 200,
+      "start": 757.44,
+      "end": 758.55,
+      "duration": 1.11,
+      "text": "output is"
+    },
+    {
+      "index": 201,
+      "start": 758.56,
+      "end": 764.59,
+      "duration": 6.03,
+      "text": "one PR is one output is"
+    },
+    {
+      "index": 202,
+      "start": 768.87,
+      "end": 768.88,
+      "duration": 0.01,
+      "text": "zero output is clear is zero output is"
+    },
+    {
+      "index": 203,
+      "start": 768.88,
+      "end": 772.71,
+      "duration": 3.83,
+      "text": "zero when preset is"
+    },
+    {
+      "index": 204,
+      "start": 772.72,
+      "end": 776.71,
+      "duration": 3.99,
+      "text": "zero preset is one and out clear one"
+    },
+    {
+      "index": 205,
+      "start": 776.72,
+      "end": 780.069,
+      "duration": 3.349,
+      "text": "then and only then"
+    },
+    {
+      "index": 206,
+      "start": 780.079,
+      "end": 782.829,
+      "duration": 2.75,
+      "text": "the flip-flop functions normally taking"
+    },
+    {
+      "index": 207,
+      "start": 782.839,
+      "end": 786.59,
+      "duration": 3.751,
+      "text": "J and K into input J and K as input s"
+    },
+    {
+      "index": 208,
+      "start": 786.6,
+      "end": 790.23,
+      "duration": 3.63,
+      "text": "the clock cycle at the clock cycle it"
+    },
+    {
+      "index": 209,
+      "start": 790.24,
+      "end": 793.47,
+      "duration": 3.23,
+      "text": "goes past high or low all that will"
+    },
+    {
+      "index": 210,
+      "start": 793.48,
+      "end": 795.99,
+      "duration": 2.51,
+      "text": "determine only when PR and clear are"
+    },
+    {
+      "index": 211,
+      "start": 796.0,
+      "end": 798.11,
+      "duration": 2.11,
+      "text": "both made one they will have no"
+    },
+    {
+      "index": 212,
+      "start": 798.12,
+      "end": 800.15,
+      "duration": 2.03,
+      "text": "influence on the normal normal"
+    },
+    {
+      "index": 213,
+      "start": 800.16,
+      "end": 802.43,
+      "duration": 2.27,
+      "text": "functioning of the flip flop so the"
+    },
+    {
+      "index": 214,
+      "start": 802.44,
+      "end": 810.23,
+      "duration": 7.79,
+      "text": "flip-flop acts normally"
+    },
+    {
+      "index": 215,
+      "start": 813.31,
+      "end": 813.32,
+      "duration": 0.01,
+      "text": "as defined by the inputs and the clock"
+    },
+    {
+      "index": 216,
+      "start": 813.32,
+      "end": 816.11,
+      "duration": 2.79,
+      "text": "when you say normal the behavior depends"
+    },
+    {
+      "index": 217,
+      "start": 816.12,
+      "end": 819.15,
+      "duration": 3.03,
+      "text": "on the values of the input J and K and"
+    },
+    {
+      "index": 218,
+      "start": 819.16,
+      "end": 820.67,
+      "duration": 1.51,
+      "text": "the"
+    },
+    {
+      "index": 219,
+      "start": 820.68,
+      "end": 824.069,
+      "duration": 3.389,
+      "text": "clock and if both are zero which is"
+    },
+    {
+      "index": 220,
+      "start": 824.079,
+      "end": 827.069,
+      "duration": 2.99,
+      "text": "which is predominant are there because"
+    },
+    {
+      "index": 221,
+      "start": 827.079,
+      "end": 829.829,
+      "duration": 2.75,
+      "text": "each of them is a pre overriding input"
+    },
+    {
+      "index": 222,
+      "start": 829.839,
+      "end": 831.99,
+      "duration": 2.151,
+      "text": "and both are zero which is overriding we"
+    },
+    {
+      "index": 223,
+      "start": 832.0,
+      "end": 834.31,
+      "duration": 2.31,
+      "text": "don't know that so one of those states"
+    },
+    {
+      "index": 224,
+      "start": 834.32,
+      "end": 836.189,
+      "duration": 1.869,
+      "text": "which is not permitted don't try to do"
+    },
+    {
+      "index": 225,
+      "start": 836.199,
+      "end": 838.829,
+      "duration": 2.63,
+      "text": "both clear and preset zero that means"
+    },
+    {
+      "index": 226,
+      "start": 838.839,
+      "end": 841.829,
+      "duration": 2.99,
+      "text": "there's uncertainty there and I always"
+    },
+    {
+      "index": 227,
+      "start": 841.839,
+      "end": 843.069,
+      "duration": 1.23,
+      "text": "tell you the uncertainty should be"
+    },
+    {
+      "index": 228,
+      "start": 843.079,
+      "end": 848.15,
+      "duration": 5.071,
+      "text": "avoided at all cost in any design so not"
+    },
+    {
+      "index": 229,
+      "start": 848.16,
+      "end": 854.269,
+      "duration": 6.109,
+      "text": "use make sure you will not"
+    },
+    {
+      "index": 230,
+      "start": 863.189,
+      "end": 863.199,
+      "duration": 0.01,
+      "text": "time make sure that pret and clear are"
+    },
+    {
+      "index": 231,
+      "start": 863.199,
+      "end": 866.03,
+      "duration": 2.831,
+      "text": "not made zero at the same"
+    },
+    {
+      "index": 232,
+      "start": 866.04,
+      "end": 868.189,
+      "duration": 2.149,
+      "text": "time now this property is going to help"
+    },
+    {
+      "index": 233,
+      "start": 868.199,
+      "end": 871.35,
+      "duration": 3.151,
+      "text": "me to start our count anywhere I like Ed"
+    },
+    {
+      "index": 234,
+      "start": 871.36,
+      "end": 873.99,
+      "duration": 2.63,
+      "text": "May count anywhere I like suppose I go"
+    },
+    {
+      "index": 235,
+      "start": 874.0,
+      "end": 876.269,
+      "duration": 2.269,
+      "text": "from 0 to 2 nus"
+    },
+    {
+      "index": 236,
+      "start": 876.279,
+      "end": 879.069,
+      "duration": 2.79,
+      "text": "1 2^ n minus 1"
+    },
+    {
+      "index": 237,
+      "start": 879.079,
+      "end": 883.47,
+      "duration": 4.391,
+      "text": "and at some intermediate point I want to"
+    },
+    {
+      "index": 238,
+      "start": 883.48,
+      "end": 887.35,
+      "duration": 3.87,
+      "text": "terminate and make it 0 0 I can do that"
+    },
+    {
+      "index": 239,
+      "start": 887.36,
+      "end": 891.069,
+      "duration": 3.709,
+      "text": "by detecting that point and clearing all"
+    },
+    {
+      "index": 240,
+      "start": 891.079,
+      "end": 893.99,
+      "duration": 2.911,
+      "text": "the flip flops at that"
+    },
+    {
+      "index": 241,
+      "start": 894.0,
+      "end": 896.189,
+      "duration": 2.189,
+      "text": "point similarly I want to start at a"
+    },
+    {
+      "index": 242,
+      "start": 896.199,
+      "end": 897.509,
+      "duration": 1.31,
+      "text": "count other than"
+    },
+    {
+      "index": 243,
+      "start": 897.519,
+      "end": 899.91,
+      "duration": 2.391,
+      "text": "zero I detect the point at which I want"
+    },
+    {
+      "index": 244,
+      "start": 899.92,
+      "end": 904.11,
+      "duration": 4.19,
+      "text": "that to be to happen and use my preset"
+    },
+    {
+      "index": 245,
+      "start": 904.12,
+      "end": 906.59,
+      "duration": 2.47,
+      "text": "inputs to get the flip-flops to"
+    },
+    {
+      "index": 246,
+      "start": 906.6,
+      "end": 909.31,
+      "duration": 2.71,
+      "text": "different values so use preset and clear"
+    },
+    {
+      "index": 247,
+      "start": 909.32,
+      "end": 911.03,
+      "duration": 1.71,
+      "text": "inputs to get the flip flops to"
+    },
+    {
+      "index": 248,
+      "start": 911.04,
+      "end": 913.91,
+      "duration": 2.87,
+      "text": "different values other than the normal"
+    },
+    {
+      "index": 249,
+      "start": 913.92,
+      "end": 916.47,
+      "duration": 2.55,
+      "text": "sequence that is where you get an"
+    },
+    {
+      "index": 250,
+      "start": 916.48,
+      "end": 919.79,
+      "duration": 3.31,
+      "text": "orbitary count counter orbitary it can"
+    },
+    {
+      "index": 251,
+      "start": 919.8,
+      "end": 921.23,
+      "duration": 1.43,
+      "text": "start arbitarily and end arbitarily"
+    },
+    {
+      "index": 252,
+      "start": 921.24,
+      "end": 924.629,
+      "duration": 3.389,
+      "text": "course defined by you orbit I say is"
+    },
+    {
+      "index": 253,
+      "start": 924.639,
+      "end": 927.069,
+      "duration": 2.43,
+      "text": "random arbitrary that means you can"
+    },
+    {
+      "index": 254,
+      "start": 927.079,
+      "end": 929.47,
+      "duration": 2.391,
+      "text": "decide what you want"
+    },
+    {
+      "index": 255,
+      "start": 929.48,
+      "end": 931.11,
+      "duration": 1.63,
+      "text": "so let us take a simple example of a"
+    },
+    {
+      "index": 256,
+      "start": 931.12,
+      "end": 935.749,
+      "duration": 4.629,
+      "text": "3-bit"
+    },
+    {
+      "index": 257,
+      "start": 937.949,
+      "end": 937.959,
+      "duration": 0.01,
+      "text": "counter but it is up or down doesn't"
+    },
+    {
+      "index": 258,
+      "start": 937.959,
+      "end": 940.829,
+      "duration": 2.87,
+      "text": "matter because as I said was always all"
+    },
+    {
+      "index": 259,
+      "start": 940.839,
+      "end": 944.59,
+      "duration": 3.751,
+      "text": "you have to do is to take Q or Q Bar for"
+    },
+    {
+      "index": 260,
+      "start": 944.6,
+      "end": 946.03,
+      "duration": 1.43,
+      "text": "up and down"
+    },
+    {
+      "index": 261,
+      "start": 946.04,
+      "end": 948.11,
+      "duration": 2.07,
+      "text": "respectively so the three bit counter"
+    },
+    {
+      "index": 262,
+      "start": 948.12,
+      "end": 949.03,
+      "duration": 0.91,
+      "text": "will"
+    },
+    {
+      "index": 263,
+      "start": 949.04,
+      "end": 959.11,
+      "duration": 10.07,
+      "text": "be three flip-flops"
+    },
+    {
+      "index": 264,
+      "start": 1030.949,
+      "end": 1030.959,
+      "duration": 0.01,
+      "text": "so I will call this a b c three"
+    },
+    {
+      "index": 265,
+      "start": 1030.959,
+      "end": 1033.39,
+      "duration": 2.431,
+      "text": "counts a is the least sign most"
+    },
+    {
+      "index": 266,
+      "start": 1033.4,
+      "end": 1034.71,
+      "duration": 1.31,
+      "text": "significant bit and C is the least"
+    },
+    {
+      "index": 267,
+      "start": 1034.72,
+      "end": 1039.429,
+      "duration": 4.709,
+      "text": "signant bit so this should be a q"
+    },
+    {
+      "index": 268,
+      "start": 1039.439,
+      "end": 1042.59,
+      "duration": 3.151,
+      "text": "a this is QB this is QC R you want to"
+    },
+    {
+      "index": 269,
+      "start": 1042.6,
+      "end": 1048.39,
+      "duration": 5.79,
+      "text": "call this a this is a b c so I have a b"
+    },
+    {
+      "index": 270,
+      "start": 1048.4,
+      "end": 1049.35,
+      "duration": 0.95,
+      "text": "c"
+    },
+    {
+      "index": 271,
+      "start": 1049.36,
+      "end": 1057.19,
+      "duration": 7.83,
+      "text": "normally I go 0 0 0 0 0 1 0 1 0 0 1 1 1"
+    },
+    {
+      "index": 272,
+      "start": 1057.2,
+      "end": 1063.789,
+      "duration": 6.589,
+      "text": "0 0 1 0 1 1 1 0 1 1 1 or if I take the"
+    },
+    {
+      "index": 273,
+      "start": 1063.799,
+      "end": 1067.59,
+      "duration": 3.791,
+      "text": "compliments it will be 1 1 1 1 1 0 so"
+    },
+    {
+      "index": 274,
+      "start": 1067.6,
+      "end": 1069.39,
+      "duration": 1.79,
+      "text": "forth to 0 0"
+    },
+    {
+      "index": 275,
+      "start": 1069.4,
+      "end": 1072.029,
+      "duration": 2.629,
+      "text": "0 Ive just drawn up counter you can also"
+    },
+    {
+      "index": 276,
+      "start": 1072.039,
+      "end": 1073.909,
+      "duration": 1.87,
+      "text": "draw the down counter by taking Q bars"
+    },
+    {
+      "index": 277,
+      "start": 1073.919,
+      "end": 1074.95,
+      "duration": 1.031,
+      "text": "instead of"
+    },
+    {
+      "index": 278,
+      "start": 1074.96,
+      "end": 1079.149,
+      "duration": 4.189,
+      "text": "Q's that's what I said just now"
+    },
+    {
+      "index": 279,
+      "start": 1079.159,
+      "end": 1082.31,
+      "duration": 3.151,
+      "text": "now let us say I want after"
+    },
+    {
+      "index": 280,
+      "start": 1082.32,
+      "end": 1085.549,
+      "duration": 3.229,
+      "text": "five Z that means I want Count"
+    },
+    {
+      "index": 281,
+      "start": 1085.559,
+      "end": 1087.87,
+      "duration": 2.311,
+      "text": "from"
+    },
+    {
+      "index": 282,
+      "start": 1087.88,
+      "end": 1093.909,
+      "duration": 6.029,
+      "text": "0 1 2 3 4 5 and back to"
+    },
+    {
+      "index": 283,
+      "start": 1093.919,
+      "end": 1096.39,
+      "duration": 2.471,
+      "text": "zero I don't want to count six and S to"
+    },
+    {
+      "index": 284,
+      "start": 1096.4,
+      "end": 1099.11,
+      "duration": 2.71,
+      "text": "go through for some reason I want only"
+    },
+    {
+      "index": 285,
+      "start": 1099.12,
+      "end": 1102.71,
+      "duration": 3.59,
+      "text": "six states to be"
+    },
+    {
+      "index": 286,
+      "start": 1102.72,
+      "end": 1105.149,
+      "duration": 2.429,
+      "text": "counted so all I do is to detect this"
+    },
+    {
+      "index": 287,
+      "start": 1105.159,
+      "end": 1107.47,
+      "duration": 2.311,
+      "text": "when five is"
+    },
+    {
+      "index": 288,
+      "start": 1107.48,
+      "end": 1110.95,
+      "duration": 3.47,
+      "text": "reached click C all the flip flops Again"
+    },
+    {
+      "index": 289,
+      "start": 1110.96,
+      "end": 1113.63,
+      "duration": 2.67,
+      "text": "by using the clear inputs so all these"
+    },
+    {
+      "index": 290,
+      "start": 1113.64,
+      "end": 1115.99,
+      "duration": 2.35,
+      "text": "flip flops are clear input and preset"
+    },
+    {
+      "index": 291,
+      "start": 1116.0,
+      "end": 1118.789,
+      "duration": 2.789,
+      "text": "inputs so I detect the count that I want"
+    },
+    {
+      "index": 292,
+      "start": 1118.799,
+      "end": 1121.75,
+      "duration": 2.951,
+      "text": "to count and that count"
+    },
+    {
+      "index": 293,
+      "start": 1121.76,
+      "end": 1124.87,
+      "duration": 3.11,
+      "text": "reaches I have to clear"
+    },
+    {
+      "index": 294,
+      "start": 1124.88,
+      "end": 1127.669,
+      "duration": 2.789,
+      "text": "them but I cannot clear it as soon as"
+    },
+    {
+      "index": 295,
+      "start": 1127.679,
+      "end": 1129.909,
+      "duration": 2.23,
+      "text": "five is reached because if I clear it as"
+    },
+    {
+      "index": 296,
+      "start": 1129.919,
+      "end": 1131.99,
+      "duration": 2.071,
+      "text": "soon as five is reached assuming there's"
+    },
+    {
+      "index": 297,
+      "start": 1132.0,
+      "end": 1135.27,
+      "duration": 3.27,
+      "text": "no delay in the clearing operation I"
+    },
+    {
+      "index": 298,
+      "start": 1135.28,
+      "end": 1136.95,
+      "duration": 1.67,
+      "text": "just reached five and it's cleared that"
+    },
+    {
+      "index": 299,
+      "start": 1136.96,
+      "end": 1139.83,
+      "duration": 2.87,
+      "text": "means I'll go 0 1 2 three four"
+    },
+    {
+      "index": 300,
+      "start": 1139.84,
+      "end": 1143.43,
+      "duration": 3.59,
+      "text": "completely done four is completely done"
+    },
+    {
+      "index": 301,
+      "start": 1143.44,
+      "end": 1145.23,
+      "duration": 1.79,
+      "text": "five has just started but I want each"
+    },
+    {
+      "index": 302,
+      "start": 1145.24,
+      "end": 1146.87,
+      "duration": 1.63,
+      "text": "count to be last for one clock period"
+    },
+    {
+      "index": 303,
+      "start": 1146.88,
+      "end": 1149.51,
+      "duration": 2.63,
+      "text": "isn't it I want each count to Lo for L"
+    },
+    {
+      "index": 304,
+      "start": 1149.52,
+      "end": 1154.11,
+      "duration": 4.59,
+      "text": "for one clock period so after 0 1 2 3"
+    },
+    {
+      "index": 305,
+      "start": 1154.12,
+      "end": 1156.83,
+      "duration": 2.71,
+      "text": "4 as soon as five is reached assuming"
+    },
+    {
+      "index": 306,
+      "start": 1156.84,
+      "end": 1159.909,
+      "duration": 3.069,
+      "text": "there's no delay in the process of reset"
+    },
+    {
+      "index": 307,
+      "start": 1159.919,
+      "end": 1161.909,
+      "duration": 1.99,
+      "text": "clearing as soon as five is reached it"
+    },
+    {
+      "index": 308,
+      "start": 1161.919,
+      "end": 1163.23,
+      "duration": 1.311,
+      "text": "become zero that means I will not have"
+    },
+    {
+      "index": 309,
+      "start": 1163.24,
+      "end": 1166.149,
+      "duration": 2.909,
+      "text": "one full clock period for five so really"
+    },
+    {
+      "index": 310,
+      "start": 1166.159,
+      "end": 1169.149,
+      "duration": 2.99,
+      "text": "I should start looking at six"
+    },
+    {
+      "index": 311,
+      "start": 1169.159,
+      "end": 1171.95,
+      "duration": 2.791,
+      "text": "when six reaches if I want to terminate"
+    },
+    {
+      "index": 312,
+      "start": 1171.96,
+      "end": 1175.19,
+      "duration": 3.23,
+      "text": "at five I should wait for six as soon as"
+    },
+    {
+      "index": 313,
+      "start": 1175.2,
+      "end": 1176.75,
+      "duration": 1.55,
+      "text": "six reaches assuming there's no delay"
+    },
+    {
+      "index": 314,
+      "start": 1176.76,
+      "end": 1179.669,
+      "duration": 2.909,
+      "text": "involved in the resetting process assume"
+    },
+    {
+      "index": 315,
+      "start": 1179.679,
+      "end": 1180.95,
+      "duration": 1.271,
+      "text": "there's no delay involved in the"
+    },
+    {
+      "index": 316,
+      "start": 1180.96,
+      "end": 1183.87,
+      "duration": 2.91,
+      "text": "clearing process as soon as count six is"
+    },
+    {
+      "index": 317,
+      "start": 1183.88,
+      "end": 1186.51,
+      "duration": 2.63,
+      "text": "reached I clear all the flip-flops so it"
+    },
+    {
+      "index": 318,
+      "start": 1186.52,
+      "end": 1188.549,
+      "duration": 2.029,
+      "text": "starts from zero so it will go from zero"
+    },
+    {
+      "index": 319,
+      "start": 1188.559,
+      "end": 1191.71,
+      "duration": 3.151,
+      "text": "1 2 3 4 5 even five will last for one"
+    },
+    {
+      "index": 320,
+      "start": 1191.72,
+      "end": 1194.83,
+      "duration": 3.11,
+      "text": "period of clock and moment it becomes"
+    },
+    {
+      "index": 321,
+      "start": 1194.84,
+      "end": 1197.39,
+      "duration": 2.55,
+      "text": "six immediately I will clear it so there"
+    },
+    {
+      "index": 322,
+      "start": 1197.4,
+      "end": 1199.51,
+      "duration": 2.11,
+      "text": "will be a small glitch"
+    },
+    {
+      "index": 323,
+      "start": 1199.52,
+      "end": 1201.789,
+      "duration": 2.269,
+      "text": "I refer to glitch in one of my previous"
+    },
+    {
+      "index": 324,
+      "start": 1201.799,
+      "end": 1205.11,
+      "duration": 3.311,
+      "text": "lectures a glitch is a very narrow"
+    },
+    {
+      "index": 325,
+      "start": 1205.12,
+      "end": 1207.95,
+      "duration": 2.83,
+      "text": "variation the output very small duration"
+    },
+    {
+      "index": 326,
+      "start": 1207.96,
+      "end": 1210.549,
+      "duration": 2.589,
+      "text": "short duration output variation from"
+    },
+    {
+      "index": 327,
+      "start": 1210.559,
+      "end": 1213.31,
+      "duration": 2.751,
+      "text": "either 0 to one back to zero or one zero"
+    },
+    {
+      "index": 328,
+      "start": 1213.32,
+      "end": 1216.31,
+      "duration": 2.99,
+      "text": "back to one a pulse of going from 0 to"
+    },
+    {
+      "index": 329,
+      "start": 1216.32,
+      "end": 1219.549,
+      "duration": 3.229,
+      "text": "one back to one 0 to one back to Z or 1"
+    },
+    {
+      "index": 330,
+      "start": 1219.559,
+      "end": 1221.07,
+      "duration": 1.511,
+      "text": "to zero back to"
+    },
+    {
+      "index": 331,
+      "start": 1221.08,
+      "end": 1224.19,
+      "duration": 3.11,
+      "text": "one it could be that this a small glitch"
+    },
+    {
+      "index": 332,
+      "start": 1224.2,
+      "end": 1226.99,
+      "duration": 2.79,
+      "text": "because of the small time delay involved"
+    },
+    {
+      "index": 333,
+      "start": 1227.0,
+      "end": 1229.83,
+      "duration": 2.83,
+      "text": "in the clearing circuit"
+    },
+    {
+      "index": 334,
+      "start": 1229.84,
+      "end": 1232.43,
+      "duration": 2.59,
+      "text": "there's a circuit involved right if you"
+    },
+    {
+      "index": 335,
+      "start": 1232.44,
+      "end": 1234.99,
+      "duration": 2.55,
+      "text": "neglect that the other alternative is"
+    },
+    {
+      "index": 336,
+      "start": 1235.0,
+      "end": 1237.149,
+      "duration": 2.149,
+      "text": "for me to have the clock count five only"
+    },
+    {
+      "index": 337,
+      "start": 1237.159,
+      "end": 1241.47,
+      "duration": 4.311,
+      "text": "for a very very narrow period which is"
+    },
+    {
+      "index": 338,
+      "start": 1244.31,
+      "end": 1244.32,
+      "duration": 0.01,
+      "text": "not correct I don't want that I want"
+    },
+    {
+      "index": 339,
+      "start": 1244.32,
+      "end": 1247.31,
+      "duration": 2.99,
+      "text": "full clock period for five also so"
+    },
+    {
+      "index": 340,
+      "start": 1247.32,
+      "end": 1249.59,
+      "duration": 2.27,
+      "text": "actually you clear if you want to"
+    },
+    {
+      "index": 341,
+      "start": 1249.6,
+      "end": 1251.87,
+      "duration": 2.27,
+      "text": "terminate count five you clear it as"
+    },
+    {
+      "index": 342,
+      "start": 1251.88,
+      "end": 1253.029,
+      "duration": 1.149,
+      "text": "soon as six"
+    },
+    {
+      "index": 343,
+      "start": 1253.039,
+      "end": 1255.63,
+      "duration": 2.591,
+      "text": "reaches so how do you do that I detect"
+    },
+    {
+      "index": 344,
+      "start": 1255.64,
+      "end": 1258.83,
+      "duration": 3.19,
+      "text": "State six and use the state six to clear"
+    },
+    {
+      "index": 345,
+      "start": 1258.84,
+      "end": 1266.27,
+      "duration": 7.43,
+      "text": "the so State six is given by"
+    },
+    {
+      "index": 346,
+      "start": 1277.51,
+      "end": 1277.52,
+      "duration": 0.01,
+      "text": "six count 6 is 110 when 11 0 is reached"
+    },
+    {
+      "index": 347,
+      "start": 1277.52,
+      "end": 1278.99,
+      "duration": 1.47,
+      "text": "I should clear immediately all the three"
+    },
+    {
+      "index": 348,
+      "start": 1279.0,
+      "end": 1282.11,
+      "duration": 3.11,
+      "text": "flip flops that means I should take"
+    },
+    {
+      "index": 349,
+      "start": 1282.12,
+      "end": 1294.59,
+      "duration": 12.47,
+      "text": "this into an an gate"
+    },
+    {
+      "index": 350,
+      "start": 1301.549,
+      "end": 1301.559,
+      "duration": 0.01,
+      "text": "1 this is zero when 1 1 Z is reached"
+    },
+    {
+      "index": 351,
+      "start": 1301.559,
+      "end": 1304.47,
+      "duration": 2.911,
+      "text": "this is zero so three input n"
+    },
+    {
+      "index": 352,
+      "start": 1304.48,
+      "end": 1307.07,
+      "duration": 2.59,
+      "text": "gate you give a zero"
+    },
+    {
+      "index": 353,
+      "start": 1307.08,
+      "end": 1309.669,
+      "duration": 2.589,
+      "text": "output when this becomes 11 1 0 or this"
+    },
+    {
+      "index": 354,
+      "start": 1309.679,
+      "end": 1312.19,
+      "duration": 2.511,
+      "text": "becomes 111 and this is what I will"
+    },
+    {
+      "index": 355,
+      "start": 1312.2,
+      "end": 1314.789,
+      "duration": 2.589,
+      "text": "connect to the clear of clear inputs of"
+    },
+    {
+      "index": 356,
+      "start": 1314.799,
+      "end": 1318.63,
+      "duration": 3.831,
+      "text": "the three flip flops so the clear input"
+    },
+    {
+      "index": 357,
+      "start": 1318.64,
+      "end": 1339.029,
+      "duration": 20.389,
+      "text": "of this"
+    },
+    {
+      "index": 358,
+      "start": 1342.51,
+      "end": 1342.52,
+      "duration": 0.01,
+      "text": "flipflop and where this a BC coming"
+    },
+    {
+      "index": 359,
+      "start": 1342.52,
+      "end": 1347.149,
+      "duration": 4.629,
+      "text": "from BC in order"
+    },
+    {
+      "index": 360,
+      "start": 1349.909,
+      "end": 1349.919,
+      "duration": 0.01,
+      "text": "to not clutter the drawing I put it here"
+    },
+    {
+      "index": 361,
+      "start": 1349.919,
+      "end": 1352.31,
+      "duration": 2.391,
+      "text": "this a b c are not different signals"
+    },
+    {
+      "index": 362,
+      "start": 1352.32,
+      "end": 1354.47,
+      "duration": 2.15,
+      "text": "these are the outputs of the flip flops"
+    },
+    {
+      "index": 363,
+      "start": 1354.48,
+      "end": 1357.11,
+      "duration": 2.63,
+      "text": "a is the output of flip flop this MSB"
+    },
+    {
+      "index": 364,
+      "start": 1357.12,
+      "end": 1359.75,
+      "duration": 2.63,
+      "text": "flip flop this LSB flip flop and this in"
+    },
+    {
+      "index": 365,
+      "start": 1359.76,
+      "end": 1361.909,
+      "duration": 2.149,
+      "text": "between flip flop so as soon as the flip"
+    },
+    {
+      "index": 366,
+      "start": 1361.919,
+      "end": 1365.39,
+      "duration": 3.471,
+      "text": "flops a b c take the value 11 1 0 this"
+    },
+    {
+      "index": 367,
+      "start": 1365.4,
+      "end": 1368.549,
+      "duration": 3.149,
+      "text": "becomes zero so I would have a count 0 1"
+    },
+    {
+      "index": 368,
+      "start": 1368.559,
+      "end": 1371.269,
+      "duration": 2.71,
+      "text": "2 3 4 5 and momentary momentary"
+    },
+    {
+      "index": 369,
+      "start": 1371.279,
+      "end": 1374.47,
+      "duration": 3.191,
+      "text": "momentary short duration count six which"
+    },
+    {
+      "index": 370,
+      "start": 1374.48,
+      "end": 1376.35,
+      "duration": 1.87,
+      "text": "can be ignored as a glitch and then"
+    },
+    {
+      "index": 371,
+      "start": 1376.36,
+      "end": 1381.59,
+      "duration": 5.23,
+      "text": "start all again zero"
+    },
+    {
+      "index": 372,
+      "start": 1383.59,
+      "end": 1383.6,
+      "duration": 0.01,
+      "text": "so I can use this to do anything"
+    },
+    {
+      "index": 373,
+      "start": 1383.6,
+      "end": 1386.35,
+      "duration": 2.75,
+      "text": "now I can start at any end if you want"
+    },
+    {
+      "index": 374,
+      "start": 1386.36,
+      "end": 1389.029,
+      "duration": 2.669,
+      "text": "to start not at zero I connect it"
+    },
+    {
+      "index": 375,
+      "start": 1389.039,
+      "end": 1390.789,
+      "duration": 1.75,
+      "text": "appropriately to preet clear suppose I"
+    },
+    {
+      "index": 376,
+      "start": 1390.799,
+      "end": 1393.95,
+      "duration": 3.151,
+      "text": "want to start with Z three so the second"
+    },
+    {
+      "index": 377,
+      "start": 1393.96,
+      "end": 1410.549,
+      "duration": 16.589,
+      "text": "example"
+    },
+    {
+      "index": 378,
+      "start": 1414.83,
+      "end": 1414.84,
+      "duration": 0.01,
+      "text": "suppose I want to start at count"
+    },
+    {
+      "index": 379,
+      "start": 1414.84,
+      "end": 1420.549,
+      "duration": 5.709,
+      "text": "two and yet end at count"
+    },
+    {
+      "index": 380,
+      "start": 1430.789,
+      "end": 1430.799,
+      "duration": 0.01,
+      "text": "3 4 5 6 and back to"
+    },
+    {
+      "index": 381,
+      "start": 1430.799,
+      "end": 1434.59,
+      "duration": 3.791,
+      "text": "two this the cycle I"
+    },
+    {
+      "index": 382,
+      "start": 1436.87,
+      "end": 1436.88,
+      "duration": 0.01,
+      "text": "want I don't want to count zero and one"
+    },
+    {
+      "index": 383,
+      "start": 1436.88,
+      "end": 1439.51,
+      "duration": 2.63,
+      "text": "I don't want to count seven"
+    },
+    {
+      "index": 384,
+      "start": 1439.52,
+      "end": 1443.19,
+      "duration": 3.67,
+      "text": "so again I do the same thing I look"
+    },
+    {
+      "index": 385,
+      "start": 1443.2,
+      "end": 1446.19,
+      "duration": 2.99,
+      "text": "at six six I have to complete so I"
+    },
+    {
+      "index": 386,
+      "start": 1446.2,
+      "end": 1449.07,
+      "duration": 2.87,
+      "text": "cannot detect when six is when the"
+    },
+    {
+      "index": 387,
+      "start": 1449.08,
+      "end": 1451.47,
+      "duration": 2.39,
+      "text": "flip-flop reach the count of six I have"
+    },
+    {
+      "index": 388,
+      "start": 1451.48,
+      "end": 1453.549,
+      "duration": 2.069,
+      "text": "to wait for count seven to come"
+    },
+    {
+      "index": 389,
+      "start": 1453.559,
+      "end": 1455.71,
+      "duration": 2.151,
+      "text": "up because six has been completely"
+    },
+    {
+      "index": 390,
+      "start": 1455.72,
+      "end": 1457.87,
+      "duration": 2.15,
+      "text": "allowed so when count seven comes up"
+    },
+    {
+      "index": 391,
+      "start": 1457.88,
+      "end": 1462.39,
+      "duration": 4.51,
+      "text": "which is 111 I detect that and not clear"
+    },
+    {
+      "index": 392,
+      "start": 1462.4,
+      "end": 1464.43,
+      "duration": 2.03,
+      "text": "all the flip flops in this case I will"
+    },
+    {
+      "index": 393,
+      "start": 1464.44,
+      "end": 1466.269,
+      "duration": 1.829,
+      "text": "preset this flip-flop and clear these"
+    },
+    {
+      "index": 394,
+      "start": 1466.279,
+      "end": 1468.95,
+      "duration": 2.671,
+      "text": "two flip flops correct"
+    },
+    {
+      "index": 395,
+      "start": 1468.96,
+      "end": 1472.47,
+      "duration": 3.51,
+      "text": "so I will get the count 11"
+    },
+    {
+      "index": 396,
+      "start": 1472.48,
+      "end": 1477.63,
+      "duration": 5.15,
+      "text": "one this is a"
+    },
+    {
+      "index": 397,
+      "start": 1487.59,
+      "end": 1487.6,
+      "duration": 0.01,
+      "text": "to to"
+    },
+    {
+      "index": 398,
+      "start": 1487.6,
+      "end": 1495.51,
+      "duration": 7.91,
+      "text": "clear a and"
+    },
+    {
+      "index": 399,
+      "start": 1500.47,
+      "end": 1500.48,
+      "duration": 0.01,
+      "text": "C clear A and C and pre set B preset"
+    },
+    {
+      "index": 400,
+      "start": 1500.48,
+      "end": 1504.35,
+      "duration": 3.87,
+      "text": "will become one so two will start after"
+    },
+    {
+      "index": 401,
+      "start": 1504.36,
+      "end": 1507.63,
+      "duration": 3.27,
+      "text": "that 2 3 4 5"
+    },
+    {
+      "index": 402,
+      "start": 1507.64,
+      "end": 1510.23,
+      "duration": 2.59,
+      "text": "six back to"
+    },
+    {
+      "index": 403,
+      "start": 1510.24,
+      "end": 1512.909,
+      "duration": 2.669,
+      "text": "two so by using this preset and clear"
+    },
+    {
+      "index": 404,
+      "start": 1512.919,
+      "end": 1514.75,
+      "duration": 1.831,
+      "text": "inputs I can start the count at any"
+    },
+    {
+      "index": 405,
+      "start": 1514.76,
+      "end": 1516.269,
+      "duration": 1.509,
+      "text": "point and can terminate the count at any"
+    },
+    {
+      "index": 406,
+      "start": 1516.279,
+      "end": 1519.389,
+      "duration": 3.11,
+      "text": "other point any count you can start and"
+    },
+    {
+      "index": 407,
+      "start": 1519.399,
+      "end": 1521.269,
+      "duration": 1.87,
+      "text": "if you want to down count all you do is"
+    },
+    {
+      "index": 408,
+      "start": 1521.279,
+      "end": 1524.389,
+      "duration": 3.11,
+      "text": "to look at Q Bar s of Q's so I have an"
+    },
+    {
+      "index": 409,
+      "start": 1524.399,
+      "end": 1526.71,
+      "duration": 2.311,
+      "text": "UPC count a down count an orbitary"
+    },
+    {
+      "index": 410,
+      "start": 1526.72,
+      "end": 1530.07,
+      "duration": 3.35,
+      "text": "starting point orbitary ending point"
+    },
+    {
+      "index": 411,
+      "start": 1530.08,
+      "end": 1531.549,
+      "duration": 1.469,
+      "text": "and number of flip flops decide the"
+    },
+    {
+      "index": 412,
+      "start": 1531.559,
+      "end": 1532.389,
+      "duration": 0.83,
+      "text": "number of"
+    },
+    {
+      "index": 413,
+      "start": 1532.399,
+      "end": 1535.47,
+      "duration": 3.071,
+      "text": "counts total maximum number of counts"
+    },
+    {
+      "index": 414,
+      "start": 1535.48,
+      "end": 1537.07,
+      "duration": 1.59,
+      "text": "possible is 2 power n when n is the"
+    },
+    {
+      "index": 415,
+      "start": 1537.08,
+      "end": 1539.31,
+      "duration": 2.23,
+      "text": "number of flip flops since zero has to"
+    },
+    {
+      "index": 416,
+      "start": 1539.32,
+      "end": 1541.789,
+      "duration": 2.469,
+      "text": "be counted as one state or one first"
+    },
+    {
+      "index": 417,
+      "start": 1541.799,
+      "end": 1544.029,
+      "duration": 2.23,
+      "text": "count the maximum count you can reach is"
+    },
+    {
+      "index": 418,
+      "start": 1544.039,
+      "end": 1548.95,
+      "duration": 4.911,
+      "text": "2 power n minus"
+    },
+    {
+      "index": 419,
+      "start": 1551.549,
+      "end": 1551.559,
+      "duration": 0.01,
+      "text": "one so this is how you count as I"
+    },
+    {
+      "index": 420,
+      "start": 1551.559,
+      "end": 1554.19,
+      "duration": 2.631,
+      "text": "already said counters of use to count"
+    },
+    {
+      "index": 421,
+      "start": 1554.2,
+      "end": 1556.87,
+      "duration": 2.67,
+      "text": "people to count events count"
+    },
+    {
+      "index": 422,
+      "start": 1556.88,
+      "end": 1560.51,
+      "duration": 3.63,
+      "text": "things clock has used all the flip flops"
+    },
+    {
+      "index": 423,
+      "start": 1560.52,
+      "end": 1562.23,
+      "duration": 1.71,
+      "text": "are very very useful"
+    },
+    {
+      "index": 424,
+      "start": 1562.24,
+      "end": 1564.389,
+      "duration": 2.149,
+      "text": "circuits many many applications you will"
+    },
+    {
+      "index": 425,
+      "start": 1564.399,
+      "end": 1566.029,
+      "duration": 1.63,
+      "text": "find uses of flip flops we'll see some"
+    },
+    {
+      "index": 426,
+      "start": 1566.039,
+      "end": 1569.63,
+      "duration": 3.591,
+      "text": "more of them many more of"
+    },
+    {
+      "index": 427,
+      "start": 1571.87,
+      "end": 1571.88,
+      "duration": 0.01,
+      "text": "them do you have any"
+    },
+    {
+      "index": 428,
+      "start": 1571.88,
+      "end": 1573.87,
+      "duration": 1.99,
+      "text": "questions so in order to complete the"
+    },
+    {
+      "index": 429,
+      "start": 1573.88,
+      "end": 1578.31,
+      "duration": 4.43,
+      "text": "drawing if you want to draw a b"
+    },
+    {
+      "index": 430,
+      "start": 1578.32,
+      "end": 1580.99,
+      "duration": 2.67,
+      "text": "c this is my"
+    },
+    {
+      "index": 431,
+      "start": 1581.0,
+      "end": 1584.909,
+      "duration": 3.909,
+      "text": "C B A"
+    },
+    {
+      "index": 432,
+      "start": 1584.919,
+      "end": 1586.99,
+      "duration": 2.071,
+      "text": "Q I will not show the rest of the"
+    },
+    {
+      "index": 433,
+      "start": 1587.0,
+      "end": 1592.31,
+      "duration": 5.31,
+      "text": "drawing"
+    },
+    {
+      "index": 434,
+      "start": 1594.549,
+      "end": 1594.559,
+      "duration": 0.01,
+      "text": "of J K Etc you know what it is all JS"
+    },
+    {
+      "index": 435,
+      "start": 1594.559,
+      "end": 1603.789,
+      "duration": 9.23,
+      "text": "are one Ks are"
+    },
+    {
+      "index": 436,
+      "start": 1609.43,
+      "end": 1609.44,
+      "duration": 0.01,
+      "text": "one now A B C when it reaches zero 111"
+    },
+    {
+      "index": 437,
+      "start": 1609.44,
+      "end": 1612.07,
+      "duration": 2.63,
+      "text": "this become zero you count this to the"
+    },
+    {
+      "index": 438,
+      "start": 1612.08,
+      "end": 1613.549,
+      "duration": 1.469,
+      "text": "clear"
+    },
+    {
+      "index": 439,
+      "start": 1613.559,
+      "end": 1615.71,
+      "duration": 2.151,
+      "text": "of"
+    },
+    {
+      "index": 440,
+      "start": 1615.72,
+      "end": 1626.47,
+      "duration": 10.75,
+      "text": "clear clear"
+    },
+    {
+      "index": 441,
+      "start": 1647.43,
+      "end": 1647.44,
+      "duration": 0.01,
+      "text": "clock this is a counter which counts"
+    },
+    {
+      "index": 442,
+      "start": 1647.44,
+      "end": 1649.59,
+      "duration": 2.15,
+      "text": "from two to"
+    },
+    {
+      "index": 443,
+      "start": 1649.6,
+      "end": 1652.99,
+      "duration": 3.39,
+      "text": "six yes so here only the second CLE"
+    },
+    {
+      "index": 444,
+      "start": 1653.0,
+      "end": 1655.669,
+      "duration": 2.669,
+      "text": "start counting from the first CLE it's"
+    },
+    {
+      "index": 445,
+      "start": 1655.679,
+      "end": 1659.47,
+      "duration": 3.791,
+      "text": "coun from 0 to yeah yeah it's"
+    },
+    {
+      "index": 446,
+      "start": 1659.48,
+      "end": 1663.07,
+      "duration": 3.59,
+      "text": "always any circuit that is a transient"
+    },
+    {
+      "index": 447,
+      "start": 1663.08,
+      "end": 1665.149,
+      "duration": 2.069,
+      "text": "State there's not even a guarantee that"
+    },
+    {
+      "index": 448,
+      "start": 1665.159,
+      "end": 1666.47,
+      "duration": 1.311,
+      "text": "is going to start at"
+    },
+    {
+      "index": 449,
+      "start": 1666.48,
+      "end": 1669.11,
+      "duration": 2.63,
+      "text": "zero when you switch on the flip flops"
+    },
+    {
+      "index": 450,
+      "start": 1669.12,
+      "end": 1672.31,
+      "duration": 3.19,
+      "text": "the first time the clock orbitally the"
+    },
+    {
+      "index": 451,
+      "start": 1672.32,
+      "end": 1673.789,
+      "duration": 1.469,
+      "text": "clock is"
+    },
+    {
+      "index": 452,
+      "start": 1673.799,
+      "end": 1677.87,
+      "duration": 4.071,
+      "text": "applied orbitally the counter can reach"
+    },
+    {
+      "index": 453,
+      "start": 1677.88,
+      "end": 1679.389,
+      "duration": 1.509,
+      "text": "first counter may be one second counter"
+    },
+    {
+      "index": 454,
+      "start": 1679.399,
+      "end": 1681.669,
+      "duration": 2.27,
+      "text": "May zero third counter may be one or 1 1"
+    },
+    {
+      "index": 455,
+      "start": 1681.679,
+      "end": 1685.11,
+      "duration": 3.431,
+      "text": "Z it can be anything very first cycle of"
+    },
+    {
+      "index": 456,
+      "start": 1685.12,
+      "end": 1687.95,
+      "duration": 2.83,
+      "text": "count you are not guaranteed of"
+    },
+    {
+      "index": 457,
+      "start": 1687.96,
+      "end": 1690.87,
+      "duration": 2.91,
+      "text": "any starting value it could all be zero"
+    },
+    {
+      "index": 458,
+      "start": 1690.88,
+      "end": 1692.549,
+      "duration": 1.669,
+      "text": "it could all be one it could be anything"
+    },
+    {
+      "index": 459,
+      "start": 1692.559,
+      "end": 1695.07,
+      "duration": 2.511,
+      "text": "else but moment the second time that"
+    },
+    {
+      "index": 460,
+      "start": 1695.08,
+      "end": 1697.43,
+      "duration": 2.35,
+      "text": "count reach so there is a transient"
+    },
+    {
+      "index": 461,
+      "start": 1697.44,
+      "end": 1700.789,
+      "duration": 3.349,
+      "text": "stage the circuit has to settle down"
+    },
+    {
+      "index": 462,
+      "start": 1700.799,
+      "end": 1702.43,
+      "duration": 1.631,
+      "text": "once the circuit settles down it does"
+    },
+    {
+      "index": 463,
+      "start": 1702.44,
+      "end": 1704.59,
+      "duration": 2.15,
+      "text": "what we want you never take into account"
+    },
+    {
+      "index": 464,
+      "start": 1704.6,
+      "end": 1706.149,
+      "duration": 1.549,
+      "text": "the initial"
+    },
+    {
+      "index": 465,
+      "start": 1706.159,
+      "end": 1708.669,
+      "duration": 2.51,
+      "text": "state after a switch on the the power"
+    },
+    {
+      "index": 466,
+      "start": 1708.679,
+      "end": 1709.99,
+      "duration": 1.311,
+      "text": "first time you switch on the power there"
+    },
+    {
+      "index": 467,
+      "start": 1710.0,
+      "end": 1712.43,
+      "duration": 2.43,
+      "text": "is no guarantee the fli Flop is going to"
+    },
+    {
+      "index": 468,
+      "start": 1712.44,
+      "end": 1716.149,
+      "duration": 3.709,
+      "text": "start at 0 0 0 is there no flip flop"
+    },
+    {
+      "index": 469,
+      "start": 1716.159,
+      "end": 1719.43,
+      "duration": 3.271,
+      "text": "maybe B may be one A and C may be zero"
+    },
+    {
+      "index": 470,
+      "start": 1719.44,
+      "end": 1721.43,
+      "duration": 1.99,
+      "text": "then it's what you want to on the other"
+    },
+    {
+      "index": 471,
+      "start": 1721.44,
+      "end": 1724.11,
+      "duration": 2.67,
+      "text": "hand one and two may be zero one and two"
+    },
+    {
+      "index": 472,
+      "start": 1724.12,
+      "end": 1726.31,
+      "duration": 2.19,
+      "text": "will be Z the other one may be one a 0 0"
+    },
+    {
+      "index": 473,
+      "start": 1726.32,
+      "end": 1730.71,
+      "duration": 4.39,
+      "text": "1 or 1 0 0 so you have to go for 1 0 0 1"
+    },
+    {
+      "index": 474,
+      "start": 1730.72,
+      "end": 1735.19,
+      "duration": 4.47,
+      "text": "0 1 1 1 0 when 110 comes it goes to two"
+    },
+    {
+      "index": 475,
+      "start": 1735.2,
+      "end": 1739.87,
+      "duration": 4.67,
+      "text": "so the cycle so the initial portion"
+    },
+    {
+      "index": 476,
+      "start": 1739.88,
+      "end": 1741.71,
+      "duration": 1.83,
+      "text": "it's a transient in linear circuits is"
+    },
+    {
+      "index": 477,
+      "start": 1741.72,
+      "end": 1742.669,
+      "duration": 0.949,
+      "text": "called"
+    },
+    {
+      "index": 478,
+      "start": 1742.679,
+      "end": 1745.07,
+      "duration": 2.391,
+      "text": "transient you don't talk about transient"
+    },
+    {
+      "index": 479,
+      "start": 1745.08,
+      "end": 1746.549,
+      "duration": 1.469,
+      "text": "only with the steady state a stable"
+    },
+    {
+      "index": 480,
+      "start": 1746.559,
+      "end": 1748.83,
+      "duration": 2.271,
+      "text": "State you analyze the circuit in this"
+    },
+    {
+      "index": 481,
+      "start": 1748.84,
+      "end": 1750.63,
+      "duration": 1.79,
+      "text": "case we can call it latency in digital"
+    },
+    {
+      "index": 482,
+      "start": 1750.64,
+      "end": 1753.31,
+      "duration": 2.67,
+      "text": "terminology digital par par called"
+    },
+    {
+      "index": 483,
+      "start": 1753.32,
+      "end": 1755.47,
+      "duration": 2.15,
+      "text": "latency latency is the time you have to"
+    },
+    {
+      "index": 484,
+      "start": 1755.48,
+      "end": 1757.269,
+      "duration": 1.789,
+      "text": "wait for the circuit to start working"
+    },
+    {
+      "index": 485,
+      "start": 1757.279,
+      "end": 1758.509,
+      "duration": 1.23,
+      "text": "after you give the"
+    },
+    {
+      "index": 486,
+      "start": 1758.519,
+      "end": 1762.31,
+      "duration": 3.791,
+      "text": "inputs latency this a very common word"
+    },
+    {
+      "index": 487,
+      "start": 1762.32,
+      "end": 1764.549,
+      "duration": 2.229,
+      "text": "latency is the time at which the circuit"
+    },
+    {
+      "index": 488,
+      "start": 1764.559,
+      "end": 1766.35,
+      "duration": 1.791,
+      "text": "start delivering the output after they"
+    },
+    {
+      "index": 489,
+      "start": 1766.36,
+      "end": 1768.19,
+      "duration": 1.83,
+      "text": "switch on the power or after giving the"
+    },
+    {
+      "index": 490,
+      "start": 1768.2,
+      "end": 1771.35,
+      "duration": 3.15,
+      "text": "inputs so there's an inbu lat in any"
+    },
+    {
+      "index": 491,
+      "start": 1771.36,
+      "end": 1773.509,
+      "duration": 2.149,
+      "text": "circuit so good"
+    },
+    {
+      "index": 492,
+      "start": 1773.519,
+      "end": 1777.389,
+      "duration": 3.87,
+      "text": "question any other questions do you"
+    },
+    {
+      "index": 493,
+      "start": 1777.399,
+      "end": 1780.07,
+      "duration": 2.671,
+      "text": "have so now have seen counters and we"
+    },
+    {
+      "index": 494,
+      "start": 1780.08,
+      "end": 1781.87,
+      "duration": 1.79,
+      "text": "can design any any counter we can count"
+    },
+    {
+      "index": 495,
+      "start": 1781.88,
+      "end": 1784.35,
+      "duration": 2.47,
+      "text": "up to 128 if you want to 0 to 127 or"
+    },
+    {
+      "index": 496,
+      "start": 1784.36,
+      "end": 1787.149,
+      "duration": 2.789,
+      "text": "anything else also for example a clock"
+    },
+    {
+      "index": 497,
+      "start": 1787.159,
+      "end": 1790.149,
+      "duration": 2.99,
+      "text": "think of clock somebody gave an example"
+    },
+    {
+      "index": 498,
+      "start": 1790.159,
+      "end": 1794.07,
+      "duration": 3.911,
+      "text": "of a clock being a divide by two example"
+    },
+    {
+      "index": 499,
+      "start": 1794.08,
+      "end": 1796.47,
+      "duration": 2.39,
+      "text": "of a division of"
+    },
+    {
+      "index": 500,
+      "start": 1796.48,
+      "end": 1798.549,
+      "duration": 2.069,
+      "text": "frequency we have a very High Crystal"
+    },
+    {
+      "index": 501,
+      "start": 1798.559,
+      "end": 1800.63,
+      "duration": 2.071,
+      "text": "frequency these clocks run on crystal"
+    },
+    {
+      "index": 502,
+      "start": 1800.64,
+      "end": 1803.87,
+      "duration": 3.23,
+      "text": "clock the the the watches the watch"
+    },
+    {
+      "index": 503,
+      "start": 1803.88,
+      "end": 1806.75,
+      "duration": 2.87,
+      "text": "chips got it clock chips or clock not"
+    },
+    {
+      "index": 504,
+      "start": 1806.76,
+      "end": 1808.269,
+      "duration": 1.509,
+      "text": "confused with this clock so let us call"
+    },
+    {
+      "index": 505,
+      "start": 1808.279,
+      "end": 1812.549,
+      "duration": 4.27,
+      "text": "it watch a watch shape an IC integrated"
+    },
+    {
+      "index": 506,
+      "start": 1812.559,
+      "end": 1815.43,
+      "duration": 2.871,
+      "text": "circuit which use in the"
+    },
+    {
+      "index": 507,
+      "start": 1815.44,
+      "end": 1818.029,
+      "duration": 2.589,
+      "text": "watches it has its clock this clock is"
+    },
+    {
+      "index": 508,
+      "start": 1818.039,
+      "end": 1820.43,
+      "duration": 2.391,
+      "text": "derived from a very high frequency so"
+    },
+    {
+      "index": 509,
+      "start": 1820.44,
+      "end": 1823.87,
+      "duration": 3.43,
+      "text": "very high frequency stable source is"
+    },
+    {
+      "index": 510,
+      "start": 1823.88,
+      "end": 1825.71,
+      "duration": 1.83,
+      "text": "called a crystal oscillator that's a"
+    },
+    {
+      "index": 511,
+      "start": 1825.72,
+      "end": 1829.59,
+      "duration": 3.87,
+      "text": "crystal it is very generally easy"
+    },
+    {
+      "index": 512,
+      "start": 1829.6,
+      "end": 1832.95,
+      "duration": 3.35,
+      "text": "to build crystals of very high"
+    },
+    {
+      "index": 513,
+      "start": 1832.96,
+      "end": 1834.909,
+      "duration": 1.949,
+      "text": "frequencies it's very difficult to get a"
+    },
+    {
+      "index": 514,
+      "start": 1834.919,
+      "end": 1838.35,
+      "duration": 3.431,
+      "text": "crystal of 100 HZ 10 KZ and things like"
+    },
+    {
+      "index": 515,
+      "start": 1838.36,
+      "end": 1841.23,
+      "duration": 2.87,
+      "text": "that usually megaherz and several mehz"
+    },
+    {
+      "index": 516,
+      "start": 1841.24,
+      "end": 1843.63,
+      "duration": 2.39,
+      "text": "is Crystal frequency is given to"
+    },
+    {
+      "index": 517,
+      "start": 1843.64,
+      "end": 1846.19,
+      "duration": 2.55,
+      "text": "available with stable frequency what do"
+    },
+    {
+      "index": 518,
+      "start": 1846.2,
+      "end": 1847.35,
+      "duration": 1.15,
+      "text": "you mean by stable the frequency will"
+    },
+    {
+      "index": 519,
+      "start": 1847.36,
+      "end": 1849.99,
+      "duration": 2.63,
+      "text": "not drift St because we don't want the"
+    },
+    {
+      "index": 520,
+      "start": 1850.0,
+      "end": 1853.23,
+      "duration": 3.23,
+      "text": "clock period some of these cheap watches"
+    },
+    {
+      "index": 521,
+      "start": 1853.24,
+      "end": 1856.71,
+      "duration": 3.47,
+      "text": "risk watches you buy in some of the"
+    },
+    {
+      "index": 522,
+      "start": 1856.72,
+      "end": 1860.549,
+      "duration": 3.829,
+      "text": "shops B now what happens is you think"
+    },
+    {
+      "index": 523,
+      "start": 1860.559,
+      "end": 1863.47,
+      "duration": 2.911,
+      "text": "it's a good watch buy for 25 rupees"
+    },
+    {
+      "index": 524,
+      "start": 1863.48,
+      "end": 1865.99,
+      "duration": 2.51,
+      "text": "moment to wear start wearing it next day"
+    },
+    {
+      "index": 525,
+      "start": 1866.0,
+      "end": 1867.59,
+      "duration": 1.59,
+      "text": "morning you look at the watch it already"
+    },
+    {
+      "index": 526,
+      "start": 1867.6,
+      "end": 1870.83,
+      "duration": 3.23,
+      "text": "9:00 in the morning when it was 5 or 6"
+    },
+    {
+      "index": 527,
+      "start": 1870.84,
+      "end": 1874.47,
+      "duration": 3.63,
+      "text": "or the other way it going slow 2:00 the"
+    },
+    {
+      "index": 528,
+      "start": 1874.48,
+      "end": 1877.07,
+      "duration": 2.59,
+      "text": "reason is because the the frequency is"
+    },
+    {
+      "index": 529,
+      "start": 1877.08,
+      "end": 1880.11,
+      "duration": 3.03,
+      "text": "not stable it counts down down down but"
+    },
+    {
+      "index": 530,
+      "start": 1880.12,
+      "end": 1882.99,
+      "duration": 2.87,
+      "text": "then if the original crystal is not a"
+    },
+    {
+      "index": 531,
+      "start": 1883.0,
+      "end": 1883.909,
+      "duration": 0.909,
+      "text": "stable"
+    },
+    {
+      "index": 532,
+      "start": 1883.919,
+      "end": 1886.07,
+      "duration": 2.151,
+      "text": "frequency it will either lose time or"
+    },
+    {
+      "index": 533,
+      "start": 1886.08,
+      "end": 1889.31,
+      "duration": 3.23,
+      "text": "gain time which you don't want"
+    },
+    {
+      "index": 534,
+      "start": 1889.32,
+      "end": 1893.23,
+      "duration": 3.91,
+      "text": "so this division by a factor of whatever"
+    },
+    {
+      "index": 535,
+      "start": 1893.24,
+      "end": 1894.389,
+      "duration": 1.149,
+      "text": "to make a"
+    },
+    {
+      "index": 536,
+      "start": 1894.399,
+      "end": 1898.99,
+      "duration": 4.591,
+      "text": "clock so I will give us an"
+    },
+    {
+      "index": 537,
+      "start": 1906.31,
+      "end": 1906.32,
+      "duration": 0.01,
+      "text": "exercise assume a crystal clock of let"
+    },
+    {
+      "index": 538,
+      "start": 1906.32,
+      "end": 1909.87,
+      "duration": 3.55,
+      "text": "us say"
+    },
+    {
+      "index": 539,
+      "start": 1913.99,
+      "end": 1914.0,
+      "duration": 0.01,
+      "text": "what very high frequency Mah"
+    },
+    {
+      "index": 540,
+      "start": 1914.0,
+      "end": 1916.509,
+      "duration": 2.509,
+      "text": "Heartz uh I want you to find out how"
+    },
+    {
+      "index": 541,
+      "start": 1916.519,
+      "end": 1918.75,
+      "duration": 2.231,
+      "text": "many stages of counting required so that"
+    },
+    {
+      "index": 542,
+      "start": 1918.76,
+      "end": 1921.509,
+      "duration": 2.749,
+      "text": "I can have a count"
+    },
+    {
+      "index": 543,
+      "start": 1921.519,
+      "end": 1924.95,
+      "duration": 3.431,
+      "text": "of seconds minutes and hours not beyond"
+    },
+    {
+      "index": 544,
+      "start": 1924.96,
+      "end": 1928.149,
+      "duration": 3.189,
+      "text": "that I want an hour display a minute"
+    },
+    {
+      "index": 545,
+      "start": 1928.159,
+      "end": 1930.47,
+      "duration": 2.311,
+      "text": "display and a second display in my"
+    },
+    {
+      "index": 546,
+      "start": 1930.48,
+      "end": 1933.31,
+      "duration": 2.83,
+      "text": "clock so the watch has"
+    },
+    {
+      "index": 547,
+      "start": 1933.32,
+      "end": 1936.43,
+      "duration": 3.11,
+      "text": "to the crystal clock the crystal"
+    },
+    {
+      "index": 548,
+      "start": 1936.44,
+      "end": 1937.83,
+      "duration": 1.39,
+      "text": "frequency"
+    },
+    {
+      "index": 549,
+      "start": 1937.84,
+      "end": 1941.43,
+      "duration": 3.59,
+      "text": "clock has to be brought"
+    },
+    {
+      "index": 550,
+      "start": 1941.44,
+      "end": 1944.629,
+      "duration": 3.189,
+      "text": "down to the hours brought down to the"
+    },
+    {
+      "index": 551,
+      "start": 1944.639,
+      "end": 1948.149,
+      "duration": 3.51,
+      "text": "minutes I the other way very very high"
+    },
+    {
+      "index": 552,
+      "start": 1948.159,
+      "end": 1952.029,
+      "duration": 3.87,
+      "text": "you do several divisions to make it"
+    },
+    {
+      "index": 553,
+      "start": 1952.039,
+      "end": 1955.43,
+      "duration": 3.391,
+      "text": "one one cycle per second to count"
+    },
+    {
+      "index": 554,
+      "start": 1955.44,
+      "end": 1958.07,
+      "duration": 2.63,
+      "text": "seconds then divide by 60 you get one"
+    },
+    {
+      "index": 555,
+      "start": 1958.08,
+      "end": 1960.47,
+      "duration": 2.39,
+      "text": "cycle per minute divide by"
+    },
+    {
+      "index": 556,
+      "start": 1960.48,
+      "end": 1964.509,
+      "duration": 4.029,
+      "text": "24 divide by what 60 Minutes make one"
+    },
+    {
+      "index": 557,
+      "start": 1964.519,
+      "end": 1970.19,
+      "duration": 5.671,
+      "text": "okay divide by 60 to make it 1 hour so"
+    },
+    {
+      "index": 558,
+      "start": 1970.2,
+      "end": 1971.669,
+      "duration": 1.469,
+      "text": "I'm not giving you a clock exact"
+    },
+    {
+      "index": 559,
+      "start": 1971.679,
+      "end": 1973.83,
+      "duration": 2.151,
+      "text": "frequency because I want a whole number"
+    },
+    {
+      "index": 560,
+      "start": 1973.84,
+      "end": 1976.549,
+      "duration": 2.709,
+      "text": "finally so you can do a a multiple of"
+    },
+    {
+      "index": 561,
+      "start": 1976.559,
+      "end": 1978.31,
+      "duration": 1.751,
+      "text": "the clock"
+    },
+    {
+      "index": 562,
+      "start": 1978.32,
+      "end": 1982.99,
+      "duration": 4.67,
+      "text": "uh got 60 * 60 know 3,600 the 3,600"
+    },
+    {
+      "index": 563,
+      "start": 1983.0,
+      "end": 1986.31,
+      "duration": 3.31,
+      "text": "seconds make a make an hour right 60"
+    },
+    {
+      "index": 564,
+      "start": 1986.32,
+      "end": 1989.269,
+      "duration": 2.949,
+      "text": "Minutes make a hour 60 seconds make a"
+    },
+    {
+      "index": 565,
+      "start": 1989.279,
+      "end": 1990.789,
+      "duration": 1.51,
+      "text": "minute so"
+    },
+    {
+      "index": 566,
+      "start": 1990.799,
+      "end": 1994.71,
+      "duration": 3.911,
+      "text": "3,600 seconds make an hour so let us say"
+    },
+    {
+      "index": 567,
+      "start": 1994.72,
+      "end": 1997.629,
+      "duration": 2.909,
+      "text": "multiply it by okay make it"
+    },
+    {
+      "index": 568,
+      "start": 1997.639,
+      "end": 2003.629,
+      "duration": 5.99,
+      "text": "3.6 mahz I'm having a 3.66 mahz clock"
+    },
+    {
+      "index": 569,
+      "start": 2003.639,
+      "end": 2008.789,
+      "duration": 5.15,
+      "text": "given to you design a series of count"
+    },
+    {
+      "index": 570,
+      "start": 2008.799,
+      "end": 2012.509,
+      "duration": 3.71,
+      "text": "s so that I can get my frequency divided"
+    },
+    {
+      "index": 571,
+      "start": 2012.519,
+      "end": 2015.83,
+      "duration": 3.311,
+      "text": "at the right time uh the right numbers"
+    },
+    {
+      "index": 572,
+      "start": 2015.84,
+      "end": 2018.95,
+      "duration": 3.11,
+      "text": "to have a count of seconds count of"
+    },
+    {
+      "index": 573,
+      "start": 2018.96,
+      "end": 2022.07,
+      "duration": 3.11,
+      "text": "minutes count of hours"
+    },
+    {
+      "index": 574,
+      "start": 2022.08,
+      "end": 2024.029,
+      "duration": 1.949,
+      "text": "okay it's an"
+    },
+    {
+      "index": 575,
+      "start": 2024.039,
+      "end": 2027.07,
+      "duration": 3.031,
+      "text": "exercise now one disadvantage of this"
+    },
+    {
+      "index": 576,
+      "start": 2027.08,
+      "end": 2028.389,
+      "duration": 1.309,
+      "text": "counter these"
+    },
+    {
+      "index": 577,
+      "start": 2028.399,
+      "end": 2031.029,
+      "duration": 2.63,
+      "text": "counters we use the clock we feed a"
+    },
+    {
+      "index": 578,
+      "start": 2031.039,
+      "end": 2033.669,
+      "duration": 2.63,
+      "text": "clock to the very first stage of the"
+    },
+    {
+      "index": 579,
+      "start": 2033.679,
+      "end": 2036.149,
+      "duration": 2.47,
+      "text": "flip-flop very first flip-flop stage"
+    },
+    {
+      "index": 580,
+      "start": 2036.159,
+      "end": 2037.909,
+      "duration": 1.75,
+      "text": "output of the flip-flop is used as the"
+    },
+    {
+      "index": 581,
+      "start": 2037.919,
+      "end": 2040.029,
+      "duration": 2.11,
+      "text": "clock for the second stage output of"
+    },
+    {
+      "index": 582,
+      "start": 2040.039,
+      "end": 2041.43,
+      "duration": 1.391,
+      "text": "this flip flop is Tak the clock to the"
+    },
+    {
+      "index": 583,
+      "start": 2041.44,
+      "end": 2043.11,
+      "duration": 1.67,
+      "text": "third St the clock is passed from"
+    },
+    {
+      "index": 584,
+      "start": 2043.12,
+      "end": 2045.31,
+      "duration": 2.19,
+      "text": "flip-flop to"
+    },
+    {
+      "index": 585,
+      "start": 2045.32,
+      "end": 2048.95,
+      "duration": 3.63,
+      "text": "flip-flop there's an inherent delay as I"
+    },
+    {
+      "index": 586,
+      "start": 2048.96,
+      "end": 2052.23,
+      "duration": 3.27,
+      "text": "said we also talked about a small glitch"
+    },
+    {
+      "index": 587,
+      "start": 2052.24,
+      "end": 2055.149,
+      "duration": 2.909,
+      "text": "glitch moment I reset it it's not going"
+    },
+    {
+      "index": 588,
+      "start": 2055.159,
+      "end": 2056.71,
+      "duration": 1.551,
+      "text": "to get reset there's going to be a short"
+    },
+    {
+      "index": 589,
+      "start": 2056.72,
+      "end": 2059.669,
+      "duration": 2.949,
+      "text": "time duration depending on"
+    },
+    {
+      "index": 590,
+      "start": 2059.679,
+      "end": 2063.75,
+      "duration": 4.071,
+      "text": "this once a 110 whatever is reached here"
+    },
+    {
+      "index": 591,
+      "start": 2063.76,
+      "end": 2066.349,
+      "duration": 2.589,
+      "text": "there's a small delay here takes one"
+    },
+    {
+      "index": 592,
+      "start": 2066.359,
+      "end": 2068.23,
+      "duration": 1.871,
+      "text": "time to become 111"
+    },
+    {
+      "index": 593,
+      "start": 2068.24,
+      "end": 2070.149,
+      "duration": 1.909,
+      "text": "it's one time to become zero that zero"
+    },
+    {
+      "index": 594,
+      "start": 2070.159,
+      "end": 2072.47,
+      "duration": 2.311,
+      "text": "applied here here here it has to"
+    },
+    {
+      "index": 595,
+      "start": 2072.48,
+      "end": 2074.389,
+      "duration": 1.909,
+      "text": "activate the circuitry for clear to"
+    },
+    {
+      "index": 596,
+      "start": 2074.399,
+      "end": 2076.19,
+      "duration": 1.791,
+      "text": "become 0 00 0 there's a small amount of"
+    },
+    {
+      "index": 597,
+      "start": 2076.2,
+      "end": 2077.75,
+      "duration": 1.55,
+      "text": "delay invol that is a short pulse I said"
+    },
+    {
+      "index": 598,
+      "start": 2077.76,
+      "end": 2079.829,
+      "duration": 2.069,
+      "text": "it's a glitch you can ignore"
+    },
+    {
+      "index": 599,
+      "start": 2079.839,
+      "end": 2083.99,
+      "duration": 4.151,
+      "text": "it now each of these flip"
+    },
+    {
+      "index": 600,
+      "start": 2087.069,
+      "end": 2087.079,
+      "duration": 0.01,
+      "text": "flops has also the propagation delay I"
+    },
+    {
+      "index": 601,
+      "start": 2087.079,
+      "end": 2088.43,
+      "duration": 1.351,
+      "text": "told you the flip flops have this"
+    },
+    {
+      "index": 602,
+      "start": 2088.44,
+      "end": 2089.669,
+      "duration": 1.229,
+      "text": "initial"
+    },
+    {
+      "index": 603,
+      "start": 2089.679,
+      "end": 2092.629,
+      "duration": 2.95,
+      "text": "stage clocking stage and the next stage"
+    },
+    {
+      "index": 604,
+      "start": 2092.639,
+      "end": 2094.109,
+      "duration": 1.47,
+      "text": "with latching"
+    },
+    {
+      "index": 605,
+      "start": 2094.119,
+      "end": 2098.79,
+      "duration": 4.671,
+      "text": "stage so there is a propagation delay"
+    },
+    {
+      "index": 606,
+      "start": 2098.8,
+      "end": 2101.15,
+      "duration": 2.35,
+      "text": "involved in each of the"
+    },
+    {
+      "index": 607,
+      "start": 2101.16,
+      "end": 2104.75,
+      "duration": 3.59,
+      "text": "flip-flops so I give this"
+    },
+    {
+      "index": 608,
+      "start": 2104.76,
+      "end": 2107.75,
+      "duration": 2.99,
+      "text": "clock it takes a while a small amount of"
+    },
+    {
+      "index": 609,
+      "start": 2107.76,
+      "end": 2110.39,
+      "duration": 2.63,
+      "text": "time though propagation delay time"
+    },
+    {
+      "index": 610,
+      "start": 2110.4,
+      "end": 2112.99,
+      "duration": 2.59,
+      "text": "before the output changes that is fed"
+    },
+    {
+      "index": 611,
+      "start": 2113.0,
+      "end": 2113.99,
+      "duration": 0.99,
+      "text": "into"
+    },
+    {
+      "index": 612,
+      "start": 2114.0,
+      "end": 2116.19,
+      "duration": 2.19,
+      "text": "this and this is going to take its one"
+    },
+    {
+      "index": 613,
+      "start": 2116.2,
+      "end": 2118.589,
+      "duration": 2.389,
+      "text": "time before this is going going to"
+    },
+    {
+      "index": 614,
+      "start": 2118.599,
+      "end": 2121.03,
+      "duration": 2.431,
+      "text": "change and this is going to be applied"
+    },
+    {
+      "index": 615,
+      "start": 2121.04,
+      "end": 2123.27,
+      "duration": 2.23,
+      "text": "here this is going to takes its own time"
+    },
+    {
+      "index": 616,
+      "start": 2123.28,
+      "end": 2126.069,
+      "duration": 2.789,
+      "text": "and this going to change so when a count"
+    },
+    {
+      "index": 617,
+      "start": 2126.079,
+      "end": 2129.87,
+      "duration": 3.791,
+      "text": "let us say the count is let us let us go"
+    },
+    {
+      "index": 618,
+      "start": 2129.88,
+      "end": 2134.43,
+      "duration": 4.55,
+      "text": "through this supposing I have this"
+    },
+    {
+      "index": 619,
+      "start": 2137.03,
+      "end": 2137.04,
+      "duration": 0.01,
+      "text": "count and I applying the clock here the"
+    },
+    {
+      "index": 620,
+      "start": 2137.04,
+      "end": 2139.39,
+      "duration": 2.35,
+      "text": "next count is"
+    },
+    {
+      "index": 621,
+      "start": 2139.4,
+      "end": 2142.23,
+      "duration": 2.83,
+      "text": "this this one has to become zero first"
+    },
+    {
+      "index": 622,
+      "start": 2142.24,
+      "end": 2144.19,
+      "duration": 1.95,
+      "text": "flipflop C flip flop has to become from"
+    },
+    {
+      "index": 623,
+      "start": 2144.2,
+      "end": 2147.109,
+      "duration": 2.909,
+      "text": "1 to zero B flip flop has to become from"
+    },
+    {
+      "index": 624,
+      "start": 2147.119,
+      "end": 2149.47,
+      "duration": 2.351,
+      "text": "1 to zero a flip flop has to become from"
+    },
+    {
+      "index": 625,
+      "start": 2149.48,
+      "end": 2151.87,
+      "duration": 2.39,
+      "text": "0 to 1 I'm feeding the clock to the C"
+    },
+    {
+      "index": 626,
+      "start": 2151.88,
+      "end": 2154.03,
+      "duration": 2.15,
+      "text": "flip flop as you can see there C flip"
+    },
+    {
+      "index": 627,
+      "start": 2154.04,
+      "end": 2156.19,
+      "duration": 2.15,
+      "text": "flop so it's going to take its own time"
+    },
+    {
+      "index": 628,
+      "start": 2156.2,
+      "end": 2158.63,
+      "duration": 2.43,
+      "text": "for this 0 to"
+    },
+    {
+      "index": 629,
+      "start": 2158.64,
+      "end": 2161.589,
+      "duration": 2.949,
+      "text": "this to become zero after that delay"
+    },
+    {
+      "index": 630,
+      "start": 2161.599,
+      "end": 2164.95,
+      "duration": 3.351,
+      "text": "only this flip FL will go from 1 to zero"
+    },
+    {
+      "index": 631,
+      "start": 2164.96,
+      "end": 2166.99,
+      "duration": 2.03,
+      "text": "after that delay only this zero will go"
+    },
+    {
+      "index": 632,
+      "start": 2167.0,
+      "end": 2171.069,
+      "duration": 4.069,
+      "text": "to one this one so from 0 1 1 to 1 0 0"
+    },
+    {
+      "index": 633,
+      "start": 2171.079,
+      "end": 2172.47,
+      "duration": 1.391,
+      "text": "to settle down it is going to take a"
+    },
+    {
+      "index": 634,
+      "start": 2172.48,
+      "end": 2176.39,
+      "duration": 3.91,
+      "text": "finite amount of time is that right"
+    },
+    {
+      "index": 635,
+      "start": 2176.4,
+      "end": 2188.349,
+      "duration": 11.949,
+      "text": "equal to approximately equal to"
+    },
+    {
+      "index": 636,
+      "start": 2190.39,
+      "end": 2190.4,
+      "duration": 0.01,
+      "text": "three"
+    },
+    {
+      "index": 637,
+      "start": 2190.4,
+      "end": 2193.27,
+      "duration": 2.87,
+      "text": "into propagation delay of"
+    },
+    {
+      "index": 638,
+      "start": 2193.28,
+      "end": 2197.15,
+      "duration": 3.87,
+      "text": "flip-flop we call t subp t subscrip p as"
+    },
+    {
+      "index": 639,
+      "start": 2197.16,
+      "end": 2199.589,
+      "duration": 2.429,
+      "text": "a propagation delay of a flipflop I want"
+    },
+    {
+      "index": 640,
+      "start": 2199.599,
+      "end": 2201.51,
+      "duration": 1.911,
+      "text": "three propagation delays approximately"
+    },
+    {
+      "index": 641,
+      "start": 2201.52,
+      "end": 2203.309,
+      "duration": 1.789,
+      "text": "of course there are other things like"
+    },
+    {
+      "index": 642,
+      "start": 2203.319,
+      "end": 2206.47,
+      "duration": 3.151,
+      "text": "reset clear all those things preset"
+    },
+    {
+      "index": 643,
+      "start": 2206.48,
+      "end": 2207.829,
+      "duration": 1.349,
+      "text": "clear and all those I'm not taking into"
+    },
+    {
+      "index": 644,
+      "start": 2207.839,
+      "end": 2210.19,
+      "duration": 2.351,
+      "text": "the see once you have a number you can"
+    },
+    {
+      "index": 645,
+      "start": 2210.2,
+      "end": 2211.55,
+      "duration": 1.35,
+      "text": "always"
+    },
+    {
+      "index": 646,
+      "start": 2211.56,
+      "end": 2213.39,
+      "duration": 1.83,
+      "text": "compute but you should know there is a"
+    },
+    {
+      "index": 647,
+      "start": 2213.4,
+      "end": 2215.03,
+      "duration": 1.63,
+      "text": "concept here you should know there is a"
+    },
+    {
+      "index": 648,
+      "start": 2215.04,
+      "end": 2217.19,
+      "duration": 2.15,
+      "text": "number you look for once the number is"
+    },
+    {
+      "index": 649,
+      "start": 2217.2,
+      "end": 2219.71,
+      "duration": 2.51,
+      "text": "given to you I can make it approximate"
+    },
+    {
+      "index": 650,
+      "start": 2219.72,
+      "end": 2223.03,
+      "duration": 3.31,
+      "text": "now 2 N but later on you find from data"
+    },
+    {
+      "index": 651,
+      "start": 2223.04,
+      "end": 2226.309,
+      "duration": 3.269,
+      "text": "it's not 2 N 3 Nan all right you to do a"
+    },
+    {
+      "index": 652,
+      "start": 2226.319,
+      "end": 2227.67,
+      "duration": 1.351,
+      "text": "computation but you should know there"
+    },
+    {
+      "index": 653,
+      "start": 2227.68,
+      "end": 2228.71,
+      "duration": 1.03,
+      "text": "something like that you have to take"
+    },
+    {
+      "index": 654,
+      "start": 2228.72,
+      "end": 2231.87,
+      "duration": 3.15,
+      "text": "into account so there is a delay each"
+    },
+    {
+      "index": 655,
+      "start": 2231.88,
+      "end": 2235.51,
+      "duration": 3.63,
+      "text": "flip flop stage which affects the change"
+    },
+    {
+      "index": 656,
+      "start": 2235.52,
+      "end": 2238.39,
+      "duration": 2.87,
+      "text": "and more number of flip flops there is"
+    },
+    {
+      "index": 657,
+      "start": 2238.4,
+      "end": 2240.43,
+      "duration": 2.03,
+      "text": "the delay in counting becomes longer and"
+    },
+    {
+      "index": 658,
+      "start": 2240.44,
+      "end": 2243.15,
+      "duration": 2.71,
+      "text": "longer right so if you have eight flip"
+    },
+    {
+      "index": 659,
+      "start": 2243.16,
+      "end": 2245.67,
+      "duration": 2.51,
+      "text": "flops eight stage with eight flip flops"
+    },
+    {
+      "index": 660,
+      "start": 2245.68,
+      "end": 2259.75,
+      "duration": 14.07,
+      "text": "how many what count can I reach"
+    },
+    {
+      "index": 661,
+      "start": 2287.39,
+      "end": 2287.4,
+      "duration": 0.01,
+      "text": "let assume TP to be the propagation"
+    },
+    {
+      "index": 662,
+      "start": 2287.4,
+      "end": 2298.95,
+      "duration": 11.55,
+      "text": "delay of a single flip"
+    },
+    {
+      "index": 663,
+      "start": 2302.91,
+      "end": 2302.92,
+      "duration": 0.01,
+      "text": "flop so eight flip flops 2 power"
+    },
+    {
+      "index": 664,
+      "start": 2302.92,
+      "end": 2310.829,
+      "duration": 7.909,
+      "text": "n 2 8 for8 as an example"
+    },
+    {
+      "index": 665,
+      "start": 2312.63,
+      "end": 2312.64,
+      "duration": 0.01,
+      "text": "for eight flip"
+    },
+    {
+      "index": 666,
+      "start": 2312.64,
+      "end": 2316.27,
+      "duration": 3.63,
+      "text": "flops delay"
+    },
+    {
+      "index": 667,
+      "start": 2318.23,
+      "end": 2318.24,
+      "duration": 0.01,
+      "text": "is"
+    },
+    {
+      "index": 668,
+      "start": 2318.24,
+      "end": 2320.829,
+      "duration": 2.589,
+      "text": "8"
+    },
+    {
+      "index": 669,
+      "start": 2320.839,
+      "end": 2323.15,
+      "duration": 2.311,
+      "text": "TP so what is the count I can reach"
+    },
+    {
+      "index": 670,
+      "start": 2323.16,
+      "end": 2326.589,
+      "duration": 3.429,
+      "text": "from0 to 2^ n minus 1 n is 8 2 power 8"
+    },
+    {
+      "index": 671,
+      "start": 2326.599,
+      "end": 2332.91,
+      "duration": 6.311,
+      "text": "is what 256 so for a count from 0 to"
+    },
+    {
+      "index": 672,
+      "start": 2337.51,
+      "end": 2337.52,
+      "duration": 0.01,
+      "text": "255 each count takes 8 TP to materialize"
+    },
+    {
+      "index": 673,
+      "start": 2337.52,
+      "end": 2338.47,
+      "duration": 0.95,
+      "text": "if I'm"
+    },
+    {
+      "index": 674,
+      "start": 2338.48,
+      "end": 2342.349,
+      "duration": 3.869,
+      "text": "zero after 8 tp0 one comes after 8 TP"
+    },
+    {
+      "index": 675,
+      "start": 2342.359,
+      "end": 2344.51,
+      "duration": 2.151,
+      "text": "two comes and so forth reliably of"
+    },
+    {
+      "index": 676,
+      "start": 2344.52,
+      "end": 2346.23,
+      "duration": 1.71,
+      "text": "course something can happen faster than"
+    },
+    {
+      "index": 677,
+      "start": 2346.24,
+      "end": 2350.79,
+      "duration": 4.55,
+      "text": "there may be no for example here to here"
+    },
+    {
+      "index": 678,
+      "start": 2350.8,
+      "end": 2352.71,
+      "duration": 1.91,
+      "text": "there's no change in this flip-flop so"
+    },
+    {
+      "index": 679,
+      "start": 2352.72,
+      "end": 2354.79,
+      "duration": 2.07,
+      "text": "it is going to immediately come there's"
+    },
+    {
+      "index": 680,
+      "start": 2354.8,
+      "end": 2356.109,
+      "duration": 1.309,
+      "text": "no change there's no question of prop"
+    },
+    {
+      "index": 681,
+      "start": 2356.119,
+      "end": 2359.03,
+      "duration": 2.911,
+      "text": "delay it's not that each count is going"
+    },
+    {
+      "index": 682,
+      "start": 2359.04,
+      "end": 2360.91,
+      "duration": 1.87,
+      "text": "to change only then I should allow for a"
+    },
+    {
+      "index": 683,
+      "start": 2360.92,
+      "end": 2364.109,
+      "duration": 3.189,
+      "text": "maximum propagation delay of 8 MP in"
+    },
+    {
+      "index": 684,
+      "start": 2364.119,
+      "end": 2367.71,
+      "duration": 3.591,
+      "text": "order for account to be reliable"
+    },
+    {
+      "index": 685,
+      "start": 2367.72,
+      "end": 2369.51,
+      "duration": 1.79,
+      "text": "now if we are talking of these clocks"
+    },
+    {
+      "index": 686,
+      "start": 2369.52,
+      "end": 2373.03,
+      "duration": 3.51,
+      "text": "the watches told you just now from 3.6"
+    },
+    {
+      "index": 687,
+      "start": 2373.04,
+      "end": 2376.069,
+      "duration": 3.029,
+      "text": "mahz you have to count down to a"
+    },
+    {
+      "index": 688,
+      "start": 2376.079,
+      "end": 2379.03,
+      "duration": 2.951,
+      "text": "second"
+    },
+    {
+      "index": 689,
+      "start": 2379.04,
+      "end": 2382.03,
+      "duration": 2.99,
+      "text": "right 1 second is one Herz per one cycle"
+    },
+    {
+      "index": 690,
+      "start": 2382.04,
+      "end": 2385.91,
+      "duration": 3.87,
+      "text": "per second is 1 second and megaherz is"
+    },
+    {
+      "index": 691,
+      "start": 2385.92,
+      "end": 2389.95,
+      "duration": 4.03,
+      "text": "10^ 6 times and 3.6 times so 3.6 million"
+    },
+    {
+      "index": 692,
+      "start": 2389.96,
+      "end": 2391.309,
+      "duration": 1.349,
+      "text": "to"
+    },
+    {
+      "index": 693,
+      "start": 2391.319,
+      "end": 2393.27,
+      "duration": 1.951,
+      "text": "1 you have to find out the number of"
+    },
+    {
+      "index": 694,
+      "start": 2393.28,
+      "end": 2395.47,
+      "duration": 2.19,
+      "text": "flip flop stages"
+    },
+    {
+      "index": 695,
+      "start": 2395.48,
+      "end": 2397.87,
+      "duration": 2.39,
+      "text": "required when that is the number of St"
+    },
+    {
+      "index": 696,
+      "start": 2397.88,
+      "end": 2400.15,
+      "duration": 2.27,
+      "text": "required each count is going to take"
+    },
+    {
+      "index": 697,
+      "start": 2400.16,
+      "end": 2402.39,
+      "duration": 2.23,
+      "text": "that much longer to"
+    },
+    {
+      "index": 698,
+      "start": 2402.4,
+      "end": 2404.19,
+      "duration": 1.79,
+      "text": "materialize"
+    },
+    {
+      "index": 699,
+      "start": 2404.2,
+      "end": 2406.71,
+      "duration": 2.51,
+      "text": "correct now if I run it at a speed which"
+    },
+    {
+      "index": 700,
+      "start": 2406.72,
+      "end": 2409.51,
+      "duration": 2.79,
+      "text": "is faster than that speed so my clock is"
+    },
+    {
+      "index": 701,
+      "start": 2409.52,
+      "end": 2414.349,
+      "duration": 4.829,
+      "text": "lower than ATP my my clock period"
+    },
+    {
+      "index": 702,
+      "start": 2414.359,
+      "end": 2416.47,
+      "duration": 2.111,
+      "text": "if clock"
+    },
+    {
+      "index": 703,
+      "start": 2416.48,
+      "end": 2419.03,
+      "duration": 2.55,
+      "text": "period what do you mean by clock period"
+    },
+    {
+      "index": 704,
+      "start": 2419.04,
+      "end": 2422.109,
+      "duration": 3.069,
+      "text": "i defined it the other day the period is"
+    },
+    {
+      "index": 705,
+      "start": 2422.119,
+      "end": 2424.589,
+      "duration": 2.47,
+      "text": "starting from one point in the clock"
+    },
+    {
+      "index": 706,
+      "start": 2424.599,
+      "end": 2427.349,
+      "duration": 2.75,
+      "text": "exactly till this the next same point in"
+    },
+    {
+      "index": 707,
+      "start": 2427.359,
+      "end": 2429.91,
+      "duration": 2.551,
+      "text": "The Next Period next clock"
+    },
+    {
+      "index": 708,
+      "start": 2429.92,
+      "end": 2432.03,
+      "duration": 2.11,
+      "text": "cycle if you take the positive edge of"
+    },
+    {
+      "index": 709,
+      "start": 2432.04,
+      "end": 2433.99,
+      "duration": 1.95,
+      "text": "the clock until the next positive Edge"
+    },
+    {
+      "index": 710,
+      "start": 2434.0,
+      "end": 2435.95,
+      "duration": 1.95,
+      "text": "comes what is the time duration that is"
+    },
+    {
+      "index": 711,
+      "start": 2435.96,
+      "end": 2437.19,
+      "duration": 1.23,
+      "text": "called the period if you take the"
+    },
+    {
+      "index": 712,
+      "start": 2437.2,
+      "end": 2439.91,
+      "duration": 2.71,
+      "text": "Negative Edge from one Negative Edge to"
+    },
+    {
+      "index": 713,
+      "start": 2439.92,
+      "end": 2442.109,
+      "duration": 2.189,
+      "text": "the next Negative Edge is clock period"
+    },
+    {
+      "index": 714,
+      "start": 2442.119,
+      "end": 2443.47,
+      "duration": 1.351,
+      "text": "so this clock"
+    },
+    {
+      "index": 715,
+      "start": 2443.48,
+      "end": 2447.91,
+      "duration": 4.43,
+      "text": "period is much much larger"
+    },
+    {
+      "index": 716,
+      "start": 2450.67,
+      "end": 2450.68,
+      "duration": 0.01,
+      "text": "than then you are not worried a small"
+    },
+    {
+      "index": 717,
+      "start": 2450.68,
+      "end": 2451.91,
+      "duration": 1.23,
+      "text": "amount of time anyway is going to have"
+    },
+    {
+      "index": 718,
+      "start": 2451.92,
+      "end": 2454.63,
+      "duration": 2.71,
+      "text": "one clock period to settle down the"
+    },
+    {
+      "index": 719,
+      "start": 2454.64,
+      "end": 2456.349,
+      "duration": 1.709,
+      "text": "count is not going to change for one"
+    },
+    {
+      "index": 720,
+      "start": 2456.359,
+      "end": 2457.79,
+      "duration": 1.431,
+      "text": "clock period every clock period the"
+    },
+    {
+      "index": 721,
+      "start": 2457.8,
+      "end": 2459.109,
+      "duration": 1.309,
+      "text": "count is going to"
+    },
+    {
+      "index": 722,
+      "start": 2459.119,
+      "end": 2462.43,
+      "duration": 3.311,
+      "text": "remain from 0 to 1 to 2 to 3 to four to"
+    },
+    {
+      "index": 723,
+      "start": 2462.44,
+      "end": 2464.63,
+      "duration": 2.19,
+      "text": "five each of these counts is going to"
+    },
+    {
+      "index": 724,
+      "start": 2464.64,
+      "end": 2467.27,
+      "duration": 2.63,
+      "text": "remain for 1 CL periods what if it takes"
+    },
+    {
+      "index": 725,
+      "start": 2467.28,
+      "end": 2470.349,
+      "duration": 3.069,
+      "text": "8p to settle down 8p is a insignificant"
+    },
+    {
+      "index": 726,
+      "start": 2470.359,
+      "end": 2472.47,
+      "duration": 2.111,
+      "text": "insignificant part of my whole clock"
+    },
+    {
+      "index": 727,
+      "start": 2472.48,
+      "end": 2474.91,
+      "duration": 2.43,
+      "text": "period but supposing I have number of"
+    },
+    {
+      "index": 728,
+      "start": 2474.92,
+      "end": 2486.23,
+      "duration": 11.31,
+      "text": "stres more if n becomes"
+    },
+    {
+      "index": 729,
+      "start": 2500.589,
+      "end": 2500.599,
+      "duration": 0.01,
+      "text": "approximate the value"
+    },
+    {
+      "index": 730,
+      "start": 2500.599,
+      "end": 2502.829,
+      "duration": 2.23,
+      "text": "of the propagation"
+    },
+    {
+      "index": 731,
+      "start": 2502.839,
+      "end": 2505.75,
+      "duration": 2.911,
+      "text": "delays of the N flip flops each flip"
+    },
+    {
+      "index": 732,
+      "start": 2505.76,
+      "end": 2508.99,
+      "duration": 3.23,
+      "text": "flop has a propagation of TP and N flip"
+    },
+    {
+      "index": 733,
+      "start": 2509.0,
+      "end": 2511.51,
+      "duration": 2.51,
+      "text": "flop stages will have n time TP and F is"
+    },
+    {
+      "index": 734,
+      "start": 2511.52,
+      "end": 2512.79,
+      "duration": 1.27,
+      "text": "n is very"
+    },
+    {
+      "index": 735,
+      "start": 2512.8,
+      "end": 2516.43,
+      "duration": 3.63,
+      "text": "large so I cannot run this counter a"
+    },
+    {
+      "index": 736,
+      "start": 2516.44,
+      "end": 2517.79,
+      "duration": 1.35,
+      "text": "speed faster than"
+    },
+    {
+      "index": 737,
+      "start": 2517.8,
+      "end": 2520.51,
+      "duration": 2.71,
+      "text": "than this ntp"
+    },
+    {
+      "index": 738,
+      "start": 2520.52,
+      "end": 2523.55,
+      "duration": 3.03,
+      "text": "so maximum clock"
+    },
+    {
+      "index": 739,
+      "start": 2523.56,
+      "end": 2527.15,
+      "duration": 3.59,
+      "text": "period has to be less than"
+    },
+    {
+      "index": 740,
+      "start": 2527.16,
+      "end": 2531.829,
+      "duration": 4.669,
+      "text": "[Music]"
+    },
+    {
+      "index": 741,
+      "start": 2536.23,
+      "end": 2536.24,
+      "duration": 0.01,
+      "text": "ntp if I run my counter faster than this"
+    },
+    {
+      "index": 742,
+      "start": 2536.24,
+      "end": 2538.03,
+      "duration": 1.79,
+      "text": "before the count settles down the next"
+    },
+    {
+      "index": 743,
+      "start": 2538.04,
+      "end": 2540.23,
+      "duration": 2.19,
+      "text": "count has to come all counts are"
+    },
+    {
+      "index": 744,
+      "start": 2540.24,
+      "end": 2541.67,
+      "duration": 1.43,
+      "text": "arbitrary then in that case it's not"
+    },
+    {
+      "index": 745,
+      "start": 2541.68,
+      "end": 2543.109,
+      "duration": 1.429,
+      "text": "reliability is not there this what I've"
+    },
+    {
+      "index": 746,
+      "start": 2543.119,
+      "end": 2545.549,
+      "duration": 2.43,
+      "text": "been stressing all the time you cannot"
+    },
+    {
+      "index": 747,
+      "start": 2545.559,
+      "end": 2547.27,
+      "duration": 1.711,
+      "text": "reliably say the count has reached from"
+    },
+    {
+      "index": 748,
+      "start": 2547.28,
+      "end": 2550.549,
+      "duration": 3.269,
+      "text": "0 to 1 1 to 2 2 to 3 3 to 4 it keeps"
+    },
+    {
+      "index": 749,
+      "start": 2550.559,
+      "end": 2553.03,
+      "duration": 2.471,
+      "text": "changing constantly because the clock"
+    },
+    {
+      "index": 750,
+      "start": 2553.04,
+      "end": 2555.069,
+      "duration": 2.029,
+      "text": "keeps coming and sometimes it may be"
+    },
+    {
+      "index": 751,
+      "start": 2555.079,
+      "end": 2556.63,
+      "duration": 1.551,
+      "text": "right depending on the number of"
+    },
+    {
+      "index": 752,
+      "start": 2556.64,
+      "end": 2558.03,
+      "duration": 1.39,
+      "text": "transition sometimes may be wrong we"
+    },
+    {
+      "index": 753,
+      "start": 2558.04,
+      "end": 2560.19,
+      "duration": 2.15,
+      "text": "don't know which is right which is wrong"
+    },
+    {
+      "index": 754,
+      "start": 2560.2,
+      "end": 2562.829,
+      "duration": 2.629,
+      "text": "so I have to either use very small"
+    },
+    {
+      "index": 755,
+      "start": 2562.839,
+      "end": 2564.15,
+      "duration": 1.311,
+      "text": "number of flip flop there is a"
+    },
+    {
+      "index": 756,
+      "start": 2564.16,
+      "end": 2566.829,
+      "duration": 2.669,
+      "text": "limitation or use extremely low clocks"
+    },
+    {
+      "index": 757,
+      "start": 2566.839,
+      "end": 2568.87,
+      "duration": 2.031,
+      "text": "low frequency clock which is not always"
+    },
+    {
+      "index": 758,
+      "start": 2568.88,
+      "end": 2570.829,
+      "duration": 1.949,
+      "text": "possible as I said the crystal"
+    },
+    {
+      "index": 759,
+      "start": 2570.839,
+      "end": 2572.95,
+      "duration": 2.111,
+      "text": "oscillator with stable"
+    },
+    {
+      "index": 760,
+      "start": 2572.96,
+      "end": 2574.829,
+      "duration": 1.869,
+      "text": "oscillators there has be Crystal and"
+    },
+    {
+      "index": 761,
+      "start": 2574.839,
+      "end": 2579.069,
+      "duration": 4.23,
+      "text": "these are only available in meah range"
+    },
+    {
+      "index": 762,
+      "start": 2579.079,
+      "end": 2581.549,
+      "duration": 2.47,
+      "text": "so either that you cannot reduce the"
+    },
+    {
+      "index": 763,
+      "start": 2581.559,
+      "end": 2584.27,
+      "duration": 2.711,
+      "text": "clock frequency for the reason of"
+    },
+    {
+      "index": 764,
+      "start": 2584.28,
+      "end": 2586.39,
+      "duration": 2.11,
+      "text": "stability not always sometimes it is"
+    },
+    {
+      "index": 765,
+      "start": 2586.4,
+      "end": 2590.99,
+      "duration": 4.59,
+      "text": "possible not always or you want"
+    },
+    {
+      "index": 766,
+      "start": 2591.0,
+      "end": 2593.87,
+      "duration": 2.87,
+      "text": "this particular speed of counting for my"
+    },
+    {
+      "index": 767,
+      "start": 2593.88,
+      "end": 2596.03,
+      "duration": 2.15,
+      "text": "application I need to count it this fast"
+    },
+    {
+      "index": 768,
+      "start": 2596.04,
+      "end": 2597.549,
+      "duration": 1.509,
+      "text": "events keep coming if number of people"
+    },
+    {
+      "index": 769,
+      "start": 2597.559,
+      "end": 2599.109,
+      "duration": 1.55,
+      "text": "I'm going to count if people keep coming"
+    },
+    {
+      "index": 770,
+      "start": 2599.119,
+      "end": 2602.109,
+      "duration": 2.99,
+      "text": "constantly know or some small events"
+    },
+    {
+      "index": 771,
+      "start": 2602.119,
+      "end": 2603.829,
+      "duration": 1.71,
+      "text": "some Atomic event or"
+    },
+    {
+      "index": 772,
+      "start": 2603.839,
+      "end": 2606.23,
+      "duration": 2.391,
+      "text": "something you are counting keep counting"
+    },
+    {
+      "index": 773,
+      "start": 2606.24,
+      "end": 2607.63,
+      "duration": 1.39,
+      "text": "at the rate at which it has come to the"
+    },
+    {
+      "index": 774,
+      "start": 2607.64,
+      "end": 2609.47,
+      "duration": 1.83,
+      "text": "count you cannot say I can only count at"
+    },
+    {
+      "index": 775,
+      "start": 2609.48,
+      "end": 2611.95,
+      "duration": 2.47,
+      "text": "this rate so please slow down I cannot"
+    },
+    {
+      "index": 776,
+      "start": 2611.96,
+      "end": 2614.43,
+      "duration": 2.47,
+      "text": "say that wherever is possible to slow"
+    },
+    {
+      "index": 777,
+      "start": 2614.44,
+      "end": 2617.109,
+      "duration": 2.669,
+      "text": "down your event or slow down or increase"
+    },
+    {
+      "index": 778,
+      "start": 2617.119,
+      "end": 2619.63,
+      "duration": 2.511,
+      "text": "the clock frequency there's no problem"
+    },
+    {
+      "index": 779,
+      "start": 2619.64,
+      "end": 2621.309,
+      "duration": 1.669,
+      "text": "or have the less number of flip flops"
+    },
+    {
+      "index": 780,
+      "start": 2621.319,
+      "end": 2622.79,
+      "duration": 1.471,
+      "text": "there's no problem but there may be"
+    },
+    {
+      "index": 781,
+      "start": 2622.8,
+      "end": 2625.069,
+      "duration": 2.269,
+      "text": "situations where the events happen fast"
+    },
+    {
+      "index": 782,
+      "start": 2625.079,
+      "end": 2626.27,
+      "duration": 1.191,
+      "text": "because that I need to use high"
+    },
+    {
+      "index": 783,
+      "start": 2626.28,
+      "end": 2628.91,
+      "duration": 2.63,
+      "text": "frequency clock and the number of clock"
+    },
+    {
+      "index": 784,
+      "start": 2628.92,
+      "end": 2630.589,
+      "duration": 1.669,
+      "text": "St also number of flipflop St is also"
+    },
+    {
+      "index": 785,
+      "start": 2630.599,
+      "end": 2632.43,
+      "duration": 1.831,
+      "text": "large because the count has to reach a"
+    },
+    {
+      "index": 786,
+      "start": 2632.44,
+      "end": 2635.63,
+      "duration": 3.19,
+      "text": "very large value then this counter"
+    },
+    {
+      "index": 787,
+      "start": 2635.64,
+      "end": 2638.63,
+      "duration": 2.99,
+      "text": "fails so this counter which is called a"
+    },
+    {
+      "index": 788,
+      "start": 2638.64,
+      "end": 2647.23,
+      "duration": 8.59,
+      "text": "ripple"
+    },
+    {
+      "index": 789,
+      "start": 2652.43,
+      "end": 2652.44,
+      "duration": 0.01,
+      "text": "counter suffers from the fact that the"
+    },
+    {
+      "index": 790,
+      "start": 2652.44,
+      "end": 2655.63,
+      "duration": 3.19,
+      "text": "clock has to Ripple through the flip"
+    },
+    {
+      "index": 791,
+      "start": 2655.64,
+      "end": 2659.03,
+      "duration": 3.39,
+      "text": "flops each clock each each flip-flop"
+    },
+    {
+      "index": 792,
+      "start": 2659.04,
+      "end": 2660.51,
+      "duration": 1.47,
+      "text": "clock is the output of the previous"
+    },
+    {
+      "index": 793,
+      "start": 2660.52,
+      "end": 2663.03,
+      "duration": 2.51,
+      "text": "clock I give the clock to the original"
+    },
+    {
+      "index": 794,
+      "start": 2663.04,
+      "end": 2665.63,
+      "duration": 2.59,
+      "text": "clock to the first flip flop the output"
+    },
+    {
+      "index": 795,
+      "start": 2665.64,
+      "end": 2666.87,
+      "duration": 1.23,
+      "text": "of that flip flop is given as the clock"
+    },
+    {
+      "index": 796,
+      "start": 2666.88,
+      "end": 2669.03,
+      "duration": 2.15,
+      "text": "to second flip flop out the second flip"
+    },
+    {
+      "index": 797,
+      "start": 2669.04,
+      "end": 2670.23,
+      "duration": 1.19,
+      "text": "flop given as clock to the third flip"
+    },
+    {
+      "index": 798,
+      "start": 2670.24,
+      "end": 2672.15,
+      "duration": 1.91,
+      "text": "flop the clock doesn't directly get into"
+    },
+    {
+      "index": 799,
+      "start": 2672.16,
+      "end": 2674.39,
+      "duration": 2.23,
+      "text": "the flip flops the clock that is given"
+    },
+    {
+      "index": 800,
+      "start": 2674.4,
+      "end": 2675.829,
+      "duration": 1.429,
+      "text": "to you as a circuit in the crystal"
+    },
+    {
+      "index": 801,
+      "start": 2675.839,
+      "end": 2678.109,
+      "duration": 2.27,
+      "text": "oscillator whatever I said that clock"
+    },
+    {
+      "index": 802,
+      "start": 2678.119,
+      "end": 2679.67,
+      "duration": 1.551,
+      "text": "doesn't directly go into different flip"
+    },
+    {
+      "index": 803,
+      "start": 2679.68,
+      "end": 2681.71,
+      "duration": 2.03,
+      "text": "flops it only goes to the first flip"
+    },
+    {
+      "index": 804,
+      "start": 2681.72,
+      "end": 2684.19,
+      "duration": 2.47,
+      "text": "flop and it has to rle through like a"
+    },
+    {
+      "index": 805,
+      "start": 2684.2,
+      "end": 2686.069,
+      "duration": 1.869,
+      "text": "wave in"
+    },
+    {
+      "index": 806,
+      "start": 2686.079,
+      "end": 2688.67,
+      "duration": 2.591,
+      "text": "Ocean does go into this into this into"
+    },
+    {
+      "index": 807,
+      "start": 2688.68,
+      "end": 2691.39,
+      "duration": 2.71,
+      "text": "this into this into this and each stage"
+    },
+    {
+      "index": 808,
+      "start": 2691.4,
+      "end": 2693.349,
+      "duration": 1.949,
+      "text": "it accumulates a delay because of the"
+    },
+    {
+      "index": 809,
+      "start": 2693.359,
+      "end": 2695.43,
+      "duration": 2.071,
+      "text": "propagation of flip flop so the clock"
+    },
+    {
+      "index": 810,
+      "start": 2695.44,
+      "end": 2697.99,
+      "duration": 2.55,
+      "text": "accumulates delay and if the number of"
+    },
+    {
+      "index": 811,
+      "start": 2698.0,
+      "end": 2701.109,
+      "duration": 3.109,
+      "text": "stages is larger than the events number"
+    },
+    {
+      "index": 812,
+      "start": 2701.119,
+      "end": 2702.47,
+      "duration": 1.351,
+      "text": "of stages very large the propagation"
+    },
+    {
+      "index": 813,
+      "start": 2702.48,
+      "end": 2705.71,
+      "duration": 3.23,
+      "text": "delay is longer than the frequency of"
+    },
+    {
+      "index": 814,
+      "start": 2705.72,
+      "end": 2708.15,
+      "duration": 2.43,
+      "text": "the events the the distance between two"
+    },
+    {
+      "index": 815,
+      "start": 2708.16,
+      "end": 2709.51,
+      "duration": 1.35,
+      "text": "events the time difference between two"
+    },
+    {
+      "index": 816,
+      "start": 2709.52,
+      "end": 2712.39,
+      "duration": 2.87,
+      "text": "events then you lose count lose track of"
+    },
+    {
+      "index": 817,
+      "start": 2712.4,
+      "end": 2715.75,
+      "duration": 3.35,
+      "text": "the count so Ripple counter the very"
+    },
+    {
+      "index": 818,
+      "start": 2715.76,
+      "end": 2717.589,
+      "duration": 1.829,
+      "text": "name suggest is a ripple why is called"
+    },
+    {
+      "index": 819,
+      "start": 2717.599,
+      "end": 2718.79,
+      "duration": 1.191,
+      "text": "Ripple counter is because the clock is"
+    },
+    {
+      "index": 820,
+      "start": 2718.8,
+      "end": 2720.829,
+      "duration": 2.029,
+      "text": "not directly apply to all the flip flops"
+    },
+    {
+      "index": 821,
+      "start": 2720.839,
+      "end": 2722.309,
+      "duration": 1.47,
+      "text": "the clock is up to the first flip flop"
+    },
+    {
+      "index": 822,
+      "start": 2722.319,
+      "end": 2723.589,
+      "duration": 1.27,
+      "text": "which ripples through the different flip"
+    },
+    {
+      "index": 823,
+      "start": 2723.599,
+      "end": 2725.71,
+      "duration": 2.111,
+      "text": "flops to different stages the Ripple"
+    },
+    {
+      "index": 824,
+      "start": 2725.72,
+      "end": 2727.99,
+      "duration": 2.27,
+      "text": "counter files if the the number"
+    },
+    {
+      "index": 825,
+      "start": 2728.0,
+      "end": 2731.75,
+      "duration": 3.75,
+      "text": "of stages very large such that the total"
+    },
+    {
+      "index": 826,
+      "start": 2731.76,
+      "end": 2734.15,
+      "duration": 2.39,
+      "text": "propagation delay"
+    },
+    {
+      "index": 827,
+      "start": 2734.16,
+      "end": 2737.069,
+      "duration": 2.909,
+      "text": "is of the order of I won't say"
+    },
+    {
+      "index": 828,
+      "start": 2737.079,
+      "end": 2739.109,
+      "duration": 2.03,
+      "text": "mathematically it should be larg but"
+    },
+    {
+      "index": 829,
+      "start": 2739.119,
+      "end": 2741.069,
+      "duration": 1.95,
+      "text": "even in a practical electronic circuit"
+    },
+    {
+      "index": 830,
+      "start": 2741.079,
+      "end": 2742.589,
+      "duration": 1.51,
+      "text": "when you approach the order of this"
+    },
+    {
+      "index": 831,
+      "start": 2742.599,
+      "end": 2745.309,
+      "duration": 2.71,
+      "text": "clock frequency clock period the total"
+    },
+    {
+      "index": 832,
+      "start": 2745.319,
+      "end": 2746.79,
+      "duration": 1.471,
+      "text": "propagation delay approaches the order"
+    },
+    {
+      "index": 833,
+      "start": 2746.8,
+      "end": 2750.79,
+      "duration": 3.99,
+      "text": "of the propagation delay it will fail to"
+    },
+    {
+      "index": 834,
+      "start": 2750.8,
+      "end": 2752.91,
+      "duration": 2.11,
+      "text": "be a reliable circuit because you can"
+    },
+    {
+      "index": 835,
+      "start": 2752.92,
+      "end": 2756.39,
+      "duration": 3.47,
+      "text": "never predict exact values so I have to"
+    },
+    {
+      "index": 836,
+      "start": 2756.4,
+      "end": 2759.19,
+      "duration": 2.79,
+      "text": "think of I like flip flops being used as"
+    },
+    {
+      "index": 837,
+      "start": 2759.2,
+      "end": 2761.39,
+      "duration": 2.19,
+      "text": "counters gives you a lot of things as I"
+    },
+    {
+      "index": 838,
+      "start": 2761.4,
+      "end": 2764.309,
+      "duration": 2.909,
+      "text": "said it can do do a division by two you"
+    },
+    {
+      "index": 839,
+      "start": 2764.319,
+      "end": 2766.309,
+      "duration": 1.99,
+      "text": "can count up countdown start any value"
+    },
+    {
+      "index": 840,
+      "start": 2766.319,
+      "end": 2767.91,
+      "duration": 1.591,
+      "text": "end near value and Counting is one of"
+    },
+    {
+      "index": 841,
+      "start": 2767.92,
+      "end": 2769.43,
+      "duration": 1.51,
+      "text": "the important things we do"
+    },
+    {
+      "index": 842,
+      "start": 2769.44,
+      "end": 2773.549,
+      "duration": 4.109,
+      "text": "in many application systems but Ripple"
+    },
+    {
+      "index": 843,
+      "start": 2773.559,
+      "end": 2774.75,
+      "duration": 1.191,
+      "text": "counter has been replaced with some"
+    },
+    {
+      "index": 844,
+      "start": 2774.76,
+      "end": 2777.47,
+      "duration": 2.71,
+      "text": "other counter so"
+    },
+    {
+      "index": 845,
+      "start": 2777.48,
+      "end": 2779.51,
+      "duration": 2.03,
+      "text": "the the Improvement of this Ripple"
+    },
+    {
+      "index": 846,
+      "start": 2779.52,
+      "end": 2783.03,
+      "duration": 3.51,
+      "text": "counter is called a synchronous counter"
+    },
+    {
+      "index": 847,
+      "start": 2783.04,
+      "end": 2785.349,
+      "duration": 2.309,
+      "text": "we'll talk about in the next lecture a"
+    },
+    {
+      "index": 848,
+      "start": 2785.359,
+      "end": 2790.99,
+      "duration": 5.631,
+      "text": "synchronous counter in principle"
+    },
+    {
+      "index": 849,
+      "start": 2794.27,
+      "end": 2794.28,
+      "duration": 0.01,
+      "text": "is which will take care of this"
+    },
+    {
+      "index": 850,
+      "start": 2794.28,
+      "end": 2796.67,
+      "duration": 2.39,
+      "text": "problem so Ripple counter suffers from"
+    },
+    {
+      "index": 851,
+      "start": 2796.68,
+      "end": 2799.03,
+      "duration": 2.35,
+      "text": "the problem of too many stages and"
+    },
+    {
+      "index": 852,
+      "start": 2799.04,
+      "end": 2801.15,
+      "duration": 2.11,
+      "text": "propagation delay affecting the total"
+    },
+    {
+      "index": 853,
+      "start": 2801.16,
+      "end": 2802.549,
+      "duration": 1.389,
+      "text": "number of count"
+    },
+    {
+      "index": 854,
+      "start": 2802.559,
+      "end": 2805.71,
+      "duration": 3.151,
+      "text": "again use it for on the other hand a"
+    },
+    {
+      "index": 855,
+      "start": 2805.72,
+      "end": 2807.87,
+      "duration": 2.15,
+      "text": "synchronous counter is what which is"
+    },
+    {
+      "index": 856,
+      "start": 2807.88,
+      "end": 2817.87,
+      "duration": 9.99,
+      "text": "more practically used"
+    },
+    {
+      "index": 857,
+      "start": 2819.51,
+      "end": 2819.52,
+      "duration": 0.01,
+      "text": "in a synchronus counter all flip flops"
+    },
+    {
+      "index": 858,
+      "start": 2819.52,
+      "end": 2821.71,
+      "duration": 2.19,
+      "text": "receive the clock at the same time"
+    },
+    {
+      "index": 859,
+      "start": 2821.72,
+      "end": 2823.47,
+      "duration": 1.75,
+      "text": "there's no question of clock"
+    },
+    {
+      "index": 860,
+      "start": 2823.48,
+      "end": 2825.95,
+      "duration": 2.47,
+      "text": "throw the clock that is given this"
+    },
+    {
+      "index": 861,
+      "start": 2825.96,
+      "end": 2827.27,
+      "duration": 1.31,
+      "text": "Crystal clock or whatever clock you"
+    },
+    {
+      "index": 862,
+      "start": 2827.28,
+      "end": 2830.43,
+      "duration": 3.15,
+      "text": "desire for the circuit the stable clock"
+    },
+    {
+      "index": 863,
+      "start": 2830.44,
+      "end": 2833.39,
+      "duration": 2.95,
+      "text": "is given to all the flip"
+    },
+    {
+      "index": 864,
+      "start": 2833.4,
+      "end": 2836.589,
+      "duration": 3.189,
+      "text": "flops so they're all clocked all the"
+    },
+    {
+      "index": 865,
+      "start": 2836.599,
+      "end": 2839.27,
+      "duration": 2.671,
+      "text": "time but the change will depend on the"
+    },
+    {
+      "index": 866,
+      "start": 2839.28,
+      "end": 2841.91,
+      "duration": 2.63,
+      "text": "previous count because if all the flip"
+    },
+    {
+      "index": 867,
+      "start": 2841.92,
+      "end": 2843.309,
+      "duration": 1.389,
+      "text": "flops are given the clock and all the"
+    },
+    {
+      "index": 868,
+      "start": 2843.319,
+      "end": 2845.51,
+      "duration": 2.191,
+      "text": "flip flop change up and down then I can"
+    },
+    {
+      "index": 869,
+      "start": 2845.52,
+      "end": 2849.51,
+      "duration": 3.99,
+      "text": "only count from one 1 1111 to 0 0 only"
+    },
+    {
+      "index": 870,
+      "start": 2849.52,
+      "end": 2852.39,
+      "duration": 2.87,
+      "text": "all of the toggle flip flops all tole F"
+    },
+    {
+      "index": 871,
+      "start": 2852.4,
+      "end": 2854.71,
+      "duration": 2.31,
+      "text": "so one state is all 11111 other state is"
+    },
+    {
+      "index": 872,
+      "start": 2854.72,
+      "end": 2857.63,
+      "duration": 2.91,
+      "text": "all 0 0 0 that I don't want I'll be able"
+    },
+    {
+      "index": 873,
+      "start": 2857.64,
+      "end": 2859.75,
+      "duration": 2.11,
+      "text": "to get all intermediate counts also so"
+    },
+    {
+      "index": 874,
+      "start": 2859.76,
+      "end": 2862.47,
+      "duration": 2.71,
+      "text": "we'll see how to use a"
+    },
+    {
+      "index": 875,
+      "start": 2862.48,
+      "end": 2866.27,
+      "duration": 3.79,
+      "text": "flipflop whose flip flops whose clocks"
+    },
+    {
+      "index": 876,
+      "start": 2866.28,
+      "end": 2868.91,
+      "duration": 2.63,
+      "text": "are all tied together the same clock"
+    },
+    {
+      "index": 877,
+      "start": 2868.92,
+      "end": 2870.75,
+      "duration": 1.83,
+      "text": "that is the given clock is applied to"
+    },
+    {
+      "index": 878,
+      "start": 2870.76,
+      "end": 2872.67,
+      "duration": 1.91,
+      "text": "all the flip flops not to the first flip"
+    },
+    {
+      "index": 879,
+      "start": 2872.68,
+      "end": 2875.349,
+      "duration": 2.669,
+      "text": "flop alone but the same time how to get"
+    },
+    {
+      "index": 880,
+      "start": 2875.359,
+      "end": 2877.87,
+      "duration": 2.511,
+      "text": "a different count these are called"
+    },
+    {
+      "index": 881,
+      "start": 2877.88,
+      "end": 2879.79,
+      "duration": 1.91,
+      "text": "synchronous counters we'll see it in the"
+    },
+    {
+      "index": 882,
+      "start": 2879.8,
+      "end": 2881.63,
+      "duration": 1.83,
+      "text": "next lecture before that you can do a"
+    },
+    {
+      "index": 883,
+      "start": 2881.64,
+      "end": 2884.87,
+      "duration": 3.23,
+      "text": "lot of work on these syn Ripple counters"
+    },
+    {
+      "index": 884,
+      "start": 2884.88,
+      "end": 2887.23,
+      "duration": 2.35,
+      "text": "what we have given you is a"
+    },
+    {
+      "index": 885,
+      "start": 2887.24,
+      "end": 2892.39,
+      "duration": 5.15,
+      "text": "flavor I would like you to design"
+    },
+    {
+      "index": 886,
+      "start": 2916.47,
+      "end": 2916.48,
+      "duration": 0.01,
+      "text": "counter for"
+    },
+    {
+      "index": 887,
+      "start": 2916.48,
+      "end": 2921.069,
+      "duration": 4.589,
+      "text": "10 down counter for"
+    },
+    {
+      "index": 888,
+      "start": 2924.589,
+      "end": 2924.599,
+      "duration": 0.01,
+      "text": "10 so these are called decimal counters"
+    },
+    {
+      "index": 889,
+      "start": 2924.599,
+      "end": 2926.829,
+      "duration": 2.23,
+      "text": "go from 0 to"
+    },
+    {
+      "index": 890,
+      "start": 2926.839,
+      "end": 2931.829,
+      "duration": 4.99,
+      "text": "9 or 9 to"
+    },
+    {
+      "index": 891,
+      "start": 2934.309,
+      "end": 2934.319,
+      "duration": 0.01,
+      "text": "0 and any other value you can also do as"
+    },
+    {
+      "index": 892,
+      "start": 2934.319,
+      "end": 2937.349,
+      "duration": 3.03,
+      "text": "he said by using these Gates we also"
+    },
+    {
+      "index": 893,
+      "start": 2937.359,
+      "end": 2938.47,
+      "duration": 1.111,
+      "text": "give you the"
+    },
+    {
+      "index": 894,
+      "start": 2938.48,
+      "end": 2942.99,
+      "duration": 4.51,
+      "text": "clock watch"
+    },
+    {
+      "index": 895,
+      "start": 2945.67,
+      "end": 2945.68,
+      "duration": 0.01,
+      "text": "example these are the assignments on"
+    },
+    {
+      "index": 896,
+      "start": 2945.68,
+      "end": 2948.23,
+      "duration": 2.55,
+      "text": "this Ripple counters but actually in"
+    },
+    {
+      "index": 897,
+      "start": 2948.24,
+      "end": 2949.47,
+      "duration": 1.23,
+      "text": "watch we will not use a ripple counter"
+    },
+    {
+      "index": 898,
+      "start": 2949.48,
+      "end": 2950.75,
+      "duration": 1.27,
+      "text": "finally we'll say that because watch is"
+    },
+    {
+      "index": 899,
+      "start": 2950.76,
+      "end": 2953.349,
+      "duration": 2.589,
+      "text": "so many stages you'll see that it may"
+    },
+    {
+      "index": 900,
+      "start": 2953.359,
+      "end": 2954.87,
+      "duration": 1.511,
+      "text": "not be worthwh do a rle counter you may"
+    },
+    {
+      "index": 901,
+      "start": 2954.88,
+      "end": 2956.39,
+      "duration": 1.51,
+      "text": "have to use a synchronous counter so"
+    },
+    {
+      "index": 902,
+      "start": 2956.4,
+      "end": 2957.75,
+      "duration": 1.35,
+      "text": "we'll talk about synchronous counter the"
+    },
+    {
+      "index": 903,
+      "start": 2957.76,
+      "end": 2961.31,
+      "duration": 3.55,
+      "text": "next lecture"
+    },
+    {
+      "index": 904,
+      "start": 3056.47,
+      "end": 3056.48,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 905,
+      "start": 3056.48,
+      "end": 3059.39,
+      "duration": 2.91,
+      "text": "he the"
+    },
+    {
+      "index": 906,
+      "start": 3059.4,
+      "end": 3093.84,
+      "duration": 34.44,
+      "text": "[Music]"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

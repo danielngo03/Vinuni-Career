@@ -1,0 +1,4680 @@
+{
+  "video": {
+    "id": "EQJBp6Ym-6A",
+    "title": "Lec 6 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=EQJBp6Ym-6A",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2728,
+    "language": "en"
+  },
+  "segment_count": 666,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.0,
+      "end": 12.619,
+      "duration": 5.619,
+      "text": "I assume from high school you know how to add and multiply"
+    },
+    {
+      "index": 1,
+      "start": 12.619,
+      "end": 17.549,
+      "duration": 4.93,
+      "text": "complex numbers using the relation i squared equals"
+    },
+    {
+      "index": 2,
+      "start": 17.549,
+      "end": 23.07,
+      "duration": 5.521,
+      "text": "negative one. I'm a little less certain that"
+    },
+    {
+      "index": 3,
+      "start": 23.07,
+      "end": 29.084,
+      "duration": 6.014,
+      "text": "you remember how to divide them. I hope you read last night by"
+    },
+    {
+      "index": 4,
+      "start": 29.084,
+      "end": 34.408,
+      "duration": 5.324,
+      "text": "way of preparation for that, but since that's something"
+    },
+    {
+      "index": 5,
+      "start": 34.408,
+      "end": 40.225,
+      "duration": 5.817,
+      "text": "we're going to have to do a lot of a differential equations,"
+    },
+    {
+      "index": 6,
+      "start": 40.225,
+      "end": 45.845,
+      "duration": 5.62,
+      "text": "so remember that the division is done by making use of the"
+    },
+    {
+      "index": 7,
+      "start": 45.845,
+      "end": 50.953,
+      "duration": 5.108,
+      "text": "complex conjugate. So, if z is equal to a plus bi,"
+    },
+    {
+      "index": 8,
+      "start": 50.953,
+      "end": 53.948,
+      "duration": 2.995,
+      "text": "some people write a plus ib,"
+    },
+    {
+      "index": 9,
+      "start": 53.948,
+      "end": 57.204,
+      "duration": 3.256,
+      "text": "and sometimes I'll do that too if it's more"
+    },
+    {
+      "index": 10,
+      "start": 57.204,
+      "end": 59.874,
+      "duration": 2.67,
+      "text": "convenient. Then, the complex conjugate is"
+    },
+    {
+      "index": 11,
+      "start": 59.874,
+      "end": 63.0,
+      "duration": 3.126,
+      "text": "what you get by changing i to negative i."
+    },
+    {
+      "index": 12,
+      "start": 63.0,
+      "end": 66.792,
+      "duration": 3.792,
+      "text": "And, the important thing is that the product of those two is"
+    },
+    {
+      "index": 13,
+      "start": 66.792,
+      "end": 69.299,
+      "duration": 2.507,
+      "text": "a real number. The product of these is a"
+    },
+    {
+      "index": 14,
+      "start": 69.299,
+      "end": 73.157,
+      "duration": 3.858,
+      "text": "squared minus the quantity ib all squared,"
+    },
+    {
+      "index": 15,
+      "start": 73.157,
+      "end": 76.95,
+      "duration": 3.793,
+      "text": "which makes a squared plus b squared because i"
+    },
+    {
+      "index": 16,
+      "start": 76.95,
+      "end": 79.264,
+      "duration": 2.314,
+      "text": "squared is negative one."
+    },
+    {
+      "index": 17,
+      "start": 79.264,
+      "end": 82.864,
+      "duration": 3.6,
+      "text": "So, the product of those, that's what you multiply if you"
+    },
+    {
+      "index": 18,
+      "start": 82.864,
+      "end": 86.078,
+      "duration": 3.214,
+      "text": "want to multiply this by something to make it real."
+    },
+    {
+      "index": 19,
+      "start": 86.078,
+      "end": 90.0,
+      "duration": 3.922,
+      "text": "You always multiplied by its complex conjugate."
+    },
+    {
+      "index": 20,
+      "start": 90.0,
+      "end": 94.089,
+      "duration": 4.089,
+      "text": "And that's the trick that underlines the doing of the"
+    },
+    {
+      "index": 21,
+      "start": 94.089,
+      "end": 96.056,
+      "duration": 1.967,
+      "text": "division. So, for example,"
+    },
+    {
+      "index": 22,
+      "start": 96.056,
+      "end": 100.303,
+      "duration": 4.247,
+      "text": "I better hang onto these or I'll never remember all the"
+    },
+    {
+      "index": 23,
+      "start": 100.303,
+      "end": 102.662,
+      "duration": 2.359,
+      "text": "examples. Suppose, for example,"
+    },
+    {
+      "index": 24,
+      "start": 102.662,
+      "end": 107.224,
+      "duration": 4.562,
+      "text": "we wanted to calculate (two plus i) divided by (one minus 3"
+    },
+    {
+      "index": 25,
+      "start": 107.224,
+      "end": 111.707,
+      "duration": 4.483,
+      "text": "i). To calculate it means I want to"
+    },
+    {
+      "index": 26,
+      "start": 111.707,
+      "end": 115.404,
+      "duration": 3.697,
+      "text": "do the division; I want to express the answer in"
+    },
+    {
+      "index": 27,
+      "start": 115.404,
+      "end": 120.48,
+      "duration": 5.076,
+      "text": "the form a plus bi. What you do is multiply the top"
+    },
+    {
+      "index": 28,
+      "start": 120.48,
+      "end": 124.959,
+      "duration": 4.479,
+      "text": "and bottom by the complex conjugate of the denominator in"
+    },
+    {
+      "index": 29,
+      "start": 124.959,
+      "end": 129.12,
+      "duration": 4.161,
+      "text": "order to make it real. So, it's (one plus 3i) divided"
+    },
+    {
+      "index": 30,
+      "start": 129.12,
+      "end": 134.08,
+      "duration": 4.96,
+      "text": "by (one plus 3i), as they taught you in"
+    },
+    {
+      "index": 31,
+      "start": 134.08,
+      "end": 136.479,
+      "duration": 2.399,
+      "text": "elementary school, that is one,"
+    },
+    {
+      "index": 32,
+      "start": 136.479,
+      "end": 140.879,
+      "duration": 4.4,
+      "text": "in a rather odd notation; therefore, multiplying doesn't"
+    },
+    {
+      "index": 33,
+      "start": 140.879,
+      "end": 143.439,
+      "duration": 2.56,
+      "text": "change the value of the fraction."
+    },
+    {
+      "index": 34,
+      "start": 143.439,
+      "end": 147.52,
+      "duration": 4.081,
+      "text": "And so, the denominator now becomes 1 squared plus 3"
+    },
+    {
+      "index": 35,
+      "start": 147.52,
+      "end": 152.0,
+      "duration": 4.48,
+      "text": "squared, which is ten."
+    },
+    {
+      "index": 36,
+      "start": 152.0,
+      "end": 155.723,
+      "duration": 3.723,
+      "text": "And, the numerator is, learn to do this without"
+    },
+    {
+      "index": 37,
+      "start": 155.723,
+      "end": 160.338,
+      "duration": 4.615,
+      "text": "multiplying out four terms. You must be able to do this in"
+    },
+    {
+      "index": 38,
+      "start": 160.338,
+      "end": 163.414,
+      "duration": 3.076,
+      "text": "your head. And, you always do it by the"
+    },
+    {
+      "index": 39,
+      "start": 163.414,
+      "end": 168.352,
+      "duration": 4.938,
+      "text": "grouping, or post office method, whatever you want to call it,"
+    },
+    {
+      "index": 40,
+      "start": 168.352,
+      "end": 173.29,
+      "duration": 4.938,
+      "text": "namely, first put down the real part, which is made out of two"
+    },
+    {
+      "index": 41,
+      "start": 173.29,
+      "end": 177.823,
+      "duration": 4.533,
+      "text": "times one minus three times one. So, that's negative one."
+    },
+    {
+      "index": 42,
+      "start": 177.823,
+      "end": 181.871,
+      "duration": 4.048,
+      "text": "And then, the imaginary part, which is i times one."
+    },
+    {
+      "index": 43,
+      "start": 181.871,
+      "end": 186.0,
+      "duration": 4.129,
+      "text": "That's one, coefficient one, plus 6i."
+    },
+    {
+      "index": 44,
+      "start": 186.0,
+      "end": 189.396,
+      "duration": 3.396,
+      "text": "So, that makes 7i. Now, some people feel this"
+    },
+    {
+      "index": 45,
+      "start": 189.396,
+      "end": 192.252,
+      "duration": 2.856,
+      "text": "still doesn't look right, if you wish,"
+    },
+    {
+      "index": 46,
+      "start": 192.252,
+      "end": 195.803,
+      "duration": 3.551,
+      "text": "and for some places and differential equations,"
+    },
+    {
+      "index": 47,
+      "start": 195.803,
+      "end": 200.435,
+      "duration": 4.632,
+      "text": "it will be useful to write that as minus one tenth plus seven"
+    },
+    {
+      "index": 48,
+      "start": 200.435,
+      "end": 204.757,
+      "duration": 4.322,
+      "text": "tenths i. And, now it's perfectly clear"
+    },
+    {
+      "index": 49,
+      "start": 204.757,
+      "end": 210.176,
+      "duration": 5.419,
+      "text": "that it's in the form a plus bi. So, learn to do that if you"
+    },
+    {
+      "index": 50,
+      "start": 210.176,
+      "end": 213.884,
+      "duration": 3.708,
+      "text": "don't know already. It's going to be important."
+    },
+    {
+      "index": 51,
+      "start": 213.884,
+      "end": 218.156,
+      "duration": 4.272,
+      "text": "Now, the main thing today is the polar representation,"
+    },
+    {
+      "index": 52,
+      "start": 218.156,
+      "end": 222.026,
+      "duration": 3.87,
+      "text": "which sometimes they don't get to in high school."
+    },
+    {
+      "index": 53,
+      "start": 222.026,
+      "end": 225.411,
+      "duration": 3.385,
+      "text": "And if they do, it's usually not in a grown"
+    },
+    {
+      "index": 54,
+      "start": 225.411,
+      "end": 229.2,
+      "duration": 3.789,
+      "text": "up-enough in a form for us to be able to use it."
+    },
+    {
+      "index": 55,
+      "start": 229.2,
+      "end": 232.505,
+      "duration": 3.305,
+      "text": "So, I have to worry about that little bit."
+    },
+    {
+      "index": 56,
+      "start": 232.505,
+      "end": 236.777,
+      "duration": 4.272,
+      "text": "The polar representation, of course, is nominally just"
+    },
+    {
+      "index": 57,
+      "start": 236.777,
+      "end": 240.969,
+      "duration": 4.192,
+      "text": "the switch to polar coordinates. If here's a plus bi,"
+    },
+    {
+      "index": 58,
+      "start": 240.969,
+      "end": 245.0,
+      "duration": 4.031,
+      "text": "then this is r, and that's theta."
+    },
+    {
+      "index": 59,
+      "start": 245.0,
+      "end": 247.968,
+      "duration": 2.968,
+      "text": "And therefore, this can be written as,"
+    },
+    {
+      "index": 60,
+      "start": 247.968,
+      "end": 251.659,
+      "duration": 3.691,
+      "text": "in the polar form, that would be r cosine theta"
+    },
+    {
+      "index": 61,
+      "start": 251.659,
+      "end": 255.59,
+      "duration": 3.931,
+      "text": "plus i, or r cosine theta."
+    },
+    {
+      "index": 62,
+      "start": 255.59,
+      "end": 258.077,
+      "duration": 2.487,
+      "text": "That's the A part."
+    },
+    {
+      "index": 63,
+      "start": 258.077,
+      "end": 261.446,
+      "duration": 3.369,
+      "text": "And, the B part is, the imaginary part is r"
+    },
+    {
+      "index": 64,
+      "start": 261.446,
+      "end": 264.415,
+      "duration": 2.969,
+      "text": "sin(theta) times i."
+    },
+    {
+      "index": 65,
+      "start": 264.415,
+      "end": 267.704,
+      "duration": 3.289,
+      "text": "Now, it would be customary, at this point,"
+    },
+    {
+      "index": 66,
+      "start": 267.704,
+      "end": 273.0,
+      "duration": 5.296,
+      "text": "to put the i in front, just because it looks better."
+    },
+    {
+      "index": 67,
+      "start": 273.0,
+      "end": 276.357,
+      "duration": 3.357,
+      "text": "The complex numbers are commutative, satisfied to"
+    },
+    {
+      "index": 68,
+      "start": 276.357,
+      "end": 278.665,
+      "duration": 2.308,
+      "text": "commutative law of multiplication,"
+    },
+    {
+      "index": 69,
+      "start": 278.665,
+      "end": 282.722,
+      "duration": 4.057,
+      "text": "which means it doesn't matter in multiplication whether you"
+    },
+    {
+      "index": 70,
+      "start": 282.722,
+      "end": 286.359,
+      "duration": 3.637,
+      "text": "put i in front or behind. It's still the same answer."
+    },
+    {
+      "index": 71,
+      "start": 286.359,
+      "end": 290.345,
+      "duration": 3.986,
+      "text": "So, this would be r cosine theta plus i times"
+    },
+    {
+      "index": 72,
+      "start": 290.345,
+      "end": 292.654,
+      "duration": 2.309,
+      "text": "r sine theta,"
+    },
+    {
+      "index": 73,
+      "start": 292.654,
+      "end": 294.962,
+      "duration": 2.308,
+      "text": "which, of course, will factor out,"
+    },
+    {
+      "index": 74,
+      "start": 294.962,
+      "end": 299.228,
+      "duration": 4.266,
+      "text": "and will make it cosine theta plus i sine theta."
+    },
+    {
+      "index": 75,
+      "start": 299.228,
+      "end": 302.376,
+      "duration": 3.148,
+      "text": "Now, it was Euler who took the"
+    },
+    {
+      "index": 76,
+      "start": 302.376,
+      "end": 305.943,
+      "duration": 3.567,
+      "text": "decisive step and said, hey, look, I'm going to call"
+    },
+    {
+      "index": 77,
+      "start": 305.943,
+      "end": 310.0,
+      "duration": 4.057,
+      "text": "that e to the i theta."
+    },
+    {
+      "index": 78,
+      "start": 310.0,
+      "end": 315.586,
+      "duration": 5.586,
+      "text": "Now, why did he do that? Because everything seemed to"
+    },
+    {
+      "index": 79,
+      "start": 315.586,
+      "end": 321.388,
+      "duration": 5.802,
+      "text": "indicate that it should. But that's certainly worth the"
+    },
+    {
+      "index": 80,
+      "start": 321.388,
+      "end": 324.933,
+      "duration": 3.545,
+      "text": "best color we have, which is what?"
+    },
+    {
+      "index": 81,
+      "start": 324.933,
+      "end": 329.446,
+      "duration": 4.513,
+      "text": "We are getting low here. Okay, nonetheless,"
+    },
+    {
+      "index": 82,
+      "start": 329.446,
+      "end": 334.28,
+      "duration": 4.834,
+      "text": "it's worth pink. I will even give him his due,"
+    },
+    {
+      "index": 83,
+      "start": 334.28,
+      "end": 338.184,
+      "duration": 3.904,
+      "text": "Euler. Sometimes it's called Euler's"
+    },
+    {
+      "index": 84,
+      "start": 338.184,
+      "end": 340.82,
+      "duration": 2.636,
+      "text": "formula, but it really shouldn't be."
+    },
+    {
+      "index": 85,
+      "start": 340.82,
+      "end": 343.607,
+      "duration": 2.787,
+      "text": "It's not a formula. It's a definition."
+    },
+    {
+      "index": 86,
+      "start": 343.607,
+      "end": 346.771,
+      "duration": 3.164,
+      "text": "So, in some sense, you can't argue with it."
+    },
+    {
+      "index": 87,
+      "start": 346.771,
+      "end": 350.914,
+      "duration": 4.143,
+      "text": "If you want to call putting a complex number in a power,"
+    },
+    {
+      "index": 88,
+      "start": 350.914,
+      "end": 353.023,
+      "duration": 2.109,
+      "text": "and calling it that, you can."
+    },
+    {
+      "index": 89,
+      "start": 353.023,
+      "end": 356.036,
+      "duration": 3.013,
+      "text": "But, one can certainly ask why he did it."
+    },
+    {
+      "index": 90,
+      "start": 356.036,
+      "end": 358.974,
+      "duration": 2.938,
+      "text": "And the answer, I guess, is that all the"
+    },
+    {
+      "index": 91,
+      "start": 358.974,
+      "end": 363.493,
+      "duration": 4.519,
+      "text": "evidence seemed to point to the fact that it was the thing to"
+    },
+    {
+      "index": 92,
+      "start": 363.493,
+      "end": 367.224,
+      "duration": 3.731,
+      "text": "do. Now, I think it's important to"
+    },
+    {
+      "index": 93,
+      "start": 367.224,
+      "end": 370.487,
+      "duration": 3.263,
+      "text": "talk about a little bit because I think it's,"
+    },
+    {
+      "index": 94,
+      "start": 370.487,
+      "end": 373.676,
+      "duration": 3.189,
+      "text": "in my opinion, if you're seeing this for the"
+    },
+    {
+      "index": 95,
+      "start": 373.676,
+      "end": 377.235,
+      "duration": 3.559,
+      "text": "first time, even if you read about it last night,"
+    },
+    {
+      "index": 96,
+      "start": 377.235,
+      "end": 381.092,
+      "duration": 3.857,
+      "text": "it's a mysterious thing, and one needs to see it from"
+    },
+    {
+      "index": 97,
+      "start": 381.092,
+      "end": 385.541,
+      "duration": 4.449,
+      "text": "every possible point of view. It's something you get used to."
+    },
+    {
+      "index": 98,
+      "start": 385.541,
+      "end": 389.249,
+      "duration": 3.708,
+      "text": "You will never see it in a sudden flash of insight."
+    },
+    {
+      "index": 99,
+      "start": 389.249,
+      "end": 393.773,
+      "duration": 4.524,
+      "text": "It will just get as familiar to you as more common arithmetic,"
+    },
+    {
+      "index": 100,
+      "start": 393.773,
+      "end": 398.0,
+      "duration": 4.227,
+      "text": "and algebraic, and calculus processes are."
+    },
+    {
+      "index": 101,
+      "start": 398.0,
+      "end": 400.583,
+      "duration": 2.583,
+      "text": "But, look. What is it we demand?"
+    },
+    {
+      "index": 102,
+      "start": 400.583,
+      "end": 404.583,
+      "duration": 4.0,
+      "text": "If you're going to call something an exponential,"
+    },
+    {
+      "index": 103,
+      "start": 404.583,
+      "end": 407.833,
+      "duration": 3.25,
+      "text": "what is it we want an exponential to do,"
+    },
+    {
+      "index": 104,
+      "start": 407.833,
+      "end": 412.916,
+      "duration": 5.083,
+      "text": "what gives an expression like this the right to be called e to"
+    },
+    {
+      "index": 105,
+      "start": 412.916,
+      "end": 417.5,
+      "duration": 4.584,
+      "text": "the i theta? The answer is I can't creep"
+    },
+    {
+      "index": 106,
+      "start": 417.5,
+      "end": 421.937,
+      "duration": 4.437,
+      "text": "inside Euler's mind. It must have been a very big"
+    },
+    {
+      "index": 107,
+      "start": 421.937,
+      "end": 424.774,
+      "duration": 2.837,
+      "text": "day of his life. He had a lot of big days,"
+    },
+    {
+      "index": 108,
+      "start": 424.774,
+      "end": 428.925,
+      "duration": 4.151,
+      "text": "but when he realized that that was the thing to write down as"
+    },
+    {
+      "index": 109,
+      "start": 428.925,
+      "end": 432.385,
+      "duration": 3.46,
+      "text": "the definition of e to the i theta."
+    },
+    {
+      "index": 110,
+      "start": 432.385,
+      "end": 435.36,
+      "duration": 2.975,
+      "text": "But, what is it one wants of an exponential?"
+    },
+    {
+      "index": 111,
+      "start": 435.36,
+      "end": 439.512,
+      "duration": 4.152,
+      "text": "Well, the high school answer surely is you want it to satisfy"
+    },
+    {
+      "index": 112,
+      "start": 439.512,
+      "end": 442.072,
+      "duration": 2.56,
+      "text": "the exponential law. Now, to my shock,"
+    },
+    {
+      "index": 113,
+      "start": 442.072,
+      "end": 444.563,
+      "duration": 2.491,
+      "text": "I realize a lot of people don't know."
+    },
+    {
+      "index": 114,
+      "start": 444.563,
+      "end": 447.884,
+      "duration": 3.321,
+      "text": "In my analysis class, these are some math majors,"
+    },
+    {
+      "index": 115,
+      "start": 447.884,
+      "end": 450.721,
+      "duration": 2.837,
+      "text": "or graduate engineers in various subjects,"
+    },
+    {
+      "index": 116,
+      "start": 450.721,
+      "end": 454.734,
+      "duration": 4.013,
+      "text": "and if I say prove such and such using the exponential law,"
+    },
+    {
+      "index": 117,
+      "start": 454.734,
+      "end": 458.54,
+      "duration": 3.806,
+      "text": "I'm sure to get at least half a dozen e-mails asking me,"
+    },
+    {
+      "index": 118,
+      "start": 458.54,
+      "end": 464.988,
+      "duration": 6.448,
+      "text": "what's the exponential law? Okay, the exponential law is a"
+    },
+    {
+      "index": 119,
+      "start": 464.988,
+      "end": 471.262,
+      "duration": 6.274,
+      "text": "to the x times a to the y equals a to the x plus y:"
+    },
+    {
+      "index": 120,
+      "start": 471.262,
+      "end": 474.549,
+      "duration": 3.287,
+      "text": "the law of exponents."
+    },
+    {
+      "index": 121,
+      "start": 474.549,
+      "end": 479.928,
+      "duration": 5.379,
+      "text": "That's the most important reason why, that's the single"
+    },
+    {
+      "index": 122,
+      "start": 479.928,
+      "end": 485.605,
+      "duration": 5.677,
+      "text": "most important thing about exponents, are the way one uses"
+    },
+    {
+      "index": 123,
+      "start": 485.605,
+      "end": 490.125,
+      "duration": 4.52,
+      "text": "them. And, this is the exponential"
+    },
+    {
+      "index": 124,
+      "start": 490.125,
+      "end": 496.488,
+      "duration": 6.363,
+      "text": "function, called the exponential function because all this"
+    },
+    {
+      "index": 125,
+      "start": 496.488,
+      "end": 500.618,
+      "duration": 4.13,
+      "text": "significant stuff is in the exponents."
+    },
+    {
+      "index": 126,
+      "start": 500.618,
+      "end": 505.195,
+      "duration": 4.577,
+      "text": "All right, so it should satisfy-- we want,"
+    },
+    {
+      "index": 127,
+      "start": 505.195,
+      "end": 511.0,
+      "duration": 5.805,
+      "text": "first of all, the exponential law to be true."
+    },
+    {
+      "index": 128,
+      "start": 511.0,
+      "end": 514.605,
+      "duration": 3.605,
+      "text": "But that's not all. That's a high school answer."
+    },
+    {
+      "index": 129,
+      "start": 514.605,
+      "end": 518.671,
+      "duration": 4.066,
+      "text": "An MIT answer would be, I mean, why is e to the x such"
+    },
+    {
+      "index": 130,
+      "start": 518.671,
+      "end": 521.357,
+      "duration": 2.686,
+      "text": "a popular function? Well, of course,"
+    },
+    {
+      "index": 131,
+      "start": 521.357,
+      "end": 524.962,
+      "duration": 3.605,
+      "text": "it does satisfy the exponential law, but for us,"
+    },
+    {
+      "index": 132,
+      "start": 524.962,
+      "end": 528.645,
+      "duration": 3.683,
+      "text": "an even more reasonable thing. It's the function,"
+    },
+    {
+      "index": 133,
+      "start": 528.645,
+      "end": 533.171,
+      "duration": 4.526,
+      "text": "which, when you differentiate it, you get the same thing you"
+    },
+    {
+      "index": 134,
+      "start": 533.171,
+      "end": 536.547,
+      "duration": 3.376,
+      "text": "started with. And, it's apart from a constant"
+    },
+    {
+      "index": 135,
+      "start": 536.547,
+      "end": 542.289,
+      "duration": 5.742,
+      "text": "factor, the only such function. Now, in terms of differential"
+    },
+    {
+      "index": 136,
+      "start": 542.289,
+      "end": 546.71,
+      "duration": 4.421,
+      "text": "equations, it means that it's the solution that e to the,"
+    },
+    {
+      "index": 137,
+      "start": 546.71,
+      "end": 551.131,
+      "duration": 4.421,
+      "text": "let's be a little generous, make it e to the ax."
+    },
+    {
+      "index": 138,
+      "start": 551.131,
+      "end": 555.631,
+      "duration": 4.5,
+      "text": "No, better not to use x because complex numbers tend to be"
+    },
+    {
+      "index": 139,
+      "start": 555.631,
+      "end": 560.131,
+      "duration": 4.5,
+      "text": "called x plus iy. Let's use t as a more neutral"
+    },
+    {
+      "index": 140,
+      "start": 560.131,
+      "end": 563.605,
+      "duration": 3.474,
+      "text": "variable, which is standing outside the fray,"
+    },
+    {
+      "index": 141,
+      "start": 563.605,
+      "end": 566.763,
+      "duration": 3.158,
+      "text": "as it were. It satisfies the relationship"
+    },
+    {
+      "index": 142,
+      "start": 566.763,
+      "end": 569.526,
+      "duration": 2.763,
+      "text": "that it's the solution, if you like,"
+    },
+    {
+      "index": 143,
+      "start": 569.526,
+      "end": 574.855,
+      "duration": 5.329,
+      "text": "to the differential equation. That's a fancy way of saying"
+    },
+    {
+      "index": 144,
+      "start": 574.855,
+      "end": 577.108,
+      "duration": 2.253,
+      "text": "it. dy / dt equals a times y."
+    },
+    {
+      "index": 145,
+      "start": 577.108,
+      "end": 578.765,
+      "duration": 1.657,
+      "text": "Now, of course,"
+    },
+    {
+      "index": 146,
+      "start": 578.765,
+      "end": 581.746,
+      "duration": 2.981,
+      "text": "that is not unique. We could make it unique by"
+    },
+    {
+      "index": 147,
+      "start": 581.746,
+      "end": 585.259,
+      "duration": 3.513,
+      "text": "putting in an initial value. So, if I want to get this"
+    },
+    {
+      "index": 148,
+      "start": 585.259,
+      "end": 589.102,
+      "duration": 3.843,
+      "text": "function and not a constant times it, I should make this an"
+    },
+    {
+      "index": 149,
+      "start": 589.102,
+      "end": 592.879,
+      "duration": 3.777,
+      "text": "initial value problem and say that y of zero should be one."
+    },
+    {
+      "index": 150,
+      "start": 592.879,
+      "end": 595.596,
+      "duration": 2.717,
+      "text": "And now, I will get only the"
+    },
+    {
+      "index": 151,
+      "start": 595.596,
+      "end": 598.313,
+      "duration": 2.717,
+      "text": "function, e to the at. So, in other words,"
+    },
+    {
+      "index": 152,
+      "start": 598.313,
+      "end": 600.433,
+      "duration": 2.12,
+      "text": "that characterizes this function."
+    },
+    {
+      "index": 153,
+      "start": 600.433,
+      "end": 604.012,
+      "duration": 3.579,
+      "text": "It's the only function in the whole world that has that"
+    },
+    {
+      "index": 154,
+      "start": 604.012,
+      "end": 608.661,
+      "duration": 4.649,
+      "text": "property. Now, if you're going to call"
+    },
+    {
+      "index": 155,
+      "start": 608.661,
+      "end": 613.51,
+      "duration": 4.849,
+      "text": "something e to the i theta, we want that to be true."
+    },
+    {
+      "index": 156,
+      "start": 613.51,
+      "end": 618.454,
+      "duration": 4.944,
+      "text": "So, here are my questions. Is it true that e to the i"
+    },
+    {
+      "index": 157,
+      "start": 618.454,
+      "end": 623.397,
+      "duration": 4.943,
+      "text": "theta one, let's use that, times e to the i theta two,"
+    },
+    {
+      "index": 158,
+      "start": 623.397,
+      "end": 629.292,
+      "duration": 5.895,
+      "text": "see, I'm on a collision course"
+    },
+    {
+      "index": 159,
+      "start": 629.292,
+      "end": 635.347,
+      "duration": 6.055,
+      "text": "here, but that's easily fixed. Is that equal to e to the i"
+    },
+    {
+      "index": 160,
+      "start": 635.347,
+      "end": 639.956,
+      "duration": 4.609,
+      "text": "(theta one plus theta two)?"
+    },
+    {
+      "index": 161,
+      "start": 639.956,
+      "end": 643.869,
+      "duration": 3.913,
+      "text": "If that turns out to be so, that's a big step."
+    },
+    {
+      "index": 162,
+      "start": 643.869,
+      "end": 646.826,
+      "duration": 2.957,
+      "text": "What would we like to be true here?"
+    },
+    {
+      "index": 163,
+      "start": 646.826,
+      "end": 652.217,
+      "duration": 5.391,
+      "text": "Well, will it be true that the derivative, with respect to t of"
+    },
+    {
+      "index": 164,
+      "start": 652.217,
+      "end": 656.217,
+      "duration": 4.0,
+      "text": "e to the i theta, I would like that to be equal"
+    },
+    {
+      "index": 165,
+      "start": 656.217,
+      "end": 661.086,
+      "duration": 4.869,
+      "text": "to i times e to the i theta."
+    },
+    {
+      "index": 166,
+      "start": 661.086,
+      "end": 664.15,
+      "duration": 3.064,
+      "text": "So, question,"
+    },
+    {
+      "index": 167,
+      "start": 664.15,
+      "end": 667.6,
+      "duration": 3.45,
+      "text": "question. I think those are the two most"
+    },
+    {
+      "index": 168,
+      "start": 667.6,
+      "end": 671.493,
+      "duration": 3.893,
+      "text": "significant things. Now, the nodes do a third"
+    },
+    {
+      "index": 169,
+      "start": 671.493,
+      "end": 674.412,
+      "duration": 2.919,
+      "text": "thing, talk about infinite series."
+    },
+    {
+      "index": 170,
+      "start": 674.412,
+      "end": 678.394,
+      "duration": 3.982,
+      "text": "Since we haven't done infinite series, anyway,"
+    },
+    {
+      "index": 171,
+      "start": 678.394,
+      "end": 683.525,
+      "duration": 5.131,
+      "text": "it's not officially part of the syllabus, the kind of power"
+    },
+    {
+      "index": 172,
+      "start": 683.525,
+      "end": 688.479,
+      "duration": 4.954,
+      "text": "series that are required. But, I will put it down for the"
+    },
+    {
+      "index": 173,
+      "start": 688.479,
+      "end": 692.284,
+      "duration": 3.805,
+      "text": "sake of completeness, as people like to say."
+    },
+    {
+      "index": 174,
+      "start": 692.284,
+      "end": 699.787,
+      "duration": 7.503,
+      "text": "So, it should behave right. The infinite series should be"
+    },
+    {
+      "index": 175,
+      "start": 699.787,
+      "end": 704.489,
+      "duration": 4.702,
+      "text": "nice. The infinite series should work"
+    },
+    {
+      "index": 176,
+      "start": 704.489,
+      "end": 708.408,
+      "duration": 3.919,
+      "text": "out. There is no word for this,"
+    },
+    {
+      "index": 177,
+      "start": 708.408,
+      "end": 711.804,
+      "duration": 3.396,
+      "text": "should work out, let's say."
+    },
+    {
+      "index": 178,
+      "start": 711.804,
+      "end": 715.853,
+      "duration": 4.049,
+      "text": "I mean, what's the little music?"
+    },
+    {
+      "index": 179,
+      "start": 715.853,
+      "end": 723.82,
+      "duration": 7.967,
+      "text": "Is that some weird music idea, or is it only me that hears it?"
+    },
+    {
+      "index": 180,
+      "start": 723.82,
+      "end": 728.0,
+      "duration": 4.18,
+      "text": "[LAUGHTER] Yes, Lord."
+    },
+    {
+      "index": 181,
+      "start": 728.0,
+      "end": 731.038,
+      "duration": 3.038,
+      "text": "I feel I'm being watched up there."
+    },
+    {
+      "index": 182,
+      "start": 731.038,
+      "end": 734.444,
+      "duration": 3.406,
+      "text": "This is terrible. So, there's one guy."
+    },
+    {
+      "index": 183,
+      "start": 734.444,
+      "end": 738.863,
+      "duration": 4.419,
+      "text": "Here's another guy. And, I won't put a box around"
+    },
+    {
+      "index": 184,
+      "start": 738.863,
+      "end": 743.098,
+      "duration": 4.235,
+      "text": "the infinite series, since I'm not going to say"
+    },
+    {
+      "index": 185,
+      "start": 743.098,
+      "end": 746.412,
+      "duration": 3.314,
+      "text": "anything about it. Now, these things,"
+    },
+    {
+      "index": 186,
+      "start": 746.412,
+      "end": 750.831,
+      "duration": 4.419,
+      "text": "in fact, are both true. Otherwise, why would I be"
+    },
+    {
+      "index": 187,
+      "start": 750.831,
+      "end": 757.0,
+      "duration": 6.169,
+      "text": "saying them, and why would Euler have made the formula?"
+    },
+    {
+      "index": 188,
+      "start": 757.0,
+      "end": 761.939,
+      "duration": 4.939,
+      "text": "But, what's interesting to see is what's behind them."
+    },
+    {
+      "index": 189,
+      "start": 761.939,
+      "end": 767.068,
+      "duration": 5.129,
+      "text": "And, that gives you little practice also in calculating"
+    },
+    {
+      "index": 190,
+      "start": 767.068,
+      "end": 772.007,
+      "duration": 4.939,
+      "text": "with the complex numbers. So, let's look at the first"
+    },
+    {
+      "index": 191,
+      "start": 772.007,
+      "end": 774.002,
+      "duration": 1.995,
+      "text": "one. What will it say?"
+    },
+    {
+      "index": 192,
+      "start": 774.002,
+      "end": 777.992,
+      "duration": 3.99,
+      "text": "It is asking the question. It says, please,"
+    },
+    {
+      "index": 193,
+      "start": 777.992,
+      "end": 781.886,
+      "duration": 3.894,
+      "text": "calculate the product of these two things."
+    },
+    {
+      "index": 194,
+      "start": 781.886,
+      "end": 784.071,
+      "duration": 2.185,
+      "text": "Okay, I do it, I'm told."
+    },
+    {
+      "index": 195,
+      "start": 784.071,
+      "end": 789.865,
+      "duration": 5.794,
+      "text": "I will calculate the product of cosine theta one plus i cosine"
+    },
+    {
+      "index": 196,
+      "start": 789.865,
+      "end": 794.014,
+      "duration": 4.149,
+      "text": "theta two-- Sine. Sine theta one."
+    },
+    {
+      "index": 197,
+      "start": 794.014,
+      "end": 797.327,
+      "duration": 3.313,
+      "text": "That's e to the i"
+    },
+    {
+      "index": 198,
+      "start": 797.327,
+      "end": 799.558,
+      "duration": 2.231,
+      "text": "theta one, right?"
+    },
+    {
+      "index": 199,
+      "start": 799.558,
+      "end": 803.277,
+      "duration": 3.719,
+      "text": "So, that corresponds to this. The other factor times the"
+    },
+    {
+      "index": 200,
+      "start": 803.277,
+      "end": 806.049,
+      "duration": 2.772,
+      "text": "other factor, cosine theta two plus i sine"
+    },
+    {
+      "index": 201,
+      "start": 806.049,
+      "end": 808.822,
+      "duration": 2.773,
+      "text": "theta two."
+    },
+    {
+      "index": 202,
+      "start": 808.822,
+      "end": 812.0,
+      "duration": 3.178,
+      "text": "Okay, what does that come out to be?"
+    },
+    {
+      "index": 203,
+      "start": 812.0,
+      "end": 814.524,
+      "duration": 2.524,
+      "text": "Well, again, we will use the method of"
+    },
+    {
+      "index": 204,
+      "start": 814.524,
+      "end": 816.981,
+      "duration": 2.457,
+      "text": "grouping. What's the real part of it?"
+    },
+    {
+      "index": 205,
+      "start": 816.981,
+      "end": 820.734,
+      "duration": 3.753,
+      "text": "The real part of it is cosine theta one cosine theta two."
+    },
+    {
+      "index": 206,
+      "start": 820.734,
+      "end": 824.691,
+      "duration": 3.957,
+      "text": "And then, there's a real part,"
+    },
+    {
+      "index": 207,
+      "start": 824.691,
+      "end": 827.011,
+      "duration": 2.32,
+      "text": "which comes from these two factors."
+    },
+    {
+      "index": 208,
+      "start": 827.011,
+      "end": 830.628,
+      "duration": 3.617,
+      "text": "It's going to occur with a minus sign because of the i"
+    },
+    {
+      "index": 209,
+      "start": 830.628,
+      "end": 833.221,
+      "duration": 2.593,
+      "text": "squared. And, what's left is sine theta"
+    },
+    {
+      "index": 210,
+      "start": 833.221,
+      "end": 836.36,
+      "duration": 3.139,
+      "text": "one sine theta two."
+    },
+    {
+      "index": 211,
+      "start": 836.36,
+      "end": 841.0,
+      "duration": 4.64,
+      "text": "And then, the imaginary part, I'll factor out the i."
+    },
+    {
+      "index": 212,
+      "start": 841.0,
+      "end": 845.661,
+      "duration": 4.661,
+      "text": "And then, what's left, I won't have to keep repeating"
+    },
+    {
+      "index": 213,
+      "start": 845.661,
+      "end": 848.619,
+      "duration": 2.958,
+      "text": "the i. So, it will have to be sine"
+    },
+    {
+      "index": 214,
+      "start": 848.619,
+      "end": 853.459,
+      "duration": 4.84,
+      "text": "theta one cosine theta two."
+    },
+    {
+      "index": 215,
+      "start": 853.459,
+      "end": 858.478,
+      "duration": 5.019,
+      "text": "And, the other factor will be cosine theta one sine theta"
+    },
+    {
+      "index": 216,
+      "start": 858.478,
+      "end": 862.512,
+      "duration": 4.034,
+      "text": "two-- plus sine theta two cosine theta one."
+    },
+    {
+      "index": 217,
+      "start": 862.512,
+      "end": 867.263,
+      "duration": 4.751,
+      "text": "Well, it looks like a mess,"
+    },
+    {
+      "index": 218,
+      "start": 867.263,
+      "end": 870.579,
+      "duration": 3.316,
+      "text": "but, again, high school to the rescue."
+    },
+    {
+      "index": 219,
+      "start": 870.579,
+      "end": 875.525,
+      "duration": 4.946,
+      "text": "What is this? The top thing is nothing in"
+    },
+    {
+      "index": 220,
+      "start": 875.525,
+      "end": 881.136,
+      "duration": 5.611,
+      "text": "disguise, but it's a disguised form of cosine (theta one plus"
+    },
+    {
+      "index": 221,
+      "start": 881.136,
+      "end": 884.41,
+      "duration": 3.274,
+      "text": "theta two)."
+    },
+    {
+      "index": 222,
+      "start": 884.41,
+      "end": 889.179,
+      "duration": 4.769,
+      "text": "And the bottom is sine of (theta one plus theta two)."
+    },
+    {
+      "index": 223,
+      "start": 889.179,
+      "end": 894.136,
+      "duration": 4.957,
+      "text": "So, the product of these two"
+    },
+    {
+      "index": 224,
+      "start": 894.136,
+      "end": 898.438,
+      "duration": 4.302,
+      "text": "things is this, and that's exactly the formula."
+    },
+    {
+      "index": 225,
+      "start": 898.438,
+      "end": 902.086,
+      "duration": 3.648,
+      "text": "In other words, this formula is a way of"
+    },
+    {
+      "index": 226,
+      "start": 902.086,
+      "end": 907.978,
+      "duration": 5.892,
+      "text": "writing those two trigonometric identities for the cosine of the"
+    },
+    {
+      "index": 227,
+      "start": 907.978,
+      "end": 913.831,
+      "duration": 5.853,
+      "text": "sum and the sine of the sum. Instead of the two identities"
+    },
+    {
+      "index": 228,
+      "start": 913.831,
+      "end": 917.242,
+      "duration": 3.411,
+      "text": "taking up that much space, written one after the other,"
+    },
+    {
+      "index": 229,
+      "start": 917.242,
+      "end": 920.778,
+      "duration": 3.536,
+      "text": "they take up as much space, and they say exactly the same"
+    },
+    {
+      "index": 230,
+      "start": 920.778,
+      "end": 922.61,
+      "duration": 1.832,
+      "text": "thing. Those two trigonometric"
+    },
+    {
+      "index": 231,
+      "start": 922.61,
+      "end": 926.526,
+      "duration": 3.916,
+      "text": "identities are exactly the same as saying that e to the i theta"
+    },
+    {
+      "index": 232,
+      "start": 926.526,
+      "end": 930.0,
+      "duration": 3.474,
+      "text": "satisfies the exponential law."
+    },
+    {
+      "index": 233,
+      "start": 930.0,
+      "end": 933.469,
+      "duration": 3.469,
+      "text": "Now, people ask, you know, what's beautiful in"
+    },
+    {
+      "index": 234,
+      "start": 933.469,
+      "end": 936.245,
+      "duration": 2.776,
+      "text": "mathematics? To me, that's beautiful."
+    },
+    {
+      "index": 235,
+      "start": 936.245,
+      "end": 939.792,
+      "duration": 3.547,
+      "text": "I think that's great. Something long turns into"
+    },
+    {
+      "index": 236,
+      "start": 939.792,
+      "end": 942.722,
+      "duration": 2.93,
+      "text": "something short, and it's just as good,"
+    },
+    {
+      "index": 237,
+      "start": 942.722,
+      "end": 945.961,
+      "duration": 3.239,
+      "text": "and moreover, connects with all these other"
+    },
+    {
+      "index": 238,
+      "start": 945.961,
+      "end": 949.277,
+      "duration": 3.316,
+      "text": "things in the world, differential equations,"
+    },
+    {
+      "index": 239,
+      "start": 949.277,
+      "end": 951.821,
+      "duration": 2.544,
+      "text": "infinite series, blah, blah, blah,"
+    },
+    {
+      "index": 240,
+      "start": 951.821,
+      "end": 954.674,
+      "duration": 2.853,
+      "text": "blah. Okay, I don't have to sell"
+    },
+    {
+      "index": 241,
+      "start": 954.674,
+      "end": 956.448,
+      "duration": 1.774,
+      "text": "Euler. He sells himself."
+    },
+    {
+      "index": 242,
+      "start": 956.448,
+      "end": 962.0,
+      "duration": 5.552,
+      "text": "Now, how about the other one? How about the other one?"
+    },
+    {
+      "index": 243,
+      "start": 962.0,
+      "end": 969.337,
+      "duration": 7.337,
+      "text": "Now, that's obviously, I haven't said something"
+    },
+    {
+      "index": 244,
+      "start": 969.337,
+      "end": 977.153,
+      "duration": 7.816,
+      "text": "because for one thing, how do you differentiate if"
+    },
+    {
+      "index": 245,
+      "start": 977.153,
+      "end": 982.895,
+      "duration": 5.742,
+      "text": "there's theta here, and t down there."
+    },
+    {
+      "index": 246,
+      "start": 982.895,
+      "end": 990.27,
+      "duration": 7.375,
+      "text": "Okay, that's easily fixed. But, how do I differentiate"
+    },
+    {
+      "index": 247,
+      "start": 990.27,
+      "end": 993.213,
+      "duration": 2.943,
+      "text": "this? What kind of a guy is e to the"
+    },
+    {
+      "index": 248,
+      "start": 993.213,
+      "end": 997.25,
+      "duration": 4.037,
+      "text": "i theta? Well, if I write it out,"
+    },
+    {
+      "index": 249,
+      "start": 997.25,
+      "end": 1001.875,
+      "duration": 4.625,
+      "text": "take a look at what it is. It's cosine theta plus i sine"
+    },
+    {
+      "index": 250,
+      "start": 1001.875,
+      "end": 1004.818,
+      "duration": 2.943,
+      "text": "theta."
+    },
+    {
+      "index": 251,
+      "start": 1004.818,
+      "end": 1007.509,
+      "duration": 2.691,
+      "text": "As theta varies, it's a function."
+    },
+    {
+      "index": 252,
+      "start": 1007.509,
+      "end": 1011.377,
+      "duration": 3.868,
+      "text": "The variable is real. Theta is a real variable."
+    },
+    {
+      "index": 253,
+      "start": 1011.377,
+      "end": 1015.245,
+      "duration": 3.868,
+      "text": "Its angle in radians, but it runs from negative"
+    },
+    {
+      "index": 254,
+      "start": 1015.245,
+      "end": 1019.45,
+      "duration": 4.205,
+      "text": "infinity to infinity. So, if you think of functions"
+    },
+    {
+      "index": 255,
+      "start": 1019.45,
+      "end": 1022.813,
+      "duration": 3.363,
+      "text": "as a black box, what's going in is a real"
+    },
+    {
+      "index": 256,
+      "start": 1022.813,
+      "end": 1026.89,
+      "duration": 4.077,
+      "text": "number. But, what's coming out is a"
+    },
+    {
+      "index": 257,
+      "start": 1026.89,
+      "end": 1029.2,
+      "duration": 2.31,
+      "text": "complex number. So, schematically,"
+    },
+    {
+      "index": 258,
+      "start": 1029.2,
+      "end": 1032.559,
+      "duration": 3.359,
+      "text": "here is the e to the i theta box,"
+    },
+    {
+      "index": 259,
+      "start": 1032.559,
+      "end": 1035.64,
+      "duration": 3.081,
+      "text": "if you like to think that way, theta goes in,"
+    },
+    {
+      "index": 260,
+      "start": 1035.64,
+      "end": 1038.23,
+      "duration": 2.59,
+      "text": "and that's real, and a complex number,"
+    },
+    {
+      "index": 261,
+      "start": 1038.23,
+      "end": 1040.96,
+      "duration": 2.73,
+      "text": "this particular complex number goes out."
+    },
+    {
+      "index": 262,
+      "start": 1040.96,
+      "end": 1044.39,
+      "duration": 3.43,
+      "text": "So, one, we'd call it, I'm not going to write this"
+    },
+    {
+      "index": 263,
+      "start": 1044.39,
+      "end": 1048.029,
+      "duration": 3.639,
+      "text": "down because it's sort of pompous and takes too long."
+    },
+    {
+      "index": 264,
+      "start": 1048.029,
+      "end": 1053.0,
+      "duration": 4.971,
+      "text": "But, it is a complex valued function of a real variable."
+    },
+    {
+      "index": 265,
+      "start": 1053.0,
+      "end": 1056.243,
+      "duration": 3.243,
+      "text": "You got that? Up to now, we studied real"
+    },
+    {
+      "index": 266,
+      "start": 1056.243,
+      "end": 1061.066,
+      "duration": 4.823,
+      "text": "functions of real variables. But now, real valued functions"
+    },
+    {
+      "index": 267,
+      "start": 1061.066,
+      "end": 1065.057,
+      "duration": 3.991,
+      "text": "of real variables, those are the kind calculus is"
+    },
+    {
+      "index": 268,
+      "start": 1065.057,
+      "end": 1068.799,
+      "duration": 3.742,
+      "text": "concerned with. But now, it's a complex-valued"
+    },
+    {
+      "index": 269,
+      "start": 1068.799,
+      "end": 1071.876,
+      "duration": 3.077,
+      "text": "function because the variable is real."
+    },
+    {
+      "index": 270,
+      "start": 1071.876,
+      "end": 1075.701,
+      "duration": 3.825,
+      "text": "But, the output, the value of the function is a"
+    },
+    {
+      "index": 271,
+      "start": 1075.701,
+      "end": 1078.279,
+      "duration": 2.578,
+      "text": "complex number. Now, in general,"
+    },
+    {
+      "index": 272,
+      "start": 1078.279,
+      "end": 1081.688,
+      "duration": 3.409,
+      "text": "such a function, well, maybe a better say,"
+    },
+    {
+      "index": 273,
+      "start": 1081.688,
+      "end": 1084.931,
+      "duration": 3.243,
+      "text": "complex-valued, how about complex-valued"
+    },
+    {
+      "index": 274,
+      "start": 1084.931,
+      "end": 1089.588,
+      "duration": 4.657,
+      "text": "function of a real variable, let's change the name of the"
+    },
+    {
+      "index": 275,
+      "start": 1089.588,
+      "end": 1094.5,
+      "duration": 4.912,
+      "text": "variable. t is always a real variable."
+    },
+    {
+      "index": 276,
+      "start": 1094.5,
+      "end": 1099.5,
+      "duration": 5.0,
+      "text": "I don't think we have complex time yet, although I'm sure"
+    },
+    {
+      "index": 277,
+      "start": 1099.5,
+      "end": 1104.232,
+      "duration": 4.732,
+      "text": "there will be someday. But, the next Einstein appears."
+    },
+    {
+      "index": 278,
+      "start": 1104.232,
+      "end": 1108.16,
+      "duration": 3.928,
+      "text": "A complex-valued function of a real variable,"
+    },
+    {
+      "index": 279,
+      "start": 1108.16,
+      "end": 1112.0,
+      "duration": 3.84,
+      "text": "t, in general, would look like this."
+    },
+    {
+      "index": 280,
+      "start": 1112.0,
+      "end": 1115.683,
+      "duration": 3.683,
+      "text": "t goes in, and what comes out? Well: a complex number,"
+    },
+    {
+      "index": 281,
+      "start": 1115.683,
+      "end": 1118.532,
+      "duration": 2.849,
+      "text": "which I would then have to write this way."
+    },
+    {
+      "index": 282,
+      "start": 1118.532,
+      "end": 1121.451,
+      "duration": 2.919,
+      "text": "In other words, the real part depends on t,"
+    },
+    {
+      "index": 283,
+      "start": 1121.451,
+      "end": 1124.023,
+      "duration": 2.572,
+      "text": "and the imaginary part depends upon t."
+    },
+    {
+      "index": 284,
+      "start": 1124.023,
+      "end": 1127.359,
+      "duration": 3.336,
+      "text": "So, a general function looks like this, a general"
+    },
+    {
+      "index": 285,
+      "start": 1127.359,
+      "end": 1131.111,
+      "duration": 3.752,
+      "text": "complex-valued function. This is just a special case of"
+    },
+    {
+      "index": 286,
+      "start": 1131.111,
+      "end": 1134.1,
+      "duration": 2.989,
+      "text": "it, where the variable has a different name."
+    },
+    {
+      "index": 287,
+      "start": 1134.1,
+      "end": 1137.992,
+      "duration": 3.892,
+      "text": "But, the first function would be cosine t, and the second"
+    },
+    {
+      "index": 288,
+      "start": 1137.992,
+      "end": 1141.397,
+      "duration": 3.405,
+      "text": "function would be sine t. So, my only question is,"
+    },
+    {
+      "index": 289,
+      "start": 1141.397,
+      "end": 1143.969,
+      "duration": 2.572,
+      "text": "how do you differentiate such a thing?"
+    },
+    {
+      "index": 290,
+      "start": 1143.969,
+      "end": 1148.0,
+      "duration": 4.031,
+      "text": "Well, I'm not going to fuss over this."
+    },
+    {
+      "index": 291,
+      "start": 1148.0,
+      "end": 1151.384,
+      "duration": 3.384,
+      "text": "The general definition is, with deltas and whatnot,"
+    },
+    {
+      "index": 292,
+      "start": 1151.384,
+      "end": 1154.904,
+      "duration": 3.52,
+      "text": "but the end result of a perfectly fine definition is,"
+    },
+    {
+      "index": 293,
+      "start": 1154.904,
+      "end": 1158.559,
+      "duration": 3.655,
+      "text": "you differentiate it by differentiating each component."
+    },
+    {
+      "index": 294,
+      "start": 1158.559,
+      "end": 1162.35,
+      "duration": 3.791,
+      "text": "The reason you don't have to work so very hard is because"
+    },
+    {
+      "index": 295,
+      "start": 1162.35,
+      "end": 1165.735,
+      "duration": 3.385,
+      "text": "this is a real variable, and I already know what it"
+    },
+    {
+      "index": 296,
+      "start": 1165.735,
+      "end": 1170.0,
+      "duration": 4.265,
+      "text": "means to differentiate a function of a real variable."
+    },
+    {
+      "index": 297,
+      "start": 1170.0,
+      "end": 1174.007,
+      "duration": 4.007,
+      "text": "So, I could write it this way, that the derivative of u plus"
+    },
+    {
+      "index": 298,
+      "start": 1174.007,
+      "end": 1177.946,
+      "duration": 3.939,
+      "text": "iv, I'll abbreviate it that way, this means the derivative,"
+    },
+    {
+      "index": 299,
+      "start": 1177.946,
+      "end": 1181.545,
+      "duration": 3.599,
+      "text": "with respect to whatever variable, since I didn't tell"
+    },
+    {
+      "index": 300,
+      "start": 1181.545,
+      "end": 1184.601,
+      "duration": 3.056,
+      "text": "you what the variable in these functions were,"
+    },
+    {
+      "index": 301,
+      "start": 1184.601,
+      "end": 1188.608,
+      "duration": 4.007,
+      "text": "well, I don't have to tell you what I'm differentiating with"
+    },
+    {
+      "index": 302,
+      "start": 1188.608,
+      "end": 1191.461,
+      "duration": 2.853,
+      "text": "respect to. It's whatever was there because"
+    },
+    {
+      "index": 303,
+      "start": 1191.461,
+      "end": 1193.634,
+      "duration": 2.173,
+      "text": "you can't see. And the answer is,"
+    },
+    {
+      "index": 304,
+      "start": 1193.634,
+      "end": 1197.777,
+      "duration": 4.143,
+      "text": "it would be the derivative of u plus i times the derivative of"
+    },
+    {
+      "index": 305,
+      "start": 1197.777,
+      "end": 1201.104,
+      "duration": 3.327,
+      "text": "v. You differentiate it just the"
+    },
+    {
+      "index": 306,
+      "start": 1201.104,
+      "end": 1205.53,
+      "duration": 4.426,
+      "text": "way you would if these were the components of a motion vector."
+    },
+    {
+      "index": 307,
+      "start": 1205.53,
+      "end": 1209.811,
+      "duration": 4.281,
+      "text": "You would get the velocity by differentiating each component"
+    },
+    {
+      "index": 308,
+      "start": 1209.811,
+      "end": 1212.714,
+      "duration": 2.903,
+      "text": "separately. And, that's what you're doing"
+    },
+    {
+      "index": 309,
+      "start": 1212.714,
+      "end": 1215.108,
+      "duration": 2.394,
+      "text": "here. Okay, now, the importance of"
+    },
+    {
+      "index": 310,
+      "start": 1215.108,
+      "end": 1219.39,
+      "duration": 4.282,
+      "text": "that is that it at least tells me what it is I have to check"
+    },
+    {
+      "index": 311,
+      "start": 1219.39,
+      "end": 1223.235,
+      "duration": 3.845,
+      "text": "when I check this formula. So, let's do it now that we"
+    },
+    {
+      "index": 312,
+      "start": 1223.235,
+      "end": 1226.573,
+      "duration": 3.338,
+      "text": "know what this is. We know how to differentiate"
+    },
+    {
+      "index": 313,
+      "start": 1226.573,
+      "end": 1229.548,
+      "duration": 2.975,
+      "text": "the function. Let's actually differentiate"
+    },
+    {
+      "index": 314,
+      "start": 1229.548,
+      "end": 1232.869,
+      "duration": 3.321,
+      "text": "it. That's fortunately,"
+    },
+    {
+      "index": 315,
+      "start": 1232.869,
+      "end": 1237.298,
+      "duration": 4.429,
+      "text": "by far, the easiest part of the whole process."
+    },
+    {
+      "index": 316,
+      "start": 1237.298,
+      "end": 1241.431,
+      "duration": 4.133,
+      "text": "So, let's do it. So, what's the derivative?"
+    },
+    {
+      "index": 317,
+      "start": 1241.431,
+      "end": 1245.368,
+      "duration": 3.937,
+      "text": "Let's go back to t, our generic variable."
+    },
+    {
+      "index": 318,
+      "start": 1245.368,
+      "end": 1251.469,
+      "duration": 6.101,
+      "text": "I want to emphasize that these functions, when we write them as"
+    },
+    {
+      "index": 319,
+      "start": 1251.469,
+      "end": 1256.784,
+      "duration": 5.315,
+      "text": "functions, that theta will almost never be the variable"
+    },
+    {
+      "index": 320,
+      "start": 1256.784,
+      "end": 1262.0,
+      "duration": 5.216,
+      "text": "outside of these notes on complex numbers."
+    },
+    {
+      "index": 321,
+      "start": 1262.0,
+      "end": 1265.405,
+      "duration": 3.405,
+      "text": "It will normally be time or something like that,"
+    },
+    {
+      "index": 322,
+      "start": 1265.405,
+      "end": 1267.652,
+      "duration": 2.247,
+      "text": "or x, a neutral variable like x."
+    },
+    {
+      "index": 323,
+      "start": 1267.652,
+      "end": 1272.072,
+      "duration": 4.42,
+      "text": "So, what's the derivative of e to the i theta?"
+    },
+    {
+      "index": 324,
+      "start": 1272.072,
+      "end": 1276.42,
+      "duration": 4.348,
+      "text": "I'm hoping that it will turn out to be i e to the i theta,"
+    },
+    {
+      "index": 325,
+      "start": 1276.42,
+      "end": 1279.608,
+      "duration": 3.188,
+      "text": "and that the yellow law may be"
+    },
+    {
+      "index": 326,
+      "start": 1279.608,
+      "end": 1283.666,
+      "duration": 4.058,
+      "text": "true just as the green one was. Okay, let's calculate it."
+    },
+    {
+      "index": 327,
+      "start": 1283.666,
+      "end": 1286.275,
+      "duration": 2.609,
+      "text": "It's the derivative, with respect to,"
+    },
+    {
+      "index": 328,
+      "start": 1286.275,
+      "end": 1290.55,
+      "duration": 4.275,
+      "text": "unfortunately I can convert t's to thetas, but not thetas to"
+    },
+    {
+      "index": 329,
+      "start": 1290.55,
+      "end": 1293.325,
+      "duration": 2.775,
+      "text": "t's. C'est la vie,"
+    },
+    {
+      "index": 330,
+      "start": 1293.325,
+      "end": 1296.691,
+      "duration": 3.366,
+      "text": "okay. Times cosine t plus i sine t,"
+    },
+    {
+      "index": 331,
+      "start": 1296.691,
+      "end": 1300.566,
+      "duration": 3.875,
+      "text": "and what's that?"
+    },
+    {
+      "index": 332,
+      "start": 1300.566,
+      "end": 1306.787,
+      "duration": 6.221,
+      "text": "Well, the derivative of cosine t, differentiating the real and"
+    },
+    {
+      "index": 333,
+      "start": 1306.787,
+      "end": 1311.478,
+      "duration": 4.691,
+      "text": "imaginary parts separately, and adding them up."
+    },
+    {
+      "index": 334,
+      "start": 1311.478,
+      "end": 1316.781,
+      "duration": 5.303,
+      "text": "It's negative sine t, plus i times cosine t."
+    },
+    {
+      "index": 335,
+      "start": 1316.781,
+      "end": 1321.269,
+      "duration": 4.488,
+      "text": "Now, let's factor out at the i,"
+    },
+    {
+      "index": 336,
+      "start": 1321.269,
+      "end": 1328.0,
+      "duration": 6.731,
+      "text": "because it says if I factor out the i, what do I get?"
+    },
+    {
+      "index": 337,
+      "start": 1328.0,
+      "end": 1332.965,
+      "duration": 4.965,
+      "text": "Well, now, the real part of what's left would be cosine t."
+    },
+    {
+      "index": 338,
+      "start": 1332.965,
+      "end": 1335.839,
+      "duration": 2.874,
+      "text": "And, how about the imaginary part?"
+    },
+    {
+      "index": 339,
+      "start": 1335.839,
+      "end": 1341.153,
+      "duration": 5.314,
+      "text": "Do you see, it will be i sine t because i times i"
+    },
+    {
+      "index": 340,
+      "start": 1341.153,
+      "end": 1344.637,
+      "duration": 3.484,
+      "text": "gives me that negative one."
+    },
+    {
+      "index": 341,
+      "start": 1344.637,
+      "end": 1347.163,
+      "duration": 2.526,
+      "text": "And, what's that? e to the it."
+    },
+    {
+      "index": 342,
+      "start": 1347.163,
+      "end": 1350.299,
+      "duration": 3.136,
+      "text": "i times e to the i t."
+    },
+    {
+      "index": 343,
+      "start": 1350.299,
+      "end": 1355.63,
+      "duration": 5.331,
+      "text": "So, that works too. What about the initial"
+    },
+    {
+      "index": 344,
+      "start": 1355.63,
+      "end": 1358.141,
+      "duration": 2.511,
+      "text": "condition? No problem."
+    },
+    {
+      "index": 345,
+      "start": 1358.141,
+      "end": 1363.641,
+      "duration": 5.5,
+      "text": "What is y of zero? What's the function at zero?"
+    },
+    {
+      "index": 346,
+      "start": 1363.641,
+      "end": 1369.38,
+      "duration": 5.739,
+      "text": "Well, don't say right away, i times zero is zero,"
+    },
+    {
+      "index": 347,
+      "start": 1369.38,
+      "end": 1374.282,
+      "duration": 4.902,
+      "text": "so it must be one. That's illegal because,"
+    },
+    {
+      "index": 348,
+      "start": 1374.282,
+      "end": 1380.141,
+      "duration": 5.859,
+      "text": "why is that illegal? It's because in that formula,"
+    },
+    {
+      "index": 349,
+      "start": 1380.141,
+      "end": 1386.0,
+      "duration": 5.859,
+      "text": "you are not multiplying i times theta."
+    },
+    {
+      "index": 350,
+      "start": 1386.0,
+      "end": 1389.343,
+      "duration": 3.343,
+      "text": "I mean, sort of, you are, but that formula is"
+    },
+    {
+      "index": 351,
+      "start": 1389.343,
+      "end": 1392.914,
+      "duration": 3.571,
+      "text": "the meaning of e to the i theta."
+    },
+    {
+      "index": 352,
+      "start": 1392.914,
+      "end": 1396.106,
+      "duration": 3.192,
+      "text": "Now, it would be very nice if this is like,"
+    },
+    {
+      "index": 353,
+      "start": 1396.106,
+      "end": 1398.462,
+      "duration": 2.356,
+      "text": "well, anyway, you can't do that."
+    },
+    {
+      "index": 354,
+      "start": 1398.462,
+      "end": 1403.097,
+      "duration": 4.635,
+      "text": "So, you have to do it by saying it's the cosine of zero plus i"
+    },
+    {
+      "index": 355,
+      "start": 1403.097,
+      "end": 1406.44,
+      "duration": 3.343,
+      "text": "times the sine of zero."
+    },
+    {
+      "index": 356,
+      "start": 1406.44,
+      "end": 1411.0,
+      "duration": 4.56,
+      "text": "And, how much is that? The sine of zero is zero."
+    },
+    {
+      "index": 357,
+      "start": 1411.0,
+      "end": 1415.91,
+      "duration": 4.91,
+      "text": "Now, it's okay to say i times zero is zero because that's the"
+    },
+    {
+      "index": 358,
+      "start": 1415.91,
+      "end": 1420.493,
+      "duration": 4.583,
+      "text": "way complex numbers multiply. What is the cosine of zero?"
+    },
+    {
+      "index": 359,
+      "start": 1420.493,
+      "end": 1422.621,
+      "duration": 2.128,
+      "text": "That's one. So, the answer,"
+    },
+    {
+      "index": 360,
+      "start": 1422.621,
+      "end": 1426.222,
+      "duration": 3.601,
+      "text": "indeed, turns out to be one. So, this checks,"
+    },
+    {
+      "index": 361,
+      "start": 1426.222,
+      "end": 1431.214,
+      "duration": 4.992,
+      "text": "really, from every conceivable standpoint down as I indicated,"
+    },
+    {
+      "index": 362,
+      "start": 1431.214,
+      "end": 1434.734,
+      "duration": 3.52,
+      "text": "also from the standpoint of infinite series."
+    },
+    {
+      "index": 363,
+      "start": 1434.734,
+      "end": 1438.089,
+      "duration": 3.355,
+      "text": "So, we are definitely allowed to use this."
+    },
+    {
+      "index": 364,
+      "start": 1438.089,
+      "end": 1443.0,
+      "duration": 4.911,
+      "text": "Now, the more general exponential law is true."
+    },
+    {
+      "index": 365,
+      "start": 1443.0,
+      "end": 1445.891,
+      "duration": 2.891,
+      "text": "I'm not going to say much about it."
+    },
+    {
+      "index": 366,
+      "start": 1445.891,
+      "end": 1449.888,
+      "duration": 3.997,
+      "text": "So, in other words, e to the a, this is really a"
+    },
+    {
+      "index": 367,
+      "start": 1449.888,
+      "end": 1453.29,
+      "duration": 3.402,
+      "text": "definition. e to the (a plus ib)"
+    },
+    {
+      "index": 368,
+      "start": 1453.29,
+      "end": 1457.117,
+      "duration": 3.827,
+      "text": "is going to be, in order for the general"
+    },
+    {
+      "index": 369,
+      "start": 1457.117,
+      "end": 1461.794,
+      "duration": 4.677,
+      "text": "exponential law to be true, this is really a definition."
+    },
+    {
+      "index": 370,
+      "start": 1461.794,
+      "end": 1466.046,
+      "duration": 4.252,
+      "text": "It's e to the a times e to the ib."
+    },
+    {
+      "index": 371,
+      "start": 1466.046,
+      "end": 1470.639,
+      "duration": 4.593,
+      "text": "Now, notice when I look at the-- at any complex number,"
+    },
+    {
+      "index": 372,
+      "start": 1470.639,
+      "end": 1474.14,
+      "duration": 3.501,
+      "text": "-- -- so, in terms of this,"
+    },
+    {
+      "index": 373,
+      "start": 1474.14,
+      "end": 1478.866,
+      "duration": 4.726,
+      "text": "the polar form of a complex number, to draw the little"
+    },
+    {
+      "index": 374,
+      "start": 1478.866,
+      "end": 1482.789,
+      "duration": 3.923,
+      "text": "picture again, if here is our complex number,"
+    },
+    {
+      "index": 375,
+      "start": 1482.789,
+      "end": 1486.535,
+      "duration": 3.746,
+      "text": "and here is r, and here is the angle theta,"
+    },
+    {
+      "index": 376,
+      "start": 1486.535,
+      "end": 1491.796,
+      "duration": 5.261,
+      "text": "so the nice way to write this complex number is r e to the i"
+    },
+    {
+      "index": 377,
+      "start": 1491.796,
+      "end": 1496.343,
+      "duration": 4.547,
+      "text": "theta. The e to the i theta"
+    },
+    {
+      "index": 378,
+      "start": 1496.343,
+      "end": 1500.0,
+      "duration": 3.657,
+      "text": "is, now, why is that?"
+    },
+    {
+      "index": 379,
+      "start": 1500.0,
+      "end": 1504.382,
+      "duration": 4.382,
+      "text": "What is the magnitude of this? This is r."
+    },
+    {
+      "index": 380,
+      "start": 1504.382,
+      "end": 1510.078,
+      "duration": 5.696,
+      "text": "The length of the absolute value, I didn't talk about"
+    },
+    {
+      "index": 381,
+      "start": 1510.078,
+      "end": 1514.898,
+      "duration": 4.82,
+      "text": "magnitude in argument. I guess I should have."
+    },
+    {
+      "index": 382,
+      "start": 1514.898,
+      "end": 1520.485,
+      "duration": 5.587,
+      "text": "But, it's in the notes. So, r is called the modulus."
+    },
+    {
+      "index": 383,
+      "start": 1520.485,
+      "end": 1524.32,
+      "duration": 3.835,
+      "text": "Well, the fancy word is the modulus."
+    },
+    {
+      "index": 384,
+      "start": 1524.32,
+      "end": 1529.469,
+      "duration": 5.149,
+      "text": "And, we haven't given the complex number a name."
+    },
+    {
+      "index": 385,
+      "start": 1529.469,
+      "end": 1533.522,
+      "duration": 4.053,
+      "text": "Let's call it alpha, modulus of alpha,"
+    },
+    {
+      "index": 386,
+      "start": 1533.522,
+      "end": 1539.0,
+      "duration": 5.478,
+      "text": "and theta is called, it's the angle."
+    },
+    {
+      "index": 387,
+      "start": 1539.0,
+      "end": 1544.4,
+      "duration": 5.4,
+      "text": "It's called the argument. I didn't make up these words."
+    },
+    {
+      "index": 388,
+      "start": 1544.4,
+      "end": 1549.7,
+      "duration": 5.3,
+      "text": "There, from a tradition of English that has long since"
+    },
+    {
+      "index": 389,
+      "start": 1549.7,
+      "end": 1555.299,
+      "duration": 5.599,
+      "text": "vanished, when I was a kid, and you wanted to know what a"
+    },
+    {
+      "index": 390,
+      "start": 1555.299,
+      "end": 1559.5,
+      "duration": 4.201,
+      "text": "play was about, you looked in the playbill,"
+    },
+    {
+      "index": 391,
+      "start": 1559.5,
+      "end": 1565.5,
+      "duration": 6.0,
+      "text": "and it said the argument of the play, it's that old-fashioned"
+    },
+    {
+      "index": 392,
+      "start": 1565.5,
+      "end": 1571.812,
+      "duration": 6.312,
+      "text": "use of the word argument. Argument means the angle,"
+    },
+    {
+      "index": 393,
+      "start": 1571.812,
+      "end": 1576.762,
+      "duration": 4.95,
+      "text": "and sometimes that's abbreviated by arg alpha."
+    },
+    {
+      "index": 394,
+      "start": 1576.762,
+      "end": 1581.262,
+      "duration": 4.5,
+      "text": "And, this is abbreviated,"
+    },
+    {
+      "index": 395,
+      "start": 1581.262,
+      "end": 1586.775,
+      "duration": 5.513,
+      "text": "of course, as absolute value of alpha, its length."
+    },
+    {
+      "index": 396,
+      "start": 1586.775,
+      "end": 1593.187,
+      "duration": 6.412,
+      "text": "Okay, the notes give you a little practice changing things"
+    },
+    {
+      "index": 397,
+      "start": 1593.187,
+      "end": 1599.289,
+      "duration": 6.102,
+      "text": "to a polar form. I think we will skip that in"
+    },
+    {
+      "index": 398,
+      "start": 1599.289,
+      "end": 1606.337,
+      "duration": 7.048,
+      "text": "favor of doing a couple of other things because that's pretty"
+    },
+    {
+      "index": 399,
+      "start": 1606.337,
+      "end": 1610.566,
+      "duration": 4.229,
+      "text": "easy. But let me, you should at least"
+    },
+    {
+      "index": 400,
+      "start": 1610.566,
+      "end": 1615.5,
+      "duration": 4.934,
+      "text": "realize when you should look at polar form."
+    },
+    {
+      "index": 401,
+      "start": 1615.5,
+      "end": 1621.843,
+      "duration": 6.343,
+      "text": "The great advantage of polar form is, particularly once"
+    },
+    {
+      "index": 402,
+      "start": 1621.843,
+      "end": 1628.656,
+      "duration": 6.813,
+      "text": "you've mastered the exponential law, the great advantage of"
+    },
+    {
+      "index": 403,
+      "start": 1628.656,
+      "end": 1635.0,
+      "duration": 6.344,
+      "text": "polar form is it's good for multiplication."
+    },
+    {
+      "index": 404,
+      "start": 1635.0,
+      "end": 1637.838,
+      "duration": 2.838,
+      "text": "Now, of course, you know how to multiply"
+    },
+    {
+      "index": 405,
+      "start": 1637.838,
+      "end": 1640.822,
+      "duration": 2.984,
+      "text": "complex numbers, even when they are in the"
+    },
+    {
+      "index": 406,
+      "start": 1640.822,
+      "end": 1643.805,
+      "duration": 2.983,
+      "text": "Cartesian form. That's the first thing you"
+    },
+    {
+      "index": 407,
+      "start": 1643.805,
+      "end": 1647.59,
+      "duration": 3.785,
+      "text": "learn in high school, how to multiply a plus bi times"
+    },
+    {
+      "index": 408,
+      "start": 1647.59,
+      "end": 1651.374,
+      "duration": 3.784,
+      "text": "c plus di. But, as you will see,"
+    },
+    {
+      "index": 409,
+      "start": 1651.374,
+      "end": 1655.377,
+      "duration": 4.003,
+      "text": "when push comes to shove, you will see this very clearly"
+    },
+    {
+      "index": 410,
+      "start": 1655.377,
+      "end": 1659.088,
+      "duration": 3.711,
+      "text": "on Friday when we talk about trigonometric inputs to"
+    },
+    {
+      "index": 411,
+      "start": 1659.088,
+      "end": 1662.0,
+      "duration": 2.912,
+      "text": "differential equations, --"
+    },
+    {
+      "index": 412,
+      "start": 1662.0,
+      "end": 1666.028,
+      "duration": 4.028,
+      "text": "that the changing to complex numbers makes all sorts of"
+    },
+    {
+      "index": 413,
+      "start": 1666.028,
+      "end": 1669.491,
+      "duration": 3.463,
+      "text": "things easy to calculate, and the answers come out"
+    },
+    {
+      "index": 414,
+      "start": 1669.491,
+      "end": 1672.742,
+      "duration": 3.251,
+      "text": "extremely clear, whereas if we had to do it any"
+    },
+    {
+      "index": 415,
+      "start": 1672.742,
+      "end": 1676.204,
+      "duration": 3.462,
+      "text": "other way, it's a lot more work. And worst of all,"
+    },
+    {
+      "index": 416,
+      "start": 1676.204,
+      "end": 1680.233,
+      "duration": 4.029,
+      "text": "when you finally slog through to the end, you fear you are"
+    },
+    {
+      "index": 417,
+      "start": 1680.233,
+      "end": 1683.958,
+      "duration": 3.725,
+      "text": "none the wiser. It's good for multiplication"
+    },
+    {
+      "index": 418,
+      "start": 1683.958,
+      "end": 1687.246,
+      "duration": 3.288,
+      "text": "because the product, so here's any number in its"
+    },
+    {
+      "index": 419,
+      "start": 1687.246,
+      "end": 1689.695,
+      "duration": 2.449,
+      "text": "polar form. That's a general complex"
+    },
+    {
+      "index": 420,
+      "start": 1689.695,
+      "end": 1692.213,
+      "duration": 2.518,
+      "text": "number. It's modulus times e to the i"
+    },
+    {
+      "index": 421,
+      "start": 1692.213,
+      "end": 1696.271,
+      "duration": 4.058,
+      "text": "theta times r two e to the i theta two--"
+    },
+    {
+      "index": 422,
+      "start": 1696.271,
+      "end": 1699.629,
+      "duration": 3.358,
+      "text": "Well, you just multiply them as"
+    },
+    {
+      "index": 423,
+      "start": 1699.629,
+      "end": 1702.917,
+      "duration": 3.288,
+      "text": "ordinary numbers. So, the part out front will be"
+    },
+    {
+      "index": 424,
+      "start": 1702.917,
+      "end": 1706.905,
+      "duration": 3.988,
+      "text": "r1 r2, and the e to the i theta parts gets"
+    },
+    {
+      "index": 425,
+      "start": 1706.905,
+      "end": 1710.753,
+      "duration": 3.848,
+      "text": "multiplied by the exponential law and becomes e to the i"
+    },
+    {
+      "index": 426,
+      "start": 1710.753,
+      "end": 1716.0,
+      "duration": 5.247,
+      "text": "(theta one plus theta two) --"
+    },
+    {
+      "index": 427,
+      "start": 1716.0,
+      "end": 1722.206,
+      "duration": 6.206,
+      "text": "which makes very clear that the multiply geometrically two"
+    },
+    {
+      "index": 428,
+      "start": 1722.206,
+      "end": 1726.344,
+      "duration": 4.138,
+      "text": "complex numbers, you multiply the moduli,"
+    },
+    {
+      "index": 429,
+      "start": 1726.344,
+      "end": 1732.551,
+      "duration": 6.207,
+      "text": "the r's, the absolute values, how long the arrow is from zero"
+    },
+    {
+      "index": 430,
+      "start": 1732.551,
+      "end": 1736.896,
+      "duration": 4.345,
+      "text": "to the complex number, multiply the moduli,"
+    },
+    {
+      "index": 431,
+      "start": 1736.896,
+      "end": 1742.051,
+      "duration": 5.155,
+      "text": "and add the arguments. So the new number,"
+    },
+    {
+      "index": 432,
+      "start": 1742.051,
+      "end": 1747.636,
+      "duration": 5.585,
+      "text": "its modulus is the product of r1 and r2."
+    },
+    {
+      "index": 433,
+      "start": 1747.636,
+      "end": 1752.308,
+      "duration": 4.672,
+      "text": "And, its argument, its angle, polar angle,"
+    },
+    {
+      "index": 434,
+      "start": 1752.308,
+      "end": 1755.955,
+      "duration": 3.647,
+      "text": "is the sum of the old two angles."
+    },
+    {
+      "index": 435,
+      "start": 1755.955,
+      "end": 1762.224,
+      "duration": 6.269,
+      "text": "And, you add the angles. And, you put down in your books"
+    },
+    {
+      "index": 436,
+      "start": 1762.224,
+      "end": 1766.099,
+      "duration": 3.875,
+      "text": "angles, but I'm being photographed,"
+    },
+    {
+      "index": 437,
+      "start": 1766.099,
+      "end": 1771.0,
+      "duration": 4.901,
+      "text": "so I'm going to write arguments."
+    },
+    {
+      "index": 438,
+      "start": 1771.0,
+      "end": 1774.389,
+      "duration": 3.389,
+      "text": "In other words, it makes the geometric content"
+    },
+    {
+      "index": 439,
+      "start": 1774.389,
+      "end": 1778.231,
+      "duration": 3.842,
+      "text": "of multiplication clear, in a sense in which this is"
+    },
+    {
+      "index": 440,
+      "start": 1778.231,
+      "end": 1780.641,
+      "duration": 2.41,
+      "text": "extremely unclear. From this law,"
+    },
+    {
+      "index": 441,
+      "start": 1780.641,
+      "end": 1784.106,
+      "duration": 3.465,
+      "text": "blah, blah, blah, blah, blah, whatever it turns"
+    },
+    {
+      "index": 442,
+      "start": 1784.106,
+      "end": 1788.55,
+      "duration": 4.444,
+      "text": "out to be, you have not the slightest intuition that this is"
+    },
+    {
+      "index": 443,
+      "start": 1788.55,
+      "end": 1792.844,
+      "duration": 4.294,
+      "text": "true about the complex numbers. That first thing is just a"
+    },
+    {
+      "index": 444,
+      "start": 1792.844,
+      "end": 1797.212,
+      "duration": 4.368,
+      "text": "formula, whereas this thing is insightful representation of"
+    },
+    {
+      "index": 445,
+      "start": 1797.212,
+      "end": 1802.78,
+      "duration": 5.568,
+      "text": "complex multiplication. Now, I'd like to use it for"
+    },
+    {
+      "index": 446,
+      "start": 1802.78,
+      "end": 1808.65,
+      "duration": 5.87,
+      "text": "something, but before we do that, let me just indicate how"
+    },
+    {
+      "index": 447,
+      "start": 1808.65,
+      "end": 1814.417,
+      "duration": 5.767,
+      "text": "just the exponential notation enables you to do things in"
+    },
+    {
+      "index": 448,
+      "start": 1814.417,
+      "end": 1819.978,
+      "duration": 5.561,
+      "text": "calculus, formulas that are impossible to remember from"
+    },
+    {
+      "index": 449,
+      "start": 1819.978,
+      "end": 1823.582,
+      "duration": 3.604,
+      "text": "calculus. It makes them very easy to"
+    },
+    {
+      "index": 450,
+      "start": 1823.582,
+      "end": 1827.289,
+      "duration": 3.707,
+      "text": "derive. A typical example of that is,"
+    },
+    {
+      "index": 451,
+      "start": 1827.289,
+      "end": 1830.585,
+      "duration": 3.296,
+      "text": "suppose you want to, for example,"
+    },
+    {
+      "index": 452,
+      "start": 1830.585,
+      "end": 1838.0,
+      "duration": 7.415,
+      "text": "integrate (e to the negative x) cosine x."
+    },
+    {
+      "index": 453,
+      "start": 1838.0,
+      "end": 1841.45,
+      "duration": 3.45,
+      "text": "Well, number one, you spend a few minutes running"
+    },
+    {
+      "index": 454,
+      "start": 1841.45,
+      "end": 1845.546,
+      "duration": 4.096,
+      "text": "through a calculus textbook and try to find out the answer"
+    },
+    {
+      "index": 455,
+      "start": 1845.546,
+      "end": 1849.787,
+      "duration": 4.241,
+      "text": "because you know you are not going to remember how to do it."
+    },
+    {
+      "index": 456,
+      "start": 1849.787,
+      "end": 1853.237,
+      "duration": 3.45,
+      "text": "Or, you run to a computer, and type in Matlab and"
+    },
+    {
+      "index": 457,
+      "start": 1853.237,
+      "end": 1855.968,
+      "duration": 2.731,
+      "text": "something. Or, you fish out your little"
+    },
+    {
+      "index": 458,
+      "start": 1855.968,
+      "end": 1859.418,
+      "duration": 3.45,
+      "text": "pocket calculator, which will give you a formula,"
+    },
+    {
+      "index": 459,
+      "start": 1859.418,
+      "end": 1863.346,
+      "duration": 3.928,
+      "text": "and so on. So, you have aides for doing"
+    },
+    {
+      "index": 460,
+      "start": 1863.346,
+      "end": 1866.363,
+      "duration": 3.017,
+      "text": "that. But, the way to do it if you're"
+    },
+    {
+      "index": 461,
+      "start": 1866.363,
+      "end": 1870.134,
+      "duration": 3.771,
+      "text": "on a desert island, and the way I always do it"
+    },
+    {
+      "index": 462,
+      "start": 1870.134,
+      "end": 1874.575,
+      "duration": 4.441,
+      "text": "because I never have any of these little aides around,"
+    },
+    {
+      "index": 463,
+      "start": 1874.575,
+      "end": 1879.351,
+      "duration": 4.776,
+      "text": "and I cannot trust my memory, probably a certain number of"
+    },
+    {
+      "index": 464,
+      "start": 1879.351,
+      "end": 1884.379,
+      "duration": 5.028,
+      "text": "you remember how you did it at high school, or how you did it"
+    },
+    {
+      "index": 465,
+      "start": 1884.379,
+      "end": 1889.407,
+      "duration": 5.028,
+      "text": "in 18.01, if you took it here. You have to use integration by"
+    },
+    {
+      "index": 466,
+      "start": 1889.407,
+      "end": 1893.011,
+      "duration": 3.604,
+      "text": "parts. But, it's one of the tricky"
+    },
+    {
+      "index": 467,
+      "start": 1893.011,
+      "end": 1897.406,
+      "duration": 4.395,
+      "text": "things that's not required on an exam because you had to use"
+    },
+    {
+      "index": 468,
+      "start": 1897.406,
+      "end": 1900.981,
+      "duration": 3.575,
+      "text": "integration by parts twice in the same direction,"
+    },
+    {
+      "index": 469,
+      "start": 1900.981,
+      "end": 1905.6,
+      "duration": 4.619,
+      "text": "and then suddenly by comparing the end product with the initial"
+    },
+    {
+      "index": 470,
+      "start": 1905.6,
+      "end": 1910.144,
+      "duration": 4.544,
+      "text": "product and writing an equation. Somehow, the value falls out."
+    },
+    {
+      "index": 471,
+      "start": 1910.144,
+      "end": 1913.869,
+      "duration": 3.725,
+      "text": "Well, that's tricky. And it's not the sort of thing"
+    },
+    {
+      "index": 472,
+      "start": 1913.869,
+      "end": 1918.562,
+      "duration": 4.693,
+      "text": "you can waste time stuffing into your head, unless you are going"
+    },
+    {
+      "index": 473,
+      "start": 1918.562,
+      "end": 1924.0,
+      "duration": 5.438,
+      "text": "to be the integration bee during IAP or something like that."
+    },
+    {
+      "index": 474,
+      "start": 1924.0,
+      "end": 1929.281,
+      "duration": 5.281,
+      "text": "Instead, using complex numbers is the way to do this."
+    },
+    {
+      "index": 475,
+      "start": 1929.281,
+      "end": 1932.531,
+      "duration": 3.25,
+      "text": "How do I think of this, cosine x?"
+    },
+    {
+      "index": 476,
+      "start": 1932.531,
+      "end": 1938.32,
+      "duration": 5.789,
+      "text": "What I do, is I think of that e to the negative x cosine x"
+    },
+    {
+      "index": 477,
+      "start": 1938.32,
+      "end": 1944.109,
+      "duration": 5.789,
+      "text": "is the real part, the real part of what?"
+    },
+    {
+      "index": 478,
+      "start": 1944.109,
+      "end": 1949.898,
+      "duration": 5.789,
+      "text": "Well, cosine x is the real part of e to the ix."
+    },
+    {
+      "index": 479,
+      "start": 1949.898,
+      "end": 1952.742,
+      "duration": 2.844,
+      "text": "So, this thing, this is real."
+    },
+    {
+      "index": 480,
+      "start": 1952.742,
+      "end": 1954.468,
+      "duration": 1.726,
+      "text": "This is real, too."
+    },
+    {
+      "index": 481,
+      "start": 1954.468,
+      "end": 1959.851,
+      "duration": 5.383,
+      "text": "But I'm thinking of it as the real part of e to the ix."
+    },
+    {
+      "index": 482,
+      "start": 1959.851,
+      "end": 1965.364,
+      "duration": 5.513,
+      "text": "Now, if I multiply these two"
+    },
+    {
+      "index": 483,
+      "start": 1965.364,
+      "end": 1969.755,
+      "duration": 4.391,
+      "text": "together, this is going to turn out to be, therefore,"
+    },
+    {
+      "index": 484,
+      "start": 1969.755,
+      "end": 1973.471,
+      "duration": 3.716,
+      "text": "the real part of e to the minus x."
+    },
+    {
+      "index": 485,
+      "start": 1973.471,
+      "end": 1977.862,
+      "duration": 4.391,
+      "text": "I'll write it out very pompously, and then I will fix"
+    },
+    {
+      "index": 486,
+      "start": 1977.862,
+      "end": 1980.226,
+      "duration": 2.364,
+      "text": "it. I would never write this,"
+    },
+    {
+      "index": 487,
+      "start": 1980.226,
+      "end": 1984.978,
+      "duration": 4.752,
+      "text": "you are you. Okay, it's e to the minus x"
+    },
+    {
+      "index": 488,
+      "start": 1984.978,
+      "end": 1989.612,
+      "duration": 4.634,
+      "text": "times, when I write cosine x plus i sine x,"
+    },
+    {
+      "index": 489,
+      "start": 1989.612,
+      "end": 1994.245,
+      "duration": 4.633,
+      "text": "so it is the real part of that is cosine x."
+    },
+    {
+      "index": 490,
+      "start": 1994.245,
+      "end": 2000.533,
+      "duration": 6.288,
+      "text": "So, it's the real part of, write it this way for real part"
+    },
+    {
+      "index": 491,
+      "start": 2000.533,
+      "end": 2006.27,
+      "duration": 5.737,
+      "text": "of e to the, factor out the x, and what's up there is"
+    },
+    {
+      "index": 492,
+      "start": 2006.27,
+      "end": 2013.0,
+      "duration": 6.73,
+      "text": "(negative one plus i) times x."
+    },
+    {
+      "index": 493,
+      "start": 2013.0,
+      "end": 2016.777,
+      "duration": 3.777,
+      "text": "Okay, and now, so, the idea is the same thing"
+    },
+    {
+      "index": 494,
+      "start": 2016.777,
+      "end": 2019.867,
+      "duration": 3.09,
+      "text": "is going to be true for the integral."
+    },
+    {
+      "index": 495,
+      "start": 2019.867,
+      "end": 2023.387,
+      "duration": 3.52,
+      "text": "This is going to be the real part of that,"
+    },
+    {
+      "index": 496,
+      "start": 2023.387,
+      "end": 2028.709,
+      "duration": 5.322,
+      "text": "the integral of e to the (minus one plus i) times x dx."
+    },
+    {
+      "index": 497,
+      "start": 2028.709,
+      "end": 2031.027,
+      "duration": 2.318,
+      "text": "In other words,"
+    },
+    {
+      "index": 498,
+      "start": 2031.027,
+      "end": 2034.375,
+      "duration": 3.348,
+      "text": "what you do is, this procedure is called"
+    },
+    {
+      "index": 499,
+      "start": 2034.375,
+      "end": 2038.839,
+      "duration": 4.464,
+      "text": "complexifying the integral. Instead of looking at the"
+    },
+    {
+      "index": 500,
+      "start": 2038.839,
+      "end": 2043.046,
+      "duration": 4.207,
+      "text": "original real problem, I'm going to turn it into a"
+    },
+    {
+      "index": 501,
+      "start": 2043.046,
+      "end": 2047.424,
+      "duration": 4.378,
+      "text": "complex problem by turning this thing into a complex"
+    },
+    {
+      "index": 502,
+      "start": 2047.424,
+      "end": 2052.059,
+      "duration": 4.635,
+      "text": "exponential. This is the real part of that"
+    },
+    {
+      "index": 503,
+      "start": 2052.059,
+      "end": 2055.467,
+      "duration": 3.408,
+      "text": "complex exponential. Now, what's the advantage of"
+    },
+    {
+      "index": 504,
+      "start": 2055.467,
+      "end": 2056.745,
+      "duration": 1.278,
+      "text": "doing that? Simple."
+    },
+    {
+      "index": 505,
+      "start": 2056.745,
+      "end": 2060.295,
+      "duration": 3.55,
+      "text": "It's because nothing is easier to integrate than an"
+    },
+    {
+      "index": 506,
+      "start": 2060.295,
+      "end": 2063.207,
+      "duration": 2.912,
+      "text": "exponential. And, though you may have some"
+    },
+    {
+      "index": 507,
+      "start": 2063.207,
+      "end": 2066.899,
+      "duration": 3.692,
+      "text": "doubts as to whether the familiar laws work also with"
+    },
+    {
+      "index": 508,
+      "start": 2066.899,
+      "end": 2070.165,
+      "duration": 3.266,
+      "text": "complex exponentials, I assure you they all do."
+    },
+    {
+      "index": 509,
+      "start": 2070.165,
+      "end": 2074.0,
+      "duration": 3.835,
+      "text": "It would be lovely to sit and prove them."
+    },
+    {
+      "index": 510,
+      "start": 2074.0,
+      "end": 2077.419,
+      "duration": 3.419,
+      "text": "On the other hand, I think after a while,"
+    },
+    {
+      "index": 511,
+      "start": 2077.419,
+      "end": 2081.779,
+      "duration": 4.36,
+      "text": "you find it rather dull. So, I'm going to do the fun"
+    },
+    {
+      "index": 512,
+      "start": 2081.779,
+      "end": 2086.396,
+      "duration": 4.617,
+      "text": "things, and assume that they are true because they are."
+    },
+    {
+      "index": 513,
+      "start": 2086.396,
+      "end": 2091.354,
+      "duration": 4.958,
+      "text": "So, what's the integral of e to the (minus one plus i) x dx?"
+    },
+    {
+      "index": 514,
+      "start": 2094.09,
+      "end": 2098.792,
+      "duration": 4.702,
+      "text": "Well, if there is justice in heaven, it must be e to the"
+    },
+    {
+      "index": 515,
+      "start": 2098.792,
+      "end": 2103.323,
+      "duration": 4.531,
+      "text": "(minus one plus i) times x divided by minus one plus i."
+    },
+    {
+      "index": 516,
+      "start": 2103.323,
+      "end": 2108.635,
+      "duration": 5.312,
+      "text": "In some sense,"
+    },
+    {
+      "index": 517,
+      "start": 2108.635,
+      "end": 2112.957,
+      "duration": 4.322,
+      "text": "that's the answer. This does, in fact,"
+    },
+    {
+      "index": 518,
+      "start": 2112.957,
+      "end": 2115.878,
+      "duration": 2.921,
+      "text": "give that. That's correct."
+    },
+    {
+      "index": 519,
+      "start": 2115.878,
+      "end": 2122.537,
+      "duration": 6.659,
+      "text": "I want the real part of this. I want the real part because"
+    },
+    {
+      "index": 520,
+      "start": 2122.537,
+      "end": 2127.911,
+      "duration": 5.374,
+      "text": "that's the way the original problem was stated."
+    },
+    {
+      "index": 521,
+      "start": 2127.911,
+      "end": 2134.96,
+      "duration": 7.049,
+      "text": "I want the real part only. So, I want the real part of"
+    },
+    {
+      "index": 522,
+      "start": 2134.96,
+      "end": 2138.906,
+      "duration": 3.946,
+      "text": "this. Now, this is what separates the"
+    },
+    {
+      "index": 523,
+      "start": 2138.906,
+      "end": 2144.607,
+      "duration": 5.701,
+      "text": "girls from the women. [LAUGHTER] This is why you have"
+    },
+    {
+      "index": 524,
+      "start": 2144.607,
+      "end": 2148.664,
+      "duration": 4.057,
+      "text": "to know how to divide complex numbers."
+    },
+    {
+      "index": 525,
+      "start": 2148.664,
+      "end": 2152.392,
+      "duration": 3.728,
+      "text": "So, watch how I find the real part."
+    },
+    {
+      "index": 526,
+      "start": 2152.392,
+      "end": 2156.996,
+      "duration": 4.604,
+      "text": "I write it this way. Normally when I do the"
+    },
+    {
+      "index": 527,
+      "start": 2156.996,
+      "end": 2162.916,
+      "duration": 5.92,
+      "text": "calculations for myself, I would skip a couple of these"
+    },
+    {
+      "index": 528,
+      "start": 2162.916,
+      "end": 2165.889,
+      "duration": 2.973,
+      "text": "steps. But this time,"
+    },
+    {
+      "index": 529,
+      "start": 2165.889,
+      "end": 2169.637,
+      "duration": 3.748,
+      "text": "I will write everything out. You're going to have to do this"
+    },
+    {
+      "index": 530,
+      "start": 2169.637,
+      "end": 2172.559,
+      "duration": 2.922,
+      "text": "a lot in this course, by the way, both over the"
+    },
+    {
+      "index": 531,
+      "start": 2172.559,
+      "end": 2176.307,
+      "duration": 3.748,
+      "text": "course of the next few weeks, and especially towards the end"
+    },
+    {
+      "index": 532,
+      "start": 2176.307,
+      "end": 2179.293,
+      "duration": 2.986,
+      "text": "of the term where we get into a complex systems,"
+    },
+    {
+      "index": 533,
+      "start": 2179.293,
+      "end": 2182.596,
+      "duration": 3.303,
+      "text": "which involve complex numbers. There's a lot of this."
+    },
+    {
+      "index": 534,
+      "start": 2182.596,
+      "end": 2186.471,
+      "duration": 3.875,
+      "text": "So, now is the time to learn to do it, and to feel skillful at"
+    },
+    {
+      "index": 535,
+      "start": 2186.471,
+      "end": 2188.44,
+      "duration": 1.969,
+      "text": "it. So, it's this times e to the"
+    },
+    {
+      "index": 536,
+      "start": 2188.44,
+      "end": 2191.489,
+      "duration": 3.049,
+      "text": "negative x times e to the ix,"
+    },
+    {
+      "index": 537,
+      "start": 2191.489,
+      "end": 2196.0,
+      "duration": 4.511,
+      "text": "which is cosine x plus i sine x."
+    },
+    {
+      "index": 538,
+      "start": 2196.0,
+      "end": 2199.233,
+      "duration": 3.233,
+      "text": "Now, I'm not ready, yet, to do the calculation to"
+    },
+    {
+      "index": 539,
+      "start": 2199.233,
+      "end": 2203.139,
+      "duration": 3.906,
+      "text": "find the real part because I don't like the way this looks."
+    },
+    {
+      "index": 540,
+      "start": 2203.139,
+      "end": 2206.709,
+      "duration": 3.57,
+      "text": "I want to go back to the thing I did right at the very"
+    },
+    {
+      "index": 541,
+      "start": 2206.709,
+      "end": 2210.145,
+      "duration": 3.436,
+      "text": "beginning of the hour, and turn it into an a plus bi"
+    },
+    {
+      "index": 542,
+      "start": 2210.145,
+      "end": 2212.367,
+      "duration": 2.222,
+      "text": "type of complex number."
+    },
+    {
+      "index": 543,
+      "start": 2212.367,
+      "end": 2215.062,
+      "duration": 2.695,
+      "text": "In other words, what we have to do is the"
+    },
+    {
+      "index": 544,
+      "start": 2215.062,
+      "end": 2217.554,
+      "duration": 2.492,
+      "text": "division. So, the division is going to"
+    },
+    {
+      "index": 545,
+      "start": 2217.554,
+      "end": 2222.0,
+      "duration": 4.446,
+      "text": "be, now, I'm going to ask you to do it in your head."
+    },
+    {
+      "index": 546,
+      "start": 2222.0,
+      "end": 2226.416,
+      "duration": 4.416,
+      "text": "I multiply the top and bottom by negative one minus I."
+    },
+    {
+      "index": 547,
+      "start": 2226.416,
+      "end": 2229.5,
+      "duration": 3.084,
+      "text": "What does that put in the denominator?"
+    },
+    {
+      "index": 548,
+      "start": 2229.5,
+      "end": 2233.75,
+      "duration": 4.25,
+      "text": "One squared plus one squared: Two."
+    },
+    {
+      "index": 549,
+      "start": 2233.75,
+      "end": 2237.75,
+      "duration": 4.0,
+      "text": "And in the numerator, negative one minus i."
+    },
+    {
+      "index": 550,
+      "start": 2237.75,
+      "end": 2240.166,
+      "duration": 2.416,
+      "text": "This is the same as that."
+    },
+    {
+      "index": 551,
+      "start": 2240.166,
+      "end": 2244.083,
+      "duration": 3.917,
+      "text": "But now, it looks at the form a + bi."
+    },
+    {
+      "index": 552,
+      "start": 2244.083,
+      "end": 2248.833,
+      "duration": 4.75,
+      "text": "It's negative one over two minus i times one half."
+    },
+    {
+      "index": 553,
+      "start": 2248.833,
+      "end": 2253.267,
+      "duration": 4.434,
+      "text": "So, this is multiplied by e to"
+    },
+    {
+      "index": 554,
+      "start": 2253.267,
+      "end": 2256.44,
+      "duration": 3.173,
+      "text": "the minus x and cosine x."
+    },
+    {
+      "index": 555,
+      "start": 2256.44,
+      "end": 2260.219,
+      "duration": 3.779,
+      "text": "So, if you are doing it, and practice a little bit,"
+    },
+    {
+      "index": 556,
+      "start": 2260.219,
+      "end": 2262.863,
+      "duration": 2.644,
+      "text": "please don't put in all these steps."
+    },
+    {
+      "index": 557,
+      "start": 2262.863,
+      "end": 2266.037,
+      "duration": 3.174,
+      "text": "Go from here; well, I would go from here to"
+    },
+    {
+      "index": 558,
+      "start": 2266.037,
+      "end": 2268.682,
+      "duration": 2.645,
+      "text": "here by myself. Maybe you shouldn't."
+    },
+    {
+      "index": 559,
+      "start": 2268.682,
+      "end": 2271.403,
+      "duration": 2.721,
+      "text": "Practice a little before you do that."
+    },
+    {
+      "index": 560,
+      "start": 2271.403,
+      "end": 2273.821,
+      "duration": 2.418,
+      "text": "And now, what do we do with this?"
+    },
+    {
+      "index": 561,
+      "start": 2273.821,
+      "end": 2277.448,
+      "duration": 3.627,
+      "text": "Now, this is in a form to pick out the real part."
+    },
+    {
+      "index": 562,
+      "start": 2277.448,
+      "end": 2283.052,
+      "duration": 5.604,
+      "text": "We want the real part of this. So, you don't have to write the"
+    },
+    {
+      "index": 563,
+      "start": 2283.052,
+      "end": 2285.369,
+      "duration": 2.317,
+      "text": "whole thing out as a complex number."
+    },
+    {
+      "index": 564,
+      "start": 2285.369,
+      "end": 2288.216,
+      "duration": 2.847,
+      "text": "In other words, you don't have to do all the"
+    },
+    {
+      "index": 565,
+      "start": 2288.216,
+      "end": 2291.262,
+      "duration": 3.046,
+      "text": "multiplications. You only have to find the real"
+    },
+    {
+      "index": 566,
+      "start": 2291.262,
+      "end": 2294.639,
+      "duration": 3.377,
+      "text": "part of it, which is what? Well, e to the negative x"
+    },
+    {
+      "index": 567,
+      "start": 2294.639,
+      "end": 2296.89,
+      "duration": 2.251,
+      "text": "will be simply a factor."
+    },
+    {
+      "index": 568,
+      "start": 2296.89,
+      "end": 2300.068,
+      "duration": 3.178,
+      "text": "That's a real factor, which I don't have to worry"
+    },
+    {
+      "index": 569,
+      "start": 2300.068,
+      "end": 2301.922,
+      "duration": 1.854,
+      "text": "about. And, in that category,"
+    },
+    {
+      "index": 570,
+      "start": 2301.922,
+      "end": 2305.762,
+      "duration": 3.84,
+      "text": "I can include the two also. So, I only have to pick out the"
+    },
+    {
+      "index": 571,
+      "start": 2305.762,
+      "end": 2310.0,
+      "duration": 4.238,
+      "text": "real part of this times that. And, what's that?"
+    },
+    {
+      "index": 572,
+      "start": 2310.0,
+      "end": 2312.609,
+      "duration": 2.609,
+      "text": "It's negative cosine x."
+    },
+    {
+      "index": 573,
+      "start": 2312.609,
+      "end": 2317.137,
+      "duration": 4.528,
+      "text": "And, the other real part comes from the product of these two"
+    },
+    {
+      "index": 574,
+      "start": 2317.137,
+      "end": 2320.054,
+      "duration": 2.917,
+      "text": "things. I times negative i is one."
+    },
+    {
+      "index": 575,
+      "start": 2320.054,
+      "end": 2322.74,
+      "duration": 2.686,
+      "text": "And, what's left is sine x."
+    },
+    {
+      "index": 576,
+      "start": 2322.74,
+      "end": 2325.733,
+      "duration": 2.993,
+      "text": "So, that's the answer to the"
+    },
+    {
+      "index": 577,
+      "start": 2325.733,
+      "end": 2328.803,
+      "duration": 3.07,
+      "text": "question. That's the integral of e to the"
+    },
+    {
+      "index": 578,
+      "start": 2328.803,
+      "end": 2332.641,
+      "duration": 3.838,
+      "text": "negative x * cosine x."
+    },
+    {
+      "index": 579,
+      "start": 2332.641,
+      "end": 2336.401,
+      "duration": 3.76,
+      "text": "Notice, it's a completely straightforward process."
+    },
+    {
+      "index": 580,
+      "start": 2336.401,
+      "end": 2340.853,
+      "duration": 4.452,
+      "text": "It doesn't involve any tricks, unless you call going to the"
+    },
+    {
+      "index": 581,
+      "start": 2340.853,
+      "end": 2344.855,
+      "duration": 4.002,
+      "text": "complex domain a trick. But, I don't."
+    },
+    {
+      "index": 582,
+      "start": 2344.855,
+      "end": 2348.541,
+      "duration": 3.686,
+      "text": "As soon as you see in this course the combination of e to"
+    },
+    {
+      "index": 583,
+      "start": 2348.541,
+      "end": 2351.635,
+      "duration": 3.094,
+      "text": "ax times cosine bx or sine bx,"
+    },
+    {
+      "index": 584,
+      "start": 2351.635,
+      "end": 2354.334,
+      "duration": 2.699,
+      "text": "you should immediately think,"
+    },
+    {
+      "index": 585,
+      "start": 2354.334,
+      "end": 2358.151,
+      "duration": 3.817,
+      "text": "and you're going to get plenty of it in the couple of weeks"
+    },
+    {
+      "index": 586,
+      "start": 2358.151,
+      "end": 2361.113,
+      "duration": 2.962,
+      "text": "after the exam, you are going to get plenty of"
+    },
+    {
+      "index": 587,
+      "start": 2361.113,
+      "end": 2365.129,
+      "duration": 4.016,
+      "text": "it, and you should immediately think of passing to the complex"
+    },
+    {
+      "index": 588,
+      "start": 2365.129,
+      "end": 2367.498,
+      "duration": 2.369,
+      "text": "domain. That will be the standard way"
+    },
+    {
+      "index": 589,
+      "start": 2367.498,
+      "end": 2372.744,
+      "duration": 5.246,
+      "text": "we solve such problems. So, you're going to get lots of"
+    },
+    {
+      "index": 590,
+      "start": 2372.744,
+      "end": 2377.083,
+      "duration": 4.339,
+      "text": "practice doing this. But, this was the first time."
+    },
+    {
+      "index": 591,
+      "start": 2377.083,
+      "end": 2382.041,
+      "duration": 4.958,
+      "text": "Now, I guess in the time remaining, I'm not going to talk"
+    },
+    {
+      "index": 592,
+      "start": 2382.041,
+      "end": 2384.875,
+      "duration": 2.834,
+      "text": "about in the notes, i, R, at all,"
+    },
+    {
+      "index": 593,
+      "start": 2384.875,
+      "end": 2389.921,
+      "duration": 5.046,
+      "text": "but I would like to talk a little bit about the extraction"
+    },
+    {
+      "index": 594,
+      "start": 2389.921,
+      "end": 2394.437,
+      "duration": 4.516,
+      "text": "of the complex roots, since you have a problem about"
+    },
+    {
+      "index": 595,
+      "start": 2394.437,
+      "end": 2399.572,
+      "duration": 5.135,
+      "text": "that and because it's another beautiful application of this"
+    },
+    {
+      "index": 596,
+      "start": 2399.572,
+      "end": 2404.0,
+      "duration": 4.428,
+      "text": "polar way of writing complex numbers."
+    },
+    {
+      "index": 597,
+      "start": 2404.0,
+      "end": 2409.978,
+      "duration": 5.978,
+      "text": "Suppose I want to calculate. So, the basic problem is to"
+    },
+    {
+      "index": 598,
+      "start": 2409.978,
+      "end": 2415.956,
+      "duration": 5.978,
+      "text": "calculate the nth roots of one. Now, in the real domain,"
+    },
+    {
+      "index": 599,
+      "start": 2415.956,
+      "end": 2421.826,
+      "duration": 5.87,
+      "text": "of course, the answer is, sometimes there's only one of"
+    },
+    {
+      "index": 600,
+      "start": 2421.826,
+      "end": 2426.826,
+      "duration": 5.0,
+      "text": "these, one itself, and sometimes there are two,"
+    },
+    {
+      "index": 601,
+      "start": 2426.826,
+      "end": 2434.0,
+      "duration": 7.174,
+      "text": "depending on whether n is an even number or an odd number."
+    },
+    {
+      "index": 602,
+      "start": 2434.0,
+      "end": 2440.719,
+      "duration": 6.719,
+      "text": "But, in the complex domain, there are always n answers as"
+    },
+    {
+      "index": 603,
+      "start": 2440.719,
+      "end": 2445.88,
+      "duration": 5.161,
+      "text": "complex numbers. One always has n nth roots."
+    },
+    {
+      "index": 604,
+      "start": 2445.88,
+      "end": 2450.679,
+      "duration": 4.799,
+      "text": "Now, where are they? Well, geometrically,"
+    },
+    {
+      "index": 605,
+      "start": 2450.679,
+      "end": 2454.4,
+      "duration": 3.721,
+      "text": "it's easy to see where they are."
+    },
+    {
+      "index": 606,
+      "start": 2454.4,
+      "end": 2461.0,
+      "duration": 6.6,
+      "text": "Here's the unit circle. Here's the unit circle."
+    },
+    {
+      "index": 607,
+      "start": 2461.0,
+      "end": 2464.428,
+      "duration": 3.428,
+      "text": "One of the roots is right here at one."
+    },
+    {
+      "index": 608,
+      "start": 2464.428,
+      "end": 2469.246,
+      "duration": 4.818,
+      "text": "Now, where are the others? Well, do you see that if I"
+    },
+    {
+      "index": 609,
+      "start": 2469.246,
+      "end": 2474.99,
+      "duration": 5.744,
+      "text": "place, let's take n equal five because that's a nice,"
+    },
+    {
+      "index": 610,
+      "start": 2474.99,
+      "end": 2478.789,
+      "duration": 3.799,
+      "text": "dramatic number. If I place these peptides"
+    },
+    {
+      "index": 611,
+      "start": 2478.789,
+      "end": 2483.236,
+      "duration": 4.447,
+      "text": "equally spaced points around the unit circle, so,"
+    },
+    {
+      "index": 612,
+      "start": 2483.236,
+      "end": 2486.479,
+      "duration": 3.243,
+      "text": "in other words, this angle is alpha."
+    },
+    {
+      "index": 613,
+      "start": 2486.479,
+      "end": 2492.951,
+      "duration": 6.472,
+      "text": "Alpha should be the angle. What would be the expression"
+    },
+    {
+      "index": 614,
+      "start": 2492.951,
+      "end": 2497.168,
+      "duration": 4.217,
+      "text": "for that? If there were five such equally"
+    },
+    {
+      "index": 615,
+      "start": 2497.168,
+      "end": 2503.704,
+      "duration": 6.536,
+      "text": "spaced, it would be one fifth of all the way around the circle."
+    },
+    {
+      "index": 616,
+      "start": 2503.704,
+      "end": 2507.816,
+      "duration": 4.112,
+      "text": "All the way around the circle is two pi."
+    },
+    {
+      "index": 617,
+      "start": 2507.816,
+      "end": 2512.56,
+      "duration": 4.744,
+      "text": "So, it will be one fifth of two pi in radians."
+    },
+    {
+      "index": 618,
+      "start": 2512.56,
+      "end": 2518.674,
+      "duration": 6.114,
+      "text": "Now, it's geometrically clear that those are the five fifth"
+    },
+    {
+      "index": 619,
+      "start": 2518.674,
+      "end": 2522.786,
+      "duration": 4.112,
+      "text": "roots because, how do I multiply complex"
+    },
+    {
+      "index": 620,
+      "start": 2522.786,
+      "end": 2526.966,
+      "duration": 4.18,
+      "text": "numbers? I multiply the moduli."
+    },
+    {
+      "index": 621,
+      "start": 2526.966,
+      "end": 2531.794,
+      "duration": 4.828,
+      "text": "Well, they all have moduli one. So, if I take this guy,"
+    },
+    {
+      "index": 622,
+      "start": 2531.794,
+      "end": 2536.622,
+      "duration": 4.828,
+      "text": "let's call that complex number, oh, I hate to give you,"
+    },
+    {
+      "index": 623,
+      "start": 2536.622,
+      "end": 2540.288,
+      "duration": 3.666,
+      "text": "they are always giving you Greek notation."
+    },
+    {
+      "index": 624,
+      "start": 2540.288,
+      "end": 2543.506,
+      "duration": 3.218,
+      "text": "All right, why not torture you? Zeta."
+    },
+    {
+      "index": 625,
+      "start": 2543.506,
+      "end": 2548.602,
+      "duration": 5.096,
+      "text": "At least you will learn how to make a zeta in this period,"
+    },
+    {
+      "index": 626,
+      "start": 2548.602,
+      "end": 2554.01,
+      "duration": 5.408,
+      "text": "small zeta, so that's zeta. There's our fifth root of"
+    },
+    {
+      "index": 627,
+      "start": 2554.01,
+      "end": 2556.906,
+      "duration": 2.896,
+      "text": "unity. It's the first one that occurs"
+    },
+    {
+      "index": 628,
+      "start": 2556.906,
+      "end": 2560.525,
+      "duration": 3.619,
+      "text": "on the circle that isn't the trivial one, one."
+    },
+    {
+      "index": 629,
+      "start": 2560.525,
+      "end": 2564.546,
+      "duration": 4.021,
+      "text": "Now, do you see that, how would I calculate zeta to"
+    },
+    {
+      "index": 630,
+      "start": 2564.546,
+      "end": 2567.764,
+      "duration": 3.218,
+      "text": "the fifth? Well, if I write zeta in polar"
+    },
+    {
+      "index": 631,
+      "start": 2567.764,
+      "end": 2571.946,
+      "duration": 4.182,
+      "text": "notation, what would it be? The modulus would be one,"
+    },
+    {
+      "index": 632,
+      "start": 2571.946,
+      "end": 2576.369,
+      "duration": 4.423,
+      "text": "and therefore it will be simply, the r will be one"
+    },
+    {
+      "index": 633,
+      "start": 2576.369,
+      "end": 2579.265,
+      "duration": 2.896,
+      "text": "for it because its length is one."
+    },
+    {
+      "index": 634,
+      "start": 2579.265,
+      "end": 2583.139,
+      "duration": 3.874,
+      "text": "Its modulus is one. What's up here?"
+    },
+    {
+      "index": 635,
+      "start": 2583.139,
+      "end": 2586.784,
+      "duration": 3.645,
+      "text": "I times that angle, and that angle is two pi over"
+    },
+    {
+      "index": 636,
+      "start": 2586.784,
+      "end": 2589.291,
+      "duration": 2.507,
+      "text": "five. So, there's just,"
+    },
+    {
+      "index": 637,
+      "start": 2589.291,
+      "end": 2591.797,
+      "duration": 2.506,
+      "text": "geometrically I see where zeta is."
+    },
+    {
+      "index": 638,
+      "start": 2591.797,
+      "end": 2595.746,
+      "duration": 3.949,
+      "text": "And, if I translate that geometry into the e to the i"
+    },
+    {
+      "index": 639,
+      "start": 2595.746,
+      "end": 2600.379,
+      "duration": 4.633,
+      "text": "theta form for the formula, I see that it must"
+    },
+    {
+      "index": 640,
+      "start": 2600.379,
+      "end": 2603.721,
+      "duration": 3.342,
+      "text": "be that number. Now, let's say somebody gives"
+    },
+    {
+      "index": 641,
+      "start": 2603.721,
+      "end": 2607.898,
+      "duration": 4.177,
+      "text": "you that number and says, hey, is this the fifth root of"
+    },
+    {
+      "index": 642,
+      "start": 2607.898,
+      "end": 2610.025,
+      "duration": 2.127,
+      "text": "one? I forbid you to draw any"
+    },
+    {
+      "index": 643,
+      "start": 2610.025,
+      "end": 2613.418,
+      "duration": 3.393,
+      "text": "pictures. What would you do?"
+    },
+    {
+      "index": 644,
+      "start": 2613.418,
+      "end": 2616.571,
+      "duration": 3.153,
+      "text": "You say, well, I'll raise it to the fifth"
+    },
+    {
+      "index": 645,
+      "start": 2616.571,
+      "end": 2619.487,
+      "duration": 2.916,
+      "text": "power. What's zeta to the fifth power?"
+    },
+    {
+      "index": 646,
+      "start": 2619.487,
+      "end": 2623.743,
+      "duration": 4.256,
+      "text": "Well, it's e to the i two pi / five,"
+    },
+    {
+      "index": 647,
+      "start": 2623.743,
+      "end": 2628.0,
+      "duration": 4.257,
+      "text": "and now, if I think of raising that to the fifth power,"
+    },
+    {
+      "index": 648,
+      "start": 2628.0,
+      "end": 2631.704,
+      "duration": 3.704,
+      "text": "by the exponential law, that's the same thing as"
+    },
+    {
+      "index": 649,
+      "start": 2631.704,
+      "end": 2634.778,
+      "duration": 3.074,
+      "text": "putting a five in front of the exponent."
+    },
+    {
+      "index": 650,
+      "start": 2634.778,
+      "end": 2637.615,
+      "duration": 2.837,
+      "text": "So, this times five, and what's that?"
+    },
+    {
+      "index": 651,
+      "start": 2637.615,
+      "end": 2641.241,
+      "duration": 3.626,
+      "text": "That's e to the i times two pi."
+    },
+    {
+      "index": 652,
+      "start": 2641.241,
+      "end": 2646.675,
+      "duration": 5.434,
+      "text": "And, what is that? Well, it's the angle."
+    },
+    {
+      "index": 653,
+      "start": 2646.675,
+      "end": 2653.173,
+      "duration": 6.498,
+      "text": "If the angle is two pi, I've gone all the way around"
+    },
+    {
+      "index": 654,
+      "start": 2653.173,
+      "end": 2657.633,
+      "duration": 4.46,
+      "text": "the circle and come back here again."
+    },
+    {
+      "index": 655,
+      "start": 2657.633,
+      "end": 2662.729,
+      "duration": 5.096,
+      "text": "I've got the number one. So, this is one."
+    },
+    {
+      "index": 656,
+      "start": 2662.729,
+      "end": 2668.335,
+      "duration": 5.606,
+      "text": "Since the argument, two pi, is the same as an"
+    },
+    {
+      "index": 657,
+      "start": 2668.335,
+      "end": 2675.088,
+      "duration": 6.753,
+      "text": "angle, it's the same as, well, let's not write it that"
+    },
+    {
+      "index": 658,
+      "start": 2675.088,
+      "end": 2679.563,
+      "duration": 4.475,
+      "text": "way. It's wrong."
+    },
+    {
+      "index": 659,
+      "start": 2679.563,
+      "end": 2692.611,
+      "duration": 13.048,
+      "text": "It's just wrong since two pi and zero are the same angle."
+    },
+    {
+      "index": 660,
+      "start": 2692.611,
+      "end": 2701.0,
+      "duration": 8.389,
+      "text": "So, I could replace this by zero."
+    },
+    {
+      "index": 661,
+      "start": 2701.0,
+      "end": 2709.267,
+      "duration": 8.267,
+      "text": "Oh dear. Well, I guess I have to stop"
+    },
+    {
+      "index": 662,
+      "start": 2709.267,
+      "end": 2722.357,
+      "duration": 13.09,
+      "text": "right in the middle of things. So, you're going to have to"
+    },
+    {
+      "index": 663,
+      "start": 2722.357,
+      "end": 2736.136,
+      "duration": 13.779,
+      "text": "read a little bit about how to find roots in order to do that"
+    },
+    {
+      "index": 664,
+      "start": 2736.136,
+      "end": 2744.403,
+      "duration": 8.267,
+      "text": "problem. And, we will go on from that"
+    },
+    {
+      "index": 665,
+      "start": 2744.403,
+      "end": 2745.403,
+      "duration": 1.0,
+      "text": "point Friday."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

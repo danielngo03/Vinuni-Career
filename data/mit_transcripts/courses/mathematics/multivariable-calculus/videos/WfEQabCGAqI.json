@@ -1,0 +1,6542 @@
+{
+  "video": {
+    "id": "WfEQabCGAqI",
+    "title": "Lec 28: Divergence theorem | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=WfEQabCGAqI",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2955,
+    "language": "en"
+  },
+  "segment_count": 932,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.75,
+      "end": 1.76,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.76,
+      "end": 4.309,
+      "duration": 2.549,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.43,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.44,
+      "end": 8.35,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.36,
+      "end": 11.23,
+      "duration": 2.87,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.24,
+      "end": 12.789,
+      "duration": 1.549,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.799,
+      "end": 15.869,
+      "duration": 3.07,
+      "text": "hundreds of MIT courses visit MIT open"
+    },
+    {
+      "index": 7,
+      "start": 15.879,
+      "end": 21.39,
+      "duration": 5.511,
+      "text": "courseware at"
+    },
+    {
+      "index": 8,
+      "start": 23.589,
+      "end": 23.599,
+      "duration": 0.01,
+      "text": "ocw.mit.edu yesterday we've learned"
+    },
+    {
+      "index": 9,
+      "start": 23.599,
+      "end": 26.87,
+      "duration": 3.271,
+      "text": "about flux and we've seen the first few"
+    },
+    {
+      "index": 10,
+      "start": 26.88,
+      "end": 30.189,
+      "duration": 3.309,
+      "text": "examples of how to set up and compute"
+    },
+    {
+      "index": 11,
+      "start": 30.199,
+      "end": 32.95,
+      "duration": 2.751,
+      "text": "integrals for flux of a vector field"
+    },
+    {
+      "index": 12,
+      "start": 32.96,
+      "end": 34.47,
+      "duration": 1.51,
+      "text": "through a"
+    },
+    {
+      "index": 13,
+      "start": 34.48,
+      "end": 37.11,
+      "duration": 2.63,
+      "text": "surface so remember the"
+    },
+    {
+      "index": 14,
+      "start": 37.12,
+      "end": 40.069,
+      "duration": 2.949,
+      "text": "flux of a vector field"
+    },
+    {
+      "index": 15,
+      "start": 40.079,
+      "end": 42.35,
+      "duration": 2.271,
+      "text": "F"
+    },
+    {
+      "index": 16,
+      "start": 42.36,
+      "end": 47.189,
+      "duration": 4.829,
+      "text": "through a surface"
+    },
+    {
+      "index": 17,
+      "start": 50.67,
+      "end": 50.68,
+      "duration": 0.01,
+      "text": "s is defined by taking the double"
+    },
+    {
+      "index": 18,
+      "start": 50.68,
+      "end": 52.15,
+      "duration": 1.47,
+      "text": "integral on the"
+    },
+    {
+      "index": 19,
+      "start": 52.16,
+      "end": 56.63,
+      "duration": 4.47,
+      "text": "surface of f. n DS where n is the unit"
+    },
+    {
+      "index": 20,
+      "start": 56.64,
+      "end": 59.59,
+      "duration": 2.95,
+      "text": "normal to the surface and DS is the area"
+    },
+    {
+      "index": 21,
+      "start": 59.6,
+      "end": 62.349,
+      "duration": 2.749,
+      "text": "element on the surface"
+    },
+    {
+      "index": 22,
+      "start": 62.359,
+      "end": 65.789,
+      "duration": 3.43,
+      "text": "so as we've seen for various surfaces we"
+    },
+    {
+      "index": 23,
+      "start": 65.799,
+      "end": 67.55,
+      "duration": 1.751,
+      "text": "have various formulas telling us what"
+    },
+    {
+      "index": 24,
+      "start": 67.56,
+      "end": 70.429,
+      "duration": 2.869,
+      "text": "the normal Vector is and what the area"
+    },
+    {
+      "index": 25,
+      "start": 70.439,
+      "end": 73.91,
+      "duration": 3.471,
+      "text": "element becomes for example on spheres"
+    },
+    {
+      "index": 26,
+      "start": 73.92,
+      "end": 76.109,
+      "duration": 2.189,
+      "text": "we typically integrate with respect to"
+    },
+    {
+      "index": 27,
+      "start": 76.119,
+      "end": 78.67,
+      "duration": 2.551,
+      "text": "Fe and Theta the latitude and longitude"
+    },
+    {
+      "index": 28,
+      "start": 78.68,
+      "end": 82.03,
+      "duration": 3.35,
+      "text": "angles on a horizontal plane we would"
+    },
+    {
+      "index": 29,
+      "start": 82.04,
+      "end": 85.469,
+      "duration": 3.429,
+      "text": "just end up integrating DX Dy and so on"
+    },
+    {
+      "index": 30,
+      "start": 85.479,
+      "end": 88.35,
+      "duration": 2.871,
+      "text": "so at the end of lecture we saw a"
+    },
+    {
+      "index": 31,
+      "start": 88.36,
+      "end": 91.35,
+      "duration": 2.99,
+      "text": "formula and a lot of you asked me how"
+    },
+    {
+      "index": 32,
+      "start": 91.36,
+      "end": 93.109,
+      "duration": 1.749,
+      "text": "did we get it well we didn't get it yet"
+    },
+    {
+      "index": 33,
+      "start": 93.119,
+      "end": 95.35,
+      "duration": 2.231,
+      "text": "so we going to try to explain where it"
+    },
+    {
+      "index": 34,
+      "start": 95.36,
+      "end": 96.83,
+      "duration": 1.47,
+      "text": "comes from and why it"
+    },
+    {
+      "index": 35,
+      "start": 96.84,
+      "end": 100.469,
+      "duration": 3.629,
+      "text": "works okay so the case we want to look"
+    },
+    {
+      "index": 36,
+      "start": 100.479,
+      "end": 104.27,
+      "duration": 3.791,
+      "text": "at is if s is the"
+    },
+    {
+      "index": 37,
+      "start": 104.28,
+      "end": 108.789,
+      "duration": 4.509,
+      "text": "graph of a"
+    },
+    {
+      "index": 38,
+      "start": 112.749,
+      "end": 112.759,
+      "duration": 0.01,
+      "text": "function so you know it's given by Z"
+    },
+    {
+      "index": 39,
+      "start": 112.759,
+      "end": 120.55,
+      "duration": 7.791,
+      "text": "equals some function in terms of X and Y"
+    },
+    {
+      "index": 40,
+      "start": 124.429,
+      "end": 124.439,
+      "duration": 0.01,
+      "text": "so our surface is out"
+    },
+    {
+      "index": 41,
+      "start": 124.439,
+      "end": 128.109,
+      "duration": 3.67,
+      "text": "here Z is a function of X and Y and X"
+    },
+    {
+      "index": 42,
+      "start": 128.119,
+      "end": 129.27,
+      "duration": 1.151,
+      "text": "and"
+    },
+    {
+      "index": 43,
+      "start": 129.28,
+      "end": 133.11,
+      "duration": 3.83,
+      "text": "Y will range over some domain in the XY"
+    },
+    {
+      "index": 44,
+      "start": 133.12,
+      "end": 138.949,
+      "duration": 5.829,
+      "text": "plane namely well the region that's the"
+    },
+    {
+      "index": 45,
+      "start": 140.589,
+      "end": 140.599,
+      "duration": 0.01,
+      "text": "shadow"
+    },
+    {
+      "index": 46,
+      "start": 140.599,
+      "end": 151.11,
+      "duration": 10.511,
+      "text": "of the surface on the XY plane"
+    },
+    {
+      "index": 47,
+      "start": 155.35,
+      "end": 155.36,
+      "duration": 0.01,
+      "text": "so I said that we'll have a formula for"
+    },
+    {
+      "index": 48,
+      "start": 155.36,
+      "end": 159.869,
+      "duration": 4.509,
+      "text": "NDS which will end up being plusus minus"
+    },
+    {
+      "index": 49,
+      "start": 159.879,
+      "end": 164.589,
+      "duration": 4.71,
+      "text": "f subx - F suby 1 DX d"
+    },
+    {
+      "index": 50,
+      "start": 164.599,
+      "end": 168.149,
+      "duration": 3.55,
+      "text": "y so that we will set up and evaluate"
+    },
+    {
+      "index": 51,
+      "start": 168.159,
+      "end": 170.509,
+      "duration": 2.35,
+      "text": "the integral in terms of X and Y"
+    },
+    {
+      "index": 52,
+      "start": 170.519,
+      "end": 172.67,
+      "duration": 2.151,
+      "text": "replacing every time we see Z we will"
+    },
+    {
+      "index": 53,
+      "start": 172.68,
+      "end": 175.27,
+      "duration": 2.59,
+      "text": "replace it by F of XY whatever the"
+    },
+    {
+      "index": 54,
+      "start": 175.28,
+      "end": 177.55,
+      "duration": 2.27,
+      "text": "formula for f might"
+    },
+    {
+      "index": 55,
+      "start": 177.56,
+      "end": 181.03,
+      "duration": 3.47,
+      "text": "be so by the way I mean see if actually"
+    },
+    {
+      "index": 56,
+      "start": 181.04,
+      "end": 182.43,
+      "duration": 1.39,
+      "text": "if we look at a very easy case where"
+    },
+    {
+      "index": 57,
+      "start": 182.44,
+      "end": 184.71,
+      "duration": 2.27,
+      "text": "this is just a horizontal plane so Z"
+    },
+    {
+      "index": 58,
+      "start": 184.72,
+      "end": 186.99,
+      "duration": 2.27,
+      "text": "equals constant the function is just a"
+    },
+    {
+      "index": 59,
+      "start": 187.0,
+      "end": 189.83,
+      "duration": 2.83,
+      "text": "constant well the partial derivatives"
+    },
+    {
+      "index": 60,
+      "start": 189.84,
+      "end": 193.83,
+      "duration": 3.99,
+      "text": "become just zero you get 0 0 1 DX Dy"
+    },
+    {
+      "index": 61,
+      "start": 193.84,
+      "end": 194.949,
+      "duration": 1.109,
+      "text": "that's what you would expect for a"
+    },
+    {
+      "index": 62,
+      "start": 194.959,
+      "end": 197.75,
+      "duration": 2.791,
+      "text": "horizontal plane just from common sense"
+    },
+    {
+      "index": 63,
+      "start": 197.76,
+      "end": 199.149,
+      "duration": 1.389,
+      "text": "so this is more interesting of course if"
+    },
+    {
+      "index": 64,
+      "start": 199.159,
+      "end": 201.47,
+      "duration": 2.311,
+      "text": "a function is more"
+    },
+    {
+      "index": 65,
+      "start": 201.48,
+      "end": 204.35,
+      "duration": 2.87,
+      "text": "interesting so how do we get that where"
+    },
+    {
+      "index": 66,
+      "start": 204.36,
+      "end": 208.55,
+      "duration": 4.19,
+      "text": "does this come"
+    },
+    {
+      "index": 67,
+      "start": 212.27,
+      "end": 212.28,
+      "duration": 0.01,
+      "text": "from so so we need to figure out for a"
+    },
+    {
+      "index": 68,
+      "start": 212.28,
+      "end": 216.03,
+      "duration": 3.75,
+      "text": "small piece of our surface what will be"
+    },
+    {
+      "index": 69,
+      "start": 216.04,
+      "end": 217.91,
+      "duration": 1.87,
+      "text": "n Delta s if you"
+    },
+    {
+      "index": 70,
+      "start": 217.92,
+      "end": 220.949,
+      "duration": 3.029,
+      "text": "want so let's say that we"
+    },
+    {
+      "index": 71,
+      "start": 220.959,
+      "end": 223.869,
+      "duration": 2.91,
+      "text": "take a small rectangle in"
+    },
+    {
+      "index": 72,
+      "start": 223.879,
+      "end": 227.83,
+      "duration": 3.951,
+      "text": "here corresponding"
+    },
+    {
+      "index": 73,
+      "start": 231.509,
+      "end": 231.519,
+      "duration": 0.01,
+      "text": "to sides Delta X"
+    },
+    {
+      "index": 74,
+      "start": 231.519,
+      "end": 235.429,
+      "duration": 3.91,
+      "text": "and Delta Y and we look at the piece of"
+    },
+    {
+      "index": 75,
+      "start": 235.439,
+      "end": 237.069,
+      "duration": 1.63,
+      "text": "surface that's above"
+    },
+    {
+      "index": 76,
+      "start": 237.079,
+      "end": 240.55,
+      "duration": 3.471,
+      "text": "that well the question we have now is"
+    },
+    {
+      "index": 77,
+      "start": 240.56,
+      "end": 242.55,
+      "duration": 1.99,
+      "text": "what is the area of this little piece of"
+    },
+    {
+      "index": 78,
+      "start": 242.56,
+      "end": 246.589,
+      "duration": 4.029,
+      "text": "surface and what is its normal"
+    },
+    {
+      "index": 79,
+      "start": 246.599,
+      "end": 249.91,
+      "duration": 3.311,
+      "text": "Vector so observe this little piece up"
+    },
+    {
+      "index": 80,
+      "start": 249.92,
+      "end": 251.71,
+      "duration": 1.79,
+      "text": "here if it's small enough it will look"
+    },
+    {
+      "index": 81,
+      "start": 251.72,
+      "end": 253.19,
+      "duration": 1.47,
+      "text": "like a parallelogram Ian it might be"
+    },
+    {
+      "index": 82,
+      "start": 253.2,
+      "end": 255.27,
+      "duration": 2.07,
+      "text": "slightly curvy but roughly it looks like"
+    },
+    {
+      "index": 83,
+      "start": 255.28,
+      "end": 257.949,
+      "duration": 2.669,
+      "text": "a parallelogram in space and so we've"
+    },
+    {
+      "index": 84,
+      "start": 257.959,
+      "end": 259.909,
+      "duration": 1.95,
+      "text": "seen how to find the area of a"
+    },
+    {
+      "index": 85,
+      "start": 259.919,
+      "end": 262.59,
+      "duration": 2.671,
+      "text": "parallelogram in space using cross"
+    },
+    {
+      "index": 86,
+      "start": 262.6,
+      "end": 265.71,
+      "duration": 3.11,
+      "text": "product right if we can figure out what"
+    },
+    {
+      "index": 87,
+      "start": 265.72,
+      "end": 267.87,
+      "duration": 2.15,
+      "text": "are the vectors for this side and that"
+    },
+    {
+      "index": 88,
+      "start": 267.88,
+      "end": 270.67,
+      "duration": 2.79,
+      "text": "side then taking the cross product will"
+    },
+    {
+      "index": 89,
+      "start": 270.68,
+      "end": 272.189,
+      "duration": 1.509,
+      "text": "give us and taking the magnitude of the"
+    },
+    {
+      "index": 90,
+      "start": 272.199,
+      "end": 275.15,
+      "duration": 2.951,
+      "text": "cross product will give us the area more"
+    },
+    {
+      "index": 91,
+      "start": 275.16,
+      "end": 276.67,
+      "duration": 1.51,
+      "text": "the cross product also gives us the"
+    },
+    {
+      "index": 92,
+      "start": 276.68,
+      "end": 279.23,
+      "duration": 2.55,
+      "text": "normal Direction so in fact the cross"
+    },
+    {
+      "index": 93,
+      "start": 279.24,
+      "end": 281.07,
+      "duration": 1.83,
+      "text": "product gives us two in one it gives us"
+    },
+    {
+      "index": 94,
+      "start": 281.08,
+      "end": 283.39,
+      "duration": 2.31,
+      "text": "the normal Direction and the area"
+    },
+    {
+      "index": 95,
+      "start": 283.4,
+      "end": 286.51,
+      "duration": 3.11,
+      "text": "element and that's why I say that we"
+    },
+    {
+      "index": 96,
+      "start": 286.52,
+      "end": 289.469,
+      "duration": 2.949,
+      "text": "will have an easy formula for n DS while"
+    },
+    {
+      "index": 97,
+      "start": 289.479,
+      "end": 291.87,
+      "duration": 2.391,
+      "text": "n and DS taken separately are more"
+    },
+    {
+      "index": 98,
+      "start": 291.88,
+      "end": 293.029,
+      "duration": 1.149,
+      "text": "complicated because you'd have to"
+    },
+    {
+      "index": 99,
+      "start": 293.039,
+      "end": 294.23,
+      "duration": 1.191,
+      "text": "actually take the length of the"
+    },
+    {
+      "index": 100,
+      "start": 294.24,
+      "end": 296.35,
+      "duration": 2.11,
+      "text": "direction of this"
+    },
+    {
+      "index": 101,
+      "start": 296.36,
+      "end": 302.029,
+      "duration": 5.669,
+      "text": "gy okay so let's carry out this program"
+    },
+    {
+      "index": 102,
+      "start": 304.71,
+      "end": 304.72,
+      "duration": 0.01,
+      "text": "so let's"
+    },
+    {
+      "index": 103,
+      "start": 304.72,
+      "end": 307.43,
+      "duration": 2.71,
+      "text": "say I'm going to"
+    },
+    {
+      "index": 104,
+      "start": 307.44,
+      "end": 311.029,
+      "duration": 3.589,
+      "text": "look at a small piece"
+    },
+    {
+      "index": 105,
+      "start": 311.039,
+      "end": 314.51,
+      "duration": 3.471,
+      "text": "of the XZ plane the sorry the XY plane"
+    },
+    {
+      "index": 106,
+      "start": 314.52,
+      "end": 319.11,
+      "duration": 4.59,
+      "text": "so here I have Delta X I have Delta"
+    },
+    {
+      "index": 107,
+      "start": 319.12,
+      "end": 323.23,
+      "duration": 4.11,
+      "text": "Y and I'm starting at some point XY now"
+    },
+    {
+      "index": 108,
+      "start": 323.24,
+      "end": 326.87,
+      "duration": 3.63,
+      "text": "above that I will have a parallelogram"
+    },
+    {
+      "index": 109,
+      "start": 326.88,
+      "end": 331.909,
+      "duration": 5.029,
+      "text": "on my Surface"
+    },
+    {
+      "index": 110,
+      "start": 334.39,
+      "end": 334.4,
+      "duration": 0.01,
+      "text": "I need to figure out so this point here"
+    },
+    {
+      "index": 111,
+      "start": 334.4,
+      "end": 336.35,
+      "duration": 1.95,
+      "text": "the point where I start I know what it"
+    },
+    {
+      "index": 112,
+      "start": 336.36,
+      "end": 341.71,
+      "duration": 5.35,
+      "text": "is it's just x y and well Z is f of x"
+    },
+    {
+      "index": 113,
+      "start": 341.72,
+      "end": 344.87,
+      "duration": 3.15,
+      "text": "y so now what I want to find actually is"
+    },
+    {
+      "index": 114,
+      "start": 344.88,
+      "end": 346.67,
+      "duration": 1.79,
+      "text": "what are these two vectors let's call"
+    },
+    {
+      "index": 115,
+      "start": 346.68,
+      "end": 349.309,
+      "duration": 2.629,
+      "text": "them u and"
+    },
+    {
+      "index": 116,
+      "start": 349.319,
+      "end": 352.71,
+      "duration": 3.391,
+      "text": "v that correspond to moving a bit in the"
+    },
+    {
+      "index": 117,
+      "start": 352.72,
+      "end": 355.189,
+      "duration": 2.469,
+      "text": "X direction or in the y direction and"
+    },
+    {
+      "index": 118,
+      "start": 355.199,
+      "end": 360.909,
+      "duration": 5.71,
+      "text": "then U cross V"
+    },
+    {
+      "index": 119,
+      "start": 364.23,
+      "end": 364.24,
+      "duration": 0.01,
+      "text": "will be well in terms of the magnitude"
+    },
+    {
+      "index": 120,
+      "start": 364.24,
+      "end": 366.749,
+      "duration": 2.509,
+      "text": "of this guy will just be the little"
+    },
+    {
+      "index": 121,
+      "start": 366.759,
+      "end": 370.469,
+      "duration": 3.71,
+      "text": "piece of surface area Delta"
+    },
+    {
+      "index": 122,
+      "start": 370.479,
+      "end": 373.27,
+      "duration": 2.791,
+      "text": "s and in terms of Direction it will be"
+    },
+    {
+      "index": 123,
+      "start": 373.28,
+      "end": 376.99,
+      "duration": 3.71,
+      "text": "normal to the surface so it will be my"
+    },
+    {
+      "index": 124,
+      "start": 377.0,
+      "end": 379.99,
+      "duration": 2.99,
+      "text": "actually I will get just Delta s times"
+    },
+    {
+      "index": 125,
+      "start": 380.0,
+      "end": 381.51,
+      "duration": 1.51,
+      "text": "my normal"
+    },
+    {
+      "index": 126,
+      "start": 381.52,
+      "end": 384.27,
+      "duration": 2.75,
+      "text": "V well up to sign because depending on"
+    },
+    {
+      "index": 127,
+      "start": 384.28,
+      "end": 386.029,
+      "duration": 1.749,
+      "text": "whether I do U cross V or V cross U I"
+    },
+    {
+      "index": 128,
+      "start": 386.039,
+      "end": 387.51,
+      "duration": 1.471,
+      "text": "might get the normal Vector in the"
+    },
+    {
+      "index": 129,
+      "start": 387.52,
+      "end": 389.029,
+      "duration": 1.509,
+      "text": "direction I want or in the opposite"
+    },
+    {
+      "index": 130,
+      "start": 389.039,
+      "end": 391.39,
+      "duration": 2.351,
+      "text": "direction but we'll take care of that"
+    },
+    {
+      "index": 131,
+      "start": 391.4,
+      "end": 394.43,
+      "duration": 3.03,
+      "text": "later up to"
+    },
+    {
+      "index": 132,
+      "start": 394.44,
+      "end": 398.189,
+      "duration": 3.749,
+      "text": "sign okay so let's find u and v in case"
+    },
+    {
+      "index": 133,
+      "start": 398.199,
+      "end": 399.79,
+      "duration": 1.591,
+      "text": "you have trouble with that small picture"
+    },
+    {
+      "index": 134,
+      "start": 399.8,
+      "end": 406.27,
+      "duration": 6.47,
+      "text": "then I have a better one"
+    },
+    {
+      "index": 135,
+      "start": 409.029,
+      "end": 409.039,
+      "duration": 0.01,
+      "text": "here let's keep it just in case you know"
+    },
+    {
+      "index": 136,
+      "start": 409.039,
+      "end": 411.23,
+      "duration": 2.191,
+      "text": "in case this one gets really too"
+    },
+    {
+      "index": 137,
+      "start": 411.24,
+      "end": 413.629,
+      "duration": 2.389,
+      "text": "cluttered um it really represents the"
+    },
+    {
+      "index": 138,
+      "start": 413.639,
+      "end": 415.189,
+      "duration": 1.55,
+      "text": "same"
+    },
+    {
+      "index": 139,
+      "start": 415.199,
+      "end": 418.27,
+      "duration": 3.071,
+      "text": "thing okay so let's try to figure out"
+    },
+    {
+      "index": 140,
+      "start": 418.28,
+      "end": 424.55,
+      "duration": 6.27,
+      "text": "these vectors u and v"
+    },
+    {
+      "index": 141,
+      "start": 428.51,
+      "end": 428.52,
+      "duration": 0.01,
+      "text": "so the vector U starts at the point x y"
+    },
+    {
+      "index": 142,
+      "start": 428.52,
+      "end": 433.189,
+      "duration": 4.669,
+      "text": "f of x"
+    },
+    {
+      "index": 143,
+      "start": 437.189,
+      "end": 437.199,
+      "duration": 0.01,
+      "text": "y and it goes two whereas its head well"
+    },
+    {
+      "index": 144,
+      "start": 437.199,
+      "end": 440.869,
+      "duration": 3.67,
+      "text": "I'll have moved X by Delta X so X Plus"
+    },
+    {
+      "index": 145,
+      "start": 440.879,
+      "end": 442.15,
+      "duration": 1.271,
+      "text": "Delta"
+    },
+    {
+      "index": 146,
+      "start": 442.16,
+      "end": 445.55,
+      "duration": 3.39,
+      "text": "X Y doesn't change and of course the Z"
+    },
+    {
+      "index": 147,
+      "start": 445.56,
+      "end": 448.71,
+      "duration": 3.15,
+      "text": "coordinate has to change it becomes f of"
+    },
+    {
+      "index": 148,
+      "start": 448.72,
+      "end": 451.27,
+      "duration": 2.55,
+      "text": "x plus Delta X X and"
+    },
+    {
+      "index": 149,
+      "start": 451.28,
+      "end": 454.71,
+      "duration": 3.43,
+      "text": "Y now how does f change if I change x a"
+    },
+    {
+      "index": 150,
+      "start": 454.72,
+      "end": 457.749,
+      "duration": 3.029,
+      "text": "little bit well we've seen that it's"
+    },
+    {
+      "index": 151,
+      "start": 457.759,
+      "end": 461.189,
+      "duration": 3.43,
+      "text": "given by the partial derivative F subx"
+    },
+    {
+      "index": 152,
+      "start": 461.199,
+      "end": 465.189,
+      "duration": 3.99,
+      "text": "so this is approximately equal to f ofx"
+    },
+    {
+      "index": 153,
+      "start": 465.199,
+      "end": 470.149,
+      "duration": 4.95,
+      "text": "y plus Delta x * F subx at the given"
+    },
+    {
+      "index": 154,
+      "start": 470.159,
+      "end": 472.629,
+      "duration": 2.47,
+      "text": "point XY I'm not going to add it because"
+    },
+    {
+      "index": 155,
+      "start": 472.639,
+      "end": 474.95,
+      "duration": 2.311,
+      "text": "you know notation is already long"
+    },
+    {
+      "index": 156,
+      "start": 474.96,
+      "end": 479.51,
+      "duration": 4.55,
+      "text": "enough so that means my Vector U is well"
+    },
+    {
+      "index": 157,
+      "start": 479.52,
+      "end": 481.07,
+      "duration": 1.55,
+      "text": "approximately because I'm using this"
+    },
+    {
+      "index": 158,
+      "start": 481.08,
+      "end": 482.309,
+      "duration": 1.229,
+      "text": "linear"
+    },
+    {
+      "index": 159,
+      "start": 482.319,
+      "end": 487.869,
+      "duration": 5.55,
+      "text": "approximation Delta x z and F subx time"
+    },
+    {
+      "index": 160,
+      "start": 487.879,
+      "end": 489.95,
+      "duration": 2.071,
+      "text": "Delta"
+    },
+    {
+      "index": 161,
+      "start": 489.96,
+      "end": 493.909,
+      "duration": 3.949,
+      "text": "X okay is that okay with"
+    },
+    {
+      "index": 162,
+      "start": 493.919,
+      "end": 497.11,
+      "duration": 3.191,
+      "text": "everyone"
+    },
+    {
+      "index": 163,
+      "start": 500.189,
+      "end": 500.199,
+      "duration": 0.01,
+      "text": "good now what about V well V works the"
+    },
+    {
+      "index": 164,
+      "start": 500.199,
+      "end": 502.51,
+      "duration": 2.311,
+      "text": "same way okay so I'm not going to do all"
+    },
+    {
+      "index": 165,
+      "start": 502.52,
+      "end": 505.55,
+      "duration": 3.03,
+      "text": "the details when I move from here to"
+    },
+    {
+      "index": 166,
+      "start": 505.56,
+      "end": 508.589,
+      "duration": 3.029,
+      "text": "here well X doesn't change and Y changes"
+    },
+    {
+      "index": 167,
+      "start": 508.599,
+      "end": 510.149,
+      "duration": 1.55,
+      "text": "by Delta y"
+    },
+    {
+      "index": 168,
+      "start": 510.159,
+      "end": 513.87,
+      "duration": 3.711,
+      "text": "so X component nothing"
+    },
+    {
+      "index": 169,
+      "start": 513.88,
+      "end": 517.949,
+      "duration": 4.069,
+      "text": "happens y component changes by Delta"
+    },
+    {
+      "index": 170,
+      "start": 517.959,
+      "end": 521.35,
+      "duration": 3.391,
+      "text": "Y what about the Z component well F"
+    },
+    {
+      "index": 171,
+      "start": 521.36,
+      "end": 524.19,
+      "duration": 2.83,
+      "text": "changes by F sub y * Delta y That's How"
+    },
+    {
+      "index": 172,
+      "start": 524.2,
+      "end": 535.31,
+      "duration": 11.11,
+      "text": "F changes if I increase y by Delta"
+    },
+    {
+      "index": 173,
+      "start": 539.43,
+      "end": 539.44,
+      "duration": 0.01,
+      "text": "y okay so I have my two sides now I can"
+    },
+    {
+      "index": 174,
+      "start": 539.44,
+      "end": 542.15,
+      "duration": 2.71,
+      "text": "can take a cross"
+    },
+    {
+      "index": 175,
+      "start": 545.509,
+      "end": 545.519,
+      "duration": 0.01,
+      "text": "product well maybe I will first sorry"
+    },
+    {
+      "index": 176,
+      "start": 545.519,
+      "end": 546.829,
+      "duration": 1.31,
+      "text": "Factor something"
+    },
+    {
+      "index": 177,
+      "start": 546.839,
+      "end": 552.23,
+      "duration": 5.391,
+      "text": "out see I can rewrite this as 1 f subx *"
+    },
+    {
+      "index": 178,
+      "start": 552.24,
+      "end": 556.949,
+      "duration": 4.709,
+      "text": "Delta X and this one I will reite as 01"
+    },
+    {
+      "index": 179,
+      "start": 556.959,
+      "end": 561.55,
+      "duration": 4.591,
+      "text": "F sub y Delta Y and so now the cross"
+    },
+    {
+      "index": 180,
+      "start": 561.56,
+      "end": 567.069,
+      "duration": 5.509,
+      "text": "product so n Delta s up to sign it's"
+    },
+    {
+      "index": 181,
+      "start": 567.079,
+      "end": 572.069,
+      "duration": 4.99,
+      "text": "going to be U CR v u V well so we'll"
+    },
+    {
+      "index": 182,
+      "start": 572.079,
+      "end": 574.47,
+      "duration": 2.391,
+      "text": "have to do the cross product and we'll"
+    },
+    {
+      "index": 183,
+      "start": 574.48,
+      "end": 577.47,
+      "duration": 2.99,
+      "text": "have a Delta X Delta y coming out okay"
+    },
+    {
+      "index": 184,
+      "start": 577.48,
+      "end": 579.509,
+      "duration": 2.029,
+      "text": "I'm just you know saving myself a"
+    },
+    {
+      "index": 185,
+      "start": 579.519,
+      "end": 582.31,
+      "duration": 2.791,
+      "text": "trouble of writing a lot of Delta X and"
+    },
+    {
+      "index": 186,
+      "start": 582.32,
+      "end": 584.03,
+      "duration": 1.71,
+      "text": "Delta y's but if you prefer you can just"
+    },
+    {
+      "index": 187,
+      "start": 584.04,
+      "end": 593.71,
+      "duration": 9.67,
+      "text": "do directly this cross product"
+    },
+    {
+      "index": 188,
+      "start": 596.35,
+      "end": 596.36,
+      "duration": 0.01,
+      "text": "there okay so let's compute this cross"
+    },
+    {
+      "index": 189,
+      "start": 596.36,
+      "end": 600.63,
+      "duration": 4.27,
+      "text": "product well the I component is 0 minus"
+    },
+    {
+      "index": 190,
+      "start": 600.64,
+      "end": 602.389,
+      "duration": 1.749,
+      "text": "F"
+    },
+    {
+      "index": 191,
+      "start": 602.399,
+      "end": 606.31,
+      "duration": 3.911,
+      "text": "subx the Y component is going to be well"
+    },
+    {
+      "index": 192,
+      "start": 606.32,
+      "end": 609.23,
+      "duration": 2.91,
+      "text": "F sub y minus 0 but with a minus sign in"
+    },
+    {
+      "index": 193,
+      "start": 609.24,
+      "end": 611.71,
+      "duration": 2.47,
+      "text": "front of everything so negative f sub y"
+    },
+    {
+      "index": 194,
+      "start": 611.72,
+      "end": 615.35,
+      "duration": 3.63,
+      "text": "and the Z component will be just one"
+    },
+    {
+      "index": 195,
+      "start": 615.36,
+      "end": 619.19,
+      "duration": 3.83,
+      "text": "times Delta X Delta"
+    },
+    {
+      "index": 196,
+      "start": 622.949,
+      "end": 622.959,
+      "duration": 0.01,
+      "text": "y okay does that make sense"
+    },
+    {
+      "index": 197,
+      "start": 622.959,
+      "end": 624.71,
+      "duration": 1.751,
+      "text": "for"
+    },
+    {
+      "index": 198,
+      "start": 624.72,
+      "end": 627.11,
+      "duration": 2.39,
+      "text": "yes very"
+    },
+    {
+      "index": 199,
+      "start": 627.12,
+      "end": 629.75,
+      "duration": 2.63,
+      "text": "good and so now when we just take you"
+    },
+    {
+      "index": 200,
+      "start": 629.76,
+      "end": 631.509,
+      "duration": 1.749,
+      "text": "know we shrink this rectangle we shrink"
+    },
+    {
+      "index": 201,
+      "start": 631.519,
+      "end": 633.75,
+      "duration": 2.231,
+      "text": "Delta X and Delta y to zero that's how"
+    },
+    {
+      "index": 202,
+      "start": 633.76,
+      "end": 637.43,
+      "duration": 3.67,
+      "text": "we get this formula for NDS equals FX"
+    },
+    {
+      "index": 203,
+      "start": 637.44,
+      "end": 640.59,
+      "duration": 3.15,
+      "text": "negative fy1 DX d"
+    },
+    {
+      "index": 204,
+      "start": 640.6,
+      "end": 643.949,
+      "duration": 3.349,
+      "text": "y well plus minus because it's it's up"
+    },
+    {
+      "index": 205,
+      "start": 643.959,
+      "end": 645.509,
+      "duration": 1.55,
+      "text": "to us to choose whether we want to take"
+    },
+    {
+      "index": 206,
+      "start": 645.519,
+      "end": 648.67,
+      "duration": 3.151,
+      "text": "the normal Vector pointing up or down so"
+    },
+    {
+      "index": 207,
+      "start": 648.68,
+      "end": 650.75,
+      "duration": 2.07,
+      "text": "see if you take this"
+    },
+    {
+      "index": 208,
+      "start": 650.76,
+      "end": 653.91,
+      "duration": 3.15,
+      "text": "convention then the Z component of NDS"
+    },
+    {
+      "index": 209,
+      "start": 653.92,
+      "end": 656.71,
+      "duration": 2.79,
+      "text": "is positive so that corresponds to"
+    },
+    {
+      "index": 210,
+      "start": 656.72,
+      "end": 659.55,
+      "duration": 2.83,
+      "text": "normal Vector pointing up"
+    },
+    {
+      "index": 211,
+      "start": 659.56,
+      "end": 661.75,
+      "duration": 2.19,
+      "text": "if you take the opposite signs then the"
+    },
+    {
+      "index": 212,
+      "start": 661.76,
+      "end": 663.15,
+      "duration": 1.39,
+      "text": "Z component will be negative that means"
+    },
+    {
+      "index": 213,
+      "start": 663.16,
+      "end": 666.069,
+      "duration": 2.909,
+      "text": "your normal Vector points"
+    },
+    {
+      "index": 214,
+      "start": 666.079,
+      "end": 670.629,
+      "duration": 4.55,
+      "text": "down Okay so this one is with and"
+    },
+    {
+      "index": 215,
+      "start": 670.639,
+      "end": 674.35,
+      "duration": 3.711,
+      "text": "pointing"
+    },
+    {
+      "index": 216,
+      "start": 676.55,
+      "end": 676.56,
+      "duration": 0.01,
+      "text": "up I mean when I say up of course it's"
+    },
+    {
+      "index": 217,
+      "start": 676.56,
+      "end": 677.99,
+      "duration": 1.43,
+      "text": "still perpendicular to the surface you"
+    },
+    {
+      "index": 218,
+      "start": 678.0,
+      "end": 680.15,
+      "duration": 2.15,
+      "text": "know the surface is really has a big"
+    },
+    {
+      "index": 219,
+      "start": 680.16,
+      "end": 681.79,
+      "duration": 1.63,
+      "text": "slope then it's it's not really going to"
+    },
+    {
+      "index": 220,
+      "start": 681.8,
+      "end": 687.47,
+      "duration": 5.67,
+      "text": "go all that much up but more up than"
+    },
+    {
+      "index": 221,
+      "start": 691.15,
+      "end": 691.16,
+      "duration": 0.01,
+      "text": "down okay"
+    },
+    {
+      "index": 222,
+      "start": 691.16,
+      "end": 699.15,
+      "duration": 7.99,
+      "text": "so that's how we get that formula any"
+    },
+    {
+      "index": 223,
+      "start": 702.35,
+      "end": 702.36,
+      "duration": 0.01,
+      "text": "questions no okay so that's a really"
+    },
+    {
+      "index": 224,
+      "start": 702.36,
+      "end": 704.43,
+      "duration": 2.07,
+      "text": "useful formula so you don't really need"
+    },
+    {
+      "index": 225,
+      "start": 704.44,
+      "end": 705.99,
+      "duration": 1.55,
+      "text": "to remember all the details of how we"
+    },
+    {
+      "index": 226,
+      "start": 706.0,
+      "end": 712.829,
+      "duration": 6.829,
+      "text": "got it but please remember that"
+    },
+    {
+      "index": 227,
+      "start": 726.31,
+      "end": 726.32,
+      "duration": 0.01,
+      "text": "so let's say I want to find the flux of"
+    },
+    {
+      "index": 228,
+      "start": 726.32,
+      "end": 729.55,
+      "duration": 3.23,
+      "text": "the vector field Z * K so it's a"
+    },
+    {
+      "index": 229,
+      "start": 729.56,
+      "end": 731.15,
+      "duration": 1.59,
+      "text": "vertical Vector"
+    },
+    {
+      "index": 230,
+      "start": 731.16,
+      "end": 733.43,
+      "duration": 2.27,
+      "text": "field"
+    },
+    {
+      "index": 231,
+      "start": 733.44,
+      "end": 737.069,
+      "duration": 3.629,
+      "text": "through the"
+    },
+    {
+      "index": 232,
+      "start": 746.31,
+      "end": 746.32,
+      "duration": 0.01,
+      "text": "paraboloid zal X2 +"
+    },
+    {
+      "index": 233,
+      "start": 746.32,
+      "end": 752.55,
+      "duration": 6.23,
+      "text": "y^2 that lives above the unit"
+    },
+    {
+      "index": 234,
+      "start": 755.03,
+      "end": 755.04,
+      "duration": 0.01,
+      "text": "dis okay so what does that"
+    },
+    {
+      "index": 235,
+      "start": 755.04,
+      "end": 758.35,
+      "duration": 3.31,
+      "text": "mean z = x² + y^2 well we've seen it"
+    },
+    {
+      "index": 236,
+      "start": 758.36,
+      "end": 760.23,
+      "duration": 1.87,
+      "text": "many times okay it's this parabol"
+    },
+    {
+      "index": 237,
+      "start": 760.24,
+      "end": 762.23,
+      "duration": 1.99,
+      "text": "pointing"
+    },
+    {
+      "index": 238,
+      "start": 762.24,
+      "end": 765.829,
+      "duration": 3.589,
+      "text": "up above the unit dis means I only care"
+    },
+    {
+      "index": 239,
+      "start": 765.839,
+      "end": 767.43,
+      "duration": 1.591,
+      "text": "about I don't care about this infinite"
+    },
+    {
+      "index": 240,
+      "start": 767.44,
+      "end": 771.31,
+      "duration": 3.87,
+      "text": "surface I will actually stop when I"
+    },
+    {
+      "index": 241,
+      "start": 771.32,
+      "end": 775.75,
+      "duration": 4.43,
+      "text": "hit a radius of one away from the Z"
+    },
+    {
+      "index": 242,
+      "start": 775.76,
+      "end": 777.35,
+      "duration": 1.59,
+      "text": "AIS"
+    },
+    {
+      "index": 243,
+      "start": 777.36,
+      "end": 780.03,
+      "duration": 2.67,
+      "text": "and so now I have my Vector field which"
+    },
+    {
+      "index": 244,
+      "start": 780.04,
+      "end": 786.75,
+      "duration": 6.71,
+      "text": "is going to point over all up"
+    },
+    {
+      "index": 245,
+      "start": 790.43,
+      "end": 790.44,
+      "duration": 0.01,
+      "text": "because well it's Z * K so the more Z is"
+    },
+    {
+      "index": 246,
+      "start": 790.44,
+      "end": 792.59,
+      "duration": 2.15,
+      "text": "positive the more your vector field goes"
+    },
+    {
+      "index": 247,
+      "start": 792.6,
+      "end": 795.389,
+      "duration": 2.789,
+      "text": "up of course if Z were negative then it"
+    },
+    {
+      "index": 248,
+      "start": 795.399,
+      "end": 799.189,
+      "duration": 3.79,
+      "text": "would Point down but we live"
+    },
+    {
+      "index": 249,
+      "start": 799.199,
+      "end": 803.55,
+      "duration": 4.351,
+      "text": "above so actually a quick opinion poll"
+    },
+    {
+      "index": 250,
+      "start": 803.56,
+      "end": 804.91,
+      "duration": 1.35,
+      "text": "what do you think the flux should be"
+    },
+    {
+      "index": 251,
+      "start": 804.92,
+      "end": 808.269,
+      "duration": 3.349,
+      "text": "should be positive zero negative we"
+    },
+    {
+      "index": 252,
+      "start": 808.279,
+      "end": 812.269,
+      "duration": 3.99,
+      "text": "don't know"
+    },
+    {
+      "index": 253,
+      "start": 813.99,
+      "end": 814.0,
+      "duration": 0.01,
+      "text": "okay so I see some I don't know I see"
+    },
+    {
+      "index": 254,
+      "start": 814.0,
+      "end": 817.189,
+      "duration": 3.189,
+      "text": "some negative and I see some positive so"
+    },
+    {
+      "index": 255,
+      "start": 817.199,
+      "end": 819.47,
+      "duration": 2.271,
+      "text": "of course I didn't tell you which way"
+    },
+    {
+      "index": 256,
+      "start": 819.48,
+      "end": 822.15,
+      "duration": 2.67,
+      "text": "I'm orienting my paraboloid so so far"
+    },
+    {
+      "index": 257,
+      "start": 822.16,
+      "end": 823.75,
+      "duration": 1.59,
+      "text": "both answers are correct the only one"
+    },
+    {
+      "index": 258,
+      "start": 823.76,
+      "end": 825.47,
+      "duration": 1.71,
+      "text": "that's probably not correct is zero"
+    },
+    {
+      "index": 259,
+      "start": 825.48,
+      "end": 826.99,
+      "duration": 1.51,
+      "text": "because no matter which way you choose"
+    },
+    {
+      "index": 260,
+      "start": 827.0,
+      "end": 828.75,
+      "duration": 1.75,
+      "text": "to orient it you should get something"
+    },
+    {
+      "index": 261,
+      "start": 828.76,
+      "end": 829.949,
+      "duration": 1.189,
+      "text": "it's not it's not looking like it will"
+    },
+    {
+      "index": 262,
+      "start": 829.959,
+      "end": 832.509,
+      "duration": 2.55,
+      "text": "be zero so let's say that I'm going to"
+    },
+    {
+      "index": 263,
+      "start": 832.519,
+      "end": 841.59,
+      "duration": 9.071,
+      "text": "do it with a normal pointing upwards"
+    },
+    {
+      "index": 264,
+      "start": 847.43,
+      "end": 847.44,
+      "duration": 0.01,
+      "text": "chance okay I see some people changing"
+    },
+    {
+      "index": 265,
+      "start": 847.44,
+      "end": 850.99,
+      "duration": 3.55,
+      "text": "back and forth between one and two um"
+    },
+    {
+      "index": 266,
+      "start": 851.0,
+      "end": 852.43,
+      "duration": 1.43,
+      "text": "okay so let's draw a picture which one"
+    },
+    {
+      "index": 267,
+      "start": 852.44,
+      "end": 855.03,
+      "duration": 2.59,
+      "text": "is pointing upwards well let's look at"
+    },
+    {
+      "index": 268,
+      "start": 855.04,
+      "end": 857.23,
+      "duration": 2.19,
+      "text": "the bottom point the normal Vector"
+    },
+    {
+      "index": 269,
+      "start": 857.24,
+      "end": 859.069,
+      "duration": 1.829,
+      "text": "pointing up here we know what it means"
+    },
+    {
+      "index": 270,
+      "start": 859.079,
+      "end": 861.31,
+      "duration": 2.231,
+      "text": "it's this guy and so if you continue to"
+    },
+    {
+      "index": 271,
+      "start": 861.32,
+      "end": 863.629,
+      "duration": 2.309,
+      "text": "follow your normal Vector see they're"
+    },
+    {
+      "index": 272,
+      "start": 863.639,
+      "end": 866.91,
+      "duration": 3.271,
+      "text": "actually pointing up and into the"
+    },
+    {
+      "index": 273,
+      "start": 866.92,
+      "end": 868.79,
+      "duration": 1.87,
+      "text": "paraboloid okay and I claim that the"
+    },
+    {
+      "index": 274,
+      "start": 868.8,
+      "end": 870.949,
+      "duration": 2.149,
+      "text": "answer should be positive because the"
+    },
+    {
+      "index": 275,
+      "start": 870.959,
+      "end": 873.91,
+      "duration": 2.951,
+      "text": "vector field is crossing our paraboloid"
+    },
+    {
+      "index": 276,
+      "start": 873.92,
+      "end": 877.949,
+      "duration": 4.029,
+      "text": "going upwards going from the outside out"
+    },
+    {
+      "index": 277,
+      "start": 877.959,
+      "end": 881.71,
+      "duration": 3.751,
+      "text": "and Below to the inside and up side so"
+    },
+    {
+      "index": 278,
+      "start": 881.72,
+      "end": 889.23,
+      "duration": 7.51,
+      "text": "in the direction that we're counting"
+    },
+    {
+      "index": 279,
+      "start": 892.03,
+      "end": 892.04,
+      "duration": 0.01,
+      "text": "positively well we'll see how it turns"
+    },
+    {
+      "index": 280,
+      "start": 892.04,
+      "end": 897.43,
+      "duration": 5.39,
+      "text": "out when we do the calculation"
+    },
+    {
+      "index": 281,
+      "start": 901.069,
+      "end": 901.079,
+      "duration": 0.01,
+      "text": "Okay so we have to"
+    },
+    {
+      "index": 282,
+      "start": 901.079,
+      "end": 903.829,
+      "duration": 2.75,
+      "text": "compute the integral for"
+    },
+    {
+      "index": 283,
+      "start": 903.839,
+      "end": 908.11,
+      "duration": 4.271,
+      "text": "flux double integral of the surface of"
+    },
+    {
+      "index": 284,
+      "start": 908.12,
+      "end": 910.79,
+      "duration": 2.67,
+      "text": "f. n"
+    },
+    {
+      "index": 285,
+      "start": 910.8,
+      "end": 913.31,
+      "duration": 2.51,
+      "text": "DS is going to be okay so what are we"
+    },
+    {
+      "index": 286,
+      "start": 913.32,
+      "end": 914.47,
+      "duration": 1.15,
+      "text": "going to"
+    },
+    {
+      "index": 287,
+      "start": 914.48,
+      "end": 920.23,
+      "duration": 5.75,
+      "text": "do well F we said is 0 0"
+    },
+    {
+      "index": 288,
+      "start": 920.24,
+      "end": 923.31,
+      "duration": 3.07,
+      "text": "Z what is NDS well let's use our brand"
+    },
+    {
+      "index": 289,
+      "start": 923.32,
+      "end": 924.99,
+      "duration": 1.67,
+      "text": "new"
+    },
+    {
+      "index": 290,
+      "start": 925.0,
+      "end": 930.829,
+      "duration": 5.829,
+      "text": "formula so it says f subx F sub y 1 DX d"
+    },
+    {
+      "index": 291,
+      "start": 930.839,
+      "end": 934.269,
+      "duration": 3.43,
+      "text": "y what what is little F in"
+    },
+    {
+      "index": 292,
+      "start": 934.279,
+      "end": 938.43,
+      "duration": 4.151,
+      "text": "here it's X2 + y^2 okay so when we're"
+    },
+    {
+      "index": 293,
+      "start": 938.44,
+      "end": 941.269,
+      "duration": 2.829,
+      "text": "using this formula we need to know"
+    },
+    {
+      "index": 294,
+      "start": 941.279,
+      "end": 943.389,
+      "duration": 2.11,
+      "text": "what's the you know what little F stands"
+    },
+    {
+      "index": 295,
+      "start": 943.399,
+      "end": 945.629,
+      "duration": 2.23,
+      "text": "for is whatever the formula is for Z as"
+    },
+    {
+      "index": 296,
+      "start": 945.639,
+      "end": 948.749,
+      "duration": 3.11,
+      "text": "a function of X and"
+    },
+    {
+      "index": 297,
+      "start": 951.509,
+      "end": 951.519,
+      "duration": 0.01,
+      "text": "Y so we"
+    },
+    {
+      "index": 298,
+      "start": 951.519,
+      "end": 955.389,
+      "duration": 3.87,
+      "text": "take x² + y^ 2 and we take the partial"
+    },
+    {
+      "index": 299,
+      "start": 955.399,
+      "end": 958.189,
+      "duration": 2.79,
+      "text": "derivatives with minus signs we get -2X"
+    },
+    {
+      "index": 300,
+      "start": 958.199,
+      "end": 962.91,
+      "duration": 4.711,
+      "text": "-2 y and one DX Dy well of course here"
+    },
+    {
+      "index": 301,
+      "start": 962.92,
+      "end": 964.03,
+      "duration": 1.11,
+      "text": "it didn't really matter because we're"
+    },
+    {
+      "index": 302,
+      "start": 964.04,
+      "end": 965.79,
+      "duration": 1.75,
+      "text": "going to dot them with zero so actually"
+    },
+    {
+      "index": 303,
+      "start": 965.8,
+      "end": 967.829,
+      "duration": 2.029,
+      "text": "even if we had make you know if even if"
+    },
+    {
+      "index": 304,
+      "start": 967.839,
+      "end": 970.87,
+      "duration": 3.031,
+      "text": "we had made a mistake we somehow"
+    },
+    {
+      "index": 305,
+      "start": 970.88,
+      "end": 973.99,
+      "duration": 3.11,
+      "text": "wouldn't have had to pay the price but"
+    },
+    {
+      "index": 306,
+      "start": 974.0,
+      "end": 976.47,
+      "duration": 2.47,
+      "text": "still okay so we'll end up with double"
+    },
+    {
+      "index": 307,
+      "start": 976.48,
+      "end": 980.829,
+      "duration": 4.349,
+      "text": "integral on S of Z DX"
+    },
+    {
+      "index": 308,
+      "start": 980.839,
+      "end": 984.67,
+      "duration": 3.831,
+      "text": "Dy now what do we do with that well we"
+    },
+    {
+      "index": 309,
+      "start": 984.68,
+      "end": 985.99,
+      "duration": 1.31,
+      "text": "have too many things we need to get rid"
+    },
+    {
+      "index": 310,
+      "start": 986.0,
+      "end": 1000.269,
+      "duration": 14.269,
+      "text": "of Z so let's use zal = x + y sare once"
+    },
+    {
+      "index": 311,
+      "start": 1011.309,
+      "end": 1011.319,
+      "duration": 0.01,
+      "text": "so that becomes double integral of X2 +"
+    },
+    {
+      "index": 312,
+      "start": 1011.319,
+      "end": 1014.829,
+      "duration": 3.51,
+      "text": "y^2 DX d y and here see we're using the"
+    },
+    {
+      "index": 313,
+      "start": 1014.839,
+      "end": 1016.389,
+      "duration": 1.55,
+      "text": "fact that we're only looking at things"
+    },
+    {
+      "index": 314,
+      "start": 1016.399,
+      "end": 1018.949,
+      "duration": 2.55,
+      "text": "that are on the surface it's not like in"
+    },
+    {
+      "index": 315,
+      "start": 1018.959,
+      "end": 1020.47,
+      "duration": 1.511,
+      "text": "triple integral you could never do that"
+    },
+    {
+      "index": 316,
+      "start": 1020.48,
+      "end": 1022.949,
+      "duration": 2.469,
+      "text": "because Z X and Y are independent here"
+    },
+    {
+      "index": 317,
+      "start": 1022.959,
+      "end": 1025.309,
+      "duration": 2.35,
+      "text": "they're related by the equation of a"
+    },
+    {
+      "index": 318,
+      "start": 1025.319,
+      "end": 1027.51,
+      "duration": 2.191,
+      "text": "surface sorry if I sound like I'm you"
+    },
+    {
+      "index": 319,
+      "start": 1027.52,
+      "end": 1029.069,
+      "duration": 1.549,
+      "text": "know renting"
+    },
+    {
+      "index": 320,
+      "start": 1029.079,
+      "end": 1031.63,
+      "duration": 2.551,
+      "text": "but I know from experience this is where"
+    },
+    {
+      "index": 321,
+      "start": 1031.64,
+      "end": 1033.15,
+      "duration": 1.51,
+      "text": "you know one of the most sticky and"
+    },
+    {
+      "index": 322,
+      "start": 1033.16,
+      "end": 1035.87,
+      "duration": 2.71,
+      "text": "tricky points is actually"
+    },
+    {
+      "index": 323,
+      "start": 1035.88,
+      "end": 1039.35,
+      "duration": 3.47,
+      "text": "that's okay so now how will we actually"
+    },
+    {
+      "index": 324,
+      "start": 1039.36,
+      "end": 1040.909,
+      "duration": 1.549,
+      "text": "integrate that well now that we have"
+    },
+    {
+      "index": 325,
+      "start": 1040.919,
+      "end": 1042.51,
+      "duration": 1.591,
+      "text": "just X and Y we should figure out what's"
+    },
+    {
+      "index": 326,
+      "start": 1042.52,
+      "end": 1044.47,
+      "duration": 1.95,
+      "text": "the range for X and Y well the range for"
+    },
+    {
+      "index": 327,
+      "start": 1044.48,
+      "end": 1046.909,
+      "duration": 2.429,
+      "text": "X and Y is going to be the shadow of our"
+    },
+    {
+      "index": 328,
+      "start": 1046.919,
+      "end": 1053.909,
+      "duration": 6.99,
+      "text": "region it's going to be this unit disc"
+    },
+    {
+      "index": 329,
+      "start": 1062.71,
+      "end": 1062.72,
+      "duration": 0.01,
+      "text": "now and see here this is finally where"
+    },
+    {
+      "index": 330,
+      "start": 1062.72,
+      "end": 1065.029,
+      "duration": 2.309,
+      "text": "I've left a world of surface integrals"
+    },
+    {
+      "index": 331,
+      "start": 1065.039,
+      "end": 1067.87,
+      "duration": 2.831,
+      "text": "to go back to a usual double integral"
+    },
+    {
+      "index": 332,
+      "start": 1067.88,
+      "end": 1069.909,
+      "duration": 2.029,
+      "text": "and now I have to set it up well I can"
+    },
+    {
+      "index": 333,
+      "start": 1069.919,
+      "end": 1071.71,
+      "duration": 1.791,
+      "text": "do it this way with dxdy but it looks"
+    },
+    {
+      "index": 334,
+      "start": 1071.72,
+      "end": 1073.35,
+      "duration": 1.63,
+      "text": "like there's a smarter thing to do okay"
+    },
+    {
+      "index": 335,
+      "start": 1073.36,
+      "end": 1075.549,
+      "duration": 2.189,
+      "text": "I'm going to use actually polar"
+    },
+    {
+      "index": 336,
+      "start": 1075.559,
+      "end": 1077.789,
+      "duration": 2.23,
+      "text": "coordinates so in fact I'm going to say"
+    },
+    {
+      "index": 337,
+      "start": 1077.799,
+      "end": 1082.51,
+      "duration": 4.711,
+      "text": "this is double integral of R 2 * Rd D"
+    },
+    {
+      "index": 338,
+      "start": 1082.52,
+      "end": 1085.43,
+      "duration": 2.91,
+      "text": "Theta I'm on the unit dis so R goes 0 to"
+    },
+    {
+      "index": 339,
+      "start": 1085.44,
+      "end": 1088.11,
+      "duration": 2.67,
+      "text": "1 Theta goes 0 to 2 pi and if you do the"
+    },
+    {
+      "index": 340,
+      "start": 1088.12,
+      "end": 1089.99,
+      "duration": 1.87,
+      "text": "calculation you'll find that this is"
+    },
+    {
+      "index": 341,
+      "start": 1090.0,
+      "end": 1094.029,
+      "duration": 4.029,
+      "text": "going to be Pi /"
+    },
+    {
+      "index": 342,
+      "start": 1107.71,
+      "end": 1107.72,
+      "duration": 0.01,
+      "text": "yes okay how do I get how did I get this"
+    },
+    {
+      "index": 343,
+      "start": 1107.72,
+      "end": 1111.23,
+      "duration": 3.51,
+      "text": "-2X and2 y so I want to use my formula"
+    },
+    {
+      "index": 344,
+      "start": 1111.24,
+      "end": 1115.75,
+      "duration": 4.51,
+      "text": "for NDS okay my Surface is given by the"
+    },
+    {
+      "index": 345,
+      "start": 1115.76,
+      "end": 1117.35,
+      "duration": 1.59,
+      "text": "graph of a function it's the graph of a"
+    },
+    {
+      "index": 346,
+      "start": 1117.36,
+      "end": 1121.39,
+      "duration": 4.03,
+      "text": "function X2 + y^2 so I will use this"
+    },
+    {
+      "index": 347,
+      "start": 1121.4,
+      "end": 1123.87,
+      "duration": 2.47,
+      "text": "formula that's up here I will take the"
+    },
+    {
+      "index": 348,
+      "start": 1123.88,
+      "end": 1126.549,
+      "duration": 2.669,
+      "text": "function x s + y^2 and I will take its"
+    },
+    {
+      "index": 349,
+      "start": 1126.559,
+      "end": 1128.99,
+      "duration": 2.431,
+      "text": "partial derivatives so if I take the"
+    },
+    {
+      "index": 350,
+      "start": 1129.0,
+      "end": 1132.19,
+      "duration": 3.19,
+      "text": "partial of f so of X2 + y sare respect"
+    },
+    {
+      "index": 351,
+      "start": 1132.2,
+      "end": 1135.83,
+      "duration": 3.63,
+      "text": "to X I get 2x so I put -2X and then same"
+    },
+    {
+      "index": 352,
+      "start": 1135.84,
+      "end": 1141.51,
+      "duration": 5.67,
+      "text": "thing -2 y 1 DX d y yes"
+    },
+    {
+      "index": 353,
+      "start": 1143.63,
+      "end": 1143.64,
+      "duration": 0.01,
+      "text": "uh which K hat Oh you mean the vector"
+    },
+    {
+      "index": 354,
+      "start": 1143.64,
+      "end": 1145.75,
+      "duration": 2.11,
+      "text": "field well so it's a different part of"
+    },
+    {
+      "index": 355,
+      "start": 1145.76,
+      "end": 1147.71,
+      "duration": 1.95,
+      "text": "the story okay so whenever you do a"
+    },
+    {
+      "index": 356,
+      "start": 1147.72,
+      "end": 1150.19,
+      "duration": 2.47,
+      "text": "surface integral for flux you have two"
+    },
+    {
+      "index": 357,
+      "start": 1150.2,
+      "end": 1153.27,
+      "duration": 3.07,
+      "text": "parts of the story one is the vector"
+    },
+    {
+      "index": 358,
+      "start": 1153.28,
+      "end": 1155.63,
+      "duration": 2.35,
+      "text": "field whose flux you're taking the other"
+    },
+    {
+      "index": 359,
+      "start": 1155.64,
+      "end": 1157.63,
+      "duration": 1.99,
+      "text": "one is the surface through which you"
+    },
+    {
+      "index": 360,
+      "start": 1157.64,
+      "end": 1158.909,
+      "duration": 1.269,
+      "text": "will be taking"
+    },
+    {
+      "index": 361,
+      "start": 1158.919,
+      "end": 1163.59,
+      "duration": 4.671,
+      "text": "flux so the vector field only comes as"
+    },
+    {
+      "index": 362,
+      "start": 1163.6,
+      "end": 1166.47,
+      "duration": 2.87,
+      "text": "you know this F in the notation and"
+    },
+    {
+      "index": 363,
+      "start": 1166.48,
+      "end": 1168.19,
+      "duration": 1.71,
+      "text": "everything else the bounce on the double"
+    },
+    {
+      "index": 364,
+      "start": 1168.2,
+      "end": 1170.83,
+      "duration": 2.63,
+      "text": "integral and and the NDS they all come"
+    },
+    {
+      "index": 365,
+      "start": 1170.84,
+      "end": 1174.19,
+      "duration": 3.35,
+      "text": "from the surface that we're looking at"
+    },
+    {
+      "index": 366,
+      "start": 1174.2,
+      "end": 1176.51,
+      "duration": 2.31,
+      "text": "okay so basically in all of this"
+    },
+    {
+      "index": 367,
+      "start": 1176.52,
+      "end": 1180.31,
+      "duration": 3.79,
+      "text": "calculation this is coming from FAL ZK"
+    },
+    {
+      "index": 368,
+      "start": 1180.32,
+      "end": 1181.95,
+      "duration": 1.63,
+      "text": "everything else comes from the"
+    },
+    {
+      "index": 369,
+      "start": 1181.96,
+      "end": 1185.35,
+      "duration": 3.39,
+      "text": "information paraboloid z x + y squ above"
+    },
+    {
+      "index": 370,
+      "start": 1185.36,
+      "end": 1186.549,
+      "duration": 1.189,
+      "text": "the unit"
+    },
+    {
+      "index": 371,
+      "start": 1186.559,
+      "end": 1189.59,
+      "duration": 3.031,
+      "text": "dis"
+    },
+    {
+      "index": 372,
+      "start": 1192.029,
+      "end": 1192.039,
+      "duration": 0.01,
+      "text": "okay so in particular if we wanted to"
+    },
+    {
+      "index": 373,
+      "start": 1192.039,
+      "end": 1193.87,
+      "duration": 1.831,
+      "text": "Now find you know the flux of any other"
+    },
+    {
+      "index": 374,
+      "start": 1193.88,
+      "end": 1196.31,
+      "duration": 2.43,
+      "text": "Vector field through the same paraboloid"
+    },
+    {
+      "index": 375,
+      "start": 1196.32,
+      "end": 1199.11,
+      "duration": 2.79,
+      "text": "well all we have to do is just replace"
+    },
+    {
+      "index": 376,
+      "start": 1199.12,
+      "end": 1200.87,
+      "duration": 1.75,
+      "text": "this guy by whatever the new Vector"
+    },
+    {
+      "index": 377,
+      "start": 1200.88,
+      "end": 1203.87,
+      "duration": 2.99,
+      "text": "field is we've learned how to set up"
+    },
+    {
+      "index": 378,
+      "start": 1203.88,
+      "end": 1207.95,
+      "duration": 4.07,
+      "text": "flux integrals for this"
+    },
+    {
+      "index": 379,
+      "start": 1209.909,
+      "end": 1209.919,
+      "duration": 0.01,
+      "text": "paraboloid not that you should remember"
+    },
+    {
+      "index": 380,
+      "start": 1209.919,
+      "end": 1211.19,
+      "duration": 1.271,
+      "text": "this one by heart I mean there's many"
+    },
+    {
+      "index": 381,
+      "start": 1211.2,
+      "end": 1213.149,
+      "duration": 1.949,
+      "text": "paraboloids in life and other surfaces"
+    },
+    {
+      "index": 382,
+      "start": 1213.159,
+      "end": 1214.95,
+      "duration": 1.791,
+      "text": "too so it's better to remember the"
+    },
+    {
+      "index": 383,
+      "start": 1214.96,
+      "end": 1217.47,
+      "duration": 2.51,
+      "text": "general"
+    },
+    {
+      "index": 384,
+      "start": 1223.669,
+      "end": 1223.679,
+      "duration": 0.01,
+      "text": "questions"
+    },
+    {
+      "index": 385,
+      "start": 1223.679,
+      "end": 1228.87,
+      "duration": 5.191,
+      "text": "no okay let's see more ways of tech L"
+    },
+    {
+      "index": 386,
+      "start": 1228.88,
+      "end": 1230.11,
+      "duration": 1.23,
+      "text": "flux"
+    },
+    {
+      "index": 387,
+      "start": 1230.12,
+      "end": 1232.35,
+      "duration": 2.23,
+      "text": "integrals but just to reassure you at"
+    },
+    {
+      "index": 388,
+      "start": 1232.36,
+      "end": 1233.789,
+      "duration": 1.429,
+      "text": "this point we've seen the most important"
+    },
+    {
+      "index": 389,
+      "start": 1233.799,
+      "end": 1236.47,
+      "duration": 2.671,
+      "text": "ones you know 90% of the problems that"
+    },
+    {
+      "index": 390,
+      "start": 1236.48,
+      "end": 1238.63,
+      "duration": 2.15,
+      "text": "will be looking at we can do with what"
+    },
+    {
+      "index": 391,
+      "start": 1238.64,
+      "end": 1241.07,
+      "duration": 2.43,
+      "text": "we've seen so far last time and this and"
+    },
+    {
+      "index": 392,
+      "start": 1241.08,
+      "end": 1242.63,
+      "duration": 1.55,
+      "text": "this"
+    },
+    {
+      "index": 393,
+      "start": 1242.64,
+      "end": 1245.35,
+      "duration": 2.71,
+      "text": "formula but let's look a little bit"
+    },
+    {
+      "index": 394,
+      "start": 1245.36,
+      "end": 1253.149,
+      "duration": 7.789,
+      "text": "at a more General"
+    },
+    {
+      "index": 395,
+      "start": 1256.029,
+      "end": 1256.039,
+      "duration": 0.01,
+      "text": "situation let's say that my Surface is"
+    },
+    {
+      "index": 396,
+      "start": 1256.039,
+      "end": 1258.029,
+      "duration": 1.99,
+      "text": "so complicated that I can't actually"
+    },
+    {
+      "index": 397,
+      "start": 1258.039,
+      "end": 1260.789,
+      "duration": 2.75,
+      "text": "Express Z as a function of X and Y but"
+    },
+    {
+      "index": 398,
+      "start": 1260.799,
+      "end": 1262.75,
+      "duration": 1.951,
+      "text": "let's say that actually I know how to"
+    },
+    {
+      "index": 399,
+      "start": 1262.76,
+      "end": 1264.71,
+      "duration": 1.95,
+      "text": "parameterize it so I have parametric"
+    },
+    {
+      "index": 400,
+      "start": 1264.72,
+      "end": 1267.35,
+      "duration": 2.63,
+      "text": "equation for my Surface that means I can"
+    },
+    {
+      "index": 401,
+      "start": 1267.36,
+      "end": 1271.63,
+      "duration": 4.27,
+      "text": "express X Y and Z in terms of any two"
+    },
+    {
+      "index": 402,
+      "start": 1271.64,
+      "end": 1273.75,
+      "duration": 2.11,
+      "text": "parameter variables that might be"
+    },
+    {
+      "index": 403,
+      "start": 1273.76,
+      "end": 1274.95,
+      "duration": 1.19,
+      "text": "relevant for"
+    },
+    {
+      "index": 404,
+      "start": 1274.96,
+      "end": 1277.95,
+      "duration": 2.99,
+      "text": "me so if you want this one here is the"
+    },
+    {
+      "index": 405,
+      "start": 1277.96,
+      "end": 1279.63,
+      "duration": 1.67,
+      "text": "special case where you can parameterize"
+    },
+    {
+      "index": 406,
+      "start": 1279.64,
+      "end": 1283.23,
+      "duration": 3.59,
+      "text": "things in terms of X and Y as your two"
+    },
+    {
+      "index": 407,
+      "start": 1283.24,
+      "end": 1285.43,
+      "duration": 2.19,
+      "text": "variables so how would you do it in the"
+    },
+    {
+      "index": 408,
+      "start": 1285.44,
+      "end": 1287.789,
+      "duration": 2.349,
+      "text": "fully General case in a way that will"
+    },
+    {
+      "index": 409,
+      "start": 1287.799,
+      "end": 1289.07,
+      "duration": 1.271,
+      "text": "answer your question"
+    },
+    {
+      "index": 410,
+      "start": 1289.08,
+      "end": 1291.909,
+      "duration": 2.829,
+      "text": "I think one of you I forgot asked"
+    },
+    {
+      "index": 411,
+      "start": 1291.919,
+      "end": 1293.99,
+      "duration": 2.071,
+      "text": "yesterday how would I do it in general"
+    },
+    {
+      "index": 412,
+      "start": 1294.0,
+      "end": 1296.43,
+      "duration": 2.43,
+      "text": "is there a formula like MDX plus ndy"
+    },
+    {
+      "index": 413,
+      "start": 1296.44,
+      "end": 1297.87,
+      "duration": 1.43,
+      "text": "well that's going to be the general"
+    },
+    {
+      "index": 414,
+      "start": 1297.88,
+      "end": 1300.95,
+      "duration": 3.07,
+      "text": "formula and you'll see it's a little bit"
+    },
+    {
+      "index": 415,
+      "start": 1300.96,
+      "end": 1302.71,
+      "duration": 1.75,
+      "text": "too complicated so the really useful"
+    },
+    {
+      "index": 416,
+      "start": 1302.72,
+      "end": 1305.07,
+      "duration": 2.35,
+      "text": "ones are actually the special"
+    },
+    {
+      "index": 417,
+      "start": 1305.08,
+      "end": 1308.31,
+      "duration": 3.23,
+      "text": "ones so let's say that we are given a"
+    },
+    {
+      "index": 418,
+      "start": 1308.32,
+      "end": 1314.99,
+      "duration": 6.67,
+      "text": "parametric"
+    },
+    {
+      "index": 419,
+      "start": 1318.59,
+      "end": 1318.6,
+      "duration": 0.01,
+      "text": "description of a surface s so that means"
+    },
+    {
+      "index": 420,
+      "start": 1318.6,
+      "end": 1320.95,
+      "duration": 2.35,
+      "text": "means we can describe"
+    },
+    {
+      "index": 421,
+      "start": 1320.96,
+      "end": 1325.029,
+      "duration": 4.069,
+      "text": "s by formulas saying X is some function"
+    },
+    {
+      "index": 422,
+      "start": 1325.039,
+      "end": 1326.75,
+      "duration": 1.711,
+      "text": "of two parameter variables I'm going to"
+    },
+    {
+      "index": 423,
+      "start": 1326.76,
+      "end": 1328.71,
+      "duration": 1.95,
+      "text": "call them u and v hope you don't mind"
+    },
+    {
+      "index": 424,
+      "start": 1328.72,
+      "end": 1330.71,
+      "duration": 1.99,
+      "text": "you can call them T1 and T2 you can call"
+    },
+    {
+      "index": 425,
+      "start": 1330.72,
+      "end": 1336.83,
+      "duration": 6.11,
+      "text": "them whatever you"
+    },
+    {
+      "index": 426,
+      "start": 1339.63,
+      "end": 1339.64,
+      "duration": 0.01,
+      "text": "want okay so one of the basic properties"
+    },
+    {
+      "index": 427,
+      "start": 1339.64,
+      "end": 1341.51,
+      "duration": 1.87,
+      "text": "of a surface is because I have only two"
+    },
+    {
+      "index": 428,
+      "start": 1341.52,
+      "end": 1343.11,
+      "duration": 1.59,
+      "text": "independent directions to move on I"
+    },
+    {
+      "index": 429,
+      "start": 1343.12,
+      "end": 1344.75,
+      "duration": 1.63,
+      "text": "should be able to express X Y and Z in"
+    },
+    {
+      "index": 430,
+      "start": 1344.76,
+      "end": 1346.07,
+      "duration": 1.31,
+      "text": "terms of two"
+    },
+    {
+      "index": 431,
+      "start": 1346.08,
+      "end": 1348.23,
+      "duration": 2.15,
+      "text": "variables so now let's say that I know"
+    },
+    {
+      "index": 432,
+      "start": 1348.24,
+      "end": 1349.35,
+      "duration": 1.11,
+      "text": "how to do"
+    },
+    {
+      "index": 433,
+      "start": 1349.36,
+      "end": 1352.83,
+      "duration": 3.47,
+      "text": "that or maybe I should instead think of"
+    },
+    {
+      "index": 434,
+      "start": 1352.84,
+      "end": 1354.47,
+      "duration": 1.63,
+      "text": "it in terms of a position Vector if that"
+    },
+    {
+      "index": 435,
+      "start": 1354.48,
+      "end": 1359.549,
+      "duration": 5.069,
+      "text": "helps you the position Vector so that's"
+    },
+    {
+      "index": 436,
+      "start": 1359.559,
+      "end": 1363.07,
+      "duration": 3.511,
+      "text": "just the vector with components XYZ is"
+    },
+    {
+      "index": 437,
+      "start": 1363.08,
+      "end": 1365.99,
+      "duration": 2.91,
+      "text": "given as a function of u and v okay so"
+    },
+    {
+      "index": 438,
+      "start": 1366.0,
+      "end": 1367.669,
+      "duration": 1.669,
+      "text": "it's it works like a parametric curve"
+    },
+    {
+      "index": 439,
+      "start": 1367.679,
+      "end": 1369.31,
+      "duration": 1.631,
+      "text": "but with two"
+    },
+    {
+      "index": 440,
+      "start": 1369.32,
+      "end": 1372.11,
+      "duration": 2.79,
+      "text": "parameters so now how will we actually"
+    },
+    {
+      "index": 441,
+      "start": 1372.12,
+      "end": 1375.23,
+      "duration": 3.11,
+      "text": "set up a flux integral on such a surface"
+    },
+    {
+      "index": 442,
+      "start": 1375.24,
+      "end": 1377.19,
+      "duration": 1.95,
+      "text": "well because we're locating ourselves in"
+    },
+    {
+      "index": 443,
+      "start": 1377.2,
+      "end": 1379.789,
+      "duration": 2.589,
+      "text": "terms of u and v we will end up with an"
+    },
+    {
+      "index": 444,
+      "start": 1379.799,
+      "end": 1383.23,
+      "duration": 3.431,
+      "text": "integral du DV so we need to figure out"
+    },
+    {
+      "index": 445,
+      "start": 1383.24,
+      "end": 1389.63,
+      "duration": 6.39,
+      "text": "how to express NDS in terms of du and"
+    },
+    {
+      "index": 446,
+      "start": 1394.95,
+      "end": 1394.96,
+      "duration": 0.01,
+      "text": "DV okay so NDS should be"
+    },
+    {
+      "index": 447,
+      "start": 1394.96,
+      "end": 1398.549,
+      "duration": 3.589,
+      "text": "something duv how do we do"
+    },
+    {
+      "index": 448,
+      "start": 1398.559,
+      "end": 1402.83,
+      "duration": 4.271,
+      "text": "that well we can use the same"
+    },
+    {
+      "index": 449,
+      "start": 1402.84,
+      "end": 1405.99,
+      "duration": 3.15,
+      "text": "method that we've actually used over"
+    },
+    {
+      "index": 450,
+      "start": 1406.0,
+      "end": 1408.51,
+      "duration": 2.51,
+      "text": "here because if you think for a second"
+    },
+    {
+      "index": 451,
+      "start": 1408.52,
+      "end": 1409.669,
+      "duration": 1.149,
+      "text": "you know here we used of course a"
+    },
+    {
+      "index": 452,
+      "start": 1409.679,
+      "end": 1411.87,
+      "duration": 2.191,
+      "text": "rectangle in the XY plane and we lifted"
+    },
+    {
+      "index": 453,
+      "start": 1411.88,
+      "end": 1414.149,
+      "duration": 2.269,
+      "text": "it to a parallelogram and so on but more"
+    },
+    {
+      "index": 454,
+      "start": 1414.159,
+      "end": 1416.029,
+      "duration": 1.87,
+      "text": "generally you can think what happens if"
+    },
+    {
+      "index": 455,
+      "start": 1416.039,
+      "end": 1418.63,
+      "duration": 2.591,
+      "text": "I change U by Delta U keeping V constant"
+    },
+    {
+      "index": 456,
+      "start": 1418.64,
+      "end": 1420.269,
+      "duration": 1.629,
+      "text": "or the other way"
+    },
+    {
+      "index": 457,
+      "start": 1420.279,
+      "end": 1422.23,
+      "duration": 1.951,
+      "text": "around you know you will get some sort"
+    },
+    {
+      "index": 458,
+      "start": 1422.24,
+      "end": 1425.909,
+      "duration": 3.669,
+      "text": "of mesh grid on your surface and you"
+    },
+    {
+      "index": 459,
+      "start": 1425.919,
+      "end": 1427.71,
+      "duration": 1.791,
+      "text": "will look at a little parallelogram"
+    },
+    {
+      "index": 460,
+      "start": 1427.72,
+      "end": 1430.43,
+      "duration": 2.71,
+      "text": "that's an elementary piece of that mesh"
+    },
+    {
+      "index": 461,
+      "start": 1430.44,
+      "end": 1432.909,
+      "duration": 2.469,
+      "text": "and figure out what is its area and"
+    },
+    {
+      "index": 462,
+      "start": 1432.919,
+      "end": 1434.789,
+      "duration": 1.87,
+      "text": "normal Vector well that will again be"
+    },
+    {
+      "index": 463,
+      "start": 1434.799,
+      "end": 1436.99,
+      "duration": 2.191,
+      "text": "given by the normal by the cross product"
+    },
+    {
+      "index": 464,
+      "start": 1437.0,
+      "end": 1440.47,
+      "duration": 3.47,
+      "text": "of the two sides"
+    },
+    {
+      "index": 465,
+      "start": 1441.63,
+      "end": 1441.64,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 466,
+      "start": 1441.64,
+      "end": 1444.19,
+      "duration": 2.55,
+      "text": "so let's think a little bit about what"
+    },
+    {
+      "index": 467,
+      "start": 1444.2,
+      "end": 1447.39,
+      "duration": 3.19,
+      "text": "happens when I move a little"
+    },
+    {
+      "index": 468,
+      "start": 1447.4,
+      "end": 1450.51,
+      "duration": 3.11,
+      "text": "bit on my Surface so you know I'm taking"
+    },
+    {
+      "index": 469,
+      "start": 1450.52,
+      "end": 1454.23,
+      "duration": 3.71,
+      "text": "actually a grid on my Surface given by"
+    },
+    {
+      "index": 470,
+      "start": 1454.24,
+      "end": 1458.75,
+      "duration": 4.51,
+      "text": "the u and v directions and if I take a"
+    },
+    {
+      "index": 471,
+      "start": 1458.76,
+      "end": 1463.23,
+      "duration": 4.47,
+      "text": "piece of"
+    },
+    {
+      "index": 472,
+      "start": 1466.59,
+      "end": 1466.6,
+      "duration": 0.01,
+      "text": "that corresponding to small changes"
+    },
+    {
+      "index": 473,
+      "start": 1466.6,
+      "end": 1471.99,
+      "duration": 5.39,
+      "text": "Delta U and Delta V"
+    },
+    {
+      "index": 474,
+      "start": 1474.95,
+      "end": 1474.96,
+      "duration": 0.01,
+      "text": "what's going to be going on here well I"
+    },
+    {
+      "index": 475,
+      "start": 1474.96,
+      "end": 1477.029,
+      "duration": 2.069,
+      "text": "have to deal with two"
+    },
+    {
+      "index": 476,
+      "start": 1477.039,
+      "end": 1479.789,
+      "duration": 2.75,
+      "text": "vectors one corresponding to changing U"
+    },
+    {
+      "index": 477,
+      "start": 1479.799,
+      "end": 1481.75,
+      "duration": 1.951,
+      "text": "one corresponding to changing V if I"
+    },
+    {
+      "index": 478,
+      "start": 1481.76,
+      "end": 1484.71,
+      "duration": 2.95,
+      "text": "change U how does my point change while"
+    },
+    {
+      "index": 479,
+      "start": 1484.72,
+      "end": 1487.269,
+      "duration": 2.549,
+      "text": "that's given by the derivative of this"
+    },
+    {
+      "index": 480,
+      "start": 1487.279,
+      "end": 1488.389,
+      "duration": 1.11,
+      "text": "with respect to"
+    },
+    {
+      "index": 481,
+      "start": 1488.399,
+      "end": 1491.909,
+      "duration": 3.51,
+      "text": "U okay so this Vector here I will"
+    },
+    {
+      "index": 482,
+      "start": 1491.919,
+      "end": 1494.909,
+      "duration": 2.99,
+      "text": "call so the"
+    },
+    {
+      "index": 483,
+      "start": 1494.919,
+      "end": 1499.43,
+      "duration": 4.511,
+      "text": "sides are given by"
+    },
+    {
+      "index": 484,
+      "start": 1499.44,
+      "end": 1502.35,
+      "duration": 2.91,
+      "text": "let me say partial R over partial U time"
+    },
+    {
+      "index": 485,
+      "start": 1502.36,
+      "end": 1503.75,
+      "duration": 1.39,
+      "text": "Delta"
+    },
+    {
+      "index": 486,
+      "start": 1503.76,
+      "end": 1508.029,
+      "duration": 4.269,
+      "text": "U if you prefer maybe I should write it"
+    },
+    {
+      "index": 487,
+      "start": 1508.039,
+      "end": 1512.59,
+      "duration": 4.551,
+      "text": "as partial X partial U Delta U partial y"
+    },
+    {
+      "index": 488,
+      "start": 1512.6,
+      "end": 1514.71,
+      "duration": 2.11,
+      "text": "well it's just too boring to write"
+    },
+    {
+      "index": 489,
+      "start": 1514.72,
+      "end": 1519.87,
+      "duration": 5.15,
+      "text": "so um and so on okay it means just you"
+    },
+    {
+      "index": 490,
+      "start": 1519.88,
+      "end": 1521.75,
+      "duration": 1.87,
+      "text": "know if I change youu a little bit keep"
+    },
+    {
+      "index": 491,
+      "start": 1521.76,
+      "end": 1524.269,
+      "duration": 2.509,
+      "text": "V constant then how X changes is given"
+    },
+    {
+      "index": 492,
+      "start": 1524.279,
+      "end": 1526.71,
+      "duration": 2.431,
+      "text": "by partial X partial U time Delta U same"
+    },
+    {
+      "index": 493,
+      "start": 1526.72,
+      "end": 1528.75,
+      "duration": 2.03,
+      "text": "thing with Y same thing with z and I'm"
+    },
+    {
+      "index": 494,
+      "start": 1528.76,
+      "end": 1532.43,
+      "duration": 3.67,
+      "text": "just using Vector notation to do it this"
+    },
+    {
+      "index": 495,
+      "start": 1532.44,
+      "end": 1534.549,
+      "duration": 2.109,
+      "text": "way if you want that's you know that's"
+    },
+    {
+      "index": 496,
+      "start": 1534.559,
+      "end": 1536.75,
+      "duration": 2.191,
+      "text": "the analogue of when I"
+    },
+    {
+      "index": 497,
+      "start": 1536.76,
+      "end": 1541.47,
+      "duration": 4.71,
+      "text": "say Delta R for line integrals along a"
+    },
+    {
+      "index": 498,
+      "start": 1541.48,
+      "end": 1544.19,
+      "duration": 2.71,
+      "text": "curve Vector Delta R is the velocity"
+    },
+    {
+      "index": 499,
+      "start": 1544.2,
+      "end": 1550.31,
+      "duration": 6.11,
+      "text": "Vector drdt time delta"
+    },
+    {
+      "index": 500,
+      "start": 1565.789,
+      "end": 1565.799,
+      "duration": 0.01,
+      "text": "the other okay so sorry so let me start"
+    },
+    {
+      "index": 501,
+      "start": 1565.799,
+      "end": 1569.029,
+      "duration": 3.23,
+      "text": "again and out of space one side is"
+    },
+    {
+      "index": 502,
+      "start": 1569.039,
+      "end": 1572.63,
+      "duration": 3.591,
+      "text": "partial R partial U * Delta U and the"
+    },
+    {
+      "index": 503,
+      "start": 1572.64,
+      "end": 1576.23,
+      "duration": 3.59,
+      "text": "other one would be partial R partial V"
+    },
+    {
+      "index": 504,
+      "start": 1576.24,
+      "end": 1578.71,
+      "duration": 2.47,
+      "text": "time Delta V because that's how the"
+    },
+    {
+      "index": 505,
+      "start": 1578.72,
+      "end": 1580.75,
+      "duration": 2.03,
+      "text": "position of your point changes if you"
+    },
+    {
+      "index": 506,
+      "start": 1580.76,
+      "end": 1584.269,
+      "duration": 3.509,
+      "text": "just change U or V and not the other"
+    },
+    {
+      "index": 507,
+      "start": 1584.279,
+      "end": 1589.789,
+      "duration": 5.51,
+      "text": "one so now to find"
+    },
+    {
+      "index": 508,
+      "start": 1593.23,
+      "end": 1593.24,
+      "duration": 0.01,
+      "text": "the surface element together with a"
+    },
+    {
+      "index": 509,
+      "start": 1593.24,
+      "end": 1595.51,
+      "duration": 2.27,
+      "text": "normal Vector I would just take the"
+    },
+    {
+      "index": 510,
+      "start": 1595.52,
+      "end": 1605.19,
+      "duration": 9.67,
+      "text": "cross product between these"
+    },
+    {
+      "index": 511,
+      "start": 1607.63,
+      "end": 1607.64,
+      "duration": 0.01,
+      "text": "guys so if you prefer that's the cross"
+    },
+    {
+      "index": 512,
+      "start": 1607.64,
+      "end": 1611.07,
+      "duration": 3.43,
+      "text": "product of partial R partial U with"
+    },
+    {
+      "index": 513,
+      "start": 1611.08,
+      "end": 1613.31,
+      "duration": 2.23,
+      "text": "partial R partial"
+    },
+    {
+      "index": 514,
+      "start": 1613.32,
+      "end": 1616.909,
+      "duration": 3.589,
+      "text": "V Delta U Delta"
+    },
+    {
+      "index": 515,
+      "start": 1616.919,
+      "end": 1621.51,
+      "duration": 4.591,
+      "text": "V and so so n DS is this cross product"
+    },
+    {
+      "index": 516,
+      "start": 1621.52,
+      "end": 1623.75,
+      "duration": 2.23,
+      "text": "time D"
+    },
+    {
+      "index": 517,
+      "start": 1623.76,
+      "end": 1629.669,
+      "duration": 5.909,
+      "text": "DV up to"
+    },
+    {
+      "index": 518,
+      "start": 1632.83,
+      "end": 1632.84,
+      "duration": 0.01,
+      "text": "sign I mean also here depends on which"
+    },
+    {
+      "index": 519,
+      "start": 1632.84,
+      "end": 1646.029,
+      "duration": 13.189,
+      "text": "choice I make for my normal Vector of"
+    },
+    {
+      "index": 520,
+      "start": 1648.549,
+      "end": 1648.559,
+      "duration": 0.01,
+      "text": "course okay"
+    },
+    {
+      "index": 521,
+      "start": 1648.559,
+      "end": 1649.549,
+      "duration": 0.99,
+      "text": "now if"
+    },
+    {
+      "index": 522,
+      "start": 1649.559,
+      "end": 1651.99,
+      "duration": 2.431,
+      "text": "you you know that of course is a"
+    },
+    {
+      "index": 523,
+      "start": 1652.0,
+      "end": 1654.23,
+      "duration": 2.23,
+      "text": "slightly confusing equation to think of"
+    },
+    {
+      "index": 524,
+      "start": 1654.24,
+      "end": 1656.549,
+      "duration": 2.309,
+      "text": "so a good exercise if you want to really"
+    },
+    {
+      "index": 525,
+      "start": 1656.559,
+      "end": 1659.149,
+      "duration": 2.59,
+      "text": "understand what's going on try this in"
+    },
+    {
+      "index": 526,
+      "start": 1659.159,
+      "end": 1661.789,
+      "duration": 2.63,
+      "text": "two good examples to look at one good"
+    },
+    {
+      "index": 527,
+      "start": 1661.799,
+      "end": 1664.509,
+      "duration": 2.71,
+      "text": "example to look at is the previous one"
+    },
+    {
+      "index": 528,
+      "start": 1664.519,
+      "end": 1666.509,
+      "duration": 1.99,
+      "text": "what is it it's when u and v are just X"
+    },
+    {
+      "index": 529,
+      "start": 1666.519,
+      "end": 1668.43,
+      "duration": 1.911,
+      "text": "and Y okay so the parametric equations"
+    },
+    {
+      "index": 530,
+      "start": 1668.44,
+      "end": 1674.269,
+      "duration": 5.829,
+      "text": "are just xal X yal Y and Z is f of XY"
+    },
+    {
+      "index": 531,
+      "start": 1674.279,
+      "end": 1676.19,
+      "duration": 1.911,
+      "text": "you should end up with the same formula"
+    },
+    {
+      "index": 532,
+      "start": 1676.2,
+      "end": 1679.11,
+      "duration": 2.91,
+      "text": "that we had over there"
+    },
+    {
+      "index": 533,
+      "start": 1679.12,
+      "end": 1680.669,
+      "duration": 1.549,
+      "text": "and and you should see why because see"
+    },
+    {
+      "index": 534,
+      "start": 1680.679,
+      "end": 1683.669,
+      "duration": 2.99,
+      "text": "it's both of them are given by a cross"
+    },
+    {
+      "index": 535,
+      "start": 1683.679,
+      "end": 1686.029,
+      "duration": 2.35,
+      "text": "product the other case you can look at"
+    },
+    {
+      "index": 536,
+      "start": 1686.039,
+      "end": 1688.63,
+      "duration": 2.591,
+      "text": "just to convince your C even further so"
+    },
+    {
+      "index": 537,
+      "start": 1688.64,
+      "end": 1689.909,
+      "duration": 1.269,
+      "text": "we don't need to do that because we've"
+    },
+    {
+      "index": 538,
+      "start": 1689.919,
+      "end": 1692.029,
+      "duration": 2.11,
+      "text": "seen the formula before but in the case"
+    },
+    {
+      "index": 539,
+      "start": 1692.039,
+      "end": 1695.87,
+      "duration": 3.831,
+      "text": "of a sphere we've seen the formula for n"
+    },
+    {
+      "index": 540,
+      "start": 1695.88,
+      "end": 1698.029,
+      "duration": 2.149,
+      "text": "and for DS"
+    },
+    {
+      "index": 541,
+      "start": 1698.039,
+      "end": 1700.71,
+      "duration": 2.671,
+      "text": "separately so we know what n DS are in"
+    },
+    {
+      "index": 542,
+      "start": 1700.72,
+      "end": 1703.11,
+      "duration": 2.39,
+      "text": "terms of d d"
+    },
+    {
+      "index": 543,
+      "start": 1703.12,
+      "end": 1706.07,
+      "duration": 2.95,
+      "text": "Theta well you could parameterize a"
+    },
+    {
+      "index": 544,
+      "start": 1706.08,
+      "end": 1708.509,
+      "duration": 2.429,
+      "text": "sphere in terms of Fe and Theta namely"
+    },
+    {
+      "index": 545,
+      "start": 1708.519,
+      "end": 1712.669,
+      "duration": 4.15,
+      "text": "the formulas would be xal a sin cosine"
+    },
+    {
+      "index": 546,
+      "start": 1712.679,
+      "end": 1717.47,
+      "duration": 4.791,
+      "text": "Theta y = a sin F sin Theta Z equals a"
+    },
+    {
+      "index": 547,
+      "start": 1717.48,
+      "end": 1719.509,
+      "duration": 2.029,
+      "text": "cosine the formulas for spherical"
+    },
+    {
+      "index": 548,
+      "start": 1719.519,
+      "end": 1722.71,
+      "duration": 3.191,
+      "text": "coordinates setting row equals a so"
+    },
+    {
+      "index": 549,
+      "start": 1722.72,
+      "end": 1724.389,
+      "duration": 1.669,
+      "text": "that's a parametric equation for the"
+    },
+    {
+      "index": 550,
+      "start": 1724.399,
+      "end": 1727.389,
+      "duration": 2.99,
+      "text": "sphere and then if you try to use this"
+    },
+    {
+      "index": 551,
+      "start": 1727.399,
+      "end": 1729.87,
+      "duration": 2.471,
+      "text": "formula here you should end up with the"
+    },
+    {
+      "index": 552,
+      "start": 1729.88,
+      "end": 1732.59,
+      "duration": 2.71,
+      "text": "same things we've already seen for NDS"
+    },
+    {
+      "index": 553,
+      "start": 1732.6,
+      "end": 1734.029,
+      "duration": 1.429,
+      "text": "just with a lot more pain to actually"
+    },
+    {
+      "index": 554,
+      "start": 1734.039,
+      "end": 1735.509,
+      "duration": 1.47,
+      "text": "get there because your cross product is"
+    },
+    {
+      "index": 555,
+      "start": 1735.519,
+      "end": 1739.87,
+      "duration": 4.351,
+      "text": "going to be a bit complicated"
+    },
+    {
+      "index": 556,
+      "start": 1741.83,
+      "end": 1741.84,
+      "duration": 0.01,
+      "text": "okay but you know we're seeing all of"
+    },
+    {
+      "index": 557,
+      "start": 1741.84,
+      "end": 1743.269,
+      "duration": 1.429,
+      "text": "these formulas they all fit together"
+    },
+    {
+      "index": 558,
+      "start": 1743.279,
+      "end": 1745.35,
+      "duration": 2.071,
+      "text": "somehow it's always the same question"
+    },
+    {
+      "index": 559,
+      "start": 1745.36,
+      "end": 1747.87,
+      "duration": 2.51,
+      "text": "just we have different angles of attack"
+    },
+    {
+      "index": 560,
+      "start": 1747.88,
+      "end": 1750.83,
+      "duration": 2.95,
+      "text": "on this General"
+    },
+    {
+      "index": 561,
+      "start": 1759.35,
+      "end": 1759.36,
+      "duration": 0.01,
+      "text": "questions"
+    },
+    {
+      "index": 562,
+      "start": 1759.36,
+      "end": 1763.87,
+      "duration": 4.51,
+      "text": "no okay let's look at yet another last"
+    },
+    {
+      "index": 563,
+      "start": 1763.88,
+      "end": 1769.71,
+      "duration": 5.83,
+      "text": "way of finding NDS"
+    },
+    {
+      "index": 564,
+      "start": 1770.87,
+      "end": 1770.88,
+      "duration": 0.01,
+      "text": "and then I promise we'll switch to"
+    },
+    {
+      "index": 565,
+      "start": 1770.88,
+      "end": 1772.95,
+      "duration": 2.07,
+      "text": "something else because I can feel that"
+    },
+    {
+      "index": 566,
+      "start": 1772.96,
+      "end": 1774.509,
+      "duration": 1.549,
+      "text": "you're getting a bit overwhelmed by all"
+    },
+    {
+      "index": 567,
+      "start": 1774.519,
+      "end": 1777.269,
+      "duration": 2.75,
+      "text": "these formulas for"
+    },
+    {
+      "index": 568,
+      "start": 1787.669,
+      "end": 1787.679,
+      "duration": 0.01,
+      "text": "so okay so what happens very often is we"
+    },
+    {
+      "index": 569,
+      "start": 1787.679,
+      "end": 1789.71,
+      "duration": 2.031,
+      "text": "don't actually know how to parameterize"
+    },
+    {
+      "index": 570,
+      "start": 1789.72,
+      "end": 1791.789,
+      "duration": 2.069,
+      "text": "our surface maybe we don't know how to"
+    },
+    {
+      "index": 571,
+      "start": 1791.799,
+      "end": 1793.669,
+      "duration": 1.87,
+      "text": "solve for Z as a function of X and Y but"
+    },
+    {
+      "index": 572,
+      "start": 1793.679,
+      "end": 1796.23,
+      "duration": 2.551,
+      "text": "our surface is given by some"
+    },
+    {
+      "index": 573,
+      "start": 1796.24,
+      "end": 1798.549,
+      "duration": 2.309,
+      "text": "equation you know"
+    },
+    {
+      "index": 574,
+      "start": 1798.559,
+      "end": 1802.789,
+      "duration": 4.23,
+      "text": "and so what that means is actually maybe"
+    },
+    {
+      "index": 575,
+      "start": 1802.799,
+      "end": 1804.269,
+      "duration": 1.47,
+      "text": "what we"
+    },
+    {
+      "index": 576,
+      "start": 1804.279,
+      "end": 1807.31,
+      "duration": 3.031,
+      "text": "know is not really these kinds of"
+    },
+    {
+      "index": 577,
+      "start": 1807.32,
+      "end": 1814.07,
+      "duration": 6.75,
+      "text": "formulas but maybe we know a normal"
+    },
+    {
+      "index": 578,
+      "start": 1816.07,
+      "end": 1816.08,
+      "duration": 0.01,
+      "text": "vector and I'm going to call this one"
+    },
+    {
+      "index": 579,
+      "start": 1816.08,
+      "end": 1817.909,
+      "duration": 1.829,
+      "text": "capital N"
+    },
+    {
+      "index": 580,
+      "start": 1817.919,
+      "end": 1821.23,
+      "duration": 3.311,
+      "text": "because I don't even need it to be a"
+    },
+    {
+      "index": 581,
+      "start": 1821.24,
+      "end": 1822.75,
+      "duration": 1.51,
+      "text": "unit Vector you will"
+    },
+    {
+      "index": 582,
+      "start": 1822.76,
+      "end": 1825.23,
+      "duration": 2.47,
+      "text": "see it can be a normal Vector of any"
+    },
+    {
+      "index": 583,
+      "start": 1825.24,
+      "end": 1832.669,
+      "duration": 7.429,
+      "text": "length you want to the surfaces"
+    },
+    {
+      "index": 584,
+      "start": 1835.11,
+      "end": 1835.12,
+      "duration": 0.01,
+      "text": "so why would we ever know a normal"
+    },
+    {
+      "index": 585,
+      "start": 1835.12,
+      "end": 1837.549,
+      "duration": 2.429,
+      "text": "Vector well for example if our surface"
+    },
+    {
+      "index": 586,
+      "start": 1837.559,
+      "end": 1839.07,
+      "duration": 1.511,
+      "text": "is a plane you know say it's a slanted"
+    },
+    {
+      "index": 587,
+      "start": 1839.08,
+      "end": 1841.95,
+      "duration": 2.87,
+      "text": "plane given by some equation ax plus b y"
+    },
+    {
+      "index": 588,
+      "start": 1841.96,
+      "end": 1843.909,
+      "duration": 1.949,
+      "text": "plus CZ equals D well you know the"
+    },
+    {
+      "index": 589,
+      "start": 1843.919,
+      "end": 1847.11,
+      "duration": 3.191,
+      "text": "normal Vector it's a c of course you"
+    },
+    {
+      "index": 590,
+      "start": 1847.12,
+      "end": 1849.87,
+      "duration": 2.75,
+      "text": "could solve for Z and then go back to"
+    },
+    {
+      "index": 591,
+      "start": 1849.88,
+      "end": 1851.35,
+      "duration": 1.47,
+      "text": "that case which is why I said that that"
+    },
+    {
+      "index": 592,
+      "start": 1851.36,
+      "end": 1854.83,
+      "duration": 3.47,
+      "text": "one is really useful but you can also"
+    },
+    {
+      "index": 593,
+      "start": 1854.84,
+      "end": 1858.029,
+      "duration": 3.189,
+      "text": "just stay with a normal Vector why why"
+    },
+    {
+      "index": 594,
+      "start": 1858.039,
+      "end": 1859.19,
+      "duration": 1.151,
+      "text": "would you know a normal Vector well"
+    },
+    {
+      "index": 595,
+      "start": 1859.2,
+      "end": 1860.83,
+      "duration": 1.63,
+      "text": "let's say that you know an equation"
+    },
+    {
+      "index": 596,
+      "start": 1860.84,
+      "end": 1864.11,
+      "duration": 3.27,
+      "text": "that's of the form G of XYZ equals"
+    },
+    {
+      "index": 597,
+      "start": 1864.12,
+      "end": 1866.47,
+      "duration": 2.35,
+      "text": "z well then you know that the gradient"
+    },
+    {
+      "index": 598,
+      "start": 1866.48,
+      "end": 1868.87,
+      "duration": 2.39,
+      "text": "of G is perpendicular to the level"
+    },
+    {
+      "index": 599,
+      "start": 1868.88,
+      "end": 1871.389,
+      "duration": 2.509,
+      "text": "surface okay so let me just give"
+    },
+    {
+      "index": 600,
+      "start": 1871.399,
+      "end": 1875.23,
+      "duration": 3.831,
+      "text": "you two"
+    },
+    {
+      "index": 601,
+      "start": 1879.59,
+      "end": 1879.6,
+      "duration": 0.01,
+      "text": "examples if you have a plane ax + b"
+    },
+    {
+      "index": 602,
+      "start": 1879.6,
+      "end": 1884.23,
+      "duration": 4.63,
+      "text": "y plus C zal D then the normal Vector"
+    },
+    {
+      "index": 603,
+      "start": 1884.24,
+      "end": 1888.07,
+      "duration": 3.83,
+      "text": "would just be ABC"
+    },
+    {
+      "index": 604,
+      "start": 1888.08,
+      "end": 1890.389,
+      "duration": 2.309,
+      "text": "if you"
+    },
+    {
+      "index": 605,
+      "start": 1890.399,
+      "end": 1892.99,
+      "duration": 2.591,
+      "text": "have a surface"
+    },
+    {
+      "index": 606,
+      "start": 1893.0,
+      "end": 1896.43,
+      "duration": 3.43,
+      "text": "s given by an"
+    },
+    {
+      "index": 607,
+      "start": 1896.44,
+      "end": 1900.669,
+      "duration": 4.229,
+      "text": "equation G of XYZ equal"
+    },
+    {
+      "index": 608,
+      "start": 1900.679,
+      "end": 1903.19,
+      "duration": 2.511,
+      "text": "Z then you can take the normal Vector to"
+    },
+    {
+      "index": 609,
+      "start": 1903.2,
+      "end": 1905.31,
+      "duration": 2.11,
+      "text": "be the gradient of G we've seen that the"
+    },
+    {
+      "index": 610,
+      "start": 1905.32,
+      "end": 1908.31,
+      "duration": 2.99,
+      "text": "gradient is perpendicular to the level"
+    },
+    {
+      "index": 611,
+      "start": 1908.32,
+      "end": 1910.75,
+      "duration": 2.43,
+      "text": "surface now of course we don't"
+    },
+    {
+      "index": 612,
+      "start": 1910.76,
+      "end": 1912.389,
+      "duration": 1.629,
+      "text": "necessarily have to follow what's going"
+    },
+    {
+      "index": 613,
+      "start": 1912.399,
+      "end": 1915.149,
+      "duration": 2.75,
+      "text": "to come because if we could solve for Z"
+    },
+    {
+      "index": 614,
+      "start": 1915.159,
+      "end": 1916.629,
+      "duration": 1.47,
+      "text": "then we might be better off doing what"
+    },
+    {
+      "index": 615,
+      "start": 1916.639,
+      "end": 1919.35,
+      "duration": 2.711,
+      "text": "we did over there"
+    },
+    {
+      "index": 616,
+      "start": 1919.36,
+      "end": 1921.99,
+      "duration": 2.63,
+      "text": "but let's say that we want to do it this"
+    },
+    {
+      "index": 617,
+      "start": 1922.0,
+      "end": 1923.43,
+      "duration": 1.43,
+      "text": "way so then what can we"
+    },
+    {
+      "index": 618,
+      "start": 1923.44,
+      "end": 1925.629,
+      "duration": 2.189,
+      "text": "do well I'm going to give you another"
+    },
+    {
+      "index": 619,
+      "start": 1925.639,
+      "end": 1926.87,
+      "duration": 1.231,
+      "text": "way to think"
+    },
+    {
+      "index": 620,
+      "start": 1926.88,
+      "end": 1945.89,
+      "duration": 19.01,
+      "text": "geometrically about NDS"
+    },
+    {
+      "index": 621,
+      "start": 1960.909,
+      "end": 1960.919,
+      "duration": 0.01,
+      "text": "so okay so let's start by thinking about"
+    },
+    {
+      "index": 622,
+      "start": 1960.919,
+      "end": 1963.99,
+      "duration": 3.071,
+      "text": "a slanted plane okay so let's say that"
+    },
+    {
+      "index": 623,
+      "start": 1964.0,
+      "end": 1967.47,
+      "duration": 3.47,
+      "text": "my Surface is just a slanted plane so my"
+    },
+    {
+      "index": 624,
+      "start": 1967.48,
+      "end": 1971.149,
+      "duration": 3.669,
+      "text": "normal Vector would be maybe somewhere"
+    },
+    {
+      "index": 625,
+      "start": 1971.159,
+      "end": 1974.59,
+      "duration": 3.431,
+      "text": "here and let's say that I'm going to try"
+    },
+    {
+      "index": 626,
+      "start": 1974.6,
+      "end": 1976.23,
+      "duration": 1.63,
+      "text": "you know I need of course some handle on"
+    },
+    {
+      "index": 627,
+      "start": 1976.24,
+      "end": 1977.95,
+      "duration": 1.71,
+      "text": "how to set up my integral so maybe I'm"
+    },
+    {
+      "index": 628,
+      "start": 1977.96,
+      "end": 1979.47,
+      "duration": 1.51,
+      "text": "going to express things in terms of X"
+    },
+    {
+      "index": 629,
+      "start": 1979.48,
+      "end": 1981.59,
+      "duration": 2.11,
+      "text": "and Y okay so I have my"
+    },
+    {
+      "index": 630,
+      "start": 1981.6,
+      "end": 1984.75,
+      "duration": 3.15,
+      "text": "coordinates and I'll try to use X and Y"
+    },
+    {
+      "index": 631,
+      "start": 1984.76,
+      "end": 1988.11,
+      "duration": 3.35,
+      "text": "so then I would like to relate Delta s"
+    },
+    {
+      "index": 632,
+      "start": 1988.12,
+      "end": 1992.31,
+      "duration": 4.19,
+      "text": "DS to the area in the XY plane so that"
+    },
+    {
+      "index": 633,
+      "start": 1992.32,
+      "end": 1994.509,
+      "duration": 2.189,
+      "text": "means you know I want maybe to look at"
+    },
+    {
+      "index": 634,
+      "start": 1994.519,
+      "end": 1997.11,
+      "duration": 2.591,
+      "text": "the projection of this guy onto a"
+    },
+    {
+      "index": 635,
+      "start": 1997.12,
+      "end": 2004.269,
+      "duration": 7.149,
+      "text": "horizontal plane let's squish it"
+    },
+    {
+      "index": 636,
+      "start": 2005.99,
+      "end": 2006.0,
+      "duration": 0.01,
+      "text": "horizontally"
+    },
+    {
+      "index": 637,
+      "start": 2006.0,
+      "end": 2009.71,
+      "duration": 3.71,
+      "text": "so then you have here another"
+    },
+    {
+      "index": 638,
+      "start": 2009.72,
+      "end": 2012.71,
+      "duration": 2.99,
+      "text": "area Okay so the guy on the slanted"
+    },
+    {
+      "index": 639,
+      "start": 2012.72,
+      "end": 2015.07,
+      "duration": 2.35,
+      "text": "plane let's call that Delta s and let's"
+    },
+    {
+      "index": 640,
+      "start": 2015.08,
+      "end": 2017.23,
+      "duration": 2.15,
+      "text": "call this guy down here Delta"
+    },
+    {
+      "index": 641,
+      "start": 2017.24,
+      "end": 2020.23,
+      "duration": 2.99,
+      "text": "a so the question and you know Delta a"
+    },
+    {
+      "index": 642,
+      "start": 2020.24,
+      "end": 2022.549,
+      "duration": 2.309,
+      "text": "would become ultimately maybe Delta X"
+    },
+    {
+      "index": 643,
+      "start": 2022.559,
+      "end": 2024.99,
+      "duration": 2.431,
+      "text": "Delta y or something like that the"
+    },
+    {
+      "index": 644,
+      "start": 2025.0,
+      "end": 2027.23,
+      "duration": 2.23,
+      "text": "question is how do we find the"
+    },
+    {
+      "index": 645,
+      "start": 2027.24,
+      "end": 2030.75,
+      "duration": 3.51,
+      "text": "conversion rate between these two areas"
+    },
+    {
+      "index": 646,
+      "start": 2030.76,
+      "end": 2032.909,
+      "duration": 2.149,
+      "text": "see I mean they're not the same visually"
+    },
+    {
+      "index": 647,
+      "start": 2032.919,
+      "end": 2034.99,
+      "duration": 2.071,
+      "text": "I hope it's clear to you that if my"
+    },
+    {
+      "index": 648,
+      "start": 2035.0,
+      "end": 2036.549,
+      "duration": 1.549,
+      "text": "plane is actually horizontal then of"
+    },
+    {
+      "index": 649,
+      "start": 2036.559,
+      "end": 2038.149,
+      "duration": 1.59,
+      "text": "course they're the same but the more"
+    },
+    {
+      "index": 650,
+      "start": 2038.159,
+      "end": 2042.029,
+      "duration": 3.87,
+      "text": "slanted it becomes the more Delta a"
+    },
+    {
+      "index": 651,
+      "start": 2042.039,
+      "end": 2044.19,
+      "duration": 2.151,
+      "text": "becomes smaller than Delta s right I"
+    },
+    {
+      "index": 652,
+      "start": 2044.2,
+      "end": 2047.629,
+      "duration": 3.429,
+      "text": "mean if you buy you know if you buy land"
+    },
+    {
+      "index": 653,
+      "start": 2047.639,
+      "end": 2049.75,
+      "duration": 2.111,
+      "text": "and it's on the side of a cliff well"
+    },
+    {
+      "index": 654,
+      "start": 2049.76,
+      "end": 2051.23,
+      "duration": 1.47,
+      "text": "whether you look at it on a map or"
+    },
+    {
+      "index": 655,
+      "start": 2051.24,
+      "end": 2052.51,
+      "duration": 1.27,
+      "text": "whether you look at it on the actual"
+    },
+    {
+      "index": 656,
+      "start": 2052.52,
+      "end": 2054.71,
+      "duration": 2.19,
+      "text": "Cliff the area is going to be very"
+    },
+    {
+      "index": 657,
+      "start": 2054.72,
+      "end": 2056.629,
+      "duration": 1.909,
+      "text": "different um I'm not sure if that's a"
+    },
+    {
+      "index": 658,
+      "start": 2056.639,
+      "end": 2057.75,
+      "duration": 1.111,
+      "text": "wise thing to do if you want to build a"
+    },
+    {
+      "index": 659,
+      "start": 2057.76,
+      "end": 2059.589,
+      "duration": 1.829,
+      "text": "house there but I'm I've been told you"
+    },
+    {
+      "index": 660,
+      "start": 2059.599,
+      "end": 2061.27,
+      "duration": 1.671,
+      "text": "can get really cheap"
+    },
+    {
+      "index": 661,
+      "start": 2061.28,
+      "end": 2063.069,
+      "duration": 1.789,
+      "text": "land"
+    },
+    {
+      "index": 662,
+      "start": 2063.079,
+      "end": 2064.869,
+      "duration": 1.79,
+      "text": "okay"
+    },
+    {
+      "index": 663,
+      "start": 2064.879,
+      "end": 2066.55,
+      "duration": 1.671,
+      "text": "so"
+    },
+    {
+      "index": 664,
+      "start": 2066.56,
+      "end": 2069.55,
+      "duration": 2.99,
+      "text": "anyway okay so Delta s versus delta a"
+    },
+    {
+      "index": 665,
+      "start": 2069.56,
+      "end": 2071.71,
+      "duration": 2.15,
+      "text": "depends on how slanted things are and"
+    },
+    {
+      "index": 666,
+      "start": 2071.72,
+      "end": 2074.75,
+      "duration": 3.03,
+      "text": "let's try to make that more precise by"
+    },
+    {
+      "index": 667,
+      "start": 2074.76,
+      "end": 2076.669,
+      "duration": 1.909,
+      "text": "looking at the angle that our plane"
+    },
+    {
+      "index": 668,
+      "start": 2076.679,
+      "end": 2079.31,
+      "duration": 2.631,
+      "text": "makes with a horizontal"
+    },
+    {
+      "index": 669,
+      "start": 2079.32,
+      "end": 2083.069,
+      "duration": 3.749,
+      "text": "Direction okay"
+    },
+    {
+      "index": 670,
+      "start": 2083.079,
+      "end": 2087.31,
+      "duration": 4.231,
+      "text": "so let's call this angle Alpha the angle"
+    },
+    {
+      "index": 671,
+      "start": 2087.32,
+      "end": 2091.75,
+      "duration": 4.43,
+      "text": "that our plane makes with the horizontal"
+    },
+    {
+      "index": 672,
+      "start": 2093.909,
+      "end": 2093.919,
+      "duration": 0.01,
+      "text": "direction see it's all coming together"
+    },
+    {
+      "index": 673,
+      "start": 2093.919,
+      "end": 2095.909,
+      "duration": 1.99,
+      "text": "now the first unit about cross products"
+    },
+    {
+      "index": 674,
+      "start": 2095.919,
+      "end": 2098.349,
+      "duration": 2.43,
+      "text": "normal vectors and so on"
+    },
+    {
+      "index": 675,
+      "start": 2098.359,
+      "end": 2100.75,
+      "duration": 2.391,
+      "text": "is actually useful"
+    },
+    {
+      "index": 676,
+      "start": 2100.76,
+      "end": 2106.19,
+      "duration": 5.43,
+      "text": "now"
+    },
+    {
+      "index": 677,
+      "start": 2109.43,
+      "end": 2109.44,
+      "duration": 0.01,
+      "text": "so I claim that the surface element is"
+    },
+    {
+      "index": 678,
+      "start": 2109.44,
+      "end": 2112.63,
+      "duration": 3.19,
+      "text": "related to the area in the plane by"
+    },
+    {
+      "index": 679,
+      "start": 2112.64,
+      "end": 2116.63,
+      "duration": 3.99,
+      "text": "Delta a equals Delta s time the cosine"
+    },
+    {
+      "index": 680,
+      "start": 2116.64,
+      "end": 2118.71,
+      "duration": 2.07,
+      "text": "of"
+    },
+    {
+      "index": 681,
+      "start": 2118.72,
+      "end": 2120.75,
+      "duration": 2.03,
+      "text": "alpha why is"
+    },
+    {
+      "index": 682,
+      "start": 2120.76,
+      "end": 2122.829,
+      "duration": 2.069,
+      "text": "that well let's look at this small"
+    },
+    {
+      "index": 683,
+      "start": 2122.839,
+      "end": 2125.069,
+      "duration": 2.23,
+      "text": "rectangle with one horizontal side and"
+    },
+    {
+      "index": 684,
+      "start": 2125.079,
+      "end": 2126.47,
+      "duration": 1.391,
+      "text": "one slanted"
+    },
+    {
+      "index": 685,
+      "start": 2126.48,
+      "end": 2129.31,
+      "duration": 2.83,
+      "text": "side well when you project this side"
+    },
+    {
+      "index": 686,
+      "start": 2129.32,
+      "end": 2130.31,
+      "duration": 0.99,
+      "text": "doesn't"
+    },
+    {
+      "index": 687,
+      "start": 2130.32,
+      "end": 2134.589,
+      "duration": 4.269,
+      "text": "change but this side gets shortened by a"
+    },
+    {
+      "index": 688,
+      "start": 2134.599,
+      "end": 2137.55,
+      "duration": 2.951,
+      "text": "factor of cosine Alpha whatever this"
+    },
+    {
+      "index": 689,
+      "start": 2137.56,
+      "end": 2140.829,
+      "duration": 3.269,
+      "text": "length was this length here is that one"
+    },
+    {
+      "index": 690,
+      "start": 2140.839,
+      "end": 2144.71,
+      "duration": 3.871,
+      "text": "time cosine Alpha so that's why the area"
+    },
+    {
+      "index": 691,
+      "start": 2144.72,
+      "end": 2147.19,
+      "duration": 2.47,
+      "text": "gets shrunk by cosine Alpha in One"
+    },
+    {
+      "index": 692,
+      "start": 2147.2,
+      "end": 2149.109,
+      "duration": 1.909,
+      "text": "Direction nothing happens in the other"
+    },
+    {
+      "index": 693,
+      "start": 2149.119,
+      "end": 2152.71,
+      "duration": 3.591,
+      "text": "direction you squish by cosine"
+    },
+    {
+      "index": 694,
+      "start": 2152.72,
+      "end": 2154.91,
+      "duration": 2.19,
+      "text": "Alpha"
+    },
+    {
+      "index": 695,
+      "start": 2154.92,
+      "end": 2158.55,
+      "duration": 3.63,
+      "text": "so what that means"
+    },
+    {
+      "index": 696,
+      "start": 2158.56,
+      "end": 2160.43,
+      "duration": 1.87,
+      "text": "is"
+    },
+    {
+      "index": 697,
+      "start": 2160.44,
+      "end": 2162.27,
+      "duration": 1.83,
+      "text": "that"
+    },
+    {
+      "index": 698,
+      "start": 2162.28,
+      "end": 2164.79,
+      "duration": 2.51,
+      "text": "well okay so we'll have to deal with"
+    },
+    {
+      "index": 699,
+      "start": 2164.8,
+      "end": 2166.55,
+      "duration": 1.75,
+      "text": "this and of course the one we'll care"
+    },
+    {
+      "index": 700,
+      "start": 2166.56,
+      "end": 2169.63,
+      "duration": 3.07,
+      "text": "about actually is Delta s expressed in"
+    },
+    {
+      "index": 701,
+      "start": 2169.64,
+      "end": 2171.63,
+      "duration": 1.99,
+      "text": "terms of Delta a but what are we going"
+    },
+    {
+      "index": 702,
+      "start": 2171.64,
+      "end": 2173.19,
+      "duration": 1.55,
+      "text": "to do with this cosine you know it's not"
+    },
+    {
+      "index": 703,
+      "start": 2173.2,
+      "end": 2174.79,
+      "duration": 1.59,
+      "text": "very convenient to have a cosine left in"
+    },
+    {
+      "index": 704,
+      "start": 2174.8,
+      "end": 2177.15,
+      "duration": 2.35,
+      "text": "here so remember the angle between two"
+    },
+    {
+      "index": 705,
+      "start": 2177.16,
+      "end": 2179.03,
+      "duration": 1.87,
+      "text": "planes it's the same thing as the angle"
+    },
+    {
+      "index": 706,
+      "start": 2179.04,
+      "end": 2181.27,
+      "duration": 2.23,
+      "text": "between their normal vectors so if you"
+    },
+    {
+      "index": 707,
+      "start": 2181.28,
+      "end": 2183.67,
+      "duration": 2.39,
+      "text": "want to see this angle Alpha elsewhere"
+    },
+    {
+      "index": 708,
+      "start": 2183.68,
+      "end": 2185.63,
+      "duration": 1.95,
+      "text": "what you can do is you can just take the"
+    },
+    {
+      "index": 709,
+      "start": 2185.64,
+      "end": 2188.19,
+      "duration": 2.55,
+      "text": "vertical Direction Let's Take k"
+    },
+    {
+      "index": 710,
+      "start": 2188.2,
+      "end": 2198.63,
+      "duration": 10.43,
+      "text": "a then here we have our angle Alpha"
+    },
+    {
+      "index": 711,
+      "start": 2200.55,
+      "end": 2200.56,
+      "duration": 0.01,
+      "text": "again"
+    },
+    {
+      "index": 712,
+      "start": 2200.56,
+      "end": 2205.15,
+      "duration": 4.59,
+      "text": "well so in particular cosine of"
+    },
+    {
+      "index": 713,
+      "start": 2205.16,
+      "end": 2208.19,
+      "duration": 3.03,
+      "text": "alpha I can get well we know how to find"
+    },
+    {
+      "index": 714,
+      "start": 2208.2,
+      "end": 2210.51,
+      "duration": 2.31,
+      "text": "the angle between two vectors right so"
+    },
+    {
+      "index": 715,
+      "start": 2210.52,
+      "end": 2214.309,
+      "duration": 3.789,
+      "text": "if we have our normal Vector"
+    },
+    {
+      "index": 716,
+      "start": 2219.99,
+      "end": 2220.0,
+      "duration": 0.01,
+      "text": "n we'll do n. K and we divide by length"
+    },
+    {
+      "index": 717,
+      "start": 2220.0,
+      "end": 2223.87,
+      "duration": 3.87,
+      "text": "n length K well length K is one that's"
+    },
+    {
+      "index": 718,
+      "start": 2223.88,
+      "end": 2225.39,
+      "duration": 1.51,
+      "text": "one easy"
+    },
+    {
+      "index": 719,
+      "start": 2225.4,
+      "end": 2227.99,
+      "duration": 2.59,
+      "text": "guy okay so that's how we find the"
+    },
+    {
+      "index": 720,
+      "start": 2228.0,
+      "end": 2233.589,
+      "duration": 5.589,
+      "text": "angle so now I'm going to say"
+    },
+    {
+      "index": 721,
+      "start": 2239.27,
+      "end": 2239.28,
+      "duration": 0.01,
+      "text": "well Delta s is going to be 1 / cosine"
+    },
+    {
+      "index": 722,
+      "start": 2239.28,
+      "end": 2243.55,
+      "duration": 4.27,
+      "text": "Alpha Delta a and I can rewrite that as"
+    },
+    {
+      "index": 723,
+      "start": 2243.56,
+      "end": 2250.109,
+      "duration": 6.549,
+      "text": "length of n divided by n. k"
+    },
+    {
+      "index": 724,
+      "start": 2262.27,
+      "end": 2262.28,
+      "duration": 0.01,
+      "text": "a now let's multiply that by the unit"
+    },
+    {
+      "index": 725,
+      "start": 2262.28,
+      "end": 2264.95,
+      "duration": 2.67,
+      "text": "normal Vector because what we care about"
+    },
+    {
+      "index": 726,
+      "start": 2264.96,
+      "end": 2266.109,
+      "duration": 1.149,
+      "text": "is not so"
+    },
+    {
+      "index": 727,
+      "start": 2266.119,
+      "end": 2270.71,
+      "duration": 4.591,
+      "text": "much DS but actually"
+    },
+    {
+      "index": 728,
+      "start": 2276.95,
+      "end": 2276.96,
+      "duration": 0.01,
+      "text": "NDS so n Delta s will be I'm just going"
+    },
+    {
+      "index": 729,
+      "start": 2276.96,
+      "end": 2284.51,
+      "duration": 7.55,
+      "text": "to multiply by"
+    },
+    {
+      "index": 730,
+      "start": 2287.15,
+      "end": 2287.16,
+      "duration": 0.01,
+      "text": "n well let's think for a second what"
+    },
+    {
+      "index": 731,
+      "start": 2287.16,
+      "end": 2289.75,
+      "duration": 2.59,
+      "text": "happens if I take the unit normal n and"
+    },
+    {
+      "index": 732,
+      "start": 2289.76,
+      "end": 2291.589,
+      "duration": 1.829,
+      "text": "I multiply it by the length of my other"
+    },
+    {
+      "index": 733,
+      "start": 2291.599,
+      "end": 2295.51,
+      "duration": 3.911,
+      "text": "normal Big N well I get big n again"
+    },
+    {
+      "index": 734,
+      "start": 2295.52,
+      "end": 2297.75,
+      "duration": 2.23,
+      "text": "right this is a normal Vector of the"
+    },
+    {
+      "index": 735,
+      "start": 2297.76,
+      "end": 2302.349,
+      "duration": 4.589,
+      "text": "same length as n well up to sign but"
+    },
+    {
+      "index": 736,
+      "start": 2302.359,
+      "end": 2304.75,
+      "duration": 2.391,
+      "text": "yeah actually maybe I should the only"
+    },
+    {
+      "index": 737,
+      "start": 2304.76,
+      "end": 2306.39,
+      "duration": 1.63,
+      "text": "thing I don't know is whether this guy"
+    },
+    {
+      "index": 738,
+      "start": 2306.4,
+      "end": 2308.19,
+      "duration": 1.79,
+      "text": "will be going in the same direction as"
+    },
+    {
+      "index": 739,
+      "start": 2308.2,
+      "end": 2310.55,
+      "duration": 2.35,
+      "text": "big n or in the opposite"
+    },
+    {
+      "index": 740,
+      "start": 2310.56,
+      "end": 2314.71,
+      "duration": 4.15,
+      "text": "direction right say that for example my"
+    },
+    {
+      "index": 741,
+      "start": 2314.72,
+      "end": 2317.23,
+      "duration": 2.51,
+      "text": "capital N has length I don't know length"
+    },
+    {
+      "index": 742,
+      "start": 2317.24,
+      "end": 2318.67,
+      "duration": 1.43,
+      "text": "three for"
+    },
+    {
+      "index": 743,
+      "start": 2318.68,
+      "end": 2321.91,
+      "duration": 3.23,
+      "text": "example then the unit normal Vector"
+    },
+    {
+      "index": 744,
+      "start": 2321.92,
+      "end": 2324.79,
+      "duration": 2.87,
+      "text": "might be this guy in which case indeed"
+    },
+    {
+      "index": 745,
+      "start": 2324.8,
+      "end": 2327.63,
+      "duration": 2.83,
+      "text": "three * little n will be big n or it"
+    },
+    {
+      "index": 746,
+      "start": 2327.64,
+      "end": 2330.349,
+      "duration": 2.709,
+      "text": "might be this one in which case three *"
+    },
+    {
+      "index": 747,
+      "start": 2330.359,
+      "end": 2332.63,
+      "duration": 2.271,
+      "text": "little n will be negative"
+    },
+    {
+      "index": 748,
+      "start": 2332.64,
+      "end": 2337.829,
+      "duration": 5.189,
+      "text": "B but up to sign it's n"
+    },
+    {
+      "index": 749,
+      "start": 2337.839,
+      "end": 2342.15,
+      "duration": 4.311,
+      "text": "and then I will have n / n. K Delta a"
+    },
+    {
+      "index": 750,
+      "start": 2342.16,
+      "end": 2342.87,
+      "duration": 0.71,
+      "text": "and"
+    },
+    {
+      "index": 751,
+      "start": 2342.88,
+      "end": 2345.15,
+      "duration": 2.27,
+      "text": "so the final formula the one that"
+    },
+    {
+      "index": 752,
+      "start": 2345.16,
+      "end": 2348.109,
+      "duration": 2.949,
+      "text": "actually we care about you know in case"
+    },
+    {
+      "index": 753,
+      "start": 2348.119,
+      "end": 2350.99,
+      "duration": 2.871,
+      "text": "you don't really like my explanations of"
+    },
+    {
+      "index": 754,
+      "start": 2351.0,
+      "end": 2354.349,
+      "duration": 3.349,
+      "text": "how we get there is"
+    },
+    {
+      "index": 755,
+      "start": 2354.359,
+      "end": 2359.349,
+      "duration": 4.99,
+      "text": "that DS n DS sorry is plus or"
+    },
+    {
+      "index": 756,
+      "start": 2359.359,
+      "end": 2363.109,
+      "duration": 3.75,
+      "text": "minus n / n.k DX"
+    },
+    {
+      "index": 757,
+      "start": 2363.119,
+      "end": 2365.47,
+      "duration": 2.351,
+      "text": "Dy that one is actually kind of useful"
+    },
+    {
+      "index": 758,
+      "start": 2365.48,
+      "end": 2370.589,
+      "duration": 5.109,
+      "text": "so let's box it"
+    },
+    {
+      "index": 759,
+      "start": 2372.829,
+      "end": 2372.839,
+      "duration": 0.01,
+      "text": "now just in case you're"
+    },
+    {
+      "index": 760,
+      "start": 2372.839,
+      "end": 2374.829,
+      "duration": 1.99,
+      "text": "wondering of course if you didn't want"
+    },
+    {
+      "index": 761,
+      "start": 2374.839,
+      "end": 2376.63,
+      "duration": 1.791,
+      "text": "to project to XY you would have maybe"
+    },
+    {
+      "index": 762,
+      "start": 2376.64,
+      "end": 2378.51,
+      "duration": 1.87,
+      "text": "preferred to project to say the plane of"
+    },
+    {
+      "index": 763,
+      "start": 2378.52,
+      "end": 2381.43,
+      "duration": 2.91,
+      "text": "a Blackboard YZ well you can do the same"
+    },
+    {
+      "index": 764,
+      "start": 2381.44,
+      "end": 2384.39,
+      "duration": 2.95,
+      "text": "thing okay to express NDS in terms of"
+    },
+    {
+      "index": 765,
+      "start": 2384.4,
+      "end": 2387.55,
+      "duration": 3.15,
+      "text": "dydz you do the same argument and simply"
+    },
+    {
+      "index": 766,
+      "start": 2387.56,
+      "end": 2389.069,
+      "duration": 1.509,
+      "text": "the only thing that changes instead of"
+    },
+    {
+      "index": 767,
+      "start": 2389.079,
+      "end": 2391.51,
+      "duration": 2.431,
+      "text": "using the vertical vector k you use the"
+    },
+    {
+      "index": 768,
+      "start": 2391.52,
+      "end": 2394.63,
+      "duration": 3.11,
+      "text": "normal Vector I so you would be doing n/"
+    },
+    {
+      "index": 769,
+      "start": 2394.64,
+      "end": 2397.589,
+      "duration": 2.949,
+      "text": "n i Dy DZ"
+    },
+    {
+      "index": 770,
+      "start": 2397.599,
+      "end": 2399.19,
+      "duration": 1.591,
+      "text": "and same thing okay so just you know"
+    },
+    {
+      "index": 771,
+      "start": 2399.2,
+      "end": 2401.47,
+      "duration": 2.27,
+      "text": "keep an open mind that this also works"
+    },
+    {
+      "index": 772,
+      "start": 2401.48,
+      "end": 2404.39,
+      "duration": 2.91,
+      "text": "with other"
+    },
+    {
+      "index": 773,
+      "start": 2406.51,
+      "end": 2406.52,
+      "duration": 0.01,
+      "text": "variables but anyway so that's how you"
+    },
+    {
+      "index": 774,
+      "start": 2406.52,
+      "end": 2409.47,
+      "duration": 2.95,
+      "text": "can basically project the vector surface"
+    },
+    {
+      "index": 775,
+      "start": 2409.48,
+      "end": 2414.71,
+      "duration": 5.23,
+      "text": "area element onto the XY plane in a"
+    },
+    {
+      "index": 776,
+      "start": 2421.349,
+      "end": 2421.359,
+      "duration": 0.01,
+      "text": "okay so let's look at the special case"
+    },
+    {
+      "index": 777,
+      "start": 2421.359,
+      "end": 2422.75,
+      "duration": 1.391,
+      "text": "just to see how this fits with stuff"
+    },
+    {
+      "index": 778,
+      "start": 2422.76,
+      "end": 2429.069,
+      "duration": 6.309,
+      "text": "we've seen before"
+    },
+    {
+      "index": 779,
+      "start": 2435.39,
+      "end": 2435.4,
+      "duration": 0.01,
+      "text": "example where our surface is given by"
+    },
+    {
+      "index": 780,
+      "start": 2435.4,
+      "end": 2436.43,
+      "duration": 1.03,
+      "text": "the"
+    },
+    {
+      "index": 781,
+      "start": 2436.44,
+      "end": 2442.589,
+      "duration": 6.149,
+      "text": "equation Z minus F of XY equal"
+    },
+    {
+      "index": 782,
+      "start": 2442.599,
+      "end": 2445.47,
+      "duration": 2.871,
+      "text": "Z okay that's a strange way to write the"
+    },
+    {
+      "index": 783,
+      "start": 2445.48,
+      "end": 2449.19,
+      "duration": 3.71,
+      "text": "equation Z equals F of XY that we saw"
+    },
+    {
+      "index": 784,
+      "start": 2449.2,
+      "end": 2451.51,
+      "duration": 2.31,
+      "text": "before but now you know it looks like"
+    },
+    {
+      "index": 785,
+      "start": 2451.52,
+      "end": 2454.47,
+      "duration": 2.95,
+      "text": "well some function of XYZ equals z so"
+    },
+    {
+      "index": 786,
+      "start": 2454.48,
+      "end": 2457.47,
+      "duration": 2.99,
+      "text": "let's try to use this new method"
+    },
+    {
+      "index": 787,
+      "start": 2457.48,
+      "end": 2463.87,
+      "duration": 6.39,
+      "text": "okay so let's call this guy G of"
+    },
+    {
+      "index": 788,
+      "start": 2466.75,
+      "end": 2466.76,
+      "duration": 0.01,
+      "text": "XYZ well so now let's look at the normal"
+    },
+    {
+      "index": 789,
+      "start": 2466.76,
+      "end": 2468.51,
+      "duration": 1.75,
+      "text": "Vector the normal Vector would be the"
+    },
+    {
+      "index": 790,
+      "start": 2468.52,
+      "end": 2470.069,
+      "duration": 1.549,
+      "text": "gradient of G we"
+    },
+    {
+      "index": 791,
+      "start": 2470.079,
+      "end": 2472.589,
+      "duration": 2.51,
+      "text": "said what's the gradient of this"
+    },
+    {
+      "index": 792,
+      "start": 2472.599,
+      "end": 2476.47,
+      "duration": 3.871,
+      "text": "function so gradient of G well partial G"
+    },
+    {
+      "index": 793,
+      "start": 2476.48,
+      "end": 2479.63,
+      "duration": 3.15,
+      "text": "partial X that's just negative partial F"
+    },
+    {
+      "index": 794,
+      "start": 2479.64,
+      "end": 2480.91,
+      "duration": 1.27,
+      "text": "partial"
+    },
+    {
+      "index": 795,
+      "start": 2480.92,
+      "end": 2484.309,
+      "duration": 3.389,
+      "text": "X gradient G sorry the Y component"
+    },
+    {
+      "index": 796,
+      "start": 2484.319,
+      "end": 2486.109,
+      "duration": 1.79,
+      "text": "partial G partial Y is going to be"
+    },
+    {
+      "index": 797,
+      "start": 2486.119,
+      "end": 2488.55,
+      "duration": 2.431,
+      "text": "negative f sub y"
+    },
+    {
+      "index": 798,
+      "start": 2488.56,
+      "end": 2494.55,
+      "duration": 5.99,
+      "text": "and G subz is just"
+    },
+    {
+      "index": 799,
+      "start": 2500.23,
+      "end": 2500.24,
+      "duration": 0.01,
+      "text": "one so now if you take n/ n."
+    },
+    {
+      "index": 800,
+      "start": 2500.24,
+      "end": 2502.51,
+      "duration": 2.27,
+      "text": "K DX"
+    },
+    {
+      "index": 801,
+      "start": 2502.52,
+      "end": 2506.19,
+      "duration": 3.67,
+      "text": "Dy well it looks like that's going to"
+    },
+    {
+      "index": 802,
+      "start": 2506.2,
+      "end": 2510.87,
+      "duration": 4.67,
+      "text": "be negative f subx negative f sub y 1"
+    },
+    {
+      "index": 803,
+      "start": 2510.88,
+      "end": 2513.309,
+      "duration": 2.429,
+      "text": "divided by well what's n. K if you do"
+    },
+    {
+      "index": 804,
+      "start": 2513.319,
+      "end": 2515.069,
+      "duration": 1.75,
+      "text": "that with K you'll get just"
+    },
+    {
+      "index": 805,
+      "start": 2515.079,
+      "end": 2519.91,
+      "duration": 4.831,
+      "text": "one so I'm not going to write it DX"
+    },
+    {
+      "index": 806,
+      "start": 2523.95,
+      "end": 2523.96,
+      "duration": 0.01,
+      "text": "Dy see that's again our favorite"
+    },
+    {
+      "index": 807,
+      "start": 2523.96,
+      "end": 2526.43,
+      "duration": 2.47,
+      "text": "formula so this one is actually more"
+    },
+    {
+      "index": 808,
+      "start": 2526.44,
+      "end": 2527.829,
+      "duration": 1.389,
+      "text": "General because you don't need to solve"
+    },
+    {
+      "index": 809,
+      "start": 2527.839,
+      "end": 2529.87,
+      "duration": 2.031,
+      "text": "for Z but if you can solve for Z then"
+    },
+    {
+      "index": 810,
+      "start": 2529.88,
+      "end": 2538.71,
+      "duration": 8.83,
+      "text": "it's the same as"
+    },
+    {
+      "index": 811,
+      "start": 2541.069,
+      "end": 2541.079,
+      "duration": 0.01,
+      "text": "before"
+    },
+    {
+      "index": 812,
+      "start": 2541.079,
+      "end": 2545.03,
+      "duration": 3.951,
+      "text": "okay I think that's enough formulas for"
+    },
+    {
+      "index": 813,
+      "start": 2545.04,
+      "end": 2550.109,
+      "duration": 5.069,
+      "text": "NDS so"
+    },
+    {
+      "index": 814,
+      "start": 2552.15,
+      "end": 2552.16,
+      "duration": 0.01,
+      "text": "after spending a lot of time telling you"
+    },
+    {
+      "index": 815,
+      "start": 2552.16,
+      "end": 2554.43,
+      "duration": 2.27,
+      "text": "how to compute surface integrals now I'm"
+    },
+    {
+      "index": 816,
+      "start": 2554.44,
+      "end": 2555.91,
+      "duration": 1.47,
+      "text": "going to try to tell you how to avoid"
+    },
+    {
+      "index": 817,
+      "start": 2555.92,
+      "end": 2570.51,
+      "duration": 14.59,
+      "text": "Computing"
+    },
+    {
+      "index": 818,
+      "start": 2572.87,
+      "end": 2572.88,
+      "duration": 0.01,
+      "text": "them and that is called the Divergence"
+    },
+    {
+      "index": 819,
+      "start": 2572.88,
+      "end": 2585.589,
+      "duration": 12.709,
+      "text": "theem"
+    },
+    {
+      "index": 820,
+      "start": 2587.19,
+      "end": 2587.2,
+      "duration": 0.01,
+      "text": "and we'll see the proof and everything"
+    },
+    {
+      "index": 821,
+      "start": 2587.2,
+      "end": 2589.549,
+      "duration": 2.349,
+      "text": "and applications on Tuesday but I want"
+    },
+    {
+      "index": 822,
+      "start": 2589.559,
+      "end": 2590.99,
+      "duration": 1.431,
+      "text": "to at least State the theorem and see"
+    },
+    {
+      "index": 823,
+      "start": 2591.0,
+      "end": 2592.349,
+      "duration": 1.349,
+      "text": "how it works in one"
+    },
+    {
+      "index": 824,
+      "start": 2592.359,
+      "end": 2596.549,
+      "duration": 4.19,
+      "text": "example it's also known as the G grain"
+    },
+    {
+      "index": 825,
+      "start": 2596.559,
+      "end": 2599.109,
+      "duration": 2.55,
+      "text": "theorem or just the G theorem depending"
+    },
+    {
+      "index": 826,
+      "start": 2599.119,
+      "end": 2601.47,
+      "duration": 2.351,
+      "text": "on who you talk to"
+    },
+    {
+      "index": 827,
+      "start": 2601.48,
+      "end": 2603.99,
+      "duration": 2.51,
+      "text": "so the green here is the same green as"
+    },
+    {
+      "index": 828,
+      "start": 2604.0,
+      "end": 2606.15,
+      "duration": 2.15,
+      "text": "in green theorum okay because that's"
+    },
+    {
+      "index": 829,
+      "start": 2606.16,
+      "end": 2608.67,
+      "duration": 2.51,
+      "text": "somehow that's a space version of green"
+    },
+    {
+      "index": 830,
+      "start": 2608.68,
+      "end": 2611.549,
+      "duration": 2.869,
+      "text": "spum so what does it say it"
+    },
+    {
+      "index": 831,
+      "start": 2611.559,
+      "end": 2616.15,
+      "duration": 4.591,
+      "text": "says so it's 3D"
+    },
+    {
+      "index": 832,
+      "start": 2616.16,
+      "end": 2621.79,
+      "duration": 5.63,
+      "text": "analog of grain for"
+    },
+    {
+      "index": 833,
+      "start": 2625.39,
+      "end": 2625.4,
+      "duration": 0.01,
+      "text": "flux what it says is if"
+    },
+    {
+      "index": 834,
+      "start": 2625.4,
+      "end": 2628.549,
+      "duration": 3.149,
+      "text": "s is a closed surface okay so remember"
+    },
+    {
+      "index": 835,
+      "start": 2628.559,
+      "end": 2630.91,
+      "duration": 2.351,
+      "text": "it's the same as with green theorem we"
+    },
+    {
+      "index": 836,
+      "start": 2630.92,
+      "end": 2634.75,
+      "duration": 3.83,
+      "text": "need to have something that's completely"
+    },
+    {
+      "index": 837,
+      "start": 2634.76,
+      "end": 2638.87,
+      "duration": 4.11,
+      "text": "enclosed so you have a surface"
+    },
+    {
+      "index": 838,
+      "start": 2638.88,
+      "end": 2640.19,
+      "duration": 1.31,
+      "text": "and there's somehow no gaps in it"
+    },
+    {
+      "index": 839,
+      "start": 2640.2,
+      "end": 2642.109,
+      "duration": 1.909,
+      "text": "there's no boundary to it it's really"
+    },
+    {
+      "index": 840,
+      "start": 2642.119,
+      "end": 2644.71,
+      "duration": 2.591,
+      "text": "completely enclosing a region in space"
+    },
+    {
+      "index": 841,
+      "start": 2644.72,
+      "end": 2656.43,
+      "duration": 11.71,
+      "text": "that I will call"
+    },
+    {
+      "index": 842,
+      "start": 2659.27,
+      "end": 2659.28,
+      "duration": 0.01,
+      "text": "D and I need to choose my orientation so"
+    },
+    {
+      "index": 843,
+      "start": 2659.28,
+      "end": 2661.91,
+      "duration": 2.63,
+      "text": "the orientation that will work for this"
+    },
+    {
+      "index": 844,
+      "start": 2661.92,
+      "end": 2664.549,
+      "duration": 2.629,
+      "text": "theorem is choosing the normal Vector to"
+    },
+    {
+      "index": 845,
+      "start": 2664.559,
+      "end": 2673.71,
+      "duration": 9.151,
+      "text": "point outwards"
+    },
+    {
+      "index": 846,
+      "start": 2684.39,
+      "end": 2684.4,
+      "duration": 0.01,
+      "text": "so that's one part of a puzzle"
+    },
+    {
+      "index": 847,
+      "start": 2684.4,
+      "end": 2687.03,
+      "duration": 2.63,
+      "text": "the other part is a vector field I need"
+    },
+    {
+      "index": 848,
+      "start": 2687.04,
+      "end": 2689.47,
+      "duration": 2.43,
+      "text": "to have a vector field that's defined"
+    },
+    {
+      "index": 849,
+      "start": 2689.48,
+      "end": 2694.309,
+      "duration": 4.829,
+      "text": "and"
+    },
+    {
+      "index": 850,
+      "start": 2703.069,
+      "end": 2703.079,
+      "duration": 0.01,
+      "text": "so same restrictions as"
+    },
+    {
+      "index": 851,
+      "start": 2703.079,
+      "end": 2706.67,
+      "duration": 3.591,
+      "text": "usual"
+    },
+    {
+      "index": 852,
+      "start": 2710.23,
+      "end": 2710.24,
+      "duration": 0.01,
+      "text": "then I don't have actually to compute"
+    },
+    {
+      "index": 853,
+      "start": 2710.24,
+      "end": 2711.309,
+      "duration": 1.069,
+      "text": "the flux"
+    },
+    {
+      "index": 854,
+      "start": 2711.319,
+      "end": 2715.47,
+      "duration": 4.151,
+      "text": "integral double integral of f. n DS over"
+    },
+    {
+      "index": 855,
+      "start": 2715.48,
+      "end": 2717.27,
+      "duration": 1.79,
+      "text": "a closed surface s I'm going to put a"
+    },
+    {
+      "index": 856,
+      "start": 2717.28,
+      "end": 2718.99,
+      "duration": 1.71,
+      "text": "circle just to remind you it's got to be"
+    },
+    {
+      "index": 857,
+      "start": 2719.0,
+      "end": 2720.829,
+      "duration": 1.829,
+      "text": "a closed surface okay that's just"
+    },
+    {
+      "index": 858,
+      "start": 2720.839,
+      "end": 2723.95,
+      "duration": 3.111,
+      "text": "notation to remind us closed surface I"
+    },
+    {
+      "index": 859,
+      "start": 2723.96,
+      "end": 2726.549,
+      "duration": 2.589,
+      "text": "can replace that by the triple integral"
+    },
+    {
+      "index": 860,
+      "start": 2726.559,
+      "end": 2731.15,
+      "duration": 4.591,
+      "text": "of the region inside of Divergence of f"
+    },
+    {
+      "index": 861,
+      "start": 2731.16,
+      "end": 2733.27,
+      "duration": 2.11,
+      "text": "DV now I need to tell you what's the"
+    },
+    {
+      "index": 862,
+      "start": 2733.28,
+      "end": 2736.39,
+      "duration": 3.11,
+      "text": "Divergence of a 3D Vector"
+    },
+    {
+      "index": 863,
+      "start": 2736.4,
+      "end": 2738.43,
+      "duration": 2.03,
+      "text": "field well you'll see it's not much"
+    },
+    {
+      "index": 864,
+      "start": 2738.44,
+      "end": 2742.39,
+      "duration": 3.95,
+      "text": "harder than in the 2D case what you do"
+    },
+    {
+      "index": 865,
+      "start": 2742.4,
+      "end": 2750.95,
+      "duration": 8.55,
+      "text": "is"
+    },
+    {
+      "index": 866,
+      "start": 2754.19,
+      "end": 2754.2,
+      "duration": 0.01,
+      "text": "just so say that your vector field has"
+    },
+    {
+      "index": 867,
+      "start": 2754.2,
+      "end": 2760.47,
+      "duration": 6.27,
+      "text": "components p q and"
+    },
+    {
+      "index": 868,
+      "start": 2766.63,
+      "end": 2766.64,
+      "duration": 0.01,
+      "text": "R then you will take P subx plus Q sub y"
+    },
+    {
+      "index": 869,
+      "start": 2766.64,
+      "end": 2769.03,
+      "duration": 2.39,
+      "text": "plus r subz okay so that's the"
+    },
+    {
+      "index": 870,
+      "start": 2769.04,
+      "end": 2771.27,
+      "duration": 2.23,
+      "text": "definition it's pretty easy to remember"
+    },
+    {
+      "index": 871,
+      "start": 2771.28,
+      "end": 2773.71,
+      "duration": 2.43,
+      "text": "you take the X component parti respect"
+    },
+    {
+      "index": 872,
+      "start": 2773.72,
+      "end": 2775.91,
+      "duration": 2.19,
+      "text": "to X Plus partial respect to Y of the Y"
+    },
+    {
+      "index": 873,
+      "start": 2775.92,
+      "end": 2777.589,
+      "duration": 1.669,
+      "text": "component plus partial respect to Z of"
+    },
+    {
+      "index": 874,
+      "start": 2777.599,
+      "end": 2778.95,
+      "duration": 1.351,
+      "text": "the Z"
+    },
+    {
+      "index": 875,
+      "start": 2778.96,
+      "end": 2780.67,
+      "duration": 1.71,
+      "text": "component"
+    },
+    {
+      "index": 876,
+      "start": 2780.68,
+      "end": 2788.47,
+      "duration": 7.79,
+      "text": "okay so for example"
+    },
+    {
+      "index": 877,
+      "start": 2810.47,
+      "end": 2810.48,
+      "duration": 0.01,
+      "text": "a was 4/3 a cubed by Computing the"
+    },
+    {
+      "index": 878,
+      "start": 2810.48,
+      "end": 2811.99,
+      "duration": 1.51,
+      "text": "surface"
+    },
+    {
+      "index": 879,
+      "start": 2812.0,
+      "end": 2814.95,
+      "duration": 2.95,
+      "text": "integral well if we do it more"
+    },
+    {
+      "index": 880,
+      "start": 2814.96,
+      "end": 2816.87,
+      "duration": 1.91,
+      "text": "efficiently Now by Green theorem so"
+    },
+    {
+      "index": 881,
+      "start": 2816.88,
+      "end": 2818.069,
+      "duration": 1.189,
+      "text": "we're going to use green"
+    },
+    {
+      "index": 882,
+      "start": 2818.079,
+      "end": 2821.549,
+      "duration": 3.47,
+      "text": "spum for this this sphere because weing"
+    },
+    {
+      "index": 883,
+      "start": 2821.559,
+      "end": 2823.309,
+      "duration": 1.75,
+      "text": "the whole sphere it's fine it's a closed"
+    },
+    {
+      "index": 884,
+      "start": 2823.319,
+      "end": 2824.95,
+      "duration": 1.631,
+      "text": "surface we couldn't do it for say a"
+    },
+    {
+      "index": 885,
+      "start": 2824.96,
+      "end": 2826.47,
+      "duration": 1.51,
+      "text": "hemisphere or something like that we"
+    },
+    {
+      "index": 886,
+      "start": 2826.48,
+      "end": 2828.71,
+      "duration": 2.23,
+      "text": "need to well I mean for the hemisphere"
+    },
+    {
+      "index": 887,
+      "start": 2828.72,
+      "end": 2830.63,
+      "duration": 1.91,
+      "text": "we need to add maybe the flat face at"
+    },
+    {
+      "index": 888,
+      "start": 2830.64,
+      "end": 2835.43,
+      "duration": 4.79,
+      "text": "the bottom or something like that"
+    },
+    {
+      "index": 889,
+      "start": 2835.44,
+      "end": 2837.829,
+      "duration": 2.389,
+      "text": "so GRE theorum"
+    },
+    {
+      "index": 890,
+      "start": 2837.839,
+      "end": 2841.349,
+      "duration": 3.51,
+      "text": "says"
+    },
+    {
+      "index": 891,
+      "start": 2844.75,
+      "end": 2844.76,
+      "duration": 0.01,
+      "text": "that our flux integral can be actually"
+    },
+    {
+      "index": 892,
+      "start": 2844.76,
+      "end": 2847.95,
+      "duration": 3.19,
+      "text": "replaced by the tri integral over the"
+    },
+    {
+      "index": 893,
+      "start": 2847.96,
+      "end": 2853.51,
+      "duration": 5.55,
+      "text": "solid bow of radius a of the Divergence"
+    },
+    {
+      "index": 894,
+      "start": 2853.52,
+      "end": 2859.069,
+      "duration": 5.549,
+      "text": "of ZK DV but now what's the Divergence"
+    },
+    {
+      "index": 895,
+      "start": 2859.079,
+      "end": 2863.39,
+      "duration": 4.311,
+      "text": "of this field well so you have 0 0 Z so"
+    },
+    {
+      "index": 896,
+      "start": 2863.4,
+      "end": 2869.309,
+      "duration": 5.909,
+      "text": "you get 0 + 0 +"
+    },
+    {
+      "index": 897,
+      "start": 2872.51,
+      "end": 2872.52,
+      "duration": 0.01,
+      "text": "1 looks like it will be one so if you do"
+    },
+    {
+      "index": 898,
+      "start": 2872.52,
+      "end": 2874.47,
+      "duration": 1.95,
+      "text": "the triple integral of 1 DV you will get"
+    },
+    {
+      "index": 899,
+      "start": 2874.48,
+      "end": 2882.71,
+      "duration": 8.23,
+      "text": "just the volume"
+    },
+    {
+      "index": 900,
+      "start": 2886.43,
+      "end": 2886.44,
+      "duration": 0.01,
+      "text": "of Orion inside which is 43 Pi a"
+    },
+    {
+      "index": 901,
+      "start": 2886.44,
+      "end": 2889.71,
+      "duration": 3.27,
+      "text": "cub and so it was no accident in fact"
+    },
+    {
+      "index": 902,
+      "start": 2889.72,
+      "end": 2892.47,
+      "duration": 2.75,
+      "text": "before that we looked at also x i + y j"
+    },
+    {
+      "index": 903,
+      "start": 2892.48,
+      "end": 2894.75,
+      "duration": 2.27,
+      "text": "plus ZK and we found three times the"
+    },
+    {
+      "index": 904,
+      "start": 2894.76,
+      "end": 2896.15,
+      "duration": 1.39,
+      "text": "volume that's because the diverence of"
+    },
+    {
+      "index": 905,
+      "start": 2896.16,
+      "end": 2898.19,
+      "duration": 2.03,
+      "text": "that field was actually"
+    },
+    {
+      "index": 906,
+      "start": 2898.2,
+      "end": 2900.63,
+      "duration": 2.43,
+      "text": "three so very quickly let me just say"
+    },
+    {
+      "index": 907,
+      "start": 2900.64,
+      "end": 2902.19,
+      "duration": 1.55,
+      "text": "what this means"
+    },
+    {
+      "index": 908,
+      "start": 2902.2,
+      "end": 2903.91,
+      "duration": 1.71,
+      "text": "physically"
+    },
+    {
+      "index": 909,
+      "start": 2903.92,
+      "end": 2906.39,
+      "duration": 2.47,
+      "text": "physically see this guy on the left is"
+    },
+    {
+      "index": 910,
+      "start": 2906.4,
+      "end": 2908.63,
+      "duration": 2.23,
+      "text": "the amount of stuff that goes out of the"
+    },
+    {
+      "index": 911,
+      "start": 2908.64,
+      "end": 2910.75,
+      "duration": 2.11,
+      "text": "region per unit"
+    },
+    {
+      "index": 912,
+      "start": 2910.76,
+      "end": 2912.63,
+      "duration": 1.87,
+      "text": "time"
+    },
+    {
+      "index": 913,
+      "start": 2912.64,
+      "end": 2915.03,
+      "duration": 2.39,
+      "text": "so I want to figure out how much stuff"
+    },
+    {
+      "index": 914,
+      "start": 2915.04,
+      "end": 2916.75,
+      "duration": 1.71,
+      "text": "comes out of there what does the"
+    },
+    {
+      "index": 915,
+      "start": 2916.76,
+      "end": 2919.47,
+      "duration": 2.71,
+      "text": "Divergence mean the Divergence means"
+    },
+    {
+      "index": 916,
+      "start": 2919.48,
+      "end": 2921.589,
+      "duration": 2.109,
+      "text": "well it measures how much the flow is"
+    },
+    {
+      "index": 917,
+      "start": 2921.599,
+      "end": 2924.03,
+      "duration": 2.431,
+      "text": "expanding things it measures how much I"
+    },
+    {
+      "index": 918,
+      "start": 2924.04,
+      "end": 2926.069,
+      "duration": 2.029,
+      "text": "I said probably when we understood 2D"
+    },
+    {
+      "index": 919,
+      "start": 2926.079,
+      "end": 2928.309,
+      "duration": 2.23,
+      "text": "Divergence it measures the amount of"
+    },
+    {
+      "index": 920,
+      "start": 2928.319,
+      "end": 2931.39,
+      "duration": 3.071,
+      "text": "sources or sinks that you have inside"
+    },
+    {
+      "index": 921,
+      "start": 2931.4,
+      "end": 2934.71,
+      "duration": 3.31,
+      "text": "your fluid so you know now it becomes"
+    },
+    {
+      "index": 922,
+      "start": 2934.72,
+      "end": 2936.51,
+      "duration": 1.79,
+      "text": "common sense if you take a region of"
+    },
+    {
+      "index": 923,
+      "start": 2936.52,
+      "end": 2937.23,
+      "duration": 0.71,
+      "text": "space"
+    },
+    {
+      "index": 924,
+      "start": 2937.24,
+      "end": 2938.95,
+      "duration": 1.71,
+      "text": "the total amount of water that flows out"
+    },
+    {
+      "index": 925,
+      "start": 2938.96,
+      "end": 2941.349,
+      "duration": 2.389,
+      "text": "of it is the total amount of sources"
+    },
+    {
+      "index": 926,
+      "start": 2941.359,
+      "end": 2943.63,
+      "duration": 2.271,
+      "text": "that you have in there minus the"
+    },
+    {
+      "index": 927,
+      "start": 2943.64,
+      "end": 2946.349,
+      "duration": 2.709,
+      "text": "sinks okay I mean in spite of this"
+    },
+    {
+      "index": 928,
+      "start": 2946.359,
+      "end": 2948.109,
+      "duration": 1.75,
+      "text": "Common Sense explanation I mean we're"
+    },
+    {
+      "index": 929,
+      "start": 2948.119,
+      "end": 2950.069,
+      "duration": 1.95,
+      "text": "going to see actually how to prove this"
+    },
+    {
+      "index": 930,
+      "start": 2950.079,
+      "end": 2952.95,
+      "duration": 2.871,
+      "text": "and we'll see how it works and what it"
+    },
+    {
+      "index": 931,
+      "start": 2952.96,
+      "end": 2955.96,
+      "duration": 3.0,
+      "text": "says"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

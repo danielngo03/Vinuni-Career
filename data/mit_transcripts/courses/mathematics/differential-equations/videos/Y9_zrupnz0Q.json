@@ -1,0 +1,4610 @@
+{
+  "video": {
+    "id": "Y9_zrupnz0Q",
+    "title": "Lec 14 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=Y9_zrupnz0Q",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2666,
+    "language": "en"
+  },
+  "segment_count": 656,
+  "segments": [
+    {
+      "index": 0,
+      "start": 7.0,
+      "end": 12.555,
+      "duration": 5.555,
+      "text": "I just recalling some of the notation we are going to need"
+    },
+    {
+      "index": 1,
+      "start": 12.555,
+      "end": 18.404,
+      "duration": 5.849,
+      "text": "for today, and a couple of the facts that we're going to use,"
+    },
+    {
+      "index": 2,
+      "start": 18.404,
+      "end": 23.667,
+      "duration": 5.263,
+      "text": "plus trying to clear up a couple of confusions that the"
+    },
+    {
+      "index": 3,
+      "start": 23.667,
+      "end": 28.054,
+      "duration": 4.387,
+      "text": "recitations report. This can be thought of two"
+    },
+    {
+      "index": 4,
+      "start": 28.054,
+      "end": 31.465,
+      "duration": 3.411,
+      "text": "ways. It's a formal polynomial in D,"
+    },
+    {
+      "index": 5,
+      "start": 31.465,
+      "end": 36.174,
+      "duration": 4.709,
+      "text": "in the letter D. It just has the shape of the"
+    },
+    {
+      "index": 6,
+      "start": 36.174,
+      "end": 40.291,
+      "duration": 4.117,
+      "text": "polynomial, D squared plus AD plus B."
+    },
+    {
+      "index": 7,
+      "start": 40.291,
+      "end": 42.854,
+      "duration": 2.563,
+      "text": "A and B are constant coefficients."
+    },
+    {
+      "index": 8,
+      "start": 42.854,
+      "end": 45.339,
+      "duration": 2.485,
+      "text": "But, it's also, at the same time,"
+    },
+    {
+      "index": 9,
+      "start": 45.339,
+      "end": 49.3,
+      "duration": 3.961,
+      "text": "if you think what it does, it's a linear operator on"
+    },
+    {
+      "index": 10,
+      "start": 49.3,
+      "end": 52.019,
+      "duration": 2.719,
+      "text": "functions. It's a linear operator on"
+    },
+    {
+      "index": 11,
+      "start": 52.019,
+      "end": 56.446,
+      "duration": 4.427,
+      "text": "functions like y of t. You think of it both ways:"
+    },
+    {
+      "index": 12,
+      "start": 56.446,
+      "end": 61.106,
+      "duration": 4.66,
+      "text": "formal polynomial because we want to do things like factoring"
+    },
+    {
+      "index": 13,
+      "start": 61.106,
+      "end": 66.0,
+      "duration": 4.894,
+      "text": "it, substituting two for D and things like that."
+    },
+    {
+      "index": 14,
+      "start": 66.0,
+      "end": 68.494,
+      "duration": 2.494,
+      "text": "Those are things you do with polynomials."
+    },
+    {
+      "index": 15,
+      "start": 68.494,
+      "end": 71.55,
+      "duration": 3.056,
+      "text": "You do them algebraically. You can take the formal"
+    },
+    {
+      "index": 16,
+      "start": 71.55,
+      "end": 74.855,
+      "duration": 3.305,
+      "text": "derivative of the polynomial because it's just sums of"
+    },
+    {
+      "index": 17,
+      "start": 74.855,
+      "end": 76.415,
+      "duration": 1.56,
+      "text": "powers. On the other hand,"
+    },
+    {
+      "index": 18,
+      "start": 76.415,
+      "end": 79.658,
+      "duration": 3.243,
+      "text": "as a linear operator, it does something to functions."
+    },
+    {
+      "index": 19,
+      "start": 79.658,
+      "end": 83.025,
+      "duration": 3.367,
+      "text": "It differentiates them, multiplies them by constants or"
+    },
+    {
+      "index": 20,
+      "start": 83.025,
+      "end": 85.582,
+      "duration": 2.557,
+      "text": "something like that. So it's, so to speak,"
+    },
+    {
+      "index": 21,
+      "start": 85.582,
+      "end": 89.075,
+      "duration": 3.493,
+      "text": "has a dual aspect this way. And, that's one of the things"
+    },
+    {
+      "index": 22,
+      "start": 89.075,
+      "end": 92.443,
+      "duration": 3.368,
+      "text": "we are exploiting what we use operator methods to solve"
+    },
+    {
+      "index": 23,
+      "start": 92.443,
+      "end": 97.173,
+      "duration": 4.73,
+      "text": "differential equations. Now, let me remind you of the"
+    },
+    {
+      "index": 24,
+      "start": 97.173,
+      "end": 100.77,
+      "duration": 3.597,
+      "text": "key thing we were interested in. f of t:"
+    },
+    {
+      "index": 25,
+      "start": 100.77,
+      "end": 104.442,
+      "duration": 3.672,
+      "text": "not any old function, we'll get to that next time,"
+    },
+    {
+      "index": 26,
+      "start": 104.442,
+      "end": 106.915,
+      "duration": 2.473,
+      "text": "but f of t, exponentials."
+    },
+    {
+      "index": 27,
+      "start": 106.915,
+      "end": 110.737,
+      "duration": 3.822,
+      "text": "So, it should be an exponential or something like an"
+    },
+    {
+      "index": 28,
+      "start": 110.737,
+      "end": 114.259,
+      "duration": 3.522,
+      "text": "exponential, or pretty close to it, for example,"
+    },
+    {
+      "index": 29,
+      "start": 114.259,
+      "end": 117.557,
+      "duration": 3.298,
+      "text": "something with sine t and cosine t,"
+    },
+    {
+      "index": 30,
+      "start": 117.557,
+      "end": 121.379,
+      "duration": 3.822,
+      "text": "or e to the, that could be thought of as"
+    },
+    {
+      "index": 31,
+      "start": 121.379,
+      "end": 127.0,
+      "duration": 5.621,
+      "text": "part of the real or imaginary part of a complex exponential."
+    },
+    {
+      "index": 32,
+      "start": 127.0,
+      "end": 130.844,
+      "duration": 3.844,
+      "text": "And, maybe by the end of today, we will have generalized that"
+    },
+    {
+      "index": 33,
+      "start": 130.844,
+      "end": 132.83,
+      "duration": 1.986,
+      "text": "even little more. But basically,"
+    },
+    {
+      "index": 34,
+      "start": 132.83,
+      "end": 136.61,
+      "duration": 3.78,
+      "text": "I'm interested in exponentials. Let's make it alpha complex."
+    },
+    {
+      "index": 35,
+      "start": 136.61,
+      "end": 140.389,
+      "duration": 3.779,
+      "text": "That will at least take care of the cases, e to the ax times"
+    },
+    {
+      "index": 36,
+      "start": 140.389,
+      "end": 143.465,
+      "duration": 3.076,
+      "text": "cosine bx, sin bx,"
+    },
+    {
+      "index": 37,
+      "start": 143.465,
+      "end": 146.668,
+      "duration": 3.203,
+      "text": "which are the main cases. Those are the main cases."
+    },
+    {
+      "index": 38,
+      "start": 146.668,
+      "end": 150.0,
+      "duration": 3.332,
+      "text": "Then, remember the little table we made."
+    },
+    {
+      "index": 39,
+      "start": 150.0,
+      "end": 154.772,
+      "duration": 4.772,
+      "text": "I simply gave you the formula for the particular solution."
+    },
+    {
+      "index": 40,
+      "start": 154.772,
+      "end": 159.879,
+      "duration": 5.107,
+      "text": "So, what we're looking for is we already know how to solve the"
+    },
+    {
+      "index": 41,
+      "start": 159.879,
+      "end": 164.232,
+      "duration": 4.353,
+      "text": "homogeneous equation. What we want is that particular"
+    },
+    {
+      "index": 42,
+      "start": 164.232,
+      "end": 167.413,
+      "duration": 3.181,
+      "text": "solution. And then, the recipe for it I"
+    },
+    {
+      "index": 43,
+      "start": 167.413,
+      "end": 172.353,
+      "duration": 4.94,
+      "text": "gave you, these things were proved by the substitution rules"
+    },
+    {
+      "index": 44,
+      "start": 172.353,
+      "end": 177.125,
+      "duration": 4.772,
+      "text": "and exponential shift rules. The recipe was that if f of t"
+    },
+    {
+      "index": 45,
+      "start": 177.125,
+      "end": 180.39,
+      "duration": 3.265,
+      "text": "was, let's make a little table."
+    },
+    {
+      "index": 46,
+      "start": 180.39,
+      "end": 183.739,
+      "duration": 3.349,
+      "text": "f of t is, well, it's always e to the a t."
+    },
+    {
+      "index": 47,
+      "start": 183.739,
+      "end": 187.27,
+      "duration": 3.531,
+      "text": "So, in other words,"
+    },
+    {
+      "index": 48,
+      "start": 187.27,
+      "end": 190.144,
+      "duration": 2.874,
+      "text": "it's e to the a t. The cases are,"
+    },
+    {
+      "index": 49,
+      "start": 190.144,
+      "end": 193.621,
+      "duration": 3.477,
+      "text": "so yp, what is the yp? Well, it is the normal case is"
+    },
+    {
+      "index": 50,
+      "start": 193.621,
+      "end": 197.766,
+      "duration": 4.145,
+      "text": "yp equals e to that alpha t divided by the"
+    },
+    {
+      "index": 51,
+      "start": 197.766,
+      "end": 201.576,
+      "duration": 3.81,
+      "text": "polynomial where you substitute, you take that polynomial,"
+    },
+    {
+      "index": 52,
+      "start": 201.576,
+      "end": 204.986,
+      "duration": 3.41,
+      "text": "and wherever you see a D, you substitute the complex"
+    },
+    {
+      "index": 53,
+      "start": 204.986,
+      "end": 207.927,
+      "duration": 2.941,
+      "text": "number, alpha. There, I'm thinking of it as a"
+    },
+    {
+      "index": 54,
+      "start": 207.927,
+      "end": 211.898,
+      "duration": 3.971,
+      "text": "formal polynomial. I'm not thinking of it as an"
+    },
+    {
+      "index": 55,
+      "start": 211.898,
+      "end": 214.0,
+      "duration": 2.102,
+      "text": "operator. Now, this breaks down."
+    },
+    {
+      "index": 56,
+      "start": 214.0,
+      "end": 217.389,
+      "duration": 3.389,
+      "text": "So, that's the formula for the particular solution."
+    },
+    {
+      "index": 57,
+      "start": 217.389,
+      "end": 220.847,
+      "duration": 3.458,
+      "text": "The only trouble is, it breaks down if p of alpha is"
+    },
+    {
+      "index": 58,
+      "start": 220.847,
+      "end": 223.288,
+      "duration": 2.441,
+      "text": "zero. So, we have to assume that it's"
+    },
+    {
+      "index": 59,
+      "start": 223.288,
+      "end": 225.389,
+      "duration": 2.101,
+      "text": "not. Now, if p of alpha is zero,"
+    },
+    {
+      "index": 60,
+      "start": 225.389,
+      "end": 228.372,
+      "duration": 2.983,
+      "text": "that means alpha is a root of the polynomial,"
+    },
+    {
+      "index": 61,
+      "start": 228.372,
+      "end": 231.152,
+      "duration": 2.78,
+      "text": "a zero of the polynomial is a better word."
+    },
+    {
+      "index": 62,
+      "start": 231.152,
+      "end": 234.135,
+      "duration": 2.983,
+      "text": "So, in that case, it will be e to the alpha t"
+    },
+    {
+      "index": 63,
+      "start": 234.135,
+      "end": 237.864,
+      "duration": 3.729,
+      "text": "divided by p prime of alpha."
+    },
+    {
+      "index": 64,
+      "start": 237.864,
+      "end": 242.0,
+      "duration": 4.136,
+      "text": "Differentiate formally the polynomials, --"
+    },
+    {
+      "index": 65,
+      "start": 242.0,
+      "end": 244.417,
+      "duration": 2.417,
+      "text": "and you will get 2D plus A."
+    },
+    {
+      "index": 66,
+      "start": 244.417,
+      "end": 246.35,
+      "duration": 1.933,
+      "text": "And now, substitute in the alpha."
+    },
+    {
+      "index": 67,
+      "start": 246.35,
+      "end": 250.037,
+      "duration": 3.687,
+      "text": "And, this will be okay provided p prime of alpha"
+    },
+    {
+      "index": 68,
+      "start": 250.037,
+      "end": 252.454,
+      "duration": 2.417,
+      "text": "is not zero. That means that alpha is the"
+    },
+    {
+      "index": 69,
+      "start": 252.454,
+      "end": 255.838,
+      "duration": 3.384,
+      "text": "simple root, simple zero of p. And then, there's one more"
+    },
+    {
+      "index": 70,
+      "start": 255.838,
+      "end": 259.343,
+      "duration": 3.505,
+      "text": "case, which, since I won't need today, I won't write on the"
+    },
+    {
+      "index": 71,
+      "start": 259.343,
+      "end": 261.095,
+      "duration": 1.752,
+      "text": "board. But, you'll need it for"
+    },
+    {
+      "index": 72,
+      "start": 261.095,
+      "end": 263.21,
+      "duration": 2.115,
+      "text": "homework. So, make sure you know it."
+    },
+    {
+      "index": 73,
+      "start": 263.21,
+      "end": 265.023,
+      "duration": 1.813,
+      "text": "Another words, if this is zero,"
+    },
+    {
+      "index": 74,
+      "start": 265.023,
+      "end": 268.709,
+      "duration": 3.686,
+      "text": "then you've got a double root. And, there is still a different"
+    },
+    {
+      "index": 75,
+      "start": 268.709,
+      "end": 270.884,
+      "duration": 2.175,
+      "text": "formula. And, this is wrong because I"
+    },
+    {
+      "index": 76,
+      "start": 270.884,
+      "end": 273.755,
+      "duration": 2.871,
+      "text": "forgot the t. Yes?"
+    },
+    {
+      "index": 77,
+      "start": 273.755,
+      "end": 281.877,
+      "duration": 8.122,
+      "text": "I could tell on your faces. That was before,"
+    },
+    {
+      "index": 78,
+      "start": 281.877,
+      "end": 291.699,
+      "duration": 9.822,
+      "text": "and now we are up to today. What we are interested in"
+    },
+    {
+      "index": 79,
+      "start": 291.699,
+      "end": 303.788,
+      "duration": 12.089,
+      "text": "talking about today is what this has to do with the phenomenon of"
+    },
+    {
+      "index": 80,
+      "start": 303.788,
+      "end": 309.293,
+      "duration": 5.505,
+      "text": "resonance. Everybody knows at least one"
+    },
+    {
+      "index": 81,
+      "start": 309.293,
+      "end": 311.341,
+      "duration": 2.048,
+      "text": "case of resonance, I hope."
+    },
+    {
+      "index": 82,
+      "start": 311.341,
+      "end": 314.208,
+      "duration": 2.867,
+      "text": "A little kid is on his swing, right?"
+    },
+    {
+      "index": 83,
+      "start": 314.208,
+      "end": 316.911,
+      "duration": 2.703,
+      "text": "Back and forth, and they are very,"
+    },
+    {
+      "index": 84,
+      "start": 316.911,
+      "end": 319.532,
+      "duration": 2.621,
+      "text": "very little, so they want a push."
+    },
+    {
+      "index": 85,
+      "start": 319.532,
+      "end": 323.873,
+      "duration": 4.341,
+      "text": "Okay, well, everybody knows that to make the swing go,"
+    },
+    {
+      "index": 86,
+      "start": 323.873,
+      "end": 327.068,
+      "duration": 3.195,
+      "text": "a swing has a certain natural frequency."
+    },
+    {
+      "index": 87,
+      "start": 327.068,
+      "end": 331.0,
+      "duration": 3.932,
+      "text": "It swings back and forth like that."
+    },
+    {
+      "index": 88,
+      "start": 331.0,
+      "end": 334.435,
+      "duration": 3.435,
+      "text": "It's a simple pendulum. It's actually damped,"
+    },
+    {
+      "index": 89,
+      "start": 334.435,
+      "end": 336.856,
+      "duration": 2.421,
+      "text": "but let's pretend that it isn't."
+    },
+    {
+      "index": 90,
+      "start": 336.856,
+      "end": 341.229,
+      "duration": 4.373,
+      "text": "Everybody knows you want to push a kid on a swing so that"
+    },
+    {
+      "index": 91,
+      "start": 341.229,
+      "end": 343.884,
+      "duration": 2.655,
+      "text": "they go high. You have to push with"
+    },
+    {
+      "index": 92,
+      "start": 343.884,
+      "end": 348.491,
+      "duration": 4.607,
+      "text": "essentially the same frequency that the natural frequency of"
+    },
+    {
+      "index": 93,
+      "start": 348.491,
+      "end": 351.848,
+      "duration": 3.357,
+      "text": "the spring, of the swing is. It's automatic,"
+    },
+    {
+      "index": 94,
+      "start": 351.848,
+      "end": 355.675,
+      "duration": 3.827,
+      "text": "because when you come back here, it gets to there,"
+    },
+    {
+      "index": 95,
+      "start": 355.675,
+      "end": 359.11,
+      "duration": 3.435,
+      "text": "and that's where you push. So, automatically,"
+    },
+    {
+      "index": 96,
+      "start": 359.11,
+      "end": 364.048,
+      "duration": 4.938,
+      "text": "you time your pushes. But if you want the kid to"
+    },
+    {
+      "index": 97,
+      "start": 364.048,
+      "end": 368.304,
+      "duration": 4.256,
+      "text": "stop, you just do the opposite. Push at the wrong time."
+    },
+    {
+      "index": 98,
+      "start": 368.304,
+      "end": 372.48,
+      "duration": 4.176,
+      "text": "So anyway, that's resonance. Of course, there are more"
+    },
+    {
+      "index": 99,
+      "start": 372.48,
+      "end": 376.578,
+      "duration": 4.098,
+      "text": "serious applications of it. It's what made the Tacoma"
+    },
+    {
+      "index": 100,
+      "start": 376.578,
+      "end": 380.282,
+      "duration": 3.704,
+      "text": "Bridge fall down, and I think movies of that are"
+    },
+    {
+      "index": 101,
+      "start": 380.282,
+      "end": 384.853,
+      "duration": 4.571,
+      "text": "now being shown not merely on television, but in elementary"
+    },
+    {
+      "index": 102,
+      "start": 384.853,
+      "end": 387.217,
+      "duration": 2.364,
+      "text": "school. Resonance is what made,"
+    },
+    {
+      "index": 103,
+      "start": 387.217,
+      "end": 391.0,
+      "duration": 3.783,
+      "text": "okay, more resonance stories later."
+    },
+    {
+      "index": 104,
+      "start": 391.0,
+      "end": 393.707,
+      "duration": 2.707,
+      "text": "So, my aim is, what is this physical"
+    },
+    {
+      "index": 105,
+      "start": 393.707,
+      "end": 398.116,
+      "duration": 4.409,
+      "text": "phenomenon, that to get a big amplitude you should have it"
+    },
+    {
+      "index": 106,
+      "start": 398.116,
+      "end": 401.984,
+      "duration": 3.868,
+      "text": "match the frequency? What does that have to do with"
+    },
+    {
+      "index": 107,
+      "start": 401.984,
+      "end": 406.239,
+      "duration": 4.255,
+      "text": "a differential equation? Well, the differential equation"
+    },
+    {
+      "index": 108,
+      "start": 406.239,
+      "end": 410.262,
+      "duration": 4.023,
+      "text": "for that simple pendulum, let's assume it's undamped,"
+    },
+    {
+      "index": 109,
+      "start": 410.262,
+      "end": 413.975,
+      "duration": 3.713,
+      "text": "will be of the type y double prime plus,"
+    },
+    {
+      "index": 110,
+      "start": 413.975,
+      "end": 416.373,
+      "duration": 2.398,
+      "text": "I'm using t now since t is time."
+    },
+    {
+      "index": 111,
+      "start": 416.373,
+      "end": 419.545,
+      "duration": 3.172,
+      "text": "That will be our new independent variable,"
+    },
+    {
+      "index": 112,
+      "start": 419.545,
+      "end": 423.722,
+      "duration": 4.177,
+      "text": "plus omega nought squared is the natural"
+    },
+    {
+      "index": 113,
+      "start": 423.722,
+      "end": 428.364,
+      "duration": 4.642,
+      "text": "frequency of the pendulum or of the spring, or whatever it is"
+    },
+    {
+      "index": 114,
+      "start": 428.364,
+      "end": 435.423,
+      "duration": 7.059,
+      "text": "that's doing the vibrating. Yeah, any questions?"
+    },
+    {
+      "index": 115,
+      "start": 435.423,
+      "end": 443.639,
+      "duration": 8.216,
+      "text": "What we're doing is driving that with the cosine,"
+    },
+    {
+      "index": 116,
+      "start": 443.639,
+      "end": 451.0,
+      "duration": 7.361,
+      "text": "with something of a different frequency."
+    },
+    {
+      "index": 117,
+      "start": 451.0,
+      "end": 456.186,
+      "duration": 5.186,
+      "text": "So, this is the input, or the driving term as it's"
+    },
+    {
+      "index": 118,
+      "start": 456.186,
+      "end": 460.525,
+      "duration": 4.339,
+      "text": "often called, or it's sometimes called the"
+    },
+    {
+      "index": 119,
+      "start": 460.525,
+      "end": 465.076,
+      "duration": 4.551,
+      "text": "forcing term. And, the point is I'm going to"
+    },
+    {
+      "index": 120,
+      "start": 465.076,
+      "end": 469.098,
+      "duration": 4.022,
+      "text": "assume that the frequency is different."
+    },
+    {
+      "index": 121,
+      "start": 469.098,
+      "end": 474.39,
+      "duration": 5.292,
+      "text": "The driving frequency is different from the natural"
+    },
+    {
+      "index": 122,
+      "start": 474.39,
+      "end": 477.671,
+      "duration": 3.281,
+      "text": "frequency. So, this is the input"
+    },
+    {
+      "index": 123,
+      "start": 477.671,
+      "end": 481.569,
+      "duration": 3.898,
+      "text": "frequency. Okay, and now let's simply"
+    },
+    {
+      "index": 124,
+      "start": 481.569,
+      "end": 483.864,
+      "duration": 2.295,
+      "text": "solve the equation and see what we get."
+    },
+    {
+      "index": 125,
+      "start": 483.864,
+      "end": 486.339,
+      "duration": 2.475,
+      "text": "So, it's if I write it using the operator,"
+    },
+    {
+      "index": 126,
+      "start": 486.339,
+      "end": 489.479,
+      "duration": 3.14,
+      "text": "it's D squared plus omega nought squared applied to y"
+    },
+    {
+      "index": 127,
+      "start": 489.479,
+      "end": 492.015,
+      "duration": 2.536,
+      "text": "is equal to cosine."
+    },
+    {
+      "index": 128,
+      "start": 492.015,
+      "end": 495.456,
+      "duration": 3.441,
+      "text": "It's a good idea to do this because the formulas are going"
+    },
+    {
+      "index": 129,
+      "start": 495.456,
+      "end": 497.992,
+      "duration": 2.536,
+      "text": "to ask you to substitute into a polynomial."
+    },
+    {
+      "index": 130,
+      "start": 497.992,
+      "end": 501.433,
+      "duration": 3.441,
+      "text": "So, it's good to have the polynomial right in front of you"
+    },
+    {
+      "index": 131,
+      "start": 501.433,
+      "end": 503.426,
+      "duration": 1.993,
+      "text": "to avoid the possibility of error."
+    },
+    {
+      "index": 132,
+      "start": 503.426,
+      "end": 506.505,
+      "duration": 3.079,
+      "text": "Well, really what I want is the particular solution."
+    },
+    {
+      "index": 133,
+      "start": 506.505,
+      "end": 510.007,
+      "duration": 3.502,
+      "text": "It's the particular solution that's going to give me a pure"
+    },
+    {
+      "index": 134,
+      "start": 510.007,
+      "end": 513.688,
+      "duration": 3.681,
+      "text": "oscillation. And, the thing to do is,"
+    },
+    {
+      "index": 135,
+      "start": 513.688,
+      "end": 517.698,
+      "duration": 4.01,
+      "text": "of course, since this cosine, you want to make it complex."
+    },
+    {
+      "index": 136,
+      "start": 517.698,
+      "end": 522.06,
+      "duration": 4.362,
+      "text": "So, we are going to complexify the equation in order to be able"
+    },
+    {
+      "index": 137,
+      "start": 522.06,
+      "end": 525.859,
+      "duration": 3.799,
+      "text": "to solve it more easily, and in order to be able to use"
+    },
+    {
+      "index": 138,
+      "start": 525.859,
+      "end": 528.814,
+      "duration": 2.955,
+      "text": "those formulas. So, the complex equation is"
+    },
+    {
+      "index": 139,
+      "start": 528.814,
+      "end": 532.613,
+      "duration": 3.799,
+      "text": "going to be D squared plus omega nought squared."
+    },
+    {
+      "index": 140,
+      "start": 532.613,
+      "end": 535.216,
+      "duration": 2.603,
+      "text": "Well, it's going to be a"
+    },
+    {
+      "index": 141,
+      "start": 535.216,
+      "end": 540.0,
+      "duration": 4.784,
+      "text": "complex, particular solution. So, I'll call it y tilde."
+    },
+    {
+      "index": 142,
+      "start": 540.0,
+      "end": 544.045,
+      "duration": 4.045,
+      "text": "And, on the right-hand side, that's going to be e to the i"
+    },
+    {
+      "index": 143,
+      "start": 544.045,
+      "end": 547.878,
+      "duration": 3.833,
+      "text": "omega1 t. Cosine is the real part of"
+    },
+    {
+      "index": 144,
+      "start": 547.878,
+      "end": 550.15,
+      "duration": 2.272,
+      "text": "this. So, when we get our answer,"
+    },
+    {
+      "index": 145,
+      "start": 550.15,
+      "end": 553.983,
+      "duration": 3.833,
+      "text": "we want to be sure to take the real part of the answer."
+    },
+    {
+      "index": 146,
+      "start": 553.983,
+      "end": 557.745,
+      "duration": 3.762,
+      "text": "I don't want the complex answer, I want its real part."
+    },
+    {
+      "index": 147,
+      "start": 557.745,
+      "end": 560.442,
+      "duration": 2.697,
+      "text": "I want the real answer, in other words,"
+    },
+    {
+      "index": 148,
+      "start": 560.442,
+      "end": 563.565,
+      "duration": 3.123,
+      "text": "the really real answer, the real real answer."
+    },
+    {
+      "index": 149,
+      "start": 563.565,
+      "end": 567.469,
+      "duration": 3.904,
+      "text": "So, now without further ado, because of those beautiful,"
+    },
+    {
+      "index": 150,
+      "start": 567.469,
+      "end": 571.444,
+      "duration": 3.975,
+      "text": "the problem has been solved once and for all by using the"
+    },
+    {
+      "index": 151,
+      "start": 571.444,
+      "end": 576.422,
+      "duration": 4.978,
+      "text": "substitution rule. I did that for you on Monday."
+    },
+    {
+      "index": 152,
+      "start": 576.422,
+      "end": 581.268,
+      "duration": 4.846,
+      "text": "The answer is simply e to the i omega1 t"
+    },
+    {
+      "index": 153,
+      "start": 581.268,
+      "end": 585.112,
+      "duration": 3.844,
+      "text": "divided by what? This polynomial with omega one"
+    },
+    {
+      "index": 154,
+      "start": 585.112,
+      "end": 589.958,
+      "duration": 4.846,
+      "text": "substituted in for D. So, sorry, i omega one,"
+    },
+    {
+      "index": 155,
+      "start": 589.958,
+      "end": 593.133,
+      "duration": 3.175,
+      "text": "the complex coefficient of t."
+    },
+    {
+      "index": 156,
+      "start": 593.133,
+      "end": 597.561,
+      "duration": 4.428,
+      "text": "So, it is substitute i omega for D, I omega one for D,"
+    },
+    {
+      "index": 157,
+      "start": 597.561,
+      "end": 601.738,
+      "duration": 4.177,
+      "text": "and you get (i omega one) squared plus omega nought"
+    },
+    {
+      "index": 158,
+      "start": 601.738,
+      "end": 606.0,
+      "duration": 4.262,
+      "text": "squared."
+    },
+    {
+      "index": 159,
+      "start": 606.0,
+      "end": 609.969,
+      "duration": 3.969,
+      "text": "Well, let's make that look a little bit better."
+    },
+    {
+      "index": 160,
+      "start": 609.969,
+      "end": 614.888,
+      "duration": 4.919,
+      "text": "This should be e to the (i omega one t)"
+    },
+    {
+      "index": 161,
+      "start": 614.888,
+      "end": 617.304,
+      "duration": 2.416,
+      "text": "divided by, now, what's this?"
+    },
+    {
+      "index": 162,
+      "start": 617.304,
+      "end": 622.309,
+      "duration": 5.005,
+      "text": "This is simply omega nought squared minus omega"
+    },
+    {
+      "index": 163,
+      "start": 622.309,
+      "end": 627.142,
+      "duration": 4.833,
+      "text": "one squared. But, I want the real part of"
+    },
+    {
+      "index": 164,
+      "start": 627.142,
+      "end": 628.868,
+      "duration": 1.726,
+      "text": "it. So, as one final,"
+    },
+    {
+      "index": 165,
+      "start": 628.868,
+      "end": 633.7,
+      "duration": 4.832,
+      "text": "last step, the real part of that is what we call just the"
+    },
+    {
+      "index": 166,
+      "start": 633.7,
+      "end": 637.928,
+      "duration": 4.228,
+      "text": "real particular solution, so, yp without the tilde"
+    },
+    {
+      "index": 167,
+      "start": 637.928,
+      "end": 642.048,
+      "duration": 4.12,
+      "text": "anymore. And, the real part of this,"
+    },
+    {
+      "index": 168,
+      "start": 642.048,
+      "end": 645.917,
+      "duration": 3.869,
+      "text": "well, this cosine plus i sine. And, the denominator,"
+    },
+    {
+      "index": 169,
+      "start": 645.917,
+      "end": 650.241,
+      "duration": 4.324,
+      "text": "luckily, turns out to be real. So, it's simply going to be"
+    },
+    {
+      "index": 170,
+      "start": 650.241,
+      "end": 652.972,
+      "duration": 2.731,
+      "text": "cosine omega one t."
+    },
+    {
+      "index": 171,
+      "start": 652.972,
+      "end": 655.779,
+      "duration": 2.807,
+      "text": "That's the top, divided by this thing,"
+    },
+    {
+      "index": 172,
+      "start": 655.779,
+      "end": 660.179,
+      "duration": 4.4,
+      "text": "omega nought squared minus omega one squared."
+    },
+    {
+      "index": 173,
+      "start": 660.179,
+      "end": 663.443,
+      "duration": 3.264,
+      "text": "In other words,"
+    },
+    {
+      "index": 174,
+      "start": 663.443,
+      "end": 667.099,
+      "duration": 3.656,
+      "text": "that's the response. This is the input,"
+    },
+    {
+      "index": 175,
+      "start": 667.099,
+      "end": 671.525,
+      "duration": 4.426,
+      "text": "and that's what came out. Well, in other words,"
+    },
+    {
+      "index": 176,
+      "start": 671.525,
+      "end": 675.663,
+      "duration": 4.138,
+      "text": "what one sees is, regardless of what natural"
+    },
+    {
+      "index": 177,
+      "start": 675.663,
+      "end": 680.089,
+      "duration": 4.426,
+      "text": "frequency this system wanted to use for itself,"
+    },
+    {
+      "index": 178,
+      "start": 680.089,
+      "end": 685.189,
+      "duration": 5.1,
+      "text": "at least for this solution, what it responds to is the"
+    },
+    {
+      "index": 179,
+      "start": 685.189,
+      "end": 690.0,
+      "duration": 4.811,
+      "text": "driving frequency, the input frequency."
+    },
+    {
+      "index": 180,
+      "start": 690.0,
+      "end": 694.597,
+      "duration": 4.597,
+      "text": "The only thing is that the amplitude has changed,"
+    },
+    {
+      "index": 181,
+      "start": 694.597,
+      "end": 699.96,
+      "duration": 5.363,
+      "text": "and in a rather dramatic way, if omega1, depending on the"
+    },
+    {
+      "index": 182,
+      "start": 699.96,
+      "end": 703.312,
+      "duration": 3.352,
+      "text": "relative sizes of omega1 and omega2."
+    },
+    {
+      "index": 183,
+      "start": 703.312,
+      "end": 708.963,
+      "duration": 5.651,
+      "text": "Now, the interesting case is when omega one is very close to"
+    },
+    {
+      "index": 184,
+      "start": 708.963,
+      "end": 713.752,
+      "duration": 4.789,
+      "text": "omega, the natural frequency. When you push it with"
+    },
+    {
+      "index": 185,
+      "start": 713.752,
+      "end": 719.211,
+      "duration": 5.459,
+      "text": "approximately it's natural frequency, then the solution is"
+    },
+    {
+      "index": 186,
+      "start": 719.211,
+      "end": 724.0,
+      "duration": 4.789,
+      "text": "big amplitude. The amplitude is large."
+    },
+    {
+      "index": 187,
+      "start": 724.0,
+      "end": 727.186,
+      "duration": 3.186,
+      "text": "So, the solution looks like the frequency."
+    },
+    {
+      "index": 188,
+      "start": 727.186,
+      "end": 730.063,
+      "duration": 2.877,
+      "text": "The input might have looked like this."
+    },
+    {
+      "index": 189,
+      "start": 730.063,
+      "end": 733.716,
+      "duration": 3.653,
+      "text": "Well, it's cosine, so it ought to start up here."
+    },
+    {
+      "index": 190,
+      "start": 733.716,
+      "end": 738.302,
+      "duration": 4.586,
+      "text": "The input might have looked like this, but the response will"
+    },
+    {
+      "index": 191,
+      "start": 738.302,
+      "end": 742.189,
+      "duration": 3.887,
+      "text": "be a curve with the same frequency and still a pure"
+    },
+    {
+      "index": 192,
+      "start": 742.189,
+      "end": 744.909,
+      "duration": 2.72,
+      "text": "oscillation. But, it will have much,"
+    },
+    {
+      "index": 193,
+      "start": 744.909,
+      "end": 748.252,
+      "duration": 3.343,
+      "text": "much bigger amplitude. And, it's because the"
+    },
+    {
+      "index": 194,
+      "start": 748.252,
+      "end": 752.605,
+      "duration": 4.353,
+      "text": "denominator, omega nought squared minus omega"
+    },
+    {
+      "index": 195,
+      "start": 752.605,
+      "end": 755.947,
+      "duration": 3.342,
+      "text": "one squared, is always zero."
+    },
+    {
+      "index": 196,
+      "start": 755.947,
+      "end": 761.0,
+      "duration": 5.053,
+      "text": "So, the response will, instead, look like this."
+    },
+    {
+      "index": 197,
+      "start": 761.0,
+      "end": 764.908,
+      "duration": 3.908,
+      "text": "Now, to all intents and purposes, that's resonance."
+    },
+    {
+      "index": 198,
+      "start": 764.908,
+      "end": 768.973,
+      "duration": 4.065,
+      "text": "You are pushing something with approximately the same"
+    },
+    {
+      "index": 199,
+      "start": 768.973,
+      "end": 772.413,
+      "duration": 3.44,
+      "text": "frequency, something that wants to oscillate."
+    },
+    {
+      "index": 200,
+      "start": 772.413,
+      "end": 777.104,
+      "duration": 4.691,
+      "text": "And, you are pushing it with approximately the same frequency"
+    },
+    {
+      "index": 201,
+      "start": 777.104,
+      "end": 780.309,
+      "duration": 3.205,
+      "text": "that it would like to oscillate by itself."
+    },
+    {
+      "index": 202,
+      "start": 780.309,
+      "end": 785.0,
+      "duration": 4.691,
+      "text": "And, what that does is it builds up the amplitude"
+    },
+    {
+      "index": 203,
+      "start": 785.0,
+      "end": 790.232,
+      "duration": 5.232,
+      "text": "Well, what happens if omega one is actually equal"
+    },
+    {
+      "index": 204,
+      "start": 790.232,
+      "end": 794.537,
+      "duration": 4.305,
+      "text": "to omega zero? So, that's the case I'd like to"
+    },
+    {
+      "index": 205,
+      "start": 794.537,
+      "end": 798.419,
+      "duration": 3.882,
+      "text": "analyze for you now. Suppose the two are equal,"
+    },
+    {
+      "index": 206,
+      "start": 798.419,
+      "end": 801.457,
+      "duration": 3.038,
+      "text": "in other words. Well, the problem is,"
+    },
+    {
+      "index": 207,
+      "start": 801.457,
+      "end": 804.918,
+      "duration": 3.461,
+      "text": "of course, I can't use that same solution."
+    },
+    {
+      "index": 208,
+      "start": 804.918,
+      "end": 808.8,
+      "duration": 3.882,
+      "text": "It isn't applicable. But that's why I gave you,"
+    },
+    {
+      "index": 209,
+      "start": 808.8,
+      "end": 813.611,
+      "duration": 4.811,
+      "text": "derived for you using the exponential shift law last time,"
+    },
+    {
+      "index": 210,
+      "start": 813.611,
+      "end": 818.0,
+      "duration": 4.389,
+      "text": "the second version, when it is a root."
+    },
+    {
+      "index": 211,
+      "start": 818.0,
+      "end": 822.468,
+      "duration": 4.468,
+      "text": "So, if omega one equals omega nought,"
+    },
+    {
+      "index": 212,
+      "start": 822.468,
+      "end": 827.017,
+      "duration": 4.549,
+      "text": "so now our equation looks like D squared plus omega nought"
+    },
+    {
+      "index": 213,
+      "start": 827.017,
+      "end": 831.566,
+      "duration": 4.549,
+      "text": "squared, the natural frequency, y."
+    },
+    {
+      "index": 214,
+      "start": 831.566,
+      "end": 834.438,
+      "duration": 2.872,
+      "text": "But this time, the driving frequency,"
+    },
+    {
+      "index": 215,
+      "start": 834.438,
+      "end": 837.87,
+      "duration": 3.432,
+      "text": "the input frequency, is omega nought itself."
+    },
+    {
+      "index": 216,
+      "start": 837.87,
+      "end": 840.982,
+      "duration": 3.112,
+      "text": "Then, the same analysis, a lot of it is,"
+    },
+    {
+      "index": 217,
+      "start": 840.982,
+      "end": 844.972,
+      "duration": 3.99,
+      "text": "well, I'd better be careful. I'd better be careful."
+    },
+    {
+      "index": 218,
+      "start": 844.972,
+      "end": 850.0,
+      "duration": 5.028,
+      "text": "Let's go through the analysis again very rapidly."
+    },
+    {
+      "index": 219,
+      "start": 850.0,
+      "end": 853.416,
+      "duration": 3.416,
+      "text": "What we want to do is first complexify it,"
+    },
+    {
+      "index": 220,
+      "start": 853.416,
+      "end": 857.083,
+      "duration": 3.667,
+      "text": "and then solve. So, the complex equation will"
+    },
+    {
+      "index": 221,
+      "start": 857.083,
+      "end": 862.083,
+      "duration": 5.0,
+      "text": "be D squared plus omega nought squared times y tilde equals e"
+    },
+    {
+      "index": 222,
+      "start": 862.083,
+      "end": 864.916,
+      "duration": 2.833,
+      "text": "to the i omega nought t, this time."
+    },
+    {
+      "index": 223,
+      "start": 869.0,
+      "end": 872.992,
+      "duration": 3.992,
+      "text": "But now, i omega is zero of this polynomial."
+    },
+    {
+      "index": 224,
+      "start": 872.992,
+      "end": 875.684,
+      "duration": 2.692,
+      "text": "That's why I picked it, right?"
+    },
+    {
+      "index": 225,
+      "start": 875.684,
+      "end": 880.976,
+      "duration": 5.292,
+      "text": "If I plug in i omega zero, I get i omega zero"
+    },
+    {
+      "index": 226,
+      "start": 880.976,
+      "end": 886.36,
+      "duration": 5.384,
+      "text": "quantity squared plus omega nought squared."
+    },
+    {
+      "index": 227,
+      "start": 886.36,
+      "end": 888.681,
+      "duration": 2.321,
+      "text": "That's zero."
+    },
+    {
+      "index": 228,
+      "start": 888.681,
+      "end": 893.973,
+      "duration": 5.292,
+      "text": "So, I'm in the second case. So, i omega nought is a simple"
+    },
+    {
+      "index": 229,
+      "start": 893.973,
+      "end": 898.429,
+      "duration": 4.456,
+      "text": "root, simple zero, of D squared plus"
+    },
+    {
+      "index": 230,
+      "start": 898.429,
+      "end": 904.0,
+      "duration": 5.571,
+      "text": "omega nought, that polynomial squared."
+    },
+    {
+      "index": 231,
+      "start": 904.0,
+      "end": 908.212,
+      "duration": 4.212,
+      "text": "Therefore, the complex particular solution is now t e"
+    },
+    {
+      "index": 232,
+      "start": 908.212,
+      "end": 913.316,
+      "duration": 5.104,
+      "text": "to the i omega nought t divided by p prime,"
+    },
+    {
+      "index": 233,
+      "start": 913.316,
+      "end": 917.367,
+      "duration": 4.051,
+      "text": "where you plug in that root, the i omega nought."
+    },
+    {
+      "index": 234,
+      "start": 917.367,
+      "end": 919.716,
+      "duration": 2.349,
+      "text": "Now, what's p prime?"
+    },
+    {
+      "index": 235,
+      "start": 919.716,
+      "end": 922.308,
+      "duration": 2.592,
+      "text": "p prime is 2D, right?"
+    },
+    {
+      "index": 236,
+      "start": 922.308,
+      "end": 926.116,
+      "duration": 3.808,
+      "text": "If I differentiate this formally, as if D were a"
+    },
+    {
+      "index": 237,
+      "start": 926.116,
+      "end": 929.924,
+      "duration": 3.808,
+      "text": "variable, the way you differentiate polynomials,"
+    },
+    {
+      "index": 238,
+      "start": 929.924,
+      "end": 932.678,
+      "duration": 2.754,
+      "text": "the derivative, this is a constant,"
+    },
+    {
+      "index": 239,
+      "start": 932.678,
+      "end": 938.86,
+      "duration": 6.182,
+      "text": "and the derivative is 2D. So, the denominator should have"
+    },
+    {
+      "index": 240,
+      "start": 938.86,
+      "end": 942.735,
+      "duration": 3.875,
+      "text": "two times for D. You are going to plug in i"
+    },
+    {
+      "index": 241,
+      "start": 942.735,
+      "end": 947.532,
+      "duration": 4.797,
+      "text": "omega zero. So, it's 2 i omega zero."
+    },
+    {
+      "index": 242,
+      "start": 947.532,
+      "end": 951.038,
+      "duration": 3.506,
+      "text": "And now, I want the real part"
+    },
+    {
+      "index": 243,
+      "start": 951.038,
+      "end": 955.098,
+      "duration": 4.06,
+      "text": "of that, which is what? Well, think about it."
+    },
+    {
+      "index": 244,
+      "start": 955.098,
+      "end": 960.541,
+      "duration": 5.443,
+      "text": "The top is cosine plus i sine. The real part is now going to"
+    },
+    {
+      "index": 245,
+      "start": 960.541,
+      "end": 965.154,
+      "duration": 4.613,
+      "text": "come from the sine, right, because it's cosine plus"
+    },
+    {
+      "index": 246,
+      "start": 965.154,
+      "end": 969.193,
+      "duration": 4.039,
+      "text": "i sine. But this i is going to divide"
+    },
+    {
+      "index": 247,
+      "start": 969.193,
+      "end": 971.764,
+      "duration": 2.571,
+      "text": "out the i that goes with this sine."
+    },
+    {
+      "index": 248,
+      "start": 971.764,
+      "end": 975.168,
+      "duration": 3.404,
+      "text": "And, therefore, the real part is going to be t"
+    },
+    {
+      "index": 249,
+      "start": 975.168,
+      "end": 978.42,
+      "duration": 3.252,
+      "text": "times the sine, this time, of omega nought t."
+    },
+    {
+      "index": 250,
+      "start": 978.42,
+      "end": 982.277,
+      "duration": 3.857,
+      "text": "And, that's going to be divided"
+    },
+    {
+      "index": 251,
+      "start": 982.277,
+      "end": 987.042,
+      "duration": 4.765,
+      "text": "by, well, the i canceled out the i that was in front of the sine"
+    },
+    {
+      "index": 252,
+      "start": 987.042,
+      "end": 988.781,
+      "duration": 1.739,
+      "text": "function. And therefore,"
+    },
+    {
+      "index": 253,
+      "start": 988.781,
+      "end": 994.0,
+      "duration": 5.219,
+      "text": "what's left is two omega nought down below."
+    },
+    {
+      "index": 254,
+      "start": 994.0,
+      "end": 996.822,
+      "duration": 2.822,
+      "text": "So, that's our particular solution now."
+    },
+    {
+      "index": 255,
+      "start": 996.822,
+      "end": 999.645,
+      "duration": 2.823,
+      "text": "Well, it looks different from that guy."
+    },
+    {
+      "index": 256,
+      "start": 999.645,
+      "end": 1002.097,
+      "duration": 2.452,
+      "text": "It doesn't look like that anymore."
+    },
+    {
+      "index": 257,
+      "start": 1002.097,
+      "end": 1006.034,
+      "duration": 3.937,
+      "text": "What does it look like? Well, it shows the way to plot"
+    },
+    {
+      "index": 258,
+      "start": 1006.034,
+      "end": 1010.639,
+      "duration": 4.605,
+      "text": "such things is basically it's an oscillation of frequency omega"
+    },
+    {
+      "index": 259,
+      "start": 1010.639,
+      "end": 1014.279,
+      "duration": 3.64,
+      "text": "nought. But, its amplitude is changing."
+    },
+    {
+      "index": 260,
+      "start": 1014.279,
+      "end": 1018.291,
+      "duration": 4.012,
+      "text": "So, the way to do it is, as always, if you have a basic"
+    },
+    {
+      "index": 261,
+      "start": 1018.291,
+      "end": 1022.005,
+      "duration": 3.714,
+      "text": "oscillation which is neither too fast nor too slow,"
+    },
+    {
+      "index": 262,
+      "start": 1022.005,
+      "end": 1026.314,
+      "duration": 4.309,
+      "text": "think of that as the thing, and the other stuff multiplying"
+    },
+    {
+      "index": 263,
+      "start": 1026.314,
+      "end": 1030.771,
+      "duration": 4.457,
+      "text": "it, think of it as changing the amplitude of that oscillation"
+    },
+    {
+      "index": 264,
+      "start": 1030.771,
+      "end": 1034.799,
+      "duration": 4.028,
+      "text": "with time. So, the amplitude is that"
+    },
+    {
+      "index": 265,
+      "start": 1034.799,
+      "end": 1038.397,
+      "duration": 3.598,
+      "text": "function, t divided by two omega zero."
+    },
+    {
+      "index": 266,
+      "start": 1038.397,
+      "end": 1041.78,
+      "duration": 3.383,
+      "text": "So, just as we did when we talked about damping,"
+    },
+    {
+      "index": 267,
+      "start": 1041.78,
+      "end": 1045.09,
+      "duration": 3.31,
+      "text": "you plot that and it's negative on the picture."
+    },
+    {
+      "index": 268,
+      "start": 1045.09,
+      "end": 1049.481,
+      "duration": 4.391,
+      "text": "So, this is the function whose graph is t divided by two omega"
+    },
+    {
+      "index": 269,
+      "start": 1049.481,
+      "end": 1054.261,
+      "duration": 4.78,
+      "text": "nought. That's the changing amplitude,"
+    },
+    {
+      "index": 270,
+      "start": 1054.261,
+      "end": 1057.276,
+      "duration": 3.015,
+      "text": "as it were. And then, the function itself"
+    },
+    {
+      "index": 271,
+      "start": 1057.276,
+      "end": 1061.798,
+      "duration": 4.522,
+      "text": "does what oscillation it can, but it has to stay within those"
+    },
+    {
+      "index": 272,
+      "start": 1061.798,
+      "end": 1063.758,
+      "duration": 1.96,
+      "text": "lines. So, the thing that's"
+    },
+    {
+      "index": 273,
+      "start": 1063.758,
+      "end": 1067.678,
+      "duration": 3.92,
+      "text": "oscillating is sine omega nought t,"
+    },
+    {
+      "index": 274,
+      "start": 1067.678,
+      "end": 1072.125,
+      "duration": 4.447,
+      "text": "which would like to be a pure oscillation, but can't because"
+    },
+    {
+      "index": 275,
+      "start": 1072.125,
+      "end": 1075.442,
+      "duration": 3.317,
+      "text": "its amplitude is being changed by that thing."
+    },
+    {
+      "index": 276,
+      "start": 1075.442,
+      "end": 1078.909,
+      "duration": 3.467,
+      "text": "So, it's doing this, and now the rest I have to"
+    },
+    {
+      "index": 277,
+      "start": 1078.909,
+      "end": 1083.156,
+      "duration": 4.247,
+      "text": "leave to your imagination. In other words,"
+    },
+    {
+      "index": 278,
+      "start": 1083.156,
+      "end": 1087.704,
+      "duration": 4.548,
+      "text": "what happens when omega nought is equal to, when the driving"
+    },
+    {
+      "index": 279,
+      "start": 1087.704,
+      "end": 1091.019,
+      "duration": 3.315,
+      "text": "frequency is actually equal to omega nought,"
+    },
+    {
+      "index": 280,
+      "start": 1091.019,
+      "end": 1095.567,
+      "duration": 4.548,
+      "text": "mathematically this turns into a different looking solution,"
+    },
+    {
+      "index": 281,
+      "start": 1095.567,
+      "end": 1098.496,
+      "duration": 2.929,
+      "text": "one with steadily increasing amplitude."
+    },
+    {
+      "index": 282,
+      "start": 1098.496,
+      "end": 1102.428,
+      "duration": 3.932,
+      "text": "The amplitude increases linearly like the function t"
+    },
+    {
+      "index": 283,
+      "start": 1102.428,
+      "end": 1105.974,
+      "duration": 3.546,
+      "text": "divided by two omega nought."
+    },
+    {
+      "index": 284,
+      "start": 1105.974,
+      "end": 1109.443,
+      "duration": 3.469,
+      "text": "Well, many people are upset by this, slightly,"
+    },
+    {
+      "index": 285,
+      "start": 1109.443,
+      "end": 1112.68,
+      "duration": 3.237,
+      "text": "in the sense that there is a funny feeling."
+    },
+    {
+      "index": 286,
+      "start": 1112.68,
+      "end": 1118.0,
+      "duration": 5.32,
+      "text": "How is it that that solution can turn into this one?"
+    },
+    {
+      "index": 287,
+      "start": 1118.0,
+      "end": 1123.111,
+      "duration": 5.111,
+      "text": "If I simply let omega one go to omega zero, what happens?"
+    },
+    {
+      "index": 288,
+      "start": 1123.111,
+      "end": 1127.492,
+      "duration": 4.381,
+      "text": "Well, the pink curve just gets taller and taller,"
+    },
+    {
+      "index": 289,
+      "start": 1127.492,
+      "end": 1132.329,
+      "duration": 4.837,
+      "text": "and after a while all you see of it is just a bunch of"
+    },
+    {
+      "index": 290,
+      "start": 1132.329,
+      "end": 1137.714,
+      "duration": 5.385,
+      "text": "vertical lines which seem to be spaced at whatever the right"
+    },
+    {
+      "index": 291,
+      "start": 1137.714,
+      "end": 1143.961,
+      "duration": 6.247,
+      "text": "period is for that function. It's sort of like being in a"
+    },
+    {
+      "index": 292,
+      "start": 1143.961,
+      "end": 1148.932,
+      "duration": 4.971,
+      "text": "first story window and watching a giraffe go by."
+    },
+    {
+      "index": 293,
+      "start": 1148.932,
+      "end": 1152.0,
+      "duration": 3.068,
+      "text": "All you see is that. Okay."
+    },
+    {
+      "index": 294,
+      "start": 1160.0,
+      "end": 1164.436,
+      "duration": 4.436,
+      "text": "So, my concern is how does that function turn into this one?"
+    },
+    {
+      "index": 295,
+      "start": 1164.436,
+      "end": 1167.518,
+      "duration": 3.082,
+      "text": "I have something in mind to remind you of,"
+    },
+    {
+      "index": 296,
+      "start": 1167.518,
+      "end": 1171.428,
+      "duration": 3.91,
+      "text": "and that's why we'll go through this little exercise."
+    },
+    {
+      "index": 297,
+      "start": 1171.428,
+      "end": 1175.112,
+      "duration": 3.684,
+      "text": "It's a simple exercise. But the function of it is,"
+    },
+    {
+      "index": 298,
+      "start": 1175.112,
+      "end": 1179.022,
+      "duration": 3.91,
+      "text": "of course that as omega one goes to omega zero cannot"
+    },
+    {
+      "index": 299,
+      "start": 1179.022,
+      "end": 1183.157,
+      "duration": 4.135,
+      "text": "possibly turn into this. It's doing the wrong thing near"
+    },
+    {
+      "index": 300,
+      "start": 1183.157,
+      "end": 1185.338,
+      "duration": 2.181,
+      "text": "zero. It's already zooming up."
+    },
+    {
+      "index": 301,
+      "start": 1185.338,
+      "end": 1189.022,
+      "duration": 3.684,
+      "text": "But, the point is, this is not the only particular"
+    },
+    {
+      "index": 302,
+      "start": 1189.022,
+      "end": 1192.932,
+      "duration": 3.91,
+      "text": "solution on the block. Any solution whatsoever of the"
+    },
+    {
+      "index": 303,
+      "start": 1192.932,
+      "end": 1196.616,
+      "duration": 3.684,
+      "text": "differential equation, the inhomogeneous equation,"
+    },
+    {
+      "index": 304,
+      "start": 1196.616,
+      "end": 1201.743,
+      "duration": 5.127,
+      "text": "is a particular solution. It's like Fred Rogers:"
+    },
+    {
+      "index": 305,
+      "start": 1201.743,
+      "end": 1205.469,
+      "duration": 3.726,
+      "text": "everybody is special. Okay, so all solutions are"
+    },
+    {
+      "index": 306,
+      "start": 1205.469,
+      "end": 1208.481,
+      "duration": 3.012,
+      "text": "special. We don't have to use that one."
+    },
+    {
+      "index": 307,
+      "start": 1208.481,
+      "end": 1211.493,
+      "duration": 3.012,
+      "text": "So, I will use, where are all the other"
+    },
+    {
+      "index": 308,
+      "start": 1211.493,
+      "end": 1214.268,
+      "duration": 2.775,
+      "text": "solutions? So, I'm going back to the"
+    },
+    {
+      "index": 309,
+      "start": 1214.268,
+      "end": 1218.152,
+      "duration": 3.884,
+      "text": "equation D squared plus omega zero squared,"
+    },
+    {
+      "index": 310,
+      "start": 1218.152,
+      "end": 1220.213,
+      "duration": 2.061,
+      "text": "applied to y,"
+    },
+    {
+      "index": 311,
+      "start": 1220.213,
+      "end": 1224.018,
+      "duration": 3.805,
+      "text": "is equal to cosine omega one t."
+    },
+    {
+      "index": 312,
+      "start": 1224.018,
+      "end": 1227.981,
+      "duration": 3.963,
+      "text": "Now, the particular solution we found was that one,"
+    },
+    {
+      "index": 313,
+      "start": 1227.981,
+      "end": 1232.737,
+      "duration": 4.756,
+      "text": "cosine omega one t divided by that omega nought squared minus"
+    },
+    {
+      "index": 314,
+      "start": 1232.737,
+      "end": 1239.0,
+      "duration": 6.263,
+      "text": "omega one squared."
+    },
+    {
+      "index": 315,
+      "start": 1239.0,
+      "end": 1244.276,
+      "duration": 5.276,
+      "text": "What do the other particular solutions look like?"
+    },
+    {
+      "index": 316,
+      "start": 1244.276,
+      "end": 1249.223,
+      "duration": 4.947,
+      "text": "Well, in general, any particular solution will"
+    },
+    {
+      "index": 317,
+      "start": 1249.223,
+      "end": 1254.939,
+      "duration": 5.716,
+      "text": "look like that one we found, what is it, omega nought"
+    },
+    {
+      "index": 318,
+      "start": 1254.939,
+      "end": 1261.425,
+      "duration": 6.486,
+      "text": "squared minus omega one squared,"
+    },
+    {
+      "index": 319,
+      "start": 1261.425,
+      "end": 1267.911,
+      "duration": 6.486,
+      "text": "plus I'm allowed to add to it any piece of the complementary"
+    },
+    {
+      "index": 320,
+      "start": 1267.911,
+      "end": 1271.433,
+      "duration": 3.522,
+      "text": "solution. Equally particular,"
+    },
+    {
+      "index": 321,
+      "start": 1271.433,
+      "end": 1274.754,
+      "duration": 3.321,
+      "text": "and equally good, as a particular solution is"
+    },
+    {
+      "index": 322,
+      "start": 1274.754,
+      "end": 1278.981,
+      "duration": 4.227,
+      "text": "this plus anything which solved the homogeneous equation."
+    },
+    {
+      "index": 323,
+      "start": 1278.981,
+      "end": 1283.433,
+      "duration": 4.452,
+      "text": "Now, all I'm going to do is pick out one good function which"
+    },
+    {
+      "index": 324,
+      "start": 1283.433,
+      "end": 1286.981,
+      "duration": 3.548,
+      "text": "solves the homogeneous equation, and here it is."
+    },
+    {
+      "index": 325,
+      "start": 1286.981,
+      "end": 1292.295,
+      "duration": 5.314,
+      "text": "It's the function minus cosine. In fact, what does solve the"
+    },
+    {
+      "index": 326,
+      "start": 1292.295,
+      "end": 1296.557,
+      "duration": 4.262,
+      "text": "homogeneous equation? Well, it's solved by sine omega"
+    },
+    {
+      "index": 327,
+      "start": 1296.557,
+      "end": 1300.491,
+      "duration": 3.934,
+      "text": "nought t, cosine omega nought t,"
+    },
+    {
+      "index": 328,
+      "start": 1300.491,
+      "end": 1304.344,
+      "duration": 3.853,
+      "text": "and any linear combination of"
+    },
+    {
+      "index": 329,
+      "start": 1304.344,
+      "end": 1307.377,
+      "duration": 3.033,
+      "text": "those. So, out of all those functions,"
+    },
+    {
+      "index": 330,
+      "start": 1307.377,
+      "end": 1311.475,
+      "duration": 4.098,
+      "text": "the one I'm going to pick is cosine omega nought t."
+    },
+    {
+      "index": 331,
+      "start": 1311.475,
+      "end": 1315.081,
+      "duration": 3.606,
+      "text": "And, I'm going to divide it by this same guy."
+    },
+    {
+      "index": 332,
+      "start": 1315.081,
+      "end": 1320.0,
+      "duration": 4.919,
+      "text": "So, this is part of the complementary solution."
+    },
+    {
+      "index": 333,
+      "start": 1320.0,
+      "end": 1322.869,
+      "duration": 2.869,
+      "text": "That's what we call the complementary solution,"
+    },
+    {
+      "index": 334,
+      "start": 1322.869,
+      "end": 1326.049,
+      "duration": 3.18,
+      "text": "the solution to the associated homogeneous equation,"
+    },
+    {
+      "index": 335,
+      "start": 1326.049,
+      "end": 1328.918,
+      "duration": 2.869,
+      "text": "to the reduced equation. Call it what you like."
+    },
+    {
+      "index": 336,
+      "start": 1328.918,
+      "end": 1332.224,
+      "duration": 3.306,
+      "text": "So, this is one of the guys in there, and it's still a"
+    },
+    {
+      "index": 337,
+      "start": 1332.224,
+      "end": 1335.28,
+      "duration": 3.056,
+      "text": "particular solution to take the one I first found,"
+    },
+    {
+      "index": 338,
+      "start": 1335.28,
+      "end": 1339.022,
+      "duration": 3.742,
+      "text": "and add to it anything which solves the homogeneous equation."
+    },
+    {
+      "index": 339,
+      "start": 1339.022,
+      "end": 1342.203,
+      "duration": 3.181,
+      "text": "I showed you that when we first set out to solve the"
+    },
+    {
+      "index": 340,
+      "start": 1342.203,
+      "end": 1344.261,
+      "duration": 2.058,
+      "text": "inhomogeneous equation in general."
+    },
+    {
+      "index": 341,
+      "start": 1344.261,
+      "end": 1347.13,
+      "duration": 2.869,
+      "text": "Now, why do I pick that? Well, I'm going to now"
+    },
+    {
+      "index": 342,
+      "start": 1347.13,
+      "end": 1351.9,
+      "duration": 4.77,
+      "text": "calculate, what's the limit? So, these guys are also good"
+    },
+    {
+      "index": 343,
+      "start": 1351.9,
+      "end": 1355.226,
+      "duration": 3.326,
+      "text": "solutions to that. This is a good solution to that"
+    },
+    {
+      "index": 344,
+      "start": 1355.226,
+      "end": 1358.619,
+      "duration": 3.393,
+      "text": "equation, this equation. All I'm going to do now is"
+    },
+    {
+      "index": 345,
+      "start": 1358.619,
+      "end": 1362.76,
+      "duration": 4.141,
+      "text": "calculate the limit as omega one approaches omega zero of this"
+    },
+    {
+      "index": 346,
+      "start": 1362.76,
+      "end": 1366.153,
+      "duration": 3.393,
+      "text": "function. Well, what is that?"
+    },
+    {
+      "index": 347,
+      "start": 1366.153,
+      "end": 1370.158,
+      "duration": 4.005,
+      "text": "It's cosine omega one t minus cosine omega zero t divided by"
+    },
+    {
+      "index": 348,
+      "start": 1370.158,
+      "end": 1374.366,
+      "duration": 4.208,
+      "text": "omega nought squared minus omega one squared."
+    },
+    {
+      "index": 349,
+      "start": 1377.081,
+      "end": 1382.123,
+      "duration": 5.042,
+      "text": "Now, you see why I did that. If I let just this guy,"
+    },
+    {
+      "index": 350,
+      "start": 1382.123,
+      "end": 1387.015,
+      "duration": 4.892,
+      "text": "omega one approaches omega zero,"
+    },
+    {
+      "index": 351,
+      "start": 1387.015,
+      "end": 1390.338,
+      "duration": 3.323,
+      "text": "I get infinity. I don't get anything."
+    },
+    {
+      "index": 352,
+      "start": 1390.338,
+      "end": 1394.861,
+      "duration": 4.523,
+      "text": "But, this is different here because I fixed it up,"
+    },
+    {
+      "index": 353,
+      "start": 1394.861,
+      "end": 1397.907,
+      "duration": 3.046,
+      "text": "now. The denominator becomes zero,"
+    },
+    {
+      "index": 354,
+      "start": 1397.907,
+      "end": 1401.692,
+      "duration": 3.785,
+      "text": "but so does the numerator. In other words,"
+    },
+    {
+      "index": 355,
+      "start": 1401.692,
+      "end": 1406.215,
+      "duration": 4.523,
+      "text": "I've put myself in position to use L'Hopital rule."
+    },
+    {
+      "index": 356,
+      "start": 1406.215,
+      "end": 1409.723,
+      "duration": 3.508,
+      "text": "So, let's L'Hopital it. It's the limit."
+    },
+    {
+      "index": 357,
+      "start": 1409.723,
+      "end": 1414.707,
+      "duration": 4.984,
+      "text": "As omega one approaches omega zero, and what do you do?"
+    },
+    {
+      "index": 358,
+      "start": 1414.707,
+      "end": 1422.0,
+      "duration": 7.293,
+      "text": "You differentiate the top and the bottom with respect to what?"
+    },
+    {
+      "index": 359,
+      "start": 1422.0,
+      "end": 1424.223,
+      "duration": 2.223,
+      "text": "Right, with respect to omega one."
+    },
+    {
+      "index": 360,
+      "start": 1424.223,
+      "end": 1427.629,
+      "duration": 3.406,
+      "text": "Omega one is the variable. That's what's changing."
+    },
+    {
+      "index": 361,
+      "start": 1427.629,
+      "end": 1430.617,
+      "duration": 2.988,
+      "text": "The t that I'm thinking of is, I'm thinking,"
+    },
+    {
+      "index": 362,
+      "start": 1430.617,
+      "end": 1433.884,
+      "duration": 3.267,
+      "text": "for the temporary fixed. This has a fixed value."
+    },
+    {
+      "index": 363,
+      "start": 1433.884,
+      "end": 1437.289,
+      "duration": 3.405,
+      "text": "Omega nought is fixed. All that's changing in this"
+    },
+    {
+      "index": 364,
+      "start": 1437.289,
+      "end": 1441.032,
+      "duration": 3.743,
+      "text": "limit operation is omega one. And therefore,"
+    },
+    {
+      "index": 365,
+      "start": 1441.032,
+      "end": 1445.013,
+      "duration": 3.981,
+      "text": "it's with respect to omega one that I differentiate it."
+    },
+    {
+      "index": 366,
+      "start": 1445.013,
+      "end": 1448.258,
+      "duration": 3.245,
+      "text": "You got that? Well, you are in no position to"
+    },
+    {
+      "index": 367,
+      "start": 1448.258,
+      "end": 1451.281,
+      "duration": 3.023,
+      "text": "say yes or no, so I shouldn't even ask the"
+    },
+    {
+      "index": 368,
+      "start": 1451.281,
+      "end": 1454.156,
+      "duration": 2.875,
+      "text": "question, but okay, rhetorical question."
+    },
+    {
+      "index": 369,
+      "start": 1454.156,
+      "end": 1457.548,
+      "duration": 3.392,
+      "text": "All right, let's differentiate this expression,"
+    },
+    {
+      "index": 370,
+      "start": 1457.548,
+      "end": 1460.792,
+      "duration": 3.244,
+      "text": "the top and bottom with respect to omega one."
+    },
+    {
+      "index": 371,
+      "start": 1460.792,
+      "end": 1464.995,
+      "duration": 4.203,
+      "text": "So, the derivative of the top with respect to omega one is"
+    },
+    {
+      "index": 372,
+      "start": 1464.995,
+      "end": 1468.239,
+      "duration": 3.244,
+      "text": "negative sine omega one t."
+    },
+    {
+      "index": 373,
+      "start": 1468.239,
+      "end": 1472.0,
+      "duration": 3.761,
+      "text": "But, I have to use the chain rule."
+    },
+    {
+      "index": 374,
+      "start": 1472.0,
+      "end": 1475.704,
+      "duration": 3.704,
+      "text": "That's differentiating with respect to this argument,"
+    },
+    {
+      "index": 375,
+      "start": 1475.704,
+      "end": 1478.839,
+      "duration": 3.135,
+      "text": "this variable. But now, I must take times the"
+    },
+    {
+      "index": 376,
+      "start": 1478.839,
+      "end": 1483.185,
+      "duration": 4.346,
+      "text": "derivative of this thing with respect to omega one."
+    },
+    {
+      "index": 377,
+      "start": 1483.185,
+      "end": 1486.106,
+      "duration": 2.921,
+      "text": "And that is t is the constant, so times t."
+    },
+    {
+      "index": 378,
+      "start": 1486.106,
+      "end": 1489.954,
+      "duration": 3.848,
+      "text": "And, how about the bottom? The derivative of the bottom"
+    },
+    {
+      "index": 379,
+      "start": 1489.954,
+      "end": 1493.73,
+      "duration": 3.776,
+      "text": "with respect to omega one is, well, that's a constant."
+    },
+    {
+      "index": 380,
+      "start": 1493.73,
+      "end": 1497.292,
+      "duration": 3.562,
+      "text": "So, it becomes zero. And, this becomes negative two"
+    },
+    {
+      "index": 381,
+      "start": 1497.292,
+      "end": 1501.966,
+      "duration": 4.674,
+      "text": "omega one. So, it's the limit of this"
+    },
+    {
+      "index": 382,
+      "start": 1501.966,
+      "end": 1505.976,
+      "duration": 4.01,
+      "text": "expression as omega one approaches omega zero."
+    },
+    {
+      "index": 383,
+      "start": 1505.976,
+      "end": 1509.229,
+      "duration": 3.253,
+      "text": "And now it's not indeterminate"
+    },
+    {
+      "index": 384,
+      "start": 1509.229,
+      "end": 1510.893,
+      "duration": 1.664,
+      "text": "anymore. The answer is,"
+    },
+    {
+      "index": 385,
+      "start": 1510.893,
+      "end": 1515.205,
+      "duration": 4.312,
+      "text": "the negative signs cancel. It's simply t sine omega nought"
+    },
+    {
+      "index": 386,
+      "start": 1515.205,
+      "end": 1519.063,
+      "duration": 3.858,
+      "text": "t divided by two omega nought."
+    },
+    {
+      "index": 387,
+      "start": 1519.063,
+      "end": 1521.787,
+      "duration": 2.724,
+      "text": "So, that's how we get that"
+    },
+    {
+      "index": 388,
+      "start": 1521.787,
+      "end": 1524.434,
+      "duration": 2.647,
+      "text": "solution. It is a limit as omega one,"
+    },
+    {
+      "index": 389,
+      "start": 1524.434,
+      "end": 1528.52,
+      "duration": 4.086,
+      "text": "but not of the particular solution we found"
+    },
+    {
+      "index": 390,
+      "start": 1528.52,
+      "end": 1534.231,
+      "duration": 5.711,
+      "text": "first, but of this other one. Now, it's still too much"
+    },
+    {
+      "index": 391,
+      "start": 1534.231,
+      "end": 1537.671,
+      "duration": 3.44,
+      "text": "algebra. I mean, what's going on here?"
+    },
+    {
+      "index": 392,
+      "start": 1537.671,
+      "end": 1541.668,
+      "duration": 3.997,
+      "text": "Well, that's something else you should know."
+    },
+    {
+      "index": 393,
+      "start": 1541.668,
+      "end": 1546.782,
+      "duration": 5.114,
+      "text": "Okay, so my question is, therefore, what does this mean?"
+    },
+    {
+      "index": 394,
+      "start": 1546.782,
+      "end": 1550.501,
+      "duration": 3.719,
+      "text": "What's the geometric meaning of all this?"
+    },
+    {
+      "index": 395,
+      "start": 1550.501,
+      "end": 1554.498,
+      "duration": 3.997,
+      "text": "In other words, what does that function look"
+    },
+    {
+      "index": 396,
+      "start": 1554.498,
+      "end": 1556.823,
+      "duration": 2.325,
+      "text": "like? Well, that's another"
+    },
+    {
+      "index": 397,
+      "start": 1556.823,
+      "end": 1561.378,
+      "duration": 4.555,
+      "text": "trigonometric identity, which in your book is just"
+    },
+    {
+      "index": 398,
+      "start": 1561.378,
+      "end": 1567.142,
+      "duration": 5.764,
+      "text": "buried as half of one line sort of casual as if everybody knows"
+    },
+    {
+      "index": 399,
+      "start": 1567.142,
+      "end": 1573.0,
+      "duration": 5.858,
+      "text": "it, and I know that virtually no one knows it."
+    },
+    {
+      "index": 400,
+      "start": 1573.0,
+      "end": 1577.274,
+      "duration": 4.274,
+      "text": "But, here's your chance. So, the cosine of B minus the"
+    },
+    {
+      "index": 401,
+      "start": 1577.274,
+      "end": 1582.354,
+      "duration": 5.08,
+      "text": "cosine of A can be expressed as a product of"
+    },
+    {
+      "index": 402,
+      "start": 1582.354,
+      "end": 1585.096,
+      "duration": 2.742,
+      "text": "signs. It's the sine of (A minus B)"
+    },
+    {
+      "index": 403,
+      "start": 1585.096,
+      "end": 1589.612,
+      "duration": 4.516,
+      "text": "over two times the sine of (A plus B) over two,"
+    },
+    {
+      "index": 404,
+      "start": 1589.612,
+      "end": 1593.0,
+      "duration": 3.388,
+      "text": "I believe."
+    },
+    {
+      "index": 405,
+      "start": 1593.0,
+      "end": 1597.752,
+      "duration": 4.752,
+      "text": "My only uncertainty: is there a two in front of"
+    },
+    {
+      "index": 406,
+      "start": 1597.752,
+      "end": 1600.749,
+      "duration": 2.997,
+      "text": "that? I think there has to be."
+    },
+    {
+      "index": 407,
+      "start": 1600.749,
+      "end": 1602.712,
+      "duration": 1.963,
+      "text": "Let me check. Sorry."
+    },
+    {
+      "index": 408,
+      "start": 1602.712,
+      "end": 1606.948,
+      "duration": 4.236,
+      "text": "Is there a two? I wouldn't trust my memory"
+    },
+    {
+      "index": 409,
+      "start": 1606.948,
+      "end": 1609.221,
+      "duration": 2.273,
+      "text": "anyway. I'd look it up."
+    },
+    {
+      "index": 410,
+      "start": 1609.221,
+      "end": 1611.907,
+      "duration": 2.686,
+      "text": "I did look it up, two, yes."
+    },
+    {
+      "index": 411,
+      "start": 1611.907,
+      "end": 1617.59,
+      "duration": 5.683,
+      "text": "If you had to prove that, you could use the sine formula"
+    },
+    {
+      "index": 412,
+      "start": 1617.59,
+      "end": 1623.248,
+      "duration": 5.658,
+      "text": "to expand this out. That would be a bad way to do"
+    },
+    {
+      "index": 413,
+      "start": 1623.248,
+      "end": 1625.807,
+      "duration": 2.559,
+      "text": "it. The best way is to use complex"
+    },
+    {
+      "index": 414,
+      "start": 1625.807,
+      "end": 1628.598,
+      "duration": 2.791,
+      "text": "numbers. Express the sign in terms of"
+    },
+    {
+      "index": 415,
+      "start": 1628.598,
+      "end": 1630.847,
+      "duration": 2.249,
+      "text": "complex numbers, exponentials,"
+    },
+    {
+      "index": 416,
+      "start": 1630.847,
+      "end": 1633.716,
+      "duration": 2.869,
+      "text": "you know, the backwards Euler formula."
+    },
+    {
+      "index": 417,
+      "start": 1633.716,
+      "end": 1637.128,
+      "duration": 3.412,
+      "text": "Then do it here, and then just multiply those"
+    },
+    {
+      "index": 418,
+      "start": 1637.128,
+      "end": 1640.772,
+      "duration": 3.644,
+      "text": "two expressions involving exponentials together,"
+    },
+    {
+      "index": 419,
+      "start": 1640.772,
+      "end": 1643.409,
+      "duration": 2.637,
+      "text": "and cancel, cancel, cancel, cancel,"
+    },
+    {
+      "index": 420,
+      "start": 1643.409,
+      "end": 1646.898,
+      "duration": 3.489,
+      "text": "and this is what you will end up with."
+    },
+    {
+      "index": 421,
+      "start": 1646.898,
+      "end": 1651.663,
+      "duration": 4.765,
+      "text": "You see why I did this. It's because this has that"
+    },
+    {
+      "index": 422,
+      "start": 1651.663,
+      "end": 1653.965,
+      "duration": 2.302,
+      "text": "form. So, let's apply that formula to"
+    },
+    {
+      "index": 423,
+      "start": 1653.965,
+      "end": 1656.076,
+      "duration": 2.111,
+      "text": "it. So, what's the left-hand side?"
+    },
+    {
+      "index": 424,
+      "start": 1656.076,
+      "end": 1659.978,
+      "duration": 3.902,
+      "text": "B is omega one t, and A is omega nought t."
+    },
+    {
+      "index": 425,
+      "start": 1659.978,
+      "end": 1662.281,
+      "duration": 2.303,
+      "text": "So, this is omega one t,"
+    },
+    {
+      "index": 426,
+      "start": 1662.281,
+      "end": 1664.776,
+      "duration": 2.495,
+      "text": "and this is omega nought t"
+    },
+    {
+      "index": 427,
+      "start": 1664.776,
+      "end": 1667.398,
+      "duration": 2.622,
+      "text": "All right, so what we get is"
+    },
+    {
+      "index": 428,
+      "start": 1667.398,
+      "end": 1671.364,
+      "duration": 3.966,
+      "text": "that the cosine of omega one t minus the cosine of omega nought"
+    },
+    {
+      "index": 429,
+      "start": 1671.364,
+      "end": 1674.946,
+      "duration": 3.582,
+      "text": "t, which is exactly the"
+    },
+    {
+      "index": 430,
+      "start": 1674.946,
+      "end": 1680.0,
+      "duration": 5.054,
+      "text": "numerator of this function that I'm trying to get a handle on."
+    },
+    {
+      "index": 431,
+      "start": 1680.0,
+      "end": 1682.792,
+      "duration": 2.792,
+      "text": "Then we will divide it by its amplitude."
+    },
+    {
+      "index": 432,
+      "start": 1682.792,
+      "end": 1685.871,
+      "duration": 3.079,
+      "text": "So, that's this constant factor that's real."
+    },
+    {
+      "index": 433,
+      "start": 1685.871,
+      "end": 1690.381,
+      "duration": 4.51,
+      "text": "It's a small number because I'm thinking of omega one"
+    },
+    {
+      "index": 434,
+      "start": 1690.381,
+      "end": 1693.675,
+      "duration": 3.294,
+      "text": "as being rather close to omega zero,"
+    },
+    {
+      "index": 435,
+      "start": 1693.675,
+      "end": 1697.828,
+      "duration": 4.153,
+      "text": "and getting closer and closer. What does this tell us about"
+    },
+    {
+      "index": 436,
+      "start": 1697.828,
+      "end": 1701.264,
+      "duration": 3.436,
+      "text": "the right-hand side? Well, the right-hand side is"
+    },
+    {
+      "index": 437,
+      "start": 1701.264,
+      "end": 1704.415,
+      "duration": 3.151,
+      "text": "twice the sine of A minus B."
+    },
+    {
+      "index": 438,
+      "start": 1704.415,
+      "end": 1708.424,
+      "duration": 4.009,
+      "text": "Now, that's good because these guys sort of resemble each"
+    },
+    {
+      "index": 439,
+      "start": 1708.424,
+      "end": 1712.217,
+      "duration": 3.793,
+      "text": "other. So, that's (omega nought minus"
+    },
+    {
+      "index": 440,
+      "start": 1712.217,
+      "end": 1715.247,
+      "duration": 3.03,
+      "text": "omega one) times t."
+    },
+    {
+      "index": 441,
+      "start": 1715.247,
+      "end": 1719.533,
+      "duration": 4.286,
+      "text": "That's A minus B, and I'm supposed to divide that"
+    },
+    {
+      "index": 442,
+      "start": 1719.533,
+      "end": 1722.341,
+      "duration": 2.808,
+      "text": "by two. And then, the other one will be"
+    },
+    {
+      "index": 443,
+      "start": 1722.341,
+      "end": 1726.258,
+      "duration": 3.917,
+      "text": "the same thing with plus: sine omega nought plus omega"
+    },
+    {
+      "index": 444,
+      "start": 1726.258,
+      "end": 1730.027,
+      "duration": 3.769,
+      "text": "one over two times t."
+    },
+    {
+      "index": 445,
+      "start": 1730.027,
+      "end": 1732.614,
+      "duration": 2.587,
+      "text": "Now, how big is this, approximately?"
+    },
+    {
+      "index": 446,
+      "start": 1732.614,
+      "end": 1736.752,
+      "duration": 4.138,
+      "text": "Remember, think of omega one as close to omega zero."
+    },
+    {
+      "index": 447,
+      "start": 1736.752,
+      "end": 1739.93,
+      "duration": 3.178,
+      "text": "Then, this is approximately"
+    },
+    {
+      "index": 448,
+      "start": 1739.93,
+      "end": 1743.866,
+      "duration": 3.936,
+      "text": "omega zero. So this part is approximately"
+    },
+    {
+      "index": 449,
+      "start": 1743.866,
+      "end": 1746.312,
+      "duration": 2.446,
+      "text": "sine of omega zero t."
+    },
+    {
+      "index": 450,
+      "start": 1746.312,
+      "end": 1749.852,
+      "duration": 3.54,
+      "text": "This part, on the other hand, that's a very small thing."
+    },
+    {
+      "index": 451,
+      "start": 1749.852,
+      "end": 1753.714,
+      "duration": 3.862,
+      "text": "Okay, now what I want to know is what does this function look"
+    },
+    {
+      "index": 452,
+      "start": 1753.714,
+      "end": 1755.839,
+      "duration": 2.125,
+      "text": "like? The interest in knowing what"
+    },
+    {
+      "index": 453,
+      "start": 1755.839,
+      "end": 1759.572,
+      "duration": 3.733,
+      "text": "the function looks like it is because we want to be able to"
+    },
+    {
+      "index": 454,
+      "start": 1759.572,
+      "end": 1761.825,
+      "duration": 2.253,
+      "text": "see that it's limited is that thing."
+    },
+    {
+      "index": 455,
+      "start": 1761.825,
+      "end": 1765.301,
+      "duration": 3.476,
+      "text": "You can't tell what's what its limit is, geometrically,"
+    },
+    {
+      "index": 456,
+      "start": 1765.301,
+      "end": 1770.0,
+      "duration": 4.699,
+      "text": "unless you know it looks like. So, what does it look like?"
+    },
+    {
+      "index": 457,
+      "start": 1770.0,
+      "end": 1775.844,
+      "duration": 5.844,
+      "text": "Well, again, the way to analyze it is the"
+    },
+    {
+      "index": 458,
+      "start": 1775.844,
+      "end": 1781.543,
+      "duration": 5.699,
+      "text": "thing, that thing. What you think of is,"
+    },
+    {
+      "index": 459,
+      "start": 1781.543,
+      "end": 1789.287,
+      "duration": 7.744,
+      "text": "yeah, of course you cannot divide one side of equality"
+    },
+    {
+      "index": 460,
+      "start": 1789.287,
+      "end": 1796.155,
+      "duration": 6.868,
+      "text": "without dividing the equation by the other side."
+    },
+    {
+      "index": 461,
+      "start": 1796.155,
+      "end": 1802.0,
+      "duration": 5.845,
+      "text": "So, that's got to be there, too."
+    },
+    {
+      "index": 462,
+      "start": 1802.0,
+      "end": 1806.503,
+      "duration": 4.503,
+      "text": "Now, what does that look like? Well, the way to think of it"
+    },
+    {
+      "index": 463,
+      "start": 1806.503,
+      "end": 1810.618,
+      "duration": 4.115,
+      "text": "is, here is something with a normal sort of frequency,"
+    },
+    {
+      "index": 464,
+      "start": 1810.618,
+      "end": 1814.112,
+      "duration": 3.494,
+      "text": "omega nought. It's doing its thing."
+    },
+    {
+      "index": 465,
+      "start": 1814.112,
+      "end": 1816.752,
+      "duration": 2.64,
+      "text": "It's a sine curve. It's doing that."
+    },
+    {
+      "index": 466,
+      "start": 1816.752,
+      "end": 1819.625,
+      "duration": 2.873,
+      "text": "What's this? Think of all this part as"
+    },
+    {
+      "index": 467,
+      "start": 1819.625,
+      "end": 1823.197,
+      "duration": 3.572,
+      "text": "varying amplitude. It's just another example of"
+    },
+    {
+      "index": 468,
+      "start": 1823.197,
+      "end": 1826.225,
+      "duration": 3.028,
+      "text": "what I gave you before. Here is a basic,"
+    },
+    {
+      "index": 469,
+      "start": 1826.225,
+      "end": 1829.72,
+      "duration": 3.495,
+      "text": "pure oscillation, and now, think of everything"
+    },
+    {
+      "index": 470,
+      "start": 1829.72,
+      "end": 1835.0,
+      "duration": 5.28,
+      "text": "else that's multiplying it as varying its amplitude."
+    },
+    {
+      "index": 471,
+      "start": 1835.0,
+      "end": 1838.886,
+      "duration": 3.886,
+      "text": "All right, so what does that thing look like?"
+    },
+    {
+      "index": 472,
+      "start": 1838.886,
+      "end": 1844.01,
+      "duration": 5.124,
+      "text": "Well, first what we want to do is plot the amplitude lines."
+    },
+    {
+      "index": 473,
+      "start": 1844.01,
+      "end": 1848.515,
+      "duration": 4.505,
+      "text": "Now, what will they be? This is sine of an extremely"
+    },
+    {
+      "index": 474,
+      "start": 1848.515,
+      "end": 1852.402,
+      "duration": 3.887,
+      "text": "small number times t. The frequency is small."
+    },
+    {
+      "index": 475,
+      "start": 1852.402,
+      "end": 1857.438,
+      "duration": 5.036,
+      "text": "How does the sine curve look if its frequency is very low,"
+    },
+    {
+      "index": 476,
+      "start": 1857.438,
+      "end": 1862.301,
+      "duration": 4.863,
+      "text": "very close to zero? Well, that must mean its period"
+    },
+    {
+      "index": 477,
+      "start": 1862.301,
+      "end": 1865.345,
+      "duration": 3.044,
+      "text": "is very large. Here's something with a big"
+    },
+    {
+      "index": 478,
+      "start": 1865.345,
+      "end": 1868.241,
+      "duration": 2.896,
+      "text": "frequency. Here's something with a very,"
+    },
+    {
+      "index": 479,
+      "start": 1868.241,
+      "end": 1871.582,
+      "duration": 3.341,
+      "text": "very low frequency. Now, with a low frequency,"
+    },
+    {
+      "index": 480,
+      "start": 1871.582,
+      "end": 1875.814,
+      "duration": 4.232,
+      "text": "it would hardly get off the ground and get up to one here,"
+    },
+    {
+      "index": 481,
+      "start": 1875.814,
+      "end": 1879.675,
+      "duration": 3.861,
+      "text": "and it would do that. But, it's made to look a little"
+    },
+    {
+      "index": 482,
+      "start": 1879.675,
+      "end": 1883.61,
+      "duration": 3.935,
+      "text": "more presentable because of this coefficient in front,"
+    },
+    {
+      "index": 483,
+      "start": 1883.61,
+      "end": 1887.396,
+      "duration": 3.786,
+      "text": "which is rather large. And so, what this thing looks"
+    },
+    {
+      "index": 484,
+      "start": 1887.396,
+      "end": 1892.0,
+      "duration": 4.604,
+      "text": "like, I won't pause to analyze it more exactly."
+    },
+    {
+      "index": 485,
+      "start": 1892.0,
+      "end": 1896.461,
+      "duration": 4.461,
+      "text": "It's something which goes up at a reasonable rate for quite a"
+    },
+    {
+      "index": 486,
+      "start": 1896.461,
+      "end": 1899.435,
+      "duration": 2.974,
+      "text": "while, and let's say that's quite awhile."
+    },
+    {
+      "index": 487,
+      "start": 1899.435,
+      "end": 1902.41,
+      "duration": 2.975,
+      "text": "And then it comes down, and then it goes,"
+    },
+    {
+      "index": 488,
+      "start": 1902.41,
+      "end": 1905.384,
+      "duration": 2.974,
+      "text": "and so on. Of course, in figuring out its"
+    },
+    {
+      "index": 489,
+      "start": 1905.384,
+      "end": 1909.325,
+      "duration": 3.941,
+      "text": "amplitude, we have to be willing to draw its negative,"
+    },
+    {
+      "index": 490,
+      "start": 1909.325,
+      "end": 1911.482,
+      "duration": 2.157,
+      "text": "too. And since I didn't figure"
+    },
+    {
+      "index": 491,
+      "start": 1911.482,
+      "end": 1914.902,
+      "duration": 3.42,
+      "text": "things out right, I can at least make it cross,"
+    },
+    {
+      "index": 492,
+      "start": 1914.902,
+      "end": 1915.72,
+      "duration": 0.818,
+      "text": "right? Okay."
+    },
+    {
+      "index": 493,
+      "start": 1915.72,
+      "end": 1921.0,
+      "duration": 5.28,
+      "text": "So, this is a picture of this slowly varying amplitude."
+    },
+    {
+      "index": 494,
+      "start": 1921.0,
+      "end": 1925.018,
+      "duration": 4.018,
+      "text": "And in between, this is the function which is"
+    },
+    {
+      "index": 495,
+      "start": 1925.018,
+      "end": 1928.672,
+      "duration": 3.654,
+      "text": "doing the oscillation, as well as it can."
+    },
+    {
+      "index": 496,
+      "start": 1928.672,
+      "end": 1932.416,
+      "duration": 3.744,
+      "text": "But, it has to stay within that amplitude."
+    },
+    {
+      "index": 497,
+      "start": 1932.416,
+      "end": 1935.887,
+      "duration": 3.471,
+      "text": "So, it's doing this. Now, what happens?"
+    },
+    {
+      "index": 498,
+      "start": 1935.887,
+      "end": 1941.002,
+      "duration": 5.115,
+      "text": "As omega one approaches omega zero,"
+    },
+    {
+      "index": 499,
+      "start": 1941.002,
+      "end": 1945.112,
+      "duration": 4.11,
+      "text": "this frequency gets closer and closer to zero,"
+    },
+    {
+      "index": 500,
+      "start": 1945.112,
+      "end": 1950.409,
+      "duration": 5.297,
+      "text": "which means the period of that dotted line gets further and"
+    },
+    {
+      "index": 501,
+      "start": 1950.409,
+      "end": 1955.981,
+      "duration": 5.572,
+      "text": "further out, goes to infinity, and you never do ultimately get"
+    },
+    {
+      "index": 502,
+      "start": 1955.981,
+      "end": 1962.574,
+      "duration": 6.593,
+      "text": "a chance to come down again. All you can see is the initial"
+    },
+    {
+      "index": 503,
+      "start": 1962.574,
+      "end": 1965.492,
+      "duration": 2.918,
+      "text": "part, where it's rising and rising."
+    },
+    {
+      "index": 504,
+      "start": 1965.492,
+      "end": 1969.44,
+      "duration": 3.948,
+      "text": "And, that's how this curve turns into that one."
+    },
+    {
+      "index": 505,
+      "start": 1969.44,
+      "end": 1972.787,
+      "duration": 3.347,
+      "text": "Now, of course, this curve is enormously"
+    },
+    {
+      "index": 506,
+      "start": 1972.787,
+      "end": 1975.705,
+      "duration": 2.918,
+      "text": "interesting. You must have had this"
+    },
+    {
+      "index": 507,
+      "start": 1975.705,
+      "end": 1979.052,
+      "duration": 3.347,
+      "text": "somewhere. That's the phenomenon of what"
+    },
+    {
+      "index": 508,
+      "start": 1979.052,
+      "end": 1983.0,
+      "duration": 3.948,
+      "text": "are called beats. Too frequencies--"
+    },
+    {
+      "index": 509,
+      "start": 1983.0,
+      "end": 1985.845,
+      "duration": 2.845,
+      "text": "Your book has half a page explaining this."
+    },
+    {
+      "index": 510,
+      "start": 1985.845,
+      "end": 1989.663,
+      "duration": 3.818,
+      "text": "That's the half a page where he gives you this identity,"
+    },
+    {
+      "index": 511,
+      "start": 1989.663,
+      "end": 1993.48,
+      "duration": 3.817,
+      "text": "except it gives it in a wrong form, so that it's hard to"
+    },
+    {
+      "index": 512,
+      "start": 1993.48,
+      "end": 1996.257,
+      "duration": 2.777,
+      "text": "figure out. But anyway, the beats are two"
+    },
+    {
+      "index": 513,
+      "start": 1996.257,
+      "end": 2000.352,
+      "duration": 4.095,
+      "text": "frequencies when you combine them, the two frequencies being"
+    },
+    {
+      "index": 514,
+      "start": 2000.352,
+      "end": 2004.516,
+      "duration": 4.164,
+      "text": "two combined pure oscillations where the frequencies are very"
+    },
+    {
+      "index": 515,
+      "start": 2004.516,
+      "end": 2007.917,
+      "duration": 3.401,
+      "text": "close to each other. What you get is a curve which"
+    },
+    {
+      "index": 516,
+      "start": 2007.917,
+      "end": 2011.143,
+      "duration": 3.226,
+      "text": "looks like that. And, of course,"
+    },
+    {
+      "index": 517,
+      "start": 2011.143,
+      "end": 2014.345,
+      "duration": 3.202,
+      "text": "what you hear is the envelope of the curve."
+    },
+    {
+      "index": 518,
+      "start": 2014.345,
+      "end": 2017.852,
+      "duration": 3.507,
+      "text": "You hear the dotted lines. Well, you hear this."
+    },
+    {
+      "index": 519,
+      "start": 2017.852,
+      "end": 2019.225,
+      "duration": 1.373,
+      "text": "You hear that, too."
+    },
+    {
+      "index": 520,
+      "start": 2019.225,
+      "end": 2023.647,
+      "duration": 4.422,
+      "text": "But, what you hear is-- And, that's how good violinists and"
+    },
+    {
+      "index": 521,
+      "start": 2023.647,
+      "end": 2026.925,
+      "duration": 3.278,
+      "text": "cellists, and so on, tune their instruments."
+    },
+    {
+      "index": 522,
+      "start": 2026.925,
+      "end": 2031.195,
+      "duration": 4.27,
+      "text": "They get one string right, and then the other strings are"
+    },
+    {
+      "index": 523,
+      "start": 2031.195,
+      "end": 2034.93,
+      "duration": 3.735,
+      "text": "tuned by listening. They don't actually listen for"
+    },
+    {
+      "index": 524,
+      "start": 2034.93,
+      "end": 2038.59,
+      "duration": 3.66,
+      "text": "the sound of the note. They listened just for the"
+    },
+    {
+      "index": 525,
+      "start": 2038.59,
+      "end": 2042.173,
+      "duration": 3.583,
+      "text": "beats, wah, wah, wah, wah, and they turn the peg"
+    },
+    {
+      "index": 526,
+      "start": 2042.173,
+      "end": 2044.46,
+      "duration": 2.287,
+      "text": "and it goes wah, wah, wah, wah,"
+    },
+    {
+      "index": 527,
+      "start": 2044.46,
+      "end": 2047.968,
+      "duration": 3.508,
+      "text": "and then finally as soon as the wahs disappear,"
+    },
+    {
+      "index": 528,
+      "start": 2047.968,
+      "end": 2053.0,
+      "duration": 5.032,
+      "text": "they know that the two strings are in tune."
+    },
+    {
+      "index": 529,
+      "start": 2053.0,
+      "end": 2056.021,
+      "duration": 3.021,
+      "text": "A piano tuner does the same thing."
+    },
+    {
+      "index": 530,
+      "start": 2056.021,
+      "end": 2059.5,
+      "duration": 3.479,
+      "text": "Of course, I, being a very bad cellist,"
+    },
+    {
+      "index": 531,
+      "start": 2059.5,
+      "end": 2062.795,
+      "duration": 3.295,
+      "text": "use a tuner. That's another solution,"
+    },
+    {
+      "index": 532,
+      "start": 2062.795,
+      "end": 2066.0,
+      "duration": 3.205,
+      "text": "a more modern solution. Okay."
+    },
+    {
+      "index": 533,
+      "start": 2089.0,
+      "end": 2091.277,
+      "duration": 2.277,
+      "text": "Oh well. Let's give it a try."
+    },
+    {
+      "index": 534,
+      "start": 2091.277,
+      "end": 2095.507,
+      "duration": 4.23,
+      "text": "The bad news is that problem six in your problem set,"
+    },
+    {
+      "index": 535,
+      "start": 2095.507,
+      "end": 2098.76,
+      "duration": 3.253,
+      "text": "I didn't ask you about the undamped case."
+    },
+    {
+      "index": 536,
+      "start": 2098.76,
+      "end": 2103.559,
+      "duration": 4.799,
+      "text": "I thought, since you are mature citizens, you could be asked"
+    },
+    {
+      "index": 537,
+      "start": 2103.559,
+      "end": 2106.0,
+      "duration": 2.441,
+      "text": "about the damped case."
+    },
+    {
+      "index": 538,
+      "start": 2121.0,
+      "end": 2126.069,
+      "duration": 5.069,
+      "text": "I warn you, first of all you have to get the notation."
+    },
+    {
+      "index": 539,
+      "start": 2126.069,
+      "end": 2131.139,
+      "duration": 5.07,
+      "text": "This is probably the most important thing I'll do with"
+    },
+    {
+      "index": 540,
+      "start": 2131.139,
+      "end": 2142.0,
+      "duration": 10.861,
+      "text": "this. Your book uses this, resonance."
+    },
+    {
+      "index": 541,
+      "start": 2162.0,
+      "end": 2166.797,
+      "duration": 4.797,
+      "text": "I'm optimistic. [LAUGHTER] Let's say zero or f"
+    },
+    {
+      "index": 542,
+      "start": 2166.797,
+      "end": 2169.25,
+      "duration": 2.453,
+      "text": "of t. It doesn't matter."
+    },
+    {
+      "index": 543,
+      "start": 2169.25,
+      "end": 2172.341,
+      "duration": 3.091,
+      "text": "In other words, the constants,"
+    },
+    {
+      "index": 544,
+      "start": 2172.341,
+      "end": 2177.886,
+      "duration": 5.545,
+      "text": "the book uses two sets of constants to describe these"
+    },
+    {
+      "index": 545,
+      "start": 2177.886,
+      "end": 2180.764,
+      "duration": 2.878,
+      "text": "equations. If it's a spring,"
+    },
+    {
+      "index": 546,
+      "start": 2180.764,
+      "end": 2186.735,
+      "duration": 5.971,
+      "text": "and not even talking about RLC circuits, the spring mass,"
+    },
+    {
+      "index": 547,
+      "start": 2186.735,
+      "end": 2193.35,
+      "duration": 6.615,
+      "text": "damping, k, spring constant. Then you divide out by m and"
+    },
+    {
+      "index": 548,
+      "start": 2193.35,
+      "end": 2196.623,
+      "duration": 3.273,
+      "text": "you get this. You're familiar with that."
+    },
+    {
+      "index": 549,
+      "start": 2196.623,
+      "end": 2201.323,
+      "duration": 4.7,
+      "text": "And, it's only after you divided out by the m that you're"
+    },
+    {
+      "index": 550,
+      "start": 2201.323,
+      "end": 2206.023,
+      "duration": 4.7,
+      "text": "allowed to call this the square of the natural frequency."
+    },
+    {
+      "index": 551,
+      "start": 2206.023,
+      "end": 2211.227,
+      "duration": 5.204,
+      "text": "So, omega naught is the natural frequency, the natural undamped"
+    },
+    {
+      "index": 552,
+      "start": 2211.227,
+      "end": 2214.417,
+      "duration": 3.19,
+      "text": "frequency. If this term were not there,"
+    },
+    {
+      "index": 553,
+      "start": 2214.417,
+      "end": 2219.201,
+      "duration": 4.784,
+      "text": "that omega nought would give the frequency with"
+    },
+    {
+      "index": 554,
+      "start": 2219.201,
+      "end": 2223.23,
+      "duration": 4.029,
+      "text": "which the system, the little spring would like to"
+    },
+    {
+      "index": 555,
+      "start": 2223.23,
+      "end": 2228.494,
+      "duration": 5.264,
+      "text": "vibrate by itself. Now, further complication is"
+    },
+    {
+      "index": 556,
+      "start": 2228.494,
+      "end": 2231.79,
+      "duration": 3.296,
+      "text": "that the visual uses neither of these."
+    },
+    {
+      "index": 557,
+      "start": 2231.79,
+      "end": 2236.155,
+      "duration": 4.365,
+      "text": "The visual uses x double dot plus b times x prime,"
+    },
+    {
+      "index": 558,
+      "start": 2236.155,
+      "end": 2240.252,
+      "duration": 4.097,
+      "text": "I think we will have to fix this in the future,"
+    },
+    {
+      "index": 559,
+      "start": 2240.252,
+      "end": 2242.925,
+      "duration": 2.673,
+      "text": "but for now, just live with it,"
+    },
+    {
+      "index": 560,
+      "start": 2242.925,
+      "end": 2247.557,
+      "duration": 4.632,
+      "text": "plus kx, and that's some function,"
+    },
+    {
+      "index": 561,
+      "start": 2247.557,
+      "end": 2250.853,
+      "duration": 3.296,
+      "text": "again, a function. So, in other words,"
+    },
+    {
+      "index": 562,
+      "start": 2250.853,
+      "end": 2257.0,
+      "duration": 6.147,
+      "text": "the problem is that b is okay, can't be confused with c."
+    },
+    {
+      "index": 563,
+      "start": 2257.0,
+      "end": 2262.573,
+      "duration": 5.573,
+      "text": "On the other hand, this is not the same k as that."
+    },
+    {
+      "index": 564,
+      "start": 2262.573,
+      "end": 2268.601,
+      "duration": 6.028,
+      "text": "What I'm trying to say is, don't automatically go to a"
+    },
+    {
+      "index": 565,
+      "start": 2268.601,
+      "end": 2273.379,
+      "duration": 4.778,
+      "text": "formula one place, and assume it's the same"
+    },
+    {
+      "index": 566,
+      "start": 2273.379,
+      "end": 2278.611,
+      "duration": 5.232,
+      "text": "formula in another place. You have to use these"
+    },
+    {
+      "index": 567,
+      "start": 2278.611,
+      "end": 2283.431,
+      "duration": 4.82,
+      "text": "equivalences. You have to look and see how"
+    },
+    {
+      "index": 568,
+      "start": 2283.431,
+      "end": 2288.553,
+      "duration": 5.122,
+      "text": "the basic equation was written, and then figure out what the"
+    },
+    {
+      "index": 569,
+      "start": 2288.553,
+      "end": 2292.287,
+      "duration": 3.734,
+      "text": "constant should be. Now, there was something"
+    },
+    {
+      "index": 570,
+      "start": 2292.287,
+      "end": 2297.583,
+      "duration": 5.296,
+      "text": "called, when we analyzed this before, and this has happened in"
+    },
+    {
+      "index": 571,
+      "start": 2297.583,
+      "end": 2302.011,
+      "duration": 4.428,
+      "text": "recitation, there was the natural, damped frequency."
+    },
+    {
+      "index": 572,
+      "start": 2302.011,
+      "end": 2305.658,
+      "duration": 3.647,
+      "text": "I'll call it the natural, damped frequency."
+    },
+    {
+      "index": 573,
+      "start": 2305.658,
+      "end": 2310.0,
+      "duration": 4.342,
+      "text": "The book calls it the pseudo-frequency."
+    },
+    {
+      "index": 574,
+      "start": 2310.0,
+      "end": 2313.873,
+      "duration": 3.873,
+      "text": "It's called pseudo-frequency because the function,"
+    },
+    {
+      "index": 575,
+      "start": 2313.873,
+      "end": 2318.38,
+      "duration": 4.507,
+      "text": "if you have zero on the right hand side, but have damping,"
+    },
+    {
+      "index": 576,
+      "start": 2318.38,
+      "end": 2321.384,
+      "duration": 3.004,
+      "text": "the function isn't periodic. It decays."
+    },
+    {
+      "index": 577,
+      "start": 2321.384,
+      "end": 2323.361,
+      "duration": 1.977,
+      "text": "It does this. Nonetheless,"
+    },
+    {
+      "index": 578,
+      "start": 2323.361,
+      "end": 2327.155,
+      "duration": 3.794,
+      "text": "it still crosses the t-axis at regular intervals,"
+    },
+    {
+      "index": 579,
+      "start": 2327.155,
+      "end": 2330.634,
+      "duration": 3.479,
+      "text": "and therefore, almost everybody just casually"
+    },
+    {
+      "index": 580,
+      "start": 2330.634,
+      "end": 2334.903,
+      "duration": 4.269,
+      "text": "refers to it as the frequency, and understands it's the"
+    },
+    {
+      "index": 581,
+      "start": 2334.903,
+      "end": 2339.252,
+      "duration": 4.349,
+      "text": "natural damped frequency. Now, the relation between them"
+    },
+    {
+      "index": 582,
+      "start": 2339.252,
+      "end": 2342.888,
+      "duration": 3.636,
+      "text": "is given by the little picture I drew you once."
+    },
+    {
+      "index": 583,
+      "start": 2342.888,
+      "end": 2347.0,
+      "duration": 4.112,
+      "text": "But, I didn't emphasize it enough."
+    },
+    {
+      "index": 584,
+      "start": 2347.0,
+      "end": 2349.379,
+      "duration": 2.379,
+      "text": "Here is omega nought."
+    },
+    {
+      "index": 585,
+      "start": 2349.379,
+      "end": 2352.833,
+      "duration": 3.454,
+      "text": "Here is the right angle. The side is omega one,"
+    },
+    {
+      "index": 586,
+      "start": 2352.833,
+      "end": 2355.904,
+      "duration": 3.071,
+      "text": "and this side is the damping."
+    },
+    {
+      "index": 587,
+      "start": 2355.904,
+      "end": 2359.358,
+      "duration": 3.454,
+      "text": "So, in other words, this is fixed because it's"
+    },
+    {
+      "index": 588,
+      "start": 2359.358,
+      "end": 2363.272,
+      "duration": 3.914,
+      "text": "fixed by the spring. That's the natural frequency of"
+    },
+    {
+      "index": 589,
+      "start": 2363.272,
+      "end": 2367.034,
+      "duration": 3.762,
+      "text": "the spring, by itself. If you are damping near the"
+    },
+    {
+      "index": 590,
+      "start": 2367.034,
+      "end": 2371.793,
+      "duration": 4.759,
+      "text": "motion, then the more you damped it, the bigger this side gets,"
+    },
+    {
+      "index": 591,
+      "start": 2371.793,
+      "end": 2376.552,
+      "duration": 4.759,
+      "text": "and therefore the smaller omega one is, the bigger the damping,"
+    },
+    {
+      "index": 592,
+      "start": 2376.552,
+      "end": 2380.927,
+      "duration": 4.375,
+      "text": "then the smaller the frequency with which the damped thing"
+    },
+    {
+      "index": 593,
+      "start": 2380.927,
+      "end": 2384.393,
+      "duration": 3.466,
+      "text": "vibrates. That sort of intuitive,"
+    },
+    {
+      "index": 594,
+      "start": 2384.393,
+      "end": 2387.121,
+      "duration": 2.728,
+      "text": "and vice versa. If you decrease the damping to"
+    },
+    {
+      "index": 595,
+      "start": 2387.121,
+      "end": 2389.787,
+      "duration": 2.666,
+      "text": "almost zero, well, then you'll make omega one"
+    },
+    {
+      "index": 596,
+      "start": 2389.787,
+      "end": 2391.848,
+      "duration": 2.061,
+      "text": "almost the same size as omega zero."
+    },
+    {
+      "index": 597,
+      "start": 2391.848,
+      "end": 2394.333,
+      "duration": 2.485,
+      "text": "This must be a right angle, and therefore,"
+    },
+    {
+      "index": 598,
+      "start": 2394.333,
+      "end": 2397.909,
+      "duration": 3.576,
+      "text": "if there's very little damping, the natural damped frequency"
+    },
+    {
+      "index": 599,
+      "start": 2397.909,
+      "end": 2400.878,
+      "duration": 2.969,
+      "text": "will be almost the same as the original frequency,"
+    },
+    {
+      "index": 600,
+      "start": 2400.878,
+      "end": 2405.85,
+      "duration": 4.972,
+      "text": "the natural frequency. So, the relation between them"
+    },
+    {
+      "index": 601,
+      "start": 2405.85,
+      "end": 2411.452,
+      "duration": 5.602,
+      "text": "is that omega one squared is equal to omega nought squared"
+    },
+    {
+      "index": 602,
+      "start": 2411.452,
+      "end": 2415.876,
+      "duration": 4.424,
+      "text": "minus p squared,"
+    },
+    {
+      "index": 603,
+      "start": 2415.876,
+      "end": 2420.987,
+      "duration": 5.111,
+      "text": "and this comes from the characteristic roots from the"
+    },
+    {
+      "index": 604,
+      "start": 2420.987,
+      "end": 2426.0,
+      "duration": 5.013,
+      "text": "characteristic roots of the damped equation."
+    },
+    {
+      "index": 605,
+      "start": 2426.0,
+      "end": 2431.348,
+      "duration": 5.348,
+      "text": "So, we did that before. I'm just reminding you of it."
+    },
+    {
+      "index": 606,
+      "start": 2431.348,
+      "end": 2437.622,
+      "duration": 6.274,
+      "text": "Now, the third frequency which now enters, and that I'm asking"
+    },
+    {
+      "index": 607,
+      "start": 2437.622,
+      "end": 2443.897,
+      "duration": 6.275,
+      "text": "you about on the problem set is if you've got a damped spring,"
+    },
+    {
+      "index": 608,
+      "start": 2443.897,
+      "end": 2449.965,
+      "duration": 6.068,
+      "text": "okay, what happens when you impose a motion on it with yet a"
+    },
+    {
+      "index": 609,
+      "start": 2449.965,
+      "end": 2453.154,
+      "duration": 3.189,
+      "text": "third frequency? In other words,"
+    },
+    {
+      "index": 610,
+      "start": 2453.154,
+      "end": 2456.96,
+      "duration": 3.806,
+      "text": "drive the damped spring. I don't care."
+    },
+    {
+      "index": 611,
+      "start": 2456.96,
+      "end": 2462.0,
+      "duration": 5.04,
+      "text": "I switched to y, since I'm in y mode."
+    },
+    {
+      "index": 612,
+      "start": 2462.0,
+      "end": 2466.15,
+      "duration": 4.15,
+      "text": "So, our equation looks like this, just as it did before,"
+    },
+    {
+      "index": 613,
+      "start": 2466.15,
+      "end": 2470.754,
+      "duration": 4.604,
+      "text": "except now going to drive that with an undetermined frequency,"
+    },
+    {
+      "index": 614,
+      "start": 2470.754,
+      "end": 2473.094,
+      "duration": 2.34,
+      "text": "cosine omega t."
+    },
+    {
+      "index": 615,
+      "start": 2473.094,
+      "end": 2475.358,
+      "duration": 2.264,
+      "text": "And, my question, now, is, see,"
+    },
+    {
+      "index": 616,
+      "start": 2475.358,
+      "end": 2479.66,
+      "duration": 4.302,
+      "text": "it's not going to be able to resonate in the correct-- you"
+    },
+    {
+      "index": 617,
+      "start": 2479.66,
+      "end": 2484.037,
+      "duration": 4.377,
+      "text": "really only get true resonance when you don't have damping."
+    },
+    {
+      "index": 618,
+      "start": 2484.037,
+      "end": 2487.962,
+      "duration": 3.925,
+      "text": "That's the only time where the amplitude can build up"
+    },
+    {
+      "index": 619,
+      "start": 2487.962,
+      "end": 2491.714,
+      "duration": 3.752,
+      "text": "indefinitely. But nonetheless,"
+    },
+    {
+      "index": 620,
+      "start": 2491.714,
+      "end": 2497.928,
+      "duration": 6.214,
+      "text": "for all practical purposes, and there's always some damping"
+    },
+    {
+      "index": 621,
+      "start": 2497.928,
+      "end": 2502.642,
+      "duration": 4.714,
+      "text": "unless you are a perfect vacuum or something,"
+    },
+    {
+      "index": 622,
+      "start": 2502.642,
+      "end": 2506.285,
+      "duration": 3.643,
+      "text": "there's almost always some damping."
+    },
+    {
+      "index": 623,
+      "start": 2506.285,
+      "end": 2510.464,
+      "duration": 4.179,
+      "text": "So, p isn't zero, can't be exactly zero."
+    },
+    {
+      "index": 624,
+      "start": 2510.464,
+      "end": 2514.428,
+      "duration": 3.964,
+      "text": "So, the problem is, which omega gives,"
+    },
+    {
+      "index": 625,
+      "start": 2514.428,
+      "end": 2520.857,
+      "duration": 6.429,
+      "text": "which frequency in the input, which input frequency gives the"
+    },
+    {
+      "index": 626,
+      "start": 2520.857,
+      "end": 2526.0,
+      "duration": 5.143,
+      "text": "maximal amplitude for the response?"
+    },
+    {
+      "index": 627,
+      "start": 2540.0,
+      "end": 2542.905,
+      "duration": 2.905,
+      "text": "We solved that problem when it was undamped,"
+    },
+    {
+      "index": 628,
+      "start": 2542.905,
+      "end": 2546.554,
+      "duration": 3.649,
+      "text": "and the answer was easy. Omega should equal omega zero."
+    },
+    {
+      "index": 629,
+      "start": 2546.554,
+      "end": 2550.0,
+      "duration": 3.446,
+      "text": "But, when it's damped, the answer is different."
+    },
+    {
+      "index": 630,
+      "start": 2550.0,
+      "end": 2553.565,
+      "duration": 3.565,
+      "text": "And, I'm not asking you to do it in general."
+    },
+    {
+      "index": 631,
+      "start": 2553.565,
+      "end": 2557.213,
+      "duration": 3.648,
+      "text": "I'm giving you some numbers. But nonetheless,"
+    },
+    {
+      "index": 632,
+      "start": 2557.213,
+      "end": 2560.944,
+      "duration": 3.731,
+      "text": "it still must be the case. So, I'm giving you,"
+    },
+    {
+      "index": 633,
+      "start": 2560.944,
+      "end": 2565.67,
+      "duration": 4.726,
+      "text": "I give you specific values of p and omega zero."
+    },
+    {
+      "index": 634,
+      "start": 2565.67,
+      "end": 2570.314,
+      "duration": 4.644,
+      "text": "That's on the problem set. Of course, one of them is tied"
+    },
+    {
+      "index": 635,
+      "start": 2570.314,
+      "end": 2573.464,
+      "duration": 3.15,
+      "text": "to your recitation. But, the answer is,"
+    },
+    {
+      "index": 636,
+      "start": 2573.464,
+      "end": 2578.025,
+      "duration": 4.561,
+      "text": "I'm going to give you the general formula for the answer"
+    },
+    {
+      "index": 637,
+      "start": 2578.025,
+      "end": 2583.0,
+      "duration": 4.975,
+      "text": "to make sure that you don't get wildly astray."
+    },
+    {
+      "index": 638,
+      "start": 2583.0,
+      "end": 2585.721,
+      "duration": 2.721,
+      "text": "Let's call that omega r,"
+    },
+    {
+      "index": 639,
+      "start": 2585.721,
+      "end": 2589.124,
+      "duration": 3.403,
+      "text": "the resonant omega. This isn't true resonance."
+    },
+    {
+      "index": 640,
+      "start": 2589.124,
+      "end": 2591.997,
+      "duration": 2.873,
+      "text": "Your book calls it practical resonance."
+    },
+    {
+      "index": 641,
+      "start": 2591.997,
+      "end": 2595.097,
+      "duration": 3.1,
+      "text": "Again, most people just call it resonance."
+    },
+    {
+      "index": 642,
+      "start": 2595.097,
+      "end": 2598.046,
+      "duration": 2.949,
+      "text": "So, you know what I mean, type of thing."
+    },
+    {
+      "index": 643,
+      "start": 2598.046,
+      "end": 2600.768,
+      "duration": 2.722,
+      "text": "It is omega r is very much like that."
+    },
+    {
+      "index": 644,
+      "start": 2600.768,
+      "end": 2605.153,
+      "duration": 4.385,
+      "text": "Maybe I should have written this one down in the same form."
+    },
+    {
+      "index": 645,
+      "start": 2605.153,
+      "end": 2609.614,
+      "duration": 4.461,
+      "text": "Omega one is the square root of omega nought squared minus p"
+    },
+    {
+      "index": 646,
+      "start": 2609.614,
+      "end": 2614.0,
+      "duration": 4.386,
+      "text": "squared."
+    },
+    {
+      "index": 647,
+      "start": 2614.0,
+      "end": 2617.779,
+      "duration": 3.779,
+      "text": "What would you expect? Well, what I would expect is"
+    },
+    {
+      "index": 648,
+      "start": 2617.779,
+      "end": 2620.197,
+      "duration": 2.418,
+      "text": "that omega r should be omega one."
+    },
+    {
+      "index": 649,
+      "start": 2620.197,
+      "end": 2623.296,
+      "duration": 3.099,
+      "text": "The damped system has a natural frequency."
+    },
+    {
+      "index": 650,
+      "start": 2623.296,
+      "end": 2627.529,
+      "duration": 4.233,
+      "text": "The resonant frequency should be the same as that natural"
+    },
+    {
+      "index": 651,
+      "start": 2627.529,
+      "end": 2632.063,
+      "duration": 4.534,
+      "text": "frequency with which the damped system wants to do its thing."
+    },
+    {
+      "index": 652,
+      "start": 2632.063,
+      "end": 2634.709,
+      "duration": 2.646,
+      "text": "And the answer is, that's not right."
+    },
+    {
+      "index": 653,
+      "start": 2634.709,
+      "end": 2637.883,
+      "duration": 3.174,
+      "text": "It is the square root. It's a little lower."
+    },
+    {
+      "index": 654,
+      "start": 2637.883,
+      "end": 2641.36,
+      "duration": 3.477,
+      "text": "It is omega nought squared"
+    },
+    {
+      "index": 655,
+      "start": 2641.36,
+      "end": 2642.693,
+      "duration": 1.333,
+      "text": "minus two p squared."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

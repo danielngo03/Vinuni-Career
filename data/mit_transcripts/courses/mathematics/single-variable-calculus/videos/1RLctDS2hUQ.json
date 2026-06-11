@@ -1,0 +1,6528 @@
+{
+  "video": {
+    "id": "1RLctDS2hUQ",
+    "title": "Lec 19 | MIT 18.01 Single Variable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=1RLctDS2hUQ",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2895,
+    "language": "en"
+  },
+  "segment_count": 930,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.75,
+      "end": 1.76,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.76,
+      "end": 4.309,
+      "duration": 2.549,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.43,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.44,
+      "end": 8.35,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.36,
+      "end": 11.19,
+      "duration": 2.83,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.2,
+      "end": 12.749,
+      "duration": 1.549,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.759,
+      "end": 15.869,
+      "duration": 3.11,
+      "text": "hundreds of MIT courses visit MIT open"
+    },
+    {
+      "index": 7,
+      "start": 15.879,
+      "end": 21.029,
+      "duration": 5.15,
+      "text": "courseware at"
+    },
+    {
+      "index": 8,
+      "start": 22.67,
+      "end": 22.68,
+      "duration": 0.01,
+      "text": "ocw.mit.edu today we're going to"
+    },
+    {
+      "index": 9,
+      "start": 22.68,
+      "end": 25.87,
+      "duration": 3.19,
+      "text": "continue with integration and we get to"
+    },
+    {
+      "index": 10,
+      "start": 25.88,
+      "end": 29.269,
+      "duration": 3.389,
+      "text": "do the uh probably the most important"
+    },
+    {
+      "index": 11,
+      "start": 29.279,
+      "end": 32.19,
+      "duration": 2.911,
+      "text": "thing of this entire course which is"
+    },
+    {
+      "index": 12,
+      "start": 32.2,
+      "end": 34.83,
+      "duration": 2.63,
+      "text": "appropriately named it's called the"
+    },
+    {
+      "index": 13,
+      "start": 34.84,
+      "end": 39.38,
+      "duration": 4.54,
+      "text": "fundamental theorem of"
+    },
+    {
+      "index": 14,
+      "start": 52.349,
+      "end": 52.359,
+      "duration": 0.01,
+      "text": "calculus and we'll be abbreviating it"
+    },
+    {
+      "index": 15,
+      "start": 52.359,
+      "end": 55.869,
+      "duration": 3.51,
+      "text": "FTC and occasionally I'll put in a one"
+    },
+    {
+      "index": 16,
+      "start": 55.879,
+      "end": 58.229,
+      "duration": 2.35,
+      "text": "here because there will be two versions"
+    },
+    {
+      "index": 17,
+      "start": 58.239,
+      "end": 60.59,
+      "duration": 2.351,
+      "text": "of it but this is the one that you'll be"
+    },
+    {
+      "index": 18,
+      "start": 60.6,
+      "end": 65.35,
+      "duration": 4.75,
+      "text": "using the most in this"
+    },
+    {
+      "index": 19,
+      "start": 65.36,
+      "end": 69.67,
+      "duration": 4.31,
+      "text": "class the fundamental theorem of"
+    },
+    {
+      "index": 20,
+      "start": 73.59,
+      "end": 73.6,
+      "duration": 0.01,
+      "text": "calculus says the"
+    },
+    {
+      "index": 21,
+      "start": 73.6,
+      "end": 76.51,
+      "duration": 2.91,
+      "text": "following it says that"
+    },
+    {
+      "index": 22,
+      "start": 76.52,
+      "end": 81.109,
+      "duration": 4.589,
+      "text": "if F Prime is equal to"
+    },
+    {
+      "index": 23,
+      "start": 81.119,
+      "end": 86.91,
+      "duration": 5.791,
+      "text": "F so frime of X is equal to little f ofx"
+    },
+    {
+      "index": 24,
+      "start": 86.92,
+      "end": 93.27,
+      "duration": 6.35,
+      "text": "is a capital f and a little f"
+    },
+    {
+      "index": 25,
+      "start": 95.069,
+      "end": 95.079,
+      "duration": 0.01,
+      "text": "then the"
+    },
+    {
+      "index": 26,
+      "start": 95.079,
+      "end": 99.91,
+      "duration": 4.831,
+      "text": "integral from A to B of f"
+    },
+    {
+      "index": 27,
+      "start": 102.55,
+      "end": 102.56,
+      "duration": 0.01,
+      "text": "ofx is equal"
+    },
+    {
+      "index": 28,
+      "start": 102.56,
+      "end": 111.23,
+      "duration": 8.67,
+      "text": "to F of B minus F of"
+    },
+    {
+      "index": 29,
+      "start": 114.749,
+      "end": 114.759,
+      "duration": 0.01,
+      "text": "a that's it that's that's the whole"
+    },
+    {
+      "index": 30,
+      "start": 114.759,
+      "end": 116.27,
+      "duration": 1.511,
+      "text": "theorem"
+    },
+    {
+      "index": 31,
+      "start": 116.28,
+      "end": 120.83,
+      "duration": 4.55,
+      "text": "and you may recognize it um before we"
+    },
+    {
+      "index": 32,
+      "start": 120.84,
+      "end": 127.99,
+      "duration": 7.15,
+      "text": "had the notation that um f was the"
+    },
+    {
+      "index": 33,
+      "start": 130.27,
+      "end": 130.28,
+      "duration": 0.01,
+      "text": "anti-derivative that is capital F was"
+    },
+    {
+      "index": 34,
+      "start": 130.28,
+      "end": 132.35,
+      "duration": 2.07,
+      "text": "the integral of f ofx we wrote it this"
+    },
+    {
+      "index": 35,
+      "start": 132.36,
+      "end": 134.99,
+      "duration": 2.63,
+      "text": "way this is this indefinite integral and"
+    },
+    {
+      "index": 36,
+      "start": 135.0,
+      "end": 136.99,
+      "duration": 1.99,
+      "text": "now we're putting in definite"
+    },
+    {
+      "index": 37,
+      "start": 137.0,
+      "end": 139.509,
+      "duration": 2.509,
+      "text": "values and we have a connection between"
+    },
+    {
+      "index": 38,
+      "start": 139.519,
+      "end": 142.55,
+      "duration": 3.031,
+      "text": "the two uses of the integral sign but"
+    },
+    {
+      "index": 39,
+      "start": 142.56,
+      "end": 144.15,
+      "duration": 1.59,
+      "text": "with the definite values we get real"
+    },
+    {
+      "index": 40,
+      "start": 144.16,
+      "end": 146.47,
+      "duration": 2.31,
+      "text": "numbers out instead of a function or a"
+    },
+    {
+      "index": 41,
+      "start": 146.48,
+      "end": 148.75,
+      "duration": 2.27,
+      "text": "function up to a"
+    },
+    {
+      "index": 42,
+      "start": 148.76,
+      "end": 151.43,
+      "duration": 2.67,
+      "text": "constant so this is it this is the"
+    },
+    {
+      "index": 43,
+      "start": 151.44,
+      "end": 154.229,
+      "duration": 2.789,
+      "text": "formula and it's usually also written"
+    },
+    {
+      "index": 44,
+      "start": 154.239,
+      "end": 157.509,
+      "duration": 3.27,
+      "text": "with another notation so I I want to"
+    },
+    {
+      "index": 45,
+      "start": 157.519,
+      "end": 160.39,
+      "duration": 2.871,
+      "text": "introduce that notation to you as well"
+    },
+    {
+      "index": 46,
+      "start": 160.4,
+      "end": 164.11,
+      "duration": 3.71,
+      "text": "so there's a new notation"
+    },
+    {
+      "index": 47,
+      "start": 167.55,
+      "end": 167.56,
+      "duration": 0.01,
+      "text": "here which you'll find very convenient"
+    },
+    {
+      "index": 48,
+      "start": 167.56,
+      "end": 170.03,
+      "duration": 2.47,
+      "text": "because we don't always have to give a"
+    },
+    {
+      "index": 49,
+      "start": 170.04,
+      "end": 171.949,
+      "duration": 1.909,
+      "text": "name a letter F to the functions"
+    },
+    {
+      "index": 50,
+      "start": 171.959,
+      "end": 175.149,
+      "duration": 3.19,
+      "text": "involved so it's an abbreviation uh for"
+    },
+    {
+      "index": 51,
+      "start": 175.159,
+      "end": 177.35,
+      "duration": 2.191,
+      "text": "right now there will be a lot of FS but"
+    },
+    {
+      "index": 52,
+      "start": 177.36,
+      "end": 179.79,
+      "duration": 2.43,
+      "text": "anyway so here's the abbreviation when"
+    },
+    {
+      "index": 53,
+      "start": 179.8,
+      "end": 183.229,
+      "duration": 3.429,
+      "text": "whenever I have a difference between a"
+    },
+    {
+      "index": 54,
+      "start": 183.239,
+      "end": 186.55,
+      "duration": 3.311,
+      "text": "function uh at two values I also can"
+    },
+    {
+      "index": 55,
+      "start": 186.56,
+      "end": 188.55,
+      "duration": 1.99,
+      "text": "write this as f"
+    },
+    {
+      "index": 56,
+      "start": 188.56,
+      "end": 192.509,
+      "duration": 3.949,
+      "text": "ofx with an a down here and a b up there"
+    },
+    {
+      "index": 57,
+      "start": 192.519,
+      "end": 195.71,
+      "duration": 3.191,
+      "text": "so that's the notation that we"
+    },
+    {
+      "index": 58,
+      "start": 195.72,
+      "end": 199.229,
+      "duration": 3.509,
+      "text": "use and you can also for emphasis and"
+    },
+    {
+      "index": 59,
+      "start": 199.239,
+      "end": 201.99,
+      "duration": 2.751,
+      "text": "this sometimes turns out to be important"
+    },
+    {
+      "index": 60,
+      "start": 202.0,
+      "end": 203.39,
+      "duration": 1.39,
+      "text": "when there's more than one variable"
+    },
+    {
+      "index": 61,
+      "start": 203.4,
+      "end": 206.03,
+      "duration": 2.63,
+      "text": "floating around in the problem to"
+    },
+    {
+      "index": 62,
+      "start": 206.04,
+      "end": 208.55,
+      "duration": 2.51,
+      "text": "specify that the variable is X so this"
+    },
+    {
+      "index": 63,
+      "start": 208.56,
+      "end": 210.19,
+      "duration": 1.63,
+      "text": "is the same thing"
+    },
+    {
+      "index": 64,
+      "start": 210.2,
+      "end": 215.19,
+      "duration": 4.99,
+      "text": "as X = A and xal B it indicates where"
+    },
+    {
+      "index": 65,
+      "start": 215.2,
+      "end": 216.55,
+      "duration": 1.35,
+      "text": "you want to plug in what you want to"
+    },
+    {
+      "index": 66,
+      "start": 216.56,
+      "end": 219.83,
+      "duration": 3.27,
+      "text": "plug in and now you take the Top Value"
+    },
+    {
+      "index": 67,
+      "start": 219.84,
+      "end": 222.949,
+      "duration": 3.109,
+      "text": "minus the bottom value so F of B minus F"
+    },
+    {
+      "index": 68,
+      "start": 222.959,
+      "end": 226.149,
+      "duration": 3.19,
+      "text": "of a so this is just a notation and in"
+    },
+    {
+      "index": 69,
+      "start": 226.159,
+      "end": 231.27,
+      "duration": 5.111,
+      "text": "that notation of course the uh the uh"
+    },
+    {
+      "index": 70,
+      "start": 231.28,
+      "end": 233.509,
+      "duration": 2.229,
+      "text": "theorem can be"
+    },
+    {
+      "index": 71,
+      "start": 233.519,
+      "end": 235.589,
+      "duration": 2.07,
+      "text": "written"
+    },
+    {
+      "index": 72,
+      "start": 235.599,
+      "end": 239.63,
+      "duration": 4.031,
+      "text": "as with this set of symbols here equal"
+    },
+    {
+      "index": 73,
+      "start": 239.64,
+      "end": 243.03,
+      "duration": 3.39,
+      "text": "equally"
+    },
+    {
+      "index": 74,
+      "start": 245.429,
+      "end": 245.439,
+      "duration": 0.01,
+      "text": "well okay so let's just give a couple of"
+    },
+    {
+      "index": 75,
+      "start": 245.439,
+      "end": 247.99,
+      "duration": 2.551,
+      "text": "examples the first example is the one"
+    },
+    {
+      "index": 76,
+      "start": 248.0,
+      "end": 251.309,
+      "duration": 3.309,
+      "text": "that we did last time very"
+    },
+    {
+      "index": 77,
+      "start": 251.319,
+      "end": 253.429,
+      "duration": 2.11,
+      "text": "laboriously if you take the function"
+    },
+    {
+      "index": 78,
+      "start": 253.439,
+      "end": 256.909,
+      "duration": 3.47,
+      "text": "capital F ofx which happens to be X Cub"
+    },
+    {
+      "index": 79,
+      "start": 256.919,
+      "end": 258.509,
+      "duration": 1.59,
+      "text": "over"
+    },
+    {
+      "index": 80,
+      "start": 258.519,
+      "end": 262.03,
+      "duration": 3.511,
+      "text": "3 then if you differentiate"
+    },
+    {
+      "index": 81,
+      "start": 262.04,
+      "end": 265.43,
+      "duration": 3.39,
+      "text": "it you get well uh the factor of three"
+    },
+    {
+      "index": 82,
+      "start": 265.44,
+      "end": 266.99,
+      "duration": 1.55,
+      "text": "cancels so you get"
+    },
+    {
+      "index": 83,
+      "start": 267.0,
+      "end": 270.189,
+      "duration": 3.189,
+      "text": "x2 that's the derivative and so by the"
+    },
+    {
+      "index": 84,
+      "start": 270.199,
+      "end": 271.87,
+      "duration": 1.671,
+      "text": "fundamental"
+    },
+    {
+      "index": 85,
+      "start": 271.88,
+      "end": 274.67,
+      "duration": 2.79,
+      "text": "theorem so this implies by the"
+    },
+    {
+      "index": 86,
+      "start": 274.68,
+      "end": 276.39,
+      "duration": 1.71,
+      "text": "fundamental"
+    },
+    {
+      "index": 87,
+      "start": 276.4,
+      "end": 281.15,
+      "duration": 4.75,
+      "text": "theorem that the integral from say A to"
+    },
+    {
+      "index": 88,
+      "start": 281.16,
+      "end": 285.909,
+      "duration": 4.749,
+      "text": "B of X cubed over"
+    },
+    {
+      "index": 89,
+      "start": 285.919,
+      "end": 288.27,
+      "duration": 2.351,
+      "text": "sorry x^2"
+    },
+    {
+      "index": 90,
+      "start": 288.28,
+      "end": 290.59,
+      "duration": 2.31,
+      "text": "DX that's the derivative here this is"
+    },
+    {
+      "index": 91,
+      "start": 290.6,
+      "end": 293.59,
+      "duration": 2.99,
+      "text": "the function we're going to use as F"
+    },
+    {
+      "index": 92,
+      "start": 293.6,
+      "end": 297.07,
+      "duration": 3.47,
+      "text": "ofx here is equal"
+    },
+    {
+      "index": 93,
+      "start": 297.08,
+      "end": 301.27,
+      "duration": 4.19,
+      "text": "to this function here um f of B minus F"
+    },
+    {
+      "index": 94,
+      "start": 301.28,
+      "end": 304.51,
+      "duration": 3.23,
+      "text": "of a that's here this function here so"
+    },
+    {
+      "index": 95,
+      "start": 304.52,
+      "end": 308.71,
+      "duration": 4.19,
+      "text": "that's right F of B minus F of"
+    },
+    {
+      "index": 96,
+      "start": 308.72,
+      "end": 313.71,
+      "duration": 4.99,
+      "text": "a and that's equal to B Cub over 3 - a"
+    },
+    {
+      "index": 97,
+      "start": 313.72,
+      "end": 318.469,
+      "duration": 4.749,
+      "text": "cub over"
+    },
+    {
+      "index": 98,
+      "start": 321.909,
+      "end": 321.919,
+      "duration": 0.01,
+      "text": "3 now in this new"
+    },
+    {
+      "index": 99,
+      "start": 321.919,
+      "end": 324.43,
+      "duration": 2.511,
+      "text": "notation we we usually don't have all"
+    },
+    {
+      "index": 100,
+      "start": 324.44,
+      "end": 325.909,
+      "duration": 1.469,
+      "text": "these letters all we write is the"
+    },
+    {
+      "index": 101,
+      "start": 325.919,
+      "end": 327.55,
+      "duration": 1.631,
+      "text": "following we write the integral from A"
+    },
+    {
+      "index": 102,
+      "start": 327.56,
+      "end": 329.59,
+      "duration": 2.03,
+      "text": "to B and I'm going to do the case 0 to B"
+    },
+    {
+      "index": 103,
+      "start": 329.6,
+      "end": 330.55,
+      "duration": 0.95,
+      "text": "because that was the one that we"
+    },
+    {
+      "index": 104,
+      "start": 330.56,
+      "end": 332.39,
+      "duration": 1.83,
+      "text": "actually did last time so I'm going to"
+    },
+    {
+      "index": 105,
+      "start": 332.4,
+      "end": 337.51,
+      "duration": 5.11,
+      "text": "set a equals z here and then the problem"
+    },
+    {
+      "index": 106,
+      "start": 337.52,
+      "end": 339.99,
+      "duration": 2.47,
+      "text": "we were faced last time was this and as"
+    },
+    {
+      "index": 107,
+      "start": 340.0,
+      "end": 342.189,
+      "duration": 2.189,
+      "text": "I said we did it very laboriously but"
+    },
+    {
+      "index": 108,
+      "start": 342.199,
+      "end": 345.87,
+      "duration": 3.671,
+      "text": "now you can see that we can do it in uh"
+    },
+    {
+      "index": 109,
+      "start": 345.88,
+      "end": 348.71,
+      "duration": 2.83,
+      "text": "a 10 seconds let's say well the"
+    },
+    {
+      "index": 110,
+      "start": 348.72,
+      "end": 351.43,
+      "duration": 2.71,
+      "text": "anti-derivative of this is X cubed over"
+    },
+    {
+      "index": 111,
+      "start": 351.44,
+      "end": 354.51,
+      "duration": 3.07,
+      "text": "3 I'm going to evaluate it at 0 and at B"
+    },
+    {
+      "index": 112,
+      "start": 354.52,
+      "end": 356.909,
+      "duration": 2.389,
+      "text": "and subtract so that's going to be B"
+    },
+    {
+      "index": 113,
+      "start": 356.919,
+      "end": 360.99,
+      "duration": 4.071,
+      "text": "Cubed over 3 - 0 cub over three which of"
+    },
+    {
+      "index": 114,
+      "start": 361.0,
+      "end": 364.11,
+      "duration": 3.11,
+      "text": "course is B Cubed over 3 and that's"
+    },
+    {
+      "index": 115,
+      "start": 364.12,
+      "end": 366.27,
+      "duration": 2.15,
+      "text": "that's the end that's the answer so this"
+    },
+    {
+      "index": 116,
+      "start": 366.28,
+      "end": 369.15,
+      "duration": 2.87,
+      "text": "is a lot faster than yesterday I hope"
+    },
+    {
+      "index": 117,
+      "start": 369.16,
+      "end": 372.589,
+      "duration": 3.429,
+      "text": "you'll agree and we can we can dispense"
+    },
+    {
+      "index": 118,
+      "start": 372.599,
+      "end": 375.11,
+      "duration": 2.511,
+      "text": "with those elaborate computations"
+    },
+    {
+      "index": 119,
+      "start": 375.12,
+      "end": 376.99,
+      "duration": 1.87,
+      "text": "although there's a conceptual reason"
+    },
+    {
+      "index": 120,
+      "start": 377.0,
+      "end": 379.99,
+      "duration": 2.99,
+      "text": "very important one for understanding the"
+    },
+    {
+      "index": 121,
+      "start": 380.0,
+      "end": 383.189,
+      "duration": 3.189,
+      "text": "procedure that we went through because"
+    },
+    {
+      "index": 122,
+      "start": 383.199,
+      "end": 386.27,
+      "duration": 3.071,
+      "text": "eventually you're going to be using"
+    },
+    {
+      "index": 123,
+      "start": 386.28,
+      "end": 388.15,
+      "duration": 1.87,
+      "text": "integrals and these quick ways of doing"
+    },
+    {
+      "index": 124,
+      "start": 388.16,
+      "end": 390.15,
+      "duration": 1.99,
+      "text": "things to solve problems like finding"
+    },
+    {
+      "index": 125,
+      "start": 390.16,
+      "end": 392.749,
+      "duration": 2.589,
+      "text": "the volumes of pyramids in other words"
+    },
+    {
+      "index": 126,
+      "start": 392.759,
+      "end": 394.79,
+      "duration": 2.031,
+      "text": "we're going to reverse the process and"
+    },
+    {
+      "index": 127,
+      "start": 394.8,
+      "end": 396.55,
+      "duration": 1.75,
+      "text": "so we need to understand the connection"
+    },
+    {
+      "index": 128,
+      "start": 396.56,
+      "end": 400.87,
+      "duration": 4.31,
+      "text": "between the"
+    },
+    {
+      "index": 129,
+      "start": 403.309,
+      "end": 403.319,
+      "duration": 0.01,
+      "text": "two all right I'm going to give a couple"
+    },
+    {
+      "index": 130,
+      "start": 403.319,
+      "end": 404.23,
+      "duration": 0.911,
+      "text": "more"
+    },
+    {
+      "index": 131,
+      "start": 404.24,
+      "end": 407.99,
+      "duration": 3.75,
+      "text": "examples and then we'll go on so the"
+    },
+    {
+      "index": 132,
+      "start": 408.0,
+      "end": 409.95,
+      "duration": 1.95,
+      "text": "second example would be one that would"
+    },
+    {
+      "index": 133,
+      "start": 409.96,
+      "end": 412.15,
+      "duration": 2.19,
+      "text": "be quite difficult to do by this remon"
+    },
+    {
+      "index": 134,
+      "start": 412.16,
+      "end": 414.189,
+      "duration": 2.029,
+      "text": "sum technique that we described"
+    },
+    {
+      "index": 135,
+      "start": 414.199,
+      "end": 417.11,
+      "duration": 2.911,
+      "text": "yesterday uh although it is possible uh"
+    },
+    {
+      "index": 136,
+      "start": 417.12,
+      "end": 419.99,
+      "duration": 2.87,
+      "text": "it uses much higher mathematics to do it"
+    },
+    {
+      "index": 137,
+      "start": 420.0,
+      "end": 421.869,
+      "duration": 1.869,
+      "text": "and that is the"
+    },
+    {
+      "index": 138,
+      "start": 421.879,
+      "end": 424.11,
+      "duration": 2.231,
+      "text": "area"
+    },
+    {
+      "index": 139,
+      "start": 424.12,
+      "end": 428.309,
+      "duration": 4.189,
+      "text": "under under one"
+    },
+    {
+      "index": 140,
+      "start": 430.589,
+      "end": 430.599,
+      "duration": 0.01,
+      "text": "hump"
+    },
+    {
+      "index": 141,
+      "start": 430.599,
+      "end": 435.39,
+      "duration": 4.791,
+      "text": "of the the sign curve sin"
+    },
+    {
+      "index": 142,
+      "start": 437.95,
+      "end": 437.96,
+      "duration": 0.01,
+      "text": "x let me just draw a picture of that the"
+    },
+    {
+      "index": 143,
+      "start": 437.96,
+      "end": 440.15,
+      "duration": 2.19,
+      "text": "curve goes like this and we're talking"
+    },
+    {
+      "index": 144,
+      "start": 440.16,
+      "end": 442.39,
+      "duration": 2.23,
+      "text": "about this area here it starts out at"
+    },
+    {
+      "index": 145,
+      "start": 442.4,
+      "end": 447.43,
+      "duration": 5.03,
+      "text": "zero it goes to Pi that's one"
+    },
+    {
+      "index": 146,
+      "start": 450.589,
+      "end": 450.599,
+      "duration": 0.01,
+      "text": "hump and so the answer answer is it's"
+    },
+    {
+      "index": 147,
+      "start": 450.599,
+      "end": 457.43,
+      "duration": 6.831,
+      "text": "the integral from 0 to Pi of sin x"
+    },
+    {
+      "index": 148,
+      "start": 459.469,
+      "end": 459.479,
+      "duration": 0.01,
+      "text": "DX and so I need to take the"
+    },
+    {
+      "index": 149,
+      "start": 459.479,
+      "end": 461.589,
+      "duration": 2.11,
+      "text": "anti-derivative of that and that's minus"
+    },
+    {
+      "index": 150,
+      "start": 461.599,
+      "end": 464.67,
+      "duration": 3.071,
+      "text": "cine X that's the thing whose derivative"
+    },
+    {
+      "index": 151,
+      "start": 464.68,
+      "end": 465.749,
+      "duration": 1.069,
+      "text": "is"
+    },
+    {
+      "index": 152,
+      "start": 465.759,
+      "end": 470.11,
+      "duration": 4.351,
+      "text": "sinx evaluating it at zero and Pi now"
+    },
+    {
+      "index": 153,
+      "start": 470.12,
+      "end": 472.749,
+      "duration": 2.629,
+      "text": "let's do this one carefully because this"
+    },
+    {
+      "index": 154,
+      "start": 472.759,
+      "end": 474.869,
+      "duration": 2.11,
+      "text": "is where I see a lot of arithmetic"
+    },
+    {
+      "index": 155,
+      "start": 474.879,
+      "end": 476.469,
+      "duration": 1.59,
+      "text": "mistakes even though this is the easy"
+    },
+    {
+      "index": 156,
+      "start": 476.479,
+      "end": 479.029,
+      "duration": 2.55,
+      "text": "part of the problem it's hard to pay"
+    },
+    {
+      "index": 157,
+      "start": 479.039,
+      "end": 481.149,
+      "duration": 2.11,
+      "text": "attention ention and plug in the right"
+    },
+    {
+      "index": 158,
+      "start": 481.159,
+      "end": 483.71,
+      "duration": 2.551,
+      "text": "numbers and so let's just pay very close"
+    },
+    {
+      "index": 159,
+      "start": 483.72,
+      "end": 485.83,
+      "duration": 2.11,
+      "text": "attention I'm plugging in pi that's"
+    },
+    {
+      "index": 160,
+      "start": 485.84,
+      "end": 487.51,
+      "duration": 1.67,
+      "text": "minus cosine"
+    },
+    {
+      "index": 161,
+      "start": 487.52,
+      "end": 490.51,
+      "duration": 2.99,
+      "text": "Pi that's the first term and then I'm"
+    },
+    {
+      "index": 162,
+      "start": 490.52,
+      "end": 493.55,
+      "duration": 3.03,
+      "text": "subtracting the value at the bottom"
+    },
+    {
+      "index": 163,
+      "start": 493.56,
+      "end": 498.11,
+      "duration": 4.55,
+      "text": "which is minus cosine of"
+    },
+    {
+      "index": 164,
+      "start": 498.12,
+      "end": 501.469,
+      "duration": 3.349,
+      "text": "zero all right there are already five"
+    },
+    {
+      "index": 165,
+      "start": 501.479,
+      "end": 502.909,
+      "duration": 1.43,
+      "text": "opportunities for you to make a"
+    },
+    {
+      "index": 166,
+      "start": 502.919,
+      "end": 504.749,
+      "duration": 1.83,
+      "text": "transcription error or an arithmetic"
+    },
+    {
+      "index": 167,
+      "start": 504.759,
+      "end": 507.55,
+      "duration": 2.791,
+      "text": "mistake in what I just did and I've seen"
+    },
+    {
+      "index": 168,
+      "start": 507.56,
+      "end": 510.589,
+      "duration": 3.029,
+      "text": "all five of them all right so the next"
+    },
+    {
+      "index": 169,
+      "start": 510.599,
+      "end": 513.63,
+      "duration": 3.031,
+      "text": "one is that this is minus"
+    },
+    {
+      "index": 170,
+      "start": 513.64,
+      "end": 517.55,
+      "duration": 3.91,
+      "text": "-1 minus1 if you like and then this is"
+    },
+    {
+      "index": 171,
+      "start": 517.56,
+      "end": 519.63,
+      "duration": 2.07,
+      "text": "minus and here's another negative"
+    },
+    {
+      "index": 172,
+      "start": 519.64,
+      "end": 524.19,
+      "duration": 4.55,
+      "text": "1 all right so all together we have two"
+    },
+    {
+      "index": 173,
+      "start": 524.2,
+      "end": 527.07,
+      "duration": 2.87,
+      "text": "so that's it that's that's the area this"
+    },
+    {
+      "index": 174,
+      "start": 527.08,
+      "end": 538.19,
+      "duration": 11.11,
+      "text": "area which is hard to guess this is area"
+    },
+    {
+      "index": 175,
+      "start": 545.23,
+      "end": 545.24,
+      "duration": 0.01,
+      "text": "all right the third example is maybe"
+    },
+    {
+      "index": 176,
+      "start": 545.24,
+      "end": 549.35,
+      "duration": 4.11,
+      "text": "Superfluous but I'm going to say it"
+    },
+    {
+      "index": 177,
+      "start": 549.36,
+      "end": 553.91,
+      "duration": 4.55,
+      "text": "anyway we can take uh the integral say"
+    },
+    {
+      "index": 178,
+      "start": 553.92,
+      "end": 557.75,
+      "duration": 3.83,
+      "text": "from uh 0 to one of x to the 100th power"
+    },
+    {
+      "index": 179,
+      "start": 557.76,
+      "end": 561.43,
+      "duration": 3.67,
+      "text": "any any power now is within our power so"
+    },
+    {
+      "index": 180,
+      "start": 561.44,
+      "end": 563.069,
+      "duration": 1.629,
+      "text": "let's do it"
+    },
+    {
+      "index": 181,
+      "start": 563.079,
+      "end": 565.389,
+      "duration": 2.31,
+      "text": "here so here we"
+    },
+    {
+      "index": 182,
+      "start": 565.399,
+      "end": 572.069,
+      "duration": 6.67,
+      "text": "have the anti-derivative is X to the 1 /"
+    },
+    {
+      "index": 183,
+      "start": 572.079,
+      "end": 575.59,
+      "duration": 3.511,
+      "text": "101 evaluated at 0 and"
+    },
+    {
+      "index": 184,
+      "start": 575.6,
+      "end": 579.87,
+      "duration": 4.27,
+      "text": "1 and that is just 1 over"
+    },
+    {
+      "index": 185,
+      "start": 579.88,
+      "end": 583.43,
+      "duration": 3.55,
+      "text": "101 okay that's"
+    },
+    {
+      "index": 186,
+      "start": 583.44,
+      "end": 585.47,
+      "duration": 2.03,
+      "text": "that all"
+    },
+    {
+      "index": 187,
+      "start": 585.48,
+      "end": 588.87,
+      "duration": 3.39,
+      "text": "right so that's that's the fundamental"
+    },
+    {
+      "index": 188,
+      "start": 588.88,
+      "end": 590.43,
+      "duration": 1.55,
+      "text": "theorem"
+    },
+    {
+      "index": 189,
+      "start": 590.44,
+      "end": 593.63,
+      "duration": 3.19,
+      "text": "now this as I say well harnesses a lot"
+    },
+    {
+      "index": 190,
+      "start": 593.64,
+      "end": 595.55,
+      "duration": 1.91,
+      "text": "of what we've already learned all about"
+    },
+    {
+      "index": 191,
+      "start": 595.56,
+      "end": 599.31,
+      "duration": 3.75,
+      "text": "um All About anti-derivatives Now I want"
+    },
+    {
+      "index": 192,
+      "start": 599.32,
+      "end": 602.35,
+      "duration": 3.03,
+      "text": "to give you an"
+    },
+    {
+      "index": 193,
+      "start": 602.36,
+      "end": 604.75,
+      "duration": 2.39,
+      "text": "intuitive"
+    },
+    {
+      "index": 194,
+      "start": 604.76,
+      "end": 609.069,
+      "duration": 4.309,
+      "text": "interpretation so let's try"
+    },
+    {
+      "index": 195,
+      "start": 611.509,
+      "end": 611.519,
+      "duration": 0.01,
+      "text": "that we'll talk about a proof of the"
+    },
+    {
+      "index": 196,
+      "start": 611.519,
+      "end": 614.11,
+      "duration": 2.591,
+      "text": "fundamental theorem a little bit later"
+    },
+    {
+      "index": 197,
+      "start": 614.12,
+      "end": 617.31,
+      "duration": 3.19,
+      "text": "uh it's not actually that hard but uh"
+    },
+    {
+      "index": 198,
+      "start": 617.32,
+      "end": 620.71,
+      "duration": 3.39,
+      "text": "we'll we'll give it intuitive uh reason"
+    },
+    {
+      "index": 199,
+      "start": 620.72,
+      "end": 626.19,
+      "duration": 5.47,
+      "text": "uh uh interpretation if you"
+    },
+    {
+      "index": 200,
+      "start": 628.67,
+      "end": 628.68,
+      "duration": 0.01,
+      "text": "like of the uh of the fundamental"
+    },
+    {
+      "index": 201,
+      "start": 628.68,
+      "end": 637.71,
+      "duration": 9.03,
+      "text": "theorem"
+    },
+    {
+      "index": 202,
+      "start": 640.35,
+      "end": 640.36,
+      "duration": 0.01,
+      "text": "so this is going to be one which is not"
+    },
+    {
+      "index": 203,
+      "start": 640.36,
+      "end": 643.31,
+      "duration": 2.95,
+      "text": "related to area but rather to time and"
+    },
+    {
+      "index": 204,
+      "start": 643.32,
+      "end": 647.43,
+      "duration": 4.11,
+      "text": "distance so we'll consider X of T is the"
+    },
+    {
+      "index": 205,
+      "start": 647.44,
+      "end": 650.069,
+      "duration": 2.629,
+      "text": "uh is your"
+    },
+    {
+      "index": 206,
+      "start": 650.079,
+      "end": 654.71,
+      "duration": 4.631,
+      "text": "position at time"
+    },
+    {
+      "index": 207,
+      "start": 660.15,
+      "end": 660.16,
+      "duration": 0.01,
+      "text": "T and then X Prime of t which is the"
+    },
+    {
+      "index": 208,
+      "start": 660.16,
+      "end": 662.79,
+      "duration": 2.63,
+      "text": "rate of change of X with respect to T is"
+    },
+    {
+      "index": 209,
+      "start": 662.8,
+      "end": 668.269,
+      "duration": 5.469,
+      "text": "going to be what we know as uh your"
+    },
+    {
+      "index": 210,
+      "start": 671.35,
+      "end": 671.36,
+      "duration": 0.01,
+      "text": "speed all"
+    },
+    {
+      "index": 211,
+      "start": 671.36,
+      "end": 674.949,
+      "duration": 3.589,
+      "text": "right and then what"
+    },
+    {
+      "index": 212,
+      "start": 674.959,
+      "end": 677.35,
+      "duration": 2.391,
+      "text": "the theorem is telling us is the"
+    },
+    {
+      "index": 213,
+      "start": 677.36,
+      "end": 679.71,
+      "duration": 2.35,
+      "text": "following it's telling us the integral"
+    },
+    {
+      "index": 214,
+      "start": 679.72,
+      "end": 684.069,
+      "duration": 4.349,
+      "text": "from A to B of V of T"
+    },
+    {
+      "index": 215,
+      "start": 684.079,
+      "end": 687.87,
+      "duration": 3.791,
+      "text": "DT So reading the relationship is equal"
+    },
+    {
+      "index": 216,
+      "start": 687.88,
+      "end": 695.069,
+      "duration": 7.189,
+      "text": "to X of B minus X of"
+    },
+    {
+      "index": 217,
+      "start": 699.99,
+      "end": 700.0,
+      "duration": 0.01,
+      "text": "a and so this is some kind of cumulative"
+    },
+    {
+      "index": 218,
+      "start": 700.0,
+      "end": 706.11,
+      "duration": 6.11,
+      "text": "sum of your uh velocities so let's"
+    },
+    {
+      "index": 219,
+      "start": 706.12,
+      "end": 708.79,
+      "duration": 2.67,
+      "text": "interpret the right hand side first this"
+    },
+    {
+      "index": 220,
+      "start": 708.8,
+      "end": 716.43,
+      "duration": 7.63,
+      "text": "is the distance"
+    },
+    {
+      "index": 221,
+      "start": 720.389,
+      "end": 720.399,
+      "duration": 0.01,
+      "text": "traveled and it's it's also what you"
+    },
+    {
+      "index": 222,
+      "start": 720.399,
+      "end": 722.11,
+      "duration": 1.711,
+      "text": "would read on your"
+    },
+    {
+      "index": 223,
+      "start": 722.12,
+      "end": 724.11,
+      "duration": 1.99,
+      "text": "odometer right from the beginning to the"
+    },
+    {
+      "index": 224,
+      "start": 724.12,
+      "end": 726.11,
+      "duration": 1.99,
+      "text": "end of the trip that's what you would"
+    },
+    {
+      "index": 225,
+      "start": 726.12,
+      "end": 729.87,
+      "duration": 3.75,
+      "text": "read on your odometer whereas this is"
+    },
+    {
+      "index": 226,
+      "start": 729.88,
+      "end": 737.71,
+      "duration": 7.83,
+      "text": "what you would read on your"
+    },
+    {
+      "index": 227,
+      "start": 740.71,
+      "end": 740.72,
+      "duration": 0.01,
+      "text": "speedometer okay so so"
+    },
+    {
+      "index": 228,
+      "start": 740.72,
+      "end": 743.55,
+      "duration": 2.83,
+      "text": "we're this is the interpretation now I"
+    },
+    {
+      "index": 229,
+      "start": 743.56,
+      "end": 745.79,
+      "duration": 2.23,
+      "text": "want to just go one step further into"
+    },
+    {
+      "index": 230,
+      "start": 745.8,
+      "end": 747.31,
+      "duration": 1.51,
+      "text": "this interpretation to make the"
+    },
+    {
+      "index": 231,
+      "start": 747.32,
+      "end": 750.87,
+      "duration": 3.55,
+      "text": "connection with the remon sums that we"
+    },
+    {
+      "index": 232,
+      "start": 750.88,
+      "end": 754.189,
+      "duration": 3.309,
+      "text": "had uh yesterday because those are very"
+    },
+    {
+      "index": 233,
+      "start": 754.199,
+      "end": 755.949,
+      "duration": 1.75,
+      "text": "complicated to understand and I want you"
+    },
+    {
+      "index": 234,
+      "start": 755.959,
+      "end": 757.91,
+      "duration": 1.951,
+      "text": "to understand them viscerally on several"
+    },
+    {
+      "index": 235,
+      "start": 757.92,
+      "end": 760.47,
+      "duration": 2.55,
+      "text": "different levels because that's how"
+    },
+    {
+      "index": 236,
+      "start": 760.48,
+      "end": 763.43,
+      "duration": 2.95,
+      "text": "you'll understand integration better the"
+    },
+    {
+      "index": 237,
+      "start": 763.44,
+      "end": 765.069,
+      "duration": 1.629,
+      "text": "first thing that I want to imagine so"
+    },
+    {
+      "index": 238,
+      "start": 765.079,
+      "end": 766.47,
+      "duration": 1.391,
+      "text": "we're going to do a thought experiment"
+    },
+    {
+      "index": 239,
+      "start": 766.48,
+      "end": 769.189,
+      "duration": 2.709,
+      "text": "now which is that you are extremely"
+    },
+    {
+      "index": 240,
+      "start": 769.199,
+      "end": 771.629,
+      "duration": 2.43,
+      "text": "obsessive and you're driving your car"
+    },
+    {
+      "index": 241,
+      "start": 771.639,
+      "end": 775.71,
+      "duration": 4.071,
+      "text": "from from time a to time B Place Q to"
+    },
+    {
+      "index": 242,
+      "start": 775.72,
+      "end": 779.75,
+      "duration": 4.03,
+      "text": "time to place R whatever and"
+    },
+    {
+      "index": 243,
+      "start": 779.76,
+      "end": 783.11,
+      "duration": 3.35,
+      "text": "you check your speedometer every"
+    },
+    {
+      "index": 244,
+      "start": 783.12,
+      "end": 786.11,
+      "duration": 2.99,
+      "text": "second okay so you've read your"
+    },
+    {
+      "index": 245,
+      "start": 786.12,
+      "end": 789.829,
+      "duration": 3.709,
+      "text": "speedometer in the I second and you've"
+    },
+    {
+      "index": 246,
+      "start": 789.839,
+      "end": 791.75,
+      "duration": 1.911,
+      "text": "read that you're going at this"
+    },
+    {
+      "index": 247,
+      "start": 791.76,
+      "end": 795.87,
+      "duration": 4.11,
+      "text": "speed now how far do you go in that"
+    },
+    {
+      "index": 248,
+      "start": 795.88,
+      "end": 798.829,
+      "duration": 2.949,
+      "text": "second well the answer is you go this"
+    },
+    {
+      "index": 249,
+      "start": 798.839,
+      "end": 801.509,
+      "duration": 2.67,
+      "text": "speed times the time interval which in"
+    },
+    {
+      "index": 250,
+      "start": 801.519,
+      "end": 803.99,
+      "duration": 2.471,
+      "text": "this case we're imagining is 1"
+    },
+    {
+      "index": 251,
+      "start": 804.0,
+      "end": 807.31,
+      "duration": 3.31,
+      "text": "second all right so this is how far you"
+    },
+    {
+      "index": 252,
+      "start": 807.32,
+      "end": 809.47,
+      "duration": 2.15,
+      "text": "went so this is the time interval and"
+    },
+    {
+      "index": 253,
+      "start": 809.48,
+      "end": 813.55,
+      "duration": 4.07,
+      "text": "this is the"
+    },
+    {
+      "index": 254,
+      "start": 816.189,
+      "end": 816.199,
+      "duration": 0.01,
+      "text": "distance"
+    },
+    {
+      "index": 255,
+      "start": 816.199,
+      "end": 817.75,
+      "duration": 1.551,
+      "text": "traveled"
+    },
+    {
+      "index": 256,
+      "start": 817.76,
+      "end": 825.47,
+      "duration": 7.71,
+      "text": "in that in a second number I in the I"
+    },
+    {
+      "index": 257,
+      "start": 827.67,
+      "end": 827.68,
+      "duration": 0.01,
+      "text": "second the distance traveled in the ice"
+    },
+    {
+      "index": 258,
+      "start": 827.68,
+      "end": 829.03,
+      "duration": 1.35,
+      "text": "second that's the total distance you"
+    },
+    {
+      "index": 259,
+      "start": 829.04,
+      "end": 831.23,
+      "duration": 2.19,
+      "text": "traveled now what"
+    },
+    {
+      "index": 260,
+      "start": 831.24,
+      "end": 833.35,
+      "duration": 2.11,
+      "text": "happens if you go the whole distance"
+    },
+    {
+      "index": 261,
+      "start": 833.36,
+      "end": 835.99,
+      "duration": 2.63,
+      "text": "well you travel all the the sum of all"
+    },
+    {
+      "index": 262,
+      "start": 836.0,
+      "end": 838.189,
+      "duration": 2.189,
+      "text": "these distances so it's some some"
+    },
+    {
+      "index": 263,
+      "start": 838.199,
+      "end": 839.629,
+      "duration": 1.43,
+      "text": "massive SU some where n is some"
+    },
+    {
+      "index": 264,
+      "start": 839.639,
+      "end": 843.03,
+      "duration": 3.391,
+      "text": "ridiculous number of seconds 3600"
+    },
+    {
+      "index": 265,
+      "start": 843.04,
+      "end": 844.55,
+      "duration": 1.51,
+      "text": "seconds or something like that whatever"
+    },
+    {
+      "index": 266,
+      "start": 844.56,
+      "end": 846.91,
+      "duration": 2.35,
+      "text": "it is and that's going to turn out to be"
+    },
+    {
+      "index": 267,
+      "start": 846.92,
+      "end": 849.67,
+      "duration": 2.75,
+      "text": "very similar to what you would read on"
+    },
+    {
+      "index": 268,
+      "start": 849.68,
+      "end": 850.629,
+      "duration": 0.949,
+      "text": "your"
+    },
+    {
+      "index": 269,
+      "start": 850.639,
+      "end": 852.749,
+      "duration": 2.11,
+      "text": "odometer right because during that"
+    },
+    {
+      "index": 270,
+      "start": 852.759,
+      "end": 854.389,
+      "duration": 1.63,
+      "text": "second you didn't change velocity very"
+    },
+    {
+      "index": 271,
+      "start": 854.399,
+      "end": 856.91,
+      "duration": 2.511,
+      "text": "much so the approximation that the speed"
+    },
+    {
+      "index": 272,
+      "start": 856.92,
+      "end": 860.509,
+      "duration": 3.589,
+      "text": "at one time that you spotted it is very"
+    },
+    {
+      "index": 273,
+      "start": 860.519,
+      "end": 862.03,
+      "duration": 1.511,
+      "text": "similar to the speed during the whole"
+    },
+    {
+      "index": 274,
+      "start": 862.04,
+      "end": 864.79,
+      "duration": 2.75,
+      "text": "second it doesn't change that much so"
+    },
+    {
+      "index": 275,
+      "start": 864.8,
+      "end": 866.389,
+      "duration": 1.589,
+      "text": "this is a pretty good approximation to"
+    },
+    {
+      "index": 276,
+      "start": 866.399,
+      "end": 867.67,
+      "duration": 1.271,
+      "text": "how far you"
+    },
+    {
+      "index": 277,
+      "start": 867.68,
+      "end": 869.31,
+      "duration": 1.63,
+      "text": "traveled"
+    },
+    {
+      "index": 278,
+      "start": 869.32,
+      "end": 872.509,
+      "duration": 3.189,
+      "text": "and uh so the sum is a very realistic"
+    },
+    {
+      "index": 279,
+      "start": 872.519,
+      "end": 874.91,
+      "duration": 2.391,
+      "text": "approximation to the entire integral"
+    },
+    {
+      "index": 280,
+      "start": 874.92,
+      "end": 876.99,
+      "duration": 2.07,
+      "text": "which is denoted this"
+    },
+    {
+      "index": 281,
+      "start": 877.0,
+      "end": 879.55,
+      "duration": 2.55,
+      "text": "way which by the fundamental theorem is"
+    },
+    {
+      "index": 282,
+      "start": 879.56,
+      "end": 882.43,
+      "duration": 2.87,
+      "text": "exactly how far you"
+    },
+    {
+      "index": 283,
+      "start": 882.44,
+      "end": 888.71,
+      "duration": 6.27,
+      "text": "traveled so this is X of B minus X of a"
+    },
+    {
+      "index": 284,
+      "start": 888.72,
+      "end": 894.749,
+      "duration": 6.029,
+      "text": "exactly the other one is"
+    },
+    {
+      "index": 285,
+      "start": 896.79,
+      "end": 896.8,
+      "duration": 0.01,
+      "text": "approximate okay again this is this is"
+    },
+    {
+      "index": 286,
+      "start": 896.8,
+      "end": 909.03,
+      "duration": 12.23,
+      "text": "called a remon sum"
+    },
+    {
+      "index": 287,
+      "start": 912.269,
+      "end": 912.279,
+      "duration": 0.01,
+      "text": "all right so that's the"
+    },
+    {
+      "index": 288,
+      "start": 912.279,
+      "end": 916.67,
+      "duration": 4.391,
+      "text": "intro to the fundamental"
+    },
+    {
+      "index": 289,
+      "start": 920.829,
+      "end": 920.839,
+      "duration": 0.01,
+      "text": "theorem and now uh what I need to do is"
+    },
+    {
+      "index": 290,
+      "start": 920.839,
+      "end": 923.069,
+      "duration": 2.23,
+      "text": "extend it just a"
+    },
+    {
+      "index": 291,
+      "start": 923.079,
+      "end": 926.389,
+      "duration": 3.31,
+      "text": "bit and the way I'm going to extend it"
+    },
+    {
+      "index": 292,
+      "start": 926.399,
+      "end": 927.59,
+      "duration": 1.191,
+      "text": "is the"
+    },
+    {
+      "index": 293,
+      "start": 927.6,
+      "end": 930.15,
+      "duration": 2.55,
+      "text": "following uh I'm going to do it on this"
+    },
+    {
+      "index": 294,
+      "start": 930.16,
+      "end": 932.389,
+      "duration": 2.229,
+      "text": "example first and then and then we'll"
+    },
+    {
+      "index": 295,
+      "start": 932.399,
+      "end": 936.03,
+      "duration": 3.631,
+      "text": "we'll uh uh do it more formally so"
+    },
+    {
+      "index": 296,
+      "start": 936.04,
+      "end": 938.35,
+      "duration": 2.31,
+      "text": "here's this example where we went"
+    },
+    {
+      "index": 297,
+      "start": 938.36,
+      "end": 940.509,
+      "duration": 2.149,
+      "text": "someplace but now I just want to draw"
+    },
+    {
+      "index": 298,
+      "start": 940.519,
+      "end": 944.91,
+      "duration": 4.391,
+      "text": "you an additional uh uh picture here"
+    },
+    {
+      "index": 299,
+      "start": 944.92,
+      "end": 948.829,
+      "duration": 3.909,
+      "text": "imagine uh I start here and I go over to"
+    },
+    {
+      "index": 300,
+      "start": 948.839,
+      "end": 952.43,
+      "duration": 3.591,
+      "text": "there and then I come"
+    },
+    {
+      "index": 301,
+      "start": 955.87,
+      "end": 955.88,
+      "duration": 0.01,
+      "text": "back okay and maybe even I do a round"
+    },
+    {
+      "index": 302,
+      "start": 955.88,
+      "end": 958.35,
+      "duration": 2.47,
+      "text": "trip I come back to the same place well"
+    },
+    {
+      "index": 303,
+      "start": 958.36,
+      "end": 961.23,
+      "duration": 2.87,
+      "text": "if I if I come back to the same place"
+    },
+    {
+      "index": 304,
+      "start": 961.24,
+      "end": 965.43,
+      "duration": 4.19,
+      "text": "then the position is unchanged from the"
+    },
+    {
+      "index": 305,
+      "start": 965.44,
+      "end": 966.629,
+      "duration": 1.189,
+      "text": "beginning to the end in other words the"
+    },
+    {
+      "index": 306,
+      "start": 966.639,
+      "end": 971.35,
+      "duration": 4.711,
+      "text": "difference is zero and the velocity uh"
+    },
+    {
+      "index": 307,
+      "start": 971.36,
+      "end": 973.269,
+      "duration": 1.909,
+      "text": "technically rather than the speed it's"
+    },
+    {
+      "index": 308,
+      "start": 973.279,
+      "end": 974.59,
+      "duration": 1.311,
+      "text": "the speed to the right and the speed to"
+    },
+    {
+      "index": 309,
+      "start": 974.6,
+      "end": 976.509,
+      "duration": 1.909,
+      "text": "the left maybe are the same but one of"
+    },
+    {
+      "index": 310,
+      "start": 976.519,
+      "end": 978.069,
+      "duration": 1.55,
+      "text": "them is going in the positive direction"
+    },
+    {
+      "index": 311,
+      "start": 978.079,
+      "end": 979.23,
+      "duration": 1.151,
+      "text": "one of them is going in the negative"
+    },
+    {
+      "index": 312,
+      "start": 979.24,
+      "end": 981.23,
+      "duration": 1.99,
+      "text": "Direction and they cancel each"
+    },
+    {
+      "index": 313,
+      "start": 981.24,
+      "end": 984.55,
+      "duration": 3.31,
+      "text": "other so so if you have this kind of"
+    },
+    {
+      "index": 314,
+      "start": 984.56,
+      "end": 986.99,
+      "duration": 2.43,
+      "text": "situation we want that to be reflected"
+    },
+    {
+      "index": 315,
+      "start": 987.0,
+      "end": 988.71,
+      "duration": 1.71,
+      "text": "we like that interpretation and you want"
+    },
+    {
+      "index": 316,
+      "start": 988.72,
+      "end": 990.749,
+      "duration": 2.029,
+      "text": "to preserve it even when in the in the"
+    },
+    {
+      "index": 317,
+      "start": 990.759,
+      "end": 994.35,
+      "duration": 3.591,
+      "text": "case when uh the the the function V is"
+    },
+    {
+      "index": 318,
+      "start": 994.36,
+      "end": 997.949,
+      "duration": 3.589,
+      "text": "negative and so I'm going to now"
+    },
+    {
+      "index": 319,
+      "start": 997.959,
+      "end": 999.79,
+      "duration": 1.831,
+      "text": "extend"
+    },
+    {
+      "index": 320,
+      "start": 999.8,
+      "end": 1006.35,
+      "duration": 6.55,
+      "text": "uh our notion of"
+    },
+    {
+      "index": 321,
+      "start": 1017.47,
+      "end": 1017.48,
+      "duration": 0.01,
+      "text": "integration to the"
+    },
+    {
+      "index": 322,
+      "start": 1017.48,
+      "end": 1021.269,
+      "duration": 3.789,
+      "text": "case F"
+    },
+    {
+      "index": 323,
+      "start": 1021.279,
+      "end": 1023.39,
+      "duration": 2.111,
+      "text": "negative or"
+    },
+    {
+      "index": 324,
+      "start": 1023.4,
+      "end": 1027.87,
+      "duration": 4.47,
+      "text": "positive in other words it could be any"
+    },
+    {
+      "index": 325,
+      "start": 1030.669,
+      "end": 1030.679,
+      "duration": 0.01,
+      "text": "sign actually there's no change the"
+    },
+    {
+      "index": 326,
+      "start": 1030.679,
+      "end": 1033.549,
+      "duration": 2.87,
+      "text": "formulas are all the same we just if"
+    },
+    {
+      "index": 327,
+      "start": 1033.559,
+      "end": 1035.309,
+      "duration": 1.75,
+      "text": "this V is going to be positive we write"
+    },
+    {
+      "index": 328,
+      "start": 1035.319,
+      "end": 1036.59,
+      "duration": 1.271,
+      "text": "in a positive number if it's going to be"
+    },
+    {
+      "index": 329,
+      "start": 1036.6,
+      "end": 1038.11,
+      "duration": 1.51,
+      "text": "negative we write in a negative number"
+    },
+    {
+      "index": 330,
+      "start": 1038.12,
+      "end": 1039.429,
+      "duration": 1.309,
+      "text": "and we just leave it"
+    },
+    {
+      "index": 331,
+      "start": 1039.439,
+      "end": 1043.23,
+      "duration": 3.791,
+      "text": "alone and the real so here's let me let"
+    },
+    {
+      "index": 332,
+      "start": 1043.24,
+      "end": 1046.11,
+      "duration": 2.87,
+      "text": "me carry out an example and show you how"
+    },
+    {
+      "index": 333,
+      "start": 1046.12,
+      "end": 1047.39,
+      "duration": 1.27,
+      "text": "it"
+    },
+    {
+      "index": 334,
+      "start": 1047.4,
+      "end": 1049.23,
+      "duration": 1.83,
+      "text": "works"
+    },
+    {
+      "index": 335,
+      "start": 1049.24,
+      "end": 1051.549,
+      "duration": 2.309,
+      "text": "I'll carry out the example on the this"
+    },
+    {
+      "index": 336,
+      "start": 1051.559,
+      "end": 1053.669,
+      "duration": 2.11,
+      "text": "Blackboard up here of the sign function"
+    },
+    {
+      "index": 337,
+      "start": 1053.679,
+      "end": 1055.99,
+      "duration": 2.311,
+      "text": "but we're going to try uh two humps"
+    },
+    {
+      "index": 338,
+      "start": 1056.0,
+      "end": 1057.71,
+      "duration": 1.71,
+      "text": "we're going to try the the the first"
+    },
+    {
+      "index": 339,
+      "start": 1057.72,
+      "end": 1060.23,
+      "duration": 2.51,
+      "text": "hump and the one that goes underneath"
+    },
+    {
+      "index": 340,
+      "start": 1060.24,
+      "end": 1062.11,
+      "duration": 1.87,
+      "text": "there so our second exam our example"
+    },
+    {
+      "index": 341,
+      "start": 1062.12,
+      "end": 1064.43,
+      "duration": 2.31,
+      "text": "here is going to be the integral from 0"
+    },
+    {
+      "index": 342,
+      "start": 1064.44,
+      "end": 1066.07,
+      "duration": 1.63,
+      "text": "to 2"
+    },
+    {
+      "index": 343,
+      "start": 1066.08,
+      "end": 1070.07,
+      "duration": 3.99,
+      "text": "pi of sin x"
+    },
+    {
+      "index": 344,
+      "start": 1070.08,
+      "end": 1073.029,
+      "duration": 2.949,
+      "text": "DX and now because the fundamental"
+    },
+    {
+      "index": 345,
+      "start": 1073.039,
+      "end": 1076.43,
+      "duration": 3.391,
+      "text": "theorem is so important and so useful"
+    },
+    {
+      "index": 346,
+      "start": 1076.44,
+      "end": 1079.029,
+      "duration": 2.589,
+      "text": "and so convenient we just assume that it"
+    },
+    {
+      "index": 347,
+      "start": 1079.039,
+      "end": 1081.59,
+      "duration": 2.551,
+      "text": "be true in this case as well so we"
+    },
+    {
+      "index": 348,
+      "start": 1081.6,
+      "end": 1085.19,
+      "duration": 3.59,
+      "text": "insist that this is going to be - cosin"
+    },
+    {
+      "index": 349,
+      "start": 1085.2,
+      "end": 1089.549,
+      "duration": 4.349,
+      "text": "x evaluated at 0 and 2 pi with the"
+    },
+    {
+      "index": 350,
+      "start": 1089.559,
+      "end": 1091.99,
+      "duration": 2.431,
+      "text": "difference now when we carry out that"
+    },
+    {
+      "index": 351,
+      "start": 1092.0,
+      "end": 1097.909,
+      "duration": 5.909,
+      "text": "difference what we get here is - cine 2"
+    },
+    {
+      "index": 352,
+      "start": 1097.919,
+      "end": 1103.909,
+      "duration": 5.99,
+      "text": "Pius - cosine"
+    },
+    {
+      "index": 353,
+      "start": 1105.909,
+      "end": 1105.919,
+      "duration": 0.01,
+      "text": "0 which"
+    },
+    {
+      "index": 354,
+      "start": 1105.919,
+      "end": 1112.789,
+      "duration": 6.87,
+      "text": "is -1 - 1 which"
+    },
+    {
+      "index": 355,
+      "start": 1118.11,
+      "end": 1118.12,
+      "duration": 0.01,
+      "text": "is0 and the interpretation of this is is"
+    },
+    {
+      "index": 356,
+      "start": 1118.12,
+      "end": 1121.549,
+      "duration": 3.429,
+      "text": "the following here's our double hump"
+    },
+    {
+      "index": 357,
+      "start": 1121.559,
+      "end": 1124.95,
+      "duration": 3.391,
+      "text": "here's pi and here's 2 pi and all that's"
+    },
+    {
+      "index": 358,
+      "start": 1124.96,
+      "end": 1126.83,
+      "duration": 1.87,
+      "text": "happening is that the geometric"
+    },
+    {
+      "index": 359,
+      "start": 1126.84,
+      "end": 1128.87,
+      "duration": 2.03,
+      "text": "interpretation that we had before of the"
+    },
+    {
+      "index": 360,
+      "start": 1128.88,
+      "end": 1132.149,
+      "duration": 3.269,
+      "text": "area under the curve has to be taken"
+    },
+    {
+      "index": 361,
+      "start": 1132.159,
+      "end": 1133.47,
+      "duration": 1.311,
+      "text": "with a grain of salt in other words I"
+    },
+    {
+      "index": 362,
+      "start": 1133.48,
+      "end": 1134.99,
+      "duration": 1.51,
+      "text": "lied to you before when I said that the"
+    },
+    {
+      "index": 363,
+      "start": 1135.0,
+      "end": 1137.35,
+      "duration": 2.35,
+      "text": "definite integral was the area under the"
+    },
+    {
+      "index": 364,
+      "start": 1137.36,
+      "end": 1139.029,
+      "duration": 1.669,
+      "text": "curve it's not"
+    },
+    {
+      "index": 365,
+      "start": 1139.039,
+      "end": 1140.99,
+      "duration": 1.951,
+      "text": "the definite integral is the area under"
+    },
+    {
+      "index": 366,
+      "start": 1141.0,
+      "end": 1143.669,
+      "duration": 2.669,
+      "text": "the curve when it's above the curve and"
+    },
+    {
+      "index": 367,
+      "start": 1143.679,
+      "end": 1147.549,
+      "duration": 3.87,
+      "text": "it counts negatively when it's below the"
+    },
+    {
+      "index": 368,
+      "start": 1147.559,
+      "end": 1150.43,
+      "duration": 2.871,
+      "text": "curve so yesterday my my geometric"
+    },
+    {
+      "index": 369,
+      "start": 1150.44,
+      "end": 1153.23,
+      "duration": 2.79,
+      "text": "interpretation was incomplete and really"
+    },
+    {
+      "index": 370,
+      "start": 1153.24,
+      "end": 1154.83,
+      "duration": 1.59,
+      "text": "just a plain"
+    },
+    {
+      "index": 371,
+      "start": 1154.84,
+      "end": 1158.31,
+      "duration": 3.47,
+      "text": "lie"
+    },
+    {
+      "index": 372,
+      "start": 1169.07,
+      "end": 1169.08,
+      "duration": 0.01,
+      "text": "interpretation"
+    },
+    {
+      "index": 373,
+      "start": 1169.08,
+      "end": 1175.549,
+      "duration": 6.469,
+      "text": "of the definite"
+    },
+    {
+      "index": 374,
+      "start": 1181.27,
+      "end": 1181.28,
+      "duration": 0.01,
+      "text": "integral um is the um plus the"
+    },
+    {
+      "index": 375,
+      "start": 1181.28,
+      "end": 1182.95,
+      "duration": 1.67,
+      "text": "area"
+    },
+    {
+      "index": 376,
+      "start": 1182.96,
+      "end": 1189.11,
+      "duration": 6.15,
+      "text": "uh above the axis above the x"
+    },
+    {
+      "index": 377,
+      "start": 1190.789,
+      "end": 1190.799,
+      "duration": 0.01,
+      "text": "axis"
+    },
+    {
+      "index": 378,
+      "start": 1190.799,
+      "end": 1192.51,
+      "duration": 1.711,
+      "text": "minus the"
+    },
+    {
+      "index": 379,
+      "start": 1192.52,
+      "end": 1194.87,
+      "duration": 2.35,
+      "text": "area"
+    },
+    {
+      "index": 380,
+      "start": 1194.88,
+      "end": 1197.23,
+      "duration": 2.35,
+      "text": "below the"
+    },
+    {
+      "index": 381,
+      "start": 1197.24,
+      "end": 1199.39,
+      "duration": 2.15,
+      "text": "x-axis"
+    },
+    {
+      "index": 382,
+      "start": 1199.4,
+      "end": 1201.63,
+      "duration": 2.23,
+      "text": "all right as as as in the"
+    },
+    {
+      "index": 383,
+      "start": 1201.64,
+      "end": 1203.909,
+      "duration": 2.269,
+      "text": "picture I'm just just writing it down in"
+    },
+    {
+      "index": 384,
+      "start": 1203.919,
+      "end": 1205.75,
+      "duration": 1.831,
+      "text": "words but but you should think of it"
+    },
+    {
+      "index": 385,
+      "start": 1205.76,
+      "end": 1207.59,
+      "duration": 1.83,
+      "text": "visually"
+    },
+    {
+      "index": 386,
+      "start": 1207.6,
+      "end": 1212.23,
+      "duration": 4.63,
+      "text": "also all right so that's the um that's"
+    },
+    {
+      "index": 387,
+      "start": 1212.24,
+      "end": 1215.47,
+      "duration": 3.23,
+      "text": "the setup here and now we have the the"
+    },
+    {
+      "index": 388,
+      "start": 1215.48,
+      "end": 1217.87,
+      "duration": 2.39,
+      "text": "complete definition of integrals and I"
+    },
+    {
+      "index": 389,
+      "start": 1217.88,
+      "end": 1219.51,
+      "duration": 1.63,
+      "text": "need to list for you a bunch of their"
+    },
+    {
+      "index": 390,
+      "start": 1219.52,
+      "end": 1221.35,
+      "duration": 1.83,
+      "text": "properties and how we deal with"
+    },
+    {
+      "index": 391,
+      "start": 1221.36,
+      "end": 1222.99,
+      "duration": 1.63,
+      "text": "integrals are are there any questions"
+    },
+    {
+      "index": 392,
+      "start": 1223.0,
+      "end": 1235.669,
+      "duration": 12.669,
+      "text": "before we before we go on yeah just"
+    },
+    {
+      "index": 393,
+      "start": 1241.029,
+      "end": 1241.039,
+      "duration": 0.01,
+      "text": "uh the uh right so so the the question"
+    },
+    {
+      "index": 394,
+      "start": 1241.039,
+      "end": 1243.11,
+      "duration": 2.071,
+      "text": "was wouldn't the absolute value of the"
+    },
+    {
+      "index": 395,
+      "start": 1243.12,
+      "end": 1246.549,
+      "duration": 3.429,
+      "text": "Velocity function be involved um the the"
+    },
+    {
+      "index": 396,
+      "start": 1246.559,
+      "end": 1249.27,
+      "duration": 2.711,
+      "text": "answer is yes that is that's one thing"
+    },
+    {
+      "index": 397,
+      "start": 1249.28,
+      "end": 1250.75,
+      "duration": 1.47,
+      "text": "that you could one question that you"
+    },
+    {
+      "index": 398,
+      "start": 1250.76,
+      "end": 1254.149,
+      "duration": 3.389,
+      "text": "could ask one question you could ask is"
+    },
+    {
+      "index": 399,
+      "start": 1254.159,
+      "end": 1256.549,
+      "duration": 2.39,
+      "text": "What's the total distance"
+    },
+    {
+      "index": 400,
+      "start": 1256.559,
+      "end": 1259.83,
+      "duration": 3.271,
+      "text": "traveled and in that that case you would"
+    },
+    {
+      "index": 401,
+      "start": 1259.84,
+      "end": 1262.669,
+      "duration": 2.829,
+      "text": "uh keep track of the absolute value of"
+    },
+    {
+      "index": 402,
+      "start": 1262.679,
+      "end": 1265.11,
+      "duration": 2.431,
+      "text": "the of the Velocity as you as as as you"
+    },
+    {
+      "index": 403,
+      "start": 1265.12,
+      "end": 1266.909,
+      "duration": 1.789,
+      "text": "said whether it's positive or negative"
+    },
+    {
+      "index": 404,
+      "start": 1266.919,
+      "end": 1268.669,
+      "duration": 1.75,
+      "text": "and you then you get the total length of"
+    },
+    {
+      "index": 405,
+      "start": 1268.679,
+      "end": 1271.75,
+      "duration": 3.071,
+      "text": "this curve"
+    },
+    {
+      "index": 406,
+      "start": 1271.76,
+      "end": 1276.23,
+      "duration": 4.47,
+      "text": "here uh that's however not what the"
+    },
+    {
+      "index": 407,
+      "start": 1276.24,
+      "end": 1279.149,
+      "duration": 2.909,
+      "text": "definite integral measures it measures"
+    },
+    {
+      "index": 408,
+      "start": 1279.159,
+      "end": 1282.99,
+      "duration": 3.831,
+      "text": "the net distance traveled so so it's"
+    },
+    {
+      "index": 409,
+      "start": 1283.0,
+      "end": 1284.59,
+      "duration": 1.59,
+      "text": "it's it's another thing in other words"
+    },
+    {
+      "index": 410,
+      "start": 1284.6,
+      "end": 1286.31,
+      "duration": 1.71,
+      "text": "we we can do that we now have the tools"
+    },
+    {
+      "index": 411,
+      "start": 1286.32,
+      "end": 1289.909,
+      "duration": 3.589,
+      "text": "to do both could also so the so if you"
+    },
+    {
+      "index": 412,
+      "start": 1289.919,
+      "end": 1292.47,
+      "duration": 2.551,
+      "text": "like the uh the"
+    },
+    {
+      "index": 413,
+      "start": 1292.48,
+      "end": 1294.269,
+      "duration": 1.789,
+      "text": "total"
+    },
+    {
+      "index": 414,
+      "start": 1294.279,
+      "end": 1298.51,
+      "duration": 4.231,
+      "text": "distance is equal to the integral of"
+    },
+    {
+      "index": 415,
+      "start": 1298.52,
+      "end": 1305.95,
+      "duration": 7.43,
+      "text": "this from A to B but the net"
+    },
+    {
+      "index": 416,
+      "start": 1308.789,
+      "end": 1308.799,
+      "duration": 0.01,
+      "text": "distance is the one without the absolute"
+    },
+    {
+      "index": 417,
+      "start": 1308.799,
+      "end": 1313.11,
+      "duration": 4.311,
+      "text": "value"
+    },
+    {
+      "index": 418,
+      "start": 1316.31,
+      "end": 1316.32,
+      "duration": 0.01,
+      "text": "signs all right so that that's"
+    },
+    {
+      "index": 419,
+      "start": 1316.32,
+      "end": 1323.99,
+      "duration": 7.67,
+      "text": "correct other questions"
+    },
+    {
+      "index": 420,
+      "start": 1326.39,
+      "end": 1326.4,
+      "duration": 0.01,
+      "text": "all right so now let's talk about"
+    },
+    {
+      "index": 421,
+      "start": 1326.4,
+      "end": 1341.87,
+      "duration": 15.47,
+      "text": "properties of"
+    },
+    {
+      "index": 422,
+      "start": 1346.95,
+      "end": 1346.96,
+      "duration": 0.01,
+      "text": "integrals well so uh the"
+    },
+    {
+      "index": 423,
+      "start": 1346.96,
+      "end": 1348.83,
+      "duration": 1.87,
+      "text": "properties"
+    },
+    {
+      "index": 424,
+      "start": 1348.84,
+      "end": 1353.269,
+      "duration": 4.429,
+      "text": "of"
+    },
+    {
+      "index": 425,
+      "start": 1356.63,
+      "end": 1356.64,
+      "duration": 0.01,
+      "text": "integrals that I want to mention to"
+    },
+    {
+      "index": 426,
+      "start": 1356.64,
+      "end": 1362.669,
+      "duration": 6.029,
+      "text": "you are these the first one"
+    },
+    {
+      "index": 427,
+      "start": 1362.679,
+      "end": 1366.31,
+      "duration": 3.631,
+      "text": "is doesn't bear too much"
+    },
+    {
+      "index": 428,
+      "start": 1366.32,
+      "end": 1371.31,
+      "duration": 4.99,
+      "text": "comment if you take the cumulative"
+    },
+    {
+      "index": 429,
+      "start": 1371.32,
+      "end": 1373.87,
+      "duration": 2.55,
+      "text": "uh integral of a sum you're just going"
+    },
+    {
+      "index": 430,
+      "start": 1373.88,
+      "end": 1375.07,
+      "duration": 1.19,
+      "text": "to get the"
+    },
+    {
+      "index": 431,
+      "start": 1375.08,
+      "end": 1376.95,
+      "duration": 1.87,
+      "text": "sum of the"
+    },
+    {
+      "index": 432,
+      "start": 1376.96,
+      "end": 1380.909,
+      "duration": 3.949,
+      "text": "separate integrals"
+    },
+    {
+      "index": 433,
+      "start": 1380.919,
+      "end": 1383.269,
+      "duration": 2.35,
+      "text": "here and I won't say much about that"
+    },
+    {
+      "index": 434,
+      "start": 1383.279,
+      "end": 1386.149,
+      "duration": 2.87,
+      "text": "that's because sums come out because the"
+    },
+    {
+      "index": 435,
+      "start": 1386.159,
+      "end": 1388.83,
+      "duration": 2.671,
+      "text": "the integral is a sum incidentally you"
+    },
+    {
+      "index": 436,
+      "start": 1388.84,
+      "end": 1392.669,
+      "duration": 3.829,
+      "text": "know this strange symbol"
+    },
+    {
+      "index": 437,
+      "start": 1392.679,
+      "end": 1394.43,
+      "duration": 1.751,
+      "text": "here"
+    },
+    {
+      "index": 438,
+      "start": 1394.44,
+      "end": 1396.87,
+      "duration": 2.43,
+      "text": "uh there's actually a reason for it"
+    },
+    {
+      "index": 439,
+      "start": 1396.88,
+      "end": 1398.59,
+      "duration": 1.71,
+      "text": "historically if you go back to old books"
+    },
+    {
+      "index": 440,
+      "start": 1398.6,
+      "end": 1399.789,
+      "duration": 1.189,
+      "text": "you'll see that it actually looks a"
+    },
+    {
+      "index": 441,
+      "start": 1399.799,
+      "end": 1403.07,
+      "duration": 3.271,
+      "text": "little bit more like an S this capital"
+    },
+    {
+      "index": 442,
+      "start": 1403.08,
+      "end": 1406.31,
+      "duration": 3.23,
+      "text": "Sigma is a sum s for sum because"
+    },
+    {
+      "index": 443,
+      "start": 1406.32,
+      "end": 1407.99,
+      "duration": 1.67,
+      "text": "everybody in those days knew Latin and"
+    },
+    {
+      "index": 444,
+      "start": 1408.0,
+      "end": 1410.75,
+      "duration": 2.75,
+      "text": "Greek and this one is also an S but"
+    },
+    {
+      "index": 445,
+      "start": 1410.76,
+      "end": 1412.43,
+      "duration": 1.67,
+      "text": "gradually it was such an important s"
+    },
+    {
+      "index": 446,
+      "start": 1412.44,
+      "end": 1414.23,
+      "duration": 1.79,
+      "text": "that they made it bigger and then they"
+    },
+    {
+      "index": 447,
+      "start": 1414.24,
+      "end": 1415.59,
+      "duration": 1.35,
+      "text": "stretched it out and made it a little"
+    },
+    {
+      "index": 448,
+      "start": 1415.6,
+      "end": 1417.789,
+      "duration": 2.189,
+      "text": "thinner because it didn't fit into one"
+    },
+    {
+      "index": 449,
+      "start": 1417.799,
+      "end": 1421.669,
+      "duration": 3.87,
+      "text": "type setting space and so just for type"
+    },
+    {
+      "index": 450,
+      "start": 1421.679,
+      "end": 1424.11,
+      "duration": 2.431,
+      "text": "setting reason it got stretched and got"
+    },
+    {
+      "index": 451,
+      "start": 1424.12,
+      "end": 1426.19,
+      "duration": 2.07,
+      "text": "a little bit skinny anyway so it's"
+    },
+    {
+      "index": 452,
+      "start": 1426.2,
+      "end": 1428.71,
+      "duration": 2.51,
+      "text": "really an S and and in fact in French"
+    },
+    {
+      "index": 453,
+      "start": 1428.72,
+      "end": 1429.83,
+      "duration": 1.11,
+      "text": "they call it"
+    },
+    {
+      "index": 454,
+      "start": 1429.84,
+      "end": 1433.909,
+      "duration": 4.069,
+      "text": "sum even though they we call it integral"
+    },
+    {
+      "index": 455,
+      "start": 1433.919,
+      "end": 1438.149,
+      "duration": 4.23,
+      "text": "so it's a it's it's a sum all right so"
+    },
+    {
+      "index": 456,
+      "start": 1438.159,
+      "end": 1440.59,
+      "duration": 2.431,
+      "text": "it it's consistent with sums in this way"
+    },
+    {
+      "index": 457,
+      "start": 1440.6,
+      "end": 1442.95,
+      "duration": 2.35,
+      "text": "and"
+    },
+    {
+      "index": 458,
+      "start": 1446.11,
+      "end": 1446.12,
+      "duration": 0.01,
+      "text": "similarly similarly we can Factor"
+    },
+    {
+      "index": 459,
+      "start": 1446.12,
+      "end": 1448.029,
+      "duration": 1.909,
+      "text": "constants out of"
+    },
+    {
+      "index": 460,
+      "start": 1448.039,
+      "end": 1451.11,
+      "duration": 3.071,
+      "text": "sums so if you have a an integral like"
+    },
+    {
+      "index": 461,
+      "start": 1451.12,
+      "end": 1459.99,
+      "duration": 8.87,
+      "text": "this the constant factors"
+    },
+    {
+      "index": 462,
+      "start": 1462.83,
+      "end": 1462.84,
+      "duration": 0.01,
+      "text": "out but definitely don't try to get a"
+    },
+    {
+      "index": 463,
+      "start": 1462.84,
+      "end": 1466.59,
+      "duration": 3.75,
+      "text": "function out of this that that won't"
+    },
+    {
+      "index": 464,
+      "start": 1466.6,
+      "end": 1469.47,
+      "duration": 2.87,
+      "text": "happen okay in other words C has to be a"
+    },
+    {
+      "index": 465,
+      "start": 1469.48,
+      "end": 1476.389,
+      "duration": 6.909,
+      "text": "constant doesn't depend on"
+    },
+    {
+      "index": 466,
+      "start": 1483.19,
+      "end": 1483.2,
+      "duration": 0.01,
+      "text": "right the third"
+    },
+    {
+      "index": 467,
+      "start": 1483.2,
+      "end": 1485.23,
+      "duration": 2.03,
+      "text": "property well what do I want to call the"
+    },
+    {
+      "index": 468,
+      "start": 1485.24,
+      "end": 1488.63,
+      "duration": 3.39,
+      "text": "third property here I have a a a sort of"
+    },
+    {
+      "index": 469,
+      "start": 1488.64,
+      "end": 1491.75,
+      "duration": 3.11,
+      "text": "a preliminary property yes uh here which"
+    },
+    {
+      "index": 470,
+      "start": 1491.76,
+      "end": 1493.23,
+      "duration": 1.47,
+      "text": "is the following and I'll draw a picture"
+    },
+    {
+      "index": 471,
+      "start": 1493.24,
+      "end": 1497.269,
+      "duration": 4.029,
+      "text": "of it suppose you have three points"
+    },
+    {
+      "index": 472,
+      "start": 1497.279,
+      "end": 1498.99,
+      "duration": 1.711,
+      "text": "along"
+    },
+    {
+      "index": 473,
+      "start": 1499.0,
+      "end": 1500.269,
+      "duration": 1.269,
+      "text": "the line so then I'm going to draw a"
+    },
+    {
+      "index": 474,
+      "start": 1500.279,
+      "end": 1502.47,
+      "duration": 2.191,
+      "text": "picture of that and I'm going to use the"
+    },
+    {
+      "index": 475,
+      "start": 1502.48,
+      "end": 1504.11,
+      "duration": 1.63,
+      "text": "interpretation above the curve even"
+    },
+    {
+      "index": 476,
+      "start": 1504.12,
+      "end": 1505.23,
+      "duration": 1.11,
+      "text": "though that's not the whole thing so"
+    },
+    {
+      "index": 477,
+      "start": 1505.24,
+      "end": 1507.149,
+      "duration": 1.909,
+      "text": "here's a here's B and here's"
+    },
+    {
+      "index": 478,
+      "start": 1507.159,
+      "end": 1510.029,
+      "duration": 2.87,
+      "text": "C and you can see that the area of this"
+    },
+    {
+      "index": 479,
+      "start": 1510.039,
+      "end": 1513.269,
+      "duration": 3.23,
+      "text": "piece of the first two pieces here is"
+    },
+    {
+      "index": 480,
+      "start": 1513.279,
+      "end": 1514.83,
+      "duration": 1.551,
+      "text": "when added together gives you the area"
+    },
+    {
+      "index": 481,
+      "start": 1514.84,
+      "end": 1517.269,
+      "duration": 2.429,
+      "text": "of the hole and that's the rule that I'd"
+    },
+    {
+      "index": 482,
+      "start": 1517.279,
+      "end": 1520.389,
+      "duration": 3.11,
+      "text": "like to uh tell you so if you integrate"
+    },
+    {
+      "index": 483,
+      "start": 1520.399,
+      "end": 1522.31,
+      "duration": 1.911,
+      "text": "from A to"
+    },
+    {
+      "index": 484,
+      "start": 1522.32,
+      "end": 1524.789,
+      "duration": 2.469,
+      "text": "B and you add to that the integral from"
+    },
+    {
+      "index": 485,
+      "start": 1524.799,
+      "end": 1526.669,
+      "duration": 1.87,
+      "text": "B to"
+    },
+    {
+      "index": 486,
+      "start": 1526.679,
+      "end": 1536.389,
+      "duration": 9.71,
+      "text": "C you'll get the integral from a to"
+    },
+    {
+      "index": 487,
+      "start": 1538.59,
+      "end": 1538.6,
+      "duration": 0.01,
+      "text": "c this is going to be just a little"
+    },
+    {
+      "index": 488,
+      "start": 1538.6,
+      "end": 1540.43,
+      "duration": 1.83,
+      "text": "preliminary because the rule is a little"
+    },
+    {
+      "index": 489,
+      "start": 1540.44,
+      "end": 1544.19,
+      "duration": 3.75,
+      "text": "better than this but I will explain that"
+    },
+    {
+      "index": 490,
+      "start": 1544.2,
+      "end": 1546.99,
+      "duration": 2.79,
+      "text": "in a in a"
+    },
+    {
+      "index": 491,
+      "start": 1547.0,
+      "end": 1551.75,
+      "duration": 4.75,
+      "text": "minute the fourth rule is a very simple"
+    },
+    {
+      "index": 492,
+      "start": 1551.76,
+      "end": 1554.669,
+      "duration": 2.909,
+      "text": "one which is that the integral from a to"
+    },
+    {
+      "index": 493,
+      "start": 1554.679,
+      "end": 1559.95,
+      "duration": 5.271,
+      "text": "a of f ofx DX is equal to"
+    },
+    {
+      "index": 494,
+      "start": 1559.96,
+      "end": 1562.43,
+      "duration": 2.47,
+      "text": "zero that you can see very obviously"
+    },
+    {
+      "index": 495,
+      "start": 1562.44,
+      "end": 1564.789,
+      "duration": 2.349,
+      "text": "because there's no area no no no"
+    },
+    {
+      "index": 496,
+      "start": 1564.799,
+      "end": 1566.669,
+      "duration": 1.87,
+      "text": "horizontal movement there the rectangle"
+    },
+    {
+      "index": 497,
+      "start": 1566.679,
+      "end": 1569.389,
+      "duration": 2.71,
+      "text": "is infinitely thin and there's nothing"
+    },
+    {
+      "index": 498,
+      "start": 1569.399,
+      "end": 1572.909,
+      "duration": 3.51,
+      "text": "there so this is the case you can also"
+    },
+    {
+      "index": 499,
+      "start": 1572.919,
+      "end": 1578.669,
+      "duration": 5.75,
+      "text": "interpret it as F of a minus F of a so"
+    },
+    {
+      "index": 500,
+      "start": 1578.679,
+      "end": 1580.75,
+      "duration": 2.071,
+      "text": "that's also consistent with our"
+    },
+    {
+      "index": 501,
+      "start": 1580.76,
+      "end": 1582.43,
+      "duration": 1.67,
+      "text": "interpretation uh in terms of the"
+    },
+    {
+      "index": 502,
+      "start": 1582.44,
+      "end": 1584.909,
+      "duration": 2.469,
+      "text": "fundamental theorem of calculus and it's"
+    },
+    {
+      "index": 503,
+      "start": 1584.919,
+      "end": 1586.59,
+      "duration": 1.671,
+      "text": "perfectly reasonable that this is the"
+    },
+    {
+      "index": 504,
+      "start": 1586.6,
+      "end": 1589.59,
+      "duration": 2.99,
+      "text": "case now the fifth"
+    },
+    {
+      "index": 505,
+      "start": 1589.6,
+      "end": 1593.71,
+      "duration": 4.11,
+      "text": "Property is is is a definition it's not"
+    },
+    {
+      "index": 506,
+      "start": 1593.72,
+      "end": 1597.11,
+      "duration": 3.39,
+      "text": "really a property but it's very"
+    },
+    {
+      "index": 507,
+      "start": 1597.12,
+      "end": 1600.549,
+      "duration": 3.429,
+      "text": "important the integral from A to B of f"
+    },
+    {
+      "index": 508,
+      "start": 1600.559,
+      "end": 1606.07,
+      "duration": 5.511,
+      "text": "ofx DX is equal to minus the integral"
+    },
+    {
+      "index": 509,
+      "start": 1606.08,
+      "end": 1610.07,
+      "duration": 3.99,
+      "text": "from B to a of f ofx"
+    },
+    {
+      "index": 510,
+      "start": 1610.08,
+      "end": 1615.549,
+      "duration": 5.469,
+      "text": "DX now really the right hand side here"
+    },
+    {
+      "index": 511,
+      "start": 1615.559,
+      "end": 1619.11,
+      "duration": 3.551,
+      "text": "is an undefined quantity so so far we"
+    },
+    {
+      "index": 512,
+      "start": 1619.12,
+      "end": 1620.909,
+      "duration": 1.789,
+      "text": "never said that you could ever do this"
+    },
+    {
+      "index": 513,
+      "start": 1620.919,
+      "end": 1622.549,
+      "duration": 1.63,
+      "text": "where the where the where the uh where"
+    },
+    {
+      "index": 514,
+      "start": 1622.559,
+      "end": 1625.99,
+      "duration": 3.431,
+      "text": "the a is less than the B right because"
+    },
+    {
+      "index": 515,
+      "start": 1626.0,
+      "end": 1629.83,
+      "duration": 3.83,
+      "text": "this is working backwards here all right"
+    },
+    {
+      "index": 516,
+      "start": 1629.84,
+      "end": 1631.71,
+      "duration": 1.87,
+      "text": "but we just have a convention that"
+    },
+    {
+      "index": 517,
+      "start": 1631.72,
+      "end": 1633.149,
+      "duration": 1.429,
+      "text": "that's the definition whenever we write"
+    },
+    {
+      "index": 518,
+      "start": 1633.159,
+      "end": 1634.789,
+      "duration": 1.63,
+      "text": "down this number it's the same as minus"
+    },
+    {
+      "index": 519,
+      "start": 1634.799,
+      "end": 1636.31,
+      "duration": 1.511,
+      "text": "what that number"
+    },
+    {
+      "index": 520,
+      "start": 1636.32,
+      "end": 1639.71,
+      "duration": 3.39,
+      "text": "is and the reason for all of these is"
+    },
+    {
+      "index": 521,
+      "start": 1639.72,
+      "end": 1641.83,
+      "duration": 2.11,
+      "text": "again that we want them to be consistent"
+    },
+    {
+      "index": 522,
+      "start": 1641.84,
+      "end": 1643.789,
+      "duration": 1.949,
+      "text": "with the fundamental theorem of calculus"
+    },
+    {
+      "index": 523,
+      "start": 1643.799,
+      "end": 1645.31,
+      "duration": 1.511,
+      "text": "which is the thing that makes all this"
+    },
+    {
+      "index": 524,
+      "start": 1645.32,
+      "end": 1648.269,
+      "duration": 2.949,
+      "text": "work so if you if you notice"
+    },
+    {
+      "index": 525,
+      "start": 1648.279,
+      "end": 1651.19,
+      "duration": 2.911,
+      "text": "the the the left hand side here is f of"
+    },
+    {
+      "index": 526,
+      "start": 1651.2,
+      "end": 1654.549,
+      "duration": 3.349,
+      "text": "B minus F of a capital f the"
+    },
+    {
+      "index": 527,
+      "start": 1654.559,
+      "end": 1656.99,
+      "duration": 2.431,
+      "text": "anti-derivative of little F on the other"
+    },
+    {
+      "index": 528,
+      "start": 1657.0,
+      "end": 1660.07,
+      "duration": 3.07,
+      "text": "hand the other side is minus and if we"
+    },
+    {
+      "index": 529,
+      "start": 1660.08,
+      "end": 1661.75,
+      "duration": 1.67,
+      "text": "just ignore that we say these are"
+    },
+    {
+      "index": 530,
+      "start": 1661.76,
+      "end": 1663.029,
+      "duration": 1.269,
+      "text": "letters if we were machine we didn't"
+    },
+    {
+      "index": 531,
+      "start": 1663.039,
+      "end": 1664.509,
+      "duration": 1.47,
+      "text": "know which one was bigger than which we"
+    },
+    {
+      "index": 532,
+      "start": 1664.519,
+      "end": 1667.389,
+      "duration": 2.87,
+      "text": "just plug them in we would get here F of"
+    },
+    {
+      "index": 533,
+      "start": 1667.399,
+      "end": 1671.59,
+      "duration": 4.191,
+      "text": "a minus F of B over here and to make"
+    },
+    {
+      "index": 534,
+      "start": 1671.6,
+      "end": 1673.509,
+      "duration": 1.909,
+      "text": "these two things equal what we want is"
+    },
+    {
+      "index": 535,
+      "start": 1673.519,
+      "end": 1676.509,
+      "duration": 2.99,
+      "text": "to put that minus sign in now it's"
+    },
+    {
+      "index": 536,
+      "start": 1676.519,
+      "end": 1679.63,
+      "duration": 3.111,
+      "text": "consistent"
+    },
+    {
+      "index": 537,
+      "start": 1683.71,
+      "end": 1683.72,
+      "duration": 0.01,
+      "text": "so again these rules are set up so that"
+    },
+    {
+      "index": 538,
+      "start": 1683.72,
+      "end": 1686.23,
+      "duration": 2.51,
+      "text": "so that everything is consistent and now"
+    },
+    {
+      "index": 539,
+      "start": 1686.24,
+      "end": 1690.23,
+      "duration": 3.99,
+      "text": "I want to improve on rule three"
+    },
+    {
+      "index": 540,
+      "start": 1690.24,
+      "end": 1694.029,
+      "duration": 3.789,
+      "text": "here and point out to you so let me just"
+    },
+    {
+      "index": 541,
+      "start": 1694.039,
+      "end": 1696.149,
+      "duration": 2.11,
+      "text": "go back to rule three for a"
+    },
+    {
+      "index": 542,
+      "start": 1696.159,
+      "end": 1700.509,
+      "duration": 4.35,
+      "text": "second that now that we can evaluate"
+    },
+    {
+      "index": 543,
+      "start": 1700.519,
+      "end": 1702.549,
+      "duration": 2.03,
+      "text": "integrals regardless of the order we"
+    },
+    {
+      "index": 544,
+      "start": 1702.559,
+      "end": 1705.389,
+      "duration": 2.83,
+      "text": "don't have to have a less than b b less"
+    },
+    {
+      "index": 545,
+      "start": 1705.399,
+      "end": 1707.269,
+      "duration": 1.87,
+      "text": "than C in order to make sense out of"
+    },
+    {
+      "index": 546,
+      "start": 1707.279,
+      "end": 1708.07,
+      "duration": 0.791,
+      "text": "this"
+    },
+    {
+      "index": 547,
+      "start": 1708.08,
+      "end": 1710.95,
+      "duration": 2.87,
+      "text": "we actually have uh the possibility of"
+    },
+    {
+      "index": 548,
+      "start": 1710.96,
+      "end": 1712.47,
+      "duration": 1.51,
+      "text": "considering integrals where the where"
+    },
+    {
+      "index": 549,
+      "start": 1712.48,
+      "end": 1714.029,
+      "duration": 1.549,
+      "text": "the A's and the B's are in and the C's"
+    },
+    {
+      "index": 550,
+      "start": 1714.039,
+      "end": 1717.31,
+      "duration": 3.271,
+      "text": "are in any order you want and in fact"
+    },
+    {
+      "index": 551,
+      "start": 1717.32,
+      "end": 1718.99,
+      "duration": 1.67,
+      "text": "with this definition with this"
+    },
+    {
+      "index": 552,
+      "start": 1719.0,
+      "end": 1722.029,
+      "duration": 3.029,
+      "text": "definition five three Works no matter"
+    },
+    {
+      "index": 553,
+      "start": 1722.039,
+      "end": 1723.83,
+      "duration": 1.791,
+      "text": "what the numbers are so this is much"
+    },
+    {
+      "index": 554,
+      "start": 1723.84,
+      "end": 1728.63,
+      "duration": 4.79,
+      "text": "more convenient we don't this is not"
+    },
+    {
+      "index": 555,
+      "start": 1732.909,
+      "end": 1732.919,
+      "duration": 0.01,
+      "text": "necessary not necessary it just works"
+    },
+    {
+      "index": 556,
+      "start": 1732.919,
+      "end": 1736.149,
+      "duration": 3.23,
+      "text": "using convention"
+    },
+    {
+      "index": 557,
+      "start": 1736.159,
+      "end": 1739.149,
+      "duration": 2.99,
+      "text": "five okay okay"
+    },
+    {
+      "index": 558,
+      "start": 1739.159,
+      "end": 1743.31,
+      "duration": 4.151,
+      "text": "with five all"
+    },
+    {
+      "index": 559,
+      "start": 1743.32,
+      "end": 1747.23,
+      "duration": 3.91,
+      "text": "right again before I go on let me"
+    },
+    {
+      "index": 560,
+      "start": 1747.24,
+      "end": 1750.269,
+      "duration": 3.029,
+      "text": "emphasize it's we really want to respect"
+    },
+    {
+      "index": 561,
+      "start": 1750.279,
+      "end": 1752.269,
+      "duration": 1.99,
+      "text": "the sign of this velocity we really want"
+    },
+    {
+      "index": 562,
+      "start": 1752.279,
+      "end": 1755.35,
+      "duration": 3.071,
+      "text": "the net change in the position and we"
+    },
+    {
+      "index": 563,
+      "start": 1755.36,
+      "end": 1758.19,
+      "duration": 2.83,
+      "text": "don't want this absolute value here"
+    },
+    {
+      "index": 564,
+      "start": 1758.2,
+      "end": 1759.75,
+      "duration": 1.55,
+      "text": "because otherwise all of our formulas"
+    },
+    {
+      "index": 565,
+      "start": 1759.76,
+      "end": 1761.63,
+      "duration": 1.87,
+      "text": "are going to mess up we won't always be"
+    },
+    {
+      "index": 566,
+      "start": 1761.64,
+      "end": 1763.269,
+      "duration": 1.629,
+      "text": "able to check sometimes you know you"
+    },
+    {
+      "index": 567,
+      "start": 1763.279,
+      "end": 1765.389,
+      "duration": 2.11,
+      "text": "have letters rather than rather than"
+    },
+    {
+      "index": 568,
+      "start": 1765.399,
+      "end": 1766.59,
+      "duration": 1.191,
+      "text": "actual numbers here and you won't know"
+    },
+    {
+      "index": 569,
+      "start": 1766.6,
+      "end": 1768.549,
+      "duration": 1.949,
+      "text": "whether a is bigger than b so you'll"
+    },
+    {
+      "index": 570,
+      "start": 1768.559,
+      "end": 1771.11,
+      "duration": 2.551,
+      "text": "want to know that these formulas work"
+    },
+    {
+      "index": 571,
+      "start": 1771.12,
+      "end": 1775.47,
+      "duration": 4.35,
+      "text": "and are consistent in uh in all"
+    },
+    {
+      "index": 572,
+      "start": 1775.48,
+      "end": 1778.47,
+      "duration": 2.99,
+      "text": "situations okay I'm going to trade these"
+    },
+    {
+      "index": 573,
+      "start": 1778.48,
+      "end": 1782.669,
+      "duration": 4.189,
+      "text": "again in order to preserve the ordering"
+    },
+    {
+      "index": 574,
+      "start": 1782.679,
+      "end": 1786.389,
+      "duration": 3.71,
+      "text": "1 through"
+    },
+    {
+      "index": 575,
+      "start": 1789.269,
+      "end": 1789.279,
+      "duration": 0.01,
+      "text": "5 and now uh I have a"
+    },
+    {
+      "index": 576,
+      "start": 1789.279,
+      "end": 1793.23,
+      "duration": 3.951,
+      "text": "sixth property that I want to talk"
+    },
+    {
+      "index": 577,
+      "start": 1793.24,
+      "end": 1796.31,
+      "duration": 3.07,
+      "text": "about this one is called"
+    },
+    {
+      "index": 578,
+      "start": 1796.32,
+      "end": 1802.07,
+      "duration": 5.75,
+      "text": "estimation"
+    },
+    {
+      "index": 579,
+      "start": 1804.63,
+      "end": 1804.64,
+      "duration": 0.01,
+      "text": "and it says the"
+    },
+    {
+      "index": 580,
+      "start": 1804.64,
+      "end": 1809.31,
+      "duration": 4.67,
+      "text": "following if f ofx is less than or equal"
+    },
+    {
+      "index": 581,
+      "start": 1809.32,
+      "end": 1810.669,
+      "duration": 1.349,
+      "text": "to G"
+    },
+    {
+      "index": 582,
+      "start": 1810.679,
+      "end": 1813.31,
+      "duration": 2.631,
+      "text": "ofx"
+    },
+    {
+      "index": 583,
+      "start": 1813.32,
+      "end": 1818.11,
+      "duration": 4.79,
+      "text": "then the integral from A to B of f ofx"
+    },
+    {
+      "index": 584,
+      "start": 1818.12,
+      "end": 1820.87,
+      "duration": 2.75,
+      "text": "DX is less than or equal to the integral"
+    },
+    {
+      "index": 585,
+      "start": 1820.88,
+      "end": 1826.23,
+      "duration": 5.35,
+      "text": "from A to B of G ofx"
+    },
+    {
+      "index": 586,
+      "start": 1828.389,
+      "end": 1828.399,
+      "duration": 0.01,
+      "text": "DX"
+    },
+    {
+      "index": 587,
+      "start": 1828.399,
+      "end": 1830.07,
+      "duration": 1.671,
+      "text": "now this one"
+    },
+    {
+      "index": 588,
+      "start": 1830.08,
+      "end": 1832.149,
+      "duration": 2.069,
+      "text": "says"
+    },
+    {
+      "index": 589,
+      "start": 1832.159,
+      "end": 1835.95,
+      "duration": 3.791,
+      "text": "that if I'm going more slowly than"
+    },
+    {
+      "index": 590,
+      "start": 1835.96,
+      "end": 1840.029,
+      "duration": 4.069,
+      "text": "you then you go farther than I"
+    },
+    {
+      "index": 591,
+      "start": 1840.039,
+      "end": 1844.19,
+      "duration": 4.151,
+      "text": "do okay that's all it's saying for this"
+    },
+    {
+      "index": 592,
+      "start": 1844.2,
+      "end": 1847.909,
+      "duration": 3.709,
+      "text": "one you'd better have a is less than b"
+    },
+    {
+      "index": 593,
+      "start": 1847.919,
+      "end": 1851.269,
+      "duration": 3.35,
+      "text": "you need it because we flip the signs"
+    },
+    {
+      "index": 594,
+      "start": 1851.279,
+      "end": 1854.389,
+      "duration": 3.11,
+      "text": "when we flip the order of A and"
+    },
+    {
+      "index": 595,
+      "start": 1854.399,
+      "end": 1857.909,
+      "duration": 3.51,
+      "text": "B so this one it's essential that the"
+    },
+    {
+      "index": 596,
+      "start": 1857.919,
+      "end": 1863.669,
+      "duration": 5.75,
+      "text": "lower limit be smaller than the upper"
+    },
+    {
+      "index": 597,
+      "start": 1866.19,
+      "end": 1866.2,
+      "duration": 0.01,
+      "text": "limit but let me just emphasize because"
+    },
+    {
+      "index": 598,
+      "start": 1866.2,
+      "end": 1868.23,
+      "duration": 2.03,
+      "text": "we're dealing with the generalities of"
+    },
+    {
+      "index": 599,
+      "start": 1868.24,
+      "end": 1869.99,
+      "duration": 1.75,
+      "text": "this actually if one of these is"
+    },
+    {
+      "index": 600,
+      "start": 1870.0,
+      "end": 1872.029,
+      "duration": 2.029,
+      "text": "negative and the other one is negative"
+    },
+    {
+      "index": 601,
+      "start": 1872.039,
+      "end": 1875.11,
+      "duration": 3.071,
+      "text": "then uh it also works okay this one ends"
+    },
+    {
+      "index": 602,
+      "start": 1875.12,
+      "end": 1876.75,
+      "duration": 1.63,
+      "text": "up being this is this if f is more"
+    },
+    {
+      "index": 603,
+      "start": 1876.76,
+      "end": 1879.149,
+      "duration": 2.389,
+      "text": "negative than G then this added up thing"
+    },
+    {
+      "index": 604,
+      "start": 1879.159,
+      "end": 1881.71,
+      "duration": 2.551,
+      "text": "is more negative than that one okay"
+    },
+    {
+      "index": 605,
+      "start": 1881.72,
+      "end": 1883.509,
+      "duration": 1.789,
+      "text": "again under the assumption that a is"
+    },
+    {
+      "index": 606,
+      "start": 1883.519,
+      "end": 1886.11,
+      "duration": 2.591,
+      "text": "less than B all right so it's it's it's"
+    },
+    {
+      "index": 607,
+      "start": 1886.12,
+      "end": 1888.029,
+      "duration": 1.909,
+      "text": "as I wrote it it's it's it's in it's in"
+    },
+    {
+      "index": 608,
+      "start": 1888.039,
+      "end": 1891.149,
+      "duration": 3.11,
+      "text": "full"
+    },
+    {
+      "index": 609,
+      "start": 1895.029,
+      "end": 1895.039,
+      "duration": 0.01,
+      "text": "generality all right I let's let's uh uh"
+    },
+    {
+      "index": 610,
+      "start": 1895.039,
+      "end": 1896.549,
+      "duration": 1.51,
+      "text": "illustrate this"
+    },
+    {
+      "index": 611,
+      "start": 1896.559,
+      "end": 1902.19,
+      "duration": 5.631,
+      "text": "one and then we have one more property"
+    },
+    {
+      "index": 612,
+      "start": 1902.2,
+      "end": 1906.149,
+      "duration": 3.949,
+      "text": "to learn after"
+    },
+    {
+      "index": 613,
+      "start": 1918.99,
+      "end": 1919.0,
+      "duration": 0.01,
+      "text": "estimation"
+    },
+    {
+      "index": 614,
+      "start": 1919.0,
+      "end": 1920.789,
+      "duration": 1.789,
+      "text": "the example is the same as one that I"
+    },
+    {
+      "index": 615,
+      "start": 1920.799,
+      "end": 1923.029,
+      "duration": 2.23,
+      "text": "already gave you but this time because"
+    },
+    {
+      "index": 616,
+      "start": 1923.039,
+      "end": 1925.509,
+      "duration": 2.47,
+      "text": "we have the tool of integration we can"
+    },
+    {
+      "index": 617,
+      "start": 1925.519,
+      "end": 1930.389,
+      "duration": 4.87,
+      "text": "just follow our noses and uh it"
+    },
+    {
+      "index": 618,
+      "start": 1930.399,
+      "end": 1933.509,
+      "duration": 3.11,
+      "text": "works I'll start with the inequality so"
+    },
+    {
+      "index": 619,
+      "start": 1933.519,
+      "end": 1935.43,
+      "duration": 1.911,
+      "text": "I'm I'm I'm I'm trying to illustrate"
+    },
+    {
+      "index": 620,
+      "start": 1935.44,
+      "end": 1936.75,
+      "duration": 1.31,
+      "text": "estimation so I want to start with an"
+    },
+    {
+      "index": 621,
+      "start": 1936.76,
+      "end": 1938.509,
+      "duration": 1.749,
+      "text": "inequality which is what the hypothesis"
+    },
+    {
+      "index": 622,
+      "start": 1938.519,
+      "end": 1940.47,
+      "duration": 1.951,
+      "text": "is here and I'm going to integrate the"
+    },
+    {
+      "index": 623,
+      "start": 1940.48,
+      "end": 1943.11,
+      "duration": 2.63,
+      "text": "inequality to get this conclusion and"
+    },
+    {
+      "index": 624,
+      "start": 1943.12,
+      "end": 1945.99,
+      "duration": 2.87,
+      "text": "see what what conclusion it is the"
+    },
+    {
+      "index": 625,
+      "start": 1946.0,
+      "end": 1947.99,
+      "duration": 1.99,
+      "text": "inequality that I want to take is that e"
+    },
+    {
+      "index": 626,
+      "start": 1948.0,
+      "end": 1950.669,
+      "duration": 2.669,
+      "text": "to X is greater than or equal to 1 for X"
+    },
+    {
+      "index": 627,
+      "start": 1950.679,
+      "end": 1953.11,
+      "duration": 2.431,
+      "text": "greater than or equal to Z that's going"
+    },
+    {
+      "index": 628,
+      "start": 1953.12,
+      "end": 1956.75,
+      "duration": 3.63,
+      "text": "to be our start starting"
+    },
+    {
+      "index": 629,
+      "start": 1959.07,
+      "end": 1959.08,
+      "duration": 0.01,
+      "text": "place and now I'm going to integrate it"
+    },
+    {
+      "index": 630,
+      "start": 1959.08,
+      "end": 1960.95,
+      "duration": 1.87,
+      "text": "that is I'm going to use estimation to"
+    },
+    {
+      "index": 631,
+      "start": 1960.96,
+      "end": 1963.43,
+      "duration": 2.47,
+      "text": "see what that gives well I'm going to"
+    },
+    {
+      "index": 632,
+      "start": 1963.44,
+      "end": 1965.87,
+      "duration": 2.43,
+      "text": "integrate say from0 to B I I can't"
+    },
+    {
+      "index": 633,
+      "start": 1965.88,
+      "end": 1967.549,
+      "duration": 1.669,
+      "text": "integrate below zero because it's only"
+    },
+    {
+      "index": 634,
+      "start": 1967.559,
+      "end": 1971.83,
+      "duration": 4.271,
+      "text": "true above zero this is e to the X DX"
+    },
+    {
+      "index": 635,
+      "start": 1971.84,
+      "end": 1973.909,
+      "duration": 2.069,
+      "text": "greater than or equal to the integral"
+    },
+    {
+      "index": 636,
+      "start": 1973.919,
+      "end": 1980.99,
+      "duration": 7.071,
+      "text": "from 0 to B of 1 DX"
+    },
+    {
+      "index": 637,
+      "start": 1983.669,
+      "end": 1983.679,
+      "duration": 0.01,
+      "text": "X all right let's work out what each of"
+    },
+    {
+      "index": 638,
+      "start": 1983.679,
+      "end": 1984.99,
+      "duration": 1.311,
+      "text": "these"
+    },
+    {
+      "index": 639,
+      "start": 1985.0,
+      "end": 1987.95,
+      "duration": 2.95,
+      "text": "is the first"
+    },
+    {
+      "index": 640,
+      "start": 1987.96,
+      "end": 1990.509,
+      "duration": 2.549,
+      "text": "one e to the X"
+    },
+    {
+      "index": 641,
+      "start": 1990.519,
+      "end": 1994.389,
+      "duration": 3.87,
+      "text": "DX is um the antiderivative is e to X"
+    },
+    {
+      "index": 642,
+      "start": 1994.399,
+      "end": 1996.99,
+      "duration": 2.591,
+      "text": "evaluated at 0 and B so that's e to the"
+    },
+    {
+      "index": 643,
+      "start": 1997.0,
+      "end": 2002.509,
+      "duration": 5.509,
+      "text": "B minus E to 0 which is e to the B minus"
+    },
+    {
+      "index": 644,
+      "start": 2007.669,
+      "end": 2007.679,
+      "duration": 0.01,
+      "text": "one"
+    },
+    {
+      "index": 645,
+      "start": 2007.679,
+      "end": 2010.23,
+      "duration": 2.551,
+      "text": "you're supposed to be able to get by the"
+    },
+    {
+      "index": 646,
+      "start": 2010.24,
+      "end": 2012.83,
+      "duration": 2.59,
+      "text": "uh by the rectangle law this is one"
+    },
+    {
+      "index": 647,
+      "start": 2012.84,
+      "end": 2015.99,
+      "duration": 3.15,
+      "text": "rectangle of Base B and height one so"
+    },
+    {
+      "index": 648,
+      "start": 2016.0,
+      "end": 2018.43,
+      "duration": 2.43,
+      "text": "the answer is b or you can do it by"
+    },
+    {
+      "index": 649,
+      "start": 2018.44,
+      "end": 2020.11,
+      "duration": 1.67,
+      "text": "anti-derivatives"
+    },
+    {
+      "index": 650,
+      "start": 2020.12,
+      "end": 2023.19,
+      "duration": 3.07,
+      "text": "but it's"
+    },
+    {
+      "index": 651,
+      "start": 2023.2,
+      "end": 2026.87,
+      "duration": 3.67,
+      "text": "B that means that our inequality"
+    },
+    {
+      "index": 652,
+      "start": 2026.88,
+      "end": 2029.23,
+      "duration": 2.35,
+      "text": "says uh if I just combine these two"
+    },
+    {
+      "index": 653,
+      "start": 2029.24,
+      "end": 2033.07,
+      "duration": 3.83,
+      "text": "things together that e to the B minus 1"
+    },
+    {
+      "index": 654,
+      "start": 2033.08,
+      "end": 2036.149,
+      "duration": 3.069,
+      "text": "is greater than or equal to B and that's"
+    },
+    {
+      "index": 655,
+      "start": 2036.159,
+      "end": 2037.909,
+      "duration": 1.75,
+      "text": "the same thing"
+    },
+    {
+      "index": 656,
+      "start": 2037.919,
+      "end": 2041.19,
+      "duration": 3.271,
+      "text": "as e to B is greater than or equal to 1"
+    },
+    {
+      "index": 657,
+      "start": 2041.2,
+      "end": 2043.549,
+      "duration": 2.349,
+      "text": "B again this only works for B greater"
+    },
+    {
+      "index": 658,
+      "start": 2043.559,
+      "end": 2045.669,
+      "duration": 2.11,
+      "text": "than or equal to Z"
+    },
+    {
+      "index": 659,
+      "start": 2045.679,
+      "end": 2047.669,
+      "duration": 1.99,
+      "text": "notice"
+    },
+    {
+      "index": 660,
+      "start": 2047.679,
+      "end": 2050.31,
+      "duration": 2.631,
+      "text": "that if B were negative this would be a"
+    },
+    {
+      "index": 661,
+      "start": 2050.32,
+      "end": 2052.629,
+      "duration": 2.309,
+      "text": "well- defined"
+    },
+    {
+      "index": 662,
+      "start": 2052.639,
+      "end": 2056.589,
+      "duration": 3.95,
+      "text": "quantity but this estimation would be"
+    },
+    {
+      "index": 663,
+      "start": 2056.599,
+      "end": 2059.629,
+      "duration": 3.03,
+      "text": "false all right we need that the B be"
+    },
+    {
+      "index": 664,
+      "start": 2059.639,
+      "end": 2061.19,
+      "duration": 1.551,
+      "text": "bigger than zero in order for this to"
+    },
+    {
+      "index": 665,
+      "start": 2061.2,
+      "end": 2064.75,
+      "duration": 3.55,
+      "text": "make sense so this is this was used and"
+    },
+    {
+      "index": 666,
+      "start": 2064.76,
+      "end": 2065.95,
+      "duration": 1.19,
+      "text": "that's a good thing because this"
+    },
+    {
+      "index": 667,
+      "start": 2065.96,
+      "end": 2069.069,
+      "duration": 3.109,
+      "text": "inequality is is uh suspect actually it"
+    },
+    {
+      "index": 668,
+      "start": 2069.079,
+      "end": 2071.349,
+      "duration": 2.27,
+      "text": "turns out to be true when B is negative"
+    },
+    {
+      "index": 669,
+      "start": 2071.359,
+      "end": 2076.069,
+      "duration": 4.71,
+      "text": "but it's we certainly didn't prove"
+    },
+    {
+      "index": 670,
+      "start": 2077.869,
+      "end": 2077.879,
+      "duration": 0.01,
+      "text": "it all"
+    },
+    {
+      "index": 671,
+      "start": 2077.879,
+      "end": 2081.149,
+      "duration": 3.27,
+      "text": "right I'm going to just repeat this"
+    },
+    {
+      "index": 672,
+      "start": 2081.159,
+      "end": 2085.55,
+      "duration": 4.391,
+      "text": "process so let's repeat"
+    },
+    {
+      "index": 673,
+      "start": 2088.99,
+      "end": 2089.0,
+      "duration": 0.01,
+      "text": "it starting from the inequality the"
+    },
+    {
+      "index": 674,
+      "start": 2089.0,
+      "end": 2091.47,
+      "duration": 2.47,
+      "text": "conclusion which is sitting right here"
+    },
+    {
+      "index": 675,
+      "start": 2091.48,
+      "end": 2094.27,
+      "duration": 2.79,
+      "text": "but I'll write it in the form e to X"
+    },
+    {
+      "index": 676,
+      "start": 2094.28,
+      "end": 2096.869,
+      "duration": 2.589,
+      "text": "greater than or equal to 1 + x for x"
+    },
+    {
+      "index": 677,
+      "start": 2096.879,
+      "end": 2099.109,
+      "duration": 2.23,
+      "text": "greater than or equal to"
+    },
+    {
+      "index": 678,
+      "start": 2099.119,
+      "end": 2102.51,
+      "duration": 3.391,
+      "text": "Z and now if I integrate this one I get"
+    },
+    {
+      "index": 679,
+      "start": 2102.52,
+      "end": 2106.15,
+      "duration": 3.63,
+      "text": "the integral from 0 to b e to the X DX"
+    },
+    {
+      "index": 680,
+      "start": 2106.16,
+      "end": 2107.75,
+      "duration": 1.59,
+      "text": "is greater than or equal to the integral"
+    },
+    {
+      "index": 681,
+      "start": 2107.76,
+      "end": 2111.47,
+      "duration": 3.71,
+      "text": "from 0 to b 1 + x"
+    },
+    {
+      "index": 682,
+      "start": 2111.48,
+      "end": 2114.67,
+      "duration": 3.19,
+      "text": "DX and uh I remind you that we've"
+    },
+    {
+      "index": 683,
+      "start": 2114.68,
+      "end": 2116.63,
+      "duration": 1.95,
+      "text": "already calculated this one this is e to"
+    },
+    {
+      "index": 684,
+      "start": 2116.64,
+      "end": 2118.069,
+      "duration": 1.429,
+      "text": "the B minus"
+    },
+    {
+      "index": 685,
+      "start": 2118.079,
+      "end": 2120.829,
+      "duration": 2.75,
+      "text": "one and the other one is not hard to"
+    },
+    {
+      "index": 686,
+      "start": 2120.839,
+      "end": 2124.19,
+      "duration": 3.351,
+      "text": "calculate the anti-derivative is x + x^2"
+    },
+    {
+      "index": 687,
+      "start": 2124.2,
+      "end": 2128.79,
+      "duration": 4.59,
+      "text": "/ 2 we're evaluating it that at z and b"
+    },
+    {
+      "index": 688,
+      "start": 2128.8,
+      "end": 2131.51,
+      "duration": 2.71,
+      "text": "so that comes out to be that comes out"
+    },
+    {
+      "index": 689,
+      "start": 2131.52,
+      "end": 2138.43,
+      "duration": 6.91,
+      "text": "to be b + B ^2 / 2 and so our conclusion"
+    },
+    {
+      "index": 690,
+      "start": 2141.71,
+      "end": 2141.72,
+      "duration": 0.01,
+      "text": "is our conclusion is that the left side"
+    },
+    {
+      "index": 691,
+      "start": 2141.72,
+      "end": 2144.829,
+      "duration": 3.109,
+      "text": "which is e to the B minus 1 is greater"
+    },
+    {
+      "index": 692,
+      "start": 2144.839,
+      "end": 2148.67,
+      "duration": 3.831,
+      "text": "than or equal to B + b^2 / 2 and this is"
+    },
+    {
+      "index": 693,
+      "start": 2148.68,
+      "end": 2151.03,
+      "duration": 2.35,
+      "text": "for B greater than or equal to"
+    },
+    {
+      "index": 694,
+      "start": 2151.04,
+      "end": 2153.39,
+      "duration": 2.35,
+      "text": "0 and that's the same thing it's e to"
+    },
+    {
+      "index": 695,
+      "start": 2153.4,
+      "end": 2155.79,
+      "duration": 2.39,
+      "text": "the B greater than or equal to 1 + B +"
+    },
+    {
+      "index": 696,
+      "start": 2155.8,
+      "end": 2159.67,
+      "duration": 3.87,
+      "text": "b^2 over"
+    },
+    {
+      "index": 697,
+      "start": 2163.71,
+      "end": 2163.72,
+      "duration": 0.01,
+      "text": "two this one actually is is false for B-"
+    },
+    {
+      "index": 698,
+      "start": 2163.72,
+      "end": 2169.15,
+      "duration": 5.43,
+      "text": "negative so that's uh something that you"
+    },
+    {
+      "index": 699,
+      "start": 2169.16,
+      "end": 2174.23,
+      "duration": 5.07,
+      "text": "have to be careful with the B positives"
+    },
+    {
+      "index": 700,
+      "start": 2176.75,
+      "end": 2176.76,
+      "duration": 0.01,
+      "text": "here all right so you can keep on going"
+    },
+    {
+      "index": 701,
+      "start": 2176.76,
+      "end": 2179.99,
+      "duration": 3.23,
+      "text": "with this and uh you didn't have to"
+    },
+    {
+      "index": 702,
+      "start": 2180.0,
+      "end": 2181.829,
+      "duration": 1.829,
+      "text": "think and you'll produce a very"
+    },
+    {
+      "index": 703,
+      "start": 2181.839,
+      "end": 2184.15,
+      "duration": 2.311,
+      "text": "interesting polinomial which is a good"
+    },
+    {
+      "index": 704,
+      "start": 2184.16,
+      "end": 2190.39,
+      "duration": 6.23,
+      "text": "approximation to e to the B"
+    },
+    {
+      "index": 705,
+      "start": 2193.589,
+      "end": 2193.599,
+      "duration": 0.01,
+      "text": "all right so that's that's it for the"
+    },
+    {
+      "index": 706,
+      "start": 2193.599,
+      "end": 2195.75,
+      "duration": 2.151,
+      "text": "basic properties now there's one tricky"
+    },
+    {
+      "index": 707,
+      "start": 2195.76,
+      "end": 2198.99,
+      "duration": 3.23,
+      "text": "property that I need to tell you about"
+    },
+    {
+      "index": 708,
+      "start": 2199.0,
+      "end": 2201.99,
+      "duration": 2.99,
+      "text": "it's not that tricky but it's a little"
+    },
+    {
+      "index": 709,
+      "start": 2202.0,
+      "end": 2207.109,
+      "duration": 5.109,
+      "text": "[Music]"
+    },
+    {
+      "index": 710,
+      "start": 2229.95,
+      "end": 2229.96,
+      "duration": 0.01,
+      "text": "change of variables in integration we've"
+    },
+    {
+      "index": 711,
+      "start": 2229.96,
+      "end": 2233.03,
+      "duration": 3.07,
+      "text": "actually already done we called that the"
+    },
+    {
+      "index": 712,
+      "start": 2233.04,
+      "end": 2234.63,
+      "duration": 1.59,
+      "text": "last time we talked about it we called"
+    },
+    {
+      "index": 713,
+      "start": 2234.64,
+      "end": 2242.51,
+      "duration": 7.87,
+      "text": "it"
+    },
+    {
+      "index": 714,
+      "start": 2245.63,
+      "end": 2245.64,
+      "duration": 0.01,
+      "text": "substitution and the idea here if you"
+    },
+    {
+      "index": 715,
+      "start": 2245.64,
+      "end": 2247.109,
+      "duration": 1.469,
+      "text": "may remember was that if if you're faced"
+    },
+    {
+      "index": 716,
+      "start": 2247.119,
+      "end": 2250.589,
+      "duration": 3.47,
+      "text": "with an integral like"
+    },
+    {
+      "index": 717,
+      "start": 2255.069,
+      "end": 2255.079,
+      "duration": 0.01,
+      "text": "this you can change it to if you put in"
+    },
+    {
+      "index": 718,
+      "start": 2255.079,
+      "end": 2258.349,
+      "duration": 3.27,
+      "text": "U is equal to U of X and you have a du"
+    },
+    {
+      "index": 719,
+      "start": 2258.359,
+      "end": 2261.75,
+      "duration": 3.391,
+      "text": "which is equal to U Prime of X du D DX"
+    },
+    {
+      "index": 720,
+      "start": 2261.76,
+      "end": 2265.309,
+      "duration": 3.549,
+      "text": "sorry then you can change the integral"
+    },
+    {
+      "index": 721,
+      "start": 2265.319,
+      "end": 2267.23,
+      "duration": 1.911,
+      "text": "uh as follows this is the same as G of U"
+    },
+    {
+      "index": 722,
+      "start": 2267.24,
+      "end": 2267.99,
+      "duration": 0.75,
+      "text": "of"
+    },
+    {
+      "index": 723,
+      "start": 2268.0,
+      "end": 2272.589,
+      "duration": 4.589,
+      "text": "X U Prime of X DX this was the General"
+    },
+    {
+      "index": 724,
+      "start": 2272.599,
+      "end": 2275.589,
+      "duration": 2.99,
+      "text": "procedure for"
+    },
+    {
+      "index": 725,
+      "start": 2275.599,
+      "end": 2278.99,
+      "duration": 3.391,
+      "text": "substitution"
+    },
+    {
+      "index": 726,
+      "start": 2282.67,
+      "end": 2282.68,
+      "duration": 0.01,
+      "text": "what's new today is that we're going to"
+    },
+    {
+      "index": 727,
+      "start": 2282.68,
+      "end": 2284.55,
+      "duration": 1.87,
+      "text": "put in the"
+    },
+    {
+      "index": 728,
+      "start": 2284.56,
+      "end": 2288.15,
+      "duration": 3.59,
+      "text": "limits if you have a limit here U1 and a"
+    },
+    {
+      "index": 729,
+      "start": 2288.16,
+      "end": 2289.39,
+      "duration": 1.23,
+      "text": "limit here"
+    },
+    {
+      "index": 730,
+      "start": 2289.4,
+      "end": 2291.55,
+      "duration": 2.15,
+      "text": "U2 you want to know what the"
+    },
+    {
+      "index": 731,
+      "start": 2291.56,
+      "end": 2294.47,
+      "duration": 2.91,
+      "text": "relationship is between the limits here"
+    },
+    {
+      "index": 732,
+      "start": 2294.48,
+      "end": 2296.109,
+      "duration": 1.629,
+      "text": "and the limits when you change variables"
+    },
+    {
+      "index": 733,
+      "start": 2296.119,
+      "end": 2297.829,
+      "duration": 1.71,
+      "text": "to the new"
+    },
+    {
+      "index": 734,
+      "start": 2297.839,
+      "end": 2300.829,
+      "duration": 2.99,
+      "text": "variables and it's the simplest possible"
+    },
+    {
+      "index": 735,
+      "start": 2300.839,
+      "end": 2304.27,
+      "duration": 3.431,
+      "text": "thing namely the two limits over here"
+    },
+    {
+      "index": 736,
+      "start": 2304.28,
+      "end": 2306.91,
+      "duration": 2.63,
+      "text": "are in the same relationship as U of X"
+    },
+    {
+      "index": 737,
+      "start": 2306.92,
+      "end": 2309.47,
+      "duration": 2.55,
+      "text": "is to to this symbol U here in other"
+    },
+    {
+      "index": 738,
+      "start": 2309.48,
+      "end": 2313.55,
+      "duration": 4.07,
+      "text": "words U1 is equal to U of X1 and U2 is"
+    },
+    {
+      "index": 739,
+      "start": 2313.56,
+      "end": 2318.43,
+      "duration": 4.87,
+      "text": "equal to U of X2 that's what"
+    },
+    {
+      "index": 740,
+      "start": 2318.44,
+      "end": 2322.27,
+      "duration": 3.83,
+      "text": "works now there's only one uh danger"
+    },
+    {
+      "index": 741,
+      "start": 2322.28,
+      "end": 2324.67,
+      "duration": 2.39,
+      "text": "here and there there's one one subtlety"
+    },
+    {
+      "index": 742,
+      "start": 2324.68,
+      "end": 2331.79,
+      "duration": 7.11,
+      "text": "which is we this only works if only"
+    },
+    {
+      "index": 743,
+      "start": 2331.8,
+      "end": 2341.03,
+      "duration": 9.23,
+      "text": "works if U Prime does not change"
+    },
+    {
+      "index": 744,
+      "start": 2343.63,
+      "end": 2343.64,
+      "duration": 0.01,
+      "text": "sign I've been worrying a little bit"
+    },
+    {
+      "index": 745,
+      "start": 2343.64,
+      "end": 2345.589,
+      "duration": 1.949,
+      "text": "about going backwards and forwards and I"
+    },
+    {
+      "index": 746,
+      "start": 2345.599,
+      "end": 2347.55,
+      "duration": 1.951,
+      "text": "allowed myself to reverse and do all"
+    },
+    {
+      "index": 747,
+      "start": 2347.56,
+      "end": 2348.99,
+      "duration": 1.43,
+      "text": "kinds of stuff right with these"
+    },
+    {
+      "index": 748,
+      "start": 2349.0,
+      "end": 2351.43,
+      "duration": 2.43,
+      "text": "integrals so we we're sort of free to do"
+    },
+    {
+      "index": 749,
+      "start": 2351.44,
+      "end": 2352.91,
+      "duration": 1.47,
+      "text": "it well this is one case where you want"
+    },
+    {
+      "index": 750,
+      "start": 2352.92,
+      "end": 2356.589,
+      "duration": 3.669,
+      "text": "to avoid it okay just don't do it it is"
+    },
+    {
+      "index": 751,
+      "start": 2356.599,
+      "end": 2357.91,
+      "duration": 1.311,
+      "text": "possible actually to make sense out of"
+    },
+    {
+      "index": 752,
+      "start": 2357.92,
+      "end": 2359.069,
+      "duration": 1.149,
+      "text": "it but it's also possible to get"
+    },
+    {
+      "index": 753,
+      "start": 2359.079,
+      "end": 2360.99,
+      "duration": 1.911,
+      "text": "yourself infinitely"
+    },
+    {
+      "index": 754,
+      "start": 2361.0,
+      "end": 2364.51,
+      "duration": 3.51,
+      "text": "confused so just make sure that now it's"
+    },
+    {
+      "index": 755,
+      "start": 2364.52,
+      "end": 2366.55,
+      "duration": 2.03,
+      "text": "okay if U Prime is always negative"
+    },
+    {
+      "index": 756,
+      "start": 2366.56,
+      "end": 2368.87,
+      "duration": 2.31,
+      "text": "always going one way so okay if U Prime"
+    },
+    {
+      "index": 757,
+      "start": 2368.88,
+      "end": 2370.39,
+      "duration": 1.51,
+      "text": "is always positive you're always going"
+    },
+    {
+      "index": 758,
+      "start": 2370.4,
+      "end": 2371.79,
+      "duration": 1.39,
+      "text": "the other way but if you mix them up"
+    },
+    {
+      "index": 759,
+      "start": 2371.8,
+      "end": 2378.67,
+      "duration": 6.87,
+      "text": "you'll get yourself mixed"
+    },
+    {
+      "index": 760,
+      "start": 2389.19,
+      "end": 2389.2,
+      "duration": 0.01,
+      "text": "example uh the example will"
+    },
+    {
+      "index": 761,
+      "start": 2389.2,
+      "end": 2393.109,
+      "duration": 3.909,
+      "text": "be uh maybe close to what we did last"
+    },
+    {
+      "index": 762,
+      "start": 2393.119,
+      "end": 2394.87,
+      "duration": 1.751,
+      "text": "time uh it did did when we first did"
+    },
+    {
+      "index": 763,
+      "start": 2394.88,
+      "end": 2399.03,
+      "duration": 4.15,
+      "text": "substitution I mean uh let's see so uh"
+    },
+    {
+      "index": 764,
+      "start": 2399.04,
+      "end": 2401.23,
+      "duration": 2.19,
+      "text": "the the integral from one to two this"
+    },
+    {
+      "index": 765,
+      "start": 2401.24,
+      "end": 2404.39,
+      "duration": 3.15,
+      "text": "time I'll put in definite limits of x^2"
+    },
+    {
+      "index": 766,
+      "start": 2404.4,
+      "end": 2405.99,
+      "duration": 1.59,
+      "text": "+"
+    },
+    {
+      "index": 767,
+      "start": 2406.0,
+      "end": 2409.109,
+      "duration": 3.109,
+      "text": "uh sorry maybe I call this x cubed x Cub"
+    },
+    {
+      "index": 768,
+      "start": 2409.119,
+      "end": 2413.47,
+      "duration": 4.351,
+      "text": "+ 2 let's say uh I don't know to the"
+    },
+    {
+      "index": 769,
+      "start": 2413.48,
+      "end": 2416.71,
+      "duration": 3.23,
+      "text": "fifth power x^2"
+    },
+    {
+      "index": 770,
+      "start": 2416.72,
+      "end": 2419.91,
+      "duration": 3.19,
+      "text": "DX all right so this is an example of an"
+    },
+    {
+      "index": 771,
+      "start": 2419.92,
+      "end": 2422.349,
+      "duration": 2.429,
+      "text": "integral that we would have tried to"
+    },
+    {
+      "index": 772,
+      "start": 2422.359,
+      "end": 2426.39,
+      "duration": 4.031,
+      "text": "handle by substitution before and the"
+    },
+    {
+      "index": 773,
+      "start": 2426.4,
+      "end": 2428.55,
+      "duration": 2.15,
+      "text": "substitution we would have"
+    },
+    {
+      "index": 774,
+      "start": 2428.56,
+      "end": 2435.67,
+      "duration": 7.11,
+      "text": "used is U = XB +"
+    },
+    {
+      "index": 775,
+      "start": 2437.95,
+      "end": 2437.96,
+      "duration": 0.01,
+      "text": "2 and that's exactly what we're going to"
+    },
+    {
+      "index": 776,
+      "start": 2437.96,
+      "end": 2439.589,
+      "duration": 1.629,
+      "text": "do here but we're just going to also"
+    },
+    {
+      "index": 777,
+      "start": 2439.599,
+      "end": 2443.79,
+      "duration": 4.191,
+      "text": "take into account the"
+    },
+    {
+      "index": 778,
+      "start": 2446.67,
+      "end": 2446.68,
+      "duration": 0.01,
+      "text": "limits the first step as in any"
+    },
+    {
+      "index": 779,
+      "start": 2446.68,
+      "end": 2448.99,
+      "duration": 2.31,
+      "text": "substitution or change of variables is"
+    },
+    {
+      "index": 780,
+      "start": 2449.0,
+      "end": 2450.47,
+      "duration": 1.47,
+      "text": "is"
+    },
+    {
+      "index": 781,
+      "start": 2450.48,
+      "end": 2453.27,
+      "duration": 2.79,
+      "text": "this all"
+    },
+    {
+      "index": 782,
+      "start": 2453.28,
+      "end": 2456.63,
+      "duration": 3.35,
+      "text": "right and so we can fill in uh the"
+    },
+    {
+      "index": 783,
+      "start": 2456.64,
+      "end": 2457.63,
+      "duration": 0.99,
+      "text": "things that we would have done"
+    },
+    {
+      "index": 784,
+      "start": 2457.64,
+      "end": 2459.109,
+      "duration": 1.469,
+      "text": "previously which is that this is the"
+    },
+    {
+      "index": 785,
+      "start": 2459.119,
+      "end": 2461.99,
+      "duration": 2.871,
+      "text": "integral and this is U to the 5th power"
+    },
+    {
+      "index": 786,
+      "start": 2462.0,
+      "end": 2465.51,
+      "duration": 3.51,
+      "text": "and then because this is 3x2 we see that"
+    },
+    {
+      "index": 787,
+      "start": 2465.52,
+      "end": 2470.19,
+      "duration": 4.67,
+      "text": "this is uh uh uh three um sorry let's"
+    },
+    {
+      "index": 788,
+      "start": 2470.2,
+      "end": 2473.71,
+      "duration": 3.51,
+      "text": "write it the other way um uh"
+    },
+    {
+      "index": 789,
+      "start": 2473.72,
+      "end": 2477.99,
+      "duration": 4.27,
+      "text": "1/3 du is equal to x^2 DX so that's what"
+    },
+    {
+      "index": 790,
+      "start": 2478.0,
+      "end": 2479.71,
+      "duration": 1.71,
+      "text": "I'm going to plug in for this Factor"
+    },
+    {
+      "index": 791,
+      "start": 2479.72,
+      "end": 2485.23,
+      "duration": 5.51,
+      "text": "here so here's 13 du which replaces"
+    },
+    {
+      "index": 792,
+      "start": 2485.24,
+      "end": 2488.51,
+      "duration": 3.27,
+      "text": "that but now there's the extra"
+    },
+    {
+      "index": 793,
+      "start": 2488.52,
+      "end": 2491.71,
+      "duration": 3.19,
+      "text": "feature the extra feature is the limits"
+    },
+    {
+      "index": 794,
+      "start": 2491.72,
+      "end": 2495.03,
+      "duration": 3.31,
+      "text": "so here really in Disguise because and"
+    },
+    {
+      "index": 795,
+      "start": 2495.04,
+      "end": 2497.349,
+      "duration": 2.309,
+      "text": "now this is incredibly"
+    },
+    {
+      "index": 796,
+      "start": 2497.359,
+      "end": 2499.589,
+      "duration": 2.23,
+      "text": "important this is one of the reasons why"
+    },
+    {
+      "index": 797,
+      "start": 2499.599,
+      "end": 2503.19,
+      "duration": 3.591,
+      "text": "we use this notation DX and"
+    },
+    {
+      "index": 798,
+      "start": 2503.2,
+      "end": 2506.23,
+      "duration": 3.03,
+      "text": "du we want to remind ourselves which"
+    },
+    {
+      "index": 799,
+      "start": 2506.24,
+      "end": 2509.349,
+      "duration": 3.109,
+      "text": "variable is involved in the integration"
+    },
+    {
+      "index": 800,
+      "start": 2509.359,
+      "end": 2511.63,
+      "duration": 2.271,
+      "text": "and especially if you're the one naming"
+    },
+    {
+      "index": 801,
+      "start": 2511.64,
+      "end": 2513.87,
+      "duration": 2.23,
+      "text": "the variables you may get mixed up in"
+    },
+    {
+      "index": 802,
+      "start": 2513.88,
+      "end": 2516.23,
+      "duration": 2.35,
+      "text": "this respect so you must know which"
+    },
+    {
+      "index": 803,
+      "start": 2516.24,
+      "end": 2519.309,
+      "duration": 3.069,
+      "text": "variable is varying between 1 and two"
+    },
+    {
+      "index": 804,
+      "start": 2519.319,
+      "end": 2521.349,
+      "duration": 2.03,
+      "text": "and the answer is it's X is the one"
+    },
+    {
+      "index": 805,
+      "start": 2521.359,
+      "end": 2524.51,
+      "duration": 3.151,
+      "text": "that's varying between 1 and two so in"
+    },
+    {
+      "index": 806,
+      "start": 2524.52,
+      "end": 2526.91,
+      "duration": 2.39,
+      "text": "Disguise even though I didn't write it"
+    },
+    {
+      "index": 807,
+      "start": 2526.92,
+      "end": 2529.95,
+      "duration": 3.03,
+      "text": "it was contained in this little symbol"
+    },
+    {
+      "index": 808,
+      "start": 2529.96,
+      "end": 2531.87,
+      "duration": 1.91,
+      "text": "here this reminded us which variable"
+    },
+    {
+      "index": 809,
+      "start": 2531.88,
+      "end": 2533.91,
+      "duration": 2.03,
+      "text": "you'll find this amazingly important"
+    },
+    {
+      "index": 810,
+      "start": 2533.92,
+      "end": 2536.55,
+      "duration": 2.63,
+      "text": "when you get to multivariable calculus"
+    },
+    {
+      "index": 811,
+      "start": 2536.56,
+      "end": 2538.15,
+      "duration": 1.59,
+      "text": "when there are many variables floating"
+    },
+    {
+      "index": 812,
+      "start": 2538.16,
+      "end": 2540.39,
+      "duration": 2.23,
+      "text": "around so this is incredibly important"
+    },
+    {
+      "index": 813,
+      "start": 2540.4,
+      "end": 2542.67,
+      "duration": 2.27,
+      "text": "distinction to make so now over here we"
+    },
+    {
+      "index": 814,
+      "start": 2542.68,
+      "end": 2544.23,
+      "duration": 1.55,
+      "text": "have a limit but it's of course it's"
+    },
+    {
+      "index": 815,
+      "start": 2544.24,
+      "end": 2546.309,
+      "duration": 2.069,
+      "text": "supposed to be with respect to you now"
+    },
+    {
+      "index": 816,
+      "start": 2546.319,
+      "end": 2547.87,
+      "duration": 1.551,
+      "text": "so we need to calculate what those"
+    },
+    {
+      "index": 817,
+      "start": 2547.88,
+      "end": 2550.67,
+      "duration": 2.79,
+      "text": "corresponding limits are and indeed it's"
+    },
+    {
+      "index": 818,
+      "start": 2550.68,
+      "end": 2553.069,
+      "duration": 2.389,
+      "text": "just I plug in here U1 is going to be"
+    },
+    {
+      "index": 819,
+      "start": 2553.079,
+      "end": 2555.27,
+      "duration": 2.191,
+      "text": "equal to what I plug in for x = 1 that's"
+    },
+    {
+      "index": 820,
+      "start": 2555.28,
+      "end": 2559.03,
+      "duration": 3.75,
+      "text": "going to be 1 Cub + 2 which is 3 and"
+    },
+    {
+      "index": 821,
+      "start": 2559.04,
+      "end": 2559.75,
+      "duration": 0.71,
+      "text": "then"
+    },
+    {
+      "index": 822,
+      "start": 2559.76,
+      "end": 2565.15,
+      "duration": 5.39,
+      "text": "U2 is uh 2 cubed + 2 which is equal to"
+    },
+    {
+      "index": 823,
+      "start": 2565.16,
+      "end": 2568.549,
+      "duration": 3.389,
+      "text": "10 right 8 + 2 is 10 so this is the"
+    },
+    {
+      "index": 824,
+      "start": 2568.559,
+      "end": 2570.349,
+      "duration": 1.79,
+      "text": "integral from 3 to"
+    },
+    {
+      "index": 825,
+      "start": 2570.359,
+      "end": 2575.15,
+      "duration": 4.791,
+      "text": "10 of U 5 * 1/3"
+    },
+    {
+      "index": 826,
+      "start": 2575.16,
+      "end": 2577.75,
+      "duration": 2.59,
+      "text": "du"
+    },
+    {
+      "index": 827,
+      "start": 2577.76,
+      "end": 2581.19,
+      "duration": 3.43,
+      "text": "and now I can finish the problem this is"
+    },
+    {
+      "index": 828,
+      "start": 2581.2,
+      "end": 2586.589,
+      "duration": 5.389,
+      "text": "118th U to the 6th power from 3 to 10"
+    },
+    {
+      "index": 829,
+      "start": 2586.599,
+      "end": 2588.43,
+      "duration": 1.831,
+      "text": "and this is where the most common"
+    },
+    {
+      "index": 830,
+      "start": 2588.44,
+      "end": 2591.63,
+      "duration": 3.19,
+      "text": "mistake is occurs in substitutions of"
+    },
+    {
+      "index": 831,
+      "start": 2591.64,
+      "end": 2593.99,
+      "duration": 2.35,
+      "text": "this type which is that if you ignore"
+    },
+    {
+      "index": 832,
+      "start": 2594.0,
+      "end": 2596.87,
+      "duration": 2.87,
+      "text": "this and you plug in these one and two"
+    },
+    {
+      "index": 833,
+      "start": 2596.88,
+      "end": 2598.19,
+      "duration": 1.31,
+      "text": "here you think oh I should just be"
+    },
+    {
+      "index": 834,
+      "start": 2598.2,
+      "end": 2601.349,
+      "duration": 3.149,
+      "text": "putting it at one and two but actually"
+    },
+    {
+      "index": 835,
+      "start": 2601.359,
+      "end": 2603.47,
+      "duration": 2.111,
+      "text": "it should be the U value that we're"
+    },
+    {
+      "index": 836,
+      "start": 2603.48,
+      "end": 2605.589,
+      "duration": 2.109,
+      "text": "interested in and the lower limit is U"
+    },
+    {
+      "index": 837,
+      "start": 2605.599,
+      "end": 2609.51,
+      "duration": 3.911,
+      "text": "equal 3 and = 10 is the upper limit all"
+    },
+    {
+      "index": 838,
+      "start": 2609.52,
+      "end": 2612.069,
+      "duration": 2.549,
+      "text": "right so those are suppressed here but"
+    },
+    {
+      "index": 839,
+      "start": 2612.079,
+      "end": 2613.549,
+      "duration": 1.47,
+      "text": "those are the ones"
+    },
+    {
+      "index": 840,
+      "start": 2613.559,
+      "end": 2617.47,
+      "duration": 3.911,
+      "text": "that that we want and so uh here we go"
+    },
+    {
+      "index": 841,
+      "start": 2617.48,
+      "end": 2620.47,
+      "duration": 2.99,
+      "text": "it's uh 1/8th times some ridiculous"
+    },
+    {
+      "index": 842,
+      "start": 2620.48,
+      "end": 2622.39,
+      "duration": 1.91,
+      "text": "number which I won't Calculate 10 to the"
+    },
+    {
+      "index": 843,
+      "start": 2622.4,
+      "end": 2626.91,
+      "duration": 4.51,
+      "text": "6 minus 3 to 6 all"
+    },
+    {
+      "index": 844,
+      "start": 2626.92,
+      "end": 2635.069,
+      "duration": 8.149,
+      "text": "right yes question it seems"
+    },
+    {
+      "index": 845,
+      "start": 2648.67,
+      "end": 2648.68,
+      "duration": 0.01,
+      "text": "an you that in terms so if you if you"
+    },
+    {
+      "index": 846,
+      "start": 2648.68,
+      "end": 2652.91,
+      "duration": 4.23,
+      "text": "want to do things with uh uh where"
+    },
+    {
+      "index": 847,
+      "start": 2652.92,
+      "end": 2654.589,
+      "duration": 1.669,
+      "text": "you're where you're where you're"
+    },
+    {
+      "index": 848,
+      "start": 2654.599,
+      "end": 2657.43,
+      "duration": 2.831,
+      "text": "worrying about the sign change the right"
+    },
+    {
+      "index": 849,
+      "start": 2657.44,
+      "end": 2660.79,
+      "duration": 3.35,
+      "text": "strategy is uh what you suggested works"
+    },
+    {
+      "index": 850,
+      "start": 2660.8,
+      "end": 2662.27,
+      "duration": 1.47,
+      "text": "and in fact I'm going to do an example"
+    },
+    {
+      "index": 851,
+      "start": 2662.28,
+      "end": 2666.75,
+      "duration": 4.47,
+      "text": "right now on this subject but uh"
+    },
+    {
+      "index": 852,
+      "start": 2666.76,
+      "end": 2668.87,
+      "duration": 2.11,
+      "text": "the right strategy is to break it up"
+    },
+    {
+      "index": 853,
+      "start": 2668.88,
+      "end": 2672.069,
+      "duration": 3.189,
+      "text": "into pieces where U Prime has one sign"
+    },
+    {
+      "index": 854,
+      "start": 2672.079,
+      "end": 2675.549,
+      "duration": 3.47,
+      "text": "or the other okay uh let let me show you"
+    },
+    {
+      "index": 855,
+      "start": 2675.559,
+      "end": 2678.51,
+      "duration": 2.951,
+      "text": "an example okay but where things go"
+    },
+    {
+      "index": 856,
+      "start": 2678.52,
+      "end": 2682.069,
+      "duration": 3.549,
+      "text": "wrong and I'll I'll tell"
+    },
+    {
+      "index": 857,
+      "start": 2682.079,
+      "end": 2686.95,
+      "duration": 4.871,
+      "text": "you how to handle it uh"
+    },
+    {
+      "index": 858,
+      "start": 2696.829,
+      "end": 2696.839,
+      "duration": 0.01,
+      "text": "warning so suppose you're integrating"
+    },
+    {
+      "index": 859,
+      "start": 2696.839,
+      "end": 2701.87,
+      "duration": 5.031,
+      "text": "fromus -1 to 1 x^2 DX here's an"
+    },
+    {
+      "index": 860,
+      "start": 2701.88,
+      "end": 2706.23,
+      "duration": 4.35,
+      "text": "example and you had the"
+    },
+    {
+      "index": 861,
+      "start": 2708.349,
+      "end": 2708.359,
+      "duration": 0.01,
+      "text": "Temptation you had the temptation to"
+    },
+    {
+      "index": 862,
+      "start": 2708.359,
+      "end": 2710.349,
+      "duration": 1.99,
+      "text": "plug in U is equal to x^2 now of course"
+    },
+    {
+      "index": 863,
+      "start": 2710.359,
+      "end": 2713.67,
+      "duration": 3.311,
+      "text": "we know how to integrate this but but uh"
+    },
+    {
+      "index": 864,
+      "start": 2713.68,
+      "end": 2715.549,
+      "duration": 1.869,
+      "text": "let's just pretend we want we were"
+    },
+    {
+      "index": 865,
+      "start": 2715.559,
+      "end": 2718.43,
+      "duration": 2.871,
+      "text": "stubborn and wanted to use"
+    },
+    {
+      "index": 866,
+      "start": 2718.44,
+      "end": 2722.069,
+      "duration": 3.629,
+      "text": "substitution then we have du is equal to"
+    },
+    {
+      "index": 867,
+      "start": 2722.079,
+      "end": 2724.63,
+      "duration": 2.551,
+      "text": "2x"
+    },
+    {
+      "index": 868,
+      "start": 2728.51,
+      "end": 2728.52,
+      "duration": 0.01,
+      "text": "DX all right right and now if I try to"
+    },
+    {
+      "index": 869,
+      "start": 2728.52,
+      "end": 2732.27,
+      "duration": 3.75,
+      "text": "make the correspondence notice that the"
+    },
+    {
+      "index": 870,
+      "start": 2732.28,
+      "end": 2736.829,
+      "duration": 4.549,
+      "text": "limits are U1 is one is is negative - 1"
+    },
+    {
+      "index": 871,
+      "start": 2736.839,
+      "end": 2740.19,
+      "duration": 3.351,
+      "text": "SAR that's the bottom limit and U2 is"
+    },
+    {
+      "index": 872,
+      "start": 2740.2,
+      "end": 2742.27,
+      "duration": 2.07,
+      "text": "the upper limit that's 1 squ that's also"
+    },
+    {
+      "index": 873,
+      "start": 2742.28,
+      "end": 2745.67,
+      "duration": 3.39,
+      "text": "equal to one both limits are one so this"
+    },
+    {
+      "index": 874,
+      "start": 2745.68,
+      "end": 2748.43,
+      "duration": 2.75,
+      "text": "is going from one to one and no matter"
+    },
+    {
+      "index": 875,
+      "start": 2748.44,
+      "end": 2752.349,
+      "duration": 3.909,
+      "text": "what it is we know it's going to be"
+    },
+    {
+      "index": 876,
+      "start": 2752.359,
+      "end": 2755.71,
+      "duration": 3.351,
+      "text": "zero but we know this is not zero this"
+    },
+    {
+      "index": 877,
+      "start": 2755.72,
+      "end": 2757.71,
+      "duration": 1.99,
+      "text": "is is the integral of a positive"
+    },
+    {
+      "index": 878,
+      "start": 2757.72,
+      "end": 2760.87,
+      "duration": 3.15,
+      "text": "quantity and it's the area under a"
+    },
+    {
+      "index": 879,
+      "start": 2760.88,
+      "end": 2763.27,
+      "duration": 2.39,
+      "text": "curve it's going to be a positive area"
+    },
+    {
+      "index": 880,
+      "start": 2763.28,
+      "end": 2764.91,
+      "duration": 1.63,
+      "text": "so this is a positive quantity it can't"
+    },
+    {
+      "index": 881,
+      "start": 2764.92,
+      "end": 2766.39,
+      "duration": 1.47,
+      "text": "be"
+    },
+    {
+      "index": 882,
+      "start": 2766.4,
+      "end": 2769.47,
+      "duration": 3.07,
+      "text": "zero if you actually plug it in it looks"
+    },
+    {
+      "index": 883,
+      "start": 2769.48,
+      "end": 2772.79,
+      "duration": 3.31,
+      "text": "equally strange it you you put in here"
+    },
+    {
+      "index": 884,
+      "start": 2772.8,
+      "end": 2774.67,
+      "duration": 1.87,
+      "text": "this U and then and then so that would"
+    },
+    {
+      "index": 885,
+      "start": 2774.68,
+      "end": 2777.069,
+      "duration": 2.389,
+      "text": "be for the u^2 and then to plug in for"
+    },
+    {
+      "index": 886,
+      "start": 2777.079,
+      "end": 2780.03,
+      "duration": 2.951,
+      "text": "DX you would write DX is equal to 1 over"
+    },
+    {
+      "index": 887,
+      "start": 2780.04,
+      "end": 2785.51,
+      "duration": 5.47,
+      "text": "2x du and then you might write that as"
+    },
+    {
+      "index": 888,
+      "start": 2785.52,
+      "end": 2786.47,
+      "duration": 0.95,
+      "text": "as this"
+    },
+    {
+      "index": 889,
+      "start": 2786.48,
+      "end": 2788.87,
+      "duration": 2.39,
+      "text": "this all right and so what we I should"
+    },
+    {
+      "index": 890,
+      "start": 2788.88,
+      "end": 2791.71,
+      "duration": 2.83,
+      "text": "put in here is this quantity here which"
+    },
+    {
+      "index": 891,
+      "start": 2791.72,
+      "end": 2794.23,
+      "duration": 2.51,
+      "text": "is a perfectly okay integral and it has"
+    },
+    {
+      "index": 892,
+      "start": 2794.24,
+      "end": 2796.87,
+      "duration": 2.63,
+      "text": "a value I mean it's it's what it"
+    },
+    {
+      "index": 893,
+      "start": 2796.88,
+      "end": 2804.43,
+      "duration": 7.55,
+      "text": "is it's zero so of course this is not"
+    },
+    {
+      "index": 894,
+      "start": 2809.87,
+      "end": 2809.88,
+      "duration": 0.01,
+      "text": "true and the reason is that U was equal"
+    },
+    {
+      "index": 895,
+      "start": 2809.88,
+      "end": 2815.19,
+      "duration": 5.31,
+      "text": "to x^2 and U Prime of X was equal to 2x"
+    },
+    {
+      "index": 896,
+      "start": 2815.2,
+      "end": 2817.99,
+      "duration": 2.79,
+      "text": "which was positive for X positive and"
+    },
+    {
+      "index": 897,
+      "start": 2818.0,
+      "end": 2820.829,
+      "duration": 2.829,
+      "text": "negative for x negative and this was the"
+    },
+    {
+      "index": 898,
+      "start": 2820.839,
+      "end": 2822.829,
+      "duration": 1.99,
+      "text": "sign change which which causes us"
+    },
+    {
+      "index": 899,
+      "start": 2822.839,
+      "end": 2825.829,
+      "duration": 2.99,
+      "text": "trouble if we break it up into its two"
+    },
+    {
+      "index": 900,
+      "start": 2825.839,
+      "end": 2828.23,
+      "duration": 2.391,
+      "text": "halves then you'll it'll be okay and"
+    },
+    {
+      "index": 901,
+      "start": 2828.24,
+      "end": 2830.309,
+      "duration": 2.069,
+      "text": "you'll be able to use this now there was"
+    },
+    {
+      "index": 902,
+      "start": 2830.319,
+      "end": 2831.19,
+      "duration": 0.871,
+      "text": "a"
+    },
+    {
+      "index": 903,
+      "start": 2831.2,
+      "end": 2834.39,
+      "duration": 3.19,
+      "text": "mistake and this was uh essentially what"
+    },
+    {
+      "index": 904,
+      "start": 2834.4,
+      "end": 2836.23,
+      "duration": 1.83,
+      "text": "what you were saying that is there's"
+    },
+    {
+      "index": 905,
+      "start": 2836.24,
+      "end": 2838.589,
+      "duration": 2.349,
+      "text": "it's possible to see this happening as"
+    },
+    {
+      "index": 906,
+      "start": 2838.599,
+      "end": 2840.309,
+      "duration": 1.71,
+      "text": "you're doing it if you're very"
+    },
+    {
+      "index": 907,
+      "start": 2840.319,
+      "end": 2843.069,
+      "duration": 2.75,
+      "text": "careful um there's a mistake in this"
+    },
+    {
+      "index": 908,
+      "start": 2843.079,
+      "end": 2845.79,
+      "duration": 2.711,
+      "text": "process and the mistake is in the"
+    },
+    {
+      "index": 909,
+      "start": 2845.8,
+      "end": 2848.03,
+      "duration": 2.23,
+      "text": "transition this is this is a mistake"
+    },
+    {
+      "index": 910,
+      "start": 2848.04,
+      "end": 2850.19,
+      "duration": 2.15,
+      "text": "here maybe I I haven't used"
+    },
+    {
+      "index": 911,
+      "start": 2850.2,
+      "end": 2854.589,
+      "duration": 4.389,
+      "text": "any red yet today so I get to use some"
+    },
+    {
+      "index": 912,
+      "start": 2854.599,
+      "end": 2856.95,
+      "duration": 2.351,
+      "text": "red here oh boy all right this is this"
+    },
+    {
+      "index": 913,
+      "start": 2856.96,
+      "end": 2859.79,
+      "duration": 2.83,
+      "text": "is not true here this step here so why"
+    },
+    {
+      "index": 914,
+      "start": 2859.8,
+      "end": 2862.23,
+      "duration": 2.43,
+      "text": "isn't it true it's not true for the the"
+    },
+    {
+      "index": 915,
+      "start": 2862.24,
+      "end": 2865.39,
+      "duration": 3.15,
+      "text": "the standard reason which is that really"
+    },
+    {
+      "index": 916,
+      "start": 2865.4,
+      "end": 2868.47,
+      "duration": 3.07,
+      "text": "X is equal to plus or minus Square < TK"
+    },
+    {
+      "index": 917,
+      "start": 2868.48,
+      "end": 2869.95,
+      "duration": 1.47,
+      "text": "of"
+    },
+    {
+      "index": 918,
+      "start": 2869.96,
+      "end": 2873.79,
+      "duration": 3.83,
+      "text": "U and if you stick to one side or the"
+    },
+    {
+      "index": 919,
+      "start": 2873.8,
+      "end": 2875.549,
+      "duration": 1.749,
+      "text": "other you'll have a coherent formula for"
+    },
+    {
+      "index": 920,
+      "start": 2875.559,
+      "end": 2876.79,
+      "duration": 1.231,
+      "text": "it one of them will be the plus and one"
+    },
+    {
+      "index": 921,
+      "start": 2876.8,
+      "end": 2877.95,
+      "duration": 1.15,
+      "text": "of them will be the minus and it will"
+    },
+    {
+      "index": 922,
+      "start": 2877.96,
+      "end": 2880.99,
+      "duration": 3.03,
+      "text": "work out when you separate it into its"
+    },
+    {
+      "index": 923,
+      "start": 2881.0,
+      "end": 2883.069,
+      "duration": 2.069,
+      "text": "pieces so you could do that but this is"
+    },
+    {
+      "index": 924,
+      "start": 2883.079,
+      "end": 2886.47,
+      "duration": 3.391,
+      "text": "a can of worms so I a avoid this and"
+    },
+    {
+      "index": 925,
+      "start": 2886.48,
+      "end": 2888.349,
+      "duration": 1.869,
+      "text": "just do it in a place where the where"
+    },
+    {
+      "index": 926,
+      "start": 2888.359,
+      "end": 2890.349,
+      "duration": 1.99,
+      "text": "the where the inverse is well defined"
+    },
+    {
+      "index": 927,
+      "start": 2890.359,
+      "end": 2891.47,
+      "duration": 1.111,
+      "text": "and where the function either moves"
+    },
+    {
+      "index": 928,
+      "start": 2891.48,
+      "end": 2893.829,
+      "duration": 2.349,
+      "text": "steadily up or steadily"
+    },
+    {
+      "index": 929,
+      "start": 2893.839,
+      "end": 2896.839,
+      "duration": 3.0,
+      "text": "down"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Single Variable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL590CCC2BC5AF3BC1"
+  }
+}

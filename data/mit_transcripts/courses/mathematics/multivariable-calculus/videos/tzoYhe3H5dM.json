@@ -1,0 +1,4015 @@
+{
+  "video": {
+    "id": "tzoYhe3H5dM",
+    "title": "Lec 31: Stokes' theorem | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=tzoYhe3H5dM",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2900,
+    "language": "en"
+  },
+  "segment_count": 571,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.3,
+      "end": 3.013,
+      "duration": 2.713,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 3.013,
+      "end": 5.59,
+      "duration": 2.577,
+      "text": "Commons license. Your support will help MIT"
+    },
+    {
+      "index": 2,
+      "start": 5.59,
+      "end": 8.993,
+      "duration": 3.403,
+      "text": "OpenCourseWare continue to offer high quality educational"
+    },
+    {
+      "index": 3,
+      "start": 8.993,
+      "end": 13.915,
+      "duration": 4.922,
+      "text": "resources for free. To make a donation or to view"
+    },
+    {
+      "index": 4,
+      "start": 13.915,
+      "end": 19.973,
+      "duration": 6.058,
+      "text": "additional materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 5,
+      "start": 19.973,
+      "end": 25.29,
+      "duration": 5.317,
+      "text": "visit MIT OpenCourseWare at OCW.mit.edu."
+    },
+    {
+      "index": 6,
+      "start": 25.29,
+      "end": 32.301,
+      "duration": 7.011,
+      "text": "Recall that yesterday we saw, no, two days ago we learned"
+    },
+    {
+      "index": 7,
+      "start": 32.301,
+      "end": 37.81,
+      "duration": 5.509,
+      "text": "about the curl of a vector field in space."
+    },
+    {
+      "index": 8,
+      "start": 37.81,
+      "end": 45.235,
+      "duration": 7.425,
+      "text": "And we said the curl of F is defined by taking a cross"
+    },
+    {
+      "index": 9,
+      "start": 45.235,
+      "end": 52.38,
+      "duration": 7.145,
+      "text": "product between the symbol dell and the vector F."
+    },
+    {
+      "index": 10,
+      "start": 52.38,
+      "end": 58.362,
+      "duration": 5.982,
+      "text": "Concretely, the way we would compute this would be by putting"
+    },
+    {
+      "index": 11,
+      "start": 58.362,
+      "end": 64.145,
+      "duration": 5.783,
+      "text": "the components of F into this determinant and expanding and"
+    },
+    {
+      "index": 12,
+      "start": 64.145,
+      "end": 69.63,
+      "duration": 5.485,
+      "text": "then getting a vector with components Ry minus Qz,"
+    },
+    {
+      "index": 13,
+      "start": 69.63,
+      "end": 81.08,
+      "duration": 11.45,
+      "text": "Pz minus Rx and Qx minus Py. I think I also tried to explain"
+    },
+    {
+      "index": 14,
+      "start": 81.08,
+      "end": 85.459,
+      "duration": 4.379,
+      "text": "very quickly what the significance of a curl is."
+    },
+    {
+      "index": 15,
+      "start": 85.459,
+      "end": 88.69,
+      "duration": 3.231,
+      "text": "Just to tell you again very quickly,"
+    },
+    {
+      "index": 16,
+      "start": 88.69,
+      "end": 94.811,
+      "duration": 6.121,
+      "text": "basically curl measures, if you mention that your vector"
+    },
+    {
+      "index": 17,
+      "start": 94.811,
+      "end": 100.788,
+      "duration": 5.977,
+      "text": "field measures the velocity in some fluid then the curl"
+    },
+    {
+      "index": 18,
+      "start": 100.788,
+      "end": 107.43,
+      "duration": 6.642,
+      "text": "measures how much rotation is taking place in that fluid."
+    },
+    {
+      "index": 19,
+      "start": 107.43,
+      "end": 125.469,
+      "duration": 18.039,
+      "text": "Measures the rotation part of a velocity field."
+    },
+    {
+      "index": 20,
+      "start": 125.469,
+      "end": 133.798,
+      "duration": 8.329,
+      "text": "More precisely the direction corresponds to the axis of"
+    },
+    {
+      "index": 21,
+      "start": 133.798,
+      "end": 142.744,
+      "duration": 8.946,
+      "text": "rotation and the magnitude corresponds to twice the angular"
+    },
+    {
+      "index": 22,
+      "start": 142.744,
+      "end": 144.75,
+      "duration": 2.006,
+      "text": "velocity."
+    },
+    {
+      "index": 23,
+      "start": 167.97,
+      "end": 170.62,
+      "duration": 2.65,
+      "text": "Just to give you a few quick examples."
+    },
+    {
+      "index": 24,
+      "start": 170.62,
+      "end": 173.31,
+      "duration": 2.69,
+      "text": "If I take a constant vector field,"
+    },
+    {
+      "index": 25,
+      "start": 173.31,
+      "end": 181.139,
+      "duration": 7.829,
+      "text": "so everything translates at the same speed,"
+    },
+    {
+      "index": 26,
+      "start": 181.139,
+      "end": 186.051,
+      "duration": 4.912,
+      "text": "then obviously when you take the partial derivatives you will"
+    },
+    {
+      "index": 27,
+      "start": 186.051,
+      "end": 190.389,
+      "duration": 4.338,
+      "text": "just get a bunch of zeros so the curl will be zero."
+    },
+    {
+      "index": 28,
+      "start": 190.389,
+      "end": 195.219,
+      "duration": 4.83,
+      "text": "If you take a vector field that stretches things,"
+    },
+    {
+      "index": 29,
+      "start": 195.219,
+      "end": 197.942,
+      "duration": 2.723,
+      "text": "let's say, for example, we are going to stretch things"
+    },
+    {
+      "index": 30,
+      "start": 197.942,
+      "end": 203.173,
+      "duration": 5.231,
+      "text": "along the x-axis, that would be a vector field"
+    },
+    {
+      "index": 31,
+      "start": 203.173,
+      "end": 210.68,
+      "duration": 7.507,
+      "text": "that goes parallel to the x direction but maybe,"
+    },
+    {
+      "index": 32,
+      "start": 210.68,
+      "end": 213.272,
+      "duration": 2.592,
+      "text": "say, x times i. So that when you are in front"
+    },
+    {
+      "index": 33,
+      "start": 213.272,
+      "end": 215.5,
+      "duration": 2.228,
+      "text": "of a plane of a blackboard you are moving forward,"
+    },
+    {
+      "index": 34,
+      "start": 215.5,
+      "end": 216.99,
+      "duration": 1.49,
+      "text": "when you are behind you are moving backwards,"
+    },
+    {
+      "index": 35,
+      "start": 216.99,
+      "end": 220.889,
+      "duration": 3.899,
+      "text": "things are getting expanded in the x direction."
+    },
+    {
+      "index": 36,
+      "start": 220.889,
+      "end": 228.46,
+      "duration": 7.571,
+      "text": "If you compute the curl, you can check each of these."
+    },
+    {
+      "index": 37,
+      "start": 228.46,
+      "end": 229.31,
+      "duration": 0.85,
+      "text": "Again, they are going to be zero."
+    },
+    {
+      "index": 38,
+      "start": 229.31,
+      "end": 233.039,
+      "duration": 3.729,
+      "text": "There is no curl. This is not what curl measures."
+    },
+    {
+      "index": 39,
+      "start": 233.039,
+      "end": 238.705,
+      "duration": 5.666,
+      "text": "I mean, actually, what measures expansion,"
+    },
+    {
+      "index": 40,
+      "start": 238.705,
+      "end": 243.68,
+      "duration": 4.975,
+      "text": "stretching is actually divergence."
+    },
+    {
+      "index": 41,
+      "start": 243.68,
+      "end": 245.18,
+      "duration": 1.5,
+      "text": "If you take the divergence of this field,"
+    },
+    {
+      "index": 42,
+      "start": 245.18,
+      "end": 247.77,
+      "duration": 2.59,
+      "text": "you would get one plus zero plus zero,"
+    },
+    {
+      "index": 43,
+      "start": 247.77,
+      "end": 250.81,
+      "duration": 3.04,
+      "text": "it looks like it will be one, so in case you don't remember,"
+    },
+    {
+      "index": 44,
+      "start": 250.81,
+      "end": 255.308,
+      "duration": 4.498,
+      "text": "I mean divergence precisely measures this stretching effect"
+    },
+    {
+      "index": 45,
+      "start": 255.308,
+      "end": 258.49,
+      "duration": 3.182,
+      "text": "in your field. And, on the other hand,"
+    },
+    {
+      "index": 46,
+      "start": 258.49,
+      "end": 262.376,
+      "duration": 3.886,
+      "text": "if you take something that corresponds to,"
+    },
+    {
+      "index": 47,
+      "start": 262.376,
+      "end": 266.675,
+      "duration": 4.299,
+      "text": "say, rotation about the z-axis at"
+    },
+    {
+      "index": 48,
+      "start": 266.675,
+      "end": 274.335,
+      "duration": 7.66,
+      "text": "unit angular velocity -- That means they are going to moving"
+    },
+    {
+      "index": 49,
+      "start": 274.335,
+      "end": 281.291,
+      "duration": 6.956,
+      "text": "in circles around the z-axis. One way to write down this"
+    },
+    {
+      "index": 50,
+      "start": 281.291,
+      "end": 286.463,
+      "duration": 5.172,
+      "text": "field, let's see, the z component is zero because"
+    },
+    {
+      "index": 51,
+      "start": 286.463,
+      "end": 290.45,
+      "duration": 3.987,
+      "text": "everything is moving horizontally."
+    },
+    {
+      "index": 52,
+      "start": 290.45,
+      "end": 294.829,
+      "duration": 4.379,
+      "text": "And in the x and y directions, if you look at it from above,"
+    },
+    {
+      "index": 53,
+      "start": 294.829,
+      "end": 299.068,
+      "duration": 4.239,
+      "text": "well, it is just going to be our good old friend the vector"
+    },
+    {
+      "index": 54,
+      "start": 299.068,
+      "end": 302.649,
+      "duration": 3.581,
+      "text": "field that rotates everything [at unit speed?]."
+    },
+    {
+      "index": 55,
+      "start": 302.649,
+      "end": 305.639,
+      "duration": 2.99,
+      "text": "And we have seen the formula for this one many times."
+    },
+    {
+      "index": 56,
+      "start": 305.639,
+      "end": 309.68,
+      "duration": 4.041,
+      "text": "The first component is minus y, the second one is x."
+    },
+    {
+      "index": 57,
+      "start": 309.68,
+      "end": 317.478,
+      "duration": 7.798,
+      "text": "Now, if you compute the curl of this guy, you will get zero,"
+    },
+    {
+      "index": 58,
+      "start": 317.478,
+      "end": 321.589,
+      "duration": 4.111,
+      "text": "two, two k. And so k is the axis of"
+    },
+    {
+      "index": 59,
+      "start": 321.589,
+      "end": 324.72,
+      "duration": 3.131,
+      "text": "rotation, two is twice the angular velocity."
+    },
+    {
+      "index": 60,
+      "start": 324.72,
+      "end": 326.566,
+      "duration": 1.846,
+      "text": "And now, of course, you can imagine much more"
+    },
+    {
+      "index": 61,
+      "start": 326.566,
+      "end": 329.589,
+      "duration": 3.023,
+      "text": "complicated motions where you will have -- For example,"
+    },
+    {
+      "index": 62,
+      "start": 329.589,
+      "end": 332.278,
+      "duration": 2.689,
+      "text": "if you look at the Charles River very carefully then you"
+    },
+    {
+      "index": 63,
+      "start": 332.278,
+      "end": 334.84,
+      "duration": 2.562,
+      "text": "will see that water is flowing, generally speaking,"
+    },
+    {
+      "index": 64,
+      "start": 334.84,
+      "end": 338.477,
+      "duration": 3.637,
+      "text": "towards the ocean. But, at the same time,"
+    },
+    {
+      "index": 65,
+      "start": 338.477,
+      "end": 343.846,
+      "duration": 5.369,
+      "text": "there are actually a few eddies in there and with water"
+    },
+    {
+      "index": 66,
+      "start": 343.846,
+      "end": 347.715,
+      "duration": 3.869,
+      "text": "swirling. Those are the places where"
+    },
+    {
+      "index": 67,
+      "start": 347.715,
+      "end": 351.42,
+      "duration": 3.705,
+      "text": "there is actually curl in the flow."
+    },
+    {
+      "index": 68,
+      "start": 351.42,
+      "end": 356.726,
+      "duration": 5.306,
+      "text": "Yes. I don't know how to turn out"
+    },
+    {
+      "index": 69,
+      "start": 356.726,
+      "end": 360.53,
+      "duration": 3.804,
+      "text": "the lights a bit, but I'm sure there is a way."
+    },
+    {
+      "index": 70,
+      "start": 360.53,
+      "end": 370.51,
+      "duration": 9.98,
+      "text": "Does this do it? Is it working?"
+    },
+    {
+      "index": 71,
+      "start": 370.51,
+      "end": 383.129,
+      "duration": 12.619,
+      "text": "OK. You're welcome."
+    },
+    {
+      "index": 72,
+      "start": 383.129,
+      "end": 391.66,
+      "duration": 8.531,
+      "text": "Hopefully it is easier to see now."
+    },
+    {
+      "index": 73,
+      "start": 391.66,
+      "end": 395.512,
+      "duration": 3.852,
+      "text": "That was about curl. Now, why do we care about curl"
+    },
+    {
+      "index": 74,
+      "start": 395.512,
+      "end": 400.35,
+      "duration": 4.838,
+      "text": "besides this motivation of understanding motions?"
+    },
+    {
+      "index": 75,
+      "start": 400.35,
+      "end": 403.529,
+      "duration": 3.179,
+      "text": "One place where it comes up is when we try to understand"
+    },
+    {
+      "index": 76,
+      "start": 403.529,
+      "end": 405.899,
+      "duration": 2.37,
+      "text": "whether a vector field is conservative."
+    },
+    {
+      "index": 77,
+      "start": 405.899,
+      "end": 409.702,
+      "duration": 3.803,
+      "text": "Remember we have seen that a vector field is conservative if"
+    },
+    {
+      "index": 78,
+      "start": 409.702,
+      "end": 413.209,
+      "duration": 3.507,
+      "text": "and only if its curl is zero. That is the situation in which"
+    },
+    {
+      "index": 79,
+      "start": 413.209,
+      "end": 416.078,
+      "duration": 2.869,
+      "text": "we are allowed to try to look for a potential function and"
+    },
+    {
+      "index": 80,
+      "start": 416.078,
+      "end": 417.889,
+      "duration": 1.811,
+      "text": "then use the fundamental theorem."
+    },
+    {
+      "index": 81,
+      "start": 417.889,
+      "end": 420.089,
+      "duration": 2.2,
+      "text": "But another place where this comes up,"
+    },
+    {
+      "index": 82,
+      "start": 420.089,
+      "end": 422.439,
+      "duration": 2.35,
+      "text": "if you remember what we did in the plane,"
+    },
+    {
+      "index": 83,
+      "start": 422.439,
+      "end": 426.138,
+      "duration": 3.699,
+      "text": "curl also came up when we tried to convert nine integrals into"
+    },
+    {
+      "index": 84,
+      "start": 426.138,
+      "end": 430.24,
+      "duration": 4.102,
+      "text": "double integrals. That was Greene's theorem."
+    },
+    {
+      "index": 85,
+      "start": 430.24,
+      "end": 439.287,
+      "duration": 9.047,
+      "text": "Well, it turns out we can do the same thing in space and that"
+    },
+    {
+      "index": 86,
+      "start": 439.287,
+      "end": 448.35,
+      "duration": 9.063,
+      "text": "is called Stokes' theorem. What does Stokes' theorem say?"
+    },
+    {
+      "index": 87,
+      "start": 448.35,
+      "end": 456.731,
+      "duration": 8.381,
+      "text": "It says that the work done by a vector field along a closed"
+    },
+    {
+      "index": 88,
+      "start": 456.731,
+      "end": 464.68,
+      "duration": 7.949,
+      "text": "curve can be replaced by a double integral of curl F."
+    },
+    {
+      "index": 89,
+      "start": 464.68,
+      "end": 467.87,
+      "duration": 3.19,
+      "text": "Let me write it using the dell notation."
+    },
+    {
+      "index": 90,
+      "start": 467.87,
+      "end": 474.374,
+      "duration": 6.504,
+      "text": "That is curl F. Dot ndS on a suitably chosen"
+    },
+    {
+      "index": 91,
+      "start": 474.374,
+      "end": 478.039,
+      "duration": 3.665,
+      "text": "surface. That is a very strange kind of"
+    },
+    {
+      "index": 92,
+      "start": 478.039,
+      "end": 481.215,
+      "duration": 3.176,
+      "text": "statement. But actually it is not much"
+    },
+    {
+      "index": 93,
+      "start": 481.215,
+      "end": 484.99,
+      "duration": 3.775,
+      "text": "more strange than things we have seen before."
+    },
+    {
+      "index": 94,
+      "start": 484.99,
+      "end": 489.579,
+      "duration": 4.589,
+      "text": "I should clarify what this means."
+    },
+    {
+      "index": 95,
+      "start": 489.579,
+      "end": 497.06,
+      "duration": 7.481,
+      "text": "C has to be a closed curve in space."
+    },
+    {
+      "index": 96,
+      "start": 497.06,
+      "end": 512.23,
+      "duration": 15.17,
+      "text": "And S can be any surface bounded by C."
+    },
+    {
+      "index": 97,
+      "start": 512.23,
+      "end": 516.095,
+      "duration": 3.865,
+      "text": "For example, what Stokes' theorem tells me"
+    },
+    {
+      "index": 98,
+      "start": 516.095,
+      "end": 521.386,
+      "duration": 5.291,
+      "text": "is that let us say that I have to compute some line integral on"
+    },
+    {
+      "index": 99,
+      "start": 521.386,
+      "end": 528.578,
+      "duration": 7.192,
+      "text": "maybe, say, the unit circle in the x,"
+    },
+    {
+      "index": 100,
+      "start": 528.578,
+      "end": 532.695,
+      "duration": 4.117,
+      "text": "y plane. Of course I can set a line"
+    },
+    {
+      "index": 101,
+      "start": 532.695,
+      "end": 537.892,
+      "duration": 5.197,
+      "text": "integral directly and compute it by setting x equals cosine T,"
+    },
+    {
+      "index": 102,
+      "start": 537.892,
+      "end": 540.789,
+      "duration": 2.897,
+      "text": "y equals sine T, z equals zero."
+    },
+    {
+      "index": 103,
+      "start": 540.789,
+      "end": 543.911,
+      "duration": 3.122,
+      "text": "But maybe sometimes I don't want to do that because my"
+    },
+    {
+      "index": 104,
+      "start": 543.911,
+      "end": 546.09,
+      "duration": 2.179,
+      "text": "vector field is really complicated."
+    },
+    {
+      "index": 105,
+      "start": 546.09,
+      "end": 551.116,
+      "duration": 5.026,
+      "text": "And instead I will want to reduce things to a surface"
+    },
+    {
+      "index": 106,
+      "start": 551.116,
+      "end": 553.684,
+      "duration": 2.568,
+      "text": "integral. Now, I know that you guys are"
+    },
+    {
+      "index": 107,
+      "start": 553.684,
+      "end": 556.485,
+      "duration": 2.801,
+      "text": "not necessarily fond of computing flux of vector fields"
+    },
+    {
+      "index": 108,
+      "start": 556.485,
+      "end": 559.39,
+      "duration": 2.905,
+      "text": "for surfaces so maybe you don't really see the point."
+    },
+    {
+      "index": 109,
+      "start": 559.39,
+      "end": 562.264,
+      "duration": 2.874,
+      "text": "But sometimes it is useful. Sometimes it is also useful"
+    },
+    {
+      "index": 110,
+      "start": 562.264,
+      "end": 565.203,
+      "duration": 2.939,
+      "text": "backwards because, actually, you have a surface"
+    },
+    {
+      "index": 111,
+      "start": 565.203,
+      "end": 569.1,
+      "duration": 3.897,
+      "text": "integral that you would like to turn into a line integral."
+    },
+    {
+      "index": 112,
+      "start": 569.1,
+      "end": 574.682,
+      "duration": 5.582,
+      "text": "What Stokes' theorem says is that I can choose my favorite"
+    },
+    {
+      "index": 113,
+      "start": 574.682,
+      "end": 578.6,
+      "duration": 3.918,
+      "text": "surface whose boundary is this circle."
+    },
+    {
+      "index": 114,
+      "start": 578.6,
+      "end": 582.382,
+      "duration": 3.782,
+      "text": "I could choose, for example,"
+    },
+    {
+      "index": 115,
+      "start": 582.382,
+      "end": 590.646,
+      "duration": 8.264,
+      "text": "a half sphere if I want or I can choose, let's call that s1,"
+    },
+    {
+      "index": 116,
+      "start": 590.646,
+      "end": 594.569,
+      "duration": 3.923,
+      "text": "I don't know, a pointy thing,"
+    },
+    {
+      "index": 117,
+      "start": 594.569,
+      "end": 597.6,
+      "duration": 3.031,
+      "text": "s2. Probably the most logical one,"
+    },
+    {
+      "index": 118,
+      "start": 597.6,
+      "end": 600.49,
+      "duration": 2.89,
+      "text": "actually, would be just to choose a disk in the x,"
+    },
+    {
+      "index": 119,
+      "start": 600.49,
+      "end": 602.529,
+      "duration": 2.039,
+      "text": "y plane. That would probably be the"
+    },
+    {
+      "index": 120,
+      "start": 602.529,
+      "end": 604.88,
+      "duration": 2.351,
+      "text": "easiest one to set up for calculating flux."
+    },
+    {
+      "index": 121,
+      "start": 604.88,
+      "end": 607.7,
+      "duration": 2.82,
+      "text": "Anyway, what Stokes' theorem tells me"
+    },
+    {
+      "index": 122,
+      "start": 607.7,
+      "end": 609.99,
+      "duration": 2.29,
+      "text": "is I can choose any of these surfaces,"
+    },
+    {
+      "index": 123,
+      "start": 609.99,
+      "end": 614.0,
+      "duration": 4.01,
+      "text": "whichever one I want, and I can compute the flux of"
+    },
+    {
+      "index": 124,
+      "start": 614.0,
+      "end": 618.361,
+      "duration": 4.361,
+      "text": "curl F through this surface. Curl F is a new vector field"
+    },
+    {
+      "index": 125,
+      "start": 618.361,
+      "end": 622.136,
+      "duration": 3.775,
+      "text": "when you have this formula that gives you a vector field you"
+    },
+    {
+      "index": 126,
+      "start": 622.136,
+      "end": 625.399,
+      "duration": 3.263,
+      "text": "compute its flux through your favorite surface,"
+    },
+    {
+      "index": 127,
+      "start": 625.399,
+      "end": 631.464,
+      "duration": 6.065,
+      "text": "and you should get the same thing as if you had done the"
+    },
+    {
+      "index": 128,
+      "start": 631.464,
+      "end": 637.68,
+      "duration": 6.216,
+      "text": "line integral for F. That is the statement."
+    },
+    {
+      "index": 129,
+      "start": 637.68,
+      "end": 643.509,
+      "duration": 5.829,
+      "text": "Now, there is a catch here. What is the catch?"
+    },
+    {
+      "index": 130,
+      "start": 643.509,
+      "end": 647.501,
+      "duration": 3.992,
+      "text": "Well, the catch is we have to figure out what conventions to"
+    },
+    {
+      "index": 131,
+      "start": 647.501,
+      "end": 651.29,
+      "duration": 3.789,
+      "text": "use because remember when we have a surface there are two"
+    },
+    {
+      "index": 132,
+      "start": 651.29,
+      "end": 654.765,
+      "duration": 3.475,
+      "text": "possible orientations. We have to decide which way we"
+    },
+    {
+      "index": 133,
+      "start": 654.765,
+      "end": 658.139,
+      "duration": 3.374,
+      "text": "will counter flux positively, which way we will counter flux"
+    },
+    {
+      "index": 134,
+      "start": 658.139,
+      "end": 661.212,
+      "duration": 3.073,
+      "text": "negatively. And, if we change our choice,"
+    },
+    {
+      "index": 135,
+      "start": 661.212,
+      "end": 665.129,
+      "duration": 3.917,
+      "text": "then of course the flux will become the opposite."
+    },
+    {
+      "index": 136,
+      "start": 665.129,
+      "end": 668.593,
+      "duration": 3.464,
+      "text": "Well, similarly to define the work, I need to choose which way"
+    },
+    {
+      "index": 137,
+      "start": 668.593,
+      "end": 672.129,
+      "duration": 3.536,
+      "text": "I am going to run my curve. If I change which way I go"
+    },
+    {
+      "index": 138,
+      "start": 672.129,
+      "end": 676.2,
+      "duration": 4.071,
+      "text": "around the curve then my work will become the opposite."
+    },
+    {
+      "index": 139,
+      "start": 676.2,
+      "end": 681.013,
+      "duration": 4.813,
+      "text": "What happens is I have to orient the curve C and the"
+    },
+    {
+      "index": 140,
+      "start": 681.013,
+      "end": 688.335,
+      "duration": 7.322,
+      "text": "surface S in compatible ways. We have to figure out what the"
+    },
+    {
+      "index": 141,
+      "start": 688.335,
+      "end": 696.978,
+      "duration": 8.643,
+      "text": "rule is for how the orientation of S and that of C relate to"
+    },
+    {
+      "index": 142,
+      "start": 696.978,
+      "end": 701.919,
+      "duration": 4.941,
+      "text": "each other. What about orientation?"
+    },
+    {
+      "index": 143,
+      "start": 701.919,
+      "end": 715.509,
+      "duration": 13.59,
+      "text": "Well, we need the orientations of C and S to be compatible and"
+    },
+    {
+      "index": 144,
+      "start": 715.509,
+      "end": 725.98,
+      "duration": 10.471,
+      "text": "they have to explain to you what the rule is."
+    },
+    {
+      "index": 145,
+      "start": 725.98,
+      "end": 735.123,
+      "duration": 9.143,
+      "text": "Let me show you a picture. The rule is if I walk along C"
+    },
+    {
+      "index": 146,
+      "start": 735.123,
+      "end": 743.249,
+      "duration": 8.126,
+      "text": "with S to my left then the normal vector is pointing up for"
+    },
+    {
+      "index": 147,
+      "start": 743.249,
+      "end": 749.58,
+      "duration": 6.331,
+      "text": "me. Let me write that."
+    },
+    {
+      "index": 148,
+      "start": 749.58,
+      "end": 757.636,
+      "duration": 8.056,
+      "text": "If I walk along C, I should say in the positive"
+    },
+    {
+      "index": 149,
+      "start": 757.636,
+      "end": 768.32,
+      "duration": 10.684,
+      "text": "direction, in the direction that I have chosen to orient C."
+    },
+    {
+      "index": 150,
+      "start": 768.32,
+      "end": 786.43,
+      "duration": 18.11,
+      "text": "With S to my left then n is pointing up for me."
+    },
+    {
+      "index": 151,
+      "start": 786.43,
+      "end": 790.213,
+      "duration": 3.783,
+      "text": "Here is the example. If I am walking on this curve,"
+    },
+    {
+      "index": 152,
+      "start": 790.213,
+      "end": 792.46,
+      "duration": 2.247,
+      "text": "it looks like the surface is to my left."
+    },
+    {
+      "index": 153,
+      "start": 792.46,
+      "end": 799.54,
+      "duration": 7.08,
+      "text": "And so the normal vector is going towards what is up for me."
+    },
+    {
+      "index": 154,
+      "start": 799.54,
+      "end": 806.149,
+      "duration": 6.609,
+      "text": "Any questions about that? I see some people using their"
+    },
+    {
+      "index": 155,
+      "start": 806.149,
+      "end": 808.218,
+      "duration": 2.069,
+      "text": "right hands. That is also right-handable"
+    },
+    {
+      "index": 156,
+      "start": 808.218,
+      "end": 811.07,
+      "duration": 2.852,
+      "text": "which I am going to say in just a few moments."
+    },
+    {
+      "index": 157,
+      "start": 811.07,
+      "end": 812.61,
+      "duration": 1.54,
+      "text": "That is another way to remember this."
+    },
+    {
+      "index": 158,
+      "start": 812.61,
+      "end": 818.11,
+      "duration": 5.5,
+      "text": "Before I tell you about the right-handable version,"
+    },
+    {
+      "index": 159,
+      "start": 818.11,
+      "end": 823.295,
+      "duration": 5.185,
+      "text": "let me just try something. Actually, I am not happy with"
+    },
+    {
+      "index": 160,
+      "start": 823.295,
+      "end": 827.506,
+      "duration": 4.211,
+      "text": "this orientation of C and I want to orient my curve C going"
+    },
+    {
+      "index": 161,
+      "start": 827.506,
+      "end": 831.879,
+      "duration": 4.373,
+      "text": "clockwise on the picture. So the other orientation."
+    },
+    {
+      "index": 162,
+      "start": 831.879,
+      "end": 835.519,
+      "duration": 3.64,
+      "text": "Then, if I walk on it this way, the surface would be to my"
+    },
+    {
+      "index": 163,
+      "start": 835.519,
+      "end": 836.899,
+      "duration": 1.38,
+      "text": "right. You can remember,"
+    },
+    {
+      "index": 164,
+      "start": 836.899,
+      "end": 839.149,
+      "duration": 2.25,
+      "text": "if it helps you, that if a surface is to your"
+    },
+    {
+      "index": 165,
+      "start": 839.149,
+      "end": 841.45,
+      "duration": 2.301,
+      "text": "right then the normal vector will go down."
+    },
+    {
+      "index": 166,
+      "start": 841.45,
+      "end": 844.149,
+      "duration": 2.699,
+      "text": "The other way to think about this rule is enough because if"
+    },
+    {
+      "index": 167,
+      "start": 844.149,
+      "end": 847.569,
+      "duration": 3.42,
+      "text": "you are walking clockwise, well, you can change that to"
+    },
+    {
+      "index": 168,
+      "start": 847.569,
+      "end": 850.97,
+      "duration": 3.401,
+      "text": "counterclockwise just by walking upside down."
+    },
+    {
+      "index": 169,
+      "start": 850.97,
+      "end": 854.87,
+      "duration": 3.9,
+      "text": "This guy is walking clockwise on C."
+    },
+    {
+      "index": 170,
+      "start": 854.87,
+      "end": 861.905,
+      "duration": 7.035,
+      "text": "And while for him, if you look carefully at the"
+    },
+    {
+      "index": 171,
+      "start": 861.905,
+      "end": 871.693,
+      "duration": 9.788,
+      "text": "picture, the surface is actually to his left when you flip upside"
+    },
+    {
+      "index": 172,
+      "start": 871.693,
+      "end": 874.57,
+      "duration": 2.877,
+      "text": "down. Yeah, it is kind of confusing."
+    },
+    {
+      "index": 173,
+      "start": 874.57,
+      "end": 878.394,
+      "duration": 3.824,
+      "text": "But, anyway, maybe it's easier if you"
+    },
+    {
+      "index": 174,
+      "start": 878.394,
+      "end": 884.959,
+      "duration": 6.565,
+      "text": "actually rotate in the picture. And now it is getting actually"
+    },
+    {
+      "index": 175,
+      "start": 884.959,
+      "end": 890.16,
+      "duration": 5.201,
+      "text": "really confusing because his walking upside up with,"
+    },
+    {
+      "index": 176,
+      "start": 890.16,
+      "end": 894.24,
+      "duration": 4.08,
+      "text": "actually, the surface is to his left."
+    },
+    {
+      "index": 177,
+      "start": 894.24,
+      "end": 898.191,
+      "duration": 3.951,
+      "text": "I mean where he is at here is actually at the front and this"
+    },
+    {
+      "index": 178,
+      "start": 898.191,
+      "end": 901.34,
+      "duration": 3.149,
+      "text": "is the back, but that is kind of hard to see."
+    },
+    {
+      "index": 179,
+      "start": 901.34,
+      "end": 905.34,
+      "duration": 4.0,
+      "text": "Anyway, whichever method will work best for you."
+    },
+    {
+      "index": 180,
+      "start": 905.34,
+      "end": 907.824,
+      "duration": 2.484,
+      "text": "Perhaps it is easiest to first do it with the other"
+    },
+    {
+      "index": 181,
+      "start": 907.824,
+      "end": 909.53,
+      "duration": 1.706,
+      "text": "orientation, this one,"
+    },
+    {
+      "index": 182,
+      "start": 909.53,
+      "end": 913.169,
+      "duration": 3.639,
+      "text": "and this side, if you want the opposite one,"
+    },
+    {
+      "index": 183,
+      "start": 913.169,
+      "end": 921.25,
+      "duration": 8.081,
+      "text": "then you will just flip everything."
+    },
+    {
+      "index": 184,
+      "start": 921.25,
+      "end": 925.554,
+      "duration": 4.304,
+      "text": "Now, what is the other way of remembering this with the"
+    },
+    {
+      "index": 185,
+      "start": 925.554,
+      "end": 927.614,
+      "duration": 2.06,
+      "text": "right-hand rule? First of all,"
+    },
+    {
+      "index": 186,
+      "start": 927.614,
+      "end": 929.389,
+      "duration": 1.775,
+      "text": "take your right hand, not your left."
+    },
+    {
+      "index": 187,
+      "start": 929.389,
+      "end": 932.059,
+      "duration": 2.67,
+      "text": "Even if your right hand is actually using a pen or"
+    },
+    {
+      "index": 188,
+      "start": 932.059,
+      "end": 934.73,
+      "duration": 2.671,
+      "text": "something like that in your right hand do this."
+    },
+    {
+      "index": 189,
+      "start": 934.73,
+      "end": 937.67,
+      "duration": 2.94,
+      "text": "And let's take your fingers in order."
+    },
+    {
+      "index": 190,
+      "start": 937.67,
+      "end": 940.492,
+      "duration": 2.822,
+      "text": "First your thumb. Let's make your thumb go along"
+    },
+    {
+      "index": 191,
+      "start": 940.492,
+      "end": 942.49,
+      "duration": 1.998,
+      "text": "the object that has only one dimension in there."
+    },
+    {
+      "index": 192,
+      "start": 942.49,
+      "end": 947.943,
+      "duration": 5.453,
+      "text": "That is the curve. Well, let's look at the top"
+    },
+    {
+      "index": 193,
+      "start": 947.943,
+      "end": 952.244,
+      "duration": 4.301,
+      "text": "picture up there. I want my thumb to go along the"
+    },
+    {
+      "index": 194,
+      "start": 952.244,
+      "end": 956.309,
+      "duration": 4.065,
+      "text": "curve so that is kind of towards the right."
+    },
+    {
+      "index": 195,
+      "start": 956.309,
+      "end": 966.357,
+      "duration": 10.048,
+      "text": "Then I want to make my index finger point towards the"
+    },
+    {
+      "index": 196,
+      "start": 966.357,
+      "end": 969.576,
+      "duration": 3.219,
+      "text": "surface. Towards the surface I mean"
+    },
+    {
+      "index": 197,
+      "start": 969.576,
+      "end": 972.149,
+      "duration": 2.573,
+      "text": "towards the interior of the surface from the curve."
+    },
+    {
+      "index": 198,
+      "start": 972.149,
+      "end": 975.34,
+      "duration": 3.191,
+      "text": "And when I am on the curve I am on the boundary of the surface,"
+    },
+    {
+      "index": 199,
+      "start": 975.34,
+      "end": 978.24,
+      "duration": 2.9,
+      "text": "so there is a direction along the surface that is the curve"
+    },
+    {
+      "index": 200,
+      "start": 978.24,
+      "end": 980.69,
+      "duration": 2.45,
+      "text": "and the other one is pointing into the surface."
+    },
+    {
+      "index": 201,
+      "start": 980.69,
+      "end": 984.225,
+      "duration": 3.535,
+      "text": "That one would be pointing kind of to the back slightly up"
+    },
+    {
+      "index": 202,
+      "start": 984.225,
+      "end": 987.441,
+      "duration": 3.216,
+      "text": "maybe, so like that. And now your middle finger is"
+    },
+    {
+      "index": 203,
+      "start": 987.441,
+      "end": 990.889,
+      "duration": 3.448,
+      "text": "going to point in the direction of the normal vector."
+    },
+    {
+      "index": 204,
+      "start": 990.889,
+      "end": 997.422,
+      "duration": 6.533,
+      "text": "That is up, at least if you have the same kind of right hand"
+    },
+    {
+      "index": 205,
+      "start": 997.422,
+      "end": 1009.79,
+      "duration": 12.368,
+      "text": "as I do. The other way of doing it is"
+    },
+    {
+      "index": 206,
+      "start": 1009.79,
+      "end": 1028.289,
+      "duration": 18.499,
+      "text": "using the right-hand rule along C positively."
+    },
+    {
+      "index": 207,
+      "start": 1028.289,
+      "end": 1038.13,
+      "duration": 9.841,
+      "text": "The index finger towards the interior of S."
+    },
+    {
+      "index": 208,
+      "start": 1038.13,
+      "end": 1047.664,
+      "duration": 9.534,
+      "text": "Sorry, I shouldn't say interior. I should say tangent to S"
+    },
+    {
+      "index": 209,
+      "start": 1047.664,
+      "end": 1054.662,
+      "duration": 6.998,
+      "text": "towards the interior of S. What I mean by that is really"
+    },
+    {
+      "index": 210,
+      "start": 1054.662,
+      "end": 1059.346,
+      "duration": 4.684,
+      "text": "the part of S that is not its boundary, so the rest of the"
+    },
+    {
+      "index": 211,
+      "start": 1059.346,
+      "end": 1069.892,
+      "duration": 10.546,
+      "text": "surface. Then the middle finger points"
+    },
+    {
+      "index": 212,
+      "start": 1069.892,
+      "end": 1080.809,
+      "duration": 10.917,
+      "text": "parallel to n. Let's practice."
+    },
+    {
+      "index": 213,
+      "start": 1080.809,
+      "end": 1089.24,
+      "duration": 8.431,
+      "text": "Let's say that I gave you this curve bounding this surface."
+    },
+    {
+      "index": 214,
+      "start": 1089.24,
+      "end": 1093.05,
+      "duration": 3.81,
+      "text": "Which way do you think the normal vector will be going?"
+    },
+    {
+      "index": 215,
+      "start": 1093.05,
+      "end": 1096.975,
+      "duration": 3.925,
+      "text": "Up. Yes. Everyone is voting up. Imaging that I am walking"
+    },
+    {
+      "index": 216,
+      "start": 1096.975,
+      "end": 1098.94,
+      "duration": 1.965,
+      "text": "around C. That is to my left."
+    },
+    {
+      "index": 217,
+      "start": 1098.94,
+      "end": 1104.994,
+      "duration": 6.054,
+      "text": "Normal vector points up. Imagine that you put your thumb"
+    },
+    {
+      "index": 218,
+      "start": 1104.994,
+      "end": 1112.319,
+      "duration": 7.325,
+      "text": "along C, your index towards S and then your middle finger"
+    },
+    {
+      "index": 219,
+      "start": 1112.319,
+      "end": 1116.69,
+      "duration": 4.371,
+      "text": "points up. Very good."
+    },
+    {
+      "index": 220,
+      "start": 1116.69,
+      "end": 1123.53,
+      "duration": 6.84,
+      "text": "N points up. Another one."
+    },
+    {
+      "index": 221,
+      "start": 1145.99,
+      "end": 1147.77,
+      "duration": 1.78,
+      "text": "It is interesting to watch you guys."
+    },
+    {
+      "index": 222,
+      "start": 1147.77,
+      "end": 1153.161,
+      "duration": 5.391,
+      "text": "I think mostly it is going up. The correct answer is it goes"
+    },
+    {
+      "index": 223,
+      "start": 1153.161,
+      "end": 1160.19,
+      "duration": 7.029,
+      "text": "up and into the cone. How do we see that?"
+    },
+    {
+      "index": 224,
+      "start": 1160.19,
+      "end": 1164.015,
+      "duration": 3.825,
+      "text": "Well, one way to think about it is imagine that you are walking"
+    },
+    {
+      "index": 225,
+      "start": 1164.015,
+      "end": 1167.289,
+      "duration": 3.274,
+      "text": "on C, on the rim of this cone. You have two options."
+    },
+    {
+      "index": 226,
+      "start": 1167.289,
+      "end": 1170.259,
+      "duration": 2.97,
+      "text": "Imagine that you are walking kind of inside or imagine that"
+    },
+    {
+      "index": 227,
+      "start": 1170.259,
+      "end": 1173.432,
+      "duration": 3.173,
+      "text": "you are walking kind of outside. If you are walking outside then"
+    },
+    {
+      "index": 228,
+      "start": 1173.432,
+      "end": 1175.65,
+      "duration": 2.218,
+      "text": "S is to your right, but it does not sound good."
+    },
+    {
+      "index": 229,
+      "start": 1175.65,
+      "end": 1179.756,
+      "duration": 4.106,
+      "text": "Let's say instead that you are walking on the inside of a cone"
+    },
+    {
+      "index": 230,
+      "start": 1179.756,
+      "end": 1183.119,
+      "duration": 3.363,
+      "text": "following the boundary. Well, then the surface is to"
+    },
+    {
+      "index": 231,
+      "start": 1183.119,
+      "end": 1185.845,
+      "duration": 2.726,
+      "text": "your left. And so the normal vector will"
+    },
+    {
+      "index": 232,
+      "start": 1185.845,
+      "end": 1190.119,
+      "duration": 4.274,
+      "text": "be up for you which means it will be pointing slightly up and"
+    },
+    {
+      "index": 233,
+      "start": 1190.119,
+      "end": 1192.44,
+      "duration": 2.321,
+      "text": "into the cone. Another way to think about it,"
+    },
+    {
+      "index": 234,
+      "start": 1192.44,
+      "end": 1196.359,
+      "duration": 3.919,
+      "text": "through the right-hand rule, from this way index going kind"
+    },
+    {
+      "index": 235,
+      "start": 1196.359,
+      "end": 1200.789,
+      "duration": 4.43,
+      "text": "of down because the surface goes down and a bit to the back."
+    },
+    {
+      "index": 236,
+      "start": 1200.789,
+      "end": 1204.73,
+      "duration": 3.941,
+      "text": "And then the normal vector points up and in."
+    },
+    {
+      "index": 237,
+      "start": 1204.73,
+      "end": 1208.71,
+      "duration": 3.98,
+      "text": "Yet another way, if you deform continuously your"
+    },
+    {
+      "index": 238,
+      "start": 1208.71,
+      "end": 1212.69,
+      "duration": 3.98,
+      "text": "surface then the conventions will not change."
+    },
+    {
+      "index": 239,
+      "start": 1212.69,
+      "end": 1215.026,
+      "duration": 2.336,
+      "text": "See, this is kind of topology"
+    },
+    {
+      "index": 240,
+      "start": 1215.026,
+      "end": 1217.528,
+      "duration": 2.502,
+      "text": "in a way. You can deform things and"
+    },
+    {
+      "index": 241,
+      "start": 1217.528,
+      "end": 1221.621,
+      "duration": 4.093,
+      "text": "nothing will change. So what if we somehow flatten"
+    },
+    {
+      "index": 242,
+      "start": 1221.621,
+      "end": 1227.25,
+      "duration": 5.629,
+      "text": "our cone, push it a bit up so that it becomes completely flat?"
+    },
+    {
+      "index": 243,
+      "start": 1227.25,
+      "end": 1230.286,
+      "duration": 3.036,
+      "text": "Then, if you had a flat disk with the curve going"
+    },
+    {
+      "index": 244,
+      "start": 1230.286,
+      "end": 1233.45,
+      "duration": 3.164,
+      "text": "counterclockwise, the normal vector would go up."
+    },
+    {
+      "index": 245,
+      "start": 1233.45,
+      "end": 1236.44,
+      "duration": 2.99,
+      "text": "Now take your disk with its normal vector sticking up."
+    },
+    {
+      "index": 246,
+      "start": 1236.44,
+      "end": 1239.792,
+      "duration": 3.352,
+      "text": "If you want to paint the face a different color so that you can"
+    },
+    {
+      "index": 247,
+      "start": 1239.792,
+      "end": 1243.09,
+      "duration": 3.298,
+      "text": "remember that was beside with a normal vector and then push it"
+    },
+    {
+      "index": 248,
+      "start": 1243.09,
+      "end": 1245.516,
+      "duration": 2.426,
+      "text": "back down to the cone, you will see that the painted"
+    },
+    {
+      "index": 249,
+      "start": 1245.516,
+      "end": 1248.551,
+      "duration": 3.035,
+      "text": "face, the one with the normal vector"
+    },
+    {
+      "index": 250,
+      "start": 1248.551,
+      "end": 1252.94,
+      "duration": 4.389,
+      "text": "on that side is the one that is inside and up."
+    },
+    {
+      "index": 251,
+      "start": 1252.94,
+      "end": 1259.731,
+      "duration": 6.791,
+      "text": "Does that make sense? Anyway, I think you have just"
+    },
+    {
+      "index": 252,
+      "start": 1259.731,
+      "end": 1263.79,
+      "duration": 4.059,
+      "text": "to play with these examples for long enough and get it."
+    },
+    {
+      "index": 253,
+      "start": 1263.79,
+      "end": 1267.684,
+      "duration": 3.894,
+      "text": "OK. The last one. Let's say that I have a"
+    },
+    {
+      "index": 254,
+      "start": 1267.684,
+      "end": 1270.229,
+      "duration": 2.545,
+      "text": "cylinder. So now this guy has actually"
+    },
+    {
+      "index": 255,
+      "start": 1270.229,
+      "end": 1272.799,
+      "duration": 2.57,
+      "text": "two boundary curves, C and C prime."
+    },
+    {
+      "index": 256,
+      "start": 1272.799,
+      "end": 1276.474,
+      "duration": 3.675,
+      "text": "And let's say I want to orient my cylinder so that the normal"
+    },
+    {
+      "index": 257,
+      "start": 1276.474,
+      "end": 1280.905,
+      "duration": 4.431,
+      "text": "vector sticks out. How should I choose the"
+    },
+    {
+      "index": 258,
+      "start": 1280.905,
+      "end": 1290.265,
+      "duration": 9.36,
+      "text": "orientation of my curves? Let's start with,"
+    },
+    {
+      "index": 259,
+      "start": 1290.265,
+      "end": 1300.051,
+      "duration": 9.786,
+      "text": "say, the bottom one. Would the bottom one be going"
+    },
+    {
+      "index": 260,
+      "start": 1300.051,
+      "end": 1304.478,
+      "duration": 4.427,
+      "text": "clockwise or counterclockwise. Most people seem to say"
+    },
+    {
+      "index": 261,
+      "start": 1304.478,
+      "end": 1307.22,
+      "duration": 2.742,
+      "text": "counterclockwise, and I agree with that."
+    },
+    {
+      "index": 262,
+      "start": 1307.22,
+      "end": 1311.81,
+      "duration": 4.59,
+      "text": "Let me write that down and claim C prime should go"
+    },
+    {
+      "index": 263,
+      "start": 1311.81,
+      "end": 1315.292,
+      "duration": 3.482,
+      "text": "counterclockwise. One way to think about it,"
+    },
+    {
+      "index": 264,
+      "start": 1315.292,
+      "end": 1318.632,
+      "duration": 3.34,
+      "text": "actually, it's quite easy, you mentioned that you're"
+    },
+    {
+      "index": 265,
+      "start": 1318.632,
+      "end": 1322.299,
+      "duration": 3.667,
+      "text": "walking on the outside of the cylinder along C prime."
+    },
+    {
+      "index": 266,
+      "start": 1322.299,
+      "end": 1326.518,
+      "duration": 4.219,
+      "text": "If you want to walk along C prime so that the cylinder is to"
+    },
+    {
+      "index": 267,
+      "start": 1326.518,
+      "end": 1330.879,
+      "duration": 4.361,
+      "text": "your left, that means you have to actually go counterclockwise"
+    },
+    {
+      "index": 268,
+      "start": 1330.879,
+      "end": 1334.728,
+      "duration": 3.849,
+      "text": "around it. The other way is use your right"
+    },
+    {
+      "index": 269,
+      "start": 1334.728,
+      "end": 1337.011,
+      "duration": 2.283,
+      "text": "hand. Say when you're at the front of"
+    },
+    {
+      "index": 270,
+      "start": 1337.011,
+      "end": 1339.22,
+      "duration": 2.209,
+      "text": "C prime, your thumb points to the right,"
+    },
+    {
+      "index": 271,
+      "start": 1339.22,
+      "end": 1343.359,
+      "duration": 4.139,
+      "text": "your index points up because that's where the surface is,"
+    },
+    {
+      "index": 272,
+      "start": 1343.359,
+      "end": 1348.65,
+      "duration": 5.291,
+      "text": "and then your middle finger will point out."
+    },
+    {
+      "index": 273,
+      "start": 1348.65,
+      "end": 1359.033,
+      "duration": 10.383,
+      "text": "What about C? Well, C I claim we should be"
+    },
+    {
+      "index": 274,
+      "start": 1359.033,
+      "end": 1363.135,
+      "duration": 4.102,
+      "text": "doing clockwise. I mean think about just walking"
+    },
+    {
+      "index": 275,
+      "start": 1363.135,
+      "end": 1366.2,
+      "duration": 3.065,
+      "text": "again on the surface of the cylinder along C."
+    },
+    {
+      "index": 276,
+      "start": 1366.2,
+      "end": 1372.112,
+      "duration": 5.912,
+      "text": "If you walk clockwise, you will see that the surface"
+    },
+    {
+      "index": 277,
+      "start": 1372.112,
+      "end": 1377.329,
+      "duration": 5.217,
+      "text": "is to your left or use the right-hand rule."
+    },
+    {
+      "index": 278,
+      "start": 1377.329,
+      "end": 1380.621,
+      "duration": 3.292,
+      "text": "Now, if a problem gives you neither the orientation of a"
+    },
+    {
+      "index": 279,
+      "start": 1380.621,
+      "end": 1384.271,
+      "duration": 3.65,
+      "text": "curve nor that of the surface then it's up to you to make them"
+    },
+    {
+      "index": 280,
+      "start": 1384.271,
+      "end": 1385.828,
+      "duration": 1.557,
+      "text": "up. But you have to make them up in"
+    },
+    {
+      "index": 281,
+      "start": 1385.828,
+      "end": 1389.087,
+      "duration": 3.259,
+      "text": "a consistent way. You cannot choose them both at"
+    },
+    {
+      "index": 282,
+      "start": 1389.087,
+      "end": 1393.769,
+      "duration": 4.682,
+      "text": "random. All right."
+    },
+    {
+      "index": 283,
+      "start": 1393.769,
+      "end": 1410.779,
+      "duration": 17.01,
+      "text": "Now we're all set to try to use Stokes' theorem."
+    },
+    {
+      "index": 284,
+      "start": 1410.779,
+      "end": 1415.369,
+      "duration": 4.59,
+      "text": "Well, let me do an example first."
+    },
+    {
+      "index": 285,
+      "start": 1415.369,
+      "end": 1423.85,
+      "duration": 8.481,
+      "text": "The first example that I will do is actually a comparison."
+    },
+    {
+      "index": 286,
+      "start": 1423.85,
+      "end": 1432.757,
+      "duration": 8.907,
+      "text": "Stokes' versus Green. I want to show you how Green's"
+    },
+    {
+      "index": 287,
+      "start": 1432.757,
+      "end": 1435.349,
+      "duration": 2.592,
+      "text": "theorem for work that we saw in the plane,"
+    },
+    {
+      "index": 288,
+      "start": 1435.349,
+      "end": 1438.589,
+      "duration": 3.24,
+      "text": "but also involved work and curl and so on,"
+    },
+    {
+      "index": 289,
+      "start": 1438.589,
+      "end": 1444.329,
+      "duration": 5.74,
+      "text": "is actually a special case of this."
+    },
+    {
+      "index": 290,
+      "start": 1444.329,
+      "end": 1451.638,
+      "duration": 7.309,
+      "text": "Let's say that we will look at the special case where our curve"
+    },
+    {
+      "index": 291,
+      "start": 1451.638,
+      "end": 1456.589,
+      "duration": 4.951,
+      "text": "C is actually a curve in the x, y plane."
+    },
+    {
+      "index": 292,
+      "start": 1456.589,
+      "end": 1459.537,
+      "duration": 2.948,
+      "text": "And let's make it go counterclockwise in the x,"
+    },
+    {
+      "index": 293,
+      "start": 1459.537,
+      "end": 1463.19,
+      "duration": 3.653,
+      "text": "y plane because that's what we did for Green's theorem."
+    },
+    {
+      "index": 294,
+      "start": 1463.19,
+      "end": 1465.88,
+      "duration": 2.69,
+      "text": "Now let's choose a surface bounded by this curve."
+    },
+    {
+      "index": 295,
+      "start": 1465.88,
+      "end": 1468.941,
+      "duration": 3.061,
+      "text": "Well, as I said, I could make up any surface"
+    },
+    {
+      "index": 296,
+      "start": 1468.941,
+      "end": 1472.43,
+      "duration": 3.489,
+      "text": "that comes to my mind. But, if I want to relate to"
+    },
+    {
+      "index": 297,
+      "start": 1472.43,
+      "end": 1475.264,
+      "duration": 2.834,
+      "text": "this stuff, I should probably stay in the x,"
+    },
+    {
+      "index": 298,
+      "start": 1475.264,
+      "end": 1478.648,
+      "duration": 3.384,
+      "text": "y plane. So I am just going to take my"
+    },
+    {
+      "index": 299,
+      "start": 1478.648,
+      "end": 1483.964,
+      "duration": 5.316,
+      "text": "surface to be the piece of the x, y plane that is inside my"
+    },
+    {
+      "index": 300,
+      "start": 1483.964,
+      "end": 1492.167,
+      "duration": 8.203,
+      "text": "curve. So let's say S is going to be a"
+    },
+    {
+      "index": 301,
+      "start": 1492.167,
+      "end": 1502.162,
+      "duration": 9.995,
+      "text": "portion of x, y plane bounded by a curve C,"
+    },
+    {
+      "index": 302,
+      "start": 1502.162,
+      "end": 1511.92,
+      "duration": 9.758,
+      "text": "and the curve C goes counterclockwise."
+    },
+    {
+      "index": 303,
+      "start": 1511.92,
+      "end": 1517.41,
+      "duration": 5.49,
+      "text": "Well, then I should look at [the table?]."
+    },
+    {
+      "index": 304,
+      "start": 1517.41,
+      "end": 1524.32,
+      "duration": 6.91,
+      "text": "For work along C of my favorite vector field F dot dr."
+    },
+    {
+      "index": 305,
+      "start": 1524.32,
+      "end": 1531.099,
+      "duration": 6.779,
+      "text": "So that will be the line integral of Pdx plus Qdy."
+    },
+    {
+      "index": 306,
+      "start": 1531.099,
+      "end": 1534.856,
+      "duration": 3.757,
+      "text": "Like I said, if I call the components of my"
+    },
+    {
+      "index": 307,
+      "start": 1534.856,
+      "end": 1538.88,
+      "duration": 4.024,
+      "text": "field P, Q and R, it will be Pdx plus Qdy plus"
+    },
+    {
+      "index": 308,
+      "start": 1538.88,
+      "end": 1542.19,
+      "duration": 3.31,
+      "text": "Rdz, but I don't have any Z here."
+    },
+    {
+      "index": 309,
+      "start": 1542.19,
+      "end": 1549.517,
+      "duration": 7.327,
+      "text": "Dz is zero on C. If I evaluate for line"
+    },
+    {
+      "index": 310,
+      "start": 1549.517,
+      "end": 1553.34,
+      "duration": 3.823,
+      "text": "integral, I don't have any term involving dz."
+    },
+    {
+      "index": 311,
+      "start": 1553.34,
+      "end": 1559.154,
+      "duration": 5.814,
+      "text": "Z is zero. Now, let's see what Strokes"
+    },
+    {
+      "index": 312,
+      "start": 1559.154,
+      "end": 1565.133,
+      "duration": 5.979,
+      "text": "says. Stokes says instead I can"
+    },
+    {
+      "index": 313,
+      "start": 1565.133,
+      "end": 1573.329,
+      "duration": 8.196,
+      "text": "compute for flux through S of curve F."
+    },
+    {
+      "index": 314,
+      "start": 1573.329,
+      "end": 1577.71,
+      "duration": 4.381,
+      "text": "But now what's the normal vector to my surface?"
+    },
+    {
+      "index": 315,
+      "start": 1577.71,
+      "end": 1579.96,
+      "duration": 2.25,
+      "text": "Well, it's going to be either k or negative k."
+    },
+    {
+      "index": 316,
+      "start": 1579.96,
+      "end": 1582.95,
+      "duration": 2.99,
+      "text": "I just have to figure out which one it is."
+    },
+    {
+      "index": 317,
+      "start": 1582.95,
+      "end": 1585.886,
+      "duration": 2.936,
+      "text": "Well, if you followed what we've done there,"
+    },
+    {
+      "index": 318,
+      "start": 1585.886,
+      "end": 1590.121,
+      "duration": 4.235,
+      "text": "you know that the normal vector compatible with this choice for"
+    },
+    {
+      "index": 319,
+      "start": 1590.121,
+      "end": 1592.99,
+      "duration": 2.869,
+      "text": "the curve C is the one that points up."
+    },
+    {
+      "index": 320,
+      "start": 1592.99,
+      "end": 1603.231,
+      "duration": 10.241,
+      "text": "My normal vector is just going to be k hat, so I am going to"
+    },
+    {
+      "index": 321,
+      "start": 1603.231,
+      "end": 1609.48,
+      "duration": 6.249,
+      "text": "replace my normal vector by k hat."
+    },
+    {
+      "index": 322,
+      "start": 1609.48,
+      "end": 1613.411,
+      "duration": 3.931,
+      "text": "That means, actually, I will be integrating curl dot"
+    },
+    {
+      "index": 323,
+      "start": 1613.411,
+      "end": 1616.724,
+      "duration": 3.313,
+      "text": "k. That means I am integrating the"
+    },
+    {
+      "index": 324,
+      "start": 1616.724,
+      "end": 1624.99,
+      "duration": 8.266,
+      "text": "z component of curl. Let's look at curl F dot k."
+    },
+    {
+      "index": 325,
+      "start": 1624.99,
+      "end": 1634.369,
+      "duration": 9.379,
+      "text": "That's the z component of curl F."
+    },
+    {
+      "index": 326,
+      "start": 1634.369,
+      "end": 1638.759,
+      "duration": 4.39,
+      "text": "And what's the z component of curl?"
+    },
+    {
+      "index": 327,
+      "start": 1638.759,
+      "end": 1641.85,
+      "duration": 3.091,
+      "text": "Well, I conveniently still have the values up there."
+    },
+    {
+      "index": 328,
+      "start": 1641.85,
+      "end": 1656.216,
+      "duration": 14.366,
+      "text": "It's Q sub x minus P sub y. My double integral becomes"
+    },
+    {
+      "index": 329,
+      "start": 1656.216,
+      "end": 1662.09,
+      "duration": 5.874,
+      "text": "double integral of Q sub x minus P sub y."
+    },
+    {
+      "index": 330,
+      "start": 1662.09,
+      "end": 1666.633,
+      "duration": 4.543,
+      "text": "What about dS? Well, I am in a piece of the x,"
+    },
+    {
+      "index": 331,
+      "start": 1666.633,
+      "end": 1672.233,
+      "duration": 5.6,
+      "text": "y plane, so dS is just dxdy or your favorite combination that"
+    },
+    {
+      "index": 332,
+      "start": 1672.233,
+      "end": 1676.882,
+      "duration": 4.649,
+      "text": "does the same thing. Now, see, if you look at this"
+    },
+    {
+      "index": 333,
+      "start": 1676.882,
+      "end": 1682.145,
+      "duration": 5.263,
+      "text": "equality, integral of Pdx plus Qdy along a closed curve equals"
+    },
+    {
+      "index": 334,
+      "start": 1682.145,
+      "end": 1685.509,
+      "duration": 3.364,
+      "text": "double integral of Qx minus Py dxdy."
+    },
+    {
+      "index": 335,
+      "start": 1685.509,
+      "end": 1691.89,
+      "duration": 6.381,
+      "text": "That is exactly the statement of Green's theorem."
+    },
+    {
+      "index": 336,
+      "start": 1691.89,
+      "end": 1697.132,
+      "duration": 5.242,
+      "text": "I mean except at that time we called things m and n,"
+    },
+    {
+      "index": 337,
+      "start": 1697.132,
+      "end": 1700.73,
+      "duration": 3.598,
+      "text": "but really that shouldn't matter."
+    },
+    {
+      "index": 338,
+      "start": 1700.73,
+      "end": 1715.549,
+      "duration": 14.819,
+      "text": "This tells you that, in fact, Green's theorem is"
+    },
+    {
+      "index": 339,
+      "start": 1715.549,
+      "end": 1731.63,
+      "duration": 16.081,
+      "text": "just a special case of Stokes' in the x, y plane."
+    },
+    {
+      "index": 340,
+      "start": 1731.63,
+      "end": 1735.212,
+      "duration": 3.582,
+      "text": "Now, another small remark I want to make right away before I"
+    },
+    {
+      "index": 341,
+      "start": 1735.212,
+      "end": 1737.492,
+      "duration": 2.28,
+      "text": "forget, you might think that these"
+    },
+    {
+      "index": 342,
+      "start": 1737.492,
+      "end": 1741.288,
+      "duration": 3.796,
+      "text": "rules that we've made up about compatibility of orientations"
+    },
+    {
+      "index": 343,
+      "start": 1741.288,
+      "end": 1745.382,
+      "duration": 4.094,
+      "text": "are completely arbitrary. Well, they are literally in the"
+    },
+    {
+      "index": 344,
+      "start": 1745.382,
+      "end": 1750.039,
+      "duration": 4.657,
+      "text": "same way as our convention for which we guy curl is arbitrary."
+    },
+    {
+      "index": 345,
+      "start": 1750.039,
+      "end": 1754.227,
+      "duration": 4.188,
+      "text": "We chose to make the curl be this thing and not the opposite"
+    },
+    {
+      "index": 346,
+      "start": 1754.227,
+      "end": 1757.99,
+      "duration": 3.763,
+      "text": "which would have been pretty much just as sensible."
+    },
+    {
+      "index": 347,
+      "start": 1757.99,
+      "end": 1761.05,
+      "duration": 3.06,
+      "text": "And, ultimately, that comes from our choice of"
+    },
+    {
+      "index": 348,
+      "start": 1761.05,
+      "end": 1765.2,
+      "duration": 4.15,
+      "text": "making the cross-product be what it is but of the opposite."
+    },
+    {
+      "index": 349,
+      "start": 1765.2,
+      "end": 1770.081,
+      "duration": 4.881,
+      "text": "Ultimately, it all comes from our preference for right-handed"
+    },
+    {
+      "index": 350,
+      "start": 1770.081,
+      "end": 1773.564,
+      "duration": 3.483,
+      "text": "coordinate systems. If we had been on the planet"
+    },
+    {
+      "index": 351,
+      "start": 1773.564,
+      "end": 1776.86,
+      "duration": 3.296,
+      "text": "with left-handed coordinate systems then actually our"
+    },
+    {
+      "index": 352,
+      "start": 1776.86,
+      "end": 1780.03,
+      "duration": 3.17,
+      "text": "conventions would be all the other way around,"
+    },
+    {
+      "index": 353,
+      "start": 1780.03,
+      "end": 1805.279,
+      "duration": 25.249,
+      "text": "but they are this way. Any other questions?"
+    },
+    {
+      "index": 354,
+      "start": 1805.279,
+      "end": 1808.784,
+      "duration": 3.505,
+      "text": "A surface that you use in Stokes' theorem is usually not"
+    },
+    {
+      "index": 355,
+      "start": 1808.784,
+      "end": 1812.607,
+      "duration": 3.823,
+      "text": "going to be closed because its boundary needs to be the curve"
+    },
+    {
+      "index": 356,
+      "start": 1812.607,
+      "end": 1814.679,
+      "duration": 2.072,
+      "text": "C. So if you had a closed surface"
+    },
+    {
+      "index": 357,
+      "start": 1814.679,
+      "end": 1817.099,
+      "duration": 2.42,
+      "text": "you wouldn't know where to put your curve."
+    },
+    {
+      "index": 358,
+      "start": 1817.099,
+      "end": 1820.551,
+      "duration": 3.452,
+      "text": "I mean of course you could make a tiny hole in it and get a tiny"
+    },
+    {
+      "index": 359,
+      "start": 1820.551,
+      "end": 1822.63,
+      "duration": 2.079,
+      "text": "curve. Actually, what that would say,"
+    },
+    {
+      "index": 360,
+      "start": 1822.63,
+      "end": 1826.238,
+      "duration": 3.608,
+      "text": "and we are going to see more about that so not very important"
+    },
+    {
+      "index": 361,
+      "start": 1826.238,
+      "end": 1828.57,
+      "duration": 2.332,
+      "text": "right now, but what we would see is that"
+    },
+    {
+      "index": 362,
+      "start": 1828.57,
+      "end": 1831.94,
+      "duration": 3.37,
+      "text": "for a close surface we would end up getting zero for the flux."
+    },
+    {
+      "index": 363,
+      "start": 1831.94,
+      "end": 1834.72,
+      "duration": 2.78,
+      "text": "And that is actually because divergence of curl is zero,"
+    },
+    {
+      "index": 364,
+      "start": 1834.72,
+      "end": 1836.49,
+      "duration": 1.77,
+      "text": "but I am getting ahead of myself."
+    },
+    {
+      "index": 365,
+      "start": 1836.49,
+      "end": 1845.884,
+      "duration": 9.394,
+      "text": "We are going to see that probably tomorrow in more"
+    },
+    {
+      "index": 366,
+      "start": 1845.884,
+      "end": 1849.467,
+      "duration": 3.583,
+      "text": "detail. Stokes' theorem only works if"
+    },
+    {
+      "index": 367,
+      "start": 1849.467,
+      "end": 1853.925,
+      "duration": 4.458,
+      "text": "you can make sense of this. That means you need your vector"
+    },
+    {
+      "index": 368,
+      "start": 1853.925,
+      "end": 1858.912,
+      "duration": 4.987,
+      "text": "field to be continuous and differentiable everywhere on the"
+    },
+    {
+      "index": 369,
+      "start": 1858.912,
+      "end": 1863.38,
+      "duration": 4.468,
+      "text": "surface S. Now, why is that relevant?"
+    },
+    {
+      "index": 370,
+      "start": 1863.38,
+      "end": 1865.873,
+      "duration": 2.493,
+      "text": "Well, say that your vector field was not defined at the"
+    },
+    {
+      "index": 371,
+      "start": 1865.873,
+      "end": 1867.72,
+      "duration": 1.847,
+      "text": "origin and say that you wanted to do,"
+    },
+    {
+      "index": 372,
+      "start": 1867.72,
+      "end": 1871.413,
+      "duration": 3.693,
+      "text": "you know, the example that I had first with the unit circling"
+    },
+    {
+      "index": 373,
+      "start": 1871.413,
+      "end": 1874.03,
+      "duration": 2.617,
+      "text": "the x, y plane. Normally, the most sensible"
+    },
+    {
+      "index": 374,
+      "start": 1874.03,
+      "end": 1877.404,
+      "duration": 3.374,
+      "text": "choice of surface to apply Stokes' theorem to would be just"
+    },
+    {
+      "index": 375,
+      "start": 1877.404,
+      "end": 1879.44,
+      "duration": 2.036,
+      "text": "the flat disk in the x, y plane."
+    },
+    {
+      "index": 376,
+      "start": 1879.44,
+      "end": 1883.01,
+      "duration": 3.57,
+      "text": "But that assumes that your vector field is well-defined"
+    },
+    {
+      "index": 377,
+      "start": 1883.01,
+      "end": 1884.753,
+      "duration": 1.743,
+      "text": "there. If your vector field is not"
+    },
+    {
+      "index": 378,
+      "start": 1884.753,
+      "end": 1887.091,
+      "duration": 2.338,
+      "text": "defined at the origin but defined everywhere else you"
+    },
+    {
+      "index": 379,
+      "start": 1887.091,
+      "end": 1889.534,
+      "duration": 2.443,
+      "text": "cannot use this guy, but maybe you can still use,"
+    },
+    {
+      "index": 380,
+      "start": 1889.534,
+      "end": 1891.24,
+      "duration": 1.706,
+      "text": "say, the half-sphere, for example."
+    },
+    {
+      "index": 381,
+      "start": 1891.24,
+      "end": 1895.048,
+      "duration": 3.808,
+      "text": "Or, you could use a piece of cylinder plus a flat top or"
+    },
+    {
+      "index": 382,
+      "start": 1895.048,
+      "end": 1898.65,
+      "duration": 3.602,
+      "text": "whatever you want but not pressing for the origin."
+    },
+    {
+      "index": 383,
+      "start": 1898.65,
+      "end": 1901.297,
+      "duration": 2.647,
+      "text": "So you could still use Stokes but you'd have to be careful"
+    },
+    {
+      "index": 384,
+      "start": 1901.297,
+      "end": 1904.992,
+      "duration": 3.695,
+      "text": "about which surface you choose. Now, if instead your vector"
+    },
+    {
+      "index": 385,
+      "start": 1904.992,
+      "end": 1909.878,
+      "duration": 4.886,
+      "text": "field is not defined anywhere on the z-axis then you're out of"
+    },
+    {
+      "index": 386,
+      "start": 1909.878,
+      "end": 1914.764,
+      "duration": 4.886,
+      "text": "luck because there is no way to find a surface bounded by this"
+    },
+    {
+      "index": 387,
+      "start": 1914.764,
+      "end": 1919.17,
+      "duration": 4.406,
+      "text": "unit circle without crossing the z-axis somewhere."
+    },
+    {
+      "index": 388,
+      "start": 1919.17,
+      "end": 1927.7,
+      "duration": 8.53,
+      "text": "Then you wouldn't be able to Stokes' theorem at all or at"
+    },
+    {
+      "index": 389,
+      "start": 1927.7,
+      "end": 1936.178,
+      "duration": 8.478,
+      "text": "least not directly. Maybe I should write it F"
+    },
+    {
+      "index": 390,
+      "start": 1936.178,
+      "end": 1945.68,
+      "duration": 9.502,
+      "text": "defines a differentiable everywhere on this."
+    },
+    {
+      "index": 391,
+      "start": 1945.68,
+      "end": 1947.93,
+      "duration": 2.25,
+      "text": "But we don't care about what happens outside of this."
+    },
+    {
+      "index": 392,
+      "start": 1947.93,
+      "end": 1955.259,
+      "duration": 7.329,
+      "text": "It's really only on the surface that we need it to be OK."
+    },
+    {
+      "index": 393,
+      "start": 1955.259,
+      "end": 1959.094,
+      "duration": 3.835,
+      "text": "I mean, again, 99% of the vector fields that"
+    },
+    {
+      "index": 394,
+      "start": 1959.094,
+      "end": 1964.355,
+      "duration": 5.261,
+      "text": "we see in this class are defined everywhere so that's not an"
+    },
+    {
+      "index": 395,
+      "start": 1964.355,
+      "end": 1967.03,
+      "duration": 2.675,
+      "text": "urgent concern, but still."
+    },
+    {
+      "index": 396,
+      "start": 1967.03,
+      "end": 1969.97,
+      "duration": 2.94,
+      "text": "OK. Should we move on?"
+    },
+    {
+      "index": 397,
+      "start": 1969.97,
+      "end": 1981.011,
+      "duration": 11.041,
+      "text": "Yes. I have a yes. Let me explain to you quickly"
+    },
+    {
+      "index": 398,
+      "start": 1981.011,
+      "end": 1988.386,
+      "duration": 7.375,
+      "text": "why Stokes is true. How do we prove a theorem like"
+    },
+    {
+      "index": 399,
+      "start": 1988.386,
+      "end": 1990.349,
+      "duration": 1.963,
+      "text": "that? Well,"
+    },
+    {
+      "index": 400,
+      "start": 1990.349,
+      "end": 1992.549,
+      "duration": 2.2,
+      "text": "the strategy, I mean there are other ways,"
+    },
+    {
+      "index": 401,
+      "start": 1992.549,
+      "end": 1996.065,
+      "duration": 3.516,
+      "text": "but the least painful strategy at this point is to observe what"
+    },
+    {
+      "index": 402,
+      "start": 1996.065,
+      "end": 1999.24,
+      "duration": 3.175,
+      "text": "we already know is a special case of Stokes's theorem."
+    },
+    {
+      "index": 403,
+      "start": 1999.24,
+      "end": 2002.539,
+      "duration": 3.299,
+      "text": "Namely we know the case where the curve is actually in the x,"
+    },
+    {
+      "index": 404,
+      "start": 2002.539,
+      "end": 2004.89,
+      "duration": 2.351,
+      "text": "y plane and the surface is a flat piece of the x,"
+    },
+    {
+      "index": 405,
+      "start": 2004.89,
+      "end": 2014.65,
+      "duration": 9.76,
+      "text": "y plane because that's Green's theorem which we proved a while"
+    },
+    {
+      "index": 406,
+      "start": 2014.65,
+      "end": 2022.633,
+      "duration": 7.983,
+      "text": "ago. We know it for C and S in the"
+    },
+    {
+      "index": 407,
+      "start": 2022.633,
+      "end": 2027.202,
+      "duration": 4.569,
+      "text": "x, y plane. Now, what if C and S were,"
+    },
+    {
+      "index": 408,
+      "start": 2027.202,
+      "end": 2029.696,
+      "duration": 2.494,
+      "text": "say, in the y, z plane instead of the x,"
+    },
+    {
+      "index": 409,
+      "start": 2029.696,
+      "end": 2031.927,
+      "duration": 2.231,
+      "text": "y plane? Well, then it will not quite"
+    },
+    {
+      "index": 410,
+      "start": 2031.927,
+      "end": 2035.256,
+      "duration": 3.329,
+      "text": "give the same picture because the normal vector would be i hat"
+    },
+    {
+      "index": 411,
+      "start": 2035.256,
+      "end": 2038.53,
+      "duration": 3.274,
+      "text": "instead of k hat and they would be having different notations"
+    },
+    {
+      "index": 412,
+      "start": 2038.53,
+      "end": 2041.039,
+      "duration": 2.509,
+      "text": "and it would be integrating with y and z."
+    },
+    {
+      "index": 413,
+      "start": 2041.039,
+      "end": 2042.99,
+      "duration": 1.951,
+      "text": "But you see that it would become, again,"
+    },
+    {
+      "index": 414,
+      "start": 2042.99,
+      "end": 2045.86,
+      "duration": 2.87,
+      "text": "exactly the same formula. We'd know it for any of the"
+    },
+    {
+      "index": 415,
+      "start": 2045.86,
+      "end": 2048.942,
+      "duration": 3.082,
+      "text": "coordinate planes. In fact, I claim we know it for"
+    },
+    {
+      "index": 416,
+      "start": 2048.942,
+      "end": 2053.01,
+      "duration": 4.068,
+      "text": "absolutely any plane. And the reason for that is,"
+    },
+    {
+      "index": 417,
+      "start": 2053.01,
+      "end": 2055.219,
+      "duration": 2.209,
+      "text": "sure, when we write it in coordinates,"
+    },
+    {
+      "index": 418,
+      "start": 2055.219,
+      "end": 2059.977,
+      "duration": 4.758,
+      "text": "when we write that this line integral is integral of Pdx plus"
+    },
+    {
+      "index": 419,
+      "start": 2059.977,
+      "end": 2064.655,
+      "duration": 4.678,
+      "text": "Qdy plus Rdz or when we write that the curl is given by this"
+    },
+    {
+      "index": 420,
+      "start": 2064.655,
+      "end": 2068.539,
+      "duration": 3.884,
+      "text": "formula we use the x, y, z coordinate system."
+    },
+    {
+      "index": 421,
+      "start": 2068.539,
+      "end": 2070.489,
+      "duration": 1.95,
+      "text": "But there is something I haven't quite told you about."
+    },
+    {
+      "index": 422,
+      "start": 2070.489,
+      "end": 2073.739,
+      "duration": 3.25,
+      "text": "Which is if I switch to any other right-handed coordinate"
+    },
+    {
+      "index": 423,
+      "start": 2073.739,
+      "end": 2075.849,
+      "duration": 2.11,
+      "text": "system, so I do some sort of rotation"
+    },
+    {
+      "index": 424,
+      "start": 2075.849,
+      "end": 2080.96,
+      "duration": 5.111,
+      "text": "of my space coordinates, then somehow the line integral,"
+    },
+    {
+      "index": 425,
+      "start": 2080.96,
+      "end": 2084.728,
+      "duration": 3.768,
+      "text": "the flux integral, the notion of curl makes sense"
+    },
+    {
+      "index": 426,
+      "start": 2084.728,
+      "end": 2087.794,
+      "duration": 3.066,
+      "text": "in coordinates. And the reason is that they all"
+    },
+    {
+      "index": 427,
+      "start": 2087.794,
+      "end": 2090.038,
+      "duration": 2.244,
+      "text": "have geometric interpretations. For example,"
+    },
+    {
+      "index": 428,
+      "start": 2090.038,
+      "end": 2092.579,
+      "duration": 2.541,
+      "text": "when I think of this as the work done by a force,"
+    },
+    {
+      "index": 429,
+      "start": 2092.579,
+      "end": 2095.139,
+      "duration": 2.56,
+      "text": "well, the force doesn't care whether it's being put in x,"
+    },
+    {
+      "index": 430,
+      "start": 2095.139,
+      "end": 2096.829,
+      "duration": 1.69,
+      "text": "y coordinates this way or that way."
+    },
+    {
+      "index": 431,
+      "start": 2096.829,
+      "end": 2100.17,
+      "duration": 3.341,
+      "text": "It still does the same work because it's the same force."
+    },
+    {
+      "index": 432,
+      "start": 2100.17,
+      "end": 2103.776,
+      "duration": 3.606,
+      "text": "And when I say that the curl measures the rotation in a"
+    },
+    {
+      "index": 433,
+      "start": 2103.776,
+      "end": 2106.047,
+      "duration": 2.271,
+      "text": "motion, well, that depends on which"
+    },
+    {
+      "index": 434,
+      "start": 2106.047,
+      "end": 2109.657,
+      "duration": 3.61,
+      "text": "coordinates you use. And the same for interpretation"
+    },
+    {
+      "index": 435,
+      "start": 2109.657,
+      "end": 2112.455,
+      "duration": 2.798,
+      "text": "of flux. In fact, if I rotated my"
+    },
+    {
+      "index": 436,
+      "start": 2112.455,
+      "end": 2117.625,
+      "duration": 5.17,
+      "text": "coordinates to fit with any other plane, I could still do"
+    },
+    {
+      "index": 437,
+      "start": 2117.625,
+      "end": 2123.186,
+      "duration": 5.561,
+      "text": "the same things. What I'm trying to say is,"
+    },
+    {
+      "index": 438,
+      "start": 2123.186,
+      "end": 2131.825,
+      "duration": 8.639,
+      "text": "in fact, if C and S are in any plane then we can still claim"
+    },
+    {
+      "index": 439,
+      "start": 2131.825,
+      "end": 2137.389,
+      "duration": 5.564,
+      "text": "that it reduces to Green's theorem."
+    },
+    {
+      "index": 440,
+      "start": 2137.389,
+      "end": 2145.012,
+      "duration": 7.623,
+      "text": "It will be Green's theorem not in x, y, z coordinates but in"
+    },
+    {
+      "index": 441,
+      "start": 2145.012,
+      "end": 2150.179,
+      "duration": 5.167,
+      "text": "some funny rotated coordinate systems."
+    },
+    {
+      "index": 442,
+      "start": 2150.179,
+      "end": 2156.215,
+      "duration": 6.036,
+      "text": "What I'm saying is that work, flux and curl makes sense"
+    },
+    {
+      "index": 443,
+      "start": 2156.215,
+      "end": 2159.68,
+      "duration": 3.465,
+      "text": "independently of coordinates."
+    },
+    {
+      "index": 444,
+      "start": 2180.48,
+      "end": 2183.142,
+      "duration": 2.662,
+      "text": "Now, this has to stop somewhere. I can start claiming that I can"
+    },
+    {
+      "index": 445,
+      "start": 2183.142,
+      "end": 2186.0,
+      "duration": 2.858,
+      "text": "somehow bend my coordinates to a plane, any surface is flat."
+    },
+    {
+      "index": 446,
+      "start": 2186.0,
+      "end": 2189.314,
+      "duration": 3.314,
+      "text": "That doesn't really work. But what I can say is if I have"
+    },
+    {
+      "index": 447,
+      "start": 2189.314,
+      "end": 2191.9,
+      "duration": 2.586,
+      "text": "any surface I can cut it into tiny pieces."
+    },
+    {
+      "index": 448,
+      "start": 2191.9,
+      "end": 2195.03,
+      "duration": 3.13,
+      "text": "And these tiny pieces are basically flat."
+    },
+    {
+      "index": 449,
+      "start": 2195.03,
+      "end": 2199.11,
+      "duration": 4.08,
+      "text": "So that's basically the idea of a proof."
+    },
+    {
+      "index": 450,
+      "start": 2199.11,
+      "end": 2207.364,
+      "duration": 8.254,
+      "text": "I am going to decompose my surface into very small flat"
+    },
+    {
+      "index": 451,
+      "start": 2207.364,
+      "end": 2216.546,
+      "duration": 9.182,
+      "text": "pieces. Given any S we are just going"
+    },
+    {
+      "index": 452,
+      "start": 2216.546,
+      "end": 2228.929,
+      "duration": 12.383,
+      "text": "to decompose it into tiny almost flat pieces."
+    },
+    {
+      "index": 453,
+      "start": 2228.929,
+      "end": 2235.657,
+      "duration": 6.728,
+      "text": "For example, if I have my surface like this,"
+    },
+    {
+      "index": 454,
+      "start": 2235.657,
+      "end": 2243.48,
+      "duration": 7.823,
+      "text": "what I will do is I will just cut it into tiles."
+    },
+    {
+      "index": 455,
+      "start": 2243.48,
+      "end": 2248.356,
+      "duration": 4.876,
+      "text": "I mean a good example of that is if you look at"
+    },
+    {
+      "index": 456,
+      "start": 2248.356,
+      "end": 2251.429,
+      "duration": 3.073,
+      "text": "those geodesic things, for example,"
+    },
+    {
+      "index": 457,
+      "start": 2251.429,
+      "end": 2256.73,
+      "duration": 5.301,
+      "text": "it's made of all these hexagons and pentagons."
+    },
+    {
+      "index": 458,
+      "start": 2256.73,
+      "end": 2258.595,
+      "duration": 1.865,
+      "text": "Well, actually, they're not quite flat in the"
+    },
+    {
+      "index": 459,
+      "start": 2258.595,
+      "end": 2261.055,
+      "duration": 2.46,
+      "text": "usual rule, but you could make them flat and it would still"
+    },
+    {
+      "index": 460,
+      "start": 2261.055,
+      "end": 2265.334,
+      "duration": 4.279,
+      "text": "look pretty much like a sphere. Anyway, you're going to cut"
+    },
+    {
+      "index": 461,
+      "start": 2265.334,
+      "end": 2269.369,
+      "duration": 4.035,
+      "text": "your surface into lots of tiny pieces."
+    },
+    {
+      "index": 462,
+      "start": 2269.369,
+      "end": 2273.26,
+      "duration": 3.891,
+      "text": "And then you can use Stokes' theorem on each small piece."
+    },
+    {
+      "index": 463,
+      "start": 2273.26,
+      "end": 2280.998,
+      "duration": 7.738,
+      "text": "What it says on each small flat piece -- It says that the line"
+    },
+    {
+      "index": 464,
+      "start": 2280.998,
+      "end": 2284.67,
+      "duration": 3.672,
+      "text": "integral along say, for example,"
+    },
+    {
+      "index": 465,
+      "start": 2284.67,
+      "end": 2288.923,
+      "duration": 4.253,
+      "text": "this curve is equal to the flux of a curl through this tiny"
+    },
+    {
+      "index": 466,
+      "start": 2288.923,
+      "end": 2292.038,
+      "duration": 3.115,
+      "text": "piece of surface. And now I will add all of these"
+    },
+    {
+      "index": 467,
+      "start": 2292.038,
+      "end": 2294.447,
+      "duration": 2.409,
+      "text": "terms together. If I add all of the small"
+    },
+    {
+      "index": 468,
+      "start": 2294.447,
+      "end": 2297.19,
+      "duration": 2.743,
+      "text": "contributions to flux I get the total flux."
+    },
+    {
+      "index": 469,
+      "start": 2297.19,
+      "end": 2299.969,
+      "duration": 2.779,
+      "text": "What if I add all of the small line integrals?"
+    },
+    {
+      "index": 470,
+      "start": 2299.969,
+      "end": 2303.116,
+      "duration": 3.147,
+      "text": "Well, I get lots of extra junk because I never asked to compute"
+    },
+    {
+      "index": 471,
+      "start": 2303.116,
+      "end": 2306.747,
+      "duration": 3.631,
+      "text": "the line integral along this. But this guy will come in twice"
+    },
+    {
+      "index": 472,
+      "start": 2306.747,
+      "end": 2310.93,
+      "duration": 4.183,
+      "text": "when I do this little plate and when I do that little plate with"
+    },
+    {
+      "index": 473,
+      "start": 2310.93,
+      "end": 2314.373,
+      "duration": 3.443,
+      "text": "opposite orientations. When I sum all of the little"
+    },
+    {
+      "index": 474,
+      "start": 2314.373,
+      "end": 2318.196,
+      "duration": 3.823,
+      "text": "line integrals together, all of the inner things cancel"
+    },
+    {
+      "index": 475,
+      "start": 2318.196,
+      "end": 2320.532,
+      "duration": 2.336,
+      "text": "out, and the only ones that I go"
+    },
+    {
+      "index": 476,
+      "start": 2320.532,
+      "end": 2324.9,
+      "duration": 4.368,
+      "text": "through only once are those that are at the outer most edges."
+    },
+    {
+      "index": 477,
+      "start": 2324.9,
+      "end": 2330.577,
+      "duration": 5.677,
+      "text": "So, when I sum all of my works together, I will get the work"
+    },
+    {
+      "index": 478,
+      "start": 2330.577,
+      "end": 2334.329,
+      "duration": 3.752,
+      "text": "done just along the outer boundary C."
+    },
+    {
+      "index": 479,
+      "start": 2334.329,
+      "end": 2352.422,
+      "duration": 18.093,
+      "text": "Sum of work around each little piece is just actually the work"
+    },
+    {
+      "index": 480,
+      "start": 2352.422,
+      "end": 2367.379,
+      "duration": 14.957,
+      "text": "along C, the outer curve. And the sum of the flux for"
+    },
+    {
+      "index": 481,
+      "start": 2367.379,
+      "end": 2379.219,
+      "duration": 11.84,
+      "text": "each piece is going to be the flux through S."
+    },
+    {
+      "index": 482,
+      "start": 2379.219,
+      "end": 2385.487,
+      "duration": 6.268,
+      "text": "From Stokes' theorem for flat surfaces, I can get it for any"
+    },
+    {
+      "index": 483,
+      "start": 2385.487,
+      "end": 2387.863,
+      "duration": 2.376,
+      "text": "surface. I am cheating a little bit"
+    },
+    {
+      "index": 484,
+      "start": 2387.863,
+      "end": 2390.842,
+      "duration": 2.979,
+      "text": "because you would actually have to check carefully that this"
+    },
+    {
+      "index": 485,
+      "start": 2390.842,
+      "end": 2393.721,
+      "duration": 2.879,
+      "text": "approximation where you flatten the little pieces that are"
+    },
+    {
+      "index": 486,
+      "start": 2393.721,
+      "end": 2396.12,
+      "duration": 2.399,
+      "text": "almost flat is varied. But, trust me,"
+    },
+    {
+      "index": 487,
+      "start": 2396.12,
+      "end": 2396.84,
+      "duration": 0.72,
+      "text": "it actually works."
+    },
+    {
+      "index": 488,
+      "start": 2413.28,
+      "end": 2415.987,
+      "duration": 2.707,
+      "text": "Let's do an actual example. I mean I said example,"
+    },
+    {
+      "index": 489,
+      "start": 2415.987,
+      "end": 2419.329,
+      "duration": 3.342,
+      "text": "but that was more like getting us ready for the proof so"
+    },
+    {
+      "index": 490,
+      "start": 2419.329,
+      "end": 2422.489,
+      "duration": 3.16,
+      "text": "probably that doesn't count as an actual example."
+    },
+    {
+      "index": 491,
+      "start": 2422.489,
+      "end": 2425.233,
+      "duration": 2.744,
+      "text": "I should probably keep these statements for now so I am not"
+    },
+    {
+      "index": 492,
+      "start": 2425.233,
+      "end": 2426.51,
+      "duration": 1.277,
+      "text": "going to erase this side."
+    },
+    {
+      "index": 493,
+      "start": 2468.92,
+      "end": 2481.891,
+      "duration": 12.971,
+      "text": "Let's do an example. Let's try to find the work of"
+    },
+    {
+      "index": 494,
+      "start": 2481.891,
+      "end": 2500.838,
+      "duration": 18.947,
+      "text": "vector field zi plus xj plus yk around the unit circle in the x,"
+    },
+    {
+      "index": 495,
+      "start": 2500.838,
+      "end": 2518.337,
+      "duration": 17.499,
+      "text": "y plane counterclockwise. The picture is conveniently"
+    },
+    {
+      "index": 496,
+      "start": 2518.337,
+      "end": 2525.497,
+      "duration": 7.16,
+      "text": "already there. Just as a quick review,"
+    },
+    {
+      "index": 497,
+      "start": 2525.497,
+      "end": 2528.719,
+      "duration": 3.222,
+      "text": "let's see how we do that directly."
+    },
+    {
+      "index": 498,
+      "start": 2528.719,
+      "end": 2534.295,
+      "duration": 5.576,
+      "text": "If we do that directly, I have to find the integral"
+    },
+    {
+      "index": 499,
+      "start": 2534.295,
+      "end": 2541.223,
+      "duration": 6.928,
+      "text": "along C. So F dot dr becomes zdx plus"
+    },
+    {
+      "index": 500,
+      "start": 2541.223,
+      "end": 2548.503,
+      "duration": 7.28,
+      "text": "xdy plus ydz. But now we actually know that"
+    },
+    {
+      "index": 501,
+      "start": 2548.503,
+      "end": 2553.48,
+      "duration": 4.977,
+      "text": "on this circle, well, z is zero."
+    },
+    {
+      "index": 502,
+      "start": 2553.48,
+      "end": 2559.933,
+      "duration": 6.453,
+      "text": "And we can parameterize x and y, the unit circle in the x,"
+    },
+    {
+      "index": 503,
+      "start": 2559.933,
+      "end": 2564.575,
+      "duration": 4.642,
+      "text": "y plane, so we can take x equals cosine t,"
+    },
+    {
+      "index": 504,
+      "start": 2564.575,
+      "end": 2569.387,
+      "duration": 4.812,
+      "text": "y equals sine t. That will just become the"
+    },
+    {
+      "index": 505,
+      "start": 2569.387,
+      "end": 2574.314,
+      "duration": 4.927,
+      "text": "integral over C. Well, z times dx,"
+    },
+    {
+      "index": 506,
+      "start": 2574.314,
+      "end": 2585.4,
+      "duration": 11.086,
+      "text": "z is zero so we have nothing, plus x is cosine t times dy is"
+    },
+    {
+      "index": 507,
+      "start": 2585.4,
+      "end": 2597.05,
+      "duration": 11.65,
+      "text": "-- Well, if y is sine t then dy is cosine tdt plus ydz but z is"
+    },
+    {
+      "index": 508,
+      "start": 2597.05,
+      "end": 2602.066,
+      "duration": 5.016,
+      "text": "zero. Now, the range of values for t,"
+    },
+    {
+      "index": 509,
+      "start": 2602.066,
+      "end": 2606.619,
+      "duration": 4.553,
+      "text": "well, we are going counterclockwise around the"
+    },
+    {
+      "index": 510,
+      "start": 2606.619,
+      "end": 2611.88,
+      "duration": 5.261,
+      "text": "entire circle so that should go from zero to 2pi."
+    },
+    {
+      "index": 511,
+      "start": 2611.88,
+      "end": 2619.46,
+      "duration": 7.58,
+      "text": "We will get integral from zero to 2pi of cosine square tdt"
+    },
+    {
+      "index": 512,
+      "start": 2619.46,
+      "end": 2625.844,
+      "duration": 6.384,
+      "text": "which, if you do the calculation, turns out to be"
+    },
+    {
+      "index": 513,
+      "start": 2625.844,
+      "end": 2630.958,
+      "duration": 5.114,
+      "text": "just pi. Now, let's instead try to use"
+    },
+    {
+      "index": 514,
+      "start": 2630.958,
+      "end": 2635.69,
+      "duration": 4.732,
+      "text": "Stokes' theorem to do the calculation."
+    },
+    {
+      "index": 515,
+      "start": 2635.69,
+      "end": 2640.57,
+      "duration": 4.88,
+      "text": "Now, of course the smart choice would be to just take the flat"
+    },
+    {
+      "index": 516,
+      "start": 2640.57,
+      "end": 2642.72,
+      "duration": 2.15,
+      "text": "unit disk. I am not going to do that."
+    },
+    {
+      "index": 517,
+      "start": 2642.72,
+      "end": 2646.358,
+      "duration": 3.638,
+      "text": "That would be too boring. Plus we have already kind of"
+    },
+    {
+      "index": 518,
+      "start": 2646.358,
+      "end": 2649.099,
+      "duration": 2.741,
+      "text": "checked it because we already trust Green's theorem."
+    },
+    {
+      "index": 519,
+      "start": 2649.099,
+      "end": 2651.039,
+      "duration": 1.94,
+      "text": "Instead, just to convince you that,"
+    },
+    {
+      "index": 520,
+      "start": 2651.039,
+      "end": 2654.48,
+      "duration": 3.441,
+      "text": "yes, I can choose really any surface I want,"
+    },
+    {
+      "index": 521,
+      "start": 2654.48,
+      "end": 2663.471,
+      "duration": 8.991,
+      "text": "let's say that I'm going to choose a piece of paraboloid z"
+    },
+    {
+      "index": 522,
+      "start": 2663.471,
+      "end": 2670.57,
+      "duration": 7.099,
+      "text": "equals one minus x squared minus y squared."
+    },
+    {
+      "index": 523,
+      "start": 2670.57,
+      "end": 2676.582,
+      "duration": 6.012,
+      "text": "Well, to get our conventions straight, we should take the"
+    },
+    {
+      "index": 524,
+      "start": 2676.582,
+      "end": 2683.239,
+      "duration": 6.657,
+      "text": "normal vector pointing up for compatibility with our choice."
+    },
+    {
+      "index": 525,
+      "start": 2683.239,
+      "end": 2688.239,
+      "duration": 5.0,
+      "text": "Well, we will have to compute the flux through S."
+    },
+    {
+      "index": 526,
+      "start": 2688.239,
+      "end": 2690.28,
+      "duration": 2.041,
+      "text": "We don't really have to because we could have chosen the disk,"
+    },
+    {
+      "index": 527,
+      "start": 2690.28,
+      "end": 2694.046,
+      "duration": 3.766,
+      "text": "it would be easier, but if we want to do it this"
+    },
+    {
+      "index": 528,
+      "start": 2694.046,
+      "end": 2700.63,
+      "duration": 6.584,
+      "text": "way we will compute the flux of curl F through our paraboloid."
+    },
+    {
+      "index": 529,
+      "start": 2700.63,
+      "end": 2703.924,
+      "duration": 3.294,
+      "text": "How do we do that? Well, we need to find the curl"
+    },
+    {
+      "index": 530,
+      "start": 2703.924,
+      "end": 2710.71,
+      "duration": 6.786,
+      "text": "and we need to find ndS. Let's start with the curl."
+    },
+    {
+      "index": 531,
+      "start": 2710.71,
+      "end": 2723.663,
+      "duration": 12.953,
+      "text": "Curl F let's take the cross-product between dell and F"
+    },
+    {
+      "index": 532,
+      "start": 2723.663,
+      "end": 2728.734,
+      "duration": 5.071,
+      "text": "which is zxy. If we compute this,"
+    },
+    {
+      "index": 533,
+      "start": 2728.734,
+      "end": 2731.69,
+      "duration": 2.956,
+      "text": "the i component will be one minus zero."
+    },
+    {
+      "index": 534,
+      "start": 2731.69,
+      "end": 2737.607,
+      "duration": 5.917,
+      "text": "It looks like it is one i. Minus the j component is zero"
+    },
+    {
+      "index": 535,
+      "start": 2737.607,
+      "end": 2741.776,
+      "duration": 4.169,
+      "text": "minus one. Plus the k component is one"
+    },
+    {
+      "index": 536,
+      "start": 2741.776,
+      "end": 2752.751,
+      "duration": 10.975,
+      "text": "minus zero. In fact, the curl of the field"
+    },
+    {
+      "index": 537,
+      "start": 2752.751,
+      "end": 2759.98,
+      "duration": 7.229,
+      "text": "is one, one, one. Now, what about ndS?"
+    },
+    {
+      "index": 538,
+      "start": 2759.98,
+      "end": 2763.947,
+      "duration": 3.967,
+      "text": "Well, this is a surface for which we know z is a function of"
+    },
+    {
+      "index": 539,
+      "start": 2763.947,
+      "end": 2768.61,
+      "duration": 4.663,
+      "text": "x and y. ndS we can write as,"
+    },
+    {
+      "index": 540,
+      "start": 2768.61,
+      "end": 2774.527,
+      "duration": 5.917,
+      "text": "let's call this F of xy, then we can use the formula"
+    },
+    {
+      "index": 541,
+      "start": 2774.527,
+      "end": 2779.148,
+      "duration": 4.621,
+      "text": "that says ndS equals negative F sub x, negative F sub y,"
+    },
+    {
+      "index": 542,
+      "start": 2779.148,
+      "end": 2786.997,
+      "duration": 7.849,
+      "text": "one dxdy, which here gives us 2x,"
+    },
+    {
+      "index": 543,
+      "start": 2786.997,
+      "end": 2794.593,
+      "duration": 7.596,
+      "text": "2y, one dxdy. Now, when we want to compute"
+    },
+    {
+      "index": 544,
+      "start": 2794.593,
+      "end": 2801.807,
+      "duration": 7.214,
+      "text": "the flux, we will have to do double integral over S of one,"
+    },
+    {
+      "index": 545,
+      "start": 2801.807,
+      "end": 2807.53,
+      "duration": 5.723,
+      "text": "one dot product with 2x, 2y, one dxdy."
+    },
+    {
+      "index": 546,
+      "start": 2807.53,
+      "end": 2815.947,
+      "duration": 8.417,
+      "text": "It will become the double integral of 2x plus 2y plus one"
+    },
+    {
+      "index": 547,
+      "start": 2815.947,
+      "end": 2818.009,
+      "duration": 2.062,
+      "text": "dxdy. And, of course,"
+    },
+    {
+      "index": 548,
+      "start": 2818.009,
+      "end": 2821.71,
+      "duration": 3.701,
+      "text": "the region which we are integrating, the range of values"
+    },
+    {
+      "index": 549,
+      "start": 2821.71,
+      "end": 2824.94,
+      "duration": 3.23,
+      "text": "of x and y will be the shadow of our surface."
+    },
+    {
+      "index": 550,
+      "start": 2824.94,
+      "end": 2827.283,
+      "duration": 2.343,
+      "text": "That is just going to be, if you look at this paraboloid"
+    },
+    {
+      "index": 551,
+      "start": 2827.283,
+      "end": 2831.28,
+      "duration": 3.997,
+      "text": "from above, all you will see is the unit"
+    },
+    {
+      "index": 552,
+      "start": 2831.28,
+      "end": 2837.96,
+      "duration": 6.68,
+      "text": "disk so it will be a double integral of the unit disk."
+    },
+    {
+      "index": 553,
+      "start": 2837.96,
+      "end": 2843.291,
+      "duration": 5.331,
+      "text": "And the way we will do that, one way is to switch to polar"
+    },
+    {
+      "index": 554,
+      "start": 2843.291,
+      "end": 2848.062,
+      "duration": 4.771,
+      "text": "coordinates and do the calculation and then you will"
+    },
+    {
+      "index": 555,
+      "start": 2848.062,
+      "end": 2851.799,
+      "duration": 3.737,
+      "text": "end up with pi. The other way is to try to do"
+    },
+    {
+      "index": 556,
+      "start": 2851.799,
+      "end": 2854.477,
+      "duration": 2.678,
+      "text": "it by symmetry. Observe, when you integrate x"
+    },
+    {
+      "index": 557,
+      "start": 2854.477,
+      "end": 2857.783,
+      "duration": 3.306,
+      "text": "above this, x is as negative on the left as it is positive on"
+    },
+    {
+      "index": 558,
+      "start": 2857.783,
+      "end": 2860.179,
+      "duration": 2.396,
+      "text": "the right. So the integral of x will be"
+    },
+    {
+      "index": 559,
+      "start": 2860.179,
+      "end": 2862.346,
+      "duration": 2.167,
+      "text": "zero. The integral of y will be zero"
+    },
+    {
+      "index": 560,
+      "start": 2862.346,
+      "end": 2866.517,
+      "duration": 4.171,
+      "text": "also by symmetry. Then the integral of one dxdy"
+    },
+    {
+      "index": 561,
+      "start": 2866.517,
+      "end": 2872.16,
+      "duration": 5.643,
+      "text": "will just be the area of this unit disk which is pi."
+    },
+    {
+      "index": 562,
+      "start": 2872.16,
+      "end": 2874.61,
+      "duration": 2.45,
+      "text": "That was our first example. And, of course,"
+    },
+    {
+      "index": 563,
+      "start": 2874.61,
+      "end": 2877.699,
+      "duration": 3.089,
+      "text": "if you're actually free to choose your favorite surface,"
+    },
+    {
+      "index": 564,
+      "start": 2877.699,
+      "end": 2881.066,
+      "duration": 3.367,
+      "text": "there is absolutely no reason why you would actually choose"
+    },
+    {
+      "index": 565,
+      "start": 2881.066,
+      "end": 2884.477,
+      "duration": 3.411,
+      "text": "this paraboloid in this example. I mean it would be much easier"
+    },
+    {
+      "index": 566,
+      "start": 2884.477,
+      "end": 2885.769,
+      "duration": 1.292,
+      "text": "to choose a flat disk. OK."
+    },
+    {
+      "index": 567,
+      "start": 2885.769,
+      "end": 2889.557,
+      "duration": 3.788,
+      "text": "Tomorrow I will tell you a few more things about curl fits in"
+    },
+    {
+      "index": 568,
+      "start": 2889.557,
+      "end": 2893.22,
+      "duration": 3.663,
+      "text": "with conservativeness and with the divergence theorem,"
+    },
+    {
+      "index": 569,
+      "start": 2893.22,
+      "end": 2897.099,
+      "duration": 3.879,
+      "text": "Stokes all together, and we will look at Practice"
+    },
+    {
+      "index": 570,
+      "start": 2897.099,
+      "end": 2900.0,
+      "duration": 2.901,
+      "text": "Exam 4B so please bring the exam with you."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

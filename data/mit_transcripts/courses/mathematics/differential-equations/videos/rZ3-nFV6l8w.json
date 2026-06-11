@@ -1,0 +1,5219 @@
+{
+  "video": {
+    "id": "rZ3-nFV6l8w",
+    "title": "Lec 11 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=rZ3-nFV6l8w",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3031,
+    "language": "en"
+  },
+  "segment_count": 743,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.0,
+      "end": 4.65,
+      "duration": 4.65,
+      "text": "y prime and y double prime."
+    },
+    {
+      "index": 1,
+      "start": 4.65,
+      "end": 9.079,
+      "duration": 4.429,
+      "text": "So, q of x times y equal zero."
+    },
+    {
+      "index": 2,
+      "start": 9.079,
+      "end": 15.612,
+      "duration": 6.533,
+      "text": "The linearity of the equation, that is, the form in which it"
+    },
+    {
+      "index": 3,
+      "start": 15.612,
+      "end": 20.152,
+      "duration": 4.54,
+      "text": "appears is going to be the key idea today."
+    },
+    {
+      "index": 4,
+      "start": 20.152,
+      "end": 25.467,
+      "duration": 5.315,
+      "text": "Today is going to be theoretical, but some of the"
+    },
+    {
+      "index": 5,
+      "start": 25.467,
+      "end": 32.0,
+      "duration": 6.533,
+      "text": "ideas in it are the most important in the course."
+    },
+    {
+      "index": 6,
+      "start": 32.0,
+      "end": 37.951,
+      "duration": 5.951,
+      "text": "So, I don't have to apologize for the theory."
+    },
+    {
+      "index": 7,
+      "start": 37.951,
+      "end": 45.797,
+      "duration": 7.846,
+      "text": "Remember, the solution method was to find two independent y"
+    },
+    {
+      "index": 8,
+      "start": 45.797,
+      "end": 51.613,
+      "duration": 5.816,
+      "text": "one, y two independent solutions."
+    },
+    {
+      "index": 9,
+      "start": 51.613,
+      "end": 60.0,
+      "duration": 8.387,
+      "text": "And now, I'll formally write out what independent means."
+    },
+    {
+      "index": 10,
+      "start": 60.0,
+      "end": 63.238,
+      "duration": 3.238,
+      "text": "There are different ways to say it."
+    },
+    {
+      "index": 11,
+      "start": 63.238,
+      "end": 67.142,
+      "duration": 3.904,
+      "text": "But for you, I think the simplest and most"
+    },
+    {
+      "index": 12,
+      "start": 67.142,
+      "end": 72.666,
+      "duration": 5.524,
+      "text": "intelligible will be to say that y2 is not to be a constant"
+    },
+    {
+      "index": 13,
+      "start": 72.666,
+      "end": 75.904,
+      "duration": 3.238,
+      "text": "multiple of y1. And, unfortunately,"
+    },
+    {
+      "index": 14,
+      "start": 75.904,
+      "end": 80.476,
+      "duration": 4.572,
+      "text": "it's necessary to add, nor is y1 to be a constant"
+    },
+    {
+      "index": 15,
+      "start": 80.476,
+      "end": 84.19,
+      "duration": 3.714,
+      "text": "multiple. I have to call it by different"
+    },
+    {
+      "index": 16,
+      "start": 84.19,
+      "end": 88.095,
+      "duration": 3.905,
+      "text": "constants. So, let's call this one c prime"
+    },
+    {
+      "index": 17,
+      "start": 88.095,
+      "end": 91.389,
+      "duration": 3.294,
+      "text": "of y2. Well, I mean,"
+    },
+    {
+      "index": 18,
+      "start": 91.389,
+      "end": 95.663,
+      "duration": 4.274,
+      "text": "the most obvious question is, well, look."
+    },
+    {
+      "index": 19,
+      "start": 95.663,
+      "end": 101.646,
+      "duration": 5.983,
+      "text": "If this is not a constant times that, this can't be there"
+    },
+    {
+      "index": 20,
+      "start": 101.646,
+      "end": 106.454,
+      "duration": 4.808,
+      "text": "because I would just use one over c if it was."
+    },
+    {
+      "index": 21,
+      "start": 106.454,
+      "end": 111.049,
+      "duration": 4.595,
+      "text": "Unfortunately, the reason I have to write it"
+    },
+    {
+      "index": 22,
+      "start": 111.049,
+      "end": 117.673,
+      "duration": 6.624,
+      "text": "this way is to take account of the possibility that y1 might be"
+    },
+    {
+      "index": 23,
+      "start": 117.673,
+      "end": 119.704,
+      "duration": 2.031,
+      "text": "zero. If y1 is zero,"
+    },
+    {
+      "index": 24,
+      "start": 119.704,
+      "end": 126.221,
+      "duration": 6.517,
+      "text": "so, the bad case that must be excluded is that y1 equals zero,"
+    },
+    {
+      "index": 25,
+      "start": 126.221,
+      "end": 130.936,
+      "duration": 4.715,
+      "text": "y2 nonzero. I don't want to call those"
+    },
+    {
+      "index": 26,
+      "start": 130.936,
+      "end": 133.021,
+      "duration": 2.085,
+      "text": "independent. But nonetheless,"
+    },
+    {
+      "index": 27,
+      "start": 133.021,
+      "end": 136.819,
+      "duration": 3.798,
+      "text": "it is true that y2 is not a constant multiple of y1."
+    },
+    {
+      "index": 28,
+      "start": 136.819,
+      "end": 139.797,
+      "duration": 2.978,
+      "text": "However, y1 is a constant multiple of y2,"
+    },
+    {
+      "index": 29,
+      "start": 139.797,
+      "end": 143.968,
+      "duration": 4.171,
+      "text": "namely, the multiple zero. It's just to exclude that case"
+    },
+    {
+      "index": 30,
+      "start": 143.968,
+      "end": 146.872,
+      "duration": 2.904,
+      "text": "that I have to say both of those things."
+    },
+    {
+      "index": 31,
+      "start": 146.872,
+      "end": 153.121,
+      "duration": 6.249,
+      "text": "And, one would not be sufficed. That's a fine point that I'm"
+    },
+    {
+      "index": 32,
+      "start": 153.121,
+      "end": 157.468,
+      "duration": 4.347,
+      "text": "not going to fuss over. But I just have,"
+    },
+    {
+      "index": 33,
+      "start": 157.468,
+      "end": 161.257,
+      "duration": 3.789,
+      "text": "of course. Now, why do you do that?"
+    },
+    {
+      "index": 34,
+      "start": 161.257,
+      "end": 165.159,
+      "duration": 3.902,
+      "text": "That's because, then, all solutions,"
+    },
+    {
+      "index": 35,
+      "start": 165.159,
+      "end": 170.063,
+      "duration": 4.904,
+      "text": "and this is what concerns us today, are what?"
+    },
+    {
+      "index": 36,
+      "start": 170.063,
+      "end": 176.417,
+      "duration": 6.354,
+      "text": "The linear combination with constant coefficients of these"
+    },
+    {
+      "index": 37,
+      "start": 176.417,
+      "end": 182.659,
+      "duration": 6.242,
+      "text": "two, and the fundamental question we have to answer today"
+    },
+    {
+      "index": 38,
+      "start": 182.659,
+      "end": 187.909,
+      "duration": 5.25,
+      "text": "is, why? Now, there are really two"
+    },
+    {
+      "index": 39,
+      "start": 187.909,
+      "end": 193.03,
+      "duration": 5.121,
+      "text": "statements involved in that. On the one hand,"
+    },
+    {
+      "index": 40,
+      "start": 193.03,
+      "end": 200.012,
+      "duration": 6.982,
+      "text": "I'm claiming there is an easier statement, which is that they"
+    },
+    {
+      "index": 41,
+      "start": 200.012,
+      "end": 204.9,
+      "duration": 4.888,
+      "text": "are all solutions. So, that's question one,"
+    },
+    {
+      "index": 42,
+      "start": 204.9,
+      "end": 209.788,
+      "duration": 4.888,
+      "text": "or statement one. Why are all of these guys"
+    },
+    {
+      "index": 43,
+      "start": 209.788,
+      "end": 213.797,
+      "duration": 4.009,
+      "text": "solutions? That, I could trust you to"
+    },
+    {
+      "index": 44,
+      "start": 213.797,
+      "end": 217.046,
+      "duration": 3.249,
+      "text": "answer yourself. I could not trust you to answer"
+    },
+    {
+      "index": 45,
+      "start": 217.046,
+      "end": 219.95,
+      "duration": 2.904,
+      "text": "it elegantly. And, it's the elegance that's"
+    },
+    {
+      "index": 46,
+      "start": 219.95,
+      "end": 224.029,
+      "duration": 4.079,
+      "text": "the most important thing today because you have to answer it"
+    },
+    {
+      "index": 47,
+      "start": 224.029,
+      "end": 226.795,
+      "duration": 2.766,
+      "text": "elegantly. Otherwise, you can't go on and"
+    },
+    {
+      "index": 48,
+      "start": 226.795,
+      "end": 230.666,
+      "duration": 3.871,
+      "text": "do more complicated things. If you answer it in an ad hoc"
+    },
+    {
+      "index": 49,
+      "start": 230.666,
+      "end": 234.538,
+      "duration": 3.872,
+      "text": "basis just by hacking out a computation, you don't really"
+    },
+    {
+      "index": 50,
+      "start": 234.538,
+      "end": 238.064,
+      "duration": 3.526,
+      "text": "see what's going on. And you can't do more difficult"
+    },
+    {
+      "index": 51,
+      "start": 238.064,
+      "end": 242.185,
+      "duration": 4.121,
+      "text": "things later. So, we have to answer this,"
+    },
+    {
+      "index": 52,
+      "start": 242.185,
+      "end": 245.748,
+      "duration": 3.563,
+      "text": "and answer it nicely. The second question is,"
+    },
+    {
+      "index": 53,
+      "start": 245.748,
+      "end": 249.796,
+      "duration": 4.048,
+      "text": "so, if that answers why there are solutions at all,"
+    },
+    {
+      "index": 54,
+      "start": 249.796,
+      "end": 254.087,
+      "duration": 4.291,
+      "text": "why are they all the solutions? Why all the solutions?"
+    },
+    {
+      "index": 55,
+      "start": 254.087,
+      "end": 257.811,
+      "duration": 3.724,
+      "text": "In other words, to say it as badly as possible,"
+    },
+    {
+      "index": 56,
+      "start": 257.811,
+      "end": 261.94,
+      "duration": 4.129,
+      "text": "why are all solutions, why all the solutions-- Never"
+    },
+    {
+      "index": 57,
+      "start": 261.94,
+      "end": 264.45,
+      "duration": 2.51,
+      "text": "mind. Why are all the solutions."
+    },
+    {
+      "index": 58,
+      "start": 264.45,
+      "end": 269.308,
+      "duration": 4.858,
+      "text": "This is a harder question to answer, but that should make you"
+    },
+    {
+      "index": 59,
+      "start": 269.308,
+      "end": 274.085,
+      "duration": 4.777,
+      "text": "happy because that means it depends upon a theorem which I'm"
+    },
+    {
+      "index": 60,
+      "start": 274.085,
+      "end": 280.95,
+      "duration": 6.865,
+      "text": "not going to prove. I'll just quote to you."
+    },
+    {
+      "index": 61,
+      "start": 280.95,
+      "end": 287.822,
+      "duration": 6.872,
+      "text": "Let's attack there for problem one first."
+    },
+    {
+      "index": 62,
+      "start": 287.822,
+      "end": 296.239,
+      "duration": 8.417,
+      "text": "q1 is answered by what's called the superposition."
+    },
+    {
+      "index": 63,
+      "start": 296.239,
+      "end": 305.0,
+      "duration": 8.761,
+      "text": "The superposition principle says exactly that."
+    },
+    {
+      "index": 64,
+      "start": 305.0,
+      "end": 309.108,
+      "duration": 4.108,
+      "text": "It says exactly that, that if y1 and y2 are solutions"
+    },
+    {
+      "index": 65,
+      "start": 309.108,
+      "end": 312.98,
+      "duration": 3.872,
+      "text": "to a linear equation, to a linear homogeneous ODE,"
+    },
+    {
+      "index": 66,
+      "start": 312.98,
+      "end": 317.325,
+      "duration": 4.345,
+      "text": "in fact it can be of higher order, too, although I won't"
+    },
+    {
+      "index": 67,
+      "start": 317.325,
+      "end": 319.459,
+      "duration": 2.134,
+      "text": "stress that. In other words,"
+    },
+    {
+      "index": 68,
+      "start": 319.459,
+      "end": 323.33,
+      "duration": 3.871,
+      "text": "you don't have to stop with the second derivative."
+    },
+    {
+      "index": 69,
+      "start": 323.33,
+      "end": 326.807,
+      "duration": 3.477,
+      "text": "You could add a third derivative and a fourth"
+    },
+    {
+      "index": 70,
+      "start": 326.807,
+      "end": 330.125,
+      "duration": 3.318,
+      "text": "derivative. As long as the former makes the"
+    },
+    {
+      "index": 71,
+      "start": 330.125,
+      "end": 334.392,
+      "duration": 4.267,
+      "text": "same, but that implies automatically that c1 y1 plus c2"
+    },
+    {
+      "index": 72,
+      "start": 334.392,
+      "end": 339.225,
+      "duration": 4.833,
+      "text": "y2 is a solution. Now, the way to do that nicely"
+    },
+    {
+      "index": 73,
+      "start": 339.225,
+      "end": 343.675,
+      "duration": 4.45,
+      "text": "is to take a little detour and talk a little bit about linear"
+    },
+    {
+      "index": 74,
+      "start": 343.675,
+      "end": 346.567,
+      "duration": 2.892,
+      "text": "operators. And, since we are going to be"
+    },
+    {
+      "index": 75,
+      "start": 346.567,
+      "end": 351.166,
+      "duration": 4.599,
+      "text": "using these for the rest of the term, this is the natural place"
+    },
+    {
+      "index": 76,
+      "start": 351.166,
+      "end": 354.8,
+      "duration": 3.634,
+      "text": "for you to learn a little bit about what they are."
+    },
+    {
+      "index": 77,
+      "start": 354.8,
+      "end": 358.508,
+      "duration": 3.708,
+      "text": "So, I'm going to do it. Ultimately, I am aimed at a"
+    },
+    {
+      "index": 78,
+      "start": 358.508,
+      "end": 362.143,
+      "duration": 3.635,
+      "text": "proof of this statement, but there are going to be"
+    },
+    {
+      "index": 79,
+      "start": 362.143,
+      "end": 366.0,
+      "duration": 3.857,
+      "text": "certain side excursions I have to make."
+    },
+    {
+      "index": 80,
+      "start": 366.0,
+      "end": 370.656,
+      "duration": 4.656,
+      "text": "The first side side excursion is to write the differential"
+    },
+    {
+      "index": 81,
+      "start": 370.656,
+      "end": 375.477,
+      "duration": 4.821,
+      "text": "equation in a different way. So, I'm going to just write its"
+    },
+    {
+      "index": 82,
+      "start": 375.477,
+      "end": 379.153,
+      "duration": 3.676,
+      "text": "transformations. The first, I'll simply recopy"
+    },
+    {
+      "index": 83,
+      "start": 379.153,
+      "end": 382.339,
+      "duration": 3.186,
+      "text": "what you know it to be, q y equals zero."
+    },
+    {
+      "index": 84,
+      "start": 382.339,
+      "end": 385.444,
+      "duration": 3.105,
+      "text": "That's the first form. The second form,"
+    },
+    {
+      "index": 85,
+      "start": 385.444,
+      "end": 391.0,
+      "duration": 5.556,
+      "text": "I'm going to replace this by the differentiation operator."
+    },
+    {
+      "index": 86,
+      "start": 391.0,
+      "end": 395.516,
+      "duration": 4.516,
+      "text": "So, I'm going to write this as D squared y."
+    },
+    {
+      "index": 87,
+      "start": 395.516,
+      "end": 398.328,
+      "duration": 2.812,
+      "text": "That means differentiate it twice."
+    },
+    {
+      "index": 88,
+      "start": 398.328,
+      "end": 402.503,
+      "duration": 4.175,
+      "text": "D it, and then D it again. This one I only have to"
+    },
+    {
+      "index": 89,
+      "start": 402.503,
+      "end": 406.593,
+      "duration": 4.09,
+      "text": "differentiate once, so I'll write that as p D(y),"
+    },
+    {
+      "index": 90,
+      "start": 406.593,
+      "end": 410.513,
+      "duration": 3.92,
+      "text": "p times the derivative of Y. The last one isn't"
+    },
+    {
+      "index": 91,
+      "start": 410.513,
+      "end": 413.837,
+      "duration": 3.324,
+      "text": "differentiated at all. I just recopy it."
+    },
+    {
+      "index": 92,
+      "start": 413.837,
+      "end": 417.501,
+      "duration": 3.664,
+      "text": "Now, I'm going to formally factor out the y."
+    },
+    {
+      "index": 93,
+      "start": 417.501,
+      "end": 422.869,
+      "duration": 5.368,
+      "text": "So this, I'm going to turn into D squared plus pD plus q."
+    },
+    {
+      "index": 94,
+      "start": 422.869,
+      "end": 427.887,
+      "duration": 5.018,
+      "text": "Now, everybody reads this as"
+    },
+    {
+      "index": 95,
+      "start": 427.887,
+      "end": 433.147,
+      "duration": 5.26,
+      "text": "times y equals zero. But, what it means is this guy,"
+    },
+    {
+      "index": 96,
+      "start": 433.147,
+      "end": 436.757,
+      "duration": 3.61,
+      "text": "it means this is shorthand for that."
+    },
+    {
+      "index": 97,
+      "start": 436.757,
+      "end": 441.502,
+      "duration": 4.745,
+      "text": "I'm not multiplying. I'm multiplying q times y."
+    },
+    {
+      "index": 98,
+      "start": 441.502,
+      "end": 445.008,
+      "duration": 3.506,
+      "text": "But, I'm not multiplying D times y."
+    },
+    {
+      "index": 99,
+      "start": 445.008,
+      "end": 448.915,
+      "duration": 3.907,
+      "text": "I'm applying D to y. Nonetheless,"
+    },
+    {
+      "index": 100,
+      "start": 448.915,
+      "end": 452.956,
+      "duration": 4.041,
+      "text": "the notation suggests this is very suggestive of that."
+    },
+    {
+      "index": 101,
+      "start": 452.956,
+      "end": 455.32,
+      "duration": 2.364,
+      "text": "And this, in turn, implies that."
+    },
+    {
+      "index": 102,
+      "start": 455.32,
+      "end": 459.361,
+      "duration": 4.041,
+      "text": "I'm just transforming it. And now, I'll take the final"
+    },
+    {
+      "index": 103,
+      "start": 459.361,
+      "end": 462.106,
+      "duration": 2.745,
+      "text": "step. I'm going to view this thing in"
+    },
+    {
+      "index": 104,
+      "start": 462.106,
+      "end": 466.148,
+      "duration": 4.042,
+      "text": "parentheses as a guy all by itself, a linear operator."
+    },
+    {
+      "index": 105,
+      "start": 466.148,
+      "end": 470.037,
+      "duration": 3.889,
+      "text": "This is a linear operator, called a linear operator."
+    },
+    {
+      "index": 106,
+      "start": 470.037,
+      "end": 474.154,
+      "duration": 4.117,
+      "text": "And, I'm going to simply abbreviate it by the letter L."
+    },
+    {
+      "index": 107,
+      "start": 474.154,
+      "end": 478.577,
+      "duration": 4.423,
+      "text": "And so, the final version of this equation has been reduced"
+    },
+    {
+      "index": 108,
+      "start": 478.577,
+      "end": 483.0,
+      "duration": 4.423,
+      "text": "to nothing but Ly equals zero."
+    },
+    {
+      "index": 109,
+      "start": 483.0,
+      "end": 485.849,
+      "duration": 2.849,
+      "text": "Now, what's L? You can think of L as,"
+    },
+    {
+      "index": 110,
+      "start": 485.849,
+      "end": 489.411,
+      "duration": 3.562,
+      "text": "well, formally, L you would write as D squared"
+    },
+    {
+      "index": 111,
+      "start": 489.411,
+      "end": 493.844,
+      "duration": 4.433,
+      "text": "plus pD plus q. But, you can think of L,"
+    },
+    {
+      "index": 112,
+      "start": 493.844,
+      "end": 498.514,
+      "duration": 4.67,
+      "text": "the way to think of it is as a black box, a function of what"
+    },
+    {
+      "index": 113,
+      "start": 498.514,
+      "end": 502.709,
+      "duration": 4.195,
+      "text": "goes into the black box, well, if this were a function"
+    },
+    {
+      "index": 114,
+      "start": 502.709,
+      "end": 507.696,
+      "duration": 4.987,
+      "text": "box, what would go it would be a number, and what would come out"
+    },
+    {
+      "index": 115,
+      "start": 507.696,
+      "end": 511.1,
+      "duration": 3.404,
+      "text": "with the number. But it's not that kind of a"
+    },
+    {
+      "index": 116,
+      "start": 511.1,
+      "end": 514.828,
+      "duration": 3.728,
+      "text": "black box. It's an operator box,"
+    },
+    {
+      "index": 117,
+      "start": 514.828,
+      "end": 518.573,
+      "duration": 3.745,
+      "text": "and therefore, what goes in is a function of"
+    },
+    {
+      "index": 118,
+      "start": 518.573,
+      "end": 521.359,
+      "duration": 2.786,
+      "text": "x. And, what comes out is another"
+    },
+    {
+      "index": 119,
+      "start": 521.359,
+      "end": 524.929,
+      "duration": 3.57,
+      "text": "function of x, the result of applying this"
+    },
+    {
+      "index": 120,
+      "start": 524.929,
+      "end": 528.848,
+      "duration": 3.919,
+      "text": "operator to that. So, from this point of view,"
+    },
+    {
+      "index": 121,
+      "start": 528.848,
+      "end": 532.505,
+      "duration": 3.657,
+      "text": "differential equations, trying to solve the"
+    },
+    {
+      "index": 122,
+      "start": 532.505,
+      "end": 537.469,
+      "duration": 4.964,
+      "text": "differential equation means, what should come out you want"
+    },
+    {
+      "index": 123,
+      "start": 537.469,
+      "end": 540.691,
+      "duration": 3.222,
+      "text": "to come out zero, and the question is,"
+    },
+    {
+      "index": 124,
+      "start": 540.691,
+      "end": 545.729,
+      "duration": 5.038,
+      "text": "what should you put in? That's what it means solving"
+    },
+    {
+      "index": 125,
+      "start": 545.729,
+      "end": 548.446,
+      "duration": 2.717,
+      "text": "differential equations in an inverse problem."
+    },
+    {
+      "index": 126,
+      "start": 548.446,
+      "end": 551.966,
+      "duration": 3.52,
+      "text": "The easy thing is to put it a function, and see what comes"
+    },
+    {
+      "index": 127,
+      "start": 551.966,
+      "end": 553.387,
+      "duration": 1.421,
+      "text": "out. You just calculate."
+    },
+    {
+      "index": 128,
+      "start": 553.387,
+      "end": 556.845,
+      "duration": 3.458,
+      "text": "The hard thing is to ask, you say, I want such and such a"
+    },
+    {
+      "index": 129,
+      "start": 556.845,
+      "end": 558.698,
+      "duration": 1.853,
+      "text": "thing to come out, for example,"
+    },
+    {
+      "index": 130,
+      "start": 558.698,
+      "end": 562.095,
+      "duration": 3.397,
+      "text": "zero; what should I put in? That's a difficult question,"
+    },
+    {
+      "index": 131,
+      "start": 562.095,
+      "end": 565.121,
+      "duration": 3.026,
+      "text": "and that's what we're spending the term answering."
+    },
+    {
+      "index": 132,
+      "start": 565.121,
+      "end": 568.394,
+      "duration": 3.273,
+      "text": "Now, the key thing about this is that this is a linear"
+    },
+    {
+      "index": 133,
+      "start": 568.394,
+      "end": 572.769,
+      "duration": 4.375,
+      "text": "operator. And, what that means is that it"
+    },
+    {
+      "index": 134,
+      "start": 572.769,
+      "end": 577.236,
+      "duration": 4.467,
+      "text": "behaves in a certain way with respect to functions."
+    },
+    {
+      "index": 135,
+      "start": 577.236,
+      "end": 582.507,
+      "duration": 5.271,
+      "text": "The easiest way to say it is, I like to make two laws of it,"
+    },
+    {
+      "index": 136,
+      "start": 582.507,
+      "end": 585.991,
+      "duration": 3.484,
+      "text": "that L of u1, if you have two functions,"
+    },
+    {
+      "index": 137,
+      "start": 585.991,
+      "end": 589.743,
+      "duration": 3.752,
+      "text": "I'm not going to put up the parentheses, x,"
+    },
+    {
+      "index": 138,
+      "start": 589.743,
+      "end": 595.282,
+      "duration": 5.539,
+      "text": "because that just makes things look longer and not any clearer,"
+    },
+    {
+      "index": 139,
+      "start": 595.282,
+      "end": 598.587,
+      "duration": 3.305,
+      "text": "actually. What does L do to the sum of"
+    },
+    {
+      "index": 140,
+      "start": 598.587,
+      "end": 603.262,
+      "duration": 4.675,
+      "text": "two functions? If that's a linear operator,"
+    },
+    {
+      "index": 141,
+      "start": 603.262,
+      "end": 608.111,
+      "duration": 4.849,
+      "text": "if you put in the sum of two functions, what you must get out"
+    },
+    {
+      "index": 142,
+      "start": 608.111,
+      "end": 612.393,
+      "duration": 4.282,
+      "text": "is the corresponding L's, the sum of the corresponding"
+    },
+    {
+      "index": 143,
+      "start": 612.393,
+      "end": 614.737,
+      "duration": 2.344,
+      "text": "L's of each. So, that's a law."
+    },
+    {
+      "index": 144,
+      "start": 614.737,
+      "end": 617.404,
+      "duration": 2.667,
+      "text": "And, the other law, linearity law,"
+    },
+    {
+      "index": 145,
+      "start": 617.404,
+      "end": 621.282,
+      "duration": 3.878,
+      "text": "and this goes for anything in mathematics and its"
+    },
+    {
+      "index": 146,
+      "start": 621.282,
+      "end": 624.191,
+      "duration": 2.909,
+      "text": "applications, which is called linear,"
+    },
+    {
+      "index": 147,
+      "start": 624.191,
+      "end": 629.121,
+      "duration": 4.93,
+      "text": "basically anything is linear if it does the following thing to"
+    },
+    {
+      "index": 148,
+      "start": 629.121,
+      "end": 633.0,
+      "duration": 3.879,
+      "text": "functions or numbers or whatever."
+    },
+    {
+      "index": 149,
+      "start": 633.0,
+      "end": 637.254,
+      "duration": 4.254,
+      "text": "The other one is of a constant times any function,"
+    },
+    {
+      "index": 150,
+      "start": 637.254,
+      "end": 641.769,
+      "duration": 4.515,
+      "text": "I don't have to give it a number now because I'm only"
+    },
+    {
+      "index": 151,
+      "start": 641.769,
+      "end": 646.023,
+      "duration": 4.254,
+      "text": "using one of them, should be equal to c times L of"
+    },
+    {
+      "index": 152,
+      "start": 646.023,
+      "end": 648.455,
+      "duration": 2.432,
+      "text": "u. So, here, c is a constant,"
+    },
+    {
+      "index": 153,
+      "start": 648.455,
+      "end": 651.928,
+      "duration": 3.473,
+      "text": "and here, of course, the u is a function,"
+    },
+    {
+      "index": 154,
+      "start": 651.928,
+      "end": 655.401,
+      "duration": 3.473,
+      "text": "functions of x. These are the two laws of"
+    },
+    {
+      "index": 155,
+      "start": 655.401,
+      "end": 658.613,
+      "duration": 3.212,
+      "text": "linearity. An operator is linear if it"
+    },
+    {
+      "index": 156,
+      "start": 658.613,
+      "end": 663.15,
+      "duration": 4.537,
+      "text": "satisfies these two laws. Now, for example,"
+    },
+    {
+      "index": 157,
+      "start": 663.15,
+      "end": 666.398,
+      "duration": 3.248,
+      "text": "the differentiation operator is such an operator."
+    },
+    {
+      "index": 158,
+      "start": 666.398,
+      "end": 667.481,
+      "duration": 1.083,
+      "text": "D is linear, why?"
+    },
+    {
+      "index": 159,
+      "start": 667.481,
+      "end": 671.406,
+      "duration": 3.925,
+      "text": "Well, because of the very first things you verify after you"
+    },
+    {
+      "index": 160,
+      "start": 671.406,
+      "end": 675.06,
+      "duration": 3.654,
+      "text": "learn what the derivative is because the derivative of,"
+    },
+    {
+      "index": 161,
+      "start": 675.06,
+      "end": 677.428,
+      "duration": 2.368,
+      "text": "well, I will write it in the D form."
+    },
+    {
+      "index": 162,
+      "start": 677.428,
+      "end": 680.541,
+      "duration": 3.113,
+      "text": "I'll write it in the form in which you know it."
+    },
+    {
+      "index": 163,
+      "start": 680.541,
+      "end": 683.789,
+      "duration": 3.248,
+      "text": "It would be D apply to u1 plus u2."
+    },
+    {
+      "index": 164,
+      "start": 683.789,
+      "end": 686.766,
+      "duration": 2.977,
+      "text": "How does one write that in ordinary calculus?"
+    },
+    {
+      "index": 165,
+      "start": 686.766,
+      "end": 691.093,
+      "duration": 4.327,
+      "text": "Well, like that. Or, maybe you write d by dx out"
+    },
+    {
+      "index": 166,
+      "start": 691.093,
+      "end": 693.119,
+      "duration": 2.026,
+      "text": "front. Let's write it this way,"
+    },
+    {
+      "index": 167,
+      "start": 693.119,
+      "end": 696.429,
+      "duration": 3.31,
+      "text": "is equal to u1 prime plus u2 prime."
+    },
+    {
+      "index": 168,
+      "start": 696.429,
+      "end": 699.13,
+      "duration": 2.701,
+      "text": "That's a law. You prove it when you first"
+    },
+    {
+      "index": 169,
+      "start": 699.13,
+      "end": 702.034,
+      "duration": 2.904,
+      "text": "study what a derivative is. It's a property."
+    },
+    {
+      "index": 170,
+      "start": 702.034,
+      "end": 705.074,
+      "duration": 3.04,
+      "text": "From our point of view, it's a property of the"
+    },
+    {
+      "index": 171,
+      "start": 705.074,
+      "end": 708.18,
+      "duration": 3.106,
+      "text": "differentiation operator. It has this property."
+    },
+    {
+      "index": 172,
+      "start": 708.18,
+      "end": 712.03,
+      "duration": 3.85,
+      "text": "The D of u1 plus u2 is D of u1 plus D of u2."
+    },
+    {
+      "index": 173,
+      "start": 712.03,
+      "end": 715.069,
+      "duration": 3.039,
+      "text": "And, it also has the property"
+    },
+    {
+      "index": 174,
+      "start": 715.069,
+      "end": 720.0,
+      "duration": 4.931,
+      "text": "that c u prime, you can pull out the constant."
+    },
+    {
+      "index": 175,
+      "start": 720.0,
+      "end": 723.385,
+      "duration": 3.385,
+      "text": "That's not affected by the differentiation."
+    },
+    {
+      "index": 176,
+      "start": 723.385,
+      "end": 727.979,
+      "duration": 4.594,
+      "text": "So, these two familiar laws from the beginning of calculus"
+    },
+    {
+      "index": 177,
+      "start": 727.979,
+      "end": 731.929,
+      "duration": 3.95,
+      "text": "say, in our language, that D is a linear operator."
+    },
+    {
+      "index": 178,
+      "start": 731.929,
+      "end": 734.831,
+      "duration": 2.902,
+      "text": "What about the multiplication of law?"
+    },
+    {
+      "index": 179,
+      "start": 734.831,
+      "end": 738.861,
+      "duration": 4.03,
+      "text": "That's even more important, that u1 times u2 prime,"
+    },
+    {
+      "index": 180,
+      "start": 738.861,
+      "end": 742.811,
+      "duration": 3.95,
+      "text": "I have nothing whatever to say about that in here."
+    },
+    {
+      "index": 181,
+      "start": 742.811,
+      "end": 745.874,
+      "duration": 3.063,
+      "text": "In this context, it's an important law,"
+    },
+    {
+      "index": 182,
+      "start": 745.874,
+      "end": 749.904,
+      "duration": 4.03,
+      "text": "but it's not important with respect to the study of"
+    },
+    {
+      "index": 183,
+      "start": 749.904,
+      "end": 753.81,
+      "duration": 3.906,
+      "text": "linearity. So, there's an example."
+    },
+    {
+      "index": 184,
+      "start": 753.81,
+      "end": 758.532,
+      "duration": 4.722,
+      "text": "Here's a more complicated one that I'm claiming is the linear"
+    },
+    {
+      "index": 185,
+      "start": 758.532,
+      "end": 761.68,
+      "duration": 3.148,
+      "text": "operator. And, since I don't want to have"
+    },
+    {
+      "index": 186,
+      "start": 761.68,
+      "end": 765.458,
+      "duration": 3.778,
+      "text": "to work in this lecture, the work is left to you."
+    },
+    {
+      "index": 187,
+      "start": 765.458,
+      "end": 768.37,
+      "duration": 2.912,
+      "text": "So, the proof, prove that L is linear,"
+    },
+    {
+      "index": 188,
+      "start": 768.37,
+      "end": 771.518,
+      "duration": 3.148,
+      "text": "is this particular operator. L is linear."
+    },
+    {
+      "index": 189,
+      "start": 771.518,
+      "end": 775.217,
+      "duration": 3.699,
+      "text": "That's in your part one homework to verify that."
+    },
+    {
+      "index": 190,
+      "start": 775.217,
+      "end": 779.861,
+      "duration": 4.644,
+      "text": "And you will do some simple exercises in recitation tomorrow"
+    },
+    {
+      "index": 191,
+      "start": 779.861,
+      "end": 786.0,
+      "duration": 6.139,
+      "text": "to sort of warm you up for that if you haven't done it already."
+    },
+    {
+      "index": 192,
+      "start": 786.0,
+      "end": 793.053,
+      "duration": 7.053,
+      "text": "Well, you shouldn't have because this only goes with this"
+    },
+    {
+      "index": 193,
+      "start": 793.053,
+      "end": 799.225,
+      "duration": 6.172,
+      "text": "lecture, actually. It's forbidden to work ahead in"
+    },
+    {
+      "index": 194,
+      "start": 799.225,
+      "end": 803.633,
+      "duration": 4.408,
+      "text": "this class. All right, where are we?"
+    },
+    {
+      "index": 195,
+      "start": 803.633,
+      "end": 811.064,
+      "duration": 7.431,
+      "text": "Well, all that was a prelude to proving this simple theorem,"
+    },
+    {
+      "index": 196,
+      "start": 811.064,
+      "end": 815.599,
+      "duration": 4.535,
+      "text": "superposition principle. So, finally,"
+    },
+    {
+      "index": 197,
+      "start": 815.599,
+      "end": 822.977,
+      "duration": 7.378,
+      "text": "what's the proof? The proof of the superposition"
+    },
+    {
+      "index": 198,
+      "start": 822.977,
+      "end": 830.005,
+      "duration": 7.028,
+      "text": "principle: if you believe that the operator is linear,"
+    },
+    {
+      "index": 199,
+      "start": 830.005,
+      "end": 833.718,
+      "duration": 3.713,
+      "text": "then L of c1, in other words,"
+    },
+    {
+      "index": 200,
+      "start": 833.718,
+      "end": 839.287,
+      "duration": 5.569,
+      "text": "the ODE is L. L is D squared plus pD plus q."
+    },
+    {
+      "index": 201,
+      "start": 839.287,
+      "end": 844.957,
+      "duration": 5.67,
+      "text": "So, the ODE is Ly equals zero."
+    },
+    {
+      "index": 202,
+      "start": 844.957,
+      "end": 847.657,
+      "duration": 2.7,
+      "text": "And, what am I being asked to"
+    },
+    {
+      "index": 203,
+      "start": 847.657,
+      "end": 850.019,
+      "duration": 2.362,
+      "text": "prove? I'm being asked to prove that"
+    },
+    {
+      "index": 204,
+      "start": 850.019,
+      "end": 853.327,
+      "duration": 3.308,
+      "text": "if y1 and y2 are solutions, then so is that thing."
+    },
+    {
+      "index": 205,
+      "start": 853.327,
+      "end": 856.432,
+      "duration": 3.105,
+      "text": "By the way, that's called a linear combination."
+    },
+    {
+      "index": 206,
+      "start": 856.432,
+      "end": 860.077,
+      "duration": 3.645,
+      "text": "Put that in your notes. Maybe I better write it even on"
+    },
+    {
+      "index": 207,
+      "start": 860.077,
+      "end": 864.33,
+      "duration": 4.253,
+      "text": "the board because it's something people say all the time without"
+    },
+    {
+      "index": 208,
+      "start": 864.33,
+      "end": 866.557,
+      "duration": 2.227,
+      "text": "realizing they haven't defined it."
+    },
+    {
+      "index": 209,
+      "start": 866.557,
+      "end": 870.0,
+      "duration": 3.443,
+      "text": "This is called a linear combination."
+    },
+    {
+      "index": 210,
+      "start": 870.0,
+      "end": 875.562,
+      "duration": 5.562,
+      "text": "This expression is called a linear combination of y1 and y2."
+    },
+    {
+      "index": 211,
+      "start": 875.562,
+      "end": 880.748,
+      "duration": 5.186,
+      "text": "It means that particular sum with constant coefficients."
+    },
+    {
+      "index": 212,
+      "start": 880.748,
+      "end": 884.048,
+      "duration": 3.3,
+      "text": "Okay, so, the ODE is Ly equals zero."
+    },
+    {
+      "index": 213,
+      "start": 884.048,
+      "end": 888.102,
+      "duration": 4.054,
+      "text": "And, I'm trying to prove that fact about it,"
+    },
+    {
+      "index": 214,
+      "start": 888.102,
+      "end": 892.44,
+      "duration": 4.338,
+      "text": "that if y1 and y2 are solutions, so is a linear"
+    },
+    {
+      "index": 215,
+      "start": 892.44,
+      "end": 895.645,
+      "duration": 3.205,
+      "text": "combination of them. So, the proof,"
+    },
+    {
+      "index": 216,
+      "start": 895.645,
+      "end": 900.925,
+      "duration": 5.28,
+      "text": "then, I start with apply L to c1 y1 plus c2 y2."
+    },
+    {
+      "index": 217,
+      "start": 900.925,
+      "end": 905.391,
+      "duration": 4.466,
+      "text": "Now, because this operator is"
+    },
+    {
+      "index": 218,
+      "start": 905.391,
+      "end": 910.587,
+      "duration": 5.196,
+      "text": "linear, it takes the sum of two functions into the corresponding"
+    },
+    {
+      "index": 219,
+      "start": 910.587,
+      "end": 913.309,
+      "duration": 2.722,
+      "text": "sum up what the operator would be."
+    },
+    {
+      "index": 220,
+      "start": 913.309,
+      "end": 917.68,
+      "duration": 4.371,
+      "text": "So, it would be L of c1 y1 plus L of c2 y2."
+    },
+    {
+      "index": 221,
+      "start": 917.68,
+      "end": 920.814,
+      "duration": 3.134,
+      "text": "That's because L is a linear"
+    },
+    {
+      "index": 222,
+      "start": 920.814,
+      "end": 923.618,
+      "duration": 2.804,
+      "text": "operator. But, I don't have to stop"
+    },
+    {
+      "index": 223,
+      "start": 923.618,
+      "end": 926.67,
+      "duration": 3.052,
+      "text": "there. Because L is a linear operator,"
+    },
+    {
+      "index": 224,
+      "start": 926.67,
+      "end": 931.288,
+      "duration": 4.618,
+      "text": "I can pull the c out front. So, it's c1 L of y1 plus c2 L"
+    },
+    {
+      "index": 225,
+      "start": 931.288,
+      "end": 936.123,
+      "duration": 4.835,
+      "text": "of y2. Now, where am I?"
+    },
+    {
+      "index": 226,
+      "start": 936.123,
+      "end": 938.441,
+      "duration": 2.318,
+      "text": "Trying to prove that this is zero."
+    },
+    {
+      "index": 227,
+      "start": 938.441,
+      "end": 940.969,
+      "duration": 2.528,
+      "text": "Well, what is L of y1? At this point,"
+    },
+    {
+      "index": 228,
+      "start": 940.969,
+      "end": 943.497,
+      "duration": 2.528,
+      "text": "I use the fact that y1 is a solution."
+    },
+    {
+      "index": 229,
+      "start": 943.497,
+      "end": 946.095,
+      "duration": 2.598,
+      "text": "Because it's a solution, this is zero."
+    },
+    {
+      "index": 230,
+      "start": 946.095,
+      "end": 950.028,
+      "duration": 3.933,
+      "text": "That's what it means to solve that differential equation."
+    },
+    {
+      "index": 231,
+      "start": 950.028,
+      "end": 953.117,
+      "duration": 3.089,
+      "text": "It means, when you apply the linear operator,"
+    },
+    {
+      "index": 232,
+      "start": 953.117,
+      "end": 955.365,
+      "duration": 2.248,
+      "text": "L, to the function, you get zero."
+    },
+    {
+      "index": 233,
+      "start": 955.365,
+      "end": 957.682,
+      "duration": 2.317,
+      "text": "In the same way, y2 is a solution."
+    },
+    {
+      "index": 234,
+      "start": 957.682,
+      "end": 962.111,
+      "duration": 4.429,
+      "text": "So, that's zero. And, the sum of c1 times zero"
+    },
+    {
+      "index": 235,
+      "start": 962.111,
+      "end": 965.46,
+      "duration": 3.349,
+      "text": "plus c2 times zero is zero."
+    },
+    {
+      "index": 236,
+      "start": 965.46,
+      "end": 968.955,
+      "duration": 3.495,
+      "text": "That's the argument. Now, you could make the same"
+    },
+    {
+      "index": 237,
+      "start": 968.955,
+      "end": 973.396,
+      "duration": 4.441,
+      "text": "argument just by plugging c1 y1, plugging it into the equation"
+    },
+    {
+      "index": 238,
+      "start": 973.396,
+      "end": 975.725,
+      "duration": 2.329,
+      "text": "and calculating, and calculating,"
+    },
+    {
+      "index": 239,
+      "start": 975.725,
+      "end": 978.929,
+      "duration": 3.204,
+      "text": "grouping the terms and so on"
+    },
+    {
+      "index": 240,
+      "start": 978.929,
+      "end": 981.987,
+      "duration": 3.058,
+      "text": "and so forth. But, that's just calculation."
+    },
+    {
+      "index": 241,
+      "start": 981.987,
+      "end": 984.244,
+      "duration": 2.257,
+      "text": "It doesn't show you why it's so."
+    },
+    {
+      "index": 242,
+      "start": 984.244,
+      "end": 988.102,
+      "duration": 3.858,
+      "text": "Why it's so is because the operator, this differential"
+    },
+    {
+      "index": 243,
+      "start": 988.102,
+      "end": 992.252,
+      "duration": 4.15,
+      "text": "equation is expressed as a linear operator applied to y is"
+    },
+    {
+      "index": 244,
+      "start": 992.252,
+      "end": 997.885,
+      "duration": 5.633,
+      "text": "zero. And, the only properties that"
+    },
+    {
+      "index": 245,
+      "start": 997.885,
+      "end": 1006.057,
+      "duration": 8.172,
+      "text": "are really been used as the fact that this operator is linear."
+    },
+    {
+      "index": 246,
+      "start": 1006.057,
+      "end": 1010.478,
+      "duration": 4.421,
+      "text": "That's the key point. L is linear."
+    },
+    {
+      "index": 247,
+      "start": 1010.478,
+      "end": 1017.311,
+      "duration": 6.833,
+      "text": "It's a linear operator. Well, that's all there is to"
+    },
+    {
+      "index": 248,
+      "start": 1017.311,
+      "end": 1024.121,
+      "duration": 6.81,
+      "text": "the superposition principle. As a prelude to answering the"
+    },
+    {
+      "index": 249,
+      "start": 1024.121,
+      "end": 1027.414,
+      "duration": 3.293,
+      "text": "more difficult question, why are these all the"
+    },
+    {
+      "index": 250,
+      "start": 1027.414,
+      "end": 1029.756,
+      "duration": 2.342,
+      "text": "solutions? Why are there no other"
+    },
+    {
+      "index": 251,
+      "start": 1029.756,
+      "end": 1032.39,
+      "duration": 2.634,
+      "text": "solutions? We need a few definitions,"
+    },
+    {
+      "index": 252,
+      "start": 1032.39,
+      "end": 1036.195,
+      "duration": 3.805,
+      "text": "and a few more ideas. And, they are going to occur in"
+    },
+    {
+      "index": 253,
+      "start": 1036.195,
+      "end": 1038.975,
+      "duration": 2.78,
+      "text": "connection with, so I'm now addressing,"
+    },
+    {
+      "index": 254,
+      "start": 1038.975,
+      "end": 1042.634,
+      "duration": 3.659,
+      "text": "ultimately, question two. But, it's not going to be"
+    },
+    {
+      "index": 255,
+      "start": 1042.634,
+      "end": 1045.195,
+      "duration": 2.561,
+      "text": "addressed directly for quite awhile."
+    },
+    {
+      "index": 256,
+      "start": 1045.195,
+      "end": 1049.731,
+      "duration": 4.536,
+      "text": "Instead, I'm going to phrase it in terms of solving the initial"
+    },
+    {
+      "index": 257,
+      "start": 1049.731,
+      "end": 1054.633,
+      "duration": 4.902,
+      "text": "value problem. So far, we've only talked about"
+    },
+    {
+      "index": 258,
+      "start": 1054.633,
+      "end": 1059.305,
+      "duration": 4.672,
+      "text": "the general solution with those two arbitrary constants."
+    },
+    {
+      "index": 259,
+      "start": 1059.305,
+      "end": 1063.297,
+      "duration": 3.992,
+      "text": "But, how do you solve the initial value problem,"
+    },
+    {
+      "index": 260,
+      "start": 1063.297,
+      "end": 1066.525,
+      "duration": 3.228,
+      "text": "in other words, fit initial conditions,"
+    },
+    {
+      "index": 261,
+      "start": 1066.525,
+      "end": 1071.536,
+      "duration": 5.011,
+      "text": "find the solution with given initial values for the function"
+    },
+    {
+      "index": 262,
+      "start": 1071.536,
+      "end": 1075.0,
+      "duration": 3.464,
+      "text": "and its derivatives. Now, --"
+    },
+    {
+      "index": 263,
+      "start": 1084.0,
+      "end": 1088.359,
+      "duration": 4.359,
+      "text": "the theorem is that this collection of functions with"
+    },
+    {
+      "index": 264,
+      "start": 1088.359,
+      "end": 1092.798,
+      "duration": 4.439,
+      "text": "these arbitrary constants, these are all the solutions we"
+    },
+    {
+      "index": 265,
+      "start": 1092.798,
+      "end": 1095.731,
+      "duration": 2.933,
+      "text": "have so far. In fact, they are all the"
+    },
+    {
+      "index": 266,
+      "start": 1095.731,
+      "end": 1099.457,
+      "duration": 3.726,
+      "text": "solutions there are, but we don't know that yet."
+    },
+    {
+      "index": 267,
+      "start": 1099.457,
+      "end": 1103.817,
+      "duration": 4.36,
+      "text": "However, if we just focus on the big class of solutions,"
+    },
+    {
+      "index": 268,
+      "start": 1103.817,
+      "end": 1108.573,
+      "duration": 4.756,
+      "text": "there might be others lurking out there somewhere lurking out"
+    },
+    {
+      "index": 269,
+      "start": 1108.573,
+      "end": 1111.818,
+      "duration": 3.245,
+      "text": "there. I don't know."
+    },
+    {
+      "index": 270,
+      "start": 1111.818,
+      "end": 1119.654,
+      "duration": 7.836,
+      "text": "But let's use what we have, that just from this family is"
+    },
+    {
+      "index": 271,
+      "start": 1119.654,
+      "end": 1127.209,
+      "duration": 7.555,
+      "text": "enough to satisfy any initial condition, to satisfy any"
+    },
+    {
+      "index": 272,
+      "start": 1127.209,
+      "end": 1131.407,
+      "duration": 4.198,
+      "text": "initial values. In other words,"
+    },
+    {
+      "index": 273,
+      "start": 1131.407,
+      "end": 1139.242,
+      "duration": 7.835,
+      "text": "if you give me any initial values, I will be able to find"
+    },
+    {
+      "index": 274,
+      "start": 1139.242,
+      "end": 1145.124,
+      "duration": 5.882,
+      "text": "the c1 and c2 which work. Now, why is that?"
+    },
+    {
+      "index": 275,
+      "start": 1145.124,
+      "end": 1148.497,
+      "duration": 3.373,
+      "text": "Well, I'd have to do a song and dance at this point,"
+    },
+    {
+      "index": 276,
+      "start": 1148.497,
+      "end": 1152.267,
+      "duration": 3.77,
+      "text": "if you hadn't been softened up by actually calculating for"
+    },
+    {
+      "index": 277,
+      "start": 1152.267,
+      "end": 1155.97,
+      "duration": 3.703,
+      "text": "specific differential equations. You've had exercises and"
+    },
+    {
+      "index": 278,
+      "start": 1155.97,
+      "end": 1159.211,
+      "duration": 3.241,
+      "text": "actually how to calculate the values of c1 and c2."
+    },
+    {
+      "index": 279,
+      "start": 1159.211,
+      "end": 1163.047,
+      "duration": 3.836,
+      "text": "So, I'm going to do it now in general what you have done so"
+    },
+    {
+      "index": 280,
+      "start": 1163.047,
+      "end": 1166.883,
+      "duration": 3.836,
+      "text": "far for particular equations using particular values of the"
+    },
+    {
+      "index": 281,
+      "start": 1166.883,
+      "end": 1170.982,
+      "duration": 4.099,
+      "text": "initial conditions. So, I'm relying on that"
+    },
+    {
+      "index": 282,
+      "start": 1170.982,
+      "end": 1175.724,
+      "duration": 4.742,
+      "text": "experience that you've had in doing the homework to make"
+    },
+    {
+      "index": 283,
+      "start": 1175.724,
+      "end": 1180.724,
+      "duration": 5.0,
+      "text": "intelligible what I'm going to do now in the abstract using"
+    },
+    {
+      "index": 284,
+      "start": 1180.724,
+      "end": 1183.482,
+      "duration": 2.758,
+      "text": "just letters. So, why is this so?"
+    },
+    {
+      "index": 285,
+      "start": 1183.482,
+      "end": 1187.362,
+      "duration": 3.88,
+      "text": "Why is that so? Well, we are going to need it,"
+    },
+    {
+      "index": 286,
+      "start": 1187.362,
+      "end": 1189.172,
+      "duration": 1.81,
+      "text": "by the way, here, too."
+    },
+    {
+      "index": 287,
+      "start": 1189.172,
+      "end": 1192.62,
+      "duration": 3.448,
+      "text": "I'll have to, again, open up parentheses."
+    },
+    {
+      "index": 288,
+      "start": 1192.62,
+      "end": 1197.62,
+      "duration": 5.0,
+      "text": "But let's go as far as we can. Well, you just try to do it."
+    },
+    {
+      "index": 289,
+      "start": 1197.62,
+      "end": 1204.0,
+      "duration": 6.38,
+      "text": "Suppose the initial conditions are, how will we write them?"
+    },
+    {
+      "index": 290,
+      "start": 1204.0,
+      "end": 1206.874,
+      "duration": 2.874,
+      "text": "So, they're going to be at some initial point,"
+    },
+    {
+      "index": 291,
+      "start": 1206.874,
+      "end": 1208.918,
+      "duration": 2.044,
+      "text": "x0. You can take it to be zero if"
+    },
+    {
+      "index": 292,
+      "start": 1208.918,
+      "end": 1212.304,
+      "duration": 3.386,
+      "text": "you want, but I'd like to be, just for a little while,"
+    },
+    {
+      "index": 293,
+      "start": 1212.304,
+      "end": 1215.307,
+      "duration": 3.003,
+      "text": "a little more general. So, let's say the initial"
+    },
+    {
+      "index": 294,
+      "start": 1215.307,
+      "end": 1219.267,
+      "duration": 3.96,
+      "text": "conditions, the initial values are being given at the point x0,"
+    },
+    {
+      "index": 295,
+      "start": 1219.267,
+      "end": 1221.886,
+      "duration": 2.619,
+      "text": "all right, that's going to be some number."
+    },
+    {
+      "index": 296,
+      "start": 1221.886,
+      "end": 1225.208,
+      "duration": 3.322,
+      "text": "Let's just call it a. And, the initial value also has"
+    },
+    {
+      "index": 297,
+      "start": 1225.208,
+      "end": 1230.0,
+      "duration": 4.792,
+      "text": "to specify the velocity or the value of the derivative there."
+    },
+    {
+      "index": 298,
+      "start": 1230.0,
+      "end": 1233.529,
+      "duration": 3.529,
+      "text": "Let's say these are the initial values."
+    },
+    {
+      "index": 299,
+      "start": 1233.529,
+      "end": 1237.523,
+      "duration": 3.994,
+      "text": "So, the problem is to find the c which work."
+    },
+    {
+      "index": 300,
+      "start": 1237.523,
+      "end": 1241.517,
+      "duration": 3.994,
+      "text": "Now, how do you do that? Well, you know from"
+    },
+    {
+      "index": 301,
+      "start": 1241.517,
+      "end": 1245.325,
+      "duration": 3.808,
+      "text": "calculation. You write y equals c1 y1 plus"
+    },
+    {
+      "index": 302,
+      "start": 1245.325,
+      "end": 1247.925,
+      "duration": 2.6,
+      "text": "c2 y2. And you write y prime,"
+    },
+    {
+      "index": 303,
+      "start": 1247.925,
+      "end": 1251.919,
+      "duration": 3.994,
+      "text": "and you take the derivative underneath that,"
+    },
+    {
+      "index": 304,
+      "start": 1251.919,
+      "end": 1256.47,
+      "duration": 4.551,
+      "text": "which is easy to do. And now, you plug in x equals"
+    },
+    {
+      "index": 305,
+      "start": 1256.47,
+      "end": 1260.0,
+      "duration": 3.53,
+      "text": "zero. And, what happens?"
+    },
+    {
+      "index": 306,
+      "start": 1260.0,
+      "end": 1264.099,
+      "duration": 4.099,
+      "text": "Well, these now turn into a set of equations."
+    },
+    {
+      "index": 307,
+      "start": 1264.099,
+      "end": 1268.198,
+      "duration": 4.099,
+      "text": "What will they look like? Well, y of x0 is a,"
+    },
+    {
+      "index": 308,
+      "start": 1268.198,
+      "end": 1272.204,
+      "duration": 4.006,
+      "text": "and this is b. So, what I get is let me flop"
+    },
+    {
+      "index": 309,
+      "start": 1272.204,
+      "end": 1277.422,
+      "duration": 5.218,
+      "text": "it over onto the other side because that's the way you're"
+    },
+    {
+      "index": 310,
+      "start": 1277.422,
+      "end": 1281.055,
+      "duration": 3.633,
+      "text": "used to looking at systems of equations."
+    },
+    {
+      "index": 311,
+      "start": 1281.055,
+      "end": 1286.459,
+      "duration": 5.404,
+      "text": "So, what we get is c1 times y1 of x0 plus c2 times y2 of x0."
+    },
+    {
+      "index": 312,
+      "start": 1286.459,
+      "end": 1291.733,
+      "duration": 5.274,
+      "text": "What's that supposed to be"
+    },
+    {
+      "index": 313,
+      "start": 1291.733,
+      "end": 1294.133,
+      "duration": 2.4,
+      "text": "equal to? Well, that's supposed to be"
+    },
+    {
+      "index": 314,
+      "start": 1294.133,
+      "end": 1297.799,
+      "duration": 3.666,
+      "text": "equal to y of x0. It's supposed to be equal to"
+    },
+    {
+      "index": 315,
+      "start": 1297.799,
+      "end": 1299.066,
+      "duration": 1.267,
+      "text": "the given number, a."
+    },
+    {
+      "index": 316,
+      "start": 1299.066,
+      "end": 1302.333,
+      "duration": 3.267,
+      "text": "And, in the same way, c1 y1 prime of x0 plus c2 y2"
+    },
+    {
+      "index": 317,
+      "start": 1302.333,
+      "end": 1306.133,
+      "duration": 3.8,
+      "text": "prime of x0, that's supposed to turn out to"
+    },
+    {
+      "index": 318,
+      "start": 1306.133,
+      "end": 1308.333,
+      "duration": 2.2,
+      "text": "be the number, b."
+    },
+    {
+      "index": 319,
+      "start": 1308.333,
+      "end": 1311.533,
+      "duration": 3.2,
+      "text": "In the calculations you've done up to this point,"
+    },
+    {
+      "index": 320,
+      "start": 1311.533,
+      "end": 1315.2,
+      "duration": 3.667,
+      "text": "y1 and y2 were always specific functions like e to the x"
+    },
+    {
+      "index": 321,
+      "start": 1315.2,
+      "end": 1317.666,
+      "duration": 2.466,
+      "text": "or cosine of 22x,"
+    },
+    {
+      "index": 322,
+      "start": 1317.666,
+      "end": 1321.853,
+      "duration": 4.187,
+      "text": "stuff like that. Now I'm doing it in the"
+    },
+    {
+      "index": 323,
+      "start": 1321.853,
+      "end": 1326.526,
+      "duration": 4.673,
+      "text": "abstract, just calling them y1 and y2, so as to include all"
+    },
+    {
+      "index": 324,
+      "start": 1326.526,
+      "end": 1330.635,
+      "duration": 4.109,
+      "text": "those possible cases. Now, what am I supposed to do?"
+    },
+    {
+      "index": 325,
+      "start": 1330.635,
+      "end": 1335.469,
+      "duration": 4.834,
+      "text": "I'm supposed to find c1 and c2. What kind of things are they?"
+    },
+    {
+      "index": 326,
+      "start": 1335.469,
+      "end": 1339.175,
+      "duration": 3.706,
+      "text": "This is what you studied in high school, right?"
+    },
+    {
+      "index": 327,
+      "start": 1339.175,
+      "end": 1343.767,
+      "duration": 4.592,
+      "text": "The letters are around us, but it's a pair of simultaneous"
+    },
+    {
+      "index": 328,
+      "start": 1343.767,
+      "end": 1346.99,
+      "duration": 3.223,
+      "text": "linear equations. What are the variables?"
+    },
+    {
+      "index": 329,
+      "start": 1346.99,
+      "end": 1350.696,
+      "duration": 3.706,
+      "text": "What are the variables?"
+    },
+    {
+      "index": 330,
+      "start": 1350.696,
+      "end": 1355.483,
+      "duration": 4.787,
+      "text": "Somebody raise their hand. If you have a pair of"
+    },
+    {
+      "index": 331,
+      "start": 1355.483,
+      "end": 1359.793,
+      "duration": 4.31,
+      "text": "simultaneous linear equations, you've got variables and you've"
+    },
+    {
+      "index": 332,
+      "start": 1359.793,
+      "end": 1361.206,
+      "duration": 1.413,
+      "text": "got constants, right?"
+    },
+    {
+      "index": 333,
+      "start": 1361.206,
+      "end": 1363.82,
+      "duration": 2.614,
+      "text": "And you are trying to find the answer."
+    },
+    {
+      "index": 334,
+      "start": 1363.82,
+      "end": 1365.798,
+      "duration": 1.978,
+      "text": "What are the variables? Yeah?"
+    },
+    {
+      "index": 335,
+      "start": 1365.798,
+      "end": 1367.211,
+      "duration": 1.413,
+      "text": "c1 and c2. Very good."
+    },
+    {
+      "index": 336,
+      "start": 1367.211,
+      "end": 1370.885,
+      "duration": 3.674,
+      "text": "I mean, it's extremely confusing because in the first"
+    },
+    {
+      "index": 337,
+      "start": 1370.885,
+      "end": 1374.842,
+      "duration": 3.957,
+      "text": "place, how can they be the variables if they occur on the"
+    },
+    {
+      "index": 338,
+      "start": 1374.842,
+      "end": 1377.456,
+      "duration": 2.614,
+      "text": "wrong side? They're on the wrong side;"
+    },
+    {
+      "index": 339,
+      "start": 1377.456,
+      "end": 1382.631,
+      "duration": 5.175,
+      "text": "they are constants. How can constants be variables?"
+    },
+    {
+      "index": 340,
+      "start": 1382.631,
+      "end": 1386.281,
+      "duration": 3.65,
+      "text": "Everything about this is wrong. Nonetheless,"
+    },
+    {
+      "index": 341,
+      "start": 1386.281,
+      "end": 1390.949,
+      "duration": 4.668,
+      "text": "the c1 and the c2 are the unknowns, if you like the high"
+    },
+    {
+      "index": 342,
+      "start": 1390.949,
+      "end": 1394.854,
+      "duration": 3.905,
+      "text": "school terminology. c1 and c2 are the unknowns."
+    },
+    {
+      "index": 343,
+      "start": 1394.854,
+      "end": 1399.692,
+      "duration": 4.838,
+      "text": "These messes are just numbers. After you've plugged in x0,"
+    },
+    {
+      "index": 344,
+      "start": 1399.692,
+      "end": 1403.851,
+      "duration": 4.159,
+      "text": "this is some number. You've got four numbers here."
+    },
+    {
+      "index": 345,
+      "start": 1403.851,
+      "end": 1406.482,
+      "duration": 2.631,
+      "text": "So, c1 and c2 are the variables."
+    },
+    {
+      "index": 346,
+      "start": 1406.482,
+      "end": 1408.859,
+      "duration": 2.377,
+      "text": "The two find, in other words,"
+    },
+    {
+      "index": 347,
+      "start": 1408.859,
+      "end": 1414.634,
+      "duration": 5.775,
+      "text": "to find the values of. All right, now you know general"
+    },
+    {
+      "index": 348,
+      "start": 1414.634,
+      "end": 1419.733,
+      "duration": 5.099,
+      "text": "theorems from 18.02 about when can you solve such a system of"
+    },
+    {
+      "index": 349,
+      "start": 1419.733,
+      "end": 1422.708,
+      "duration": 2.975,
+      "text": "equations. I'm claiming that you can"
+    },
+    {
+      "index": 350,
+      "start": 1422.708,
+      "end": 1428.062,
+      "duration": 5.354,
+      "text": "always find c1 and c2 that work. But, you know that's not always"
+    },
+    {
+      "index": 351,
+      "start": 1428.062,
+      "end": 1432.481,
+      "duration": 4.419,
+      "text": "the case that a pair of simultaneous linear equations"
+    },
+    {
+      "index": 352,
+      "start": 1432.481,
+      "end": 1435.371,
+      "duration": 2.89,
+      "text": "can be solved. There's a condition."
+    },
+    {
+      "index": 353,
+      "start": 1435.371,
+      "end": 1439.705,
+      "duration": 4.334,
+      "text": "There's a condition which guarantees their solution,"
+    },
+    {
+      "index": 354,
+      "start": 1439.705,
+      "end": 1444.849,
+      "duration": 5.144,
+      "text": "which is what? What has to be true about the"
+    },
+    {
+      "index": 355,
+      "start": 1444.849,
+      "end": 1448.78,
+      "duration": 3.931,
+      "text": "coefficients? These are the coefficients."
+    },
+    {
+      "index": 356,
+      "start": 1448.78,
+      "end": 1453.791,
+      "duration": 5.011,
+      "text": "What has to be true? The matrix of coefficients must"
+    },
+    {
+      "index": 357,
+      "start": 1453.791,
+      "end": 1458.213,
+      "duration": 4.422,
+      "text": "be invertible. The determinant of coefficients"
+    },
+    {
+      "index": 358,
+      "start": 1458.213,
+      "end": 1462.242,
+      "duration": 4.029,
+      "text": "must be nonzero. So, they are solvable if,"
+    },
+    {
+      "index": 359,
+      "start": 1462.242,
+      "end": 1465.387,
+      "duration": 3.145,
+      "text": "for the c1 and c2, if this thing,"
+    },
+    {
+      "index": 360,
+      "start": 1465.387,
+      "end": 1469.71,
+      "duration": 4.323,
+      "text": "I'm going to write it. Since all of these are"
+    },
+    {
+      "index": 361,
+      "start": 1469.71,
+      "end": 1474.132,
+      "duration": 4.422,
+      "text": "evaluated at x0, I'm going to write it in this"
+    },
+    {
+      "index": 362,
+      "start": 1474.132,
+      "end": 1478.0,
+      "duration": 3.868,
+      "text": "way. y1, the determinant,"
+    },
+    {
+      "index": 363,
+      "start": 1478.0,
+      "end": 1481.4,
+      "duration": 3.4,
+      "text": "whose entries are y1, y2, y1 prime,"
+    },
+    {
+      "index": 364,
+      "start": 1481.4,
+      "end": 1484.9,
+      "duration": 3.5,
+      "text": "and y2 prime,"
+    },
+    {
+      "index": 365,
+      "start": 1484.9,
+      "end": 1489.7,
+      "duration": 4.8,
+      "text": "evaluated at zero, x0, that means that I evaluate"
+    },
+    {
+      "index": 366,
+      "start": 1489.7,
+      "end": 1494.299,
+      "duration": 4.599,
+      "text": "each of the functions in the determinant at x0."
+    },
+    {
+      "index": 367,
+      "start": 1494.299,
+      "end": 1500.0,
+      "duration": 5.701,
+      "text": "I'll write it this way. That should be not zero."
+    },
+    {
+      "index": 368,
+      "start": 1500.0,
+      "end": 1503.925,
+      "duration": 3.925,
+      "text": "So, in other words, the key thing which makes this"
+    },
+    {
+      "index": 369,
+      "start": 1503.925,
+      "end": 1508.731,
+      "duration": 4.806,
+      "text": "possible, makes it possible for us to solve the initial value"
+    },
+    {
+      "index": 370,
+      "start": 1508.731,
+      "end": 1513.297,
+      "duration": 4.566,
+      "text": "problem, is that this funny determinant should not be zero"
+    },
+    {
+      "index": 371,
+      "start": 1513.297,
+      "end": 1516.421,
+      "duration": 3.124,
+      "text": "at the point at which we are interested."
+    },
+    {
+      "index": 372,
+      "start": 1516.421,
+      "end": 1519.865,
+      "duration": 3.444,
+      "text": "Now, this determinant is important in 18.03."
+    },
+    {
+      "index": 373,
+      "start": 1519.865,
+      "end": 1523.31,
+      "duration": 3.445,
+      "text": "It has a name, and this is when you're going"
+    },
+    {
+      "index": 374,
+      "start": 1523.31,
+      "end": 1526.594,
+      "duration": 3.284,
+      "text": "to learn it, if you don't know it already."
+    },
+    {
+      "index": 375,
+      "start": 1526.594,
+      "end": 1531.0,
+      "duration": 4.406,
+      "text": "That determinant is called the Wronskian."
+    },
+    {
+      "index": 376,
+      "start": 1531.0,
+      "end": 1534.622,
+      "duration": 3.622,
+      "text": "The Wronskian of what? If you want to be pompous,"
+    },
+    {
+      "index": 377,
+      "start": 1534.622,
+      "end": 1537.792,
+      "duration": 3.17,
+      "text": "you say this with a V sound instead of a W."
+    },
+    {
+      "index": 378,
+      "start": 1537.792,
+      "end": 1541.641,
+      "duration": 3.849,
+      "text": "But, nobody does except people trying to be pompous."
+    },
+    {
+      "index": 379,
+      "start": 1541.641,
+      "end": 1543.905,
+      "duration": 2.264,
+      "text": "The Wronskian, we'll write a W."
+    },
+    {
+      "index": 380,
+      "start": 1543.905,
+      "end": 1547.075,
+      "duration": 3.17,
+      "text": "Now, notice, you can only calculate it when"
+    },
+    {
+      "index": 381,
+      "start": 1547.075,
+      "end": 1549.716,
+      "duration": 2.641,
+      "text": "you know what the two functions are."
+    },
+    {
+      "index": 382,
+      "start": 1549.716,
+      "end": 1553.415,
+      "duration": 3.699,
+      "text": "So, the Wronskian of the two functions, y1 and y2,"
+    },
+    {
+      "index": 383,
+      "start": 1553.415,
+      "end": 1556.886,
+      "duration": 3.471,
+      "text": "what's the variable? It's not a function of two"
+    },
+    {
+      "index": 384,
+      "start": 1556.886,
+      "end": 1560.509,
+      "duration": 3.623,
+      "text": "variables, y1 and y2. These are just the names of"
+    },
+    {
+      "index": 385,
+      "start": 1560.509,
+      "end": 1564.74,
+      "duration": 4.231,
+      "text": "functions of x. So, when you do it,"
+    },
+    {
+      "index": 386,
+      "start": 1564.74,
+      "end": 1568.495,
+      "duration": 3.755,
+      "text": "put it in, calculate out that determinant."
+    },
+    {
+      "index": 387,
+      "start": 1568.495,
+      "end": 1573.349,
+      "duration": 4.854,
+      "text": "This is a function of x, a function of the independent"
+    },
+    {
+      "index": 388,
+      "start": 1573.349,
+      "end": 1577.195,
+      "duration": 3.846,
+      "text": "variable after you've done the calculation."
+    },
+    {
+      "index": 389,
+      "start": 1577.195,
+      "end": 1580.675,
+      "duration": 3.48,
+      "text": "Anyway, let's write its definition, y1,"
+    },
+    {
+      "index": 390,
+      "start": 1580.675,
+      "end": 1583.24,
+      "duration": 2.565,
+      "text": "y2, y1 prime, y2 prime."
+    },
+    {
+      "index": 391,
+      "start": 1583.24,
+      "end": 1586.995,
+      "duration": 3.755,
+      "text": "Now, in order to do this,"
+    },
+    {
+      "index": 392,
+      "start": 1586.995,
+      "end": 1592.215,
+      "duration": 5.22,
+      "text": "the point is we must know that that Wronskian is not zero,"
+    },
+    {
+      "index": 393,
+      "start": 1592.215,
+      "end": 1597.618,
+      "duration": 5.403,
+      "text": "that the Wronskian of these two functions is not zero at the"
+    },
+    {
+      "index": 394,
+      "start": 1597.618,
+      "end": 1602.326,
+      "duration": 4.708,
+      "text": "point x0. Now, enter a theorem which"
+    },
+    {
+      "index": 395,
+      "start": 1602.326,
+      "end": 1607.159,
+      "duration": 4.833,
+      "text": "you're going to prove for homework, but this is harder."
+    },
+    {
+      "index": 396,
+      "start": 1607.159,
+      "end": 1611.992,
+      "duration": 4.833,
+      "text": "So, it's part two homework. It's not part one homework."
+    },
+    {
+      "index": 397,
+      "start": 1611.992,
+      "end": 1615.929,
+      "duration": 3.937,
+      "text": "In other words, I didn't give you the answer."
+    },
+    {
+      "index": 398,
+      "start": 1615.929,
+      "end": 1621.478,
+      "duration": 5.549,
+      "text": "You've got to find it yourself, alone or in the company of good"
+    },
+    {
+      "index": 399,
+      "start": 1621.478,
+      "end": 1625.013,
+      "duration": 3.535,
+      "text": "friends. So, anyway, here's the"
+    },
+    {
+      "index": 400,
+      "start": 1625.013,
+      "end": 1628.673,
+      "duration": 3.66,
+      "text": "Wronskian. Now, what can we say for sure?"
+    },
+    {
+      "index": 401,
+      "start": 1628.673,
+      "end": 1633.431,
+      "duration": 4.758,
+      "text": "Note, suppose y1 and y, just to get you a feeling for"
+    },
+    {
+      "index": 402,
+      "start": 1633.431,
+      "end": 1636.816,
+      "duration": 3.385,
+      "text": "it a little bit, suppose they were not"
+    },
+    {
+      "index": 403,
+      "start": 1636.816,
+      "end": 1640.751,
+      "duration": 3.935,
+      "text": "independent. The word for not independent is"
+    },
+    {
+      "index": 404,
+      "start": 1640.751,
+      "end": 1644.228,
+      "duration": 3.477,
+      "text": "dependent. Suppose they were dependent."
+    },
+    {
+      "index": 405,
+      "start": 1644.228,
+      "end": 1648.437,
+      "duration": 4.209,
+      "text": "In other words, suppose that y2 were a constant"
+    },
+    {
+      "index": 406,
+      "start": 1648.437,
+      "end": 1653.379,
+      "duration": 4.942,
+      "text": "multiple of y1. We know that's not the case"
+    },
+    {
+      "index": 407,
+      "start": 1653.379,
+      "end": 1657.961,
+      "duration": 4.582,
+      "text": "because our functions are supposed to be independent."
+    },
+    {
+      "index": 408,
+      "start": 1657.961,
+      "end": 1662.544,
+      "duration": 4.583,
+      "text": "But suppose they weren't. What would the value of the"
+    },
+    {
+      "index": 409,
+      "start": 1662.544,
+      "end": 1666.245,
+      "duration": 3.701,
+      "text": "Wronskian be? If y2 is a constant times y1,"
+    },
+    {
+      "index": 410,
+      "start": 1666.245,
+      "end": 1670.651,
+      "duration": 4.406,
+      "text": "then y2 prime is that same constant times y1 prime."
+    },
+    {
+      "index": 411,
+      "start": 1670.651,
+      "end": 1673.735,
+      "duration": 3.084,
+      "text": "What's the value of the determinant?"
+    },
+    {
+      "index": 412,
+      "start": 1673.735,
+      "end": 1676.908,
+      "duration": 3.173,
+      "text": "Zero. For what values of x is it zero"
+    },
+    {
+      "index": 413,
+      "start": 1676.908,
+      "end": 1681.049,
+      "duration": 4.141,
+      "text": "for all values of x? And now, that's the theorem"
+    },
+    {
+      "index": 414,
+      "start": 1681.049,
+      "end": 1686.16,
+      "duration": 5.111,
+      "text": "that you're going to prove, that if y1 and y2 are solutions"
+    },
+    {
+      "index": 415,
+      "start": 1686.16,
+      "end": 1690.831,
+      "duration": 4.671,
+      "text": "to the ODE, I won't keep, say, it's the ODE we've been"
+    },
+    {
+      "index": 416,
+      "start": 1690.831,
+      "end": 1694.708,
+      "duration": 3.877,
+      "text": "talking about, y double prime plus py."
+    },
+    {
+      "index": 417,
+      "start": 1694.708,
+      "end": 1700.509,
+      "duration": 5.801,
+      "text": "But the linear homogeneous with"
+    },
+    {
+      "index": 418,
+      "start": 1700.509,
+      "end": 1706.849,
+      "duration": 6.34,
+      "text": "not constant coefficients, just linear homogeneous second"
+    },
+    {
+      "index": 419,
+      "start": 1706.849,
+      "end": 1709.113,
+      "duration": 2.264,
+      "text": "order. Our solutions,"
+    },
+    {
+      "index": 420,
+      "start": 1709.113,
+      "end": 1713.075,
+      "duration": 3.962,
+      "text": "as there are only two possibilities,"
+    },
+    {
+      "index": 421,
+      "start": 1713.075,
+      "end": 1717.214,
+      "duration": 4.139,
+      "text": "either-or. Either the Wronskian of y,"
+    },
+    {
+      "index": 422,
+      "start": 1717.214,
+      "end": 1719.94,
+      "duration": 2.726,
+      "text": "there are only two possibilities."
+    },
+    {
+      "index": 423,
+      "start": 1719.94,
+      "end": 1724.029,
+      "duration": 4.089,
+      "text": "Either the Wronskian of y1 and y2 is always zero,"
+    },
+    {
+      "index": 424,
+      "start": 1724.029,
+      "end": 1727.607,
+      "duration": 3.578,
+      "text": "identically zero, zero for all values of x."
+    },
+    {
+      "index": 425,
+      "start": 1727.607,
+      "end": 1731.099,
+      "duration": 3.492,
+      "text": "This is redundant. When I say identically,"
+    },
+    {
+      "index": 426,
+      "start": 1731.099,
+      "end": 1736.04,
+      "duration": 4.941,
+      "text": "I mean for all values of x. But, I am just making assurance"
+    },
+    {
+      "index": 427,
+      "start": 1736.04,
+      "end": 1741.759,
+      "duration": 5.719,
+      "text": "doubly sure. Or, or the Wronskian is never"
+    },
+    {
+      "index": 428,
+      "start": 1741.759,
+      "end": 1746.037,
+      "duration": 4.278,
+      "text": "zero. Now, there is no notation as"
+    },
+    {
+      "index": 429,
+      "start": 1746.037,
+      "end": 1750.962,
+      "duration": 4.925,
+      "text": "for that. I'd better just write it out,"
+    },
+    {
+      "index": 430,
+      "start": 1750.962,
+      "end": 1753.296,
+      "duration": 2.334,
+      "text": "is never zero, i.e."
+    },
+    {
+      "index": 431,
+      "start": 1753.296,
+      "end": 1755.759,
+      "duration": 2.463,
+      "text": "for no x is it, i.e."
+    },
+    {
+      "index": 432,
+      "start": 1755.759,
+      "end": 1760.555,
+      "duration": 4.796,
+      "text": "for all x. There's no way to say that."
+    },
+    {
+      "index": 433,
+      "start": 1760.555,
+      "end": 1766.0,
+      "duration": 5.445,
+      "text": "I mean, for all values of x, it's not zero."
+    },
+    {
+      "index": 434,
+      "start": 1766.0,
+      "end": 1772.87,
+      "duration": 6.87,
+      "text": "That means, there is not a single point for which it's"
+    },
+    {
+      "index": 435,
+      "start": 1772.87,
+      "end": 1775.333,
+      "duration": 2.463,
+      "text": "zero. In particular,"
+    },
+    {
+      "index": 436,
+      "start": 1775.333,
+      "end": 1783.154,
+      "duration": 7.821,
+      "text": "it's not zero here. So, this is your homework:"
+    },
+    {
+      "index": 437,
+      "start": 1783.154,
+      "end": 1785.824,
+      "duration": 2.67,
+      "text": "problem five, part two."
+    },
+    {
+      "index": 438,
+      "start": 1785.824,
+      "end": 1792.74,
+      "duration": 6.916,
+      "text": "I'll give you a method of proving it, which was discovered"
+    },
+    {
+      "index": 439,
+      "start": 1792.74,
+      "end": 1797.23,
+      "duration": 4.49,
+      "text": "by the famous Norwegian mathematician,"
+    },
+    {
+      "index": 440,
+      "start": 1797.23,
+      "end": 1802.326,
+      "duration": 5.096,
+      "text": "Abel, who is, I guess, the centenary of his"
+    },
+    {
+      "index": 441,
+      "start": 1802.326,
+      "end": 1809.0,
+      "duration": 6.674,
+      "text": "birth, I guess, was just celebrated last year."
+    },
+    {
+      "index": 442,
+      "start": 1809.0,
+      "end": 1813.875,
+      "duration": 4.875,
+      "text": "He has one of the truly tragic stories in mathematics,"
+    },
+    {
+      "index": 443,
+      "start": 1813.875,
+      "end": 1818.751,
+      "duration": 4.876,
+      "text": "which I think you can read. It must be a Simmons book,"
+    },
+    {
+      "index": 444,
+      "start": 1818.751,
+      "end": 1822.432,
+      "duration": 3.681,
+      "text": "if you have that. Simmons is very good on"
+    },
+    {
+      "index": 445,
+      "start": 1822.432,
+      "end": 1824.731,
+      "duration": 2.299,
+      "text": "biographies. Look up Abel."
+    },
+    {
+      "index": 446,
+      "start": 1824.731,
+      "end": 1829.976,
+      "duration": 5.245,
+      "text": "He'll have a biography of Abel, and you can weep if you're"
+    },
+    {
+      "index": 447,
+      "start": 1829.976,
+      "end": 1834.319,
+      "duration": 4.343,
+      "text": "feeling sad. He died at the age of 26 of"
+    },
+    {
+      "index": 448,
+      "start": 1834.319,
+      "end": 1837.411,
+      "duration": 3.092,
+      "text": "tuberculosis, having done a number of"
+    },
+    {
+      "index": 449,
+      "start": 1837.411,
+      "end": 1841.705,
+      "duration": 4.294,
+      "text": "sensational things, none of which was recognized in"
+    },
+    {
+      "index": 450,
+      "start": 1841.705,
+      "end": 1846.343,
+      "duration": 4.638,
+      "text": "his lifetime because people buried his papers under big"
+    },
+    {
+      "index": 451,
+      "start": 1846.343,
+      "end": 1849.435,
+      "duration": 3.092,
+      "text": "piles of papers. So, he died unknown,"
+    },
+    {
+      "index": 452,
+      "start": 1849.435,
+      "end": 1853.128,
+      "duration": 3.693,
+      "text": "uncelebrated, and now he's Norway's greatest"
+    },
+    {
+      "index": 453,
+      "start": 1853.128,
+      "end": 1856.478,
+      "duration": 3.35,
+      "text": "culture hero. In the middle of a park in"
+    },
+    {
+      "index": 454,
+      "start": 1856.478,
+      "end": 1863.064,
+      "duration": 6.586,
+      "text": "Oslo, there's a huge statue. And, since nobody knows what"
+    },
+    {
+      "index": 455,
+      "start": 1863.064,
+      "end": 1867.99,
+      "duration": 4.926,
+      "text": "Abel looked like, the statue is way up high so"
+    },
+    {
+      "index": 456,
+      "start": 1867.99,
+      "end": 1873.572,
+      "duration": 5.582,
+      "text": "you can't see very well. But, the inscription on the"
+    },
+    {
+      "index": 457,
+      "start": 1873.572,
+      "end": 1879.81,
+      "duration": 6.238,
+      "text": "bottom says Niels Henrik Abel, 1801-1826 or something like"
+    },
+    {
+      "index": 458,
+      "start": 1879.81,
+      "end": 1882.0,
+      "duration": 2.19,
+      "text": "that. Now, --"
+    },
+    {
+      "index": 459,
+      "start": 1898.0,
+      "end": 1901.101,
+      "duration": 3.101,
+      "text": "the choice, I'm still, believe it or not,"
+    },
+    {
+      "index": 460,
+      "start": 1901.101,
+      "end": 1904.347,
+      "duration": 3.246,
+      "text": "aiming at question two, but I have another big"
+    },
+    {
+      "index": 461,
+      "start": 1904.347,
+      "end": 1907.377,
+      "duration": 3.03,
+      "text": "parentheses to open. And, when I closed it,"
+    },
+    {
+      "index": 462,
+      "start": 1907.377,
+      "end": 1910.334,
+      "duration": 2.957,
+      "text": "the answer to question two will be simple."
+    },
+    {
+      "index": 463,
+      "start": 1910.334,
+      "end": 1913.868,
+      "duration": 3.534,
+      "text": "But, I think it's very desirable that you get this"
+    },
+    {
+      "index": 464,
+      "start": 1913.868,
+      "end": 1917.691,
+      "duration": 3.823,
+      "text": "second big parentheses. It will help you to understand"
+    },
+    {
+      "index": 465,
+      "start": 1917.691,
+      "end": 1922.514,
+      "duration": 4.823,
+      "text": "something important. It will help you on your"
+    },
+    {
+      "index": 466,
+      "start": 1922.514,
+      "end": 1928.066,
+      "duration": 5.552,
+      "text": "problem set tomorrow night. I don't have to apologize."
+    },
+    {
+      "index": 467,
+      "start": 1928.066,
+      "end": 1932.676,
+      "duration": 4.61,
+      "text": "I'm just going to do it. So, the question is,"
+    },
+    {
+      "index": 468,
+      "start": 1932.676,
+      "end": 1938.123,
+      "duration": 5.447,
+      "text": "the thing you have to understand is that when I write"
+    },
+    {
+      "index": 469,
+      "start": 1938.123,
+      "end": 1943.152,
+      "duration": 5.029,
+      "text": "this combination, I'm claiming that these are all"
+    },
+    {
+      "index": 470,
+      "start": 1943.152,
+      "end": 1947.342,
+      "duration": 4.19,
+      "text": "the solutions. I haven't proved that yet."
+    },
+    {
+      "index": 471,
+      "start": 1947.342,
+      "end": 1953.0,
+      "duration": 5.658,
+      "text": "But, they are going to be all the solutions"
+    },
+    {
+      "index": 472,
+      "start": 1953.0,
+      "end": 1956.76,
+      "duration": 3.76,
+      "text": "The point is, there's nothing sacrosanct"
+    },
+    {
+      "index": 473,
+      "start": 1956.76,
+      "end": 1961.003,
+      "duration": 4.243,
+      "text": "about the y1 and y2. This is exactly the same"
+    },
+    {
+      "index": 474,
+      "start": 1961.003,
+      "end": 1966.5,
+      "duration": 5.497,
+      "text": "collection as a collection which I would write using other"
+    },
+    {
+      "index": 475,
+      "start": 1966.5,
+      "end": 1969.971,
+      "duration": 3.471,
+      "text": "constants. Let's call them u1 and u2."
+    },
+    {
+      "index": 476,
+      "start": 1969.971,
+      "end": 1975.275,
+      "duration": 5.304,
+      "text": "They are exactly the same, where u1 and u2 are any other"
+    },
+    {
+      "index": 477,
+      "start": 1975.275,
+      "end": 1980.0,
+      "duration": 4.725,
+      "text": "pair of linearly independent solutions."
+    },
+    {
+      "index": 478,
+      "start": 1980.0,
+      "end": 1985.022,
+      "duration": 5.022,
+      "text": "Any other pair of independent solutions, they must be"
+    },
+    {
+      "index": 479,
+      "start": 1985.022,
+      "end": 1990.142,
+      "duration": 5.12,
+      "text": "independent, either a constant multiple of each other."
+    },
+    {
+      "index": 480,
+      "start": 1990.142,
+      "end": 1993.812,
+      "duration": 3.67,
+      "text": "In other words, u1 is some combination,"
+    },
+    {
+      "index": 481,
+      "start": 1993.812,
+      "end": 1998.448,
+      "duration": 4.636,
+      "text": "now I'm really stuck because I don't know how to,"
+    },
+    {
+      "index": 482,
+      "start": 1998.448,
+      "end": 2002.988,
+      "duration": 4.54,
+      "text": "c1 bar, let's say, that means a special value of"
+    },
+    {
+      "index": 483,
+      "start": 2002.988,
+      "end": 2008.59,
+      "duration": 5.602,
+      "text": "c1, and a special value of c2, and u2 is some other special"
+    },
+    {
+      "index": 484,
+      "start": 2008.59,
+      "end": 2011.585,
+      "duration": 2.995,
+      "text": "value, oh my God, c1 double bar,"
+    },
+    {
+      "index": 485,
+      "start": 2011.585,
+      "end": 2016.316,
+      "duration": 4.731,
+      "text": "how's that? The notation is getting worse"
+    },
+    {
+      "index": 486,
+      "start": 2016.316,
+      "end": 2018.633,
+      "duration": 2.317,
+      "text": "and worse. I apologize for it."
+    },
+    {
+      "index": 487,
+      "start": 2018.633,
+      "end": 2022.307,
+      "duration": 3.674,
+      "text": "In other words, I could pick y1 and y2 and make"
+    },
+    {
+      "index": 488,
+      "start": 2022.307,
+      "end": 2025.423,
+      "duration": 3.116,
+      "text": "up all of these. And, I'd get a bunch of"
+    },
+    {
+      "index": 489,
+      "start": 2025.423,
+      "end": 2028.378,
+      "duration": 2.955,
+      "text": "solutions. But, I could also pick some"
+    },
+    {
+      "index": 490,
+      "start": 2028.378,
+      "end": 2031.573,
+      "duration": 3.195,
+      "text": "other family, some other two guys in this"
+    },
+    {
+      "index": 491,
+      "start": 2031.573,
+      "end": 2036.686,
+      "duration": 5.113,
+      "text": "family, and just as well express the solutions in terms of u1 and"
+    },
+    {
+      "index": 492,
+      "start": 2036.686,
+      "end": 2039.402,
+      "duration": 2.716,
+      "text": "u2. Now, well, why is he telling us"
+    },
+    {
+      "index": 493,
+      "start": 2039.402,
+      "end": 2043.378,
+      "duration": 3.976,
+      "text": "that? Well, the point is that the y1"
+    },
+    {
+      "index": 494,
+      "start": 2043.378,
+      "end": 2048.134,
+      "duration": 4.756,
+      "text": "and the y2 are typically the ones you get easily from solving"
+    },
+    {
+      "index": 495,
+      "start": 2048.134,
+      "end": 2051.542,
+      "duration": 3.408,
+      "text": "the equations, like e to the x and e"
+    },
+    {
+      "index": 496,
+      "start": 2051.542,
+      "end": 2055.268,
+      "duration": 3.726,
+      "text": "to the 2x. That's what you've gotten,"
+    },
+    {
+      "index": 497,
+      "start": 2055.268,
+      "end": 2058.756,
+      "duration": 3.488,
+      "text": "or cosine x and sine x,"
+    },
+    {
+      "index": 498,
+      "start": 2058.756,
+      "end": 2062.085,
+      "duration": 3.329,
+      "text": "something like that. But, for certain ways,"
+    },
+    {
+      "index": 499,
+      "start": 2062.085,
+      "end": 2066.445,
+      "duration": 4.36,
+      "text": "they might not be the best way of writing the solutions."
+    },
+    {
+      "index": 500,
+      "start": 2066.445,
+      "end": 2071.121,
+      "duration": 4.676,
+      "text": "There is another way of writing those that you should learn,"
+    },
+    {
+      "index": 501,
+      "start": 2071.121,
+      "end": 2075.243,
+      "duration": 4.122,
+      "text": "and that's called finding normalized, the normalized."
+    },
+    {
+      "index": 502,
+      "start": 2075.243,
+      "end": 2080.0,
+      "duration": 4.757,
+      "text": "They are okay, but they are not normalized."
+    },
+    {
+      "index": 503,
+      "start": 2080.0,
+      "end": 2082.669,
+      "duration": 2.669,
+      "text": "For some things, the normalized solutions are"
+    },
+    {
+      "index": 504,
+      "start": 2082.669,
+      "end": 2084.975,
+      "duration": 2.306,
+      "text": "the best. I'll explain to you what they"
+    },
+    {
+      "index": 505,
+      "start": 2084.975,
+      "end": 2088.009,
+      "duration": 3.034,
+      "text": "are, and I'll explain to you what they're good for."
+    },
+    {
+      "index": 506,
+      "start": 2088.009,
+      "end": 2090.679,
+      "duration": 2.67,
+      "text": "You'll see immediately what they're good for."
+    },
+    {
+      "index": 507,
+      "start": 2090.679,
+      "end": 2093.652,
+      "duration": 2.973,
+      "text": "Normalized solutions, now, you have to specify the"
+    },
+    {
+      "index": 508,
+      "start": 2093.652,
+      "end": 2095.655,
+      "duration": 2.003,
+      "text": "point at which you're normalizing."
+    },
+    {
+      "index": 509,
+      "start": 2095.655,
+      "end": 2098.021,
+      "duration": 2.366,
+      "text": "In general, it would be x nought,"
+    },
+    {
+      "index": 510,
+      "start": 2098.021,
+      "end": 2101.359,
+      "duration": 3.338,
+      "text": "but let's, at this point, since I don't have an infinity"
+    },
+    {
+      "index": 511,
+      "start": 2101.359,
+      "end": 2105.0,
+      "duration": 3.641,
+      "text": "of time, to simplify things, let's say zero."
+    },
+    {
+      "index": 512,
+      "start": 2105.0,
+      "end": 2108.846,
+      "duration": 3.846,
+      "text": "It could be x nought, any point would do just as"
+    },
+    {
+      "index": 513,
+      "start": 2108.846,
+      "end": 2111.196,
+      "duration": 2.35,
+      "text": "well. But, zero is the most common"
+    },
+    {
+      "index": 514,
+      "start": 2111.196,
+      "end": 2113.333,
+      "duration": 2.137,
+      "text": "choice. What are the normalized"
+    },
+    {
+      "index": 515,
+      "start": 2113.333,
+      "end": 2115.398,
+      "duration": 2.065,
+      "text": "solutions? Well, first of all,"
+    },
+    {
+      "index": 516,
+      "start": 2115.398,
+      "end": 2119.245,
+      "duration": 3.847,
+      "text": "I have to give them names. I want to still call them y."
+    },
+    {
+      "index": 517,
+      "start": 2119.245,
+      "end": 2121.809,
+      "duration": 2.564,
+      "text": "So, I'll call them capital Y1 and Y2."
+    },
+    {
+      "index": 518,
+      "start": 2121.809,
+      "end": 2125.37,
+      "duration": 3.561,
+      "text": "And, what they are, are the solutions which satisfy"
+    },
+    {
+      "index": 519,
+      "start": 2125.37,
+      "end": 2127.507,
+      "duration": 2.137,
+      "text": "certain, special, very special,"
+    },
+    {
+      "index": 520,
+      "start": 2127.507,
+      "end": 2131.871,
+      "duration": 4.364,
+      "text": "initial conditions. And, what are those?"
+    },
+    {
+      "index": 521,
+      "start": 2131.871,
+      "end": 2137.204,
+      "duration": 5.333,
+      "text": "So, they're the ones which satisfy, the initial conditions"
+    },
+    {
+      "index": 522,
+      "start": 2137.204,
+      "end": 2143.005,
+      "duration": 5.801,
+      "text": "for Y1 are, of course there are going to be guys that look like"
+    },
+    {
+      "index": 523,
+      "start": 2143.005,
+      "end": 2146.28,
+      "duration": 3.275,
+      "text": "this. The only thing that's going to"
+    },
+    {
+      "index": 524,
+      "start": 2146.28,
+      "end": 2151.894,
+      "duration": 5.614,
+      "text": "make them distinctive is the initial conditions they satisfy."
+    },
+    {
+      "index": 525,
+      "start": 2151.894,
+      "end": 2156.573,
+      "duration": 4.679,
+      "text": "Y1 has to satisfy at zero. Its value should be one,"
+    },
+    {
+      "index": 526,
+      "start": 2156.573,
+      "end": 2162.0,
+      "duration": 5.427,
+      "text": "and the value of its derivative should be zero."
+    },
+    {
+      "index": 527,
+      "start": 2162.0,
+      "end": 2167.384,
+      "duration": 5.384,
+      "text": "For Y2, it's just the opposite. Here, the value of the function"
+    },
+    {
+      "index": 528,
+      "start": 2167.384,
+      "end": 2171.205,
+      "duration": 3.821,
+      "text": "should be zero at zero. But, the value of its"
+    },
+    {
+      "index": 529,
+      "start": 2171.205,
+      "end": 2174.071,
+      "duration": 2.866,
+      "text": "derivative, now, I want to be one."
+    },
+    {
+      "index": 530,
+      "start": 2174.071,
+      "end": 2177.631,
+      "duration": 3.56,
+      "text": "Let me give you a trivial example of this,"
+    },
+    {
+      "index": 531,
+      "start": 2177.631,
+      "end": 2181.452,
+      "duration": 3.821,
+      "text": "and then one, which is a little less trivial,"
+    },
+    {
+      "index": 532,
+      "start": 2181.452,
+      "end": 2185.881,
+      "duration": 4.429,
+      "text": "so you'll have some feeling for what I'm asking for."
+    },
+    {
+      "index": 533,
+      "start": 2185.881,
+      "end": 2188.747,
+      "duration": 2.866,
+      "text": "Suppose the equation, for example,"
+    },
+    {
+      "index": 534,
+      "start": 2188.747,
+      "end": 2193.002,
+      "duration": 4.255,
+      "text": "is y double prime plus, well, let's really make it"
+    },
+    {
+      "index": 535,
+      "start": 2193.002,
+      "end": 2196.636,
+      "duration": 3.634,
+      "text": "simple. Okay, you know the standard"
+    },
+    {
+      "index": 536,
+      "start": 2196.636,
+      "end": 2199.303,
+      "duration": 2.667,
+      "text": "solutions are y1 is cosine x,"
+    },
+    {
+      "index": 537,
+      "start": 2199.303,
+      "end": 2201.242,
+      "duration": 1.939,
+      "text": "and y2 is sine x."
+    },
+    {
+      "index": 538,
+      "start": 2201.242,
+      "end": 2204.333,
+      "duration": 3.091,
+      "text": "These are functions, which, when you take the second"
+    },
+    {
+      "index": 539,
+      "start": 2204.333,
+      "end": 2206.818,
+      "duration": 2.485,
+      "text": "derivative, they turn into their negative."
+    },
+    {
+      "index": 540,
+      "start": 2206.818,
+      "end": 2210.333,
+      "duration": 3.515,
+      "text": "You know, you could go the complex roots are i and minus i,"
+    },
+    {
+      "index": 541,
+      "start": 2210.333,
+      "end": 2212.272,
+      "duration": 1.939,
+      "text": "and blah, blah, blah, blah, blah,"
+    },
+    {
+      "index": 542,
+      "start": 2212.272,
+      "end": 2213.909,
+      "duration": 1.637,
+      "text": "blah. If you do it that way,"
+    },
+    {
+      "index": 543,
+      "start": 2213.909,
+      "end": 2216.09,
+      "duration": 2.181,
+      "text": "fine. But at some point in the course"
+    },
+    {
+      "index": 544,
+      "start": 2216.09,
+      "end": 2219.06,
+      "duration": 2.97,
+      "text": "you have to be able to write down and, right away,"
+    },
+    {
+      "index": 545,
+      "start": 2219.06,
+      "end": 2221.181,
+      "duration": 2.121,
+      "text": "oh, yeah, cosine x, sine x."
+    },
+    {
+      "index": 546,
+      "start": 2221.181,
+      "end": 2225.775,
+      "duration": 4.594,
+      "text": "Okay, what are the normalized"
+    },
+    {
+      "index": 547,
+      "start": 2225.775,
+      "end": 2229.316,
+      "duration": 3.541,
+      "text": "things? Well, what's the value of this"
+    },
+    {
+      "index": 548,
+      "start": 2229.316,
+      "end": 2231.039,
+      "duration": 1.723,
+      "text": "at zero? It is one."
+    },
+    {
+      "index": 549,
+      "start": 2231.039,
+      "end": 2235.059,
+      "duration": 4.02,
+      "text": "What's the value of its derivative at zero?"
+    },
+    {
+      "index": 550,
+      "start": 2235.059,
+      "end": 2236.59,
+      "duration": 1.531,
+      "text": "Zero. This is Y1."
+    },
+    {
+      "index": 551,
+      "start": 2236.59,
+      "end": 2242.524,
+      "duration": 5.934,
+      "text": "This is the only case in which you locked on immediately to the"
+    },
+    {
+      "index": 552,
+      "start": 2242.524,
+      "end": 2246.066,
+      "duration": 3.542,
+      "text": "normalized solutions. In the same way,"
+    },
+    {
+      "index": 553,
+      "start": 2246.066,
+      "end": 2252.0,
+      "duration": 5.934,
+      "text": "this guy is Y2 because its value at zero is zero."
+    },
+    {
+      "index": 554,
+      "start": 2252.0,
+      "end": 2255.5,
+      "duration": 3.5,
+      "text": "It's value of its derivative at zero is one."
+    },
+    {
+      "index": 555,
+      "start": 2255.5,
+      "end": 2259.162,
+      "duration": 3.662,
+      "text": "So, this is Y2. Okay, now let's look at a case"
+    },
+    {
+      "index": 556,
+      "start": 2259.162,
+      "end": 2264.29,
+      "duration": 5.128,
+      "text": "where you don't immediately lock on to the normalized solutions."
+    },
+    {
+      "index": 557,
+      "start": 2264.29,
+      "end": 2267.709,
+      "duration": 3.419,
+      "text": "Very simple: all I have to do is change the"
+    },
+    {
+      "index": 558,
+      "start": 2267.709,
+      "end": 2269.337,
+      "duration": 1.628,
+      "text": "sign. Here, you know,"
+    },
+    {
+      "index": 559,
+      "start": 2269.337,
+      "end": 2274.22,
+      "duration": 4.883,
+      "text": "think through r squared minus one equals zero."
+    },
+    {
+      "index": 560,
+      "start": 2274.22,
+      "end": 2278.372,
+      "duration": 4.152,
+      "text": "The characteristic roots are plus one and minus one,"
+    },
+    {
+      "index": 561,
+      "start": 2278.372,
+      "end": 2280.935,
+      "duration": 2.563,
+      "text": "right? And therefore,"
+    },
+    {
+      "index": 562,
+      "start": 2280.935,
+      "end": 2284.81,
+      "duration": 3.875,
+      "text": "the solution is e to the x, and e to the negative x."
+    },
+    {
+      "index": 563,
+      "start": 2284.81,
+      "end": 2287.482,
+      "duration": 2.672,
+      "text": "So, the solutions you find by"
+    },
+    {
+      "index": 564,
+      "start": 2287.482,
+      "end": 2291.29,
+      "duration": 3.808,
+      "text": "the usual way of solving it is y1 equals e to the x,"
+    },
+    {
+      "index": 565,
+      "start": 2291.29,
+      "end": 2295.032,
+      "duration": 3.742,
+      "text": "and y2 equals e to the negative x."
+    },
+    {
+      "index": 566,
+      "start": 2295.032,
+      "end": 2297.103,
+      "duration": 2.071,
+      "text": "Those are the standard solution."
+    },
+    {
+      "index": 567,
+      "start": 2297.103,
+      "end": 2299.709,
+      "duration": 2.606,
+      "text": "So, the general solution is of the form."
+    },
+    {
+      "index": 568,
+      "start": 2299.709,
+      "end": 2303.851,
+      "duration": 4.142,
+      "text": "So, the general solution is of the form c1 e to the x plus c2 e"
+    },
+    {
+      "index": 569,
+      "start": 2303.851,
+      "end": 2306.523,
+      "duration": 2.672,
+      "text": "to the negative x."
+    },
+    {
+      "index": 570,
+      "start": 2306.523,
+      "end": 2311.0,
+      "duration": 4.477,
+      "text": "Now, what I want to find out is what is Y1 and Y2?"
+    },
+    {
+      "index": 571,
+      "start": 2311.0,
+      "end": 2316.344,
+      "duration": 5.344,
+      "text": "How do I find out what Y1 is? Well, I have to satisfy initial"
+    },
+    {
+      "index": 572,
+      "start": 2316.344,
+      "end": 2318.839,
+      "duration": 2.495,
+      "text": "conditions. So, if this is y,"
+    },
+    {
+      "index": 573,
+      "start": 2318.839,
+      "end": 2323.114,
+      "duration": 4.275,
+      "text": "let's write down here, if you can still see that,"
+    },
+    {
+      "index": 574,
+      "start": 2323.114,
+      "end": 2328.637,
+      "duration": 5.523,
+      "text": "y prime is c1 e to the x minus c2 e to the negative x ."
+    },
+    {
+      "index": 575,
+      "start": 2328.637,
+      "end": 2331.755,
+      "duration": 3.118,
+      "text": "So, if I plug in,"
+    },
+    {
+      "index": 576,
+      "start": 2331.755,
+      "end": 2336.655,
+      "duration": 4.9,
+      "text": "I want y of zero to be one, I want this guy at the point"
+    },
+    {
+      "index": 577,
+      "start": 2336.655,
+      "end": 2340.485,
+      "duration": 3.83,
+      "text": "zero to be one. What equation does that give"
+    },
+    {
+      "index": 578,
+      "start": 2340.485,
+      "end": 2344.523,
+      "duration": 4.038,
+      "text": "me? That gives me c1 plus c2,"
+    },
+    {
+      "index": 579,
+      "start": 2344.523,
+      "end": 2348.023,
+      "duration": 3.5,
+      "text": "plugging in x equals zero,"
+    },
+    {
+      "index": 580,
+      "start": 2348.023,
+      "end": 2351.116,
+      "duration": 3.093,
+      "text": "equals the value of this thing at zero."
+    },
+    {
+      "index": 581,
+      "start": 2351.116,
+      "end": 2354.779,
+      "duration": 3.663,
+      "text": "So, that's supposed to be one."
+    },
+    {
+      "index": 582,
+      "start": 2354.779,
+      "end": 2359.174,
+      "duration": 4.395,
+      "text": "How about the other guy? The value of its derivative is"
+    },
+    {
+      "index": 583,
+      "start": 2359.174,
+      "end": 2364.058,
+      "duration": 4.884,
+      "text": "supposed to come out to be zero. And, what is its derivative?"
+    },
+    {
+      "index": 584,
+      "start": 2364.058,
+      "end": 2366.581,
+      "duration": 2.523,
+      "text": "Well, plug into this expression."
+    },
+    {
+      "index": 585,
+      "start": 2366.581,
+      "end": 2372.3,
+      "duration": 5.719,
+      "text": "It's c1 minus c2. Okay, what's the solution to"
+    },
+    {
+      "index": 586,
+      "start": 2372.3,
+      "end": 2376.325,
+      "duration": 4.025,
+      "text": "those pair of equations? c2 has to be equal to c1."
+    },
+    {
+      "index": 587,
+      "start": 2376.325,
+      "end": 2379.611,
+      "duration": 3.286,
+      "text": "The sum of the two of them has to be one."
+    },
+    {
+      "index": 588,
+      "start": 2379.611,
+      "end": 2382.98,
+      "duration": 3.369,
+      "text": "Each one, therefore, is equal to one half."
+    },
+    {
+      "index": 589,
+      "start": 2382.98,
+      "end": 2386.677,
+      "duration": 3.697,
+      "text": "And so, what's the value of Y1? Y1, therefore,"
+    },
+    {
+      "index": 590,
+      "start": 2386.677,
+      "end": 2390.291,
+      "duration": 3.614,
+      "text": "is the function where c1 and c2 are one half."
+    },
+    {
+      "index": 591,
+      "start": 2390.291,
+      "end": 2395.22,
+      "duration": 4.929,
+      "text": "It's the function e to the x plus e to the negative x divided"
+    },
+    {
+      "index": 592,
+      "start": 2395.22,
+      "end": 2399.0,
+      "duration": 3.78,
+      "text": "by two."
+    },
+    {
+      "index": 593,
+      "start": 2399.0,
+      "end": 2403.0,
+      "duration": 4.0,
+      "text": "In the same way, I won't repeat the calculation."
+    },
+    {
+      "index": 594,
+      "start": 2403.0,
+      "end": 2407.34,
+      "duration": 4.34,
+      "text": "You can do yourself. Same calculation shows that Y2,"
+    },
+    {
+      "index": 595,
+      "start": 2407.34,
+      "end": 2410.148,
+      "duration": 2.808,
+      "text": "so, put in the initial conditions."
+    },
+    {
+      "index": 596,
+      "start": 2410.148,
+      "end": 2415.17,
+      "duration": 5.022,
+      "text": "The answer will be that Y2 is equal to e to the x minus e to"
+    },
+    {
+      "index": 597,
+      "start": 2415.17,
+      "end": 2419.595,
+      "duration": 4.425,
+      "text": "the minus x divided by two."
+    },
+    {
+      "index": 598,
+      "start": 2419.595,
+      "end": 2422.234,
+      "duration": 2.639,
+      "text": "These are the special functions."
+    },
+    {
+      "index": 599,
+      "start": 2422.234,
+      "end": 2425.808,
+      "duration": 3.574,
+      "text": "For this equation, these are the normalized"
+    },
+    {
+      "index": 600,
+      "start": 2425.808,
+      "end": 2428.702,
+      "duration": 2.894,
+      "text": "solutions. They are better than the"
+    },
+    {
+      "index": 601,
+      "start": 2428.702,
+      "end": 2435.0,
+      "duration": 6.298,
+      "text": "original solutions because their initial values are nicer."
+    },
+    {
+      "index": 602,
+      "start": 2435.0,
+      "end": 2437.591,
+      "duration": 2.591,
+      "text": "Just check it. The initial value,"
+    },
+    {
+      "index": 603,
+      "start": 2437.591,
+      "end": 2440.993,
+      "duration": 3.402,
+      "text": "when x is equal to zero, the initial value,"
+    },
+    {
+      "index": 604,
+      "start": 2440.993,
+      "end": 2444.8,
+      "duration": 3.807,
+      "text": "this has is zero. Here, when x is equal to zero,"
+    },
+    {
+      "index": 605,
+      "start": 2444.8,
+      "end": 2447.473,
+      "duration": 2.673,
+      "text": "the value of the function is zero."
+    },
+    {
+      "index": 606,
+      "start": 2447.473,
+      "end": 2451.199,
+      "duration": 3.726,
+      "text": "But, the value of its derivative, these cancel,"
+    },
+    {
+      "index": 607,
+      "start": 2451.199,
+      "end": 2454.034,
+      "duration": 2.835,
+      "text": "is one. So, these are the good guys."
+    },
+    {
+      "index": 608,
+      "start": 2454.034,
+      "end": 2457.436,
+      "duration": 3.402,
+      "text": "Okay, there's no colored chalk this period."
+    },
+    {
+      "index": 609,
+      "start": 2457.436,
+      "end": 2461.705,
+      "duration": 4.269,
+      "text": "Okay, there was colored chalk. There's one."
+    },
+    {
+      "index": 610,
+      "start": 2461.705,
+      "end": 2464.411,
+      "duration": 2.706,
+      "text": "So, for this equation, these are the good guys."
+    },
+    {
+      "index": 611,
+      "start": 2464.411,
+      "end": 2467.941,
+      "duration": 3.53,
+      "text": "These are our best solutions. e to the x and e to the"
+    },
+    {
+      "index": 612,
+      "start": 2467.941,
+      "end": 2470.117,
+      "duration": 2.176,
+      "text": "minus x are good solutions."
+    },
+    {
+      "index": 613,
+      "start": 2470.117,
+      "end": 2472.176,
+      "duration": 2.059,
+      "text": "But, these are our better solutions."
+    },
+    {
+      "index": 614,
+      "start": 2472.176,
+      "end": 2474.529,
+      "duration": 2.353,
+      "text": "And, this one, of course, is the function"
+    },
+    {
+      "index": 615,
+      "start": 2474.529,
+      "end": 2478.176,
+      "duration": 3.647,
+      "text": "which is called hyperbolic sine of x, and this is the one which"
+    },
+    {
+      "index": 616,
+      "start": 2478.176,
+      "end": 2480.058,
+      "duration": 1.882,
+      "text": "is called hyperbolic cosine of x."
+    },
+    {
+      "index": 617,
+      "start": 2480.058,
+      "end": 2483.058,
+      "duration": 3.0,
+      "text": "This is one of the most important ways in which they"
+    },
+    {
+      "index": 618,
+      "start": 2483.058,
+      "end": 2486.176,
+      "duration": 3.118,
+      "text": "enter into mathematics. And, this is why the engineers"
+    },
+    {
+      "index": 619,
+      "start": 2486.176,
+      "end": 2488.529,
+      "duration": 2.353,
+      "text": "want them. Now, why do the engineers want"
+    },
+    {
+      "index": 620,
+      "start": 2488.529,
+      "end": 2494.973,
+      "duration": 6.444,
+      "text": "normalized solutions? Well, I didn't explain that."
+    },
+    {
+      "index": 621,
+      "start": 2494.973,
+      "end": 2501.359,
+      "duration": 6.386,
+      "text": "So, what's so good about normalized solutions?"
+    },
+    {
+      "index": 622,
+      "start": 2501.359,
+      "end": 2507.32,
+      "duration": 5.961,
+      "text": "Very simple: if Y1 and Y2 are normalized at"
+    },
+    {
+      "index": 623,
+      "start": 2507.32,
+      "end": 2513.706,
+      "duration": 6.386,
+      "text": "zero, let's say, then the solution to the IVP,"
+    },
+    {
+      "index": 624,
+      "start": 2513.706,
+      "end": 2519.24,
+      "duration": 5.534,
+      "text": "in other words, the ODE plus the initial"
+    },
+    {
+      "index": 625,
+      "start": 2519.24,
+      "end": 2527.188,
+      "duration": 7.948,
+      "text": "values, y of zero equals, let's say, a and y"
+    },
+    {
+      "index": 626,
+      "start": 2527.188,
+      "end": 2534.0,
+      "duration": 6.812,
+      "text": "prime of zero equals b."
+    },
+    {
+      "index": 627,
+      "start": 2534.0,
+      "end": 2537.475,
+      "duration": 3.475,
+      "text": "So, the ODE I'm not repeating. It's the one we've been talking"
+    },
+    {
+      "index": 628,
+      "start": 2537.475,
+      "end": 2540.21,
+      "duration": 2.735,
+      "text": "about all term since the beginning of the period."
+    },
+    {
+      "index": 629,
+      "start": 2540.21,
+      "end": 2543.458,
+      "duration": 3.248,
+      "text": "It's the one with the p of x and q of x."
+    },
+    {
+      "index": 630,
+      "start": 2543.458,
+      "end": 2545.282,
+      "duration": 1.824,
+      "text": "And, here are the initial values."
+    },
+    {
+      "index": 631,
+      "start": 2545.282,
+      "end": 2548.358,
+      "duration": 3.076,
+      "text": "I'm going to call them a and b. You can also call them,"
+    },
+    {
+      "index": 632,
+      "start": 2548.358,
+      "end": 2550.581,
+      "duration": 2.223,
+      "text": "if you like, maybe that's better to call"
+    },
+    {
+      "index": 633,
+      "start": 2550.581,
+      "end": 2554.0,
+      "duration": 3.419,
+      "text": "them y0, as they are individual in the homework."
+    },
+    {
+      "index": 634,
+      "start": 2554.0,
+      "end": 2556.669,
+      "duration": 2.669,
+      "text": "They are called, I'm using the,"
+    },
+    {
+      "index": 635,
+      "start": 2556.669,
+      "end": 2559.962,
+      "duration": 3.293,
+      "text": "let's use those. What is the solution?"
+    },
+    {
+      "index": 636,
+      "start": 2559.962,
+      "end": 2563.789,
+      "duration": 3.827,
+      "text": "I say the solution is, if you use y1 and y2,"
+    },
+    {
+      "index": 637,
+      "start": 2563.789,
+      "end": 2566.814,
+      "duration": 3.025,
+      "text": "the solution is y0, in other words,"
+    },
+    {
+      "index": 638,
+      "start": 2566.814,
+      "end": 2569.395,
+      "duration": 2.581,
+      "text": "the a times Y1, plus y0 prime,"
+    },
+    {
+      "index": 639,
+      "start": 2569.395,
+      "end": 2573.4,
+      "duration": 4.005,
+      "text": "in other words, b times Y2."
+    },
+    {
+      "index": 640,
+      "start": 2573.4,
+      "end": 2577.227,
+      "duration": 3.827,
+      "text": "In other words, you can write down instantly"
+    },
+    {
+      "index": 641,
+      "start": 2577.227,
+      "end": 2580.875,
+      "duration": 3.648,
+      "text": "the solution to the initial value problem,"
+    },
+    {
+      "index": 642,
+      "start": 2580.875,
+      "end": 2585.681,
+      "duration": 4.806,
+      "text": "if instead of using the functions, you started out with"
+    },
+    {
+      "index": 643,
+      "start": 2585.681,
+      "end": 2592.0,
+      "duration": 6.319,
+      "text": "the little Y1 and Y2, you use these better functions."
+    },
+    {
+      "index": 644,
+      "start": 2592.0,
+      "end": 2596.087,
+      "duration": 4.087,
+      "text": "The thing that's better about them is that they instantly"
+    },
+    {
+      "index": 645,
+      "start": 2596.087,
+      "end": 2598.934,
+      "duration": 2.847,
+      "text": "solve for you the initial value problem."
+    },
+    {
+      "index": 646,
+      "start": 2598.934,
+      "end": 2602.875,
+      "duration": 3.941,
+      "text": "All you do is use this number, initial condition as the"
+    },
+    {
+      "index": 647,
+      "start": 2602.875,
+      "end": 2606.087,
+      "duration": 3.212,
+      "text": "coefficient of Y1, and use this number as the"
+    },
+    {
+      "index": 648,
+      "start": 2606.087,
+      "end": 2609.664,
+      "duration": 3.577,
+      "text": "coefficient of Y2. Now, just check that by looking"
+    },
+    {
+      "index": 649,
+      "start": 2609.664,
+      "end": 2612.0,
+      "duration": 2.336,
+      "text": "at it. Why is that so?"
+    },
+    {
+      "index": 650,
+      "start": 2612.0,
+      "end": 2614.211,
+      "duration": 2.211,
+      "text": "Well, for example, let's check."
+    },
+    {
+      "index": 651,
+      "start": 2614.211,
+      "end": 2617.308,
+      "duration": 3.097,
+      "text": "What is its value of this function at zero?"
+    },
+    {
+      "index": 652,
+      "start": 2617.308,
+      "end": 2620.405,
+      "duration": 3.097,
+      "text": "Well, the value of this guy at zero is one."
+    },
+    {
+      "index": 653,
+      "start": 2620.405,
+      "end": 2624.755,
+      "duration": 4.35,
+      "text": "So, the answer is y0 times one, and the value of this guy at"
+    },
+    {
+      "index": 654,
+      "start": 2624.755,
+      "end": 2627.557,
+      "duration": 2.802,
+      "text": "zero is zero. So, this term disappears."
+    },
+    {
+      "index": 655,
+      "start": 2627.557,
+      "end": 2630.949,
+      "duration": 3.392,
+      "text": "And, it's exactly the same with the derivative."
+    },
+    {
+      "index": 656,
+      "start": 2630.949,
+      "end": 2634.046,
+      "duration": 3.097,
+      "text": "What's the value of the derivative at zero?"
+    },
+    {
+      "index": 657,
+      "start": 2634.046,
+      "end": 2637.658,
+      "duration": 3.612,
+      "text": "The value of the derivative of this thing is zero."
+    },
+    {
+      "index": 658,
+      "start": 2637.658,
+      "end": 2641.788,
+      "duration": 4.13,
+      "text": "So, this term disappears. The value of this derivative at"
+    },
+    {
+      "index": 659,
+      "start": 2641.788,
+      "end": 2646.409,
+      "duration": 4.621,
+      "text": "zero is one. And so, the answer is y0 prime."
+    },
+    {
+      "index": 660,
+      "start": 2646.409,
+      "end": 2648.497,
+      "duration": 2.088,
+      "text": "So, check, check,"
+    },
+    {
+      "index": 661,
+      "start": 2648.497,
+      "end": 2651.87,
+      "duration": 3.373,
+      "text": "this works. So, these better solutions have"
+    },
+    {
+      "index": 662,
+      "start": 2651.87,
+      "end": 2654.761,
+      "duration": 2.891,
+      "text": "the property, what's good about them,"
+    },
+    {
+      "index": 663,
+      "start": 2654.761,
+      "end": 2658.134,
+      "duration": 3.373,
+      "text": "and why scientists and engineers like them,"
+    },
+    {
+      "index": 664,
+      "start": 2658.134,
+      "end": 2662.31,
+      "duration": 4.176,
+      "text": "is that they enable you immediately to write down the"
+    },
+    {
+      "index": 665,
+      "start": 2662.31,
+      "end": 2666.727,
+      "duration": 4.417,
+      "text": "answer to the initial value problem without having to go"
+    },
+    {
+      "index": 666,
+      "start": 2666.727,
+      "end": 2670.502,
+      "duration": 3.775,
+      "text": "through this business, which I buried down here,"
+    },
+    {
+      "index": 667,
+      "start": 2670.502,
+      "end": 2675.0,
+      "duration": 4.498,
+      "text": "of solving simultaneous linear equations."
+    },
+    {
+      "index": 668,
+      "start": 2675.0,
+      "end": 2680.035,
+      "duration": 5.035,
+      "text": "Okay, now, believe it or not, that's all the work."
+    },
+    {
+      "index": 669,
+      "start": 2680.035,
+      "end": 2686.201,
+      "duration": 6.166,
+      "text": "We are ready to answer question number two: why are these all"
+    },
+    {
+      "index": 670,
+      "start": 2686.201,
+      "end": 2690.62,
+      "duration": 4.419,
+      "text": "the solutions? Of course, I have to invoke a"
+    },
+    {
+      "index": 671,
+      "start": 2690.62,
+      "end": 2693.292,
+      "duration": 2.672,
+      "text": "big theorem. A big theorem:"
+    },
+    {
+      "index": 672,
+      "start": 2693.292,
+      "end": 2696.786,
+      "duration": 3.494,
+      "text": "where shall I invoke a big theorem?"
+    },
+    {
+      "index": 673,
+      "start": 2696.786,
+      "end": 2702.227,
+      "duration": 5.441,
+      "text": "Let's see if we can do it here. The big theorem says,"
+    },
+    {
+      "index": 674,
+      "start": 2702.227,
+      "end": 2705.034,
+      "duration": 2.807,
+      "text": "it's called the existence and uniqueness theorem."
+    },
+    {
+      "index": 675,
+      "start": 2705.034,
+      "end": 2708.425,
+      "duration": 3.391,
+      "text": "It's the last thing that's proved at the end of an analysis"
+    },
+    {
+      "index": 676,
+      "start": 2708.425,
+      "end": 2711.816,
+      "duration": 3.391,
+      "text": "course, at which real analysis courses, over which students"
+    },
+    {
+      "index": 677,
+      "start": 2711.816,
+      "end": 2715.324,
+      "duration": 3.508,
+      "text": "sweat for one whole semester, and their reward at the end is,"
+    },
+    {
+      "index": 678,
+      "start": 2715.324,
+      "end": 2718.481,
+      "duration": 3.157,
+      "text": "if they are very lucky, and if they have been very good"
+    },
+    {
+      "index": 679,
+      "start": 2718.481,
+      "end": 2721.697,
+      "duration": 3.216,
+      "text": "students, they get to see the proof of the existence and"
+    },
+    {
+      "index": 680,
+      "start": 2721.697,
+      "end": 2724.328,
+      "duration": 2.631,
+      "text": "uniqueness theorem for differential equations."
+    },
+    {
+      "index": 681,
+      "start": 2724.328,
+      "end": 2727.661,
+      "duration": 3.333,
+      "text": "But, I can at least say what it is for the linear equation"
+    },
+    {
+      "index": 682,
+      "start": 2727.661,
+      "end": 2731.034,
+      "duration": 3.373,
+      "text": "because it's so simple. It says, so,"
+    },
+    {
+      "index": 683,
+      "start": 2731.034,
+      "end": 2735.344,
+      "duration": 4.31,
+      "text": "the equation we are talking about is the usual one,"
+    },
+    {
+      "index": 684,
+      "start": 2735.344,
+      "end": 2739.224,
+      "duration": 3.88,
+      "text": "homogeneous equation, and I'm going to assume,"
+    },
+    {
+      "index": 685,
+      "start": 2739.224,
+      "end": 2744.31,
+      "duration": 5.086,
+      "text": "you have to have assumptions that p and q are continuous for"
+    },
+    {
+      "index": 686,
+      "start": 2744.31,
+      "end": 2746.896,
+      "duration": 2.586,
+      "text": "all x. So, they're good-looking"
+    },
+    {
+      "index": 687,
+      "start": 2746.896,
+      "end": 2750.344,
+      "duration": 3.448,
+      "text": "functions. Coefficients aren't allowed to"
+    },
+    {
+      "index": 688,
+      "start": 2750.344,
+      "end": 2755.0,
+      "duration": 4.656,
+      "text": "blow up anywhere. They've got to look nice."
+    },
+    {
+      "index": 689,
+      "start": 2755.0,
+      "end": 2763.539,
+      "duration": 8.539,
+      "text": "Then, the theorem says there is one and only one solution,"
+    },
+    {
+      "index": 690,
+      "start": 2763.539,
+      "end": 2771.479,
+      "duration": 7.94,
+      "text": "one and only solution satisfying, given initial values"
+    },
+    {
+      "index": 691,
+      "start": 2771.479,
+      "end": 2779.119,
+      "duration": 7.64,
+      "text": "such that y of zero, let's say y of zero is equal to"
+    },
+    {
+      "index": 692,
+      "start": 2779.119,
+      "end": 2784.063,
+      "duration": 4.944,
+      "text": "some given number, A,"
+    },
+    {
+      "index": 693,
+      "start": 2784.063,
+      "end": 2791.404,
+      "duration": 7.341,
+      "text": "and y, let's make y0, and y prime of zero equals B."
+    },
+    {
+      "index": 694,
+      "start": 2791.404,
+      "end": 2797.922,
+      "duration": 6.518,
+      "text": "The initial value problem has"
+    },
+    {
+      "index": 695,
+      "start": 2797.922,
+      "end": 2802.255,
+      "duration": 4.333,
+      "text": "one and only one solution. The existence is,"
+    },
+    {
+      "index": 696,
+      "start": 2802.255,
+      "end": 2805.883,
+      "duration": 3.628,
+      "text": "it has a solution. The uniqueness is,"
+    },
+    {
+      "index": 697,
+      "start": 2805.883,
+      "end": 2811.023,
+      "duration": 5.14,
+      "text": "it only has one solution. If you specify the initial"
+    },
+    {
+      "index": 698,
+      "start": 2811.023,
+      "end": 2816.767,
+      "duration": 5.744,
+      "text": "conditions, there's only one function which satisfies them"
+    },
+    {
+      "index": 699,
+      "start": 2816.767,
+      "end": 2822.511,
+      "duration": 5.744,
+      "text": "and at the same time satisfies that differential equation."
+    },
+    {
+      "index": 700,
+      "start": 2822.511,
+      "end": 2828.255,
+      "duration": 5.744,
+      "text": "Now, this answers our question. This answers our question,"
+    },
+    {
+      "index": 701,
+      "start": 2828.255,
+      "end": 2834.0,
+      "duration": 5.745,
+      "text": "because, look, what I want is all solutions."
+    },
+    {
+      "index": 702,
+      "start": 2834.0,
+      "end": 2841.951,
+      "duration": 7.951,
+      "text": "What we want are all solutions to the ODE."
+    },
+    {
+      "index": 703,
+      "start": 2841.951,
+      "end": 2853.199,
+      "duration": 11.248,
+      "text": "And now, here's what I say: a claim that this collection of"
+    },
+    {
+      "index": 704,
+      "start": 2853.199,
+      "end": 2862.896,
+      "duration": 9.697,
+      "text": "functions, c1 Y1 plus c2 Y2 are all"
+    },
+    {
+      "index": 705,
+      "start": 2862.896,
+      "end": 2868.293,
+      "duration": 5.397,
+      "text": "solutions. Of course, I began a period by"
+    },
+    {
+      "index": 706,
+      "start": 2868.293,
+      "end": 2872.574,
+      "duration": 4.281,
+      "text": "saying I'd show you that c1 little y1 c little y2 are all"
+    },
+    {
+      "index": 707,
+      "start": 2872.574,
+      "end": 2875.862,
+      "duration": 3.288,
+      "text": "the solutions. But, it's the case that these"
+    },
+    {
+      "index": 708,
+      "start": 2875.862,
+      "end": 2880.067,
+      "duration": 4.205,
+      "text": "two families are the same. So, the family that I started"
+    },
+    {
+      "index": 709,
+      "start": 2880.067,
+      "end": 2884.73,
+      "duration": 4.663,
+      "text": "with would be exactly the same as the family c1 prime Y1"
+    },
+    {
+      "index": 710,
+      "start": 2884.73,
+      "end": 2887.559,
+      "duration": 2.829,
+      "text": "because, after all, these are two"
+    },
+    {
+      "index": 711,
+      "start": 2887.559,
+      "end": 2891.0,
+      "duration": 3.441,
+      "text": "special guys from that collection."
+    },
+    {
+      "index": 712,
+      "start": 2891.0,
+      "end": 2895.978,
+      "duration": 4.978,
+      "text": "So, it doesn't matter whether I talk about the original ones,"
+    },
+    {
+      "index": 713,
+      "start": 2895.978,
+      "end": 2899.213,
+      "duration": 3.235,
+      "text": "or these. The theorem is still the same."
+    },
+    {
+      "index": 714,
+      "start": 2899.213,
+      "end": 2902.864,
+      "duration": 3.651,
+      "text": "The final step, therefore, if you give me one"
+    },
+    {
+      "index": 715,
+      "start": 2902.864,
+      "end": 2906.681,
+      "duration": 3.817,
+      "text": "more minute, I think that will be quite enough."
+    },
+    {
+      "index": 716,
+      "start": 2906.681,
+      "end": 2910.0,
+      "duration": 3.319,
+      "text": "Why are these all the solutions?"
+    },
+    {
+      "index": 717,
+      "start": 2910.0,
+      "end": 2915.454,
+      "duration": 5.454,
+      "text": "Well, I have to take an arbitrary solution and show you"
+    },
+    {
+      "index": 718,
+      "start": 2915.454,
+      "end": 2919.494,
+      "duration": 4.04,
+      "text": "that it's one of these. So, the proof is,"
+    },
+    {
+      "index": 719,
+      "start": 2919.494,
+      "end": 2923.838,
+      "duration": 4.344,
+      "text": "given a solution, u(x), what are its values?"
+    },
+    {
+      "index": 720,
+      "start": 2923.838,
+      "end": 2928.08,
+      "duration": 4.242,
+      "text": "Well, u of x zero is u zero,"
+    },
+    {
+      "index": 721,
+      "start": 2928.08,
+      "end": 2931.919,
+      "duration": 3.839,
+      "text": "and u prime of x zero, zero,"
+    },
+    {
+      "index": 722,
+      "start": 2931.919,
+      "end": 2938.08,
+      "duration": 6.161,
+      "text": "let's say, is equal to u zero, is equal to some other"
+    },
+    {
+      "index": 723,
+      "start": 2938.08,
+      "end": 2942.277,
+      "duration": 4.197,
+      "text": "number. Now, what's the solution?"
+    },
+    {
+      "index": 724,
+      "start": 2942.277,
+      "end": 2947.198,
+      "duration": 4.921,
+      "text": "Write down what's the solution of these using the Y1's?"
+    },
+    {
+      "index": 725,
+      "start": 2947.198,
+      "end": 2952.574,
+      "duration": 5.376,
+      "text": "Then, I know I've just shown you that u zero times Y1 plus u"
+    },
+    {
+      "index": 726,
+      "start": 2952.574,
+      "end": 2957.767,
+      "duration": 5.193,
+      "text": "zero prime Y2 satisfies the same initial"
+    },
+    {
+      "index": 727,
+      "start": 2957.767,
+      "end": 2961.958,
+      "duration": 4.191,
+      "text": "conditions, satisfies these initial conditions,"
+    },
+    {
+      "index": 728,
+      "start": 2961.958,
+      "end": 2964.692,
+      "duration": 2.734,
+      "text": "initial values. In other words,"
+    },
+    {
+      "index": 729,
+      "start": 2964.692,
+      "end": 2967.699,
+      "duration": 3.007,
+      "text": "I started with my little solution."
+    },
+    {
+      "index": 730,
+      "start": 2967.699,
+      "end": 2971.89,
+      "duration": 4.191,
+      "text": "u of x walks up to and says, hi there."
+    },
+    {
+      "index": 731,
+      "start": 2971.89,
+      "end": 2977.357,
+      "duration": 5.467,
+      "text": "Hi there, and the differential equation looks at it and says,"
+    },
+    {
+      "index": 732,
+      "start": 2977.357,
+      "end": 2981.116,
+      "duration": 3.759,
+      "text": "who are you? You say, oh,"
+    },
+    {
+      "index": 733,
+      "start": 2981.116,
+      "end": 2986.604,
+      "duration": 5.488,
+      "text": "I satisfy you and my initial, and then it says what are your"
+    },
+    {
+      "index": 734,
+      "start": 2986.604,
+      "end": 2990.79,
+      "duration": 4.186,
+      "text": "initial values? It says, my initial values are"
+    },
+    {
+      "index": 735,
+      "start": 2990.79,
+      "end": 2994.418,
+      "duration": 3.628,
+      "text": "u0 and u0 prime. And, it said,"
+    },
+    {
+      "index": 736,
+      "start": 2994.418,
+      "end": 2999.441,
+      "duration": 5.023,
+      "text": "sorry, but we've got one of ours who satisfies the same"
+    },
+    {
+      "index": 737,
+      "start": 2999.441,
+      "end": 3003.906,
+      "duration": 4.465,
+      "text": "initial conditions. We don't need you because the"
+    },
+    {
+      "index": 738,
+      "start": 3003.906,
+      "end": 3009.767,
+      "duration": 5.861,
+      "text": "existence and uniqueness theorem says that there can only be one"
+    },
+    {
+      "index": 739,
+      "start": 3009.767,
+      "end": 3013.395,
+      "duration": 3.628,
+      "text": "function which does that. And therefore,"
+    },
+    {
+      "index": 740,
+      "start": 3013.395,
+      "end": 3020.0,
+      "duration": 6.605,
+      "text": "you must be equal to this guy by the uniqueness theorem."
+    },
+    {
+      "index": 741,
+      "start": 3020.0,
+      "end": 3023.953,
+      "duration": 3.953,
+      "text": "Okay, we'll talk more about stuff next time,"
+    },
+    {
+      "index": 742,
+      "start": 3023.953,
+      "end": 3025.686,
+      "duration": 1.733,
+      "text": "linear equation next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

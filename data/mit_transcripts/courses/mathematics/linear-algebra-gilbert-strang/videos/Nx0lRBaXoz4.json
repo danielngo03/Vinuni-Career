@@ -1,0 +1,5072 @@
+{
+  "video": {
+    "id": "Nx0lRBaXoz4",
+    "title": "Lec 29 | MIT 18.06 Linear Algebra, Spring 2005",
+    "url": "https://www.youtube.com/watch?v=Nx0lRBaXoz4",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2495,
+    "language": "en"
+  },
+  "segment_count": 722,
+  "segments": [
+    {
+      "index": 0,
+      "start": 17.189,
+      "end": 17.199,
+      "duration": 0.01,
+      "text": "okay this is the lecture"
+    },
+    {
+      "index": 1,
+      "start": 17.199,
+      "end": 20.83,
+      "duration": 3.631,
+      "text": "on the singular value"
+    },
+    {
+      "index": 2,
+      "start": 20.84,
+      "end": 25.99,
+      "duration": 5.15,
+      "text": "decomposition but everybody calls it the"
+    },
+    {
+      "index": 3,
+      "start": 26.0,
+      "end": 30.31,
+      "duration": 4.31,
+      "text": "SVD so this is the final and best Factor"
+    },
+    {
+      "index": 4,
+      "start": 30.32,
+      "end": 32.63,
+      "duration": 2.31,
+      "text": "ization of a"
+    },
+    {
+      "index": 5,
+      "start": 32.64,
+      "end": 36.229,
+      "duration": 3.589,
+      "text": "matrix uh let me tell you what's"
+    },
+    {
+      "index": 6,
+      "start": 36.239,
+      "end": 40.63,
+      "duration": 4.391,
+      "text": "coming the factors will be uh orthogonal"
+    },
+    {
+      "index": 7,
+      "start": 40.64,
+      "end": 45.549,
+      "duration": 4.909,
+      "text": "Matrix diagonal matrix orthogonal Matrix"
+    },
+    {
+      "index": 8,
+      "start": 45.559,
+      "end": 48.59,
+      "duration": 3.031,
+      "text": "so it's things that we've seen before"
+    },
+    {
+      "index": 9,
+      "start": 48.6,
+      "end": 52.43,
+      "duration": 3.83,
+      "text": "these special good matrices orthogonal"
+    },
+    {
+      "index": 10,
+      "start": 52.44,
+      "end": 55.91,
+      "duration": 3.47,
+      "text": "diagonal the the new point is that we"
+    },
+    {
+      "index": 11,
+      "start": 55.92,
+      "end": 59.59,
+      "duration": 3.67,
+      "text": "need two orthogonal matrices a a a can"
+    },
+    {
+      "index": 12,
+      "start": 59.6,
+      "end": 61.75,
+      "duration": 2.15,
+      "text": "be any Matrix"
+    },
+    {
+      "index": 13,
+      "start": 61.76,
+      "end": 64.509,
+      "duration": 2.749,
+      "text": "whatsoever any Matrix whatsoever has"
+    },
+    {
+      "index": 14,
+      "start": 64.519,
+      "end": 68.19,
+      "duration": 3.671,
+      "text": "this singular value decomposition so a"
+    },
+    {
+      "index": 15,
+      "start": 68.2,
+      "end": 70.429,
+      "duration": 2.229,
+      "text": "diagonal one in the middle but I need"
+    },
+    {
+      "index": 16,
+      "start": 70.439,
+      "end": 72.99,
+      "duration": 2.551,
+      "text": "two different probably different"
+    },
+    {
+      "index": 17,
+      "start": 73.0,
+      "end": 76.19,
+      "duration": 3.19,
+      "text": "orthogonal matrices to to be able to do"
+    },
+    {
+      "index": 18,
+      "start": 76.2,
+      "end": 79.789,
+      "duration": 3.589,
+      "text": "this okay and this factorization has"
+    },
+    {
+      "index": 19,
+      "start": 79.799,
+      "end": 84.109,
+      "duration": 4.31,
+      "text": "jumped into importance uh and is"
+    },
+    {
+      "index": 20,
+      "start": 84.119,
+      "end": 86.83,
+      "duration": 2.711,
+      "text": "properly I think maybe the bringing"
+    },
+    {
+      "index": 21,
+      "start": 86.84,
+      "end": 89.59,
+      "duration": 2.75,
+      "text": "together of everything in this course"
+    },
+    {
+      "index": 22,
+      "start": 89.6,
+      "end": 92.71,
+      "duration": 3.11,
+      "text": "one thing we'll bring together"
+    },
+    {
+      "index": 23,
+      "start": 92.72,
+      "end": 96.83,
+      "duration": 4.11,
+      "text": "is the the the good the very good family"
+    },
+    {
+      "index": 24,
+      "start": 96.84,
+      "end": 99.23,
+      "duration": 2.39,
+      "text": "of matricies that we just studied"
+    },
+    {
+      "index": 25,
+      "start": 99.24,
+      "end": 101.31,
+      "duration": 2.07,
+      "text": "symmetric positive definite do you"
+    },
+    {
+      "index": 26,
+      "start": 101.32,
+      "end": 103.87,
+      "duration": 2.55,
+      "text": "remember the story with those guys"
+    },
+    {
+      "index": 27,
+      "start": 103.88,
+      "end": 107.63,
+      "duration": 3.75,
+      "text": "because they were symmetric their igen"
+    },
+    {
+      "index": 28,
+      "start": 107.64,
+      "end": 109.63,
+      "duration": 1.99,
+      "text": "vectors were"
+    },
+    {
+      "index": 29,
+      "start": 109.64,
+      "end": 112.069,
+      "duration": 2.429,
+      "text": "orthogonal so I could produce an"
+    },
+    {
+      "index": 30,
+      "start": 112.079,
+      "end": 115.109,
+      "duration": 3.03,
+      "text": "orthogonal Matrix in this is my usual"
+    },
+    {
+      "index": 31,
+      "start": 115.119,
+      "end": 118.709,
+      "duration": 3.59,
+      "text": "one my usual one is the igen vectors and"
+    },
+    {
+      "index": 32,
+      "start": 118.719,
+      "end": 120.91,
+      "duration": 2.191,
+      "text": "igen values"
+    },
+    {
+      "index": 33,
+      "start": 120.92,
+      "end": 124.429,
+      "duration": 3.509,
+      "text": "in the symmetric case the igen vectors"
+    },
+    {
+      "index": 34,
+      "start": 124.439,
+      "end": 127.709,
+      "duration": 3.27,
+      "text": "are orthogonal so I've got the good my"
+    },
+    {
+      "index": 35,
+      "start": 127.719,
+      "end": 130.749,
+      "duration": 3.03,
+      "text": "my ordinary s has become a especially"
+    },
+    {
+      "index": 36,
+      "start": 130.759,
+      "end": 135.07,
+      "duration": 4.311,
+      "text": "good q and positive definite my ordinary"
+    },
+    {
+      "index": 37,
+      "start": 135.08,
+      "end": 138.47,
+      "duration": 3.39,
+      "text": "Lambda has become a positive Lambda so"
+    },
+    {
+      "index": 38,
+      "start": 138.48,
+      "end": 141.589,
+      "duration": 3.109,
+      "text": "this is that's the that's the singular"
+    },
+    {
+      "index": 39,
+      "start": 141.599,
+      "end": 142.67,
+      "duration": 1.071,
+      "text": "value"
+    },
+    {
+      "index": 40,
+      "start": 142.68,
+      "end": 145.229,
+      "duration": 2.549,
+      "text": "decomposition in case our Matrix is"
+    },
+    {
+      "index": 41,
+      "start": 145.239,
+      "end": 147.43,
+      "duration": 2.191,
+      "text": "symmetric positive"
+    },
+    {
+      "index": 42,
+      "start": 147.44,
+      "end": 150.79,
+      "duration": 3.35,
+      "text": "definite in that case I don't need two U"
+    },
+    {
+      "index": 43,
+      "start": 150.8,
+      "end": 154.509,
+      "duration": 3.709,
+      "text": "and a v one Matrix one orthogonal Matrix"
+    },
+    {
+      "index": 44,
+      "start": 154.519,
+      "end": 156.27,
+      "duration": 1.751,
+      "text": "will do for both"
+    },
+    {
+      "index": 45,
+      "start": 156.28,
+      "end": 157.91,
+      "duration": 1.63,
+      "text": "sides"
+    },
+    {
+      "index": 46,
+      "start": 157.92,
+      "end": 160.79,
+      "duration": 2.87,
+      "text": "but so this would be no good in in"
+    },
+    {
+      "index": 47,
+      "start": 160.8,
+      "end": 163.07,
+      "duration": 2.27,
+      "text": "general because usually the I Vector"
+    },
+    {
+      "index": 48,
+      "start": 163.08,
+      "end": 166.309,
+      "duration": 3.229,
+      "text": "Matrix isn't orthogonal so this is not"
+    },
+    {
+      "index": 49,
+      "start": 166.319,
+      "end": 168.949,
+      "duration": 2.63,
+      "text": "what I'm that's not what I'm"
+    },
+    {
+      "index": 50,
+      "start": 168.959,
+      "end": 173.149,
+      "duration": 4.19,
+      "text": "after I I'm I'm looking for"
+    },
+    {
+      "index": 51,
+      "start": 173.159,
+      "end": 175.75,
+      "duration": 2.591,
+      "text": "orthogonal times diagonal times"
+    },
+    {
+      "index": 52,
+      "start": 175.76,
+      "end": 178.309,
+      "duration": 2.549,
+      "text": "orthogonal and let me show you what that"
+    },
+    {
+      "index": 53,
+      "start": 178.319,
+      "end": 180.91,
+      "duration": 2.591,
+      "text": "means and where it comes from"
+    },
+    {
+      "index": 54,
+      "start": 180.92,
+      "end": 184.35,
+      "duration": 3.43,
+      "text": "okay what does it"
+    },
+    {
+      "index": 55,
+      "start": 184.36,
+      "end": 186.99,
+      "duration": 2.63,
+      "text": "mean you remember"
+    },
+    {
+      "index": 56,
+      "start": 187.0,
+      "end": 189.47,
+      "duration": 2.47,
+      "text": "the the picture of any linear"
+    },
+    {
+      "index": 57,
+      "start": 189.48,
+      "end": 191.91,
+      "duration": 2.43,
+      "text": "transformation this was like the most"
+    },
+    {
+      "index": 58,
+      "start": 191.92,
+      "end": 195.71,
+      "duration": 3.79,
+      "text": "important figure in"
+    },
+    {
+      "index": 59,
+      "start": 195.72,
+      "end": 198.789,
+      "duration": 3.069,
+      "text": "1806 and what am I looking for"
+    },
+    {
+      "index": 60,
+      "start": 198.799,
+      "end": 203.149,
+      "duration": 4.35,
+      "text": "now a typical Vector in"
+    },
+    {
+      "index": 61,
+      "start": 203.159,
+      "end": 207.39,
+      "duration": 4.231,
+      "text": "the row space typical Vector let me call"
+    },
+    {
+      "index": 62,
+      "start": 207.4,
+      "end": 208.39,
+      "duration": 0.99,
+      "text": "it"
+    },
+    {
+      "index": 63,
+      "start": 208.4,
+      "end": 213.07,
+      "duration": 4.67,
+      "text": "V1 gets taken over to some Vector in the"
+    },
+    {
+      "index": 64,
+      "start": 213.08,
+      "end": 220.509,
+      "duration": 7.429,
+      "text": "column space say U1 so U1 is a"
+    },
+    {
+      "index": 65,
+      "start": 222.39,
+      "end": 222.4,
+      "duration": 0.01,
+      "text": "V1"
+    },
+    {
+      "index": 66,
+      "start": 222.4,
+      "end": 225.99,
+      "duration": 3.59,
+      "text": "okay now another"
+    },
+    {
+      "index": 67,
+      "start": 226.0,
+      "end": 228.83,
+      "duration": 2.83,
+      "text": "Vector gets taken over here somewhere"
+    },
+    {
+      "index": 68,
+      "start": 228.84,
+      "end": 232.429,
+      "duration": 3.589,
+      "text": "what am I looking for in this SVD this"
+    },
+    {
+      "index": 69,
+      "start": 232.439,
+      "end": 233.789,
+      "duration": 1.35,
+      "text": "singular value"
+    },
+    {
+      "index": 70,
+      "start": 233.799,
+      "end": 237.75,
+      "duration": 3.951,
+      "text": "decomposition what I'm looking for is an"
+    },
+    {
+      "index": 71,
+      "start": 237.76,
+      "end": 241.229,
+      "duration": 3.469,
+      "text": "orthogonal basis here that gets knocked"
+    },
+    {
+      "index": 72,
+      "start": 241.239,
+      "end": 244.91,
+      "duration": 3.671,
+      "text": "over into an orthogonal basis over"
+    },
+    {
+      "index": 73,
+      "start": 244.92,
+      "end": 248.429,
+      "duration": 3.509,
+      "text": "there that see that's pretty special to"
+    },
+    {
+      "index": 74,
+      "start": 248.439,
+      "end": 251.39,
+      "duration": 2.951,
+      "text": "to have to have an orthogonal"
+    },
+    {
+      "index": 75,
+      "start": 251.4,
+      "end": 256.349,
+      "duration": 4.949,
+      "text": "basis in the row space that goes over"
+    },
+    {
+      "index": 76,
+      "start": 256.359,
+      "end": 258.789,
+      "duration": 2.43,
+      "text": "into an orthogonal basis so this is like"
+    },
+    {
+      "index": 77,
+      "start": 258.799,
+      "end": 261.509,
+      "duration": 2.71,
+      "text": "a right angle and this is a right angle"
+    },
+    {
+      "index": 78,
+      "start": 261.519,
+      "end": 264.629,
+      "duration": 3.11,
+      "text": "into an orthogonal basis in the column"
+    },
+    {
+      "index": 79,
+      "start": 264.639,
+      "end": 268.35,
+      "duration": 3.711,
+      "text": "space so that's our that's our goal is"
+    },
+    {
+      "index": 80,
+      "start": 268.36,
+      "end": 271.35,
+      "duration": 2.99,
+      "text": "to find"
+    },
+    {
+      "index": 81,
+      "start": 271.36,
+      "end": 274.23,
+      "duration": 2.87,
+      "text": "you see how things are coming together"
+    },
+    {
+      "index": 82,
+      "start": 274.24,
+      "end": 277.11,
+      "duration": 2.87,
+      "text": "first of all can I find an orthogonal"
+    },
+    {
+      "index": 83,
+      "start": 277.12,
+      "end": 278.99,
+      "duration": 1.87,
+      "text": "basis for this row"
+    },
+    {
+      "index": 84,
+      "start": 279.0,
+      "end": 282.59,
+      "duration": 3.59,
+      "text": "space of course no de no big deal to"
+    },
+    {
+      "index": 85,
+      "start": 282.6,
+      "end": 285.35,
+      "duration": 2.75,
+      "text": "find an orthogonal basis Graham Schmidt"
+    },
+    {
+      "index": 86,
+      "start": 285.36,
+      "end": 287.87,
+      "duration": 2.51,
+      "text": "tells me how to do it start with any old"
+    },
+    {
+      "index": 87,
+      "start": 287.88,
+      "end": 289.909,
+      "duration": 2.029,
+      "text": "basis and gr use grind through Graham"
+    },
+    {
+      "index": 88,
+      "start": 289.919,
+      "end": 293.11,
+      "duration": 3.191,
+      "text": "Schmidt out comes an orthogonal"
+    },
+    {
+      "index": 89,
+      "start": 293.12,
+      "end": 296.55,
+      "duration": 3.43,
+      "text": "basis but then if I just take any old"
+    },
+    {
+      "index": 90,
+      "start": 296.56,
+      "end": 299.31,
+      "duration": 2.75,
+      "text": "orthogonal basis then when I multiply by"
+    },
+    {
+      "index": 91,
+      "start": 299.32,
+      "end": 300.15,
+      "duration": 0.83,
+      "text": "a"
+    },
+    {
+      "index": 92,
+      "start": 300.16,
+      "end": 301.79,
+      "duration": 1.63,
+      "text": "there's no reason why it should be"
+    },
+    {
+      "index": 93,
+      "start": 301.8,
+      "end": 303.67,
+      "duration": 1.87,
+      "text": "orthogonal over"
+    },
+    {
+      "index": 94,
+      "start": 303.68,
+      "end": 306.909,
+      "duration": 3.229,
+      "text": "here so I'm looking for this special"
+    },
+    {
+      "index": 95,
+      "start": 306.919,
+      "end": 311.71,
+      "duration": 4.791,
+      "text": "setup where a takes these basis vectors"
+    },
+    {
+      "index": 96,
+      "start": 311.72,
+      "end": 315.07,
+      "duration": 3.35,
+      "text": "into orthogonal vectors over there now"
+    },
+    {
+      "index": 97,
+      "start": 315.08,
+      "end": 318.07,
+      "duration": 2.99,
+      "text": "you might have noticed that the null"
+    },
+    {
+      "index": 98,
+      "start": 318.08,
+      "end": 320.43,
+      "duration": 2.35,
+      "text": "space I didn't include why don't I stick"
+    },
+    {
+      "index": 99,
+      "start": 320.44,
+      "end": 321.309,
+      "duration": 0.869,
+      "text": "that"
+    },
+    {
+      "index": 100,
+      "start": 321.319,
+      "end": 323.909,
+      "duration": 2.59,
+      "text": "in you remember our usual figure had a"
+    },
+    {
+      "index": 101,
+      "start": 323.919,
+      "end": 325.189,
+      "duration": 1.27,
+      "text": "little null"
+    },
+    {
+      "index": 102,
+      "start": 325.199,
+      "end": 327.909,
+      "duration": 2.71,
+      "text": "space and a little null"
+    },
+    {
+      "index": 103,
+      "start": 327.919,
+      "end": 331.83,
+      "duration": 3.911,
+      "text": "space and uh those are no problems those"
+    },
+    {
+      "index": 104,
+      "start": 331.84,
+      "end": 334.27,
+      "duration": 2.43,
+      "text": "are null spaces are going to show up as"
+    },
+    {
+      "index": 105,
+      "start": 334.28,
+      "end": 339.189,
+      "duration": 4.909,
+      "text": "zeros on the diagonal of Sigma so that"
+    },
+    {
+      "index": 106,
+      "start": 339.199,
+      "end": 342.15,
+      "duration": 2.951,
+      "text": "that's not what we're that that doesn't"
+    },
+    {
+      "index": 107,
+      "start": 342.16,
+      "end": 344.83,
+      "duration": 2.67,
+      "text": "present any difficulty our difficulty is"
+    },
+    {
+      "index": 108,
+      "start": 344.84,
+      "end": 347.39,
+      "duration": 2.55,
+      "text": "to find the so do you see what this will"
+    },
+    {
+      "index": 109,
+      "start": 347.4,
+      "end": 350.39,
+      "duration": 2.99,
+      "text": "mean this will mean that"
+    },
+    {
+      "index": 110,
+      "start": 350.4,
+      "end": 353.23,
+      "duration": 2.83,
+      "text": "a times"
+    },
+    {
+      "index": 111,
+      "start": 353.24,
+      "end": 358.469,
+      "duration": 5.229,
+      "text": "this these V's V1 V2 up to what's the"
+    },
+    {
+      "index": 112,
+      "start": 358.479,
+      "end": 363.029,
+      "duration": 4.55,
+      "text": "dimension of this row space"
+    },
+    {
+      "index": 113,
+      "start": 366.55,
+      "end": 366.56,
+      "duration": 0.01,
+      "text": "VR sorry make that v a little smaller up"
+    },
+    {
+      "index": 114,
+      "start": 366.56,
+      "end": 369.629,
+      "duration": 3.069,
+      "text": "to"
+    },
+    {
+      "index": 115,
+      "start": 374.23,
+      "end": 374.24,
+      "duration": 0.01,
+      "text": "VR so that's"
+    },
+    {
+      "index": 116,
+      "start": 374.24,
+      "end": 376.83,
+      "duration": 2.59,
+      "text": "av1 is going to be the First Column so"
+    },
+    {
+      "index": 117,
+      "start": 376.84,
+      "end": 379.51,
+      "duration": 2.67,
+      "text": "let me here's what I'm here's what I'm"
+    },
+    {
+      "index": 118,
+      "start": 379.52,
+      "end": 382.83,
+      "duration": 3.31,
+      "text": "achieving oh I would like I'm not only"
+    },
+    {
+      "index": 119,
+      "start": 382.84,
+      "end": 384.749,
+      "duration": 1.909,
+      "text": "have going to make these orthogonal but"
+    },
+    {
+      "index": 120,
+      "start": 384.759,
+      "end": 387.43,
+      "duration": 2.671,
+      "text": "why not make them orthonormal make them"
+    },
+    {
+      "index": 121,
+      "start": 387.44,
+      "end": 390.51,
+      "duration": 3.07,
+      "text": "unit vectors so this"
+    },
+    {
+      "index": 122,
+      "start": 390.52,
+      "end": 394.629,
+      "duration": 4.109,
+      "text": "maybe the unit Vector is here is the U1"
+    },
+    {
+      "index": 123,
+      "start": 394.639,
+      "end": 399.029,
+      "duration": 4.39,
+      "text": "and this might be a multiple of it so"
+    },
+    {
+      "index": 124,
+      "start": 399.039,
+      "end": 403.35,
+      "duration": 4.311,
+      "text": "really what's happening is av1 is some"
+    },
+    {
+      "index": 125,
+      "start": 403.36,
+      "end": 407.629,
+      "duration": 4.269,
+      "text": "multiple of U1 right I'm going to these"
+    },
+    {
+      "index": 126,
+      "start": 407.639,
+      "end": 410.27,
+      "duration": 2.631,
+      "text": "guys will be unit vectors and they'll go"
+    },
+    {
+      "index": 127,
+      "start": 410.28,
+      "end": 413.27,
+      "duration": 2.99,
+      "text": "over into multiples of unit vectors and"
+    },
+    {
+      "index": 128,
+      "start": 413.28,
+      "end": 415.11,
+      "duration": 1.83,
+      "text": "the multiple I'm not going to call"
+    },
+    {
+      "index": 129,
+      "start": 415.12,
+      "end": 418.309,
+      "duration": 3.189,
+      "text": "Lambda anymore I'm calling it Sigma so"
+    },
+    {
+      "index": 130,
+      "start": 418.319,
+      "end": 420.589,
+      "duration": 2.27,
+      "text": "that's the number the the stretching"
+    },
+    {
+      "index": 131,
+      "start": 420.599,
+      "end": 425.869,
+      "duration": 5.27,
+      "text": "number and similarly av2 is Sigma 2"
+    },
+    {
+      "index": 132,
+      "start": 425.879,
+      "end": 429.309,
+      "duration": 3.43,
+      "text": "U2 this is what this is my goal and now"
+    },
+    {
+      "index": 133,
+      "start": 429.319,
+      "end": 432.71,
+      "duration": 3.391,
+      "text": "I want to express that goal in Matrix"
+    },
+    {
+      "index": 134,
+      "start": 432.72,
+      "end": 435.55,
+      "duration": 2.83,
+      "text": "language that's the the usual step think"
+    },
+    {
+      "index": 135,
+      "start": 435.56,
+      "end": 438.51,
+      "duration": 2.95,
+      "text": "of what you want and then express it as"
+    },
+    {
+      "index": 136,
+      "start": 438.52,
+      "end": 442.309,
+      "duration": 3.789,
+      "text": "a matrix multiplication so"
+    },
+    {
+      "index": 137,
+      "start": 442.319,
+      "end": 446.79,
+      "duration": 4.471,
+      "text": "av1 is Sigma one U1 actually here here"
+    },
+    {
+      "index": 138,
+      "start": 446.8,
+      "end": 452.95,
+      "duration": 6.15,
+      "text": "we go let me pull out these U1 U2 to"
+    },
+    {
+      "index": 139,
+      "start": 452.96,
+      "end": 458.27,
+      "duration": 5.31,
+      "text": "ur and then a matrix with the"
+    },
+    {
+      "index": 140,
+      "start": 458.28,
+      "end": 461.67,
+      "duration": 3.39,
+      "text": "sigmas it's everything now is going to"
+    },
+    {
+      "index": 141,
+      "start": 461.68,
+      "end": 465.67,
+      "duration": 3.99,
+      "text": "be in this in that in that uh little"
+    },
+    {
+      "index": 142,
+      "start": 465.68,
+      "end": 468.95,
+      "duration": 3.27,
+      "text": "part of the Blackboard you see that"
+    },
+    {
+      "index": 143,
+      "start": 468.96,
+      "end": 470.589,
+      "duration": 1.629,
+      "text": "this"
+    },
+    {
+      "index": 144,
+      "start": 470.599,
+      "end": 474.469,
+      "duration": 3.87,
+      "text": "equation says what I'm trying to do with"
+    },
+    {
+      "index": 145,
+      "start": 474.479,
+      "end": 478.51,
+      "duration": 4.031,
+      "text": "my figure a * the first basis Vector"
+    },
+    {
+      "index": 146,
+      "start": 478.52,
+      "end": 481.55,
+      "duration": 3.03,
+      "text": "should be Sigma 1 times times the other"
+    },
+    {
+      "index": 147,
+      "start": 481.56,
+      "end": 484.589,
+      "duration": 3.029,
+      "text": "basis the other first basis ve Vector"
+    },
+    {
+      "index": 148,
+      "start": 484.599,
+      "end": 487.39,
+      "duration": 2.791,
+      "text": "these are the basis vectors in the row"
+    },
+    {
+      "index": 149,
+      "start": 487.4,
+      "end": 490.309,
+      "duration": 2.909,
+      "text": "space these are the basis vectors in the"
+    },
+    {
+      "index": 150,
+      "start": 490.319,
+      "end": 492.71,
+      "duration": 2.391,
+      "text": "column space and these are the"
+    },
+    {
+      "index": 151,
+      "start": 492.72,
+      "end": 498.43,
+      "duration": 5.71,
+      "text": "multiplying factors so a V2 is Sigma 2 *"
+    },
+    {
+      "index": 152,
+      "start": 498.44,
+      "end": 504.27,
+      "duration": 5.83,
+      "text": "U2 a VR is Sigma R * Ur and then we've"
+    },
+    {
+      "index": 153,
+      "start": 504.28,
+      "end": 506.71,
+      "duration": 2.43,
+      "text": "got a whole lot of zeros and maybe some"
+    },
+    {
+      "index": 154,
+      "start": 506.72,
+      "end": 509.749,
+      "duration": 3.029,
+      "text": "zeros at the end uh but this is that's"
+    },
+    {
+      "index": 155,
+      "start": 509.759,
+      "end": 512.87,
+      "duration": 3.111,
+      "text": "the heart of it and now if I express"
+    },
+    {
+      "index": 156,
+      "start": 512.88,
+      "end": 518.99,
+      "duration": 6.11,
+      "text": "that"
+    },
+    {
+      "index": 157,
+      "start": 522.55,
+      "end": 522.56,
+      "duration": 0.01,
+      "text": "in as matrices because you knew that was"
+    },
+    {
+      "index": 158,
+      "start": 522.56,
+      "end": 527.31,
+      "duration": 4.75,
+      "text": "coming that's what I have so this is my"
+    },
+    {
+      "index": 159,
+      "start": 527.32,
+      "end": 529.19,
+      "duration": 1.87,
+      "text": "goal to"
+    },
+    {
+      "index": 160,
+      "start": 529.2,
+      "end": 532.07,
+      "duration": 2.87,
+      "text": "find an orthogonal basis in the roast"
+    },
+    {
+      "index": 161,
+      "start": 532.08,
+      "end": 535.75,
+      "duration": 3.67,
+      "text": "orthonormal even bases in the row space"
+    },
+    {
+      "index": 162,
+      "start": 535.76,
+      "end": 538.43,
+      "duration": 2.67,
+      "text": "and an orthonormal basis in the column"
+    },
+    {
+      "index": 163,
+      "start": 538.44,
+      "end": 541.47,
+      "duration": 3.03,
+      "text": "space so that I'm sort of diagonalize"
+    },
+    {
+      "index": 164,
+      "start": 541.48,
+      "end": 544.829,
+      "duration": 3.349,
+      "text": "the Matrix The Matrix a is like getting"
+    },
+    {
+      "index": 165,
+      "start": 544.839,
+      "end": 547.71,
+      "duration": 2.871,
+      "text": "converted to this diagonal matrix"
+    },
+    {
+      "index": 166,
+      "start": 547.72,
+      "end": 551.11,
+      "duration": 3.39,
+      "text": "Sigma and you notice that usually I have"
+    },
+    {
+      "index": 167,
+      "start": 551.12,
+      "end": 553.509,
+      "duration": 2.389,
+      "text": "to do I have to allow myself two"
+    },
+    {
+      "index": 168,
+      "start": 553.519,
+      "end": 554.91,
+      "duration": 1.391,
+      "text": "different"
+    },
+    {
+      "index": 169,
+      "start": 554.92,
+      "end": 557.63,
+      "duration": 2.71,
+      "text": "bases the my my little comment about"
+    },
+    {
+      "index": 170,
+      "start": 557.64,
+      "end": 560.03,
+      "duration": 2.39,
+      "text": "symmetric positive definite was the one"
+    },
+    {
+      "index": 171,
+      "start": 560.04,
+      "end": 562.829,
+      "duration": 2.789,
+      "text": "case where it's"
+    },
+    {
+      "index": 172,
+      "start": 562.839,
+      "end": 566.55,
+      "duration": 3.711,
+      "text": "aqal Q Sigma where V and U are the same"
+    },
+    {
+      "index": 173,
+      "start": 566.56,
+      "end": 569.79,
+      "duration": 3.23,
+      "text": "q but mostly uh uh you know I'm going to"
+    },
+    {
+      "index": 174,
+      "start": 569.8,
+      "end": 572.99,
+      "duration": 3.19,
+      "text": "take a matrix like oh let me take a"
+    },
+    {
+      "index": 175,
+      "start": 573.0,
+      "end": 577.389,
+      "duration": 4.389,
+      "text": "matrix like 44 -"
+    },
+    {
+      "index": 176,
+      "start": 577.399,
+      "end": 581.35,
+      "duration": 3.951,
+      "text": "33 okay there's a 2X two"
+    },
+    {
+      "index": 177,
+      "start": 581.36,
+      "end": 585.31,
+      "duration": 3.95,
+      "text": "matrix it's invertible so"
+    },
+    {
+      "index": 178,
+      "start": 585.32,
+      "end": 589.11,
+      "duration": 3.79,
+      "text": "uh uh it has rank two so I'm going to"
+    },
+    {
+      "index": 179,
+      "start": 589.12,
+      "end": 593.35,
+      "duration": 4.23,
+      "text": "look for two vectors V1 and V2 in the in"
+    },
+    {
+      "index": 180,
+      "start": 593.36,
+      "end": 595.67,
+      "duration": 2.31,
+      "text": "the row space and you so I'm going to"
+    },
+    {
+      "index": 181,
+      "start": 595.68,
+      "end": 597.87,
+      "duration": 2.19,
+      "text": "look for V1"
+    },
+    {
+      "index": 182,
+      "start": 597.88,
+      "end": 600.35,
+      "duration": 2.47,
+      "text": "V2 in the"
+    },
+    {
+      "index": 183,
+      "start": 600.36,
+      "end": 604.31,
+      "duration": 3.95,
+      "text": "space which of course is"
+    },
+    {
+      "index": 184,
+      "start": 604.32,
+      "end": 608.23,
+      "duration": 3.91,
+      "text": "R2 and I'm going to look for U1 U2 in"
+    },
+    {
+      "index": 185,
+      "start": 608.24,
+      "end": 609.99,
+      "duration": 1.75,
+      "text": "the column"
+    },
+    {
+      "index": 186,
+      "start": 610.0,
+      "end": 614.11,
+      "duration": 4.11,
+      "text": "space which of course is also R2 and I'm"
+    },
+    {
+      "index": 187,
+      "start": 614.12,
+      "end": 617.11,
+      "duration": 2.99,
+      "text": "going to look for numbers Sigma one and"
+    },
+    {
+      "index": 188,
+      "start": 617.12,
+      "end": 621.069,
+      "duration": 3.949,
+      "text": "sigma 2 so that it all comes out right"
+    },
+    {
+      "index": 189,
+      "start": 621.079,
+      "end": 623.389,
+      "duration": 2.31,
+      "text": "so these guys are or"
+    },
+    {
+      "index": 190,
+      "start": 623.399,
+      "end": 626.069,
+      "duration": 2.67,
+      "text": "orthonormal these guys are orthonormal"
+    },
+    {
+      "index": 191,
+      "start": 626.079,
+      "end": 628.829,
+      "duration": 2.75,
+      "text": "and these are the scaling factors so"
+    },
+    {
+      "index": 192,
+      "start": 628.839,
+      "end": 632.35,
+      "duration": 3.511,
+      "text": "I'll do that that example as soon as I"
+    },
+    {
+      "index": 193,
+      "start": 632.36,
+      "end": 636.269,
+      "duration": 3.909,
+      "text": "get the Matrix picture straight okay do"
+    },
+    {
+      "index": 194,
+      "start": 636.279,
+      "end": 639.31,
+      "duration": 3.031,
+      "text": "you see that this expresses what I want"
+    },
+    {
+      "index": 195,
+      "start": 639.32,
+      "end": 641.35,
+      "duration": 2.03,
+      "text": "can I just"
+    },
+    {
+      "index": 196,
+      "start": 641.36,
+      "end": 645.79,
+      "duration": 4.43,
+      "text": "say two words about null spaces if we"
+    },
+    {
+      "index": 197,
+      "start": 645.8,
+      "end": 648.79,
+      "duration": 2.99,
+      "text": "have if there's some null"
+    },
+    {
+      "index": 198,
+      "start": 648.8,
+      "end": 653.75,
+      "duration": 4.95,
+      "text": "space then we've got we want to stick in"
+    },
+    {
+      "index": 199,
+      "start": 653.76,
+      "end": 656.949,
+      "duration": 3.189,
+      "text": "a basis for those for that so here comes"
+    },
+    {
+      "index": 200,
+      "start": 656.959,
+      "end": 660.87,
+      "duration": 3.911,
+      "text": "a basis for the null space V r + one"
+    },
+    {
+      "index": 201,
+      "start": 660.88,
+      "end": 664.75,
+      "duration": 3.87,
+      "text": "down to VN so if if we only had an R"
+    },
+    {
+      "index": 202,
+      "start": 664.76,
+      "end": 667.949,
+      "duration": 3.189,
+      "text": "dimensional row space and the other n"
+    },
+    {
+      "index": 203,
+      "start": 667.959,
+      "end": 669.99,
+      "duration": 2.031,
+      "text": "minus r Dimensions were in the null"
+    },
+    {
+      "index": 204,
+      "start": 670.0,
+      "end": 672.509,
+      "duration": 2.509,
+      "text": "space okay we'll take an orthogonal"
+    },
+    {
+      "index": 205,
+      "start": 672.519,
+      "end": 676.11,
+      "duration": 3.591,
+      "text": "orthonormal basis there no problem and"
+    },
+    {
+      "index": 206,
+      "start": 676.12,
+      "end": 677.949,
+      "duration": 1.829,
+      "text": "then we'll just get"
+    },
+    {
+      "index": 207,
+      "start": 677.959,
+      "end": 681.31,
+      "duration": 3.351,
+      "text": "zeros so actually those zeros will come"
+    },
+    {
+      "index": 208,
+      "start": 681.32,
+      "end": 684.23,
+      "duration": 2.91,
+      "text": "out from the from the on the diagonal"
+    },
+    {
+      "index": 209,
+      "start": 684.24,
+      "end": 689.31,
+      "duration": 5.07,
+      "text": "matrix so I'll I'll complete that to uh"
+    },
+    {
+      "index": 210,
+      "start": 689.32,
+      "end": 693.629,
+      "duration": 4.309,
+      "text": "to um orthonormal basis for the whole"
+    },
+    {
+      "index": 211,
+      "start": 693.639,
+      "end": 696.59,
+      "duration": 2.951,
+      "text": "Space RM I complete this to an"
+    },
+    {
+      "index": 212,
+      "start": 696.6,
+      "end": 699.509,
+      "duration": 2.909,
+      "text": "orthonormal bases for the whole Space RN"
+    },
+    {
+      "index": 213,
+      "start": 699.519,
+      "end": 702.03,
+      "duration": 2.511,
+      "text": "and I complete that with"
+    },
+    {
+      "index": 214,
+      "start": 702.04,
+      "end": 706.829,
+      "duration": 4.789,
+      "text": "zeros uh null spaces are no problem here"
+    },
+    {
+      "index": 215,
+      "start": 706.839,
+      "end": 710.87,
+      "duration": 4.031,
+      "text": "so really the true the true problem is"
+    },
+    {
+      "index": 216,
+      "start": 710.88,
+      "end": 713.31,
+      "duration": 2.43,
+      "text": "in a matrix like that which isn't"
+    },
+    {
+      "index": 217,
+      "start": 713.32,
+      "end": 715.47,
+      "duration": 2.15,
+      "text": "symmetric so I can't use its igen"
+    },
+    {
+      "index": 218,
+      "start": 715.48,
+      "end": 718.389,
+      "duration": 2.909,
+      "text": "vectors they're not orthogonal but"
+    },
+    {
+      "index": 219,
+      "start": 718.399,
+      "end": 722.23,
+      "duration": 3.831,
+      "text": "somehow I have to get these orthogonal"
+    },
+    {
+      "index": 220,
+      "start": 722.24,
+      "end": 723.67,
+      "duration": 1.43,
+      "text": "in fact"
+    },
+    {
+      "index": 221,
+      "start": 723.68,
+      "end": 725.79,
+      "duration": 2.11,
+      "text": "orthonormal"
+    },
+    {
+      "index": 222,
+      "start": 725.8,
+      "end": 728.509,
+      "duration": 2.709,
+      "text": "guys that make it"
+    },
+    {
+      "index": 223,
+      "start": 728.519,
+      "end": 731.509,
+      "duration": 2.99,
+      "text": "work I I have to find this These"
+    },
+    {
+      "index": 224,
+      "start": 731.519,
+      "end": 733.91,
+      "duration": 2.391,
+      "text": "orthonormal Guys these orthonormal guys"
+    },
+    {
+      "index": 225,
+      "start": 733.92,
+      "end": 739.55,
+      "duration": 5.63,
+      "text": "and I want a V1 to be Sigma 1 U1 and AV"
+    },
+    {
+      "index": 226,
+      "start": 739.56,
+      "end": 742.629,
+      "duration": 3.069,
+      "text": "V2 to be Sigma 2"
+    },
+    {
+      "index": 227,
+      "start": 742.639,
+      "end": 745.75,
+      "duration": 3.111,
+      "text": "U2"
+    },
+    {
+      "index": 228,
+      "start": 749.99,
+      "end": 750.0,
+      "duration": 0.01,
+      "text": "okay that's my goal here's here here's"
+    },
+    {
+      "index": 229,
+      "start": 750.0,
+      "end": 753.35,
+      "duration": 3.35,
+      "text": "the uh matrices that are going to get me"
+    },
+    {
+      "index": 230,
+      "start": 753.36,
+      "end": 756.509,
+      "duration": 3.149,
+      "text": "there now these are orthogonal matrices"
+    },
+    {
+      "index": 231,
+      "start": 756.519,
+      "end": 759.15,
+      "duration": 2.631,
+      "text": "I can put that if I multiply on both"
+    },
+    {
+      "index": 232,
+      "start": 759.16,
+      "end": 760.91,
+      "duration": 1.75,
+      "text": "both sides by V"
+    },
+    {
+      "index": 233,
+      "start": 760.92,
+      "end": 768.03,
+      "duration": 7.11,
+      "text": "inverse I have a equal U Sigma V inverse"
+    },
+    {
+      "index": 234,
+      "start": 768.04,
+      "end": 769.269,
+      "duration": 1.229,
+      "text": "and of"
+    },
+    {
+      "index": 235,
+      "start": 769.279,
+      "end": 771.75,
+      "duration": 2.471,
+      "text": "course you know the other way I can"
+    },
+    {
+      "index": 236,
+      "start": 771.76,
+      "end": 774.509,
+      "duration": 2.749,
+      "text": "write V inverse this is one of those"
+    },
+    {
+      "index": 237,
+      "start": 774.519,
+      "end": 777.99,
+      "duration": 3.471,
+      "text": "Square orthogonal matrices so it's the"
+    },
+    {
+      "index": 238,
+      "start": 778.0,
+      "end": 782.11,
+      "duration": 4.11,
+      "text": "same as U Sigma V"
+    },
+    {
+      "index": 239,
+      "start": 782.12,
+      "end": 784.949,
+      "duration": 2.829,
+      "text": "transpose"
+    },
+    {
+      "index": 240,
+      "start": 784.959,
+      "end": 787.949,
+      "duration": 2.99,
+      "text": "okay here's my"
+    },
+    {
+      "index": 241,
+      "start": 787.959,
+      "end": 790.87,
+      "duration": 2.911,
+      "text": "problem I've got"
+    },
+    {
+      "index": 242,
+      "start": 790.88,
+      "end": 794.87,
+      "duration": 3.99,
+      "text": "two orthogonal matrices here and I don't"
+    },
+    {
+      "index": 243,
+      "start": 794.88,
+      "end": 798.069,
+      "duration": 3.189,
+      "text": "want to find them both at once so I want"
+    },
+    {
+      "index": 244,
+      "start": 798.079,
+      "end": 801.43,
+      "duration": 3.351,
+      "text": "to cook up some expression that will"
+    },
+    {
+      "index": 245,
+      "start": 801.44,
+      "end": 802.12,
+      "duration": 0.68,
+      "text": "make"
+    },
+    {
+      "index": 246,
+      "start": 802.13,
+      "end": 803.509,
+      "duration": 1.379,
+      "text": "[Music]"
+    },
+    {
+      "index": 247,
+      "start": 803.519,
+      "end": 807.43,
+      "duration": 3.911,
+      "text": "the use disappear I would like to make"
+    },
+    {
+      "index": 248,
+      "start": 807.44,
+      "end": 809.43,
+      "duration": 1.99,
+      "text": "the use disappear and leave me only with"
+    },
+    {
+      "index": 249,
+      "start": 809.44,
+      "end": 813.71,
+      "duration": 4.27,
+      "text": "the v's and here's how to do it"
+    },
+    {
+      "index": 250,
+      "start": 813.72,
+      "end": 816.59,
+      "duration": 2.87,
+      "text": "it's it's the same combination that"
+    },
+    {
+      "index": 251,
+      "start": 816.6,
+      "end": 818.79,
+      "duration": 2.19,
+      "text": "keeps showing up whenever we have a"
+    },
+    {
+      "index": 252,
+      "start": 818.8,
+      "end": 822.35,
+      "duration": 3.55,
+      "text": "general rectangular Matrix then it's a"
+    },
+    {
+      "index": 253,
+      "start": 822.36,
+      "end": 826.629,
+      "duration": 4.269,
+      "text": "transpose a that's the great Matrix"
+    },
+    {
+      "index": 254,
+      "start": 826.639,
+      "end": 829.069,
+      "duration": 2.43,
+      "text": "that's the great Matrix that's the"
+    },
+    {
+      "index": 255,
+      "start": 829.079,
+      "end": 830.389,
+      "duration": 1.31,
+      "text": "Matrix that's"
+    },
+    {
+      "index": 256,
+      "start": 830.399,
+      "end": 833.23,
+      "duration": 2.831,
+      "text": "symmetric and in fact positive definite"
+    },
+    {
+      "index": 257,
+      "start": 833.24,
+      "end": 835.35,
+      "duration": 2.11,
+      "text": "or at least positive semi-definite this"
+    },
+    {
+      "index": 258,
+      "start": 835.36,
+      "end": 837.629,
+      "duration": 2.269,
+      "text": "is the Matrix with nice properties so"
+    },
+    {
+      "index": 259,
+      "start": 837.639,
+      "end": 840.069,
+      "duration": 2.43,
+      "text": "let's see what will it be so if I took"
+    },
+    {
+      "index": 260,
+      "start": 840.079,
+      "end": 843.389,
+      "duration": 3.31,
+      "text": "the transpose then I would have a"
+    },
+    {
+      "index": 261,
+      "start": 843.399,
+      "end": 846.79,
+      "duration": 3.391,
+      "text": "transpose a will be what what do I have"
+    },
+    {
+      "index": 262,
+      "start": 846.8,
+      "end": 850.23,
+      "duration": 3.43,
+      "text": "if I transpose that I have V Sigma"
+    },
+    {
+      "index": 263,
+      "start": 850.24,
+      "end": 853.55,
+      "duration": 3.31,
+      "text": "transpose U transpose that's that's the"
+    },
+    {
+      "index": 264,
+      "start": 853.56,
+      "end": 857.31,
+      "duration": 3.75,
+      "text": "a transpose now the"
+    },
+    {
+      "index": 265,
+      "start": 857.32,
+      "end": 860.79,
+      "duration": 3.47,
+      "text": "A and what have I"
+    },
+    {
+      "index": 266,
+      "start": 860.8,
+      "end": 863.79,
+      "duration": 2.99,
+      "text": "got looks like worse because it's got"
+    },
+    {
+      "index": 267,
+      "start": 863.8,
+      "end": 867.269,
+      "duration": 3.469,
+      "text": "six things now together but it's going"
+    },
+    {
+      "index": 268,
+      "start": 867.279,
+      "end": 870.91,
+      "duration": 3.631,
+      "text": "to collapse into something good what"
+    },
+    {
+      "index": 269,
+      "start": 870.92,
+      "end": 875.23,
+      "duration": 4.31,
+      "text": "does U transpose U collapse into I the"
+    },
+    {
+      "index": 270,
+      "start": 875.24,
+      "end": 877.71,
+      "duration": 2.47,
+      "text": "identity so that's the key point this is"
+    },
+    {
+      "index": 271,
+      "start": 877.72,
+      "end": 881.11,
+      "duration": 3.39,
+      "text": "the identity and we don't have you"
+    },
+    {
+      "index": 272,
+      "start": 881.12,
+      "end": 884.15,
+      "duration": 3.03,
+      "text": "anymore and sigma transpose time Sigma"
+    },
+    {
+      "index": 273,
+      "start": 884.16,
+      "end": 885.949,
+      "duration": 1.789,
+      "text": "those are diagonal"
+    },
+    {
+      "index": 274,
+      "start": 885.959,
+      "end": 888.31,
+      "duration": 2.351,
+      "text": "matrices so their product is just going"
+    },
+    {
+      "index": 275,
+      "start": 888.32,
+      "end": 890.71,
+      "duration": 2.39,
+      "text": "to have Sigma squares on the diagonal so"
+    },
+    {
+      "index": 276,
+      "start": 890.72,
+      "end": 894.269,
+      "duration": 3.549,
+      "text": "do you see what we've got here this is"
+    },
+    {
+      "index": 277,
+      "start": 894.279,
+      "end": 898.43,
+      "duration": 4.151,
+      "text": "V times this easy Matrix Sigma 1^ 2"
+    },
+    {
+      "index": 278,
+      "start": 898.44,
+      "end": 902.15,
+      "duration": 3.71,
+      "text": "Sigma 2 ^ 2 * V"
+    },
+    {
+      "index": 279,
+      "start": 902.16,
+      "end": 904.629,
+      "duration": 2.469,
+      "text": "transpose this is this is the a"
+    },
+    {
+      "index": 280,
+      "start": 904.639,
+      "end": 907.71,
+      "duration": 3.071,
+      "text": "transpose a this is let me copy down a"
+    },
+    {
+      "index": 281,
+      "start": 907.72,
+      "end": 911.509,
+      "duration": 3.789,
+      "text": "transpose a is"
+    },
+    {
+      "index": 282,
+      "start": 914.269,
+      "end": 914.279,
+      "duration": 0.01,
+      "text": "that 's are out of the picture now I'm"
+    },
+    {
+      "index": 283,
+      "start": 914.279,
+      "end": 916.67,
+      "duration": 2.391,
+      "text": "only having to choose the v's and what"
+    },
+    {
+      "index": 284,
+      "start": 916.68,
+      "end": 922.55,
+      "duration": 5.87,
+      "text": "are these v's and what are these"
+    },
+    {
+      "index": 285,
+      "start": 925.749,
+      "end": 925.759,
+      "duration": 0.01,
+      "text": "sigmas do you know what the v's"
+    },
+    {
+      "index": 286,
+      "start": 925.759,
+      "end": 928.99,
+      "duration": 3.231,
+      "text": "are they're the igen vectors see this is"
+    },
+    {
+      "index": 287,
+      "start": 929.0,
+      "end": 930.069,
+      "duration": 1.069,
+      "text": "a"
+    },
+    {
+      "index": 288,
+      "start": 930.079,
+      "end": 933.509,
+      "duration": 3.43,
+      "text": "perfect igen Vector igen"
+    },
+    {
+      "index": 289,
+      "start": 933.519,
+      "end": 936.79,
+      "duration": 3.271,
+      "text": "value Q Lambda Q"
+    },
+    {
+      "index": 290,
+      "start": 936.8,
+      "end": 942.15,
+      "duration": 5.35,
+      "text": "transpose for the Matrix a transpose a a"
+    },
+    {
+      "index": 291,
+      "start": 942.16,
+      "end": 945.509,
+      "duration": 3.349,
+      "text": "itself is like nothing special but a"
+    },
+    {
+      "index": 292,
+      "start": 945.519,
+      "end": 948.91,
+      "duration": 3.391,
+      "text": "transpose a will be special it'll be"
+    },
+    {
+      "index": 293,
+      "start": 948.92,
+      "end": 951.309,
+      "duration": 2.389,
+      "text": "symmetric positive definite so this will"
+    },
+    {
+      "index": 294,
+      "start": 951.319,
+      "end": 954.069,
+      "duration": 2.75,
+      "text": "be its igen vectors and this will be its"
+    },
+    {
+      "index": 295,
+      "start": 954.079,
+      "end": 956.71,
+      "duration": 2.631,
+      "text": "igen values and the igen values will be"
+    },
+    {
+      "index": 296,
+      "start": 956.72,
+      "end": 959.71,
+      "duration": 2.99,
+      "text": "positive because this thing positive"
+    },
+    {
+      "index": 297,
+      "start": 959.72,
+      "end": 964.15,
+      "duration": 4.43,
+      "text": "definite can I just now so so this is my"
+    },
+    {
+      "index": 298,
+      "start": 964.16,
+      "end": 967.309,
+      "duration": 3.149,
+      "text": "method this tells me what the v's are"
+    },
+    {
+      "index": 299,
+      "start": 967.319,
+      "end": 970.79,
+      "duration": 3.471,
+      "text": "and how am I going to find the"
+    },
+    {
+      "index": 300,
+      "start": 977.03,
+      "end": 977.04,
+      "duration": 0.01,
+      "text": "'s well one way would be to look at a a"
+    },
+    {
+      "index": 301,
+      "start": 977.04,
+      "end": 980.269,
+      "duration": 3.229,
+      "text": "transpose put multiply a by a transpose"
+    },
+    {
+      "index": 302,
+      "start": 980.279,
+      "end": 983.15,
+      "duration": 2.871,
+      "text": "in the opposite order that will stick"
+    },
+    {
+      "index": 303,
+      "start": 983.16,
+      "end": 985.509,
+      "duration": 2.349,
+      "text": "the V's in the middle knock them out and"
+    },
+    {
+      "index": 304,
+      "start": 985.519,
+      "end": 988.43,
+      "duration": 2.911,
+      "text": "leave me with the U's so here's the"
+    },
+    {
+      "index": 305,
+      "start": 988.44,
+      "end": 992.629,
+      "duration": 4.189,
+      "text": "overall picture then the v's are the IG"
+    },
+    {
+      "index": 306,
+      "start": 992.639,
+      "end": 996.59,
+      "duration": 3.951,
+      "text": "vectors of a transpose a the U's are the"
+    },
+    {
+      "index": 307,
+      "start": 996.6,
+      "end": 999.949,
+      "duration": 3.349,
+      "text": "igon vectors of AA transpose which are"
+    },
+    {
+      "index": 308,
+      "start": 999.959,
+      "end": 1003.55,
+      "duration": 3.591,
+      "text": "different and the sigmas are the square"
+    },
+    {
+      "index": 309,
+      "start": 1003.56,
+      "end": 1005.59,
+      "duration": 2.03,
+      "text": "roots of"
+    },
+    {
+      "index": 310,
+      "start": 1005.6,
+      "end": 1008.87,
+      "duration": 3.27,
+      "text": "these and the positive square roots so"
+    },
+    {
+      "index": 311,
+      "start": 1008.88,
+      "end": 1011.269,
+      "duration": 2.389,
+      "text": "we have positive sigmas let me do that"
+    },
+    {
+      "index": 312,
+      "start": 1011.279,
+      "end": 1014.389,
+      "duration": 3.11,
+      "text": "for that example this is this is really"
+    },
+    {
+      "index": 313,
+      "start": 1014.399,
+      "end": 1017.67,
+      "duration": 3.271,
+      "text": "what you should know and be able to do"
+    },
+    {
+      "index": 314,
+      "start": 1017.68,
+      "end": 1019.79,
+      "duration": 2.11,
+      "text": "for um"
+    },
+    {
+      "index": 315,
+      "start": 1019.8,
+      "end": 1023.629,
+      "duration": 3.829,
+      "text": "the the SVD okay let me take that Matrix"
+    },
+    {
+      "index": 316,
+      "start": 1023.639,
+      "end": 1025.47,
+      "duration": 1.831,
+      "text": "so what's my first"
+    },
+    {
+      "index": 317,
+      "start": 1025.48,
+      "end": 1029.75,
+      "duration": 4.27,
+      "text": "step compute a transpose a because I"
+    },
+    {
+      "index": 318,
+      "start": 1029.76,
+      "end": 1033.189,
+      "duration": 3.429,
+      "text": "want its igen vectors okay so I have to"
+    },
+    {
+      "index": 319,
+      "start": 1033.199,
+      "end": 1035.71,
+      "duration": 2.511,
+      "text": "compute a transpose"
+    },
+    {
+      "index": 320,
+      "start": 1035.72,
+      "end": 1043.51,
+      "duration": 7.79,
+      "text": "a so a transpose is 4 4 minus 3 3 and a"
+    },
+    {
+      "index": 321,
+      "start": 1043.52,
+      "end": 1049.07,
+      "duration": 5.55,
+      "text": "is 44 - 33 and I do that multiplication"
+    },
+    {
+      "index": 322,
+      "start": 1049.08,
+      "end": 1051.909,
+      "duration": 2.829,
+      "text": "and I get 16 I get"
+    },
+    {
+      "index": 323,
+      "start": 1051.919,
+      "end": 1058.47,
+      "duration": 6.551,
+      "text": "25 I get 16 - 99 is that 7 and it better"
+    },
+    {
+      "index": 324,
+      "start": 1058.48,
+      "end": 1059.43,
+      "duration": 0.95,
+      "text": "come out"
+    },
+    {
+      "index": 325,
+      "start": 1059.44,
+      "end": 1061.83,
+      "duration": 2.39,
+      "text": "symmetric and oh okay and then it comes"
+    },
+    {
+      "index": 326,
+      "start": 1061.84,
+      "end": 1062.99,
+      "duration": 1.15,
+      "text": "out"
+    },
+    {
+      "index": 327,
+      "start": 1063.0,
+      "end": 1066.39,
+      "duration": 3.39,
+      "text": "25"
+    },
+    {
+      "index": 328,
+      "start": 1068.35,
+      "end": 1068.36,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 329,
+      "start": 1068.36,
+      "end": 1071.63,
+      "duration": 3.27,
+      "text": "so I want its igen vectors and its igen"
+    },
+    {
+      "index": 330,
+      "start": 1071.64,
+      "end": 1074.549,
+      "duration": 2.909,
+      "text": "values its igen vectors will be the v's"
+    },
+    {
+      "index": 331,
+      "start": 1074.559,
+      "end": 1077.549,
+      "duration": 2.99,
+      "text": "its igon values will be the squares of"
+    },
+    {
+      "index": 332,
+      "start": 1077.559,
+      "end": 1081.11,
+      "duration": 3.551,
+      "text": "the sigmas okay what are the igen values"
+    },
+    {
+      "index": 333,
+      "start": 1081.12,
+      "end": 1083.87,
+      "duration": 2.75,
+      "text": "and igen vectors of this"
+    },
+    {
+      "index": 334,
+      "start": 1083.88,
+      "end": 1086.63,
+      "duration": 2.75,
+      "text": "guy have you you have you seen that 2 by"
+    },
+    {
+      "index": 335,
+      "start": 1086.64,
+      "end": 1091.029,
+      "duration": 4.389,
+      "text": "two example enough to recognize that the"
+    },
+    {
+      "index": 336,
+      "start": 1091.039,
+      "end": 1095.95,
+      "duration": 4.911,
+      "text": "igen vectors are that 1 one is an igen"
+    },
+    {
+      "index": 337,
+      "start": 1095.96,
+      "end": 1099.19,
+      "duration": 3.23,
+      "text": "Vector so this is here is a transpose a"
+    },
+    {
+      "index": 338,
+      "start": 1099.2,
+      "end": 1101.27,
+      "duration": 2.07,
+      "text": "I'm looking for its IG"
+    },
+    {
+      "index": 339,
+      "start": 1101.28,
+      "end": 1104.35,
+      "duration": 3.07,
+      "text": "vectors so its igon vectors I think are"
+    },
+    {
+      "index": 340,
+      "start": 1104.36,
+      "end": 1109.07,
+      "duration": 4.71,
+      "text": "1 one and 1us one because if I multip"
+    },
+    {
+      "index": 341,
+      "start": 1109.08,
+      "end": 1112.909,
+      "duration": 3.829,
+      "text": "that matrix by 1 one what do I get if I"
+    },
+    {
+      "index": 342,
+      "start": 1112.919,
+      "end": 1117.19,
+      "duration": 4.271,
+      "text": "multiply that matrix by 1 one I get 32"
+    },
+    {
+      "index": 343,
+      "start": 1117.2,
+      "end": 1120.43,
+      "duration": 3.23,
+      "text": "32 so which is 32 of 1"
+    },
+    {
+      "index": 344,
+      "start": 1120.44,
+      "end": 1122.31,
+      "duration": 1.87,
+      "text": "one so"
+    },
+    {
+      "index": 345,
+      "start": 1122.32,
+      "end": 1124.789,
+      "duration": 2.469,
+      "text": "there's the first IG"
+    },
+    {
+      "index": 346,
+      "start": 1124.799,
+      "end": 1127.909,
+      "duration": 3.11,
+      "text": "vector and there's the I value for a"
+    },
+    {
+      "index": 347,
+      "start": 1127.919,
+      "end": 1131.029,
+      "duration": 3.11,
+      "text": "transpose a so I'm going to take its"
+    },
+    {
+      "index": 348,
+      "start": 1131.039,
+      "end": 1136.99,
+      "duration": 5.951,
+      "text": "square root in the um in the"
+    },
+    {
+      "index": 349,
+      "start": 1137.0,
+      "end": 1139.39,
+      "duration": 2.39,
+      "text": "uh for Sigma"
+    },
+    {
+      "index": 350,
+      "start": 1139.4,
+      "end": 1141.669,
+      "duration": 2.269,
+      "text": "okay what's the IG Vector that goes IG"
+    },
+    {
+      "index": 351,
+      "start": 1141.679,
+      "end": 1143.909,
+      "duration": 2.23,
+      "text": "value that goes with this one if I do"
+    },
+    {
+      "index": 352,
+      "start": 1143.919,
+      "end": 1145.99,
+      "duration": 2.071,
+      "text": "that multiplication what do I get I get"
+    },
+    {
+      "index": 353,
+      "start": 1146.0,
+      "end": 1148.87,
+      "duration": 2.87,
+      "text": "some multiple of 1 minus"
+    },
+    {
+      "index": 354,
+      "start": 1148.88,
+      "end": 1151.27,
+      "duration": 2.39,
+      "text": "one and what is that"
+    },
+    {
+      "index": 355,
+      "start": 1151.28,
+      "end": 1155.63,
+      "duration": 4.35,
+      "text": "multiple looks like"
+    },
+    {
+      "index": 356,
+      "start": 1158.789,
+      "end": 1158.799,
+      "duration": 0.01,
+      "text": "18 okay so those are the two igen"
+    },
+    {
+      "index": 357,
+      "start": 1158.799,
+      "end": 1162.149,
+      "duration": 3.35,
+      "text": "vectors but oh just a moment I didn't"
+    },
+    {
+      "index": 358,
+      "start": 1162.159,
+      "end": 1165.95,
+      "duration": 3.791,
+      "text": "normalize them to to make everything"
+    },
+    {
+      "index": 359,
+      "start": 1165.96,
+      "end": 1168.51,
+      "duration": 2.55,
+      "text": "absolutely right I ought to normalize"
+    },
+    {
+      "index": 360,
+      "start": 1168.52,
+      "end": 1171.27,
+      "duration": 2.75,
+      "text": "the these igen vectors divide by their"
+    },
+    {
+      "index": 361,
+      "start": 1171.28,
+      "end": 1175.029,
+      "duration": 3.749,
+      "text": "length Square < TK of two so all these"
+    },
+    {
+      "index": 362,
+      "start": 1175.039,
+      "end": 1180.149,
+      "duration": 5.11,
+      "text": "guys should be true unit"
+    },
+    {
+      "index": 363,
+      "start": 1180.159,
+      "end": 1184.27,
+      "duration": 4.111,
+      "text": "vectors and of course that normalization"
+    },
+    {
+      "index": 364,
+      "start": 1184.28,
+      "end": 1186.47,
+      "duration": 2.19,
+      "text": "didn't change the 32 and the"
+    },
+    {
+      "index": 365,
+      "start": 1186.48,
+      "end": 1192.07,
+      "duration": 5.59,
+      "text": "18 okay so I'm happy with the v's here"
+    },
+    {
+      "index": 366,
+      "start": 1192.08,
+      "end": 1195.39,
+      "duration": 3.31,
+      "text": "are the v's so now let me put together"
+    },
+    {
+      "index": 367,
+      "start": 1195.4,
+      "end": 1199.23,
+      "duration": 3.83,
+      "text": "the the the pieces here here's my a"
+    },
+    {
+      "index": 368,
+      "start": 1199.24,
+      "end": 1204.27,
+      "duration": 5.03,
+      "text": "here's my a let me let me write down a"
+    },
+    {
+      "index": 369,
+      "start": 1204.28,
+      "end": 1206.99,
+      "duration": 2.71,
+      "text": "again this should"
+    },
+    {
+      "index": 370,
+      "start": 1207.0,
+      "end": 1212.95,
+      "duration": 5.95,
+      "text": "if if life is right we should get U"
+    },
+    {
+      "index": 371,
+      "start": 1212.96,
+      "end": 1215.029,
+      "duration": 2.069,
+      "text": "which I don't yet"
+    },
+    {
+      "index": 372,
+      "start": 1215.039,
+      "end": 1219.149,
+      "duration": 4.11,
+      "text": "know youu I don't yet know Sigma I do"
+    },
+    {
+      "index": 373,
+      "start": 1219.159,
+      "end": 1221.95,
+      "duration": 2.791,
+      "text": "now know what's Sigma so I'm looking for"
+    },
+    {
+      "index": 374,
+      "start": 1221.96,
+      "end": 1226.39,
+      "duration": 4.43,
+      "text": "U Sigma V transpose youu the diagonal"
+    },
+    {
+      "index": 375,
+      "start": 1226.4,
+      "end": 1231.59,
+      "duration": 5.19,
+      "text": "guy and V transpose"
+    },
+    {
+      "index": 376,
+      "start": 1233.669,
+      "end": 1233.679,
+      "duration": 0.01,
+      "text": "okay let's just see that come out right"
+    },
+    {
+      "index": 377,
+      "start": 1233.679,
+      "end": 1235.71,
+      "duration": 2.031,
+      "text": "so what's what are the what are the"
+    },
+    {
+      "index": 378,
+      "start": 1235.72,
+      "end": 1238.39,
+      "duration": 2.67,
+      "text": "sigmas they're the square roots of these"
+    },
+    {
+      "index": 379,
+      "start": 1238.4,
+      "end": 1241.43,
+      "duration": 3.03,
+      "text": "things so Square < TK of"
+    },
+    {
+      "index": 380,
+      "start": 1241.44,
+      "end": 1246.75,
+      "duration": 5.31,
+      "text": "32 and square < TK of"
+    },
+    {
+      "index": 381,
+      "start": 1252.43,
+      "end": 1252.44,
+      "duration": 0.01,
+      "text": "18 0 0 okay what are the v's they're"
+    },
+    {
+      "index": 382,
+      "start": 1252.44,
+      "end": 1256.19,
+      "duration": 3.75,
+      "text": "these two and I have to transpose maybe"
+    },
+    {
+      "index": 383,
+      "start": 1256.2,
+      "end": 1259.35,
+      "duration": 3.15,
+      "text": "that maybe that just leaves me with one"
+    },
+    {
+      "index": 384,
+      "start": 1259.36,
+      "end": 1263.23,
+      "duration": 3.87,
+      "text": "with 1/ < TK two in that row and the"
+    },
+    {
+      "index": 385,
+      "start": 1263.24,
+      "end": 1270.59,
+      "duration": 7.35,
+      "text": "other one is 1/ < TK 2- 1 over < TK"
+    },
+    {
+      "index": 386,
+      "start": 1274.07,
+      "end": 1274.08,
+      "duration": 0.01,
+      "text": "two now finally I've got to know the"
+    },
+    {
+      "index": 387,
+      "start": 1274.08,
+      "end": 1277.59,
+      "duration": 3.51,
+      "text": "use well actually one way to do since I"
+    },
+    {
+      "index": 388,
+      "start": 1277.6,
+      "end": 1279.269,
+      "duration": 1.669,
+      "text": "now know all the other pieces I could"
+    },
+    {
+      "index": 389,
+      "start": 1279.279,
+      "end": 1280.99,
+      "duration": 1.711,
+      "text": "put those together and figure out what"
+    },
+    {
+      "index": 390,
+      "start": 1281.0,
+      "end": 1283.63,
+      "duration": 2.63,
+      "text": "the U's are but let me do it the AA"
+    },
+    {
+      "index": 391,
+      "start": 1283.64,
+      "end": 1284.95,
+      "duration": 1.31,
+      "text": "transpose"
+    },
+    {
+      "index": 392,
+      "start": 1284.96,
+      "end": 1291.269,
+      "duration": 6.309,
+      "text": "way okay find the U's now"
+    },
+    {
+      "index": 393,
+      "start": 1292.71,
+      "end": 1292.72,
+      "duration": 0.01,
+      "text": "U1 and"
+    },
+    {
+      "index": 394,
+      "start": 1292.72,
+      "end": 1296.19,
+      "duration": 3.47,
+      "text": "U2 and what are"
+    },
+    {
+      "index": 395,
+      "start": 1296.2,
+      "end": 1300.11,
+      "duration": 3.91,
+      "text": "they I look at a a"
+    },
+    {
+      "index": 396,
+      "start": 1300.12,
+      "end": 1304.31,
+      "duration": 4.19,
+      "text": "transpose so a is supposed to be U Sigma"
+    },
+    {
+      "index": 397,
+      "start": 1304.32,
+      "end": 1305.71,
+      "duration": 1.39,
+      "text": "V"
+    },
+    {
+      "index": 398,
+      "start": 1305.72,
+      "end": 1308.23,
+      "duration": 2.51,
+      "text": "transpose and then when I transpose that"
+    },
+    {
+      "index": 399,
+      "start": 1308.24,
+      "end": 1312.029,
+      "duration": 3.789,
+      "text": "I get V Sigma transpose"
+    },
+    {
+      "index": 400,
+      "start": 1312.039,
+      "end": 1316.11,
+      "duration": 4.071,
+      "text": "U"
+    },
+    {
+      "index": 401,
+      "start": 1318.269,
+      "end": 1318.279,
+      "duration": 0.01,
+      "text": "transpose so I'm just doing it in the"
+    },
+    {
+      "index": 402,
+      "start": 1318.279,
+      "end": 1321.35,
+      "duration": 3.071,
+      "text": "opposite order a * a transpose and"
+    },
+    {
+      "index": 403,
+      "start": 1321.36,
+      "end": 1323.87,
+      "duration": 2.51,
+      "text": "what's the good part here that in the"
+    },
+    {
+      "index": 404,
+      "start": 1323.88,
+      "end": 1329.43,
+      "duration": 5.55,
+      "text": "middle V transpose V is going to be the"
+    },
+    {
+      "index": 405,
+      "start": 1329.44,
+      "end": 1332.39,
+      "duration": 2.95,
+      "text": "identity so this is just"
+    },
+    {
+      "index": 406,
+      "start": 1332.4,
+      "end": 1335.51,
+      "duration": 3.11,
+      "text": "U Sigma Sigma transpose that's some"
+    },
+    {
+      "index": 407,
+      "start": 1335.52,
+      "end": 1341.23,
+      "duration": 5.71,
+      "text": "diagonal matrix with Sigma squares and U"
+    },
+    {
+      "index": 408,
+      "start": 1341.24,
+      "end": 1344.59,
+      "duration": 3.35,
+      "text": "transpose so what am I seeing here I'm"
+    },
+    {
+      "index": 409,
+      "start": 1344.6,
+      "end": 1348.71,
+      "duration": 4.11,
+      "text": "seeing here again a symmetric positive"
+    },
+    {
+      "index": 410,
+      "start": 1348.72,
+      "end": 1350.669,
+      "duration": 1.949,
+      "text": "definite or at least semi-definite"
+    },
+    {
+      "index": 411,
+      "start": 1350.679,
+      "end": 1353.99,
+      "duration": 3.311,
+      "text": "Matrix and I'm seeing its igon vectors"
+    },
+    {
+      "index": 412,
+      "start": 1354.0,
+      "end": 1355.63,
+      "duration": 1.63,
+      "text": "and its igon"
+    },
+    {
+      "index": 413,
+      "start": 1355.64,
+      "end": 1359.39,
+      "duration": 3.75,
+      "text": "values so if I compute AA"
+    },
+    {
+      "index": 414,
+      "start": 1359.4,
+      "end": 1361.99,
+      "duration": 2.59,
+      "text": "transpose its ion vectors will be the"
+    },
+    {
+      "index": 415,
+      "start": 1362.0,
+      "end": 1365.149,
+      "duration": 3.149,
+      "text": "things that go into U okay so I need to"
+    },
+    {
+      "index": 416,
+      "start": 1365.159,
+      "end": 1367.99,
+      "duration": 2.831,
+      "text": "compute AA transpose I guess I'm going"
+    },
+    {
+      "index": 417,
+      "start": 1368.0,
+      "end": 1371.83,
+      "duration": 3.83,
+      "text": "to have to go let me can I can I move"
+    },
+    {
+      "index": 418,
+      "start": 1371.84,
+      "end": 1374.269,
+      "duration": 2.429,
+      "text": "that up just a little maybe a little"
+    },
+    {
+      "index": 419,
+      "start": 1374.279,
+      "end": 1379.71,
+      "duration": 5.431,
+      "text": "more and do AA transpose"
+    },
+    {
+      "index": 420,
+      "start": 1382.95,
+      "end": 1382.96,
+      "duration": 0.01,
+      "text": "so what's a 4"
+    },
+    {
+      "index": 421,
+      "start": 1382.96,
+      "end": 1386.59,
+      "duration": 3.63,
+      "text": "4 minus 3 and three and what's a"
+    },
+    {
+      "index": 422,
+      "start": 1386.6,
+      "end": 1391.029,
+      "duration": 4.429,
+      "text": "transpose 4 4 - 3 and 3 and when I do"
+    },
+    {
+      "index": 423,
+      "start": 1391.039,
+      "end": 1392.029,
+      "duration": 0.99,
+      "text": "that"
+    },
+    {
+      "index": 424,
+      "start": 1392.039,
+      "end": 1396.35,
+      "duration": 4.311,
+      "text": "multiplication uh I get what do I get 16"
+    },
+    {
+      "index": 425,
+      "start": 1396.36,
+      "end": 1399.149,
+      "duration": 2.789,
+      "text": "and 16"
+    },
+    {
+      "index": 426,
+      "start": 1399.159,
+      "end": 1402.269,
+      "duration": 3.11,
+      "text": "32 uh that one comes out zero oh so this"
+    },
+    {
+      "index": 427,
+      "start": 1402.279,
+      "end": 1406.75,
+      "duration": 4.471,
+      "text": "is a lucky case and that one comes out"
+    },
+    {
+      "index": 428,
+      "start": 1406.76,
+      "end": 1410.43,
+      "duration": 3.67,
+      "text": "18 so this is a like an accident that a"
+    },
+    {
+      "index": 429,
+      "start": 1410.44,
+      "end": 1413.63,
+      "duration": 3.19,
+      "text": "a transpose happens to come out"
+    },
+    {
+      "index": 430,
+      "start": 1413.64,
+      "end": 1417.51,
+      "duration": 3.87,
+      "text": "diagonal so we know easily its igen"
+    },
+    {
+      "index": 431,
+      "start": 1417.52,
+      "end": 1419.83,
+      "duration": 2.31,
+      "text": "vectors and igen values so its igen"
+    },
+    {
+      "index": 432,
+      "start": 1419.84,
+      "end": 1422.63,
+      "duration": 2.79,
+      "text": "vectors are what's the first igen Vector"
+    },
+    {
+      "index": 433,
+      "start": 1422.64,
+      "end": 1425.59,
+      "duration": 2.95,
+      "text": "for this AA transposed matrix it's just"
+    },
+    {
+      "index": 434,
+      "start": 1425.6,
+      "end": 1427.19,
+      "duration": 1.59,
+      "text": "one"
+    },
+    {
+      "index": 435,
+      "start": 1427.2,
+      "end": 1430.029,
+      "duration": 2.829,
+      "text": "Z and when I do that multiplication I"
+    },
+    {
+      "index": 436,
+      "start": 1430.039,
+      "end": 1432.99,
+      "duration": 2.951,
+      "text": "get 32 * 1"
+    },
+    {
+      "index": 437,
+      "start": 1433.0,
+      "end": 1437.59,
+      "duration": 4.59,
+      "text": "0 and the other igen Vector is just 01"
+    },
+    {
+      "index": 438,
+      "start": 1437.6,
+      "end": 1440.789,
+      "duration": 3.189,
+      "text": "and when I multiply by that I get 18 so"
+    },
+    {
+      "index": 439,
+      "start": 1440.799,
+      "end": 1443.669,
+      "duration": 2.87,
+      "text": "this is a a"
+    },
+    {
+      "index": 440,
+      "start": 1443.679,
+      "end": 1446.19,
+      "duration": 2.511,
+      "text": "transpose multiplying that gives me the"
+    },
+    {
+      "index": 441,
+      "start": 1446.2,
+      "end": 1449.909,
+      "duration": 3.709,
+      "text": "32 a a transpose multiplying this guy"
+    },
+    {
+      "index": 442,
+      "start": 1449.919,
+      "end": 1452.39,
+      "duration": 2.471,
+      "text": "gives me"
+    },
+    {
+      "index": 443,
+      "start": 1452.4,
+      "end": 1454.35,
+      "duration": 1.95,
+      "text": "18 first of"
+    },
+    {
+      "index": 444,
+      "start": 1454.36,
+      "end": 1457.549,
+      "duration": 3.189,
+      "text": "all I got 32 and 18"
+    },
+    {
+      "index": 445,
+      "start": 1457.559,
+      "end": 1460.83,
+      "duration": 3.271,
+      "text": "Again am I"
+    },
+    {
+      "index": 446,
+      "start": 1460.84,
+      "end": 1463.39,
+      "duration": 2.55,
+      "text": "surprised yeah it's clearly not an"
+    },
+    {
+      "index": 447,
+      "start": 1463.4,
+      "end": 1467.47,
+      "duration": 4.07,
+      "text": "accident the I values of AA transpose"
+    },
+    {
+      "index": 448,
+      "start": 1467.48,
+      "end": 1470.47,
+      "duration": 2.99,
+      "text": "were exactly the the same as the igen"
+    },
+    {
+      "index": 449,
+      "start": 1470.48,
+      "end": 1476.789,
+      "duration": 6.309,
+      "text": "values of this one was a transpose"
+    },
+    {
+      "index": 450,
+      "start": 1480.669,
+      "end": 1480.679,
+      "duration": 0.01,
+      "text": "a that's no surprise at all the IG"
+    },
+    {
+      "index": 451,
+      "start": 1480.679,
+      "end": 1483.269,
+      "duration": 2.59,
+      "text": "values of ab are the same as the igen"
+    },
+    {
+      "index": 452,
+      "start": 1483.279,
+      "end": 1484.43,
+      "duration": 1.151,
+      "text": "values of"
+    },
+    {
+      "index": 453,
+      "start": 1484.44,
+      "end": 1488.99,
+      "duration": 4.55,
+      "text": "ba the the order if I that's a very nice"
+    },
+    {
+      "index": 454,
+      "start": 1489.0,
+      "end": 1492.07,
+      "duration": 3.07,
+      "text": "fact that igen values stay the same if I"
+    },
+    {
+      "index": 455,
+      "start": 1492.08,
+      "end": 1494.269,
+      "duration": 2.189,
+      "text": "switch the order of"
+    },
+    {
+      "index": 456,
+      "start": 1494.279,
+      "end": 1497.47,
+      "duration": 3.191,
+      "text": "multiplication so no surprise to see 32"
+    },
+    {
+      "index": 457,
+      "start": 1497.48,
+      "end": 1500.549,
+      "duration": 3.069,
+      "text": "and 18 what what I"
+    },
+    {
+      "index": 458,
+      "start": 1500.559,
+      "end": 1504.149,
+      "duration": 3.59,
+      "text": "learned first I check that things were"
+    },
+    {
+      "index": 459,
+      "start": 1504.159,
+      "end": 1506.63,
+      "duration": 2.471,
+      "text": "numerically correct but now I've learned"
+    },
+    {
+      "index": 460,
+      "start": 1506.64,
+      "end": 1510.11,
+      "duration": 3.47,
+      "text": "these igen vectors and actually they're"
+    },
+    {
+      "index": 461,
+      "start": 1510.12,
+      "end": 1512.59,
+      "duration": 2.47,
+      "text": "about as nice as can be"
+    },
+    {
+      "index": 462,
+      "start": 1512.6,
+      "end": 1515.59,
+      "duration": 2.99,
+      "text": "they're the best orthogonal Matrix just"
+    },
+    {
+      "index": 463,
+      "start": 1515.6,
+      "end": 1517.75,
+      "duration": 2.15,
+      "text": "the"
+    },
+    {
+      "index": 464,
+      "start": 1517.76,
+      "end": 1520.87,
+      "duration": 3.11,
+      "text": "identity"
+    },
+    {
+      "index": 465,
+      "start": 1524.71,
+      "end": 1524.72,
+      "duration": 0.01,
+      "text": "okay so my claim is that it ought to all"
+    },
+    {
+      "index": 466,
+      "start": 1524.72,
+      "end": 1526.31,
+      "duration": 1.59,
+      "text": "fit"
+    },
+    {
+      "index": 467,
+      "start": 1526.32,
+      "end": 1529.389,
+      "duration": 3.069,
+      "text": "together that this numer this these"
+    },
+    {
+      "index": 468,
+      "start": 1529.399,
+      "end": 1532.029,
+      "duration": 2.63,
+      "text": "numbers should come out right the"
+    },
+    {
+      "index": 469,
+      "start": 1532.039,
+      "end": 1534.63,
+      "duration": 2.591,
+      "text": "numbers should come out right because"
+    },
+    {
+      "index": 470,
+      "start": 1534.64,
+      "end": 1538.11,
+      "duration": 3.47,
+      "text": "the the uh"
+    },
+    {
+      "index": 471,
+      "start": 1538.12,
+      "end": 1541.269,
+      "duration": 3.149,
+      "text": "Matrix multiplications use the"
+    },
+    {
+      "index": 472,
+      "start": 1541.279,
+      "end": 1543.51,
+      "duration": 2.231,
+      "text": "properties that we want okay so we just"
+    },
+    {
+      "index": 473,
+      "start": 1543.52,
+      "end": 1545.669,
+      "duration": 2.149,
+      "text": "check that here's the identity so not"
+    },
+    {
+      "index": 474,
+      "start": 1545.679,
+      "end": 1548.43,
+      "duration": 2.751,
+      "text": "doing anything Square < TK of 32 is"
+    },
+    {
+      "index": 475,
+      "start": 1548.44,
+      "end": 1551.51,
+      "duration": 3.07,
+      "text": "multiplying that row so that's square of"
+    },
+    {
+      "index": 476,
+      "start": 1551.52,
+      "end": 1555.909,
+      "duration": 4.389,
+      "text": "32 divided < TK of two means < TK of 16"
+    },
+    {
+      "index": 477,
+      "start": 1555.919,
+      "end": 1561.269,
+      "duration": 5.35,
+      "text": "4 correct and > of 18 is divided s > of"
+    },
+    {
+      "index": 478,
+      "start": 1561.279,
+      "end": 1563.87,
+      "duration": 2.591,
+      "text": "two so that leaves me squ < TK of 9"
+    },
+    {
+      "index": 479,
+      "start": 1563.88,
+      "end": 1566.51,
+      "duration": 2.63,
+      "text": "which is three"
+    },
+    {
+      "index": 480,
+      "start": 1566.52,
+      "end": 1570.71,
+      "duration": 4.19,
+      "text": "but now Professor Strang you see the"
+    },
+    {
+      "index": 481,
+      "start": 1570.72,
+      "end": 1573.83,
+      "duration": 3.11,
+      "text": "problem why is that okay why am I"
+    },
+    {
+      "index": 482,
+      "start": 1573.84,
+      "end": 1577.909,
+      "duration": 4.069,
+      "text": "getting Min - 3 3 here and here I'm"
+    },
+    {
+      "index": 483,
+      "start": 1577.919,
+      "end": 1583.389,
+      "duration": 5.47,
+      "text": "getting 3 minus"
+    },
+    {
+      "index": 484,
+      "start": 1585.23,
+      "end": 1585.24,
+      "duration": 0.01,
+      "text": "3"
+    },
+    {
+      "index": 485,
+      "start": 1585.24,
+      "end": 1591.07,
+      "duration": 5.83,
+      "text": "FY I don't know why"
+    },
+    {
+      "index": 486,
+      "start": 1592.669,
+      "end": 1592.679,
+      "duration": 0.01,
+      "text": "it shouldn't have"
+    },
+    {
+      "index": 487,
+      "start": 1592.679,
+      "end": 1595.63,
+      "duration": 2.951,
+      "text": "happened but it did now okay you could"
+    },
+    {
+      "index": 488,
+      "start": 1595.64,
+      "end": 1602.75,
+      "duration": 7.11,
+      "text": "say well uh just uh that the igen vector"
+    },
+    {
+      "index": 489,
+      "start": 1602.76,
+      "end": 1604.51,
+      "duration": 1.75,
+      "text": "there could have I could have had the"
+    },
+    {
+      "index": 490,
+      "start": 1604.52,
+      "end": 1608.19,
+      "duration": 3.67,
+      "text": "minus sign here for that Ian Vector but"
+    },
+    {
+      "index": 491,
+      "start": 1608.2,
+      "end": 1611.909,
+      "duration": 3.709,
+      "text": "I'm not happy about"
+    },
+    {
+      "index": 492,
+      "start": 1617.029,
+      "end": 1617.039,
+      "duration": 0.01,
+      "text": "that H okay so I realize there's a"
+    },
+    {
+      "index": 493,
+      "start": 1617.039,
+      "end": 1619.19,
+      "duration": 2.151,
+      "text": "little catch here somewhere where and I"
+    },
+    {
+      "index": 494,
+      "start": 1619.2,
+      "end": 1622.669,
+      "duration": 3.469,
+      "text": "I may not see it until uh Wednesday"
+    },
+    {
+      "index": 495,
+      "start": 1622.679,
+      "end": 1624.43,
+      "duration": 1.751,
+      "text": "which then gives you a very important"
+    },
+    {
+      "index": 496,
+      "start": 1624.44,
+      "end": 1627.549,
+      "duration": 3.109,
+      "text": "reason to come back on Wednesday to"
+    },
+    {
+      "index": 497,
+      "start": 1627.559,
+      "end": 1630.389,
+      "duration": 2.83,
+      "text": "catch that sign difference so did what"
+    },
+    {
+      "index": 498,
+      "start": 1630.399,
+      "end": 1633.389,
+      "duration": 2.99,
+      "text": "did I do"
+    },
+    {
+      "index": 499,
+      "start": 1633.399,
+      "end": 1636.87,
+      "duration": 3.471,
+      "text": "illegally I think I put the igen"
+    },
+    {
+      "index": 500,
+      "start": 1636.88,
+      "end": 1641.71,
+      "duration": 4.83,
+      "text": "vectors in that Matrix V"
+    },
+    {
+      "index": 501,
+      "start": 1643.87,
+      "end": 1643.88,
+      "duration": 0.01,
+      "text": "transpose okay I'm going to have to"
+    },
+    {
+      "index": 502,
+      "start": 1643.88,
+      "end": 1647.95,
+      "duration": 4.07,
+      "text": "think why did that come out uh with the"
+    },
+    {
+      "index": 503,
+      "start": 1647.96,
+      "end": 1650.95,
+      "duration": 2.99,
+      "text": "with the opposite sign so you see I mean"
+    },
+    {
+      "index": 504,
+      "start": 1650.96,
+      "end": 1652.95,
+      "duration": 1.99,
+      "text": "if I had a minus"
+    },
+    {
+      "index": 505,
+      "start": 1652.96,
+      "end": 1655.669,
+      "duration": 2.709,
+      "text": "there I would be all right but I don't"
+    },
+    {
+      "index": 506,
+      "start": 1655.679,
+      "end": 1659.75,
+      "duration": 4.071,
+      "text": "want that I want positive entries down"
+    },
+    {
+      "index": 507,
+      "start": 1659.76,
+      "end": 1664.509,
+      "duration": 4.749,
+      "text": "the uh diagonal of Sigma"
+    },
+    {
+      "index": 508,
+      "start": 1664.519,
+      "end": 1668.549,
+      "duration": 4.03,
+      "text": "squar okay it'll come to me but uh I'm"
+    },
+    {
+      "index": 509,
+      "start": 1668.559,
+      "end": 1674.07,
+      "duration": 5.511,
+      "text": "going to leave this example to"
+    },
+    {
+      "index": 510,
+      "start": 1674.08,
+      "end": 1676.75,
+      "duration": 2.67,
+      "text": "to to"
+    },
+    {
+      "index": 511,
+      "start": 1676.76,
+      "end": 1679.11,
+      "duration": 2.35,
+      "text": "finish okay"
+    },
+    {
+      "index": 512,
+      "start": 1679.12,
+      "end": 1681.95,
+      "duration": 2.83,
+      "text": "and the beauty of uh these sliding"
+    },
+    {
+      "index": 513,
+      "start": 1681.96,
+      "end": 1685.909,
+      "duration": 3.949,
+      "text": "boards is I can make that go away um can"
+    },
+    {
+      "index": 514,
+      "start": 1685.919,
+      "end": 1690.95,
+      "duration": 5.031,
+      "text": "I uh let me let me not do it though yet"
+    },
+    {
+      "index": 515,
+      "start": 1690.96,
+      "end": 1693.99,
+      "duration": 3.03,
+      "text": "let me take a second"
+    },
+    {
+      "index": 516,
+      "start": 1694.0,
+      "end": 1696.789,
+      "duration": 2.789,
+      "text": "example let me take a second example"
+    },
+    {
+      "index": 517,
+      "start": 1696.799,
+      "end": 1700.75,
+      "duration": 3.951,
+      "text": "where the Matrix is"
+    },
+    {
+      "index": 518,
+      "start": 1703.269,
+      "end": 1703.279,
+      "duration": 0.01,
+      "text": "singular so rank"
+    },
+    {
+      "index": 519,
+      "start": 1703.279,
+      "end": 1712.63,
+      "duration": 9.351,
+      "text": "one okay so let me take as a example two"
+    },
+    {
+      "index": 520,
+      "start": 1715.149,
+      "end": 1715.159,
+      "duration": 0.01,
+      "text": "where my Matrix a is going to be"
+    },
+    {
+      "index": 521,
+      "start": 1715.159,
+      "end": 1717.71,
+      "duration": 2.551,
+      "text": "rectangular"
+    },
+    {
+      "index": 522,
+      "start": 1717.72,
+      "end": 1721.389,
+      "duration": 3.669,
+      "text": "again let me make let me just make it"
+    },
+    {
+      "index": 523,
+      "start": 1721.399,
+      "end": 1726.789,
+      "duration": 5.39,
+      "text": "43"
+    },
+    {
+      "index": 524,
+      "start": 1729.75,
+      "end": 1729.76,
+      "duration": 0.01,
+      "text": "86 okay that's a rank one"
+    },
+    {
+      "index": 525,
+      "start": 1729.76,
+      "end": 1732.43,
+      "duration": 2.67,
+      "text": "Matrix so that has a null"
+    },
+    {
+      "index": 526,
+      "start": 1732.44,
+      "end": 1736.07,
+      "duration": 3.63,
+      "text": "space and only a"
+    },
+    {
+      "index": 527,
+      "start": 1736.08,
+      "end": 1738.43,
+      "duration": 2.35,
+      "text": "one-dimensional row space and col colum"
+    },
+    {
+      "index": 528,
+      "start": 1738.44,
+      "end": 1742.909,
+      "duration": 4.469,
+      "text": "space so actually the the my my picture"
+    },
+    {
+      "index": 529,
+      "start": 1742.919,
+      "end": 1746.71,
+      "duration": 3.791,
+      "text": "becomes easy for this Matrix because"
+    },
+    {
+      "index": 530,
+      "start": 1746.72,
+      "end": 1749.149,
+      "duration": 2.429,
+      "text": "what's my column my row space for this"
+    },
+    {
+      "index": 531,
+      "start": 1749.159,
+      "end": 1753.35,
+      "duration": 4.191,
+      "text": "one so this is 2 by two so my my"
+    },
+    {
+      "index": 532,
+      "start": 1753.36,
+      "end": 1755.35,
+      "duration": 1.99,
+      "text": "pictures are both"
+    },
+    {
+      "index": 533,
+      "start": 1755.36,
+      "end": 1759.31,
+      "duration": 3.95,
+      "text": "two-dimensional my my row space is all"
+    },
+    {
+      "index": 534,
+      "start": 1759.32,
+      "end": 1762.87,
+      "duration": 3.55,
+      "text": "multiples of that Vector 43 so the whole"
+    },
+    {
+      "index": 535,
+      "start": 1762.88,
+      "end": 1766.71,
+      "duration": 3.83,
+      "text": "the row space is just a line"
+    },
+    {
+      "index": 536,
+      "start": 1770.269,
+      "end": 1770.279,
+      "duration": 0.01,
+      "text": "right that's the the row space and the"
+    },
+    {
+      "index": 537,
+      "start": 1770.279,
+      "end": 1771.87,
+      "duration": 1.591,
+      "text": "null space of course is the"
+    },
+    {
+      "index": 538,
+      "start": 1771.88,
+      "end": 1775.43,
+      "duration": 3.55,
+      "text": "perpendicular line so the row space for"
+    },
+    {
+      "index": 539,
+      "start": 1775.44,
+      "end": 1777.43,
+      "duration": 1.99,
+      "text": "this"
+    },
+    {
+      "index": 540,
+      "start": 1777.44,
+      "end": 1781.43,
+      "duration": 3.99,
+      "text": "Matrix is"
+    },
+    {
+      "index": 541,
+      "start": 1783.11,
+      "end": 1783.12,
+      "duration": 0.01,
+      "text": "multiples"
+    },
+    {
+      "index": 542,
+      "start": 1783.12,
+      "end": 1785.389,
+      "duration": 2.269,
+      "text": "of"
+    },
+    {
+      "index": 543,
+      "start": 1785.399,
+      "end": 1790.11,
+      "duration": 4.711,
+      "text": "43 typical row okay what's the column"
+    },
+    {
+      "index": 544,
+      "start": 1790.12,
+      "end": 1792.909,
+      "duration": 2.789,
+      "text": "space The Columns are all multiples of"
+    },
+    {
+      "index": 545,
+      "start": 1792.919,
+      "end": 1798.71,
+      "duration": 5.791,
+      "text": "48 3 6 1 two the column space then goes"
+    },
+    {
+      "index": 546,
+      "start": 1798.72,
+      "end": 1801.95,
+      "duration": 3.23,
+      "text": "in like this"
+    },
+    {
+      "index": 547,
+      "start": 1801.96,
+      "end": 1806.389,
+      "duration": 4.429,
+      "text": "direction so the column"
+    },
+    {
+      "index": 548,
+      "start": 1808.909,
+      "end": 1808.919,
+      "duration": 0.01,
+      "text": "space when I look at those columns the"
+    },
+    {
+      "index": 549,
+      "start": 1808.919,
+      "end": 1810.71,
+      "duration": 1.791,
+      "text": "column space was only onedimensional"
+    },
+    {
+      "index": 550,
+      "start": 1810.72,
+      "end": 1817.11,
+      "duration": 6.39,
+      "text": "because the rank is one it's multiples"
+    },
+    {
+      "index": 551,
+      "start": 1820.669,
+      "end": 1820.679,
+      "duration": 0.01,
+      "text": "of of"
+    },
+    {
+      "index": 552,
+      "start": 1820.679,
+      "end": 1825.509,
+      "duration": 4.83,
+      "text": "48 okay and what's the null space of a"
+    },
+    {
+      "index": 553,
+      "start": 1825.519,
+      "end": 1829.669,
+      "duration": 4.15,
+      "text": "transpose it's the perp icular guy"
+    },
+    {
+      "index": 554,
+      "start": 1829.679,
+      "end": 1833.389,
+      "duration": 3.71,
+      "text": "there's so this was the null space of"
+    },
+    {
+      "index": 555,
+      "start": 1833.399,
+      "end": 1838.149,
+      "duration": 4.75,
+      "text": "a and this is the null space of a"
+    },
+    {
+      "index": 556,
+      "start": 1838.159,
+      "end": 1841.23,
+      "duration": 3.071,
+      "text": "transpose"
+    },
+    {
+      "index": 557,
+      "start": 1845.11,
+      "end": 1845.12,
+      "duration": 0.01,
+      "text": "okay what I want to say here is that the"
+    },
+    {
+      "index": 558,
+      "start": 1845.12,
+      "end": 1849.029,
+      "duration": 3.909,
+      "text": "the choosing these orthogonal bases for"
+    },
+    {
+      "index": 559,
+      "start": 1849.039,
+      "end": 1851.509,
+      "duration": 2.47,
+      "text": "the row space and the column space is"
+    },
+    {
+      "index": 560,
+      "start": 1851.519,
+      "end": 1852.909,
+      "duration": 1.39,
+      "text": "like no"
+    },
+    {
+      "index": 561,
+      "start": 1852.919,
+      "end": 1856.11,
+      "duration": 3.191,
+      "text": "problem they're only onedimensional so"
+    },
+    {
+      "index": 562,
+      "start": 1856.12,
+      "end": 1860.95,
+      "duration": 4.83,
+      "text": "what should V be V should be V1 but yeah"
+    },
+    {
+      "index": 563,
+      "start": 1860.96,
+      "end": 1864.509,
+      "duration": 3.549,
+      "text": "V1 rather V1 is supposed to be a unit"
+    },
+    {
+      "index": 564,
+      "start": 1864.519,
+      "end": 1868.31,
+      "duration": 3.791,
+      "text": "Vector there's only one V1 to choose"
+    },
+    {
+      "index": 565,
+      "start": 1868.32,
+      "end": 1871.19,
+      "duration": 2.87,
+      "text": "here only one dimension in the row space"
+    },
+    {
+      "index": 566,
+      "start": 1871.2,
+      "end": 1874.07,
+      "duration": 2.87,
+      "text": "I just want to make it a unit Vector so"
+    },
+    {
+      "index": 567,
+      "start": 1874.08,
+      "end": 1876.07,
+      "duration": 1.99,
+      "text": "V1 will"
+    },
+    {
+      "index": 568,
+      "start": 1876.08,
+      "end": 1879.11,
+      "duration": 3.03,
+      "text": "be it'll be this Vector but made into a"
+    },
+    {
+      "index": 569,
+      "start": 1879.12,
+      "end": 1882.789,
+      "duration": 3.669,
+      "text": "unit Vector"
+    },
+    {
+      "index": 570,
+      "start": 1893.269,
+      "end": 1893.279,
+      "duration": 0.01,
+      "text": "4 fths 3 fths and what will be U1 U1"
+    },
+    {
+      "index": 571,
+      "start": 1893.279,
+      "end": 1896.07,
+      "duration": 2.791,
+      "text": "will be the unit Vector there so I want"
+    },
+    {
+      "index": 572,
+      "start": 1896.08,
+      "end": 1897.07,
+      "duration": 0.99,
+      "text": "to turn"
+    },
+    {
+      "index": 573,
+      "start": 1897.08,
+      "end": 1901.75,
+      "duration": 4.67,
+      "text": "48 or one two into a unit Vector so U1"
+    },
+    {
+      "index": 574,
+      "start": 1901.76,
+      "end": 1902.83,
+      "duration": 1.07,
+      "text": "will"
+    },
+    {
+      "index": 575,
+      "start": 1902.84,
+      "end": 1905.83,
+      "duration": 2.99,
+      "text": "be uh let's see if it's one two then"
+    },
+    {
+      "index": 576,
+      "start": 1905.84,
+      "end": 1909.23,
+      "duration": 3.39,
+      "text": "it's what multiple of one two do I want"
+    },
+    {
+      "index": 577,
+      "start": 1909.24,
+      "end": 1911.47,
+      "duration": 2.23,
+      "text": "that has length Square < t of five so I"
+    },
+    {
+      "index": 578,
+      "start": 1911.48,
+      "end": 1915.11,
+      "duration": 3.63,
+      "text": "have to divide by < TK"
+    },
+    {
+      "index": 579,
+      "start": 1915.12,
+      "end": 1918.509,
+      "duration": 3.389,
+      "text": "5 let me complete the singular value"
+    },
+    {
+      "index": 580,
+      "start": 1918.519,
+      "end": 1920.629,
+      "duration": 2.11,
+      "text": "decomposition for this"
+    },
+    {
+      "index": 581,
+      "start": 1920.639,
+      "end": 1923.11,
+      "duration": 2.471,
+      "text": "Matrix so this"
+    },
+    {
+      "index": 582,
+      "start": 1923.12,
+      "end": 1927.269,
+      "duration": 4.149,
+      "text": "Matrix"
+    },
+    {
+      "index": 583,
+      "start": 1932.31,
+      "end": 1932.32,
+      "duration": 0.01,
+      "text": "4386 is so I know what you want here's"
+    },
+    {
+      "index": 584,
+      "start": 1932.32,
+      "end": 1933.19,
+      "duration": 0.87,
+      "text": "here's"
+    },
+    {
+      "index": 585,
+      "start": 1933.2,
+      "end": 1937.99,
+      "duration": 4.79,
+      "text": "a and I want to get you the basis in the"
+    },
+    {
+      "index": 586,
+      "start": 1938.0,
+      "end": 1942.11,
+      "duration": 4.11,
+      "text": "column space and it has to start with uh"
+    },
+    {
+      "index": 587,
+      "start": 1942.12,
+      "end": 1950.629,
+      "duration": 8.509,
+      "text": "this guy 1 overun 5 2 overun 5"
+    },
+    {
+      "index": 588,
+      "start": 1952.95,
+      "end": 1952.96,
+      "duration": 0.01,
+      "text": "then I"
+    },
+    {
+      "index": 589,
+      "start": 1952.96,
+      "end": 1955.549,
+      "duration": 2.589,
+      "text": "want the"
+    },
+    {
+      "index": 590,
+      "start": 1955.559,
+      "end": 1957.23,
+      "duration": 1.671,
+      "text": "sigma"
+    },
+    {
+      "index": 591,
+      "start": 1957.24,
+      "end": 1961.509,
+      "duration": 4.269,
+      "text": "okay what are we expecting now for"
+    },
+    {
+      "index": 592,
+      "start": 1961.519,
+      "end": 1964.99,
+      "duration": 3.471,
+      "text": "Sigma where it's this is only a this is"
+    },
+    {
+      "index": 593,
+      "start": 1965.0,
+      "end": 1967.87,
+      "duration": 2.87,
+      "text": "only a rank one Matrix we're only"
+    },
+    {
+      "index": 594,
+      "start": 1967.88,
+      "end": 1971.509,
+      "duration": 3.629,
+      "text": "expecting a sigma one which I have to"
+    },
+    {
+      "index": 595,
+      "start": 1971.519,
+      "end": 1976.389,
+      "duration": 4.87,
+      "text": "find but zero here okay so what's Sigma"
+    },
+    {
+      "index": 596,
+      "start": 1976.399,
+      "end": 1979.549,
+      "duration": 3.15,
+      "text": "one"
+    },
+    {
+      "index": 597,
+      "start": 1983.07,
+      "end": 1983.08,
+      "duration": 0.01,
+      "text": "it we should see it it should be the"
+    },
+    {
+      "index": 598,
+      "start": 1983.08,
+      "end": 1985.43,
+      "duration": 2.35,
+      "text": "where where did these sigmas come from"
+    },
+    {
+      "index": 599,
+      "start": 1985.44,
+      "end": 1988.669,
+      "duration": 3.229,
+      "text": "they came from a transpose a so I can I"
+    },
+    {
+      "index": 600,
+      "start": 1988.679,
+      "end": 1990.95,
+      "duration": 2.271,
+      "text": "do that little calculation over here a"
+    },
+    {
+      "index": 601,
+      "start": 1990.96,
+      "end": 1997.669,
+      "duration": 6.709,
+      "text": "transpose a is 43"
+    },
+    {
+      "index": 602,
+      "start": 2005.629,
+      "end": 2005.639,
+      "duration": 0.01,
+      "text": "4386 this had better this is a rank one"
+    },
+    {
+      "index": 603,
+      "start": 2005.639,
+      "end": 2007.909,
+      "duration": 2.27,
+      "text": "Matrix this is going to be the whole"
+    },
+    {
+      "index": 604,
+      "start": 2007.919,
+      "end": 2010.669,
+      "duration": 2.75,
+      "text": "thing will have rank one that's 16 and"
+    },
+    {
+      "index": 605,
+      "start": 2010.679,
+      "end": 2012.99,
+      "duration": 2.311,
+      "text": "64 is"
+    },
+    {
+      "index": 606,
+      "start": 2013.0,
+      "end": 2016.83,
+      "duration": 3.83,
+      "text": "80 12 and 48 is"
+    },
+    {
+      "index": 607,
+      "start": 2016.84,
+      "end": 2023.789,
+      "duration": 6.949,
+      "text": "60 12 and 48 is 60 9 and 36 is"
+    },
+    {
+      "index": 608,
+      "start": 2023.799,
+      "end": 2028.269,
+      "duration": 4.47,
+      "text": "45 okay it's a rank one Matrix of course"
+    },
+    {
+      "index": 609,
+      "start": 2028.279,
+      "end": 2031.549,
+      "duration": 3.27,
+      "text": "every row is a multiple of"
+    },
+    {
+      "index": 610,
+      "start": 2031.559,
+      "end": 2034.43,
+      "duration": 2.871,
+      "text": "43 and what's the IG what are the igen"
+    },
+    {
+      "index": 611,
+      "start": 2034.44,
+      "end": 2035.71,
+      "duration": 1.27,
+      "text": "values of that"
+    },
+    {
+      "index": 612,
+      "start": 2035.72,
+      "end": 2038.71,
+      "duration": 2.99,
+      "text": "Matrix so this is like the calculations"
+    },
+    {
+      "index": 613,
+      "start": 2038.72,
+      "end": 2041.11,
+      "duration": 2.39,
+      "text": "this is like practicing now what are the"
+    },
+    {
+      "index": 614,
+      "start": 2041.12,
+      "end": 2043.47,
+      "duration": 2.35,
+      "text": "IG values of this rank one"
+    },
+    {
+      "index": 615,
+      "start": 2043.48,
+      "end": 2046.31,
+      "duration": 2.83,
+      "text": "Matrix well tell me one IG value since"
+    },
+    {
+      "index": 616,
+      "start": 2046.32,
+      "end": 2049.869,
+      "duration": 3.549,
+      "text": "the rank is only one one IG value is"
+    },
+    {
+      "index": 617,
+      "start": 2049.879,
+      "end": 2053.03,
+      "duration": 3.151,
+      "text": "going to be zero and then you know that"
+    },
+    {
+      "index": 618,
+      "start": 2053.04,
+      "end": 2058.23,
+      "duration": 5.19,
+      "text": "the other igon value is going to be"
+    },
+    {
+      "index": 619,
+      "start": 2061.829,
+      "end": 2061.839,
+      "duration": 0.01,
+      "text": "125 so that's Sigma squared right in a"
+    },
+    {
+      "index": 620,
+      "start": 2061.839,
+      "end": 2064.79,
+      "duration": 2.951,
+      "text": "transpose a so this will be the square"
+    },
+    {
+      "index": 621,
+      "start": 2064.8,
+      "end": 2068.79,
+      "duration": 3.99,
+      "text": "root of 125"
+    },
+    {
+      "index": 622,
+      "start": 2068.8,
+      "end": 2070.03,
+      "duration": 1.23,
+      "text": "and then"
+    },
+    {
+      "index": 623,
+      "start": 2070.04,
+      "end": 2073.869,
+      "duration": 3.829,
+      "text": "finally the V"
+    },
+    {
+      "index": 624,
+      "start": 2079.069,
+      "end": 2079.079,
+      "duration": 0.01,
+      "text": "transpose the v's will be there's"
+    },
+    {
+      "index": 625,
+      "start": 2079.079,
+      "end": 2081.23,
+      "duration": 2.151,
+      "text": "V1 and what's"
+    },
+    {
+      "index": 626,
+      "start": 2081.24,
+      "end": 2083.829,
+      "duration": 2.589,
+      "text": "V2 what's V2 in"
+    },
+    {
+      "index": 627,
+      "start": 2083.839,
+      "end": 2087.629,
+      "duration": 3.79,
+      "text": "the what's how do I make this into"
+    },
+    {
+      "index": 628,
+      "start": 2087.639,
+      "end": 2093.669,
+      "duration": 6.03,
+      "text": "a orthonormal basis well V2 is in the"
+    },
+    {
+      "index": 629,
+      "start": 2093.679,
+      "end": 2096.069,
+      "duration": 2.39,
+      "text": "null space Direction it's it's"
+    },
+    {
+      "index": 630,
+      "start": 2096.079,
+      "end": 2100.51,
+      "duration": 4.431,
+      "text": "perpendicular to that so 6 and"
+    },
+    {
+      "index": 631,
+      "start": 2100.52,
+      "end": 2103.47,
+      "duration": 2.95,
+      "text": "minus8 so those are the v's that go in"
+    },
+    {
+      "index": 632,
+      "start": 2103.48,
+      "end": 2107.19,
+      "duration": 3.71,
+      "text": "here"
+    },
+    {
+      "index": 633,
+      "start": 2111.19,
+      "end": 2111.2,
+      "duration": 0.01,
+      "text": "86 and 6"
+    },
+    {
+      "index": 634,
+      "start": 2111.2,
+      "end": 2114.069,
+      "duration": 2.869,
+      "text": "minus8"
+    },
+    {
+      "index": 635,
+      "start": 2114.079,
+      "end": 2116.63,
+      "duration": 2.551,
+      "text": "okay and I guess I better finish this"
+    },
+    {
+      "index": 636,
+      "start": 2116.64,
+      "end": 2119.71,
+      "duration": 3.07,
+      "text": "guy so this guy all I want is to"
+    },
+    {
+      "index": 637,
+      "start": 2119.72,
+      "end": 2122.39,
+      "duration": 2.67,
+      "text": "complete the orthonormal basis it'll be"
+    },
+    {
+      "index": 638,
+      "start": 2122.4,
+      "end": 2126.75,
+      "duration": 4.35,
+      "text": "coming from there it'll be a 2 over < TK"
+    },
+    {
+      "index": 639,
+      "start": 2126.76,
+      "end": 2131.349,
+      "duration": 4.589,
+      "text": "5 and -1 over < TK 5 I could have take"
+    },
+    {
+      "index": 640,
+      "start": 2131.359,
+      "end": 2134.39,
+      "duration": 3.031,
+      "text": "let me take Square < TK of 5 out of that"
+    },
+    {
+      "index": 641,
+      "start": 2134.4,
+      "end": 2137.069,
+      "duration": 2.669,
+      "text": "Matrix to make it look"
+    },
+    {
+      "index": 642,
+      "start": 2137.079,
+      "end": 2140.27,
+      "duration": 3.191,
+      "text": "better so 1 over < TK"
+    },
+    {
+      "index": 643,
+      "start": 2140.28,
+      "end": 2146.79,
+      "duration": 6.51,
+      "text": "5 Time 1 2 2 minus"
+    },
+    {
+      "index": 644,
+      "start": 2148.87,
+      "end": 2148.88,
+      "duration": 0.01,
+      "text": "one"
+    },
+    {
+      "index": 645,
+      "start": 2148.88,
+      "end": 2152.23,
+      "duration": 3.35,
+      "text": "okay so there I have including the < TK"
+    },
+    {
+      "index": 646,
+      "start": 2152.24,
+      "end": 2155.27,
+      "duration": 3.03,
+      "text": "of 5 I that's an orthogonal Matrix"
+    },
+    {
+      "index": 647,
+      "start": 2155.28,
+      "end": 2157.19,
+      "duration": 1.91,
+      "text": "that's an orthogonal Matrix that's a"
+    },
+    {
+      "index": 648,
+      "start": 2157.2,
+      "end": 2161.19,
+      "duration": 3.99,
+      "text": "diagonal Matrix and its rank is only one"
+    },
+    {
+      "index": 649,
+      "start": 2161.2,
+      "end": 2163.55,
+      "duration": 2.35,
+      "text": "and now if I do that"
+    },
+    {
+      "index": 650,
+      "start": 2163.56,
+      "end": 2169.069,
+      "duration": 5.509,
+      "text": "multiplication I pray that it comes out"
+    },
+    {
+      "index": 651,
+      "start": 2169.079,
+      "end": 2171.51,
+      "duration": 2.431,
+      "text": "right the square root of five will"
+    },
+    {
+      "index": 652,
+      "start": 2171.52,
+      "end": 2173.99,
+      "duration": 2.47,
+      "text": "cancel into that square root of 125 and"
+    },
+    {
+      "index": 653,
+      "start": 2174.0,
+      "end": 2176.19,
+      "duration": 2.19,
+      "text": "leave me with the square root of 25"
+    },
+    {
+      "index": 654,
+      "start": 2176.2,
+      "end": 2179.349,
+      "duration": 3.149,
+      "text": "which is five and five will multiply"
+    },
+    {
+      "index": 655,
+      "start": 2179.359,
+      "end": 2182.069,
+      "duration": 2.71,
+      "text": "these numbers and I'll get whole numbers"
+    },
+    {
+      "index": 656,
+      "start": 2182.079,
+      "end": 2186.43,
+      "duration": 4.351,
+      "text": "and out will come a okay that's a sec"
+    },
+    {
+      "index": 657,
+      "start": 2186.44,
+      "end": 2189.79,
+      "duration": 3.35,
+      "text": "like a second example showing how the"
+    },
+    {
+      "index": 658,
+      "start": 2189.8,
+      "end": 2192.829,
+      "duration": 3.029,
+      "text": "null space guy so this this"
+    },
+    {
+      "index": 659,
+      "start": 2192.839,
+      "end": 2195.15,
+      "duration": 2.311,
+      "text": "vector"
+    },
+    {
+      "index": 660,
+      "start": 2195.16,
+      "end": 2199.63,
+      "duration": 4.47,
+      "text": "and the and and this one were multiplied"
+    },
+    {
+      "index": 661,
+      "start": 2199.64,
+      "end": 2202.95,
+      "duration": 3.31,
+      "text": "by this zero so they they"
+    },
+    {
+      "index": 662,
+      "start": 2202.96,
+      "end": 2206.87,
+      "duration": 3.91,
+      "text": "were easy to deal with it was the key"
+    },
+    {
+      "index": 663,
+      "start": 2206.88,
+      "end": 2210.27,
+      "duration": 3.39,
+      "text": "ones are the ones in the column space"
+    },
+    {
+      "index": 664,
+      "start": 2210.28,
+      "end": 2213.43,
+      "duration": 3.15,
+      "text": "and the row space do you see how I'm"
+    },
+    {
+      "index": 665,
+      "start": 2213.44,
+      "end": 2214.51,
+      "duration": 1.07,
+      "text": "getting"
+    },
+    {
+      "index": 666,
+      "start": 2214.52,
+      "end": 2219.87,
+      "duration": 5.35,
+      "text": "columns here diagonal here rows here"
+    },
+    {
+      "index": 667,
+      "start": 2219.88,
+      "end": 2223.23,
+      "duration": 3.35,
+      "text": "coming together to produce a okay that's"
+    },
+    {
+      "index": 668,
+      "start": 2223.24,
+      "end": 2225.79,
+      "duration": 2.55,
+      "text": "the singular value"
+    },
+    {
+      "index": 669,
+      "start": 2225.8,
+      "end": 2229.349,
+      "duration": 3.549,
+      "text": "decomposition so uh let let me think"
+    },
+    {
+      "index": 670,
+      "start": 2229.359,
+      "end": 2236.349,
+      "duration": 6.99,
+      "text": "what I want to add to to complete this"
+    },
+    {
+      "index": 671,
+      "start": 2239.43,
+      "end": 2239.44,
+      "duration": 0.01,
+      "text": "topic s of what we're really"
+    },
+    {
+      "index": 672,
+      "start": 2239.44,
+      "end": 2243.47,
+      "duration": 4.03,
+      "text": "doing so that's two examples and now"
+    },
+    {
+      "index": 673,
+      "start": 2243.48,
+      "end": 2245.75,
+      "duration": 2.27,
+      "text": "let's think what we're really doing"
+    },
+    {
+      "index": 674,
+      "start": 2245.76,
+      "end": 2249.63,
+      "duration": 3.87,
+      "text": "we're we're choosing the right"
+    },
+    {
+      "index": 675,
+      "start": 2254.47,
+      "end": 2254.48,
+      "duration": 0.01,
+      "text": "basis for the four subspaces of linear"
+    },
+    {
+      "index": 676,
+      "start": 2254.48,
+      "end": 2258.63,
+      "duration": 4.15,
+      "text": "algebra let me let me let me write this"
+    },
+    {
+      "index": 677,
+      "start": 2258.64,
+      "end": 2261.109,
+      "duration": 2.469,
+      "text": "down so"
+    },
+    {
+      "index": 678,
+      "start": 2261.119,
+      "end": 2263.349,
+      "duration": 2.23,
+      "text": "V1 up to"
+    },
+    {
+      "index": 679,
+      "start": 2263.359,
+      "end": 2269.349,
+      "duration": 5.99,
+      "text": "VR is an orthonormal"
+    },
+    {
+      "index": 680,
+      "start": 2270.99,
+      "end": 2271.0,
+      "duration": 0.01,
+      "text": "basis"
+    },
+    {
+      "index": 681,
+      "start": 2271.0,
+      "end": 2278.15,
+      "duration": 7.15,
+      "text": "for the row space"
+    },
+    {
+      "index": 682,
+      "start": 2280.95,
+      "end": 2280.96,
+      "duration": 0.01,
+      "text": "U1 up to"
+    },
+    {
+      "index": 683,
+      "start": 2280.96,
+      "end": 2284.829,
+      "duration": 3.869,
+      "text": "ur is an orthonormal basis for the"
+    },
+    {
+      "index": 684,
+      "start": 2284.839,
+      "end": 2288.47,
+      "duration": 3.631,
+      "text": "column"
+    },
+    {
+      "index": 685,
+      "start": 2291.589,
+      "end": 2291.599,
+      "duration": 0.01,
+      "text": "space and then I just finished those out"
+    },
+    {
+      "index": 686,
+      "start": 2291.599,
+      "end": 2297.63,
+      "duration": 6.031,
+      "text": "by V + 1 the rest up to VN is an"
+    },
+    {
+      "index": 687,
+      "start": 2297.64,
+      "end": 2303.55,
+      "duration": 5.91,
+      "text": "orthonormal basis for the null"
+    },
+    {
+      "index": 688,
+      "start": 2308.79,
+      "end": 2308.8,
+      "duration": 0.01,
+      "text": "space and finally u r + one"
+    },
+    {
+      "index": 689,
+      "start": 2308.8,
+      "end": 2313.79,
+      "duration": 4.99,
+      "text": "up to u m is an orthonormal basis for"
+    },
+    {
+      "index": 690,
+      "start": 2313.8,
+      "end": 2320.39,
+      "duration": 6.59,
+      "text": "the null space of a"
+    },
+    {
+      "index": 691,
+      "start": 2322.829,
+      "end": 2322.839,
+      "duration": 0.01,
+      "text": "transpose do you see that we finally got"
+    },
+    {
+      "index": 692,
+      "start": 2322.839,
+      "end": 2324.349,
+      "duration": 1.51,
+      "text": "the bases"
+    },
+    {
+      "index": 693,
+      "start": 2324.359,
+      "end": 2327.67,
+      "duration": 3.311,
+      "text": "right they're right because they're"
+    },
+    {
+      "index": 694,
+      "start": 2327.68,
+      "end": 2331.87,
+      "duration": 4.19,
+      "text": "orthonormal and also I mean the again"
+    },
+    {
+      "index": 695,
+      "start": 2331.88,
+      "end": 2333.91,
+      "duration": 2.03,
+      "text": "Graham Schmidt would have done this in"
+    },
+    {
+      "index": 696,
+      "start": 2333.92,
+      "end": 2337.069,
+      "duration": 3.149,
+      "text": "chapter 4 here we needed igen values"
+    },
+    {
+      "index": 697,
+      "start": 2337.079,
+      "end": 2338.55,
+      "duration": 1.471,
+      "text": "because"
+    },
+    {
+      "index": 698,
+      "start": 2338.56,
+      "end": 2342.47,
+      "duration": 3.91,
+      "text": "because these bases make the Matrix"
+    },
+    {
+      "index": 699,
+      "start": 2342.48,
+      "end": 2349.71,
+      "duration": 7.23,
+      "text": "diagonal a * v i is a multiple of UI so"
+    },
+    {
+      "index": 700,
+      "start": 2349.72,
+      "end": 2353.55,
+      "duration": 3.83,
+      "text": "I'll put"
+    },
+    {
+      "index": 701,
+      "start": 2356.71,
+      "end": 2356.72,
+      "duration": 0.01,
+      "text": "M The Matrix has been made diagonal when"
+    },
+    {
+      "index": 702,
+      "start": 2356.72,
+      "end": 2359.67,
+      "duration": 2.95,
+      "text": "we choose these"
+    },
+    {
+      "index": 703,
+      "start": 2359.68,
+      "end": 2363.109,
+      "duration": 3.429,
+      "text": "bases the the there's no coupling"
+    },
+    {
+      "index": 704,
+      "start": 2363.119,
+      "end": 2366.75,
+      "duration": 3.631,
+      "text": "between v's and no coupling between U's"
+    },
+    {
+      "index": 705,
+      "start": 2366.76,
+      "end": 2370.39,
+      "duration": 3.63,
+      "text": "each a a Time Each V is in the direction"
+    },
+    {
+      "index": 706,
+      "start": 2370.4,
+      "end": 2372.99,
+      "duration": 2.59,
+      "text": "of the corresponding U so it's exactly"
+    },
+    {
+      "index": 707,
+      "start": 2373.0,
+      "end": 2377.27,
+      "duration": 4.27,
+      "text": "the right basis for the four fundamental"
+    },
+    {
+      "index": 708,
+      "start": 2377.28,
+      "end": 2380.069,
+      "duration": 2.789,
+      "text": "subspaces and of course their dimensions"
+    },
+    {
+      "index": 709,
+      "start": 2380.079,
+      "end": 2382.99,
+      "duration": 2.911,
+      "text": "are what we know the dimension of the"
+    },
+    {
+      "index": 710,
+      "start": 2383.0,
+      "end": 2387.19,
+      "duration": 4.19,
+      "text": "row space is the rank R and so is the"
+    },
+    {
+      "index": 711,
+      "start": 2387.2,
+      "end": 2389.63,
+      "duration": 2.43,
+      "text": "dimension of the column space the"
+    },
+    {
+      "index": 712,
+      "start": 2389.64,
+      "end": 2392.71,
+      "duration": 3.07,
+      "text": "dimension of the null space is n minus r"
+    },
+    {
+      "index": 713,
+      "start": 2392.72,
+      "end": 2395.67,
+      "duration": 2.95,
+      "text": "that's how many vectors we need and M"
+    },
+    {
+      "index": 714,
+      "start": 2395.68,
+      "end": 2398.71,
+      "duration": 3.03,
+      "text": "minus r basis vectors for the left null"
+    },
+    {
+      "index": 715,
+      "start": 2398.72,
+      "end": 2401.15,
+      "duration": 2.43,
+      "text": "space the null space of a"
+    },
+    {
+      "index": 716,
+      "start": 2401.16,
+      "end": 2403.51,
+      "duration": 2.35,
+      "text": "transpose"
+    },
+    {
+      "index": 717,
+      "start": 2403.52,
+      "end": 2406.87,
+      "duration": 3.35,
+      "text": "okay I'm going to stop there I could"
+    },
+    {
+      "index": 718,
+      "start": 2406.88,
+      "end": 2410.95,
+      "duration": 4.07,
+      "text": "develop further from the from the SVD"
+    },
+    {
+      "index": 719,
+      "start": 2410.96,
+      "end": 2413.63,
+      "duration": 2.67,
+      "text": "but we'll see it again in the very last"
+    },
+    {
+      "index": 720,
+      "start": 2413.64,
+      "end": 2415.829,
+      "duration": 2.189,
+      "text": "lectures of the course so there's the"
+    },
+    {
+      "index": 721,
+      "start": 2415.839,
+      "end": 2426.309,
+      "duration": 10.47,
+      "text": "SVD"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

@@ -1,0 +1,6031 @@
+{
+  "video": {
+    "id": "Y_Ac6KiQ1t0",
+    "title": "15. Projections onto Subspaces",
+    "url": "https://www.youtube.com/watch?v=Y_Ac6KiQ1t0",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2931,
+    "language": "en"
+  },
+  "segment_count": 859,
+  "segments": [
+    {
+      "index": 0,
+      "start": 18.63,
+      "end": 18.64,
+      "duration": 0.01,
+      "text": "to make this make this lecture"
+    },
+    {
+      "index": 1,
+      "start": 18.64,
+      "end": 20.269,
+      "duration": 1.629,
+      "text": "Immortal"
+    },
+    {
+      "index": 2,
+      "start": 20.279,
+      "end": 25.029,
+      "duration": 4.75,
+      "text": "okay are we on all right this is an"
+    },
+    {
+      "index": 3,
+      "start": 25.039,
+      "end": 28.79,
+      "duration": 3.751,
+      "text": "important lecture it's about"
+    },
+    {
+      "index": 4,
+      "start": 28.8,
+      "end": 31.669,
+      "duration": 2.869,
+      "text": "projection and and uh let me start by"
+    },
+    {
+      "index": 5,
+      "start": 31.679,
+      "end": 34.95,
+      "duration": 3.271,
+      "text": "just projecting a vector B down on a"
+    },
+    {
+      "index": 6,
+      "start": 34.96,
+      "end": 39.069,
+      "duration": 4.109,
+      "text": "vector a so just to so you see what the"
+    },
+    {
+      "index": 7,
+      "start": 39.079,
+      "end": 42.549,
+      "duration": 3.47,
+      "text": "geometry looks like in when I'm in in"
+    },
+    {
+      "index": 8,
+      "start": 42.559,
+      "end": 46.35,
+      "duration": 3.791,
+      "text": "just two Dimensions I'd like to find the"
+    },
+    {
+      "index": 9,
+      "start": 46.36,
+      "end": 49.11,
+      "duration": 2.75,
+      "text": "point along this"
+    },
+    {
+      "index": 10,
+      "start": 49.12,
+      "end": 52.189,
+      "duration": 3.069,
+      "text": "line so that that line through a is a"
+    },
+    {
+      "index": 11,
+      "start": 52.199,
+      "end": 54.549,
+      "duration": 2.35,
+      "text": "one-dimensional Subspace so I'm starting"
+    },
+    {
+      "index": 12,
+      "start": 54.559,
+      "end": 57.189,
+      "duration": 2.63,
+      "text": "with one dimension I'd like to find the"
+    },
+    {
+      "index": 13,
+      "start": 57.199,
+      "end": 60.83,
+      "duration": 3.631,
+      "text": "point on that line closest to B"
+    },
+    {
+      "index": 14,
+      "start": 60.84,
+      "end": 62.95,
+      "duration": 2.11,
+      "text": "can I just take that problem first and"
+    },
+    {
+      "index": 15,
+      "start": 62.96,
+      "end": 65.789,
+      "duration": 2.829,
+      "text": "then I'll explain why I want to do it"
+    },
+    {
+      "index": 16,
+      "start": 65.799,
+      "end": 68.51,
+      "duration": 2.711,
+      "text": "and why I want to project on other"
+    },
+    {
+      "index": 17,
+      "start": 68.52,
+      "end": 71.07,
+      "duration": 2.55,
+      "text": "subspaces so where where is the point"
+    },
+    {
+      "index": 18,
+      "start": 71.08,
+      "end": 75.23,
+      "duration": 4.15,
+      "text": "closest to B that's on that line it's"
+    },
+    {
+      "index": 19,
+      "start": 75.24,
+      "end": 81.19,
+      "duration": 5.95,
+      "text": "somewhere there and let me connect"
+    },
+    {
+      "index": 20,
+      "start": 84.87,
+      "end": 84.88,
+      "duration": 0.01,
+      "text": "that and and what's the whole point of"
+    },
+    {
+      "index": 21,
+      "start": 84.88,
+      "end": 86.95,
+      "duration": 2.07,
+      "text": "my picture now what what's the where"
+    },
+    {
+      "index": 22,
+      "start": 86.96,
+      "end": 89.469,
+      "duration": 2.509,
+      "text": "does orthogonality come into this"
+    },
+    {
+      "index": 23,
+      "start": 89.479,
+      "end": 90.63,
+      "duration": 1.151,
+      "text": "picture"
+    },
+    {
+      "index": 24,
+      "start": 90.64,
+      "end": 93.149,
+      "duration": 2.509,
+      "text": "the whole point is that this this best"
+    },
+    {
+      "index": 25,
+      "start": 93.159,
+      "end": 95.83,
+      "duration": 2.671,
+      "text": "point that's the projection"
+    },
+    {
+      "index": 26,
+      "start": 95.84,
+      "end": 100.03,
+      "duration": 4.19,
+      "text": "P of B onto the"
+    },
+    {
+      "index": 27,
+      "start": 100.04,
+      "end": 103.23,
+      "duration": 3.19,
+      "text": "line uh where is"
+    },
+    {
+      "index": 28,
+      "start": 103.24,
+      "end": 105.469,
+      "duration": 2.229,
+      "text": "orthogonality it's the fact that that's"
+    },
+    {
+      "index": 29,
+      "start": 105.479,
+      "end": 108.63,
+      "duration": 3.151,
+      "text": "a right angle that this the error this"
+    },
+    {
+      "index": 30,
+      "start": 108.64,
+      "end": 112.35,
+      "duration": 3.71,
+      "text": "is like how much I'm Wrong by this is"
+    },
+    {
+      "index": 31,
+      "start": 112.36,
+      "end": 116.99,
+      "duration": 4.63,
+      "text": "the difference between B and P the whole"
+    },
+    {
+      "index": 32,
+      "start": 117.0,
+      "end": 119.109,
+      "duration": 2.109,
+      "text": "point is that that that that's"
+    },
+    {
+      "index": 33,
+      "start": 119.119,
+      "end": 122.19,
+      "duration": 3.071,
+      "text": "perpendicular to a that's got to give us"
+    },
+    {
+      "index": 34,
+      "start": 122.2,
+      "end": 125.23,
+      "duration": 3.03,
+      "text": "the equation that's got to tell us"
+    },
+    {
+      "index": 35,
+      "start": 125.24,
+      "end": 127.389,
+      "duration": 2.149,
+      "text": "that's that's the one fact we know"
+    },
+    {
+      "index": 36,
+      "start": 127.399,
+      "end": 128.949,
+      "duration": 1.55,
+      "text": "that's got to tell us where that"
+    },
+    {
+      "index": 37,
+      "start": 128.959,
+      "end": 134.15,
+      "duration": 5.191,
+      "text": "projection is let me also say look I"
+    },
+    {
+      "index": 38,
+      "start": 134.16,
+      "end": 137.309,
+      "duration": 3.149,
+      "text": "I've drawn a triangle there so if we"
+    },
+    {
+      "index": 39,
+      "start": 137.319,
+      "end": 141.07,
+      "duration": 3.751,
+      "text": "were doing trigonometry we would do like"
+    },
+    {
+      "index": 40,
+      "start": 141.08,
+      "end": 145.509,
+      "duration": 4.429,
+      "text": "we would have angles Theta and distances"
+    },
+    {
+      "index": 41,
+      "start": 145.519,
+      "end": 147.83,
+      "duration": 2.311,
+      "text": "that would involve sin Theta and cos"
+    },
+    {
+      "index": 42,
+      "start": 147.84,
+      "end": 151.19,
+      "duration": 3.35,
+      "text": "Theta that leads to lousy formulas"
+    },
+    {
+      "index": 43,
+      "start": 151.2,
+      "end": 154.11,
+      "duration": 2.91,
+      "text": "compared to linear algebra the the the"
+    },
+    {
+      "index": 44,
+      "start": 154.12,
+      "end": 158.63,
+      "duration": 4.51,
+      "text": "formula that we want comes out nicely"
+    },
+    {
+      "index": 45,
+      "start": 158.64,
+      "end": 162.869,
+      "duration": 4.229,
+      "text": "and what's the what do we know we know"
+    },
+    {
+      "index": 46,
+      "start": 162.879,
+      "end": 167.949,
+      "duration": 5.07,
+      "text": "that P this projection is some multiple"
+    },
+    {
+      "index": 47,
+      "start": 167.959,
+      "end": 171.27,
+      "duration": 3.311,
+      "text": "of a right it's on that line so we know"
+    },
+    {
+      "index": 48,
+      "start": 171.28,
+      "end": 173.149,
+      "duration": 1.869,
+      "text": "it's it's in that one-dimensional"
+    },
+    {
+      "index": 49,
+      "start": 173.159,
+      "end": 176.149,
+      "duration": 2.99,
+      "text": "Subspace it's some multiple let me call"
+    },
+    {
+      "index": 50,
+      "start": 176.159,
+      "end": 180.43,
+      "duration": 4.271,
+      "text": "that multiple X of a so really it's that"
+    },
+    {
+      "index": 51,
+      "start": 180.44,
+      "end": 182.47,
+      "duration": 2.03,
+      "text": "number X I'd like to"
+    },
+    {
+      "index": 52,
+      "start": 182.48,
+      "end": 186.509,
+      "duration": 4.029,
+      "text": "find so th this is going to be simple in"
+    },
+    {
+      "index": 53,
+      "start": 186.519,
+      "end": 190.35,
+      "duration": 3.831,
+      "text": "1D so let's just carry it through and"
+    },
+    {
+      "index": 54,
+      "start": 190.36,
+      "end": 194.07,
+      "duration": 3.71,
+      "text": "then see how it goes in high dimension"
+    },
+    {
+      "index": 55,
+      "start": 194.08,
+      "end": 198.83,
+      "duration": 4.75,
+      "text": "okay the key fact is so the the key the"
+    },
+    {
+      "index": 56,
+      "start": 198.84,
+      "end": 201.07,
+      "duration": 2.23,
+      "text": "key to everything is that perpendicular"
+    },
+    {
+      "index": 57,
+      "start": 201.08,
+      "end": 206.71,
+      "duration": 5.63,
+      "text": "the fact that that a is perpendicular to"
+    },
+    {
+      "index": 58,
+      "start": 206.72,
+      "end": 210.19,
+      "duration": 3.47,
+      "text": "a is perpendicular to"
+    },
+    {
+      "index": 59,
+      "start": 210.2,
+      "end": 215.63,
+      "duration": 5.43,
+      "text": "e which is B minus a x x a I don't care"
+    },
+    {
+      "index": 60,
+      "start": 215.64,
+      "end": 221.07,
+      "duration": 5.43,
+      "text": "if that's x a that that equals"
+    },
+    {
+      "index": 61,
+      "start": 221.08,
+      "end": 223.47,
+      "duration": 2.39,
+      "text": "zero you see that as the central"
+    },
+    {
+      "index": 62,
+      "start": 223.48,
+      "end": 226.35,
+      "duration": 2.87,
+      "text": "equation that's saying that this"
+    },
+    {
+      "index": 63,
+      "start": 226.36,
+      "end": 230.71,
+      "duration": 4.35,
+      "text": "a is perpendicular to this correction"
+    },
+    {
+      "index": 64,
+      "start": 230.72,
+      "end": 233.99,
+      "duration": 3.27,
+      "text": "that's going to tell us what x is let me"
+    },
+    {
+      "index": 65,
+      "start": 234.0,
+      "end": 237.11,
+      "duration": 3.11,
+      "text": "just raise the board and simplify that"
+    },
+    {
+      "index": 66,
+      "start": 237.12,
+      "end": 239.91,
+      "duration": 2.79,
+      "text": "and out will come X"
+    },
+    {
+      "index": 67,
+      "start": 239.92,
+      "end": 243.75,
+      "duration": 3.83,
+      "text": "okay so if I simplify that uh let's see"
+    },
+    {
+      "index": 68,
+      "start": 243.76,
+      "end": 247.91,
+      "duration": 4.15,
+      "text": "I'll move one to to one term to one side"
+    },
+    {
+      "index": 69,
+      "start": 247.92,
+      "end": 249.47,
+      "duration": 1.55,
+      "text": "the other term will be on the other side"
+    },
+    {
+      "index": 70,
+      "start": 249.48,
+      "end": 254.39,
+      "duration": 4.91,
+      "text": "it looks to me like x * a transpose"
+    },
+    {
+      "index": 71,
+      "start": 254.4,
+      "end": 260.469,
+      "duration": 6.069,
+      "text": "a is equal to a transpose"
+    },
+    {
+      "index": 72,
+      "start": 264.83,
+      "end": 264.84,
+      "duration": 0.01,
+      "text": "B right I have a transpose B is one one"
+    },
+    {
+      "index": 73,
+      "start": 264.84,
+      "end": 267.71,
+      "duration": 2.87,
+      "text": "term a transpose a is the other so right"
+    },
+    {
+      "index": 74,
+      "start": 267.72,
+      "end": 271.23,
+      "duration": 3.51,
+      "text": "away here's my a transpose a but it it's"
+    },
+    {
+      "index": 75,
+      "start": 271.24,
+      "end": 275.67,
+      "duration": 4.43,
+      "text": "just a number now and I divide by it and"
+    },
+    {
+      "index": 76,
+      "start": 275.68,
+      "end": 280.99,
+      "duration": 5.31,
+      "text": "I get the answer X is a transpose B over"
+    },
+    {
+      "index": 77,
+      "start": 281.0,
+      "end": 284.189,
+      "duration": 3.189,
+      "text": "a transpose"
+    },
+    {
+      "index": 78,
+      "start": 288.35,
+      "end": 288.36,
+      "duration": 0.01,
+      "text": "A and P the projection I wanted is"
+    },
+    {
+      "index": 79,
+      "start": 288.36,
+      "end": 290.51,
+      "duration": 2.15,
+      "text": "that's the that's the right multiple"
+    },
+    {
+      "index": 80,
+      "start": 290.52,
+      "end": 292.83,
+      "duration": 2.31,
+      "text": "that's got a cosine Theta built in but"
+    },
+    {
+      "index": 81,
+      "start": 292.84,
+      "end": 296.39,
+      "duration": 3.55,
+      "text": "we don't need to look at Angles we've"
+    },
+    {
+      "index": 82,
+      "start": 296.4,
+      "end": 299.029,
+      "duration": 2.629,
+      "text": "just got vectors here and the projection"
+    },
+    {
+      "index": 83,
+      "start": 299.039,
+      "end": 300.43,
+      "duration": 1.391,
+      "text": "is p"
+    },
+    {
+      "index": 84,
+      "start": 300.44,
+      "end": 302.27,
+      "duration": 1.83,
+      "text": "is"
+    },
+    {
+      "index": 85,
+      "start": 302.28,
+      "end": 306.31,
+      "duration": 4.03,
+      "text": "a times that"
+    },
+    {
+      "index": 86,
+      "start": 306.32,
+      "end": 309.27,
+      "duration": 2.95,
+      "text": "X or x times that a but I I'm really"
+    },
+    {
+      "index": 87,
+      "start": 309.28,
+      "end": 310.629,
+      "duration": 1.349,
+      "text": "going to eventually I'm going to want"
+    },
+    {
+      "index": 88,
+      "start": 310.639,
+      "end": 314.79,
+      "duration": 4.151,
+      "text": "that X coming on the right hand side so"
+    },
+    {
+      "index": 89,
+      "start": 314.8,
+      "end": 316.749,
+      "duration": 1.949,
+      "text": "you see that I've"
+    },
+    {
+      "index": 90,
+      "start": 316.759,
+      "end": 320.39,
+      "duration": 3.631,
+      "text": "got two of the three formulas"
+    },
+    {
+      "index": 91,
+      "start": 320.4,
+      "end": 324.189,
+      "duration": 3.789,
+      "text": "already right here I've got the the the"
+    },
+    {
+      "index": 92,
+      "start": 324.199,
+      "end": 327.11,
+      "duration": 2.911,
+      "text": "equation that's the equation that that"
+    },
+    {
+      "index": 93,
+      "start": 327.12,
+      "end": 329.67,
+      "duration": 2.55,
+      "text": "that that leads me to the answer here's"
+    },
+    {
+      "index": 94,
+      "start": 329.68,
+      "end": 333.39,
+      "duration": 3.71,
+      "text": "here's the answer for x and here's the"
+    },
+    {
+      "index": 95,
+      "start": 333.4,
+      "end": 336.749,
+      "duration": 3.349,
+      "text": "projection okay can I do add just one"
+    },
+    {
+      "index": 96,
+      "start": 336.759,
+      "end": 338.83,
+      "duration": 2.071,
+      "text": "more thing to this onedimensional"
+    },
+    {
+      "index": 97,
+      "start": 338.84,
+      "end": 343.35,
+      "duration": 4.51,
+      "text": "problem one more like lift it up into"
+    },
+    {
+      "index": 98,
+      "start": 343.36,
+      "end": 347.43,
+      "duration": 4.07,
+      "text": "linear algebra into"
+    },
+    {
+      "index": 99,
+      "start": 349.749,
+      "end": 349.759,
+      "duration": 0.01,
+      "text": "matrices here's the last thing I want to"
+    },
+    {
+      "index": 100,
+      "start": 349.759,
+      "end": 352.43,
+      "duration": 2.671,
+      "text": "do with but don't forget those formulas"
+    },
+    {
+      "index": 101,
+      "start": 352.44,
+      "end": 355.469,
+      "duration": 3.029,
+      "text": "a transpose B over a transpose"
+    },
+    {
+      "index": 102,
+      "start": 355.479,
+      "end": 357.99,
+      "duration": 2.511,
+      "text": "a actually let's look at that for a"
+    },
+    {
+      "index": 103,
+      "start": 358.0,
+      "end": 362.67,
+      "duration": 4.67,
+      "text": "moment first uh um"
+    },
+    {
+      "index": 104,
+      "start": 366.07,
+      "end": 366.08,
+      "duration": 0.01,
+      "text": "suppose uh and and and a well then I"
+    },
+    {
+      "index": 105,
+      "start": 366.08,
+      "end": 369.07,
+      "duration": 2.99,
+      "text": "I'll let me I'll let me take this next"
+    },
+    {
+      "index": 106,
+      "start": 369.08,
+      "end": 372.43,
+      "duration": 3.35,
+      "text": "step so p is a * X so can I write that"
+    },
+    {
+      "index": 107,
+      "start": 372.44,
+      "end": 377.35,
+      "duration": 4.91,
+      "text": "then p is a * this neat number a"
+    },
+    {
+      "index": 108,
+      "start": 377.36,
+      "end": 383.15,
+      "duration": 5.79,
+      "text": "transpose B over a transpose"
+    },
+    {
+      "index": 109,
+      "start": 385.589,
+      "end": 385.599,
+      "duration": 0.01,
+      "text": "a that's our"
+    },
+    {
+      "index": 110,
+      "start": 385.599,
+      "end": 387.79,
+      "duration": 2.191,
+      "text": "projection can I ask a couple of"
+    },
+    {
+      "index": 111,
+      "start": 387.8,
+      "end": 390.029,
+      "duration": 2.229,
+      "text": "questions about it just while we look"
+    },
+    {
+      "index": 112,
+      "start": 390.039,
+      "end": 393.27,
+      "duration": 3.231,
+      "text": "get that digest that formula"
+    },
+    {
+      "index": 113,
+      "start": 393.28,
+      "end": 399.35,
+      "duration": 6.07,
+      "text": "suppose B is doubled suppose I change B"
+    },
+    {
+      "index": 114,
+      "start": 399.36,
+      "end": 400.71,
+      "duration": 1.35,
+      "text": "to"
+    },
+    {
+      "index": 115,
+      "start": 400.72,
+      "end": 405.15,
+      "duration": 4.43,
+      "text": "2B what happens to the"
+    },
+    {
+      "index": 116,
+      "start": 407.79,
+      "end": 407.8,
+      "duration": 0.01,
+      "text": "projection so suppose I instead of that"
+    },
+    {
+      "index": 117,
+      "start": 407.8,
+      "end": 409.589,
+      "duration": 1.789,
+      "text": "Vector B that I drew on the board make"
+    },
+    {
+      "index": 118,
+      "start": 409.599,
+      "end": 413.15,
+      "duration": 3.551,
+      "text": "it 2 B twice as long what's what's the"
+    },
+    {
+      "index": 119,
+      "start": 413.16,
+      "end": 414.51,
+      "duration": 1.35,
+      "text": "projection"
+    },
+    {
+      "index": 120,
+      "start": 414.52,
+      "end": 417.869,
+      "duration": 3.349,
+      "text": "now it's double to right it's going to"
+    },
+    {
+      "index": 121,
+      "start": 417.879,
+      "end": 421.189,
+      "duration": 3.31,
+      "text": "be twice as far if B goes twice as far"
+    },
+    {
+      "index": 122,
+      "start": 421.199,
+      "end": 423.07,
+      "duration": 1.871,
+      "text": "the projection will go twice as far and"
+    },
+    {
+      "index": 123,
+      "start": 423.08,
+      "end": 425.71,
+      "duration": 2.63,
+      "text": "you see it there if I put in an extra"
+    },
+    {
+      "index": 124,
+      "start": 425.72,
+      "end": 429.029,
+      "duration": 3.309,
+      "text": "Factor two then then P's got that factor"
+    },
+    {
+      "index": 125,
+      "start": 429.039,
+      "end": 432.99,
+      "duration": 3.951,
+      "text": "too now what about if I double"
+    },
+    {
+      "index": 126,
+      "start": 433.0,
+      "end": 437.55,
+      "duration": 4.55,
+      "text": "A what if I double the vector a that I'm"
+    },
+    {
+      "index": 127,
+      "start": 437.56,
+      "end": 438.909,
+      "duration": 1.349,
+      "text": "projecting"
+    },
+    {
+      "index": 128,
+      "start": 438.919,
+      "end": 441.79,
+      "duration": 2.871,
+      "text": "onto what what"
+    },
+    {
+      "index": 129,
+      "start": 441.8,
+      "end": 444.39,
+      "duration": 2.59,
+      "text": "changes no the projection doesn't change"
+    },
+    {
+      "index": 130,
+      "start": 444.4,
+      "end": 447.83,
+      "duration": 3.43,
+      "text": "at all right CU I'm just the line didn't"
+    },
+    {
+      "index": 131,
+      "start": 447.84,
+      "end": 451.629,
+      "duration": 3.789,
+      "text": "change if I double a or I take minus a"
+    },
+    {
+      "index": 132,
+      "start": 451.639,
+      "end": 454.15,
+      "duration": 2.511,
+      "text": "it's still that same line the projection"
+    },
+    {
+      "index": 133,
+      "start": 454.16,
+      "end": 456.79,
+      "duration": 2.63,
+      "text": "still in the same place and of course if"
+    },
+    {
+      "index": 134,
+      "start": 456.8,
+      "end": 460.55,
+      "duration": 3.75,
+      "text": "I double A I get a four up up above and"
+    },
+    {
+      "index": 135,
+      "start": 460.56,
+      "end": 462.79,
+      "duration": 2.23,
+      "text": "I get a four extra four below they"
+    },
+    {
+      "index": 136,
+      "start": 462.8,
+      "end": 464.83,
+      "duration": 2.03,
+      "text": "cancel out and the projection is the"
+    },
+    {
+      "index": 137,
+      "start": 464.84,
+      "end": 467.469,
+      "duration": 2.629,
+      "text": "same okay so"
+    },
+    {
+      "index": 138,
+      "start": 467.479,
+      "end": 471.189,
+      "duration": 3.71,
+      "text": "really this I want to look at"
+    },
+    {
+      "index": 139,
+      "start": 471.199,
+      "end": 472.99,
+      "duration": 1.791,
+      "text": "this"
+    },
+    {
+      "index": 140,
+      "start": 473.0,
+      "end": 476.749,
+      "duration": 3.749,
+      "text": "as the projection is there's a matrix"
+    },
+    {
+      "index": 141,
+      "start": 476.759,
+      "end": 480.11,
+      "duration": 3.351,
+      "text": "here the projection is being"
+    },
+    {
+      "index": 142,
+      "start": 480.12,
+      "end": 482.23,
+      "duration": 2.11,
+      "text": "is carried out by some Matrix that I'm"
+    },
+    {
+      "index": 143,
+      "start": 482.24,
+      "end": 485.749,
+      "duration": 3.509,
+      "text": "going to call the projection Matrix and"
+    },
+    {
+      "index": 144,
+      "start": 485.759,
+      "end": 488.83,
+      "duration": 3.071,
+      "text": "in other words the projection is some"
+    },
+    {
+      "index": 145,
+      "start": 488.84,
+      "end": 492.55,
+      "duration": 3.71,
+      "text": "Matrix that acts on this guy B and"
+    },
+    {
+      "index": 146,
+      "start": 492.56,
+      "end": 495.469,
+      "duration": 2.909,
+      "text": "produces the projection the"
+    },
+    {
+      "index": 147,
+      "start": 495.479,
+      "end": 497.469,
+      "duration": 1.99,
+      "text": "projection"
+    },
+    {
+      "index": 148,
+      "start": 497.479,
+      "end": 502.23,
+      "duration": 4.751,
+      "text": "p is the projection Matrix acting on"
+    },
+    {
+      "index": 149,
+      "start": 502.24,
+      "end": 505.749,
+      "duration": 3.509,
+      "text": "whatever the input is the input is B the"
+    },
+    {
+      "index": 150,
+      "start": 505.759,
+      "end": 508.749,
+      "duration": 2.99,
+      "text": "projection Matrix is p okay actually you"
+    },
+    {
+      "index": 151,
+      "start": 508.759,
+      "end": 511.11,
+      "duration": 2.351,
+      "text": "can tell me right away what this"
+    },
+    {
+      "index": 152,
+      "start": 511.12,
+      "end": 513.589,
+      "duration": 2.469,
+      "text": "projection Matrix is so this is a"
+    },
+    {
+      "index": 153,
+      "start": 513.599,
+      "end": 516.589,
+      "duration": 2.99,
+      "text": "pretty interesting"
+    },
+    {
+      "index": 154,
+      "start": 516.599,
+      "end": 520.909,
+      "duration": 4.31,
+      "text": "Matrix what Matrix is multiplying B I'm"
+    },
+    {
+      "index": 155,
+      "start": 520.919,
+      "end": 523.709,
+      "duration": 2.79,
+      "text": "just just from my formula I see what p"
+    },
+    {
+      "index": 156,
+      "start": 523.719,
+      "end": 528.87,
+      "duration": 5.151,
+      "text": "is p this projection"
+    },
+    {
+      "index": 157,
+      "start": 530.63,
+      "end": 530.64,
+      "duration": 0.01,
+      "text": "Matrix"
+    },
+    {
+      "index": 158,
+      "start": 530.64,
+      "end": 535.71,
+      "duration": 5.07,
+      "text": "is what is it I see a a transpose"
+    },
+    {
+      "index": 159,
+      "start": 535.72,
+      "end": 543.11,
+      "duration": 7.39,
+      "text": "above and I see a transpose a below"
+    },
+    {
+      "index": 160,
+      "start": 545.71,
+      "end": 545.72,
+      "duration": 0.01,
+      "text": "and those don't cancel that's not"
+    },
+    {
+      "index": 161,
+      "start": 545.72,
+      "end": 548.91,
+      "duration": 3.19,
+      "text": "one right that's a matrix because down"
+    },
+    {
+      "index": 162,
+      "start": 548.92,
+      "end": 551.47,
+      "duration": 2.55,
+      "text": "here the a transpose a that's just a"
+    },
+    {
+      "index": 163,
+      "start": 551.48,
+      "end": 554.03,
+      "duration": 2.55,
+      "text": "number a transpose a that's the length"
+    },
+    {
+      "index": 164,
+      "start": 554.04,
+      "end": 558.31,
+      "duration": 4.27,
+      "text": "of a squ and up above is a column time a"
+    },
+    {
+      "index": 165,
+      "start": 558.32,
+      "end": 562.31,
+      "duration": 3.99,
+      "text": "row column time a row is a matrix so"
+    },
+    {
+      "index": 166,
+      "start": 562.32,
+      "end": 566.43,
+      "duration": 4.11,
+      "text": "this is a full scale n byn Matrix if I"
+    },
+    {
+      "index": 167,
+      "start": 566.44,
+      "end": 567.99,
+      "duration": 1.55,
+      "text": "if I'm in N"
+    },
+    {
+      "index": 168,
+      "start": 568.0,
+      "end": 570.389,
+      "duration": 2.389,
+      "text": "Dimension and it's kind of an"
+    },
+    {
+      "index": 169,
+      "start": 570.399,
+      "end": 573.55,
+      "duration": 3.151,
+      "text": "interesting one and it's the one which"
+    },
+    {
+      "index": 170,
+      "start": 573.56,
+      "end": 576.63,
+      "duration": 3.07,
+      "text": "If I multiply by B then I get this you"
+    },
+    {
+      "index": 171,
+      "start": 576.64,
+      "end": 579.67,
+      "duration": 3.03,
+      "text": "see once again I'm putting parentheses"
+    },
+    {
+      "index": 172,
+      "start": 579.68,
+      "end": 582.63,
+      "duration": 2.95,
+      "text": "in different places I'm putting the"
+    },
+    {
+      "index": 173,
+      "start": 582.64,
+      "end": 585.43,
+      "duration": 2.79,
+      "text": "parentheses like"
+    },
+    {
+      "index": 174,
+      "start": 585.44,
+      "end": 588.47,
+      "duration": 3.03,
+      "text": "there I'm saying okay that's really the"
+    },
+    {
+      "index": 175,
+      "start": 588.48,
+      "end": 592.59,
+      "duration": 4.11,
+      "text": "Matrix that produces"
+    },
+    {
+      "index": 176,
+      "start": 592.6,
+      "end": 595.23,
+      "duration": 2.63,
+      "text": "this"
+    },
+    {
+      "index": 177,
+      "start": 595.24,
+      "end": 600.269,
+      "duration": 5.029,
+      "text": "projection okay now tell me"
+    },
+    {
+      "index": 178,
+      "start": 600.279,
+      "end": 602.31,
+      "duration": 2.031,
+      "text": "all right what are the properties of"
+    },
+    {
+      "index": 179,
+      "start": 602.32,
+      "end": 604.389,
+      "duration": 2.069,
+      "text": "that"
+    },
+    {
+      "index": 180,
+      "start": 604.399,
+      "end": 607.15,
+      "duration": 2.751,
+      "text": "Matrix I'm just using letters here A and"
+    },
+    {
+      "index": 181,
+      "start": 607.16,
+      "end": 609.63,
+      "duration": 2.47,
+      "text": "B I could put in numbers but I think"
+    },
+    {
+      "index": 182,
+      "start": 609.64,
+      "end": 612.15,
+      "duration": 2.51,
+      "text": "it's for once it's clearer with letters"
+    },
+    {
+      "index": 183,
+      "start": 612.16,
+      "end": 614.99,
+      "duration": 2.83,
+      "text": "because all formulas are simple a"
+    },
+    {
+      "index": 184,
+      "start": 615.0,
+      "end": 617.75,
+      "duration": 2.75,
+      "text": "transpose B over a transpose a that's"
+    },
+    {
+      "index": 185,
+      "start": 617.76,
+      "end": 621.389,
+      "duration": 3.629,
+      "text": "the number that multiplies the A and"
+    },
+    {
+      "index": 186,
+      "start": 621.399,
+      "end": 623.35,
+      "duration": 1.951,
+      "text": "then I see wait a minute there's a"
+    },
+    {
+      "index": 187,
+      "start": 623.36,
+      "end": 626.47,
+      "duration": 3.11,
+      "text": "matrix here and what's the rank of that"
+    },
+    {
+      "index": 188,
+      "start": 626.48,
+      "end": 628.11,
+      "duration": 1.63,
+      "text": "matrix by the"
+    },
+    {
+      "index": 189,
+      "start": 628.12,
+      "end": 630.829,
+      "duration": 2.709,
+      "text": "way what what's the rank of that Matrix"
+    },
+    {
+      "index": 190,
+      "start": 630.839,
+      "end": 632.31,
+      "duration": 1.471,
+      "text": "yeah let me let me just ask you about"
+    },
+    {
+      "index": 191,
+      "start": 632.32,
+      "end": 635.269,
+      "duration": 2.949,
+      "text": "that Matrix which looks a little strange"
+    },
+    {
+      "index": 192,
+      "start": 635.279,
+      "end": 641.949,
+      "duration": 6.67,
+      "text": "a a transpose over this number but"
+    },
+    {
+      "index": 193,
+      "start": 645.23,
+      "end": 645.24,
+      "duration": 0.01,
+      "text": "uh well I could ask you it's column"
+    },
+    {
+      "index": 194,
+      "start": 645.24,
+      "end": 647.79,
+      "duration": 2.55,
+      "text": "space yeah let me ask you it's column"
+    },
+    {
+      "index": 195,
+      "start": 647.8,
+      "end": 651.23,
+      "duration": 3.43,
+      "text": "space so what's the column space of a"
+    },
+    {
+      "index": 196,
+      "start": 651.24,
+      "end": 655.069,
+      "duration": 3.829,
+      "text": "matrix it's it's if you multiply that"
+    },
+    {
+      "index": 197,
+      "start": 655.079,
+      "end": 657.99,
+      "duration": 2.911,
+      "text": "matrix by anything you always get in the"
+    },
+    {
+      "index": 198,
+      "start": 658.0,
+      "end": 659.75,
+      "duration": 1.75,
+      "text": "column space right"
+    },
+    {
+      "index": 199,
+      "start": 659.76,
+      "end": 662.15,
+      "duration": 2.39,
+      "text": "the column space of a matrix"
+    },
+    {
+      "index": 200,
+      "start": 662.16,
+      "end": 665.31,
+      "duration": 3.15,
+      "text": "is when you multiply any vector by that"
+    },
+    {
+      "index": 201,
+      "start": 665.32,
+      "end": 667.269,
+      "duration": 1.949,
+      "text": "Matrix any Vector"
+    },
+    {
+      "index": 202,
+      "start": 667.279,
+      "end": 671.47,
+      "duration": 4.191,
+      "text": "B by The Matrix you always land in the"
+    },
+    {
+      "index": 203,
+      "start": 671.48,
+      "end": 674.269,
+      "duration": 2.789,
+      "text": "column space that's that's what column"
+    },
+    {
+      "index": 204,
+      "start": 674.279,
+      "end": 675.389,
+      "duration": 1.11,
+      "text": "spaces"
+    },
+    {
+      "index": 205,
+      "start": 675.399,
+      "end": 680.03,
+      "duration": 4.631,
+      "text": "were now what space do we always land in"
+    },
+    {
+      "index": 206,
+      "start": 680.04,
+      "end": 683.15,
+      "duration": 3.11,
+      "text": "what's the column space of what's the"
+    },
+    {
+      "index": 207,
+      "start": 683.16,
+      "end": 686.47,
+      "duration": 3.31,
+      "text": "result when I multiply this any Vector B"
+    },
+    {
+      "index": 208,
+      "start": 686.48,
+      "end": 689.389,
+      "duration": 2.909,
+      "text": "by my Matrix"
+    },
+    {
+      "index": 209,
+      "start": 689.399,
+      "end": 691.15,
+      "duration": 1.751,
+      "text": "so I have P *"
+    },
+    {
+      "index": 210,
+      "start": 691.16,
+      "end": 693.67,
+      "duration": 2.51,
+      "text": "B where am"
+    },
+    {
+      "index": 211,
+      "start": 693.68,
+      "end": 696.99,
+      "duration": 3.31,
+      "text": "I I'm on that line right the column"
+    },
+    {
+      "index": 212,
+      "start": 697.0,
+      "end": 699.629,
+      "duration": 2.629,
+      "text": "space so here are facts about this"
+    },
+    {
+      "index": 213,
+      "start": 699.639,
+      "end": 703.67,
+      "duration": 4.031,
+      "text": "Matrix the column space of"
+    },
+    {
+      "index": 214,
+      "start": 703.68,
+      "end": 708.55,
+      "duration": 4.87,
+      "text": "P of this projection Matrix is the line"
+    },
+    {
+      "index": 215,
+      "start": 708.56,
+      "end": 711.59,
+      "duration": 3.03,
+      "text": "through"
+    },
+    {
+      "index": 216,
+      "start": 714.949,
+      "end": 714.959,
+      "duration": 0.01,
+      "text": "a and the rank of this"
+    },
+    {
+      "index": 217,
+      "start": 714.959,
+      "end": 719.79,
+      "duration": 4.831,
+      "text": "Matrix is"
+    },
+    {
+      "index": 218,
+      "start": 721.629,
+      "end": 721.639,
+      "duration": 0.01,
+      "text": "you can all say it at"
+    },
+    {
+      "index": 219,
+      "start": 721.639,
+      "end": 726.99,
+      "duration": 5.351,
+      "text": "once one right the rank is one this is a"
+    },
+    {
+      "index": 220,
+      "start": 727.0,
+      "end": 729.629,
+      "duration": 2.629,
+      "text": "rank one Matrix actually it's exactly"
+    },
+    {
+      "index": 221,
+      "start": 729.639,
+      "end": 731.629,
+      "duration": 1.99,
+      "text": "the form that we we're familiar with"
+    },
+    {
+      "index": 222,
+      "start": 731.639,
+      "end": 734.43,
+      "duration": 2.791,
+      "text": "with rank one Matrix M with a rank one"
+    },
+    {
+      "index": 223,
+      "start": 734.44,
+      "end": 738.069,
+      "duration": 3.629,
+      "text": "Matrix a column times a row that's a"
+    },
+    {
+      "index": 224,
+      "start": 738.079,
+      "end": 742.35,
+      "duration": 4.271,
+      "text": "rank one Matrix that column is"
+    },
+    {
+      "index": 225,
+      "start": 742.36,
+      "end": 746.35,
+      "duration": 3.99,
+      "text": "the is the basis for the column"
+    },
+    {
+      "index": 226,
+      "start": 746.36,
+      "end": 749.75,
+      "duration": 3.39,
+      "text": "space just one dimension okay"
+    },
+    {
+      "index": 227,
+      "start": 749.76,
+      "end": 752.79,
+      "duration": 3.03,
+      "text": "so I know that much about the Matrix but"
+    },
+    {
+      "index": 228,
+      "start": 752.8,
+      "end": 754.949,
+      "duration": 2.149,
+      "text": "now there are two more facts about the"
+    },
+    {
+      "index": 229,
+      "start": 754.959,
+      "end": 757.949,
+      "duration": 2.99,
+      "text": "Matrix that that I want to that I want"
+    },
+    {
+      "index": 230,
+      "start": 757.959,
+      "end": 758.949,
+      "duration": 0.99,
+      "text": "to"
+    },
+    {
+      "index": 231,
+      "start": 758.959,
+      "end": 761.949,
+      "duration": 2.99,
+      "text": "notice is first of all is the Matrix"
+    },
+    {
+      "index": 232,
+      "start": 761.959,
+      "end": 764.59,
+      "duration": 2.631,
+      "text": "symmetric that's a natural question for"
+    },
+    {
+      "index": 233,
+      "start": 764.6,
+      "end": 769.03,
+      "duration": 4.43,
+      "text": "matrices and the answer is yes if I take"
+    },
+    {
+      "index": 234,
+      "start": 769.04,
+      "end": 771.59,
+      "duration": 2.55,
+      "text": "the transpose of this there's a number"
+    },
+    {
+      "index": 235,
+      "start": 771.6,
+      "end": 774.55,
+      "duration": 2.95,
+      "text": "down there the transpose of a a"
+    },
+    {
+      "index": 236,
+      "start": 774.56,
+      "end": 778.389,
+      "duration": 3.829,
+      "text": "transpose is a a transpose so p is"
+    },
+    {
+      "index": 237,
+      "start": 778.399,
+      "end": 782.629,
+      "duration": 4.23,
+      "text": "symmetric ppose equals P so this is a"
+    },
+    {
+      "index": 238,
+      "start": 782.639,
+      "end": 785.79,
+      "duration": 3.151,
+      "text": "key property that the projection Matrix"
+    },
+    {
+      "index": 239,
+      "start": 785.8,
+      "end": 786.71,
+      "duration": 0.91,
+      "text": "is"
+    },
+    {
+      "index": 240,
+      "start": 786.72,
+      "end": 789.389,
+      "duration": 2.669,
+      "text": "symmetric one more property now and this"
+    },
+    {
+      "index": 241,
+      "start": 789.399,
+      "end": 791.509,
+      "duration": 2.11,
+      "text": "is the real"
+    },
+    {
+      "index": 242,
+      "start": 791.519,
+      "end": 797.43,
+      "duration": 5.911,
+      "text": "one what happens if I do the projection"
+    },
+    {
+      "index": 243,
+      "start": 797.44,
+      "end": 800.15,
+      "duration": 2.71,
+      "text": "twice so I'm looking up looking for"
+    },
+    {
+      "index": 244,
+      "start": 800.16,
+      "end": 803.189,
+      "duration": 3.029,
+      "text": "something some information about"
+    },
+    {
+      "index": 245,
+      "start": 803.199,
+      "end": 806.03,
+      "duration": 2.831,
+      "text": "p² but just give me in terms of that"
+    },
+    {
+      "index": 246,
+      "start": 806.04,
+      "end": 809.829,
+      "duration": 3.789,
+      "text": "picture in terms of my picture"
+    },
+    {
+      "index": 247,
+      "start": 809.839,
+      "end": 812.03,
+      "duration": 2.191,
+      "text": "I take any Vector"
+    },
+    {
+      "index": 248,
+      "start": 812.04,
+      "end": 815.829,
+      "duration": 3.789,
+      "text": "B I multiply it by my projection Matrix"
+    },
+    {
+      "index": 249,
+      "start": 815.839,
+      "end": 820.03,
+      "duration": 4.191,
+      "text": "and that puts me there so this is"
+    },
+    {
+      "index": 250,
+      "start": 820.04,
+      "end": 824.31,
+      "duration": 4.27,
+      "text": "PB and now I project"
+    },
+    {
+      "index": 251,
+      "start": 824.32,
+      "end": 827.55,
+      "duration": 3.23,
+      "text": "again what happens now what happens when"
+    },
+    {
+      "index": 252,
+      "start": 827.56,
+      "end": 830.949,
+      "duration": 3.389,
+      "text": "I apply the projection Matrix a second"
+    },
+    {
+      "index": 253,
+      "start": 830.959,
+      "end": 835.069,
+      "duration": 4.11,
+      "text": "time to this so I'm applying it once"
+    },
+    {
+      "index": 254,
+      "start": 835.079,
+      "end": 837.269,
+      "duration": 2.19,
+      "text": "brings me here and the second time"
+    },
+    {
+      "index": 255,
+      "start": 837.279,
+      "end": 839.59,
+      "duration": 2.311,
+      "text": "brings me"
+    },
+    {
+      "index": 256,
+      "start": 839.6,
+      "end": 843.47,
+      "duration": 3.87,
+      "text": "I stay put right the projection for a"
+    },
+    {
+      "index": 257,
+      "start": 843.48,
+      "end": 846.59,
+      "duration": 3.11,
+      "text": "point on this line the projection is"
+    },
+    {
+      "index": 258,
+      "start": 846.6,
+      "end": 849.91,
+      "duration": 3.31,
+      "text": "right where it is the projection is the"
+    },
+    {
+      "index": 259,
+      "start": 849.92,
+      "end": 853.47,
+      "duration": 3.55,
+      "text": "same point so that means that if I"
+    },
+    {
+      "index": 260,
+      "start": 853.48,
+      "end": 856.269,
+      "duration": 2.789,
+      "text": "project"
+    },
+    {
+      "index": 261,
+      "start": 856.279,
+      "end": 859.79,
+      "duration": 3.511,
+      "text": "twice I get the same answer as I did in"
+    },
+    {
+      "index": 262,
+      "start": 859.8,
+      "end": 863.67,
+      "duration": 3.87,
+      "text": "the first projection so those are the"
+    },
+    {
+      "index": 263,
+      "start": 863.68,
+      "end": 867.67,
+      "duration": 3.99,
+      "text": "two properties that tell me I'm looking"
+    },
+    {
+      "index": 264,
+      "start": 867.68,
+      "end": 870.629,
+      "duration": 2.949,
+      "text": "at a projection Matrix"
+    },
+    {
+      "index": 265,
+      "start": 870.639,
+      "end": 871.91,
+      "duration": 1.271,
+      "text": "it's"
+    },
+    {
+      "index": 266,
+      "start": 871.92,
+      "end": 875.069,
+      "duration": 3.149,
+      "text": "symmetric and its square is itself"
+    },
+    {
+      "index": 267,
+      "start": 875.079,
+      "end": 877.47,
+      "duration": 2.391,
+      "text": "because if I project the second time"
+    },
+    {
+      "index": 268,
+      "start": 877.48,
+      "end": 879.949,
+      "duration": 2.469,
+      "text": "it's the same result as the first"
+    },
+    {
+      "index": 269,
+      "start": 879.959,
+      "end": 884.269,
+      "duration": 4.31,
+      "text": "projection okay so that's uh and and"
+    },
+    {
+      "index": 270,
+      "start": 884.279,
+      "end": 888.35,
+      "duration": 4.071,
+      "text": "then here's the exact formula when I"
+    },
+    {
+      "index": 271,
+      "start": 888.36,
+      "end": 890.87,
+      "duration": 2.51,
+      "text": "know what I'm projecting onto that line"
+    },
+    {
+      "index": 272,
+      "start": 890.88,
+      "end": 894.99,
+      "duration": 4.11,
+      "text": "to a then I know what p is so do you see"
+    },
+    {
+      "index": 273,
+      "start": 895.0,
+      "end": 897.509,
+      "duration": 2.509,
+      "text": "that I have all the pieces here for"
+    },
+    {
+      "index": 274,
+      "start": 897.519,
+      "end": 901.31,
+      "duration": 3.791,
+      "text": "projection on a line"
+    },
+    {
+      "index": 275,
+      "start": 904.949,
+      "end": 904.959,
+      "duration": 0.01,
+      "text": "now and those please remember those so"
+    },
+    {
+      "index": 276,
+      "start": 904.959,
+      "end": 907.47,
+      "duration": 2.511,
+      "text": "there are three formulas to remember the"
+    },
+    {
+      "index": 277,
+      "start": 907.48,
+      "end": 910.55,
+      "duration": 3.07,
+      "text": "formula for x the formula for p which is"
+    },
+    {
+      "index": 278,
+      "start": 910.56,
+      "end": 913.67,
+      "duration": 3.11,
+      "text": "just ax and then the formula for capital"
+    },
+    {
+      "index": 279,
+      "start": 913.68,
+      "end": 916.749,
+      "duration": 3.069,
+      "text": "P which is the"
+    },
+    {
+      "index": 280,
+      "start": 916.759,
+      "end": 923.71,
+      "duration": 6.951,
+      "text": "Matrix good good okay now I want to move"
+    },
+    {
+      "index": 281,
+      "start": 923.72,
+      "end": 925.67,
+      "duration": 1.95,
+      "text": "to more"
+    },
+    {
+      "index": 282,
+      "start": 925.68,
+      "end": 927.829,
+      "duration": 2.149,
+      "text": "Dimensions so we're going to have three"
+    },
+    {
+      "index": 283,
+      "start": 927.839,
+      "end": 931.11,
+      "duration": 3.271,
+      "text": "formulas again but you'll have"
+    },
+    {
+      "index": 284,
+      "start": 931.12,
+      "end": 933.829,
+      "duration": 2.709,
+      "text": "to they they'll be a little different"
+    },
+    {
+      "index": 285,
+      "start": 933.839,
+      "end": 938.03,
+      "duration": 4.191,
+      "text": "because we won't have a single line but"
+    },
+    {
+      "index": 286,
+      "start": 938.04,
+      "end": 942.23,
+      "duration": 4.19,
+      "text": "uh a plane or threedimensional or a n"
+    },
+    {
+      "index": 287,
+      "start": 942.24,
+      "end": 943.67,
+      "duration": 1.43,
+      "text": "dimensional"
+    },
+    {
+      "index": 288,
+      "start": 943.68,
+      "end": 951.67,
+      "duration": 7.99,
+      "text": "Subs okay so so now I'm move to the next"
+    },
+    {
+      "index": 289,
+      "start": 963.43,
+      "end": 963.44,
+      "duration": 0.01,
+      "text": "let me say first why I want this"
+    },
+    {
+      "index": 290,
+      "start": 963.44,
+      "end": 965.55,
+      "duration": 2.11,
+      "text": "projection and then we'll figure out"
+    },
+    {
+      "index": 291,
+      "start": 965.56,
+      "end": 967.829,
+      "duration": 2.269,
+      "text": "what it is we'll go completely in"
+    },
+    {
+      "index": 292,
+      "start": 967.839,
+      "end": 971.79,
+      "duration": 3.951,
+      "text": "parallel there and then we'll use it"
+    },
+    {
+      "index": 293,
+      "start": 971.8,
+      "end": 975.509,
+      "duration": 3.709,
+      "text": "okay why do I want this projection well"
+    },
+    {
+      "index": 294,
+      "start": 975.519,
+      "end": 984.55,
+      "duration": 9.031,
+      "text": "so why why"
+    },
+    {
+      "index": 295,
+      "start": 986.67,
+      "end": 986.68,
+      "duration": 0.01,
+      "text": "project it's"
+    },
+    {
+      "index": 296,
+      "start": 986.68,
+      "end": 990.309,
+      "duration": 3.629,
+      "text": "because I'm as as I mentioned last time"
+    },
+    {
+      "index": 297,
+      "start": 990.319,
+      "end": 996.23,
+      "duration": 5.911,
+      "text": "this new chapter deals with"
+    },
+    {
+      "index": 298,
+      "start": 1005.749,
+      "end": 1005.759,
+      "duration": 0.01,
+      "text": "B may"
+    },
+    {
+      "index": 299,
+      "start": 1005.759,
+      "end": 1013.47,
+      "duration": 7.711,
+      "text": "have no"
+    },
+    {
+      "index": 300,
+      "start": 1016.269,
+      "end": 1016.279,
+      "duration": 0.01,
+      "text": "solution so that that's that's really my"
+    },
+    {
+      "index": 301,
+      "start": 1016.279,
+      "end": 1018.91,
+      "duration": 2.631,
+      "text": "problem that I'm I'm given a a bunch of"
+    },
+    {
+      "index": 302,
+      "start": 1018.92,
+      "end": 1021.35,
+      "duration": 2.43,
+      "text": "equations probably too many"
+    },
+    {
+      "index": 303,
+      "start": 1021.36,
+      "end": 1024.029,
+      "duration": 2.669,
+      "text": "equations more equations than"
+    },
+    {
+      "index": 304,
+      "start": 1024.039,
+      "end": 1027.15,
+      "duration": 3.111,
+      "text": "unknowns and I can't solve"
+    },
+    {
+      "index": 305,
+      "start": 1027.16,
+      "end": 1032.23,
+      "duration": 5.07,
+      "text": "them okay so what do I do I solve the"
+    },
+    {
+      "index": 306,
+      "start": 1032.24,
+      "end": 1035.51,
+      "duration": 3.27,
+      "text": "closest problem that I can solve and"
+    },
+    {
+      "index": 307,
+      "start": 1035.52,
+      "end": 1038.909,
+      "duration": 3.389,
+      "text": "what's the closest one well ax will"
+    },
+    {
+      "index": 308,
+      "start": 1038.919,
+      "end": 1041.47,
+      "duration": 2.551,
+      "text": "always be in the column space of a"
+    },
+    {
+      "index": 309,
+      "start": 1041.48,
+      "end": 1045.549,
+      "duration": 4.069,
+      "text": "that's my problem my problem is ax has"
+    },
+    {
+      "index": 310,
+      "start": 1045.559,
+      "end": 1048.549,
+      "duration": 2.99,
+      "text": "to be in the column space and B is"
+    },
+    {
+      "index": 311,
+      "start": 1048.559,
+      "end": 1050.23,
+      "duration": 1.671,
+      "text": "probably not in the"
+    },
+    {
+      "index": 312,
+      "start": 1050.24,
+      "end": 1053.51,
+      "duration": 3.27,
+      "text": "col so I change"
+    },
+    {
+      "index": 313,
+      "start": 1053.52,
+      "end": 1055.63,
+      "duration": 2.11,
+      "text": "B to"
+    },
+    {
+      "index": 314,
+      "start": 1055.64,
+      "end": 1059.43,
+      "duration": 3.79,
+      "text": "what I choose the closest Vector in the"
+    },
+    {
+      "index": 315,
+      "start": 1059.44,
+      "end": 1060.43,
+      "duration": 0.99,
+      "text": "column"
+    },
+    {
+      "index": 316,
+      "start": 1060.44,
+      "end": 1064.669,
+      "duration": 4.229,
+      "text": "space so I'll"
+    },
+    {
+      "index": 317,
+      "start": 1069.43,
+      "end": 1069.44,
+      "duration": 0.01,
+      "text": "solve ax = P"
+    },
+    {
+      "index": 318,
+      "start": 1069.44,
+      "end": 1073.43,
+      "duration": 3.99,
+      "text": "instead that that one I can do where p"
+    },
+    {
+      "index": 319,
+      "start": 1073.44,
+      "end": 1076.87,
+      "duration": 3.43,
+      "text": "is this is the"
+    },
+    {
+      "index": 320,
+      "start": 1076.88,
+      "end": 1080.59,
+      "duration": 3.71,
+      "text": "projection of B"
+    },
+    {
+      "index": 321,
+      "start": 1080.6,
+      "end": 1083.51,
+      "duration": 2.91,
+      "text": "onto the column"
+    },
+    {
+      "index": 322,
+      "start": 1083.52,
+      "end": 1086.19,
+      "duration": 2.67,
+      "text": "space that's why I want to be able to do"
+    },
+    {
+      "index": 323,
+      "start": 1086.2,
+      "end": 1089.95,
+      "duration": 3.75,
+      "text": "this because I I have to find a solution"
+    },
+    {
+      "index": 324,
+      "start": 1089.96,
+      "end": 1092.71,
+      "duration": 2.75,
+      "text": "here and I'm going to put a little hat"
+    },
+    {
+      "index": 325,
+      "start": 1092.72,
+      "end": 1097.19,
+      "duration": 4.47,
+      "text": "there to indicate that it's not the X"
+    },
+    {
+      "index": 326,
+      "start": 1097.2,
+      "end": 1100.35,
+      "duration": 3.15,
+      "text": "it's not the x that doesn't"
+    },
+    {
+      "index": 327,
+      "start": 1100.36,
+      "end": 1106.07,
+      "duration": 5.71,
+      "text": "exist it's the X hat that's best"
+    },
+    {
+      "index": 328,
+      "start": 1106.08,
+      "end": 1110.07,
+      "duration": 3.99,
+      "text": "possible so if so I must be able to"
+    },
+    {
+      "index": 329,
+      "start": 1110.08,
+      "end": 1114.549,
+      "duration": 4.469,
+      "text": "figure out what's the good projection"
+    },
+    {
+      "index": 330,
+      "start": 1114.559,
+      "end": 1116.87,
+      "duration": 2.311,
+      "text": "there what's the good right hand side"
+    },
+    {
+      "index": 331,
+      "start": 1116.88,
+      "end": 1119.35,
+      "duration": 2.47,
+      "text": "that is in the column space that's as"
+    },
+    {
+      "index": 332,
+      "start": 1119.36,
+      "end": 1122.27,
+      "duration": 2.91,
+      "text": "close as possible to be and then I'm"
+    },
+    {
+      "index": 333,
+      "start": 1122.28,
+      "end": 1125.11,
+      "duration": 2.83,
+      "text": "then I know what to do okay so now I've"
+    },
+    {
+      "index": 334,
+      "start": 1125.12,
+      "end": 1128.669,
+      "duration": 3.549,
+      "text": "got that problem so so that's that's why"
+    },
+    {
+      "index": 335,
+      "start": 1128.679,
+      "end": 1131.59,
+      "duration": 2.911,
+      "text": "I have the problem again but now let me"
+    },
+    {
+      "index": 336,
+      "start": 1131.6,
+      "end": 1133.31,
+      "duration": 1.71,
+      "text": "say I'm in three"
+    },
+    {
+      "index": 337,
+      "start": 1133.32,
+      "end": 1135.59,
+      "duration": 2.27,
+      "text": "dimensions so I have a"
+    },
+    {
+      "index": 338,
+      "start": 1135.6,
+      "end": 1139.029,
+      "duration": 3.429,
+      "text": "plane maybe for example"
+    },
+    {
+      "index": 339,
+      "start": 1139.039,
+      "end": 1145.35,
+      "duration": 6.311,
+      "text": "and I have a vector B that's not in the"
+    },
+    {
+      "index": 340,
+      "start": 1148.63,
+      "end": 1148.64,
+      "duration": 0.01,
+      "text": "plane and I want to Project"
+    },
+    {
+      "index": 341,
+      "start": 1148.64,
+      "end": 1152.63,
+      "duration": 3.99,
+      "text": "B down into the"
+    },
+    {
+      "index": 342,
+      "start": 1154.47,
+      "end": 1154.48,
+      "duration": 0.01,
+      "text": "plan"
+    },
+    {
+      "index": 343,
+      "start": 1154.48,
+      "end": 1158.11,
+      "duration": 3.63,
+      "text": "okay so there's my question how do I"
+    },
+    {
+      "index": 344,
+      "start": 1158.12,
+      "end": 1159.95,
+      "duration": 1.83,
+      "text": "project a vector and I'm I'm really what"
+    },
+    {
+      "index": 345,
+      "start": 1159.96,
+      "end": 1162.27,
+      "duration": 2.31,
+      "text": "I'm looking for is a nice"
+    },
+    {
+      "index": 346,
+      "start": 1162.28,
+      "end": 1164.63,
+      "duration": 2.35,
+      "text": "formula and I'm counting on linear"
+    },
+    {
+      "index": 347,
+      "start": 1164.64,
+      "end": 1169.07,
+      "duration": 4.43,
+      "text": "algebra to just come out right a nice"
+    },
+    {
+      "index": 348,
+      "start": 1169.08,
+      "end": 1170.59,
+      "duration": 1.51,
+      "text": "formula"
+    },
+    {
+      "index": 349,
+      "start": 1170.6,
+      "end": 1174.149,
+      "duration": 3.549,
+      "text": "for the projection of of B into the"
+    },
+    {
+      "index": 350,
+      "start": 1174.159,
+      "end": 1178.19,
+      "duration": 4.031,
+      "text": "plane the nearest point so this again a"
+    },
+    {
+      "index": 351,
+      "start": 1178.2,
+      "end": 1181.11,
+      "duration": 2.91,
+      "text": "right angle is going to be"
+    },
+    {
+      "index": 352,
+      "start": 1181.12,
+      "end": 1184.23,
+      "duration": 3.11,
+      "text": "crucial okay now so what's first of all"
+    },
+    {
+      "index": 353,
+      "start": 1184.24,
+      "end": 1188.149,
+      "duration": 3.909,
+      "text": "I've got to say what is that plane to"
+    },
+    {
+      "index": 354,
+      "start": 1188.159,
+      "end": 1189.95,
+      "duration": 1.791,
+      "text": "get a formula I have to tell you what"
+    },
+    {
+      "index": 355,
+      "start": 1189.96,
+      "end": 1192.43,
+      "duration": 2.47,
+      "text": "the plane is how am I going to tell you"
+    },
+    {
+      "index": 356,
+      "start": 1192.44,
+      "end": 1196.23,
+      "duration": 3.79,
+      "text": "a plane I'll tell you a a basis for the"
+    },
+    {
+      "index": 357,
+      "start": 1196.24,
+      "end": 1199.789,
+      "duration": 3.549,
+      "text": "plane I'll tell you two vectors"
+    },
+    {
+      "index": 358,
+      "start": 1199.799,
+      "end": 1203.549,
+      "duration": 3.75,
+      "text": "A1 and A2 that that give you a basis for"
+    },
+    {
+      "index": 359,
+      "start": 1203.559,
+      "end": 1206.59,
+      "duration": 3.031,
+      "text": "the flame so let let say say there's an"
+    },
+    {
+      "index": 360,
+      "start": 1206.6,
+      "end": 1211.47,
+      "duration": 4.87,
+      "text": "A1 and here's a a vector"
+    },
+    {
+      "index": 361,
+      "start": 1211.48,
+      "end": 1214.669,
+      "duration": 3.189,
+      "text": "A2 they don't have to be"
+    },
+    {
+      "index": 362,
+      "start": 1214.679,
+      "end": 1216.669,
+      "duration": 1.99,
+      "text": "perpendicular but they better be"
+    },
+    {
+      "index": 363,
+      "start": 1216.679,
+      "end": 1218.83,
+      "duration": 2.151,
+      "text": "independent because then that tells me"
+    },
+    {
+      "index": 364,
+      "start": 1218.84,
+      "end": 1221.789,
+      "duration": 2.949,
+      "text": "the plane the plane is the it's the"
+    },
+    {
+      "index": 365,
+      "start": 1221.799,
+      "end": 1224.59,
+      "duration": 2.791,
+      "text": "plane"
+    },
+    {
+      "index": 366,
+      "start": 1235.27,
+      "end": 1235.28,
+      "duration": 0.01,
+      "text": "and actually going back to my to this to"
+    },
+    {
+      "index": 367,
+      "start": 1235.28,
+      "end": 1238.83,
+      "duration": 3.55,
+      "text": "this connection this plane is a column"
+    },
+    {
+      "index": 368,
+      "start": 1238.84,
+      "end": 1244.43,
+      "duration": 5.59,
+      "text": "space it's the it's the column"
+    },
+    {
+      "index": 369,
+      "start": 1246.43,
+      "end": 1246.44,
+      "duration": 0.01,
+      "text": "space"
+    },
+    {
+      "index": 370,
+      "start": 1246.44,
+      "end": 1249.43,
+      "duration": 2.99,
+      "text": "of what"
+    },
+    {
+      "index": 371,
+      "start": 1249.44,
+      "end": 1252.95,
+      "duration": 3.51,
+      "text": "Matrix what what Matrix so how do I"
+    },
+    {
+      "index": 372,
+      "start": 1252.96,
+      "end": 1255.789,
+      "duration": 2.829,
+      "text": "connect the two"
+    },
+    {
+      "index": 373,
+      "start": 1255.799,
+      "end": 1258.39,
+      "duration": 2.591,
+      "text": "questions I'm trying I'm I'm thinking"
+    },
+    {
+      "index": 374,
+      "start": 1258.4,
+      "end": 1261.07,
+      "duration": 2.67,
+      "text": "how how do I project onto a"
+    },
+    {
+      "index": 375,
+      "start": 1261.08,
+      "end": 1264.99,
+      "duration": 3.91,
+      "text": "plane and I want to get a matrix in"
+    },
+    {
+      "index": 376,
+      "start": 1265.0,
+      "end": 1268.11,
+      "duration": 3.11,
+      "text": "here everything's cleaner if I write it"
+    },
+    {
+      "index": 377,
+      "start": 1268.12,
+      "end": 1271.39,
+      "duration": 3.27,
+      "text": "in terms of a matrix so what"
+    },
+    {
+      "index": 378,
+      "start": 1271.4,
+      "end": 1274.71,
+      "duration": 3.31,
+      "text": "Matrix has these has that column space"
+    },
+    {
+      "index": 379,
+      "start": 1274.72,
+      "end": 1277.59,
+      "duration": 2.87,
+      "text": "well of course it's just the Matrix that"
+    },
+    {
+      "index": 380,
+      "start": 1277.6,
+      "end": 1281.549,
+      "duration": 3.949,
+      "text": "has A1 in the First Column and A2 in the"
+    },
+    {
+      "index": 381,
+      "start": 1281.559,
+      "end": 1282.83,
+      "duration": 1.271,
+      "text": "second"
+    },
+    {
+      "index": 382,
+      "start": 1282.84,
+      "end": 1286.19,
+      "duration": 3.35,
+      "text": "column right just just let's be sure"
+    },
+    {
+      "index": 383,
+      "start": 1286.2,
+      "end": 1288.31,
+      "duration": 2.11,
+      "text": "we've got the the question before we get"
+    },
+    {
+      "index": 384,
+      "start": 1288.32,
+      "end": 1289.029,
+      "duration": 0.709,
+      "text": "to"
+    },
+    {
+      "index": 385,
+      "start": 1289.039,
+      "end": 1292.23,
+      "duration": 3.191,
+      "text": "answer so I'm looking"
+    },
+    {
+      "index": 386,
+      "start": 1292.24,
+      "end": 1297.19,
+      "duration": 4.95,
+      "text": "for again I'm given a matrix a with two"
+    },
+    {
+      "index": 387,
+      "start": 1297.2,
+      "end": 1300.909,
+      "duration": 3.709,
+      "text": "columns and really I'm ready once I get"
+    },
+    {
+      "index": 388,
+      "start": 1300.919,
+      "end": 1304.669,
+      "duration": 3.75,
+      "text": "to two I'm ready for n so it could be"
+    },
+    {
+      "index": 389,
+      "start": 1304.679,
+      "end": 1307.789,
+      "duration": 3.11,
+      "text": "two columns it could be n columns I'll"
+    },
+    {
+      "index": 390,
+      "start": 1307.799,
+      "end": 1309.99,
+      "duration": 2.191,
+      "text": "write the answer in terms of the Matrix"
+    },
+    {
+      "index": 391,
+      "start": 1310.0,
+      "end": 1314.31,
+      "duration": 4.31,
+      "text": "a and the point will be those two"
+    },
+    {
+      "index": 392,
+      "start": 1314.32,
+      "end": 1317.23,
+      "duration": 2.91,
+      "text": "columns describe the plane they describe"
+    },
+    {
+      "index": 393,
+      "start": 1317.24,
+      "end": 1320.789,
+      "duration": 3.549,
+      "text": "the column space and I want to"
+    },
+    {
+      "index": 394,
+      "start": 1320.799,
+      "end": 1323.789,
+      "duration": 2.99,
+      "text": "project okay and I'm given a vector B"
+    },
+    {
+      "index": 395,
+      "start": 1323.799,
+      "end": 1326.83,
+      "duration": 3.031,
+      "text": "that's probably not in the column space"
+    },
+    {
+      "index": 396,
+      "start": 1326.84,
+      "end": 1329.669,
+      "duration": 2.829,
+      "text": "of course if B is in the column space my"
+    },
+    {
+      "index": 397,
+      "start": 1329.679,
+      "end": 1332.47,
+      "duration": 2.791,
+      "text": "projection is simple it's just"
+    },
+    {
+      "index": 398,
+      "start": 1332.48,
+      "end": 1338.19,
+      "duration": 5.71,
+      "text": "B but most likely I have an error E this"
+    },
+    {
+      "index": 399,
+      "start": 1338.2,
+      "end": 1340.31,
+      "duration": 2.11,
+      "text": "B minus P"
+    },
+    {
+      "index": 400,
+      "start": 1340.32,
+      "end": 1345.75,
+      "duration": 5.43,
+      "text": "part which is probably not zero okay but"
+    },
+    {
+      "index": 401,
+      "start": 1345.76,
+      "end": 1349.669,
+      "duration": 3.909,
+      "text": "the beauty is that I know"
+    },
+    {
+      "index": 402,
+      "start": 1349.679,
+      "end": 1351.99,
+      "duration": 2.311,
+      "text": "the from"
+    },
+    {
+      "index": 403,
+      "start": 1352.0,
+      "end": 1355.029,
+      "duration": 3.029,
+      "text": "geometry or I could get it from calculus"
+    },
+    {
+      "index": 404,
+      "start": 1355.039,
+      "end": 1357.95,
+      "duration": 2.911,
+      "text": "or I could get it from linear algebra"
+    },
+    {
+      "index": 405,
+      "start": 1357.96,
+      "end": 1363.19,
+      "duration": 5.23,
+      "text": "that that this this Vector this this is"
+    },
+    {
+      "index": 406,
+      "start": 1363.2,
+      "end": 1365.789,
+      "duration": 2.589,
+      "text": "the part of B that's that's"
+    },
+    {
+      "index": 407,
+      "start": 1365.799,
+      "end": 1367.669,
+      "duration": 1.87,
+      "text": "perpendicular to the"
+    },
+    {
+      "index": 408,
+      "start": 1367.679,
+      "end": 1373.59,
+      "duration": 5.911,
+      "text": "plane that that e is perpendicular is"
+    },
+    {
+      "index": 409,
+      "start": 1373.6,
+      "end": 1376.95,
+      "duration": 3.35,
+      "text": "perpendicular to the"
+    },
+    {
+      "index": 410,
+      "start": 1376.96,
+      "end": 1379.99,
+      "duration": 3.03,
+      "text": "plane you're you're intuition is saying"
+    },
+    {
+      "index": 411,
+      "start": 1380.0,
+      "end": 1384.029,
+      "duration": 4.029,
+      "text": "that that's the crucial fact that that"
+    },
+    {
+      "index": 412,
+      "start": 1384.039,
+      "end": 1386.07,
+      "duration": 2.031,
+      "text": "that's that that's going to give us the"
+    },
+    {
+      "index": 413,
+      "start": 1386.08,
+      "end": 1390.35,
+      "duration": 4.27,
+      "text": "answer okay so let me that's the problem"
+    },
+    {
+      "index": 414,
+      "start": 1390.36,
+      "end": 1393.59,
+      "duration": 3.23,
+      "text": "now for the"
+    },
+    {
+      "index": 415,
+      "start": 1396.11,
+      "end": 1396.12,
+      "duration": 0.01,
+      "text": "answer so so this is a lecture that's"
+    },
+    {
+      "index": 416,
+      "start": 1396.12,
+      "end": 1397.909,
+      "duration": 1.789,
+      "text": "really like moving"
+    },
+    {
+      "index": 417,
+      "start": 1397.919,
+      "end": 1402.19,
+      "duration": 4.271,
+      "text": "along because uh I'm just popping that"
+    },
+    {
+      "index": 418,
+      "start": 1402.2,
+      "end": 1406.11,
+      "duration": 3.91,
+      "text": "problem up there and asking you what"
+    },
+    {
+      "index": 419,
+      "start": 1406.12,
+      "end": 1410.029,
+      "duration": 3.909,
+      "text": "combination now yeah so what is P what"
+    },
+    {
+      "index": 420,
+      "start": 1410.039,
+      "end": 1413.47,
+      "duration": 3.431,
+      "text": "is this projection P this is projection"
+    },
+    {
+      "index": 421,
+      "start": 1413.48,
+      "end": 1416.75,
+      "duration": 3.27,
+      "text": "p is some multiple"
+    },
+    {
+      "index": 422,
+      "start": 1416.76,
+      "end": 1420.669,
+      "duration": 3.909,
+      "text": "of"
+    },
+    {
+      "index": 423,
+      "start": 1423.789,
+      "end": 1423.799,
+      "duration": 0.01,
+      "text": "these bases guys right some multiple of"
+    },
+    {
+      "index": 424,
+      "start": 1423.799,
+      "end": 1425.75,
+      "duration": 1.951,
+      "text": "the"
+    },
+    {
+      "index": 425,
+      "start": 1425.76,
+      "end": 1429.63,
+      "duration": 3.87,
+      "text": "columns but I don't like writing out X1"
+    },
+    {
+      "index": 426,
+      "start": 1429.64,
+      "end": 1433.149,
+      "duration": 3.509,
+      "text": "A1 Plus X2 A2 I would rather write that"
+    },
+    {
+      "index": 427,
+      "start": 1433.159,
+      "end": 1435.87,
+      "duration": 2.711,
+      "text": "as a"
+    },
+    {
+      "index": 428,
+      "start": 1435.88,
+      "end": 1439.07,
+      "duration": 3.19,
+      "text": "x well actually I should put if I'm"
+    },
+    {
+      "index": 429,
+      "start": 1439.08,
+      "end": 1441.35,
+      "duration": 2.27,
+      "text": "really doing everything right I should"
+    },
+    {
+      "index": 430,
+      "start": 1441.36,
+      "end": 1443.47,
+      "duration": 2.11,
+      "text": "put a little hat on it to remember that"
+    },
+    {
+      "index": 431,
+      "start": 1443.48,
+      "end": 1446.549,
+      "duration": 3.069,
+      "text": "that that this x that those are the"
+    },
+    {
+      "index": 432,
+      "start": 1446.559,
+      "end": 1448.99,
+      "duration": 2.431,
+      "text": "numbers and I could have put a hat way"
+    },
+    {
+      "index": 433,
+      "start": 1449.0,
+      "end": 1451.269,
+      "duration": 2.269,
+      "text": "back"
+    },
+    {
+      "index": 434,
+      "start": 1451.279,
+      "end": 1456.31,
+      "duration": 5.031,
+      "text": "there is right so this is this is the"
+    },
+    {
+      "index": 435,
+      "start": 1456.32,
+      "end": 1459.35,
+      "duration": 3.03,
+      "text": "projection p p is"
+    },
+    {
+      "index": 436,
+      "start": 1459.36,
+      "end": 1461.71,
+      "duration": 2.35,
+      "text": "axar and I'm looking for"
+    },
+    {
+      "index": 437,
+      "start": 1461.72,
+      "end": 1467.35,
+      "duration": 5.63,
+      "text": "xar so that's what I want an"
+    },
+    {
+      "index": 438,
+      "start": 1470.11,
+      "end": 1470.12,
+      "duration": 0.01,
+      "text": "equation so so so now I've got hold of"
+    },
+    {
+      "index": 439,
+      "start": 1470.12,
+      "end": 1473.95,
+      "duration": 3.83,
+      "text": "the problem the problem is find the"
+    },
+    {
+      "index": 440,
+      "start": 1473.96,
+      "end": 1477.83,
+      "duration": 3.87,
+      "text": "right combination of the columns so"
+    },
+    {
+      "index": 441,
+      "start": 1477.84,
+      "end": 1481.07,
+      "duration": 3.23,
+      "text": "that the error Vector is perpendicular"
+    },
+    {
+      "index": 442,
+      "start": 1481.08,
+      "end": 1483.07,
+      "duration": 1.99,
+      "text": "to the"
+    },
+    {
+      "index": 443,
+      "start": 1483.08,
+      "end": 1486.549,
+      "duration": 3.469,
+      "text": "plane now let me turn that into an"
+    },
+    {
+      "index": 444,
+      "start": 1486.559,
+      "end": 1490.75,
+      "duration": 4.191,
+      "text": "equation so what so I'll raise the board"
+    },
+    {
+      "index": 445,
+      "start": 1490.76,
+      "end": 1493.83,
+      "duration": 3.07,
+      "text": "and just turn that turn what we've just"
+    },
+    {
+      "index": 446,
+      "start": 1493.84,
+      "end": 1497.31,
+      "duration": 3.47,
+      "text": "done into an"
+    },
+    {
+      "index": 447,
+      "start": 1500.269,
+      "end": 1500.279,
+      "duration": 0.01,
+      "text": "equation so let me I'll I'll write again"
+    },
+    {
+      "index": 448,
+      "start": 1500.279,
+      "end": 1505.549,
+      "duration": 5.27,
+      "text": "the main point the projection is a XB X"
+    },
+    {
+      "index": 449,
+      "start": 1505.559,
+      "end": 1511.63,
+      "duration": 6.071,
+      "text": "hat and our problem is find X"
+    },
+    {
+      "index": 450,
+      "start": 1514.549,
+      "end": 1514.559,
+      "duration": 0.01,
+      "text": "hat and the key"
+    },
+    {
+      "index": 451,
+      "start": 1514.559,
+      "end": 1516.75,
+      "duration": 2.191,
+      "text": "is"
+    },
+    {
+      "index": 452,
+      "start": 1516.76,
+      "end": 1520.43,
+      "duration": 3.67,
+      "text": "that B minus ax"
+    },
+    {
+      "index": 453,
+      "start": 1520.44,
+      "end": 1525.269,
+      "duration": 4.829,
+      "text": "hat that's the error this is the E is"
+    },
+    {
+      "index": 454,
+      "start": 1525.279,
+      "end": 1529.59,
+      "duration": 4.311,
+      "text": "perpendicular"
+    },
+    {
+      "index": 455,
+      "start": 1536.549,
+      "end": 1536.559,
+      "duration": 0.01,
+      "text": "plane that's got to give"
+    },
+    {
+      "index": 456,
+      "start": 1536.559,
+      "end": 1538.75,
+      "duration": 2.191,
+      "text": "me well what am I looking for I'm"
+    },
+    {
+      "index": 457,
+      "start": 1538.76,
+      "end": 1540.789,
+      "duration": 2.029,
+      "text": "looking for two equations now because"
+    },
+    {
+      "index": 458,
+      "start": 1540.799,
+      "end": 1544.63,
+      "duration": 3.831,
+      "text": "I've got an X1 and an"
+    },
+    {
+      "index": 459,
+      "start": 1548.63,
+      "end": 1548.64,
+      "duration": 0.01,
+      "text": "X2 and I'll get two equations because so"
+    },
+    {
+      "index": 460,
+      "start": 1548.64,
+      "end": 1554.43,
+      "duration": 5.79,
+      "text": "this thing e is perpendicular to the"
+    },
+    {
+      "index": 461,
+      "start": 1557.149,
+      "end": 1557.159,
+      "duration": 0.01,
+      "text": "plane so what does that mean I guess it"
+    },
+    {
+      "index": 462,
+      "start": 1557.159,
+      "end": 1561.59,
+      "duration": 4.431,
+      "text": "means it's perpendic I to A1 and also to"
+    },
+    {
+      "index": 463,
+      "start": 1561.6,
+      "end": 1564.43,
+      "duration": 2.83,
+      "text": "A2 right those are two vectors in the"
+    },
+    {
+      "index": 464,
+      "start": 1564.44,
+      "end": 1566.59,
+      "duration": 2.15,
+      "text": "plane and the things that are"
+    },
+    {
+      "index": 465,
+      "start": 1566.6,
+      "end": 1568.669,
+      "duration": 2.069,
+      "text": "perpendicular to the plane are"
+    },
+    {
+      "index": 466,
+      "start": 1568.679,
+      "end": 1571.909,
+      "duration": 3.23,
+      "text": "perpendicular to A1 and A2 let me just"
+    },
+    {
+      "index": 467,
+      "start": 1571.919,
+      "end": 1574.269,
+      "duration": 2.35,
+      "text": "repeat this this guy then is"
+    },
+    {
+      "index": 468,
+      "start": 1574.279,
+      "end": 1575.75,
+      "duration": 1.471,
+      "text": "perpendicular to the plane so it's"
+    },
+    {
+      "index": 469,
+      "start": 1575.76,
+      "end": 1577.59,
+      "duration": 1.83,
+      "text": "perpendicular to that vector and that"
+    },
+    {
+      "index": 470,
+      "start": 1577.6,
+      "end": 1580.51,
+      "duration": 2.91,
+      "text": "Vector not it's not it's perpendicular"
+    },
+    {
+      "index": 471,
+      "start": 1580.52,
+      "end": 1583.51,
+      "duration": 2.99,
+      "text": "to that of course but it's so it's"
+    },
+    {
+      "index": 472,
+      "start": 1583.52,
+      "end": 1586.59,
+      "duration": 3.07,
+      "text": "perpendicular to everything in the plane"
+    },
+    {
+      "index": 473,
+      "start": 1586.6,
+      "end": 1590.389,
+      "duration": 3.789,
+      "text": "and the plane is really told me by A1"
+    },
+    {
+      "index": 474,
+      "start": 1590.399,
+      "end": 1596.029,
+      "duration": 5.63,
+      "text": "and A2 so really I have the equations A1"
+    },
+    {
+      "index": 475,
+      "start": 1596.039,
+      "end": 1598.63,
+      "duration": 2.591,
+      "text": "transpose b -"
+    },
+    {
+      "index": 476,
+      "start": 1598.64,
+      "end": 1604.11,
+      "duration": 5.47,
+      "text": "ax is zero and also A2"
+    },
+    {
+      "index": 477,
+      "start": 1604.12,
+      "end": 1606.669,
+      "duration": 2.549,
+      "text": "transpose B minus"
+    },
+    {
+      "index": 478,
+      "start": 1606.679,
+      "end": 1611.51,
+      "duration": 4.831,
+      "text": "ax is"
+    },
+    {
+      "index": 479,
+      "start": 1619.029,
+      "end": 1619.039,
+      "duration": 0.01,
+      "text": "equ but"
+    },
+    {
+      "index": 480,
+      "start": 1619.039,
+      "end": 1621.35,
+      "duration": 2.311,
+      "text": "I want those in Matrix"
+    },
+    {
+      "index": 481,
+      "start": 1621.36,
+      "end": 1624.07,
+      "duration": 2.71,
+      "text": "form I want to put those two equations"
+    },
+    {
+      "index": 482,
+      "start": 1624.08,
+      "end": 1626.59,
+      "duration": 2.51,
+      "text": "together as a matrix equation and it's"
+    },
+    {
+      "index": 483,
+      "start": 1626.6,
+      "end": 1630.11,
+      "duration": 3.51,
+      "text": "just comes out right look at the Matrix"
+    },
+    {
+      "index": 484,
+      "start": 1630.12,
+      "end": 1631.11,
+      "duration": 0.99,
+      "text": "a"
+    },
+    {
+      "index": 485,
+      "start": 1631.12,
+      "end": 1635.43,
+      "duration": 4.31,
+      "text": "transpose put A1 A1 transposes its first"
+    },
+    {
+      "index": 486,
+      "start": 1635.44,
+      "end": 1639.669,
+      "duration": 4.229,
+      "text": "row A2 transposes its second row that"
+    },
+    {
+      "index": 487,
+      "start": 1639.679,
+      "end": 1644.75,
+      "duration": 5.071,
+      "text": "multiplies this B minus"
+    },
+    {
+      "index": 488,
+      "start": 1660.11,
+      "end": 1660.12,
+      "duration": 0.01,
+      "text": "um you see that I'm just this is one way"
+    },
+    {
+      "index": 489,
+      "start": 1660.12,
+      "end": 1663.11,
+      "duration": 2.99,
+      "text": "to to to come up with this equation so"
+    },
+    {
+      "index": 490,
+      "start": 1663.12,
+      "end": 1666.83,
+      "duration": 3.71,
+      "text": "the equation I'm coming up with is a"
+    },
+    {
+      "index": 491,
+      "start": 1666.84,
+      "end": 1670.43,
+      "duration": 3.59,
+      "text": "transpose b - a"
+    },
+    {
+      "index": 492,
+      "start": 1670.44,
+      "end": 1674.47,
+      "duration": 4.03,
+      "text": "x is"
+    },
+    {
+      "index": 493,
+      "start": 1676.509,
+      "end": 1676.519,
+      "duration": 0.01,
+      "text": "zero"
+    },
+    {
+      "index": 494,
+      "start": 1676.519,
+      "end": 1679.87,
+      "duration": 3.351,
+      "text": "okay that's my equation"
+    },
+    {
+      "index": 495,
+      "start": 1679.88,
+      "end": 1681.87,
+      "duration": 1.99,
+      "text": "all right now I I want to stop for a"
+    },
+    {
+      "index": 496,
+      "start": 1681.88,
+      "end": 1684.99,
+      "duration": 3.11,
+      "text": "moment before I solve it and just think"
+    },
+    {
+      "index": 497,
+      "start": 1685.0,
+      "end": 1689.149,
+      "duration": 4.149,
+      "text": "about it first of all do you see that"
+    },
+    {
+      "index": 498,
+      "start": 1689.159,
+      "end": 1691.269,
+      "duration": 2.11,
+      "text": "that"
+    },
+    {
+      "index": 499,
+      "start": 1691.279,
+      "end": 1693.87,
+      "duration": 2.591,
+      "text": "equation back in the very first problem"
+    },
+    {
+      "index": 500,
+      "start": 1693.88,
+      "end": 1698.83,
+      "duration": 4.95,
+      "text": "I solv on a line what was what was"
+    },
+    {
+      "index": 501,
+      "start": 1698.84,
+      "end": 1702.669,
+      "duration": 3.829,
+      "text": "uh on a line the The Matrix a only had"
+    },
+    {
+      "index": 502,
+      "start": 1702.679,
+      "end": 1706.19,
+      "duration": 3.511,
+      "text": "one column it was just little"
+    },
+    {
+      "index": 503,
+      "start": 1706.2,
+      "end": 1709.95,
+      "duration": 3.75,
+      "text": "a so in the first problem I solved"
+    },
+    {
+      "index": 504,
+      "start": 1709.96,
+      "end": 1713.149,
+      "duration": 3.189,
+      "text": "projecting on a line this for for"
+    },
+    {
+      "index": 505,
+      "start": 1713.159,
+      "end": 1715.11,
+      "duration": 1.951,
+      "text": "Capital a you just change that to little"
+    },
+    {
+      "index": 506,
+      "start": 1715.12,
+      "end": 1716.95,
+      "duration": 1.83,
+      "text": "a and you have the same equation that we"
+    },
+    {
+      "index": 507,
+      "start": 1716.96,
+      "end": 1718.11,
+      "duration": 1.15,
+      "text": "solved"
+    },
+    {
+      "index": 508,
+      "start": 1718.12,
+      "end": 1721.83,
+      "duration": 3.71,
+      "text": "before a transpose eals"
+    },
+    {
+      "index": 509,
+      "start": 1721.84,
+      "end": 1727.71,
+      "duration": 5.87,
+      "text": "Z okay now a second thing second"
+    },
+    {
+      "index": 510,
+      "start": 1727.72,
+      "end": 1731.47,
+      "duration": 3.75,
+      "text": "comment I would like to since I know"
+    },
+    {
+      "index": 511,
+      "start": 1731.48,
+      "end": 1733.909,
+      "duration": 2.429,
+      "text": "about these four"
+    },
+    {
+      "index": 512,
+      "start": 1733.919,
+      "end": 1737.149,
+      "duration": 3.23,
+      "text": "subspaces I would like to get them into"
+    },
+    {
+      "index": 513,
+      "start": 1737.159,
+      "end": 1740.71,
+      "duration": 3.551,
+      "text": "this picture"
+    },
+    {
+      "index": 514,
+      "start": 1742.43,
+      "end": 1742.44,
+      "duration": 0.01,
+      "text": "so let me ask the"
+    },
+    {
+      "index": 515,
+      "start": 1742.44,
+      "end": 1746.31,
+      "duration": 3.87,
+      "text": "question what Subspace is this thing"
+    },
+    {
+      "index": 516,
+      "start": 1746.32,
+      "end": 1750.07,
+      "duration": 3.75,
+      "text": "in which of the four subspaces is that"
+    },
+    {
+      "index": 517,
+      "start": 1750.08,
+      "end": 1752.389,
+      "duration": 2.309,
+      "text": "error Vector e this is this is nothing"
+    },
+    {
+      "index": 518,
+      "start": 1752.399,
+      "end": 1757.43,
+      "duration": 5.031,
+      "text": "but e this is this Sky coming down the"
+    },
+    {
+      "index": 519,
+      "start": 1757.44,
+      "end": 1761.269,
+      "duration": 3.829,
+      "text": "in in down perpendicular to the plane"
+    },
+    {
+      "index": 520,
+      "start": 1761.279,
+      "end": 1764.389,
+      "duration": 3.11,
+      "text": "what Subspace is e"
+    },
+    {
+      "index": 521,
+      "start": 1764.399,
+      "end": 1769.269,
+      "duration": 4.87,
+      "text": "in from this equation"
+    },
+    {
+      "index": 522,
+      "start": 1772.83,
+      "end": 1772.84,
+      "duration": 0.01,
+      "text": "well the equation is saying a transpose"
+    },
+    {
+      "index": 523,
+      "start": 1772.84,
+      "end": 1777.35,
+      "duration": 4.51,
+      "text": "e is zero so I'm learning here that e is"
+    },
+    {
+      "index": 524,
+      "start": 1777.36,
+      "end": 1783.75,
+      "duration": 6.39,
+      "text": "in the null space of a"
+    },
+    {
+      "index": 525,
+      "start": 1787.19,
+      "end": 1787.2,
+      "duration": 0.01,
+      "text": "transpose right that's my equation and"
+    },
+    {
+      "index": 526,
+      "start": 1787.2,
+      "end": 1789.71,
+      "duration": 2.51,
+      "text": "now I just want to see hey of course"
+    },
+    {
+      "index": 527,
+      "start": 1789.72,
+      "end": 1792.43,
+      "duration": 2.71,
+      "text": "that that was right"
+    },
+    {
+      "index": 528,
+      "start": 1792.44,
+      "end": 1794.83,
+      "duration": 2.39,
+      "text": "because things that are in the null"
+    },
+    {
+      "index": 529,
+      "start": 1794.84,
+      "end": 1797.029,
+      "duration": 2.189,
+      "text": "space of a"
+    },
+    {
+      "index": 530,
+      "start": 1797.039,
+      "end": 1799.19,
+      "duration": 2.151,
+      "text": "transpose what do we know about the null"
+    },
+    {
+      "index": 531,
+      "start": 1799.2,
+      "end": 1802.029,
+      "duration": 2.829,
+      "text": "space of a"
+    },
+    {
+      "index": 532,
+      "start": 1805.789,
+      "end": 1805.799,
+      "duration": 0.01,
+      "text": "transpose so the last lecture gave us"
+    },
+    {
+      "index": 533,
+      "start": 1805.799,
+      "end": 1808.19,
+      "duration": 2.391,
+      "text": "the sort of the geometry of these"
+    },
+    {
+      "index": 534,
+      "start": 1808.2,
+      "end": 1811.149,
+      "duration": 2.949,
+      "text": "subspaces and the orthogonality of them"
+    },
+    {
+      "index": 535,
+      "start": 1811.159,
+      "end": 1813.75,
+      "duration": 2.591,
+      "text": "and do you remember what it was what on"
+    },
+    {
+      "index": 536,
+      "start": 1813.76,
+      "end": 1816.07,
+      "duration": 2.31,
+      "text": "the on the on the right side of our big"
+    },
+    {
+      "index": 537,
+      "start": 1816.08,
+      "end": 1818.99,
+      "duration": 2.91,
+      "text": "figure we always have the null space of"
+    },
+    {
+      "index": 538,
+      "start": 1819.0,
+      "end": 1821.75,
+      "duration": 2.75,
+      "text": "a transpose and"
+    },
+    {
+      "index": 539,
+      "start": 1821.76,
+      "end": 1826.269,
+      "duration": 4.509,
+      "text": "the column space of a and their"
+    },
+    {
+      "index": 540,
+      "start": 1826.279,
+      "end": 1831.75,
+      "duration": 5.471,
+      "text": "orthogon so e in the null space of a"
+    },
+    {
+      "index": 541,
+      "start": 1831.76,
+      "end": 1835.43,
+      "duration": 3.67,
+      "text": "transpose is saying e is perpendicular"
+    },
+    {
+      "index": 542,
+      "start": 1835.44,
+      "end": 1838.11,
+      "duration": 2.67,
+      "text": "to the column space of"
+    },
+    {
+      "index": 543,
+      "start": 1838.12,
+      "end": 1843.59,
+      "duration": 5.47,
+      "text": "a"
+    },
+    {
+      "index": 544,
+      "start": 1847.389,
+      "end": 1847.399,
+      "duration": 0.01,
+      "text": "yes like I I just feel okay the damn"
+    },
+    {
+      "index": 545,
+      "start": 1847.399,
+      "end": 1852.029,
+      "duration": 4.63,
+      "text": "thing came out right uh the equation for"
+    },
+    {
+      "index": 546,
+      "start": 1852.039,
+      "end": 1854.509,
+      "duration": 2.47,
+      "text": "the the equation that I struggled to"
+    },
+    {
+      "index": 547,
+      "start": 1854.519,
+      "end": 1858.149,
+      "duration": 3.63,
+      "text": "find for e"
+    },
+    {
+      "index": 548,
+      "start": 1858.159,
+      "end": 1858.56,
+      "duration": 0.401,
+      "text": "really"
+    },
+    {
+      "index": 549,
+      "start": 1858.57,
+      "end": 1859.789,
+      "duration": 1.219,
+      "text": "[Music]"
+    },
+    {
+      "index": 550,
+      "start": 1859.799,
+      "end": 1863.47,
+      "duration": 3.671,
+      "text": "said what I wanted that the the the"
+    },
+    {
+      "index": 551,
+      "start": 1863.48,
+      "end": 1865.99,
+      "duration": 2.51,
+      "text": "error E is perpendicular to the coln"
+    },
+    {
+      "index": 552,
+      "start": 1866.0,
+      "end": 1869.31,
+      "duration": 3.31,
+      "text": "space of a just right and from our four"
+    },
+    {
+      "index": 553,
+      "start": 1869.32,
+      "end": 1872.509,
+      "duration": 3.189,
+      "text": "fundamental subspaces we knew that that"
+    },
+    {
+      "index": 554,
+      "start": 1872.519,
+      "end": 1875.669,
+      "duration": 3.15,
+      "text": "is the same as that to say e is in the"
+    },
+    {
+      "index": 555,
+      "start": 1875.679,
+      "end": 1878.029,
+      "duration": 2.35,
+      "text": "null space of a transpose says e is"
+    },
+    {
+      "index": 556,
+      "start": 1878.039,
+      "end": 1880.47,
+      "duration": 2.431,
+      "text": "perpendicular to the column space okay"
+    },
+    {
+      "index": 557,
+      "start": 1880.48,
+      "end": 1882.509,
+      "duration": 2.029,
+      "text": "so we got this equation now let's just"
+    },
+    {
+      "index": 558,
+      "start": 1882.519,
+      "end": 1885.269,
+      "duration": 2.75,
+      "text": "solve it all right let me just rewrite"
+    },
+    {
+      "index": 559,
+      "start": 1885.279,
+      "end": 1890.029,
+      "duration": 4.75,
+      "text": "it as a transpose a"
+    },
+    {
+      "index": 560,
+      "start": 1890.039,
+      "end": 1895.789,
+      "duration": 5.75,
+      "text": "x equal a transpose B that's our"
+    },
+    {
+      "index": 561,
+      "start": 1895.799,
+      "end": 1902.11,
+      "duration": 6.311,
+      "text": "equation that gives us"
+    },
+    {
+      "index": 562,
+      "start": 1906.629,
+      "end": 1906.639,
+      "duration": 0.01,
+      "text": "X and oh I allow me to keep remembering"
+    },
+    {
+      "index": 563,
+      "start": 1906.639,
+      "end": 1909.549,
+      "duration": 2.91,
+      "text": "the one-dimensional case the"
+    },
+    {
+      "index": 564,
+      "start": 1909.559,
+      "end": 1911.149,
+      "duration": 1.59,
+      "text": "one-dimensional"
+    },
+    {
+      "index": 565,
+      "start": 1911.159,
+      "end": 1914.95,
+      "duration": 3.791,
+      "text": "case this was little a so this was just"
+    },
+    {
+      "index": 566,
+      "start": 1914.96,
+      "end": 1918.029,
+      "duration": 3.069,
+      "text": "a number little a little a transpose a"
+    },
+    {
+      "index": 567,
+      "start": 1918.039,
+      "end": 1920.789,
+      "duration": 2.75,
+      "text": "transpose a was just a vector row times"
+    },
+    {
+      "index": 568,
+      "start": 1920.799,
+      "end": 1924.549,
+      "duration": 3.75,
+      "text": "a column a number and this was a number"
+    },
+    {
+      "index": 569,
+      "start": 1924.559,
+      "end": 1927.75,
+      "duration": 3.191,
+      "text": "and X was the ratio of those numbers but"
+    },
+    {
+      "index": 570,
+      "start": 1927.76,
+      "end": 1929.35,
+      "duration": 1.59,
+      "text": "now we've got"
+    },
+    {
+      "index": 571,
+      "start": 1929.36,
+      "end": 1932.47,
+      "duration": 3.11,
+      "text": "matrices this this one is n byn a"
+    },
+    {
+      "index": 572,
+      "start": 1932.48,
+      "end": 1936.149,
+      "duration": 3.669,
+      "text": "transpose a is an N byn Matrix okay so"
+    },
+    {
+      "index": 573,
+      "start": 1936.159,
+      "end": 1937.75,
+      "duration": 1.591,
+      "text": "can I move to"
+    },
+    {
+      "index": 574,
+      "start": 1937.76,
+      "end": 1945.47,
+      "duration": 7.71,
+      "text": "the next board for the"
+    },
+    {
+      "index": 575,
+      "start": 1948.909,
+      "end": 1948.919,
+      "duration": 0.01,
+      "text": "solution okay there this is the the the"
+    },
+    {
+      "index": 576,
+      "start": 1948.919,
+      "end": 1949.87,
+      "duration": 0.951,
+      "text": "key"
+    },
+    {
+      "index": 577,
+      "start": 1949.88,
+      "end": 1952.909,
+      "duration": 3.029,
+      "text": "equation now I'm ready for the formulas"
+    },
+    {
+      "index": 578,
+      "start": 1952.919,
+      "end": 1956.99,
+      "duration": 4.071,
+      "text": "that we have to remember what's X"
+    },
+    {
+      "index": 579,
+      "start": 1957.0,
+      "end": 1959.19,
+      "duration": 2.19,
+      "text": "hat what's the"
+    },
+    {
+      "index": 580,
+      "start": 1959.2,
+      "end": 1961.669,
+      "duration": 2.469,
+      "text": "projection what's the projection Matrix"
+    },
+    {
+      "index": 581,
+      "start": 1961.679,
+      "end": 1963.99,
+      "duration": 2.311,
+      "text": "those are my three questions that we"
+    },
+    {
+      "index": 582,
+      "start": 1964.0,
+      "end": 1966.23,
+      "duration": 2.23,
+      "text": "answered in the 1D case and now we're"
+    },
+    {
+      "index": 583,
+      "start": 1966.24,
+      "end": 1969.909,
+      "duration": 3.669,
+      "text": "ready for in the N dimensional case so"
+    },
+    {
+      "index": 584,
+      "start": 1969.919,
+      "end": 1973.99,
+      "duration": 4.071,
+      "text": "what is X hat well what can I say"
+    },
+    {
+      "index": 585,
+      "start": 1974.0,
+      "end": 1979.43,
+      "duration": 5.43,
+      "text": "but a transpose a inverse"
+    },
+    {
+      "index": 586,
+      "start": 1981.43,
+      "end": 1981.44,
+      "duration": 0.01,
+      "text": "a transpose"
+    },
+    {
+      "index": 587,
+      "start": 1981.44,
+      "end": 1987.909,
+      "duration": 6.469,
+      "text": "B okay that's the solution to to our"
+    },
+    {
+      "index": 588,
+      "start": 1990.149,
+      "end": 1990.159,
+      "duration": 0.01,
+      "text": "equation what's the projection that's"
+    },
+    {
+      "index": 589,
+      "start": 1990.159,
+      "end": 1992.47,
+      "duration": 2.311,
+      "text": "more interesting what's the"
+    },
+    {
+      "index": 590,
+      "start": 1992.48,
+      "end": 1996.629,
+      "duration": 4.149,
+      "text": "projection the projection"
+    },
+    {
+      "index": 591,
+      "start": 2000.149,
+      "end": 2000.159,
+      "duration": 0.01,
+      "text": "is a xat that's how X hat got into the"
+    },
+    {
+      "index": 592,
+      "start": 2000.159,
+      "end": 2004.269,
+      "duration": 4.11,
+      "text": "picture in the first place X hat was"
+    },
+    {
+      "index": 593,
+      "start": 2004.279,
+      "end": 2008.35,
+      "duration": 4.071,
+      "text": "the was the combination of column and I"
+    },
+    {
+      "index": 594,
+      "start": 2008.36,
+      "end": 2010.19,
+      "duration": 1.83,
+      "text": "had to look for those numbers and now I"
+    },
+    {
+      "index": 595,
+      "start": 2010.2,
+      "end": 2013.149,
+      "duration": 2.949,
+      "text": "found them was the combination of The"
+    },
+    {
+      "index": 596,
+      "start": 2013.159,
+      "end": 2016.509,
+      "duration": 3.35,
+      "text": "Columns of a that gave me the projection"
+    },
+    {
+      "index": 597,
+      "start": 2016.519,
+      "end": 2020.07,
+      "duration": 3.551,
+      "text": "okay so now I know what this guy is so"
+    },
+    {
+      "index": 598,
+      "start": 2020.08,
+      "end": 2026.07,
+      "duration": 5.99,
+      "text": "it's just I multiply by a a a transpose"
+    },
+    {
+      "index": 599,
+      "start": 2026.08,
+      "end": 2035.029,
+      "duration": 8.949,
+      "text": "a inverse a transpose"
+    },
+    {
+      "index": 600,
+      "start": 2039.07,
+      "end": 2039.08,
+      "duration": 0.01,
+      "text": "B that's looking a little messy but it's"
+    },
+    {
+      "index": 601,
+      "start": 2039.08,
+      "end": 2042.35,
+      "duration": 3.27,
+      "text": "uh not"
+    },
+    {
+      "index": 602,
+      "start": 2046.269,
+      "end": 2046.279,
+      "duration": 0.01,
+      "text": "bad that that combination is is our like"
+    },
+    {
+      "index": 603,
+      "start": 2046.279,
+      "end": 2049.19,
+      "duration": 2.911,
+      "text": "magic combination this is the thing"
+    },
+    {
+      "index": 604,
+      "start": 2049.2,
+      "end": 2053.109,
+      "duration": 3.909,
+      "text": "which is which Ed which was which is"
+    },
+    {
+      "index": 605,
+      "start": 2053.119,
+      "end": 2055.95,
+      "duration": 2.831,
+      "text": "like uh what's it like what was it in"
+    },
+    {
+      "index": 606,
+      "start": 2055.96,
+      "end": 2058.149,
+      "duration": 2.189,
+      "text": "one"
+    },
+    {
+      "index": 607,
+      "start": 2058.159,
+      "end": 2060.51,
+      "duration": 2.351,
+      "text": "dimension what was that we had this we"
+    },
+    {
+      "index": 608,
+      "start": 2060.52,
+      "end": 2062.589,
+      "duration": 2.069,
+      "text": "must have had this thing way back at the"
+    },
+    {
+      "index": 609,
+      "start": 2062.599,
+      "end": 2064.149,
+      "duration": 1.55,
+      "text": "beginning of the"
+    },
+    {
+      "index": 610,
+      "start": 2064.159,
+      "end": 2067.829,
+      "duration": 3.67,
+      "text": "lecture what did we oh then a was just a"
+    },
+    {
+      "index": 611,
+      "start": 2067.839,
+      "end": 2072.31,
+      "duration": 4.471,
+      "text": "column so it was little a little a"
+    },
+    {
+      "index": 612,
+      "start": 2072.32,
+      "end": 2076.589,
+      "duration": 4.269,
+      "text": "transpose over a transpose a right"
+    },
+    {
+      "index": 613,
+      "start": 2076.599,
+      "end": 2082.149,
+      "duration": 5.55,
+      "text": "that's what it was in"
+    },
+    {
+      "index": 614,
+      "start": 2086.31,
+      "end": 2086.32,
+      "duration": 0.01,
+      "text": "1D you see what's happened in more"
+    },
+    {
+      "index": 615,
+      "start": 2086.32,
+      "end": 2089.27,
+      "duration": 2.95,
+      "text": "Dimensions I I'm not allowed to just"
+    },
+    {
+      "index": 616,
+      "start": 2089.28,
+      "end": 2091.069,
+      "duration": 1.789,
+      "text": "divide because because I don't have a"
+    },
+    {
+      "index": 617,
+      "start": 2091.079,
+      "end": 2092.909,
+      "duration": 1.83,
+      "text": "number I have to put inverse because I"
+    },
+    {
+      "index": 618,
+      "start": 2092.919,
+      "end": 2094.349,
+      "duration": 1.43,
+      "text": "have an N byn"
+    },
+    {
+      "index": 619,
+      "start": 2094.359,
+      "end": 2099.23,
+      "duration": 4.871,
+      "text": "Matrix but same formula"
+    },
+    {
+      "index": 620,
+      "start": 2102.39,
+      "end": 2102.4,
+      "duration": 0.01,
+      "text": "and now tell me what's the projection"
+    },
+    {
+      "index": 621,
+      "start": 2102.4,
+      "end": 2104.47,
+      "duration": 2.07,
+      "text": "Matrix what"
+    },
+    {
+      "index": 622,
+      "start": 2104.48,
+      "end": 2111.31,
+      "duration": 6.83,
+      "text": "Matrix is multiplying B to give the"
+    },
+    {
+      "index": 623,
+      "start": 2114.51,
+      "end": 2114.52,
+      "duration": 0.01,
+      "text": "projection right there just there it I"
+    },
+    {
+      "index": 624,
+      "start": 2114.52,
+      "end": 2116.47,
+      "duration": 1.95,
+      "text": "even I even already underlined it by"
+    },
+    {
+      "index": 625,
+      "start": 2116.48,
+      "end": 2120.47,
+      "duration": 3.99,
+      "text": "action the projection"
+    },
+    {
+      "index": 626,
+      "start": 2124.27,
+      "end": 2124.28,
+      "duration": 0.01,
+      "text": "Matrix which I use capital P is this"
+    },
+    {
+      "index": 627,
+      "start": 2124.28,
+      "end": 2126.51,
+      "duration": 2.23,
+      "text": "it's it's that thing so I write it again"
+    },
+    {
+      "index": 628,
+      "start": 2126.52,
+      "end": 2128.79,
+      "duration": 2.27,
+      "text": "a *"
+    },
+    {
+      "index": 629,
+      "start": 2128.8,
+      "end": 2140.75,
+      "duration": 11.95,
+      "text": "a transpose a inverse *"
+    },
+    {
+      "index": 630,
+      "start": 2142.31,
+      "end": 2142.32,
+      "duration": 0.01,
+      "text": "aose"
+    },
+    {
+      "index": 631,
+      "start": 2142.32,
+      "end": 2146.39,
+      "duration": 4.07,
+      "text": "now if you bear with me I'll think"
+    },
+    {
+      "index": 632,
+      "start": 2146.4,
+      "end": 2149.03,
+      "duration": 2.63,
+      "text": "about what I what I what have I done"
+    },
+    {
+      "index": 633,
+      "start": 2149.04,
+      "end": 2152.03,
+      "duration": 2.99,
+      "text": "here I've got this"
+    },
+    {
+      "index": 634,
+      "start": 2152.04,
+      "end": 2154.67,
+      "duration": 2.63,
+      "text": "formula now the first thing that occurs"
+    },
+    {
+      "index": 635,
+      "start": 2154.68,
+      "end": 2158.47,
+      "duration": 3.79,
+      "text": "to me is"
+    },
+    {
+      "index": 636,
+      "start": 2162.71,
+      "end": 2162.72,
+      "duration": 0.01,
+      "text": "something bad look um why don't I"
+    },
+    {
+      "index": 637,
+      "start": 2162.72,
+      "end": 2165.27,
+      "duration": 2.55,
+      "text": "just you know here's a product of two"
+    },
+    {
+      "index": 638,
+      "start": 2165.28,
+      "end": 2167.589,
+      "duration": 2.309,
+      "text": "matrices and I want its"
+    },
+    {
+      "index": 639,
+      "start": 2167.599,
+      "end": 2170.349,
+      "duration": 2.75,
+      "text": "inverse why don't I just use the formula"
+    },
+    {
+      "index": 640,
+      "start": 2170.359,
+      "end": 2172.79,
+      "duration": 2.431,
+      "text": "I know for the inverse of a product and"
+    },
+    {
+      "index": 641,
+      "start": 2172.8,
+      "end": 2176.589,
+      "duration": 3.789,
+      "text": "say okay that's a inverse time a"
+    },
+    {
+      "index": 642,
+      "start": 2176.599,
+      "end": 2180.91,
+      "duration": 4.311,
+      "text": "transpose"
+    },
+    {
+      "index": 643,
+      "start": 2184.87,
+      "end": 2184.88,
+      "duration": 0.01,
+      "text": "inverse what will happen if I do"
+    },
+    {
+      "index": 644,
+      "start": 2184.88,
+      "end": 2189.109,
+      "duration": 4.229,
+      "text": "that what will happen if I if I say hey"
+    },
+    {
+      "index": 645,
+      "start": 2189.119,
+      "end": 2192.91,
+      "duration": 3.791,
+      "text": "this is a inverse * a transpose inverse"
+    },
+    {
+      "index": 646,
+      "start": 2192.92,
+      "end": 2194.99,
+      "duration": 2.07,
+      "text": "then shall I do"
+    },
+    {
+      "index": 647,
+      "start": 2195.0,
+      "end": 2198.71,
+      "duration": 3.71,
+      "text": "it it's going to go on videotape if I do"
+    },
+    {
+      "index": 648,
+      "start": 2198.72,
+      "end": 2202.069,
+      "duration": 3.349,
+      "text": "it and I don't all right I'll put it"
+    },
+    {
+      "index": 649,
+      "start": 2202.079,
+      "end": 2205.03,
+      "duration": 2.951,
+      "text": "there but just like don't take the"
+    },
+    {
+      "index": 650,
+      "start": 2205.04,
+      "end": 2209.069,
+      "duration": 4.029,
+      "text": "videotape quite so carefully okay so if"
+    },
+    {
+      "index": 651,
+      "start": 2209.079,
+      "end": 2211.75,
+      "duration": 2.671,
+      "text": "I if I put that thing it would be a a"
+    },
+    {
+      "index": 652,
+      "start": 2211.76,
+      "end": 2215.829,
+      "duration": 4.069,
+      "text": "inverse a transpose inverse a"
+    },
+    {
+      "index": 653,
+      "start": 2215.839,
+      "end": 2219.47,
+      "duration": 3.631,
+      "text": "transpose and what's that"
+    },
+    {
+      "index": 654,
+      "start": 2219.48,
+      "end": 2222.55,
+      "duration": 3.07,
+      "text": "that's the"
+    },
+    {
+      "index": 655,
+      "start": 2225.55,
+      "end": 2225.56,
+      "duration": 0.01,
+      "text": "identity but what's going"
+    },
+    {
+      "index": 656,
+      "start": 2225.56,
+      "end": 2231.069,
+      "duration": 5.509,
+      "text": "on so right you see my question is"
+    },
+    {
+      "index": 657,
+      "start": 2231.079,
+      "end": 2234.51,
+      "duration": 3.431,
+      "text": "somehow I did I did something wrong that"
+    },
+    {
+      "index": 658,
+      "start": 2234.52,
+      "end": 2239.069,
+      "duration": 4.549,
+      "text": "wasn't allowed and and and why is"
+    },
+    {
+      "index": 659,
+      "start": 2239.079,
+      "end": 2243.67,
+      "duration": 4.591,
+      "text": "that because a is not a square Matrix a"
+    },
+    {
+      "index": 660,
+      "start": 2243.68,
+      "end": 2245.79,
+      "duration": 2.11,
+      "text": "is not a square Matrix it doesn't have"
+    },
+    {
+      "index": 661,
+      "start": 2245.8,
+      "end": 2247.75,
+      "duration": 1.95,
+      "text": "an inverse"
+    },
+    {
+      "index": 662,
+      "start": 2247.76,
+      "end": 2251.99,
+      "duration": 4.23,
+      "text": "so so I have to leave it that way this"
+    },
+    {
+      "index": 663,
+      "start": 2252.0,
+      "end": 2254.79,
+      "duration": 2.79,
+      "text": "is not okay if if a was a square"
+    },
+    {
+      "index": 664,
+      "start": 2254.8,
+      "end": 2259.99,
+      "duration": 5.19,
+      "text": "invertible Matrix then then I couldn't"
+    },
+    {
+      "index": 665,
+      "start": 2262.47,
+      "end": 2262.48,
+      "duration": 0.01,
+      "text": "complain yeah I I'll think let me think"
+    },
+    {
+      "index": 666,
+      "start": 2262.48,
+      "end": 2266.15,
+      "duration": 3.67,
+      "text": "about that case but but my main case the"
+    },
+    {
+      "index": 667,
+      "start": 2266.16,
+      "end": 2269.069,
+      "duration": 2.909,
+      "text": "whole reason I'm doing all this is that"
+    },
+    {
+      "index": 668,
+      "start": 2269.079,
+      "end": 2272.03,
+      "duration": 2.951,
+      "text": "a is this Matrix that"
+    },
+    {
+      "index": 669,
+      "start": 2272.04,
+      "end": 2275.39,
+      "duration": 3.35,
+      "text": "has X too many rows it's just got a"
+    },
+    {
+      "index": 670,
+      "start": 2275.4,
+      "end": 2279.069,
+      "duration": 3.669,
+      "text": "couple of columns like A1 and A2"
+    },
+    {
+      "index": 671,
+      "start": 2279.079,
+      "end": 2283.23,
+      "duration": 4.151,
+      "text": "but lots of rows not square and if it's"
+    },
+    {
+      "index": 672,
+      "start": 2283.24,
+      "end": 2287.43,
+      "duration": 4.19,
+      "text": "not Square this a transpose a is square"
+    },
+    {
+      "index": 673,
+      "start": 2287.44,
+      "end": 2290.87,
+      "duration": 3.43,
+      "text": "but I can't pull it apart like this so I"
+    },
+    {
+      "index": 674,
+      "start": 2290.88,
+      "end": 2293.19,
+      "duration": 2.31,
+      "text": "I I'm not allowed to to do this pull"
+    },
+    {
+      "index": 675,
+      "start": 2293.2,
+      "end": 2297.589,
+      "duration": 4.389,
+      "text": "apart except if a was Square now if a is"
+    },
+    {
+      "index": 676,
+      "start": 2297.599,
+      "end": 2299.87,
+      "duration": 2.271,
+      "text": "square what's what's going on if a is a"
+    },
+    {
+      "index": 677,
+      "start": 2299.88,
+      "end": 2302.51,
+      "duration": 2.63,
+      "text": "square Matrix a nice Square in"
+    },
+    {
+      "index": 678,
+      "start": 2302.52,
+      "end": 2305.47,
+      "duration": 2.95,
+      "text": "invertible"
+    },
+    {
+      "index": 679,
+      "start": 2308.15,
+      "end": 2308.16,
+      "duration": 0.01,
+      "text": "matx what's up with that what's what's"
+    },
+    {
+      "index": 680,
+      "start": 2308.16,
+      "end": 2311.03,
+      "duration": 2.87,
+      "text": "with that case so this is"
+    },
+    {
+      "index": 681,
+      "start": 2311.04,
+      "end": 2314.309,
+      "duration": 3.269,
+      "text": "all the formula ought to work then too"
+    },
+    {
+      "index": 682,
+      "start": 2314.319,
+      "end": 2317.79,
+      "duration": 3.471,
+      "text": "if a is a nice Square invertible Matrix"
+    },
+    {
+      "index": 683,
+      "start": 2317.8,
+      "end": 2320.75,
+      "duration": 2.95,
+      "text": "what's its column space so it's a nice n"
+    },
+    {
+      "index": 684,
+      "start": 2320.76,
+      "end": 2324.069,
+      "duration": 3.309,
+      "text": "byn invertible everything great Matrix"
+    },
+    {
+      "index": 685,
+      "start": 2324.079,
+      "end": 2326.27,
+      "duration": 2.191,
+      "text": "what's its column"
+    },
+    {
+      "index": 686,
+      "start": 2326.28,
+      "end": 2329.63,
+      "duration": 3.35,
+      "text": "space the whole of"
+    },
+    {
+      "index": 687,
+      "start": 2329.64,
+      "end": 2332.75,
+      "duration": 3.11,
+      "text": "RN so what's the projection Matrix if"
+    },
+    {
+      "index": 688,
+      "start": 2332.76,
+      "end": 2335.95,
+      "duration": 3.19,
+      "text": "I'm projecting under the whole"
+    },
+    {
+      "index": 689,
+      "start": 2335.96,
+      "end": 2340.91,
+      "duration": 4.95,
+      "text": "Space it's the identity right if I'm"
+    },
+    {
+      "index": 690,
+      "start": 2340.92,
+      "end": 2342.589,
+      "duration": 1.669,
+      "text": "projecting"
+    },
+    {
+      "index": 691,
+      "start": 2342.599,
+      "end": 2345.829,
+      "duration": 3.23,
+      "text": "B on the whole Space not just onto a"
+    },
+    {
+      "index": 692,
+      "start": 2345.839,
+      "end": 2349.829,
+      "duration": 3.99,
+      "text": "plane but onto all of 3D then B is"
+    },
+    {
+      "index": 693,
+      "start": 2349.839,
+      "end": 2351.95,
+      "duration": 2.111,
+      "text": "already in the column space the"
+    },
+    {
+      "index": 694,
+      "start": 2351.96,
+      "end": 2355.47,
+      "duration": 3.51,
+      "text": "projection is the identity and this is"
+    },
+    {
+      "index": 695,
+      "start": 2355.48,
+      "end": 2360.27,
+      "duration": 4.79,
+      "text": "gives me the correct formula p is R but"
+    },
+    {
+      "index": 696,
+      "start": 2360.28,
+      "end": 2363.23,
+      "duration": 2.95,
+      "text": "if I'm projecting on a Subspace then I"
+    },
+    {
+      "index": 697,
+      "start": 2363.24,
+      "end": 2365.23,
+      "duration": 1.99,
+      "text": "can't split those apart and I have to"
+    },
+    {
+      "index": 698,
+      "start": 2365.24,
+      "end": 2369.27,
+      "duration": 4.03,
+      "text": "stay with that formula"
+    },
+    {
+      "index": 699,
+      "start": 2371.829,
+      "end": 2371.839,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 700,
+      "start": 2371.839,
+      "end": 2375.19,
+      "duration": 3.351,
+      "text": "and what can I say so so I remember this"
+    },
+    {
+      "index": 701,
+      "start": 2375.2,
+      "end": 2378.309,
+      "duration": 3.109,
+      "text": "formula for 1D and that's what it looks"
+    },
+    {
+      "index": 702,
+      "start": 2378.319,
+      "end": 2379.79,
+      "duration": 1.471,
+      "text": "like in nend"
+    },
+    {
+      "index": 703,
+      "start": 2379.8,
+      "end": 2382.109,
+      "duration": 2.309,
+      "text": "dimension and what are the properties"
+    },
+    {
+      "index": 704,
+      "start": 2382.119,
+      "end": 2384.309,
+      "duration": 2.19,
+      "text": "that I expected for any projection"
+    },
+    {
+      "index": 705,
+      "start": 2384.319,
+      "end": 2387.39,
+      "duration": 3.071,
+      "text": "Matrix and I still expect for this one"
+    },
+    {
+      "index": 706,
+      "start": 2387.4,
+      "end": 2389.67,
+      "duration": 2.27,
+      "text": "that Matrix should be symmetric and it"
+    },
+    {
+      "index": 707,
+      "start": 2389.68,
+      "end": 2391.91,
+      "duration": 2.23,
+      "text": "is p transposes"
+    },
+    {
+      "index": 708,
+      "start": 2391.92,
+      "end": 2395.67,
+      "duration": 3.75,
+      "text": "p because if I transpose this this guy"
+    },
+    {
+      "index": 709,
+      "start": 2395.68,
+      "end": 2397.43,
+      "duration": 1.75,
+      "text": "symmetric"
+    },
+    {
+      "index": 710,
+      "start": 2397.44,
+      "end": 2400.19,
+      "duration": 2.75,
+      "text": "and it's inverse of symmetric and if I"
+    },
+    {
+      "index": 711,
+      "start": 2400.2,
+      "end": 2403.55,
+      "duration": 3.35,
+      "text": "transpose this one when I transpose it"
+    },
+    {
+      "index": 712,
+      "start": 2403.56,
+      "end": 2406.75,
+      "duration": 3.19,
+      "text": "will pop up there become a the a"
+    },
+    {
+      "index": 713,
+      "start": 2406.76,
+      "end": 2409.19,
+      "duration": 2.43,
+      "text": "transpose will pop up here and I'm back"
+    },
+    {
+      "index": 714,
+      "start": 2409.2,
+      "end": 2410.51,
+      "duration": 1.31,
+      "text": "to P"
+    },
+    {
+      "index": 715,
+      "start": 2410.52,
+      "end": 2413.99,
+      "duration": 3.47,
+      "text": "again and do we dare try the other"
+    },
+    {
+      "index": 716,
+      "start": 2414.0,
+      "end": 2416.109,
+      "duration": 2.109,
+      "text": "property which is"
+    },
+    {
+      "index": 717,
+      "start": 2416.119,
+      "end": 2423.589,
+      "duration": 7.47,
+      "text": "p² ="
+    },
+    {
+      "index": 718,
+      "start": 2432.109,
+      "end": 2432.119,
+      "duration": 0.01,
+      "text": "cuz we know geometrically that the first"
+    },
+    {
+      "index": 719,
+      "start": 2432.119,
+      "end": 2435.349,
+      "duration": 3.23,
+      "text": "projection pops us onto the column space"
+    },
+    {
+      "index": 720,
+      "start": 2435.359,
+      "end": 2437.03,
+      "duration": 1.671,
+      "text": "and the second one leaves us where we"
+    },
+    {
+      "index": 721,
+      "start": 2437.04,
+      "end": 2440.63,
+      "duration": 3.59,
+      "text": "are so I expect that if I multiply by"
+    },
+    {
+      "index": 722,
+      "start": 2440.64,
+      "end": 2444.069,
+      "duration": 3.429,
+      "text": "and let me do it if I multiply by"
+    },
+    {
+      "index": 723,
+      "start": 2444.079,
+      "end": 2448.95,
+      "duration": 4.871,
+      "text": "another P so there's another a another a"
+    },
+    {
+      "index": 724,
+      "start": 2448.96,
+      "end": 2450.51,
+      "duration": 1.55,
+      "text": "transpose"
+    },
+    {
+      "index": 725,
+      "start": 2450.52,
+      "end": 2453.03,
+      "duration": 2.51,
+      "text": "a inverse"
+    },
+    {
+      "index": 726,
+      "start": 2453.04,
+      "end": 2455.15,
+      "duration": 2.11,
+      "text": "a"
+    },
+    {
+      "index": 727,
+      "start": 2455.16,
+      "end": 2458.43,
+      "duration": 3.27,
+      "text": "transpose can you"
+    },
+    {
+      "index": 728,
+      "start": 2458.44,
+      "end": 2462.79,
+      "duration": 4.35,
+      "text": "God eight A's in a row is like OB scene"
+    },
+    {
+      "index": 729,
+      "start": 2462.8,
+      "end": 2467.109,
+      "duration": 4.309,
+      "text": "but uh uh do you see that it"
+    },
+    {
+      "index": 730,
+      "start": 2467.119,
+      "end": 2470.27,
+      "duration": 3.151,
+      "text": "works so I'm squaring that so what do I"
+    },
+    {
+      "index": 731,
+      "start": 2470.28,
+      "end": 2473.71,
+      "duration": 3.43,
+      "text": "do how do I see that multiplication"
+    },
+    {
+      "index": 732,
+      "start": 2473.72,
+      "end": 2476.55,
+      "duration": 2.83,
+      "text": "well yeah I just want to put parentheses"
+    },
+    {
+      "index": 733,
+      "start": 2476.56,
+      "end": 2479.23,
+      "duration": 2.67,
+      "text": "in good places so I see what's happening"
+    },
+    {
+      "index": 734,
+      "start": 2479.24,
+      "end": 2482.069,
+      "duration": 2.829,
+      "text": "yeah here's an a transpose a sitting"
+    },
+    {
+      "index": 735,
+      "start": 2482.079,
+      "end": 2484.589,
+      "duration": 2.51,
+      "text": "together so when that a transpose a"
+    },
+    {
+      "index": 736,
+      "start": 2484.599,
+      "end": 2488.87,
+      "duration": 4.271,
+      "text": "multiplies its inverse all that stuff go"
+    },
+    {
+      "index": 737,
+      "start": 2488.88,
+      "end": 2491.87,
+      "duration": 2.99,
+      "text": "right and leaves just the a transpose at"
+    },
+    {
+      "index": 738,
+      "start": 2491.88,
+      "end": 2494.39,
+      "duration": 2.51,
+      "text": "the end which is just what we"
+    },
+    {
+      "index": 739,
+      "start": 2494.4,
+      "end": 2498.55,
+      "duration": 4.15,
+      "text": "want so P ^2 equals P so sure enough"
+    },
+    {
+      "index": 740,
+      "start": 2498.56,
+      "end": 2503.75,
+      "duration": 5.19,
+      "text": "those two properties hold okay that's"
+    },
+    {
+      "index": 741,
+      "start": 2503.76,
+      "end": 2507.27,
+      "duration": 3.51,
+      "text": "that okay we really have got now all the"
+    },
+    {
+      "index": 742,
+      "start": 2507.28,
+      "end": 2511.349,
+      "duration": 4.069,
+      "text": "formulas X hat the projection p and the"
+    },
+    {
+      "index": 743,
+      "start": 2511.359,
+      "end": 2515.03,
+      "duration": 3.671,
+      "text": "projection Matrix Capital C and now my"
+    },
+    {
+      "index": 744,
+      "start": 2515.04,
+      "end": 2518.87,
+      "duration": 3.83,
+      "text": "job is to use"
+    },
+    {
+      "index": 745,
+      "start": 2518.88,
+      "end": 2521.109,
+      "duration": 2.229,
+      "text": "okay so when would"
+    },
+    {
+      "index": 746,
+      "start": 2521.119,
+      "end": 2525.55,
+      "duration": 4.431,
+      "text": "I when would I uh have a bunch of"
+    },
+    {
+      "index": 747,
+      "start": 2525.56,
+      "end": 2529.23,
+      "duration": 3.67,
+      "text": "equations too many equations and yet I"
+    },
+    {
+      "index": 748,
+      "start": 2529.24,
+      "end": 2532.99,
+      "duration": 3.75,
+      "text": "want the best answer and the the"
+    },
+    {
+      "index": 749,
+      "start": 2533.0,
+      "end": 2536.63,
+      "duration": 3.63,
+      "text": "most important example the most common"
+    },
+    {
+      "index": 750,
+      "start": 2536.64,
+      "end": 2541.069,
+      "duration": 4.429,
+      "text": "example is if I have"
+    },
+    {
+      "index": 751,
+      "start": 2541.079,
+      "end": 2544.069,
+      "duration": 2.99,
+      "text": "points here's the here's the"
+    },
+    {
+      "index": 752,
+      "start": 2544.079,
+      "end": 2555.15,
+      "duration": 11.071,
+      "text": "application these squares"
+    },
+    {
+      "index": 753,
+      "start": 2563.47,
+      "end": 2563.48,
+      "duration": 0.01,
+      "text": "lot okay so I I'll start this"
+    },
+    {
+      "index": 754,
+      "start": 2563.48,
+      "end": 2566.829,
+      "duration": 3.349,
+      "text": "application today and there's more in it"
+    },
+    {
+      "index": 755,
+      "start": 2566.839,
+      "end": 2570.51,
+      "duration": 3.671,
+      "text": "than uh I can do in this same lecture so"
+    },
+    {
+      "index": 756,
+      "start": 2570.52,
+      "end": 2573.23,
+      "duration": 2.71,
+      "text": "that'll give me a chance to recap the"
+    },
+    {
+      "index": 757,
+      "start": 2573.24,
+      "end": 2578.15,
+      "duration": 4.91,
+      "text": "formulas and there they are and and"
+    },
+    {
+      "index": 758,
+      "start": 2578.16,
+      "end": 2581.03,
+      "duration": 2.87,
+      "text": "recap the idea so let me let me start"
+    },
+    {
+      "index": 759,
+      "start": 2581.04,
+      "end": 2583.43,
+      "duration": 2.39,
+      "text": "the problem uh"
+    },
+    {
+      "index": 760,
+      "start": 2583.44,
+      "end": 2586.349,
+      "duration": 2.909,
+      "text": "today I'm"
+    },
+    {
+      "index": 761,
+      "start": 2586.359,
+      "end": 2589.51,
+      "duration": 3.151,
+      "text": "given a bunch of data"
+    },
+    {
+      "index": 762,
+      "start": 2589.52,
+      "end": 2593.309,
+      "duration": 3.789,
+      "text": "points and they lie close to a line but"
+    },
+    {
+      "index": 763,
+      "start": 2593.319,
+      "end": 2595.95,
+      "duration": 2.631,
+      "text": "not on a line let me take this say at"
+    },
+    {
+      "index": 764,
+      "start": 2595.96,
+      "end": 2599.47,
+      "duration": 3.51,
+      "text": "tal to 1 2 and"
+    },
+    {
+      "index": 765,
+      "start": 2599.48,
+      "end": 2602.109,
+      "duration": 2.629,
+      "text": "3 I have"
+    },
+    {
+      "index": 766,
+      "start": 2602.119,
+      "end": 2606.39,
+      "duration": 4.271,
+      "text": "one and two and two again so my data"
+    },
+    {
+      "index": 767,
+      "start": 2606.4,
+      "end": 2610.829,
+      "duration": 4.429,
+      "text": "points are are this is the like the time"
+    },
+    {
+      "index": 768,
+      "start": 2610.839,
+      "end": 2613.79,
+      "duration": 2.951,
+      "text": "Direction and this is like well let me"
+    },
+    {
+      "index": 769,
+      "start": 2613.8,
+      "end": 2617.71,
+      "duration": 3.91,
+      "text": "call that b or Y or something I'm given"
+    },
+    {
+      "index": 770,
+      "start": 2617.72,
+      "end": 2618.829,
+      "duration": 1.109,
+      "text": "these three"
+    },
+    {
+      "index": 771,
+      "start": 2618.839,
+      "end": 2621.27,
+      "duration": 2.431,
+      "text": "points and I want"
+    },
+    {
+      "index": 772,
+      "start": 2621.28,
+      "end": 2624.75,
+      "duration": 3.47,
+      "text": "to fit them by a line by the best"
+    },
+    {
+      "index": 773,
+      "start": 2624.76,
+      "end": 2628.99,
+      "duration": 4.23,
+      "text": "straight line so the problem is fit the"
+    },
+    {
+      "index": 774,
+      "start": 2629.0,
+      "end": 2632.15,
+      "duration": 3.15,
+      "text": "points uh"
+    },
+    {
+      "index": 775,
+      "start": 2632.16,
+      "end": 2636.19,
+      "duration": 4.03,
+      "text": "one one is the first point the second"
+    },
+    {
+      "index": 776,
+      "start": 2636.2,
+      "end": 2639.589,
+      "duration": 3.389,
+      "text": "point is T ="
+    },
+    {
+      "index": 777,
+      "start": 2639.599,
+      "end": 2648.43,
+      "duration": 8.831,
+      "text": "2 b = 1 and the third point is T = 3 Bal"
+    },
+    {
+      "index": 778,
+      "start": 2651.87,
+      "end": 2651.88,
+      "duration": 0.01,
+      "text": "2 so those are my three point tal sorry"
+    },
+    {
+      "index": 779,
+      "start": 2651.88,
+      "end": 2654.03,
+      "duration": 2.15,
+      "text": "that's"
+    },
+    {
+      "index": 780,
+      "start": 2654.04,
+      "end": 2655.87,
+      "duration": 1.83,
+      "text": "two"
+    },
+    {
+      "index": 781,
+      "start": 2655.88,
+      "end": 2659.67,
+      "duration": 3.79,
+      "text": "yeah okay so this is the0 1 one this is"
+    },
+    {
+      "index": 782,
+      "start": 2659.68,
+      "end": 2663.549,
+      "duration": 3.869,
+      "text": "the 22 and that's the 32 and of course"
+    },
+    {
+      "index": 783,
+      "start": 2663.559,
+      "end": 2667.309,
+      "duration": 3.75,
+      "text": "there isn't a line that goes through"
+    },
+    {
+      "index": 784,
+      "start": 2667.319,
+      "end": 2669.23,
+      "duration": 1.911,
+      "text": "so I'm looking for the best line I'm"
+    },
+    {
+      "index": 785,
+      "start": 2669.24,
+      "end": 2672.91,
+      "duration": 3.67,
+      "text": "looking for a line that probably goes"
+    },
+    {
+      "index": 786,
+      "start": 2672.92,
+      "end": 2675.19,
+      "duration": 2.27,
+      "text": "somewhere you think it goes somewhere"
+    },
+    {
+      "index": 787,
+      "start": 2675.2,
+      "end": 2676.15,
+      "duration": 0.95,
+      "text": "like"
+    },
+    {
+      "index": 788,
+      "start": 2676.16,
+      "end": 2679.23,
+      "duration": 3.07,
+      "text": "that I'm look I didn't mean to make it"
+    },
+    {
+      "index": 789,
+      "start": 2679.24,
+      "end": 2681.71,
+      "duration": 2.47,
+      "text": "go through that point it won't it'll"
+    },
+    {
+      "index": 790,
+      "start": 2681.72,
+      "end": 2684.829,
+      "duration": 3.109,
+      "text": "kind of it'll it'll go between so the"
+    },
+    {
+      "index": 791,
+      "start": 2684.839,
+      "end": 2687.349,
+      "duration": 2.51,
+      "text": "error there and the error there and the"
+    },
+    {
+      "index": 792,
+      "start": 2687.359,
+      "end": 2691.15,
+      "duration": 3.791,
+      "text": "error there"
+    },
+    {
+      "index": 793,
+      "start": 2691.16,
+      "end": 2693.95,
+      "duration": 2.79,
+      "text": "are as small as I can get"
+    },
+    {
+      "index": 794,
+      "start": 2693.96,
+      "end": 2698.87,
+      "duration": 4.91,
+      "text": "them okay what I'd like to do is"
+    },
+    {
+      "index": 795,
+      "start": 2698.88,
+      "end": 2701.069,
+      "duration": 2.189,
+      "text": "find the Matrix a because once I found"
+    },
+    {
+      "index": 796,
+      "start": 2701.079,
+      "end": 2703.99,
+      "duration": 2.911,
+      "text": "the Matrix a the formulas take"
+    },
+    {
+      "index": 797,
+      "start": 2704.0,
+      "end": 2707.549,
+      "duration": 3.549,
+      "text": "over so what I I'm looking for this line"
+    },
+    {
+      "index": 798,
+      "start": 2707.559,
+      "end": 2712.15,
+      "duration": 4.591,
+      "text": "B is C +"
+    },
+    {
+      "index": 799,
+      "start": 2715.109,
+      "end": 2715.119,
+      "duration": 0.01,
+      "text": "DT so this is in the homework that I"
+    },
+    {
+      "index": 800,
+      "start": 2715.119,
+      "end": 2718.39,
+      "duration": 3.271,
+      "text": "sent out for today find the best line so"
+    },
+    {
+      "index": 801,
+      "start": 2718.4,
+      "end": 2722.87,
+      "duration": 4.47,
+      "text": "I'm looking for these numbers C and"
+    },
+    {
+      "index": 802,
+      "start": 2722.88,
+      "end": 2725.27,
+      "duration": 2.39,
+      "text": "D that tell me the"
+    },
+    {
+      "index": 803,
+      "start": 2725.28,
+      "end": 2728.99,
+      "duration": 3.71,
+      "text": "line and I want them to be as close to"
+    },
+    {
+      "index": 804,
+      "start": 2729.0,
+      "end": 2730.829,
+      "duration": 1.829,
+      "text": "going through those three points as I"
+    },
+    {
+      "index": 805,
+      "start": 2730.839,
+      "end": 2734.39,
+      "duration": 3.551,
+      "text": "can get I can't get exactly so there are"
+    },
+    {
+      "index": 806,
+      "start": 2734.4,
+      "end": 2736.79,
+      "duration": 2.39,
+      "text": "three equations to go through the three"
+    },
+    {
+      "index": 807,
+      "start": 2736.8,
+      "end": 2739.39,
+      "duration": 2.59,
+      "text": "points it would it will go exactly"
+    },
+    {
+      "index": 808,
+      "start": 2739.4,
+      "end": 2740.95,
+      "duration": 1.55,
+      "text": "through that"
+    },
+    {
+      "index": 809,
+      "start": 2740.96,
+      "end": 2743.95,
+      "duration": 2.99,
+      "text": "point if let's see that first point has"
+    },
+    {
+      "index": 810,
+      "start": 2743.96,
+      "end": 2749.03,
+      "duration": 5.07,
+      "text": "tal to 1 so that would say C + d = 1"
+    },
+    {
+      "index": 811,
+      "start": 2749.04,
+      "end": 2750.87,
+      "duration": 1.83,
+      "text": "this is the 1"
+    },
+    {
+      "index": 812,
+      "start": 2750.88,
+      "end": 2754.109,
+      "duration": 3.229,
+      "text": "one the second Point T is"
+    },
+    {
+      "index": 813,
+      "start": 2754.119,
+      "end": 2760.67,
+      "duration": 6.551,
+      "text": "2 so C + 2D should come out to equal"
+    },
+    {
+      "index": 814,
+      "start": 2760.68,
+      "end": 2763.309,
+      "duration": 2.629,
+      "text": "two but I also want to get the third"
+    },
+    {
+      "index": 815,
+      "start": 2763.319,
+      "end": 2765.63,
+      "duration": 2.311,
+      "text": "equation in and that that third equation"
+    },
+    {
+      "index": 816,
+      "start": 2765.64,
+      "end": 2768.51,
+      "duration": 2.87,
+      "text": "T is 3 so C +"
+    },
+    {
+      "index": 817,
+      "start": 2768.52,
+      "end": 2776.51,
+      "duration": 7.99,
+      "text": "3D equal only"
+    },
+    {
+      "index": 818,
+      "start": 2780.589,
+      "end": 2780.599,
+      "duration": 0.01,
+      "text": "2 that that's the key is to write down"
+    },
+    {
+      "index": 819,
+      "start": 2780.599,
+      "end": 2783.43,
+      "duration": 2.831,
+      "text": "what equations we would like to solve"
+    },
+    {
+      "index": 820,
+      "start": 2783.44,
+      "end": 2786.67,
+      "duration": 3.23,
+      "text": "but can't reason we if we could solve"
+    },
+    {
+      "index": 821,
+      "start": 2786.68,
+      "end": 2788.309,
+      "duration": 1.629,
+      "text": "them that would mean that we could put a"
+    },
+    {
+      "index": 822,
+      "start": 2788.319,
+      "end": 2791.549,
+      "duration": 3.23,
+      "text": "line through all three points"
+    },
+    {
+      "index": 823,
+      "start": 2791.559,
+      "end": 2795.43,
+      "duration": 3.871,
+      "text": "and of course if these numbers one 2 two"
+    },
+    {
+      "index": 824,
+      "start": 2795.44,
+      "end": 2798.15,
+      "duration": 2.71,
+      "text": "were different we could do"
+    },
+    {
+      "index": 825,
+      "start": 2798.16,
+      "end": 2801.67,
+      "duration": 3.51,
+      "text": "it but with those numbers 1 two two we"
+    },
+    {
+      "index": 826,
+      "start": 2801.68,
+      "end": 2804.51,
+      "duration": 2.83,
+      "text": "can't so what is our equation"
+    },
+    {
+      "index": 827,
+      "start": 2804.52,
+      "end": 2808.39,
+      "duration": 3.87,
+      "text": "axal axal B that we can't"
+    },
+    {
+      "index": 828,
+      "start": 2808.4,
+      "end": 2811.109,
+      "duration": 2.709,
+      "text": "solve I I I want I just want to say"
+    },
+    {
+      "index": 829,
+      "start": 2811.119,
+      "end": 2813.23,
+      "duration": 2.111,
+      "text": "what's the Matrix here what's the"
+    },
+    {
+      "index": 830,
+      "start": 2813.24,
+      "end": 2815.99,
+      "duration": 2.75,
+      "text": "unknown X and what's the right hand side"
+    },
+    {
+      "index": 831,
+      "start": 2816.0,
+      "end": 2819.069,
+      "duration": 3.069,
+      "text": "so this is the Matrix is"
+    },
+    {
+      "index": 832,
+      "start": 2819.079,
+      "end": 2822.91,
+      "duration": 3.831,
+      "text": "111 1 2"
+    },
+    {
+      "index": 833,
+      "start": 2826.63,
+      "end": 2826.64,
+      "duration": 0.01,
+      "text": "3 the unknown is c and"
+    },
+    {
+      "index": 834,
+      "start": 2826.64,
+      "end": 2836.03,
+      "duration": 9.39,
+      "text": "d and the right hand side is 1"
+    },
+    {
+      "index": 835,
+      "start": 2838.99,
+      "end": 2839.0,
+      "duration": 0.01,
+      "text": "two2 right I've just taken my equations"
+    },
+    {
+      "index": 836,
+      "start": 2839.0,
+      "end": 2849.91,
+      "duration": 10.91,
+      "text": "and I've said what is ax and what is b"
+    },
+    {
+      "index": 837,
+      "start": 2852.51,
+      "end": 2852.52,
+      "duration": 0.01,
+      "text": "then there's no solution this is the"
+    },
+    {
+      "index": 838,
+      "start": 2852.52,
+      "end": 2854.069,
+      "duration": 1.549,
+      "text": "typical case where I have three"
+    },
+    {
+      "index": 839,
+      "start": 2854.079,
+      "end": 2857.589,
+      "duration": 3.51,
+      "text": "equations two unknowns no solution but"
+    },
+    {
+      "index": 840,
+      "start": 2857.599,
+      "end": 2859.63,
+      "duration": 2.031,
+      "text": "I'm still looking for the best"
+    },
+    {
+      "index": 841,
+      "start": 2859.64,
+      "end": 2863.27,
+      "duration": 3.63,
+      "text": "solution and the best solution"
+    },
+    {
+      "index": 842,
+      "start": 2863.28,
+      "end": 2868.15,
+      "duration": 4.87,
+      "text": "is taken is is to solve not this"
+    },
+    {
+      "index": 843,
+      "start": 2868.16,
+      "end": 2872.71,
+      "duration": 4.55,
+      "text": "equation axal B which has which has no"
+    },
+    {
+      "index": 844,
+      "start": 2872.72,
+      "end": 2876.39,
+      "duration": 3.67,
+      "text": "solution but the equation that does have"
+    },
+    {
+      "index": 845,
+      "start": 2876.4,
+      "end": 2879.309,
+      "duration": 2.909,
+      "text": "a solution solution which"
+    },
+    {
+      "index": 846,
+      "start": 2879.319,
+      "end": 2882.75,
+      "duration": 3.431,
+      "text": "was this one so that's the equation to"
+    },
+    {
+      "index": 847,
+      "start": 2882.76,
+      "end": 2885.43,
+      "duration": 2.67,
+      "text": "solve that's the central equation of the"
+    },
+    {
+      "index": 848,
+      "start": 2885.44,
+      "end": 2889.43,
+      "duration": 3.99,
+      "text": "subject I can't solve axal B but"
+    },
+    {
+      "index": 849,
+      "start": 2889.44,
+      "end": 2891.91,
+      "duration": 2.47,
+      "text": "magically when I multiply both sides by"
+    },
+    {
+      "index": 850,
+      "start": 2891.92,
+      "end": 2893.39,
+      "duration": 1.47,
+      "text": "a"
+    },
+    {
+      "index": 851,
+      "start": 2893.4,
+      "end": 2896.87,
+      "duration": 3.47,
+      "text": "transpose I get an equation that I can"
+    },
+    {
+      "index": 852,
+      "start": 2896.88,
+      "end": 2900.03,
+      "duration": 3.15,
+      "text": "solve and its solution gives me X the"
+    },
+    {
+      "index": 853,
+      "start": 2900.04,
+      "end": 2904.39,
+      "duration": 4.35,
+      "text": "best X the best projection and I"
+    },
+    {
+      "index": 854,
+      "start": 2904.4,
+      "end": 2906.349,
+      "duration": 1.949,
+      "text": "discover what's the Matrix that's behind"
+    },
+    {
+      "index": 855,
+      "start": 2906.359,
+      "end": 2907.43,
+      "duration": 1.071,
+      "text": "it"
+    },
+    {
+      "index": 856,
+      "start": 2907.44,
+      "end": 2910.51,
+      "duration": 3.07,
+      "text": "okay so next time I'll complete an"
+    },
+    {
+      "index": 857,
+      "start": 2910.52,
+      "end": 2914.589,
+      "duration": 4.069,
+      "text": "example numerical example today was all"
+    },
+    {
+      "index": 858,
+      "start": 2914.599,
+      "end": 2920.48,
+      "duration": 5.881,
+      "text": "letter numbers next time thank"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

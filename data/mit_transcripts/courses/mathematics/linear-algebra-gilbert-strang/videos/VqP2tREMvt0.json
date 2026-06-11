@@ -1,0 +1,5513 @@
+{
+  "video": {
+    "id": "VqP2tREMvt0",
+    "title": "7. Solving Ax = 0: Pivot Variables, Special Solutions",
+    "url": "https://www.youtube.com/watch?v=VqP2tREMvt0",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2599,
+    "language": "en"
+  },
+  "segment_count": 785,
+  "segments": [
+    {
+      "index": 0,
+      "start": 12.11,
+      "end": 12.12,
+      "duration": 0.01,
+      "text": "okay here's linear"
+    },
+    {
+      "index": 1,
+      "start": 12.12,
+      "end": 14.509,
+      "duration": 2.389,
+      "text": "algebra lecture"
+    },
+    {
+      "index": 2,
+      "start": 14.519,
+      "end": 17.23,
+      "duration": 2.711,
+      "text": "s I've been talking"
+    },
+    {
+      "index": 3,
+      "start": 17.24,
+      "end": 22.15,
+      "duration": 4.91,
+      "text": "about Vector spaces and especially the"
+    },
+    {
+      "index": 4,
+      "start": 22.16,
+      "end": 24.99,
+      "duration": 2.83,
+      "text": "null space of a matrix and the column"
+    },
+    {
+      "index": 5,
+      "start": 25.0,
+      "end": 28.349,
+      "duration": 3.349,
+      "text": "space of a matrix what's in those spaces"
+    },
+    {
+      "index": 6,
+      "start": 28.359,
+      "end": 31.79,
+      "duration": 3.431,
+      "text": "now I want to actually"
+    },
+    {
+      "index": 7,
+      "start": 31.8,
+      "end": 35.31,
+      "duration": 3.51,
+      "text": "describe them H how do you describe all"
+    },
+    {
+      "index": 8,
+      "start": 35.32,
+      "end": 37.27,
+      "duration": 1.95,
+      "text": "the vectors that are in those spaces how"
+    },
+    {
+      "index": 9,
+      "start": 37.28,
+      "end": 40.43,
+      "duration": 3.15,
+      "text": "do you compute these things so this is"
+    },
+    {
+      "index": 10,
+      "start": 40.44,
+      "end": 46.549,
+      "duration": 6.109,
+      "text": "the uh turning the idea the definition"
+    },
+    {
+      "index": 11,
+      "start": 46.559,
+      "end": 50.389,
+      "duration": 3.83,
+      "text": "into an algorithm what's the algorithm"
+    },
+    {
+      "index": 12,
+      "start": 50.399,
+      "end": 54.75,
+      "duration": 4.351,
+      "text": "for solving ax equals z so that's the"
+    },
+    {
+      "index": 13,
+      "start": 54.76,
+      "end": 57.229,
+      "duration": 2.469,
+      "text": "null space that I'm interested in so can"
+    },
+    {
+      "index": 14,
+      "start": 57.239,
+      "end": 60.709,
+      "duration": 3.47,
+      "text": "I take a particular Matrix a and"
+    },
+    {
+      "index": 15,
+      "start": 60.719,
+      "end": 63.95,
+      "duration": 3.231,
+      "text": "describe the natural algorithm and I'll"
+    },
+    {
+      "index": 16,
+      "start": 63.96,
+      "end": 65.63,
+      "duration": 1.67,
+      "text": "execute it for that"
+    },
+    {
+      "index": 17,
+      "start": 65.64,
+      "end": 69.55,
+      "duration": 3.91,
+      "text": "Matrix uh here we go uh so let me take"
+    },
+    {
+      "index": 18,
+      "start": 69.56,
+      "end": 73.35,
+      "duration": 3.79,
+      "text": "the Matrix as an example so we're"
+    },
+    {
+      "index": 19,
+      "start": 73.36,
+      "end": 75.67,
+      "duration": 2.31,
+      "text": "definitely talking rectangular matrices"
+    },
+    {
+      "index": 20,
+      "start": 75.68,
+      "end": 79.07,
+      "duration": 3.39,
+      "text": "in this chapter so I'll make I'll have"
+    },
+    {
+      "index": 21,
+      "start": 79.08,
+      "end": 81.23,
+      "duration": 2.15,
+      "text": "four"
+    },
+    {
+      "index": 22,
+      "start": 81.24,
+      "end": 86.23,
+      "duration": 4.99,
+      "text": "columns and three rows 2"
+    },
+    {
+      "index": 23,
+      "start": 86.24,
+      "end": 95.389,
+      "duration": 9.149,
+      "text": "468 and 36810"
+    },
+    {
+      "index": 24,
+      "start": 99.23,
+      "end": 99.24,
+      "duration": 0.01,
+      "text": "okay if I just look at those columns uh"
+    },
+    {
+      "index": 25,
+      "start": 99.24,
+      "end": 100.63,
+      "duration": 1.39,
+      "text": "and"
+    },
+    {
+      "index": 26,
+      "start": 100.64,
+      "end": 103.789,
+      "duration": 3.149,
+      "text": "rows well I noticed right away that"
+    },
+    {
+      "index": 27,
+      "start": 103.799,
+      "end": 107.789,
+      "duration": 3.99,
+      "text": "column two is a multiple of column one"
+    },
+    {
+      "index": 28,
+      "start": 107.799,
+      "end": 110.67,
+      "duration": 2.871,
+      "text": "it's in the same direction as column one"
+    },
+    {
+      "index": 29,
+      "start": 110.68,
+      "end": 111.87,
+      "duration": 1.19,
+      "text": "it's not"
+    },
+    {
+      "index": 30,
+      "start": 111.88,
+      "end": 114.749,
+      "duration": 2.869,
+      "text": "independent I I'll expect to discover"
+    },
+    {
+      "index": 31,
+      "start": 114.759,
+      "end": 117.83,
+      "duration": 3.071,
+      "text": "that in the process actually with rows I"
+    },
+    {
+      "index": 32,
+      "start": 117.84,
+      "end": 121.31,
+      "duration": 3.47,
+      "text": "noticed that that row plus this row"
+    },
+    {
+      "index": 33,
+      "start": 121.32,
+      "end": 122.789,
+      "duration": 1.469,
+      "text": "gives the third"
+    },
+    {
+      "index": 34,
+      "start": 122.799,
+      "end": 126.469,
+      "duration": 3.67,
+      "text": "row so the third row is not"
+    },
+    {
+      "index": 35,
+      "start": 126.479,
+      "end": 130.07,
+      "duration": 3.591,
+      "text": "independent so uh all that should come"
+    },
+    {
+      "index": 36,
+      "start": 130.08,
+      "end": 134.67,
+      "duration": 4.59,
+      "text": "out of elimination so now what am I my"
+    },
+    {
+      "index": 37,
+      "start": 134.68,
+      "end": 136.91,
+      "duration": 2.23,
+      "text": "my algorithm is"
+    },
+    {
+      "index": 38,
+      "start": 136.92,
+      "end": 140.03,
+      "duration": 3.11,
+      "text": "elimination but extended now to the"
+    },
+    {
+      "index": 39,
+      "start": 140.04,
+      "end": 143.869,
+      "duration": 3.829,
+      "text": "rectangular case where we have to"
+    },
+    {
+      "index": 40,
+      "start": 143.879,
+      "end": 146.27,
+      "duration": 2.391,
+      "text": "continue even"
+    },
+    {
+      "index": 41,
+      "start": 146.28,
+      "end": 150.39,
+      "duration": 4.11,
+      "text": "if there's zeros in the pivot position"
+    },
+    {
+      "index": 42,
+      "start": 150.4,
+      "end": 153.83,
+      "duration": 3.43,
+      "text": "we go on okay so let me execute"
+    },
+    {
+      "index": 43,
+      "start": 153.84,
+      "end": 155.91,
+      "duration": 2.07,
+      "text": "elimination for that"
+    },
+    {
+      "index": 44,
+      "start": 155.92,
+      "end": 161.149,
+      "duration": 5.229,
+      "text": "Matrix my goal is oh was while I'm doing"
+    },
+    {
+      "index": 45,
+      "start": 161.159,
+      "end": 163.67,
+      "duration": 2.511,
+      "text": "elimination I'm not changing the null"
+    },
+    {
+      "index": 46,
+      "start": 163.68,
+      "end": 166.71,
+      "duration": 3.03,
+      "text": "space that's very important right I'm"
+    },
+    {
+      "index": 47,
+      "start": 166.72,
+      "end": 171.229,
+      "duration": 4.509,
+      "text": "solving ax equals z by elimination and"
+    },
+    {
+      "index": 48,
+      "start": 171.239,
+      "end": 173.27,
+      "duration": 2.031,
+      "text": "when I do these operations that you"
+    },
+    {
+      "index": 49,
+      "start": 173.28,
+      "end": 175.63,
+      "duration": 2.35,
+      "text": "already know when I subtract a multiple"
+    },
+    {
+      "index": 50,
+      "start": 175.64,
+      "end": 178.03,
+      "duration": 2.39,
+      "text": "of one equation from another"
+    },
+    {
+      "index": 51,
+      "start": 178.04,
+      "end": 181.27,
+      "duration": 3.23,
+      "text": "equation I'm not changing in the"
+    },
+    {
+      "index": 52,
+      "start": 181.28,
+      "end": 183.91,
+      "duration": 2.63,
+      "text": "solutions so I'm not changing the null"
+    },
+    {
+      "index": 53,
+      "start": 183.92,
+      "end": 186.75,
+      "duration": 2.83,
+      "text": "space actually I am changing the column"
+    },
+    {
+      "index": 54,
+      "start": 186.76,
+      "end": 189.589,
+      "duration": 2.829,
+      "text": "space as you'll see so you have to pay"
+    },
+    {
+      "index": 55,
+      "start": 189.599,
+      "end": 192.43,
+      "duration": 2.831,
+      "text": "attention what does elimination leave"
+    },
+    {
+      "index": 56,
+      "start": 192.44,
+      "end": 196.149,
+      "duration": 3.709,
+      "text": "unchanged and it the answer is the"
+    },
+    {
+      "index": 57,
+      "start": 196.159,
+      "end": 198.35,
+      "duration": 2.191,
+      "text": "solutions to the system are not changed"
+    },
+    {
+      "index": 58,
+      "start": 198.36,
+      "end": 200.99,
+      "duration": 2.63,
+      "text": "because I'm doing the same thing to I'm"
+    },
+    {
+      "index": 59,
+      "start": 201.0,
+      "end": 203.589,
+      "duration": 2.589,
+      "text": "doing a legitimate operations on the"
+    },
+    {
+      "index": 60,
+      "start": 203.599,
+      "end": 205.83,
+      "duration": 2.231,
+      "text": "equations of course on the right hand"
+    },
+    {
+      "index": 61,
+      "start": 205.84,
+      "end": 208.27,
+      "duration": 2.43,
+      "text": "side it's always zero and I don't plan"
+    },
+    {
+      "index": 62,
+      "start": 208.28,
+      "end": 210.789,
+      "duration": 2.509,
+      "text": "to write zero all the time"
+    },
+    {
+      "index": 63,
+      "start": 210.799,
+      "end": 212.509,
+      "duration": 1.71,
+      "text": "okay so I'm really just working on the"
+    },
+    {
+      "index": 64,
+      "start": 212.519,
+      "end": 215.309,
+      "duration": 2.79,
+      "text": "left side but the right side"
+    },
+    {
+      "index": 65,
+      "start": 215.319,
+      "end": 219.789,
+      "duration": 4.47,
+      "text": "is is keeping up always zeros okay so"
+    },
+    {
+      "index": 66,
+      "start": 219.799,
+      "end": 220.75,
+      "duration": 0.951,
+      "text": "what's"
+    },
+    {
+      "index": 67,
+      "start": 220.76,
+      "end": 222.949,
+      "duration": 2.189,
+      "text": "elimination well you know where the"
+    },
+    {
+      "index": 68,
+      "start": 222.959,
+      "end": 226.149,
+      "duration": 3.19,
+      "text": "first pivot is and you know what to do"
+    },
+    {
+      "index": 69,
+      "start": 226.159,
+      "end": 228.789,
+      "duration": 2.63,
+      "text": "with it so can I just take the first"
+    },
+    {
+      "index": 70,
+      "start": 228.799,
+      "end": 234.91,
+      "duration": 6.111,
+      "text": "step below here so that pivot row is"
+    },
+    {
+      "index": 71,
+      "start": 234.92,
+      "end": 238.55,
+      "duration": 3.63,
+      "text": "fine I take two times that row away from"
+    },
+    {
+      "index": 72,
+      "start": 238.56,
+      "end": 240.509,
+      "duration": 1.949,
+      "text": "this one and I get zero"
+    },
+    {
+      "index": 73,
+      "start": 240.519,
+      "end": 244.63,
+      "duration": 4.111,
+      "text": "Z that's signaling a difficulty two two"
+    },
+    {
+      "index": 74,
+      "start": 244.64,
+      "end": 246.83,
+      "duration": 2.19,
+      "text": "tws away from the six leaves me with a"
+    },
+    {
+      "index": 75,
+      "start": 246.84,
+      "end": 249.27,
+      "duration": 2.43,
+      "text": "two two tws away from the eight leaves"
+    },
+    {
+      "index": 76,
+      "start": 249.28,
+      "end": 252.03,
+      "duration": 2.75,
+      "text": "me with a four and now three of those"
+    },
+    {
+      "index": 77,
+      "start": 252.04,
+      "end": 255.55,
+      "duration": 3.51,
+      "text": "away from here is zero again another"
+    },
+    {
+      "index": 78,
+      "start": 255.56,
+      "end": 258.59,
+      "duration": 3.03,
+      "text": "zero 3 tws away from that eight is the"
+    },
+    {
+      "index": 79,
+      "start": 258.6,
+      "end": 263.15,
+      "duration": 4.55,
+      "text": "two 3 twos away from that 10 is a four"
+    },
+    {
+      "index": 80,
+      "start": 263.16,
+      "end": 265.79,
+      "duration": 2.63,
+      "text": "okay that's the first stage of"
+    },
+    {
+      "index": 81,
+      "start": 265.8,
+      "end": 268.469,
+      "duration": 2.669,
+      "text": "elimination I've got the First Column"
+    },
+    {
+      "index": 82,
+      "start": 268.479,
+      "end": 271.15,
+      "duration": 2.671,
+      "text": "straight"
+    },
+    {
+      "index": 83,
+      "start": 271.16,
+      "end": 274.51,
+      "duration": 3.35,
+      "text": "so of course I move on to the second"
+    },
+    {
+      "index": 84,
+      "start": 274.52,
+      "end": 278.629,
+      "duration": 4.109,
+      "text": "column I look in that position I see a"
+    },
+    {
+      "index": 85,
+      "start": 278.639,
+      "end": 282.749,
+      "duration": 4.11,
+      "text": "zero I look below it hoping for a"
+    },
+    {
+      "index": 86,
+      "start": 282.759,
+      "end": 285.67,
+      "duration": 2.911,
+      "text": "nonzero that I can do a row exchange but"
+    },
+    {
+      "index": 87,
+      "start": 285.68,
+      "end": 286.71,
+      "duration": 1.03,
+      "text": "it's zero"
+    },
+    {
+      "index": 88,
+      "start": 286.72,
+      "end": 291.029,
+      "duration": 4.309,
+      "text": "below so that's telling me that that"
+    },
+    {
+      "index": 89,
+      "start": 291.039,
+      "end": 294.43,
+      "duration": 3.391,
+      "text": "column is well what it's really going to"
+    },
+    {
+      "index": 90,
+      "start": 294.44,
+      "end": 297.909,
+      "duration": 3.469,
+      "text": "be telling me is that that column is a"
+    },
+    {
+      "index": 91,
+      "start": 297.919,
+      "end": 300.11,
+      "duration": 2.191,
+      "text": "combination of the earlier column it's"
+    },
+    {
+      "index": 92,
+      "start": 300.12,
+      "end": 302.83,
+      "duration": 2.71,
+      "text": "depend that second column is dependent"
+    },
+    {
+      "index": 93,
+      "start": 302.84,
+      "end": 305.749,
+      "duration": 2.909,
+      "text": "on the earlier column but I don't stop"
+    },
+    {
+      "index": 94,
+      "start": 305.759,
+      "end": 308.35,
+      "duration": 2.591,
+      "text": "to think"
+    },
+    {
+      "index": 95,
+      "start": 308.36,
+      "end": 311.79,
+      "duration": 3.43,
+      "text": "here that column there's nothing to do I"
+    },
+    {
+      "index": 96,
+      "start": 311.8,
+      "end": 314.11,
+      "duration": 2.31,
+      "text": "go on to the next so here's the next"
+    },
+    {
+      "index": 97,
+      "start": 314.12,
+      "end": 316.749,
+      "duration": 2.629,
+      "text": "pivot so there's the first pivot and"
+    },
+    {
+      "index": 98,
+      "start": 316.759,
+      "end": 319.51,
+      "duration": 2.751,
+      "text": "there's the second pivot can I just keep"
+    },
+    {
+      "index": 99,
+      "start": 319.52,
+      "end": 323.71,
+      "duration": 4.19,
+      "text": "this elimination going downwards so so"
+    },
+    {
+      "index": 100,
+      "start": 323.72,
+      "end": 330.67,
+      "duration": 6.95,
+      "text": "the next step keeps the first row"
+    },
+    {
+      "index": 101,
+      "start": 332.629,
+      "end": 332.639,
+      "duration": 0.01,
+      "text": "keeps the second"
+    },
+    {
+      "index": 102,
+      "start": 332.639,
+      "end": 337.55,
+      "duration": 4.911,
+      "text": "row with its pivot so I've got my two"
+    },
+    {
+      "index": 103,
+      "start": 337.56,
+      "end": 339.749,
+      "duration": 2.189,
+      "text": "pivots and does"
+    },
+    {
+      "index": 104,
+      "start": 339.759,
+      "end": 342.59,
+      "duration": 2.831,
+      "text": "elimination to clear out the column"
+    },
+    {
+      "index": 105,
+      "start": 342.6,
+      "end": 346.23,
+      "duration": 3.63,
+      "text": "below that pivot so actually you see the"
+    },
+    {
+      "index": 106,
+      "start": 346.24,
+      "end": 349.11,
+      "duration": 2.87,
+      "text": "multiplier is one it subtracts row two"
+    },
+    {
+      "index": 107,
+      "start": 349.12,
+      "end": 352.39,
+      "duration": 3.27,
+      "text": "from Row three and produces a row of"
+    },
+    {
+      "index": 108,
+      "start": 352.4,
+      "end": 356.35,
+      "duration": 3.95,
+      "text": "zeros okay that I would I would call"
+    },
+    {
+      "index": 109,
+      "start": 356.36,
+      "end": 360.909,
+      "duration": 4.549,
+      "text": "that Matrix U right that's our"
+    },
+    {
+      "index": 110,
+      "start": 360.919,
+      "end": 364.23,
+      "duration": 3.311,
+      "text": "upper well I can't quite say upper"
+    },
+    {
+      "index": 111,
+      "start": 364.24,
+      "end": 367.39,
+      "duration": 3.15,
+      "text": "triangular uh maybe upper I don't know"
+    },
+    {
+      "index": 112,
+      "start": 367.4,
+      "end": 370.95,
+      "duration": 3.55,
+      "text": "upper something it's got"
+    },
+    {
+      "index": 113,
+      "start": 370.96,
+      "end": 375.71,
+      "duration": 4.75,
+      "text": "uh it's it's in this so-called Echelon"
+    },
+    {
+      "index": 114,
+      "start": 375.72,
+      "end": 380.309,
+      "duration": 4.589,
+      "text": "form e the word Echelon means like"
+    },
+    {
+      "index": 115,
+      "start": 380.319,
+      "end": 383.39,
+      "duration": 3.071,
+      "text": "staircase form it's the the nonzeros"
+    },
+    {
+      "index": 116,
+      "start": 383.4,
+      "end": 386.469,
+      "duration": 3.069,
+      "text": "come in that staircase form if there was"
+    },
+    {
+      "index": 117,
+      "start": 386.479,
+      "end": 388.39,
+      "duration": 1.911,
+      "text": "another pivot"
+    },
+    {
+      "index": 118,
+      "start": 388.4,
+      "end": 390.87,
+      "duration": 2.47,
+      "text": "here the then the staircase would"
+    },
+    {
+      "index": 119,
+      "start": 390.88,
+      "end": 394.83,
+      "duration": 3.95,
+      "text": "include that but here's a case where we"
+    },
+    {
+      "index": 120,
+      "start": 394.84,
+      "end": 399.029,
+      "duration": 4.189,
+      "text": "have two pivots only okay so actually"
+    },
+    {
+      "index": 121,
+      "start": 399.039,
+      "end": 400.71,
+      "duration": 1.671,
+      "text": "we've already discovered the most"
+    },
+    {
+      "index": 122,
+      "start": 400.72,
+      "end": 403.15,
+      "duration": 2.43,
+      "text": "important number about this"
+    },
+    {
+      "index": 123,
+      "start": 403.16,
+      "end": 405.79,
+      "duration": 2.63,
+      "text": "Matrix the number of"
+    },
+    {
+      "index": 124,
+      "start": 405.8,
+      "end": 407.55,
+      "duration": 1.75,
+      "text": "pivots is"
+    },
+    {
+      "index": 125,
+      "start": 407.56,
+      "end": 411.07,
+      "duration": 3.51,
+      "text": "two that number we will call the rank of"
+    },
+    {
+      "index": 126,
+      "start": 411.08,
+      "end": 413.469,
+      "duration": 2.389,
+      "text": "the Matrix so let me put it put"
+    },
+    {
+      "index": 127,
+      "start": 413.479,
+      "end": 415.469,
+      "duration": 1.99,
+      "text": "immediately the"
+    },
+    {
+      "index": 128,
+      "start": 415.479,
+      "end": 417.589,
+      "duration": 2.11,
+      "text": "rank of"
+    },
+    {
+      "index": 129,
+      "start": 417.599,
+      "end": 420.07,
+      "duration": 2.471,
+      "text": "a so I'm telling you what the this word"
+    },
+    {
+      "index": 130,
+      "start": 420.08,
+      "end": 421.589,
+      "duration": 1.509,
+      "text": "rank"
+    },
+    {
+      "index": 131,
+      "start": 421.599,
+      "end": 425.71,
+      "duration": 4.111,
+      "text": "means in the algorithm it's equal to the"
+    },
+    {
+      "index": 132,
+      "start": 425.72,
+      "end": 427.71,
+      "duration": 1.99,
+      "text": "number of"
+    },
+    {
+      "index": 133,
+      "start": 427.72,
+      "end": 431.749,
+      "duration": 4.029,
+      "text": "pivots and in this case"
+    },
+    {
+      "index": 134,
+      "start": 431.759,
+      "end": 435.629,
+      "duration": 3.87,
+      "text": "two okay for me that number two is the"
+    },
+    {
+      "index": 135,
+      "start": 435.639,
+      "end": 439.189,
+      "duration": 3.55,
+      "text": "crucial number okay now I go to you"
+    },
+    {
+      "index": 136,
+      "start": 439.199,
+      "end": 442.869,
+      "duration": 3.67,
+      "text": "remember I'm always solving ax equals z"
+    },
+    {
+      "index": 137,
+      "start": 442.879,
+      "end": 446.309,
+      "duration": 3.43,
+      "text": "but now I can solve uux equals 0 right"
+    },
+    {
+      "index": 138,
+      "start": 446.319,
+      "end": 450.55,
+      "duration": 4.231,
+      "text": "same Solutions same null space okay so I"
+    },
+    {
+      "index": 139,
+      "start": 450.56,
+      "end": 454.309,
+      "duration": 3.749,
+      "text": "could stop here why don't I why don't I"
+    },
+    {
+      "index": 140,
+      "start": 454.319,
+      "end": 456.749,
+      "duration": 2.43,
+      "text": "stop here and do the back substitution"
+    },
+    {
+      "index": 141,
+      "start": 456.759,
+      "end": 459.71,
+      "duration": 2.951,
+      "text": "so now I have to ask you how do I"
+    },
+    {
+      "index": 142,
+      "start": 459.72,
+      "end": 461.67,
+      "duration": 1.95,
+      "text": "describe the"
+    },
+    {
+      "index": 143,
+      "start": 461.68,
+      "end": 464.23,
+      "duration": 2.55,
+      "text": "solutions there are solutions right to"
+    },
+    {
+      "index": 144,
+      "start": 464.24,
+      "end": 467.469,
+      "duration": 3.229,
+      "text": "ax equals z I knew there would be I had"
+    },
+    {
+      "index": 145,
+      "start": 467.479,
+      "end": 470.23,
+      "duration": 2.751,
+      "text": "three equations in four unknowns I"
+    },
+    {
+      "index": 146,
+      "start": 470.24,
+      "end": 473.07,
+      "duration": 2.83,
+      "text": "certainly expected some solutions now I"
+    },
+    {
+      "index": 147,
+      "start": 473.08,
+      "end": 475.629,
+      "duration": 2.549,
+      "text": "want to see what are they okay here's"
+    },
+    {
+      "index": 148,
+      "start": 475.639,
+      "end": 477.589,
+      "duration": 1.95,
+      "text": "the critical"
+    },
+    {
+      "index": 149,
+      "start": 477.599,
+      "end": 483.71,
+      "duration": 6.111,
+      "text": "step I and I refer to it up here as"
+    },
+    {
+      "index": 150,
+      "start": 483.72,
+      "end": 487.469,
+      "duration": 3.749,
+      "text": "separating out the pivot variables the"
+    },
+    {
+      "index": 151,
+      "start": 487.479,
+      "end": 490.309,
+      "duration": 2.83,
+      "text": "pivot columns which are these two here I"
+    },
+    {
+      "index": 152,
+      "start": 490.319,
+      "end": 493.55,
+      "duration": 3.231,
+      "text": "have two pivot columns those are those"
+    },
+    {
+      "index": 153,
+      "start": 493.56,
+      "end": 494.99,
+      "duration": 1.43,
+      "text": "obviously they're The Columns with the"
+    },
+    {
+      "index": 154,
+      "start": 495.0,
+      "end": 497.749,
+      "duration": 2.749,
+      "text": "pivot so I have two"
+    },
+    {
+      "index": 155,
+      "start": 497.759,
+      "end": 501.189,
+      "duration": 3.43,
+      "text": "pivot"
+    },
+    {
+      "index": 156,
+      "start": 504.51,
+      "end": 504.52,
+      "duration": 0.01,
+      "text": "columns and I have the other"
+    },
+    {
+      "index": 157,
+      "start": 504.52,
+      "end": 508.149,
+      "duration": 3.629,
+      "text": "columns I'll call free two these are"
+    },
+    {
+      "index": 158,
+      "start": 508.159,
+      "end": 512.269,
+      "duration": 4.11,
+      "text": "free columns"
+    },
+    {
+      "index": 159,
+      "start": 515.87,
+      "end": 515.88,
+      "duration": 0.01,
+      "text": "okay why do I use those words why do I"
+    },
+    {
+      "index": 160,
+      "start": 515.88,
+      "end": 517.19,
+      "duration": 1.31,
+      "text": "use that word"
+    },
+    {
+      "index": 161,
+      "start": 517.2,
+      "end": 520.909,
+      "duration": 3.709,
+      "text": "free because now I want to write I want"
+    },
+    {
+      "index": 162,
+      "start": 520.919,
+      "end": 525.15,
+      "duration": 4.231,
+      "text": "to find the solutions to ux equals z"
+    },
+    {
+      "index": 163,
+      "start": 525.16,
+      "end": 527.07,
+      "duration": 1.91,
+      "text": "here's the way I do"
+    },
+    {
+      "index": 164,
+      "start": 527.08,
+      "end": 529.35,
+      "duration": 2.27,
+      "text": "it these free"
+    },
+    {
+      "index": 165,
+      "start": 529.36,
+      "end": 533.71,
+      "duration": 4.35,
+      "text": "columns I can assign any number freely"
+    },
+    {
+      "index": 166,
+      "start": 533.72,
+      "end": 538.67,
+      "duration": 4.95,
+      "text": "to those to those to those to the to the"
+    },
+    {
+      "index": 167,
+      "start": 538.68,
+      "end": 541.31,
+      "duration": 2.63,
+      "text": "variables X2 and"
+    },
+    {
+      "index": 168,
+      "start": 541.32,
+      "end": 545.55,
+      "duration": 4.23,
+      "text": "X4 the ones that multiply columns 2 and"
+    },
+    {
+      "index": 169,
+      "start": 545.56,
+      "end": 548.59,
+      "duration": 3.03,
+      "text": "four so I can assign anything I like to"
+    },
+    {
+      "index": 170,
+      "start": 548.6,
+      "end": 550.31,
+      "duration": 1.71,
+      "text": "X2 and"
+    },
+    {
+      "index": 171,
+      "start": 550.32,
+      "end": 552.31,
+      "duration": 1.99,
+      "text": "X4 and"
+    },
+    {
+      "index": 172,
+      "start": 552.32,
+      "end": 556.19,
+      "duration": 3.87,
+      "text": "then I can solve the equations for X1"
+    },
+    {
+      "index": 173,
+      "start": 556.2,
+      "end": 560.31,
+      "duration": 4.11,
+      "text": "and X3 let me say that again if I give"
+    },
+    {
+      "index": 174,
+      "start": 560.32,
+      "end": 563.91,
+      "duration": 3.59,
+      "text": "let me let me assign so so one"
+    },
+    {
+      "index": 175,
+      "start": 563.92,
+      "end": 565.069,
+      "duration": 1.149,
+      "text": "particular"
+    },
+    {
+      "index": 176,
+      "start": 565.079,
+      "end": 570.11,
+      "duration": 5.031,
+      "text": "X is to assign say the value one to the"
+    },
+    {
+      "index": 177,
+      "start": 570.12,
+      "end": 573.03,
+      "duration": 2.91,
+      "text": "to X2 and zero to"
+    },
+    {
+      "index": 178,
+      "start": 573.04,
+      "end": 575.949,
+      "duration": 2.909,
+      "text": "X4 those are that was a free choice but"
+    },
+    {
+      "index": 179,
+      "start": 575.959,
+      "end": 578.99,
+      "duration": 3.031,
+      "text": "it's a convenient Choice okay now I want"
+    },
+    {
+      "index": 180,
+      "start": 579.0,
+      "end": 583.829,
+      "duration": 4.829,
+      "text": "to solve ux equals 0 and find numbers 1"
+    },
+    {
+      "index": 181,
+      "start": 583.839,
+      "end": 587.67,
+      "duration": 3.831,
+      "text": "and three F complete the solution okay"
+    },
+    {
+      "index": 182,
+      "start": 587.68,
+      "end": 590.509,
+      "duration": 2.829,
+      "text": "can I write down let's see shall we just"
+    },
+    {
+      "index": 183,
+      "start": 590.519,
+      "end": 593.19,
+      "duration": 2.671,
+      "text": "remember what ux equals 0 represents"
+    },
+    {
+      "index": 184,
+      "start": 593.2,
+      "end": 595.31,
+      "duration": 2.11,
+      "text": "what are my equations that first"
+    },
+    {
+      "index": 185,
+      "start": 595.32,
+      "end": 600.829,
+      "duration": 5.509,
+      "text": "equation is X1 plus just"
+    },
+    {
+      "index": 186,
+      "start": 600.839,
+      "end": 604.23,
+      "duration": 3.391,
+      "text": "I'm just saying what are these matrices"
+    },
+    {
+      "index": 187,
+      "start": 604.24,
+      "end": 607.71,
+      "duration": 3.47,
+      "text": "of meaning that's the first equation and"
+    },
+    {
+      "index": 188,
+      "start": 607.72,
+      "end": 609.71,
+      "duration": 1.99,
+      "text": "the second equation was"
+    },
+    {
+      "index": 189,
+      "start": 609.72,
+      "end": 611.71,
+      "duration": 1.99,
+      "text": "2x3 +"
+    },
+    {
+      "index": 190,
+      "start": 611.72,
+      "end": 615.47,
+      "duration": 3.75,
+      "text": "4x4 = 0 those are my two"
+    },
+    {
+      "index": 191,
+      "start": 615.48,
+      "end": 619.509,
+      "duration": 4.029,
+      "text": "equations okay now the point is I can"
+    },
+    {
+      "index": 192,
+      "start": 619.519,
+      "end": 621.949,
+      "duration": 2.43,
+      "text": "find X1 and"
+    },
+    {
+      "index": 193,
+      "start": 621.959,
+      "end": 624.949,
+      "duration": 2.99,
+      "text": "X3 by back substitution so we're"
+    },
+    {
+      "index": 194,
+      "start": 624.959,
+      "end": 627.99,
+      "duration": 3.031,
+      "text": "building on what we already know the new"
+    },
+    {
+      "index": 195,
+      "start": 628.0,
+      "end": 630.63,
+      "duration": 2.63,
+      "text": "thing is that there were some some free"
+    },
+    {
+      "index": 196,
+      "start": 630.64,
+      "end": 633.31,
+      "duration": 2.67,
+      "text": "variables that I could give any numbers"
+    },
+    {
+      "index": 197,
+      "start": 633.32,
+      "end": 635.949,
+      "duration": 2.629,
+      "text": "to and I'm systematically going to make"
+    },
+    {
+      "index": 198,
+      "start": 635.959,
+      "end": 638.47,
+      "duration": 2.511,
+      "text": "a choice like this one and zero now what"
+    },
+    {
+      "index": 199,
+      "start": 638.48,
+      "end": 639.509,
+      "duration": 1.029,
+      "text": "is"
+    },
+    {
+      "index": 200,
+      "start": 639.519,
+      "end": 643.03,
+      "duration": 3.511,
+      "text": "X3 let's let's go backwards back up I"
+    },
+    {
+      "index": 201,
+      "start": 643.04,
+      "end": 645.069,
+      "duration": 2.029,
+      "text": "look at the last"
+    },
+    {
+      "index": 202,
+      "start": 645.079,
+      "end": 650.269,
+      "duration": 5.19,
+      "text": "equation X3 is zero from the last"
+    },
+    {
+      "index": 203,
+      "start": 650.279,
+      "end": 652.43,
+      "duration": 2.151,
+      "text": "equation because because"
+    },
+    {
+      "index": 204,
+      "start": 652.44,
+      "end": 656.389,
+      "duration": 3.949,
+      "text": "X4 we've we've set X4 to zero and then"
+    },
+    {
+      "index": 205,
+      "start": 656.399,
+      "end": 659.99,
+      "duration": 3.591,
+      "text": "we get X3 as zero okay now we set X2 to"
+    },
+    {
+      "index": 206,
+      "start": 660.0,
+      "end": 663.269,
+      "duration": 3.269,
+      "text": "be one so what is"
+    },
+    {
+      "index": 207,
+      "start": 663.279,
+      "end": 669.43,
+      "duration": 6.151,
+      "text": "X1 -2 right so that I have -2 + 2 0 and"
+    },
+    {
+      "index": 208,
+      "start": 669.44,
+      "end": 672.15,
+      "duration": 2.71,
+      "text": "0 correctly giving zero there is a"
+    },
+    {
+      "index": 209,
+      "start": 672.16,
+      "end": 673.75,
+      "duration": 1.59,
+      "text": "vector in the null"
+    },
+    {
+      "index": 210,
+      "start": 673.76,
+      "end": 677.629,
+      "duration": 3.869,
+      "text": "space there's a solution to ax equals 0"
+    },
+    {
+      "index": 211,
+      "start": 677.639,
+      "end": 680.03,
+      "duration": 2.391,
+      "text": "in fact what solution is that that"
+    },
+    {
+      "index": 212,
+      "start": 680.04,
+      "end": 684.509,
+      "duration": 4.469,
+      "text": "simply says that -2 * the First Column"
+    },
+    {
+      "index": 213,
+      "start": 684.519,
+      "end": 687.629,
+      "duration": 3.11,
+      "text": "plus 1 * the second column is the zero"
+    },
+    {
+      "index": 214,
+      "start": 687.639,
+      "end": 690.11,
+      "duration": 2.471,
+      "text": "column of course that's right minus two"
+    },
+    {
+      "index": 215,
+      "start": 690.12,
+      "end": 693.03,
+      "duration": 2.91,
+      "text": "of that column plus one of that or minus"
+    },
+    {
+      "index": 216,
+      "start": 693.04,
+      "end": 695.79,
+      "duration": 2.75,
+      "text": "two of that plus one of that that"
+    },
+    {
+      "index": 217,
+      "start": 695.8,
+      "end": 698.79,
+      "duration": 2.99,
+      "text": "solution is that that's just what we saw"
+    },
+    {
+      "index": 218,
+      "start": 698.8,
+      "end": 701.43,
+      "duration": 2.63,
+      "text": "immediately that the second column is"
+    },
+    {
+      "index": 219,
+      "start": 701.44,
+      "end": 704.629,
+      "duration": 3.189,
+      "text": "twice as big as the First Column okay"
+    },
+    {
+      "index": 220,
+      "start": 704.639,
+      "end": 707.35,
+      "duration": 2.711,
+      "text": "tell me some more vectors in the null"
+    },
+    {
+      "index": 221,
+      "start": 707.36,
+      "end": 710.509,
+      "duration": 3.149,
+      "text": "space I found"
+    },
+    {
+      "index": 222,
+      "start": 710.519,
+      "end": 715.389,
+      "duration": 4.87,
+      "text": "one tell me uh how to get a bunch more"
+    },
+    {
+      "index": 223,
+      "start": 715.399,
+      "end": 718.509,
+      "duration": 3.11,
+      "text": "immediately out of that one just take"
+    },
+    {
+      "index": 224,
+      "start": 718.519,
+      "end": 721.509,
+      "duration": 2.99,
+      "text": "multiples of it it any multiple of I"
+    },
+    {
+      "index": 225,
+      "start": 721.519,
+      "end": 724.43,
+      "duration": 2.911,
+      "text": "could multiply this by anything I might"
+    },
+    {
+      "index": 226,
+      "start": 724.44,
+      "end": 727.35,
+      "duration": 2.91,
+      "text": "as well call it I could say C some"
+    },
+    {
+      "index": 227,
+      "start": 727.36,
+      "end": 729.35,
+      "duration": 1.99,
+      "text": "multiple of this so let"
+    },
+    {
+      "index": 228,
+      "start": 729.36,
+      "end": 733.829,
+      "duration": 4.469,
+      "text": "me so X could be any multiple of this"
+    },
+    {
+      "index": 229,
+      "start": 733.839,
+      "end": 737.87,
+      "duration": 4.031,
+      "text": "one okay that that describes now a line"
+    },
+    {
+      "index": 230,
+      "start": 737.88,
+      "end": 739.75,
+      "duration": 1.87,
+      "text": "an infinitely long line in"
+    },
+    {
+      "index": 231,
+      "start": 739.76,
+      "end": 742.67,
+      "duration": 2.91,
+      "text": "four-dimensional"
+    },
+    {
+      "index": 232,
+      "start": 742.68,
+      "end": 744.189,
+      "duration": 1.509,
+      "text": "space"
+    },
+    {
+      "index": 233,
+      "start": 744.199,
+      "end": 746.99,
+      "duration": 2.791,
+      "text": "but which is in the null space is that"
+    },
+    {
+      "index": 234,
+      "start": 747.0,
+      "end": 749.87,
+      "duration": 2.87,
+      "text": "the whole null space"
+    },
+    {
+      "index": 235,
+      "start": 749.88,
+      "end": 754.269,
+      "duration": 4.389,
+      "text": "no I've got two free variables here I"
+    },
+    {
+      "index": 236,
+      "start": 754.279,
+      "end": 756.389,
+      "duration": 2.11,
+      "text": "made this Choice One and zero for the"
+    },
+    {
+      "index": 237,
+      "start": 756.399,
+      "end": 758.389,
+      "duration": 1.99,
+      "text": "free variables but I could have made"
+    },
+    {
+      "index": 238,
+      "start": 758.399,
+      "end": 761.35,
+      "duration": 2.951,
+      "text": "another Choice let me make the other"
+    },
+    {
+      "index": 239,
+      "start": 761.36,
+      "end": 763.23,
+      "duration": 1.87,
+      "text": "choice zero and"
+    },
+    {
+      "index": 240,
+      "start": 763.24,
+      "end": 765.59,
+      "duration": 2.35,
+      "text": "one you see my"
+    },
+    {
+      "index": 241,
+      "start": 765.6,
+      "end": 768.55,
+      "duration": 2.95,
+      "text": "system it my so let me repeat the system"
+    },
+    {
+      "index": 242,
+      "start": 768.56,
+      "end": 772.15,
+      "duration": 3.59,
+      "text": "this is the algorithm that you you"
+    },
+    {
+      "index": 243,
+      "start": 772.16,
+      "end": 774.35,
+      "duration": 2.19,
+      "text": "just learn to"
+    },
+    {
+      "index": 244,
+      "start": 774.36,
+      "end": 779.23,
+      "duration": 4.87,
+      "text": "do find do do elimination"
+    },
+    {
+      "index": 245,
+      "start": 779.24,
+      "end": 781.15,
+      "duration": 1.91,
+      "text": "decide which are the pivot columns and"
+    },
+    {
+      "index": 246,
+      "start": 781.16,
+      "end": 782.829,
+      "duration": 1.669,
+      "text": "which are the free columns that tells"
+    },
+    {
+      "index": 247,
+      "start": 782.839,
+      "end": 785.67,
+      "duration": 2.831,
+      "text": "you that that variables 1 and three are"
+    },
+    {
+      "index": 248,
+      "start": 785.68,
+      "end": 788.75,
+      "duration": 3.07,
+      "text": "pivot variables two and four are free"
+    },
+    {
+      "index": 249,
+      "start": 788.76,
+      "end": 792.509,
+      "duration": 3.749,
+      "text": "variables then those free variables you"
+    },
+    {
+      "index": 250,
+      "start": 792.519,
+      "end": 795.829,
+      "duration": 3.31,
+      "text": "assign them you you give one of them the"
+    },
+    {
+      "index": 251,
+      "start": 795.839,
+      "end": 798.949,
+      "duration": 3.11,
+      "text": "value one and the others the value zero"
+    },
+    {
+      "index": 252,
+      "start": 798.959,
+      "end": 802.47,
+      "duration": 3.511,
+      "text": "in this case we had a one and a zero and"
+    },
+    {
+      "index": 253,
+      "start": 802.48,
+      "end": 805.15,
+      "duration": 2.67,
+      "text": "complete the solution and you do you"
+    },
+    {
+      "index": 254,
+      "start": 805.16,
+      "end": 807.91,
+      "duration": 2.75,
+      "text": "give the other one the value one and and"
+    },
+    {
+      "index": 255,
+      "start": 807.92,
+      "end": 810.269,
+      "duration": 2.349,
+      "text": "zero and now complete to solution so"
+    },
+    {
+      "index": 256,
+      "start": 810.279,
+      "end": 812.87,
+      "duration": 2.591,
+      "text": "let's complete that solution I'm looking"
+    },
+    {
+      "index": 257,
+      "start": 812.88,
+      "end": 816.35,
+      "duration": 3.47,
+      "text": "for a vector in the null space and it's"
+    },
+    {
+      "index": 258,
+      "start": 816.36,
+      "end": 817.949,
+      "duration": 1.589,
+      "text": "absolutely going to be different from"
+    },
+    {
+      "index": 259,
+      "start": 817.959,
+      "end": 821.55,
+      "duration": 3.591,
+      "text": "this guy because uh because any multiple"
+    },
+    {
+      "index": 260,
+      "start": 821.56,
+      "end": 823.189,
+      "duration": 1.629,
+      "text": "of that zero is never going to give the"
+    },
+    {
+      "index": 261,
+      "start": 823.199,
+      "end": 825.629,
+      "duration": 2.43,
+      "text": "one so I have somebody new in the null"
+    },
+    {
+      "index": 262,
+      "start": 825.639,
+      "end": 829.069,
+      "duration": 3.43,
+      "text": "space and let me finish it out what's X3"
+    },
+    {
+      "index": 263,
+      "start": 829.079,
+      "end": 832.43,
+      "duration": 3.351,
+      "text": "here so we're going by back substitution"
+    },
+    {
+      "index": 264,
+      "start": 832.44,
+      "end": 835.749,
+      "duration": 3.309,
+      "text": "looking at this equation now X4 we've"
+    },
+    {
+      "index": 265,
+      "start": 835.759,
+      "end": 839.15,
+      "duration": 3.391,
+      "text": "changed we're doing the other"
+    },
+    {
+      "index": 266,
+      "start": 839.16,
+      "end": 842.829,
+      "duration": 3.669,
+      "text": "possibility where X2 is zero and X4 is 1"
+    },
+    {
+      "index": 267,
+      "start": 842.839,
+      "end": 845.79,
+      "duration": 2.951,
+      "text": "so X3 will happen to be"
+    },
+    {
+      "index": 268,
+      "start": 845.8,
+      "end": 848.389,
+      "duration": 2.589,
+      "text": "min-2 and now what do I get for that"
+    },
+    {
+      "index": 269,
+      "start": 848.399,
+      "end": 849.31,
+      "duration": 0.911,
+      "text": "first"
+    },
+    {
+      "index": 270,
+      "start": 849.32,
+      "end": 855.15,
+      "duration": 5.83,
+      "text": "equation uh X1 let's see 2 x3s is min -4"
+    },
+    {
+      "index": 271,
+      "start": 855.16,
+      "end": 858.43,
+      "duration": 3.27,
+      "text": "plus two do I get a two"
+    },
+    {
+      "index": 272,
+      "start": 858.44,
+      "end": 861.43,
+      "duration": 2.99,
+      "text": "there perhaps yeah two for"
+    },
+    {
+      "index": 273,
+      "start": 861.44,
+      "end": 867.269,
+      "duration": 5.829,
+      "text": "X1 - 4 and two okay that's in the null"
+    },
+    {
+      "index": 274,
+      "start": 867.279,
+      "end": 871.15,
+      "duration": 3.871,
+      "text": "space what does that say"
+    },
+    {
+      "index": 275,
+      "start": 874.509,
+      "end": 874.519,
+      "duration": 0.01,
+      "text": "about the columns that says that two of"
+    },
+    {
+      "index": 276,
+      "start": 874.519,
+      "end": 875.43,
+      "duration": 0.911,
+      "text": "this"
+    },
+    {
+      "index": 277,
+      "start": 875.44,
+      "end": 878.59,
+      "duration": 3.15,
+      "text": "column minus two of this column plus"
+    },
+    {
+      "index": 278,
+      "start": 878.6,
+      "end": 880.829,
+      "duration": 2.229,
+      "text": "this column gives zero which it"
+    },
+    {
+      "index": 279,
+      "start": 880.839,
+      "end": 885.31,
+      "duration": 4.471,
+      "text": "does two of that minus two of that and"
+    },
+    {
+      "index": 280,
+      "start": 885.32,
+      "end": 889.03,
+      "duration": 3.71,
+      "text": "one of that gives the zero column okay"
+    },
+    {
+      "index": 281,
+      "start": 889.04,
+      "end": 891.47,
+      "duration": 2.43,
+      "text": "now now I found another Vector in the"
+    },
+    {
+      "index": 282,
+      "start": 891.48,
+      "end": 893.79,
+      "duration": 2.31,
+      "text": "null space now we're ready to tell me"
+    },
+    {
+      "index": 283,
+      "start": 893.8,
+      "end": 896.949,
+      "duration": 3.149,
+      "text": "the whole null space what are all the"
+    },
+    {
+      "index": 284,
+      "start": 896.959,
+      "end": 901.11,
+      "duration": 4.151,
+      "text": "solutions to ax equals 0"
+    },
+    {
+      "index": 285,
+      "start": 905.749,
+      "end": 905.759,
+      "duration": 0.01,
+      "text": "I've got this guy and when I have him"
+    },
+    {
+      "index": 286,
+      "start": 905.759,
+      "end": 908.47,
+      "duration": 2.711,
+      "text": "what else is goes into the null space"
+    },
+    {
+      "index": 287,
+      "start": 908.48,
+      "end": 909.629,
+      "duration": 1.149,
+      "text": "along with"
+    },
+    {
+      "index": 288,
+      "start": 909.639,
+      "end": 912.67,
+      "duration": 3.031,
+      "text": "that these are my two special"
+    },
+    {
+      "index": 289,
+      "start": 912.68,
+      "end": 915.31,
+      "duration": 2.63,
+      "text": "Solutions I call them special I just"
+    },
+    {
+      "index": 290,
+      "start": 915.32,
+      "end": 918.15,
+      "duration": 2.83,
+      "text": "invented that name special Solutions"
+    },
+    {
+      "index": 291,
+      "start": 918.16,
+      "end": 920.389,
+      "duration": 2.229,
+      "text": "what's special about them is the special"
+    },
+    {
+      "index": 292,
+      "start": 920.399,
+      "end": 924.749,
+      "duration": 4.35,
+      "text": "numbers I gave to the free"
+    },
+    {
+      "index": 293,
+      "start": 924.759,
+      "end": 927.389,
+      "duration": 2.63,
+      "text": "variables the values zero and one for"
+    },
+    {
+      "index": 294,
+      "start": 927.399,
+      "end": 929.949,
+      "duration": 2.55,
+      "text": "the free variables I could have given"
+    },
+    {
+      "index": 295,
+      "start": 929.959,
+      "end": 933.47,
+      "duration": 3.511,
+      "text": "the free variables any values and got"
+    },
+    {
+      "index": 296,
+      "start": 933.48,
+      "end": 936.47,
+      "duration": 2.99,
+      "text": "vectors in the null space but this was a"
+    },
+    {
+      "index": 297,
+      "start": 936.48,
+      "end": 940.069,
+      "duration": 3.589,
+      "text": "good way to be sure I got got everybody"
+    },
+    {
+      "index": 298,
+      "start": 940.079,
+      "end": 943.99,
+      "duration": 3.911,
+      "text": "okay so once I have him I also have any"
+    },
+    {
+      "index": 299,
+      "start": 944.0,
+      "end": 946.829,
+      "duration": 2.829,
+      "text": "multiple right so I could take any"
+    },
+    {
+      "index": 300,
+      "start": 946.839,
+      "end": 949.91,
+      "duration": 3.071,
+      "text": "multiple of that and it's in the null"
+    },
+    {
+      "index": 301,
+      "start": 949.92,
+      "end": 952.949,
+      "duration": 3.029,
+      "text": "space and now what else I left a little"
+    },
+    {
+      "index": 302,
+      "start": 952.959,
+      "end": 956.389,
+      "duration": 3.43,
+      "text": "space for what"
+    },
+    {
+      "index": 303,
+      "start": 956.399,
+      "end": 959.87,
+      "duration": 3.471,
+      "text": "what a plus sign I can take any"
+    },
+    {
+      "index": 304,
+      "start": 959.88,
+      "end": 962.629,
+      "duration": 2.749,
+      "text": "combination here's a line of vectors in"
+    },
+    {
+      "index": 305,
+      "start": 962.639,
+      "end": 966.15,
+      "duration": 3.511,
+      "text": "the null space a bunch of solutions"
+    },
+    {
+      "index": 306,
+      "start": 966.16,
+      "end": 968.509,
+      "duration": 2.349,
+      "text": "would you rather I say in the null space"
+    },
+    {
+      "index": 307,
+      "start": 968.519,
+      "end": 970.949,
+      "duration": 2.43,
+      "text": "or would you rather I say okay I'm"
+    },
+    {
+      "index": 308,
+      "start": 970.959,
+      "end": 974.509,
+      "duration": 3.55,
+      "text": "solving ax equals z well really I'm"
+    },
+    {
+      "index": 309,
+      "start": 974.519,
+      "end": 978.55,
+      "duration": 4.031,
+      "text": "solving ux equals"
+    },
+    {
+      "index": 310,
+      "start": 982.15,
+      "end": 982.16,
+      "duration": 0.01,
+      "text": "z well okay let me put in that crucial"
+    },
+    {
+      "index": 311,
+      "start": 982.16,
+      "end": 985.509,
+      "duration": 3.349,
+      "text": "plus sign I'm taking all the"
+    },
+    {
+      "index": 312,
+      "start": 985.519,
+      "end": 989.43,
+      "duration": 3.911,
+      "text": "combinations of my two special Solutions"
+    },
+    {
+      "index": 313,
+      "start": 989.44,
+      "end": 992.03,
+      "duration": 2.59,
+      "text": "that that's my conclusion"
+    },
+    {
+      "index": 314,
+      "start": 992.04,
+      "end": 996.629,
+      "duration": 4.589,
+      "text": "now the null space contains contains"
+    },
+    {
+      "index": 315,
+      "start": 996.639,
+      "end": 999.829,
+      "duration": 3.19,
+      "text": "exactly all the combinations of the"
+    },
+    {
+      "index": 316,
+      "start": 999.839,
+      "end": 1001.43,
+      "duration": 1.591,
+      "text": "special"
+    },
+    {
+      "index": 317,
+      "start": 1001.44,
+      "end": 1004.43,
+      "duration": 2.99,
+      "text": "Solutions and how many special Solutions"
+    },
+    {
+      "index": 318,
+      "start": 1004.44,
+      "end": 1008.55,
+      "duration": 4.11,
+      "text": "are there there's one for every free"
+    },
+    {
+      "index": 319,
+      "start": 1008.56,
+      "end": 1011.03,
+      "duration": 2.47,
+      "text": "variable and how many free variables are"
+    },
+    {
+      "index": 320,
+      "start": 1011.04,
+      "end": 1012.87,
+      "duration": 1.83,
+      "text": "there oh I mean we can see all the whole"
+    },
+    {
+      "index": 321,
+      "start": 1012.88,
+      "end": 1018.949,
+      "duration": 6.069,
+      "text": "picture now if if the rank R was two"
+    },
+    {
+      "index": 322,
+      "start": 1018.959,
+      "end": 1022.949,
+      "duration": 3.99,
+      "text": "this is the this is the number of pivot"
+    },
+    {
+      "index": 323,
+      "start": 1022.959,
+      "end": 1027.75,
+      "duration": 4.791,
+      "text": "variables right because it counted the"
+    },
+    {
+      "index": 324,
+      "start": 1030.99,
+      "end": 1031.0,
+      "duration": 0.01,
+      "text": "pivots so how many free"
+    },
+    {
+      "index": 325,
+      "start": 1031.0,
+      "end": 1034.029,
+      "duration": 3.029,
+      "text": "variables well you know it's two"
+    },
+    {
+      "index": 326,
+      "start": 1034.039,
+      "end": 1037.429,
+      "duration": 3.39,
+      "text": "right what is it in for a matrix that's"
+    },
+    {
+      "index": 327,
+      "start": 1037.439,
+      "end": 1042.39,
+      "duration": 4.951,
+      "text": "M rows n columns n variables that means"
+    },
+    {
+      "index": 328,
+      "start": 1042.4,
+      "end": 1044.069,
+      "duration": 1.669,
+      "text": "with rank"
+    },
+    {
+      "index": 329,
+      "start": 1044.079,
+      "end": 1047.549,
+      "duration": 3.47,
+      "text": "R how many free variables have we got"
+    },
+    {
+      "index": 330,
+      "start": 1047.559,
+      "end": 1050.71,
+      "duration": 3.151,
+      "text": "left if R of the variables are pivot"
+    },
+    {
+      "index": 331,
+      "start": 1050.72,
+      "end": 1056.99,
+      "duration": 6.27,
+      "text": "variables we have n minus r in this case"
+    },
+    {
+      "index": 332,
+      "start": 1057.0,
+      "end": 1064.029,
+      "duration": 7.029,
+      "text": "4-2 fre"
+    },
+    {
+      "index": 333,
+      "start": 1072.669,
+      "end": 1072.679,
+      "duration": 0.01,
+      "text": "all we get a ni we get clean answers"
+    },
+    {
+      "index": 334,
+      "start": 1072.679,
+      "end": 1076.99,
+      "duration": 4.311,
+      "text": "here we get R pivot variables so there"
+    },
+    {
+      "index": 335,
+      "start": 1077.0,
+      "end": 1080.149,
+      "duration": 3.149,
+      "text": "really were our equation equations here"
+    },
+    {
+      "index": 336,
+      "start": 1080.159,
+      "end": 1082.11,
+      "duration": 1.951,
+      "text": "there looked like three equations but"
+    },
+    {
+      "index": 337,
+      "start": 1082.12,
+      "end": 1084.95,
+      "duration": 2.83,
+      "text": "there were really only two independent"
+    },
+    {
+      "index": 338,
+      "start": 1084.96,
+      "end": 1088.549,
+      "duration": 3.589,
+      "text": "equations and there were n minus"
+    },
+    {
+      "index": 339,
+      "start": 1088.559,
+      "end": 1091.909,
+      "duration": 3.35,
+      "text": "r variables that we could choose freely"
+    },
+    {
+      "index": 340,
+      "start": 1091.919,
+      "end": 1095.71,
+      "duration": 3.791,
+      "text": "and we gave them those special 01 uh"
+    },
+    {
+      "index": 341,
+      "start": 1095.72,
+      "end": 1098.47,
+      "duration": 2.75,
+      "text": "values and we got the special"
+    },
+    {
+      "index": 342,
+      "start": 1098.48,
+      "end": 1100.95,
+      "duration": 2.47,
+      "text": "Solutions"
+    },
+    {
+      "index": 343,
+      "start": 1100.96,
+      "end": 1104.789,
+      "duration": 3.829,
+      "text": "okay that for me we could stop at that"
+    },
+    {
+      "index": 344,
+      "start": 1104.799,
+      "end": 1107.39,
+      "duration": 2.591,
+      "text": "point that gives you a complete"
+    },
+    {
+      "index": 345,
+      "start": 1107.4,
+      "end": 1108.95,
+      "duration": 1.55,
+      "text": "algorithm"
+    },
+    {
+      "index": 346,
+      "start": 1108.96,
+      "end": 1112.87,
+      "duration": 3.91,
+      "text": "for finding all the solutions to ax"
+    },
+    {
+      "index": 347,
+      "start": 1112.88,
+      "end": 1113.83,
+      "duration": 0.95,
+      "text": "equals"
+    },
+    {
+      "index": 348,
+      "start": 1113.84,
+      "end": 1117.35,
+      "duration": 3.51,
+      "text": "z"
+    },
+    {
+      "index": 349,
+      "start": 1120.63,
+      "end": 1120.64,
+      "duration": 0.01,
+      "text": "okay again you do"
+    },
+    {
+      "index": 350,
+      "start": 1120.64,
+      "end": 1123.95,
+      "duration": 3.31,
+      "text": "elimination going onward when a"
+    },
+    {
+      "index": 351,
+      "start": 1123.96,
+      "end": 1126.23,
+      "duration": 2.27,
+      "text": "column when when there's nothing to be"
+    },
+    {
+      "index": 352,
+      "start": 1126.24,
+      "end": 1129.59,
+      "duration": 3.35,
+      "text": "done on one column you just"
+    },
+    {
+      "index": 353,
+      "start": 1129.6,
+      "end": 1132.59,
+      "duration": 2.99,
+      "text": "continue that this number R the number"
+    },
+    {
+      "index": 354,
+      "start": 1132.6,
+      "end": 1134.99,
+      "duration": 2.39,
+      "text": "of pivots is"
+    },
+    {
+      "index": 355,
+      "start": 1135.0,
+      "end": 1139.71,
+      "duration": 4.71,
+      "text": "crucial and it leaves n minus r free"
+    },
+    {
+      "index": 356,
+      "start": 1139.72,
+      "end": 1142.149,
+      "duration": 2.429,
+      "text": "variables which you give value Zer and"
+    },
+    {
+      "index": 357,
+      "start": 1142.159,
+      "end": 1147.19,
+      "duration": 5.031,
+      "text": "one to I would like to take one more"
+    },
+    {
+      "index": 358,
+      "start": 1149.789,
+      "end": 1149.799,
+      "duration": 0.01,
+      "text": "step I would like to clean up this"
+    },
+    {
+      "index": 359,
+      "start": 1149.799,
+      "end": 1153.47,
+      "duration": 3.671,
+      "text": "Matrix even more so now I'm going to go"
+    },
+    {
+      "index": 360,
+      "start": 1153.48,
+      "end": 1156.95,
+      "duration": 3.47,
+      "text": "to this is in its this is in Echelon"
+    },
+    {
+      "index": 361,
+      "start": 1156.96,
+      "end": 1160.59,
+      "duration": 3.63,
+      "text": "form upper triangular if you like I want"
+    },
+    {
+      "index": 362,
+      "start": 1160.6,
+      "end": 1164.07,
+      "duration": 3.47,
+      "text": "to go one more step to make it as good"
+    },
+    {
+      "index": 363,
+      "start": 1164.08,
+      "end": 1167.23,
+      "duration": 3.15,
+      "text": "as it can be okay so now I'm going to"
+    },
+    {
+      "index": 364,
+      "start": 1167.24,
+      "end": 1170.029,
+      "duration": 2.789,
+      "text": "speak about the reduced"
+    },
+    {
+      "index": 365,
+      "start": 1170.039,
+      "end": 1172.87,
+      "duration": 2.831,
+      "text": "row Echelon form okay so now I'm going"
+    },
+    {
+      "index": 366,
+      "start": 1172.88,
+      "end": 1178.83,
+      "duration": 5.95,
+      "text": "to speak about the Matrix R which is the"
+    },
+    {
+      "index": 367,
+      "start": 1182.11,
+      "end": 1182.12,
+      "duration": 0.01,
+      "text": "reduced row"
+    },
+    {
+      "index": 368,
+      "start": 1182.12,
+      "end": 1183.669,
+      "duration": 1.549,
+      "text": "Echelon"
+    },
+    {
+      "index": 369,
+      "start": 1183.679,
+      "end": 1188.149,
+      "duration": 4.47,
+      "text": "form so what does that mean that means I"
+    },
+    {
+      "index": 370,
+      "start": 1188.159,
+      "end": 1192.47,
+      "duration": 4.311,
+      "text": "just I I can I can work harder on you so"
+    },
+    {
+      "index": 371,
+      "start": 1192.48,
+      "end": 1195.19,
+      "duration": 2.71,
+      "text": "let me start let me suppose I got as far"
+    },
+    {
+      "index": 372,
+      "start": 1195.2,
+      "end": 1196.35,
+      "duration": 1.15,
+      "text": "as"
+    },
+    {
+      "index": 373,
+      "start": 1196.36,
+      "end": 1208.149,
+      "duration": 11.789,
+      "text": "U which was good"
+    },
+    {
+      "index": 374,
+      "start": 1211.63,
+      "end": 1211.64,
+      "duration": 0.01,
+      "text": "notice how that row of zeros appeared I"
+    },
+    {
+      "index": 375,
+      "start": 1211.64,
+      "end": 1214.75,
+      "duration": 3.11,
+      "text": "I didn't comment on that but I I should"
+    },
+    {
+      "index": 376,
+      "start": 1214.76,
+      "end": 1219.35,
+      "duration": 4.59,
+      "text": "have that row of zeros appeared because"
+    },
+    {
+      "index": 377,
+      "start": 1219.36,
+      "end": 1221.99,
+      "duration": 2.63,
+      "text": "Row three was a combination of rows one"
+    },
+    {
+      "index": 378,
+      "start": 1222.0,
+      "end": 1226.35,
+      "duration": 4.35,
+      "text": "and two and elimination discovered that"
+    },
+    {
+      "index": 379,
+      "start": 1226.36,
+      "end": 1229.23,
+      "duration": 2.87,
+      "text": "fact when we get a row of zero that's"
+    },
+    {
+      "index": 380,
+      "start": 1229.24,
+      "end": 1232.59,
+      "duration": 3.35,
+      "text": "telling us that the that that the"
+    },
+    {
+      "index": 381,
+      "start": 1232.6,
+      "end": 1234.63,
+      "duration": 2.03,
+      "text": "original row that was"
+    },
+    {
+      "index": 382,
+      "start": 1234.64,
+      "end": 1238.669,
+      "duration": 4.029,
+      "text": "there was a combination of other rows"
+    },
+    {
+      "index": 383,
+      "start": 1238.679,
+      "end": 1241.549,
+      "duration": 2.87,
+      "text": "and elimination knocked it"
+    },
+    {
+      "index": 384,
+      "start": 1241.559,
+      "end": 1245.149,
+      "duration": 3.59,
+      "text": "out okay so we got this far now how can"
+    },
+    {
+      "index": 385,
+      "start": 1245.159,
+      "end": 1248.75,
+      "duration": 3.591,
+      "text": "I clean that up further I can do uh"
+    },
+    {
+      "index": 386,
+      "start": 1248.76,
+      "end": 1250.39,
+      "duration": 1.63,
+      "text": "elimination"
+    },
+    {
+      "index": 387,
+      "start": 1250.4,
+      "end": 1254.31,
+      "duration": 3.91,
+      "text": "upwards I can get zero above the pivots"
+    },
+    {
+      "index": 388,
+      "start": 1254.32,
+      "end": 1257.029,
+      "duration": 2.709,
+      "text": "so this reduced row Echelon form has"
+    },
+    {
+      "index": 389,
+      "start": 1257.039,
+      "end": 1259.51,
+      "duration": 2.471,
+      "text": "zeros"
+    },
+    {
+      "index": 390,
+      "start": 1259.52,
+      "end": 1264.19,
+      "duration": 4.67,
+      "text": "above and"
+    },
+    {
+      "index": 391,
+      "start": 1267.43,
+      "end": 1267.44,
+      "duration": 0.01,
+      "text": "below the"
+    },
+    {
+      "index": 392,
+      "start": 1267.44,
+      "end": 1270.43,
+      "duration": 2.99,
+      "text": "pivots so let me do"
+    },
+    {
+      "index": 393,
+      "start": 1270.44,
+      "end": 1273.71,
+      "duration": 3.27,
+      "text": "that so now I'll subtract one of this"
+    },
+    {
+      "index": 394,
+      "start": 1273.72,
+      "end": 1277.11,
+      "duration": 3.39,
+      "text": "from the row above that will leave a"
+    },
+    {
+      "index": 395,
+      "start": 1277.12,
+      "end": 1280.87,
+      "duration": 3.75,
+      "text": "zero and a minus two in there"
+    },
+    {
+      "index": 396,
+      "start": 1280.88,
+      "end": 1285.63,
+      "duration": 4.75,
+      "text": "and that's"
+    },
+    {
+      "index": 397,
+      "start": 1289.909,
+      "end": 1289.919,
+      "duration": 0.01,
+      "text": "good okay and I can clean it up even one"
+    },
+    {
+      "index": 398,
+      "start": 1289.919,
+      "end": 1292.31,
+      "duration": 2.391,
+      "text": "more step I can make the"
+    },
+    {
+      "index": 399,
+      "start": 1292.32,
+      "end": 1294.75,
+      "duration": 2.43,
+      "text": "pivots the pivots I'm going to make"
+    },
+    {
+      "index": 400,
+      "start": 1294.76,
+      "end": 1297.87,
+      "duration": 3.11,
+      "text": "equal to one because I can divide"
+    },
+    {
+      "index": 401,
+      "start": 1297.88,
+      "end": 1300.39,
+      "duration": 2.51,
+      "text": "equation two by the"
+    },
+    {
+      "index": 402,
+      "start": 1300.4,
+      "end": 1304.19,
+      "duration": 3.79,
+      "text": "pivot that won't change the solutions so"
+    },
+    {
+      "index": 403,
+      "start": 1304.2,
+      "end": 1306.95,
+      "duration": 2.75,
+      "text": "let me do that and then I really I'm"
+    },
+    {
+      "index": 404,
+      "start": 1306.96,
+      "end": 1314.35,
+      "duration": 7.39,
+      "text": "ready to stop 1 2 0- 2 0 0 1 two I"
+    },
+    {
+      "index": 405,
+      "start": 1314.36,
+      "end": 1318.63,
+      "duration": 4.27,
+      "text": "divided the second equation by two"
+    },
+    {
+      "index": 406,
+      "start": 1318.64,
+      "end": 1321.75,
+      "duration": 3.11,
+      "text": "because now I have a one in the"
+    },
+    {
+      "index": 407,
+      "start": 1321.76,
+      "end": 1327.07,
+      "duration": 5.31,
+      "text": "pivot and Zer below okay this is my"
+    },
+    {
+      "index": 408,
+      "start": 1327.08,
+      "end": 1333.75,
+      "duration": 6.67,
+      "text": "Matrix"
+    },
+    {
+      "index": 409,
+      "start": 1337.87,
+      "end": 1337.88,
+      "duration": 0.01,
+      "text": "R I guess I'm hoping that you could now"
+    },
+    {
+      "index": 410,
+      "start": 1337.88,
+      "end": 1340.31,
+      "duration": 2.43,
+      "text": "execute the whole"
+    },
+    {
+      "index": 411,
+      "start": 1340.32,
+      "end": 1344.95,
+      "duration": 4.63,
+      "text": "algorithm mat lab will do it immediately"
+    },
+    {
+      "index": 412,
+      "start": 1344.96,
+      "end": 1346.549,
+      "duration": 1.589,
+      "text": "with the"
+    },
+    {
+      "index": 413,
+      "start": 1346.559,
+      "end": 1349.549,
+      "duration": 2.99,
+      "text": "command RR R"
+    },
+    {
+      "index": 414,
+      "start": 1349.559,
+      "end": 1354.63,
+      "duration": 5.071,
+      "text": "EF Ro reduced row Echelon form of a so"
+    },
+    {
+      "index": 415,
+      "start": 1354.64,
+      "end": 1358.149,
+      "duration": 3.509,
+      "text": "if I input that original Matrix a and"
+    },
+    {
+      "index": 416,
+      "start": 1358.159,
+      "end": 1360.99,
+      "duration": 2.831,
+      "text": "then I write then I type that"
+    },
+    {
+      "index": 417,
+      "start": 1361.0,
+      "end": 1365.19,
+      "duration": 4.19,
+      "text": "command press return that Matrix will"
+    },
+    {
+      "index": 418,
+      "start": 1365.2,
+      "end": 1368.39,
+      "duration": 3.19,
+      "text": "appear That's the reduced row Echelon"
+    },
+    {
+      "index": 419,
+      "start": 1368.4,
+      "end": 1370.71,
+      "duration": 2.31,
+      "text": "form"
+    },
+    {
+      "index": 420,
+      "start": 1370.72,
+      "end": 1374.149,
+      "duration": 3.429,
+      "text": "and it's got all the"
+    },
+    {
+      "index": 421,
+      "start": 1374.159,
+      "end": 1376.909,
+      "duration": 2.75,
+      "text": "information as"
+    },
+    {
+      "index": 422,
+      "start": 1376.919,
+      "end": 1380.149,
+      "duration": 3.23,
+      "text": "clear as can be"
+    },
+    {
+      "index": 423,
+      "start": 1380.159,
+      "end": 1382.149,
+      "duration": 1.99,
+      "text": "what what information has it got well of"
+    },
+    {
+      "index": 424,
+      "start": 1382.159,
+      "end": 1385.669,
+      "duration": 3.51,
+      "text": "course it immediately tells me the pivot"
+    },
+    {
+      "index": 425,
+      "start": 1385.679,
+      "end": 1388.909,
+      "duration": 3.23,
+      "text": "rows pivot rows one and two pivot"
+    },
+    {
+      "index": 426,
+      "start": 1388.919,
+      "end": 1390.51,
+      "duration": 1.591,
+      "text": "columns one and"
+    },
+    {
+      "index": 427,
+      "start": 1390.52,
+      "end": 1393.71,
+      "duration": 3.19,
+      "text": "three and in fact it's got the identity"
+    },
+    {
+      "index": 428,
+      "start": 1393.72,
+      "end": 1396.35,
+      "duration": 2.63,
+      "text": "Matrix in there right it's it's got"
+    },
+    {
+      "index": 429,
+      "start": 1396.36,
+      "end": 1398.95,
+      "duration": 2.59,
+      "text": "zeros above and below the pivots and the"
+    },
+    {
+      "index": 430,
+      "start": 1398.96,
+      "end": 1404.75,
+      "duration": 5.79,
+      "text": "pivots are one so it's so it's got a so"
+    },
+    {
+      "index": 431,
+      "start": 1404.76,
+      "end": 1409.47,
+      "duration": 4.71,
+      "text": "notice the 2x two identity Matrix"
+    },
+    {
+      "index": 432,
+      "start": 1409.48,
+      "end": 1412.07,
+      "duration": 2.59,
+      "text": "that's sitting in the pivot rows and"
+    },
+    {
+      "index": 433,
+      "start": 1412.08,
+      "end": 1418.99,
+      "duration": 6.91,
+      "text": "pivot columns it's it's it's I in the"
+    },
+    {
+      "index": 434,
+      "start": 1419.0,
+      "end": 1420.63,
+      "duration": 1.63,
+      "text": "pivot"
+    },
+    {
+      "index": 435,
+      "start": 1420.64,
+      "end": 1425.59,
+      "duration": 4.95,
+      "text": "rows and"
+    },
+    {
+      "index": 436,
+      "start": 1434.71,
+      "end": 1434.72,
+      "duration": 0.01,
+      "text": "below those are always indicating that"
+    },
+    {
+      "index": 437,
+      "start": 1434.72,
+      "end": 1437.95,
+      "duration": 3.23,
+      "text": "original rows were were combinations of"
+    },
+    {
+      "index": 438,
+      "start": 1437.96,
+      "end": 1440.47,
+      "duration": 2.51,
+      "text": "other rows so we really only had two"
+    },
+    {
+      "index": 439,
+      "start": 1440.48,
+      "end": 1444.99,
+      "duration": 4.51,
+      "text": "rows there and now it also so there's"
+    },
+    {
+      "index": 440,
+      "start": 1445.0,
+      "end": 1448.789,
+      "duration": 3.789,
+      "text": "the identity now it's also got its"
+    },
+    {
+      "index": 441,
+      "start": 1448.799,
+      "end": 1451.669,
+      "duration": 2.87,
+      "text": "free"
+    },
+    {
+      "index": 442,
+      "start": 1451.679,
+      "end": 1456.029,
+      "duration": 4.35,
+      "text": "columns and uh they're cleaned up as"
+    },
+    {
+      "index": 443,
+      "start": 1456.039,
+      "end": 1458.789,
+      "duration": 2.75,
+      "text": "much as possible actually actually it's"
+    },
+    {
+      "index": 444,
+      "start": 1458.799,
+      "end": 1461.71,
+      "duration": 2.911,
+      "text": "now so cleaned up that the special"
+    },
+    {
+      "index": 445,
+      "start": 1461.72,
+      "end": 1464.789,
+      "duration": 3.069,
+      "text": "Solutions I can read off you you"
+    },
+    {
+      "index": 446,
+      "start": 1464.799,
+      "end": 1467.029,
+      "duration": 2.23,
+      "text": "remember I went through the steps of"
+    },
+    {
+      "index": 447,
+      "start": 1467.039,
+      "end": 1469.029,
+      "duration": 1.99,
+      "text": "computing this uh"
+    },
+    {
+      "index": 448,
+      "start": 1469.039,
+      "end": 1471.75,
+      "duration": 2.711,
+      "text": "this uh doing back"
+    },
+    {
+      "index": 449,
+      "start": 1471.76,
+      "end": 1476.47,
+      "duration": 4.71,
+      "text": "substitution let me let me instead of"
+    },
+    {
+      "index": 450,
+      "start": 1476.48,
+      "end": 1478.87,
+      "duration": 2.39,
+      "text": "that system let me take this improved"
+    },
+    {
+      "index": 451,
+      "start": 1478.88,
+      "end": 1481.789,
+      "duration": 2.909,
+      "text": "system so I'm going to use these"
+    },
+    {
+      "index": 452,
+      "start": 1481.799,
+      "end": 1485.19,
+      "duration": 3.391,
+      "text": "numbers right in these equations what"
+    },
+    {
+      "index": 453,
+      "start": 1485.2,
+      "end": 1490.95,
+      "duration": 5.75,
+      "text": "did I do I divided this equation by"
+    },
+    {
+      "index": 454,
+      "start": 1493.99,
+      "end": 1494.0,
+      "duration": 0.01,
+      "text": "two and oh yeah and I had subtracted two"
+    },
+    {
+      "index": 455,
+      "start": 1494.0,
+      "end": 1496.149,
+      "duration": 2.149,
+      "text": "of this which knocked out this guy and"
+    },
+    {
+      "index": 456,
+      "start": 1496.159,
+      "end": 1500.11,
+      "duration": 3.951,
+      "text": "made that a minus sign is that what"
+    },
+    {
+      "index": 457,
+      "start": 1500.12,
+      "end": 1503.909,
+      "duration": 3.789,
+      "text": "that's that's now I've now written RX"
+    },
+    {
+      "index": 458,
+      "start": 1503.919,
+      "end": 1509.35,
+      "duration": 5.431,
+      "text": "equals"
+    },
+    {
+      "index": 459,
+      "start": 1512.909,
+      "end": 1512.919,
+      "duration": 0.01,
+      "text": "0 now I guess I'm hoping everybody in"
+    },
+    {
+      "index": 460,
+      "start": 1512.919,
+      "end": 1516.19,
+      "duration": 3.271,
+      "text": "this room understands the the solutions"
+    },
+    {
+      "index": 461,
+      "start": 1516.2,
+      "end": 1520.63,
+      "duration": 4.43,
+      "text": "to the original ax equals z the Midway"
+    },
+    {
+      "index": 462,
+      "start": 1520.64,
+      "end": 1525.35,
+      "duration": 4.71,
+      "text": "halfway ux equal Z and the final RX"
+    },
+    {
+      "index": 463,
+      "start": 1525.36,
+      "end": 1526.95,
+      "duration": 1.59,
+      "text": "equals 0 all the"
+    },
+    {
+      "index": 464,
+      "start": 1526.96,
+      "end": 1530.19,
+      "duration": 3.23,
+      "text": "same because going from one of those to"
+    },
+    {
+      "index": 465,
+      "start": 1530.2,
+      "end": 1533.87,
+      "duration": 3.67,
+      "text": "another one I didn't mess up I I just"
+    },
+    {
+      "index": 466,
+      "start": 1533.88,
+      "end": 1536.43,
+      "duration": 2.55,
+      "text": "multiplied equations and subtracted from"
+    },
+    {
+      "index": 467,
+      "start": 1536.44,
+      "end": 1538.87,
+      "duration": 2.43,
+      "text": "other equations which I'm allowed to"
+    },
+    {
+      "index": 468,
+      "start": 1538.88,
+      "end": 1543.07,
+      "duration": 4.19,
+      "text": "do okay but my point is that"
+    },
+    {
+      "index": 469,
+      "start": 1543.08,
+      "end": 1548.789,
+      "duration": 5.709,
+      "text": "now if I do this free variables and back"
+    },
+    {
+      "index": 470,
+      "start": 1548.799,
+      "end": 1551.43,
+      "duration": 2.631,
+      "text": "substitution it's just the numbers are"
+    },
+    {
+      "index": 471,
+      "start": 1551.44,
+      "end": 1555.83,
+      "duration": 4.39,
+      "text": "there when I let X so in this guy I let"
+    },
+    {
+      "index": 472,
+      "start": 1555.84,
+      "end": 1559.029,
+      "duration": 3.189,
+      "text": "X2 be one"
+    },
+    {
+      "index": 473,
+      "start": 1559.039,
+      "end": 1561.51,
+      "duration": 2.471,
+      "text": "and X4"
+    },
+    {
+      "index": 474,
+      "start": 1561.52,
+      "end": 1564.43,
+      "duration": 2.91,
+      "text": "b0 I I guess what am I seeing here let"
+    },
+    {
+      "index": 475,
+      "start": 1564.44,
+      "end": 1567.07,
+      "duration": 2.63,
+      "text": "me let me sort of separate this out here"
+    },
+    {
+      "index": 476,
+      "start": 1567.08,
+      "end": 1569.269,
+      "duration": 2.189,
+      "text": "I'm seeing in the"
+    },
+    {
+      "index": 477,
+      "start": 1569.279,
+      "end": 1573.549,
+      "duration": 4.27,
+      "text": "pivot in the pivot columns if I if I put"
+    },
+    {
+      "index": 478,
+      "start": 1573.559,
+      "end": 1576.909,
+      "duration": 3.35,
+      "text": "the pivot columns here I'm seeing those"
+    },
+    {
+      "index": 479,
+      "start": 1576.919,
+      "end": 1579.789,
+      "duration": 2.87,
+      "text": "and I'm in the free"
+    },
+    {
+      "index": 480,
+      "start": 1579.799,
+      "end": 1582.549,
+      "duration": 2.75,
+      "text": "columns I'm seeing what am I seeing in"
+    },
+    {
+      "index": 481,
+      "start": 1582.559,
+      "end": 1584.99,
+      "duration": 2.431,
+      "text": "the free columns the two Z and that"
+    },
+    {
+      "index": 482,
+      "start": 1585.0,
+      "end": 1589.19,
+      "duration": 4.19,
+      "text": "first free column the the X2 column and"
+    },
+    {
+      "index": 483,
+      "start": 1589.2,
+      "end": 1593.269,
+      "duration": 4.069,
+      "text": "a minus 22 in the in the in the fourth"
+    },
+    {
+      "index": 484,
+      "start": 1593.279,
+      "end": 1596.47,
+      "duration": 3.191,
+      "text": "column the other free column and and the"
+    },
+    {
+      "index": 485,
+      "start": 1596.48,
+      "end": 1597.99,
+      "duration": 1.51,
+      "text": "row of zeros"
+    },
+    {
+      "index": 486,
+      "start": 1598.0,
+      "end": 1600.95,
+      "duration": 2.95,
+      "text": "below which of course have"
+    },
+    {
+      "index": 487,
+      "start": 1600.96,
+      "end": 1605.07,
+      "duration": 4.11,
+      "text": "no that equation is 0 equals z that's"
+    },
+    {
+      "index": 488,
+      "start": 1605.08,
+      "end": 1607.51,
+      "duration": 2.43,
+      "text": "satisfying here's my"
+    },
+    {
+      "index": 489,
+      "start": 1607.52,
+      "end": 1610.87,
+      "duration": 3.35,
+      "text": "point that when I do back"
+    },
+    {
+      "index": 490,
+      "start": 1610.88,
+      "end": 1613.51,
+      "duration": 2.63,
+      "text": "substitution these numbers are exactly"
+    },
+    {
+      "index": 491,
+      "start": 1613.52,
+      "end": 1614.669,
+      "duration": 1.149,
+      "text": "what shows"
+    },
+    {
+      "index": 492,
+      "start": 1614.679,
+      "end": 1618.669,
+      "duration": 3.99,
+      "text": "up oh their signs get switched I was"
+    },
+    {
+      "index": 493,
+      "start": 1618.679,
+      "end": 1622.269,
+      "duration": 3.59,
+      "text": "going to say those numbers 2 - 2"
+    },
+    {
+      "index": 494,
+      "start": 1622.279,
+      "end": 1625.269,
+      "duration": 2.99,
+      "text": "02 can I just circle the this is the"
+    },
+    {
+      "index": 495,
+      "start": 1625.279,
+      "end": 1627.71,
+      "duration": 2.431,
+      "text": "free part of the Matrix this is the"
+    },
+    {
+      "index": 496,
+      "start": 1627.72,
+      "end": 1629.19,
+      "duration": 1.47,
+      "text": "identity"
+    },
+    {
+      "index": 497,
+      "start": 1629.2,
+      "end": 1631.63,
+      "duration": 2.43,
+      "text": "part this is the free part maybe I'll"
+    },
+    {
+      "index": 498,
+      "start": 1631.64,
+      "end": 1633.71,
+      "duration": 2.07,
+      "text": "call it"
+    },
+    {
+      "index": 499,
+      "start": 1633.72,
+      "end": 1636.909,
+      "duration": 3.189,
+      "text": "F this of course I call I because it's"
+    },
+    {
+      "index": 500,
+      "start": 1636.919,
+      "end": 1637.71,
+      "duration": 0.791,
+      "text": "the"
+    },
+    {
+      "index": 501,
+      "start": 1637.72,
+      "end": 1641.389,
+      "duration": 3.669,
+      "text": "identity the free part is a I mean I'm"
+    },
+    {
+      "index": 502,
+      "start": 1641.399,
+      "end": 1644.269,
+      "duration": 2.87,
+      "text": "just doing back"
+    },
+    {
+      "index": 503,
+      "start": 1647.71,
+      "end": 1647.72,
+      "duration": 0.01,
+      "text": "substitution and the those free numbers"
+    },
+    {
+      "index": 504,
+      "start": 1647.72,
+      "end": 1649.549,
+      "duration": 1.829,
+      "text": "will show up with a minus sign because"
+    },
+    {
+      "index": 505,
+      "start": 1649.559,
+      "end": 1651.269,
+      "duration": 1.71,
+      "text": "they pop onto the other side of the"
+    },
+    {
+      "index": 506,
+      "start": 1651.279,
+      "end": 1656.75,
+      "duration": 5.471,
+      "text": "equation so I see min-2 0 and I see 2"
+    },
+    {
+      "index": 507,
+      "start": 1656.76,
+      "end": 1661.59,
+      "duration": 4.83,
+      "text": "-2 C can I so that wasn't magic it had"
+    },
+    {
+      "index": 508,
+      "start": 1661.6,
+      "end": 1662.43,
+      "duration": 0.83,
+      "text": "to"
+    },
+    {
+      "index": 509,
+      "start": 1662.44,
+      "end": 1667.23,
+      "duration": 4.79,
+      "text": "happen let me uh show you clearly why it"
+    },
+    {
+      "index": 510,
+      "start": 1667.24,
+      "end": 1670.63,
+      "duration": 3.39,
+      "text": "happened okay so that's this this is"
+    },
+    {
+      "index": 511,
+      "start": 1670.64,
+      "end": 1673.909,
+      "duration": 3.269,
+      "text": "what I'm interested in here and now let"
+    },
+    {
+      "index": 512,
+      "start": 1673.919,
+      "end": 1679.43,
+      "duration": 5.511,
+      "text": "me let me just like do it do it for or"
+    },
+    {
+      "index": 513,
+      "start": 1679.44,
+      "end": 1682.07,
+      "duration": 2.63,
+      "text": "let's suppose"
+    },
+    {
+      "index": 514,
+      "start": 1682.08,
+      "end": 1686.71,
+      "duration": 4.63,
+      "text": "we've we've got"
+    },
+    {
+      "index": 515,
+      "start": 1690.149,
+      "end": 1690.159,
+      "duration": 0.01,
+      "text": "to let's suppose we've got this system"
+    },
+    {
+      "index": 516,
+      "start": 1690.159,
+      "end": 1691.47,
+      "duration": 1.311,
+      "text": "already"
+    },
+    {
+      "index": 517,
+      "start": 1691.48,
+      "end": 1694.909,
+      "duration": 3.429,
+      "text": "in in our"
+    },
+    {
+      "index": 518,
+      "start": 1694.919,
+      "end": 1697.23,
+      "duration": 2.311,
+      "text": "RF"
+    },
+    {
+      "index": 519,
+      "start": 1697.24,
+      "end": 1702.789,
+      "duration": 5.549,
+      "text": "form so my Matrix R is what does it look"
+    },
+    {
+      "index": 520,
+      "start": 1702.799,
+      "end": 1704.669,
+      "duration": 1.87,
+      "text": "like can"
+    },
+    {
+      "index": 521,
+      "start": 1704.679,
+      "end": 1708.63,
+      "duration": 3.951,
+      "text": "I'll let me pretend that the pivot"
+    },
+    {
+      "index": 522,
+      "start": 1708.64,
+      "end": 1711.47,
+      "duration": 2.83,
+      "text": "columns come first and then whatever is"
+    },
+    {
+      "index": 523,
+      "start": 1711.48,
+      "end": 1714.35,
+      "duration": 2.87,
+      "text": "in the free cup and there might be some"
+    },
+    {
+      "index": 524,
+      "start": 1714.36,
+      "end": 1716.909,
+      "duration": 2.549,
+      "text": "zero rows"
+    },
+    {
+      "index": 525,
+      "start": 1716.919,
+      "end": 1719.509,
+      "duration": 2.59,
+      "text": "below there's a"
+    },
+    {
+      "index": 526,
+      "start": 1719.519,
+      "end": 1722.389,
+      "duration": 2.87,
+      "text": "typical a pretty"
+    },
+    {
+      "index": 527,
+      "start": 1722.399,
+      "end": 1728.389,
+      "duration": 5.99,
+      "text": "typical reduced row Echelon"
+    },
+    {
+      "index": 528,
+      "start": 1731.83,
+      "end": 1731.84,
+      "duration": 0.01,
+      "text": "form you see what's typical it's it's"
+    },
+    {
+      "index": 529,
+      "start": 1731.84,
+      "end": 1736.269,
+      "duration": 4.429,
+      "text": "got this is R by R this is this this is"
+    },
+    {
+      "index": 530,
+      "start": 1736.279,
+      "end": 1742.669,
+      "duration": 6.39,
+      "text": "R pivot rows"
+    },
+    {
+      "index": 531,
+      "start": 1755.47,
+      "end": 1755.48,
+      "duration": 0.01,
+      "text": "columns and here are n minus r free"
+    },
+    {
+      "index": 532,
+      "start": 1755.48,
+      "end": 1759.029,
+      "duration": 3.549,
+      "text": "columns okay tell me what are the"
+    },
+    {
+      "index": 533,
+      "start": 1759.039,
+      "end": 1760.63,
+      "duration": 1.591,
+      "text": "special"
+    },
+    {
+      "index": 534,
+      "start": 1760.64,
+      "end": 1764.029,
+      "duration": 3.389,
+      "text": "Solutions what are the what's what's X"
+    },
+    {
+      "index": 535,
+      "start": 1764.039,
+      "end": 1768.19,
+      "duration": 4.151,
+      "text": "if I want to solve RX equals z in fact"
+    },
+    {
+      "index": 536,
+      "start": 1768.2,
+      "end": 1770.11,
+      "duration": 1.91,
+      "text": "let"
+    },
+    {
+      "index": 537,
+      "start": 1770.12,
+      "end": 1775.389,
+      "duration": 5.269,
+      "text": "me I'm really going to uh do the whole"
+    },
+    {
+      "index": 538,
+      "start": 1775.399,
+      "end": 1777.87,
+      "duration": 2.471,
+      "text": "since these this is now block matrices I"
+    },
+    {
+      "index": 539,
+      "start": 1777.88,
+      "end": 1779.63,
+      "duration": 1.75,
+      "text": "might as well do all of the special"
+    },
+    {
+      "index": 540,
+      "start": 1779.64,
+      "end": 1782.83,
+      "duration": 3.19,
+      "text": "Solutions at once so I want to solve RX"
+    },
+    {
+      "index": 541,
+      "start": 1782.84,
+      "end": 1784.669,
+      "duration": 1.829,
+      "text": "equal"
+    },
+    {
+      "index": 542,
+      "start": 1784.679,
+      "end": 1788.63,
+      "duration": 3.951,
+      "text": "0 and I'll have some special"
+    },
+    {
+      "index": 543,
+      "start": 1788.64,
+      "end": 1791.75,
+      "duration": 3.11,
+      "text": "Solutions let me"
+    },
+    {
+      "index": 544,
+      "start": 1791.76,
+      "end": 1794.87,
+      "duration": 3.11,
+      "text": "actually can I do them all at once I'm"
+    },
+    {
+      "index": 545,
+      "start": 1794.88,
+      "end": 1800.389,
+      "duration": 5.509,
+      "text": "going to create a null space Matrix"
+    },
+    {
+      "index": 546,
+      "start": 1813.31,
+      "end": 1813.32,
+      "duration": 0.01,
+      "text": "columns are the special solute The"
+    },
+    {
+      "index": 547,
+      "start": 1813.32,
+      "end": 1818.07,
+      "duration": 4.75,
+      "text": "Columns are the special"
+    },
+    {
+      "index": 548,
+      "start": 1820.63,
+      "end": 1820.64,
+      "duration": 0.01,
+      "text": "Solutions this is I'm making it sound"
+    },
+    {
+      "index": 549,
+      "start": 1820.64,
+      "end": 1823.029,
+      "duration": 2.389,
+      "text": "harder it's going to be totally easy n"
+    },
+    {
+      "index": 550,
+      "start": 1823.039,
+      "end": 1826.95,
+      "duration": 3.911,
+      "text": "will be this null space Matrix I want"
+    },
+    {
+      "index": 551,
+      "start": 1826.96,
+      "end": 1831.789,
+      "duration": 4.829,
+      "text": "r n to be the zero Matrix these Columns"
+    },
+    {
+      "index": 552,
+      "start": 1831.799,
+      "end": 1834.11,
+      "duration": 2.311,
+      "text": "of n are supposed to multi get"
+    },
+    {
+      "index": 553,
+      "start": 1834.12,
+      "end": 1836.269,
+      "duration": 2.149,
+      "text": "multiplied by R and give zero"
+    },
+    {
+      "index": 554,
+      "start": 1836.279,
+      "end": 1840.509,
+      "duration": 4.23,
+      "text": "columns so what n will do the job let me"
+    },
+    {
+      "index": 555,
+      "start": 1840.519,
+      "end": 1843.47,
+      "duration": 2.951,
+      "text": "put I'm going to put the identity in the"
+    },
+    {
+      "index": 556,
+      "start": 1843.48,
+      "end": 1847.99,
+      "duration": 4.51,
+      "text": "free variable part and then minus F will"
+    },
+    {
+      "index": 557,
+      "start": 1848.0,
+      "end": 1851.029,
+      "duration": 3.029,
+      "text": "show up in"
+    },
+    {
+      "index": 558,
+      "start": 1854.549,
+      "end": 1854.559,
+      "duration": 0.01,
+      "text": "the pivot variables just the way it did"
+    },
+    {
+      "index": 559,
+      "start": 1854.559,
+      "end": 1856.71,
+      "duration": 2.151,
+      "text": "in that example there we had the"
+    },
+    {
+      "index": 560,
+      "start": 1856.72,
+      "end": 1861.549,
+      "duration": 4.829,
+      "text": "identity and F here and in the special"
+    },
+    {
+      "index": 561,
+      "start": 1861.559,
+      "end": 1863.99,
+      "duration": 2.431,
+      "text": "solution so these columns are there's"
+    },
+    {
+      "index": 562,
+      "start": 1864.0,
+      "end": 1866.59,
+      "duration": 2.59,
+      "text": "the Matrix of special Solutions and"
+    },
+    {
+      "index": 563,
+      "start": 1866.6,
+      "end": 1868.909,
+      "duration": 2.309,
+      "text": "actually there so there's a matlb"
+    },
+    {
+      "index": 564,
+      "start": 1868.919,
+      "end": 1871.269,
+      "duration": 2.35,
+      "text": "command or a teaching code"
+    },
+    {
+      "index": 565,
+      "start": 1871.279,
+      "end": 1874.269,
+      "duration": 2.99,
+      "text": "command"
+    },
+    {
+      "index": 566,
+      "start": 1874.279,
+      "end": 1880.07,
+      "duration": 5.791,
+      "text": "null n equal so this is the the produces"
+    },
+    {
+      "index": 567,
+      "start": 1880.08,
+      "end": 1883.19,
+      "duration": 3.11,
+      "text": "the null basis the null space Matrix"
+    },
+    {
+      "index": 568,
+      "start": 1883.2,
+      "end": 1890.07,
+      "duration": 6.87,
+      "text": "null of a and there it is do you"
+    },
+    {
+      "index": 569,
+      "start": 1892.71,
+      "end": 1892.72,
+      "duration": 0.01,
+      "text": "so and how does that command actually"
+    },
+    {
+      "index": 570,
+      "start": 1892.72,
+      "end": 1897.31,
+      "duration": 4.59,
+      "text": "work it uses matlb to compute"
+    },
+    {
+      "index": 571,
+      "start": 1897.32,
+      "end": 1901.909,
+      "duration": 4.589,
+      "text": "R then it picks out the pivot variables"
+    },
+    {
+      "index": 572,
+      "start": 1901.919,
+      "end": 1905.629,
+      "duration": 3.71,
+      "text": "the free variables puts puts ones and"
+    },
+    {
+      "index": 573,
+      "start": 1905.639,
+      "end": 1908.629,
+      "duration": 2.99,
+      "text": "zeros in for the free variables and"
+    },
+    {
+      "index": 574,
+      "start": 1908.639,
+      "end": 1912.149,
+      "duration": 3.51,
+      "text": "copies out the pivot variables it it"
+    },
+    {
+      "index": 575,
+      "start": 1912.159,
+      "end": 1913.95,
+      "duration": 1.791,
+      "text": "does back substitution but back"
+    },
+    {
+      "index": 576,
+      "start": 1913.96,
+      "end": 1916.71,
+      "duration": 2.75,
+      "text": "substitution for this system is totally"
+    },
+    {
+      "index": 577,
+      "start": 1916.72,
+      "end": 1918.83,
+      "duration": 2.11,
+      "text": "simple what what is this"
+    },
+    {
+      "index": 578,
+      "start": 1918.84,
+      "end": 1921.99,
+      "duration": 3.15,
+      "text": "system uh RX ="
+    },
+    {
+      "index": 579,
+      "start": 1922.0,
+      "end": 1926.31,
+      "duration": 4.31,
+      "text": "Z so this is R is i"
+    },
+    {
+      "index": 580,
+      "start": 1926.32,
+      "end": 1931.029,
+      "duration": 4.709,
+      "text": "f and X is the pivot"
+    },
+    {
+      "index": 581,
+      "start": 1931.039,
+      "end": 1933.99,
+      "duration": 2.951,
+      "text": "variables and the free"
+    },
+    {
+      "index": 582,
+      "start": 1934.0,
+      "end": 1937.269,
+      "duration": 3.269,
+      "text": "variables and it's supposed to give"
+    },
+    {
+      "index": 583,
+      "start": 1937.279,
+      "end": 1940.789,
+      "duration": 3.51,
+      "text": "zero so what does that mean that means"
+    },
+    {
+      "index": 584,
+      "start": 1940.799,
+      "end": 1943.19,
+      "duration": 2.391,
+      "text": "that the pivot"
+    },
+    {
+      "index": 585,
+      "start": 1943.2,
+      "end": 1946.71,
+      "duration": 3.51,
+      "text": "variables plus f * the free variables"
+    },
+    {
+      "index": 586,
+      "start": 1946.72,
+      "end": 1948.549,
+      "duration": 1.829,
+      "text": "give zero"
+    },
+    {
+      "index": 587,
+      "start": 1948.559,
+      "end": 1950.95,
+      "duration": 2.391,
+      "text": "so let me put ftimes the free variables"
+    },
+    {
+      "index": 588,
+      "start": 1950.96,
+      "end": 1953.629,
+      "duration": 2.669,
+      "text": "on the other side I get minus"
+    },
+    {
+      "index": 589,
+      "start": 1953.639,
+      "end": 1956.389,
+      "duration": 2.75,
+      "text": "ftimes the free"
+    },
+    {
+      "index": 590,
+      "start": 1956.399,
+      "end": 1960.11,
+      "duration": 3.711,
+      "text": "variables there's there's my uh equation"
+    },
+    {
+      "index": 591,
+      "start": 1960.12,
+      "end": 1962.19,
+      "duration": 2.07,
+      "text": "as simple as it can"
+    },
+    {
+      "index": 592,
+      "start": 1962.2,
+      "end": 1965.47,
+      "duration": 3.27,
+      "text": "be that's that's what back substitution"
+    },
+    {
+      "index": 593,
+      "start": 1965.48,
+      "end": 1967.75,
+      "duration": 2.27,
+      "text": "comes to when I've reduced and reduced"
+    },
+    {
+      "index": 594,
+      "start": 1967.76,
+      "end": 1970.11,
+      "duration": 2.35,
+      "text": "and reduced this system to the to the"
+    },
+    {
+      "index": 595,
+      "start": 1970.12,
+      "end": 1973.909,
+      "duration": 3.789,
+      "text": "best form okay and"
+    },
+    {
+      "index": 596,
+      "start": 1973.919,
+      "end": 1976.95,
+      "duration": 3.031,
+      "text": "uh then if the free variables I make"
+    },
+    {
+      "index": 597,
+      "start": 1976.96,
+      "end": 1980.509,
+      "duration": 3.549,
+      "text": "this special choice of the identity then"
+    },
+    {
+      "index": 598,
+      "start": 1980.519,
+      "end": 1984.07,
+      "duration": 3.551,
+      "text": "the pivot V pivot variables are minus F"
+    },
+    {
+      "index": 599,
+      "start": 1984.08,
+      "end": 1988.83,
+      "duration": 4.75,
+      "text": "okay can I do uh another example could"
+    },
+    {
+      "index": 600,
+      "start": 1988.84,
+      "end": 1990.95,
+      "duration": 2.11,
+      "text": "you do another example can I let me just"
+    },
+    {
+      "index": 601,
+      "start": 1990.96,
+      "end": 1993.43,
+      "duration": 2.47,
+      "text": "take another Matrix and and let's go"
+    },
+    {
+      "index": 602,
+      "start": 1993.44,
+      "end": 1997.269,
+      "duration": 3.829,
+      "text": "through this algorithm once more"
+    },
+    {
+      "index": 603,
+      "start": 1997.279,
+      "end": 2000.789,
+      "duration": 3.51,
+      "text": "okay here we go here's a Blackboard for"
+    },
+    {
+      "index": 604,
+      "start": 2000.799,
+      "end": 2002.47,
+      "duration": 1.671,
+      "text": "another"
+    },
+    {
+      "index": 605,
+      "start": 2002.48,
+      "end": 2005.029,
+      "duration": 2.549,
+      "text": "Matrix"
+    },
+    {
+      "index": 606,
+      "start": 2005.039,
+      "end": 2009.269,
+      "duration": 4.23,
+      "text": "okay so I'll call The Matrix a again but"
+    },
+    {
+      "index": 607,
+      "start": 2009.279,
+      "end": 2012.59,
+      "duration": 3.311,
+      "text": "let me make it uh yeah how big should we"
+    },
+    {
+      "index": 608,
+      "start": 2012.6,
+      "end": 2015.23,
+      "duration": 2.63,
+      "text": "make it this"
+    },
+    {
+      "index": 609,
+      "start": 2019.19,
+      "end": 2019.2,
+      "duration": 0.01,
+      "text": "time ah why don't I do this just for the"
+    },
+    {
+      "index": 610,
+      "start": 2019.2,
+      "end": 2021.789,
+      "duration": 2.589,
+      "text": "heck of it let me take the transpose of"
+    },
+    {
+      "index": 611,
+      "start": 2021.799,
+      "end": 2022.669,
+      "duration": 0.87,
+      "text": "this"
+    },
+    {
+      "index": 612,
+      "start": 2022.679,
+      "end": 2027.11,
+      "duration": 4.431,
+      "text": "a and see what happens to"
+    },
+    {
+      "index": 613,
+      "start": 2043.87,
+      "end": 2043.88,
+      "duration": 0.01,
+      "text": "before we do the calculations tell me"
+    },
+    {
+      "index": 614,
+      "start": 2043.88,
+      "end": 2045.509,
+      "duration": 1.629,
+      "text": "what's"
+    },
+    {
+      "index": 615,
+      "start": 2045.519,
+      "end": 2050.23,
+      "duration": 4.711,
+      "text": "coming how many pivot variables do you"
+    },
+    {
+      "index": 616,
+      "start": 2050.24,
+      "end": 2051.19,
+      "duration": 0.95,
+      "text": "expect"
+    },
+    {
+      "index": 617,
+      "start": 2051.2,
+      "end": 2055.909,
+      "duration": 4.709,
+      "text": "here how many columns are going to have"
+    },
+    {
+      "index": 618,
+      "start": 2055.919,
+      "end": 2057.27,
+      "duration": 1.351,
+      "text": "pivots how"
+    },
+    {
+      "index": 619,
+      "start": 2057.28,
+      "end": 2058.51,
+      "duration": 1.23,
+      "text": "[Music]"
+    },
+    {
+      "index": 620,
+      "start": 2058.52,
+      "end": 2061.069,
+      "duration": 2.549,
+      "text": "many we have three columns in that"
+    },
+    {
+      "index": 621,
+      "start": 2061.079,
+      "end": 2063.19,
+      "duration": 2.111,
+      "text": "Matrix but are we going to are we going"
+    },
+    {
+      "index": 622,
+      "start": 2063.2,
+      "end": 2064.829,
+      "duration": 1.629,
+      "text": "to have three"
+    },
+    {
+      "index": 623,
+      "start": 2064.839,
+      "end": 2068.23,
+      "duration": 3.391,
+      "text": "pivots no because"
+    },
+    {
+      "index": 624,
+      "start": 2068.24,
+      "end": 2070.869,
+      "duration": 2.629,
+      "text": "this third column is the sum of the"
+    },
+    {
+      "index": 625,
+      "start": 2070.879,
+      "end": 2074.589,
+      "duration": 3.71,
+      "text": "first two columns I'm totally expecting"
+    },
+    {
+      "index": 626,
+      "start": 2074.599,
+      "end": 2078.31,
+      "duration": 3.711,
+      "text": "totally expecting that these will be"
+    },
+    {
+      "index": 627,
+      "start": 2078.32,
+      "end": 2079.95,
+      "duration": 1.63,
+      "text": "pivot"
+    },
+    {
+      "index": 628,
+      "start": 2079.96,
+      "end": 2083.069,
+      "duration": 3.109,
+      "text": "columns because they're"
+    },
+    {
+      "index": 629,
+      "start": 2083.079,
+      "end": 2086.31,
+      "duration": 3.231,
+      "text": "independent but that this third guy the"
+    },
+    {
+      "index": 630,
+      "start": 2086.32,
+      "end": 2089.069,
+      "duration": 2.749,
+      "text": "third column which is dependent on the"
+    },
+    {
+      "index": 631,
+      "start": 2089.079,
+      "end": 2092.149,
+      "duration": 3.07,
+      "text": "first two is going to be a free column"
+    },
+    {
+      "index": 632,
+      "start": 2092.159,
+      "end": 2095.149,
+      "duration": 2.99,
+      "text": "elimination better discover that and"
+    },
+    {
+      "index": 633,
+      "start": 2095.159,
+      "end": 2098.349,
+      "duration": 3.19,
+      "text": "elimination will also straighten out the"
+    },
+    {
+      "index": 634,
+      "start": 2098.359,
+      "end": 2101.39,
+      "duration": 3.031,
+      "text": "rows we'll also Identify some zero some"
+    },
+    {
+      "index": 635,
+      "start": 2101.4,
+      "end": 2104.15,
+      "duration": 2.75,
+      "text": "some dependent rows and some independent"
+    },
+    {
+      "index": 636,
+      "start": 2104.16,
+      "end": 2108.19,
+      "duration": 4.03,
+      "text": "rows what's the what's the row reduced"
+    },
+    {
+      "index": 637,
+      "start": 2108.2,
+      "end": 2111.51,
+      "duration": 3.31,
+      "text": "Echelon form for this let's just do it"
+    },
+    {
+      "index": 638,
+      "start": 2111.52,
+      "end": 2117.349,
+      "duration": 5.829,
+      "text": "okay so so that's the first pivot two *"
+    },
+    {
+      "index": 639,
+      "start": 2117.359,
+      "end": 2119.27,
+      "duration": 1.911,
+      "text": "that away from that gives me a row of"
+    },
+    {
+      "index": 640,
+      "start": 2119.28,
+      "end": 2122.23,
+      "duration": 2.95,
+      "text": "zeros two * that away from that gives me"
+    },
+    {
+      "index": 641,
+      "start": 2122.24,
+      "end": 2124.03,
+      "duration": 1.79,
+      "text": "a"
+    },
+    {
+      "index": 642,
+      "start": 2124.04,
+      "end": 2127.069,
+      "duration": 3.029,
+      "text": "022 and 2 * that away from that gives me"
+    },
+    {
+      "index": 643,
+      "start": 2127.079,
+      "end": 2131.15,
+      "duration": 4.071,
+      "text": "a 0"
+    },
+    {
+      "index": 644,
+      "start": 2133.19,
+      "end": 2133.2,
+      "duration": 0.01,
+      "text": "44"
+    },
+    {
+      "index": 645,
+      "start": 2133.2,
+      "end": 2136.19,
+      "duration": 2.99,
+      "text": "okay First Column is straight first"
+    },
+    {
+      "index": 646,
+      "start": 2136.2,
+      "end": 2138.99,
+      "duration": 2.79,
+      "text": "variable is a pivot variable no problem"
+    },
+    {
+      "index": 647,
+      "start": 2139.0,
+      "end": 2141.109,
+      "duration": 2.109,
+      "text": "on to the second column I look at the"
+    },
+    {
+      "index": 648,
+      "start": 2141.119,
+      "end": 2142.829,
+      "duration": 1.71,
+      "text": "second pivot it's a"
+    },
+    {
+      "index": 649,
+      "start": 2142.839,
+      "end": 2146.829,
+      "duration": 3.99,
+      "text": "zero I look below it there's a two okay"
+    },
+    {
+      "index": 650,
+      "start": 2146.839,
+      "end": 2149.43,
+      "duration": 2.591,
+      "text": "I do a row"
+    },
+    {
+      "index": 651,
+      "start": 2149.44,
+      "end": 2153.99,
+      "duration": 4.55,
+      "text": "exchange so this zero is now there I now"
+    },
+    {
+      "index": 652,
+      "start": 2154.0,
+      "end": 2155.63,
+      "duration": 1.63,
+      "text": "have a perfectly good"
+    },
+    {
+      "index": 653,
+      "start": 2155.64,
+      "end": 2158.63,
+      "duration": 2.99,
+      "text": "pivot and I use it"
+    },
+    {
+      "index": 654,
+      "start": 2158.64,
+      "end": 2161.069,
+      "duration": 2.429,
+      "text": "okay and I subtract two of that row away"
+    },
+    {
+      "index": 655,
+      "start": 2161.079,
+      "end": 2164.27,
+      "duration": 3.191,
+      "text": "from this row you all right if I do it"
+    },
+    {
+      "index": 656,
+      "start": 2164.28,
+      "end": 2168.27,
+      "duration": 3.99,
+      "text": "like that I I've got to the form U now"
+    },
+    {
+      "index": 657,
+      "start": 2168.28,
+      "end": 2173.829,
+      "duration": 5.549,
+      "text": "this was my a now there's my"
+    },
+    {
+      "index": 658,
+      "start": 2177.95,
+      "end": 2177.96,
+      "duration": 0.01,
+      "text": "U I can see I can see now I I have to"
+    },
+    {
+      "index": 659,
+      "start": 2177.96,
+      "end": 2179.95,
+      "duration": 1.99,
+      "text": "stop right I would go on to the third"
+    },
+    {
+      "index": 660,
+      "start": 2179.96,
+      "end": 2181.63,
+      "duration": 1.67,
+      "text": "column I should have"
+    },
+    {
+      "index": 661,
+      "start": 2181.64,
+      "end": 2184.109,
+      "duration": 2.469,
+      "text": "tried I quit but without trying I"
+    },
+    {
+      "index": 662,
+      "start": 2184.119,
+      "end": 2186.349,
+      "duration": 2.23,
+      "text": "shouldn't have done that on to the third"
+    },
+    {
+      "index": 663,
+      "start": 2186.359,
+      "end": 2188.91,
+      "duration": 2.551,
+      "text": "column look at the pivot position it's"
+    },
+    {
+      "index": 664,
+      "start": 2188.92,
+      "end": 2192.23,
+      "duration": 3.31,
+      "text": "got a zero in it look below all zeros"
+    },
+    {
+      "index": 665,
+      "start": 2192.24,
+      "end": 2195.95,
+      "duration": 3.71,
+      "text": "now I'm entitled to stop okay so the"
+    },
+    {
+      "index": 666,
+      "start": 2195.96,
+      "end": 2204.75,
+      "duration": 8.79,
+      "text": "rank is two"
+    },
+    {
+      "index": 667,
+      "start": 2208.589,
+      "end": 2208.599,
+      "duration": 0.01,
+      "text": "again uh what about the null space how"
+    },
+    {
+      "index": 668,
+      "start": 2208.599,
+      "end": 2211.39,
+      "duration": 2.791,
+      "text": "many special Solutions are there this"
+    },
+    {
+      "index": 669,
+      "start": 2211.4,
+      "end": 2215.91,
+      "duration": 4.51,
+      "text": "time how many special solutions for this"
+    },
+    {
+      "index": 670,
+      "start": 2215.92,
+      "end": 2218.55,
+      "duration": 2.63,
+      "text": "Matrix I've got an which are the free"
+    },
+    {
+      "index": 671,
+      "start": 2218.56,
+      "end": 2220.309,
+      "duration": 1.749,
+      "text": "variables and which are the pivot"
+    },
+    {
+      "index": 672,
+      "start": 2220.319,
+      "end": 2222.589,
+      "duration": 2.27,
+      "text": "variables and so on pivot columns I've"
+    },
+    {
+      "index": 673,
+      "start": 2222.599,
+      "end": 2224.069,
+      "duration": 1.47,
+      "text": "got two pivot"
+    },
+    {
+      "index": 674,
+      "start": 2224.079,
+      "end": 2226.95,
+      "duration": 2.871,
+      "text": "columns and that's no accident the"
+    },
+    {
+      "index": 675,
+      "start": 2226.96,
+      "end": 2229.87,
+      "duration": 2.91,
+      "text": "number of pivot columns for a matrix"
+    },
+    {
+      "index": 676,
+      "start": 2229.88,
+      "end": 2232.67,
+      "duration": 2.79,
+      "text": "a that's a great"
+    },
+    {
+      "index": 677,
+      "start": 2232.68,
+      "end": 2235.069,
+      "duration": 2.389,
+      "text": "fact that the number of pivot columns"
+    },
+    {
+      "index": 678,
+      "start": 2235.079,
+      "end": 2238.27,
+      "duration": 3.191,
+      "text": "for a and a trans a transpose are the"
+    },
+    {
+      "index": 679,
+      "start": 2238.28,
+      "end": 2241.71,
+      "duration": 3.43,
+      "text": "same and then I have a free column"
+    },
+    {
+      "index": 680,
+      "start": 2241.72,
+      "end": 2243.19,
+      "duration": 1.47,
+      "text": "there's a free"
+    },
+    {
+      "index": 681,
+      "start": 2243.2,
+      "end": 2247.19,
+      "duration": 3.99,
+      "text": "column one free column because the count"
+    },
+    {
+      "index": 682,
+      "start": 2247.2,
+      "end": 2249.349,
+      "duration": 2.149,
+      "text": "is 3 -"
+    },
+    {
+      "index": 683,
+      "start": 2249.359,
+      "end": 2256.589,
+      "duration": 7.23,
+      "text": "2 3 - 2 gives me one free"
+    },
+    {
+      "index": 684,
+      "start": 2264.15,
+      "end": 2264.16,
+      "duration": 0.01,
+      "text": "column okay so now let me solve"
+    },
+    {
+      "index": 685,
+      "start": 2264.16,
+      "end": 2267.95,
+      "duration": 3.79,
+      "text": "uh what's in the null space okay so how"
+    },
+    {
+      "index": 686,
+      "start": 2267.96,
+      "end": 2271.55,
+      "duration": 3.59,
+      "text": "do I H let's see these vectors have"
+    },
+    {
+      "index": 687,
+      "start": 2271.56,
+      "end": 2273.829,
+      "duration": 2.269,
+      "text": "length three they only have three"
+    },
+    {
+      "index": 688,
+      "start": 2273.839,
+      "end": 2276.27,
+      "duration": 2.431,
+      "text": "components I'm making too much space for"
+    },
+    {
+      "index": 689,
+      "start": 2276.28,
+      "end": 2278.15,
+      "duration": 1.87,
+      "text": "the to write X"
+    },
+    {
+      "index": 690,
+      "start": 2278.16,
+      "end": 2281.069,
+      "duration": 2.909,
+      "text": "X has just got three components and what"
+    },
+    {
+      "index": 691,
+      "start": 2281.079,
+      "end": 2282.27,
+      "duration": 1.191,
+      "text": "are"
+    },
+    {
+      "index": 692,
+      "start": 2282.28,
+      "end": 2288.589,
+      "duration": 6.309,
+      "text": "they I'm looking for the null"
+    },
+    {
+      "index": 693,
+      "start": 2291.39,
+      "end": 2291.4,
+      "duration": 0.01,
+      "text": "space okay so how do I"
+    },
+    {
+      "index": 694,
+      "start": 2291.4,
+      "end": 2294.15,
+      "duration": 2.75,
+      "text": "start I give the free"
+    },
+    {
+      "index": 695,
+      "start": 2294.16,
+      "end": 2298.03,
+      "duration": 3.87,
+      "text": "variable some convenient value and"
+    },
+    {
+      "index": 696,
+      "start": 2298.04,
+      "end": 2299.19,
+      "duration": 1.15,
+      "text": "what's"
+    },
+    {
+      "index": 697,
+      "start": 2299.2,
+      "end": 2303.71,
+      "duration": 4.51,
+      "text": "that I set it to one I set the free"
+    },
+    {
+      "index": 698,
+      "start": 2303.72,
+      "end": 2305.91,
+      "duration": 2.19,
+      "text": "variable to one if I set the free"
+    },
+    {
+      "index": 699,
+      "start": 2305.92,
+      "end": 2309.03,
+      "duration": 3.11,
+      "text": "variable to zero and solve for the pivot"
+    },
+    {
+      "index": 700,
+      "start": 2309.04,
+      "end": 2312.309,
+      "duration": 3.269,
+      "text": "variables I'll get all zeros no"
+    },
+    {
+      "index": 701,
+      "start": 2312.319,
+      "end": 2314.51,
+      "duration": 2.191,
+      "text": "progress but by setting the free"
+    },
+    {
+      "index": 702,
+      "start": 2314.52,
+      "end": 2318.069,
+      "duration": 3.549,
+      "text": "variable to one you see my two equations"
+    },
+    {
+      "index": 703,
+      "start": 2318.079,
+      "end": 2322.27,
+      "duration": 4.191,
+      "text": "now are shall I my equations are X1 +"
+    },
+    {
+      "index": 704,
+      "start": 2322.28,
+      "end": 2327.109,
+      "duration": 4.829,
+      "text": "2x2 + 3x3 is z that's my first equation"
+    },
+    {
+      "index": 705,
+      "start": 2327.119,
+      "end": 2331.03,
+      "duration": 3.911,
+      "text": "and my second equation is now 2x2 + 2x3"
+    },
+    {
+      "index": 706,
+      "start": 2331.04,
+      "end": 2332.87,
+      "duration": 1.83,
+      "text": "="
+    },
+    {
+      "index": 707,
+      "start": 2332.88,
+      "end": 2339.15,
+      "duration": 6.27,
+      "text": "0 and uh okay so if X3 is 1 then X2"
+    },
+    {
+      "index": 708,
+      "start": 2339.16,
+      "end": 2341.55,
+      "duration": 2.39,
+      "text": "is"
+    },
+    {
+      "index": 709,
+      "start": 2341.56,
+      "end": 2346.309,
+      "duration": 4.749,
+      "text": "minus1 and if X3 is 1 and X2 is min -1"
+    },
+    {
+      "index": 710,
+      "start": 2346.319,
+      "end": 2351.069,
+      "duration": 4.75,
+      "text": "then maybe X1 is"
+    },
+    {
+      "index": 711,
+      "start": 2353.99,
+      "end": 2354.0,
+      "duration": 0.01,
+      "text": "minus1 and actually I go back to check"
+    },
+    {
+      "index": 712,
+      "start": 2354.0,
+      "end": 2355.79,
+      "duration": 1.79,
+      "text": "now I don't"
+    },
+    {
+      "index": 713,
+      "start": 2355.8,
+      "end": 2358.79,
+      "duration": 2.99,
+      "text": "like I I did I did a quick calculation"
+    },
+    {
+      "index": 714,
+      "start": 2358.8,
+      "end": 2361.63,
+      "duration": 2.83,
+      "text": "mentally can I mentally do a quick check"
+    },
+    {
+      "index": 715,
+      "start": 2361.64,
+      "end": 2364.99,
+      "duration": 3.35,
+      "text": "that Matrix that solution X says that"
+    },
+    {
+      "index": 716,
+      "start": 2365.0,
+      "end": 2368.23,
+      "duration": 3.23,
+      "text": "minus this column minus this column plus"
+    },
+    {
+      "index": 717,
+      "start": 2368.24,
+      "end": 2372.829,
+      "duration": 4.589,
+      "text": "this one is the zero column and it is"
+    },
+    {
+      "index": 718,
+      "start": 2372.839,
+      "end": 2375.51,
+      "duration": 2.671,
+      "text": "minus that minus that plus that is zero"
+    },
+    {
+      "index": 719,
+      "start": 2375.52,
+      "end": 2378.15,
+      "duration": 2.63,
+      "text": "so that's in the null space and now you"
+    },
+    {
+      "index": 720,
+      "start": 2378.16,
+      "end": 2379.79,
+      "duration": 1.63,
+      "text": "can tell me what else is in the null"
+    },
+    {
+      "index": 721,
+      "start": 2379.8,
+      "end": 2382.829,
+      "duration": 3.029,
+      "text": "space what's what's the whole null space"
+    },
+    {
+      "index": 722,
+      "start": 2382.839,
+      "end": 2387.109,
+      "duration": 4.27,
+      "text": "now it's I multiply by C right the whole"
+    },
+    {
+      "index": 723,
+      "start": 2387.119,
+      "end": 2390.67,
+      "duration": 3.551,
+      "text": "null space is a"
+    },
+    {
+      "index": 724,
+      "start": 2390.68,
+      "end": 2393.79,
+      "duration": 3.11,
+      "text": "line so that's the description if I ask"
+    },
+    {
+      "index": 725,
+      "start": 2393.8,
+      "end": 2397.829,
+      "duration": 4.029,
+      "text": "you on a homework or a quiz or the final"
+    },
+    {
+      "index": 726,
+      "start": 2397.839,
+      "end": 2401.069,
+      "duration": 3.23,
+      "text": "what give me describe tell me the null"
+    },
+    {
+      "index": 727,
+      "start": 2401.079,
+      "end": 2403.75,
+      "duration": 2.671,
+      "text": "space find the null space of this"
+    },
+    {
+      "index": 728,
+      "start": 2403.76,
+      "end": 2406.39,
+      "duration": 2.63,
+      "text": "Matrix you could take those"
+    },
+    {
+      "index": 729,
+      "start": 2406.4,
+      "end": 2409.75,
+      "duration": 3.35,
+      "text": "steps and that's the answer I'm looking"
+    },
+    {
+      "index": 730,
+      "start": 2409.76,
+      "end": 2413.63,
+      "duration": 3.87,
+      "text": "for and I'm looking for that c too"
+    },
+    {
+      "index": 731,
+      "start": 2413.64,
+      "end": 2415.87,
+      "duration": 2.23,
+      "text": "because that's telling me that you're"
+    },
+    {
+      "index": 732,
+      "start": 2415.88,
+      "end": 2418.069,
+      "duration": 2.189,
+      "text": "remembering that it's a whole space and"
+    },
+    {
+      "index": 733,
+      "start": 2418.079,
+      "end": 2419.63,
+      "duration": 1.551,
+      "text": "not just one"
+    },
+    {
+      "index": 734,
+      "start": 2419.64,
+      "end": 2422.829,
+      "duration": 3.189,
+      "text": "vector later I will ask you for a basis"
+    },
+    {
+      "index": 735,
+      "start": 2422.839,
+      "end": 2425.75,
+      "duration": 2.911,
+      "text": "for the null space then I just want this"
+    },
+    {
+      "index": 736,
+      "start": 2425.76,
+      "end": 2428.23,
+      "duration": 2.47,
+      "text": "Vector but if I ask for the whole null"
+    },
+    {
+      "index": 737,
+      "start": 2428.24,
+      "end": 2430.03,
+      "duration": 1.79,
+      "text": "space then there's the whole line"
+    },
+    {
+      "index": 738,
+      "start": 2430.04,
+      "end": 2433.589,
+      "duration": 3.549,
+      "text": "through that Vector okay now one more"
+    },
+    {
+      "index": 739,
+      "start": 2433.599,
+      "end": 2435.67,
+      "duration": 2.071,
+      "text": "natural thing to do with this example"
+    },
+    {
+      "index": 740,
+      "start": 2435.68,
+      "end": 2439.87,
+      "duration": 4.19,
+      "text": "right is keep going to"
+    },
+    {
+      "index": 741,
+      "start": 2439.88,
+      "end": 2444.55,
+      "duration": 4.67,
+      "text": "the the reduced Matrix R so can I push"
+    },
+    {
+      "index": 742,
+      "start": 2444.56,
+      "end": 2447.27,
+      "duration": 2.71,
+      "text": "onwards to r that should be quick but"
+    },
+    {
+      "index": 743,
+      "start": 2447.28,
+      "end": 2450.95,
+      "duration": 3.67,
+      "text": "let's just practice let me keep going to"
+    },
+    {
+      "index": 744,
+      "start": 2450.96,
+      "end": 2455.23,
+      "duration": 4.27,
+      "text": "R okay so what do I do here I subtract I"
+    },
+    {
+      "index": 745,
+      "start": 2455.24,
+      "end": 2457.829,
+      "duration": 2.589,
+      "text": "I want I clear out above the pivot so I"
+    },
+    {
+      "index": 746,
+      "start": 2457.839,
+      "end": 2461.51,
+      "duration": 3.671,
+      "text": "subtract that from that that's one1 is"
+    },
+    {
+      "index": 747,
+      "start": 2461.52,
+      "end": 2464.27,
+      "duration": 2.75,
+      "text": "left right when I subtracted this Row"
+    },
+    {
+      "index": 748,
+      "start": 2464.28,
+      "end": 2466.51,
+      "duration": 2.23,
+      "text": "from this it produces zero Above This"
+    },
+    {
+      "index": 749,
+      "start": 2466.52,
+      "end": 2471.109,
+      "duration": 4.589,
+      "text": "pivot and now I want that pivot to be a"
+    },
+    {
+      "index": 750,
+      "start": 2471.119,
+      "end": 2475.99,
+      "duration": 4.871,
+      "text": "one so for the r Matrix I'll divide this"
+    },
+    {
+      "index": 751,
+      "start": 2476.0,
+      "end": 2477.95,
+      "duration": 1.95,
+      "text": "equation by"
+    },
+    {
+      "index": 752,
+      "start": 2477.96,
+      "end": 2481.71,
+      "duration": 3.75,
+      "text": "two and of course these zero zeros are"
+    },
+    {
+      "index": 753,
+      "start": 2481.72,
+      "end": 2486.23,
+      "duration": 4.51,
+      "text": "great they don't change there's R that's"
+    },
+    {
+      "index": 754,
+      "start": 2486.24,
+      "end": 2489.43,
+      "duration": 3.19,
+      "text": "r you see what R is you see the identity"
+    },
+    {
+      "index": 755,
+      "start": 2489.44,
+      "end": 2491.03,
+      "duration": 1.59,
+      "text": "Matrix sitting up"
+    },
+    {
+      "index": 756,
+      "start": 2491.04,
+      "end": 2495.349,
+      "duration": 4.309,
+      "text": "here you see the Free Part F the F part"
+    },
+    {
+      "index": 757,
+      "start": 2495.359,
+      "end": 2498.91,
+      "duration": 3.551,
+      "text": "here and you see the zeros below this is"
+    },
+    {
+      "index": 758,
+      "start": 2498.92,
+      "end": 2501.589,
+      "duration": 2.669,
+      "text": "if F0"
+    },
+    {
+      "index": 759,
+      "start": 2501.599,
+      "end": 2504.19,
+      "duration": 2.591,
+      "text": "0 and what's the"
+    },
+    {
+      "index": 760,
+      "start": 2504.2,
+      "end": 2507.63,
+      "duration": 3.43,
+      "text": "X the X has the"
+    },
+    {
+      "index": 761,
+      "start": 2507.64,
+      "end": 2511.069,
+      "duration": 3.429,
+      "text": "identity well it's only a single number"
+    },
+    {
+      "index": 762,
+      "start": 2511.079,
+      "end": 2513.79,
+      "duration": 2.711,
+      "text": "one but it's the identity Matrix in the"
+    },
+    {
+      "index": 763,
+      "start": 2513.8,
+      "end": 2516.99,
+      "duration": 3.19,
+      "text": "free in the free part and what does it"
+    },
+    {
+      "index": 764,
+      "start": 2517.0,
+      "end": 2518.589,
+      "duration": 1.589,
+      "text": "have in"
+    },
+    {
+      "index": 765,
+      "start": 2518.599,
+      "end": 2521.43,
+      "duration": 2.831,
+      "text": "the pivot variables what did back"
+    },
+    {
+      "index": 766,
+      "start": 2521.44,
+      "end": 2525.79,
+      "duration": 4.35,
+      "text": "substitution give it gave minus these"
+    },
+    {
+      "index": 767,
+      "start": 2525.8,
+      "end": 2529.99,
+      "duration": 4.19,
+      "text": "guys you see that what this is is any"
+    },
+    {
+      "index": 768,
+      "start": 2530.0,
+      "end": 2532.55,
+      "duration": 2.55,
+      "text": "multiple of this is the identity there"
+    },
+    {
+      "index": 769,
+      "start": 2532.56,
+      "end": 2535.91,
+      "duration": 3.35,
+      "text": "and this is minus F"
+    },
+    {
+      "index": 770,
+      "start": 2535.92,
+      "end": 2539.75,
+      "duration": 3.83,
+      "text": "here that's our null space this is our"
+    },
+    {
+      "index": 771,
+      "start": 2539.76,
+      "end": 2541.95,
+      "duration": 2.19,
+      "text": "null space Matrix"
+    },
+    {
+      "index": 772,
+      "start": 2541.96,
+      "end": 2546.39,
+      "duration": 4.43,
+      "text": "n for this our our null space Matrix is"
+    },
+    {
+      "index": 773,
+      "start": 2546.4,
+      "end": 2549.589,
+      "duration": 3.189,
+      "text": "the guy whose columns are the special"
+    },
+    {
+      "index": 774,
+      "start": 2549.599,
+      "end": 2552.349,
+      "duration": 2.75,
+      "text": "Solutions so their free variables have"
+    },
+    {
+      "index": 775,
+      "start": 2552.359,
+      "end": 2556.27,
+      "duration": 3.911,
+      "text": "these special values one and"
+    },
+    {
+      "index": 776,
+      "start": 2556.28,
+      "end": 2559.71,
+      "duration": 3.43,
+      "text": "the pivot variables have minus F so do"
+    },
+    {
+      "index": 777,
+      "start": 2559.72,
+      "end": 2562.15,
+      "duration": 2.43,
+      "text": "you see the how the minus F just"
+    },
+    {
+      "index": 778,
+      "start": 2562.16,
+      "end": 2568.39,
+      "duration": 6.23,
+      "text": "automatically shows up in the special"
+    },
+    {
+      "index": 779,
+      "start": 2570.829,
+      "end": 2570.839,
+      "duration": 0.01,
+      "text": "Solutions that's it really I I don't"
+    },
+    {
+      "index": 780,
+      "start": 2570.839,
+      "end": 2572.87,
+      "duration": 2.031,
+      "text": "think there's anything more I can"
+    },
+    {
+      "index": 781,
+      "start": 2572.88,
+      "end": 2576.71,
+      "duration": 3.83,
+      "text": "say about ax equals z there's more I can"
+    },
+    {
+      "index": 782,
+      "start": 2576.72,
+      "end": 2579.39,
+      "duration": 2.67,
+      "text": "say about ax equal"
+    },
+    {
+      "index": 783,
+      "start": 2579.4,
+      "end": 2583.63,
+      "duration": 4.23,
+      "text": "B but that'll be uh Friday okay so"
+    },
+    {
+      "index": 784,
+      "start": 2583.64,
+      "end": 2588.359,
+      "duration": 4.719,
+      "text": "that's that's the null space thanks"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

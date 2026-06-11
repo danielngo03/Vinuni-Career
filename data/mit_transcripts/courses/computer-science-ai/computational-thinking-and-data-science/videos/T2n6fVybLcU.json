@@ -1,0 +1,8467 @@
+{
+  "video": {
+    "id": "T2n6fVybLcU",
+    "title": "2. Damped Free Oscillators",
+    "url": "https://www.youtube.com/watch?v=T2n6fVybLcU",
+    "channel": "MIT OpenCourseWare",
+    "duration": 4593,
+    "language": "en"
+  },
+  "segment_count": 1207,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.769,
+      "end": 2.779,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 2.779,
+      "end": 5.349,
+      "duration": 2.57,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 5.359,
+      "end": 7.57,
+      "duration": 2.211,
+      "text": "will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 7.58,
+      "end": 9.43,
+      "duration": 1.85,
+      "text": "offer high quality educational resources"
+    },
+    {
+      "index": 4,
+      "start": 9.44,
+      "end": 10.509,
+      "duration": 1.069,
+      "text": "for free"
+    },
+    {
+      "index": 5,
+      "start": 10.519,
+      "end": 12.7,
+      "duration": 2.181,
+      "text": "to make a donation or to view additional"
+    },
+    {
+      "index": 6,
+      "start": 12.71,
+      "end": 14.74,
+      "duration": 2.03,
+      "text": "materials from hundreds of MIT courses"
+    },
+    {
+      "index": 7,
+      "start": 14.75,
+      "end": 21.5,
+      "duration": 6.75,
+      "text": "visit MIT opencourseware at ocw.mit.edu"
+    },
+    {
+      "index": 8,
+      "start": 26.249,
+      "end": 26.259,
+      "duration": 0.01,
+      "text": "okay so welcome back everybody we'll"
+    },
+    {
+      "index": 9,
+      "start": 26.259,
+      "end": 31.64,
+      "duration": 5.381,
+      "text": "come back to a o3 today we are going to"
+    },
+    {
+      "index": 10,
+      "start": 31.65,
+      "end": 34.11,
+      "duration": 2.46,
+      "text": "continue a discussion of the harmonic"
+    },
+    {
+      "index": 11,
+      "start": 34.12,
+      "end": 38.04,
+      "duration": 3.92,
+      "text": "oscillators and also we will add 10 p.m."
+    },
+    {
+      "index": 12,
+      "start": 38.05,
+      "end": 40.11,
+      "duration": 2.06,
+      "text": "force into the game and see what will"
+    },
+    {
+      "index": 13,
+      "start": 40.12,
+      "end": 43.47,
+      "duration": 3.35,
+      "text": "happen okay so this essentially what we"
+    },
+    {
+      "index": 14,
+      "start": 43.48,
+      "end": 45.979,
+      "duration": 2.499,
+      "text": "have learned that time from this slide"
+    },
+    {
+      "index": 15,
+      "start": 45.989,
+      "end": 49.619,
+      "duration": 3.63,
+      "text": "we have analyzed the physics of a"
+    },
+    {
+      "index": 16,
+      "start": 49.629,
+      "end": 52.14,
+      "duration": 2.511,
+      "text": "harmonic oscillator so which we actually"
+    },
+    {
+      "index": 17,
+      "start": 52.15,
+      "end": 54.149,
+      "duration": 1.999,
+      "text": "demonstrated last time and you can see"
+    },
+    {
+      "index": 18,
+      "start": 54.159,
+      "end": 57.35,
+      "duration": 3.191,
+      "text": "the device still there and Hookes law"
+    },
+    {
+      "index": 19,
+      "start": 57.36,
+      "end": 61.35,
+      "duration": 3.99,
+      "text": "actually Hookes law is actually far more"
+    },
+    {
+      "index": 20,
+      "start": 61.36,
+      "end": 64.619,
+      "duration": 3.259,
+      "text": "general than what we saw before it works"
+    },
+    {
+      "index": 21,
+      "start": 64.629,
+      "end": 70.289,
+      "duration": 5.66,
+      "text": "for all small oscillations run about a"
+    },
+    {
+      "index": 22,
+      "start": 70.299,
+      "end": 76.249,
+      "duration": 5.95,
+      "text": "point of equilibrium position okay and"
+    },
+    {
+      "index": 23,
+      "start": 76.259,
+      "end": 79.789,
+      "duration": 3.53,
+      "text": "that is it can be demonstrated by"
+    },
+    {
+      "index": 24,
+      "start": 79.799,
+      "end": 82.83,
+      "duration": 3.031,
+      "text": "multiple different kind of physical"
+    },
+    {
+      "index": 25,
+      "start": 82.84,
+      "end": 87.359,
+      "duration": 4.519,
+      "text": "systems for example here I have a mass"
+    },
+    {
+      "index": 26,
+      "start": 87.369,
+      "end": 90.899,
+      "duration": 3.53,
+      "text": "which essentially can only move along"
+    },
+    {
+      "index": 27,
+      "start": 90.909,
+      "end": 93.749,
+      "duration": 2.84,
+      "text": "this track here and if I put these maths"
+    },
+    {
+      "index": 28,
+      "start": 93.759,
+      "end": 96.95,
+      "duration": 3.191,
+      "text": "set free and this thing is actually"
+    },
+    {
+      "index": 29,
+      "start": 96.96,
+      "end": 102.33,
+      "duration": 5.37,
+      "text": "exercising harmonic oscillation okay we"
+    },
+    {
+      "index": 30,
+      "start": 102.34,
+      "end": 104.76,
+      "duration": 2.42,
+      "text": "can do this with large amplitude with"
+    },
+    {
+      "index": 31,
+      "start": 104.77,
+      "end": 106.98,
+      "duration": 2.21,
+      "text": "and also to it with small amplitude and"
+    },
+    {
+      "index": 32,
+      "start": 106.99,
+      "end": 110.849,
+      "duration": 3.859,
+      "text": "you see that hi pretty it works"
+    },
+    {
+      "index": 33,
+      "start": 110.859,
+      "end": 113.399,
+      "duration": 2.54,
+      "text": "Hookes law actually works and it"
+    },
+    {
+      "index": 34,
+      "start": 113.409,
+      "end": 116.849,
+      "duration": 3.44,
+      "text": "predicts exactly the same motion as what"
+    },
+    {
+      "index": 35,
+      "start": 116.859,
+      "end": 121.77,
+      "duration": 4.911,
+      "text": "you see on the slide okay and we also"
+    },
+    {
+      "index": 36,
+      "start": 121.78,
+      "end": 125.129,
+      "duration": 3.349,
+      "text": "have a little bit more complicated"
+    },
+    {
+      "index": 37,
+      "start": 125.139,
+      "end": 128.88,
+      "duration": 3.741,
+      "text": "system for example this is as your some"
+    },
+    {
+      "index": 38,
+      "start": 128.89,
+      "end": 131.07,
+      "duration": 2.18,
+      "text": "kind of rod and you can actually fixed"
+    },
+    {
+      "index": 39,
+      "start": 131.08,
+      "end": 134.16,
+      "duration": 3.08,
+      "text": "one point and make it oscillate and we"
+    },
+    {
+      "index": 40,
+      "start": 134.17,
+      "end": 137.99,
+      "duration": 3.82,
+      "text": "see that ha he also does some kind of"
+    },
+    {
+      "index": 41,
+      "start": 138.0,
+      "end": 141.27,
+      "duration": 3.27,
+      "text": "harmonic oscillation but now what is"
+    },
+    {
+      "index": 42,
+      "start": 141.28,
+      "end": 143.79,
+      "duration": 2.51,
+      "text": "actually that oscillating is the"
+    },
+    {
+      "index": 43,
+      "start": 143.8,
+      "end": 146.82,
+      "duration": 3.02,
+      "text": "amplitude the amplitude is actually the"
+    },
+    {
+      "index": 44,
+      "start": 146.83,
+      "end": 149.64,
+      "duration": 2.81,
+      "text": "angle with respect to the to a downward"
+    },
+    {
+      "index": 45,
+      "start": 149.65,
+      "end": 153.179,
+      "duration": 3.529,
+      "text": "direction and finally this is actually"
+    },
+    {
+      "index": 46,
+      "start": 153.189,
+      "end": 154.67,
+      "duration": 1.481,
+      "text": "up the Lebert"
+    },
+    {
+      "index": 47,
+      "start": 154.68,
+      "end": 157.179,
+      "duration": 2.499,
+      "text": "conversion of this spring-mass system"
+    },
+    {
+      "index": 48,
+      "start": 157.189,
+      "end": 160.91,
+      "duration": 3.721,
+      "text": "which will be analyzing data yo your"
+    },
+    {
+      "index": 49,
+      "start": 160.92,
+      "end": 163.339,
+      "duration": 2.419,
+      "text": "pset and you see that huh"
+    },
+    {
+      "index": 50,
+      "start": 163.349,
+      "end": 165.28,
+      "duration": 1.931,
+      "text": "you actually also they up and down"
+    },
+    {
+      "index": 51,
+      "start": 165.29,
+      "end": 170.259,
+      "duration": 4.969,
+      "text": "harmonically so that's all very nice and"
+    },
+    {
+      "index": 52,
+      "start": 170.269,
+      "end": 173.36,
+      "duration": 3.091,
+      "text": "we also have learned one thing which is"
+    },
+    {
+      "index": 53,
+      "start": 173.37,
+      "end": 176.539,
+      "duration": 3.169,
+      "text": "very very interesting is that complete a"
+    },
+    {
+      "index": 54,
+      "start": 176.549,
+      "end": 180.349,
+      "duration": 3.8,
+      "text": "complex exponential is actually a pretty"
+    },
+    {
+      "index": 55,
+      "start": 180.359,
+      "end": 182.39,
+      "duration": 2.031,
+      "text": "beautiful way to present the solution"
+    },
+    {
+      "index": 56,
+      "start": 182.4,
+      "end": 186.949,
+      "duration": 4.549,
+      "text": "and you se it works also in describing"
+    },
+    {
+      "index": 57,
+      "start": 186.959,
+      "end": 190.22,
+      "duration": 3.261,
+      "text": "the temped oscillators and we will we"
+    },
+    {
+      "index": 58,
+      "start": 190.23,
+      "end": 193.759,
+      "duration": 3.529,
+      "text": "will see how it works in the lecture"
+    },
+    {
+      "index": 59,
+      "start": 193.769,
+      "end": 197.869,
+      "duration": 4.1,
+      "text": "today I'd receive several questions"
+    },
+    {
+      "index": 60,
+      "start": 197.879,
+      "end": 200.569,
+      "duration": 2.69,
+      "text": "during my office hour and and through"
+    },
+    {
+      "index": 61,
+      "start": 200.579,
+      "end": 203.179,
+      "duration": 2.6,
+      "text": "email or Piazza there were some"
+    },
+    {
+      "index": 62,
+      "start": 203.189,
+      "end": 207.409,
+      "duration": 4.22,
+      "text": "confusions about doing a Taylor"
+    },
+    {
+      "index": 63,
+      "start": 207.419,
+      "end": 210.679,
+      "duration": 3.26,
+      "text": "expansion okay so in in the lecture last"
+    },
+    {
+      "index": 64,
+      "start": 210.689,
+      "end": 214.039,
+      "duration": 3.35,
+      "text": "time the equilibrium position is at X"
+    },
+    {
+      "index": 65,
+      "start": 214.049,
+      "end": 217.49,
+      "duration": 3.441,
+      "text": "equal to zero therefore I do Taylor"
+    },
+    {
+      "index": 66,
+      "start": 217.5,
+      "end": 221.449,
+      "duration": 3.949,
+      "text": "expansion around 0 okay but in this case"
+    },
+    {
+      "index": 67,
+      "start": 221.459,
+      "end": 224.539,
+      "duration": 3.08,
+      "text": "if the equilibrium position or the"
+    },
+    {
+      "index": 68,
+      "start": 224.549,
+      "end": 228.17,
+      "duration": 3.621,
+      "text": "minimum of the potential is at X equal"
+    },
+    {
+      "index": 69,
+      "start": 228.18,
+      "end": 232.58,
+      "duration": 4.4,
+      "text": "to L then what you need to do is to do a"
+    },
+    {
+      "index": 70,
+      "start": 232.59,
+      "end": 235.52,
+      "duration": 2.93,
+      "text": "Taylor expansion around X equal to L"
+    },
+    {
+      "index": 71,
+      "start": 235.53,
+      "end": 237.89,
+      "duration": 2.36,
+      "text": "okay just to make that really really"
+    },
+    {
+      "index": 72,
+      "start": 237.9,
+      "end": 238.28,
+      "duration": 0.38,
+      "text": "clear"
+    },
+    {
+      "index": 73,
+      "start": 238.29,
+      "end": 240.979,
+      "duration": 2.689,
+      "text": "okay okay I hope that will help you with"
+    },
+    {
+      "index": 74,
+      "start": 240.989,
+      "end": 245.36,
+      "duration": 4.371,
+      "text": "the pset question okay so that's get"
+    },
+    {
+      "index": 75,
+      "start": 245.37,
+      "end": 247.729,
+      "duration": 2.359,
+      "text": "started immediately so let's continue"
+    },
+    {
+      "index": 76,
+      "start": 247.739,
+      "end": 252.11,
+      "duration": 4.371,
+      "text": "the discussion of the equation of motion"
+    },
+    {
+      "index": 77,
+      "start": 252.12,
+      "end": 255.31,
+      "duration": 3.19,
+      "text": "we arrived last time so we have n X"
+    },
+    {
+      "index": 78,
+      "start": 255.32,
+      "end": 259.55,
+      "duration": 4.23,
+      "text": "double dot and this is equal to minus K"
+    },
+    {
+      "index": 79,
+      "start": 259.56,
+      "end": 262.67,
+      "duration": 3.11,
+      "text": "X okay that's this issue the formula"
+    },
+    {
+      "index": 80,
+      "start": 262.68,
+      "end": 264.89,
+      "duration": 2.21,
+      "text": "from last time and we can actually"
+    },
+    {
+      "index": 81,
+      "start": 264.9,
+      "end": 271.93,
+      "duration": 7.03,
+      "text": "calculate the kinetic energy"
+    },
+    {
+      "index": 82,
+      "start": 277.58,
+      "end": 277.59,
+      "duration": 0.01,
+      "text": "of this spring-mass system and basically"
+    },
+    {
+      "index": 83,
+      "start": 277.59,
+      "end": 280.49,
+      "duration": 2.9,
+      "text": "we will arrive this is going to be equal"
+    },
+    {
+      "index": 84,
+      "start": 280.5,
+      "end": 289.61,
+      "duration": 9.11,
+      "text": "to 1 1 / 2 and times X dot square okay"
+    },
+    {
+      "index": 85,
+      "start": 289.62,
+      "end": 292.22,
+      "duration": 2.6,
+      "text": "and we can also calculate the potential"
+    },
+    {
+      "index": 86,
+      "start": 292.23,
+      "end": 294.1,
+      "duration": 1.87,
+      "text": "energy of with the of the spring"
+    },
+    {
+      "index": 87,
+      "start": 294.11,
+      "end": 303.46,
+      "duration": 9.35,
+      "text": "potential energy and that is equal to"
+    },
+    {
+      "index": 88,
+      "start": 303.47,
+      "end": 311.42,
+      "duration": 7.95,
+      "text": "1/2 K x squared we also know what would"
+    },
+    {
+      "index": 89,
+      "start": 311.43,
+      "end": 314.05,
+      "duration": 2.62,
+      "text": "be the total energy the total energy"
+    },
+    {
+      "index": 90,
+      "start": 314.06,
+      "end": 317.96,
+      "duration": 3.9,
+      "text": "will be a sum of the kinetic energy and"
+    },
+    {
+      "index": 91,
+      "start": 317.97,
+      "end": 321.59,
+      "duration": 3.62,
+      "text": "the potential basically you get this"
+    },
+    {
+      "index": 92,
+      "start": 321.6,
+      "end": 327.19,
+      "duration": 5.59,
+      "text": "formula one half and X dot squared plus"
+    },
+    {
+      "index": 93,
+      "start": 327.2,
+      "end": 333.83,
+      "duration": 6.63,
+      "text": "one-half KX squared for last time we"
+    },
+    {
+      "index": 94,
+      "start": 333.84,
+      "end": 335.54,
+      "duration": 1.7,
+      "text": "have solved this equation of motion"
+    },
+    {
+      "index": 95,
+      "start": 335.55,
+      "end": 340.66,
+      "duration": 5.11,
+      "text": "right so that the solution we got is X"
+    },
+    {
+      "index": 96,
+      "start": 340.67,
+      "end": 348.58,
+      "duration": 7.91,
+      "text": "equal to a cosine Omega 0 T plus Phi"
+    },
+    {
+      "index": 97,
+      "start": 348.59,
+      "end": 352.58,
+      "duration": 3.99,
+      "text": "while Omega zero is equal to square root"
+    },
+    {
+      "index": 98,
+      "start": 352.59,
+      "end": 359.42,
+      "duration": 6.83,
+      "text": "of K over m therefore we can actually"
+    },
+    {
+      "index": 99,
+      "start": 359.43,
+      "end": 362.72,
+      "duration": 3.29,
+      "text": "calculate what would be the total energy"
+    },
+    {
+      "index": 100,
+      "start": 362.73,
+      "end": 365.99,
+      "duration": 3.26,
+      "text": "as a function of time right so if we"
+    },
+    {
+      "index": 101,
+      "start": 366.0,
+      "end": 368.6,
+      "duration": 2.6,
+      "text": "calculate that you'll get e will be"
+    },
+    {
+      "index": 102,
+      "start": 368.61,
+      "end": 375.83,
+      "duration": 7.22,
+      "text": "equal to n over 2 n is square Omega 0"
+    },
+    {
+      "index": 103,
+      "start": 375.84,
+      "end": 381.94,
+      "duration": 6.1,
+      "text": "square sine squared Omega 0 T plus Phi"
+    },
+    {
+      "index": 104,
+      "start": 381.95,
+      "end": 384.83,
+      "duration": 2.88,
+      "text": "so this is actually the first time ok"
+    },
+    {
+      "index": 105,
+      "start": 384.84,
+      "end": 391.78,
+      "duration": 6.94,
+      "text": "here plus 1 over 2k a squared cosine"
+    },
+    {
+      "index": 106,
+      "start": 391.79,
+      "end": 397.49,
+      "duration": 5.7,
+      "text": "squared Omega 0 T plus Phi ok"
+    },
+    {
+      "index": 107,
+      "start": 397.5,
+      "end": 401.06,
+      "duration": 3.56,
+      "text": "and we also know that this this turn"
+    },
+    {
+      "index": 108,
+      "start": 401.07,
+      "end": 404.65,
+      "duration": 3.58,
+      "text": "this issue a coefficient here is just"
+    },
+    {
+      "index": 109,
+      "start": 404.66,
+      "end": 407.62,
+      "duration": 2.96,
+      "text": "ka square right because Omega zero is"
+    },
+    {
+      "index": 110,
+      "start": 407.63,
+      "end": 410.83,
+      "duration": 3.2,
+      "text": "actually equal to square root of K over"
+    },
+    {
+      "index": 111,
+      "start": 410.84,
+      "end": 414.55,
+      "duration": 3.71,
+      "text": "m and if you replace this Omega 0 square"
+    },
+    {
+      "index": 112,
+      "start": 414.56,
+      "end": 418.93,
+      "duration": 4.37,
+      "text": "by by ko and then you actually arrive K"
+    },
+    {
+      "index": 113,
+      "start": 418.94,
+      "end": 422.05,
+      "duration": 3.11,
+      "text": "a square okay so that is actually very"
+    },
+    {
+      "index": 114,
+      "start": 422.06,
+      "end": 424.93,
+      "duration": 2.87,
+      "text": "good so that means I can simplify the"
+    },
+    {
+      "index": 115,
+      "start": 424.94,
+      "end": 427.36,
+      "duration": 2.42,
+      "text": "total energy and what we are going to"
+    },
+    {
+      "index": 116,
+      "start": 427.37,
+      "end": 432.1,
+      "duration": 4.73,
+      "text": "get is 1 over 2 ka square I can take"
+    },
+    {
+      "index": 117,
+      "start": 432.11,
+      "end": 435.19,
+      "duration": 3.08,
+      "text": "this factor out and that will give me"
+    },
+    {
+      "index": 118,
+      "start": 435.2,
+      "end": 438.46,
+      "duration": 3.26,
+      "text": "inside this bracket I will get sine"
+    },
+    {
+      "index": 119,
+      "start": 438.47,
+      "end": 444.91,
+      "duration": 6.44,
+      "text": "square Omega 0 T plus Phi plus cosine"
+    },
+    {
+      "index": 120,
+      "start": 444.92,
+      "end": 450.88,
+      "duration": 5.96,
+      "text": "square Omega 0 T plus Phi and this is"
+    },
+    {
+      "index": 121,
+      "start": 450.89,
+      "end": 455.62,
+      "duration": 4.73,
+      "text": "actually equal to 1 right just a"
+    },
+    {
+      "index": 122,
+      "start": 455.63,
+      "end": 458.17,
+      "duration": 2.54,
+      "text": "reminder sine squared theta plus cosine"
+    },
+    {
+      "index": 123,
+      "start": 458.18,
+      "end": 462.1,
+      "duration": 3.92,
+      "text": "square theta is always equal to 1 so"
+    },
+    {
+      "index": 124,
+      "start": 462.11,
+      "end": 464.92,
+      "duration": 2.81,
+      "text": "that give me this result this is a 1"
+    },
+    {
+      "index": 125,
+      "start": 464.93,
+      "end": 466.69,
+      "duration": 1.76,
+      "text": "over 2k"
+    },
+    {
+      "index": 126,
+      "start": 466.7,
+      "end": 472.48,
+      "duration": 5.78,
+      "text": "a square ok so that is actually the"
+    },
+    {
+      "index": 127,
+      "start": 472.49,
+      "end": 476.77,
+      "duration": 4.28,
+      "text": "result what does that mean that means if"
+    },
+    {
+      "index": 128,
+      "start": 476.78,
+      "end": 483.909,
+      "duration": 7.129,
+      "text": "I actually put this mass harder okay so"
+    },
+    {
+      "index": 129,
+      "start": 483.919,
+      "end": 487.74,
+      "duration": 3.821,
+      "text": "that the initial de has larger amplitude"
+    },
+    {
+      "index": 130,
+      "start": 487.75,
+      "end": 490.87,
+      "duration": 3.12,
+      "text": "then the total energy is actually"
+    },
+    {
+      "index": 131,
+      "start": 490.88,
+      "end": 494.11,
+      "duration": 3.23,
+      "text": "proportional to amplitude squared okay"
+    },
+    {
+      "index": 132,
+      "start": 494.12,
+      "end": 497.62,
+      "duration": 3.5,
+      "text": "so I am storing more and more energy if"
+    },
+    {
+      "index": 133,
+      "start": 497.63,
+      "end": 499.72,
+      "duration": 2.09,
+      "text": "I increase the temperature increase the"
+    },
+    {
+      "index": 134,
+      "start": 499.73,
+      "end": 503.35,
+      "duration": 3.62,
+      "text": "amplitude even more than I'm storing the"
+    },
+    {
+      "index": 135,
+      "start": 503.36,
+      "end": 505.78,
+      "duration": 2.42,
+      "text": "energy in this system and it's"
+    },
+    {
+      "index": 136,
+      "start": 505.79,
+      "end": 508.96,
+      "duration": 3.17,
+      "text": "proportional to a square and also if the"
+    },
+    {
+      "index": 137,
+      "start": 508.97,
+      "end": 511.72,
+      "duration": 2.75,
+      "text": "spring constant is larger the same"
+    },
+    {
+      "index": 138,
+      "start": 511.73,
+      "end": 515.2,
+      "duration": 3.47,
+      "text": "amplitude will give you more energy so"
+    },
+    {
+      "index": 139,
+      "start": 515.21,
+      "end": 517.209,
+      "duration": 1.999,
+      "text": "that means you can store more energy if"
+    },
+    {
+      "index": 140,
+      "start": 517.219,
+      "end": 520.99,
+      "duration": 3.771,
+      "text": "you have larger spring constant okay the"
+    },
+    {
+      "index": 141,
+      "start": 521.0,
+      "end": 524.05,
+      "duration": 3.05,
+      "text": "most surprising thing is that actually"
+    },
+    {
+      "index": 142,
+      "start": 524.06,
+      "end": 529.12,
+      "duration": 5.06,
+      "text": "this is actually a constant right what"
+    },
+    {
+      "index": 143,
+      "start": 529.13,
+      "end": 532.18,
+      "duration": 3.05,
+      "text": "does that mean the total energy is"
+    },
+    {
+      "index": 144,
+      "start": 532.19,
+      "end": 535.06,
+      "duration": 2.87,
+      "text": "actually not varying as a function of"
+    },
+    {
+      "index": 145,
+      "start": 535.07,
+      "end": 537.67,
+      "duration": 2.6,
+      "text": "time you see so total energy is"
+    },
+    {
+      "index": 146,
+      "start": 537.68,
+      "end": 538.42,
+      "duration": 0.74,
+      "text": "conserved"
+    },
+    {
+      "index": 147,
+      "start": 538.43,
+      "end": 543.64,
+      "duration": 5.21,
+      "text": "okay so you can see from this slide the"
+    },
+    {
+      "index": 148,
+      "start": 543.65,
+      "end": 546.88,
+      "duration": 3.23,
+      "text": "total energy is actually shown as the"
+    },
+    {
+      "index": 149,
+      "start": 546.89,
+      "end": 550.93,
+      "duration": 4.04,
+      "text": "sum which is the green curve and the"
+    },
+    {
+      "index": 150,
+      "start": 550.94,
+      "end": 552.73,
+      "duration": 1.79,
+      "text": "kinetic energy and potential energy are"
+    },
+    {
+      "index": 151,
+      "start": 552.74,
+      "end": 556.99,
+      "duration": 4.25,
+      "text": "shown as red and blue curves you can see"
+    },
+    {
+      "index": 152,
+      "start": 557.0,
+      "end": 560.32,
+      "duration": 3.32,
+      "text": "that they are energy the total energy is"
+    },
+    {
+      "index": 153,
+      "start": 560.33,
+      "end": 563.11,
+      "duration": 2.78,
+      "text": "actually constant but this system is"
+    },
+    {
+      "index": 154,
+      "start": 563.12,
+      "end": 566.26,
+      "duration": 3.14,
+      "text": "very diamonique oh you see so the energy"
+    },
+    {
+      "index": 155,
+      "start": 566.27,
+      "end": 570.87,
+      "duration": 4.6,
+      "text": "is actually going back and forth between"
+    },
+    {
+      "index": 156,
+      "start": 570.88,
+      "end": 575.89,
+      "duration": 5.01,
+      "text": "the spring and a mass okay in the form"
+    },
+    {
+      "index": 157,
+      "start": 575.9,
+      "end": 579.04,
+      "duration": 3.14,
+      "text": "of kinetic energy and in the form of"
+    },
+    {
+      "index": 158,
+      "start": 579.05,
+      "end": 580.87,
+      "duration": 1.82,
+      "text": "potential energy but they are doing this"
+    },
+    {
+      "index": 159,
+      "start": 580.88,
+      "end": 585.22,
+      "duration": 4.34,
+      "text": "so well such that the sum is actually a"
+    },
+    {
+      "index": 160,
+      "start": 585.23,
+      "end": 589.27,
+      "duration": 4.04,
+      "text": "constant so energy is conserved okay so"
+    },
+    {
+      "index": 161,
+      "start": 589.28,
+      "end": 591.99,
+      "duration": 2.71,
+      "text": "that is actually pretty beautiful and"
+    },
+    {
+      "index": 162,
+      "start": 592.0,
+      "end": 597.04,
+      "duration": 5.04,
+      "text": "and can be described by very well about"
+    },
+    {
+      "index": 163,
+      "start": 597.05,
+      "end": 602.52,
+      "duration": 5.47,
+      "text": "this mathematics any questions from here"
+    },
+    {
+      "index": 164,
+      "start": 605.95,
+      "end": 605.96,
+      "duration": 0.01,
+      "text": "okay so I would like to say simple"
+    },
+    {
+      "index": 165,
+      "start": 605.96,
+      "end": 608.11,
+      "duration": 2.15,
+      "text": "harmonic motion actually what you are"
+    },
+    {
+      "index": 166,
+      "start": 608.12,
+      "end": 610.63,
+      "duration": 2.51,
+      "text": "going to get is the energy is as you can"
+    },
+    {
+      "index": 167,
+      "start": 610.64,
+      "end": 612.94,
+      "duration": 2.3,
+      "text": "serve and independent that time and"
+    },
+    {
+      "index": 168,
+      "start": 612.95,
+      "end": 615.79,
+      "duration": 2.84,
+      "text": "later you will see an example with"
+    },
+    {
+      "index": 169,
+      "start": 615.8,
+      "end": 619.21,
+      "duration": 3.41,
+      "text": "stamping and you will see that energy"
+    },
+    {
+      "index": 170,
+      "start": 619.22,
+      "end": 621.31,
+      "duration": 2.09,
+      "text": "conservation is no longer the case"
+    },
+    {
+      "index": 171,
+      "start": 621.32,
+      "end": 625.54,
+      "duration": 4.22,
+      "text": "okay so that's immediately jump to"
+    },
+    {
+      "index": 172,
+      "start": 625.55,
+      "end": 629.19,
+      "duration": 3.64,
+      "text": "another example which is a should be"
+    },
+    {
+      "index": 173,
+      "start": 629.2,
+      "end": 632.29,
+      "duration": 3.09,
+      "text": "involving simple harmonic motion so"
+    },
+    {
+      "index": 174,
+      "start": 632.3,
+      "end": 638.38,
+      "duration": 6.08,
+      "text": "let's take this rod and a nail system as"
+    },
+    {
+      "index": 175,
+      "start": 638.39,
+      "end": 641.92,
+      "duration": 3.53,
+      "text": "an example if I actually slightly move"
+    },
+    {
+      "index": 176,
+      "start": 641.93,
+      "end": 646.75,
+      "duration": 4.82,
+      "text": "this rod and then I release that then it"
+    },
+    {
+      "index": 177,
+      "start": 646.76,
+      "end": 651.25,
+      "duration": 4.49,
+      "text": "was actually us see a simple harmonic"
+    },
+    {
+      "index": 178,
+      "start": 651.26,
+      "end": 654.22,
+      "duration": 2.96,
+      "text": "motion okay also consistent so that's"
+    },
+    {
+      "index": 179,
+      "start": 654.23,
+      "end": 657.55,
+      "duration": 3.32,
+      "text": "actually do the calculation as another"
+    },
+    {
+      "index": 180,
+      "start": 657.56,
+      "end": 661.33,
+      "duration": 3.77,
+      "text": "example so this is actually my system I"
+    },
+    {
+      "index": 181,
+      "start": 661.34,
+      "end": 665.71,
+      "duration": 4.37,
+      "text": "have this rod okay now I assume that"
+    },
+    {
+      "index": 182,
+      "start": 665.72,
+      "end": 668.59,
+      "duration": 2.87,
+      "text": "that the mass is uniformly distributed"
+    },
+    {
+      "index": 183,
+      "start": 668.6,
+      "end": 672.58,
+      "duration": 3.98,
+      "text": "and this rod and the snail down the war"
+    },
+    {
+      "index": 184,
+      "start": 672.59,
+      "end": 677.71,
+      "duration": 5.12,
+      "text": "okay and the length of this rod is that"
+    },
+    {
+      "index": 185,
+      "start": 677.72,
+      "end": 680.74,
+      "duration": 3.02,
+      "text": "you the L so that means the center of"
+    },
+    {
+      "index": 186,
+      "start": 680.75,
+      "end": 684.46,
+      "duration": 3.71,
+      "text": "mass is actually at L over 2 with"
+    },
+    {
+      "index": 187,
+      "start": 684.47,
+      "end": 687.3,
+      "duration": 2.83,
+      "text": "respect to the nail okay"
+    },
+    {
+      "index": 188,
+      "start": 687.31,
+      "end": 693.0,
+      "duration": 5.69,
+      "text": "and also this whole system is set up and"
+    },
+    {
+      "index": 189,
+      "start": 693.01,
+      "end": 696.21,
+      "duration": 3.2,
+      "text": "on earth right therefore there will be"
+    },
+    {
+      "index": 190,
+      "start": 696.22,
+      "end": 698.65,
+      "duration": 2.43,
+      "text": "gravitational force pointing downward"
+    },
+    {
+      "index": 191,
+      "start": 698.66,
+      "end": 703.06,
+      "duration": 4.4,
+      "text": "okay so that means you have rotational"
+    },
+    {
+      "index": 192,
+      "start": 703.07,
+      "end": 708.94,
+      "duration": 5.87,
+      "text": "force FG pointing downward okay so this"
+    },
+    {
+      "index": 193,
+      "start": 708.95,
+      "end": 711.7,
+      "duration": 2.75,
+      "text": "is actually the system which I would"
+    },
+    {
+      "index": 194,
+      "start": 711.71,
+      "end": 714.43,
+      "duration": 2.72,
+      "text": "like to understand and that just a"
+    },
+    {
+      "index": 195,
+      "start": 714.44,
+      "end": 716.17,
+      "duration": 1.73,
+      "text": "reminder what that we're going to do"
+    },
+    {
+      "index": 196,
+      "start": 716.18,
+      "end": 719.5,
+      "duration": 3.32,
+      "text": "afterwards in order to turn the whole"
+    },
+    {
+      "index": 197,
+      "start": 719.51,
+      "end": 721.81,
+      "duration": 2.3,
+      "text": "system into a language we will now"
+    },
+    {
+      "index": 198,
+      "start": 721.82,
+      "end": 724.48,
+      "duration": 2.66,
+      "text": "describe the nature what is going to why"
+    },
+    {
+      "index": 199,
+      "start": 724.49,
+      "end": 732.49,
+      "duration": 8.0,
+      "text": "we're going to do anybody we are going"
+    },
+    {
+      "index": 200,
+      "start": 732.5,
+      "end": 737.11,
+      "duration": 4.61,
+      "text": "to define the coordinate system right so"
+    },
+    {
+      "index": 201,
+      "start": 737.12,
+      "end": 739.95,
+      "duration": 2.83,
+      "text": "that I can translate everything into"
+    },
+    {
+      "index": 202,
+      "start": 739.96,
+      "end": 742.18,
+      "duration": 2.22,
+      "text": "mathematics right so that's actually"
+    },
+    {
+      "index": 203,
+      "start": 742.19,
+      "end": 744.79,
+      "duration": 2.6,
+      "text": "what we are always doing and you will"
+    },
+    {
+      "index": 204,
+      "start": 744.8,
+      "end": 748.12,
+      "duration": 3.32,
+      "text": "see that we are always doing this in"
+    },
+    {
+      "index": 205,
+      "start": 748.13,
+      "end": 752.65,
+      "duration": 4.52,
+      "text": "this class okay so how what is actually"
+    },
+    {
+      "index": 206,
+      "start": 752.66,
+      "end": 754.45,
+      "duration": 1.79,
+      "text": "the coordinate system which I would like"
+    },
+    {
+      "index": 207,
+      "start": 754.46,
+      "end": 757.69,
+      "duration": 3.23,
+      "text": "to use since this system is going to be"
+    },
+    {
+      "index": 208,
+      "start": 757.7,
+      "end": 761.89,
+      "duration": 4.19,
+      "text": "rotating back and forth okay therefore I"
+    },
+    {
+      "index": 209,
+      "start": 761.9,
+      "end": 767.05,
+      "duration": 5.15,
+      "text": "would like to define theta to be the"
+    },
+    {
+      "index": 210,
+      "start": 767.06,
+      "end": 771.25,
+      "duration": 4.19,
+      "text": "angle with respect to axis which is"
+    },
+    {
+      "index": 211,
+      "start": 771.26,
+      "end": 774.55,
+      "duration": 3.29,
+      "text": "actually pointing downward okay so the"
+    },
+    {
+      "index": 212,
+      "start": 774.56,
+      "end": 779.23,
+      "duration": 4.67,
+      "text": "origin of this coordinate system is"
+    },
+    {
+      "index": 213,
+      "start": 779.24,
+      "end": 783.22,
+      "duration": 3.98,
+      "text": "theta equal to zero this means that I'm"
+    },
+    {
+      "index": 214,
+      "start": 783.23,
+      "end": 786.97,
+      "duration": 3.74,
+      "text": "pointing that okay that's rad is a ship"
+    },
+    {
+      "index": 215,
+      "start": 786.98,
+      "end": 794.32,
+      "duration": 7.34,
+      "text": "pointing tango okay and also I need to"
+    },
+    {
+      "index": 216,
+      "start": 794.33,
+      "end": 797.85,
+      "duration": 3.52,
+      "text": "define what is actually the positive"
+    },
+    {
+      "index": 217,
+      "start": 797.86,
+      "end": 800.68,
+      "duration": 2.82,
+      "text": "what is actually the positive value of"
+    },
+    {
+      "index": 218,
+      "start": 800.69,
+      "end": 801.79,
+      "duration": 1.1,
+      "text": "the theta right"
+    },
+    {
+      "index": 219,
+      "start": 801.8,
+      "end": 806.02,
+      "duration": 4.22,
+      "text": "so I define anti-clockwise direction"
+    },
+    {
+      "index": 220,
+      "start": 806.03,
+      "end": 809.23,
+      "duration": 3.2,
+      "text": "to be positive okay so it is actually"
+    },
+    {
+      "index": 221,
+      "start": 809.24,
+      "end": 811.66,
+      "duration": 2.42,
+      "text": "important to say to h we first defined"
+    },
+    {
+      "index": 222,
+      "start": 811.67,
+      "end": 814.9,
+      "duration": 3.23,
+      "text": "that then actually then actually to"
+    },
+    {
+      "index": 223,
+      "start": 814.91,
+      "end": 816.79,
+      "duration": 1.88,
+      "text": "translate everything into mathematics"
+    },
+    {
+      "index": 224,
+      "start": 816.8,
+      "end": 820.96,
+      "duration": 4.16,
+      "text": "okay so the initial condition is the"
+    },
+    {
+      "index": 225,
+      "start": 820.97,
+      "end": 824.62,
+      "duration": 3.65,
+      "text": "following so I actually move this thing"
+    },
+    {
+      "index": 226,
+      "start": 824.63,
+      "end": 827.95,
+      "duration": 3.32,
+      "text": "rotate this inside D then I actually"
+    },
+    {
+      "index": 227,
+      "start": 827.96,
+      "end": 830.2,
+      "duration": 2.24,
+      "text": "reduce that really carefully without"
+    },
+    {
+      "index": 228,
+      "start": 830.21,
+      "end": 833.35,
+      "duration": 3.14,
+      "text": "introducing any initial velocity okay"
+    },
+    {
+      "index": 229,
+      "start": 833.36,
+      "end": 843.96,
+      "duration": 10.6,
+      "text": "therefore I have two initial conditions"
+    },
+    {
+      "index": 230,
+      "start": 848.7,
+      "end": 848.71,
+      "duration": 0.01,
+      "text": "okay at T equal to zero there are two"
+    },
+    {
+      "index": 231,
+      "start": 848.71,
+      "end": 850.42,
+      "duration": 1.71,
+      "text": "initial conditions"
+    },
+    {
+      "index": 232,
+      "start": 850.43,
+      "end": 853.54,
+      "duration": 3.11,
+      "text": "the first one is theta equal to theta 0"
+    },
+    {
+      "index": 233,
+      "start": 853.55,
+      "end": 860.59,
+      "duration": 7.04,
+      "text": "this equal to theta initial the second"
+    },
+    {
+      "index": 234,
+      "start": 860.6,
+      "end": 862.54,
+      "duration": 1.94,
+      "text": "condition is the same as what we have"
+    },
+    {
+      "index": 235,
+      "start": 862.55,
+      "end": 865.69,
+      "duration": 3.14,
+      "text": "been doing last time the initial"
+    },
+    {
+      "index": 236,
+      "start": 865.7,
+      "end": 869.17,
+      "duration": 3.47,
+      "text": "velocity or angular velocity is actually"
+    },
+    {
+      "index": 237,
+      "start": 869.18,
+      "end": 871.81,
+      "duration": 2.63,
+      "text": "equal to 0 so that gives you theta dot"
+    },
+    {
+      "index": 238,
+      "start": 871.82,
+      "end": 877.77,
+      "duration": 5.95,
+      "text": "equal to 0 okay now we have actually"
+    },
+    {
+      "index": 239,
+      "start": 877.78,
+      "end": 882.19,
+      "duration": 4.41,
+      "text": "define the coordinate system then now we"
+    },
+    {
+      "index": 240,
+      "start": 882.2,
+      "end": 888.28,
+      "duration": 6.08,
+      "text": "can issue the draw a force diagram right"
+    },
+    {
+      "index": 241,
+      "start": 888.29,
+      "end": 890.56,
+      "duration": 2.27,
+      "text": "so that we can actually use the null our"
+    },
+    {
+      "index": 242,
+      "start": 890.57,
+      "end": 893.53,
+      "duration": 2.96,
+      "text": "knowledge about the physics and to"
+    },
+    {
+      "index": 243,
+      "start": 893.54,
+      "end": 896.02,
+      "duration": 2.48,
+      "text": "obtain the equation of motion right so"
+    },
+    {
+      "index": 244,
+      "start": 896.03,
+      "end": 904.6,
+      "duration": 8.57,
+      "text": "now the force diagram looks like this so"
+    },
+    {
+      "index": 245,
+      "start": 904.61,
+      "end": 906.34,
+      "duration": 1.73,
+      "text": "this is actually the center of mass of"
+    },
+    {
+      "index": 246,
+      "start": 906.35,
+      "end": 911.98,
+      "duration": 5.63,
+      "text": "this rod and you have a force pointing"
+    },
+    {
+      "index": 247,
+      "start": 911.99,
+      "end": 914.05,
+      "duration": 2.06,
+      "text": "downward which is due to the"
+    },
+    {
+      "index": 248,
+      "start": 914.06,
+      "end": 919.44,
+      "duration": 5.38,
+      "text": "gravitational force FG is equal to mg"
+    },
+    {
+      "index": 249,
+      "start": 919.45,
+      "end": 922.63,
+      "duration": 3.18,
+      "text": "okay is pointing downward okay the"
+    },
+    {
+      "index": 250,
+      "start": 922.64,
+      "end": 929.37,
+      "duration": 6.73,
+      "text": "magnitude is actually equal to mg and"
+    },
+    {
+      "index": 251,
+      "start": 935.2,
+      "end": 935.21,
+      "duration": 0.01,
+      "text": "also we know the R vector this"
+    },
+    {
+      "index": 252,
+      "start": 935.21,
+      "end": 939.94,
+      "duration": 4.73,
+      "text": "vector have a length of L over 2"
+    },
+    {
+      "index": 253,
+      "start": 939.95,
+      "end": 944.29,
+      "duration": 4.34,
+      "text": "pointing from the center of mass of this"
+    },
+    {
+      "index": 254,
+      "start": 944.3,
+      "end": 951.46,
+      "duration": 7.16,
+      "text": "rod to the tuna net okay and also we"
+    },
+    {
+      "index": 255,
+      "start": 951.47,
+      "end": 956.17,
+      "duration": 4.7,
+      "text": "know the angle between this vector"
+    },
+    {
+      "index": 256,
+      "start": 956.18,
+      "end": 958.81,
+      "duration": 2.63,
+      "text": "pointing from the center of mass to the"
+    },
+    {
+      "index": 257,
+      "start": 958.82,
+      "end": 961.99,
+      "duration": 3.17,
+      "text": "nail and the vertical direction which we"
+    },
+    {
+      "index": 258,
+      "start": 962.0,
+      "end": 964.51,
+      "duration": 2.51,
+      "text": "have already defined which is actually"
+    },
+    {
+      "index": 259,
+      "start": 964.52,
+      "end": 968.02,
+      "duration": 3.5,
+      "text": "called Sita therefore now we can"
+    },
+    {
+      "index": 260,
+      "start": 968.03,
+      "end": 971.88,
+      "duration": 3.85,
+      "text": "actually calculate wobbler the torque"
+    },
+    {
+      "index": 261,
+      "start": 971.89,
+      "end": 980.85,
+      "duration": 8.96,
+      "text": "tau will be equal to this R vector plus"
+    },
+    {
+      "index": 262,
+      "start": 980.86,
+      "end": 985.03,
+      "duration": 4.17,
+      "text": "the force the total force acting on the"
+    },
+    {
+      "index": 263,
+      "start": 985.04,
+      "end": 988.12,
+      "duration": 3.08,
+      "text": "the center of mass in this case is just"
+    },
+    {
+      "index": 264,
+      "start": 988.13,
+      "end": 993.52,
+      "duration": 5.39,
+      "text": "F G okay so now we can actually write"
+    },
+    {
+      "index": 265,
+      "start": 993.53,
+      "end": 996.91,
+      "duration": 3.38,
+      "text": "this explicitly since the whole system"
+    },
+    {
+      "index": 266,
+      "start": 996.92,
+      "end": 999.97,
+      "duration": 3.05,
+      "text": "is actually rotating on a single plane"
+    },
+    {
+      "index": 267,
+      "start": 999.98,
+      "end": 1004.71,
+      "duration": 4.73,
+      "text": "right so there's only one plan this rod"
+    },
+    {
+      "index": 268,
+      "start": 1004.72,
+      "end": 1006.72,
+      "duration": 2.0,
+      "text": "is sitting up and it's actually going"
+    },
+    {
+      "index": 269,
+      "start": 1006.73,
+      "end": 1010.13,
+      "duration": 3.4,
+      "text": "back and forth only on this prep okay"
+    },
+    {
+      "index": 270,
+      "start": 1010.14,
+      "end": 1013.43,
+      "duration": 3.29,
+      "text": "therefore actually I can drop all the"
+    },
+    {
+      "index": 271,
+      "start": 1013.44,
+      "end": 1018.15,
+      "duration": 4.71,
+      "text": "arrows and write it down the magnitude"
+    },
+    {
+      "index": 272,
+      "start": 1018.16,
+      "end": 1021.24,
+      "duration": 3.08,
+      "text": "of the Tau directly and this will be"
+    },
+    {
+      "index": 273,
+      "start": 1021.25,
+      "end": 1031.699,
+      "duration": 10.449,
+      "text": "equal to minus and G L over 2 sine theta"
+    },
+    {
+      "index": 274,
+      "start": 1041.919,
+      "end": 1041.929,
+      "duration": 0.01,
+      "text": "okay so now we have the talk and the"
+    },
+    {
+      "index": 275,
+      "start": 1041.929,
+      "end": 1045.1,
+      "duration": 3.171,
+      "text": "weekend you make use the rotational"
+    },
+    {
+      "index": 276,
+      "start": 1045.11,
+      "end": 1048.22,
+      "duration": 3.11,
+      "text": "version of Newton's law to obtain the"
+    },
+    {
+      "index": 277,
+      "start": 1048.23,
+      "end": 1050.35,
+      "duration": 2.12,
+      "text": "equation of motion right so that should"
+    },
+    {
+      "index": 278,
+      "start": 1050.36,
+      "end": 1055.09,
+      "duration": 4.73,
+      "text": "be pretty straightforward tau will be"
+    },
+    {
+      "index": 279,
+      "start": 1055.1,
+      "end": 1058.419,
+      "duration": 3.319,
+      "text": "equal to I which is smooth the moment of"
+    },
+    {
+      "index": 280,
+      "start": 1058.429,
+      "end": 1064.529,
+      "duration": 6.1,
+      "text": "inertia of the system and times alpha"
+    },
+    {
+      "index": 281,
+      "start": 1064.539,
+      "end": 1068.649,
+      "duration": 4.11,
+      "text": "okay and there's just for your"
+    },
+    {
+      "index": 282,
+      "start": 1068.659,
+      "end": 1072.009,
+      "duration": 3.35,
+      "text": "information I already calculated the AI"
+    },
+    {
+      "index": 283,
+      "start": 1072.019,
+      "end": 1080.409,
+      "duration": 8.39,
+      "text": "for you I is equal to 1/3 and l squared"
+    },
+    {
+      "index": 284,
+      "start": 1080.419,
+      "end": 1083.56,
+      "duration": 3.141,
+      "text": "okay so you can actually go back home"
+    },
+    {
+      "index": 285,
+      "start": 1083.57,
+      "end": 1086.139,
+      "duration": 2.569,
+      "text": "and that actually to a check to see if I"
+    },
+    {
+      "index": 286,
+      "start": 1086.149,
+      "end": 1088.299,
+      "duration": 2.15,
+      "text": "entered in the tools and if you trust me"
+    },
+    {
+      "index": 287,
+      "start": 1088.309,
+      "end": 1090.94,
+      "duration": 2.631,
+      "text": "and that's and the answer which is"
+    },
+    {
+      "index": 288,
+      "start": 1090.95,
+      "end": 1093.93,
+      "duration": 2.98,
+      "text": "actually 1 over 3 and L square if the"
+    },
+    {
+      "index": 289,
+      "start": 1093.94,
+      "end": 1098.71,
+      "duration": 4.77,
+      "text": "mass is uniformly distributed on this"
+    },
+    {
+      "index": 290,
+      "start": 1098.72,
+      "end": 1105.46,
+      "duration": 6.74,
+      "text": "rod okay so that will give me minus n 2"
+    },
+    {
+      "index": 291,
+      "start": 1105.47,
+      "end": 1116.86,
+      "duration": 11.39,
+      "text": "L divided by 2 sine theta ok so that is"
+    },
+    {
+      "index": 292,
+      "start": 1116.87,
+      "end": 1119.529,
+      "duration": 2.659,
+      "text": "actually coming from from this side okay"
+    },
+    {
+      "index": 293,
+      "start": 1119.539,
+      "end": 1124.389,
+      "duration": 4.85,
+      "text": "so now I can actually simplify this"
+    },
+    {
+      "index": 294,
+      "start": 1124.399,
+      "end": 1127.299,
+      "duration": 2.9,
+      "text": "expression I can now practice the I"
+    },
+    {
+      "index": 295,
+      "start": 1127.309,
+      "end": 1132.33,
+      "duration": 5.021,
+      "text": "value into this equation and I will get"
+    },
+    {
+      "index": 296,
+      "start": 1139.509,
+      "end": 1139.519,
+      "duration": 0.01,
+      "text": "1 over 3 and L square theta double dot P"
+    },
+    {
+      "index": 297,
+      "start": 1139.519,
+      "end": 1141.999,
+      "duration": 2.48,
+      "text": "which is actually alpha okay I now"
+    },
+    {
+      "index": 298,
+      "start": 1142.009,
+      "end": 1144.49,
+      "duration": 2.481,
+      "text": "dreaded as a seat at about dot and that"
+    },
+    {
+      "index": 299,
+      "start": 1144.5,
+      "end": 1149.159,
+      "duration": 4.659,
+      "text": "will be equal to minus and G L over 2"
+    },
+    {
+      "index": 300,
+      "start": 1149.169,
+      "end": 1154.57,
+      "duration": 5.401,
+      "text": "sine theta okay I can move all the"
+    },
+    {
+      "index": 301,
+      "start": 1154.58,
+      "end": 1155.71,
+      "duration": 1.13,
+      "text": "constant to the right hand side"
+    },
+    {
+      "index": 302,
+      "start": 1155.72,
+      "end": 1160.029,
+      "duration": 4.309,
+      "text": "therefore I get theta double dot T this"
+    },
+    {
+      "index": 303,
+      "start": 1160.039,
+      "end": 1166.45,
+      "duration": 6.411,
+      "text": "is equal to minus and gee L okay"
+    },
+    {
+      "index": 304,
+      "start": 1166.46,
+      "end": 1168.97,
+      "duration": 2.51,
+      "text": "actually I can - you already simplify"
+    },
+    {
+      "index": 305,
+      "start": 1168.98,
+      "end": 1170.89,
+      "duration": 1.91,
+      "text": "this right"
+    },
+    {
+      "index": 306,
+      "start": 1170.9,
+      "end": 1174.41,
+      "duration": 3.51,
+      "text": "this says you cancel and why one of the"
+    },
+    {
+      "index": 307,
+      "start": 1174.42,
+      "end": 1178.79,
+      "duration": 4.37,
+      "text": "L as you can so so therefore I get - 3G"
+    },
+    {
+      "index": 308,
+      "start": 1178.8,
+      "end": 1188.66,
+      "duration": 9.86,
+      "text": "over 2 sine theta ok as judo we actually"
+    },
+    {
+      "index": 309,
+      "start": 1188.67,
+      "end": 1193.34,
+      "duration": 4.67,
+      "text": "define a Omega to repress this kind of"
+    },
+    {
+      "index": 310,
+      "start": 1193.35,
+      "end": 1195.71,
+      "duration": 2.36,
+      "text": "this constant to make our life easier"
+    },
+    {
+      "index": 311,
+      "start": 1195.72,
+      "end": 1201.31,
+      "duration": 5.59,
+      "text": "so I can now define Omega 0 equal to"
+    },
+    {
+      "index": 312,
+      "start": 1201.32,
+      "end": 1209.09,
+      "duration": 7.77,
+      "text": "square root of 3G over 2l okay and that"
+    },
+    {
+      "index": 313,
+      "start": 1209.1,
+      "end": 1214.55,
+      "duration": 5.45,
+      "text": "will give you CPAP double dot e equal to"
+    },
+    {
+      "index": 314,
+      "start": 1214.56,
+      "end": 1223.85,
+      "duration": 9.29,
+      "text": "minus Omega 0 square sine theta any"
+    },
+    {
+      "index": 315,
+      "start": 1223.86,
+      "end": 1226.87,
+      "duration": 3.01,
+      "text": "questions so far a lot of calculation"
+    },
+    {
+      "index": 316,
+      "start": 1226.88,
+      "end": 1229.22,
+      "duration": 2.34,
+      "text": "but I should be all pretty"
+    },
+    {
+      "index": 317,
+      "start": 1229.23,
+      "end": 1234.92,
+      "duration": 5.69,
+      "text": "straightforward and HD we are done no we"
+    },
+    {
+      "index": 318,
+      "start": 1234.93,
+      "end": 1237.11,
+      "duration": 2.18,
+      "text": "are done because we have the equation of"
+    },
+    {
+      "index": 319,
+      "start": 1237.12,
+      "end": 1239.86,
+      "duration": 2.74,
+      "text": "motion and the rest of the job is to"
+    },
+    {
+      "index": 320,
+      "start": 1239.87,
+      "end": 1242.63,
+      "duration": 2.76,
+      "text": "just solve it so this is actually now"
+    },
+    {
+      "index": 321,
+      "start": 1242.64,
+      "end": 1244.25,
+      "duration": 1.61,
+      "text": "the the problem of the maths Department"
+    },
+    {
+      "index": 322,
+      "start": 1244.26,
+      "end": 1246.8,
+      "duration": 2.54,
+      "text": "so can anybody as you tell me the"
+    },
+    {
+      "index": 323,
+      "start": 1246.81,
+      "end": 1259.01,
+      "duration": 12.2,
+      "text": "solution of the seat of t anybody so"
+    },
+    {
+      "index": 324,
+      "start": 1259.02,
+      "end": 1261.71,
+      "duration": 2.69,
+      "text": "that now we are facing a very difficult"
+    },
+    {
+      "index": 325,
+      "start": 1261.72,
+      "end": 1265.37,
+      "duration": 3.65,
+      "text": "situation we don't know how to solve"
+    },
+    {
+      "index": 326,
+      "start": 1265.38,
+      "end": 1268.61,
+      "duration": 3.23,
+      "text": "this equation in front of you I I don't"
+    },
+    {
+      "index": 327,
+      "start": 1268.62,
+      "end": 1274.61,
+      "duration": 5.99,
+      "text": "know okay of course you can easily solve"
+    },
+    {
+      "index": 328,
+      "start": 1274.62,
+      "end": 1278.69,
+      "duration": 4.07,
+      "text": "it with a computer ok or you want to go"
+    },
+    {
+      "index": 329,
+      "start": 1278.7,
+      "end": 1281.63,
+      "duration": 2.93,
+      "text": "fancy solve it with your cellphone"
+    },
+    {
+      "index": 330,
+      "start": 1281.64,
+      "end": 1289.13,
+      "duration": 7.49,
+      "text": "if we turn X Pro but it's not very nice"
+    },
+    {
+      "index": 331,
+      "start": 1289.14,
+      "end": 1293.96,
+      "duration": 4.82,
+      "text": "to do this in front of you yeah we don't"
+    },
+    {
+      "index": 332,
+      "start": 1293.97,
+      "end": 1296.18,
+      "duration": 2.21,
+      "text": "learn too much ok so what are we going"
+    },
+    {
+      "index": 333,
+      "start": 1296.19,
+      "end": 1302.0,
+      "duration": 5.81,
+      "text": "to do so what we can do is actually to"
+    },
+    {
+      "index": 334,
+      "start": 1302.01,
+      "end": 1304.28,
+      "duration": 2.27,
+      "text": "consider a special case"
+    },
+    {
+      "index": 335,
+      "start": 1304.29,
+      "end": 1307.64,
+      "duration": 3.35,
+      "text": "so we know that this equation of motion"
+    },
+    {
+      "index": 336,
+      "start": 1307.65,
+      "end": 1311.15,
+      "duration": 3.5,
+      "text": "is exact okay so if you solve it it"
+    },
+    {
+      "index": 337,
+      "start": 1311.16,
+      "end": 1315.74,
+      "duration": 4.58,
+      "text": "would describe the motion of this this"
+    },
+    {
+      "index": 338,
+      "start": 1315.75,
+      "end": 1319.67,
+      "duration": 3.92,
+      "text": "rod the motion of this the same even"
+    },
+    {
+      "index": 339,
+      "start": 1319.68,
+      "end": 1324.23,
+      "duration": 4.55,
+      "text": "with slash angle it works okay and now"
+    },
+    {
+      "index": 340,
+      "start": 1324.24,
+      "end": 1327.47,
+      "duration": 3.23,
+      "text": "in order to actually to show you the"
+    },
+    {
+      "index": 341,
+      "start": 1327.48,
+      "end": 1330.38,
+      "duration": 2.9,
+      "text": "mass if in the class therefore actually"
+    },
+    {
+      "index": 342,
+      "start": 1330.39,
+      "end": 1333.11,
+      "duration": 2.72,
+      "text": "I were to a small approximation so I"
+    },
+    {
+      "index": 343,
+      "start": 1333.12,
+      "end": 1335.84,
+      "duration": 2.72,
+      "text": "should I would only work on the case"
+    },
+    {
+      "index": 344,
+      "start": 1335.85,
+      "end": 1339.2,
+      "duration": 3.35,
+      "text": "that when the amplitude is very small"
+    },
+    {
+      "index": 345,
+      "start": 1339.21,
+      "end": 1343.19,
+      "duration": 3.98,
+      "text": "and see what is going to happen so now"
+    },
+    {
+      "index": 346,
+      "start": 1343.2,
+      "end": 1346.49,
+      "duration": 3.29,
+      "text": "I'm considered in a special case up to"
+    },
+    {
+      "index": 347,
+      "start": 1346.5,
+      "end": 1349.46,
+      "duration": 2.96,
+      "text": "now everything is exact and now I'm now"
+    },
+    {
+      "index": 348,
+      "start": 1349.47,
+      "end": 1354.5,
+      "duration": 5.03,
+      "text": "going to a special case see top T goes"
+    },
+    {
+      "index": 349,
+      "start": 1354.51,
+      "end": 1359.99,
+      "duration": 5.48,
+      "text": "to 0 okay then we can actually get this"
+    },
+    {
+      "index": 350,
+      "start": 1360.0,
+      "end": 1366.74,
+      "duration": 6.74,
+      "text": "sine theta P is roughly C Turkey okay"
+    },
+    {
+      "index": 351,
+      "start": 1366.75,
+      "end": 1369.14,
+      "duration": 2.39,
+      "text": "based on the Tyler expansion you can"
+    },
+    {
+      "index": 352,
+      "start": 1369.15,
+      "end": 1373.58,
+      "duration": 4.43,
+      "text": "actually verify this okay so in this"
+    },
+    {
+      "index": 353,
+      "start": 1373.59,
+      "end": 1378.86,
+      "duration": 5.27,
+      "text": "case if we take Sita equal to one degree"
+    },
+    {
+      "index": 354,
+      "start": 1378.87,
+      "end": 1383.51,
+      "duration": 4.64,
+      "text": "okay then the ratio of the sine theta"
+    },
+    {
+      "index": 355,
+      "start": 1383.52,
+      "end": 1389.74,
+      "duration": 6.22,
+      "text": "and the Sita is actually equal to 99.99%"
+    },
+    {
+      "index": 356,
+      "start": 1389.75,
+      "end": 1393.47,
+      "duration": 3.72,
+      "text": "which is very good if I take it as like"
+    },
+    {
+      "index": 357,
+      "start": 1393.48,
+      "end": 1396.65,
+      "duration": 3.17,
+      "text": "five percent then I get ninety nine so"
+    },
+    {
+      "index": 358,
+      "start": 1396.66,
+      "end": 1400.28,
+      "duration": 3.62,
+      "text": "at five degree okay and this issue in"
+    },
+    {
+      "index": 359,
+      "start": 1400.29,
+      "end": 1403.61,
+      "duration": 3.32,
+      "text": "nineteen ninety nine percent even a tank"
+    },
+    {
+      "index": 360,
+      "start": 1403.62,
+      "end": 1408.05,
+      "duration": 4.43,
+      "text": "degree okay it says should be 99.5"
+    },
+    {
+      "index": 361,
+      "start": 1408.06,
+      "end": 1411.44,
+      "duration": 3.38,
+      "text": "percent that shows you that science it"
+    },
+    {
+      "index": 362,
+      "start": 1411.45,
+      "end": 1414.17,
+      "duration": 2.72,
+      "text": "has so close to Sita okay we are pretty"
+    },
+    {
+      "index": 363,
+      "start": 1414.18,
+      "end": 1417.38,
+      "duration": 3.2,
+      "text": "safe because the difference is smaller"
+    },
+    {
+      "index": 364,
+      "start": 1417.39,
+      "end": 1420.38,
+      "duration": 2.99,
+      "text": "than one percent okay so that's really"
+    },
+    {
+      "index": 365,
+      "start": 1420.39,
+      "end": 1427.67,
+      "duration": 7.28,
+      "text": "nice after this approximation okay I get"
+    },
+    {
+      "index": 366,
+      "start": 1427.68,
+      "end": 1431.21,
+      "duration": 3.53,
+      "text": "my final equation of motion Sita double"
+    },
+    {
+      "index": 367,
+      "start": 1431.22,
+      "end": 1437.149,
+      "duration": 5.929,
+      "text": "dot T equal to minus Omega 0 square"
+    },
+    {
+      "index": 368,
+      "start": 1437.159,
+      "end": 1442.249,
+      "duration": 5.09,
+      "text": "Sita just a reminder Omega zero is equal"
+    },
+    {
+      "index": 369,
+      "start": 1442.259,
+      "end": 1450.469,
+      "duration": 8.21,
+      "text": "to square root of 3G over 2l okay we"
+    },
+    {
+      "index": 370,
+      "start": 1450.479,
+      "end": 1454.969,
+      "duration": 4.49,
+      "text": "have solved this equation last time last"
+    },
+    {
+      "index": 371,
+      "start": 1454.979,
+      "end": 1458.119,
+      "duration": 3.14,
+      "text": "lecture right it's exactly the same"
+    },
+    {
+      "index": 372,
+      "start": 1458.129,
+      "end": 1459.82,
+      "duration": 1.691,
+      "text": "okay happen to be exactly the same"
+    },
+    {
+      "index": 373,
+      "start": 1459.83,
+      "end": 1462.759,
+      "duration": 2.929,
+      "text": "therefore I know the solution will be"
+    },
+    {
+      "index": 374,
+      "start": 1462.769,
+      "end": 1468.589,
+      "duration": 5.82,
+      "text": "Sita with T equal to a cosine Omega 0 T"
+    },
+    {
+      "index": 375,
+      "start": 1468.599,
+      "end": 1474.469,
+      "duration": 5.87,
+      "text": "transfer from the initial conditions"
+    },
+    {
+      "index": 376,
+      "start": 1474.479,
+      "end": 1479.06,
+      "duration": 4.581,
+      "text": "which I have one and the two okay I'm"
+    },
+    {
+      "index": 377,
+      "start": 1479.07,
+      "end": 1481.879,
+      "duration": 2.809,
+      "text": "not going to go over this calculation"
+    },
+    {
+      "index": 378,
+      "start": 1481.889,
+      "end": 1484.279,
+      "duration": 2.39,
+      "text": "again but again we can actually plug in"
+    },
+    {
+      "index": 379,
+      "start": 1484.289,
+      "end": 1489.049,
+      "duration": 4.76,
+      "text": "1 and 2 to solve the unknown a and Phi"
+    },
+    {
+      "index": 380,
+      "start": 1489.059,
+      "end": 1492.08,
+      "duration": 3.021,
+      "text": "if you do this exercise you will"
+    },
+    {
+      "index": 381,
+      "start": 1492.09,
+      "end": 1497.119,
+      "duration": 5.029,
+      "text": "conclude that a is equal to theta"
+    },
+    {
+      "index": 382,
+      "start": 1497.129,
+      "end": 1507.849,
+      "duration": 10.72,
+      "text": "initial and Phi is equal to zero okay so"
+    },
+    {
+      "index": 383,
+      "start": 1507.859,
+      "end": 1511.539,
+      "duration": 3.68,
+      "text": "what the solution will be seated with T"
+    },
+    {
+      "index": 384,
+      "start": 1511.549,
+      "end": 1516.229,
+      "duration": 4.68,
+      "text": "equal to a ok so n is now replaced by"
+    },
+    {
+      "index": 385,
+      "start": 1516.239,
+      "end": 1526.879,
+      "duration": 10.64,
+      "text": "theta initial cosine Omega 0 you can see"
+    },
+    {
+      "index": 386,
+      "start": 1526.889,
+      "end": 1531.879,
+      "duration": 4.99,
+      "text": "that this actually works for this system"
+    },
+    {
+      "index": 387,
+      "start": 1531.889,
+      "end": 1534.529,
+      "duration": 2.64,
+      "text": "simple harmonic oscillation actually"
+    },
+    {
+      "index": 388,
+      "start": 1534.539,
+      "end": 1538.46,
+      "duration": 3.921,
+      "text": "described this the motion of this system"
+    },
+    {
+      "index": 389,
+      "start": 1538.47,
+      "end": 1541.339,
+      "duration": 2.869,
+      "text": "as a function of time you can also see a"
+    },
+    {
+      "index": 390,
+      "start": 1541.349,
+      "end": 1544.909,
+      "duration": 3.56,
+      "text": "few more example showing here to obtain"
+    },
+    {
+      "index": 391,
+      "start": 1544.919,
+      "end": 1547.129,
+      "duration": 2.21,
+      "text": "you are going to actually work on in"
+    },
+    {
+      "index": 392,
+      "start": 1547.139,
+      "end": 1551.18,
+      "duration": 4.041,
+      "text": "your pset and also another one involving"
+    },
+    {
+      "index": 393,
+      "start": 1551.19,
+      "end": 1554.45,
+      "duration": 3.26,
+      "text": "circuit if you have a capacitor and you"
+    },
+    {
+      "index": 394,
+      "start": 1554.46,
+      "end": 1558.769,
+      "duration": 4.309,
+      "text": "have a daughter actually the the current"
+    },
+    {
+      "index": 395,
+      "start": 1558.779,
+      "end": 1562.789,
+      "duration": 4.01,
+      "text": "the size of the current is also doing a"
+    },
+    {
+      "index": 396,
+      "start": 1562.799,
+      "end": 1566.599,
+      "duration": 3.8,
+      "text": "simple harmonic motion okay and as we"
+    },
+    {
+      "index": 397,
+      "start": 1566.609,
+      "end": 1570.079,
+      "duration": 3.47,
+      "text": "actually discussed before the energy is"
+    },
+    {
+      "index": 398,
+      "start": 1570.089,
+      "end": 1571.07,
+      "duration": 0.981,
+      "text": "always conserved"
+    },
+    {
+      "index": 399,
+      "start": 1571.08,
+      "end": 1573.11,
+      "duration": 2.03,
+      "text": "and it's actually stored in different"
+    },
+    {
+      "index": 400,
+      "start": 1573.12,
+      "end": 1580.13,
+      "duration": 7.01,
+      "text": "components of the systems okay so we"
+    },
+    {
+      "index": 401,
+      "start": 1580.14,
+      "end": 1583.13,
+      "duration": 2.99,
+      "text": "have done this what is actually new"
+    },
+    {
+      "index": 402,
+      "start": 1583.14,
+      "end": 1587.259,
+      "duration": 4.119,
+      "text": "today what we are going to do today is"
+    },
+    {
+      "index": 403,
+      "start": 1587.269,
+      "end": 1591.649,
+      "duration": 4.38,
+      "text": "that's actually observe this phenomena"
+    },
+    {
+      "index": 404,
+      "start": 1591.659,
+      "end": 1594.5,
+      "duration": 2.841,
+      "text": "here so this thing is actually going to"
+    },
+    {
+      "index": 405,
+      "start": 1594.51,
+      "end": 1597.44,
+      "duration": 2.93,
+      "text": "go back and forth but it's actually not"
+    },
+    {
+      "index": 406,
+      "start": 1597.45,
+      "end": 1599.899,
+      "duration": 2.449,
+      "text": "going to do that forever right"
+    },
+    {
+      "index": 407,
+      "start": 1599.909,
+      "end": 1603.799,
+      "duration": 3.89,
+      "text": "something is happening which I should"
+    },
+    {
+      "index": 408,
+      "start": 1603.809,
+      "end": 1608.48,
+      "duration": 4.671,
+      "text": "slow the motion damn I can also you make"
+    },
+    {
+      "index": 409,
+      "start": 1608.49,
+      "end": 1611.6,
+      "duration": 3.11,
+      "text": "use of this system okay I start from"
+    },
+    {
+      "index": 410,
+      "start": 1611.61,
+      "end": 1614.87,
+      "duration": 3.26,
+      "text": "from here and I not worried that this"
+    },
+    {
+      "index": 411,
+      "start": 1614.88,
+      "end": 1617.12,
+      "duration": 2.24,
+      "text": "issue goes out of the of this track"
+    },
+    {
+      "index": 412,
+      "start": 1617.13,
+      "end": 1621.049,
+      "duration": 3.919,
+      "text": "because I know for sure you will stop"
+    },
+    {
+      "index": 413,
+      "start": 1621.059,
+      "end": 1625.6,
+      "duration": 4.541,
+      "text": "there why because the initial amplitude"
+    },
+    {
+      "index": 414,
+      "start": 1625.61,
+      "end": 1629.269,
+      "duration": 3.659,
+      "text": "okay it's not going to okay so the mp2"
+    },
+    {
+      "index": 415,
+      "start": 1629.279,
+      "end": 1630.74,
+      "duration": 1.461,
+      "text": "is not going to be larger than the"
+    },
+    {
+      "index": 416,
+      "start": 1630.75,
+      "end": 1632.299,
+      "duration": 1.549,
+      "text": "initial amplitude right so I'm now"
+    },
+    {
+      "index": 417,
+      "start": 1632.309,
+      "end": 1635.18,
+      "duration": 2.871,
+      "text": "worried at all okay but you can see that"
+    },
+    {
+      "index": 418,
+      "start": 1635.19,
+      "end": 1638.06,
+      "duration": 2.87,
+      "text": "the amplitude is changing as a function"
+    },
+    {
+      "index": 419,
+      "start": 1638.07,
+      "end": 1641.33,
+      "duration": 3.26,
+      "text": "of time apparently something is missing"
+    },
+    {
+      "index": 420,
+      "start": 1641.34,
+      "end": 1645.259,
+      "duration": 3.919,
+      "text": "and that is actually a drag force work"
+    },
+    {
+      "index": 421,
+      "start": 1645.269,
+      "end": 1647.72,
+      "duration": 2.451,
+      "text": "or friction which is actually not"
+    },
+    {
+      "index": 422,
+      "start": 1647.73,
+      "end": 1650.87,
+      "duration": 3.14,
+      "text": "including in included in our calculation"
+    },
+    {
+      "index": 423,
+      "start": 1650.88,
+      "end": 1656.899,
+      "duration": 6.019,
+      "text": "so that actually try to make the"
+    },
+    {
+      "index": 424,
+      "start": 1656.909,
+      "end": 1660.32,
+      "duration": 3.411,
+      "text": "calculation more realistic and see what"
+    },
+    {
+      "index": 425,
+      "start": 1660.33,
+      "end": 1663.889,
+      "duration": 3.559,
+      "text": "is going to happen so now I will"
+    },
+    {
+      "index": 426,
+      "start": 1663.899,
+      "end": 1670.789,
+      "duration": 6.89,
+      "text": "introduce a drag force okay which I"
+    },
+    {
+      "index": 427,
+      "start": 1670.799,
+      "end": 1676.36,
+      "duration": 5.561,
+      "text": "should introduce a torque tau drag T"
+    },
+    {
+      "index": 428,
+      "start": 1676.37,
+      "end": 1681.47,
+      "duration": 5.1,
+      "text": "which is equal to minus P P is a some"
+    },
+    {
+      "index": 429,
+      "start": 1681.48,
+      "end": 1685.299,
+      "duration": 3.819,
+      "text": "kind of constant which is given to you"
+    },
+    {
+      "index": 430,
+      "start": 1685.309,
+      "end": 1690.409,
+      "duration": 5.1,
+      "text": "Seeta thought he which is actually"
+    },
+    {
+      "index": 431,
+      "start": 1690.419,
+      "end": 1694.81,
+      "duration": 4.391,
+      "text": "proportional to the angular velocity of"
+    },
+    {
+      "index": 432,
+      "start": 1694.82,
+      "end": 1700.299,
+      "duration": 5.479,
+      "text": "that rod okay and also of course I keep"
+    },
+    {
+      "index": 433,
+      "start": 1700.309,
+      "end": 1704.78,
+      "duration": 4.471,
+      "text": "the original approximation the CETA is"
+    },
+    {
+      "index": 434,
+      "start": 1704.79,
+      "end": 1707.06,
+      "duration": 2.27,
+      "text": "very small such that I don't have to"
+    },
+    {
+      "index": 435,
+      "start": 1707.07,
+      "end": 1708.62,
+      "duration": 1.55,
+      "text": "tell with the integration of science"
+    },
+    {
+      "index": 436,
+      "start": 1708.63,
+      "end": 1711.35,
+      "duration": 2.72,
+      "text": "system okay so being this out about"
+    },
+    {
+      "index": 437,
+      "start": 1711.36,
+      "end": 1714.14,
+      "duration": 2.78,
+      "text": "dot equal to minus Omega 0 square sine"
+    },
+    {
+      "index": 438,
+      "start": 1714.15,
+      "end": 1719.42,
+      "duration": 5.27,
+      "text": "theta this complicated function okay you"
+    },
+    {
+      "index": 439,
+      "start": 1719.43,
+      "end": 1723.86,
+      "duration": 4.43,
+      "text": "may ask why do I actually introduce a"
+    },
+    {
+      "index": 440,
+      "start": 1723.87,
+      "end": 1727.69,
+      "duration": 3.82,
+      "text": "drag force proportional to the velocity"
+    },
+    {
+      "index": 441,
+      "start": 1727.7,
+      "end": 1730.49,
+      "duration": 2.79,
+      "text": "okay and why do we put a minus sign"
+    },
+    {
+      "index": 442,
+      "start": 1730.5,
+      "end": 1733.34,
+      "duration": 2.84,
+      "text": "there okay that is essentially because"
+    },
+    {
+      "index": 443,
+      "start": 1733.35,
+      "end": 1736.97,
+      "duration": 3.62,
+      "text": "if you have a minus sign okay that means"
+    },
+    {
+      "index": 444,
+      "start": 1736.98,
+      "end": 1740.21,
+      "duration": 3.23,
+      "text": "when this mass or that rod is actually"
+    },
+    {
+      "index": 445,
+      "start": 1740.22,
+      "end": 1742.46,
+      "duration": 2.24,
+      "text": "for example it's actually going downward"
+    },
+    {
+      "index": 446,
+      "start": 1742.47,
+      "end": 1744.56,
+      "duration": 2.09,
+      "text": "then the track force is really tracking"
+    },
+    {
+      "index": 447,
+      "start": 1744.57,
+      "end": 1747.38,
+      "duration": 2.81,
+      "text": "it because it's actually in the opposite"
+    },
+    {
+      "index": 448,
+      "start": 1747.39,
+      "end": 1751.9,
+      "duration": 4.51,
+      "text": "direction of the velocity of the mass or"
+    },
+    {
+      "index": 449,
+      "start": 1751.91,
+      "end": 1755.57,
+      "duration": 3.66,
+      "text": "the angular velocity of the rod okay so"
+    },
+    {
+      "index": 450,
+      "start": 1755.58,
+      "end": 1758.0,
+      "duration": 2.42,
+      "text": "I need a minus sign there okay otherwise"
+    },
+    {
+      "index": 451,
+      "start": 1758.01,
+      "end": 1760.43,
+      "duration": 2.42,
+      "text": "sign it's not a track force anymore it's"
+    },
+    {
+      "index": 452,
+      "start": 1760.44,
+      "end": 1762.95,
+      "duration": 2.51,
+      "text": "actually accelerating the whole thing"
+    },
+    {
+      "index": 453,
+      "start": 1762.96,
+      "end": 1764.14,
+      "duration": 1.18,
+      "text": "okay"
+    },
+    {
+      "index": 454,
+      "start": 1764.15,
+      "end": 1768.35,
+      "duration": 4.2,
+      "text": "secondly why is that why do I choose"
+    },
+    {
+      "index": 455,
+      "start": 1768.36,
+      "end": 1771.95,
+      "duration": 3.59,
+      "text": "that to be proportional to sit a dot"
+    },
+    {
+      "index": 456,
+      "start": 1771.96,
+      "end": 1776.3,
+      "duration": 4.34,
+      "text": "over velocity okay"
+    },
+    {
+      "index": 457,
+      "start": 1776.31,
+      "end": 1780.71,
+      "duration": 4.4,
+      "text": "there's really no much deeper reason I"
+    },
+    {
+      "index": 458,
+      "start": 1780.72,
+      "end": 1784.39,
+      "duration": 3.67,
+      "text": "choose this form because I can actually"
+    },
+    {
+      "index": 459,
+      "start": 1784.4,
+      "end": 1786.8,
+      "duration": 2.4,
+      "text": "solve it in front of you"
+    },
+    {
+      "index": 460,
+      "start": 1786.81,
+      "end": 1790.51,
+      "duration": 3.7,
+      "text": "okay the reality is actually between"
+    },
+    {
+      "index": 461,
+      "start": 1790.52,
+      "end": 1794.06,
+      "duration": 3.54,
+      "text": "proportional to theta dot and theta dot"
+    },
+    {
+      "index": 462,
+      "start": 1794.07,
+      "end": 1795.8,
+      "duration": 1.73,
+      "text": "square for example okay"
+    },
+    {
+      "index": 463,
+      "start": 1795.81,
+      "end": 1798.02,
+      "duration": 2.21,
+      "text": "this is your model which I introduce"
+    },
+    {
+      "index": 464,
+      "start": 1798.03,
+      "end": 1800.45,
+      "duration": 2.42,
+      "text": "here which I can actually solve it in"
+    },
+    {
+      "index": 465,
+      "start": 1800.46,
+      "end": 1804.62,
+      "duration": 4.16,
+      "text": "front of you okay on the other hand you"
+    },
+    {
+      "index": 466,
+      "start": 1804.63,
+      "end": 1807.11,
+      "duration": 2.48,
+      "text": "will see that it's actually not bad at"
+    },
+    {
+      "index": 467,
+      "start": 1807.12,
+      "end": 1810.08,
+      "duration": 2.96,
+      "text": "all okay it actually works and the"
+    },
+    {
+      "index": 468,
+      "start": 1810.09,
+      "end": 1812.75,
+      "duration": 2.66,
+      "text": "describe the system which we actually"
+    },
+    {
+      "index": 469,
+      "start": 1812.76,
+      "end": 1818.18,
+      "duration": 5.42,
+      "text": "work perform the demo here okay and once"
+    },
+    {
+      "index": 470,
+      "start": 1818.19,
+      "end": 1821.96,
+      "duration": 3.77,
+      "text": "we have introduced this okay the"
+    },
+    {
+      "index": 471,
+      "start": 1821.97,
+      "end": 1825.59,
+      "duration": 3.62,
+      "text": "equation of motion will be modified okay"
+    },
+    {
+      "index": 472,
+      "start": 1825.6,
+      "end": 1827.27,
+      "duration": 1.67,
+      "text": "so that's come back to the equation of"
+    },
+    {
+      "index": 473,
+      "start": 1827.28,
+      "end": 1831.67,
+      "duration": 4.39,
+      "text": "motion so you have theta double dot he"
+    },
+    {
+      "index": 474,
+      "start": 1831.68,
+      "end": 1838.58,
+      "duration": 6.9,
+      "text": "originally will be equal to tau Toto P"
+    },
+    {
+      "index": 475,
+      "start": 1838.59,
+      "end": 1845.44,
+      "duration": 6.85,
+      "text": "/ I okay and now this will become tau t"
+    },
+    {
+      "index": 476,
+      "start": 1845.45,
+      "end": 1857.149,
+      "duration": 11.699,
+      "text": "plus tau drag T / app there's additional"
+    },
+    {
+      "index": 477,
+      "start": 1857.159,
+      "end": 1860.84,
+      "duration": 3.681,
+      "text": "time here okay if I simplify this whole"
+    },
+    {
+      "index": 478,
+      "start": 1860.85,
+      "end": 1868.639,
+      "duration": 7.789,
+      "text": "equation then I get minus mg L / - okay"
+    },
+    {
+      "index": 479,
+      "start": 1868.649,
+      "end": 1872.299,
+      "duration": 3.65,
+      "text": "signs theta and this is actually roughly"
+    },
+    {
+      "index": 480,
+      "start": 1872.309,
+      "end": 1880.299,
+      "duration": 7.99,
+      "text": "Sita okay - P Sita dot divided by"
+    },
+    {
+      "index": 481,
+      "start": 1880.309,
+      "end": 1886.46,
+      "duration": 6.151,
+      "text": "one-third of M L square okay so you can"
+    },
+    {
+      "index": 482,
+      "start": 1886.47,
+      "end": 1888.59,
+      "duration": 2.12,
+      "text": "see that I still make this approximation"
+    },
+    {
+      "index": 483,
+      "start": 1888.6,
+      "end": 1893.109,
+      "duration": 4.509,
+      "text": "sine theta roughly equal to Sita okay"
+    },
+    {
+      "index": 484,
+      "start": 1893.119,
+      "end": 1897.529,
+      "duration": 4.41,
+      "text": "then I can actually write this equation"
+    },
+    {
+      "index": 485,
+      "start": 1897.539,
+      "end": 1905.98,
+      "duration": 8.441,
+      "text": "in a small angle case okay I get minus"
+    },
+    {
+      "index": 486,
+      "start": 1905.99,
+      "end": 1910.369,
+      "duration": 4.379,
+      "text": "3G over 2l Sita"
+    },
+    {
+      "index": 487,
+      "start": 1910.379,
+      "end": 1919.93,
+      "duration": 9.551,
+      "text": "t minus 3b over and L square theta dot"
+    },
+    {
+      "index": 488,
+      "start": 1925.639,
+      "end": 1925.649,
+      "duration": 0.01,
+      "text": "okay and now I as usual I define Omega 0"
+    },
+    {
+      "index": 489,
+      "start": 1925.649,
+      "end": 1931.34,
+      "duration": 5.691,
+      "text": "square equal to 3G over 2l and I can"
+    },
+    {
+      "index": 490,
+      "start": 1931.35,
+      "end": 1937.85,
+      "duration": 6.5,
+      "text": "also define gamma is equal to CP / ml"
+    },
+    {
+      "index": 491,
+      "start": 1937.86,
+      "end": 1941.57,
+      "duration": 3.71,
+      "text": "squared okay just to make my life easier"
+    },
+    {
+      "index": 492,
+      "start": 1941.58,
+      "end": 1943.749,
+      "duration": 2.169,
+      "text": "right"
+    },
+    {
+      "index": 493,
+      "start": 1943.759,
+      "end": 1948.799,
+      "duration": 5.04,
+      "text": "finally we will arrive this expression"
+    },
+    {
+      "index": 494,
+      "start": 1948.809,
+      "end": 1954.97,
+      "duration": 6.161,
+      "text": "sheet a double dot plus gamma theta dot"
+    },
+    {
+      "index": 495,
+      "start": 1954.98,
+      "end": 1961.82,
+      "duration": 6.84,
+      "text": "plus Omega 0 square theta and that is"
+    },
+    {
+      "index": 496,
+      "start": 1961.83,
+      "end": 1966.24,
+      "duration": 4.41,
+      "text": "equal to 2"
+    },
+    {
+      "index": 497,
+      "start": 1970.779,
+      "end": 1970.789,
+      "duration": 0.01,
+      "text": "so what you can see from here is that we"
+    },
+    {
+      "index": 498,
+      "start": 1970.789,
+      "end": 1975.48,
+      "duration": 4.691,
+      "text": "have actually arrived and derive the"
+    },
+    {
+      "index": 499,
+      "start": 1975.49,
+      "end": 1977.14,
+      "duration": 1.65,
+      "text": "equation of motion"
+    },
+    {
+      "index": 500,
+      "start": 1977.15,
+      "end": 1978.94,
+      "duration": 1.79,
+      "text": "okay we have described that this"
+    },
+    {
+      "index": 501,
+      "start": 1978.95,
+      "end": 1980.919,
+      "duration": 1.969,
+      "text": "equation of motion and what is really"
+    },
+    {
+      "index": 502,
+      "start": 1980.929,
+      "end": 1984.01,
+      "duration": 3.081,
+      "text": "the rest part of the world is actually"
+    },
+    {
+      "index": 503,
+      "start": 1984.02,
+      "end": 1986.38,
+      "duration": 2.36,
+      "text": "ready to solve this equation of motion"
+    },
+    {
+      "index": 504,
+      "start": 1986.39,
+      "end": 1988.75,
+      "duration": 2.36,
+      "text": "and you don't really have to solve it"
+    },
+    {
+      "index": 505,
+      "start": 1988.76,
+      "end": 1991.419,
+      "duration": 2.659,
+      "text": "because you already get the result from"
+    },
+    {
+      "index": 506,
+      "start": 1991.429,
+      "end": 1995.56,
+      "duration": 4.131,
+      "text": "1803 HD you will remember and we are"
+    },
+    {
+      "index": 507,
+      "start": 1995.57,
+      "end": 1997.99,
+      "duration": 2.42,
+      "text": "going to discuss the result but before"
+    },
+    {
+      "index": 508,
+      "start": 1998.0,
+      "end": 2000.39,
+      "duration": 2.39,
+      "text": "that before I really try to solve this"
+    },
+    {
+      "index": 509,
+      "start": 2000.4,
+      "end": 2006.32,
+      "duration": 5.92,
+      "text": "equation I would like to take a vote"
+    },
+    {
+      "index": 510,
+      "start": 2012.57,
+      "end": 2012.58,
+      "duration": 0.01,
+      "text": "okay so here I have two different two"
+    },
+    {
+      "index": 511,
+      "start": 2012.58,
+      "end": 2015.539,
+      "duration": 2.959,
+      "text": "system okay they have equal amount of"
+    },
+    {
+      "index": 512,
+      "start": 2015.549,
+      "end": 2018.029,
+      "duration": 2.48,
+      "text": "mass okay they are attached to a spring"
+    },
+    {
+      "index": 513,
+      "start": 2018.039,
+      "end": 2022.26,
+      "duration": 4.221,
+      "text": "okay if you do the same equation motion"
+    },
+    {
+      "index": 514,
+      "start": 2022.27,
+      "end": 2025.409,
+      "duration": 3.139,
+      "text": "simulation you will actually get exactly"
+    },
+    {
+      "index": 515,
+      "start": 2025.419,
+      "end": 2029.82,
+      "duration": 4.401,
+      "text": "the same solution so it exactly the same"
+    },
+    {
+      "index": 516,
+      "start": 2029.83,
+      "end": 2032.97,
+      "duration": 3.14,
+      "text": "equation of motion in in that form"
+    },
+    {
+      "index": 517,
+      "start": 2032.98,
+      "end": 2035.07,
+      "duration": 2.09,
+      "text": "format okay so the form of the equation"
+    },
+    {
+      "index": 518,
+      "start": 2035.08,
+      "end": 2036.72,
+      "duration": 1.64,
+      "text": "of motion will be the same between this"
+    },
+    {
+      "index": 519,
+      "start": 2036.73,
+      "end": 2041.34,
+      "duration": 4.61,
+      "text": "system and that system okay I would like"
+    },
+    {
+      "index": 520,
+      "start": 2041.35,
+      "end": 2044.58,
+      "duration": 3.23,
+      "text": "to ask you a question about the"
+    },
+    {
+      "index": 521,
+      "start": 2044.59,
+      "end": 2047.399,
+      "duration": 2.809,
+      "text": "oscillation frequency so you can see"
+    },
+    {
+      "index": 522,
+      "start": 2047.409,
+      "end": 2050.369,
+      "duration": 2.96,
+      "text": "that one one of them is as you have a"
+    },
+    {
+      "index": 523,
+      "start": 2050.379,
+      "end": 2053.49,
+      "duration": 3.111,
+      "text": "mass like a point-like particle and the"
+    },
+    {
+      "index": 524,
+      "start": 2053.5,
+      "end": 2056.97,
+      "duration": 3.47,
+      "text": "other one where the ahead okay what is"
+    },
+    {
+      "index": 525,
+      "start": 2056.98,
+      "end": 2059.79,
+      "duration": 2.81,
+      "text": "going to happen is that this Mexican hat"
+    },
+    {
+      "index": 526,
+      "start": 2059.8,
+      "end": 2063.48,
+      "duration": 3.68,
+      "text": "is going to be trying to push the air"
+    },
+    {
+      "index": 527,
+      "start": 2063.49,
+      "end": 2068.76,
+      "duration": 5.27,
+      "text": "away right then you may sing okay this"
+    },
+    {
+      "index": 528,
+      "start": 2068.77,
+      "end": 2070.889,
+      "duration": 2.119,
+      "text": "Mexican stream is not really very"
+    },
+    {
+      "index": 529,
+      "start": 2070.899,
+      "end": 2073.619,
+      "duration": 2.72,
+      "text": "important therefore the oscillation"
+    },
+    {
+      "index": 530,
+      "start": 2073.629,
+      "end": 2076.68,
+      "duration": 3.051,
+      "text": "frequency may be the same right how many"
+    },
+    {
+      "index": 531,
+      "start": 2076.69,
+      "end": 2078.359,
+      "duration": 1.669,
+      "text": "of you think the oscillation frequency"
+    },
+    {
+      "index": 532,
+      "start": 2078.369,
+      "end": 2081.06,
+      "duration": 2.691,
+      "text": "if I actually try to protect this two"
+    },
+    {
+      "index": 533,
+      "start": 2081.07,
+      "end": 2084.329,
+      "duration": 3.259,
+      "text": "system will be the same help raise your"
+    },
+    {
+      "index": 534,
+      "start": 2084.339,
+      "end": 2088.08,
+      "duration": 3.741,
+      "text": "hand one two three four five"
+    },
+    {
+      "index": 535,
+      "start": 2093.78,
+      "end": 2093.79,
+      "duration": 0.01,
+      "text": "okay you have 11 so the Omega the"
+    },
+    {
+      "index": 536,
+      "start": 2093.79,
+      "end": 2101.82,
+      "duration": 8.03,
+      "text": "predate Omega will be equal to Omega how"
+    },
+    {
+      "index": 537,
+      "start": 2101.83,
+      "end": 2105.93,
+      "duration": 4.1,
+      "text": "many of you were seeing that okay"
+    },
+    {
+      "index": 538,
+      "start": 2105.94,
+      "end": 2108.72,
+      "duration": 2.78,
+      "text": "because of this hat okay"
+    },
+    {
+      "index": 539,
+      "start": 2108.73,
+      "end": 2111.54,
+      "duration": 2.81,
+      "text": "this is pushing this air away you know"
+    },
+    {
+      "index": 540,
+      "start": 2111.55,
+      "end": 2114.84,
+      "duration": 3.29,
+      "text": "it's a lot of work to be done and"
+    },
+    {
+      "index": 541,
+      "start": 2114.85,
+      "end": 2119.37,
+      "duration": 4.52,
+      "text": "therefore this is going to slow down the"
+    },
+    {
+      "index": 542,
+      "start": 2119.38,
+      "end": 2122.13,
+      "duration": 2.75,
+      "text": "oscillation how many of you think that"
+    },
+    {
+      "index": 543,
+      "start": 2122.14,
+      "end": 2130.77,
+      "duration": 8.63,
+      "text": "is going to happen one two three okay"
+    },
+    {
+      "index": 544,
+      "start": 2130.78,
+      "end": 2145.71,
+      "duration": 14.93,
+      "text": "seventeen okay it may it may happen to"
+    },
+    {
+      "index": 545,
+      "start": 2145.72,
+      "end": 2148.74,
+      "duration": 3.02,
+      "text": "you that you think this idea of know"
+    },
+    {
+      "index": 546,
+      "start": 2148.75,
+      "end": 2151.56,
+      "duration": 2.81,
+      "text": "where Dena Headlee is really fashionable"
+    },
+    {
+      "index": 547,
+      "start": 2151.57,
+      "end": 2154.83,
+      "duration": 3.26,
+      "text": "know therefore it got really exciting"
+    },
+    {
+      "index": 548,
+      "start": 2154.84,
+      "end": 2160.05,
+      "duration": 5.21,
+      "text": "and also the faster cannot happen how"
+    },
+    {
+      "index": 549,
+      "start": 2160.06,
+      "end": 2162.06,
+      "duration": 2.0,
+      "text": "many of you as you think that is going"
+    },
+    {
+      "index": 550,
+      "start": 2162.07,
+      "end": 2169.07,
+      "duration": 7.0,
+      "text": "to happen okay one do you think so too"
+    },
+    {
+      "index": 551,
+      "start": 2169.08,
+      "end": 2172.68,
+      "duration": 3.6,
+      "text": "very good we have to what what do you"
+    },
+    {
+      "index": 552,
+      "start": 2172.69,
+      "end": 2174.41,
+      "duration": 1.72,
+      "text": "think what are the rest"
+    },
+    {
+      "index": 553,
+      "start": 2174.42,
+      "end": 2180.0,
+      "duration": 5.58,
+      "text": "the only 30 of you as you think that is"
+    },
+    {
+      "index": 554,
+      "start": 2180.01,
+      "end": 2184.71,
+      "duration": 4.7,
+      "text": "going to happen okay all the rest think"
+    },
+    {
+      "index": 555,
+      "start": 2184.72,
+      "end": 2187.38,
+      "duration": 2.66,
+      "text": "all the rest of the class think that"
+    },
+    {
+      "index": 556,
+      "start": 2187.39,
+      "end": 2190.47,
+      "duration": 3.08,
+      "text": "this is going to to disappear to the"
+    },
+    {
+      "index": 557,
+      "start": 2190.48,
+      "end": 2193.05,
+      "duration": 2.57,
+      "text": "moon okay so that is as real opinion and"
+    },
+    {
+      "index": 558,
+      "start": 2193.06,
+      "end": 2195.9,
+      "duration": 2.84,
+      "text": "we have completed the poll and what we"
+    },
+    {
+      "index": 559,
+      "start": 2195.91,
+      "end": 2199.17,
+      "duration": 3.26,
+      "text": "are we are going to do is that we are"
+    },
+    {
+      "index": 560,
+      "start": 2199.18,
+      "end": 2201.18,
+      "duration": 2.0,
+      "text": "going to solve this system and see what"
+    },
+    {
+      "index": 561,
+      "start": 2201.19,
+      "end": 2203.82,
+      "duration": 2.63,
+      "text": "is going to happen and we will do the"
+    },
+    {
+      "index": 562,
+      "start": 2203.83,
+      "end": 2207.45,
+      "duration": 3.62,
+      "text": "experiment in front of you okay all"
+    },
+    {
+      "index": 563,
+      "start": 2207.46,
+      "end": 2210.57,
+      "duration": 3.11,
+      "text": "right so that's very nice so now we have"
+    },
+    {
+      "index": 564,
+      "start": 2210.58,
+      "end": 2213.78,
+      "duration": 3.2,
+      "text": "this equation of motion and now I will"
+    },
+    {
+      "index": 565,
+      "start": 2213.79,
+      "end": 2215.4,
+      "duration": 1.61,
+      "text": "pretend that I'm from the math"
+    },
+    {
+      "index": 566,
+      "start": 2215.41,
+      "end": 2219.66,
+      "duration": 4.25,
+      "text": "department for a bit and help you guide"
+    },
+    {
+      "index": 567,
+      "start": 2219.67,
+      "end": 2221.609,
+      "duration": 1.939,
+      "text": "you through the solution"
+    },
+    {
+      "index": 568,
+      "start": 2221.619,
+      "end": 2224.4,
+      "duration": 2.781,
+      "text": "so now I can use this trick okay the"
+    },
+    {
+      "index": 569,
+      "start": 2224.41,
+      "end": 2227.489,
+      "duration": 3.079,
+      "text": "CETA I can actually say Sita is actually"
+    },
+    {
+      "index": 570,
+      "start": 2227.499,
+      "end": 2231.769,
+      "duration": 4.27,
+      "text": "the real part of the Z is a complex"
+    },
+    {
+      "index": 571,
+      "start": 2231.779,
+      "end": 2237.18,
+      "duration": 5.401,
+      "text": "function and as we learned before the T"
+    },
+    {
+      "index": 572,
+      "start": 2237.19,
+      "end": 2240.89,
+      "duration": 3.7,
+      "text": "and I assume that to be exponential I"
+    },
+    {
+      "index": 573,
+      "start": 2240.9,
+      "end": 2244.41,
+      "duration": 3.51,
+      "text": "alpha so alpha is actually some kind of"
+    },
+    {
+      "index": 574,
+      "start": 2244.42,
+      "end": 2246.63,
+      "duration": 2.21,
+      "text": "constant which we I I don't really know"
+    },
+    {
+      "index": 575,
+      "start": 2246.64,
+      "end": 2250.23,
+      "duration": 3.59,
+      "text": "what is the constant yet okay now I can"
+    },
+    {
+      "index": 576,
+      "start": 2250.24,
+      "end": 2252.87,
+      "duration": 2.63,
+      "text": "now actually write the equation of"
+    },
+    {
+      "index": 577,
+      "start": 2252.88,
+      "end": 2257.43,
+      "duration": 4.55,
+      "text": "motion okay in the form of Z then"
+    },
+    {
+      "index": 578,
+      "start": 2257.44,
+      "end": 2261.42,
+      "duration": 3.98,
+      "text": "basically what I get is Z double dot T"
+    },
+    {
+      "index": 579,
+      "start": 2261.43,
+      "end": 2270.559,
+      "duration": 9.129,
+      "text": "plus gamma the dot T plus Omega 0 square"
+    },
+    {
+      "index": 580,
+      "start": 2270.569,
+      "end": 2276.48,
+      "duration": 5.911,
+      "text": "the e of T and this is equal to 0 okay"
+    },
+    {
+      "index": 581,
+      "start": 2276.49,
+      "end": 2280.289,
+      "duration": 3.799,
+      "text": "so remember explanation function cannot"
+    },
+    {
+      "index": 582,
+      "start": 2280.299,
+      "end": 2282.71,
+      "duration": 2.411,
+      "text": "be killed by differentiation right"
+    },
+    {
+      "index": 583,
+      "start": 2282.72,
+      "end": 2285.269,
+      "duration": 2.549,
+      "text": "therefore it's really convenient you can"
+    },
+    {
+      "index": 584,
+      "start": 2285.279,
+      "end": 2288.239,
+      "duration": 2.96,
+      "text": "see from here now I can plug in this"
+    },
+    {
+      "index": 585,
+      "start": 2288.249,
+      "end": 2291.66,
+      "duration": 3.411,
+      "text": "expression which I did some guests and"
+    },
+    {
+      "index": 586,
+      "start": 2291.67,
+      "end": 2295.769,
+      "duration": 4.099,
+      "text": "two to this equation of motion then what"
+    },
+    {
+      "index": 587,
+      "start": 2295.779,
+      "end": 2298.71,
+      "duration": 2.931,
+      "text": "I am going to get this minus alpha"
+    },
+    {
+      "index": 588,
+      "start": 2298.72,
+      "end": 2302.249,
+      "duration": 3.529,
+      "text": "square okay because I you take I offer I"
+    },
+    {
+      "index": 589,
+      "start": 2302.259,
+      "end": 2306.96,
+      "duration": 4.701,
+      "text": "have out of this exponential function"
+    },
+    {
+      "index": 590,
+      "start": 2306.97,
+      "end": 2309.809,
+      "duration": 2.839,
+      "text": "right because you do to double"
+    },
+    {
+      "index": 591,
+      "start": 2309.819,
+      "end": 2312.599,
+      "duration": 2.78,
+      "text": "differentiation okay so you get minus"
+    },
+    {
+      "index": 592,
+      "start": 2312.609,
+      "end": 2319.019,
+      "duration": 6.41,
+      "text": "alpha square plus I gamma alpha right"
+    },
+    {
+      "index": 593,
+      "start": 2319.029,
+      "end": 2321.21,
+      "duration": 2.181,
+      "text": "because this is only differentiate at"
+    },
+    {
+      "index": 594,
+      "start": 2321.22,
+      "end": 2326.609,
+      "duration": 5.389,
+      "text": "one time plus Omega 0 Square and that is"
+    },
+    {
+      "index": 595,
+      "start": 2326.619,
+      "end": 2330.239,
+      "duration": 3.62,
+      "text": "actually all those things as you is"
+    },
+    {
+      "index": 596,
+      "start": 2330.249,
+      "end": 2332.269,
+      "duration": 2.02,
+      "text": "multiplying this exponential function"
+    },
+    {
+      "index": 597,
+      "start": 2332.279,
+      "end": 2336.769,
+      "duration": 4.49,
+      "text": "exponential I have ax equal to zero okay"
+    },
+    {
+      "index": 598,
+      "start": 2336.779,
+      "end": 2340.65,
+      "duration": 3.871,
+      "text": "so we will write this expression that is"
+    },
+    {
+      "index": 599,
+      "start": 2340.66,
+      "end": 2344.999,
+      "duration": 4.339,
+      "text": "very nice and we also know that this"
+    },
+    {
+      "index": 600,
+      "start": 2345.009,
+      "end": 2348.359,
+      "duration": 3.35,
+      "text": "expression is going to be bad it all the"
+    },
+    {
+      "index": 601,
+      "start": 2348.369,
+      "end": 2349.589,
+      "duration": 1.22,
+      "text": "time no matter what"
+    },
+    {
+      "index": 602,
+      "start": 2349.599,
+      "end": 2353.039,
+      "duration": 3.44,
+      "text": "what T you put in it should be bad right"
+    },
+    {
+      "index": 603,
+      "start": 2353.049,
+      "end": 2354.539,
+      "duration": 1.49,
+      "text": "because this is the equation of motion"
+    },
+    {
+      "index": 604,
+      "start": 2354.549,
+      "end": 2355.35,
+      "duration": 0.801,
+      "text": "and"
+    },
+    {
+      "index": 605,
+      "start": 2355.36,
+      "end": 2357.6,
+      "duration": 2.24,
+      "text": "that we hope that this solution will"
+    },
+    {
+      "index": 606,
+      "start": 2357.61,
+      "end": 2360.56,
+      "duration": 2.95,
+      "text": "survive this test right okay"
+    },
+    {
+      "index": 607,
+      "start": 2360.57,
+      "end": 2364.95,
+      "duration": 4.38,
+      "text": "so I can easily conclude that this one"
+    },
+    {
+      "index": 608,
+      "start": 2364.96,
+      "end": 2369.0,
+      "duration": 4.04,
+      "text": "is actually not equal to zero okay it"
+    },
+    {
+      "index": 609,
+      "start": 2369.01,
+      "end": 2372.21,
+      "duration": 3.2,
+      "text": "can be some value nonzero so what is"
+    },
+    {
+      "index": 610,
+      "start": 2372.22,
+      "end": 2375.3,
+      "duration": 3.08,
+      "text": "actually equal to zero this first term"
+    },
+    {
+      "index": 611,
+      "start": 2375.31,
+      "end": 2380.94,
+      "duration": 5.63,
+      "text": "is actually equal to zero okay therefore"
+    },
+    {
+      "index": 612,
+      "start": 2380.95,
+      "end": 2385.86,
+      "duration": 4.91,
+      "text": "I can now solve this equation minus"
+    },
+    {
+      "index": 613,
+      "start": 2385.87,
+      "end": 2388.5,
+      "duration": 2.63,
+      "text": "alpha squared plus I gamma alpha plus"
+    },
+    {
+      "index": 614,
+      "start": 2388.51,
+      "end": 2392.01,
+      "duration": 3.5,
+      "text": "Omega 0 square equal to zero I can solve"
+    },
+    {
+      "index": 615,
+      "start": 2392.02,
+      "end": 2397.8,
+      "duration": 5.78,
+      "text": "it ok if I do that then I will get alpha"
+    },
+    {
+      "index": 616,
+      "start": 2397.81,
+      "end": 2403.89,
+      "duration": 6.08,
+      "text": "is equal to I gamma plus minus square"
+    },
+    {
+      "index": 617,
+      "start": 2403.9,
+      "end": 2408.66,
+      "duration": 4.76,
+      "text": "root of 4 Omega 0 square minus gamma"
+    },
+    {
+      "index": 618,
+      "start": 2408.67,
+      "end": 2413.46,
+      "duration": 4.79,
+      "text": "square divided by 2 this is actually a"
+    },
+    {
+      "index": 619,
+      "start": 2413.47,
+      "end": 2417.42,
+      "duration": 3.95,
+      "text": "second-order polynomial and you can"
+    },
+    {
+      "index": 620,
+      "start": 2417.43,
+      "end": 2420.12,
+      "duration": 2.69,
+      "text": "actually add that this issue equal to 0"
+    },
+    {
+      "index": 621,
+      "start": 2420.13,
+      "end": 2422.28,
+      "duration": 2.15,
+      "text": "therefore you can actually solve in Z"
+    },
+    {
+      "index": 622,
+      "start": 2422.29,
+      "end": 2425.91,
+      "duration": 3.62,
+      "text": "and this is actually the solution and I"
+    },
+    {
+      "index": 623,
+      "start": 2425.92,
+      "end": 2428.55,
+      "duration": 2.63,
+      "text": "can write it down you know slightly"
+    },
+    {
+      "index": 624,
+      "start": 2428.56,
+      "end": 2432.71,
+      "duration": 4.15,
+      "text": "different form I gamma over 2 plus minus"
+    },
+    {
+      "index": 625,
+      "start": 2432.72,
+      "end": 2437.1,
+      "duration": 4.38,
+      "text": "square root of Omega 0 square minus"
+    },
+    {
+      "index": 626,
+      "start": 2437.11,
+      "end": 2441.39,
+      "duration": 4.28,
+      "text": "gamma square over 4 okay"
+    },
+    {
+      "index": 627,
+      "start": 2441.4,
+      "end": 2443.67,
+      "duration": 2.27,
+      "text": "any questions so far and not going too"
+    },
+    {
+      "index": 628,
+      "start": 2443.68,
+      "end": 2453.56,
+      "duration": 9.88,
+      "text": "fast no everything so ok ok"
+    },
+    {
+      "index": 629,
+      "start": 2457.53,
+      "end": 2457.54,
+      "duration": 0.01,
+      "text": "so you can see that half is equal to"
+    },
+    {
+      "index": 630,
+      "start": 2457.54,
+      "end": 2460.05,
+      "duration": 2.51,
+      "text": "this expression and I would like to"
+    },
+    {
+      "index": 631,
+      "start": 2460.06,
+      "end": 2465.8,
+      "duration": 5.74,
+      "text": "consider a situation where Omega zero is"
+    },
+    {
+      "index": 632,
+      "start": 2465.81,
+      "end": 2469.73,
+      "duration": 3.92,
+      "text": "much much larger than gamma okay"
+    },
+    {
+      "index": 633,
+      "start": 2469.74,
+      "end": 2473.19,
+      "duration": 3.45,
+      "text": "that means just a reminder of what is"
+    },
+    {
+      "index": 634,
+      "start": 2473.2,
+      "end": 2474.24,
+      "duration": 1.04,
+      "text": "gamma okay"
+    },
+    {
+      "index": 635,
+      "start": 2474.25,
+      "end": 2476.49,
+      "duration": 2.24,
+      "text": "maybe you got already a bit confused"
+    },
+    {
+      "index": 636,
+      "start": 2476.5,
+      "end": 2480.96,
+      "duration": 4.46,
+      "text": "what is gamma gamma is related to the"
+    },
+    {
+      "index": 637,
+      "start": 2480.97,
+      "end": 2483.72,
+      "duration": 2.75,
+      "text": "strength of the drag force right it's"
+    },
+    {
+      "index": 638,
+      "start": 2483.73,
+      "end": 2486.84,
+      "duration": 3.11,
+      "text": "actually three P over N squared okay P"
+    },
+    {
+      "index": 639,
+      "start": 2486.85,
+      "end": 2490.59,
+      "duration": 3.74,
+      "text": "is actually giving you the portion okay"
+    },
+    {
+      "index": 640,
+      "start": 2490.6,
+      "end": 2494.13,
+      "duration": 3.53,
+      "text": "it's actually determining the size of"
+    },
+    {
+      "index": 641,
+      "start": 2494.14,
+      "end": 2497.07,
+      "duration": 2.93,
+      "text": "the drag force okay so I would like to"
+    },
+    {
+      "index": 642,
+      "start": 2497.08,
+      "end": 2501.12,
+      "duration": 4.04,
+      "text": "consider a situation the first situation"
+    },
+    {
+      "index": 643,
+      "start": 2501.13,
+      "end": 2507.9,
+      "duration": 6.77,
+      "text": "is if Omega 0 square is larger than"
+    },
+    {
+      "index": 644,
+      "start": 2507.91,
+      "end": 2514.11,
+      "duration": 6.2,
+      "text": "gamma square over 4 okay so it not limit"
+    },
+    {
+      "index": 645,
+      "start": 2514.12,
+      "end": 2518.94,
+      "duration": 4.82,
+      "text": "it so in that case the drag force okay"
+    },
+    {
+      "index": 646,
+      "start": 2518.95,
+      "end": 2523.32,
+      "duration": 4.37,
+      "text": "it is small okay it's not huge okay"
+    },
+    {
+      "index": 647,
+      "start": 2523.33,
+      "end": 2527.67,
+      "duration": 4.34,
+      "text": "small okay if that is the case this is"
+    },
+    {
+      "index": 648,
+      "start": 2527.68,
+      "end": 2532.02,
+      "duration": 4.34,
+      "text": "actually real right because Omega 0"
+    },
+    {
+      "index": 649,
+      "start": 2532.03,
+      "end": 2534.63,
+      "duration": 2.6,
+      "text": "square is larger than gamma square over"
+    },
+    {
+      "index": 650,
+      "start": 2534.64,
+      "end": 2538.47,
+      "duration": 3.83,
+      "text": "4 therefore this is real okay so now I"
+    },
+    {
+      "index": 651,
+      "start": 2538.48,
+      "end": 2543.18,
+      "duration": 4.7,
+      "text": "can actually define Omega square define"
+    },
+    {
+      "index": 652,
+      "start": 2543.19,
+      "end": 2547.59,
+      "duration": 4.4,
+      "text": "that as Omega 0 square minus gamma"
+    },
+    {
+      "index": 653,
+      "start": 2547.6,
+      "end": 2554.63,
+      "duration": 7.03,
+      "text": "square over 4 ok and this will become"
+    },
+    {
+      "index": 654,
+      "start": 2554.64,
+      "end": 2560.42,
+      "duration": 5.78,
+      "text": "and this will become hi gamma over 2"
+    },
+    {
+      "index": 655,
+      "start": 2560.43,
+      "end": 2568.98,
+      "duration": 8.55,
+      "text": "plus minus Omega okay so that means I"
+    },
+    {
+      "index": 656,
+      "start": 2568.99,
+      "end": 2572.88,
+      "duration": 3.89,
+      "text": "will have two solutions coming from this"
+    },
+    {
+      "index": 657,
+      "start": 2572.89,
+      "end": 2579.59,
+      "duration": 6.7,
+      "text": "exercise the pass of T is equal to"
+    },
+    {
+      "index": 658,
+      "start": 2579.6,
+      "end": 2583.85,
+      "duration": 4.25,
+      "text": "exponential minus gamma over 2 T"
+    },
+    {
+      "index": 659,
+      "start": 2583.86,
+      "end": 2585.309,
+      "duration": 1.449,
+      "text": "exponential"
+    },
+    {
+      "index": 660,
+      "start": 2585.319,
+      "end": 2593.89,
+      "duration": 8.571,
+      "text": "I Omega okay and the - the second"
+    },
+    {
+      "index": 661,
+      "start": 2593.9,
+      "end": 2598.239,
+      "duration": 4.339,
+      "text": "solution okay if I take one of the plus"
+    },
+    {
+      "index": 662,
+      "start": 2598.249,
+      "end": 2601.15,
+      "duration": 2.901,
+      "text": "sign that was a minus sign solution then"
+    },
+    {
+      "index": 663,
+      "start": 2601.16,
+      "end": 2603.699,
+      "duration": 2.539,
+      "text": "the second solution will be explanation"
+    },
+    {
+      "index": 664,
+      "start": 2603.709,
+      "end": 2610.209,
+      "duration": 6.5,
+      "text": "minus I gamma over 2t explanation - hi"
+    },
+    {
+      "index": 665,
+      "start": 2610.219,
+      "end": 2618.299,
+      "duration": 8.08,
+      "text": "oh my gosh okay any questions so far"
+    },
+    {
+      "index": 666,
+      "start": 2624.16,
+      "end": 2624.17,
+      "duration": 0.01,
+      "text": "okay so we would like to go back to Sita"
+    },
+    {
+      "index": 667,
+      "start": 2624.17,
+      "end": 2629.289,
+      "duration": 5.119,
+      "text": "right so so what would be the Sita so"
+    },
+    {
+      "index": 668,
+      "start": 2629.299,
+      "end": 2632.92,
+      "duration": 3.621,
+      "text": "that means I will have a theta 1 of T"
+    },
+    {
+      "index": 669,
+      "start": 2632.93,
+      "end": 2634.749,
+      "duration": 1.819,
+      "text": "which is actually taking the real part"
+    },
+    {
+      "index": 670,
+      "start": 2634.759,
+      "end": 2638.049,
+      "duration": 3.29,
+      "text": "so I see the price maybe okay"
+    },
+    {
+      "index": 671,
+      "start": 2638.059,
+      "end": 2641.109,
+      "duration": 3.05,
+      "text": "taking the real part of the Z press and"
+    },
+    {
+      "index": 672,
+      "start": 2641.119,
+      "end": 2645.13,
+      "duration": 4.011,
+      "text": "now we'll give you exponential minus"
+    },
+    {
+      "index": 673,
+      "start": 2645.14,
+      "end": 2655.93,
+      "duration": 10.79,
+      "text": "gamma over 2t cosine Omega okay I'm just"
+    },
+    {
+      "index": 674,
+      "start": 2655.94,
+      "end": 2658.18,
+      "duration": 2.24,
+      "text": "plugging in the solution to this"
+    },
+    {
+      "index": 675,
+      "start": 2658.19,
+      "end": 2666.699,
+      "duration": 8.509,
+      "text": "equation okay theta minus T will be"
+    },
+    {
+      "index": 676,
+      "start": 2666.709,
+      "end": 2670.259,
+      "duration": 3.55,
+      "text": "equal to exponential and come over to T"
+    },
+    {
+      "index": 677,
+      "start": 2670.269,
+      "end": 2679.479,
+      "duration": 9.21,
+      "text": "sine Omega T okay finally the full"
+    },
+    {
+      "index": 678,
+      "start": 2679.489,
+      "end": 2684.279,
+      "duration": 4.79,
+      "text": "solution of theta of T will be a linear"
+    },
+    {
+      "index": 679,
+      "start": 2684.289,
+      "end": 2687.339,
+      "duration": 3.05,
+      "text": "combination of this two solution right"
+    },
+    {
+      "index": 680,
+      "start": 2687.349,
+      "end": 2691.779,
+      "duration": 4.43,
+      "text": "therefore you will get set of t equal to"
+    },
+    {
+      "index": 681,
+      "start": 2691.789,
+      "end": 2697.539,
+      "duration": 5.75,
+      "text": "exponential minus gamma over 2t a is"
+    },
+    {
+      "index": 682,
+      "start": 2697.549,
+      "end": 2701.65,
+      "duration": 4.101,
+      "text": "some kind of constant times cosine Omega"
+    },
+    {
+      "index": 683,
+      "start": 2701.66,
+      "end": 2711.109,
+      "duration": 9.449,
+      "text": "T plus P sine Omega T okay"
+    },
+    {
+      "index": 684,
+      "start": 2711.119,
+      "end": 2714.62,
+      "duration": 3.501,
+      "text": "and of course from the last time as you"
+    },
+    {
+      "index": 685,
+      "start": 2714.63,
+      "end": 2717.859,
+      "duration": 3.229,
+      "text": "we know that this can also be written as"
+    },
+    {
+      "index": 686,
+      "start": 2717.869,
+      "end": 2725.14,
+      "duration": 7.271,
+      "text": "a cosine Omega T plus five"
+    },
+    {
+      "index": 687,
+      "start": 2725.15,
+      "end": 2730.87,
+      "duration": 5.72,
+      "text": "okay any questions so far"
+    },
+    {
+      "index": 688,
+      "start": 2736.729,
+      "end": 2736.739,
+      "duration": 0.01,
+      "text": "okay very good so we have actually"
+    },
+    {
+      "index": 689,
+      "start": 2736.739,
+      "end": 2739.729,
+      "duration": 2.99,
+      "text": "already solved this equation and of"
+    },
+    {
+      "index": 690,
+      "start": 2739.739,
+      "end": 2743.12,
+      "duration": 3.381,
+      "text": "course we can actually practice a back"
+    },
+    {
+      "index": 691,
+      "start": 2743.13,
+      "end": 2748.88,
+      "duration": 5.75,
+      "text": "into this equation of motion and you"
+    },
+    {
+      "index": 692,
+      "start": 2748.89,
+      "end": 2750.92,
+      "duration": 2.03,
+      "text": "will see that it really works and I'm"
+    },
+    {
+      "index": 693,
+      "start": 2750.93,
+      "end": 2752.569,
+      "duration": 1.639,
+      "text": "not going to do that now but you can"
+    },
+    {
+      "index": 694,
+      "start": 2752.579,
+      "end": 2754.94,
+      "duration": 2.361,
+      "text": "easily go back home and check and you"
+    },
+    {
+      "index": 695,
+      "start": 2754.95,
+      "end": 2758.87,
+      "duration": 3.92,
+      "text": "will be deep me it works and also at the"
+    },
+    {
+      "index": 696,
+      "start": 2758.88,
+      "end": 2761.87,
+      "duration": 2.99,
+      "text": "same time you got to undetermined"
+    },
+    {
+      "index": 697,
+      "start": 2761.88,
+      "end": 2765.37,
+      "duration": 3.49,
+      "text": "constants since this is a second order"
+    },
+    {
+      "index": 698,
+      "start": 2765.38,
+      "end": 2769.94,
+      "duration": 4.56,
+      "text": "differential equation therefore ha this"
+    },
+    {
+      "index": 699,
+      "start": 2769.95,
+      "end": 2772.069,
+      "duration": 2.119,
+      "text": "thing as you works have two arbitrary"
+    },
+    {
+      "index": 700,
+      "start": 2772.079,
+      "end": 2774.68,
+      "duration": 2.601,
+      "text": "constant therefore that is actually one"
+    },
+    {
+      "index": 701,
+      "start": 2774.69,
+      "end": 2777.549,
+      "duration": 2.859,
+      "text": "and the only one solution in a universe"
+    },
+    {
+      "index": 702,
+      "start": 2777.559,
+      "end": 2780.799,
+      "duration": 3.24,
+      "text": "which satisfy the equation of motion or"
+    },
+    {
+      "index": 703,
+      "start": 2780.809,
+      "end": 2783.319,
+      "duration": 2.51,
+      "text": "to satisfy that equation equation"
+    },
+    {
+      "index": 704,
+      "start": 2783.329,
+      "end": 2787.489,
+      "duration": 4.16,
+      "text": "differential equation okay so this thing"
+    },
+    {
+      "index": 705,
+      "start": 2787.499,
+      "end": 2792.14,
+      "duration": 4.641,
+      "text": "actually have dramatical consequence the"
+    },
+    {
+      "index": 706,
+      "start": 2792.15,
+      "end": 2794.87,
+      "duration": 2.72,
+      "text": "first thing which we learn is that as a"
+    },
+    {
+      "index": 707,
+      "start": 2794.88,
+      "end": 2797.109,
+      "duration": 2.229,
+      "text": "function of time what is going to happen"
+    },
+    {
+      "index": 708,
+      "start": 2797.119,
+      "end": 2798.289,
+      "duration": 1.17,
+      "text": "okay"
+    },
+    {
+      "index": 709,
+      "start": 2798.299,
+      "end": 2801.849,
+      "duration": 3.55,
+      "text": "the amplitude is now becoming"
+    },
+    {
+      "index": 710,
+      "start": 2801.859,
+      "end": 2807.229,
+      "duration": 5.37,
+      "text": "exponential minus gamma over 2t times a"
+    },
+    {
+      "index": 711,
+      "start": 2807.239,
+      "end": 2811.13,
+      "duration": 3.891,
+      "text": "this is actually the amplitude the"
+    },
+    {
+      "index": 712,
+      "start": 2811.14,
+      "end": 2816.92,
+      "duration": 5.78,
+      "text": "amplitude is decreasing exponentially so"
+    },
+    {
+      "index": 713,
+      "start": 2816.93,
+      "end": 2818.829,
+      "duration": 1.899,
+      "text": "that is actually the first partition"
+    },
+    {
+      "index": 714,
+      "start": 2818.839,
+      "end": 2822.2,
+      "duration": 3.361,
+      "text": "coming from this exercise okay the"
+    },
+    {
+      "index": 715,
+      "start": 2822.21,
+      "end": 2826.069,
+      "duration": 3.859,
+      "text": "second prediction is that this C is"
+    },
+    {
+      "index": 716,
+      "start": 2826.079,
+      "end": 2827.989,
+      "duration": 1.91,
+      "text": "still oscillating because we've got the"
+    },
+    {
+      "index": 717,
+      "start": 2827.999,
+      "end": 2833.019,
+      "duration": 5.02,
+      "text": "cosine Omega T plus Phi there you see so"
+    },
+    {
+      "index": 718,
+      "start": 2833.029,
+      "end": 2835.849,
+      "duration": 2.82,
+      "text": "the resulting motion is going to be like"
+    },
+    {
+      "index": 719,
+      "start": 2835.859,
+      "end": 2839.42,
+      "duration": 3.561,
+      "text": "going up and down I'll be done and got"
+    },
+    {
+      "index": 720,
+      "start": 2839.43,
+      "end": 2840.41,
+      "duration": 0.98,
+      "text": "tired"
+    },
+    {
+      "index": 721,
+      "start": 2840.42,
+      "end": 2842.69,
+      "duration": 2.27,
+      "text": "therefore the amplitude because small"
+    },
+    {
+      "index": 722,
+      "start": 2842.7,
+      "end": 2843.62,
+      "duration": 0.92,
+      "text": "Ernst"
+    },
+    {
+      "index": 723,
+      "start": 2843.63,
+      "end": 2848.539,
+      "duration": 4.909,
+      "text": "and modern but it's never zero right"
+    },
+    {
+      "index": 724,
+      "start": 2848.549,
+      "end": 2850.43,
+      "duration": 1.881,
+      "text": "it's never a zero okay it's actually"
+    },
+    {
+      "index": 725,
+      "start": 2850.44,
+      "end": 2853.729,
+      "duration": 3.289,
+      "text": "going to be a living down so small I"
+    },
+    {
+      "index": 726,
+      "start": 2853.739,
+      "end": 2855.049,
+      "duration": 1.31,
+      "text": "couldn't see it but it's still"
+    },
+    {
+      "index": 727,
+      "start": 2855.059,
+      "end": 2858.13,
+      "duration": 3.071,
+      "text": "oscillating okay"
+    },
+    {
+      "index": 728,
+      "start": 2862.719,
+      "end": 2862.729,
+      "duration": 0.01,
+      "text": "finally we actually have also the answer"
+    },
+    {
+      "index": 729,
+      "start": 2862.729,
+      "end": 2868.16,
+      "duration": 5.431,
+      "text": "to the original question we post okay so"
+    },
+    {
+      "index": 730,
+      "start": 2868.17,
+      "end": 2869.989,
+      "duration": 1.819,
+      "text": "now you can see that the oscillation"
+    },
+    {
+      "index": 731,
+      "start": 2869.999,
+      "end": 2875.029,
+      "duration": 5.03,
+      "text": "frequency is omega okay originally"
+    },
+    {
+      "index": 732,
+      "start": 2875.039,
+      "end": 2879.4,
+      "duration": 4.361,
+      "text": "before we introduced the drag force"
+    },
+    {
+      "index": 733,
+      "start": 2879.41,
+      "end": 2883.249,
+      "duration": 3.839,
+      "text": "Omega 0 which is the oscillation"
+    },
+    {
+      "index": 734,
+      "start": 2883.259,
+      "end": 2885.65,
+      "duration": 2.391,
+      "text": "frequency it should be like your"
+    },
+    {
+      "index": 735,
+      "start": 2885.66,
+      "end": 2888.859,
+      "duration": 3.199,
+      "text": "frequency is a square root of 3G over 2l"
+    },
+    {
+      "index": 736,
+      "start": 2888.869,
+      "end": 2893.599,
+      "duration": 4.73,
+      "text": "and you can see that the Omega okay that"
+    },
+    {
+      "index": 737,
+      "start": 2893.609,
+      "end": 2896.359,
+      "duration": 2.75,
+      "text": "the new Omega the oscillation frequency"
+    },
+    {
+      "index": 738,
+      "start": 2896.369,
+      "end": 2900.95,
+      "duration": 4.581,
+      "text": "with drag force essentially Omega 0"
+    },
+    {
+      "index": 739,
+      "start": 2900.96,
+      "end": 2904.039,
+      "duration": 3.079,
+      "text": "square square root of this Omega 0"
+    },
+    {
+      "index": 740,
+      "start": 2904.049,
+      "end": 2908.089,
+      "duration": 4.04,
+      "text": "square minus gamma squared over 4 so"
+    },
+    {
+      "index": 741,
+      "start": 2908.099,
+      "end": 2910.549,
+      "duration": 2.45,
+      "text": "that what this tells she tells us is"
+    },
+    {
+      "index": 742,
+      "start": 2910.559,
+      "end": 2916.88,
+      "duration": 6.321,
+      "text": "that this is going to be smaller right"
+    },
+    {
+      "index": 743,
+      "start": 2916.89,
+      "end": 2920.029,
+      "duration": 3.139,
+      "text": "because of the drag force okay so that's"
+    },
+    {
+      "index": 744,
+      "start": 2920.039,
+      "end": 2923.509,
+      "duration": 3.47,
+      "text": "the prediction ok let's do the"
+    },
+    {
+      "index": 745,
+      "start": 2923.519,
+      "end": 2925.489,
+      "duration": 1.97,
+      "text": "experiment and see what is going to"
+    },
+    {
+      "index": 746,
+      "start": 2925.499,
+      "end": 2928.009,
+      "duration": 2.51,
+      "text": "happen so let's take a look at this two"
+    },
+    {
+      "index": 747,
+      "start": 2928.019,
+      "end": 2930.349,
+      "duration": 2.33,
+      "text": "system they have the identical mass"
+    },
+    {
+      "index": 748,
+      "start": 2930.359,
+      "end": 2933.349,
+      "duration": 2.99,
+      "text": "which our instructor taking her"
+    },
+    {
+      "index": 749,
+      "start": 2933.359,
+      "end": 2935.42,
+      "duration": 2.061,
+      "text": "instructor H we kept for the prepare"
+    },
+    {
+      "index": 750,
+      "start": 2935.43,
+      "end": 2938.299,
+      "duration": 2.869,
+      "text": "okay they have the same mass even though"
+    },
+    {
+      "index": 751,
+      "start": 2938.309,
+      "end": 2941.18,
+      "duration": 2.871,
+      "text": "one is actually do go Tiffany the other"
+    },
+    {
+      "index": 752,
+      "start": 2941.19,
+      "end": 2944.599,
+      "duration": 3.409,
+      "text": "one looks normal okay now what I'm going"
+    },
+    {
+      "index": 753,
+      "start": 2944.609,
+      "end": 2949.759,
+      "duration": 5.15,
+      "text": "to do is to really try and and see which"
+    },
+    {
+      "index": 754,
+      "start": 2949.769,
+      "end": 2952.219,
+      "duration": 2.45,
+      "text": "one is actually isolating faster okay so"
+    },
+    {
+      "index": 755,
+      "start": 2952.229,
+      "end": 2955.16,
+      "duration": 2.931,
+      "text": "let's see I drew this then at the same"
+    },
+    {
+      "index": 756,
+      "start": 2955.17,
+      "end": 2958.13,
+      "duration": 2.96,
+      "text": "time and you can see that originally"
+    },
+    {
+      "index": 757,
+      "start": 2958.14,
+      "end": 2959.9,
+      "duration": 1.76,
+      "text": "they seem to be oscillating at the same"
+    },
+    {
+      "index": 758,
+      "start": 2959.91,
+      "end": 2962.359,
+      "duration": 2.449,
+      "text": "frequency but you can see very clearly"
+    },
+    {
+      "index": 759,
+      "start": 2962.369,
+      "end": 2966.769,
+      "duration": 4.4,
+      "text": "that the one with the head is actually"
+    },
+    {
+      "index": 760,
+      "start": 2966.779,
+      "end": 2970.759,
+      "duration": 3.98,
+      "text": "oscillating slower okay so you can see"
+    },
+    {
+      "index": 761,
+      "start": 2970.769,
+      "end": 2973.729,
+      "duration": 2.96,
+      "text": "that okay seventeen of you actually have"
+    },
+    {
+      "index": 762,
+      "start": 2973.739,
+      "end": 2976.079,
+      "duration": 2.34,
+      "text": "the correct answer gather courage and"
+    },
+    {
+      "index": 763,
+      "start": 2976.089,
+      "end": 2979.289,
+      "duration": 3.2,
+      "text": "and the most important thing is that you"
+    },
+    {
+      "index": 764,
+      "start": 2979.299,
+      "end": 2981.38,
+      "duration": 2.081,
+      "text": "can see that this simple mask actually"
+    },
+    {
+      "index": 765,
+      "start": 2981.39,
+      "end": 2984.449,
+      "duration": 3.059,
+      "text": "describe and predict what is going to"
+    },
+    {
+      "index": 766,
+      "start": 2984.459,
+      "end": 2988.17,
+      "duration": 3.711,
+      "text": "happen in my little experiment so that"
+    },
+    {
+      "index": 767,
+      "start": 2988.18,
+      "end": 2991.41,
+      "duration": 3.23,
+      "text": "is actually really cool and I think it's"
+    },
+    {
+      "index": 768,
+      "start": 2991.42,
+      "end": 2994.079,
+      "duration": 2.659,
+      "text": "time to take a little break and they"
+    },
+    {
+      "index": 769,
+      "start": 2994.089,
+      "end": 2996.66,
+      "duration": 2.571,
+      "text": "will come come back and and look at"
+    },
+    {
+      "index": 770,
+      "start": 2996.67,
+      "end": 2998.939,
+      "duration": 2.269,
+      "text": "other solutions and of course you are"
+    },
+    {
+      "index": 771,
+      "start": 2998.949,
+      "end": 3001.699,
+      "duration": 2.75,
+      "text": "welcome to come to the front to pray"
+    },
+    {
+      "index": 772,
+      "start": 3001.709,
+      "end": 3009.68,
+      "duration": 7.971,
+      "text": "with those demonstrations"
+    },
+    {
+      "index": 773,
+      "start": 3012.65,
+      "end": 3012.66,
+      "duration": 0.01,
+      "text": "so there are two small issues which were"
+    },
+    {
+      "index": 774,
+      "start": 3012.66,
+      "end": 3016.279,
+      "duration": 3.619,
+      "text": "raised by during the break so the first"
+    },
+    {
+      "index": 775,
+      "start": 3016.289,
+      "end": 3018.64,
+      "duration": 2.351,
+      "text": "one is that if you actually calculate"
+    },
+    {
+      "index": 776,
+      "start": 3018.65,
+      "end": 3021.529,
+      "duration": 2.879,
+      "text": "the torque okay"
+    },
+    {
+      "index": 777,
+      "start": 3021.539,
+      "end": 3025.16,
+      "duration": 3.621,
+      "text": "from this fund this equation so I made a"
+    },
+    {
+      "index": 778,
+      "start": 3025.17,
+      "end": 3025.97,
+      "duration": 0.8,
+      "text": "mistake"
+    },
+    {
+      "index": 779,
+      "start": 3025.98,
+      "end": 3028.67,
+      "duration": 2.69,
+      "text": "the R vector should be actually pointing"
+    },
+    {
+      "index": 780,
+      "start": 3028.68,
+      "end": 3031.97,
+      "duration": 3.29,
+      "text": "from the nail to the center of mass okay"
+    },
+    {
+      "index": 781,
+      "start": 3031.98,
+      "end": 3034.7,
+      "duration": 2.72,
+      "text": "so I think that's a trivial a mistake so"
+    },
+    {
+      "index": 782,
+      "start": 3034.71,
+      "end": 3036.17,
+      "duration": 1.46,
+      "text": "if you do this okay"
+    },
+    {
+      "index": 783,
+      "start": 3036.18,
+      "end": 3038.72,
+      "duration": 2.54,
+      "text": "then you can get you a care today the"
+    },
+    {
+      "index": 784,
+      "start": 3038.73,
+      "end": 3042.65,
+      "duration": 3.92,
+      "text": "tau equal to R cross F then you actually"
+    },
+    {
+      "index": 785,
+      "start": 3042.66,
+      "end": 3046.549,
+      "duration": 3.889,
+      "text": "get this minus sign okay so so if I if I"
+    },
+    {
+      "index": 786,
+      "start": 3046.559,
+      "end": 3049.279,
+      "duration": 2.72,
+      "text": "make a mistake and pointing toward the"
+    },
+    {
+      "index": 787,
+      "start": 3049.289,
+      "end": 3052.549,
+      "duration": 3.26,
+      "text": "nail okay then you will get no minus"
+    },
+    {
+      "index": 788,
+      "start": 3052.559,
+      "end": 3055.16,
+      "duration": 2.601,
+      "text": "sign okay they're not really work okay"
+    },
+    {
+      "index": 789,
+      "start": 3055.17,
+      "end": 3058.849,
+      "duration": 3.679,
+      "text": "so so very good I'm very happy that you"
+    },
+    {
+      "index": 790,
+      "start": 3058.859,
+      "end": 3060.549,
+      "duration": 1.69,
+      "text": "are actually paying very much attention"
+    },
+    {
+      "index": 791,
+      "start": 3060.559,
+      "end": 3064.73,
+      "duration": 4.171,
+      "text": "to capture those the the second issue is"
+    },
+    {
+      "index": 792,
+      "start": 3064.74,
+      "end": 3067.819,
+      "duration": 3.079,
+      "text": "that okay so now I'm saying that okay"
+    },
+    {
+      "index": 793,
+      "start": 3067.829,
+      "end": 3070.7,
+      "duration": 2.871,
+      "text": "now I have the solution in the complex"
+    },
+    {
+      "index": 794,
+      "start": 3070.71,
+      "end": 3074.39,
+      "duration": 3.68,
+      "text": "form format so I can have a G+ and I"
+    },
+    {
+      "index": 795,
+      "start": 3074.4,
+      "end": 3075.95,
+      "duration": 1.55,
+      "text": "have the Z - okay"
+    },
+    {
+      "index": 796,
+      "start": 3075.96,
+      "end": 3078.68,
+      "duration": 2.72,
+      "text": "and then I would like to go to the real"
+    },
+    {
+      "index": 797,
+      "start": 3078.69,
+      "end": 3079.849,
+      "duration": 1.159,
+      "text": "world"
+    },
+    {
+      "index": 798,
+      "start": 3079.859,
+      "end": 3082.25,
+      "duration": 2.391,
+      "text": "right because imaginary thing is"
+    },
+    {
+      "index": 799,
+      "start": 3082.26,
+      "end": 3084.89,
+      "duration": 2.63,
+      "text": "actually hidden in some kind of you know"
+    },
+    {
+      "index": 800,
+      "start": 3084.9,
+      "end": 3087.68,
+      "duration": 2.78,
+      "text": "motion in the actual dimension and etc I"
+    },
+    {
+      "index": 801,
+      "start": 3087.69,
+      "end": 3090.17,
+      "duration": 2.48,
+      "text": "would like to go back to reality okay"
+    },
+    {
+      "index": 802,
+      "start": 3090.18,
+      "end": 3094.13,
+      "duration": 3.95,
+      "text": "and and what I said in the class is that"
+    },
+    {
+      "index": 803,
+      "start": 3094.14,
+      "end": 3096.319,
+      "duration": 2.179,
+      "text": "I take a real part of one of the"
+    },
+    {
+      "index": 804,
+      "start": 3096.329,
+      "end": 3098.93,
+      "duration": 2.601,
+      "text": "solution and I can also take the real"
+    },
+    {
+      "index": 805,
+      "start": 3098.94,
+      "end": 3102.529,
+      "duration": 3.589,
+      "text": "part of I times one of the solution but"
+    },
+    {
+      "index": 806,
+      "start": 3102.539,
+      "end": 3106.309,
+      "duration": 3.77,
+      "text": "of course you can also do this by doing"
+    },
+    {
+      "index": 807,
+      "start": 3106.319,
+      "end": 3108.559,
+      "duration": 2.24,
+      "text": "a linear combination of the solution"
+    },
+    {
+      "index": 808,
+      "start": 3108.569,
+      "end": 3111.26,
+      "duration": 2.691,
+      "text": "right as we actually discussed last time"
+    },
+    {
+      "index": 809,
+      "start": 3111.27,
+      "end": 3114.14,
+      "duration": 2.87,
+      "text": "linear combination of the solutions is"
+    },
+    {
+      "index": 810,
+      "start": 3114.15,
+      "end": 3117.099,
+      "duration": 2.949,
+      "text": "also a solution to this the same"
+    },
+    {
+      "index": 811,
+      "start": 3117.109,
+      "end": 3119.63,
+      "duration": 2.521,
+      "text": "equation of motion right since this one"
+    },
+    {
+      "index": 812,
+      "start": 3119.64,
+      "end": 3123.859,
+      "duration": 4.219,
+      "text": "is a linear therefore what I actually do"
+    },
+    {
+      "index": 813,
+      "start": 3123.869,
+      "end": 3127.549,
+      "duration": 3.68,
+      "text": "is actually to to sum the two solution"
+    },
+    {
+      "index": 814,
+      "start": 3127.559,
+      "end": 3132.16,
+      "duration": 4.601,
+      "text": "the press and D - and / - or actually I"
+    },
+    {
+      "index": 815,
+      "start": 3132.17,
+      "end": 3136.339,
+      "duration": 4.169,
+      "text": "attended to the two minus I over 2 times"
+    },
+    {
+      "index": 816,
+      "start": 3136.349,
+      "end": 3140.75,
+      "duration": 4.401,
+      "text": "the price - the the - okay then I can"
+    },
+    {
+      "index": 817,
+      "start": 3140.76,
+      "end": 3142.52,
+      "duration": 1.76,
+      "text": "also extract this sign"
+    },
+    {
+      "index": 818,
+      "start": 3142.53,
+      "end": 3145.25,
+      "duration": 2.72,
+      "text": "here okay so that is that should be the"
+    },
+    {
+      "index": 819,
+      "start": 3145.26,
+      "end": 3148.16,
+      "duration": 2.9,
+      "text": "correct explanation of the two solution"
+    },
+    {
+      "index": 820,
+      "start": 3148.17,
+      "end": 3154.45,
+      "duration": 6.28,
+      "text": "in real axis okay any questions so far"
+    },
+    {
+      "index": 821,
+      "start": 3154.46,
+      "end": 3157.01,
+      "duration": 2.55,
+      "text": "thank you very much for protection"
+    },
+    {
+      "index": 822,
+      "start": 3157.02,
+      "end": 3160.31,
+      "duration": 3.29,
+      "text": "during those okay so now you can see"
+    },
+    {
+      "index": 823,
+      "start": 3160.32,
+      "end": 3162.56,
+      "duration": 2.24,
+      "text": "that we have been discussing the"
+    },
+    {
+      "index": 824,
+      "start": 3162.57,
+      "end": 3164.36,
+      "duration": 1.79,
+      "text": "equation of motion of this functional"
+    },
+    {
+      "index": 825,
+      "start": 3164.37,
+      "end": 3166.93,
+      "duration": 2.56,
+      "text": "form and the one thing which is really"
+    },
+    {
+      "index": 826,
+      "start": 3166.94,
+      "end": 3172.16,
+      "duration": 5.22,
+      "text": "interesting is that the solution when we"
+    },
+    {
+      "index": 827,
+      "start": 3172.17,
+      "end": 3177.23,
+      "duration": 5.06,
+      "text": "take small track force limit actually we"
+    },
+    {
+      "index": 828,
+      "start": 3177.24,
+      "end": 3180.77,
+      "duration": 3.53,
+      "text": "arrive a beautiful solution looks like"
+    },
+    {
+      "index": 829,
+      "start": 3180.78,
+      "end": 3185.83,
+      "duration": 5.05,
+      "text": "this a exponential minus gamma over 2t"
+    },
+    {
+      "index": 830,
+      "start": 3185.84,
+      "end": 3188.75,
+      "duration": 2.91,
+      "text": "cosine Omega T plus Phi"
+    },
+    {
+      "index": 831,
+      "start": 3188.76,
+      "end": 3190.82,
+      "duration": 2.06,
+      "text": "that I should predict the oscillation"
+    },
+    {
+      "index": 832,
+      "start": 3190.83,
+      "end": 3194.14,
+      "duration": 3.31,
+      "text": "okay at the same time he also says that"
+    },
+    {
+      "index": 833,
+      "start": 3194.15,
+      "end": 3198.07,
+      "duration": 3.92,
+      "text": "the amplitude is actually going to drop"
+    },
+    {
+      "index": 834,
+      "start": 3198.08,
+      "end": 3201.61,
+      "duration": 3.53,
+      "text": "exponentially but never zero okay"
+    },
+    {
+      "index": 835,
+      "start": 3201.62,
+      "end": 3206.51,
+      "duration": 4.89,
+      "text": "finally we also know that this solution"
+    },
+    {
+      "index": 836,
+      "start": 3206.52,
+      "end": 3209.6,
+      "duration": 3.08,
+      "text": "actually tells us that if we have a"
+    },
+    {
+      "index": 837,
+      "start": 3209.61,
+      "end": 3211.91,
+      "duration": 2.3,
+      "text": "spring mass system oscillating up and"
+    },
+    {
+      "index": 838,
+      "start": 3211.92,
+      "end": 3215.66,
+      "duration": 3.74,
+      "text": "down if we have a rod like what we"
+    },
+    {
+      "index": 839,
+      "start": 3215.67,
+      "end": 3219.86,
+      "duration": 4.19,
+      "text": "actually solving in in a class this"
+    },
+    {
+      "index": 840,
+      "start": 3219.87,
+      "end": 3224.24,
+      "duration": 4.37,
+      "text": "object is going to pass through zero the"
+    },
+    {
+      "index": 841,
+      "start": 3224.25,
+      "end": 3226.7,
+      "duration": 2.45,
+      "text": "equilibrium position infinite number of"
+    },
+    {
+      "index": 842,
+      "start": 3226.71,
+      "end": 3229.46,
+      "duration": 2.75,
+      "text": "times right because the the cosine is"
+    },
+    {
+      "index": 843,
+      "start": 3229.47,
+      "end": 3232.73,
+      "duration": 3.26,
+      "text": "always there therefore although the mp2"
+    },
+    {
+      "index": 844,
+      "start": 3232.74,
+      "end": 3234.37,
+      "duration": 1.63,
+      "text": "become very small they still oscillating"
+    },
+    {
+      "index": 845,
+      "start": 3234.38,
+      "end": 3237.41,
+      "duration": 3.03,
+      "text": "forever until the end of the universe"
+    },
+    {
+      "index": 846,
+      "start": 3237.42,
+      "end": 3241.04,
+      "duration": 3.62,
+      "text": "okay all right so that's actually what"
+    },
+    {
+      "index": 847,
+      "start": 3241.05,
+      "end": 3244.22,
+      "duration": 3.17,
+      "text": "we have learned and also one thing which"
+    },
+    {
+      "index": 848,
+      "start": 3244.23,
+      "end": 3247.4,
+      "duration": 3.17,
+      "text": "we learned that time is that simple"
+    },
+    {
+      "index": 849,
+      "start": 3247.41,
+      "end": 3250.88,
+      "duration": 3.47,
+      "text": "harmonic motion okay like this one which"
+    },
+    {
+      "index": 850,
+      "start": 3250.89,
+      "end": 3254.51,
+      "duration": 3.62,
+      "text": "was shown here or this one which is a"
+    },
+    {
+      "index": 851,
+      "start": 3254.52,
+      "end": 3257.51,
+      "duration": 2.99,
+      "text": "mass oscillating back and forth on the"
+    },
+    {
+      "index": 852,
+      "start": 3257.52,
+      "end": 3261.98,
+      "duration": 4.46,
+      "text": "track essentially just a projection of a"
+    },
+    {
+      "index": 853,
+      "start": 3261.99,
+      "end": 3264.5,
+      "duration": 2.51,
+      "text": "circular motion right in the complex"
+    },
+    {
+      "index": 854,
+      "start": 3264.51,
+      "end": 3267.05,
+      "duration": 2.54,
+      "text": "plane okay and what we are really seeing"
+    },
+    {
+      "index": 855,
+      "start": 3267.06,
+      "end": 3270.35,
+      "duration": 3.29,
+      "text": "here in front of in front of you is"
+    },
+    {
+      "index": 856,
+      "start": 3270.36,
+      "end": 3273.17,
+      "duration": 2.81,
+      "text": "actually a projection to the real axis"
+    },
+    {
+      "index": 857,
+      "start": 3273.18,
+      "end": 3274.87,
+      "duration": 1.69,
+      "text": "okay so that's actually really"
+    },
+    {
+      "index": 858,
+      "start": 3274.88,
+      "end": 3276.44,
+      "duration": 1.56,
+      "text": "remarkable"
+    },
+    {
+      "index": 859,
+      "start": 3276.45,
+      "end": 3280.069,
+      "duration": 3.619,
+      "text": "result and the beautiful picture and of"
+    },
+    {
+      "index": 860,
+      "start": 3280.079,
+      "end": 3282.44,
+      "duration": 2.361,
+      "text": "course we can actually also practice the"
+    },
+    {
+      "index": 861,
+      "start": 3282.45,
+      "end": 3287.3,
+      "duration": 4.85,
+      "text": "solution with Tempe so what is actually"
+    },
+    {
+      "index": 862,
+      "start": 3287.31,
+      "end": 3290.3,
+      "duration": 2.99,
+      "text": "the picture in this language in in this"
+    },
+    {
+      "index": 863,
+      "start": 3290.31,
+      "end": 3293.69,
+      "duration": 3.38,
+      "text": "exactly the same language if we actually"
+    },
+    {
+      "index": 864,
+      "start": 3293.7,
+      "end": 3297.47,
+      "duration": 3.77,
+      "text": "follow the locus and basically what you"
+    },
+    {
+      "index": 865,
+      "start": 3297.48,
+      "end": 3299.78,
+      "duration": 2.3,
+      "text": "are going to see is that this thing as"
+    },
+    {
+      "index": 866,
+      "start": 3299.79,
+      "end": 3302.96,
+      "duration": 3.17,
+      "text": "you spiral okay and the amplitude is"
+    },
+    {
+      "index": 867,
+      "start": 3302.97,
+      "end": 3305.06,
+      "duration": 2.09,
+      "text": "actually getting smaller and smaller and"
+    },
+    {
+      "index": 868,
+      "start": 3305.07,
+      "end": 3308.69,
+      "duration": 3.62,
+      "text": "they sucked into this black hole in the"
+    },
+    {
+      "index": 869,
+      "start": 3308.7,
+      "end": 3311.359,
+      "duration": 2.659,
+      "text": "zero zero okay so you can see that now"
+    },
+    {
+      "index": 870,
+      "start": 3311.369,
+      "end": 3315.26,
+      "duration": 3.891,
+      "text": "the the the picture looks as if there is"
+    },
+    {
+      "index": 871,
+      "start": 3315.27,
+      "end": 3317.78,
+      "duration": 2.51,
+      "text": "something really rotating in the complex"
+    },
+    {
+      "index": 872,
+      "start": 3317.79,
+      "end": 3320.12,
+      "duration": 2.33,
+      "text": "plane and they essentially approaching"
+    },
+    {
+      "index": 873,
+      "start": 3320.13,
+      "end": 3322.43,
+      "duration": 2.3,
+      "text": "zero because the amplitude is casually"
+    },
+    {
+      "index": 874,
+      "start": 3322.44,
+      "end": 3325.01,
+      "duration": 2.57,
+      "text": "getting smaller and smaller but this"
+    },
+    {
+      "index": 875,
+      "start": 3325.02,
+      "end": 3329.12,
+      "duration": 4.1,
+      "text": "whole thing is still rotating okay okay"
+    },
+    {
+      "index": 876,
+      "start": 3329.13,
+      "end": 3331.63,
+      "duration": 2.5,
+      "text": "that's pretty nice"
+    },
+    {
+      "index": 877,
+      "start": 3331.64,
+      "end": 3337.04,
+      "duration": 5.4,
+      "text": "alright so now this is actually a"
+    },
+    {
+      "index": 878,
+      "start": 3337.05,
+      "end": 3339.859,
+      "duration": 2.809,
+      "text": "special case when we actually assume"
+    },
+    {
+      "index": 879,
+      "start": 3339.869,
+      "end": 3344.12,
+      "duration": 4.251,
+      "text": "that gamma is actually pretty small so"
+    },
+    {
+      "index": 880,
+      "start": 3344.13,
+      "end": 3348.92,
+      "duration": 4.79,
+      "text": "you have very small tract force okay so"
+    },
+    {
+      "index": 881,
+      "start": 3348.93,
+      "end": 3353.059,
+      "duration": 4.129,
+      "text": "that's actually check what will happen"
+    },
+    {
+      "index": 882,
+      "start": 3353.069,
+      "end": 3356.059,
+      "duration": 2.99,
+      "text": "if I now start to increase the drag"
+    },
+    {
+      "index": 883,
+      "start": 3356.069,
+      "end": 3360.17,
+      "duration": 4.101,
+      "text": "force make this hat larger larger and"
+    },
+    {
+      "index": 884,
+      "start": 3360.18,
+      "end": 3363.17,
+      "duration": 2.99,
+      "text": "larger okay introducing more and more"
+    },
+    {
+      "index": 885,
+      "start": 3363.18,
+      "end": 3367.99,
+      "duration": 4.81,
+      "text": "track okay what is going to happen okay"
+    },
+    {
+      "index": 886,
+      "start": 3368.0,
+      "end": 3371.54,
+      "duration": 3.54,
+      "text": "so now I consider the situation the"
+    },
+    {
+      "index": 887,
+      "start": 3371.55,
+      "end": 3375.62,
+      "duration": 4.07,
+      "text": "second situation Omega 0 square equal to"
+    },
+    {
+      "index": 888,
+      "start": 3375.63,
+      "end": 3382.28,
+      "duration": 6.65,
+      "text": "gamma square over 4 okay okay so when"
+    },
+    {
+      "index": 889,
+      "start": 3382.29,
+      "end": 3385.16,
+      "duration": 2.87,
+      "text": "when the gamma is very small what we see"
+    },
+    {
+      "index": 890,
+      "start": 3385.17,
+      "end": 3387.17,
+      "duration": 2.0,
+      "text": "is that this is actually under damped"
+    },
+    {
+      "index": 891,
+      "start": 3387.18,
+      "end": 3390.5,
+      "duration": 3.32,
+      "text": "right so so the damping is really small"
+    },
+    {
+      "index": 892,
+      "start": 3390.51,
+      "end": 3393.859,
+      "duration": 3.349,
+      "text": "but if I increase the gamma to a"
+    },
+    {
+      "index": 893,
+      "start": 3393.869,
+      "end": 3399.23,
+      "duration": 5.361,
+      "text": "critical value now Omega 0 square happen"
+    },
+    {
+      "index": 894,
+      "start": 3399.24,
+      "end": 3402.53,
+      "duration": 3.29,
+      "text": "to be equal to gamma square over 4 okay"
+    },
+    {
+      "index": 895,
+      "start": 3402.54,
+      "end": 3406.85,
+      "duration": 4.31,
+      "text": "I call this critically"
+    },
+    {
+      "index": 896,
+      "start": 3406.86,
+      "end": 3413.32,
+      "duration": 6.46,
+      "text": "damn oscillate"
+    },
+    {
+      "index": 897,
+      "start": 3414.73,
+      "end": 3414.74,
+      "duration": 0.01,
+      "text": "okay"
+    },
+    {
+      "index": 898,
+      "start": 3414.74,
+      "end": 3419.35,
+      "duration": 4.61,
+      "text": "so what does that mean that means Omega"
+    },
+    {
+      "index": 899,
+      "start": 3419.36,
+      "end": 3422.32,
+      "duration": 2.96,
+      "text": "is equal to zero"
+    },
+    {
+      "index": 900,
+      "start": 3422.33,
+      "end": 3427.76,
+      "duration": 5.43,
+      "text": "you see this is our definition of Omega"
+    },
+    {
+      "index": 901,
+      "start": 3427.77,
+      "end": 3431.45,
+      "duration": 3.68,
+      "text": "right if Omega zero equal square equal"
+    },
+    {
+      "index": 902,
+      "start": 3431.46,
+      "end": 3434.99,
+      "duration": 3.53,
+      "text": "to gamma square over 4 then Omega is"
+    },
+    {
+      "index": 903,
+      "start": 3435.0,
+      "end": 3437.74,
+      "duration": 2.74,
+      "text": "equal to zero"
+    },
+    {
+      "index": 904,
+      "start": 3437.75,
+      "end": 3441.02,
+      "duration": 3.27,
+      "text": "the artisans with the critical moment"
+    },
+    {
+      "index": 905,
+      "start": 3441.03,
+      "end": 3447.98,
+      "duration": 6.95,
+      "text": "the cistern stop oscillating okay so it"
+    },
+    {
+      "index": 906,
+      "start": 3447.99,
+      "end": 3452.33,
+      "duration": 4.34,
+      "text": "is not absolutely any more okay so now I"
+    },
+    {
+      "index": 907,
+      "start": 3452.34,
+      "end": 3456.68,
+      "duration": 4.34,
+      "text": "can actually start from from the"
+    },
+    {
+      "index": 908,
+      "start": 3456.69,
+      "end": 3458.9,
+      "duration": 2.21,
+      "text": "solution where I obtained from one one"
+    },
+    {
+      "index": 909,
+      "start": 3458.91,
+      "end": 3462.17,
+      "duration": 3.26,
+      "text": "okay and I can actually how you make"
+    },
+    {
+      "index": 910,
+      "start": 3462.18,
+      "end": 3465.64,
+      "duration": 3.46,
+      "text": "make use of this this two solution"
+    },
+    {
+      "index": 911,
+      "start": 3465.65,
+      "end": 3473.59,
+      "duration": 7.94,
+      "text": "cheetara's in the city minus theta plus"
+    },
+    {
+      "index": 912,
+      "start": 3473.6,
+      "end": 3478.0,
+      "duration": 4.4,
+      "text": "P will be equal to exponential minus"
+    },
+    {
+      "index": 913,
+      "start": 3478.01,
+      "end": 3485.42,
+      "duration": 7.41,
+      "text": "gamma over 2t cosine Omega T when Omega"
+    },
+    {
+      "index": 914,
+      "start": 3485.43,
+      "end": 3488.51,
+      "duration": 3.08,
+      "text": "goes to 0 okay what is going to happen"
+    },
+    {
+      "index": 915,
+      "start": 3488.52,
+      "end": 3492.35,
+      "duration": 3.83,
+      "text": "is that this is actually becoming which"
+    },
+    {
+      "index": 916,
+      "start": 3492.36,
+      "end": 3496.04,
+      "duration": 3.68,
+      "text": "value anybody know if Omega C 0 what is"
+    },
+    {
+      "index": 917,
+      "start": 3496.05,
+      "end": 3500.24,
+      "duration": 4.19,
+      "text": "going to happen one yeah okay one right"
+    },
+    {
+      "index": 918,
+      "start": 3500.25,
+      "end": 3503.87,
+      "duration": 3.62,
+      "text": "so that will give me exponential minus"
+    },
+    {
+      "index": 919,
+      "start": 3503.88,
+      "end": 3512.36,
+      "duration": 8.48,
+      "text": "gamma over 2t see top minus T okay I can"
+    },
+    {
+      "index": 920,
+      "start": 3512.37,
+      "end": 3513.95,
+      "duration": 1.58,
+      "text": "do the same trick and see what will"
+    },
+    {
+      "index": 921,
+      "start": 3513.96,
+      "end": 3517.88,
+      "duration": 3.92,
+      "text": "happen so I take sin theta minus T okay"
+    },
+    {
+      "index": 922,
+      "start": 3517.89,
+      "end": 3519.53,
+      "duration": 1.64,
+      "text": "which is as you obtained it from the"
+    },
+    {
+      "index": 923,
+      "start": 3519.54,
+      "end": 3521.93,
+      "duration": 2.39,
+      "text": "exercise number one when we discuss on"
+    },
+    {
+      "index": 924,
+      "start": 3521.94,
+      "end": 3524.12,
+      "duration": 2.18,
+      "text": "the template system then you in case you"
+    },
+    {
+      "index": 925,
+      "start": 3524.13,
+      "end": 3529.24,
+      "duration": 5.11,
+      "text": "get exponential minus gamma over 2t sine"
+    },
+    {
+      "index": 926,
+      "start": 3529.25,
+      "end": 3537.14,
+      "duration": 7.89,
+      "text": "Omega T Omega goes to 0 I should I get 0"
+    },
+    {
+      "index": 927,
+      "start": 3537.15,
+      "end": 3540.25,
+      "duration": 3.1,
+      "text": "it's time okay so that don't really"
+    },
+    {
+      "index": 928,
+      "start": 3540.26,
+      "end": 3542.44,
+      "duration": 2.18,
+      "text": "right because if I have a solution which"
+    },
+    {
+      "index": 929,
+      "start": 3542.45,
+      "end": 3544.84,
+      "duration": 2.39,
+      "text": "is zero then it's not describing"
+    },
+    {
+      "index": 930,
+      "start": 3544.85,
+      "end": 3547.12,
+      "duration": 2.27,
+      "text": "anything right I can always add zero to"
+    },
+    {
+      "index": 931,
+      "start": 3547.13,
+      "end": 3549.91,
+      "duration": 2.78,
+      "text": "to the solution but that help you okay"
+    },
+    {
+      "index": 932,
+      "start": 3549.92,
+      "end": 3554.22,
+      "duration": 4.3,
+      "text": "so instead of taking the limit of this"
+    },
+    {
+      "index": 933,
+      "start": 3554.23,
+      "end": 3558.04,
+      "duration": 3.81,
+      "text": "this function actually we choose to"
+    },
+    {
+      "index": 934,
+      "start": 3558.05,
+      "end": 3563.46,
+      "duration": 5.41,
+      "text": "actually to Sita minus T divided by"
+    },
+    {
+      "index": 935,
+      "start": 3563.47,
+      "end": 3566.65,
+      "duration": 3.18,
+      "text": "Omega and that we actually make this"
+    },
+    {
+      "index": 936,
+      "start": 3566.66,
+      "end": 3570.37,
+      "duration": 3.71,
+      "text": "approaching Omega approaching zero then"
+    },
+    {
+      "index": 937,
+      "start": 3570.38,
+      "end": 3573.13,
+      "duration": 2.75,
+      "text": "basically I get exponential minus gamma"
+    },
+    {
+      "index": 938,
+      "start": 3573.14,
+      "end": 3579.75,
+      "duration": 6.61,
+      "text": "over 2t sine Omega T divided by Omega"
+    },
+    {
+      "index": 939,
+      "start": 3579.76,
+      "end": 3584.71,
+      "duration": 4.95,
+      "text": "okay if I have this approaching Omega"
+    },
+    {
+      "index": 940,
+      "start": 3584.72,
+      "end": 3588.64,
+      "duration": 3.92,
+      "text": "approaching to 0 and this is HD roughly"
+    },
+    {
+      "index": 941,
+      "start": 3588.65,
+      "end": 3593.22,
+      "duration": 4.57,
+      "text": "just explanation of minus gamma over 2t"
+    },
+    {
+      "index": 942,
+      "start": 3593.23,
+      "end": 3597.73,
+      "duration": 4.5,
+      "text": "Omega T Omega and this is actually"
+    },
+    {
+      "index": 943,
+      "start": 3597.74,
+      "end": 3603.609,
+      "duration": 5.869,
+      "text": "keeping you ki times exponential minus"
+    },
+    {
+      "index": 944,
+      "start": 3603.619,
+      "end": 3620.8,
+      "duration": 17.181,
+      "text": "gamma over 2t any questions so far"
+    },
+    {
+      "index": 945,
+      "start": 3625.61,
+      "end": 3625.62,
+      "duration": 0.01,
+      "text": "at this one yeah so it should be okay"
+    },
+    {
+      "index": 946,
+      "start": 3625.62,
+      "end": 3630.8,
+      "duration": 5.18,
+      "text": "yeah yes this is a negative sign"
+    },
+    {
+      "index": 947,
+      "start": 3630.81,
+      "end": 3640.79,
+      "duration": 9.98,
+      "text": "yes okay any other questions okay so you"
+    },
+    {
+      "index": 948,
+      "start": 3640.8,
+      "end": 3643.94,
+      "duration": 3.14,
+      "text": "can see that now I arrived to solution"
+    },
+    {
+      "index": 949,
+      "start": 3643.95,
+      "end": 3646.82,
+      "duration": 2.87,
+      "text": "one is actually proportional to"
+    },
+    {
+      "index": 950,
+      "start": 3646.83,
+      "end": 3651.05,
+      "duration": 4.22,
+      "text": "exponential minus gamma over 2t the"
+    },
+    {
+      "index": 951,
+      "start": 3651.06,
+      "end": 3653.42,
+      "duration": 2.36,
+      "text": "other one is actually proportional to T"
+    },
+    {
+      "index": 952,
+      "start": 3653.43,
+      "end": 3656.5,
+      "duration": 3.07,
+      "text": "times exponential minus gamma over 2t"
+    },
+    {
+      "index": 953,
+      "start": 3656.51,
+      "end": 3659.87,
+      "duration": 3.36,
+      "text": "okay so you can see that the cosine or"
+    },
+    {
+      "index": 954,
+      "start": 3659.88,
+      "end": 3663.92,
+      "duration": 4.04,
+      "text": "sine turn disappeared right so that"
+    },
+    {
+      "index": 955,
+      "start": 3663.93,
+      "end": 3669.11,
+      "duration": 5.18,
+      "text": "means you were never oscillating okay so"
+    },
+    {
+      "index": 956,
+      "start": 3669.12,
+      "end": 3671.18,
+      "duration": 2.06,
+      "text": "this is actually what we see in this"
+    },
+    {
+      "index": 957,
+      "start": 3671.19,
+      "end": 3673.79,
+      "duration": 2.6,
+      "text": "slide this so-called critically damped"
+    },
+    {
+      "index": 958,
+      "start": 3673.8,
+      "end": 3677.57,
+      "duration": 3.77,
+      "text": "okay when actually Omega zero squared is"
+    },
+    {
+      "index": 959,
+      "start": 3677.58,
+      "end": 3683.18,
+      "duration": 5.6,
+      "text": "equal to gamma square over 4 and you can"
+    },
+    {
+      "index": 960,
+      "start": 3683.19,
+      "end": 3686.17,
+      "duration": 2.98,
+      "text": "see that what is going to happen is that"
+    },
+    {
+      "index": 961,
+      "start": 3686.18,
+      "end": 3691.25,
+      "duration": 5.07,
+      "text": "this mass okay or this rod is going to"
+    },
+    {
+      "index": 962,
+      "start": 3691.26,
+      "end": 3698.24,
+      "duration": 6.98,
+      "text": "pass 0 only one time at most okay and it"
+    },
+    {
+      "index": 963,
+      "start": 3698.25,
+      "end": 3701.18,
+      "duration": 2.93,
+      "text": "could actually never pass 0 if you"
+    },
+    {
+      "index": 964,
+      "start": 3701.19,
+      "end": 3703.0,
+      "duration": 1.81,
+      "text": "actually set up the initial condition"
+    },
+    {
+      "index": 965,
+      "start": 3703.01,
+      "end": 3706.22,
+      "duration": 3.21,
+      "text": "correcting okay so so one thing which I"
+    },
+    {
+      "index": 966,
+      "start": 3706.23,
+      "end": 3709.28,
+      "duration": 3.05,
+      "text": "can do is I shoot this mass really"
+    },
+    {
+      "index": 967,
+      "start": 3709.29,
+      "end": 3712.13,
+      "duration": 2.84,
+      "text": "really very forcefully so that I have a"
+    },
+    {
+      "index": 968,
+      "start": 3712.14,
+      "end": 3715.46,
+      "duration": 3.32,
+      "text": "very large initial velocity and what it"
+    },
+    {
+      "index": 969,
+      "start": 3715.47,
+      "end": 3718.22,
+      "duration": 2.75,
+      "text": "really is going to do like the"
+    },
+    {
+      "index": 970,
+      "start": 3718.23,
+      "end": 3719.6,
+      "duration": 1.37,
+      "text": "right-hand side diagram"
+    },
+    {
+      "index": 971,
+      "start": 3719.61,
+      "end": 3722.93,
+      "duration": 3.32,
+      "text": "oh you will overshoot the row a bit then"
+    },
+    {
+      "index": 972,
+      "start": 3722.94,
+      "end": 3726.32,
+      "duration": 3.38,
+      "text": "close back it almost like exponentially"
+    },
+    {
+      "index": 973,
+      "start": 3726.33,
+      "end": 3731.18,
+      "duration": 4.85,
+      "text": "okay so at most you can only pass to"
+    },
+    {
+      "index": 974,
+      "start": 3731.19,
+      "end": 3734.78,
+      "duration": 3.59,
+      "text": "zero one time if you do this kind of"
+    },
+    {
+      "index": 975,
+      "start": 3734.79,
+      "end": 3739.91,
+      "duration": 5.12,
+      "text": "initial condition okay so that is"
+    },
+    {
+      "index": 976,
+      "start": 3739.92,
+      "end": 3743.03,
+      "duration": 3.11,
+      "text": "actually pretty interesting and there"
+    },
+    {
+      "index": 977,
+      "start": 3743.04,
+      "end": 3746.81,
+      "duration": 3.77,
+      "text": "are practical application of this poncho"
+    },
+    {
+      "index": 978,
+      "start": 3746.82,
+      "end": 3749.63,
+      "duration": 2.81,
+      "text": "it is a solution actually so for example"
+    },
+    {
+      "index": 979,
+      "start": 3749.64,
+      "end": 3751.82,
+      "duration": 2.18,
+      "text": "we have the door closed"
+    },
+    {
+      "index": 980,
+      "start": 3751.83,
+      "end": 3754.22,
+      "duration": 2.39,
+      "text": "so it's also here right the toad clothes"
+    },
+    {
+      "index": 981,
+      "start": 3754.23,
+      "end": 3756.89,
+      "duration": 2.66,
+      "text": "you would like to have the tour go back"
+    },
+    {
+      "index": 982,
+      "start": 3756.9,
+      "end": 3760.43,
+      "duration": 3.53,
+      "text": "to the original clothes the mode the"
+    },
+    {
+      "index": 983,
+      "start": 3760.44,
+      "end": 3762.59,
+      "duration": 2.15,
+      "text": "position of equilibrium position is"
+    },
+    {
+      "index": 984,
+      "start": 3762.6,
+      "end": 3766.1,
+      "duration": 3.5,
+      "text": "really fast ok so what you can do is"
+    },
+    {
+      "index": 985,
+      "start": 3766.11,
+      "end": 3770.18,
+      "duration": 4.07,
+      "text": "really design this toad course so that"
+    },
+    {
+      "index": 986,
+      "start": 3770.19,
+      "end": 3773.21,
+      "duration": 3.02,
+      "text": "issue is actually match with critical"
+    },
+    {
+      "index": 987,
+      "start": 3773.22,
+      "end": 3776.27,
+      "duration": 3.05,
+      "text": "tempter situation ok a good condition so"
+    },
+    {
+      "index": 988,
+      "start": 3776.28,
+      "end": 3778.61,
+      "duration": 2.33,
+      "text": "that actually you go back to zero really"
+    },
+    {
+      "index": 989,
+      "start": 3778.62,
+      "end": 3787.85,
+      "duration": 9.23,
+      "text": "quick ok any questions ok so now what we"
+    },
+    {
+      "index": 990,
+      "start": 3787.86,
+      "end": 3794.41,
+      "duration": 6.55,
+      "text": "could do is that instead of having a"
+    },
+    {
+      "index": 991,
+      "start": 3794.42,
+      "end": 3799.94,
+      "duration": 5.52,
+      "text": "very small drag force were worse a"
+    },
+    {
+      "index": 992,
+      "start": 3799.95,
+      "end": 3801.98,
+      "duration": 2.03,
+      "text": "slightly larger track for so that"
+    },
+    {
+      "index": 993,
+      "start": 3801.99,
+      "end": 3805.09,
+      "duration": 3.1,
+      "text": "actually reach critical tempt situation"
+    },
+    {
+      "index": 994,
+      "start": 3805.1,
+      "end": 3808.46,
+      "duration": 3.36,
+      "text": "what we could do is that we put the"
+    },
+    {
+      "index": 995,
+      "start": 3808.47,
+      "end": 3813.17,
+      "duration": 4.7,
+      "text": "whole system into water right the end of"
+    },
+    {
+      "index": 996,
+      "start": 3813.18,
+      "end": 3816.86,
+      "duration": 3.68,
+      "text": "track force will be very big okay and we"
+    },
+    {
+      "index": 997,
+      "start": 3816.87,
+      "end": 3819.02,
+      "duration": 2.15,
+      "text": "would like to see what is going to"
+    },
+    {
+      "index": 998,
+      "start": 3819.03,
+      "end": 3823.01,
+      "duration": 3.98,
+      "text": "happen ok so in this case is the third"
+    },
+    {
+      "index": 999,
+      "start": 3823.02,
+      "end": 3827.02,
+      "duration": 4.0,
+      "text": "situation ok the third situation is that"
+    },
+    {
+      "index": 1000,
+      "start": 3827.03,
+      "end": 3830.72,
+      "duration": 3.69,
+      "text": "Omega 0 square is actually smoother than"
+    },
+    {
+      "index": 1001,
+      "start": 3830.73,
+      "end": 3837.13,
+      "duration": 6.4,
+      "text": "gamma square over 4 so you have huge"
+    },
+    {
+      "index": 1002,
+      "start": 3837.14,
+      "end": 3847.7,
+      "duration": 10.56,
+      "text": "drag force okay so that will give you a"
+    },
+    {
+      "index": 1003,
+      "start": 3847.71,
+      "end": 3853.9,
+      "duration": 6.19,
+      "text": "situation which is called over damped"
+    },
+    {
+      "index": 1004,
+      "start": 3864.73,
+      "end": 3864.74,
+      "duration": 0.01,
+      "text": "now I have again alpha is equal to I"
+    },
+    {
+      "index": 1005,
+      "start": 3864.74,
+      "end": 3866.84,
+      "duration": 2.1,
+      "text": "gamma over 2"
+    },
+    {
+      "index": 1006,
+      "start": 3866.85,
+      "end": 3871.52,
+      "duration": 4.67,
+      "text": "okay price minus square root of Omega 0"
+    },
+    {
+      "index": 1007,
+      "start": 3871.53,
+      "end": 3876.08,
+      "duration": 4.55,
+      "text": "square minus gamma square over 4 right"
+    },
+    {
+      "index": 1008,
+      "start": 3876.09,
+      "end": 3878.99,
+      "duration": 2.9,
+      "text": "I'm just copying from here okay and that"
+    },
+    {
+      "index": 1009,
+      "start": 3879.0,
+      "end": 3883.22,
+      "duration": 4.22,
+      "text": "will be equal to I I can take out the I"
+    },
+    {
+      "index": 1010,
+      "start": 3883.23,
+      "end": 3889.58,
+      "duration": 6.35,
+      "text": "ok gamma over 2 plus minus square root"
+    },
+    {
+      "index": 1011,
+      "start": 3889.59,
+      "end": 3895.19,
+      "duration": 5.6,
+      "text": "of gamma squared over 4 minus Omega 0"
+    },
+    {
+      "index": 1012,
+      "start": 3895.2,
+      "end": 3907.19,
+      "duration": 11.99,
+      "text": "square now I can easily define gamma"
+    },
+    {
+      "index": 1013,
+      "start": 3907.2,
+      "end": 3913.43,
+      "duration": 6.23,
+      "text": "plus minus equal to gamma over 2 plus"
+    },
+    {
+      "index": 1014,
+      "start": 3913.44,
+      "end": 3918.88,
+      "duration": 5.44,
+      "text": "minus square root of gamma square over 4"
+    },
+    {
+      "index": 1015,
+      "start": 3918.89,
+      "end": 3925.07,
+      "duration": 6.18,
+      "text": "minus Omega 0 square ok then basically"
+    },
+    {
+      "index": 1016,
+      "start": 3925.08,
+      "end": 3929.72,
+      "duration": 4.64,
+      "text": "the solution okay I this is actually now"
+    },
+    {
+      "index": 1017,
+      "start": 3929.73,
+      "end": 3931.82,
+      "duration": 2.09,
+      "text": "I already have the solution so basically"
+    },
+    {
+      "index": 1018,
+      "start": 3931.83,
+      "end": 3934.49,
+      "duration": 2.66,
+      "text": "the two solution will be looking like"
+    },
+    {
+      "index": 1019,
+      "start": 3934.5,
+      "end": 3939.35,
+      "duration": 4.85,
+      "text": "this Sita of T will be equal to a plus"
+    },
+    {
+      "index": 1020,
+      "start": 3939.36,
+      "end": 3943.19,
+      "duration": 3.83,
+      "text": "some kind of constant exponential minus"
+    },
+    {
+      "index": 1021,
+      "start": 3943.2,
+      "end": 3949.52,
+      "duration": 6.32,
+      "text": "gamma plus T plus a minus exponential"
+    },
+    {
+      "index": 1022,
+      "start": 3949.53,
+      "end": 3956.36,
+      "duration": 6.83,
+      "text": "minus gamma minus T ok because this is"
+    },
+    {
+      "index": 1023,
+      "start": 3956.37,
+      "end": 3958.46,
+      "duration": 2.09,
+      "text": "actually becoming already ok"
+    },
+    {
+      "index": 1024,
+      "start": 3958.47,
+      "end": 3962.24,
+      "duration": 3.77,
+      "text": "so alpha is actually I times gamma plus"
+    },
+    {
+      "index": 1025,
+      "start": 3962.25,
+      "end": 3964.94,
+      "duration": 2.69,
+      "text": "minus right there for you if you put the"
+    },
+    {
+      "index": 1026,
+      "start": 3964.95,
+      "end": 3968.42,
+      "duration": 3.47,
+      "text": "back into this then basically what you"
+    },
+    {
+      "index": 1027,
+      "start": 3968.43,
+      "end": 3972.82,
+      "duration": 4.39,
+      "text": "are getting is explanation plus gamma"
+    },
+    {
+      "index": 1028,
+      "start": 3972.83,
+      "end": 3975.53,
+      "duration": 2.7,
+      "text": "exponential minus gamma plus T or"
+    },
+    {
+      "index": 1029,
+      "start": 3975.54,
+      "end": 3979.82,
+      "duration": 4.28,
+      "text": "explanation of minus gamma minus T ok so"
+    },
+    {
+      "index": 1030,
+      "start": 3979.83,
+      "end": 3981.64,
+      "duration": 1.81,
+      "text": "that's already a real function and"
+    },
+    {
+      "index": 1031,
+      "start": 3981.65,
+      "end": 3985.37,
+      "duration": 3.72,
+      "text": "linear combination of these two solution"
+    },
+    {
+      "index": 1032,
+      "start": 3985.38,
+      "end": 3989.57,
+      "duration": 4.19,
+      "text": "is our final four solution to the"
+    },
+    {
+      "index": 1033,
+      "start": 3989.58,
+      "end": 3991.27,
+      "duration": 1.69,
+      "text": "equation of motion"
+    },
+    {
+      "index": 1034,
+      "start": 3991.28,
+      "end": 3995.66,
+      "duration": 4.38,
+      "text": "okay again what we are going to see is"
+    },
+    {
+      "index": 1035,
+      "start": 3995.67,
+      "end": 3999.77,
+      "duration": 4.1,
+      "text": "that this is actually the drag force is"
+    },
+    {
+      "index": 1036,
+      "start": 3999.78,
+      "end": 4002.86,
+      "duration": 3.08,
+      "text": "huge I just throw the whole system into"
+    },
+    {
+      "index": 1037,
+      "start": 4002.87,
+      "end": 4005.74,
+      "duration": 2.87,
+      "text": "water and the water is really stopped"
+    },
+    {
+      "index": 1038,
+      "start": 4005.75,
+      "end": 4008.29,
+      "duration": 2.54,
+      "text": "trying to stop the oscillation really"
+    },
+    {
+      "index": 1039,
+      "start": 4008.3,
+      "end": 4012.58,
+      "duration": 4.28,
+      "text": "very much therefore you can see that huh"
+    },
+    {
+      "index": 1040,
+      "start": 4012.59,
+      "end": 4015.79,
+      "duration": 3.2,
+      "text": "again I don't have any oscillation okay"
+    },
+    {
+      "index": 1041,
+      "start": 4015.8,
+      "end": 4019.81,
+      "duration": 4.01,
+      "text": "if I am very very strong start this"
+    },
+    {
+      "index": 1042,
+      "start": 4019.82,
+      "end": 4023.77,
+      "duration": 3.95,
+      "text": "thing 3d 3d start the initial velocity"
+    },
+    {
+      "index": 1043,
+      "start": 4023.78,
+      "end": 4027.49,
+      "duration": 3.71,
+      "text": "or initial angular velocity really high"
+    },
+    {
+      "index": 1044,
+      "start": 4027.5,
+      "end": 4030.25,
+      "duration": 2.75,
+      "text": "you have I have actually give a huge"
+    },
+    {
+      "index": 1045,
+      "start": 4030.26,
+      "end": 4032.59,
+      "duration": 2.33,
+      "text": "amount of energy into this system then"
+    },
+    {
+      "index": 1046,
+      "start": 4032.6,
+      "end": 4036.37,
+      "duration": 3.77,
+      "text": "at most again I can actually have that"
+    },
+    {
+      "index": 1047,
+      "start": 4036.38,
+      "end": 4039.28,
+      "duration": 2.9,
+      "text": "system to pass through the equilibrium"
+    },
+    {
+      "index": 1048,
+      "start": 4039.29,
+      "end": 4042.73,
+      "duration": 3.44,
+      "text": "position only one time then this whole"
+    },
+    {
+      "index": 1049,
+      "start": 4042.74,
+      "end": 4046.65,
+      "duration": 3.91,
+      "text": "this system will slow the grid paper"
+    },
+    {
+      "index": 1050,
+      "start": 4046.66,
+      "end": 4052.92,
+      "duration": 6.26,
+      "text": "okay because the gamma because of the"
+    },
+    {
+      "index": 1051,
+      "start": 4052.93,
+      "end": 4055.42,
+      "duration": 2.49,
+      "text": "exponential function we see here the"
+    },
+    {
+      "index": 1052,
+      "start": 4055.43,
+      "end": 4058.11,
+      "duration": 2.68,
+      "text": "amplitude is going to be decaying"
+    },
+    {
+      "index": 1053,
+      "start": 4058.12,
+      "end": 4064.63,
+      "duration": 6.51,
+      "text": "exponentially okay any questions so"
+    },
+    {
+      "index": 1054,
+      "start": 4064.64,
+      "end": 4067.14,
+      "duration": 2.5,
+      "text": "that's actually do a quick demonstration"
+    },
+    {
+      "index": 1055,
+      "start": 4067.15,
+      "end": 4070.93,
+      "duration": 3.78,
+      "text": "here okay so here this is actually the"
+    },
+    {
+      "index": 1056,
+      "start": 4070.94,
+      "end": 4076.27,
+      "duration": 5.33,
+      "text": "original bit little pore here metal one"
+    },
+    {
+      "index": 1057,
+      "start": 4076.28,
+      "end": 4079.18,
+      "duration": 2.9,
+      "text": "which is actually you can see that this"
+    },
+    {
+      "index": 1058,
+      "start": 4079.19,
+      "end": 4083.08,
+      "duration": 3.89,
+      "text": "is going to go back and forth really"
+    },
+    {
+      "index": 1059,
+      "start": 4083.09,
+      "end": 4086.17,
+      "duration": 3.08,
+      "text": "nicely and you can see that because of"
+    },
+    {
+      "index": 1060,
+      "start": 4086.18,
+      "end": 4090.76,
+      "duration": 4.58,
+      "text": "the friction okay actually the amplitude"
+    },
+    {
+      "index": 1061,
+      "start": 4090.77,
+      "end": 4094.3,
+      "duration": 3.53,
+      "text": "is becoming smaller and smaller okay so"
+    },
+    {
+      "index": 1062,
+      "start": 4094.31,
+      "end": 4097.24,
+      "duration": 2.93,
+      "text": "that actually match with this situation"
+    },
+    {
+      "index": 1063,
+      "start": 4097.25,
+      "end": 4100.78,
+      "duration": 3.53,
+      "text": "right so it's actually under damped the"
+    },
+    {
+      "index": 1064,
+      "start": 4100.79,
+      "end": 4104.14,
+      "duration": 3.35,
+      "text": "situation this ball is going to if in"
+    },
+    {
+      "index": 1065,
+      "start": 4104.15,
+      "end": 4106.24,
+      "duration": 2.09,
+      "text": "idealized situation it's going to go"
+    },
+    {
+      "index": 1066,
+      "start": 4106.25,
+      "end": 4109.18,
+      "duration": 2.93,
+      "text": "through zero infinite number of times"
+    },
+    {
+      "index": 1067,
+      "start": 4109.19,
+      "end": 4114.07,
+      "duration": 4.88,
+      "text": "okay so now what I'm going to do is how"
+    },
+    {
+      "index": 1068,
+      "start": 4114.08,
+      "end": 4117.34,
+      "duration": 3.26,
+      "text": "I change this ball to something which is"
+    },
+    {
+      "index": 1069,
+      "start": 4117.35,
+      "end": 4119.47,
+      "duration": 2.12,
+      "text": "different okay this is actually made of"
+    },
+    {
+      "index": 1070,
+      "start": 4119.48,
+      "end": 4123.55,
+      "duration": 4.07,
+      "text": "Mac Magna knee okay and let's see what"
+    },
+    {
+      "index": 1071,
+      "start": 4123.56,
+      "end": 4124.539,
+      "duration": 0.979,
+      "text": "is going to happen"
+    },
+    {
+      "index": 1072,
+      "start": 4124.549,
+      "end": 4126.61,
+      "duration": 2.061,
+      "text": "so now you can see that because this is"
+    },
+    {
+      "index": 1073,
+      "start": 4126.62,
+      "end": 4127.84,
+      "duration": 1.22,
+      "text": "actually made of magnet"
+    },
+    {
+      "index": 1074,
+      "start": 4127.85,
+      "end": 4130.18,
+      "duration": 2.33,
+      "text": "therefore the drag force will be kolosso"
+    },
+    {
+      "index": 1075,
+      "start": 4130.19,
+      "end": 4133.66,
+      "duration": 3.47,
+      "text": "will be very very big and let's see what"
+    },
+    {
+      "index": 1076,
+      "start": 4133.67,
+      "end": 4140.8,
+      "duration": 7.13,
+      "text": "happen you see that that the track force"
+    },
+    {
+      "index": 1077,
+      "start": 4140.81,
+      "end": 4141.94,
+      "duration": 1.13,
+      "text": "is huge"
+    },
+    {
+      "index": 1078,
+      "start": 4141.95,
+      "end": 4145.63,
+      "duration": 3.68,
+      "text": "therefore you see I put it here so that"
+    },
+    {
+      "index": 1079,
+      "start": 4145.64,
+      "end": 4152.41,
+      "duration": 6.77,
+      "text": "ie has big initial velocity the only"
+    },
+    {
+      "index": 1080,
+      "start": 4152.42,
+      "end": 4155.53,
+      "duration": 3.11,
+      "text": "path to zero once right"
+    },
+    {
+      "index": 1081,
+      "start": 4155.54,
+      "end": 4157.3,
+      "duration": 1.76,
+      "text": "of course it now is actually approaching"
+    },
+    {
+      "index": 1082,
+      "start": 4157.31,
+      "end": 4159.519,
+      "duration": 2.209,
+      "text": "the zero already really slowly"
+    },
+    {
+      "index": 1083,
+      "start": 4159.529,
+      "end": 4162.16,
+      "duration": 2.631,
+      "text": "exponentially but it's not zero okay so"
+    },
+    {
+      "index": 1084,
+      "start": 4162.17,
+      "end": 4165.16,
+      "duration": 2.99,
+      "text": "you know the pass through the zero you"
+    },
+    {
+      "index": 1085,
+      "start": 4165.17,
+      "end": 4167.76,
+      "duration": 2.59,
+      "text": "feel free diplomats only once"
+    },
+    {
+      "index": 1086,
+      "start": 4167.77,
+      "end": 4171.849,
+      "duration": 4.079,
+      "text": "okay just to show that this is a real"
+    },
+    {
+      "index": 1087,
+      "start": 4171.859,
+      "end": 4183.64,
+      "duration": 11.781,
+      "text": "deal okay right oh I'm not trying to"
+    },
+    {
+      "index": 1088,
+      "start": 4183.65,
+      "end": 4187.12,
+      "duration": 3.47,
+      "text": "destroy the whole cause ruin okay okay"
+    },
+    {
+      "index": 1089,
+      "start": 4187.13,
+      "end": 4188.98,
+      "duration": 1.85,
+      "text": "so you can actually pray with this"
+    },
+    {
+      "index": 1090,
+      "start": 4188.99,
+      "end": 4194.41,
+      "duration": 5.42,
+      "text": "after we initial lecture okay I would"
+    },
+    {
+      "index": 1091,
+      "start": 4194.42,
+      "end": 4197.74,
+      "duration": 3.32,
+      "text": "like to ask you a question after we"
+    },
+    {
+      "index": 1092,
+      "start": 4197.75,
+      "end": 4201.04,
+      "duration": 3.29,
+      "text": "learn this front is a lecture okay there"
+    },
+    {
+      "index": 1093,
+      "start": 4201.05,
+      "end": 4205.29,
+      "duration": 4.24,
+      "text": "are three situation under damped"
+    },
+    {
+      "index": 1094,
+      "start": 4205.3,
+      "end": 4208.56,
+      "duration": 3.26,
+      "text": "critically damped and the over damped"
+    },
+    {
+      "index": 1095,
+      "start": 4208.57,
+      "end": 4211.48,
+      "duration": 2.91,
+      "text": "okay I would like to ask you two"
+    },
+    {
+      "index": 1096,
+      "start": 4211.49,
+      "end": 4214.87,
+      "duration": 3.38,
+      "text": "questions the first one is through this"
+    },
+    {
+      "index": 1097,
+      "start": 4214.88,
+      "end": 4218.02,
+      "duration": 3.14,
+      "text": "demonstration okay so now I have a"
+    },
+    {
+      "index": 1098,
+      "start": 4218.03,
+      "end": 4223.57,
+      "duration": 5.54,
+      "text": "system which is nicely constructed I"
+    },
+    {
+      "index": 1099,
+      "start": 4223.58,
+      "end": 4229.05,
+      "duration": 5.47,
+      "text": "hope you can see it okay that's it and"
+    },
+    {
+      "index": 1100,
+      "start": 4229.06,
+      "end": 4234.4,
+      "duration": 5.34,
+      "text": "this system is made of a torsional"
+    },
+    {
+      "index": 1101,
+      "start": 4234.41,
+      "end": 4238.84,
+      "duration": 4.43,
+      "text": "spring and also there's a pad here which"
+    },
+    {
+      "index": 1102,
+      "start": 4238.85,
+      "end": 4241.54,
+      "duration": 2.69,
+      "text": "is connected to a spring okay if I"
+    },
+    {
+      "index": 1103,
+      "start": 4241.55,
+      "end": 4244.09,
+      "duration": 2.54,
+      "text": "actually perturb this thing it's going"
+    },
+    {
+      "index": 1104,
+      "start": 4244.1,
+      "end": 4247.78,
+      "duration": 3.68,
+      "text": "to be oscillating back and forth before"
+    },
+    {
+      "index": 1105,
+      "start": 4247.79,
+      "end": 4253.27,
+      "duration": 5.48,
+      "text": "I turn on the power so that you know the"
+    },
+    {
+      "index": 1106,
+      "start": 4253.28,
+      "end": 4257.32,
+      "duration": 4.04,
+      "text": "lower part is actually you have magnet"
+    },
+    {
+      "index": 1107,
+      "start": 4257.33,
+      "end": 4257.88,
+      "duration": 0.55,
+      "text": "okay"
+    },
+    {
+      "index": 1108,
+      "start": 4257.89,
+      "end": 4260.37,
+      "duration": 2.48,
+      "text": "is not turned on yet okay and this"
+    },
+    {
+      "index": 1109,
+      "start": 4260.38,
+      "end": 4263.97,
+      "duration": 3.59,
+      "text": "magnet is going to provide a drag force"
+    },
+    {
+      "index": 1110,
+      "start": 4263.98,
+      "end": 4266.94,
+      "duration": 2.96,
+      "text": "to actually change the behavior of this"
+    },
+    {
+      "index": 1111,
+      "start": 4266.95,
+      "end": 4270.78,
+      "duration": 3.83,
+      "text": "system okay so you can see that before I"
+    },
+    {
+      "index": 1112,
+      "start": 4270.79,
+      "end": 4274.71,
+      "duration": 3.92,
+      "text": "turn on the magnetic field the whole"
+    },
+    {
+      "index": 1113,
+      "start": 4274.72,
+      "end": 4276.51,
+      "duration": 1.79,
+      "text": "system is actually oscillating back and"
+    },
+    {
+      "index": 1114,
+      "start": 4276.52,
+      "end": 4280.13,
+      "duration": 3.61,
+      "text": "forth really nicely as we predict smoke"
+    },
+    {
+      "index": 1115,
+      "start": 4280.14,
+      "end": 4283.59,
+      "duration": 3.45,
+      "text": "amplitude vibration is harmonic"
+    },
+    {
+      "index": 1116,
+      "start": 4283.6,
+      "end": 4286.77,
+      "duration": 3.17,
+      "text": "oscillation okay so that's very nice so"
+    },
+    {
+      "index": 1117,
+      "start": 4286.78,
+      "end": 4289.89,
+      "duration": 3.11,
+      "text": "now what I'm going to do is to turn on"
+    },
+    {
+      "index": 1118,
+      "start": 4289.9,
+      "end": 4292.62,
+      "duration": 2.72,
+      "text": "the power and see what is going to"
+    },
+    {
+      "index": 1119,
+      "start": 4292.63,
+      "end": 4296.22,
+      "duration": 3.59,
+      "text": "happen after I turn on the power there's"
+    },
+    {
+      "index": 1120,
+      "start": 4296.23,
+      "end": 4302.22,
+      "duration": 5.99,
+      "text": "a there's a electric field okay and and"
+    },
+    {
+      "index": 1121,
+      "start": 4302.23,
+      "end": 4305.67,
+      "duration": 3.44,
+      "text": "this is you're going to be okay so the"
+    },
+    {
+      "index": 1122,
+      "start": 4305.68,
+      "end": 4307.59,
+      "duration": 1.91,
+      "text": "magnet when the magnetic field is I"
+    },
+    {
+      "index": 1123,
+      "start": 4307.6,
+      "end": 4310.26,
+      "duration": 2.66,
+      "text": "should turn down therefore this is"
+    },
+    {
+      "index": 1124,
+      "start": 4310.27,
+      "end": 4312.21,
+      "duration": 1.94,
+      "text": "actually acting like a drag force a"
+    },
+    {
+      "index": 1125,
+      "start": 4312.22,
+      "end": 4314.34,
+      "duration": 2.12,
+      "text": "tooth to this system okay so that's"
+    },
+    {
+      "index": 1126,
+      "start": 4314.35,
+      "end": 4317.1,
+      "duration": 2.75,
+      "text": "actually see what is going to happen now"
+    },
+    {
+      "index": 1127,
+      "start": 4317.11,
+      "end": 4320.82,
+      "duration": 3.71,
+      "text": "I drew this this makes this the behavior"
+    },
+    {
+      "index": 1128,
+      "start": 4320.83,
+      "end": 4324.45,
+      "duration": 3.62,
+      "text": "of the system looks like this you first"
+    },
+    {
+      "index": 1129,
+      "start": 4324.46,
+      "end": 4328.92,
+      "duration": 4.46,
+      "text": "oscillate and then it stops so the"
+    },
+    {
+      "index": 1130,
+      "start": 4328.93,
+      "end": 4332.51,
+      "duration": 3.58,
+      "text": "question is is this critical tent under"
+    },
+    {
+      "index": 1131,
+      "start": 4332.52,
+      "end": 4335.88,
+      "duration": 3.36,
+      "text": "damped over over damped system anybody"
+    },
+    {
+      "index": 1132,
+      "start": 4335.89,
+      "end": 4342.15,
+      "duration": 6.26,
+      "text": "knows yeah yes this is under damped how"
+    },
+    {
+      "index": 1133,
+      "start": 4342.16,
+      "end": 4345.06,
+      "duration": 2.9,
+      "text": "do I see that that is because when I do"
+    },
+    {
+      "index": 1134,
+      "start": 4345.07,
+      "end": 4348.83,
+      "duration": 3.76,
+      "text": "this experiment you will pass through"
+    },
+    {
+      "index": 1135,
+      "start": 4348.84,
+      "end": 4352.28,
+      "duration": 3.44,
+      "text": "zeros multiple times"
+    },
+    {
+      "index": 1136,
+      "start": 4352.29,
+      "end": 4355.14,
+      "duration": 2.85,
+      "text": "therefore there are oscillations trying"
+    },
+    {
+      "index": 1137,
+      "start": 4355.15,
+      "end": 4355.95,
+      "duration": 0.8,
+      "text": "into prey"
+    },
+    {
+      "index": 1138,
+      "start": 4355.96,
+      "end": 4358.68,
+      "duration": 2.72,
+      "text": "therefore I can conclude that the drag"
+    },
+    {
+      "index": 1139,
+      "start": 4358.69,
+      "end": 4361.17,
+      "duration": 2.48,
+      "text": "force is not large enough so that is"
+    },
+    {
+      "index": 1140,
+      "start": 4361.18,
+      "end": 4363.15,
+      "duration": 1.97,
+      "text": "actually a ton on the template situation"
+    },
+    {
+      "index": 1141,
+      "start": 4363.16,
+      "end": 4365.04,
+      "duration": 1.88,
+      "text": "okay and the next time we are going to"
+    },
+    {
+      "index": 1142,
+      "start": 4365.05,
+      "end": 4367.8,
+      "duration": 2.75,
+      "text": "drive this system I have a second"
+    },
+    {
+      "index": 1143,
+      "start": 4367.81,
+      "end": 4371.39,
+      "duration": 3.58,
+      "text": "question for you so now your friends"
+    },
+    {
+      "index": 1144,
+      "start": 4371.4,
+      "end": 4374.04,
+      "duration": 2.64,
+      "text": "know that you take took arrow 3"
+    },
+    {
+      "index": 1145,
+      "start": 4374.05,
+      "end": 4376.65,
+      "duration": 2.6,
+      "text": "therefore they were wondering if you can"
+    },
+    {
+      "index": 1146,
+      "start": 4376.66,
+      "end": 4380.82,
+      "duration": 4.16,
+      "text": "actually design a car suspension system"
+    },
+    {
+      "index": 1147,
+      "start": 4380.83,
+      "end": 4384.21,
+      "duration": 3.38,
+      "text": "okay to see if you can actually make the"
+    },
+    {
+      "index": 1148,
+      "start": 4384.22,
+      "end": 4389.0,
+      "duration": 4.78,
+      "text": "design for them when you design this car"
+    },
+    {
+      "index": 1149,
+      "start": 4389.01,
+      "end": 4390.78,
+      "duration": 1.77,
+      "text": "which"
+    },
+    {
+      "index": 1150,
+      "start": 4390.79,
+      "end": 4393.54,
+      "duration": 2.75,
+      "text": "condition will you consider to set up"
+    },
+    {
+      "index": 1151,
+      "start": 4393.55,
+      "end": 4398.58,
+      "duration": 5.03,
+      "text": "the car where you set it up as a under"
+    },
+    {
+      "index": 1152,
+      "start": 4398.59,
+      "end": 4402.96,
+      "duration": 4.37,
+      "text": "damped critically damped or over damped"
+    },
+    {
+      "index": 1153,
+      "start": 4402.97,
+      "end": 4405.45,
+      "duration": 2.48,
+      "text": "how many of you actually think you"
+    },
+    {
+      "index": 1154,
+      "start": 4405.46,
+      "end": 4411.87,
+      "duration": 6.41,
+      "text": "should be under damped no nobody"
+    },
+    {
+      "index": 1155,
+      "start": 4411.88,
+      "end": 4414.57,
+      "duration": 2.69,
+      "text": "how many of you as you think it should"
+    },
+    {
+      "index": 1156,
+      "start": 4414.58,
+      "end": 4423.08,
+      "duration": 8.5,
+      "text": "be over damped one two three four okay"
+    },
+    {
+      "index": 1157,
+      "start": 4423.09,
+      "end": 4425.76,
+      "duration": 2.67,
+      "text": "how many of you as you think you should"
+    },
+    {
+      "index": 1158,
+      "start": 4425.77,
+      "end": 4429.3,
+      "duration": 3.53,
+      "text": "be critically damped okay but jority of"
+    },
+    {
+      "index": 1159,
+      "start": 4429.31,
+      "end": 4430.74,
+      "duration": 1.43,
+      "text": "you think that should be the correct"
+    },
+    {
+      "index": 1160,
+      "start": 4430.75,
+      "end": 4436.41,
+      "duration": 5.66,
+      "text": "design so if you have the car design as"
+    },
+    {
+      "index": 1161,
+      "start": 4436.42,
+      "end": 4439.26,
+      "duration": 2.84,
+      "text": "an under damped situation then when you"
+    },
+    {
+      "index": 1162,
+      "start": 4439.27,
+      "end": 4441.27,
+      "duration": 2.0,
+      "text": "drive the car you are going to have very"
+    },
+    {
+      "index": 1163,
+      "start": 4441.28,
+      "end": 4443.72,
+      "duration": 2.44,
+      "text": "funny style you're going to have this"
+    },
+    {
+      "index": 1164,
+      "start": 4443.73,
+      "end": 4447.09,
+      "duration": 3.36,
+      "text": "now this is the style so that your car"
+    },
+    {
+      "index": 1165,
+      "start": 4447.1,
+      "end": 4449.7,
+      "duration": 2.6,
+      "text": "is going to be oscillating all the time"
+    },
+    {
+      "index": 1166,
+      "start": 4449.71,
+      "end": 4453.3,
+      "duration": 3.59,
+      "text": "okay because it's going to be there and"
+    },
+    {
+      "index": 1167,
+      "start": 4453.31,
+      "end": 4456.33,
+      "duration": 3.02,
+      "text": "it's really tempting really slowly okay"
+    },
+    {
+      "index": 1168,
+      "start": 4456.34,
+      "end": 4461.88,
+      "duration": 5.54,
+      "text": "if you design that to be over damped it"
+    },
+    {
+      "index": 1169,
+      "start": 4461.89,
+      "end": 4464.07,
+      "duration": 2.18,
+      "text": "would be become very bumpy right so so"
+    },
+    {
+      "index": 1170,
+      "start": 4464.08,
+      "end": 4466.86,
+      "duration": 2.78,
+      "text": "let's take a limit of infinitely large"
+    },
+    {
+      "index": 1171,
+      "start": 4466.87,
+      "end": 4470.43,
+      "duration": 3.56,
+      "text": "drug force constant okay then it's like"
+    },
+    {
+      "index": 1172,
+      "start": 4470.44,
+      "end": 4475.41,
+      "duration": 4.97,
+      "text": "when you heat some boundary oh it"
+    },
+    {
+      "index": 1173,
+      "start": 4475.42,
+      "end": 4477.81,
+      "duration": 2.39,
+      "text": "doesn't really help you to reduce the"
+    },
+    {
+      "index": 1174,
+      "start": 4477.82,
+      "end": 4481.1,
+      "duration": 3.28,
+      "text": "amplitude okay so the correct answer is"
+    },
+    {
+      "index": 1175,
+      "start": 4481.11,
+      "end": 4484.08,
+      "duration": 2.97,
+      "text": "you would choose your give the device"
+    },
+    {
+      "index": 1176,
+      "start": 4484.09,
+      "end": 4488.4,
+      "duration": 4.31,
+      "text": "that you will do it critically damped"
+    },
+    {
+      "index": 1177,
+      "start": 4488.41,
+      "end": 4492.51,
+      "duration": 4.1,
+      "text": "okay so before we end the section today"
+    },
+    {
+      "index": 1178,
+      "start": 4492.52,
+      "end": 4495.74,
+      "duration": 3.22,
+      "text": "I would like to post a question to you"
+    },
+    {
+      "index": 1179,
+      "start": 4495.75,
+      "end": 4499.47,
+      "duration": 3.72,
+      "text": "the first the thing with which we have"
+    },
+    {
+      "index": 1180,
+      "start": 4499.48,
+      "end": 4501.45,
+      "duration": 1.97,
+      "text": "learned from simple harmonic motion is"
+    },
+    {
+      "index": 1181,
+      "start": 4501.46,
+      "end": 4504.45,
+      "duration": 2.99,
+      "text": "that the energy is conserved in the"
+    },
+    {
+      "index": 1182,
+      "start": 4504.46,
+      "end": 4507.12,
+      "duration": 2.66,
+      "text": "simple harmonic motion okay I have the"
+    },
+    {
+      "index": 1183,
+      "start": 4507.13,
+      "end": 4511.02,
+      "duration": 3.89,
+      "text": "FS the spring force proportional to"
+    },
+    {
+      "index": 1184,
+      "start": 4511.03,
+      "end": 4514.89,
+      "duration": 3.86,
+      "text": "minus K times X and that energy is"
+    },
+    {
+      "index": 1185,
+      "start": 4514.9,
+      "end": 4518.85,
+      "duration": 3.95,
+      "text": "conserved okay but if I add a drag force"
+    },
+    {
+      "index": 1186,
+      "start": 4518.86,
+      "end": 4522.93,
+      "duration": 4.07,
+      "text": "in the form of minus P times V energy is"
+    },
+    {
+      "index": 1187,
+      "start": 4522.94,
+      "end": 4524.43,
+      "duration": 1.49,
+      "text": "not conserved right okay"
+    },
+    {
+      "index": 1188,
+      "start": 4524.44,
+      "end": 4527.16,
+      "duration": 2.72,
+      "text": "see that he was to issue a sedating now"
+    },
+    {
+      "index": 1189,
+      "start": 4527.17,
+      "end": 4531.03,
+      "duration": 3.86,
+      "text": "it's now oscillating right this scene is"
+    },
+    {
+      "index": 1190,
+      "start": 4531.04,
+      "end": 4535.14,
+      "duration": 4.1,
+      "text": "stop absolutely okay why you start the"
+    },
+    {
+      "index": 1191,
+      "start": 4535.15,
+      "end": 4538.65,
+      "duration": 3.5,
+      "text": "case mathematically okay we know what is"
+    },
+    {
+      "index": 1192,
+      "start": 4538.66,
+      "end": 4542.01,
+      "duration": 3.35,
+      "text": "happening physically because in this"
+    },
+    {
+      "index": 1193,
+      "start": 4542.02,
+      "end": 4544.229,
+      "duration": 2.209,
+      "text": "physical system because okay this a"
+    },
+    {
+      "index": 1194,
+      "start": 4544.239,
+      "end": 4548.34,
+      "duration": 4.101,
+      "text": "Mexican Hat is trying to push the air"
+    },
+    {
+      "index": 1195,
+      "start": 4548.35,
+      "end": 4550.709,
+      "duration": 2.359,
+      "text": "away so what is going to happen is that"
+    },
+    {
+      "index": 1196,
+      "start": 4550.719,
+      "end": 4553.62,
+      "duration": 2.901,
+      "text": "it's transferring the energy from the"
+    },
+    {
+      "index": 1197,
+      "start": 4553.63,
+      "end": 4557.459,
+      "duration": 3.829,
+      "text": "system to the to alemannic use of air"
+    },
+    {
+      "index": 1198,
+      "start": 4557.469,
+      "end": 4560.22,
+      "duration": 2.751,
+      "text": "okay so it's a separating the air so the"
+    },
+    {
+      "index": 1199,
+      "start": 4560.23,
+      "end": 4562.08,
+      "duration": 1.85,
+      "text": "energy goes away but why the"
+    },
+    {
+      "index": 1200,
+      "start": 4562.09,
+      "end": 4565.35,
+      "duration": 3.26,
+      "text": "mathematical form looks so similar and"
+    },
+    {
+      "index": 1201,
+      "start": 4565.36,
+      "end": 4569.459,
+      "duration": 4.099,
+      "text": "it does different thing and think about"
+    },
+    {
+      "index": 1202,
+      "start": 4569.469,
+      "end": 4572.31,
+      "duration": 2.841,
+      "text": "it and I'm not going to talk talk about"
+    },
+    {
+      "index": 1203,
+      "start": 4572.32,
+      "end": 4575.55,
+      "duration": 3.23,
+      "text": "the answer today and thank you Matt"
+    },
+    {
+      "index": 1204,
+      "start": 4575.56,
+      "end": 4577.74,
+      "duration": 2.18,
+      "text": "thank you very much and we will continue"
+    },
+    {
+      "index": 1205,
+      "start": 4577.75,
+      "end": 4581.37,
+      "duration": 3.62,
+      "text": "next time to see what we can learn if I"
+    },
+    {
+      "index": 1206,
+      "start": 4581.38,
+      "end": 4586.8,
+      "duration": 5.42,
+      "text": "start to type the oscillation back"
+    }
+  ],
+  "course": {
+    "category": "Computer Science & AI",
+    "title": "Computational Thinking and Data Science",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP61R5sPDPKVfcFlu95wSs2Kx"
+  }
+}

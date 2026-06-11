@@ -1,0 +1,5828 @@
+{
+  "video": {
+    "id": "umt6BB1nJ4w",
+    "title": "Lec 25 | MIT 18.06 Linear Algebra, Spring 2005",
+    "url": "https://www.youtube.com/watch?v=umt6BB1nJ4w",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2632,
+    "language": "en"
+  },
+  "segment_count": 830,
+  "segments": [
+    {
+      "index": 0,
+      "start": 11.11,
+      "end": 11.12,
+      "duration": 0.01,
+      "text": "one and"
+    },
+    {
+      "index": 1,
+      "start": 11.12,
+      "end": 14.95,
+      "duration": 3.83,
+      "text": "the lecture on symmetric matrices."
+    },
+    {
+      "index": 2,
+      "start": 14.96,
+      "end": 17.43,
+      "duration": 2.47,
+      "text": "So that's the most important class of"
+    },
+    {
+      "index": 3,
+      "start": 17.44,
+      "end": 21.429,
+      "duration": 3.989,
+      "text": "matrices symmetric matrices A equals A"
+    },
+    {
+      "index": 4,
+      "start": 21.439,
+      "end": 25.75,
+      "duration": 4.311,
+      "text": "transpose. So the first points, the main"
+    },
+    {
+      "index": 5,
+      "start": 25.76,
+      "end": 28.71,
+      "duration": 2.95,
+      "text": "points of the lecture, I'll tell you"
+    },
+    {
+      "index": 6,
+      "start": 28.72,
+      "end": 31.269,
+      "duration": 2.549,
+      "text": "right away"
+    },
+    {
+      "index": 7,
+      "start": 31.279,
+      "end": 33.83,
+      "duration": 2.551,
+      "text": "what's special about the igen values."
+    },
+    {
+      "index": 8,
+      "start": 33.84,
+      "end": 35.99,
+      "duration": 2.15,
+      "text": "What's special about the igen vectors?"
+    },
+    {
+      "index": 9,
+      "start": 36.0,
+      "end": 38.79,
+      "duration": 2.79,
+      "text": "This is now"
+    },
+    {
+      "index": 10,
+      "start": 38.8,
+      "end": 41.99,
+      "duration": 3.19,
+      "text": "this is the way we now look at a matrix."
+    },
+    {
+      "index": 11,
+      "start": 42.0,
+      "end": 44.069,
+      "duration": 2.069,
+      "text": "We want to know about its igen values"
+    },
+    {
+      "index": 12,
+      "start": 44.079,
+      "end": 46.389,
+      "duration": 2.31,
+      "text": "and igen vectors. And if we have a"
+    },
+    {
+      "index": 13,
+      "start": 46.399,
+      "end": 49.67,
+      "duration": 3.271,
+      "text": "special type of matrix that should tell"
+    },
+    {
+      "index": 14,
+      "start": 49.68,
+      "end": 51.99,
+      "duration": 2.31,
+      "text": "us something about igen values and igen"
+    },
+    {
+      "index": 15,
+      "start": 52.0,
+      "end": 55.43,
+      "duration": 3.43,
+      "text": "vectors like markoff matrices they had"
+    },
+    {
+      "index": 16,
+      "start": 55.44,
+      "end": 59.43,
+      "duration": 3.99,
+      "text": "an igen value equal one. Now, symmetric"
+    },
+    {
+      "index": 17,
+      "start": 59.44,
+      "end": 62.63,
+      "duration": 3.19,
+      "text": "matrices, can I just tell you right off"
+    },
+    {
+      "index": 18,
+      "start": 62.64,
+      "end": 65.67,
+      "duration": 3.03,
+      "text": "what the main facts, the two main facts"
+    },
+    {
+      "index": 19,
+      "start": 65.68,
+      "end": 68.31,
+      "duration": 2.63,
+      "text": "are? The igen values of a symmetric"
+    },
+    {
+      "index": 20,
+      "start": 68.32,
+      "end": 70.87,
+      "duration": 2.55,
+      "text": "matrix real. This is a real symmetric"
+    },
+    {
+      "index": 21,
+      "start": 70.88,
+      "end": 74.55,
+      "duration": 3.67,
+      "text": "matrix. We talking mostly about real"
+    },
+    {
+      "index": 22,
+      "start": 74.56,
+      "end": 81.429,
+      "duration": 6.869,
+      "text": "matrices. The igen values are also real."
+    },
+    {
+      "index": 23,
+      "start": 84.95,
+      "end": 84.96,
+      "duration": 0.01,
+      "text": "So our examples of rotation matrices"
+    },
+    {
+      "index": 24,
+      "start": 84.96,
+      "end": 87.99,
+      "duration": 3.03,
+      "text": "where where we got igen values that were"
+    },
+    {
+      "index": 25,
+      "start": 88.0,
+      "end": 89.51,
+      "duration": 1.51,
+      "text": "complex"
+    },
+    {
+      "index": 26,
+      "start": 89.52,
+      "end": 92.55,
+      "duration": 3.03,
+      "text": "that won't happen now for symmetric"
+    },
+    {
+      "index": 27,
+      "start": 92.56,
+      "end": 94.789,
+      "duration": 2.229,
+      "text": "matrices the Igen values are real and"
+    },
+    {
+      "index": 28,
+      "start": 94.799,
+      "end": 97.83,
+      "duration": 3.031,
+      "text": "the igen vectors are also very special"
+    },
+    {
+      "index": 29,
+      "start": 97.84,
+      "end": 100.469,
+      "duration": 2.629,
+      "text": "the igen vectors are perpendicular"
+    },
+    {
+      "index": 30,
+      "start": 100.479,
+      "end": 102.95,
+      "duration": 2.471,
+      "text": "orthogonal which do you prefer I'll say"
+    },
+    {
+      "index": 31,
+      "start": 102.96,
+      "end": 106.389,
+      "duration": 3.429,
+      "text": "perpendicular per well they're both long"
+    },
+    {
+      "index": 32,
+      "start": 106.399,
+      "end": 112.789,
+      "duration": 6.39,
+      "text": "words perpendic pick."
+    },
+    {
+      "index": 33,
+      "start": 118.23,
+      "end": 118.24,
+      "duration": 0.01,
+      "text": "Okay. Right. So, uh"
+    },
+    {
+      "index": 34,
+      "start": 118.24,
+      "end": 122.389,
+      "duration": 4.149,
+      "text": "I have uh you should say why and I'll at"
+    },
+    {
+      "index": 35,
+      "start": 122.399,
+      "end": 125.91,
+      "duration": 3.511,
+      "text": "least answer why for case one. Maybe"
+    },
+    {
+      "index": 36,
+      "start": 125.92,
+      "end": 128.229,
+      "duration": 2.309,
+      "text": "case two the checking the igen that the"
+    },
+    {
+      "index": 37,
+      "start": 128.239,
+      "end": 130.55,
+      "duration": 2.311,
+      "text": "igen vectors are perpendicular I'll"
+    },
+    {
+      "index": 38,
+      "start": 130.56,
+      "end": 136.39,
+      "duration": 5.83,
+      "text": "leave to um uh the the book."
+    },
+    {
+      "index": 39,
+      "start": 136.4,
+      "end": 140.47,
+      "duration": 4.07,
+      "text": "But let's just realize what well first I"
+    },
+    {
+      "index": 40,
+      "start": 140.48,
+      "end": 143.75,
+      "duration": 3.27,
+      "text": "have to say"
+    },
+    {
+      "index": 41,
+      "start": 143.76,
+      "end": 146.63,
+      "duration": 2.87,
+      "text": "it it could happen like for the identity"
+    },
+    {
+      "index": 42,
+      "start": 146.64,
+      "end": 149.19,
+      "duration": 2.55,
+      "text": "matrix"
+    },
+    {
+      "index": 43,
+      "start": 149.2,
+      "end": 151.83,
+      "duration": 2.63,
+      "text": "there's a symmetric matrix its igen"
+    },
+    {
+      "index": 44,
+      "start": 151.84,
+      "end": 153.67,
+      "duration": 1.83,
+      "text": "values are certainly all real they're"
+    },
+    {
+      "index": 45,
+      "start": 153.68,
+      "end": 156.71,
+      "duration": 3.03,
+      "text": "all one for the identity matrix what"
+    },
+    {
+      "index": 46,
+      "start": 156.72,
+      "end": 159.91,
+      "duration": 3.19,
+      "text": "about the igen vectors well for the"
+    },
+    {
+      "index": 47,
+      "start": 159.92,
+      "end": 163.91,
+      "duration": 3.99,
+      "text": "identity every vector is an igen vector"
+    },
+    {
+      "index": 48,
+      "start": 163.92,
+      "end": 166.869,
+      "duration": 2.949,
+      "text": "so how can I say they're perpendicular"
+    },
+    {
+      "index": 49,
+      "start": 166.879,
+      "end": 170.15,
+      "duration": 3.271,
+      "text": "What I really mean is the they this word"
+    },
+    {
+      "index": 50,
+      "start": 170.16,
+      "end": 177.589,
+      "duration": 7.429,
+      "text": "r should really be written can be chosen"
+    },
+    {
+      "index": 51,
+      "start": 179.19,
+      "end": 179.2,
+      "duration": 0.01,
+      "text": "perpendicular"
+    },
+    {
+      "index": 52,
+      "start": 179.2,
+      "end": 182.63,
+      "duration": 3.43,
+      "text": "that is I if we have it's the usual case"
+    },
+    {
+      "index": 53,
+      "start": 182.64,
+      "end": 185.75,
+      "duration": 3.11,
+      "text": "if the igen values are all different"
+    },
+    {
+      "index": 54,
+      "start": 185.76,
+      "end": 188.55,
+      "duration": 2.79,
+      "text": "then each igen value has one line of"
+    },
+    {
+      "index": 55,
+      "start": 188.56,
+      "end": 190.229,
+      "duration": 1.669,
+      "text": "igen vectors and those lines are"
+    },
+    {
+      "index": 56,
+      "start": 190.239,
+      "end": 193.27,
+      "duration": 3.031,
+      "text": "perpendicular here"
+    },
+    {
+      "index": 57,
+      "start": 193.28,
+      "end": 196.07,
+      "duration": 2.79,
+      "text": "but if an igen value is repeated"
+    },
+    {
+      "index": 58,
+      "start": 196.08,
+      "end": 197.91,
+      "duration": 1.83,
+      "text": "then there's a whole plane of igen"
+    },
+    {
+      "index": 59,
+      "start": 197.92,
+      "end": 201.35,
+      "duration": 3.43,
+      "text": "vectors and all I'm saying is that in"
+    },
+    {
+      "index": 60,
+      "start": 201.36,
+      "end": 204.39,
+      "duration": 3.03,
+      "text": "that plane we can choose perpendicular"
+    },
+    {
+      "index": 61,
+      "start": 204.4,
+      "end": 207.67,
+      "duration": 3.27,
+      "text": "ones. So that's why it's a can be chosen"
+    },
+    {
+      "index": 62,
+      "start": 207.68,
+      "end": 209.91,
+      "duration": 2.23,
+      "text": "part is this is in the case of a"
+    },
+    {
+      "index": 63,
+      "start": 209.92,
+      "end": 212.07,
+      "duration": 2.15,
+      "text": "repeated igen value where there's some"
+    },
+    {
+      "index": 64,
+      "start": 212.08,
+      "end": 215.43,
+      "duration": 3.35,
+      "text": "real substantial freedom. But the"
+    },
+    {
+      "index": 65,
+      "start": 215.44,
+      "end": 219.43,
+      "duration": 3.99,
+      "text": "typical case is different values all"
+    },
+    {
+      "index": 66,
+      "start": 219.44,
+      "end": 221.11,
+      "duration": 1.67,
+      "text": "realed"
+    },
+    {
+      "index": 67,
+      "start": 221.12,
+      "end": 222.63,
+      "duration": 1.51,
+      "text": "one-dimensional"
+    },
+    {
+      "index": 68,
+      "start": 222.64,
+      "end": 225.35,
+      "duration": 2.71,
+      "text": "vector spaces spaces and all"
+    },
+    {
+      "index": 69,
+      "start": 225.36,
+      "end": 229.03,
+      "duration": 3.67,
+      "text": "perpendicular. So just let's just see"
+    },
+    {
+      "index": 70,
+      "start": 229.04,
+      "end": 234.07,
+      "duration": 5.03,
+      "text": "the conclusion if if we accept those as"
+    },
+    {
+      "index": 71,
+      "start": 234.08,
+      "end": 237.509,
+      "duration": 3.429,
+      "text": "correct what happens and I also mean"
+    },
+    {
+      "index": 72,
+      "start": 237.519,
+      "end": 239.11,
+      "duration": 1.591,
+      "text": "that"
+    },
+    {
+      "index": 73,
+      "start": 239.12,
+      "end": 243.509,
+      "duration": 4.389,
+      "text": "there's a full set of them I I"
+    },
+    {
+      "index": 74,
+      "start": 243.519,
+      "end": 245.99,
+      "duration": 2.471,
+      "text": "so that's part of this picture here that"
+    },
+    {
+      "index": 75,
+      "start": 246.0,
+      "end": 248.149,
+      "duration": 2.149,
+      "text": "there there's a complete set of igen"
+    },
+    {
+      "index": 76,
+      "start": 248.159,
+      "end": 251.429,
+      "duration": 3.27,
+      "text": "vectors perpendicular ones so having a"
+    },
+    {
+      "index": 77,
+      "start": 251.439,
+      "end": 254.55,
+      "duration": 3.111,
+      "text": "complete set of igen vectors means so"
+    },
+    {
+      "index": 78,
+      "start": 254.56,
+      "end": 256.069,
+      "duration": 1.509,
+      "text": "normal"
+    },
+    {
+      "index": 79,
+      "start": 256.079,
+      "end": 260.069,
+      "duration": 3.99,
+      "text": "Uh so the usual maybe I put the usually"
+    },
+    {
+      "index": 80,
+      "start": 260.079,
+      "end": 264.15,
+      "duration": 4.071,
+      "text": "usual usual case is that the matrix A we"
+    },
+    {
+      "index": 81,
+      "start": 264.16,
+      "end": 267.749,
+      "duration": 3.589,
+      "text": "can write in terms of its igen val"
+    },
+    {
+      "index": 82,
+      "start": 267.759,
+      "end": 271.189,
+      "duration": 3.43,
+      "text": "matrix and its igen vector matrix this"
+    },
+    {
+      "index": 83,
+      "start": 271.199,
+      "end": 273.67,
+      "duration": 2.471,
+      "text": "way right"
+    },
+    {
+      "index": 84,
+      "start": 273.68,
+      "end": 277.43,
+      "duration": 3.75,
+      "text": "we can do that in the usual case but now"
+    },
+    {
+      "index": 85,
+      "start": 277.44,
+      "end": 280.469,
+      "duration": 3.029,
+      "text": "what's special"
+    },
+    {
+      "index": 86,
+      "start": 280.479,
+      "end": 283.03,
+      "duration": 2.551,
+      "text": "when the matrix is symmetric so this is"
+    },
+    {
+      "index": 87,
+      "start": 283.04,
+      "end": 287.909,
+      "duration": 4.869,
+      "text": "the usual case and now let me go to the"
+    },
+    {
+      "index": 88,
+      "start": 287.919,
+      "end": 292.15,
+      "duration": 4.231,
+      "text": "symmetric case."
+    },
+    {
+      "index": 89,
+      "start": 296.23,
+      "end": 296.24,
+      "duration": 0.01,
+      "text": "So in the symmetric case a this this"
+    },
+    {
+      "index": 90,
+      "start": 296.24,
+      "end": 299.03,
+      "duration": 2.79,
+      "text": "should become somehow a little special."
+    },
+    {
+      "index": 91,
+      "start": 299.04,
+      "end": 301.749,
+      "duration": 2.709,
+      "text": "Well the lambdas"
+    },
+    {
+      "index": 92,
+      "start": 301.759,
+      "end": 303.83,
+      "duration": 2.071,
+      "text": "on the diagonal are still on the"
+    },
+    {
+      "index": 93,
+      "start": 303.84,
+      "end": 305.67,
+      "duration": 1.83,
+      "text": "diagonal. They're they're real but"
+    },
+    {
+      "index": 94,
+      "start": 305.68,
+      "end": 308.39,
+      "duration": 2.71,
+      "text": "that's where they are."
+    },
+    {
+      "index": 95,
+      "start": 308.4,
+      "end": 312.15,
+      "duration": 3.75,
+      "text": "What about the igen vector matrix?"
+    },
+    {
+      "index": 96,
+      "start": 312.16,
+      "end": 314.469,
+      "duration": 2.309,
+      "text": "So what can I do now special about the"
+    },
+    {
+      "index": 97,
+      "start": 314.479,
+      "end": 317.189,
+      "duration": 2.71,
+      "text": "igen vector matrix when when the A"
+    },
+    {
+      "index": 98,
+      "start": 317.199,
+      "end": 320.15,
+      "duration": 2.951,
+      "text": "itself is symmetric that says something"
+    },
+    {
+      "index": 99,
+      "start": 320.16,
+      "end": 322.95,
+      "duration": 2.79,
+      "text": "good about the igen vector matrix. So"
+    },
+    {
+      "index": 100,
+      "start": 322.96,
+      "end": 325.59,
+      "duration": 2.63,
+      "text": "what does this what does this lead to?"
+    },
+    {
+      "index": 101,
+      "start": 325.6,
+      "end": 328.23,
+      "duration": 2.63,
+      "text": "This these perpendicular"
+    },
+    {
+      "index": 102,
+      "start": 328.24,
+      "end": 331.909,
+      "duration": 3.669,
+      "text": "vectors. I can not only I I can not only"
+    },
+    {
+      "index": 103,
+      "start": 331.919,
+      "end": 334.07,
+      "duration": 2.151,
+      "text": "guarantee they're perpendicular, I could"
+    },
+    {
+      "index": 104,
+      "start": 334.08,
+      "end": 336.95,
+      "duration": 2.87,
+      "text": "also make them unit vectors. No problem."
+    },
+    {
+      "index": 105,
+      "start": 336.96,
+      "end": 340.629,
+      "duration": 3.669,
+      "text": "Just scale their length to one. So what"
+    },
+    {
+      "index": 106,
+      "start": 340.639,
+      "end": 346.07,
+      "duration": 5.431,
+      "text": "do I have? I have orthonormal"
+    },
+    {
+      "index": 107,
+      "start": 353.189,
+      "end": 353.199,
+      "duration": 0.01,
+      "text": "And what does that tell me about the"
+    },
+    {
+      "index": 108,
+      "start": 353.199,
+      "end": 356.469,
+      "duration": 3.27,
+      "text": "igen vector matrix? What what letter"
+    },
+    {
+      "index": 109,
+      "start": 356.479,
+      "end": 359.189,
+      "duration": 2.71,
+      "text": "should I now use"
+    },
+    {
+      "index": 110,
+      "start": 359.199,
+      "end": 362.71,
+      "duration": 3.511,
+      "text": "in place of S? Remember S has the igen"
+    },
+    {
+      "index": 111,
+      "start": 362.72,
+      "end": 365.27,
+      "duration": 2.55,
+      "text": "vectors in its columns. But now those"
+    },
+    {
+      "index": 112,
+      "start": 365.28,
+      "end": 367.99,
+      "duration": 2.71,
+      "text": "columns are orthonormal. So the right"
+    },
+    {
+      "index": 113,
+      "start": 368.0,
+      "end": 370.469,
+      "duration": 2.469,
+      "text": "letter to use is"
+    },
+    {
+      "index": 114,
+      "start": 370.479,
+      "end": 374.23,
+      "duration": 3.751,
+      "text": "Q. So that's where so we've got the"
+    },
+    {
+      "index": 115,
+      "start": 374.24,
+      "end": 376.95,
+      "duration": 2.71,
+      "text": "letter all set up. So this should be Q"
+    },
+    {
+      "index": 116,
+      "start": 376.96,
+      "end": 379.749,
+      "duration": 2.789,
+      "text": "lambda Q inverse."
+    },
+    {
+      "index": 117,
+      "start": 379.759,
+      "end": 383.43,
+      "duration": 3.671,
+      "text": "Q standing in our minds always for this"
+    },
+    {
+      "index": 118,
+      "start": 383.44,
+      "end": 387.029,
+      "duration": 3.589,
+      "text": "matrix. In this case it's square. It's"
+    },
+    {
+      "index": 119,
+      "start": 387.039,
+      "end": 389.749,
+      "duration": 2.71,
+      "text": "it's so these are the columns of Q of"
+    },
+    {
+      "index": 120,
+      "start": 389.759,
+      "end": 395.27,
+      "duration": 5.511,
+      "text": "course."
+    },
+    {
+      "index": 121,
+      "start": 399.029,
+      "end": 399.039,
+      "duration": 0.01,
+      "text": "And one more thing,"
+    },
+    {
+      "index": 122,
+      "start": 399.039,
+      "end": 401.909,
+      "duration": 2.87,
+      "text": "what's Q inverse"
+    },
+    {
+      "index": 123,
+      "start": 401.919,
+      "end": 404.07,
+      "duration": 2.151,
+      "text": "for an orthonormal for a matrix that has"
+    },
+    {
+      "index": 124,
+      "start": 404.08,
+      "end": 407.51,
+      "duration": 3.43,
+      "text": "these orthonormal columns?"
+    },
+    {
+      "index": 125,
+      "start": 407.52,
+      "end": 410.87,
+      "duration": 3.35,
+      "text": "We know that the inverse is the same as"
+    },
+    {
+      "index": 126,
+      "start": 410.88,
+      "end": 416.79,
+      "duration": 5.91,
+      "text": "the transpose. So here is the beautiful"
+    },
+    {
+      "index": 127,
+      "start": 416.8,
+      "end": 420.39,
+      "duration": 3.59,
+      "text": "there's the the great uh description the"
+    },
+    {
+      "index": 128,
+      "start": 420.4,
+      "end": 424.15,
+      "duration": 3.75,
+      "text": "factorization of a symmetric matrix. And"
+    },
+    {
+      "index": 129,
+      "start": 424.16,
+      "end": 426.23,
+      "duration": 2.07,
+      "text": "this is like one of the famous theorems"
+    },
+    {
+      "index": 130,
+      "start": 426.24,
+      "end": 428.629,
+      "duration": 2.389,
+      "text": "of linear algebra that if I have a"
+    },
+    {
+      "index": 131,
+      "start": 428.639,
+      "end": 432.469,
+      "duration": 3.83,
+      "text": "symmetric matrix, it can be factored in"
+    },
+    {
+      "index": 132,
+      "start": 432.479,
+      "end": 436.15,
+      "duration": 3.671,
+      "text": "this form and an orthogonal matrix times"
+    },
+    {
+      "index": 133,
+      "start": 436.16,
+      "end": 438.39,
+      "duration": 2.23,
+      "text": "diagonal times the transpose of that"
+    },
+    {
+      "index": 134,
+      "start": 438.4,
+      "end": 441.11,
+      "duration": 2.71,
+      "text": "orthogonal matrix. And of course"
+    },
+    {
+      "index": 135,
+      "start": 441.12,
+      "end": 446.07,
+      "duration": 4.95,
+      "text": "everybody immediately says yes. And if"
+    },
+    {
+      "index": 136,
+      "start": 446.08,
+      "end": 448.95,
+      "duration": 2.87,
+      "text": "this is possible then that's clearly"
+    },
+    {
+      "index": 137,
+      "start": 448.96,
+      "end": 451.99,
+      "duration": 3.03,
+      "text": "symmetric, right? that take we've looked"
+    },
+    {
+      "index": 138,
+      "start": 452.0,
+      "end": 454.309,
+      "duration": 2.309,
+      "text": "at products of three guys like that and"
+    },
+    {
+      "index": 139,
+      "start": 454.319,
+      "end": 457.029,
+      "duration": 2.71,
+      "text": "taken their transpose and we got it back"
+    },
+    {
+      "index": 140,
+      "start": 457.039,
+      "end": 458.55,
+      "duration": 1.511,
+      "text": "again."
+    },
+    {
+      "index": 141,
+      "start": 458.56,
+      "end": 462.87,
+      "duration": 4.31,
+      "text": "So do you see the beauty of this of this"
+    },
+    {
+      "index": 142,
+      "start": 462.88,
+      "end": 466.23,
+      "duration": 3.35,
+      "text": "uh factorization? Then it it completely"
+    },
+    {
+      "index": 143,
+      "start": 466.24,
+      "end": 469.029,
+      "duration": 2.789,
+      "text": "displays the igen values and igen"
+    },
+    {
+      "index": 144,
+      "start": 469.039,
+      "end": 471.83,
+      "duration": 2.791,
+      "text": "vectors and the symmetry of the of the"
+    },
+    {
+      "index": 145,
+      "start": 471.84,
+      "end": 475.27,
+      "duration": 3.43,
+      "text": "whole thing because that product Q *"
+    },
+    {
+      "index": 146,
+      "start": 475.28,
+      "end": 479.83,
+      "duration": 4.55,
+      "text": "lambda* qranspose if I transpose it it"
+    },
+    {
+      "index": 147,
+      "start": 479.84,
+      "end": 482.39,
+      "duration": 2.55,
+      "text": "just comes in this position and we get"
+    },
+    {
+      "index": 148,
+      "start": 482.4,
+      "end": 485.51,
+      "duration": 3.11,
+      "text": "that matrix back again. So that's in"
+    },
+    {
+      "index": 149,
+      "start": 485.52,
+      "end": 487.749,
+      "duration": 2.229,
+      "text": "mathematics that's called the spectral"
+    },
+    {
+      "index": 150,
+      "start": 487.759,
+      "end": 490.629,
+      "duration": 2.87,
+      "text": "theorem. Spectrum is the set of igen"
+    },
+    {
+      "index": 151,
+      "start": 490.639,
+      "end": 494.39,
+      "duration": 3.751,
+      "text": "values of a matrix. Spec it somehow"
+    },
+    {
+      "index": 152,
+      "start": 494.4,
+      "end": 496.95,
+      "duration": 2.55,
+      "text": "comes from the idea of the spectrum of"
+    },
+    {
+      "index": 153,
+      "start": 496.96,
+      "end": 500.55,
+      "duration": 3.59,
+      "text": "light as a combination of of uh pure"
+    },
+    {
+      "index": 154,
+      "start": 500.56,
+      "end": 502.39,
+      "duration": 1.83,
+      "text": "things"
+    },
+    {
+      "index": 155,
+      "start": 502.4,
+      "end": 506.39,
+      "duration": 3.99,
+      "text": "where our matrix is broken down into"
+    },
+    {
+      "index": 156,
+      "start": 506.4,
+      "end": 511.43,
+      "duration": 5.03,
+      "text": "pure values and igen vectors. uh in"
+    },
+    {
+      "index": 157,
+      "start": 511.44,
+      "end": 513.75,
+      "duration": 2.31,
+      "text": "mechanics it's often called the"
+    },
+    {
+      "index": 158,
+      "start": 513.76,
+      "end": 516.63,
+      "duration": 2.87,
+      "text": "principal axis theorem. It's very"
+    },
+    {
+      "index": 159,
+      "start": 516.64,
+      "end": 520.709,
+      "duration": 4.069,
+      "text": "useful. It means that if you have uh we"
+    },
+    {
+      "index": 160,
+      "start": 520.719,
+      "end": 523.029,
+      "duration": 2.31,
+      "text": "we'll see it geometrically. It means"
+    },
+    {
+      "index": 161,
+      "start": 523.039,
+      "end": 525.509,
+      "duration": 2.47,
+      "text": "that if I have some material if I look"
+    },
+    {
+      "index": 162,
+      "start": 525.519,
+      "end": 528.55,
+      "duration": 3.031,
+      "text": "at the right axes uh it becomes"
+    },
+    {
+      "index": 163,
+      "start": 528.56,
+      "end": 533.03,
+      "duration": 4.47,
+      "text": "diagonal. It becomes uh um the the"
+    },
+    {
+      "index": 164,
+      "start": 533.04,
+      "end": 536.15,
+      "duration": 3.11,
+      "text": "directions don't couple together. Okay."
+    },
+    {
+      "index": 165,
+      "start": 536.16,
+      "end": 539.67,
+      "duration": 3.51,
+      "text": "So that's that's what to remember. from"
+    },
+    {
+      "index": 166,
+      "start": 539.68,
+      "end": 543.03,
+      "duration": 3.35,
+      "text": "this lecture. Now I would like to say"
+    },
+    {
+      "index": 167,
+      "start": 543.04,
+      "end": 545.99,
+      "duration": 2.95,
+      "text": "why are the igen values real?"
+    },
+    {
+      "index": 168,
+      "start": 546.0,
+      "end": 548.79,
+      "duration": 2.79,
+      "text": "Can I do that? So so because something"
+    },
+    {
+      "index": 169,
+      "start": 548.8,
+      "end": 552.31,
+      "duration": 3.51,
+      "text": "useful comes out. So I'll just come back"
+    },
+    {
+      "index": 170,
+      "start": 552.32,
+      "end": 555.269,
+      "duration": 2.949,
+      "text": "come to that question. Why"
+    },
+    {
+      "index": 171,
+      "start": 555.279,
+      "end": 557.03,
+      "duration": 1.751,
+      "text": "real"
+    },
+    {
+      "index": 172,
+      "start": 557.04,
+      "end": 562.949,
+      "duration": 5.909,
+      "text": "values?"
+    },
+    {
+      "index": 173,
+      "start": 565.75,
+      "end": 565.76,
+      "duration": 0.01,
+      "text": "Okay. So I have to start from the only"
+    },
+    {
+      "index": 174,
+      "start": 565.76,
+      "end": 573.75,
+      "duration": 7.99,
+      "text": "thing we know ax= lambda x."
+    },
+    {
+      "index": 175,
+      "start": 576.15,
+      "end": 576.16,
+      "duration": 0.01,
+      "text": "Okay. But as far as I know at this"
+    },
+    {
+      "index": 176,
+      "start": 576.16,
+      "end": 580.31,
+      "duration": 4.15,
+      "text": "moment, lambda could be complex. I'm"
+    },
+    {
+      "index": 177,
+      "start": 580.32,
+      "end": 582.87,
+      "duration": 2.55,
+      "text": "going to prove it's not and x could be"
+    },
+    {
+      "index": 178,
+      "start": 582.88,
+      "end": 584.79,
+      "duration": 1.91,
+      "text": "complex."
+    },
+    {
+      "index": 179,
+      "start": 584.8,
+      "end": 588.31,
+      "duration": 3.51,
+      "text": "In fact, for the moment, even a could be"
+    },
+    {
+      "index": 180,
+      "start": 588.32,
+      "end": 589.829,
+      "duration": 1.509,
+      "text": "we could even think, well, what happens"
+    },
+    {
+      "index": 181,
+      "start": 589.839,
+      "end": 592.55,
+      "duration": 2.711,
+      "text": "if a is complex? Well, one thing we can"
+    },
+    {
+      "index": 182,
+      "start": 592.56,
+      "end": 595.99,
+      "duration": 3.43,
+      "text": "always do this is this is like always"
+    },
+    {
+      "index": 183,
+      "start": 596.0,
+      "end": 598.07,
+      "duration": 2.07,
+      "text": "always okay."
+    },
+    {
+      "index": 184,
+      "start": 598.08,
+      "end": 602.23,
+      "duration": 4.15,
+      "text": "I can if I have an equation I can take"
+    },
+    {
+      "index": 185,
+      "start": 602.24,
+      "end": 605.11,
+      "duration": 2.87,
+      "text": "the complex conjugate of everything"
+    },
+    {
+      "index": 186,
+      "start": 605.12,
+      "end": 609.19,
+      "duration": 4.07,
+      "text": "that's no no so a conjugate x conjugate"
+    },
+    {
+      "index": 187,
+      "start": 609.2,
+      "end": 613.03,
+      "duration": 3.83,
+      "text": "equal lambda conjugate x conjugate"
+    },
+    {
+      "index": 188,
+      "start": 613.04,
+      "end": 616.069,
+      "duration": 3.029,
+      "text": "that just means that everywhere over"
+    },
+    {
+      "index": 189,
+      "start": 616.079,
+      "end": 618.63,
+      "duration": 2.551,
+      "text": "here that there was a"
+    },
+    {
+      "index": 190,
+      "start": 618.64,
+      "end": 621.91,
+      "duration": 3.27,
+      "text": "an i then here I changed it to a minus i"
+    },
+    {
+      "index": 191,
+      "start": 621.92,
+      "end": 624.87,
+      "duration": 2.95,
+      "text": "that you you know that that step that"
+    },
+    {
+      "index": 192,
+      "start": 624.88,
+      "end": 629.03,
+      "duration": 4.15,
+      "text": "conjugate business that a plus I if I"
+    },
+    {
+      "index": 193,
+      "start": 629.04,
+      "end": 632.47,
+      "duration": 3.43,
+      "text": "conjugate it it's a minus I that's the"
+    },
+    {
+      "index": 194,
+      "start": 632.48,
+      "end": 636.23,
+      "duration": 3.75,
+      "text": "meaning of conjugate and products behave"
+    },
+    {
+      "index": 195,
+      "start": 636.24,
+      "end": 639.91,
+      "duration": 3.67,
+      "text": "right I can conjugate every factor so I"
+    },
+    {
+      "index": 196,
+      "start": 639.92,
+      "end": 642.63,
+      "duration": 2.71,
+      "text": "haven't done anything yet except to say"
+    },
+    {
+      "index": 197,
+      "start": 642.64,
+      "end": 645.269,
+      "duration": 2.629,
+      "text": "what would be true"
+    },
+    {
+      "index": 198,
+      "start": 645.279,
+      "end": 647.35,
+      "duration": 2.071,
+      "text": "if"
+    },
+    {
+      "index": 199,
+      "start": 647.36,
+      "end": 648.949,
+      "duration": 1.589,
+      "text": "um"
+    },
+    {
+      "index": 200,
+      "start": 648.959,
+      "end": 652.389,
+      "duration": 3.43,
+      "text": "x in any case even if x and lambda were"
+    },
+    {
+      "index": 201,
+      "start": 652.399,
+      "end": 654.63,
+      "duration": 2.231,
+      "text": "complex of course our we're speaking"
+    },
+    {
+      "index": 202,
+      "start": 654.64,
+      "end": 657.59,
+      "duration": 2.95,
+      "text": "about real matrices a so I take that"
+    },
+    {
+      "index": 203,
+      "start": 657.6,
+      "end": 660.71,
+      "duration": 3.11,
+      "text": "out. Actually,"
+    },
+    {
+      "index": 204,
+      "start": 660.72,
+      "end": 662.63,
+      "duration": 1.91,
+      "text": "this already tells me something about"
+    },
+    {
+      "index": 205,
+      "start": 662.64,
+      "end": 665.43,
+      "duration": 2.79,
+      "text": "real matrices. I I I haven't used any"
+    },
+    {
+      "index": 206,
+      "start": 665.44,
+      "end": 669.03,
+      "duration": 3.59,
+      "text": "assumption of a equal arpose yet."
+    },
+    {
+      "index": 207,
+      "start": 669.04,
+      "end": 671.67,
+      "duration": 2.63,
+      "text": "Symmetry is waiting in the wings to be"
+    },
+    {
+      "index": 208,
+      "start": 671.68,
+      "end": 676.31,
+      "duration": 4.63,
+      "text": "used. This tells me that if a real"
+    },
+    {
+      "index": 209,
+      "start": 676.32,
+      "end": 678.87,
+      "duration": 2.55,
+      "text": "matrix has an igen value lambda and an"
+    },
+    {
+      "index": 210,
+      "start": 678.88,
+      "end": 682.63,
+      "duration": 3.75,
+      "text": "igen vector x, it also has another of"
+    },
+    {
+      "index": 211,
+      "start": 682.64,
+      "end": 685.67,
+      "duration": 3.03,
+      "text": "its igen values is lambda bar with igen"
+    },
+    {
+      "index": 212,
+      "start": 685.68,
+      "end": 687.75,
+      "duration": 2.07,
+      "text": "vector xbar."
+    },
+    {
+      "index": 213,
+      "start": 687.76,
+      "end": 690.47,
+      "duration": 2.71,
+      "text": "Real matrices the igen values come in"
+    },
+    {
+      "index": 214,
+      "start": 690.48,
+      "end": 693.67,
+      "duration": 3.19,
+      "text": "lambda lambda bar. The complex igen"
+    },
+    {
+      "index": 215,
+      "start": 693.68,
+      "end": 696.23,
+      "duration": 2.55,
+      "text": "values come in lambda and lambda bar"
+    },
+    {
+      "index": 216,
+      "start": 696.24,
+      "end": 699.59,
+      "duration": 3.35,
+      "text": "pairs. But of course, I'm aiming to show"
+    },
+    {
+      "index": 217,
+      "start": 699.6,
+      "end": 702.55,
+      "duration": 2.95,
+      "text": "that they're not complex at all here by"
+    },
+    {
+      "index": 218,
+      "start": 702.56,
+      "end": 705.03,
+      "duration": 2.47,
+      "text": "getting symmetry in. So, how am I going"
+    },
+    {
+      "index": 219,
+      "start": 705.04,
+      "end": 707.269,
+      "duration": 2.229,
+      "text": "to use symmetry? I'm going to transpose"
+    },
+    {
+      "index": 220,
+      "start": 707.279,
+      "end": 709.91,
+      "duration": 2.631,
+      "text": "this equation"
+    },
+    {
+      "index": 221,
+      "start": 709.92,
+      "end": 717.11,
+      "duration": 7.19,
+      "text": "to xar transpose a transpose equals xar"
+    },
+    {
+      "index": 222,
+      "start": 717.12,
+      "end": 719.75,
+      "duration": 2.63,
+      "text": "transpose lambda bar. That's just a"
+    },
+    {
+      "index": 223,
+      "start": 719.76,
+      "end": 722.23,
+      "duration": 2.47,
+      "text": "number. So, I don't mind where I put"
+    },
+    {
+      "index": 224,
+      "start": 722.24,
+      "end": 724.31,
+      "duration": 2.07,
+      "text": "that number."
+    },
+    {
+      "index": 225,
+      "start": 724.32,
+      "end": 729.91,
+      "duration": 5.59,
+      "text": "This is this is then again okay"
+    },
+    {
+      "index": 226,
+      "start": 729.92,
+      "end": 732.31,
+      "duration": 2.39,
+      "text": "but now"
+    },
+    {
+      "index": 227,
+      "start": 732.32,
+      "end": 735.75,
+      "duration": 3.43,
+      "text": "I'm ready to use symmetry I'm ready so"
+    },
+    {
+      "index": 228,
+      "start": 735.76,
+      "end": 740.23,
+      "duration": 4.47,
+      "text": "this was all just mechanics now now"
+    },
+    {
+      "index": 229,
+      "start": 740.24,
+      "end": 743.35,
+      "duration": 3.11,
+      "text": "comes the moment to say okay if the"
+    },
+    {
+      "index": 230,
+      "start": 743.36,
+      "end": 747.509,
+      "duration": 4.149,
+      "text": "matrix is symmetric then this arpose is"
+    },
+    {
+      "index": 231,
+      "start": 747.519,
+      "end": 750.389,
+      "duration": 2.87,
+      "text": "the same as a you see at that moment I"
+    },
+    {
+      "index": 232,
+      "start": 750.399,
+      "end": 753.829,
+      "duration": 3.43,
+      "text": "use the assumption now let me finish the"
+    },
+    {
+      "index": 233,
+      "start": 753.839,
+      "end": 755.67,
+      "duration": 1.831,
+      "text": "discussion"
+    },
+    {
+      "index": 234,
+      "start": 755.68,
+      "end": 758.15,
+      "duration": 2.47,
+      "text": "here. Here's the way I finish. I look at"
+    },
+    {
+      "index": 235,
+      "start": 758.16,
+      "end": 760.87,
+      "duration": 2.71,
+      "text": "this original equation and I take the"
+    },
+    {
+      "index": 236,
+      "start": 760.88,
+      "end": 765.11,
+      "duration": 4.23,
+      "text": "inner product. I multiply both sides by"
+    },
+    {
+      "index": 237,
+      "start": 765.12,
+      "end": 769.269,
+      "duration": 4.149,
+      "text": "Oh, maybe I'll do it with this one."
+    },
+    {
+      "index": 238,
+      "start": 769.279,
+      "end": 774.069,
+      "duration": 4.79,
+      "text": "I take I multiply both sides by Xbar"
+    },
+    {
+      "index": 239,
+      "start": 774.079,
+      "end": 778.23,
+      "duration": 4.151,
+      "text": "transpose. Xar transpose A Xar equals"
+    },
+    {
+      "index": 240,
+      "start": 778.24,
+      "end": 781.91,
+      "duration": 3.67,
+      "text": "lambda bar Xar transpose"
+    },
+    {
+      "index": 241,
+      "start": 781.92,
+      "end": 783.67,
+      "duration": 1.75,
+      "text": "Xbar."
+    },
+    {
+      "index": 242,
+      "start": 783.68,
+      "end": 789.509,
+      "duration": 5.829,
+      "text": "Okay, fine."
+    },
+    {
+      "index": 243,
+      "start": 791.03,
+      "end": 791.04,
+      "duration": 0.01,
+      "text": "All right."
+    },
+    {
+      "index": 244,
+      "start": 791.04,
+      "end": 793.43,
+      "duration": 2.39,
+      "text": "Now, what's the other one? Oh, the other"
+    },
+    {
+      "index": 245,
+      "start": 793.44,
+      "end": 796.949,
+      "duration": 3.509,
+      "text": "one I'll probably use this guy."
+    },
+    {
+      "index": 246,
+      "start": 796.959,
+      "end": 800.71,
+      "duration": 3.751,
+      "text": "Uh, am I happy about this?"
+    },
+    {
+      "index": 247,
+      "start": 800.72,
+      "end": 804.55,
+      "duration": 3.83,
+      "text": "No. For some reason, I'm not. I'm I'm I"
+    },
+    {
+      "index": 248,
+      "start": 804.56,
+      "end": 806.23,
+      "duration": 1.67,
+      "text": "want to"
+    },
+    {
+      "index": 249,
+      "start": 806.24,
+      "end": 808.31,
+      "duration": 2.07,
+      "text": "Yeah. If I take the inner product of"
+    },
+    {
+      "index": 250,
+      "start": 808.32,
+      "end": 811.67,
+      "duration": 3.35,
+      "text": "this from the right with Xbar, I get Xar"
+    },
+    {
+      "index": 251,
+      "start": 811.68,
+      "end": 817.03,
+      "duration": 5.35,
+      "text": "transpose A Xar equals Xar transpose"
+    },
+    {
+      "index": 252,
+      "start": 817.04,
+      "end": 822.87,
+      "duration": 5.83,
+      "text": "lambda Xar."
+    },
+    {
+      "index": 253,
+      "start": 825.91,
+      "end": 825.92,
+      "duration": 0.01,
+      "text": "Um I've done something dumb because I've"
+    },
+    {
+      "index": 254,
+      "start": 825.92,
+      "end": 830.15,
+      "duration": 4.23,
+      "text": "got the"
+    },
+    {
+      "index": 255,
+      "start": 832.949,
+      "end": 832.959,
+      "duration": 0.01,
+      "text": "I haven't learned anything. I've got"
+    },
+    {
+      "index": 256,
+      "start": 832.959,
+      "end": 835.99,
+      "duration": 3.031,
+      "text": "those two equations are identical. So,"
+    },
+    {
+      "index": 257,
+      "start": 836.0,
+      "end": 839.43,
+      "duration": 3.43,
+      "text": "forgive me for doing such a thing, but"
+    },
+    {
+      "index": 258,
+      "start": 839.44,
+      "end": 844.629,
+      "duration": 5.189,
+      "text": "um I'll look at the book. Um"
+    },
+    {
+      "index": 259,
+      "start": 844.639,
+      "end": 846.31,
+      "duration": 1.671,
+      "text": "okay,"
+    },
+    {
+      "index": 260,
+      "start": 846.32,
+      "end": 848.629,
+      "duration": 2.309,
+      "text": "so I took the dotproduct."
+    },
+    {
+      "index": 261,
+      "start": 848.639,
+      "end": 851.99,
+      "duration": 3.351,
+      "text": "Yeah, somehow it didn't I should have"
+    },
+    {
+      "index": 262,
+      "start": 852.0,
+      "end": 854.069,
+      "duration": 2.069,
+      "text": "taken the dotproduct of this guy here"
+    },
+    {
+      "index": 263,
+      "start": 854.079,
+      "end": 858.15,
+      "duration": 4.071,
+      "text": "with that's what I was going to do. a x"
+    },
+    {
+      "index": 264,
+      "start": 858.16,
+      "end": 864.629,
+      "duration": 6.469,
+      "text": "equ= lambda xar transpose x right okay"
+    },
+    {
+      "index": 265,
+      "start": 864.639,
+      "end": 867.189,
+      "duration": 2.55,
+      "text": "so that that was that's fine that comes"
+    },
+    {
+      "index": 266,
+      "start": 867.199,
+      "end": 869.189,
+      "duration": 1.99,
+      "text": "directly from that multiplying both"
+    },
+    {
+      "index": 267,
+      "start": 869.199,
+      "end": 872.389,
+      "duration": 3.19,
+      "text": "sides by xar transpose but now I'd like"
+    },
+    {
+      "index": 268,
+      "start": 872.399,
+      "end": 878.31,
+      "duration": 5.911,
+      "text": "to get why do I have x bars over there"
+    },
+    {
+      "index": 269,
+      "start": 878.32,
+      "end": 879.829,
+      "duration": 1.509,
+      "text": "oh"
+    },
+    {
+      "index": 270,
+      "start": 879.839,
+      "end": 883.269,
+      "duration": 3.43,
+      "text": "yes forget this"
+    },
+    {
+      "index": 271,
+      "start": 883.279,
+      "end": 887.03,
+      "duration": 3.751,
+      "text": "okay on this one right on this one I"
+    },
+    {
+      "index": 272,
+      "start": 887.04,
+      "end": 888.79,
+      "duration": 1.75,
+      "text": "took it like that I multiply on the"
+    },
+    {
+      "index": 273,
+      "start": 888.8,
+      "end": 893.67,
+      "duration": 4.87,
+      "text": "right by x that's the idea"
+    },
+    {
+      "index": 274,
+      "start": 893.68,
+      "end": 896.389,
+      "duration": 2.709,
+      "text": "okay"
+    },
+    {
+      "index": 275,
+      "start": 896.399,
+      "end": 900.47,
+      "duration": 4.071,
+      "text": "now why am I happier with this"
+    },
+    {
+      "index": 276,
+      "start": 900.48,
+      "end": 904.23,
+      "duration": 3.75,
+      "text": "situation now a proof is coming here"
+    },
+    {
+      "index": 277,
+      "start": 904.24,
+      "end": 908.15,
+      "duration": 3.91,
+      "text": "because I compare this guy"
+    },
+    {
+      "index": 278,
+      "start": 908.16,
+      "end": 911.11,
+      "duration": 2.95,
+      "text": "with this one and they have the same"
+    },
+    {
+      "index": 279,
+      "start": 911.12,
+      "end": 913.509,
+      "duration": 2.389,
+      "text": "left hand side so they have the same"
+    },
+    {
+      "index": 280,
+      "start": 913.519,
+      "end": 915.99,
+      "duration": 2.471,
+      "text": "right hand side so comparing those two."
+    },
+    {
+      "index": 281,
+      "start": 916.0,
+      "end": 918.069,
+      "duration": 2.069,
+      "text": "Can I I'll raise the board to do this"
+    },
+    {
+      "index": 282,
+      "start": 918.079,
+      "end": 919.99,
+      "duration": 1.911,
+      "text": "comparison."
+    },
+    {
+      "index": 283,
+      "start": 920.0,
+      "end": 925.59,
+      "duration": 5.59,
+      "text": "This thing lambda xbar transpose x is"
+    },
+    {
+      "index": 284,
+      "start": 925.6,
+      "end": 927.509,
+      "duration": 1.909,
+      "text": "equal to"
+    },
+    {
+      "index": 285,
+      "start": 927.519,
+      "end": 930.389,
+      "duration": 2.87,
+      "text": "lambda bar"
+    },
+    {
+      "index": 286,
+      "start": 930.399,
+      "end": 935.99,
+      "duration": 5.591,
+      "text": "xar transpose x. Okay."
+    },
+    {
+      "index": 287,
+      "start": 936.0,
+      "end": 937.99,
+      "duration": 1.99,
+      "text": "And the conclusion I'm going to reach,"
+    },
+    {
+      "index": 288,
+      "start": 938.0,
+      "end": 943.269,
+      "duration": 5.269,
+      "text": "am I am I on the right track here?"
+    },
+    {
+      "index": 289,
+      "start": 943.279,
+      "end": 945.43,
+      "duration": 2.151,
+      "text": "The conclusion I'm going to reach is"
+    },
+    {
+      "index": 290,
+      "start": 945.44,
+      "end": 951.91,
+      "duration": 6.47,
+      "text": "lambda equal lambda bar."
+    },
+    {
+      "index": 291,
+      "start": 953.91,
+      "end": 953.92,
+      "duration": 0.01,
+      "text": "I I would have to track down the other"
+    },
+    {
+      "index": 292,
+      "start": 953.92,
+      "end": 956.069,
+      "duration": 2.149,
+      "text": "possibility that this this thing is"
+    },
+    {
+      "index": 293,
+      "start": 956.079,
+      "end": 960.15,
+      "duration": 4.071,
+      "text": "zero. But let me uh oh"
+    },
+    {
+      "index": 294,
+      "start": 960.16,
+      "end": 960.23,
+      "duration": 0.07,
+      "text": "oh oh oh oh oh oh oh oh oh oh oh oh oh"
+    },
+    {
+      "index": 295,
+      "start": 960.24,
+      "end": 960.87,
+      "duration": 0.63,
+      "text": "oh oh oh oh oh oh oh oh yeah yeah that's"
+    },
+    {
+      "index": 296,
+      "start": 960.88,
+      "end": 963.43,
+      "duration": 2.55,
+      "text": "important. It's not zero."
+    },
+    {
+      "index": 297,
+      "start": 963.44,
+      "end": 965.11,
+      "duration": 1.67,
+      "text": "So"
+    },
+    {
+      "index": 298,
+      "start": 965.12,
+      "end": 967.91,
+      "duration": 2.79,
+      "text": "once I know that this isn't zero I just"
+    },
+    {
+      "index": 299,
+      "start": 967.92,
+      "end": 970.389,
+      "duration": 2.469,
+      "text": "cancel it and I learn that lambda equals"
+    },
+    {
+      "index": 300,
+      "start": 970.399,
+      "end": 974.31,
+      "duration": 3.911,
+      "text": "lambda bar. And so what can you do you"
+    },
+    {
+      "index": 301,
+      "start": 974.32,
+      "end": 976.47,
+      "duration": 2.15,
+      "text": "have you got the"
+    },
+    {
+      "index": 302,
+      "start": 976.48,
+      "end": 980.629,
+      "duration": 4.149,
+      "text": "reasoning al together?"
+    },
+    {
+      "index": 303,
+      "start": 980.639,
+      "end": 983.67,
+      "duration": 3.031,
+      "text": "What does this tell us?"
+    },
+    {
+      "index": 304,
+      "start": 983.68,
+      "end": 985.509,
+      "duration": 1.829,
+      "text": "Lambda is an igen value of this"
+    },
+    {
+      "index": 305,
+      "start": 985.519,
+      "end": 987.749,
+      "duration": 2.23,
+      "text": "symmetric matrix."
+    },
+    {
+      "index": 306,
+      "start": 987.759,
+      "end": 989.829,
+      "duration": 2.07,
+      "text": "We've just proved that it equal lambda"
+    },
+    {
+      "index": 307,
+      "start": 989.839,
+      "end": 992.629,
+      "duration": 2.79,
+      "text": "bar. So we have just proved that lambda"
+    },
+    {
+      "index": 308,
+      "start": 992.639,
+      "end": 996.31,
+      "duration": 3.671,
+      "text": "is real. Right?"
+    },
+    {
+      "index": 309,
+      "start": 996.32,
+      "end": 998.47,
+      "duration": 2.15,
+      "text": "If if a number is equal to its own"
+    },
+    {
+      "index": 310,
+      "start": 998.48,
+      "end": 1000.87,
+      "duration": 2.39,
+      "text": "complex conjugate, then there's no"
+    },
+    {
+      "index": 311,
+      "start": 1000.88,
+      "end": 1002.949,
+      "duration": 2.069,
+      "text": "imaginary part at all. The number is"
+    },
+    {
+      "index": 312,
+      "start": 1002.959,
+      "end": 1008.47,
+      "duration": 5.511,
+      "text": "real. So lambda is real."
+    },
+    {
+      "index": 313,
+      "start": 1011.749,
+      "end": 1011.759,
+      "duration": 0.01,
+      "text": "Good. Good."
+    },
+    {
+      "index": 314,
+      "start": 1011.759,
+      "end": 1015.189,
+      "duration": 3.43,
+      "text": "Now what? But it depended on this little"
+    },
+    {
+      "index": 315,
+      "start": 1015.199,
+      "end": 1016.79,
+      "duration": 1.591,
+      "text": "expression"
+    },
+    {
+      "index": 316,
+      "start": 1016.8,
+      "end": 1019.509,
+      "duration": 2.709,
+      "text": "on knowing that that wasn't zero so that"
+    },
+    {
+      "index": 317,
+      "start": 1019.519,
+      "end": 1023.189,
+      "duration": 3.67,
+      "text": "I could cancel it out. So can we just"
+    },
+    {
+      "index": 318,
+      "start": 1023.199,
+      "end": 1025.829,
+      "duration": 2.63,
+      "text": "take a second on that one because it's"
+    },
+    {
+      "index": 319,
+      "start": 1025.839,
+      "end": 1028.71,
+      "duration": 2.871,
+      "text": "an important quantity."
+    },
+    {
+      "index": 320,
+      "start": 1028.72,
+      "end": 1033.35,
+      "duration": 4.63,
+      "text": "Xar transpose X. Okay. Now remember"
+    },
+    {
+      "index": 321,
+      "start": 1033.36,
+      "end": 1038.39,
+      "duration": 5.03,
+      "text": "as far as we know X is complex."
+    },
+    {
+      "index": 322,
+      "start": 1038.4,
+      "end": 1040.63,
+      "duration": 2.23,
+      "text": "So this is"
+    },
+    {
+      "index": 323,
+      "start": 1040.64,
+      "end": 1043.189,
+      "duration": 2.549,
+      "text": "here X is complex. X has these"
+    },
+    {
+      "index": 324,
+      "start": 1043.199,
+      "end": 1049.27,
+      "duration": 6.071,
+      "text": "components X1 X2 down to XN"
+    },
+    {
+      "index": 325,
+      "start": 1049.28,
+      "end": 1054.47,
+      "duration": 5.19,
+      "text": "and Xar transpose. Well, it's transposed"
+    },
+    {
+      "index": 326,
+      "start": 1054.48,
+      "end": 1057.35,
+      "duration": 2.87,
+      "text": "and it's conjugated. So that's X1"
+    },
+    {
+      "index": 327,
+      "start": 1057.36,
+      "end": 1061.909,
+      "duration": 4.549,
+      "text": "conjugated, X2 conjugated up to XN"
+    },
+    {
+      "index": 328,
+      "start": 1061.919,
+      "end": 1065.11,
+      "duration": 3.191,
+      "text": "conjugated. I'm I'm I'm really reminding"
+    },
+    {
+      "index": 329,
+      "start": 1065.12,
+      "end": 1067.27,
+      "duration": 2.15,
+      "text": "you of crucial facts about complex"
+    },
+    {
+      "index": 330,
+      "start": 1067.28,
+      "end": 1069.19,
+      "duration": 1.91,
+      "text": "numbers that are going to come into the"
+    },
+    {
+      "index": 331,
+      "start": 1069.2,
+      "end": 1073.75,
+      "duration": 4.55,
+      "text": "next lecture as well as this one. So"
+    },
+    {
+      "index": 332,
+      "start": 1073.76,
+      "end": 1079.19,
+      "duration": 5.43,
+      "text": "what can you tell me about that product?"
+    },
+    {
+      "index": 333,
+      "start": 1079.2,
+      "end": 1081.59,
+      "duration": 2.39,
+      "text": "I I guess what I'm trying to say is if I"
+    },
+    {
+      "index": 334,
+      "start": 1081.6,
+      "end": 1084.31,
+      "duration": 2.71,
+      "text": "had a complex vector,"
+    },
+    {
+      "index": 335,
+      "start": 1084.32,
+      "end": 1086.549,
+      "duration": 2.229,
+      "text": "this would be the quantity I would I"
+    },
+    {
+      "index": 336,
+      "start": 1086.559,
+      "end": 1089.27,
+      "duration": 2.711,
+      "text": "would like. This is the quantity I like."
+    },
+    {
+      "index": 337,
+      "start": 1089.28,
+      "end": 1091.59,
+      "duration": 2.31,
+      "text": "I would take the vector"
+    },
+    {
+      "index": 338,
+      "start": 1091.6,
+      "end": 1093.669,
+      "duration": 2.069,
+      "text": "times its transpose. Now what what"
+    },
+    {
+      "index": 339,
+      "start": 1093.679,
+      "end": 1096.15,
+      "duration": 2.471,
+      "text": "happens usually if I take a vector"
+    },
+    {
+      "index": 340,
+      "start": 1096.16,
+      "end": 1099.75,
+      "duration": 3.59,
+      "text": "xrpose x I mean that's a quantity we see"
+    },
+    {
+      "index": 341,
+      "start": 1099.76,
+      "end": 1103.11,
+      "duration": 3.35,
+      "text": "all the time xrpose x that's the length"
+    },
+    {
+      "index": 342,
+      "start": 1103.12,
+      "end": 1106.47,
+      "duration": 3.35,
+      "text": "of x squ right that's this positive"
+    },
+    {
+      "index": 343,
+      "start": 1106.48,
+      "end": 1108.63,
+      "duration": 2.15,
+      "text": "length squared. It's pythagoras. It's"
+    },
+    {
+      "index": 344,
+      "start": 1108.64,
+      "end": 1113.59,
+      "duration": 4.95,
+      "text": "x1^2 plus x2^2 and so on. Now our vector"
+    },
+    {
+      "index": 345,
+      "start": 1113.6,
+      "end": 1116.63,
+      "duration": 3.03,
+      "text": "is complex and you see the effect. I'm"
+    },
+    {
+      "index": 346,
+      "start": 1116.64,
+      "end": 1119.51,
+      "duration": 2.87,
+      "text": "conjugating one of these guys. So now"
+    },
+    {
+      "index": 347,
+      "start": 1119.52,
+      "end": 1122.71,
+      "duration": 3.19,
+      "text": "when I do this multiplication I have x1"
+    },
+    {
+      "index": 348,
+      "start": 1122.72,
+      "end": 1125.11,
+      "duration": 2.39,
+      "text": "bar * x1"
+    },
+    {
+      "index": 349,
+      "start": 1125.12,
+      "end": 1130.47,
+      "duration": 5.35,
+      "text": "and x2 bar * x2 and so on. So this is an"
+    },
+    {
+      "index": 350,
+      "start": 1130.48,
+      "end": 1134.15,
+      "duration": 3.67,
+      "text": "this is some a plus i"
+    },
+    {
+      "index": 351,
+      "start": 1134.16,
+      "end": 1138.549,
+      "duration": 4.389,
+      "text": "and this is some a minus i."
+    },
+    {
+      "index": 352,
+      "start": 1138.559,
+      "end": 1142.47,
+      "duration": 3.911,
+      "text": "I mean what's the point here?"
+    },
+    {
+      "index": 353,
+      "start": 1142.48,
+      "end": 1144.71,
+      "duration": 2.23,
+      "text": "What's the point? When I multiply a"
+    },
+    {
+      "index": 354,
+      "start": 1144.72,
+      "end": 1147.43,
+      "duration": 2.71,
+      "text": "number by its conjugate, a complex"
+    },
+    {
+      "index": 355,
+      "start": 1147.44,
+      "end": 1151.51,
+      "duration": 4.07,
+      "text": "number by its conjugate, what do I get?"
+    },
+    {
+      "index": 356,
+      "start": 1151.52,
+      "end": 1156.15,
+      "duration": 4.63,
+      "text": "I get a the the imaginary part is gone."
+    },
+    {
+      "index": 357,
+      "start": 1156.16,
+      "end": 1158.549,
+      "duration": 2.389,
+      "text": "When I multiply a plus i by its"
+    },
+    {
+      "index": 358,
+      "start": 1158.559,
+      "end": 1160.23,
+      "duration": 1.671,
+      "text": "conjugate,"
+    },
+    {
+      "index": 359,
+      "start": 1160.24,
+      "end": 1162.39,
+      "duration": 2.15,
+      "text": "what's what's the result of that of each"
+    },
+    {
+      "index": 360,
+      "start": 1162.4,
+      "end": 1163.51,
+      "duration": 1.11,
+      "text": "of those separate little"
+    },
+    {
+      "index": 361,
+      "start": 1163.52,
+      "end": 1165.19,
+      "duration": 1.67,
+      "text": "multiplications?"
+    },
+    {
+      "index": 362,
+      "start": 1165.2,
+      "end": 1167.909,
+      "duration": 2.709,
+      "text": "There's an a squared"
+    },
+    {
+      "index": 363,
+      "start": 1167.919,
+      "end": 1171.51,
+      "duration": 3.591,
+      "text": "and and what how many what's b ^2 comes"
+    },
+    {
+      "index": 364,
+      "start": 1171.52,
+      "end": 1175.75,
+      "duration": 4.23,
+      "text": "in with a plus or a minus? A plus"
+    },
+    {
+      "index": 365,
+      "start": 1175.76,
+      "end": 1179.669,
+      "duration": 3.909,
+      "text": "i * minus i is a plus b^2. And what"
+    },
+    {
+      "index": 366,
+      "start": 1179.679,
+      "end": 1183.83,
+      "duration": 4.151,
+      "text": "about the imaginary part?"
+    },
+    {
+      "index": 367,
+      "start": 1186.15,
+      "end": 1186.16,
+      "duration": 0.01,
+      "text": "Gone, right?"
+    },
+    {
+      "index": 368,
+      "start": 1186.16,
+      "end": 1191.35,
+      "duration": 5.19,
+      "text": "an I AB and a minus I AB. So this this"
+    },
+    {
+      "index": 369,
+      "start": 1191.36,
+      "end": 1193.75,
+      "duration": 2.39,
+      "text": "is the right thing to do. If you want a"
+    },
+    {
+      "index": 370,
+      "start": 1193.76,
+      "end": 1198.07,
+      "duration": 4.31,
+      "text": "decent answer,"
+    },
+    {
+      "index": 371,
+      "start": 1201.11,
+      "end": 1201.12,
+      "duration": 0.01,
+      "text": "then multiply numbers by their"
+    },
+    {
+      "index": 372,
+      "start": 1201.12,
+      "end": 1202.95,
+      "duration": 1.83,
+      "text": "conjugates."
+    },
+    {
+      "index": 373,
+      "start": 1202.96,
+      "end": 1207.029,
+      "duration": 4.069,
+      "text": "Multiply vectors by the conjugates of"
+    },
+    {
+      "index": 374,
+      "start": 1207.039,
+      "end": 1208.95,
+      "duration": 1.911,
+      "text": "XRPOSE."
+    },
+    {
+      "index": 375,
+      "start": 1208.96,
+      "end": 1210.549,
+      "duration": 1.589,
+      "text": "So"
+    },
+    {
+      "index": 376,
+      "start": 1210.559,
+      "end": 1212.71,
+      "duration": 2.151,
+      "text": "this quantity is positive. This quantity"
+    },
+    {
+      "index": 377,
+      "start": 1212.72,
+      "end": 1215.51,
+      "duration": 2.79,
+      "text": "is positive. the whole thing is positive"
+    },
+    {
+      "index": 378,
+      "start": 1215.52,
+      "end": 1219.51,
+      "duration": 3.99,
+      "text": "except for the zero vector and that"
+    },
+    {
+      "index": 379,
+      "start": 1219.52,
+      "end": 1221.43,
+      "duration": 1.91,
+      "text": "allows me to know that this is a"
+    },
+    {
+      "index": 380,
+      "start": 1221.44,
+      "end": 1224.95,
+      "duration": 3.51,
+      "text": "positive number which I safely cancel"
+    },
+    {
+      "index": 381,
+      "start": 1224.96,
+      "end": 1227.51,
+      "duration": 2.55,
+      "text": "out and I reach the conclusion. So"
+    },
+    {
+      "index": 382,
+      "start": 1227.52,
+      "end": 1229.99,
+      "duration": 2.47,
+      "text": "actually in this"
+    },
+    {
+      "index": 383,
+      "start": 1230.0,
+      "end": 1233.83,
+      "duration": 3.83,
+      "text": "discussion here I've done two things. I"
+    },
+    {
+      "index": 384,
+      "start": 1233.84,
+      "end": 1235.669,
+      "duration": 1.829,
+      "text": "I've reached the conclusion that lambda"
+    },
+    {
+      "index": 385,
+      "start": 1235.679,
+      "end": 1239.029,
+      "duration": 3.35,
+      "text": "is real which I wanted to do. But at the"
+    },
+    {
+      "index": 386,
+      "start": 1239.039,
+      "end": 1242.47,
+      "duration": 3.431,
+      "text": "same time we sort of saw what to do if"
+    },
+    {
+      "index": 387,
+      "start": 1242.48,
+      "end": 1244.71,
+      "duration": 2.23,
+      "text": "things were complex. If a vector is"
+    },
+    {
+      "index": 388,
+      "start": 1244.72,
+      "end": 1248.95,
+      "duration": 4.23,
+      "text": "complex then it's xar transpose x. This"
+    },
+    {
+      "index": 389,
+      "start": 1248.96,
+      "end": 1253.59,
+      "duration": 4.63,
+      "text": "is its length"
+    },
+    {
+      "index": 390,
+      "start": 1255.27,
+      "end": 1255.28,
+      "duration": 0.01,
+      "text": "squared."
+    },
+    {
+      "index": 391,
+      "start": 1255.28,
+      "end": 1257.51,
+      "duration": 2.23,
+      "text": "And as I said the the next lecture"
+    },
+    {
+      "index": 392,
+      "start": 1257.52,
+      "end": 1262.23,
+      "duration": 4.71,
+      "text": "Monday will will repeat that this is the"
+    },
+    {
+      "index": 393,
+      "start": 1262.24,
+      "end": 1263.75,
+      "duration": 1.51,
+      "text": "right thing and then do the right thing"
+    },
+    {
+      "index": 394,
+      "start": 1263.76,
+      "end": 1267.75,
+      "duration": 3.99,
+      "text": "for matrices and all other all other uh"
+    },
+    {
+      "index": 395,
+      "start": 1267.76,
+      "end": 1270.789,
+      "duration": 3.029,
+      "text": "complex possibilities."
+    },
+    {
+      "index": 396,
+      "start": 1270.799,
+      "end": 1272.95,
+      "duration": 2.151,
+      "text": "Okay."
+    },
+    {
+      "index": 397,
+      "start": 1272.96,
+      "end": 1276.149,
+      "duration": 3.189,
+      "text": "But the main point then is that the igen"
+    },
+    {
+      "index": 398,
+      "start": 1276.159,
+      "end": 1279.51,
+      "duration": 3.351,
+      "text": "values of a symmetric matrix"
+    },
+    {
+      "index": 399,
+      "start": 1279.52,
+      "end": 1282.549,
+      "duration": 3.029,
+      "text": "it just where did we use symmetry by the"
+    },
+    {
+      "index": 400,
+      "start": 1282.559,
+      "end": 1286.39,
+      "duration": 3.831,
+      "text": "way? We used it here, right?"
+    },
+    {
+      "index": 401,
+      "start": 1286.4,
+      "end": 1289.51,
+      "duration": 3.11,
+      "text": "Can I just"
+    },
+    {
+      "index": 402,
+      "start": 1289.52,
+      "end": 1292.789,
+      "duration": 3.269,
+      "text": "suppose A was a complex suppose A had"
+    },
+    {
+      "index": 403,
+      "start": 1292.799,
+      "end": 1295.75,
+      "duration": 2.951,
+      "text": "been a complex number. Could could I"
+    },
+    {
+      "index": 404,
+      "start": 1295.76,
+      "end": 1298.07,
+      "duration": 2.31,
+      "text": "have made all this work? If A was a"
+    },
+    {
+      "index": 405,
+      "start": 1298.08,
+      "end": 1301.669,
+      "duration": 3.589,
+      "text": "complex number, complex matrix, then"
+    },
+    {
+      "index": 406,
+      "start": 1301.679,
+      "end": 1304.95,
+      "duration": 3.271,
+      "text": "here I should have written a bar."
+    },
+    {
+      "index": 407,
+      "start": 1304.96,
+      "end": 1307.35,
+      "duration": 2.39,
+      "text": "I erased the bar because I assumed A was"
+    },
+    {
+      "index": 408,
+      "start": 1307.36,
+      "end": 1309.19,
+      "duration": 1.83,
+      "text": "real. But now let's suppose for a moment"
+    },
+    {
+      "index": 409,
+      "start": 1309.2,
+      "end": 1312.87,
+      "duration": 3.67,
+      "text": "it's not. Then when I took this step,"
+    },
+    {
+      "index": 410,
+      "start": 1312.88,
+      "end": 1315.19,
+      "duration": 2.31,
+      "text": "what should I have?"
+    },
+    {
+      "index": 411,
+      "start": 1315.2,
+      "end": 1316.95,
+      "duration": 1.75,
+      "text": "What did I do on that step? I"
+    },
+    {
+      "index": 412,
+      "start": 1316.96,
+      "end": 1319.83,
+      "duration": 2.87,
+      "text": "transposed. So I should have a bar"
+    },
+    {
+      "index": 413,
+      "start": 1319.84,
+      "end": 1323.51,
+      "duration": 3.67,
+      "text": "transpose."
+    },
+    {
+      "index": 414,
+      "start": 1326.63,
+      "end": 1326.64,
+      "duration": 0.01,
+      "text": "In the symmetric case, that was a and"
+    },
+    {
+      "index": 415,
+      "start": 1326.64,
+      "end": 1328.71,
+      "duration": 2.07,
+      "text": "that's what made everything work, right?"
+    },
+    {
+      "index": 416,
+      "start": 1328.72,
+      "end": 1332.71,
+      "duration": 3.99,
+      "text": "This this led immediately to that."
+    },
+    {
+      "index": 417,
+      "start": 1332.72,
+      "end": 1336.39,
+      "duration": 3.67,
+      "text": "This one led immediately to this when"
+    },
+    {
+      "index": 418,
+      "start": 1336.4,
+      "end": 1338.63,
+      "duration": 2.23,
+      "text": "the matrix was real, so that didn't"
+    },
+    {
+      "index": 419,
+      "start": 1338.64,
+      "end": 1340.71,
+      "duration": 2.07,
+      "text": "matter. and it was symmetric so that"
+    },
+    {
+      "index": 420,
+      "start": 1340.72,
+      "end": 1345.35,
+      "duration": 4.63,
+      "text": "didn't matter then I got a but so now I"
+    },
+    {
+      "index": 421,
+      "start": 1345.36,
+      "end": 1348.07,
+      "duration": 2.71,
+      "text": "just get to ask you suppose the matrix"
+    },
+    {
+      "index": 422,
+      "start": 1348.08,
+      "end": 1351.11,
+      "duration": 3.03,
+      "text": "had been complex"
+    },
+    {
+      "index": 423,
+      "start": 1351.12,
+      "end": 1354.23,
+      "duration": 3.11,
+      "text": "what's the right"
+    },
+    {
+      "index": 424,
+      "start": 1354.24,
+      "end": 1358.71,
+      "duration": 4.47,
+      "text": "equivalent of si symmetry so so so the"
+    },
+    {
+      "index": 425,
+      "start": 1358.72,
+      "end": 1361.75,
+      "duration": 3.03,
+      "text": "good matrix so here let me say good"
+    },
+    {
+      "index": 426,
+      "start": 1361.76,
+      "end": 1364.87,
+      "duration": 3.11,
+      "text": "matrices"
+    },
+    {
+      "index": 427,
+      "start": 1369.99,
+      "end": 1370.0,
+      "duration": 0.01,
+      "text": "by good I mean real lambdas"
+    },
+    {
+      "index": 428,
+      "start": 1370.0,
+      "end": 1373.51,
+      "duration": 3.51,
+      "text": "and perpendicular"
+    },
+    {
+      "index": 429,
+      "start": 1373.52,
+      "end": 1377.43,
+      "duration": 3.91,
+      "text": "x's"
+    },
+    {
+      "index": 430,
+      "start": 1382.789,
+      "end": 1382.799,
+      "duration": 0.01,
+      "text": "and tell me now which matrices are good"
+    },
+    {
+      "index": 431,
+      "start": 1382.799,
+      "end": 1385.909,
+      "duration": 3.11,
+      "text": "if they're symmet if they're if they're"
+    },
+    {
+      "index": 432,
+      "start": 1385.919,
+      "end": 1388.31,
+      "duration": 2.391,
+      "text": "real matrices the good ones are"
+    },
+    {
+      "index": 433,
+      "start": 1388.32,
+      "end": 1390.149,
+      "duration": 1.829,
+      "text": "symmetric because then everything went"
+    },
+    {
+      "index": 434,
+      "start": 1390.159,
+      "end": 1392.95,
+      "duration": 2.791,
+      "text": "through so the so so the good the I'm"
+    },
+    {
+      "index": 435,
+      "start": 1392.96,
+      "end": 1395.83,
+      "duration": 2.87,
+      "text": "I'm saying now what's good this is this"
+    },
+    {
+      "index": 436,
+      "start": 1395.84,
+      "end": 1397.75,
+      "duration": 1.91,
+      "text": "is these are the good matrices they have"
+    },
+    {
+      "index": 437,
+      "start": 1397.76,
+      "end": 1401.11,
+      "duration": 3.35,
+      "text": "real values, perpendicular igon vectors."
+    },
+    {
+      "index": 438,
+      "start": 1401.12,
+      "end": 1405.75,
+      "duration": 4.63,
+      "text": "Good means a equal arpose"
+    },
+    {
+      "index": 439,
+      "start": 1405.76,
+      "end": 1407.909,
+      "duration": 2.149,
+      "text": "if real."
+    },
+    {
+      "index": 440,
+      "start": 1407.919,
+      "end": 1409.75,
+      "duration": 1.831,
+      "text": "Then then that was what our proof"
+    },
+    {
+      "index": 441,
+      "start": 1409.76,
+      "end": 1413.19,
+      "duration": 3.43,
+      "text": "worked. But if a is complex"
+    },
+    {
+      "index": 442,
+      "start": 1413.2,
+      "end": 1416.23,
+      "duration": 3.03,
+      "text": "all our proof will still work provided a"
+    },
+    {
+      "index": 443,
+      "start": 1416.24,
+      "end": 1419.909,
+      "duration": 3.669,
+      "text": "bar transpose is a. Do you see what I'm"
+    },
+    {
+      "index": 444,
+      "start": 1419.919,
+      "end": 1421.59,
+      "duration": 1.671,
+      "text": "saying?"
+    },
+    {
+      "index": 445,
+      "start": 1421.6,
+      "end": 1426.07,
+      "duration": 4.47,
+      "text": "I'm saying if we have complex matrices"
+    },
+    {
+      "index": 446,
+      "start": 1426.08,
+      "end": 1428.95,
+      "duration": 2.87,
+      "text": "and we want to say are they are they as"
+    },
+    {
+      "index": 447,
+      "start": 1428.96,
+      "end": 1431.99,
+      "duration": 3.03,
+      "text": "good as symmetric matrices"
+    },
+    {
+      "index": 448,
+      "start": 1432.0,
+      "end": 1436.31,
+      "duration": 4.31,
+      "text": "then we should not only transpose the"
+    },
+    {
+      "index": 449,
+      "start": 1436.32,
+      "end": 1439.59,
+      "duration": 3.27,
+      "text": "thing but conjugate it those are good"
+    },
+    {
+      "index": 450,
+      "start": 1439.6,
+      "end": 1441.27,
+      "duration": 1.67,
+      "text": "matrices"
+    },
+    {
+      "index": 451,
+      "start": 1441.28,
+      "end": 1443.59,
+      "duration": 2.31,
+      "text": "and of course the most important the"
+    },
+    {
+      "index": 452,
+      "start": 1443.6,
+      "end": 1447.35,
+      "duration": 3.75,
+      "text": "most important case is when they're real"
+    },
+    {
+      "index": 453,
+      "start": 1447.36,
+      "end": 1449.43,
+      "duration": 2.07,
+      "text": "this part doesn't matter and I just have"
+    },
+    {
+      "index": 454,
+      "start": 1449.44,
+      "end": 1452.23,
+      "duration": 2.79,
+      "text": "a= a transpose symmetric."
+    },
+    {
+      "index": 455,
+      "start": 1452.24,
+      "end": 1455.75,
+      "duration": 3.51,
+      "text": "I I'll just repeat that the good"
+    },
+    {
+      "index": 456,
+      "start": 1455.76,
+      "end": 1460.31,
+      "duration": 4.55,
+      "text": "matrices if complex are these."
+    },
+    {
+      "index": 457,
+      "start": 1460.32,
+      "end": 1462.149,
+      "duration": 1.829,
+      "text": "If real"
+    },
+    {
+      "index": 458,
+      "start": 1462.159,
+      "end": 1464.31,
+      "duration": 2.151,
+      "text": "that doesn't make any difference so I'm"
+    },
+    {
+      "index": 459,
+      "start": 1464.32,
+      "end": 1468.149,
+      "duration": 3.829,
+      "text": "just saying symmetric and of course 99%"
+    },
+    {
+      "index": 460,
+      "start": 1468.159,
+      "end": 1471.029,
+      "duration": 2.87,
+      "text": "of examples and applications the"
+    },
+    {
+      "index": 461,
+      "start": 1471.039,
+      "end": 1474.789,
+      "duration": 3.75,
+      "text": "matrices are real and we don't have that"
+    },
+    {
+      "index": 462,
+      "start": 1474.799,
+      "end": 1478.31,
+      "duration": 3.511,
+      "text": "and then symmetric is the key property."
+    },
+    {
+      "index": 463,
+      "start": 1478.32,
+      "end": 1481.029,
+      "duration": 2.709,
+      "text": "Okay."
+    },
+    {
+      "index": 464,
+      "start": 1481.039,
+      "end": 1485.75,
+      "duration": 4.711,
+      "text": "So that that's uh these main facts. Uh"
+    },
+    {
+      "index": 465,
+      "start": 1485.76,
+      "end": 1489.43,
+      "duration": 3.67,
+      "text": "and now let me just let me just so"
+    },
+    {
+      "index": 466,
+      "start": 1489.44,
+      "end": 1493.83,
+      "duration": 4.39,
+      "text": "that's this xbar transpose x. Okay. So"
+    },
+    {
+      "index": 467,
+      "start": 1493.84,
+      "end": 1496.47,
+      "duration": 2.63,
+      "text": "I'll just uh"
+    },
+    {
+      "index": 468,
+      "start": 1496.48,
+      "end": 1500.07,
+      "duration": 3.59,
+      "text": "write it once more in this form. So"
+    },
+    {
+      "index": 469,
+      "start": 1500.08,
+      "end": 1503.669,
+      "duration": 3.589,
+      "text": "perpendicular orthonormal igon vectors"
+    },
+    {
+      "index": 470,
+      "start": 1503.679,
+      "end": 1507.269,
+      "duration": 3.59,
+      "text": "real values transposes of orthonormal"
+    },
+    {
+      "index": 471,
+      "start": 1507.279,
+      "end": 1509.35,
+      "duration": 2.071,
+      "text": "igon vectors"
+    },
+    {
+      "index": 472,
+      "start": 1509.36,
+      "end": 1513.75,
+      "duration": 4.39,
+      "text": "that's the symmetric case a= arpose"
+    },
+    {
+      "index": 473,
+      "start": 1513.76,
+      "end": 1515.35,
+      "duration": 1.59,
+      "text": "okay"
+    },
+    {
+      "index": 474,
+      "start": 1515.36,
+      "end": 1518.07,
+      "duration": 2.71,
+      "text": "good"
+    },
+    {
+      "index": 475,
+      "start": 1518.08,
+      "end": 1519.83,
+      "duration": 1.75,
+      "text": "actually"
+    },
+    {
+      "index": 476,
+      "start": 1519.84,
+      "end": 1523.51,
+      "duration": 3.67,
+      "text": "I'll even take one more step here uh"
+    },
+    {
+      "index": 477,
+      "start": 1523.52,
+      "end": 1526.149,
+      "duration": 2.629,
+      "text": "suppose"
+    },
+    {
+      "index": 478,
+      "start": 1526.159,
+      "end": 1529.43,
+      "duration": 3.271,
+      "text": "I can break this down to show you really"
+    },
+    {
+      "index": 479,
+      "start": 1529.44,
+      "end": 1534.149,
+      "duration": 4.709,
+      "text": "what that says about a symmetric matrix."
+    },
+    {
+      "index": 480,
+      "start": 1534.159,
+      "end": 1536.87,
+      "duration": 2.711,
+      "text": "I can break that down. Let me here here"
+    },
+    {
+      "index": 481,
+      "start": 1536.88,
+      "end": 1542.47,
+      "duration": 5.59,
+      "text": "go these igen vectors. I"
+    },
+    {
+      "index": 482,
+      "start": 1542.48,
+      "end": 1545.35,
+      "duration": 2.87,
+      "text": "here go these igen values lambda 1"
+    },
+    {
+      "index": 483,
+      "start": 1545.36,
+      "end": 1548.95,
+      "duration": 3.59,
+      "text": "lambda 2 and so on. Here go these"
+    },
+    {
+      "index": 484,
+      "start": 1548.96,
+      "end": 1555.029,
+      "duration": 6.069,
+      "text": "vectors transposed."
+    },
+    {
+      "index": 485,
+      "start": 1558.549,
+      "end": 1558.559,
+      "duration": 0.01,
+      "text": "And what happens if I actually do out"
+    },
+    {
+      "index": 486,
+      "start": 1558.559,
+      "end": 1561.269,
+      "duration": 2.71,
+      "text": "that multiplication?"
+    },
+    {
+      "index": 487,
+      "start": 1561.279,
+      "end": 1564.149,
+      "duration": 2.87,
+      "text": "Do you see what will happen? Uh there's"
+    },
+    {
+      "index": 488,
+      "start": 1564.159,
+      "end": 1567.669,
+      "duration": 3.51,
+      "text": "lambda 1 * q1 transpose."
+    },
+    {
+      "index": 489,
+      "start": 1567.679,
+      "end": 1570.39,
+      "duration": 2.711,
+      "text": "So the first row here is just lambda 1"
+    },
+    {
+      "index": 490,
+      "start": 1570.4,
+      "end": 1574.549,
+      "duration": 4.149,
+      "text": "q1 transpose. If I multiply column times"
+    },
+    {
+      "index": 491,
+      "start": 1574.559,
+      "end": 1578.07,
+      "duration": 3.511,
+      "text": "row, you remember I could do that when I"
+    },
+    {
+      "index": 492,
+      "start": 1578.08,
+      "end": 1580.789,
+      "duration": 2.709,
+      "text": "multiply matrices. I can multiply"
+    },
+    {
+      "index": 493,
+      "start": 1580.799,
+      "end": 1582.39,
+      "duration": 1.591,
+      "text": "columns"
+    },
+    {
+      "index": 494,
+      "start": 1582.4,
+      "end": 1585.75,
+      "duration": 3.35,
+      "text": "times rows. So when I do that I get"
+    },
+    {
+      "index": 495,
+      "start": 1585.76,
+      "end": 1589.11,
+      "duration": 3.35,
+      "text": "lambda one and then the column and then"
+    },
+    {
+      "index": 496,
+      "start": 1589.12,
+      "end": 1591.35,
+      "duration": 2.23,
+      "text": "the row"
+    },
+    {
+      "index": 497,
+      "start": 1591.36,
+      "end": 1594.789,
+      "duration": 3.429,
+      "text": "and then lambda 2 and the column and the"
+    },
+    {
+      "index": 498,
+      "start": 1594.799,
+      "end": 1601.83,
+      "duration": 7.031,
+      "text": "row."
+    },
+    {
+      "index": 499,
+      "start": 1604.63,
+      "end": 1604.64,
+      "duration": 0.01,
+      "text": "Every symmetric matrix breaks up into"
+    },
+    {
+      "index": 500,
+      "start": 1604.64,
+      "end": 1607.029,
+      "duration": 2.389,
+      "text": "these pieces."
+    },
+    {
+      "index": 501,
+      "start": 1607.039,
+      "end": 1611.11,
+      "duration": 4.071,
+      "text": "So these pieces have real lambdas"
+    },
+    {
+      "index": 502,
+      "start": 1611.12,
+      "end": 1614.549,
+      "duration": 3.429,
+      "text": "and they have"
+    },
+    {
+      "index": 503,
+      "start": 1614.559,
+      "end": 1616.87,
+      "duration": 2.311,
+      "text": "these igen these orthonormal igen"
+    },
+    {
+      "index": 504,
+      "start": 1616.88,
+      "end": 1620.549,
+      "duration": 3.669,
+      "text": "vectors"
+    },
+    {
+      "index": 505,
+      "start": 1623.59,
+      "end": 1623.6,
+      "duration": 0.01,
+      "text": "and maybe you even could tell me what"
+    },
+    {
+      "index": 506,
+      "start": 1623.6,
+      "end": 1627.43,
+      "duration": 3.83,
+      "text": "kind of a matrix have I got there."
+    },
+    {
+      "index": 507,
+      "start": 1627.44,
+      "end": 1630.71,
+      "duration": 3.27,
+      "text": "Suppose I take a unit vector"
+    },
+    {
+      "index": 508,
+      "start": 1630.72,
+      "end": 1634.23,
+      "duration": 3.51,
+      "text": "times its transpose. So column times row"
+    },
+    {
+      "index": 509,
+      "start": 1634.24,
+      "end": 1637.59,
+      "duration": 3.35,
+      "text": "I'm getting a matrix"
+    },
+    {
+      "index": 510,
+      "start": 1637.6,
+      "end": 1642.07,
+      "duration": 4.47,
+      "text": "that's a matrix with a special name."
+    },
+    {
+      "index": 511,
+      "start": 1642.08,
+      "end": 1644.31,
+      "duration": 2.23,
+      "text": "What's it what kind of a matrix is it?"
+    },
+    {
+      "index": 512,
+      "start": 1644.32,
+      "end": 1646.63,
+      "duration": 2.31,
+      "text": "We've seen those matrices now in chapter"
+    },
+    {
+      "index": 513,
+      "start": 1646.64,
+      "end": 1651.029,
+      "duration": 4.389,
+      "text": "4. It's this a transpose"
+    },
+    {
+      "index": 514,
+      "start": 1651.039,
+      "end": 1653.35,
+      "duration": 2.311,
+      "text": "with a unit vector. So I don't have to"
+    },
+    {
+      "index": 515,
+      "start": 1653.36,
+      "end": 1657.35,
+      "duration": 3.99,
+      "text": "divide by a transpose a. That matrix is"
+    },
+    {
+      "index": 516,
+      "start": 1657.36,
+      "end": 1659.029,
+      "duration": 1.669,
+      "text": "a"
+    },
+    {
+      "index": 517,
+      "start": 1659.039,
+      "end": 1661.43,
+      "duration": 2.391,
+      "text": "projection matrix. That's a projection"
+    },
+    {
+      "index": 518,
+      "start": 1661.44,
+      "end": 1663.669,
+      "duration": 2.229,
+      "text": "matrix. It's symmetric"
+    },
+    {
+      "index": 519,
+      "start": 1663.679,
+      "end": 1666.47,
+      "duration": 2.791,
+      "text": "and if I square it there'll be another"
+    },
+    {
+      "index": 520,
+      "start": 1666.48,
+      "end": 1669.029,
+      "duration": 2.549,
+      "text": "there'll be a Q1 transpose Q1 which is"
+    },
+    {
+      "index": 521,
+      "start": 1669.039,
+      "end": 1673.99,
+      "duration": 4.951,
+      "text": "one. So I'll get that matrix back again."
+    },
+    {
+      "index": 522,
+      "start": 1674.0,
+      "end": 1678.71,
+      "duration": 4.71,
+      "text": "Every so every symmetric matrix every"
+    },
+    {
+      "index": 523,
+      "start": 1678.72,
+      "end": 1680.789,
+      "duration": 2.069,
+      "text": "symmetric"
+    },
+    {
+      "index": 524,
+      "start": 1680.799,
+      "end": 1683.11,
+      "duration": 2.311,
+      "text": "matrix"
+    },
+    {
+      "index": 525,
+      "start": 1683.12,
+      "end": 1685.029,
+      "duration": 1.909,
+      "text": "is"
+    },
+    {
+      "index": 526,
+      "start": 1685.039,
+      "end": 1688.95,
+      "duration": 3.911,
+      "text": "a combination of"
+    },
+    {
+      "index": 527,
+      "start": 1688.96,
+      "end": 1691.43,
+      "duration": 2.47,
+      "text": "of mutually perpendicular. So"
+    },
+    {
+      "index": 528,
+      "start": 1691.44,
+      "end": 1693.669,
+      "duration": 2.229,
+      "text": "perpendicular"
+    },
+    {
+      "index": 529,
+      "start": 1693.679,
+      "end": 1695.909,
+      "duration": 2.23,
+      "text": "projection matrices."
+    },
+    {
+      "index": 530,
+      "start": 1695.919,
+      "end": 1697.43,
+      "duration": 1.511,
+      "text": "Projection"
+    },
+    {
+      "index": 531,
+      "start": 1697.44,
+      "end": 1700.389,
+      "duration": 2.949,
+      "text": "matrices."
+    },
+    {
+      "index": 532,
+      "start": 1700.399,
+      "end": 1702.149,
+      "duration": 1.75,
+      "text": "Okay,"
+    },
+    {
+      "index": 533,
+      "start": 1702.159,
+      "end": 1704.149,
+      "duration": 1.99,
+      "text": "that's another way that people like to"
+    },
+    {
+      "index": 534,
+      "start": 1704.159,
+      "end": 1706.47,
+      "duration": 2.311,
+      "text": "think of the"
+    },
+    {
+      "index": 535,
+      "start": 1706.48,
+      "end": 1709.19,
+      "duration": 2.71,
+      "text": "spectral theorem that every symmetric"
+    },
+    {
+      "index": 536,
+      "start": 1709.2,
+      "end": 1713.269,
+      "duration": 4.069,
+      "text": "matrix can be broken up that way. That I"
+    },
+    {
+      "index": 537,
+      "start": 1713.279,
+      "end": 1715.909,
+      "duration": 2.63,
+      "text": "guess at this moment first I haven't"
+    },
+    {
+      "index": 538,
+      "start": 1715.919,
+      "end": 1718.149,
+      "duration": 2.23,
+      "text": "done an example. I could create a"
+    },
+    {
+      "index": 539,
+      "start": 1718.159,
+      "end": 1720.87,
+      "duration": 2.711,
+      "text": "symmetric matrix"
+    },
+    {
+      "index": 540,
+      "start": 1720.88,
+      "end": 1722.87,
+      "duration": 1.99,
+      "text": "check that it's find its igen values"
+    },
+    {
+      "index": 541,
+      "start": 1722.88,
+      "end": 1725.43,
+      "duration": 2.55,
+      "text": "they would come out real find its igen"
+    },
+    {
+      "index": 542,
+      "start": 1725.44,
+      "end": 1726.549,
+      "duration": 1.109,
+      "text": "vectors they would come out"
+    },
+    {
+      "index": 543,
+      "start": 1726.559,
+      "end": 1729.11,
+      "duration": 2.551,
+      "text": "perpendicular and you would see it in"
+    },
+    {
+      "index": 544,
+      "start": 1729.12,
+      "end": 1731.43,
+      "duration": 2.31,
+      "text": "numbers but maybe I'll leave it here for"
+    },
+    {
+      "index": 545,
+      "start": 1731.44,
+      "end": 1734.63,
+      "duration": 3.19,
+      "text": "the moment in letters"
+    },
+    {
+      "index": 546,
+      "start": 1734.64,
+      "end": 1737.669,
+      "duration": 3.029,
+      "text": "oh I maybe I will do it with numbers for"
+    },
+    {
+      "index": 547,
+      "start": 1737.679,
+      "end": 1739.669,
+      "duration": 1.99,
+      "text": "this reason because there's one more"
+    },
+    {
+      "index": 548,
+      "start": 1739.679,
+      "end": 1742.63,
+      "duration": 2.951,
+      "text": "remarkable fact"
+    },
+    {
+      "index": 549,
+      "start": 1742.64,
+      "end": 1745.669,
+      "duration": 3.029,
+      "text": "can I just put this further great fact"
+    },
+    {
+      "index": 550,
+      "start": 1745.679,
+      "end": 1751.669,
+      "duration": 5.99,
+      "text": "about symmetric matrices on the board."
+    },
+    {
+      "index": 551,
+      "start": 1753.75,
+      "end": 1753.76,
+      "duration": 0.01,
+      "text": "When I have symmetric matrices, I know"
+    },
+    {
+      "index": 552,
+      "start": 1753.76,
+      "end": 1756.549,
+      "duration": 2.789,
+      "text": "their values are real."
+    },
+    {
+      "index": 553,
+      "start": 1756.559,
+      "end": 1758.549,
+      "duration": 1.99,
+      "text": "So then I can get interested in the"
+    },
+    {
+      "index": 554,
+      "start": 1758.559,
+      "end": 1761.99,
+      "duration": 3.431,
+      "text": "question, are they positive or negative?"
+    },
+    {
+      "index": 555,
+      "start": 1762.0,
+      "end": 1763.99,
+      "duration": 1.99,
+      "text": "And you remember why that's important"
+    },
+    {
+      "index": 556,
+      "start": 1764.0,
+      "end": 1766.47,
+      "duration": 2.47,
+      "text": "for differential equations that decides"
+    },
+    {
+      "index": 557,
+      "start": 1766.48,
+      "end": 1769.909,
+      "duration": 3.429,
+      "text": "between instability and stability."
+    },
+    {
+      "index": 558,
+      "start": 1769.919,
+      "end": 1772.87,
+      "duration": 2.951,
+      "text": "So I'm after I know they're real, then"
+    },
+    {
+      "index": 559,
+      "start": 1772.88,
+      "end": 1775.029,
+      "duration": 2.149,
+      "text": "the next question is are they positive?"
+    },
+    {
+      "index": 560,
+      "start": 1775.039,
+      "end": 1777.59,
+      "duration": 2.551,
+      "text": "Are they negative?"
+    },
+    {
+      "index": 561,
+      "start": 1777.6,
+      "end": 1779.43,
+      "duration": 1.83,
+      "text": "And"
+    },
+    {
+      "index": 562,
+      "start": 1779.44,
+      "end": 1782.71,
+      "duration": 3.27,
+      "text": "I hate to have to compute those"
+    },
+    {
+      "index": 563,
+      "start": 1782.72,
+      "end": 1785.83,
+      "duration": 3.11,
+      "text": "igen values to answer that question,"
+    },
+    {
+      "index": 564,
+      "start": 1785.84,
+      "end": 1788.07,
+      "duration": 2.23,
+      "text": "right? Because computing the igen values"
+    },
+    {
+      "index": 565,
+      "start": 1788.08,
+      "end": 1790.63,
+      "duration": 2.55,
+      "text": "of a symmetric matrix of order let's say"
+    },
+    {
+      "index": 566,
+      "start": 1790.64,
+      "end": 1794.549,
+      "duration": 3.909,
+      "text": "50 computed 50 values"
+    },
+    {
+      "index": 567,
+      "start": 1794.559,
+      "end": 1798.63,
+      "duration": 4.071,
+      "text": "is a job."
+    },
+    {
+      "index": 568,
+      "start": 1798.64,
+      "end": 1801.909,
+      "duration": 3.269,
+      "text": "I mean by pencil and paper it's a"
+    },
+    {
+      "index": 569,
+      "start": 1801.919,
+      "end": 1807.35,
+      "duration": 5.431,
+      "text": "lifetimes job. I mean which and in fact"
+    },
+    {
+      "index": 570,
+      "start": 1807.36,
+      "end": 1809.35,
+      "duration": 1.99,
+      "text": "um"
+    },
+    {
+      "index": 571,
+      "start": 1809.36,
+      "end": 1813.51,
+      "duration": 4.15,
+      "text": "a few years ago well say 20 years ago or"
+    },
+    {
+      "index": 572,
+      "start": 1813.52,
+      "end": 1817.909,
+      "duration": 4.389,
+      "text": "30 nobody really knew how to do it. I"
+    },
+    {
+      "index": 573,
+      "start": 1817.919,
+      "end": 1821.11,
+      "duration": 3.191,
+      "text": "mean so like science was stuck on this"
+    },
+    {
+      "index": 574,
+      "start": 1821.12,
+      "end": 1823.99,
+      "duration": 2.87,
+      "text": "problem. If you have a matrix of order"
+    },
+    {
+      "index": 575,
+      "start": 1824.0,
+      "end": 1826.07,
+      "duration": 2.07,
+      "text": "50 or 100 how do you find its igen"
+    },
+    {
+      "index": 576,
+      "start": 1826.08,
+      "end": 1827.99,
+      "duration": 1.91,
+      "text": "values"
+    },
+    {
+      "index": 577,
+      "start": 1828.0,
+      "end": 1829.59,
+      "duration": 1.59,
+      "text": "numerically? Now, I'm just saying"
+    },
+    {
+      "index": 578,
+      "start": 1829.6,
+      "end": 1832.149,
+      "duration": 2.549,
+      "text": "because pencil and paper is we're going"
+    },
+    {
+      "index": 579,
+      "start": 1832.159,
+      "end": 1835.51,
+      "duration": 3.351,
+      "text": "to run out of time or paper or something"
+    },
+    {
+      "index": 580,
+      "start": 1835.52,
+      "end": 1838.23,
+      "duration": 2.71,
+      "text": "before we get it."
+    },
+    {
+      "index": 581,
+      "start": 1838.24,
+      "end": 1842.31,
+      "duration": 4.07,
+      "text": "Um, well, and you might think, okay, get"
+    },
+    {
+      "index": 582,
+      "start": 1842.32,
+      "end": 1845.35,
+      "duration": 3.03,
+      "text": "the get get mat lab to compute the"
+    },
+    {
+      "index": 583,
+      "start": 1845.36,
+      "end": 1848.71,
+      "duration": 3.35,
+      "text": "determinant of lambda minus a a minus"
+    },
+    {
+      "index": 584,
+      "start": 1848.72,
+      "end": 1852.31,
+      "duration": 3.59,
+      "text": "lambda i this polomial of 50th degree"
+    },
+    {
+      "index": 585,
+      "start": 1852.32,
+      "end": 1855.75,
+      "duration": 3.43,
+      "text": "and then find the roots."
+    },
+    {
+      "index": 586,
+      "start": 1855.76,
+      "end": 1858.149,
+      "duration": 2.389,
+      "text": "uh mat lab will do it but it will"
+    },
+    {
+      "index": 587,
+      "start": 1858.159,
+      "end": 1859.669,
+      "duration": 1.51,
+      "text": "complain"
+    },
+    {
+      "index": 588,
+      "start": 1859.679,
+      "end": 1862.87,
+      "duration": 3.191,
+      "text": "uh because it's a very bad way to find"
+    },
+    {
+      "index": 589,
+      "start": 1862.88,
+      "end": 1866.149,
+      "duration": 3.269,
+      "text": "the igen values. I I I'm sorry to be"
+    },
+    {
+      "index": 590,
+      "start": 1866.159,
+      "end": 1868.549,
+      "duration": 2.39,
+      "text": "saying this because it's the way I"
+    },
+    {
+      "index": 591,
+      "start": 1868.559,
+      "end": 1870.71,
+      "duration": 2.151,
+      "text": "taught you to do it right. I taught you"
+    },
+    {
+      "index": 592,
+      "start": 1870.72,
+      "end": 1872.95,
+      "duration": 2.23,
+      "text": "to find the igen values by doing that"
+    },
+    {
+      "index": 593,
+      "start": 1872.96,
+      "end": 1875.59,
+      "duration": 2.63,
+      "text": "determinant and taking the roots of that"
+    },
+    {
+      "index": 594,
+      "start": 1875.6,
+      "end": 1878.87,
+      "duration": 3.27,
+      "text": "polomial. But now I'm saying, okay, I"
+    },
+    {
+      "index": 595,
+      "start": 1878.88,
+      "end": 1880.95,
+      "duration": 2.07,
+      "text": "really meant that for 2 by twos and 3"
+    },
+    {
+      "index": 596,
+      "start": 1880.96,
+      "end": 1883.43,
+      "duration": 2.47,
+      "text": "by3s, but I didn't mean you to do it on"
+    },
+    {
+      "index": 597,
+      "start": 1883.44,
+      "end": 1886.549,
+      "duration": 3.109,
+      "text": "a 50 by 50. And"
+    },
+    {
+      "index": 598,
+      "start": 1886.559,
+      "end": 1888.23,
+      "duration": 1.671,
+      "text": "you're not too unhappy probably because"
+    },
+    {
+      "index": 599,
+      "start": 1888.24,
+      "end": 1891.909,
+      "duration": 3.669,
+      "text": "you didn't want to do it. But good"
+    },
+    {
+      "index": 600,
+      "start": 1891.919,
+      "end": 1893.909,
+      "duration": 1.99,
+      "text": "because"
+    },
+    {
+      "index": 601,
+      "start": 1893.919,
+      "end": 1897.269,
+      "duration": 3.35,
+      "text": "it would be a very unstable way. The the"
+    },
+    {
+      "index": 602,
+      "start": 1897.279,
+      "end": 1899.029,
+      "duration": 1.75,
+      "text": "50 answers that would come out would be"
+    },
+    {
+      "index": 603,
+      "start": 1899.039,
+      "end": 1903.669,
+      "duration": 4.63,
+      "text": "highly unreliable. So uh new ways are"
+    },
+    {
+      "index": 604,
+      "start": 1903.679,
+      "end": 1906.389,
+      "duration": 2.71,
+      "text": "are much better to find those 50 values."
+    },
+    {
+      "index": 605,
+      "start": 1906.399,
+      "end": 1908.23,
+      "duration": 1.831,
+      "text": "That's a that's a part of numerical"
+    },
+    {
+      "index": 606,
+      "start": 1908.24,
+      "end": 1910.31,
+      "duration": 2.07,
+      "text": "linear algebra."
+    },
+    {
+      "index": 607,
+      "start": 1910.32,
+      "end": 1914.789,
+      "duration": 4.469,
+      "text": "But here's the remarkable fact"
+    },
+    {
+      "index": 608,
+      "start": 1914.799,
+      "end": 1917.11,
+      "duration": 2.311,
+      "text": "that mat lab would quite happily find"
+    },
+    {
+      "index": 609,
+      "start": 1917.12,
+      "end": 1919.509,
+      "duration": 2.389,
+      "text": "the 50 pivots."
+    },
+    {
+      "index": 610,
+      "start": 1919.519,
+      "end": 1921.509,
+      "duration": 1.99,
+      "text": "Right? Now the pivots are not the same"
+    },
+    {
+      "index": 611,
+      "start": 1921.519,
+      "end": 1924.789,
+      "duration": 3.27,
+      "text": "as the igen values."
+    },
+    {
+      "index": 612,
+      "start": 1924.799,
+      "end": 1926.95,
+      "duration": 2.151,
+      "text": "But here's the great thing. If if I had"
+    },
+    {
+      "index": 613,
+      "start": 1926.96,
+      "end": 1930.149,
+      "duration": 3.189,
+      "text": "a real matrix, I could find those 50"
+    },
+    {
+      "index": 614,
+      "start": 1930.159,
+      "end": 1933.509,
+      "duration": 3.35,
+      "text": "pivots and I could see maybe 28 of them"
+    },
+    {
+      "index": 615,
+      "start": 1933.519,
+      "end": 1936.87,
+      "duration": 3.351,
+      "text": "are positive and 22 or negative pivots"
+    },
+    {
+      "index": 616,
+      "start": 1936.88,
+      "end": 1938.95,
+      "duration": 2.07,
+      "text": "and I can compute those safely and"
+    },
+    {
+      "index": 617,
+      "start": 1938.96,
+      "end": 1942.389,
+      "duration": 3.429,
+      "text": "quickly. And the great fact is that 28"
+    },
+    {
+      "index": 618,
+      "start": 1942.399,
+      "end": 1945.269,
+      "duration": 2.87,
+      "text": "of the igen values would be positive and"
+    },
+    {
+      "index": 619,
+      "start": 1945.279,
+      "end": 1948.549,
+      "duration": 3.27,
+      "text": "22 would be negative that the signs of"
+    },
+    {
+      "index": 620,
+      "start": 1948.559,
+      "end": 1951.99,
+      "duration": 3.431,
+      "text": "the pivots. So this is like a just I"
+    },
+    {
+      "index": 621,
+      "start": 1952.0,
+      "end": 1953.909,
+      "duration": 1.909,
+      "text": "hope you think this this is kind of a"
+    },
+    {
+      "index": 622,
+      "start": 1953.919,
+      "end": 1959.99,
+      "duration": 6.071,
+      "text": "nice thing that the signs of the pivots"
+    },
+    {
+      "index": 623,
+      "start": 1962.149,
+      "end": 1962.159,
+      "duration": 0.01,
+      "text": "for symmetric I'm always talking about"
+    },
+    {
+      "index": 624,
+      "start": 1962.159,
+      "end": 1964.87,
+      "duration": 2.711,
+      "text": "symmetric matrices. So I really like"
+    },
+    {
+      "index": 625,
+      "start": 1964.88,
+      "end": 1966.63,
+      "duration": 1.75,
+      "text": "trying to convince you that symmetric"
+    },
+    {
+      "index": 626,
+      "start": 1966.64,
+      "end": 1970.31,
+      "duration": 3.67,
+      "text": "matrices are better than the rest. So"
+    },
+    {
+      "index": 627,
+      "start": 1970.32,
+      "end": 1972.789,
+      "duration": 2.469,
+      "text": "the signs of the pivots"
+    },
+    {
+      "index": 628,
+      "start": 1972.799,
+      "end": 1976.789,
+      "duration": 3.99,
+      "text": "are same as"
+    },
+    {
+      "index": 629,
+      "start": 1979.59,
+      "end": 1979.6,
+      "duration": 0.01,
+      "text": "the signs"
+    },
+    {
+      "index": 630,
+      "start": 1979.6,
+      "end": 1982.71,
+      "duration": 3.11,
+      "text": "of the igen values."
+    },
+    {
+      "index": 631,
+      "start": 1982.72,
+      "end": 1984.789,
+      "duration": 2.069,
+      "text": "The same number"
+    },
+    {
+      "index": 632,
+      "start": 1984.799,
+      "end": 1987.59,
+      "duration": 2.791,
+      "text": "the number of"
+    },
+    {
+      "index": 633,
+      "start": 1987.6,
+      "end": 1991.19,
+      "duration": 3.59,
+      "text": "pivots greater than zero."
+    },
+    {
+      "index": 634,
+      "start": 1991.2,
+      "end": 1994.389,
+      "duration": 3.189,
+      "text": "The number of positive pivots"
+    },
+    {
+      "index": 635,
+      "start": 1994.399,
+      "end": 1999.75,
+      "duration": 5.351,
+      "text": "is equal to the number of positive"
+    },
+    {
+      "index": 636,
+      "start": 2002.149,
+      "end": 2002.159,
+      "duration": 0.01,
+      "text": "igen values."
+    },
+    {
+      "index": 637,
+      "start": 2002.159,
+      "end": 2005.35,
+      "duration": 3.191,
+      "text": "So that actually is a very useful that"
+    },
+    {
+      "index": 638,
+      "start": 2005.36,
+      "end": 2008.95,
+      "duration": 3.59,
+      "text": "gives you a a a good start on a decent"
+    },
+    {
+      "index": 639,
+      "start": 2008.96,
+      "end": 2011.83,
+      "duration": 2.87,
+      "text": "way to compute values"
+    },
+    {
+      "index": 640,
+      "start": 2011.84,
+      "end": 2013.75,
+      "duration": 1.91,
+      "text": "because you can narrow them down. You"
+    },
+    {
+      "index": 641,
+      "start": 2013.76,
+      "end": 2015.669,
+      "duration": 1.909,
+      "text": "can find out how many are positive, how"
+    },
+    {
+      "index": 642,
+      "start": 2015.679,
+      "end": 2018.389,
+      "duration": 2.71,
+      "text": "many are negative. Then you could shift"
+    },
+    {
+      "index": 643,
+      "start": 2018.399,
+      "end": 2022.63,
+      "duration": 4.231,
+      "text": "the matrix by seven times the identity."
+    },
+    {
+      "index": 644,
+      "start": 2022.64,
+      "end": 2024.63,
+      "duration": 1.99,
+      "text": "That would shift all the igen values by"
+    },
+    {
+      "index": 645,
+      "start": 2024.64,
+      "end": 2026.389,
+      "duration": 1.749,
+      "text": "seven."
+    },
+    {
+      "index": 646,
+      "start": 2026.399,
+      "end": 2027.99,
+      "duration": 1.591,
+      "text": "Then you could take the pivots of that"
+    },
+    {
+      "index": 647,
+      "start": 2028.0,
+      "end": 2030.23,
+      "duration": 2.23,
+      "text": "matrix and you would know how many igen"
+    },
+    {
+      "index": 648,
+      "start": 2030.24,
+      "end": 2031.83,
+      "duration": 1.59,
+      "text": "values"
+    },
+    {
+      "index": 649,
+      "start": 2031.84,
+      "end": 2033.83,
+      "duration": 1.99,
+      "text": "of the original were above seven and"
+    },
+    {
+      "index": 650,
+      "start": 2033.84,
+      "end": 2037.43,
+      "duration": 3.59,
+      "text": "below seven. So this this neat little"
+    },
+    {
+      "index": 651,
+      "start": 2037.44,
+      "end": 2042.789,
+      "duration": 5.349,
+      "text": "theorem that the symmetric matrices"
+    },
+    {
+      "index": 652,
+      "start": 2042.799,
+      "end": 2046.07,
+      "duration": 3.271,
+      "text": "have this connection between nobody's"
+    },
+    {
+      "index": 653,
+      "start": 2046.08,
+      "end": 2048.149,
+      "duration": 2.069,
+      "text": "mixing up and thinking the pivots are"
+    },
+    {
+      "index": 654,
+      "start": 2048.159,
+      "end": 2050.71,
+      "duration": 2.551,
+      "text": "the igen values."
+    },
+    {
+      "index": 655,
+      "start": 2050.72,
+      "end": 2053.27,
+      "duration": 2.55,
+      "text": "I mean the only thing I can think of is"
+    },
+    {
+      "index": 656,
+      "start": 2053.28,
+      "end": 2056.069,
+      "duration": 2.789,
+      "text": "the product of the pivots equals the"
+    },
+    {
+      "index": 657,
+      "start": 2056.079,
+      "end": 2059.109,
+      "duration": 3.03,
+      "text": "product of the igen values. Why is that?"
+    },
+    {
+      "index": 658,
+      "start": 2059.119,
+      "end": 2060.869,
+      "duration": 1.75,
+      "text": "So if I asked you for the reason on"
+    },
+    {
+      "index": 659,
+      "start": 2060.879,
+      "end": 2063.19,
+      "duration": 2.311,
+      "text": "that, why is the product of the pivots"
+    },
+    {
+      "index": 660,
+      "start": 2063.2,
+      "end": 2065.51,
+      "duration": 2.31,
+      "text": "for a symmetric matrix the same as the"
+    },
+    {
+      "index": 661,
+      "start": 2065.52,
+      "end": 2068.55,
+      "duration": 3.03,
+      "text": "product of the igen values?"
+    },
+    {
+      "index": 662,
+      "start": 2068.56,
+      "end": 2072.79,
+      "duration": 4.23,
+      "text": "Because they both equal"
+    },
+    {
+      "index": 663,
+      "start": 2075.589,
+      "end": 2075.599,
+      "duration": 0.01,
+      "text": "the determinant, right? The product of"
+    },
+    {
+      "index": 664,
+      "start": 2075.599,
+      "end": 2077.589,
+      "duration": 1.99,
+      "text": "the pivots gives the determinant if no"
+    },
+    {
+      "index": 665,
+      "start": 2077.599,
+      "end": 2080.31,
+      "duration": 2.711,
+      "text": "row exchanges. The product of the igen"
+    },
+    {
+      "index": 666,
+      "start": 2080.32,
+      "end": 2083.75,
+      "duration": 3.43,
+      "text": "values always gives the determinant. So,"
+    },
+    {
+      "index": 667,
+      "start": 2083.76,
+      "end": 2086.629,
+      "duration": 2.869,
+      "text": "so the products, but that doesn't tell"
+    },
+    {
+      "index": 668,
+      "start": 2086.639,
+      "end": 2088.629,
+      "duration": 1.99,
+      "text": "you anything about the 50 individual"
+    },
+    {
+      "index": 669,
+      "start": 2088.639,
+      "end": 2093.19,
+      "duration": 4.551,
+      "text": "ones, which this does. Okay. So, that's"
+    },
+    {
+      "index": 670,
+      "start": 2093.2,
+      "end": 2095.829,
+      "duration": 2.629,
+      "text": "uh those are essential facts about"
+    },
+    {
+      "index": 671,
+      "start": 2095.839,
+      "end": 2098.23,
+      "duration": 2.391,
+      "text": "symmetric matrices."
+    },
+    {
+      "index": 672,
+      "start": 2098.24,
+      "end": 2100.95,
+      "duration": 2.71,
+      "text": "Okay."
+    },
+    {
+      "index": 673,
+      "start": 2100.96,
+      "end": 2105.43,
+      "duration": 4.47,
+      "text": "Now, I I said in the in the lecture"
+    },
+    {
+      "index": 674,
+      "start": 2105.44,
+      "end": 2108.63,
+      "duration": 3.19,
+      "text": "description that I would"
+    },
+    {
+      "index": 675,
+      "start": 2108.64,
+      "end": 2112.71,
+      "duration": 4.07,
+      "text": "take the last minutes to start on"
+    },
+    {
+      "index": 676,
+      "start": 2112.72,
+      "end": 2114.79,
+      "duration": 2.07,
+      "text": "positive definite matrices because we're"
+    },
+    {
+      "index": 677,
+      "start": 2114.8,
+      "end": 2119.43,
+      "duration": 4.63,
+      "text": "right there. We're we're we're we're uh"
+    },
+    {
+      "index": 678,
+      "start": 2119.44,
+      "end": 2121.67,
+      "duration": 2.23,
+      "text": "we're ready to say what's a positive"
+    },
+    {
+      "index": 679,
+      "start": 2121.68,
+      "end": 2131.67,
+      "duration": 9.99,
+      "text": "definite matrix."
+    },
+    {
+      "index": 680,
+      "start": 2134.55,
+      "end": 2134.56,
+      "duration": 0.01,
+      "text": "It's symmetric. First of all,"
+    },
+    {
+      "index": 681,
+      "start": 2134.56,
+      "end": 2140.069,
+      "duration": 5.509,
+      "text": "I'm always I will mean symmetric."
+    },
+    {
+      "index": 682,
+      "start": 2142.71,
+      "end": 2142.72,
+      "duration": 0.01,
+      "text": "So this is the this is the next section"
+    },
+    {
+      "index": 683,
+      "start": 2142.72,
+      "end": 2145.67,
+      "duration": 2.95,
+      "text": "of the book. It's about this. If"
+    },
+    {
+      "index": 684,
+      "start": 2145.68,
+      "end": 2149.67,
+      "duration": 3.99,
+      "text": "symmetric matrices are good, which is"
+    },
+    {
+      "index": 685,
+      "start": 2149.68,
+      "end": 2152.47,
+      "duration": 2.79,
+      "text": "like the point of my lecture so far,"
+    },
+    {
+      "index": 686,
+      "start": 2152.48,
+      "end": 2156.31,
+      "duration": 3.83,
+      "text": "then positive definite matrices"
+    },
+    {
+      "index": 687,
+      "start": 2156.32,
+      "end": 2158.47,
+      "duration": 2.15,
+      "text": "are"
+    },
+    {
+      "index": 688,
+      "start": 2158.48,
+      "end": 2161.589,
+      "duration": 3.109,
+      "text": "uh subclass that are"
+    },
+    {
+      "index": 689,
+      "start": 2161.599,
+      "end": 2165.91,
+      "duration": 4.311,
+      "text": "excellent. Okay, just the greatest."
+    },
+    {
+      "index": 690,
+      "start": 2165.92,
+      "end": 2168.15,
+      "duration": 2.23,
+      "text": "So what are they?"
+    },
+    {
+      "index": 691,
+      "start": 2168.16,
+      "end": 2170.069,
+      "duration": 1.909,
+      "text": "They're matrices. They're symmetric"
+    },
+    {
+      "index": 692,
+      "start": 2170.079,
+      "end": 2172.87,
+      "duration": 2.791,
+      "text": "matrices. So all their igen values are"
+    },
+    {
+      "index": 693,
+      "start": 2172.88,
+      "end": 2175.43,
+      "duration": 2.55,
+      "text": "real. You can guess what they are."
+    },
+    {
+      "index": 694,
+      "start": 2175.44,
+      "end": 2179.99,
+      "duration": 4.55,
+      "text": "These are symmetric matrices with all"
+    },
+    {
+      "index": 695,
+      "start": 2180.0,
+      "end": 2185.91,
+      "duration": 5.91,
+      "text": "the igen values are"
+    },
+    {
+      "index": 696,
+      "start": 2193.99,
+      "end": 2194.0,
+      "duration": 0.01,
+      "text": "What? Well, it it it's hinted of course"
+    },
+    {
+      "index": 697,
+      "start": 2194.0,
+      "end": 2197.27,
+      "duration": 3.27,
+      "text": "by the name for these things. All the en"
+    },
+    {
+      "index": 698,
+      "start": 2197.28,
+      "end": 2199.99,
+      "duration": 2.71,
+      "text": "values are positive."
+    },
+    {
+      "index": 699,
+      "start": 2200.0,
+      "end": 2205.03,
+      "duration": 5.03,
+      "text": "Okay."
+    },
+    {
+      "index": 700,
+      "start": 2207.51,
+      "end": 2207.52,
+      "duration": 0.01,
+      "text": "Tell me about the pivots. We can check"
+    },
+    {
+      "index": 701,
+      "start": 2207.52,
+      "end": 2209.349,
+      "duration": 1.829,
+      "text": "the igen values or we can check the"
+    },
+    {
+      "index": 702,
+      "start": 2209.359,
+      "end": 2212.47,
+      "duration": 3.111,
+      "text": "pivots. All the pivots"
+    },
+    {
+      "index": 703,
+      "start": 2212.48,
+      "end": 2218.39,
+      "duration": 5.91,
+      "text": "are what?"
+    },
+    {
+      "index": 704,
+      "start": 2220.87,
+      "end": 2220.88,
+      "duration": 0.01,
+      "text": "And then I'll then I'll finally give an"
+    },
+    {
+      "index": 705,
+      "start": 2220.88,
+      "end": 2223.43,
+      "duration": 2.55,
+      "text": "example. I feel awful that I have got to"
+    },
+    {
+      "index": 706,
+      "start": 2223.44,
+      "end": 2224.95,
+      "duration": 1.51,
+      "text": "this point in the lecture and I haven't"
+    },
+    {
+      "index": 707,
+      "start": 2224.96,
+      "end": 2227.43,
+      "duration": 2.47,
+      "text": "given you a single example. So let me"
+    },
+    {
+      "index": 708,
+      "start": 2227.44,
+      "end": 2233.829,
+      "duration": 6.389,
+      "text": "give you one. 5 3 22"
+    },
+    {
+      "index": 709,
+      "start": 2233.839,
+      "end": 2236.23,
+      "duration": 2.391,
+      "text": "at symmetric"
+    },
+    {
+      "index": 710,
+      "start": 2236.24,
+      "end": 2241.589,
+      "duration": 5.349,
+      "text": "fine its igen values are real for sure"
+    },
+    {
+      "index": 711,
+      "start": 2241.599,
+      "end": 2244.23,
+      "duration": 2.631,
+      "text": "but more than that"
+    },
+    {
+      "index": 712,
+      "start": 2244.24,
+      "end": 2248.95,
+      "duration": 4.71,
+      "text": "I know the signs of those igen values"
+    },
+    {
+      "index": 713,
+      "start": 2248.96,
+      "end": 2251.99,
+      "duration": 3.03,
+      "text": "and also I know the signs of those"
+    },
+    {
+      "index": 714,
+      "start": 2252.0,
+      "end": 2253.589,
+      "duration": 1.589,
+      "text": "pivots. So what's the deal with the"
+    },
+    {
+      "index": 715,
+      "start": 2253.599,
+      "end": 2256.63,
+      "duration": 3.031,
+      "text": "pivots? the I if the igen values are all"
+    },
+    {
+      "index": 716,
+      "start": 2256.64,
+      "end": 2261.03,
+      "duration": 4.39,
+      "text": "positive and if this little fact is true"
+    },
+    {
+      "index": 717,
+      "start": 2261.04,
+      "end": 2264.15,
+      "duration": 3.11,
+      "text": "that the pivots and and values have the"
+    },
+    {
+      "index": 718,
+      "start": 2264.16,
+      "end": 2267.67,
+      "duration": 3.51,
+      "text": "same signs then this must be true all"
+    },
+    {
+      "index": 719,
+      "start": 2267.68,
+      "end": 2271.51,
+      "duration": 3.83,
+      "text": "the pivots are positive"
+    },
+    {
+      "index": 720,
+      "start": 2274.63,
+      "end": 2274.64,
+      "duration": 0.01,
+      "text": "and that's the good way to test this is"
+    },
+    {
+      "index": 721,
+      "start": 2274.64,
+      "end": 2276.39,
+      "duration": 1.75,
+      "text": "the good test because I could what are"
+    },
+    {
+      "index": 722,
+      "start": 2276.4,
+      "end": 2279.03,
+      "duration": 2.63,
+      "text": "the pivots for that matrix"
+    },
+    {
+      "index": 723,
+      "start": 2279.04,
+      "end": 2282.87,
+      "duration": 3.83,
+      "text": "the pivots for that matrix are five so"
+    },
+    {
+      "index": 724,
+      "start": 2282.88,
+      "end": 2286.79,
+      "duration": 3.91,
+      "text": "pivots are"
+    },
+    {
+      "index": 725,
+      "start": 2289.109,
+      "end": 2289.119,
+      "duration": 0.01,
+      "text": "five and what's the second pivot? Have"
+    },
+    {
+      "index": 726,
+      "start": 2289.119,
+      "end": 2292.87,
+      "duration": 3.751,
+      "text": "we like noticed the formula for the"
+    },
+    {
+      "index": 727,
+      "start": 2292.88,
+      "end": 2298.55,
+      "duration": 5.67,
+      "text": "second pivot in a matrix?"
+    },
+    {
+      "index": 728,
+      "start": 2300.23,
+      "end": 2300.24,
+      "duration": 0.01,
+      "text": "It doesn't necessarily, you know, it may"
+    },
+    {
+      "index": 729,
+      "start": 2300.24,
+      "end": 2302.95,
+      "duration": 2.71,
+      "text": "come out a fraction for sure, but what"
+    },
+    {
+      "index": 730,
+      "start": 2302.96,
+      "end": 2305.51,
+      "duration": 2.55,
+      "text": "is that fraction? Can you tell me? Well,"
+    },
+    {
+      "index": 731,
+      "start": 2305.52,
+      "end": 2308.71,
+      "duration": 3.19,
+      "text": "here the product of the pivots is the"
+    },
+    {
+      "index": 732,
+      "start": 2308.72,
+      "end": 2311.19,
+      "duration": 2.47,
+      "text": "determinant. What's the determinant of"
+    },
+    {
+      "index": 733,
+      "start": 2311.2,
+      "end": 2314.87,
+      "duration": 3.67,
+      "text": "this matrix?"
+    },
+    {
+      "index": 734,
+      "start": 2316.47,
+      "end": 2316.48,
+      "duration": 0.01,
+      "text": "11."
+    },
+    {
+      "index": 735,
+      "start": 2316.48,
+      "end": 2321.75,
+      "duration": 5.27,
+      "text": "So the second pivot must be 11 over 5."
+    },
+    {
+      "index": 736,
+      "start": 2321.76,
+      "end": 2324.55,
+      "duration": 2.79,
+      "text": "So that the product is 11."
+    },
+    {
+      "index": 737,
+      "start": 2324.56,
+      "end": 2327.51,
+      "duration": 2.95,
+      "text": "They're both positive."
+    },
+    {
+      "index": 738,
+      "start": 2327.52,
+      "end": 2329.67,
+      "duration": 2.15,
+      "text": "Then I know that the igen values of that"
+    },
+    {
+      "index": 739,
+      "start": 2329.68,
+      "end": 2332.39,
+      "duration": 2.71,
+      "text": "matrix are both positive. What are the"
+    },
+    {
+      "index": 740,
+      "start": 2332.4,
+      "end": 2334.47,
+      "duration": 2.07,
+      "text": "igen values? Well, I've got to take the"
+    },
+    {
+      "index": 741,
+      "start": 2334.48,
+      "end": 2336.79,
+      "duration": 2.31,
+      "text": "roots of, you know, do I put in a minus"
+    },
+    {
+      "index": 742,
+      "start": 2336.8,
+      "end": 2339.43,
+      "duration": 2.63,
+      "text": "lambda? You mentally do this. lambda"
+    },
+    {
+      "index": 743,
+      "start": 2339.44,
+      "end": 2343.829,
+      "duration": 4.389,
+      "text": "squared minus how many lambdas"
+    },
+    {
+      "index": 744,
+      "start": 2343.839,
+      "end": 2346.39,
+      "duration": 2.551,
+      "text": "eight right five and three the trace"
+    },
+    {
+      "index": 745,
+      "start": 2346.4,
+      "end": 2350.15,
+      "duration": 3.75,
+      "text": "comes in there plus what number comes"
+    },
+    {
+      "index": 746,
+      "start": 2350.16,
+      "end": 2353.99,
+      "duration": 3.83,
+      "text": "here the determinant the 11 so I set"
+    },
+    {
+      "index": 747,
+      "start": 2354.0,
+      "end": 2357.109,
+      "duration": 3.109,
+      "text": "that to zero"
+    },
+    {
+      "index": 748,
+      "start": 2357.119,
+      "end": 2360.15,
+      "duration": 3.031,
+      "text": "so the igen values are"
+    },
+    {
+      "index": 749,
+      "start": 2360.16,
+      "end": 2362.79,
+      "duration": 2.63,
+      "text": "let's see half of that is four look at"
+    },
+    {
+      "index": 750,
+      "start": 2362.8,
+      "end": 2365.43,
+      "duration": 2.63,
+      "text": "that positive number plus or minus the"
+    },
+    {
+      "index": 751,
+      "start": 2365.44,
+      "end": 2372.39,
+      "duration": 6.95,
+      "text": "square<unk> of 16 - 11 I think five"
+    },
+    {
+      "index": 752,
+      "start": 2375.03,
+      "end": 2375.04,
+      "duration": 0.01,
+      "text": "the values well 2 by two they're not so"
+    },
+    {
+      "index": 753,
+      "start": 2375.04,
+      "end": 2377.75,
+      "duration": 2.71,
+      "text": "terrible but they're not so perfect"
+    },
+    {
+      "index": 754,
+      "start": 2377.76,
+      "end": 2384.71,
+      "duration": 6.95,
+      "text": "pivots are really simple"
+    },
+    {
+      "index": 755,
+      "start": 2387.349,
+      "end": 2387.359,
+      "duration": 0.01,
+      "text": "and this is uh this is the family of"
+    },
+    {
+      "index": 756,
+      "start": 2387.359,
+      "end": 2389.43,
+      "duration": 2.071,
+      "text": "matrices that you really want in"
+    },
+    {
+      "index": 757,
+      "start": 2389.44,
+      "end": 2393.75,
+      "duration": 4.31,
+      "text": "differential equations because uh you"
+    },
+    {
+      "index": 758,
+      "start": 2393.76,
+      "end": 2396.15,
+      "duration": 2.39,
+      "text": "know the signs of the igen values so you"
+    },
+    {
+      "index": 759,
+      "start": 2396.16,
+      "end": 2399.589,
+      "duration": 3.429,
+      "text": "know the stability or Not okay. Uh"
+    },
+    {
+      "index": 760,
+      "start": 2399.599,
+      "end": 2403.109,
+      "duration": 3.51,
+      "text": "there's one other related fact I can pop"
+    },
+    {
+      "index": 761,
+      "start": 2403.119,
+      "end": 2406.39,
+      "duration": 3.271,
+      "text": "in here in in the time available for"
+    },
+    {
+      "index": 762,
+      "start": 2406.4,
+      "end": 2410.31,
+      "duration": 3.91,
+      "text": "positive definite matrices."
+    },
+    {
+      "index": 763,
+      "start": 2410.32,
+      "end": 2413.349,
+      "duration": 3.029,
+      "text": "The the related fact is to ask you about"
+    },
+    {
+      "index": 764,
+      "start": 2413.359,
+      "end": 2414.87,
+      "duration": 1.511,
+      "text": "determinants."
+    },
+    {
+      "index": 765,
+      "start": 2414.88,
+      "end": 2425.03,
+      "duration": 10.15,
+      "text": "So what's the determinant?"
+    },
+    {
+      "index": 766,
+      "start": 2427.589,
+      "end": 2427.599,
+      "duration": 0.01,
+      "text": "What can you tell me if I remember"
+    },
+    {
+      "index": 767,
+      "start": 2427.599,
+      "end": 2431.589,
+      "duration": 3.99,
+      "text": "positive definite means all values are"
+    },
+    {
+      "index": 768,
+      "start": 2431.599,
+      "end": 2433.829,
+      "duration": 2.23,
+      "text": "positive all pivots are positive so what"
+    },
+    {
+      "index": 769,
+      "start": 2433.839,
+      "end": 2436.87,
+      "duration": 3.031,
+      "text": "can you tell me about the determinant"
+    },
+    {
+      "index": 770,
+      "start": 2436.88,
+      "end": 2440.31,
+      "duration": 3.43,
+      "text": "it's positive too"
+    },
+    {
+      "index": 771,
+      "start": 2440.32,
+      "end": 2445.03,
+      "duration": 4.71,
+      "text": "but somehow that that's not quite enough"
+    },
+    {
+      "index": 772,
+      "start": 2445.04,
+      "end": 2448.95,
+      "duration": 3.91,
+      "text": "here here's a matrix -1"
+    },
+    {
+      "index": 773,
+      "start": 2448.96,
+      "end": 2451.349,
+      "duration": 2.389,
+      "text": "minus3"
+    },
+    {
+      "index": 774,
+      "start": 2451.359,
+      "end": 2454.31,
+      "duration": 2.951,
+      "text": "what's the determinant of that guy"
+    },
+    {
+      "index": 775,
+      "start": 2454.32,
+      "end": 2457.03,
+      "duration": 2.71,
+      "text": "It's positive, right? Is this a positive"
+    },
+    {
+      "index": 776,
+      "start": 2457.04,
+      "end": 2459.109,
+      "duration": 2.069,
+      "text": "definite matrix? Are the pivots what are"
+    },
+    {
+      "index": 777,
+      "start": 2459.119,
+      "end": 2462.15,
+      "duration": 3.031,
+      "text": "the pivots? Well, negative."
+    },
+    {
+      "index": 778,
+      "start": 2462.16,
+      "end": 2464.069,
+      "duration": 1.909,
+      "text": "What are the igen values? Well, they're"
+    },
+    {
+      "index": 779,
+      "start": 2464.079,
+      "end": 2467.19,
+      "duration": 3.111,
+      "text": "also the same. So,"
+    },
+    {
+      "index": 780,
+      "start": 2467.2,
+      "end": 2469.589,
+      "duration": 2.389,
+      "text": "somehow"
+    },
+    {
+      "index": 781,
+      "start": 2469.599,
+      "end": 2472.069,
+      "duration": 2.47,
+      "text": "I don't just want the determinant of the"
+    },
+    {
+      "index": 782,
+      "start": 2472.079,
+      "end": 2474.71,
+      "duration": 2.631,
+      "text": "whole matrix. Here is 11. That's great."
+    },
+    {
+      "index": 783,
+      "start": 2474.72,
+      "end": 2476.15,
+      "duration": 1.43,
+      "text": "Here, the determinant of the whole"
+    },
+    {
+      "index": 784,
+      "start": 2476.16,
+      "end": 2480.23,
+      "duration": 4.07,
+      "text": "matrix is three. That's positive."
+    },
+    {
+      "index": 785,
+      "start": 2480.24,
+      "end": 2484.79,
+      "duration": 4.55,
+      "text": "I also I've got to check like little"
+    },
+    {
+      "index": 786,
+      "start": 2484.8,
+      "end": 2486.87,
+      "duration": 2.07,
+      "text": "subdeterminants"
+    },
+    {
+      "index": 787,
+      "start": 2486.88,
+      "end": 2489.51,
+      "duration": 2.63,
+      "text": "say maybe coming down from the left. So"
+    },
+    {
+      "index": 788,
+      "start": 2489.52,
+      "end": 2492.47,
+      "duration": 2.95,
+      "text": "the one by one and the 2x two have to be"
+    },
+    {
+      "index": 789,
+      "start": 2492.48,
+      "end": 2494.87,
+      "duration": 2.39,
+      "text": "positive. So there that's where I get"
+    },
+    {
+      "index": 790,
+      "start": 2494.88,
+      "end": 2496.95,
+      "duration": 2.07,
+      "text": "the all"
+    },
+    {
+      "index": 791,
+      "start": 2496.96,
+      "end": 2501.75,
+      "duration": 4.79,
+      "text": "all can I call them subdeterminants"
+    },
+    {
+      "index": 792,
+      "start": 2501.76,
+      "end": 2504.23,
+      "duration": 2.47,
+      "text": "are see I have to I need to make that"
+    },
+    {
+      "index": 793,
+      "start": 2504.24,
+      "end": 2508.79,
+      "duration": 4.55,
+      "text": "thing plural. I need to test n things,"
+    },
+    {
+      "index": 794,
+      "start": 2508.8,
+      "end": 2511.589,
+      "duration": 2.789,
+      "text": "not just the big determinant. All"
+    },
+    {
+      "index": 795,
+      "start": 2511.599,
+      "end": 2514.39,
+      "duration": 2.791,
+      "text": "subdeterminants are"
+    },
+    {
+      "index": 796,
+      "start": 2514.4,
+      "end": 2518.71,
+      "duration": 4.31,
+      "text": "positive. Then I'm okay."
+    },
+    {
+      "index": 797,
+      "start": 2518.72,
+      "end": 2523.349,
+      "duration": 4.629,
+      "text": "Then I'm okay. This passes the test."
+    },
+    {
+      "index": 798,
+      "start": 2523.359,
+      "end": 2526.87,
+      "duration": 3.511,
+      "text": "Five is positive and 11 is positive."
+    },
+    {
+      "index": 799,
+      "start": 2526.88,
+      "end": 2529.43,
+      "duration": 2.55,
+      "text": "This fails the test because that minus"
+    },
+    {
+      "index": 800,
+      "start": 2529.44,
+      "end": 2532.15,
+      "duration": 2.71,
+      "text": "one there is negative."
+    },
+    {
+      "index": 801,
+      "start": 2532.16,
+      "end": 2533.829,
+      "duration": 1.669,
+      "text": "And then the big determinant is"
+    },
+    {
+      "index": 802,
+      "start": 2533.839,
+      "end": 2536.069,
+      "duration": 2.23,
+      "text": "positive3."
+    },
+    {
+      "index": 803,
+      "start": 2536.079,
+      "end": 2538.95,
+      "duration": 2.871,
+      "text": "So this"
+    },
+    {
+      "index": 804,
+      "start": 2538.96,
+      "end": 2542.15,
+      "duration": 3.19,
+      "text": "these this fact do you see that actually"
+    },
+    {
+      "index": 805,
+      "start": 2542.16,
+      "end": 2547.19,
+      "duration": 5.03,
+      "text": "the course like coming together"
+    },
+    {
+      "index": 806,
+      "start": 2549.349,
+      "end": 2549.359,
+      "duration": 0.01,
+      "text": "and that's really my point now in the"
+    },
+    {
+      "index": 807,
+      "start": 2549.359,
+      "end": 2552.23,
+      "duration": 2.871,
+      "text": "next in this lecture and particularly"
+    },
+    {
+      "index": 808,
+      "start": 2552.24,
+      "end": 2556.15,
+      "duration": 3.91,
+      "text": "next Wednesday and Friday"
+    },
+    {
+      "index": 809,
+      "start": 2556.16,
+      "end": 2559.109,
+      "duration": 2.949,
+      "text": "the course comes together these pivots"
+    },
+    {
+      "index": 810,
+      "start": 2559.119,
+      "end": 2562.63,
+      "duration": 3.511,
+      "text": "that we met in the first week these"
+    },
+    {
+      "index": 811,
+      "start": 2562.64,
+      "end": 2564.79,
+      "duration": 2.15,
+      "text": "determinants that we met in the middle"
+    },
+    {
+      "index": 812,
+      "start": 2564.8,
+      "end": 2566.63,
+      "duration": 1.83,
+      "text": "of the course."
+    },
+    {
+      "index": 813,
+      "start": 2566.64,
+      "end": 2569.589,
+      "duration": 2.949,
+      "text": "These igen values that we met most"
+    },
+    {
+      "index": 814,
+      "start": 2569.599,
+      "end": 2573.829,
+      "duration": 4.23,
+      "text": "recently all matrices are square here."
+    },
+    {
+      "index": 815,
+      "start": 2573.839,
+      "end": 2576.79,
+      "duration": 2.951,
+      "text": "So coming together for square matrices"
+    },
+    {
+      "index": 816,
+      "start": 2576.8,
+      "end": 2579.589,
+      "duration": 2.789,
+      "text": "means these three pieces come together"
+    },
+    {
+      "index": 817,
+      "start": 2579.599,
+      "end": 2583.349,
+      "duration": 3.75,
+      "text": "and they come together in that beautiful"
+    },
+    {
+      "index": 818,
+      "start": 2583.359,
+      "end": 2586.63,
+      "duration": 3.271,
+      "text": "fact that if that all the that if I have"
+    },
+    {
+      "index": 819,
+      "start": 2586.64,
+      "end": 2589.75,
+      "duration": 3.11,
+      "text": "one of these I have the others that if I"
+    },
+    {
+      "index": 820,
+      "start": 2589.76,
+      "end": 2593.03,
+      "duration": 3.27,
+      "text": "but but for symmetric matrices so that"
+    },
+    {
+      "index": 821,
+      "start": 2593.04,
+      "end": 2596.63,
+      "duration": 3.59,
+      "text": "this will be the positive definite"
+    },
+    {
+      "index": 822,
+      "start": 2596.64,
+      "end": 2600.79,
+      "duration": 4.15,
+      "text": "section and then the real climax of the"
+    },
+    {
+      "index": 823,
+      "start": 2600.8,
+      "end": 2602.95,
+      "duration": 2.15,
+      "text": "course is to make everything come"
+    },
+    {
+      "index": 824,
+      "start": 2602.96,
+      "end": 2607.829,
+      "duration": 4.869,
+      "text": "together for M byN matrices"
+    },
+    {
+      "index": 825,
+      "start": 2607.839,
+      "end": 2611.03,
+      "duration": 3.191,
+      "text": "not necessarily symmetric bring bring"
+    },
+    {
+      "index": 826,
+      "start": 2611.04,
+      "end": 2613.349,
+      "duration": 2.309,
+      "text": "everything together there and that will"
+    },
+    {
+      "index": 827,
+      "start": 2613.359,
+      "end": 2616.95,
+      "duration": 3.591,
+      "text": "be the final thing okay so uh have a"
+    },
+    {
+      "index": 828,
+      "start": 2616.96,
+      "end": 2619.91,
+      "duration": 2.95,
+      "text": "great weekend and don't forget symmetric"
+    },
+    {
+      "index": 829,
+      "start": 2619.92,
+      "end": 2622.96,
+      "duration": 3.04,
+      "text": "matrices thanks"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

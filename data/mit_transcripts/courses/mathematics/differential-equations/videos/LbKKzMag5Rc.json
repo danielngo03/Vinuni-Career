@@ -1,0 +1,7109 @@
+{
+  "video": {
+    "id": "LbKKzMag5Rc",
+    "title": "Lec 2 | MIT 18.03 Differential Equations, Spring 2006",
+    "url": "https://www.youtube.com/watch?v=LbKKzMag5Rc",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3045,
+    "language": "en"
+  },
+  "segment_count": 1013,
+  "segments": [
+    {
+      "index": 0,
+      "start": 2.5,
+      "end": 2.51,
+      "duration": 0.01,
+      "text": "oh the"
+    },
+    {
+      "index": 1,
+      "start": 2.51,
+      "end": 19.75,
+      "duration": 17.24,
+      "text": "[Applause]"
+    },
+    {
+      "index": 2,
+      "start": 34.11,
+      "end": 34.12,
+      "duration": 0.01,
+      "text": "the uh today we're going to talk uh I'm"
+    },
+    {
+      "index": 3,
+      "start": 34.12,
+      "end": 36.35,
+      "duration": 2.23,
+      "text": "postponing the linear equation to next"
+    },
+    {
+      "index": 4,
+      "start": 36.36,
+      "end": 39.15,
+      "duration": 2.79,
+      "text": "time uh instead uh I think it's a good"
+    },
+    {
+      "index": 5,
+      "start": 39.16,
+      "end": 42.47,
+      "duration": 3.31,
+      "text": "idea since in real life most of the"
+    },
+    {
+      "index": 6,
+      "start": 42.48,
+      "end": 44.51,
+      "duration": 2.03,
+      "text": "differential equations are solved by"
+    },
+    {
+      "index": 7,
+      "start": 44.52,
+      "end": 47.51,
+      "duration": 2.99,
+      "text": "numerical methods to introduce you to"
+    },
+    {
+      "index": 8,
+      "start": 47.52,
+      "end": 50.229,
+      "duration": 2.709,
+      "text": "those right away even when you see the"
+    },
+    {
+      "index": 9,
+      "start": 50.239,
+      "end": 53.069,
+      "duration": 2.83,
+      "text": "compu where you saw the computer screen"
+    },
+    {
+      "index": 10,
+      "start": 53.079,
+      "end": 56.189,
+      "duration": 3.11,
+      "text": "uh the solutions being drawn of course"
+    },
+    {
+      "index": 11,
+      "start": 56.199,
+      "end": 58.75,
+      "duration": 2.551,
+      "text": "that what really was happening is that"
+    },
+    {
+      "index": 12,
+      "start": 58.76,
+      "end": 60.709,
+      "duration": 1.949,
+      "text": "the computer was calculating the"
+    },
+    {
+      "index": 13,
+      "start": 60.719,
+      "end": 63.109,
+      "duration": 2.39,
+      "text": "solutions numerically and plotting the"
+    },
+    {
+      "index": 14,
+      "start": 63.119,
+      "end": 65.19,
+      "duration": 2.071,
+      "text": "points"
+    },
+    {
+      "index": 15,
+      "start": 65.2,
+      "end": 68.51,
+      "duration": 3.31,
+      "text": "so this is the main way numerically is"
+    },
+    {
+      "index": 16,
+      "start": 68.52,
+      "end": 70.749,
+      "duration": 2.229,
+      "text": "the main way differential equations are"
+    },
+    {
+      "index": 17,
+      "start": 70.759,
+      "end": 73.55,
+      "duration": 2.791,
+      "text": "actually solved there of any complexity"
+    },
+    {
+      "index": 18,
+      "start": 73.56,
+      "end": 77.31,
+      "duration": 3.75,
+      "text": "at all now so the problem is an initial"
+    },
+    {
+      "index": 19,
+      "start": 77.32,
+      "end": 79.429,
+      "duration": 2.109,
+      "text": "value problem let's write it A first"
+    },
+    {
+      "index": 20,
+      "start": 79.439,
+      "end": 81.91,
+      "duration": 2.471,
+      "text": "order problem the way we talked about it"
+    },
+    {
+      "index": 21,
+      "start": 81.92,
+      "end": 83.63,
+      "duration": 1.71,
+      "text": "on"
+    },
+    {
+      "index": 22,
+      "start": 83.64,
+      "end": 86.31,
+      "duration": 2.67,
+      "text": "Wednesday uh and now I'll specifically"
+    },
+    {
+      "index": 23,
+      "start": 86.32,
+      "end": 88.59,
+      "duration": 2.27,
+      "text": "add to that the starting point that you"
+    },
+    {
+      "index": 24,
+      "start": 88.6,
+      "end": 90.469,
+      "duration": 1.869,
+      "text": "used when you did the computer"
+    },
+    {
+      "index": 25,
+      "start": 90.479,
+      "end": 92.59,
+      "duration": 2.111,
+      "text": "experiments and I'll write the starting"
+    },
+    {
+      "index": 26,
+      "start": 92.6,
+      "end": 97.109,
+      "duration": 4.509,
+      "text": "point this way so y of x0 should be y0"
+    },
+    {
+      "index": 27,
+      "start": 97.119,
+      "end": 99.27,
+      "duration": 2.151,
+      "text": "so this is the initial condition and"
+    },
+    {
+      "index": 28,
+      "start": 99.28,
+      "end": 100.91,
+      "duration": 1.63,
+      "text": "this is the first order differential"
+    },
+    {
+      "index": 29,
+      "start": 100.92,
+      "end": 103.51,
+      "duration": 2.59,
+      "text": "equation and as you know the two of them"
+    },
+    {
+      "index": 30,
+      "start": 103.52,
+      "end": 108.35,
+      "duration": 4.83,
+      "text": "together are called an ivp an initial"
+    },
+    {
+      "index": 31,
+      "start": 108.36,
+      "end": 111.91,
+      "duration": 3.55,
+      "text": "value problem which means two things the"
+    },
+    {
+      "index": 32,
+      "start": 111.92,
+      "end": 114.109,
+      "duration": 2.189,
+      "text": "differential equation and the initial"
+    },
+    {
+      "index": 33,
+      "start": 114.119,
+      "end": 117.59,
+      "duration": 3.471,
+      "text": "value uh that you are want to start the"
+    },
+    {
+      "index": 34,
+      "start": 117.6,
+      "end": 120.749,
+      "duration": 3.149,
+      "text": "solution at"
+    },
+    {
+      "index": 35,
+      "start": 120.759,
+      "end": 125.709,
+      "duration": 4.95,
+      "text": "okay the uh now the"
+    },
+    {
+      "index": 36,
+      "start": 125.719,
+      "end": 129.109,
+      "duration": 3.39,
+      "text": "method we're going to talk about the"
+    },
+    {
+      "index": 37,
+      "start": 129.119,
+      "end": 132.35,
+      "duration": 3.231,
+      "text": "basic method of which many others are"
+    },
+    {
+      "index": 38,
+      "start": 132.36,
+      "end": 135.19,
+      "duration": 2.83,
+      "text": "merely refinements in one way or another"
+    },
+    {
+      "index": 39,
+      "start": 135.2,
+      "end": 144.949,
+      "duration": 9.749,
+      "text": "is uh called Oilers"
+    },
+    {
+      "index": 40,
+      "start": 147.79,
+      "end": 147.8,
+      "duration": 0.01,
+      "text": "method Oiler who did of course"
+    },
+    {
+      "index": 41,
+      "start": 147.8,
+      "end": 150.71,
+      "duration": 2.91,
+      "text": "everything in analysis did"
+    },
+    {
+      "index": 42,
+      "start": 150.72,
+      "end": 152.75,
+      "duration": 2.03,
+      "text": "as far as I know didn't actually use it"
+    },
+    {
+      "index": 43,
+      "start": 152.76,
+      "end": 154.589,
+      "duration": 1.829,
+      "text": "to compute Solutions of differential"
+    },
+    {
+      "index": 44,
+      "start": 154.599,
+      "end": 157.55,
+      "duration": 2.951,
+      "text": "equations his interest was theoretical"
+    },
+    {
+      "index": 45,
+      "start": 157.56,
+      "end": 159.83,
+      "duration": 2.27,
+      "text": "uh he used it as a method of proving the"
+    },
+    {
+      "index": 46,
+      "start": 159.84,
+      "end": 161.949,
+      "duration": 2.109,
+      "text": "existence theorem that proving that"
+    },
+    {
+      "index": 47,
+      "start": 161.959,
+      "end": 163.47,
+      "duration": 1.511,
+      "text": "Solutions"
+    },
+    {
+      "index": 48,
+      "start": 163.48,
+      "end": 167.229,
+      "duration": 3.749,
+      "text": "existed but uh nowadays it's used to"
+    },
+    {
+      "index": 49,
+      "start": 167.239,
+      "end": 170.149,
+      "duration": 2.91,
+      "text": "calculate the solutions numerically and"
+    },
+    {
+      "index": 50,
+      "start": 170.159,
+      "end": 173.39,
+      "duration": 3.231,
+      "text": "the method is very simple to describe"
+    },
+    {
+      "index": 51,
+      "start": 173.4,
+      "end": 176.47,
+      "duration": 3.07,
+      "text": "it's so naive if you probably think that"
+    },
+    {
+      "index": 52,
+      "start": 176.48,
+      "end": 178.869,
+      "duration": 2.389,
+      "text": "if you had been living 300 years ago you"
+    },
+    {
+      "index": 53,
+      "start": 178.879,
+      "end": 180.83,
+      "duration": 1.951,
+      "text": "would have discovered a and covered"
+    },
+    {
+      "index": 54,
+      "start": 180.84,
+      "end": 182.949,
+      "duration": 2.109,
+      "text": "yourself with glory for all"
+    },
+    {
+      "index": 55,
+      "start": 182.959,
+      "end": 185.91,
+      "duration": 2.951,
+      "text": "eternity here is uh so here is our"
+    },
+    {
+      "index": 56,
+      "start": 185.92,
+      "end": 192.47,
+      "duration": 6.55,
+      "text": "starting point uh x0"
+    },
+    {
+      "index": 57,
+      "start": 195.949,
+      "end": 195.959,
+      "duration": 0.01,
+      "text": "y0 now what information do we have at"
+    },
+    {
+      "index": 58,
+      "start": 195.959,
+      "end": 197.91,
+      "duration": 1.951,
+      "text": "that point all we have is the little"
+    },
+    {
+      "index": 59,
+      "start": 197.92,
+      "end": 200.789,
+      "duration": 2.869,
+      "text": "line element whose slope is given by F"
+    },
+    {
+      "index": 60,
+      "start": 200.799,
+      "end": 205.83,
+      "duration": 5.031,
+      "text": "ofx Y so if I start the solution the"
+    },
+    {
+      "index": 61,
+      "start": 205.84,
+      "end": 208.11,
+      "duration": 2.27,
+      "text": "only way the solution could possibly go"
+    },
+    {
+      "index": 62,
+      "start": 208.12,
+      "end": 210.509,
+      "duration": 2.389,
+      "text": "would be to start off in that Direction"
+    },
+    {
+      "index": 63,
+      "start": 210.519,
+      "end": 212.99,
+      "duration": 2.471,
+      "text": "since I have no other"
+    },
+    {
+      "index": 64,
+      "start": 213.0,
+      "end": 215.309,
+      "duration": 2.309,
+      "text": "information at least it's cor has the"
+    },
+    {
+      "index": 65,
+      "start": 215.319,
+      "end": 218.429,
+      "duration": 3.11,
+      "text": "correct direction at x0 y0 but of course"
+    },
+    {
+      "index": 66,
+      "start": 218.439,
+      "end": 220.03,
+      "duration": 1.591,
+      "text": "it's not likely to have the correct"
+    },
+    {
+      "index": 67,
+      "start": 220.04,
+      "end": 223.19,
+      "duration": 3.15,
+      "text": "direction anywhere else now what you do"
+    },
+    {
+      "index": 68,
+      "start": 223.2,
+      "end": 226.309,
+      "duration": 3.109,
+      "text": "then is choose a step size I'll draw"
+    },
+    {
+      "index": 69,
+      "start": 226.319,
+      "end": 228.869,
+      "duration": 2.55,
+      "text": "just a few two steps of the method"
+    },
+    {
+      "index": 70,
+      "start": 228.879,
+      "end": 232.27,
+      "duration": 3.391,
+      "text": "that's I think good enough uh you choose"
+    },
+    {
+      "index": 71,
+      "start": 232.28,
+      "end": 235.03,
+      "duration": 2.75,
+      "text": "a steps a uniform step size which is"
+    },
+    {
+      "index": 72,
+      "start": 235.04,
+      "end": 237.55,
+      "duration": 2.51,
+      "text": "usually called"
+    },
+    {
+      "index": 73,
+      "start": 237.56,
+      "end": 241.47,
+      "duration": 3.91,
+      "text": "H and you continue that solution until"
+    },
+    {
+      "index": 74,
+      "start": 241.48,
+      "end": 243.55,
+      "duration": 2.07,
+      "text": "you get to the next point which will be"
+    },
+    {
+      "index": 75,
+      "start": 243.56,
+      "end": 246.069,
+      "duration": 2.509,
+      "text": "x0 plus h as I've drawn it on the"
+    },
+    {
+      "index": 76,
+      "start": 246.079,
+      "end": 250.39,
+      "duration": 4.311,
+      "text": "picture so we get to here uh we stop at"
+    },
+    {
+      "index": 77,
+      "start": 250.4,
+      "end": 253.91,
+      "duration": 3.51,
+      "text": "that point and now you recalculate what"
+    },
+    {
+      "index": 78,
+      "start": 253.92,
+      "end": 256.83,
+      "duration": 2.91,
+      "text": "the line element is here suppose here"
+    },
+    {
+      "index": 79,
+      "start": 256.84,
+      "end": 259.59,
+      "duration": 2.75,
+      "text": "the line element now through this point"
+    },
+    {
+      "index": 80,
+      "start": 259.6,
+      "end": 262.59,
+      "duration": 2.99,
+      "text": "goes like that well then that's the new"
+    },
+    {
+      "index": 81,
+      "start": 262.6,
+      "end": 264.79,
+      "duration": 2.19,
+      "text": "direction that you should start out with"
+    },
+    {
+      "index": 82,
+      "start": 264.8,
+      "end": 266.95,
+      "duration": 2.15,
+      "text": "going from here and so the next step of"
+    },
+    {
+      "index": 83,
+      "start": 266.96,
+      "end": 270.07,
+      "duration": 3.11,
+      "text": "the process will carry you to here"
+    },
+    {
+      "index": 84,
+      "start": 270.08,
+      "end": 272.629,
+      "duration": 2.549,
+      "text": "that's two steps of Oilers method notice"
+    },
+    {
+      "index": 85,
+      "start": 272.639,
+      "end": 275.749,
+      "duration": 3.11,
+      "text": "it produces a broken line approximation"
+    },
+    {
+      "index": 86,
+      "start": 275.759,
+      "end": 278.31,
+      "duration": 2.551,
+      "text": "to the solution but in fact you only see"
+    },
+    {
+      "index": 87,
+      "start": 278.32,
+      "end": 279.67,
+      "duration": 1.35,
+      "text": "that broken"
+    },
+    {
+      "index": 88,
+      "start": 279.68,
+      "end": 283.51,
+      "duration": 3.83,
+      "text": "line if you're at a computer if you're"
+    },
+    {
+      "index": 89,
+      "start": 283.52,
+      "end": 285.55,
+      "duration": 2.03,
+      "text": "uh looking at the computer visual for"
+    },
+    {
+      "index": 90,
+      "start": 285.56,
+      "end": 287.629,
+      "duration": 2.069,
+      "text": "example which is whose purpose is to"
+    },
+    {
+      "index": 91,
+      "start": 287.639,
+      "end": 290.23,
+      "duration": 2.591,
+      "text": "illustrate for you Oilers method in"
+    },
+    {
+      "index": 92,
+      "start": 290.24,
+      "end": 293.71,
+      "duration": 3.47,
+      "text": "actual practice what you see is just the"
+    },
+    {
+      "index": 93,
+      "start": 293.72,
+      "end": 295.469,
+      "duration": 1.749,
+      "text": "computer is simply calculating this"
+    },
+    {
+      "index": 94,
+      "start": 295.479,
+      "end": 297.749,
+      "duration": 2.27,
+      "text": "point that point that point and the"
+    },
+    {
+      "index": 95,
+      "start": 297.759,
+      "end": 300.55,
+      "duration": 2.791,
+      "text": "succession of points and many programs"
+    },
+    {
+      "index": 96,
+      "start": 300.56,
+      "end": 302.51,
+      "duration": 1.95,
+      "text": "will just automatically connect those"
+    },
+    {
+      "index": 97,
+      "start": 302.52,
+      "end": 305.23,
+      "duration": 2.71,
+      "text": "points by a smooth looking curve if uh"
+    },
+    {
+      "index": 98,
+      "start": 305.24,
+      "end": 307.99,
+      "duration": 2.75,
+      "text": "that's what you prefer to"
+    },
+    {
+      "index": 99,
+      "start": 308.0,
+      "end": 311.469,
+      "duration": 3.469,
+      "text": "see well that's that's all there is to"
+    },
+    {
+      "index": 100,
+      "start": 311.479,
+      "end": 315.67,
+      "duration": 4.191,
+      "text": "the method uh what we have to do now is"
+    },
+    {
+      "index": 101,
+      "start": 315.68,
+      "end": 318.51,
+      "duration": 2.83,
+      "text": "derive the equations for the"
+    },
+    {
+      "index": 102,
+      "start": 318.52,
+      "end": 321.07,
+      "duration": 2.55,
+      "text": "method how are we going to do that well"
+    },
+    {
+      "index": 103,
+      "start": 321.08,
+      "end": 323.909,
+      "duration": 2.829,
+      "text": "the essence of it is how to get from the"
+    },
+    {
+      "index": 104,
+      "start": 323.919,
+      "end": 327.51,
+      "duration": 3.591,
+      "text": "nth step to the N plus First Step so I'm"
+    },
+    {
+      "index": 105,
+      "start": 327.52,
+      "end": 329.27,
+      "duration": 1.75,
+      "text": "going to draw that a picture just to"
+    },
+    {
+      "index": 106,
+      "start": 329.28,
+      "end": 331.15,
+      "duration": 1.87,
+      "text": "illustr"
+    },
+    {
+      "index": 107,
+      "start": 331.16,
+      "end": 334.749,
+      "duration": 3.589,
+      "text": "that so now we're not at x0 but let's"
+    },
+    {
+      "index": 108,
+      "start": 334.759,
+      "end": 339.309,
+      "duration": 4.55,
+      "text": "say we've already gotten to xn"
+    },
+    {
+      "index": 109,
+      "start": 342.95,
+      "end": 342.96,
+      "duration": 0.01,
+      "text": "YN how do I take the next step well I"
+    },
+    {
+      "index": 110,
+      "start": 342.96,
+      "end": 345.83,
+      "duration": 2.87,
+      "text": "take the line element and it goes up"
+    },
+    {
+      "index": 111,
+      "start": 345.84,
+      "end": 349.39,
+      "duration": 3.55,
+      "text": "like that let's say because the slope is"
+    },
+    {
+      "index": 112,
+      "start": 349.4,
+      "end": 353.309,
+      "duration": 3.909,
+      "text": "uh this I'm going to call that slope a"
+    },
+    {
+      "index": 113,
+      "start": 353.319,
+      "end": 357.469,
+      "duration": 4.15,
+      "text": "subn of course a subn is the value of"
+    },
+    {
+      "index": 114,
+      "start": 357.479,
+      "end": 360.029,
+      "duration": 2.55,
+      "text": "the right hand side at the point xn1 YN"
+    },
+    {
+      "index": 115,
+      "start": 360.039,
+      "end": 362.029,
+      "duration": 1.99,
+      "text": "and we'll need that in the equation but"
+    },
+    {
+      "index": 116,
+      "start": 362.039,
+      "end": 363.67,
+      "duration": 1.631,
+      "text": "I think it will be a little clearer if I"
+    },
+    {
+      "index": 117,
+      "start": 363.68,
+      "end": 365.51,
+      "duration": 1.83,
+      "text": "just give it a capital letter at this"
+    },
+    {
+      "index": 118,
+      "start": 365.52,
+      "end": 368.11,
+      "duration": 2.59,
+      "text": "point"
+    },
+    {
+      "index": 119,
+      "start": 368.12,
+      "end": 371.23,
+      "duration": 3.11,
+      "text": "now how this is the new point and all I"
+    },
+    {
+      "index": 120,
+      "start": 371.24,
+      "end": 374.27,
+      "duration": 3.03,
+      "text": "want to know is what are its coordinates"
+    },
+    {
+      "index": 121,
+      "start": 374.28,
+      "end": 377.87,
+      "duration": 3.59,
+      "text": "well the xn + one is there the YN + one"
+    },
+    {
+      "index": 122,
+      "start": 377.88,
+      "end": 378.99,
+      "duration": 1.11,
+      "text": "is"
+    },
+    {
+      "index": 123,
+      "start": 379.0,
+      "end": 381.95,
+      "duration": 2.95,
+      "text": "here clearly I should draw this triangle"
+    },
+    {
+      "index": 124,
+      "start": 381.96,
+      "end": 383.029,
+      "duration": 1.069,
+      "text": "complete the"
+    },
+    {
+      "index": 125,
+      "start": 383.039,
+      "end": 386.309,
+      "duration": 3.27,
+      "text": "triangle this side of the triangle this"
+    },
+    {
+      "index": 126,
+      "start": 386.319,
+      "end": 389.27,
+      "duration": 2.951,
+      "text": "the hypotenuse has slope a n this side"
+    },
+    {
+      "index": 127,
+      "start": 389.28,
+      "end": 392.309,
+      "duration": 3.029,
+      "text": "of the triangle has length H H is the"
+    },
+    {
+      "index": 128,
+      "start": 392.319,
+      "end": 395.39,
+      "duration": 3.071,
+      "text": "step size perhaps I better indicate that"
+    },
+    {
+      "index": 129,
+      "start": 395.4,
+      "end": 397.23,
+      "duration": 1.83,
+      "text": "actually put that up so that you know"
+    },
+    {
+      "index": 130,
+      "start": 397.24,
+      "end": 400.83,
+      "duration": 3.59,
+      "text": "the word step size it means how it's the"
+    },
+    {
+      "index": 131,
+      "start": 400.84,
+      "end": 403.51,
+      "duration": 2.67,
+      "text": "step size on the x axis how far you have"
+    },
+    {
+      "index": 132,
+      "start": 403.52,
+      "end": 405.909,
+      "duration": 2.389,
+      "text": "to go to get from each x to the next"
+    },
+    {
+      "index": 133,
+      "start": 405.919,
+      "end": 410.749,
+      "duration": 4.83,
+      "text": "one what's this well if that slope has"
+    },
+    {
+      "index": 134,
+      "start": 410.759,
+      "end": 414.07,
+      "duration": 3.311,
+      "text": "this the slope a n this is H then this"
+    },
+    {
+      "index": 135,
+      "start": 414.08,
+      "end": 416.309,
+      "duration": 2.229,
+      "text": "must be H * a"
+    },
+    {
+      "index": 136,
+      "start": 416.319,
+      "end": 419.95,
+      "duration": 3.631,
+      "text": "n the length of that side"
+    },
+    {
+      "index": 137,
+      "start": 419.96,
+      "end": 422.07,
+      "duration": 2.11,
+      "text": "right in order that the ratio of the"
+    },
+    {
+      "index": 138,
+      "start": 422.08,
+      "end": 425.83,
+      "duration": 3.75,
+      "text": "height to this width should be a n and"
+    },
+    {
+      "index": 139,
+      "start": 425.84,
+      "end": 427.23,
+      "duration": 1.39,
+      "text": "that gives us the"
+    },
+    {
+      "index": 140,
+      "start": 427.24,
+      "end": 429.589,
+      "duration": 2.349,
+      "text": "method what's"
+    },
+    {
+      "index": 141,
+      "start": 429.599,
+      "end": 433.909,
+      "duration": 4.31,
+      "text": "the how do I get from uh clearly to get"
+    },
+    {
+      "index": 142,
+      "start": 433.919,
+      "end": 436.909,
+      "duration": 2.99,
+      "text": "from xn to xn plus one I simply add H so"
+    },
+    {
+      "index": 143,
+      "start": 436.919,
+      "end": 438.51,
+      "duration": 1.591,
+      "text": "that's the trivial part of it the"
+    },
+    {
+      "index": 144,
+      "start": 438.52,
+      "end": 440.11,
+      "duration": 1.59,
+      "text": "interesting thing is how do I get the"
+    },
+    {
+      "index": 145,
+      "start": 440.12,
+      "end": 443.15,
+      "duration": 3.03,
+      "text": "new YN + one and so the best way to"
+    },
+    {
+      "index": 146,
+      "start": 443.16,
+      "end": 447.95,
+      "duration": 4.79,
+      "text": "write it as that YN + 1us"
+    },
+    {
+      "index": 147,
+      "start": 447.96,
+      "end": 452.43,
+      "duration": 4.47,
+      "text": "YN divided by"
+    },
+    {
+      "index": 148,
+      "start": 452.44,
+      "end": 458.83,
+      "duration": 6.39,
+      "text": "H well YN sorry YN + 1 minus YN is is"
+    },
+    {
+      "index": 149,
+      "start": 458.84,
+      "end": 462.589,
+      "duration": 3.749,
+      "text": "this line the same as the line H * a n"
+    },
+    {
+      "index": 150,
+      "start": 462.599,
+      "end": 467.23,
+      "duration": 4.631,
+      "text": "so that's the way to write"
+    },
+    {
+      "index": 151,
+      "start": 470.71,
+      "end": 470.72,
+      "duration": 0.01,
+      "text": "it or since the computer is interested"
+    },
+    {
+      "index": 152,
+      "start": 470.72,
+      "end": 473.909,
+      "duration": 3.189,
+      "text": "in calculating YN + one itself put this"
+    },
+    {
+      "index": 153,
+      "start": 473.919,
+      "end": 477.589,
+      "duration": 3.67,
+      "text": "on the other side it you take the old YN"
+    },
+    {
+      "index": 154,
+      "start": 477.599,
+      "end": 481.149,
+      "duration": 3.55,
+      "text": "the previous one and to it you add H"
+    },
+    {
+      "index": 155,
+      "start": 481.159,
+      "end": 485.469,
+      "duration": 4.31,
+      "text": "time a n and what prel is a n well the"
+    },
+    {
+      "index": 156,
+      "start": 485.479,
+      "end": 487.35,
+      "duration": 1.871,
+      "text": "computer has to be told that a n is the"
+    },
+    {
+      "index": 157,
+      "start": 487.36,
+      "end": 490.11,
+      "duration": 2.75,
+      "text": "value of f so now with that let's"
+    },
+    {
+      "index": 158,
+      "start": 490.12,
+      "end": 492.749,
+      "duration": 2.629,
+      "text": "actually write the oiler program not the"
+    },
+    {
+      "index": 159,
+      "start": 492.759,
+      "end": 495.589,
+      "duration": 2.83,
+      "text": "program but the oiler the oiler method"
+    },
+    {
+      "index": 160,
+      "start": 495.599,
+      "end": 497.99,
+      "duration": 2.391,
+      "text": "equations let's just call it the oiler"
+    },
+    {
+      "index": 161,
+      "start": 498.0,
+      "end": 501.469,
+      "duration": 3.469,
+      "text": "equations what will they be first of all"
+    },
+    {
+      "index": 162,
+      "start": 501.479,
+      "end": 506.589,
+      "duration": 5.11,
+      "text": "the new X is the old x +"
+    },
+    {
+      "index": 163,
+      "start": 506.599,
+      "end": 511.35,
+      "duration": 4.751,
+      "text": "H the new Y is is just what I've written"
+    },
+    {
+      "index": 164,
+      "start": 511.36,
+      "end": 516.63,
+      "duration": 5.27,
+      "text": "there the old y plus h * a certain"
+    },
+    {
+      "index": 165,
+      "start": 516.64,
+      "end": 522.029,
+      "duration": 5.389,
+      "text": "number a n and finally a n has the value"
+    },
+    {
+      "index": 166,
+      "start": 522.039,
+      "end": 524.63,
+      "duration": 2.591,
+      "text": "it's the slope of the line element here"
+    },
+    {
+      "index": 167,
+      "start": 524.64,
+      "end": 527.509,
+      "duration": 2.869,
+      "text": "and therefore by definition that's F of"
+    },
+    {
+      "index": 168,
+      "start": 527.519,
+      "end": 529.949,
+      "duration": 2.43,
+      "text": "xn"
+    },
+    {
+      "index": 169,
+      "start": 529.959,
+      "end": 533.59,
+      "duration": 3.631,
+      "text": "YN so it's these three equations which"
+    },
+    {
+      "index": 170,
+      "start": 533.6,
+      "end": 537.99,
+      "duration": 4.39,
+      "text": "Define Oilers method if I assume in 100"
+    },
+    {
+      "index": 171,
+      "start": 538.0,
+      "end": 541.63,
+      "duration": 3.63,
+      "text": "surely you must be asked is uh to at"
+    },
+    {
+      "index": 172,
+      "start": 541.64,
+      "end": 544.15,
+      "duration": 2.51,
+      "text": "some point as an exercise in the term at"
+    },
+    {
+      "index": 173,
+      "start": 544.16,
+      "end": 547.99,
+      "duration": 3.83,
+      "text": "one point to uh to uh calculate to"
+    },
+    {
+      "index": 174,
+      "start": 548.0,
+      "end": 550.31,
+      "duration": 2.31,
+      "text": "program the computer in C or whatever"
+    },
+    {
+      "index": 175,
+      "start": 550.32,
+      "end": 552.75,
+      "duration": 2.43,
+      "text": "they're using Java now I guess uh to do"
+    },
+    {
+      "index": 176,
+      "start": 552.76,
+      "end": 555.19,
+      "duration": 2.43,
+      "text": "Oiler Oilers method and these are the"
+    },
+    {
+      "index": 177,
+      "start": 555.2,
+      "end": 556.63,
+      "duration": 1.43,
+      "text": "equations you these would be the"
+    },
+    {
+      "index": 178,
+      "start": 556.64,
+      "end": 558.47,
+      "duration": 1.83,
+      "text": "recursive equations that you would put"
+    },
+    {
+      "index": 179,
+      "start": 558.48,
+      "end": 560.15,
+      "duration": 1.67,
+      "text": "in to do"
+    },
+    {
+      "index": 180,
+      "start": 560.16,
+      "end": 564.509,
+      "duration": 4.349,
+      "text": "that okay uh let's try uh an example"
+    },
+    {
+      "index": 181,
+      "start": 564.519,
+      "end": 569.87,
+      "duration": 5.351,
+      "text": "then"
+    },
+    {
+      "index": 182,
+      "start": 572.11,
+      "end": 572.12,
+      "duration": 0.01,
+      "text": "so what would be a good color for wher"
+    },
+    {
+      "index": 183,
+      "start": 572.12,
+      "end": 574.91,
+      "duration": 2.79,
+      "text": "well a purple I assume nobody can see"
+    },
+    {
+      "index": 184,
+      "start": 574.92,
+      "end": 576.43,
+      "duration": 1.51,
+      "text": "purple is that"
+    },
+    {
+      "index": 185,
+      "start": 576.44,
+      "end": 578.31,
+      "duration": 1.87,
+      "text": "correct can anyone in the back of the"
+    },
+    {
+      "index": 186,
+      "start": 578.32,
+      "end": 580.47,
+      "duration": 2.15,
+      "text": "room see that that that's"
+    },
+    {
+      "index": 187,
+      "start": 580.48,
+      "end": 582.11,
+      "duration": 1.63,
+      "text": "purple"
+    },
+    {
+      "index": 188,
+      "start": 582.12,
+      "end": 590.71,
+      "duration": 8.59,
+      "text": "what okay sit"
+    },
+    {
+      "index": 189,
+      "start": 594.829,
+      "end": 594.839,
+      "duration": 0.01,
+      "text": "closer so let's calculate uh the example"
+    },
+    {
+      "index": 190,
+      "start": 594.839,
+      "end": 598.35,
+      "duration": 3.511,
+      "text": "I'll use a simple example but it's not"
+    },
+    {
+      "index": 191,
+      "start": 598.36,
+      "end": 599.949,
+      "duration": 1.589,
+      "text": "entirely trivial"
+    },
+    {
+      "index": 192,
+      "start": 599.959,
+      "end": 602.15,
+      "duration": 2.191,
+      "text": "my example is going to be the equation"
+    },
+    {
+      "index": 193,
+      "start": 602.16,
+      "end": 606.47,
+      "duration": 4.31,
+      "text": "x^2 - y^2 on the right hand side and"
+    },
+    {
+      "index": 194,
+      "start": 606.48,
+      "end": 609.79,
+      "duration": 3.31,
+      "text": "let's start with Y of 0 equals one let's"
+    },
+    {
+      "index": 195,
+      "start": 609.8,
+      "end": 612.829,
+      "duration": 3.029,
+      "text": "say and so this is my initial value"
+    },
+    {
+      "index": 196,
+      "start": 612.839,
+      "end": 617.389,
+      "duration": 4.55,
+      "text": "problem that pair of equations and uh I"
+    },
+    {
+      "index": 197,
+      "start": 617.399,
+      "end": 620.59,
+      "duration": 3.191,
+      "text": "have to specify a step size so let's"
+    },
+    {
+      "index": 198,
+      "start": 620.6,
+      "end": 622.55,
+      "duration": 1.95,
+      "text": "take the step size to be"
+    },
+    {
+      "index": 199,
+      "start": 622.56,
+      "end": 625.269,
+      "duration": 2.709,
+      "text": "0.1 you choose the step size or the"
+    },
+    {
+      "index": 200,
+      "start": 625.279,
+      "end": 627.63,
+      "duration": 2.351,
+      "text": "computer does uh we'll have to talk"
+    },
+    {
+      "index": 201,
+      "start": 627.64,
+      "end": 630.19,
+      "duration": 2.55,
+      "text": "about that in a few minutes"
+    },
+    {
+      "index": 202,
+      "start": 630.2,
+      "end": 632.31,
+      "duration": 2.11,
+      "text": "now what do you do"
+    },
+    {
+      "index": 203,
+      "start": 632.32,
+      "end": 634.91,
+      "duration": 2.59,
+      "text": "well I say this is a non-trivial"
+    },
+    {
+      "index": 204,
+      "start": 634.92,
+      "end": 637.629,
+      "duration": 2.709,
+      "text": "equation because uh this equation as far"
+    },
+    {
+      "index": 205,
+      "start": 637.639,
+      "end": 640.19,
+      "duration": 2.551,
+      "text": "as I know cannot be solved in terms of"
+    },
+    {
+      "index": 206,
+      "start": 640.2,
+      "end": 642.91,
+      "duration": 2.71,
+      "text": "Elementary functions so this equation"
+    },
+    {
+      "index": 207,
+      "start": 642.92,
+      "end": 645.069,
+      "duration": 2.149,
+      "text": "would be in fact a very good candidate"
+    },
+    {
+      "index": 208,
+      "start": 645.079,
+      "end": 647.47,
+      "duration": 2.391,
+      "text": "for numerical a numerical method like"
+    },
+    {
+      "index": 209,
+      "start": 647.48,
+      "end": 650.389,
+      "duration": 2.909,
+      "text": "Oilers and you had to use it or maybe it"
+    },
+    {
+      "index": 210,
+      "start": 650.399,
+      "end": 652.069,
+      "duration": 1.67,
+      "text": "was the other way around I forget on"
+    },
+    {
+      "index": 211,
+      "start": 652.079,
+      "end": 655.19,
+      "duration": 3.111,
+      "text": "your problem Set uh you drew a picture"
+    },
+    {
+      "index": 212,
+      "start": 655.2,
+      "end": 657.35,
+      "duration": 2.15,
+      "text": "of the direction field and answered some"
+    },
+    {
+      "index": 213,
+      "start": 657.36,
+      "end": 660.91,
+      "duration": 3.55,
+      "text": "questions about the iines"
+    },
+    {
+      "index": 214,
+      "start": 660.92,
+      "end": 664.19,
+      "duration": 3.27,
+      "text": "how the solutions behave all right now"
+    },
+    {
+      "index": 215,
+      "start": 664.2,
+      "end": 666.55,
+      "duration": 2.35,
+      "text": "the main thing I want you to get uh this"
+    },
+    {
+      "index": 216,
+      "start": 666.56,
+      "end": 668.71,
+      "duration": 2.15,
+      "text": "is not just for Oilers talking about"
+    },
+    {
+      "index": 217,
+      "start": 668.72,
+      "end": 670.79,
+      "duration": 2.07,
+      "text": "Oilers equations but in"
+    },
+    {
+      "index": 218,
+      "start": 670.8,
+      "end": 673.389,
+      "duration": 2.589,
+      "text": "general for the calculations you have to"
+    },
+    {
+      "index": 219,
+      "start": 673.399,
+      "end": 675.03,
+      "duration": 1.631,
+      "text": "do in this course it's extremely"
+    },
+    {
+      "index": 220,
+      "start": 675.04,
+      "end": 677.35,
+      "duration": 2.31,
+      "text": "important to be systematic because if"
+    },
+    {
+      "index": 221,
+      "start": 677.36,
+      "end": 679.35,
+      "duration": 1.99,
+      "text": "you are not systematic you know if you"
+    },
+    {
+      "index": 222,
+      "start": 679.36,
+      "end": 681.15,
+      "duration": 1.79,
+      "text": "just scribble scribble scribble scribble"
+    },
+    {
+      "index": 223,
+      "start": 681.16,
+      "end": 683.629,
+      "duration": 2.469,
+      "text": "scribble you can do the work but it"
+    },
+    {
+      "index": 224,
+      "start": 683.639,
+      "end": 685.949,
+      "duration": 2.31,
+      "text": "becomes impossible to find"
+    },
+    {
+      "index": 225,
+      "start": 685.959,
+      "end": 688.91,
+      "duration": 2.951,
+      "text": "mistakes you must do the work in a form"
+    },
+    {
+      "index": 226,
+      "start": 688.92,
+      "end": 691.069,
+      "duration": 2.149,
+      "text": "in which which you can check in which it"
+    },
+    {
+      "index": 227,
+      "start": 691.079,
+      "end": 693.11,
+      "duration": 2.031,
+      "text": "can be checked which you can look over"
+    },
+    {
+      "index": 228,
+      "start": 693.12,
+      "end": 696.19,
+      "duration": 3.07,
+      "text": "it find and try to see where mistakes"
+    },
+    {
+      "index": 229,
+      "start": 696.2,
+      "end": 699.19,
+      "duration": 2.99,
+      "text": "are if in fact there are any so I I"
+    },
+    {
+      "index": 230,
+      "start": 699.2,
+      "end": 700.43,
+      "duration": 1.23,
+      "text": "strongly"
+    },
+    {
+      "index": 231,
+      "start": 700.44,
+      "end": 703.59,
+      "duration": 3.15,
+      "text": "suggest uh this is not a suggestion this"
+    },
+    {
+      "index": 232,
+      "start": 703.6,
+      "end": 707.31,
+      "duration": 3.71,
+      "text": "is a command uh that you make a little"
+    },
+    {
+      "index": 233,
+      "start": 707.32,
+      "end": 710.67,
+      "duration": 3.35,
+      "text": "tight to do a Oilers method by hand I'd"
+    },
+    {
+      "index": 234,
+      "start": 710.68,
+      "end": 713.31,
+      "duration": 2.63,
+      "text": "only ask you for a step or two since I'm"
+    },
+    {
+      "index": 235,
+      "start": 713.32,
+      "end": 715.509,
+      "duration": 2.189,
+      "text": "just trying to make sure you have some"
+    },
+    {
+      "index": 236,
+      "start": 715.519,
+      "end": 717.43,
+      "duration": 1.911,
+      "text": "idea of these equations and where they"
+    },
+    {
+      "index": 237,
+      "start": 717.44,
+      "end": 719.43,
+      "duration": 1.99,
+      "text": "come from"
+    },
+    {
+      "index": 238,
+      "start": 719.44,
+      "end": 722.509,
+      "duration": 3.069,
+      "text": "so first the value of n then the value"
+    },
+    {
+      "index": 239,
+      "start": 722.519,
+      "end": 726.31,
+      "duration": 3.791,
+      "text": "of xn then the value of the"
+    },
+    {
+      "index": 240,
+      "start": 726.32,
+      "end": 729.509,
+      "duration": 3.189,
+      "text": "YN and then a couple of more columns"
+    },
+    {
+      "index": 241,
+      "start": 729.519,
+      "end": 732.269,
+      "duration": 2.75,
+      "text": "which tell you what the calcul how to do"
+    },
+    {
+      "index": 242,
+      "start": 732.279,
+      "end": 734.47,
+      "duration": 2.191,
+      "text": "the calculation you're going to need the"
+    },
+    {
+      "index": 243,
+      "start": 734.48,
+      "end": 736.269,
+      "duration": 1.789,
+      "text": "value of the"
+    },
+    {
+      "index": 244,
+      "start": 736.279,
+      "end": 740.23,
+      "duration": 3.951,
+      "text": "slope and it's probably a good idea also"
+    },
+    {
+      "index": 245,
+      "start": 740.24,
+      "end": 742.31,
+      "duration": 2.07,
+      "text": "because otherwise you'll forget it to"
+    },
+    {
+      "index": 246,
+      "start": 742.32,
+      "end": 747.15,
+      "duration": 4.83,
+      "text": "put in h a because that occurs in the"
+    },
+    {
+      "index": 247,
+      "start": 747.16,
+      "end": 749.55,
+      "duration": 2.39,
+      "text": "formula all right let's start doing it"
+    },
+    {
+      "index": 248,
+      "start": 749.56,
+      "end": 752.069,
+      "duration": 2.509,
+      "text": "well the first value of n is zero that's"
+    },
+    {
+      "index": 249,
+      "start": 752.079,
+      "end": 754.75,
+      "duration": 2.671,
+      "text": "the starting point at the starting point"
+    },
+    {
+      "index": 250,
+      "start": 754.76,
+      "end": 759.67,
+      "duration": 4.91,
+      "text": "x0 y0 x has the value zero and Y has the"
+    },
+    {
+      "index": 251,
+      "start": 759.68,
+      "end": 763.79,
+      "duration": 4.11,
+      "text": "value one so zero and"
+    },
+    {
+      "index": 252,
+      "start": 763.8,
+      "end": 767.509,
+      "duration": 3.709,
+      "text": "one in other words I'm starting I'm"
+    },
+    {
+      "index": 253,
+      "start": 767.519,
+      "end": 770.389,
+      "duration": 2.87,
+      "text": "carrying out exactly what I drew"
+    },
+    {
+      "index": 254,
+      "start": 770.399,
+      "end": 772.949,
+      "duration": 2.55,
+      "text": "pictorially only now I'm doing it"
+    },
+    {
+      "index": 255,
+      "start": 772.959,
+      "end": 775.23,
+      "duration": 2.271,
+      "text": "arithmetically using a table and"
+    },
+    {
+      "index": 256,
+      "start": 775.24,
+      "end": 778.189,
+      "duration": 2.949,
+      "text": "substituting into the formulas okay the"
+    },
+    {
+      "index": 257,
+      "start": 778.199,
+      "end": 780.509,
+      "duration": 2.31,
+      "text": "next thing we have to calc Cal is a n"
+    },
+    {
+      "index": 258,
+      "start": 780.519,
+      "end": 783.829,
+      "duration": 3.31,
+      "text": "well that's since a n is the value of"
+    },
+    {
+      "index": 259,
+      "start": 783.839,
+      "end": 785.31,
+      "duration": 1.471,
+      "text": "the right hand"
+    },
+    {
+      "index": 260,
+      "start": 785.32,
+      "end": 788.829,
+      "duration": 3.509,
+      "text": "side at the 01 you have to plug that in"
+    },
+    {
+      "index": 261,
+      "start": 788.839,
+      "end": 793.23,
+      "duration": 4.391,
+      "text": "the right hand side is x0 x^2 - y^2 so"
+    },
+    {
+      "index": 262,
+      "start": 793.24,
+      "end": 797.11,
+      "duration": 3.87,
+      "text": "it's 0^ 2us 1^ squar the value of the"
+    },
+    {
+      "index": 263,
+      "start": 797.12,
+      "end": 800.91,
+      "duration": 3.79,
+      "text": "slope there is minus one negative 1 now"
+    },
+    {
+      "index": 264,
+      "start": 800.92,
+      "end": 804.59,
+      "duration": 3.67,
+      "text": "I have to multiply that by H H is 0.1 so"
+    },
+    {
+      "index": 265,
+      "start": 804.6,
+      "end": 808.35,
+      "duration": 3.75,
+      "text": "it's minus sorry negative I'll never"
+    },
+    {
+      "index": 266,
+      "start": 808.36,
+      "end": 810.35,
+      "duration": 1.99,
+      "text": "learn that"
+    },
+    {
+      "index": 267,
+      "start": 810.36,
+      "end": 811.509,
+      "duration": 1.149,
+      "text": "the way you learn to talk in"
+    },
+    {
+      "index": 268,
+      "start": 811.519,
+      "end": 813.11,
+      "duration": 1.591,
+      "text": "kindergarten is the way you learn to"
+    },
+    {
+      "index": 269,
+      "start": 813.12,
+      "end": 814.87,
+      "duration": 1.75,
+      "text": "talk the rest of your life"
+    },
+    {
+      "index": 270,
+      "start": 814.88,
+      "end": 818.15,
+      "duration": 3.27,
+      "text": "unfortunately uh kindergarten we said"
+    },
+    {
+      "index": 271,
+      "start": 818.16,
+      "end": 821.87,
+      "duration": 3.71,
+      "text": "minus uh Sor negative"
+    },
+    {
+      "index": 272,
+      "start": 821.88,
+      "end": 827.509,
+      "duration": 5.629,
+      "text": ".1"
+    },
+    {
+      "index": 273,
+      "start": 831.59,
+      "end": 831.6,
+      "duration": 0.01,
+      "text": "uh n is one now what's the value of xn"
+    },
+    {
+      "index": 274,
+      "start": 831.6,
+      "end": 834.949,
+      "duration": 3.349,
+      "text": "well to the old one I add"
+    },
+    {
+      "index": 275,
+      "start": 834.959,
+      "end": 837.67,
+      "duration": 2.711,
+      "text": "on10th what's the value of y well at"
+    },
+    {
+      "index": 276,
+      "start": 837.68,
+      "end": 839.509,
+      "duration": 1.829,
+      "text": "this point you have to do the"
+    },
+    {
+      "index": 277,
+      "start": 839.519,
+      "end": 843.269,
+      "duration": 3.75,
+      "text": "calculation it's the old value of y to"
+    },
+    {
+      "index": 278,
+      "start": 843.279,
+      "end": 846.43,
+      "duration": 3.151,
+      "text": "get this new value it's the old Value"
+    },
+    {
+      "index": 279,
+      "start": 846.44,
+      "end": 849.829,
+      "duration": 3.389,
+      "text": "Plus this number well that's this plus"
+    },
+    {
+      "index": 280,
+      "start": 849.839,
+      "end": 854.91,
+      "duration": 5.071,
+      "text": "that number is"
+    },
+    {
+      "index": 281,
+      "start": 858.31,
+      "end": 858.32,
+      "duration": 0.01,
+      "text": "9/10 a n now I have to calculate the new"
+    },
+    {
+      "index": 282,
+      "start": 858.32,
+      "end": 862.269,
+      "duration": 3.949,
+      "text": "slope at this point okay that is one10"
+    },
+    {
+      "index": 283,
+      "start": 862.279,
+      "end": 867.43,
+      "duration": 5.151,
+      "text": "squared - 910 squared Gul that's"
+    },
+    {
+      "index": 284,
+      "start": 867.44,
+      "end": 869.949,
+      "duration": 2.509,
+      "text": "0.001 minus"
+    },
+    {
+      "index": 285,
+      "start": 869.959,
+      "end": 872.79,
+      "duration": 2.831,
+      "text": "81 which makes"
+    },
+    {
+      "index": 286,
+      "start": 872.8,
+      "end": 877.03,
+      "duration": 4.23,
+      "text": "minus80 I"
+    },
+    {
+      "index": 287,
+      "start": 880.35,
+      "end": 880.36,
+      "duration": 0.01,
+      "text": "hope check it on your calculators uh"
+    },
+    {
+      "index": 288,
+      "start": 880.36,
+      "end": 884.509,
+      "duration": 4.149,
+      "text": "whip them out and press the buttons uh I"
+    },
+    {
+      "index": 289,
+      "start": 884.519,
+      "end": 888.189,
+      "duration": 3.67,
+      "text": "now multiply that by H and which means"
+    },
+    {
+      "index": 290,
+      "start": 888.199,
+      "end": 891.91,
+      "duration": 3.711,
+      "text": "it's going to be minus"
+    },
+    {
+      "index": 291,
+      "start": 895.189,
+      "end": 895.199,
+      "duration": 0.01,
+      "text": ".08 uh perhaps with a zero after I"
+    },
+    {
+      "index": 292,
+      "start": 895.199,
+      "end": 897.11,
+      "duration": 1.911,
+      "text": "didn't tell you how many decimal places"
+    },
+    {
+      "index": 293,
+      "start": 897.12,
+      "end": 899.829,
+      "duration": 2.709,
+      "text": "let's carry it out to two decimal places"
+    },
+    {
+      "index": 294,
+      "start": 899.839,
+      "end": 903.67,
+      "duration": 3.831,
+      "text": "I think uh that'll be uh good"
+    },
+    {
+      "index": 295,
+      "start": 903.68,
+      "end": 906.55,
+      "duration": 2.87,
+      "text": "enough and finally the last step two"
+    },
+    {
+      "index": 296,
+      "start": 906.56,
+      "end": 909.71,
+      "duration": 3.15,
+      "text": "here add one add another one10 so the"
+    },
+    {
+      "index": 297,
+      "start": 909.72,
+      "end": 912.99,
+      "duration": 3.27,
+      "text": "value of x is now 210 and finally what's"
+    },
+    {
+      "index": 298,
+      "start": 913.0,
+      "end": 914.71,
+      "duration": 1.71,
+      "text": "the value of y well I didn't tell you"
+    },
+    {
+      "index": 299,
+      "start": 914.72,
+      "end": 919.59,
+      "duration": 4.87,
+      "text": "where to stop let's stop at y of Point"
+    },
+    {
+      "index": 300,
+      "start": 919.6,
+      "end": 921.31,
+      "duration": 1.71,
+      "text": "let's stop at y of point2 because"
+    },
+    {
+      "index": 301,
+      "start": 921.32,
+      "end": 923.79,
+      "duration": 2.47,
+      "text": "there's no more room on the Blackboard"
+    },
+    {
+      "index": 302,
+      "start": 923.8,
+      "end": 925.269,
+      "duration": 1.469,
+      "text": "seems like an"
+    },
+    {
+      "index": 303,
+      "start": 925.279,
+      "end": 927.829,
+      "duration": 2.55,
+      "text": "excellent about approximately how big is"
+    },
+    {
+      "index": 304,
+      "start": 927.839,
+      "end": 930.23,
+      "duration": 2.391,
+      "text": "that in other words then uh this is"
+    },
+    {
+      "index": 305,
+      "start": 930.24,
+      "end": 932.189,
+      "duration": 1.949,
+      "text": "going to"
+    },
+    {
+      "index": 306,
+      "start": 932.199,
+      "end": 935.11,
+      "duration": 2.911,
+      "text": "be"
+    },
+    {
+      "index": 307,
+      "start": 935.12,
+      "end": 940.91,
+      "duration": 5.79,
+      "text": "uh this uh the old y uh plus this number"
+    },
+    {
+      "index": 308,
+      "start": 940.92,
+      "end": 947.269,
+      "duration": 6.349,
+      "text": "which seems to be0 82 to"
+    },
+    {
+      "index": 309,
+      "start": 951.71,
+      "end": 951.72,
+      "duration": 0.01,
+      "text": "me so the answer is the new value is"
+    },
+    {
+      "index": 310,
+      "start": 951.72,
+      "end": 954.309,
+      "duration": 2.589,
+      "text": "82 okay well we got a number we did what"
+    },
+    {
+      "index": 311,
+      "start": 954.319,
+      "end": 956.629,
+      "duration": 2.31,
+      "text": "we were supposed to do we got a number"
+    },
+    {
+      "index": 312,
+      "start": 956.639,
+      "end": 959.15,
+      "duration": 2.511,
+      "text": "next question well now let's ask a few"
+    },
+    {
+      "index": 313,
+      "start": 959.16,
+      "end": 960.87,
+      "duration": 1.71,
+      "text": "questions one of the first most basic"
+    },
+    {
+      "index": 314,
+      "start": 960.88,
+      "end": 965.55,
+      "duration": 4.67,
+      "text": "thing is you know how right is"
+    },
+    {
+      "index": 315,
+      "start": 968.59,
+      "end": 968.6,
+      "duration": 0.01,
+      "text": "this how can I answer such a question if"
+    },
+    {
+      "index": 316,
+      "start": 968.6,
+      "end": 971.71,
+      "duration": 3.11,
+      "text": "I can't calc if I have no explicit"
+    },
+    {
+      "index": 317,
+      "start": 971.72,
+      "end": 973.91,
+      "duration": 2.19,
+      "text": "formula for that Solution that's the"
+    },
+    {
+      "index": 318,
+      "start": 973.92,
+      "end": 976.87,
+      "duration": 2.95,
+      "text": "basic problem with numerical"
+    },
+    {
+      "index": 319,
+      "start": 976.88,
+      "end": 979.35,
+      "duration": 2.47,
+      "text": "calculation in other words I have to"
+    },
+    {
+      "index": 320,
+      "start": 979.36,
+      "end": 981.99,
+      "duration": 2.63,
+      "text": "wander around in the dark to some extent"
+    },
+    {
+      "index": 321,
+      "start": 982.0,
+      "end": 984.35,
+      "duration": 2.35,
+      "text": "and yet have some idea when I've arrived"
+    },
+    {
+      "index": 322,
+      "start": 984.36,
+      "end": 986.11,
+      "duration": 1.75,
+      "text": "at the place that I want to"
+    },
+    {
+      "index": 323,
+      "start": 986.12,
+      "end": 988.55,
+      "duration": 2.43,
+      "text": "go well the first question I'd like to"
+    },
+    {
+      "index": 324,
+      "start": 988.56,
+      "end": 989.43,
+      "duration": 0.87,
+      "text": "answer"
+    },
+    {
+      "index": 325,
+      "start": 989.44,
+      "end": 991.91,
+      "duration": 2.47,
+      "text": "question is is this too high or too low"
+    },
+    {
+      "index": 326,
+      "start": 991.92,
+      "end": 993.189,
+      "duration": 1.269,
+      "text": "is"
+    },
+    {
+      "index": 327,
+      "start": 993.199,
+      "end": 996.67,
+      "duration": 3.471,
+      "text": "Oiler sorry he will forgive me in heaven"
+    },
+    {
+      "index": 328,
+      "start": 996.68,
+      "end": 999.91,
+      "duration": 3.23,
+      "text": "I will use him by this I mean is the"
+    },
+    {
+      "index": 329,
+      "start": 999.92,
+      "end": 1002.47,
+      "duration": 2.55,
+      "text": "result well let me say something first"
+    },
+    {
+      "index": 330,
+      "start": 1002.48,
+      "end": 1005.069,
+      "duration": 2.589,
+      "text": "and then I'll criticize it uh is Oiler"
+    },
+    {
+      "index": 331,
+      "start": 1005.079,
+      "end": 1010.629,
+      "duration": 5.55,
+      "text": "too high or too"
+    },
+    {
+      "index": 332,
+      "start": 1013.35,
+      "end": 1013.36,
+      "duration": 0.01,
+      "text": "low in other words is the result of"
+    },
+    {
+      "index": 333,
+      "start": 1013.36,
+      "end": 1016.67,
+      "duration": 3.31,
+      "text": "using Oilers method I.E is this number"
+    },
+    {
+      "index": 334,
+      "start": 1016.68,
+      "end": 1019.15,
+      "duration": 2.47,
+      "text": "too high or too low is it higher than"
+    },
+    {
+      "index": 335,
+      "start": 1019.16,
+      "end": 1021.47,
+      "duration": 2.31,
+      "text": "the right answer what it should be or is"
+    },
+    {
+      "index": 336,
+      "start": 1021.48,
+      "end": 1024.029,
+      "duration": 2.549,
+      "text": "it lower than the right answer or God"
+    },
+    {
+      "index": 337,
+      "start": 1024.039,
+      "end": 1027.029,
+      "duration": 2.99,
+      "text": "forbid is it exactly right uh it's"
+    },
+    {
+      "index": 338,
+      "start": 1027.039,
+      "end": 1029.47,
+      "duration": 2.431,
+      "text": "almost never exactly right that's not an"
+    },
+    {
+      "index": 339,
+      "start": 1029.48,
+      "end": 1031.71,
+      "duration": 2.23,
+      "text": "option"
+    },
+    {
+      "index": 340,
+      "start": 1031.72,
+      "end": 1034.909,
+      "duration": 3.189,
+      "text": "um how will we answer that question well"
+    },
+    {
+      "index": 341,
+      "start": 1034.919,
+      "end": 1038.069,
+      "duration": 3.15,
+      "text": "let's answer it geometrically"
+    },
+    {
+      "index": 342,
+      "start": 1038.079,
+      "end": 1043.71,
+      "duration": 5.631,
+      "text": "if basically if the solution were a line"
+    },
+    {
+      "index": 343,
+      "start": 1043.72,
+      "end": 1046.429,
+      "duration": 2.709,
+      "text": "were a straight line then the oiler"
+    },
+    {
+      "index": 344,
+      "start": 1046.439,
+      "end": 1048.59,
+      "duration": 2.151,
+      "text": "method would be exactly right all the"
+    },
+    {
+      "index": 345,
+      "start": 1048.6,
+      "end": 1052.23,
+      "duration": 3.63,
+      "text": "time"
+    },
+    {
+      "index": 346,
+      "start": 1054.63,
+      "end": 1054.64,
+      "duration": 0.01,
+      "text": "but it's not a line then it's a it's a"
+    },
+    {
+      "index": 347,
+      "start": 1054.64,
+      "end": 1057.87,
+      "duration": 3.23,
+      "text": "curve well the critical question is is"
+    },
+    {
+      "index": 348,
+      "start": 1057.88,
+      "end": 1060.47,
+      "duration": 2.59,
+      "text": "it curved is the solution so here's the"
+    },
+    {
+      "index": 349,
+      "start": 1060.48,
+      "end": 1063.669,
+      "duration": 3.189,
+      "text": "solution let's call it y1 of X and let's"
+    },
+    {
+      "index": 350,
+      "start": 1063.679,
+      "end": 1066.87,
+      "duration": 3.191,
+      "text": "say here was the starting point here the"
+    },
+    {
+      "index": 351,
+      "start": 1066.88,
+      "end": 1069.909,
+      "duration": 3.029,
+      "text": "solution is"
+    },
+    {
+      "index": 352,
+      "start": 1079.23,
+      "end": 1079.24,
+      "duration": 0.01,
+      "text": "concave right a concave up a concave"
+    },
+    {
+      "index": 353,
+      "start": 1079.24,
+      "end": 1081.07,
+      "duration": 1.83,
+      "text": "down if you learn those words I think"
+    },
+    {
+      "index": 354,
+      "start": 1081.08,
+      "end": 1082.99,
+      "duration": 1.91,
+      "text": "those have by now pretty I hope pretty"
+    },
+    {
+      "index": 355,
+      "start": 1083.0,
+      "end": 1085.27,
+      "duration": 2.27,
+      "text": "well disappeared from the curriculum uh"
+    },
+    {
+      "index": 356,
+      "start": 1085.28,
+      "end": 1086.909,
+      "duration": 1.629,
+      "text": "call it if you haven't up till now what"
+    },
+    {
+      "index": 357,
+      "start": 1086.919,
+      "end": 1089.51,
+      "duration": 2.591,
+      "text": "mathematicians call it convex is that"
+    },
+    {
+      "index": 358,
+      "start": 1089.52,
+      "end": 1090.83,
+      "duration": 1.31,
+      "text": "and the other one is"
+    },
+    {
+      "index": 359,
+      "start": 1090.84,
+      "end": 1093.029,
+      "duration": 2.189,
+      "text": "concave uh well how do the oiler"
+    },
+    {
+      "index": 360,
+      "start": 1093.039,
+      "end": 1095.789,
+      "duration": 2.75,
+      "text": "Solutions look well I'll just sketch I"
+    },
+    {
+      "index": 361,
+      "start": 1095.799,
+      "end": 1098.47,
+      "duration": 2.671,
+      "text": "think from this you can see already when"
+    },
+    {
+      "index": 362,
+      "start": 1098.48,
+      "end": 1100.669,
+      "duration": 2.189,
+      "text": "you start out on the oiler solution it's"
+    },
+    {
+      "index": 363,
+      "start": 1100.679,
+      "end": 1103.95,
+      "duration": 3.271,
+      "text": "going to go like that now you're too low"
+    },
+    {
+      "index": 364,
+      "start": 1103.96,
+      "end": 1106.789,
+      "duration": 2.829,
+      "text": "well let's suppose after that it the"
+    },
+    {
+      "index": 365,
+      "start": 1106.799,
+      "end": 1109.149,
+      "duration": 2.35,
+      "text": "line element here is approximately the"
+    },
+    {
+      "index": 366,
+      "start": 1109.159,
+      "end": 1111.549,
+      "duration": 2.39,
+      "text": "same as what it is there you know"
+    },
+    {
+      "index": 367,
+      "start": 1111.559,
+      "end": 1113.59,
+      "duration": 2.031,
+      "text": "roughly parallel after all they're not"
+    },
+    {
+      "index": 368,
+      "start": 1113.6,
+      "end": 1116.19,
+      "duration": 2.59,
+      "text": "too far apart and the direction field is"
+    },
+    {
+      "index": 369,
+      "start": 1116.2,
+      "end": 1118.39,
+      "duration": 2.19,
+      "text": "continuous that is the directions don't"
+    },
+    {
+      "index": 370,
+      "start": 1118.4,
+      "end": 1120.669,
+      "duration": 2.269,
+      "text": "change drastically from one point to"
+    },
+    {
+      "index": 371,
+      "start": 1120.679,
+      "end": 1123.71,
+      "duration": 3.031,
+      "text": "another well then it'll sort of but now"
+    },
+    {
+      "index": 372,
+      "start": 1123.72,
+      "end": 1125.99,
+      "duration": 2.27,
+      "text": "you see it's still too low it's even"
+    },
+    {
+      "index": 373,
+      "start": 1126.0,
+      "end": 1129.71,
+      "duration": 3.71,
+      "text": "lower as it pathetically tries to follow"
+    },
+    {
+      "index": 374,
+      "start": 1129.72,
+      "end": 1132.07,
+      "duration": 2.35,
+      "text": "its losing territory and that's"
+    },
+    {
+      "index": 375,
+      "start": 1132.08,
+      "end": 1134.83,
+      "duration": 2.75,
+      "text": "basically because the curve is convex"
+    },
+    {
+      "index": 376,
+      "start": 1134.84,
+      "end": 1136.87,
+      "duration": 2.03,
+      "text": "exactly the opposite would happen if the"
+    },
+    {
+      "index": 377,
+      "start": 1136.88,
+      "end": 1138.99,
+      "duration": 2.11,
+      "text": "curve were concave if the solution curve"
+    },
+    {
+      "index": 378,
+      "start": 1139.0,
+      "end": 1142.23,
+      "duration": 3.23,
+      "text": "or concave now it's too high and it's"
+    },
+    {
+      "index": 379,
+      "start": 1142.24,
+      "end": 1145.51,
+      "duration": 3.27,
+      "text": "not going to be able to correct that as"
+    },
+    {
+      "index": 380,
+      "start": 1145.52,
+      "end": 1149.35,
+      "duration": 3.83,
+      "text": "long as the solution curve stays con con"
+    },
+    {
+      "index": 381,
+      "start": 1149.36,
+      "end": 1151.63,
+      "duration": 2.27,
+      "text": "concave well that's probably too"
+    },
+    {
+      "index": 382,
+      "start": 1151.64,
+      "end": 1153.95,
+      "duration": 2.31,
+      "text": "optimistic it's probably more like"
+    },
+    {
+      "index": 383,
+      "start": 1153.96,
+      "end": 1156.909,
+      "duration": 2.949,
+      "text": "this so in other words in this case if"
+    },
+    {
+      "index": 384,
+      "start": 1156.919,
+      "end": 1159.95,
+      "duration": 3.031,
+      "text": "the curve is convex the oiler is going"
+    },
+    {
+      "index": 385,
+      "start": 1159.96,
+      "end": 1166.909,
+      "duration": 6.949,
+      "text": "to be too high H sorry too"
+    },
+    {
+      "index": 386,
+      "start": 1170.19,
+      "end": 1170.2,
+      "duration": 0.01,
+      "text": "low let's put E for Oiler how about that"
+    },
+    {
+      "index": 387,
+      "start": 1170.2,
+      "end": 1173.27,
+      "duration": 3.07,
+      "text": "Oiler is too low if it's concave then"
+    },
+    {
+      "index": 388,
+      "start": 1173.28,
+      "end": 1176.43,
+      "duration": 3.15,
+      "text": "Oiler is too"
+    },
+    {
+      "index": 389,
+      "start": 1176.44,
+      "end": 1178.71,
+      "duration": 2.27,
+      "text": "high okay that's"
+    },
+    {
+      "index": 390,
+      "start": 1178.72,
+      "end": 1181.47,
+      "duration": 2.75,
+      "text": "great uh there's just one little problem"
+    },
+    {
+      "index": 391,
+      "start": 1181.48,
+      "end": 1185.149,
+      "duration": 3.669,
+      "text": "left namely if we don't have a formula"
+    },
+    {
+      "index": 392,
+      "start": 1185.159,
+      "end": 1187.549,
+      "duration": 2.39,
+      "text": "for the solution and we don't have a"
+    },
+    {
+      "index": 393,
+      "start": 1187.559,
+      "end": 1189.31,
+      "duration": 1.751,
+      "text": "computer that's busy drawing the picture"
+    },
+    {
+      "index": 394,
+      "start": 1189.32,
+      "end": 1191.39,
+      "duration": 2.07,
+      "text": "for us in which case we wouldn't need"
+    },
+    {
+      "index": 395,
+      "start": 1191.4,
+      "end": 1193.95,
+      "duration": 2.55,
+      "text": "any of this anyway uh how are we"
+    },
+    {
+      "index": 396,
+      "start": 1193.96,
+      "end": 1195.59,
+      "duration": 1.63,
+      "text": "supposed to tell if it's convex or"
+    },
+    {
+      "index": 397,
+      "start": 1195.6,
+      "end": 1200.909,
+      "duration": 5.309,
+      "text": "concave"
+    },
+    {
+      "index": 398,
+      "start": 1203.909,
+      "end": 1203.919,
+      "duration": 0.01,
+      "text": "ah back to calculus calculus to the"
+    },
+    {
+      "index": 399,
+      "start": 1203.919,
+      "end": 1207.07,
+      "duration": 3.151,
+      "text": "rescue when is it a curve convex a curve"
+    },
+    {
+      "index": 400,
+      "start": 1207.08,
+      "end": 1212.83,
+      "duration": 5.75,
+      "text": "is convex if its second derivative"
+    },
+    {
+      "index": 401,
+      "start": 1216.71,
+      "end": 1216.72,
+      "duration": 0.01,
+      "text": "is positive because the first to be"
+    },
+    {
+      "index": 402,
+      "start": 1216.72,
+      "end": 1218.87,
+      "duration": 2.15,
+      "text": "convex means the first derivative is"
+    },
+    {
+      "index": 403,
+      "start": 1218.88,
+      "end": 1221.43,
+      "duration": 2.55,
+      "text": "increasing all the time and therefore"
+    },
+    {
+      "index": 404,
+      "start": 1221.44,
+      "end": 1223.39,
+      "duration": 1.95,
+      "text": "the second derivative which is the"
+    },
+    {
+      "index": 405,
+      "start": 1223.4,
+      "end": 1224.909,
+      "duration": 1.509,
+      "text": "derivative of the first derivative"
+    },
+    {
+      "index": 406,
+      "start": 1224.919,
+      "end": 1227.71,
+      "duration": 2.791,
+      "text": "should be positive just the opposite"
+    },
+    {
+      "index": 407,
+      "start": 1227.72,
+      "end": 1230.19,
+      "duration": 2.47,
+      "text": "here the Curve the slope is the first"
+    },
+    {
+      "index": 408,
+      "start": 1230.2,
+      "end": 1232.51,
+      "duration": 2.31,
+      "text": "derivative is decreasing all the time"
+    },
+    {
+      "index": 409,
+      "start": 1232.52,
+      "end": 1234.23,
+      "duration": 1.71,
+      "text": "and therefore the second derivative is"
+    },
+    {
+      "index": 410,
+      "start": 1234.24,
+      "end": 1237.31,
+      "duration": 3.07,
+      "text": "negative so all we have to do is decide"
+    },
+    {
+      "index": 411,
+      "start": 1237.32,
+      "end": 1239.07,
+      "duration": 1.75,
+      "text": "what the first and SEC what the"
+    },
+    {
+      "index": 412,
+      "start": 1239.08,
+      "end": 1240.909,
+      "duration": 1.829,
+      "text": "derivative the second derivative of this"
+    },
+    {
+      "index": 413,
+      "start": 1240.919,
+      "end": 1243.63,
+      "duration": 2.711,
+      "text": "solution is let's we should probably"
+    },
+    {
+      "index": 414,
+      "start": 1243.64,
+      "end": 1246.43,
+      "duration": 2.79,
+      "text": "call it a solution to Y of X is a little"
+    },
+    {
+      "index": 415,
+      "start": 1246.44,
+      "end": 1249.149,
+      "duration": 2.709,
+      "text": "too vague y1 means the solution that's"
+    },
+    {
+      "index": 416,
+      "start": 1249.159,
+      "end": 1251.63,
+      "duration": 2.471,
+      "text": "started at this point so in fact"
+    },
+    {
+      "index": 417,
+      "start": 1251.64,
+      "end": 1252.87,
+      "duration": 1.23,
+      "text": "probably it would have been better from"
+    },
+    {
+      "index": 418,
+      "start": 1252.88,
+      "end": 1255.27,
+      "duration": 2.39,
+      "text": "the beginning to call that y1 except"
+    },
+    {
+      "index": 419,
+      "start": 1255.28,
+      "end": 1256.99,
+      "duration": 1.71,
+      "text": "there's no"
+    },
+    {
+      "index": 420,
+      "start": 1257.0,
+      "end": 1260.11,
+      "duration": 3.11,
+      "text": "room y1 left say that means the solution"
+    },
+    {
+      "index": 421,
+      "start": 1260.12,
+      "end": 1263.59,
+      "duration": 3.47,
+      "text": "which started out at the0 01 so I'm"
+    },
+    {
+      "index": 422,
+      "start": 1263.6,
+      "end": 1265.47,
+      "duration": 1.87,
+      "text": "still talking about a solution like that"
+    },
+    {
+      "index": 423,
+      "start": 1265.48,
+      "end": 1268.71,
+      "duration": 3.23,
+      "text": "all right so I want to know if this is"
+    },
+    {
+      "index": 424,
+      "start": 1268.72,
+      "end": 1270.43,
+      "duration": 1.71,
+      "text": "positive the second derivative is"
+    },
+    {
+      "index": 425,
+      "start": 1270.44,
+      "end": 1272.99,
+      "duration": 2.55,
+      "text": "positive at the starting point zero or"
+    },
+    {
+      "index": 426,
+      "start": 1273.0,
+      "end": 1275.47,
+      "duration": 2.47,
+      "text": "it's negative now again how do you"
+    },
+    {
+      "index": 427,
+      "start": 1275.48,
+      "end": 1277.47,
+      "duration": 1.99,
+      "text": "calculate the second derivative if you"
+    },
+    {
+      "index": 428,
+      "start": 1277.48,
+      "end": 1279.07,
+      "duration": 1.59,
+      "text": "can't even if you don't know what the"
+    },
+    {
+      "index": 429,
+      "start": 1279.08,
+      "end": 1281.47,
+      "duration": 2.39,
+      "text": "solution is explicitly and the answer is"
+    },
+    {
+      "index": 430,
+      "start": 1281.48,
+      "end": 1282.909,
+      "duration": 1.429,
+      "text": "you can do it from the differential"
+    },
+    {
+      "index": 431,
+      "start": 1282.919,
+      "end": 1286.149,
+      "duration": 3.23,
+      "text": "equation"
+    },
+    {
+      "index": 432,
+      "start": 1289.549,
+      "end": 1289.559,
+      "duration": 0.01,
+      "text": "itself how do I do that well easy y"
+    },
+    {
+      "index": 433,
+      "start": 1289.559,
+      "end": 1294.669,
+      "duration": 5.11,
+      "text": "Prime = x^2 - y^2 okay that tells me how"
+    },
+    {
+      "index": 434,
+      "start": 1294.679,
+      "end": 1298.35,
+      "duration": 3.671,
+      "text": "to calculate y Prime if I know the value"
+    },
+    {
+      "index": 435,
+      "start": 1298.36,
+      "end": 1301.99,
+      "duration": 3.63,
+      "text": "of x and y in other words the 0 Z1 what"
+    },
+    {
+      "index": 436,
+      "start": 1302.0,
+      "end": 1304.669,
+      "duration": 2.669,
+      "text": "would be the value of y double Prime"
+    },
+    {
+      "index": 437,
+      "start": 1304.679,
+      "end": 1308.669,
+      "duration": 3.99,
+      "text": "well differentiate the equation it's 2x"
+    },
+    {
+      "index": 438,
+      "start": 1308.679,
+      "end": 1312.59,
+      "duration": 3.911,
+      "text": "- 2 y y Prime don't forget to use the"
+    },
+    {
+      "index": 439,
+      "start": 1312.6,
+      "end": 1314.549,
+      "duration": 1.949,
+      "text": "chain"
+    },
+    {
+      "index": 440,
+      "start": 1314.559,
+      "end": 1322.149,
+      "duration": 7.59,
+      "text": "rule so if I want to calculate at 01"
+    },
+    {
+      "index": 441,
+      "start": 1324.11,
+      "end": 1324.12,
+      "duration": 0.01,
+      "text": "in other words at my starting point is"
+    },
+    {
+      "index": 442,
+      "start": 1324.12,
+      "end": 1327.549,
+      "duration": 3.429,
+      "text": "that curve convex or concave well let's"
+    },
+    {
+      "index": 443,
+      "start": 1327.559,
+      "end": 1330.47,
+      "duration": 2.911,
+      "text": "calculate y of 0 equals"
+    },
+    {
+      "index": 444,
+      "start": 1330.48,
+      "end": 1334.149,
+      "duration": 3.669,
+      "text": "1 okay what's y Prime of 0 well I don't"
+    },
+    {
+      "index": 445,
+      "start": 1334.159,
+      "end": 1336.35,
+      "duration": 2.191,
+      "text": "have to repeat that calculation using"
+    },
+    {
+      "index": 446,
+      "start": 1336.36,
+      "end": 1338.029,
+      "duration": 1.669,
+      "text": "this I already calculated that it was"
+    },
+    {
+      "index": 447,
+      "start": 1338.039,
+      "end": 1339.149,
+      "duration": 1.11,
+      "text": "negative"
+    },
+    {
+      "index": 448,
+      "start": 1339.159,
+      "end": 1341.99,
+      "duration": 2.831,
+      "text": "one and now the new thing is what's y"
+    },
+    {
+      "index": 449,
+      "start": 1342.0,
+      "end": 1346.11,
+      "duration": 4.11,
+      "text": "double Prime of zero well it is this it"
+    },
+    {
+      "index": 450,
+      "start": 1346.12,
+      "end": 1351.35,
+      "duration": 5.23,
+      "text": "is I'll write it out it's 2 * 0 0 - 2"
+    },
+    {
+      "index": 451,
+      "start": 1351.36,
+      "end": 1358.029,
+      "duration": 6.669,
+      "text": "* Nega uh Y which is 1 2 * 1 * y Prime"
+    },
+    {
+      "index": 452,
+      "start": 1358.039,
+      "end": 1360.149,
+      "duration": 2.11,
+      "text": "which is negative 1 you you want to see"
+    },
+    {
+      "index": 453,
+      "start": 1360.159,
+      "end": 1361.71,
+      "duration": 1.551,
+      "text": "we're pulling ourselves up our own"
+    },
+    {
+      "index": 454,
+      "start": 1361.72,
+      "end": 1364.789,
+      "duration": 3.069,
+      "text": "bootstraps which is impossible but it is"
+    },
+    {
+      "index": 455,
+      "start": 1364.799,
+      "end": 1369.11,
+      "duration": 4.311,
+      "text": "not impossible because we're doing it uh"
+    },
+    {
+      "index": 456,
+      "start": 1369.12,
+      "end": 1374.59,
+      "duration": 5.47,
+      "text": "so so what's the answer zero here two"
+    },
+    {
+      "index": 457,
+      "start": 1374.6,
+      "end": 1376.59,
+      "duration": 1.99,
+      "text": "I've calculated without having the"
+    },
+    {
+      "index": 458,
+      "start": 1376.6,
+      "end": 1378.99,
+      "duration": 2.39,
+      "text": "foggiest idea of what the solution is is"
+    },
+    {
+      "index": 459,
+      "start": 1379.0,
+      "end": 1381.19,
+      "duration": 2.19,
+      "text": "how it looks I've calculated that its"
+    },
+    {
+      "index": 460,
+      "start": 1381.2,
+      "end": 1383.11,
+      "duration": 1.91,
+      "text": "second derivative at the starting point"
+    },
+    {
+      "index": 461,
+      "start": 1383.12,
+      "end": 1387.59,
+      "duration": 4.47,
+      "text": "is two therefore my solution is convex"
+    },
+    {
+      "index": 462,
+      "start": 1387.6,
+      "end": 1389.63,
+      "duration": 2.03,
+      "text": "at the starting point and therefore this"
+    },
+    {
+      "index": 463,
+      "start": 1389.64,
+      "end": 1392.11,
+      "duration": 2.47,
+      "text": "Oiler approximation if I don't carry it"
+    },
+    {
+      "index": 464,
+      "start": 1392.12,
+      "end": 1395.95,
+      "duration": 3.83,
+      "text": "out too far will be too low so it's"
+    },
+    {
+      "index": 465,
+      "start": 1395.96,
+      "end": 1406.71,
+      "duration": 10.75,
+      "text": "convex Oiler too"
+    },
+    {
+      "index": 466,
+      "start": 1409.87,
+      "end": 1409.88,
+      "duration": 0.01,
+      "text": "low now you could argue yeah well what"
+    },
+    {
+      "index": 467,
+      "start": 1409.88,
+      "end": 1412.19,
+      "duration": 2.31,
+      "text": "about this uh you"
+    },
+    {
+      "index": 468,
+      "start": 1412.2,
+      "end": 1414.47,
+      "duration": 2.27,
+      "text": "know suppose"
+    },
+    {
+      "index": 469,
+      "start": 1414.48,
+      "end": 1418.31,
+      "duration": 3.83,
+      "text": "it you know"
+    },
+    {
+      "index": 470,
+      "start": 1418.32,
+      "end": 1421.83,
+      "duration": 3.51,
+      "text": "yeah so you go like this and then then"
+    },
+    {
+      "index": 471,
+      "start": 1421.84,
+      "end": 1424.83,
+      "duration": 2.99,
+      "text": "but then it uh see it catches up and"
+    },
+    {
+      "index": 472,
+      "start": 1424.84,
+      "end": 1427.269,
+      "duration": 2.429,
+      "text": "then so well of course if the curve"
+    },
+    {
+      "index": 473,
+      "start": 1427.279,
+      "end": 1430.99,
+      "duration": 3.711,
+      "text": "changes from convex to concave then then"
+    },
+    {
+      "index": 474,
+      "start": 1431.0,
+      "end": 1432.63,
+      "duration": 1.63,
+      "text": "it's really impossible to make any"
+    },
+    {
+      "index": 475,
+      "start": 1432.64,
+      "end": 1435.87,
+      "duration": 3.23,
+      "text": "prediction at all uh that's a difficulty"
+    },
+    {
+      "index": 476,
+      "start": 1435.88,
+      "end": 1438.149,
+      "duration": 2.269,
+      "text": "uh so all this analysis is only if you"
+    },
+    {
+      "index": 477,
+      "start": 1438.159,
+      "end": 1439.51,
+      "duration": 1.351,
+      "text": "stay stay very"
+    },
+    {
+      "index": 478,
+      "start": 1439.52,
+      "end": 1444.95,
+      "duration": 5.43,
+      "text": "nearby uh however I wanted to show you"
+    },
+    {
+      "index": 479,
+      "start": 1444.96,
+      "end": 1446.95,
+      "duration": 1.99,
+      "text": "uh the main purpose of it in my mind was"
+    },
+    {
+      "index": 480,
+      "start": 1446.96,
+      "end": 1449.43,
+      "duration": 2.47,
+      "text": "to show you how to use the diff it's"
+    },
+    {
+      "index": 481,
+      "start": 1449.44,
+      "end": 1451.51,
+      "duration": 2.07,
+      "text": "these equations how to use the"
+    },
+    {
+      "index": 482,
+      "start": 1451.52,
+      "end": 1455.029,
+      "duration": 3.509,
+      "text": "differential equation itself to get"
+    },
+    {
+      "index": 483,
+      "start": 1455.039,
+      "end": 1457.789,
+      "duration": 2.75,
+      "text": "information about the solutions without"
+    },
+    {
+      "index": 484,
+      "start": 1457.799,
+      "end": 1462.07,
+      "duration": 4.271,
+      "text": "actually being able to calculate the"
+    },
+    {
+      "index": 485,
+      "start": 1465.789,
+      "end": 1465.799,
+      "duration": 0.01,
+      "text": "solutions now so that's the method and"
+    },
+    {
+      "index": 486,
+      "start": 1465.799,
+      "end": 1467.19,
+      "duration": 1.391,
+      "text": "that's how to find out something about"
+    },
+    {
+      "index": 487,
+      "start": 1467.2,
+      "end": 1468.669,
+      "duration": 1.469,
+      "text": "it and now what I'd like to talk talk"
+    },
+    {
+      "index": 488,
+      "start": 1468.679,
+      "end": 1471.35,
+      "duration": 2.671,
+      "text": "about is"
+    },
+    {
+      "index": 489,
+      "start": 1471.36,
+      "end": 1474.909,
+      "duration": 3.549,
+      "text": "errors how do I handle"
+    },
+    {
+      "index": 490,
+      "start": 1474.919,
+      "end": 1478.87,
+      "duration": 3.951,
+      "text": "uh"
+    },
+    {
+      "index": 491,
+      "start": 1482.51,
+      "end": 1482.52,
+      "duration": 0.01,
+      "text": "oh right so I mean that's an anal in a"
+    },
+    {
+      "index": 492,
+      "start": 1482.52,
+      "end": 1485.31,
+      "duration": 2.79,
+      "text": "sense I've started the error analysis in"
+    },
+    {
+      "index": 493,
+      "start": 1485.32,
+      "end": 1487.75,
+      "duration": 2.43,
+      "text": "other words the error by definition the"
+    },
+    {
+      "index": 494,
+      "start": 1487.76,
+      "end": 1492.029,
+      "duration": 4.269,
+      "text": "error is this difference e the error so"
+    },
+    {
+      "index": 495,
+      "start": 1492.039,
+      "end": 1494.11,
+      "duration": 2.071,
+      "text": "in other words I'm asking here is the"
+    },
+    {
+      "index": 496,
+      "start": 1494.12,
+      "end": 1495.43,
+      "duration": 1.31,
+      "text": "error"
+    },
+    {
+      "index": 497,
+      "start": 1495.44,
+      "end": 1498.63,
+      "duration": 3.19,
+      "text": "positive as it would be uh it's depends"
+    },
+    {
+      "index": 498,
+      "start": 1498.64,
+      "end": 1499.95,
+      "duration": 1.31,
+      "text": "which way you measure it usually you"
+    },
+    {
+      "index": 499,
+      "start": 1499.96,
+      "end": 1502.75,
+      "duration": 2.79,
+      "text": "take this minus that so here the"
+    },
+    {
+      "index": 500,
+      "start": 1502.76,
+      "end": 1505.07,
+      "duration": 2.31,
+      "text": "error the error would be considered"
+    },
+    {
+      "index": 501,
+      "start": 1505.08,
+      "end": 1506.75,
+      "duration": 1.67,
+      "text": "positive and here it would be considered"
+    },
+    {
+      "index": 502,
+      "start": 1506.76,
+      "end": 1508.47,
+      "duration": 1.71,
+      "text": "negative although I'm sure there's a"
+    },
+    {
+      "index": 503,
+      "start": 1508.48,
+      "end": 1510.71,
+      "duration": 2.23,
+      "text": "book somewhere in the world which does"
+    },
+    {
+      "index": 504,
+      "start": 1510.72,
+      "end": 1515.549,
+      "duration": 4.829,
+      "text": "the opposite uh most hedge by just using"
+    },
+    {
+      "index": 505,
+      "start": 1515.559,
+      "end": 1517.35,
+      "duration": 1.791,
+      "text": "the absolute value of the"
+    },
+    {
+      "index": 506,
+      "start": 1517.36,
+      "end": 1520.029,
+      "duration": 2.669,
+      "text": "error plus a statement that the method"
+    },
+    {
+      "index": 507,
+      "start": 1520.039,
+      "end": 1522.669,
+      "duration": 2.63,
+      "text": "is producing answers which are too low"
+    },
+    {
+      "index": 508,
+      "start": 1522.679,
+      "end": 1526.71,
+      "duration": 4.031,
+      "text": "or too"
+    },
+    {
+      "index": 509,
+      "start": 1531.43,
+      "end": 1531.44,
+      "duration": 0.01,
+      "text": "high the question then is naturally"
+    },
+    {
+      "index": 510,
+      "start": 1531.44,
+      "end": 1535.43,
+      "duration": 3.99,
+      "text": "this is not the world's best method it's"
+    },
+    {
+      "index": 511,
+      "start": 1535.44,
+      "end": 1537.789,
+      "duration": 2.349,
+      "text": "not as bad as it seems It's not the"
+    },
+    {
+      "index": 512,
+      "start": 1537.799,
+      "end": 1540.23,
+      "duration": 2.431,
+      "text": "world's best method because that"
+    },
+    {
+      "index": 513,
+      "start": 1540.24,
+      "end": 1542.43,
+      "duration": 2.19,
+      "text": "convexity and concavity means that"
+    },
+    {
+      "index": 514,
+      "start": 1542.44,
+      "end": 1545.07,
+      "duration": 2.63,
+      "text": "you're automatically IND introducing a"
+    },
+    {
+      "index": 515,
+      "start": 1545.08,
+      "end": 1546.549,
+      "duration": 1.469,
+      "text": "systematic"
+    },
+    {
+      "index": 516,
+      "start": 1546.559,
+      "end": 1549.029,
+      "duration": 2.47,
+      "text": "error if you can predict which way the"
+    },
+    {
+      "index": 517,
+      "start": 1549.039,
+      "end": 1550.99,
+      "duration": 1.951,
+      "text": "error is going to be by just knowing if"
+    },
+    {
+      "index": 518,
+      "start": 1551.0,
+      "end": 1555.669,
+      "duration": 4.669,
+      "text": "the curve is convex or concave then"
+    },
+    {
+      "index": 519,
+      "start": 1555.679,
+      "end": 1558.31,
+      "duration": 2.631,
+      "text": "that's it's just it's not what you want"
+    },
+    {
+      "index": 520,
+      "start": 1558.32,
+      "end": 1560.11,
+      "duration": 1.79,
+      "text": "I mean you want to at least have a"
+    },
+    {
+      "index": 521,
+      "start": 1560.12,
+      "end": 1562.269,
+      "duration": 2.149,
+      "text": "chance of getting the right answer"
+    },
+    {
+      "index": 522,
+      "start": 1562.279,
+      "end": 1563.669,
+      "duration": 1.39,
+      "text": "whereas this is telling you you're"
+    },
+    {
+      "index": 523,
+      "start": 1563.679,
+      "end": 1565.549,
+      "duration": 1.87,
+      "text": "definitely going to get the wrong answer"
+    },
+    {
+      "index": 524,
+      "start": 1565.559,
+      "end": 1568.35,
+      "duration": 2.791,
+      "text": "all it tells you is and it's telling you"
+    },
+    {
+      "index": 525,
+      "start": 1568.36,
+      "end": 1569.669,
+      "duration": 1.309,
+      "text": "your answer is going to be too high or"
+    },
+    {
+      "index": 526,
+      "start": 1569.679,
+      "end": 1571.83,
+      "duration": 2.151,
+      "text": "too low we'd like a better chance of"
+    },
+    {
+      "index": 527,
+      "start": 1571.84,
+      "end": 1574.07,
+      "duration": 2.23,
+      "text": "getting the right answer"
+    },
+    {
+      "index": 528,
+      "start": 1574.08,
+      "end": 1577.19,
+      "duration": 3.11,
+      "text": "now so the question is how do you get a"
+    },
+    {
+      "index": 529,
+      "start": 1577.2,
+      "end": 1581.63,
+      "duration": 4.43,
+      "text": "better"
+    },
+    {
+      "index": 530,
+      "start": 1589.909,
+      "end": 1589.919,
+      "duration": 0.01,
+      "text": "method now"
+    },
+    {
+      "index": 531,
+      "start": 1589.919,
+      "end": 1591.83,
+      "duration": 1.911,
+      "text": "the first method which will occur I'm"
+    },
+    {
+      "index": 532,
+      "start": 1591.84,
+      "end": 1595.51,
+      "duration": 3.67,
+      "text": "sure to anyone who looks at that picture"
+    },
+    {
+      "index": 533,
+      "start": 1595.52,
+      "end": 1598.83,
+      "duration": 3.31,
+      "text": "is look if you want this yellow line to"
+    },
+    {
+      "index": 534,
+      "start": 1598.84,
+      "end": 1600.95,
+      "duration": 2.11,
+      "text": "follow the white"
+    },
+    {
+      "index": 535,
+      "start": 1600.96,
+      "end": 1604.59,
+      "duration": 3.63,
+      "text": "one the white solution more accurately"
+    },
+    {
+      "index": 536,
+      "start": 1604.6,
+      "end": 1606.87,
+      "duration": 2.27,
+      "text": "For Heaven's Sake don't take such big"
+    },
+    {
+      "index": 537,
+      "start": 1606.88,
+      "end": 1609.789,
+      "duration": 2.909,
+      "text": "steps take small steps and then it will"
+    },
+    {
+      "index": 538,
+      "start": 1609.799,
+      "end": 1613.149,
+      "duration": 3.35,
+      "text": "follow better all right let's draw a"
+    },
+    {
+      "index": 539,
+      "start": 1613.159,
+      "end": 1618.63,
+      "duration": 5.471,
+      "text": "picture excuse me"
+    },
+    {
+      "index": 540,
+      "start": 1621.71,
+      "end": 1621.72,
+      "duration": 0.01,
+      "text": "my little box of treasures"
+    },
+    {
+      "index": 541,
+      "start": 1621.72,
+      "end": 1630.87,
+      "duration": 9.15,
+      "text": "here take any"
+    },
+    {
+      "index": 542,
+      "start": 1640.35,
+      "end": 1640.36,
+      "duration": 0.01,
+      "text": "size and the picture roughly which is"
+    },
+    {
+      "index": 543,
+      "start": 1640.36,
+      "end": 1642.51,
+      "duration": 2.15,
+      "text": "going to justify that will look like"
+    },
+    {
+      "index": 544,
+      "start": 1642.52,
+      "end": 1646.19,
+      "duration": 3.67,
+      "text": "this uh if the solution curve looks like"
+    },
+    {
+      "index": 545,
+      "start": 1646.2,
+      "end": 1650.35,
+      "duration": 4.15,
+      "text": "this then with a big step size I'm"
+    },
+    {
+      "index": 546,
+      "start": 1650.36,
+      "end": 1652.909,
+      "duration": 2.549,
+      "text": "liable to have something that looks like"
+    },
+    {
+      "index": 547,
+      "start": 1652.919,
+      "end": 1657.549,
+      "duration": 4.63,
+      "text": "that but if I take a smaller step size"
+    },
+    {
+      "index": 548,
+      "start": 1657.559,
+      "end": 1660.59,
+      "duration": 3.031,
+      "text": "suppose I have the step size how is it"
+    },
+    {
+      "index": 549,
+      "start": 1660.6,
+      "end": 1662.149,
+      "duration": 1.549,
+      "text": "going to look then well I better switch"
+    },
+    {
+      "index": 550,
+      "start": 1662.159,
+      "end": 1664.71,
+      "duration": 2.551,
+      "text": "to a different color if I have the step"
+    },
+    {
+      "index": 551,
+      "start": 1664.72,
+      "end": 1669.509,
+      "duration": 4.789,
+      "text": "size I'll get a a uh a little it goes"
+    },
+    {
+      "index": 552,
+      "start": 1669.519,
+      "end": 1672.75,
+      "duration": 3.231,
+      "text": "like that and now it's following closer"
+    },
+    {
+      "index": 553,
+      "start": 1672.76,
+      "end": 1675.63,
+      "duration": 2.87,
+      "text": "of course I'm stacking the deck but see"
+    },
+    {
+      "index": 554,
+      "start": 1675.64,
+      "end": 1679.389,
+      "duration": 3.749,
+      "text": "how close it follows uh"
+    },
+    {
+      "index": 555,
+      "start": 1679.399,
+      "end": 1680.95,
+      "duration": 1.551,
+      "text": "you know I'm definitely not to be"
+    },
+    {
+      "index": 556,
+      "start": 1680.96,
+      "end": 1684.43,
+      "duration": 3.47,
+      "text": "trusted on this but uh there okay let's"
+    },
+    {
+      "index": 557,
+      "start": 1684.44,
+      "end": 1687.07,
+      "duration": 2.63,
+      "text": "do the opposite make a really big steps"
+    },
+    {
+      "index": 558,
+      "start": 1687.08,
+      "end": 1688.75,
+      "duration": 1.67,
+      "text": "suppose instead of the yellow one I'd"
+    },
+    {
+      "index": 559,
+      "start": 1688.76,
+      "end": 1691.75,
+      "duration": 2.99,
+      "text": "used the green one well a double step"
+    },
+    {
+      "index": 560,
+      "start": 1691.76,
+      "end": 1693.59,
+      "duration": 1.83,
+      "text": "size well what would have happened then"
+    },
+    {
+      "index": 561,
+      "start": 1693.6,
+      "end": 1695.35,
+      "duration": 1.75,
+      "text": "well I started out but now I've gone all"
+    },
+    {
+      "index": 562,
+      "start": 1695.36,
+      "end": 1698.11,
+      "duration": 2.75,
+      "text": "the way to there and now on my way up of"
+    },
+    {
+      "index": 563,
+      "start": 1698.12,
+      "end": 1700.149,
+      "duration": 2.029,
+      "text": "course it it has a little further to go"
+    },
+    {
+      "index": 564,
+      "start": 1700.159,
+      "end": 1702.19,
+      "duration": 2.031,
+      "text": "but if for some reason I had stopped"
+    },
+    {
+      "index": 565,
+      "start": 1702.2,
+      "end": 1704.19,
+      "duration": 1.99,
+      "text": "there you could see I would be still"
+    },
+    {
+      "index": 566,
+      "start": 1704.2,
+      "end": 1707.31,
+      "duration": 3.11,
+      "text": "lower in other words the bigger the step"
+    },
+    {
+      "index": 567,
+      "start": 1707.32,
+      "end": 1709.669,
+      "duration": 2.349,
+      "text": "size the the more the error and where"
+    },
+    {
+      "index": 568,
+      "start": 1709.679,
+      "end": 1711.47,
+      "duration": 1.791,
+      "text": "are the errors that we're talking about"
+    },
+    {
+      "index": 569,
+      "start": 1711.48,
+      "end": 1715.269,
+      "duration": 3.789,
+      "text": "well uh the way to think of the errors"
+    },
+    {
+      "index": 570,
+      "start": 1715.279,
+      "end": 1717.83,
+      "duration": 2.551,
+      "text": "this is the"
+    },
+    {
+      "index": 571,
+      "start": 1721.19,
+      "end": 1721.2,
+      "duration": 0.01,
+      "text": "error that number the error and you can"
+    },
+    {
+      "index": 572,
+      "start": 1721.2,
+      "end": 1723.509,
+      "duration": 2.309,
+      "text": "make it a positive negative or just put"
+    },
+    {
+      "index": 573,
+      "start": 1723.519,
+      "end": 1725.63,
+      "duration": 2.111,
+      "text": "an automatically an absolute value sign"
+    },
+    {
+      "index": 574,
+      "start": 1725.64,
+      "end": 1727.31,
+      "duration": 1.67,
+      "text": "around it that's not so"
+    },
+    {
+      "index": 575,
+      "start": 1727.32,
+      "end": 1729.35,
+      "duration": 2.03,
+      "text": "important so in other words the"
+    },
+    {
+      "index": 576,
+      "start": 1729.36,
+      "end": 1732.509,
+      "duration": 3.149,
+      "text": "conclusion is that the error that the"
+    },
+    {
+      "index": 577,
+      "start": 1732.519,
+      "end": 1736.509,
+      "duration": 3.99,
+      "text": "error E the difference between the True"
+    },
+    {
+      "index": 578,
+      "start": 1736.519,
+      "end": 1738.31,
+      "duration": 1.791,
+      "text": "Value that I should have gotten the"
+    },
+    {
+      "index": 579,
+      "start": 1738.32,
+      "end": 1740.83,
+      "duration": 2.51,
+      "text": "oiler value that the calculation"
+    },
+    {
+      "index": 580,
+      "start": 1740.84,
+      "end": 1744.83,
+      "duration": 3.99,
+      "text": "produced the the error E depends on the"
+    },
+    {
+      "index": 581,
+      "start": 1744.84,
+      "end": 1750.71,
+      "duration": 5.87,
+      "text": "step"
+    },
+    {
+      "index": 582,
+      "start": 1753.789,
+      "end": 1753.799,
+      "duration": 0.01,
+      "text": "size now how does it depend on the step"
+    },
+    {
+      "index": 583,
+      "start": 1753.799,
+      "end": 1756.269,
+      "duration": 2.47,
+      "text": "size well it's impossible to give an"
+    },
+    {
+      "index": 584,
+      "start": 1756.279,
+      "end": 1759.07,
+      "duration": 2.791,
+      "text": "exact formula but there's an approximate"
+    },
+    {
+      "index": 585,
+      "start": 1759.08,
+      "end": 1764.75,
+      "duration": 5.67,
+      "text": "answer which is by and large true and uh"
+    },
+    {
+      "index": 586,
+      "start": 1764.76,
+      "end": 1767.23,
+      "duration": 2.47,
+      "text": "the answer is so e is going to be a"
+    },
+    {
+      "index": 587,
+      "start": 1767.24,
+      "end": 1770.549,
+      "duration": 3.309,
+      "text": "function of H what function well"
+    },
+    {
+      "index": 588,
+      "start": 1770.559,
+      "end": 1772.47,
+      "duration": 1.911,
+      "text": "asymptotically which means is another"
+    },
+    {
+      "index": 589,
+      "start": 1772.48,
+      "end": 1775.389,
+      "duration": 2.909,
+      "text": "way of putting quotation marks uh around"
+    },
+    {
+      "index": 590,
+      "start": 1775.399,
+      "end": 1777.43,
+      "duration": 2.031,
+      "text": "what do I say it's going to be a"
+    },
+    {
+      "index": 591,
+      "start": 1777.44,
+      "end": 1781.789,
+      "duration": 4.349,
+      "text": "constant some constant times"
+    },
+    {
+      "index": 592,
+      "start": 1781.799,
+      "end": 1796.269,
+      "duration": 14.47,
+      "text": "H late you pretty"
+    },
+    {
+      "index": 593,
+      "start": 1813.11,
+      "end": 1813.12,
+      "duration": 0.01,
+      "text": "there it looks like this and for this"
+    },
+    {
+      "index": 594,
+      "start": 1813.12,
+      "end": 1816.909,
+      "duration": 3.789,
+      "text": "reason it's called a uh first"
+    },
+    {
+      "index": 595,
+      "start": 1816.919,
+      "end": 1821.149,
+      "duration": 4.23,
+      "text": "order the oiler is a first order method"
+    },
+    {
+      "index": 596,
+      "start": 1821.159,
+      "end": 1826.389,
+      "duration": 5.23,
+      "text": "and now first"
+    },
+    {
+      "index": 597,
+      "start": 1831.11,
+      "end": 1831.12,
+      "duration": 0.01,
+      "text": "order does not refer to the first order"
+    },
+    {
+      "index": 598,
+      "start": 1831.12,
+      "end": 1833.269,
+      "duration": 2.149,
+      "text": "of the differential equation it's not"
+    },
+    {
+      "index": 599,
+      "start": 1833.279,
+      "end": 1835.43,
+      "duration": 2.151,
+      "text": "that use of the word first it's not the"
+    },
+    {
+      "index": 600,
+      "start": 1835.44,
+      "end": 1837.269,
+      "duration": 1.829,
+      "text": "first order because it's y Prime equals"
+    },
+    {
+      "index": 601,
+      "start": 1837.279,
+      "end": 1840.75,
+      "duration": 3.471,
+      "text": "f ofx y the first order means the fact"
+    },
+    {
+      "index": 602,
+      "start": 1840.76,
+      "end": 1843.83,
+      "duration": 3.07,
+      "text": "that H occurs to the first"
+    },
+    {
+      "index": 603,
+      "start": 1843.84,
+      "end": 1847.509,
+      "duration": 3.669,
+      "text": "Power the way people usually say this"
+    },
+    {
+      "index": 604,
+      "start": 1847.519,
+      "end": 1850.43,
+      "duration": 2.911,
+      "text": "is since the normal way of decreasing"
+    },
+    {
+      "index": 605,
+      "start": 1850.44,
+      "end": 1852.669,
+      "duration": 2.229,
+      "text": "the step size as you'll see as soon as"
+    },
+    {
+      "index": 606,
+      "start": 1852.679,
+      "end": 1855.389,
+      "duration": 2.71,
+      "text": "you try to use the computer visual that"
+    },
+    {
+      "index": 607,
+      "start": 1855.399,
+      "end": 1857.23,
+      "duration": 1.831,
+      "text": "deals with Oiler method which I highly"
+    },
+    {
+      "index": 608,
+      "start": 1857.24,
+      "end": 1859.11,
+      "duration": 1.87,
+      "text": "recommend by the way so highly"
+    },
+    {
+      "index": 609,
+      "start": 1859.12,
+      "end": 1861.19,
+      "duration": 2.07,
+      "text": "recommended that you have to do"
+    },
+    {
+      "index": 610,
+      "start": 1861.2,
+      "end": 1863.509,
+      "duration": 2.309,
+      "text": "it uh"
+    },
+    {
+      "index": 611,
+      "start": 1863.519,
+      "end": 1865.95,
+      "duration": 2.431,
+      "text": "is is"
+    },
+    {
+      "index": 612,
+      "start": 1865.96,
+      "end": 1868.95,
+      "duration": 2.99,
+      "text": "that the way to say it that since you"
+    },
+    {
+      "index": 613,
+      "start": 1868.96,
+      "end": 1872.389,
+      "duration": 3.429,
+      "text": "con each new Step hases the step size"
+    },
+    {
+      "index": 614,
+      "start": 1872.399,
+      "end": 1875.629,
+      "duration": 3.23,
+      "text": "that's the usual way to do it uh if you"
+    },
+    {
+      "index": 615,
+      "start": 1875.639,
+      "end": 1882.59,
+      "duration": 6.951,
+      "text": "have the step"
+    },
+    {
+      "index": 616,
+      "start": 1885.71,
+      "end": 1885.72,
+      "duration": 0.01,
+      "text": "size since this is a constant if I have"
+    },
+    {
+      "index": 617,
+      "start": 1885.72,
+      "end": 1893.269,
+      "duration": 7.549,
+      "text": "the step size I have the eror"
+    },
+    {
+      "index": 618,
+      "start": 1895.87,
+      "end": 1895.88,
+      "duration": 0.01,
+      "text": "approximately have the step size have"
+    },
+    {
+      "index": 619,
+      "start": 1895.88,
+      "end": 1899.99,
+      "duration": 4.11,
+      "text": "the error that tells you how the error"
+    },
+    {
+      "index": 620,
+      "start": 1900.0,
+      "end": 1903.789,
+      "duration": 3.789,
+      "text": "varies with step size for Oilers"
+    },
+    {
+      "index": 621,
+      "start": 1903.799,
+      "end": 1909.71,
+      "duration": 5.911,
+      "text": "method"
+    },
+    {
+      "index": 622,
+      "start": 1912.11,
+      "end": 1912.12,
+      "duration": 0.01,
+      "text": "uh uh please understand that's what"
+    },
+    {
+      "index": 623,
+      "start": 1912.12,
+      "end": 1913.75,
+      "duration": 1.63,
+      "text": "people say and please understand the"
+    },
+    {
+      "index": 624,
+      "start": 1913.76,
+      "end": 1916.35,
+      "duration": 2.59,
+      "text": "grammatical construction"
+    },
+    {
+      "index": 625,
+      "start": 1916.36,
+      "end": 1918.75,
+      "duration": 2.39,
+      "text": "uh since everyone the math department"
+    },
+    {
+      "index": 626,
+      "start": 1918.76,
+      "end": 1921.35,
+      "duration": 2.59,
+      "text": "has a cold these days except me for the"
+    },
+    {
+      "index": 627,
+      "start": 1921.36,
+      "end": 1925.149,
+      "duration": 3.789,
+      "text": "moment"
+    },
+    {
+      "index": 628,
+      "start": 1927.71,
+      "end": 1927.72,
+      "duration": 0.01,
+      "text": "uh everyone goes around chanting this"
+    },
+    {
+      "index": 629,
+      "start": 1927.72,
+      "end": 1931.31,
+      "duration": 3.59,
+      "text": "Mantra this is totally irrelevant"
+    },
+    {
+      "index": 630,
+      "start": 1931.32,
+      "end": 1935.149,
+      "duration": 3.829,
+      "text": "uh total Mantra uh you know feed a cold"
+    },
+    {
+      "index": 631,
+      "start": 1935.159,
+      "end": 1937.75,
+      "duration": 2.591,
+      "text": "starve a"
+    },
+    {
+      "index": 632,
+      "start": 1941.11,
+      "end": 1941.12,
+      "duration": 0.01,
+      "text": "fever and if you ask them what it means"
+    },
+    {
+      "index": 633,
+      "start": 1941.12,
+      "end": 1944.669,
+      "duration": 3.549,
+      "text": "they say it means you know eat a lot if"
+    },
+    {
+      "index": 634,
+      "start": 1944.679,
+      "end": 1946.59,
+      "duration": 1.911,
+      "text": "you have a cold and if you have a fever"
+    },
+    {
+      "index": 635,
+      "start": 1946.6,
+      "end": 1949.11,
+      "duration": 2.51,
+      "text": "don't eat very much"
+    },
+    {
+      "index": 636,
+      "start": 1949.12,
+      "end": 1951.43,
+      "duration": 2.31,
+      "text": "which is not what it means at all"
+    },
+    {
+      "index": 637,
+      "start": 1951.44,
+      "end": 1953.269,
+      "duration": 1.829,
+      "text": "grammatically it's exactly the same"
+    },
+    {
+      "index": 638,
+      "start": 1953.279,
+      "end": 1954.87,
+      "duration": 1.591,
+      "text": "construction as"
+    },
+    {
+      "index": 639,
+      "start": 1954.88,
+      "end": 1958.59,
+      "duration": 3.71,
+      "text": "this have the what this means is if you"
+    },
+    {
+      "index": 640,
+      "start": 1958.6,
+      "end": 1962.11,
+      "duration": 3.51,
+      "text": "have the step size you will have the"
+    },
+    {
+      "index": 641,
+      "start": 1962.12,
+      "end": 1964.789,
+      "duration": 2.669,
+      "text": "error and that's what feed a cold starve"
+    },
+    {
+      "index": 642,
+      "start": 1964.799,
+      "end": 1966.71,
+      "duration": 1.911,
+      "text": "a fever means and remember this for the"
+    },
+    {
+      "index": 643,
+      "start": 1966.72,
+      "end": 1969.59,
+      "duration": 2.87,
+      "text": "rest of your life if you feed a cold if"
+    },
+    {
+      "index": 644,
+      "start": 1969.6,
+      "end": 1971.99,
+      "duration": 2.39,
+      "text": "you eat too much when you have a cold"
+    },
+    {
+      "index": 645,
+      "start": 1972.0,
+      "end": 1974.35,
+      "duration": 2.35,
+      "text": "you will get a fever and end up St"
+    },
+    {
+      "index": 646,
+      "start": 1974.36,
+      "end": 1977.149,
+      "duration": 2.789,
+      "text": "having to starve starve yourself because"
+    },
+    {
+      "index": 647,
+      "start": 1977.159,
+      "end": 1978.83,
+      "duration": 1.671,
+      "text": "of course nobody when you have a fever"
+    },
+    {
+      "index": 648,
+      "start": 1978.84,
+      "end": 1980.389,
+      "duration": 1.549,
+      "text": "nobody feels like eating so they don't"
+    },
+    {
+      "index": 649,
+      "start": 1980.399,
+      "end": 1981.47,
+      "duration": 1.071,
+      "text": "eat"
+    },
+    {
+      "index": 650,
+      "start": 1981.48,
+      "end": 1984.269,
+      "duration": 2.789,
+      "text": "anything all right you got that you got"
+    },
+    {
+      "index": 651,
+      "start": 1984.279,
+      "end": 1987.31,
+      "duration": 3.031,
+      "text": "that"
+    },
+    {
+      "index": 652,
+      "start": 1995.029,
+      "end": 1995.039,
+      "duration": 0.01,
+      "text": "go I want all of you to go home and tell"
+    },
+    {
+      "index": 653,
+      "start": 1995.039,
+      "end": 2002.549,
+      "duration": 7.51,
+      "text": "that to your"
+    },
+    {
+      "index": 654,
+      "start": 2004.35,
+      "end": 2004.36,
+      "duration": 0.01,
+      "text": "mothers you know that's the way we"
+    },
+    {
+      "index": 655,
+      "start": 2004.36,
+      "end": 2006.669,
+      "duration": 2.309,
+      "text": "always used to speak back you know a"
+    },
+    {
+      "index": 656,
+      "start": 2006.679,
+      "end": 2009.149,
+      "duration": 2.47,
+      "text": "Grimmer one spare the rod and spoil the"
+    },
+    {
+      "index": 657,
+      "start": 2009.159,
+      "end": 2011.71,
+      "duration": 2.551,
+      "text": "child does not mean that you should not"
+    },
+    {
+      "index": 658,
+      "start": 2011.72,
+      "end": 2014.43,
+      "duration": 2.71,
+      "text": "hit your kid and"
+    },
+    {
+      "index": 659,
+      "start": 2014.44,
+      "end": 2018.11,
+      "duration": 3.67,
+      "text": "uh it means it means that if you fail to"
+    },
+    {
+      "index": 660,
+      "start": 2018.12,
+      "end": 2021.11,
+      "duration": 2.99,
+      "text": "hit your kid uh he or she will be"
+    },
+    {
+      "index": 661,
+      "start": 2021.12,
+      "end": 2024.549,
+      "duration": 3.429,
+      "text": "spoiled whatever that means uh so uh you"
+    },
+    {
+      "index": 662,
+      "start": 2024.559,
+      "end": 2026.509,
+      "duration": 1.95,
+      "text": "don't want to you want to do with that"
+    },
+    {
+      "index": 663,
+      "start": 2026.519,
+      "end": 2029.549,
+      "duration": 3.03,
+      "text": "the I guess the mantra today would be uh"
+    },
+    {
+      "index": 664,
+      "start": 2029.559,
+      "end": 2031.909,
+      "duration": 2.35,
+      "text": "What"
+    },
+    {
+      "index": 665,
+      "start": 2031.919,
+      "end": 2038.87,
+      "duration": 6.951,
+      "text": "uh I don't know"
+    },
+    {
+      "index": 666,
+      "start": 2042.99,
+      "end": 2043.0,
+      "duration": 0.01,
+      "text": "okay so the first line of defense is"
+    },
+    {
+      "index": 667,
+      "start": 2043.0,
+      "end": 2046.71,
+      "duration": 3.71,
+      "text": "simply to uh keep having the step size"
+    },
+    {
+      "index": 668,
+      "start": 2046.72,
+      "end": 2048.95,
+      "duration": 2.23,
+      "text": "in Oiler and what people do is if they"
+    },
+    {
+      "index": 669,
+      "start": 2048.96,
+      "end": 2050.71,
+      "duration": 1.75,
+      "text": "don't want to use anything better than"
+    },
+    {
+      "index": 670,
+      "start": 2050.72,
+      "end": 2053.629,
+      "duration": 2.909,
+      "text": "Oilers method is you keep having the"
+    },
+    {
+      "index": 671,
+      "start": 2053.639,
+      "end": 2056.069,
+      "duration": 2.43,
+      "text": "step size until the curve doesn't seem"
+    },
+    {
+      "index": 672,
+      "start": 2056.079,
+      "end": 2058.79,
+      "duration": 2.711,
+      "text": "to change anymore and then you say well"
+    },
+    {
+      "index": 673,
+      "start": 2058.8,
+      "end": 2060.389,
+      "duration": 1.589,
+      "text": "that must be the"
+    },
+    {
+      "index": 674,
+      "start": 2060.399,
+      "end": 2062.909,
+      "duration": 2.51,
+      "text": "solution and I ask you on the problem"
+    },
+    {
+      "index": 675,
+      "start": 2062.919,
+      "end": 2065.79,
+      "duration": 2.871,
+      "text": "set how much would you could continue to"
+    },
+    {
+      "index": 676,
+      "start": 2065.8,
+      "end": 2068.389,
+      "duration": 2.589,
+      "text": "have to have the step size in order for"
+    },
+    {
+      "index": 677,
+      "start": 2068.399,
+      "end": 2069.99,
+      "duration": 1.591,
+      "text": "that good thing to"
+    },
+    {
+      "index": 678,
+      "start": 2070.0,
+      "end": 2072.669,
+      "duration": 2.669,
+      "text": "happen however there are more efficient"
+    },
+    {
+      "index": 679,
+      "start": 2072.679,
+      "end": 2075.71,
+      "duration": 3.031,
+      "text": "methods which gets the result"
+    },
+    {
+      "index": 680,
+      "start": 2075.72,
+      "end": 2079.19,
+      "duration": 3.47,
+      "text": "faster and so if that's our good method"
+    },
+    {
+      "index": 681,
+      "start": 2079.2,
+      "end": 2083.669,
+      "duration": 4.469,
+      "text": "let's call this our a bet a still better"
+    },
+    {
+      "index": 682,
+      "start": 2083.679,
+      "end": 2087.069,
+      "duration": 3.39,
+      "text": "method the better"
+    },
+    {
+      "index": 683,
+      "start": 2087.079,
+      "end": 2090.349,
+      "duration": 3.27,
+      "text": "methods aim at being better they keep"
+    },
+    {
+      "index": 684,
+      "start": 2090.359,
+      "end": 2093.19,
+      "duration": 2.831,
+      "text": "the same idea as Oilers method but they"
+    },
+    {
+      "index": 685,
+      "start": 2093.2,
+      "end": 2097.03,
+      "duration": 3.83,
+      "text": "say look let's try to improve that slope"
+    },
+    {
+      "index": 686,
+      "start": 2097.04,
+      "end": 2100.99,
+      "duration": 3.95,
+      "text": "a end in other words since the slope a n"
+    },
+    {
+      "index": 687,
+      "start": 2101.0,
+      "end": 2103.79,
+      "duration": 2.79,
+      "text": "that we start with is guaranteed to be"
+    },
+    {
+      "index": 688,
+      "start": 2103.8,
+      "end": 2106.71,
+      "duration": 2.91,
+      "text": "wrong if the curve is convex or concave"
+    },
+    {
+      "index": 689,
+      "start": 2106.72,
+      "end": 2109.67,
+      "duration": 2.95,
+      "text": "can we somehow correct it so that for"
+    },
+    {
+      "index": 690,
+      "start": 2109.68,
+      "end": 2112.23,
+      "duration": 2.55,
+      "text": "example instead of a immediately aiming"
+    },
+    {
+      "index": 691,
+      "start": 2112.24,
+      "end": 2114.67,
+      "duration": 2.43,
+      "text": "there can't we somehow aim it so that by"
+    },
+    {
+      "index": 692,
+      "start": 2114.68,
+      "end": 2117.67,
+      "duration": 2.99,
+      "text": "luck we just the next step just lands us"
+    },
+    {
+      "index": 693,
+      "start": 2117.68,
+      "end": 2119.51,
+      "duration": 1.83,
+      "text": "back on the curve again in other words"
+    },
+    {
+      "index": 694,
+      "start": 2119.52,
+      "end": 2121.51,
+      "duration": 1.99,
+      "text": "we're sort of looking for the short path"
+    },
+    {
+      "index": 695,
+      "start": 2121.52,
+      "end": 2124.23,
+      "duration": 2.71,
+      "text": "a shortcut path which by good luck will"
+    },
+    {
+      "index": 696,
+      "start": 2124.24,
+      "end": 2126.87,
+      "duration": 2.63,
+      "text": "end us up back on the curve again and"
+    },
+    {
+      "index": 697,
+      "start": 2126.88,
+      "end": 2128.63,
+      "duration": 1.75,
+      "text": "all the Improv ments the simple"
+    },
+    {
+      "index": 698,
+      "start": 2128.64,
+      "end": 2131.15,
+      "duration": 2.51,
+      "text": "improvements on Oiler method method and"
+    },
+    {
+      "index": 699,
+      "start": 2131.16,
+      "end": 2133.79,
+      "duration": 2.63,
+      "text": "they are the most stable in ways to do"
+    },
+    {
+      "index": 700,
+      "start": 2133.8,
+      "end": 2136.349,
+      "duration": 2.549,
+      "text": "solve differential equations numerically"
+    },
+    {
+      "index": 701,
+      "start": 2136.359,
+      "end": 2138.79,
+      "duration": 2.431,
+      "text": "aim at finding a better"
+    },
+    {
+      "index": 702,
+      "start": 2138.8,
+      "end": 2143.51,
+      "duration": 4.71,
+      "text": "slope so they find a better value for a"
+    },
+    {
+      "index": 703,
+      "start": 2143.52,
+      "end": 2146.51,
+      "duration": 2.99,
+      "text": "better a better slope find a better"
+    },
+    {
+      "index": 704,
+      "start": 2146.52,
+      "end": 2148.23,
+      "duration": 1.71,
+      "text": "value value"
+    },
+    {
+      "index": 705,
+      "start": 2148.24,
+      "end": 2150.67,
+      "duration": 2.43,
+      "text": "for than a"
+    },
+    {
+      "index": 706,
+      "start": 2150.68,
+      "end": 2153.43,
+      "duration": 2.75,
+      "text": "n try to improve that slope that you"
+    },
+    {
+      "index": 707,
+      "start": 2153.44,
+      "end": 2155.63,
+      "duration": 2.19,
+      "text": "found now once you have the idea that"
+    },
+    {
+      "index": 708,
+      "start": 2155.64,
+      "end": 2157.99,
+      "duration": 2.35,
+      "text": "you should look for a better slope uh"
+    },
+    {
+      "index": 709,
+      "start": 2158.0,
+      "end": 2160.43,
+      "duration": 2.43,
+      "text": "it's not very difficult to see what in"
+    },
+    {
+      "index": 710,
+      "start": 2160.44,
+      "end": 2163.95,
+      "duration": 3.51,
+      "text": "fact you should try again I think most"
+    },
+    {
+      "index": 711,
+      "start": 2163.96,
+      "end": 2166.47,
+      "duration": 2.51,
+      "text": "of you would say uh hey I would have"
+    },
+    {
+      "index": 712,
+      "start": 2166.48,
+      "end": 2167.47,
+      "duration": 0.99,
+      "text": "thought of"
+    },
+    {
+      "index": 713,
+      "start": 2167.48,
+      "end": 2170.03,
+      "duration": 2.55,
+      "text": "that uh and you'd be closer in time"
+    },
+    {
+      "index": 714,
+      "start": 2170.04,
+      "end": 2172.27,
+      "duration": 2.23,
+      "text": "since these methods were only found"
+    },
+    {
+      "index": 715,
+      "start": 2172.28,
+      "end": 2175.109,
+      "duration": 2.829,
+      "text": "about uh maybe 100 around the turn of"
+    },
+    {
+      "index": 716,
+      "start": 2175.119,
+      "end": 2178.75,
+      "duration": 3.631,
+      "text": "the last century is when I plac"
+    },
+    {
+      "index": 717,
+      "start": 2178.76,
+      "end": 2180.79,
+      "duration": 2.03,
+      "text": "them mostly by some German"
+    },
+    {
+      "index": 718,
+      "start": 2180.8,
+      "end": 2183.109,
+      "duration": 2.309,
+      "text": "mathematicians interested in solving"
+    },
+    {
+      "index": 719,
+      "start": 2183.119,
+      "end": 2185.79,
+      "duration": 2.671,
+      "text": "equations numerically all right so what"
+    },
+    {
+      "index": 720,
+      "start": 2185.8,
+      "end": 2188.23,
+      "duration": 2.43,
+      "text": "is uh the better method"
+    },
+    {
+      "index": 721,
+      "start": 2188.24,
+      "end": 2190.75,
+      "duration": 2.51,
+      "text": "our better slope what should we look for"
+    },
+    {
+      "index": 722,
+      "start": 2190.76,
+      "end": 2193.589,
+      "duration": 2.829,
+      "text": "in our better slope well the simplest"
+    },
+    {
+      "index": 723,
+      "start": 2193.599,
+      "end": 2195.91,
+      "duration": 2.311,
+      "text": "procedure is once again we're starting"
+    },
+    {
+      "index": 724,
+      "start": 2195.92,
+      "end": 2200.47,
+      "duration": 4.55,
+      "text": "from there and the oiler slope would be"
+    },
+    {
+      "index": 725,
+      "start": 2200.48,
+      "end": 2203.27,
+      "duration": 2.79,
+      "text": "the same as the line element so it uh"
+    },
+    {
+      "index": 726,
+      "start": 2203.28,
+      "end": 2205.95,
+      "duration": 2.67,
+      "text": "the line element looks like this and our"
+    },
+    {
+      "index": 727,
+      "start": 2205.96,
+      "end": 2208.87,
+      "duration": 2.91,
+      "text": "yellow slope a an I'll still continue to"
+    },
+    {
+      "index": 728,
+      "start": 2208.88,
+      "end": 2211.91,
+      "duration": 3.03,
+      "text": "call it a goes like that and gets to"
+    },
+    {
+      "index": 729,
+      "start": 2211.92,
+      "end": 2215.109,
+      "duration": 3.189,
+      "text": "here okay now if it were convex if the"
+    },
+    {
+      "index": 730,
+      "start": 2215.119,
+      "end": 2217.95,
+      "duration": 2.831,
+      "text": "curve were convex this would be too low"
+    },
+    {
+      "index": 731,
+      "start": 2217.96,
+      "end": 2221.069,
+      "duration": 3.109,
+      "text": "and therefore the next step would"
+    },
+    {
+      "index": 732,
+      "start": 2221.079,
+      "end": 2223.67,
+      "duration": 2.591,
+      "text": "be I'm going to draw this next step in"
+    },
+    {
+      "index": 733,
+      "start": 2223.68,
+      "end": 2228.15,
+      "duration": 4.47,
+      "text": "pink well uh let's let's continue in uh"
+    },
+    {
+      "index": 734,
+      "start": 2228.16,
+      "end": 2231.589,
+      "duration": 3.429,
+      "text": "here would be uh going up like that I'll"
+    },
+    {
+      "index": 735,
+      "start": 2231.599,
+      "end": 2234.55,
+      "duration": 2.951,
+      "text": "call this BN just because it's the next"
+    },
+    {
+      "index": 736,
+      "start": 2234.56,
+      "end": 2236.39,
+      "duration": 1.83,
+      "text": "step of Oilers method it could be called"
+    },
+    {
+      "index": 737,
+      "start": 2236.4,
+      "end": 2239.51,
+      "duration": 3.11,
+      "text": "a an prime or something like that but"
+    },
+    {
+      "index": 738,
+      "start": 2239.52,
+      "end": 2242.19,
+      "duration": 2.67,
+      "text": "this will do and now what you do is let"
+    },
+    {
+      "index": 739,
+      "start": 2242.2,
+      "end": 2244.71,
+      "duration": 2.51,
+      "text": "me put an arrow on it to indicate"
+    },
+    {
+      "index": 740,
+      "start": 2244.72,
+      "end": 2249.51,
+      "duration": 4.79,
+      "text": "parallel this go back to the beginning"
+    },
+    {
+      "index": 741,
+      "start": 2249.52,
+      "end": 2253.39,
+      "duration": 3.87,
+      "text": "draw this parallel to BN so here is BN"
+    },
+    {
+      "index": 742,
+      "start": 2253.4,
+      "end": 2256.15,
+      "duration": 2.75,
+      "text": "again just a line of slope that same"
+    },
+    {
+      "index": 743,
+      "start": 2256.16,
+      "end": 2259.67,
+      "duration": 3.51,
+      "text": "slope and now what you should use as the"
+    },
+    {
+      "index": 744,
+      "start": 2259.68,
+      "end": 2262.95,
+      "duration": 3.27,
+      "text": "simplest Improvement on Oilers method is"
+    },
+    {
+      "index": 745,
+      "start": 2262.96,
+      "end": 2265.27,
+      "duration": 2.31,
+      "text": "take the average of these two because"
+    },
+    {
+      "index": 746,
+      "start": 2265.28,
+      "end": 2267.55,
+      "duration": 2.27,
+      "text": "that's more likely to hit the curve than"
+    },
+    {
+      "index": 747,
+      "start": 2267.56,
+      "end": 2270.23,
+      "duration": 2.67,
+      "text": "a an will which is sure to be too low if"
+    },
+    {
+      "index": 748,
+      "start": 2270.24,
+      "end": 2273.03,
+      "duration": 2.79,
+      "text": "the curve is convex in other words use"
+    },
+    {
+      "index": 749,
+      "start": 2273.04,
+      "end": 2275.15,
+      "duration": 2.11,
+      "text": "this instead use"
+    },
+    {
+      "index": 750,
+      "start": 2275.16,
+      "end": 2283.39,
+      "duration": 8.23,
+      "text": "that so this is our better"
+    },
+    {
+      "index": 751,
+      "start": 2286.19,
+      "end": 2286.2,
+      "duration": 0.01,
+      "text": "slope okay what will we call that slope"
+    },
+    {
+      "index": 752,
+      "start": 2286.2,
+      "end": 2287.91,
+      "duration": 1.71,
+      "text": "we don't have to call it anything what"
+    },
+    {
+      "index": 753,
+      "start": 2287.92,
+      "end": 2291.55,
+      "duration": 3.63,
+      "text": "would the equations for the method be"
+    },
+    {
+      "index": 754,
+      "start": 2291.56,
+      "end": 2296.47,
+      "duration": 4.91,
+      "text": "well xn + 1 is gotten by adding the step"
+    },
+    {
+      "index": 755,
+      "start": 2296.48,
+      "end": 2298.63,
+      "duration": 2.15,
+      "text": "size so here's my step size just as it"
+    },
+    {
+      "index": 756,
+      "start": 2298.64,
+      "end": 2300.109,
+      "duration": 1.469,
+      "text": "was"
+    },
+    {
+      "index": 757,
+      "start": 2300.119,
+      "end": 2302.63,
+      "duration": 2.511,
+      "text": "before just as it was before the new"
+    },
+    {
+      "index": 758,
+      "start": 2302.64,
+      "end": 2305.71,
+      "duration": 3.07,
+      "text": "thing is how to get the new value of y"
+    },
+    {
+      "index": 759,
+      "start": 2305.72,
+      "end": 2310.79,
+      "duration": 5.07,
+      "text": "so y n + one should be the old YN plus h"
+    },
+    {
+      "index": 760,
+      "start": 2310.8,
+      "end": 2315.19,
+      "duration": 4.39,
+      "text": "* not this crummy slope a n but the"
+    },
+    {
+      "index": 761,
+      "start": 2315.2,
+      "end": 2318.03,
+      "duration": 2.83,
+      "text": "better the pink slope what's the formula"
+    },
+    {
+      "index": 762,
+      "start": 2318.04,
+      "end": 2320.39,
+      "duration": 2.35,
+      "text": "for the pink slope well let's do it in"
+    },
+    {
+      "index": 763,
+      "start": 2320.4,
+      "end": 2326.47,
+      "duration": 6.07,
+      "text": "two steps it's the average of a and"
+    },
+    {
+      "index": 764,
+      "start": 2329.23,
+      "end": 2329.24,
+      "duration": 0.01,
+      "text": "BN hey but you didn't tell me or I"
+    },
+    {
+      "index": 765,
+      "start": 2329.24,
+      "end": 2331.829,
+      "duration": 2.589,
+      "text": "didn't tell you what BN was so you now"
+    },
+    {
+      "index": 766,
+      "start": 2331.839,
+      "end": 2334.55,
+      "duration": 2.711,
+      "text": "must tell the computer oh yes by the way"
+    },
+    {
+      "index": 767,
+      "start": 2334.56,
+      "end": 2336.39,
+      "duration": 1.83,
+      "text": "you remember that a an was what it"
+    },
+    {
+      "index": 768,
+      "start": 2336.4,
+      "end": 2337.95,
+      "duration": 1.55,
+      "text": "always was"
+    },
+    {
+      "index": 769,
+      "start": 2337.96,
+      "end": 2341.03,
+      "duration": 3.07,
+      "text": "the interesting thing is what is BN well"
+    },
+    {
+      "index": 770,
+      "start": 2341.04,
+      "end": 2344.589,
+      "duration": 3.549,
+      "text": "to get BN BN is the slope of the line"
+    },
+    {
+      "index": 771,
+      "start": 2344.599,
+      "end": 2346.63,
+      "duration": 2.031,
+      "text": "element at this new"
+    },
+    {
+      "index": 772,
+      "start": 2346.64,
+      "end": 2348.67,
+      "duration": 2.03,
+      "text": "point now what am I going to call that"
+    },
+    {
+      "index": 773,
+      "start": 2348.68,
+      "end": 2350.829,
+      "duration": 2.149,
+      "text": "new point I don't want to call this y"
+    },
+    {
+      "index": 774,
+      "start": 2350.839,
+      "end": 2355.27,
+      "duration": 4.431,
+      "text": "value YN + one because that's it's this"
+    },
+    {
+      "index": 775,
+      "start": 2355.28,
+      "end": 2357.03,
+      "duration": 1.75,
+      "text": "up here that's going to be the YN plus"
+    },
+    {
+      "index": 776,
+      "start": 2357.04,
+      "end": 2360.43,
+      "duration": 3.39,
+      "text": "one all this is is a temporary value"
+    },
+    {
+      "index": 777,
+      "start": 2360.44,
+      "end": 2363.349,
+      "duration": 2.909,
+      "text": "used to make another calculation which"
+    },
+    {
+      "index": 778,
+      "start": 2363.359,
+      "end": 2365.39,
+      "duration": 2.031,
+      "text": "will then be combined with the previous"
+    },
+    {
+      "index": 779,
+      "start": 2365.4,
+      "end": 2368.79,
+      "duration": 3.39,
+      "text": "calculations to get the right value"
+    },
+    {
+      "index": 780,
+      "start": 2368.8,
+      "end": 2372.069,
+      "duration": 3.269,
+      "text": "therefore give it a temporary"
+    },
+    {
+      "index": 781,
+      "start": 2372.079,
+      "end": 2375.51,
+      "duration": 3.431,
+      "text": "name that point we'll call it it's not"
+    },
+    {
+      "index": 782,
+      "start": 2375.52,
+      "end": 2378.109,
+      "duration": 2.589,
+      "text": "going to be the final the real YN + one"
+    },
+    {
+      "index": 783,
+      "start": 2378.119,
+      "end": 2381.43,
+      "duration": 3.311,
+      "text": "we'll call it yn+1 twiddles YN plus1"
+    },
+    {
+      "index": 784,
+      "start": 2381.44,
+      "end": 2384.23,
+      "duration": 2.79,
+      "text": "temporary uh and what's the formula for"
+    },
+    {
+      "index": 785,
+      "start": 2384.24,
+      "end": 2386.349,
+      "duration": 2.109,
+      "text": "it well it's just going to be what the"
+    },
+    {
+      "index": 786,
+      "start": 2386.359,
+      "end": 2388.71,
+      "duration": 2.351,
+      "text": "oiler formula original Oiler formula"
+    },
+    {
+      "index": 787,
+      "start": 2388.72,
+      "end": 2390.95,
+      "duration": 2.23,
+      "text": "it's going to be YN plus what you would"
+    },
+    {
+      "index": 788,
+      "start": 2390.96,
+      "end": 2392.75,
+      "duration": 1.79,
+      "text": "have gotten if you would"
+    },
+    {
+      "index": 789,
+      "start": 2392.76,
+      "end": 2394.829,
+      "duration": 2.069,
+      "text": "calculated in other words it's the point"
+    },
+    {
+      "index": 790,
+      "start": 2394.839,
+      "end": 2397.87,
+      "duration": 3.031,
+      "text": "that the oiler method produced"
+    },
+    {
+      "index": 791,
+      "start": 2397.88,
+      "end": 2400.069,
+      "duration": 2.189,
+      "text": "uh but it's not finally the point that"
+    },
+    {
+      "index": 792,
+      "start": 2400.079,
+      "end": 2400.829,
+      "duration": 0.75,
+      "text": "we"
+    },
+    {
+      "index": 793,
+      "start": 2400.839,
+      "end": 2404.109,
+      "duration": 3.27,
+      "text": "want now do I have to say anything else"
+    },
+    {
+      "index": 794,
+      "start": 2404.119,
+      "end": 2406.23,
+      "duration": 2.111,
+      "text": "uh yeah I didn't tell the computer what"
+    },
+    {
+      "index": 795,
+      "start": 2406.24,
+      "end": 2411.43,
+      "duration": 5.19,
+      "text": "BN was okay BN is the"
+    },
+    {
+      "index": 796,
+      "start": 2411.44,
+      "end": 2414.91,
+      "duration": 3.47,
+      "text": "slope of the direction field at the"
+    },
+    {
+      "index": 797,
+      "start": 2414.92,
+      "end": 2417.43,
+      "duration": 2.51,
+      "text": "point n + one and the computer knows"
+    },
+    {
+      "index": 798,
+      "start": 2417.44,
+      "end": 2422.309,
+      "duration": 4.869,
+      "text": "what that is and this point y n + one"
+    },
+    {
+      "index": 799,
+      "start": 2422.319,
+      "end": 2427.51,
+      "duration": 5.191,
+      "text": "temporary"
+    },
+    {
+      "index": 800,
+      "start": 2430.589,
+      "end": 2430.599,
+      "duration": 0.01,
+      "text": "so you make a temporary choice of this"
+    },
+    {
+      "index": 801,
+      "start": 2430.599,
+      "end": 2433.15,
+      "duration": 2.551,
+      "text": "calculate that number and then go back"
+    },
+    {
+      "index": 802,
+      "start": 2433.16,
+      "end": 2435.91,
+      "duration": 2.75,
+      "text": "and as it were correct that value to"
+    },
+    {
+      "index": 803,
+      "start": 2435.92,
+      "end": 2441.309,
+      "duration": 5.389,
+      "text": "this value by using this better"
+    },
+    {
+      "index": 804,
+      "start": 2444.03,
+      "end": 2444.04,
+      "duration": 0.01,
+      "text": "slope now that's all there is to the"
+    },
+    {
+      "index": 805,
+      "start": 2444.04,
+      "end": 2446.71,
+      "duration": 2.67,
+      "text": "method except I didn't give you its name"
+    },
+    {
+      "index": 806,
+      "start": 2446.72,
+      "end": 2449.87,
+      "duration": 3.15,
+      "text": "uh well it has three names four names in"
+    },
+    {
+      "index": 807,
+      "start": 2449.88,
+      "end": 2453.829,
+      "duration": 3.949,
+      "text": "fact uh which one shall I give you uh I"
+    },
+    {
+      "index": 808,
+      "start": 2453.839,
+      "end": 2454.829,
+      "duration": 0.99,
+      "text": "don't"
+    },
+    {
+      "index": 809,
+      "start": 2454.839,
+      "end": 2460.829,
+      "duration": 5.99,
+      "text": "care okay if you the short name is hoins"
+    },
+    {
+      "index": 810,
+      "start": 2460.839,
+      "end": 2464.19,
+      "duration": 3.351,
+      "text": "Method but nobody knows pronounces that"
+    },
+    {
+      "index": 811,
+      "start": 2464.2,
+      "end": 2468.19,
+      "duration": 3.99,
+      "text": "correctly uh so that's Hy's method uh"
+    },
+    {
+      "index": 812,
+      "start": 2468.2,
+      "end": 2474.19,
+      "duration": 5.99,
+      "text": "it's called also the improved Oiler"
+    },
+    {
+      "index": 813,
+      "start": 2477.75,
+      "end": 2477.76,
+      "duration": 0.01,
+      "text": "method it's called modified"
+    },
+    {
+      "index": 814,
+      "start": 2477.76,
+      "end": 2481.63,
+      "duration": 3.87,
+      "text": "Oiler very expressive"
+    },
+    {
+      "index": 815,
+      "start": 2481.64,
+      "end": 2485.15,
+      "duration": 3.51,
+      "text": "word modified Oilers method and it's"
+    },
+    {
+      "index": 816,
+      "start": 2485.16,
+      "end": 2488.23,
+      "duration": 3.07,
+      "text": "also called AR"
+    },
+    {
+      "index": 817,
+      "start": 2488.24,
+      "end": 2491.15,
+      "duration": 2.91,
+      "text": "K2 I'm sure you'll like that name best"
+    },
+    {
+      "index": 818,
+      "start": 2491.16,
+      "end": 2496.069,
+      "duration": 4.909,
+      "text": "it has a Star Wars sort of sound to it"
+    },
+    {
+      "index": 819,
+      "start": 2496.079,
+      "end": 2500.63,
+      "duration": 4.551,
+      "text": "uh R Cas stands for runga cuta and the"
+    },
+    {
+      "index": 820,
+      "start": 2500.64,
+      "end": 2501.99,
+      "duration": 1.35,
+      "text": "reason for the"
+    },
+    {
+      "index": 821,
+      "start": 2502.0,
+      "end": 2505.069,
+      "duration": 3.069,
+      "text": "two is not that it uses two well it is"
+    },
+    {
+      "index": 822,
+      "start": 2505.079,
+      "end": 2508.069,
+      "duration": 2.99,
+      "text": "that it uses two slopes but the real"
+    },
+    {
+      "index": 823,
+      "start": 2508.079,
+      "end": 2510.55,
+      "duration": 2.471,
+      "text": "reason for the two is that it it is a"
+    },
+    {
+      "index": 824,
+      "start": 2510.56,
+      "end": 2512.91,
+      "duration": 2.35,
+      "text": "second order method so let's that's the"
+    },
+    {
+      "index": 825,
+      "start": 2512.92,
+      "end": 2514.63,
+      "duration": 1.71,
+      "text": "most important thing to put down about"
+    },
+    {
+      "index": 826,
+      "start": 2514.64,
+      "end": 2517.55,
+      "duration": 2.91,
+      "text": "it it's a second order method whereas"
+    },
+    {
+      "index": 827,
+      "start": 2517.56,
+      "end": 2520.43,
+      "duration": 2.87,
+      "text": "Oilers was only a first order method so"
+    },
+    {
+      "index": 828,
+      "start": 2520.44,
+      "end": 2522.67,
+      "duration": 2.23,
+      "text": "this is a so Ho's"
+    },
+    {
+      "index": 829,
+      "start": 2522.68,
+      "end": 2525.47,
+      "duration": 2.79,
+      "text": "method or rk2 let's write it that's the"
+    },
+    {
+      "index": 830,
+      "start": 2525.48,
+      "end": 2527.87,
+      "duration": 2.39,
+      "text": "shortest thing to write is a second"
+    },
+    {
+      "index": 831,
+      "start": 2527.88,
+      "end": 2531.23,
+      "duration": 3.35,
+      "text": "order method"
+    },
+    {
+      "index": 832,
+      "start": 2531.24,
+      "end": 2534.589,
+      "duration": 3.349,
+      "text": "meaning that the error varies with the"
+    },
+    {
+      "index": 833,
+      "start": 2534.599,
+      "end": 2535.91,
+      "duration": 1.311,
+      "text": "step"
+    },
+    {
+      "index": 834,
+      "start": 2535.92,
+      "end": 2539.069,
+      "duration": 3.149,
+      "text": "size like some constant it won't be the"
+    },
+    {
+      "index": 835,
+      "start": 2539.079,
+      "end": 2541.589,
+      "duration": 2.51,
+      "text": "same as the constant for Oilers method"
+    },
+    {
+      "index": 836,
+      "start": 2541.599,
+      "end": 2544.109,
+      "duration": 2.51,
+      "text": "times H"
+    },
+    {
+      "index": 837,
+      "start": 2544.119,
+      "end": 2547.63,
+      "duration": 3.511,
+      "text": "squared that's a big saving because it"
+    },
+    {
+      "index": 838,
+      "start": 2547.64,
+      "end": 2550.71,
+      "duration": 3.07,
+      "text": "now means that if you have the step size"
+    },
+    {
+      "index": 839,
+      "start": 2550.72,
+      "end": 2553.589,
+      "duration": 2.869,
+      "text": "you're going to decrease the error by a"
+    },
+    {
+      "index": 840,
+      "start": 2553.599,
+      "end": 2557.27,
+      "duration": 3.671,
+      "text": "factor of one quarter you will quarter"
+    },
+    {
+      "index": 841,
+      "start": 2557.28,
+      "end": 2559.19,
+      "duration": 1.91,
+      "text": "the"
+    },
+    {
+      "index": 842,
+      "start": 2559.2,
+      "end": 2561.87,
+      "duration": 2.67,
+      "text": "error now you say hey great why should"
+    },
+    {
+      "index": 843,
+      "start": 2561.88,
+      "end": 2565.19,
+      "duration": 3.31,
+      "text": "anyone use anything else well think a"
+    },
+    {
+      "index": 844,
+      "start": 2565.2,
+      "end": 2567.549,
+      "duration": 2.349,
+      "text": "little second the real thing which"
+    },
+    {
+      "index": 845,
+      "start": 2567.559,
+      "end": 2570.109,
+      "duration": 2.55,
+      "text": "determines how slowly one of these"
+    },
+    {
+      "index": 846,
+      "start": 2570.119,
+      "end": 2573.15,
+      "duration": 3.031,
+      "text": "methods run is you look at the hardest"
+    },
+    {
+      "index": 847,
+      "start": 2573.16,
+      "end": 2575.549,
+      "duration": 2.389,
+      "text": "step of the method and ask how long does"
+    },
+    {
+      "index": 848,
+      "start": 2575.559,
+      "end": 2577.549,
+      "duration": 1.99,
+      "text": "the computer take how many of those"
+    },
+    {
+      "index": 849,
+      "start": 2577.559,
+      "end": 2579.87,
+      "duration": 2.311,
+      "text": "hardest steps are there now the answer"
+    },
+    {
+      "index": 850,
+      "start": 2579.88,
+      "end": 2583.069,
+      "duration": 3.189,
+      "text": "is the hardest step is always the"
+    },
+    {
+      "index": 851,
+      "start": 2583.079,
+      "end": 2585.589,
+      "duration": 2.51,
+      "text": "evaluation of the slope the evaluation"
+    },
+    {
+      "index": 852,
+      "start": 2585.599,
+      "end": 2588.309,
+      "duration": 2.71,
+      "text": "of the function because you know I the"
+    },
+    {
+      "index": 853,
+      "start": 2588.319,
+      "end": 2590.39,
+      "duration": 2.071,
+      "text": "functions that are in common use are not"
+    },
+    {
+      "index": 854,
+      "start": 2590.4,
+      "end": 2594.069,
+      "duration": 3.669,
+      "text": "x^2 minus y^2 they take half a page and"
+    },
+    {
+      "index": 855,
+      "start": 2594.079,
+      "end": 2595.829,
+      "duration": 1.75,
+      "text": "have his coefficients you know 10"
+    },
+    {
+      "index": 856,
+      "start": 2595.839,
+      "end": 2599.39,
+      "duration": 3.551,
+      "text": "decimal place numbers whatever the guy"
+    },
+    {
+      "index": 857,
+      "start": 2599.4,
+      "end": 2601.349,
+      "duration": 1.949,
+      "text": "the engineer is doing it you know"
+    },
+    {
+      "index": 858,
+      "start": 2601.359,
+      "end": 2603.75,
+      "duration": 2.391,
+      "text": "whatever their accuracy"
+    },
+    {
+      "index": 859,
+      "start": 2603.76,
+      "end": 2606.589,
+      "duration": 2.829,
+      "text": "was so the thing that controls how long"
+    },
+    {
+      "index": 860,
+      "start": 2606.599,
+      "end": 2609.75,
+      "duration": 3.151,
+      "text": "a method runs is how many times the"
+    },
+    {
+      "index": 861,
+      "start": 2609.76,
+      "end": 2612.309,
+      "duration": 2.549,
+      "text": "slope the function must be"
+    },
+    {
+      "index": 862,
+      "start": 2612.319,
+      "end": 2615.15,
+      "duration": 2.831,
+      "text": "evaluated for Oiler I only have to"
+    },
+    {
+      "index": 863,
+      "start": 2615.16,
+      "end": 2618.109,
+      "duration": 2.949,
+      "text": "evaluate it"
+    },
+    {
+      "index": 864,
+      "start": 2626.63,
+      "end": 2626.64,
+      "duration": 0.01,
+      "text": "twice now roughly speaking the number of"
+    },
+    {
+      "index": 865,
+      "start": 2626.64,
+      "end": 2630.109,
+      "duration": 3.469,
+      "text": "function evaluations will each will give"
+    },
+    {
+      "index": 866,
+      "start": 2630.119,
+      "end": 2632.87,
+      "duration": 2.751,
+      "text": "you the exponent the method that's"
+    },
+    {
+      "index": 867,
+      "start": 2632.88,
+      "end": 2635.349,
+      "duration": 2.469,
+      "text": "called rung a cut a fourth order will"
+    },
+    {
+      "index": 868,
+      "start": 2635.359,
+      "end": 2639.549,
+      "duration": 4.19,
+      "text": "require four evaluations of slope but"
+    },
+    {
+      "index": 869,
+      "start": 2639.559,
+      "end": 2642.23,
+      "duration": 2.671,
+      "text": "the accuracy will be like H to the"
+    },
+    {
+      "index": 870,
+      "start": 2642.24,
+      "end": 2645.67,
+      "duration": 3.43,
+      "text": "4th very accurate you have the step size"
+    },
+    {
+      "index": 871,
+      "start": 2645.68,
+      "end": 2649.71,
+      "duration": 4.03,
+      "text": "and it goes down by a factor of 16 great"
+    },
+    {
+      "index": 872,
+      "start": 2649.72,
+      "end": 2652.549,
+      "duration": 2.829,
+      "text": "but you had to do it for you had to"
+    },
+    {
+      "index": 873,
+      "start": 2652.559,
+      "end": 2655.99,
+      "duration": 3.431,
+      "text": "evaluate the slope four times suppose"
+    },
+    {
+      "index": 874,
+      "start": 2656.0,
+      "end": 2658.349,
+      "duration": 2.349,
+      "text": "instead you"
+    },
+    {
+      "index": 875,
+      "start": 2658.359,
+      "end": 2660.27,
+      "duration": 1.911,
+      "text": "had"
+    },
+    {
+      "index": 876,
+      "start": 2660.28,
+      "end": 2663.589,
+      "duration": 3.309,
+      "text": "have four times this thing and what"
+    },
+    {
+      "index": 877,
+      "start": 2663.599,
+      "end": 2664.829,
+      "duration": 1.23,
+      "text": "would you have done you would have"
+    },
+    {
+      "index": 878,
+      "start": 2664.839,
+      "end": 2667.63,
+      "duration": 2.791,
+      "text": "decreased it to 116th of what it"
+    },
+    {
+      "index": 879,
+      "start": 2667.64,
+      "end": 2671.51,
+      "duration": 3.87,
+      "text": "was you still you would increase the"
+    },
+    {
+      "index": 880,
+      "start": 2671.52,
+      "end": 2673.309,
+      "duration": 1.789,
+      "text": "number of functions evaluations you"
+    },
+    {
+      "index": 881,
+      "start": 2673.319,
+      "end": 2674.39,
+      "duration": 1.071,
+      "text": "needed"
+    },
+    {
+      "index": 882,
+      "start": 2674.4,
+      "end": 2679.23,
+      "duration": 4.83,
+      "text": "to four and you would have decreased the"
+    },
+    {
+      "index": 883,
+      "start": 2679.24,
+      "end": 2682.71,
+      "duration": 3.47,
+      "text": "error by a 16th so in some sense it"
+    },
+    {
+      "index": 884,
+      "start": 2682.72,
+      "end": 2684.51,
+      "duration": 1.79,
+      "text": "really doesn't matter whether you use a"
+    },
+    {
+      "index": 885,
+      "start": 2684.52,
+      "end": 2687.349,
+      "duration": 2.829,
+      "text": "very fancy method which requires more"
+    },
+    {
+      "index": 886,
+      "start": 2687.359,
+      "end": 2689.309,
+      "duration": 1.95,
+      "text": "function evaluation it's true the eror"
+    },
+    {
+      "index": 887,
+      "start": 2689.319,
+      "end": 2691.47,
+      "duration": 2.151,
+      "text": "goes down faster but you having to do"
+    },
+    {
+      "index": 888,
+      "start": 2691.48,
+      "end": 2695.47,
+      "duration": 3.99,
+      "text": "more work to get it so anyway nothing's"
+    },
+    {
+      "index": 889,
+      "start": 2695.48,
+      "end": 2699.91,
+      "duration": 4.43,
+      "text": "free now uh I was I there is an arcave"
+    },
+    {
+      "index": 890,
+      "start": 2699.92,
+      "end": 2701.95,
+      "duration": 2.03,
+      "text": "for I think I'll skip that since I"
+    },
+    {
+      "index": 891,
+      "start": 2701.96,
+      "end": 2703.71,
+      "duration": 1.75,
+      "text": "wouldn't dare to ask you any questions"
+    },
+    {
+      "index": 892,
+      "start": 2703.72,
+      "end": 2707.19,
+      "duration": 3.47,
+      "text": "about it but uh let me I just mention it"
+    },
+    {
+      "index": 893,
+      "start": 2707.2,
+      "end": 2710.63,
+      "duration": 3.43,
+      "text": "at least because it's the standard it"
+    },
+    {
+      "index": 894,
+      "start": 2710.64,
+      "end": 2713.71,
+      "duration": 3.07,
+      "text": "uses for evaluation it's the standard"
+    },
+    {
+      "index": 895,
+      "start": 2713.72,
+      "end": 2716.23,
+      "duration": 2.51,
+      "text": "method if uh you don't want to do"
+    },
+    {
+      "index": 896,
+      "start": 2716.24,
+      "end": 2718.87,
+      "duration": 2.63,
+      "text": "anything fancier uh it's rather"
+    },
+    {
+      "index": 897,
+      "start": 2718.88,
+      "end": 2720.99,
+      "duration": 2.11,
+      "text": "inefficient but it's very accurate"
+    },
+    {
+      "index": 898,
+      "start": 2721.0,
+      "end": 2724.309,
+      "duration": 3.309,
+      "text": "standard method uh"
+    },
+    {
+      "index": 899,
+      "start": 2724.319,
+      "end": 2726.79,
+      "duration": 2.471,
+      "text": "accurate and uh you'll see when you use"
+    },
+    {
+      "index": 900,
+      "start": 2726.8,
+      "end": 2731.349,
+      "duration": 4.549,
+      "text": "the programs it's in fact the program"
+    },
+    {
+      "index": 901,
+      "start": 2731.359,
+      "end": 2732.95,
+      "duration": 1.591,
+      "text": "which is drawing those curves the"
+    },
+    {
+      "index": 902,
+      "start": 2732.96,
+      "end": 2735.27,
+      "duration": 2.31,
+      "text": "numerical method which draws all those"
+    },
+    {
+      "index": 903,
+      "start": 2735.28,
+      "end": 2737.069,
+      "duration": 1.789,
+      "text": "curves that you believe"
+    },
+    {
+      "index": 904,
+      "start": 2737.079,
+      "end": 2740.95,
+      "duration": 3.871,
+      "text": "in uh on the computer screen is the rk4"
+    },
+    {
+      "index": 905,
+      "start": 2740.96,
+      "end": 2742.67,
+      "duration": 1.71,
+      "text": "method the runga cut up I should give"
+    },
+    {
+      "index": 906,
+      "start": 2742.68,
+      "end": 2748.549,
+      "duration": 5.869,
+      "text": "them the names rangaka fourth order"
+    },
+    {
+      "index": 907,
+      "start": 2752.19,
+      "end": 2752.2,
+      "duration": 0.01,
+      "text": "method two mathemati two I believe both"
+    },
+    {
+      "index": 908,
+      "start": 2752.2,
+      "end": 2754.47,
+      "duration": 2.27,
+      "text": "German mathematicians around the turn of"
+    },
+    {
+      "index": 909,
+      "start": 2754.48,
+      "end": 2759.43,
+      "duration": 4.95,
+      "text": "last century rangaka fourth order"
+    },
+    {
+      "index": 910,
+      "start": 2767.23,
+      "end": 2767.24,
+      "duration": 0.01,
+      "text": "slopes requires you to calculate four"
+    },
+    {
+      "index": 911,
+      "start": 2767.24,
+      "end": 2769.069,
+      "duration": 1.829,
+      "text": "slopes I won't bother telling you what"
+    },
+    {
+      "index": 912,
+      "start": 2769.079,
+      "end": 2770.71,
+      "duration": 1.631,
+      "text": "you do but it's a procedure like that"
+    },
+    {
+      "index": 913,
+      "start": 2770.72,
+      "end": 2772.549,
+      "duration": 1.829,
+      "text": "it's just a little more elaborate and"
+    },
+    {
+      "index": 914,
+      "start": 2772.559,
+      "end": 2774.95,
+      "duration": 2.391,
+      "text": "you take two of these you make up a"
+    },
+    {
+      "index": 915,
+      "start": 2774.96,
+      "end": 2778.109,
+      "duration": 3.149,
+      "text": "weighted average for the super slope you"
+    },
+    {
+      "index": 916,
+      "start": 2778.119,
+      "end": 2779.79,
+      "duration": 1.671,
+      "text": "use weighted average what should I"
+    },
+    {
+      "index": 917,
+      "start": 2779.8,
+      "end": 2781.75,
+      "duration": 1.95,
+      "text": "divide that"
+    },
+    {
+      "index": 918,
+      "start": 2781.76,
+      "end": 2784.03,
+      "duration": 2.27,
+      "text": "by to get the"
+    },
+    {
+      "index": 919,
+      "start": 2784.04,
+      "end": 2785.71,
+      "duration": 1.67,
+      "text": "right"
+    },
+    {
+      "index": 920,
+      "start": 2785.72,
+      "end": 2788.43,
+      "duration": 2.71,
+      "text": "six why why six well because if all"
+    },
+    {
+      "index": 921,
+      "start": 2788.44,
+      "end": 2790.829,
+      "duration": 2.389,
+      "text": "these numbers were the same I'd want it"
+    },
+    {
+      "index": 922,
+      "start": 2790.839,
+      "end": 2792.75,
+      "duration": 1.911,
+      "text": "to come out to be whatever that common"
+    },
+    {
+      "index": 923,
+      "start": 2792.76,
+      "end": 2795.15,
+      "duration": 2.39,
+      "text": "value was therefore you always must"
+    },
+    {
+      "index": 924,
+      "start": 2795.16,
+      "end": 2797.03,
+      "duration": 1.87,
+      "text": "divide by in a weighted average you must"
+    },
+    {
+      "index": 925,
+      "start": 2797.04,
+      "end": 2798.87,
+      "duration": 1.83,
+      "text": "always divide by the sum of the"
+    },
+    {
+      "index": 926,
+      "start": 2798.88,
+      "end": 2803.95,
+      "duration": 5.07,
+      "text": "coefficients so this is the super"
+    },
+    {
+      "index": 927,
+      "start": 2807.75,
+      "end": 2807.76,
+      "duration": 0.01,
+      "text": "slope and if you plug that super slope"
+    },
+    {
+      "index": 928,
+      "start": 2807.76,
+      "end": 2810.67,
+      "duration": 2.91,
+      "text": "in uh to here you will be using the"
+    },
+    {
+      "index": 929,
+      "start": 2810.68,
+      "end": 2812.47,
+      "duration": 1.79,
+      "text": "wrong a cutter method and get the best"
+    },
+    {
+      "index": 930,
+      "start": 2812.48,
+      "end": 2815.109,
+      "duration": 2.629,
+      "text": "possible results now I wanted to spend"
+    },
+    {
+      "index": 931,
+      "start": 2815.119,
+      "end": 2817.67,
+      "duration": 2.551,
+      "text": "the last three minutes uh talking about"
+    },
+    {
+      "index": 932,
+      "start": 2817.68,
+      "end": 2821.309,
+      "duration": 3.629,
+      "text": "pitfalls of numerical computation in"
+    },
+    {
+      "index": 933,
+      "start": 2821.319,
+      "end": 2824.51,
+      "duration": 3.191,
+      "text": "general uh one Pitfall I'm leaving you"
+    },
+    {
+      "index": 934,
+      "start": 2824.52,
+      "end": 2828.19,
+      "duration": 3.67,
+      "text": "on the homework to discover for"
+    },
+    {
+      "index": 935,
+      "start": 2830.43,
+      "end": 2830.44,
+      "duration": 0.01,
+      "text": "yourself don't worry it won't cause you"
+    },
+    {
+      "index": 936,
+      "start": 2830.44,
+      "end": 2832.109,
+      "duration": 1.669,
+      "text": "any grief"
+    },
+    {
+      "index": 937,
+      "start": 2832.119,
+      "end": 2835.03,
+      "duration": 2.911,
+      "text": "just it'll just destroy your faith in"
+    },
+    {
+      "index": 938,
+      "start": 2835.04,
+      "end": 2836.589,
+      "duration": 1.549,
+      "text": "these things for the rest of your life"
+    },
+    {
+      "index": 939,
+      "start": 2836.599,
+      "end": 2842.829,
+      "duration": 6.23,
+      "text": "which is probably a good thing so"
+    },
+    {
+      "index": 940,
+      "start": 2849.309,
+      "end": 2849.319,
+      "duration": 0.01,
+      "text": "pitfalls number one you find you'll"
+    },
+    {
+      "index": 941,
+      "start": 2849.319,
+      "end": 2852.069,
+      "duration": 2.75,
+      "text": "find let me talk instead briefly about"
+    },
+    {
+      "index": 942,
+      "start": 2852.079,
+      "end": 2854.87,
+      "duration": 2.791,
+      "text": "number two which I'm not giving you an"
+    },
+    {
+      "index": 943,
+      "start": 2854.88,
+      "end": 2858.589,
+      "duration": 3.709,
+      "text": "exercise in number two is illustrated by"
+    },
+    {
+      "index": 944,
+      "start": 2858.599,
+      "end": 2860.79,
+      "duration": 2.191,
+      "text": "the following"
+    },
+    {
+      "index": 945,
+      "start": 2860.8,
+      "end": 2863.309,
+      "duration": 2.509,
+      "text": "equation what could be"
+    },
+    {
+      "index": 946,
+      "start": 2863.319,
+      "end": 2866.99,
+      "duration": 3.671,
+      "text": "simpler this is a very bad equation to"
+    },
+    {
+      "index": 947,
+      "start": 2867.0,
+      "end": 2870.39,
+      "duration": 3.39,
+      "text": "try to solve numerically now why well"
+    },
+    {
+      "index": 948,
+      "start": 2870.4,
+      "end": 2872.27,
+      "duration": 1.87,
+      "text": "because if I separate"
+    },
+    {
+      "index": 949,
+      "start": 2872.28,
+      "end": 2874.47,
+      "duration": 2.19,
+      "text": "variables uh why don't I save a little"
+    },
+    {
+      "index": 950,
+      "start": 2874.48,
+      "end": 2875.87,
+      "duration": 1.39,
+      "text": "time I'll just tell you what the"
+    },
+    {
+      "index": 951,
+      "start": 2875.88,
+      "end": 2877.87,
+      "duration": 1.99,
+      "text": "solution is okay okay you obviously you"
+    },
+    {
+      "index": 952,
+      "start": 2877.88,
+      "end": 2879.43,
+      "duration": 1.55,
+      "text": "separate variables maybe you can do it"
+    },
+    {
+      "index": 953,
+      "start": 2879.44,
+      "end": 2882.549,
+      "duration": 3.109,
+      "text": "in your head the solution will be the"
+    },
+    {
+      "index": 954,
+      "start": 2882.559,
+      "end": 2884.069,
+      "duration": 1.51,
+      "text": "solutions will have an arbitrary"
+    },
+    {
+      "index": 955,
+      "start": 2884.079,
+      "end": 2885.67,
+      "duration": 1.591,
+      "text": "constant in them and they won't be very"
+    },
+    {
+      "index": 956,
+      "start": 2885.68,
+      "end": 2887.71,
+      "duration": 2.03,
+      "text": "complicated they will be one over C"
+    },
+    {
+      "index": 957,
+      "start": 2887.72,
+      "end": 2889.23,
+      "duration": 1.51,
+      "text": "minus"
+    },
+    {
+      "index": 958,
+      "start": 2889.24,
+      "end": 2892.109,
+      "duration": 2.869,
+      "text": "x c is an arbitrary constant and as you"
+    },
+    {
+      "index": 959,
+      "start": 2892.119,
+      "end": 2893.75,
+      "duration": 1.631,
+      "text": "give different values you get now what"
+    },
+    {
+      "index": 960,
+      "start": 2893.76,
+      "end": 2897.23,
+      "duration": 3.47,
+      "text": "do those guys look like okay so here I"
+    },
+    {
+      "index": 961,
+      "start": 2897.24,
+      "end": 2901.63,
+      "duration": 4.39,
+      "text": "am I I'm start out at The Point one and"
+    },
+    {
+      "index": 962,
+      "start": 2901.64,
+      "end": 2904.549,
+      "duration": 2.909,
+      "text": "I start out I tell the computer compute"
+    },
+    {
+      "index": 963,
+      "start": 2904.559,
+      "end": 2906.99,
+      "duration": 2.431,
+      "text": "for me the value of the solution at one"
+    },
+    {
+      "index": 964,
+      "start": 2907.0,
+      "end": 2909.67,
+      "duration": 2.67,
+      "text": "starting out at one and it computes and"
+    },
+    {
+      "index": 965,
+      "start": 2909.68,
+      "end": 2911.829,
+      "duration": 2.149,
+      "text": "computes a little while but the solution"
+    },
+    {
+      "index": 966,
+      "start": 2911.839,
+      "end": 2914.19,
+      "duration": 2.351,
+      "text": "how does this curve actually look so in"
+    },
+    {
+      "index": 967,
+      "start": 2914.2,
+      "end": 2916.75,
+      "duration": 2.55,
+      "text": "other words suppose I say that y of 0"
+    },
+    {
+      "index": 968,
+      "start": 2916.76,
+      "end": 2921.51,
+      "duration": 4.75,
+      "text": "equals 1 find me y of two in other words"
+    },
+    {
+      "index": 969,
+      "start": 2921.52,
+      "end": 2924.15,
+      "duration": 2.63,
+      "text": "take a a nice small step size use the"
+    },
+    {
+      "index": 970,
+      "start": 2924.16,
+      "end": 2926.03,
+      "duration": 1.87,
+      "text": "rung of cut of fourth order method"
+    },
+    {
+      "index": 971,
+      "start": 2926.04,
+      "end": 2928.03,
+      "duration": 1.99,
+      "text": "calculate a little bit and tell me I"
+    },
+    {
+      "index": 972,
+      "start": 2928.04,
+      "end": 2930.349,
+      "duration": 2.309,
+      "text": "just want to know what y of two"
+    },
+    {
+      "index": 973,
+      "start": 2930.359,
+      "end": 2933.19,
+      "duration": 2.831,
+      "text": "is well what is y of2 oh well"
+    },
+    {
+      "index": 974,
+      "start": 2933.2,
+      "end": 2934.99,
+      "duration": 1.79,
+      "text": "unfortunately how does that curve look"
+    },
+    {
+      "index": 975,
+      "start": 2935.0,
+      "end": 2940.829,
+      "duration": 5.829,
+      "text": "the curve looks like this"
+    },
+    {
+      "index": 976,
+      "start": 2942.87,
+      "end": 2942.88,
+      "duration": 0.01,
+      "text": "at that point it drops to"
+    },
+    {
+      "index": 977,
+      "start": 2942.88,
+      "end": 2945.19,
+      "duration": 2.31,
+      "text": "Infinity in a manner of speaking and"
+    },
+    {
+      "index": 978,
+      "start": 2945.2,
+      "end": 2948.19,
+      "duration": 2.99,
+      "text": "then sort of comes back up again like"
+    },
+    {
+      "index": 979,
+      "start": 2948.2,
+      "end": 2950.789,
+      "duration": 2.589,
+      "text": "that what is the value of y this is the"
+    },
+    {
+      "index": 980,
+      "start": 2950.799,
+      "end": 2952.03,
+      "duration": 1.231,
+      "text": "point"
+    },
+    {
+      "index": 981,
+      "start": 2952.04,
+      "end": 2956.069,
+      "duration": 4.029,
+      "text": "one what is the value of y of two is it"
+    },
+    {
+      "index": 982,
+      "start": 2956.079,
+      "end": 2959.99,
+      "duration": 3.911,
+      "text": "here is it this well I don't know but I"
+    },
+    {
+      "index": 983,
+      "start": 2960.0,
+      "end": 2962.75,
+      "duration": 2.75,
+      "text": "do know that the computer will not find"
+    },
+    {
+      "index": 984,
+      "start": 2962.76,
+      "end": 2965.51,
+      "duration": 2.75,
+      "text": "it the computer will follow this along"
+    },
+    {
+      "index": 985,
+      "start": 2965.52,
+      "end": 2968.91,
+      "duration": 3.39,
+      "text": "and get lost in eternity in infinity and"
+    },
+    {
+      "index": 986,
+      "start": 2968.92,
+      "end": 2971.109,
+      "duration": 2.189,
+      "text": "see no reason whatever just why it"
+    },
+    {
+      "index": 987,
+      "start": 2971.119,
+      "end": 2973.589,
+      "duration": 2.47,
+      "text": "should start again on this branch of the"
+    },
+    {
+      "index": 988,
+      "start": 2973.599,
+      "end": 2977.43,
+      "duration": 3.831,
+      "text": "curve okay well we should can't we"
+    },
+    {
+      "index": 989,
+      "start": 2977.44,
+      "end": 2978.87,
+      "duration": 1.43,
+      "text": "predict that that's going to happen"
+    },
+    {
+      "index": 990,
+      "start": 2978.88,
+      "end": 2980.829,
+      "duration": 1.949,
+      "text": "somehow and you know avoided what I"
+    },
+    {
+      "index": 991,
+      "start": 2980.839,
+      "end": 2983.63,
+      "duration": 2.791,
+      "text": "should have you know the whole"
+    },
+    {
+      "index": 992,
+      "start": 2983.64,
+      "end": 2987.349,
+      "duration": 3.709,
+      "text": "difficulty is this is called a singular"
+    },
+    {
+      "index": 993,
+      "start": 2987.359,
+      "end": 2990.549,
+      "duration": 3.19,
+      "text": "point this this solution has a"
+    },
+    {
+      "index": 994,
+      "start": 2990.559,
+      "end": 2992.589,
+      "duration": 2.03,
+      "text": "singularity in other words a place where"
+    },
+    {
+      "index": 995,
+      "start": 2992.599,
+      "end": 2994.549,
+      "duration": 1.95,
+      "text": "it goes to infinity or becomes"
+    },
+    {
+      "index": 996,
+      "start": 2994.559,
+      "end": 2996.069,
+      "duration": 1.51,
+      "text": "discontinuous maybe has a jump"
+    },
+    {
+      "index": 997,
+      "start": 2996.079,
+      "end": 2997.15,
+      "duration": 1.071,
+      "text": "discontinu"
+    },
+    {
+      "index": 998,
+      "start": 2997.16,
+      "end": 3000.75,
+      "duration": 3.59,
+      "text": "it has a singularity at xal"
+    },
+    {
+      "index": 999,
+      "start": 3000.76,
+      "end": 3004.789,
+      "duration": 4.029,
+      "text": "C this in particular at x equal 1 here"
+    },
+    {
+      "index": 1000,
+      "start": 3004.799,
+      "end": 3006.67,
+      "duration": 1.871,
+      "text": "but from the differential equation there"
+    },
+    {
+      "index": 1001,
+      "start": 3006.68,
+      "end": 3009.39,
+      "duration": 2.71,
+      "text": "is where is that c there is no way of"
+    },
+    {
+      "index": 1002,
+      "start": 3009.4,
+      "end": 3012.069,
+      "duration": 2.669,
+      "text": "predicting it each solution in other"
+    },
+    {
+      "index": 1003,
+      "start": 3012.079,
+      "end": 3014.549,
+      "duration": 2.47,
+      "text": "words to this differential equation has"
+    },
+    {
+      "index": 1004,
+      "start": 3014.559,
+      "end": 3017.91,
+      "duration": 3.351,
+      "text": "its own private Singularity which only"
+    },
+    {
+      "index": 1005,
+      "start": 3017.92,
+      "end": 3019.95,
+      "duration": 2.03,
+      "text": "it knows about and where it's going to"
+    },
+    {
+      "index": 1006,
+      "start": 3019.96,
+      "end": 3022.069,
+      "duration": 2.109,
+      "text": "blow up and there's no way of telling"
+    },
+    {
+      "index": 1007,
+      "start": 3022.079,
+      "end": 3023.829,
+      "duration": 1.75,
+      "text": "from the differential equation where"
+    },
+    {
+      "index": 1008,
+      "start": 3023.839,
+      "end": 3026.75,
+      "duration": 2.911,
+      "text": "that's going to be that's what makes"
+    },
+    {
+      "index": 1009,
+      "start": 3026.76,
+      "end": 3028.589,
+      "duration": 1.829,
+      "text": "numerical c one of the things that makes"
+    },
+    {
+      "index": 1010,
+      "start": 3028.599,
+      "end": 3031.27,
+      "duration": 2.671,
+      "text": "numerical calculation difficult when you"
+    },
+    {
+      "index": 1011,
+      "start": 3031.28,
+      "end": 3033.15,
+      "duration": 1.87,
+      "text": "cannot predict where things are going to"
+    },
+    {
+      "index": 1012,
+      "start": 3033.16,
+      "end": 3036.92,
+      "duration": 3.76,
+      "text": "go bad in advance"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

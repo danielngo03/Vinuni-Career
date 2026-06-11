@@ -1,0 +1,5933 @@
+{
+  "video": {
+    "id": "8o5Cmfpeo6g",
+    "title": "6. Column Space and Nullspace",
+    "url": "https://www.youtube.com/watch?v=8o5Cmfpeo6g",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2761,
+    "language": "en"
+  },
+  "segment_count": 845,
+  "segments": [
+    {
+      "index": 0,
+      "start": 13.39,
+      "end": 13.4,
+      "duration": 0.01,
+      "text": "okay this is uh lecture six in linear"
+    },
+    {
+      "index": 1,
+      "start": 13.4,
+      "end": 17.349,
+      "duration": 3.949,
+      "text": "algebra and uh we're at the start of"
+    },
+    {
+      "index": 2,
+      "start": 17.359,
+      "end": 20.109,
+      "duration": 2.75,
+      "text": "this new chapter chapter three in the"
+    },
+    {
+      "index": 3,
+      "start": 20.119,
+      "end": 23.15,
+      "duration": 3.031,
+      "text": "text which is really getting to the"
+    },
+    {
+      "index": 4,
+      "start": 23.16,
+      "end": 27.509,
+      "duration": 4.349,
+      "text": "center of linear algebra and uh I had"
+    },
+    {
+      "index": 5,
+      "start": 27.519,
+      "end": 31.71,
+      "duration": 4.191,
+      "text": "time to make a first start on it at the"
+    },
+    {
+      "index": 6,
+      "start": 31.72,
+      "end": 35.95,
+      "duration": 4.23,
+      "text": "end of lecture five but now is lecture"
+    },
+    {
+      "index": 7,
+      "start": 35.96,
+      "end": 39.59,
+      "duration": 3.63,
+      "text": "six uh is officially the lecture on"
+    },
+    {
+      "index": 8,
+      "start": 39.6,
+      "end": 41.75,
+      "duration": 2.15,
+      "text": "Vector spaces and"
+    },
+    {
+      "index": 9,
+      "start": 41.76,
+      "end": 44.91,
+      "duration": 3.15,
+      "text": "subspaces and then especially there are"
+    },
+    {
+      "index": 10,
+      "start": 44.92,
+      "end": 47.59,
+      "duration": 2.67,
+      "text": "two ve two subspaces that we're"
+    },
+    {
+      "index": 11,
+      "start": 47.6,
+      "end": 50.63,
+      "duration": 3.03,
+      "text": "specially interested in one is the"
+    },
+    {
+      "index": 12,
+      "start": 50.64,
+      "end": 53.43,
+      "duration": 2.79,
+      "text": "column space of a matrix the other is"
+    },
+    {
+      "index": 13,
+      "start": 53.44,
+      "end": 57.189,
+      "duration": 3.749,
+      "text": "the null space of the Matrix so I got to"
+    },
+    {
+      "index": 14,
+      "start": 57.199,
+      "end": 60.79,
+      "duration": 3.591,
+      "text": "tell you what those are okay"
+    },
+    {
+      "index": 15,
+      "start": 60.8,
+      "end": 64.789,
+      "duration": 3.989,
+      "text": "so first to remember from lecture"
+    },
+    {
+      "index": 16,
+      "start": 64.799,
+      "end": 68.95,
+      "duration": 4.151,
+      "text": "five what is a vector space it's a bunch"
+    },
+    {
+      "index": 17,
+      "start": 68.96,
+      "end": 71.109,
+      "duration": 2.149,
+      "text": "of"
+    },
+    {
+      "index": 18,
+      "start": 71.119,
+      "end": 74.749,
+      "duration": 3.63,
+      "text": "vectors that where I'm allowed where I"
+    },
+    {
+      "index": 19,
+      "start": 74.759,
+      "end": 78.99,
+      "duration": 4.231,
+      "text": "can add I can add any two vectors in the"
+    },
+    {
+      "index": 20,
+      "start": 79.0,
+      "end": 82.35,
+      "duration": 3.35,
+      "text": "space and the answer it stays in the"
+    },
+    {
+      "index": 21,
+      "start": 82.36,
+      "end": 85.51,
+      "duration": 3.15,
+      "text": "space or I can multiply any Vector in"
+    },
+    {
+      "index": 22,
+      "start": 85.52,
+      "end": 88.71,
+      "duration": 3.19,
+      "text": "the space By Any constant and the result"
+    },
+    {
+      "index": 23,
+      "start": 88.72,
+      "end": 90.789,
+      "duration": 2.069,
+      "text": "stays in the space"
+    },
+    {
+      "index": 24,
+      "start": 90.799,
+      "end": 93.55,
+      "duration": 2.751,
+      "text": "so that's in fact if I combine those two"
+    },
+    {
+      "index": 25,
+      "start": 93.56,
+      "end": 94.469,
+      "duration": 0.909,
+      "text": "into"
+    },
+    {
+      "index": 26,
+      "start": 94.479,
+      "end": 98.069,
+      "duration": 3.59,
+      "text": "one you can see that if I can add and I"
+    },
+    {
+      "index": 27,
+      "start": 98.079,
+      "end": 101.469,
+      "duration": 3.39,
+      "text": "can multiply by by numbers that really"
+    },
+    {
+      "index": 28,
+      "start": 101.479,
+      "end": 103.63,
+      "duration": 2.151,
+      "text": "means that I can take linear"
+    },
+    {
+      "index": 29,
+      "start": 103.64,
+      "end": 106.55,
+      "duration": 2.91,
+      "text": "combinations so the quick way to say it"
+    },
+    {
+      "index": 30,
+      "start": 106.56,
+      "end": 107.55,
+      "duration": 0.99,
+      "text": "is that"
+    },
+    {
+      "index": 31,
+      "start": 107.56,
+      "end": 111.51,
+      "duration": 3.95,
+      "text": "all linear combinations C any multiple"
+    },
+    {
+      "index": 32,
+      "start": 111.52,
+      "end": 115.19,
+      "duration": 3.67,
+      "text": "of V plus any multiple of w stay in the"
+    },
+    {
+      "index": 33,
+      "start": 115.2,
+      "end": 118.59,
+      "duration": 3.39,
+      "text": "space so can I give you examples that"
+    },
+    {
+      "index": 34,
+      "start": 118.6,
+      "end": 120.429,
+      "duration": 1.829,
+      "text": "our Vector spaces"
+    },
+    {
+      "index": 35,
+      "start": 120.439,
+      "end": 122.95,
+      "duration": 2.511,
+      "text": "and also some examples that are not to"
+    },
+    {
+      "index": 36,
+      "start": 122.96,
+      "end": 125.91,
+      "duration": 2.95,
+      "text": "to make that point clear so suppose I'm"
+    },
+    {
+      "index": 37,
+      "start": 125.92,
+      "end": 129.389,
+      "duration": 3.469,
+      "text": "in uh three"
+    },
+    {
+      "index": 38,
+      "start": 129.399,
+      "end": 133.11,
+      "duration": 3.711,
+      "text": "dimensions then uh one way to get us"
+    },
+    {
+      "index": 39,
+      "start": 133.12,
+      "end": 136.11,
+      "duration": 2.99,
+      "text": "one uh one space is the whole"
+    },
+    {
+      "index": 40,
+      "start": 136.12,
+      "end": 138.91,
+      "duration": 2.79,
+      "text": "three-dimensional space so the whole"
+    },
+    {
+      "index": 41,
+      "start": 138.92,
+      "end": 140.229,
+      "duration": 1.309,
+      "text": "Space"
+    },
+    {
+      "index": 42,
+      "start": 140.239,
+      "end": 142.19,
+      "duration": 1.951,
+      "text": "R3 threedimensional"
+    },
+    {
+      "index": 43,
+      "start": 142.2,
+      "end": 145.39,
+      "duration": 3.19,
+      "text": "space would be a vector space because if"
+    },
+    {
+      "index": 44,
+      "start": 145.4,
+      "end": 147.509,
+      "duration": 2.109,
+      "text": "I have a couple of vectors I can add"
+    },
+    {
+      "index": 45,
+      "start": 147.519,
+      "end": 149.35,
+      "duration": 1.831,
+      "text": "them and I'm certainly okay and they"
+    },
+    {
+      "index": 46,
+      "start": 149.36,
+      "end": 151.19,
+      "duration": 1.83,
+      "text": "follow all the"
+    },
+    {
+      "index": 47,
+      "start": 151.2,
+      "end": 156.27,
+      "duration": 5.07,
+      "text": "rules so R3 is easy now I'm interested"
+    },
+    {
+      "index": 48,
+      "start": 156.28,
+      "end": 158.19,
+      "duration": 1.91,
+      "text": "also in"
+    },
+    {
+      "index": 49,
+      "start": 158.2,
+      "end": 161.39,
+      "duration": 3.19,
+      "text": "subspaces so there's this key word"
+    },
+    {
+      "index": 50,
+      "start": 161.4,
+      "end": 164.589,
+      "duration": 3.189,
+      "text": "subspaces that's a space of that's some"
+    },
+    {
+      "index": 51,
+      "start": 164.599,
+      "end": 166.55,
+      "duration": 1.951,
+      "text": "vectors"
+    },
+    {
+      "index": 52,
+      "start": 166.56,
+      "end": 170.949,
+      "duration": 4.389,
+      "text": "inside the given space inside R3 that"
+    },
+    {
+      "index": 53,
+      "start": 170.959,
+      "end": 173.39,
+      "duration": 2.431,
+      "text": "still make up a vector space of their of"
+    },
+    {
+      "index": 54,
+      "start": 173.4,
+      "end": 175.869,
+      "duration": 2.469,
+      "text": "their own it's a vector space inside a"
+    },
+    {
+      "index": 55,
+      "start": 175.879,
+      "end": 178.55,
+      "duration": 2.671,
+      "text": "vector space and the simplest example"
+    },
+    {
+      "index": 56,
+      "start": 178.56,
+      "end": 182.07,
+      "duration": 3.51,
+      "text": "was a plane so like can I just sketch it"
+    },
+    {
+      "index": 57,
+      "start": 182.08,
+      "end": 185.869,
+      "duration": 3.789,
+      "text": "there there is a plane it's got to go"
+    },
+    {
+      "index": 58,
+      "start": 185.879,
+      "end": 189.03,
+      "duration": 3.151,
+      "text": "through the origin and of course it goes"
+    },
+    {
+      "index": 59,
+      "start": 189.04,
+      "end": 191.63,
+      "duration": 2.59,
+      "text": "infinitely far that's a that's a"
+    },
+    {
+      "index": 60,
+      "start": 191.64,
+      "end": 195.55,
+      "duration": 3.91,
+      "text": "Subspace now do you see that if I have"
+    },
+    {
+      "index": 61,
+      "start": 195.56,
+      "end": 199.39,
+      "duration": 3.83,
+      "text": "two vectors on the plane and I add them"
+    },
+    {
+      "index": 62,
+      "start": 199.4,
+      "end": 203.39,
+      "duration": 3.99,
+      "text": "the result stays in the plane if I take"
+    },
+    {
+      "index": 63,
+      "start": 203.4,
+      "end": 205.83,
+      "duration": 2.43,
+      "text": "a vector in the plane and I multiply by"
+    },
+    {
+      "index": 64,
+      "start": 205.84,
+      "end": 209.07,
+      "duration": 3.23,
+      "text": "min-2 I'm still in the plane so that"
+    },
+    {
+      "index": 65,
+      "start": 209.08,
+      "end": 212.07,
+      "duration": 2.99,
+      "text": "plane is a Subspace so let me just make"
+    },
+    {
+      "index": 66,
+      "start": 212.08,
+      "end": 213.63,
+      "duration": 1.55,
+      "text": "that point"
+    },
+    {
+      "index": 67,
+      "start": 213.64,
+      "end": 216.789,
+      "duration": 3.149,
+      "text": "plane through"
+    },
+    {
+      "index": 68,
+      "start": 216.799,
+      "end": 223.27,
+      "duration": 6.471,
+      "text": "zero through that 0 0 0 is a"
+    },
+    {
+      "index": 69,
+      "start": 223.28,
+      "end": 226.949,
+      "duration": 3.669,
+      "text": "Subspace okay and"
+    },
+    {
+      "index": 70,
+      "start": 226.959,
+      "end": 230.63,
+      "duration": 3.671,
+      "text": "also uh another Subspace would be a"
+    },
+    {
+      "index": 71,
+      "start": 230.64,
+      "end": 234.63,
+      "duration": 3.99,
+      "text": "line a line through 0000 yeah the line"
+    },
+    {
+      "index": 72,
+      "start": 234.64,
+      "end": 236.71,
+      "duration": 2.07,
+      "text": "has to go through the origin all"
+    },
+    {
+      "index": 73,
+      "start": 236.72,
+      "end": 239.35,
+      "duration": 2.63,
+      "text": "subspaces have got to contain the origin"
+    },
+    {
+      "index": 74,
+      "start": 239.36,
+      "end": 243.11,
+      "duration": 3.75,
+      "text": "contain zero the zero Vector so this"
+    },
+    {
+      "index": 75,
+      "start": 243.12,
+      "end": 248.83,
+      "duration": 5.71,
+      "text": "line is a Subs line is a"
+    },
+    {
+      "index": 76,
+      "start": 250.99,
+      "end": 251.0,
+      "duration": 0.01,
+      "text": "Subspace really if"
+    },
+    {
+      "index": 77,
+      "start": 251.0,
+      "end": 253.949,
+      "duration": 2.949,
+      "text": "I if I want to say it really correctly I"
+    },
+    {
+      "index": 78,
+      "start": 253.959,
+      "end": 260.03,
+      "duration": 6.071,
+      "text": "should say a Subspace of R3 that's I"
+    },
+    {
+      "index": 79,
+      "start": 260.04,
+      "end": 264.11,
+      "duration": 4.07,
+      "text": "that of R3 was like understood there now"
+    },
+    {
+      "index": 80,
+      "start": 264.12,
+      "end": 267.469,
+      "duration": 3.349,
+      "text": "so let me call this plane P and let me"
+    },
+    {
+      "index": 81,
+      "start": 267.479,
+      "end": 270.67,
+      "duration": 3.191,
+      "text": "call this line L"
+    },
+    {
+      "index": 82,
+      "start": 270.68,
+      "end": 274.51,
+      "duration": 3.83,
+      "text": "and let me ask you"
+    },
+    {
+      "index": 83,
+      "start": 274.52,
+      "end": 277.83,
+      "duration": 3.31,
+      "text": "about other uh set"
+    },
+    {
+      "index": 84,
+      "start": 277.84,
+      "end": 282.15,
+      "duration": 4.31,
+      "text": "other sets of vectors suppose I"
+    },
+    {
+      "index": 85,
+      "start": 282.16,
+      "end": 284.51,
+      "duration": 2.35,
+      "text": "took yeah here here so here's a first"
+    },
+    {
+      "index": 86,
+      "start": 284.52,
+      "end": 287.71,
+      "duration": 3.19,
+      "text": "question suppose I take two subspaces"
+    },
+    {
+      "index": 87,
+      "start": 287.72,
+      "end": 289.23,
+      "duration": 1.51,
+      "text": "like"
+    },
+    {
+      "index": 88,
+      "start": 289.24,
+      "end": 293.43,
+      "duration": 4.19,
+      "text": "p&l and I just put them together take"
+    },
+    {
+      "index": 89,
+      "start": 293.44,
+      "end": 297.39,
+      "duration": 3.95,
+      "text": "their Union take all the vectors so so"
+    },
+    {
+      "index": 90,
+      "start": 297.4,
+      "end": 301.029,
+      "duration": 3.629,
+      "text": "now I you've got P and L in mind here so"
+    },
+    {
+      "index": 91,
+      "start": 301.039,
+      "end": 302.79,
+      "duration": 1.751,
+      "text": "I have two"
+    },
+    {
+      "index": 92,
+      "start": 302.8,
+      "end": 305.39,
+      "duration": 2.59,
+      "text": "subspaces I have two"
+    },
+    {
+      "index": 93,
+      "start": 305.4,
+      "end": 308.07,
+      "duration": 2.67,
+      "text": "subspaces and for"
+    },
+    {
+      "index": 94,
+      "start": 308.08,
+      "end": 314.59,
+      "duration": 6.51,
+      "text": "example p a plane and L A Line okay now"
+    },
+    {
+      "index": 95,
+      "start": 314.6,
+      "end": 317.27,
+      "duration": 2.67,
+      "text": "I want to ask you about the union of"
+    },
+    {
+      "index": 96,
+      "start": 317.28,
+      "end": 323.23,
+      "duration": 5.95,
+      "text": "those so P Union L this is all"
+    },
+    {
+      "index": 97,
+      "start": 325.83,
+      "end": 325.84,
+      "duration": 0.01,
+      "text": "vectors"
+    },
+    {
+      "index": 98,
+      "start": 325.84,
+      "end": 332.189,
+      "duration": 6.349,
+      "text": "in P or l or"
+    },
+    {
+      "index": 99,
+      "start": 335.35,
+      "end": 335.36,
+      "duration": 0.01,
+      "text": "MO is that a"
+    },
+    {
+      "index": 100,
+      "start": 335.36,
+      "end": 339.71,
+      "duration": 4.35,
+      "text": "Subspace is this a Subspace"
+    },
+    {
+      "index": 101,
+      "start": 339.72,
+      "end": 345.469,
+      "duration": 5.749,
+      "text": "this is or is"
+    },
+    {
+      "index": 102,
+      "start": 347.35,
+      "end": 347.36,
+      "duration": 0.01,
+      "text": "not a"
+    },
+    {
+      "index": 103,
+      "start": 347.36,
+      "end": 349.95,
+      "duration": 2.59,
+      "text": "Subspace because we I just want to be"
+    },
+    {
+      "index": 104,
+      "start": 349.96,
+      "end": 353.39,
+      "duration": 3.43,
+      "text": "sure that I've got the central"
+    },
+    {
+      "index": 105,
+      "start": 353.4,
+      "end": 356.87,
+      "duration": 3.47,
+      "text": "idea suppose I take the vectors in the"
+    },
+    {
+      "index": 106,
+      "start": 356.88,
+      "end": 362.189,
+      "duration": 5.309,
+      "text": "plane and also the vectors on that"
+    },
+    {
+      "index": 107,
+      "start": 362.199,
+      "end": 365.029,
+      "duration": 2.83,
+      "text": "line put them together so I've got a"
+    },
+    {
+      "index": 108,
+      "start": 365.039,
+      "end": 367.11,
+      "duration": 2.071,
+      "text": "bunch of vectors is it a Subspace can"
+    },
+    {
+      "index": 109,
+      "start": 367.12,
+      "end": 369.55,
+      "duration": 2.43,
+      "text": "you give me like so the camera can hear"
+    },
+    {
+      "index": 110,
+      "start": 369.56,
+      "end": 373.51,
+      "duration": 3.95,
+      "text": "it or maybe the tape can you say yes or"
+    },
+    {
+      "index": 111,
+      "start": 373.52,
+      "end": 378.39,
+      "duration": 4.87,
+      "text": "no do I have a Subspace if I put if I"
+    },
+    {
+      "index": 112,
+      "start": 378.4,
+      "end": 381.87,
+      "duration": 3.47,
+      "text": "take all the vectors on the plane plus"
+    },
+    {
+      "index": 113,
+      "start": 381.88,
+      "end": 385.029,
+      "duration": 3.149,
+      "text": "all and all the ones on the line and"
+    },
+    {
+      "index": 114,
+      "start": 385.039,
+      "end": 387.589,
+      "duration": 2.55,
+      "text": "just join them together but I'm not"
+    },
+    {
+      "index": 115,
+      "start": 387.599,
+      "end": 390.51,
+      "duration": 2.911,
+      "text": "taking this guy that's"
+    },
+    {
+      "index": 116,
+      "start": 390.52,
+      "end": 392.27,
+      "duration": 1.75,
+      "text": "actually I'm not taking most of them"
+    },
+    {
+      "index": 117,
+      "start": 392.28,
+      "end": 394.99,
+      "duration": 2.71,
+      "text": "because most vectors are not on the line"
+    },
+    {
+      "index": 118,
+      "start": 395.0,
+      "end": 397.55,
+      "duration": 2.55,
+      "text": "or the plane they're off somewhere else"
+    },
+    {
+      "index": 119,
+      "start": 397.56,
+      "end": 399.029,
+      "duration": 1.469,
+      "text": "do I have a"
+    },
+    {
+      "index": 120,
+      "start": 399.039,
+      "end": 403.909,
+      "duration": 4.87,
+      "text": "Subspace no right thank you no because"
+    },
+    {
+      "index": 121,
+      "start": 403.919,
+      "end": 408.51,
+      "duration": 4.591,
+      "text": "why not because I can't add because if I"
+    },
+    {
+      "index": 122,
+      "start": 408.52,
+      "end": 412.15,
+      "duration": 3.63,
+      "text": "that that requirement isn't satisfied if"
+    },
+    {
+      "index": 123,
+      "start": 412.16,
+      "end": 415.27,
+      "duration": 3.11,
+      "text": "I take one vector like this guy and"
+    },
+    {
+      "index": 124,
+      "start": 415.28,
+      "end": 416.909,
+      "duration": 1.629,
+      "text": "another Vector that happens to come from"
+    },
+    {
+      "index": 125,
+      "start": 416.919,
+      "end": 420.029,
+      "duration": 3.11,
+      "text": "L and add I'm off somewhere else"
+    },
+    {
+      "index": 126,
+      "start": 420.039,
+      "end": 423.15,
+      "duration": 3.111,
+      "text": "you see that I that I've gone"
+    },
+    {
+      "index": 127,
+      "start": 423.16,
+      "end": 426.83,
+      "duration": 3.67,
+      "text": "outside the union if I just add"
+    },
+    {
+      "index": 128,
+      "start": 426.84,
+      "end": 429.589,
+      "duration": 2.749,
+      "text": "something from p and something from L uh"
+    },
+    {
+      "index": 129,
+      "start": 429.599,
+      "end": 431.909,
+      "duration": 2.31,
+      "text": "then normally what'll happen is I'm"
+    },
+    {
+      "index": 130,
+      "start": 431.919,
+      "end": 435.95,
+      "duration": 4.031,
+      "text": "outside the Union uh the and I don't"
+    },
+    {
+      "index": 131,
+      "start": 435.96,
+      "end": 439.189,
+      "duration": 3.229,
+      "text": "have a Subspace so the correct answer is"
+    },
+    {
+      "index": 132,
+      "start": 439.199,
+      "end": 440.43,
+      "duration": 1.231,
+      "text": "is"
+    },
+    {
+      "index": 133,
+      "start": 440.44,
+      "end": 444.029,
+      "duration": 3.589,
+      "text": "not okay now let me ask you about the"
+    },
+    {
+      "index": 134,
+      "start": 444.039,
+      "end": 447.189,
+      "duration": 3.15,
+      "text": "other thing we do is take the"
+    },
+    {
+      "index": 135,
+      "start": 447.199,
+      "end": 449.309,
+      "duration": 2.11,
+      "text": "intersection so what does intersection"
+    },
+    {
+      "index": 136,
+      "start": 449.319,
+      "end": 454.51,
+      "duration": 5.191,
+      "text": "mean mean intersection means all"
+    },
+    {
+      "index": 137,
+      "start": 458.629,
+      "end": 458.639,
+      "duration": 0.01,
+      "text": "vectors that are in"
+    },
+    {
+      "index": 138,
+      "start": 458.639,
+      "end": 462.83,
+      "duration": 4.191,
+      "text": "both P and"
+    },
+    {
+      "index": 139,
+      "start": 462.84,
+      "end": 464.95,
+      "duration": 2.11,
+      "text": "L is this a"
+    },
+    {
+      "index": 140,
+      "start": 464.96,
+      "end": 467.189,
+      "duration": 2.229,
+      "text": "Subspace yeah so I guess I want to go"
+    },
+    {
+      "index": 141,
+      "start": 467.199,
+      "end": 470.749,
+      "duration": 3.55,
+      "text": "back up to the same question this is or"
+    },
+    {
+      "index": 142,
+      "start": 470.759,
+      "end": 474.43,
+      "duration": 3.671,
+      "text": "is not a Subspace and you can answer me"
+    },
+    {
+      "index": 143,
+      "start": 474.44,
+      "end": 477.11,
+      "duration": 2.67,
+      "text": "answer the question first for this"
+    },
+    {
+      "index": 144,
+      "start": 477.12,
+      "end": 480.749,
+      "duration": 3.629,
+      "text": "particular example this picture I drew"
+    },
+    {
+      "index": 145,
+      "start": 480.759,
+      "end": 484.23,
+      "duration": 3.471,
+      "text": "what's what is p intersect L for this"
+    },
+    {
+      "index": 146,
+      "start": 484.24,
+      "end": 486.83,
+      "duration": 2.59,
+      "text": "case it's only"
+    },
+    {
+      "index": 147,
+      "start": 486.84,
+      "end": 489.55,
+      "duration": 2.71,
+      "text": "zero at least sort of this was the"
+    },
+    {
+      "index": 148,
+      "start": 489.56,
+      "end": 492.589,
+      "duration": 3.029,
+      "text": "artist's idea as he drew it that uh that"
+    },
+    {
+      "index": 149,
+      "start": 492.599,
+      "end": 494.869,
+      "duration": 2.27,
+      "text": "that line L was not in the"
+    },
+    {
+      "index": 150,
+      "start": 494.879,
+      "end": 498.67,
+      "duration": 3.791,
+      "text": "plane and uh went off somewhere else and"
+    },
+    {
+      "index": 151,
+      "start": 498.68,
+      "end": 501.11,
+      "duration": 2.43,
+      "text": "then the only point that was in common"
+    },
+    {
+      "index": 152,
+      "start": 501.12,
+      "end": 503.83,
+      "duration": 2.71,
+      "text": "was the zero Vector is the zero vector"
+    },
+    {
+      "index": 153,
+      "start": 503.84,
+      "end": 507.95,
+      "duration": 4.11,
+      "text": "by itself a Subspace yes absolutely and"
+    },
+    {
+      "index": 154,
+      "start": 507.96,
+      "end": 512.389,
+      "duration": 4.429,
+      "text": "what about uh uh if I if if I don't have"
+    },
+    {
+      "index": 155,
+      "start": 512.399,
+      "end": 514.87,
+      "duration": 2.471,
+      "text": "this plane and this line but any"
+    },
+    {
+      "index": 156,
+      "start": 514.88,
+      "end": 517.709,
+      "duration": 2.829,
+      "text": "Subspace and any other"
+    },
+    {
+      "index": 157,
+      "start": 517.719,
+      "end": 520.43,
+      "duration": 2.711,
+      "text": "Subspace so now can can I ask that"
+    },
+    {
+      "index": 158,
+      "start": 520.44,
+      "end": 522.67,
+      "duration": 2.23,
+      "text": "question for any two"
+    },
+    {
+      "index": 159,
+      "start": 522.68,
+      "end": 527.55,
+      "duration": 4.87,
+      "text": "subspaces so maybe I'll write it up"
+    },
+    {
+      "index": 160,
+      "start": 527.56,
+      "end": 531.269,
+      "duration": 3.709,
+      "text": "here if I'm strong enough okay so this"
+    },
+    {
+      "index": 161,
+      "start": 531.279,
+      "end": 535.79,
+      "duration": 4.511,
+      "text": "is the general question I have"
+    },
+    {
+      "index": 162,
+      "start": 538.43,
+      "end": 538.44,
+      "duration": 0.01,
+      "text": "subspaces say"
+    },
+    {
+      "index": 163,
+      "start": 538.44,
+      "end": 540.35,
+      "duration": 1.91,
+      "text": "S&T"
+    },
+    {
+      "index": 164,
+      "start": 540.36,
+      "end": 546.15,
+      "duration": 5.79,
+      "text": "and I want to ask you about their"
+    },
+    {
+      "index": 165,
+      "start": 551.79,
+      "end": 551.8,
+      "duration": 0.01,
+      "text": "intersection s intersect T and I want it"
+    },
+    {
+      "index": 166,
+      "start": 551.8,
+      "end": 556.59,
+      "duration": 4.79,
+      "text": "is a"
+    },
+    {
+      "index": 167,
+      "start": 563.59,
+      "end": 563.6,
+      "duration": 0.01,
+      "text": "why do you see why if I take the vectors"
+    },
+    {
+      "index": 168,
+      "start": 563.6,
+      "end": 565.75,
+      "duration": 2.15,
+      "text": "that are in both one that are in both of"
+    },
+    {
+      "index": 169,
+      "start": 565.76,
+      "end": 566.829,
+      "duration": 1.069,
+      "text": "the"
+    },
+    {
+      "index": 170,
+      "start": 566.839,
+      "end": 569.55,
+      "duration": 2.711,
+      "text": "subspaces so that's like a smaller set"
+    },
+    {
+      "index": 171,
+      "start": 569.56,
+      "end": 571.43,
+      "duration": 1.87,
+      "text": "of vectors probably because it's we've"
+    },
+    {
+      "index": 172,
+      "start": 571.44,
+      "end": 574.03,
+      "duration": 2.59,
+      "text": "added requirements it has to be in s and"
+    },
+    {
+      "index": 173,
+      "start": 574.04,
+      "end": 575.389,
+      "duration": 1.349,
+      "text": "in"
+    },
+    {
+      "index": 174,
+      "start": 575.399,
+      "end": 578.35,
+      "duration": 2.951,
+      "text": "t how do I know that's a Subspace can we"
+    },
+    {
+      "index": 175,
+      "start": 578.36,
+      "end": 580.509,
+      "duration": 2.149,
+      "text": "just think through that abstract stuff"
+    },
+    {
+      "index": 176,
+      "start": 580.519,
+      "end": 582.79,
+      "duration": 2.271,
+      "text": "and then I get to the"
+    },
+    {
+      "index": 177,
+      "start": 582.8,
+      "end": 588.59,
+      "duration": 5.79,
+      "text": "examples okay so why suppose I take a"
+    },
+    {
+      "index": 178,
+      "start": 588.6,
+      "end": 590.15,
+      "duration": 1.55,
+      "text": "couple of vectors that are in the"
+    },
+    {
+      "index": 179,
+      "start": 590.16,
+      "end": 595.55,
+      "duration": 5.39,
+      "text": "intersection why is the sum also in the"
+    },
+    {
+      "index": 180,
+      "start": 595.56,
+      "end": 597.71,
+      "duration": 2.15,
+      "text": "intersection okay so let me give a name"
+    },
+    {
+      "index": 181,
+      "start": 597.72,
+      "end": 599.87,
+      "duration": 2.15,
+      "text": "to these vectors say V and"
+    },
+    {
+      "index": 182,
+      "start": 599.88,
+      "end": 602.509,
+      "duration": 2.629,
+      "text": "W they're in the intersection so that"
+    },
+    {
+      "index": 183,
+      "start": 602.519,
+      "end": 604.31,
+      "duration": 1.791,
+      "text": "means they're both in"
+    },
+    {
+      "index": 184,
+      "start": 604.32,
+      "end": 607.31,
+      "duration": 2.99,
+      "text": "s also means they're both in"
+    },
+    {
+      "index": 185,
+      "start": 607.32,
+      "end": 610.949,
+      "duration": 3.629,
+      "text": "t so what can I say about v+"
+    },
+    {
+      "index": 186,
+      "start": 610.959,
+      "end": 613.43,
+      "duration": 2.471,
+      "text": "W is it in"
+    },
+    {
+      "index": 187,
+      "start": 613.44,
+      "end": 617.99,
+      "duration": 4.55,
+      "text": "s yes right if if I take two vectors V"
+    },
+    {
+      "index": 188,
+      "start": 618.0,
+      "end": 621.949,
+      "duration": 3.949,
+      "text": "and W that are both in s then the sum is"
+    },
+    {
+      "index": 189,
+      "start": 621.959,
+      "end": 623.91,
+      "duration": 1.951,
+      "text": "in s because s was a"
+    },
+    {
+      "index": 190,
+      "start": 623.92,
+      "end": 626.87,
+      "duration": 2.95,
+      "text": "Subspace and if they're both in T and I"
+    },
+    {
+      "index": 191,
+      "start": 626.88,
+      "end": 629.75,
+      "duration": 2.87,
+      "text": "add them then the result is also in in t"
+    },
+    {
+      "index": 192,
+      "start": 629.76,
+      "end": 633.19,
+      "duration": 3.43,
+      "text": "because T was a Subspace so the"
+    },
+    {
+      "index": 193,
+      "start": 633.2,
+      "end": 637.269,
+      "duration": 4.069,
+      "text": "result V + W is in the intersection it's"
+    },
+    {
+      "index": 194,
+      "start": 637.279,
+      "end": 641.67,
+      "duration": 4.391,
+      "text": "in both and requirement one is"
+    },
+    {
+      "index": 195,
+      "start": 641.68,
+      "end": 644.55,
+      "duration": 2.87,
+      "text": "satisfied requirement two is the same if"
+    },
+    {
+      "index": 196,
+      "start": 644.56,
+      "end": 647.15,
+      "duration": 2.59,
+      "text": "I take a vector that's in both I"
+    },
+    {
+      "index": 197,
+      "start": 647.16,
+      "end": 650.03,
+      "duration": 2.87,
+      "text": "multiply by seven 7even times that"
+    },
+    {
+      "index": 198,
+      "start": 650.04,
+      "end": 652.629,
+      "duration": 2.589,
+      "text": "Vector is in s because the vector was in"
+    },
+    {
+      "index": 199,
+      "start": 652.639,
+      "end": 655.35,
+      "duration": 2.711,
+      "text": "s seven times that Vector is in t"
+    },
+    {
+      "index": 200,
+      "start": 655.36,
+      "end": 658.23,
+      "duration": 2.87,
+      "text": "because the the original one was in t so"
+    },
+    {
+      "index": 201,
+      "start": 658.24,
+      "end": 660.069,
+      "duration": 1.829,
+      "text": "stimes that vector is in the"
+    },
+    {
+      "index": 202,
+      "start": 660.079,
+      "end": 663.03,
+      "duration": 2.951,
+      "text": "intersection in other"
+    },
+    {
+      "index": 203,
+      "start": 663.04,
+      "end": 665.509,
+      "duration": 2.469,
+      "text": "words when you take the intersection of"
+    },
+    {
+      "index": 204,
+      "start": 665.519,
+      "end": 668.11,
+      "duration": 2.591,
+      "text": "two subspaces you get probably a smaller"
+    },
+    {
+      "index": 205,
+      "start": 668.12,
+      "end": 671.949,
+      "duration": 3.829,
+      "text": "Subspace but it is a Subspace okay so"
+    },
+    {
+      "index": 206,
+      "start": 671.959,
+      "end": 674.43,
+      "duration": 2.471,
+      "text": "that's like sort"
+    },
+    {
+      "index": 207,
+      "start": 674.44,
+      "end": 677.99,
+      "duration": 3.55,
+      "text": "of just emphasizing what these two"
+    },
+    {
+      "index": 208,
+      "start": 678.0,
+      "end": 679.19,
+      "duration": 1.19,
+      "text": "requirements"
+    },
+    {
+      "index": 209,
+      "start": 679.2,
+      "end": 683.15,
+      "duration": 3.95,
+      "text": "mean again to to to to let me Circle"
+    },
+    {
+      "index": 210,
+      "start": 683.16,
+      "end": 685.269,
+      "duration": 2.109,
+      "text": "those because those are so important the"
+    },
+    {
+      "index": 211,
+      "start": 685.279,
+      "end": 689.03,
+      "duration": 3.751,
+      "text": "the sum and the scalar multiplication"
+    },
+    {
+      "index": 212,
+      "start": 689.04,
+      "end": 693.11,
+      "duration": 4.07,
+      "text": "which which combines into linear"
+    },
+    {
+      "index": 213,
+      "start": 693.12,
+      "end": 695.389,
+      "duration": 2.269,
+      "text": "combinations that's what you have to do"
+    },
+    {
+      "index": 214,
+      "start": 695.399,
+      "end": 699.67,
+      "duration": 4.271,
+      "text": "inside the Subspace okay on to the"
+    },
+    {
+      "index": 215,
+      "start": 699.68,
+      "end": 700.75,
+      "duration": 1.07,
+      "text": "column"
+    },
+    {
+      "index": 216,
+      "start": 700.76,
+      "end": 704.069,
+      "duration": 3.309,
+      "text": "space okay so my lecture last time"
+    },
+    {
+      "index": 217,
+      "start": 704.079,
+      "end": 706.91,
+      "duration": 2.831,
+      "text": "started that and I want to continue it"
+    },
+    {
+      "index": 218,
+      "start": 706.92,
+      "end": 711.71,
+      "duration": 4.79,
+      "text": "okay column space of a"
+    },
+    {
+      "index": 219,
+      "start": 718.03,
+      "end": 718.04,
+      "duration": 0.01,
+      "text": "matrix of a okay can I can I take an"
+    },
+    {
+      "index": 220,
+      "start": 718.04,
+      "end": 721.99,
+      "duration": 3.95,
+      "text": "example say say 1 2 3"
+    },
+    {
+      "index": 221,
+      "start": 722.0,
+      "end": 725.269,
+      "duration": 3.269,
+      "text": "4 1 1 1"
+    },
+    {
+      "index": 222,
+      "start": 725.279,
+      "end": 730.949,
+      "duration": 5.67,
+      "text": "1 2 3 4"
+    },
+    {
+      "index": 223,
+      "start": 733.35,
+      "end": 733.36,
+      "duration": 0.01,
+      "text": "five"
+    },
+    {
+      "index": 224,
+      "start": 733.36,
+      "end": 738.629,
+      "duration": 5.269,
+      "text": "okay that's my Matrix"
+    },
+    {
+      "index": 225,
+      "start": 743.11,
+      "end": 743.12,
+      "duration": 0.01,
+      "text": "a so it's got columns three"
+    },
+    {
+      "index": 226,
+      "start": 743.12,
+      "end": 746.59,
+      "duration": 3.47,
+      "text": "columns those columns are vectors so the"
+    },
+    {
+      "index": 227,
+      "start": 746.6,
+      "end": 749.79,
+      "duration": 3.19,
+      "text": "columns so the column space of this a"
+    },
+    {
+      "index": 228,
+      "start": 749.8,
+      "end": 752.47,
+      "duration": 2.67,
+      "text": "of this a let me let's stay with this"
+    },
+    {
+      "index": 229,
+      "start": 752.48,
+      "end": 755.11,
+      "duration": 2.63,
+      "text": "example for a while the column space of"
+    },
+    {
+      "index": 230,
+      "start": 755.12,
+      "end": 759.389,
+      "duration": 4.269,
+      "text": "this Matrix is a Subspace of"
+    },
+    {
+      "index": 231,
+      "start": 759.399,
+      "end": 763.59,
+      "duration": 4.191,
+      "text": "r r what so what space are we in if I'm"
+    },
+    {
+      "index": 232,
+      "start": 763.6,
+      "end": 765.71,
+      "duration": 2.11,
+      "text": "looking at The Columns of this"
+    },
+    {
+      "index": 233,
+      "start": 765.72,
+      "end": 767.269,
+      "duration": 1.549,
+      "text": "Matrix"
+    },
+    {
+      "index": 234,
+      "start": 767.279,
+      "end": 771.629,
+      "duration": 4.35,
+      "text": "R4 right these These are vectors in R4"
+    },
+    {
+      "index": 235,
+      "start": 771.639,
+      "end": 773.99,
+      "duration": 2.351,
+      "text": "they're four-dimensional vectors so it"
+    },
+    {
+      "index": 236,
+      "start": 774.0,
+      "end": 778.11,
+      "duration": 4.11,
+      "text": "say column space of a is uh is a"
+    },
+    {
+      "index": 237,
+      "start": 778.12,
+      "end": 780.03,
+      "duration": 1.91,
+      "text": "Subspace"
+    },
+    {
+      "index": 238,
+      "start": 780.04,
+      "end": 783.069,
+      "duration": 3.029,
+      "text": "of R4"
+    },
+    {
+      "index": 239,
+      "start": 783.079,
+      "end": 788.35,
+      "duration": 5.271,
+      "text": "here because a was 4 by a is a 4x3"
+    },
+    {
+      "index": 240,
+      "start": 788.36,
+      "end": 791.67,
+      "duration": 3.31,
+      "text": "matrix this tells me how many rows there"
+    },
+    {
+      "index": 241,
+      "start": 791.68,
+      "end": 794.629,
+      "duration": 2.949,
+      "text": "are how many components in a column and"
+    },
+    {
+      "index": 242,
+      "start": 794.639,
+      "end": 798.189,
+      "duration": 3.55,
+      "text": "so we're in R4 Okay now what's in that"
+    },
+    {
+      "index": 243,
+      "start": 798.199,
+      "end": 802.03,
+      "duration": 3.831,
+      "text": "Subspace what's so the column space of a"
+    },
+    {
+      "index": 244,
+      "start": 802.04,
+      "end": 803.509,
+      "duration": 1.469,
+      "text": "it's a Subspace of"
+    },
+    {
+      "index": 245,
+      "start": 803.519,
+      "end": 807.67,
+      "duration": 4.151,
+      "text": "R4 I call it the column space of a like"
+    },
+    {
+      "index": 246,
+      "start": 807.68,
+      "end": 811.35,
+      "duration": 3.67,
+      "text": "that so that's that's my little symbol"
+    },
+    {
+      "index": 247,
+      "start": 811.36,
+      "end": 813.55,
+      "duration": 2.19,
+      "text": "for some Subspace of"
+    },
+    {
+      "index": 248,
+      "start": 813.56,
+      "end": 817.55,
+      "duration": 3.99,
+      "text": "R4 what's in R what's in that Subspace"
+    },
+    {
+      "index": 249,
+      "start": 817.56,
+      "end": 821.43,
+      "duration": 3.87,
+      "text": "well that column certainly is 1 2 3 4"
+    },
+    {
+      "index": 250,
+      "start": 821.44,
+      "end": 823.949,
+      "duration": 2.509,
+      "text": "this column is in this column is in and"
+    },
+    {
+      "index": 251,
+      "start": 823.959,
+      "end": 824.67,
+      "duration": 0.711,
+      "text": "what"
+    },
+    {
+      "index": 252,
+      "start": 824.68,
+      "end": 828.949,
+      "duration": 4.269,
+      "text": "else so it's got The Columns of a in it"
+    },
+    {
+      "index": 253,
+      "start": 828.959,
+      "end": 830.829,
+      "duration": 1.87,
+      "text": "but that's not enough"
+    },
+    {
+      "index": 254,
+      "start": 830.839,
+      "end": 833.269,
+      "duration": 2.43,
+      "text": "certainly right I don't have a Subspace"
+    },
+    {
+      "index": 255,
+      "start": 833.279,
+      "end": 836.31,
+      "duration": 3.031,
+      "text": "if I just put in three vectors so how do"
+    },
+    {
+      "index": 256,
+      "start": 836.32,
+      "end": 840.629,
+      "duration": 4.309,
+      "text": "I fill that out to be a Subspace I"
+    },
+    {
+      "index": 257,
+      "start": 840.639,
+      "end": 842.55,
+      "duration": 1.911,
+      "text": "take"
+    },
+    {
+      "index": 258,
+      "start": 842.56,
+      "end": 844.91,
+      "duration": 2.35,
+      "text": "their linear"
+    },
+    {
+      "index": 259,
+      "start": 844.92,
+      "end": 848.91,
+      "duration": 3.99,
+      "text": "combinations so the column space of a is"
+    },
+    {
+      "index": 260,
+      "start": 848.92,
+      "end": 851.23,
+      "duration": 2.31,
+      "text": "all"
+    },
+    {
+      "index": 261,
+      "start": 851.24,
+      "end": 854.15,
+      "duration": 2.91,
+      "text": "linear"
+    },
+    {
+      "index": 262,
+      "start": 854.16,
+      "end": 858.509,
+      "duration": 4.349,
+      "text": "combinations combinations of the"
+    },
+    {
+      "index": 263,
+      "start": 862.829,
+      "end": 862.839,
+      "duration": 0.01,
+      "text": "colors and that does give me a Subspace"
+    },
+    {
+      "index": 264,
+      "start": 862.839,
+      "end": 864.59,
+      "duration": 1.751,
+      "text": "it does give me a vector space because"
+    },
+    {
+      "index": 265,
+      "start": 864.6,
+      "end": 866.43,
+      "duration": 1.83,
+      "text": "if I have one linear combination and I"
+    },
+    {
+      "index": 266,
+      "start": 866.44,
+      "end": 869.629,
+      "duration": 3.189,
+      "text": "multiply by 11 I've got another lar"
+    },
+    {
+      "index": 267,
+      "start": 869.639,
+      "end": 871.47,
+      "duration": 1.831,
+      "text": "combination if I have a linear"
+    },
+    {
+      "index": 268,
+      "start": 871.48,
+      "end": 873.189,
+      "duration": 1.709,
+      "text": "combination I add to another linear"
+    },
+    {
+      "index": 269,
+      "start": 873.199,
+      "end": 874.949,
+      "duration": 1.75,
+      "text": "combination I get a third"
+    },
+    {
+      "index": 270,
+      "start": 874.959,
+      "end": 877.71,
+      "duration": 2.751,
+      "text": "combination so that this is like the"
+    },
+    {
+      "index": 271,
+      "start": 877.72,
+      "end": 879.35,
+      "duration": 1.63,
+      "text": "smallest"
+    },
+    {
+      "index": 272,
+      "start": 879.36,
+      "end": 881.509,
+      "duration": 2.149,
+      "text": "space like it it's got to have those"
+    },
+    {
+      "index": 273,
+      "start": 881.519,
+      "end": 884.23,
+      "duration": 2.711,
+      "text": "three columns in it and it has to have"
+    },
+    {
+      "index": 274,
+      "start": 884.24,
+      "end": 886.269,
+      "duration": 2.029,
+      "text": "their combinations and that's where we"
+    },
+    {
+      "index": 275,
+      "start": 886.279,
+      "end": 889.829,
+      "duration": 3.55,
+      "text": "stop okay now I I'm going to be"
+    },
+    {
+      "index": 276,
+      "start": 889.839,
+      "end": 892.949,
+      "duration": 3.11,
+      "text": "interested in that"
+    },
+    {
+      "index": 277,
+      "start": 892.959,
+      "end": 896.31,
+      "duration": 3.351,
+      "text": "space so like get some idea what's in"
+    },
+    {
+      "index": 278,
+      "start": 896.32,
+      "end": 898.749,
+      "duration": 2.429,
+      "text": "that space how big is that space is that"
+    },
+    {
+      "index": 279,
+      "start": 898.759,
+      "end": 901.829,
+      "duration": 3.07,
+      "text": "space the whole four dimensional"
+    },
+    {
+      "index": 280,
+      "start": 901.839,
+      "end": 906.79,
+      "duration": 4.951,
+      "text": "space or is it a Subspace inside can you"
+    },
+    {
+      "index": 281,
+      "start": 906.8,
+      "end": 909.79,
+      "duration": 2.99,
+      "text": "let me just see if you"
+    },
+    {
+      "index": 282,
+      "start": 914.15,
+      "end": 914.16,
+      "duration": 0.01,
+      "text": "can I mean we can get a yes or no answer"
+    },
+    {
+      "index": 283,
+      "start": 914.16,
+      "end": 915.79,
+      "duration": 1.63,
+      "text": "sometimes"
+    },
+    {
+      "index": 284,
+      "start": 915.8,
+      "end": 918.87,
+      "duration": 3.07,
+      "text": "without without being ready for the"
+    },
+    {
+      "index": 285,
+      "start": 918.88,
+      "end": 921.629,
+      "duration": 2.749,
+      "text": "complete"
+    },
+    {
+      "index": 286,
+      "start": 925.11,
+      "end": 925.12,
+      "duration": 0.01,
+      "text": "proof what do you think is the Subspace"
+    },
+    {
+      "index": 287,
+      "start": 925.12,
+      "end": 926.749,
+      "duration": 1.629,
+      "text": "that I'm talking about here the"
+    },
+    {
+      "index": 288,
+      "start": 926.759,
+      "end": 928.79,
+      "duration": 2.031,
+      "text": "combinations of those three guys does"
+    },
+    {
+      "index": 289,
+      "start": 928.8,
+      "end": 931.189,
+      "duration": 2.389,
+      "text": "that fill the full four-dimensional"
+    },
+    {
+      "index": 290,
+      "start": 931.199,
+      "end": 936.069,
+      "duration": 4.87,
+      "text": "space maybe yes or no on that one no no"
+    },
+    {
+      "index": 291,
+      "start": 936.079,
+      "end": 937.87,
+      "duration": 1.791,
+      "text": "somehow our feeling"
+    },
+    {
+      "index": 292,
+      "start": 937.88,
+      "end": 941.23,
+      "duration": 3.35,
+      "text": "is and it happens to be right that if we"
+    },
+    {
+      "index": 293,
+      "start": 941.24,
+      "end": 943.269,
+      "duration": 2.029,
+      "text": "start with three vectors and take their"
+    },
+    {
+      "index": 294,
+      "start": 943.279,
+      "end": 945.309,
+      "duration": 2.03,
+      "text": "combinations we can't get the whole"
+    },
+    {
+      "index": 295,
+      "start": 945.319,
+      "end": 947.269,
+      "duration": 1.95,
+      "text": "four-dimensional"
+    },
+    {
+      "index": 296,
+      "start": 947.279,
+      "end": 949.47,
+      "duration": 2.191,
+      "text": "Space uh"
+    },
+    {
+      "index": 297,
+      "start": 949.48,
+      "end": 952.509,
+      "duration": 3.029,
+      "text": "now so somehow we get a smaller space"
+    },
+    {
+      "index": 298,
+      "start": 952.519,
+      "end": 953.79,
+      "duration": 1.271,
+      "text": "but how much"
+    },
+    {
+      "index": 299,
+      "start": 953.8,
+      "end": 956.509,
+      "duration": 2.709,
+      "text": "smaller uh that's okay that's going to"
+    },
+    {
+      "index": 300,
+      "start": 956.519,
+      "end": 959.949,
+      "duration": 3.43,
+      "text": "come up here that's not so immediate"
+    },
+    {
+      "index": 301,
+      "start": 959.959,
+      "end": 964.55,
+      "duration": 4.591,
+      "text": "uh let me let me uh first make this"
+    },
+    {
+      "index": 302,
+      "start": 964.56,
+      "end": 966.99,
+      "duration": 2.43,
+      "text": "critical connection"
+    },
+    {
+      "index": 303,
+      "start": 967.0,
+      "end": 972.829,
+      "duration": 5.829,
+      "text": "with with um linear equations because"
+    },
+    {
+      "index": 304,
+      "start": 972.839,
+      "end": 976.389,
+      "duration": 3.55,
+      "text": "behind our abstract definition we have a"
+    },
+    {
+      "index": 305,
+      "start": 976.399,
+      "end": 979.55,
+      "duration": 3.151,
+      "text": "purpose and that is to understand ax"
+    },
+    {
+      "index": 306,
+      "start": 979.56,
+      "end": 983.67,
+      "duration": 4.11,
+      "text": "equal B so suppose I make the"
+    },
+    {
+      "index": 307,
+      "start": 983.68,
+      "end": 986.069,
+      "duration": 2.389,
+      "text": "connection"
+    },
+    {
+      "index": 308,
+      "start": 986.079,
+      "end": 987.67,
+      "duration": 1.591,
+      "text": "does"
+    },
+    {
+      "index": 309,
+      "start": 987.68,
+      "end": 989.509,
+      "duration": 1.829,
+      "text": "axal B"
+    },
+    {
+      "index": 310,
+      "start": 989.519,
+      "end": 992.35,
+      "duration": 2.831,
+      "text": "always have have a solution for every"
+    },
+    {
+      "index": 311,
+      "start": 992.36,
+      "end": 995.47,
+      "duration": 3.11,
+      "text": "B have a have"
+    },
+    {
+      "index": 312,
+      "start": 995.48,
+      "end": 998.79,
+      "duration": 3.31,
+      "text": "a"
+    },
+    {
+      "index": 313,
+      "start": 1009.269,
+      "end": 1009.279,
+      "duration": 0.01,
+      "text": "side I guess that's going to be a yes or"
+    },
+    {
+      "index": 314,
+      "start": 1009.279,
+      "end": 1012.389,
+      "duration": 3.11,
+      "text": "no"
+    },
+    {
+      "index": 315,
+      "start": 1016.59,
+      "end": 1016.6,
+      "duration": 0.01,
+      "text": "question and then I'm going to ask which"
+    },
+    {
+      "index": 316,
+      "start": 1016.6,
+      "end": 1019.67,
+      "duration": 3.07,
+      "text": "right hand sides are okay"
+    },
+    {
+      "index": 317,
+      "start": 1019.68,
+      "end": 1021.389,
+      "duration": 1.709,
+      "text": "that that's really the question I'm"
+    },
+    {
+      "index": 318,
+      "start": 1021.399,
+      "end": 1026.309,
+      "duration": 4.91,
+      "text": "after is which right hand sides"
+    },
+    {
+      "index": 319,
+      "start": 1026.319,
+      "end": 1030.189,
+      "duration": 3.87,
+      "text": "B do make a you can see from the way I'm"
+    },
+    {
+      "index": 320,
+      "start": 1030.199,
+      "end": 1031.829,
+      "duration": 1.63,
+      "text": "speaking what's the answer to this"
+    },
+    {
+      "index": 321,
+      "start": 1031.839,
+      "end": 1034.949,
+      "duration": 3.11,
+      "text": "question as it is the answer is"
+    },
+    {
+      "index": 322,
+      "start": 1034.959,
+      "end": 1038.35,
+      "duration": 3.391,
+      "text": "no ax equal B does not have a solution"
+    },
+    {
+      "index": 323,
+      "start": 1038.36,
+      "end": 1039.63,
+      "duration": 1.27,
+      "text": "for every"
+    },
+    {
+      "index": 324,
+      "start": 1039.64,
+      "end": 1043.309,
+      "duration": 3.669,
+      "text": "B why why do you say why do I say"
+    },
+    {
+      "index": 325,
+      "start": 1043.319,
+      "end": 1047.909,
+      "duration": 4.59,
+      "text": "no because ax equal B is it's really"
+    },
+    {
+      "index": 326,
+      "start": 1047.919,
+      "end": 1053.59,
+      "duration": 5.671,
+      "text": "this is like this is four"
+    },
+    {
+      "index": 327,
+      "start": 1064.35,
+      "end": 1064.36,
+      "duration": 0.01,
+      "text": "unknowns right X is let me let let me"
+    },
+    {
+      "index": 328,
+      "start": 1064.36,
+      "end": 1066.39,
+      "duration": 2.03,
+      "text": "let me write out that whole what the"
+    },
+    {
+      "index": 329,
+      "start": 1066.4,
+      "end": 1069.07,
+      "duration": 2.67,
+      "text": "whole thing looks"
+    },
+    {
+      "index": 330,
+      "start": 1069.08,
+      "end": 1072.15,
+      "duration": 3.07,
+      "text": "like"
+    },
+    {
+      "index": 331,
+      "start": 1077.83,
+      "end": 1077.84,
+      "duration": 0.01,
+      "text": "yeah let me write out ax equal B ax"
+    },
+    {
+      "index": 332,
+      "start": 1077.84,
+      "end": 1084.23,
+      "duration": 6.39,
+      "text": "is these columns are 1 2 3 4 1 one one 1"
+    },
+    {
+      "index": 333,
+      "start": 1084.24,
+      "end": 1086.029,
+      "duration": 1.789,
+      "text": "and 2 3 4"
+    },
+    {
+      "index": 334,
+      "start": 1086.039,
+      "end": 1089.669,
+      "duration": 3.63,
+      "text": "5 then X of course has three components"
+    },
+    {
+      "index": 335,
+      "start": 1089.679,
+      "end": 1094.549,
+      "duration": 4.87,
+      "text": "X1 X2 X3 and I'm trying to get"
+    },
+    {
+      "index": 336,
+      "start": 1094.559,
+      "end": 1099.43,
+      "duration": 4.871,
+      "text": "the hit the right right hand side B1 B2"
+    },
+    {
+      "index": 337,
+      "start": 1099.44,
+      "end": 1104.35,
+      "duration": 4.91,
+      "text": "B3 and"
+    },
+    {
+      "index": 338,
+      "start": 1107.47,
+      "end": 1107.48,
+      "duration": 0.01,
+      "text": "B4 so my first point is I can't always"
+    },
+    {
+      "index": 339,
+      "start": 1107.48,
+      "end": 1110.51,
+      "duration": 3.03,
+      "text": "do it"
+    },
+    {
+      "index": 340,
+      "start": 1110.52,
+      "end": 1113.11,
+      "duration": 2.59,
+      "text": "in a way that just says again what you"
+    },
+    {
+      "index": 341,
+      "start": 1113.12,
+      "end": 1115.19,
+      "duration": 2.07,
+      "text": "told me five minutes"
+    },
+    {
+      "index": 342,
+      "start": 1115.2,
+      "end": 1117.47,
+      "duration": 2.27,
+      "text": "ago that the"
+    },
+    {
+      "index": 343,
+      "start": 1117.48,
+      "end": 1120.11,
+      "duration": 2.63,
+      "text": "combinations of these columns don't fill"
+    },
+    {
+      "index": 344,
+      "start": 1120.12,
+      "end": 1122.75,
+      "duration": 2.63,
+      "text": "the whole four-dimensional Space there's"
+    },
+    {
+      "index": 345,
+      "start": 1122.76,
+      "end": 1125.11,
+      "duration": 2.35,
+      "text": "going to be some vectors b a lot of"
+    },
+    {
+      "index": 346,
+      "start": 1125.12,
+      "end": 1128.19,
+      "duration": 3.07,
+      "text": "vectors B that are not combinations of"
+    },
+    {
+      "index": 347,
+      "start": 1128.2,
+      "end": 1130.029,
+      "duration": 1.829,
+      "text": "those of these three"
+    },
+    {
+      "index": 348,
+      "start": 1130.039,
+      "end": 1132.27,
+      "duration": 2.231,
+      "text": "columns because the combinations of"
+    },
+    {
+      "index": 349,
+      "start": 1132.28,
+      "end": 1133.87,
+      "duration": 1.59,
+      "text": "those columns are like going to be just"
+    },
+    {
+      "index": 350,
+      "start": 1133.88,
+      "end": 1136.149,
+      "duration": 2.269,
+      "text": "a little plane or something inside"
+    },
+    {
+      "index": 351,
+      "start": 1136.159,
+      "end": 1137.71,
+      "duration": 1.551,
+      "text": "inside"
+    },
+    {
+      "index": 352,
+      "start": 1137.72,
+      "end": 1141.789,
+      "duration": 4.069,
+      "text": "R4 now so and you see that I do have"
+    },
+    {
+      "index": 353,
+      "start": 1141.799,
+      "end": 1145.19,
+      "duration": 3.391,
+      "text": "four equations and only three unknowns"
+    },
+    {
+      "index": 354,
+      "start": 1145.2,
+      "end": 1148.75,
+      "duration": 3.55,
+      "text": "so like anybody is going to say no you"
+    },
+    {
+      "index": 355,
+      "start": 1148.76,
+      "end": 1151.07,
+      "duration": 2.31,
+      "text": "dope you can't usually solve four"
+    },
+    {
+      "index": 356,
+      "start": 1151.08,
+      "end": 1153.51,
+      "duration": 2.43,
+      "text": "equations with only three unknowns but"
+    },
+    {
+      "index": 357,
+      "start": 1153.52,
+      "end": 1154.789,
+      "duration": 1.269,
+      "text": "now I want to"
+    },
+    {
+      "index": 358,
+      "start": 1154.799,
+      "end": 1158.47,
+      "duration": 3.671,
+      "text": "say sometimes you can for some right"
+    },
+    {
+      "index": 359,
+      "start": 1158.48,
+      "end": 1161.27,
+      "duration": 2.79,
+      "text": "hand sides I can solve"
+    },
+    {
+      "index": 360,
+      "start": 1161.28,
+      "end": 1165.029,
+      "duration": 3.749,
+      "text": "this so that's the that's the bunch of"
+    },
+    {
+      "index": 361,
+      "start": 1165.039,
+      "end": 1167.149,
+      "duration": 2.11,
+      "text": "right hand sides that I'm interested in"
+    },
+    {
+      "index": 362,
+      "start": 1167.159,
+      "end": 1171.35,
+      "duration": 4.191,
+      "text": "right now which right hand"
+    },
+    {
+      "index": 363,
+      "start": 1171.36,
+      "end": 1175.23,
+      "duration": 3.87,
+      "text": "sides allow me to solve this this is the"
+    },
+    {
+      "index": 364,
+      "start": 1175.24,
+      "end": 1177.35,
+      "duration": 2.11,
+      "text": "question for today it's going to have"
+    },
+    {
+      "index": 365,
+      "start": 1177.36,
+      "end": 1179.23,
+      "duration": 1.87,
+      "text": "like a nice clear"
+    },
+    {
+      "index": 366,
+      "start": 1179.24,
+      "end": 1182.47,
+      "duration": 3.23,
+      "text": "answer so my my question is that so my"
+    },
+    {
+      "index": 367,
+      "start": 1182.48,
+      "end": 1183.51,
+      "duration": 1.03,
+      "text": "question"
+    },
+    {
+      "index": 368,
+      "start": 1183.52,
+      "end": 1185.99,
+      "duration": 2.47,
+      "text": "is"
+    },
+    {
+      "index": 369,
+      "start": 1186.0,
+      "end": 1190.31,
+      "duration": 4.31,
+      "text": "which B's which vectors B allow"
+    },
+    {
+      "index": 370,
+      "start": 1190.32,
+      "end": 1197.63,
+      "duration": 7.31,
+      "text": "me allow this system to be"
+    },
+    {
+      "index": 371,
+      "start": 1199.95,
+      "end": 1199.96,
+      "duration": 0.01,
+      "text": "solved"
+    },
+    {
+      "index": 372,
+      "start": 1199.96,
+      "end": 1204.669,
+      "duration": 4.709,
+      "text": "and I I want to ask you so that's"
+    },
+    {
+      "index": 373,
+      "start": 1204.679,
+      "end": 1208.35,
+      "duration": 3.671,
+      "text": "like gets two question marks to indicate"
+    },
+    {
+      "index": 374,
+      "start": 1208.36,
+      "end": 1210.47,
+      "duration": 2.11,
+      "text": "that's this is the important question"
+    },
+    {
+      "index": 375,
+      "start": 1210.48,
+      "end": 1214.47,
+      "duration": 3.99,
+      "text": "okay first before we give a give a total"
+    },
+    {
+      "index": 376,
+      "start": 1214.48,
+      "end": 1216.87,
+      "duration": 2.39,
+      "text": "answer give me just a partial"
+    },
+    {
+      "index": 377,
+      "start": 1216.88,
+      "end": 1219.99,
+      "duration": 3.11,
+      "text": "answer tell me one right hand side that"
+    },
+    {
+      "index": 378,
+      "start": 1220.0,
+      "end": 1224.31,
+      "duration": 4.31,
+      "text": "I know I can solve this thing for so all"
+    },
+    {
+      "index": 379,
+      "start": 1224.32,
+      "end": 1228.11,
+      "duration": 3.79,
+      "text": "zeros okay that's the like guaranteed if"
+    },
+    {
+      "index": 380,
+      "start": 1228.12,
+      "end": 1230.909,
+      "duration": 2.789,
+      "text": "B's were all zero then I know I can"
+    },
+    {
+      "index": 381,
+      "start": 1230.919,
+      "end": 1234.029,
+      "duration": 3.11,
+      "text": "solve it let the X's all be zero no"
+    },
+    {
+      "index": 382,
+      "start": 1234.039,
+      "end": 1236.19,
+      "duration": 2.151,
+      "text": "problem okay"
+    },
+    {
+      "index": 383,
+      "start": 1236.2,
+      "end": 1240.75,
+      "duration": 4.55,
+      "text": "so that's that's always okay ax equals z"
+    },
+    {
+      "index": 384,
+      "start": 1240.76,
+      "end": 1243.87,
+      "duration": 3.11,
+      "text": "i can always solve now tell me another"
+    },
+    {
+      "index": 385,
+      "start": 1243.88,
+      "end": 1247.19,
+      "duration": 3.31,
+      "text": "right hand side just a specific set of"
+    },
+    {
+      "index": 386,
+      "start": 1247.2,
+      "end": 1250.75,
+      "duration": 3.55,
+      "text": "numbers for which I can solve"
+    },
+    {
+      "index": 387,
+      "start": 1250.76,
+      "end": 1253.63,
+      "duration": 2.87,
+      "text": "this this these three these four"
+    },
+    {
+      "index": 388,
+      "start": 1253.64,
+      "end": 1256.31,
+      "duration": 2.67,
+      "text": "equations with only three unknowns but"
+    },
+    {
+      "index": 389,
+      "start": 1256.32,
+      "end": 1258.39,
+      "duration": 2.07,
+      "text": "if you give me the a good right hand"
+    },
+    {
+      "index": 390,
+      "start": 1258.4,
+      "end": 1261.83,
+      "duration": 3.43,
+      "text": "side I can do it so tell me"
+    },
+    {
+      "index": 391,
+      "start": 1261.84,
+      "end": 1264.149,
+      "duration": 2.309,
+      "text": "one 1 2 3"
+    },
+    {
+      "index": 392,
+      "start": 1264.159,
+      "end": 1268.51,
+      "duration": 4.351,
+      "text": "4 if I can I solve is this a is that a"
+    },
+    {
+      "index": 393,
+      "start": 1268.52,
+      "end": 1271.35,
+      "duration": 2.83,
+      "text": "good right hand"
+    },
+    {
+      "index": 394,
+      "start": 1271.36,
+      "end": 1274.31,
+      "duration": 2.95,
+      "text": "side can you solve can you find a"
+    },
+    {
+      "index": 395,
+      "start": 1274.32,
+      "end": 1279.75,
+      "duration": 5.43,
+      "text": "solution that X1 + X2 + 2 X3 is 1 2 X1 +"
+    },
+    {
+      "index": 396,
+      "start": 1279.76,
+      "end": 1286.07,
+      "duration": 6.31,
+      "text": "X2 + 3x3 is 2 and two more"
+    },
+    {
+      "index": 397,
+      "start": 1288.71,
+      "end": 1288.72,
+      "duration": 0.01,
+      "text": "equations so I'm asking you to solve in"
+    },
+    {
+      "index": 398,
+      "start": 1288.72,
+      "end": 1292.269,
+      "duration": 3.549,
+      "text": "your head in within 5"
+    },
+    {
+      "index": 399,
+      "start": 1292.279,
+      "end": 1295.11,
+      "duration": 2.831,
+      "text": "Seconds uh four equations and three"
+    },
+    {
+      "index": 400,
+      "start": 1295.12,
+      "end": 1297.95,
+      "duration": 2.83,
+      "text": "unknowns but you can do it because the"
+    },
+    {
+      "index": 401,
+      "start": 1297.96,
+      "end": 1300.19,
+      "duration": 2.23,
+      "text": "right hand side is"
+    },
+    {
+      "index": 402,
+      "start": 1300.2,
+      "end": 1303.19,
+      "duration": 2.99,
+      "text": "like showing up here it's it's it's one"
+    },
+    {
+      "index": 403,
+      "start": 1303.2,
+      "end": 1305.87,
+      "duration": 2.67,
+      "text": "of the columns so tell me what's the x"
+    },
+    {
+      "index": 404,
+      "start": 1305.88,
+      "end": 1307.269,
+      "duration": 1.389,
+      "text": "that does solve"
+    },
+    {
+      "index": 405,
+      "start": 1307.279,
+      "end": 1313.23,
+      "duration": 5.951,
+      "text": "it one 0 one 0 0 solves"
+    },
+    {
+      "index": 406,
+      "start": 1313.24,
+      "end": 1314.99,
+      "duration": 1.75,
+      "text": "it"
+    },
+    {
+      "index": 407,
+      "start": 1315.0,
+      "end": 1319.23,
+      "duration": 4.23,
+      "text": "because well you can multiply this out"
+    },
+    {
+      "index": 408,
+      "start": 1319.24,
+      "end": 1322.47,
+      "duration": 3.23,
+      "text": "by rows but oh God it's much nicer to"
+    },
+    {
+      "index": 409,
+      "start": 1322.48,
+      "end": 1326.789,
+      "duration": 4.309,
+      "text": "say okay this is one of this column zero"
+    },
+    {
+      "index": 410,
+      "start": 1326.799,
+      "end": 1328.83,
+      "duration": 2.031,
+      "text": "of this zero of this so it's one of that"
+    },
+    {
+      "index": 411,
+      "start": 1328.84,
+      "end": 1330.909,
+      "duration": 2.069,
+      "text": "column which is exactly what we"
+    },
+    {
+      "index": 412,
+      "start": 1330.919,
+      "end": 1336.269,
+      "duration": 5.35,
+      "text": "wanted okay so there is a b that's"
+    },
+    {
+      "index": 413,
+      "start": 1336.279,
+      "end": 1339.23,
+      "duration": 2.951,
+      "text": "okay now tell me another B that's okay"
+    },
+    {
+      "index": 414,
+      "start": 1339.24,
+      "end": 1340.789,
+      "duration": 1.549,
+      "text": "another right hand side that would be"
+    },
+    {
+      "index": 415,
+      "start": 1340.799,
+      "end": 1342.149,
+      "duration": 1.35,
+      "text": "all"
+    },
+    {
+      "index": 416,
+      "start": 1342.159,
+      "end": 1347.51,
+      "duration": 5.351,
+      "text": "right well all"
+    },
+    {
+      "index": 417,
+      "start": 1349.47,
+      "end": 1349.48,
+      "duration": 0.01,
+      "text": "ones"
+    },
+    {
+      "index": 418,
+      "start": 1349.48,
+      "end": 1351.59,
+      "duration": 2.11,
+      "text": "actually and then what's the solution in"
+    },
+    {
+      "index": 419,
+      "start": 1351.6,
+      "end": 1355.149,
+      "duration": 3.549,
+      "text": "that case 0 one0"
+    },
+    {
+      "index": 420,
+      "start": 1355.159,
+      "end": 1356.71,
+      "duration": 1.551,
+      "text": "thanks"
+    },
+    {
+      "index": 421,
+      "start": 1356.72,
+      "end": 1360.47,
+      "duration": 3.75,
+      "text": "and in fact it's much like one way to do"
+    },
+    {
+      "index": 422,
+      "start": 1360.48,
+      "end": 1364.31,
+      "duration": 3.83,
+      "text": "it is think of a solution first right"
+    },
+    {
+      "index": 423,
+      "start": 1364.32,
+      "end": 1365.83,
+      "duration": 1.51,
+      "text": "and then just see"
+    },
+    {
+      "index": 424,
+      "start": 1365.84,
+      "end": 1369.39,
+      "duration": 3.55,
+      "text": "what B turns out to"
+    },
+    {
+      "index": 425,
+      "start": 1369.4,
+      "end": 1374.75,
+      "duration": 5.35,
+      "text": "be what B turns out to be right okay uh"
+    },
+    {
+      "index": 426,
+      "start": 1374.76,
+      "end": 1377.23,
+      "duration": 2.47,
+      "text": "so I think of a solution so I think of"
+    },
+    {
+      "index": 427,
+      "start": 1377.24,
+      "end": 1382.95,
+      "duration": 5.71,
+      "text": "an X I think of any X1 X2 X3 I do this"
+    },
+    {
+      "index": 428,
+      "start": 1382.96,
+      "end": 1387.269,
+      "duration": 4.309,
+      "text": "multiplication and what have I"
+    },
+    {
+      "index": 429,
+      "start": 1390.87,
+      "end": 1390.88,
+      "duration": 0.01,
+      "text": "got where now now I'm ready to answer"
+    },
+    {
+      "index": 430,
+      "start": 1390.88,
+      "end": 1392.909,
+      "duration": 2.029,
+      "text": "the big"
+    },
+    {
+      "index": 431,
+      "start": 1392.919,
+      "end": 1398.789,
+      "duration": 5.87,
+      "text": "question I can solve axal B exactly when"
+    },
+    {
+      "index": 432,
+      "start": 1398.799,
+      "end": 1402.43,
+      "duration": 3.631,
+      "text": "the right hand side B is a vector"
+    },
+    {
+      "index": 433,
+      "start": 1402.44,
+      "end": 1407.35,
+      "duration": 4.91,
+      "text": "in the column space good I can solve"
+    },
+    {
+      "index": 434,
+      "start": 1407.36,
+      "end": 1412.43,
+      "duration": 5.07,
+      "text": "axal B B when B is a combination of the"
+    },
+    {
+      "index": 435,
+      "start": 1412.44,
+      "end": 1416.23,
+      "duration": 3.79,
+      "text": "columns when it's in the column space so"
+    },
+    {
+      "index": 436,
+      "start": 1416.24,
+      "end": 1418.19,
+      "duration": 1.95,
+      "text": "let me write that answer"
+    },
+    {
+      "index": 437,
+      "start": 1418.2,
+      "end": 1422.269,
+      "duration": 4.069,
+      "text": "down I can I can"
+    },
+    {
+      "index": 438,
+      "start": 1422.279,
+      "end": 1429.669,
+      "duration": 7.39,
+      "text": "solve axal B exactly"
+    },
+    {
+      "index": 439,
+      "start": 1441.31,
+      "end": 1441.32,
+      "duration": 0.01,
+      "text": "space let me just say again why that"
+    },
+    {
+      "index": 440,
+      "start": 1441.32,
+      "end": 1444.99,
+      "duration": 3.67,
+      "text": "is because it the column Space by its"
+    },
+    {
+      "index": 441,
+      "start": 1445.0,
+      "end": 1447.87,
+      "duration": 2.87,
+      "text": "definition contains all the combinations"
+    },
+    {
+      "index": 442,
+      "start": 1447.88,
+      "end": 1450.029,
+      "duration": 2.149,
+      "text": "it contains all the"
+    },
+    {
+      "index": 443,
+      "start": 1450.039,
+      "end": 1453.59,
+      "duration": 3.551,
+      "text": "AXS the column space really consists of"
+    },
+    {
+      "index": 444,
+      "start": 1453.6,
+      "end": 1456.39,
+      "duration": 2.79,
+      "text": "all vectors A * n"
+    },
+    {
+      "index": 445,
+      "start": 1456.4,
+      "end": 1459.909,
+      "duration": 3.509,
+      "text": "x so that's those are the B's that I can"
+    },
+    {
+      "index": 446,
+      "start": 1459.919,
+      "end": 1461.99,
+      "duration": 2.071,
+      "text": "deal"
+    },
+    {
+      "index": 447,
+      "start": 1462.0,
+      "end": 1465.789,
+      "duration": 3.789,
+      "text": "with if B is a combination of the"
+    },
+    {
+      "index": 448,
+      "start": 1465.799,
+      "end": 1469.549,
+      "duration": 3.75,
+      "text": "columns then that combination tells me"
+    },
+    {
+      "index": 449,
+      "start": 1469.559,
+      "end": 1471.07,
+      "duration": 1.511,
+      "text": "what x should"
+    },
+    {
+      "index": 450,
+      "start": 1471.08,
+      "end": 1473.99,
+      "duration": 2.91,
+      "text": "be if B is not a combination of the"
+    },
+    {
+      "index": 451,
+      "start": 1474.0,
+      "end": 1475.99,
+      "duration": 1.99,
+      "text": "columns then there is no X there's no"
+    },
+    {
+      "index": 452,
+      "start": 1476.0,
+      "end": 1479.35,
+      "duration": 3.35,
+      "text": "way to solve ax equal B"
+    },
+    {
+      "index": 453,
+      "start": 1479.36,
+      "end": 1483.11,
+      "duration": 3.75,
+      "text": "okay so the column Space is really the"
+    },
+    {
+      "index": 454,
+      "start": 1483.12,
+      "end": 1484.47,
+      "duration": 1.35,
+      "text": "that's that's really why we're"
+    },
+    {
+      "index": 455,
+      "start": 1484.48,
+      "end": 1486.43,
+      "duration": 1.95,
+      "text": "interested in this column space because"
+    },
+    {
+      "index": 456,
+      "start": 1486.44,
+      "end": 1490.07,
+      "duration": 3.63,
+      "text": "it's the central guy it says when we can"
+    },
+    {
+      "index": 457,
+      "start": 1490.08,
+      "end": 1493.11,
+      "duration": 3.03,
+      "text": "solve and and"
+    },
+    {
+      "index": 458,
+      "start": 1493.12,
+      "end": 1495.35,
+      "duration": 2.23,
+      "text": "so"
+    },
+    {
+      "index": 459,
+      "start": 1495.36,
+      "end": 1497.99,
+      "duration": 2.63,
+      "text": "so we got to understand this column"
+    },
+    {
+      "index": 460,
+      "start": 1498.0,
+      "end": 1501.43,
+      "duration": 3.43,
+      "text": "space"
+    },
+    {
+      "index": 461,
+      "start": 1508.63,
+      "end": 1508.64,
+      "duration": 0.01,
+      "text": "think yeah"
+    },
+    {
+      "index": 462,
+      "start": 1508.64,
+      "end": 1511.029,
+      "duration": 2.389,
+      "text": "somehow oh well let's just as long as"
+    },
+    {
+      "index": 463,
+      "start": 1511.039,
+      "end": 1513.35,
+      "duration": 2.311,
+      "text": "we've got it here what do I get for this"
+    },
+    {
+      "index": 464,
+      "start": 1513.36,
+      "end": 1516.23,
+      "duration": 2.87,
+      "text": "particular example if I take"
+    },
+    {
+      "index": 465,
+      "start": 1516.24,
+      "end": 1523.35,
+      "duration": 7.11,
+      "text": "combinations of this and this and"
+    },
+    {
+      "index": 466,
+      "start": 1525.87,
+      "end": 1525.88,
+      "duration": 0.01,
+      "text": "this I I'll tell you the question that's"
+    },
+    {
+      "index": 467,
+      "start": 1525.88,
+      "end": 1527.11,
+      "duration": 1.23,
+      "text": "in my"
+    },
+    {
+      "index": 468,
+      "start": 1527.12,
+      "end": 1530.07,
+      "duration": 2.95,
+      "text": "mind it's it's not even proper to use"
+    },
+    {
+      "index": 469,
+      "start": 1530.08,
+      "end": 1532.19,
+      "duration": 2.11,
+      "text": "this word yet but you'll know what it"
+    },
+    {
+      "index": 470,
+      "start": 1532.2,
+      "end": 1537.07,
+      "duration": 4.87,
+      "text": "means are those three columns"
+    },
+    {
+      "index": 471,
+      "start": 1537.08,
+      "end": 1541.269,
+      "duration": 4.189,
+      "text": "independent if I take the combinations"
+    },
+    {
+      "index": 472,
+      "start": 1541.279,
+      "end": 1544.789,
+      "duration": 3.51,
+      "text": "of the three columns does it does each"
+    },
+    {
+      "index": 473,
+      "start": 1544.799,
+      "end": 1547.99,
+      "duration": 3.191,
+      "text": "column contribute something"
+    },
+    {
+      "index": 474,
+      "start": 1548.0,
+      "end": 1552.029,
+      "duration": 4.029,
+      "text": "new or not so that if I take the"
+    },
+    {
+      "index": 475,
+      "start": 1552.039,
+      "end": 1554.269,
+      "duration": 2.23,
+      "text": "combinations of those three columns do I"
+    },
+    {
+      "index": 476,
+      "start": 1554.279,
+      "end": 1557.07,
+      "duration": 2.791,
+      "text": "like get some three-dimensional Subspace"
+    },
+    {
+      "index": 477,
+      "start": 1557.08,
+      "end": 1559.23,
+      "duration": 2.15,
+      "text": "do I have three vectors that are like"
+    },
+    {
+      "index": 478,
+      "start": 1559.24,
+      "end": 1560.389,
+      "duration": 1.149,
+      "text": "you"
+    },
+    {
+      "index": 479,
+      "start": 1560.399,
+      "end": 1563.269,
+      "duration": 2.87,
+      "text": "know independent whatever that"
+    },
+    {
+      "index": 480,
+      "start": 1563.279,
+      "end": 1568.83,
+      "duration": 5.551,
+      "text": "means or do I do a or do or does is one"
+    },
+    {
+      "index": 481,
+      "start": 1568.84,
+      "end": 1570.789,
+      "duration": 1.949,
+      "text": "of those columns like contributing"
+    },
+    {
+      "index": 482,
+      "start": 1570.799,
+      "end": 1574.71,
+      "duration": 3.911,
+      "text": "nothing new so that actually only two of"
+    },
+    {
+      "index": 483,
+      "start": 1574.72,
+      "end": 1577.99,
+      "duration": 3.27,
+      "text": "The Columns would have given the same"
+    },
+    {
+      "index": 484,
+      "start": 1578.0,
+      "end": 1580.389,
+      "duration": 2.389,
+      "text": "column space yeah that's a good way to"
+    },
+    {
+      "index": 485,
+      "start": 1580.399,
+      "end": 1582.51,
+      "duration": 2.111,
+      "text": "ask the question finally I think of it"
+    },
+    {
+      "index": 486,
+      "start": 1582.52,
+      "end": 1584.31,
+      "duration": 1.79,
+      "text": "can I throw away any"
+    },
+    {
+      "index": 487,
+      "start": 1584.32,
+      "end": 1587.99,
+      "duration": 3.67,
+      "text": "columns and have the same column space"
+    },
+    {
+      "index": 488,
+      "start": 1588.0,
+      "end": 1589.149,
+      "duration": 1.149,
+      "text": "yes"
+    },
+    {
+      "index": 489,
+      "start": 1589.159,
+      "end": 1591.71,
+      "duration": 2.551,
+      "text": "and which one do you suggest I throw"
+    },
+    {
+      "index": 490,
+      "start": 1591.72,
+      "end": 1595.59,
+      "duration": 3.87,
+      "text": "away well three is the natural like guy"
+    },
+    {
+      "index": 491,
+      "start": 1595.6,
+      "end": 1600.389,
+      "duration": 4.789,
+      "text": "to Target so if I and why"
+    },
+    {
+      "index": 492,
+      "start": 1600.399,
+      "end": 1603.269,
+      "duration": 2.87,
+      "text": "because what what did you what's so bad"
+    },
+    {
+      "index": 493,
+      "start": 1603.279,
+      "end": 1606.909,
+      "duration": 3.63,
+      "text": "about three here column three it's it's"
+    },
+    {
+      "index": 494,
+      "start": 1606.919,
+      "end": 1610.149,
+      "duration": 3.23,
+      "text": "the sum of these right so it's not if"
+    },
+    {
+      "index": 495,
+      "start": 1610.159,
+      "end": 1612.029,
+      "duration": 1.87,
+      "text": "I'm taking if I have combinations of"
+    },
+    {
+      "index": 496,
+      "start": 1612.039,
+      "end": 1614.75,
+      "duration": 2.711,
+      "text": "these two and I put in this one actually"
+    },
+    {
+      "index": 497,
+      "start": 1614.76,
+      "end": 1618.43,
+      "duration": 3.67,
+      "text": "I don't get anything more so later on I"
+    },
+    {
+      "index": 498,
+      "start": 1618.44,
+      "end": 1621.51,
+      "duration": 3.07,
+      "text": "will call these pivot"
+    },
+    {
+      "index": 499,
+      "start": 1621.52,
+      "end": 1625.269,
+      "duration": 3.749,
+      "text": "columns and the third guy will not be a"
+    },
+    {
+      "index": 500,
+      "start": 1625.279,
+      "end": 1627.31,
+      "duration": 2.031,
+      "text": "pivot column in this with that with"
+    },
+    {
+      "index": 501,
+      "start": 1627.32,
+      "end": 1630.99,
+      "duration": 3.67,
+      "text": "those numbers now actually but honesty"
+    },
+    {
+      "index": 502,
+      "start": 1631.0,
+      "end": 1633.269,
+      "duration": 2.269,
+      "text": "makes me ask you this question could I"
+    },
+    {
+      "index": 503,
+      "start": 1633.279,
+      "end": 1635.43,
+      "duration": 2.151,
+      "text": "have thrown away column"
+    },
+    {
+      "index": 504,
+      "start": 1635.44,
+      "end": 1638.87,
+      "duration": 3.43,
+      "text": "one yes I could I"
+    },
+    {
+      "index": 505,
+      "start": 1638.88,
+      "end": 1642.269,
+      "duration": 3.389,
+      "text": "could so when I'd say pivot columns my"
+    },
+    {
+      "index": 506,
+      "start": 1642.279,
+      "end": 1644.47,
+      "duration": 2.191,
+      "text": "convention is okay I'll keep the first"
+    },
+    {
+      "index": 507,
+      "start": 1644.48,
+      "end": 1647.95,
+      "duration": 3.47,
+      "text": "ones as long as they're not dependent so"
+    },
+    {
+      "index": 508,
+      "start": 1647.96,
+      "end": 1650.029,
+      "duration": 2.069,
+      "text": "like keep this guy he's fine he's Al"
+    },
+    {
+      "index": 509,
+      "start": 1650.039,
+      "end": 1652.51,
+      "duration": 2.471,
+      "text": "line I keep the second guy it's in a"
+    },
+    {
+      "index": 510,
+      "start": 1652.52,
+      "end": 1655.029,
+      "duration": 2.509,
+      "text": "second Direction but the third one which"
+    },
+    {
+      "index": 511,
+      "start": 1655.039,
+      "end": 1659.389,
+      "duration": 4.35,
+      "text": "is in the same plane as the first two"
+    },
+    {
+      "index": 512,
+      "start": 1659.399,
+      "end": 1662.07,
+      "duration": 2.671,
+      "text": "gives me nothing new it's dependent in"
+    },
+    {
+      "index": 513,
+      "start": 1662.08,
+      "end": 1665.509,
+      "duration": 3.429,
+      "text": "the in the language that we will use and"
+    },
+    {
+      "index": 514,
+      "start": 1665.519,
+      "end": 1667.909,
+      "duration": 2.39,
+      "text": "I don't need it"
+    },
+    {
+      "index": 515,
+      "start": 1667.919,
+      "end": 1670.909,
+      "duration": 2.99,
+      "text": "okay so I would describe the column"
+    },
+    {
+      "index": 516,
+      "start": 1670.919,
+      "end": 1673.31,
+      "duration": 2.391,
+      "text": "space of this Matrix as a"
+    },
+    {
+      "index": 517,
+      "start": 1673.32,
+      "end": 1677.11,
+      "duration": 3.79,
+      "text": "two-dimensional Subspace of"
+    },
+    {
+      "index": 518,
+      "start": 1677.12,
+      "end": 1682.11,
+      "duration": 4.99,
+      "text": "R4 a two-dimensional Subspace of R4 okay"
+    },
+    {
+      "index": 519,
+      "start": 1682.12,
+      "end": 1684.35,
+      "duration": 2.23,
+      "text": "so you're seeing how these Vector spaces"
+    },
+    {
+      "index": 520,
+      "start": 1684.36,
+      "end": 1687.269,
+      "duration": 2.909,
+      "text": "work and you you're seeing that we some"
+    },
+    {
+      "index": 521,
+      "start": 1687.279,
+      "end": 1690.19,
+      "duration": 2.911,
+      "text": "idea of dependence or Independence is is"
+    },
+    {
+      "index": 522,
+      "start": 1690.2,
+      "end": 1693.99,
+      "duration": 3.79,
+      "text": "in our future okay now I want to speak"
+    },
+    {
+      "index": 523,
+      "start": 1694.0,
+      "end": 1699.47,
+      "duration": 5.47,
+      "text": "about another Vector space the null"
+    },
+    {
+      "index": 524,
+      "start": 1699.48,
+      "end": 1703.07,
+      "duration": 3.59,
+      "text": "space so again I'm getting a little"
+    },
+    {
+      "index": 525,
+      "start": 1703.08,
+      "end": 1706.389,
+      "duration": 3.309,
+      "text": "ahead because it's in section 3.2 but"
+    },
+    {
+      "index": 526,
+      "start": 1706.399,
+      "end": 1709.47,
+      "duration": 3.071,
+      "text": "that's okay all right now so I'm I'm"
+    },
+    {
+      "index": 527,
+      "start": 1709.48,
+      "end": 1711.029,
+      "duration": 1.549,
+      "text": "ready for the null"
+    },
+    {
+      "index": 528,
+      "start": 1711.039,
+      "end": 1716.07,
+      "duration": 5.031,
+      "text": "space let me keep the same"
+    },
+    {
+      "index": 529,
+      "start": 1718.83,
+      "end": 1718.84,
+      "duration": 0.01,
+      "text": "Matrix and this is going to be a"
+    },
+    {
+      "index": 530,
+      "start": 1718.84,
+      "end": 1721.47,
+      "duration": 2.63,
+      "text": "different totally different Subspace"
+    },
+    {
+      "index": 531,
+      "start": 1721.48,
+      "end": 1723.95,
+      "duration": 2.47,
+      "text": "totally different"
+    },
+    {
+      "index": 532,
+      "start": 1723.96,
+      "end": 1727.31,
+      "duration": 3.35,
+      "text": "okay now so let me make space for now"
+    },
+    {
+      "index": 533,
+      "start": 1727.32,
+      "end": 1729.549,
+      "duration": 2.229,
+      "text": "here here comes a completely different"
+    },
+    {
+      "index": 534,
+      "start": 1729.559,
+      "end": 1735.83,
+      "duration": 6.271,
+      "text": "Subspace the null"
+    },
+    {
+      "index": 535,
+      "start": 1746.11,
+      "end": 1746.12,
+      "duration": 0.01,
+      "text": "it it"
+    },
+    {
+      "index": 536,
+      "start": 1746.12,
+      "end": 1749.11,
+      "duration": 2.99,
+      "text": "contains not right hand sides"
+    },
+    {
+      "index": 537,
+      "start": 1749.12,
+      "end": 1752.43,
+      "duration": 3.31,
+      "text": "B it contains"
+    },
+    {
+      "index": 538,
+      "start": 1752.44,
+      "end": 1756.75,
+      "duration": 4.31,
+      "text": "X's it contains all X's that solve this"
+    },
+    {
+      "index": 539,
+      "start": 1756.76,
+      "end": 1759.63,
+      "duration": 2.87,
+      "text": "word null is going to I mean that's the"
+    },
+    {
+      "index": 540,
+      "start": 1759.64,
+      "end": 1763.35,
+      "duration": 3.71,
+      "text": "key word here meaning zero so this"
+    },
+    {
+      "index": 541,
+      "start": 1763.36,
+      "end": 1767.029,
+      "duration": 3.669,
+      "text": "contains this is all"
+    },
+    {
+      "index": 542,
+      "start": 1767.039,
+      "end": 1770.029,
+      "duration": 2.99,
+      "text": "solutions"
+    },
+    {
+      "index": 543,
+      "start": 1770.039,
+      "end": 1774.63,
+      "duration": 4.591,
+      "text": "X and of course X's our vectors X1 X2"
+    },
+    {
+      "index": 544,
+      "start": 1774.64,
+      "end": 1776.19,
+      "duration": 1.55,
+      "text": "and"
+    },
+    {
+      "index": 545,
+      "start": 1776.2,
+      "end": 1783.47,
+      "duration": 7.27,
+      "text": "X3 to the equation a x ="
+    },
+    {
+      "index": 546,
+      "start": 1783.48,
+      "end": 1786.029,
+      "duration": 2.549,
+      "text": "z well four"
+    },
+    {
+      "index": 547,
+      "start": 1786.039,
+      "end": 1788.83,
+      "duration": 2.791,
+      "text": "equations because we got so you see what"
+    },
+    {
+      "index": 548,
+      "start": 1788.84,
+      "end": 1792.87,
+      "duration": 4.03,
+      "text": "I'm doing I'm now saying okay columns"
+    },
+    {
+      "index": 549,
+      "start": 1792.88,
+      "end": 1795.11,
+      "duration": 2.23,
+      "text": "were great the column space we"
+    },
+    {
+      "index": 550,
+      "start": 1795.12,
+      "end": 1798.95,
+      "duration": 3.83,
+      "text": "understood now I'm interested in"
+    },
+    {
+      "index": 551,
+      "start": 1798.96,
+      "end": 1802.07,
+      "duration": 3.11,
+      "text": "X's I'm not the only B I'm interested in"
+    },
+    {
+      "index": 552,
+      "start": 1802.08,
+      "end": 1804.269,
+      "duration": 2.189,
+      "text": "now is the B of all zeros the right hand"
+    },
+    {
+      "index": 553,
+      "start": 1804.279,
+      "end": 1806.029,
+      "duration": 1.75,
+      "text": "side is now"
+    },
+    {
+      "index": 554,
+      "start": 1806.039,
+      "end": 1811.149,
+      "duration": 5.11,
+      "text": "zero and I'm interested in"
+    },
+    {
+      "index": 555,
+      "start": 1814.95,
+      "end": 1814.96,
+      "duration": 0.01,
+      "text": "Solutions X's so where is this null"
+    },
+    {
+      "index": 556,
+      "start": 1814.96,
+      "end": 1817.75,
+      "duration": 2.79,
+      "text": "space for for this"
+    },
+    {
+      "index": 557,
+      "start": 1817.76,
+      "end": 1822.63,
+      "duration": 4.87,
+      "text": "example these X's are have three"
+    },
+    {
+      "index": 558,
+      "start": 1822.64,
+      "end": 1825.549,
+      "duration": 2.909,
+      "text": "components so the null space is a"
+    },
+    {
+      "index": 559,
+      "start": 1825.559,
+      "end": 1827.549,
+      "duration": 1.99,
+      "text": "Subspace we still have to show it is a"
+    },
+    {
+      "index": 560,
+      "start": 1827.559,
+      "end": 1829.269,
+      "duration": 1.71,
+      "text": "Subspace of"
+    },
+    {
+      "index": 561,
+      "start": 1829.279,
+      "end": 1831.07,
+      "duration": 1.791,
+      "text": "R"
+    },
+    {
+      "index": 562,
+      "start": 1831.08,
+      "end": 1835.269,
+      "duration": 4.189,
+      "text": "three so this is and and we will show so"
+    },
+    {
+      "index": 563,
+      "start": 1835.279,
+      "end": 1838.389,
+      "duration": 3.11,
+      "text": "these these vectors X this is"
+    },
+    {
+      "index": 564,
+      "start": 1838.399,
+      "end": 1842.99,
+      "duration": 4.591,
+      "text": "in"
+    },
+    {
+      "index": 565,
+      "start": 1848.47,
+      "end": 1848.48,
+      "duration": 0.01,
+      "text": "R3 where the column space was in R4 in"
+    },
+    {
+      "index": 566,
+      "start": 1848.48,
+      "end": 1853.029,
+      "duration": 4.549,
+      "text": "our example in in for an M byn Matrix"
+    },
+    {
+      "index": 567,
+      "start": 1853.039,
+      "end": 1854.269,
+      "duration": 1.23,
+      "text": "this is"
+    },
+    {
+      "index": 568,
+      "start": 1854.279,
+      "end": 1856.909,
+      "duration": 2.63,
+      "text": "M and this is"
+    },
+    {
+      "index": 569,
+      "start": 1856.919,
+      "end": 1860.95,
+      "duration": 4.031,
+      "text": "m because the number of columns n tells"
+    },
+    {
+      "index": 570,
+      "start": 1860.96,
+      "end": 1863.029,
+      "duration": 2.069,
+      "text": "me how many unknowns how many X's"
+    },
+    {
+      "index": 571,
+      "start": 1863.039,
+      "end": 1865.99,
+      "duration": 2.951,
+      "text": "multiply those columns so it tells me"
+    },
+    {
+      "index": 572,
+      "start": 1866.0,
+      "end": 1869.83,
+      "duration": 3.83,
+      "text": "the big space in this case R3 that I'm"
+    },
+    {
+      "index": 573,
+      "start": 1869.84,
+      "end": 1873.23,
+      "duration": 3.39,
+      "text": "in now tell me why don't we figure out"
+    },
+    {
+      "index": 574,
+      "start": 1873.24,
+      "end": 1877.11,
+      "duration": 3.87,
+      "text": "what the null space is for this"
+    },
+    {
+      "index": 575,
+      "start": 1877.12,
+      "end": 1880.509,
+      "duration": 3.389,
+      "text": "example uh just by looking at it I mean"
+    },
+    {
+      "index": 576,
+      "start": 1880.519,
+      "end": 1884.35,
+      "duration": 3.831,
+      "text": "that's the beauty of small"
+    },
+    {
+      "index": 577,
+      "start": 1884.36,
+      "end": 1887.23,
+      "duration": 2.87,
+      "text": "examples that my official way to find"
+    },
+    {
+      "index": 578,
+      "start": 1887.24,
+      "end": 1889.11,
+      "duration": 1.87,
+      "text": "null space"
+    },
+    {
+      "index": 579,
+      "start": 1889.12,
+      "end": 1892.269,
+      "duration": 3.149,
+      "text": "and column spaces and and and get all"
+    },
+    {
+      "index": 580,
+      "start": 1892.279,
+      "end": 1896.11,
+      "duration": 3.831,
+      "text": "the facts straight would be elimination"
+    },
+    {
+      "index": 581,
+      "start": 1896.12,
+      "end": 1898.35,
+      "duration": 2.23,
+      "text": "and we'll do that but with a small"
+    },
+    {
+      "index": 582,
+      "start": 1898.36,
+      "end": 1901.07,
+      "duration": 2.71,
+      "text": "example we can see see what's going on"
+    },
+    {
+      "index": 583,
+      "start": 1901.08,
+      "end": 1903.19,
+      "duration": 2.11,
+      "text": "without going through the mechanics of"
+    },
+    {
+      "index": 584,
+      "start": 1903.2,
+      "end": 1907.509,
+      "duration": 4.309,
+      "text": "elimination so so this null"
+    },
+    {
+      "index": 585,
+      "start": 1907.519,
+      "end": 1910.19,
+      "duration": 2.671,
+      "text": "space so I'm talking about the again the"
+    },
+    {
+      "index": 586,
+      "start": 1910.2,
+      "end": 1915.71,
+      "duration": 5.51,
+      "text": "null space and let me copy Again The"
+    },
+    {
+      "index": 587,
+      "start": 1923.149,
+      "end": 1923.159,
+      "duration": 0.01,
+      "text": "Matrix 1 2 3 4 1 1 one one and 2 3 4"
+    },
+    {
+      "index": 588,
+      "start": 1923.159,
+      "end": 1925.95,
+      "duration": 2.791,
+      "text": "5 what's in the null space so I'm I'm"
+    },
+    {
+      "index": 589,
+      "start": 1925.96,
+      "end": 1927.669,
+      "duration": 1.709,
+      "text": "taking a *"
+    },
+    {
+      "index": 590,
+      "start": 1927.679,
+      "end": 1931.99,
+      "duration": 4.311,
+      "text": "X so let me I'm me write it again and I"
+    },
+    {
+      "index": 591,
+      "start": 1932.0,
+      "end": 1933.389,
+      "duration": 1.389,
+      "text": "want you to"
+    },
+    {
+      "index": 592,
+      "start": 1933.399,
+      "end": 1938.43,
+      "duration": 5.031,
+      "text": "solve those four"
+    },
+    {
+      "index": 593,
+      "start": 1940.87,
+      "end": 1940.88,
+      "duration": 0.01,
+      "text": "equations in fact I want you to find all"
+    },
+    {
+      "index": 594,
+      "start": 1940.88,
+      "end": 1943.389,
+      "duration": 2.509,
+      "text": "solutions to those four"
+    },
+    {
+      "index": 595,
+      "start": 1943.399,
+      "end": 1945.789,
+      "duration": 2.39,
+      "text": "equations well actually first of all"
+    },
+    {
+      "index": 596,
+      "start": 1945.799,
+      "end": 1948.029,
+      "duration": 2.23,
+      "text": "find one I why should I ask you for all"
+    },
+    {
+      "index": 597,
+      "start": 1948.039,
+      "end": 1950.269,
+      "duration": 2.23,
+      "text": "of them tell me one well tell me one"
+    },
+    {
+      "index": 598,
+      "start": 1950.279,
+      "end": 1952.909,
+      "duration": 2.63,
+      "text": "solution that you you don't even have to"
+    },
+    {
+      "index": 599,
+      "start": 1952.919,
+      "end": 1955.07,
+      "duration": 2.151,
+      "text": "have to look at the Matrix to know one"
+    },
+    {
+      "index": 600,
+      "start": 1955.08,
+      "end": 1958.87,
+      "duration": 3.79,
+      "text": "solution to this set of equations it"
+    },
+    {
+      "index": 601,
+      "start": 1958.88,
+      "end": 1964.07,
+      "duration": 5.19,
+      "text": "is zero Vector whatever that Matrix is"
+    },
+    {
+      "index": 602,
+      "start": 1964.08,
+      "end": 1967.59,
+      "duration": 3.51,
+      "text": "it's null space contains zero because a"
+    },
+    {
+      "index": 603,
+      "start": 1967.6,
+      "end": 1970.19,
+      "duration": 2.59,
+      "text": "times the zero Vector sure gives the"
+    },
+    {
+      "index": 604,
+      "start": 1970.2,
+      "end": 1972.87,
+      "duration": 2.67,
+      "text": "zero right hand side so the null space"
+    },
+    {
+      "index": 605,
+      "start": 1972.88,
+      "end": 1974.83,
+      "duration": 1.95,
+      "text": "certainly contains"
+    },
+    {
+      "index": 606,
+      "start": 1974.84,
+      "end": 1977.509,
+      "duration": 2.669,
+      "text": "zero so it's got a chance to be a vector"
+    },
+    {
+      "index": 607,
+      "start": 1977.519,
+      "end": 1979.549,
+      "duration": 2.03,
+      "text": "space now and it and it will turn out it"
+    },
+    {
+      "index": 608,
+      "start": 1979.559,
+      "end": 1983.149,
+      "duration": 3.59,
+      "text": "is okay tell me the tell me another"
+    },
+    {
+      "index": 609,
+      "start": 1983.159,
+      "end": 1986.509,
+      "duration": 3.35,
+      "text": "solution so this particular null space"
+    },
+    {
+      "index": 610,
+      "start": 1986.519,
+      "end": 1988.43,
+      "duration": 1.911,
+      "text": "and of course I'm going to call it n of"
+    },
+    {
+      "index": 611,
+      "start": 1988.44,
+      "end": 1990.11,
+      "duration": 1.67,
+      "text": "a for null"
+    },
+    {
+      "index": 612,
+      "start": 1990.12,
+      "end": 1994.029,
+      "duration": 3.909,
+      "text": "space this"
+    },
+    {
+      "index": 613,
+      "start": 1996.789,
+      "end": 1996.799,
+      "duration": 0.01,
+      "text": "contains well we've already located the"
+    },
+    {
+      "index": 614,
+      "start": 1996.799,
+      "end": 1999.269,
+      "duration": 2.47,
+      "text": "zero vector and now you're going to tell"
+    },
+    {
+      "index": 615,
+      "start": 1999.279,
+      "end": 2001.87,
+      "duration": 2.591,
+      "text": "me another Vector that's in the null"
+    },
+    {
+      "index": 616,
+      "start": 2001.88,
+      "end": 2006.269,
+      "duration": 4.389,
+      "text": "space another solution another X another"
+    },
+    {
+      "index": 617,
+      "start": 2006.279,
+      "end": 2008.389,
+      "duration": 2.11,
+      "text": "you see what I'm asking you for is a"
+    },
+    {
+      "index": 618,
+      "start": 2008.399,
+      "end": 2010.23,
+      "duration": 1.831,
+      "text": "combination of those columns that's what"
+    },
+    {
+      "index": 619,
+      "start": 2010.24,
+      "end": 2012.19,
+      "duration": 1.95,
+      "text": "I'm I'm always looking at combinations"
+    },
+    {
+      "index": 620,
+      "start": 2012.2,
+      "end": 2016.149,
+      "duration": 3.949,
+      "text": "of columns but now I'm looking at the"
+    },
+    {
+      "index": 621,
+      "start": 2016.159,
+      "end": 2019.95,
+      "duration": 3.791,
+      "text": "X the the the the the weights the"
+    },
+    {
+      "index": 622,
+      "start": 2019.96,
+      "end": 2022.11,
+      "duration": 2.15,
+      "text": "coefficients in the combination so tell"
+    },
+    {
+      "index": 623,
+      "start": 2022.12,
+      "end": 2026.99,
+      "duration": 4.87,
+      "text": "me a good set of numbers to put in"
+    },
+    {
+      "index": 624,
+      "start": 2029.35,
+      "end": 2029.36,
+      "duration": 0.01,
+      "text": "there one"
+    },
+    {
+      "index": 625,
+      "start": 2029.36,
+      "end": 2032.23,
+      "duration": 2.87,
+      "text": "one one one minus one"
+    },
+    {
+      "index": 626,
+      "start": 2032.24,
+      "end": 2035.789,
+      "duration": 3.549,
+      "text": "thanks 1 one minus one so there's a"
+    },
+    {
+      "index": 627,
+      "start": 2035.799,
+      "end": 2039.43,
+      "duration": 3.631,
+      "text": "vector that's in it"
+    },
+    {
+      "index": 628,
+      "start": 2039.44,
+      "end": 2042.19,
+      "duration": 2.75,
+      "text": "okay but have I got a Subspace at this"
+    },
+    {
+      "index": 629,
+      "start": 2042.2,
+      "end": 2045.23,
+      "duration": 3.03,
+      "text": "point certainly not right I got just a"
+    },
+    {
+      "index": 630,
+      "start": 2045.24,
+      "end": 2047.79,
+      "duration": 2.55,
+      "text": "couple of vectors no way they make a"
+    },
+    {
+      "index": 631,
+      "start": 2047.8,
+      "end": 2050.95,
+      "duration": 3.15,
+      "text": "Subspace tell me actually why don't I"
+    },
+    {
+      "index": 632,
+      "start": 2050.96,
+      "end": 2053.99,
+      "duration": 3.03,
+      "text": "jump the whole way now tell"
+    },
+    {
+      "index": 633,
+      "start": 2054.0,
+      "end": 2057.349,
+      "duration": 3.349,
+      "text": "me well tell me one more"
+    },
+    {
+      "index": 634,
+      "start": 2057.359,
+      "end": 2061.99,
+      "duration": 4.631,
+      "text": "Solution One More X that would"
+    },
+    {
+      "index": 635,
+      "start": 2064.589,
+      "end": 2064.599,
+      "duration": 0.01,
+      "text": "work 22"
+    },
+    {
+      "index": 636,
+      "start": 2064.599,
+      "end": 2066.909,
+      "duration": 2.31,
+      "text": "-2 oh well tell me all of them that"
+    },
+    {
+      "index": 637,
+      "start": 2066.919,
+      "end": 2069.829,
+      "duration": 2.91,
+      "text": "would have been easier tell me the whole"
+    },
+    {
+      "index": 638,
+      "start": 2069.839,
+      "end": 2072.27,
+      "duration": 2.431,
+      "text": "lot now what what is the null space for"
+    },
+    {
+      "index": 639,
+      "start": 2072.28,
+      "end": 2073.389,
+      "duration": 1.109,
+      "text": "this"
+    },
+    {
+      "index": 640,
+      "start": 2073.399,
+      "end": 2076.909,
+      "duration": 3.51,
+      "text": "matrix it's all vectors of the form so"
+    },
+    {
+      "index": 641,
+      "start": 2076.919,
+      "end": 2078.75,
+      "duration": 1.831,
+      "text": "what what could what could this be it"
+    },
+    {
+      "index": 642,
+      "start": 2078.76,
+      "end": 2083.47,
+      "duration": 4.71,
+      "text": "could be 1 one minus one it could be any"
+    },
+    {
+      "index": 643,
+      "start": 2083.48,
+      "end": 2086.589,
+      "duration": 3.109,
+      "text": "it could be any number"
+    },
+    {
+      "index": 644,
+      "start": 2086.599,
+      "end": 2091.03,
+      "duration": 4.431,
+      "text": "c any number the same number again"
+    },
+    {
+      "index": 645,
+      "start": 2091.04,
+      "end": 2096.39,
+      "duration": 5.35,
+      "text": "and minus C in other words"
+    },
+    {
+      "index": 646,
+      "start": 2096.4,
+      "end": 2100.51,
+      "duration": 4.11,
+      "text": "actually and any multiple of this guy oh"
+    },
+    {
+      "index": 647,
+      "start": 2100.52,
+      "end": 2103.109,
+      "duration": 2.589,
+      "text": "that's that's the perfect description"
+    },
+    {
+      "index": 648,
+      "start": 2103.119,
+      "end": 2106.47,
+      "duration": 3.351,
+      "text": "because now the zero vectors"
+    },
+    {
+      "index": 649,
+      "start": 2106.48,
+      "end": 2108.71,
+      "duration": 2.23,
+      "text": "automatically included because C could"
+    },
+    {
+      "index": 650,
+      "start": 2108.72,
+      "end": 2111.87,
+      "duration": 3.15,
+      "text": "be zero the vector I had is included cuz"
+    },
+    {
+      "index": 651,
+      "start": 2111.88,
+      "end": 2114.99,
+      "duration": 3.11,
+      "text": "C could be one but now any vector and"
+    },
+    {
+      "index": 652,
+      "start": 2115.0,
+      "end": 2119.91,
+      "duration": 4.91,
+      "text": "that's actually"
+    },
+    {
+      "index": 653,
+      "start": 2123.39,
+      "end": 2123.4,
+      "duration": 0.01,
+      "text": "it and do I have a do I have a"
+    },
+    {
+      "index": 654,
+      "start": 2123.4,
+      "end": 2126.349,
+      "duration": 2.949,
+      "text": "Subspace and what does it look like it's"
+    },
+    {
+      "index": 655,
+      "start": 2126.359,
+      "end": 2129.23,
+      "duration": 2.871,
+      "text": "in so what what how would you describe"
+    },
+    {
+      "index": 656,
+      "start": 2129.24,
+      "end": 2132.23,
+      "duration": 2.99,
+      "text": "this the null space this all these"
+    },
+    {
+      "index": 657,
+      "start": 2132.24,
+      "end": 2136.23,
+      "duration": 3.99,
+      "text": "vectors of this form c c minus C like 7"
+    },
+    {
+      "index": 658,
+      "start": 2136.24,
+      "end": 2137.75,
+      "duration": 1.51,
+      "text": "7 -"
+    },
+    {
+      "index": 659,
+      "start": 2137.76,
+      "end": 2142.829,
+      "duration": 5.069,
+      "text": "7 - 11 - 11 + 11 what have I got"
+    },
+    {
+      "index": 660,
+      "start": 2142.839,
+      "end": 2145.31,
+      "duration": 2.471,
+      "text": "here if it describe that whole null"
+    },
+    {
+      "index": 661,
+      "start": 2145.32,
+      "end": 2147.39,
+      "duration": 2.07,
+      "text": "space what if I drew"
+    },
+    {
+      "index": 662,
+      "start": 2147.4,
+      "end": 2149.47,
+      "duration": 2.07,
+      "text": "it what do I"
+    },
+    {
+      "index": 663,
+      "start": 2149.48,
+      "end": 2152.87,
+      "duration": 3.39,
+      "text": "draw a line right the null space is a"
+    },
+    {
+      "index": 664,
+      "start": 2152.88,
+      "end": 2156.63,
+      "duration": 3.75,
+      "text": "line it's the line through it's it's in"
+    },
+    {
+      "index": 665,
+      "start": 2156.64,
+      "end": 2159.71,
+      "duration": 3.07,
+      "text": "R3"
+    },
+    {
+      "index": 666,
+      "start": 2163.91,
+      "end": 2163.92,
+      "duration": 0.01,
+      "text": "and the vector 1 one1 maybe goes down"
+    },
+    {
+      "index": 667,
+      "start": 2163.92,
+      "end": 2165.23,
+      "duration": 1.31,
+      "text": "here I don't know where it goes they"
+    },
+    {
+      "index": 668,
+      "start": 2165.24,
+      "end": 2169.99,
+      "duration": 4.75,
+      "text": "down here there's the vector 1 one1 that"
+    },
+    {
+      "index": 669,
+      "start": 2170.0,
+      "end": 2171.75,
+      "duration": 1.75,
+      "text": "you gave"
+    },
+    {
+      "index": 670,
+      "start": 2171.76,
+      "end": 2176.03,
+      "duration": 4.27,
+      "text": "me and where is the vector c c c it's on"
+    },
+    {
+      "index": 671,
+      "start": 2176.04,
+      "end": 2179.109,
+      "duration": 3.069,
+      "text": "this line of course there's 0 0 that we"
+    },
+    {
+      "index": 672,
+      "start": 2179.119,
+      "end": 2181.67,
+      "duration": 2.551,
+      "text": "had and what we've got is that whole"
+    },
+    {
+      "index": 673,
+      "start": 2181.68,
+      "end": 2186.109,
+      "duration": 4.429,
+      "text": "whoops that whole line going both ways"
+    },
+    {
+      "index": 674,
+      "start": 2186.119,
+      "end": 2188.51,
+      "duration": 2.391,
+      "text": "through the origin"
+    },
+    {
+      "index": 675,
+      "start": 2188.52,
+      "end": 2195.15,
+      "duration": 6.63,
+      "text": "the null space is a line in"
+    },
+    {
+      "index": 676,
+      "start": 2196.79,
+      "end": 2196.8,
+      "duration": 0.01,
+      "text": "R3"
+    },
+    {
+      "index": 677,
+      "start": 2196.8,
+      "end": 2200.589,
+      "duration": 3.789,
+      "text": "okay for that example we we could find"
+    },
+    {
+      "index": 678,
+      "start": 2200.599,
+      "end": 2203.91,
+      "duration": 3.311,
+      "text": "all the combinations of the columns that"
+    },
+    {
+      "index": 679,
+      "start": 2203.92,
+      "end": 2209.55,
+      "duration": 5.63,
+      "text": "gave zero at site now can I just take"
+    },
+    {
+      "index": 680,
+      "start": 2209.56,
+      "end": 2213.349,
+      "duration": 3.789,
+      "text": "one more time to go back to the"
+    },
+    {
+      "index": 681,
+      "start": 2213.359,
+      "end": 2215.47,
+      "duration": 2.111,
+      "text": "definition of"
+    },
+    {
+      "index": 682,
+      "start": 2215.48,
+      "end": 2218.03,
+      "duration": 2.55,
+      "text": "Subspace Vector space"
+    },
+    {
+      "index": 683,
+      "start": 2218.04,
+      "end": 2222.03,
+      "duration": 3.99,
+      "text": "and ask you to why how do I know that"
+    },
+    {
+      "index": 684,
+      "start": 2222.04,
+      "end": 2225.79,
+      "duration": 3.75,
+      "text": "the null space is a vector space how am"
+    },
+    {
+      "index": 685,
+      "start": 2225.8,
+      "end": 2228.79,
+      "duration": 2.99,
+      "text": "I entitled to use this word space I'll"
+    },
+    {
+      "index": 686,
+      "start": 2228.8,
+      "end": 2231.309,
+      "duration": 2.509,
+      "text": "never use that word space without"
+    },
+    {
+      "index": 687,
+      "start": 2231.319,
+      "end": 2234.75,
+      "duration": 3.431,
+      "text": "meaning that the two requirements are"
+    },
+    {
+      "index": 688,
+      "start": 2234.76,
+      "end": 2237.15,
+      "duration": 2.39,
+      "text": "satisfied can we just check that they"
+    },
+    {
+      "index": 689,
+      "start": 2237.16,
+      "end": 2240.829,
+      "duration": 3.669,
+      "text": "are so I'm going to check that look can"
+    },
+    {
+      "index": 690,
+      "start": 2240.839,
+      "end": 2244.309,
+      "duration": 3.47,
+      "text": "I just continue here check"
+    },
+    {
+      "index": 691,
+      "start": 2244.319,
+      "end": 2250.43,
+      "duration": 6.111,
+      "text": "that that the solution"
+    },
+    {
+      "index": 692,
+      "start": 2258.91,
+      "end": 2258.92,
+      "duration": 0.01,
+      "text": "always"
+    },
+    {
+      "index": 693,
+      "start": 2258.92,
+      "end": 2261.829,
+      "duration": 2.909,
+      "text": "give a"
+    },
+    {
+      "index": 694,
+      "start": 2261.839,
+      "end": 2265.27,
+      "duration": 3.431,
+      "text": "Subspace and the course the keyword"
+    },
+    {
+      "index": 695,
+      "start": 2265.28,
+      "end": 2271.75,
+      "duration": 6.47,
+      "text": "is that space so what do I have to"
+    },
+    {
+      "index": 696,
+      "start": 2275.069,
+      "end": 2275.079,
+      "duration": 0.01,
+      "text": "check what I have to show that if I have"
+    },
+    {
+      "index": 697,
+      "start": 2275.079,
+      "end": 2278.27,
+      "duration": 3.191,
+      "text": "one solution call it X and another"
+    },
+    {
+      "index": 698,
+      "start": 2278.28,
+      "end": 2281.27,
+      "duration": 2.99,
+      "text": "solution call it"
+    },
+    {
+      "index": 699,
+      "start": 2281.28,
+      "end": 2285.15,
+      "duration": 3.87,
+      "text": "xar that their sum is also a solution"
+    },
+    {
+      "index": 700,
+      "start": 2285.16,
+      "end": 2287.349,
+      "duration": 2.189,
+      "text": "right that's the that's a requirement to"
+    },
+    {
+      "index": 701,
+      "start": 2287.359,
+      "end": 2290.23,
+      "duration": 2.871,
+      "text": "use that word space I have to say I have"
+    },
+    {
+      "index": 702,
+      "start": 2290.24,
+      "end": 2294.79,
+      "duration": 4.55,
+      "text": "to convince myself that if ax is"
+    },
+    {
+      "index": 703,
+      "start": 2294.8,
+      "end": 2296.67,
+      "duration": 1.87,
+      "text": "zero"
+    },
+    {
+      "index": 704,
+      "start": 2296.68,
+      "end": 2302.349,
+      "duration": 5.669,
+      "text": "and also an ax star is zero or maybe I"
+    },
+    {
+      "index": 705,
+      "start": 2302.359,
+      "end": 2306.27,
+      "duration": 3.911,
+      "text": "should have said if AV is zero and a w"
+    },
+    {
+      "index": 706,
+      "start": 2306.28,
+      "end": 2310.75,
+      "duration": 4.47,
+      "text": "is zero then and what about V + W so I"
+    },
+    {
+      "index": 707,
+      "start": 2310.76,
+      "end": 2315.15,
+      "duration": 4.39,
+      "text": "let me use those letters if a v is zero"
+    },
+    {
+      "index": 708,
+      "start": 2315.16,
+      "end": 2318.349,
+      "duration": 3.189,
+      "text": "and a w is"
+    },
+    {
+      "index": 709,
+      "start": 2318.359,
+      "end": 2321.829,
+      "duration": 3.47,
+      "text": "zero then what then what is it what's"
+    },
+    {
+      "index": 710,
+      "start": 2321.839,
+      "end": 2325.71,
+      "duration": 3.871,
+      "text": "the if that and that then what's my"
+    },
+    {
+      "index": 711,
+      "start": 2325.72,
+      "end": 2333.03,
+      "duration": 7.31,
+      "text": "point here that a * V + W must"
+    },
+    {
+      "index": 712,
+      "start": 2333.04,
+      "end": 2337.67,
+      "duration": 4.63,
+      "text": "be zero that says that if V is in the n"
+    },
+    {
+      "index": 713,
+      "start": 2337.68,
+      "end": 2340.87,
+      "duration": 3.19,
+      "text": "space and W is in the null space then"
+    },
+    {
+      "index": 714,
+      "start": 2340.88,
+      "end": 2343.71,
+      "duration": 2.83,
+      "text": "there some V plus W is in the null space"
+    },
+    {
+      "index": 715,
+      "start": 2343.72,
+      "end": 2345.99,
+      "duration": 2.27,
+      "text": "and of course now that I've written it"
+    },
+    {
+      "index": 716,
+      "start": 2346.0,
+      "end": 2350.87,
+      "duration": 4.87,
+      "text": "down it's totally absurd ridiculously"
+    },
+    {
+      "index": 717,
+      "start": 2352.79,
+      "end": 2352.8,
+      "duration": 0.01,
+      "text": "simple"
+    },
+    {
+      "index": 718,
+      "start": 2352.8,
+      "end": 2355.829,
+      "duration": 3.029,
+      "text": "because matrix multiplication allows me"
+    },
+    {
+      "index": 719,
+      "start": 2355.839,
+      "end": 2361.069,
+      "duration": 5.23,
+      "text": "to separate that out into AV plus a"
+    },
+    {
+      "index": 720,
+      "start": 2361.079,
+      "end": 2363.67,
+      "duration": 2.591,
+      "text": "w i shouldn't say absurdly simple that"
+    },
+    {
+      "index": 721,
+      "start": 2363.68,
+      "end": 2366.87,
+      "duration": 3.19,
+      "text": "was a dumb thing to say we've used here"
+    },
+    {
+      "index": 722,
+      "start": 2366.88,
+      "end": 2369.63,
+      "duration": 2.75,
+      "text": "a base basic law of matrix"
+    },
+    {
+      "index": 723,
+      "start": 2369.64,
+      "end": 2371.63,
+      "duration": 1.99,
+      "text": "multiplication actually we've used it"
+    },
+    {
+      "index": 724,
+      "start": 2371.64,
+      "end": 2374.109,
+      "duration": 2.469,
+      "text": "without proving it but that's okay we"
+    },
+    {
+      "index": 725,
+      "start": 2374.119,
+      "end": 2377.19,
+      "duration": 3.071,
+      "text": "only live so long and just skip that"
+    },
+    {
+      "index": 726,
+      "start": 2377.2,
+      "end": 2380.43,
+      "duration": 3.23,
+      "text": "proof uh I think it's called the"
+    },
+    {
+      "index": 727,
+      "start": 2380.44,
+      "end": 2383.75,
+      "duration": 3.31,
+      "text": "distributive law that I can split these"
+    },
+    {
+      "index": 728,
+      "start": 2383.76,
+      "end": 2386.51,
+      "duration": 2.75,
+      "text": "split this into two pieces but but now"
+    },
+    {
+      "index": 729,
+      "start": 2386.52,
+      "end": 2390.87,
+      "duration": 4.35,
+      "text": "you see the point that that AV is zero"
+    },
+    {
+      "index": 730,
+      "start": 2390.88,
+      "end": 2393.95,
+      "duration": 3.07,
+      "text": "and a w is z so I have 0 plus 0 and I do"
+    },
+    {
+      "index": 731,
+      "start": 2393.96,
+      "end": 2395.47,
+      "duration": 1.51,
+      "text": "get zero it"
+    },
+    {
+      "index": 732,
+      "start": 2395.48,
+      "end": 2399.829,
+      "duration": 4.349,
+      "text": "checks and similarly I have to to show"
+    },
+    {
+      "index": 733,
+      "start": 2399.839,
+      "end": 2406.109,
+      "duration": 6.27,
+      "text": "that if AV is zero then a * any multiple"
+    },
+    {
+      "index": 734,
+      "start": 2406.119,
+      "end": 2411.03,
+      "duration": 4.911,
+      "text": "say 12 V is also zero and how do I know"
+    },
+    {
+      "index": 735,
+      "start": 2411.04,
+      "end": 2413.79,
+      "duration": 2.75,
+      "text": "that because I'm allowed to bring that"
+    },
+    {
+      "index": 736,
+      "start": 2413.8,
+      "end": 2417.71,
+      "duration": 3.91,
+      "text": "12 outside a number a scaler can move"
+    },
+    {
+      "index": 737,
+      "start": 2417.72,
+      "end": 2422.109,
+      "duration": 4.389,
+      "text": "outside so I have 12 AVS 12 zeros I have"
+    },
+    {
+      "index": 738,
+      "start": 2422.119,
+      "end": 2426.309,
+      "duration": 4.19,
+      "text": "zero that's check to okay just"
+    },
+    {
+      "index": 739,
+      "start": 2426.319,
+      "end": 2431.87,
+      "duration": 5.551,
+      "text": "to it it's really critical to understand"
+    },
+    {
+      "index": 740,
+      "start": 2431.88,
+      "end": 2435.71,
+      "duration": 3.83,
+      "text": "the oh yeah here under what am I what I"
+    },
+    {
+      "index": 741,
+      "start": 2435.72,
+      "end": 2437.87,
+      "duration": 2.15,
+      "text": "was going to say understand what's the"
+    },
+    {
+      "index": 742,
+      "start": 2437.88,
+      "end": 2440.309,
+      "duration": 2.429,
+      "text": "point of a vector space let me make that"
+    },
+    {
+      "index": 743,
+      "start": 2440.319,
+      "end": 2444.15,
+      "duration": 3.831,
+      "text": "point by changing the right hand"
+    },
+    {
+      "index": 744,
+      "start": 2444.16,
+      "end": 2447.27,
+      "duration": 3.11,
+      "text": "side oops okay let me change the right"
+    },
+    {
+      "index": 745,
+      "start": 2447.28,
+      "end": 2451.829,
+      "duration": 4.549,
+      "text": "hand side to 1 two 3 4 oh okay why don't"
+    },
+    {
+      "index": 746,
+      "start": 2451.839,
+      "end": 2453.47,
+      "duration": 1.631,
+      "text": "we do all of linear algebra in one"
+    },
+    {
+      "index": 747,
+      "start": 2453.48,
+      "end": 2456.67,
+      "duration": 3.19,
+      "text": "lecture then we we okay I would like to"
+    },
+    {
+      "index": 748,
+      "start": 2456.68,
+      "end": 2459.349,
+      "duration": 2.669,
+      "text": "know solutions to this"
+    },
+    {
+      "index": 749,
+      "start": 2459.359,
+      "end": 2463.95,
+      "duration": 4.591,
+      "text": "equation to those four"
+    },
+    {
+      "index": 750,
+      "start": 2466.71,
+      "end": 2466.72,
+      "duration": 0.01,
+      "text": "equations so I have four equations I"
+    },
+    {
+      "index": 751,
+      "start": 2466.72,
+      "end": 2469.309,
+      "duration": 2.589,
+      "text": "have only three unknowns so if I don't"
+    },
+    {
+      "index": 752,
+      "start": 2469.319,
+      "end": 2470.79,
+      "duration": 1.471,
+      "text": "have a pretty special right hand side"
+    },
+    {
+      "index": 753,
+      "start": 2470.8,
+      "end": 2472.79,
+      "duration": 1.99,
+      "text": "there won't be any solution at all but"
+    },
+    {
+      "index": 754,
+      "start": 2472.8,
+      "end": 2475.109,
+      "duration": 2.309,
+      "text": "that is a very special right hand"
+    },
+    {
+      "index": 755,
+      "start": 2475.119,
+      "end": 2479.309,
+      "duration": 4.19,
+      "text": "side and we know that there is a"
+    },
+    {
+      "index": 756,
+      "start": 2479.319,
+      "end": 2482.71,
+      "duration": 3.391,
+      "text": "solution one were there any more"
+    },
+    {
+      "index": 757,
+      "start": 2482.72,
+      "end": 2486.23,
+      "duration": 3.51,
+      "text": "solutions and did they form a vector"
+    },
+    {
+      "index": 758,
+      "start": 2486.24,
+      "end": 2490.589,
+      "duration": 4.349,
+      "text": "space okay so I'm asking two questions"
+    },
+    {
+      "index": 759,
+      "start": 2490.599,
+      "end": 2494.19,
+      "duration": 3.591,
+      "text": "there one is do so my right hand side"
+    },
+    {
+      "index": 760,
+      "start": 2494.2,
+      "end": 2496.03,
+      "duration": 1.83,
+      "text": "now is not zero anymore I'm not looking"
+    },
+    {
+      "index": 761,
+      "start": 2496.04,
+      "end": 2498.349,
+      "duration": 2.309,
+      "text": "at the null space because I I changed"
+    },
+    {
+      "index": 762,
+      "start": 2498.359,
+      "end": 2500.069,
+      "duration": 1.71,
+      "text": "from"
+    },
+    {
+      "index": 763,
+      "start": 2500.079,
+      "end": 2504.03,
+      "duration": 3.951,
+      "text": "zeros so my first question is do the"
+    },
+    {
+      "index": 764,
+      "start": 2504.04,
+      "end": 2507.63,
+      "duration": 3.59,
+      "text": "solutions if there are any and there are"
+    },
+    {
+      "index": 765,
+      "start": 2507.64,
+      "end": 2509.55,
+      "duration": 1.91,
+      "text": "do they form a"
+    },
+    {
+      "index": 766,
+      "start": 2509.56,
+      "end": 2512.27,
+      "duration": 2.71,
+      "text": "Subspace let's answer that question"
+    },
+    {
+      "index": 767,
+      "start": 2512.28,
+      "end": 2515.589,
+      "duration": 3.309,
+      "text": "first yes or no do I get a"
+    },
+    {
+      "index": 768,
+      "start": 2515.599,
+      "end": 2518.55,
+      "duration": 2.951,
+      "text": "Subspace if I look at at the solutions"
+    },
+    {
+      "index": 769,
+      "start": 2518.56,
+      "end": 2522.91,
+      "duration": 4.35,
+      "text": "to let me let me go back to X1 X2"
+    },
+    {
+      "index": 770,
+      "start": 2522.92,
+      "end": 2526.349,
+      "duration": 3.429,
+      "text": "X3 I'm looking at all the X's at all"
+    },
+    {
+      "index": 771,
+      "start": 2526.359,
+      "end": 2530.349,
+      "duration": 3.99,
+      "text": "those vectors in R3 that solve axal B"
+    },
+    {
+      "index": 772,
+      "start": 2530.359,
+      "end": 2532.589,
+      "duration": 2.23,
+      "text": "the only thing I've changed is B isn't"
+    },
+    {
+      "index": 773,
+      "start": 2532.599,
+      "end": 2536.27,
+      "duration": 3.671,
+      "text": "zero"
+    },
+    {
+      "index": 774,
+      "start": 2540.349,
+      "end": 2540.359,
+      "duration": 0.01,
+      "text": "anymore do the X's the solutions form a"
+    },
+    {
+      "index": 775,
+      "start": 2540.359,
+      "end": 2543.63,
+      "duration": 3.271,
+      "text": "vector space no they don't they"
+    },
+    {
+      "index": 776,
+      "start": 2543.64,
+      "end": 2546.63,
+      "duration": 2.99,
+      "text": "absolutely don't why what's an easy way"
+    },
+    {
+      "index": 777,
+      "start": 2546.64,
+      "end": 2549.03,
+      "duration": 2.39,
+      "text": "to see that I don't have a the solutions"
+    },
+    {
+      "index": 778,
+      "start": 2549.04,
+      "end": 2551.67,
+      "duration": 2.63,
+      "text": "to this do not form a"
+    },
+    {
+      "index": 779,
+      "start": 2551.68,
+      "end": 2555.51,
+      "duration": 3.83,
+      "text": "Subspace the solutions don't because"
+    },
+    {
+      "index": 780,
+      "start": 2555.52,
+      "end": 2558.99,
+      "duration": 3.47,
+      "text": "what how shall I see that the zero"
+    },
+    {
+      "index": 781,
+      "start": 2559.0,
+      "end": 2562.67,
+      "duration": 3.67,
+      "text": "Vector is not a solution so I never even"
+    },
+    {
+      "index": 782,
+      "start": 2562.68,
+      "end": 2565.069,
+      "duration": 2.389,
+      "text": "got started the zero Vector doesn't"
+    },
+    {
+      "index": 783,
+      "start": 2565.079,
+      "end": 2568.15,
+      "duration": 3.071,
+      "text": "solve this system I can't the solutions"
+    },
+    {
+      "index": 784,
+      "start": 2568.16,
+      "end": 2570.99,
+      "duration": 2.83,
+      "text": "can't be a vector"
+    },
+    {
+      "index": 785,
+      "start": 2571.0,
+      "end": 2572.549,
+      "duration": 1.549,
+      "text": "SP"
+    },
+    {
+      "index": 786,
+      "start": 2572.559,
+      "end": 2576.349,
+      "duration": 3.79,
+      "text": "now what are they like well we'll see"
+    },
+    {
+      "index": 787,
+      "start": 2576.359,
+      "end": 2578.99,
+      "duration": 2.631,
+      "text": "this but let's do it for this example so"
+    },
+    {
+      "index": 788,
+      "start": 2579.0,
+      "end": 2581.109,
+      "duration": 2.109,
+      "text": "one 0 was a"
+    },
+    {
+      "index": 789,
+      "start": 2581.119,
+      "end": 2583.829,
+      "duration": 2.71,
+      "text": "solution you saw that right away are"
+    },
+    {
+      "index": 790,
+      "start": 2583.839,
+      "end": 2585.829,
+      "duration": 1.99,
+      "text": "there any other Solutions can you tell"
+    },
+    {
+      "index": 791,
+      "start": 2585.839,
+      "end": 2591.51,
+      "duration": 5.671,
+      "text": "me a a second solution to this system of"
+    },
+    {
+      "index": 792,
+      "start": 2591.52,
+      "end": 2597.39,
+      "duration": 5.87,
+      "text": "equations 0 ne1 1 boy that's"
+    },
+    {
+      "index": 793,
+      "start": 2597.4,
+      "end": 2599.309,
+      "duration": 1.909,
+      "text": "01"
+    },
+    {
+      "index": 794,
+      "start": 2599.319,
+      "end": 2602.39,
+      "duration": 3.071,
+      "text": "1 yes because that says I take minus"
+    },
+    {
+      "index": 795,
+      "start": 2602.4,
+      "end": 2604.47,
+      "duration": 2.07,
+      "text": "this column plus this one and sure"
+    },
+    {
+      "index": 796,
+      "start": 2604.48,
+      "end": 2606.109,
+      "duration": 1.629,
+      "text": "enough that's"
+    },
+    {
+      "index": 797,
+      "start": 2606.119,
+      "end": 2607.63,
+      "duration": 1.511,
+      "text": "right"
+    },
+    {
+      "index": 798,
+      "start": 2607.64,
+      "end": 2609.71,
+      "duration": 2.07,
+      "text": "so there are there's a bunch of"
+    },
+    {
+      "index": 799,
+      "start": 2609.72,
+      "end": 2614.27,
+      "duration": 4.55,
+      "text": "solutions"
+    },
+    {
+      "index": 800,
+      "start": 2617.43,
+      "end": 2617.44,
+      "duration": 0.01,
+      "text": "here but they're not a Subspace I'll"
+    },
+    {
+      "index": 801,
+      "start": 2617.44,
+      "end": 2619.109,
+      "duration": 1.669,
+      "text": "tell you what it's like it's like a"
+    },
+    {
+      "index": 802,
+      "start": 2619.119,
+      "end": 2621.79,
+      "duration": 2.671,
+      "text": "plane that doesn't go through the origin"
+    },
+    {
+      "index": 803,
+      "start": 2621.8,
+      "end": 2623.51,
+      "duration": 1.71,
+      "text": "or a line that doesn't go through the"
+    },
+    {
+      "index": 804,
+      "start": 2623.52,
+      "end": 2625.67,
+      "duration": 2.15,
+      "text": "origin maybe in this case it's a line"
+    },
+    {
+      "index": 805,
+      "start": 2625.68,
+      "end": 2627.47,
+      "duration": 1.79,
+      "text": "that doesn't go through the origin if I"
+    },
+    {
+      "index": 806,
+      "start": 2627.48,
+      "end": 2630.99,
+      "duration": 3.51,
+      "text": "graph the solutions to ax equal B so you"
+    },
+    {
+      "index": 807,
+      "start": 2631.0,
+      "end": 2634.549,
+      "duration": 3.549,
+      "text": "I I think you've got the idea subspaces"
+    },
+    {
+      "index": 808,
+      "start": 2634.559,
+      "end": 2637.19,
+      "duration": 2.631,
+      "text": "have to go through the origin if I'm"
+    },
+    {
+      "index": 809,
+      "start": 2637.2,
+      "end": 2639.829,
+      "duration": 2.629,
+      "text": "looking at X's then they better solve ax"
+    },
+    {
+      "index": 810,
+      "start": 2639.839,
+      "end": 2641.95,
+      "duration": 2.111,
+      "text": "equals"
+    },
+    {
+      "index": 811,
+      "start": 2641.96,
+      "end": 2645.99,
+      "duration": 4.03,
+      "text": "z in a way I've got my two subspaces"
+    },
+    {
+      "index": 812,
+      "start": 2646.0,
+      "end": 2649.549,
+      "duration": 3.549,
+      "text": "that I talking about today"
+    },
+    {
+      "index": 813,
+      "start": 2649.559,
+      "end": 2653.15,
+      "duration": 3.591,
+      "text": "are kind of the two ways I can tell you"
+    },
+    {
+      "index": 814,
+      "start": 2653.16,
+      "end": 2656.63,
+      "duration": 3.47,
+      "text": "what a sub about a about a"
+    },
+    {
+      "index": 815,
+      "start": 2656.64,
+      "end": 2658.829,
+      "duration": 2.189,
+      "text": "Subspace if I want to tell you about the"
+    },
+    {
+      "index": 816,
+      "start": 2658.839,
+      "end": 2662.43,
+      "duration": 3.591,
+      "text": "column space I tell you a few columns"
+    },
+    {
+      "index": 817,
+      "start": 2662.44,
+      "end": 2665.109,
+      "duration": 2.669,
+      "text": "and I say take their combinations like I"
+    },
+    {
+      "index": 818,
+      "start": 2665.119,
+      "end": 2668.069,
+      "duration": 2.95,
+      "text": "build up this Subspace I put in a few"
+    },
+    {
+      "index": 819,
+      "start": 2668.079,
+      "end": 2670.43,
+      "duration": 2.351,
+      "text": "vectors their combinations make a"
+    },
+    {
+      "index": 820,
+      "start": 2670.44,
+      "end": 2673.99,
+      "duration": 3.55,
+      "text": "Subspace now when I went to let me come"
+    },
+    {
+      "index": 821,
+      "start": 2674.0,
+      "end": 2680.069,
+      "duration": 6.069,
+      "text": "back to the one that is a Subspace"
+    },
+    {
+      "index": 822,
+      "start": 2684.349,
+      "end": 2684.359,
+      "duration": 0.01,
+      "text": "here here when I talked about the null"
+    },
+    {
+      "index": 823,
+      "start": 2684.359,
+      "end": 2687.03,
+      "duration": 2.671,
+      "text": "space I didn't tell you what's in it we"
+    },
+    {
+      "index": 824,
+      "start": 2687.04,
+      "end": 2689.71,
+      "duration": 2.67,
+      "text": "had to figure out what was in it what I"
+    },
+    {
+      "index": 825,
+      "start": 2689.72,
+      "end": 2693.549,
+      "duration": 3.829,
+      "text": "told you was the equations that I'm that"
+    },
+    {
+      "index": 826,
+      "start": 2693.559,
+      "end": 2696.79,
+      "duration": 3.231,
+      "text": "has to be satisfied you see those like"
+    },
+    {
+      "index": 827,
+      "start": 2696.8,
+      "end": 2698.71,
+      "duration": 1.91,
+      "text": "those are the two natural ways to tell"
+    },
+    {
+      "index": 828,
+      "start": 2698.72,
+      "end": 2701.43,
+      "duration": 2.71,
+      "text": "you what's what's in this what's in a"
+    },
+    {
+      "index": 829,
+      "start": 2701.44,
+      "end": 2704.19,
+      "duration": 2.75,
+      "text": "Subspace I can either give you a few"
+    },
+    {
+      "index": 830,
+      "start": 2704.2,
+      "end": 2707.71,
+      "duration": 3.51,
+      "text": "vectors and say fill it out take"
+    },
+    {
+      "index": 831,
+      "start": 2707.72,
+      "end": 2710.19,
+      "duration": 2.47,
+      "text": "combinations or I can give you a system"
+    },
+    {
+      "index": 832,
+      "start": 2710.2,
+      "end": 2714.39,
+      "duration": 4.19,
+      "text": "of equations the requirements that the"
+    },
+    {
+      "index": 833,
+      "start": 2714.4,
+      "end": 2716.47,
+      "duration": 2.07,
+      "text": "X's have to"
+    },
+    {
+      "index": 834,
+      "start": 2716.48,
+      "end": 2719.589,
+      "duration": 3.109,
+      "text": "satisfy and both of those ways produce"
+    },
+    {
+      "index": 835,
+      "start": 2719.599,
+      "end": 2722.549,
+      "duration": 2.95,
+      "text": "subspaces and they're the important ways"
+    },
+    {
+      "index": 836,
+      "start": 2722.559,
+      "end": 2724.23,
+      "duration": 1.671,
+      "text": "to construct"
+    },
+    {
+      "index": 837,
+      "start": 2724.24,
+      "end": 2726.589,
+      "duration": 2.349,
+      "text": "Subspace okay so today's lecture"
+    },
+    {
+      "index": 838,
+      "start": 2726.599,
+      "end": 2728.349,
+      "duration": 1.75,
+      "text": "actually"
+    },
+    {
+      "index": 839,
+      "start": 2728.359,
+      "end": 2732.27,
+      "duration": 3.911,
+      "text": "got uh the essentials of"
+    },
+    {
+      "index": 840,
+      "start": 2732.28,
+      "end": 2735.829,
+      "duration": 3.549,
+      "text": "3.2 the idea of the null space now we"
+    },
+    {
+      "index": 841,
+      "start": 2735.839,
+      "end": 2739.069,
+      "duration": 3.23,
+      "text": "have to tackle Wednesday the job of how"
+    },
+    {
+      "index": 842,
+      "start": 2739.079,
+      "end": 2741.67,
+      "duration": 2.591,
+      "text": "do we actually get hold of that Subspace"
+    },
+    {
+      "index": 843,
+      "start": 2741.68,
+      "end": 2744.23,
+      "duration": 2.55,
+      "text": "in an example that's bigger and we can't"
+    },
+    {
+      "index": 844,
+      "start": 2744.24,
+      "end": 2755.91,
+      "duration": 11.67,
+      "text": "see it just by ey okay see you Wednesday"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Linear Algebra - Gilbert Strang",
+    "source_url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D"
+  }
+}

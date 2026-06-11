@@ -1,0 +1,7060 @@
+{
+  "video": {
+    "id": "60e4hdCi1D4",
+    "title": "Lec 17: Double integrals in polar coords; applications | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=60e4hdCi1D4",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3090,
+    "language": "en"
+  },
+  "segment_count": 1006,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.79,
+      "end": 1.8,
+      "duration": 0.01,
+      "text": "the following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.8,
+      "end": 4.309,
+      "duration": 2.509,
+      "text": "a Creative Commons license your support"
+    },
+    {
+      "index": 2,
+      "start": 4.319,
+      "end": 6.43,
+      "duration": 2.111,
+      "text": "will help MIT open courseware continue"
+    },
+    {
+      "index": 3,
+      "start": 6.44,
+      "end": 8.35,
+      "duration": 1.91,
+      "text": "to offer highquality educational"
+    },
+    {
+      "index": 4,
+      "start": 8.36,
+      "end": 11.23,
+      "duration": 2.87,
+      "text": "resources for free to make a donation or"
+    },
+    {
+      "index": 5,
+      "start": 11.24,
+      "end": 12.789,
+      "duration": 1.549,
+      "text": "to view additional materials from"
+    },
+    {
+      "index": 6,
+      "start": 12.799,
+      "end": 15.869,
+      "duration": 3.07,
+      "text": "hundreds of MIT courses visit MIT open"
+    },
+    {
+      "index": 7,
+      "start": 15.879,
+      "end": 21.029,
+      "duration": 5.15,
+      "text": "courseware at"
+    },
+    {
+      "index": 8,
+      "start": 23.67,
+      "end": 23.68,
+      "duration": 0.01,
+      "text": "ocw.mit.edu"
+    },
+    {
+      "index": 9,
+      "start": 23.68,
+      "end": 27.47,
+      "duration": 3.79,
+      "text": "so yesterday we saw how to define double"
+    },
+    {
+      "index": 10,
+      "start": 27.48,
+      "end": 30.029,
+      "duration": 2.549,
+      "text": "integrals and how to start computing"
+    },
+    {
+      "index": 11,
+      "start": 30.039,
+      "end": 31.83,
+      "duration": 1.791,
+      "text": "them in terms of X and Y"
+    },
+    {
+      "index": 12,
+      "start": 31.84,
+      "end": 35.43,
+      "duration": 3.59,
+      "text": "coordinates Okay so we've defined the"
+    },
+    {
+      "index": 13,
+      "start": 35.44,
+      "end": 36.75,
+      "duration": 1.31,
+      "text": "double"
+    },
+    {
+      "index": 14,
+      "start": 36.76,
+      "end": 39.95,
+      "duration": 3.19,
+      "text": "integral of a region in plane of a"
+    },
+    {
+      "index": 15,
+      "start": 39.96,
+      "end": 44.47,
+      "duration": 4.51,
+      "text": "function f of XY da"
+    },
+    {
+      "index": 16,
+      "start": 49.79,
+      "end": 49.8,
+      "duration": 0.01,
+      "text": "a ah you can't hear me okay uh is the"
+    },
+    {
+      "index": 17,
+      "start": 49.8,
+      "end": 51.51,
+      "duration": 1.71,
+      "text": "sound working can you hear me at the"
+    },
+    {
+      "index": 18,
+      "start": 51.52,
+      "end": 53.15,
+      "duration": 1.63,
+      "text": "back"
+    },
+    {
+      "index": 19,
+      "start": 53.16,
+      "end": 56.229,
+      "duration": 3.069,
+      "text": "now can we make the sound"
+    },
+    {
+      "index": 20,
+      "start": 56.239,
+      "end": 59.549,
+      "duration": 3.31,
+      "text": "louder does this work and people are not"
+    },
+    {
+      "index": 21,
+      "start": 59.559,
+      "end": 64.31,
+      "duration": 4.751,
+      "text": "hearing me the back is it"
+    },
+    {
+      "index": 22,
+      "start": 66.35,
+      "end": 66.36,
+      "duration": 0.01,
+      "text": "better okay people are still saying make"
+    },
+    {
+      "index": 23,
+      "start": 66.36,
+      "end": 74.03,
+      "duration": 7.67,
+      "text": "it louder uh is it better okay great"
+    },
+    {
+      "index": 24,
+      "start": 74.04,
+      "end": 76.71,
+      "duration": 2.67,
+      "text": "thanks"
+    },
+    {
+      "index": 25,
+      "start": 76.72,
+      "end": 79.149,
+      "duration": 2.429,
+      "text": "so okay that's not an excuse to start"
+    },
+    {
+      "index": 26,
+      "start": 79.159,
+      "end": 82.91,
+      "duration": 3.751,
+      "text": "you know chatting with your friends"
+    },
+    {
+      "index": 27,
+      "start": 85.429,
+      "end": 85.439,
+      "duration": 0.01,
+      "text": "um okay so when we have a region in the"
+    },
+    {
+      "index": 28,
+      "start": 85.439,
+      "end": 86.789,
+      "duration": 1.35,
+      "text": "XY"
+    },
+    {
+      "index": 29,
+      "start": 86.799,
+      "end": 91.429,
+      "duration": 4.63,
+      "text": "plane and we have a function of X and Y"
+    },
+    {
+      "index": 30,
+      "start": 91.439,
+      "end": 93.83,
+      "duration": 2.391,
+      "text": "we are defining the double integral of f"
+    },
+    {
+      "index": 31,
+      "start": 93.84,
+      "end": 95.35,
+      "duration": 1.51,
+      "text": "over this"
+    },
+    {
+      "index": 32,
+      "start": 95.36,
+      "end": 99.59,
+      "duration": 4.23,
+      "text": "region by taking basically the sum of"
+    },
+    {
+      "index": 33,
+      "start": 99.6,
+      "end": 102.469,
+      "duration": 2.869,
+      "text": "values of a function everywhere in here"
+    },
+    {
+      "index": 34,
+      "start": 102.479,
+      "end": 105.35,
+      "duration": 2.871,
+      "text": "times the area element and the"
+    },
+    {
+      "index": 35,
+      "start": 105.36,
+      "end": 107.109,
+      "duration": 1.749,
+      "text": "definition actually is we split the"
+    },
+    {
+      "index": 36,
+      "start": 107.119,
+      "end": 110.429,
+      "duration": 3.31,
+      "text": "region into lots of tiny little pieces"
+    },
+    {
+      "index": 37,
+      "start": 110.439,
+      "end": 112.35,
+      "duration": 1.911,
+      "text": "we multiply the value of the function at"
+    },
+    {
+      "index": 38,
+      "start": 112.36,
+      "end": 114.27,
+      "duration": 1.91,
+      "text": "that point times the area of a little"
+    },
+    {
+      "index": 39,
+      "start": 114.28,
+      "end": 117.149,
+      "duration": 2.869,
+      "text": "piece and we sum that everywhere and"
+    },
+    {
+      "index": 40,
+      "start": 117.159,
+      "end": 119.55,
+      "duration": 2.391,
+      "text": "we've seen actually how to compute these"
+    },
+    {
+      "index": 41,
+      "start": 119.56,
+      "end": 122.67,
+      "duration": 3.11,
+      "text": "things"
+    },
+    {
+      "index": 42,
+      "start": 127.589,
+      "end": 127.599,
+      "duration": 0.01,
+      "text": "integrals so"
+    },
+    {
+      "index": 43,
+      "start": 127.599,
+      "end": 130.83,
+      "duration": 3.231,
+      "text": "first integrating over Dy then over DX"
+    },
+    {
+      "index": 44,
+      "start": 130.84,
+      "end": 132.79,
+      "duration": 1.95,
+      "text": "or the other way"
+    },
+    {
+      "index": 45,
+      "start": 132.8,
+      "end": 136.99,
+      "duration": 4.19,
+      "text": "around"
+    },
+    {
+      "index": 46,
+      "start": 140.19,
+      "end": 140.2,
+      "duration": 0.01,
+      "text": "so one example that we did in particular"
+    },
+    {
+      "index": 47,
+      "start": 140.2,
+      "end": 143.509,
+      "duration": 3.309,
+      "text": "was to compute the double integral over"
+    },
+    {
+      "index": 48,
+      "start": 143.519,
+      "end": 146.589,
+      "duration": 3.07,
+      "text": "a quarter"
+    },
+    {
+      "index": 49,
+      "start": 150.07,
+      "end": 150.08,
+      "duration": 0.01,
+      "text": "dis quarter of a unit dis so that was"
+    },
+    {
+      "index": 50,
+      "start": 150.08,
+      "end": 152.39,
+      "duration": 2.31,
+      "text": "the region where X2 + y sare is less"
+    },
+    {
+      "index": 51,
+      "start": 152.4,
+      "end": 157.63,
+      "duration": 5.23,
+      "text": "than 1 and X and Y are positive of 1 - x"
+    },
+    {
+      "index": 52,
+      "start": 157.64,
+      "end": 159.19,
+      "duration": 1.55,
+      "text": "2us y^"
+    },
+    {
+      "index": 53,
+      "start": 159.2,
+      "end": 160.949,
+      "duration": 1.749,
+      "text": "2"
+    },
+    {
+      "index": 54,
+      "start": 160.959,
+      "end": 164.39,
+      "duration": 3.431,
+      "text": "Da and well hopefully I kind of"
+    },
+    {
+      "index": 55,
+      "start": 164.4,
+      "end": 166.07,
+      "duration": 1.67,
+      "text": "convinced you that we can do it using"
+    },
+    {
+      "index": 56,
+      "start": 166.08,
+      "end": 168.79,
+      "duration": 2.71,
+      "text": "enough trig and substitutions and so on"
+    },
+    {
+      "index": 57,
+      "start": 168.8,
+      "end": 171.47,
+      "duration": 2.67,
+      "text": "but it's not very"
+    },
+    {
+      "index": 58,
+      "start": 171.48,
+      "end": 172.99,
+      "duration": 1.51,
+      "text": "pleasant"
+    },
+    {
+      "index": 59,
+      "start": 173.0,
+      "end": 175.75,
+      "duration": 2.75,
+      "text": "and the reason for that is that using X"
+    },
+    {
+      "index": 60,
+      "start": 175.76,
+      "end": 178.35,
+      "duration": 2.59,
+      "text": "and Y coordinates here doesn't seem very"
+    },
+    {
+      "index": 61,
+      "start": 178.36,
+      "end": 180.589,
+      "duration": 2.229,
+      "text": "appropriate so in fact we can use polar"
+    },
+    {
+      "index": 62,
+      "start": 180.599,
+      "end": 182.75,
+      "duration": 2.151,
+      "text": "coordinates instead to compute this"
+    },
+    {
+      "index": 63,
+      "start": 182.76,
+      "end": 193.35,
+      "duration": 10.59,
+      "text": "double"
+    },
+    {
+      "index": 64,
+      "start": 195.07,
+      "end": 195.08,
+      "duration": 0.01,
+      "text": "integral"
+    },
+    {
+      "index": 65,
+      "start": 195.08,
+      "end": 199.27,
+      "duration": 4.19,
+      "text": "so remember that polar coordinates are"
+    },
+    {
+      "index": 66,
+      "start": 199.28,
+      "end": 203.63,
+      "duration": 4.35,
+      "text": "about replacing X and Y as coordinates"
+    },
+    {
+      "index": 67,
+      "start": 203.64,
+      "end": 206.509,
+      "duration": 2.869,
+      "text": "for a point in the plane by"
+    },
+    {
+      "index": 68,
+      "start": 206.519,
+      "end": 209.27,
+      "duration": 2.751,
+      "text": "instead R which is the distance from the"
+    },
+    {
+      "index": 69,
+      "start": 209.28,
+      "end": 212.509,
+      "duration": 3.229,
+      "text": "origin to our point and Theta which is"
+    },
+    {
+      "index": 70,
+      "start": 212.519,
+      "end": 216.149,
+      "duration": 3.63,
+      "text": "the angle measured counterclockwise from"
+    },
+    {
+      "index": 71,
+      "start": 216.159,
+      "end": 217.75,
+      "duration": 1.591,
+      "text": "the positive"
+    },
+    {
+      "index": 72,
+      "start": 217.76,
+      "end": 222.99,
+      "duration": 5.23,
+      "text": "x-axis okay so in terms of R and Theta"
+    },
+    {
+      "index": 73,
+      "start": 223.0,
+      "end": 227.71,
+      "duration": 4.71,
+      "text": "you have xal R cosine Theta y equal R"
+    },
+    {
+      "index": 74,
+      "start": 227.72,
+      "end": 229.63,
+      "duration": 1.91,
+      "text": "sin"
+    },
+    {
+      "index": 75,
+      "start": 229.64,
+      "end": 231.35,
+      "duration": 1.71,
+      "text": "thet"
+    },
+    {
+      "index": 76,
+      "start": 231.36,
+      "end": 235.55,
+      "duration": 4.19,
+      "text": "so the claim is we are able actually to"
+    },
+    {
+      "index": 77,
+      "start": 235.56,
+      "end": 238.71,
+      "duration": 3.15,
+      "text": "do double integrals in polar coordinates"
+    },
+    {
+      "index": 78,
+      "start": 238.72,
+      "end": 241.509,
+      "duration": 2.789,
+      "text": "we just have to learn how"
+    },
+    {
+      "index": 79,
+      "start": 241.519,
+      "end": 247.069,
+      "duration": 5.55,
+      "text": "two okay so just to draw a quick"
+    },
+    {
+      "index": 80,
+      "start": 250.83,
+      "end": 250.84,
+      "duration": 0.01,
+      "text": "picture when we were integrating in XY"
+    },
+    {
+      "index": 81,
+      "start": 250.84,
+      "end": 253.069,
+      "duration": 2.229,
+      "text": "coordinates in rectangular"
+    },
+    {
+      "index": 82,
+      "start": 253.079,
+      "end": 257.15,
+      "duration": 4.071,
+      "text": "coordinates we were slicing our region"
+    },
+    {
+      "index": 83,
+      "start": 257.16,
+      "end": 259.509,
+      "duration": 2.349,
+      "text": "by grid lines that were either"
+    },
+    {
+      "index": 84,
+      "start": 259.519,
+      "end": 261.189,
+      "duration": 1.67,
+      "text": "horizontal or vertical and we used that"
+    },
+    {
+      "index": 85,
+      "start": 261.199,
+      "end": 263.79,
+      "duration": 2.591,
+      "text": "to set up the iterated integral and we"
+    },
+    {
+      "index": 86,
+      "start": 263.8,
+      "end": 267.43,
+      "duration": 3.63,
+      "text": "said da became DX Dy or Dy"
+    },
+    {
+      "index": 87,
+      "start": 267.44,
+      "end": 271.67,
+      "duration": 4.23,
+      "text": "DX so now we are going to actually"
+    },
+    {
+      "index": 88,
+      "start": 271.68,
+      "end": 273.67,
+      "duration": 1.99,
+      "text": "integrate in terms of the Polar"
+    },
+    {
+      "index": 89,
+      "start": 273.68,
+      "end": 275.629,
+      "duration": 1.949,
+      "text": "coordinates R and"
+    },
+    {
+      "index": 90,
+      "start": 275.639,
+      "end": 281.15,
+      "duration": 5.511,
+      "text": "Theta so let's say we will"
+    },
+    {
+      "index": 91,
+      "start": 284.909,
+      "end": 284.919,
+      "duration": 0.01,
+      "text": "integrate in the order well R first and"
+    },
+    {
+      "index": 92,
+      "start": 284.919,
+      "end": 287.79,
+      "duration": 2.871,
+      "text": "then Theta that's the order that makes"
+    },
+    {
+      "index": 93,
+      "start": 287.8,
+      "end": 290.15,
+      "duration": 2.35,
+      "text": "the most sense usually when you do polar"
+    },
+    {
+      "index": 94,
+      "start": 290.16,
+      "end": 293.35,
+      "duration": 3.19,
+      "text": "coordinates so what does that mean it"
+    },
+    {
+      "index": 95,
+      "start": 293.36,
+      "end": 296.99,
+      "duration": 3.63,
+      "text": "means that we will first focus on a"
+    },
+    {
+      "index": 96,
+      "start": 297.0,
+      "end": 300.87,
+      "duration": 3.87,
+      "text": "slice where we fix the value of theta"
+    },
+    {
+      "index": 97,
+      "start": 300.88,
+      "end": 303.189,
+      "duration": 2.309,
+      "text": "and we'll let R vary so that means we"
+    },
+    {
+      "index": 98,
+      "start": 303.199,
+      "end": 305.59,
+      "duration": 2.391,
+      "text": "fix a direction we fix a ray out from"
+    },
+    {
+      "index": 99,
+      "start": 305.6,
+      "end": 308.83,
+      "duration": 3.23,
+      "text": "the origin in a certain direction and"
+    },
+    {
+      "index": 100,
+      "start": 308.84,
+      "end": 310.87,
+      "duration": 2.03,
+      "text": "we'll travel along this R and see which"
+    },
+    {
+      "index": 101,
+      "start": 310.88,
+      "end": 314.39,
+      "duration": 3.51,
+      "text": "part of it which values of R are in our"
+    },
+    {
+      "index": 102,
+      "start": 314.4,
+      "end": 316.629,
+      "duration": 2.229,
+      "text": "region okay so here it will be actually"
+    },
+    {
+      "index": 103,
+      "start": 316.639,
+      "end": 318.99,
+      "duration": 2.351,
+      "text": "pretty easy"
+    },
+    {
+      "index": 104,
+      "start": 319.0,
+      "end": 322.87,
+      "duration": 3.87,
+      "text": "because R will just well start at zero"
+    },
+    {
+      "index": 105,
+      "start": 322.88,
+      "end": 325.469,
+      "duration": 2.589,
+      "text": "and you'll have to stop when you"
+    },
+    {
+      "index": 106,
+      "start": 325.479,
+      "end": 328.67,
+      "duration": 3.191,
+      "text": "actually exit this quarter dis well"
+    },
+    {
+      "index": 107,
+      "start": 328.68,
+      "end": 330.71,
+      "duration": 2.03,
+      "text": "what's the equation of this Circle in"
+    },
+    {
+      "index": 108,
+      "start": 330.72,
+      "end": 334.59,
+      "duration": 3.87,
+      "text": "polar coordinates it's just Ral 1 so"
+    },
+    {
+      "index": 109,
+      "start": 334.6,
+      "end": 337.749,
+      "duration": 3.149,
+      "text": "we'll stop when R reaches"
+    },
+    {
+      "index": 110,
+      "start": 337.759,
+      "end": 344.23,
+      "duration": 6.471,
+      "text": "one okay what about Theta well the first"
+    },
+    {
+      "index": 111,
+      "start": 344.24,
+      "end": 346.07,
+      "duration": 1.83,
+      "text": "array that we might want to consider is"
+    },
+    {
+      "index": 112,
+      "start": 346.08,
+      "end": 348.35,
+      "duration": 2.27,
+      "text": "the one that goes along the xaxis that's"
+    },
+    {
+      "index": 113,
+      "start": 348.36,
+      "end": 351.55,
+      "duration": 3.19,
+      "text": "when theta equals zero and we'll stop"
+    },
+    {
+      "index": 114,
+      "start": 351.56,
+      "end": 353.749,
+      "duration": 2.189,
+      "text": "when Theta reaches pi/ 2 because we"
+    },
+    {
+      "index": 115,
+      "start": 353.759,
+      "end": 355.629,
+      "duration": 1.87,
+      "text": "don't care about the rest of the disc we"
+    },
+    {
+      "index": 116,
+      "start": 355.639,
+      "end": 358.629,
+      "duration": 2.99,
+      "text": "only care about the first"
+    },
+    {
+      "index": 117,
+      "start": 358.639,
+      "end": 361.629,
+      "duration": 2.99,
+      "text": "quadrant"
+    },
+    {
+      "index": 118,
+      "start": 361.639,
+      "end": 364.309,
+      "duration": 2.67,
+      "text": "okay so we'll stop at pi/"
+    },
+    {
+      "index": 119,
+      "start": 364.319,
+      "end": 368.629,
+      "duration": 4.31,
+      "text": "two now there's a there's a catch"
+    },
+    {
+      "index": 120,
+      "start": 368.639,
+      "end": 372.11,
+      "duration": 3.471,
+      "text": "FL which is that da is not drd Theta so"
+    },
+    {
+      "index": 121,
+      "start": 372.12,
+      "end": 375.87,
+      "duration": 3.75,
+      "text": "let me explain to you why okay so let's"
+    },
+    {
+      "index": 122,
+      "start": 375.88,
+      "end": 377.55,
+      "duration": 1.67,
+      "text": "say that we are slicing you know what it"
+    },
+    {
+      "index": 123,
+      "start": 377.56,
+      "end": 379.07,
+      "duration": 1.51,
+      "text": "means really is that we are cutting our"
+    },
+    {
+      "index": 124,
+      "start": 379.08,
+      "end": 380.589,
+      "duration": 1.509,
+      "text": "region into little"
+    },
+    {
+      "index": 125,
+      "start": 380.599,
+      "end": 385.07,
+      "duration": 4.471,
+      "text": "pieces that are the elementary you know"
+    },
+    {
+      "index": 126,
+      "start": 385.08,
+      "end": 386.909,
+      "duration": 1.829,
+      "text": "what corresponds to a small rectangle in"
+    },
+    {
+      "index": 127,
+      "start": 386.919,
+      "end": 388.749,
+      "duration": 1.83,
+      "text": "the XY coordinate system here would be"
+    },
+    {
+      "index": 128,
+      "start": 388.759,
+      "end": 392.71,
+      "duration": 3.951,
+      "text": "actually a little piece of"
+    },
+    {
+      "index": 129,
+      "start": 392.72,
+      "end": 396.99,
+      "duration": 4.27,
+      "text": "circle between a given radius R"
+    },
+    {
+      "index": 130,
+      "start": 397.0,
+      "end": 400.95,
+      "duration": 3.95,
+      "text": "and R plus Delta R and given an between"
+    },
+    {
+      "index": 131,
+      "start": 400.96,
+      "end": 403.469,
+      "duration": 2.509,
+      "text": "an angle Theta and theta plus Delta"
+    },
+    {
+      "index": 132,
+      "start": 403.479,
+      "end": 405.629,
+      "duration": 2.15,
+      "text": "Theta okay so I need to draw actually a"
+    },
+    {
+      "index": 133,
+      "start": 405.639,
+      "end": 408.27,
+      "duration": 2.631,
+      "text": "bigger picture of it because it"
+    },
+    {
+      "index": 134,
+      "start": 408.28,
+      "end": 411.43,
+      "duration": 3.15,
+      "text": "makes really hard to"
+    },
+    {
+      "index": 135,
+      "start": 411.44,
+      "end": 414.749,
+      "duration": 3.309,
+      "text": "read so let's say that I fix an angle"
+    },
+    {
+      "index": 136,
+      "start": 414.759,
+      "end": 418.23,
+      "duration": 3.471,
+      "text": "Theta and a slightly different one where"
+    },
+    {
+      "index": 137,
+      "start": 418.24,
+      "end": 421.11,
+      "duration": 2.87,
+      "text": "I've added the Delta"
+    },
+    {
+      "index": 138,
+      "start": 421.12,
+      "end": 423.79,
+      "duration": 2.67,
+      "text": "thet and let's say that I"
+    },
+    {
+      "index": 139,
+      "start": 423.8,
+      "end": 427.99,
+      "duration": 4.19,
+      "text": "have a radius"
+    },
+    {
+      "index": 140,
+      "start": 428.0,
+      "end": 432.909,
+      "duration": 4.909,
+      "text": "R and I add Delta R to it so then you"
+    },
+    {
+      "index": 141,
+      "start": 432.919,
+      "end": 434.71,
+      "duration": 1.791,
+      "text": "know I'll have a little piece of XY"
+    },
+    {
+      "index": 142,
+      "start": 434.72,
+      "end": 437.95,
+      "duration": 3.23,
+      "text": "plane that's in here"
+    },
+    {
+      "index": 143,
+      "start": 437.96,
+      "end": 440.35,
+      "duration": 2.39,
+      "text": "and I have to figure out what is its"
+    },
+    {
+      "index": 144,
+      "start": 440.36,
+      "end": 445.67,
+      "duration": 5.31,
+      "text": "area what is Delta a for this"
+    },
+    {
+      "index": 145,
+      "start": 445.68,
+      "end": 449.629,
+      "duration": 3.949,
+      "text": "guy well let's see this guy actually if"
+    },
+    {
+      "index": 146,
+      "start": 449.639,
+      "end": 452.07,
+      "duration": 2.431,
+      "text": "you know my Delta R and Delta Theta are"
+    },
+    {
+      "index": 147,
+      "start": 452.08,
+      "end": 454.43,
+      "duration": 2.35,
+      "text": "small enough it will almost look like a"
+    },
+    {
+      "index": 148,
+      "start": 454.44,
+      "end": 456.629,
+      "duration": 2.189,
+      "text": "rectangle it's rotated but it's"
+    },
+    {
+      "index": 149,
+      "start": 456.639,
+      "end": 458.35,
+      "duration": 1.711,
+      "text": "basically a rectangle I mean these sides"
+    },
+    {
+      "index": 150,
+      "start": 458.36,
+      "end": 460.79,
+      "duration": 2.43,
+      "text": "of course are curvy but you know if"
+    },
+    {
+      "index": 151,
+      "start": 460.8,
+      "end": 464.23,
+      "duration": 3.43,
+      "text": "they're short enough it's almost"
+    },
+    {
+      "index": 152,
+      "start": 464.24,
+      "end": 469.83,
+      "duration": 5.59,
+      "text": "straight so the area here should be this"
+    },
+    {
+      "index": 153,
+      "start": 469.84,
+      "end": 472.589,
+      "duration": 2.749,
+      "text": "length times that"
+    },
+    {
+      "index": 154,
+      "start": 472.599,
+      "end": 475.35,
+      "duration": 2.751,
+      "text": "length well what's this length that one"
+    },
+    {
+      "index": 155,
+      "start": 475.36,
+      "end": 477.469,
+      "duration": 2.109,
+      "text": "is easy it's Delta"
+    },
+    {
+      "index": 156,
+      "start": 477.479,
+      "end": 480.55,
+      "duration": 3.071,
+      "text": "R okay"
+    },
+    {
+      "index": 157,
+      "start": 480.56,
+      "end": 482.55,
+      "duration": 1.99,
+      "text": "what about that length well it's not"
+    },
+    {
+      "index": 158,
+      "start": 482.56,
+      "end": 484.23,
+      "duration": 1.67,
+      "text": "Delta Theta it's something slightly"
+    },
+    {
+      "index": 159,
+      "start": 484.24,
+      "end": 487.27,
+      "duration": 3.03,
+      "text": "different it's a piece of a circle of"
+    },
+    {
+      "index": 160,
+      "start": 487.28,
+      "end": 490.309,
+      "duration": 3.029,
+      "text": "radius R corresponding to angle Delta"
+    },
+    {
+      "index": 161,
+      "start": 490.319,
+      "end": 497.07,
+      "duration": 6.751,
+      "text": "Theta so it's R Delta"
+    },
+    {
+      "index": 162,
+      "start": 502.589,
+      "end": 502.599,
+      "duration": 0.01,
+      "text": "Theta so times R Delta"
+    },
+    {
+      "index": 163,
+      "start": 502.599,
+      "end": 505.749,
+      "duration": 3.15,
+      "text": "Theta okay so that means now even if we"
+    },
+    {
+      "index": 164,
+      "start": 505.759,
+      "end": 507.149,
+      "duration": 1.39,
+      "text": "shrink things and take smaller and"
+    },
+    {
+      "index": 165,
+      "start": 507.159,
+      "end": 510.67,
+      "duration": 3.511,
+      "text": "smaller Rion da"
+    },
+    {
+      "index": 166,
+      "start": 510.68,
+      "end": 515.79,
+      "duration": 5.11,
+      "text": "is going to be r d r d"
+    },
+    {
+      "index": 167,
+      "start": 515.8,
+      "end": 517.67,
+      "duration": 1.87,
+      "text": "Theta okay so that's very important"
+    },
+    {
+      "index": 168,
+      "start": 517.68,
+      "end": 519.35,
+      "duration": 1.67,
+      "text": "thing to remember when you integrate in"
+    },
+    {
+      "index": 169,
+      "start": 519.36,
+      "end": 521.509,
+      "duration": 2.149,
+      "text": "polar"
+    },
+    {
+      "index": 170,
+      "start": 521.519,
+      "end": 524.029,
+      "duration": 2.51,
+      "text": "coordinates you just set up your bounds"
+    },
+    {
+      "index": 171,
+      "start": 524.039,
+      "end": 526.07,
+      "duration": 2.031,
+      "text": "in terms of R and Theta but you replace"
+    },
+    {
+      "index": 172,
+      "start": 526.08,
+      "end": 532.949,
+      "duration": 6.869,
+      "text": "da by Rd D Theta not just d d"
+    },
+    {
+      "index": 173,
+      "start": 535.15,
+      "end": 535.16,
+      "duration": 0.01,
+      "text": "Theta and then of course we have some"
+    },
+    {
+      "index": 174,
+      "start": 535.16,
+      "end": 537.11,
+      "duration": 1.95,
+      "text": "function that we're integrating let's"
+    },
+    {
+      "index": 175,
+      "start": 537.12,
+      "end": 541.949,
+      "duration": 4.829,
+      "text": "say that I called that thing f"
+    },
+    {
+      "index": 176,
+      "start": 551.71,
+      "end": 551.72,
+      "duration": 0.01,
+      "text": "oops so concretely how do I do it"
+    },
+    {
+      "index": 177,
+      "start": 551.72,
+      "end": 556.19,
+      "duration": 4.47,
+      "text": "here well my function f was given as you"
+    },
+    {
+      "index": 178,
+      "start": 556.2,
+      "end": 560.11,
+      "duration": 3.91,
+      "text": "know 1 - x - y^ 2 and I like to switch"
+    },
+    {
+      "index": 179,
+      "start": 560.12,
+      "end": 561.75,
+      "duration": 1.63,
+      "text": "that to Polar coordinates I want to put"
+    },
+    {
+      "index": 180,
+      "start": 561.76,
+      "end": 563.71,
+      "duration": 1.95,
+      "text": "R and Theta in"
+    },
+    {
+      "index": 181,
+      "start": 563.72,
+      "end": 566.67,
+      "duration": 2.95,
+      "text": "there well I have formulas for x and y"
+    },
+    {
+      "index": 182,
+      "start": 566.68,
+      "end": 568.23,
+      "duration": 1.55,
+      "text": "in polar coordinates so I could just"
+    },
+    {
+      "index": 183,
+      "start": 568.24,
+      "end": 571.59,
+      "duration": 3.35,
+      "text": "replace you know x 2 r² cosine sare"
+    },
+    {
+      "index": 184,
+      "start": 571.6,
+      "end": 575.91,
+      "duration": 4.31,
+      "text": "Theta y^ 2 r² sin sare Theta and that"
+    },
+    {
+      "index": 185,
+      "start": 575.92,
+      "end": 579.03,
+      "duration": 3.11,
+      "text": "works just fine but maybe you can"
+    },
+    {
+      "index": 186,
+      "start": 579.04,
+      "end": 581.389,
+      "duration": 2.349,
+      "text": "observe that this is"
+    },
+    {
+      "index": 187,
+      "start": 581.399,
+      "end": 585.269,
+      "duration": 3.87,
+      "text": "actually you know this is X2 + y^2 it's"
+    },
+    {
+      "index": 188,
+      "start": 585.279,
+      "end": 586.829,
+      "duration": 1.55,
+      "text": "just the square of a distance from the"
+    },
+    {
+      "index": 189,
+      "start": 586.839,
+      "end": 589.03,
+      "duration": 2.191,
+      "text": "origin so that's just R squ okay that's"
+    },
+    {
+      "index": 190,
+      "start": 589.04,
+      "end": 591.11,
+      "duration": 2.07,
+      "text": "a useful thing you know you don't"
+    },
+    {
+      "index": 191,
+      "start": 591.12,
+      "end": 593.87,
+      "duration": 2.75,
+      "text": "strictly need it but it's much faster if"
+    },
+    {
+      "index": 192,
+      "start": 593.88,
+      "end": 596.87,
+      "duration": 2.99,
+      "text": "you see this right away saves you you"
+    },
+    {
+      "index": 193,
+      "start": 596.88,
+      "end": 606.79,
+      "duration": 9.91,
+      "text": "know writing down a sign and a cosine"
+    },
+    {
+      "index": 194,
+      "start": 610.15,
+      "end": 610.16,
+      "duration": 0.01,
+      "text": "so now we just end up with the integral"
+    },
+    {
+      "index": 195,
+      "start": 610.16,
+      "end": 614.99,
+      "duration": 4.83,
+      "text": "from 0 to Pi / 2 integral from 0 to 1 of"
+    },
+    {
+      "index": 196,
+      "start": 615.0,
+      "end": 619.99,
+      "duration": 4.99,
+      "text": "1- R 2 r d r d"
+    },
+    {
+      "index": 197,
+      "start": 620.0,
+      "end": 624.63,
+      "duration": 4.63,
+      "text": "Theta now if I want to compute this"
+    },
+    {
+      "index": 198,
+      "start": 624.64,
+      "end": 628.31,
+      "duration": 3.67,
+      "text": "integral so let's first do the inner"
+    },
+    {
+      "index": 199,
+      "start": 628.32,
+      "end": 629.87,
+      "duration": 1.55,
+      "text": "integral"
+    },
+    {
+      "index": 200,
+      "start": 629.88,
+      "end": 634.269,
+      "duration": 4.389,
+      "text": "so if I integrate r - R Cub I will get"
+    },
+    {
+      "index": 201,
+      "start": 634.279,
+      "end": 640.75,
+      "duration": 6.471,
+      "text": "r^ 2 / 2 - R 2 sorry R 4 four between Z"
+    },
+    {
+      "index": 202,
+      "start": 640.76,
+      "end": 641.79,
+      "duration": 1.03,
+      "text": "and"
+    },
+    {
+      "index": 203,
+      "start": 641.8,
+      "end": 646.269,
+      "duration": 4.469,
+      "text": "one then I will integrate the"
+    },
+    {
+      "index": 204,
+      "start": 646.279,
+      "end": 649.75,
+      "duration": 3.471,
+      "text": "Theta so what is this equal to well for"
+    },
+    {
+      "index": 205,
+      "start": 649.76,
+      "end": 652.71,
+      "duration": 2.95,
+      "text": "Ral 1 you get 12 minus a quarter that's"
+    },
+    {
+      "index": 206,
+      "start": 652.72,
+      "end": 655.35,
+      "duration": 2.63,
+      "text": "going to be just a quarter and when you"
+    },
+    {
+      "index": 207,
+      "start": 655.36,
+      "end": 657.31,
+      "duration": 1.95,
+      "text": "plug zero you get zero so it's the"
+    },
+    {
+      "index": 208,
+      "start": 657.32,
+      "end": 659.91,
+      "duration": 2.59,
+      "text": "integral from 0 to Pi / 2"
+    },
+    {
+      "index": 209,
+      "start": 659.92,
+      "end": 664.35,
+      "duration": 4.43,
+      "text": "of 1 qu D Theta and that just integrates"
+    },
+    {
+      "index": 210,
+      "start": 664.36,
+      "end": 670.03,
+      "duration": 5.67,
+      "text": "to a quarter of Pi / 2 which is pi/"
+    },
+    {
+      "index": 211,
+      "start": 670.04,
+      "end": 673.55,
+      "duration": 3.51,
+      "text": "8"
+    },
+    {
+      "index": 212,
+      "start": 677.03,
+      "end": 677.04,
+      "duration": 0.01,
+      "text": "okay so that's a lot easier than the way"
+    },
+    {
+      "index": 213,
+      "start": 677.04,
+      "end": 680.069,
+      "duration": 3.029,
+      "text": "we did it"
+    },
+    {
+      "index": 214,
+      "start": 682.99,
+      "end": 683.0,
+      "duration": 0.01,
+      "text": "yesterday now well here we were lucky"
+    },
+    {
+      "index": 215,
+      "start": 683.0,
+      "end": 684.55,
+      "duration": 1.55,
+      "text": "okay I mean usually you will switch to"
+    },
+    {
+      "index": 216,
+      "start": 684.56,
+      "end": 686.87,
+      "duration": 2.31,
+      "text": "Polar coordinates either because the"
+    },
+    {
+      "index": 217,
+      "start": 686.88,
+      "end": 688.91,
+      "duration": 2.03,
+      "text": "region is easier to set up here it's"
+    },
+    {
+      "index": 218,
+      "start": 688.92,
+      "end": 691.31,
+      "duration": 2.39,
+      "text": "indeed easier to set up because see the"
+    },
+    {
+      "index": 219,
+      "start": 691.32,
+      "end": 692.99,
+      "duration": 1.67,
+      "text": "balance became very simple we don't have"
+    },
+    {
+      "index": 220,
+      "start": 693.0,
+      "end": 696.91,
+      "duration": 3.91,
+      "text": "that square root of 1- X anymore or"
+    },
+    {
+      "index": 221,
+      "start": 696.92,
+      "end": 698.629,
+      "duration": 1.709,
+      "text": "because the integrant becomes much"
+    },
+    {
+      "index": 222,
+      "start": 698.639,
+      "end": 701.71,
+      "duration": 3.071,
+      "text": "simpler here our function while it's not"
+    },
+    {
+      "index": 223,
+      "start": 701.72,
+      "end": 703.629,
+      "duration": 1.909,
+      "text": "very complicated in X Y coordinates but"
+    },
+    {
+      "index": 224,
+      "start": 703.639,
+      "end": 706.35,
+      "duration": 2.711,
+      "text": "it's even simpler in our feta"
+    },
+    {
+      "index": 225,
+      "start": 706.36,
+      "end": 709.47,
+      "duration": 3.11,
+      "text": "coordinates so here we were very lucky"
+    },
+    {
+      "index": 226,
+      "start": 709.48,
+      "end": 711.55,
+      "duration": 2.07,
+      "text": "um in general you know there's maybe a"
+    },
+    {
+      "index": 227,
+      "start": 711.56,
+      "end": 713.15,
+      "duration": 1.59,
+      "text": "trade-off maybe it will be easier to set"
+    },
+    {
+      "index": 228,
+      "start": 713.16,
+      "end": 714.87,
+      "duration": 1.71,
+      "text": "up the bounds but maybe the function"
+    },
+    {
+      "index": 229,
+      "start": 714.88,
+      "end": 716.509,
+      "duration": 1.629,
+      "text": "will become harder because it will have"
+    },
+    {
+      "index": 230,
+      "start": 716.519,
+      "end": 719.269,
+      "duration": 2.75,
+      "text": "all these signs and cosines in it if our"
+    },
+    {
+      "index": 231,
+      "start": 719.279,
+      "end": 720.949,
+      "duration": 1.67,
+      "text": "function had been just"
+    },
+    {
+      "index": 232,
+      "start": 720.959,
+      "end": 724.31,
+      "duration": 3.351,
+      "text": "x x is very easy in XY coordinates here"
+    },
+    {
+      "index": 233,
+      "start": 724.32,
+      "end": 726.99,
+      "duration": 2.67,
+      "text": "it becomes R cosine Theta that means you"
+    },
+    {
+      "index": 234,
+      "start": 727.0,
+      "end": 728.43,
+      "duration": 1.43,
+      "text": "will have a little bit of trick to do in"
+    },
+    {
+      "index": 235,
+      "start": 728.44,
+      "end": 731.069,
+      "duration": 2.629,
+      "text": "the integral not a very big one but you"
+    },
+    {
+      "index": 236,
+      "start": 731.079,
+      "end": 732.949,
+      "duration": 1.87,
+      "text": "know you know not a very complicated"
+    },
+    {
+      "index": 237,
+      "start": 732.959,
+      "end": 735.47,
+      "duration": 2.511,
+      "text": "integral but imagine you know it could"
+    },
+    {
+      "index": 238,
+      "start": 735.48,
+      "end": 739.91,
+      "duration": 4.43,
+      "text": "get potentially much"
+    },
+    {
+      "index": 239,
+      "start": 743.389,
+      "end": 743.399,
+      "duration": 0.01,
+      "text": "harder okay so anyway that's double"
+    },
+    {
+      "index": 240,
+      "start": 743.399,
+      "end": 746.71,
+      "duration": 3.311,
+      "text": "integrals in polar coordinates and the"
+    },
+    {
+      "index": 241,
+      "start": 746.72,
+      "end": 751.31,
+      "duration": 4.59,
+      "text": "way that you set up bounds in general"
+    },
+    {
+      "index": 242,
+      "start": 754.55,
+      "end": 754.56,
+      "duration": 0.01,
+      "text": "is you in so in 99% of the cases you"
+    },
+    {
+      "index": 243,
+      "start": 754.56,
+      "end": 757.069,
+      "duration": 2.509,
+      "text": "will integrate over R first so what you"
+    },
+    {
+      "index": 244,
+      "start": 757.079,
+      "end": 759.189,
+      "duration": 2.11,
+      "text": "will do is you will look for a given"
+    },
+    {
+      "index": 245,
+      "start": 759.199,
+      "end": 762.03,
+      "duration": 2.831,
+      "text": "Theta what are the bounds for R to be in"
+    },
+    {
+      "index": 246,
+      "start": 762.04,
+      "end": 764.43,
+      "duration": 2.39,
+      "text": "the region what is the portion of myay"
+    },
+    {
+      "index": 247,
+      "start": 764.44,
+      "end": 766.75,
+      "duration": 2.31,
+      "text": "that's in the given region and then you"
+    },
+    {
+      "index": 248,
+      "start": 766.76,
+      "end": 769.15,
+      "duration": 2.39,
+      "text": "will put the bounce for Theta but"
+    },
+    {
+      "index": 249,
+      "start": 769.16,
+      "end": 770.87,
+      "duration": 1.71,
+      "text": "conceptually it's the same as before"
+    },
+    {
+      "index": 250,
+      "start": 770.88,
+      "end": 773.189,
+      "duration": 2.309,
+      "text": "just instead of slicing horizontally or"
+    },
+    {
+      "index": 251,
+      "start": 773.199,
+      "end": 775.79,
+      "duration": 2.591,
+      "text": "vertically we slice"
+    },
+    {
+      "index": 252,
+      "start": 775.8,
+      "end": 778.59,
+      "duration": 2.79,
+      "text": "radially okay so we'll do more examples"
+    },
+    {
+      "index": 253,
+      "start": 778.6,
+      "end": 780.03,
+      "duration": 1.43,
+      "text": "in a bit"
+    },
+    {
+      "index": 254,
+      "start": 780.04,
+      "end": 782.069,
+      "duration": 2.029,
+      "text": "uh any questions about this of the"
+    },
+    {
+      "index": 255,
+      "start": 782.079,
+      "end": 784.43,
+      "duration": 2.351,
+      "text": "general"
+    },
+    {
+      "index": 256,
+      "start": 802.87,
+      "end": 802.88,
+      "duration": 0.01,
+      "text": "say ah yes so that's a very good"
+    },
+    {
+      "index": 257,
+      "start": 802.88,
+      "end": 806.189,
+      "duration": 3.309,
+      "text": "question okay yes why do I measure the"
+    },
+    {
+      "index": 258,
+      "start": 806.199,
+      "end": 808.87,
+      "duration": 2.671,
+      "text": "length inside instead of outside uh oops"
+    },
+    {
+      "index": 259,
+      "start": 808.88,
+      "end": 811.15,
+      "duration": 2.27,
+      "text": "which one which one do I want this"
+    },
+    {
+      "index": 260,
+      "start": 811.16,
+      "end": 814.35,
+      "duration": 3.19,
+      "text": "one so here I I said this side is R"
+    },
+    {
+      "index": 261,
+      "start": 814.36,
+      "end": 816.43,
+      "duration": 2.07,
+      "text": "Delta Theta I could have said actually R"
+    },
+    {
+      "index": 262,
+      "start": 816.44,
+      "end": 818.31,
+      "duration": 1.87,
+      "text": "Delta Theta is the length here here it's"
+    },
+    {
+      "index": 263,
+      "start": 818.32,
+      "end": 820.67,
+      "duration": 2.35,
+      "text": "slightly more it's r r plus Delta R *"
+    },
+    {
+      "index": 264,
+      "start": 820.68,
+      "end": 823.15,
+      "duration": 2.47,
+      "text": "Delta Theta but you know if Delta R is"
+    },
+    {
+      "index": 265,
+      "start": 823.16,
+      "end": 825.269,
+      "duration": 2.109,
+      "text": "very small compared to R then that's"
+    },
+    {
+      "index": 266,
+      "start": 825.279,
+      "end": 826.87,
+      "duration": 1.591,
+      "text": "almost the same thing and this is an"
+    },
+    {
+      "index": 267,
+      "start": 826.88,
+      "end": 829.269,
+      "duration": 2.389,
+      "text": "approximation anyway so I took this one"
+    },
+    {
+      "index": 268,
+      "start": 829.279,
+      "end": 831.55,
+      "duration": 2.271,
+      "text": "because it gives me the simpler"
+    },
+    {
+      "index": 269,
+      "start": 831.56,
+      "end": 833.15,
+      "duration": 1.59,
+      "text": "formula"
+    },
+    {
+      "index": 270,
+      "start": 833.16,
+      "end": 835.79,
+      "duration": 2.63,
+      "text": "um if you want if you take the limit as"
+    },
+    {
+      "index": 271,
+      "start": 835.8,
+      "end": 838.31,
+      "duration": 2.51,
+      "text": "Delta R tends to zero then the two"
+    },
+    {
+      "index": 272,
+      "start": 838.32,
+      "end": 839.749,
+      "duration": 1.429,
+      "text": "things become the same"
+    },
+    {
+      "index": 273,
+      "start": 839.759,
+      "end": 841.67,
+      "duration": 1.911,
+      "text": "anyway okay the"
+    },
+    {
+      "index": 274,
+      "start": 841.68,
+      "end": 844.15,
+      "duration": 2.47,
+      "text": "length you know whether you put r or R"
+    },
+    {
+      "index": 275,
+      "start": 844.16,
+      "end": 845.59,
+      "duration": 1.43,
+      "text": "plus Delta R in here doesn't matter"
+    },
+    {
+      "index": 276,
+      "start": 845.6,
+      "end": 847.35,
+      "duration": 1.75,
+      "text": "anymore if you imagine that you know"
+    },
+    {
+      "index": 277,
+      "start": 847.36,
+      "end": 849.99,
+      "duration": 2.63,
+      "text": "this guy is infinitely small then really"
+    },
+    {
+      "index": 278,
+      "start": 850.0,
+      "end": 854.43,
+      "duration": 4.43,
+      "text": "the lengths become the"
+    },
+    {
+      "index": 279,
+      "start": 857.47,
+      "end": 857.48,
+      "duration": 0.01,
+      "text": "same okay we'll also see another another"
+    },
+    {
+      "index": 280,
+      "start": 857.48,
+      "end": 859.67,
+      "duration": 2.19,
+      "text": "proof of this formula using changes of"
+    },
+    {
+      "index": 281,
+      "start": 859.68,
+      "end": 862.79,
+      "duration": 3.11,
+      "text": "variables uh next week but I mean"
+    },
+    {
+      "index": 282,
+      "start": 862.8,
+      "end": 867.43,
+      "duration": 4.63,
+      "text": "hopefully this is at least slightly"
+    },
+    {
+      "index": 283,
+      "start": 870.829,
+      "end": 870.839,
+      "duration": 0.01,
+      "text": "convincing okay more question"
+    },
+    {
+      "index": 284,
+      "start": 870.839,
+      "end": 873.269,
+      "duration": 2.43,
+      "text": "questions"
+    },
+    {
+      "index": 285,
+      "start": 873.279,
+      "end": 879.189,
+      "duration": 5.91,
+      "text": "no okay so let's"
+    },
+    {
+      "index": 286,
+      "start": 881.79,
+      "end": 881.8,
+      "duration": 0.01,
+      "text": "see so we've seen how to compute double"
+    },
+    {
+      "index": 287,
+      "start": 881.8,
+      "end": 883.23,
+      "duration": 1.43,
+      "text": "integrals I have to tell you what"
+    },
+    {
+      "index": 288,
+      "start": 883.24,
+      "end": 887.31,
+      "duration": 4.07,
+      "text": "they're good for as"
+    },
+    {
+      "index": 289,
+      "start": 891.31,
+      "end": 891.32,
+      "duration": 0.01,
+      "text": "well so the definition we saw yesterday"
+    },
+    {
+      "index": 290,
+      "start": 891.32,
+      "end": 893.35,
+      "duration": 2.03,
+      "text": "and motivation was in terms of finding"
+    },
+    {
+      "index": 291,
+      "start": 893.36,
+      "end": 897.189,
+      "duration": 3.829,
+      "text": "volumes okay but that's not going to be"
+    },
+    {
+      "index": 292,
+      "start": 897.199,
+      "end": 899.55,
+      "duration": 2.351,
+      "text": "our main preoccupation because"
+    },
+    {
+      "index": 293,
+      "start": 899.56,
+      "end": 901.189,
+      "duration": 1.629,
+      "text": "you know Finding volumes is fun but it's"
+    },
+    {
+      "index": 294,
+      "start": 901.199,
+      "end": 903.31,
+      "duration": 2.111,
+      "text": "not all varies to life and you know now"
+    },
+    {
+      "index": 295,
+      "start": 903.32,
+      "end": 905.11,
+      "duration": 1.79,
+      "text": "I mean you know you're doing single"
+    },
+    {
+      "index": 296,
+      "start": 905.12,
+      "end": 906.79,
+      "duration": 1.67,
+      "text": "integrals when you do single integrals"
+    },
+    {
+      "index": 297,
+      "start": 906.8,
+      "end": 908.55,
+      "duration": 1.75,
+      "text": "it's usually not to find the area of"
+    },
+    {
+      "index": 298,
+      "start": 908.56,
+      "end": 910.35,
+      "duration": 1.79,
+      "text": "some region of a plane it's for"
+    },
+    {
+      "index": 299,
+      "start": 910.36,
+      "end": 912.35,
+      "duration": 1.99,
+      "text": "something else"
+    },
+    {
+      "index": 300,
+      "start": 912.36,
+      "end": 915.67,
+      "duration": 3.31,
+      "text": "usually okay so the way we actually"
+    },
+    {
+      "index": 301,
+      "start": 915.68,
+      "end": 917.509,
+      "duration": 1.829,
+      "text": "think of a double integral is really as"
+    },
+    {
+      "index": 302,
+      "start": 917.519,
+      "end": 919.43,
+      "duration": 1.911,
+      "text": "summing the values of a function all"
+    },
+    {
+      "index": 303,
+      "start": 919.44,
+      "end": 922.509,
+      "duration": 3.069,
+      "text": "over this region so we can use that to"
+    },
+    {
+      "index": 304,
+      "start": 922.519,
+      "end": 924.59,
+      "duration": 2.071,
+      "text": "get information about maybe the region"
+    },
+    {
+      "index": 305,
+      "start": 924.6,
+      "end": 926.79,
+      "duration": 2.19,
+      "text": "or about the average value of a function"
+    },
+    {
+      "index": 306,
+      "start": 926.8,
+      "end": 929.509,
+      "duration": 2.709,
+      "text": "in that region and so on so"
+    },
+    {
+      "index": 307,
+      "start": 929.519,
+      "end": 937.91,
+      "duration": 8.391,
+      "text": "let's think about various uses of double"
+    },
+    {
+      "index": 308,
+      "start": 940.749,
+      "end": 940.759,
+      "duration": 0.01,
+      "text": "integrals so the first"
+    },
+    {
+      "index": 309,
+      "start": 940.759,
+      "end": 942.949,
+      "duration": 2.19,
+      "text": "one that I will mention is actually"
+    },
+    {
+      "index": 310,
+      "start": 942.959,
+      "end": 944.55,
+      "duration": 1.591,
+      "text": "something you thought maybe you could do"
+    },
+    {
+      "index": 311,
+      "start": 944.56,
+      "end": 946.829,
+      "duration": 2.269,
+      "text": "with the simple integral with a single"
+    },
+    {
+      "index": 312,
+      "start": 946.839,
+      "end": 949.71,
+      "duration": 2.871,
+      "text": "integral but it's useful very often to"
+    },
+    {
+      "index": 313,
+      "start": 949.72,
+      "end": 951.99,
+      "duration": 2.27,
+      "text": "do it as a double integral it's to find"
+    },
+    {
+      "index": 314,
+      "start": 952.0,
+      "end": 957.509,
+      "duration": 5.509,
+      "text": "the area of a given"
+    },
+    {
+      "index": 315,
+      "start": 960.35,
+      "end": 960.36,
+      "duration": 0.01,
+      "text": "region Okay so give you you know some"
+    },
+    {
+      "index": 316,
+      "start": 960.36,
+      "end": 962.269,
+      "duration": 1.909,
+      "text": "region in the"
+    },
+    {
+      "index": 317,
+      "start": 962.279,
+      "end": 966.189,
+      "duration": 3.91,
+      "text": "plane and you want to know just its"
+    },
+    {
+      "index": 318,
+      "start": 966.199,
+      "end": 968.829,
+      "duration": 2.63,
+      "text": "area so in various cases you could set"
+    },
+    {
+      "index": 319,
+      "start": 968.839,
+      "end": 972.15,
+      "duration": 3.311,
+      "text": "this up as a simple as a single integral"
+    },
+    {
+      "index": 320,
+      "start": 972.16,
+      "end": 974.87,
+      "duration": 2.71,
+      "text": "but often it could be useful to set it"
+    },
+    {
+      "index": 321,
+      "start": 974.88,
+      "end": 977.389,
+      "duration": 2.509,
+      "text": "up as a double integral so how do you"
+    },
+    {
+      "index": 322,
+      "start": 977.399,
+      "end": 979.71,
+      "duration": 2.311,
+      "text": "express the area as a double integral"
+    },
+    {
+      "index": 323,
+      "start": 979.72,
+      "end": 981.67,
+      "duration": 1.95,
+      "text": "well the area of this region is the sum"
+    },
+    {
+      "index": 324,
+      "start": 981.68,
+      "end": 983.87,
+      "duration": 2.19,
+      "text": "of the areas of all the little pieces so"
+    },
+    {
+      "index": 325,
+      "start": 983.88,
+      "end": 987.629,
+      "duration": 3.749,
+      "text": "it means you want to sum one da over the"
+    },
+    {
+      "index": 326,
+      "start": 987.639,
+      "end": 990.389,
+      "duration": 2.75,
+      "text": "entire region"
+    },
+    {
+      "index": 327,
+      "start": 990.399,
+      "end": 991.87,
+      "duration": 1.471,
+      "text": "okay so the"
+    },
+    {
+      "index": 328,
+      "start": 991.88,
+      "end": 996.59,
+      "duration": 4.71,
+      "text": "area of R is the double integral over R"
+    },
+    {
+      "index": 329,
+      "start": 996.6,
+      "end": 999.87,
+      "duration": 3.27,
+      "text": "of the function"
+    },
+    {
+      "index": 330,
+      "start": 1005.23,
+      "end": 1005.24,
+      "duration": 0.01,
+      "text": "that's"
+    },
+    {
+      "index": 331,
+      "start": 1005.24,
+      "end": 1007.59,
+      "duration": 2.35,
+      "text": "so one way to think about it if you're"
+    },
+    {
+      "index": 332,
+      "start": 1007.6,
+      "end": 1009.309,
+      "duration": 1.709,
+      "text": "really still attached to the idea of"
+    },
+    {
+      "index": 333,
+      "start": 1009.319,
+      "end": 1011.55,
+      "duration": 2.231,
+      "text": "double integral the volume you know what"
+    },
+    {
+      "index": 334,
+      "start": 1011.56,
+      "end": 1013.629,
+      "duration": 2.069,
+      "text": "this measures is the volume below the"
+    },
+    {
+      "index": 335,
+      "start": 1013.639,
+      "end": 1015.069,
+      "duration": 1.43,
+      "text": "graph of a function one the graph of a"
+    },
+    {
+      "index": 336,
+      "start": 1015.079,
+      "end": 1017.15,
+      "duration": 2.071,
+      "text": "function one is just a horizontal plane"
+    },
+    {
+      "index": 337,
+      "start": 1017.16,
+      "end": 1019.749,
+      "duration": 2.589,
+      "text": "at height one so what you'll be"
+    },
+    {
+      "index": 338,
+      "start": 1019.759,
+      "end": 1023.35,
+      "duration": 3.591,
+      "text": "measuring would be the volume of a prism"
+    },
+    {
+      "index": 339,
+      "start": 1023.36,
+      "end": 1029.189,
+      "duration": 5.829,
+      "text": "or uh with base R and height"
+    },
+    {
+      "index": 340,
+      "start": 1031.549,
+      "end": 1031.559,
+      "duration": 0.01,
+      "text": "one and the volume of that of course"
+    },
+    {
+      "index": 341,
+      "start": 1031.559,
+      "end": 1033.069,
+      "duration": 1.51,
+      "text": "would be base times height so it would"
+    },
+    {
+      "index": 342,
+      "start": 1033.079,
+      "end": 1035.029,
+      "duration": 1.95,
+      "text": "just be the area of R"
+    },
+    {
+      "index": 343,
+      "start": 1035.039,
+      "end": 1037.11,
+      "duration": 2.071,
+      "text": "again but we don't actually even need to"
+    },
+    {
+      "index": 344,
+      "start": 1037.12,
+      "end": 1038.71,
+      "duration": 1.59,
+      "text": "think about it that way really what"
+    },
+    {
+      "index": 345,
+      "start": 1038.72,
+      "end": 1041.27,
+      "duration": 2.55,
+      "text": "we're doing is we're summing da over the"
+    },
+    {
+      "index": 346,
+      "start": 1041.28,
+      "end": 1044.71,
+      "duration": 3.43,
+      "text": "entire"
+    },
+    {
+      "index": 347,
+      "start": 1048.029,
+      "end": 1048.039,
+      "duration": 0.01,
+      "text": "region okay a related thing we can do so"
+    },
+    {
+      "index": 348,
+      "start": 1048.039,
+      "end": 1051.71,
+      "duration": 3.671,
+      "text": "imagine that Lally this is you know uh"
+    },
+    {
+      "index": 349,
+      "start": 1051.72,
+      "end": 1054.27,
+      "duration": 2.55,
+      "text": "some object some physical object and"
+    },
+    {
+      "index": 350,
+      "start": 1054.28,
+      "end": 1055.669,
+      "duration": 1.389,
+      "text": "it's got to be a flat object because"
+    },
+    {
+      "index": 351,
+      "start": 1055.679,
+      "end": 1057.31,
+      "duration": 1.631,
+      "text": "we're just dealing with things in the"
+    },
+    {
+      "index": 352,
+      "start": 1057.32,
+      "end": 1059.75,
+      "duration": 2.43,
+      "text": "plane so far but you know you have a"
+    },
+    {
+      "index": 353,
+      "start": 1059.76,
+      "end": 1062.789,
+      "duration": 3.029,
+      "text": "flat metal plate or something and you"
+    },
+    {
+      "index": 354,
+      "start": 1062.799,
+      "end": 1065.75,
+      "duration": 2.951,
+      "text": "would like to know it's its mass well"
+    },
+    {
+      "index": 355,
+      "start": 1065.76,
+      "end": 1067.75,
+      "duration": 1.99,
+      "text": "its mass is the sum of the masses of"
+    },
+    {
+      "index": 356,
+      "start": 1067.76,
+      "end": 1070.19,
+      "duration": 2.43,
+      "text": "everything every single little"
+    },
+    {
+      "index": 357,
+      "start": 1070.2,
+      "end": 1072.59,
+      "duration": 2.39,
+      "text": "piece and so you would get that by"
+    },
+    {
+      "index": 358,
+      "start": 1072.6,
+      "end": 1075.149,
+      "duration": 2.549,
+      "text": "integrating the density the density for"
+    },
+    {
+      "index": 359,
+      "start": 1075.159,
+      "end": 1077.83,
+      "duration": 2.671,
+      "text": "a flat object would be the area sorry"
+    },
+    {
+      "index": 360,
+      "start": 1077.84,
+      "end": 1081.27,
+      "duration": 3.43,
+      "text": "the mass per unit area"
+    },
+    {
+      "index": 361,
+      "start": 1085.149,
+      "end": 1085.159,
+      "duration": 0.01,
+      "text": "okay so we can get the mass"
+    },
+    {
+      "index": 362,
+      "start": 1085.159,
+      "end": 1086.909,
+      "duration": 1.75,
+      "text": "of"
+    },
+    {
+      "index": 363,
+      "start": 1086.919,
+      "end": 1090.99,
+      "duration": 4.071,
+      "text": "a well"
+    },
+    {
+      "index": 364,
+      "start": 1099.31,
+      "end": 1099.32,
+      "duration": 0.01,
+      "text": "density so let's use Delta for"
+    },
+    {
+      "index": 365,
+      "start": 1099.32,
+      "end": 1107.75,
+      "duration": 8.43,
+      "text": "density which is the mass per unit"
+    },
+    {
+      "index": 366,
+      "start": 1109.669,
+      "end": 1109.679,
+      "duration": 0.01,
+      "text": "area"
+    },
+    {
+      "index": 367,
+      "start": 1109.679,
+      "end": 1113.43,
+      "duration": 3.751,
+      "text": "so each little piece of your object will"
+    },
+    {
+      "index": 368,
+      "start": 1113.44,
+      "end": 1116.23,
+      "duration": 2.79,
+      "text": "have a mass which will be just the"
+    },
+    {
+      "index": 369,
+      "start": 1116.24,
+      "end": 1120.39,
+      "duration": 4.15,
+      "text": "density times its ARA for each small"
+    },
+    {
+      "index": 370,
+      "start": 1120.4,
+      "end": 1122.669,
+      "duration": 2.269,
+      "text": "piece and you will get the total mass by"
+    },
+    {
+      "index": 371,
+      "start": 1122.679,
+      "end": 1126.71,
+      "duration": 4.031,
+      "text": "summing these things"
+    },
+    {
+      "index": 372,
+      "start": 1131.59,
+      "end": 1131.6,
+      "duration": 0.01,
+      "text": "so the mass will be the double integral"
+    },
+    {
+      "index": 373,
+      "start": 1131.6,
+      "end": 1135.43,
+      "duration": 3.83,
+      "text": "of the density times the area"
+    },
+    {
+      "index": 374,
+      "start": 1135.44,
+      "end": 1138.19,
+      "duration": 2.75,
+      "text": "element now if it has constant density"
+    },
+    {
+      "index": 375,
+      "start": 1138.2,
+      "end": 1139.59,
+      "duration": 1.39,
+      "text": "you know if it's always the same"
+    },
+    {
+      "index": 376,
+      "start": 1139.6,
+      "end": 1141.789,
+      "duration": 2.189,
+      "text": "material then of course you could just"
+    },
+    {
+      "index": 377,
+      "start": 1141.799,
+      "end": 1144.07,
+      "duration": 2.271,
+      "text": "take the density out and you will get"
+    },
+    {
+      "index": 378,
+      "start": 1144.08,
+      "end": 1146.95,
+      "duration": 2.87,
+      "text": "density times the total area you if you"
+    },
+    {
+      "index": 379,
+      "start": 1146.96,
+      "end": 1148.95,
+      "duration": 1.99,
+      "text": "know that it's always the same"
+    },
+    {
+      "index": 380,
+      "start": 1148.96,
+      "end": 1151.87,
+      "duration": 2.91,
+      "text": "material but if actually it has varying"
+    },
+    {
+      "index": 381,
+      "start": 1151.88,
+      "end": 1153.87,
+      "duration": 1.99,
+      "text": "density maybe because it's some metallic"
+    },
+    {
+      "index": 382,
+      "start": 1153.88,
+      "end": 1155.63,
+      "duration": 1.75,
+      "text": "thing but with various metal so with"
+    },
+    {
+      "index": 383,
+      "start": 1155.64,
+      "end": 1157.909,
+      "duration": 2.269,
+      "text": "varying thickness or something then you"
+    },
+    {
+      "index": 384,
+      "start": 1157.919,
+      "end": 1159.51,
+      "duration": 1.591,
+      "text": "can still get the mass by integrating"
+    },
+    {
+      "index": 385,
+      "start": 1159.52,
+      "end": 1160.63,
+      "duration": 1.11,
+      "text": "the"
+    },
+    {
+      "index": 386,
+      "start": 1160.64,
+      "end": 1162.31,
+      "duration": 1.67,
+      "text": "density"
+    },
+    {
+      "index": 387,
+      "start": 1162.32,
+      "end": 1165.029,
+      "duration": 2.709,
+      "text": "okay so I me of course looking at flat"
+    },
+    {
+      "index": 388,
+      "start": 1165.039,
+      "end": 1166.789,
+      "duration": 1.75,
+      "text": "objects might be a little bit strange"
+    },
+    {
+      "index": 389,
+      "start": 1166.799,
+      "end": 1167.95,
+      "duration": 1.151,
+      "text": "that's because we're only doing double"
+    },
+    {
+      "index": 390,
+      "start": 1167.96,
+      "end": 1169.27,
+      "duration": 1.31,
+      "text": "integrals so far"
+    },
+    {
+      "index": 391,
+      "start": 1169.28,
+      "end": 1171.23,
+      "duration": 1.95,
+      "text": "in a few weeks we'll be doing triple"
+    },
+    {
+      "index": 392,
+      "start": 1171.24,
+      "end": 1172.669,
+      "duration": 1.429,
+      "text": "integrals and then we'll be able to do"
+    },
+    {
+      "index": 393,
+      "start": 1172.679,
+      "end": 1173.789,
+      "duration": 1.11,
+      "text": "solids in"
+    },
+    {
+      "index": 394,
+      "start": 1173.799,
+      "end": 1180.63,
+      "duration": 6.831,
+      "text": "space uh but you know one thing at a"
+    },
+    {
+      "index": 395,
+      "start": 1198.95,
+      "end": 1198.96,
+      "duration": 0.01,
+      "text": "so okay another useful application is to"
+    },
+    {
+      "index": 396,
+      "start": 1198.96,
+      "end": 1201.789,
+      "duration": 2.829,
+      "text": "find the average value of some quantity"
+    },
+    {
+      "index": 397,
+      "start": 1201.799,
+      "end": 1211.35,
+      "duration": 9.551,
+      "text": "in a"
+    },
+    {
+      "index": 398,
+      "start": 1213.029,
+      "end": 1213.039,
+      "duration": 0.01,
+      "text": "region"
+    },
+    {
+      "index": 399,
+      "start": 1213.039,
+      "end": 1215.51,
+      "duration": 2.471,
+      "text": "so what does it mean to take the average"
+    },
+    {
+      "index": 400,
+      "start": 1215.52,
+      "end": 1218.11,
+      "duration": 2.59,
+      "text": "value of some function f in this region"
+    },
+    {
+      "index": 401,
+      "start": 1218.12,
+      "end": 1220.83,
+      "duration": 2.71,
+      "text": "R well you know what's the average of"
+    },
+    {
+      "index": 402,
+      "start": 1220.84,
+      "end": 1222.95,
+      "duration": 2.11,
+      "text": "you know a finite set of data for"
+    },
+    {
+      "index": 403,
+      "start": 1222.96,
+      "end": 1224.35,
+      "duration": 1.39,
+      "text": "example if I ask you to compute your"
+    },
+    {
+      "index": 404,
+      "start": 1224.36,
+      "end": 1226.51,
+      "duration": 2.15,
+      "text": "average score on 1802 problem sets you"
+    },
+    {
+      "index": 405,
+      "start": 1226.52,
+      "end": 1228.11,
+      "duration": 1.59,
+      "text": "would just take the scores add them up"
+    },
+    {
+      "index": 406,
+      "start": 1228.12,
+      "end": 1230.59,
+      "duration": 2.47,
+      "text": "and divide by the number of problem"
+    },
+    {
+      "index": 407,
+      "start": 1230.6,
+      "end": 1233.19,
+      "duration": 2.59,
+      "text": "sets uh what if there's infinitely many"
+    },
+    {
+      "index": 408,
+      "start": 1233.2,
+      "end": 1234.71,
+      "duration": 1.51,
+      "text": "things because you know say ask you to"
+    },
+    {
+      "index": 409,
+      "start": 1234.72,
+      "end": 1236.63,
+      "duration": 1.91,
+      "text": "find the average temperature in this"
+    },
+    {
+      "index": 410,
+      "start": 1236.64,
+      "end": 1238.11,
+      "duration": 1.47,
+      "text": "room well you would have to measure the"
+    },
+    {
+      "index": 411,
+      "start": 1238.12,
+      "end": 1240.27,
+      "duration": 2.15,
+      "text": "temperature everywhere and then add all"
+    },
+    {
+      "index": 412,
+      "start": 1240.28,
+      "end": 1242.47,
+      "duration": 2.19,
+      "text": "of these together and divide by the"
+    },
+    {
+      "index": 413,
+      "start": 1242.48,
+      "end": 1244.31,
+      "duration": 1.83,
+      "text": "number of data points but depending on"
+    },
+    {
+      "index": 414,
+      "start": 1244.32,
+      "end": 1246.27,
+      "duration": 1.95,
+      "text": "how careful you are actually there's"
+    },
+    {
+      "index": 415,
+      "start": 1246.28,
+      "end": 1247.83,
+      "duration": 1.55,
+      "text": "potentially infinitely many points to"
+    },
+    {
+      "index": 416,
+      "start": 1247.84,
+      "end": 1250.71,
+      "duration": 2.87,
+      "text": "look at so the mathematical way to"
+    },
+    {
+      "index": 417,
+      "start": 1250.72,
+      "end": 1253.43,
+      "duration": 2.71,
+      "text": "define the average over a continuous set"
+    },
+    {
+      "index": 418,
+      "start": 1253.44,
+      "end": 1256.63,
+      "duration": 3.19,
+      "text": "of data is that you actually integrate"
+    },
+    {
+      "index": 419,
+      "start": 1256.64,
+      "end": 1259.63,
+      "duration": 2.99,
+      "text": "the function of the entire set set of"
+    },
+    {
+      "index": 420,
+      "start": 1259.64,
+      "end": 1262.909,
+      "duration": 3.269,
+      "text": "data and then you divide by the size of"
+    },
+    {
+      "index": 421,
+      "start": 1262.919,
+      "end": 1266.149,
+      "duration": 3.23,
+      "text": "the sample which is just the area of the"
+    },
+    {
+      "index": 422,
+      "start": 1266.159,
+      "end": 1271.23,
+      "duration": 5.071,
+      "text": "region okay so in fact the"
+    },
+    {
+      "index": 423,
+      "start": 1271.24,
+      "end": 1275.11,
+      "duration": 3.87,
+      "text": "average of f so the notation we'll use"
+    },
+    {
+      "index": 424,
+      "start": 1275.12,
+      "end": 1278.07,
+      "duration": 2.95,
+      "text": "usually for that is f with a bar on top"
+    },
+    {
+      "index": 425,
+      "start": 1278.08,
+      "end": 1281.71,
+      "duration": 3.63,
+      "text": "okay to tell us the average F that would"
+    },
+    {
+      "index": 426,
+      "start": 1281.72,
+      "end": 1287.51,
+      "duration": 5.79,
+      "text": "be so we said we'll take the integral of"
+    },
+    {
+      "index": 427,
+      "start": 1287.52,
+      "end": 1289.669,
+      "duration": 2.149,
+      "text": "f and will"
+    },
+    {
+      "index": 428,
+      "start": 1289.679,
+      "end": 1294.59,
+      "duration": 4.911,
+      "text": "divide by the area of the"
+    },
+    {
+      "index": 429,
+      "start": 1296.669,
+      "end": 1296.679,
+      "duration": 0.01,
+      "text": "region okay you can really think of it"
+    },
+    {
+      "index": 430,
+      "start": 1296.679,
+      "end": 1299.51,
+      "duration": 2.831,
+      "text": "as the sum of the values of f everywhere"
+    },
+    {
+      "index": 431,
+      "start": 1299.52,
+      "end": 1304.99,
+      "duration": 5.47,
+      "text": "divided by the number of points in"
+    },
+    {
+      "index": 432,
+      "start": 1308.549,
+      "end": 1308.559,
+      "duration": 0.01,
+      "text": "everywhere and so that's an average"
+    },
+    {
+      "index": 433,
+      "start": 1308.559,
+      "end": 1310.63,
+      "duration": 2.071,
+      "text": "where everything is actually equally"
+    },
+    {
+      "index": 434,
+      "start": 1310.64,
+      "end": 1313.11,
+      "duration": 2.47,
+      "text": "likely you know that's a uniform average"
+    },
+    {
+      "index": 435,
+      "start": 1313.12,
+      "end": 1314.83,
+      "duration": 1.71,
+      "text": "where all the points in the region all"
+    },
+    {
+      "index": 436,
+      "start": 1314.84,
+      "end": 1316.63,
+      "duration": 1.79,
+      "text": "the little pieces of the Orion are"
+    },
+    {
+      "index": 437,
+      "start": 1316.64,
+      "end": 1320.11,
+      "duration": 3.47,
+      "text": "equally likely but maybe if you want to"
+    },
+    {
+      "index": 438,
+      "start": 1320.12,
+      "end": 1322.39,
+      "duration": 2.27,
+      "text": "do say an average over some solid with"
+    },
+    {
+      "index": 439,
+      "start": 1322.4,
+      "end": 1324.39,
+      "duration": 1.99,
+      "text": "variable density or if you want to"
+    },
+    {
+      "index": 440,
+      "start": 1324.4,
+      "end": 1326.23,
+      "duration": 1.83,
+      "text": "somehow give more importance to certain"
+    },
+    {
+      "index": 441,
+      "start": 1326.24,
+      "end": 1328.47,
+      "duration": 2.23,
+      "text": "parts than two others then you could"
+    },
+    {
+      "index": 442,
+      "start": 1328.48,
+      "end": 1331.149,
+      "duration": 2.669,
+      "text": "actually do a weighted"
+    },
+    {
+      "index": 443,
+      "start": 1331.159,
+      "end": 1338.669,
+      "duration": 7.51,
+      "text": "average so what's a weighted average"
+    },
+    {
+      "index": 444,
+      "start": 1340.95,
+      "end": 1340.96,
+      "duration": 0.01,
+      "text": "well you know in the case of taking the"
+    },
+    {
+      "index": 445,
+      "start": 1340.96,
+      "end": 1342.43,
+      "duration": 1.47,
+      "text": "average of your problem sets if I tell"
+    },
+    {
+      "index": 446,
+      "start": 1342.44,
+      "end": 1344.35,
+      "duration": 1.91,
+      "text": "you while problem set one is worth twice"
+    },
+    {
+      "index": 447,
+      "start": 1344.36,
+      "end": 1345.71,
+      "duration": 1.35,
+      "text": "as much as the others then you would"
+    },
+    {
+      "index": 448,
+      "start": 1345.72,
+      "end": 1348.83,
+      "duration": 3.11,
+      "text": "count twice that score in the sum and"
+    },
+    {
+      "index": 449,
+      "start": 1348.84,
+      "end": 1350.19,
+      "duration": 1.35,
+      "text": "then you would divide you would count it"
+    },
+    {
+      "index": 450,
+      "start": 1350.2,
+      "end": 1351.95,
+      "duration": 1.75,
+      "text": "as two of course when you"
+    },
+    {
+      "index": 451,
+      "start": 1351.96,
+      "end": 1354.87,
+      "duration": 2.91,
+      "text": "divide so the weighted average is the"
+    },
+    {
+      "index": 452,
+      "start": 1354.88,
+      "end": 1357.75,
+      "duration": 2.87,
+      "text": "sum of the values but each weighted by a"
+    },
+    {
+      "index": 453,
+      "start": 1357.76,
+      "end": 1359.909,
+      "duration": 2.149,
+      "text": "certain coefficient and then you will"
+    },
+    {
+      "index": 454,
+      "start": 1359.919,
+      "end": 1362.269,
+      "duration": 2.35,
+      "text": "divide by the sum of the"
+    },
+    {
+      "index": 455,
+      "start": 1362.279,
+      "end": 1364.83,
+      "duration": 2.551,
+      "text": "weight so it's a bit the same idea as"
+    },
+    {
+      "index": 456,
+      "start": 1364.84,
+      "end": 1367.83,
+      "duration": 2.99,
+      "text": "when we you know replace area by some"
+    },
+    {
+      "index": 457,
+      "start": 1367.84,
+      "end": 1369.99,
+      "duration": 2.15,
+      "text": "mass that tells you how important a"
+    },
+    {
+      "index": 458,
+      "start": 1370.0,
+      "end": 1372.269,
+      "duration": 2.269,
+      "text": "given piece"
+    },
+    {
+      "index": 459,
+      "start": 1372.279,
+      "end": 1376.87,
+      "duration": 4.591,
+      "text": "is so we'll actually have a"
+    },
+    {
+      "index": 460,
+      "start": 1380.19,
+      "end": 1380.2,
+      "duration": 0.01,
+      "text": "density let's call it again that would"
+    },
+    {
+      "index": 461,
+      "start": 1380.2,
+      "end": 1380.909,
+      "duration": 0.709,
+      "text": "be"
+    },
+    {
+      "index": 462,
+      "start": 1380.919,
+      "end": 1384.669,
+      "duration": 3.75,
+      "text": "now well we'll see what we divide by but"
+    },
+    {
+      "index": 463,
+      "start": 1384.679,
+      "end": 1387.31,
+      "duration": 2.631,
+      "text": "what we will take is the"
+    },
+    {
+      "index": 464,
+      "start": 1387.32,
+      "end": 1390.07,
+      "duration": 2.75,
+      "text": "integral times of a function time the"
+    },
+    {
+      "index": 465,
+      "start": 1390.08,
+      "end": 1392.51,
+      "duration": 2.43,
+      "text": "density time the area"
+    },
+    {
+      "index": 466,
+      "start": 1392.52,
+      "end": 1394.59,
+      "duration": 2.07,
+      "text": "element because this would correspond to"
+    },
+    {
+      "index": 467,
+      "start": 1394.6,
+      "end": 1395.63,
+      "duration": 1.03,
+      "text": "the mass"
+    },
+    {
+      "index": 468,
+      "start": 1395.64,
+      "end": 1398.11,
+      "duration": 2.47,
+      "text": "element telling us how to weight the"
+    },
+    {
+      "index": 469,
+      "start": 1398.12,
+      "end": 1402.63,
+      "duration": 4.51,
+      "text": "various points of our region and then we"
+    },
+    {
+      "index": 470,
+      "start": 1402.64,
+      "end": 1404.35,
+      "duration": 1.71,
+      "text": "would divide by the total weight which"
+    },
+    {
+      "index": 471,
+      "start": 1404.36,
+      "end": 1407.95,
+      "duration": 3.59,
+      "text": "is the mass of the region so as defined"
+    },
+    {
+      "index": 472,
+      "start": 1407.96,
+      "end": 1411.99,
+      "duration": 4.03,
+      "text": "up there"
+    },
+    {
+      "index": 473,
+      "start": 1415.59,
+      "end": 1415.6,
+      "duration": 0.01,
+      "text": "okay so you know if a density is uniform"
+    },
+    {
+      "index": 474,
+      "start": 1415.6,
+      "end": 1418.59,
+      "duration": 2.99,
+      "text": "then of course the density gets out and"
+    },
+    {
+      "index": 475,
+      "start": 1418.6,
+      "end": 1420.83,
+      "duration": 2.23,
+      "text": "you know you can simplify and reduce to"
+    },
+    {
+      "index": 476,
+      "start": 1420.84,
+      "end": 1424.59,
+      "duration": 3.75,
+      "text": "that if all the points are equally"
+    },
+    {
+      "index": 477,
+      "start": 1426.87,
+      "end": 1426.88,
+      "duration": 0.01,
+      "text": "likely okay so why is that important"
+    },
+    {
+      "index": 478,
+      "start": 1426.88,
+      "end": 1428.19,
+      "duration": 1.31,
+      "text": "well that's important for various"
+    },
+    {
+      "index": 479,
+      "start": 1428.2,
+      "end": 1431.149,
+      "duration": 2.949,
+      "text": "applications but one that you might have"
+    },
+    {
+      "index": 480,
+      "start": 1431.159,
+      "end": 1433.029,
+      "duration": 1.87,
+      "text": "seen in"
+    },
+    {
+      "index": 481,
+      "start": 1433.039,
+      "end": 1435.99,
+      "duration": 2.951,
+      "text": "physics we care about maybe where is the"
+    },
+    {
+      "index": 482,
+      "start": 1436.0,
+      "end": 1439.11,
+      "duration": 3.11,
+      "text": "center of mass of a given object okay so"
+    },
+    {
+      "index": 483,
+      "start": 1439.12,
+      "end": 1440.75,
+      "duration": 1.63,
+      "text": "the center of mass is basically the"
+    },
+    {
+      "index": 484,
+      "start": 1440.76,
+      "end": 1442.59,
+      "duration": 1.83,
+      "text": "point you know you would call that point"
+    },
+    {
+      "index": 485,
+      "start": 1442.6,
+      "end": 1443.83,
+      "duration": 1.23,
+      "text": "to be you know you would say that point"
+    },
+    {
+      "index": 486,
+      "start": 1443.84,
+      "end": 1445.71,
+      "duration": 1.87,
+      "text": "is right in the middle of the object but"
+    },
+    {
+      "index": 487,
+      "start": 1445.72,
+      "end": 1446.87,
+      "duration": 1.15,
+      "text": "of course if the object has a very"
+    },
+    {
+      "index": 488,
+      "start": 1446.88,
+      "end": 1450.35,
+      "duration": 3.47,
+      "text": "strange shape or if somehow part of it"
+    },
+    {
+      "index": 489,
+      "start": 1450.36,
+      "end": 1453.63,
+      "duration": 3.27,
+      "text": "is heavier than the rest then that takes"
+    },
+    {
+      "index": 490,
+      "start": 1453.64,
+      "end": 1454.71,
+      "duration": 1.07,
+      "text": "a very different"
+    },
+    {
+      "index": 491,
+      "start": 1454.72,
+      "end": 1457.47,
+      "duration": 2.75,
+      "text": "meaning so strictly speaking the center"
+    },
+    {
+      "index": 492,
+      "start": 1457.48,
+      "end": 1460.51,
+      "duration": 3.03,
+      "text": "of mass of a solid is the point where"
+    },
+    {
+      "index": 493,
+      "start": 1460.52,
+      "end": 1461.99,
+      "duration": 1.47,
+      "text": "you would have to concentrate all the"
+    },
+    {
+      "index": 494,
+      "start": 1462.0,
+      "end": 1465.149,
+      "duration": 3.149,
+      "text": "mass if you wanted it to behave"
+    },
+    {
+      "index": 495,
+      "start": 1465.159,
+      "end": 1467.35,
+      "duration": 2.191,
+      "text": "equivalently from the point of view of"
+    },
+    {
+      "index": 496,
+      "start": 1467.36,
+      "end": 1468.95,
+      "duration": 1.59,
+      "text": "mechanics if you are trying to do"
+    },
+    {
+      "index": 497,
+      "start": 1468.96,
+      "end": 1471.11,
+      "duration": 2.15,
+      "text": "translations of that object you know if"
+    },
+    {
+      "index": 498,
+      "start": 1471.12,
+      "end": 1473.389,
+      "duration": 2.269,
+      "text": "you are going to push that object that"
+    },
+    {
+      "index": 499,
+      "start": 1473.399,
+      "end": 1475.909,
+      "duration": 2.51,
+      "text": "would be really where you know where the"
+    },
+    {
+      "index": 500,
+      "start": 1475.919,
+      "end": 1481.149,
+      "duration": 5.23,
+      "text": "equivalent Point Mass would"
+    },
+    {
+      "index": 501,
+      "start": 1483.99,
+      "end": 1484.0,
+      "duration": 0.01,
+      "text": "lie the other way to think about it you"
+    },
+    {
+      "index": 502,
+      "start": 1484.0,
+      "end": 1486.31,
+      "duration": 2.31,
+      "text": "know if I have a flat object then the"
+    },
+    {
+      "index": 503,
+      "start": 1486.32,
+      "end": 1488.269,
+      "duration": 1.949,
+      "text": "center of mass is basically the point"
+    },
+    {
+      "index": 504,
+      "start": 1488.279,
+      "end": 1489.63,
+      "duration": 1.351,
+      "text": "where I would need to hold it so that"
+    },
+    {
+      "index": 505,
+      "start": 1489.64,
+      "end": 1491.669,
+      "duration": 2.029,
+      "text": "it's perfectly balanced you know and of"
+    },
+    {
+      "index": 506,
+      "start": 1491.679,
+      "end": 1493.83,
+      "duration": 2.151,
+      "text": "course I can't do this because I'm not"
+    },
+    {
+      "index": 507,
+      "start": 1493.84,
+      "end": 1495.43,
+      "duration": 1.59,
+      "text": "well whatever but you get the feeling I"
+    },
+    {
+      "index": 508,
+      "start": 1495.44,
+      "end": 1497.149,
+      "duration": 1.709,
+      "text": "mean the center of mass of this eraser"
+    },
+    {
+      "index": 509,
+      "start": 1497.159,
+      "end": 1499.23,
+      "duration": 2.071,
+      "text": "is somewhere in the middle"
+    },
+    {
+      "index": 510,
+      "start": 1499.24,
+      "end": 1500.63,
+      "duration": 1.39,
+      "text": "and so in principle that's where I would"
+    },
+    {
+      "index": 511,
+      "start": 1500.64,
+      "end": 1503.31,
+      "duration": 2.67,
+      "text": "have to put my finger for it to stay"
+    },
+    {
+      "index": 512,
+      "start": 1503.32,
+      "end": 1508.389,
+      "duration": 5.069,
+      "text": "well and it doesn't"
+    },
+    {
+      "index": 513,
+      "start": 1510.31,
+      "end": 1510.32,
+      "duration": 0.01,
+      "text": "work okay that's but that's where the"
+    },
+    {
+      "index": 514,
+      "start": 1510.32,
+      "end": 1511.909,
+      "duration": 1.589,
+      "text": "center of mass should be I think it's"
+    },
+    {
+      "index": 515,
+      "start": 1511.919,
+      "end": 1513.909,
+      "duration": 1.99,
+      "text": "should be in the"
+    },
+    {
+      "index": 516,
+      "start": 1513.919,
+      "end": 1519.87,
+      "duration": 5.951,
+      "text": "middle"
+    },
+    {
+      "index": 517,
+      "start": 1522.19,
+      "end": 1522.2,
+      "duration": 0.01,
+      "text": "so well maybe I shouldn't call this fre"
+    },
+    {
+      "index": 518,
+      "start": 1522.2,
+      "end": 1525.23,
+      "duration": 3.03,
+      "text": "I should call this maybe you know 2 a or"
+    },
+    {
+      "index": 519,
+      "start": 1525.24,
+      "end": 1527.549,
+      "duration": 2.309,
+      "text": "whatever it's CU it's really a special"
+    },
+    {
+      "index": 520,
+      "start": 1527.559,
+      "end": 1529.75,
+      "duration": 2.191,
+      "text": "case of the average"
+    },
+    {
+      "index": 521,
+      "start": 1529.76,
+      "end": 1532.87,
+      "duration": 3.11,
+      "text": "value so how do we find the center of"
+    },
+    {
+      "index": 522,
+      "start": 1532.88,
+      "end": 1535.549,
+      "duration": 2.669,
+      "text": "mass"
+    },
+    {
+      "index": 523,
+      "start": 1535.559,
+      "end": 1537.83,
+      "duration": 2.271,
+      "text": "of"
+    },
+    {
+      "index": 524,
+      "start": 1537.84,
+      "end": 1540.07,
+      "duration": 2.23,
+      "text": "a flat"
+    },
+    {
+      "index": 525,
+      "start": 1540.08,
+      "end": 1549.389,
+      "duration": 9.309,
+      "text": "object with density"
+    },
+    {
+      "index": 526,
+      "start": 1554.59,
+      "end": 1554.6,
+      "duration": 0.01,
+      "text": "Delta well so if you have your object in"
+    },
+    {
+      "index": 527,
+      "start": 1554.6,
+      "end": 1556.75,
+      "duration": 2.15,
+      "text": "the XY"
+    },
+    {
+      "index": 528,
+      "start": 1556.76,
+      "end": 1561.11,
+      "duration": 4.35,
+      "text": "plane then it's Center of mass will be"
+    },
+    {
+      "index": 529,
+      "start": 1561.12,
+      "end": 1563.389,
+      "duration": 2.269,
+      "text": "at positions that are actually just the"
+    },
+    {
+      "index": 530,
+      "start": 1563.399,
+      "end": 1564.95,
+      "duration": 1.551,
+      "text": "coordinates of the center of mass will"
+    },
+    {
+      "index": 531,
+      "start": 1564.96,
+      "end": 1569.149,
+      "duration": 4.189,
+      "text": "just be the weighted aages of X and Y on"
+    },
+    {
+      "index": 532,
+      "start": 1569.159,
+      "end": 1570.95,
+      "duration": 1.791,
+      "text": "the"
+    },
+    {
+      "index": 533,
+      "start": 1570.96,
+      "end": 1573.63,
+      "duration": 2.67,
+      "text": "solid okay so the center of mass will be"
+    },
+    {
+      "index": 534,
+      "start": 1573.64,
+      "end": 1576.95,
+      "duration": 3.31,
+      "text": "at a position that I will call xar Y Bar"
+    },
+    {
+      "index": 535,
+      "start": 1576.96,
+      "end": 1579.029,
+      "duration": 2.069,
+      "text": "and these are really just the averages"
+    },
+    {
+      "index": 536,
+      "start": 1579.039,
+      "end": 1581.75,
+      "duration": 2.711,
+      "text": "the average values of X and of Y in the"
+    },
+    {
+      "index": 537,
+      "start": 1581.76,
+      "end": 1585.99,
+      "duration": 4.23,
+      "text": "solid so just to give a formulas again"
+    },
+    {
+      "index": 538,
+      "start": 1586.0,
+      "end": 1589.83,
+      "duration": 3.83,
+      "text": "xar would be one over the mass"
+    },
+    {
+      "index": 539,
+      "start": 1589.84,
+      "end": 1593.63,
+      "duration": 3.79,
+      "text": "time the double integral of x time"
+    },
+    {
+      "index": 540,
+      "start": 1593.64,
+      "end": 1595.99,
+      "duration": 2.35,
+      "text": "density"
+    },
+    {
+      "index": 541,
+      "start": 1596.0,
+      "end": 1601.389,
+      "duration": 5.389,
+      "text": "D and same thing with"
+    },
+    {
+      "index": 542,
+      "start": 1604.11,
+      "end": 1604.12,
+      "duration": 0.01,
+      "text": "y y y"
+    },
+    {
+      "index": 543,
+      "start": 1604.12,
+      "end": 1609.59,
+      "duration": 5.47,
+      "text": "bar is the weighted average of the y"
+    },
+    {
+      "index": 544,
+      "start": 1609.6,
+      "end": 1613.43,
+      "duration": 3.83,
+      "text": "coordinate in your"
+    },
+    {
+      "index": 545,
+      "start": 1616.669,
+      "end": 1616.679,
+      "duration": 0.01,
+      "text": "region okay so you see if you take a"
+    },
+    {
+      "index": 546,
+      "start": 1616.679,
+      "end": 1618.43,
+      "duration": 1.751,
+      "text": "region that's symmetric and has uni from"
+    },
+    {
+      "index": 547,
+      "start": 1618.44,
+      "end": 1619.669,
+      "duration": 1.229,
+      "text": "density that will just give you the"
+    },
+    {
+      "index": 548,
+      "start": 1619.679,
+      "end": 1622.269,
+      "duration": 2.59,
+      "text": "center of the region but if the region"
+    },
+    {
+      "index": 549,
+      "start": 1622.279,
+      "end": 1624.909,
+      "duration": 2.63,
+      "text": "has a strange shape or if a density is"
+    },
+    {
+      "index": 550,
+      "start": 1624.919,
+      "end": 1626.909,
+      "duration": 1.99,
+      "text": "not homogeneous if parts of it are"
+    },
+    {
+      "index": 551,
+      "start": 1626.919,
+      "end": 1628.909,
+      "duration": 1.99,
+      "text": "heavier then you know you will get"
+    },
+    {
+      "index": 552,
+      "start": 1628.919,
+      "end": 1630.83,
+      "duration": 1.911,
+      "text": "whatever the weighted average will"
+    },
+    {
+      "index": 553,
+      "start": 1630.84,
+      "end": 1633.99,
+      "duration": 3.15,
+      "text": "be and that would be the point where"
+    },
+    {
+      "index": 554,
+      "start": 1634.0,
+      "end": 1636.31,
+      "duration": 2.31,
+      "text": "this think would be balanced if you were"
+    },
+    {
+      "index": 555,
+      "start": 1636.32,
+      "end": 1638.71,
+      "duration": 2.39,
+      "text": "trying to you know balance it on a pole"
+    },
+    {
+      "index": 556,
+      "start": 1638.72,
+      "end": 1643.71,
+      "duration": 4.99,
+      "text": "or on your"
+    },
+    {
+      "index": 557,
+      "start": 1679.389,
+      "end": 1679.399,
+      "duration": 0.01,
+      "text": "okay any questions so far"
+    },
+    {
+      "index": 558,
+      "start": 1679.399,
+      "end": 1690.75,
+      "duration": 11.351,
+      "text": "NOP"
+    },
+    {
+      "index": 559,
+      "start": 1693.669,
+      "end": 1693.679,
+      "duration": 0.01,
+      "text": "yes uh no sorry no no so when you do I"
+    },
+    {
+      "index": 560,
+      "start": 1693.679,
+      "end": 1696.669,
+      "duration": 2.99,
+      "text": "mean so here I I set up this I didn't"
+    },
+    {
+      "index": 561,
+      "start": 1696.679,
+      "end": 1699.59,
+      "duration": 2.911,
+      "text": "set this up as an iterated integral yet"
+    },
+    {
+      "index": 562,
+      "start": 1699.6,
+      "end": 1702.71,
+      "duration": 3.11,
+      "text": "okay so here the function that I'm"
+    },
+    {
+      "index": 563,
+      "start": 1702.72,
+      "end": 1706.43,
+      "duration": 3.71,
+      "text": "integrating is x * Delta where Delta you"
+    },
+    {
+      "index": 564,
+      "start": 1706.44,
+      "end": 1707.83,
+      "duration": 1.39,
+      "text": "know the density will be given to me"
+    },
+    {
+      "index": 565,
+      "start": 1707.84,
+      "end": 1710.87,
+      "duration": 3.03,
+      "text": "maybe as a function of X and Y and then"
+    },
+    {
+      "index": 566,
+      "start": 1710.88,
+      "end": 1713.35,
+      "duration": 2.47,
+      "text": "I will integrate this da and da could"
+    },
+    {
+      "index": 567,
+      "start": 1713.36,
+      "end": 1716.19,
+      "duration": 2.83,
+      "text": "mean DX Dy could mean Dy DX could mean"
+    },
+    {
+      "index": 568,
+      "start": 1716.2,
+      "end": 1719.83,
+      "duration": 3.63,
+      "text": "Rd Rd Theta I will choose how to set it"
+    },
+    {
+      "index": 569,
+      "start": 1719.84,
+      "end": 1721.909,
+      "duration": 2.069,
+      "text": "up depending maybe on the shape of the"
+    },
+    {
+      "index": 570,
+      "start": 1721.919,
+      "end": 1724.35,
+      "duration": 2.431,
+      "text": "region you know if my solid is actually"
+    },
+    {
+      "index": 571,
+      "start": 1724.36,
+      "end": 1726.149,
+      "duration": 1.789,
+      "text": "just you know going to be round then I"
+    },
+    {
+      "index": 572,
+      "start": 1726.159,
+      "end": 1727.87,
+      "duration": 1.711,
+      "text": "might want to use polar coordinates if"
+    },
+    {
+      "index": 573,
+      "start": 1727.88,
+      "end": 1730.509,
+      "duration": 2.629,
+      "text": "it's a square I might want to use XY"
+    },
+    {
+      "index": 574,
+      "start": 1730.519,
+      "end": 1732.549,
+      "duration": 2.03,
+      "text": "coordinates if it's more complicated"
+    },
+    {
+      "index": 575,
+      "start": 1732.559,
+      "end": 1734.909,
+      "duration": 2.35,
+      "text": "well I will choose depending on how I"
+    },
+    {
+      "index": 576,
+      "start": 1734.919,
+      "end": 1736.669,
+      "duration": 1.75,
+      "text": "feel about"
+    },
+    {
+      "index": 577,
+      "start": 1736.679,
+      "end": 1740.31,
+      "duration": 3.631,
+      "text": "it yes"
+    },
+    {
+      "index": 578,
+      "start": 1743.83,
+      "end": 1743.84,
+      "duration": 0.01,
+      "text": "so yes so Delta Delta is the density"
+    },
+    {
+      "index": 579,
+      "start": 1743.84,
+      "end": 1745.87,
+      "duration": 2.03,
+      "text": "it's in general it's a function of X and"
+    },
+    {
+      "index": 580,
+      "start": 1745.88,
+      "end": 1747.83,
+      "duration": 1.95,
+      "text": "Y if you imagine that your solid you"
+    },
+    {
+      "index": 581,
+      "start": 1747.84,
+      "end": 1750.549,
+      "duration": 2.709,
+      "text": "know is not homogeneous then its density"
+    },
+    {
+      "index": 582,
+      "start": 1750.559,
+      "end": 1751.909,
+      "duration": 1.35,
+      "text": "will depend on which piece of it you're"
+    },
+    {
+      "index": 583,
+      "start": 1751.919,
+      "end": 1754.23,
+      "duration": 2.311,
+      "text": "looking at of course to compute this you"
+    },
+    {
+      "index": 584,
+      "start": 1754.24,
+      "end": 1755.669,
+      "duration": 1.429,
+      "text": "need to know the"
+    },
+    {
+      "index": 585,
+      "start": 1755.679,
+      "end": 1757.95,
+      "duration": 2.271,
+      "text": "density uh if you have a problem asking"
+    },
+    {
+      "index": 586,
+      "start": 1757.96,
+      "end": 1759.43,
+      "duration": 1.47,
+      "text": "you to find the center of mass of"
+    },
+    {
+      "index": 587,
+      "start": 1759.44,
+      "end": 1760.87,
+      "duration": 1.43,
+      "text": "something and you have no information"
+    },
+    {
+      "index": 588,
+      "start": 1760.88,
+      "end": 1763.029,
+      "duration": 2.149,
+      "text": "about the density assume it's uniform"
+    },
+    {
+      "index": 589,
+      "start": 1763.039,
+      "end": 1764.87,
+      "duration": 1.831,
+      "text": "you know take the density to be a"
+    },
+    {
+      "index": 590,
+      "start": 1764.88,
+      "end": 1766.99,
+      "duration": 2.11,
+      "text": "constant even take it to be one that's"
+    },
+    {
+      "index": 591,
+      "start": 1767.0,
+      "end": 1769.509,
+      "duration": 2.509,
+      "text": "even easier if you want I me you know"
+    },
+    {
+      "index": 592,
+      "start": 1769.519,
+      "end": 1770.87,
+      "duration": 1.351,
+      "text": "it's a general fact of math we don't"
+    },
+    {
+      "index": 593,
+      "start": 1770.88,
+      "end": 1773.87,
+      "duration": 2.99,
+      "text": "care about units so density you know if"
+    },
+    {
+      "index": 594,
+      "start": 1773.88,
+      "end": 1775.19,
+      "duration": 1.31,
+      "text": "density is constant we might as well"
+    },
+    {
+      "index": 595,
+      "start": 1775.2,
+      "end": 1777.029,
+      "duration": 1.829,
+      "text": "take it to be one and that just means"
+    },
+    {
+      "index": 596,
+      "start": 1777.039,
+      "end": 1780.31,
+      "duration": 3.271,
+      "text": "that our mass unit becomes the area"
+    },
+    {
+      "index": 597,
+      "start": 1780.32,
+      "end": 1791.19,
+      "duration": 10.87,
+      "text": "unit yes you"
+    },
+    {
+      "index": 598,
+      "start": 1794.07,
+      "end": 1794.08,
+      "duration": 0.01,
+      "text": "have that's a good question no I don't"
+    },
+    {
+      "index": 599,
+      "start": 1794.08,
+      "end": 1796.75,
+      "duration": 2.67,
+      "text": "think we could actually find the center"
+    },
+    {
+      "index": 600,
+      "start": 1796.76,
+      "end": 1798.509,
+      "duration": 1.749,
+      "text": "of mass in polar coordinates by finding"
+    },
+    {
+      "index": 601,
+      "start": 1798.519,
+      "end": 1801.35,
+      "duration": 2.831,
+      "text": "the average of r or the average of theta"
+    },
+    {
+      "index": 602,
+      "start": 1801.36,
+      "end": 1803.99,
+      "duration": 2.63,
+      "text": "see for example take a disk centered at"
+    },
+    {
+      "index": 603,
+      "start": 1804.0,
+      "end": 1806.269,
+      "duration": 2.269,
+      "text": "the origin okay well you know that the"
+    },
+    {
+      "index": 604,
+      "start": 1806.279,
+      "end": 1808.23,
+      "duration": 1.951,
+      "text": "center of mass should be at the origin"
+    },
+    {
+      "index": 605,
+      "start": 1808.24,
+      "end": 1811.029,
+      "duration": 2.789,
+      "text": "right but the average of R is certainly"
+    },
+    {
+      "index": 606,
+      "start": 1811.039,
+      "end": 1812.789,
+      "duration": 1.75,
+      "text": "not zero because R is positive"
+    },
+    {
+      "index": 607,
+      "start": 1812.799,
+      "end": 1814.83,
+      "duration": 2.031,
+      "text": "everywhere so that doesn't work you"
+    },
+    {
+      "index": 608,
+      "start": 1814.84,
+      "end": 1816.99,
+      "duration": 2.15,
+      "text": "cannot get the polar coordinates of the"
+    },
+    {
+      "index": 609,
+      "start": 1817.0,
+      "end": 1819.31,
+      "duration": 2.31,
+      "text": "center of mass just by taking the"
+    },
+    {
+      "index": 610,
+      "start": 1819.32,
+      "end": 1821.59,
+      "duration": 2.27,
+      "text": "average of R and the average of theta by"
+    },
+    {
+      "index": 611,
+      "start": 1821.6,
+      "end": 1822.87,
+      "duration": 1.27,
+      "text": "the way what's the average of theta you"
+    },
+    {
+      "index": 612,
+      "start": 1822.88,
+      "end": 1824.509,
+      "duration": 1.629,
+      "text": "know if you take Theta to go from 0 to 2"
+    },
+    {
+      "index": 613,
+      "start": 1824.519,
+      "end": 1826.59,
+      "duration": 2.071,
+      "text": "pi the average Theta will be Pi if you"
+    },
+    {
+      "index": 614,
+      "start": 1826.6,
+      "end": 1828.87,
+      "duration": 2.27,
+      "text": "take it to go fromus pi Pi the average"
+    },
+    {
+      "index": 615,
+      "start": 1828.88,
+      "end": 1831.549,
+      "duration": 2.669,
+      "text": "Theta will be zero so there's a problem"
+    },
+    {
+      "index": 616,
+      "start": 1831.559,
+      "end": 1833.71,
+      "duration": 2.151,
+      "text": "there so that that actually just doesn't"
+    },
+    {
+      "index": 617,
+      "start": 1833.72,
+      "end": 1837.269,
+      "duration": 3.549,
+      "text": "work um so we really have to compute xar"
+    },
+    {
+      "index": 618,
+      "start": 1837.279,
+      "end": 1839.35,
+      "duration": 2.071,
+      "text": "and Y bar but still we could compute"
+    },
+    {
+      "index": 619,
+      "start": 1839.36,
+      "end": 1841.11,
+      "duration": 1.75,
+      "text": "them you know we could set this up and"
+    },
+    {
+      "index": 620,
+      "start": 1841.12,
+      "end": 1842.71,
+      "duration": 1.59,
+      "text": "then switch to Polar coordinates to"
+    },
+    {
+      "index": 621,
+      "start": 1842.72,
+      "end": 1844.509,
+      "duration": 1.789,
+      "text": "evaluate this integral but we still be"
+    },
+    {
+      "index": 622,
+      "start": 1844.519,
+      "end": 1850.909,
+      "duration": 6.39,
+      "text": "Computing the average values of X and"
+    },
+    {
+      "index": 623,
+      "start": 1856.909,
+      "end": 1856.919,
+      "duration": 0.01,
+      "text": "Okay"
+    },
+    {
+      "index": 624,
+      "start": 1856.919,
+      "end": 1859.509,
+      "duration": 2.59,
+      "text": "so next thing so we're basically re"
+    },
+    {
+      "index": 625,
+      "start": 1859.519,
+      "end": 1862.549,
+      "duration": 3.03,
+      "text": "exploring you know mechanics and motion"
+    },
+    {
+      "index": 626,
+      "start": 1862.559,
+      "end": 1865.389,
+      "duration": 2.83,
+      "text": "of solids here so the next thing is"
+    },
+    {
+      "index": 627,
+      "start": 1865.399,
+      "end": 1870.95,
+      "duration": 5.551,
+      "text": "moment of"
+    },
+    {
+      "index": 628,
+      "start": 1874.789,
+      "end": 1874.799,
+      "duration": 0.01,
+      "text": "inertia so just to remind you or in case"
+    },
+    {
+      "index": 629,
+      "start": 1874.799,
+      "end": 1877.71,
+      "duration": 2.911,
+      "text": "you somehow haven't seen it in physics"
+    },
+    {
+      "index": 630,
+      "start": 1877.72,
+      "end": 1881.07,
+      "duration": 3.35,
+      "text": "yet so the moment of inertia is"
+    },
+    {
+      "index": 631,
+      "start": 1881.08,
+      "end": 1883.47,
+      "duration": 2.39,
+      "text": "basically to rotation of a solid what"
+    },
+    {
+      "index": 632,
+      "start": 1883.48,
+      "end": 1886.47,
+      "duration": 2.99,
+      "text": "the mass is to translation okay in the"
+    },
+    {
+      "index": 633,
+      "start": 1886.48,
+      "end": 1888.95,
+      "duration": 2.47,
+      "text": "following sense Mass the mass of a solid"
+    },
+    {
+      "index": 634,
+      "start": 1888.96,
+      "end": 1890.87,
+      "duration": 1.91,
+      "text": "is what makes it hard to push"
+    },
+    {
+      "index": 635,
+      "start": 1890.88,
+      "end": 1893.789,
+      "duration": 2.909,
+      "text": "it you know how hard it is to throw"
+    },
+    {
+      "index": 636,
+      "start": 1893.799,
+      "end": 1896.31,
+      "duration": 2.511,
+      "text": "something is related to its mass how"
+    },
+    {
+      "index": 637,
+      "start": 1896.32,
+      "end": 1898.23,
+      "duration": 1.91,
+      "text": "hard it is to spin something on the"
+    },
+    {
+      "index": 638,
+      "start": 1898.24,
+      "end": 1903.11,
+      "duration": 4.87,
+      "text": "other hand is given by its moment of"
+    },
+    {
+      "index": 639,
+      "start": 1905.789,
+      "end": 1905.799,
+      "duration": 0.01,
+      "text": "inertia maybe I should write this down"
+    },
+    {
+      "index": 640,
+      "start": 1905.799,
+      "end": 1911.629,
+      "duration": 5.83,
+      "text": "so mass is how hard it"
+    },
+    {
+      "index": 641,
+      "start": 1916.83,
+      "end": 1916.84,
+      "duration": 0.01,
+      "text": "is to impart a translation motion to a"
+    },
+    {
+      "index": 642,
+      "start": 1916.84,
+      "end": 1919.35,
+      "duration": 2.51,
+      "text": "solid"
+    },
+    {
+      "index": 643,
+      "start": 1919.36,
+      "end": 1922.029,
+      "duration": 2.669,
+      "text": "so I'm using fancy words"
+    },
+    {
+      "index": 644,
+      "start": 1922.039,
+      "end": 1923.669,
+      "duration": 1.63,
+      "text": "today"
+    },
+    {
+      "index": 645,
+      "start": 1923.679,
+      "end": 1928.669,
+      "duration": 4.99,
+      "text": "and the moment of"
+    },
+    {
+      "index": 646,
+      "start": 1931.07,
+      "end": 1931.08,
+      "duration": 0.01,
+      "text": "inertia so the difference with the mass"
+    },
+    {
+      "index": 647,
+      "start": 1931.08,
+      "end": 1933.149,
+      "duration": 2.069,
+      "text": "is that moment of inertia is defined"
+    },
+    {
+      "index": 648,
+      "start": 1933.159,
+      "end": 1934.629,
+      "duration": 1.47,
+      "text": "about some"
+    },
+    {
+      "index": 649,
+      "start": 1934.639,
+      "end": 1937.47,
+      "duration": 2.831,
+      "text": "AIS okay so you choose an axis then you"
+    },
+    {
+      "index": 650,
+      "start": 1937.48,
+      "end": 1938.99,
+      "duration": 1.51,
+      "text": "will try to measure how hard it is to"
+    },
+    {
+      "index": 651,
+      "start": 1939.0,
+      "end": 1940.83,
+      "duration": 1.83,
+      "text": "spin your object around that axis for"
+    },
+    {
+      "index": 652,
+      "start": 1940.84,
+      "end": 1942.87,
+      "duration": 2.03,
+      "text": "example I can try to measure how hard it"
+    },
+    {
+      "index": 653,
+      "start": 1942.88,
+      "end": 1945.789,
+      "duration": 2.909,
+      "text": "is to spin this sheet of paper about an"
+    },
+    {
+      "index": 654,
+      "start": 1945.799,
+      "end": 1947.269,
+      "duration": 1.47,
+      "text": "axis that's in the center of it so I"
+    },
+    {
+      "index": 655,
+      "start": 1947.279,
+      "end": 1949.47,
+      "duration": 2.191,
+      "text": "would try to spin like that and see how"
+    },
+    {
+      "index": 656,
+      "start": 1949.48,
+      "end": 1951.909,
+      "duration": 2.429,
+      "text": "much effort I have to make well for a"
+    },
+    {
+      "index": 657,
+      "start": 1951.919,
+      "end": 1954.789,
+      "duration": 2.87,
+      "text": "sheet of paper not very much"
+    },
+    {
+      "index": 658,
+      "start": 1954.799,
+      "end": 1958.669,
+      "duration": 3.87,
+      "text": "but so that would measure the same thing"
+    },
+    {
+      "index": 659,
+      "start": 1958.679,
+      "end": 1960.789,
+      "duration": 2.11,
+      "text": "but it would be"
+    },
+    {
+      "index": 660,
+      "start": 1960.799,
+      "end": 1962.909,
+      "duration": 2.11,
+      "text": "rotation"
+    },
+    {
+      "index": 661,
+      "start": 1962.919,
+      "end": 1976.509,
+      "duration": 13.59,
+      "text": "motion about"
+    },
+    {
+      "index": 662,
+      "start": 1979.31,
+      "end": 1979.32,
+      "duration": 0.01,
+      "text": "vexes so maybe some of you know the"
+    },
+    {
+      "index": 663,
+      "start": 1979.32,
+      "end": 1981.71,
+      "duration": 2.39,
+      "text": "definition if not I'm going to try to"
+    },
+    {
+      "index": 664,
+      "start": 1981.72,
+      "end": 1984.389,
+      "duration": 2.669,
+      "text": "derive it again I'm sorry that it won't"
+    },
+    {
+      "index": 665,
+      "start": 1984.399,
+      "end": 1986.19,
+      "duration": 1.791,
+      "text": "be quite as detailed as the way you've"
+    },
+    {
+      "index": 666,
+      "start": 1986.2,
+      "end": 1987.629,
+      "duration": 1.429,
+      "text": "probably seen it in physics but you know"
+    },
+    {
+      "index": 667,
+      "start": 1987.639,
+      "end": 1988.83,
+      "duration": 1.191,
+      "text": "I'm not trying to replace your physics"
+    },
+    {
+      "index": 668,
+      "start": 1988.84,
+      "end": 1990.269,
+      "duration": 1.429,
+      "text": "teachers I'm sure they're doing a great"
+    },
+    {
+      "index": 669,
+      "start": 1990.279,
+      "end": 1992.389,
+      "duration": 2.11,
+      "text": "job"
+    },
+    {
+      "index": 670,
+      "start": 1992.399,
+      "end": 1994.629,
+      "duration": 2.23,
+      "text": "and"
+    },
+    {
+      "index": 671,
+      "start": 1994.639,
+      "end": 1996.99,
+      "duration": 2.351,
+      "text": "so you know what's the idea for the"
+    },
+    {
+      "index": 672,
+      "start": 1997.0,
+      "end": 1998.71,
+      "duration": 1.71,
+      "text": "definition to to find a formula for"
+    },
+    {
+      "index": 673,
+      "start": 1998.72,
+      "end": 2000.909,
+      "duration": 2.189,
+      "text": "moment of inertia so the idea is to"
+    },
+    {
+      "index": 674,
+      "start": 2000.919,
+      "end": 2002.59,
+      "duration": 1.671,
+      "text": "think about kinetic energy kinetic"
+    },
+    {
+      "index": 675,
+      "start": 2002.6,
+      "end": 2005.789,
+      "duration": 3.189,
+      "text": "energy is really what you know um you"
+    },
+    {
+      "index": 676,
+      "start": 2005.799,
+      "end": 2007.389,
+      "duration": 1.59,
+      "text": "know when you push something or when you"
+    },
+    {
+      "index": 677,
+      "start": 2007.399,
+      "end": 2009.35,
+      "duration": 1.951,
+      "text": "try to make it move you have to provide"
+    },
+    {
+      "index": 678,
+      "start": 2009.36,
+      "end": 2011.19,
+      "duration": 1.83,
+      "text": "some energy to it and then it has"
+    },
+    {
+      "index": 679,
+      "start": 2011.2,
+      "end": 2013.75,
+      "duration": 2.55,
+      "text": "kinetic energy and if you have the right"
+    },
+    {
+      "index": 680,
+      "start": 2013.76,
+      "end": 2015.23,
+      "duration": 1.47,
+      "text": "device then you can convert back that"
+    },
+    {
+      "index": 681,
+      "start": 2015.24,
+      "end": 2017.71,
+      "duration": 2.47,
+      "text": "kinetic energy into something"
+    },
+    {
+      "index": 682,
+      "start": 2017.72,
+      "end": 2020.43,
+      "duration": 2.71,
+      "text": "else"
+    },
+    {
+      "index": 683,
+      "start": 2020.44,
+      "end": 2024.029,
+      "duration": 3.589,
+      "text": "so if you try to look at the kinetic"
+    },
+    {
+      "index": 684,
+      "start": 2024.039,
+      "end": 2027.029,
+      "duration": 2.99,
+      "text": "energy of a point Mass so you have"
+    },
+    {
+      "index": 685,
+      "start": 2027.039,
+      "end": 2031.909,
+      "duration": 4.87,
+      "text": "something with mass m going at velocity"
+    },
+    {
+      "index": 686,
+      "start": 2031.919,
+      "end": 2035.95,
+      "duration": 4.031,
+      "text": "V well that will be 12 of the masstimes"
+    },
+    {
+      "index": 687,
+      "start": 2035.96,
+      "end": 2038.35,
+      "duration": 2.39,
+      "text": "the square of the speed okay hopefully"
+    },
+    {
+      "index": 688,
+      "start": 2038.36,
+      "end": 2040.87,
+      "duration": 2.51,
+      "text": "you've all seen that formula some time"
+    },
+    {
+      "index": 689,
+      "start": 2040.88,
+      "end": 2043.23,
+      "duration": 2.35,
+      "text": "before now let's say that instead of"
+    },
+    {
+      "index": 690,
+      "start": 2043.24,
+      "end": 2044.87,
+      "duration": 1.63,
+      "text": "just trying to push this Mass I'm going"
+    },
+    {
+      "index": 691,
+      "start": 2044.88,
+      "end": 2048.75,
+      "duration": 3.87,
+      "text": "to make it spin around something okay so"
+    },
+    {
+      "index": 692,
+      "start": 2048.76,
+      "end": 2050.95,
+      "duration": 2.19,
+      "text": "instead of"
+    },
+    {
+      "index": 693,
+      "start": 2050.96,
+      "end": 2054.829,
+      "duration": 3.869,
+      "text": "just somewhere maybe you know I will"
+    },
+    {
+      "index": 694,
+      "start": 2054.839,
+      "end": 2057.669,
+      "duration": 2.83,
+      "text": "have here the origin and I'm trying to"
+    },
+    {
+      "index": 695,
+      "start": 2057.679,
+      "end": 2060.069,
+      "duration": 2.39,
+      "text": "actually make it go around the"
+    },
+    {
+      "index": 696,
+      "start": 2060.079,
+      "end": 2062.589,
+      "duration": 2.51,
+      "text": "origin at a certain you know in a circle"
+    },
+    {
+      "index": 697,
+      "start": 2062.599,
+      "end": 2066.71,
+      "duration": 4.111,
+      "text": "at a certain angular"
+    },
+    {
+      "index": 698,
+      "start": 2073.71,
+      "end": 2073.72,
+      "duration": 0.01,
+      "text": "velocity so for a mass m at distance"
+    },
+    {
+      "index": 699,
+      "start": 2073.72,
+      "end": 2079.03,
+      "duration": 5.31,
+      "text": "R let's call R this"
+    },
+    {
+      "index": 700,
+      "start": 2080.829,
+      "end": 2080.839,
+      "duration": 0.01,
+      "text": "distance"
+    },
+    {
+      "index": 701,
+      "start": 2080.839,
+      "end": 2086.069,
+      "duration": 5.23,
+      "text": "and angular"
+    },
+    {
+      "index": 702,
+      "start": 2087.869,
+      "end": 2087.879,
+      "duration": 0.01,
+      "text": "velocity let's called the angular"
+    },
+    {
+      "index": 703,
+      "start": 2087.879,
+      "end": 2089.19,
+      "duration": 1.311,
+      "text": "velocity Omega I think that's what"
+    },
+    {
+      "index": 704,
+      "start": 2089.2,
+      "end": 2091.149,
+      "duration": 1.949,
+      "text": "physicists call it so remember the"
+    },
+    {
+      "index": 705,
+      "start": 2091.159,
+      "end": 2093.669,
+      "duration": 2.51,
+      "text": "angular velocity is just the rate of"
+    },
+    {
+      "index": 706,
+      "start": 2093.679,
+      "end": 2097.27,
+      "duration": 3.591,
+      "text": "change of the angle over time okay it's"
+    },
+    {
+      "index": 707,
+      "start": 2097.28,
+      "end": 2100.15,
+      "duration": 2.87,
+      "text": "def DT if you"
+    },
+    {
+      "index": 708,
+      "start": 2100.16,
+      "end": 2103.51,
+      "duration": 3.35,
+      "text": "want well what's theine energy now well"
+    },
+    {
+      "index": 709,
+      "start": 2103.52,
+      "end": 2105.069,
+      "duration": 1.549,
+      "text": "first we have to find out what's the"
+    },
+    {
+      "index": 710,
+      "start": 2105.079,
+      "end": 2108.75,
+      "duration": 3.671,
+      "text": "speed what's the speed well if we are"
+    },
+    {
+      "index": 711,
+      "start": 2108.76,
+      "end": 2111.63,
+      "duration": 2.87,
+      "text": "going on a circle of radius r at angular"
+    },
+    {
+      "index": 712,
+      "start": 2111.64,
+      "end": 2114.31,
+      "duration": 2.67,
+      "text": "velocity Omega that means that in unit"
+    },
+    {
+      "index": 713,
+      "start": 2114.32,
+      "end": 2116.55,
+      "duration": 2.23,
+      "text": "time we rotate by Omega and we go by a"
+    },
+    {
+      "index": 714,
+      "start": 2116.56,
+      "end": 2121.39,
+      "duration": 4.83,
+      "text": "distance of R * Omega okay"
+    },
+    {
+      "index": 715,
+      "start": 2121.4,
+      "end": 2124.87,
+      "duration": 3.47,
+      "text": "so the the actual speed is the radius"
+    },
+    {
+      "index": 716,
+      "start": 2124.88,
+      "end": 2126.63,
+      "duration": 1.75,
+      "text": "times the angular"
+    },
+    {
+      "index": 717,
+      "start": 2126.64,
+      "end": 2128.75,
+      "duration": 2.11,
+      "text": "velocity"
+    },
+    {
+      "index": 718,
+      "start": 2128.76,
+      "end": 2134.03,
+      "duration": 5.27,
+      "text": "and so the kinetic energy is 12 m v^ 2"
+    },
+    {
+      "index": 719,
+      "start": 2134.04,
+      "end": 2139.27,
+      "duration": 5.23,
+      "text": "which is 12 m r 2 Omega"
+    },
+    {
+      "index": 720,
+      "start": 2139.28,
+      "end": 2144.349,
+      "duration": 5.069,
+      "text": "s and so see by similarity with that"
+    },
+    {
+      "index": 721,
+      "start": 2144.359,
+      "end": 2146.79,
+      "duration": 2.431,
+      "text": "formula we can think of so here the"
+    },
+    {
+      "index": 722,
+      "start": 2146.8,
+      "end": 2151.069,
+      "duration": 4.269,
+      "text": "coefficient of v s is the mass and here"
+    },
+    {
+      "index": 723,
+      "start": 2151.079,
+      "end": 2152.87,
+      "duration": 1.791,
+      "text": "we'll say the co efficient of Omega squ"
+    },
+    {
+      "index": 724,
+      "start": 2152.88,
+      "end": 2156.069,
+      "duration": 3.189,
+      "text": "so this thing is the moment of"
+    },
+    {
+      "index": 725,
+      "start": 2156.079,
+      "end": 2175.47,
+      "duration": 19.391,
+      "text": "inertia that's how we def moment of"
+    },
+    {
+      "index": 726,
+      "start": 2178.79,
+      "end": 2178.8,
+      "duration": 0.01,
+      "text": "inertia okay now that's only for a point"
+    },
+    {
+      "index": 727,
+      "start": 2178.8,
+      "end": 2180.95,
+      "duration": 2.15,
+      "text": "mass and you know it's kind of fun to"
+    },
+    {
+      "index": 728,
+      "start": 2180.96,
+      "end": 2182.829,
+      "duration": 1.869,
+      "text": "spin just you know a small bowl but"
+    },
+    {
+      "index": 729,
+      "start": 2182.839,
+      "end": 2184.03,
+      "duration": 1.191,
+      "text": "maybe you'd like to spin actually a"
+    },
+    {
+      "index": 730,
+      "start": 2184.04,
+      "end": 2185.349,
+      "duration": 1.309,
+      "text": "larger"
+    },
+    {
+      "index": 731,
+      "start": 2185.359,
+      "end": 2188.43,
+      "duration": 3.071,
+      "text": "solid and try Define this moment of"
+    },
+    {
+      "index": 732,
+      "start": 2188.44,
+      "end": 2190.67,
+      "duration": 2.23,
+      "text": "inertia well the moment of inertia of a"
+    },
+    {
+      "index": 733,
+      "start": 2190.68,
+      "end": 2192.23,
+      "duration": 1.55,
+      "text": "solid will be just the sum of the"
+    },
+    {
+      "index": 734,
+      "start": 2192.24,
+      "end": 2195.27,
+      "duration": 3.03,
+      "text": "moments of inertia of all the little"
+    },
+    {
+      "index": 735,
+      "start": 2195.28,
+      "end": 2197.95,
+      "duration": 2.67,
+      "text": "pieces so what we'll do is we'll just"
+    },
+    {
+      "index": 736,
+      "start": 2197.96,
+      "end": 2199.63,
+      "duration": 1.67,
+      "text": "cut our solid into little chunks and"
+    },
+    {
+      "index": 737,
+      "start": 2199.64,
+      "end": 2205.63,
+      "duration": 5.99,
+      "text": "we'll sum this thing for each little"
+    },
+    {
+      "index": 738,
+      "start": 2211.79,
+      "end": 2211.8,
+      "duration": 0.01,
+      "text": "so for a"
+    },
+    {
+      "index": 739,
+      "start": 2211.8,
+      "end": 2213.91,
+      "duration": 2.11,
+      "text": "solid with"
+    },
+    {
+      "index": 740,
+      "start": 2213.92,
+      "end": 2215.63,
+      "duration": 1.71,
+      "text": "density"
+    },
+    {
+      "index": 741,
+      "start": 2215.64,
+      "end": 2221.99,
+      "duration": 6.35,
+      "text": "Delta so each little piece has"
+    },
+    {
+      "index": 742,
+      "start": 2225.75,
+      "end": 2225.76,
+      "duration": 0.01,
+      "text": "mass which is the density times the"
+    },
+    {
+      "index": 743,
+      "start": 2225.76,
+      "end": 2227.589,
+      "duration": 1.829,
+      "text": "amount of area because it's equal"
+    },
+    {
+      "index": 744,
+      "start": 2227.599,
+      "end": 2229.63,
+      "duration": 2.031,
+      "text": "actually"
+    },
+    {
+      "index": 745,
+      "start": 2229.64,
+      "end": 2232.87,
+      "duration": 3.23,
+      "text": "what and the moment of inertia of that"
+    },
+    {
+      "index": 746,
+      "start": 2232.88,
+      "end": 2235.309,
+      "duration": 2.429,
+      "text": "small portion of the solid will be Delta"
+    },
+    {
+      "index": 747,
+      "start": 2235.319,
+      "end": 2238.39,
+      "duration": 3.071,
+      "text": "M the small masstimes r s the square of"
+    },
+    {
+      "index": 748,
+      "start": 2238.4,
+      "end": 2241.349,
+      "duration": 2.949,
+      "text": "a distance to the center to the axis"
+    },
+    {
+      "index": 749,
+      "start": 2241.359,
+      "end": 2243.47,
+      "duration": 2.111,
+      "text": "around which I'm"
+    },
+    {
+      "index": 750,
+      "start": 2243.48,
+      "end": 2245.349,
+      "duration": 1.869,
+      "text": "spinning"
+    },
+    {
+      "index": 751,
+      "start": 2245.359,
+      "end": 2249.03,
+      "duration": 3.671,
+      "text": "so that means if I sum this these things"
+    },
+    {
+      "index": 752,
+      "start": 2249.04,
+      "end": 2256.349,
+      "duration": 7.309,
+      "text": "together well so has moment of"
+    },
+    {
+      "index": 753,
+      "start": 2261.51,
+      "end": 2261.52,
+      "duration": 0.01,
+      "text": "inertia Delta M * R 2 which is R 2 * for"
+    },
+    {
+      "index": 754,
+      "start": 2261.52,
+      "end": 2262.99,
+      "duration": 1.47,
+      "text": "density"
+    },
+    {
+      "index": 755,
+      "start": 2263.0,
+      "end": 2266.79,
+      "duration": 3.79,
+      "text": "* Delta a and so I will be summing these"
+    },
+    {
+      "index": 756,
+      "start": 2266.8,
+      "end": 2268.47,
+      "duration": 1.67,
+      "text": "things"
+    },
+    {
+      "index": 757,
+      "start": 2268.48,
+      "end": 2271.43,
+      "duration": 2.95,
+      "text": "together and so the moment of"
+    },
+    {
+      "index": 758,
+      "start": 2271.44,
+      "end": 2274.55,
+      "duration": 3.11,
+      "text": "inertia about the origin will be the"
+    },
+    {
+      "index": 759,
+      "start": 2274.56,
+      "end": 2304.55,
+      "duration": 29.99,
+      "text": "double integral of r² * time"
+    },
+    {
+      "index": 760,
+      "start": 2306.43,
+      "end": 2306.44,
+      "duration": 0.01,
+      "text": "da Okay"
+    },
+    {
+      "index": 761,
+      "start": 2306.44,
+      "end": 2308.51,
+      "duration": 2.07,
+      "text": "so"
+    },
+    {
+      "index": 762,
+      "start": 2308.52,
+      "end": 2310.109,
+      "duration": 1.589,
+      "text": "the"
+    },
+    {
+      "index": 763,
+      "start": 2310.119,
+      "end": 2313.15,
+      "duration": 3.031,
+      "text": "final formula for the moment of"
+    },
+    {
+      "index": 764,
+      "start": 2313.16,
+      "end": 2318.829,
+      "duration": 5.669,
+      "text": "inertia about the"
+    },
+    {
+      "index": 765,
+      "start": 2321.79,
+      "end": 2321.8,
+      "duration": 0.01,
+      "text": "origin is the double integral of the"
+    },
+    {
+      "index": 766,
+      "start": 2321.8,
+      "end": 2325.67,
+      "duration": 3.87,
+      "text": "region of r² density"
+    },
+    {
+      "index": 767,
+      "start": 2325.68,
+      "end": 2327.99,
+      "duration": 2.31,
+      "text": "da or if you prefer if you're going to"
+    },
+    {
+      "index": 768,
+      "start": 2328.0,
+      "end": 2330.19,
+      "duration": 2.19,
+      "text": "do it in XY coordinates of course R"
+    },
+    {
+      "index": 769,
+      "start": 2330.2,
+      "end": 2333.63,
+      "duration": 3.43,
+      "text": "square becomes x square plus y^ s it's"
+    },
+    {
+      "index": 770,
+      "start": 2333.64,
+      "end": 2339.309,
+      "duration": 5.669,
+      "text": "the square of the distance from the"
+    },
+    {
+      "index": 771,
+      "start": 2339.319,
+      "end": 2341.63,
+      "duration": 2.311,
+      "text": "origin okay so when you integrate this"
+    },
+    {
+      "index": 772,
+      "start": 2341.64,
+      "end": 2343.71,
+      "duration": 2.07,
+      "text": "that tells you how hard it is to spin"
+    },
+    {
+      "index": 773,
+      "start": 2343.72,
+      "end": 2345.91,
+      "duration": 2.19,
+      "text": "that solid about the origin so the"
+    },
+    {
+      "index": 774,
+      "start": 2345.92,
+      "end": 2348.19,
+      "duration": 2.27,
+      "text": "motion that we try to do is we keep this"
+    },
+    {
+      "index": 775,
+      "start": 2348.2,
+      "end": 2351.349,
+      "duration": 3.149,
+      "text": "fixed and then we just"
+    },
+    {
+      "index": 776,
+      "start": 2351.359,
+      "end": 2355.069,
+      "duration": 3.71,
+      "text": "rotate around the origin well sorry"
+    },
+    {
+      "index": 777,
+      "start": 2355.079,
+      "end": 2356.91,
+      "duration": 1.831,
+      "text": "that's a pretty bad picture but"
+    },
+    {
+      "index": 778,
+      "start": 2356.92,
+      "end": 2359.39,
+      "duration": 2.47,
+      "text": "hopefully you get what I"
+    },
+    {
+      "index": 779,
+      "start": 2359.4,
+      "end": 2362.91,
+      "duration": 3.51,
+      "text": "mean"
+    },
+    {
+      "index": 780,
+      "start": 2366.03,
+      "end": 2366.04,
+      "duration": 0.01,
+      "text": "okay and then the rotational energy so"
+    },
+    {
+      "index": 781,
+      "start": 2366.04,
+      "end": 2368.99,
+      "duration": 2.95,
+      "text": "the name we use for that is is i z and"
+    },
+    {
+      "index": 782,
+      "start": 2369.0,
+      "end": 2371.349,
+      "duration": 2.349,
+      "text": "then the"
+    },
+    {
+      "index": 783,
+      "start": 2382.069,
+      "end": 2382.079,
+      "duration": 0.01,
+      "text": "energy is 12 time this moment of inertia"
+    },
+    {
+      "index": 784,
+      "start": 2382.079,
+      "end": 2385.03,
+      "duration": 2.951,
+      "text": "time the square of the angular"
+    },
+    {
+      "index": 785,
+      "start": 2385.04,
+      "end": 2388.069,
+      "duration": 3.029,
+      "text": "velocity so it's in this sense that this"
+    },
+    {
+      "index": 786,
+      "start": 2388.079,
+      "end": 2394.87,
+      "duration": 6.791,
+      "text": "replaces the mass for rotation"
+    },
+    {
+      "index": 787,
+      "start": 2403.91,
+      "end": 2403.92,
+      "duration": 0.01,
+      "text": "rotations so in particular here we've"
+    },
+    {
+      "index": 788,
+      "start": 2403.92,
+      "end": 2406.55,
+      "duration": 2.63,
+      "text": "been rotating things about just a point"
+    },
+    {
+      "index": 789,
+      "start": 2406.56,
+      "end": 2410.03,
+      "duration": 3.47,
+      "text": "in the plane what you could imagine also"
+    },
+    {
+      "index": 790,
+      "start": 2410.04,
+      "end": 2416.47,
+      "duration": 6.43,
+      "text": "is instead you have your"
+    },
+    {
+      "index": 791,
+      "start": 2418.67,
+      "end": 2418.68,
+      "duration": 0.01,
+      "text": "solid so what I've done so far is I've"
+    },
+    {
+      "index": 792,
+      "start": 2418.68,
+      "end": 2421.19,
+      "duration": 2.51,
+      "text": "skewered it this way and I'm rotating"
+    },
+    {
+      "index": 793,
+      "start": 2421.2,
+      "end": 2424.91,
+      "duration": 3.71,
+      "text": "around V AIS instead I could skewer it"
+    },
+    {
+      "index": 794,
+      "start": 2424.92,
+      "end": 2427.349,
+      "duration": 2.429,
+      "text": "through say the horizontal axis and and"
+    },
+    {
+      "index": 795,
+      "start": 2427.359,
+      "end": 2428.67,
+      "duration": 1.311,
+      "text": "then I could try to spin about the"
+    },
+    {
+      "index": 796,
+      "start": 2428.68,
+      "end": 2430.19,
+      "duration": 1.51,
+      "text": "horizontal axis so then it would you"
+    },
+    {
+      "index": 797,
+      "start": 2430.2,
+      "end": 2433.589,
+      "duration": 3.389,
+      "text": "know rotate in space in that direction"
+    },
+    {
+      "index": 798,
+      "start": 2433.599,
+      "end": 2439.75,
+      "duration": 6.151,
+      "text": "like"
+    },
+    {
+      "index": 799,
+      "start": 2450.47,
+      "end": 2450.48,
+      "duration": 0.01,
+      "text": "so let's say we do rotation about the"
+    },
+    {
+      "index": 800,
+      "start": 2450.48,
+      "end": 2452.63,
+      "duration": 2.15,
+      "text": "xaxis well the idea would still be the"
+    },
+    {
+      "index": 801,
+      "start": 2452.64,
+      "end": 2454.71,
+      "duration": 2.07,
+      "text": "same okay the moment of inertia for any"
+    },
+    {
+      "index": 802,
+      "start": 2454.72,
+      "end": 2458.55,
+      "duration": 3.83,
+      "text": "small piece of the solid would"
+    },
+    {
+      "index": 803,
+      "start": 2458.56,
+      "end": 2460.75,
+      "duration": 2.19,
+      "text": "its mass"
+    },
+    {
+      "index": 804,
+      "start": 2460.76,
+      "end": 2463.19,
+      "duration": 2.43,
+      "text": "element the square of the distance to"
+    },
+    {
+      "index": 805,
+      "start": 2463.2,
+      "end": 2465.349,
+      "duration": 2.149,
+      "text": "the axis because that will be the radius"
+    },
+    {
+      "index": 806,
+      "start": 2465.359,
+      "end": 2468.71,
+      "duration": 3.351,
+      "text": "of a trajectory if you take this point"
+    },
+    {
+      "index": 807,
+      "start": 2468.72,
+      "end": 2472.87,
+      "duration": 4.15,
+      "text": "here it's going to go on a circle like"
+    },
+    {
+      "index": 808,
+      "start": 2472.88,
+      "end": 2475.19,
+      "duration": 2.31,
+      "text": "that centered on the"
+    },
+    {
+      "index": 809,
+      "start": 2475.2,
+      "end": 2478.47,
+      "duration": 3.27,
+      "text": "x-axis so the radius will just be this"
+    },
+    {
+      "index": 810,
+      "start": 2478.48,
+      "end": 2479.75,
+      "duration": 1.27,
+      "text": "distance"
+    },
+    {
+      "index": 811,
+      "start": 2479.76,
+      "end": 2483.27,
+      "duration": 3.51,
+      "text": "here well what's this distance it's just"
+    },
+    {
+      "index": 812,
+      "start": 2483.28,
+      "end": 2485.79,
+      "duration": 2.51,
+      "text": "y or maybe absolute value of"
+    },
+    {
+      "index": 813,
+      "start": 2485.8,
+      "end": 2489.67,
+      "duration": 3.87,
+      "text": "y Okay so"
+    },
+    {
+      "index": 814,
+      "start": 2492.63,
+      "end": 2492.64,
+      "duration": 0.01,
+      "text": "distance to"
+    },
+    {
+      "index": 815,
+      "start": 2492.64,
+      "end": 2497.47,
+      "duration": 4.83,
+      "text": "xais is absolute value of y and what we"
+    },
+    {
+      "index": 816,
+      "start": 2497.48,
+      "end": 2499.39,
+      "duration": 1.91,
+      "text": "actually care about is the square of the"
+    },
+    {
+      "index": 817,
+      "start": 2499.4,
+      "end": 2502.67,
+      "duration": 3.27,
+      "text": "distance so that will just be y^"
+    },
+    {
+      "index": 818,
+      "start": 2502.68,
+      "end": 2505.63,
+      "duration": 2.95,
+      "text": "squ so the moment of inertia about the"
+    },
+    {
+      "index": 819,
+      "start": 2505.64,
+      "end": 2506.589,
+      "duration": 0.949,
+      "text": "x-"
+    },
+    {
+      "index": 820,
+      "start": 2506.599,
+      "end": 2509.309,
+      "duration": 2.71,
+      "text": "axis is going to be obtained by"
+    },
+    {
+      "index": 821,
+      "start": 2509.319,
+      "end": 2510.91,
+      "duration": 1.591,
+      "text": "integrating"
+    },
+    {
+      "index": 822,
+      "start": 2510.92,
+      "end": 2515.27,
+      "duration": 4.35,
+      "text": "y^2 times the mass"
+    },
+    {
+      "index": 823,
+      "start": 2518.43,
+      "end": 2518.44,
+      "duration": 0.01,
+      "text": "element okay it's slightly strange that"
+    },
+    {
+      "index": 824,
+      "start": 2518.44,
+      "end": 2520.95,
+      "duration": 2.51,
+      "text": "I have y in the inertia about the xaxis"
+    },
+    {
+      "index": 825,
+      "start": 2520.96,
+      "end": 2522.99,
+      "duration": 2.03,
+      "text": "but if you think about it y tells me how"
+    },
+    {
+      "index": 826,
+      "start": 2523.0,
+      "end": 2524.95,
+      "duration": 1.95,
+      "text": "far I am from the x-axis so how hard it"
+    },
+    {
+      "index": 827,
+      "start": 2524.96,
+      "end": 2528.27,
+      "duration": 3.31,
+      "text": "will be to spin around the"
+    },
+    {
+      "index": 828,
+      "start": 2528.28,
+      "end": 2530.71,
+      "duration": 2.43,
+      "text": "x-axis okay and I could do the same"
+    },
+    {
+      "index": 829,
+      "start": 2530.72,
+      "end": 2533.67,
+      "duration": 2.95,
+      "text": "about any other axis that I want just I"
+    },
+    {
+      "index": 830,
+      "start": 2533.68,
+      "end": 2535.71,
+      "duration": 2.03,
+      "text": "would have to sum the square of the"
+    },
+    {
+      "index": 831,
+      "start": 2535.72,
+      "end": 2542.15,
+      "duration": 6.43,
+      "text": "distance to the axis of"
+    },
+    {
+      "index": 832,
+      "start": 2546.109,
+      "end": 2546.119,
+      "duration": 0.01,
+      "text": "rotation okay so maybe I should do an"
+    },
+    {
+      "index": 833,
+      "start": 2546.119,
+      "end": 2549.87,
+      "duration": 3.751,
+      "text": "example"
+    },
+    {
+      "index": 834,
+      "start": 2552.75,
+      "end": 2552.76,
+      "duration": 0.01,
+      "text": "yes oh sorry same thing as above this TS"
+    },
+    {
+      "index": 835,
+      "start": 2552.76,
+      "end": 2556.95,
+      "duration": 4.19,
+      "text": "to the"
+    },
+    {
+      "index": 836,
+      "start": 2559.27,
+      "end": 2559.28,
+      "duration": 0.01,
+      "text": "x-axis because that's what we care about"
+    },
+    {
+      "index": 837,
+      "start": 2559.28,
+      "end": 2560.829,
+      "duration": 1.549,
+      "text": "right for the moment of inertia we want"
+    },
+    {
+      "index": 838,
+      "start": 2560.839,
+      "end": 2562.51,
+      "duration": 1.671,
+      "text": "the square of the distance to the axis"
+    },
+    {
+      "index": 839,
+      "start": 2562.52,
+      "end": 2571.349,
+      "duration": 8.829,
+      "text": "of"
+    },
+    {
+      "index": 840,
+      "start": 2573.63,
+      "end": 2573.64,
+      "duration": 0.01,
+      "text": "rotation okay so let's do an example"
+    },
+    {
+      "index": 841,
+      "start": 2573.64,
+      "end": 2577.27,
+      "duration": 3.63,
+      "text": "let's try to figure out if we have just"
+    },
+    {
+      "index": 842,
+      "start": 2577.28,
+      "end": 2580.19,
+      "duration": 2.91,
+      "text": "a uniform disc how hard it is to spin it"
+    },
+    {
+      "index": 843,
+      "start": 2580.2,
+      "end": 2583.67,
+      "duration": 3.47,
+      "text": "around its"
+    },
+    {
+      "index": 844,
+      "start": 2585.829,
+      "end": 2585.839,
+      "duration": 0.01,
+      "text": "Center okay so that shouldn't be very"
+    },
+    {
+      "index": 845,
+      "start": 2585.839,
+      "end": 2590.43,
+      "duration": 4.591,
+      "text": "hard to comp to figure out say that we"
+    },
+    {
+      "index": 846,
+      "start": 2590.44,
+      "end": 2594.109,
+      "duration": 3.669,
+      "text": "have a"
+    },
+    {
+      "index": 847,
+      "start": 2595.79,
+      "end": 2595.8,
+      "duration": 0.01,
+      "text": "dis"
+    },
+    {
+      "index": 848,
+      "start": 2595.8,
+      "end": 2603.71,
+      "duration": 7.91,
+      "text": "of radius"
+    },
+    {
+      "index": 849,
+      "start": 2606.39,
+      "end": 2606.4,
+      "duration": 0.01,
+      "text": "a and we want to rotate it about its"
+    },
+    {
+      "index": 850,
+      "start": 2606.4,
+      "end": 2609.589,
+      "duration": 3.189,
+      "text": "Center"
+    },
+    {
+      "index": 851,
+      "start": 2611.109,
+      "end": 2611.119,
+      "duration": 0.01,
+      "text": "and let's say that it's of uniform"
+    },
+    {
+      "index": 852,
+      "start": 2611.119,
+      "end": 2613.15,
+      "duration": 2.031,
+      "text": "density and let's take just the density"
+    },
+    {
+      "index": 853,
+      "start": 2613.16,
+      "end": 2614.71,
+      "duration": 1.55,
+      "text": "to be one so that you we don't really"
+    },
+    {
+      "index": 854,
+      "start": 2614.72,
+      "end": 2617.27,
+      "duration": 2.55,
+      "text": "care about the"
+    },
+    {
+      "index": 855,
+      "start": 2617.28,
+      "end": 2620.549,
+      "duration": 3.269,
+      "text": "density so what's the moment of inertia"
+    },
+    {
+      "index": 856,
+      "start": 2620.559,
+      "end": 2622.79,
+      "duration": 2.231,
+      "text": "of that well we have to integrate over"
+    },
+    {
+      "index": 857,
+      "start": 2622.8,
+      "end": 2624.829,
+      "duration": 2.029,
+      "text": "our"
+    },
+    {
+      "index": 858,
+      "start": 2624.839,
+      "end": 2630.27,
+      "duration": 5.431,
+      "text": "disk R 2 time the density which is 1"
+    },
+    {
+      "index": 859,
+      "start": 2630.28,
+      "end": 2631.67,
+      "duration": 1.39,
+      "text": "time"
+    },
+    {
+      "index": 860,
+      "start": 2631.68,
+      "end": 2635.63,
+      "duration": 3.95,
+      "text": "da okay what's R squ so you have here to"
+    },
+    {
+      "index": 861,
+      "start": 2635.64,
+      "end": 2637.75,
+      "duration": 2.11,
+      "text": "resist the urge to say oh the radius is"
+    },
+    {
+      "index": 862,
+      "start": 2637.76,
+      "end": 2640.829,
+      "duration": 3.069,
+      "text": "just a we know the radius is a uh no"
+    },
+    {
+      "index": 863,
+      "start": 2640.839,
+      "end": 2643.23,
+      "duration": 2.391,
+      "text": "it's not a because we're looking at"
+    },
+    {
+      "index": 864,
+      "start": 2643.24,
+      "end": 2645.27,
+      "duration": 2.03,
+      "text": "rotation of you know any point inside"
+    },
+    {
+      "index": 865,
+      "start": 2645.28,
+      "end": 2647.99,
+      "duration": 2.71,
+      "text": "this disc and when you're inside the dis"
+    },
+    {
+      "index": 866,
+      "start": 2648.0,
+      "end": 2650.109,
+      "duration": 2.109,
+      "text": "the distance to the origin is not a it's"
+    },
+    {
+      "index": 867,
+      "start": 2650.119,
+      "end": 2651.67,
+      "duration": 1.551,
+      "text": "less than a it's actually anything"
+    },
+    {
+      "index": 868,
+      "start": 2651.68,
+      "end": 2652.95,
+      "duration": 1.27,
+      "text": "between zero and"
+    },
+    {
+      "index": 869,
+      "start": 2652.96,
+      "end": 2655.23,
+      "duration": 2.27,
+      "text": "a okay so just you know point out a"
+    },
+    {
+      "index": 870,
+      "start": 2655.24,
+      "end": 2657.95,
+      "duration": 2.71,
+      "text": "pitfall R here is really a function on"
+    },
+    {
+      "index": 871,
+      "start": 2657.96,
+      "end": 2659.43,
+      "duration": 1.47,
+      "text": "this dis and we're going to integrate"
+    },
+    {
+      "index": 872,
+      "start": 2659.44,
+      "end": 2665.03,
+      "duration": 5.59,
+      "text": "that function don't plug I equals a just"
+    },
+    {
+      "index": 873,
+      "start": 2667.549,
+      "end": 2667.559,
+      "duration": 0.01,
+      "text": "yet okay what coordinates do we used to"
+    },
+    {
+      "index": 874,
+      "start": 2667.559,
+      "end": 2668.549,
+      "duration": 0.99,
+      "text": "compute this"
+    },
+    {
+      "index": 875,
+      "start": 2668.559,
+      "end": 2670.39,
+      "duration": 1.831,
+      "text": "integral we yeah probably polar"
+    },
+    {
+      "index": 876,
+      "start": 2670.4,
+      "end": 2671.67,
+      "duration": 1.27,
+      "text": "coordinates I mean unless you want to"
+    },
+    {
+      "index": 877,
+      "start": 2671.68,
+      "end": 2673.71,
+      "duration": 2.03,
+      "text": "repeat of what happened already with you"
+    },
+    {
+      "index": 878,
+      "start": 2673.72,
+      "end": 2678.15,
+      "duration": 4.43,
+      "text": "know X and Y so that will tell us we"
+    },
+    {
+      "index": 879,
+      "start": 2678.16,
+      "end": 2682.75,
+      "duration": 4.59,
+      "text": "want to integrate R stimes Rd D Theta"
+    },
+    {
+      "index": 880,
+      "start": 2682.76,
+      "end": 2685.63,
+      "duration": 2.87,
+      "text": "and the bounce for R well R will go from"
+    },
+    {
+      "index": 881,
+      "start": 2685.64,
+      "end": 2689.19,
+      "duration": 3.55,
+      "text": "0 to a no matter in which direction I go"
+    },
+    {
+      "index": 882,
+      "start": 2689.2,
+      "end": 2691.47,
+      "duration": 2.27,
+      "text": "from the origin if I fix"
+    },
+    {
+      "index": 883,
+      "start": 2691.48,
+      "end": 2696.87,
+      "duration": 5.39,
+      "text": "Theta R goes from Z to Ral a the part of"
+    },
+    {
+      "index": 884,
+      "start": 2696.88,
+      "end": 2700.15,
+      "duration": 3.27,
+      "text": "this Ray that lives inside the disc is"
+    },
+    {
+      "index": 885,
+      "start": 2700.16,
+      "end": 2701.91,
+      "duration": 1.75,
+      "text": "always from 0 to"
+    },
+    {
+      "index": 886,
+      "start": 2701.92,
+      "end": 2708.15,
+      "duration": 6.23,
+      "text": "a and Theta goes from well 0 to 2 pi for"
+    },
+    {
+      "index": 887,
+      "start": 2710.829,
+      "end": 2710.839,
+      "duration": 0.01,
+      "text": "example okay and now you can compute"
+    },
+    {
+      "index": 888,
+      "start": 2710.839,
+      "end": 2714.03,
+      "duration": 3.191,
+      "text": "this integral well I'll let you figure"
+    },
+    {
+      "index": 889,
+      "start": 2714.04,
+      "end": 2716.27,
+      "duration": 2.23,
+      "text": "it out but the inner integral becomes a"
+    },
+    {
+      "index": 890,
+      "start": 2716.28,
+      "end": 2720.47,
+      "duration": 4.19,
+      "text": "4 4 and the outer multiplies things by 2"
+    },
+    {
+      "index": 891,
+      "start": 2720.48,
+      "end": 2724.069,
+      "duration": 3.589,
+      "text": "pi so you get Pi a 4 over"
+    },
+    {
+      "index": 892,
+      "start": 2724.079,
+      "end": 2730.069,
+      "duration": 5.99,
+      "text": "two no yes"
+    },
+    {
+      "index": 893,
+      "start": 2732.829,
+      "end": 2732.839,
+      "duration": 0.01,
+      "text": "okay so that's how hard it is to spin"
+    },
+    {
+      "index": 894,
+      "start": 2732.839,
+      "end": 2736.03,
+      "duration": 3.191,
+      "text": "this disc now what"
+    },
+    {
+      "index": 895,
+      "start": 2736.04,
+      "end": 2738.309,
+      "duration": 2.269,
+      "text": "about instead of spinning it about the"
+    },
+    {
+      "index": 896,
+      "start": 2738.319,
+      "end": 2740.589,
+      "duration": 2.27,
+      "text": "center we decide actually to spin it"
+    },
+    {
+      "index": 897,
+      "start": 2740.599,
+      "end": 2743.75,
+      "duration": 3.151,
+      "text": "about a point on the"
+    },
+    {
+      "index": 898,
+      "start": 2743.76,
+      "end": 2745.549,
+      "duration": 1.789,
+      "text": "circumference so you know for example"
+    },
+    {
+      "index": 899,
+      "start": 2745.559,
+      "end": 2747.51,
+      "duration": 1.951,
+      "text": "think of a frisbee you know frisbee you"
+    },
+    {
+      "index": 900,
+      "start": 2747.52,
+      "end": 2748.79,
+      "duration": 1.27,
+      "text": "know it has this rim and so you can"
+    },
+    {
+      "index": 901,
+      "start": 2748.8,
+      "end": 2751.549,
+      "duration": 2.749,
+      "text": "actually try to make it rotate around"
+    },
+    {
+      "index": 902,
+      "start": 2751.559,
+      "end": 2752.87,
+      "duration": 1.311,
+      "text": "the point on the"
+    },
+    {
+      "index": 903,
+      "start": 2752.88,
+      "end": 2754.589,
+      "duration": 1.709,
+      "text": "circumference by holding it you know"
+    },
+    {
+      "index": 904,
+      "start": 2754.599,
+      "end": 2757.549,
+      "duration": 2.95,
+      "text": "near the r and spinning it there how"
+    },
+    {
+      "index": 905,
+      "start": 2757.559,
+      "end": 2759.549,
+      "duration": 1.99,
+      "text": "much harder is that than around the"
+    },
+    {
+      "index": 906,
+      "start": 2759.559,
+      "end": 2762.47,
+      "duration": 2.911,
+      "text": "center well we'll try to compute now the"
+    },
+    {
+      "index": 907,
+      "start": 2762.48,
+      "end": 2765.63,
+      "duration": 3.15,
+      "text": "moment of inertia about this point so we"
+    },
+    {
+      "index": 908,
+      "start": 2765.64,
+      "end": 2767.91,
+      "duration": 2.27,
+      "text": "have two options one is we keep the"
+    },
+    {
+      "index": 909,
+      "start": 2767.92,
+      "end": 2770.19,
+      "duration": 2.27,
+      "text": "system of coordinates centered here but"
+    },
+    {
+      "index": 910,
+      "start": 2770.2,
+      "end": 2771.79,
+      "duration": 1.59,
+      "text": "then the formula for distance to this"
+    },
+    {
+      "index": 911,
+      "start": 2771.8,
+      "end": 2774.069,
+      "duration": 2.269,
+      "text": "point becomes"
+    },
+    {
+      "index": 912,
+      "start": 2774.079,
+      "end": 2776.67,
+      "duration": 2.591,
+      "text": "harder the other option which is the one"
+    },
+    {
+      "index": 913,
+      "start": 2776.68,
+      "end": 2779.03,
+      "duration": 2.35,
+      "text": "I will choose is to change the"
+    },
+    {
+      "index": 914,
+      "start": 2779.04,
+      "end": 2780.51,
+      "duration": 1.47,
+      "text": "coordinates so that this point becomes"
+    },
+    {
+      "index": 915,
+      "start": 2780.52,
+      "end": 2781.15,
+      "duration": 0.63,
+      "text": "the"
+    },
+    {
+      "index": 916,
+      "start": 2781.16,
+      "end": 2785.91,
+      "duration": 4.75,
+      "text": "origin okay so let's do"
+    },
+    {
+      "index": 917,
+      "start": 2815.23,
+      "end": 2815.24,
+      "duration": 0.01,
+      "text": "so about a"
+    },
+    {
+      "index": 918,
+      "start": 2815.24,
+      "end": 2823.15,
+      "duration": 7.91,
+      "text": "point on the"
+    },
+    {
+      "index": 919,
+      "start": 2831.99,
+      "end": 2832.0,
+      "duration": 0.01,
+      "text": "do maybe is set up my region like"
+    },
+    {
+      "index": 920,
+      "start": 2832.0,
+      "end": 2834.79,
+      "duration": 2.79,
+      "text": "that you know now I I've moved the"
+    },
+    {
+      "index": 921,
+      "start": 2834.8,
+      "end": 2836.27,
+      "duration": 1.47,
+      "text": "origin so that it's on the circumference"
+    },
+    {
+      "index": 922,
+      "start": 2836.28,
+      "end": 2838.99,
+      "duration": 2.71,
+      "text": "of the disc and I will again try to find"
+    },
+    {
+      "index": 923,
+      "start": 2839.0,
+      "end": 2841.87,
+      "duration": 2.87,
+      "text": "the moment of inertia of this disc about"
+    },
+    {
+      "index": 924,
+      "start": 2841.88,
+      "end": 2845.829,
+      "duration": 3.949,
+      "text": "the"
+    },
+    {
+      "index": 925,
+      "start": 2848.67,
+      "end": 2848.68,
+      "duration": 0.01,
+      "text": "origin so it's still the double integral"
+    },
+    {
+      "index": 926,
+      "start": 2848.68,
+      "end": 2851.23,
+      "duration": 2.55,
+      "text": "of R2"
+    },
+    {
+      "index": 927,
+      "start": 2851.24,
+      "end": 2854.109,
+      "duration": 2.869,
+      "text": "da but now I want to find out how to set"
+    },
+    {
+      "index": 928,
+      "start": 2854.119,
+      "end": 2857.47,
+      "duration": 3.351,
+      "text": "up the"
+    },
+    {
+      "index": 929,
+      "start": 2860.51,
+      "end": 2860.52,
+      "duration": 0.01,
+      "text": "integral so I could try to use XY"
+    },
+    {
+      "index": 930,
+      "start": 2860.52,
+      "end": 2862.99,
+      "duration": 2.47,
+      "text": "coordinates and it would work or I can"
+    },
+    {
+      "index": 931,
+      "start": 2863.0,
+      "end": 2864.51,
+      "duration": 1.51,
+      "text": "use polar coordinates and actually it"
+    },
+    {
+      "index": 932,
+      "start": 2864.52,
+      "end": 2867.589,
+      "duration": 3.069,
+      "text": "works a little bit better that"
+    },
+    {
+      "index": 933,
+      "start": 2867.599,
+      "end": 2870.87,
+      "duration": 3.271,
+      "text": "way but both both are"
+    },
+    {
+      "index": 934,
+      "start": 2870.88,
+      "end": 2874.51,
+      "duration": 3.63,
+      "text": "doable so let's say I do it this way so"
+    },
+    {
+      "index": 935,
+      "start": 2874.52,
+      "end": 2875.829,
+      "duration": 1.309,
+      "text": "I have to figure out how to set up my"
+    },
+    {
+      "index": 936,
+      "start": 2875.839,
+      "end": 2879.15,
+      "duration": 3.311,
+      "text": "bounds right so what have bounds for"
+    },
+    {
+      "index": 937,
+      "start": 2879.16,
+      "end": 2884.03,
+      "duration": 4.87,
+      "text": "R well if I fix a value of"
+    },
+    {
+      "index": 938,
+      "start": 2887.349,
+      "end": 2887.359,
+      "duration": 0.01,
+      "text": "theta so it means I chose an angle here"
+    },
+    {
+      "index": 939,
+      "start": 2887.359,
+      "end": 2890.23,
+      "duration": 2.871,
+      "text": "and now I'm shooting a ray from the"
+    },
+    {
+      "index": 940,
+      "start": 2890.24,
+      "end": 2892.23,
+      "duration": 1.99,
+      "text": "origin in that"
+    },
+    {
+      "index": 941,
+      "start": 2892.24,
+      "end": 2896.95,
+      "duration": 4.71,
+      "text": "direction so I enter my region at Ral Z"
+    },
+    {
+      "index": 942,
+      "start": 2896.96,
+      "end": 2898.67,
+      "duration": 1.71,
+      "text": "but hasn't"
+    },
+    {
+      "index": 943,
+      "start": 2898.68,
+      "end": 2902.069,
+      "duration": 3.389,
+      "text": "changed question is where do I exit the"
+    },
+    {
+      "index": 944,
+      "start": 2902.079,
+      "end": 2905.75,
+      "duration": 3.671,
+      "text": "region so what is that"
+    },
+    {
+      "index": 945,
+      "start": 2905.76,
+      "end": 2908.589,
+      "duration": 2.829,
+      "text": "distance"
+    },
+    {
+      "index": 946,
+      "start": 2908.599,
+      "end": 2909.63,
+      "duration": 1.031,
+      "text": "okay so maybe you've seen it in"
+    },
+    {
+      "index": 947,
+      "start": 2909.64,
+      "end": 2911.63,
+      "duration": 1.99,
+      "text": "recitation maybe"
+    },
+    {
+      "index": 948,
+      "start": 2911.64,
+      "end": 2915.349,
+      "duration": 3.709,
+      "text": "not um"
+    },
+    {
+      "index": 949,
+      "start": 2915.359,
+      "end": 2917.91,
+      "duration": 2.551,
+      "text": "so let's see well actually I should have"
+    },
+    {
+      "index": 950,
+      "start": 2917.92,
+      "end": 2920.03,
+      "duration": 2.11,
+      "text": "written down the radius of the circle is"
+    },
+    {
+      "index": 951,
+      "start": 2920.04,
+      "end": 2922.87,
+      "duration": 2.83,
+      "text": "a so this distance here is 2"
+    },
+    {
+      "index": 952,
+      "start": 2922.88,
+      "end": 2926.51,
+      "duration": 3.63,
+      "text": "a okay"
+    },
+    {
+      "index": 953,
+      "start": 2929.75,
+      "end": 2929.76,
+      "duration": 0.01,
+      "text": "so if you draw this segment in here you"
+    },
+    {
+      "index": 954,
+      "start": 2929.76,
+      "end": 2933.03,
+      "duration": 3.27,
+      "text": "know that here you have a right"
+    },
+    {
+      "index": 955,
+      "start": 2933.04,
+      "end": 2935.95,
+      "duration": 2.91,
+      "text": "angle so you have a right triangle the"
+    },
+    {
+      "index": 956,
+      "start": 2935.96,
+      "end": 2939.109,
+      "duration": 3.149,
+      "text": "hypotenuse here has length 2 a this"
+    },
+    {
+      "index": 957,
+      "start": 2939.119,
+      "end": 2943.03,
+      "duration": 3.911,
+      "text": "angle is Theta well this length is 2"
+    },
+    {
+      "index": 958,
+      "start": 2943.04,
+      "end": 2947.99,
+      "duration": 4.95,
+      "text": "a cosine"
+    },
+    {
+      "index": 959,
+      "start": 2951.63,
+      "end": 2951.64,
+      "duration": 0.01,
+      "text": "Theta okay so the polar coordinates"
+    },
+    {
+      "index": 960,
+      "start": 2951.64,
+      "end": 2953.99,
+      "duration": 2.35,
+      "text": "equation of this circle passing through"
+    },
+    {
+      "index": 961,
+      "start": 2954.0,
+      "end": 2962.47,
+      "duration": 8.47,
+      "text": "the origin is Ral 2 a cosine"
+    },
+    {
+      "index": 962,
+      "start": 2968.109,
+      "end": 2968.119,
+      "duration": 0.01,
+      "text": "Theta so R will go from 0 to 2 a cosine"
+    },
+    {
+      "index": 963,
+      "start": 2968.119,
+      "end": 2972.789,
+      "duration": 4.67,
+      "text": "F okay that's the distance"
+    },
+    {
+      "index": 964,
+      "start": 2972.799,
+      "end": 2976.43,
+      "duration": 3.631,
+      "text": "here now what are the bounds for"
+    },
+    {
+      "index": 965,
+      "start": 2976.44,
+      "end": 2979.39,
+      "duration": 2.95,
+      "text": "Theta it's not quite 0 to 2 pi because"
+    },
+    {
+      "index": 966,
+      "start": 2979.4,
+      "end": 2981.67,
+      "duration": 2.27,
+      "text": "actually you see in this direction if I"
+    },
+    {
+      "index": 967,
+      "start": 2981.68,
+      "end": 2983.069,
+      "duration": 1.389,
+      "text": "shoot a in this direction I will never"
+    },
+    {
+      "index": 968,
+      "start": 2983.079,
+      "end": 2985.03,
+      "duration": 1.951,
+      "text": "meet my region so I have to"
+    },
+    {
+      "index": 969,
+      "start": 2985.04,
+      "end": 2988.23,
+      "duration": 3.19,
+      "text": "actually think a bit more well the the"
+    },
+    {
+      "index": 970,
+      "start": 2988.24,
+      "end": 2990.349,
+      "duration": 2.109,
+      "text": "directions in which I will actually hit"
+    },
+    {
+      "index": 971,
+      "start": 2990.359,
+      "end": 2993.15,
+      "duration": 2.791,
+      "text": "my circle are all the directions in the"
+    },
+    {
+      "index": 972,
+      "start": 2993.16,
+      "end": 2994.789,
+      "duration": 1.629,
+      "text": "right half of the"
+    },
+    {
+      "index": 973,
+      "start": 2994.799,
+      "end": 2997.87,
+      "duration": 3.071,
+      "text": "plane okay I mean of course if I shoot"
+    },
+    {
+      "index": 974,
+      "start": 2997.88,
+      "end": 2999.63,
+      "duration": 1.75,
+      "text": "very close to the axis you might think"
+    },
+    {
+      "index": 975,
+      "start": 2999.64,
+      "end": 3001.19,
+      "duration": 1.55,
+      "text": "oh I won't be in there but actually"
+    },
+    {
+      "index": 976,
+      "start": 3001.2,
+      "end": 3003.19,
+      "duration": 1.99,
+      "text": "that's not true because here the circle"
+    },
+    {
+      "index": 977,
+      "start": 3003.2,
+      "end": 3005.67,
+      "duration": 2.47,
+      "text": "is tangent to the axis so okay no matter"
+    },
+    {
+      "index": 978,
+      "start": 3005.68,
+      "end": 3007.589,
+      "duration": 1.909,
+      "text": "which direction I take I will still have"
+    },
+    {
+      "index": 979,
+      "start": 3007.599,
+      "end": 3009.39,
+      "duration": 1.791,
+      "text": "a little tiny"
+    },
+    {
+      "index": 980,
+      "start": 3009.4,
+      "end": 3011.67,
+      "duration": 2.27,
+      "text": "piece so the angle actually goes from"
+    },
+    {
+      "index": 981,
+      "start": 3011.68,
+      "end": 3014.27,
+      "duration": 2.59,
+      "text": "minus Pi / 2 to Pi /"
+    },
+    {
+      "index": 982,
+      "start": 3014.28,
+      "end": 3019.67,
+      "duration": 5.39,
+      "text": "2 so now if you compute that you will"
+    },
+    {
+      "index": 983,
+      "start": 3019.68,
+      "end": 3022.109,
+      "duration": 2.429,
+      "text": "get well the inner"
+    },
+    {
+      "index": 984,
+      "start": 3022.119,
+      "end": 3027.19,
+      "duration": 5.071,
+      "text": "integral will be R 4 4 between 0 and 2 a"
+    },
+    {
+      "index": 985,
+      "start": 3027.2,
+      "end": 3031.109,
+      "duration": 3.909,
+      "text": "cosine Theta which will turn out to be 4"
+    },
+    {
+      "index": 986,
+      "start": 3031.119,
+      "end": 3037.99,
+      "duration": 6.871,
+      "text": "a 4 cosine 4 Theta and now you will"
+    },
+    {
+      "index": 987,
+      "start": 3038.0,
+      "end": 3042.789,
+      "duration": 4.789,
+      "text": "integrate that from minus pi/ 2 to Pi /"
+    },
+    {
+      "index": 988,
+      "start": 3046.99,
+      "end": 3047.0,
+      "duration": 0.01,
+      "text": "2 and well that's again the evil"
+    },
+    {
+      "index": 989,
+      "start": 3047.0,
+      "end": 3049.51,
+      "duration": 2.51,
+      "text": "integral that we had yesterday so either"
+    },
+    {
+      "index": 990,
+      "start": 3049.52,
+      "end": 3052.109,
+      "duration": 2.589,
+      "text": "we remember the method from yesterday or"
+    },
+    {
+      "index": 991,
+      "start": 3052.119,
+      "end": 3053.589,
+      "duration": 1.47,
+      "text": "we remember from yesterday that actually"
+    },
+    {
+      "index": 992,
+      "start": 3053.599,
+      "end": 3055.87,
+      "duration": 2.271,
+      "text": "there's formulas in the notes to help"
+    },
+    {
+      "index": 993,
+      "start": 3055.88,
+      "end": 3057.829,
+      "duration": 1.949,
+      "text": "you so on home homework you can use"
+    },
+    {
+      "index": 994,
+      "start": 3057.839,
+      "end": 3059.23,
+      "duration": 1.391,
+      "text": "these formulas in the notes at the"
+    },
+    {
+      "index": 995,
+      "start": 3059.24,
+      "end": 3064.15,
+      "duration": 4.91,
+      "text": "beginning of section"
+    },
+    {
+      "index": 996,
+      "start": 3066.63,
+      "end": 3066.64,
+      "duration": 0.01,
+      "text": "3B there's formulas for these particular"
+    },
+    {
+      "index": 997,
+      "start": 3066.64,
+      "end": 3069.39,
+      "duration": 2.75,
+      "text": "kinds of integrals and that will end up"
+    },
+    {
+      "index": 998,
+      "start": 3069.4,
+      "end": 3073.63,
+      "duration": 4.23,
+      "text": "being three halves of Pi a to 4 so in"
+    },
+    {
+      "index": 999,
+      "start": 3073.64,
+      "end": 3075.71,
+      "duration": 2.07,
+      "text": "case you wanted to know it's three times"
+    },
+    {
+      "index": 1000,
+      "start": 3075.72,
+      "end": 3077.789,
+      "duration": 2.069,
+      "text": "harder to spin a frisbe about a point on"
+    },
+    {
+      "index": 1001,
+      "start": 3077.799,
+      "end": 3079.95,
+      "duration": 2.151,
+      "text": "circumference than around the center see"
+    },
+    {
+      "index": 1002,
+      "start": 3079.96,
+      "end": 3082.589,
+      "duration": 2.629,
+      "text": "we got three times the moment of inertia"
+    },
+    {
+      "index": 1003,
+      "start": 3082.599,
+      "end": 3085.03,
+      "duration": 2.431,
+      "text": "about the"
+    },
+    {
+      "index": 1004,
+      "start": 3088.47,
+      "end": 3088.48,
+      "duration": 0.01,
+      "text": "center okay that's it have a nice"
+    },
+    {
+      "index": 1005,
+      "start": 3088.48,
+      "end": 3091.48,
+      "duration": 3.0,
+      "text": "weekend"
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

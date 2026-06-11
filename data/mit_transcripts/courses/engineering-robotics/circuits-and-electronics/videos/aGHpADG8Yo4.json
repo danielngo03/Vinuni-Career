@@ -1,0 +1,6024 @@
+{
+  "video": {
+    "id": "aGHpADG8Yo4",
+    "title": "Lecture 22 - Application of Shift Registers",
+    "url": "https://www.youtube.com/watch?v=aGHpADG8Yo4",
+    "channel": "nptelhrd",
+    "duration": 3174,
+    "language": "en"
+  },
+  "segment_count": 858,
+  "segments": [
+    {
+      "index": 0,
+      "start": 23.47,
+      "end": 23.48,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 1,
+      "start": 23.48,
+      "end": 28.95,
+      "duration": 5.47,
+      "text": "oh oh"
+    },
+    {
+      "index": 2,
+      "start": 30.4,
+      "end": 30.41,
+      "duration": 0.01,
+      "text": "sh"
+    },
+    {
+      "index": 3,
+      "start": 30.41,
+      "end": 58.91,
+      "duration": 28.5,
+      "text": "[Music]"
+    },
+    {
+      "index": 4,
+      "start": 140.0,
+      "end": 141.91,
+      "duration": 1.91,
+      "text": "today we'll see some of the applications"
+    },
+    {
+      "index": 5,
+      "start": 141.92,
+      "end": 145.55,
+      "duration": 3.63,
+      "text": "of um shift registers we talked about"
+    },
+    {
+      "index": 6,
+      "start": 145.56,
+      "end": 150.309,
+      "duration": 4.749,
+      "text": "flip flops counters and registers"
+    },
+    {
+      "index": 7,
+      "start": 150.319,
+      "end": 153.309,
+      "duration": 2.99,
+      "text": "registers are group of flip flops in"
+    },
+    {
+      "index": 8,
+      "start": 153.319,
+      "end": 155.75,
+      "duration": 2.431,
+      "text": "which you can store"
+    },
+    {
+      "index": 9,
+      "start": 155.76,
+      "end": 158.869,
+      "duration": 3.109,
+      "text": "data then we said the shifters the"
+    },
+    {
+      "index": 10,
+      "start": 158.879,
+      "end": 160.83,
+      "duration": 1.951,
+      "text": "registers can have a shifting feature so"
+    },
+    {
+      "index": 11,
+      "start": 160.84,
+      "end": 163.83,
+      "duration": 2.99,
+      "text": "that once you put a data you can shift"
+    },
+    {
+      "index": 12,
+      "start": 163.84,
+      "end": 165.43,
+      "duration": 1.59,
+      "text": "that data either to the left or the"
+    },
+    {
+      "index": 13,
+      "start": 165.44,
+      "end": 167.47,
+      "duration": 2.03,
+      "text": "right and these are called shift"
+    },
+    {
+      "index": 14,
+      "start": 167.48,
+      "end": 169.83,
+      "duration": 2.35,
+      "text": "registers there are lots of applications"
+    },
+    {
+      "index": 15,
+      "start": 169.84,
+      "end": 173.149,
+      "duration": 3.309,
+      "text": "of course we saw applications"
+    },
+    {
+      "index": 16,
+      "start": 173.159,
+      "end": 176.11,
+      "duration": 2.951,
+      "text": "of um flip flops and"
+    },
+    {
+      "index": 17,
+      "start": 176.12,
+      "end": 178.309,
+      "duration": 2.189,
+      "text": "counters uh likewise the applications"
+    },
+    {
+      "index": 18,
+      "start": 178.319,
+      "end": 180.55,
+      "duration": 2.231,
+      "text": "for registers the the"
+    },
+    {
+      "index": 19,
+      "start": 180.56,
+      "end": 183.589,
+      "duration": 3.029,
+      "text": "most prominent application of register"
+    },
+    {
+      "index": 20,
+      "start": 183.599,
+      "end": 185.789,
+      "duration": 2.19,
+      "text": "is the memory storage use them as"
+    },
+    {
+      "index": 21,
+      "start": 185.799,
+      "end": 187.03,
+      "duration": 1.231,
+      "text": "storage"
+    },
+    {
+      "index": 22,
+      "start": 187.04,
+      "end": 189.309,
+      "duration": 2.269,
+      "text": "elements shift registers are sometimes"
+    },
+    {
+      "index": 23,
+      "start": 189.319,
+      "end": 191.03,
+      "duration": 1.711,
+      "text": "used for other"
+    },
+    {
+      "index": 24,
+      "start": 191.04,
+      "end": 193.71,
+      "duration": 2.67,
+      "text": "applications um I thought we'll see some"
+    },
+    {
+      "index": 25,
+      "start": 193.72,
+      "end": 196.03,
+      "duration": 2.31,
+      "text": "of those applications"
+    },
+    {
+      "index": 26,
+      "start": 196.04,
+      "end": 208.67,
+      "duration": 12.63,
+      "text": "today shift register"
+    },
+    {
+      "index": 27,
+      "start": 234.03,
+      "end": 234.04,
+      "duration": 0.01,
+      "text": "with a shift right feature so"
+    },
+    {
+      "index": 28,
+      "start": 234.04,
+      "end": 236.589,
+      "duration": 2.549,
+      "text": "it's a 4"
+    },
+    {
+      "index": 29,
+      "start": 236.599,
+      "end": 238.67,
+      "duration": 2.071,
+      "text": "bit shift"
+    },
+    {
+      "index": 30,
+      "start": 238.68,
+      "end": 243.429,
+      "duration": 4.749,
+      "text": "right"
+    },
+    {
+      "index": 31,
+      "start": 248.589,
+      "end": 248.599,
+      "duration": 0.01,
+      "text": "register so the this will have let us"
+    },
+    {
+      "index": 32,
+      "start": 248.599,
+      "end": 252.83,
+      "duration": 4.231,
+      "text": "assume this a serial in parallel"
+    },
+    {
+      "index": 33,
+      "start": 260.27,
+      "end": 260.28,
+      "duration": 0.01,
+      "text": "data also you can serial in parallel out"
+    },
+    {
+      "index": 34,
+      "start": 260.28,
+      "end": 261.629,
+      "duration": 1.349,
+      "text": "does not mean you cannot put parallel"
+    },
+    {
+      "index": 35,
+      "start": 261.639,
+      "end": 263.67,
+      "duration": 2.031,
+      "text": "data parallel input also will be there"
+    },
+    {
+      "index": 36,
+      "start": 263.68,
+      "end": 265.99,
+      "duration": 2.31,
+      "text": "with the loading feature otherwise"
+    },
+    {
+      "index": 37,
+      "start": 266.0,
+      "end": 268.27,
+      "duration": 2.27,
+      "text": "normally data is put through the"
+    },
+    {
+      "index": 38,
+      "start": 268.28,
+      "end": 272.11,
+      "duration": 3.83,
+      "text": "serial so this will have the data in"
+    },
+    {
+      "index": 39,
+      "start": 272.12,
+      "end": 274.15,
+      "duration": 2.03,
+      "text": "clock of"
+    },
+    {
+      "index": 40,
+      "start": 274.16,
+      "end": 275.83,
+      "duration": 1.67,
+      "text": "course"
+    },
+    {
+      "index": 41,
+      "start": 275.84,
+      "end": 278.189,
+      "duration": 2.349,
+      "text": "clock either positive Edge or negative"
+    },
+    {
+      "index": 42,
+      "start": 278.199,
+      "end": 280.23,
+      "duration": 2.031,
+      "text": "doesn't"
+    },
+    {
+      "index": 43,
+      "start": 280.24,
+      "end": 284.07,
+      "duration": 3.83,
+      "text": "matter the input of the serial input is"
+    },
+    {
+      "index": 44,
+      "start": 284.08,
+      "end": 286.39,
+      "duration": 2.31,
+      "text": "called serial"
+    },
+    {
+      "index": 45,
+      "start": 286.4,
+      "end": 290.83,
+      "duration": 4.43,
+      "text": "I serial"
+    },
+    {
+      "index": 46,
+      "start": 295.87,
+      "end": 295.88,
+      "duration": 0.01,
+      "text": "input and the clock will shift the bits"
+    },
+    {
+      "index": 47,
+      "start": 295.88,
+      "end": 298.51,
+      "duration": 2.63,
+      "text": "we should also have we should also have"
+    },
+    {
+      "index": 48,
+      "start": 298.52,
+      "end": 300.67,
+      "duration": 2.15,
+      "text": "load and"
+    },
+    {
+      "index": 49,
+      "start": 300.68,
+      "end": 303.43,
+      "duration": 2.75,
+      "text": "clear"
+    },
+    {
+      "index": 50,
+      "start": 306.749,
+      "end": 306.759,
+      "duration": 0.01,
+      "text": "features because you want to start with"
+    },
+    {
+      "index": 51,
+      "start": 306.759,
+      "end": 309.59,
+      "duration": 2.831,
+      "text": "the"
+    },
+    {
+      "index": 52,
+      "start": 312.189,
+      "end": 312.199,
+      "duration": 0.01,
+      "text": "pattern that also you can do by putting"
+    },
+    {
+      "index": 53,
+      "start": 312.199,
+      "end": 314.51,
+      "duration": 2.311,
+      "text": "the data one at a time and shifting it"
+    },
+    {
+      "index": 54,
+      "start": 314.52,
+      "end": 315.909,
+      "duration": 1.389,
+      "text": "that's one way of loading the other way"
+    },
+    {
+      "index": 55,
+      "start": 315.919,
+      "end": 318.71,
+      "duration": 2.791,
+      "text": "of loading is to give parallel inputs"
+    },
+    {
+      "index": 56,
+      "start": 318.72,
+      "end": 322.189,
+      "duration": 3.469,
+      "text": "and then give all the bits at the same"
+    },
+    {
+      "index": 57,
+      "start": 322.199,
+      "end": 325.67,
+      "duration": 3.471,
+      "text": "time so"
+    },
+    {
+      "index": 58,
+      "start": 328.23,
+      "end": 328.24,
+      "duration": 0.01,
+      "text": "outputs so these are parallel"
+    },
+    {
+      "index": 59,
+      "start": 328.24,
+      "end": 332.35,
+      "duration": 4.11,
+      "text": "outputs this"
+    },
+    {
+      "index": 60,
+      "start": 348.51,
+      "end": 348.52,
+      "duration": 0.01,
+      "text": "d AB CD"
+    },
+    {
+      "index": 61,
+      "start": 348.52,
+      "end": 352.99,
+      "duration": 4.47,
+      "text": "again first you put a pattern in"
+    },
+    {
+      "index": 62,
+      "start": 353.0,
+      "end": 356.11,
+      "duration": 3.11,
+      "text": "this load"
+    },
+    {
+      "index": 63,
+      "start": 356.12,
+      "end": 358.469,
+      "duration": 2.349,
+      "text": "it of course you want to clear it later"
+    },
+    {
+      "index": 64,
+      "start": 358.479,
+      "end": 360.59,
+      "duration": 2.111,
+      "text": "on you can do a clearing"
+    },
+    {
+      "index": 65,
+      "start": 360.6,
+      "end": 364.39,
+      "duration": 3.79,
+      "text": "then you clock it as you clock it the"
+    },
+    {
+      "index": 66,
+      "start": 364.4,
+      "end": 367.51,
+      "duration": 3.11,
+      "text": "bits get shifted oneit one p to the"
+    },
+    {
+      "index": 67,
+      "start": 367.52,
+      "end": 368.51,
+      "duration": 0.99,
+      "text": "right that's why it's called shift"
+    },
+    {
+      "index": 68,
+      "start": 368.52,
+      "end": 371.15,
+      "duration": 2.63,
+      "text": "register to the right so what I'm going"
+    },
+    {
+      "index": 69,
+      "start": 371.16,
+      "end": 375.79,
+      "duration": 4.63,
+      "text": "to do is to take the output of"
+    },
+    {
+      "index": 70,
+      "start": 402.629,
+      "end": 402.639,
+      "duration": 0.01,
+      "text": "it this bit goes here this bit goes here"
+    },
+    {
+      "index": 71,
+      "start": 402.639,
+      "end": 405.909,
+      "duration": 3.27,
+      "text": "this bit goes here and the exclusive of"
+    },
+    {
+      "index": 72,
+      "start": 405.919,
+      "end": 408.99,
+      "duration": 3.071,
+      "text": "these two bits is loaded as a fresh"
+    },
+    {
+      "index": 73,
+      "start": 409.0,
+      "end": 412.029,
+      "duration": 3.029,
+      "text": "input so you can as you clock it this"
+    },
+    {
+      "index": 74,
+      "start": 412.039,
+      "end": 414.87,
+      "duration": 2.831,
+      "text": "will go on so let assume that has"
+    },
+    {
+      "index": 75,
+      "start": 414.88,
+      "end": 416.51,
+      "duration": 1.63,
+      "text": "initially I'm able to load a pattern of"
+    },
+    {
+      "index": 76,
+      "start": 416.52,
+      "end": 418.39,
+      "duration": 1.87,
+      "text": "1"
+    },
+    {
+      "index": 77,
+      "start": 418.4,
+      "end": 421.67,
+      "duration": 3.27,
+      "text": "0"
+    },
+    {
+      "index": 78,
+      "start": 430.589,
+      "end": 430.599,
+      "duration": 0.01,
+      "text": "pattern just assume that you can assume"
+    },
+    {
+      "index": 79,
+      "start": 430.599,
+      "end": 434.27,
+      "duration": 3.671,
+      "text": "anything I'm just assuming"
+    },
+    {
+      "index": 80,
+      "start": 442.07,
+      "end": 442.08,
+      "duration": 0.01,
+      "text": "0 then with the next clock"
+    },
+    {
+      "index": 81,
+      "start": 442.08,
+      "end": 447.95,
+      "duration": 5.87,
+      "text": "pulse at first clock"
+    },
+    {
+      "index": 82,
+      "start": 451.35,
+      "end": 451.36,
+      "duration": 0.01,
+      "text": "pulse what will happen is this one gets"
+    },
+    {
+      "index": 83,
+      "start": 451.36,
+      "end": 461.189,
+      "duration": 9.829,
+      "text": "here this zero gets here this zero gets"
+    },
+    {
+      "index": 84,
+      "start": 466.23,
+      "end": 466.24,
+      "duration": 0.01,
+      "text": "here and a new bit will be added to the"
+    },
+    {
+      "index": 85,
+      "start": 466.24,
+      "end": 468.83,
+      "duration": 2.59,
+      "text": "input which will go into QA since this"
+    },
+    {
+      "index": 86,
+      "start": 468.84,
+      "end": 470.43,
+      "duration": 1.59,
+      "text": "is an exclusive R of c and d what will"
+    },
+    {
+      "index": 87,
+      "start": 470.44,
+      "end": 473.149,
+      "duration": 2.709,
+      "text": "be the exclusive R of c and"
+    },
+    {
+      "index": 88,
+      "start": 473.159,
+      "end": 478.309,
+      "duration": 5.15,
+      "text": "d zero so that zero will get into this"
+    },
+    {
+      "index": 89,
+      "start": 478.319,
+      "end": 480.39,
+      "duration": 2.071,
+      "text": "position"
+    },
+    {
+      "index": 90,
+      "start": 480.4,
+      "end": 482.35,
+      "duration": 1.95,
+      "text": "so again I shift it after the second"
+    },
+    {
+      "index": 91,
+      "start": 482.36,
+      "end": 484.909,
+      "duration": 2.549,
+      "text": "clock pulse this will"
+    },
+    {
+      "index": 92,
+      "start": 484.919,
+      "end": 488.11,
+      "duration": 3.191,
+      "text": "become 0 1"
+    },
+    {
+      "index": 93,
+      "start": 488.12,
+      "end": 494.43,
+      "duration": 6.31,
+      "text": "0 is also zero our third clock"
+    },
+    {
+      "index": 94,
+      "start": 511.23,
+      "end": 511.24,
+      "duration": 0.01,
+      "text": "pulse what will be"
+    },
+    {
+      "index": 95,
+      "start": 511.24,
+      "end": 520.829,
+      "duration": 9.589,
+      "text": "this what will be the new new bit"
+    },
+    {
+      "index": 96,
+      "start": 525.67,
+      "end": 525.68,
+      "duration": 0.01,
+      "text": "zero one ex all this two all you have to"
+    },
+    {
+      "index": 97,
+      "start": 525.68,
+      "end": 527.509,
+      "duration": 1.829,
+      "text": "do is to shift these three bits here and"
+    },
+    {
+      "index": 98,
+      "start": 527.519,
+      "end": 532.55,
+      "duration": 5.031,
+      "text": "get the exclusive R of this"
+    },
+    {
+      "index": 99,
+      "start": 535.43,
+      "end": 535.44,
+      "duration": 0.01,
+      "text": "here"
+    },
+    {
+      "index": 100,
+      "start": 535.44,
+      "end": 538.19,
+      "duration": 2.75,
+      "text": "right now after this this will"
+    },
+    {
+      "index": 101,
+      "start": 538.2,
+      "end": 540.59,
+      "duration": 2.39,
+      "text": "be one Z"
+    },
+    {
+      "index": 102,
+      "start": 540.6,
+      "end": 544.069,
+      "duration": 3.469,
+      "text": "1 what"
+    },
+    {
+      "index": 103,
+      "start": 544.079,
+      "end": 546.75,
+      "duration": 2.671,
+      "text": "Z 0 1"
+    },
+    {
+      "index": 104,
+      "start": 546.76,
+      "end": 549.949,
+      "duration": 3.189,
+      "text": "0"
+    },
+    {
+      "index": 105,
+      "start": 563.71,
+      "end": 563.72,
+      "duration": 0.01,
+      "text": "1 1"
+    },
+    {
+      "index": 106,
+      "start": 563.72,
+      "end": 565.509,
+      "duration": 1.789,
+      "text": "0 be"
+    },
+    {
+      "index": 107,
+      "start": 565.519,
+      "end": 568.11,
+      "duration": 2.591,
+      "text": "one one one"
+    },
+    {
+      "index": 108,
+      "start": 568.12,
+      "end": 572.069,
+      "duration": 3.949,
+      "text": "one"
+    },
+    {
+      "index": 109,
+      "start": 574.069,
+      "end": 574.079,
+      "duration": 0.01,
+      "text": "1 then it will"
+    },
+    {
+      "index": 110,
+      "start": 574.079,
+      "end": 579.23,
+      "duration": 5.151,
+      "text": "be 1 1 1"
+    },
+    {
+      "index": 111,
+      "start": 582.99,
+      "end": 583.0,
+      "duration": 0.01,
+      "text": "0 I'll write here after this it will"
+    },
+    {
+      "index": 112,
+      "start": 583.0,
+      "end": 586.71,
+      "duration": 3.71,
+      "text": "be 01"
+    },
+    {
+      "index": 113,
+      "start": 586.72,
+      "end": 588.23,
+      "duration": 1.51,
+      "text": "1"
+    },
+    {
+      "index": 114,
+      "start": 588.24,
+      "end": 590.59,
+      "duration": 2.35,
+      "text": "1"
+    },
+    {
+      "index": 115,
+      "start": 590.6,
+      "end": 592.15,
+      "duration": 1.55,
+      "text": "0"
+    },
+    {
+      "index": 116,
+      "start": 592.16,
+      "end": 597.069,
+      "duration": 4.909,
+      "text": "then 0 0 1"
+    },
+    {
+      "index": 117,
+      "start": 597.079,
+      "end": 601.11,
+      "duration": 4.031,
+      "text": "0 1 0"
+    },
+    {
+      "index": 118,
+      "start": 601.12,
+      "end": 610.55,
+      "duration": 9.43,
+      "text": "Z which is"
+    },
+    {
+      "index": 119,
+      "start": 612.11,
+      "end": 612.12,
+      "duration": 0.01,
+      "text": "this"
+    },
+    {
+      "index": 120,
+      "start": 612.12,
+      "end": 614.47,
+      "duration": 2.35,
+      "text": "so we're just putting One initial"
+    },
+    {
+      "index": 121,
+      "start": 614.48,
+      "end": 616.47,
+      "duration": 1.99,
+      "text": "pattern of course this only arbitrary"
+    },
+    {
+      "index": 122,
+      "start": 616.48,
+      "end": 618.87,
+      "duration": 2.39,
+      "text": "pattern it doesn't have to be 1 0 0 0"
+    },
+    {
+      "index": 123,
+      "start": 618.88,
+      "end": 620.79,
+      "duration": 1.91,
+      "text": "you can put any other pattern"
+    },
+    {
+      "index": 124,
+      "start": 620.8,
+      "end": 624.15,
+      "duration": 3.35,
+      "text": "too and I get shifting every time they"
+    },
+    {
+      "index": 125,
+      "start": 624.16,
+      "end": 626.99,
+      "duration": 2.83,
+      "text": "apply clock pulse the bits get shifted"
+    },
+    {
+      "index": 126,
+      "start": 627.0,
+      "end": 628.87,
+      "duration": 1.87,
+      "text": "the bits get shifted one bit P to the"
+    },
+    {
+      "index": 127,
+      "start": 628.88,
+      "end": 629.75,
+      "duration": 0.87,
+      "text": "right"
+    },
+    {
+      "index": 128,
+      "start": 629.76,
+      "end": 631.55,
+      "duration": 1.79,
+      "text": "and a new bit is added to the right new"
+    },
+    {
+      "index": 129,
+      "start": 631.56,
+      "end": 633.75,
+      "duration": 2.19,
+      "text": "bit add to the left then again shift it"
+    },
+    {
+      "index": 130,
+      "start": 633.76,
+      "end": 636.509,
+      "duration": 2.749,
+      "text": "and so forth so what happens is how many"
+    },
+    {
+      "index": 131,
+      "start": 636.519,
+      "end": 638.91,
+      "duration": 2.391,
+      "text": "how many different how many different"
+    },
+    {
+      "index": 132,
+      "start": 638.92,
+      "end": 640.71,
+      "duration": 1.79,
+      "text": "patterns are here this is the starting"
+    },
+    {
+      "index": 133,
+      "start": 640.72,
+      "end": 645.269,
+      "duration": 4.549,
+      "text": "pattern so 1 2 3 4 5 6 7 8 9 10 11 12 13"
+    },
+    {
+      "index": 134,
+      "start": 645.279,
+      "end": 648.509,
+      "duration": 3.23,
+      "text": "14 15 patterns again it repeats so the"
+    },
+    {
+      "index": 135,
+      "start": 648.519,
+      "end": 650.949,
+      "duration": 2.43,
+      "text": "first clock second clock third clock"
+    },
+    {
+      "index": 136,
+      "start": 650.959,
+      "end": 654.75,
+      "duration": 3.791,
+      "text": "fourth fifth 6th 7th"
+    },
+    {
+      "index": 137,
+      "start": 654.76,
+      "end": 661.389,
+      "duration": 6.629,
+      "text": "8th 10th 11 12 13th"
+    },
+    {
+      "index": 138,
+      "start": 664.55,
+      "end": 664.56,
+      "duration": 0.01,
+      "text": "CL 15th"
+    },
+    {
+      "index": 139,
+      "start": 664.56,
+      "end": 667.629,
+      "duration": 3.069,
+      "text": "clock so this is zero so 15 clock pulses"
+    },
+    {
+      "index": 140,
+      "start": 667.639,
+      "end": 671.43,
+      "duration": 3.791,
+      "text": "after 15 so the the the frequency of"
+    },
+    {
+      "index": 141,
+      "start": 671.44,
+      "end": 673.99,
+      "duration": 2.55,
+      "text": "repetition is 15 clock pulses duration"
+    },
+    {
+      "index": 142,
+      "start": 674.0,
+      "end": 675.11,
+      "duration": 1.11,
+      "text": "15 CL"
+    },
+    {
+      "index": 143,
+      "start": 675.12,
+      "end": 678.15,
+      "duration": 3.03,
+      "text": "durations during 15 CL after 15 clock PS"
+    },
+    {
+      "index": 144,
+      "start": 678.16,
+      "end": 680.47,
+      "duration": 2.31,
+      "text": "the original pattern is"
+    },
+    {
+      "index": 145,
+      "start": 680.48,
+      "end": 682.509,
+      "duration": 2.029,
+      "text": "restored"
+    },
+    {
+      "index": 146,
+      "start": 682.519,
+      "end": 685.03,
+      "duration": 2.511,
+      "text": "okay now there are only 16 possibilities"
+    },
+    {
+      "index": 147,
+      "start": 685.04,
+      "end": 686.99,
+      "duration": 1.95,
+      "text": "with four bits so I get all the four all"
+    },
+    {
+      "index": 148,
+      "start": 687.0,
+      "end": 690.069,
+      "duration": 3.069,
+      "text": "the all except one I don't don't get 0 0"
+    },
+    {
+      "index": 149,
+      "start": 690.079,
+      "end": 692.43,
+      "duration": 2.351,
+      "text": "if I get 0 00 0 what will happen it'll"
+    },
+    {
+      "index": 150,
+      "start": 692.44,
+      "end": 694.389,
+      "duration": 1.949,
+      "text": "keep repeating so I should not put a 0"
+    },
+    {
+      "index": 151,
+      "start": 694.399,
+      "end": 696.79,
+      "duration": 2.391,
+      "text": "00 0 0 to start with because when you"
+    },
+    {
+      "index": 152,
+      "start": 696.8,
+      "end": 700.55,
+      "duration": 3.75,
+      "text": "put 000000 it gets shifted 0000 0 again"
+    },
+    {
+      "index": 153,
+      "start": 700.56,
+      "end": 703.15,
+      "duration": 2.59,
+      "text": "it get shifted 00 so if you leave 0000"
+    },
+    {
+      "index": 154,
+      "start": 703.16,
+      "end": 705.19,
+      "duration": 2.03,
+      "text": "out so you load anything other than what"
+    },
+    {
+      "index": 155,
+      "start": 705.2,
+      "end": 708.75,
+      "duration": 3.55,
+      "text": "0 0 0 I get all the other 15 patterns"
+    },
+    {
+      "index": 156,
+      "start": 708.76,
+      "end": 710.069,
+      "duration": 1.309,
+      "text": "and then it gets"
+    },
+    {
+      "index": 157,
+      "start": 710.079,
+      "end": 712.15,
+      "duration": 2.071,
+      "text": "repeated such a circuit is called a"
+    },
+    {
+      "index": 158,
+      "start": 712.16,
+      "end": 717.949,
+      "duration": 5.789,
+      "text": "pseudo random noise"
+    },
+    {
+      "index": 159,
+      "start": 729.35,
+      "end": 729.36,
+      "duration": 0.01,
+      "text": "not necessarily nice it can be"
+    },
+    {
+      "index": 160,
+      "start": 729.36,
+      "end": 741.389,
+      "duration": 12.029,
+      "text": "pattern you can call it pseudo random"
+    },
+    {
+      "index": 161,
+      "start": 743.23,
+      "end": 743.24,
+      "duration": 0.01,
+      "text": "generator or if you don't want to call"
+    },
+    {
+      "index": 162,
+      "start": 743.24,
+      "end": 747.069,
+      "duration": 3.829,
+      "text": "it noise you can also sto ROM"
+    },
+    {
+      "index": 163,
+      "start": 747.079,
+      "end": 749.189,
+      "duration": 2.11,
+      "text": "generator what I mean is suppos you want"
+    },
+    {
+      "index": 164,
+      "start": 749.199,
+      "end": 752.15,
+      "duration": 2.951,
+      "text": "to have a pattern verification"
+    },
+    {
+      "index": 165,
+      "start": 752.16,
+      "end": 755.23,
+      "duration": 3.07,
+      "text": "pattern you put a bit pattern which is"
+    },
+    {
+      "index": 166,
+      "start": 755.24,
+      "end": 757.43,
+      "duration": 2.19,
+      "text": "accepted and for that bit pattern you"
+    },
+    {
+      "index": 167,
+      "start": 757.44,
+      "end": 759.269,
+      "duration": 1.829,
+      "text": "know the sequence it has to come so you"
+    },
+    {
+      "index": 168,
+      "start": 759.279,
+      "end": 762.15,
+      "duration": 2.871,
+      "text": "can know whether there is any error in"
+    },
+    {
+      "index": 169,
+      "start": 762.16,
+      "end": 763.03,
+      "duration": 0.87,
+      "text": "the"
+    },
+    {
+      "index": 170,
+      "start": 763.04,
+      "end": 766.59,
+      "duration": 3.55,
+      "text": "transmission by if you agree on the"
+    },
+    {
+      "index": 171,
+      "start": 766.6,
+      "end": 768.79,
+      "duration": 2.19,
+      "text": "initial pattern both the sending and"
+    },
+    {
+      "index": 172,
+      "start": 768.8,
+      "end": 770.629,
+      "duration": 1.829,
+      "text": "receiving"
+    },
+    {
+      "index": 173,
+      "start": 770.639,
+      "end": 773.59,
+      "duration": 2.951,
+      "text": "end for this given pattern you know the"
+    },
+    {
+      "index": 174,
+      "start": 773.6,
+      "end": 775.47,
+      "duration": 1.87,
+      "text": "sequence of this"
+    },
+    {
+      "index": 175,
+      "start": 775.48,
+      "end": 777.829,
+      "duration": 2.349,
+      "text": "patterns I think you call it sequence"
+    },
+    {
+      "index": 176,
+      "start": 777.839,
+      "end": 782.55,
+      "duration": 4.711,
+      "text": "generator"
+    },
+    {
+      "index": 177,
+      "start": 785.069,
+      "end": 785.079,
+      "duration": 0.01,
+      "text": "I think it's called P I'm sorry it's"
+    },
+    {
+      "index": 178,
+      "start": 785.079,
+      "end": 789.47,
+      "duration": 4.391,
+      "text": "called pseudo random sequence generator"
+    },
+    {
+      "index": 179,
+      "start": 789.48,
+      "end": 792.509,
+      "duration": 3.029,
+      "text": "not can also be used"
+    },
+    {
+      "index": 180,
+      "start": 792.519,
+      "end": 794.91,
+      "duration": 2.391,
+      "text": "for generation of noise if you want it"
+    },
+    {
+      "index": 181,
+      "start": 794.92,
+      "end": 798.189,
+      "duration": 3.269,
+      "text": "this way but so the advantage of this is"
+    },
+    {
+      "index": 182,
+      "start": 798.199,
+      "end": 800.389,
+      "duration": 2.19,
+      "text": "I can check I can check the transmission"
+    },
+    {
+      "index": 183,
+      "start": 800.399,
+      "end": 801.629,
+      "duration": 1.23,
+      "text": "over a"
+    },
+    {
+      "index": 184,
+      "start": 801.639,
+      "end": 805.67,
+      "duration": 4.031,
+      "text": "y over a period of time so I agree on"
+    },
+    {
+      "index": 185,
+      "start": 805.68,
+      "end": 807.87,
+      "duration": 2.19,
+      "text": "the initial pattern both sides receiver"
+    },
+    {
+      "index": 186,
+      "start": 807.88,
+      "end": 810.43,
+      "duration": 2.55,
+      "text": "and Senter and then start sending data"
+    },
+    {
+      "index": 187,
+      "start": 810.44,
+      "end": 813.15,
+      "duration": 2.71,
+      "text": "and as I receive data I check with this"
+    },
+    {
+      "index": 188,
+      "start": 813.16,
+      "end": 814.59,
+      "duration": 1.43,
+      "text": "and if there's a change that mean"
+    },
+    {
+      "index": 189,
+      "start": 814.6,
+      "end": 817.31,
+      "duration": 2.71,
+      "text": "there's something happening to the"
+    },
+    {
+      "index": 190,
+      "start": 817.32,
+      "end": 819.87,
+      "duration": 2.55,
+      "text": "transmission"
+    },
+    {
+      "index": 191,
+      "start": 819.88,
+      "end": 823.43,
+      "duration": 3.55,
+      "text": "why random because the pattern can be"
+    },
+    {
+      "index": 192,
+      "start": 823.44,
+      "end": 826.509,
+      "duration": 3.069,
+      "text": "also kept secret in the sense this the"
+    },
+    {
+      "index": 193,
+      "start": 826.519,
+      "end": 827.99,
+      "duration": 1.471,
+      "text": "sequence will depend on the even though"
+    },
+    {
+      "index": 194,
+      "start": 828.0,
+      "end": 830.87,
+      "duration": 2.87,
+      "text": "all the 15 patterns will come all the 15"
+    },
+    {
+      "index": 195,
+      "start": 830.88,
+      "end": 833.71,
+      "duration": 2.83,
+      "text": "words all the 15 different patterns will"
+    },
+    {
+      "index": 196,
+      "start": 833.72,
+      "end": 836.67,
+      "duration": 2.95,
+      "text": "arise the sequence in which the arise"
+    },
+    {
+      "index": 197,
+      "start": 836.68,
+      "end": 839.35,
+      "duration": 2.67,
+      "text": "will they will come depends on on the"
+    },
+    {
+      "index": 198,
+      "start": 839.36,
+      "end": 841.91,
+      "duration": 2.55,
+      "text": "initial pattern the initial pattern is"
+    },
+    {
+      "index": 199,
+      "start": 841.92,
+      "end": 843.23,
+      "duration": 1.31,
+      "text": "different then you'll have a different"
+    },
+    {
+      "index": 200,
+      "start": 843.24,
+      "end": 845.949,
+      "duration": 2.709,
+      "text": "sequence again"
+    },
+    {
+      "index": 201,
+      "start": 845.959,
+      "end": 849.31,
+      "duration": 3.351,
+      "text": "15 so it is not completely"
+    },
+    {
+      "index": 202,
+      "start": 849.32,
+      "end": 852.87,
+      "duration": 3.55,
+      "text": "random you know that 15 after 15 it will"
+    },
+    {
+      "index": 203,
+      "start": 852.88,
+      "end": 855.629,
+      "duration": 2.749,
+      "text": "repeated so that way it is pseudo random"
+    },
+    {
+      "index": 204,
+      "start": 855.639,
+      "end": 857.79,
+      "duration": 2.151,
+      "text": "pseudo random means semi semi random"
+    },
+    {
+      "index": 205,
+      "start": 857.8,
+      "end": 859.43,
+      "duration": 1.63,
+      "text": "it's not completely"
+    },
+    {
+      "index": 206,
+      "start": 859.44,
+      "end": 861.67,
+      "duration": 2.23,
+      "text": "random you know there 15 patterns going"
+    },
+    {
+      "index": 207,
+      "start": 861.68,
+      "end": 862.71,
+      "duration": 1.03,
+      "text": "to come and if you know the initial"
+    },
+    {
+      "index": 208,
+      "start": 862.72,
+      "end": 864.99,
+      "duration": 2.27,
+      "text": "pattern you can guess the other patterns"
+    },
+    {
+      "index": 209,
+      "start": 865.0,
+      "end": 866.31,
+      "duration": 1.31,
+      "text": "so that's called that's why it's called"
+    },
+    {
+      "index": 210,
+      "start": 866.32,
+      "end": 868.389,
+      "duration": 2.069,
+      "text": "pseudo random but if you have this"
+    },
+    {
+      "index": 211,
+      "start": 868.399,
+      "end": 871.269,
+      "duration": 2.87,
+      "text": "pattern that is given as a test"
+    },
+    {
+      "index": 212,
+      "start": 871.279,
+      "end": 874.509,
+      "duration": 3.23,
+      "text": "pattern I can use it for testing I can"
+    },
+    {
+      "index": 213,
+      "start": 874.519,
+      "end": 876.829,
+      "duration": 2.31,
+      "text": "give the initial pattern and send it and"
+    },
+    {
+      "index": 214,
+      "start": 876.839,
+      "end": 878.03,
+      "duration": 1.191,
+      "text": "then test whether I'm receiving the"
+    },
+    {
+      "index": 215,
+      "start": 878.04,
+      "end": 879.87,
+      "duration": 1.83,
+      "text": "other things in the same order sequence"
+    },
+    {
+      "index": 216,
+      "start": 879.88,
+      "end": 881.269,
+      "duration": 1.389,
+      "text": "so one of the important applications of"
+    },
+    {
+      "index": 217,
+      "start": 881.279,
+      "end": 886.189,
+      "duration": 4.91,
+      "text": "a shift register sudom sequence"
+    },
+    {
+      "index": 218,
+      "start": 886.199,
+      "end": 888.47,
+      "duration": 2.271,
+      "text": "generator and I can now have different"
+    },
+    {
+      "index": 219,
+      "start": 888.48,
+      "end": 890.189,
+      "duration": 1.709,
+      "text": "values as I said the starting value so"
+    },
+    {
+      "index": 220,
+      "start": 890.199,
+      "end": 891.59,
+      "duration": 1.391,
+      "text": "that the sequence will be repeated but"
+    },
+    {
+      "index": 221,
+      "start": 891.6,
+      "end": 894.15,
+      "duration": 2.55,
+      "text": "not in the same uh the patterns will be"
+    },
+    {
+      "index": 222,
+      "start": 894.16,
+      "end": 896.509,
+      "duration": 2.349,
+      "text": "rep not in the same sequence or I can"
+    },
+    {
+      "index": 223,
+      "start": 896.519,
+      "end": 898.749,
+      "duration": 2.23,
+      "text": "tap instead of here I can do here I can"
+    },
+    {
+      "index": 224,
+      "start": 898.759,
+      "end": 901.47,
+      "duration": 2.711,
+      "text": "do here I can take this this and this"
+    },
+    {
+      "index": 225,
+      "start": 901.48,
+      "end": 904.069,
+      "duration": 2.589,
+      "text": "and exclusive of three inputs I can do I"
+    },
+    {
+      "index": 226,
+      "start": 904.079,
+      "end": 905.55,
+      "duration": 1.471,
+      "text": "can do all sorts of variations I can get"
+    },
+    {
+      "index": 227,
+      "start": 905.56,
+      "end": 907.03,
+      "duration": 1.47,
+      "text": "different sequences and different"
+    },
+    {
+      "index": 228,
+      "start": 907.04,
+      "end": 910.03,
+      "duration": 2.99,
+      "text": "patterns so I can have a simple test"
+    },
+    {
+      "index": 229,
+      "start": 910.04,
+      "end": 912.59,
+      "duration": 2.55,
+      "text": "designed one is for our testing the"
+    },
+    {
+      "index": 230,
+      "start": 912.6,
+      "end": 915.31,
+      "duration": 2.71,
+      "text": "system other is for establish the"
+    },
+    {
+      "index": 231,
+      "start": 915.32,
+      "end": 916.99,
+      "duration": 1.67,
+      "text": "reliability of the communication between"
+    },
+    {
+      "index": 232,
+      "start": 917.0,
+      "end": 921.35,
+      "duration": 4.35,
+      "text": "two points if the initial test gets"
+    },
+    {
+      "index": 233,
+      "start": 921.36,
+      "end": 924.189,
+      "duration": 2.829,
+      "text": "through the other side properly then we"
+    },
+    {
+      "index": 234,
+      "start": 924.199,
+      "end": 926.629,
+      "duration": 2.43,
+      "text": "know that the channel is well"
+    },
+    {
+      "index": 235,
+      "start": 926.639,
+      "end": 928.309,
+      "duration": 1.67,
+      "text": "established so you can start sending the"
+    },
+    {
+      "index": 236,
+      "start": 928.319,
+      "end": 929.15,
+      "duration": 0.831,
+      "text": "trans"
+    },
+    {
+      "index": 237,
+      "start": 929.16,
+      "end": 931.15,
+      "duration": 1.99,
+      "text": "miss this is one of the major"
+    },
+    {
+      "index": 238,
+      "start": 931.16,
+      "end": 933.43,
+      "duration": 2.27,
+      "text": "applications of one of the important"
+    },
+    {
+      "index": 239,
+      "start": 933.44,
+      "end": 937.35,
+      "duration": 3.91,
+      "text": "applications of shift"
+    },
+    {
+      "index": 240,
+      "start": 939.23,
+      "end": 939.24,
+      "duration": 0.01,
+      "text": "register we'll talk of another"
+    },
+    {
+      "index": 241,
+      "start": 939.24,
+      "end": 942.949,
+      "duration": 3.709,
+      "text": "application of shift register which is"
+    },
+    {
+      "index": 242,
+      "start": 942.959,
+      "end": 944.389,
+      "duration": 1.43,
+      "text": "let us say again I'm going to shift"
+    },
+    {
+      "index": 243,
+      "start": 944.399,
+      "end": 947.67,
+      "duration": 3.271,
+      "text": "register and I'm just for the purpose of"
+    },
+    {
+      "index": 244,
+      "start": 947.68,
+      "end": 949.189,
+      "duration": 1.509,
+      "text": "explanation I'm going to put them as"
+    },
+    {
+      "index": 245,
+      "start": 949.199,
+      "end": 955.23,
+      "duration": 6.031,
+      "text": "three different flip"
+    },
+    {
+      "index": 246,
+      "start": 957.99,
+      "end": 958.0,
+      "duration": 0.01,
+      "text": "flops that means I have to these are def"
+    },
+    {
+      "index": 247,
+      "start": 958.0,
+      "end": 979.069,
+      "duration": 21.069,
+      "text": "F flops"
+    },
+    {
+      "index": 248,
+      "start": 981.749,
+      "end": 981.759,
+      "duration": 0.01,
+      "text": "I can even have JK flip flops I I love"
+    },
+    {
+      "index": 249,
+      "start": 981.759,
+      "end": 987.509,
+      "duration": 5.75,
+      "text": "JK flip"
+    },
+    {
+      "index": 250,
+      "start": 1017.47,
+      "end": 1017.48,
+      "duration": 0.01,
+      "text": "so call this flip flops"
+    },
+    {
+      "index": 251,
+      "start": 1017.48,
+      "end": 1027.71,
+      "duration": 10.23,
+      "text": "ABC"
+    },
+    {
+      "index": 252,
+      "start": 1032.63,
+      "end": 1032.64,
+      "duration": 0.01,
+      "text": "together I will not show the clock"
+    },
+    {
+      "index": 253,
+      "start": 1032.64,
+      "end": 1034.189,
+      "duration": 1.549,
+      "text": "separately because they are the same"
+    },
+    {
+      "index": 254,
+      "start": 1034.199,
+      "end": 1036.63,
+      "duration": 2.431,
+      "text": "thing I'm just showing this"
+    },
+    {
+      "index": 255,
+      "start": 1036.64,
+      "end": 1039.069,
+      "duration": 2.429,
+      "text": "drawing or okay I can show it separately"
+    },
+    {
+      "index": 256,
+      "start": 1039.079,
+      "end": 1047.39,
+      "duration": 8.311,
+      "text": "also doesn't"
+    },
+    {
+      "index": 257,
+      "start": 1071.029,
+      "end": 1071.039,
+      "duration": 0.01,
+      "text": "clock what I'm going to do is to connect"
+    },
+    {
+      "index": 258,
+      "start": 1071.039,
+      "end": 1072.59,
+      "duration": 1.551,
+      "text": "this"
+    },
+    {
+      "index": 259,
+      "start": 1072.6,
+      "end": 1076.83,
+      "duration": 4.23,
+      "text": "J to this Q"
+    },
+    {
+      "index": 260,
+      "start": 1096.669,
+      "end": 1096.679,
+      "duration": 0.01,
+      "text": "so I have three JK flip flops output of"
+    },
+    {
+      "index": 261,
+      "start": 1096.679,
+      "end": 1099.19,
+      "duration": 2.511,
+      "text": "first JK goes to Second JK output of"
+    },
+    {
+      "index": 262,
+      "start": 1099.2,
+      "end": 1101.95,
+      "duration": 2.75,
+      "text": "second JK go to third JK and output of"
+    },
+    {
+      "index": 263,
+      "start": 1101.96,
+      "end": 1103.95,
+      "duration": 1.99,
+      "text": "the third J goes into input of the first"
+    },
+    {
+      "index": 264,
+      "start": 1103.96,
+      "end": 1107.31,
+      "duration": 3.35,
+      "text": "J with a Twist q and"
+    },
+    {
+      "index": 265,
+      "start": 1107.32,
+      "end": 1110.47,
+      "duration": 3.15,
+      "text": "Q"
+    },
+    {
+      "index": 266,
+      "start": 1113.43,
+      "end": 1113.44,
+      "duration": 0.01,
+      "text": "now I can have this a shift s the output"
+    },
+    {
+      "index": 267,
+      "start": 1113.44,
+      "end": 1115.029,
+      "duration": 1.589,
+      "text": "of this gets shifted into the every"
+    },
+    {
+      "index": 268,
+      "start": 1115.039,
+      "end": 1117.43,
+      "duration": 2.391,
+      "text": "clock pulse this output goes into this"
+    },
+    {
+      "index": 269,
+      "start": 1117.44,
+      "end": 1118.71,
+      "duration": 1.27,
+      "text": "this output go into this that's why it's"
+    },
+    {
+      "index": 270,
+      "start": 1118.72,
+      "end": 1122.149,
+      "duration": 3.429,
+      "text": "a shift"
+    },
+    {
+      "index": 271,
+      "start": 1156.23,
+      "end": 1156.24,
+      "duration": 0.01,
+      "text": "pulse because C which is zero c bar"
+    },
+    {
+      "index": 272,
+      "start": 1156.24,
+      "end": 1159.19,
+      "duration": 2.95,
+      "text": "which is one is connected to J J becomes"
+    },
+    {
+      "index": 273,
+      "start": 1159.2,
+      "end": 1161.27,
+      "duration": 2.07,
+      "text": "one and K becomes zero after the first"
+    },
+    {
+      "index": 274,
+      "start": 1161.28,
+      "end": 1164.63,
+      "duration": 3.35,
+      "text": "clock pulse right I put 0 0 0 I shift it"
+    },
+    {
+      "index": 275,
+      "start": 1164.64,
+      "end": 1167.51,
+      "duration": 2.87,
+      "text": "one clock pulse shifts this Z into this"
+    },
+    {
+      "index": 276,
+      "start": 1167.52,
+      "end": 1168.99,
+      "duration": 1.47,
+      "text": "this 0 into this"
+    },
+    {
+      "index": 277,
+      "start": 1169.0,
+      "end": 1171.23,
+      "duration": 2.23,
+      "text": "this zero not back into this but this"
+    },
+    {
+      "index": 278,
+      "start": 1171.24,
+      "end": 1174.029,
+      "duration": 2.789,
+      "text": "zero is connected here in this one so"
+    },
+    {
+      "index": 279,
+      "start": 1174.039,
+      "end": 1175.75,
+      "duration": 1.711,
+      "text": "after the thing then the next time will"
+    },
+    {
+      "index": 280,
+      "start": 1175.76,
+      "end": 1182.549,
+      "duration": 6.789,
+      "text": "be the pattern will be 1 0"
+    },
+    {
+      "index": 281,
+      "start": 1187.63,
+      "end": 1187.64,
+      "duration": 0.01,
+      "text": "after the second clock PSE it will"
+    },
+    {
+      "index": 282,
+      "start": 1187.64,
+      "end": 1192.149,
+      "duration": 4.509,
+      "text": "be"
+    },
+    {
+      "index": 283,
+      "start": 1195.75,
+      "end": 1195.76,
+      "duration": 0.01,
+      "text": "110 third clock pulse it be"
+    },
+    {
+      "index": 284,
+      "start": 1195.76,
+      "end": 1199.83,
+      "duration": 4.07,
+      "text": "111 and fourth clock pulse will be 0"
+    },
+    {
+      "index": 285,
+      "start": 1199.84,
+      "end": 1207.47,
+      "duration": 7.63,
+      "text": "1 clock pul it be 0 0"
+    },
+    {
+      "index": 286,
+      "start": 1211.59,
+      "end": 1211.6,
+      "duration": 0.01,
+      "text": "1 up six loog puls in"
+    },
+    {
+      "index": 287,
+      "start": 1211.6,
+      "end": 1214.669,
+      "duration": 3.069,
+      "text": "is 0 0 0 which is the same as the"
+    },
+    {
+      "index": 288,
+      "start": 1214.679,
+      "end": 1215.95,
+      "duration": 1.271,
+      "text": "original"
+    },
+    {
+      "index": 289,
+      "start": 1215.96,
+      "end": 1219.43,
+      "duration": 3.47,
+      "text": "so in six cycles of clock I get the"
+    },
+    {
+      "index": 290,
+      "start": 1219.44,
+      "end": 1227.149,
+      "duration": 7.709,
+      "text": "pattern 0 0 0 1 0 0 1 1 0 111 011 0"
+    },
+    {
+      "index": 291,
+      "start": 1229.59,
+      "end": 1229.6,
+      "duration": 0.01,
+      "text": "01"
+    },
+    {
+      "index": 292,
+      "start": 1229.6,
+      "end": 1231.27,
+      "duration": 1.67,
+      "text": "now if you draw the waveforms for this"
+    },
+    {
+      "index": 293,
+      "start": 1231.28,
+      "end": 1233.35,
+      "duration": 2.07,
+      "text": "how is it going to look"
+    },
+    {
+      "index": 294,
+      "start": 1233.36,
+      "end": 1243.51,
+      "duration": 10.15,
+      "text": "like I draw the waveforms"
+    },
+    {
+      "index": 295,
+      "start": 1245.75,
+      "end": 1245.76,
+      "duration": 0.01,
+      "text": "here"
+    },
+    {
+      "index": 296,
+      "start": 1245.76,
+      "end": 1247.71,
+      "duration": 1.95,
+      "text": "clock"
+    },
+    {
+      "index": 297,
+      "start": 1247.72,
+      "end": 1250.99,
+      "duration": 3.27,
+      "text": "clock"
+    },
+    {
+      "index": 298,
+      "start": 1270.269,
+      "end": 1270.279,
+      "duration": 0.01,
+      "text": "PSE first clock pulse second clock"
+    },
+    {
+      "index": 299,
+      "start": 1270.279,
+      "end": 1275.99,
+      "duration": 5.711,
+      "text": "pulse third clock"
+    },
+    {
+      "index": 300,
+      "start": 1287.029,
+      "end": 1287.039,
+      "duration": 0.01,
+      "text": "time"
+    },
+    {
+      "index": 301,
+      "start": 1287.039,
+      "end": 1290.47,
+      "duration": 3.431,
+      "text": "axis"
+    },
+    {
+      "index": 302,
+      "start": 1294.07,
+      "end": 1294.08,
+      "duration": 0.01,
+      "text": "now if you look at this you can see"
+    },
+    {
+      "index": 303,
+      "start": 1294.08,
+      "end": 1298.63,
+      "duration": 4.55,
+      "text": "that after the first initially 0 0"
+    },
+    {
+      "index": 304,
+      "start": 1298.64,
+      "end": 1301.51,
+      "duration": 2.87,
+      "text": "0 then a becomes high for three clock"
+    },
+    {
+      "index": 305,
+      "start": 1301.52,
+      "end": 1304.39,
+      "duration": 2.87,
+      "text": "pulses and low for three clock"
+    },
+    {
+      "index": 306,
+      "start": 1304.4,
+      "end": 1306.87,
+      "duration": 2.47,
+      "text": "pulses high for three clock puls low for"
+    },
+    {
+      "index": 307,
+      "start": 1306.88,
+      "end": 1310.269,
+      "duration": 3.389,
+      "text": "three clock P it repeats similarly for B"
+    },
+    {
+      "index": 308,
+      "start": 1310.279,
+      "end": 1313.07,
+      "duration": 2.791,
+      "text": "remains zero first two clock pulses then"
+    },
+    {
+      "index": 309,
+      "start": 1313.08,
+      "end": 1315.31,
+      "duration": 2.23,
+      "text": "three and then next three clock pulses"
+    },
+    {
+      "index": 310,
+      "start": 1315.32,
+      "end": 1316.99,
+      "duration": 1.67,
+      "text": "zero next three clock pules one and so"
+    },
+    {
+      "index": 311,
+      "start": 1317.0,
+      "end": 1318.83,
+      "duration": 1.83,
+      "text": "forth repeats"
+    },
+    {
+      "index": 312,
+      "start": 1318.84,
+      "end": 1321.549,
+      "duration": 2.709,
+      "text": "C become zero to start with first three"
+    },
+    {
+      "index": 313,
+      "start": 1321.559,
+      "end": 1324.39,
+      "duration": 2.831,
+      "text": "clock remains zero second three clock"
+    },
+    {
+      "index": 314,
+      "start": 1324.4,
+      "end": 1327.549,
+      "duration": 3.149,
+      "text": "one then again zero then again one so to"
+    },
+    {
+      "index": 315,
+      "start": 1327.559,
+      "end": 1332.39,
+      "duration": 4.831,
+      "text": "draw this for a b c pattern a would be"
+    },
+    {
+      "index": 316,
+      "start": 1332.4,
+      "end": 1334.99,
+      "duration": 2.59,
+      "text": "zero then becomes"
+    },
+    {
+      "index": 317,
+      "start": 1335.0,
+      "end": 1338.47,
+      "duration": 3.47,
+      "text": "one remains one for three clock"
+    },
+    {
+      "index": 318,
+      "start": 1338.48,
+      "end": 1340.789,
+      "duration": 2.309,
+      "text": "pulses and then remains zero for the"
+    },
+    {
+      "index": 319,
+      "start": 1340.799,
+      "end": 1342.83,
+      "duration": 2.031,
+      "text": "rest of"
+    },
+    {
+      "index": 320,
+      "start": 1342.84,
+      "end": 1346.51,
+      "duration": 3.67,
+      "text": "it this is a output"
+    },
+    {
+      "index": 321,
+      "start": 1346.52,
+      "end": 1349.909,
+      "duration": 3.389,
+      "text": "a all time AIS I will not show timing"
+    },
+    {
+      "index": 322,
+      "start": 1349.919,
+      "end": 1354.83,
+      "duration": 4.911,
+      "text": "separately this the time"
+    },
+    {
+      "index": 323,
+      "start": 1356.63,
+      "end": 1356.64,
+      "duration": 0.01,
+      "text": "AIS"
+    },
+    {
+      "index": 324,
+      "start": 1356.64,
+      "end": 1359.31,
+      "duration": 2.67,
+      "text": "okay B would"
+    },
+    {
+      "index": 325,
+      "start": 1359.32,
+      "end": 1365.83,
+      "duration": 6.51,
+      "text": "be first two clock PS will remain"
+    },
+    {
+      "index": 326,
+      "start": 1368.23,
+      "end": 1368.24,
+      "duration": 0.01,
+      "text": "zero the next three clock pulses it will"
+    },
+    {
+      "index": 327,
+      "start": 1368.24,
+      "end": 1376.95,
+      "duration": 8.71,
+      "text": "be"
+    },
+    {
+      "index": 328,
+      "start": 1410.39,
+      "end": 1410.4,
+      "duration": 0.01,
+      "text": "pulses so I have the I'm dividing this"
+    },
+    {
+      "index": 329,
+      "start": 1410.4,
+      "end": 1413.71,
+      "duration": 3.31,
+      "text": "clock by what frequency what what is the"
+    },
+    {
+      "index": 330,
+      "start": 1413.72,
+      "end": 1416.029,
+      "duration": 2.309,
+      "text": "factor the clock gets divided what is"
+    },
+    {
+      "index": 331,
+      "start": 1416.039,
+      "end": 1417.75,
+      "duration": 1.711,
+      "text": "the frequency of this compared to"
+    },
+    {
+      "index": 332,
+      "start": 1417.76,
+      "end": 1422.11,
+      "duration": 4.35,
+      "text": "this time period of this"
+    },
+    {
+      "index": 333,
+      "start": 1426.75,
+      "end": 1426.76,
+      "duration": 0.01,
+      "text": "is three times less no so every no no"
+    },
+    {
+      "index": 334,
+      "start": 1426.76,
+      "end": 1430.59,
+      "duration": 3.83,
+      "text": "six times less there are this period for"
+    },
+    {
+      "index": 335,
+      "start": 1430.6,
+      "end": 1434.23,
+      "duration": 3.63,
+      "text": "example this period is equal to six"
+    },
+    {
+      "index": 336,
+      "start": 1434.24,
+      "end": 1436.909,
+      "duration": 2.669,
+      "text": "periods of this clock the period of this"
+    },
+    {
+      "index": 337,
+      "start": 1436.919,
+      "end": 1440.549,
+      "duration": 3.63,
+      "text": "clock is 16 six or I can put eight four"
+    },
+    {
+      "index": 338,
+      "start": 1440.559,
+      "end": 1442.149,
+      "duration": 1.59,
+      "text": "flip flops will become"
+    },
+    {
+      "index": 339,
+      "start": 1442.159,
+      "end": 1447.47,
+      "duration": 5.311,
+      "text": "eight so the the period of this clock"
+    },
+    {
+      "index": 340,
+      "start": 1447.48,
+      "end": 1451.43,
+      "duration": 3.95,
+      "text": "is n * the period of the original clock"
+    },
+    {
+      "index": 341,
+      "start": 1451.44,
+      "end": 1454.07,
+      "duration": 2.63,
+      "text": "where n is the number"
+    },
+    {
+      "index": 342,
+      "start": 1454.08,
+      "end": 1457.149,
+      "duration": 3.069,
+      "text": "of n is twice the number of flip flops"
+    },
+    {
+      "index": 343,
+      "start": 1457.159,
+      "end": 1460.669,
+      "duration": 3.51,
+      "text": "so I should say 2 N the period of this"
+    },
+    {
+      "index": 344,
+      "start": 1460.679,
+      "end": 1463.95,
+      "duration": 3.271,
+      "text": "clock is two 2 n * the clock period of"
+    },
+    {
+      "index": 345,
+      "start": 1463.96,
+      "end": 1465.789,
+      "duration": 1.829,
+      "text": "the original clock where n is the number"
+    },
+    {
+      "index": 346,
+      "start": 1465.799,
+      "end": 1470.71,
+      "duration": 4.911,
+      "text": "of flip flops that used for this"
+    },
+    {
+      "index": 347,
+      "start": 1471.99,
+      "end": 1472.0,
+      "duration": 0.01,
+      "text": "that is one thing which you can always"
+    },
+    {
+      "index": 348,
+      "start": 1472.0,
+      "end": 1473.35,
+      "duration": 1.35,
+      "text": "get by"
+    },
+    {
+      "index": 349,
+      "start": 1473.36,
+      "end": 1475.83,
+      "duration": 2.47,
+      "text": "division but more importantly the if you"
+    },
+    {
+      "index": 350,
+      "start": 1475.84,
+      "end": 1477.71,
+      "duration": 1.87,
+      "text": "want to use this separate"
+    },
+    {
+      "index": 351,
+      "start": 1477.72,
+      "end": 1480.789,
+      "duration": 3.069,
+      "text": "clocks different different"
+    },
+    {
+      "index": 352,
+      "start": 1480.799,
+      "end": 1483.19,
+      "duration": 2.391,
+      "text": "faces there's always a face difference"
+    },
+    {
+      "index": 353,
+      "start": 1483.2,
+      "end": 1487.07,
+      "duration": 3.87,
+      "text": "of this much one/ thir of a clock period"
+    },
+    {
+      "index": 354,
+      "start": 1487.08,
+      "end": 1488.47,
+      "duration": 1.39,
+      "text": "one thir of a clock period between this"
+    },
+    {
+      "index": 355,
+      "start": 1488.48,
+      "end": 1490.31,
+      "duration": 1.83,
+      "text": "and this this and this between this and"
+    },
+    {
+      "index": 356,
+      "start": 1490.32,
+      "end": 1492.71,
+      "duration": 2.39,
+      "text": "this I can get a clock period it's"
+    },
+    {
+      "index": 357,
+      "start": 1492.72,
+      "end": 1496.19,
+      "duration": 3.47,
+      "text": "called multi face clock multiple face so"
+    },
+    {
+      "index": 358,
+      "start": 1496.2,
+      "end": 1498.47,
+      "duration": 2.27,
+      "text": "I have the clock p"
+    },
+    {
+      "index": 359,
+      "start": 1498.48,
+      "end": 1502.51,
+      "duration": 4.03,
+      "text": "period the clock"
+    },
+    {
+      "index": 360,
+      "start": 1508.87,
+      "end": 1508.88,
+      "duration": 0.01,
+      "text": "period is six times uh I mean 2 n * the"
+    },
+    {
+      "index": 361,
+      "start": 1508.88,
+      "end": 1510.669,
+      "duration": 1.789,
+      "text": "system clock"
+    },
+    {
+      "index": 362,
+      "start": 1510.679,
+      "end": 1518.59,
+      "duration": 7.911,
+      "text": "period we'll call the system"
+    },
+    {
+      "index": 363,
+      "start": 1521.51,
+      "end": 1521.52,
+      "duration": 0.01,
+      "text": "clock and there's a face difference"
+    },
+    {
+      "index": 364,
+      "start": 1521.52,
+      "end": 1525.71,
+      "duration": 4.19,
+      "text": "between let"
+    },
+    {
+      "index": 365,
+      "start": 1534.389,
+      "end": 1534.399,
+      "duration": 0.01,
+      "text": "difference between two successive a"
+    },
+    {
+      "index": 366,
+      "start": 1534.399,
+      "end": 1536.149,
+      "duration": 1.75,
+      "text": "forms"
+    },
+    {
+      "index": 367,
+      "start": 1536.159,
+      "end": 1544.71,
+      "duration": 8.551,
+      "text": "of pH difference of one clock"
+    },
+    {
+      "index": 368,
+      "start": 1556.669,
+      "end": 1556.679,
+      "duration": 0.01,
+      "text": "clocks one original clock"
+    },
+    {
+      "index": 369,
+      "start": 1556.679,
+      "end": 1567.31,
+      "duration": 10.631,
+      "text": "period"
+    },
+    {
+      "index": 370,
+      "start": 1569.35,
+      "end": 1569.36,
+      "duration": 0.01,
+      "text": "sometimes it is"
+    },
+    {
+      "index": 371,
+      "start": 1569.36,
+      "end": 1572.75,
+      "duration": 3.39,
+      "text": "useful so I want to have some lights"
+    },
+    {
+      "index": 372,
+      "start": 1572.76,
+      "end": 1575.669,
+      "duration": 2.909,
+      "text": "going in a sequence supposing I turn on"
+    },
+    {
+      "index": 373,
+      "start": 1575.679,
+      "end": 1579.909,
+      "duration": 4.23,
+      "text": "lights and turn off lights using"
+    },
+    {
+      "index": 374,
+      "start": 1583.95,
+      "end": 1583.96,
+      "duration": 0.01,
+      "text": "this this light will be on at this"
+    },
+    {
+      "index": 375,
+      "start": 1583.96,
+      "end": 1586.269,
+      "duration": 2.309,
+      "text": "point until stay on"
+    },
+    {
+      "index": 376,
+      "start": 1586.279,
+      "end": 1588.71,
+      "duration": 2.431,
+      "text": "for three clock periods and then it"
+    },
+    {
+      "index": 377,
+      "start": 1588.72,
+      "end": 1591.909,
+      "duration": 3.189,
+      "text": "become off this light will be turned on"
+    },
+    {
+      "index": 378,
+      "start": 1591.919,
+      "end": 1595.149,
+      "duration": 3.23,
+      "text": "after a delay from this light again it"
+    },
+    {
+      "index": 379,
+      "start": 1595.159,
+      "end": 1596.029,
+      "duration": 0.87,
+      "text": "will"
+    },
+    {
+      "index": 380,
+      "start": 1596.039,
+      "end": 1598.99,
+      "duration": 2.951,
+      "text": "stay so before that it will go so first"
+    },
+    {
+      "index": 381,
+      "start": 1599.0,
+      "end": 1600.47,
+      "duration": 1.47,
+      "text": "this will light up then this will light"
+    },
+    {
+      "index": 382,
+      "start": 1600.48,
+      "end": 1602.149,
+      "duration": 1.669,
+      "text": "up then this will light up and this will"
+    },
+    {
+      "index": 383,
+      "start": 1602.159,
+      "end": 1604.11,
+      "duration": 1.951,
+      "text": "go and this will go this will"
+    },
+    {
+      "index": 384,
+      "start": 1604.12,
+      "end": 1608.149,
+      "duration": 4.029,
+      "text": "go right so some sort of application"
+    },
+    {
+      "index": 385,
+      "start": 1608.159,
+      "end": 1610.87,
+      "duration": 2.711,
+      "text": "like that where you need multiple pH"
+    },
+    {
+      "index": 386,
+      "start": 1610.88,
+      "end": 1612.47,
+      "duration": 1.59,
+      "text": "it's called multi face"
+    },
+    {
+      "index": 387,
+      "start": 1612.48,
+      "end": 1615.75,
+      "duration": 3.27,
+      "text": "clocks multi face clocks when you"
+    },
+    {
+      "index": 388,
+      "start": 1615.76,
+      "end": 1625.63,
+      "duration": 9.87,
+      "text": "want for some system"
+    },
+    {
+      "index": 389,
+      "start": 1632.389,
+      "end": 1632.399,
+      "duration": 0.01,
+      "text": "it such a this also called a counter"
+    },
+    {
+      "index": 390,
+      "start": 1632.399,
+      "end": 1633.789,
+      "duration": 1.39,
+      "text": "counters basically what you do in a"
+    },
+    {
+      "index": 391,
+      "start": 1633.799,
+      "end": 1636.63,
+      "duration": 2.831,
+      "text": "counter counter you give a clock pulse"
+    },
+    {
+      "index": 392,
+      "start": 1636.64,
+      "end": 1638.95,
+      "duration": 2.31,
+      "text": "divide that clock by a factor of two by"
+    },
+    {
+      "index": 393,
+      "start": 1638.96,
+      "end": 1641.31,
+      "duration": 2.35,
+      "text": "every flip flop frequency is divided by"
+    },
+    {
+      "index": 394,
+      "start": 1641.32,
+      "end": 1644.029,
+      "duration": 2.709,
+      "text": "two in every flip flop"
+    },
+    {
+      "index": 395,
+      "start": 1644.039,
+      "end": 1647.95,
+      "duration": 3.911,
+      "text": "stage so same similar thing here similar"
+    },
+    {
+      "index": 396,
+      "start": 1647.96,
+      "end": 1649.47,
+      "duration": 1.51,
+      "text": "thing"
+    },
+    {
+      "index": 397,
+      "start": 1649.48,
+      "end": 1652.19,
+      "duration": 2.71,
+      "text": "here so this also"
+    },
+    {
+      "index": 398,
+      "start": 1652.2,
+      "end": 1654.35,
+      "duration": 2.15,
+      "text": "counter but only thing the output of"
+    },
+    {
+      "index": 399,
+      "start": 1654.36,
+      "end": 1658.549,
+      "duration": 4.189,
+      "text": "this counter we twist and then connect"
+    },
+    {
+      "index": 400,
+      "start": 1658.559,
+      "end": 1661.509,
+      "duration": 2.95,
+      "text": "it a counter which output of one is go"
+    },
+    {
+      "index": 401,
+      "start": 1661.519,
+      "end": 1663.75,
+      "duration": 2.231,
+      "text": "to the next output of second go to the"
+    },
+    {
+      "index": 402,
+      "start": 1663.76,
+      "end": 1665.11,
+      "duration": 1.35,
+      "text": "third output of third goes to Fourth"
+    },
+    {
+      "index": 403,
+      "start": 1665.12,
+      "end": 1667.59,
+      "duration": 2.47,
+      "text": "output of fourth goes back to the one"
+    },
+    {
+      "index": 404,
+      "start": 1667.6,
+      "end": 1670.63,
+      "duration": 3.03,
+      "text": "without twisting it if I"
+    },
+    {
+      "index": 405,
+      "start": 1670.64,
+      "end": 1673.149,
+      "duration": 2.509,
+      "text": "do you can take it as an assignment"
+    },
+    {
+      "index": 406,
+      "start": 1673.159,
+      "end": 1676.269,
+      "duration": 3.11,
+      "text": "exercise you connect Q back to J and Q"
+    },
+    {
+      "index": 407,
+      "start": 1676.279,
+      "end": 1678.35,
+      "duration": 2.071,
+      "text": "Bar J back to K"
+    },
+    {
+      "index": 408,
+      "start": 1678.36,
+      "end": 1681.31,
+      "duration": 2.95,
+      "text": "okay of course you put a 0 0 nothing"
+    },
+    {
+      "index": 409,
+      "start": 1681.32,
+      "end": 1684.389,
+      "duration": 3.069,
+      "text": "will happen anything other than 0 you"
+    },
+    {
+      "index": 410,
+      "start": 1684.399,
+      "end": 1686.59,
+      "duration": 2.191,
+      "text": "put and see how it it's a shift register"
+    },
+    {
+      "index": 411,
+      "start": 1686.6,
+      "end": 1689.83,
+      "duration": 3.23,
+      "text": "basically that's all 1 0"
+    },
+    {
+      "index": 412,
+      "start": 1689.84,
+      "end": 1692.549,
+      "duration": 2.709,
+      "text": "0 0 1"
+    },
+    {
+      "index": 413,
+      "start": 1692.559,
+      "end": 1696.11,
+      "duration": 3.551,
+      "text": "0 then 0 1 1 0 0 so it will only repeat"
+    },
+    {
+      "index": 414,
+      "start": 1696.12,
+      "end": 1697.269,
+      "duration": 1.149,
+      "text": "shift"
+    },
+    {
+      "index": 415,
+      "start": 1697.279,
+      "end": 1699.95,
+      "duration": 2.671,
+      "text": "register that's called ring counter a"
+    },
+    {
+      "index": 416,
+      "start": 1699.96,
+      "end": 1704.149,
+      "duration": 4.189,
+      "text": "counter wherein we use"
+    },
+    {
+      "index": 417,
+      "start": 1704.159,
+      "end": 1706.909,
+      "duration": 2.75,
+      "text": "the output of the last flipflop back to"
+    },
+    {
+      "index": 418,
+      "start": 1706.919,
+      "end": 1708.269,
+      "duration": 1.35,
+      "text": "the input of the first flip flop is"
+    },
+    {
+      "index": 419,
+      "start": 1708.279,
+      "end": 1709.509,
+      "duration": 1.23,
+      "text": "called a ring"
+    },
+    {
+      "index": 420,
+      "start": 1709.519,
+      "end": 1712.269,
+      "duration": 2.75,
+      "text": "counter or recirculating shift register"
+    },
+    {
+      "index": 421,
+      "start": 1712.279,
+      "end": 1714.71,
+      "duration": 2.431,
+      "text": "they call it you circulate again and"
+    },
+    {
+      "index": 422,
+      "start": 1714.72,
+      "end": 1716.99,
+      "duration": 2.27,
+      "text": "again the same"
+    },
+    {
+      "index": 423,
+      "start": 1717.0,
+      "end": 1719.31,
+      "duration": 2.31,
+      "text": "pattern but this counter is slightly"
+    },
+    {
+      "index": 424,
+      "start": 1719.32,
+      "end": 1720.549,
+      "duration": 1.229,
+      "text": "different from The Ring counter it's"
+    },
+    {
+      "index": 425,
+      "start": 1720.559,
+      "end": 1724.23,
+      "duration": 3.671,
+      "text": "called twisted pair ring counter so we"
+    },
+    {
+      "index": 426,
+      "start": 1724.24,
+      "end": 1736.389,
+      "duration": 12.149,
+      "text": "have a uh let's say recirculating shift"
+    },
+    {
+      "index": 427,
+      "start": 1738.83,
+      "end": 1738.84,
+      "duration": 0.01,
+      "text": "resistors"
+    },
+    {
+      "index": 428,
+      "start": 1738.84,
+      "end": 1742.07,
+      "duration": 3.23,
+      "text": "ring"
+    },
+    {
+      "index": 429,
+      "start": 1745.029,
+      "end": 1745.039,
+      "duration": 0.01,
+      "text": "counter Rec circular is same as the ring"
+    },
+    {
+      "index": 430,
+      "start": 1745.039,
+      "end": 1746.59,
+      "duration": 1.551,
+      "text": "counter in the"
+    },
+    {
+      "index": 431,
+      "start": 1746.6,
+      "end": 1751.549,
+      "duration": 4.949,
+      "text": "sense I have this flip"
+    },
+    {
+      "index": 432,
+      "start": 1762.07,
+      "end": 1762.08,
+      "duration": 0.01,
+      "text": "in put a pattern and keep circulating it"
+    },
+    {
+      "index": 433,
+      "start": 1762.08,
+      "end": 1763.549,
+      "duration": 1.469,
+      "text": "that's what will happen a ring"
+    },
+    {
+      "index": 434,
+      "start": 1763.559,
+      "end": 1766.31,
+      "duration": 2.751,
+      "text": "counter put a pattern and connect it"
+    },
+    {
+      "index": 435,
+      "start": 1766.32,
+      "end": 1768.789,
+      "duration": 2.469,
+      "text": "back you use a d flip flop for that"
+    },
+    {
+      "index": 436,
+      "start": 1768.799,
+      "end": 1771.63,
+      "duration": 2.831,
+      "text": "matter you don't need to use"
+    },
+    {
+      "index": 437,
+      "start": 1771.64,
+      "end": 1775.35,
+      "duration": 3.71,
+      "text": "JK if want you can use JK to but this"
+    },
+    {
+      "index": 438,
+      "start": 1775.36,
+      "end": 1778.63,
+      "duration": 3.27,
+      "text": "shift register which uses twisting of"
+    },
+    {
+      "index": 439,
+      "start": 1778.64,
+      "end": 1780.549,
+      "duration": 1.909,
+      "text": "the output back into the input is called"
+    },
+    {
+      "index": 440,
+      "start": 1780.559,
+      "end": 1786.789,
+      "duration": 6.23,
+      "text": "Twisted ring"
+    },
+    {
+      "index": 441,
+      "start": 1792.11,
+      "end": 1792.12,
+      "duration": 0.01,
+      "text": "counter what we have seen at Twisted R"
+    },
+    {
+      "index": 442,
+      "start": 1792.12,
+      "end": 1796.31,
+      "duration": 4.19,
+      "text": "counter use for multiple pH Twisted ring"
+    },
+    {
+      "index": 443,
+      "start": 1796.32,
+      "end": 1803.23,
+      "duration": 6.91,
+      "text": "counter"
+    },
+    {
+      "index": 444,
+      "start": 1806.23,
+      "end": 1806.24,
+      "duration": 0.01,
+      "text": "for using this multip clock"
+    },
+    {
+      "index": 445,
+      "start": 1806.24,
+      "end": 1808.19,
+      "duration": 1.95,
+      "text": "generation and the period of the clock"
+    },
+    {
+      "index": 446,
+      "start": 1808.2,
+      "end": 1809.23,
+      "duration": 1.03,
+      "text": "will"
+    },
+    {
+      "index": 447,
+      "start": 1809.24,
+      "end": 1813.149,
+      "duration": 3.909,
+      "text": "be 1 six of the period of the original"
+    },
+    {
+      "index": 448,
+      "start": 1813.159,
+      "end": 1816.43,
+      "duration": 3.271,
+      "text": "clock with the face difference of one"
+    },
+    {
+      "index": 449,
+      "start": 1816.44,
+      "end": 1820.35,
+      "duration": 3.91,
+      "text": "clock period between two"
+    },
+    {
+      "index": 450,
+      "start": 1822.47,
+      "end": 1822.48,
+      "duration": 0.01,
+      "text": "faces this counter is also called a"
+    },
+    {
+      "index": 451,
+      "start": 1822.48,
+      "end": 1826.23,
+      "duration": 3.75,
+      "text": "Johnson's"
+    },
+    {
+      "index": 452,
+      "start": 1839.43,
+      "end": 1839.44,
+      "duration": 0.01,
+      "text": "counter again it's used commonly for"
+    },
+    {
+      "index": 453,
+      "start": 1839.44,
+      "end": 1841.99,
+      "duration": 2.55,
+      "text": "multiple p as I said you want to have"
+    },
+    {
+      "index": 454,
+      "start": 1842.0,
+      "end": 1843.99,
+      "duration": 1.99,
+      "text": "lights turning on and turning off in a"
+    },
+    {
+      "index": 455,
+      "start": 1844.0,
+      "end": 1846.909,
+      "duration": 2.909,
+      "text": "particular sequence you can do"
+    },
+    {
+      "index": 456,
+      "start": 1846.919,
+      "end": 1850.909,
+      "duration": 3.99,
+      "text": "this there's one"
+    },
+    {
+      "index": 457,
+      "start": 1854.23,
+      "end": 1854.24,
+      "duration": 0.01,
+      "text": "example now if I don't want this pH to"
+    },
+    {
+      "index": 458,
+      "start": 1854.24,
+      "end": 1856.23,
+      "duration": 1.99,
+      "text": "be of this"
+    },
+    {
+      "index": 459,
+      "start": 1856.24,
+      "end": 1858.99,
+      "duration": 2.75,
+      "text": "duration one period of clock I want only"
+    },
+    {
+      "index": 460,
+      "start": 1859.0,
+      "end": 1860.789,
+      "duration": 1.789,
+      "text": "one clock period with different faces"
+    },
+    {
+      "index": 461,
+      "start": 1860.799,
+      "end": 1864.029,
+      "duration": 3.23,
+      "text": "that is I want a clock to be on I want"
+    },
+    {
+      "index": 462,
+      "start": 1864.039,
+      "end": 1867.389,
+      "duration": 3.35,
+      "text": "one pulse to be on for this period one"
+    },
+    {
+      "index": 463,
+      "start": 1867.399,
+      "end": 1869.83,
+      "duration": 2.431,
+      "text": "period another face another clock to be"
+    },
+    {
+      "index": 464,
+      "start": 1869.84,
+      "end": 1871.43,
+      "duration": 1.59,
+      "text": "on for this period we are six periods"
+    },
+    {
+      "index": 465,
+      "start": 1871.44,
+      "end": 1886.149,
+      "duration": 14.709,
+      "text": "right suppose I want pulses like"
+    },
+    {
+      "index": 466,
+      "start": 1915.389,
+      "end": 1915.399,
+      "duration": 0.01,
+      "text": "the what I'm saying"
+    },
+    {
+      "index": 467,
+      "start": 1915.399,
+      "end": 1919.35,
+      "duration": 3.951,
+      "text": "is what I'm saying is s of this lights"
+    },
+    {
+      "index": 468,
+      "start": 1919.36,
+      "end": 1921.029,
+      "duration": 1.669,
+      "text": "say take the same light example this"
+    },
+    {
+      "index": 469,
+      "start": 1921.039,
+      "end": 1922.59,
+      "duration": 1.551,
+      "text": "light is on at this point in time and"
+    },
+    {
+      "index": 470,
+      "start": 1922.6,
+      "end": 1924.789,
+      "duration": 2.189,
+      "text": "remains on for 3:00 periods and then"
+    },
+    {
+      "index": 471,
+      "start": 1924.799,
+      "end": 1927.75,
+      "duration": 2.951,
+      "text": "switches off this light is on the next"
+    },
+    {
+      "index": 472,
+      "start": 1927.76,
+      "end": 1929.75,
+      "duration": 1.99,
+      "text": "clock period after next clock period but"
+    },
+    {
+      "index": 473,
+      "start": 1929.76,
+      "end": 1931.11,
+      "duration": 1.35,
+      "text": "remains on for three more clock periods"
+    },
+    {
+      "index": 474,
+      "start": 1931.12,
+      "end": 1934.269,
+      "duration": 3.149,
+      "text": "and so forth I have three lights turn"
+    },
+    {
+      "index": 475,
+      "start": 1934.279,
+      "end": 1940.23,
+      "duration": 5.951,
+      "text": "on this turns on this turns"
+    },
+    {
+      "index": 476,
+      "start": 1944.19,
+      "end": 1944.2,
+      "duration": 0.01,
+      "text": "on and I can have them on for half the"
+    },
+    {
+      "index": 477,
+      "start": 1944.2,
+      "end": 1946.47,
+      "duration": 2.27,
+      "text": "clock period and other half clock Period"
+    },
+    {
+      "index": 478,
+      "start": 1946.48,
+      "end": 1949.149,
+      "duration": 2.669,
+      "text": "start disapp pring one and then like"
+    },
+    {
+      "index": 479,
+      "start": 1949.159,
+      "end": 1951.59,
+      "duration": 2.431,
+      "text": "this instead I want a"
+    },
+    {
+      "index": 480,
+      "start": 1951.6,
+      "end": 1955.269,
+      "duration": 3.669,
+      "text": "clock six faces but only each dire"
+    },
+    {
+      "index": 481,
+      "start": 1955.279,
+      "end": 1958.669,
+      "duration": 3.39,
+      "text": "should I should have six LEDs or six"
+    },
+    {
+      "index": 482,
+      "start": 1958.679,
+      "end": 1960.909,
+      "duration": 2.23,
+      "text": "lights which should be turned on each"
+    },
+    {
+      "index": 483,
+      "start": 1960.919,
+      "end": 1963.31,
+      "duration": 2.391,
+      "text": "only for one clock period original clock"
+    },
+    {
+      "index": 484,
+      "start": 1963.32,
+      "end": 1965.59,
+      "duration": 2.27,
+      "text": "period that means I want something to be"
+    },
+    {
+      "index": 485,
+      "start": 1965.6,
+      "end": 1967.389,
+      "duration": 1.789,
+      "text": "on for this period alone and off for the"
+    },
+    {
+      "index": 486,
+      "start": 1967.399,
+      "end": 1971.11,
+      "duration": 3.711,
+      "text": "rest of the period it can be a"
+    },
+    {
+      "index": 487,
+      "start": 1971.12,
+      "end": 1973.909,
+      "duration": 2.789,
+      "text": "motor it can be a light can be something"
+    },
+    {
+      "index": 488,
+      "start": 1973.919,
+      "end": 1975.789,
+      "duration": 1.87,
+      "text": "which you want to just activate for this"
+    },
+    {
+      "index": 489,
+      "start": 1975.799,
+      "end": 1978.31,
+      "duration": 2.511,
+      "text": "clock period"
+    },
+    {
+      "index": 490,
+      "start": 1978.32,
+      "end": 1979.669,
+      "duration": 1.349,
+      "text": "another only for this clock period"
+    },
+    {
+      "index": 491,
+      "start": 1979.679,
+      "end": 1981.95,
+      "duration": 2.271,
+      "text": "another only for this clock period this"
+    },
+    {
+      "index": 492,
+      "start": 1981.96,
+      "end": 1984.549,
+      "duration": 2.589,
+      "text": "this this so from these waveforms I"
+    },
+    {
+      "index": 493,
+      "start": 1984.559,
+      "end": 1985.629,
+      "duration": 1.07,
+      "text": "should be able to generate these"
+    },
+    {
+      "index": 494,
+      "start": 1985.639,
+      "end": 1988.629,
+      "duration": 2.99,
+      "text": "waveforms easily because if you look at"
+    },
+    {
+      "index": 495,
+      "start": 1988.639,
+      "end": 1990.99,
+      "duration": 2.351,
+      "text": "this"
+    },
+    {
+      "index": 496,
+      "start": 1991.0,
+      "end": 1997.23,
+      "duration": 6.23,
+      "text": "ABC you can also write I can write ABC"
+    },
+    {
+      "index": 497,
+      "start": 2001.23,
+      "end": 2001.24,
+      "duration": 0.01,
+      "text": "here we started with 0 0 0 then we made"
+    },
+    {
+      "index": 498,
+      "start": 2001.24,
+      "end": 2003.35,
+      "duration": 2.11,
+      "text": "it 1 0"
+    },
+    {
+      "index": 499,
+      "start": 2003.36,
+      "end": 2007.549,
+      "duration": 4.189,
+      "text": "0 1 1 0 1 one one"
+    },
+    {
+      "index": 500,
+      "start": 2007.559,
+      "end": 2010.789,
+      "duration": 3.23,
+      "text": "0 1 1 0 0"
+    },
+    {
+      "index": 501,
+      "start": 2010.799,
+      "end": 2016.43,
+      "duration": 5.631,
+      "text": "1 is it not back to"
+    },
+    {
+      "index": 502,
+      "start": 2019.389,
+      "end": 2019.399,
+      "duration": 0.01,
+      "text": "zero suppose I take the compliments also"
+    },
+    {
+      "index": 503,
+      "start": 2019.399,
+      "end": 2035.95,
+      "duration": 16.551,
+      "text": "at the same"
+    },
+    {
+      "index": 504,
+      "start": 2044.509,
+      "end": 2044.519,
+      "duration": 0.01,
+      "text": "so each of these flip-flops have q and Q"
+    },
+    {
+      "index": 505,
+      "start": 2044.519,
+      "end": 2048.869,
+      "duration": 4.35,
+      "text": "bars so I can call this a b c this is a"
+    },
+    {
+      "index": 506,
+      "start": 2048.879,
+      "end": 2052.55,
+      "duration": 3.671,
+      "text": "bar B Bar C"
+    },
+    {
+      "index": 507,
+      "start": 2052.56,
+      "end": 2055.349,
+      "duration": 2.789,
+      "text": "bar so similar to the ABC I can draw"
+    },
+    {
+      "index": 508,
+      "start": 2055.359,
+      "end": 2058.149,
+      "duration": 2.79,
+      "text": "wave forms for a bar B Bar C bar which"
+    },
+    {
+      "index": 509,
+      "start": 2058.159,
+      "end": 2060.909,
+      "duration": 2.75,
+      "text": "will again have the same on period for"
+    },
+    {
+      "index": 510,
+      "start": 2060.919,
+      "end": 2062.43,
+      "duration": 1.511,
+      "text": "three clock pulses of per three clock"
+    },
+    {
+      "index": 511,
+      "start": 2062.44,
+      "end": 2065.27,
+      "duration": 2.83,
+      "text": "pulses but that will be complimentary to"
+    },
+    {
+      "index": 512,
+      "start": 2065.28,
+      "end": 2067.389,
+      "duration": 2.109,
+      "text": "the corresponding clock if a bar will be"
+    },
+    {
+      "index": 513,
+      "start": 2067.399,
+      "end": 2070.669,
+      "duration": 3.27,
+      "text": "complement to a inverse of"
+    },
+    {
+      "index": 514,
+      "start": 2070.679,
+      "end": 2073.109,
+      "duration": 2.43,
+      "text": "a b bar will be inverse of b c bar will"
+    },
+    {
+      "index": 515,
+      "start": 2073.119,
+      "end": 2075.869,
+      "duration": 2.75,
+      "text": "be inverse of C again on for 3:00 period"
+    },
+    {
+      "index": 516,
+      "start": 2075.879,
+      "end": 2077.669,
+      "duration": 1.79,
+      "text": "off for three clock period total clock"
+    },
+    {
+      "index": 517,
+      "start": 2077.679,
+      "end": 2081.109,
+      "duration": 3.43,
+      "text": "period being 6 times the original clock"
+    },
+    {
+      "index": 518,
+      "start": 2081.119,
+      "end": 2084.829,
+      "duration": 3.71,
+      "text": "period now I can see the pattern is that"
+    },
+    {
+      "index": 519,
+      "start": 2084.839,
+      "end": 2086.99,
+      "duration": 2.151,
+      "text": "I want something to be on only for one"
+    },
+    {
+      "index": 520,
+      "start": 2087.0,
+      "end": 2091.389,
+      "duration": 4.389,
+      "text": "clock period now there is a you can look"
+    },
+    {
+      "index": 521,
+      "start": 2091.399,
+      "end": 2095.869,
+      "duration": 4.47,
+      "text": "at this for example if you"
+    },
+    {
+      "index": 522,
+      "start": 2100.87,
+      "end": 2100.88,
+      "duration": 0.01,
+      "text": "take B bar and C bar are one only for"
+    },
+    {
+      "index": 523,
+      "start": 2100.88,
+      "end": 2102.349,
+      "duration": 1.469,
+      "text": "the first clock period let's call this"
+    },
+    {
+      "index": 524,
+      "start": 2102.359,
+      "end": 2111.829,
+      "duration": 9.47,
+      "text": "first clock period second thir 4 5"
+    },
+    {
+      "index": 525,
+      "start": 2114.15,
+      "end": 2114.16,
+      "duration": 0.01,
+      "text": "6 suppose I"
+    },
+    {
+      "index": 526,
+      "start": 2114.16,
+      "end": 2118.47,
+      "duration": 4.31,
+      "text": "say a bar B Bar C"
+    },
+    {
+      "index": 527,
+      "start": 2118.48,
+      "end": 2121.63,
+      "duration": 3.15,
+      "text": "Bar B Bar C bar is what is one only for"
+    },
+    {
+      "index": 528,
+      "start": 2121.64,
+      "end": 2124.589,
+      "duration": 2.949,
+      "text": "this clock"
+    },
+    {
+      "index": 529,
+      "start": 2127.87,
+      "end": 2127.88,
+      "duration": 0.01,
+      "text": "period huh"
+    },
+    {
+      "index": 530,
+      "start": 2127.88,
+      "end": 2130.19,
+      "duration": 2.31,
+      "text": "okay okay it's wrong I'm sorry second"
+    },
+    {
+      "index": 531,
+      "start": 2130.2,
+      "end": 2135.19,
+      "duration": 4.99,
+      "text": "one also it is wrong on we can a bar"
+    },
+    {
+      "index": 532,
+      "start": 2135.2,
+      "end": 2147.99,
+      "duration": 12.79,
+      "text": "bar AB"
+    },
+    {
+      "index": 533,
+      "start": 2150.95,
+      "end": 2150.96,
+      "duration": 0.01,
+      "text": "bar first clock period will be"
+    },
+    {
+      "index": 534,
+      "start": 2150.96,
+      "end": 2155.79,
+      "duration": 4.83,
+      "text": "on"
+    },
+    {
+      "index": 535,
+      "start": 2158.71,
+      "end": 2158.72,
+      "duration": 0.01,
+      "text": "uhar B Bar"
+    },
+    {
+      "index": 536,
+      "start": 2158.72,
+      "end": 2161.71,
+      "duration": 2.99,
+      "text": "C so a bar c bar is on only for this two"
+    },
+    {
+      "index": 537,
+      "start": 2161.72,
+      "end": 2164.67,
+      "duration": 2.95,
+      "text": "clock"
+    },
+    {
+      "index": 538,
+      "start": 2167.0,
+      "end": 2167.01,
+      "duration": 0.01,
+      "text": "period uh for this clock"
+    },
+    {
+      "index": 539,
+      "start": 2167.01,
+      "end": 2170.47,
+      "duration": 3.46,
+      "text": "[Music]"
+    },
+    {
+      "index": 540,
+      "start": 2172.75,
+      "end": 2172.76,
+      "duration": 0.01,
+      "text": "period"
+    },
+    {
+      "index": 541,
+      "start": 2172.76,
+      "end": 2176.67,
+      "duration": 3.91,
+      "text": "a AC bar only for this clock period"
+    },
+    {
+      "index": 542,
+      "start": 2176.68,
+      "end": 2179.309,
+      "duration": 2.629,
+      "text": "right AC"
+    },
+    {
+      "index": 543,
+      "start": 2179.319,
+      "end": 2185.71,
+      "duration": 6.391,
+      "text": "bar only for this clock period is on hi"
+    },
+    {
+      "index": 544,
+      "start": 2185.72,
+      "end": 2191.309,
+      "duration": 5.589,
+      "text": "just AC bar that's"
+    },
+    {
+      "index": 545,
+      "start": 2193.109,
+      "end": 2193.119,
+      "duration": 0.01,
+      "text": "wrong A"
+    },
+    {
+      "index": 546,
+      "start": 2193.119,
+      "end": 2200.27,
+      "duration": 7.151,
+      "text": "Bar B Bar C"
+    },
+    {
+      "index": 547,
+      "start": 2203.39,
+      "end": 2203.4,
+      "duration": 0.01,
+      "text": "bar AB"
+    },
+    {
+      "index": 548,
+      "start": 2203.4,
+      "end": 2209.069,
+      "duration": 5.669,
+      "text": "bar AB bar"
+    },
+    {
+      "index": 549,
+      "start": 2213.349,
+      "end": 2213.359,
+      "duration": 0.01,
+      "text": "right is AB bar on only for"
+    },
+    {
+      "index": 550,
+      "start": 2213.359,
+      "end": 2215.67,
+      "duration": 2.311,
+      "text": "this"
+    },
+    {
+      "index": 551,
+      "start": 2215.68,
+      "end": 2219.79,
+      "duration": 4.11,
+      "text": "a B Bar"
+    },
+    {
+      "index": 552,
+      "start": 2233.71,
+      "end": 2233.72,
+      "duration": 0.01,
+      "text": "all right second is all right what"
+    },
+    {
+      "index": 553,
+      "start": 2233.72,
+      "end": 2237.03,
+      "duration": 3.31,
+      "text": "is third one BC"
+    },
+    {
+      "index": 554,
+      "start": 2237.04,
+      "end": 2238.95,
+      "duration": 1.91,
+      "text": "bar"
+    },
+    {
+      "index": 555,
+      "start": 2238.96,
+      "end": 2243.87,
+      "duration": 4.91,
+      "text": "b c bar right BC"
+    },
+    {
+      "index": 556,
+      "start": 2248.069,
+      "end": 2248.079,
+      "duration": 0.01,
+      "text": "bar fourth one will be AB can have this"
+    },
+    {
+      "index": 557,
+      "start": 2248.079,
+      "end": 2251.87,
+      "duration": 3.791,
+      "text": "no AB AC will be there AC will be on"
+    },
+    {
+      "index": 558,
+      "start": 2251.88,
+      "end": 2256.03,
+      "duration": 4.15,
+      "text": "only for"
+    },
+    {
+      "index": 559,
+      "start": 2262.309,
+      "end": 2262.319,
+      "duration": 0.01,
+      "text": "this this one would be a bar a bar B A"
+    },
+    {
+      "index": 560,
+      "start": 2262.319,
+      "end": 2263.589,
+      "duration": 1.27,
+      "text": "Bar C would"
+    },
+    {
+      "index": 561,
+      "start": 2263.599,
+      "end": 2268.71,
+      "duration": 5.111,
+      "text": "be uh a bar C this a bar B yes I think"
+    },
+    {
+      "index": 562,
+      "start": 2268.72,
+      "end": 2272.71,
+      "duration": 3.99,
+      "text": "the complement of"
+    },
+    {
+      "index": 563,
+      "start": 2275.23,
+      "end": 2275.24,
+      "duration": 0.01,
+      "text": "this this will be B Bar C bar most"
+    },
+    {
+      "index": 564,
+      "start": 2275.24,
+      "end": 2284.109,
+      "duration": 8.869,
+      "text": "probably B Bar C B Bar C compliment"
+    },
+    {
+      "index": 565,
+      "start": 2286.589,
+      "end": 2286.599,
+      "duration": 0.01,
+      "text": "operations so what I have to do is all I"
+    },
+    {
+      "index": 566,
+      "start": 2286.599,
+      "end": 2288.99,
+      "duration": 2.391,
+      "text": "have to do is to get the complement of"
+    },
+    {
+      "index": 567,
+      "start": 2289.0,
+      "end": 2292.67,
+      "duration": 3.67,
+      "text": "these waveforms a b c a bar B Bar C bar"
+    },
+    {
+      "index": 568,
+      "start": 2292.68,
+      "end": 2294.79,
+      "duration": 2.11,
+      "text": "and then use and Gates so in that case"
+    },
+    {
+      "index": 569,
+      "start": 2294.8,
+      "end": 2296.87,
+      "duration": 2.07,
+      "text": "I'll have so this is what the first"
+    },
+    {
+      "index": 570,
+      "start": 2296.88,
+      "end": 2299.309,
+      "duration": 2.429,
+      "text": "clock period is on a bar c bar of course"
+    },
+    {
+      "index": 571,
+      "start": 2299.319,
+      "end": 2300.829,
+      "duration": 1.51,
+      "text": "I'm not"
+    },
+    {
+      "index": 572,
+      "start": 2300.839,
+      "end": 2304.27,
+      "duration": 3.431,
+      "text": "showing c"
+    },
+    {
+      "index": 573,
+      "start": 2306.99,
+      "end": 2307.0,
+      "duration": 0.01,
+      "text": "bar I'm not showing a bar B Bar c bar"
+    },
+    {
+      "index": 574,
+      "start": 2307.0,
+      "end": 2310.069,
+      "duration": 3.069,
+      "text": "you can you can imagine that it will be"
+    },
+    {
+      "index": 575,
+      "start": 2310.079,
+      "end": 2312.63,
+      "duration": 2.551,
+      "text": "the the opposite of"
+    },
+    {
+      "index": 576,
+      "start": 2312.64,
+      "end": 2316.91,
+      "duration": 4.27,
+      "text": "this this will be a"
+    },
+    {
+      "index": 577,
+      "start": 2334.99,
+      "end": 2335.0,
+      "duration": 0.01,
+      "text": "bar so you can these waveforms can be"
+    },
+    {
+      "index": 578,
+      "start": 2335.0,
+      "end": 2342.79,
+      "duration": 7.79,
+      "text": "from a bar c bar here AB"
+    },
+    {
+      "index": 579,
+      "start": 2345.069,
+      "end": 2345.079,
+      "duration": 0.01,
+      "text": "bar AB"
+    },
+    {
+      "index": 580,
+      "start": 2345.079,
+      "end": 2347.55,
+      "duration": 2.471,
+      "text": "Bar BC"
+    },
+    {
+      "index": 581,
+      "start": 2347.56,
+      "end": 2349.589,
+      "duration": 2.029,
+      "text": "bar"
+    },
+    {
+      "index": 582,
+      "start": 2349.599,
+      "end": 2351.829,
+      "duration": 2.23,
+      "text": "AC a bar"
+    },
+    {
+      "index": 583,
+      "start": 2351.839,
+      "end": 2355.95,
+      "duration": 4.111,
+      "text": "b v Bar C so I have no variety of"
+    },
+    {
+      "index": 584,
+      "start": 2355.96,
+      "end": 2358.51,
+      "duration": 2.55,
+      "text": "choices now I can either have three-"
+    },
+    {
+      "index": 585,
+      "start": 2358.52,
+      "end": 2362.67,
+      "duration": 4.15,
+      "text": "face clock with the same period of six"
+    },
+    {
+      "index": 586,
+      "start": 2362.68,
+      "end": 2365.43,
+      "duration": 2.75,
+      "text": "times the original clock"
+    },
+    {
+      "index": 587,
+      "start": 2365.44,
+      "end": 2368.03,
+      "duration": 2.59,
+      "text": "period"
+    },
+    {
+      "index": 588,
+      "start": 2368.04,
+      "end": 2372.03,
+      "duration": 3.99,
+      "text": "so I can have a light on overlapping"
+    },
+    {
+      "index": 589,
+      "start": 2372.04,
+      "end": 2374.55,
+      "duration": 2.51,
+      "text": "three lights on first light will be on"
+    },
+    {
+      "index": 590,
+      "start": 2374.56,
+      "end": 2376.19,
+      "duration": 1.63,
+      "text": "second will be on after some time third"
+    },
+    {
+      "index": 591,
+      "start": 2376.2,
+      "end": 2377.67,
+      "duration": 1.47,
+      "text": "light will be on after some time then"
+    },
+    {
+      "index": 592,
+      "start": 2377.68,
+      "end": 2379.87,
+      "duration": 2.19,
+      "text": "the first light will be off second will"
+    },
+    {
+      "index": 593,
+      "start": 2379.88,
+      "end": 2381.23,
+      "duration": 1.35,
+      "text": "be off third light will be off that type"
+    },
+    {
+      "index": 594,
+      "start": 2381.24,
+      "end": 2383.069,
+      "duration": 1.829,
+      "text": "of display if you want you can have it"
+    },
+    {
+      "index": 595,
+      "start": 2383.079,
+      "end": 2384.829,
+      "duration": 1.75,
+      "text": "or I want to have only a light on for"
+    },
+    {
+      "index": 596,
+      "start": 2384.839,
+      "end": 2386.51,
+      "duration": 1.671,
+      "text": "this period first light and then it will"
+    },
+    {
+      "index": 597,
+      "start": 2386.52,
+      "end": 2388.51,
+      "duration": 1.99,
+      "text": "go and then second light will be on that"
+    },
+    {
+      "index": 598,
+      "start": 2388.52,
+      "end": 2389.95,
+      "duration": 1.43,
+      "text": "should go on third light should be on"
+    },
+    {
+      "index": 599,
+      "start": 2389.96,
+      "end": 2392.79,
+      "duration": 2.83,
+      "text": "they have six lights which should be on"
+    },
+    {
+      "index": 600,
+      "start": 2392.8,
+      "end": 2394.63,
+      "duration": 1.83,
+      "text": "for one clock period each of the"
+    },
+    {
+      "index": 601,
+      "start": 2394.64,
+      "end": 2396.67,
+      "duration": 2.03,
+      "text": "original clock and then again again it"
+    },
+    {
+      "index": 602,
+      "start": 2396.68,
+      "end": 2399.03,
+      "duration": 2.35,
+      "text": "will repeat so all these applications"
+    },
+    {
+      "index": 603,
+      "start": 2399.04,
+      "end": 2401.15,
+      "duration": 2.11,
+      "text": "are possible by Johnson's counter or"
+    },
+    {
+      "index": 604,
+      "start": 2401.16,
+      "end": 2403.03,
+      "duration": 1.87,
+      "text": "Twisted R counter which is a basic"
+    },
+    {
+      "index": 605,
+      "start": 2403.04,
+      "end": 2404.67,
+      "duration": 1.63,
+      "text": "modification of the shift register as I"
+    },
+    {
+      "index": 606,
+      "start": 2404.68,
+      "end": 2407.19,
+      "duration": 2.51,
+      "text": "said because shift resist basically is"
+    },
+    {
+      "index": 607,
+      "start": 2407.2,
+      "end": 2409.75,
+      "duration": 2.55,
+      "text": "the output of one stage fits into second"
+    },
+    {
+      "index": 608,
+      "start": 2409.76,
+      "end": 2411.79,
+      "duration": 2.03,
+      "text": "stage and shifted to the left or the"
+    },
+    {
+      "index": 609,
+      "start": 2411.8,
+      "end": 2414.63,
+      "duration": 2.83,
+      "text": "right depending on"
+    },
+    {
+      "index": 610,
+      "start": 2416.91,
+      "end": 2416.92,
+      "duration": 0.01,
+      "text": "the the other two applications we saw"
+    },
+    {
+      "index": 611,
+      "start": 2416.92,
+      "end": 2418.349,
+      "duration": 1.429,
+      "text": "the other day were"
+    },
+    {
+      "index": 612,
+      "start": 2418.359,
+      "end": 2420.91,
+      "duration": 2.551,
+      "text": "the parallel to serial converter suppose"
+    },
+    {
+      "index": 613,
+      "start": 2420.92,
+      "end": 2422.19,
+      "duration": 1.27,
+      "text": "the serial data is coming I give you"
+    },
+    {
+      "index": 614,
+      "start": 2422.2,
+      "end": 2424.63,
+      "duration": 2.43,
+      "text": "examples of data coming through"
+    },
+    {
+      "index": 615,
+      "start": 2424.64,
+      "end": 2428.15,
+      "duration": 3.51,
+      "text": "telephone lines in bit form and you want"
+    },
+    {
+      "index": 616,
+      "start": 2428.16,
+      "end": 2430.95,
+      "duration": 2.79,
+      "text": "to assemble it as"
+    },
+    {
+      "index": 617,
+      "start": 2430.96,
+      "end": 2433.71,
+      "duration": 2.75,
+      "text": "words serial to parallel conversion or"
+    },
+    {
+      "index": 618,
+      "start": 2433.72,
+      "end": 2436.51,
+      "duration": 2.79,
+      "text": "you have the computer generated data is"
+    },
+    {
+      "index": 619,
+      "start": 2436.52,
+      "end": 2439.51,
+      "duration": 2.99,
+      "text": "available as parallel data byes or words"
+    },
+    {
+      "index": 620,
+      "start": 2439.52,
+      "end": 2440.829,
+      "duration": 1.309,
+      "text": "and you want to transmit it through your"
+    },
+    {
+      "index": 621,
+      "start": 2440.839,
+      "end": 2443.589,
+      "duration": 2.75,
+      "text": "telephone line you have to shift it"
+    },
+    {
+      "index": 622,
+      "start": 2443.599,
+      "end": 2446.829,
+      "duration": 3.23,
+      "text": "serially and send it so other"
+    },
+    {
+      "index": 623,
+      "start": 2446.839,
+      "end": 2449.069,
+      "duration": 2.23,
+      "text": "applications are"
+    },
+    {
+      "index": 624,
+      "start": 2449.079,
+      "end": 2452.069,
+      "duration": 2.99,
+      "text": "then um parallel to serial converter and"
+    },
+    {
+      "index": 625,
+      "start": 2452.079,
+      "end": 2454.43,
+      "duration": 2.351,
+      "text": "serial to parallel converter so shift"
+    },
+    {
+      "index": 626,
+      "start": 2454.44,
+      "end": 2457.63,
+      "duration": 3.19,
+      "text": "register is a very very important U"
+    },
+    {
+      "index": 627,
+      "start": 2457.64,
+      "end": 2460.069,
+      "duration": 2.429,
+      "text": "uh what shall I say the the the building"
+    },
+    {
+      "index": 628,
+      "start": 2460.079,
+      "end": 2462.55,
+      "duration": 2.471,
+      "text": "block of a sequen shell system of any"
+    },
+    {
+      "index": 629,
+      "start": 2462.56,
+      "end": 2465.43,
+      "duration": 2.87,
+      "text": "digital system we these are all building"
+    },
+    {
+      "index": 630,
+      "start": 2465.44,
+      "end": 2470.15,
+      "duration": 4.71,
+      "text": "blocks of uh digital circuits first we"
+    },
+    {
+      "index": 631,
+      "start": 2470.16,
+      "end": 2471.309,
+      "duration": 1.149,
+      "text": "saw"
+    },
+    {
+      "index": 632,
+      "start": 2471.319,
+      "end": 2474.55,
+      "duration": 3.231,
+      "text": "combinational building blocks Gates"
+    },
+    {
+      "index": 633,
+      "start": 2474.56,
+      "end": 2477.51,
+      "duration": 2.95,
+      "text": "adders and all that we saw then"
+    },
+    {
+      "index": 634,
+      "start": 2477.52,
+      "end": 2479.87,
+      "duration": 2.35,
+      "text": "sequential building blocks flip flops"
+    },
+    {
+      "index": 635,
+      "start": 2479.88,
+      "end": 2482.309,
+      "duration": 2.429,
+      "text": "using flip flops we saw how to build"
+    },
+    {
+      "index": 636,
+      "start": 2482.319,
+      "end": 2484.55,
+      "duration": 2.231,
+      "text": "counters and how to build registers how"
+    },
+    {
+      "index": 637,
+      "start": 2484.56,
+      "end": 2485.91,
+      "duration": 1.35,
+      "text": "to build shift registers and shift"
+    },
+    {
+      "index": 638,
+      "start": 2485.92,
+      "end": 2488.63,
+      "duration": 2.71,
+      "text": "register is a very"
+    },
+    {
+      "index": 639,
+      "start": 2488.64,
+      "end": 2491.75,
+      "duration": 3.11,
+      "text": "uh frequently used component in many"
+    },
+    {
+      "index": 640,
+      "start": 2491.76,
+      "end": 2494.15,
+      "duration": 2.39,
+      "text": "digital systems I given you some"
+    },
+    {
+      "index": 641,
+      "start": 2494.16,
+      "end": 2495.75,
+      "duration": 1.59,
+      "text": "application today the pseudo random"
+    },
+    {
+      "index": 642,
+      "start": 2495.76,
+      "end": 2496.75,
+      "duration": 0.99,
+      "text": "sequence"
+    },
+    {
+      "index": 643,
+      "start": 2496.76,
+      "end": 2499.829,
+      "duration": 3.069,
+      "text": "generator"
+    },
+    {
+      "index": 644,
+      "start": 2502.47,
+      "end": 2502.48,
+      "duration": 0.01,
+      "text": "the Johnson's"
+    },
+    {
+      "index": 645,
+      "start": 2502.48,
+      "end": 2504.589,
+      "duration": 2.109,
+      "text": "counter and then the parall to serial"
+    },
+    {
+      "index": 646,
+      "start": 2504.599,
+      "end": 2506.15,
+      "duration": 1.551,
+      "text": "serial par we talked about the other day"
+    },
+    {
+      "index": 647,
+      "start": 2506.16,
+      "end": 2506.99,
+      "duration": 0.83,
+      "text": "and all"
+    },
+    {
+      "index": 648,
+      "start": 2507.0,
+      "end": 2512.23,
+      "duration": 5.23,
+      "text": "that so with this we are more or"
+    },
+    {
+      "index": 649,
+      "start": 2512.24,
+      "end": 2514.43,
+      "duration": 2.19,
+      "text": "less"
+    },
+    {
+      "index": 650,
+      "start": 2514.44,
+      "end": 2517.47,
+      "duration": 3.03,
+      "text": "um completing the"
+    },
+    {
+      "index": 651,
+      "start": 2517.48,
+      "end": 2519.91,
+      "duration": 2.43,
+      "text": "discussion of the basic building blocks"
+    },
+    {
+      "index": 652,
+      "start": 2519.92,
+      "end": 2521.99,
+      "duration": 2.07,
+      "text": "we are to talk of some other building"
+    },
+    {
+      "index": 653,
+      "start": 2522.0,
+      "end": 2525.03,
+      "duration": 3.03,
+      "text": "blocks in combinational domain"
+    },
+    {
+      "index": 654,
+      "start": 2525.04,
+      "end": 2528.55,
+      "duration": 3.51,
+      "text": "multiplexers and all that but what I"
+    },
+    {
+      "index": 655,
+      "start": 2528.56,
+      "end": 2530.47,
+      "duration": 1.91,
+      "text": "want to do now is"
+    },
+    {
+      "index": 656,
+      "start": 2530.48,
+      "end": 2534.15,
+      "duration": 3.67,
+      "text": "to talk of now"
+    },
+    {
+      "index": 657,
+      "start": 2534.16,
+      "end": 2536.829,
+      "duration": 2.669,
+      "text": "systems we'll we'll use"
+    },
+    {
+      "index": 658,
+      "start": 2536.839,
+      "end": 2538.75,
+      "duration": 1.911,
+      "text": "multiplexers decoders and other"
+    },
+    {
+      "index": 659,
+      "start": 2538.76,
+      "end": 2540.91,
+      "duration": 2.15,
+      "text": "combinational building blocks which are"
+    },
+    {
+      "index": 660,
+      "start": 2540.92,
+      "end": 2544.75,
+      "duration": 3.83,
+      "text": "not basic building blocks like"
+    },
+    {
+      "index": 661,
+      "start": 2544.76,
+      "end": 2547.63,
+      "duration": 2.87,
+      "text": "gates gates the basic building block in"
+    },
+    {
+      "index": 662,
+      "start": 2547.64,
+      "end": 2549.549,
+      "duration": 1.909,
+      "text": "combinational flip flops are the basic"
+    },
+    {
+      "index": 663,
+      "start": 2549.559,
+      "end": 2552.67,
+      "duration": 3.111,
+      "text": "building block sequential but I took a"
+    },
+    {
+      "index": 664,
+      "start": 2552.68,
+      "end": 2554.75,
+      "duration": 2.07,
+      "text": "flip flop application and developed into"
+    },
+    {
+      "index": 665,
+      "start": 2554.76,
+      "end": 2556.75,
+      "duration": 1.99,
+      "text": "counters and registers and shift"
+    },
+    {
+      "index": 666,
+      "start": 2556.76,
+      "end": 2558.829,
+      "duration": 2.069,
+      "text": "registers like we did in the case of"
+    },
+    {
+      "index": 667,
+      "start": 2558.839,
+      "end": 2560.47,
+      "duration": 1.631,
+      "text": "gates we took the basic building block"
+    },
+    {
+      "index": 668,
+      "start": 2560.48,
+      "end": 2563.069,
+      "duration": 2.589,
+      "text": "of gates and developed them into adders"
+    },
+    {
+      "index": 669,
+      "start": 2563.079,
+      "end": 2565.91,
+      "duration": 2.831,
+      "text": "subs and all that so now there's a whole"
+    },
+    {
+      "index": 670,
+      "start": 2565.92,
+      "end": 2569.03,
+      "duration": 3.11,
+      "text": "lot of things can be added these are"
+    },
+    {
+      "index": 671,
+      "start": 2569.04,
+      "end": 2571.589,
+      "duration": 2.549,
+      "text": "basically built using the basic building"
+    },
+    {
+      "index": 672,
+      "start": 2571.599,
+      "end": 2573.75,
+      "duration": 2.151,
+      "text": "blocks combinational Bic building blocks"
+    },
+    {
+      "index": 673,
+      "start": 2573.76,
+      "end": 2575.829,
+      "duration": 2.069,
+      "text": "are Gates sequential building blocks are"
+    },
+    {
+      "index": 674,
+      "start": 2575.839,
+      "end": 2578.95,
+      "duration": 3.111,
+      "text": "basic building blocks are flip flops now"
+    },
+    {
+      "index": 675,
+      "start": 2578.96,
+      "end": 2580.75,
+      "duration": 1.79,
+      "text": "we can use all these things to build"
+    },
+    {
+      "index": 676,
+      "start": 2580.76,
+      "end": 2582.27,
+      "duration": 1.51,
+      "text": "subsystems"
+    },
+    {
+      "index": 677,
+      "start": 2582.28,
+      "end": 2587.349,
+      "duration": 5.069,
+      "text": "or second order type of"
+    },
+    {
+      "index": 678,
+      "start": 2589.67,
+      "end": 2589.68,
+      "duration": 0.01,
+      "text": "complexity and then using them we have"
+    },
+    {
+      "index": 679,
+      "start": 2589.68,
+      "end": 2590.829,
+      "duration": 1.149,
+      "text": "to build"
+    },
+    {
+      "index": 680,
+      "start": 2590.839,
+      "end": 2593.47,
+      "duration": 2.631,
+      "text": "systems so we have to get into the act"
+    },
+    {
+      "index": 681,
+      "start": 2593.48,
+      "end": 2597.03,
+      "duration": 3.55,
+      "text": "of how to define a system how"
+    },
+    {
+      "index": 682,
+      "start": 2597.04,
+      "end": 2599.79,
+      "duration": 2.75,
+      "text": "to synthesize it how to build"
+    },
+    {
+      "index": 683,
+      "start": 2599.8,
+      "end": 2602.829,
+      "duration": 3.029,
+      "text": "it before that we'll just deviate for a"
+    },
+    {
+      "index": 684,
+      "start": 2602.839,
+      "end": 2605.349,
+      "duration": 2.51,
+      "text": "minute and say here now why did I now"
+    },
+    {
+      "index": 685,
+      "start": 2605.359,
+      "end": 2607.43,
+      "duration": 2.071,
+      "text": "start from Gates and finished Gates and"
+    },
+    {
+      "index": 686,
+      "start": 2607.44,
+      "end": 2608.95,
+      "duration": 1.51,
+      "text": "then instead of doing the other things"
+    },
+    {
+      "index": 687,
+      "start": 2608.96,
+      "end": 2613.87,
+      "duration": 4.91,
+      "text": "like multiplexers and decoders and other"
+    },
+    {
+      "index": 688,
+      "start": 2613.88,
+      "end": 2615.27,
+      "duration": 1.39,
+      "text": "programable arrays which are all"
+    },
+    {
+      "index": 689,
+      "start": 2615.28,
+      "end": 2617.91,
+      "duration": 2.63,
+      "text": "combinational building blocks switched"
+    },
+    {
+      "index": 690,
+      "start": 2617.92,
+      "end": 2620.19,
+      "duration": 2.27,
+      "text": "to sequential in order to give you all"
+    },
+    {
+      "index": 691,
+      "start": 2620.2,
+      "end": 2622.349,
+      "duration": 2.149,
+      "text": "the basic building blocks in both"
+    },
+    {
+      "index": 692,
+      "start": 2622.359,
+      "end": 2625.03,
+      "duration": 2.671,
+      "text": "combination sequential basic tiles like"
+    },
+    {
+      "index": 693,
+      "start": 2625.04,
+      "end": 2628.109,
+      "duration": 3.069,
+      "text": "a Lego block I told you basic tiles are"
+    },
+    {
+      "index": 694,
+      "start": 2628.119,
+      "end": 2629.43,
+      "duration": 1.311,
+      "text": "there it's up to you to play with them"
+    },
+    {
+      "index": 695,
+      "start": 2629.44,
+      "end": 2631.43,
+      "duration": 1.99,
+      "text": "and then build"
+    },
+    {
+      "index": 696,
+      "start": 2631.44,
+      "end": 2635.109,
+      "duration": 3.669,
+      "text": "Cals now why did I do that is because"
+    },
+    {
+      "index": 697,
+      "start": 2635.119,
+      "end": 2638.23,
+      "duration": 3.111,
+      "text": "technologically these are of the same"
+    },
+    {
+      "index": 698,
+      "start": 2638.24,
+      "end": 2640.63,
+      "duration": 2.39,
+      "text": "complexity we have generally we Define"
+    },
+    {
+      "index": 699,
+      "start": 2640.64,
+      "end": 2645.349,
+      "duration": 4.709,
+      "text": "systems as small scale I all these are"
+    },
+    {
+      "index": 700,
+      "start": 2645.359,
+      "end": 2649.069,
+      "duration": 3.71,
+      "text": "integrated circuits it is made"
+    },
+    {
+      "index": 701,
+      "start": 2649.079,
+      "end": 2652.75,
+      "duration": 3.671,
+      "text": "of silicon but then built as a one"
+    },
+    {
+      "index": 702,
+      "start": 2652.76,
+      "end": 2654.03,
+      "duration": 1.27,
+      "text": "single"
+    },
+    {
+      "index": 703,
+      "start": 2654.04,
+      "end": 2656.549,
+      "duration": 2.509,
+      "text": "circuit a gate even a gate is as"
+    },
+    {
+      "index": 704,
+      "start": 2656.559,
+      "end": 2658.63,
+      "duration": 2.071,
+      "text": "integrated circuit in the"
+    },
+    {
+      "index": 705,
+      "start": 2658.64,
+      "end": 2661.63,
+      "duration": 2.99,
+      "text": "sense gate is not a component it's the"
+    },
+    {
+      "index": 706,
+      "start": 2661.64,
+      "end": 2663.79,
+      "duration": 2.15,
+      "text": "basic component of a gate is a regist"
+    },
+    {
+      "index": 707,
+      "start": 2663.8,
+      "end": 2666.91,
+      "duration": 3.11,
+      "text": "transistor maybe your Field Effect"
+    },
+    {
+      "index": 708,
+      "start": 2666.92,
+      "end": 2670.75,
+      "duration": 3.83,
+      "text": "transor M fet as they call it metaloy"
+    },
+    {
+      "index": 709,
+      "start": 2670.76,
+      "end": 2673.829,
+      "duration": 3.069,
+      "text": "Field Effect or bipolar Junction trans"
+    },
+    {
+      "index": 710,
+      "start": 2673.839,
+      "end": 2675.67,
+      "duration": 1.831,
+      "text": "sometimes may use extra components like"
+    },
+    {
+      "index": 711,
+      "start": 2675.68,
+      "end": 2678.309,
+      "duration": 2.629,
+      "text": "res resistors occasionally"
+    },
+    {
+      "index": 712,
+      "start": 2678.319,
+      "end": 2680.349,
+      "duration": 2.03,
+      "text": "capacitors so using all these things you"
+    },
+    {
+      "index": 713,
+      "start": 2680.359,
+      "end": 2682.43,
+      "duration": 2.071,
+      "text": "build a basic building"
+    },
+    {
+      "index": 714,
+      "start": 2682.44,
+      "end": 2684.67,
+      "duration": 2.23,
+      "text": "block which is an integrated circuit"
+    },
+    {
+      "index": 715,
+      "start": 2684.68,
+      "end": 2686.349,
+      "duration": 1.669,
+      "text": "because all these things are integrated"
+    },
+    {
+      "index": 716,
+      "start": 2686.359,
+      "end": 2688.27,
+      "duration": 1.911,
+      "text": "the circuit is integrated in a small"
+    },
+    {
+      "index": 717,
+      "start": 2688.28,
+      "end": 2691.069,
+      "duration": 2.789,
+      "text": "single piece of silicon silicon"
+    },
+    {
+      "index": 718,
+      "start": 2691.079,
+      "end": 2695.19,
+      "duration": 4.111,
+      "text": "crystal uh into which you edge this by"
+    },
+    {
+      "index": 719,
+      "start": 2695.2,
+      "end": 2696.75,
+      "duration": 1.55,
+      "text": "lots of means etching is a very crude"
+    },
+    {
+      "index": 720,
+      "start": 2696.76,
+      "end": 2698.87,
+      "duration": 2.11,
+      "text": "term today etching is usually earlier on"
+    },
+    {
+      "index": 721,
+      "start": 2698.88,
+      "end": 2701.47,
+      "duration": 2.59,
+      "text": "it was done by chemical process today we"
+    },
+    {
+      "index": 722,
+      "start": 2701.48,
+      "end": 2703.27,
+      "duration": 1.79,
+      "text": "have so much Precision required all"
+    },
+    {
+      "index": 723,
+      "start": 2703.28,
+      "end": 2705.589,
+      "duration": 2.309,
+      "text": "these things we have lithography using"
+    },
+    {
+      "index": 724,
+      "start": 2705.599,
+      "end": 2708.47,
+      "duration": 2.871,
+      "text": "lasers using Electron Beam molecular"
+    },
+    {
+      "index": 725,
+      "start": 2708.48,
+      "end": 2709.91,
+      "duration": 1.43,
+      "text": "beam and all that lithography so that"
+    },
+    {
+      "index": 726,
+      "start": 2709.92,
+      "end": 2712.71,
+      "duration": 2.79,
+      "text": "you can precisely cut like even in"
+    },
+    {
+      "index": 727,
+      "start": 2712.72,
+      "end": 2714.95,
+      "duration": 2.23,
+      "text": "surgery you know now today earlier on"
+    },
+    {
+      "index": 728,
+      "start": 2714.96,
+      "end": 2716.23,
+      "duration": 1.27,
+      "text": "people were used to be operated they"
+    },
+    {
+      "index": 729,
+      "start": 2716.24,
+      "end": 2717.39,
+      "duration": 1.15,
+      "text": "have to cut"
+    },
+    {
+      "index": 730,
+      "start": 2717.4,
+      "end": 2719.549,
+      "duration": 2.149,
+      "text": "open and do all those things and then"
+    },
+    {
+      "index": 731,
+      "start": 2719.559,
+      "end": 2721.43,
+      "duration": 1.871,
+      "text": "close it today everything is done with"
+    },
+    {
+      "index": 732,
+      "start": 2721.44,
+      "end": 2725.27,
+      "duration": 3.83,
+      "text": "Precision beams laser beams being sent"
+    },
+    {
+      "index": 733,
+      "start": 2725.28,
+      "end": 2726.47,
+      "duration": 1.19,
+      "text": "and"
+    },
+    {
+      "index": 734,
+      "start": 2726.48,
+      "end": 2731.19,
+      "duration": 4.71,
+      "text": "so likewise in a building block also we"
+    },
+    {
+      "index": 735,
+      "start": 2731.2,
+      "end": 2733.43,
+      "duration": 2.23,
+      "text": "have transistors and Gates and things"
+    },
+    {
+      "index": 736,
+      "start": 2733.44,
+      "end": 2736.03,
+      "duration": 2.59,
+      "text": "like that because the technology is"
+    },
+    {
+      "index": 737,
+      "start": 2736.04,
+      "end": 2738.67,
+      "duration": 2.63,
+      "text": "grown very very precisely they are put"
+    },
+    {
+      "index": 738,
+      "start": 2738.68,
+      "end": 2740.79,
+      "duration": 2.11,
+      "text": "together in place different places and"
+    },
+    {
+      "index": 739,
+      "start": 2740.8,
+      "end": 2743.069,
+      "duration": 2.269,
+      "text": "formed in a single circuit these are"
+    },
+    {
+      "index": 740,
+      "start": 2743.079,
+      "end": 2745.91,
+      "duration": 2.831,
+      "text": "called integrated circuits now General"
+    },
+    {
+      "index": 741,
+      "start": 2745.92,
+      "end": 2748.23,
+      "duration": 2.31,
+      "text": "integrated circuits are any circuit in"
+    },
+    {
+      "index": 742,
+      "start": 2748.24,
+      "end": 2751.589,
+      "duration": 3.349,
+      "text": "which several components both active and"
+    },
+    {
+      "index": 743,
+      "start": 2751.599,
+      "end": 2753.75,
+      "duration": 2.151,
+      "text": "passive Active Components are"
+    },
+    {
+      "index": 744,
+      "start": 2753.76,
+      "end": 2756.67,
+      "duration": 2.91,
+      "text": "transistors diodes"
+    },
+    {
+      "index": 745,
+      "start": 2756.68,
+      "end": 2758.15,
+      "duration": 1.47,
+      "text": "FS"
+    },
+    {
+      "index": 746,
+      "start": 2758.16,
+      "end": 2762.63,
+      "duration": 4.47,
+      "text": "Etc and passive components are resistors"
+    },
+    {
+      "index": 747,
+      "start": 2762.64,
+      "end": 2765.87,
+      "duration": 3.23,
+      "text": "capacitors inductors of course is very"
+    },
+    {
+      "index": 748,
+      "start": 2765.88,
+      "end": 2767.95,
+      "duration": 2.07,
+      "text": "uh it is"
+    },
+    {
+      "index": 749,
+      "start": 2767.96,
+      "end": 2770.99,
+      "duration": 3.03,
+      "text": "relatively activ R are easy to make"
+    },
+    {
+      "index": 750,
+      "start": 2771.0,
+      "end": 2772.829,
+      "duration": 1.829,
+      "text": "passive are little more difficult"
+    },
+    {
+      "index": 751,
+      "start": 2772.839,
+      "end": 2774.99,
+      "duration": 2.151,
+      "text": "resistance is okay capacity a little"
+    },
+    {
+      "index": 752,
+      "start": 2775.0,
+      "end": 2777.99,
+      "duration": 2.99,
+      "text": "more difficult both in terms of size and"
+    },
+    {
+      "index": 753,
+      "start": 2778.0,
+      "end": 2781.27,
+      "duration": 3.27,
+      "text": "the and the Precision values and"
+    },
+    {
+      "index": 754,
+      "start": 2781.28,
+      "end": 2784.19,
+      "duration": 2.91,
+      "text": "inductance is even more difficult but"
+    },
+    {
+      "index": 755,
+      "start": 2784.2,
+      "end": 2785.87,
+      "duration": 1.67,
+      "text": "we'll see all those things later on how"
+    },
+    {
+      "index": 756,
+      "start": 2785.88,
+      "end": 2787.91,
+      "duration": 2.03,
+      "text": "they build all these things but this"
+    },
+    {
+      "index": 757,
+      "start": 2787.92,
+      "end": 2791.51,
+      "duration": 3.59,
+      "text": "integrated components integrated"
+    },
+    {
+      "index": 758,
+      "start": 2791.52,
+      "end": 2795.79,
+      "duration": 4.27,
+      "text": "circuits are classified"
+    },
+    {
+      "index": 759,
+      "start": 2799.15,
+      "end": 2799.16,
+      "duration": 0.01,
+      "text": "into small scale integrate circuits"
+    },
+    {
+      "index": 760,
+      "start": 2799.16,
+      "end": 2801.549,
+      "duration": 2.389,
+      "text": "medium scale integrate circuits large"
+    },
+    {
+      "index": 761,
+      "start": 2801.559,
+      "end": 2803.79,
+      "duration": 2.231,
+      "text": "scale integr circuits very large scale"
+    },
+    {
+      "index": 762,
+      "start": 2803.8,
+      "end": 2806.39,
+      "duration": 2.59,
+      "text": "integr"
+    },
+    {
+      "index": 763,
+      "start": 2808.75,
+      "end": 2808.76,
+      "duration": 0.01,
+      "text": "circuits a small scale integrate circuit"
+    },
+    {
+      "index": 764,
+      "start": 2808.76,
+      "end": 2810.309,
+      "duration": 1.549,
+      "text": "is a circuit in"
+    },
+    {
+      "index": 765,
+      "start": 2810.319,
+      "end": 2814.79,
+      "duration": 4.471,
+      "text": "which about 10 gates in one"
+    },
+    {
+      "index": 766,
+      "start": 2814.8,
+      "end": 2817.67,
+      "duration": 2.87,
+      "text": "circuit"
+    },
+    {
+      "index": 767,
+      "start": 2817.68,
+      "end": 2819.15,
+      "duration": 1.47,
+      "text": "some simple a"
+    },
+    {
+      "index": 768,
+      "start": 2819.16,
+      "end": 2821.91,
+      "duration": 2.75,
+      "text": "gate the gate is an equivalent function"
+    },
+    {
+      "index": 769,
+      "start": 2821.92,
+      "end": 2823.349,
+      "duration": 1.429,
+      "text": "don't think that gate has to be a gate"
+    },
+    {
+      "index": 770,
+      "start": 2823.359,
+      "end": 2825.39,
+      "duration": 2.031,
+      "text": "in sense I told you a gate will have a"
+    },
+    {
+      "index": 771,
+      "start": 2825.4,
+      "end": 2827.15,
+      "duration": 1.75,
+      "text": "few transistors and a couple of"
+    },
+    {
+      "index": 772,
+      "start": 2827.16,
+      "end": 2829.349,
+      "duration": 2.189,
+      "text": "resistors so if you think of that as a"
+    },
+    {
+      "index": 773,
+      "start": 2829.359,
+      "end": 2831.23,
+      "duration": 1.871,
+      "text": "building basic building block five trans"
+    },
+    {
+      "index": 774,
+      "start": 2831.24,
+      "end": 2834.43,
+      "duration": 3.19,
+      "text": "about two resistor something that order"
+    },
+    {
+      "index": 775,
+      "start": 2834.44,
+      "end": 2836.91,
+      "duration": 2.47,
+      "text": "as one unit of gate we'll call it gate"
+    },
+    {
+      "index": 776,
+      "start": 2836.92,
+      "end": 2839.43,
+      "duration": 2.51,
+      "text": "function it's not a gate as per se it's"
+    },
+    {
+      "index": 777,
+      "start": 2839.44,
+      "end": 2842.109,
+      "duration": 2.669,
+      "text": "a gate function up to 10 gate functions"
+    },
+    {
+      "index": 778,
+      "start": 2842.119,
+      "end": 2844.309,
+      "duration": 2.19,
+      "text": "in a single circuit is called integrated"
+    },
+    {
+      "index": 779,
+      "start": 2844.319,
+      "end": 2852.549,
+      "duration": 8.23,
+      "text": "circuit this not approximately"
+    },
+    {
+      "index": 780,
+      "start": 2854.51,
+      "end": 2854.52,
+      "duration": 0.01,
+      "text": "any circuit which can which can do an"
+    },
+    {
+      "index": 781,
+      "start": 2854.52,
+      "end": 2857.829,
+      "duration": 3.309,
+      "text": "equivalent function of 10 gates up to 10"
+    },
+    {
+      "index": 782,
+      "start": 2857.839,
+      "end": 2859.75,
+      "duration": 1.911,
+      "text": "Gates and Gates or Gates suppose you"
+    },
+    {
+      "index": 783,
+      "start": 2859.76,
+      "end": 2862.23,
+      "duration": 2.47,
+      "text": "draw a simple combination logic circuit"
+    },
+    {
+      "index": 784,
+      "start": 2862.24,
+      "end": 2864.829,
+      "duration": 2.589,
+      "text": "few Gates here and there equivalent of"
+    },
+    {
+      "index": 785,
+      "start": 2864.839,
+      "end": 2867.79,
+      "duration": 2.951,
+      "text": "that 10 Gates we call them up to"
+    },
+    {
+      "index": 786,
+      "start": 2867.8,
+      "end": 2873.069,
+      "duration": 5.269,
+      "text": "that small scale and then from 10 to 100"
+    },
+    {
+      "index": 787,
+      "start": 2873.079,
+      "end": 2874.51,
+      "duration": 1.431,
+      "text": "approximate these are approximate thumb"
+    },
+    {
+      "index": 788,
+      "start": 2874.52,
+      "end": 2877.91,
+      "duration": 3.39,
+      "text": "rules nobody defines as this it's not uh"
+    },
+    {
+      "index": 789,
+      "start": 2877.92,
+      "end": 2881.67,
+      "duration": 3.75,
+      "text": "uh numbers like planks constant or"
+    },
+    {
+      "index": 790,
+      "start": 2881.68,
+      "end": 2884.27,
+      "duration": 2.59,
+      "text": "something which cannot change anything"
+    },
+    {
+      "index": 791,
+      "start": 2884.28,
+      "end": 2885.99,
+      "duration": 1.71,
+      "text": "it's not approximate just to give you"
+    },
+    {
+      "index": 792,
+      "start": 2886.0,
+      "end": 2887.87,
+      "duration": 1.87,
+      "text": "the idea of the complexity somebody"
+    },
+    {
+      "index": 793,
+      "start": 2887.88,
+      "end": 2889.75,
+      "duration": 1.87,
+      "text": "gives a circuit say how many"
+    },
+    {
+      "index": 794,
+      "start": 2889.76,
+      "end": 2891.95,
+      "duration": 2.19,
+      "text": "gates you give me a circuit say how many"
+    },
+    {
+      "index": 795,
+      "start": 2891.96,
+      "end": 2893.589,
+      "duration": 1.629,
+      "text": "gates you say th Gates does not mean"
+    },
+    {
+      "index": 796,
+      "start": 2893.599,
+      "end": 2895.91,
+      "duration": 2.311,
+      "text": "thousand Gates report this circuit will"
+    },
+    {
+      "index": 797,
+      "start": 2895.92,
+      "end": 2898.79,
+      "duration": 2.87,
+      "text": "do things which are which is capable of"
+    },
+    {
+      "index": 798,
+      "start": 2898.8,
+      "end": 2900.71,
+      "duration": 1.91,
+      "text": "being done by about, GES that's what we"
+    },
+    {
+      "index": 799,
+      "start": 2900.72,
+      "end": 2906.75,
+      "duration": 6.03,
+      "text": "mean up from 100 to th000 is called LSi"
+    },
+    {
+      "index": 800,
+      "start": 2906.76,
+      "end": 2909.51,
+      "duration": 2.75,
+      "text": "and Beyond thousand it's called vsi but"
+    },
+    {
+      "index": 801,
+      "start": 2909.52,
+      "end": 2910.71,
+      "duration": 1.19,
+      "text": "of"
+    },
+    {
+      "index": 802,
+      "start": 2910.72,
+      "end": 2913.23,
+      "duration": 2.51,
+      "text": "course today people start of ulsi and"
+    },
+    {
+      "index": 803,
+      "start": 2913.24,
+      "end": 2914.47,
+      "duration": 1.23,
+      "text": "all that I don't believe in all that"
+    },
+    {
+      "index": 804,
+      "start": 2914.48,
+      "end": 2916.069,
+      "duration": 1.589,
+      "text": "Ultra large scale integr circuit but"
+    },
+    {
+      "index": 805,
+      "start": 2916.079,
+      "end": 2918.27,
+      "duration": 2.191,
+      "text": "then anything big there's no between vs"
+    },
+    {
+      "index": 806,
+      "start": 2918.28,
+      "end": 2920.549,
+      "duration": 2.269,
+      "text": "and ulsi and all that somebody says"
+    },
+    {
+      "index": 807,
+      "start": 2920.559,
+      "end": 2922.99,
+      "duration": 2.431,
+      "text": "Beyond under th000 is ulsi and all that"
+    },
+    {
+      "index": 808,
+      "start": 2923.0,
+      "end": 2927.43,
+      "duration": 4.43,
+      "text": "it's all it's all individuals"
+    },
+    {
+      "index": 809,
+      "start": 2927.44,
+      "end": 2930.19,
+      "duration": 2.75,
+      "text": "opinion so this is basically a structure"
+    },
+    {
+      "index": 810,
+      "start": 2930.2,
+      "end": 2931.829,
+      "duration": 1.629,
+      "text": "and why I finished all these basic"
+    },
+    {
+      "index": 811,
+      "start": 2931.839,
+      "end": 2932.91,
+      "duration": 1.071,
+      "text": "building blocks and combination and"
+    },
+    {
+      "index": 812,
+      "start": 2932.92,
+      "end": 2934.349,
+      "duration": 1.429,
+      "text": "sequential is whatever you have done is"
+    },
+    {
+      "index": 813,
+      "start": 2934.359,
+      "end": 2936.309,
+      "duration": 1.95,
+      "text": "up to now is can be generally classified"
+    },
+    {
+      "index": 814,
+      "start": 2936.319,
+      "end": 2937.67,
+      "duration": 1.351,
+      "text": "as small scale"
+    },
+    {
+      "index": 815,
+      "start": 2937.68,
+      "end": 2940.109,
+      "duration": 2.429,
+      "text": "circuits when you put more of these"
+    },
+    {
+      "index": 816,
+      "start": 2940.119,
+      "end": 2942.349,
+      "duration": 2.23,
+      "text": "Gates the functional complexity"
+    },
+    {
+      "index": 817,
+      "start": 2942.359,
+      "end": 2944.589,
+      "duration": 2.23,
+      "text": "increases they become medium scale integ"
+    },
+    {
+      "index": 818,
+      "start": 2944.599,
+      "end": 2946.87,
+      "duration": 2.271,
+      "text": "circuits and then you more and more of"
+    },
+    {
+      "index": 819,
+      "start": 2946.88,
+      "end": 2949.069,
+      "duration": 2.189,
+      "text": "them become lar scale integ circuits so"
+    },
+    {
+      "index": 820,
+      "start": 2949.079,
+      "end": 2950.789,
+      "duration": 1.71,
+      "text": "basic level we have now understood the"
+    },
+    {
+      "index": 821,
+      "start": 2950.799,
+      "end": 2953.069,
+      "duration": 2.27,
+      "text": "basic building blocks bricks and we'll"
+    },
+    {
+      "index": 822,
+      "start": 2953.079,
+      "end": 2954.95,
+      "duration": 1.871,
+      "text": "use those bricks to build a system"
+    },
+    {
+      "index": 823,
+      "start": 2954.96,
+      "end": 2957.829,
+      "duration": 2.869,
+      "text": "subsystems which are medium scale like"
+    },
+    {
+      "index": 824,
+      "start": 2957.839,
+      "end": 2960.15,
+      "duration": 2.311,
+      "text": "multiplexers and other things and in the"
+    },
+    {
+      "index": 825,
+      "start": 2960.16,
+      "end": 2961.67,
+      "duration": 1.51,
+      "text": "case"
+    },
+    {
+      "index": 826,
+      "start": 2961.68,
+      "end": 2964.51,
+      "duration": 2.83,
+      "text": "of 4bit full ladder May qualified to be"
+    },
+    {
+      "index": 827,
+      "start": 2964.52,
+      "end": 2966.829,
+      "duration": 2.309,
+      "text": "have"
+    },
+    {
+      "index": 828,
+      "start": 2966.839,
+      "end": 2971.03,
+      "duration": 4.191,
+      "text": "MSI similarly uh 8bit shift 4bit shift"
+    },
+    {
+      "index": 829,
+      "start": 2971.04,
+      "end": 2974.309,
+      "duration": 3.269,
+      "text": "reg 8 bit shift register may qualify to"
+    },
+    {
+      "index": 830,
+      "start": 2974.319,
+      "end": 2977.91,
+      "duration": 3.591,
+      "text": "become yeah MSI so then we'll do MSI"
+    },
+    {
+      "index": 831,
+      "start": 2977.92,
+      "end": 2979.67,
+      "duration": 1.75,
+      "text": "functions and then how to use them"
+    },
+    {
+      "index": 832,
+      "start": 2979.68,
+      "end": 2981.91,
+      "duration": 2.23,
+      "text": "directly instead of going to gate every"
+    },
+    {
+      "index": 833,
+      "start": 2981.92,
+      "end": 2983.829,
+      "duration": 1.909,
+      "text": "time because if you are giving a very"
+    },
+    {
+      "index": 834,
+      "start": 2983.839,
+      "end": 2985.43,
+      "duration": 1.591,
+      "text": "very large Circ like a micro processor"
+    },
+    {
+      "index": 835,
+      "start": 2985.44,
+      "end": 2986.63,
+      "duration": 1.19,
+      "text": "to Define you cannot go to the gate"
+    },
+    {
+      "index": 836,
+      "start": 2986.64,
+      "end": 2988.63,
+      "duration": 1.99,
+      "text": "level and design because a micro"
+    },
+    {
+      "index": 837,
+      "start": 2988.64,
+      "end": 2992.39,
+      "duration": 3.75,
+      "text": "processor may have 30 uh 300,000 Gates"
+    },
+    {
+      "index": 838,
+      "start": 2992.4,
+      "end": 2995.27,
+      "duration": 2.87,
+      "text": "100,000 Gates like that so I can bu give"
+    },
+    {
+      "index": 839,
+      "start": 2995.28,
+      "end": 2997.109,
+      "duration": 1.829,
+      "text": "you a circuit diagram 100,000 Gates"
+    },
+    {
+      "index": 840,
+      "start": 2997.119,
+      "end": 2999.47,
+      "duration": 2.351,
+      "text": "conned wind boggling so you have to"
+    },
+    {
+      "index": 841,
+      "start": 2999.48,
+      "end": 3002.349,
+      "duration": 2.869,
+      "text": "think of higher levels of abstraction"
+    },
+    {
+      "index": 842,
+      "start": 3002.359,
+      "end": 3004.589,
+      "duration": 2.23,
+      "text": "it's called level of abstraction higher"
+    },
+    {
+      "index": 843,
+      "start": 3004.599,
+      "end": 3007.47,
+      "duration": 2.871,
+      "text": "level abstraction I will talk about MSI"
+    },
+    {
+      "index": 844,
+      "start": 3007.48,
+      "end": 3009.19,
+      "duration": 1.71,
+      "text": "being directly used LSI being directly"
+    },
+    {
+      "index": 845,
+      "start": 3009.2,
+      "end": 3011.99,
+      "duration": 2.79,
+      "text": "used to get V LSI and all that so we"
+    },
+    {
+      "index": 846,
+      "start": 3012.0,
+      "end": 3014.91,
+      "duration": 2.91,
+      "text": "will see from next lecture starting next"
+    },
+    {
+      "index": 847,
+      "start": 3014.92,
+      "end": 3018.15,
+      "duration": 3.23,
+      "text": "lecture we'll see how to build using"
+    },
+    {
+      "index": 848,
+      "start": 3018.16,
+      "end": 3019.829,
+      "duration": 1.669,
+      "text": "this basic building blocks of both"
+    },
+    {
+      "index": 849,
+      "start": 3019.839,
+      "end": 3022.39,
+      "duration": 2.551,
+      "text": "combination sequential how to build"
+    },
+    {
+      "index": 850,
+      "start": 3022.4,
+      "end": 3025.51,
+      "duration": 3.11,
+      "text": "systems which are meaningful in sense of"
+    },
+    {
+      "index": 851,
+      "start": 3025.52,
+      "end": 3027.87,
+      "duration": 2.35,
+      "text": "system design they're basically smaller"
+    },
+    {
+      "index": 852,
+      "start": 3027.88,
+      "end": 3029.71,
+      "duration": 1.83,
+      "text": "system to start with later on probably"
+    },
+    {
+      "index": 853,
+      "start": 3029.72,
+      "end": 3032.109,
+      "duration": 2.389,
+      "text": "we'll do a lot of bigger systems just to"
+    },
+    {
+      "index": 854,
+      "start": 3032.119,
+      "end": 3034.15,
+      "duration": 2.031,
+      "text": "get you some ideas we'll get small start"
+    },
+    {
+      "index": 855,
+      "start": 3034.16,
+      "end": 3038.06,
+      "duration": 3.9,
+      "text": "with the small"
+    },
+    {
+      "index": 856,
+      "start": 3172.87,
+      "end": 3172.88,
+      "duration": 0.01,
+      "text": "[Music]"
+    },
+    {
+      "index": 857,
+      "start": 3172.88,
+      "end": 3175.88,
+      "duration": 3.0,
+      "text": "t"
+    }
+  ],
+  "course": {
+    "category": "Engineering & Robotics",
+    "title": "Circuits and Electronics",
+    "source_url": "https://www.youtube.com/playlist?list=PL803563859BF7ED8C"
+  }
+}

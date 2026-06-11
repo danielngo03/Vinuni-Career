@@ -1,0 +1,6689 @@
+{
+  "video": {
+    "id": "TluTv5V0RmE",
+    "title": "2. Conditioning and Bayes' Rule",
+    "url": "https://www.youtube.com/watch?v=TluTv5V0RmE",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3071,
+    "language": "en"
+  },
+  "segment_count": 953,
+  "segments": [
+    {
+      "index": 0,
+      "start": 0.04,
+      "end": 2.46,
+      "duration": 2.42,
+      "text": "The following content is provided under a Creative"
+    },
+    {
+      "index": 1,
+      "start": 2.46,
+      "end": 3.87,
+      "duration": 1.41,
+      "text": "Commons license."
+    },
+    {
+      "index": 2,
+      "start": 3.87,
+      "end": 6.91,
+      "duration": 3.04,
+      "text": "Your support will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.91,
+      "end": 10.56,
+      "duration": 3.65,
+      "text": "offer high quality educational resources for free."
+    },
+    {
+      "index": 4,
+      "start": 10.56,
+      "end": 13.46,
+      "duration": 2.9,
+      "text": "To make a donation or view additional materials from"
+    },
+    {
+      "index": 5,
+      "start": 13.46,
+      "end": 19.29,
+      "duration": 5.83,
+      "text": "hundreds of MIT courses, visit MIT OpenCourseWare at"
+    },
+    {
+      "index": 6,
+      "start": 19.29,
+      "end": 22.004,
+      "duration": 2.714,
+      "text": "ocw.mit.edu"
+    },
+    {
+      "index": 7,
+      "start": 22.004,
+      "end": 24.966,
+      "duration": 2.962,
+      "text": "JOHN TSISIKLIS: So here's the agenda for today."
+    },
+    {
+      "index": 8,
+      "start": 24.966,
+      "end": 26.848,
+      "duration": 1.882,
+      "text": "We're going to do a very quick review."
+    },
+    {
+      "index": 9,
+      "start": 26.848,
+      "end": 28.936,
+      "duration": 2.088,
+      "text": "And then we're going to introduce some"
+    },
+    {
+      "index": 10,
+      "start": 28.936,
+      "end": 30.56,
+      "duration": 1.624,
+      "text": "very important concepts."
+    },
+    {
+      "index": 11,
+      "start": 30.56,
+      "end": 34.06,
+      "duration": 3.5,
+      "text": "The idea is that all information is--"
+    },
+    {
+      "index": 12,
+      "start": 34.06,
+      "end": 36.45,
+      "duration": 2.39,
+      "text": "Information is always partial."
+    },
+    {
+      "index": 13,
+      "start": 36.45,
+      "end": 40.26,
+      "duration": 3.81,
+      "text": "And the question is what do we do to probabilities if we have"
+    },
+    {
+      "index": 14,
+      "start": 40.26,
+      "end": 43.34,
+      "duration": 3.08,
+      "text": "some partial information about the random experiments."
+    },
+    {
+      "index": 15,
+      "start": 43.34,
+      "end": 45.77,
+      "duration": 2.43,
+      "text": "We're going to introduce the important concept of"
+    },
+    {
+      "index": 16,
+      "start": 45.77,
+      "end": 47.53,
+      "duration": 1.76,
+      "text": "conditional probability."
+    },
+    {
+      "index": 17,
+      "start": 47.53,
+      "end": 50.86,
+      "duration": 3.33,
+      "text": "And then we will see three very useful ways"
+    },
+    {
+      "index": 18,
+      "start": 50.86,
+      "end": 52.67,
+      "duration": 1.81,
+      "text": "in which it is used."
+    },
+    {
+      "index": 19,
+      "start": 52.67,
+      "end": 55.41,
+      "duration": 2.74,
+      "text": "And these ways basically correspond to divide and"
+    },
+    {
+      "index": 20,
+      "start": 55.41,
+      "end": 58.07,
+      "duration": 2.66,
+      "text": "conquer methods for breaking up problems"
+    },
+    {
+      "index": 21,
+      "start": 58.07,
+      "end": 60.12,
+      "duration": 2.05,
+      "text": "into simpler pieces."
+    },
+    {
+      "index": 22,
+      "start": 60.12,
+      "end": 64.01,
+      "duration": 3.89,
+      "text": "And also one more fundamental tool which allows us to use"
+    },
+    {
+      "index": 23,
+      "start": 64.01,
+      "end": 67.42,
+      "duration": 3.41,
+      "text": "conditional probabilities to do inference, that is, if we"
+    },
+    {
+      "index": 24,
+      "start": 67.42,
+      "end": 69.44,
+      "duration": 2.02,
+      "text": "get a little bit of information about some"
+    },
+    {
+      "index": 25,
+      "start": 69.44,
+      "end": 72.62,
+      "duration": 3.18,
+      "text": "phenomenon, what can we infer about the things"
+    },
+    {
+      "index": 26,
+      "start": 72.62,
+      "end": 74.64,
+      "duration": 2.02,
+      "text": "that we have not seen?"
+    },
+    {
+      "index": 27,
+      "start": 74.64,
+      "end": 77.05,
+      "duration": 2.41,
+      "text": "So our quick review."
+    },
+    {
+      "index": 28,
+      "start": 77.05,
+      "end": 82.1,
+      "duration": 5.05,
+      "text": "In setting up a model of a random experiment, the first"
+    },
+    {
+      "index": 29,
+      "start": 82.1,
+      "end": 85.93,
+      "duration": 3.83,
+      "text": "thing to do is to come up with a list of all the possible"
+    },
+    {
+      "index": 30,
+      "start": 85.93,
+      "end": 87.87,
+      "duration": 1.94,
+      "text": "outcomes of the experiment."
+    },
+    {
+      "index": 31,
+      "start": 87.87,
+      "end": 91.12,
+      "duration": 3.25,
+      "text": "So that list is what we call the sample space."
+    },
+    {
+      "index": 32,
+      "start": 91.12,
+      "end": 92.48,
+      "duration": 1.36,
+      "text": "It's a set."
+    },
+    {
+      "index": 33,
+      "start": 92.48,
+      "end": 94.58,
+      "duration": 2.1,
+      "text": "And the elements of the sample space are all"
+    },
+    {
+      "index": 34,
+      "start": 94.58,
+      "end": 95.72,
+      "duration": 1.14,
+      "text": "the possible outcomes."
+    },
+    {
+      "index": 35,
+      "start": 95.72,
+      "end": 97.56,
+      "duration": 1.84,
+      "text": "Those possible outcomes must be"
+    },
+    {
+      "index": 36,
+      "start": 97.56,
+      "end": 99.69,
+      "duration": 2.13,
+      "text": "distinguishable from each other."
+    },
+    {
+      "index": 37,
+      "start": 99.69,
+      "end": 101.02,
+      "duration": 1.33,
+      "text": "They're mutually exclusive."
+    },
+    {
+      "index": 38,
+      "start": 101.02,
+      "end": 104.9,
+      "duration": 3.88,
+      "text": "Either one happens or the other happens, but not both."
+    },
+    {
+      "index": 39,
+      "start": 104.9,
+      "end": 107.44,
+      "duration": 2.54,
+      "text": "And they are collectively exhaustive, that is no matter"
+    },
+    {
+      "index": 40,
+      "start": 107.44,
+      "end": 110.48,
+      "duration": 3.04,
+      "text": "what the outcome of the experiment is going to be an"
+    },
+    {
+      "index": 41,
+      "start": 110.48,
+      "end": 112.13,
+      "duration": 1.65,
+      "text": "element of the sample space."
+    },
+    {
+      "index": 42,
+      "start": 112.13,
+      "end": 114.2,
+      "duration": 2.07,
+      "text": "And then we discussed last time that there's also an"
+    },
+    {
+      "index": 43,
+      "start": 114.2,
+      "end": 117.51,
+      "duration": 3.31,
+      "text": "element of art in how to choose your sample space,"
+    },
+    {
+      "index": 44,
+      "start": 117.51,
+      "end": 121.44,
+      "duration": 3.93,
+      "text": "depending on how much detail you want to capture."
+    },
+    {
+      "index": 45,
+      "start": 121.44,
+      "end": 123.13,
+      "duration": 1.69,
+      "text": "This is usually the easy part."
+    },
+    {
+      "index": 46,
+      "start": 123.13,
+      "end": 126.98,
+      "duration": 3.85,
+      "text": "Then the more interesting part is to assign probabilities to"
+    },
+    {
+      "index": 47,
+      "start": 126.98,
+      "end": 130.66,
+      "duration": 3.68,
+      "text": "our model, that is to make some statements about what we"
+    },
+    {
+      "index": 48,
+      "start": 130.66,
+      "end": 134.61,
+      "duration": 3.95,
+      "text": "believe to be likely and what we believe to be unlikely."
+    },
+    {
+      "index": 49,
+      "start": 134.61,
+      "end": 137.72,
+      "duration": 3.11,
+      "text": "The way we do that is by assigning probabilities to"
+    },
+    {
+      "index": 50,
+      "start": 137.72,
+      "end": 140.51,
+      "duration": 2.79,
+      "text": "subsets of the sample space."
+    },
+    {
+      "index": 51,
+      "start": 140.51,
+      "end": 146.12,
+      "duration": 5.61,
+      "text": "So as we have our sample space here, we may have a subset A."
+    },
+    {
+      "index": 52,
+      "start": 146.12,
+      "end": 151.09,
+      "duration": 4.97,
+      "text": "And we assign a number to that subset P(A), which is the"
+    },
+    {
+      "index": 53,
+      "start": 151.09,
+      "end": 153.91,
+      "duration": 2.82,
+      "text": "probability that this event happens."
+    },
+    {
+      "index": 54,
+      "start": 153.91,
+      "end": 157.08,
+      "duration": 3.17,
+      "text": "Or this is the probability that when we do the experiment"
+    },
+    {
+      "index": 55,
+      "start": 157.08,
+      "end": 159.86,
+      "duration": 2.78,
+      "text": "and we get an outcome it's the probability that the outcome"
+    },
+    {
+      "index": 56,
+      "start": 159.86,
+      "end": 161.85,
+      "duration": 1.99,
+      "text": "happens to fall inside that event."
+    },
+    {
+      "index": 57,
+      "start": 161.85,
+      "end": 164.5,
+      "duration": 2.65,
+      "text": "We have certain rules that probabilities should satisfy."
+    },
+    {
+      "index": 58,
+      "start": 164.5,
+      "end": 166.21,
+      "duration": 1.71,
+      "text": "They're non-negative."
+    },
+    {
+      "index": 59,
+      "start": 166.21,
+      "end": 169.78,
+      "duration": 3.57,
+      "text": "The probability of the overall sample space is equal to one,"
+    },
+    {
+      "index": 60,
+      "start": 169.78,
+      "end": 172.9,
+      "duration": 3.12,
+      "text": "which expresses the fact that we're are certain, no matter"
+    },
+    {
+      "index": 61,
+      "start": 172.9,
+      "end": 175.48,
+      "duration": 2.58,
+      "text": "what, the outcome is going to be an element"
+    },
+    {
+      "index": 62,
+      "start": 175.48,
+      "end": 176.83,
+      "duration": 1.35,
+      "text": "of the sample space."
+    },
+    {
+      "index": 63,
+      "start": 176.83,
+      "end": 179.76,
+      "duration": 2.93,
+      "text": "Well, if we set the top right so that it exhausts all"
+    },
+    {
+      "index": 64,
+      "start": 179.76,
+      "end": 183.19,
+      "duration": 3.43,
+      "text": "possibilities, this should be the case."
+    },
+    {
+      "index": 65,
+      "start": 183.19,
+      "end": 185.48,
+      "duration": 2.29,
+      "text": "And then there's another interesting property of"
+    },
+    {
+      "index": 66,
+      "start": 185.48,
+      "end": 189.24,
+      "duration": 3.76,
+      "text": "probabilities that says that, if we have two events or two"
+    },
+    {
+      "index": 67,
+      "start": 189.24,
+      "end": 191.91,
+      "duration": 2.67,
+      "text": "subsets that are disjoint, and we're interested in the"
+    },
+    {
+      "index": 68,
+      "start": 191.91,
+      "end": 197.67,
+      "duration": 5.76,
+      "text": "probability, that one or the other happens, that is the"
+    },
+    {
+      "index": 69,
+      "start": 197.67,
+      "end": 201.87,
+      "duration": 4.2,
+      "text": "outcome belongs to A or belongs to B. For disjoint"
+    },
+    {
+      "index": 70,
+      "start": 201.87,
+      "end": 205.32,
+      "duration": 3.45,
+      "text": "events the total probability of these two, taken together,"
+    },
+    {
+      "index": 71,
+      "start": 205.32,
+      "end": 208.03,
+      "duration": 2.71,
+      "text": "is just the sum of their individual probabilities."
+    },
+    {
+      "index": 72,
+      "start": 208.03,
+      "end": 210.27,
+      "duration": 2.24,
+      "text": "So probabilities behave like masses."
+    },
+    {
+      "index": 73,
+      "start": 210.27,
+      "end": 214.76,
+      "duration": 4.49,
+      "text": "The mass of the object consisting of A and B is the"
+    },
+    {
+      "index": 74,
+      "start": 214.76,
+      "end": 217.23,
+      "duration": 2.47,
+      "text": "sum of the masses of these two objects."
+    },
+    {
+      "index": 75,
+      "start": 217.23,
+      "end": 219.72,
+      "duration": 2.49,
+      "text": "Or you can think of probabilities as areas."
+    },
+    {
+      "index": 76,
+      "start": 219.72,
+      "end": 221.24,
+      "duration": 1.52,
+      "text": "They have, again, the same property."
+    },
+    {
+      "index": 77,
+      "start": 221.24,
+      "end": 225.49,
+      "duration": 4.25,
+      "text": "The area of A together with B is the area of A plus the area"
+    },
+    {
+      "index": 78,
+      "start": 225.49,
+      "end": 226.41,
+      "duration": 0.92,
+      "text": "B."
+    },
+    {
+      "index": 79,
+      "start": 226.41,
+      "end": 230.29,
+      "duration": 3.88,
+      "text": "But as we discussed at the end of last lecture, it's useful"
+    },
+    {
+      "index": 80,
+      "start": 230.29,
+      "end": 233.97,
+      "duration": 3.68,
+      "text": "to have in our hands a more general version of this"
+    },
+    {
+      "index": 81,
+      "start": 233.97,
+      "end": 238.99,
+      "duration": 5.02,
+      "text": "additivity property, which says the following, if we take"
+    },
+    {
+      "index": 82,
+      "start": 238.99,
+      "end": 240.982,
+      "duration": 1.992,
+      "text": "a sequence of sets--"
+    },
+    {
+      "index": 83,
+      "start": 240.982,
+      "end": 247.48,
+      "duration": 6.498,
+      "text": "A1, A2, A3, A4, and so on."
+    },
+    {
+      "index": 84,
+      "start": 247.48,
+      "end": 249.63,
+      "duration": 2.15,
+      "text": "And we put all of those sets together."
+    },
+    {
+      "index": 85,
+      "start": 249.63,
+      "end": 251.41,
+      "duration": 1.78,
+      "text": "It's an infinite sequence."
+    },
+    {
+      "index": 86,
+      "start": 251.41,
+      "end": 254.95,
+      "duration": 3.54,
+      "text": "And we ask for the probability that the outcome falls"
+    },
+    {
+      "index": 87,
+      "start": 254.95,
+      "end": 259.17,
+      "duration": 4.22,
+      "text": "somewhere in this infinite union, that is we are asking"
+    },
+    {
+      "index": 88,
+      "start": 259.17,
+      "end": 262.64,
+      "duration": 3.47,
+      "text": "for the probability that the outcome belongs to one of"
+    },
+    {
+      "index": 89,
+      "start": 262.64,
+      "end": 267.95,
+      "duration": 5.31,
+      "text": "these sets, and assuming that the sets are disjoint, we can"
+    },
+    {
+      "index": 90,
+      "start": 267.95,
+      "end": 272.82,
+      "duration": 4.87,
+      "text": "again find the probability for the overall set by adding up"
+    },
+    {
+      "index": 91,
+      "start": 272.82,
+      "end": 276.0,
+      "duration": 3.18,
+      "text": "the probabilities of the individual sets."
+    },
+    {
+      "index": 92,
+      "start": 276.0,
+      "end": 278.91,
+      "duration": 2.91,
+      "text": "So this is a nice and simple property."
+    },
+    {
+      "index": 93,
+      "start": 278.91,
+      "end": 283.13,
+      "duration": 4.22,
+      "text": "But it's a little more subtle than you might think."
+    },
+    {
+      "index": 94,
+      "start": 283.13,
+      "end": 285.82,
+      "duration": 2.69,
+      "text": "And let's see what's going on by considering"
+    },
+    {
+      "index": 95,
+      "start": 285.82,
+      "end": 287.77,
+      "duration": 1.95,
+      "text": "the following example."
+    },
+    {
+      "index": 96,
+      "start": 287.77,
+      "end": 291.85,
+      "duration": 4.08,
+      "text": "We had an example last time where we take our sample space"
+    },
+    {
+      "index": 97,
+      "start": 291.85,
+      "end": 293.8,
+      "duration": 1.95,
+      "text": "to be the unit square."
+    },
+    {
+      "index": 98,
+      "start": 293.8,
+      "end": 298.11,
+      "duration": 4.31,
+      "text": "And we said let's consider a probability law that says that"
+    },
+    {
+      "index": 99,
+      "start": 298.11,
+      "end": 304.19,
+      "duration": 6.08,
+      "text": "the probability of a subset is just the area of that subset."
+    },
+    {
+      "index": 100,
+      "start": 304.19,
+      "end": 307.63,
+      "duration": 3.44,
+      "text": "So let's consider this probability law."
+    },
+    {
+      "index": 101,
+      "start": 307.63,
+      "end": 308.53,
+      "duration": 0.9,
+      "text": "OK."
+    },
+    {
+      "index": 102,
+      "start": 308.53,
+      "end": 313.99,
+      "duration": 5.46,
+      "text": "Now the unit square is the set --let me just"
+    },
+    {
+      "index": 103,
+      "start": 313.99,
+      "end": 315.21,
+      "duration": 1.22,
+      "text": "draw it this way--"
+    },
+    {
+      "index": 104,
+      "start": 315.21,
+      "end": 320.52,
+      "duration": 5.31,
+      "text": "the unit square is the union of one element set consisting"
+    },
+    {
+      "index": 105,
+      "start": 320.52,
+      "end": 321.68,
+      "duration": 1.16,
+      "text": "all of the points."
+    },
+    {
+      "index": 106,
+      "start": 321.68,
+      "end": 328.28,
+      "duration": 6.6,
+      "text": "So the unit square is made up by the union of the various"
+    },
+    {
+      "index": 107,
+      "start": 328.28,
+      "end": 330.74,
+      "duration": 2.46,
+      "text": "points inside the square."
+    },
+    {
+      "index": 108,
+      "start": 330.74,
+      "end": 333.83,
+      "duration": 3.09,
+      "text": "So union over all x's and y's."
+    },
+    {
+      "index": 109,
+      "start": 333.83,
+      "end": 334.77,
+      "duration": 0.94,
+      "text": "OK?"
+    },
+    {
+      "index": 110,
+      "start": 334.77,
+      "end": 336.69,
+      "duration": 1.92,
+      "text": "So the square is made up out of all the"
+    },
+    {
+      "index": 111,
+      "start": 336.69,
+      "end": 338.4,
+      "duration": 1.71,
+      "text": "points that this contains."
+    },
+    {
+      "index": 112,
+      "start": 338.4,
+      "end": 341.14,
+      "duration": 2.74,
+      "text": "And now let's do a calculation."
+    },
+    {
+      "index": 113,
+      "start": 341.14,
+      "end": 345.06,
+      "duration": 3.92,
+      "text": "One is the probability of our overall sample space, which is"
+    },
+    {
+      "index": 114,
+      "start": 345.06,
+      "end": 347.26,
+      "duration": 2.2,
+      "text": "the unit square."
+    },
+    {
+      "index": 115,
+      "start": 347.26,
+      "end": 362.0,
+      "duration": 14.74,
+      "text": "Now the unit square is the union of these things, which,"
+    },
+    {
+      "index": 116,
+      "start": 362.0,
+      "end": 366.81,
+      "duration": 4.81,
+      "text": "according to our additivity axiom, is the sum of the"
+    },
+    {
+      "index": 117,
+      "start": 366.81,
+      "end": 370.595,
+      "duration": 3.785,
+      "text": "probabilities of all of these one element sets."
+    },
+    {
+      "index": 118,
+      "start": 376.83,
+      "end": 380.58,
+      "duration": 3.75,
+      "text": "Now what is the probability of a one element set?"
+    },
+    {
+      "index": 119,
+      "start": 380.58,
+      "end": 383.52,
+      "duration": 2.94,
+      "text": "What is the probability of this one element set?"
+    },
+    {
+      "index": 120,
+      "start": 383.52,
+      "end": 386.1,
+      "duration": 2.58,
+      "text": "What's the probability that our outcome is exactly that"
+    },
+    {
+      "index": 121,
+      "start": 386.1,
+      "end": 387.49,
+      "duration": 1.39,
+      "text": "particular point?"
+    },
+    {
+      "index": 122,
+      "start": 387.49,
+      "end": 391.46,
+      "duration": 3.97,
+      "text": "Well, it's the area of that set, which is zero."
+    },
+    {
+      "index": 123,
+      "start": 391.46,
+      "end": 393.99,
+      "duration": 2.53,
+      "text": "So it's just the sum of zeros."
+    },
+    {
+      "index": 124,
+      "start": 393.99,
+      "end": 395.95,
+      "duration": 1.96,
+      "text": "And by any reasonable definition the"
+    },
+    {
+      "index": 125,
+      "start": 395.95,
+      "end": 398.37,
+      "duration": 2.42,
+      "text": "sum of zeros is zero."
+    },
+    {
+      "index": 126,
+      "start": 398.37,
+      "end": 402.22,
+      "duration": 3.85,
+      "text": "So we just proved that one is equal to zero."
+    },
+    {
+      "index": 127,
+      "start": 402.22,
+      "end": 402.68,
+      "duration": 0.46,
+      "text": "OK."
+    },
+    {
+      "index": 128,
+      "start": 402.68,
+      "end": 408.34,
+      "duration": 5.66,
+      "text": "Either probability theory is dead or there is some mistake"
+    },
+    {
+      "index": 129,
+      "start": 408.34,
+      "end": 411.03,
+      "duration": 2.69,
+      "text": "in the derivation that I did."
+    },
+    {
+      "index": 130,
+      "start": 411.03,
+      "end": 414.58,
+      "duration": 3.55,
+      "text": "OK, the mistake is quite subtle and it"
+    },
+    {
+      "index": 131,
+      "start": 414.58,
+      "end": 417.3,
+      "duration": 2.72,
+      "text": "comes at this step."
+    },
+    {
+      "index": 132,
+      "start": 417.3,
+      "end": 420.64,
+      "duration": 3.34,
+      "text": "We're sort of applied the additivity axiom by saying"
+    },
+    {
+      "index": 133,
+      "start": 420.64,
+      "end": 424.04,
+      "duration": 3.4,
+      "text": "that the unit square is the union of all those sets."
+    },
+    {
+      "index": 134,
+      "start": 424.04,
+      "end": 426.5,
+      "duration": 2.46,
+      "text": "Can we really apply our additivity axiom."
+    },
+    {
+      "index": 135,
+      "start": 426.5,
+      "end": 427.26,
+      "duration": 0.76,
+      "text": "Here's the catch."
+    },
+    {
+      "index": 136,
+      "start": 427.26,
+      "end": 431.47,
+      "duration": 4.21,
+      "text": "The additivity axiom applies to the case where we have a"
+    },
+    {
+      "index": 137,
+      "start": 431.47,
+      "end": 437.18,
+      "duration": 5.71,
+      "text": "sequence of disjoint events and we take their union."
+    },
+    {
+      "index": 138,
+      "start": 437.18,
+      "end": 441.74,
+      "duration": 4.56,
+      "text": "Is this a sequence of sets?"
+    },
+    {
+      "index": 139,
+      "start": 441.74,
+      "end": 447.78,
+      "duration": 6.04,
+      "text": "Can you make up the whole unit square by taking a sequence of"
+    },
+    {
+      "index": 140,
+      "start": 447.78,
+      "end": 451.31,
+      "duration": 3.53,
+      "text": "elements inside it and cover the whole unit square?"
+    },
+    {
+      "index": 141,
+      "start": 451.31,
+      "end": 454.9,
+      "duration": 3.59,
+      "text": "Well if you try, if you start looking at the sequence of one"
+    },
+    {
+      "index": 142,
+      "start": 454.9,
+      "end": 460.91,
+      "duration": 6.01,
+      "text": "element points, that sequence will never be able to exhaust"
+    },
+    {
+      "index": 143,
+      "start": 460.91,
+      "end": 463.1,
+      "duration": 2.19,
+      "text": "the whole unit square."
+    },
+    {
+      "index": 144,
+      "start": 463.1,
+      "end": 465.68,
+      "duration": 2.58,
+      "text": "So there's a deeper reason behind that."
+    },
+    {
+      "index": 145,
+      "start": 465.68,
+      "end": 468.79,
+      "duration": 3.11,
+      "text": "And the reason is that infinite sets are not all of"
+    },
+    {
+      "index": 146,
+      "start": 468.79,
+      "end": 470.13,
+      "duration": 1.34,
+      "text": "the same size."
+    },
+    {
+      "index": 147,
+      "start": 470.13,
+      "end": 472.62,
+      "duration": 2.49,
+      "text": "The integers are an infinite set."
+    },
+    {
+      "index": 148,
+      "start": 472.62,
+      "end": 475.51,
+      "duration": 2.89,
+      "text": "And you can arrange the integers in a sequence."
+    },
+    {
+      "index": 149,
+      "start": 475.51,
+      "end": 477.63,
+      "duration": 2.12,
+      "text": "But the continuous set like the units"
+    },
+    {
+      "index": 150,
+      "start": 477.63,
+      "end": 480.205,
+      "duration": 2.575,
+      "text": "square is a bigger set."
+    },
+    {
+      "index": 151,
+      "start": 480.205,
+      "end": 482.05,
+      "duration": 1.845,
+      "text": "It's so-called uncountable."
+    },
+    {
+      "index": 152,
+      "start": 482.05,
+      "end": 486.16,
+      "duration": 4.11,
+      "text": "It has more elements than any sequence could have."
+    },
+    {
+      "index": 153,
+      "start": 486.16,
+      "end": 493.61,
+      "duration": 7.45,
+      "text": "So this union here is not of this kind, where we would have"
+    },
+    {
+      "index": 154,
+      "start": 493.61,
+      "end": 496.93,
+      "duration": 3.32,
+      "text": "a sequence of events."
+    },
+    {
+      "index": 155,
+      "start": 496.93,
+      "end": 498.37,
+      "duration": 1.44,
+      "text": "It's a different kind of union."
+    },
+    {
+      "index": 156,
+      "start": 498.37,
+      "end": 503.07,
+      "duration": 4.7,
+      "text": "It's a Union that involves a union of many, many more sets."
+    },
+    {
+      "index": 157,
+      "start": 503.07,
+      "end": 505.42,
+      "duration": 2.35,
+      "text": "So the countable additivity axiom does not"
+    },
+    {
+      "index": 158,
+      "start": 505.42,
+      "end": 507.36,
+      "duration": 1.94,
+      "text": "apply in this case."
+    },
+    {
+      "index": 159,
+      "start": 507.36,
+      "end": 510.23,
+      "duration": 2.87,
+      "text": "Because, we're not dealing with a sequence of sets."
+    },
+    {
+      "index": 160,
+      "start": 510.23,
+      "end": 513.78,
+      "duration": 3.55,
+      "text": "And so this is the incorrect step."
+    },
+    {
+      "index": 161,
+      "start": 513.78,
+      "end": 517.24,
+      "duration": 3.46,
+      "text": "So at some level you might think that this is puzzling"
+    },
+    {
+      "index": 162,
+      "start": 517.24,
+      "end": 518.58,
+      "duration": 1.34,
+      "text": "and awfully confusing."
+    },
+    {
+      "index": 163,
+      "start": 518.58,
+      "end": 521.07,
+      "duration": 2.49,
+      "text": "On the other hand, if you think about areas of the way"
+    },
+    {
+      "index": 164,
+      "start": 521.07,
+      "end": 523.52,
+      "duration": 2.45,
+      "text": "you're used to them from calculus, there's nothing"
+    },
+    {
+      "index": 165,
+      "start": 523.52,
+      "end": 524.94,
+      "duration": 1.42,
+      "text": "mysterious about it."
+    },
+    {
+      "index": 166,
+      "start": 524.94,
+      "end": 527.46,
+      "duration": 2.52,
+      "text": "Every point on the unit square has zero area."
+    },
+    {
+      "index": 167,
+      "start": 527.46,
+      "end": 530.14,
+      "duration": 2.68,
+      "text": "When you put all the points together, they make up"
+    },
+    {
+      "index": 168,
+      "start": 530.14,
+      "end": 532.33,
+      "duration": 2.19,
+      "text": "something that has finite area."
+    },
+    {
+      "index": 169,
+      "start": 532.33,
+      "end": 535.47,
+      "duration": 3.14,
+      "text": "So there shouldn't be any mystery behind it."
+    },
+    {
+      "index": 170,
+      "start": 535.47,
+      "end": 540.23,
+      "duration": 4.76,
+      "text": "Now, one interesting thing that this discussion tells us,"
+    },
+    {
+      "index": 171,
+      "start": 540.23,
+      "end": 543.67,
+      "duration": 3.44,
+      "text": "especially the fact that the single elements set has zero"
+    },
+    {
+      "index": 172,
+      "start": 543.67,
+      "end": 545.79,
+      "duration": 2.12,
+      "text": "area, is the following--"
+    },
+    {
+      "index": 173,
+      "start": 545.79,
+      "end": 548.96,
+      "duration": 3.17,
+      "text": "Individual points have zero probability."
+    },
+    {
+      "index": 174,
+      "start": 548.96,
+      "end": 552.39,
+      "duration": 3.43,
+      "text": "After you do the experiment and you observe the outcome,"
+    },
+    {
+      "index": 175,
+      "start": 552.39,
+      "end": 554.66,
+      "duration": 2.27,
+      "text": "it's going to be an individual point."
+    },
+    {
+      "index": 176,
+      "start": 554.66,
+      "end": 558.16,
+      "duration": 3.5,
+      "text": "So what happened in that experiment is something that"
+    },
+    {
+      "index": 177,
+      "start": 558.16,
+      "end": 561.82,
+      "duration": 3.66,
+      "text": "initially you thought had zero probability of occurring."
+    },
+    {
+      "index": 178,
+      "start": 561.82,
+      "end": 565.42,
+      "duration": 3.6,
+      "text": "So if you happen to get some particular numbers and you"
+    },
+    {
+      "index": 179,
+      "start": 565.42,
+      "end": 568.29,
+      "duration": 2.87,
+      "text": "say, \"Well, in the beginning, what did I think about those"
+    },
+    {
+      "index": 180,
+      "start": 568.29,
+      "end": 569.28,
+      "duration": 0.99,
+      "text": "specific numbers?"
+    },
+    {
+      "index": 181,
+      "start": 569.28,
+      "end": 571.29,
+      "duration": 2.01,
+      "text": "I thought they had zero probability."
+    },
+    {
+      "index": 182,
+      "start": 571.29,
+      "end": 576.25,
+      "duration": 4.96,
+      "text": "But yet those particular numbers did occur.\""
+    },
+    {
+      "index": 183,
+      "start": 576.25,
+      "end": 581.64,
+      "duration": 5.39,
+      "text": "So one moral from this is that zero probability does not mean"
+    },
+    {
+      "index": 184,
+      "start": 581.64,
+      "end": 582.89,
+      "duration": 1.25,
+      "text": "impossible."
+    },
+    {
+      "index": 185,
+      "start": 582.89,
+      "end": 586.92,
+      "duration": 4.03,
+      "text": "It just means extremely, extremely unlikely by itself."
+    },
+    {
+      "index": 186,
+      "start": 586.92,
+      "end": 589.42,
+      "duration": 2.5,
+      "text": "So zero probability things do happen."
+    },
+    {
+      "index": 187,
+      "start": 589.42,
+      "end": 593.34,
+      "duration": 3.92,
+      "text": "In such continuous models, actually zero probability"
+    },
+    {
+      "index": 188,
+      "start": 593.34,
+      "end": 596.93,
+      "duration": 3.59,
+      "text": "outcomes are everything that happens."
+    },
+    {
+      "index": 189,
+      "start": 596.93,
+      "end": 600.79,
+      "duration": 3.86,
+      "text": "And the bumper sticker version of this is to always expect"
+    },
+    {
+      "index": 190,
+      "start": 600.79,
+      "end": 602.22,
+      "duration": 1.43,
+      "text": "the unexpected."
+    },
+    {
+      "index": 191,
+      "start": 602.22,
+      "end": 605.095,
+      "duration": 2.875,
+      "text": "Yes?"
+    },
+    {
+      "index": 192,
+      "start": 605.095,
+      "end": 606.345,
+      "duration": 1.25,
+      "text": "AUDIENCE: [INAUDIBLE]."
+    },
+    {
+      "index": 193,
+      "start": 608.532,
+      "end": 611.8,
+      "duration": 3.268,
+      "text": "JOHN TSISIKLIS: Well, probability is supposed to be"
+    },
+    {
+      "index": 194,
+      "start": 611.8,
+      "end": 612.53,
+      "duration": 0.73,
+      "text": "a real number."
+    },
+    {
+      "index": 195,
+      "start": 612.53,
+      "end": 616.22,
+      "duration": 3.69,
+      "text": "So it's either zero or it's a positive number."
+    },
+    {
+      "index": 196,
+      "start": 616.22,
+      "end": 621.35,
+      "duration": 5.13,
+      "text": "So you can think of the probability of things just"
+    },
+    {
+      "index": 197,
+      "start": 621.35,
+      "end": 625.04,
+      "duration": 3.69,
+      "text": "close to that point and those probabilities are tiny and"
+    },
+    {
+      "index": 198,
+      "start": 625.04,
+      "end": 626.39,
+      "duration": 1.35,
+      "text": "close to zero."
+    },
+    {
+      "index": 199,
+      "start": 626.39,
+      "end": 628.78,
+      "duration": 2.39,
+      "text": "So that's how we're going to interpret probabilities in"
+    },
+    {
+      "index": 200,
+      "start": 628.78,
+      "end": 629.81,
+      "duration": 1.03,
+      "text": "continuous models."
+    },
+    {
+      "index": 201,
+      "start": 629.81,
+      "end": 631.34,
+      "duration": 1.53,
+      "text": "But this is two chapters ahead."
+    },
+    {
+      "index": 202,
+      "start": 633.95,
+      "end": 634.23,
+      "duration": 0.28,
+      "text": "Yeah?"
+    },
+    {
+      "index": 203,
+      "start": 634.23,
+      "end": 636.198,
+      "duration": 1.968,
+      "text": "AUDIENCE: How do we interpret probability of zero?"
+    },
+    {
+      "index": 204,
+      "start": 636.198,
+      "end": 637.674,
+      "duration": 1.476,
+      "text": "If we can use models that way, then how about"
+    },
+    {
+      "index": 205,
+      "start": 637.674,
+      "end": 638.658,
+      "duration": 0.984,
+      "text": "probability of one?"
+    },
+    {
+      "index": 206,
+      "start": 638.658,
+      "end": 640.462,
+      "duration": 1.804,
+      "text": "That it it's extremely likely but not"
+    },
+    {
+      "index": 207,
+      "start": 640.462,
+      "end": 642.11,
+      "duration": 1.648,
+      "text": "necessarily for certain?"
+    },
+    {
+      "index": 208,
+      "start": 642.11,
+      "end": 643.32,
+      "duration": 1.21,
+      "text": "JOHN TSISIKLIS: That's also the case."
+    },
+    {
+      "index": 209,
+      "start": 643.32,
+      "end": 647.45,
+      "duration": 4.13,
+      "text": "For example, if you ask in this continuous model, if you"
+    },
+    {
+      "index": 210,
+      "start": 647.45,
+      "end": 652.19,
+      "duration": 4.74,
+      "text": "ask me for the probability that x, y, is different than"
+    },
+    {
+      "index": 211,
+      "start": 652.19,
+      "end": 655.84,
+      "duration": 3.65,
+      "text": "the zero, zero this is the whole square,"
+    },
+    {
+      "index": 212,
+      "start": 655.84,
+      "end": 657.22,
+      "duration": 1.38,
+      "text": "except for one point."
+    },
+    {
+      "index": 213,
+      "start": 657.22,
+      "end": 661.15,
+      "duration": 3.93,
+      "text": "So the area of this is going to be one."
+    },
+    {
+      "index": 214,
+      "start": 661.15,
+      "end": 666.33,
+      "duration": 5.18,
+      "text": "But this event is not entirely certain because the zero, zero"
+    },
+    {
+      "index": 215,
+      "start": 666.33,
+      "end": 668.21,
+      "duration": 1.88,
+      "text": "outcome is also possible."
+    },
+    {
+      "index": 216,
+      "start": 668.21,
+      "end": 672.33,
+      "duration": 4.12,
+      "text": "So again, probability of one means essential certainty."
+    },
+    {
+      "index": 217,
+      "start": 672.33,
+      "end": 676.45,
+      "duration": 4.12,
+      "text": "But it still allows the possibility that the outcome"
+    },
+    {
+      "index": 218,
+      "start": 676.45,
+      "end": 678.32,
+      "duration": 1.87,
+      "text": "might be outside that set."
+    },
+    {
+      "index": 219,
+      "start": 678.32,
+      "end": 680.91,
+      "duration": 2.59,
+      "text": "So these are some of the weird things that are happening when"
+    },
+    {
+      "index": 220,
+      "start": 680.91,
+      "end": 682.68,
+      "duration": 1.77,
+      "text": "you have continuous models."
+    },
+    {
+      "index": 221,
+      "start": 682.68,
+      "end": 685.24,
+      "duration": 2.56,
+      "text": "And that's why we start to this class with discrete"
+    },
+    {
+      "index": 222,
+      "start": 685.24,
+      "end": 687.05,
+      "duration": 1.81,
+      "text": "models, on which would be spending the"
+    },
+    {
+      "index": 223,
+      "start": 687.05,
+      "end": 690.4,
+      "duration": 3.35,
+      "text": "next couple of weeks."
+    },
+    {
+      "index": 224,
+      "start": 690.4,
+      "end": 690.82,
+      "duration": 0.42,
+      "text": "OK."
+    },
+    {
+      "index": 225,
+      "start": 690.82,
+      "end": 695.65,
+      "duration": 4.83,
+      "text": "So now once we have set up our probability model and we have"
+    },
+    {
+      "index": 226,
+      "start": 695.65,
+      "end": 699.16,
+      "duration": 3.51,
+      "text": "a legitimate probability law that has these properties,"
+    },
+    {
+      "index": 227,
+      "start": 699.16,
+      "end": 703.07,
+      "duration": 3.91,
+      "text": "then the rest is usually simple."
+    },
+    {
+      "index": 228,
+      "start": 703.07,
+      "end": 705.95,
+      "duration": 2.88,
+      "text": "Somebody asks you a question of calculating the probability"
+    },
+    {
+      "index": 229,
+      "start": 705.95,
+      "end": 707.52,
+      "duration": 1.57,
+      "text": "of some event."
+    },
+    {
+      "index": 230,
+      "start": 707.52,
+      "end": 710.27,
+      "duration": 2.75,
+      "text": "While you were told something about the probability law,"
+    },
+    {
+      "index": 231,
+      "start": 710.27,
+      "end": 712.52,
+      "duration": 2.25,
+      "text": "such as for example the probabilities are equal to"
+    },
+    {
+      "index": 232,
+      "start": 712.52,
+      "end": 715.46,
+      "duration": 2.94,
+      "text": "areas, and then you just need to calculate."
+    },
+    {
+      "index": 233,
+      "start": 715.46,
+      "end": 718.73,
+      "duration": 3.27,
+      "text": "In these type of examples somebody would give you a set"
+    },
+    {
+      "index": 234,
+      "start": 718.73,
+      "end": 720.23,
+      "duration": 1.5,
+      "text": "and you would have to calculate the"
+    },
+    {
+      "index": 235,
+      "start": 720.23,
+      "end": 721.5,
+      "duration": 1.27,
+      "text": "area of that set."
+    },
+    {
+      "index": 236,
+      "start": 721.5,
+      "end": 726.06,
+      "duration": 4.56,
+      "text": "So the rest is just calculation and simple."
+    },
+    {
+      "index": 237,
+      "start": 726.06,
+      "end": 729.39,
+      "duration": 3.33,
+      "text": "Alright, so now it's time to start with our main"
+    },
+    {
+      "index": 238,
+      "start": 729.39,
+      "end": 732.6,
+      "duration": 3.21,
+      "text": "business for today."
+    },
+    {
+      "index": 239,
+      "start": 732.6,
+      "end": 736.88,
+      "duration": 4.28,
+      "text": "And the starting point is the following--"
+    },
+    {
+      "index": 240,
+      "start": 736.88,
+      "end": 738.92,
+      "duration": 2.04,
+      "text": "You know something about the world."
+    },
+    {
+      "index": 241,
+      "start": 738.92,
+      "end": 741.69,
+      "duration": 2.77,
+      "text": "And based on what you know when you set up a probability"
+    },
+    {
+      "index": 242,
+      "start": 741.69,
+      "end": 743.82,
+      "duration": 2.13,
+      "text": "model and you write down probabilities for the"
+    },
+    {
+      "index": 243,
+      "start": 743.82,
+      "end": 746.0,
+      "duration": 2.18,
+      "text": "different outcomes."
+    },
+    {
+      "index": 244,
+      "start": 746.0,
+      "end": 748.95,
+      "duration": 2.95,
+      "text": "Then something happens, and somebody tells you a little"
+    },
+    {
+      "index": 245,
+      "start": 748.95,
+      "end": 753.62,
+      "duration": 4.67,
+      "text": "more about the world, gives you some new information."
+    },
+    {
+      "index": 246,
+      "start": 753.62,
+      "end": 757.43,
+      "duration": 3.81,
+      "text": "This new information, in general, should change your"
+    },
+    {
+      "index": 247,
+      "start": 757.43,
+      "end": 761.24,
+      "duration": 3.81,
+      "text": "beliefs about what happened or what may happen."
+    },
+    {
+      "index": 248,
+      "start": 761.24,
+      "end": 764.55,
+      "duration": 3.31,
+      "text": "So whenever we're given new information, some partial"
+    },
+    {
+      "index": 249,
+      "start": 764.55,
+      "end": 767.4,
+      "duration": 2.85,
+      "text": "information about the outcome of the experiment, we should"
+    },
+    {
+      "index": 250,
+      "start": 767.4,
+      "end": 769.75,
+      "duration": 2.35,
+      "text": "revise our beliefs."
+    },
+    {
+      "index": 251,
+      "start": 769.75,
+      "end": 774.47,
+      "duration": 4.72,
+      "text": "And conditional probabilities are just the probabilities"
+    },
+    {
+      "index": 252,
+      "start": 774.47,
+      "end": 778.82,
+      "duration": 4.35,
+      "text": "that apply after the revision of our beliefs, when we're"
+    },
+    {
+      "index": 253,
+      "start": 778.82,
+      "end": 780.58,
+      "duration": 1.76,
+      "text": "given some information."
+    },
+    {
+      "index": 254,
+      "start": 780.58,
+      "end": 784.51,
+      "duration": 3.93,
+      "text": "So lets make this into a numerical example."
+    },
+    {
+      "index": 255,
+      "start": 784.51,
+      "end": 787.87,
+      "duration": 3.36,
+      "text": "So inside the sample space, this part of the sample space,"
+    },
+    {
+      "index": 256,
+      "start": 787.87,
+      "end": 792.58,
+      "duration": 4.71,
+      "text": "let's say has probability 3/6, this part has 2/6, and that"
+    },
+    {
+      "index": 257,
+      "start": 792.58,
+      "end": 794.55,
+      "duration": 1.97,
+      "text": "part has 1/6."
+    },
+    {
+      "index": 258,
+      "start": 794.55,
+      "end": 797.94,
+      "duration": 3.39,
+      "text": "I guess that means that out here we have zero probability."
+    },
+    {
+      "index": 259,
+      "start": 797.94,
+      "end": 801.9,
+      "duration": 3.96,
+      "text": "So these were our initial beliefs about the outcome of"
+    },
+    {
+      "index": 260,
+      "start": 801.9,
+      "end": 803.27,
+      "duration": 1.37,
+      "text": "the experiment."
+    },
+    {
+      "index": 261,
+      "start": 803.27,
+      "end": 807.16,
+      "duration": 3.89,
+      "text": "Suppose now that someone comes and tells you"
+    },
+    {
+      "index": 262,
+      "start": 807.16,
+      "end": 810.96,
+      "duration": 3.8,
+      "text": "that event B occurred."
+    },
+    {
+      "index": 263,
+      "start": 810.96,
+      "end": 813.56,
+      "duration": 2.6,
+      "text": "So they don't tell you the full outcome with the"
+    },
+    {
+      "index": 264,
+      "start": 813.56,
+      "end": 814.44,
+      "duration": 0.88,
+      "text": "experiment."
+    },
+    {
+      "index": 265,
+      "start": 814.44,
+      "end": 818.96,
+      "duration": 4.52,
+      "text": "But they just tell you that the outcome is known to lie"
+    },
+    {
+      "index": 266,
+      "start": 818.96,
+      "end": 821.06,
+      "duration": 2.1,
+      "text": "inside this set B."
+    },
+    {
+      "index": 267,
+      "start": 821.06,
+      "end": 824.32,
+      "duration": 3.26,
+      "text": "Well then, you should certainly change your beliefs"
+    },
+    {
+      "index": 268,
+      "start": 824.32,
+      "end": 825.56,
+      "duration": 1.24,
+      "text": "in some way."
+    },
+    {
+      "index": 269,
+      "start": 825.56,
+      "end": 828.42,
+      "duration": 2.86,
+      "text": "And your new beliefs about what is likely to occur and"
+    },
+    {
+      "index": 270,
+      "start": 828.42,
+      "end": 831.77,
+      "duration": 3.35,
+      "text": "what is not is going to be denoted by this notation."
+    },
+    {
+      "index": 271,
+      "start": 831.77,
+      "end": 835.33,
+      "duration": 3.56,
+      "text": "This is the conditional probability that the event A"
+    },
+    {
+      "index": 272,
+      "start": 835.33,
+      "end": 837.97,
+      "duration": 2.64,
+      "text": "is going to occur, the probability that the outcome"
+    },
+    {
+      "index": 273,
+      "start": 837.97,
+      "end": 841.58,
+      "duration": 3.61,
+      "text": "is going to fall inside the set A given that we are told"
+    },
+    {
+      "index": 274,
+      "start": 841.58,
+      "end": 845.89,
+      "duration": 4.31,
+      "text": "and we're sure that the event lies inside the event B Now"
+    },
+    {
+      "index": 275,
+      "start": 845.89,
+      "end": 849.0,
+      "duration": 3.11,
+      "text": "once you're told that the outcome lies inside the event"
+    },
+    {
+      "index": 276,
+      "start": 849.0,
+      "end": 853.74,
+      "duration": 4.74,
+      "text": "B, then our old sample space in some ways is irrelevant."
+    },
+    {
+      "index": 277,
+      "start": 853.74,
+      "end": 856.975,
+      "duration": 3.235,
+      "text": "We have then you sample space, which is just the set B. We"
+    },
+    {
+      "index": 278,
+      "start": 856.975,
+      "end": 861.02,
+      "duration": 4.045,
+      "text": "are certain that the outcome is going to be inside B."
+    },
+    {
+      "index": 279,
+      "start": 861.02,
+      "end": 865.465,
+      "duration": 4.445,
+      "text": "For example, what is this conditional probability?"
+    },
+    {
+      "index": 280,
+      "start": 869.12,
+      "end": 870.16,
+      "duration": 1.04,
+      "text": "It should be one."
+    },
+    {
+      "index": 281,
+      "start": 870.16,
+      "end": 873.25,
+      "duration": 3.09,
+      "text": "Given that I told you that B occurred, you're certain that"
+    },
+    {
+      "index": 282,
+      "start": 873.25,
+      "end": 876.38,
+      "duration": 3.13,
+      "text": "B occurred, so this has unit probability."
+    },
+    {
+      "index": 283,
+      "start": 876.38,
+      "end": 880.34,
+      "duration": 3.96,
+      "text": "So here we see an instance of revision of our beliefs."
+    },
+    {
+      "index": 284,
+      "start": 880.34,
+      "end": 884.88,
+      "duration": 4.54,
+      "text": "Initially, event B had the probability of (2+1)/6 --"
+    },
+    {
+      "index": 285,
+      "start": 884.88,
+      "end": 886.3,
+      "duration": 1.42,
+      "text": "that's 1/2."
+    },
+    {
+      "index": 286,
+      "start": 886.3,
+      "end": 889.5,
+      "duration": 3.2,
+      "text": "Initially, we thought B had probability 1/2."
+    },
+    {
+      "index": 287,
+      "start": 889.5,
+      "end": 892.37,
+      "duration": 2.87,
+      "text": "Once we're told that B occurred, the new probability"
+    },
+    {
+      "index": 288,
+      "start": 892.37,
+      "end": 894.25,
+      "duration": 1.88,
+      "text": "of B is equal to one."
+    },
+    {
+      "index": 289,
+      "start": 894.25,
+      "end": 895.16,
+      "duration": 0.91,
+      "text": "OK."
+    },
+    {
+      "index": 290,
+      "start": 895.16,
+      "end": 900.86,
+      "duration": 5.7,
+      "text": "How do we revise the probability that A occurs?"
+    },
+    {
+      "index": 291,
+      "start": 900.86,
+      "end": 903.95,
+      "duration": 3.09,
+      "text": "So we are going to have the outcome of the experiment."
+    },
+    {
+      "index": 292,
+      "start": 903.95,
+      "end": 907.33,
+      "duration": 3.38,
+      "text": "We know that it's inside B. So we will either get something"
+    },
+    {
+      "index": 293,
+      "start": 907.33,
+      "end": 909.2,
+      "duration": 1.87,
+      "text": "here, and A does not occur."
+    },
+    {
+      "index": 294,
+      "start": 909.2,
+      "end": 912.57,
+      "duration": 3.37,
+      "text": "Or something inside here, and A does occur."
+    },
+    {
+      "index": 295,
+      "start": 912.57,
+      "end": 916.28,
+      "duration": 3.71,
+      "text": "What's the likelihood that, given that we're inside B, the"
+    },
+    {
+      "index": 296,
+      "start": 916.28,
+      "end": 918.16,
+      "duration": 1.88,
+      "text": "outcome is inside here?"
+    },
+    {
+      "index": 297,
+      "start": 918.16,
+      "end": 921.38,
+      "duration": 3.22,
+      "text": "Here's how we're going to think about."
+    },
+    {
+      "index": 298,
+      "start": 921.38,
+      "end": 926.11,
+      "duration": 4.73,
+      "text": "This part of this set B, in which A also occurs, in our"
+    },
+    {
+      "index": 299,
+      "start": 926.11,
+      "end": 931.28,
+      "duration": 5.17,
+      "text": "initial model was twice as likely as that part of B. So"
+    },
+    {
+      "index": 300,
+      "start": 931.28,
+      "end": 936.22,
+      "duration": 4.94,
+      "text": "outcomes inside here collectively were twice as"
+    },
+    {
+      "index": 301,
+      "start": 936.22,
+      "end": 938.95,
+      "duration": 2.73,
+      "text": "likely as outcomes out there."
+    },
+    {
+      "index": 302,
+      "start": 938.95,
+      "end": 943.24,
+      "duration": 4.29,
+      "text": "So we're going to keep the same proportions and say, that"
+    },
+    {
+      "index": 303,
+      "start": 943.24,
+      "end": 947.28,
+      "duration": 4.04,
+      "text": "given that we are inside the set B, we still want outcomes"
+    },
+    {
+      "index": 304,
+      "start": 947.28,
+      "end": 951.12,
+      "duration": 3.84,
+      "text": "inside here to be twice as likely outcomes there."
+    },
+    {
+      "index": 305,
+      "start": 951.12,
+      "end": 955.8,
+      "duration": 4.68,
+      "text": "So the proportion of the probabilities should be two"
+    },
+    {
+      "index": 306,
+      "start": 955.8,
+      "end": 957.57,
+      "duration": 1.77,
+      "text": "versus one."
+    },
+    {
+      "index": 307,
+      "start": 957.57,
+      "end": 961.21,
+      "duration": 3.64,
+      "text": "And these probabilities should add up to one because together"
+    },
+    {
+      "index": 308,
+      "start": 961.21,
+      "end": 964.34,
+      "duration": 3.13,
+      "text": "they make the conditional probability of B. So the"
+    },
+    {
+      "index": 309,
+      "start": 964.34,
+      "end": 969.26,
+      "duration": 4.92,
+      "text": "conditional probabilities should be 2/3 probability of"
+    },
+    {
+      "index": 310,
+      "start": 969.26,
+      "end": 973.08,
+      "duration": 3.82,
+      "text": "being here and 1/3 probability of being there."
+    },
+    {
+      "index": 311,
+      "start": 973.08,
+      "end": 976.86,
+      "duration": 3.78,
+      "text": "That's how we revise our probabilities."
+    },
+    {
+      "index": 312,
+      "start": 976.86,
+      "end": 980.74,
+      "duration": 3.88,
+      "text": "That's a reasonable, intuitively reasonable, way of"
+    },
+    {
+      "index": 313,
+      "start": 980.74,
+      "end": 982.23,
+      "duration": 1.49,
+      "text": "doing this revision."
+    },
+    {
+      "index": 314,
+      "start": 982.23,
+      "end": 986.65,
+      "duration": 4.42,
+      "text": "Let's translate what we did into a definition."
+    },
+    {
+      "index": 315,
+      "start": 986.65,
+      "end": 989.49,
+      "duration": 2.84,
+      "text": "The definition says the following, that the"
+    },
+    {
+      "index": 316,
+      "start": 989.49,
+      "end": 993.41,
+      "duration": 3.92,
+      "text": "conditional probability of A given that B occurred is"
+    },
+    {
+      "index": 317,
+      "start": 993.41,
+      "end": 995.27,
+      "duration": 1.86,
+      "text": "calculated as follows."
+    },
+    {
+      "index": 318,
+      "start": 995.27,
+      "end": 999.43,
+      "duration": 4.16,
+      "text": "We look at the total probability of B. And out of"
+    },
+    {
+      "index": 319,
+      "start": 999.43,
+      "end": 1003.19,
+      "duration": 3.76,
+      "text": "that probability that was inside here, what fraction of"
+    },
+    {
+      "index": 320,
+      "start": 1003.19,
+      "end": 1008.31,
+      "duration": 5.12,
+      "text": "that probability is assigned to points for which the event"
+    },
+    {
+      "index": 321,
+      "start": 1008.31,
+      "end": 1009.78,
+      "duration": 1.47,
+      "text": "A also occurs?"
+    },
+    {
+      "index": 322,
+      "start": 1014.48,
+      "end": 1016.86,
+      "duration": 2.38,
+      "text": "Does it give us the same numbers as we got with this"
+    },
+    {
+      "index": 323,
+      "start": 1016.86,
+      "end": 1018.42,
+      "duration": 1.56,
+      "text": "heuristic argument?"
+    },
+    {
+      "index": 324,
+      "start": 1018.42,
+      "end": 1021.53,
+      "duration": 3.11,
+      "text": "Well in this example, probability of A intersection"
+    },
+    {
+      "index": 325,
+      "start": 1021.53,
+      "end": 1026.359,
+      "duration": 4.829,
+      "text": "B is 2/6, divided by total probability of B, which is"
+    },
+    {
+      "index": 326,
+      "start": 1026.359,
+      "end": 1032.369,
+      "duration": 6.01,
+      "text": "3/6, and so it's 2/3, which agrees with this answer that's"
+    },
+    {
+      "index": 327,
+      "start": 1032.369,
+      "end": 1033.589,
+      "duration": 1.22,
+      "text": "we got before."
+    },
+    {
+      "index": 328,
+      "start": 1033.589,
+      "end": 1038.28,
+      "duration": 4.691,
+      "text": "So the former indeed matches what we were trying to do."
+    },
+    {
+      "index": 329,
+      "start": 1038.28,
+      "end": 1041.04,
+      "duration": 2.76,
+      "text": "One little technical detail."
+    },
+    {
+      "index": 330,
+      "start": 1041.04,
+      "end": 1044.97,
+      "duration": 3.93,
+      "text": "If the event B has zero probability, and then here we"
+    },
+    {
+      "index": 331,
+      "start": 1044.97,
+      "end": 1047.77,
+      "duration": 2.8,
+      "text": "have a ratio that doesn't make sense."
+    },
+    {
+      "index": 332,
+      "start": 1047.77,
+      "end": 1050.47,
+      "duration": 2.7,
+      "text": "So in this case, we say that conditional probabilities are"
+    },
+    {
+      "index": 333,
+      "start": 1050.47,
+      "end": 1051.72,
+      "duration": 1.25,
+      "text": "not defined."
+    },
+    {
+      "index": 334,
+      "start": 1054.78,
+      "end": 1058.98,
+      "duration": 4.2,
+      "text": "Now you can take this definition and unravel it and"
+    },
+    {
+      "index": 335,
+      "start": 1058.98,
+      "end": 1060.26,
+      "duration": 1.28,
+      "text": "write it in this form."
+    },
+    {
+      "index": 336,
+      "start": 1060.26,
+      "end": 1063.51,
+      "duration": 3.25,
+      "text": "The probability of A intersection B is the"
+    },
+    {
+      "index": 337,
+      "start": 1063.51,
+      "end": 1066.78,
+      "duration": 3.27,
+      "text": "probability of B times the conditional probability."
+    },
+    {
+      "index": 338,
+      "start": 1070.35,
+      "end": 1073.82,
+      "duration": 3.47,
+      "text": "So this is just consequence of the definition but it has a"
+    },
+    {
+      "index": 339,
+      "start": 1073.82,
+      "end": 1075.37,
+      "duration": 1.55,
+      "text": "nice interpretation."
+    },
+    {
+      "index": 340,
+      "start": 1075.37,
+      "end": 1077.93,
+      "duration": 2.56,
+      "text": "Think of probabilities as frequencies."
+    },
+    {
+      "index": 341,
+      "start": 1077.93,
+      "end": 1081.48,
+      "duration": 3.55,
+      "text": "If I do the experiment over and over, what fraction of the"
+    },
+    {
+      "index": 342,
+      "start": 1081.48,
+      "end": 1085.3,
+      "duration": 3.82,
+      "text": "time is it going to be the case that both A and B occur?"
+    },
+    {
+      "index": 343,
+      "start": 1085.3,
+      "end": 1088.49,
+      "duration": 3.19,
+      "text": "Well, there's going to be a certain fraction of the time"
+    },
+    {
+      "index": 344,
+      "start": 1088.49,
+      "end": 1090.82,
+      "duration": 2.33,
+      "text": "at which B occurs."
+    },
+    {
+      "index": 345,
+      "start": 1090.82,
+      "end": 1094.76,
+      "duration": 3.94,
+      "text": "And out of those times when B occurs, there's going to be a"
+    },
+    {
+      "index": 346,
+      "start": 1094.76,
+      "end": 1097.27,
+      "duration": 2.51,
+      "text": "further fraction of the experiments in"
+    },
+    {
+      "index": 347,
+      "start": 1097.27,
+      "end": 1099.41,
+      "duration": 2.14,
+      "text": "which A also occurs."
+    },
+    {
+      "index": 348,
+      "start": 1099.41,
+      "end": 1101.93,
+      "duration": 2.52,
+      "text": "So interpret the conditional probability as follows."
+    },
+    {
+      "index": 349,
+      "start": 1101.93,
+      "end": 1104.32,
+      "duration": 2.39,
+      "text": "You only look at those experiments at which"
+    },
+    {
+      "index": 350,
+      "start": 1104.32,
+      "end": 1106.05,
+      "duration": 1.73,
+      "text": "B happens to occur."
+    },
+    {
+      "index": 351,
+      "start": 1106.05,
+      "end": 1109.82,
+      "duration": 3.77,
+      "text": "And look at what fraction of those experiments where B"
+    },
+    {
+      "index": 352,
+      "start": 1109.82,
+      "end": 1113.67,
+      "duration": 3.85,
+      "text": "already occurred, event A also occurs."
+    },
+    {
+      "index": 353,
+      "start": 1113.67,
+      "end": 1119.61,
+      "duration": 5.94,
+      "text": "And there's a symmetrical version of this equality."
+    },
+    {
+      "index": 354,
+      "start": 1119.61,
+      "end": 1124.66,
+      "duration": 5.05,
+      "text": "There's symmetry between the events B and A. So you also"
+    },
+    {
+      "index": 355,
+      "start": 1124.66,
+      "end": 1128.89,
+      "duration": 4.23,
+      "text": "have this relation that goes the other way."
+    },
+    {
+      "index": 356,
+      "start": 1128.89,
+      "end": 1133.95,
+      "duration": 5.06,
+      "text": "OK, so what do we use these conditional probabilities for?"
+    },
+    {
+      "index": 357,
+      "start": 1133.95,
+      "end": 1135.12,
+      "duration": 1.17,
+      "text": "First, one comment."
+    },
+    {
+      "index": 358,
+      "start": 1135.12,
+      "end": 1138.1,
+      "duration": 2.98,
+      "text": "Conditional probabilities are just like ordinary"
+    },
+    {
+      "index": 359,
+      "start": 1138.1,
+      "end": 1139.17,
+      "duration": 1.07,
+      "text": "probabilities."
+    },
+    {
+      "index": 360,
+      "start": 1139.17,
+      "end": 1142.82,
+      "duration": 3.65,
+      "text": "They're the new probabilities that apply in a new universe"
+    },
+    {
+      "index": 361,
+      "start": 1142.82,
+      "end": 1147.3,
+      "duration": 4.48,
+      "text": "where event B is known to have occurred."
+    },
+    {
+      "index": 362,
+      "start": 1147.3,
+      "end": 1150.62,
+      "duration": 3.32,
+      "text": "So we had an original probability model."
+    },
+    {
+      "index": 363,
+      "start": 1150.62,
+      "end": 1152.21,
+      "duration": 1.59,
+      "text": "We are told that B occurs."
+    },
+    {
+      "index": 364,
+      "start": 1152.21,
+      "end": 1153.84,
+      "duration": 1.63,
+      "text": "We revise our model."
+    },
+    {
+      "index": 365,
+      "start": 1153.84,
+      "end": 1156.69,
+      "duration": 2.85,
+      "text": "Our new model should still be legitimate probability model."
+    },
+    {
+      "index": 366,
+      "start": 1156.69,
+      "end": 1160.77,
+      "duration": 4.08,
+      "text": "So it should satisfy all sorts of properties that ordinary"
+    },
+    {
+      "index": 367,
+      "start": 1160.77,
+      "end": 1163.21,
+      "duration": 2.44,
+      "text": "probabilities do satisfy."
+    },
+    {
+      "index": 368,
+      "start": 1163.21,
+      "end": 1169.23,
+      "duration": 6.02,
+      "text": "So for example, if A and B are disjoint events, then we know"
+    },
+    {
+      "index": 369,
+      "start": 1169.23,
+      "end": 1173.83,
+      "duration": 4.6,
+      "text": "that the probability of A union B is equal to the"
+    },
+    {
+      "index": 370,
+      "start": 1173.83,
+      "end": 1179.23,
+      "duration": 5.4,
+      "text": "probability of A plus probability of B. And now if I"
+    },
+    {
+      "index": 371,
+      "start": 1179.23,
+      "end": 1182.77,
+      "duration": 3.54,
+      "text": "tell you that a certain event C occurred, we're placed in a"
+    },
+    {
+      "index": 372,
+      "start": 1182.77,
+      "end": 1185.22,
+      "duration": 2.45,
+      "text": "new universe where event C occurred."
+    },
+    {
+      "index": 373,
+      "start": 1185.22,
+      "end": 1187.515,
+      "duration": 2.295,
+      "text": "We have new probabilities for that universe."
+    },
+    {
+      "index": 374,
+      "start": 1187.515,
+      "end": 1189.88,
+      "duration": 2.365,
+      "text": "These are the conditional probabilities."
+    },
+    {
+      "index": 375,
+      "start": 1189.88,
+      "end": 1192.96,
+      "duration": 3.08,
+      "text": "And conditional probabilities also satisfy"
+    },
+    {
+      "index": 376,
+      "start": 1192.96,
+      "end": 1194.82,
+      "duration": 1.86,
+      "text": "this kind of property."
+    },
+    {
+      "index": 377,
+      "start": 1194.82,
+      "end": 1198.38,
+      "duration": 3.56,
+      "text": "So this is just our usual additivity axiom but the"
+    },
+    {
+      "index": 378,
+      "start": 1198.38,
+      "end": 1202.29,
+      "duration": 3.91,
+      "text": "applied in a new model, in which we were told that event"
+    },
+    {
+      "index": 379,
+      "start": 1202.29,
+      "end": 1203.25,
+      "duration": 0.96,
+      "text": "C occurred."
+    },
+    {
+      "index": 380,
+      "start": 1203.25,
+      "end": 1206.58,
+      "duration": 3.33,
+      "text": "So conditional probabilities do not taste or smell any"
+    },
+    {
+      "index": 381,
+      "start": 1206.58,
+      "end": 1209.97,
+      "duration": 3.39,
+      "text": "different than ordinary probabilities do."
+    },
+    {
+      "index": 382,
+      "start": 1209.97,
+      "end": 1214.35,
+      "duration": 4.38,
+      "text": "Conditional probabilities, given a specific event B, just"
+    },
+    {
+      "index": 383,
+      "start": 1214.35,
+      "end": 1219.48,
+      "duration": 5.13,
+      "text": "form a probability law on our sample space."
+    },
+    {
+      "index": 384,
+      "start": 1219.48,
+      "end": 1222.46,
+      "duration": 2.98,
+      "text": "It's a different probability law but it's still a"
+    },
+    {
+      "index": 385,
+      "start": 1222.46,
+      "end": 1226.43,
+      "duration": 3.97,
+      "text": "probability law that has all of the desired properties."
+    },
+    {
+      "index": 386,
+      "start": 1226.43,
+      "end": 1230.36,
+      "duration": 3.93,
+      "text": "OK, so where do conditional probabilities come up?"
+    },
+    {
+      "index": 387,
+      "start": 1230.36,
+      "end": 1232.45,
+      "duration": 2.09,
+      "text": "They do come up in quizzes and they do"
+    },
+    {
+      "index": 388,
+      "start": 1232.45,
+      "end": 1234.07,
+      "duration": 1.62,
+      "text": "come up in silly problems."
+    },
+    {
+      "index": 389,
+      "start": 1234.07,
+      "end": 1235.68,
+      "duration": 1.61,
+      "text": "So let's start with this."
+    },
+    {
+      "index": 390,
+      "start": 1235.68,
+      "end": 1237.79,
+      "duration": 2.11,
+      "text": "We have this example from last time."
+    },
+    {
+      "index": 391,
+      "start": 1237.79,
+      "end": 1242.22,
+      "duration": 4.43,
+      "text": "Two rolls of a die, all possible pairs of roles are"
+    },
+    {
+      "index": 392,
+      "start": 1242.22,
+      "end": 1246.41,
+      "duration": 4.19,
+      "text": "equally likely, so every element in this square has"
+    },
+    {
+      "index": 393,
+      "start": 1246.41,
+      "end": 1247.66,
+      "duration": 1.25,
+      "text": "probability of 1/16."
+    },
+    {
+      "index": 394,
+      "start": 1250.3,
+      "end": 1252.33,
+      "duration": 2.03,
+      "text": "So all elements are equally likely."
+    },
+    {
+      "index": 395,
+      "start": 1252.33,
+      "end": 1254.28,
+      "duration": 1.95,
+      "text": "That's our original model."
+    },
+    {
+      "index": 396,
+      "start": 1254.28,
+      "end": 1257.21,
+      "duration": 2.93,
+      "text": "Then somebody comes and tells us that the minimum of the two"
+    },
+    {
+      "index": 397,
+      "start": 1257.21,
+      "end": 1259.53,
+      "duration": 2.32,
+      "text": "rolls is equal to zero."
+    },
+    {
+      "index": 398,
+      "start": 1259.53,
+      "end": 1262.06,
+      "duration": 2.53,
+      "text": "What's that event?"
+    },
+    {
+      "index": 399,
+      "start": 1262.06,
+      "end": 1265.99,
+      "duration": 3.93,
+      "text": "The minimum equal to zero can happen in many ways, if we get"
+    },
+    {
+      "index": 400,
+      "start": 1265.99,
+      "end": 1268.99,
+      "duration": 3.0,
+      "text": "two zeros or if we get a zero and--"
+    },
+    {
+      "index": 401,
+      "start": 1268.99,
+      "end": 1273.14,
+      "duration": 4.15,
+      "text": "sorry, if we get two two's, or get a two"
+    },
+    {
+      "index": 402,
+      "start": 1273.14,
+      "end": 1274.83,
+      "duration": 1.69,
+      "text": "and something larger."
+    },
+    {
+      "index": 403,
+      "start": 1274.83,
+      "end": 1281.4,
+      "duration": 6.57,
+      "text": "And so the is our new event B. The red event is the event B."
+    },
+    {
+      "index": 404,
+      "start": 1281.4,
+      "end": 1283.5,
+      "duration": 2.1,
+      "text": "And now we want to calculate probabilities"
+    },
+    {
+      "index": 405,
+      "start": 1283.5,
+      "end": 1285.31,
+      "duration": 1.81,
+      "text": "inside this new universe."
+    },
+    {
+      "index": 406,
+      "start": 1285.31,
+      "end": 1288.77,
+      "duration": 3.46,
+      "text": "For example, you may be interested in the question,"
+    },
+    {
+      "index": 407,
+      "start": 1288.77,
+      "end": 1291.96,
+      "duration": 3.19,
+      "text": "questions about the maximum of the two rolls."
+    },
+    {
+      "index": 408,
+      "start": 1291.96,
+      "end": 1294.31,
+      "duration": 2.35,
+      "text": "In the new universe, what's the probability that the"
+    },
+    {
+      "index": 409,
+      "start": 1294.31,
+      "end": 1297.55,
+      "duration": 3.24,
+      "text": "maximum is equal to one?"
+    },
+    {
+      "index": 410,
+      "start": 1297.55,
+      "end": 1304.32,
+      "duration": 6.77,
+      "text": "The maximum being equal to one is this black event."
+    },
+    {
+      "index": 411,
+      "start": 1304.32,
+      "end": 1309.24,
+      "duration": 4.92,
+      "text": "And given that we're told that B occurred, this black events"
+    },
+    {
+      "index": 412,
+      "start": 1309.24,
+      "end": 1310.3,
+      "duration": 1.06,
+      "text": "cannot happen."
+    },
+    {
+      "index": 413,
+      "start": 1310.3,
+      "end": 1313.24,
+      "duration": 2.94,
+      "text": "So this probability is equal to zero."
+    },
+    {
+      "index": 414,
+      "start": 1313.24,
+      "end": 1316.5,
+      "duration": 3.26,
+      "text": "How about the maximum being equal to two,"
+    },
+    {
+      "index": 415,
+      "start": 1316.5,
+      "end": 1319.11,
+      "duration": 2.61,
+      "text": "given that event B?"
+    },
+    {
+      "index": 416,
+      "start": 1319.11,
+      "end": 1321.76,
+      "duration": 2.65,
+      "text": "OK, we can use the definition here."
+    },
+    {
+      "index": 417,
+      "start": 1321.76,
+      "end": 1325.73,
+      "duration": 3.97,
+      "text": "It's going to be the probability that the maximum"
+    },
+    {
+      "index": 418,
+      "start": 1325.73,
+      "end": 1330.59,
+      "duration": 4.86,
+      "text": "is equal to two and B occurs divided by the probability of"
+    },
+    {
+      "index": 419,
+      "start": 1330.59,
+      "end": 1336.02,
+      "duration": 5.43,
+      "text": "B. The probability that the maximum is equal to two."
+    },
+    {
+      "index": 420,
+      "start": 1336.02,
+      "end": 1339.47,
+      "duration": 3.45,
+      "text": "OK, what's the event that the maximum is equal to two?"
+    },
+    {
+      "index": 421,
+      "start": 1339.47,
+      "end": 1340.34,
+      "duration": 0.87,
+      "text": "Let's draw it."
+    },
+    {
+      "index": 422,
+      "start": 1340.34,
+      "end": 1342.3,
+      "duration": 1.96,
+      "text": "This is going to be the blue event."
+    },
+    {
+      "index": 423,
+      "start": 1342.3,
+      "end": 1345.95,
+      "duration": 3.65,
+      "text": "The maximum is equal to two if we get any"
+    },
+    {
+      "index": 424,
+      "start": 1345.95,
+      "end": 1348.52,
+      "duration": 2.57,
+      "text": "of those blue points."
+    },
+    {
+      "index": 425,
+      "start": 1348.52,
+      "end": 1352.31,
+      "duration": 3.79,
+      "text": "So the intersection of the two events is the intersection of"
+    },
+    {
+      "index": 426,
+      "start": 1352.31,
+      "end": 1355.17,
+      "duration": 2.86,
+      "text": "the red event and the blue event."
+    },
+    {
+      "index": 427,
+      "start": 1355.17,
+      "end": 1357.77,
+      "duration": 2.6,
+      "text": "There's only one point in their intersection."
+    },
+    {
+      "index": 428,
+      "start": 1357.77,
+      "end": 1359.64,
+      "duration": 1.87,
+      "text": "So the probability of that intersection"
+    },
+    {
+      "index": 429,
+      "start": 1359.64,
+      "end": 1361.08,
+      "duration": 1.44,
+      "text": "happening is 1/16."
+    },
+    {
+      "index": 430,
+      "start": 1363.74,
+      "end": 1365.16,
+      "duration": 1.42,
+      "text": "That's the numerator."
+    },
+    {
+      "index": 431,
+      "start": 1365.16,
+      "end": 1367.11,
+      "duration": 1.95,
+      "text": "How about the denominator?"
+    },
+    {
+      "index": 432,
+      "start": 1367.11,
+      "end": 1370.61,
+      "duration": 3.5,
+      "text": "The event B consists of five elements, each one of which"
+    },
+    {
+      "index": 433,
+      "start": 1370.61,
+      "end": 1372.27,
+      "duration": 1.66,
+      "text": "had probability of 1/16."
+    },
+    {
+      "index": 434,
+      "start": 1372.27,
+      "end": 1374.57,
+      "duration": 2.3,
+      "text": "So that's 5/16."
+    },
+    {
+      "index": 435,
+      "start": 1374.57,
+      "end": 1378.34,
+      "duration": 3.77,
+      "text": "And so the answer is 1/5."
+    },
+    {
+      "index": 436,
+      "start": 1378.34,
+      "end": 1382.83,
+      "duration": 4.49,
+      "text": "Could we have gotten this answer in a faster way?"
+    },
+    {
+      "index": 437,
+      "start": 1382.83,
+      "end": 1384.19,
+      "duration": 1.36,
+      "text": "Yes."
+    },
+    {
+      "index": 438,
+      "start": 1384.19,
+      "end": 1385.56,
+      "duration": 1.37,
+      "text": "Here's how it goes."
+    },
+    {
+      "index": 439,
+      "start": 1385.56,
+      "end": 1389.06,
+      "duration": 3.5,
+      "text": "We're trying to find the conditional probability that"
+    },
+    {
+      "index": 440,
+      "start": 1389.06,
+      "end": 1393.21,
+      "duration": 4.15,
+      "text": "we get this point, given that B occurred."
+    },
+    {
+      "index": 441,
+      "start": 1393.21,
+      "end": 1395.57,
+      "duration": 2.36,
+      "text": "B consist of five elements."
+    },
+    {
+      "index": 442,
+      "start": 1395.57,
+      "end": 1398.25,
+      "duration": 2.68,
+      "text": "All of those five elements were equally likely when we"
+    },
+    {
+      "index": 443,
+      "start": 1398.25,
+      "end": 1402.72,
+      "duration": 4.47,
+      "text": "started, so they remain equally likely afterwards."
+    },
+    {
+      "index": 444,
+      "start": 1402.72,
+      "end": 1405.18,
+      "duration": 2.46,
+      "text": "Because when we define conditional probabilities, we"
+    },
+    {
+      "index": 445,
+      "start": 1405.18,
+      "end": 1408.11,
+      "duration": 2.93,
+      "text": "keep the same proportions inside the set."
+    },
+    {
+      "index": 446,
+      "start": 1408.11,
+      "end": 1411.94,
+      "duration": 3.83,
+      "text": "So the five red elements were equally likely."
+    },
+    {
+      "index": 447,
+      "start": 1411.94,
+      "end": 1415.05,
+      "duration": 3.11,
+      "text": "They remain equally likely in the conditional world."
+    },
+    {
+      "index": 448,
+      "start": 1415.05,
+      "end": 1419.08,
+      "duration": 4.03,
+      "text": "So conditional event B having happened, each one of these"
+    },
+    {
+      "index": 449,
+      "start": 1419.08,
+      "end": 1421.58,
+      "duration": 2.5,
+      "text": "five elements has the same probability."
+    },
+    {
+      "index": 450,
+      "start": 1421.58,
+      "end": 1424.3,
+      "duration": 2.72,
+      "text": "So the probability that we actually get this point is"
+    },
+    {
+      "index": 451,
+      "start": 1424.3,
+      "end": 1426.21,
+      "duration": 1.91,
+      "text": "going to be 1/5."
+    },
+    {
+      "index": 452,
+      "start": 1426.21,
+      "end": 1428.28,
+      "duration": 2.07,
+      "text": "And so that's the shortcut."
+    },
+    {
+      "index": 453,
+      "start": 1428.28,
+      "end": 1433.07,
+      "duration": 4.79,
+      "text": "More generally, whenever you have a uniform distribution on"
+    },
+    {
+      "index": 454,
+      "start": 1433.07,
+      "end": 1436.47,
+      "duration": 3.4,
+      "text": "your initial sample space, when you condition on an"
+    },
+    {
+      "index": 455,
+      "start": 1436.47,
+      "end": 1441.0,
+      "duration": 4.53,
+      "text": "event, your new distribution is still going to be uniform,"
+    },
+    {
+      "index": 456,
+      "start": 1441.0,
+      "end": 1445.01,
+      "duration": 4.01,
+      "text": "but on the smaller events of that we considered."
+    },
+    {
+      "index": 457,
+      "start": 1445.01,
+      "end": 1449.78,
+      "duration": 4.77,
+      "text": "So we started with a uniform distribution on the big square"
+    },
+    {
+      "index": 458,
+      "start": 1449.78,
+      "end": 1453.73,
+      "duration": 3.95,
+      "text": "and we ended up with a uniform distribution"
+    },
+    {
+      "index": 459,
+      "start": 1453.73,
+      "end": 1457.23,
+      "duration": 3.5,
+      "text": "just on the red point."
+    },
+    {
+      "index": 460,
+      "start": 1457.23,
+      "end": 1459.85,
+      "duration": 2.62,
+      "text": "Now besides silly problems, however, conditional"
+    },
+    {
+      "index": 461,
+      "start": 1459.85,
+      "end": 1465.07,
+      "duration": 5.22,
+      "text": "probabilities show up in real and interesting situations."
+    },
+    {
+      "index": 462,
+      "start": 1465.07,
+      "end": 1467.39,
+      "duration": 2.32,
+      "text": "And this example is going to give you some"
+    },
+    {
+      "index": 463,
+      "start": 1467.39,
+      "end": 1470.43,
+      "duration": 3.04,
+      "text": "idea of how that happens."
+    },
+    {
+      "index": 464,
+      "start": 1470.43,
+      "end": 1472.25,
+      "duration": 1.82,
+      "text": "OK."
+    },
+    {
+      "index": 465,
+      "start": 1472.25,
+      "end": 1475.45,
+      "duration": 3.2,
+      "text": "Actually, in this example, instead of starting with a"
+    },
+    {
+      "index": 466,
+      "start": 1475.45,
+      "end": 1479.48,
+      "duration": 4.03,
+      "text": "probability model in terms of regular probabilities, I'm"
+    },
+    {
+      "index": 467,
+      "start": 1479.48,
+      "end": 1483.07,
+      "duration": 3.59,
+      "text": "actually going to define the model in terms of conditional"
+    },
+    {
+      "index": 468,
+      "start": 1483.07,
+      "end": 1483.89,
+      "duration": 0.82,
+      "text": "probabilities."
+    },
+    {
+      "index": 469,
+      "start": 1483.89,
+      "end": 1485.88,
+      "duration": 1.99,
+      "text": "And we'll see how this is done."
+    },
+    {
+      "index": 470,
+      "start": 1485.88,
+      "end": 1488.33,
+      "duration": 2.45,
+      "text": "So here's the story."
+    },
+    {
+      "index": 471,
+      "start": 1488.33,
+      "end": 1492.21,
+      "duration": 3.88,
+      "text": "There may be an airplane flying up in the sky, in a"
+    },
+    {
+      "index": 472,
+      "start": 1492.21,
+      "end": 1495.4,
+      "duration": 3.19,
+      "text": "particular sector of the sky that you're watching."
+    },
+    {
+      "index": 473,
+      "start": 1495.4,
+      "end": 1497.95,
+      "duration": 2.55,
+      "text": "Sometimes there is one sometimes there isn't."
+    },
+    {
+      "index": 474,
+      "start": 1497.95,
+      "end": 1501.76,
+      "duration": 3.81,
+      "text": "And from experience you know that when you look up, there's"
+    },
+    {
+      "index": 475,
+      "start": 1501.76,
+      "end": 1504.4,
+      "duration": 2.64,
+      "text": "five percent probability that the plane is flying above"
+    },
+    {
+      "index": 476,
+      "start": 1504.4,
+      "end": 1509.67,
+      "duration": 5.27,
+      "text": "there and 95% probability that there's no plane up there."
+    },
+    {
+      "index": 477,
+      "start": 1509.67,
+      "end": 1514.93,
+      "duration": 5.26,
+      "text": "So event A is the event that the plane is flying out there."
+    },
+    {
+      "index": 478,
+      "start": 1514.93,
+      "end": 1519.14,
+      "duration": 4.21,
+      "text": "Now you bought this wonderful radar that's looks up."
+    },
+    {
+      "index": 479,
+      "start": 1519.14,
+      "end": 1523.3,
+      "duration": 4.16,
+      "text": "And you're told in the manufacturer's specs that, if"
+    },
+    {
+      "index": 480,
+      "start": 1523.3,
+      "end": 1527.31,
+      "duration": 4.01,
+      "text": "there is a plane out there, your radar is going to"
+    },
+    {
+      "index": 481,
+      "start": 1527.31,
+      "end": 1530.09,
+      "duration": 2.78,
+      "text": "register something, a blip on the screen"
+    },
+    {
+      "index": 482,
+      "start": 1530.09,
+      "end": 1532.94,
+      "duration": 2.85,
+      "text": "with probability 99%."
+    },
+    {
+      "index": 483,
+      "start": 1532.94,
+      "end": 1535.54,
+      "duration": 2.6,
+      "text": "And it will not register anything with"
+    },
+    {
+      "index": 484,
+      "start": 1535.54,
+      "end": 1537.5,
+      "duration": 1.96,
+      "text": "probability one percent."
+    },
+    {
+      "index": 485,
+      "start": 1537.5,
+      "end": 1543.89,
+      "duration": 6.39,
+      "text": "So this particular part of the picture is a self-contained"
+    },
+    {
+      "index": 486,
+      "start": 1543.89,
+      "end": 1550.28,
+      "duration": 6.39,
+      "text": "probability model of what your radar does in a world where a"
+    },
+    {
+      "index": 487,
+      "start": 1550.28,
+      "end": 1552.53,
+      "duration": 2.25,
+      "text": "plane is out there."
+    },
+    {
+      "index": 488,
+      "start": 1552.53,
+      "end": 1555.38,
+      "duration": 2.85,
+      "text": "So I'm telling you that the plane is out there."
+    },
+    {
+      "index": 489,
+      "start": 1555.38,
+      "end": 1558.24,
+      "duration": 2.86,
+      "text": "So we're now dealing with conditional probabilities"
+    },
+    {
+      "index": 490,
+      "start": 1558.24,
+      "end": 1560.92,
+      "duration": 2.68,
+      "text": "because I gave you some particular information."
+    },
+    {
+      "index": 491,
+      "start": 1560.92,
+      "end": 1564.12,
+      "duration": 3.2,
+      "text": "Given this information that the plane is out there, that's"
+    },
+    {
+      "index": 492,
+      "start": 1564.12,
+      "end": 1567.77,
+      "duration": 3.65,
+      "text": "how your radar is going to behave with probability 99% is"
+    },
+    {
+      "index": 493,
+      "start": 1567.77,
+      "end": 1570.32,
+      "duration": 2.55,
+      "text": "going to detect it, with probability one percent is"
+    },
+    {
+      "index": 494,
+      "start": 1570.32,
+      "end": 1571.62,
+      "duration": 1.3,
+      "text": "going to miss it."
+    },
+    {
+      "index": 495,
+      "start": 1571.62,
+      "end": 1574.1,
+      "duration": 2.48,
+      "text": "So this piece of the picture is a self-contained"
+    },
+    {
+      "index": 496,
+      "start": 1574.1,
+      "end": 1575.06,
+      "duration": 0.96,
+      "text": "probability model."
+    },
+    {
+      "index": 497,
+      "start": 1575.06,
+      "end": 1577.13,
+      "duration": 2.07,
+      "text": "The probabilities add up to one."
+    },
+    {
+      "index": 498,
+      "start": 1577.13,
+      "end": 1580.3,
+      "duration": 3.17,
+      "text": "But it's a piece of a larger model."
+    },
+    {
+      "index": 499,
+      "start": 1580.3,
+      "end": 1582.82,
+      "duration": 2.52,
+      "text": "Similarly, there's the other possibility."
+    },
+    {
+      "index": 500,
+      "start": 1582.82,
+      "end": 1587.98,
+      "duration": 5.16,
+      "text": "Maybe a plane is not up there and the manufacturer specs"
+    },
+    {
+      "index": 501,
+      "start": 1587.98,
+      "end": 1592.63,
+      "duration": 4.65,
+      "text": "tell you something about false alarms."
+    },
+    {
+      "index": 502,
+      "start": 1592.63,
+      "end": 1597.49,
+      "duration": 4.86,
+      "text": "A false alarm is the situation where the plane is not there,"
+    },
+    {
+      "index": 503,
+      "start": 1597.49,
+      "end": 1601.19,
+      "duration": 3.7,
+      "text": "but for some reason your radar picked up some noise or"
+    },
+    {
+      "index": 504,
+      "start": 1601.19,
+      "end": 1603.7,
+      "duration": 2.51,
+      "text": "whatever and shows a blip on the screen."
+    },
+    {
+      "index": 505,
+      "start": 1603.7,
+      "end": 1606.79,
+      "duration": 3.09,
+      "text": "And suppose that this happens with probability ten percent."
+    },
+    {
+      "index": 506,
+      "start": 1606.79,
+      "end": 1609.17,
+      "duration": 2.38,
+      "text": "Whereas with probability 90% your radar"
+    },
+    {
+      "index": 507,
+      "start": 1609.17,
+      "end": 1611.22,
+      "duration": 2.05,
+      "text": "gives the correct answer."
+    },
+    {
+      "index": 508,
+      "start": 1611.22,
+      "end": 1615.43,
+      "duration": 4.21,
+      "text": "So this is sort of a model of what's going to happen with"
+    },
+    {
+      "index": 509,
+      "start": 1615.43,
+      "end": 1619.43,
+      "duration": 4.0,
+      "text": "respect to both the plane -- we're given probabilities"
+    },
+    {
+      "index": 510,
+      "start": 1619.43,
+      "end": 1622.0,
+      "duration": 2.57,
+      "text": "about this -- and we're given probabilities about how the"
+    },
+    {
+      "index": 511,
+      "start": 1622.0,
+      "end": 1624.12,
+      "duration": 2.12,
+      "text": "radar behaves."
+    },
+    {
+      "index": 512,
+      "start": 1624.12,
+      "end": 1627.74,
+      "duration": 3.62,
+      "text": "So here I have indirectly specified the probability law"
+    },
+    {
+      "index": 513,
+      "start": 1627.74,
+      "end": 1630.81,
+      "duration": 3.07,
+      "text": "in our model by starting with conditional probabilities as"
+    },
+    {
+      "index": 514,
+      "start": 1630.81,
+      "end": 1633.67,
+      "duration": 2.86,
+      "text": "opposed to starting with ordinary probabilities."
+    },
+    {
+      "index": 515,
+      "start": 1633.67,
+      "end": 1637.16,
+      "duration": 3.49,
+      "text": "Can we derive ordinary probabilities starting from"
+    },
+    {
+      "index": 516,
+      "start": 1637.16,
+      "end": 1638.74,
+      "duration": 1.58,
+      "text": "the conditional number ones?"
+    },
+    {
+      "index": 517,
+      "start": 1638.74,
+      "end": 1640.34,
+      "duration": 1.6,
+      "text": "Yeah, we certainly can."
+    },
+    {
+      "index": 518,
+      "start": 1640.34,
+      "end": 1645.81,
+      "duration": 5.47,
+      "text": "Let's look at this event, A intersection B, which is the"
+    },
+    {
+      "index": 519,
+      "start": 1645.81,
+      "end": 1651.16,
+      "duration": 5.35,
+      "text": "event up here, that there is a plane and our"
+    },
+    {
+      "index": 520,
+      "start": 1651.16,
+      "end": 1653.75,
+      "duration": 2.59,
+      "text": "radar picks it up."
+    },
+    {
+      "index": 521,
+      "start": 1653.75,
+      "end": 1655.76,
+      "duration": 2.01,
+      "text": "How can we calculate this probability?"
+    },
+    {
+      "index": 522,
+      "start": 1655.76,
+      "end": 1658.6,
+      "duration": 2.84,
+      "text": "Well we use the definition of conditional probabilities and"
+    },
+    {
+      "index": 523,
+      "start": 1658.6,
+      "end": 1661.43,
+      "duration": 2.83,
+      "text": "this is the probability of A times the conditional"
+    },
+    {
+      "index": 524,
+      "start": 1661.43,
+      "end": 1670.26,
+      "duration": 8.83,
+      "text": "probability of B given A. So it's 0.05 times 0.99."
+    },
+    {
+      "index": 525,
+      "start": 1670.26,
+      "end": 1673.29,
+      "duration": 3.03,
+      "text": "And the answer, in case you care--"
+    },
+    {
+      "index": 526,
+      "start": 1673.29,
+      "end": 1676.73,
+      "duration": 3.44,
+      "text": "It's 0.0495."
+    },
+    {
+      "index": 527,
+      "start": 1676.73,
+      "end": 1677.65,
+      "duration": 0.92,
+      "text": "OK."
+    },
+    {
+      "index": 528,
+      "start": 1677.65,
+      "end": 1681.37,
+      "duration": 3.72,
+      "text": "So we can calculate the probabilities of final"
+    },
+    {
+      "index": 529,
+      "start": 1681.37,
+      "end": 1685.12,
+      "duration": 3.75,
+      "text": "outcomes, which are the leaves of the tree, by using the"
+    },
+    {
+      "index": 530,
+      "start": 1685.12,
+      "end": 1687.25,
+      "duration": 2.13,
+      "text": "probabilities that we have along the"
+    },
+    {
+      "index": 531,
+      "start": 1687.25,
+      "end": 1689.0,
+      "duration": 1.75,
+      "text": "branches of the tree."
+    },
+    {
+      "index": 532,
+      "start": 1689.0,
+      "end": 1691.95,
+      "duration": 2.95,
+      "text": "So essentially, what we ended up doing was to multiply the"
+    },
+    {
+      "index": 533,
+      "start": 1691.95,
+      "end": 1693.7,
+      "duration": 1.75,
+      "text": "probability of this branch times the"
+    },
+    {
+      "index": 534,
+      "start": 1693.7,
+      "end": 1697.22,
+      "duration": 3.52,
+      "text": "probability of that branch."
+    },
+    {
+      "index": 535,
+      "start": 1697.22,
+      "end": 1700.69,
+      "duration": 3.47,
+      "text": "Now, how about the answer to this question."
+    },
+    {
+      "index": 536,
+      "start": 1700.69,
+      "end": 1705.35,
+      "duration": 4.66,
+      "text": "What is the probability that our radar is"
+    },
+    {
+      "index": 537,
+      "start": 1705.35,
+      "end": 1708.66,
+      "duration": 3.31,
+      "text": "going to register something?"
+    },
+    {
+      "index": 538,
+      "start": 1708.66,
+      "end": 1712.8,
+      "duration": 4.14,
+      "text": "OK, this is an event that can happen in multiple ways."
+    },
+    {
+      "index": 539,
+      "start": 1712.8,
+      "end": 1718.02,
+      "duration": 5.22,
+      "text": "It's the event that consists of this outcome."
+    },
+    {
+      "index": 540,
+      "start": 1718.02,
+      "end": 1721.64,
+      "duration": 3.62,
+      "text": "There is a plane and the radar registers something together"
+    },
+    {
+      "index": 541,
+      "start": 1721.64,
+      "end": 1726.44,
+      "duration": 4.8,
+      "text": "with this outcome, there is no plane but the radar still"
+    },
+    {
+      "index": 542,
+      "start": 1726.44,
+      "end": 1728.47,
+      "duration": 2.03,
+      "text": "registers something."
+    },
+    {
+      "index": 543,
+      "start": 1728.47,
+      "end": 1732.65,
+      "duration": 4.18,
+      "text": "So to find the probability of this event, we need the"
+    },
+    {
+      "index": 544,
+      "start": 1732.65,
+      "end": 1736.94,
+      "duration": 4.29,
+      "text": "individual probabilities of the two outcomes."
+    },
+    {
+      "index": 545,
+      "start": 1736.94,
+      "end": 1740.78,
+      "duration": 3.84,
+      "text": "For the first outcome, we already calculated it."
+    },
+    {
+      "index": 546,
+      "start": 1740.78,
+      "end": 1743.87,
+      "duration": 3.09,
+      "text": "For the second outcome, the probability that this happens"
+    },
+    {
+      "index": 547,
+      "start": 1743.87,
+      "end": 1748.48,
+      "duration": 4.61,
+      "text": "is going to be this probability 95% times 0.10,"
+    },
+    {
+      "index": 548,
+      "start": 1748.48,
+      "end": 1751.28,
+      "duration": 2.8,
+      "text": "which is the conditional probability for taking this"
+    },
+    {
+      "index": 549,
+      "start": 1751.28,
+      "end": 1755.07,
+      "duration": 3.79,
+      "text": "branch, given that there was no plane out there."
+    },
+    {
+      "index": 550,
+      "start": 1755.07,
+      "end": 1758.08,
+      "duration": 3.01,
+      "text": "So we just add the numbers."
+    },
+    {
+      "index": 551,
+      "start": 1758.08,
+      "end": 1766.95,
+      "duration": 8.87,
+      "text": "0.05 times 0.99 plus 0.95 times 0.1 and the"
+    },
+    {
+      "index": 552,
+      "start": 1766.95,
+      "end": 1771.72,
+      "duration": 4.77,
+      "text": "final answer is 0.1445."
+    },
+    {
+      "index": 553,
+      "start": 1771.72,
+      "end": 1772.41,
+      "duration": 0.69,
+      "text": "OK."
+    },
+    {
+      "index": 554,
+      "start": 1772.41,
+      "end": 1775.73,
+      "duration": 3.32,
+      "text": "And now here's the interesting question."
+    },
+    {
+      "index": 555,
+      "start": 1775.73,
+      "end": 1781.48,
+      "duration": 5.75,
+      "text": "Given that your radar recorded something, how likely is it"
+    },
+    {
+      "index": 556,
+      "start": 1781.48,
+      "end": 1785.07,
+      "duration": 3.59,
+      "text": "that there is an airplane up there?"
+    },
+    {
+      "index": 557,
+      "start": 1785.07,
+      "end": 1786.81,
+      "duration": 1.74,
+      "text": "Your radar registering something --"
+    },
+    {
+      "index": 558,
+      "start": 1786.81,
+      "end": 1788.73,
+      "duration": 1.92,
+      "text": "that can be caused by two things."
+    },
+    {
+      "index": 559,
+      "start": 1788.73,
+      "end": 1792.39,
+      "duration": 3.66,
+      "text": "Either there's a plane there, and your radar did its job."
+    },
+    {
+      "index": 560,
+      "start": 1792.39,
+      "end": 1797.4,
+      "duration": 5.01,
+      "text": "Or there was nothing, but your radar fired a false alarm."
+    },
+    {
+      "index": 561,
+      "start": 1797.4,
+      "end": 1801.69,
+      "duration": 4.29,
+      "text": "What's the probability that this is the case as opposed to"
+    },
+    {
+      "index": 562,
+      "start": 1801.69,
+      "end": 1805.37,
+      "duration": 3.68,
+      "text": "that being the case?"
+    },
+    {
+      "index": 563,
+      "start": 1805.37,
+      "end": 1806.46,
+      "duration": 1.09,
+      "text": "OK."
+    },
+    {
+      "index": 564,
+      "start": 1806.46,
+      "end": 1810.51,
+      "duration": 4.05,
+      "text": "The intuitive shortcut would be that it should be the"
+    },
+    {
+      "index": 565,
+      "start": 1810.51,
+      "end": 1812.93,
+      "duration": 2.42,
+      "text": "probability--"
+    },
+    {
+      "index": 566,
+      "start": 1812.93,
+      "end": 1815.82,
+      "duration": 2.89,
+      "text": "you look at their relative odds of these two elements and"
+    },
+    {
+      "index": 567,
+      "start": 1815.82,
+      "end": 1819.57,
+      "duration": 3.75,
+      "text": "you use them to find out how much more likely it is to be"
+    },
+    {
+      "index": 568,
+      "start": 1819.57,
+      "end": 1821.73,
+      "duration": 2.16,
+      "text": "there as opposed to being there."
+    },
+    {
+      "index": 569,
+      "start": 1821.73,
+      "end": 1824.24,
+      "duration": 2.51,
+      "text": "But instead of doing this, let's just write down the"
+    },
+    {
+      "index": 570,
+      "start": 1824.24,
+      "end": 1826.57,
+      "duration": 2.33,
+      "text": "definition and just use it."
+    },
+    {
+      "index": 571,
+      "start": 1826.57,
+      "end": 1830.48,
+      "duration": 3.91,
+      "text": "It's the probability of A and B happening, divided by the"
+    },
+    {
+      "index": 572,
+      "start": 1830.48,
+      "end": 1834.25,
+      "duration": 3.77,
+      "text": "probability of B. This is just our definition of conditional"
+    },
+    {
+      "index": 573,
+      "start": 1834.25,
+      "end": 1835.54,
+      "duration": 1.29,
+      "text": "probabilities."
+    },
+    {
+      "index": 574,
+      "start": 1835.54,
+      "end": 1839.3,
+      "duration": 3.76,
+      "text": "Now we have already found the numerator."
+    },
+    {
+      "index": 575,
+      "start": 1839.3,
+      "end": 1842.45,
+      "duration": 3.15,
+      "text": "We have already calculated the denominator."
+    },
+    {
+      "index": 576,
+      "start": 1842.45,
+      "end": 1846.44,
+      "duration": 3.99,
+      "text": "So we take the ratio of these two numbers and we find the"
+    },
+    {
+      "index": 577,
+      "start": 1846.44,
+      "end": 1847.65,
+      "duration": 1.21,
+      "text": "final answer --"
+    },
+    {
+      "index": 578,
+      "start": 1847.65,
+      "end": 1854.49,
+      "duration": 6.84,
+      "text": "which is 0.34."
+    },
+    {
+      "index": 579,
+      "start": 1854.49,
+      "end": 1855.98,
+      "duration": 1.49,
+      "text": "OK."
+    },
+    {
+      "index": 580,
+      "start": 1855.98,
+      "end": 1859.04,
+      "duration": 3.06,
+      "text": "There's this slightly curious thing that's"
+    },
+    {
+      "index": 581,
+      "start": 1859.04,
+      "end": 1862.27,
+      "duration": 3.23,
+      "text": "happened in this example."
+    },
+    {
+      "index": 582,
+      "start": 1862.27,
+      "end": 1868.38,
+      "duration": 6.11,
+      "text": "Doesn't this number feel a little too low?"
+    },
+    {
+      "index": 583,
+      "start": 1868.38,
+      "end": 1870.7,
+      "duration": 2.32,
+      "text": "My radar --"
+    },
+    {
+      "index": 584,
+      "start": 1870.7,
+      "end": 1873.82,
+      "duration": 3.12,
+      "text": "So this is a conditional probability, given that my"
+    },
+    {
+      "index": 585,
+      "start": 1873.82,
+      "end": 1877.11,
+      "duration": 3.29,
+      "text": "radar said there is something out there, that there is"
+    },
+    {
+      "index": 586,
+      "start": 1877.11,
+      "end": 1879.2,
+      "duration": 2.09,
+      "text": "indeed something there."
+    },
+    {
+      "index": 587,
+      "start": 1879.2,
+      "end": 1881.96,
+      "duration": 2.76,
+      "text": "So it's sort of the probability that our radar"
+    },
+    {
+      "index": 588,
+      "start": 1881.96,
+      "end": 1884.56,
+      "duration": 2.6,
+      "text": "gave the correct answer."
+    },
+    {
+      "index": 589,
+      "start": 1884.56,
+      "end": 1888.58,
+      "duration": 4.02,
+      "text": "Now, the specs of our radar we're pretty good."
+    },
+    {
+      "index": 590,
+      "start": 1888.58,
+      "end": 1891.46,
+      "duration": 2.88,
+      "text": "In this situation, it gives you the correct"
+    },
+    {
+      "index": 591,
+      "start": 1891.46,
+      "end": 1894.16,
+      "duration": 2.7,
+      "text": "answer 99% of the time."
+    },
+    {
+      "index": 592,
+      "start": 1894.16,
+      "end": 1896.02,
+      "duration": 1.86,
+      "text": "In this situation, it gives you the correct"
+    },
+    {
+      "index": 593,
+      "start": 1896.02,
+      "end": 1898.4,
+      "duration": 2.38,
+      "text": "answer 90% of the time."
+    },
+    {
+      "index": 594,
+      "start": 1898.4,
+      "end": 1899.73,
+      "duration": 1.33,
+      "text": "So you would think that your radar"
+    },
+    {
+      "index": 595,
+      "start": 1899.73,
+      "end": 1901.87,
+      "duration": 2.14,
+      "text": "there is really reliable."
+    },
+    {
+      "index": 596,
+      "start": 1901.87,
+      "end": 1907.73,
+      "duration": 5.86,
+      "text": "But yet here the radar recorded something, but the"
+    },
+    {
+      "index": 597,
+      "start": 1907.73,
+      "end": 1911.9,
+      "duration": 4.17,
+      "text": "chance that the answer that you get out of this is the"
+    },
+    {
+      "index": 598,
+      "start": 1911.9,
+      "end": 1915.18,
+      "duration": 3.28,
+      "text": "right one, given that it recorded something, the chance"
+    },
+    {
+      "index": 599,
+      "start": 1915.18,
+      "end": 1918.97,
+      "duration": 3.79,
+      "text": "that there is an airplane out there is only 30%."
+    },
+    {
+      "index": 600,
+      "start": 1918.97,
+      "end": 1921.98,
+      "duration": 3.01,
+      "text": "So you cannot really rely on the measurements from your"
+    },
+    {
+      "index": 601,
+      "start": 1921.98,
+      "end": 1926.65,
+      "duration": 4.67,
+      "text": "radar, even though the specs of the radar were really good."
+    },
+    {
+      "index": 602,
+      "start": 1926.65,
+      "end": 1928.62,
+      "duration": 1.97,
+      "text": "What's the reason for this?"
+    },
+    {
+      "index": 603,
+      "start": 1928.62,
+      "end": 1937.73,
+      "duration": 9.11,
+      "text": "Well, the reason is that false alarms are pretty common."
+    },
+    {
+      "index": 604,
+      "start": 1937.73,
+      "end": 1940.11,
+      "duration": 2.38,
+      "text": "Most of the time there's nothing."
+    },
+    {
+      "index": 605,
+      "start": 1940.11,
+      "end": 1943.75,
+      "duration": 3.64,
+      "text": "And there's a ten percent probability of false alarms."
+    },
+    {
+      "index": 606,
+      "start": 1943.75,
+      "end": 1946.64,
+      "duration": 2.89,
+      "text": "So there's roughly a ten percent probability that in"
+    },
+    {
+      "index": 607,
+      "start": 1946.64,
+      "end": 1949.73,
+      "duration": 3.09,
+      "text": "any given experiment, you have a false alarm."
+    },
+    {
+      "index": 608,
+      "start": 1949.73,
+      "end": 1953.45,
+      "duration": 3.72,
+      "text": "And there is about the five percent probability that"
+    },
+    {
+      "index": 609,
+      "start": 1953.45,
+      "end": 1957.09,
+      "duration": 3.64,
+      "text": "something out there and your radar gets it."
+    },
+    {
+      "index": 610,
+      "start": 1957.09,
+      "end": 1961.35,
+      "duration": 4.26,
+      "text": "So when your radar records something, it's actually more"
+    },
+    {
+      "index": 611,
+      "start": 1961.35,
+      "end": 1964.98,
+      "duration": 3.63,
+      "text": "likely to be a false alarm rather than"
+    },
+    {
+      "index": 612,
+      "start": 1964.98,
+      "end": 1966.86,
+      "duration": 1.88,
+      "text": "being an actual airplane."
+    },
+    {
+      "index": 613,
+      "start": 1966.86,
+      "end": 1969.1,
+      "duration": 2.24,
+      "text": "This has probability ten percent roughly."
+    },
+    {
+      "index": 614,
+      "start": 1969.1,
+      "end": 1972.0,
+      "duration": 2.9,
+      "text": "This has probability roughly five percent"
+    },
+    {
+      "index": 615,
+      "start": 1972.0,
+      "end": 1975.13,
+      "duration": 3.13,
+      "text": "So conditional probabilities are sometimes"
+    },
+    {
+      "index": 616,
+      "start": 1975.13,
+      "end": 1978.25,
+      "duration": 3.12,
+      "text": "counter-intuitive in terms of the answers that they get."
+    },
+    {
+      "index": 617,
+      "start": 1978.25,
+      "end": 1981.21,
+      "duration": 2.96,
+      "text": "And you can make similar stories about doctors"
+    },
+    {
+      "index": 618,
+      "start": 1981.21,
+      "end": 1984.37,
+      "duration": 3.16,
+      "text": "interpreting the results of tests."
+    },
+    {
+      "index": 619,
+      "start": 1984.37,
+      "end": 1987.56,
+      "duration": 3.19,
+      "text": "So you tested positive for a certain disease."
+    },
+    {
+      "index": 620,
+      "start": 1987.56,
+      "end": 1991.26,
+      "duration": 3.7,
+      "text": "Does it mean that you have the disease necessarily?"
+    },
+    {
+      "index": 621,
+      "start": 1991.26,
+      "end": 1994.59,
+      "duration": 3.33,
+      "text": "Well if that disease has been eradicated from the face of"
+    },
+    {
+      "index": 622,
+      "start": 1994.59,
+      "end": 1997.9,
+      "duration": 3.31,
+      "text": "the earth, testing positive doesn't mean that you have the"
+    },
+    {
+      "index": 623,
+      "start": 1997.9,
+      "end": 2001.74,
+      "duration": 3.84,
+      "text": "disease, even if the test was designed to be"
+    },
+    {
+      "index": 624,
+      "start": 2001.74,
+      "end": 2003.32,
+      "duration": 1.58,
+      "text": "a pretty good one."
+    },
+    {
+      "index": 625,
+      "start": 2003.32,
+      "end": 2008.19,
+      "duration": 4.87,
+      "text": "So unfortunately, doctors do get it wrong also sometimes."
+    },
+    {
+      "index": 626,
+      "start": 2008.19,
+      "end": 2009.99,
+      "duration": 1.8,
+      "text": "And the reasoning that comes in such"
+    },
+    {
+      "index": 627,
+      "start": 2009.99,
+      "end": 2012.29,
+      "duration": 2.3,
+      "text": "situations is pretty subtle."
+    },
+    {
+      "index": 628,
+      "start": 2012.29,
+      "end": 2014.89,
+      "duration": 2.6,
+      "text": "Now for the rest of the lecture, what we're going to"
+    },
+    {
+      "index": 629,
+      "start": 2014.89,
+      "end": 2020.71,
+      "duration": 5.82,
+      "text": "do is to take this example where we did three things and"
+    },
+    {
+      "index": 630,
+      "start": 2020.71,
+      "end": 2021.88,
+      "duration": 1.17,
+      "text": "abstract them."
+    },
+    {
+      "index": 631,
+      "start": 2021.88,
+      "end": 2024.54,
+      "duration": 2.66,
+      "text": "These three trivial calculations that's we just"
+    },
+    {
+      "index": 632,
+      "start": 2024.54,
+      "end": 2030.19,
+      "duration": 5.65,
+      "text": "did are three very important, very basic tools that you use"
+    },
+    {
+      "index": 633,
+      "start": 2030.19,
+      "end": 2033.35,
+      "duration": 3.16,
+      "text": "to solve more general probability problems."
+    },
+    {
+      "index": 634,
+      "start": 2033.35,
+      "end": 2035.04,
+      "duration": 1.69,
+      "text": "So what's the first one?"
+    },
+    {
+      "index": 635,
+      "start": 2035.04,
+      "end": 2038.04,
+      "duration": 3.0,
+      "text": "We find the probability of a composite event, two things"
+    },
+    {
+      "index": 636,
+      "start": 2038.04,
+      "end": 2041.3,
+      "duration": 3.26,
+      "text": "happening, by multiplying probabilities and conditional"
+    },
+    {
+      "index": 637,
+      "start": 2041.3,
+      "end": 2043.13,
+      "duration": 1.83,
+      "text": "probabilities."
+    },
+    {
+      "index": 638,
+      "start": 2043.13,
+      "end": 2048.639,
+      "duration": 5.509,
+      "text": "More general version of this, look at any situation, maybe"
+    },
+    {
+      "index": 639,
+      "start": 2048.639,
+      "end": 2050.86,
+      "duration": 2.221,
+      "text": "involving lots and lots of events."
+    },
+    {
+      "index": 640,
+      "start": 2050.86,
+      "end": 2055.51,
+      "duration": 4.65,
+      "text": "So here's a story that event A may happen or may not happen."
+    },
+    {
+      "index": 641,
+      "start": 2055.51,
+      "end": 2059.44,
+      "duration": 3.93,
+      "text": "Given that A occurred, it's possible that B happens or"
+    },
+    {
+      "index": 642,
+      "start": 2059.44,
+      "end": 2061.36,
+      "duration": 1.92,
+      "text": "that B does not happen."
+    },
+    {
+      "index": 643,
+      "start": 2061.36,
+      "end": 2065.28,
+      "duration": 3.92,
+      "text": "Given that B also happens, it's possible that the event C"
+    },
+    {
+      "index": 644,
+      "start": 2065.28,
+      "end": 2069.77,
+      "duration": 4.49,
+      "text": "also happens or that event C does not happen."
+    },
+    {
+      "index": 645,
+      "start": 2069.77,
+      "end": 2073.4,
+      "duration": 3.63,
+      "text": "And somebody specifies for you a model by giving you all"
+    },
+    {
+      "index": 646,
+      "start": 2073.4,
+      "end": 2076.23,
+      "duration": 2.83,
+      "text": "these conditional probabilities along the way."
+    },
+    {
+      "index": 647,
+      "start": 2076.23,
+      "end": 2079.57,
+      "duration": 3.34,
+      "text": "Notice what we move along the branches as the tree"
+    },
+    {
+      "index": 648,
+      "start": 2079.57,
+      "end": 2080.69,
+      "duration": 1.12,
+      "text": "progresses."
+    },
+    {
+      "index": 649,
+      "start": 2080.69,
+      "end": 2085.11,
+      "duration": 4.42,
+      "text": "Any point in the tree corresponds to certain events"
+    },
+    {
+      "index": 650,
+      "start": 2085.11,
+      "end": 2087.05,
+      "duration": 1.94,
+      "text": "having happened."
+    },
+    {
+      "index": 651,
+      "start": 2087.05,
+      "end": 2090.98,
+      "duration": 3.93,
+      "text": "And then, given that this has happened, we specify"
+    },
+    {
+      "index": 652,
+      "start": 2090.98,
+      "end": 2092.36,
+      "duration": 1.38,
+      "text": "conditional probabilities."
+    },
+    {
+      "index": 653,
+      "start": 2092.36,
+      "end": 2095.989,
+      "duration": 3.629,
+      "text": "Given that this has happened, how likely is it for that C"
+    },
+    {
+      "index": 654,
+      "start": 2095.989,
+      "end": 2097.9,
+      "duration": 1.911,
+      "text": "also occurs?"
+    },
+    {
+      "index": 655,
+      "start": 2097.9,
+      "end": 2100.89,
+      "duration": 2.99,
+      "text": "Given a model of this kind, how do we find the probability"
+    },
+    {
+      "index": 656,
+      "start": 2100.89,
+      "end": 2102.66,
+      "duration": 1.77,
+      "text": "or for this event?"
+    },
+    {
+      "index": 657,
+      "start": 2102.66,
+      "end": 2105.31,
+      "duration": 2.65,
+      "text": "The answer is extremely simple."
+    },
+    {
+      "index": 658,
+      "start": 2105.31,
+      "end": 2109.93,
+      "duration": 4.62,
+      "text": "All that you do is move along with the tree and multiply"
+    },
+    {
+      "index": 659,
+      "start": 2109.93,
+      "end": 2112.95,
+      "duration": 3.02,
+      "text": "conditional probabilities along the way."
+    },
+    {
+      "index": 660,
+      "start": 2112.95,
+      "end": 2116.9,
+      "duration": 3.95,
+      "text": "So in terms of frequencies, how often do all three things"
+    },
+    {
+      "index": 661,
+      "start": 2116.9,
+      "end": 2119.31,
+      "duration": 2.41,
+      "text": "happen, A, B, and C?"
+    },
+    {
+      "index": 662,
+      "start": 2119.31,
+      "end": 2122.45,
+      "duration": 3.14,
+      "text": "You first see how often does A occur."
+    },
+    {
+      "index": 663,
+      "start": 2122.45,
+      "end": 2124.86,
+      "duration": 2.41,
+      "text": "Out of the times that A occurs, how"
+    },
+    {
+      "index": 664,
+      "start": 2124.86,
+      "end": 2126.71,
+      "duration": 1.85,
+      "text": "often does B occur?"
+    },
+    {
+      "index": 665,
+      "start": 2126.71,
+      "end": 2129.63,
+      "duration": 2.92,
+      "text": "And out of the times where both A and B have occurred,"
+    },
+    {
+      "index": 666,
+      "start": 2129.63,
+      "end": 2131.66,
+      "duration": 2.03,
+      "text": "how often does C occur?"
+    },
+    {
+      "index": 667,
+      "start": 2131.66,
+      "end": 2134.39,
+      "duration": 2.73,
+      "text": "And you can just multiply those three frequencies with"
+    },
+    {
+      "index": 668,
+      "start": 2134.39,
+      "end": 2136.44,
+      "duration": 2.05,
+      "text": "each other."
+    },
+    {
+      "index": 669,
+      "start": 2136.44,
+      "end": 2139.74,
+      "duration": 3.3,
+      "text": "What is the formal proof of this?"
+    },
+    {
+      "index": 670,
+      "start": 2139.74,
+      "end": 2143.0,
+      "duration": 3.26,
+      "text": "Well, the only thing we have in our hands is the definition"
+    },
+    {
+      "index": 671,
+      "start": 2143.0,
+      "end": 2144.89,
+      "duration": 1.89,
+      "text": "of conditional probabilities."
+    },
+    {
+      "index": 672,
+      "start": 2144.89,
+      "end": 2149.66,
+      "duration": 4.77,
+      "text": "So let's just use this."
+    },
+    {
+      "index": 673,
+      "start": 2149.66,
+      "end": 2150.91,
+      "duration": 1.25,
+      "text": "And--"
+    },
+    {
+      "index": 674,
+      "start": 2154.37,
+      "end": 2155.0,
+      "duration": 0.63,
+      "text": "OK."
+    },
+    {
+      "index": 675,
+      "start": 2155.0,
+      "end": 2158.21,
+      "duration": 3.21,
+      "text": "Now, the definition of conditional probabilities"
+    },
+    {
+      "index": 676,
+      "start": 2158.21,
+      "end": 2160.77,
+      "duration": 2.56,
+      "text": "tells us that the probability of two things is the"
+    },
+    {
+      "index": 677,
+      "start": 2160.77,
+      "end": 2163.66,
+      "duration": 2.89,
+      "text": "probability of one of them times a conditional"
+    },
+    {
+      "index": 678,
+      "start": 2163.66,
+      "end": 2164.62,
+      "duration": 0.96,
+      "text": "probability."
+    },
+    {
+      "index": 679,
+      "start": 2164.62,
+      "end": 2165.85,
+      "duration": 1.23,
+      "text": "Unfortunately, here we have the"
+    },
+    {
+      "index": 680,
+      "start": 2165.85,
+      "end": 2167.31,
+      "duration": 1.46,
+      "text": "probability of three things."
+    },
+    {
+      "index": 681,
+      "start": 2167.31,
+      "end": 2169.0,
+      "duration": 1.69,
+      "text": "What can I do?"
+    },
+    {
+      "index": 682,
+      "start": 2169.0,
+      "end": 2173.57,
+      "duration": 4.57,
+      "text": "I can put a parenthesis in here and think of this as the"
+    },
+    {
+      "index": 683,
+      "start": 2173.57,
+      "end": 2178.64,
+      "duration": 5.07,
+      "text": "probability of this and that and apply our definition of"
+    },
+    {
+      "index": 684,
+      "start": 2178.64,
+      "end": 2180.3,
+      "duration": 1.66,
+      "text": "conditional probabilities here."
+    },
+    {
+      "index": 685,
+      "start": 2180.3,
+      "end": 2183.92,
+      "duration": 3.62,
+      "text": "The probability of two things happening is the probability"
+    },
+    {
+      "index": 686,
+      "start": 2183.92,
+      "end": 2188.43,
+      "duration": 4.51,
+      "text": "that the first happens times the conditional probability"
+    },
+    {
+      "index": 687,
+      "start": 2188.43,
+      "end": 2194.07,
+      "duration": 5.64,
+      "text": "that the second happens, given A and B, given that the first"
+    },
+    {
+      "index": 688,
+      "start": 2194.07,
+      "end": 2195.33,
+      "duration": 1.26,
+      "text": "one happened."
+    },
+    {
+      "index": 689,
+      "start": 2195.33,
+      "end": 2198.85,
+      "duration": 3.52,
+      "text": "So this is just the definition of the conditional probability"
+    },
+    {
+      "index": 690,
+      "start": 2198.85,
+      "end": 2201.98,
+      "duration": 3.13,
+      "text": "of an event, given another event."
+    },
+    {
+      "index": 691,
+      "start": 2201.98,
+      "end": 2204.27,
+      "duration": 2.29,
+      "text": "That other event is a composite one, but"
+    },
+    {
+      "index": 692,
+      "start": 2204.27,
+      "end": 2205.33,
+      "duration": 1.06,
+      "text": "that's not an issue."
+    },
+    {
+      "index": 693,
+      "start": 2205.33,
+      "end": 2207.3,
+      "duration": 1.97,
+      "text": "It's just an event."
+    },
+    {
+      "index": 694,
+      "start": 2207.3,
+      "end": 2210.04,
+      "duration": 2.74,
+      "text": "And then we use the definition of conditional probabilities"
+    },
+    {
+      "index": 695,
+      "start": 2210.04,
+      "end": 2216.29,
+      "duration": 6.25,
+      "text": "once more to break this apart and make it P(A), P(B given A)"
+    },
+    {
+      "index": 696,
+      "start": 2216.29,
+      "end": 2218.26,
+      "duration": 1.97,
+      "text": "and then finally, the last term."
+    },
+    {
+      "index": 697,
+      "start": 2220.93,
+      "end": 2221.27,
+      "duration": 0.34,
+      "text": "OK."
+    },
+    {
+      "index": 698,
+      "start": 2221.27,
+      "end": 2223.68,
+      "duration": 2.41,
+      "text": "So this proves the formula that I have up"
+    },
+    {
+      "index": 699,
+      "start": 2223.68,
+      "end": 2225.29,
+      "duration": 1.61,
+      "text": "there on the slides."
+    },
+    {
+      "index": 700,
+      "start": 2225.29,
+      "end": 2227.47,
+      "duration": 2.18,
+      "text": "And if you wish to calculate any other"
+    },
+    {
+      "index": 701,
+      "start": 2227.47,
+      "end": 2229.33,
+      "duration": 1.86,
+      "text": "probability in this diagram."
+    },
+    {
+      "index": 702,
+      "start": 2229.33,
+      "end": 2232.59,
+      "duration": 3.26,
+      "text": "For example, if you want to calculate this probability,"
+    },
+    {
+      "index": 703,
+      "start": 2232.59,
+      "end": 2235.58,
+      "duration": 2.99,
+      "text": "you would still multiply the conditional probabilities"
+    },
+    {
+      "index": 704,
+      "start": 2235.58,
+      "end": 2238.56,
+      "duration": 2.98,
+      "text": "along the different branches of the tree."
+    },
+    {
+      "index": 705,
+      "start": 2238.56,
+      "end": 2242.36,
+      "duration": 3.8,
+      "text": "In particular, here in this branch, you would have the"
+    },
+    {
+      "index": 706,
+      "start": 2242.36,
+      "end": 2246.67,
+      "duration": 4.31,
+      "text": "conditional probability of C complement, given A"
+    },
+    {
+      "index": 707,
+      "start": 2246.67,
+      "end": 2249.79,
+      "duration": 3.12,
+      "text": "intersection B complement, and so on."
+    },
+    {
+      "index": 708,
+      "start": 2249.79,
+      "end": 2252.07,
+      "duration": 2.28,
+      "text": "So you write down probabilities along all those"
+    },
+    {
+      "index": 709,
+      "start": 2252.07,
+      "end": 2255.94,
+      "duration": 3.87,
+      "text": "tree branches and just multiply them as you go."
+    },
+    {
+      "index": 710,
+      "start": 2258.51,
+      "end": 2264.45,
+      "duration": 5.94,
+      "text": "So this was the first skill that we are covering."
+    },
+    {
+      "index": 711,
+      "start": 2264.45,
+      "end": 2266.69,
+      "duration": 2.24,
+      "text": "What was the second one?"
+    },
+    {
+      "index": 712,
+      "start": 2266.69,
+      "end": 2273.24,
+      "duration": 6.55,
+      "text": "What we did was to calculate the total probability of a"
+    },
+    {
+      "index": 713,
+      "start": 2273.24,
+      "end": 2278.52,
+      "duration": 5.28,
+      "text": "certain event B that consisted of--"
+    },
+    {
+      "index": 714,
+      "start": 2278.52,
+      "end": 2282.82,
+      "duration": 4.3,
+      "text": "was made up from different possibilities, which"
+    },
+    {
+      "index": 715,
+      "start": 2282.82,
+      "end": 2285.58,
+      "duration": 2.76,
+      "text": "corresponded to different scenarios."
+    },
+    {
+      "index": 716,
+      "start": 2285.58,
+      "end": 2288.87,
+      "duration": 3.29,
+      "text": "So we wanted to calculate the probability of this event B"
+    },
+    {
+      "index": 717,
+      "start": 2288.87,
+      "end": 2292.03,
+      "duration": 3.16,
+      "text": "that consisted of those two elements."
+    },
+    {
+      "index": 718,
+      "start": 2292.03,
+      "end": 2293.28,
+      "duration": 1.25,
+      "text": "Let's generalize."
+    },
+    {
+      "index": 719,
+      "start": 2298.6,
+      "end": 2303.08,
+      "duration": 4.48,
+      "text": "So we have our big model."
+    },
+    {
+      "index": 720,
+      "start": 2303.08,
+      "end": 2306.11,
+      "duration": 3.03,
+      "text": "And this sample space is partitioned"
+    },
+    {
+      "index": 721,
+      "start": 2306.11,
+      "end": 2307.41,
+      "duration": 1.3,
+      "text": "in a number of sets."
+    },
+    {
+      "index": 722,
+      "start": 2307.41,
+      "end": 2310.62,
+      "duration": 3.21,
+      "text": "In our radar example, we had a partition in two sets."
+    },
+    {
+      "index": 723,
+      "start": 2310.62,
+      "end": 2313.6,
+      "duration": 2.98,
+      "text": "Either a plane is there, or a plane is not there."
+    },
+    {
+      "index": 724,
+      "start": 2313.6,
+      "end": 2315.85,
+      "duration": 2.25,
+      "text": "Since we're trying to generalize, now I'm going to"
+    },
+    {
+      "index": 725,
+      "start": 2315.85,
+      "end": 2319.41,
+      "duration": 3.56,
+      "text": "give you a picture for the case of three possibilities or"
+    },
+    {
+      "index": 726,
+      "start": 2319.41,
+      "end": 2321.36,
+      "duration": 1.95,
+      "text": "three possible scenarios."
+    },
+    {
+      "index": 727,
+      "start": 2321.36,
+      "end": 2325.16,
+      "duration": 3.8,
+      "text": "So whatever happens in the world, there are three"
+    },
+    {
+      "index": 728,
+      "start": 2325.16,
+      "end": 2329.66,
+      "duration": 4.5,
+      "text": "possible scenarios, A1, A2, A3."
+    },
+    {
+      "index": 729,
+      "start": 2329.66,
+      "end": 2334.695,
+      "duration": 5.035,
+      "text": "So think of these as there's nothing in the air, there's an"
+    },
+    {
+      "index": 730,
+      "start": 2334.695,
+      "end": 2338.19,
+      "duration": 3.495,
+      "text": "airplane in the air, or there's a flock of geese"
+    },
+    {
+      "index": 731,
+      "start": 2338.19,
+      "end": 2339.49,
+      "duration": 1.3,
+      "text": "flying in the air."
+    },
+    {
+      "index": 732,
+      "start": 2339.49,
+      "end": 2343.05,
+      "duration": 3.56,
+      "text": "So there's three possible scenarios."
+    },
+    {
+      "index": 733,
+      "start": 2343.05,
+      "end": 2348.972,
+      "duration": 5.922,
+      "text": "And then there's a certain event B of interest, such as a"
+    },
+    {
+      "index": 734,
+      "start": 2348.972,
+      "end": 2352.8,
+      "duration": 3.828,
+      "text": "radar records something or doesn't record something."
+    },
+    {
+      "index": 735,
+      "start": 2352.8,
+      "end": 2355.87,
+      "duration": 3.07,
+      "text": "We specify this model by giving"
+    },
+    {
+      "index": 736,
+      "start": 2355.87,
+      "end": 2358.04,
+      "duration": 2.17,
+      "text": "probabilities for the Ai's--"
+    },
+    {
+      "index": 737,
+      "start": 2360.69,
+      "end": 2363.42,
+      "duration": 2.73,
+      "text": "That's the probability of the different scenarios."
+    },
+    {
+      "index": 738,
+      "start": 2363.42,
+      "end": 2367.18,
+      "duration": 3.76,
+      "text": "And somebody also gives us the probabilities that this event"
+    },
+    {
+      "index": 739,
+      "start": 2367.18,
+      "end": 2371.01,
+      "duration": 3.83,
+      "text": "B is going to occur, given that the Ai-th"
+    },
+    {
+      "index": 740,
+      "start": 2371.01,
+      "end": 2373.48,
+      "duration": 2.47,
+      "text": "scenario has occurred."
+    },
+    {
+      "index": 741,
+      "start": 2373.48,
+      "end": 2376.23,
+      "duration": 2.75,
+      "text": "Think of the Ai's as scenarios."
+    },
+    {
+      "index": 742,
+      "start": 2379.13,
+      "end": 2383.11,
+      "duration": 3.98,
+      "text": "And we want to calculate the overall probability of the"
+    },
+    {
+      "index": 743,
+      "start": 2383.11,
+      "end": 2387.21,
+      "duration": 4.1,
+      "text": "event B. What's happening in this example?"
+    },
+    {
+      "index": 744,
+      "start": 2387.21,
+      "end": 2389.64,
+      "duration": 2.43,
+      "text": "Perhaps, instead of this picture, it's easier to"
+    },
+    {
+      "index": 745,
+      "start": 2389.64,
+      "end": 2394.97,
+      "duration": 5.33,
+      "text": "visualize if I go back to the picture I was using before."
+    },
+    {
+      "index": 746,
+      "start": 2394.97,
+      "end": 2399.99,
+      "duration": 5.02,
+      "text": "We have three possible scenarios, A1, A2, A3."
+    },
+    {
+      "index": 747,
+      "start": 2399.99,
+      "end": 2405.15,
+      "duration": 5.16,
+      "text": "And under each scenario, B may happen or B may not happen."
+    },
+    {
+      "index": 748,
+      "start": 2411.36,
+      "end": 2412.25,
+      "duration": 0.89,
+      "text": "And so on."
+    },
+    {
+      "index": 749,
+      "start": 2412.25,
+      "end": 2416.06,
+      "duration": 3.81,
+      "text": "So here we have A2 intersection B. And here we"
+    },
+    {
+      "index": 750,
+      "start": 2416.06,
+      "end": 2422.11,
+      "duration": 6.05,
+      "text": "have A3 intersection B. In the previous slide, we found how"
+    },
+    {
+      "index": 751,
+      "start": 2422.11,
+      "end": 2425.35,
+      "duration": 3.24,
+      "text": "to calculate the probability of any event of this kind,"
+    },
+    {
+      "index": 752,
+      "start": 2425.35,
+      "end": 2428.87,
+      "duration": 3.52,
+      "text": "which is done by multiplying probabilities here and"
+    },
+    {
+      "index": 753,
+      "start": 2428.87,
+      "end": 2431.1,
+      "duration": 2.23,
+      "text": "conditional probabilities there."
+    },
+    {
+      "index": 754,
+      "start": 2431.1,
+      "end": 2434.32,
+      "duration": 3.22,
+      "text": "Now we are asked to calculate the total probability of the"
+    },
+    {
+      "index": 755,
+      "start": 2434.32,
+      "end": 2438.41,
+      "duration": 4.09,
+      "text": "event B. The event B can happen in three possible ways."
+    },
+    {
+      "index": 756,
+      "start": 2438.41,
+      "end": 2439.9,
+      "duration": 1.49,
+      "text": "It can happen here."
+    },
+    {
+      "index": 757,
+      "start": 2439.9,
+      "end": 2441.7,
+      "duration": 1.8,
+      "text": "It can happen there."
+    },
+    {
+      "index": 758,
+      "start": 2441.7,
+      "end": 2443.78,
+      "duration": 2.08,
+      "text": "And it can happen here."
+    },
+    {
+      "index": 759,
+      "start": 2443.78,
+      "end": 2450.02,
+      "duration": 6.24,
+      "text": "So this is our event B. It consists of three elements."
+    },
+    {
+      "index": 760,
+      "start": 2450.02,
+      "end": 2453.37,
+      "duration": 3.35,
+      "text": "To calculate the total probability of our event B,"
+    },
+    {
+      "index": 761,
+      "start": 2453.37,
+      "end": 2456.73,
+      "duration": 3.36,
+      "text": "all we need to do is to add these three probabilities."
+    },
+    {
+      "index": 762,
+      "start": 2459.44,
+      "end": 2463.51,
+      "duration": 4.07,
+      "text": "So B is an event that consists of these three elements."
+    },
+    {
+      "index": 763,
+      "start": 2463.51,
+      "end": 2466.45,
+      "duration": 2.94,
+      "text": "There are three ways that B can happen."
+    },
+    {
+      "index": 764,
+      "start": 2466.45,
+      "end": 2470.39,
+      "duration": 3.94,
+      "text": "Either B happens together with A1, or B happens together with"
+    },
+    {
+      "index": 765,
+      "start": 2470.39,
+      "end": 2473.03,
+      "duration": 2.64,
+      "text": "A2, or B happens together with A3."
+    },
+    {
+      "index": 766,
+      "start": 2473.03,
+      "end": 2475.34,
+      "duration": 2.31,
+      "text": "So we need to add the probabilities of these three"
+    },
+    {
+      "index": 767,
+      "start": 2475.34,
+      "end": 2476.63,
+      "duration": 1.29,
+      "text": "contingencies."
+    },
+    {
+      "index": 768,
+      "start": 2476.63,
+      "end": 2478.98,
+      "duration": 2.35,
+      "text": "For each one of those contingencies, we can"
+    },
+    {
+      "index": 769,
+      "start": 2478.98,
+      "end": 2483.02,
+      "duration": 4.04,
+      "text": "calculate its probability by using the multiplication rule."
+    },
+    {
+      "index": 770,
+      "start": 2483.02,
+      "end": 2487.58,
+      "duration": 4.56,
+      "text": "So the probability of A1 and B happening is this--"
+    },
+    {
+      "index": 771,
+      "start": 2487.58,
+      "end": 2490.03,
+      "duration": 2.45,
+      "text": "It's the probability of A1 and then B happening"
+    },
+    {
+      "index": 772,
+      "start": 2490.03,
+      "end": 2492.02,
+      "duration": 1.99,
+      "text": "given that A1 happens."
+    },
+    {
+      "index": 773,
+      "start": 2492.02,
+      "end": 2496.14,
+      "duration": 4.12,
+      "text": "The probability of this contingency is found by taking"
+    },
+    {
+      "index": 774,
+      "start": 2496.14,
+      "end": 2499.47,
+      "duration": 3.33,
+      "text": "the probability that A2 happens times the conditional"
+    },
+    {
+      "index": 775,
+      "start": 2499.47,
+      "end": 2502.35,
+      "duration": 2.88,
+      "text": "probability of A2, given that B happened."
+    },
+    {
+      "index": 776,
+      "start": 2502.35,
+      "end": 2504.64,
+      "duration": 2.29,
+      "text": "And similarly for the third one."
+    },
+    {
+      "index": 777,
+      "start": 2504.64,
+      "end": 2508.03,
+      "duration": 3.39,
+      "text": "So this is the general rule that we have here."
+    },
+    {
+      "index": 778,
+      "start": 2508.03,
+      "end": 2510.83,
+      "duration": 2.8,
+      "text": "The rule is written for the case of three scenarios."
+    },
+    {
+      "index": 779,
+      "start": 2510.83,
+      "end": 2514.02,
+      "duration": 3.19,
+      "text": "But obviously, it has a generalization for the case of"
+    },
+    {
+      "index": 780,
+      "start": 2514.02,
+      "end": 2517.44,
+      "duration": 3.42,
+      "text": "four or five or more scenarios."
+    },
+    {
+      "index": 781,
+      "start": 2517.44,
+      "end": 2522.05,
+      "duration": 4.61,
+      "text": "It gives you a way of breaking up the calculation of an event"
+    },
+    {
+      "index": 782,
+      "start": 2522.05,
+      "end": 2526.74,
+      "duration": 4.69,
+      "text": "that can happen in multiple ways by considering individual"
+    },
+    {
+      "index": 783,
+      "start": 2526.74,
+      "end": 2529.72,
+      "duration": 2.98,
+      "text": "probabilities for the different ways that the event"
+    },
+    {
+      "index": 784,
+      "start": 2529.72,
+      "end": 2530.97,
+      "duration": 1.25,
+      "text": "can happen."
+    },
+    {
+      "index": 785,
+      "start": 2532.95,
+      "end": 2534.64,
+      "duration": 1.69,
+      "text": "OK."
+    },
+    {
+      "index": 786,
+      "start": 2534.64,
+      "end": 2536.3,
+      "duration": 1.66,
+      "text": "So--"
+    },
+    {
+      "index": 787,
+      "start": 2536.3,
+      "end": 2536.656,
+      "duration": 0.356,
+      "text": "Yes?"
+    },
+    {
+      "index": 788,
+      "start": 2536.656,
+      "end": 2538.18,
+      "duration": 1.524,
+      "text": "AUDIENCE: Does this have to change for"
+    },
+    {
+      "index": 789,
+      "start": 2538.18,
+      "end": 2539.8,
+      "duration": 1.62,
+      "text": "infinite sample space?"
+    },
+    {
+      "index": 790,
+      "start": 2539.8,
+      "end": 2540.76,
+      "duration": 0.96,
+      "text": "JOHN TSISIKLIS: No."
+    },
+    {
+      "index": 791,
+      "start": 2540.76,
+      "end": 2543.05,
+      "duration": 2.29,
+      "text": "This is true whether your sample space"
+    },
+    {
+      "index": 792,
+      "start": 2543.05,
+      "end": 2545.45,
+      "duration": 2.4,
+      "text": "is infinite or finite."
+    },
+    {
+      "index": 793,
+      "start": 2545.45,
+      "end": 2548.41,
+      "duration": 2.96,
+      "text": "What I'm using in this argument that we have a"
+    },
+    {
+      "index": 794,
+      "start": 2548.41,
+      "end": 2553.67,
+      "duration": 5.26,
+      "text": "partition into just three scenarios, three events."
+    },
+    {
+      "index": 795,
+      "start": 2553.67,
+      "end": 2556.72,
+      "duration": 3.05,
+      "text": "So it's a partition to a finite number of events."
+    },
+    {
+      "index": 796,
+      "start": 2556.72,
+      "end": 2561.1,
+      "duration": 4.38,
+      "text": "It's also true if it's a partition into an infinite"
+    },
+    {
+      "index": 797,
+      "start": 2561.1,
+      "end": 2563.67,
+      "duration": 2.57,
+      "text": "sequence of events."
+    },
+    {
+      "index": 798,
+      "start": 2563.67,
+      "end": 2567.55,
+      "duration": 3.88,
+      "text": "But that's, I think, one of the theoretical problems at"
+    },
+    {
+      "index": 799,
+      "start": 2567.55,
+      "end": 2569.43,
+      "duration": 1.88,
+      "text": "the end of the chapter."
+    },
+    {
+      "index": 800,
+      "start": 2569.43,
+      "end": 2574.35,
+      "duration": 4.92,
+      "text": "You probably may not need it for now."
+    },
+    {
+      "index": 801,
+      "start": 2574.35,
+      "end": 2577.55,
+      "duration": 3.2,
+      "text": "OK, going back to the story here."
+    },
+    {
+      "index": 802,
+      "start": 2577.55,
+      "end": 2580.41,
+      "duration": 2.86,
+      "text": "There are three possible scenarios about what could"
+    },
+    {
+      "index": 803,
+      "start": 2580.41,
+      "end": 2583.39,
+      "duration": 2.98,
+      "text": "happen in the world that are captured here."
+    },
+    {
+      "index": 804,
+      "start": 2583.39,
+      "end": 2588.66,
+      "duration": 5.27,
+      "text": "Event, under each scenario, event B may or may not happen."
+    },
+    {
+      "index": 805,
+      "start": 2588.66,
+      "end": 2591.85,
+      "duration": 3.19,
+      "text": "And so these probabilities tell us the likelihoods of the"
+    },
+    {
+      "index": 806,
+      "start": 2591.85,
+      "end": 2593.27,
+      "duration": 1.42,
+      "text": "different scenarios."
+    },
+    {
+      "index": 807,
+      "start": 2593.27,
+      "end": 2597.64,
+      "duration": 4.37,
+      "text": "These conditional probabilities tell us how"
+    },
+    {
+      "index": 808,
+      "start": 2597.64,
+      "end": 2601.03,
+      "duration": 3.39,
+      "text": "likely is it for B to happen under one scenario, or the"
+    },
+    {
+      "index": 809,
+      "start": 2601.03,
+      "end": 2603.76,
+      "duration": 2.73,
+      "text": "other scenario, or the other scenario."
+    },
+    {
+      "index": 810,
+      "start": 2603.76,
+      "end": 2608.51,
+      "duration": 4.75,
+      "text": "The overall probability of B is found by taking some"
+    },
+    {
+      "index": 811,
+      "start": 2608.51,
+      "end": 2612.38,
+      "duration": 3.87,
+      "text": "combination of the probabilities of B in the"
+    },
+    {
+      "index": 812,
+      "start": 2612.38,
+      "end": 2614.25,
+      "duration": 1.87,
+      "text": "different possible worlds, in the"
+    },
+    {
+      "index": 813,
+      "start": 2614.25,
+      "end": 2616.23,
+      "duration": 1.98,
+      "text": "different possible scenarios."
+    },
+    {
+      "index": 814,
+      "start": 2616.23,
+      "end": 2618.69,
+      "duration": 2.46,
+      "text": "Under some scenario, B may be very likely."
+    },
+    {
+      "index": 815,
+      "start": 2618.69,
+      "end": 2622.28,
+      "duration": 3.59,
+      "text": "Under another scenario, it may be very unlikely."
+    },
+    {
+      "index": 816,
+      "start": 2622.28,
+      "end": 2625.74,
+      "duration": 3.46,
+      "text": "We take all of these into account and weigh them"
+    },
+    {
+      "index": 817,
+      "start": 2625.74,
+      "end": 2628.59,
+      "duration": 2.85,
+      "text": "according to the likelihood of the scenarios."
+    },
+    {
+      "index": 818,
+      "start": 2628.59,
+      "end": 2633.04,
+      "duration": 4.45,
+      "text": "Now notice that since A1, A2, and three form a partition,"
+    },
+    {
+      "index": 819,
+      "start": 2633.04,
+      "end": 2638.53,
+      "duration": 5.49,
+      "text": "these three probabilities have what property?"
+    },
+    {
+      "index": 820,
+      "start": 2638.53,
+      "end": 2640.81,
+      "duration": 2.28,
+      "text": "Add to what?"
+    },
+    {
+      "index": 821,
+      "start": 2640.81,
+      "end": 2643.64,
+      "duration": 2.83,
+      "text": "They add to one."
+    },
+    {
+      "index": 822,
+      "start": 2643.64,
+      "end": 2646.02,
+      "duration": 2.38,
+      "text": "So it's the probability of this branch, plus this branch,"
+    },
+    {
+      "index": 823,
+      "start": 2646.02,
+      "end": 2647.24,
+      "duration": 1.22,
+      "text": "plus this branch."
+    },
+    {
+      "index": 824,
+      "start": 2647.24,
+      "end": 2651.66,
+      "duration": 4.42,
+      "text": "So what we have here is a weighted average of the"
+    },
+    {
+      "index": 825,
+      "start": 2651.66,
+      "end": 2655.12,
+      "duration": 3.46,
+      "text": "probabilities of the B's into the different worlds, or in"
+    },
+    {
+      "index": 826,
+      "start": 2655.12,
+      "end": 2656.69,
+      "duration": 1.57,
+      "text": "the different scenarios."
+    },
+    {
+      "index": 827,
+      "start": 2656.69,
+      "end": 2657.86,
+      "duration": 1.17,
+      "text": "Special case."
+    },
+    {
+      "index": 828,
+      "start": 2657.86,
+      "end": 2660.37,
+      "duration": 2.51,
+      "text": "Suppose the three scenarios are equally likely."
+    },
+    {
+      "index": 829,
+      "start": 2660.37,
+      "end": 2665.3,
+      "duration": 4.93,
+      "text": "So P of A1 equals 1/3, equals to P of A2, P of A3."
+    },
+    {
+      "index": 830,
+      "start": 2665.3,
+      "end": 2667.32,
+      "duration": 2.02,
+      "text": "what are we saying here?"
+    },
+    {
+      "index": 831,
+      "start": 2667.32,
+      "end": 2671.75,
+      "duration": 4.43,
+      "text": "In that case of equally likely scenarios, the probability of"
+    },
+    {
+      "index": 832,
+      "start": 2671.75,
+      "end": 2675.92,
+      "duration": 4.17,
+      "text": "B is the average of the probabilities of B in the"
+    },
+    {
+      "index": 833,
+      "start": 2675.92,
+      "end": 2678.835,
+      "duration": 2.915,
+      "text": "three different words, or in the three different scenarios."
+    },
+    {
+      "index": 834,
+      "start": 2682.95,
+      "end": 2683.45,
+      "duration": 0.5,
+      "text": "OK."
+    },
+    {
+      "index": 835,
+      "start": 2683.45,
+      "end": 2686.63,
+      "duration": 3.18,
+      "text": "So to finally, the last step."
+    },
+    {
+      "index": 836,
+      "start": 2686.63,
+      "end": 2693.8,
+      "duration": 7.17,
+      "text": "If we go back again two slides, the last thing that we"
+    },
+    {
+      "index": 837,
+      "start": 2693.8,
+      "end": 2697.51,
+      "duration": 3.71,
+      "text": "did was to calculate a conditional probability of"
+    },
+    {
+      "index": 838,
+      "start": 2697.51,
+      "end": 2701.76,
+      "duration": 4.25,
+      "text": "this kind, probability of A given B, which is a"
+    },
+    {
+      "index": 839,
+      "start": 2701.76,
+      "end": 2704.08,
+      "duration": 2.32,
+      "text": "probability associated essentially with"
+    },
+    {
+      "index": 840,
+      "start": 2704.08,
+      "end": 2705.63,
+      "duration": 1.55,
+      "text": "an inference problem."
+    },
+    {
+      "index": 841,
+      "start": 2705.63,
+      "end": 2709.84,
+      "duration": 4.21,
+      "text": "Given that our radar recorded something, how likely is it"
+    },
+    {
+      "index": 842,
+      "start": 2709.84,
+      "end": 2712.06,
+      "duration": 2.22,
+      "text": "that the plane was up there?"
+    },
+    {
+      "index": 843,
+      "start": 2712.06,
+      "end": 2715.24,
+      "duration": 3.18,
+      "text": "So we're trying to infer whether a plane was up there"
+    },
+    {
+      "index": 844,
+      "start": 2715.24,
+      "end": 2718.61,
+      "duration": 3.37,
+      "text": "or not, based on the information that we've got."
+    },
+    {
+      "index": 845,
+      "start": 2718.61,
+      "end": 2720.77,
+      "duration": 2.16,
+      "text": "So let's generalize once more."
+    },
+    {
+      "index": 846,
+      "start": 2724.56,
+      "end": 2728.25,
+      "duration": 3.69,
+      "text": "And we're just going to rewrite what we did in that"
+    },
+    {
+      "index": 847,
+      "start": 2728.25,
+      "end": 2732.19,
+      "duration": 3.94,
+      "text": "example, but in terms of general symbols instead of the"
+    },
+    {
+      "index": 848,
+      "start": 2732.19,
+      "end": 2733.65,
+      "duration": 1.46,
+      "text": "specific numbers."
+    },
+    {
+      "index": 849,
+      "start": 2733.65,
+      "end": 2738.18,
+      "duration": 4.53,
+      "text": "So once more, the model that we have involves probabilities"
+    },
+    {
+      "index": 850,
+      "start": 2738.18,
+      "end": 2740.48,
+      "duration": 2.3,
+      "text": "of the different scenarios."
+    },
+    {
+      "index": 851,
+      "start": 2740.48,
+      "end": 2742.83,
+      "duration": 2.35,
+      "text": "These we call them prior probabilities."
+    },
+    {
+      "index": 852,
+      "start": 2742.83,
+      "end": 2746.69,
+      "duration": 3.86,
+      "text": "They're are our initial beliefs about how likely each"
+    },
+    {
+      "index": 853,
+      "start": 2746.69,
+      "end": 2749.36,
+      "duration": 2.67,
+      "text": "scenario is to occur."
+    },
+    {
+      "index": 854,
+      "start": 2749.36,
+      "end": 2754.5,
+      "duration": 5.14,
+      "text": "We also have a model of our measuring device that tells us"
+    },
+    {
+      "index": 855,
+      "start": 2754.5,
+      "end": 2758.11,
+      "duration": 3.61,
+      "text": "under that scenario how likely is it that our radar will"
+    },
+    {
+      "index": 856,
+      "start": 2758.11,
+      "end": 2760.14,
+      "duration": 2.03,
+      "text": "register something or not."
+    },
+    {
+      "index": 857,
+      "start": 2760.14,
+      "end": 2763.22,
+      "duration": 3.08,
+      "text": "So we're given again these conditional probabilities."
+    },
+    {
+      "index": 858,
+      "start": 2763.22,
+      "end": 2764.33,
+      "duration": 1.11,
+      "text": "We're given the conditional"
+    },
+    {
+      "index": 859,
+      "start": 2764.33,
+      "end": 2766.95,
+      "duration": 2.62,
+      "text": "probabilities for these branches."
+    },
+    {
+      "index": 860,
+      "start": 2766.95,
+      "end": 2771.05,
+      "duration": 4.1,
+      "text": "Then we are told that event B occurred."
+    },
+    {
+      "index": 861,
+      "start": 2771.05,
+      "end": 2775.33,
+      "duration": 4.28,
+      "text": "And on the basis of this new information, we want to form"
+    },
+    {
+      "index": 862,
+      "start": 2775.33,
+      "end": 2778.51,
+      "duration": 3.18,
+      "text": "some new beliefs about the relative likelihood of the"
+    },
+    {
+      "index": 863,
+      "start": 2778.51,
+      "end": 2780.11,
+      "duration": 1.6,
+      "text": "different scenarios."
+    },
+    {
+      "index": 864,
+      "start": 2780.11,
+      "end": 2783.79,
+      "duration": 3.68,
+      "text": "Going back again to our radar example, an airplane was"
+    },
+    {
+      "index": 865,
+      "start": 2783.79,
+      "end": 2786.34,
+      "duration": 2.55,
+      "text": "present with probability 5%."
+    },
+    {
+      "index": 866,
+      "start": 2786.34,
+      "end": 2789.18,
+      "duration": 2.84,
+      "text": "Given that the radar recorded something, we're going to"
+    },
+    {
+      "index": 867,
+      "start": 2789.18,
+      "end": 2790.54,
+      "duration": 1.36,
+      "text": "change our beliefs."
+    },
+    {
+      "index": 868,
+      "start": 2790.54,
+      "end": 2794.87,
+      "duration": 4.33,
+      "text": "Now, a plane is present with probability 34%."
+    },
+    {
+      "index": 869,
+      "start": 2794.87,
+      "end": 2798.27,
+      "duration": 3.4,
+      "text": "The radar, since we saw something, we are going to"
+    },
+    {
+      "index": 870,
+      "start": 2798.27,
+      "end": 2801.88,
+      "duration": 3.61,
+      "text": "revise our beliefs as to whether the plane is out there"
+    },
+    {
+      "index": 871,
+      "start": 2801.88,
+      "end": 2803.13,
+      "duration": 1.25,
+      "text": "or is not there."
+    },
+    {
+      "index": 872,
+      "start": 2806.04,
+      "end": 2812.66,
+      "duration": 6.62,
+      "text": "And so what we need to do is to calculate the conditional"
+    },
+    {
+      "index": 873,
+      "start": 2812.66,
+      "end": 2817.29,
+      "duration": 4.63,
+      "text": "probabilities of the different scenarios, given the"
+    },
+    {
+      "index": 874,
+      "start": 2817.29,
+      "end": 2819.34,
+      "duration": 2.05,
+      "text": "information that we got."
+    },
+    {
+      "index": 875,
+      "start": 2819.34,
+      "end": 2822.33,
+      "duration": 2.99,
+      "text": "So initially, we have these probabilities for the"
+    },
+    {
+      "index": 876,
+      "start": 2822.33,
+      "end": 2824.0,
+      "duration": 1.67,
+      "text": "different scenarios."
+    },
+    {
+      "index": 877,
+      "start": 2824.0,
+      "end": 2826.87,
+      "duration": 2.87,
+      "text": "Once we get the information, we update them and we"
+    },
+    {
+      "index": 878,
+      "start": 2826.87,
+      "end": 2829.76,
+      "duration": 2.89,
+      "text": "calculate our revised probabilities or conditional"
+    },
+    {
+      "index": 879,
+      "start": 2829.76,
+      "end": 2834.13,
+      "duration": 4.37,
+      "text": "probabilities given the observation that we made."
+    },
+    {
+      "index": 880,
+      "start": 2834.13,
+      "end": 2834.73,
+      "duration": 0.6,
+      "text": "OK."
+    },
+    {
+      "index": 881,
+      "start": 2834.73,
+      "end": 2835.76,
+      "duration": 1.03,
+      "text": "So what do we do?"
+    },
+    {
+      "index": 882,
+      "start": 2835.76,
+      "end": 2837.62,
+      "duration": 1.86,
+      "text": "We just use the definition of conditional"
+    },
+    {
+      "index": 883,
+      "start": 2837.62,
+      "end": 2839.36,
+      "duration": 1.74,
+      "text": "probabilities twice."
+    },
+    {
+      "index": 884,
+      "start": 2839.36,
+      "end": 2842.49,
+      "duration": 3.13,
+      "text": "By definition the conditional probability is the probability"
+    },
+    {
+      "index": 885,
+      "start": 2842.49,
+      "end": 2845.74,
+      "duration": 3.25,
+      "text": "of two things happening divided by the probability of"
+    },
+    {
+      "index": 886,
+      "start": 2845.74,
+      "end": 2847.96,
+      "duration": 2.22,
+      "text": "the conditioning event."
+    },
+    {
+      "index": 887,
+      "start": 2847.96,
+      "end": 2850.48,
+      "duration": 2.52,
+      "text": "Now, I'm using the definition of conditional probabilities"
+    },
+    {
+      "index": 888,
+      "start": 2850.48,
+      "end": 2853.55,
+      "duration": 3.07,
+      "text": "once more, or rather I use the multiplication rule."
+    },
+    {
+      "index": 889,
+      "start": 2853.55,
+      "end": 2855.97,
+      "duration": 2.42,
+      "text": "The probability of two things happening is the probability"
+    },
+    {
+      "index": 890,
+      "start": 2855.97,
+      "end": 2858.74,
+      "duration": 2.77,
+      "text": "of the first and the second."
+    },
+    {
+      "index": 891,
+      "start": 2858.74,
+      "end": 2861.19,
+      "duration": 2.45,
+      "text": "So these are things that are given to us."
+    },
+    {
+      "index": 892,
+      "start": 2861.19,
+      "end": 2863.43,
+      "duration": 2.24,
+      "text": "They're the probabilities of the different scenarios."
+    },
+    {
+      "index": 893,
+      "start": 2863.43,
+      "end": 2867.75,
+      "duration": 4.32,
+      "text": "And it's the model of our measuring device, which we"
+    },
+    {
+      "index": 894,
+      "start": 2867.75,
+      "end": 2871.81,
+      "duration": 4.06,
+      "text": "assume to be available."
+    },
+    {
+      "index": 895,
+      "start": 2871.81,
+      "end": 2873.45,
+      "duration": 1.64,
+      "text": "And how about the denominator?"
+    },
+    {
+      "index": 896,
+      "start": 2873.45,
+      "end": 2877.78,
+      "duration": 4.33,
+      "text": "This is total probability of the event B. But we just found"
+    },
+    {
+      "index": 897,
+      "start": 2877.78,
+      "end": 2881.14,
+      "duration": 3.36,
+      "text": "that's it's easy to calculate using the formula in the"
+    },
+    {
+      "index": 898,
+      "start": 2881.14,
+      "end": 2882.4,
+      "duration": 1.26,
+      "text": "previous slide."
+    },
+    {
+      "index": 899,
+      "start": 2882.4,
+      "end": 2884.75,
+      "duration": 2.35,
+      "text": "To find the overall probability of event B"
+    },
+    {
+      "index": 900,
+      "start": 2884.75,
+      "end": 2888.26,
+      "duration": 3.51,
+      "text": "occurring, we look at the probabilities of B occurring"
+    },
+    {
+      "index": 901,
+      "start": 2888.26,
+      "end": 2891.56,
+      "duration": 3.3,
+      "text": "under the different scenario and weigh them according to"
+    },
+    {
+      "index": 902,
+      "start": 2891.56,
+      "end": 2893.71,
+      "duration": 2.15,
+      "text": "the probabilities of all the scenarios."
+    },
+    {
+      "index": 903,
+      "start": 2893.71,
+      "end": 2897.37,
+      "duration": 3.66,
+      "text": "So in the end, we have a formula for the conditional"
+    },
+    {
+      "index": 904,
+      "start": 2897.37,
+      "end": 2902.73,
+      "duration": 5.36,
+      "text": "probability, A's given B, based on the data of the"
+    },
+    {
+      "index": 905,
+      "start": 2902.73,
+      "end": 2905.09,
+      "duration": 2.36,
+      "text": "problem, which were probabilities of the different"
+    },
+    {
+      "index": 906,
+      "start": 2905.09,
+      "end": 2907.36,
+      "duration": 2.27,
+      "text": "scenarios and conditional probabilities of"
+    },
+    {
+      "index": 907,
+      "start": 2907.36,
+      "end": 2909.49,
+      "duration": 2.13,
+      "text": "B, given the A's."
+    },
+    {
+      "index": 908,
+      "start": 2909.49,
+      "end": 2913.32,
+      "duration": 3.83,
+      "text": "So what this calculation does is, basically, it reverses the"
+    },
+    {
+      "index": 909,
+      "start": 2913.32,
+      "end": 2915.31,
+      "duration": 1.99,
+      "text": "order of conditioning."
+    },
+    {
+      "index": 910,
+      "start": 2915.31,
+      "end": 2919.0,
+      "duration": 3.69,
+      "text": "We are given conditional probabilities of these kind,"
+    },
+    {
+      "index": 911,
+      "start": 2919.0,
+      "end": 2922.95,
+      "duration": 3.95,
+      "text": "where it's B given A and we produce new conditional"
+    },
+    {
+      "index": 912,
+      "start": 2922.95,
+      "end": 2926.63,
+      "duration": 3.68,
+      "text": "probabilities, where things go the other way."
+    },
+    {
+      "index": 913,
+      "start": 2926.63,
+      "end": 2933.53,
+      "duration": 6.9,
+      "text": "So schematically, what's happening here is that we have"
+    },
+    {
+      "index": 914,
+      "start": 2933.53,
+      "end": 2939.995,
+      "duration": 6.465,
+      "text": "model of cause and effect and--"
+    },
+    {
+      "index": 915,
+      "start": 2942.55,
+      "end": 2949.84,
+      "duration": 7.29,
+      "text": "So a scenario occurs and that may cause B to happen or may"
+    },
+    {
+      "index": 916,
+      "start": 2949.84,
+      "end": 2951.88,
+      "duration": 2.04,
+      "text": "not cause it to happen."
+    },
+    {
+      "index": 917,
+      "start": 2951.88,
+      "end": 2954.495,
+      "duration": 2.615,
+      "text": "So this is a cause/effect model."
+    },
+    {
+      "index": 918,
+      "start": 2957.3,
+      "end": 2960.09,
+      "duration": 2.79,
+      "text": "And it's modeled using probabilities, such as"
+    },
+    {
+      "index": 919,
+      "start": 2960.09,
+      "end": 2963.35,
+      "duration": 3.26,
+      "text": "probability of B given Ai."
+    },
+    {
+      "index": 920,
+      "start": 2963.35,
+      "end": 2968.71,
+      "duration": 5.36,
+      "text": "And what we want to do is inference where we are told"
+    },
+    {
+      "index": 921,
+      "start": 2968.71,
+      "end": 2975.91,
+      "duration": 7.2,
+      "text": "that B occurs, and we want to infer whether Ai"
+    },
+    {
+      "index": 922,
+      "start": 2975.91,
+      "end": 2978.58,
+      "duration": 2.67,
+      "text": "also occurred or not."
+    },
+    {
+      "index": 923,
+      "start": 2978.58,
+      "end": 2982.05,
+      "duration": 3.47,
+      "text": "And the appropriate probabilities for that are the"
+    },
+    {
+      "index": 924,
+      "start": 2982.05,
+      "end": 2985.01,
+      "duration": 2.96,
+      "text": "conditional probabilities that A occurred,"
+    },
+    {
+      "index": 925,
+      "start": 2985.01,
+      "end": 2988.11,
+      "duration": 3.1,
+      "text": "given that B occurred."
+    },
+    {
+      "index": 926,
+      "start": 2988.11,
+      "end": 2992.25,
+      "duration": 4.14,
+      "text": "So we're starting with a causal model of our situation."
+    },
+    {
+      "index": 927,
+      "start": 2992.25,
+      "end": 2997.22,
+      "duration": 4.97,
+      "text": "It models from a given cause how likely is a certain effect"
+    },
+    {
+      "index": 928,
+      "start": 2997.22,
+      "end": 2998.83,
+      "duration": 1.61,
+      "text": "to be observed."
+    },
+    {
+      "index": 929,
+      "start": 2998.83,
+      "end": 3002.92,
+      "duration": 4.09,
+      "text": "And then we do inference, which answers the question,"
+    },
+    {
+      "index": 930,
+      "start": 3002.92,
+      "end": 3006.73,
+      "duration": 3.81,
+      "text": "given that the effect was observed, how likely is it"
+    },
+    {
+      "index": 931,
+      "start": 3006.73,
+      "end": 3010.87,
+      "duration": 4.14,
+      "text": "that the world was in this particular situation or state"
+    },
+    {
+      "index": 932,
+      "start": 3010.87,
+      "end": 3012.94,
+      "duration": 2.07,
+      "text": "or scenario."
+    },
+    {
+      "index": 933,
+      "start": 3012.94,
+      "end": 3017.26,
+      "duration": 4.32,
+      "text": "So the name of the Bayes rule comes from Thomas Bayes, a"
+    },
+    {
+      "index": 934,
+      "start": 3017.26,
+      "end": 3020.75,
+      "duration": 3.49,
+      "text": "British theologian back in the 1700s."
+    },
+    {
+      "index": 935,
+      "start": 3020.75,
+      "end": 3021.53,
+      "duration": 0.78,
+      "text": "It actually--"
+    },
+    {
+      "index": 936,
+      "start": 3021.53,
+      "end": 3025.0,
+      "duration": 3.47,
+      "text": "This calculation addresses a basic problem, a basic"
+    },
+    {
+      "index": 937,
+      "start": 3025.0,
+      "end": 3030.23,
+      "duration": 5.23,
+      "text": "philosophical problem, how one can learn from experience or"
+    },
+    {
+      "index": 938,
+      "start": 3030.23,
+      "end": 3033.3,
+      "duration": 3.07,
+      "text": "from experimental data and some systematic way."
+    },
+    {
+      "index": 939,
+      "start": 3033.3,
+      "end": 3035.84,
+      "duration": 2.54,
+      "text": "So the British at that time were preoccupied with this"
+    },
+    {
+      "index": 940,
+      "start": 3035.84,
+      "end": 3036.71,
+      "duration": 0.87,
+      "text": "type of question."
+    },
+    {
+      "index": 941,
+      "start": 3036.71,
+      "end": 3041.2,
+      "duration": 4.49,
+      "text": "Is there a basic theory that about how we can incorporate"
+    },
+    {
+      "index": 942,
+      "start": 3041.2,
+      "end": 3044.28,
+      "duration": 3.08,
+      "text": "new knowledge to previous knowledge."
+    },
+    {
+      "index": 943,
+      "start": 3044.28,
+      "end": 3047.6,
+      "duration": 3.32,
+      "text": "And this calculation made an argument that, yes, it is"
+    },
+    {
+      "index": 944,
+      "start": 3047.6,
+      "end": 3050.1,
+      "duration": 2.5,
+      "text": "possible to do that in a systematic way."
+    },
+    {
+      "index": 945,
+      "start": 3050.1,
+      "end": 3053.04,
+      "duration": 2.94,
+      "text": "So the philosophical underpinnings of this have a"
+    },
+    {
+      "index": 946,
+      "start": 3053.04,
+      "end": 3057.05,
+      "duration": 4.01,
+      "text": "very long history and a lot of discussion around them."
+    },
+    {
+      "index": 947,
+      "start": 3057.05,
+      "end": 3060.56,
+      "duration": 3.51,
+      "text": "But for our purposes, it's just an extremely useful tool."
+    },
+    {
+      "index": 948,
+      "start": 3060.56,
+      "end": 3063.55,
+      "duration": 2.99,
+      "text": "And it's the foundation of almost everything that gets"
+    },
+    {
+      "index": 949,
+      "start": 3063.55,
+      "end": 3067.19,
+      "duration": 3.64,
+      "text": "done when you try to do inference based on partial"
+    },
+    {
+      "index": 950,
+      "start": 3067.19,
+      "end": 3068.86,
+      "duration": 1.67,
+      "text": "observations."
+    },
+    {
+      "index": 951,
+      "start": 3068.86,
+      "end": 3069.69,
+      "duration": 0.83,
+      "text": "Very well."
+    },
+    {
+      "index": 952,
+      "start": 3069.69,
+      "end": 3070.94,
+      "duration": 1.25,
+      "text": "Till next time."
+    }
+  ],
+  "course": {
+    "category": "Physics",
+    "title": "Electricity and Magnetism",
+    "source_url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP61MdtwGTqZA0MreSaDybji8"
+  }
+}

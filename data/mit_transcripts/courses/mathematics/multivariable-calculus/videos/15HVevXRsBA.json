@@ -1,0 +1,4099 @@
+{
+  "video": {
+    "id": "15HVevXRsBA",
+    "title": "Lec 13: Lagrange multipliers | MIT 18.02 Multivariable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=15HVevXRsBA",
+    "channel": "MIT OpenCourseWare",
+    "duration": 3010,
+    "language": "en"
+  },
+  "segment_count": 583,
+  "segments": [
+    {
+      "index": 0,
+      "start": 25.09,
+      "end": 29.457,
+      "duration": 4.367,
+      "text": "Last time we saw things about gradients and directional"
+    },
+    {
+      "index": 1,
+      "start": 29.457,
+      "end": 32.706,
+      "duration": 3.249,
+      "text": "derivatives. Before that we studied how to"
+    },
+    {
+      "index": 2,
+      "start": 32.706,
+      "end": 37.23,
+      "duration": 4.524,
+      "text": "look for minima and maxima of functions of several variables."
+    },
+    {
+      "index": 3,
+      "start": 37.23,
+      "end": 41.77,
+      "duration": 4.54,
+      "text": "And today we are going to look again at min/max problems but in"
+    },
+    {
+      "index": 4,
+      "start": 41.77,
+      "end": 45.432,
+      "duration": 3.662,
+      "text": "a different setting, namely, one for variables that"
+    },
+    {
+      "index": 5,
+      "start": 45.432,
+      "end": 49.418,
+      "duration": 3.986,
+      "text": "are not independent. And so what we will see is you"
+    },
+    {
+      "index": 6,
+      "start": 49.418,
+      "end": 52.39,
+      "duration": 2.972,
+      "text": "may have heard of Lagrange multipliers."
+    },
+    {
+      "index": 7,
+      "start": 52.39,
+      "end": 59.081,
+      "duration": 6.691,
+      "text": "And this is the one point in the term when I can shine with"
+    },
+    {
+      "index": 8,
+      "start": 59.081,
+      "end": 65.08,
+      "duration": 5.999,
+      "text": "my French accent and say Lagrange's name properly."
+    },
+    {
+      "index": 9,
+      "start": 65.08,
+      "end": 68.705,
+      "duration": 3.625,
+      "text": "OK. What are Lagrange multipliers"
+    },
+    {
+      "index": 10,
+      "start": 68.705,
+      "end": 73.128,
+      "duration": 4.423,
+      "text": "about? Well, the goal is to minimize"
+    },
+    {
+      "index": 11,
+      "start": 73.128,
+      "end": 79.269,
+      "duration": 6.141,
+      "text": "or maximize a function of several variables."
+    },
+    {
+      "index": 12,
+      "start": 79.269,
+      "end": 82.477,
+      "duration": 3.208,
+      "text": "Let's say, for example, f of x, y, z,"
+    },
+    {
+      "index": 13,
+      "start": 82.477,
+      "end": 87.29,
+      "duration": 4.813,
+      "text": "but where these variables are no longer independent."
+    },
+    {
+      "index": 14,
+      "start": 101.65,
+      "end": 103.803,
+      "duration": 2.153,
+      "text": "They are not independent. That means that there is a"
+    },
+    {
+      "index": 15,
+      "start": 103.803,
+      "end": 107.527,
+      "duration": 3.724,
+      "text": "relation between them. The relation is maybe some"
+    },
+    {
+      "index": 16,
+      "start": 107.527,
+      "end": 112.97,
+      "duration": 5.443,
+      "text": "equation of the form g of x, y, z equals some constant."
+    },
+    {
+      "index": 17,
+      "start": 112.97,
+      "end": 117.433,
+      "duration": 4.463,
+      "text": "You take the relation between x, y, z, you call that g and"
+    },
+    {
+      "index": 18,
+      "start": 117.433,
+      "end": 122.214,
+      "duration": 4.781,
+      "text": "that gives you the constraint. And your goal is to minimize f"
+    },
+    {
+      "index": 19,
+      "start": 122.214,
+      "end": 125.778,
+      "duration": 3.564,
+      "text": "only of those values of x, y, z that satisfy the"
+    },
+    {
+      "index": 20,
+      "start": 125.778,
+      "end": 127.89,
+      "duration": 2.112,
+      "text": "constraint. What is one way to do that?"
+    },
+    {
+      "index": 21,
+      "start": 127.89,
+      "end": 130.87,
+      "duration": 2.98,
+      "text": "Well, one to do that, if the constraint is very"
+    },
+    {
+      "index": 22,
+      "start": 130.87,
+      "end": 134.37,
+      "duration": 3.5,
+      "text": "simple, we can maybe solve for one of the variables."
+    },
+    {
+      "index": 23,
+      "start": 134.37,
+      "end": 137.667,
+      "duration": 3.297,
+      "text": "Maybe we can solve this equation for one of the"
+    },
+    {
+      "index": 24,
+      "start": 137.667,
+      "end": 141.609,
+      "duration": 3.942,
+      "text": "variables, plug it back into f, and then we have a usual"
+    },
+    {
+      "index": 25,
+      "start": 141.609,
+      "end": 145.05,
+      "duration": 3.441,
+      "text": "min/max problem that we have seen how to do."
+    },
+    {
+      "index": 26,
+      "start": 145.05,
+      "end": 148.437,
+      "duration": 3.387,
+      "text": "The problem is sometimes you cannot actually solve for x,"
+    },
+    {
+      "index": 27,
+      "start": 148.437,
+      "end": 151.885,
+      "duration": 3.448,
+      "text": "y, z in here because this condition is too complicated and"
+    },
+    {
+      "index": 28,
+      "start": 151.885,
+      "end": 158.53,
+      "duration": 6.645,
+      "text": "then we need a new method. That is what we are going to do."
+    },
+    {
+      "index": 29,
+      "start": 158.53,
+      "end": 161.669,
+      "duration": 3.139,
+      "text": "Why would we care about that? Well, one example is actually"
+    },
+    {
+      "index": 30,
+      "start": 161.669,
+      "end": 163.976,
+      "duration": 2.307,
+      "text": "in physics. Maybe you have seen in"
+    },
+    {
+      "index": 31,
+      "start": 163.976,
+      "end": 167.63,
+      "duration": 3.654,
+      "text": "thermodynamics that you study quantities about gases,"
+    },
+    {
+      "index": 32,
+      "start": 167.63,
+      "end": 170.582,
+      "duration": 2.952,
+      "text": "and those quantities that involve pressure,"
+    },
+    {
+      "index": 33,
+      "start": 170.582,
+      "end": 173.234,
+      "duration": 2.652,
+      "text": "volume and temperature. And pressure,"
+    },
+    {
+      "index": 34,
+      "start": 173.234,
+      "end": 176.289,
+      "duration": 3.055,
+      "text": "volume and temperature are not independent of each other."
+    },
+    {
+      "index": 35,
+      "start": 176.289,
+      "end": 179.729,
+      "duration": 3.44,
+      "text": "I mean you know probably the equation PV = NRT."
+    },
+    {
+      "index": 36,
+      "start": 179.729,
+      "end": 181.759,
+      "duration": 2.03,
+      "text": "And, of course, there you could actually solve"
+    },
+    {
+      "index": 37,
+      "start": 181.759,
+      "end": 183.969,
+      "duration": 2.21,
+      "text": "to express things in terms of one or the other."
+    },
+    {
+      "index": 38,
+      "start": 183.969,
+      "end": 187.161,
+      "duration": 3.192,
+      "text": "But sometimes it is more convenient to keep all three"
+    },
+    {
+      "index": 39,
+      "start": 187.161,
+      "end": 189.74,
+      "duration": 2.579,
+      "text": "variables but treat them as constrained."
+    },
+    {
+      "index": 40,
+      "start": 189.74,
+      "end": 199.462,
+      "duration": 9.722,
+      "text": "It is just an example of a situation where you might want"
+    },
+    {
+      "index": 41,
+      "start": 199.462,
+      "end": 204.15,
+      "duration": 4.688,
+      "text": "to do this. Anyway, we will look mostly at"
+    },
+    {
+      "index": 42,
+      "start": 204.15,
+      "end": 208.282,
+      "duration": 4.132,
+      "text": "particular examples, but just to point out that this"
+    },
+    {
+      "index": 43,
+      "start": 208.282,
+      "end": 212.09,
+      "duration": 3.808,
+      "text": "is useful when you study guesses in physics."
+    },
+    {
+      "index": 44,
+      "start": 212.09,
+      "end": 215.125,
+      "duration": 3.035,
+      "text": "The first observation is we cannot use our usual method of"
+    },
+    {
+      "index": 45,
+      "start": 215.125,
+      "end": 216.99,
+      "duration": 1.865,
+      "text": "looking for critical points of f."
+    },
+    {
+      "index": 46,
+      "start": 216.99,
+      "end": 220.547,
+      "duration": 3.557,
+      "text": "Because critical points of f typically will not satisfy this"
+    },
+    {
+      "index": 47,
+      "start": 220.547,
+      "end": 223.14,
+      "duration": 2.593,
+      "text": "condition and so won't be good solutions."
+    },
+    {
+      "index": 48,
+      "start": 223.14,
+      "end": 229.672,
+      "duration": 6.532,
+      "text": "We need something else. Let's look at an example,"
+    },
+    {
+      "index": 49,
+      "start": 229.672,
+      "end": 233.97,
+      "duration": 4.298,
+      "text": "and we will see how that leads us to the method."
+    },
+    {
+      "index": 50,
+      "start": 233.97,
+      "end": 243.34,
+      "duration": 9.37,
+      "text": "For example, let's say that I want to find"
+    },
+    {
+      "index": 51,
+      "start": 243.34,
+      "end": 257.737,
+      "duration": 14.397,
+      "text": "the point closest to the origin -- -- on the hyperbola xy equals"
+    },
+    {
+      "index": 52,
+      "start": 257.737,
+      "end": 263.413,
+      "duration": 5.676,
+      "text": "3 in the plane. That means I have this"
+    },
+    {
+      "index": 53,
+      "start": 263.413,
+      "end": 266.807,
+      "duration": 3.394,
+      "text": "hyperbola, and I am asking myself what is the point on it"
+    },
+    {
+      "index": 54,
+      "start": 266.807,
+      "end": 269.05,
+      "duration": 2.243,
+      "text": "that is the closest to the origin?"
+    },
+    {
+      "index": 55,
+      "start": 269.05,
+      "end": 271.29,
+      "duration": 2.24,
+      "text": "I mean we can solve this by elementary geometry,"
+    },
+    {
+      "index": 56,
+      "start": 271.29,
+      "end": 274.089,
+      "duration": 2.799,
+      "text": "we don't need actually Lagrange multipliers,"
+    },
+    {
+      "index": 57,
+      "start": 274.089,
+      "end": 278.581,
+      "duration": 4.492,
+      "text": "but we are going to do it with Lagrange multipliers because it"
+    },
+    {
+      "index": 58,
+      "start": 278.581,
+      "end": 281.519,
+      "duration": 2.938,
+      "text": "is a pretty good example. What does it mean?"
+    },
+    {
+      "index": 59,
+      "start": 281.519,
+      "end": 287.56,
+      "duration": 6.041,
+      "text": "Well, it means that we want to minimize distance to the origin."
+    },
+    {
+      "index": 60,
+      "start": 287.56,
+      "end": 289.759,
+      "duration": 2.199,
+      "text": "What is the distance to the origin?"
+    },
+    {
+      "index": 61,
+      "start": 289.759,
+      "end": 293.057,
+      "duration": 3.298,
+      "text": "If I have a point, at coordinates (x,"
+    },
+    {
+      "index": 62,
+      "start": 293.057,
+      "end": 298.277,
+      "duration": 5.22,
+      "text": "y) and then the distance to the origin is square root of x"
+    },
+    {
+      "index": 63,
+      "start": 298.277,
+      "end": 302.198,
+      "duration": 3.921,
+      "text": "squared plus y squared. Well, do we really want to"
+    },
+    {
+      "index": 64,
+      "start": 302.198,
+      "end": 305.04,
+      "duration": 2.842,
+      "text": "minimize that or can we minimize something easier?"
+    },
+    {
+      "index": 65,
+      "start": 305.04,
+      "end": 306.573,
+      "duration": 1.533,
+      "text": "Yeah. Maybe we can minimize the"
+    },
+    {
+      "index": 66,
+      "start": 306.573,
+      "end": 314.824,
+      "duration": 8.251,
+      "text": "square of a distance. Let's forget this guy and"
+    },
+    {
+      "index": 67,
+      "start": 314.824,
+      "end": 323.786,
+      "duration": 8.962,
+      "text": "instead -- Actually, we will minimize f of x,"
+    },
+    {
+      "index": 68,
+      "start": 323.786,
+      "end": 327.89,
+      "duration": 4.104,
+      "text": "y equals x squared plus y squared,"
+    },
+    {
+      "index": 69,
+      "start": 327.89,
+      "end": 339.416,
+      "duration": 11.526,
+      "text": "that looks better, subject to the constraint xy ="
+    },
+    {
+      "index": 70,
+      "start": 339.416,
+      "end": 344.568,
+      "duration": 5.152,
+      "text": "3. And so we will call this thing"
+    },
+    {
+      "index": 71,
+      "start": 344.568,
+      "end": 350.74,
+      "duration": 6.172,
+      "text": "g of x, y to illustrate the general method."
+    },
+    {
+      "index": 72,
+      "start": 350.74,
+      "end": 358.801,
+      "duration": 8.061,
+      "text": "Let's look at a picture. Here you can see in yellow the"
+    },
+    {
+      "index": 73,
+      "start": 358.801,
+      "end": 362.502,
+      "duration": 3.701,
+      "text": "hyperbola xy equals three. And we are going to look for"
+    },
+    {
+      "index": 74,
+      "start": 362.502,
+      "end": 365.04,
+      "duration": 2.538,
+      "text": "the points that are the closest to the origin."
+    },
+    {
+      "index": 75,
+      "start": 365.04,
+      "end": 368.181,
+      "duration": 3.141,
+      "text": "What can we do? Well, for example,"
+    },
+    {
+      "index": 76,
+      "start": 368.181,
+      "end": 373.056,
+      "duration": 4.875,
+      "text": "we can plot the function x squared plus y squared,"
+    },
+    {
+      "index": 77,
+      "start": 373.056,
+      "end": 377.34,
+      "duration": 4.284,
+      "text": "function f. That is the contour plot of f"
+    },
+    {
+      "index": 78,
+      "start": 377.34,
+      "end": 381.966,
+      "duration": 4.626,
+      "text": "with a hyperbola on top of it. Now let's see what we can do"
+    },
+    {
+      "index": 79,
+      "start": 381.966,
+      "end": 385.62,
+      "duration": 3.654,
+      "text": "with that. Well, let's ask ourselves,"
+    },
+    {
+      "index": 80,
+      "start": 385.62,
+      "end": 390.195,
+      "duration": 4.575,
+      "text": "for example, if I look at points where f"
+    },
+    {
+      "index": 81,
+      "start": 390.195,
+      "end": 394.031,
+      "duration": 3.836,
+      "text": "equals 20 now. I think I am at 20 but you"
+    },
+    {
+      "index": 82,
+      "start": 394.031,
+      "end": 397.645,
+      "duration": 3.614,
+      "text": "cannot really see it. That is a circle with a point"
+    },
+    {
+      "index": 83,
+      "start": 397.645,
+      "end": 401.18,
+      "duration": 3.535,
+      "text": "whose distant square is 20. Well, can I find a solution if"
+    },
+    {
+      "index": 84,
+      "start": 401.18,
+      "end": 404.38,
+      "duration": 3.2,
+      "text": "I am on the hyperbola? Yes, there are four points at"
+    },
+    {
+      "index": 85,
+      "start": 404.38,
+      "end": 406.709,
+      "duration": 2.329,
+      "text": "this distance. Can I do better?"
+    },
+    {
+      "index": 86,
+      "start": 406.709,
+      "end": 409.06,
+      "duration": 2.351,
+      "text": "Well, let's decrease for distance."
+    },
+    {
+      "index": 87,
+      "start": 409.06,
+      "end": 412.55,
+      "duration": 3.49,
+      "text": "Yes, we can still find points on the hyperbola and so on."
+    },
+    {
+      "index": 88,
+      "start": 412.55,
+      "end": 416.01,
+      "duration": 3.46,
+      "text": "Except if we go too low then there are no points on this"
+    },
+    {
+      "index": 89,
+      "start": 416.01,
+      "end": 420.032,
+      "duration": 4.022,
+      "text": "circle anymore in the hyperbola. If we decrease the value of f"
+    },
+    {
+      "index": 90,
+      "start": 420.032,
+      "end": 423.863,
+      "duration": 3.831,
+      "text": "that we want to look at that will somehow limit value beyond"
+    },
+    {
+      "index": 91,
+      "start": 423.863,
+      "end": 427.24,
+      "duration": 3.377,
+      "text": "which we cannot go, and that is the minimum of f."
+    },
+    {
+      "index": 92,
+      "start": 427.24,
+      "end": 433.04,
+      "duration": 5.8,
+      "text": "We are trying to look for the smallest value of f that will"
+    },
+    {
+      "index": 93,
+      "start": 433.04,
+      "end": 437.04,
+      "duration": 4.0,
+      "text": "actually be realized on the hyperbola."
+    },
+    {
+      "index": 94,
+      "start": 437.04,
+      "end": 440.206,
+      "duration": 3.166,
+      "text": "When does that happen? Well, I have to backtrack a"
+    },
+    {
+      "index": 95,
+      "start": 440.206,
+      "end": 443.62,
+      "duration": 3.414,
+      "text": "little bit. It seems like the limiting case"
+    },
+    {
+      "index": 96,
+      "start": 443.62,
+      "end": 446.681,
+      "duration": 3.061,
+      "text": "is basically here. It is when the circle is"
+    },
+    {
+      "index": 97,
+      "start": 446.681,
+      "end": 451.792,
+      "duration": 5.111,
+      "text": "tangent to the hyperbola. That is the smallest circle"
+    },
+    {
+      "index": 98,
+      "start": 451.792,
+      "end": 457.111,
+      "duration": 5.319,
+      "text": "that will hit the hyperbola. If I take a larger value of f,"
+    },
+    {
+      "index": 99,
+      "start": 457.111,
+      "end": 459.878,
+      "duration": 2.767,
+      "text": "I will have solutions. If I take a smaller value of f,"
+    },
+    {
+      "index": 100,
+      "start": 459.878,
+      "end": 461.94,
+      "duration": 2.062,
+      "text": "I will not have any solutions anymore."
+    },
+    {
+      "index": 101,
+      "start": 461.94,
+      "end": 469.46,
+      "duration": 7.52,
+      "text": "So, that is the situation that we want to solve for."
+    },
+    {
+      "index": 102,
+      "start": 469.46,
+      "end": 474.365,
+      "duration": 4.905,
+      "text": "How do we find that minimum? Well, a key observation that is"
+    },
+    {
+      "index": 103,
+      "start": 474.365,
+      "end": 478.25,
+      "duration": 3.885,
+      "text": "valid on this picture, and that actually remain true"
+    },
+    {
+      "index": 104,
+      "start": 478.25,
+      "end": 483.724,
+      "duration": 5.474,
+      "text": "in the completely general case, is that when we have a minimum"
+    },
+    {
+      "index": 105,
+      "start": 483.724,
+      "end": 489.79,
+      "duration": 6.066,
+      "text": "the level curve of f is actually tangent to our hyperbola."
+    },
+    {
+      "index": 106,
+      "start": 489.79,
+      "end": 495.871,
+      "duration": 6.081,
+      "text": "It is tangent to the set of points where x,"
+    },
+    {
+      "index": 107,
+      "start": 495.871,
+      "end": 500.94,
+      "duration": 5.069,
+      "text": "y equals three, to the hyperbola."
+    },
+    {
+      "index": 108,
+      "start": 500.94,
+      "end": 512.621,
+      "duration": 11.681,
+      "text": "Let's write that down. We observe that at the minimum"
+    },
+    {
+      "index": 109,
+      "start": 512.621,
+      "end": 529.59,
+      "duration": 16.969,
+      "text": "the level curve of f is tangent to the hyperbola."
+    },
+    {
+      "index": 110,
+      "start": 529.59,
+      "end": 533.511,
+      "duration": 3.921,
+      "text": "Remember, the hyperbola is given by the equal g equals"
+    },
+    {
+      "index": 111,
+      "start": 533.511,
+      "end": 536.25,
+      "duration": 2.739,
+      "text": "three, so it is a level curve of g."
+    },
+    {
+      "index": 112,
+      "start": 536.25,
+      "end": 539.487,
+      "duration": 3.237,
+      "text": "We have a level curve of f and a level curve of g that are"
+    },
+    {
+      "index": 113,
+      "start": 539.487,
+      "end": 543.368,
+      "duration": 3.881,
+      "text": "tangent to each other. And I claim that is going to be"
+    },
+    {
+      "index": 114,
+      "start": 543.368,
+      "end": 547.35,
+      "duration": 3.982,
+      "text": "the general situation that we are interested in."
+    },
+    {
+      "index": 115,
+      "start": 547.35,
+      "end": 552.07,
+      "duration": 4.72,
+      "text": "How do we try to solve for points where this happens?"
+    },
+    {
+      "index": 116,
+      "start": 568.1,
+      "end": 576.65,
+      "duration": 8.55,
+      "text": "How do we find x, y where the level curves of f"
+    },
+    {
+      "index": 117,
+      "start": 576.65,
+      "end": 587.769,
+      "duration": 11.119,
+      "text": "and g are tangent to each other? Let's think for a second."
+    },
+    {
+      "index": 118,
+      "start": 587.769,
+      "end": 591.906,
+      "duration": 4.137,
+      "text": "If the two level curves are tangent to each other that means"
+    },
+    {
+      "index": 119,
+      "start": 591.906,
+      "end": 597.722,
+      "duration": 5.816,
+      "text": "they have the same tangent line. That means that the normal"
+    },
+    {
+      "index": 120,
+      "start": 597.722,
+      "end": 603.22,
+      "duration": 5.498,
+      "text": "vectors should be parallel. Let me maybe draw a picture"
+    },
+    {
+      "index": 121,
+      "start": 603.22,
+      "end": 606.745,
+      "duration": 3.525,
+      "text": "here. This is the level curve maybe f"
+    },
+    {
+      "index": 122,
+      "start": 606.745,
+      "end": 611.989,
+      "duration": 5.244,
+      "text": "equals something. And this is the level curve g"
+    },
+    {
+      "index": 123,
+      "start": 611.989,
+      "end": 616.0,
+      "duration": 4.011,
+      "text": "equals constant. Here my constant is three."
+    },
+    {
+      "index": 124,
+      "start": 616.0,
+      "end": 620.511,
+      "duration": 4.511,
+      "text": "Well, if I look for gradient vectors, the gradient of f will"
+    },
+    {
+      "index": 125,
+      "start": 620.511,
+      "end": 623.799,
+      "duration": 3.288,
+      "text": "be perpendicular to the level curve of f."
+    },
+    {
+      "index": 126,
+      "start": 623.799,
+      "end": 627.718,
+      "duration": 3.919,
+      "text": "The gradient of g will be perpendicular to the level curve"
+    },
+    {
+      "index": 127,
+      "start": 627.718,
+      "end": 629.739,
+      "duration": 2.021,
+      "text": "of g. They don't have any reason to"
+    },
+    {
+      "index": 128,
+      "start": 629.739,
+      "end": 632.446,
+      "duration": 2.707,
+      "text": "be of the same size, but they have to be parallel to"
+    },
+    {
+      "index": 129,
+      "start": 632.446,
+      "end": 635.42,
+      "duration": 2.974,
+      "text": "each other. Of course, they could also be"
+    },
+    {
+      "index": 130,
+      "start": 635.42,
+      "end": 638.649,
+      "duration": 3.229,
+      "text": "parallel pointing in opposite directions."
+    },
+    {
+      "index": 131,
+      "start": 638.649,
+      "end": 648.559,
+      "duration": 9.91,
+      "text": "But the key point is that when this happens the gradient of f"
+    },
+    {
+      "index": 132,
+      "start": 648.559,
+      "end": 654.34,
+      "duration": 5.781,
+      "text": "is parallel to the gradient of g."
+    },
+    {
+      "index": 133,
+      "start": 654.34,
+      "end": 663.47,
+      "duration": 9.13,
+      "text": "Well, let's check that. Here is a point."
+    },
+    {
+      "index": 134,
+      "start": 663.47,
+      "end": 665.91,
+      "duration": 2.44,
+      "text": "And I can plot the gradient of f in blue."
+    },
+    {
+      "index": 135,
+      "start": 665.91,
+      "end": 668.934,
+      "duration": 3.024,
+      "text": "The gradient of g in yellow. And you see,"
+    },
+    {
+      "index": 136,
+      "start": 668.934,
+      "end": 672.355,
+      "duration": 3.421,
+      "text": "in most of these places, somehow the two gradients are"
+    },
+    {
+      "index": 137,
+      "start": 672.355,
+      "end": 674.82,
+      "duration": 2.465,
+      "text": "not really parallel. Actually, I should not be"
+    },
+    {
+      "index": 138,
+      "start": 674.82,
+      "end": 677.271,
+      "duration": 2.451,
+      "text": "looking at random points. I should be looking only on the"
+    },
+    {
+      "index": 139,
+      "start": 677.271,
+      "end": 679.893,
+      "duration": 2.622,
+      "text": "hyperbola. I want points on the hyperbola"
+    },
+    {
+      "index": 140,
+      "start": 679.893,
+      "end": 682.57,
+      "duration": 2.677,
+      "text": "where the two gradients are parallel."
+    },
+    {
+      "index": 141,
+      "start": 682.57,
+      "end": 688.109,
+      "duration": 5.539,
+      "text": "Well, when does that happen? Well, it looks like it will"
+    },
+    {
+      "index": 142,
+      "start": 688.109,
+      "end": 691.612,
+      "duration": 3.503,
+      "text": "happen here. When I am at a minimum,"
+    },
+    {
+      "index": 143,
+      "start": 691.612,
+      "end": 694.5,
+      "duration": 2.888,
+      "text": "the two gradient vectors are parallel."
+    },
+    {
+      "index": 144,
+      "start": 694.5,
+      "end": 697.866,
+      "duration": 3.366,
+      "text": "It is not really proof. It is an example that seems to"
+    },
+    {
+      "index": 145,
+      "start": 697.866,
+      "end": 703.769,
+      "duration": 5.903,
+      "text": "be convincing. So far things work pretty well."
+    },
+    {
+      "index": 146,
+      "start": 703.769,
+      "end": 706.279,
+      "duration": 2.51,
+      "text": "How do we decide if two vectors are parallel?"
+    },
+    {
+      "index": 147,
+      "start": 706.279,
+      "end": 710.147,
+      "duration": 3.868,
+      "text": "Well, they are parallel when they are proportional to each"
+    },
+    {
+      "index": 148,
+      "start": 710.147,
+      "end": 714.642,
+      "duration": 4.495,
+      "text": "other. You can write one of them as a"
+    },
+    {
+      "index": 149,
+      "start": 714.642,
+      "end": 722.283,
+      "duration": 7.641,
+      "text": "constant times the other one, and that constant usually one"
+    },
+    {
+      "index": 150,
+      "start": 722.283,
+      "end": 727.87,
+      "duration": 5.587,
+      "text": "uses the Greek letter lambda. I don't know if you have seen"
+    },
+    {
+      "index": 151,
+      "start": 727.87,
+      "end": 730.73,
+      "duration": 2.86,
+      "text": "it before. It is the Greek letter for L."
+    },
+    {
+      "index": 152,
+      "start": 730.73,
+      "end": 735.788,
+      "duration": 5.058,
+      "text": "And probably, I am sure, it is somebody's"
+    },
+    {
+      "index": 153,
+      "start": 735.788,
+      "end": 742.365,
+      "duration": 6.577,
+      "text": "idea of paying tribute to Lagrange by putting an L in"
+    },
+    {
+      "index": 154,
+      "start": 742.365,
+      "end": 745.73,
+      "duration": 3.365,
+      "text": "there. Lambda is just a constant."
+    },
+    {
+      "index": 155,
+      "start": 745.73,
+      "end": 751.053,
+      "duration": 5.323,
+      "text": "And we are looking for a scalar lambda and points x and y where"
+    },
+    {
+      "index": 156,
+      "start": 751.053,
+      "end": 753.809,
+      "duration": 2.756,
+      "text": "this holds. In fact,"
+    },
+    {
+      "index": 157,
+      "start": 753.809,
+      "end": 757.704,
+      "duration": 3.895,
+      "text": "what we are doing is replacing min/max problems in two"
+    },
+    {
+      "index": 158,
+      "start": 757.704,
+      "end": 761.452,
+      "duration": 3.748,
+      "text": "variables with a constraint between them by a set of"
+    },
+    {
+      "index": 159,
+      "start": 761.452,
+      "end": 767.879,
+      "duration": 6.427,
+      "text": "equations involving, you will see, three variables."
+    },
+    {
+      "index": 160,
+      "start": 767.879,
+      "end": 774.017,
+      "duration": 6.138,
+      "text": "We had min/max with two variables x, y,"
+    },
+    {
+      "index": 161,
+      "start": 774.017,
+      "end": 780.626,
+      "duration": 6.609,
+      "text": "but no independent. We had a constraint g of x,"
+    },
+    {
+      "index": 162,
+      "start": 780.626,
+      "end": 786.84,
+      "duration": 6.214,
+      "text": "y equals constant. And that becomes something new."
+    },
+    {
+      "index": 163,
+      "start": 786.84,
+      "end": 792.676,
+      "duration": 5.836,
+      "text": "That becomes a system of equations where we have to"
+    },
+    {
+      "index": 164,
+      "start": 792.676,
+      "end": 799.68,
+      "duration": 7.004,
+      "text": "solve, well, let's write down what it means for gradient f to"
+    },
+    {
+      "index": 165,
+      "start": 799.68,
+      "end": 806.953,
+      "duration": 7.273,
+      "text": "be proportional to gradient g. That means that f sub x should"
+    },
+    {
+      "index": 166,
+      "start": 806.953,
+      "end": 812.678,
+      "duration": 5.725,
+      "text": "be lambda times g sub x, and f sub y should be lambda"
+    },
+    {
+      "index": 167,
+      "start": 812.678,
+      "end": 816.834,
+      "duration": 4.156,
+      "text": "times g sub y. Because the gradient vectors"
+    },
+    {
+      "index": 168,
+      "start": 816.834,
+      "end": 819.852,
+      "duration": 3.018,
+      "text": "here are f sub x, f sub y and g sub x,"
+    },
+    {
+      "index": 169,
+      "start": 819.852,
+      "end": 823.697,
+      "duration": 3.845,
+      "text": "g sub y. If you have a third variable z"
+    },
+    {
+      "index": 170,
+      "start": 823.697,
+      "end": 829.79,
+      "duration": 6.093,
+      "text": "then you have also an equation f sub z equals lambda g sub z."
+    },
+    {
+      "index": 171,
+      "start": 829.79,
+      "end": 833.159,
+      "duration": 3.369,
+      "text": "Now, let's see. How many unknowns do we have in"
+    },
+    {
+      "index": 172,
+      "start": 833.159,
+      "end": 835.828,
+      "duration": 2.669,
+      "text": "these equations? Well, there is x,"
+    },
+    {
+      "index": 173,
+      "start": 835.828,
+      "end": 841.545,
+      "duration": 5.717,
+      "text": "there is y and there is lambda. We have three unknowns and have"
+    },
+    {
+      "index": 174,
+      "start": 841.545,
+      "end": 846.5,
+      "duration": 4.955,
+      "text": "only two equations. Something is missing."
+    },
+    {
+      "index": 175,
+      "start": 846.5,
+      "end": 850.19,
+      "duration": 3.69,
+      "text": "Well, I mean x and y are not actually independent."
+    },
+    {
+      "index": 176,
+      "start": 850.19,
+      "end": 854.789,
+      "duration": 4.599,
+      "text": "They are related by the equation g of x,"
+    },
+    {
+      "index": 177,
+      "start": 854.789,
+      "end": 861.629,
+      "duration": 6.84,
+      "text": "y equals c, so we need to add the constraint g equals c."
+    },
+    {
+      "index": 178,
+      "start": 861.629,
+      "end": 866.98,
+      "duration": 5.351,
+      "text": "And now we have three equations involving three variables."
+    },
+    {
+      "index": 179,
+      "start": 866.98,
+      "end": 879.258,
+      "duration": 12.278,
+      "text": "Let's see how that works. Here remember we have f equals"
+    },
+    {
+      "index": 180,
+      "start": 879.258,
+      "end": 885.279,
+      "duration": 6.021,
+      "text": "x squared y squared and g = xy. What is f sub x?"
+    },
+    {
+      "index": 181,
+      "start": 885.279,
+      "end": 892.237,
+      "duration": 6.958,
+      "text": "It is going to be 2x equals lambda times,"
+    },
+    {
+      "index": 182,
+      "start": 892.237,
+      "end": 895.889,
+      "duration": 3.652,
+      "text": "what is g sub x, y."
+    },
+    {
+      "index": 183,
+      "start": 895.889,
+      "end": 899.7,
+      "duration": 3.811,
+      "text": "Maybe I should write here f sub x equals lambda g sub x just to"
+    },
+    {
+      "index": 184,
+      "start": 899.7,
+      "end": 903.664,
+      "duration": 3.964,
+      "text": "remind you. Then we have f sub y equals"
+    },
+    {
+      "index": 185,
+      "start": 903.664,
+      "end": 910.635,
+      "duration": 6.971,
+      "text": "lambda g sub y. F sub y is 2y equals lambda"
+    },
+    {
+      "index": 186,
+      "start": 910.635,
+      "end": 918.226,
+      "duration": 7.591,
+      "text": "times g sub y is x. And then our third equation g"
+    },
+    {
+      "index": 187,
+      "start": 918.226,
+      "end": 922.7,
+      "duration": 4.474,
+      "text": "equals c becomes xy equals three."
+    },
+    {
+      "index": 188,
+      "start": 922.7,
+      "end": 926.64,
+      "duration": 3.94,
+      "text": "So, that is what you would have to solve."
+    },
+    {
+      "index": 189,
+      "start": 926.64,
+      "end": 933.87,
+      "duration": 7.23,
+      "text": "Any questions at this point? No."
+    },
+    {
+      "index": 190,
+      "start": 933.87,
+      "end": 944.121,
+      "duration": 10.251,
+      "text": "Yes? How do I know the direction of"
+    },
+    {
+      "index": 191,
+      "start": 944.121,
+      "end": 947.16,
+      "duration": 3.039,
+      "text": "a gradient? Do you mean how do I know that"
+    },
+    {
+      "index": 192,
+      "start": 947.16,
+      "end": 950.289,
+      "duration": 3.129,
+      "text": "it is perpendicular to a level curve?"
+    },
+    {
+      "index": 193,
+      "start": 950.289,
+      "end": 954.077,
+      "duration": 3.788,
+      "text": "Oh, how do I know if it points in that direction on the"
+    },
+    {
+      "index": 194,
+      "start": 954.077,
+      "end": 956.57,
+      "duration": 2.493,
+      "text": "opposite one? Well, that depends."
+    },
+    {
+      "index": 195,
+      "start": 956.57,
+      "end": 959.208,
+      "duration": 2.638,
+      "text": "I mean we'd seen in last time, but the gradient is"
+    },
+    {
+      "index": 196,
+      "start": 959.208,
+      "end": 962.492,
+      "duration": 3.284,
+      "text": "perpendicular to the level and points towards higher values of"
+    },
+    {
+      "index": 197,
+      "start": 962.492,
+      "end": 965.95,
+      "duration": 3.458,
+      "text": "a function. So it could be -- Wait."
+    },
+    {
+      "index": 198,
+      "start": 965.95,
+      "end": 968.59,
+      "duration": 2.64,
+      "text": "What did I have? It could be that my gradient"
+    },
+    {
+      "index": 199,
+      "start": 968.59,
+      "end": 971.69,
+      "duration": 3.1,
+      "text": "vectors up there actually point in opposite directions."
+    },
+    {
+      "index": 200,
+      "start": 971.69,
+      "end": 975.187,
+      "duration": 3.497,
+      "text": "It doesn't matter to me because it will still look the same in"
+    },
+    {
+      "index": 201,
+      "start": 975.187,
+      "end": 978.226,
+      "duration": 3.039,
+      "text": "terms of the equation, just lambda will be positive or"
+    },
+    {
+      "index": 202,
+      "start": 978.226,
+      "end": 982.49,
+      "duration": 4.264,
+      "text": "negative, depending on the case. I can handle both situations."
+    },
+    {
+      "index": 203,
+      "start": 982.49,
+      "end": 990.663,
+      "duration": 8.173,
+      "text": "It's not a problem. I can allow lambda to be"
+    },
+    {
+      "index": 204,
+      "start": 990.663,
+      "end": 994.125,
+      "duration": 3.462,
+      "text": "positive or negative. Well, in this example,"
+    },
+    {
+      "index": 205,
+      "start": 994.125,
+      "end": 995.659,
+      "duration": 1.534,
+      "text": "it looks like lambda will be positive."
+    },
+    {
+      "index": 206,
+      "start": 995.659,
+      "end": 998.7,
+      "duration": 3.041,
+      "text": "If you look at the picture on the plot."
+    },
+    {
+      "index": 207,
+      "start": 998.7,
+      "end": 1008.296,
+      "duration": 9.596,
+      "text": "Yes? Well, because actually they are"
+    },
+    {
+      "index": 208,
+      "start": 1008.296,
+      "end": 1011.795,
+      "duration": 3.499,
+      "text": "not equal to each other. If you look at this point where"
+    },
+    {
+      "index": 209,
+      "start": 1011.795,
+      "end": 1015.229,
+      "duration": 3.434,
+      "text": "the hyperbola and the circle touch each other,"
+    },
+    {
+      "index": 210,
+      "start": 1015.229,
+      "end": 1018.511,
+      "duration": 3.282,
+      "text": "first of all, I don't know which circle I am"
+    },
+    {
+      "index": 211,
+      "start": 1018.511,
+      "end": 1021.563,
+      "duration": 3.052,
+      "text": "going to look at. I am trying to solve,"
+    },
+    {
+      "index": 212,
+      "start": 1021.563,
+      "end": 1024.18,
+      "duration": 2.617,
+      "text": "actually, for the radius of the circle."
+    },
+    {
+      "index": 213,
+      "start": 1024.18,
+      "end": 1027.93,
+      "duration": 3.75,
+      "text": "I am trying to find what the minimum value of f is."
+    },
+    {
+      "index": 214,
+      "start": 1027.93,
+      "end": 1030.163,
+      "duration": 2.233,
+      "text": "And, second, at that point,"
+    },
+    {
+      "index": 215,
+      "start": 1030.163,
+      "end": 1034.46,
+      "duration": 4.297,
+      "text": "the value of f and the value of g are not equal."
+    },
+    {
+      "index": 216,
+      "start": 1034.46,
+      "end": 1037.373,
+      "duration": 2.913,
+      "text": "g is equal to three because I want the hyperbola x equals"
+    },
+    {
+      "index": 217,
+      "start": 1037.373,
+      "end": 1039.743,
+      "duration": 2.37,
+      "text": "three. The value of f will be the"
+    },
+    {
+      "index": 218,
+      "start": 1039.743,
+      "end": 1042.75,
+      "duration": 3.007,
+      "text": "square of a distance, whatever that is."
+    },
+    {
+      "index": 219,
+      "start": 1042.75,
+      "end": 1047.14,
+      "duration": 4.39,
+      "text": "I think it will end up being 6, but we will see."
+    },
+    {
+      "index": 220,
+      "start": 1047.14,
+      "end": 1049.653,
+      "duration": 2.513,
+      "text": "So, you cannot really set them equal because you don't know"
+    },
+    {
+      "index": 221,
+      "start": 1049.653,
+      "end": 1065.87,
+      "duration": 16.217,
+      "text": "what f is equal to in advance. Yes?"
+    },
+    {
+      "index": 222,
+      "start": 1065.87,
+      "end": 1069.854,
+      "duration": 3.984,
+      "text": "Not quite. Actually, here I am just using"
+    },
+    {
+      "index": 223,
+      "start": 1069.854,
+      "end": 1072.738,
+      "duration": 2.884,
+      "text": "this idea of finding a point closest to the origin to"
+    },
+    {
+      "index": 224,
+      "start": 1072.738,
+      "end": 1075.289,
+      "duration": 2.551,
+      "text": "illustrate an example of a min/max problem."
+    },
+    {
+      "index": 225,
+      "start": 1075.289,
+      "end": 1079.446,
+      "duration": 4.157,
+      "text": "The general problem we are trying to solve is minimize f"
+    },
+    {
+      "index": 226,
+      "start": 1079.446,
+      "end": 1083.548,
+      "duration": 4.102,
+      "text": "subject to g equals constant. And what we are going to do for"
+    },
+    {
+      "index": 227,
+      "start": 1083.548,
+      "end": 1087.066,
+      "duration": 3.518,
+      "text": "that is we are really going to say instead let's look at places"
+    },
+    {
+      "index": 228,
+      "start": 1087.066,
+      "end": 1090.527,
+      "duration": 3.461,
+      "text": "where gradient f and gradient g are parallel to each other and"
+    },
+    {
+      "index": 229,
+      "start": 1090.527,
+      "end": 1094.63,
+      "duration": 4.103,
+      "text": "solve for equations of that. I think we completely lose the"
+    },
+    {
+      "index": 230,
+      "start": 1094.63,
+      "end": 1099.089,
+      "duration": 4.459,
+      "text": "notion of closest point if we just look at these equations."
+    },
+    {
+      "index": 231,
+      "start": 1099.089,
+      "end": 1101.89,
+      "duration": 2.801,
+      "text": "We don't really say anything about closest points anymore."
+    },
+    {
+      "index": 232,
+      "start": 1101.89,
+      "end": 1104.38,
+      "duration": 2.49,
+      "text": "Of course, that is what they mean in the end."
+    },
+    {
+      "index": 233,
+      "start": 1104.38,
+      "end": 1108.642,
+      "duration": 4.262,
+      "text": "But, in the general setting, there is no closest point"
+    },
+    {
+      "index": 234,
+      "start": 1108.642,
+      "end": 1111.16,
+      "duration": 2.518,
+      "text": "involved anymore. OK."
+    },
+    {
+      "index": 235,
+      "start": 1111.16,
+      "end": 1120.664,
+      "duration": 9.504,
+      "text": "Yes? Yes."
+    },
+    {
+      "index": 236,
+      "start": 1120.664,
+      "end": 1123.48,
+      "duration": 2.816,
+      "text": "It is always going to be the case that,"
+    },
+    {
+      "index": 237,
+      "start": 1123.48,
+      "end": 1126.978,
+      "duration": 3.498,
+      "text": "at the minimum, or at the maximum of a function"
+    },
+    {
+      "index": 238,
+      "start": 1126.978,
+      "end": 1129.901,
+      "duration": 2.923,
+      "text": "subject to a constraint, the level curves of f and the"
+    },
+    {
+      "index": 239,
+      "start": 1129.901,
+      "end": 1132.15,
+      "duration": 2.249,
+      "text": "level curves of g will be tangent to each other."
+    },
+    {
+      "index": 240,
+      "start": 1132.15,
+      "end": 1134.14,
+      "duration": 1.99,
+      "text": "That is the basis for this method."
+    },
+    {
+      "index": 241,
+      "start": 1134.14,
+      "end": 1140.089,
+      "duration": 5.949,
+      "text": "I am going to justify that soon. It could be minimum or maximum."
+    },
+    {
+      "index": 242,
+      "start": 1140.089,
+      "end": 1142.43,
+      "duration": 2.341,
+      "text": "In three-dimensions it could even be a saddle point."
+    },
+    {
+      "index": 243,
+      "start": 1142.43,
+      "end": 1143.948,
+      "duration": 1.518,
+      "text": "And, in fact, I should say in advance,"
+    },
+    {
+      "index": 244,
+      "start": 1143.948,
+      "end": 1146.247,
+      "duration": 2.299,
+      "text": "this method will not tell us whether it is a minimum or a"
+    },
+    {
+      "index": 245,
+      "start": 1146.247,
+      "end": 1148.092,
+      "duration": 1.845,
+      "text": "maximum. We do not have any way of"
+    },
+    {
+      "index": 246,
+      "start": 1148.092,
+      "end": 1150.039,
+      "duration": 1.947,
+      "text": "knowing, except for testing values."
+    },
+    {
+      "index": 247,
+      "start": 1150.039,
+      "end": 1153.58,
+      "duration": 3.541,
+      "text": "We cannot use second derivative tests or anything like that."
+    },
+    {
+      "index": 248,
+      "start": 1153.58,
+      "end": 1161.16,
+      "duration": 7.58,
+      "text": "I will get back to that. Yes?"
+    },
+    {
+      "index": 249,
+      "start": 1161.16,
+      "end": 1163.026,
+      "duration": 1.866,
+      "text": "Yes. Here you can set y equals to"
+    },
+    {
+      "index": 250,
+      "start": 1163.026,
+      "end": 1166.372,
+      "duration": 3.346,
+      "text": "favor x. Then you can minimize x squared"
+    },
+    {
+      "index": 251,
+      "start": 1166.372,
+      "end": 1170.423,
+      "duration": 4.051,
+      "text": "plus nine over x squared. In general, if I am trying to"
+    },
+    {
+      "index": 252,
+      "start": 1170.423,
+      "end": 1173.711,
+      "duration": 3.288,
+      "text": "solve a more complicated problem, I might not be able to"
+    },
+    {
+      "index": 253,
+      "start": 1173.711,
+      "end": 1175.699,
+      "duration": 1.988,
+      "text": "solve. I am doing an example where,"
+    },
+    {
+      "index": 254,
+      "start": 1175.699,
+      "end": 1178.391,
+      "duration": 2.692,
+      "text": "indeed, here you could solve and remove one variable,"
+    },
+    {
+      "index": 255,
+      "start": 1178.391,
+      "end": 1181.59,
+      "duration": 3.199,
+      "text": "but you cannot always do that. And this method will still work."
+    },
+    {
+      "index": 256,
+      "start": 1181.59,
+      "end": 1187.93,
+      "duration": 6.34,
+      "text": "The other one won't. OK."
+    },
+    {
+      "index": 257,
+      "start": 1187.93,
+      "end": 1193.36,
+      "duration": 5.43,
+      "text": "I don't see any other questions. Are there any other questions?"
+    },
+    {
+      "index": 258,
+      "start": 1193.36,
+      "end": 1196.15,
+      "duration": 2.79,
+      "text": "No. OK."
+    },
+    {
+      "index": 259,
+      "start": 1196.15,
+      "end": 1202.504,
+      "duration": 6.354,
+      "text": "I see a lot of students stretching and so on,"
+    },
+    {
+      "index": 260,
+      "start": 1202.504,
+      "end": 1208.72,
+      "duration": 6.216,
+      "text": "so it is very confusing for me. How do we solve these equations?"
+    },
+    {
+      "index": 261,
+      "start": 1208.72,
+      "end": 1214.4,
+      "duration": 5.68,
+      "text": "Well, the answer is in general we might be in deep trouble."
+    },
+    {
+      "index": 262,
+      "start": 1214.4,
+      "end": 1218.007,
+      "duration": 3.607,
+      "text": "There is no general method for solving the equations that you"
+    },
+    {
+      "index": 263,
+      "start": 1218.007,
+      "end": 1221.984,
+      "duration": 3.977,
+      "text": "get from this method. You just have to think about"
+    },
+    {
+      "index": 264,
+      "start": 1221.984,
+      "end": 1225.24,
+      "duration": 3.256,
+      "text": "them. Sometimes it will be very easy."
+    },
+    {
+      "index": 265,
+      "start": 1225.24,
+      "end": 1228.426,
+      "duration": 3.186,
+      "text": "Sometimes it will be so hard that you cannot actually do it"
+    },
+    {
+      "index": 266,
+      "start": 1228.426,
+      "end": 1231.019,
+      "duration": 2.593,
+      "text": "without the computer. Sometimes it will be just hard"
+    },
+    {
+      "index": 267,
+      "start": 1231.019,
+      "end": 1233.28,
+      "duration": 2.261,
+      "text": "enough to be on Part B of this week's problem set."
+    },
+    {
+      "index": 268,
+      "start": 1250.63,
+      "end": 1256.721,
+      "duration": 6.091,
+      "text": "I claim in this case we can actually do it without so much"
+    },
+    {
+      "index": 269,
+      "start": 1256.721,
+      "end": 1263.24,
+      "duration": 6.519,
+      "text": "trouble, because actually we can think of this as a two by two"
+    },
+    {
+      "index": 270,
+      "start": 1263.24,
+      "end": 1270.519,
+      "duration": 7.279,
+      "text": "linear system in x and y. Well, let me do something."
+    },
+    {
+      "index": 271,
+      "start": 1270.519,
+      "end": 1278.15,
+      "duration": 7.631,
+      "text": "Let me rewrite the first two equations as 2x - lambda y = 0."
+    },
+    {
+      "index": 272,
+      "start": 1278.15,
+      "end": 1290.63,
+      "duration": 12.48,
+      "text": "And lambda x - 2y = 0. And xy = 3."
+    },
+    {
+      "index": 273,
+      "start": 1290.63,
+      "end": 1296.612,
+      "duration": 5.982,
+      "text": "That is what we want to solve. Well, I can put this into"
+    },
+    {
+      "index": 274,
+      "start": 1296.612,
+      "end": 1301.732,
+      "duration": 5.12,
+      "text": "matrix form. Two minus lambda,"
+    },
+    {
+      "index": 275,
+      "start": 1301.732,
+      "end": 1308.49,
+      "duration": 6.758,
+      "text": "lambda minus two times x, y equals 0,0."
+    },
+    {
+      "index": 276,
+      "start": 1308.49,
+      "end": 1312.126,
+      "duration": 3.636,
+      "text": "Now, how do I solve a linear system matrix times x,"
+    },
+    {
+      "index": 277,
+      "start": 1312.126,
+      "end": 1314.677,
+      "duration": 2.551,
+      "text": "y equals zero? Well, I always have an obvious"
+    },
+    {
+      "index": 278,
+      "start": 1314.677,
+      "end": 1316.94,
+      "duration": 2.263,
+      "text": "solution. X and y both equal to zero."
+    },
+    {
+      "index": 279,
+      "start": 1316.94,
+      "end": 1322.115,
+      "duration": 5.175,
+      "text": "Is that a good solution? No, because zero times zero is"
+    },
+    {
+      "index": 280,
+      "start": 1322.115,
+      "end": 1327.676,
+      "duration": 5.561,
+      "text": "not three. We want another solution,"
+    },
+    {
+      "index": 281,
+      "start": 1327.676,
+      "end": 1334.23,
+      "duration": 6.554,
+      "text": "the trivial solution. 0,0 does not solve the"
+    },
+    {
+      "index": 282,
+      "start": 1334.23,
+      "end": 1340.906,
+      "duration": 6.676,
+      "text": "constraint equation xy equals three, so we want another"
+    },
+    {
+      "index": 283,
+      "start": 1340.906,
+      "end": 1344.125,
+      "duration": 3.219,
+      "text": "solution. When do we have another"
+    },
+    {
+      "index": 284,
+      "start": 1344.125,
+      "end": 1349.952,
+      "duration": 5.827,
+      "text": "solution? Well, when the determinant of a"
+    },
+    {
+      "index": 285,
+      "start": 1349.952,
+      "end": 1357.766,
+      "duration": 7.814,
+      "text": "matrix is zero. We have other solutions that"
+    },
+    {
+      "index": 286,
+      "start": 1357.766,
+      "end": 1366.49,
+      "duration": 8.724,
+      "text": "exist only if determinant of a matrix is zero."
+    },
+    {
+      "index": 287,
+      "start": 1366.49,
+      "end": 1381.41,
+      "duration": 14.92,
+      "text": "M is this guy. Let's compute the determinant."
+    },
+    {
+      "index": 288,
+      "start": 1381.41,
+      "end": 1388.339,
+      "duration": 6.929,
+      "text": "Well, that seems to be negative four plus lambda squared."
+    },
+    {
+      "index": 289,
+      "start": 1388.339,
+      "end": 1395.454,
+      "duration": 7.115,
+      "text": "That is zero exactly when lambda squared equals four,"
+    },
+    {
+      "index": 290,
+      "start": 1395.454,
+      "end": 1400.789,
+      "duration": 5.335,
+      "text": "which is lambda is plus or minus two."
+    },
+    {
+      "index": 291,
+      "start": 1400.789,
+      "end": 1405.324,
+      "duration": 4.535,
+      "text": "Already you see here it is a the level of difficulty that is"
+    },
+    {
+      "index": 292,
+      "start": 1405.324,
+      "end": 1410.013,
+      "duration": 4.689,
+      "text": "a little bit much for an exam but perfectly fine for a problem"
+    },
+    {
+      "index": 293,
+      "start": 1410.013,
+      "end": 1413.779,
+      "duration": 3.766,
+      "text": "set or for a beautiful lecture like this one."
+    },
+    {
+      "index": 294,
+      "start": 1413.779,
+      "end": 1417.349,
+      "duration": 3.57,
+      "text": "How do we deal with -- Well, we have two cases to look at."
+    },
+    {
+      "index": 295,
+      "start": 1417.349,
+      "end": 1420.839,
+      "duration": 3.49,
+      "text": "Lambda equals two or lambda equals minus two."
+    },
+    {
+      "index": 296,
+      "start": 1420.839,
+      "end": 1423.079,
+      "duration": 2.24,
+      "text": "Let's start with lambda equals two."
+    },
+    {
+      "index": 297,
+      "start": 1423.079,
+      "end": 1427.68,
+      "duration": 4.601,
+      "text": "If I set lambda equals two, what does this equation become?"
+    },
+    {
+      "index": 298,
+      "start": 1427.68,
+      "end": 1433.91,
+      "duration": 6.23,
+      "text": "Well, it becomes x equals y. This one becomes y equals x."
+    },
+    {
+      "index": 299,
+      "start": 1433.91,
+      "end": 1437.299,
+      "duration": 3.389,
+      "text": "Well, they seem to be the same. x equals y."
+    },
+    {
+      "index": 300,
+      "start": 1437.299,
+      "end": 1441.527,
+      "duration": 4.228,
+      "text": "And then the equation xy equals three becomes,"
+    },
+    {
+      "index": 301,
+      "start": 1441.527,
+      "end": 1446.829,
+      "duration": 5.302,
+      "text": "well, x squared equals three. I have two solutions."
+    },
+    {
+      "index": 302,
+      "start": 1446.829,
+      "end": 1455.19,
+      "duration": 8.361,
+      "text": "One is x equals root three and, therefore, y equals root three"
+    },
+    {
+      "index": 303,
+      "start": 1455.19,
+      "end": 1463.14,
+      "duration": 7.95,
+      "text": "as well, or negative root three and negative root three."
+    },
+    {
+      "index": 304,
+      "start": 1463.14,
+      "end": 1466.911,
+      "duration": 3.771,
+      "text": "Let's look at the other case. If I set lambda equal to"
+    },
+    {
+      "index": 305,
+      "start": 1466.911,
+      "end": 1470.89,
+      "duration": 3.979,
+      "text": "negative two then I get 2x equals negative 2y."
+    },
+    {
+      "index": 306,
+      "start": 1470.89,
+      "end": 1477.058,
+      "duration": 6.168,
+      "text": "That means x equals negative y. The second one,"
+    },
+    {
+      "index": 307,
+      "start": 1477.058,
+      "end": 1480.92,
+      "duration": 3.862,
+      "text": "2y equals negative 2x. That is y equals negative x."
+    },
+    {
+      "index": 308,
+      "start": 1480.92,
+      "end": 1485.975,
+      "duration": 5.055,
+      "text": "Well, that is the same thing. And xy equals three becomes"
+    },
+    {
+      "index": 309,
+      "start": 1485.975,
+      "end": 1491.54,
+      "duration": 5.565,
+      "text": "negative x squared equals three. Can we solve that?"
+    },
+    {
+      "index": 310,
+      "start": 1491.54,
+      "end": 1498.279,
+      "duration": 6.739,
+      "text": "No. There are no solutions here."
+    },
+    {
+      "index": 311,
+      "start": 1498.279,
+      "end": 1503.164,
+      "duration": 4.885,
+      "text": "Now we have two candidate points which are these two"
+    },
+    {
+      "index": 312,
+      "start": 1503.164,
+      "end": 1507.57,
+      "duration": 4.406,
+      "text": "points, root three, root three or negative root"
+    },
+    {
+      "index": 313,
+      "start": 1507.57,
+      "end": 1513.769,
+      "duration": 6.199,
+      "text": "three, negative root three. OK."
+    },
+    {
+      "index": 314,
+      "start": 1513.769,
+      "end": 1516.369,
+      "duration": 2.6,
+      "text": "Let's actually look at what we have here."
+    },
+    {
+      "index": 315,
+      "start": 1516.369,
+      "end": 1520.295,
+      "duration": 3.926,
+      "text": "Maybe you cannot read the coordinates, but the point that"
+    },
+    {
+      "index": 316,
+      "start": 1520.295,
+      "end": 1523.589,
+      "duration": 3.294,
+      "text": "I have here is indeed root three, root three."
+    },
+    {
+      "index": 317,
+      "start": 1523.589,
+      "end": 1526.69,
+      "duration": 3.101,
+      "text": "How do we see that lambda equals two?"
+    },
+    {
+      "index": 318,
+      "start": 1526.69,
+      "end": 1529.764,
+      "duration": 3.074,
+      "text": "Well, if you look at this picture, the gradient of f,"
+    },
+    {
+      "index": 319,
+      "start": 1529.764,
+      "end": 1532.72,
+      "duration": 2.956,
+      "text": "that is the blue vector, is indeed twice the yellow"
+    },
+    {
+      "index": 320,
+      "start": 1532.72,
+      "end": 1536.583,
+      "duration": 3.863,
+      "text": "vector, gradient g. That is where you read the"
+    },
+    {
+      "index": 321,
+      "start": 1536.583,
+      "end": 1541.869,
+      "duration": 5.286,
+      "text": "value of lambda. And we have the other solution"
+    },
+    {
+      "index": 322,
+      "start": 1541.869,
+      "end": 1545.953,
+      "duration": 4.084,
+      "text": "which is somewhere here. Negative root three,"
+    },
+    {
+      "index": 323,
+      "start": 1545.953,
+      "end": 1548.485,
+      "duration": 2.532,
+      "text": "negative root there. And there, again,"
+    },
+    {
+      "index": 324,
+      "start": 1548.485,
+      "end": 1551.602,
+      "duration": 3.117,
+      "text": "lambda equals two. The two vectors are"
+    },
+    {
+      "index": 325,
+      "start": 1551.602,
+      "end": 1559.019,
+      "duration": 7.417,
+      "text": "proportional by a factor of two. Yes?"
+    },
+    {
+      "index": 326,
+      "start": 1559.019,
+      "end": 1561.704,
+      "duration": 2.685,
+      "text": "No, solutions are not quite guaranteed to be absolute minima"
+    },
+    {
+      "index": 327,
+      "start": 1561.704,
+      "end": 1563.817,
+      "duration": 2.113,
+      "text": "or maxima. They are guaranteed to be"
+    },
+    {
+      "index": 328,
+      "start": 1563.817,
+      "end": 1566.64,
+      "duration": 2.823,
+      "text": "somehow critical points end of a constraint."
+    },
+    {
+      "index": 329,
+      "start": 1566.64,
+      "end": 1569.387,
+      "duration": 2.747,
+      "text": "That means if you were able to solve and eliminate the variable"
+    },
+    {
+      "index": 330,
+      "start": 1569.387,
+      "end": 1572.252,
+      "duration": 2.865,
+      "text": "that would be a critical point. When you have the same problem,"
+    },
+    {
+      "index": 331,
+      "start": 1572.252,
+      "end": 1574.74,
+      "duration": 2.488,
+      "text": "as we have critical points, are they maxima or minima?"
+    },
+    {
+      "index": 332,
+      "start": 1574.74,
+      "end": 1582.014,
+      "duration": 7.274,
+      "text": "And the answer is, well, we won't know until we"
+    },
+    {
+      "index": 333,
+      "start": 1582.014,
+      "end": 1588.91,
+      "duration": 6.896,
+      "text": "check. More questions?"
+    },
+    {
+      "index": 334,
+      "start": 1588.91,
+      "end": 1592.9,
+      "duration": 3.99,
+      "text": "No. Yes?"
+    },
+    {
+      "index": 335,
+      "start": 1592.9,
+      "end": 1596.428,
+      "duration": 3.528,
+      "text": "What is a Lagrange multiplier? Well, it is this number lambda"
+    },
+    {
+      "index": 336,
+      "start": 1596.428,
+      "end": 1599.089,
+      "duration": 2.661,
+      "text": "that is called the multiplier here."
+    },
+    {
+      "index": 337,
+      "start": 1599.089,
+      "end": 1604.613,
+      "duration": 5.524,
+      "text": "It is a multiplier because it is what you have to multiply"
+    },
+    {
+      "index": 338,
+      "start": 1604.613,
+      "end": 1608.49,
+      "duration": 3.877,
+      "text": "gradient of g by to get gradient of f."
+    },
+    {
+      "index": 339,
+      "start": 1608.49,
+      "end": 1609.29,
+      "duration": 0.8,
+      "text": "It multiplies."
+    },
+    {
+      "index": 340,
+      "start": 1624.029,
+      "end": 1631.319,
+      "duration": 7.29,
+      "text": "Let's try to see why is this method valid?"
+    },
+    {
+      "index": 341,
+      "start": 1631.319,
+      "end": 1638.882,
+      "duration": 7.563,
+      "text": "Because so far I have shown you pictures and have said see they"
+    },
+    {
+      "index": 342,
+      "start": 1638.882,
+      "end": 1643.598,
+      "duration": 4.716,
+      "text": "are tangent. But why is it that they have to"
+    },
+    {
+      "index": 343,
+      "start": 1643.598,
+      "end": 1648.38,
+      "duration": 4.782,
+      "text": "be tangent in general? Let's think about it."
+    },
+    {
+      "index": 344,
+      "start": 1648.38,
+      "end": 1657.75,
+      "duration": 9.37,
+      "text": "Let's say that we are at constrained min or max."
+    },
+    {
+      "index": 345,
+      "start": 1657.75,
+      "end": 1662.1,
+      "duration": 4.35,
+      "text": "What that means is that if I move on the level g equals"
+    },
+    {
+      "index": 346,
+      "start": 1662.1,
+      "end": 1666.612,
+      "duration": 4.512,
+      "text": "constant then the value of f should only increase or only"
+    },
+    {
+      "index": 347,
+      "start": 1666.612,
+      "end": 1669.11,
+      "duration": 2.498,
+      "text": "decrease. But it means,"
+    },
+    {
+      "index": 348,
+      "start": 1669.11,
+      "end": 1673.574,
+      "duration": 4.464,
+      "text": "in particular, to first order it will not"
+    },
+    {
+      "index": 349,
+      "start": 1673.574,
+      "end": 1676.468,
+      "duration": 2.894,
+      "text": "change. At an unconstrained min or max,"
+    },
+    {
+      "index": 350,
+      "start": 1676.468,
+      "end": 1679.019,
+      "duration": 2.551,
+      "text": "partial derivatives are zero. In this case,"
+    },
+    {
+      "index": 351,
+      "start": 1679.019,
+      "end": 1682.4,
+      "duration": 3.381,
+      "text": "derivatives are zero only in the allowed directions."
+    },
+    {
+      "index": 352,
+      "start": 1682.4,
+      "end": 1689.362,
+      "duration": 6.962,
+      "text": "And the allowed directions are those that stay on the levels of"
+    },
+    {
+      "index": 353,
+      "start": 1689.362,
+      "end": 1701.4,
+      "duration": 12.038,
+      "text": "this g equals constant. In any direction along the"
+    },
+    {
+      "index": 354,
+      "start": 1701.4,
+      "end": 1720.569,
+      "duration": 19.169,
+      "text": "level set g = c the rate of change of f must be zero."
+    },
+    {
+      "index": 355,
+      "start": 1720.569,
+      "end": 1724.559,
+      "duration": 3.99,
+      "text": "That is what happens at minima or maxima."
+    },
+    {
+      "index": 356,
+      "start": 1724.559,
+      "end": 1729.806,
+      "duration": 5.247,
+      "text": "Except here, of course, we look only at the"
+    },
+    {
+      "index": 357,
+      "start": 1729.806,
+      "end": 1734.466,
+      "duration": 4.66,
+      "text": "allowed directions. Let's say the same thing in"
+    },
+    {
+      "index": 358,
+      "start": 1734.466,
+      "end": 1737.03,
+      "duration": 2.564,
+      "text": "terms of directional derivatives."
+    },
+    {
+      "index": 359,
+      "start": 1763.4,
+      "end": 1775.751,
+      "duration": 12.351,
+      "text": "That means for any direction that is tangent to the"
+    },
+    {
+      "index": 360,
+      "start": 1775.751,
+      "end": 1789.832,
+      "duration": 14.081,
+      "text": "constraint level g equal c, we must have df over ds in the"
+    },
+    {
+      "index": 361,
+      "start": 1789.832,
+      "end": 1800.039,
+      "duration": 10.207,
+      "text": "direction of u equals zero. I will draw a picture."
+    },
+    {
+      "index": 362,
+      "start": 1800.039,
+      "end": 1805.003,
+      "duration": 4.964,
+      "text": "Let's say now I am in three variables just to give you"
+    },
+    {
+      "index": 363,
+      "start": 1805.003,
+      "end": 1809.676,
+      "duration": 4.673,
+      "text": "different examples. Here I have a level surface g"
+    },
+    {
+      "index": 364,
+      "start": 1809.676,
+      "end": 1811.9,
+      "duration": 2.224,
+      "text": "equals c. I am at my point."
+    },
+    {
+      "index": 365,
+      "start": 1811.9,
+      "end": 1818.14,
+      "duration": 6.24,
+      "text": "And if I move in any direction that is on the level surface,"
+    },
+    {
+      "index": 366,
+      "start": 1818.14,
+      "end": 1824.019,
+      "duration": 5.879,
+      "text": "so I move in the direction u tangent to the level surface,"
+    },
+    {
+      "index": 367,
+      "start": 1824.019,
+      "end": 1832.509,
+      "duration": 8.49,
+      "text": "then the rate of change of f in that direction should be zero."
+    },
+    {
+      "index": 368,
+      "start": 1832.509,
+      "end": 1834.75,
+      "duration": 2.241,
+      "text": "Now, remember what the formula is for this guy."
+    },
+    {
+      "index": 369,
+      "start": 1834.75,
+      "end": 1844.029,
+      "duration": 9.279,
+      "text": "Well, we have seen that this guy is actually radiant f dot u."
+    },
+    {
+      "index": 370,
+      "start": 1844.029,
+      "end": 1858.753,
+      "duration": 14.724,
+      "text": "That means any such vector u must be perpendicular to the"
+    },
+    {
+      "index": 371,
+      "start": 1858.753,
+      "end": 1865.43,
+      "duration": 6.677,
+      "text": "gradient of f. That means that the gradient of"
+    },
+    {
+      "index": 372,
+      "start": 1865.43,
+      "end": 1870.212,
+      "duration": 4.782,
+      "text": "f should be perpendicular to anything that is tangent to this"
+    },
+    {
+      "index": 373,
+      "start": 1870.212,
+      "end": 1872.973,
+      "duration": 2.761,
+      "text": "level. That means the gradient of f"
+    },
+    {
+      "index": 374,
+      "start": 1872.973,
+      "end": 1876.04,
+      "duration": 3.067,
+      "text": "should be perpendicular to the level set."
+    },
+    {
+      "index": 375,
+      "start": 1876.04,
+      "end": 1877.19,
+      "duration": 1.15,
+      "text": "That is what we have shown."
+    },
+    {
+      "index": 376,
+      "start": 1897.48,
+      "end": 1900.383,
+      "duration": 2.903,
+      "text": "But we know another vector that is also perpendicular to the"
+    },
+    {
+      "index": 377,
+      "start": 1900.383,
+      "end": 1917.029,
+      "duration": 16.646,
+      "text": "level set of g. That is the gradient of g."
+    },
+    {
+      "index": 378,
+      "start": 1917.029,
+      "end": 1922.123,
+      "duration": 5.094,
+      "text": "We conclude that the gradient of f must be parallel to the"
+    },
+    {
+      "index": 379,
+      "start": 1922.123,
+      "end": 1927.485,
+      "duration": 5.362,
+      "text": "gradient of g because both are perpendicular to the level set"
+    },
+    {
+      "index": 380,
+      "start": 1927.485,
+      "end": 1929.602,
+      "duration": 2.117,
+      "text": "of g. I see confused faces,"
+    },
+    {
+      "index": 381,
+      "start": 1929.602,
+      "end": 1933.039,
+      "duration": 3.437,
+      "text": "so let me try to tell you again where that comes from."
+    },
+    {
+      "index": 382,
+      "start": 1933.039,
+      "end": 1936.078,
+      "duration": 3.039,
+      "text": "We said if we had a constrained minimum or maximum,"
+    },
+    {
+      "index": 383,
+      "start": 1936.078,
+      "end": 1939.299,
+      "duration": 3.221,
+      "text": "if we move in the level set of g, f doesn't change."
+    },
+    {
+      "index": 384,
+      "start": 1939.299,
+      "end": 1940.799,
+      "duration": 1.5,
+      "text": "Well, it doesn't change to first order."
+    },
+    {
+      "index": 385,
+      "start": 1940.799,
+      "end": 1944.589,
+      "duration": 3.79,
+      "text": "It is the same idea as when you are looking for a minimum you"
+    },
+    {
+      "index": 386,
+      "start": 1944.589,
+      "end": 1946.799,
+      "duration": 2.21,
+      "text": "set the derivative equal to zero."
+    },
+    {
+      "index": 387,
+      "start": 1946.799,
+      "end": 1951.212,
+      "duration": 4.413,
+      "text": "So the derivative in any direction, tangent to g equals"
+    },
+    {
+      "index": 388,
+      "start": 1951.212,
+      "end": 1954.807,
+      "duration": 3.595,
+      "text": "c, should be the directional derivative of f,"
+    },
+    {
+      "index": 389,
+      "start": 1954.807,
+      "end": 1958.24,
+      "duration": 3.433,
+      "text": "in any such direction, should be zero."
+    },
+    {
+      "index": 390,
+      "start": 1958.24,
+      "end": 1963.48,
+      "duration": 5.24,
+      "text": "That is what we mean by critical point of f."
+    },
+    {
+      "index": 391,
+      "start": 1963.48,
+      "end": 1968.813,
+      "duration": 5.333,
+      "text": "And so that means that any vector u, any unit vector"
+    },
+    {
+      "index": 392,
+      "start": 1968.813,
+      "end": 1975.507,
+      "duration": 6.694,
+      "text": "tangent to the level set of g is going to be perpendicular to the"
+    },
+    {
+      "index": 393,
+      "start": 1975.507,
+      "end": 1980.532,
+      "duration": 5.025,
+      "text": "gradient of f. That means that the gradient of"
+    },
+    {
+      "index": 394,
+      "start": 1980.532,
+      "end": 1984.789,
+      "duration": 4.257,
+      "text": "f is perpendicular to the level set of g."
+    },
+    {
+      "index": 395,
+      "start": 1984.789,
+      "end": 1986.751,
+      "duration": 1.962,
+      "text": "If you want, that means the level sets of f"
+    },
+    {
+      "index": 396,
+      "start": 1986.751,
+      "end": 1990.956,
+      "duration": 4.205,
+      "text": "and g are tangent to each other. That is justifying what we have"
+    },
+    {
+      "index": 397,
+      "start": 1990.956,
+      "end": 1995.768,
+      "duration": 4.812,
+      "text": "observed in the picture that the two level sets have to be"
+    },
+    {
+      "index": 398,
+      "start": 1995.768,
+      "end": 2000.579,
+      "duration": 4.811,
+      "text": "tangent to each other at the prime minimum or maximum."
+    },
+    {
+      "index": 399,
+      "start": 2000.579,
+      "end": 2003.78,
+      "duration": 3.201,
+      "text": "Does that make a little bit of sense?"
+    },
+    {
+      "index": 400,
+      "start": 2003.78,
+      "end": 2008.135,
+      "duration": 4.355,
+      "text": "Kind of. I see at least a few faces"
+    },
+    {
+      "index": 401,
+      "start": 2008.135,
+      "end": 2015.769,
+      "duration": 7.634,
+      "text": "nodding so I take that to be a positive answer."
+    },
+    {
+      "index": 402,
+      "start": 2015.769,
+      "end": 2019.1,
+      "duration": 3.331,
+      "text": "Since I have been asked by several of you,"
+    },
+    {
+      "index": 403,
+      "start": 2019.1,
+      "end": 2023.0,
+      "duration": 3.9,
+      "text": "how do I know if it is a maximum or a minimum?"
+    },
+    {
+      "index": 404,
+      "start": 2023.0,
+      "end": 2037.078,
+      "duration": 14.078,
+      "text": "Well, warning, the method doesn't tell whether"
+    },
+    {
+      "index": 405,
+      "start": 2037.078,
+      "end": 2049.28,
+      "duration": 12.202,
+      "text": "a solution is a minimum or a maximum."
+    },
+    {
+      "index": 406,
+      "start": 2049.28,
+      "end": 2053.32,
+      "duration": 4.04,
+      "text": "How do we do it? Well, more bad news."
+    },
+    {
+      "index": 407,
+      "start": 2053.32,
+      "end": 2066.59,
+      "duration": 13.27,
+      "text": "We cannot use the second derivative test."
+    },
+    {
+      "index": 408,
+      "start": 2066.59,
+      "end": 2070.456,
+      "duration": 3.866,
+      "text": "And the reason for that is that we care actually only about"
+    },
+    {
+      "index": 409,
+      "start": 2070.456,
+      "end": 2074.59,
+      "duration": 4.134,
+      "text": "these specific directions that are tangent to variable of g."
+    },
+    {
+      "index": 410,
+      "start": 2074.59,
+      "end": 2079.158,
+      "duration": 4.568,
+      "text": "And we don't want to bother to try to define directional second"
+    },
+    {
+      "index": 411,
+      "start": 2079.158,
+      "end": 2082.11,
+      "duration": 2.952,
+      "text": "derivatives. Not to mention that actually it"
+    },
+    {
+      "index": 412,
+      "start": 2082.11,
+      "end": 2085.106,
+      "duration": 2.996,
+      "text": "wouldn't work. There is a criterion but it is"
+    },
+    {
+      "index": 413,
+      "start": 2085.106,
+      "end": 2089.329,
+      "duration": 4.223,
+      "text": "much more complicated than that. Basically, the answer for us is"
+    },
+    {
+      "index": 414,
+      "start": 2089.329,
+      "end": 2092.472,
+      "duration": 3.143,
+      "text": "that we don't have a second derivative test in this"
+    },
+    {
+      "index": 415,
+      "start": 2092.472,
+      "end": 2094.489,
+      "duration": 2.017,
+      "text": "situation. What are we left with?"
+    },
+    {
+      "index": 416,
+      "start": 2094.489,
+      "end": 2097.079,
+      "duration": 2.59,
+      "text": "Well, we are just left with comparing values."
+    },
+    {
+      "index": 417,
+      "start": 2097.079,
+      "end": 2100.421,
+      "duration": 3.342,
+      "text": "Say that in this problem you found a point where f equals"
+    },
+    {
+      "index": 418,
+      "start": 2100.421,
+      "end": 2104.239,
+      "duration": 3.818,
+      "text": "three, a point where f equals nine, a point where f equals 15."
+    },
+    {
+      "index": 419,
+      "start": 2104.239,
+      "end": 2108.359,
+      "duration": 4.12,
+      "text": "Well, then probably the minimum is the point where f equals"
+    },
+    {
+      "index": 420,
+      "start": 2108.359,
+      "end": 2112.546,
+      "duration": 4.187,
+      "text": "three and the maximum is 15. Actually, in this case,"
+    },
+    {
+      "index": 421,
+      "start": 2112.546,
+      "end": 2117.106,
+      "duration": 4.56,
+      "text": "where we found minima, these two points are tied for"
+    },
+    {
+      "index": 422,
+      "start": 2117.106,
+      "end": 2119.13,
+      "duration": 2.024,
+      "text": "minimum. What about the maximum?"
+    },
+    {
+      "index": 423,
+      "start": 2119.13,
+      "end": 2122.519,
+      "duration": 3.389,
+      "text": "What is the maximum of f on the hyperbola?"
+    },
+    {
+      "index": 424,
+      "start": 2122.519,
+      "end": 2125.778,
+      "duration": 3.259,
+      "text": "Well, it is infinity because the point can go as far as you"
+    },
+    {
+      "index": 425,
+      "start": 2125.778,
+      "end": 2129.755,
+      "duration": 3.977,
+      "text": "want from the origin. But the general idea is if we"
+    },
+    {
+      "index": 426,
+      "start": 2129.755,
+      "end": 2135.59,
+      "duration": 5.835,
+      "text": "have a good reason to believe that there should be a minimum,"
+    },
+    {
+      "index": 427,
+      "start": 2135.59,
+      "end": 2138.739,
+      "duration": 3.149,
+      "text": "and it's not like at infinity or something weird like that,"
+    },
+    {
+      "index": 428,
+      "start": 2138.739,
+      "end": 2142.198,
+      "duration": 3.459,
+      "text": "then the minimum will be a solution of the Lagrange"
+    },
+    {
+      "index": 429,
+      "start": 2142.198,
+      "end": 2146.094,
+      "duration": 3.896,
+      "text": "multiplier equations. We just look for all the"
+    },
+    {
+      "index": 430,
+      "start": 2146.094,
+      "end": 2151.855,
+      "duration": 5.761,
+      "text": "solutions and then we choose the one that gives us the lowest"
+    },
+    {
+      "index": 431,
+      "start": 2151.855,
+      "end": 2155.34,
+      "duration": 3.485,
+      "text": "value. Is that good enough?"
+    },
+    {
+      "index": 432,
+      "start": 2155.34,
+      "end": 2157.32,
+      "duration": 1.98,
+      "text": "Let me actually write that down."
+    },
+    {
+      "index": 433,
+      "start": 2183.739,
+      "end": 2195.672,
+      "duration": 11.933,
+      "text": "To find the minimum or the maximum, we compare values of f"
+    },
+    {
+      "index": 434,
+      "start": 2195.672,
+      "end": 2206.559,
+      "duration": 10.887,
+      "text": "at the various solutions -- -- to Lagrange multiplier"
+    },
+    {
+      "index": 435,
+      "start": 2206.559,
+      "end": 2209.49,
+      "duration": 2.931,
+      "text": "equations."
+    },
+    {
+      "index": 436,
+      "start": 2228.929,
+      "end": 2231.835,
+      "duration": 2.906,
+      "text": "I should say also that sometimes you can just conclude"
+    },
+    {
+      "index": 437,
+      "start": 2231.835,
+      "end": 2234.384,
+      "duration": 2.549,
+      "text": "by thinking geometrically. In this case,"
+    },
+    {
+      "index": 438,
+      "start": 2234.384,
+      "end": 2238.831,
+      "duration": 4.447,
+      "text": "when it is asking you which point is closest to the origin"
+    },
+    {
+      "index": 439,
+      "start": 2238.831,
+      "end": 2243.2,
+      "duration": 4.369,
+      "text": "you can just see that your answer is the correct one."
+    },
+    {
+      "index": 440,
+      "start": 2243.2,
+      "end": 2252.728,
+      "duration": 9.528,
+      "text": "Let's do an advanced example. Advanced means that -- Well,"
+    },
+    {
+      "index": 441,
+      "start": 2252.728,
+      "end": 2257.937,
+      "duration": 5.209,
+      "text": "this one I didn't actually dare to put on top of the other"
+    },
+    {
+      "index": 442,
+      "start": 2257.937,
+      "end": 2268.07,
+      "duration": 10.133,
+      "text": "problem sets. Instead, I am going to do it."
+    },
+    {
+      "index": 443,
+      "start": 2268.07,
+      "end": 2271.8,
+      "duration": 3.73,
+      "text": "What is this going to be about? We are going to look for a"
+    },
+    {
+      "index": 444,
+      "start": 2271.8,
+      "end": 2283.915,
+      "duration": 12.115,
+      "text": "surface minimizing pyramid. Let's say that we want to build"
+    },
+    {
+      "index": 445,
+      "start": 2283.915,
+      "end": 2299.335,
+      "duration": 15.42,
+      "text": "a pyramid with a given triangular base -- -- and a"
+    },
+    {
+      "index": 446,
+      "start": 2299.335,
+      "end": 2308.431,
+      "duration": 9.096,
+      "text": "given volume. Say that I have maybe in the x,"
+    },
+    {
+      "index": 447,
+      "start": 2308.431,
+      "end": 2313.539,
+      "duration": 5.108,
+      "text": "y plane I am giving you some triangle."
+    },
+    {
+      "index": 448,
+      "start": 2313.539,
+      "end": 2320.579,
+      "duration": 7.04,
+      "text": "And I am going to try to build a pyramid."
+    },
+    {
+      "index": 449,
+      "start": 2320.579,
+      "end": 2328.219,
+      "duration": 7.64,
+      "text": "Of course, I can choose where to put the top of a pyramid."
+    },
+    {
+      "index": 450,
+      "start": 2328.219,
+      "end": 2333.05,
+      "duration": 4.831,
+      "text": "This guy will end up being behind now."
+    },
+    {
+      "index": 451,
+      "start": 2333.05,
+      "end": 2349.844,
+      "duration": 16.794,
+      "text": "And the constraint and the goal is to minimize the total surface"
+    },
+    {
+      "index": 452,
+      "start": 2349.844,
+      "end": 2353.013,
+      "duration": 3.169,
+      "text": "area. The first time I taught this"
+    },
+    {
+      "index": 453,
+      "start": 2353.013,
+      "end": 2355.805,
+      "duration": 2.792,
+      "text": "class, it was a few years ago, was just before they built the"
+    },
+    {
+      "index": 454,
+      "start": 2355.805,
+      "end": 2357.871,
+      "duration": 2.066,
+      "text": "Stata Center. And then I used to motivate"
+    },
+    {
+      "index": 455,
+      "start": 2357.871,
+      "end": 2360.61,
+      "duration": 2.739,
+      "text": "this problem by saying Frank Gehry has gone crazy and has"
+    },
+    {
+      "index": 456,
+      "start": 2360.61,
+      "end": 2363.84,
+      "duration": 3.23,
+      "text": "been given a triangular plot of land he wants to put a pyramid."
+    },
+    {
+      "index": 457,
+      "start": 2363.84,
+      "end": 2366.199,
+      "duration": 2.359,
+      "text": "There needs to be the right amount of volume so that you can"
+    },
+    {
+      "index": 458,
+      "start": 2366.199,
+      "end": 2368.92,
+      "duration": 2.721,
+      "text": "put all the offices in there. And he wants it to be,"
+    },
+    {
+      "index": 459,
+      "start": 2368.92,
+      "end": 2371.139,
+      "duration": 2.219,
+      "text": "actually, covered in solid gold."
+    },
+    {
+      "index": 460,
+      "start": 2371.139,
+      "end": 2374.506,
+      "duration": 3.367,
+      "text": "And because that is expensive, the administration wants him to"
+    },
+    {
+      "index": 461,
+      "start": 2374.506,
+      "end": 2378.611,
+      "duration": 4.105,
+      "text": "cut the costs a bit. And so you have to minimize the"
+    },
+    {
+      "index": 462,
+      "start": 2378.611,
+      "end": 2382.809,
+      "duration": 4.198,
+      "text": "total size so that it doesn't cost too much."
+    },
+    {
+      "index": 463,
+      "start": 2382.809,
+      "end": 2385.277,
+      "duration": 2.468,
+      "text": "We will see if MIT comes up with a triangular pyramid"
+    },
+    {
+      "index": 464,
+      "start": 2385.277,
+      "end": 2388.19,
+      "duration": 2.913,
+      "text": "building. Hopefully not."
+    },
+    {
+      "index": 465,
+      "start": 2388.19,
+      "end": 2398.929,
+      "duration": 10.739,
+      "text": "It could be our next dorm, you never know."
+    },
+    {
+      "index": 466,
+      "start": 2398.929,
+      "end": 2401.969,
+      "duration": 3.04,
+      "text": "Anyway, it is a fine geometry problem."
+    },
+    {
+      "index": 467,
+      "start": 2401.969,
+      "end": 2407.55,
+      "duration": 5.581,
+      "text": "Let's try to think about how we can do this."
+    },
+    {
+      "index": 468,
+      "start": 2407.55,
+      "end": 2410.079,
+      "duration": 2.529,
+      "text": "The natural way to think about it would be -- Well,"
+    },
+    {
+      "index": 469,
+      "start": 2410.079,
+      "end": 2411.9,
+      "duration": 1.821,
+      "text": "what do we have to look for first?"
+    },
+    {
+      "index": 470,
+      "start": 2411.9,
+      "end": 2418.23,
+      "duration": 6.33,
+      "text": "We have to look for the position of that top point."
+    },
+    {
+      "index": 471,
+      "start": 2418.23,
+      "end": 2429.181,
+      "duration": 10.951,
+      "text": "Remember we know that the volume of a pyramid is one-third"
+    },
+    {
+      "index": 472,
+      "start": 2429.181,
+      "end": 2437.016,
+      "duration": 7.835,
+      "text": "the area of base times height. In fact, fixing the volume,"
+    },
+    {
+      "index": 473,
+      "start": 2437.016,
+      "end": 2439.827,
+      "duration": 2.811,
+      "text": "knowing that we have fixed the area of a base,"
+    },
+    {
+      "index": 474,
+      "start": 2439.827,
+      "end": 2443.2,
+      "duration": 3.373,
+      "text": "means that we are fixing the height of the pyramid."
+    },
+    {
+      "index": 475,
+      "start": 2443.2,
+      "end": 2447.485,
+      "duration": 4.285,
+      "text": "The height is completely fixed. What we have to choose just is"
+    },
+    {
+      "index": 476,
+      "start": 2447.485,
+      "end": 2452.282,
+      "duration": 4.797,
+      "text": "where do we put that top point? Do we put it smack in the"
+    },
+    {
+      "index": 477,
+      "start": 2452.282,
+      "end": 2458.05,
+      "duration": 5.768,
+      "text": "middle of a triangle or to a side or even anywhere we want?"
+    },
+    {
+      "index": 478,
+      "start": 2458.05,
+      "end": 2475.219,
+      "duration": 17.169,
+      "text": "Its z coordinate is fixed. Let's call h the height."
+    },
+    {
+      "index": 479,
+      "start": 2475.219,
+      "end": 2480.96,
+      "duration": 5.741,
+      "text": "What we could do is something like this."
+    },
+    {
+      "index": 480,
+      "start": 2480.96,
+      "end": 2484.599,
+      "duration": 3.639,
+      "text": "We say we have three points of a base."
+    },
+    {
+      "index": 481,
+      "start": 2484.599,
+      "end": 2492.009,
+      "duration": 7.41,
+      "text": "Let's call them p1 at (x1, y1,0); p2 at (x2,"
+    },
+    {
+      "index": 482,
+      "start": 2492.009,
+      "end": 2496.489,
+      "duration": 4.48,
+      "text": "y2,0); p3 at (x3, y3,0)."
+    },
+    {
+      "index": 483,
+      "start": 2496.489,
+      "end": 2500.01,
+      "duration": 3.521,
+      "text": "This point p is the unknown point at (x, y,"
+    },
+    {
+      "index": 484,
+      "start": 2500.01,
+      "end": 2502.82,
+      "duration": 2.81,
+      "text": "h). We know the height."
+    },
+    {
+      "index": 485,
+      "start": 2502.82,
+      "end": 2506.802,
+      "duration": 3.982,
+      "text": "And then we want to minimize the sum of the areas of these"
+    },
+    {
+      "index": 486,
+      "start": 2506.802,
+      "end": 2510.803,
+      "duration": 4.001,
+      "text": "three triangles. One here, one here and one at"
+    },
+    {
+      "index": 487,
+      "start": 2510.803,
+      "end": 2513.982,
+      "duration": 3.179,
+      "text": "the back. And areas of triangles we know"
+    },
+    {
+      "index": 488,
+      "start": 2513.982,
+      "end": 2517.63,
+      "duration": 3.648,
+      "text": "how to express by using length of cross-product."
+    },
+    {
+      "index": 489,
+      "start": 2517.63,
+      "end": 2520.38,
+      "duration": 2.75,
+      "text": "It becomes a function of x and y."
+    },
+    {
+      "index": 490,
+      "start": 2520.38,
+      "end": 2524.019,
+      "duration": 3.639,
+      "text": "And you can try to minimize it. Actually, it doesn't quite work."
+    },
+    {
+      "index": 491,
+      "start": 2524.019,
+      "end": 2525.52,
+      "duration": 1.501,
+      "text": "The formulas are just too complicated."
+    },
+    {
+      "index": 492,
+      "start": 2525.52,
+      "end": 2534.934,
+      "duration": 9.414,
+      "text": "You will never get there. What happens is actually maybe"
+    },
+    {
+      "index": 493,
+      "start": 2534.934,
+      "end": 2538.78,
+      "duration": 3.846,
+      "text": "we need better coordinates. Why do we need better"
+    },
+    {
+      "index": 494,
+      "start": 2538.78,
+      "end": 2541.415,
+      "duration": 2.635,
+      "text": "coordinates? That is because the geometry is"
+    },
+    {
+      "index": 495,
+      "start": 2541.415,
+      "end": 2544.809,
+      "duration": 3.394,
+      "text": "kind of difficult to do if you use x, y coordinates."
+    },
+    {
+      "index": 496,
+      "start": 2544.809,
+      "end": 2548.5,
+      "duration": 3.691,
+      "text": "I mean formula for cross-product is fine,"
+    },
+    {
+      "index": 497,
+      "start": 2548.5,
+      "end": 2553.85,
+      "duration": 5.35,
+      "text": "but then the length of the vector will be annoying and just"
+    },
+    {
+      "index": 498,
+      "start": 2553.85,
+      "end": 2557.502,
+      "duration": 3.652,
+      "text": "doesn't look good. Instead, let's think about it"
+    },
+    {
+      "index": 499,
+      "start": 2557.502,
+      "end": 2558.23,
+      "duration": 0.728,
+      "text": "differently."
+    },
+    {
+      "index": 500,
+      "start": 2574.449,
+      "end": 2581.557,
+      "duration": 7.108,
+      "text": "I claim if we do it this way and we express the area as a"
+    },
+    {
+      "index": 501,
+      "start": 2581.557,
+      "end": 2586.634,
+      "duration": 5.077,
+      "text": "function of x, y, well, actually we can't"
+    },
+    {
+      "index": 502,
+      "start": 2586.634,
+      "end": 2593.469,
+      "duration": 6.835,
+      "text": "solve for a minimum. Here is another way to do it."
+    },
+    {
+      "index": 503,
+      "start": 2593.469,
+      "end": 2597.296,
+      "duration": 3.827,
+      "text": "Well, what has worked pretty well for us so far is this"
+    },
+    {
+      "index": 504,
+      "start": 2597.296,
+      "end": 2599.989,
+      "duration": 2.693,
+      "text": "geometric idea of base times height."
+    },
+    {
+      "index": 505,
+      "start": 2599.989,
+      "end": 2609.67,
+      "duration": 9.681,
+      "text": "So let's think in terms of the heights of side triangles."
+    },
+    {
+      "index": 506,
+      "start": 2609.67,
+      "end": 2617.949,
+      "duration": 8.279,
+      "text": "I am going to use the height of these things."
+    },
+    {
+      "index": 507,
+      "start": 2617.949,
+      "end": 2623.689,
+      "duration": 5.74,
+      "text": "And I am going to say that the area will be the sum of three"
+    },
+    {
+      "index": 508,
+      "start": 2623.689,
+      "end": 2628.65,
+      "duration": 4.961,
+      "text": "terms, which are three bases times three heights."
+    },
+    {
+      "index": 509,
+      "start": 2628.65,
+      "end": 2633.579,
+      "duration": 4.929,
+      "text": "Let's give names to these quantities."
+    },
+    {
+      "index": 510,
+      "start": 2633.579,
+      "end": 2638.196,
+      "duration": 4.617,
+      "text": "Actually, for that it is going to be good to have the point in"
+    },
+    {
+      "index": 511,
+      "start": 2638.196,
+      "end": 2641.45,
+      "duration": 3.254,
+      "text": "the xy plane that lives directly below p."
+    },
+    {
+      "index": 512,
+      "start": 2641.45,
+      "end": 2648.359,
+      "duration": 6.909,
+      "text": "Let's call it q. P is the point that coordinates"
+    },
+    {
+      "index": 513,
+      "start": 2648.359,
+      "end": 2653.522,
+      "duration": 5.163,
+      "text": "x, y, h. And let's call q the point that"
+    },
+    {
+      "index": 514,
+      "start": 2653.522,
+      "end": 2659.26,
+      "duration": 5.738,
+      "text": "is just below it and so it' coordinates are x,"
+    },
+    {
+      "index": 515,
+      "start": 2659.26,
+      "end": 2662.23,
+      "duration": 2.97,
+      "text": "y, 0. Let's see."
+    },
+    {
+      "index": 516,
+      "start": 2662.23,
+      "end": 2674.396,
+      "duration": 12.166,
+      "text": "Let me draw a map of this thing. p1, p2, p3 and I have my point"
+    },
+    {
+      "index": 517,
+      "start": 2674.396,
+      "end": 2677.94,
+      "duration": 3.544,
+      "text": "q in the middle. Let's see."
+    },
+    {
+      "index": 518,
+      "start": 2677.94,
+      "end": 2680.13,
+      "duration": 2.19,
+      "text": "To know these areas, I need to know the base."
+    },
+    {
+      "index": 519,
+      "start": 2680.13,
+      "end": 2684.662,
+      "duration": 4.532,
+      "text": "Well, the base I can decide that I know it because it is"
+    },
+    {
+      "index": 520,
+      "start": 2684.662,
+      "end": 2688.75,
+      "duration": 4.088,
+      "text": "part of my given data. I know the sides of this"
+    },
+    {
+      "index": 521,
+      "start": 2688.75,
+      "end": 2693.865,
+      "duration": 5.115,
+      "text": "triangle. Let me call the lengths a1,"
+    },
+    {
+      "index": 522,
+      "start": 2693.865,
+      "end": 2696.95,
+      "duration": 3.085,
+      "text": "a2, a3. I also need to know the height,"
+    },
+    {
+      "index": 523,
+      "start": 2696.95,
+      "end": 2698.9,
+      "duration": 1.95,
+      "text": "so I need to know these lengths."
+    },
+    {
+      "index": 524,
+      "start": 2698.9,
+      "end": 2701.693,
+      "duration": 2.793,
+      "text": "How do I know these lengths? Well, its distance in space,"
+    },
+    {
+      "index": 525,
+      "start": 2701.693,
+      "end": 2703.69,
+      "duration": 1.997,
+      "text": "but it is a little bit annoying."
+    },
+    {
+      "index": 526,
+      "start": 2703.69,
+      "end": 2710.213,
+      "duration": 6.523,
+      "text": "But maybe I can reduce it to a distance in the plane by looking"
+    },
+    {
+      "index": 527,
+      "start": 2710.213,
+      "end": 2717.07,
+      "duration": 6.857,
+      "text": "instead at this distance here. Let me give names to the"
+    },
+    {
+      "index": 528,
+      "start": 2717.07,
+      "end": 2724.972,
+      "duration": 7.902,
+      "text": "distances from q to the sides. Let's call u1,"
+    },
+    {
+      "index": 529,
+      "start": 2724.972,
+      "end": 2735.15,
+      "duration": 10.178,
+      "text": "u2, u3 the distances from q to the sides."
+    },
+    {
+      "index": 530,
+      "start": 2747.389,
+      "end": 2749.75,
+      "duration": 2.361,
+      "text": "Well, now I can claim I can find, actually,"
+    },
+    {
+      "index": 531,
+      "start": 2749.75,
+      "end": 2753.44,
+      "duration": 3.69,
+      "text": "sorry. I need to draw one more thing."
+    },
+    {
+      "index": 532,
+      "start": 2753.44,
+      "end": 2757.088,
+      "duration": 3.648,
+      "text": "I claim I have a nice formula for the area,"
+    },
+    {
+      "index": 533,
+      "start": 2757.088,
+      "end": 2761.78,
+      "duration": 4.692,
+      "text": "because this is vertical and this is horizontal so this"
+    },
+    {
+      "index": 534,
+      "start": 2761.78,
+      "end": 2765.69,
+      "duration": 3.91,
+      "text": "length here is u3, this length here is h."
+    },
+    {
+      "index": 535,
+      "start": 2765.69,
+      "end": 2773.194,
+      "duration": 7.504,
+      "text": "So what is this length here? It is the square root of u3"
+    },
+    {
+      "index": 536,
+      "start": 2773.194,
+      "end": 2777.898,
+      "duration": 4.704,
+      "text": "squared plus h squared. And similarly for these other"
+    },
+    {
+      "index": 537,
+      "start": 2777.898,
+      "end": 2783.096,
+      "duration": 5.198,
+      "text": "guys. They are square roots of a u"
+    },
+    {
+      "index": 538,
+      "start": 2783.096,
+      "end": 2791.088,
+      "duration": 7.992,
+      "text": "squared plus h squared. The heights of the faces are"
+    },
+    {
+      "index": 539,
+      "start": 2791.088,
+      "end": 2796.89,
+      "duration": 5.802,
+      "text": "square root of u1 squared times h squared."
+    },
+    {
+      "index": 540,
+      "start": 2796.89,
+      "end": 2803.541,
+      "duration": 6.651,
+      "text": "And similarly with u2 and u3. So the total side area is going"
+    },
+    {
+      "index": 541,
+      "start": 2803.541,
+      "end": 2807.33,
+      "duration": 3.789,
+      "text": "to be the area of the first faces,"
+    },
+    {
+      "index": 542,
+      "start": 2807.33,
+      "end": 2818.623,
+      "duration": 11.293,
+      "text": "one-half of base times height, plus one-half of a base times a"
+    },
+    {
+      "index": 543,
+      "start": 2818.623,
+      "end": 2826.44,
+      "duration": 7.817,
+      "text": "height plus one-half of the third one."
+    },
+    {
+      "index": 544,
+      "start": 2826.44,
+      "end": 2829.097,
+      "duration": 2.657,
+      "text": "It doesn't look so much better. But, trust me,"
+    },
+    {
+      "index": 545,
+      "start": 2829.097,
+      "end": 2835.212,
+      "duration": 6.115,
+      "text": "it will get better. Now, that is a function of"
+    },
+    {
+      "index": 546,
+      "start": 2835.212,
+      "end": 2839.71,
+      "duration": 4.498,
+      "text": "three variables, u1, u2, u3."
+    },
+    {
+      "index": 547,
+      "start": 2839.71,
+      "end": 2842.55,
+      "duration": 2.84,
+      "text": "And how do we relate u1, u2, u3 to each other?"
+    },
+    {
+      "index": 548,
+      "start": 2842.55,
+      "end": 2845.289,
+      "duration": 2.739,
+      "text": "They are probably not independent."
+    },
+    {
+      "index": 549,
+      "start": 2845.289,
+      "end": 2852.258,
+      "duration": 6.969,
+      "text": "Well, let's cut this triangle here into three pieces like"
+    },
+    {
+      "index": 550,
+      "start": 2852.258,
+      "end": 2855.927,
+      "duration": 3.669,
+      "text": "that. Then each piece has side --"
+    },
+    {
+      "index": 551,
+      "start": 2855.927,
+      "end": 2860.9,
+      "duration": 4.973,
+      "text": "Well, let's look at it the piece of the bottom."
+    },
+    {
+      "index": 552,
+      "start": 2860.9,
+      "end": 2870.746,
+      "duration": 9.846,
+      "text": "It has base a3, height u3. Cutting base into three tells"
+    },
+    {
+      "index": 553,
+      "start": 2870.746,
+      "end": 2877.738,
+      "duration": 6.992,
+      "text": "you that the area of a base is one-half of a1,"
+    },
+    {
+      "index": 554,
+      "start": 2877.738,
+      "end": 2884.886,
+      "duration": 7.148,
+      "text": "u1 plus one-half of a2, u2 plus one-half of a3,"
+    },
+    {
+      "index": 555,
+      "start": 2884.886,
+      "end": 2889.92,
+      "duration": 5.034,
+      "text": "u3. And that is our constraint."
+    },
+    {
+      "index": 556,
+      "start": 2889.92,
+      "end": 2892.639,
+      "duration": 2.719,
+      "text": "My three variables, u1, u2, u3, are constrained in"
+    },
+    {
+      "index": 557,
+      "start": 2892.639,
+      "end": 2894.864,
+      "duration": 2.225,
+      "text": "this way. The sum of this figure must be"
+    },
+    {
+      "index": 558,
+      "start": 2894.864,
+      "end": 2897.989,
+      "duration": 3.125,
+      "text": "the area of a base. And I want to minimize that guy."
+    },
+    {
+      "index": 559,
+      "start": 2897.989,
+      "end": 2903.03,
+      "duration": 5.041,
+      "text": "So that is my g and that guy here is my f."
+    },
+    {
+      "index": 560,
+      "start": 2903.03,
+      "end": 2908.96,
+      "duration": 5.93,
+      "text": "Now we try to apply our Lagrange multiplier equations."
+    },
+    {
+      "index": 561,
+      "start": 2908.96,
+      "end": 2913.95,
+      "duration": 4.99,
+      "text": "Well, partial f of a partial u1 is -- Well,"
+    },
+    {
+      "index": 562,
+      "start": 2913.95,
+      "end": 2916.949,
+      "duration": 2.999,
+      "text": "if you do the calculation, you will see it is one-half a1,"
+    },
+    {
+      "index": 563,
+      "start": 2916.949,
+      "end": 2923.03,
+      "duration": 6.081,
+      "text": "u1 over square root of u1^2 plus h^2 equals lambda,"
+    },
+    {
+      "index": 564,
+      "start": 2923.03,
+      "end": 2926.05,
+      "duration": 3.02,
+      "text": "what is partial g, partial a1?"
+    },
+    {
+      "index": 565,
+      "start": 2926.05,
+      "end": 2930.09,
+      "duration": 4.04,
+      "text": "That one you can do, I am sure. It is one-half a1."
+    },
+    {
+      "index": 566,
+      "start": 2930.09,
+      "end": 2940.949,
+      "duration": 10.859,
+      "text": "Oh, these guys simplify. If you do the same with the"
+    },
+    {
+      "index": 567,
+      "start": 2940.949,
+      "end": 2949.66,
+      "duration": 8.711,
+      "text": "second one -- -- things simplify again."
+    },
+    {
+      "index": 568,
+      "start": 2949.66,
+      "end": 2957.753,
+      "duration": 8.093,
+      "text": "And the same with the third one. Well, you will get,"
+    },
+    {
+      "index": 569,
+      "start": 2957.753,
+      "end": 2961.088,
+      "duration": 3.335,
+      "text": "after simplifying, u3 over square root of u3"
+    },
+    {
+      "index": 570,
+      "start": 2961.088,
+      "end": 2964.19,
+      "duration": 3.102,
+      "text": "squared plus h squared equals lambda."
+    },
+    {
+      "index": 571,
+      "start": 2964.19,
+      "end": 2967.74,
+      "duration": 3.55,
+      "text": "Now, that means this guy equals this guy equals this guy."
+    },
+    {
+      "index": 572,
+      "start": 2967.74,
+      "end": 2973.373,
+      "duration": 5.633,
+      "text": "They are all equal to lambda. And, if you think about it,"
+    },
+    {
+      "index": 573,
+      "start": 2973.373,
+      "end": 2979.313,
+      "duration": 5.94,
+      "text": "that means that u1 = u2 = u3. See, it looked like scary"
+    },
+    {
+      "index": 574,
+      "start": 2979.313,
+      "end": 2982.76,
+      "duration": 3.447,
+      "text": "equations but the solution is very simple."
+    },
+    {
+      "index": 575,
+      "start": 2982.76,
+      "end": 2985.031,
+      "duration": 2.271,
+      "text": "What does it mean? It means that our point q"
+    },
+    {
+      "index": 576,
+      "start": 2985.031,
+      "end": 2987.55,
+      "duration": 2.519,
+      "text": "should be equidistant from all three sides."
+    },
+    {
+      "index": 577,
+      "start": 2987.55,
+      "end": 2992.539,
+      "duration": 4.989,
+      "text": "That is called the incenter. Q should be in the incenter."
+    },
+    {
+      "index": 578,
+      "start": 2992.539,
+      "end": 2996.243,
+      "duration": 3.704,
+      "text": "The next time you have to build a golden pyramid and don't want"
+    },
+    {
+      "index": 579,
+      "start": 2996.243,
+      "end": 2999.29,
+      "duration": 3.047,
+      "text": "to go broke, well, you know where to put the top."
+    },
+    {
+      "index": 580,
+      "start": 2999.29,
+      "end": 3003.016,
+      "duration": 3.726,
+      "text": "If that was a bit fast, sorry. Anyway, it is not completely"
+    },
+    {
+      "index": 581,
+      "start": 3003.016,
+      "end": 3006.65,
+      "duration": 3.634,
+      "text": "crucial. But go over it and you will see"
+    },
+    {
+      "index": 582,
+      "start": 3006.65,
+      "end": 3008.84,
+      "duration": 2.19,
+      "text": "it works. Have a nice weekend."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Multivariable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38"
+  }
+}

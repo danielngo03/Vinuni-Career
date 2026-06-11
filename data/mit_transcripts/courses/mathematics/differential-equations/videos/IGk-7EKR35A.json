@@ -1,0 +1,1670 @@
+{
+  "video": {
+    "id": "IGk-7EKR35A",
+    "title": "Convolution and Green's Formula | MIT 18.03SC Differential Equations, Fall 2011",
+    "url": "https://www.youtube.com/watch?v=IGk-7EKR35A",
+    "channel": "MIT OpenCourseWare",
+    "duration": 598,
+    "language": "en"
+  },
+  "segment_count": 236,
+  "segments": [
+    {
+      "index": 0,
+      "start": 8.55,
+      "end": 8.56,
+      "duration": 0.01,
+      "text": "Hi everyone. Welcome back."
+    },
+    {
+      "index": 1,
+      "start": 8.56,
+      "end": 10.55,
+      "duration": 1.99,
+      "text": "So, in this problem, I'd like to take a"
+    },
+    {
+      "index": 2,
+      "start": 10.56,
+      "end": 13.11,
+      "duration": 2.55,
+      "text": "look at convolution and Green's formula."
+    },
+    {
+      "index": 3,
+      "start": 13.12,
+      "end": 15.27,
+      "duration": 2.15,
+      "text": "And specifically for part one, we're"
+    },
+    {
+      "index": 4,
+      "start": 15.28,
+      "end": 17.55,
+      "duration": 2.27,
+      "text": "just asked to compute the convolution of"
+    },
+    {
+      "index": 5,
+      "start": 17.56,
+      "end": 20.07,
+      "duration": 2.51,
+      "text": "t with itself, t."
+    },
+    {
+      "index": 6,
+      "start": 20.08,
+      "end": 21.63,
+      "duration": 1.55,
+      "text": "In the second part, we're asked to"
+    },
+    {
+      "index": 7,
+      "start": 21.64,
+      "end": 24.07,
+      "duration": 2.43,
+      "text": "compute compute the convolution"
+    },
+    {
+      "index": 8,
+      "start": 24.08,
+      "end": 26.23,
+      "duration": 2.15,
+      "text": "of e to the minus kt"
+    },
+    {
+      "index": 9,
+      "start": 26.24,
+      "end": 29.51,
+      "duration": 3.27,
+      "text": "with another exponential e to the at."
+    },
+    {
+      "index": 10,
+      "start": 29.52,
+      "end": 31.11,
+      "duration": 1.59,
+      "text": "And then in part b,"
+    },
+    {
+      "index": 11,
+      "start": 31.12,
+      "end": 33.83,
+      "duration": 2.71,
+      "text": "we're to use the result from part a"
+    },
+    {
+      "index": 12,
+      "start": 33.84,
+      "end": 36.47,
+      "duration": 2.63,
+      "text": "as well as Green's formula to solve x"
+    },
+    {
+      "index": 13,
+      "start": 36.48,
+      "end": 39.31,
+      "duration": 2.83,
+      "text": "dot plus kx equals e to the at."
+    },
+    {
+      "index": 14,
+      "start": 39.32,
+      "end": 40.99,
+      "duration": 1.67,
+      "text": "And specifically, we're interested in"
+    },
+    {
+      "index": 15,
+      "start": 41.0,
+      "end": 43.35,
+      "duration": 2.35,
+      "text": "the rest initial condition solution to"
+    },
+    {
+      "index": 16,
+      "start": 43.36,
+      "end": 44.83,
+      "duration": 1.47,
+      "text": "this formula."
+    },
+    {
+      "index": 17,
+      "start": 44.84,
+      "end": 46.47,
+      "duration": 1.63,
+      "text": "Okay. So, I'll let you think about this"
+    },
+    {
+      "index": 18,
+      "start": 46.48,
+      "end": 62.19,
+      "duration": 15.71,
+      "text": "problem and I'll be back in a minute."
+    },
+    {
+      "index": 19,
+      "start": 64.229,
+      "end": 64.239,
+      "duration": 0.01,
+      "text": "Hi everyone. Welcome back."
+    },
+    {
+      "index": 20,
+      "start": 64.239,
+      "end": 65.99,
+      "duration": 1.751,
+      "text": "Okay. So, for part one, we're asked to"
+    },
+    {
+      "index": 21,
+      "start": 66.0,
+      "end": 67.43,
+      "duration": 1.43,
+      "text": "compute the convolution of two"
+    },
+    {
+      "index": 22,
+      "start": 67.44,
+      "end": 69.83,
+      "duration": 2.39,
+      "text": "functions, t with itself."
+    },
+    {
+      "index": 23,
+      "start": 69.84,
+      "end": 71.11,
+      "duration": 1.27,
+      "text": "And I'll just quickly write down the"
+    },
+    {
+      "index": 24,
+      "start": 71.12,
+      "end": 72.91,
+      "duration": 1.79,
+      "text": "formula for a convolution. So, if I have"
+    },
+    {
+      "index": 25,
+      "start": 72.92,
+      "end": 74.99,
+      "duration": 2.07,
+      "text": "two functions"
+    },
+    {
+      "index": 26,
+      "start": 75.0,
+      "end": 76.91,
+      "duration": 1.91,
+      "text": "f and g,"
+    },
+    {
+      "index": 27,
+      "start": 76.92,
+      "end": 79.75,
+      "duration": 2.83,
+      "text": "then the convolution is defined as"
+    },
+    {
+      "index": 28,
+      "start": 79.76,
+      "end": 81.07,
+      "duration": 1.31,
+      "text": "in this case,"
+    },
+    {
+      "index": 29,
+      "start": 81.08,
+      "end": 83.31,
+      "duration": 2.23,
+      "text": "the integral from zero"
+    },
+    {
+      "index": 30,
+      "start": 83.32,
+      "end": 84.71,
+      "duration": 1.39,
+      "text": "to t"
+    },
+    {
+      "index": 31,
+      "start": 84.72,
+      "end": 85.71,
+      "duration": 0.99,
+      "text": "of"
+    },
+    {
+      "index": 32,
+      "start": 85.72,
+      "end": 89.59,
+      "duration": 3.87,
+      "text": "f, so the function f evaluated at"
+    },
+    {
+      "index": 33,
+      "start": 89.6,
+      "end": 90.71,
+      "duration": 1.11,
+      "text": "We're going to use tau as the"
+    },
+    {
+      "index": 34,
+      "start": 90.72,
+      "end": 92.71,
+      "duration": 1.99,
+      "text": "integration variable."
+    },
+    {
+      "index": 35,
+      "start": 92.72,
+      "end": 94.91,
+      "duration": 2.19,
+      "text": "multiplied by g"
+    },
+    {
+      "index": 36,
+      "start": 94.92,
+      "end": 98.23,
+      "duration": 3.31,
+      "text": "t minus tau"
+    },
+    {
+      "index": 37,
+      "start": 98.24,
+      "end": 100.23,
+      "duration": 1.99,
+      "text": "d tau."
+    },
+    {
+      "index": 38,
+      "start": 100.24,
+      "end": 101.39,
+      "duration": 1.15,
+      "text": "So, notice how"
+    },
+    {
+      "index": 39,
+      "start": 101.4,
+      "end": 103.75,
+      "duration": 2.35,
+      "text": "the variable t appears in two places in"
+    },
+    {
+      "index": 40,
+      "start": 103.76,
+      "end": 107.23,
+      "duration": 3.47,
+      "text": "this formula. It appears in one place in"
+    },
+    {
+      "index": 41,
+      "start": 107.24,
+      "end": 108.83,
+      "duration": 1.59,
+      "text": "the argument of g"
+    },
+    {
+      "index": 42,
+      "start": 108.84,
+      "end": 110.35,
+      "duration": 1.51,
+      "text": "and it appears in the bound of"
+    },
+    {
+      "index": 43,
+      "start": 110.36,
+      "end": 111.71,
+      "duration": 1.35,
+      "text": "integration."
+    },
+    {
+      "index": 44,
+      "start": 111.72,
+      "end": 113.87,
+      "duration": 2.15,
+      "text": "Meanwhile, tau is the integrate"
+    },
+    {
+      "index": 45,
+      "start": 113.88,
+      "end": 115.07,
+      "duration": 1.19,
+      "text": "It's the variable we're integrating"
+    },
+    {
+      "index": 46,
+      "start": 115.08,
+      "end": 117.23,
+      "duration": 2.15,
+      "text": "over. And tau appears in two places as"
+    },
+    {
+      "index": 47,
+      "start": 117.24,
+      "end": 118.19,
+      "duration": 0.95,
+      "text": "well."
+    },
+    {
+      "index": 48,
+      "start": 118.2,
+      "end": 121.67,
+      "duration": 3.47,
+      "text": "One in f and one in g."
+    },
+    {
+      "index": 49,
+      "start": 121.68,
+      "end": 123.55,
+      "duration": 1.87,
+      "text": "Okay. So, if we're interested in t"
+    },
+    {
+      "index": 50,
+      "start": 123.56,
+      "end": 127.39,
+      "duration": 3.83,
+      "text": "convolved with t,"
+    },
+    {
+      "index": 51,
+      "start": 130.59,
+      "end": 130.6,
+      "duration": 0.01,
+      "text": "we have the integral from zero to t"
+    },
+    {
+      "index": 52,
+      "start": 130.6,
+      "end": 133.07,
+      "duration": 2.47,
+      "text": "of"
+    },
+    {
+      "index": 53,
+      "start": 134.39,
+      "end": 134.4,
+      "duration": 0.01,
+      "text": "tau"
+    },
+    {
+      "index": 54,
+      "start": 134.4,
+      "end": 136.27,
+      "duration": 1.87,
+      "text": "times"
+    },
+    {
+      "index": 55,
+      "start": 136.28,
+      "end": 138.71,
+      "duration": 2.43,
+      "text": "t minus tau."
+    },
+    {
+      "index": 56,
+      "start": 138.72,
+      "end": 141.39,
+      "duration": 2.67,
+      "text": "So, notice how f is just t"
+    },
+    {
+      "index": 57,
+      "start": 141.4,
+      "end": 142.87,
+      "duration": 1.47,
+      "text": "and g is t."
+    },
+    {
+      "index": 58,
+      "start": 142.88,
+      "end": 145.99,
+      "duration": 3.11,
+      "text": "So, when we insert tau and t minus tau"
+    },
+    {
+      "index": 59,
+      "start": 146.0,
+      "end": 147.83,
+      "duration": 1.83,
+      "text": "into the the function, we end up just"
+    },
+    {
+      "index": 60,
+      "start": 147.84,
+      "end": 150.79,
+      "duration": 2.95,
+      "text": "getting tau times t minus tau"
+    },
+    {
+      "index": 61,
+      "start": 150.8,
+      "end": 156.47,
+      "duration": 5.67,
+      "text": "d tau."
+    },
+    {
+      "index": 62,
+      "start": 158.23,
+      "end": 158.24,
+      "duration": 0.01,
+      "text": "And just expanding this out, we have t"
+    },
+    {
+      "index": 63,
+      "start": 158.24,
+      "end": 160.27,
+      "duration": 2.03,
+      "text": "times tau"
+    },
+    {
+      "index": 64,
+      "start": 160.28,
+      "end": 161.95,
+      "duration": 1.67,
+      "text": "minus tau squared"
+    },
+    {
+      "index": 65,
+      "start": 161.96,
+      "end": 164.19,
+      "duration": 2.23,
+      "text": "d tau."
+    },
+    {
+      "index": 66,
+      "start": 164.2,
+      "end": 165.99,
+      "duration": 1.79,
+      "text": "So, in the integral, the variable t"
+    },
+    {
+      "index": 67,
+      "start": 166.0,
+      "end": 170.79,
+      "duration": 4.79,
+      "text": "always appears just as a constant."
+    },
+    {
+      "index": 68,
+      "start": 173.19,
+      "end": 173.2,
+      "duration": 0.01,
+      "text": "So, in this case, we have t"
+    },
+    {
+      "index": 69,
+      "start": 173.2,
+      "end": 175.35,
+      "duration": 2.15,
+      "text": "tau integrated becomes t squared over"
+    },
+    {
+      "index": 70,
+      "start": 175.36,
+      "end": 176.35,
+      "duration": 0.99,
+      "text": "two"
+    },
+    {
+      "index": 71,
+      "start": 176.36,
+      "end": 180.63,
+      "duration": 4.27,
+      "text": "when I integrate from zero to t."
+    },
+    {
+      "index": 72,
+      "start": 180.64,
+      "end": 184.55,
+      "duration": 3.91,
+      "text": "Tau squared integrates to 1/3"
+    },
+    {
+      "index": 73,
+      "start": 184.56,
+      "end": 189.59,
+      "duration": 5.03,
+      "text": "t cubed."
+    },
+    {
+      "index": 74,
+      "start": 191.75,
+      "end": 191.76,
+      "duration": 0.01,
+      "text": "And zero drops out from the other end of"
+    },
+    {
+      "index": 75,
+      "start": 191.76,
+      "end": 192.91,
+      "duration": 1.15,
+      "text": "the integral."
+    },
+    {
+      "index": 76,
+      "start": 192.92,
+      "end": 195.67,
+      "duration": 2.75,
+      "text": "So, we end up with t cubed"
+    },
+    {
+      "index": 77,
+      "start": 195.68,
+      "end": 199.39,
+      "duration": 3.71,
+      "text": "1/2 minus 1/3"
+    },
+    {
+      "index": 78,
+      "start": 199.4,
+      "end": 203.43,
+      "duration": 4.03,
+      "text": "which is equal to 1/6 t cubed."
+    },
+    {
+      "index": 79,
+      "start": 203.44,
+      "end": 204.31,
+      "duration": 0.87,
+      "text": "Okay. So, there's the answer we're"
+    },
+    {
+      "index": 80,
+      "start": 204.32,
+      "end": 206.11,
+      "duration": 1.79,
+      "text": "looking for."
+    },
+    {
+      "index": 81,
+      "start": 206.12,
+      "end": 209.11,
+      "duration": 2.99,
+      "text": "For part b or for question two,"
+    },
+    {
+      "index": 82,
+      "start": 209.12,
+      "end": 210.51,
+      "duration": 1.39,
+      "text": "again, we have another computation to"
+    },
+    {
+      "index": 83,
+      "start": 210.52,
+      "end": 213.39,
+      "duration": 2.87,
+      "text": "do."
+    },
+    {
+      "index": 84,
+      "start": 230.03,
+      "end": 230.04,
+      "duration": 0.01,
+      "text": "The first one's going to be e to the kt."
+    },
+    {
+      "index": 85,
+      "start": 230.04,
+      "end": 231.83,
+      "duration": 1.79,
+      "text": "Sorry."
+    },
+    {
+      "index": 86,
+      "start": 231.84,
+      "end": 235.55,
+      "duration": 3.71,
+      "text": "e to the k tau"
+    },
+    {
+      "index": 87,
+      "start": 238.35,
+      "end": 238.36,
+      "duration": 0.01,
+      "text": "And the second one is e to the a"
+    },
+    {
+      "index": 88,
+      "start": 238.36,
+      "end": 241.99,
+      "duration": 3.63,
+      "text": "t minus tau"
+    },
+    {
+      "index": 89,
+      "start": 248.63,
+      "end": 248.64,
+      "duration": 0.01,
+      "text": "So, we can just expand things out and I"
+    },
+    {
+      "index": 90,
+      "start": 248.64,
+      "end": 249.83,
+      "duration": 1.19,
+      "text": "get"
+    },
+    {
+      "index": 91,
+      "start": 249.84,
+      "end": 251.99,
+      "duration": 2.15,
+      "text": "e to the at"
+    },
+    {
+      "index": 92,
+      "start": 252.0,
+      "end": 254.79,
+      "duration": 2.79,
+      "text": "times e to the minus"
+    },
+    {
+      "index": 93,
+      "start": 254.8,
+      "end": 256.99,
+      "duration": 2.19,
+      "text": "a a plus"
+    },
+    {
+      "index": 94,
+      "start": 257.0,
+      "end": 259.03,
+      "duration": 2.03,
+      "text": "k"
+    },
+    {
+      "index": 95,
+      "start": 259.04,
+      "end": 262.75,
+      "duration": 3.71,
+      "text": "tau d tau"
+    },
+    {
+      "index": 96,
+      "start": 265.15,
+      "end": 265.16,
+      "duration": 0.01,
+      "text": "zero to t."
+    },
+    {
+      "index": 97,
+      "start": 265.16,
+      "end": 266.75,
+      "duration": 1.59,
+      "text": "And again, because"
+    },
+    {
+      "index": 98,
+      "start": 266.76,
+      "end": 268.75,
+      "duration": 1.99,
+      "text": "t is just a dummy variable in this"
+    },
+    {
+      "index": 99,
+      "start": 268.76,
+      "end": 269.87,
+      "duration": 1.11,
+      "text": "integral,"
+    },
+    {
+      "index": 100,
+      "start": 269.88,
+      "end": 271.39,
+      "duration": 1.51,
+      "text": "we're not integrating over t. I can just"
+    },
+    {
+      "index": 101,
+      "start": 271.4,
+      "end": 273.75,
+      "duration": 2.35,
+      "text": "think of e to the at as a constant."
+    },
+    {
+      "index": 102,
+      "start": 273.76,
+      "end": 275.07,
+      "duration": 1.31,
+      "text": "So, I'm really just integrating the"
+    },
+    {
+      "index": 103,
+      "start": 275.08,
+      "end": 282.91,
+      "duration": 7.83,
+      "text": "function e to the minus a plus k tau."
+    },
+    {
+      "index": 104,
+      "start": 284.31,
+      "end": 284.32,
+      "duration": 0.01,
+      "text": "And when I integrate this function, I"
+    },
+    {
+      "index": 105,
+      "start": 284.32,
+      "end": 285.47,
+      "duration": 1.15,
+      "text": "get"
+    },
+    {
+      "index": 106,
+      "start": 285.48,
+      "end": 288.71,
+      "duration": 3.23,
+      "text": "1 over"
+    },
+    {
+      "index": 107,
+      "start": 291.67,
+      "end": 291.68,
+      "duration": 0.01,
+      "text": "minus a plus k"
+    },
+    {
+      "index": 108,
+      "start": 291.68,
+      "end": 295.55,
+      "duration": 3.87,
+      "text": "e to the minus a plus k"
+    },
+    {
+      "index": 109,
+      "start": 295.56,
+      "end": 298.99,
+      "duration": 3.43,
+      "text": "tau evaluated at the bounds"
+    },
+    {
+      "index": 110,
+      "start": 299.0,
+      "end": 308.39,
+      "duration": 9.39,
+      "text": "zero and t."
+    },
+    {
+      "index": 111,
+      "start": 310.03,
+      "end": 310.04,
+      "duration": 0.01,
+      "text": "So, the negative sign here just flips"
+    },
+    {
+      "index": 112,
+      "start": 310.04,
+      "end": 312.79,
+      "duration": 2.75,
+      "text": "the bounds."
+    },
+    {
+      "index": 113,
+      "start": 325.51,
+      "end": 325.52,
+      "duration": 0.01,
+      "text": "And then substituting in t gives us e to"
+    },
+    {
+      "index": 114,
+      "start": 325.52,
+      "end": 327.31,
+      "duration": 1.79,
+      "text": "the minus"
+    },
+    {
+      "index": 115,
+      "start": 327.32,
+      "end": 328.75,
+      "duration": 1.43,
+      "text": "a plus k"
+    },
+    {
+      "index": 116,
+      "start": 328.76,
+      "end": 331.19,
+      "duration": 2.43,
+      "text": "t."
+    },
+    {
+      "index": 117,
+      "start": 333.71,
+      "end": 333.72,
+      "duration": 0.01,
+      "text": "Okay. And I can expand out multiply out"
+    },
+    {
+      "index": 118,
+      "start": 333.72,
+      "end": 337.95,
+      "duration": 4.23,
+      "text": "e to the at."
+    },
+    {
+      "index": 119,
+      "start": 340.87,
+      "end": 340.88,
+      "duration": 0.01,
+      "text": "And when the dust settles,"
+    },
+    {
+      "index": 120,
+      "start": 340.88,
+      "end": 342.91,
+      "duration": 2.03,
+      "text": "we have e to the at"
+    },
+    {
+      "index": 121,
+      "start": 342.92,
+      "end": 344.59,
+      "duration": 1.67,
+      "text": "minus"
+    },
+    {
+      "index": 122,
+      "start": 344.6,
+      "end": 348.55,
+      "duration": 3.95,
+      "text": "e to the minus kt."
+    },
+    {
+      "index": 123,
+      "start": 350.07,
+      "end": 350.08,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 124,
+      "start": 350.08,
+      "end": 351.43,
+      "duration": 1.35,
+      "text": "So, this is just the"
+    },
+    {
+      "index": 125,
+      "start": 351.44,
+      "end": 353.63,
+      "duration": 2.19,
+      "text": "the computation of"
+    },
+    {
+      "index": 126,
+      "start": 353.64,
+      "end": 356.63,
+      "duration": 2.99,
+      "text": "the convolution e to the minus kt"
+    },
+    {
+      "index": 127,
+      "start": 356.64,
+      "end": 358.47,
+      "duration": 1.83,
+      "text": "and e to the at."
+    },
+    {
+      "index": 128,
+      "start": 358.48,
+      "end": 361.19,
+      "duration": 2.71,
+      "text": "So, note now if if for example, k were"
+    },
+    {
+      "index": 129,
+      "start": 361.2,
+      "end": 363.31,
+      "duration": 2.11,
+      "text": "to equal negative a,"
+    },
+    {
+      "index": 130,
+      "start": 363.32,
+      "end": 365.67,
+      "duration": 2.35,
+      "text": "we would have zero in the denominator"
+    },
+    {
+      "index": 131,
+      "start": 365.68,
+      "end": 367.51,
+      "duration": 1.83,
+      "text": "and zero in the numerator."
+    },
+    {
+      "index": 132,
+      "start": 367.52,
+      "end": 368.55,
+      "duration": 1.03,
+      "text": "So, one way to"
+    },
+    {
+      "index": 133,
+      "start": 368.56,
+      "end": 370.55,
+      "duration": 1.99,
+      "text": "compute the special case when case when"
+    },
+    {
+      "index": 134,
+      "start": 370.56,
+      "end": 372.55,
+      "duration": 1.99,
+      "text": "k is equal to negative a"
+    },
+    {
+      "index": 135,
+      "start": 372.56,
+      "end": 374.87,
+      "duration": 2.31,
+      "text": "is to use L'Hopital's rule"
+    },
+    {
+      "index": 136,
+      "start": 374.88,
+      "end": 376.23,
+      "duration": 1.35,
+      "text": "and differentiate the top and the"
+    },
+    {
+      "index": 137,
+      "start": 376.24,
+      "end": 377.83,
+      "duration": 1.59,
+      "text": "bottom."
+    },
+    {
+      "index": 138,
+      "start": 377.84,
+      "end": 383.63,
+      "duration": 5.79,
+      "text": "Uh for example, with respect to k."
+    },
+    {
+      "index": 139,
+      "start": 386.03,
+      "end": 386.04,
+      "duration": 0.01,
+      "text": "Another alternative way of computing the"
+    },
+    {
+      "index": 140,
+      "start": 386.04,
+      "end": 387.59,
+      "duration": 1.55,
+      "text": "special case when"
+    },
+    {
+      "index": 141,
+      "start": 387.6,
+      "end": 389.59,
+      "duration": 1.99,
+      "text": "a is equal to negative k"
+    },
+    {
+      "index": 142,
+      "start": 389.6,
+      "end": 391.43,
+      "duration": 1.83,
+      "text": "is just to plug in"
+    },
+    {
+      "index": 143,
+      "start": 391.44,
+      "end": 392.43,
+      "duration": 0.99,
+      "text": "e to the"
+    },
+    {
+      "index": 144,
+      "start": 392.44,
+      "end": 393.39,
+      "duration": 0.95,
+      "text": "uh"
+    },
+    {
+      "index": 145,
+      "start": 393.4,
+      "end": 394.71,
+      "duration": 1.31,
+      "text": "e to the k"
+    },
+    {
+      "index": 146,
+      "start": 394.72,
+      "end": 396.87,
+      "duration": 2.15,
+      "text": "and then just work out this integral"
+    },
+    {
+      "index": 147,
+      "start": 396.88,
+      "end": 400.31,
+      "duration": 3.43,
+      "text": "and you'll obtain a different answer."
+    },
+    {
+      "index": 148,
+      "start": 402.87,
+      "end": 402.88,
+      "duration": 0.01,
+      "text": "Okay. And now lastly for part b,"
+    },
+    {
+      "index": 149,
+      "start": 402.88,
+      "end": 404.07,
+      "duration": 1.19,
+      "text": "we're interested in the differential"
+    },
+    {
+      "index": 150,
+      "start": 404.08,
+      "end": 406.47,
+      "duration": 2.39,
+      "text": "equation x dot"
+    },
+    {
+      "index": 151,
+      "start": 406.48,
+      "end": 409.11,
+      "duration": 2.63,
+      "text": "plus kx"
+    },
+    {
+      "index": 152,
+      "start": 409.12,
+      "end": 411.35,
+      "duration": 2.23,
+      "text": "equals e to the at."
+    },
+    {
+      "index": 153,
+      "start": 411.36,
+      "end": 412.95,
+      "duration": 1.59,
+      "text": "And we're interested in finding the"
+    },
+    {
+      "index": 154,
+      "start": 412.96,
+      "end": 414.31,
+      "duration": 1.35,
+      "text": "particular solution that has rest"
+    },
+    {
+      "index": 155,
+      "start": 414.32,
+      "end": 416.55,
+      "duration": 2.23,
+      "text": "initial conditions."
+    },
+    {
+      "index": 156,
+      "start": 416.56,
+      "end": 418.47,
+      "duration": 1.91,
+      "text": "So, for example, x"
+    },
+    {
+      "index": 157,
+      "start": 418.48,
+      "end": 424.19,
+      "duration": 5.71,
+      "text": "of zero is equal to zero."
+    },
+    {
+      "index": 158,
+      "start": 426.39,
+      "end": 426.4,
+      "duration": 0.01,
+      "text": "And we want to use Green's formula. So,"
+    },
+    {
+      "index": 159,
+      "start": 426.4,
+      "end": 428.51,
+      "duration": 2.11,
+      "text": "just recall that"
+    },
+    {
+      "index": 160,
+      "start": 428.52,
+      "end": 429.51,
+      "duration": 0.99,
+      "text": "uh"
+    },
+    {
+      "index": 161,
+      "start": 429.52,
+      "end": 433.15,
+      "duration": 3.63,
+      "text": "there's the impulse response formula"
+    },
+    {
+      "index": 162,
+      "start": 433.16,
+      "end": 437.87,
+      "duration": 4.71,
+      "text": "or the weight function w"
+    },
+    {
+      "index": 163,
+      "start": 439.15,
+      "end": 439.16,
+      "duration": 0.01,
+      "text": "which solves the same differential"
+    },
+    {
+      "index": 164,
+      "start": 439.16,
+      "end": 440.79,
+      "duration": 1.63,
+      "text": "equation but with a delta function on"
+    },
+    {
+      "index": 165,
+      "start": 440.8,
+      "end": 444.23,
+      "duration": 3.43,
+      "text": "the right hand side."
+    },
+    {
+      "index": 166,
+      "start": 446.43,
+      "end": 446.44,
+      "duration": 0.01,
+      "text": "And w"
+    },
+    {
+      "index": 167,
+      "start": 446.44,
+      "end": 449.79,
+      "duration": 3.35,
+      "text": "in this case"
+    },
+    {
+      "index": 168,
+      "start": 451.51,
+      "end": 451.52,
+      "duration": 0.01,
+      "text": "as we've seen in lecture"
+    },
+    {
+      "index": 169,
+      "start": 451.52,
+      "end": 453.35,
+      "duration": 1.83,
+      "text": "is actually e"
+    },
+    {
+      "index": 170,
+      "start": 453.36,
+      "end": 456.07,
+      "duration": 2.71,
+      "text": "uh to the negative kt"
+    },
+    {
+      "index": 171,
+      "start": 456.08,
+      "end": 458.39,
+      "duration": 2.31,
+      "text": "when t is bigger than zero"
+    },
+    {
+      "index": 172,
+      "start": 458.4,
+      "end": 463.67,
+      "duration": 5.27,
+      "text": "and it's zero when t is less than zero."
+    },
+    {
+      "index": 173,
+      "start": 466.23,
+      "end": 466.24,
+      "duration": 0.01,
+      "text": "So, notice how e to the minus kt is"
+    },
+    {
+      "index": 174,
+      "start": 466.24,
+      "end": 467.95,
+      "duration": 1.71,
+      "text": "exactly the function that we convolved"
+    },
+    {
+      "index": 175,
+      "start": 467.96,
+      "end": 470.35,
+      "duration": 2.39,
+      "text": "in part a."
+    },
+    {
+      "index": 176,
+      "start": 470.36,
+      "end": 472.03,
+      "duration": 1.67,
+      "text": "Uh specifically, we convolved it with e"
+    },
+    {
+      "index": 177,
+      "start": 472.04,
+      "end": 473.83,
+      "duration": 1.79,
+      "text": "to the at."
+    },
+    {
+      "index": 178,
+      "start": 473.84,
+      "end": 475.47,
+      "duration": 1.63,
+      "text": "So, for example,"
+    },
+    {
+      "index": 179,
+      "start": 475.48,
+      "end": 477.63,
+      "duration": 2.15,
+      "text": "Green's formula says that the particular"
+    },
+    {
+      "index": 180,
+      "start": 477.64,
+      "end": 479.15,
+      "duration": 1.51,
+      "text": "solution that has rest initial"
+    },
+    {
+      "index": 181,
+      "start": 479.16,
+      "end": 480.43,
+      "duration": 1.27,
+      "text": "conditions"
+    },
+    {
+      "index": 182,
+      "start": 480.44,
+      "end": 483.79,
+      "duration": 3.35,
+      "text": "is going to be the weight function"
+    },
+    {
+      "index": 183,
+      "start": 483.8,
+      "end": 485.99,
+      "duration": 2.19,
+      "text": "convolved with the right hand side of"
+    },
+    {
+      "index": 184,
+      "start": 486.0,
+      "end": 488.55,
+      "duration": 2.55,
+      "text": "the differential equation"
+    },
+    {
+      "index": 185,
+      "start": 488.56,
+      "end": 491.95,
+      "duration": 3.39,
+      "text": "e to the at."
+    },
+    {
+      "index": 186,
+      "start": 493.27,
+      "end": 493.28,
+      "duration": 0.01,
+      "text": "In this case,"
+    },
+    {
+      "index": 187,
+      "start": 493.28,
+      "end": 495.67,
+      "duration": 2.39,
+      "text": "on the domain of integration for the"
+    },
+    {
+      "index": 188,
+      "start": 495.68,
+      "end": 497.87,
+      "duration": 2.19,
+      "text": "convolution, w is just e to the minus"
+    },
+    {
+      "index": 189,
+      "start": 497.88,
+      "end": 505.51,
+      "duration": 7.63,
+      "text": "kt."
+    },
+    {
+      "index": 190,
+      "start": 507.31,
+      "end": 507.32,
+      "duration": 0.01,
+      "text": "So, we have e to the minus kt convolved"
+    },
+    {
+      "index": 191,
+      "start": 507.32,
+      "end": 509.31,
+      "duration": 1.99,
+      "text": "with e to the at."
+    },
+    {
+      "index": 192,
+      "start": 509.32,
+      "end": 511.79,
+      "duration": 2.47,
+      "text": "So, Green's formula gives us"
+    },
+    {
+      "index": 193,
+      "start": 511.8,
+      "end": 513.39,
+      "duration": 1.59,
+      "text": "the equation for"
+    },
+    {
+      "index": 194,
+      "start": 513.4,
+      "end": 514.55,
+      "duration": 1.15,
+      "text": "the solution to this differential"
+    },
+    {
+      "index": 195,
+      "start": 514.56,
+      "end": 515.83,
+      "duration": 1.27,
+      "text": "equation which has rest initial"
+    },
+    {
+      "index": 196,
+      "start": 515.84,
+      "end": 517.55,
+      "duration": 1.71,
+      "text": "conditions."
+    },
+    {
+      "index": 197,
+      "start": 517.56,
+      "end": 518.909,
+      "duration": 1.349,
+      "text": "And specifically, we've already worked"
+    },
+    {
+      "index": 198,
+      "start": 518.919,
+      "end": 520.149,
+      "duration": 1.23,
+      "text": "this out from part a, so I can just"
+    },
+    {
+      "index": 199,
+      "start": 520.159,
+      "end": 522.75,
+      "duration": 2.591,
+      "text": "write down what the answer is."
+    },
+    {
+      "index": 200,
+      "start": 522.76,
+      "end": 526.95,
+      "duration": 4.19,
+      "text": "It's 1 over a plus k"
+    },
+    {
+      "index": 201,
+      "start": 528.87,
+      "end": 528.88,
+      "duration": 0.01,
+      "text": "e to the at"
+    },
+    {
+      "index": 202,
+      "start": 528.88,
+      "end": 535.55,
+      "duration": 6.67,
+      "text": "minus e to the minus kt."
+    },
+    {
+      "index": 203,
+      "start": 536.87,
+      "end": 536.88,
+      "duration": 0.01,
+      "text": "And just as a quick check to make sure"
+    },
+    {
+      "index": 204,
+      "start": 536.88,
+      "end": 538.39,
+      "duration": 1.51,
+      "text": "that we've done everything correctly, we"
+    },
+    {
+      "index": 205,
+      "start": 538.4,
+      "end": 540.47,
+      "duration": 2.07,
+      "text": "can plug in t equals zero. And when t"
+    },
+    {
+      "index": 206,
+      "start": 540.48,
+      "end": 542.95,
+      "duration": 2.47,
+      "text": "equals zero, we have one minus one which"
+    },
+    {
+      "index": 207,
+      "start": 542.96,
+      "end": 544.51,
+      "duration": 1.55,
+      "text": "gives us zero."
+    },
+    {
+      "index": 208,
+      "start": 544.52,
+      "end": 547.19,
+      "duration": 2.67,
+      "text": "So, indeed, this x is the solution to"
+    },
+    {
+      "index": 209,
+      "start": 547.2,
+      "end": 548.95,
+      "duration": 1.75,
+      "text": "this differential equation"
+    },
+    {
+      "index": 210,
+      "start": 548.96,
+      "end": 552.67,
+      "duration": 3.71,
+      "text": "which has rest initial conditions."
+    },
+    {
+      "index": 211,
+      "start": 554.79,
+      "end": 554.8,
+      "duration": 0.01,
+      "text": "Okay. So, I'd"
+    },
+    {
+      "index": 212,
+      "start": 554.8,
+      "end": 556.55,
+      "duration": 1.75,
+      "text": "just like to conclude this problem."
+    },
+    {
+      "index": 213,
+      "start": 556.56,
+      "end": 558.03,
+      "duration": 1.47,
+      "text": "Quick recap."
+    },
+    {
+      "index": 214,
+      "start": 558.04,
+      "end": 560.31,
+      "duration": 2.27,
+      "text": "Uh we worked out several convolutions."
+    },
+    {
+      "index": 215,
+      "start": 560.32,
+      "end": 562.83,
+      "duration": 2.51,
+      "text": "And specifically, we were able to use"
+    },
+    {
+      "index": 216,
+      "start": 562.84,
+      "end": 564.63,
+      "duration": 1.79,
+      "text": "Green's formula"
+    },
+    {
+      "index": 217,
+      "start": 564.64,
+      "end": 566.11,
+      "duration": 1.47,
+      "text": "uh in addition to the convolution that"
+    },
+    {
+      "index": 218,
+      "start": 566.12,
+      "end": 568.11,
+      "duration": 1.99,
+      "text": "we worked out to compute the solution"
+    },
+    {
+      "index": 219,
+      "start": 568.12,
+      "end": 570.87,
+      "duration": 2.75,
+      "text": "with rest initial conditions to an ODE."
+    },
+    {
+      "index": 220,
+      "start": 570.88,
+      "end": 572.47,
+      "duration": 1.59,
+      "text": "Uh moreover, Green's function is very"
+    },
+    {
+      "index": 221,
+      "start": 572.48,
+      "end": 574.51,
+      "duration": 2.03,
+      "text": "useful because"
+    },
+    {
+      "index": 222,
+      "start": 574.52,
+      "end": 575.91,
+      "duration": 1.39,
+      "text": "notice how we could have computed the"
+    },
+    {
+      "index": 223,
+      "start": 575.92,
+      "end": 577.39,
+      "duration": 1.47,
+      "text": "convolution for any right hand side"
+    },
+    {
+      "index": 224,
+      "start": 577.4,
+      "end": 579.11,
+      "duration": 1.71,
+      "text": "function here."
+    },
+    {
+      "index": 225,
+      "start": 579.12,
+      "end": 580.43,
+      "duration": 1.31,
+      "text": "So,"
+    },
+    {
+      "index": 226,
+      "start": 580.44,
+      "end": 582.79,
+      "duration": 2.35,
+      "text": "in some sense, we're able to generalize"
+    },
+    {
+      "index": 227,
+      "start": 582.8,
+      "end": 584.23,
+      "duration": 1.43,
+      "text": "and find solutions to differential"
+    },
+    {
+      "index": 228,
+      "start": 584.24,
+      "end": 585.87,
+      "duration": 1.63,
+      "text": "equations which have arbitrary right"
+    },
+    {
+      "index": 229,
+      "start": 585.88,
+      "end": 587.39,
+      "duration": 1.51,
+      "text": "hand side forcings."
+    },
+    {
+      "index": 230,
+      "start": 587.4,
+      "end": 589.51,
+      "duration": 2.11,
+      "text": "Not just signs and cosines,"
+    },
+    {
+      "index": 231,
+      "start": 589.52,
+      "end": 590.99,
+      "duration": 1.47,
+      "text": "periodic functions or other simple"
+    },
+    {
+      "index": 232,
+      "start": 591.0,
+      "end": 592.47,
+      "duration": 1.47,
+      "text": "functions which we've been looking at in"
+    },
+    {
+      "index": 233,
+      "start": 592.48,
+      "end": 594.35,
+      "duration": 1.87,
+      "text": "the past."
+    },
+    {
+      "index": 234,
+      "start": 594.36,
+      "end": 595.75,
+      "duration": 1.39,
+      "text": "So, I'd like to conclude here and I'll"
+    },
+    {
+      "index": 235,
+      "start": 595.76,
+      "end": 598.48,
+      "duration": 2.72,
+      "text": "see you next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Differential Equations",
+    "source_url": "https://www.youtube.com/playlist?list=PL64BDFBDA2AF24F7E"
+  }
+}

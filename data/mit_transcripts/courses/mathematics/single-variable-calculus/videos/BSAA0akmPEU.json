@@ -1,0 +1,7354 @@
+{
+  "video": {
+    "id": "BSAA0akmPEU",
+    "title": "Lec 9 | MIT 18.01 Single Variable Calculus, Fall 2007",
+    "url": "https://www.youtube.com/watch?v=BSAA0akmPEU",
+    "channel": "MIT OpenCourseWare",
+    "duration": 2808,
+    "language": "en"
+  },
+  "segment_count": 1048,
+  "segments": [
+    {
+      "index": 0,
+      "start": 1.83,
+      "end": 1.8399999999999999,
+      "duration": 0.01,
+      "text": "The following content is provided under"
+    },
+    {
+      "index": 1,
+      "start": 1.8399999999999999,
+      "end": 4.35,
+      "duration": 2.51,
+      "text": "a Creative Commons license. Your support"
+    },
+    {
+      "index": 2,
+      "start": 4.36,
+      "end": 6.63,
+      "duration": 2.27,
+      "text": "will help MIT OpenCourseWare continue to"
+    },
+    {
+      "index": 3,
+      "start": 6.64,
+      "end": 8.87,
+      "duration": 2.23,
+      "text": "offer high-quality educational resources"
+    },
+    {
+      "index": 4,
+      "start": 8.88,
+      "end": 9.95,
+      "duration": 1.07,
+      "text": "for free."
+    },
+    {
+      "index": 5,
+      "start": 9.96,
+      "end": 11.99,
+      "duration": 2.03,
+      "text": "To make a donation or to view additional"
+    },
+    {
+      "index": 6,
+      "start": 12.0,
+      "end": 14.79,
+      "duration": 2.79,
+      "text": "materials from hundreds of MIT courses,"
+    },
+    {
+      "index": 7,
+      "start": 14.8,
+      "end": 21.95,
+      "duration": 7.15,
+      "text": "visit MIT OpenCourseWare at ocw.mit.edu."
+    },
+    {
+      "index": 8,
+      "start": 29.15,
+      "end": 29.16,
+      "duration": 0.01,
+      "text": "And"
+    },
+    {
+      "index": 9,
+      "start": 29.16,
+      "end": 31.59,
+      "duration": 2.43,
+      "text": "so this is unit two"
+    },
+    {
+      "index": 10,
+      "start": 31.6,
+      "end": 39.03,
+      "duration": 7.43,
+      "text": "and it's called applications"
+    },
+    {
+      "index": 11,
+      "start": 51.19,
+      "end": 51.2,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 12,
+      "start": 51.2,
+      "end": 53.75,
+      "duration": 2.55,
+      "text": "So, the first"
+    },
+    {
+      "index": 13,
+      "start": 53.76,
+      "end": 56.07,
+      "duration": 2.31,
+      "text": "application, and we're going to do two"
+    },
+    {
+      "index": 14,
+      "start": 56.08,
+      "end": 57.39,
+      "duration": 1.31,
+      "text": "today,"
+    },
+    {
+      "index": 15,
+      "start": 57.4,
+      "end": 59.35,
+      "duration": 1.95,
+      "text": "is what are known as linear"
+    },
+    {
+      "index": 16,
+      "start": 59.36,
+      "end": 64.03,
+      "duration": 4.67,
+      "text": "approximations."
+    },
+    {
+      "index": 17,
+      "start": 66.27,
+      "end": 66.28,
+      "duration": 0.01,
+      "text": "Oops, that should have two P's in it."
+    },
+    {
+      "index": 18,
+      "start": 66.28,
+      "end": 72.47,
+      "duration": 6.19,
+      "text": "Approximations."
+    },
+    {
+      "index": 19,
+      "start": 73.99,
+      "end": 74.0,
+      "duration": 0.01,
+      "text": "So,"
+    },
+    {
+      "index": 20,
+      "start": 74.0,
+      "end": 76.31,
+      "duration": 2.31,
+      "text": "that can be summarized with one formula,"
+    },
+    {
+      "index": 21,
+      "start": 76.32,
+      "end": 77.95,
+      "duration": 1.63,
+      "text": "but it's going to take us"
+    },
+    {
+      "index": 22,
+      "start": 77.96,
+      "end": 79.75,
+      "duration": 1.79,
+      "text": "at least half an hour to explain how"
+    },
+    {
+      "index": 23,
+      "start": 79.76,
+      "end": 81.99,
+      "duration": 2.23,
+      "text": "this formula is used."
+    },
+    {
+      "index": 24,
+      "start": 82.0,
+      "end": 84.07,
+      "duration": 2.07,
+      "text": "So, here's the formula."
+    },
+    {
+      "index": 25,
+      "start": 84.08,
+      "end": 86.03,
+      "duration": 1.95,
+      "text": "It's f of x"
+    },
+    {
+      "index": 26,
+      "start": 86.04,
+      "end": 89.47,
+      "duration": 3.43,
+      "text": "is approximately equal to"
+    },
+    {
+      "index": 27,
+      "start": 89.48,
+      "end": 94.19,
+      "duration": 4.71,
+      "text": "its value at a at a base point plus"
+    },
+    {
+      "index": 28,
+      "start": 94.2,
+      "end": 98.39,
+      "duration": 4.19,
+      "text": "the derivative times x minus x zero."
+    },
+    {
+      "index": 29,
+      "start": 98.4,
+      "end": 102.79,
+      "duration": 4.39,
+      "text": "All right, so this is the main formula"
+    },
+    {
+      "index": 30,
+      "start": 102.8,
+      "end": 104.35,
+      "duration": 1.55,
+      "text": "for right now."
+    },
+    {
+      "index": 31,
+      "start": 104.36,
+      "end": 112.11,
+      "duration": 7.75,
+      "text": "Put it in a box."
+    },
+    {
+      "index": 32,
+      "start": 113.19,
+      "end": 113.2,
+      "duration": 0.01,
+      "text": "And"
+    },
+    {
+      "index": 33,
+      "start": 113.2,
+      "end": 117.83,
+      "duration": 4.63,
+      "text": "let me just describe"
+    },
+    {
+      "index": 34,
+      "start": 119.79,
+      "end": 119.8,
+      "duration": 0.01,
+      "text": "then I'll describe what it means again"
+    },
+    {
+      "index": 35,
+      "start": 119.8,
+      "end": 122.95,
+      "duration": 3.15,
+      "text": "and several other times. So, first of"
+    },
+    {
+      "index": 36,
+      "start": 122.96,
+      "end": 125.27,
+      "duration": 2.31,
+      "text": "all, what it means is that if you have a"
+    },
+    {
+      "index": 37,
+      "start": 125.28,
+      "end": 127.15,
+      "duration": 1.87,
+      "text": "curve"
+    },
+    {
+      "index": 38,
+      "start": 127.16,
+      "end": 128.23,
+      "duration": 1.07,
+      "text": "which is"
+    },
+    {
+      "index": 39,
+      "start": 128.24,
+      "end": 131.15,
+      "duration": 2.91,
+      "text": "y = f of x,"
+    },
+    {
+      "index": 40,
+      "start": 131.16,
+      "end": 134.35,
+      "duration": 3.19,
+      "text": "it's approximately the same"
+    },
+    {
+      "index": 41,
+      "start": 134.36,
+      "end": 135.55,
+      "duration": 1.19,
+      "text": "as"
+    },
+    {
+      "index": 42,
+      "start": 135.56,
+      "end": 138.83,
+      "duration": 3.27,
+      "text": "its tangent line."
+    },
+    {
+      "index": 43,
+      "start": 165.67,
+      "end": 165.68,
+      "duration": 0.01,
+      "text": "I'm going to take the function f of x"
+    },
+    {
+      "index": 44,
+      "start": 165.68,
+      "end": 167.43,
+      "duration": 1.75,
+      "text": "which is"
+    },
+    {
+      "index": 45,
+      "start": 167.44,
+      "end": 170.31,
+      "duration": 2.87,
+      "text": "log x"
+    },
+    {
+      "index": 46,
+      "start": 170.32,
+      "end": 173.47,
+      "duration": 3.15,
+      "text": "and then its derivative"
+    },
+    {
+      "index": 47,
+      "start": 173.48,
+      "end": 179.07,
+      "duration": 5.59,
+      "text": "is 1 over x."
+    },
+    {
+      "index": 48,
+      "start": 182.31,
+      "end": 182.32,
+      "duration": 0.01,
+      "text": "And uh so, let's take the base point x 0"
+    },
+    {
+      "index": 49,
+      "start": 182.32,
+      "end": 184.67,
+      "duration": 2.35,
+      "text": "is equal to 1. That's pretty much the"
+    },
+    {
+      "index": 50,
+      "start": 184.68,
+      "end": 186.55,
+      "duration": 1.87,
+      "text": "only place where we know"
+    },
+    {
+      "index": 51,
+      "start": 186.56,
+      "end": 189.15,
+      "duration": 2.59,
+      "text": "uh the logarithm for sure."
+    },
+    {
+      "index": 52,
+      "start": 189.16,
+      "end": 192.31,
+      "duration": 3.15,
+      "text": "And so, what we plug in here now are the"
+    },
+    {
+      "index": 53,
+      "start": 192.32,
+      "end": 195.949,
+      "duration": 3.629,
+      "text": "values. So, f of 1"
+    },
+    {
+      "index": 54,
+      "start": 195.959,
+      "end": 198.55,
+      "duration": 2.591,
+      "text": "is uh the log of 0 or sorry, the log of"
+    },
+    {
+      "index": 55,
+      "start": 198.56,
+      "end": 200.71,
+      "duration": 2.15,
+      "text": "1, which is 0."
+    },
+    {
+      "index": 56,
+      "start": 200.72,
+      "end": 202.91,
+      "duration": 2.19,
+      "text": "And f prime of 1,"
+    },
+    {
+      "index": 57,
+      "start": 202.92,
+      "end": 206.949,
+      "duration": 4.029,
+      "text": "well, that's 1 over 1, which is 1."
+    },
+    {
+      "index": 58,
+      "start": 208.949,
+      "end": 208.959,
+      "duration": 0.01,
+      "text": "All right? So, now we have an"
+    },
+    {
+      "index": 59,
+      "start": 208.959,
+      "end": 211.71,
+      "duration": 2.751,
+      "text": "approximation formula, which if I copy"
+    },
+    {
+      "index": 60,
+      "start": 211.72,
+      "end": 213.99,
+      "duration": 2.27,
+      "text": "down what's right up here,"
+    },
+    {
+      "index": 61,
+      "start": 214.0,
+      "end": 216.509,
+      "duration": 2.509,
+      "text": "it's going to be log x"
+    },
+    {
+      "index": 62,
+      "start": 216.519,
+      "end": 219.39,
+      "duration": 2.871,
+      "text": "is approximately"
+    },
+    {
+      "index": 63,
+      "start": 219.4,
+      "end": 223.31,
+      "duration": 3.91,
+      "text": "So, f of 0 is is 0, right?"
+    },
+    {
+      "index": 64,
+      "start": 223.32,
+      "end": 226.59,
+      "duration": 3.27,
+      "text": "Plus 1 *"
+    },
+    {
+      "index": 65,
+      "start": 226.6,
+      "end": 228.99,
+      "duration": 2.39,
+      "text": "x - 1."
+    },
+    {
+      "index": 66,
+      "start": 229.0,
+      "end": 232.39,
+      "duration": 3.39,
+      "text": "All right? So, I plugged in here for x"
+    },
+    {
+      "index": 67,
+      "start": 232.4,
+      "end": 234.59,
+      "duration": 2.19,
+      "text": "places, I evaluated the"
+    },
+    {
+      "index": 68,
+      "start": 234.6,
+      "end": 236.15,
+      "duration": 1.55,
+      "text": "coefficients"
+    },
+    {
+      "index": 69,
+      "start": 236.16,
+      "end": 237.67,
+      "duration": 1.51,
+      "text": "and"
+    },
+    {
+      "index": 70,
+      "start": 237.68,
+      "end": 239.47,
+      "duration": 1.79,
+      "text": "this is the"
+    },
+    {
+      "index": 71,
+      "start": 239.48,
+      "end": 242.47,
+      "duration": 2.99,
+      "text": "dependent variable. So, so all told, if"
+    },
+    {
+      "index": 72,
+      "start": 242.48,
+      "end": 244.15,
+      "duration": 1.67,
+      "text": "you like, what I have here is that the"
+    },
+    {
+      "index": 73,
+      "start": 244.16,
+      "end": 247.75,
+      "duration": 3.59,
+      "text": "logarithm of x is approximately x minus"
+    },
+    {
+      "index": 74,
+      "start": 247.76,
+      "end": 251.27,
+      "duration": 3.51,
+      "text": "1."
+    },
+    {
+      "index": 75,
+      "start": 264.03,
+      "end": 264.04,
+      "duration": 0.01,
+      "text": "And then"
+    },
+    {
+      "index": 76,
+      "start": 264.04,
+      "end": 265.43,
+      "duration": 1.39,
+      "text": "I'll draw in"
+    },
+    {
+      "index": 77,
+      "start": 265.44,
+      "end": 267.19,
+      "duration": 1.75,
+      "text": "the tangent line at the place that we're"
+    },
+    {
+      "index": 78,
+      "start": 267.2,
+      "end": 270.71,
+      "duration": 3.51,
+      "text": "considering, which is x = 1. So, here's"
+    },
+    {
+      "index": 79,
+      "start": 270.72,
+      "end": 273.07,
+      "duration": 2.35,
+      "text": "the tangent line."
+    },
+    {
+      "index": 80,
+      "start": 273.08,
+      "end": 274.909,
+      "duration": 1.829,
+      "text": "All right, I separated a little bit, but"
+    },
+    {
+      "index": 81,
+      "start": 274.919,
+      "end": 275.99,
+      "duration": 1.071,
+      "text": "really I probably should have drawn it a"
+    },
+    {
+      "index": 82,
+      "start": 276.0,
+      "end": 278.11,
+      "duration": 2.11,
+      "text": "little closer there to show you. The"
+    },
+    {
+      "index": 83,
+      "start": 278.12,
+      "end": 279.909,
+      "duration": 1.789,
+      "text": "whole point is that these two are"
+    },
+    {
+      "index": 84,
+      "start": 279.919,
+      "end": 282.99,
+      "duration": 3.071,
+      "text": "nearby."
+    },
+    {
+      "index": 85,
+      "start": 284.55,
+      "end": 284.56,
+      "duration": 0.01,
+      "text": "But they're not nearby everywhere. So,"
+    },
+    {
+      "index": 86,
+      "start": 284.56,
+      "end": 287.03,
+      "duration": 2.47,
+      "text": "this is this is uh the line"
+    },
+    {
+      "index": 87,
+      "start": 287.04,
+      "end": 290.15,
+      "duration": 3.11,
+      "text": "y = x - 1."
+    },
+    {
+      "index": 88,
+      "start": 290.16,
+      "end": 291.99,
+      "duration": 1.83,
+      "text": "All right, that's the tangent line."
+    },
+    {
+      "index": 89,
+      "start": 292.0,
+      "end": 295.07,
+      "duration": 3.07,
+      "text": "They're nearby only when x is near 1."
+    },
+    {
+      "index": 90,
+      "start": 295.08,
+      "end": 298.07,
+      "duration": 2.99,
+      "text": "So, say in this little realm here."
+    },
+    {
+      "index": 91,
+      "start": 298.08,
+      "end": 301.55,
+      "duration": 3.47,
+      "text": "So, when x is approximately 1"
+    },
+    {
+      "index": 92,
+      "start": 301.56,
+      "end": 305.11,
+      "duration": 3.55,
+      "text": "this is true."
+    },
+    {
+      "index": 93,
+      "start": 306.75,
+      "end": 306.76,
+      "duration": 0.01,
+      "text": "Once you get a little farther away, this"
+    },
+    {
+      "index": 94,
+      "start": 306.76,
+      "end": 308.27,
+      "duration": 1.51,
+      "text": "straight line the straight green line"
+    },
+    {
+      "index": 95,
+      "start": 308.28,
+      "end": 310.63,
+      "duration": 2.35,
+      "text": "will separate from the graph."
+    },
+    {
+      "index": 96,
+      "start": 310.64,
+      "end": 312.23,
+      "duration": 1.59,
+      "text": "But near this place, they're close"
+    },
+    {
+      "index": 97,
+      "start": 312.24,
+      "end": 314.31,
+      "duration": 2.07,
+      "text": "together."
+    },
+    {
+      "index": 98,
+      "start": 314.32,
+      "end": 316.15,
+      "duration": 1.83,
+      "text": "All right, so the idea again is that the"
+    },
+    {
+      "index": 99,
+      "start": 316.16,
+      "end": 318.67,
+      "duration": 2.51,
+      "text": "curve the curved line is approximately"
+    },
+    {
+      "index": 100,
+      "start": 318.68,
+      "end": 320.95,
+      "duration": 2.27,
+      "text": "the tangent line, and this is one"
+    },
+    {
+      "index": 101,
+      "start": 320.96,
+      "end": 325.39,
+      "duration": 4.43,
+      "text": "example of it."
+    },
+    {
+      "index": 102,
+      "start": 326.87,
+      "end": 326.88,
+      "duration": 0.01,
+      "text": "All right, so"
+    },
+    {
+      "index": 103,
+      "start": 326.88,
+      "end": 329.35,
+      "duration": 2.47,
+      "text": "I want to explain this in in in one more"
+    },
+    {
+      "index": 104,
+      "start": 329.36,
+      "end": 331.19,
+      "duration": 1.83,
+      "text": "way and then we want to"
+    },
+    {
+      "index": 105,
+      "start": 331.2,
+      "end": 333.87,
+      "duration": 2.67,
+      "text": "discuss it systematically. So, the"
+    },
+    {
+      "index": 106,
+      "start": 333.88,
+      "end": 336.95,
+      "duration": 3.07,
+      "text": "second way that I want to describe this"
+    },
+    {
+      "index": 107,
+      "start": 336.96,
+      "end": 338.75,
+      "duration": 1.79,
+      "text": "uh requires me to remind you what the"
+    },
+    {
+      "index": 108,
+      "start": 338.76,
+      "end": 341.31,
+      "duration": 2.55,
+      "text": "definition of the derivative is."
+    },
+    {
+      "index": 109,
+      "start": 341.32,
+      "end": 344.43,
+      "duration": 3.11,
+      "text": "So"
+    },
+    {
+      "index": 110,
+      "start": 346.67,
+      "end": 346.68,
+      "duration": 0.01,
+      "text": "the definition of a derivative is that"
+    },
+    {
+      "index": 111,
+      "start": 346.68,
+      "end": 348.55,
+      "duration": 1.87,
+      "text": "it's the limit"
+    },
+    {
+      "index": 112,
+      "start": 348.56,
+      "end": 352.51,
+      "duration": 3.95,
+      "text": "as delta X goes to zero of"
+    },
+    {
+      "index": 113,
+      "start": 354.35,
+      "end": 354.36,
+      "duration": 0.01,
+      "text": "delta F over delta X. That's one way of"
+    },
+    {
+      "index": 114,
+      "start": 354.36,
+      "end": 355.67,
+      "duration": 1.31,
+      "text": "writing it."
+    },
+    {
+      "index": 115,
+      "start": 355.68,
+      "end": 357.31,
+      "duration": 1.63,
+      "text": "All right? And this is the way we"
+    },
+    {
+      "index": 116,
+      "start": 357.32,
+      "end": 361.31,
+      "duration": 3.99,
+      "text": "defined it."
+    },
+    {
+      "index": 117,
+      "start": 363.03,
+      "end": 363.04,
+      "duration": 0.01,
+      "text": "And one of the things that we did in the"
+    },
+    {
+      "index": 118,
+      "start": 363.04,
+      "end": 365.35,
+      "duration": 2.31,
+      "text": "first unit was we looked at this"
+    },
+    {
+      "index": 119,
+      "start": 365.36,
+      "end": 369.07,
+      "duration": 3.71,
+      "text": "backwards."
+    },
+    {
+      "index": 120,
+      "start": 371.59,
+      "end": 371.6,
+      "duration": 0.01,
+      "text": "We used the derivative, knowing the"
+    },
+    {
+      "index": 121,
+      "start": 371.6,
+      "end": 373.71,
+      "duration": 2.11,
+      "text": "derivatives of functions to evaluate"
+    },
+    {
+      "index": 122,
+      "start": 373.72,
+      "end": 375.51,
+      "duration": 1.79,
+      "text": "some limits."
+    },
+    {
+      "index": 123,
+      "start": 375.52,
+      "end": 377.79,
+      "duration": 2.27,
+      "text": "So you were supposed to do that on your"
+    },
+    {
+      "index": 124,
+      "start": 377.8,
+      "end": 378.87,
+      "duration": 1.07,
+      "text": "uh"
+    },
+    {
+      "index": 125,
+      "start": 378.88,
+      "end": 381.03,
+      "duration": 2.15,
+      "text": "hour test. There were some examples"
+    },
+    {
+      "index": 126,
+      "start": 381.04,
+      "end": 382.51,
+      "duration": 1.47,
+      "text": "there, at least one example, where that"
+    },
+    {
+      "index": 127,
+      "start": 382.52,
+      "end": 386.19,
+      "duration": 3.67,
+      "text": "was the easiest way to do the problem."
+    },
+    {
+      "index": 128,
+      "start": 386.2,
+      "end": 387.71,
+      "duration": 1.51,
+      "text": "So in other words, you can read this"
+    },
+    {
+      "index": 129,
+      "start": 387.72,
+      "end": 389.35,
+      "duration": 1.63,
+      "text": "equation both ways. This is really, of"
+    },
+    {
+      "index": 130,
+      "start": 389.36,
+      "end": 391.79,
+      "duration": 2.43,
+      "text": "course, the same equation written twice."
+    },
+    {
+      "index": 131,
+      "start": 391.8,
+      "end": 393.55,
+      "duration": 1.75,
+      "text": "Now, what's new about what we're going"
+    },
+    {
+      "index": 132,
+      "start": 393.56,
+      "end": 394.99,
+      "duration": 1.43,
+      "text": "to do now"
+    },
+    {
+      "index": 133,
+      "start": 395.0,
+      "end": 396.19,
+      "duration": 1.19,
+      "text": "is"
+    },
+    {
+      "index": 134,
+      "start": 396.2,
+      "end": 399.07,
+      "duration": 2.87,
+      "text": "that we're going to take this expression"
+    },
+    {
+      "index": 135,
+      "start": 399.08,
+      "end": 402.27,
+      "duration": 3.19,
+      "text": "here, delta F over delta X,"
+    },
+    {
+      "index": 136,
+      "start": 402.28,
+      "end": 403.55,
+      "duration": 1.27,
+      "text": "and we're going to say, \"Well, when"
+    },
+    {
+      "index": 137,
+      "start": 403.56,
+      "end": 406.03,
+      "duration": 2.47,
+      "text": "delta X is fairly near zero, this"
+    },
+    {
+      "index": 138,
+      "start": 406.04,
+      "end": 407.909,
+      "duration": 1.869,
+      "text": "expression is going to be fairly close"
+    },
+    {
+      "index": 139,
+      "start": 407.919,
+      "end": 410.03,
+      "duration": 2.111,
+      "text": "to the limiting value. So this is"
+    },
+    {
+      "index": 140,
+      "start": 410.04,
+      "end": 413.51,
+      "duration": 3.47,
+      "text": "approximately F prime of X zero.\""
+    },
+    {
+      "index": 141,
+      "start": 413.52,
+      "end": 416.67,
+      "duration": 3.15,
+      "text": "All right? So that, I claim, is the same"
+    },
+    {
+      "index": 142,
+      "start": 416.68,
+      "end": 418.95,
+      "duration": 2.27,
+      "text": "as what's"
+    },
+    {
+      "index": 143,
+      "start": 418.96,
+      "end": 421.63,
+      "duration": 2.67,
+      "text": "in the box in pink that I have over"
+    },
+    {
+      "index": 144,
+      "start": 421.64,
+      "end": 422.55,
+      "duration": 0.91,
+      "text": "here."
+    },
+    {
+      "index": 145,
+      "start": 422.56,
+      "end": 424.39,
+      "duration": 1.83,
+      "text": "All right? So this"
+    },
+    {
+      "index": 146,
+      "start": 424.4,
+      "end": 429.23,
+      "duration": 4.83,
+      "text": "equa- this approximation formula here"
+    },
+    {
+      "index": 147,
+      "start": 429.24,
+      "end": 431.31,
+      "duration": 2.07,
+      "text": "is the same as this one. This is an"
+    },
+    {
+      "index": 148,
+      "start": 431.32,
+      "end": 433.87,
+      "duration": 2.55,
+      "text": "average rate of change,"
+    },
+    {
+      "index": 149,
+      "start": 433.88,
+      "end": 436.03,
+      "duration": 2.15,
+      "text": "and this is an infinitesimal rate of"
+    },
+    {
+      "index": 150,
+      "start": 436.04,
+      "end": 437.95,
+      "duration": 1.91,
+      "text": "change, and they're nearly the same."
+    },
+    {
+      "index": 151,
+      "start": 437.96,
+      "end": 440.23,
+      "duration": 2.27,
+      "text": "That's the claim. So you'll have various"
+    },
+    {
+      "index": 152,
+      "start": 440.24,
+      "end": 442.95,
+      "duration": 2.71,
+      "text": "exercises in which this approximation is"
+    },
+    {
+      "index": 153,
+      "start": 442.96,
+      "end": 446.51,
+      "duration": 3.55,
+      "text": "the useful one to to use, and I will as"
+    },
+    {
+      "index": 154,
+      "start": 446.52,
+      "end": 447.75,
+      "duration": 1.23,
+      "text": "I said, I'll be illustrating this a"
+    },
+    {
+      "index": 155,
+      "start": 447.76,
+      "end": 448.909,
+      "duration": 1.149,
+      "text": "little bit"
+    },
+    {
+      "index": 156,
+      "start": 448.919,
+      "end": 451.79,
+      "duration": 2.871,
+      "text": "today. Now, let me just explain why"
+    },
+    {
+      "index": 157,
+      "start": 451.8,
+      "end": 454.35,
+      "duration": 2.55,
+      "text": "those two formulas in the boxes are the"
+    },
+    {
+      "index": 158,
+      "start": 454.36,
+      "end": 455.67,
+      "duration": 1.31,
+      "text": "same."
+    },
+    {
+      "index": 159,
+      "start": 455.68,
+      "end": 458.47,
+      "duration": 2.79,
+      "text": "All right? So let's just"
+    },
+    {
+      "index": 160,
+      "start": 458.48,
+      "end": 460.27,
+      "duration": 1.79,
+      "text": "start over here"
+    },
+    {
+      "index": 161,
+      "start": 460.28,
+      "end": 464.79,
+      "duration": 4.51,
+      "text": "and explain that. So the the smaller box"
+    },
+    {
+      "index": 162,
+      "start": 464.8,
+      "end": 467.15,
+      "duration": 2.35,
+      "text": "is the same thing if I multiply through"
+    },
+    {
+      "index": 163,
+      "start": 467.16,
+      "end": 470.95,
+      "duration": 3.79,
+      "text": "by delta X as delta F is approximately F"
+    },
+    {
+      "index": 164,
+      "start": 470.96,
+      "end": 474.15,
+      "duration": 3.19,
+      "text": "prime of X zero delta X."
+    },
+    {
+      "index": 165,
+      "start": 474.16,
+      "end": 475.59,
+      "duration": 1.43,
+      "text": "All right?"
+    },
+    {
+      "index": 166,
+      "start": 475.6,
+      "end": 477.39,
+      "duration": 1.79,
+      "text": "And now if I just write out what this"
+    },
+    {
+      "index": 167,
+      "start": 477.4,
+      "end": 478.95,
+      "duration": 1.55,
+      "text": "is,"
+    },
+    {
+      "index": 168,
+      "start": 478.96,
+      "end": 482.63,
+      "duration": 3.67,
+      "text": "it's F of X"
+    },
+    {
+      "index": 169,
+      "start": 482.64,
+      "end": 484.95,
+      "duration": 2.31,
+      "text": "uh"
+    },
+    {
+      "index": 170,
+      "start": 484.96,
+      "end": 487.51,
+      "duration": 2.55,
+      "text": "right? Uh"
+    },
+    {
+      "index": 171,
+      "start": 487.52,
+      "end": 489.79,
+      "duration": 2.27,
+      "text": "minus F of X zero."
+    },
+    {
+      "index": 172,
+      "start": 489.8,
+      "end": 491.63,
+      "duration": 1.83,
+      "text": "I'm going to write it this way,"
+    },
+    {
+      "index": 173,
+      "start": 491.64,
+      "end": 493.35,
+      "duration": 1.71,
+      "text": "which is approximately F prime of X"
+    },
+    {
+      "index": 174,
+      "start": 493.36,
+      "end": 494.47,
+      "duration": 1.11,
+      "text": "zero."
+    },
+    {
+      "index": 175,
+      "start": 494.48,
+      "end": 497.03,
+      "duration": 2.55,
+      "text": "And this is X minus X zero. So, here I'm"
+    },
+    {
+      "index": 176,
+      "start": 497.04,
+      "end": 499.55,
+      "duration": 2.51,
+      "text": "using the notations delta X"
+    },
+    {
+      "index": 177,
+      "start": 499.56,
+      "end": 505.55,
+      "duration": 5.99,
+      "text": "is X minus X zero."
+    },
+    {
+      "index": 178,
+      "start": 507.909,
+      "end": 507.919,
+      "duration": 0.01,
+      "text": "And so, this is the change in F."
+    },
+    {
+      "index": 179,
+      "start": 507.919,
+      "end": 512.35,
+      "duration": 4.431,
+      "text": "This is just rewriting what delta X is."
+    },
+    {
+      "index": 180,
+      "start": 512.36,
+      "end": 515.51,
+      "duration": 3.15,
+      "text": "And now, the only the last step is just"
+    },
+    {
+      "index": 181,
+      "start": 515.52,
+      "end": 517.39,
+      "duration": 1.87,
+      "text": "to put the constant on the other side."
+    },
+    {
+      "index": 182,
+      "start": 517.4,
+      "end": 521.11,
+      "duration": 3.71,
+      "text": "So, F of X is approximately F of X zero"
+    },
+    {
+      "index": 183,
+      "start": 521.12,
+      "end": 524.23,
+      "duration": 3.11,
+      "text": "plus F prime of X zero"
+    },
+    {
+      "index": 184,
+      "start": 524.24,
+      "end": 526.99,
+      "duration": 2.75,
+      "text": "X minus X zero. So,"
+    },
+    {
+      "index": 185,
+      "start": 527.0,
+      "end": 528.99,
+      "duration": 1.99,
+      "text": "this is this this is exactly what I had"
+    },
+    {
+      "index": 186,
+      "start": 529.0,
+      "end": 532.03,
+      "duration": 3.03,
+      "text": "in the just to begin with. All right?"
+    },
+    {
+      "index": 187,
+      "start": 532.04,
+      "end": 533.67,
+      "duration": 1.63,
+      "text": "So, these two are just algebraically the"
+    },
+    {
+      "index": 188,
+      "start": 533.68,
+      "end": 536.67,
+      "duration": 2.99,
+      "text": "same statement."
+    },
+    {
+      "index": 189,
+      "start": 536.68,
+      "end": 540.63,
+      "duration": 3.95,
+      "text": "This one one other way of looking at it."
+    },
+    {
+      "index": 190,
+      "start": 540.64,
+      "end": 543.35,
+      "duration": 2.71,
+      "text": "All right. So, now"
+    },
+    {
+      "index": 191,
+      "start": 543.36,
+      "end": 545.55,
+      "duration": 2.19,
+      "text": "I want to I want to go through some"
+    },
+    {
+      "index": 192,
+      "start": 545.56,
+      "end": 548.03,
+      "duration": 2.47,
+      "text": "systematic discussion here"
+    },
+    {
+      "index": 193,
+      "start": 548.04,
+      "end": 551.27,
+      "duration": 3.23,
+      "text": "of several linear approximations,"
+    },
+    {
+      "index": 194,
+      "start": 551.28,
+      "end": 553.47,
+      "duration": 2.19,
+      "text": "which you're going to be wanting to"
+    },
+    {
+      "index": 195,
+      "start": 553.48,
+      "end": 555.95,
+      "duration": 2.47,
+      "text": "memorize. And"
+    },
+    {
+      "index": 196,
+      "start": 555.96,
+      "end": 557.79,
+      "duration": 1.83,
+      "text": "rather than it's being hard to memorize"
+    },
+    {
+      "index": 197,
+      "start": 557.8,
+      "end": 559.95,
+      "duration": 2.15,
+      "text": "these, it's supposed to remind you. So,"
+    },
+    {
+      "index": 198,
+      "start": 559.96,
+      "end": 562.79,
+      "duration": 2.83,
+      "text": "you have a lot of extra reinforcement in"
+    },
+    {
+      "index": 199,
+      "start": 562.8,
+      "end": 565.31,
+      "duration": 2.51,
+      "text": "remembering derivatives of all kinds."
+    },
+    {
+      "index": 200,
+      "start": 565.32,
+      "end": 566.829,
+      "duration": 1.509,
+      "text": "So,"
+    },
+    {
+      "index": 201,
+      "start": 566.839,
+      "end": 568.71,
+      "duration": 1.871,
+      "text": "when we when we carry out these"
+    },
+    {
+      "index": 202,
+      "start": 568.72,
+      "end": 570.87,
+      "duration": 2.15,
+      "text": "systematic discussions,"
+    },
+    {
+      "index": 203,
+      "start": 570.88,
+      "end": 572.91,
+      "duration": 2.03,
+      "text": "it's we want to make things absolutely"
+    },
+    {
+      "index": 204,
+      "start": 572.92,
+      "end": 575.79,
+      "duration": 2.87,
+      "text": "as simple as possible. And so, one of"
+    },
+    {
+      "index": 205,
+      "start": 575.8,
+      "end": 578.07,
+      "duration": 2.27,
+      "text": "the things that we do is we always use"
+    },
+    {
+      "index": 206,
+      "start": 578.08,
+      "end": 580.71,
+      "duration": 2.63,
+      "text": "the base point to be x zero. So, I'm"
+    },
+    {
+      "index": 207,
+      "start": 580.72,
+      "end": 583.07,
+      "duration": 2.35,
+      "text": "always going to have x zero is equal to"
+    },
+    {
+      "index": 208,
+      "start": 583.08,
+      "end": 586.27,
+      "duration": 3.19,
+      "text": "zero in these uh standard list of"
+    },
+    {
+      "index": 209,
+      "start": 586.28,
+      "end": 588.31,
+      "duration": 2.03,
+      "text": "formulas that I'm going to uh going to"
+    },
+    {
+      "index": 210,
+      "start": 588.32,
+      "end": 591.15,
+      "duration": 2.83,
+      "text": "use. And if I put x zero equals zero,"
+    },
+    {
+      "index": 211,
+      "start": 591.16,
+      "end": 594.51,
+      "duration": 3.35,
+      "text": "then this formula becomes f of x a"
+    },
+    {
+      "index": 212,
+      "start": 594.52,
+      "end": 596.87,
+      "duration": 2.35,
+      "text": "little bit simpler to read. It becomes f"
+    },
+    {
+      "index": 213,
+      "start": 596.88,
+      "end": 601.11,
+      "duration": 4.23,
+      "text": "of x is f of zero plus f prime of zero"
+    },
+    {
+      "index": 214,
+      "start": 601.12,
+      "end": 602.83,
+      "duration": 1.71,
+      "text": "times x."
+    },
+    {
+      "index": 215,
+      "start": 602.84,
+      "end": 605.67,
+      "duration": 2.83,
+      "text": "All right? So, this is probably the form"
+    },
+    {
+      "index": 216,
+      "start": 605.68,
+      "end": 610.71,
+      "duration": 5.03,
+      "text": "that you'll want to remember most."
+    },
+    {
+      "index": 217,
+      "start": 611.63,
+      "end": 611.64,
+      "duration": 0.01,
+      "text": "That's again just a linear"
+    },
+    {
+      "index": 218,
+      "start": 611.64,
+      "end": 613.71,
+      "duration": 2.07,
+      "text": "approximation, but"
+    },
+    {
+      "index": 219,
+      "start": 613.72,
+      "end": 616.27,
+      "duration": 2.55,
+      "text": "one always has to remember, and this is"
+    },
+    {
+      "index": 220,
+      "start": 616.28,
+      "end": 617.07,
+      "duration": 0.79,
+      "text": "a a a a"
+    },
+    {
+      "index": 221,
+      "start": 617.08,
+      "end": 619.27,
+      "duration": 2.19,
+      "text": "a very important thing, it this one only"
+    },
+    {
+      "index": 222,
+      "start": 619.28,
+      "end": 622.67,
+      "duration": 3.39,
+      "text": "worked near x is one."
+    },
+    {
+      "index": 223,
+      "start": 622.68,
+      "end": 624.75,
+      "duration": 2.07,
+      "text": "This approximation here really only"
+    },
+    {
+      "index": 224,
+      "start": 624.76,
+      "end": 628.83,
+      "duration": 4.07,
+      "text": "works when x is near x zero."
+    },
+    {
+      "index": 225,
+      "start": 628.84,
+      "end": 630.75,
+      "duration": 1.91,
+      "text": "All right? So, that's a little addition"
+    },
+    {
+      "index": 226,
+      "start": 630.76,
+      "end": 632.35,
+      "duration": 1.59,
+      "text": "that you need to throw in. So, this one"
+    },
+    {
+      "index": 227,
+      "start": 632.36,
+      "end": 634.71,
+      "duration": 2.35,
+      "text": "works when x"
+    },
+    {
+      "index": 228,
+      "start": 634.72,
+      "end": 638.43,
+      "duration": 3.71,
+      "text": "is near zero."
+    },
+    {
+      "index": 229,
+      "start": 640.27,
+      "end": 640.28,
+      "duration": 0.01,
+      "text": "Right? You can't expect it to be true"
+    },
+    {
+      "index": 230,
+      "start": 640.28,
+      "end": 641.79,
+      "duration": 1.51,
+      "text": "far away. The curve can go anywhere it"
+    },
+    {
+      "index": 231,
+      "start": 641.8,
+      "end": 644.99,
+      "duration": 3.19,
+      "text": "wants when it's far away from the point"
+    },
+    {
+      "index": 232,
+      "start": 645.0,
+      "end": 646.55,
+      "duration": 1.55,
+      "text": "of tangency."
+    },
+    {
+      "index": 233,
+      "start": 646.56,
+      "end": 649.31,
+      "duration": 2.75,
+      "text": "So, okay. So, let's work this out. Let's"
+    },
+    {
+      "index": 234,
+      "start": 649.32,
+      "end": 651.59,
+      "duration": 2.27,
+      "text": "do it for the sine function,"
+    },
+    {
+      "index": 235,
+      "start": 651.6,
+      "end": 653.67,
+      "duration": 2.07,
+      "text": "for the cosine function,"
+    },
+    {
+      "index": 236,
+      "start": 653.68,
+      "end": 656.91,
+      "duration": 3.23,
+      "text": "and for e to the x to begin with. Yeah,"
+    },
+    {
+      "index": 237,
+      "start": 656.92,
+      "end": 662.51,
+      "duration": 5.59,
+      "text": "question."
+    },
+    {
+      "index": 238,
+      "start": 664.63,
+      "end": 664.64,
+      "duration": 0.01,
+      "text": "Yeah, when does this one work? Well, so"
+    },
+    {
+      "index": 239,
+      "start": 664.64,
+      "end": 666.79,
+      "duration": 2.15,
+      "text": "this The question was when does this one"
+    },
+    {
+      "index": 240,
+      "start": 666.8,
+      "end": 668.91,
+      "duration": 2.11,
+      "text": "work? Again, this is when x is"
+    },
+    {
+      "index": 241,
+      "start": 668.92,
+      "end": 672.11,
+      "duration": 3.19,
+      "text": "approximately x zero."
+    },
+    {
+      "index": 242,
+      "start": 672.12,
+      "end": 674.43,
+      "duration": 2.31,
+      "text": "Cuz it's actually the same"
+    },
+    {
+      "index": 243,
+      "start": 674.44,
+      "end": 678.15,
+      "duration": 3.71,
+      "text": "as this one over here."
+    },
+    {
+      "index": 244,
+      "start": 680.11,
+      "end": 680.12,
+      "duration": 0.01,
+      "text": "Okay?"
+    },
+    {
+      "index": 245,
+      "start": 680.12,
+      "end": 681.67,
+      "duration": 1.55,
+      "text": "And indeed,"
+    },
+    {
+      "index": 246,
+      "start": 681.68,
+      "end": 683.11,
+      "duration": 1.43,
+      "text": "that's what's going on when we when we"
+    },
+    {
+      "index": 247,
+      "start": 683.12,
+      "end": 685.39,
+      "duration": 2.27,
+      "text": "take this this limiting value. Delta x"
+    },
+    {
+      "index": 248,
+      "start": 685.4,
+      "end": 687.23,
+      "duration": 1.83,
+      "text": "going to zero is the same. Delta x"
+    },
+    {
+      "index": 249,
+      "start": 687.24,
+      "end": 689.15,
+      "duration": 1.91,
+      "text": "small. So, another way of saying it is"
+    },
+    {
+      "index": 250,
+      "start": 689.16,
+      "end": 695.03,
+      "duration": 5.87,
+      "text": "that delta x is"
+    },
+    {
+      "index": 251,
+      "start": 697.03,
+      "end": 697.04,
+      "duration": 0.01,
+      "text": "All right?"
+    },
+    {
+      "index": 252,
+      "start": 697.04,
+      "end": 699.11,
+      "duration": 2.07,
+      "text": "Now, exactly what we mean by small will"
+    },
+    {
+      "index": 253,
+      "start": 699.12,
+      "end": 701.07,
+      "duration": 1.95,
+      "text": "also be explaining."
+    },
+    {
+      "index": 254,
+      "start": 701.08,
+      "end": 704.03,
+      "duration": 2.95,
+      "text": "But, uh it it is a matter of to some"
+    },
+    {
+      "index": 255,
+      "start": 704.04,
+      "end": 706.27,
+      "duration": 2.23,
+      "text": "extent of intuition as to how much how"
+    },
+    {
+      "index": 256,
+      "start": 706.28,
+      "end": 708.95,
+      "duration": 2.67,
+      "text": "good it is. In In practical cases,"
+    },
+    {
+      "index": 257,
+      "start": 708.96,
+      "end": 711.15,
+      "duration": 2.19,
+      "text": "people will really care about how small"
+    },
+    {
+      "index": 258,
+      "start": 711.16,
+      "end": 712.95,
+      "duration": 1.79,
+      "text": "it is before the approximation is"
+    },
+    {
+      "index": 259,
+      "start": 712.96,
+      "end": 716.71,
+      "duration": 3.75,
+      "text": "useful. And that's a serious issue."
+    },
+    {
+      "index": 260,
+      "start": 716.72,
+      "end": 718.31,
+      "duration": 1.59,
+      "text": "All right. So, let me carry out these"
+    },
+    {
+      "index": 261,
+      "start": 718.32,
+      "end": 721.35,
+      "duration": 3.03,
+      "text": "approximations for X. Again, this is"
+    },
+    {
+      "index": 262,
+      "start": 721.36,
+      "end": 725.63,
+      "duration": 4.27,
+      "text": "always for X near zero."
+    },
+    {
+      "index": 263,
+      "start": 726.67,
+      "end": 726.68,
+      "duration": 0.01,
+      "text": "All right?"
+    },
+    {
+      "index": 264,
+      "start": 726.68,
+      "end": 728.11,
+      "duration": 1.43,
+      "text": "So, all of these are going to be for X"
+    },
+    {
+      "index": 265,
+      "start": 728.12,
+      "end": 729.87,
+      "duration": 1.75,
+      "text": "near zero. So, in order to make this"
+    },
+    {
+      "index": 266,
+      "start": 729.88,
+      "end": 732.95,
+      "duration": 3.07,
+      "text": "computation, I have to evaluate"
+    },
+    {
+      "index": 267,
+      "start": 732.96,
+      "end": 735.83,
+      "duration": 2.87,
+      "text": "the function. It's Right, I need to plug"
+    },
+    {
+      "index": 268,
+      "start": 735.84,
+      "end": 737.83,
+      "duration": 1.99,
+      "text": "in two numbers here."
+    },
+    {
+      "index": 269,
+      "start": 737.84,
+      "end": 739.43,
+      "duration": 1.59,
+      "text": "In order to get this expression. I need"
+    },
+    {
+      "index": 270,
+      "start": 739.44,
+      "end": 740.87,
+      "duration": 1.43,
+      "text": "to know what f of zero is, and I need to"
+    },
+    {
+      "index": 271,
+      "start": 740.88,
+      "end": 743.03,
+      "duration": 2.15,
+      "text": "know what f prime of zero is. If this is"
+    },
+    {
+      "index": 272,
+      "start": 743.04,
+      "end": 745.23,
+      "duration": 2.19,
+      "text": "the function f of X,"
+    },
+    {
+      "index": 273,
+      "start": 745.24,
+      "end": 746.63,
+      "duration": 1.39,
+      "text": "then I'm going to make a little table"
+    },
+    {
+      "index": 274,
+      "start": 746.64,
+      "end": 750.31,
+      "duration": 3.67,
+      "text": "over to the right here with f prime, and"
+    },
+    {
+      "index": 275,
+      "start": 750.32,
+      "end": 752.19,
+      "duration": 1.87,
+      "text": "then I'm going to evaluate f of zero,"
+    },
+    {
+      "index": 276,
+      "start": 752.2,
+      "end": 753.67,
+      "duration": 1.47,
+      "text": "and then I'm going to evaluate f prime"
+    },
+    {
+      "index": 277,
+      "start": 753.68,
+      "end": 756.59,
+      "duration": 2.91,
+      "text": "of zero, and then read off what the"
+    },
+    {
+      "index": 278,
+      "start": 756.6,
+      "end": 758.15,
+      "duration": 1.55,
+      "text": "answers are."
+    },
+    {
+      "index": 279,
+      "start": 758.16,
+      "end": 759.67,
+      "duration": 1.51,
+      "text": "All right. So, first of all, if the"
+    },
+    {
+      "index": 280,
+      "start": 759.68,
+      "end": 762.23,
+      "duration": 2.55,
+      "text": "function is sine X, the derivative is"
+    },
+    {
+      "index": 281,
+      "start": 762.24,
+      "end": 764.23,
+      "duration": 1.99,
+      "text": "cosine X."
+    },
+    {
+      "index": 282,
+      "start": 764.24,
+      "end": 766.79,
+      "duration": 2.55,
+      "text": "The value of f at zero, that's sine of"
+    },
+    {
+      "index": 283,
+      "start": 766.8,
+      "end": 769.71,
+      "duration": 2.91,
+      "text": "zero, is zero."
+    },
+    {
+      "index": 284,
+      "start": 769.72,
+      "end": 772.51,
+      "duration": 2.79,
+      "text": "The derivative is cosine. Cosine of zero"
+    },
+    {
+      "index": 285,
+      "start": 772.52,
+      "end": 774.07,
+      "duration": 1.55,
+      "text": "is one."
+    },
+    {
+      "index": 286,
+      "start": 774.08,
+      "end": 777.15,
+      "duration": 3.07,
+      "text": "So, there we go. So, now we have the uh"
+    },
+    {
+      "index": 287,
+      "start": 777.16,
+      "end": 779.23,
+      "duration": 2.07,
+      "text": "coefficients zero and one. So, this"
+    },
+    {
+      "index": 288,
+      "start": 779.24,
+      "end": 781.15,
+      "duration": 1.91,
+      "text": "number is zero,"
+    },
+    {
+      "index": 289,
+      "start": 781.16,
+      "end": 784.43,
+      "duration": 3.27,
+      "text": "and this number is one."
+    },
+    {
+      "index": 290,
+      "start": 784.44,
+      "end": 787.51,
+      "duration": 3.07,
+      "text": "So, what we get here is zero plus one"
+    },
+    {
+      "index": 291,
+      "start": 787.52,
+      "end": 791.03,
+      "duration": 3.51,
+      "text": "times X. So, this is approximately X."
+    },
+    {
+      "index": 292,
+      "start": 791.04,
+      "end": 791.91,
+      "duration": 0.87,
+      "text": "All right. There's the linear"
+    },
+    {
+      "index": 293,
+      "start": 791.92,
+      "end": 798.03,
+      "duration": 6.11,
+      "text": "approximation to sine X."
+    },
+    {
+      "index": 294,
+      "start": 800.15,
+      "end": 800.16,
+      "duration": 0.01,
+      "text": "Similarly, so now this is a routine"
+    },
+    {
+      "index": 295,
+      "start": 800.16,
+      "end": 801.99,
+      "duration": 1.83,
+      "text": "matter to just read this off of this"
+    },
+    {
+      "index": 296,
+      "start": 802.0,
+      "end": 803.63,
+      "duration": 1.63,
+      "text": "table. We'll do it for the cosine"
+    },
+    {
+      "index": 297,
+      "start": 803.64,
+      "end": 804.829,
+      "duration": 1.189,
+      "text": "function. If you differentiate the"
+    },
+    {
+      "index": 298,
+      "start": 804.839,
+      "end": 809.27,
+      "duration": 4.431,
+      "text": "cosine, what you get is negative sine x."
+    },
+    {
+      "index": 299,
+      "start": 809.28,
+      "end": 813.19,
+      "duration": 3.91,
+      "text": "All right? The value at zero is one."
+    },
+    {
+      "index": 300,
+      "start": 813.2,
+      "end": 814.99,
+      "duration": 1.79,
+      "text": "So, that's cosine of zero at one. The"
+    },
+    {
+      "index": 301,
+      "start": 815.0,
+      "end": 819.59,
+      "duration": 4.59,
+      "text": "value of the minus sine at zero is zero."
+    },
+    {
+      "index": 302,
+      "start": 819.6,
+      "end": 821.07,
+      "duration": 1.47,
+      "text": "So, this is"
+    },
+    {
+      "index": 303,
+      "start": 821.08,
+      "end": 823.03,
+      "duration": 1.95,
+      "text": "going back over here, one plus zero"
+    },
+    {
+      "index": 304,
+      "start": 823.04,
+      "end": 828.19,
+      "duration": 5.15,
+      "text": "times x. So, this is approximately one."
+    },
+    {
+      "index": 305,
+      "start": 829.51,
+      "end": 829.52,
+      "duration": 0.01,
+      "text": "This linear function happens to be"
+    },
+    {
+      "index": 306,
+      "start": 829.52,
+      "end": 832.43,
+      "duration": 2.91,
+      "text": "constant."
+    },
+    {
+      "index": 307,
+      "start": 835.59,
+      "end": 835.6,
+      "duration": 0.01,
+      "text": "And finally, if I do e to the x,"
+    },
+    {
+      "index": 308,
+      "start": 835.6,
+      "end": 838.87,
+      "duration": 3.27,
+      "text": "its derivative is again e to the x."
+    },
+    {
+      "index": 309,
+      "start": 838.88,
+      "end": 841.91,
+      "duration": 3.03,
+      "text": "And its value at zero is one. The value"
+    },
+    {
+      "index": 310,
+      "start": 841.92,
+      "end": 844.27,
+      "duration": 2.35,
+      "text": "of the derivative at zero is also one."
+    },
+    {
+      "index": 311,
+      "start": 844.28,
+      "end": 847.51,
+      "duration": 3.23,
+      "text": "So, both of the terms here, f of zero"
+    },
+    {
+      "index": 312,
+      "start": 847.52,
+      "end": 849.51,
+      "duration": 1.99,
+      "text": "and f prime of zero, they're both one,"
+    },
+    {
+      "index": 313,
+      "start": 849.52,
+      "end": 855.15,
+      "duration": 5.63,
+      "text": "and we get one plus x."
+    },
+    {
+      "index": 314,
+      "start": 856.23,
+      "end": 856.24,
+      "duration": 0.01,
+      "text": "All right. So, these are the linear"
+    },
+    {
+      "index": 315,
+      "start": 856.24,
+      "end": 858.35,
+      "duration": 2.11,
+      "text": "approximations."
+    },
+    {
+      "index": 316,
+      "start": 858.36,
+      "end": 862.11,
+      "duration": 3.75,
+      "text": "You can memorize these. You'll probably"
+    },
+    {
+      "index": 317,
+      "start": 862.12,
+      "end": 863.67,
+      "duration": 1.55,
+      "text": "remember them either this way or that"
+    },
+    {
+      "index": 318,
+      "start": 863.68,
+      "end": 866.15,
+      "duration": 2.47,
+      "text": "way. This collection of information here"
+    },
+    {
+      "index": 319,
+      "start": 866.16,
+      "end": 868.07,
+      "duration": 1.91,
+      "text": "encodes the same collection of"
+    },
+    {
+      "index": 320,
+      "start": 868.08,
+      "end": 869.67,
+      "duration": 1.59,
+      "text": "information as we have over here for the"
+    },
+    {
+      "index": 321,
+      "start": 869.68,
+      "end": 871.51,
+      "duration": 1.83,
+      "text": "values of the function and the values of"
+    },
+    {
+      "index": 322,
+      "start": 871.52,
+      "end": 876.35,
+      "duration": 4.83,
+      "text": "their derivatives at zero."
+    },
+    {
+      "index": 323,
+      "start": 877.87,
+      "end": 877.88,
+      "duration": 0.01,
+      "text": "So, let me just emphasize again the"
+    },
+    {
+      "index": 324,
+      "start": 877.88,
+      "end": 880.03,
+      "duration": 2.15,
+      "text": "geometric point of view by drawing"
+    },
+    {
+      "index": 325,
+      "start": 880.04,
+      "end": 881.39,
+      "duration": 1.35,
+      "text": "pictures"
+    },
+    {
+      "index": 326,
+      "start": 881.4,
+      "end": 886.829,
+      "duration": 5.429,
+      "text": "of these"
+    },
+    {
+      "index": 327,
+      "start": 888.829,
+      "end": 888.839,
+      "duration": 0.01,
+      "text": "results."
+    },
+    {
+      "index": 328,
+      "start": 888.839,
+      "end": 894.829,
+      "duration": 5.99,
+      "text": "So, first of all, for the sine function,"
+    },
+    {
+      "index": 329,
+      "start": 898.03,
+      "end": 898.04,
+      "duration": 0.01,
+      "text": "here's the Whoop. Here's the sine. Well,"
+    },
+    {
+      "index": 330,
+      "start": 898.04,
+      "end": 903.55,
+      "duration": 5.51,
+      "text": "close enough. Okay?"
+    },
+    {
+      "index": 331,
+      "start": 905.75,
+      "end": 905.76,
+      "duration": 0.01,
+      "text": "So, that's Boy, now that is quite some"
+    },
+    {
+      "index": 332,
+      "start": 905.76,
+      "end": 907.35,
+      "duration": 1.59,
+      "text": "sine, isn't it? I don't know. Let's try"
+    },
+    {
+      "index": 333,
+      "start": 907.36,
+      "end": 908.27,
+      "duration": 0.91,
+      "text": "to"
+    },
+    {
+      "index": 334,
+      "start": 908.28,
+      "end": 910.31,
+      "duration": 2.03,
+      "text": "make the two bumps be the same height,"
+    },
+    {
+      "index": 335,
+      "start": 910.32,
+      "end": 912.23,
+      "duration": 1.91,
+      "text": "roughly speaking. All right? Anyway, the"
+    },
+    {
+      "index": 336,
+      "start": 912.24,
+      "end": 913.51,
+      "duration": 1.27,
+      "text": "tangent line we're talking about is"
+    },
+    {
+      "index": 337,
+      "start": 913.52,
+      "end": 915.47,
+      "duration": 1.95,
+      "text": "here."
+    },
+    {
+      "index": 338,
+      "start": 915.48,
+      "end": 917.87,
+      "duration": 2.39,
+      "text": "And this is y equals x."
+    },
+    {
+      "index": 339,
+      "start": 917.88,
+      "end": 922.87,
+      "duration": 4.99,
+      "text": "And this is the function sine x."
+    },
+    {
+      "index": 340,
+      "start": 925.19,
+      "end": 925.2,
+      "duration": 0.01,
+      "text": "And near zero,"
+    },
+    {
+      "index": 341,
+      "start": 925.2,
+      "end": 928.87,
+      "duration": 3.67,
+      "text": "those things coincide pretty closely."
+    },
+    {
+      "index": 342,
+      "start": 928.88,
+      "end": 932.11,
+      "duration": 3.23,
+      "text": "The cosine function,"
+    },
+    {
+      "index": 343,
+      "start": 932.12,
+      "end": 933.79,
+      "duration": 1.67,
+      "text": "I'll put that underneath, I guess. I"
+    },
+    {
+      "index": 344,
+      "start": 933.8,
+      "end": 935.59,
+      "duration": 1.79,
+      "text": "think I can fit it. Make it a little"
+    },
+    {
+      "index": 345,
+      "start": 935.6,
+      "end": 938.23,
+      "duration": 2.63,
+      "text": "smaller here."
+    },
+    {
+      "index": 346,
+      "start": 938.24,
+      "end": 939.47,
+      "duration": 1.23,
+      "text": "All right."
+    },
+    {
+      "index": 347,
+      "start": 939.48,
+      "end": 943.15,
+      "duration": 3.67,
+      "text": "So, for the cosine function,"
+    },
+    {
+      "index": 348,
+      "start": 944.87,
+      "end": 944.88,
+      "duration": 0.01,
+      "text": "we're up here."
+    },
+    {
+      "index": 349,
+      "start": 944.88,
+      "end": 948.59,
+      "duration": 3.71,
+      "text": "It's y = 1."
+    },
+    {
+      "index": 350,
+      "start": 951.35,
+      "end": 951.36,
+      "duration": 0.01,
+      "text": "Well, no wonder the tangent line is"
+    },
+    {
+      "index": 351,
+      "start": 951.36,
+      "end": 954.15,
+      "duration": 2.79,
+      "text": "constant. It's horizontal."
+    },
+    {
+      "index": 352,
+      "start": 954.16,
+      "end": 955.19,
+      "duration": 1.03,
+      "text": "All right. The tangent line is"
+    },
+    {
+      "index": 353,
+      "start": 955.2,
+      "end": 956.75,
+      "duration": 1.55,
+      "text": "horizontal, so the the function"
+    },
+    {
+      "index": 354,
+      "start": 956.76,
+      "end": 959.71,
+      "duration": 2.95,
+      "text": "corresponding is is is constant. So,"
+    },
+    {
+      "index": 355,
+      "start": 959.72,
+      "end": 963.11,
+      "duration": 3.39,
+      "text": "this is y = cosine x."
+    },
+    {
+      "index": 356,
+      "start": 963.12,
+      "end": 964.95,
+      "duration": 1.83,
+      "text": "All right."
+    },
+    {
+      "index": 357,
+      "start": 964.96,
+      "end": 968.67,
+      "duration": 3.71,
+      "text": "And finally, if I draw"
+    },
+    {
+      "index": 358,
+      "start": 968.68,
+      "end": 972.07,
+      "duration": 3.39,
+      "text": "y = e to the x,"
+    },
+    {
+      "index": 359,
+      "start": 972.08,
+      "end": 974.87,
+      "duration": 2.79,
+      "text": "that's coming down like this."
+    },
+    {
+      "index": 360,
+      "start": 974.88,
+      "end": 977.91,
+      "duration": 3.03,
+      "text": "And the tangent line is here."
+    },
+    {
+      "index": 361,
+      "start": 977.92,
+      "end": 981.19,
+      "duration": 3.27,
+      "text": "And it's y = 1 + x. The value is 1, and"
+    },
+    {
+      "index": 362,
+      "start": 981.2,
+      "end": 984.31,
+      "duration": 3.11,
+      "text": "the slope is 1."
+    },
+    {
+      "index": 363,
+      "start": 985.91,
+      "end": 985.92,
+      "duration": 0.01,
+      "text": "All right. So, this is how to remember"
+    },
+    {
+      "index": 364,
+      "start": 985.92,
+      "end": 988.07,
+      "duration": 2.15,
+      "text": "it graphically, if you like."
+    },
+    {
+      "index": 365,
+      "start": 988.08,
+      "end": 989.87,
+      "duration": 1.79,
+      "text": "This analytic"
+    },
+    {
+      "index": 366,
+      "start": 989.88,
+      "end": 992.23,
+      "duration": 2.35,
+      "text": "picture"
+    },
+    {
+      "index": 367,
+      "start": 992.24,
+      "end": 996.11,
+      "duration": 3.87,
+      "text": "is extremely important and will help you"
+    },
+    {
+      "index": 368,
+      "start": 996.12,
+      "end": 998.03,
+      "duration": 1.91,
+      "text": "to deal with sines, cosines, and"
+    },
+    {
+      "index": 369,
+      "start": 998.04,
+      "end": 1001.03,
+      "duration": 2.99,
+      "text": "exponentials."
+    },
+    {
+      "index": 370,
+      "start": 1001.04,
+      "end": 1002.829,
+      "duration": 1.789,
+      "text": "Yeah, question."
+    },
+    {
+      "index": 371,
+      "start": 1002.839,
+      "end": 1004.27,
+      "duration": 1.431,
+      "text": "What do you normally use linear"
+    },
+    {
+      "index": 372,
+      "start": 1004.28,
+      "end": 1006.27,
+      "duration": 1.99,
+      "text": "approximations for?"
+    },
+    {
+      "index": 373,
+      "start": 1006.28,
+      "end": 1007.95,
+      "duration": 1.67,
+      "text": "The question is, what do you normally"
+    },
+    {
+      "index": 374,
+      "start": 1007.96,
+      "end": 1010.59,
+      "duration": 2.63,
+      "text": "use linear approximations for? Good"
+    },
+    {
+      "index": 375,
+      "start": 1010.6,
+      "end": 1012.59,
+      "duration": 1.99,
+      "text": "question. We're getting there. First,"
+    },
+    {
+      "index": 376,
+      "start": 1012.6,
+      "end": 1014.15,
+      "duration": 1.55,
+      "text": "we're getting a little library of them,"
+    },
+    {
+      "index": 377,
+      "start": 1014.16,
+      "end": 1017.23,
+      "duration": 3.07,
+      "text": "and I'll give you a few examples. Okay."
+    },
+    {
+      "index": 378,
+      "start": 1017.24,
+      "end": 1020.03,
+      "duration": 2.79,
+      "text": "So, now"
+    },
+    {
+      "index": 379,
+      "start": 1020.04,
+      "end": 1022.95,
+      "duration": 2.91,
+      "text": "I need to to finish the catalog with two"
+    },
+    {
+      "index": 380,
+      "start": 1022.96,
+      "end": 1024.71,
+      "duration": 1.75,
+      "text": "more examples, which are just a little"
+    },
+    {
+      "index": 381,
+      "start": 1024.72,
+      "end": 1027.59,
+      "duration": 2.87,
+      "text": "bit slightly more challenging"
+    },
+    {
+      "index": 382,
+      "start": 1027.6,
+      "end": 1031.47,
+      "duration": 3.87,
+      "text": "and a little bit less obvious. So,"
+    },
+    {
+      "index": 383,
+      "start": 1031.48,
+      "end": 1034.309,
+      "duration": 2.829,
+      "text": "the next couple that we're going to do"
+    },
+    {
+      "index": 384,
+      "start": 1034.319,
+      "end": 1036.429,
+      "duration": 2.11,
+      "text": "are um"
+    },
+    {
+      "index": 385,
+      "start": 1036.439,
+      "end": 1040.87,
+      "duration": 4.431,
+      "text": "log of 1 + x"
+    },
+    {
+      "index": 386,
+      "start": 1043.27,
+      "end": 1043.28,
+      "duration": 0.01,
+      "text": "and 1 + x"
+    },
+    {
+      "index": 387,
+      "start": 1043.28,
+      "end": 1045.59,
+      "duration": 2.31,
+      "text": "to the power r."
+    },
+    {
+      "index": 388,
+      "start": 1045.6,
+      "end": 1047.309,
+      "duration": 1.709,
+      "text": "Okay, these are the last two that we're"
+    },
+    {
+      "index": 389,
+      "start": 1047.319,
+      "end": 1049.23,
+      "duration": 1.911,
+      "text": "going to write down and that you"
+    },
+    {
+      "index": 390,
+      "start": 1049.24,
+      "end": 1051.39,
+      "duration": 2.15,
+      "text": "need to uh think about. Now, the"
+    },
+    {
+      "index": 391,
+      "start": 1051.4,
+      "end": 1053.43,
+      "duration": 2.03,
+      "text": "procedure is the same"
+    },
+    {
+      "index": 392,
+      "start": 1053.44,
+      "end": 1054.99,
+      "duration": 1.55,
+      "text": "as over here."
+    },
+    {
+      "index": 393,
+      "start": 1055.0,
+      "end": 1057.79,
+      "duration": 2.79,
+      "text": "Namely, I have to write down f prime"
+    },
+    {
+      "index": 394,
+      "start": 1057.8,
+      "end": 1059.87,
+      "duration": 2.07,
+      "text": "and I have to write down f of 0 and I"
+    },
+    {
+      "index": 395,
+      "start": 1059.88,
+      "end": 1062.27,
+      "duration": 2.39,
+      "text": "have to write down f prime of 0 and then"
+    },
+    {
+      "index": 396,
+      "start": 1062.28,
+      "end": 1063.95,
+      "duration": 1.67,
+      "text": "I'll have the coefficients to be able to"
+    },
+    {
+      "index": 397,
+      "start": 1063.96,
+      "end": 1067.19,
+      "duration": 3.23,
+      "text": "fill in what the uh approximation is."
+    },
+    {
+      "index": 398,
+      "start": 1067.2,
+      "end": 1070.67,
+      "duration": 3.47,
+      "text": "So, f prime is 1 over 1 + x in the case"
+    },
+    {
+      "index": 399,
+      "start": 1070.68,
+      "end": 1073.19,
+      "duration": 2.51,
+      "text": "of the logarithm and f of 0 if I plug"
+    },
+    {
+      "index": 400,
+      "start": 1073.2,
+      "end": 1077.07,
+      "duration": 3.87,
+      "text": "in, that's that's log of 1, which is 0."
+    },
+    {
+      "index": 401,
+      "start": 1077.08,
+      "end": 1079.71,
+      "duration": 2.63,
+      "text": "And f prime, if I plug in 0 here, I get"
+    },
+    {
+      "index": 402,
+      "start": 1079.72,
+      "end": 1081.35,
+      "duration": 1.63,
+      "text": "1."
+    },
+    {
+      "index": 403,
+      "start": 1081.36,
+      "end": 1083.47,
+      "duration": 2.11,
+      "text": "And similarly, if I do it for this one,"
+    },
+    {
+      "index": 404,
+      "start": 1083.48,
+      "end": 1087.87,
+      "duration": 4.39,
+      "text": "I get r 1 + x to the r - 1."
+    },
+    {
+      "index": 405,
+      "start": 1087.88,
+      "end": 1090.19,
+      "duration": 2.31,
+      "text": "And when I plug in f of 0, I get 1 to"
+    },
+    {
+      "index": 406,
+      "start": 1090.2,
+      "end": 1092.35,
+      "duration": 2.15,
+      "text": "the r, which is 1."
+    },
+    {
+      "index": 407,
+      "start": 1092.36,
+      "end": 1094.03,
+      "duration": 1.67,
+      "text": "And here, I get"
+    },
+    {
+      "index": 408,
+      "start": 1094.04,
+      "end": 1097.99,
+      "duration": 3.95,
+      "text": "r * 1 to the r - 1, which is r."
+    },
+    {
+      "index": 409,
+      "start": 1098.0,
+      "end": 1100.39,
+      "duration": 2.39,
+      "text": "All right? So, so the corresponding"
+    },
+    {
+      "index": 410,
+      "start": 1100.4,
+      "end": 1102.87,
+      "duration": 2.47,
+      "text": "statement here is that log 1 + x is"
+    },
+    {
+      "index": 411,
+      "start": 1102.88,
+      "end": 1104.95,
+      "duration": 2.07,
+      "text": "approximately x."
+    },
+    {
+      "index": 412,
+      "start": 1104.96,
+      "end": 1106.31,
+      "duration": 1.35,
+      "text": "And"
+    },
+    {
+      "index": 413,
+      "start": 1106.32,
+      "end": 1110.59,
+      "duration": 4.27,
+      "text": "1 + x to the r is approximately 1 + rx."
+    },
+    {
+      "index": 414,
+      "start": 1110.6,
+      "end": 1113.79,
+      "duration": 3.19,
+      "text": "All right? That's 0 + 1 * x and here we"
+    },
+    {
+      "index": 415,
+      "start": 1113.8,
+      "end": 1121.43,
+      "duration": 7.63,
+      "text": "have 1 + r * x."
+    },
+    {
+      "index": 416,
+      "start": 1123.19,
+      "end": 1123.2,
+      "duration": 0.01,
+      "text": "And now, I I do want to make a"
+    },
+    {
+      "index": 417,
+      "start": 1123.2,
+      "end": 1124.23,
+      "duration": 1.03,
+      "text": "connection"
+    },
+    {
+      "index": 418,
+      "start": 1124.24,
+      "end": 1126.59,
+      "duration": 2.35,
+      "text": "explain to you what's going on here uh"
+    },
+    {
+      "index": 419,
+      "start": 1126.6,
+      "end": 1127.67,
+      "duration": 1.07,
+      "text": "in the connection with the first"
+    },
+    {
+      "index": 420,
+      "start": 1127.68,
+      "end": 1129.95,
+      "duration": 2.27,
+      "text": "example. We already did the logarithm"
+    },
+    {
+      "index": 421,
+      "start": 1129.96,
+      "end": 1132.31,
+      "duration": 2.35,
+      "text": "once. Let's just point out that these"
+    },
+    {
+      "index": 422,
+      "start": 1132.32,
+      "end": 1135.07,
+      "duration": 2.75,
+      "text": "are two computations are the same"
+    },
+    {
+      "index": 423,
+      "start": 1135.08,
+      "end": 1137.15,
+      "duration": 2.07,
+      "text": "or practically the same."
+    },
+    {
+      "index": 424,
+      "start": 1137.16,
+      "end": 1140.99,
+      "duration": 3.83,
+      "text": "Um here I use the base point one."
+    },
+    {
+      "index": 425,
+      "start": 1141.0,
+      "end": 1143.47,
+      "duration": 2.47,
+      "text": "But because of my sort of convenient"
+    },
+    {
+      "index": 426,
+      "start": 1143.48,
+      "end": 1146.27,
+      "duration": 2.79,
+      "text": "form, which will end up I claim being"
+    },
+    {
+      "index": 427,
+      "start": 1146.28,
+      "end": 1147.99,
+      "duration": 1.71,
+      "text": "much more convenient for pretty much"
+    },
+    {
+      "index": 428,
+      "start": 1148.0,
+      "end": 1149.95,
+      "duration": 1.95,
+      "text": "every purpose, we want to do these"
+    },
+    {
+      "index": 429,
+      "start": 1149.96,
+      "end": 1153.95,
+      "duration": 3.99,
+      "text": "things near x is approximately zero."
+    },
+    {
+      "index": 430,
+      "start": 1153.96,
+      "end": 1157.35,
+      "duration": 3.39,
+      "text": "All right? You cannot expand a logarithm"
+    },
+    {
+      "index": 431,
+      "start": 1157.36,
+      "end": 1159.47,
+      "duration": 2.11,
+      "text": "and and understand a tangent line for it"
+    },
+    {
+      "index": 432,
+      "start": 1159.48,
+      "end": 1161.15,
+      "duration": 1.67,
+      "text": "at x equals zero because it goes down to"
+    },
+    {
+      "index": 433,
+      "start": 1161.16,
+      "end": 1162.75,
+      "duration": 1.59,
+      "text": "minus infinity."
+    },
+    {
+      "index": 434,
+      "start": 1162.76,
+      "end": 1166.03,
+      "duration": 3.27,
+      "text": "Similarly, if you try to graph a 1 + x"
+    },
+    {
+      "index": 435,
+      "start": 1166.04,
+      "end": 1168.51,
+      "duration": 2.47,
+      "text": "to the r or x to the r without the one"
+    },
+    {
+      "index": 436,
+      "start": 1168.52,
+      "end": 1170.79,
+      "duration": 2.27,
+      "text": "here, you'll discover that sometimes the"
+    },
+    {
+      "index": 437,
+      "start": 1170.8,
+      "end": 1173.59,
+      "duration": 2.79,
+      "text": "slope is infinite and so forth. So, this"
+    },
+    {
+      "index": 438,
+      "start": 1173.6,
+      "end": 1176.35,
+      "duration": 2.75,
+      "text": "is a bad choice of point. One is a much"
+    },
+    {
+      "index": 439,
+      "start": 1176.36,
+      "end": 1178.55,
+      "duration": 2.19,
+      "text": "better choice of of a place to expand"
+    },
+    {
+      "index": 440,
+      "start": 1178.56,
+      "end": 1180.59,
+      "duration": 2.03,
+      "text": "around and then we shift things so that"
+    },
+    {
+      "index": 441,
+      "start": 1180.6,
+      "end": 1182.31,
+      "duration": 1.71,
+      "text": "it looks like it's x equals zero by"
+    },
+    {
+      "index": 442,
+      "start": 1182.32,
+      "end": 1184.47,
+      "duration": 2.15,
+      "text": "shifting by the one. So, the connection"
+    },
+    {
+      "index": 443,
+      "start": 1184.48,
+      "end": 1189.55,
+      "duration": 5.07,
+      "text": "with um with the previous example"
+    },
+    {
+      "index": 444,
+      "start": 1190.59,
+      "end": 1190.6,
+      "duration": 0.01,
+      "text": "is"
+    },
+    {
+      "index": 445,
+      "start": 1190.6,
+      "end": 1192.03,
+      "duration": 1.43,
+      "text": "that the"
+    },
+    {
+      "index": 446,
+      "start": 1192.04,
+      "end": 1193.75,
+      "duration": 1.71,
+      "text": "what we wrote before I could write as"
+    },
+    {
+      "index": 447,
+      "start": 1193.76,
+      "end": 1196.99,
+      "duration": 3.23,
+      "text": "the logarithm of u is u minus one."
+    },
+    {
+      "index": 448,
+      "start": 1197.0,
+      "end": 1198.91,
+      "duration": 1.91,
+      "text": "Right? That's just recopying what I have"
+    },
+    {
+      "index": 449,
+      "start": 1198.92,
+      "end": 1200.87,
+      "duration": 1.95,
+      "text": "over here"
+    },
+    {
+      "index": 450,
+      "start": 1200.88,
+      "end": 1203.15,
+      "duration": 2.27,
+      "text": "except with the letter u"
+    },
+    {
+      "index": 451,
+      "start": 1203.16,
+      "end": 1205.43,
+      "duration": 2.27,
+      "text": "rather than the letter x. And then I"
+    },
+    {
+      "index": 452,
+      "start": 1205.44,
+      "end": 1207.03,
+      "duration": 1.59,
+      "text": "plug in"
+    },
+    {
+      "index": 453,
+      "start": 1207.04,
+      "end": 1208.99,
+      "duration": 1.95,
+      "text": "um"
+    },
+    {
+      "index": 454,
+      "start": 1209.0,
+      "end": 1212.87,
+      "duration": 3.87,
+      "text": "uh u is equal to uh 1 + x."
+    },
+    {
+      "index": 455,
+      "start": 1212.88,
+      "end": 1214.87,
+      "duration": 1.99,
+      "text": "And then that, if I copy it down, you"
+    },
+    {
+      "index": 456,
+      "start": 1214.88,
+      "end": 1217.27,
+      "duration": 2.39,
+      "text": "see that I have an u in place of 1 + x,"
+    },
+    {
+      "index": 457,
+      "start": 1217.28,
+      "end": 1218.99,
+      "duration": 1.71,
+      "text": "that's the same as this."
+    },
+    {
+      "index": 458,
+      "start": 1219.0,
+      "end": 1220.67,
+      "duration": 1.67,
+      "text": "And if I write out u minus one, if I"
+    },
+    {
+      "index": 459,
+      "start": 1220.68,
+      "end": 1222.27,
+      "duration": 1.59,
+      "text": "subtract"
+    },
+    {
+      "index": 460,
+      "start": 1222.28,
+      "end": 1224.39,
+      "duration": 2.11,
+      "text": "one from u, that means that it's x. So,"
+    },
+    {
+      "index": 461,
+      "start": 1224.4,
+      "end": 1225.63,
+      "duration": 1.23,
+      "text": "that's what's on the right-hand side"
+    },
+    {
+      "index": 462,
+      "start": 1225.64,
+      "end": 1226.59,
+      "duration": 0.95,
+      "text": "there. So, these are the same"
+    },
+    {
+      "index": 463,
+      "start": 1226.6,
+      "end": 1231.99,
+      "duration": 5.39,
+      "text": "computation. I've just uh"
+    },
+    {
+      "index": 464,
+      "start": 1238.87,
+      "end": 1238.88,
+      "duration": 0.01,
+      "text": "All right."
+    },
+    {
+      "index": 465,
+      "start": 1238.88,
+      "end": 1241.95,
+      "duration": 3.07,
+      "text": "So, now I I I I want to try to address"
+    },
+    {
+      "index": 466,
+      "start": 1241.96,
+      "end": 1245.19,
+      "duration": 3.23,
+      "text": "the the question that was that was asked"
+    },
+    {
+      "index": 467,
+      "start": 1245.2,
+      "end": 1246.15,
+      "duration": 0.95,
+      "text": "uh"
+    },
+    {
+      "index": 468,
+      "start": 1246.16,
+      "end": 1248.07,
+      "duration": 1.91,
+      "text": "about how this is used and and and what"
+    },
+    {
+      "index": 469,
+      "start": 1248.08,
+      "end": 1250.43,
+      "duration": 2.35,
+      "text": "the importance is. And"
+    },
+    {
+      "index": 470,
+      "start": 1250.44,
+      "end": 1251.35,
+      "duration": 0.91,
+      "text": "uh"
+    },
+    {
+      "index": 471,
+      "start": 1251.36,
+      "end": 1253.23,
+      "duration": 1.87,
+      "text": "what I'm going to do"
+    },
+    {
+      "index": 472,
+      "start": 1253.24,
+      "end": 1255.27,
+      "duration": 2.03,
+      "text": "is"
+    },
+    {
+      "index": 473,
+      "start": 1255.28,
+      "end": 1258.11,
+      "duration": 2.83,
+      "text": "is just give you one example here and"
+    },
+    {
+      "index": 474,
+      "start": 1258.12,
+      "end": 1260.39,
+      "duration": 2.27,
+      "text": "then try to emphasize"
+    },
+    {
+      "index": 475,
+      "start": 1260.4,
+      "end": 1262.71,
+      "duration": 2.31,
+      "text": "uh"
+    },
+    {
+      "index": 476,
+      "start": 1262.72,
+      "end": 1265.07,
+      "duration": 2.35,
+      "text": "the first way in which this is a useful"
+    },
+    {
+      "index": 477,
+      "start": 1265.08,
+      "end": 1268.59,
+      "duration": 3.51,
+      "text": "idea. So,"
+    },
+    {
+      "index": 478,
+      "start": 1271.63,
+      "end": 1271.64,
+      "duration": 0.01,
+      "text": "or maybe this is the second example,"
+    },
+    {
+      "index": 479,
+      "start": 1271.64,
+      "end": 1273.31,
+      "duration": 1.67,
+      "text": "if you like."
+    },
+    {
+      "index": 480,
+      "start": 1273.32,
+      "end": 1275.39,
+      "duration": 2.07,
+      "text": "So, we'll call this example two, maybe,"
+    },
+    {
+      "index": 481,
+      "start": 1275.4,
+      "end": 1276.55,
+      "duration": 1.15,
+      "text": "since we already have."
+    },
+    {
+      "index": 482,
+      "start": 1276.56,
+      "end": 1278.19,
+      "duration": 1.63,
+      "text": "So, let's just take the logarithm of"
+    },
+    {
+      "index": 483,
+      "start": 1278.2,
+      "end": 1280.67,
+      "duration": 2.47,
+      "text": "1.1."
+    },
+    {
+      "index": 484,
+      "start": 1280.68,
+      "end": 1282.23,
+      "duration": 1.55,
+      "text": "Just a second."
+    },
+    {
+      "index": 485,
+      "start": 1282.24,
+      "end": 1285.71,
+      "duration": 3.47,
+      "text": "Let's take the logarithm of 1.1."
+    },
+    {
+      "index": 486,
+      "start": 1285.72,
+      "end": 1288.83,
+      "duration": 3.11,
+      "text": "So, I claim that according to our rules,"
+    },
+    {
+      "index": 487,
+      "start": 1288.84,
+      "end": 1290.47,
+      "duration": 1.63,
+      "text": "I can glance at this and I can"
+    },
+    {
+      "index": 488,
+      "start": 1290.48,
+      "end": 1291.75,
+      "duration": 1.27,
+      "text": "immediately see that that it's"
+    },
+    {
+      "index": 489,
+      "start": 1291.76,
+      "end": 1293.71,
+      "duration": 1.95,
+      "text": "approximately a tenth."
+    },
+    {
+      "index": 490,
+      "start": 1293.72,
+      "end": 1295.87,
+      "duration": 2.15,
+      "text": "So, what did I use here?"
+    },
+    {
+      "index": 491,
+      "start": 1295.88,
+      "end": 1300.39,
+      "duration": 4.51,
+      "text": "I used that the log of 1 + X"
+    },
+    {
+      "index": 492,
+      "start": 1300.4,
+      "end": 1302.75,
+      "duration": 2.35,
+      "text": "is approximately X,"
+    },
+    {
+      "index": 493,
+      "start": 1302.76,
+      "end": 1304.07,
+      "duration": 1.31,
+      "text": "and"
+    },
+    {
+      "index": 494,
+      "start": 1304.08,
+      "end": 1306.43,
+      "duration": 2.35,
+      "text": "the value of X that I used was a tenth."
+    },
+    {
+      "index": 495,
+      "start": 1306.44,
+      "end": 1308.07,
+      "duration": 1.63,
+      "text": "All right? So, that is the formula. So,"
+    },
+    {
+      "index": 496,
+      "start": 1308.08,
+      "end": 1309.91,
+      "duration": 1.83,
+      "text": "let me I should put a box around these"
+    },
+    {
+      "index": 497,
+      "start": 1309.92,
+      "end": 1314.59,
+      "duration": 4.67,
+      "text": "two formulas, too."
+    },
+    {
+      "index": 498,
+      "start": 1316.67,
+      "end": 1316.68,
+      "duration": 0.01,
+      "text": "That's this formula here,"
+    },
+    {
+      "index": 499,
+      "start": 1316.68,
+      "end": 1318.83,
+      "duration": 2.15,
+      "text": "applied with X equals a tenth. I'm"
+    },
+    {
+      "index": 500,
+      "start": 1318.84,
+      "end": 1320.35,
+      "duration": 1.51,
+      "text": "claiming that a tenth is a is a"
+    },
+    {
+      "index": 501,
+      "start": 1320.36,
+      "end": 1322.03,
+      "duration": 1.67,
+      "text": "sufficiently small number, sufficiently"
+    },
+    {
+      "index": 502,
+      "start": 1322.04,
+      "end": 1323.51,
+      "duration": 1.47,
+      "text": "close to zero that this is an okay"
+    },
+    {
+      "index": 503,
+      "start": 1323.52,
+      "end": 1325.11,
+      "duration": 1.59,
+      "text": "statement."
+    },
+    {
+      "index": 504,
+      "start": 1325.12,
+      "end": 1326.15,
+      "duration": 1.03,
+      "text": "All right?"
+    },
+    {
+      "index": 505,
+      "start": 1326.16,
+      "end": 1328.11,
+      "duration": 1.95,
+      "text": "Now,"
+    },
+    {
+      "index": 506,
+      "start": 1328.12,
+      "end": 1330.03,
+      "duration": 1.91,
+      "text": "I want to So, the first question that I"
+    },
+    {
+      "index": 507,
+      "start": 1330.04,
+      "end": 1332.11,
+      "duration": 2.07,
+      "text": "want to ask you is which do you think is"
+    },
+    {
+      "index": 508,
+      "start": 1332.12,
+      "end": 1334.51,
+      "duration": 2.39,
+      "text": "a more complicated thing,"
+    },
+    {
+      "index": 509,
+      "start": 1334.52,
+      "end": 1336.99,
+      "duration": 2.47,
+      "text": "the left-hand side or the right-hand"
+    },
+    {
+      "index": 510,
+      "start": 1337.0,
+      "end": 1339.47,
+      "duration": 2.47,
+      "text": "side?"
+    },
+    {
+      "index": 511,
+      "start": 1339.48,
+      "end": 1341.03,
+      "duration": 1.55,
+      "text": "I claim that this is a more complicated"
+    },
+    {
+      "index": 512,
+      "start": 1341.04,
+      "end": 1342.55,
+      "duration": 1.51,
+      "text": "thing. You'd have to go to a calculator"
+    },
+    {
+      "index": 513,
+      "start": 1342.56,
+      "end": 1344.43,
+      "duration": 1.87,
+      "text": "to to punch out and figure out what this"
+    },
+    {
+      "index": 514,
+      "start": 1344.44,
+      "end": 1346.79,
+      "duration": 2.35,
+      "text": "thing is. This is easy. You know what a"
+    },
+    {
+      "index": 515,
+      "start": 1346.8,
+      "end": 1348.19,
+      "duration": 1.39,
+      "text": "tenth is."
+    },
+    {
+      "index": 516,
+      "start": 1348.2,
+      "end": 1350.55,
+      "duration": 2.35,
+      "text": "All right? So, the distinction that I"
+    },
+    {
+      "index": 517,
+      "start": 1350.56,
+      "end": 1353.67,
+      "duration": 3.11,
+      "text": "want to make is that this half this"
+    },
+    {
+      "index": 518,
+      "start": 1353.68,
+      "end": 1357.23,
+      "duration": 3.55,
+      "text": "part, well, I'm sorry, this is hard,"
+    },
+    {
+      "index": 519,
+      "start": 1357.24,
+      "end": 1359.79,
+      "duration": 2.55,
+      "text": "and this is easy."
+    },
+    {
+      "index": 520,
+      "start": 1359.8,
+      "end": 1361.87,
+      "duration": 2.07,
+      "text": "All right? Now, that may look"
+    },
+    {
+      "index": 521,
+      "start": 1361.88,
+      "end": 1364.23,
+      "duration": 2.35,
+      "text": "contradictory, but I want to just do it"
+    },
+    {
+      "index": 522,
+      "start": 1364.24,
+      "end": 1368.95,
+      "duration": 4.71,
+      "text": "right above as well. This is hard,"
+    },
+    {
+      "index": 523,
+      "start": 1368.96,
+      "end": 1372.15,
+      "duration": 3.19,
+      "text": "and this is easy."
+    },
+    {
+      "index": 524,
+      "start": 1372.16,
+      "end": 1374.99,
+      "duration": 2.83,
+      "text": "Okay? This looks uglier,"
+    },
+    {
+      "index": 525,
+      "start": 1375.0,
+      "end": 1376.99,
+      "duration": 1.99,
+      "text": "but actually this is the hard one, and"
+    },
+    {
+      "index": 526,
+      "start": 1377.0,
+      "end": 1378.63,
+      "duration": 1.63,
+      "text": "this is giving us information about it."
+    },
+    {
+      "index": 527,
+      "start": 1378.64,
+      "end": 1380.91,
+      "duration": 2.27,
+      "text": "Now, let me show you why that's true."
+    },
+    {
+      "index": 528,
+      "start": 1380.92,
+      "end": 1382.91,
+      "duration": 1.99,
+      "text": "Look down this column here. These are"
+    },
+    {
+      "index": 529,
+      "start": 1382.92,
+      "end": 1384.51,
+      "duration": 1.59,
+      "text": "the hard ones,"
+    },
+    {
+      "index": 530,
+      "start": 1384.52,
+      "end": 1386.23,
+      "duration": 1.71,
+      "text": "hard functions. These are the easy"
+    },
+    {
+      "index": 531,
+      "start": 1386.24,
+      "end": 1389.99,
+      "duration": 3.75,
+      "text": "functions. What's easier than this?"
+    },
+    {
+      "index": 532,
+      "start": 1390.0,
+      "end": 1391.27,
+      "duration": 1.27,
+      "text": "Nothing."
+    },
+    {
+      "index": 533,
+      "start": 1391.28,
+      "end": 1393.19,
+      "duration": 1.91,
+      "text": "Okay, well, yeah, zero, that's easier,"
+    },
+    {
+      "index": 534,
+      "start": 1393.2,
+      "end": 1394.19,
+      "duration": 0.99,
+      "text": "but"
+    },
+    {
+      "index": 535,
+      "start": 1394.2,
+      "end": 1396.03,
+      "duration": 1.83,
+      "text": "Okay, over here it gets even worse."
+    },
+    {
+      "index": 536,
+      "start": 1396.04,
+      "end": 1398.39,
+      "duration": 2.35,
+      "text": "These are the hard functions and these"
+    },
+    {
+      "index": 537,
+      "start": 1398.4,
+      "end": 1400.59,
+      "duration": 2.19,
+      "text": "are the easy ones."
+    },
+    {
+      "index": 538,
+      "start": 1400.6,
+      "end": 1403.23,
+      "duration": 2.63,
+      "text": "All right? So, that's the main advantage"
+    },
+    {
+      "index": 539,
+      "start": 1403.24,
+      "end": 1405.27,
+      "duration": 2.03,
+      "text": "of linear approximation is you get"
+    },
+    {
+      "index": 540,
+      "start": 1405.28,
+      "end": 1408.11,
+      "duration": 2.83,
+      "text": "something much simpler to deal with. And"
+    },
+    {
+      "index": 541,
+      "start": 1408.12,
+      "end": 1410.47,
+      "duration": 2.35,
+      "text": "if you've made a valid approximation,"
+    },
+    {
+      "index": 542,
+      "start": 1410.48,
+      "end": 1413.47,
+      "duration": 2.99,
+      "text": "you can make much progress on problems."
+    },
+    {
+      "index": 543,
+      "start": 1413.48,
+      "end": 1415.31,
+      "duration": 1.83,
+      "text": "Okay, we'll we'll be doing some more"
+    },
+    {
+      "index": 544,
+      "start": 1415.32,
+      "end": 1417.71,
+      "duration": 2.39,
+      "text": "examples, but I saw some more questions"
+    },
+    {
+      "index": 545,
+      "start": 1417.72,
+      "end": 1419.63,
+      "duration": 1.91,
+      "text": "before I made that point. Yeah. Is that"
+    },
+    {
+      "index": 546,
+      "start": 1419.64,
+      "end": 1422.83,
+      "duration": 3.19,
+      "text": "ln 1.1 or ln 1?"
+    },
+    {
+      "index": 547,
+      "start": 1422.84,
+      "end": 1426.87,
+      "duration": 4.03,
+      "text": "Is this ln of 1.1 or what?"
+    },
+    {
+      "index": 548,
+      "start": 1426.88,
+      "end": 1428.39,
+      "duration": 1.51,
+      "text": "ln 1.1"
+    },
+    {
+      "index": 549,
+      "start": 1428.4,
+      "end": 1432.27,
+      "duration": 3.87,
+      "text": "Uh, this is this is a paren there."
+    },
+    {
+      "index": 550,
+      "start": 1432.28,
+      "end": 1435.07,
+      "duration": 2.79,
+      "text": "It's ln of 1.1. It's the it's the"
+    },
+    {
+      "index": 551,
+      "start": 1435.08,
+      "end": 1436.79,
+      "duration": 1.71,
+      "text": "digital number, right? I guess I've"
+    },
+    {
+      "index": 552,
+      "start": 1436.8,
+      "end": 1439.35,
+      "duration": 2.55,
+      "text": "never used that before a decimal point,"
+    },
+    {
+      "index": 553,
+      "start": 1439.36,
+      "end": 1443.95,
+      "duration": 4.59,
+      "text": "have I? I don't know."
+    },
+    {
+      "index": 554,
+      "start": 1454.91,
+      "end": 1454.92,
+      "duration": 0.01,
+      "text": "Okay. So, let let let's continue here."
+    },
+    {
+      "index": 555,
+      "start": 1454.92,
+      "end": 1456.83,
+      "duration": 1.91,
+      "text": "Let Let me give you some more examples"
+    },
+    {
+      "index": 556,
+      "start": 1456.84,
+      "end": 1457.95,
+      "duration": 1.11,
+      "text": "where uh"
+    },
+    {
+      "index": 557,
+      "start": 1457.96,
+      "end": 1459.91,
+      "duration": 1.95,
+      "text": "it becomes even uh"
+    },
+    {
+      "index": 558,
+      "start": 1459.92,
+      "end": 1461.71,
+      "duration": 1.79,
+      "text": "more vivid, if you like, that this"
+    },
+    {
+      "index": 559,
+      "start": 1461.72,
+      "end": 1464.31,
+      "duration": 2.59,
+      "text": "approximation is is giving us something"
+    },
+    {
+      "index": 560,
+      "start": 1464.32,
+      "end": 1465.91,
+      "duration": 1.59,
+      "text": "a little simpler"
+    },
+    {
+      "index": 561,
+      "start": 1465.92,
+      "end": 1470.19,
+      "duration": 4.27,
+      "text": "to deal with."
+    },
+    {
+      "index": 562,
+      "start": 1478.71,
+      "end": 1478.72,
+      "duration": 0.01,
+      "text": "I want to uh find"
+    },
+    {
+      "index": 563,
+      "start": 1478.72,
+      "end": 1484.87,
+      "duration": 6.15,
+      "text": "the uh linear approximation"
+    },
+    {
+      "index": 564,
+      "start": 1486.87,
+      "end": 1486.88,
+      "duration": 0.01,
+      "text": "near"
+    },
+    {
+      "index": 565,
+      "start": 1486.88,
+      "end": 1488.59,
+      "duration": 1.71,
+      "text": "x = 0."
+    },
+    {
+      "index": 566,
+      "start": 1488.6,
+      "end": 1490.35,
+      "duration": 1.75,
+      "text": "I also when I when I write this"
+    },
+    {
+      "index": 567,
+      "start": 1490.36,
+      "end": 1492.91,
+      "duration": 2.55,
+      "text": "expression near x = 0, that's the same"
+    },
+    {
+      "index": 568,
+      "start": 1492.92,
+      "end": 1494.99,
+      "duration": 2.07,
+      "text": "thing as this."
+    },
+    {
+      "index": 569,
+      "start": 1495.0,
+      "end": 1496.47,
+      "duration": 1.47,
+      "text": "That's the same thing as saying X is"
+    },
+    {
+      "index": 570,
+      "start": 1496.48,
+      "end": 1500.39,
+      "duration": 3.91,
+      "text": "approximately zero. All right? of"
+    },
+    {
+      "index": 571,
+      "start": 1500.4,
+      "end": 1504.31,
+      "duration": 3.91,
+      "text": "the function e to the minus 3x divided"
+    },
+    {
+      "index": 572,
+      "start": 1504.32,
+      "end": 1505.31,
+      "duration": 0.99,
+      "text": "by"
+    },
+    {
+      "index": 573,
+      "start": 1505.32,
+      "end": 1508.19,
+      "duration": 2.87,
+      "text": "square root 1 plus x."
+    },
+    {
+      "index": 574,
+      "start": 1508.2,
+      "end": 1517.35,
+      "duration": 9.15,
+      "text": "All right? So, here's a function."
+    },
+    {
+      "index": 575,
+      "start": 1520.87,
+      "end": 1520.88,
+      "duration": 0.01,
+      "text": "Okay. Now, what I claim I want to use"
+    },
+    {
+      "index": 576,
+      "start": 1520.88,
+      "end": 1524.03,
+      "duration": 3.15,
+      "text": "for the purposes of this approximation"
+    },
+    {
+      "index": 577,
+      "start": 1524.04,
+      "end": 1529.07,
+      "duration": 5.03,
+      "text": "are just the sum of the approximation"
+    },
+    {
+      "index": 578,
+      "start": 1529.08,
+      "end": 1531.63,
+      "duration": 2.55,
+      "text": "formulas that we've already derived."
+    },
+    {
+      "index": 579,
+      "start": 1531.64,
+      "end": 1533.15,
+      "duration": 1.51,
+      "text": "All right? And just to combine them"
+    },
+    {
+      "index": 580,
+      "start": 1533.16,
+      "end": 1534.55,
+      "duration": 1.39,
+      "text": "algebraically. So, I'm not going to do"
+    },
+    {
+      "index": 581,
+      "start": 1534.56,
+      "end": 1535.95,
+      "duration": 1.39,
+      "text": "any calculus. I'm just going to"
+    },
+    {
+      "index": 582,
+      "start": 1535.96,
+      "end": 1538.19,
+      "duration": 2.23,
+      "text": "remember. So,"
+    },
+    {
+      "index": 583,
+      "start": 1538.2,
+      "end": 1540.55,
+      "duration": 2.35,
+      "text": "with e to the minus 3x, it's pretty"
+    },
+    {
+      "index": 584,
+      "start": 1540.56,
+      "end": 1542.07,
+      "duration": 1.51,
+      "text": "clear that I should be using this"
+    },
+    {
+      "index": 585,
+      "start": 1542.08,
+      "end": 1544.55,
+      "duration": 2.47,
+      "text": "formula for e to the x."
+    },
+    {
+      "index": 586,
+      "start": 1544.56,
+      "end": 1546.39,
+      "duration": 1.83,
+      "text": "For the other one, it may be slightly"
+    },
+    {
+      "index": 587,
+      "start": 1546.4,
+      "end": 1549.03,
+      "duration": 2.63,
+      "text": "less obvious, but we have"
+    },
+    {
+      "index": 588,
+      "start": 1549.04,
+      "end": 1553.03,
+      "duration": 3.99,
+      "text": "uh powers of 1 plus x over here."
+    },
+    {
+      "index": 589,
+      "start": 1553.04,
+      "end": 1556.23,
+      "duration": 3.19,
+      "text": "All right? So, let's plug those in. I'll"
+    },
+    {
+      "index": 590,
+      "start": 1556.24,
+      "end": 1564.55,
+      "duration": 8.31,
+      "text": "put this up so that you can remember it."
+    },
+    {
+      "index": 591,
+      "start": 1565.99,
+      "end": 1566.0,
+      "duration": 0.01,
+      "text": "And we're going to"
+    },
+    {
+      "index": 592,
+      "start": 1566.0,
+      "end": 1570.79,
+      "duration": 4.79,
+      "text": "carry out this approximation."
+    },
+    {
+      "index": 593,
+      "start": 1572.63,
+      "end": 1572.64,
+      "duration": 0.01,
+      "text": "So, first of all,"
+    },
+    {
+      "index": 594,
+      "start": 1572.64,
+      "end": 1575.83,
+      "duration": 3.19,
+      "text": "I'm going to write this"
+    },
+    {
+      "index": 595,
+      "start": 1575.84,
+      "end": 1577.91,
+      "duration": 2.07,
+      "text": "so that it's slightly more suggestive."
+    },
+    {
+      "index": 596,
+      "start": 1577.92,
+      "end": 1578.99,
+      "duration": 1.07,
+      "text": "Namely, I'm going to write it as a"
+    },
+    {
+      "index": 597,
+      "start": 1579.0,
+      "end": 1583.59,
+      "duration": 4.59,
+      "text": "product."
+    },
+    {
+      "index": 598,
+      "start": 1586.35,
+      "end": 1586.36,
+      "duration": 0.01,
+      "text": "And there you can now see the exponent"
+    },
+    {
+      "index": 599,
+      "start": 1586.36,
+      "end": 1589.47,
+      "duration": 3.11,
+      "text": "uh in this case, r equals a half a minus"
+    },
+    {
+      "index": 600,
+      "start": 1589.48,
+      "end": 1591.75,
+      "duration": 2.27,
+      "text": "a half that we're going to use."
+    },
+    {
+      "index": 601,
+      "start": 1591.76,
+      "end": 1597.27,
+      "duration": 5.51,
+      "text": "Okay? So, now I have e to the minus 3x 1"
+    },
+    {
+      "index": 602,
+      "start": 1597.28,
+      "end": 1600.19,
+      "duration": 2.91,
+      "text": "plus x to the minus a half, and that's"
+    },
+    {
+      "index": 603,
+      "start": 1600.2,
+      "end": 1602.35,
+      "duration": 2.15,
+      "text": "going to be approximately Well, I'm"
+    },
+    {
+      "index": 604,
+      "start": 1602.36,
+      "end": 1604.63,
+      "duration": 2.27,
+      "text": "going to use this formula. I have to use"
+    },
+    {
+      "index": 605,
+      "start": 1604.64,
+      "end": 1607.39,
+      "duration": 2.75,
+      "text": "it correctly. Uh x is replaced by minus"
+    },
+    {
+      "index": 606,
+      "start": 1607.4,
+      "end": 1610.19,
+      "duration": 2.79,
+      "text": "3x, so this is 1 minus 3x."
+    },
+    {
+      "index": 607,
+      "start": 1610.2,
+      "end": 1612.27,
+      "duration": 2.07,
+      "text": "And then over here, I can just copy"
+    },
+    {
+      "index": 608,
+      "start": 1612.28,
+      "end": 1615.03,
+      "duration": 2.75,
+      "text": "verbatim the other approximation formula"
+    },
+    {
+      "index": 609,
+      "start": 1615.04,
+      "end": 1616.71,
+      "duration": 1.67,
+      "text": "with r equals"
+    },
+    {
+      "index": 610,
+      "start": 1616.72,
+      "end": 1619.71,
+      "duration": 2.99,
+      "text": "minus a half. So, this is times 1 minus"
+    },
+    {
+      "index": 611,
+      "start": 1619.72,
+      "end": 1623.95,
+      "duration": 4.23,
+      "text": "a half x."
+    },
+    {
+      "index": 612,
+      "start": 1625.79,
+      "end": 1625.8,
+      "duration": 0.01,
+      "text": "All right?"
+    },
+    {
+      "index": 613,
+      "start": 1625.8,
+      "end": 1627.71,
+      "duration": 1.91,
+      "text": "And now, I'm going to carry out the"
+    },
+    {
+      "index": 614,
+      "start": 1627.72,
+      "end": 1631.11,
+      "duration": 3.39,
+      "text": "multiplication."
+    },
+    {
+      "index": 615,
+      "start": 1635.55,
+      "end": 1635.56,
+      "duration": 0.01,
+      "text": "So, this is 1 minus 3x minus a half x"
+    },
+    {
+      "index": 616,
+      "start": 1635.56,
+      "end": 1643.51,
+      "duration": 7.95,
+      "text": "plus 3 halves x squared."
+    },
+    {
+      "index": 617,
+      "start": 1645.67,
+      "end": 1645.68,
+      "duration": 0.01,
+      "text": "Hm."
+    },
+    {
+      "index": 618,
+      "start": 1645.68,
+      "end": 1647.35,
+      "duration": 1.67,
+      "text": "Okay."
+    },
+    {
+      "index": 619,
+      "start": 1647.36,
+      "end": 1650.87,
+      "duration": 3.51,
+      "text": "So, now"
+    },
+    {
+      "index": 620,
+      "start": 1652.63,
+      "end": 1652.64,
+      "duration": 0.01,
+      "text": "Here's Here's our formula. So, now this"
+    },
+    {
+      "index": 621,
+      "start": 1652.64,
+      "end": 1655.71,
+      "duration": 3.07,
+      "text": "isn't where things stop. And indeed, in"
+    },
+    {
+      "index": 622,
+      "start": 1655.72,
+      "end": 1657.47,
+      "duration": 1.75,
+      "text": "this kind of arithmetic that I'm"
+    },
+    {
+      "index": 623,
+      "start": 1657.48,
+      "end": 1659.91,
+      "duration": 2.43,
+      "text": "describing now, things are actual easier"
+    },
+    {
+      "index": 624,
+      "start": 1659.92,
+      "end": 1662.55,
+      "duration": 2.63,
+      "text": "than they are in ordinary algebra and"
+    },
+    {
+      "index": 625,
+      "start": 1662.56,
+      "end": 1663.79,
+      "duration": 1.23,
+      "text": "arithmetic."
+    },
+    {
+      "index": 626,
+      "start": 1663.8,
+      "end": 1667.51,
+      "duration": 3.71,
+      "text": "The reason is that there's another step"
+    },
+    {
+      "index": 627,
+      "start": 1667.52,
+      "end": 1669.71,
+      "duration": 2.19,
+      "text": "which I'm now going to perform, which is"
+    },
+    {
+      "index": 628,
+      "start": 1669.72,
+      "end": 1672.35,
+      "duration": 2.63,
+      "text": "that I'm going to throw away"
+    },
+    {
+      "index": 629,
+      "start": 1672.36,
+      "end": 1674.39,
+      "duration": 2.03,
+      "text": "this term here."
+    },
+    {
+      "index": 630,
+      "start": 1674.4,
+      "end": 1675.71,
+      "duration": 1.31,
+      "text": "All right? I'm going to ignore it. In"
+    },
+    {
+      "index": 631,
+      "start": 1675.72,
+      "end": 1677.47,
+      "duration": 1.75,
+      "text": "fact, I didn't even have to work it out"
+    },
+    {
+      "index": 632,
+      "start": 1677.48,
+      "end": 1679.19,
+      "duration": 1.71,
+      "text": "because I'm going to throw it away. So,"
+    },
+    {
+      "index": 633,
+      "start": 1679.2,
+      "end": 1681.99,
+      "duration": 2.79,
+      "text": "the reason is that already when I passed"
+    },
+    {
+      "index": 634,
+      "start": 1682.0,
+      "end": 1684.07,
+      "duration": 2.07,
+      "text": "from this expression to this one, that"
+    },
+    {
+      "index": 635,
+      "start": 1684.08,
+      "end": 1685.15,
+      "duration": 1.07,
+      "text": "is from this type of thing to this"
+    },
+    {
+      "index": 636,
+      "start": 1685.16,
+      "end": 1686.67,
+      "duration": 1.51,
+      "text": "thing, I was already throwing away"
+    },
+    {
+      "index": 637,
+      "start": 1686.68,
+      "end": 1689.47,
+      "duration": 2.79,
+      "text": "quadratic and higher order terms."
+    },
+    {
+      "index": 638,
+      "start": 1689.48,
+      "end": 1691.87,
+      "duration": 2.39,
+      "text": "So, this isn't the only"
+    },
+    {
+      "index": 639,
+      "start": 1691.88,
+      "end": 1693.63,
+      "duration": 1.75,
+      "text": "quadratic term. There are tons of them."
+    },
+    {
+      "index": 640,
+      "start": 1693.64,
+      "end": 1694.87,
+      "duration": 1.23,
+      "text": "I have to ignore all of them if I'm"
+    },
+    {
+      "index": 641,
+      "start": 1694.88,
+      "end": 1696.43,
+      "duration": 1.55,
+      "text": "going to ignore some of them. In fact, I"
+    },
+    {
+      "index": 642,
+      "start": 1696.44,
+      "end": 1697.91,
+      "duration": 1.47,
+      "text": "only want to be left with the linear"
+    },
+    {
+      "index": 643,
+      "start": 1697.92,
+      "end": 1700.23,
+      "duration": 2.31,
+      "text": "stuff."
+    },
+    {
+      "index": 644,
+      "start": 1700.24,
+      "end": 1701.99,
+      "duration": 1.75,
+      "text": "Because that's all I'm really getting a"
+    },
+    {
+      "index": 645,
+      "start": 1702.0,
+      "end": 1704.15,
+      "duration": 2.15,
+      "text": "valid computation for."
+    },
+    {
+      "index": 646,
+      "start": 1704.16,
+      "end": 1707.39,
+      "duration": 3.23,
+      "text": "So, this is approximately 1 minus So,"
+    },
+    {
+      "index": 647,
+      "start": 1707.4,
+      "end": 1710.47,
+      "duration": 3.07,
+      "text": "let's see. It's a total of 7 halves"
+    },
+    {
+      "index": 648,
+      "start": 1710.48,
+      "end": 1711.91,
+      "duration": 1.43,
+      "text": "x."
+    },
+    {
+      "index": 649,
+      "start": 1711.92,
+      "end": 1713.59,
+      "duration": 1.67,
+      "text": "All right? And this is the the the"
+    },
+    {
+      "index": 650,
+      "start": 1713.6,
+      "end": 1716.39,
+      "duration": 2.79,
+      "text": "answer."
+    },
+    {
+      "index": 651,
+      "start": 1718.31,
+      "end": 1718.32,
+      "duration": 0.01,
+      "text": "This is the linear part."
+    },
+    {
+      "index": 652,
+      "start": 1718.32,
+      "end": 1722.87,
+      "duration": 4.55,
+      "text": "So, the x squared term is negligible."
+    },
+    {
+      "index": 653,
+      "start": 1726.67,
+      "end": 1726.68,
+      "duration": 0.01,
+      "text": "So, we drop x squared term"
+    },
+    {
+      "index": 654,
+      "start": 1726.68,
+      "end": 1735.83,
+      "duration": 9.15,
+      "text": "terms and higher."
+    },
+    {
+      "index": 655,
+      "start": 1737.47,
+      "end": 1737.48,
+      "duration": 0.01,
+      "text": "All those terms should be lower order."
+    },
+    {
+      "index": 656,
+      "start": 1737.48,
+      "end": 1739.31,
+      "duration": 1.83,
+      "text": "If you imagine F is a 10th or maybe a"
+    },
+    {
+      "index": 657,
+      "start": 1739.32,
+      "end": 1741.19,
+      "duration": 1.87,
+      "text": "100th, then these terms will end up"
+    },
+    {
+      "index": 658,
+      "start": 1741.2,
+      "end": 1744.19,
+      "duration": 2.99,
+      "text": "being much smaller."
+    },
+    {
+      "index": 659,
+      "start": 1744.2,
+      "end": 1745.43,
+      "duration": 1.23,
+      "text": "All right, so we"
+    },
+    {
+      "index": 660,
+      "start": 1745.44,
+      "end": 1748.99,
+      "duration": 3.55,
+      "text": "we have a rather crude approach"
+    },
+    {
+      "index": 661,
+      "start": 1749.0,
+      "end": 1750.59,
+      "duration": 1.59,
+      "text": "and that's really the simplicity and"
+    },
+    {
+      "index": 662,
+      "start": 1750.6,
+      "end": 1754.15,
+      "duration": 3.55,
+      "text": "that's the savings."
+    },
+    {
+      "index": 663,
+      "start": 1755.47,
+      "end": 1755.48,
+      "duration": 0.01,
+      "text": "Okay."
+    },
+    {
+      "index": 664,
+      "start": 1755.48,
+      "end": 1758.71,
+      "duration": 3.23,
+      "text": "So now since this unit is called"
+    },
+    {
+      "index": 665,
+      "start": 1758.72,
+      "end": 1760.51,
+      "duration": 1.79,
+      "text": "applications"
+    },
+    {
+      "index": 666,
+      "start": 1760.52,
+      "end": 1763.67,
+      "duration": 3.15,
+      "text": "and these are indeed applications to"
+    },
+    {
+      "index": 667,
+      "start": 1763.68,
+      "end": 1766.23,
+      "duration": 2.55,
+      "text": "math, I also wanted to"
+    },
+    {
+      "index": 668,
+      "start": 1766.24,
+      "end": 1768.23,
+      "duration": 1.99,
+      "text": "give you a um"
+    },
+    {
+      "index": 669,
+      "start": 1768.24,
+      "end": 1771.51,
+      "duration": 3.27,
+      "text": "a real-life application or a place where"
+    },
+    {
+      "index": 670,
+      "start": 1771.52,
+      "end": 1774.11,
+      "duration": 2.59,
+      "text": "linear approximations come up"
+    },
+    {
+      "index": 671,
+      "start": 1774.12,
+      "end": 1786.63,
+      "duration": 12.51,
+      "text": "in real life."
+    },
+    {
+      "index": 672,
+      "start": 1790.19,
+      "end": 1790.2,
+      "duration": 0.01,
+      "text": "So maybe we'll call this example"
+    },
+    {
+      "index": 673,
+      "start": 1790.2,
+      "end": 1795.31,
+      "duration": 5.11,
+      "text": "four."
+    },
+    {
+      "index": 674,
+      "start": 1797.27,
+      "end": 1797.28,
+      "duration": 0.01,
+      "text": "This is supposedly a real-life example."
+    },
+    {
+      "index": 675,
+      "start": 1797.28,
+      "end": 1803.39,
+      "duration": 6.11,
+      "text": "I'll try to persuade you that it is."
+    },
+    {
+      "index": 676,
+      "start": 1804.91,
+      "end": 1804.92,
+      "duration": 0.01,
+      "text": "Um"
+    },
+    {
+      "index": 677,
+      "start": 1804.92,
+      "end": 1806.67,
+      "duration": 1.75,
+      "text": "so"
+    },
+    {
+      "index": 678,
+      "start": 1806.68,
+      "end": 1808.39,
+      "duration": 1.71,
+      "text": "so I like this example because it's got"
+    },
+    {
+      "index": 679,
+      "start": 1808.4,
+      "end": 1809.47,
+      "duration": 1.07,
+      "text": "a lot of"
+    },
+    {
+      "index": 680,
+      "start": 1809.48,
+      "end": 1811.87,
+      "duration": 2.39,
+      "text": "math as well as physics in it. So here I"
+    },
+    {
+      "index": 681,
+      "start": 1811.88,
+      "end": 1814.27,
+      "duration": 2.39,
+      "text": "am"
+    },
+    {
+      "index": 682,
+      "start": 1814.28,
+      "end": 1817.07,
+      "duration": 2.79,
+      "text": "on the surface of the Earth"
+    },
+    {
+      "index": 683,
+      "start": 1817.08,
+      "end": 1822.95,
+      "duration": 5.87,
+      "text": "and here is is a satellite"
+    },
+    {
+      "index": 684,
+      "start": 1824.75,
+      "end": 1824.76,
+      "duration": 0.01,
+      "text": "going this way"
+    },
+    {
+      "index": 685,
+      "start": 1824.76,
+      "end": 1826.79,
+      "duration": 2.03,
+      "text": "at some velocity V."
+    },
+    {
+      "index": 686,
+      "start": 1826.8,
+      "end": 1828.23,
+      "duration": 1.43,
+      "text": "Okay?"
+    },
+    {
+      "index": 687,
+      "start": 1828.24,
+      "end": 1830.23,
+      "duration": 1.99,
+      "text": "And"
+    },
+    {
+      "index": 688,
+      "start": 1830.24,
+      "end": 1832.15,
+      "duration": 1.91,
+      "text": "this satellite has a clock on it because"
+    },
+    {
+      "index": 689,
+      "start": 1832.16,
+      "end": 1834.71,
+      "duration": 2.55,
+      "text": "this is a GPS satellite and it has a has"
+    },
+    {
+      "index": 690,
+      "start": 1834.72,
+      "end": 1836.75,
+      "duration": 2.03,
+      "text": "a time T."
+    },
+    {
+      "index": 691,
+      "start": 1836.76,
+      "end": 1837.83,
+      "duration": 1.07,
+      "text": "Okay?"
+    },
+    {
+      "index": 692,
+      "start": 1837.84,
+      "end": 1839.83,
+      "duration": 1.99,
+      "text": "But I have a watch. In fact, it's right"
+    },
+    {
+      "index": 693,
+      "start": 1839.84,
+      "end": 1841.19,
+      "duration": 1.35,
+      "text": "here."
+    },
+    {
+      "index": 694,
+      "start": 1841.2,
+      "end": 1843.19,
+      "duration": 1.99,
+      "text": "And I have a time"
+    },
+    {
+      "index": 695,
+      "start": 1843.2,
+      "end": 1845.99,
+      "duration": 2.79,
+      "text": "which I keep which is T prime."
+    },
+    {
+      "index": 696,
+      "start": 1846.0,
+      "end": 1848.27,
+      "duration": 2.27,
+      "text": "And there's an interesting relationship"
+    },
+    {
+      "index": 697,
+      "start": 1848.28,
+      "end": 1851.11,
+      "duration": 2.83,
+      "text": "between T and T prime"
+    },
+    {
+      "index": 698,
+      "start": 1851.12,
+      "end": 1856.71,
+      "duration": 5.59,
+      "text": "which is called time dilation."
+    },
+    {
+      "index": 699,
+      "start": 1867.55,
+      "end": 1867.56,
+      "duration": 0.01,
+      "text": "And it's the following formula. T prime"
+    },
+    {
+      "index": 700,
+      "start": 1867.56,
+      "end": 1870.95,
+      "duration": 3.39,
+      "text": "is equal to T divided by the square root"
+    },
+    {
+      "index": 701,
+      "start": 1870.96,
+      "end": 1873.87,
+      "duration": 2.91,
+      "text": "of 1 minus V squared over C squared."
+    },
+    {
+      "index": 702,
+      "start": 1873.88,
+      "end": 1877.39,
+      "duration": 3.51,
+      "text": "Where V is the velocity of the satellite"
+    },
+    {
+      "index": 703,
+      "start": 1877.4,
+      "end": 1882.31,
+      "duration": 4.91,
+      "text": "and C is the speed of light."
+    },
+    {
+      "index": 704,
+      "start": 1885.07,
+      "end": 1885.08,
+      "duration": 0.01,
+      "text": "Okay? So, now I'd like to get a rough"
+    },
+    {
+      "index": 705,
+      "start": 1885.08,
+      "end": 1889.91,
+      "duration": 4.83,
+      "text": "idea of how different my watch is from"
+    },
+    {
+      "index": 706,
+      "start": 1889.92,
+      "end": 1894.19,
+      "duration": 4.27,
+      "text": "the clock on the satellite."
+    },
+    {
+      "index": 707,
+      "start": 1897.27,
+      "end": 1897.28,
+      "duration": 0.01,
+      "text": "All right? So, I'm going to use this"
+    },
+    {
+      "index": 708,
+      "start": 1897.28,
+      "end": 1899.35,
+      "duration": 2.07,
+      "text": "same approximation. We've already used"
+    },
+    {
+      "index": 709,
+      "start": 1899.36,
+      "end": 1901.03,
+      "duration": 1.67,
+      "text": "it once."
+    },
+    {
+      "index": 710,
+      "start": 1901.04,
+      "end": 1902.87,
+      "duration": 1.83,
+      "text": "I'm going to write T, but but now let me"
+    },
+    {
+      "index": 711,
+      "start": 1902.88,
+      "end": 1905.47,
+      "duration": 2.59,
+      "text": "just remind you the situation here is we"
+    },
+    {
+      "index": 712,
+      "start": 1905.48,
+      "end": 1908.95,
+      "duration": 3.47,
+      "text": "have something of the form 1 minus U"
+    },
+    {
+      "index": 713,
+      "start": 1908.96,
+      "end": 1911.07,
+      "duration": 2.11,
+      "text": "to the minus 1/2."
+    },
+    {
+      "index": 714,
+      "start": 1911.08,
+      "end": 1913.27,
+      "duration": 2.19,
+      "text": "All right? That's the That's what's"
+    },
+    {
+      "index": 715,
+      "start": 1913.28,
+      "end": 1915.79,
+      "duration": 2.51,
+      "text": "happening when I multiply through here."
+    },
+    {
+      "index": 716,
+      "start": 1915.8,
+      "end": 1917.99,
+      "duration": 2.19,
+      "text": "So, with U"
+    },
+    {
+      "index": 717,
+      "start": 1918.0,
+      "end": 1921.87,
+      "duration": 3.87,
+      "text": "equal to V squared over C squared."
+    },
+    {
+      "index": 718,
+      "start": 1921.88,
+      "end": 1923.47,
+      "duration": 1.59,
+      "text": "All right? So, so in real life, of"
+    },
+    {
+      "index": 719,
+      "start": 1923.48,
+      "end": 1925.59,
+      "duration": 2.11,
+      "text": "course, the expression that you're going"
+    },
+    {
+      "index": 720,
+      "start": 1925.6,
+      "end": 1928.19,
+      "duration": 2.59,
+      "text": "to use the linear approximation on isn't"
+    },
+    {
+      "index": 721,
+      "start": 1928.2,
+      "end": 1930.99,
+      "duration": 2.79,
+      "text": "necessarily itself linear. It can be any"
+    },
+    {
+      "index": 722,
+      "start": 1931.0,
+      "end": 1932.83,
+      "duration": 1.83,
+      "text": "physical quantity. So, in this case it's"
+    },
+    {
+      "index": 723,
+      "start": 1932.84,
+      "end": 1936.11,
+      "duration": 3.27,
+      "text": "V squared over C squared."
+    },
+    {
+      "index": 724,
+      "start": 1936.12,
+      "end": 1938.63,
+      "duration": 2.51,
+      "text": "And now the approximation formula says"
+    },
+    {
+      "index": 725,
+      "start": 1938.64,
+      "end": 1940.03,
+      "duration": 1.39,
+      "text": "that this is approximately equal to"
+    },
+    {
+      "index": 726,
+      "start": 1940.04,
+      "end": 1941.71,
+      "duration": 1.67,
+      "text": "Well, again, it's the same rule. There's"
+    },
+    {
+      "index": 727,
+      "start": 1941.72,
+      "end": 1944.79,
+      "duration": 3.07,
+      "text": "an R and then X is minus U, so this is"
+    },
+    {
+      "index": 728,
+      "start": 1944.8,
+      "end": 1948.07,
+      "duration": 3.27,
+      "text": "minus minus 1/2, so it's it's uh 1 plus"
+    },
+    {
+      "index": 729,
+      "start": 1948.08,
+      "end": 1949.67,
+      "duration": 1.59,
+      "text": "1/2"
+    },
+    {
+      "index": 730,
+      "start": 1949.68,
+      "end": 1950.23,
+      "duration": 0.55,
+      "text": "uh"
+    },
+    {
+      "index": 731,
+      "start": 1950.24,
+      "end": 1951.27,
+      "duration": 1.03,
+      "text": "U."
+    },
+    {
+      "index": 732,
+      "start": 1951.28,
+      "end": 1954.67,
+      "duration": 3.39,
+      "text": "All right?"
+    },
+    {
+      "index": 733,
+      "start": 1957.07,
+      "end": 1957.08,
+      "duration": 0.01,
+      "text": "So, this is approximately"
+    },
+    {
+      "index": 734,
+      "start": 1957.08,
+      "end": 1960.43,
+      "duration": 3.35,
+      "text": "by the same rule, this is T"
+    },
+    {
+      "index": 735,
+      "start": 1960.44,
+      "end": 1964.31,
+      "duration": 3.87,
+      "text": "T prime is approximately T times 1 plus"
+    },
+    {
+      "index": 736,
+      "start": 1964.32,
+      "end": 1973.35,
+      "duration": 9.03,
+      "text": "1/2 V squared over C squared."
+    },
+    {
+      "index": 737,
+      "start": 1977.07,
+      "end": 1977.08,
+      "duration": 0.01,
+      "text": "I promised you that this would be a"
+    },
+    {
+      "index": 738,
+      "start": 1977.08,
+      "end": 1979.23,
+      "duration": 2.15,
+      "text": "real-life problem. So,"
+    },
+    {
+      "index": 739,
+      "start": 1979.24,
+      "end": 1980.95,
+      "duration": 1.71,
+      "text": "the question is when when people were"
+    },
+    {
+      "index": 740,
+      "start": 1980.96,
+      "end": 1984.23,
+      "duration": 3.27,
+      "text": "designing these GPS systems,"
+    },
+    {
+      "index": 741,
+      "start": 1984.24,
+      "end": 1986.71,
+      "duration": 2.47,
+      "text": "they they run clocks on the satellites."
+    },
+    {
+      "index": 742,
+      "start": 1986.72,
+      "end": 1988.03,
+      "duration": 1.31,
+      "text": "You're you're down there, you're making"
+    },
+    {
+      "index": 743,
+      "start": 1988.04,
+      "end": 1989.35,
+      "duration": 1.31,
+      "text": "your measurements. You're you're talking"
+    },
+    {
+      "index": 744,
+      "start": 1989.36,
+      "end": 1990.51,
+      "duration": 1.15,
+      "text": "to the"
+    },
+    {
+      "index": 745,
+      "start": 1990.52,
+      "end": 1992.95,
+      "duration": 2.43,
+      "text": "to the satellite by by or you're"
+    },
+    {
+      "index": 746,
+      "start": 1992.96,
+      "end": 1995.31,
+      "duration": 2.35,
+      "text": "receiving its signals from its radio."
+    },
+    {
+      "index": 747,
+      "start": 1995.32,
+      "end": 1996.91,
+      "duration": 1.59,
+      "text": "The question is,"
+    },
+    {
+      "index": 748,
+      "start": 1996.92,
+      "end": 1999.03,
+      "duration": 2.11,
+      "text": "is this going to cause problems"
+    },
+    {
+      "index": 749,
+      "start": 1999.04,
+      "end": 2000.27,
+      "duration": 1.23,
+      "text": "in the"
+    },
+    {
+      "index": 750,
+      "start": 2000.28,
+      "end": 2002.75,
+      "duration": 2.47,
+      "text": "in the um"
+    },
+    {
+      "index": 751,
+      "start": 2002.76,
+      "end": 2004.43,
+      "duration": 1.67,
+      "text": "transmission? And there are there are"
+    },
+    {
+      "index": 752,
+      "start": 2004.44,
+      "end": 2006.15,
+      "duration": 1.71,
+      "text": "dozens of such problems that you have to"
+    },
+    {
+      "index": 753,
+      "start": 2006.16,
+      "end": 2008.63,
+      "duration": 2.47,
+      "text": "check for. So, in this case, what"
+    },
+    {
+      "index": 754,
+      "start": 2008.64,
+      "end": 2012.07,
+      "duration": 3.43,
+      "text": "actually happens is that V"
+    },
+    {
+      "index": 755,
+      "start": 2012.08,
+      "end": 2015.07,
+      "duration": 2.99,
+      "text": "is about 4 km per second."
+    },
+    {
+      "index": 756,
+      "start": 2015.08,
+      "end": 2016.95,
+      "duration": 1.87,
+      "text": "That's how fast the GPS satellites"
+    },
+    {
+      "index": 757,
+      "start": 2016.96,
+      "end": 2018.67,
+      "duration": 1.71,
+      "text": "actually go."
+    },
+    {
+      "index": 758,
+      "start": 2018.68,
+      "end": 2020.51,
+      "duration": 1.83,
+      "text": "In fact, they had to decide to put them"
+    },
+    {
+      "index": 759,
+      "start": 2020.52,
+      "end": 2021.83,
+      "duration": 1.31,
+      "text": "at a certain altitude, and they could"
+    },
+    {
+      "index": 760,
+      "start": 2021.84,
+      "end": 2022.71,
+      "duration": 0.87,
+      "text": "have"
+    },
+    {
+      "index": 761,
+      "start": 2022.72,
+      "end": 2024.03,
+      "duration": 1.31,
+      "text": "tweaked this if they'd put them at"
+    },
+    {
+      "index": 762,
+      "start": 2024.04,
+      "end": 2025.55,
+      "duration": 1.51,
+      "text": "different places."
+    },
+    {
+      "index": 763,
+      "start": 2025.56,
+      "end": 2027.67,
+      "duration": 2.11,
+      "text": "Um anyway,"
+    },
+    {
+      "index": 764,
+      "start": 2027.68,
+      "end": 2030.51,
+      "duration": 2.83,
+      "text": "the speed of light is 3 * 10 to the"
+    },
+    {
+      "index": 765,
+      "start": 2030.52,
+      "end": 2033.79,
+      "duration": 3.27,
+      "text": "fifth kilometers per second."
+    },
+    {
+      "index": 766,
+      "start": 2033.8,
+      "end": 2035.35,
+      "duration": 1.55,
+      "text": "All right?"
+    },
+    {
+      "index": 767,
+      "start": 2035.36,
+      "end": 2037.87,
+      "duration": 2.51,
+      "text": "So, this number"
+    },
+    {
+      "index": 768,
+      "start": 2037.88,
+      "end": 2039.99,
+      "duration": 2.11,
+      "text": "V squared over C squared is"
+    },
+    {
+      "index": 769,
+      "start": 2040.0,
+      "end": 2044.31,
+      "duration": 4.31,
+      "text": "approximately 10 to the minus 10th."
+    },
+    {
+      "index": 770,
+      "start": 2044.32,
+      "end": 2045.75,
+      "duration": 1.43,
+      "text": "All right?"
+    },
+    {
+      "index": 771,
+      "start": 2045.76,
+      "end": 2049.55,
+      "duration": 3.79,
+      "text": "Now, if you actually"
+    },
+    {
+      "index": 772,
+      "start": 2049.56,
+      "end": 2051.389,
+      "duration": 1.829,
+      "text": "keep track of how much of an error that"
+    },
+    {
+      "index": 773,
+      "start": 2051.399,
+      "end": 2055.03,
+      "duration": 3.631,
+      "text": "would make in a GPS location, what you"
+    },
+    {
+      "index": 774,
+      "start": 2055.04,
+      "end": 2056.95,
+      "duration": 1.91,
+      "text": "would find is maybe it's a millimeter or"
+    },
+    {
+      "index": 775,
+      "start": 2056.96,
+      "end": 2058.83,
+      "duration": 1.87,
+      "text": "something like that. So, in fact, it it"
+    },
+    {
+      "index": 776,
+      "start": 2058.84,
+      "end": 2061.47,
+      "duration": 2.63,
+      "text": "doesn't matter. So, that's that's nice."
+    },
+    {
+      "index": 777,
+      "start": 2061.48,
+      "end": 2063.149,
+      "duration": 1.669,
+      "text": "But in fact, the engineers who were"
+    },
+    {
+      "index": 778,
+      "start": 2063.159,
+      "end": 2065.19,
+      "duration": 2.031,
+      "text": "designing these systems actually did use"
+    },
+    {
+      "index": 779,
+      "start": 2065.2,
+      "end": 2069.31,
+      "duration": 4.11,
+      "text": "this very computation, exactly this."
+    },
+    {
+      "index": 780,
+      "start": 2069.32,
+      "end": 2071.83,
+      "duration": 2.51,
+      "text": "And the way that they used it was they"
+    },
+    {
+      "index": 781,
+      "start": 2071.84,
+      "end": 2074.35,
+      "duration": 2.51,
+      "text": "decided that because the clocks were"
+    },
+    {
+      "index": 782,
+      "start": 2074.36,
+      "end": 2077.27,
+      "duration": 2.91,
+      "text": "different, when the uh satellite"
+    },
+    {
+      "index": 783,
+      "start": 2077.28,
+      "end": 2078.99,
+      "duration": 1.71,
+      "text": "broadcasts its radio frequency, that"
+    },
+    {
+      "index": 784,
+      "start": 2079.0,
+      "end": 2080.669,
+      "duration": 1.669,
+      "text": "frequency would be shifted, would be"
+    },
+    {
+      "index": 785,
+      "start": 2080.679,
+      "end": 2082.669,
+      "duration": 1.99,
+      "text": "offset. And they decided that the"
+    },
+    {
+      "index": 786,
+      "start": 2082.679,
+      "end": 2084.75,
+      "duration": 2.071,
+      "text": "fidelity was so important that they"
+    },
+    {
+      "index": 787,
+      "start": 2084.76,
+      "end": 2086.59,
+      "duration": 1.83,
+      "text": "would send the satellites off with this"
+    },
+    {
+      "index": 788,
+      "start": 2086.6,
+      "end": 2089.149,
+      "duration": 2.549,
+      "text": "kind of exactly this offset"
+    },
+    {
+      "index": 789,
+      "start": 2089.159,
+      "end": 2091.51,
+      "duration": 2.351,
+      "text": "to compensate for the way the signal is."
+    },
+    {
+      "index": 790,
+      "start": 2091.52,
+      "end": 2092.629,
+      "duration": 1.109,
+      "text": "So, from the point of view of good"
+    },
+    {
+      "index": 791,
+      "start": 2092.639,
+      "end": 2095.07,
+      "duration": 2.431,
+      "text": "reception on your little GPS device,"
+    },
+    {
+      "index": 792,
+      "start": 2095.08,
+      "end": 2097.51,
+      "duration": 2.43,
+      "text": "they changed the frequency at which the"
+    },
+    {
+      "index": 793,
+      "start": 2097.52,
+      "end": 2100.15,
+      "duration": 2.63,
+      "text": "uh transmitter in the satellites"
+    },
+    {
+      "index": 794,
+      "start": 2100.16,
+      "end": 2105.07,
+      "duration": 4.91,
+      "text": "according to exactly this rule."
+    },
+    {
+      "index": 795,
+      "start": 2107.03,
+      "end": 2107.04,
+      "duration": 0.01,
+      "text": "And incidentally, the reason why they"
+    },
+    {
+      "index": 796,
+      "start": 2107.04,
+      "end": 2109.23,
+      "duration": 2.19,
+      "text": "didn't they ignored higher order terms,"
+    },
+    {
+      "index": 797,
+      "start": 2109.24,
+      "end": 2111.79,
+      "duration": 2.55,
+      "text": "the sort of quadratic terms, is that if"
+    },
+    {
+      "index": 798,
+      "start": 2111.8,
+      "end": 2114.71,
+      "duration": 2.91,
+      "text": "you if you take u squared, that's a size"
+    },
+    {
+      "index": 799,
+      "start": 2114.72,
+      "end": 2117.51,
+      "duration": 2.79,
+      "text": "10 to the minus 20th."
+    },
+    {
+      "index": 800,
+      "start": 2117.52,
+      "end": 2120.23,
+      "duration": 2.71,
+      "text": "And that really is totally negligible."
+    },
+    {
+      "index": 801,
+      "start": 2120.24,
+      "end": 2121.75,
+      "duration": 1.51,
+      "text": "That doesn't matter to any measurement"
+    },
+    {
+      "index": 802,
+      "start": 2121.76,
+      "end": 2123.27,
+      "duration": 1.51,
+      "text": "at all. That's on the measure on the"
+    },
+    {
+      "index": 803,
+      "start": 2123.28,
+      "end": 2124.39,
+      "duration": 1.11,
+      "text": "order of"
+    },
+    {
+      "index": 804,
+      "start": 2124.4,
+      "end": 2127.51,
+      "duration": 3.11,
+      "text": "nanometers, and it's it's not important"
+    },
+    {
+      "index": 805,
+      "start": 2127.52,
+      "end": 2130.71,
+      "duration": 3.19,
+      "text": "for any of the uh uses to which GPS is"
+    },
+    {
+      "index": 806,
+      "start": 2130.72,
+      "end": 2132.55,
+      "duration": 1.83,
+      "text": "put."
+    },
+    {
+      "index": 807,
+      "start": 2132.56,
+      "end": 2135.27,
+      "duration": 2.71,
+      "text": "Okay, so that's a real example of uh of"
+    },
+    {
+      "index": 808,
+      "start": 2135.28,
+      "end": 2137.67,
+      "duration": 2.39,
+      "text": "a use of um"
+    },
+    {
+      "index": 809,
+      "start": 2137.68,
+      "end": 2140.11,
+      "duration": 2.43,
+      "text": "linear approximations."
+    },
+    {
+      "index": 810,
+      "start": 2140.12,
+      "end": 2141.95,
+      "duration": 1.83,
+      "text": "All right, so uh let's take a little"
+    },
+    {
+      "index": 811,
+      "start": 2141.96,
+      "end": 2144.27,
+      "duration": 2.31,
+      "text": "pause here. I'm going to now uh switch"
+    },
+    {
+      "index": 812,
+      "start": 2144.28,
+      "end": 2145.67,
+      "duration": 1.39,
+      "text": "gears and talk about quadratic"
+    },
+    {
+      "index": 813,
+      "start": 2145.68,
+      "end": 2147.63,
+      "duration": 1.95,
+      "text": "approximations. But before I do that,"
+    },
+    {
+      "index": 814,
+      "start": 2147.64,
+      "end": 2163.79,
+      "duration": 16.15,
+      "text": "let's have some more questions. Yeah."
+    },
+    {
+      "index": 815,
+      "start": 2167.43,
+      "end": 2167.44,
+      "duration": 0.01,
+      "text": "Okay. So, the question was asked,"
+    },
+    {
+      "index": 816,
+      "start": 2167.44,
+      "end": 2169.35,
+      "duration": 1.91,
+      "text": "suppose I did this by a different"
+    },
+    {
+      "index": 817,
+      "start": 2169.36,
+      "end": 2170.91,
+      "duration": 1.55,
+      "text": "method,"
+    },
+    {
+      "index": 818,
+      "start": 2170.92,
+      "end": 2172.83,
+      "duration": 1.91,
+      "text": "all right? Suppose I applied the"
+    },
+    {
+      "index": 819,
+      "start": 2172.84,
+      "end": 2175.87,
+      "duration": 3.03,
+      "text": "original formula here."
+    },
+    {
+      "index": 820,
+      "start": 2175.88,
+      "end": 2178.03,
+      "duration": 2.15,
+      "text": "Namely, I defined the function f of x,"
+    },
+    {
+      "index": 821,
+      "start": 2178.04,
+      "end": 2181.23,
+      "duration": 3.19,
+      "text": "which was this function here."
+    },
+    {
+      "index": 822,
+      "start": 2181.24,
+      "end": 2183.23,
+      "duration": 1.99,
+      "text": "All right? And then I plugged in its"
+    },
+    {
+      "index": 823,
+      "start": 2183.24,
+      "end": 2185.71,
+      "duration": 2.47,
+      "text": "value at x equals zero, and the value of"
+    },
+    {
+      "index": 824,
+      "start": 2185.72,
+      "end": 2188.39,
+      "duration": 2.67,
+      "text": "its derivative at x equals zero. So, the"
+    },
+    {
+      "index": 825,
+      "start": 2188.4,
+      "end": 2191.91,
+      "duration": 3.51,
+      "text": "answer is yes, it's also true that if I"
+    },
+    {
+      "index": 826,
+      "start": 2191.92,
+      "end": 2195.75,
+      "duration": 3.83,
+      "text": "call this function f of x,"
+    },
+    {
+      "index": 827,
+      "start": 2195.76,
+      "end": 2197.95,
+      "duration": 2.19,
+      "text": "then it must be true that the linear"
+    },
+    {
+      "index": 828,
+      "start": 2197.96,
+      "end": 2199.83,
+      "duration": 1.87,
+      "text": "approximation"
+    },
+    {
+      "index": 829,
+      "start": 2199.84,
+      "end": 2202.75,
+      "duration": 2.91,
+      "text": "is f of x zero"
+    },
+    {
+      "index": 830,
+      "start": 2202.76,
+      "end": 2205.55,
+      "duration": 2.79,
+      "text": "plus f prime of I'm sorry, it's it's at"
+    },
+    {
+      "index": 831,
+      "start": 2205.56,
+      "end": 2207.43,
+      "duration": 1.87,
+      "text": "zero. So, it's f of x zero f prime of x"
+    },
+    {
+      "index": 832,
+      "start": 2207.44,
+      "end": 2210.15,
+      "duration": 2.71,
+      "text": "zero times x, right? So, that should be"
+    },
+    {
+      "index": 833,
+      "start": 2210.16,
+      "end": 2212.11,
+      "duration": 1.95,
+      "text": "true. That's the That's the formula that"
+    },
+    {
+      "index": 834,
+      "start": 2212.12,
+      "end": 2214.35,
+      "duration": 2.23,
+      "text": "we're we're using it's up there in the"
+    },
+    {
+      "index": 835,
+      "start": 2214.36,
+      "end": 2217.63,
+      "duration": 3.27,
+      "text": "in the pink also, all right? So, this is"
+    },
+    {
+      "index": 836,
+      "start": 2217.64,
+      "end": 2219.75,
+      "duration": 2.11,
+      "text": "the formula. So, now what about f of"
+    },
+    {
+      "index": 837,
+      "start": 2219.76,
+      "end": 2223.07,
+      "duration": 3.31,
+      "text": "zero? Well, if I plug in zero here, I"
+    },
+    {
+      "index": 838,
+      "start": 2223.08,
+      "end": 2225.95,
+      "duration": 2.87,
+      "text": "get 1 * 1. So, this thing is 1. So,"
+    },
+    {
+      "index": 839,
+      "start": 2225.96,
+      "end": 2228.27,
+      "duration": 2.31,
+      "text": "that's no surprise, and that's what I"
+    },
+    {
+      "index": 840,
+      "start": 2228.28,
+      "end": 2229.75,
+      "duration": 1.47,
+      "text": "got."
+    },
+    {
+      "index": 841,
+      "start": 2229.76,
+      "end": 2231.15,
+      "duration": 1.39,
+      "text": "All right?"
+    },
+    {
+      "index": 842,
+      "start": 2231.16,
+      "end": 2234.15,
+      "duration": 2.99,
+      "text": "If I computed f prime"
+    },
+    {
+      "index": 843,
+      "start": 2234.16,
+      "end": 2236.71,
+      "duration": 2.55,
+      "text": "by the product rule, it would be an"
+    },
+    {
+      "index": 844,
+      "start": 2236.72,
+      "end": 2240.23,
+      "duration": 3.51,
+      "text": "annoying, somewhat long computation, and"
+    },
+    {
+      "index": 845,
+      "start": 2240.24,
+      "end": 2241.99,
+      "duration": 1.75,
+      "text": "because of what we've just done, we know"
+    },
+    {
+      "index": 846,
+      "start": 2242.0,
+      "end": 2245.87,
+      "duration": 3.87,
+      "text": "what it has to be. It has to be -7/2."
+    },
+    {
+      "index": 847,
+      "start": 2245.88,
+      "end": 2248.27,
+      "duration": 2.39,
+      "text": "Because this is a shortcut for doing it."
+    },
+    {
+      "index": 848,
+      "start": 2248.28,
+      "end": 2250.11,
+      "duration": 1.83,
+      "text": "This is faster than doing that. But, of"
+    },
+    {
+      "index": 849,
+      "start": 2250.12,
+      "end": 2252.27,
+      "duration": 2.15,
+      "text": "course, that's a legal way of doing it."
+    },
+    {
+      "index": 850,
+      "start": 2252.28,
+      "end": 2253.79,
+      "duration": 1.51,
+      "text": "When you get to second derivatives,"
+    },
+    {
+      "index": 851,
+      "start": 2253.8,
+      "end": 2255.79,
+      "duration": 1.99,
+      "text": "you'll quickly discover that this method"
+    },
+    {
+      "index": 852,
+      "start": 2255.8,
+      "end": 2257.43,
+      "duration": 1.63,
+      "text": "that I've just described is"
+    },
+    {
+      "index": 853,
+      "start": 2257.44,
+      "end": 2259.59,
+      "duration": 2.15,
+      "text": "is complicated, but far superior to"
+    },
+    {
+      "index": 854,
+      "start": 2259.6,
+      "end": 2266.15,
+      "duration": 6.55,
+      "text": "differentiating this expression twice."
+    },
+    {
+      "index": 855,
+      "start": 2267.75,
+      "end": 2267.76,
+      "duration": 0.01,
+      "text": "Uh would you have to throw away an x"
+    },
+    {
+      "index": 856,
+      "start": 2267.76,
+      "end": 2270.51,
+      "duration": 2.75,
+      "text": "squared term if you differentiated? No."
+    },
+    {
+      "index": 857,
+      "start": 2270.52,
+      "end": 2272.31,
+      "duration": 1.79,
+      "text": "And in fact, we didn't really have to do"
+    },
+    {
+      "index": 858,
+      "start": 2272.32,
+      "end": 2274.43,
+      "duration": 2.11,
+      "text": "that here. If you differentiate and then"
+    },
+    {
+      "index": 859,
+      "start": 2274.44,
+      "end": 2275.87,
+      "duration": 1.43,
+      "text": "plug in x equals zero. So, if you"
+    },
+    {
+      "index": 860,
+      "start": 2275.88,
+      "end": 2277.31,
+      "duration": 1.43,
+      "text": "differentiate this and you plug in x"
+    },
+    {
+      "index": 861,
+      "start": 2277.32,
+      "end": 2279.07,
+      "duration": 1.75,
+      "text": "equals zero, you get -7/2. You"
+    },
+    {
+      "index": 862,
+      "start": 2279.08,
+      "end": 2280.47,
+      "duration": 1.39,
+      "text": "differentiate this and you plug in x"
+    },
+    {
+      "index": 863,
+      "start": 2280.48,
+      "end": 2282.51,
+      "duration": 2.03,
+      "text": "equals zero, this term still drops out"
+    },
+    {
+      "index": 864,
+      "start": 2282.52,
+      "end": 2284.71,
+      "duration": 2.19,
+      "text": "because it's just a a 3x when you"
+    },
+    {
+      "index": 865,
+      "start": 2284.72,
+      "end": 2286.11,
+      "duration": 1.39,
+      "text": "differentiate, and then you plug in x"
+    },
+    {
+      "index": 866,
+      "start": 2286.12,
+      "end": 2288.43,
+      "duration": 2.31,
+      "text": "equals zero, it's gone, too. And"
+    },
+    {
+      "index": 867,
+      "start": 2288.44,
+      "end": 2290.31,
+      "duration": 1.87,
+      "text": "similarly, if you're up here, it goes"
+    },
+    {
+      "index": 868,
+      "start": 2290.32,
+      "end": 2292.03,
+      "duration": 1.71,
+      "text": "away, and similarly over here, it goes"
+    },
+    {
+      "index": 869,
+      "start": 2292.04,
+      "end": 2294.11,
+      "duration": 2.07,
+      "text": "away. So, the higher order terms never"
+    },
+    {
+      "index": 870,
+      "start": 2294.12,
+      "end": 2295.59,
+      "duration": 1.47,
+      "text": "influence"
+    },
+    {
+      "index": 871,
+      "start": 2295.6,
+      "end": 2296.99,
+      "duration": 1.39,
+      "text": "the the"
+    },
+    {
+      "index": 872,
+      "start": 2297.0,
+      "end": 2299.35,
+      "duration": 2.35,
+      "text": "this this computation here. This just"
+    },
+    {
+      "index": 873,
+      "start": 2299.36,
+      "end": 2302.11,
+      "duration": 2.75,
+      "text": "captures the linear features of the"
+    },
+    {
+      "index": 874,
+      "start": 2302.12,
+      "end": 2306.59,
+      "duration": 4.47,
+      "text": "of the function."
+    },
+    {
+      "index": 875,
+      "start": 2308.83,
+      "end": 2308.84,
+      "duration": 0.01,
+      "text": "All right. So, now I want to go on to"
+    },
+    {
+      "index": 876,
+      "start": 2308.84,
+      "end": 2310.99,
+      "duration": 2.15,
+      "text": "quadratic approximation"
+    },
+    {
+      "index": 877,
+      "start": 2311.0,
+      "end": 2312.99,
+      "duration": 1.99,
+      "text": "and we're now we're going to elaborate"
+    },
+    {
+      "index": 878,
+      "start": 2313.0,
+      "end": 2320.83,
+      "duration": 7.83,
+      "text": "on this formula."
+    },
+    {
+      "index": 879,
+      "start": 2327.19,
+      "end": 2327.2,
+      "duration": 0.01,
+      "text": "uh linear approximation, huh? Well, that"
+    },
+    {
+      "index": 880,
+      "start": 2327.2,
+      "end": 2329.87,
+      "duration": 2.67,
+      "text": "should have been linear approximation."
+    },
+    {
+      "index": 881,
+      "start": 2329.88,
+      "end": 2332.71,
+      "duration": 2.83,
+      "text": "Liner, that's interesting. Okay, so that"
+    },
+    {
+      "index": 882,
+      "start": 2332.72,
+      "end": 2334.47,
+      "duration": 1.75,
+      "text": "that that was wrong. But, now we're"
+    },
+    {
+      "index": 883,
+      "start": 2334.48,
+      "end": 2339.75,
+      "duration": 5.27,
+      "text": "going to change it to quadratic."
+    },
+    {
+      "index": 884,
+      "start": 2342.47,
+      "end": 2342.48,
+      "duration": 0.01,
+      "text": "So, suppose we we talk about a quadratic"
+    },
+    {
+      "index": 885,
+      "start": 2342.48,
+      "end": 2344.31,
+      "duration": 1.83,
+      "text": "approximation here."
+    },
+    {
+      "index": 886,
+      "start": 2344.32,
+      "end": 2347.19,
+      "duration": 2.87,
+      "text": "Now, the quadratic approximation"
+    },
+    {
+      "index": 887,
+      "start": 2347.2,
+      "end": 2348.95,
+      "duration": 1.75,
+      "text": "is going to be"
+    },
+    {
+      "index": 888,
+      "start": 2348.96,
+      "end": 2352.59,
+      "duration": 3.63,
+      "text": "just an elaboration one more step of"
+    },
+    {
+      "index": 889,
+      "start": 2352.6,
+      "end": 2354.35,
+      "duration": 1.75,
+      "text": "detail"
+    },
+    {
+      "index": 890,
+      "start": 2354.36,
+      "end": 2355.47,
+      "duration": 1.11,
+      "text": "uh"
+    },
+    {
+      "index": 891,
+      "start": 2355.48,
+      "end": 2356.79,
+      "duration": 1.31,
+      "text": "from the linear. In other words, it's an"
+    },
+    {
+      "index": 892,
+      "start": 2356.8,
+      "end": 2360.39,
+      "duration": 3.59,
+      "text": "extension of the linear approximation."
+    },
+    {
+      "index": 893,
+      "start": 2360.4,
+      "end": 2364.47,
+      "duration": 4.07,
+      "text": "And so, we're adding one more term here."
+    },
+    {
+      "index": 894,
+      "start": 2364.48,
+      "end": 2366.19,
+      "duration": 1.71,
+      "text": "And the extra term turns out to be"
+    },
+    {
+      "index": 895,
+      "start": 2366.2,
+      "end": 2369.07,
+      "duration": 2.87,
+      "text": "related to the second derivative,"
+    },
+    {
+      "index": 896,
+      "start": 2369.08,
+      "end": 2373.63,
+      "duration": 4.55,
+      "text": "but there's a factor of two."
+    },
+    {
+      "index": 897,
+      "start": 2376.19,
+      "end": 2376.2,
+      "duration": 0.01,
+      "text": "All right. So, this is the formula for"
+    },
+    {
+      "index": 898,
+      "start": 2376.2,
+      "end": 2379.11,
+      "duration": 2.91,
+      "text": "the quadratic approximation."
+    },
+    {
+      "index": 899,
+      "start": 2379.12,
+      "end": 2381.03,
+      "duration": 1.91,
+      "text": "And this chunk of it, of course, is the"
+    },
+    {
+      "index": 900,
+      "start": 2381.04,
+      "end": 2386.47,
+      "duration": 5.43,
+      "text": "linear part."
+    },
+    {
+      "index": 901,
+      "start": 2394.19,
+      "end": 2394.2,
+      "duration": 0.01,
+      "text": "All right."
+    },
+    {
+      "index": 902,
+      "start": 2394.2,
+      "end": 2395.99,
+      "duration": 1.79,
+      "text": "So, the linear part is the first piece"
+    },
+    {
+      "index": 903,
+      "start": 2396.0,
+      "end": 2398.91,
+      "duration": 2.91,
+      "text": "and the quadratic part is the second"
+    },
+    {
+      "index": 904,
+      "start": 2398.92,
+      "end": 2401.51,
+      "duration": 2.59,
+      "text": "piece."
+    },
+    {
+      "index": 905,
+      "start": 2408.67,
+      "end": 2408.68,
+      "duration": 0.01,
+      "text": "I want to develop the same catalog of uh"
+    },
+    {
+      "index": 906,
+      "start": 2408.68,
+      "end": 2411.39,
+      "duration": 2.71,
+      "text": "of of functions as I as I had before. In"
+    },
+    {
+      "index": 907,
+      "start": 2411.4,
+      "end": 2413.47,
+      "duration": 2.07,
+      "text": "other words, I want to extend our"
+    },
+    {
+      "index": 908,
+      "start": 2413.48,
+      "end": 2415.83,
+      "duration": 2.35,
+      "text": "formulas to uh"
+    },
+    {
+      "index": 909,
+      "start": 2415.84,
+      "end": 2419.59,
+      "duration": 3.75,
+      "text": "to the uh higher order terms."
+    },
+    {
+      "index": 910,
+      "start": 2419.6,
+      "end": 2420.67,
+      "duration": 1.07,
+      "text": "And"
+    },
+    {
+      "index": 911,
+      "start": 2420.68,
+      "end": 2422.27,
+      "duration": 1.59,
+      "text": "if you do that"
+    },
+    {
+      "index": 912,
+      "start": 2422.28,
+      "end": 2424.19,
+      "duration": 1.91,
+      "text": "for"
+    },
+    {
+      "index": 913,
+      "start": 2424.2,
+      "end": 2426.91,
+      "duration": 2.71,
+      "text": "the this example here, maybe I'll even"
+    },
+    {
+      "index": 914,
+      "start": 2426.92,
+      "end": 2428.83,
+      "duration": 1.91,
+      "text": "illustrate with this example before I go"
+    },
+    {
+      "index": 915,
+      "start": 2428.84,
+      "end": 2432.95,
+      "duration": 4.11,
+      "text": "on. If you do it with this example here,"
+    },
+    {
+      "index": 916,
+      "start": 2432.96,
+      "end": 2434.75,
+      "duration": 1.79,
+      "text": "just to give you a flavor for what goes"
+    },
+    {
+      "index": 917,
+      "start": 2434.76,
+      "end": 2439.27,
+      "duration": 4.51,
+      "text": "on."
+    },
+    {
+      "index": 918,
+      "start": 2441.55,
+      "end": 2441.56,
+      "duration": 0.01,
+      "text": "What turns out to be the case, so this"
+    },
+    {
+      "index": 919,
+      "start": 2441.56,
+      "end": 2445.43,
+      "duration": 3.87,
+      "text": "is the linear version."
+    },
+    {
+      "index": 920,
+      "start": 2446.71,
+      "end": 2446.72,
+      "duration": 0.01,
+      "text": "And now I'm going to compare it to the"
+    },
+    {
+      "index": 921,
+      "start": 2446.72,
+      "end": 2449.03,
+      "duration": 2.31,
+      "text": "quadratic version. So, the quadratic"
+    },
+    {
+      "index": 922,
+      "start": 2449.04,
+      "end": 2455.47,
+      "duration": 6.43,
+      "text": "version turns out to be this."
+    },
+    {
+      "index": 923,
+      "start": 2456.95,
+      "end": 2456.96,
+      "duration": 0.01,
+      "text": "That's what turns out to be the, uh,"
+    },
+    {
+      "index": 924,
+      "start": 2456.96,
+      "end": 2460.39,
+      "duration": 3.43,
+      "text": "quadratic approximation. And when I"
+    },
+    {
+      "index": 925,
+      "start": 2460.4,
+      "end": 2463.07,
+      "duration": 2.67,
+      "text": "uh, use this example here,"
+    },
+    {
+      "index": 926,
+      "start": 2463.08,
+      "end": 2466.55,
+      "duration": 3.47,
+      "text": "so this is 1.1, which is the same as log"
+    },
+    {
+      "index": 927,
+      "start": 2466.56,
+      "end": 2468.67,
+      "duration": 2.11,
+      "text": "of 1 plus a tenth,"
+    },
+    {
+      "index": 928,
+      "start": 2468.68,
+      "end": 2472.51,
+      "duration": 3.83,
+      "text": "right? So, that's approximately a tenth"
+    },
+    {
+      "index": 929,
+      "start": 2472.52,
+      "end": 2477.11,
+      "duration": 4.59,
+      "text": "minus a half 1/10 squared."
+    },
+    {
+      "index": 930,
+      "start": 2477.12,
+      "end": 2479.19,
+      "duration": 2.07,
+      "text": "Right? So, 1/200."
+    },
+    {
+      "index": 931,
+      "start": 2479.2,
+      "end": 2481.95,
+      "duration": 2.75,
+      "text": "So, that turns out instead of being, um,"
+    },
+    {
+      "index": 932,
+      "start": 2481.96,
+      "end": 2484.51,
+      "duration": 2.55,
+      "text": "a tenth, that's point"
+    },
+    {
+      "index": 933,
+      "start": 2484.52,
+      "end": 2487.43,
+      "duration": 2.91,
+      "text": "uh, what is it? Uh, 0.095"
+    },
+    {
+      "index": 934,
+      "start": 2487.44,
+      "end": 2489.11,
+      "duration": 1.67,
+      "text": "or something like that."
+    },
+    {
+      "index": 935,
+      "start": 2489.12,
+      "end": 2491.59,
+      "duration": 2.47,
+      "text": "It's a little bit less. All right? It's"
+    },
+    {
+      "index": 936,
+      "start": 2491.6,
+      "end": 2495.51,
+      "duration": 3.91,
+      "text": "not 0.1, but it's pretty close."
+    },
+    {
+      "index": 937,
+      "start": 2497.51,
+      "end": 2497.52,
+      "duration": 0.01,
+      "text": "Okay? So, the if you like, the"
+    },
+    {
+      "index": 938,
+      "start": 2497.52,
+      "end": 2500.31,
+      "duration": 2.79,
+      "text": "correction is in the is in lower in the"
+    },
+    {
+      "index": 939,
+      "start": 2500.32,
+      "end": 2508.15,
+      "duration": 7.83,
+      "text": "in the decimal expansion."
+    },
+    {
+      "index": 940,
+      "start": 2510.07,
+      "end": 2510.08,
+      "duration": 0.01,
+      "text": "All right. So, now let me let me"
+    },
+    {
+      "index": 941,
+      "start": 2510.08,
+      "end": 2513.71,
+      "duration": 3.63,
+      "text": "actually check a few of these."
+    },
+    {
+      "index": 942,
+      "start": 2513.72,
+      "end": 2516.07,
+      "duration": 2.35,
+      "text": "I'll carry them out. And what I'm going"
+    },
+    {
+      "index": 943,
+      "start": 2516.08,
+      "end": 2519.67,
+      "duration": 3.59,
+      "text": "to probably save for next time is"
+    },
+    {
+      "index": 944,
+      "start": 2519.68,
+      "end": 2521.87,
+      "duration": 2.19,
+      "text": "explaining to you"
+    },
+    {
+      "index": 945,
+      "start": 2521.88,
+      "end": 2524.27,
+      "duration": 2.39,
+      "text": "So, this is"
+    },
+    {
+      "index": 946,
+      "start": 2524.28,
+      "end": 2527.99,
+      "duration": 3.71,
+      "text": "why this factor of a half."
+    },
+    {
+      "index": 947,
+      "start": 2528.0,
+      "end": 2529.91,
+      "duration": 1.91,
+      "text": "And we're going to do this later. Do"
+    },
+    {
+      "index": 948,
+      "start": 2529.92,
+      "end": 2531.95,
+      "duration": 2.03,
+      "text": "this do this next time. You can"
+    },
+    {
+      "index": 949,
+      "start": 2531.96,
+      "end": 2535.59,
+      "duration": 3.63,
+      "text": "certainly uh, do well to stick with"
+    },
+    {
+      "index": 950,
+      "start": 2535.6,
+      "end": 2536.27,
+      "duration": 0.67,
+      "text": "uh"
+    },
+    {
+      "index": 951,
+      "start": 2536.28,
+      "end": 2538.51,
+      "duration": 2.23,
+      "text": "this presentation for one more lecture,"
+    },
+    {
+      "index": 952,
+      "start": 2538.52,
+      "end": 2541.11,
+      "duration": 2.59,
+      "text": "so we can see this reinforced. All"
+    },
+    {
+      "index": 953,
+      "start": 2541.12,
+      "end": 2544.55,
+      "duration": 3.43,
+      "text": "right? So So now I'm going to uh"
+    },
+    {
+      "index": 954,
+      "start": 2544.56,
+      "end": 2552.59,
+      "duration": 8.03,
+      "text": "work out these derivatives"
+    },
+    {
+      "index": 955,
+      "start": 2554.67,
+      "end": 2554.68,
+      "duration": 0.01,
+      "text": "of the higher-order terms."
+    },
+    {
+      "index": 956,
+      "start": 2554.68,
+      "end": 2557.07,
+      "duration": 2.39,
+      "text": "And let me do it for the uh X"
+    },
+    {
+      "index": 957,
+      "start": 2557.08,
+      "end": 2559.43,
+      "duration": 2.35,
+      "text": "approximately zero case."
+    },
+    {
+      "index": 958,
+      "start": 2559.44,
+      "end": 2561.31,
+      "duration": 1.87,
+      "text": "So"
+    },
+    {
+      "index": 959,
+      "start": 2561.32,
+      "end": 2562.95,
+      "duration": 1.63,
+      "text": "So first of all,"
+    },
+    {
+      "index": 960,
+      "start": 2562.96,
+      "end": 2567.63,
+      "duration": 4.67,
+      "text": "I want to add in the extra term here."
+    },
+    {
+      "index": 961,
+      "start": 2570.87,
+      "end": 2570.88,
+      "duration": 0.01,
+      "text": "All right? Here's the extra term"
+    },
+    {
+      "index": 962,
+      "start": 2570.88,
+      "end": 2573.91,
+      "duration": 3.03,
+      "text": "for the quadratic part."
+    },
+    {
+      "index": 963,
+      "start": 2573.92,
+      "end": 2575.67,
+      "duration": 1.75,
+      "text": "And now, in order to figure out what's"
+    },
+    {
+      "index": 964,
+      "start": 2575.68,
+      "end": 2577.07,
+      "duration": 1.39,
+      "text": "going on,"
+    },
+    {
+      "index": 965,
+      "start": 2577.08,
+      "end": 2580.07,
+      "duration": 2.99,
+      "text": "I'm going to need to compute also second"
+    },
+    {
+      "index": 966,
+      "start": 2580.08,
+      "end": 2583.31,
+      "duration": 3.23,
+      "text": "derivatives."
+    },
+    {
+      "index": 967,
+      "start": 2585.31,
+      "end": 2585.32,
+      "duration": 0.01,
+      "text": "So here I need a second derivative, and"
+    },
+    {
+      "index": 968,
+      "start": 2585.32,
+      "end": 2587.91,
+      "duration": 2.59,
+      "text": "I need to throw in the value of that"
+    },
+    {
+      "index": 969,
+      "start": 2587.92,
+      "end": 2589.51,
+      "duration": 1.59,
+      "text": "second derivative"
+    },
+    {
+      "index": 970,
+      "start": 2589.52,
+      "end": 2591.43,
+      "duration": 1.91,
+      "text": "at zero."
+    },
+    {
+      "index": 971,
+      "start": 2591.44,
+      "end": 2592.39,
+      "duration": 0.95,
+      "text": "All right? So this is what I'm going to"
+    },
+    {
+      "index": 972,
+      "start": 2592.4,
+      "end": 2594.15,
+      "duration": 1.75,
+      "text": "need to compute. So if I do it, for"
+    },
+    {
+      "index": 973,
+      "start": 2594.16,
+      "end": 2597.51,
+      "duration": 3.35,
+      "text": "example, for the sine function,"
+    },
+    {
+      "index": 974,
+      "start": 2597.52,
+      "end": 2598.99,
+      "duration": 1.47,
+      "text": "I already have the linear part. I need"
+    },
+    {
+      "index": 975,
+      "start": 2599.0,
+      "end": 2601.27,
+      "duration": 2.27,
+      "text": "this last bit. So I differentiate the"
+    },
+    {
+      "index": 976,
+      "start": 2601.28,
+      "end": 2603.39,
+      "duration": 2.11,
+      "text": "sine function twice, and I get, I claim,"
+    },
+    {
+      "index": 977,
+      "start": 2603.4,
+      "end": 2605.55,
+      "duration": 2.15,
+      "text": "minus the sine function. The first"
+    },
+    {
+      "index": 978,
+      "start": 2605.56,
+      "end": 2607.47,
+      "duration": 1.91,
+      "text": "derivative is the cosine, and the cosine"
+    },
+    {
+      "index": 979,
+      "start": 2607.48,
+      "end": 2609.43,
+      "duration": 1.95,
+      "text": "derivative is the minus the sine. And"
+    },
+    {
+      "index": 980,
+      "start": 2609.44,
+      "end": 2612.31,
+      "duration": 2.87,
+      "text": "when I evaluate it at zero, I get, lo"
+    },
+    {
+      "index": 981,
+      "start": 2612.32,
+      "end": 2615.63,
+      "duration": 3.31,
+      "text": "and behold, zero. Sine of zero is zero."
+    },
+    {
+      "index": 982,
+      "start": 2615.64,
+      "end": 2618.99,
+      "duration": 3.35,
+      "text": "So actually, the quadratic approximation"
+    },
+    {
+      "index": 983,
+      "start": 2619.0,
+      "end": 2620.95,
+      "duration": 1.95,
+      "text": "is the same. It's zero times X squared."
+    },
+    {
+      "index": 984,
+      "start": 2620.96,
+      "end": 2623.15,
+      "duration": 2.19,
+      "text": "There's no X squared term here."
+    },
+    {
+      "index": 985,
+      "start": 2623.16,
+      "end": 2625.19,
+      "duration": 2.03,
+      "text": "So that's why this is such a terrific uh"
+    },
+    {
+      "index": 986,
+      "start": 2625.2,
+      "end": 2625.75,
+      "duration": 0.55,
+      "text": "uh"
+    },
+    {
+      "index": 987,
+      "start": 2625.76,
+      "end": 2627.67,
+      "duration": 1.91,
+      "text": "approximation. It's also the quadratic"
+    },
+    {
+      "index": 988,
+      "start": 2627.68,
+      "end": 2630.59,
+      "duration": 2.91,
+      "text": "approximation. For the cosine function,"
+    },
+    {
+      "index": 989,
+      "start": 2630.6,
+      "end": 2633.59,
+      "duration": 2.99,
+      "text": "if you differentiate twice,"
+    },
+    {
+      "index": 990,
+      "start": 2633.6,
+      "end": 2635.59,
+      "duration": 1.99,
+      "text": "you get The derivative is this minus the"
+    },
+    {
+      "index": 991,
+      "start": 2635.6,
+      "end": 2636.91,
+      "duration": 1.31,
+      "text": "sine, and the derivative of that is"
+    },
+    {
+      "index": 992,
+      "start": 2636.92,
+      "end": 2639.83,
+      "duration": 2.91,
+      "text": "minus the cosine."
+    },
+    {
+      "index": 993,
+      "start": 2639.84,
+      "end": 2643.19,
+      "duration": 3.35,
+      "text": "All right? So that's f double prime."
+    },
+    {
+      "index": 994,
+      "start": 2643.2,
+      "end": 2646.59,
+      "duration": 3.39,
+      "text": "And now, if I evaluate that at zero, I"
+    },
+    {
+      "index": 995,
+      "start": 2646.6,
+      "end": 2649.67,
+      "duration": 3.07,
+      "text": "get -1."
+    },
+    {
+      "index": 996,
+      "start": 2651.35,
+      "end": 2651.36,
+      "duration": 0.01,
+      "text": "And so, the term that I have to plug in"
+    },
+    {
+      "index": 997,
+      "start": 2651.36,
+      "end": 2653.83,
+      "duration": 2.47,
+      "text": "here, this -1 is the coefficient that"
+    },
+    {
+      "index": 998,
+      "start": 2653.84,
+      "end": 2657.23,
+      "duration": 3.39,
+      "text": "appears right here. So, I need a -1/2 x"
+    },
+    {
+      "index": 999,
+      "start": 2657.24,
+      "end": 2661.15,
+      "duration": 3.91,
+      "text": "squared extra."
+    },
+    {
+      "index": 1000,
+      "start": 2663.51,
+      "end": 2663.52,
+      "duration": 0.01,
+      "text": "All right?"
+    },
+    {
+      "index": 1001,
+      "start": 2663.52,
+      "end": 2665.47,
+      "duration": 1.95,
+      "text": "And if you do it for the e to the x, you"
+    },
+    {
+      "index": 1002,
+      "start": 2665.48,
+      "end": 2668.23,
+      "duration": 2.75,
+      "text": "get an e to the x, and you get a one,"
+    },
+    {
+      "index": 1003,
+      "start": 2668.24,
+      "end": 2671.79,
+      "duration": 3.55,
+      "text": "and so you get a plus a half x squared"
+    },
+    {
+      "index": 1004,
+      "start": 2671.8,
+      "end": 2673.59,
+      "duration": 1.79,
+      "text": "here."
+    },
+    {
+      "index": 1005,
+      "start": 2673.6,
+      "end": 2676.11,
+      "duration": 2.51,
+      "text": "All right?"
+    },
+    {
+      "index": 1006,
+      "start": 2681.59,
+      "end": 2681.6,
+      "duration": 0.01,
+      "text": "I'm going to finish uh these two in just"
+    },
+    {
+      "index": 1007,
+      "start": 2681.6,
+      "end": 2683.55,
+      "duration": 1.95,
+      "text": "a second, but I first want to tell you"
+    },
+    {
+      "index": 1008,
+      "start": 2683.56,
+      "end": 2686.31,
+      "duration": 2.75,
+      "text": "about the geometric significance"
+    },
+    {
+      "index": 1009,
+      "start": 2686.32,
+      "end": 2696.51,
+      "duration": 10.19,
+      "text": "of this quadratic term."
+    },
+    {
+      "index": 1010,
+      "start": 2720.79,
+      "end": 2720.8,
+      "duration": 0.01,
+      "text": "So, the geometric significance is is is"
+    },
+    {
+      "index": 1011,
+      "start": 2720.8,
+      "end": 2723.23,
+      "duration": 2.43,
+      "text": "best to describe just by drawing a"
+    },
+    {
+      "index": 1012,
+      "start": 2723.24,
+      "end": 2725.71,
+      "duration": 2.47,
+      "text": "picture here."
+    },
+    {
+      "index": 1013,
+      "start": 2725.72,
+      "end": 2726.91,
+      "duration": 1.19,
+      "text": "And I'm going to draw the picture of the"
+    },
+    {
+      "index": 1014,
+      "start": 2726.92,
+      "end": 2729.39,
+      "duration": 2.47,
+      "text": "cosine function."
+    },
+    {
+      "index": 1015,
+      "start": 2729.4,
+      "end": 2731.55,
+      "duration": 2.15,
+      "text": "And remember, we already had the tangent"
+    },
+    {
+      "index": 1016,
+      "start": 2731.56,
+      "end": 2734.35,
+      "duration": 2.79,
+      "text": "line."
+    },
+    {
+      "index": 1017,
+      "start": 2736.35,
+      "end": 2736.36,
+      "duration": 0.01,
+      "text": "So, the tangent line was this horizontal"
+    },
+    {
+      "index": 1018,
+      "start": 2736.36,
+      "end": 2738.27,
+      "duration": 1.91,
+      "text": "here."
+    },
+    {
+      "index": 1019,
+      "start": 2738.28,
+      "end": 2740.91,
+      "duration": 2.63,
+      "text": "All right? And that was y = 1. But, you"
+    },
+    {
+      "index": 1020,
+      "start": 2740.92,
+      "end": 2742.87,
+      "duration": 1.95,
+      "text": "can see intuitively, that doesn't even"
+    },
+    {
+      "index": 1021,
+      "start": 2742.88,
+      "end": 2744.47,
+      "duration": 1.59,
+      "text": "tell you whether this function is above"
+    },
+    {
+      "index": 1022,
+      "start": 2744.48,
+      "end": 2746.91,
+      "duration": 2.43,
+      "text": "or below one there. Doesn't tell you"
+    },
+    {
+      "index": 1023,
+      "start": 2746.92,
+      "end": 2748.87,
+      "duration": 1.95,
+      "text": "much. It's sort of begging for there to"
+    },
+    {
+      "index": 1024,
+      "start": 2748.88,
+      "end": 2750.39,
+      "duration": 1.51,
+      "text": "be a little more information to tell us"
+    },
+    {
+      "index": 1025,
+      "start": 2750.4,
+      "end": 2752.63,
+      "duration": 2.23,
+      "text": "what the function is doing nearby."
+    },
+    {
+      "index": 1026,
+      "start": 2752.64,
+      "end": 2754.63,
+      "duration": 1.99,
+      "text": "And indeed, that's what this second"
+    },
+    {
+      "index": 1027,
+      "start": 2754.64,
+      "end": 2757.51,
+      "duration": 2.87,
+      "text": "expression does for us."
+    },
+    {
+      "index": 1028,
+      "start": 2757.52,
+      "end": 2759.63,
+      "duration": 2.11,
+      "text": "It's some kind of parabola underneath"
+    },
+    {
+      "index": 1029,
+      "start": 2759.64,
+      "end": 2760.91,
+      "duration": 1.27,
+      "text": "here."
+    },
+    {
+      "index": 1030,
+      "start": 2760.92,
+      "end": 2765.59,
+      "duration": 4.67,
+      "text": "So, this is y = 1 - 1/2 X squared."
+    },
+    {
+      "index": 1031,
+      "start": 2765.6,
+      "end": 2768.91,
+      "duration": 3.31,
+      "text": "Which is a much better fit to the curve"
+    },
+    {
+      "index": 1032,
+      "start": 2768.92,
+      "end": 2772.31,
+      "duration": 3.39,
+      "text": "than the horizontal line."
+    },
+    {
+      "index": 1033,
+      "start": 2772.32,
+      "end": 2774.23,
+      "duration": 1.91,
+      "text": "All right? And this is if you like this"
+    },
+    {
+      "index": 1034,
+      "start": 2774.24,
+      "end": 2775.99,
+      "duration": 1.75,
+      "text": "is the best"
+    },
+    {
+      "index": 1035,
+      "start": 2776.0,
+      "end": 2777.19,
+      "duration": 1.19,
+      "text": "fit"
+    },
+    {
+      "index": 1036,
+      "start": 2777.2,
+      "end": 2783.83,
+      "duration": 6.63,
+      "text": "parabola."
+    },
+    {
+      "index": 1037,
+      "start": 2785.07,
+      "end": 2785.08,
+      "duration": 0.01,
+      "text": "So, it's going to be the closest"
+    },
+    {
+      "index": 1038,
+      "start": 2785.08,
+      "end": 2787.27,
+      "duration": 2.19,
+      "text": "parabola to the um"
+    },
+    {
+      "index": 1039,
+      "start": 2787.28,
+      "end": 2789.19,
+      "duration": 1.91,
+      "text": "to the to the curve. And that's more or"
+    },
+    {
+      "index": 1040,
+      "start": 2789.2,
+      "end": 2790.95,
+      "duration": 1.75,
+      "text": "less the significance."
+    },
+    {
+      "index": 1041,
+      "start": 2790.96,
+      "end": 2794.67,
+      "duration": 3.71,
+      "text": "Uh it's much much closer."
+    },
+    {
+      "index": 1042,
+      "start": 2794.68,
+      "end": 2798.47,
+      "duration": 3.79,
+      "text": "All right. I want to uh give you"
+    },
+    {
+      "index": 1043,
+      "start": 2798.48,
+      "end": 2799.83,
+      "duration": 1.35,
+      "text": "Well, so"
+    },
+    {
+      "index": 1044,
+      "start": 2799.84,
+      "end": 2801.55,
+      "duration": 1.71,
+      "text": "I I I think we'll save these other"
+    },
+    {
+      "index": 1045,
+      "start": 2801.56,
+      "end": 2803.55,
+      "duration": 1.99,
+      "text": "derivations for next time because I"
+    },
+    {
+      "index": 1046,
+      "start": 2803.56,
+      "end": 2805.15,
+      "duration": 1.59,
+      "text": "think we're out of time now. So, we'll"
+    },
+    {
+      "index": 1047,
+      "start": 2805.16,
+      "end": 2808.24,
+      "duration": 3.08,
+      "text": "do these next time."
+    }
+  ],
+  "course": {
+    "category": "Mathematics",
+    "title": "Single Variable Calculus",
+    "source_url": "https://www.youtube.com/playlist?list=PL590CCC2BC5AF3BC1"
+  }
+}
