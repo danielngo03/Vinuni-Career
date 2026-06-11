@@ -28,6 +28,7 @@ st.set_page_config(page_title="CV Analysis", layout="wide")
 user = require_login("student")
 render_parser_status_sidebar()
 student_user_id = get_current_user_id()
+st.page_link("pages/0_Home.py", label="Back to Dashboard")
 st.title("CV Analysis")
 
 tab_parse, tab_manage, tab_match = st.tabs(["Parse CV", "Manage Students", "Match Jobs"])

@@ -73,6 +73,7 @@ If the selected LLM provider is not configured or fails, the system uses a deter
 | Matching engine | Rank students for one open job using deterministic rules. |
 | Student profile provider | Return mock student profiles now; can be replaced by an API provider later. |
 | Demo auth | Enforce basic `student` and `enterprise` role boundaries through request headers. |
+| YouTube RAG pipeline | Crawl video or playlist transcripts, clean captions, and build timestamped overlapping chunks. |
 
 ## State
 
@@ -159,6 +160,7 @@ Protected endpoints expect:
 
 - `X-Demo-Role: enterprise` for JD parsing, job management, matching, and student list access.
 - `X-Demo-Role: student` for CV parsing and owned student profile management.
+- `X-Demo-Role: teacher` for school/teacher-owned transcript pipeline workflows.
 - `X-Demo-User-Id` is optional but used to tag CV-derived student profile ownership.
 
 JD matching:
@@ -195,8 +197,19 @@ Streamlit UI:
 - Home page with project stats and link to JD Workspace.
 - JD Workspace page with parse, manage, and matching tabs.
 - CV Analysis page with upload/text parsing, JSON review/edit, and saved student management.
+- Teacher RAG Pipeline page with YouTube video/playlist input and RAG chunk output report.
 
 Matching reads mock student profiles plus locally saved CV-derived student profiles.
+
+## YouTube RAG Data
+
+The teacher-owned transcript pipeline accepts a single YouTube video URL or playlist URL. It writes three output layers:
+
+- `raw`: timestamped transcript JSON from YouTube captions.
+- `cleaned`: normalized transcript JSON with boilerplate removal and course metadata.
+- `chunks`: JSONL RAG documents using window slicing with overlap.
+
+Each chunk includes source metadata such as category, course title, video title, video URL, timestamp URL, start/end time, and segment range.
 
 ## Risks
 

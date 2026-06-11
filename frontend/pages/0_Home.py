@@ -1,4 +1,4 @@
-"""Streamlit app entrypoint."""
+"""Home dashboard page."""
 
 from __future__ import annotations
 
@@ -10,5 +10,5 @@ except ImportError as exc:  # pragma: no cover
     raise RuntimeError("Install streamlit to run the demo UI.") from exc
 
 
-st.set_page_config(page_title="Dashboard", layout="wide")
+st.set_page_config(page_title="Home", layout="wide")
 render_dashboard()

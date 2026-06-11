@@ -19,7 +19,7 @@ except ImportError:  # pragma: no cover - used only when optional API dependency
     status = None  # type: ignore[assignment]
 
 
-DemoRole = Literal["student", "enterprise"]
+DemoRole = Literal["student", "enterprise", "teacher"]
 
 
 @dataclass(frozen=True)
@@ -38,10 +38,10 @@ def require_roles(*allowed_roles: DemoRole) -> Callable[..., DemoUser]:
             return DemoUser(user_id=x_demo_user_id or f"demo_{role}", role=role)
 
         role = (x_demo_role or "").strip().lower()
-        if role not in {"student", "enterprise"}:
+        if role not in {"student", "enterprise", "teacher"}:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Missing or invalid X-Demo-Role header. Use student or enterprise.",
+                detail="Missing or invalid X-Demo-Role header. Use student, enterprise, or teacher.",
             )
         if role not in allowed_roles:
             raise HTTPException(

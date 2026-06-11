@@ -32,6 +32,7 @@ st.set_page_config(page_title="JD Workspace", layout="wide")
 user = require_login("enterprise")
 render_parser_status_sidebar()
 company_user_id = get_current_user_id()
+st.page_link("pages/0_Home.py", label="Back to Dashboard")
 st.title("JD Workspace")
 
 tab_parse, tab_manage, tab_match = st.tabs(["Parse JD", "Manage Jobs", "Match Students"])

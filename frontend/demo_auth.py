@@ -10,6 +10,13 @@ except ImportError as exc:  # pragma: no cover
     raise RuntimeError("Install streamlit to run the demo UI.") from exc
 
 
+ACCOUNT_TYPE_LABELS = {
+    "enterprise": "Enterprise / Company",
+    "student": "Student",
+    "teacher": "Teacher / School",
+}
+
+
 def get_current_user() -> dict[str, str] | None:
     user = st.session_state.get("auth_user")
     return user if isinstance(user, dict) else None
@@ -43,8 +50,10 @@ def require_login(*allowed_roles: str) -> dict[str, str]:
 def render_login() -> None:
     st.title("Login")
     with st.form("login-form"):
-        role = st.selectbox("Account type", ["enterprise", "student"])
-        user_id = st.text_input("User ID")
+        account_label = st.selectbox("Account type", list(ACCOUNT_TYPE_LABELS.values()))
+        role = next(key for key, label in ACCOUNT_TYPE_LABELS.items() if label == account_label)
+        user_label = "Teacher / School ID" if role == "teacher" else "User ID"
+        user_id = st.text_input(user_label)
         password = st.text_input("Password", type="password")
         submitted = st.form_submit_button("Login")
 
@@ -65,8 +74,9 @@ def render_login() -> None:
 
 def render_logout_sidebar(user: dict[str, Any]) -> None:
     st.sidebar.header("Account")
-    st.sidebar.write(str(user.get("user_id", "")))
-    st.sidebar.caption(str(user.get("role", "")))
+    role = str(user.get("role", ""))
+    st.sidebar.text_input("Account type", value=ACCOUNT_TYPE_LABELS.get(role, role), disabled=True)
+    st.sidebar.text_input("Account ID", value=str(user.get("user_id", "")), disabled=True)
     if st.sidebar.button("Logout"):
         for key in ["auth_user", "draft_job", "draft_student", "parser_metadata", "cv_parser_metadata"]:
             st.session_state.pop(key, None)
