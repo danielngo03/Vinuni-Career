@@ -10,5 +10,10 @@ except ImportError as exc:  # pragma: no cover
     raise RuntimeError("Install streamlit to run the demo UI.") from exc
 
 
-st.set_page_config(page_title="Home", layout="wide")
-render_dashboard()
+def main() -> None:
+    st.set_page_config(page_title="Home", layout="wide")
+    render_dashboard()
+
+
+if __name__ == "__main__":
+    main()

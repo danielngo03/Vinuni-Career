@@ -24,7 +24,7 @@ PARTIAL_MATCH_THRESHOLD=0.6
 DEMO_AUTH_ENABLED=true
 ```
 
-If `GEMINI_API_KEY` is missing or the LLM call fails, JD parsing uses the deterministic fallback parser.
+If `GEMINI_API_KEY` is missing or the LLM call fails, JD and CV parsing use deterministic fallback behavior where available.
 
 Demo API authorization uses request headers:
 
@@ -37,7 +37,7 @@ or:
 
 ```text
 X-Demo-Role: student
-X-Demo-User-Id: student_demo
+X-Demo-User-Id: mock-student-ai-001
 ```
 
 Teacher/school accounts use:
@@ -101,9 +101,10 @@ scripts\_pyrun.cmd -m streamlit run frontend\Home.py
 
 The UI currently has:
 
-- Home page: project overview and page links.
-- JD Workspace page: parse JD, manage jobs, and run matching.
-- CV Analysis page: parse CVs, review/edit student profile JSON, and save profiles.
+- Home page: demo login, role-aware dashboard metrics, and page links.
+- Enterprise JD Workspace page: parse JD, manage jobs, and run matching.
+- Student CV Analysis page: parse CVs, review and save student profiles, and match the student against open jobs.
+- Teacher RAG Pipeline page: build transcript/RAG data from a YouTube video or playlist.
 
 ## 5. Run Tests
 
@@ -135,6 +136,7 @@ Teachers can also use the Streamlit `Teacher RAG Pipeline` page after logging in
 - Run commands from the project root: `K:\Corhort\C2-App-037`.
 - Saved jobs are stored under `data/jobs`.
 - Saved CV-derived student profiles are stored under `data/students`.
-- Mock student profiles are stored in `data/mock/students.json`.
+- Mock jobs are stored in `data/jobs` with `metadata.is_mock = true`.
+- Mock student profiles are stored in `data/students` with `metadata.is_mock = true`.
 - YouTube RAG transcript outputs are stored under `data/youtube_rag`.
 - Frontend and backend can both run locally at the same time.

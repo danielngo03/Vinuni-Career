@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-from demo_auth import get_current_user_id, require_login
+from demo_auth import get_current_account_id, require_login
 from shared import (
+    job_review_data,
     job_repo,
     log_ui_action,
     parse_detail,
+    render_home_link,
     render_parsed_job_review,
+    render_parse_metadata_status,
     render_parser_status_sidebar,
     student_provider,
 )
@@ -28,18 +31,18 @@ from backend.src.services.jd_parser import (
 from backend.src.services.matching import match_students_for_job
 
 
-st.set_page_config(page_title="JD Workspace", layout="wide")
+st.set_page_config(page_title="Enterprise JD Workspace", layout="wide")
 user = require_login("enterprise")
 render_parser_status_sidebar()
-company_user_id = get_current_user_id()
-st.page_link("pages/0_Home.py", label="Back to Dashboard")
-st.title("JD Workspace")
+company_account_id = get_current_account_id()
+render_home_link()
+st.title("Enterprise JD Workspace")
 
-tab_parse, tab_manage, tab_match = st.tabs(["Parse JD", "Manage Jobs", "Match Students"])
+tab_parse, tab_manage, tab_match = st.tabs(["Parse JD", "Manage Jobs", "Run Matching"])
 
 with tab_parse:
     input_mode = st.radio("Input mode", ["Form", "Upload", "Raw text"], horizontal=True)
-    company_id = st.text_input("Company ID", value=company_user_id, disabled=True)
+    company_id = st.text_input("Company ID", value=company_account_id, disabled=True)
 
     if input_mode == "Form":
         form = {
@@ -82,21 +85,13 @@ with tab_parse:
 
     if "draft_job" in st.session_state:
         if "parser_metadata" in st.session_state:
-            metadata = st.session_state["parser_metadata"]
-            if metadata["used_llm"]:
-                st.success(f"Last parse used {metadata['parser_mode']} ({metadata['model']}).")
-            elif metadata["api_key_configured"] and metadata["fallback_used"]:
-                st.warning("LLM credentials exist, but the last parse used fallback because the LLM call failed.")
-                if metadata.get("error"):
-                    st.caption(metadata["error"])
-            else:
-                st.info("Last parse used the local fallback/mock parser because the selected LLM is not configured.")
+            render_parse_metadata_status(st.session_state["parser_metadata"], "JD")
         st.subheader("Review parsed job")
         render_parsed_job_review(st.session_state["draft_job"], key_prefix="draft-job")
         if st.button("Save job"):
             try:
                 job_data = dict(st.session_state["draft_job"])
-                job_data["company_id"] = company_user_id
+                job_data["company_id"] = company_account_id
                 job = job_from_dict(job_data)
                 job_repo.save(job)
                 log_ui_action("save_job", job.job_id)
@@ -106,12 +101,12 @@ with tab_parse:
                 st.error(str(exc))
 
 with tab_manage:
-    jobs = [job for job in job_repo.list() if job.company_id == company_user_id]
+    jobs = [job for job in job_repo.list() if job.company_id == company_account_id]
     if not jobs:
         st.info("No jobs saved yet.")
     for job in jobs:
         with st.expander(f"{job.title} ({job.job_id}) - {job.status}"):
-            render_parsed_job_review(job_to_dict(job), key_prefix=f"job-{job.job_id}")
+            render_parsed_job_review(job_review_data(job), key_prefix=f"job-{job.job_id}")
             col1, col2, col3 = st.columns(3)
             if col1.button("Open", key=f"open-{job.job_id}"):
                 job_repo.update_status(job.job_id, "open")
@@ -127,17 +122,36 @@ with tab_manage:
                 st.rerun()
 
 with tab_match:
-    jobs = [job for job in job_repo.list() if job.company_id == company_user_id and job.status == "open"]
+    jobs = [job for job in job_repo.list() if job.company_id == company_account_id]
+    open_jobs = [job for job in jobs if job.status == "open"]
+    students = student_provider.list_profiles()
+
     if not jobs:
-        st.info("Open at least one job before running matching.")
+        st.info("No jobs saved yet. Parse and save a JD first.")
+    elif not students:
+        st.info("No student profiles available for matching.")
     else:
-        selected = st.selectbox("Open job", jobs, format_func=lambda job: f"{job.title} ({job.job_id})")
+        selected = st.selectbox(
+            "Job",
+            jobs,
+            format_func=lambda job: f"{job.title} ({job.job_id}) - {job.status}",
+        )
+        if selected.status != "open":
+            st.warning("This job is not open yet. Open it before running matching.")
+            if st.button("Open selected job", key=f"match-open-{selected.job_id}"):
+                job_repo.update_status(selected.job_id, "open")
+                log_ui_action("open_job_from_match", selected.job_id)
+                st.rerun()
+
+        st.caption(f"{len(open_jobs)} open jobs, {len(students)} student profiles available.")
         strong = st.slider("Strong match threshold", 0.0, 1.0, settings.strong_match_threshold, 0.05)
         partial = st.slider("Partial match threshold", 0.0, strong, settings.partial_match_threshold, 0.05)
-        if st.button("Run matching"):
+
+        run_disabled = selected.status != "open"
+        if st.button("Run matching", disabled=run_disabled):
             results = match_students_for_job(
                 selected,
-                student_provider.list_profiles(),
+                students,
                 MatchThresholds(strong_match=strong, partial_match=partial),
             )
             log_ui_action("run_match", f"{selected.job_id}: {len(results)} results")

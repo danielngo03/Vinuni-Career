@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 from backend.src.agents.student_profile import router as student_profile_router
 from backend.src.agents.student_profile.service import summarize_student_profile
 from backend.src.models.schemas import student_from_dict
-from backend.src.services.storage import CombinedStudentProfileProvider, JsonStudentRepository, MockStudentProfileProvider
+from backend.src.services.storage import JsonStudentRepository
 
 
 class StudentProfileAgentTests(unittest.TestCase):
@@ -39,30 +39,24 @@ class StudentProfileRouterTests(unittest.TestCase):
         self.temp_dir = TemporaryDirectory()
         base_path = Path(self.temp_dir.name)
         self.students_dir = base_path / "students"
-        self.mock_path = base_path / "mock_students.json"
-        self.mock_path.write_text(
-            """[
-  {
-    "student_id": "mock_student",
-    "name": "Mock Student",
-    "skills": {
-      "Python": {"score": 8, "confidence": 0.9, "evidence": ["Mock project"]}
-    },
-    "metadata": {"source": "mock"}
-  }
-]""",
-            encoding="utf-8",
-        )
-
         self.original_saved_repo = student_profile_router.saved_student_repo
-        self.original_mock_provider = student_profile_router.mock_student_provider
         self.original_student_provider = student_profile_router.student_provider
 
         saved_repo = JsonStudentRepository(self.students_dir)
-        mock_provider = MockStudentProfileProvider(self.mock_path)
+        saved_repo.save(
+            student_from_dict(
+                {
+                    "student_id": "mock_student",
+                    "name": "Mock Student",
+                    "skills": {
+                        "Python": {"score": 8, "confidence": 0.9, "evidence": ["Mock project"]},
+                    },
+                    "metadata": {"is_mock": True},
+                }
+            )
+        )
         student_profile_router.saved_student_repo = saved_repo
-        student_profile_router.mock_student_provider = mock_provider
-        student_profile_router.student_provider = CombinedStudentProfileProvider(saved_repo, mock_provider)
+        student_profile_router.student_provider = saved_repo
 
         app = FastAPI()
         app.include_router(student_profile_router.router)
@@ -70,7 +64,6 @@ class StudentProfileRouterTests(unittest.TestCase):
 
     def tearDown(self):
         student_profile_router.saved_student_repo = self.original_saved_repo
-        student_profile_router.mock_student_provider = self.original_mock_provider
         student_profile_router.student_provider = self.original_student_provider
         self.temp_dir.cleanup()
 

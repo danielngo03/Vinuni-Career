@@ -1,46 +1,53 @@
 {
   "student_id": "mock-student-ai-001",
-  "name": "Mock Student AI",
+  "name": "An Nguyen",
   "skills": {
     "Python": {
-      "score": 8,
+      "score": 9,
       "confidence": 0.9,
       "evidence": [
-        "Built a sentiment classification notebook",
-        "Implemented FastAPI model inference endpoint"
+        "Built a FastAPI ML inference service",
+        "Completed Python data science coursework"
       ]
     },
     "Machine Learning": {
       "score": 8,
-      "confidence": 0.85,
+      "confidence": 0.86,
       "evidence": [
-        "Completed supervised learning project",
-        "Evaluated precision and recall on model outputs"
+        "Trained classification and regression models",
+        "Worked on a capstone recommendation model"
       ]
     },
     "LLM": {
       "score": 7,
-      "confidence": 0.8,
+      "confidence": 0.78,
       "evidence": [
-        "Created prompt evaluation scripts",
-        "Tested retrieval augmented QA prototype"
+        "Built a small RAG prototype",
+        "Evaluated prompts for a course assistant"
       ]
     },
     "SQL": {
       "score": 6,
-      "confidence": 0.75,
+      "confidence": 0.74,
       "evidence": [
-        "Queried project experiment logs"
+        "Used SQL for analytics coursework"
+      ]
+    },
+    "Documentation": {
+      "score": 6,
+      "confidence": 0.7,
+      "evidence": [
+        "Wrote experiment notes and project README files"
       ]
     }
   },
   "metadata": {
-    "owner_user_id": "mock_student_ai",
-    "major": "Computer Science",
-    "year": "3",
-    "email": "mock.ai@student.edu",
     "is_mock": true,
     "mock_type": "student_profile",
-    "mock_source": "local_demo_seed"
+    "mock_source": "local_demo_seed",
+    "owner_user_id": "mock-student-ai-001",
+    "major": "AI Engineering",
+    "year": 4,
+    "demo_note": "Strong match for AI Engineer Intern."
   }
 }

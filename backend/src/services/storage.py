@@ -56,6 +56,35 @@ class JsonJobRepository:
         return self.save(job)
 
 
+class CombinedJobRepository:
+    def __init__(self, saved_repo: JsonJobRepository, mock_repo: JsonJobRepository) -> None:
+        self.saved_repo = saved_repo
+        self.mock_repo = mock_repo
+
+    def save(self, job: JobRequirementProfile) -> JobRequirementProfile:
+        return self.saved_repo.save(job)
+
+    def get(self, job_id: str) -> JobRequirementProfile:
+        try:
+            return self.saved_repo.get(job_id)
+        except FileNotFoundError:
+            return self.mock_repo.get(job_id)
+
+    def list(self) -> list[JobRequirementProfile]:
+        jobs_by_id: dict[str, JobRequirementProfile] = {}
+        for job in self.mock_repo.list():
+            jobs_by_id[job.job_id] = job
+        for job in self.saved_repo.list():
+            jobs_by_id[job.job_id] = job
+        return list(jobs_by_id.values())
+
+    def delete(self, job_id: str) -> None:
+        self.saved_repo.delete(job_id)
+
+    def update_status(self, job_id: str, status: str) -> JobRequirementProfile:
+        return self.saved_repo.update_status(job_id, status)
+
+
 class MockStudentProfileProvider:
     def __init__(self, path: Path) -> None:
         self.path = path
@@ -63,6 +92,11 @@ class MockStudentProfileProvider:
     def list_profiles(self) -> list[StudentProfile]:
         if not self.path.exists():
             return []
+        if self.path.is_dir():
+            return [
+                student_from_dict(json.loads(path.read_text(encoding="utf-8")))
+                for path in sorted(self.path.glob("*.json"))
+            ]
         data: Any = json.loads(self.path.read_text(encoding="utf-8"))
         if not isinstance(data, list):
             raise ValidationError("Mock student profile file must contain a list.")
