@@ -24,12 +24,12 @@ Implemented:
 - Job create, list, update, open, close, and delete.
 - Rule-based student-job matching.
 - Mock student profile loading.
+- Student profile create, list, read, update, delete, and summary routes.
 - Streamlit UI with a home page and a JD workspace page.
-- Agent-style backend structure for JD matching and a student profile API skeleton.
+- Agent-style backend structure for JD matching, CV analysis, and student profile management.
 
 Not implemented yet:
 
-- Real CV upload and parsing.
 - Production database.
 - Authentication and authorization.
 - Admin dashboard.
