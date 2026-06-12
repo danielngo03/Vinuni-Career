@@ -41,9 +41,14 @@ if FastAPI is not None:
                     "main_endpoints": ["/jobs", "/jobs/parse", "/jobs/{job_id}/match", "/students/mock"],
                 },
                 "student_profile": {
-                    "description": "Student profile summaries and skill insight endpoints.",
+                    "description": "Student profile management, mock profile access, and skill summaries.",
                     "health": "/agents/student-profile/health",
-                    "main_endpoints": ["/agents/student-profile/students/{student_id}/summary"],
+                    "main_endpoints": [
+                        "/agents/student-profile/students",
+                        "/agents/student-profile/students/mock",
+                        "/agents/student-profile/students/{student_id}",
+                        "/agents/student-profile/students/{student_id}/summary",
+                    ],
                 },
                 "cv_analysis": {
                     "description": "CV upload, student skill extraction, validation, and local student storage.",

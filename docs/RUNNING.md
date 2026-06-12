@@ -75,12 +75,20 @@ POST /students/cv/parse
 POST /students/cv/parse-upload
 POST /students
 GET  /students
+POST /agents/student-profile/students
+GET  /agents/student-profile/students
+GET  /agents/student-profile/students/mock
+GET  /agents/student-profile/students/{student_id}
+PATCH /agents/student-profile/students/{student_id}
+DELETE /agents/student-profile/students/{student_id}
+GET  /agents/student-profile/students/{student_id}/summary
 ```
 
 Role rules:
 
 - `enterprise`: JD parsing, job management, matching, and student list access.
 - `student`: CV parsing, saving a student profile, and managing owned profiles.
+- Student profile CRUD is namespaced under `/agents/student-profile`; students can manage their own saved profiles, while enterprises can read profiles for matching/review.
 - `teacher`: YouTube transcript RAG pipeline page for school-owned course data.
 
 ## 4. Run Streamlit UI
